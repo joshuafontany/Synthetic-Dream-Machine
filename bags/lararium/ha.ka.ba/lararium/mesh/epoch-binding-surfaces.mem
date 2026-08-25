@@ -77,7 +77,7 @@ a wrong answer here reads identically to a right one until a founding breaks.
 * ''whatever falls off the far end encodes a retention policy nobody wrote down'', and a count-based lifetime tracks the Nexus's own tempo: a quiet Nexus expires nothing, a busy one expires fast, and the slowest peer becomes everyone's replay surface. In a totally-ordered chain that costs LIVENESS; in a mesh it costs SAFETY.
 * ''a list of valid markers IS a roster of moments.'' This house holds no rosters.
 
-A raise is an ordinary capability grant that ends by ''NON-RENEWAL'', which the house already does everywhere else. So `raiseStands` reads `boundEpoch >= effective` against the Nexus's own lease epoch — the same comparison, against the same fold, that every device delegation already makes. ''Read it as: the Nexus is the resource, and its lease epoch is the fence.'' <<~ confidence Synthesis-Canon 16/20 >>
+A raise is an ordinary capability grant that ends by ''NON-RENEWAL'', which the house already does everywhere else. So `raiseStands` reads `boundEpoch >= effective` against the Nexus's own lease epoch — the same comparison, against the same fold, that every device delegation already makes. ''Read it as: the Nexus is the resource, and its lease epoch is the fence.'' <<~ confidence 16/20 >>
 
 The receiver-side per-peer window (IPsec-shaped, evaluated locally, `undefined` at the edge) stays available for ''anti-replay on a wire'' — packet sequence numbers, where a set is the right instrument. It never governs standing.
 
@@ -99,7 +99,7 @@ keying fold and belongs to Keyhive/BeeKEM. `compaction-handlers` reserves the ba
 
 ''AND A MARK THAT LIVES ONLY IN A REPORT IS NO MARK.'' This section exists because the first pass named
 these sites in conversation and left the tree unmarked — which is the same failure as a green count beside
-a check that never ran. <<~ confidence Synthesis-Canon 15/20 >>
+a check that never ran. <<~ confidence 15/20 >>
 
 !!! ★ THE ONE MOST EASILY MISSED ★
 
@@ -140,7 +140,7 @@ read. The vessel already names that condition and its cure rather than boot-loop
 > ''Cure (identity-safe, no data loss)'': run `lares vessel rite rebuild` — rebuilds the genesis engine under current
 > deps; your operator key/card are untouched.
 
-<<~ confidence Synthesis-Canon 16/20 >> ''One surface, one cure, and the cure keeps the identity.''
+<<~ confidence 16/20 >> ''One surface, one cure, and the cure keeps the identity.''
 
 <<~/ahu >>
 
@@ -167,7 +167,7 @@ against another's.
 > compose ''per-operator'' (DreamNet-offered) and ride their own fast ratchet, so a plugin change ''MUST
 > NEVER perturb the true-name.''
 
-<<~ confidence Canon 18/20 >> ''So the epoch rides the genesis ENGINE, and the served-plugin layer composes
+<<~ confidence 18/20 >> ''So the epoch rides the genesis ENGINE, and the served-plugin layer composes
 freely beneath it.'' A commit that re-packs the plugin moves a local integrity witness and touches no
 lineage: the seal stands, every delegation edge still verifies, and no confederation shifts. The
 ''slow ratchet'' (engine) carries the binding; the ''fast ratchet'' (plugins) carries composition, and
@@ -214,6 +214,6 @@ are acts, never upgrades''.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;aDwjM6i_h1P7LCg4RSf7P-vsJvVMIN1xjKjrXwo0LN0
+<<^ code:"&#x0003;" >>ni:///sha-256;tcaxBnnpvaoJxwJkjFdSJVrTQIHuq3BeWa_bXUxOcl4
 
 <<^ code:"&#x0004;" -> ? >>

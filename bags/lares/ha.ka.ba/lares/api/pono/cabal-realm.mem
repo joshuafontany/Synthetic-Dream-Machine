@@ -30,7 +30,7 @@ A ''CabalGroup'' (the multi-human social tier above the PersonaGroups) reads as 
 
 ''The word cuts three ways, and the cuts hold apart'' (operator ruling): a ''Place'' bears identity — the hearth that holds a DID. A ''vessel'' names the metal currently running the code. A ''realm'' names neither: it names ''what the members jointly imagine over their pooled vessels and Places'', a superset no single machine hosts and no single key signs. The realm never mints a DID; it composes the members' own.
 
-Triple-cruci­bled (your recorded design · the deep web · the canon). The model braids ''three shipped bodies of work'', and the braid holds: <<~ confidence Synthesis-Canon 15/20 >>
+Triple-cruci­bled (your recorded design · the deep web · the canon). The model braids ''three shipped bodies of work'', and the braid holds: <<~ confidence 15/20 >>
 * ''Ostrom's common-pool-resource governance'' (the social layer),
 * ''the federated shared-substrate abstraction'' — a Matrix room //runs// as a replicated event-DAG many homeservers maintain; an SSB feed lives only while followed (the systems layer),
 * ''Clark's soft-state + CRDT tombstones'' (the liveness layer).
@@ -113,7 +113,7 @@ Without these the realm becomes the //un//-governed commons that collapses (Hard
 
 The fusion is easy because the same person often does both, and it fails in one direction: ''a realm's members agreeing something does NOT move a key, and an operator holding the metal does NOT hold a vote in the realm.'' Where a design needs both it must name both, separately — the realm's agreement and the infrastructure's authority never substitute for each other.
 
-The Ostrom principles above still hold ''unchanged'' under the cut; they govern the realm. Read them as claims about the metal and P1's cost-dial turns into an admission fee for hardware, which no one ever ruled. <<~ confidence Synthesis-Canon 14/20 >>
+The Ostrom principles above still hold ''unchanged'' under the cut; they govern the realm. Read them as claims about the metal and P1's cost-dial turns into an admission fee for hardware, which no one ever ruled. <<~ confidence 14/20 >>
 
 <<~/ahu >>
 
@@ -140,7 +140,7 @@ This stays ''OPEN — the operator's design seat'': the residual reads as calibr
 
 !! The Seal ~ content keys to the question, not the roster (predicate-keyed, plane-collapsed)
 
-A cabal-realm shares content without materializing a reader-set. It seals each post to the ''NP-predicate'' //"holder presents a valid delegation-chain to the charter root, valid for epoch e"// — the ''same witness'' the maintenance-closure already reads (`group-as-closure`) — so ''the two planes collapse onto one cap-chain'': the chain that authorizes maintenance IS the decryption witness. No reader-object stands; //"who may read?"// reads ''unanswerable by design'' (a predicate's extension, never a list). The group-messaging trilemma (strong-PCS · efficient fan-out · no materialized set — pick two) ''dissolves as scoped'': the set never forms (horn 3), one ciphertext-trace diffuses by gossip (horn 2), and post-compromise HEALING lands at ''epoch cadence'' — the substrate ceiling, since strong-immediate healing would demand a global-now the causal-island law forbids (//you cannot lose what the substrate never permitted//). Forward-secrecy rides epoch-time; healing rides the ''same short-TTL cap + revoke-CID G-set that ages the closure'' — one evaporation-trace, both planes (Ledger-State Stigmergy). Deploy floor: ''Silent Threshold Encryption'' today, ramping to ''Witness Encryption''; never CP-ABE/IBE/DKG (a coordinator smuggles a global-now back in). <<~ confidence Synthesis 12/20 >> Five domains converged on the one attractor — witness-encryption · clonal-selection · stigmergy · CRDT-as-sheaf (`cohomological-gate`) · the color-manifold honesty-brake (//the unwrap-witness relocates, never vanishes//).
+A cabal-realm shares content without materializing a reader-set. It seals each post to the ''NP-predicate'' //"holder presents a valid delegation-chain to the charter root, valid for epoch e"// — the ''same witness'' the maintenance-closure already reads (`group-as-closure`) — so ''the two planes collapse onto one cap-chain'': the chain that authorizes maintenance IS the decryption witness. No reader-object stands; //"who may read?"// reads ''unanswerable by design'' (a predicate's extension, never a list). The group-messaging trilemma (strong-PCS · efficient fan-out · no materialized set — pick two) ''dissolves as scoped'': the set never forms (horn 3), one ciphertext-trace diffuses by gossip (horn 2), and post-compromise HEALING lands at ''epoch cadence'' — the substrate ceiling, since strong-immediate healing would demand a global-now the causal-island law forbids (//you cannot lose what the substrate never permitted//). Forward-secrecy rides epoch-time; healing rides the ''same short-TTL cap + revoke-CID G-set that ages the closure'' — one evaporation-trace, both planes (Ledger-State Stigmergy). Deploy floor: ''Silent Threshold Encryption'' today, ramping to ''Witness Encryption''; never CP-ABE/IBE/DKG (a coordinator smuggles a global-now back in). <<~ confidence 12/20 >> Five domains converged on the one attractor — witness-encryption · clonal-selection · stigmergy · CRDT-as-sheaf (`cohomological-gate`) · the color-manifold honesty-brake (//the unwrap-witness relocates, never vanishes//).
 
 <<~/ahu >>
 
@@ -196,7 +196,7 @@ A cabal splits at ''two roots'' (operator ruling). A ''private-held root'' — t
 
 !! The Wax-Stamp ~ provenance of the DATA, never presence of the person (the public-plane dual)
 
-The public org root answers a ''provenance'' question, not a membership one: //"does this POST trace to the CURRENT charter, a PAST charter (authentic, older), or a SPOOF?"// — the artifact's lineage, ''never'' a person's presence. The two mechanisms stay ''orthogonal'' (operator ruling): the ''membership handshake'' answers presence, ''live + peer-to-peer'' (two nameless entities compare their #has cap-stacks right then — no registry); the ''wax-stamp'' answers provenance, ''public + on the data.'' Presence is a live verb; provenance is a frozen fact. <<~ confidence Synthesis 13/20 >>
+The public org root answers a ''provenance'' question, not a membership one: //"does this POST trace to the CURRENT charter, a PAST charter (authentic, older), or a SPOOF?"// — the artifact's lineage, ''never'' a person's presence. The two mechanisms stay ''orthogonal'' (operator ruling): the ''membership handshake'' answers presence, ''live + peer-to-peer'' (two nameless entities compare their #has cap-stacks right then — no registry); the ''wax-stamp'' answers provenance, ''public + on the data.'' Presence is a live verb; provenance is a frozen fact. <<~ confidence 13/20 >>
 
 The charter reads as a ''pre-rotated, hash-linked, content-addressed epoch chain'' (TUF ≈ KERI, one shape): each epoch names its authorizing key-set/quorum AND ''pre-commits a digest of the next epoch's keys'' — so stealing today's council keys ''cannot forge tomorrow's charter.'' It lists ''keys + thresholds, never a roster.'' A wax-stamp on posted data reads `{artifact-hash · epoch-CID · sealed-at (an ITC/logical BOUND-PAST) · signature by an epoch-N key}` — inline, self-verifying ''island-locally'' (no global read, pono with #causal-islands). The reader trichotomy ''falls out mechanically'': epoch == head & sig ok → ''CURRENT'' · epoch is a prev-reachable ancestor & sig ok vs that epoch's key-state → ''PAST-authentic'' · no match / sig fails → ''SPOOF''.
 
@@ -215,6 +215,6 @@ The honest wall, kept lit: ''"valid trace to lineage L" reads as a hard crypto f
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;77Gysb1eBtZRvHOt_6fHB9AmO12xAQgd7zzR1RazGMk
+<<^ code:"&#x0003;" >>ni:///sha-256;8TuhWn88sjezX1nMnf9PifDbP4uUgZQcWZaKXmNb7gY
 
 <<^ code:"&#x0004;" -> ? >>

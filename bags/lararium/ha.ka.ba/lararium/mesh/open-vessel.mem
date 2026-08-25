@@ -158,7 +158,7 @@ carrying authority drifts ''silently''; a derivation cannot.
 
 <<~/ahu >>
 
-<<~ confidence Synthesis-Canon 14/20 >> The design reads pono (composition, not interface;
+<<~ confidence 14/20 >> The design reads pono (composition, not interface;
 role-as-capability; native-first by subtraction), and the node + browser suites boot real
 vessels through the phase sequence, so the invariant carries a live guard rather than an
 argument. What stays open sits one level out: a live-daemon exercise of the full sequence.
@@ -170,6 +170,6 @@ argument. What stays open sits one level out: a live-daemon exercise of the full
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZN3UiHAxdWxqYAA4Bm6EgiIobB0QV1jqf0f2qoeGqIM
+<<^ code:"&#x0003;" >>ni:///sha-256;oJxJlcoewe2o5kr2cKP_KMekkdcM9WACCpGejOYDzHM
 
 <<^ code:"&#x0004;" -> ? >>

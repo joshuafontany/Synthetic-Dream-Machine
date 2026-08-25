@@ -64,7 +64,7 @@ Read the two axes as a ''2D coordinate plane, never a single ladder''. A vessel 
 
 ''"Operator" names a VERTICAL position on the INFRA axis — runs-infrastructure — never a WHO/social tier.'' A human who founds and runs a Lararium reads //operator// on INFRA; that same human faces the WHO axis under a veiled persona, anon by default. Both standings ride one body at once and never collapse — text that files "operator" beside anon/persona/cabal mislabels an INFRA-vertical standing as a social rung. The correction holds the operator on INFRA.
 
-The planes stay ''soft-bridged at the vessel, never fused'' — every crossing edge deliberately signed, no membership auto-proposing a carriage edge and no contract auto-granting read. A ''cabal names a social tie (WHO), never infrastructure (INFRA)'' and proposes no leyline. <<~ confidence Synthesis 13/20 >> the 2D-coordinate reading firms the two-axis split the operator ruled (2026-06-28).
+The planes stay ''soft-bridged at the vessel, never fused'' — every crossing edge deliberately signed, no membership auto-proposing a carriage edge and no contract auto-granting read. A ''cabal names a social tie (WHO), never infrastructure (INFRA)'' and proposes no leyline. <<~ confidence 13/20 >> the 2D-coordinate reading firms the two-axis split the operator ruled (2026-06-28).
 
 <<~/ahu >>
 
@@ -203,7 +203,7 @@ A lararium hosts an ''operator'' (sovereign — founds the lararium, holds the f
 
 !!! plurality ~ many handles × many cap-stacks
 
-One human carries ''many Handles'' (personaGroups on the WHO axis) crossed with ''many cap-stacks'' (INFRA vessels) — the connections soft, never hard-fused. A test engineer ''sprays ephemeral cap-stacks'': short-lease vessels that mesh, run, and decay to the floor, no fresh social self minted per box. The personas stay plural and severable, and ''a quorum MUST NOT form across one human's own faces''. Those handles bind ONE principal's instruments — below the seam, joined by compose — so a gauge reads them nominal BY LAW, and several of them co-signing where a protocol asks for many bodies satisfies the count while supplying ''one locus of cost at both ends''. The plurality still reads first-class for reach and disclosure; it buys no quorum (`first-realm-arc#the-arc`). <<~ confidence Synthesis 11/20 >> the shape holds; the quorum-across-own-personas dial (how many bodies a protocol demands distinct) waits on the local instrument.
+One human carries ''many Handles'' (personaGroups on the WHO axis) crossed with ''many cap-stacks'' (INFRA vessels) — the connections soft, never hard-fused. A test engineer ''sprays ephemeral cap-stacks'': short-lease vessels that mesh, run, and decay to the floor, no fresh social self minted per box. The personas stay plural and severable, and ''a quorum MUST NOT form across one human's own faces''. Those handles bind ONE principal's instruments — below the seam, joined by compose — so a gauge reads them nominal BY LAW, and several of them co-signing where a protocol asks for many bodies satisfies the count while supplying ''one locus of cost at both ends''. The plurality still reads first-class for reach and disclosure; it buys no quorum (`first-realm-arc#the-arc`). <<~ confidence 11/20 >> the shape holds; the quorum-across-own-personas dial (how many bodies a protocol demands distinct) waits on the local instrument.
 
 <<~/ahu >>
 
@@ -264,7 +264,7 @@ Two tiers cross the read/sealed cut:
 * ''public tier'' — engine-blob + plugin-blobs, ''universal'', fetch-by-anyone, the same grammar floor every vessel verifies from cold (the genesis CID lineage, #grammar-as-shared-structure).
 * ''sealed tier'' — sovereign byte-blobs, encrypted to the cabal/persona read-set, carried blind by the relay (#the-relay-floor).
 
-''Cold-boot by CID.'' A cold Lararium ''bootstraps its engine by CID from a peer or a Herm'' — it fetches the engine-blob off the public floor, verifies by rehash, and stands its runtime before it decrypts a single sovereign doc. <<~ confidence Synthesis-Canon 14/20 >> WITNESSED: the re-genesis carries the engine-blob ''by CID'' into the node vessel — the serde-skew dep-bump cure (`lares vessel rite rebuild`, commit 95edf181), the engine riding as content rather than a baked-in artifact. The ''cross-vessel cold-fetch'' (a Lararium pulling its engine off a peer/Herm) stands ''PROPOSED'', riding the same read-face the node already serves.
+''Cold-boot by CID.'' A cold Lararium ''bootstraps its engine by CID from a peer or a Herm'' — it fetches the engine-blob off the public floor, verifies by rehash, and stands its runtime before it decrypts a single sovereign doc. <<~ confidence 14/20 >> WITNESSED: the re-genesis carries the engine-blob ''by CID'' into the node vessel — the serde-skew dep-bump cure (`lares vessel rite rebuild`, commit 95edf181), the engine riding as content rather than a baked-in artifact. The ''cross-vessel cold-fetch'' (a Lararium pulling its engine off a peer/Herm) stands ''PROPOSED'', riding the same read-face the node already serves.
 
 !!! Large bodies leave the CRDT ~ content-resolution over the blob floor
 
@@ -274,7 +274,7 @@ A byte-blob that dwarfs the doc ''must not ride the Automerge CRDT'' — a 16MB 
 
 ''This rides the INFRA/FLOW axis whole.'' A resolved body travels as ''blind carriage of content-addressed ciphertext'' — the relay carries the sealed blob without reading it, exactly the relay-floor cut (#the-relay-floor): `#has {forward}` · `#has-NOT {read, decrypt}`. Content-resolution adds no new plane; it ''extends the sealed tier'' above with a fetch-on-demand shore.
 
-''Three gates, never fused'' — and the separation ''preserves the two-axis orthogonality'' this whole meme keeps (#gate-model): (1) ''transport'' — may-this-peer-carry, the relay-forward gate (INFRA · FLOW); (2) ''content-cap'' — may-this-identity-resolve-THIS-cid, a `#has` cap scoped `{peer × address}` (still FLOW — it gates //carriage of a specific blob//, never sight); (3) ''read'' — may-they-decrypt, CGKA/BeeKEM on the cabal read-set (SOCIAL · WHO). The node ''routes and verifies ciphertext, never decrypts'' — the Delivery-Service-never-Auth-root keel. Fuse the three and WHO leaks into FLOW (the Matrix leaked-URL sin); split them and the axes stay orthogonal through the fetch. <<~ confidence Synthesis 12/20 >> the composition stands design-north; the detail — the resolve chain to PENDING, discovery-without-a-DHT, the two revocation modes — lives whole at the edge below.
+''Three gates, never fused'' — and the separation ''preserves the two-axis orthogonality'' this whole meme keeps (#gate-model): (1) ''transport'' — may-this-peer-carry, the relay-forward gate (INFRA · FLOW); (2) ''content-cap'' — may-this-identity-resolve-THIS-cid, a `#has` cap scoped `{peer × address}` (still FLOW — it gates //carriage of a specific blob//, never sight); (3) ''read'' — may-they-decrypt, CGKA/BeeKEM on the cabal read-set (SOCIAL · WHO). The node ''routes and verifies ciphertext, never decrypts'' — the Delivery-Service-never-Auth-root keel. Fuse the three and WHO leaks into FLOW (the Matrix leaked-URL sin); split them and the axes stay orthogonal through the fetch. <<~ confidence 12/20 >> the composition stands design-north; the detail — the resolve chain to PENDING, discovery-without-a-DHT, the two revocation modes — lives whole at the edge below.
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
@@ -350,7 +350,7 @@ A vessel that imports a bag from a foreign cabalGroup parses its memes, verifies
 
 !!! The intersection law ~ an OPTIONAL capability decays the grammar to what everyone implements
 
-''A shared grammar confers legibility and never confers PARITY.'' The federation record supplies the mechanism, and it ran without anyone defecting: an extensible-by-design protocol grew its modern surface as a stack of separately-negotiated OPTIONAL extensions, each implemented or not at each end and at each carrier. //Speaks the protocol// then told a party nothing about whether two vessels could hold a current exchange. <<~ confidence Synthesis-Canon 16/20 >> ''The network's effective capability fell to the INTERSECTION of what the endpoints happened to implement, and the intersection decays'' — no capture, no command, no bad actor. The largest node left because the walled alternative worked better; the federation kept running and lost its reason to be implemented against.
+''A shared grammar confers legibility and never confers PARITY.'' The federation record supplies the mechanism, and it ran without anyone defecting: an extensible-by-design protocol grew its modern surface as a stack of separately-negotiated OPTIONAL extensions, each implemented or not at each end and at each carrier. //Speaks the protocol// then told a party nothing about whether two vessels could hold a current exchange. <<~ confidence 16/20 >> ''The network's effective capability fell to the INTERSECTION of what the endpoints happened to implement, and the intersection decays'' — no capture, no command, no bad actor. The largest node left because the walled alternative worked better; the federation kept running and lost its reason to be implemented against.
 
 > ''SO //WITHOUT RUNTIME NEGOTIATION// CARRIES THE WHOLE DEFENCE, and a Nexus defined as //operators who parse a shared grammar IDENTICALLY// stands on that one adverb.'' The moment a grammar element becomes optional, membership stops naming one thing and starts naming a lattice of partial conformances that nothing surfaces. ''Every optionality admitted to the grammar layer trades a federation property for an implementation convenience'', and the trade lands invisibly — a vessel implementing the subset still parses itself as conforming.
 
@@ -374,11 +374,11 @@ The earlier cap-wall — an anonymous vessel ''DENIED'' at the relay door — re
 
 A fresh browser spore dials in along one of ''three distinct crossings'', each clearing a different door:
 
-* ''anon → public-lararium'' — the ''veil'' path: public-read off the content-addressed floor (#the-cas-substrate), no pledge, no admission; the relay-forward gate runs near-open. <<~ confidence Synthesis-Canon 15/20 >> WITNESSED: an anon browser boots live against a public lararium and renders the public plane (the browser-wiki witness, commit 0c379598).
+* ''anon → public-lararium'' — the ''veil'' path: public-read off the content-addressed floor (#the-cas-substrate), no pledge, no admission; the relay-forward gate runs near-open. <<~ confidence 15/20 >> WITNESSED: an anon browser boots live against a public lararium and renders the public plane (the browser-wiki witness, commit 0c379598).
 * ''anon → known'' — the ''guild-PLEDGE'': a member ''vouches'', minting a ''device-admit edge'' into the PersonaGroup (#social-axis); the voucher ''co-pays and watches'' — their standing decays if the spore sours (the siege-gate `rb>c`, <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-siege-gate >>). ''No pledge → anergy:'' the spore draws no ban, it ''stays anon at the floor'', free to re-present later with a vouch.
 * ''operator'' — ''runs-INFRA'', orthogonal to the two WHO crossings: a browser carrying the operator's own infrastructure standing reaches its own sovereign plane. The vertical-on-INFRA position (#two-axis-topology), never a social tier.
 
-''The keystone (PROPOSED, unbuilt):'' a ''tiered verdict in the keyholder worker'' — the gate reads the dialing spore and returns one of ''veil · PersonaGroup · owner'', routing each crossing to its right door (the split-gate made operational). The earlier single DENIED verdict read as a fused gate; the tiered verdict dissolves it. <<~ confidence Synthesis 12/20 >> the matrix stands ruled; the tiered keyholder-worker verdict awaits build and witness.
+''The keystone (PROPOSED, unbuilt):'' a ''tiered verdict in the keyholder worker'' — the gate reads the dialing spore and returns one of ''veil · PersonaGroup · owner'', routing each crossing to its right door (the split-gate made operational). The earlier single DENIED verdict read as a fused gate; the tiered verdict dissolves it. <<~ confidence 12/20 >> the matrix stands ruled; the tiered keyholder-worker verdict awaits build and witness.
 
 !!! The split-gate stands concrete ~ one mechanism per door
 
@@ -390,7 +390,7 @@ Each door of the tiered gate now names a built mechanism, so the abstract split 
 
 ''The browser clears the WHO/INFRA doors only from a secure context'' — `crypto.subtle` + OPFS demand `https`/`localhost`, so a phone reaches the doors through a DNS-01 trusted name on the kahu domain, not a bare LAN IP (<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>).
 
-''The one door not yet stood LIVE in a vessel:'' the relay-forward CARRIAGE loop (`serveCasWire` over the authenticated relay). Every piece — seal producer, member gate, relay, discovery, keyring — stands built and green in isolation; no running vessel yet assembles the serving loop. So cross-operator SEALED sync stays fail-closed until that loop lands — correctly denying a private plane it cannot yet carry, never a bug. <<~ confidence Synthesis-Canon 14/20 >> the split-gate is ruled and its doors built; the live carriage loop is the one owed assembly, and the whole family breath waits on that single wiring.
+''The one door not yet stood LIVE in a vessel:'' the relay-forward CARRIAGE loop (`serveCasWire` over the authenticated relay). Every piece — seal producer, member gate, relay, discovery, keyring — stands built and green in isolation; no running vessel yet assembles the serving loop. So cross-operator SEALED sync stays fail-closed until that loop lands — correctly denying a private plane it cannot yet carry, never a bug. <<~ confidence 14/20 >> the split-gate is ruled and its doors built; the live carriage loop is the one owed assembly, and the whole family breath waits on that single wiring.
 
 <<~ hud Drift-Ward(? Confidence 10/20 · "the relay-forward gate admits by lease + cost" — the crossing-cost calibration (siege-gate, Sybil-filter) stays an open design, carried with the veil/lease economy at lararium-identity#the-veil; the gate build follows this canon.) >>
 
@@ -432,7 +432,7 @@ The two-axis relay mesh did not arrive from nowhere; deep knowledge domains alre
 
 ''The counter-rhyme (river / watershed).'' Horton-Strahler stream order runs a strict tree: all flow drains to one root outlet, no any-to-any, no loops — //precisely what DreamNet is NOT//, yet the shape the shrine-tier fractal could decay into. The river names the failure mode to watch.
 
-''The three-plane geometry (Christaller central place theory).'' Settlements nest by a constant ''K'' that differs by //function// over one settlement field — ''K=3 marketing, K=4 transport, K=7 administrative'' (the last with indivisible tributary areas). This independently re-derives the three-plane model: ''FLOW/transport ↔ K=4 · WHO/membership ↔ K=3 · @daemon-authority ↔ K=7'', three geometries overlapping one shrine-field. <<~ confidence Synthesis 14/20 >> a doctrinal resonance that firms as the DreamNet grows; each plane SHOULD carry its own nesting geometry.
+''The three-plane geometry (Christaller central place theory).'' Settlements nest by a constant ''K'' that differs by //function// over one settlement field — ''K=3 marketing, K=4 transport, K=7 administrative'' (the last with indivisible tributary areas). This independently re-derives the three-plane model: ''FLOW/transport ↔ K=4 · WHO/membership ↔ K=3 · @daemon-authority ↔ K=7'', three geometries overlapping one shrine-field. <<~ confidence 14/20 >> a doctrinal resonance that firms as the DreamNet grows; each plane SHOULD carry its own nesting geometry.
 
 !!! Normative draws (ratified into this canon)
 
@@ -450,7 +450,7 @@ The two-axis relay mesh did not arrive from nowhere; deep knowledge domains alre
 
 The whole two-axis topology worked above rides ''Scope 1'' of the two-scopes ruling. ''Scope 1'' names the CID / CAD-blob / CRDT DreamNet→Meshpalace ''networking'' pipe — the special-case TS reaches through the full tools-stack, coordinated by `@daemon` verbs; the ''Meshpalace anchors a KEY Scope-1 node''. ''Scope 2'' names the general ''Sensorium-palaces''. Both scopes ''consume the whole model'' (the two axes, the relay floor, the pose, the routing substrate); both braid TS-coordination with py/R-tooling.
 
-The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''structural causality'' (Automerge logical time, heads/ITC-shaped, #node-addressing), distinct from the ''py/R FFZ-rhythm sensorium gates'' that Scope 2 rides. The FfzClock holds the rhythmic freshness grain; the CRDT-causal clock holds the TS structural spine — the two never fuse (the convergent-mesh three-clocks reading, <<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#three-clocks >>). <<~ confidence Synthesis 12/20 >> the ruling firms which layer runs sovereign in TS and which rides the py/R tooling behind the causal-island boundary.
+The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''structural causality'' (Automerge logical time, heads/ITC-shaped, #node-addressing), distinct from the ''py/R FFZ-rhythm sensorium gates'' that Scope 2 rides. The FfzClock holds the rhythmic freshness grain; the CRDT-causal clock holds the TS structural spine — the two never fuse (the convergent-mesh three-clocks reading, <<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#three-clocks >>). <<~ confidence 12/20 >> the ruling firms which layer runs sovereign in TS and which rides the py/R tooling behind the causal-island boundary.
 
 <<~/ahu >>
 
@@ -480,6 +480,6 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;rMfg84SvSiDI3d4ZtruBaSY-UpNbseMzdJ8tHggUVs4
+<<^ code:"&#x0003;" >>ni:///sha-256;BibQ2hKt3MF68FsCaSMvlQYJ1LUtaxEl9u5aBfJ7624
 
 <<^ code:"&#x0004;" -> ? >>

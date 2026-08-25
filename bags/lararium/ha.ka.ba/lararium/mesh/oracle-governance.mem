@@ -124,7 +124,7 @@ authority at all
 ''projection AND run their own topic boards'' off the well-known root — the board hands out
 sight, never a write-throne.
 
-<<~ confidence Synthesis 13/20 >> moving the cap-tier from the //doc// to the //signing//
+<<~ confidence 13/20 >> moving the cap-tier from the //doc// to the //signing//
 //quorum// keeps FLOW ⊥ WHO at the governance layer the same way the relay floor keeps it at
 the carriage layer: the public can carry and read the projection without holding any
 authority over it.
@@ -151,7 +151,7 @@ another:
   reject, a dead steward set, and the readers carry the content-addressed board onto a new
   steward source without permission. //The fork guards.//
 
-<<~ confidence Synthesis 12/20 >> the forkable backstop carries the deepest guarantee:
+<<~ confidence 12/20 >> the forkable backstop carries the deepest guarantee:
 governance never needs to be perfect because exit stays cheap — content-addressing makes
 the board portable, so capture costs the captor their readership, not the readers their
 board.
@@ -183,7 +183,7 @@ rendezvous ''replaces'' the DHT for discovery, and any DHT that survives sits //
 causal-island boundary as an external bridge, never a load-bearing floor. The rendezvous
 hands out an ''address''; the provider-state stays ''local-first''.
 
-<<~ confidence Synthesis 13/20 >> this reads as a ''convergence'', not a fresh invention:
+<<~ confidence 13/20 >> this reads as a ''convergence'', not a fresh invention:
 the outside re-derived the inside. Two external waves, chasing capability-gated discovery
 cold, arrived at the rendezvous the `@oracle` canon already stood — pattern-integrity
 confirmed by independent arrival, the way a proof gains weight when a second hand reaches
@@ -204,6 +204,6 @@ it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-disco
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5HVtaRaDXwXf8mLEpmd3baCR__0u_xYPtm93-S4vw8U
+<<^ code:"&#x0003;" >>ni:///sha-256;jRHImPnEV3onqptZ8jjsxNGhoYnaBvbD3tbmBrGbAEQ
 
 <<^ code:"&#x0004;" -> ? >>

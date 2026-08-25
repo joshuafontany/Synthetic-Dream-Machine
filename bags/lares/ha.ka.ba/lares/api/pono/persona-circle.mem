@@ -182,7 +182,7 @@ A vessel wants a word for ''the plane I stand in''. Every naming system surveyed
 
 ''The permissive precedent does not reach a lararium.'' seL4 resolves invocations against an implicit per-thread root and survives, because that root sits kernel-installed, per-subject, unforgeable, and ''not a string any caller can utter''. A bag id reads as a string in a document.
 
-''Why the stakes exceed style.'' The capability layer hashes a bag URL to ''seed the document'' behind it, then looks it up verbatim to grant access — so for a stretch of the stack the name //is// the plane. Two spellings seed two documents no aliasing reconciles, which makes a rename after the ring lights a re-founding rather than an edit. And the naming art adds the clause worth carrying: a later change to a binding ''MUST NOT'' rewrite what an earlier resolution already stored (NIP-05). Resolution never re-fires backward. <<~ confidence Synthesis-Canon 16/20 >>
+''Why the stakes exceed style.'' The capability layer hashes a bag URL to ''seed the document'' behind it, then looks it up verbatim to grant access — so for a stretch of the stack the name //is// the plane. Two spellings seed two documents no aliasing reconciles, which makes a rename after the ring lights a re-founding rather than an edit. And the naming art adds the clause worth carrying: a later change to a binding ''MUST NOT'' rewrite what an earlier resolution already stored (NIP-05). Resolution never re-fires backward. <<~ confidence 16/20 >>
 
 ''An ungrounded gesture halts.'' A deictic naming a compartment the vessel does not carry reads as an ERROR, never a fallback to a first plane — DNS's rule, and every silent-default case in the surveyed art produced documented harm.
 
@@ -190,7 +190,7 @@ A vessel wants a word for ''the plane I stand in''. Every naming system surveyed
 
 ''The plane predicate matches what the derivation can PRODUCE'' — the stem plus the tag's exact hex width — rather than the stem plus anything. A looser rule accepts strings the derivation never emits, and invites a caller to hand-construct a plane name.
 
-''The honest limit.'' The tag names, it never seals: someone already holding a group's doc id computes its plane name freely. What the derivation buys reads narrower and real — the name carries ''no vessel material and no sibling material'', so two compartments on one laptop produce two ids with nothing of the laptop, and nothing of each other, inside either. The Janus probe surface rides the transport, unchanged by any naming choice. <<~ confidence Synthesis-Canon 15/20 >>
+''The honest limit.'' The tag names, it never seals: someone already holding a group's doc id computes its plane name freely. What the derivation buys reads narrower and real — the name carries ''no vessel material and no sibling material'', so two compartments on one laptop produce two ids with nothing of the laptop, and nothing of each other, inside either. The Janus probe surface rides the transport, unchanged by any naming choice. <<~ confidence 15/20 >>
 
 <<~/ahu >>
 
@@ -217,6 +217,6 @@ And the substrate itself, by canon, has ''no forward-secrecy and no retroactive 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Wi_xM52yToZVC4NE7LEljaALNAujG1co2N0SX9x53RY
+<<^ code:"&#x0003;" >>ni:///sha-256;7nCy9FKK5-8eGsH3ql8bP8mkNVtWkodSeTufifNmbhg
 
 <<^ code:"&#x0004;" -> ? >>

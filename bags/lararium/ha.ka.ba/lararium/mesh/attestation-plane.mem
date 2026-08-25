@@ -35,7 +35,7 @@ it three times, and never once in a protocol document:
 * in ''Mastodon'' it appeared as a '''login prompt on the server suspending you''' — `Move` must issue FROM
   the old host, signed by the old key, while logged in.
 
-<<~ confidence Synthesis-Canon 15/20 >> ''Therefore the kahu co-signature does not carry the risk. The
+<<~ confidence 15/20 >> ''Therefore the kahu co-signature does not carry the risk. The
 CLIENT'S RENDER POLICY and the EXIT PROOF carry it.'' Spec both as tightly as resolution gets spec'd.
 
 ''The frame beneath it'' — Zooko's triangle, resolved by Stiegler's petname split. The '''key''' runs global
@@ -84,7 +84,7 @@ that place dies or turns hostile, so the span IS the exit right, measured.
 ''No retroactive baseline exists anywhere in the field'' (nobody has re-measured Bluesky since April 2024).
 Instrument at founding or lose the baseline permanently.
 
-<<~ confidence Synthesis 11/20 >> ''OPEN (operator):'' a cross-Nexus rate eventually requires different kahu
+<<~ confidence 11/20 >> ''OPEN (operator):'' a cross-Nexus rate eventually requires different kahu
 groups to SHARE TELEMETRY — which wants its own consent shape, since a naive share would correlate the very
 fleets the infra layer keeps un-correlatable.
 
@@ -127,7 +127,7 @@ the same refusal to let any authority NAME one. Only a provenance reader wants w
 ''PLURALITY NAMES THE PROXY; INDEPENDENCE NAMES THE PROPERTY.'' Ten attestors forming one clique read as one
 attestor wearing ten masks — canon says as much in the neighbouring register: "mandatory vouching IS a root
 admitter wearing N masks." So the ceiling meters CONCENTRATION rather than counting heads, and it self-tunes as
-a Nexus grows where a fixed number never would. <<~ confidence Synthesis 11/20 >> What independence measure
+a Nexus grows where a fixed number never would. <<~ confidence 11/20 >> What independence measure
 survives contact with a real social graph stays genuinely open, and rides research rather than a guess.
 
 !!! 4 · Governance splits from infra duty
@@ -145,7 +145,7 @@ own bank account'': Open Collective Foundation dissolved in 2024, 600+ collectiv
 MONEY could transfer — and only to another 501(c)(3). ''A domain held there becomes the asset of an entity
 the kahu do not govern, exposed to that entity's own dissolution.''
 
-<<~ confidence Synthesis-Canon 14/20 >> What the field shows working for this asset class instead: SPI holds
+<<~ confidence 14/20 >> What the field shows working for this asset class instead: SPI holds
 Debian's trademarks and domains under a member-elected board with documented domain procedures; Software
 Freedom Conservancy holds ''domain names'' for member projects à-la-carte, so a project may assign some assets
 and retain others. ''Budget the move honestly'' — Mastodon's asset transfer to a nonprofit ran roughly ten
@@ -187,7 +187,7 @@ CA/Browser Forum ballots, not in products. (Threshold ECDSA for DNSSEC keys and 
 exist; neither gates ISSUANCE.) The reason reads structural rather than accidental: a sixty-day renewal
 cadence cannot wait on humans.
 
-<<~ confidence Synthesis-Canon 15/20 >> So every survivor ''separates cadences'' — a quorum gates the rare,
+<<~ confidence 15/20 >> So every survivor ''separates cadences'' — a quorum gates the rare,
 slow, high-power act (mint a key, rotate it, admit a member), and automation carries the frequent, fast,
 low-power one (issue a leaf). ''A quorum placed in the renewal path gets bypassed inside one outage, and the
 bypass becomes permanent.'' The composable approximation that does deploy: pin issuance with CAA `accounturi`
@@ -201,7 +201,7 @@ parent's own power to issue.
 
 !!! 6 · The host-scoped nym rides as a LEASE
 
-<<~ confidence Provisional-Synthesis 7/20 >> ''APPROVED IN PRINCIPLE ONLY — this rung awaits unpacking and
+<<~ confidence 7/20 >> ''APPROVED IN PRINCIPLE ONLY — this rung awaits unpacking and
 carries no RULED language yet.''
 
 ''Rent gates the flood, never the claim.'' Three price points across four orders of magnitude produced one
@@ -293,6 +293,6 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dt0evfcAvs21A7CC7sGZIyhhsAgxB0bYQ9EeKoEGvzo
+<<^ code:"&#x0003;" >>ni:///sha-256;A740EJsbjv8_SxGHaoqdOqeFCv4MJ0CEV213_NLKO2k
 
 <<^ code:"&#x0004;" -> ? >>

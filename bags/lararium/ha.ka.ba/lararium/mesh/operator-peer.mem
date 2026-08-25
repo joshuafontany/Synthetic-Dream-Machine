@@ -202,7 +202,7 @@ revocable. The agent never holds the operator's key and never impersonates — e
 authority equals the INTERSECTION of the operator's grant and the agent's attenuation
 (an agent reduces access, never expands it).
 
-<<~ confidence Synthesis-Canon 15/20 >> The leaf-identity shape (OP-AP5/6) stands
+<<~ confidence 15/20 >> The leaf-identity shape (OP-AP5/6) stands
 resolved by twin scouts 2026-06-07 (light cached-card + bare-Ed25519 signer over the
 heavy worker-keyhive path; the tree's `auth-proof` tests already prove bare-Ed25519
 proofs verify). The remaining BUILD: `lares vessel found` mints + persists the operator
@@ -246,6 +246,6 @@ identical ea rights.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SrFWuiFjj2wvqNoPMy5syzboc2hdcE_XGyM4nxW9lr0
+<<^ code:"&#x0003;" >>ni:///sha-256;GuLNUAMKN91wf-4Kr7CiqLjihG0_scMklwgMqFITDlk
 
 <<^ code:"&#x0004;" -> ? >>

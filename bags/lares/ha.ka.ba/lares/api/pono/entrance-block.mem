@@ -25,7 +25,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
 
 !! The Law ~ the substrate COUPLES
 
-<<~ confidence Canon 17/20 >> ''A single body hosting many rhythms ENTRAINS them, because the body itself constitutes the coupling medium.''
+<<~ confidence 17/20 >> ''A single body hosting many rhythms ENTRAINS them, because the body itself constitutes the coupling medium.''
 
 A shared substrate never merely //risks// a false now. It ''manufactures a real one — and then leans on it.''
 
@@ -43,7 +43,7 @@ What a shared body yields reads WORSE than honest entrainment. It yields ''modul
 
 !! Entrance Block ~ independence stands as a shore, never a default
 
-<<~ confidence Canon 17/20 >> ''Two oscillators coexist as genuinely independent only where one holds a ONE-WAY boundary — it MAY emit phase, and it MUST refuse to receive phase.''
+<<~ confidence 17/20 >> ''Two oscillators coexist as genuinely independent only where one holds a ONE-WAY boundary — it MAY emit phase, and it MUST refuse to receive phase.''
 
 Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside the sinus rhythm only through ''entrance block'' — a rim of depressed tissue that lets the ectopic impulse OUT and does not let the sinus impulse IN. Strip the block and no second rhythm survives; one rhythm stands, carrying an occasional early beat.
 
@@ -59,7 +59,7 @@ Cardiology names the mechanism. A parasystolic focus keeps its own rhythm beside
 
 !! Forbid the PHASE, never the PERIOD
 
-<<~ confidence Synthesis-Canon 14/20 >> The earlier framing — //"the rhythms MUST NOT entrain"// — cut too coarse. It names the wrong quantity.
+<<~ confidence 14/20 >> The earlier framing — //"the rhythms MUST NOT entrain"// — cut too coarse. It names the wrong quantity.
 
 The ''gankogui'' bell plays //without variation, steadily, without error, throughout the piece//: it carries a ''cycle'' and ''no message''. Around it the drummers hold ''private downbeats'' — the same period, different origins — and the music LIVES in that non-coincidence.
 
@@ -73,7 +73,7 @@ The ''gankogui'' bell plays //without variation, steadily, without error, throug
 
 !! The WAIT ~ the coupling channel canon missed
 
-<<~ confidence Synthesis-Canon 15/20 >> ''The false now enters not through the DATA path, but through the WAIT.''
+<<~ confidence 15/20 >> ''The false now enters not through the DATA path, but through the WAIT.''
 
 Canon already holds //"the @daemon carries verbs + a data-pointer, NO payload"// (#nalu, the home split). That reads ''necessary and NOT sufficient.'' A payload-free coordinator a handler must ''block on'' stands as a conductor — ''regardless of what it carries.''
 
@@ -89,7 +89,7 @@ This forecloses the shared asyncio serve-loop: a shared event loop HANDS every b
 
 !! A recovered rhythm holds a PATH-INTEGRAL, never a snapshot
 
-<<~ confidence Synthesis 12/20 >> Hoʻokele: the navigator holds position by ACCUMULATING every distance and bearing since the last known land. So a hull that defers its bearing for one watch ''does not lose a watch — it loses the voyage'', because it cannot resume integrating from a value it never computed.
+<<~ confidence 12/20 >> Hoʻokele: the navigator holds position by ACCUMULATING every distance and bearing since the last known land. So a hull that defers its bearing for one watch ''does not lose a watch — it loses the voyage'', because it cannot resume integrating from a value it never computed.
 
 A recovered clock carries the same shape — an integral over its stream's own history.
 
@@ -103,7 +103,7 @@ A recovered clock carries the same shape — an integral over its stream's own h
 
 !! The order parameter rides as ALARM, never as target
 
-<<~ confidence Canon 17/20 >> ''Where N rhythms carry the payload, the DESYNCHRONY carries the signal.''
+<<~ confidence 17/20 >> ''Where N rhythms carry the payload, the DESYNCHRONY carries the signal.''
 
 The SCN's dispersed neurons each hold their OWN period (21–26 h); the tissue's clean 24 h stands as a ''coupling artifact — no single cell holds it.'' Cut the coupling peptide and the aggregate rhythm dies ''while every individual clock lives on, correct'' — an aggregate monitor reports //"the clock died"// over a field of healthy clocks.
 
@@ -143,7 +143,7 @@ A Lar binds to a ''place'', never a family; the family moves, the Lar stays (#el
 
 <<~moves anchor-the-self -> at-the-address on/never-in-the-handler if/bodies-spawn-and-die do/a-reconnecting-stream-finds-the-same-seat >>
 
-<<~ confidence Synthesis-Canon 14/20 >> ''Anchor the stream's self at the ADDRESS, never in the handler.'' This buys ''disposable bodies'' — spawn, drain, suspend, kill freely; the reconnecting stream finds the same seat, the same lineage.
+<<~ confidence 14/20 >> ''Anchor the stream's self at the ADDRESS, never in the handler.'' This buys ''disposable bodies'' — spawn, drain, suspend, kill freely; the reconnecting stream finds the same seat, the same lineage.
 
 It costs the ''abandoned shrine'': dead places still hold Lares. ''Stale seats reap BY RITUAL'' — an explicit rite of closing — never left to flicker.
 
@@ -163,12 +163,12 @@ The py capture body reads ''disposable''. The ''worldline'' holds the shrine.
 
 !! Owed ~ what this canon has not yet paid for
 
-<<~ confidence Provisional-Synthesis 7/20 >> ''`embed_io` stands untested against the WAIT.'' The warm embedder rides as a shared holder — //"the model is the resource"// — and every stream reaches it. A stream that POINTS at the holder clears the shore; a stream that BLOCKS on it couples through the queue. ''Test it, or give each body its own embedder and pay the memory.''
+<<~ confidence 7/20 >> ''`embed_io` stands untested against the WAIT.'' The warm embedder rides as a shared holder — //"the model is the resource"// — and every stream reaches it. A stream that POINTS at the holder clears the shore; a stream that BLOCKS on it couples through the queue. ''Test it, or give each body its own embedder and pay the memory.''
 
 Every shared resource in the py fleet owes the same test: `content_io` · `structurepalace_io` · `form_encoder` · the WAL · the drain ledger. ''The question never reads "does it carry payload." It reads "does a stream WAIT on it."''
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;35XVdB6glem5pZHXNMHpbJK9p4-EsBsbWyb1M-RcXz8
+<<^ code:"&#x0003;" >>ni:///sha-256;Mtrk88qOxhBEsjv2YtW1M-ulGiUAKj7QFNw7Izkk0Ik
 
 <<^ code:"&#x0004;" -> ? >>

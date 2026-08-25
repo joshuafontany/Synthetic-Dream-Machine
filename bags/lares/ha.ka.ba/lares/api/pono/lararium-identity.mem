@@ -59,7 +59,7 @@ The base model ''rules capability-is-identity'' (Goblins/OCapN) with ''petnames'
 layer — the capability //is// the identity, the petname its local name, both riding the `lar:` l-space
 regions (#capability-and-petnames).
 
-<<~ confidence Synthesis 13/20 >> The foundation (the two-axis WHO⊥INFRA split, per-vessel key, delegation edge,
+<<~ confidence 13/20 >> The foundation (the two-axis WHO⊥INFRA split, per-vessel key, delegation edge,
 two-faced hearth, capability-is-identity + petnames — operator-ruled 2026-06-24) firms toward canon;
 the encrypt-from-start keying carries one kept dissent (#provenance), so the meme
 stands ''PROPOSED'' until that settles.
@@ -98,7 +98,7 @@ at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topol
 
 ''Circles ride orthogonal — never a rung.'' A ''Circle'' names a Kowloon local-membership set that
 ''never federates'' (`circles-kowloon`); a vessel holds circles //within// its Lararium, and circles
-do not stack between operators. <<~ confidence Synthesis 13/20 >> The earlier plane-list-vs-group-scale
+do not stack between operators. <<~ confidence 13/20 >> The earlier plane-list-vs-group-scale
 question closes with the ruling above — no numbered plane survives to reconcile; the group-scale
 (nameless `#has`-stacks) stands, Circles stay orthogonal to it.
 
@@ -251,7 +251,7 @@ other crossing ''LIFTs'' — one key climbs over time. The test reads as one que
 The ''HOLD'' path fires when a //lived// veil carries a public past that MUST stay severed from the
 persona it joins — keeping the key would publicly weld the anon's history to the group (the
 unlinkability collapse). A clean-slate or same-persona device ''LIFTs'' instead; the link reads as
-wanted. <<~ confidence Synthesis 12/20 >> Lift stands built (the edge); Hold stands named, unbuilt —
+wanted. <<~ confidence 12/20 >> Lift stands built (the edge); Hold stands named, unbuilt —
 the veil-primitive's open twin. Whether a vessel carries a severable past rides the operator's
 veil-policy choice, never a silent default.
 
@@ -281,7 +281,7 @@ convergent membership-removal (#delegation-edge), immediate and irreversible at 
 ''Anti-amplification holds'': only the kahu/root issues ceiling grants; no vessel self-escalates or
 grants above its own tier (the ocap attenuation law, `orichalcum-capabilities`).
 
-<<~ confidence Synthesis 13/20 >> Most of the lease lives already — the edge `exp`, the epoch-lease,
+<<~ confidence 13/20 >> Most of the lease lives already — the edge `exp`, the epoch-lease,
 Keyhive-removal, the cap-lattice floor. The research firms the SHAPE (floor=anon · feed=re-issue ·
 T1/T2 + renewal-discount); the ''siege-gate's entry COST rides the dial below'' (#the-siege-gate).
 
@@ -325,14 +325,14 @@ flood the cost should bite; a costly, witnessed one reads as a legitimate schism
 ''The ZK-vouch — carry rep across a HOLD without a link.'' A HOLD severs the old veil (#the-veil); to
 carry credibility forward without welding the identities, the ''kahu signs as a blind oracle'' —
 blind-signing the new vessel's delegation edge, certifying //without knowing which vessel// it routes
-to (BBS+/issuer-hiding + a one-time nullifier = the epoch-lease). <<~ confidence Synthesis 12/20 >> A
+to (BBS+/issuer-hiding + a one-time nullifier = the epoch-lease). <<~ confidence 12/20 >> A
 fully peer-to-peer, zero-trust ZK-vouch does NOT exist (the Identity-Continuity Paradox — //someone//
 holds the old↔new link; the kahu's signs-but-commands-not posture fits the oracle seat, though a
 ''threshold'' of vouchers MAY hold the link instead of one kahu). ''Price the HOLD at the staked''
 ''reputation'' — consume the credential, the fresh veil inherits a //decayed// standing; this blocks
 sever-and-refound farming.
 
-<<~ confidence Synthesis 11/20 >> The dial's SHAPE seats on a four-domain convergence. The ''sybil''
+<<~ confidence 11/20 >> The dial's SHAPE seats on a four-domain convergence. The ''sybil''
 ''plane stands built'' (#the-lineage-fold); the ''ZK-vouch / privacy plane defers'' — it serves absent
 parties until a second crossing fruits. The exact numbers — what fraction of a voucher's standing
 stakes, how fast it decays, one kahu or a threshold — wait on the local instrument — ''the shape constrains, the dial does not follow from it''.
@@ -377,7 +377,7 @@ lineage trapped by its first response). The germinal-center antidote — help LI
 ranks against siblings — rides in the price's mass-conservation, yet the pull persists; the same bias
 reads in the node's own recall.
 
-<<~ confidence Synthesis-Canon 14/20 >> grounded across the fields: Cheng-Friedman (the ε-throttle
+<<~ confidence 14/20 >> grounded across the fields: Cheng-Friedman (the ε-throttle
 bound; and no symmetric reputation runs sybilproof) · Ziegler-Lausen Appleseed · Levien Advogato ·
 Felsenstein pruning as sum-product · the Leontief inverse · Galton-Watson branching · UCAN / SPKI ·
 BBS per-verifier + Semaphore · Merton + Francis for the warning.
@@ -437,7 +437,7 @@ So @oracle wears ''two faces'', joined by a publish-bridge:
 
 ''The honest limit'' — this buys read-only ONLY for the PUBLIC plane. Private/encrypted bags, forward-secrecy on revocation, per-change invariants a peer verifies without trusting the relay keep Keyhive/Beelay's seat (#four-port-swap).
 
-<<~ confidence Synthesis-Canon 15/20 >> The Two-Faced Substrate (content-addressed floor + signed monotone pointer) seats on four converging lenses with zero new tech — `Automerge.save` over the node's existing HTTP server, the pointer on the existing channel. ''Real-time streaming (Hypercore — read-only by keypair, live)'' rides as the named END-GOAL above the floor, deferred until a live feed waits to be watched.
+<<~ confidence 15/20 >> The Two-Faced Substrate (content-addressed floor + signed monotone pointer) seats on four converging lenses with zero new tech — `Automerge.save` over the node's existing HTTP server, the pointer on the existing channel. ''Real-time streaming (Hypercore — read-only by keypair, live)'' rides as the named END-GOAL above the floor, deferred until a live feed waits to be watched.
 
 <<~/ahu >>
 
@@ -576,7 +576,7 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 * ''Registry-as-island'' — keep each registry a causal island; resist a global registry re-growing (the web2 smell).
 * ''Two ratchets, never conflated'' — the public grammar ratchet (engine-epochs, shared) vs the private key ratchet (per-place); see #head.
 * ''The veil + the lease — the design crystallized'' (2026-06-25, two research-swarms + the Elyncia/Shadowtalk/Mage fiction layer): anon stands a first-class veil (#the-veil), the crossing runs LIFT or HOLD on the boundary rule, decay rides native as the lease (#the-lease). Lift built (the edge); HOLD (refound-sever) named-unbuilt. The crossing CEREMONY rides a ''siege-gate'' (born-besieged; cost + witness + invite-graph Sybil-filter) and ''dissent/forking stays allowed but COSTLY'' (Mage-Paradox: cost parts a schism from a siege) — both land in federation + dreamnet-architecture once the cost calibrates.
-* ''The cost dial — synthesized'' (swarm complete, 2026-06-25; #the-siege-gate): four blind domains (Sybil-graph defense · ZK-credential · immune costimulation · ritual/club economics) converged on the VOUCHER as the cost — MARGINAL-not-absolute (set the slope), invite-graph-relative (`rb>c`, the voucher supplies r), voucher-co-pays-and-watches, ''anergy-not-ban'' (no vouch → stay at floor=anon, re-presentable), entry-dear/maintenance-cheap/re-entry-costlier, group-value-tracking. The ZK-vouch rides the kahu as a blind oracle (carry rep across a HOLD without a link; price the HOLD at the staked rep). <<~ confidence Synthesis 11/20 >> The mechanism stands ''unbuilt and contact-deferred'' (LIFT built; HOLD · siege-cost · ZK-vouch await the second spore). OPEN remnant: the exact dial numbers (stake-fraction · decay-rate) + whether ONE kahu or a THRESHOLD holds the blind-oracle link.
+* ''The cost dial — synthesized'' (swarm complete, 2026-06-25; #the-siege-gate): four blind domains (Sybil-graph defense · ZK-credential · immune costimulation · ritual/club economics) converged on the VOUCHER as the cost — MARGINAL-not-absolute (set the slope), invite-graph-relative (`rb>c`, the voucher supplies r), voucher-co-pays-and-watches, ''anergy-not-ban'' (no vouch → stay at floor=anon, re-presentable), entry-dear/maintenance-cheap/re-entry-costlier, group-value-tracking. The ZK-vouch rides the kahu as a blind oracle (carry rep across a HOLD without a link; price the HOLD at the staked rep). <<~ confidence 11/20 >> The mechanism stands ''unbuilt and contact-deferred'' (LIFT built; HOLD · siege-cost · ZK-vouch await the second spore). OPEN remnant: the exact dial numbers (stake-fraction · decay-rate) + whether ONE kahu or a THRESHOLD holds the blind-oracle link.
 
 <<~/ahu >>
 
@@ -598,6 +598,6 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mZfQRx-XaclWTEbyZ5VD9P9578lmgRq3tJ7k9zlvMTU
+<<^ code:"&#x0003;" >>ni:///sha-256;aN4eJv_1g0m-4K53_xz2fkm5acM27n6guUd8_hp4NrE
 
 <<^ code:"&#x0004;" -> ? >>

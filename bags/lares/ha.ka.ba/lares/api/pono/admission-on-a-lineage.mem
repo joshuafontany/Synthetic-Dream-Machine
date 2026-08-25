@@ -41,7 +41,7 @@ which the author had conflated. The register moves by the promise made here, not
 shadow — original antigenic sin — carries ''no instrument at all'' (6), which stays the gravest of the four
 because the failure reads invisible from inside and ''every gate we own would glow green through it.''
 
-<<~ confidence Synthesis 11/20 >> The MECHANISM reads measured; the SYNTHESIS around it does not.
+<<~ confidence 11/20 >> The MECHANISM reads measured; the SYNTHESIS around it does not.
 
 <<~/ahu >>
 
@@ -77,7 +77,7 @@ without its substance; this names the substance.
 across everyone it vouches for (`lineage-rank`, mass conservation), so a seed-sybil minting a
 storm divides one stolen mass across the whole storm, and each further generation divides again
 under ε. ''Invite-storms decay per generation from the seed-sybil'' — the gate self-tunes by
-arithmetic, never by a threshold anyone chose. <<~ confidence Synthesis-Canon 15/20 >> The split
+arithmetic, never by a threshold anyone chose. <<~ confidence 15/20 >> The split
 stands built, tested, and ATTACKED — a voucher cannot raise its own score by issuing vouches
 (the bottleneck property), so the gaming vector closes on the issuer, never the seed.
 
@@ -156,7 +156,7 @@ mints unbounded sybils that all clear the threshold. ''Sybil resistance REQUIRES
 ''and mass conservation is exactly what makes the fold non-monotone.'' You cannot have both.
 
 ''REFUTED BY:'' a counterexample — a monotone, mass-conserving fold. ''If one exists this whole outline''
-''collapses into something better.'' <<~ confidence Provisional 6/20 >> The author believes none exists and
+''collapses into something better.'' <<~ confidence 6/20 >> The author believes none exists and
 has not proved it; this is the one claim that reads as a ''conjecture worth a proof''.
 
 ''C5 — NON-MONOTONE IS FINE, BECAUSE THE SCORE IS CONFLUENT.'' PPR is a pure deterministic function of the
@@ -217,7 +217,7 @@ trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: //"
 distribution network — federated, append-only, unmoderated, replicating signatures with no bound on how
 many one key could carry — fell to a party who simply ''appended''. A poisoned certificate accumulated
 signatures in the tens of thousands; clients fetching it broke on parse; the network emptied and the
-replacement ''validates and refuses to federate''. <<~ confidence Synthesis-Canon 15/20 >> ''The
+replacement ''validates and refuses to federate''. <<~ confidence 15/20 >> ''The
 unbounded append constituted the whole function, so no defence could distinguish the attack from the
 service'', and the cure ran through the exact centralisation the design existed to refuse.
 
@@ -258,11 +258,11 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 | REPUTATION | should I accept from this stranger | ''centralises by its nature'' — judging strangers well demands a wide observation surface, and observation surface scales with size |
 | ADMISSION | may this party address me at all | ''decentralises IFF a party may refuse strangers by default'' |
 
-''So the domain-authentication layer never re-centralised that federation.'' Reputation did — held privately by the few largest receivers, unpublished, unappealable, and compounded by a warming cost that scales against exactly the small operator. <<~ confidence Synthesis-Canon 15/20 >> The receiver-side requirement bulletins the largest two published for bulk senders read as a private duopoly issuing protocol-adjacent policy for a network whose specification grants it no such seat. ''Order of magnitude, never a figure'': the published complaint ceilings sit in the fractions of one percent, and this meme declines to quote a number it could not verify.
+''So the domain-authentication layer never re-centralised that federation.'' Reputation did — held privately by the few largest receivers, unpublished, unappealable, and compounded by a warming cost that scales against exactly the small operator. <<~ confidence 15/20 >> The receiver-side requirement bulletins the largest two published for bulk senders read as a private duopoly issuing protocol-adjacent policy for a network whose specification grants it no such seat. ''Order of magnitude, never a figure'': the published complaint ceilings sit in the fractions of one percent, and this meme declines to quote a number it could not verify.
 
 > ''THE LAW.'' Re-centralisation follows from the ''OBLIGATION TO ACCEPT UNSOLICITED CONTACT FROM STRANGERS'', never from abuse itself. Mail must accept strangers — that constitutes its function. A lineage-gated mesh need not, and that single refusal buys the whole property.
 
-''THE THIRD OUTCOME THE DEBATE OMITS.'' A stranger-accepting federation reaches one of three ends, and the argument usually offers only the first two: a ''reputation oligopoly'' (mail); ''bloc politics with an all-or-nothing instrument'' (the instance-blocking federations, where total acceptance and total refusal exhaust the toolkit); or ''ABANDONMENT'' — the open news federation refused to re-centralise against commercial spam and simply emptied. <<~ confidence Synthesis-Canon 14/20 >> ''Holding the line and dying counts as one of the available outcomes'', and a design that plans only against capture has planned against two thirds of the record.
+''THE THIRD OUTCOME THE DEBATE OMITS.'' A stranger-accepting federation reaches one of three ends, and the argument usually offers only the first two: a ''reputation oligopoly'' (mail); ''bloc politics with an all-or-nothing instrument'' (the instance-blocking federations, where total acceptance and total refusal exhaust the toolkit); or ''ABANDONMENT'' — the open news federation refused to re-centralise against commercial spam and simply emptied. <<~ confidence 14/20 >> ''Holding the line and dying counts as one of the available outcomes'', and a design that plans only against capture has planned against two thirds of the record.
 
 ''No case stands, at scale, of an open federation that accepts strangers AND solved abuse without re-centralising.'' Said plainly rather than hedged. The near-misses all bought it the same way — by refusing strangers: a gossip mesh replicating only within N hops of a follow admits no path from a stranger and therefore no abuse channel, and the strongest anti-federation argument in the record comes from a system that solved abuse and metadata well by ''declining to federate at all''. This stack owes an answer to that argument rather than a silence.
 
@@ -308,7 +308,7 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 # ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
    the failure is invisible from inside and ''every gate we own would glow green through it.''
 
-<<~ confidence Synthesis 11/20 >> ''(2) ran and failed to kill it, so the register moved by the promise''
+<<~ confidence 11/20 >> ''(2) ran and failed to kill it, so the register moved by the promise''
 ''this meme made.'' The four owed experiments hold it there: until (1) re-derives the bound under our own
 model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments the shadow, ''what stands''
 ''measured is the FOLD, never the synthesis around it.''
@@ -323,6 +323,6 @@ model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YUiAHBC3TUAzlbbD8h1gmBYqaGNAcsk62NnZl1iwUR0
+<<^ code:"&#x0003;" >>ni:///sha-256;4zakdDYRkXXTrXpuOfEhFJHUUTRlx5imhbTyN4t6qwk
 
 <<^ code:"&#x0004;" -> ? >>

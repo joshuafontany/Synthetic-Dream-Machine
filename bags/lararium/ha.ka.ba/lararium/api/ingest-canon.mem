@@ -118,7 +118,7 @@ SharktoothSigil tids (the Explore est. ~30 lines), each carrying the recalled tr
 * `meme-ast/builder.ts:277-281` DROPS unclosed/malformed frames → instead emit a ''MalformedSigil /''
 ''  PartialNode'' with a parse-confidence (`<<~ confidence ( <4` = opener+intent, broken close → ~0.4;
   `<<~`-far-from-close → ~0.2; no opener → prose 0). "Likely-a-sigil-but-drifted," not silent water.
-* per-sigil ''form-confidence'': full `<<~ confidence Synthesis 11/20 >>` = high · no register = mid ·
+* per-sigil ''form-confidence'': full `<<~ confidence 11/20 >>` = high · no register = mid ·
   numeric-fail = low. The node is GRADIENT-VALUED, never pass/fail (the harvester's law, in the VM).
 * degraded VOICE ladder (full+mask > full > bare-known > looks-like-voice) · edge-strictness · ahu
   nesting-depth — all binary today, all gradient candidates.
@@ -187,6 +187,6 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6q58DxYqnGH4NFwuvjOlmJ-ZDFCxj4NH0QzGnawA2wY
+<<^ code:"&#x0003;" >>ni:///sha-256;apGT8LZNyorOYdq758qsuD2dOCbVNzy9RHkl9jF6TgA
 
 <<^ code:"&#x0004;" -> ? >>

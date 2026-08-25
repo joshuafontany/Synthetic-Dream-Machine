@@ -103,7 +103,7 @@ value'', never by title ([[founding-runbook|lar:///ha.ka.ba/lararium/mesh/foundi
   history; the charter's epoch chain reads as exactly this shape one scale up (#the-continuity-anchor).
 * ''DELEGATED'' (the USER's durable option) — an operator root ''delegates a disposable user stream'';
   durability lives in the ROOT, the leaf stays light and abandonable. A user gains persistence WITHOUT
-  carrying a reserve (KERI delegated identifiers, KID0007). <<~ confidence Synthesis 12/20 >>
+  carrying a reserve (KERI delegated identifiers, KID0007). <<~ confidence 12/20 >>
 * ''NONE-CIVIC'' (the HERM) — no identifier of ''persons'' at all. The self-certifying key that boots
   the keel stands as the Herm's ''PLACE DID'' — a somewhere, not a someone — and ''never an operator
   DID'': a crossroads holds no human key for a passer-by to steal. The operator's relation to it rides
@@ -250,7 +250,7 @@ relays blind-transit the ciphertext across the mesh, and the user — holding th
 grant (the device-fleet full-sync, already granted) — decrypts at the leaf. ''Transit crosses the whole
 mesh; the read stays at the authorized vessel.''
 
-''Two edges keep the breathing honest.'' <<~ confidence Synthesis-Canon 14/20 >> First, the
+''Two edges keep the breathing honest.'' <<~ confidence 14/20 >> First, the
 ''encrypt-first invariant'': blind-transit stays safe ONLY for what a plane seals for the mesh — a
 cleartext-local plane a relay carried WOULD leak, so the self-slot's private-plane denial guards exactly
 that gap. The discipline that makes the rhizome true reads ''everything that federates, encrypts first'';
@@ -294,7 +294,7 @@ them split:
 <<~Fork SELF-SLOT-A "keep/the committed posture — a cross-operator carries ONLY the federatable set, private ciphertext never transits a foreign relay cost/the mesh does NOT breathe across operator boundaries; a remote same-operator user reaches its private data only over IN-fleet legs, never a cabal-mate's relay" >>
 <<~Fork SELF-SLOT-B "refine/split sharePolicy's private-plane denial into DENY-READ-CAP (keep, absolute) ⊥ ALLOW-CARRY-of-ciphertext-to-a-blind-relay (new) — a cross-operator relay blind-transits sealed private bytes it can never read cost/a new carry-tier between MANDATORY and private-read; the relay holds encrypted replicas of planes it cannot decrypt (storage + the read-floor as the sole guard) gain/the mesh breathes — private data reaches its remote reader across ANY honest leg, carry-generous under the read-floor" >>
 
-<<~ confidence Synthesis 12/20 >> ''The recommendation leans SELF-SLOT-B'', because the mesh-breathes
+<<~ confidence 12/20 >> ''The recommendation leans SELF-SLOT-B'', because the mesh-breathes
 role the operator named REQUIRES private ciphertext to cross foreign legs, and carry ⊥ read makes it safe
 by construction — the relay holds bytes it provably cannot read. The refinement stays NARROW: it flips
 the private-plane denial from ''deny-carry-and-read'' to ''deny-read, allow-blind-carry'', and changes
@@ -346,7 +346,7 @@ Four parts carry it:
   SOLELY with the recovering vessel — no quorum, no guardian, no recovery root holds it. Continuity
   survives; the key-history turns over.
 
-<<~ confidence Synthesis 13/20 >> ''Blast-radius, cut:'' Reading-A hands the recovery quorum the
+<<~ confidence 13/20 >> ''Blast-radius, cut:'' Reading-A hands the recovery quorum the
 operational key forever (sign anything). Reading-B hands it exactly ''one rotation'' — it can seat a
 fresh key it does not itself hold, and nothing else. The recovery authority never becomes a content
 signer.
@@ -373,7 +373,7 @@ the shape at persona scale). The invariant becomes:
 * a rotation advances the head; the old edges still resolve, because they pinned the invariant
   identifier, never the rotated key.
 
-<<~ confidence Synthesis-Canon 16/20 >> ''The load-bearing build for Reading-B read: give each PersonaGroup
+<<~ confidence 16/20 >> ''The load-bearing build for Reading-B read: give each PersonaGroup
 a pre-rotated persona-KEL, and move the pin from the raw operational key to the identifier prefix.''
 ''BUILT'' — `persona-kel` mints the inception, derives the prefix, advances rotations hash-linked, and
 verifies a chain; `boot-daemon-keyhive`'s Binding Gate pins the prefix and resolves the head. It lifted
@@ -413,7 +413,7 @@ verified against the pre-committed set. ''No secret ever reconstructs — the st
   a card"); the rotation event carries k separate signatures. This reads the FROST/TSS direction
   recovery-core already gestures at ("the seed then never assembles").
 
-<<~ confidence Synthesis-Canon 14/20 >> ''Both satisfy the ruling'' — neither resurrects the operational
+<<~ confidence 14/20 >> ''Both satisfy the ruling'' — neither resurrects the operational
 key; that part settled. The fork decides ONLY whether the RECOVERY authority itself ever briefly
 materializes as one secret. The guardian-CARD survives either way — Fork A's card carries a share of the
 recovery root; Fork B's card carries a guardian's recovery public key + a signing prompt. The operator
@@ -426,7 +426,7 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 !! The honest edges (kept lit)
 
-<<~ confidence Synthesis-Canon 14/20 >> Three walls hold this design, and each stays named:
+<<~ confidence 14/20 >> Three walls hold this design, and each stays named:
 
 * ''The persona-KEL indirection STANDS — this wall came down'' (corrected; it read as an open gate long
   after it closed, and a stale wall misroutes every reader who trusts it). The Binding Gate ''pins the
@@ -469,6 +469,6 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;zdNEAlDsSXWCL3JNzcQrC3m5aAudhCaZEdkB0osTJZI
+<<^ code:"&#x0003;" >>ni:///sha-256;EO5zbY8PbZv1E3LT5rITDhNJKMHv-WASUpFxy-JARyw
 
 <<^ code:"&#x0004;" -> ? >>

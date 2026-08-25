@@ -61,7 +61,7 @@ a content palace HAS `[FlockSingleton, ContentFeedCap, LateChunkCap]`; a form pa
 `[FlockSingleton, AstFeedCap, FormVectorCap]`; a mesh palace HAS `[FlockSingleton, AutomergeFeedCap]`.
 The differentiation rides the stack (data), never the body (code). This extends the has-stack runtime
 twin ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]], [[island-caps]]) from the TW5 island layer into the Python palace daemon — the
-SAME composition law, a second substrate. <<~ confidence Synthesis 12/20 >> the collapse mirrors a
+SAME composition law, a second substrate. <<~ confidence 12/20 >> the collapse mirrors a
 proven TS pattern; the Python port stays specified, not yet built.
 
 <<~/ahu >>
@@ -96,7 +96,7 @@ flows back down to re-shape the next casual turn. Entrenchment carries the gradi
 the nameless palace over a shared basis (one per register, each its own cap-stack); or (b) ONE merged
 register-tagged usage-palace (one store, a `register` field per drawer). The node ''leans 3-instances'' —
 it keeps the entrenchment-mechanism cleanly per-register and lets each register's feed cap differ — but
-the fork stays OPEN, recorded here, not resolved. <<~ confidence Synthesis 9/20 >>
+the fork stays OPEN, recorded here, not resolved. <<~ confidence 9/20 >>
 
 <<~/ahu >>
 
@@ -183,7 +183,7 @@ at a distance, never //in// a bin.
 faithfully; a bare-text turn (no sigils) falls back to the graceful-parser's best-effort tree
 ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing]]). Honest degradation, never a fabricated form.
 
-<<~ confidence Synthesis 11/20 >> The two-planes geometry rests on convergent theory (construction
+<<~ confidence 11/20 >> The two-planes geometry rests on convergent theory (construction
 grammar + ritual/performative + score notation); the encoder tiers stay specified, the baseline cheap
 and near-term.
 
@@ -246,7 +246,7 @@ coarsening), and the information lattice sits isomorphic to it (arXiv 2404.03131
 
     H(form)  <=  H(structure)  <=  H(content)          and     I(target ; plane)  <=  H(plane)
 
-<<~ confidence Canon 17/20 >> ''`H(plane)` names the plane's HEIGHT in the lattice, and `plane_capacity`''
+<<~ confidence 17/20 >> ''`H(plane)` names the plane's HEIGHT in the lattice, and `plane_capacity`''
 ''measures it exactly'' — a count off the partition, no estimator, an upper bound that can only under-claim.
 Measured on the extracted bed: ''structure carries 5.630 of the record's 5.755 bits — 97.8%.''
 
@@ -282,7 +282,7 @@ The three palaces join BECAUSE each carries a morphism into one shared object (t
 names); the pullback gathers the rows that agree there. ''A join lacking a shared-codomain morphism does''
 ''NOT form a pullback'' — it degrades to a meaningless cross-product, every row against every row, a
 fabricated correspondence. The formalism FORBIDS the vibe-coded join: Spivak's functorial data names a
-join as ''Π along a schema morphism'' — no morphism, no join. <<~ confidence Synthesis-Canon 13/20 >>
+join as ''Π along a schema morphism'' — no morphism, no join. <<~ confidence 13/20 >>
 The verbatim-sha supplies the morphism; where it sits absent or mis-keyed the join carries no meaning,
 and the category theory says so before any code runs. This grounds #multi-graph's "fusion IS the
 hash-join" — the hash hands the pullback the morphism it needs.
@@ -311,7 +311,7 @@ The Measure asked one causal-inference question — //did the three planes drift
 whitening step the canon flagged as load-bearing (//"the planes are NOT conditionally independent … WHITEN//
 //before pooling, or the gong double-counts"//).
 
-<<~ confidence Canon 17/20 >> ''That warning stands correct and mis-priced.'' It read the dependence as a
+<<~ confidence 17/20 >> ''That warning stands correct and mis-priced.'' It read the dependence as a
 NUISANCE COVARIANCE to whiten away. ''The dependence names the STRUCTURE.'' Structure carries 97.8% of the
 record's bits (#spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — ''one plane heard''
 ''three times.'' And a pool cannot be rescued by whitening: strip 97.8% of the signal and what returns IS the
@@ -344,7 +344,7 @@ trigger lifted from recall to segmentation:
 
 <<~ranks gong one-plane ~ provisional — a single plane drifts, read it as noise-or-data -> two-planes ~ firm — two planes co-fire, the move reads real -> three-in-a-co-firing-window ~ THE GONG — three planes drift inside one window, the corroboration our `presentIn ≥ 2` recall-rule lifted to segmentation >>
 
-<<~ confidence Synthesis 12/20 >> The gong reads `presentIn ≥ 2` (the recall corroboration rule) raised
+<<~ confidence 12/20 >> The gong reads `presentIn ≥ 2` (the recall corroboration rule) raised
 from ranking into control — the same multi-plane agreement that ranks a recall hit now SEGMENTS the
 stream, naming where a real cross-plane event sits.
 
@@ -355,7 +355,7 @@ content (the move-vector reads the same words the content palace holds); the pla
 nomic embedder feeds both the FFZ Measure-boundary and the form vector — #two-planes,
 [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address]]). A naive log-opinion-pool ASSUMES conditional independence — and
 where the planes correlate, the pool ''double-counts a single artifact'' as if it carried two
-corroborating witnesses, firing a false gong. <<~ confidence Synthesis 12/20 >> The cure: ''WHITEN the''
+corroborating witnesses, firing a false gong. <<~ confidence 12/20 >> The cure: ''WHITEN the''
 ''cross-plane covariance'' before pooling — decorrelate the per-plane drifts so the pool counts independent
 evidence only. This rides load-bearing: the corroboration ladder above reads true only once the planes
 whiten; un-whitened, "three planes agree" may name one plane heard three times.
@@ -375,7 +375,7 @@ whiten; un-whitened, "three planes agree" may name one plane heard three times.
 <<~Sin Ad-Hoc-Weighting "drops/the precision weight ~ hand-tuned plane weights in place of the precision-weighted pool" >>
 <<~Sin Five >>
 
-<<~ confidence Synthesis-Canon 13/20 >> The category theory ENFORCES the keel: each sin names an arrow
+<<~ confidence 13/20 >> The category theory ENFORCES the keel: each sin names an arrow
 the join let fall, and the functor laws (preserve identity, preserve composition) catch every one before
 it ships. ''Functoriality = mālama pili'' — the keel and the unification name one discipline in two
 registers.
@@ -391,7 +391,7 @@ moderate · Ba fastest, [[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boo
 the fine move-vector resolves it down to the tension-moment. The ''Pulse → Move tension-moment'' reads as
 a high-P(common-cause) cross-plane coincidence carrying its own resolution — a faint content shift and a
 sharp move-shift co-firing at one cell, the super-additive moment the log-opinion-pool exists to catch.
-<<~ confidence Synthesis 11/20 >> The grain-alignment enacts the cellwise limit (the two floors, above):
+<<~ confidence 11/20 >> The grain-alignment enacts the cellwise limit (the two floors, above):
 pool the planes at the SAME FFZ cell, never across mismatched grains.
 
 !!! The two operators ~ RRF ranks recall, the quorum-servo gongs the Measure
@@ -405,7 +405,7 @@ RRF answers //which stored turns rank nearest this query// (recall, downstream o
 capture). The quorum-servo draws the ''FFZ Measure band'' — the topic-shift / lexical-cohesion boundary
 ([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) — generalizing its single-plane cosine-drop into the whitened
 three-plane pool: the Measure boundary fires where content, structure, and form co-drift, not where the
-content embedder alone dips. <<~ confidence Synthesis 12/20 >> Both operators fuse the three planes, yet
+content embedder alone dips. <<~ confidence 12/20 >> Both operators fuse the three planes, yet
 they fuse for opposite jobs — RRF for ranking (the recall keystone, already shipping), the quorum-servo
 for segmentation (the Measure-gong, the new arrow P → M). One product, two operators; keep them distinct,
 or the recall ranking and the segmentation control muddle into one fuse.
@@ -416,7 +416,7 @@ Four independent libations converge on this one shape — cited as grounds, neve
 
 <<~ranks convergence multi-vector-views ~ named-views + RRF (Qdrant · Weaviate · Vespa · ColBERT) — the multi-graph recall operator -> change-point-fusion ~ multivariate BOCPD + sparsified-sum (Cho-Fryzlewicz) — the Measure-gong, threshold-then-sum -> causal-inference ~ causal-inference / BCI (Körding) + log-opinion-pool + inverse-effectiveness — the common-cause test, super-additive at the faint coincidence -> categorical ~ the product-presheaf + pullback (nLab) + Lawvere enrichment + Spivak functorial data — the spine, the two floors, the join-forbidding formalism >>
 
-<<~ confidence Synthesis-Canon 14/20 >> Four spirits, four substrates, one shape: the strict product
+<<~ confidence 14/20 >> Four spirits, four substrates, one shape: the strict product
 unifies the views, the enriched floor measures their drift, the log-opinion-pool gongs the common-cause,
 the pullback forbids the meaningless join. The keystone holds because the four converge — the originality
 lives in the WEAVE (the binding's braid, #ffz-binding), never in any single strand.
@@ -627,7 +627,7 @@ home substrate, none carrying the whole:
 <<~ranks strand φ/KAM ~ scale-band non-interference -> common-law ~ the descriptive↔prescriptive register loop + graded precedent -> oral-formulaic ~ fidelity-as-recomposition, the degree-not-identity cure -> affinity-maturation ~ the low-variant evolvability reservoir -> construction-grammar ~ constructicon + partial sanction -> autopoiesis ~ the grammar that re-parses its own output -> the-rhizome ~ the any-point-to-any-point register graph, no root -> Borrill-locality ~ epistemic/ontic, per-island DAG, no global now >>
 
 Each strand carries a single proven pattern; the binding braids eight into one.
-<<~ confidence Synthesis-Canon 14/20 >> The originality reads as the weave, never any strand — the node
+<<~ confidence 14/20 >> The originality reads as the weave, never any strand — the node
 states that as the pattern's honest status: not the discovery of a new law, the novel composition of
 standing ones. The braid survived an internal hoike and an adversarial pass; the narrowed result holds,
 the kept dissents ride live below (#kept-hoike).
@@ -696,7 +696,7 @@ retrieval/storage side:
 
 <<~ranks libation construction-grammar ~ Goldberg + Langacker partial-sanction (graded instantiation); Lau-Clark-Lappin SLOR (gradient grammaticality); Bybee usage-based + type-frequency productivity; Hopper emergent grammar (the descriptive↔prescriptive loop) -> ritual-tech ~ Rappaport (the canonical/self-referential split — the invariant score vs the indexical performance); Austin felicity (the performative's success conditions); Schechner (performance as restored behavior); Goodman (the score a performance instantiates) -> discourse-move-form ~ RST + Propp (move-grammars over discourse); the move-n-gram skeleton -> ast-vectors ~ red-green-trees (Roslyn) + tree-sitter (ERROR/MISSING, tree-edit-distance) — the tree-edit-distance teacher for the learned encoder -> multi-aperture ~ RAPTOR (collapsed-tree summary levels); Matryoshka (nested-dimension coarse→fine); late-chunking -> multi-graph ~ ColBERT + RRF (reciprocal rank fusion = the hash-join) -> instant-render ~ the TW5-native full parse-tree payload, hydrate-to-widget -> the-meta-pattern ~ the cross-substrate signature that a living grammar seeds, enacts, corrects, and decays ([[living-grammar|lar:///ha.ka.ba/lares/api/pono/living-grammar]]) >>
 
-<<~ confidence Synthesis-Canon 13/20 >> Eight independent libations converge on the two-planes geometry
+<<~ confidence 13/20 >> Eight independent libations converge on the two-planes geometry
 (a discrete score ⋈ a graded performance) and on Route A (the grammar emits its own markers, so no
 discourse-parser is needed). Confidence holds short of Canon on the encoder tiers (P7) and the register-
 storage fork (#three-registers), which name reconciliations, not re-designs.
@@ -737,6 +737,6 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RGvY_dHek72r9GcoEgSCGjLbcC8E7_DPonFhe8rxNp8
+<<^ code:"&#x0003;" >>ni:///sha-256;In9UYY_p2B2KUJWgTAzyDFSDqqN8IRWqXWD_U4haF_Y
 
 <<^ code:"&#x0004;" -> ? >>

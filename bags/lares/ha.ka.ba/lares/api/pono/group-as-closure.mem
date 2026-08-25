@@ -50,7 +50,7 @@ member; no doc holds a roster a single key may rewrite. The group ''resolves'' a
 reciprocal-edge closure: the set of edges that mutually name each other, gathered by a
 query a vessel runs over the edges it has synced.
 
-<<~ confidence Synthesis 13/20 >> SPKI/SDSI carries this whole — //no group object exists;//
+<<~ confidence 13/20 >> SPKI/SDSI carries this whole — //no group object exists;//
 //groups stand as relational constructs built from distributed name bindings//, and
 linked-local-names grant ''global reach without a global namespace''. The group reads off
 the edges, never out of a register.
@@ -91,7 +91,7 @@ Three properties ride this composition load-bearing:
   quorum-of-quorums — so a cabal-of-cabals threshold composes without new machinery.
 * ''Composed, never granted.'' Keyhive supplies ''membership'' (the delegate/revoke
   CRDT) and ''deliberately no quorum''; the threshold rides //above// keyhive, assembled
-  from independent signatures the verifier counts. <<~ confidence Synthesis 12/20 >> the
+  from independent signatures the verifier counts. <<~ confidence 12/20 >> the
   layering keeps the floor (membership) convergent and the ceiling (threshold) explicit.
 
 A K-of-N threshold defeats the single-key capture a central group-object would invite:
@@ -118,7 +118,7 @@ Eviction composes three moves, none of them a state-replay:
 * ''key-rotation'' — the read-set rotates its epoch forward, so the evicted key reads no
   future tail (forward-only revocation, the epoch-lease, never a targeted global undo).
 
-<<~ confidence Synthesis 13/20 >> the stack DOES NOT re-roll Matrix-style state-resolution
+<<~ confidence 13/20 >> the stack DOES NOT re-roll Matrix-style state-resolution
 replay — no group walks an event DAG to recompute a canonical membership. The closure
 re-evaluates over the current edges; the kāpae shadows; the epoch rolls; the verdict
 falls out of the query, local-first.
@@ -166,7 +166,7 @@ The closure model carries directly onto the existing identity architecture
 
 !! Prior Art — Four Converging Roots
 
-<<~ confidence Synthesis 14/20 >> four independent traditions arrive at //group = relation,//
+<<~ confidence 14/20 >> four independent traditions arrive at //group = relation,//
 //not object//:
 
 * ''SPKI/SDSI'' (Ellison, Rivest, Lampson) — //no group object exists; groups stand as//
@@ -200,6 +200,6 @@ group-object, the closure model carries a real pattern integrity, not a stylisti
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;i76CjF5rP6QsXjxWTh-CCIFLbEzKq4myq9hQOeanPpE
+<<^ code:"&#x0003;" >>ni:///sha-256;OOTBcJh6qzb6d7QCsHsko_UdOvKygd-2S48U47GZIdo
 
 <<^ code:"&#x0004;" -> ? >>

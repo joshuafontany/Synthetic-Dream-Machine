@@ -67,7 +67,7 @@ body becomes a ''skinny handle'': `_is_skinny` marks it, and `getTiddlerText` fi
 `dispatchEvent("lazyLoad", title)` and returns null ("loading") at `wiki.js:1485`. The
 syncer sits under this house's hand, so the house answers that one event with the resolver.
 The `_canonical_uri` variant (`wiki.js:1078`, parse-time, per-parser) carries the media-src
-case. <<~ confidence Synthesis-Canon 14/20 >> the shore rides TW5's own machinery
+case. <<~ confidence 14/20 >> the shore rides TW5's own machinery
 verified in TW5 source — the house adds a resolver, never a fork of the lazy path.
 
 <<~/ahu >>
@@ -118,7 +118,7 @@ mark-and-sweep from the tags (Iroh tags). ''Each island pins its own'' — it pa
 disk; a peer MAY opportunistically cache (best-effort, zero obligation). Filecoin
 deal/PoSt/slashing reads as global-ledger/block-height = a global-now trap → avoided.
 
-<<~ confidence Synthesis-Canon 14/20 >> the publicity plane carries the load-bearing
+<<~ confidence 14/20 >> the publicity plane carries the load-bearing
 move: it folds the addressing mode into the grant-graph the mesh already runs, so the
 same WHO-axis that tiers a bag tiers its bytes.
 
@@ -150,7 +150,7 @@ this house's `allowableStates`), never a thrown error. And the resolver
 ''verifies `BLAKE3(ciphertext)==cid` every hop'' — range-verified per ≤16KiB slice for a
 large body.
 
-<<~ confidence Synthesis-Canon 14/20 >> the never-fuse discipline carries the security:
+<<~ confidence 14/20 >> the never-fuse discipline carries the security:
 transport, content-authz, and read each answer their own gate, so no single leaked handle
 grants passage past all three.
 
@@ -181,7 +181,7 @@ transport) covers B-shaped whole bodies; Stage-2/3 add the A-shaped ''intra-ahu'
 `@crossroads` library holds BOTH today — raw `.txt` books (B) and structured `.mem` memes
 with large source ahus (A).
 
-<<~ confidence Synthesis 12/20 >> A and B differ only where the cut falls; the byte store
+<<~ confidence 12/20 >> A and B differ only where the cut falls; the byte store
 and the resolver never learn which grain birthed the blob.
 
 <<~/ahu >>
@@ -252,7 +252,7 @@ first-principles (Fathom + Meridian) and the internal crucible (`@oracle` /
 | ''`@cad` content-addressed pipe'' | the Scope-1 networking pipe |
 | ''cap-root + provider hint'' | rhizome peer-signed edges |
 
-<<~ confidence Synthesis-Canon 14/20 >> every part of the smallest core ships in
+<<~ confidence 14/20 >> every part of the smallest core ships in
 production somewhere — Matrix, UCAN, WNFS, Beelay, bao, MLS, Tahoe, Iroh — so the house
 invents ''only the composition'', never a new primitive.
 
@@ -277,7 +277,7 @@ Four choices ride ahead of the build, each holding for the operator:
   offer (reciprocal pin? the "fed node hums" ritual-feeding)? The one storage-economics
   frontier no system solved without a global ledger.
 
-<<~ confidence Synthesis 11/20 >> the four forks stay genuinely open; the operator's
+<<~ confidence 11/20 >> the four forks stay genuinely open; the operator's
 priors decide them, and wave-3 may reopen any.
 
 <<~/ahu >>
@@ -296,6 +296,6 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8MlYrdv8J-fIrTjZ9kMxWThXEGwRekIEptv4MdNEl6Q
+<<^ code:"&#x0003;" >>ni:///sha-256;r5lP7cf9xNWpZGUeRrBQI3ZYvxr6dVfqSIvHsCdI8b0
 
 <<^ code:"&#x0004;" -> ? >>

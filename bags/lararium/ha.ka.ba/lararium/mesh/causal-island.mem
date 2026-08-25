@@ -98,7 +98,7 @@ Keyhive capability, not a platform (`[[feedback_isomorphism_by_composition]]`). 
 own their keys. //Heavy peer = substrate, not authority.// So co-located peers share a
 relay (infrastructure), never a replica (sovereignty).
 
-<<~ confidence Synthesis-Canon 16/20 >> The principle reconciles local-first
+<<~ confidence 16/20 >> The principle reconciles local-first
 multi-peer co-location with sovereignty: one substrate may carry many sovereign
 islands.
 
@@ -136,6 +136,6 @@ Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorp
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;B7nr8BEoQdyvU9LZZTQKqQHPwK28P-UagZmc6-ZQWUk
+<<^ code:"&#x0003;" >>ni:///sha-256;NU_9X9sOFtZvmMY6ymOcbeKH_LgHS4xTnA7b8rPwXjE
 
 <<^ code:"&#x0004;" -> ? >>

@@ -52,7 +52,7 @@ Two ways a title leaves the surface view of a layered cascade (recipe over bags,
 | reversibility | ''toggleable'' — lower it to re-admit | one-way at this layer; re-add to restore |
 | read intent | "exclude this, even if a copy lives below" | "this no longer lives //here//; let the cascade resolve" |
 
-The cut MUST stay sharp. A gesture that ''relocates'' a record (MOVE, promotion `@working → canon`) RETRACTS the source to //absent//, never raises a kāpae — the source falls through and the canonical copy beneath surfaces (residency-model anti-pattern #3). A gesture that ''excludes'' a record (EVICT, CLEAR, DROP) raises a kāpae, never retracts to absent — the shadow defeats any lower-layer re-add. <<~ confidence Synthesis 14/20 >> conflating the two re-introduces the OverlayFS / moby#783 resurrection bug: a deleted upper record falls through to a stale lower copy that the operator believed gone.
+The cut MUST stay sharp. A gesture that ''relocates'' a record (MOVE, promotion `@working → canon`) RETRACTS the source to //absent//, never raises a kāpae — the source falls through and the canonical copy beneath surfaces (residency-model anti-pattern #3). A gesture that ''excludes'' a record (EVICT, CLEAR, DROP) raises a kāpae, never retracts to absent — the shadow defeats any lower-layer re-add. <<~ confidence 14/20 >> conflating the two re-introduces the OverlayFS / moby#783 resurrection bug: a deleted upper record falls through to a stale lower copy that the operator believed gone.
 
 <<~/ahu >>
 
@@ -82,7 +82,7 @@ This already lives in code:
 * The residency action handler routes the two deliberately: `tombstoneIn()` for CLEAR / DROP / DELETE (kāpae hide, shadows lower bags), `removeIn()` for the MOVE source retract (absent, falls through) — witness: `packages/lararium-tw5/src/action-handler.ts` `executeMove` / `executeClear`, carrying the comment "kāpae shadows, absent falls through".
 * The conflict surface lists raised kāpae as readable drift state (`listKapaeBags` returns hides — residency-model #conflict-resolution).
 
-<<~ confidence Synthesis-Canon 15/20 >> the bag-cascade sense stands witnessed in shipped code and named in residency-model anti-pattern #3 (Kāpae resurrection — "First-class `tombstone` op distinct from 'absent'").
+<<~ confidence 15/20 >> the bag-cascade sense stands witnessed in shipped code and named in residency-model anti-pattern #3 (Kāpae resurrection — "First-class `tombstone` op distinct from 'absent'").
 
 <<~/ahu >>
 
@@ -102,7 +102,7 @@ This rhymes the recipe-as-bag-stack: membership composes as a priority walk over
 
 Raised over a ''relationship'' the same marker needs none of it. The shadow scopes to one edge, no third party needs the news, the blast radius equals that relation, and ''two edges tombstone concurrently WITHOUT racing'' — because they name different objects. The mutual case the literature leaves open (Keyhive names and defers it; p2panda calls it "still to be explored") then dissolves rather than resolving: A shadows the edge (B→group) while B shadows (A→group), ''both shadows hold, both stand aside'', and remove-wins needs no winner. The place lands in a LEGIBLE state — no authority stands — which ''surfaces a fork'' instead of diverging in silence. Surfacing belongs to the code; deciding which side stays legitimate belongs to the humans (#fork-as-exit, cabal-realm#the-unswept-corner).
 
-<<~ confidence Synthesis 12/20 >> the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts accrete keyed by edge/gesture/version so a raise and a lower at one version both survive a merge, the fold takes highest-version-per-edge with a ''same-version tie leaving the shadow UP'', and forged acts drop before the fold. Wired at the two readers that decide standing — the fleet closure and the vouch-lineage read — and RAISABLE through a per-Nexus board (the fifth deterministic sibling) plus the `lares edge kapae` / `un-kapae` verbs. It needs NO convergent-removal machinery: the earlier reading expected to lean on Keyhive/BeeKEM blank-path, and the edge grain retires that dependency, since distinct edges never contend.
+<<~ confidence 12/20 >> the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts accrete keyed by edge/gesture/version so a raise and a lower at one version both survive a merge, the fold takes highest-version-per-edge with a ''same-version tie leaving the shadow UP'', and forged acts drop before the fold. Wired at the two readers that decide standing — the fleet closure and the vouch-lineage read — and RAISABLE through a per-Nexus board (the fifth deterministic sibling) plus the `lares edge kapae` / `un-kapae` verbs. It needs NO convergent-removal machinery: the earlier reading expected to lean on Keyhive/BeeKEM blank-path, and the edge grain retires that dependency, since distinct edges never contend.
 
 ''THE MARKERS NUMBER FOUR, NOT FIVE.'' An earlier count named the device-delegation edge as a separate relationship awaiting its own marker. It never was one: `dyadId` derives from exactly (deviceDid, operatorDid) — the two ends of that very delegation — so ''the dyad IS that relationship'' rather than a fifth beside it. The delegation needs no marker of its own; it needs its shadow CONSULTED, at the Binding Gate, which stays owed.
 
@@ -133,6 +133,6 @@ Raised over a ''relationship'' the same marker needs none of it. The shadow scop
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tB-cRHA1QNp1aK6rbV10ux66pVn-B-TpYSpE0hjMkj4
+<<^ code:"&#x0003;" >>ni:///sha-256;hTrS38zZCz7K86175VOZAQ13JCxFMSQ-stVTC-A_NR4
 
 <<^ code:"&#x0004;" -> ? >>

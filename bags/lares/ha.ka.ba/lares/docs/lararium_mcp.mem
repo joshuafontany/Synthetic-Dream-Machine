@@ -200,7 +200,7 @@ Graph redesign cluster lives under `packages/lares-core/memes/docs/graph/**`:
 Legacy non-meme design docs in `docs/mcp/` that contributed content now carry consumed markers.
 Active Sprint-03, roadmap, backlog, and todo work-tracking files remain live planning surfaces.
 
-<<~ confidence Synthesis-Canon 15/20 >> ''MemPalace sidecar retires — M1 sidecar-free (swarm ruling, 2026-07-03).'' The read-only stdio sidecar demonstration no longer holds: the sovereign ''contentpalace'' inherits mempalace's exact base schema (ChromaDB `cid·document·embedding·metadata`, 384-dim cosine), stands py-served behind the causal-island, and replaces the top-level `~/.mempalace` sidecar; ingest offloads via @daemon coordinator verbs to the py nalu-gates. Contract + retire-residue: `adapters#contentpalace-inherits`. The `adapters/mempalace.py` stdio client (module map above) and the read-only-gate rows below stand as consumed history.
+<<~ confidence 15/20 >> ''MemPalace sidecar retires — M1 sidecar-free (swarm ruling, 2026-07-03).'' The read-only stdio sidecar demonstration no longer holds: the sovereign ''contentpalace'' inherits mempalace's exact base schema (ChromaDB `cid·document·embedding·metadata`, 384-dim cosine), stands py-served behind the causal-island, and replaces the top-level `~/.mempalace` sidecar; ingest offloads via @daemon coordinator verbs to the py nalu-gates. Contract + retire-residue: `adapters#contentpalace-inherits`. The `adapters/mempalace.py` stdio client (module map above) and the read-only-gate rows below stand as consumed history.
 
 <<~/ahu >>
 
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wnK0LjiNVrkiJKC9NLA263IPfF0CCFHmSWSgQjdT-uk
+<<^ code:"&#x0003;" >>ni:///sha-256;GYUN4Lthu-5dyRNPLgoRVHeu0PDjj_in0cpdDbHS4bQ
 
 <<^ code:"&#x0004;" -> ? >>

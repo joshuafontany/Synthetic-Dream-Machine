@@ -33,7 +33,7 @@ written   = "2026-07-23"
 > authenticated keyring delivery). The floor stands wired live; the declared-source rides a defined-but-
 > unlit shore. The //model// awaits a post-swarm hoike.
 
-<<~ confidence Synthesis-Canon 15/20 >> A bag answers ''one question'' about its sealing — WHO holds the read-cap — and the answer rides as a ''chain by set-inclusion'': VEIL{this-vessel} ⊂ PERSONAGROUP{your-fleet} ⊂ CONTRACT{your-fleet ∪ a-cabal} ⊂ PUBLIC{world}. The bag ''declares'' its tier as self-describing data; the gate ''enforces'' the meet of that declaration against the crypto floor — so a declaration ''only ever tightens'', mechanically never loosens. The whole model turns on that one asymmetry.
+<<~ confidence 15/20 >> A bag answers ''one question'' about its sealing — WHO holds the read-cap — and the answer rides as a ''chain by set-inclusion'': VEIL{this-vessel} ⊂ PERSONAGROUP{your-fleet} ⊂ CONTRACT{your-fleet ∪ a-cabal} ⊂ PUBLIC{world}. The bag ''declares'' its tier as self-describing data; the gate ''enforces'' the meet of that declaration against the crypto floor — so a declaration ''only ever tightens'', mechanically never loosens. The whole model turns on that one asymmetry.
 
 <<~/ahu >>
 
@@ -57,7 +57,7 @@ The tier names the read-cap holder-set, ascending in openness — a lower rank n
 
 ''PERSONAGROUP and CONTRACT ride the SAME mechanism'' — keyring-delivery to a recipient set (#keyring-delivery) — differing ONLY in which set (`fleet ⊂ fleet∪cabal`, a strict chain). A Cabal STARTS a cross-operator contract (#carry-contract names the bilateral tier the cabal negotiates); PERSONAGROUP reads as a SELF-contract to your own device-admitted vessels. The four names carry the human face; the specific recipient set rides beneath.
 
-''THE ONE PLANE THAT TRUNCATES THE CHAIN.'' A ''reach credential'' — a foreign app credential the vessel holds so a human posts outward from their wiki (#reach-plane) — rides this same chain and this same keyring-delivery, and stops one rung short: ''PUBLIC is refused by TYPE'', because a world-readable credential stops being a credential. So the reach ceiling reads CONTRACT where the content chain carries none, and the difference names a definition rather than a policy. A credential declared PERSONAGROUP delivers to the whole fleet — every device of yours may post — and a credential ''never federates'' in any tier. <<~ confidence Synthesis 12/20 >> On that plane ''the tier IS the blast radius'', so the tighten-only keystone below reads as a security control rather than hygiene.
+''THE ONE PLANE THAT TRUNCATES THE CHAIN.'' A ''reach credential'' — a foreign app credential the vessel holds so a human posts outward from their wiki (#reach-plane) — rides this same chain and this same keyring-delivery, and stops one rung short: ''PUBLIC is refused by TYPE'', because a world-readable credential stops being a credential. So the reach ceiling reads CONTRACT where the content chain carries none, and the difference names a definition rather than a policy. A credential declared PERSONAGROUP delivers to the whole fleet — every device of yours may post — and a credential ''never federates'' in any tier. <<~ confidence 12/20 >> On that plane ''the tier IS the blast radius'', so the tighten-only keystone below reads as a security control rather than hygiene.
 
 <<~/ahu >>
 
@@ -67,7 +67,7 @@ The tier names the read-cap holder-set, ascending in openness — a lower rank n
 
 The tier rides as a ''declared datum'' the @daemon recipe carries (a bag-level default; a per-tiddler `capTier` refines it). ''Fail-closed by construction'': `DEFAULT_CAP_TIER = "veil"`, and `parseCapTier` folds any torn / absent / unknown value to VEIL — a torn datum NEVER silently opens a bag.
 
-<<~ confidence Synthesis-Canon 14/20 >> Modeled ''isomorphic to `FederationPosture`'' (federation-gate.ts) by composition, never by an interface tower: a closed string union + a `DEFAULT_…` fail-closed constant + a `…FromDoc` parser that fail-closes a torn value + a pure gate fn. The tier carries ''one structure more'' than a posture — a total order + a `meet` (a posture reads as the two-valued special case). The rhyme is a subtraction, not an inheritance.
+<<~ confidence 14/20 >> Modeled ''isomorphic to `FederationPosture`'' (federation-gate.ts) by composition, never by an interface tower: a closed string union + a `DEFAULT_…` fail-closed constant + a `…FromDoc` parser that fail-closes a torn value + a pure gate fn. The tier carries ''one structure more'' than a posture — a total order + a `meet` (a posture reads as the two-valued special case). The rhyme is a subtraction, not an inheritance.
 
 <<~/ahu >>
 
@@ -77,7 +77,7 @@ The tier rides as a ''declared datum'' the @daemon recipe carries (a bag-level d
 
 ''The load-bearing invariant.'' The datum only DECLARES; the gate ENFORCES `declared ∧ structural-floor` — the ''taint-meet'' toward the more-restrictive tier. A self-describing datum can therefore only ever ''self-TIGHTEN'': `resolveTier(declared, floor) = meet(declared, floor)` never returns a tier more-open than its floor, so it is ''mechanically impossible'' for a quine to grant more openness than the crypto structure permits. The gate never trusts the declared datum to loosen.
 
-<<~ confidence Synthesis-Canon 15/20 >> Three consequences fall out of the one meet:
+<<~ confidence 15/20 >> Three consequences fall out of the one meet:
 
 * ''The high-water-mark cascade'' — `refineBagTierWithTiddlers` folds the bag default under `meet` with every per-tiddler refinement: a bag reads only as shareable as its ''least-shareable tiddler''. A tiddler declaring PUBLIC inside a PERSONAGROUP bag leaves the bag PERSONAGROUP.
 * ''META-CAP ≥ declared cap'' — `mayDeclareTier`: the write-cap that SETS a bag's tier datum must sit at-least-as-restrictive as the tier it declares. You cannot publicly-editably declare a private bag's tier (attenuation-only, the ocap discipline of #orichalcum-capabilities).
@@ -101,7 +101,7 @@ Tightening is free — a bag may always self-tighten, and a tightening cascade n
 
 The member tiers (PERSONAGROUP / CONTRACT) become concrete through ''keyring-delivery to the recipient set'' (built `30cdd087`). The per-Nexus convergence keyring — the `@cad` read-key (#content-resolution) — rides ''admission'': the founder seals its `{epoch → secret}` keyring to the joinee's ephemeral X25519 recipient on the persona-admit grant hop (#persona-policy), and the joinee installs it ''authoritatively'' — a delivered epoch supersedes the joinee's self-minted PHANTOM (a first-boot Nexus-of-one that seals only bodies no peer can read). Same-Nexus members thereby share the secret → cross-member `@cad` read works.
 
-<<~ confidence Synthesis-Canon 15/20 >> ''The lesson, load-bearing: a delivery must be as AUTHENTICATED as the ceremony it rides.'' The recipient pubkey rode PUBLIC in the enrollment offer, so a ''sealed-only'' fragment proves nothing about WHO authored it — an active paster could substitute their own keyring, sealed to that same public key, and the joinee would seal every future body under an attacker-known secret. Confidential ≠ authenticated when the recipient key is public. The cure ''binds a sha256 of the exact carried token INTO the persona-signed grant transcript''; the joinee installs ONLY on a signature-covered digest match, else stays carry-only (four fail-closed branches). Revert the digest gate and the MITM-substitution test falls — the binding genuinely catches the swap.
+<<~ confidence 15/20 >> ''The lesson, load-bearing: a delivery must be as AUTHENTICATED as the ceremony it rides.'' The recipient pubkey rode PUBLIC in the enrollment offer, so a ''sealed-only'' fragment proves nothing about WHO authored it — an active paster could substitute their own keyring, sealed to that same public key, and the joinee would seal every future body under an attacker-known secret. Confidential ≠ authenticated when the recipient key is public. The cure ''binds a sha256 of the exact carried token INTO the persona-signed grant transcript''; the joinee installs ONLY on a signature-covered digest match, else stays carry-only (four fail-closed branches). Revert the digest gate and the MITM-substitution test falls — the binding genuinely catches the swap.
 
 <<~/ahu >>
 
@@ -157,6 +157,6 @@ Deferred with clean shores (not built): the TW5 `$:/tags/CapTierFilter` ordered-
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kRr6yxh2S703hzofCREI7rdycrUrVd1fmYOWzWiKVqU
+<<^ code:"&#x0003;" >>ni:///sha-256;joaC9fbplMtHwAjLyRPlYWcERvnNA1I1VfiEtNZXGWE
 
 <<^ code:"&#x0004;" -> ? >>

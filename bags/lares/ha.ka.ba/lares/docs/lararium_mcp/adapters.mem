@@ -137,7 +137,7 @@ Implementation landed as `lares/lararium_mcp/adapters/mempalace.py` with mocked 
 
 !! ContentPalace Inherits the Schema ~ M1 sidecar-free
 
-<<~ confidence Synthesis-Canon 15/20 >> The ''contentpalace inherits mempalace's exact base schema'' and extends it across the whole palace architecture (swarm ruling, 2026-07-03). The base carries through byte-for-byte:
+<<~ confidence 15/20 >> The ''contentpalace inherits mempalace's exact base schema'' and extends it across the whole palace architecture (swarm ruling, 2026-07-03). The base carries through byte-for-byte:
 
 | Field | Base (mempalace) | Reading |
 |---|---|---|
@@ -222,6 +222,6 @@ The following remain blocked until explicit policy lands:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;o_-bc9ColDVR4orq8_b-WoH5mfWEs_TyXxjnEmy-yac
+<<^ code:"&#x0003;" >>ni:///sha-256;_y24i0-659UwoAYwrJYfKHUYUqjfs5id2ES1SBB9qFE
 
 <<^ code:"&#x0004;" -> ? >>

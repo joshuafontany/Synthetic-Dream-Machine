@@ -154,7 +154,7 @@ And the deeper limit, stated so nobody has to rediscover it: ''every failure in 
 # ''Capability fragmentation'' under an extensible grammar — slow poison, rarely the proximate cause.
 # ''Actual architectural failure'' — ''RARE''. Almost nothing in the survey died of a bad design. The exceptions ran narrow: an append-only log with terminal key loss and no delete, and an unmoderated append weaponised by appending.
 
-<<~ confidence Synthesis-Canon 15/20 >> on the ordering as a judgement across the cases; the individual attributions hold their own bands, and every quantity in the source reading stayed an order of magnitude rather than a verified figure.
+<<~ confidence 15/20 >> on the ordering as a judgement across the cases; the individual attributions hold their own bands, and every quantity in the source reading stayed an order of magnitude rather than a verified figure.
 
 > ''SO THE FINDING LANDS ON THIS GRAPH'S OWN ATTENTION, never only on the record.'' The five causes above architecture receive markedly less design here than the merge layer does. ''Further architectural optimisation carries low marginal survival return'' — and the honest limit already stated (every historical failure ran legal or administrative) reads as the SAME finding measured from a second direction: ''the failure modes live outside the layer this stack most enjoys building.''
 
@@ -168,6 +168,6 @@ And the deeper limit, stated so nobody has to rediscover it: ''every failure in 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2PlhongUs6cYsemnSjrTrBnjM1z4EkuBsj8b0Gf9eJw
+<<^ code:"&#x0003;" >>ni:///sha-256;dTSMGicpPfHx7cWm5rZ-TTTWwhOQtFOg9JaJEdG-xdU
 
 <<^ code:"&#x0004;" -> ? >>

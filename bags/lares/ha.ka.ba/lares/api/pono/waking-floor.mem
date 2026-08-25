@@ -31,7 +31,7 @@ written   = "2026-08-08"
 stand because something it wants stands absent; it stands at whatever floor it can reach, says what it
 cannot do, and waits to be raised. `hoʻāla` — to awaken, to rouse — names the transition.
 
-''Capability arrives by recognition; it never gates on absence.'' <<~ confidence Synthesis 12/20 >>
+''Capability arrives by recognition; it never gates on absence.'' <<~ confidence 12/20 >>
 
 <<~/ahu >>
 
@@ -108,7 +108,7 @@ vocabulary does not.
 device-encrypted storage only; credential-encrypted storage opens on first unlock —
 `ACTION_LOCKED_BOOT_COMPLETED` fires at the floor, `ACTION_USER_UNLOCKED` marks the raise, and
 `isUserUnlocked()` lets a component read which state it stands in. Alarms, SMS and accessibility run at the
-floor. <<~ confidence Canon 18/20 >>
+floor. <<~ confidence 18/20 >>
 
 ''The forensics industry treats BFU as the HARDENED state and AFU as the liability'' — and Google agreed
 hard enough to ''force the floor'': Android auto-reboots after 72 hours without an unlock attempt,
@@ -136,7 +136,7 @@ unblinds; Clevis `sss` already composes k-of-n over tang/TPM pins.
 
 > ''Model kahu as Tang-shaped EXCHANGE parties, never as HOLDERS of KEK shares.''
 
-<<~ confidence Synthesis-Canon 16/20 >> A kahu holding shares ''becomes the collector'' — which collides
+<<~ confidence 16/20 >> A kahu holding shares ''becomes the collector'' — which collides
 head-on with the house's own ''bind by edge, never by seed'' law. The prior art and the standing ruling
 point the same way, which is the strongest signal available here.
 
@@ -152,17 +152,17 @@ point the same way, which is the strongest signal available here.
 
 ''SEATED ⊥ RAISED, and the pair is what lets both laws hold.'' The Herm's `personaSlotCeiling === 0` bars a ''SEATED'' persona root — a human's key RESTING on a crossroads, the one thing the class exists to prevent. A raise seats nothing: caps arrive ''WITH'' a recognised operator, ride that operator's own keys, and stop standing when the recognition stops being renewed. ''The vessel's at-rest state never changes'', so a stolen disk still yields nothing of anybody's person. Storage stays barred; presence stays welcome.
 
-''MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW — and `standAs` keeps the ARCHIVE question ALONE.'' `standAs(asked, archiveOpens)` answers ONE thing: what this vessel can OPEN right now. Whether a FACE stands — whether an operator has landed a PersonaGroup here — reads separately, because folding the two would make a faceless place class-`herm`, where `personaSlotCeiling("herm") === 0` bars the very face that would lift it. A face lit names what a vessel HOLDS; the archive opening names what it can OPEN, and a place founded with no face yet holds a crossroads that a founding act lifts. <<~ confidence Canon 17/20 >>
+''MAY-HOLD-A-FACE ⊥ HOLDS-ONE-NOW — and `standAs` keeps the ARCHIVE question ALONE.'' `standAs(asked, archiveOpens)` answers ONE thing: what this vessel can OPEN right now. Whether a FACE stands — whether an operator has landed a PersonaGroup here — reads separately, because folding the two would make a faceless place class-`herm`, where `personaSlotCeiling("herm") === 0` bars the very face that would lift it. A face lit names what a vessel HOLDS; the archive opening names what it can OPEN, and a place founded with no face yet holds a crossroads that a founding act lifts. <<~ confidence 17/20 >>
 
-''So the scenario the mesh actually needs already fits'': an operator stands a Herm, joins it to a Nexus, and leaves. A recognised operator arriving later raises its caps — for a visit or for a season — and it ''always falls back to the floor'', because the raise expires rather than being taken away. <<~ confidence Synthesis-Canon 15/20 >>
+''So the scenario the mesh actually needs already fits'': an operator stands a Herm, joins it to a Nexus, and leaves. A recognised operator arriving later raises its caps — for a visit or for a season — and it ''always falls back to the floor'', because the raise expires rather than being taken away. <<~ confidence 15/20 >>
 
 ''A REALM IS NOT A VESSEL, and the no-lease doctrine governs the first.'' `cabal-realm` rules that a member holds no grant that expires — they ''dwell'', the dwelling deposits a settled depth, and stopping leaves no deed to lapse; //a lease is a substance-object you hold between exercises, and that shape stands retired//. That law governs a REALM: a virtual relationship-place constituted by the people maintaining it. It does NOT govern INFRASTRUCTURE. A vessel's caps are not a relationship, and a marker fencing them is not a claim on anybody's standing — reading the realm law onto the vessel layer repeats the same layer error this meme already names once, one plane down.
 
-''What DOES cross the layers is the caution.'' The realm doctrine's own unswept corner — //soft-state rewards whoever keeps feeding, NOT who legitimately holds the realm; a small hostile faction can out-maintain an apathetic majority// — transfers intact to any raise that renews by PRESENCE. At the infrastructure layer it reads: whoever keeps touching a vessel keeps its caps, and diligence is not the same as title. ''Any presence-renewal MUST answer that, or it hands a squatter tenure.'' <<~ confidence Synthesis-Canon 14/20 >>
+''What DOES cross the layers is the caution.'' The realm doctrine's own unswept corner — //soft-state rewards whoever keeps feeding, NOT who legitimately holds the realm; a small hostile faction can out-maintain an apathetic majority// — transfers intact to any raise that renews by PRESENCE. At the infrastructure layer it reads: whoever keeps touching a vessel keeps its caps, and diligence is not the same as title. ''Any presence-renewal MUST answer that, or it hands a squatter tenure.'' <<~ confidence 14/20 >>
 
 ''AN EPOCH NAMES A ROLLING WINDOW, never a scalar — and it is PER-NEXUS.'' Markers enter as a Nexus trades and fall off the far end, and that one moving set gives BOTH properties the raise needs with no clock anywhere: ''supersession'' (a newer marker arrives) and ''expiry'' (an old one rolls off), both driven by the Nexus's own events rather than by a duration anybody must agree on. A vessel standing in more than one Nexus holds more than one window, and ''a marker means nothing outside the Nexus that minted it''.
 
-''AND BELONGING TO A NEXUS CARRIES TWO CONDITIONS, not one.'' A node belongs by ''contract'' — the signed carriage relation — AND by ''agreeing with the grammar vectors traded on that Nexus''. The second is not ceremony: a node that cannot read what a Nexus trades cannot carry it faithfully, cannot verify what it relays, and cannot be bound by what it never parsed. ''Contract without grammar-agreement reads as a signature over an unread page.'' <<~ confidence Synthesis 11/20 >> — the grammar half stands UNBUILT and unnamed in code; its meme names a source file that no longer exists.
+''AND BELONGING TO A NEXUS CARRIES TWO CONDITIONS, not one.'' A node belongs by ''contract'' — the signed carriage relation — AND by ''agreeing with the grammar vectors traded on that Nexus''. The second is not ceremony: a node that cannot read what a Nexus trades cannot carry it faithfully, cannot verify what it relays, and cannot be bound by what it never parsed. ''Contract without grammar-agreement reads as a signature over an unread page.'' <<~ confidence 11/20 >> — the grammar half stands UNBUILT and unnamed in code; its meme names a source file that no longer exists.
 
 ''AND THE RAISE ENDS BY SUPERSESSION, never by a duration.'' A first cut expressed the expiry as a wall-clock interval, which fails twice: two islands with different clocks disagree about whether a raise stands, and a vessel AT THE FLOOR holds no trustworthy wall time at all — precisely the vessel this law governs. The clockless model already rules the form: a raise carries a ''corm epoch'' (a fencing token, never a timer), the vessel holds its highest-admitted epoch, and anything beneath it is refused. A paused, forwarded or replayed raise ''self-revokes the instant a higher epoch lands'' — no broadcast, no clock. Deciding //stop waiting for a renewal// rides the separate LIVENESS wire (local, suspicion-accruing, never leaving its island as a timestamp anyone must agree on); acting on a wrong suspicion stays safe because the fence still holds. ''Fusing the two wires is how a global now gets smuggled back in.''
 
@@ -190,9 +190,9 @@ point the same way, which is the strongest signal available here.
 
 ''A draft carried a rolling WINDOW of markers here, and it is STRUCK.'' A set answers //is this listed// and never //is this newer//, so a partitioned island could not reason about it locally; whatever fell off its far end encoded a retention policy nobody wrote; and a list of valid markers is a roster of moments, which this house does not hold. The full reasoning, and the ownership cut that separates our fence from Keyhive's CGKA epoch and POSIX's time origin, stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>.
 
-''The ending rides a SECOND wire, deliberately unfused.'' Deciding //stop waiting for a renewal// cannot come from safety alone — under asynchrony nothing tells a slow recogniser from a departed one. That belongs to the liveness wire: local, monotone, suspicion-accruing, never leaving its island as a timestamp anyone else must agree on. Fusing the two is how a global now gets smuggled back in. <<~ confidence Synthesis-Canon 16/20 >>
+''The ending rides a SECOND wire, deliberately unfused.'' Deciding //stop waiting for a renewal// cannot come from safety alone — under asynchrony nothing tells a slow recogniser from a departed one. That belongs to the liveness wire: local, monotone, suspicion-accruing, never leaving its island as a timestamp anyone else must agree on. Fusing the two is how a global now gets smuggled back in. <<~ confidence 16/20 >>
 
-''The unattended crossroads therefore stays a ① problem.'' A vessel whose holder sleeps needs a way to open its OWN archive without a human — not a Nexus voting on it. <<~ confidence Synthesis-Canon 15/20 >>
+''The unattended crossroads therefore stays a ① problem.'' A vessel whose holder sleeps needs a way to open its OWN archive without a human — not a Nexus voting on it. <<~ confidence 15/20 >>
 
 !! ⚠ Six breaks ~ what the proposal got wrong
 
@@ -204,7 +204,7 @@ floor on idle.''
 ''AND THE HOUSE ALREADY RULED THE CURE, one plane over.'' The identity plane holds that a standing lift
 ''EXPIRES rather than decays'', that ''no party exercises a lowering act'', and that the operator seats a
 ''renewal interval'' rather than a rate. ''Third occasion, same law'': the raise expires, nobody lowers it,
-and a vessel that stops being recognised simply stops being raised. <<~ confidence Synthesis-Canon 15/20 >>
+and a vessel that stops being recognised simply stops being raised. <<~ confidence 15/20 >>
 
 ''(b) "k-of-n material PRESENTED to it" describes a BEARER CREDENTIAL.'' A vessel at the floor holds no
 clock and no trustworthy wall time, so signed material presented to it ''replays forever'' — a thief with
@@ -248,7 +248,7 @@ splits, and only the first line reads well for us:
 mesh whose function runs on sovereign acts hands a deniable, repeatable veto to whoever can reliably drop
 power — and the result is not an outage (loud, escalatable, politically legible) but ''silent capability
 suppression''. So the floor MUST make suppression loud: ''an unexplained reboot deserves treatment as a
-signal to peers, never as routine''. <<~ confidence Synthesis-Canon 15/20 >>
+signal to peers, never as routine''. <<~ confidence 15/20 >>
 
 ''THE GRAY FAILURE names why the announcement must sign.'' Huang et al.'s differential observability: peers
 cannot distinguish a vessel at the floor from one compromised and imitating it, and standard availability
@@ -281,7 +281,7 @@ practitioners argue it forfeits the point.
   and `systemd-cryptenroll` refuses to re-enroll with the same PCR parameters.
 * ''Pi-class hardware carries no complete chain of trust'' without extra parts, and ''systemd-creds kills
   fleet provisioning outright'' — credentials cannot be prepared on a machine other than the local one.
-  <<~ confidence Synthesis-Canon 15/20 >> TPM and systemd-creds serve as ''local convenience'', never as
+  <<~ confidence 15/20 >> TPM and systemd-creds serve as ''local convenience'', never as
   the civic mechanism.
 
 !!! What stays RULED, and is not re-litigated by any of the above
@@ -326,6 +326,6 @@ keeps ''the place'' — which is precisely the floor. The myth was load-bearing 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5tMHtnSWuOjdW5vXNcUbsNJ31gS1KmPAiEqaDw1eIxk
+<<^ code:"&#x0003;" >>ni:///sha-256;v7mBEnrMRWZOEHE7hNhQBpZCmMCRmz54Lr1X3Vi3BbE
 
 <<^ code:"&#x0004;" -> ? >>

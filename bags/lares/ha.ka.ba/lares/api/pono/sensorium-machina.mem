@@ -37,7 +37,7 @@ pattern-integrity takes, and why the sensorium touches pattern and never substan
 ''machina'': what runs, what it may claim, and what it may never claim.
 
 ''The day that overturned the centre.'' The sensorium was designed as a ''decomposition'' — five planes
-that FACTOR a stream into independent coordinates. It never did, and it cannot. <<~ confidence Canon 17/20 >>
+that FACTOR a stream into independent coordinates. It never did, and it cannot. <<~ confidence 17/20 >>
 ''Locatello et al. (arXiv 1811.12359) prove unsupervised disentanglement impossible without an inductive''
 ''bias'', and the house's own no-imposed-prior law forbade exactly that bias. The ambition and the law ran
 inconsistent from the first line. What the machina actually runs — what it ran all along, unnamed — reads
@@ -55,7 +55,7 @@ factorization.
 
 <<~ranks code l(G) ~ the GRAMMAR bits — what RECURS across the stream: the templates, the constructions, the shapes a record shares with its neighbours -> l(D|G) ~ the RESIDUAL bits — what stays UNIQUE to this record once the grammar has been paid for >>
 
-<<~ confidence Canon 18/20 >> ''The cut rides CODE LENGTH'' — never a weight, never a routing table, never
+<<~ confidence 18/20 >> ''The cut rides CODE LENGTH'' — never a weight, never a routing table, never
 a typed `k`. A candidate joins the grammar only where it LOWERS `l(G) + l(D|G)`. The ledger already runs
 (`form_induction.description_length`).
 
@@ -96,7 +96,7 @@ that lattice, and the entropies order themselves ''by construction'':
 
     H(form)  <=  H(structure)  <=  H(content)          and     I(target ; plane)  <=  H(plane)
 
-<<~ confidence Canon 17/20 >> ''`H(plane)` names the plane's HEIGHT in the lattice'', and `plane_capacity`
+<<~ confidence 17/20 >> ''`H(plane)` names the plane's HEIGHT in the lattice'', and `plane_capacity`
 measures it exactly — a count off the partition, ''no estimator, no bias correction, no threshold'', an
 upper bound that can only ''under-claim''. Measured on the extracted bed: ''structure carries 5.630 of the''
 ''record's 5.755 bits — 97.8%.'' A near-deterministic ''quotient'', not a complementary factor. A factor
@@ -109,7 +109,7 @@ carrying almost the whole object contributes no complementary coordinate; ''ther
 
 ''No plane MAY be read without its ceiling.'' `plane_capacity` reads it, and the base space ''is part of''
 ''the question'' — the ceiling reads ''through the pushforward onto the RECORD base'', never over the plane's
-own rows. A pattern plane's native ceiling approaches `log2(N_patterns)` by construction: <<~ confidence Canon 17/20 >>
+own rows. A pattern plane's native ceiling approaches `log2(N_patterns)` by construction: <<~ confidence 17/20 >>
 that number ''measures the ID column and nothing else'' — the instrument scoring its own primary key, the
 purest form of manufacturing a finding. The reading:
 
@@ -124,7 +124,7 @@ Silence there is how the form plane vanished from every report while holding 914
 
 !!! The gate that could not fire
 
-<<~ confidence Canon 17/20 >> ''A chain of quotients holds NO obstruction to gluing — `dim H¹ = 0` BY''
+<<~ confidence 17/20 >> ''A chain of quotients holds NO obstruction to gluing — `dim H¹ = 0` BY''
 ''CONSTRUCTION.'' That names exactly why the coherence gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]])
 reported ''health on every bed it ever read'': the health named a ''tautology'' — one plane heard three
 times. ''It was never anti-apophenia. It could not fire.''
@@ -150,7 +150,7 @@ answer re-cuts the boundary rather than patching it.
 
 !!! The re-cut ~ ki names a VARIANCE, never a storage class
 
-<<~ confidence Synthesis-Canon 16/20 >> The reading ''li = STORED · ki = COMPUTED-ON-READ'' ''retires''
+<<~ confidence 16/20 >> The reading ''li = STORED · ki = COMPUTED-ON-READ'' ''retires''
 ''here.'' It fails on its own examples: the FFZ address gets ''computed'' and then ''stored''; STANDING gets
 ''stored'' as a witness-log and ''derived'' at read. ''Storage names a caching decision, never an''
 ''ontology.'' And under the two-part code both `l(G)` and `l(D|G)` fall out as derived, so //"is it computed"//
@@ -166,7 +166,7 @@ be static — [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integriti
 
 !!! A SECOND axis, and the confusion that cost us the bands
 
-<<~ confidence Synthesis-Canon 15/20 >> The variance axis (`restrict | extend`) runs ''orthogonal'' to a
+<<~ confidence 15/20 >> The variance axis (`restrict | extend`) runs ''orthogonal'' to a
 provenance axis nobody had named:
 
 <<~ranks provenance GIVEN ~ what the SOURCE handed us: the bytes, the typed blocks, the causal edge-DAG, the harness's grounding act — you cannot DISCOVER what you were handed, and you cannot recover what the parser threw away (the DPI ceiling reads on THIS axis) -> INDUCED ~ what we COMPUTED: every grammar, every boundary, every coupling edge >>
@@ -186,7 +186,7 @@ Under the variance test, exactly three readings extend — and no others:
 <<~Ki Coupling "asks/who leads whom, ACROSS streams extends/irreducibly — a relation BETWEEN streams that NO coarsening of one stream can ever reach engines/effective transfer entropy (`coupling.R`, RTransferEntropy::calc_ete), surrogate-null gated; ΦID atoms (redundancy · unique · synergy) as the depth extension product/a directed, null-certified edge — a HYPOTHESIS surfaced, never a verdict" >>
 <<~Ki Standing "asks/what does the world OUTSIDE this trace vouch for extends/only distinct-signer witness edges raise it — repetition and recall move it not at all engines/`persistence-keel.ts` product/the r-axis rating (noise→data→meme→ano→kapu), ceiling pinned at 16 — kapu seats by talk-story alone" >>
 
-''COUPLING survives the chain, and it is the ONE genuinely cosheaf-shaped thing left.'' <<~ confidence Synthesis-Canon 15/20 >>
+''COUPLING survives the chain, and it is the ONE genuinely cosheaf-shaped thing left.'' <<~ confidence 15/20 >>
 Take the position plainly: every li plane is a ''quotient of one stream''; coupling is a ''relation between''
 ''two''. No chain of coarsenings on stream A can produce a fact about A→B. Coupling therefore cannot be
 absorbed by the compression of a single stream, cannot be gated by the DPI ceiling of a single plane, and
@@ -203,14 +203,14 @@ it needs) or rides beside it (standing).
 
 <<~ hud Drift-Ward(_ Confidence 12/20 · L-Prime · crossing: causal-claim territory) >>
 
-<<~ confidence Synthesis-Canon 14/20 >> A coupling edge MAY be claimed only where the reading ''beats a''
+<<~ confidence 14/20 >> A coupling edge MAY be claimed only where the reading ''beats a''
 ''surrogate'', and the surrogate MUST break ''only the X→Y alignment'' while preserving the source's own
 dynamics — a ''circular time-shift / rotation of the source'', a block bootstrap, a local permutation.
 A phase-randomized or IID null destroys the source's own nonlinearity along with the coupling, so a
 rejection there conflates //"X runs nonlinear"// with //"X couples into Y."// ''The null FAMILY carries the''
 ''finding''; picking the wrong one is an instrument manufacturing its own result.
 
-And the ceiling on the claim rhymes with a law the house already holds: <<~ confidence Synthesis-Canon 13/20 >>
+And the ceiling on the claim rhymes with a law the house already holds: <<~ confidence 13/20 >>
 ''no-global-now IS the causal-discovery observational ceiling.''
 An island observes correlation and lead-lag; it can never ''intervene'' on another island to establish
 cause. The sensorium ''detects''; it never intervenes.
@@ -249,7 +249,7 @@ Each R leg rides the `drawer_io` NDJSON contract — one request on stdin, one r
 against it, and ''it never moves again''; every number rides beside its ''chance floor'', and a result that
 fails to clear the floor reads as //the tolerance doing the work//).
 
-<<~ confidence Canon 17/20 >> ''`boundary_score` carries the anti-manufacture law in code.'' A detector
+<<~ confidence 17/20 >> ''`boundary_score` carries the anti-manufacture law in code.'' A detector
 placing //n// boundaries ''uniformly at random'' still scores, and scores HIGH once the tolerance opens
 (`expected recall ≈ 1 − (1 − (2w+1)/N)^n`). ''Tune the tolerance after seeing a result and the scorer''
 ''becomes the last place the imposed prior hides.'' The harness lands first; the instrument second.
@@ -268,7 +268,7 @@ placing //n// boundaries ''uniformly at random'' still scores, and scores HIGH o
 
     bitsSaved = log2( p1(c) / p0(c) )            ADMIT  ⟺  bitsSaved <= 0
 
-<<~ confidence Canon 17/20 >> ''Zero names no threshold anyone chose.'' It marks the ''tie between two code''
+<<~ confidence 17/20 >> ''Zero names no threshold anyone chose.'' It marks the ''tie between two code''
 ''lengths'', and //take the shorter code// IS the MDL rule. The gate holds no dial.
 
 * ''`p1`'' — a ''von Mises-Fisher'' fitted to the store. Its log-density runs ''linear in the cosine'', and
@@ -280,14 +280,14 @@ placing //n// boundaries ''uniformly at random'' still scores, and scores HIGH o
 
     cos*  =  −ln( C_d(κ) · Area ) / κ                measured: κ = 3202  →  cos* = 0.811
 
-<<~ confidence Canon 17/20 >> ''The complexity charge reads EXACT'': `E[R̄²] = 1/n` ''in every dimension'',
+<<~ confidence 17/20 >> ''The complexity charge reads EXACT'': `E[R̄²] = 1/n` ''in every dimension'',
 so the charge needs no correction term and no calibration at width. `O(d)` per admit, ''zero store reads''.
 The `admitThreshold` dial ''DELETES'' — the one knob the design most wanted to keep, gone because the store
 now infers it.
 
 !!! The blind spot, kept in the light
 
-<<~ confidence Synthesis-Canon 15/20 >> ''A single vMF runs UNIMODAL.'' It cannot see duplication of a
+<<~ confidence 15/20 >> ''A single vMF runs UNIMODAL.'' It cannot see duplication of a
 ''MINORITY mode'' — a small, tight cluster re-arriving looks, to one concentration parameter, like the tail
 of the majority. ''The cure adds no knob:'' a ''movMF'' (a mixture of vMFs) whose ''component count is''
 ''chosen by prequential code length'' — the same MDL rule, one level up, so the mixture size gets //inferred//
@@ -297,13 +297,13 @@ exactly as `cos*` now does. ''OWED'' (#owed).
 
 ''A dream pass is ADMITTED only where it SHORTENS THE TOTAL CODE, measured against the ORIGINAL li BYTES.''
 
-<<~ confidence Canon 18/20 >> ''Noise does not compress.'' That single fact carries the whole anchor: a pass
+<<~ confidence 18/20 >> ''Noise does not compress.'' That single fact carries the whole anchor: a pass
 that hallucinates cannot pay for itself in bits against the bytes it started from, however coherent it
 reads. And the anchor needs ''no peer, no signature, no federation'' — which matters exactly because
 ''SENSORIUMS DO NOT FEDERATE'' (operator ruling, standing). An anchor that required a witness would have
 had nowhere to stand.
 
-''Why the anchor is not optional.'' <<~ confidence Canon 17/20 >> The multi-pass dreamtime loop runs
+''Why the anchor is not optional.'' <<~ confidence 17/20 >> The multi-pass dreamtime loop runs
 ''structurally identical to recursive self-training'', and recursive self-training ''collapses'': a model
 trained on its own output loses the tails first and the mode last (Shumailov et al., //Nature// 631:755-759,
 2024). The two-store law (`dream_pass.py`) keeps the eidetic ground ''append-only and never written'', so
@@ -324,12 +324,12 @@ the original bytes always stand there to be compressed against. ''The immutabili
 
     d(a, b) = DEPTH − |longest common prefix|          d(a,c) <= max( d(a,b), d(b,c) )
 
-<<~ confidence Canon 17/20 >> The ultrametric inequality ''holds by measurement'', proven over ''4,000''
+<<~ confidence 17/20 >> The ultrametric inequality ''holds by measurement'', proven over ''4,000''
 ''seeded triples''. Distance runs ''ORDER-FREE'' — no timeline crossed, no clock read. Coarsening = truncation.
 
 !!! The grain prices itself
 
-<<~ confidence Canon 17/20 >> ''The path is a PREFIX CODE.'' Every address reads prefix-free at each level,
+<<~ confidence 17/20 >> ''The path is a PREFIX CODE.'' Every address reads prefix-free at each level,
 so its length reads ''in BITS'' — which puts the rhythmic grain in the ''same currency'' as the two-part
 code. ''The grain does not sit beside the compression. It FOLDS INTO it'' (`ffz_address.address_bits`).
 This is what makes the grain ''li'': a stored, restrict-shaped label, priced in the one ledger.
@@ -338,7 +338,7 @@ This is what makes the grain ''li'': a stored, restrict-shaped label, priced in 
 
 <<~ranks mood RHIZOME ~ a live operator-AI chat: the harness HANDS OVER the Beat — it ticks on the OPERATOR'S GROUNDING ACT, never on response delivery. Forks read as sidechains, injections land where the message lands, handbacks read as DAG-joins. Order lives on the edge-DAG, never in the address -> GEOLOGY ~ a curated artifact (a chant, a codebase): NOBODY ever grounded it. There are no turns. So the ''Beat reads NULL, and the tree STILL STANDS'' — a Measure holds a Beat-less span exactly the way an era holds a stratum >>
 
-<<~ confidence Canon 17/20 >> ''Membership was never made of clock. That is why ONE instrument reads both.''
+<<~ confidence 17/20 >> ''Membership was never made of clock. That is why ONE instrument reads both.''
 
 <<~moves a-curated-corpus -> on/EARNING-every-band-it-has if/no-grounding-act-ever-landed do/detect-each-boundary-and-pay-for-it >>
 <<~moves a-rhizome -> on/being-GIVEN-a-band if/the-harness-hands-over-the-Beat do/take-it-and-spend-the-detection-budget-elsewhere >>
@@ -367,7 +367,7 @@ counter manufactures a global now.
 
 !!! The register-switch problem ~ the corpus runs as a PIDGIN
 
-<<~ confidence Synthesis-Canon 15/20 >> ''`role == "user"` names TOOL OUTPUT 89.1% of the time'' (measured
+<<~ confidence 15/20 >> ''`role == "user"` names TOOL OUTPUT 89.1% of the time'' (measured
 this session on the live transcript bed). The transcript's `user` role does not name the operator; it names
 ''the channel the harness returns on''. So the corpus braids ''at least four grammars'' — operator prose,
 model prose, tool invocation, tool return — and it braids them ''inside a single role label''.
@@ -387,7 +387,7 @@ English commentary. The memory sensorium ''is a Beckwith bed by construction.''
 
 ''The answer key costs nothing, because the source already wrote it down.'' Every transcript stores its
 content as ''typed blocks'' (`text | thinking | tool_use | tool_result`) — and ''the block type IS a''
-''ground-truth register label, GIVEN, never inferred.'' <<~ confidence Canon 17/20 >> ''Truth = the register''
+''ground-truth register label, GIVEN, never inferred.'' <<~ confidence 17/20 >> ''Truth = the register''
 ''SWITCH, never the block edge'': adjacent blocks of the same register merge into a ''RUN'', truth marks
 where a run ''opens'', and every block edge ''inside'' a run stands as a ''DISTRACTOR''. A detector firing
 on block edges pays for it in precision. (Named so nobody later reads it as a finding: `thinking` blocks
@@ -399,7 +399,7 @@ persist with the text ''redacted at write'' — zero characters — so `thinking
 
 <<~ranks memory-ki boundary ~ the register switch, read on the LEXICON-FREE character-class channel; scored against the GIVEN answer key by the UNMOVED pre-registered scorer -> coupling ~ ''operator ⟷ model as TWO STREAMS'' — the directed lead-lag the text corpus could never pose, because a text corpus holds only one speaker. THIS is where coupling stops being an ornament and becomes the point -> standing ~ what later turns, and later sessions, VOUCH for; the witness edges the persistence keel counts >>
 
-<<~ confidence Synthesis-Canon 14/20 >> ''The memory sensorium is the first bed on which COUPLING is even''
+<<~ confidence 14/20 >> ''The memory sensorium is the first bed on which COUPLING is even''
 ''well-posed.'' A chant has no second stream. A codebase has no second stream. A session has exactly two, and
 they take turns — which is why the rhizome, not the corpus, is the sensorium's true home ground, and why
 this goalpost sits where the operator put it.
@@ -420,7 +420,7 @@ this goalpost sits where the operator put it.
 
 !!! The DreamNet sensorium ~ what it still lacks
 
-<<~ confidence Synthesis 9/20 >> The hypothesis holds and stays ''unearned''. Named honestly, its ''li is''
+<<~ confidence 9/20 >> The hypothesis holds and stays ''unearned''. Named honestly, its ''li is''
 ''the hole'': a node's stream carries no verbatim bytes to coarsen, no AST, no constructicon — so
 `Content ↠ Structure ↠ Form` has ''nothing to stand on until someone says what a mesh RECORD is.'' Its ki
 reads clearer than its li, which inverts every other sensorium in the family and marks it as ''not yet''
@@ -429,7 +429,7 @@ reads clearer than its li, which inverts every other sensorium in the family and
 
 !!! The operator's forward idea ~ day-dream / deep-dream as SEPARATE SENSORIA
 
-<<~ confidence Provisional-Synthesis 7/20 >> ''Held forward, and deliberately under-specified — this one''
+<<~ confidence 7/20 >> ''Held forward, and deliberately under-specified — this one''
 ''belongs to the operator's hand.'' The idea: rather than running daydream and deep-dream as two //modes// over
 one store, stand them as ''separate sensoria'', each with its own store, so the two dream registers can
 ''disagree'' and be ''compared'' rather than overwriting one another.
@@ -440,7 +440,7 @@ one store, stand them as ''separate sensoria'', each with its own store, so the 
 
 The two-store law already stands (`dream_pass.py`): the eidetic sensorium holds the append-only immutable
 ground and a pass ''READS it and NEVER writes it''; the Dream sensorium holds the mutable schema and a
-re-dream ''REPLACES its own prior content whole''. <<~ confidence Synthesis 10/20 >> ''Standing a second''
+re-dream ''REPLACES its own prior content whole''. <<~ confidence 10/20 >> ''Standing a second''
 ''dream store beside the first therefore costs no new law'' — it costs a `halfLife`, a name, and the
 comparison instrument that does not yet exist.
 
@@ -452,7 +452,7 @@ comparison instrument that does not yet exist.
 
 !!! THE ONE NOBODY HAS ASKED ~ //what compresses the GRAMMAR?//
 
-<<~ confidence Synthesis-Canon 14/20 >> ''The loop emits a NEW grammar each pass: `G₁, G₂, G₃`.'' The
+<<~ confidence 14/20 >> ''The loop emits a NEW grammar each pass: `G₁, G₂, G₃`.'' The
 exogenous anchor tests ''each pass against the original bytes'' (#the-arrow), and that is a real guard — it
 catches a pass that hallucinates.
 
@@ -465,7 +465,7 @@ catches a pass that hallucinates.
 output got //better//, pass by pass, by the only measure the machina holds — but //"the sequence of grammars//
 //never settles."// ''Nothing in the canon names this. No instrument measures it.''
 
-<<~ confidence Synthesis 11/20 >> ''And the shape of the cure is already visible in the shape of the hole.''
+<<~ confidence 11/20 >> ''And the shape of the cure is already visible in the shape of the hole.''
 Price the grammars themselves: `l(G_{n+1} | G_n)` — ''the description length of the NEXT grammar GIVEN the''
 ''last one.'' If the grammars converge, that quantity ''falls to zero'', their own description length stops
 falling, and ''dreaming acquires a COMPUTABLE HALTING CONDITION''. If it fails to fall, the loop is drifting
@@ -474,7 +474,7 @@ one level up, and it is ''the first thing to build.''
 
 !!! The epistemic fork ~ real convergence, or measurement-in-general?
 
-<<~ confidence Synthesis 10/20 >> One fork stays ''LIVE, never resolved.'' The ''INFLATIONARY'' read: the
+<<~ confidence 10/20 >> One fork stays ''LIVE, never resolved.'' The ''INFLATIONARY'' read: the
 sensorium's readings converge because they estimate one real quantity. The ''DEFLATIONARY'' read: ANY
 structure-imposing instrument grows boundary-like, form-like, coupling-like organs, so the convergence
 reports a property of ''measurement-in-general'', not of THIS shape. The machina cannot yet tell them
@@ -488,7 +488,7 @@ against.
 
 !!! The standing ward ~ measure at the width it runs
 
-<<~ confidence Canon 18/20 >> ''Treat every gate as guilty until measured at the width it actually runs.''
+<<~ confidence 18/20 >> ''Treat every gate as guilty until measured at the width it actually runs.''
 Nine instruments manufactured their own findings before this design settled, and the ninth — a diagonal
 Gaussian that ''INVERTS at 384 dimensions'' — stayed ''invisible to every 2-D test.'' A gate validated at a
 toy width certifies nothing at the running width. ''The instrument MUST NOT manufacture its finding'', and
@@ -533,7 +533,7 @@ Members + grounds: [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-g
 
 !! Grounds ~ the cited names the design stands on
 
-<<~ confidence Synthesis-Canon 14/20 >> The two-part code and the three ki readings rest on named prior
+<<~ confidence 14/20 >> The two-part code and the three ki readings rest on named prior
 art, one line per warrant: ''predictive-information / excess-entropy'' (Bialek, Nemenman & Tishby) names
 the one quantity every li plane estimates a facet of · the ''ε-machine'' (Crutchfield, computational
 mechanics) gives FORM its exact formal twin, the minimal generating machine · ''critical-slowing-down''
@@ -548,6 +548,6 @@ five-plane count (#owed, the-five-plane-count).
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-cqR7K8bZL672fqkJucPDzrMHIqoGWHR2uEpd4UzwUs
+<<^ code:"&#x0003;" >>ni:///sha-256;VNa8tQT6YDMqKmo1jqNyJgzx4t_27Xe1C_4cixbavG4
 
 <<^ code:"&#x0004;" -> ? >>

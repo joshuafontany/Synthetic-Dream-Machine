@@ -71,7 +71,7 @@ from attribution: ''naming rides the lineage-path'' (descent = address, //who//)
 ''attribution rides the reference-edge'' (act → principal, //whose-act//). One handle,
 two offices.
 
-<<~ confidence Synthesis-Canon 17/20 >> Six independent domains rhyme to the
+<<~ confidence 17/20 >> Six independent domains rhyme to the
 no-registry derived handle — the convergence, not any single source, seats it.
 
 ''The ʻŌlelo name — //hoʻoili//.'' This worldline functor (Turn → Trajectory) carries
@@ -154,7 +154,7 @@ Wings stay isolated; one shared token lets the harvester draw the inter-wing edg
 <<~Kind Cross-Surface "case/a claude coordinator drives gh-copilot/codex key/W3C trace-id via env TRACEPARENT ~ the coordinator MINTS a trace-id + span-id once, injects TRACEPARENT into the worker env, BOTH sides record it; the harvester joins on trace-id, orients the arrow by parent-span-id. Needs a thin launcher SHIM (gh copilot ignores TRACEPARENT today)." >>
 <<~Kind Two >>
 
-<<~ confidence Synthesis-Canon 16/20 >> Causality over timing: a propagated id
+<<~ confidence 16/20 >> Causality over timing: a propagated id
 records happened-before ''at the point the edge is created'' — a fact, not an
 inference. Heuristic cwd+time correlation breaks on concurrency, clock-skew (no global
 now), retries, and fan-out. The id travels //with// the work.
@@ -188,7 +188,7 @@ rules; on the worldline, the merge-topology rules and FfzClock's LWW only paces 
 grain. The Fuller-Fontany-Zelenka Chronometer earns its name as the ''rhythm'' of the
 house, not its causality court.
 
-<<~ confidence Synthesis-Canon 16/20 >> The boundary holds because it follows the
+<<~ confidence 16/20 >> The boundary holds because it follows the
 actor-boundary. Open at the mechanism (#open): `ffzCompare` must return //concurrent//
 (not an LWW tiebreak) when two clocks share no merge-ancestry — confirm the API
 separates the causal partial-order read from the rhythmic LWW read at wire-time.
@@ -219,7 +219,7 @@ and the ''DAG stays per-island LOCAL'' (a union of local cones, never one global
 the Lightcone rhyme #the-six-rhymes). Borrill certifies this as
 ''more-correct-than-vanilla-Lamport'': vanilla Lamport manufactures a total order that
 overclaims causation; the worldline's partial order, local and epistemic, claims only
-what it can hold. <<~ confidence Synthesis-Canon 16/20 >> The cut grounds the
+what it can hold. <<~ confidence 16/20 >> The cut grounds the
 facet-as-projection ruling above: the cache reads an epistemic position ("as of last
 sync"), never an ontic verdict.
 
@@ -282,7 +282,7 @@ holds — these models ride //our// @daemon atop the base's bi-temporal KG (`kg_
 content-addressed tunnels; MemPalace's trunk (entity-first real-name registry, single-node
 "local-first") stays a different ontology — faithful upstream gets only backend/adapters/fixes.
 
-<<~ confidence Synthesis-Canon 16/20 >> The three resolutions rest on convergent prior art
+<<~ confidence 16/20 >> The three resolutions rest on convergent prior art
 (bitemporal · PROV-invalidation · vector-clocks · Merkle-fork) and on mechanisms the base
 already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ticks · operator-root), and the past-session FFZ/DAG re-derives by nuke-and-pave + re-harvest.
 
@@ -327,7 +327,7 @@ never the host env. The fork held for the operator: (a) do the panels need netwo
 egress to the model API (→ an allow-listed proxy, not `--unshare-net`); (b) trusted
 prompts vs untrusted generated code (sets the tier floor: T0 vs T1+).
 
-<<~ confidence Synthesis-Canon 15/20 >>
+<<~ confidence 15/20 >>
 
 <<~/ahu >>
 
@@ -429,6 +429,6 @@ attribute to the spirit that moved them.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tePpDNZqvZim0pm8yC6zNcAtym5P7JPDQgnJ-2R66b4
+<<^ code:"&#x0003;" >>ni:///sha-256;JZN8xTU4Hsy4fBkCq4248eUMO7ww1d9rScoXFOu2kfs
 
 <<^ code:"&#x0004;" -> ? >>

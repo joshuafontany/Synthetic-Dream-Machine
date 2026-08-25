@@ -73,7 +73,7 @@ Two readers parse the exchange today; one survives.
 
 <<~moves second-reader -> engine-grammar on/the-@daemon-VM if/it-can-read-in-the-engine do/retire-the-regex >>
 
-<<~ confidence Synthesis-Canon 15/20 >> ''The ruling: if it CAN happen in the wiki''
+<<~ confidence 15/20 >> ''The ruling: if it CAN happen in the wiki''
 ''engine, it DOES.'' `turn-harvest`'s regex retires into the engine grammar. One
 grammar SOURCE (the instrument `.tids`), one runtime (the @daemon VM).
 
@@ -158,7 +158,7 @@ summons/outcome rail slice-1 `recall` proved).
    atomically; a ''nalu-triggered effect'' (the Elm `Cmd` shape) projects them
    across the causal-island shore as `lar_*` ''tension on the mempalace drawer''.
 
-<<~ confidence Synthesis-Canon 15/20 >> The hold is load-bearing: it sequences the
+<<~ confidence 15/20 >> The hold is load-bearing: it sequences the
 reading ''after'' the verbatim drawer that the mine leg lands, so the `lar_*`
 annotation finds its drawer present. //The nalu is the pulse that makes "eventual"//
 //concrete// — "hold" ≡ `enqueueNalu`, "flush" ≡ the wave.
@@ -225,6 +225,6 @@ readings AND the form-capture both drain the one emitted-marker stream, no disco
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kk1VsxISbpqFHFxNYsuyPRAVjAEokqp9OgCEQGwQBG8
+<<^ code:"&#x0003;" >>ni:///sha-256;F9iowiMJO8CJmBcJ-L1Jludt_9w_X-6QL-xp9Fdz2pU
 
 <<^ code:"&#x0004;" -> ? >>

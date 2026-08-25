@@ -54,7 +54,7 @@ A request to scan, flag, compare before/after, or correct ''already-settled'' wo
 * `Hoʻoko-required` --- the wording turns, not just collects a warning.
 * `ambiguous` --- quotation, code, literal example, or house-style exception clouds the call.
 
-''◇ Decide'' --- the lightest lawful turn carries. Mark-only unless the user asked for correction or the sentence cannot pass honestly. Surface ambiguity; never guess it closed. A surviving `${copula}` MUST carry `<<~ confidence Canon 20/20 >>` --- own the copula at full weight, or turn it.
+''◇ Decide'' --- the lightest lawful turn carries. Mark-only unless the user asked for correction or the sentence cannot pass honestly. Surface ambiguity; never guess it closed. A surviving `${copula}` MUST carry `<<~ confidence 20/20 >>` --- own the copula at full weight, or turn it.
 
 ''▶ Act'' --- emit one surface below. One bad sentence MUST NOT widen into a document rewrite. Quotations, code, and literal examples MUST NOT normalize silently.
 
@@ -95,6 +95,6 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mtwZmpHGsMrGqS1SzeoPQTYUgmxopfpdM_VLMacPtHU
+<<^ code:"&#x0003;" >>ni:///sha-256;pqib4XfmSaZ0ZLSGN67WOW0qQR-mJ7y8jEKL645tpS0
 
 <<^ code:"&#x0004;" -> ? >>

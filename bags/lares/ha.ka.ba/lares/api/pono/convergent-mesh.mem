@@ -32,7 +32,7 @@ Three problems the mesh once held apart — ''adjudicating a revision'' to share
 
 <<~ranks convergent local ~ read/check/act against what THIS node verifies, as of last sync; never a global census -> decaying-lease ~ a capability fades unless fed (feed-the-Lar = ratchet); not persistent-state-changed-by-events -> graded-belief ~ hold a degree (Maybe-Logic 0..20), commit on a hysteretic threshold -> cost-bound ~ each proof costs-to-forge or binds-to-position (per-vessel-key + delegation) -> lineage-scoped ~ revocation notice · membership cost · revision reliance all ride the delegation lineage -> constitutional-core ~ a small unamendable core, fork-by-fiat, the rest self-adjudicated locally >>
 
-<<~ confidence Synthesis-Canon 15/20 >> Five of the six rest on machinery the house already holds — the ratchet, the residency ladder, the Maybe-Logic band, the per-vessel-key, the causal islands. Only the constitutional core stays genuinely new — and it names the ''kahu's'' office (`kahu`).
+<<~ confidence 15/20 >> Five of the six rest on machinery the house already holds — the ratchet, the residency ladder, the Maybe-Logic band, the per-vessel-key, the causal islands. Only the constitutional core stays genuinely new — and it names the ''kahu's'' office (`kahu`).
 
 <<~/ahu >>
 
@@ -52,14 +52,14 @@ Time rides three instruments, never one (`ffz-clock`):
 
 !! Two revocation modes ~ the epoch is a LEASE, not a revoker
 
-<<~ confidence Canon 17/20 >> ''CANONICAL — this section is the founding statement of the fencing epoch, and a sweep should CITE it rather than restate it.'' The collapse (one mechanism, two carriers) and the ownership cut that keeps our fence off Keyhive's CGKA epoch both stand downstream of this paragraph: <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+<<~ confidence 17/20 >> ''CANONICAL — this section is the founding statement of the fencing epoch, and a sweep should CITE it rather than restate it.'' The collapse (one mechanism, two carriers) and the ownership cut that keeps our fence off Keyhive's CGKA epoch both stand downstream of this paragraph: <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
 
 Revocation runs two modes, and conflating them ships an unsafe gate:
 
-* ''Non-renewal (the default)'' — the ''epoch-lease'': a max-register rolls forward, every grant at epoch ≤ N must re-mint or expire. Coordinator-free, rides Automerge over the WS relay. <<~ confidence Synthesis-Canon 15/20 >> Safe //because// it only ratchets the whole resource forward — it never singles out one principal.
+* ''Non-renewal (the default)'' — the ''epoch-lease'': a max-register rolls forward, every grant at epoch ≤ N must re-mint or expire. Coordinator-free, rides Automerge over the WS relay. <<~ confidence 15/20 >> Safe //because// it only ratchets the whole resource forward — it never singles out one principal.
 * ''Targeted (the exception, and scoped to AUTHORITY alone)'' — it withdraws a capability and MUST NOT touch `kūlana`, which knows no lowering act and moves only by non-renewal — ''Keyhive convergent membership-removal'' (`revoke()`, a tombstone in the membership graph; `orichalcum-capabilities`). A device that re-mints concurrently with a roll would ride the max-register //up// and survive, so any revoke that must defeat a malicious self-renew MUST ride Keyhive's convergent removal — ''never the counter'' (Kleppmann · p2panda · Keyhive converge on this; #provenance). That convergent-removal tombstone reads as a ''raised kāpae on the membership stack'' (`kapae#membership-sense`) — remove-wins, the shadow defeating the malicious self-renew the way a raised kāpae defeats a partitioned lower-layer re-add.
 
-<<~ confidence Synthesis 12/20 >> The content-resolution design (`content-resolution`) ''mechanizes both modes on the `@cad` content-store'' — no new mode, the two made concrete for large bodies. ''Authz-revoke = the epoch-lease'': drop the `#has` cap scoped `{peer × address}` and drop the retention tag, forward-immediate. ''Content-revoke = Keyhive convergent-removal'': re-key → a new ciphertext-cid (`cid = BLAKE3(ciphertext)`) → an indirection-map update (logical-name → current cid), forward-only — already-fetched bytes stay unrecallable by construction, matching the forward-only ceiling of #contract-key-agreement.
+<<~ confidence 12/20 >> The content-resolution design (`content-resolution`) ''mechanizes both modes on the `@cad` content-store'' — no new mode, the two made concrete for large bodies. ''Authz-revoke = the epoch-lease'': drop the `#has` cap scoped `{peer × address}` and drop the retention tag, forward-immediate. ''Content-revoke = Keyhive convergent-removal'': re-key → a new ciphertext-cid (`cid = BLAKE3(ciphertext)`) → an indirection-map update (logical-name → current cid), forward-only — already-fetched bytes stay unrecallable by construction, matching the forward-only ceiling of #contract-key-agreement.
 
 <<~/ahu >>
 
@@ -75,9 +75,9 @@ Private docs spawn fresh and isolated per vessel — they hide in `@catalog` —
 
 !! The Beelay bypass ~ what rides the relay, what stays Beelay's
 
-<<~ confidence Synthesis 13/20 >> The ''public layer'' — base canon (`@lares`/`@lararium`), capability-as-identity public //signatures//, the epoch-lease, Keyhive convergent-revoke — rides ''public CRDT state over the WS relay'', no Beelay. Beelay shrinks from "the multi-vessel blocker" to its one irreplaceable job: ''forward-secrecy of //private// encrypted content's data-keys'' (key-agreement, BeeKEM-class) — needed only for private bags, and ''Keyhive already carries BeeKEM'', so the work is to //anchor it at the contract//, never to re-invent it.
+<<~ confidence 13/20 >> The ''public layer'' — base canon (`@lares`/`@lararium`), capability-as-identity public //signatures//, the epoch-lease, Keyhive convergent-revoke — rides ''public CRDT state over the WS relay'', no Beelay. Beelay shrinks from "the multi-vessel blocker" to its one irreplaceable job: ''forward-secrecy of //private// encrypted content's data-keys'' (key-agreement, BeeKEM-class) — needed only for private bags, and ''Keyhive already carries BeeKEM'', so the work is to //anchor it at the contract//, never to re-invent it.
 
-<<~ confidence Synthesis 12/20 >> Consistent with the bypass, the content-resolution design (`content-resolution`) holds ''the relay ciphertext-only'' — the node routes and verifies `BLAKE3(ciphertext)==cid`, ''never decrypts'' (MLS Delivery-Service-never-decryptor = node-never-Auth-root). Substrate-not-sovereignty: bytes ride `@cad` as ciphertext, data-keys stay behind Beelay's one job.
+<<~ confidence 12/20 >> Consistent with the bypass, the content-resolution design (`content-resolution`) holds ''the relay ciphertext-only'' — the node routes and verifies `BLAKE3(ciphertext)==cid`, ''never decrypts'' (MLS Delivery-Service-never-decryptor = node-never-Auth-root). Substrate-not-sovereignty: bytes ride `@cad` as ciphertext, data-keys stay behind Beelay's one job.
 
 <<~/ahu >>
 
@@ -116,9 +116,9 @@ This meme stands ''PROPOSED'' (crucible-before-binding). The model held through 
 
 !! Scope 1 ~ the DreamNet networking pipe [surgical 2026-07-03]
 
-This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace ''networking'' pipe, the special-case TS reaches through the full tools-stack, coordinated by `@daemon` verbs. Its ''CRDT-causal clock runs in TS'' (structural causality — the Automerge logical time of #three-clocks, `getHeads`/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates that ''Scope 2'' (the general Sensorium-palaces) rides. The convergent membership + coordinator-free key-agreement worked here ''consume the whole model''; both scopes braid TS-coordination with py/R-tooling. <<~ confidence Synthesis 12/20 >> the ruling firms the networking/sensorium split, and lands the FfzClock↔Automerge distinction (#three-clocks) inside it.
+This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace ''networking'' pipe, the special-case TS reaches through the full tools-stack, coordinated by `@daemon` verbs. Its ''CRDT-causal clock runs in TS'' (structural causality — the Automerge logical time of #three-clocks, `getHeads`/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates that ''Scope 2'' (the general Sensorium-palaces) rides. The convergent membership + coordinator-free key-agreement worked here ''consume the whole model''; both scopes braid TS-coordination with py/R-tooling. <<~ confidence 12/20 >> the ruling firms the networking/sensorium split, and lands the FfzClock↔Automerge distinction (#three-clocks) inside it.
 
-<<~ confidence Synthesis 13/20 >> The Scope-1 CAD-blob pipe now carries a ''concrete design'' (`content-resolution`, doubly-grounded — two astral-sea research waves ∪ this canon): large bodies ''leave the CRDT'' as a ''skinny TW5 handle'' (a stable logical-name + provider-hint, riding TW5's own `lazyLoad` engine) resolving through an ''@cad ciphertext-addressed CAS'' (`cid = BLAKE3(ciphertext)`, so an untrusted holder verifies/pins/repairs blind) via a ''`resolveByCid`'' host callback — three gates never fused, chaining local → hint-named provider → connected peers → PENDING (first-class lawful state). Design-north, ''NOT built''; the content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, `genesis/cas`; handles in the publicity-tiered bags — public `@crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`) = this meme's Scope-1 pipe made concrete (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>).
+<<~ confidence 13/20 >> The Scope-1 CAD-blob pipe now carries a ''concrete design'' (`content-resolution`, doubly-grounded — two astral-sea research waves ∪ this canon): large bodies ''leave the CRDT'' as a ''skinny TW5 handle'' (a stable logical-name + provider-hint, riding TW5's own `lazyLoad` engine) resolving through an ''@cad ciphertext-addressed CAS'' (`cid = BLAKE3(ciphertext)`, so an untrusted holder verifies/pins/repairs blind) via a ''`resolveByCid`'' host callback — three gates never fused, chaining local → hint-named provider → connected peers → PENDING (first-class lawful state). Design-north, ''NOT built''; the content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, `genesis/cas`; handles in the publicity-tiered bags — public `@crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`) = this meme's Scope-1 pipe made concrete (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>).
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
@@ -139,6 +139,6 @@ This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CR
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;upBj2FoVKulgAg6BGrp6KDzFUZZLBIMZLKDjVPlr1zU
+<<^ code:"&#x0003;" >>ni:///sha-256;aRlY5RjubJ-U4EtgNZveTZqGA-a4f_PW8qYOZcpIT8Y
 
 <<^ code:"&#x0004;" -> ? >>

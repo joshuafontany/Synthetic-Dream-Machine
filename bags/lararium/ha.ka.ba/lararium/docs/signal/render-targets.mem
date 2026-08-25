@@ -327,7 +327,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 <<~ hud Focus(10) Feedback(3) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad 🏛️ >>
-Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
+Lares (Scryer): <<~ confidence 16/20 >> the structure holds.
 ```
 
 !!! Surface 2: `chat-log:post-header`
@@ -345,7 +345,7 @@ Lares (Scryer): <<~ confidence Synthesis-Canon 16/20 >> the structure holds.
 ''Closed example — Lindwyrm in Elyncia-space:''
 
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — lar:///memory.deep.surfaces <<~ confidence Synthesis-Canon 16/20 >> <<~ syad 🏛️ >>
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — lar:///memory.deep.surfaces <<~ confidence 16/20 >> <<~ syad 🏛️ >>
 ```
 
 ''NPC / non-Lares post:''
@@ -415,6 +415,6 @@ Before emitting any stance block on any surface:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8y4PCT3mxBjqaZQL3PuqN5lXxX8kp7kndoay-qj1i4U
+<<^ code:"&#x0003;" >>ni:///sha-256;1Qgf7Gpb0ewdbSpLqzKg_l2PukE7DFi_SHPAcEKEnAY
 
 <<^ code:"&#x0004;" -> ? >>

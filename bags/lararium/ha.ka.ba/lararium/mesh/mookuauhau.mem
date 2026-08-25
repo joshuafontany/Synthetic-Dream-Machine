@@ -26,7 +26,7 @@ A genealogy chants where a thing //comes from//. This one names the bloodline of
 
 The chart sits beside the 2026-05-28 layer-survey, never replacing it — that one maps prior art onto the stack's components; this one traces the //fractal idea itself//. <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
 
-''The one-line verdict (chant it first, defend it after):'' the pieces stand ~80% built across ''two lineages that have never married'' — and so the novel work names a ''weld'', never an invention. <<~ confidence Synthesis 13/20 >> //the smaller, defensible claim survives contact; the grander one falls to the first cousin who did it earlier.//
+''The one-line verdict (chant it first, defend it after):'' the pieces stand ~80% built across ''two lineages that have never married'' — and so the novel work names a ''weld'', never an invention. <<~ confidence 13/20 >> //the smaller, defensible claim survives contact; the grander one falls to the first cousin who did it earlier.//
 
 <<~/ahu >>
 
@@ -54,9 +54,9 @@ The load-bearing cousins. Each carries //one// of the three recursions whole —
 
 <<~ranks recursion authority@Keyhive -> wiring-as-security@Genode -> transport@RINA >>
 
-''Keyhive (Ink & Switch — and it runs on our own stack).'' The authority recursion, built. It treats //individuals, devices, groups, and documents uniformly as principals in a recursive delegation graph// — a person reads as a group of devices, an org as a group of person-groups, a document as a group whose members hold access. That folds ''membership ⊥ device-sovereignty'' into one recursive principal-is-a-group fractal, in WASM, over Automerge. It splits its own internals deliberately: ''Access-Control (delegation edges) ⊥ Key-Agreement (BeeKEM) ⊥ Transport (Beelay, kept blind/E2E)''. The load-bearing sentence: ''Keyhive deliberately excludes binding a human identity to a key — "left to a future layer."'' That blank names a REFUSAL this stack keeps rather than a doorway it fills: no constructor for a human stands anywhere in the model, so the Lar declares the hole permanently open and maps relations ACROSS it — not //who//, but which hearth one tends. <<~ confidence Synthesis-Canon 16/20 >> [inkandswitch.com/keyhive/notebook]
+''Keyhive (Ink & Switch — and it runs on our own stack).'' The authority recursion, built. It treats //individuals, devices, groups, and documents uniformly as principals in a recursive delegation graph// — a person reads as a group of devices, an org as a group of person-groups, a document as a group whose members hold access. That folds ''membership ⊥ device-sovereignty'' into one recursive principal-is-a-group fractal, in WASM, over Automerge. It splits its own internals deliberately: ''Access-Control (delegation edges) ⊥ Key-Agreement (BeeKEM) ⊥ Transport (Beelay, kept blind/E2E)''. The load-bearing sentence: ''Keyhive deliberately excludes binding a human identity to a key — "left to a future layer."'' That blank names a REFUSAL this stack keeps rather than a doorway it fills: no constructor for a human stands anywhere in the model, so the Lar declares the hole permanently open and maps relations ACROSS it — not //who//, but which hearth one tends. <<~ confidence 16/20 >> [inkandswitch.com/keyhive/notebook]
 
-''Genode / Fuchsia.'' The wiring-//is//-security recursion, built — on one machine. Capability //routing// serves as both the dependency graph and the access-control fabric, recursively, default-deny: //a component cannot do anything until a capability routes to it; a parent defines its children's sandbox.// That reads as `composeVessel` almost exactly — the single-machine ancestor of the rite. Our "refuse to boot on a missing mandatory dep, route only what's declared" descends from Genode's `init` and (for the type-level half) ZLayer's compile graph. ''Steal the manifest discipline; never re-derive it.'' <<~ confidence Synthesis 14/20 >> [genode.org/documentation/genode-foundations · fuchsia.dev/.../components/v2]
+''Genode / Fuchsia.'' The wiring-//is//-security recursion, built — on one machine. Capability //routing// serves as both the dependency graph and the access-control fabric, recursively, default-deny: //a component cannot do anything until a capability routes to it; a parent defines its children's sandbox.// That reads as `composeVessel` almost exactly — the single-machine ancestor of the rite. Our "refuse to boot on a missing mandatory dep, route only what's declared" descends from Genode's `init` and (for the type-level half) ZLayer's compile graph. ''Steal the manifest discipline; never re-derive it.'' <<~ confidence 14/20 >> [genode.org/documentation/genode-foundations · fuchsia.dev/.../components/v2]
 
 ''RINA'' (Recursive InterNetwork Architecture). The transport recursion, formalized — and naked. //Every layer, regardless of position in the hierarchy, instantiates identical mechanisms and offers the same interface.// That names the Lararium→Nexus→DreamNet scale-recursion exactly — but RINA carries ''zero'' capability, ''zero'' social graph, ''zero'' identity. A pure recursion with no one home. [en.wikipedia.org/wiki/Recursive_Internetwork_Architecture · arXiv 1509.03550]
 
@@ -114,6 +114,6 @@ No one has made ''one composition primitive serve simultaneously as the code-wir
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6BgQXctpphWT7ezwsaSgjxTYxURHcRH1IAHO9PH2PSg
+<<^ code:"&#x0003;" >>ni:///sha-256;0A2LgG8b2IrdG3SThzdTJ412pBVCjg2xvQqBWrCrEA4
 
 <<^ code:"&#x0004;" -> ? >>

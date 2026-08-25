@@ -55,7 +55,7 @@ a coordinate stays exactly as fresh whenever it gets read, because it counts not
 
 ''A grain names NESTED MEMBERSHIP — a containment PATH, never a count.'' `Theme ⊃ Arc ⊃ Measure
 ⊃ Beat ⊃ Pulse`: each band declares //which// container a moment sits inside, never //how many//
-ticks have elapsed. <<~ confidence Synthesis-Canon 16/20 >> The moment a band hardens into a
+ticks have elapsed. <<~ confidence 16/20 >> The moment a band hardens into a
 count that scales palace-wide, it manufactures a global now — the un-pono failure
 ([[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]]). The retired wall-clock
 `Date.now()` anchor stood as exactly this: one monotone integer every island would have to
@@ -84,7 +84,7 @@ The discourse reads its own structure at five grains; every membership stays isl
 Beat alone ratchets (the grounding act, #contract); the bands around it read as ''containment'',
 derived locally. This ''re-levels'' the earlier calendar reading — the old "day" band retires
 with the shared epoch (another count-anchor); Theme now crosses island boundaries by
-content-community, where a shared clock never could. <<~ confidence Synthesis-Canon 15/20 >>
+content-community, where a shared clock never could. <<~ confidence 15/20 >>
 
 !!! Glossary ~ island ≡ Arc, never a vessel
 
@@ -102,7 +102,7 @@ vessel boundary stays an operator-priced crossing, never a band.
 ''PARTIAL and NEVER ENTERS THE ADDRESS.'' Cladistics teaches the cut: descent runs temporal
 (ancestor before descendant), yet a clade reads as MEMBERSHIP, not a rank-count — and the
 PhyloCode DISCARDS the Linnaean ranks precisely because ''the ranks were the secret count''.
-<<~ confidence Synthesis-Canon 15/20 >> So here: causality rides the edge-DAG
+<<~ confidence 15/20 >> So here: causality rides the edge-DAG
 (`ffzCausalCompare`, the worldline happened-before —
 [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]); it never leaks into the
 grain. The grain names where-inside; the DAG names what-came-before; the two stay separate
@@ -112,7 +112,7 @@ instruments (#the-two-domain-boundary).
 
 ''Hox colinearity'' marks what FFZ is NOT. In the Hox cluster gene-ORDER maps to body-order:
 position itself carries the signal, the count IS the content. That names the exact anti-pattern
-the spine refuses — <<~ confidence Synthesis-Canon 15/20 >> ''never let a band become a counter''
+the spine refuses — <<~ confidence 15/20 >> ''never let a band become a counter''
 ''whose count is the signal.'' A Hox band cannot be truncated or read locally: lop the prefix and
 the colinear meaning shatters, because the position WAS the content.
 
@@ -133,7 +133,7 @@ Three readings of one shape converge, cited as grounds:
 
 <<~ranks convergence formal ~ the ultrametric / Baire metric · the meet-semilattice · the materialized-path tree — the address IS the longest-common-prefix -> natural ~ cladistics · the prosodic hierarchy · GTTM metrical structure · the renormalization group · Schenkerian levels · X-bar · RST · biological levels-of-organization (8 of 9 surveyed domains read a nested non-counting membership) -> cached-projection ~ FfzClock as a materialized VIEW, "as of my last read" (Kleppmann local-first), re-derivable from the edge-DAG, never the authority (#the-two-domain-boundary, [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#ffz-binding]]) >>
 
-<<~ confidence Synthesis-Canon 16/20 >> Eight of nine natural domains plus the formal linchpin
+<<~ confidence 16/20 >> Eight of nine natural domains plus the formal linchpin
 (ultrametric ≡ LCP ≡ lattice-meet) converge on the membership-tree reading; the convergence
 certifies the spine as a found shape, never a local invention. The lone counter-example (Hox)
 sharpens the boundary rather than weakening it.
@@ -153,7 +153,7 @@ clean in two:
 
 ''The retired over-claim stays retired.'' Earlier chronometer research read FfzClock's
 epoch-dominance as //"universal causal ordering across all instances."// That reading
-retires: <<~ confidence Synthesis-Canon 16/20 >> `ffzMerge`'s LWW total-order serves
+retires: <<~ confidence 16/20 >> `ffzMerge`'s LWW total-order serves
 //rhythmic alignment// across instances — useful, coordinator-free — but it is ''not'' a
 happened-before partial order and never rules a causal question. Causal order rides
 Automerge (inside its docs) or the reified edge-DAG (on a worldline); FfzClock rides
@@ -180,7 +180,7 @@ aliases into a slow band's. ''φ² carries the MAGNITUDE'' relation (band-size s
 same intent in integer radices — shared factors collide in hash-merge paths).
 
 ''Entrainment DROPS.'' Earlier chronometer research read the bands as ''coupled oscillators'' pulling one
-another toward phase-lock; that over-claim retires. <<~ confidence Synthesis-Canon 15/20 >> The bands do
+another toward phase-lock; that over-claim retires. <<~ confidence 15/20 >> The bands do
 not couple. A worldline ''handback'' reads as a directed ''one-shot DAG-JOIN'' — the happened-before
 merge, the twin-reunion (lar:///ha.ka.ba/lararium/api/agent-worldline#attribution) — NEVER oscillator
 coupling. One join, one direction, once.
@@ -207,11 +207,11 @@ Two claims ride φ, and they hold at DIFFERENT confidence — the meme states bo
 stands as the ''load-bearing original'': the one shore where every integer-radix address (CIDR,
 Dewey, a trie, the p-adic metric) breaks, because each hides a global positional COUNTER — a
 fixed radix couples the bands through shared factors. φ refuses the coupling, so the spine stays
-a TREE and never a number-line. <<~ confidence Canon 18/20 >> Every surveyed domain confirms the
+a TREE and never a number-line. <<~ confidence 18/20 >> Every surveyed domain confirms the
 load-bearing claim: ''an independent feature per band'' (the scale-orthogonality the bands need).
 But the SECOND claim — that the golden ratio SPECIFICALLY (φ, not merely //some// mutually-
 incommensurate spacing) tunes the bands — rests on a single contested neuroscience line.
-<<~ confidence Provisional 4/20 >> Hold the golden-ratio-specifically reading as provisional; the
+<<~ confidence 4/20 >> Hold the golden-ratio-specifically reading as provisional; the
 non-interference law needs only the independent-feature-per-band claim, which stands at Canon.
 
 !!! The grammar-palace facet ~ two P0 ladders, six deferred
@@ -296,7 +296,7 @@ lattice meet, #the-spine) — a membership tree, never a count.
 
 !!! The grain ~ segment ticks, block addresses (Loom-grounded, 7-spirit swarm + observability)
 
-''The tick fires at the SEGMENT, the block is an OFFSET.'' <<~ confidence Synthesis-Canon 16/20 >>
+''The tick fires at the SEGMENT, the block is an OFFSET.'' <<~ confidence 16/20 >>
 Every dominant agent-observability standard (OTel GenAI, Langfuse, LangSmith, Phoenix) draws
 the same line: the finest //durably-recorded, independently-addressable// unit is the ''span =''
 ''one LLM call / one tool call = one generation segment'' (`stop_reason` boundary). Content-blocks
@@ -345,7 +345,7 @@ choices follow the spine:
 
 <<~ranks tool materialized-path ~ a dendrogram / TREE, NOT the p-adic metric (a fixed prime couples the bands — integer coupling, the very thing φ refuses, #non-interference) -> nested-intervals ~ store nested INTERVALS, never integer lft/rgt (lft/rgt is a global positional count that re-breaks on every insert) -> measure-boundary ~ reuse the nomic embedder, cosine-drop = the topic-shift, the same encoder the formpalace holds -> theme-community ~ python-igraph CPM-Leiden + a label-propagation delta — INCREMENTAL, so a fresh node joins a community with no global recompute (no-global-now) -> the-cap-boundary ~ @endo (Far / CapTP) carries the #has-cap-stack boundary ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]]) >>
 
-<<~ confidence Synthesis 11/20 >> These name the implementation seat, never a built surface; the
+<<~ confidence 11/20 >> These name the implementation seat, never a built surface; the
 serializer + Claude-agent profile already stand (#open), the membership-derivation (Measure
 cosine-drop, Theme community-detection) names the next slice.
 
@@ -371,7 +371,7 @@ A lease rides the ''epoch-counter'' for its value, ''FfzClock'' for its cadence;
 wall-clock `exp` stays a replay backstop only. ''Revocation is NOT a clock'': two modes
 ride beside the instruments — ''non-renewal'' (the epoch-lease expires un-refreshed) and
 ''targeted'' (Keyhive convergent membership-removal, `revoke()` — a tombstone in the
-membership graph, never an epoch). <<~ confidence Synthesis-Canon 15/20 >> A device
+membership graph, never an epoch). <<~ confidence 15/20 >> A device
 re-minting concurrently with a roll rides the max-register //up// and survives, so
 targeted revocation MUST ride Keyhive's convergent removal, never the counter
 (Kleppmann · p2panda · Keyhive converge; adversarial research 2026-06-24).
@@ -412,6 +412,6 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZisBFsgA43_HQDL9E-sGSwF_HCJ_CCwN0HO76LM6V6k
+<<^ code:"&#x0003;" >>ni:///sha-256;iFJ9k5AEDdHOIYSNbZ5IgU_joWTRK5RsYBX45hWTAuo
 
 <<^ code:"&#x0004;" -> ? >>

@@ -95,7 +95,7 @@ It reads referenced content the node points it at.
 |---|---|---|
 | Taskwork SA | `aim` bearing vector (`lar:///threshold.uncertain.opens/…`) | Semantic bearing — what heading the turn takes |
 | Taskwork SA | `OODA-HA` gauge (`Feedback(N↺)`, `N↺ + φ:reason` on suspend) | Temporal position — loops closed, or the phase a loop holds open across turns |
-| Agent SA | `confidence` sigil (`<<~ confidence Synthesis 13/20 >>`) | Epistemic confidence — the node's degree of certainty |
+| Agent SA | `confidence` sigil (`<<~ confidence 13/20 >>`) | Epistemic confidence — the node's degree of certainty |
 | Agent SA | `syad` lens (`<<~ syad 🏛️ 🗡️ >>`) | Discourse posture — the standpoints the node invokes and adopts |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next `syad` lens reflects the shift |
 | Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `↺`) | Cognitive movement through the current OODA-HA phase set |
@@ -121,6 +121,6 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VknESRhI0_xdBs69a440-aJVPV2Ic1WUmDgJ7pAo0KI
+<<^ code:"&#x0003;" >>ni:///sha-256;NM61Z_VtE5cQ9vwTtGPtlZ9Q9R0xB7timkCXUHOK3Fg
 
 <<^ code:"&#x0004;" -> ? >>

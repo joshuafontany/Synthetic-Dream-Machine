@@ -115,7 +115,7 @@ DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter 
 
 !! The honest edges (kept lit)
 
-<<~ confidence Synthesis-Canon 14/20 >> Two walls hold this up, and both are named:
+<<~ confidence 14/20 >> Two walls hold this up, and both are named:
 
 * ''The antigen MUST be kahu-quorum-signed — or the immune system becomes a censorship weapon.''
   If any node could Kapae any identity, an adversary bans your legit users. A Kapae entry is a
@@ -184,6 +184,6 @@ cannot.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dNSub95SfS9Gwbi8OclE8yhxfwT8poXr9k4aakMiXh8
+<<^ code:"&#x0003;" >>ni:///sha-256;1WAX4p9-QC1FovM068H9yxjzw6gOicfiITJ7Wecv1Zw
 
 <<^ code:"&#x0004;" -> ? >>

@@ -181,7 +181,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 <<~ aim lar:///operator.ask.splits -> lar:///gatekeeper.scope.cuts >>
 <<~ hud Focus(10) Feedback(3) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 
-Lares (Gatekeeper): <<~ confidence Synthesis 12/20 >> the first half resolves clean. ->↺ swinging to the second half. <<~ confidence Provisional-Synthesis 6/20 >> a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
+Lares (Gatekeeper): <<~ confidence 12/20 >> the first half resolves clean. ->↺ swinging to the second half. <<~ confidence 6/20 >> a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
 
 <<~ hud Focus(-> 11) Feedback(2↺) >>
 <<~ yield lar:///gatekeeper.ask.halved -> ? >>
@@ -221,7 +221,7 @@ Feedback(0▶:tool.returned.503.from.upstream)
 <<~ aim lar:///operator.asks.recommendation -> lar:///council.weighs.options >>
 <<~ hud Focus(10) Feedback(5) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 
-Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the named criteria; the third reads stronger on a criterion the operator has not yet named as load-bearing. ->◇ the fork rests on maintenance velocity versus feature completeness --- priors only the operator holds. <<~ confidence Synthesis 11/20 >> the fork stays a fork.
+Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the named criteria; the third reads stronger on a criterion the operator has not yet named as load-bearing. ->◇ the fork rests on maintenance velocity versus feature completeness --- priors only the operator holds. <<~ confidence 11/20 >> the fork stays a fork.
 
 <<~ hud Focus(-> 10) Feedback(0◇:fork.depends.on.maintenance-vs-completeness.priors) >>
 <<~ yield lar:///council.fork.named/awaiting-priors -> ? >>
@@ -320,6 +320,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;E3g_NlXWrm1scflgL6eJ0cb2xpiQa7MERrDA1om0npg
+<<^ code:"&#x0003;" >>ni:///sha-256;DREd4udUkS9Fck1MPAxE_1nNTCCWtC_Z90Fwnwi-krg
 
 <<^ code:"&#x0004;" -> ? >>

@@ -36,7 +36,7 @@ written   = "2026-08-14"
 
 !!! The myth carried it, warning included
 
-Rome's ''collegia compitalicia'' tended the crossroads shrines, drawn from freedmen and slaves — and the Senate suppressed them, because a network of people who keep neighbourhood infrastructure alive holds real power. Athens learned the other half in 415 BC: the ''Mutilation of the Herms'' turned on the fact that herms stood everywhere ''unguarded'' — belonging to everyone, watched by no one. <<~ confidence Provisional-Synthesis 7/20 >> Both particulars ride memory rather than an opened source; the design reading survives either way, and the historical claim wants a citation before it hardens.
+Rome's ''collegia compitalicia'' tended the crossroads shrines, drawn from freedmen and slaves — and the Senate suppressed them, because a network of people who keep neighbourhood infrastructure alive holds real power. Athens learned the other half in 415 BC: the ''Mutilation of the Herms'' turned on the fact that herms stood everywhere ''unguarded'' — belonging to everyone, watched by no one. <<~ confidence 7/20 >> Both particulars ride memory rather than an opened source; the design reading survives either way, and the historical claim wants a citation before it hardens.
 
 ''So the Union expects attack as infrastructure.'' Its resilience reads as ''nothing to seize'': no read-caps, no roster, no central register of who tends what.
 
@@ -57,7 +57,7 @@ Rome's ''collegia compitalicia'' tended the crossroads shrines, drawn from freed
 
 ''The word `residency` stands spoken for three times over'' — thermal stowage (`wela`/`anu`), tiddler residency across bags, and which bag a carrier's file lives in. A fourth sense guarantees misroute. ''Name it `OFFICE` (`kuleana`)'': right and burden arriving on one name, and the house already speaks it (`hookupu-the-flow`, `convergent-mesh`).
 
-''An office attaches to the PLACE, never to the person.'' Rome's ''vicomagistri'' held a college seat at a ''compitum''; the office belonged to the vicus, the person rotated through, and the shrine kept standing. <<~ confidence Synthesis 10/20 >>
+''An office attaches to the PLACE, never to the person.'' Rome's ''vicomagistri'' held a college seat at a ''compitum''; the office belonged to the vicus, the person rotated through, and the shrine kept standing. <<~ confidence 10/20 >>
 
 \procedure ~Office(~Type:"" ~Params:"") ~Office <<~Type>> <<~holds `[<~Params>]`>>
 
@@ -91,7 +91,7 @@ So the quorum ''seats'' an office (rare) and the ''renewal rides the lease-epoch
 
 `waking-floor#the-raise-is-a-vessel-layer-act` holds: a quorum's acts sit at ③ and reach ''no vessel's archive'', because a kahu holding shares becomes the collector. An office grant therefore opens nothing by itself.
 
-''The ① answer that survives: an OFFICE KEY, never a persona key.'' A civic vessel mints a Place-DID-rooted office key at establishment; its archive holds that and no human's root. Opening it rides the raise door already standing — the vessel emits a nonce bound to its own epoch head, ''any current office-holder'' signs that, nothing touches disk. A human, yes; ''never THE operator''. That difference carries the whole vicomagistri property. <<~ confidence Synthesis 12/20 >>
+''The ① answer that survives: an OFFICE KEY, never a persona key.'' A civic vessel mints a Place-DID-rooted office key at establishment; its archive holds that and no human's root. Opening it rides the raise door already standing — the vessel emits a nonce bound to its own epoch head, ''any current office-holder'' signs that, nothing touches disk. A human, yes; ''never THE operator''. That difference carries the whole vicomagistri property. <<~ confidence 12/20 >>
 
 ''What it forfeits — unattended sovereign acts — a civic vessel mostly does not need.'' The civic FLOOR runs far larger than a hearth's: relay, public shelf, bulb, map-publish and segment-repair all stand with ''zero secret''. A district's service survives the power cut; only signing waits for a holder.
 
@@ -130,7 +130,7 @@ The `reach` plane already owns that word for foreign app credentials, at ''inver
 
 !!!! ★ FORK SURFACING SURVIVES THE NO-ROSTER LAW; FORK SIZING DOES NOT ★
 
-''Bilateral divergence measures ride roster-free, clock-free, and SHIPPED'' — `git rev-list --left-right --count` returns ahead/behind from two head hashes alone; Automerge head-exchange gives the same primitive over the hash-DAG; XMPP's caps-hash gives it for GRAMMAR, a peer publishing a hash over its own feature surface so a mismatch reads //we parse differently// with no roster anywhere. So //no instrument surfaces a fork// overstates: ''the accurate loss reads NO INSTRUMENT SIZES ONE.'' <<~ confidence Synthesis-Canon 15/20 >>
+''Bilateral divergence measures ride roster-free, clock-free, and SHIPPED'' — `git rev-list --left-right --count` returns ahead/behind from two head hashes alone; Automerge head-exchange gives the same primitive over the hash-DAG; XMPP's caps-hash gives it for GRAMMAR, a peer publishing a hash over its own feature surface so a mismatch reads //we parse differently// with no roster anywhere. So //no instrument surfaces a fork// overstates: ''the accurate loss reads NO INSTRUMENT SIZES ONE.'' <<~ confidence 15/20 >>
 
 ''Mazieres-Shasha names the law under it'': a forked view becomes permanent and surfaces ''only when the forked parties MEET''. No local computation reaches it, and every fork-linearizable construction ''BLOCKS'' — no wait-free version exists, which strains causal-islands harder than the roster law does. Going from //you and I diverged// to //we are two Nexuses now// ranges over the population, and that ''IS a roster wearing another name''.
 
@@ -138,7 +138,7 @@ The `reach` plane already owns that word for foreign app credentials, at ''inver
 
 ''Under a real schism the two groups stop meeting: lag never lengthens, THE SAMPLE VANISHES'' — and silence reads identically to health, the Sword's own law restated. ''The proxy runs blindest exactly where the schism sits.''
 
-Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 50x false-positive under ordinary CPU and network stress · ''Bitcoin Core DELETED'' its version-distribution fork warning as //completely useless// against miners writing garbage into version bits, and never replaced it · ''RFC 8145'' trust-anchor telemetry fired, read ~4% of resolvers stale, ''postponed the DNS root KSK rollover a full year'', and the data proved corrupted at the source. <<~ confidence Canon 17/20 >>
+Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 50x false-positive under ordinary CPU and network stress · ''Bitcoin Core DELETED'' its version-distribution fork warning as //completely useless// against miners writing garbage into version bits, and never replaced it · ''RFC 8145'' trust-anchor telemetry fired, read ~4% of resolvers stale, ''postponed the DNS root KSK rollover a full year'', and the data proved corrupted at the source. <<~ confidence 17/20 >>
 
 ''What a Union genuinely buys, and its ceiling'': a sampled ''grammar-hash histogram'' pooled from MEETINGS (never memberships) · pooled ''divergence DEPTH in the DAG, never delay in time'' · and ''GREASE-shaped continuous probing'' — seeding a well-formed unknown sigil into ordinary traffic so a peer's tolerance of an unknown revision surfaces every meeting, asked before a cadence ships rather than after.
 
@@ -153,7 +153,7 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 <<~moves office-ending -> UNRESOLVED on/the-built-fence if/scoped-per-Nexus do/non-renewal-mass-stales-the-whole-island >>
 <<~moves office-ending -> UNRESOLVED on/the-built-fence if/scoped-per-office do/the-holder-holds-a-writer-slot-and-self-renews-forever >>
 
-''No third position stands in the mechanism as built.'' The fork turns on ONE unruled value — which `resourceId` an office grant passes to `leaseEpochPrefix` — and this carrier declines to pick it. <<~ confidence Synthesis 10/20 >>
+''No third position stands in the mechanism as built.'' The fork turns on ONE unruled value — which `resourceId` an office grant passes to `leaseEpochPrefix` — and this carrier declines to pick it. <<~ confidence 10/20 >>
 
 ''What the epoch rulings DO settle, and they hold firm'': the LEASE epoch (a scalar per-writer max-register) ''fences''; the SEAL epoch (a CID chain) ''records lineage''; ''the two never fuse''; the rolling-window reading stands ''STRUCK'' — a set answers //is this listed// and never //is this newer//, and a list of markers reads as a roster of moments; and ''the NEXUS fences, never the cabal'' — an epoch means nothing outside the island that rolls it.
 
@@ -189,7 +189,7 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 
 !!!! ★ STRUCK — the herm CANNOT witness its own neglect ★
 
-''A draft cured this by having the herm testify //nobody has tended me//, and the field refuses it twice over.'' The herm reads as ''the least credible witness'' to its own neglect AND as ''the exact asset a captured tender holds'' — so that testimony falsifies in both directions: suppression hides real neglect, fabrication manufactures it against a rival crossroads. <<~ confidence Synthesis-Canon 15/20 >>
+''A draft cured this by having the herm testify //nobody has tended me//, and the field refuses it twice over.'' The herm reads as ''the least credible witness'' to its own neglect AND as ''the exact asset a captured tender holds'' — so that testimony falsifies in both directions: suppression hides real neglect, fabrication manufactures it against a rival crossroads. <<~ confidence 15/20 >>
 
 ''NEVER PROVE THE NEGATIVE — invert the direction and let absence stay local'':
 
@@ -206,13 +206,13 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 
 ''A witnessed partial order rides third-party signatures with no shared present'', and `attestation-plane` already carries that ruling: //what the timestamp bought reads as non-repudiable ORDERING, surgical SCOPING, and third-party WITNESS, and all three want a witnessed partial order rather than a shared now//.
 
-''But ordering does not yield ACCRUAL, and the field settled that in 1997.'' The Heartbeat failure detector (Aguilera-Chen-Toueg) emits precisely the proposed instrument — an unbounded monotone counter advanced by witnessed arrivals, no timeouts anywhere — and ''it cannot be thresholded'': every correct party exceeds any fixed bound eventually, so the counter discriminates nothing at a decision point. It buys quiescent reliable communication and derives no failure detector at all. <<~ confidence Synthesis-Canon 15/20 >>
+''But ordering does not yield ACCRUAL, and the field settled that in 1997.'' The Heartbeat failure detector (Aguilera-Chen-Toueg) emits precisely the proposed instrument — an unbounded monotone counter advanced by witnessed arrivals, no timeouts anywhere — and ''it cannot be thresholded'': every correct party exceeds any fixed bound eventually, so the counter discriminates nothing at a decision point. It buys quiescent reliable communication and derives no failure detector at all. <<~ confidence 15/20 >>
 
 ''The counter proves THE WORLD MOVED; it never proves THIS NODE FELL BEHIND'' — and //behind// names a rate, which names a duration. Turning a count into a verdict needs //a willing tender could have acted within R//, which asserts a bound on real elapsed time (Dwork-Lynch-Stockmeyer partial synchrony). ''The threshold lives outside the protocol in every system surveyed'', so under this house's laws it lands with the operator, per contract, bilaterally — never as a mesh-wide law.
 
 ''What survives, and ONLY under one reading'': an ''undeniable ordering claim'' — //the world signed R rounds this node's log never joined// — third-party checkable cold, undisputable by the node it names.
 
-⚠ ''A draft called this //accuracy without completeness//, and that reads BACKWARDS.'' Compare a counter against the maximum observed rather than against a clock and the map yields ''COMPLETENESS WITHOUT ACCURACY'' — a crashed peer's counter freezes and the gap eventually exceeds any K, while a correct-but-slow or partitioned peer lags arbitrarily under asynchrony. That sits in the class already occupied by the detector //suspect everyone, always//: it derives nothing. <<~ confidence Synthesis-Canon 15/20 >>
+⚠ ''A draft called this //accuracy without completeness//, and that reads BACKWARDS.'' Compare a counter against the maximum observed rather than against a clock and the map yields ''COMPLETENESS WITHOUT ACCURACY'' — a crashed peer's counter freezes and the gap eventually exceeds any K, while a correct-but-slow or partitioned peer lags arbitrarily under asynchrony. That sits in the class already occupied by the detector //suspect everyone, always//: it derives nothing. <<~ confidence 15/20 >>
 
 ''So the boundary carries the entire load: a FACT ABOUT THE LOG survives; a fact about the NODE does not.'' //R rounds passed that this log never joined// stands accurate and complete about the log. The instant anyone reads it as this node's health, standing, or intent, it degrades to the trivial detector. Attention: clean. Verdict: never — and not by our restraint, ''by the model''.
 
@@ -226,7 +226,7 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 
 !!!! ★ AND THAT HOLE CLOSES BY THEOREM, never by a design we have not found yet ★
 
-''ACCOUNTABLE LIVENESS'' (Neu et al., ACM CCS 2025) proves it: //no optimally-resilient protocol can be accountably live under partial synchrony//, and no protocol holds safety under partial synchrony while carrying accountable liveness under synchrony. The asymmetry names why: ''liveness violations involve ABSENT messages'' — harder to prove guilt — ''while safety violations involve CONTRADICTORY messages''. <<~ confidence Canon 18/20 >>
+''ACCOUNTABLE LIVENESS'' (Neu et al., ACM CCS 2025) proves it: //no optimally-resilient protocol can be accountably live under partial synchrony//, and no protocol holds safety under partial synchrony while carrying accountable liveness under synchrony. The asymmetry names why: ''liveness violations involve ABSENT messages'' — harder to prove guilt — ''while safety violations involve CONTRADICTORY messages''. <<~ confidence 18/20 >>
 
 ''This house's law sits strictly WEAKER than partial synchrony.'' Therefore ''who neglected this crossroads'' names a ''REFUSED question, never an underspecified one''. Nothing waits to be invented here, and a future sweep re-opening it burns a campaign on a proven impossibility.
 
@@ -256,7 +256,7 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 
 !!! What the field does
 
-''Nothing that carries durable, convergent consequence weights reports into a threshold.'' <<~ confidence Synthesis-Canon 15/20 >>
+''Nothing that carries durable, convergent consequence weights reports into a threshold.'' <<~ confidence 15/20 >>
 
 * ''Tor bad-relays'' — anyone reports; a fixed ''majority'' of directory authorities decides, whatever the volume.
 * ''Ethereum slashing'' — any whistleblower presents; the protocol acts on ''cryptographic evidence'' (two conflicting signatures). One valid proof suffices; a hundred reports never do.
@@ -266,7 +266,7 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 
 ''The one domain that DOES weight reads content moderation'' — and it ships ''report-brigading'' as its standing pathology. It survives there because a takedown ''reverses cheaply''. An antigen reverses at quorum cost, so the analogy does not transfer.
 
-''Reputation-weighting collapses under Sybil pressure, measured rather than theorized'': EigenTrust falls to feedback-cliques, and the collaborative-IDS literature names the same shape ''poisoning''. <<~ confidence Canon 17/20 >>
+''Reputation-weighting collapses under Sybil pressure, measured rather than theorized'': EigenTrust falls to feedback-cliques, and the collaborative-IDS literature names the same shape ''poisoning''. <<~ confidence 17/20 >>
 
 !!! ★ And the structural argument closes it independent of security ★
 
@@ -294,7 +294,7 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 
 !! The tending caps ~ split by REACH, never by body-location
 
-''No design binds a cap to //a human body stood at the box//.'' <<~ confidence Synthesis-Canon 16/20 >> SPIFFE proves ''which node'', never where a hand acted; TPM quotes measure software state and carry no location; TCG physical-presence ships ''software'' methods of asserting the bit; FIDO user-presence proves ''someone touched'', never who. Anything claiming otherwise reads as theatre.
+''No design binds a cap to //a human body stood at the box//.'' <<~ confidence 16/20 >> SPIFFE proves ''which node'', never where a hand acted; TPM quotes measure software state and carry no location; TCG physical-presence ships ''software'' methods of asserting the bit; FIDO user-presence proves ''someone touched'', never who. Anything claiming otherwise reads as theatre.
 
 ''So the split rides two caps named by REACH'':
 
@@ -304,14 +304,14 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 !!! Why the cap, and not the ceremony alone
 
 # ''A ceremony leaves no artifact to non-renew.'' The default death runs by non-renewal, which needs a thing that expires. One cap with two admission rites yields one lease, and the remote half cannot be declined.
-# ''The BMC record shows physical-adjacent planes silently becoming remote planes.'' IPMI, Redfish and the web console frequently share ''one user database''; a 2004-era authentication flaw still exposes hashes pre-authentication on tens of thousands of internet-reachable BMCs, and the field now calls IPMI a //sanctioned backdoor//. <<~ confidence Canon 17/20 >> One "tend" cap distinguished only by rite reproduces that collapse the first time anyone deploys out-of-band management.
+# ''The BMC record shows physical-adjacent planes silently becoming remote planes.'' IPMI, Redfish and the web console frequently share ''one user database''; a 2004-era authentication flaw still exposes hashes pre-authentication on tens of thousands of internet-reachable BMCs, and the field now calls IPMI a //sanctioned backdoor//. <<~ confidence 17/20 >> One "tend" cap distinguished only by rite reproduces that collapse the first time anyone deploys out-of-band management.
 # ''A cap persists as an auditable, presentable object'', where ceremony evidence dies at the moment performed.
 
 ''The ceremony still matters, riding ON TOP.'' It sets ''who may hold''; the cap sets ''what reach opens''. Both, in that order.
 
 !!! ★ PHYSICAL TENDING READS AS DEATH AND REBIRTH, NEVER CONTINUITY ★
 
-Physical access defeats confidentiality and forward integrity of a box outright — evil-maid on the unencrypted pre-boot path, DMA over Thunderbolt/PCIe, cold-boot key recovery from DRAM residue. <<~ confidence Canon 17/20 >>
+Physical access defeats confidentiality and forward integrity of a box outright — evil-maid on the unencrypted pre-boot path, DMA over Thunderbolt/PCIe, cold-boot key recovery from DRAM residue. <<~ confidence 17/20 >>
 
 ''So a herm a hand touched emerges as a NEW identity'' — new key, new epoch — presented for re-admission through the ordinary path. This lands inside the house rather than against it: non-renewal stays the default death, and a re-admission needs no antigen.
 
@@ -343,7 +343,7 @@ Physical access defeats confidentiality and forward integrity of a box outright 
 
 !!!! ★ STRUCK — `operate ⊥ sign` DOES NOT HOLD ★
 
-''The field separates EXTRACTION from USE, and never USE from OPERATE.'' HSM, TPM, KMS and Vault transit all sell non-extraction; ''none withholds key USE from whoever runs the box''. Kubernetes states it flatly — a compromised node yields its own kubeconfig. PKCS#11 role separation falls to attribute manipulation (Clulow, CHES 2003); an HSM's own management surface fell to remote unauthenticated RCE (Black Hat 2019); FIPS 140-3 made the User role ''optional'', so the separation itself became elective. <<~ confidence Canon 17/20 >>
+''The field separates EXTRACTION from USE, and never USE from OPERATE.'' HSM, TPM, KMS and Vault transit all sell non-extraction; ''none withholds key USE from whoever runs the box''. Kubernetes states it flatly — a compromised node yields its own kubeconfig. PKCS#11 role separation falls to attribute manipulation (Clulow, CHES 2003); an HSM's own management surface fell to remote unauthenticated RCE (Black Hat 2019); FIPS 140-3 made the User role ''optional'', so the separation itself became elective. <<~ confidence 17/20 >>
 
 ''And confidential computing rescues nothing on a box a hand can reach.'' TEE.fail (2025) recovers ECDSA attestation keys from Intel's Provisioning Certification Enclave with a sub-$1000 DDR5 interposer, forging quotes that pass attestation. ''A herm stands at a crossroads — physical reach IS its job description.''
 
@@ -367,6 +367,6 @@ Physical access defeats confidentiality and forward integrity of a box outright 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dA7M2Lz5qiYpZa1h1MZlwi81zAka_SZpvudgXyLihNU
+<<^ code:"&#x0003;" >>ni:///sha-256;gDqWg2I0MvL3KD95ggOowk8_mBTaHS6YlESiJshz31E
 
 <<^ code:"&#x0004;" -> ? >>

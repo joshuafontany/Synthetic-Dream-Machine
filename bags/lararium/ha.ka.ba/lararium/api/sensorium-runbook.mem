@@ -38,7 +38,7 @@ written   = "2026-08-04"
 quorum and custody and succession. This rite tends: repeatable, operational, governed by measurement and
 cadence and capacity.
 
-<<~ confidence Synthesis-Canon 15/20 >> ''The distinction that keeps them apart reads as a difference in
+<<~ confidence 15/20 >> ''The distinction that keeps them apart reads as a difference in
 cardinal sin.'' A founding's worst outcome ''loses a key'' and nothing recovers it. A sensorium's worst
 outcome ''loses a baseline'' — and while the corpus always re-pours from its sources, ''a measurement never
 taken cannot be taken later''. A rite built around irreversibility teaches the wrong reflexes for a thing
@@ -77,7 +77,7 @@ disk with a different prefix and a rehearsal never reaches the operator's own pl
 the same string — the TypeScript `larariumDataHome()` and the Python `_lararium_data_home()` — so a holder
 started from either side opens the same store.
 
-<<~ confidence Canon 17/20 >> ''What a rite re-makes decides nothing here; whose it is decides everything.''
+<<~ confidence 17/20 >> ''What a rite re-makes decides nothing here; whose it is decides everything.''
 A Lar wakes, acts and gives way, and `clear`, `bake` and `rebirth` reforge the substrate beneath it whole.
 None of them reach a sensorium, because a sensorium never stood in the spirits' home to begin with. That it
 also survives every founding reads as the ''CONSEQUENCE'' of belonging to the house, never the reason — and
@@ -97,7 +97,7 @@ cross-plane'' — which the code enforces rather than requests.
 | ''structure'' | parse trees (`.structurepalace`) | a structural hash (PATTERN) | a cosheaf-shaped registry — what a SHAPE does across the corpus |
 | ''persistence'' | testimony claims | a claim cid (CLAIM) | a sheaf over the claim base |
 
-<<~ confidence Synthesis-Canon 16/20 >> ''A structure row and a content row live over different
+<<~ confidence 16/20 >> ''A structure row and a content row live over different
 universes.'' A sup-norm between them reads a distance between two worlds and returns a number anyway.
 ''The only road across'' runs the extension map — a structure row's provenance lists the records
 exhibiting that pattern, and the pushforward carries two facts an ad-hoc crossing hides: ''the fiber
@@ -141,7 +141,7 @@ narrow. The tells, in the order they appear:
 * ''Coupling reads honest-insufficient'' rather than low — the instrument names its own starvation, and an
   operator who reads that as a coupling VERDICT has read a missing plane as a finding.
 
-<<~ confidence Synthesis 12/20 >> ''Honest-insufficient reads as the instrument working.'' It carries more
+<<~ confidence 12/20 >> ''Honest-insufficient reads as the instrument working.'' It carries more
 information than a number would; a gauge that returned 0.0 against an unfed plane would have lied.
 
 <<~/ahu >>
@@ -199,7 +199,7 @@ slightly off// long before it presents as a failure.
 * ''Detector'' — open file handles climbing across a long run while work does not. Sample the count
   periodically DURING a pour; a leak reveals itself as a slope, never as a value.
 * ''Cure'' — drain the holders and restart them; the corpus takes no harm.
-* ''Live'' — <<~ confidence Synthesis 11/20 >> this stack currently carries a measured leak (a peak of 593
+* ''Live'' — <<~ confidence 11/20 >> this stack currently carries a measured leak (a peak of 593
   against 1245 at an older wedge point) whose route stands UNKNOWN. A hypothesis that named one file
   rested on that file's own docstring rather than on its code, and dissolved on reading. ''Treat the next
   long pour as the experiment that finds it.''
@@ -253,7 +253,7 @@ declared regime costs less than reconciling the drift.
 
 !!! The measure-first law
 
-<<~ confidence Synthesis-Canon 14/20 >> ''ONE clean before/after boundary exists per re-pour, and it opens
+<<~ confidence 14/20 >> ''ONE clean before/after boundary exists per re-pour, and it opens
 exactly once.'' Instrument BEFORE the teardown or the comparison never becomes available. A pour
 instrumented after the fact requires a second pour to measure, which costs the whole run again and still
 lacks the original state to compare against.
@@ -277,7 +277,7 @@ Run every check before the first deletion:
 
 !!! The movement
 
-<<~ confidence Provisional-Synthesis 7/20 >> ''Command spellings UNVERIFIED as a sequence'' — the verbs
+<<~ confidence 7/20 >> ''Command spellings UNVERIFIED as a sequence'' — the verbs
 below stand confirmed on the MCP roster, and the CLI's own subcommand set reads NARROWER than this
 sequence assumes (#surface-drift). Treat the shape as load-bearing and each spelling as a claim to check.
 
@@ -303,7 +303,7 @@ the working's limits invites the operator to ask for what it cannot give and to 
 
 !!! The ceiling
 
-<<~ confidence Canon 18/20 >> ''`I(target; plane) ≤ H(plane)`'' — exact, and it forbids manufacture. A
+<<~ confidence 18/20 >> ''`I(target; plane) ≤ H(plane)`'' — exact, and it forbids manufacture. A
 plane cannot report more about a target than the plane itself carries. So ''a low reading names a
 capacity limit OR an absence, and the figure alone never distinguishes them.'' An operator who reads a
 ceiling-bound figure as a finding about the world has read the instrument's own entropy.
@@ -328,7 +328,7 @@ one common space. ''Reading it as a single scalar over one substrate mistypes th
   never PUBLISHED as a property (#identity-enacts-relation).
 * ''Reproducibility across a re-pour with different sources.'' Comparability requires a fixed source set;
   a corpus poured from a moved target measures the move.
-* ''Its own ground, by name.'' <<~ confidence Synthesis 12/20 >> The stores carry no identity for the pour
+* ''Its own ground, by name.'' <<~ confidence 12/20 >> The stores carry no identity for the pour
   a reading stands over — no `pour_id`, no corpus version, nothing a second reading could match against.
   So ''two readings taken across a re-pour compare nothing'', however faithfully each got recorded, and
   the gap sits UPSTREAM of any ledger: a baseline needs a ground it can name before it needs a place to
@@ -371,7 +371,7 @@ a movement of this rite rather than a later courtesy:
 
 !! The surface drift ~ measured, and standing open
 
-<<~ confidence Synthesis-Canon 15/20 >> ''The sensorium's verbs live at MCP; the CLI exposes a narrower,
+<<~ confidence 15/20 >> ''The sensorium's verbs live at MCP; the CLI exposes a narrower,
 differently-named set.'' Measured 2026-08-04:
 
 * ''MCP roster'' — `analyze` `couple_r` `flow` `forecast` `jing` `ki` `li` `mismatch` `plane_record` `pour`
@@ -402,7 +402,7 @@ vocabulary rather than the implementer's. Two properties follow, and both matter
   gap an implementer's inventory of exported symbols never shows: a verb may exist at every layer and
   still leave a flow unwalkable.
 
-<<~ confidence Synthesis 11/20 >> ''An unwalked rite reports nothing about the surfaces.'' The list above
+<<~ confidence 11/20 >> ''An unwalked rite reports nothing about the surfaces.'' The list above
 stands measured by reading source, which finds what EXISTS and stays blind to what a flow REQUIRES —
 absence of finding and absence of looking generate identically.
 
@@ -422,6 +422,6 @@ absence of finding and absence of looking generate identically.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1N9zhbuQjwUKCNxhkqwtR_k0RBA5Tw-cPCr3porDIlI
+<<^ code:"&#x0003;" >>ni:///sha-256;6ITcLYZS3VIX_0R2dkPKsr22Q0fEdD9SQPE3Cl89DKA
 
 <<^ code:"&#x0004;" -> ? >>

@@ -48,7 +48,7 @@ A ruler asks for trust and accumulates power against the day trust runs short. A
 
 <<~moves ruler-legitimacy/asks-to-be-trusted -> steward-legitimacy/proves-it-cannot-betray on/published-binding if/k-of-n-and-forkable do/audit-the-structure-not-the-actor >>
 
-So a peer never weighs //"do I trust Amorphous Dreams?"// — it weighs //"can I verify the threshold, the constitution's amendment-width, and the fork-exit?"// <<~ confidence Synthesis 12/20 >> The check moves from a judgement about hidden intent to an audit of visible structure — the same shift the object-capability model makes from ambient trust to explicit edges ([[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]] integrity). A cabal that cannot structurally betray needs no trust to be safe.
+So a peer never weighs //"do I trust Amorphous Dreams?"// — it weighs //"can I verify the threshold, the constitution's amendment-width, and the fork-exit?"// <<~ confidence 12/20 >> The check moves from a judgement about hidden intent to an audit of visible structure — the same shift the object-capability model makes from ambient trust to explicit edges ([[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]] integrity). A cabal that cannot structurally betray needs no trust to be safe.
 
 <<~/ahu >>
 
@@ -76,7 +76,7 @@ The steward keeps a repair hand — the power to sign the zone, re-seed a corrup
 * ''quorum-gated'' — no break-glass fires below the k-of-n floor; one captured holder turns nothing.
 * ''time-delayed for anything constitutional'' — a change to the founding rules waits out a multi-period delay, the way Tezos requires a >80% super-majority sustained across multiple voting periods. The delay gives the wider body time to see, object, and fork.
 
-<<~ confidence Synthesis 11/20 >> The four edges keep break-glass a //repair// primitive, never a //governance// primitive — it restores the system to its own constitution, it never rewrites that constitution unilaterally. A repair hand that could change who-signs would carry the throne back in through the maintenance door.
+<<~ confidence 11/20 >> The four edges keep break-glass a //repair// primitive, never a //governance// primitive — it restores the system to its own constitution, it never rewrites that constitution unilaterally. A repair hand that could change who-signs would carry the throne back in through the maintenance door.
 
 <<~/ahu >>
 
@@ -92,7 +92,7 @@ Every binding above stands on a system that already runs it at scale; the doctri
 * ''Tezos on-chain amendment'' — >80% multi-period super-majority for protocol change; time-delay as a constitutional brace (break-glass time-delay).
 * ''Git / fork-by-construction'' — exit as the ultimate check; a rhizome forks where it disagrees (binding ④).
 
-<<~ confidence Synthesis-Canon 13/20 >> The convergence reads strong: every durable open-governance body that survived capture did so by binding its own founders, not by trusting them. The Amorphous Dreams cabal inherits that lineage rather than improvising against it.
+<<~ confidence 13/20 >> The convergence reads strong: every durable open-governance body that survived capture did so by binding its own founders, not by trusting them. The Amorphous Dreams cabal inherits that lineage rather than improvising against it.
 
 <<~/ahu >>
 
@@ -109,6 +109,6 @@ Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.k
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;trW4YKktoogU9Ec-lH3W2V14-8EWqoyZqvgupkrk3gY
+<<^ code:"&#x0003;" >>ni:///sha-256;3bQPs4nCH9OGOHIrretYzro63NybQm7ISWXlovkOYyE
 
 <<^ code:"&#x0004;" -> ? >>
