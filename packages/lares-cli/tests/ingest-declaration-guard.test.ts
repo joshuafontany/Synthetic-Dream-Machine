@@ -1,7 +1,7 @@
 /**
  * ingest-declaration-guard — a bag's OWN declaration is DISK-OWNED and never becomes a record.
  *
- * Seeded, `iam.mem` would land in the bag's document and then round-trip through the projection — after
+ * Seeded, `meta.mem` would land in the bag's document and then round-trip through the projection — after
  * which a wiki edit could re-home the bag or loosen its cap-tier. A declaration a rendered surface can move
  * is a declaration nothing holds, so the authority stays on disk where `lares bag declare` writes it.
  *

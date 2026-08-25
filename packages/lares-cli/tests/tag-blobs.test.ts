@@ -3,8 +3,8 @@
  *
  * The shore stamps the CAS opt-in flag for carriers that would hit the ungated-large-inline
  * wall at regenesis: a `<file>.meta` sidecar for a standalone file, `_lar_cas = "yes"` on
- * the dominant blob-ahu's iam fence for a meme. A mind-bundle meme (body across many small
- * ahus), an ambiguous split (>1 large ahu), a blob-ahu with no iam fence, and an
+ * the dominant blob-ahu's meta fence for a meme. A mind-bundle meme (body across many small
+ * ahus), an ambiguous split (>1 large ahu), a blob-ahu with no meta fence, and an
  * already-flagged carrier all REPORT rather than mutate. Here we prove the detection reuse,
  * both write shapes, idempotency, and the report-never-guess doctrine.
  */
@@ -20,8 +20,8 @@ const BIG = "x".repeat(70 * 1024);   // over the 64 KiB CAS backstop floor
 const HUGE = "y".repeat(1100 * 1024); // over the 1 MiB oversized-inline wall
 
 const smallAhu = (slot: string) => `<<~ ahu #${slot} >>\n\nshort prose in ${slot}.\n\n<<~/ahu >>\n`;
-const iamAhu = (slot: string, body: string) =>
-  `<<~ ahu #${slot} >>\n\`\`\`toml iam\nrole = "source-text interior"\ntype = "text/markdown"\n\`\`\`\n\n${body}\n<<~/ahu >>\n`;
+const metaAhu = (slot: string, body: string) =>
+  `<<~ ahu #${slot} >>\n\`\`\`toml meta\nrole = "source-text interior"\ntype = "text/markdown"\n\`\`\`\n\n${body}\n<<~/ahu >>\n`;
 const bareAhu = (slot: string, body: string) => `<<~ ahu #${slot} >>\n\n${body}\n<<~/ahu >>\n`;
 
 describe("carrierNeedsTag — reuses the in-tree readiness law", () => {
@@ -43,12 +43,12 @@ describe("carrierNeedsTag — reuses the in-tree readiness law", () => {
 });
 
 describe("tagMemeText — stamp the single dominant blob-ahu", () => {
-  test("one large #source-text ahu with an iam fence → ahu-tagged, and re-scan reads flagged", () => {
-    const meme = smallAhu("meme-header") + iamAhu("source-text", BIG);
+  test("one large #source-text ahu with an meta fence → ahu-tagged, and re-scan reads flagged", () => {
+    const meme = smallAhu("meme-header") + metaAhu("source-text", BIG);
     const { text, kind } = tagMemeText(meme);
     expect(kind).toBe("ahu-tagged");
     expect(text).toContain('_lar_cas = "yes"');
-    // The flag lands INSIDE the source-text iam fence, not the header — and CAS_FLAG_RE reads it.
+    // The flag lands INSIDE the source-text meta fence, not the header — and CAS_FLAG_RE reads it.
     expect(carrierCasFlagged(text)).toBe(true);
     expect(text.indexOf('_lar_cas = "yes"')).toBeGreaterThan(text.indexOf("#source-text"));
   });
@@ -63,16 +63,16 @@ describe("tagMemeText — stamp the single dominant blob-ahu", () => {
   });
 
   test("two large ahus → ambiguous-meme, canon untouched", () => {
-    const meme = iamAhu("source-text", BIG) + iamAhu("appendix", BIG);
+    const meme = metaAhu("source-text", BIG) + metaAhu("appendix", BIG);
     const { text, kind } = tagMemeText(meme);
     expect(kind).toBe("ambiguous-meme");
     expect(text).toBe(meme);
   });
 
-  test("a lone large ahu with NO iam fence → meme-no-iam, canon untouched", () => {
+  test("a lone large ahu with NO meta fence → meme-no-meta, canon untouched", () => {
     const meme = smallAhu("meme-header") + bareAhu("source-text", BIG);
     const { text, kind } = tagMemeText(meme);
-    expect(kind).toBe("meme-no-iam");
+    expect(kind).toBe("meme-no-meta");
     expect(text).toBe(meme);
   });
 });
@@ -128,7 +128,7 @@ describe("tagBlobs — the batch over a mixed carrier set", () => {
       const txt = join(dir, "big.txt");   writeFileSync(txt, HUGE);
       const carriers: TagCarrier[] = [
         { file: txt, text: HUGE, ext: ".txt" },                                    // (a) → .meta
-        { file: join(dir, "one.mem"), text: smallAhu("h") + iamAhu("source-text", HUGE), ext: ".mem" }, // (b) → ahu
+        { file: join(dir, "one.mem"), text: smallAhu("h") + metaAhu("source-text", HUGE), ext: ".mem" }, // (b) → ahu
         { file: join(dir, "bundle.mem"), text: bundle, ext: ".mem" },              // (c) → mind-bundle REPORT
         { file: join(dir, "flagged.txt"), text: HUGE, ext: ".txt", meta: "_lar_cas: yes\n" }, // (d) → skipped by filter
         { file: join(dir, "small.txt"), text: "tiny", ext: ".txt" },               // skipped by filter
