@@ -548,7 +548,7 @@ The iam `register` field names the band a carrier's overall content stands in, o
 
 <<~ranks register provisional@1..4 ~ speculative opening, the play register -> provisional-synthesis@5..8 ~ forming, predication stays scoped and short -> synthesis@9..12 ~ working synthesis, process and relation dominate -> synthesis-canon@13..16 ~ near-settled, stronger declarative survives where grounds show -> canon@17..20 ~ vowed on real grounds, talk-story consensus seats it >>
 
-A band names a region on the continuum, not a discrete bin. ''Temporal grain:'' Provisional moves fast, Synthesis moderate, Synthesis-Canon slower; Canon settles above 17/20 only by talk-story consensus. Abbreviated field values (`"SC"` for Synthesis-Canon) read by their initials.
+A band names a region on the continuum, not a discrete bin; Canon stays reserved for talk-story consensus. Abbreviated field values (`"SC"` for Synthesis-Canon) read by their initials.
 
 !!! The placement law
 
@@ -1057,6 +1057,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gj3DxAfjkWzaZMHjsLOJtb6n4dbfe-Av2b5aj4IYP6k
+<<^ code:"&#x0003;" >>ni:///sha-256;67HfMVq29dnoFkNqYooIwPJeAqJM24fvX7Nk06mHp44
 
 <<^ code:"&#x0004;" -> ? >>
