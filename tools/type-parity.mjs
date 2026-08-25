@@ -19,13 +19,16 @@ const DECL = "packages/lararium-mesh/src/carrier-type.ts";
 
 const decl = readFileSync(join(REPO, DECL), "utf8");
 const canonical = /CARRIER_TYPE = "([^"]+)"/.exec(decl)?.[1];
-const legacy = /CARRIER_TYPE_UNSUFFIXED = "([^"]+)"/.exec(decl)?.[1];
 // The authority builds its declaration from the type constant, so this witness builds the same
 // string the same way rather than string-matching a template it cannot evaluate.
 const declSpec = /DECLARATION[\s\S]{0,120}?(lar:\/\/\/[^\s`"]+)/.exec(decl)?.[1];
-const declaration = declSpec ? `<<!DOCTYPE ${canonical.replace("text/x-", "")} ${declSpec} >>` : null;
-if (!canonical || !legacy) {
-  console.error("[type-parity] carrier-type.ts declares neither name — the declaration moved");
+// MIRRORED FROM THE AUTHORITY, character for character — `DECLARATION` strips `text/`, so this does
+// too. An earlier generation stripped `text/x-`, the provisional prefix RFC 6838 deprecates; against a
+// canonical name that no longer carries it that reconstruction kept the prefix, and the one legitimate
+// inline copy read as a fork of a line it matches exactly.
+const declaration = declSpec ? `<<!DOCTYPE ${canonical.replace("text/", "")} ${declSpec} >>` : null;
+if (!canonical) {
+  console.error("[type-parity] carrier-type.ts names no CARRIER_TYPE — the declaration moved");
   process.exit(1);
 }
 
@@ -49,9 +52,7 @@ const KEYED = [
 const faults = [];
 for (const f of KEYED) {
   const t = readFileSync(join(REPO, f), "utf8");
-  for (const name of [canonical, legacy]) {
-    if (!t.includes(`as "${name}"`)) faults.push([f, `registers no module under "${name}"`]);
-  }
+  if (!t.includes(`as "${canonical}"`)) faults.push([f, `registers no module under "${canonical}"`]);
 }
 
 // EVERY OTHER SITE READS THE DECLARATION. A source file spelling the type inline has forked it.
@@ -64,20 +65,19 @@ for (const f of SOURCES) {
   const t = readFileSync(join(REPO, f), "utf8");
   for (const [i, line] of t.split("\n").entries()) {
     if (line.trimStart().startsWith("*") || line.trimStart().startsWith("//")) continue;  // prose
-    if (line.includes(`"${canonical}"`) || line.includes(`"${legacy}"`)) inline.push([`${f}:${i + 1}`, line.trim().slice(0, 90)]);
+    if (line.includes(`"${canonical}"`)) inline.push([`${f}:${i + 1}`, line.trim().slice(0, 90)]);
   }
 }
 
-// AND THE CORPUS. A carrier declares its own type in its meta block; both spellings read, and which one a
-// carrier carries says when it was written — reported, never failed, because rewriting a carrier's
-// type re-addresses it wherever a store addresses carriers by their bytes.
+// AND THE CORPUS. A carrier declares its own type in its own meta block. Reported, never failed:
+// rewriting a carrier's type re-addresses it wherever a store addresses carriers by their bytes, so a
+// census belongs in a reading rather than in a gate.
 const carriers = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
   .split("\n").filter(Boolean);
-let suffixed = 0, unsuffixed = 0, neither = 0;
+let declared = 0, neither = 0;
 for (const f of carriers) {
   const t = readFileSync(join(REPO, f), "utf8");
-  if (t.includes(`= "${canonical}"`)) suffixed++;
-  else if (t.includes(`= "${legacy}"`)) unsuffixed++;
+  if (t.includes(`= "${canonical}"`)) declared++;
   else neither++;
 }
 
@@ -98,12 +98,12 @@ if (declaration) {
   }
 }
 
-console.log(`[type-parity] canonical "${canonical}" · also read "${legacy}"`);
+console.log(`[type-parity] one spelling: "${canonical}"`);
 if (declFaults.length > 0) {
   console.log(`  a source spells a DOCTYPE that differs from the one authority:`);
   for (const [where, lit] of declFaults) console.log(`    ${where}\n      ${lit}`);
 }
-console.log(`  corpus: ${suffixed} suffixed · ${unsuffixed} on the earlier name · ${neither} declaring neither`);
+console.log(`  corpus: ${declared} declaring it · ${neither} declaring none`);
 
 if (inline.length > 0) {
   console.log(`  a source spells the type inline instead of reading the declaration:`);
@@ -112,7 +112,7 @@ if (inline.length > 0) {
 for (const [f, why] of faults) console.log(`  ${f} ${why}`);
 
 if (inline.length + faults.length + declFaults.length === 0) {
-  console.log("  one declaration, and every dispatch key registers both names");
+  console.log("  one declaration, and every dispatch key registers it");
   process.exit(0);
 }
 console.log("  Read `carrier-type.ts`; a literal here is the fork, not the mismatch it becomes later.");
