@@ -519,6 +519,10 @@ Interoperability:          degrades to readable text in a plain viewer;
 Published specification:   this document (lar:///…/api/pono/memetic-wikitext)
 Applications:              Lararium nodes (federated wiki devices); TiddlyWiki 5; mesh tooling
 File extension:            .mem (carrier form), .tid (runtime widget/procedure)
+Intended usage:            COMMON
+Restrictions on usage:     none
+Contact:                   Joshua Fontany <joshua.fontany@gmail.com>
+Author/Change controller:  Joshua Fontany
 ```
 
 ''The `text` tree holds on measured bytes.'' A carrier presents legibly in a plain viewer end to end:
@@ -669,6 +673,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;q55BApADV3r1cz8q2n2pCeP3ArNpXq4yvSx7mkL5fhg
+<<^ code:"&#x0003;" >>ni:///sha-256;F5cjkQ-zm40PWsnnL3xGDv__2lF2rfoq04zg7bKFoAM
 
 <<^ code:"&#x0004;" -> ? >>

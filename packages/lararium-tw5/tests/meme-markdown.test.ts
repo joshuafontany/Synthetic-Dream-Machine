@@ -103,6 +103,13 @@ describe("the submission projection", () => {
     expect(p.markdown).toContain("''unrendered''");
   });
 
+  test("a sigil spanning lines travels whole, fenced", () => {
+    const src = "<<~ranks register a ~ one\n  -> b ~ two\n  -> c ~ three >>\nprose after\n";
+    const t = transposeMarkdown(src);
+    expect(t.markdown).toContain("```\n<<~ranks register a ~ one\n  -> b ~ two\n  -> c ~ three >>\n```");
+    expect(t.markdown).toContain("prose after");
+  });
+
   test("the projection is deterministic", () => {
     const again = projectSubmission(CARRIER);
     expect(again.markdown).toBe(p.markdown);

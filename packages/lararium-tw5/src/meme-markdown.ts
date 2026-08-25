@@ -103,6 +103,7 @@ export function transposeMarkdown(text: string): { markdown: string; uri?: strin
   let uri: string | undefined;
   let check: string | undefined;
   let tableRow = 0;         // rows emitted in the current table run
+  let sigilBuf: string[] | null = null;  // a line-spanning sigil, gathered whole
 
   for (const line of text.split("\n")) {
     const fenceMark = /^(`{3,})/.exec(line);
@@ -133,6 +134,17 @@ export function transposeMarkdown(text: string): { markdown: string; uri?: strin
     const etx = ETX_LINE.exec(line);
     if (etx) { check = check ?? etx[1]; continue; }
     if (FRAME_LINE.test(line) || DOCTYPE_LINE.test(line)) continue;
+
+    // ── a sigil spanning lines travels whole, shown literally in a fence ──
+    if (sigilBuf) {
+      sigilBuf.push(line);
+      if (/ >>\s*$/.test(line)) {
+        out.push("```", ...sigilBuf, "```");
+        sigilBuf = null;
+      }
+      continue;
+    }
+    if (/^<<[~^]/.test(line) && !/>>/.test(line)) { sigilBuf = [line]; continue; }
 
     // ── sigils with a markdown shape ──
     const ahu = AHU_OPEN.exec(line);

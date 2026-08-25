@@ -279,8 +279,9 @@ Encoding considerations:   ASCII only in the path; pct-encoding per RFC 3986
 Interoperability:          names, does not dereference over a network; an
                            unknown resolver treats a lar: URI as an opaque name
 Security considerations:   see #security
-Contact:                   the operator (canon authority)
-Author/Change controller:  this document (lar:///…/api/pono/lar-uri)
+Contact:                   Joshua Fontany <joshua.fontany@gmail.com>
+Author/Change controller:  Joshua Fontany; specification of record:
+                           this document (lar:///…/api/pono/lar-uri)
 References:                 RFC 3986, RFC 4151, RFC 7595; [MWT], [PRANALA]
 ```
 

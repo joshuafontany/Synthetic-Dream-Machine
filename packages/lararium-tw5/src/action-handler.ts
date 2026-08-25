@@ -353,8 +353,13 @@ export function registerActionReactors(table: VerbTable, opts: ActionHandlerOpti
       const rec = await store.get(t);
       if (rec) group.set(t, rec.tiddler as unknown as TiddlerFields);
     }
+    if (group.size === 0) {
+      throw new Error(
+        `PROJECT-MD: no records under ${title} in ${bag} — the ACTIVE wiki composes a different` +
+        ` shelf than the one this address lives on, or the bag name is wrong (check \`wiki active\`)`);
+    }
     const whole = expandMemeRefs((t) => group.get(t), title);
-    if (!whole) throw new Error(`PROJECT-MD: ${title} does not recompose as a carrier`);
+    if (!whole) throw new Error(`PROJECT-MD: ${title} does not recompose as a carrier (${group.size} record(s) present — the parent record or its type may be missing)`);
     const out = projectSubmission(whole, { uri: title });
     return { verb: "PROJECT-MD", uri: out.uri, check: out.check, markdown: out.markdown, meta: out.meta };
   });

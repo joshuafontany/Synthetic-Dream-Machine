@@ -471,6 +471,10 @@ Interoperability:          degrades to readable text in a plain viewer;
 Published specification:   this document (lar:///…/api/pono/memetic-wikitext)
 Applications:              Lararium nodes (federated wiki devices); TiddlyWiki 5; mesh tooling
 File extension:            .mem (carrier form), .tid (runtime widget/procedure)
+Intended usage:            COMMON
+Restrictions on usage:     none
+Contact:                   Joshua Fontany <joshua.fontany@gmail.com>
+Author/Change controller:  Joshua Fontany
 ```
 
 **The `text` tree holds on measured bytes.** A carrier presents legibly in a plain viewer end to end:

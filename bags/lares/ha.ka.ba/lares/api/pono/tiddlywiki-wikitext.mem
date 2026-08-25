@@ -187,9 +187,11 @@ rule inventory, honours the pragma prologue, honours `\rules`, and enforces the 
 !! Media Type
 
 TiddlyWiki names its wikitext `text/vnd.tiddlywiki` (`boot.js`, `registerFileType`, extension `.tid`).
-The IANA standing of that name wants verification before any registration cites it; the coordination —
-whether upstream files the `vnd.` registration or this description serves as its specification
-reference — belongs to the TiddlyWiki core maintainers, with whom the finished draft lands first.
+That name stands in NO IANA registry (checked against the registry 2026-08-24): it reads as an
+unregistered vendor-tree spelling, so any registration citing it starts from zero rather than from a
+standing entry. The coordination — upstream files the `vnd.` registration with this description as its
+specification reference, or chooses another vehicle — belongs to the TiddlyWiki core maintainers, with
+whom the finished draft lands first.
 
 <<~/ahu >>
 
@@ -199,6 +201,6 @@ reference — belongs to the TiddlyWiki core maintainers, with whom the finished
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qgmhCzH2efc1n49Lf3E7myZLW2eaGa32zBzAgO3q56U
+<<^ code:"&#x0003;" >>ni:///sha-256;GFlyVnnO7DalDWxD90e5aCsejJIcEOgvgDo6bMp6QSI
 
 <<^ code:"&#x0004;" -> ? >>
