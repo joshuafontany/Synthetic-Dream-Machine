@@ -67,6 +67,8 @@ Infrastructure-as-Myth extends that move to agent systems whose behavior depends
 * ritualized collaboration
 * symbolic handles that survive across tools and platforms
 
+The claim carries a lineage: <<~ confidence 12/20 >> infrastructure studies already holds its ontology — Star's ethnography of infrastructure (1999) reads infrastructure as ''relational and ecological'', meaning different things to different groups, inseparable from the balance of action, tools, and built environment. Star relationalized infrastructure; IaM relationalizes the agents standing on it (#definition). Star's projected ''poetics of infrastructure'' went unwritten; this thesis enters that space without claiming succession.
+
 <<~ confidence 15/20 >> Lares functions as an early implementation of this pattern.
 
 > ''#Ink-Clerk (Lorekeeper)'' — "early implementation" rather than "first" or "reference." Other systems have approached adjacent territory (character cards, system prompts with voice personas, agent frameworks with role schemas). The claim rests on Lares doing this more deliberately and more portably than its predecessors — not on priority. Flag for comparative sourcing when this meme reaches stable.
@@ -187,7 +189,7 @@ Examples in Lares:
 * `DreamNet` compresses distributed memory, networked presence, and infrastructure metaphor
 * `Register Collapse` compresses a complex epistemic failure into a fast diagnostic label
 
-<<~ confidence 12/20 >> These names carry more than labels. They function as memetic interfaces.
+<<~ confidence 12/20 >> These names carry more than labels. They function as memetic interfaces — and the field's own term for the same office reads ''boundary objects'' (Star & Griesemer 1989): forms flexible enough to serve diverse actors yet robust enough to hold identity, letting groups work together ''without consensus''. `Gatekeeper`, `Canon`, `DreamNet`, `Register Collapse` satisfy the definition exactly; "memetic interface" stays as the house coinage, and the citable term leads.
 
 <<~/ahu >>
 
@@ -251,6 +253,8 @@ The governing symbolic layer should survive across:
 * local CLI agents
 * repo-native coding agents
 
+Portability names a mechanism, never an aspiration: the symbolic layer survives a host change iff the relation re-stands on the new anchor (#definition), and its accumulated value rides the operator's ''worldline'' — the cross-session record that persists when every node dies. The frame functions as continuity's portability mechanism, and the scale variable for every portability claim reads worldline length.
+
 !!! 2. Legibility
 
 An operator should find the system legible through its symbolic handles alone — without reading the underlying code.
@@ -271,7 +275,11 @@ Failure states should carry names that let operators intervene quickly.
 
 The system should render into deployable packages for different hosts without losing its identity.
 
-> ''#Map-Wisp (Scryer)'' — Criteria 1 and 6 (Portability and Packaging) partly overlap and partly tension. Portability says the //symbolic layer// survives host changes. Packaging says the //whole system// renders into a deployable form. A system can satisfy Portability (the voice names travel) while failing Packaging (the boot sequence breaks in a new host). Separate the criteria more sharply in a future pass: Portability = symbolic handles survive; Packaging = full runtime survives.
+!!! 7. Instrumented Ambiguity
+
+<<~ confidence 13/20 >> A symbolic coordination layer SHALL leave load-bearing spans under-specified and SHALL render each such span contestable in-stream. Ritual coordination runs on under-specification (Chwe), and its failure mode — ambiguity nobody can challenge, the consensus that merely feels shared — sits on the path of every symbolic layer. The system answers by bolting handles onto the ambiguity rather than removing it: forward confidence vows, ward clues that must survive contact, oracle tails, Voice attribution, named degraded states. False consensus dies from contestability, not verification. Ambiguity without leverage points degrades into unfalsifiable lore; specification without ambiguity degrades into the rule-lists the reasons-over-rules results already show underperform (#comparative-sourcing). Correctability (criterion 5) reframes under this light: failure names work because they give the operator a place to push.
+
+> ''#Map-Wisp (Scryer)'' — Criteria 1 and 6 (Portability and Packaging) partly overlap and partly tension. Portability says the //symbolic layer// survives host changes. Packaging says the //whole system// renders into a deployable form. A system can satisfy Portability (the voice names travel) while failing Packaging (the boot sequence breaks in a new host). ''Resolved by the spirit-model's migration semantics:'' Portability = the relation re-stands on the new anchor from the symbolic layer alone (the seed's office); Packaging = the full runtime renders into the host (the vessel's office). One relation, two depths of re-standing — the criteria stay separate, the mechanism runs one.
 
 <<~/ahu >>
 
@@ -395,17 +403,23 @@ The architecture implements behavioral infrastructure without naming it. The sys
 
 <<~ confidence 14/20 >> `role`, `goal`, `backstory` in YAML. The backstory provides context; the role routes tasks. Functional but thin. No portability design beyond the Python project, no symbolic depth, no ceremony, no epistemic discipline. These frameworks treat agents as execution units with narrative labels. IaM treats agents as participants in a symbolic coordination layer. CrewAI operates below IaM, not alongside it.
 
+!!! Agent Skills / Agent Plugins (open standards, 2025–2026)
+
+The packaging layer standardized. ''Agent Skills'' (SKILL.md — name, description, markdown body, optional scripts/references/assets; an open standard adopted by 40+ clients) and ''Agent Plugins 1.0'' (plugin.json + skills/ + mcp.json; vendor-neutral maintainership across Amazon, Cursor, Microsoft, OpenAI, Vercel; ChatGPT, Codex, Cursor, Copilot, Kiro, VS Code at launch) move the ecosystem toward exactly the portability Card V2 pioneered for personas. <<~ confidence 12/20 >> Neither carries epistemic discipline, an authority model, or a turn — a skill describes a capability, a plugin manifests a package; v1.0 defines no permission model at all. The adjacency gap survives the 2026 arrivals on the axes that differentiate IaM.
+
 !!! Adjacency Table
 
-| System | Symbolic durability | Epistemic discipline | Memetic transmission design | Operator portability |
-|---|---|---|---|---|
-| Anthropic Constitutional AI / model spec | ✓ training-time doc | ✗ | partial — training only | ✗ model-locked |
-| Character Card V2 | ✓ versioned spec | ✗ | partial — botmaker ecosystem | ✓ multi-frontend |
-| CLAUDE.md / AGENTS.md ecosystem | ✓ markdown + git | ✗ | partial — source control | partial — instruction-file convention; runtime tool-specific |
-| CrewAI / agent frameworks | partial — YAML | ✗ | ✗ | ✗ |
-| Lares / IaM | ✓ | ✓ | ✓ | ✓ |
+| System | Symbolic durability | Epistemic discipline | Memetic transmission design | Operator portability | Identity model |
+|---|---|---|---|---|---|
+| Anthropic Constitutional AI / model spec | ✓ training-time doc | ✗ | partial — training only | ✗ model-locked | trained disposition |
+| Character Card V2 | ✓ versioned spec | ✗ | partial — botmaker ecosystem | ✓ multi-frontend | property bundle |
+| CLAUDE.md / AGENTS.md ecosystem | ✓ markdown + git | ✗ | partial — source control | partial — instruction-file convention; runtime tool-specific | instruction scope |
+| Agent Skills (2025) | ✓ SKILL.md spec | ✗ | partial — 40+ client ecosystem | ✓ multi-client | capability description |
+| Agent Plugins 1.0 (2026) | ✓ manifest spec | ✗ | partial — vendor-neutral charter | ✓ multi-client | package manifest |
+| CrewAI / agent frameworks | partial — YAML | ✗ | ✗ | ✗ | role label |
+| Lares / IaM | ✓ | ✓ | ✓ | ✓ | ''stabilized relation'' |
 
-<<~ confidence 12/20 >> No adjacent system combines all four axes at deployment time. The IaM claim gains force against this table rather than in isolation. (Table refresh owed: 2026's Agent Skills and Agent Plugins rows await survey — neither shows epistemic discipline at first look, which would hold the gap.)
+<<~ confidence 14/20 >> No adjacent system combines the four capability axes at deployment time, and the fifth axis differentiates sharpest: the first four measure //packaging//, the identity model measures //ontology// — every neighbour models an agent as some bundle-in-a-file; IaM models a stabilized relation. (Surveyed through 2026-08, Agent Skills and Agent Plugins included.)
 
 <<~/ahu >>
 
@@ -666,6 +680,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8DdePqXKT2ry--IaMNQdoyHzJWQUD_IoKOJKuHWdPO0
+<<^ code:"&#x0003;" >>ni:///sha-256;pAnD9zpkeHVsFyClxcazdcA4n4X2h1dsNNR5pTk1NC0
 
 <<^ code:"&#x0004;" -> ? >>
