@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for archive crystals, continuity mechanisms, prospective MemPalace work, and MCP-backed session carry"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/crystal"
 ```
 

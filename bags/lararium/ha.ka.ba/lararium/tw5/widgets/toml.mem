@@ -13,7 +13,7 @@ retain        = true
 role          = "anchor: TomlWidget — heleuma ka"
 source-symbol = "TomlWidget"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/toml", "tw5/modules/tw5-widgets"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/toml"
 ```
 

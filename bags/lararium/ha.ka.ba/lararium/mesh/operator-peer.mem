@@ -13,7 +13,7 @@ register  = "Synthesis"
 retain    = true
 role      = "Canonical operator-vessel contract: two-lane VM pool law, shared command/receipt surface, ea sovereignty model"
 tags      = ["mesh/lar-vessel", "mesh/causal-island"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/operator-peer"
 ```
 

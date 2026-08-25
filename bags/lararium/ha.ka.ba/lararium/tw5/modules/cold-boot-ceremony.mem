@@ -16,7 +16,7 @@ role          = "heleuma ka: void-start device identity tiddler builder — titl
 source-symbol = "*"
 status-date   = "2026-05-04"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/heleuma/ka"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
 ```
 

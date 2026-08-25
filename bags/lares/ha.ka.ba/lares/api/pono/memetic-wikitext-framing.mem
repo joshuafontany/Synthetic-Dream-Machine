@@ -16,7 +16,7 @@ revision-note = "stood up at the split: the transmission-frame half of the langu
 role          = "submittable specification for the memetic carrier frame — the declaration register, the SOH/STX/ETX/EOT control set, the ni:/// block check, canonical form, carriage, the health gradient, and frame security. The language it frames rides the sibling memetic-wikitext spec; the address rides lar-uri"
 status        = "standing"
 status-why    = "submission-draft"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext-framing"
 ```
 
@@ -203,9 +203,9 @@ the tiddler's `type:` field, and the `type` line in every carrier's iam block. O
 the DOCTYPE says WHICH GRAMMAR READS THIS, the `type` field says WHAT THIS IS TO A TRANSPORT. Folding
 the media type into the DOCTYPE slot would put both under one name for no gain.
 
-''The media type follows the same suffix'' ([MEMETIC-WIKITEXT] #media-type): `text/x-memetic-wikitext+tiddlywiki`. The
-`x-` marks the subtype unregistered with IANA and drops on registration; the suffix does not — it
-states a structural fact about the syntax and holds whatever the subtype is called.
+''The media type follows the same suffix'' ([MEMETIC-WIKITEXT] #media-type): `text/memetic-wikitext+tiddlywiki`.
+The suffix states a structural fact about the syntax and holds whatever the subtype is called; the
+earlier `x-` spellings file as deprecated read-side aliases there.
 
 <<~/ahu >>
 
@@ -1057,6 +1057,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;67HfMVq29dnoFkNqYooIwPJeAqJM24fvX7Nk06mHp44
+<<^ code:"&#x0003;" >>ni:///sha-256;y4Xj8WfFik-Y5e2Dgz38sKmfc9SDCNJ39odH_Q9OssI
 
 <<^ code:"&#x0004;" -> ? >>

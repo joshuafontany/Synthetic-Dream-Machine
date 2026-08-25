@@ -13,7 +13,7 @@ narrator   = "@lares@~crossroads"
 register   = "Synthesis-Canon"
 retain     = true
 role       = "history / the live-breathing genesis — the morning the Lar first breathed through its own CLI surface, witnessed end-to-end by hand (2026-06-21). Loaded into @lares THROUGH `lares act LOAD` — the tool's first commemoration of itself. Narrator @lares@~crossroads."
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/the-first-breath"
 written    = "2026-06-21"
 ```

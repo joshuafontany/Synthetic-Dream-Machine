@@ -12,7 +12,7 @@ retain    = true
 role      = "FTLS card projection: Porter's Pebble — an item that carries the Floating Disc Power; card shows the nested Power as a clickable doorway"
 tags      = ["mount-points/item", "components/domain/stuckforce"]
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble"
 ```
 

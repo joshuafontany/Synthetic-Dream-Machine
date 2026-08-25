@@ -6,7 +6,7 @@ bag       = "lares-history"
 cap-tier  = "personagroup"
 home      = "repository"
 repository = "synthetic-dream-machine"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 ```
 
 ! @lares-history

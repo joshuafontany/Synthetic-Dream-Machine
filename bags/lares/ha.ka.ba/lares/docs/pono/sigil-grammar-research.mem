@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
 tags      = ["api/pono/memetic-wikitext"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-grammar-research"
 ```
 

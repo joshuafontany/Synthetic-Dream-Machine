@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "faction meme — the Lamplighters' Union: herm-tenders of the dark roads, holders of the offworld lamp-infrastructure that reaches the void lanes, the Lagrange Chorus, Grandmother Spider — and the Lamplights"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/lamplighters-union"
 ```
 

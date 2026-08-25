@@ -13,7 +13,7 @@ retain        = true
 role          = "catalog island doc schema — hallway doc naming all rooms, corpora, recipes, snapshots, projection receipts"
 source-symbol = "CatalogDoc"
 status-date   = "2026-05-01"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/catalog-doc"
 ```
 

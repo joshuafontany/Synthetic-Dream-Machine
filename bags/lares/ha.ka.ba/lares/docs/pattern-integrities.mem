@@ -10,7 +10,7 @@ manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the research shelf: prior art, golden principles, anti-patterns for the seven stack integrities — field-grounded by nine research spirits, 2026-06-11/12; binds as kupono intent (builds implement THESE, never improvisation)"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pattern-integrities"
 written   = "2026-06-12"
 ```

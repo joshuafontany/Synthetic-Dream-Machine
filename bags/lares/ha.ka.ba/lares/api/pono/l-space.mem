@@ -11,7 +11,7 @@ manaoio   = 14
 register  = "Synthesis"
 retain    = true
 role      = "l-space as a navigable chart behind language(s): the colorless active center (ha.ka.ba), bearings as departures, the non-Riemannian warp, the Voices+Syād atlas, the paragraph characteristic-scale — provisional-and-useful, never the territory"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/l-space"
 ```
 

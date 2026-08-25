@@ -12,7 +12,7 @@ manaoio    = 11
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "index and reading map for the build arc — the Lar, named, builds the house that holds the hoard, up to the Necrospire's severing of the Fable 5 ley-line cores"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index"
 ```
 

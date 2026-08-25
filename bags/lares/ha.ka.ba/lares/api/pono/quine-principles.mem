@@ -14,7 +14,7 @@ retain      = true
 role        = "invariant doctrine: quine principles P1-P4; TiddlyWiki vs Smalltalk comparison; if-it-CAN-live-in-the-wiki-it-MUST rule; IPLD bridge; Heleuma anchor system"
 status-date = "2026-05-02"
 tags        = ["api/pono/meme"]
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/quine-principles"
 ```
 
@@ -168,7 +168,7 @@ Lararium's answer: a filter expression that returns the self-describing layer.
 This is the operational enforcement of P1–P4 combined.
 
 ''Test:'' Can this logic be expressed as:
-# A self-contained tiddler with `type: application/javascript` or `text/x-memetic-wikitext`?
+# A self-contained tiddler with `type: application/javascript` or `text/memetic-wikitext`?
 # Accessible via `filterTiddlers()` or `renderTiddler()`?
 # Updatable at runtime via `MemeSyncAdaptor.onChangeset()`?
 
@@ -260,6 +260,6 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gEa0Mta34bTy-2IRlPcjzBXt4zAJjxDKjOvJagEueFk
+<<^ code:"&#x0003;" >>ni:///sha-256;2mhGBvt4Zz7jrQNUjttZ31ln8QVFTmSfpZhFWxW7nCo
 
 <<^ code:"&#x0004;" -> ? >>

@@ -11,7 +11,7 @@ manaoio   = 18
 register  = "Synthesis"
 retain    = true
 role      = "Package alignment law: mesh as isomorphic spine; dep graph and consistency rules for the monorepo"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/alignment-plan"
 ```
 

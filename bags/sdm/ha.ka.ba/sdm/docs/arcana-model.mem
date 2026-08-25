@@ -13,7 +13,7 @@ rating     = "meme"
 register   = "Synthesis"
 retain     = true
 role       = "the Arcana model — thirteen rooms as verbs-of-will and axes-of-system, the guard-law, the charters, the walk order, and the word-sense laws that keep Arcana/module from blurring"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/docs/arcana-model"
 ```
 

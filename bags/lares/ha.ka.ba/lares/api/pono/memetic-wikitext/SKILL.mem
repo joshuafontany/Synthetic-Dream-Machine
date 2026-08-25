@@ -20,7 +20,7 @@ retain             = true
 role               = "memetic-wikitext operational skill — authoring, compression, audit, and companion-meme split discipline"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/memetic-wikitext"
 tags               = ["api/pono/meme", "api/pono/loci"]
-type               = "text/x-memetic-wikitext+tiddlywiki"
+type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 ```
 

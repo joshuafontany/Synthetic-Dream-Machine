@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "8k project instructions seed for a cold lararium node; points to the full noosphere boot meme"
 tagspace  = "stable"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/noosphere-project-instructions"
 ```
 

@@ -3,7 +3,7 @@
 <<^ code:"&#x0001;" ? -> lar:///last-sprint/HANDOFF >>
 ```toml iam
 file-path = "bags/lares-history/last-sprint/HANDOFF.mem"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/HANDOFF"
 ```
 
@@ -63,7 +63,7 @@ stay TW5-conventional. Dual-distribution build emits both
 E.10.14 (Path A): Wikirule split into three canonical TW5
 module-type:wikirule files (lar-sigil-block, lar-sigil-inline,
 lar-doctype-comment) + shared helpers. Parser exports as
-`{ MemeticParser as "text/x-memetic-wikitext" }` per TW5 wiki.js
+`{ MemeticParser as "text/memetic-wikitext" }` per TW5 wiki.js
 convention. Widgets self-`require`("$:/core/.../widget.js"), set
 prototype chain, export under tag name. Plugin loader unpacks via
 canonical `$tw.modules.applyMethods` flow. Smoke (in-process) green.
@@ -454,7 +454,7 @@ lares act MOVE <uri> --to <target-bag>
 * ''ContactCard transport.'' JSON via `toJson`/`fromJson`, wrap with TextEncoder. NOT bytes — alpha.56c doesn't expose `toBytes` for ContactCard.
 * ''Cap-event home: D4.a — inside the bag's own Automerge doc'' (TW5-native, decided post-research). Title shape `lar:///{bag-uri}/cap/{event-id}`, tag `$:/tags/CapEvent` (sub-tags `.../Prekey`, `.../Cgka`, `.../Delegation`, `.../Revocation`). Reasons: bags are TW5 policy boundaries, not performance boundaries; cap events MUST share the bag's sync surface (peer with bag but not cap log can't validate writes); Automerge has no cross-doc atomicity; TW5's own pattern co-locates high-churn runtime metadata (history, state, drafts) with content via `$:/` + tag, not via separate bag. Companion-doc shape is reserved for future //performance// tuning if cap-event volume crosses a threshold.
 * ''TW5 system-namespace boundary (E.10.13).'' Every Lares system tiddler TITLE lives in `lar:///`: cascade configs (`lar:///config/Lar/...`), global mounts (`lar:///mounts/...`), templates (`lar:///ha.ka.ba/lararium/templates/...`), plugin envelopes (`lar:///plugins/lares/...`). Tag VALUES stay TW5-conventional `$:/tags/...` — tag values are not titles, do not intersect the sync filter, and let cascade entries plug into TW5's standard tag-discovery path. Drafts, ephemeral UX state, and shadow-tiddler defaults stay browser-local in `$:/` by design. For drag-and-drop community distribution, `$:/plugins/...` envelopes MAY re-emit the same plugin module code; canonical signature lives in the `lar:///` form. Decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md` (TW5 System Boundary section).
-* ''Plugin-tiddler boot path (E.10.13).'' TW5Engine boots by pushing one envelope tiddler — `lar:///plugins/lares/memetic-wikitext` — into `preloadTiddlers`. The standard `$tw.modules` flow registers wikirule, parser, deserializer, and widget modules; cascade configs, templates, and the `<$lar-meme-split>` global mount materialize as shadow tiddlers. No imperative widget/parser/wikirule registration code remains. Parsers instantiate via the canonical TW5 construction path (not a hand-rolled prototype-chain dance). Do not reintroduce imperative `parsers["text/x-memetic-wikitext"] = ...` mutations.
+* ''Plugin-tiddler boot path (E.10.13).'' TW5Engine boots by pushing one envelope tiddler — `lar:///plugins/lares/memetic-wikitext` — into `preloadTiddlers`. The standard `$tw.modules` flow registers wikirule, parser, deserializer, and widget modules; cascade configs, templates, and the `<$lar-meme-split>` global mount materialize as shadow tiddlers. No imperative widget/parser/wikirule registration code remains. Parsers instantiate via the canonical TW5 construction path (not a hand-rolled prototype-chain dance). Do not reintroduce imperative `parsers["text/memetic-wikitext"] = ...` mutations.
 * Chapel-perilous-opens removed; unstable URIs resolve as virtual until promoted to a stable @-scope
 * Admin URI shape: room URI vs bag URI distinction is intentional
 * Bag-mirror configs live in admin room (operator-private, federates to operator devices only)
@@ -465,6 +465,6 @@ lares act MOVE <uri> --to <target-bag>
 
 //The crystal holds.//
 
-<<^ code:"&#x0003;" >>ni:///sha-256;x3WYHd_QhFLB9jokhKmeyZE3rHxmgSh4q9M6X9eJf9Y
+<<^ code:"&#x0003;" >>ni:///sha-256;HY2_ny3KVITQEB4PccNGuda5A5O6aJvQ8BxcP3J9o9U
 
 <<^ code:"&#x0004;" -> ? >>

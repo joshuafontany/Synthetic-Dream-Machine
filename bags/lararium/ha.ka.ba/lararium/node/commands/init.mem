@@ -10,7 +10,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe init.ts"
 source-file = "packages/lararium-node/src/commands/init.ts"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/node/commands/init"
 ```
 

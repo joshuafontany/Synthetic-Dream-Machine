@@ -13,7 +13,7 @@ role               = "vendor declaration: Streams plugin by Saq Imtiaz — hiera
 tags               = ["api/pono/meme"]
 tw5-plugin-id      = "$:/plugins/sq/streams"
 tw5-plugin-version = "1.2.24"
-type               = "text/x-memetic-wikitext+tiddlywiki"
+type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/vendor/sq-streams"
 ```
 

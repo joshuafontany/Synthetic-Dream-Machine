@@ -11,7 +11,7 @@ manaoio   = 15
 register  = "Synthesis-Canon"
 retain    = true
 role      = "DreamNet two-axis mesh topology: INFRA (relay-floor → lararium → nexusGroup → DreamNet) ⊥ SOCIAL (vessel-key → personaGroup-veiled → cabalGroup), the two axes crossing at the vessel"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/dreamnet-architecture"
 ```
 

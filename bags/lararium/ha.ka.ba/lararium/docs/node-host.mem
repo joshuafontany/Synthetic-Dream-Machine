@@ -15,7 +15,7 @@ role          = "lararium-node host: path roots + corpus-source structural contr
 source-symbol = "*"
 status-date   = "2026-04-30"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/node-host"
 ```
 

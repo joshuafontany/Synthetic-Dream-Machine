@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "Lady Aki discounted gear ledger — prose companion to the live CSV table"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger"
 ```
 

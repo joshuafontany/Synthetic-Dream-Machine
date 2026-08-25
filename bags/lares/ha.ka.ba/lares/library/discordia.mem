@@ -6,7 +6,7 @@ bytes      = 694457
 collection = "discordia"
 entries    = 5
 namespace  = "&#x2299;"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/library/discordia"
 ```
 

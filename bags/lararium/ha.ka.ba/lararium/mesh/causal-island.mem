@@ -13,7 +13,7 @@ register    = "Synthesis-Canon"
 retain      = true
 role        = "Causal-island ontological law: the four-tier boundary model, the ACCESS axis, and the share-substrate-not-sovereignty law that governs co-located vessels"
 source-file = "packages/lararium-mesh/src/causal-island.ts"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/causal-island"
 ```
 

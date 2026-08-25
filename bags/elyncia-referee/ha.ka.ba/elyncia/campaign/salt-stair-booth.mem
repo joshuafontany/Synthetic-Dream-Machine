@@ -13,7 +13,7 @@ rating     = "kapu"
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "the Salt-Stair booth thread — outline, style guide, and the verbatim scene transcript with interpretive segues; rides kapu at rest (referee-side), the player-facing render extracts the open strata only"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/salt-stair-booth"
 ```
 

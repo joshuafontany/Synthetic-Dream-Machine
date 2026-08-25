@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "doctrine: one meme-graph model, two surface projections (Story-River + TLDraw canvas); graph-primacy; view-state as its own lar-URI-addressed region; the nine families classified by surface; transclusion's surface-split"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology"
 ```
 

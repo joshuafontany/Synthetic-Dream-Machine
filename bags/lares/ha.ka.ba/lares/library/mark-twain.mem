@@ -6,7 +6,7 @@ bytes      = 16715743
 collection = "mark-twain"
 entries    = 6
 namespace  = "&#x2299;"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/library/mark-twain"
 ```
 

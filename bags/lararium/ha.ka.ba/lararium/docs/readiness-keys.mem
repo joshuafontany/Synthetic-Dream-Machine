@@ -14,7 +14,7 @@ role          = "lararium progressive readiness vocabulary — named shrine-ligh
 source-symbol = "READINESS_KEYS"
 status-date   = "2026-05-01"
 tags          = ["docs/readiness-keys"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/readiness-keys"
 ```
 

@@ -3,7 +3,7 @@
 <<^ code:"&#x0001;" ? -> lar:///lares_research/alpha/alpha-test-prompt-00001 >>
 ```toml iam
 file-path = "bags/lares-history/lares_research/alpha/alpha-test-prompt-00001.mem"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "lares_research/alpha/alpha-test-prompt-00001"
 ```
 
@@ -12,7 +12,7 @@ uri-path  = "lares_research/alpha/alpha-test-prompt-00001"
 # <<~ ahu #iam-ha "structure" >>
 name = "test-prompt-00001"
 file-path = "ha-ka-ba/alpha/alpha-test-prompt-00001.mem"
-content-type = "text/x-memetic-wikitext+tiddlywiki"
+content-type = "text/memetic-wikitext+tiddlywiki"
 version = "0.1-alpha"
 tulen = 0.55
 # <<~/ahu >>

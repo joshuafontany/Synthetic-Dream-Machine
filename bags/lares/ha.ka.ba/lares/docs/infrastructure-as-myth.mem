@@ -24,7 +24,7 @@ status         = "designed"
 status-why     = "a research paper rather than a build subject"
 tags           = ["api/pono/meme", "api/pono"]
 tagspace       = "stable"
-type           = "text/x-memetic-wikitext+tiddlywiki"
+type           = "text/memetic-wikitext+tiddlywiki"
 uri-path       = "ha.ka.ba/lares/docs/infrastructure-as-myth"
 ```
 

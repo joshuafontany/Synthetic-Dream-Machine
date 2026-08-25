@@ -12,7 +12,7 @@ register  = "Provisional-Synthesis"
 retain    = true
 role      = "the final-paper worksite for the Infrastructure as Myth arXiv submission — the submittable .md + .meta pair stands here when the pipeline lands; the docs sister serves as the working design surface"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/infrastructure-as-myth"
 ```
 

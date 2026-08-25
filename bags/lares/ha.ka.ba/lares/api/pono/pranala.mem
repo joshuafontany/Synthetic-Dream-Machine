@@ -13,7 +13,7 @@ register        = "Synthesis-Canon"
 retain          = true
 role            = "pranala law (kānāwai): the anchored-pointer sigil — NARROWED 2026-06-12 under the has-stack model; typed-edge anatomy moved to api/pono/wire; role/family attribute vocabulary retired-reserved"
 tags            = ["api/pono/meme", "api/pono/loci", "api/pono/has-stack", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala"]
-type            = "text/x-memetic-wikitext+tiddlywiki"
+type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/api/pono/pranala"
 ```
 

@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "Shape/Detail/Motion reading frame for Sharktooth sigils; progressive display authoring principle"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-shape-motion"
 ```
 

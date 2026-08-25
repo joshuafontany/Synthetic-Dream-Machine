@@ -15,7 +15,7 @@ register  = "Synthesis"
 retain    = false
 role      = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/masks"
 ```
 

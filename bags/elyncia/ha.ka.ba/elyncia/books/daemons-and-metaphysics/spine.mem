@@ -14,7 +14,7 @@ register   = "Provisional-Synthesis"
 retain     = true
 role       = "spine — Elyncia 03, Daemons and the Metaphysics of Play; cut-plan pending its close read"
 tags       = ["ha.ka.ba/elyncia/books/index"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine"
 ```
 

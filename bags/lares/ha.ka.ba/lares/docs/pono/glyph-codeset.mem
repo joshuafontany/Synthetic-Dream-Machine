@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "nine-category glyph codeset: Unicode ranges, semantic roles, authority matrix, UCAN attenuation, parsing pseudocode, validation rules, three-layer encoding"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/glyph-codeset"
 ```
 

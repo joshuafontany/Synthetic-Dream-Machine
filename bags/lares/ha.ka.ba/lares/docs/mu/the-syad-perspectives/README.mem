@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "extracted syad source shelf, archive-consumed derivation store, register-metaphysics provenance locus"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives/README"
 ```
 

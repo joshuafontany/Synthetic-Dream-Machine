@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "element-type declaration pragma — kumu as structural root; declares named grammar node type; English aliases: \\type \\typos"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kumu"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kumu"
 ```
 

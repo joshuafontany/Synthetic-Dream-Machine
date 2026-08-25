@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "faction roster index for Elyncia worldbuilding — the House of Masks summit guest-list stands as its first enactment; per-faction memes grow beside this index as canon deepens"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/index"
 ```
 

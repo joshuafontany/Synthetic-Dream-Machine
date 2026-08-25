@@ -4,7 +4,7 @@ type: application/javascript
 module-type: parser
 \*/
 /**
- * memetic-parser — WikiParser subclass for `text/x-memetic-wikitext`.
+ * memetic-parser — WikiParser subclass for `text/memetic-wikitext+tiddlywiki`.
  *
  * Inherits the standard wikitext parser, then filters its rule arrays in
  * the constructor so the rules that mangle round-trip never instantiate
@@ -71,7 +71,7 @@ interface WikiLike {
 }
 
 /**
- * MemeticParser — WikiParser subclass for `text/x-memetic-wikitext`.
+ * MemeticParser — WikiParser subclass for `text/memetic-wikitext+tiddlywiki`.
  *
  * Module-type: parser. TW5's standard plugin loader registers parsers via
  * `$tw.Wiki.parsers[contentType] = exports[contentType]`, iterating the
@@ -163,5 +163,6 @@ MemeticParser.prototype = Object.create(stdParser.prototype as object) as Parser
 
 // BOTH SPELLINGS EXPORT THE SAME PARSER. TW5 keys parser modules by type string, so a carrier stored
 // under the unsuffixed name needs its own export or it silently falls through to the wikitext parser.
+export { MemeticParser as "text/memetic-wikitext+tiddlywiki" };
 export { MemeticParser as "text/x-memetic-wikitext+tiddlywiki" };
 export { MemeticParser as "text/x-memetic-wikitext" };

@@ -13,7 +13,7 @@ register    = "Synthesis"
 retain      = true
 role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations named by its KEEL (VesselKeel); openVesselCore owns the sequence, the keel supplies the substrate atoms; role rides as a capability bundle, never a platform. `recipe` names the pinned wiki's composition and nothing else."
 source-file = "packages/lararium-mesh/src/open-vessel-core.ts"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 ```
 

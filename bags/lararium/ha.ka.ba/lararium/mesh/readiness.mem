@@ -10,7 +10,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe readiness.ts"
 source-file = "packages/lararium-mesh/src/readiness.ts"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/readiness"
 ```
 

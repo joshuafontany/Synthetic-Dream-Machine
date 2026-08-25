@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "research substrate for the Session 0.1 Painter of Words and Light — the AI renderer assistant Lares; carries the fae-casting, visual-canon, world-dress, Midjourney V8.2, and Delos-archaeology research verbatim, plus the negentropy proposals for the open canon gaps (the venue settled as The House of Masks; six ride open)"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-render-research"
 ```
 

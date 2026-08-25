@@ -10,7 +10,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe admin-event-store.ts"
 source-file = "packages/lararium-keyhive/src/admin-event-store.ts"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/keyhive/admin-event-store"
 ```
 

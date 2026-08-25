@@ -17,7 +17,7 @@ status      = "standing"
 status-date = "2026-06-01"
 status-why  = "the TW5 action handler stands live"
 tags        = ["api/residency-model"]
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/api/action-handler"
 ```
 

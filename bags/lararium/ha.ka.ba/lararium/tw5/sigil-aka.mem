@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "design record: ~aka sigil — shadow transclusion, template mechanism, preview image plan"
 tags      = ["node/disk-projector"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-aka"
 ```
 

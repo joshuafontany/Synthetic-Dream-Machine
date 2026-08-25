@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/guest-grammar"
 ```
 

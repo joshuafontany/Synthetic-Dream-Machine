@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "the handoff reds for Session 0.1's three islands — A the Actual-Play Lares (in-world first) and B the Referee's Second (provisional-first) here; C the Painter of Words and Light rides in session-0-1-render-research; all sessions co-work one graph and one universe (plurality pono · mutuality · kuleana)"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts"
 ```
 

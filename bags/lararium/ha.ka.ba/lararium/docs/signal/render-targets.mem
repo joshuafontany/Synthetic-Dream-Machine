@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "docs room for lararium-side render-target law, glyph conventions, and cross-surface verification"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/render-targets"
 ```
 

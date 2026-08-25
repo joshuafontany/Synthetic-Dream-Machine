@@ -11,7 +11,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "heleuma: command-handler argument coercers + requestId factory"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/node/handler-args"
 ```
 

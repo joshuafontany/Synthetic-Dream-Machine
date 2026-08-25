@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "invokable lens --- conformance-checks external content against the OODA-HA reference loop"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/conformance"
 ```
 

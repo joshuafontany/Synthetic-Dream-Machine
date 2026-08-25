@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for exchange vector law — record form, HUD example, and pattern-training guidance"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/exchange-vector"
 ```
 

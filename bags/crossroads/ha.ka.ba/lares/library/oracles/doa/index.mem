@@ -13,7 +13,7 @@ rating     = "meme"
 register   = "Synthesis"
 retain     = true
 role       = "skinny handle for the Discordian Oracle AppleKation reliquary — bytes ride the genesis/cas KIND-plane by content address; this meme carries the names, cids, provenance, and rites"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/library/oracles/doa/index"
 ```
 

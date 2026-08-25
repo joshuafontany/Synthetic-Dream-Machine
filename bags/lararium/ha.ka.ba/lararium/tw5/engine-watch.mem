@@ -13,7 +13,7 @@ revised-on    = "2026-06-15"
 revision-note = "EW-5 SEATED (was held-open): engine-genesis update = operator(admin) on @oracle, peers federate read-only; the fold rides the RECONCILE rite. EW-6 added: boot warns, never auto-folds (relocates the boot auto-merge to the rite). Watch subscribes to @oracle (the runtime island), split from the @lararium corpus."
 role          = "engine-watch — island-side engine-epoch drift detection; a waiting engine surfaces as an alert the island writes itself; carries the seated engine-update authority (EW-5/6)"
 source-file   = "packages/lararium-tw5/src/engine-watch.ts"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/engine-watch"
 ```
 

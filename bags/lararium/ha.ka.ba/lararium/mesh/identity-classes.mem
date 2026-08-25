@@ -16,7 +16,7 @@ revised-on = "2026-08-10"
 status    = "standing"
 status-why = "the SUBSTRATE stands"
 tags      = ["mesh/vessel-caps", "mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/founding-runbook", "mesh/charter-chain"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/identity-classes"
 written   = "2026-07-20"
 ```

@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "region worksheet — the Illyrian Regions: the sinking realm, the Accursed Mountains and the caldera, the drowned coast, the deep strata; grown by play"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/illyria/region-worksheet"
 ```
 

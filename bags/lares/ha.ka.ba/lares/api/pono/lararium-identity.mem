@@ -16,7 +16,7 @@ role       = "the identity architecture stated whole — the two-axis split (the
 status     = "standing"
 status-why = "the vessel identity core stands live on both platforms"
 tags       = ["api/pono/meme", "api/pono/causal-islands", "api/pono/orichalcum-capabilities", "api/pono/loci"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/api/pono/lararium-identity"
 written    = "2026-06-23"
 ```

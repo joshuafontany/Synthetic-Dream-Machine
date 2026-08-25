@@ -9,7 +9,7 @@ manao     = 18
 manaoio   = 18
 register  = "Synthesis-Canon"
 retain    = true
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/graceful-parsing"
 ```
 
@@ -274,7 +274,7 @@ core. So a plugin `module-type: parser` that does `exports["text/vnd.tiddlywiki"
 (subclass the core `WikiParser` — `wikiparser.js:494` — and run `parse()` inside a tolerant guard that
 catches throws + downgrades the malformed span to a graded `Error`/Text node) ''OVERRIDES core for ALL''
 ''standard wikitext'' — identical to how `memetic-parser.ts:106` already registers ours for
-`text/x-memetic-wikitext`, just aimed at the default type. Panic-mode-to-water at the WHOLE-parser
+`text/memetic-wikitext`, just aimed at the default type. Panic-mode-to-water at the WHOLE-parser
 boundary, zero `$:/core` edits. FINER per-rule recovery (recovery-sets in the block/inline rules) is
 ALSO plugin-overridable by the same last-wins rule — a `module-type: wikirule` exporting an existing
 rule name shadows it. The operator's submodule-fork grant is a held SAFETY-NET, expected UNUSED.
@@ -431,6 +431,6 @@ behind that — correction by degree, never a binary gate — lives at [[living-
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;InbFA8dacHKTZiJ4QifacjBzP3B-neyD8ECgaxf8Vko
+<<^ code:"&#x0003;" >>ni:///sha-256;-LQNIj4i5lDDcNO3Nkn4_zMk687vNVsLUhCERSjwULc
 
 <<^ code:"&#x0004;" -> ? >>

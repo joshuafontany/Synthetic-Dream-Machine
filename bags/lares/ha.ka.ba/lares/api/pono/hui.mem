@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "await-all synchronization sigil — hui as gathering; English alias: \\sync; async-first concurrency sprint pending"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-hui"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/hui"
 ```
 

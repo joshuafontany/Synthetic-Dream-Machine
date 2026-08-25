@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "cancelling-race sigil — holo as full sprint; Verse race: first wins, losers and their entire subtrees cancelled recursively; English alias: \\race; async-first concurrency sprint pending"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-holo"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/holo"
 ```
 

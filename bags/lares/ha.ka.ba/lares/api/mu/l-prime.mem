@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "active language-discipline law (kānāwai), certainty-pressure regulator, and forward generation-pressure surface --- seeds wording toward verb-relations as it forms"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/mu/l-prime"
 ```
 

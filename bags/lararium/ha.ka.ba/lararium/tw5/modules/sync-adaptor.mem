@@ -13,7 +13,7 @@ role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 e
 source-symbol = "_applyChange"
 status-date   = "2026-04-30"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/heleuma/ha"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 ```
 

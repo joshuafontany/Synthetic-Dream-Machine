@@ -12,7 +12,7 @@ register  = "Provisional-Synthesis"
 retain    = true
 role      = "the base-syntax specification draft for TiddlyWiki 5 wikitext — the normative reference the +tiddlywiki suffix registration requires and no standards track yet carries"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/tiddlywiki-wikitext"
 ```
 

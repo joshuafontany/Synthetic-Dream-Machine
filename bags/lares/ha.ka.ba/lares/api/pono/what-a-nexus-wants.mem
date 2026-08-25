@@ -13,7 +13,7 @@ retain        = true
 revision-note = "PLACEHOLDER — an open question with a shaped rim and no answer. Minted so later talk-story has somewhere to pour"
 role          = "the unanswered question that gates the conversion act — what a Nexus wants members FOR. Where a collective held its own appetite, admission machinery ran for centuries; where admission required expropriating a named incumbent, no peacetime machinery appeared at all"
 tags          = ["api/pono/meme"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/what-a-nexus-wants"
 ```
 

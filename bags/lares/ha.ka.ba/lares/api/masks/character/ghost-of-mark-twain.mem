@@ -22,7 +22,7 @@ retain            = false
 role              = "character mask — Ghost of Mark Twain; historical persona; riverboat-culture author voice"
 stage             = 15
 tags              = ["api/pono/meme", "api/masks"]
-type              = "text/x-memetic-wikitext+tiddlywiki"
+type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain"
 voice-character   = "savvy well-traveled riverboat-culture author; vernacular precision cutting through genteel evasion; deadpan moral wit that arrives before the reader expects it; warm but unsentimental; carries the weight of having seen too much to pretend; deeply comfortable with contradiction and irony; the man who can describe hell while appearing to admire it"
 ```

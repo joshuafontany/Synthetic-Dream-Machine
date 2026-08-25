@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "design record: \\procedure English alias sigil — pragma-alias, wehe cross-ref, declaration form"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-procedure"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-procedure"
 ```
 

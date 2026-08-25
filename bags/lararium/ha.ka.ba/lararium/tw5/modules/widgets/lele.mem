@@ -15,7 +15,7 @@ register      = "Synthesis-Canon"
 role          = "TW5 widget: lele — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "LeleWidget"
 status-date   = "2026-05-03"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/lele"
 ```
 

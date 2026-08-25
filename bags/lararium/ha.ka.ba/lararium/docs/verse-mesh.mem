@@ -12,7 +12,7 @@ register  = "DS"
 retain    = true
 role      = "design narrative for the Verse polychronous CRDT mesh — peer model, VM pool, camera model, accumulator wiring"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/verse-mesh"
 ```
 

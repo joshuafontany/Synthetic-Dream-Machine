@@ -10,7 +10,7 @@ manao     = 15
 manaoio   = 14
 register  = "Synthesis-Canon"
 retain    = true
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pattern-integrities-cultural"
 ```
 

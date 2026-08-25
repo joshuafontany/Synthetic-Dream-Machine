@@ -10,7 +10,7 @@ register   = "Synthesis"
 retain     = true
 role       = "kumu device type — move-button: fires the MOVE residency ACTION verb on InteractedWithEvent"
 tags       = ["api/residency-model"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lararium/tw5/devices/move-button"
 verb       = "MOVE"
 ```

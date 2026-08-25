@@ -14,7 +14,7 @@ register   = "Provisional-Synthesis"
 retain     = true
 role       = "spine — Elyncia 01, A Broken World: the walk through the history, the Curse of Iron, and the gazetteer; chunks live at their topical addresses"
 tags       = ["ha.ka.ba/elyncia/books/index"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/books/a-broken-world/spine"
 ```
 

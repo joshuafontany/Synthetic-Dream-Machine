@@ -14,7 +14,7 @@ retain        = true
 role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
 tags          = ["api/pono/meme", "api/pono/memetic-wikitext"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/render-pipeline"
 ```
 
@@ -33,7 +33,7 @@ Two distinct engines carry render work:
 # ''TW5 render engine'' — runs inside the TW5 VM; the `lar-render-mode` variable drives mode dispatch; the template cascade selects the rendering tiddler per sigil
 # ''Isomorphic parse engine'' — `@lararium/tw5/meme-ast`; emits typed `MemeAstNode[]` and `PranalaEdge[]` for the island adaptor, deserializer, and TW5 module consumers; compiles to TW5 JS via Vite; web3-native
 
-Both engines consume the same `text/x-memetic-wikitext` surface. The isomorphic parse engine lives in `@lararium/tw5` as a TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
+Both engines consume the same `text/memetic-wikitext` surface. The isomorphic parse engine lives in `@lararium/tw5` as a TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
 
 <<~/ahu >>
 
@@ -47,7 +47,7 @@ Render work runs along orthogonal axes; naming them apart lets each vary without
 
 One surface passes through three trees:
 
-# ''parse tree'' — `text/x-memetic-wikitext` parses to `MemeAstNode[]`.
+# ''parse tree'' — `text/memetic-wikitext` parses to `MemeAstNode[]`.
 # ''widget tree'' — the execution-bearing middle layer; `kumu` declares the widget-node types and `kahea` name-form calls resolve here — the render-time projection of `memetic-wikitext#processing-model`, standing between parse and document.
 # ''DOM tree'' — the widget tree renders into a document. In this stack that document reads as a //fakeDom//, not the browser's live one.
 
@@ -255,6 +255,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2NONzV4yOTaz0DreKOVUuTYqnDPXqUaxt9WDPbdT1Fw
+<<^ code:"&#x0003;" >>ni:///sha-256;1Cru-beIuDkwA0jr9aw7L6RCngv2O7Q9x0lHBmbeUqw
 
 <<^ code:"&#x0004;" -> ? >>

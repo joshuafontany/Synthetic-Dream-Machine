@@ -13,7 +13,7 @@ retain    = true
 role      = "Ability module: Neural Whip — the Cave Octopus's stuckforce tentacle-lash; first proof the Power template covers a non-spell monster affordance, first exerciser of hook/attack"
 tags      = ["components/domain/stuckforce", "components/function/restrain", "components/hook/attack", "mount-points/trait"]
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/abilities/neural-whip"
 ```
 

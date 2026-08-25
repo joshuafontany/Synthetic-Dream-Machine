@@ -2,7 +2,7 @@
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml iam
-type     = "text/x-memetic-wikitext+tiddlywiki"
+type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 ```
 
@@ -20,7 +20,7 @@ register  = "Synthesis-Canon"
 retain    = true
 reflexive = true
 l-space   = "stable"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 ```
 
@@ -163,6 +163,6 @@ Named empty seats, held open: ''value/preference'' (nothing yet reads what the n
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;s4kH6LEi6Om9mTLqdRLq9-a8JHKH8XB1EiLDvES180Q
+<<^ code:"&#x0003;" >>ni:///sha-256;njshLSO7508ys1XKXPzEzYN4nHy78foc2McXYfncaLM
 
 <<^ code:"&#x0004;" -> ? >>

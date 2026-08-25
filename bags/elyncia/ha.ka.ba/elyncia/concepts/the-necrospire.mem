@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "concept canon — the Necrospire: the Oort needle, the Pale Emperor's prison bound onto it, the aeons adrift, the fall, and the caldera in the Accursed Mountains"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/concepts/the-necrospire"
 ```
 

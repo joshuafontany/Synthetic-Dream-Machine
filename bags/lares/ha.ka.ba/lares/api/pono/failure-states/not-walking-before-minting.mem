@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "craft failure law — deriving from context what the graph already holds, at the cost of the derivation"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting"
 ```
 

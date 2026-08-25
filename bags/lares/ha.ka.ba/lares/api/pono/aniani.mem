@@ -16,7 +16,7 @@ status      = "designed"
 status-why = "doctrine; no source carries it yet"
 status-date = "2026-06-13"
 tags        = ["api/pono/lens"]
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/aniani"
 ```
 

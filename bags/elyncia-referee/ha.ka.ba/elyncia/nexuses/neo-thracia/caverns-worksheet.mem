@@ -13,7 +13,7 @@ rating     = "kapu"
 register   = "Synthesis"
 retain     = true
 role       = "referee worksheet — the Caverns of Neo-Thracia: geography canon, water-road law, watershed villages, guide Burdens"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet"
 ```
 

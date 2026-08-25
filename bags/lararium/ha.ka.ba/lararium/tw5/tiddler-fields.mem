@@ -10,7 +10,7 @@ manaoio   = 18
 register  = "Synthesis-Canon"
 retain    = true
 role      = "interface note: canonical TW5 core-semantic tiddler field shapes for Lararium"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/tiddler-fields"
 ```
 

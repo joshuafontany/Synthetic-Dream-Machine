@@ -13,7 +13,7 @@ rating     = "meme"
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "spine/skeleton holder — the region-worksheet practice: scale ladder, map-kinds, hex-entry law, travel loop; slots for verbatim SDM-06 and FTLS-04 chapter text land in #source before uplift"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/templates/region-worksheet"
 ```
 

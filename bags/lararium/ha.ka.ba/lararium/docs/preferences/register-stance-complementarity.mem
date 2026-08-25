@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for the explicit complementarity claim between epistemic register and discourse stance"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/register-stance-complementarity"
 ```
 

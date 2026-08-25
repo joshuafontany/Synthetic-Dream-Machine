@@ -10,7 +10,7 @@ manaoio       = 17
 register      = "Synthesis-Canon"
 role          = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
 status-date   = "2026-04-30"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 ```
 
@@ -39,7 +39,7 @@ _bootModules()
     │
     └─ if none pass → imperative fallback:
             MemeticParser registered in tw.Wiki.parsers
-            the text/x-memetic-wikitext deserializer rides TW5's native
+            the text/memetic-wikitext deserializer rides TW5's native
               module-type collection — a `module-type: tiddlerdeserializer`
               plugin tiddler auto-collected into $tw.modules.types keyed by
               content-type (no imperative map assignment); carrier-filetype
@@ -80,6 +80,6 @@ The distinction is the whole gate. ''Authority is what a carrier holds and who g
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gBukrx8bF3-05LFC2Jt2GJks6TW6_9KDN1LIzhKw4SE
+<<^ code:"&#x0003;" >>ni:///sha-256;TdU2lVkjWw9N0VvcwgbTiMa3abM5r-5BZz6qOMDuEas
 
 <<^ code:"&#x0004;" -> ? >>

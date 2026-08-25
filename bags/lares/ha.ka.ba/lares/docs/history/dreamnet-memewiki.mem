@@ -13,7 +13,7 @@ register   = "Synthesis"
 retain     = true
 role       = "the consolidation that staged the memetic-wikitext kernel — four scratch notes folded into one OODA-HA worksite, judged against what stands"
 tags       = ["api/pono/meme"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/dreamnet-memewiki"
 ```
 

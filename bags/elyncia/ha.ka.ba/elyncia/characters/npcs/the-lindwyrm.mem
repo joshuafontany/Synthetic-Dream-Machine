@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "NPC, public view — the Lindwyrm of New Delos: Patroness, embodied immortal, founder of the League of Free Cities, reluctant infrastructure matriarch"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm"
 ```
 

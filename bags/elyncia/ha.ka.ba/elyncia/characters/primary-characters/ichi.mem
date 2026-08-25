@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "Ichi — Powered Symbiote trait + Construct Golem; spore-daemon ashigaru armor, worn and autonomous modes, flexible Inner Fire slots"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/ichi"
 ```
 

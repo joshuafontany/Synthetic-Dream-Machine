@@ -12,7 +12,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "the dev loop: the idempotent CLI cures after a code change (refresh/reconcile/rebuild/fresh/serve/reset/wake) + WHERE vessel state lives vs corpus (the repo). Carries the SITING LAW: three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — so the spirits' vessel, identity, seal and hearth bags stand at <lares>, the acquired shelf and the sensoriums at <lararium>, and the watermarks alone at <state>. Under LAR_ROOT every directory names an XDG kind and the two houses nest inside the data kind. The reach taxonomy + the path law + the invariants the dev loop rests on."
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/node/dev-loop"
 written   = "2026-06-27"
 ```

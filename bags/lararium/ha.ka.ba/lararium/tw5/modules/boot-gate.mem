@@ -13,7 +13,7 @@ role          = "canonical source copy: TW5 boot gate — 3-layer trust check fo
 source-symbol = "_bootModules"
 status-date   = "2026-04-30"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/heleuma/ha"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/boot-gate"
 ```
 

@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "places — the constellation's far exclaves: the Poseidon-coast crags and the Artemision's risen six miles"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves"
 ```
 

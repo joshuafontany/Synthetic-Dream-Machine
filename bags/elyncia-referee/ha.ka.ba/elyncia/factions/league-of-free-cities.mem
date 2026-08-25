@@ -13,7 +13,7 @@ rating     = "kapu"
 register   = "Synthesis"
 retain     = true
 role       = "faction meme, referee view — the League of Free Cities: the Confederation the Lindwyrm declared over the new DreamNet; structure, members, tensions, and the summit's politics"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/league-of-free-cities"
 ```
 

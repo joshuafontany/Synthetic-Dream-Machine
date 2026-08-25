@@ -11,7 +11,7 @@ manaoio    = 18
 register   = "Synthesis-Canon"
 retain     = true
 role       = "foundational operating principles for the quine-like self-replicating wiki-agentic-HUD"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/PRINCIPLES"
 ```
 

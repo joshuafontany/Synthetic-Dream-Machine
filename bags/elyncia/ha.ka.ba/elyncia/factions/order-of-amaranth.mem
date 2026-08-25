@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Synthesis"
 retain     = true
 role       = "faction meme — the Order of Amaranth: sanctuary law, iron convoys under the unfading flower, field medicine, the livery and the sacrament"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/order-of-amaranth"
 ```
 

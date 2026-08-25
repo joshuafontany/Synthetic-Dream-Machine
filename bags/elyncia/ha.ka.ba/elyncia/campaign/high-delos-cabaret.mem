@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Provisional"
 retain     = true
 role       = "actual-play locus for Session 0.1 — the High Delos cabaret scene; venue, cast, and lifepath-flow scaffold now, the played record as it lands; player-safe by construction, nothing kapu ever drafts here"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/high-delos-cabaret"
 ```
 

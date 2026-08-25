@@ -11,7 +11,7 @@ manaoio    = 17
 register   = "Synthesis"
 retain     = true
 role       = "canonical design constitution for the Lararium multiplayer infinite-canvas wiki system — LOCAL-FIRST PIVOT complete (M10, 2026-04-29): Automerge-repo (@automerge/automerge-repo) is the shared meme/tiddler CRDT store; browser opens IndexedDB first and syncs via /meme-sync; LarariumTW5 is now the room-scoped semantic/filter/render VM; tldraw is a browser projection from TW5 via projectFromTw5(), not the meme-content authority; legacy /rooms TLSocketRoom+SQLite remains as layout/reaction compatibility surface only; authority delivered via <meta name='lararium-receipt'> in HTML shell (no hidden tldraw frame shape); projection-cache deleted; LarDiskSyncAdaptor derives disk paths via resolveLarUri() with echo-loop guard; multi-room HTTP routing (/room/:roomId) exists while content still uses one server meme-store doc; PUT /admin/promote writes lares/ and patches Automerge immediately; M11 open: projection diffing, real canvas body-node write-back, second-node federation, KumuExecutor"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
 ```
 
@@ -432,7 +432,7 @@ AutomergeMemeStore / LarTiddlerStore
     ↓  LarariumCrdtSyncAdaptor (echo-loop guarded)
 TW5 wiki (virtual server, isomorphic)
     ├─ filter engine   →  filterClosure(expr, closure)  →  FilterEngineFn in context
-    ├─ parse bridge    →  text/x-memetic-wikitext parser delegates to parseMemeCarrier()
+    ├─ parse bridge    →  text/memetic-wikitext parser delegates to parseMemeCarrier()
     ├─ kumuRegistry    →  computed view via tiddlerStore.subscribe() (reactive, incremental)
     └─ draft surface   →  canvas/TW5 edit → AutomergeMemeStore → MOVE (residency ACTION) → lares/
 ```
@@ -1267,6 +1267,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bhes8E5MAnutBAlRWdDgeXBaXUHDSvP7N_MwSFgnSgw
+<<^ code:"&#x0003;" >>ni:///sha-256;bZs9P2kyFHdmXnf48b2OCu1CnUCnO0EMMgbcX1WgLaw
 
 <<^ code:"&#x0004;" -> ? >>

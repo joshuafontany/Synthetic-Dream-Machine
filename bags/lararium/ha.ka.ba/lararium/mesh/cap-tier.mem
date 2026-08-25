@@ -16,7 +16,7 @@ role      = "the bag's sealing-posture as SELF-DESCRIBING TIGHTEN-ONLY data: WHO
 status    = "standing"
 status-why = "the CORE built and revert-verified; the declared-source shore unlit"
 tags      = ["mesh/carry-contract", "mesh/content-resolution", "mesh/membership-doctrine", "mesh/secure-context", "api/pono/lararium-identity", "api/pono/orichalcum-capabilities", "api/pono/causal-islands"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/cap-tier"
 written   = "2026-07-23"
 ```

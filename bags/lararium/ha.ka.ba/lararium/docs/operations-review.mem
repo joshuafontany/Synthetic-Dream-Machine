@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = false
 role      = "OODA-HA extraction plan for lararium interaction protocols — frame-uncertainty, talk story, session init, and related surfaces"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/operations-review"
 ```
 

@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "Engine update banner — shown when SW caches a new TW5 engine version; prompts page reload"
 tags      = ["$:/tags/PageTemplate"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/engine-update-banner"
 ```
 

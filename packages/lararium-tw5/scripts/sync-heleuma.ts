@@ -613,7 +613,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
 \`\`\`toml iam
 uri-path    = "${uriPath}"
 file-path   = "${filePath}"
-type        = "text/x-memetic-wikitext"
+type        = "text/memetic-wikitext+tiddlywiki"
 register    = "CS"
 confidence  = 14
 mana        = 14

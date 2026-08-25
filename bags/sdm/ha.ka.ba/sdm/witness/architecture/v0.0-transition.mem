@@ -4,14 +4,14 @@
 ```toml iam
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/architecture/v0.0-transition.mem"
+l-space   = "sdm"
 mana      = 12
 manao     = 17
 manaoio   = 16
 register  = "Synthesis"
 retain    = true
 role      = "architecture witness: what the v0.0 prototype contained and why it retired into the v0.1 composition model"
-l-space   = "sdm"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/architecture/v0.0-transition"
 ```
 
@@ -23,7 +23,7 @@ uri-path  = "ha.ka.ba/sdm/witness/architecture/v0.0-transition"
 
 !! What v0.0 Was
 
-The prototype froze at `@sdm/v0.0/**` (read-only archive). It proved that Powers could live as file-first `text/x-memetic-wikitext` memes in an Automerge/TW5 bag, and it ran an ''inheritance'' spine:
+The prototype froze at `@sdm/v0.0/**` (read-only archive). It proved that Powers could live as file-first `text/memetic-wikitext` memes in an Automerge/TW5 bag, and it ran an ''inheritance'' spine:
 
 ```text
 api/powers/*          Powers API root: a default implementation
@@ -68,6 +68,6 @@ The edge taxonomy collapsed to one flat verb (`#has`, no family/role) for compos
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;rEBAsN8KCDhHT_JPMqFclLI-ozM2Ep8FAabugI3wtes
+<<^ code:"&#x0003;" >>ni:///sha-256;Y5qBknNj1Rhww3j5HBEShL-a13f9k8fovBWXFpcaFtM
 
 <<^ code:"&#x0004;" -> ? >>

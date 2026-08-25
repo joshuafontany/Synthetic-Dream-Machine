@@ -7,7 +7,7 @@ l-space   = "archive"
 register  = "Synthesis"
 retain    = true
 role      = "sprint resume artifact — the state a session needed to continue without prior chat context"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/SESSION"
 ```
 
@@ -249,7 +249,7 @@ Three commits retire architectural debts and canonicalize TW5 module shapes.
 |---|---|
 | `0adc3697` E.10.13 | TW5Engine boot path → plugin-tiddler load. `_registerWidgets` / `_registerDeserializer` / parser-wrapper-injection deleted. Boot pushes one envelope tiddler into `preloadTiddlers`; TW5's standard plugin loader unpacks. Namespace alignment: every Lares system title moved to `lar:///`. Tag VALUES stay TW5-conventional. Dual-distribution emits both canonical and drag-and-drop envelopes. |
 | `8a543b6e` (docs) | E.10.13 closure docs + namespace decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md`. |
-| `430f40f5` E.10.14 (Path A) | Canonical TW5 module export shapes. Wikirule split into three module-type:wikirule files. Parser exports as `{ MemeticParser as "text/x-memetic-wikitext" }`. Widgets self-`require`("$:/core/.../widget.js"), set prototype chain, export under tag name. Plugin loader unpacks via canonical `$tw.modules.applyMethods` flow. In-process smoke harness lands at `scripts/smoke-plugin-boot.ts`. |
+| `430f40f5` E.10.14 (Path A) | Canonical TW5 module export shapes. Wikirule split into three module-type:wikirule files. Parser exports as `{ MemeticParser as "text/memetic-wikitext" }`. Widgets self-`require`("$:/core/.../widget.js"), set prototype chain, export under tag name. Plugin loader unpacks via canonical `$tw.modules.applyMethods` flow. In-process smoke harness lands at `scripts/smoke-plugin-boot.ts`. |
 
 ''Operator-flagged debts retired:''
 ** Construction-path debt — parsers instantiate via canonical `$tw.modules` path. Single-backtick regression cured.
@@ -1104,6 +1104,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-tiCx5pMCVFS29it0z_VneK3rHkBnkiTx3pLP1Qjo-k
+<<^ code:"&#x0003;" >>ni:///sha-256;UtP056MuR7QQ_cGvmlzuOGi3rmFt1qeD8NALWgBR1aY
 
 <<^ code:"&#x0004;" -> ? >>

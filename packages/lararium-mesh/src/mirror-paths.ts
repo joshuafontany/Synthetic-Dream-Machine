@@ -13,7 +13,7 @@ export type MirrorPathStrategy = "lares" | "engine" | "wiki-shadow";
 /**
  * The meme file extension. A meme carries memetic-wikitext, not CommonMark, so
  * `.mem` names the filetype on disk and the memetic-wikitext MIME
- * (`text/x-memetic-wikitext`) rides it.
+ * (`text/memetic-wikitext+tiddlywiki`) rides it.
  */
 export const MEME_EXT = ".mem";
 

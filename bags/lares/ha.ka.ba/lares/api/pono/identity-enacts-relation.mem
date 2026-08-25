@@ -13,7 +13,7 @@ retain        = true
 revision-note = "PROVISIONAL — the constructor, the declared partition, declaration ⊥ gauge, fluid-not-frozen rank, and the vocabulary. Operator-ruled spans marked RULED; the rest reads PROPOSED and unbuilt"
 role          = "the identity plane's ontology: identity ENACTS a relation; a mutual hold constitutes a scale RELATIVE TO A DECLARED PARTITION; the declaration, the measurement and the decision stand as three artifacts with three owners; rank runs fluid, never frozen, and a lift EXPIRES. Expands lararium-identity's five-scale axis with what makes a scale real"
 tags          = ["api/pono/meme"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 ```
 

@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "component (posture): Ritual — activation requires extended procedure and time, not an instant"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/posture/ritual"
 ```
 

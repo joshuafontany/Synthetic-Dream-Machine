@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "relation-family edge sugar — outgoing semantic link; no execution pulse; shorthand for pranala family:relation"
 tags      = ["api/pono/pranala", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-loulou"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 ```
 

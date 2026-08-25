@@ -15,7 +15,7 @@ source-lines = "1-57"
 source-path  = "packages/lares-core/memes/docs/lararium/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle.md"
 tags         = ["api/pono/meme"]
 target-mask  = "lar:///ha.ka.ba/lares/api/masks/named/mischief-muse"
-type         = "text/x-memetic-wikitext+tiddlywiki"
+type         = "text/memetic-wikitext+tiddlywiki"
 uri-path     = "ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle"
 ```
 

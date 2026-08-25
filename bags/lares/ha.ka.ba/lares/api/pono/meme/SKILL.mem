@@ -19,7 +19,7 @@ register           = "Synthesis-Canon"
 retain             = true
 role               = "meme operational skill — composition, audit, conformance check, and lawful companion-meme split"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/meme"
-type               = "text/x-memetic-wikitext+tiddlywiki"
+type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 ```
 

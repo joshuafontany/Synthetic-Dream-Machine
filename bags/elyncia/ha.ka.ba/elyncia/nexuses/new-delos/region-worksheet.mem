@@ -13,7 +13,7 @@ rating     = "ano"
 register   = "Provisional-Synthesis"
 retain     = true
 role       = "region worksheet — the New Delos Nexus in four strata: High Delos, Low Delos, the Underdark, and the outer seas/islands/shores; seeded from gazetteer canon, grown by play"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet"
 ```
 

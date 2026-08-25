@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant capability: heleuma-ba — psyche/path anchor; quine-only trace record with no runtime corpus path"
 tags      = ["api/pono/heleuma"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ba"
 ```
 

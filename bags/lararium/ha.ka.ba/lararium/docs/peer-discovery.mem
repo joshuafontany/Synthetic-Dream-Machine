@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "Web3 peer discovery doctrine — cold bootstrap, six-tier ladder, DID service endpoints, social-graph discovery, Keyhive add-member"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/peer-coordination", "lar:///ha.ka.ba/lares/api/pono/local-first", "lar:///ha.ka.ba/lararium/tw5/lar-uri-namespace", "lar:///ha.ka.ba/lararium/tw5/lararium-doc-stack"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/peer-discovery"
 ```
 

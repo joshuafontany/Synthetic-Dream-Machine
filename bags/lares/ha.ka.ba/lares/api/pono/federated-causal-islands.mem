@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law: Fontany-Fuller-Zelenka non-simultaneous apprehension as ontological basis; causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay semantics"
 tags      = ["api/pono/pranala"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/federated-causal-islands"
 ```
 

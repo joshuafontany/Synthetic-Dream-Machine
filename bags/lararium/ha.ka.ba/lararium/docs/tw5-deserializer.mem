@@ -8,10 +8,10 @@ mana          = 17
 manao         = 17
 manaoio       = 16
 register      = "Synthesis-Canon"
-role          = "design doc: TW5 tiddlerdeserializer module (module-type auto-collection) for text/x-memetic-wikitext"
+role          = "design doc: TW5 tiddlerdeserializer module (module-type auto-collection) for text/memetic-wikitext"
 source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 status-date   = "2026-04-30"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-deserializer"
 ```
 
@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lararium/docs/tw5-deserializer"
 
 !! Overview
 
-TW5 deserializes tiddler content by content-type. The deserializer for `text/x-memetic-wikitext` declares `module-type: tiddlerdeserializer`; TW5's native module loader collects it at boot into `$tw.modules.types.tiddlerdeserializer`, keyed by content-type. The compiled CJS exports the function under its content-type key — `exports["text/x-memetic-wikitext"] = memeticWikitextDeserializer` — so TW5 reaches it through the same registry `$tw.wiki.deserializeTiddlers` reads. When TW5 meets a tiddler of this type, it calls the collected function to split the raw carrier text into one parent tiddler and N ahu child slot tiddlers — the same structural split the disk projector performs on the Node side.
+TW5 deserializes tiddler content by content-type. The deserializer for `text/memetic-wikitext` declares `module-type: tiddlerdeserializer`; TW5's native module loader collects it at boot into `$tw.modules.types.tiddlerdeserializer`, keyed by content-type. The compiled CJS exports the function under its content-type key — `exports["text/memetic-wikitext"] = memeticWikitextDeserializer` — so TW5 reaches it through the same registry `$tw.wiki.deserializeTiddlers` reads. When TW5 meets a tiddler of this type, it calls the collected function to split the raw carrier text into one parent tiddler and N ahu child slot tiddlers — the same structural split the disk projector performs on the Node side.
 
 The canonical source rests at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer`.
 
@@ -43,12 +43,12 @@ Parse warnings ride a synthesised `$:/lararium/parse-warning/<slug>` tiddler (`P
 
 !! The Module Rides the Native Registry
 
-The deserializer travels as a plugin tiddler — TS source compiled to a CJS module tiddler carrying `module-type: tiddlerdeserializer`. TW5 collects every such module by type at boot; the content-type key on the export binds the function to `text/x-memetic-wikitext` with no imperative property assignment and no closure over a live wiki class. Disk ingest and store load converge on the exact registry: `$tw.wiki.deserializeTiddlers` dispatches by content-type into the collected set.
+The deserializer travels as a plugin tiddler — TS source compiled to a CJS module tiddler carrying `module-type: tiddlerdeserializer`. TW5 collects every such module by type at boot; the content-type key on the export binds the function to `text/memetic-wikitext` with no imperative property assignment and no closure over a live wiki class. Disk ingest and store load converge on the exact registry: `$tw.wiki.deserializeTiddlers` dispatches by content-type into the collected set.
 
-The paired `carrier-filetype` startup module registers `.mem` as `text/x-memetic-wikitext` through `$tw.config.fileExtensionInfo`, so drag-and-drop, the import dialog, and the filesystem adaptor route as one. ''One extension, one type'' — the extension answers the only question a content sniff could ask, and a malformed carrier reaches the carrier reader (which names the fault) rather than a router that would reclassify it away from its own diagnostic.
+The paired `carrier-filetype` startup module registers `.mem` as `text/memetic-wikitext` through `$tw.config.fileExtensionInfo`, so drag-and-drop, the import dialog, and the filesystem adaptor route as one. ''One extension, one type'' — the extension answers the only question a content sniff could ask, and a malformed carrier reaches the carrier reader (which names the fault) rather than a router that would reclassify it away from its own diagnostic.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;FhIoLBTJ0lI1A_pfwbFJXJHDApBHwEohIW6DM3U_bHM
+<<^ code:"&#x0003;" >>ni:///sha-256;kuvMdCLzKpqjtsxYLglhf88poVm60EfkQ8AFGK6Kzq4
 
 <<^ code:"&#x0004;" -> ? >>

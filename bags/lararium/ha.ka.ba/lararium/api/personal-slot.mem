@@ -18,7 +18,7 @@ role        = "the @personal recipe slot (cross-device viewing state, PersonaGro
 status      = "standing"
 status-why  = "the @personal slot stands; S7.7 cross-device remains"
 tags        = ["lar:///ha.ka.ba/lares/api/lararium/wiki-recipe"]
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/api/personal-slot"
 uri-shape   = "lar:///ha.ka.ba/wikis/{slug}/personal"
 ```

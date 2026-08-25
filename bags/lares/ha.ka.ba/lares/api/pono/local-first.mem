@@ -14,7 +14,7 @@ retain      = true
 role        = "invariant doctrine: 7 local-first ideals (Ink & Switch) + Keyhive/Beelay alignment matrix; server-as-peer law; Fuller non-simultaneous Universe = causal island"
 status-date = "2026-05-02"
 tags        = ["api/pono/meme"]
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/local-first"
 ```
 
@@ -101,7 +101,7 @@ Software created today remains accessible without the vendor. Data in open forma
 readable independently of the application.
 
 ''Lararium:'' SATISFIED. TW5 format — HTML + JS in a single file or tiddler store —
-remains readable today from 2004 archives. The `text/x-memetic-wikitext` format is
+remains readable today from 2004 archives. The `text/memetic-wikitext` format is
 plain text with TOML headers; readable by any text editor.
 
 ''Law:'' No binary-only storage for meme content. `MutableLarRecord.text` is always
@@ -263,6 +263,6 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sAIFOEYecpVnJid4gjQkwPpH8FQ1bbudYQa39-yiYZw
+<<^ code:"&#x0003;" >>ni:///sha-256;FWzaAhKaa1s1Xa1LhABvkR7oyYfC5SUr8u5ZJn7LVuM
 
 <<^ code:"&#x0004;" -> ? >>

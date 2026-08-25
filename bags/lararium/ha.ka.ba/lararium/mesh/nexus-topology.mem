@@ -16,7 +16,7 @@ role      = "the DEPLOYMENT topology under the two-axis mesh, and the CIVIC-SCAL
 status    = "designed"
 status-why = "the names stand registered; the serving layers stand unbuilt"
 tags      = ["mesh/secure-context", "mesh/attestation-plane", "mesh/dreamnet-architecture", "mesh/reach-plane", "api/network-edge", "api/pono/causal-islands"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/nexus-topology"
 written   = "2026-08-08"
 ```

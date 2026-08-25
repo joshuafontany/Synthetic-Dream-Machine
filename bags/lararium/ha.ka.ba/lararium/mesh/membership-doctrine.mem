@@ -16,7 +16,7 @@ revised-on = "2026-08-10"
 status    = "standing"
 status-why = "operator-ruled and enforced at the members-registry"
 tags      = ["mesh/carry-contract", "mesh/identity-classes", "api/pono/persona-policy", "api/pono/cabal-realm", "api/pono/causal-islands"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/membership-doctrine"
 written   = "2026-07-21"
 ```

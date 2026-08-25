@@ -15,7 +15,7 @@ role       = "submission-grade specification for the lar: URI scheme — abstrac
 status     = "standing"
 status-why = "submission-draft"
 tags       = ["api/pono/meme", "api/pono/loci"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 ```
 
@@ -274,6 +274,8 @@ The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable na
 
 Session form names the speaker through the authority. It MUST stay within exchange spans, away from stable graph addresses, system resource names, and other storage.
 
+''The userinfo slot carries the grant by design.'' [RFC3986] §3.2.1 deprecates `user:password` in the userinfo slot — a secret before an unencrypted transport. The grant stands in that slot anyway, deliberately: `alias:grant` re-uses the one authority shape every URI reader — parser, tool, or model — already holds, bent to a new office rather than fighting it. The grant names a capability reference, never a secret: it authorizes nothing by itself, discloses nothing when logged, and rides only within exchange spans the transport already protects. The deprecation guards against a hazard this slot's cargo does not carry, and the familiar shape means every existing URI parser splits the speaker correctly with no new grammar taught.
+
 <<~/ahu >>
 
 <<~ ahu #signal-law >>
@@ -420,6 +422,6 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NYeLwQio9SZn7m_u-ole57f3kfNZm_CO6MaflSI2CVc
+<<^ code:"&#x0003;" >>ni:///sha-256;qnKifkrvwG9dSbsxh65kMcdBDoMO14Q119ol3dcb3A8
 
 <<^ code:"&#x0004;" -> ? >>

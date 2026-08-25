@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "parser law: MemeticParser subclass contract, lar-sigil dispatch model, grammar self-hosting, sigil kinds, closure law, C0 control-sigil roles"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/memetic-wikitext"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/parser"
 ```
 
@@ -25,11 +25,11 @@ uri-path  = "ha.ka.ba/lares/api/pono/parser"
 
 ! Parser Law
 
-Parser law names the parsing contract for `text/x-memetic-wikitext`.
+Parser law names the parsing contract for `text/memetic-wikitext`.
 
 Two implementations carry this law:
 
-# `MemeticParser` — TW5 WikiParser subclass; governs parse for all `text/x-memetic-wikitext` tiddlers inside the TW5 VM
+# `MemeticParser` — TW5 WikiParser subclass; governs parse for all `text/memetic-wikitext` tiddlers inside the TW5 VM
 # `@lararium/mesh/meme-ast` — non-TW5 AST consumer path; governs parse for island adaptor, deserializer, and external mesh nodes
 
 Both share the same sigil grammar. Their outputs differ in shape and consumer.
@@ -40,10 +40,10 @@ Both share the same sigil grammar. Their outputs differ in shape and consumer.
 
 !! MemeticParser — TW5 WikiParser Subclass
 
-`MemeticParser` extends TW5's standard WikiParser, registered for `text/x-memetic-wikitext`.
+`MemeticParser` extends TW5's standard WikiParser, registered for `text/memetic-wikitext`.
 
 Implementation: `packages/lararium-tw5/src/memetic-parser.ts`
-TW5 registration path: `module-type: parser`, export key `"text/x-memetic-wikitext"`.
+TW5 registration path: `module-type: parser`, export key `"text/memetic-wikitext"`.
 
 On construction it filters the inherited rule arrays (`pragmaRules`, `blockRules`, `inlineRules`) against a deny list. The deny list defaults to empty — all inherited TW5 rules fire. An operator may override it by writing space-separated rule names to `lar:///ha.ka.ba/config/memetic-rules-except`.
 
@@ -201,7 +201,7 @@ Canonical form:
 ```toml iam
 uri-path  = "..."
 file-path = "..."
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 ...
 ```
 ````
@@ -285,6 +285,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8vyZZOSJ3B0vML85EkUFFjlgSdn_MvR_0erdLkAx1oc
+<<^ code:"&#x0003;" >>ni:///sha-256;ab7epQiD5htX6jMOcgNOIYbFOZAQWnhWm3aQytbT7iI
 
 <<^ code:"&#x0004;" -> ? >>

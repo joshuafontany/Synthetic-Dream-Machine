@@ -11,7 +11,7 @@ manaoio   = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "protocol governance concept: kahu as grammar-guardian role in DreamNet topology"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/kahu"
 ```
 

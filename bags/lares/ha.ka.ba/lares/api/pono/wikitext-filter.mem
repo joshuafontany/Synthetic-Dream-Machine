@@ -13,7 +13,7 @@ namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
 role        = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/wikitext-filter"
 ```
 

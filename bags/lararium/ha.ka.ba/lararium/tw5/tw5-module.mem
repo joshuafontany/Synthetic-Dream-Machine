@@ -11,7 +11,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "a component a carrier wears: kernel-injectable TW5 module meme; capability gate for corpus-carried executable code"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/kapu"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/tw5-module"
 ```
 
@@ -30,7 +30,7 @@ corpus load.
 |---|---|
 | `content-type` | MUST be `"application/javascript"` |
 | `module-type` | MUST be one of `"parser"`, `"widget"`, `"library"`, `"startup"` |
-| `tw5-module-name` | The string key TW5 registers the module under (e.g. `"text/x-memetic-wikitext"` for parsers) |
+| `tw5-module-name` | The string key TW5 registers the module under (e.g. `"text/memetic-wikitext"` for parsers) |
 | `mana` | MUST be ≥ 18 to pass gate layer 1 (threshold) |
 | `manao` | MUST be ≥ 17 to pass gate layer 1 (threshold) |
 | `manaoio` | MUST be ≥ 17 to pass gate layer 1 (threshold) |
@@ -70,6 +70,6 @@ boots correctly in offline or cold-start conditions before the corpus is loaded.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BdLwY8UemEz9-YlOxmoHDcSYjt2QfimAfq_esm3PQLI
+<<^ code:"&#x0003;" >>ni:///sha-256;YqLZdMUDi2WWO5la21ZQgqbwvXFgx3dL1Gaac218vl8
 
 <<^ code:"&#x0004;" -> ? >>

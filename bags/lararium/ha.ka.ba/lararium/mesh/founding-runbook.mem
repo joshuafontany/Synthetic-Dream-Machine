@@ -16,7 +16,7 @@ status    = "rite"
 status-why = "the founding rite, in two branches — rehearsal and keeper; WALKED end-to-end 2026-08-09, two cycles, no amendment"
 revised-on = "2026-08-09"
 tags      = ["mesh/carry-contract", "api/pono/persona-policy", "mesh/siege-resilience", "mesh/charter-chain"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/founding-runbook"
 written   = "2026-07-20"
 ```

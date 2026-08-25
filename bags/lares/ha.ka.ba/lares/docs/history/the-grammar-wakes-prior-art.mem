@@ -13,7 +13,7 @@ register      = "Synthesis"
 render-target = "docs"
 retain        = true
 role          = "side-car to the genesis arc — the 8-system prior-art comparison battery and 7 open design tests that shaped kahea/ahu/loulou design pressure and the W3C lineage verdict. Reference, not narrative."
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/the-grammar-wakes-prior-art"
 ```
 

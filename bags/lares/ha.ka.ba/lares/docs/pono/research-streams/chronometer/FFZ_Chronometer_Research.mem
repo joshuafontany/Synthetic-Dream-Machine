@@ -2,7 +2,7 @@
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research >>
 ```toml iam
-type = "text/x-memetic-wikitext+tiddlywiki"
+type = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research"
 ```
 

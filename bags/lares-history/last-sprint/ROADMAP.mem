@@ -3,7 +3,7 @@
 <<^ code:"&#x0001;" ? -> lar:///last-sprint/ROADMAP >>
 ```toml iam
 file-path = "bags/lares-history/last-sprint/ROADMAP.mem"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/ROADMAP"
 ```
 
@@ -65,7 +65,7 @@ Social graph control inverts: circles are owned by their center, not the platfor
 | S8.3 | tw5-typed coexistence (E.10.10→E.10.11) | ✅ Complete | linonetwo's `tw5-typed@^1.1.5` dev dep added + activated in tsconfig types array. Hand-rolled types coexist (parallel type graphs, no collision). Per-site migration as call sites are touched. |
 | V.1 | Vite plugin packaging — first artifact (E.10.12) | ✅ Complete | `vite.plugin.config.ts` + `scripts/build-plugin-tiddler.ts`. Output: `dist-plugin/lares-memetic-wikitext.tid` (71.3 KiB), drag-and-drop installable in any TW5 5.4+ wiki. Five JS module tiddlers (wikirule + 2 widgets + parser + deserializer) + seven data tiddlers (cascades + templates + mount + readme). |
 | V.2 | Boot-path conversion + lar:// namespace alignment (E.10.13) | ✅ Complete | TW5Engine pushes one envelope tiddler (`lar:///plugins/lares/memetic-wikitext`) into `preloadTiddlers`; TW5's standard plugin loader registers wikirule/parser/deserializer/widget modules and materializes cascade + template + mount shadow tiddlers. `_registerWidgets` / `_registerDeserializer` / parser-wrapper-injection block deleted. Single-backtick parser regression cured as a side effect (canonical `$tw.modules` construction path). Folded with namespace alignment: every Lares system title moved to `lar:///` (cascades, mount, templates, plugin envelope) so shadow-tiddler edits and in-VM plugin re-packs sync to disk through the existing `lar:`-only filter; canon MOVE ceremony no longer bugs out on `$:/`-prefixed system tiddlers. Tag VALUES stay TW5-conventional. Dual-distribution emits both `lar:///` (canonical, 72.2 KiB) and `$:/` (drag-and-drop) envelopes from one Vite library bundle. Decision recorded in `packages/lares-core/memes/api/pono/lar-uri.md` (TW5 System Boundary). |
-| A | Canonical TW5 module export shapes (E.10.14) | ✅ Complete | Wikirule split into 3 module-type:wikirule files (lar-sigil-block / lar-sigil-inline / lar-doctype-comment). Parser exports as `{MemeticParser as "text/x-memetic-wikitext"}`. Widgets self-`require`("$:/core/.../widget.js"), set prototype chain, export under tag name. Plugin loader unpacks via canonical `$tw.modules.applyMethods` flow. In-process smoke harness at `scripts/smoke-plugin-boot.ts`. |
+| A | Canonical TW5 module export shapes (E.10.14) | ✅ Complete | Wikirule split into 3 module-type:wikirule files (lar-sigil-block / lar-sigil-inline / lar-doctype-comment). Parser exports as `{MemeticParser as "text/memetic-wikitext"}`. Widgets self-`require`("$:/core/.../widget.js"), set prototype chain, export under tag name. Plugin loader unpacks via canonical `$tw.modules.applyMethods` flow. In-process smoke harness at `scripts/smoke-plugin-boot.ts`. |
 | W | CodeMirror 6 / Lezer alignment + Memetic Wikitext LSP server | ⬜ Designed (way downstream — gated on CLI wiki stability) | Two-stage: (1) wikirule patterns map onto CM6 + Lezer grammar; `tobibeer/codemirror-6-tw5` is the closest active community effort. (2) ''Operator's TW5-Grammar textmate VSCode plugin evolves into a full Memetic Wikitext LSP server'' — Lezer grammar definitions feed both CM6 (browser TW5 + standalone) and the LSP (VSCode + JetBrains + neovim + any LSP-aware editor). Operator-stated trigger: "once CLI wikis stabilize completely." |
 | G.1→G.5 | Sigil family ports + factory | ✅ Complete | aka URI sigil (G.1), pranala-header (G.2), kahea + loulou URI sigils (G.3), pranala edge inline+block (G.4), `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget` factory collapses 5 widgets (G.5). Six sigils now ride template-cascade architecture (ahu, aka, kahea, loulou, pranala-header, pranala); five share factory. ahu stays bespoke (slot/uri/parentUri logic). kau retired from G — its dispatch is logic-heavy, not cascade-shaped. |
 | G.rest | Remaining sigils (lele, papalohe, pae) | ⬜ Less urgent | Less-load-bearing per operator; can land when use cases surface. Same factory pattern; mostly mechanical. |
@@ -724,6 +724,6 @@ calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.
 | Grammar Invariant 4+ | Block until quine round-trip proves Invariant 3 |
 | Keyhive WASM integration | `encryptedShareHint` field is the forward-compatible hook; Keyhive WASM not yet stable |
 
-<<^ code:"&#x0003;" >>ni:///sha-256;meaIHvsl8JFghwxWVNaxo80qZv1vV9RvU8A7XRvAwSo
+<<^ code:"&#x0003;" >>ni:///sha-256;vKGJf6tnhmEqWSIoJT3s0uxqZKqROUOFCkEU3Mxqkk4
 
 <<^ code:"&#x0004;" -> ? >>

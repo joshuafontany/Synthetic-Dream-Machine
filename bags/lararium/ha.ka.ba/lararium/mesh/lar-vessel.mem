@@ -10,7 +10,7 @@ register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe lar-vessel.ts"
 source-file = "packages/lararium-mesh/src/lar-vessel.ts"
-type        = "text/x-memetic-wikitext+tiddlywiki"
+type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/lar-vessel"
 ```
 

@@ -17,7 +17,7 @@ role          = "load-bearing invariant — the sync boundary admits any valid T
 status        = "designed"
 status-why    = "the namespace design; no source carries it yet"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
 ```
 

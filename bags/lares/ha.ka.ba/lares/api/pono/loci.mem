@@ -11,7 +11,7 @@ namespace = "&#x2299;"
 register  = "Synthesis-Canon"
 retain    = true
 role      = "loci law (kānāwai): the mandatory component — address authority, bags/ siting derivation, relative-name qualification office, address stability, canon-MOVE rule"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loci"
 ```
 

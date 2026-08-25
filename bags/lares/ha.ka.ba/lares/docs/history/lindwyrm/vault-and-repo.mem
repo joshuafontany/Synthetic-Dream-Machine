@@ -14,7 +14,7 @@ render-target = "chat-log:post-header"
 retain        = true
 role          = "DreamDeck narrative locus — Act I of the Lindwyrm hoard story"
 source        = "lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#act-i-vault-repo"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo"
 ```
 

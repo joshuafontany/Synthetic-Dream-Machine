@@ -13,7 +13,7 @@ rating     = "kapu"
 register   = "Synthesis"
 retain     = true
 role       = "NPC dossier, referee view — the Lindwyrm behind the public face: the summit as recruitment engine, the intelligence apparatus, the long game of the mesh; the deepest seals stay in the operator's own seats, pointed at and never carried here"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier"
 ```
 

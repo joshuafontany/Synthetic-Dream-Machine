@@ -12,7 +12,7 @@ namespace = "&#x2299;"
 register  = "Synthesis"
 retain    = true
 role      = "the pre-VM read: what a cold reader must find to stand a wiki, and the floor it stops at"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/boot-loader"
 ```
 

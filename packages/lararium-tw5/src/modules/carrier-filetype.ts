@@ -8,7 +8,7 @@ module-type: startup
  *
  * ── ONE EXTENSION, ONE TYPE ─────────────────────────────────────────────────────────────────────
  * A `.mem` file IS a memetic-wikitext carrier. It opens with a `<<!DOCTYPE …>>` declaration, an SOH
- * frame, or both, and `text/x-memetic-wikitext` reads every one of those shapes. The extension has
+ * frame, or both, and the carrier type reads every one of those shapes. The extension has
  * already answered the only question a router could ask, so the registration carries no ambiguity
  * forward.
  *

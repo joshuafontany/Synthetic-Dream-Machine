@@ -13,7 +13,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: two planes of different arity — the vessel-wide content tiga (ha/ka/ba) + a face's own four planes (persona/circles/identities/sessions), all named off one derived tag and resolved from @catalog"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 ```
 

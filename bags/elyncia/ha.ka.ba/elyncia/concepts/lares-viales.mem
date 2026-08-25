@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "the Lares Viales / Hermai — wayfarer-lares and crossroads-markers of the leylines; the fiction of the minimal blind-carriage node (cap-model at @lararium/mesh/vessel-caps#lares-viales)"
 l-space   = "stable:@elyncia"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/elyncia/concepts/lares-viales"
 ```
 

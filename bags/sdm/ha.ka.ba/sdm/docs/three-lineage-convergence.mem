@@ -13,7 +13,7 @@ rating     = "meme"
 register   = "Synthesis"
 retain     = true
 role       = "design research — the three-lineage convergence: Ars Magica's verb×form grammar, Mage's rated spheres, and the SDM thirteen; what each lens teaches the conversion program"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/docs/three-lineage-convergence"
 ```
 

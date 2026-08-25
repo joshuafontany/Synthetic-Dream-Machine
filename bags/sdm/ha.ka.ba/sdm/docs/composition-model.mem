@@ -11,7 +11,7 @@ register  = "Synthesis"
 retain    = true
 role      = "operator/dev doctrine: the Powers composition model — entity + module + component + mount-point, one flat #has verb, pattern/instance two-layer split"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/docs/composition-model"
 ```
 

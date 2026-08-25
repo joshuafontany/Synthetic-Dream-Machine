@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law for shared lar l-space precedence across system memes and live exchange records"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/l-space-trust"
 ```
 

@@ -9,7 +9,7 @@ mana      = 10
 register  = "Synthesis-Canon"
 retain    = true
 role      = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/cli/bin/lares"
 ```
 

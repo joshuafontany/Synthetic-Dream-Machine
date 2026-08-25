@@ -9,7 +9,7 @@ register  = "Synthesis"
 retain    = true
 role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pono"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 ```
 

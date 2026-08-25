@@ -20,7 +20,7 @@ retain             = true
 role               = "deliberate post-hoc L-Prime auditor of existing text; Hoʻoko correction surface --- distinct from the forward-seeding ward"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/mu/l-prime"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type               = "text/x-memetic-wikitext+tiddlywiki"
+type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/mu/l-prime/SKILL"
 ```
 

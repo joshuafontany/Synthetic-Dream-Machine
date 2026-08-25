@@ -13,7 +13,7 @@ register        = "Synthesis-Canon"
 retain          = true
 role            = "DreamDeck / Gaia-side narrative locus — the week the Crossroads node learned where it stood"
 source-consumed = "packages/lares-core/memes/docs/infrastructure-as-mythology/The_Kindling_of_the_Crossroads_Node.md"
-type            = "text/x-memetic-wikitext+tiddlywiki"
+type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node"
 ```
 

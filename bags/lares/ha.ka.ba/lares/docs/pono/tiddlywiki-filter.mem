@@ -8,7 +8,7 @@ register  = "Synthesis"
 retain    = false
 role      = "docs companion for x-tiddlywiki-filter: examples, guidance, reminders, and deferred scope notes"
 tags      = ["api/pono/meme"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/tiddlywiki-filter"
 ```
 

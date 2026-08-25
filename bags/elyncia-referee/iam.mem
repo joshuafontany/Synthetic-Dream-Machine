@@ -6,7 +6,7 @@ bag       = "elyncia-referee"
 cap-tier  = "contract"
 home      = "repository"
 repository = "synthetic-dream-machine"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 ```
 
 ! @elyncia-referee

@@ -1,5 +1,5 @@
 title: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel
-type: text/x-memetic-wikitext
+type: text/memetic-wikitext+tiddlywiki
 tags:
 
 <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
@@ -8,7 +8,7 @@ tags:
 ```toml iam
 uri-path  = "ha.ka.ba/lares/api/pono/memetic-wikitext/kernel"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
-type      = "text/x-memetic-wikitext"
+type      = "text/memetic-wikitext+tiddlywiki"
 l-space   = "stable"
 confidence = 18
 register  = "CS"

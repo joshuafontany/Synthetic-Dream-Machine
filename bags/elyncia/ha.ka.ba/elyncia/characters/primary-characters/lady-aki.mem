@@ -27,7 +27,7 @@ sdm-character-role                     = "Wandering Spider Folk miko-wizard, fun
 sdm-character-save                     = 13
 sdm-daemon-name                        = "Freyja Fontany"
 sdm-daemon-uri                         = "lar:///ha.ka.ba/bags/players/freyja-fontany"
-type                                   = "text/x-memetic-wikitext+tiddlywiki"
+type                                   = "text/memetic-wikitext+tiddlywiki"
 uri-path                               = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki"
 ```
 

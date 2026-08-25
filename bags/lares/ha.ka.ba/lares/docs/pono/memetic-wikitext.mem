@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = false
 role      = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/memetic-wikitext"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/memetic-wikitext"
 ```
 
@@ -160,7 +160,7 @@ TW5 cascade page: a list of conditions evaluated in turn, ordered by tagged-tidd
 XML and XHTML supply the right model for well-formedness, nesting, closure, quoting, and conformance language. Sigils SHOULD look more like XML/XHTML than HTML in their closure discipline.
 
 ''4. Fragment semantics require a representation model.''
-W3C fragment guidance requires fragment meaning to bind to a representation or media type, not just to a URI scheme. The `#slot` anchor form in `ahu` needs a registered media type (`text/x-memetic-wikitext`) to carry normative fragment semantics.
+W3C fragment guidance requires fragment meaning to bind to a representation or media type, not just to a URI scheme. The `#slot` anchor form in `ahu` needs a registered media type (`text/memetic-wikitext`) to carry normative fragment semantics.
 
 ''5. Normative language: RFC 8174 + W3C QA guidance.''
 `MUST`, `SHOULD`, `MAY`, conformance classes, and claims follow RFC 8174. The `aka lar:///ha.ka.ba/lares/api/pono/RFC-2119` edge in every invariant file satisfies this requirement.
@@ -193,6 +193,6 @@ The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wi
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AJuZIRCIl9pUi4K3jJEb2Tn9YmXYuxZwVpR3ldK0Y8g
+<<^ code:"&#x0003;" >>ni:///sha-256;QQ-cbLEE15xyh-v2arE3NPaoDPBATwSr37m-RBbLw0s
 
 <<^ code:"&#x0004;" -> ? >>

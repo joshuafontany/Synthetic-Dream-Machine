@@ -13,7 +13,7 @@ retain        = true
 revision-note = "PROVISIONAL — the conversion act: a fed guest re-anchors from host to realm at a periodic assembly. Shaped, unbuilt, and deliberately UNDER-SPECIFIED: the mesh holds that a re-anchoring happened and never what made it valid"
 role          = "the conversion act — how a stranger begins to dwell. The guest dwells WITH a host (a dyad, one edge); the thing-event re-anchors that dwelling INTO the realm. The assembly stands as the third party that inverts the host-payment problem: the host is paid in depth for GIVING the guest away, never in a dependant kept"
 tags          = ["api/pono/meme"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/the-thing-event"
 ```
 

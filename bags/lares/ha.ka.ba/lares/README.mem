@@ -10,7 +10,7 @@ manao     = 16
 register  = "Synthesis-Canon"
 retain    = true
 role      = "identity frame and infrastructure map for the Lares node"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/README"
 ```
 

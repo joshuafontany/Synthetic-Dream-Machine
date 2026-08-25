@@ -14,7 +14,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "sacred chao boot, ha/ka/ba triad instantiator, address-space semantics"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/mu/chao"
 ```
 

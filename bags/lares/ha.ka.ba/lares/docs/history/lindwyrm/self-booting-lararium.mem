@@ -14,7 +14,7 @@ render-target   = "chat-log:post-header"
 retain          = true
 role            = "DreamDeck narrative locus — April 10 threshold, transclusion-first self-location"
 source-consumed = ["packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE.md", "packages/lares-core/memes/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY.md"]
-type            = "text/x-memetic-wikitext+tiddlywiki"
+type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium"
 ```
 

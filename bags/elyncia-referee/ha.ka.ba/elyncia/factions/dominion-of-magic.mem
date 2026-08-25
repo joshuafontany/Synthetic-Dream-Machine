@@ -13,7 +13,7 @@ rating     = "kapu"
 register   = "Synthesis"
 retain     = true
 role       = "faction meme, referee view — the Rise of the Dominion of Magic: the public theocracy, and beneath it the sealed spine — Umvald's reaching, the hijacked rite, the puppet-state"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/dominion-of-magic"
 ```
 

@@ -17,7 +17,7 @@ manaoio            = 8
 register           = "Synthesis"
 role               = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
 skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
-type               = "text/x-memetic-wikitext+tiddlywiki"
+type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "lares_research/skill-pono-template"
 ```
 

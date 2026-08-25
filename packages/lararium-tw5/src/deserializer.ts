@@ -4,14 +4,14 @@ type: application/javascript
 module-type: tiddlerdeserializer
 \*/
 /**
- * deserializer — TW5 causal-island boundary module for text/x-memetic-wikitext.
+ * deserializer — TW5 causal-island boundary module for text/memetic-wikitext+tiddlywiki.
  *
  * Heleuma ba: this TS source compiles to an CJS plugin tiddler at
  * lar:///ha.ka.ba/lararium/tw5/modules/deserializer
- * (module-type: tiddlerdeserializer, key: text/x-memetic-wikitext).
+ * (module-type: tiddlerdeserializer, key: text/memetic-wikitext+tiddlywiki).
  *
  * Parsing MUST happen inside the TW5 VM on live clients (FFZ invariant).
- * This file is the causal-island boundary: text/x-memetic-wikitext enters,
+ * This file is the causal-island boundary: text/memetic-wikitext+tiddlywiki enters,
  * TiddlerFields[] (parent + ahu-slot children) leave.
  * Non-TW5 adaptation stops at this shore; decomposition law begins here.
  *
@@ -729,6 +729,7 @@ function asStringFields(fields: Record<string, unknown>): TiddlerFields {
   return out;
 }
 
+export { memeticWikitextDeserializer as "text/memetic-wikitext+tiddlywiki" };
 export { memeticWikitextDeserializer as "text/x-memetic-wikitext+tiddlywiki" };
 export { memeticWikitextDeserializer as "text/x-memetic-wikitext" };
 

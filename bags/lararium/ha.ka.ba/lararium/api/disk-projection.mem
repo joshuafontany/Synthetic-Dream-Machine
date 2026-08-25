@@ -17,9 +17,9 @@ revised-on    = "2026-06-18"
 revision-note = "working↔canon split (shore-law): a wiki's saved edits land in the typed @working live layer (wikis/, tracked); canon (bags/) is reached only by a cap-gated promotion MOVE; the general lararium shore law (working↔canon · plane↔plane · host↔lararium) governs every causal-island crossing, host-agnostic surface contract; prior: @oracle/@lararium split (#oracle-split) — the runtime system island (@oracle) separates from the memetic corpus (@lararium); projection-law trued to running code; co-projection rewrite; carrier-whole at rest"
 role          = "load-bearing invariant — the node vessel's two on-disk projection surfaces: bags/ (seed/canon) vs wikis/ (projection/output); which bags mirror, which ride the sync mesh"
 status        = "standing"
-status-why = "the disk projector stands live; bags render to wikis"
+status-why    = "the disk projector stands live; bags render to wikis"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/meme"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 ```
 
@@ -138,7 +138,7 @@ A future debug-only disk projection MAY be added behind an explicit flag; it MUS
 
 Write-back routes by ''type'', in three rules:
 
-# ''Group rule.'' `type: text/x-memetic-wikitext` records form a ''tiddler-group'' keyed by the carrier parent (a fragment URI belongs to its parent's group). A group MUST write back as ''ONE markdown-meme `.md`'' — the whole carrier (#granularity). A child's change re-flushes its group, never its own file.
+# ''Group rule.'' `type: text/memetic-wikitext` records form a ''tiddler-group'' keyed by the carrier parent (a fragment URI belongs to its parent's group). A group MUST write back as ''ONE markdown-meme `.md`'' — the whole carrier (#granularity). A child's change re-flushes its group, never its own file.
 # ''Default rule.'' Every other tiddler follows the ''standard TW5 path'' — `$tw.utils.generateTiddlerFileInfo` semantics, run inside the island's own TW5 VM: `.tid` for tw5-wikitext, content-file + `.meta` sidecar for foreign types, `.json` for unsafe fields. One tiddler, one file, TW5's own format law.
 # ''Cascade rule.'' Siting and format overrides ride ''composable cascade tiddlers inside the wiki'' — `lar:///ha.ka.ba/lararium/config/disk-paths` and `…/config/disk-extensions`, first non-empty filter result wins, per-wiki overlays compose through the recipe (the proven `config/bag-paths` pattern; the lar-native mirror of TW5's `$:/config/FileSystemPaths` / `FileSystemExtensions`).
 
@@ -202,6 +202,6 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 the FORMAL register of the living grammar ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#three-registers]]) — the curated band
 between casual chat-use and the defined parser core.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-eEPk6nP-k-lpB3tOVbdFxO8PxQbybGixlqd4YoeIl8
+<<^ code:"&#x0003;" >>ni:///sha-256;0dPlBCKPs3p-i0ghp6I3KsgSp90qUxEkGV3C5kw7Spc
 
 <<^ code:"&#x0004;" -> ? >>

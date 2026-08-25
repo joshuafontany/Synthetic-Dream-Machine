@@ -14,7 +14,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "lar-telemetry — the process by which the @daemon TW5 engine reads a turn's instrument sigils (the gauges) into gradient-valued readings, holds them on the nalu queue, and flushes on the next wave to project lar_* onto the mempalace drawer; the chat sigils as SharktoothSigil instruments; gradient readings never verdicts; verbatim-always / telemetry-eventual; @daemon owns it all"
 tags      = ["api/pono/meme", "api/lararium"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/lar-telemetry"
 written   = "2026-06-24"
 ```
@@ -61,7 +61,7 @@ lar:///ha.ka.ba/lararium/api/capture-annotation-model#forward-facing-nalu.
 Two readers parse the exchange today; one survives.
 
 * ''The engine reader'' — `memetic-parser` stands a `WikiParser` subclass for
-  `text/x-memetic-wikitext`: TiddlyWiki wikitext as a ''superset'', with `<<~ … >>`
+  `text/memetic-wikitext`: TiddlyWiki wikitext as a ''superset'', with `<<~ … >>`
   claimed by the `lar-sigil` wikirule, native `<<macro>>` still firing. The
   grammar runs ''self-hosted'': a tiddler tagged the `SharktoothSigil` grammar tag
   //teaches the parser a new word// (`grammar-cache` reads its `lar-*` fields into a
@@ -225,6 +225,6 @@ readings AND the form-capture both drain the one emitted-marker stream, no disco
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;F9iowiMJO8CJmBcJ-L1Jludt_9w_X-6QL-xp9Fdz2pU
+<<^ code:"&#x0003;" >>ni:///sha-256;HytnkmGKj9dTkN_vjrpYxDPdkhUkAbUK-Qliia2nym8
 
 <<^ code:"&#x0004;" -> ? >>

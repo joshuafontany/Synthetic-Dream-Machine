@@ -12,7 +12,7 @@ register  = "Synthesis"
 retain    = true
 role      = "component (function): ECM Scan — sensing and analyzing active Powers and noospheric signatures"
 l-space   = "sdm"
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/ecm-scan"
 ```
 

@@ -11,7 +11,7 @@ manaoio    = 16
 register   = "Synthesis"
 retain     = true
 role       = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/ROADMAP"
 ```
 
@@ -631,7 +631,7 @@ TW5 is a ''first-class binding layer'', not an optional guest. It is summoned wh
 
 * ''Filter engine'' — wikitext-filter expressions over the tiddler corpus; `filterClosure()` evaluates room recipes, template cascades, and palette search
 * ''Virtual server'' — `LarariumCrdtSyncAdaptor` binds `AutomergeMemeStore` / `LarTiddlerStore` to TW5’s wiki; CRDT deltas propagate into TW5 tiddlers; TW5 tiddler saves propagate back to the store (echo-loop guarded). `MemoryTiddlerStore` is now tests/fixtures only.
-* ''Parse bridge'' — a registered `text/x-memetic-wikitext` TW5 parser module delegates to `parseMemeCarrier()` in `@lararium/mesh`; TW5’s render pipeline can then produce HTML from carrier tiddlers without being the canonical parser
+* ''Parse bridge'' — a registered `text/memetic-wikitext` TW5 parser module delegates to `parseMemeCarrier()` in `@lararium/mesh`; TW5’s render pipeline can then produce HTML from carrier tiddlers without being the canonical parser
 * ''Draft surface'' — target flow is canvas/TW5 edit → `AutomergeMemeStore.put(origin: "canvas-draft" | "tw-local")` → live room state → `PUT /admin/promote` ceremony → `lares/` file (canon). The tldraw body-node draft listener exists, but body nodes are not emitted yet.
 
 The three-tree pipeline remains:
@@ -3258,7 +3258,7 @@ var __lar_X = (function(exports) { exports.X = X; return exports; })({});
 ```
 The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` object is never touched. Every `require("lar:///...{module}")` returns `{}`. Widget registration, deserializer registration, and library module exports were all broken. `window.__lararium_tw5_modules` global declared in `vite.bundle.config.ts` had zero runtime readers (dead web2 remnant). All 17 `dist-widgets/*.cjs.js` files had misleading extension — not IIFEs after the fix.
 
-↻ ''Orient:'' TW5 wraps all plugin tiddler code in its own CommonJS scope, injecting real `exports`. CJS output (`format: 'cjs'`) targets TW5's actual `exports` object directly. Deserializer needs MIME-key footer (`exports["text/x-memetic-wikitext"] = exports.memeticWikitextDeserializer`) since `"text/x-memetic-wikitext"` is not a valid TypeScript export identifier. `.cjs.js` suffix → `.tw5.js` (format-agnostic; describes what the file IS). `vite.bundle.config.ts` gets same treatment; `write-tiddler-memes.ts` + `write-module-meme.ts` updated to match.
+↻ ''Orient:'' TW5 wraps all plugin tiddler code in its own CommonJS scope, injecting real `exports`. CJS output (`format: 'cjs'`) targets TW5's actual `exports` object directly. Deserializer needs MIME-key footer (`exports["text/memetic-wikitext"] = exports.memeticWikitextDeserializer`) since `"text/memetic-wikitext"` is not a valid TypeScript export identifier. `.cjs.js` suffix → `.tw5.js` (format-agnostic; describes what the file IS). `vite.bundle.config.ts` gets same treatment; `write-tiddler-memes.ts` + `write-module-meme.ts` updated to match.
 
 ⊘ ''Decide:'' `format: 'cjs'`, remove CJS `name:`, add `esModule: false` + `exports: "named"` in rollup output, footer injection for deserializer MIME key, rename all dist files and build pipeline references.
 
@@ -3287,6 +3287,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BCcq4AWk_HB5SvbMqK2c5VSSW8zBUUl9sMPG21_hWeI
+<<^ code:"&#x0003;" >>ni:///sha-256;fuI8r06JMxsjqJTgwJ4CLryXfEv9YOxVjEGMUktWod8
 
 <<^ code:"&#x0004;" -> ? >>

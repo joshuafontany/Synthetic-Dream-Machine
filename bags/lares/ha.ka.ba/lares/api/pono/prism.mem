@@ -12,7 +12,7 @@ register  = "Synthesis-Canon"
 retain    = true
 role      = "the lens-harness --- references existing content and refracts it through declared lenses into composed readings"
 tags      = ["api/pono/meme", "api/pono/loci"]
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/prism"
 ```
 

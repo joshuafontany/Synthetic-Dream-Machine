@@ -14,7 +14,7 @@ register   = "Provisional-Synthesis"
 retain     = true
 role       = "spine, referee tier — Elyncia 04, the RNG: the most designed book, migrated LAST, its five-part chiasmus preserved by the spine's mortar"
 tags       = ["ha.ka.ba/elyncia/books/index"]
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/books/referee-noosphere-guide/spine"
 ```
 

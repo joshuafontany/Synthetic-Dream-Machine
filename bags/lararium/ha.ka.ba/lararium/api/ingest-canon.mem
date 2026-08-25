@@ -13,7 +13,7 @@ namespace = "&#x2299;"
 register  = "Canon"
 retain    = true
 role      = "THE locked golden path for {any chat + telemetry} → ingest → nalu → mempalace: one Kappa path, born-annotated single-write, per-exchange drawers, the writeback demoted to version-gated re-derivation and joined to the single-writer lock. 9 cited decisions + the build/retire migration."
-type      = "text/x-memetic-wikitext+tiddlywiki"
+type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/ingest-canon"
 written   = "2026-06-27"
 ```
@@ -139,7 +139,7 @@ alternate syntax shipped as a plugin). Five findings, all sourced (talk.tiddlywi
 linonetwo's tw-react + TidGi):
 
 # ''Registration is ALREADY canonical.'' `memetic-parser.ts` subclasses WikiParser for content-type
-   `text/x-memetic-wikitext` (deny-list now EMPTY → native rule flow unchanged); wikirules load via the
+   `text/memetic-wikitext` (deny-list now EMPTY → native rule flow unchanged); wikirules load via the
    stock `module-type: wikirule` path (`createClassesFromModules`). `<<~` claims by DISJOINT MATCH —
    TW5's `macrocallinline` skips it (`~` isn't a legal macro-name start), so no ordering-luck, no fork.
    We sidestep TW5's global token-collision pitfall TWO ways: our own content-type AND the non-colliding
@@ -187,6 +187,6 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;apGT8LZNyorOYdq758qsuD2dOCbVNzy9RHkl9jF6TgA
+<<^ code:"&#x0003;" >>ni:///sha-256;rQ-RdrnP0opcMlrX1Cdv8-UQzLvYTMjytET0vno-9h4
 
 <<^ code:"&#x0004;" -> ? >>

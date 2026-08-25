@@ -13,7 +13,7 @@ manaoio    = 17
 register   = "Synthesis-Canon"
 retain     = true
 role       = "ATProto / Bluesky login architecture doctrine — BFF, identity layers, DPoP boundary"
-type       = "text/x-memetic-wikitext+tiddlywiki"
+type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/AUTH-ATPROTO"
 ```
 

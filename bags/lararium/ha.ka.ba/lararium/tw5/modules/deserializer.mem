@@ -10,11 +10,11 @@ manao         = 17
 manaoio       = 16
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 register      = "Synthesis-Canon"
-role          = "heleuma ka: TW5 tiddlerdeserializer for text/x-memetic-wikitext"
+role          = "heleuma ka: TW5 tiddlerdeserializer for text/memetic-wikitext"
 source-symbol = "*"
 status-date   = "2026-05-01"
 tags          = ["lar:///ha.ka.ba/lares/api/pono/heleuma/ka"]
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/deserializer"
 ```
 
@@ -24,7 +24,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/deserializer"
 
 !! Deserializer — Contract
 
-TW5 `module-type = "tiddlerdeserializer"` module keyed to `text/x-memetic-wikitext`.
+TW5 `module-type = "tiddlerdeserializer"` module keyed to `text/memetic-wikitext`.
 
 When TW5 encounters a tiddler with that content-type, it calls:
 
@@ -37,8 +37,8 @@ Stream model:
 * ''Partial carrier'' (no ETX): `flush()` emits best-effort; no crash.
 * ''Bare body'' (no SOH framing): treated as a single carrier with `fields.title` as URI.
 
-Parent tiddler: `text = original carrier text`, `type = "text/x-memetic-wikitext+tiddlywiki"`.
-Child tiddlers (ahu slots): `text = ahu body text`, also `type = "text/x-memetic-wikitext+tiddlywiki"`.
+Parent tiddler: `text = original carrier text`, `type = "text/memetic-wikitext+tiddlywiki"`.
+Child tiddlers (ahu slots): `text = ahu body text`, also `type = "text/memetic-wikitext+tiddlywiki"`.
 No AST→string reconstruction. MemeticParser owns all rendering for both levels.
 
 Compiled artifact: `packages/lararium-tw5/tiddlers/src/memetic-wikitext-deserializer.js`
@@ -60,6 +60,6 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;XYL6EPw1bnvQPNcv9R5hciVW5X-XofSgdg5Y8EfGgD4
+<<^ code:"&#x0003;" >>ni:///sha-256;uXMMWkJSsaK-vqp32A6AEI3JdLBMYlg-8h4VpBx9LlQ
 
 <<^ code:"&#x0004;" -> ? >>

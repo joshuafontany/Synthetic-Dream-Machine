@@ -13,10 +13,10 @@ register      = "Synthesis-Canon"
 retain        = true
 revised-on    = "2026-08-24"
 revision-note = "the split: the transmission-frame half stands in its own sibling specification (api/pono/memetic-wikitext-framing) — this document keeps the language, composes as the document production the frame wraps, and cites [FRAMING] where the frame law lives"
-role          = "submittable specification for text/x-memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submissions: the lar: URI spec and the carrier framing spec."
+role          = "submittable specification for text/memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submissions: the lar: URI spec and the carrier framing spec."
 status        = "standing"
 status-why    = "submission-draft"
-type          = "text/x-memetic-wikitext+tiddlywiki"
+type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext"
 ```
 
@@ -30,7 +30,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext"
 
 !! Abstract
 
-Memetic-wikitext (`text/x-memetic-wikitext`) defines a composable, wikitext-derived markup in which every active construct rides one outer delimiter — the ''sharktooth procedure call'' `<<~ … >>` — and reads on two layers at once: a ''compile-time graph'' reading and a ''render-time semantic'' reading. Authors write content, typed graph edges, definitions, conditionals, iteration, and concurrency coordination through one uniform sigil surface. The language carries a TiddlyWiki5 and Verse heritage and addresses its content by the sibling `lar:` URI scheme.
+Memetic-wikitext (`text/memetic-wikitext`) defines a composable, wikitext-derived markup in which every active construct rides one outer delimiter — the ''sharktooth procedure call'' `<<~ … >>` — and reads on two layers at once: a ''compile-time graph'' reading and a ''render-time semantic'' reading. Authors write content, typed graph edges, definitions, conditionals, iteration, and concurrency coordination through one uniform sigil surface. The language carries a TiddlyWiki5 and Verse heritage and addresses its content by the sibling `lar:` URI scheme.
 
 This specification names the lexical structure, a formal surface grammar, the dual-layer processing model, the typed-edge (pranala) system, and the conformance, media-type, and security obligations a processor MUST meet. It does ''not'' enumerate every sigil; the live sigil registry rides the runtime ''kernel'' face, and the epistemic ontology rides the `api/mu` canon.
 
@@ -48,7 +48,7 @@ This document holds ''submission-draft'' maturity. The lexical structure, dual-l
 
 !! Introduction — Scope, Audience, and Relation to the `lar:` Spec
 
-''Scope.'' This specification covers the surface syntax of `text/x-memetic-wikitext`, the parse and render processing model, the typed-edge system, and processor conformance. It governs how constructs get ''written and processed'', and stops there; meaning beyond the language lives in the ontology memes.
+''Scope.'' This specification covers the surface syntax of `text/memetic-wikitext`, the parse and render processing model, the typed-edge system, and processor conformance. It governs how constructs get ''written and processed'', and stops there; meaning beyond the language lives in the ontology memes.
 
 ''Out of scope.'' The epistemic ontology (the `syad` standpoints, `saptabhaṅgī` predications, and `mu` tools) lives in `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives` and `lar:///ha.ka.ba/lares/api/mu/the-four-tools`; the Law of Fives and the attention scale live in `lar:///ha.ka.ba/lares/api/mu/the-law-of-5s` and `lar:///ha.ka.ba/lares/api/pono/attention-scale`. The operational authoring discipline lives at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL`. The live TOML sigil registry rides the runtime kernel at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel`.
 
@@ -505,7 +505,7 @@ A ''conforming author'' SHOULD: reserve capitalized RFC-2119 force for intended 
 
 ```
 Type name:                 text
-Subtype name:              x-memetic-wikitext+tiddlywiki
+Subtype name:              memetic-wikitext+tiddlywiki
 Required parameters:       none
 Optional parameters:       charset (default UTF-8)
 Encoding considerations:   8-bit; UTF-8 REQUIRED
@@ -529,10 +529,11 @@ the content stays reasonable to present absent interpretation software — this 
 bytes rather than on argument, and the marks named SOH · STX · ETX · EOT ([FRAMING] #control-set) name what a
 reference STANDS FOR, never what a file contains.
 
-The `x-` prefix reads as DEPRECATED under RFC 6838: a type wearing it sits in no
-tree at all, and the registration path drops it (the target name `text/memetic-wikitext+tiddlywiki`, with
-the current spelling filed as a deprecated alias — the office `CARRIER_TYPE_UNSUFFIXED` already performs
-on the read side). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
+The subtype carries no `x-` prefix: RFC 6838 deprecates it, and a type wearing it sits in no tree at
+all. The earlier `x-` spellings (`text/x-memetic-wikitext+tiddlywiki` and the unsuffixed
+`text/x-memetic-wikitext`) file as deprecated aliases the read side admits forever and no writer emits —
+carriers authored under any spelling name the same syntax, and content-addressed stores hold bytes under
+paths the old spellings named. The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
 generic processing: a receiver holding only a TW5 parser processes a carrier usefully, every sigil an
 unbound macro call degrading to inert text (#conformance). That the syntax builds on TW5 states the
 lineage; the degradation property states the warrant.
@@ -642,11 +643,11 @@ A canvas reaction wire (flow surface):
 * ''Widget-tree pass.'' `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.
 * ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
 * ''The `+tiddlywiki` suffix — adopted, corpus-wide.'' Every carrier writes
-  `text/x-memetic-wikitext+tiddlywiki` in both its declaration and its iam; the read side keeps the
-  unsuffixed spelling as a deprecated alias (`CARRIER_TYPE_UNSUFFIXED`), the office RFC 6838 names for
-  a registration. What stays open: the suffix sits in no IANA registry, and registering it needs a
-  normative reference for TW5 wikitext that no standards track yet carries — the base-syntax document
-  this family still owes.
+  `text/memetic-wikitext+tiddlywiki` in its iam, and its declaration writes the matching root name; the
+  read side keeps the earlier `x-` spellings as deprecated aliases, the office RFC 6838 names for a
+  registration. What stays open: the suffix sits in no IANA registry, and registering it needs a
+  normative reference for TW5 wikitext — the base-syntax document stands drafted
+  (`lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext`) and awaits its walk to the TW5 circle.
 
 <<~/ahu >>
 
@@ -670,6 +671,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BnZAtl_KN2zCtvpKuCiqrWUeMrL05JolCkyjQd8GYqs
+<<^ code:"&#x0003;" >>ni:///sha-256;TXuPjGHXRIW3GFHvvizxHWtq5yIjEZGMsN1csoWQUXY
 
 <<^ code:"&#x0004;" -> ? >>

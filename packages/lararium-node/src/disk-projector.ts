@@ -340,7 +340,7 @@ export class LarDiskProjector {
     // carries every name; WHAT projects = carriers only. Ledger/observation
     // records (residency effect log) stay off disk — audit data, never
     // carrier surface. (The general type-filter — project only
-    // text/x-memetic-wikitext — arrives with the migration wave.)
+    // text/memetic-wikitext+tiddlywiki — arrives with the migration wave.)
     if (isEffectRecordUri(tiddlerUri)) return;
 
     // Site the carrier by its own filetype — ONE render shore. The VM registry
