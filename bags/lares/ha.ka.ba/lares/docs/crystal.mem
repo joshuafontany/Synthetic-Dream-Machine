@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/crystal"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Crystal Docs
@@ -40,8 +42,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
-
 <<~ ahu #edges >>
 
 !! Edges
@@ -51,6 +51,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;puMELiocSy2HRrIfe6GUXyeCq1H0Wa7w-WyfxBzlhXA
+<<^ code:"&#x0003;" >>ni:///sha-256;EuZME6XvtXpEeks4fl3qcnAfoxEqsb20CSaC0QgGWDA
 
 <<^ code:"&#x0004;" -> ? >>

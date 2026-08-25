@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/tick"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! \tick (Deferred)
@@ -28,8 +30,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
-
 <<~ ahu #edges >>
 
 !! Edges
@@ -38,6 +38,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;C5NAghNO68_3akD8_8HConGHcLVG5_UCgGhzy7Eyy0A
+<<^ code:"&#x0003;" >>ni:///sha-256;hWZ8K4T4yddSI0fVr3ptRmaBjLVzYCqzFpTsMBpZQok
 
 <<^ code:"&#x0004;" -> ? >>

@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kumu"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Kumu
@@ -30,8 +32,6 @@ Where `wehe` / `\procedure` declares a named callable body, `kumu` declares a na
 a procedure executes; a kumu defines a form that other nodes instantiate.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -68,6 +68,6 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AkxfdQZ6447sQR4-R37qnNNT0JkxNVj6ZujreSmS5YQ
+<<^ code:"&#x0003;" >>ni:///sha-256;XrxtUoK3AnrIarTE-FS0DwAc4kpNz4wYVgj7Ir-cHVc
 
 <<^ code:"&#x0004;" -> ? >>

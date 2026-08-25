@@ -16,6 +16,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Heleuma — Anchor
@@ -30,8 +32,6 @@ A ''heleuma'' names any artifact that MUST exist outside the `lar:///` URI space
 A heleuma does not mark failure. It marks a ''named threshold crossing'' — the meme graph asserting sovereignty over something that must, for now, be born outside.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -86,6 +86,6 @@ A heleuma API meme that acquires:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;cq2smHqE-uxt9fxn4fEt1a04QEr_ohZBMhl6kIP2YjA
+<<^ code:"&#x0003;" >>ni:///sha-256;oMo2_JdF-H8U8vdQDZV4UR3_xt_IjJMF5oaHA0zu5HI
 
 <<^ code:"&#x0004;" -> ? >>

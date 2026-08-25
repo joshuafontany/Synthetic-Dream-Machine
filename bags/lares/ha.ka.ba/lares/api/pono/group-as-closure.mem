@@ -22,6 +22,8 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Group as Closure
@@ -37,8 +39,6 @@ prior-arts converge on this shape; this meme stands them whole and maps them ont
 `#has`-stack.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #core-claim >>
 
@@ -200,6 +200,6 @@ group-object, the closure model carries a real pattern integrity, not a stylisti
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OOTBcJh6qzb6d7QCsHsko_UdOvKygd-2S48U47GZIdo
+<<^ code:"&#x0003;" >>ni:///sha-256;N4p6IXT_KPhTkUHceUgXXgB8Qj5InHUBIb3b5H-OXlE
 
 <<^ code:"&#x0004;" -> ? >>

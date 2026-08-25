@@ -18,6 +18,8 @@ uri-path       = "ha.ka.ba/lares/api/pono/meme"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>⊙:5de4551845d0a7b9
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Meme Law (Kānāwai)
@@ -36,8 +38,6 @@ and propagates through the content-addressed bag network the same way a biologic
 through a social network.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -171,6 +171,6 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pilr6iKHecGLyLjPstl_CK8oH03gt7s5NFkDgWaSPIE
+<<^ code:"&#x0003;" >>ni:///sha-256;Ne3N3S05i2o8Rcpv23fAjZgFVP53w6bSc17OR_b7tvw
 
 <<^ code:"&#x0004;" -> ? >>

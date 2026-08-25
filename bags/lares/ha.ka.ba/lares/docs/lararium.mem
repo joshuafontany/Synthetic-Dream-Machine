@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/lararium"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Lararium Docs
@@ -41,8 +43,6 @@ Use this branch for:
 * lararium-side signal rooms under `lar:///ha.ka.ba/lararium/docs/signal`
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #mechanics-shelf >>
 
@@ -72,6 +72,6 @@ The rooms may deepen later without moving the seat again.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TVtWv-uIqRnuxuqo01WQlPmjQ8Gdp_wVylhUte2HMVw
+<<^ code:"&#x0003;" >>ni:///sha-256;g_gQiJ9CLTG9Fkdu4X6VD6nO7c14pKv8DDiCR-Unzs4
 
 <<^ code:"&#x0004;" -> ? >>

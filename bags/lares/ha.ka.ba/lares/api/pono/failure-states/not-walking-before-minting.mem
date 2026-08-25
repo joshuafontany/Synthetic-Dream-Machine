@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Not Walking Before Minting
@@ -39,8 +41,6 @@ The node reasons a finding out from context — sometimes across several researc
 ↺ if the graph held it, ask what ELSE sits one hop out; a rediscovery usually names a whole unwalked shelf.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ If the graph's version reads WORSE than the derivation, that reads as a genuine 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gnfvbtr0MwsSaX30M9bEAb_NWhAWpFm4mbLxVL4a31U
+<<^ code:"&#x0003;" >>ni:///sha-256;l7e0gBjPbYHuXtPBRCy76s6dPi_qm4ZLXzNbirFIqLk
 
 <<^ code:"&#x0004;" -> ? >>

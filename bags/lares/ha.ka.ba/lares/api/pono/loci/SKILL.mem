@@ -22,14 +22,14 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/loci/SKILL"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! Loci / SKILL
 
 Read [[loci.md|./loci.md]] first.
 Treat that loci as constitutional.
 This skill runs that law through the OODA-HA cycle.
 This skill does not widen, soften, or reinterpret it.
-
-<<^ code:"&#x0002;" >>
 
 Loci SKILL opens the procedural stream here.
 <<~/ahu >>
@@ -224,6 +224,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Z6uoFfv70AbpBTb3A8e4RDyYnhaNg3_ACDV2E-BDCu4
+<<^ code:"&#x0003;" >>ni:///sha-256;VEygzX7mEDTlZSDHYZjfxBH9WczYmUx3aS21PWeeFzk
 
 <<^ code:"&#x0004;" -> ? >>

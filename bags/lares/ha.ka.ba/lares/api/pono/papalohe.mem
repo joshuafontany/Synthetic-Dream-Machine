@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/papalohe"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Papalohe
@@ -29,8 +31,6 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 `listenable` names the source event (OUTPUT pin). `subscribable` names the optional target function (INPUT pin).
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -132,6 +132,6 @@ Two values, distinct Verse-side origins:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3bmmic2GoaWUgZhQhTK3IlmhigqAby711StKPpjPpYE
+<<^ code:"&#x0003;" >>ni:///sha-256;ImbKR2WC0od5KsNb90yWDQP78YQQshINp65zPSsc4uw
 
 <<^ code:"&#x0004;" -> ? >>

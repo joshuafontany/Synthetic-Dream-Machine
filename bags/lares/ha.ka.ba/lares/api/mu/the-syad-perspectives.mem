@@ -21,6 +21,8 @@ uri-path      = "ha.ka.ba/lares/api/mu/the-syad-perspectives"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Syad Perspectives
@@ -30,8 +32,6 @@ Different measure.
 Standpoint declares the measure.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #relationship >>
 
@@ -305,6 +305,6 @@ satirist-operational = "nasti-avaktavya"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;XuVn2mPVL1-4W33Y4GTBi8mjz2jEJYhaxwQvTe46Jjg
+<<^ code:"&#x0003;" >>ni:///sha-256;2r4qt4rrVbZLFnpdnyJ_ioi3apH5oK3bq2VzZh7cJkQ
 
 <<^ code:"&#x0004;" -> ? >>

@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/pono"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Pono Docs
@@ -40,8 +42,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
-
 <<~ ahu #edges >>
 
 !! Edges
@@ -52,6 +52,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;r4skXnT_XEje7GnDiKGgm2wQJ5w87zz2I6zxCHpzNX8
+<<^ code:"&#x0003;" >>ni:///sha-256;MrgnZxdWFJDs0Kd7gqobimOh2uh0yfa4CRbMAFD2YMk
 
 <<^ code:"&#x0004;" -> ? >>

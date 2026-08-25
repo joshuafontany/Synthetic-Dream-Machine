@@ -18,6 +18,8 @@ written   = "2026-06-12"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Wire — the reified edge
@@ -27,8 +29,6 @@ A relation rich enough to //do// something — carry a value, route a message, g
 A wire that merely //points// stays a `loulou`; embedding stays `aka`/`kahea`; composition stays the tags stack. The wire begins where adjacency ends.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -88,6 +88,6 @@ Co-projection applied to wires: the operator's mind originates; the carrier body
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JTB4TExjgEzbHe4WLjE-0mB3RaTA1gRRU5Guwb4HXW8
+<<^ code:"&#x0003;" >>ni:///sha-256;omk72OzURT2nFTRKB9oQPc3T2xQlzvXZ3SpaYww2oNg
 
 <<^ code:"&#x0004;" -> ? >>

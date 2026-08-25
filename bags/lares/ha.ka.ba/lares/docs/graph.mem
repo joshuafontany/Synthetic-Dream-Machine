@@ -16,6 +16,8 @@ type             = "text/memetic-wikitext+tiddlywiki"
 uri-path         = "ha.ka.ba/lares/docs/graph"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: static `_SOCKET`/`_DEPTH` maps and carrier-index scans stand in for a real graph walk.
@@ -25,8 +27,6 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 ↺ verify: Tier 0 declared-core and Tier 1 graph walk converge on the same 14 memes before proceeding; surface one open question — `? ->` socket resolution depth — before implementing the parser.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #core-proposition >>
 
@@ -173,6 +173,6 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jO7YzMlvRuhlVKqiKEJlB7-zsr0JsQ-I6TlIIDPjvUk
+<<^ code:"&#x0003;" >>ni:///sha-256;H5Z-IVxQVSAFFxgo0EygBNKa69VgdWMSsv2qNYB8Is0
 
 <<^ code:"&#x0004;" -> ? >>

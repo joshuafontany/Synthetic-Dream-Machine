@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Table That Hides a Plane
@@ -43,8 +45,6 @@ A table reads as clarity, so the node builds one — and adjacency in a row asse
 ↺ re-read the split for what the adjacency was hiding — a blur usually carries a downstream ruling built on it.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -72,6 +72,6 @@ If the entities share a plane but differ in degree, that reads as an ordinary ta
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ISDhzjOTKisqiCRnw6BrpQLntG1Q6eMggPY4ONc_IXk
+<<^ code:"&#x0003;" >>ni:///sha-256;VuU5luCC8O-RLu2CgTiRCgOcwlyh8AwyVYrl8Msw2Ho
 
 <<^ code:"&#x0004;" -> ? >>

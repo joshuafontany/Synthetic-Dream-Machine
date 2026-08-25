@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/uefn-scene"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! UEFN Scene Decomposition
@@ -25,8 +27,6 @@ Goal: import a UEFN `.verse` / scene file → bag of tiddlers and pranala edges 
 holding the bag can render any filtered view of the scene graph without a running UEFN instance.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #semantic-separation >>
 
@@ -211,6 +211,6 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uUh86T7WNOEpY3GD4WF-8w9VexvAJqJRDcKc0jX4UmA
+<<^ code:"&#x0003;" >>ni:///sha-256;Yxn6MB1eXleAIqZT9Y_FQwri4VZ-8O3yp7F2d2ghT5o
 
 <<^ code:"&#x0004;" -> ? >>

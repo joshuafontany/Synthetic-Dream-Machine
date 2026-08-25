@@ -21,6 +21,8 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "lares_research/skill-pono-template"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~/ahu >>
 
 ! Skill Package Template
@@ -34,8 +36,6 @@ The ''inner layer'' follows the memetic-wikitext standard — TOML `#meta` block
 `SKILL.md * OODA-HA * ha.ka.ba` names the composition: the SKILL.md container governs the outer runtime identity; the OODA-HA * ha.ka.ba governs the inner epistemic structure and execution discipline.
 
 A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #skill-body-open >>
 
@@ -510,6 +510,6 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;QWSJJSI6f3662aSkx2L34J9_doRDrfVR08iUTi6Lt9Y
+<<^ code:"&#x0003;" >>ni:///sha-256;Zu8jI_pSsnS66BQPEkustJ6ycGwc_P4slpM39jFz9G0
 
 <<^ code:"&#x0004;" -> ? >>

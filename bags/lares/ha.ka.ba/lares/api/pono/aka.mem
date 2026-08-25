@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/aka"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Aka
@@ -29,8 +31,6 @@ Sugar for `<<~ pranala ? -> URI family:transclusion >>`. The `transclusion` fami
 a frozen embed can age from its source, so edges SHOULD carry a confidence rating when the embed is uncertain.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -125,6 +125,6 @@ confidence-bounded = true
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;EXQINb71Zc_9EzFIacVdGWRybuU1qNCypaadOm9fEFI
+<<^ code:"&#x0003;" >>ni:///sha-256;oTZFoeVlz3mKKSP821o4ow5ct6gfQrl-zFl0SDSHuco
 
 <<^ code:"&#x0004;" -> ? >>

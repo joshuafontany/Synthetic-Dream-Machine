@@ -24,6 +24,8 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! Memetic-Wikitext Skill
 
 [[memetic-wikitext.md|../memetic-wikitext.md]] holds the root law.
@@ -43,8 +45,6 @@ Keep these points active when the skill loads:
 * the smallest lawful intervention beats a grand rewrite
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #workflow-contract >>
 
@@ -222,6 +222,6 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uM4GqVhh2nmP6v93H4m6rbfVtz0oKvJFHCS606wk0h8
+<<^ code:"&#x0003;" >>ni:///sha-256;y5vHrEipJqlTcAfrcSXXP1YPS_1MfLHADUYEK5oy258
 
 <<^ code:"&#x0004;" -> ? >>

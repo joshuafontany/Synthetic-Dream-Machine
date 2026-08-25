@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/holo"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Holo
@@ -33,8 +35,6 @@ other boats stop racing. The winning result propagates out; the contest closes.
 Grammar only --- the cancelling-race execution runtime awaits the async-first sprint.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -76,6 +76,6 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1zHRqSpTQu-FN0CpJnpyCs7GXzkVPhyP__sHxNZ6-uw
+<<^ code:"&#x0003;" >>ni:///sha-256;CbYLRvbobCrn7MKpZ3Y8AU0t1imjqGjuaTIf5baFdok
 
 <<^ code:"&#x0004;" -> ? >>

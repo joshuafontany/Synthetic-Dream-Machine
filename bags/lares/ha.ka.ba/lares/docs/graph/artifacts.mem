@@ -15,6 +15,8 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: the current boot receipt uses a compilation timestamp as its identity — not content addressing.
@@ -24,8 +26,6 @@ uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 ↺ verify: identical source files always produce identical receipt hashes across separate compilation runs; MemPalace persistence of boot receipts routes to the adapters layer; write-back awaits policy gate.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #content-addressing >>
 
@@ -306,6 +306,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MGycQpWDTzQTqNQCeo6pViqblXNFhjVmxx0LA5p3t9o
+<<^ code:"&#x0003;" >>ni:///sha-256;ejmebFOYgcR4qdd7gPBJm0I2rwVsJpkIaf9ZAAvh-_U
 
 <<^ code:"&#x0004;" -> ? >>

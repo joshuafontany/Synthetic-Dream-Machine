@@ -29,6 +29,8 @@ voice-character   = "friendly helpful computer AI with an unmistakable edge of c
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Friend Computer
@@ -50,8 +52,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #corpus >>
 
@@ -158,6 +158,6 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wiCunP6lYPl7irWy3r66dsGgk2RB2-sYRbGo_GrXgiQ
+<<^ code:"&#x0003;" >>ni:///sha-256;0ayUfyiqV8nEd976tJoR8JZ_wDo2fqUw_9yqHlFQOcc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -19,6 +19,8 @@ uri-path  = "ha.ka.ba/lares/docs/voices/masks-tree-plan"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Masks API Tree — Build Plan
@@ -68,8 +70,6 @@ packages/lares-core/memes/api/lares/masks/
 * Skeleton template (the repeatable pattern for "stub with fill tracking")
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #orient >>
 
@@ -263,6 +263,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bSXFLLAvvjGUBS-ekS9c2zhUzywJIxpQphe0OGY_vSY
+<<^ code:"&#x0003;" >>ni:///sha-256;lK62fSa2IkAYI7XI-rSX0dz2ulkFdY4WxT9X2QZazqc
 
 <<^ code:"&#x0004;" -> ? >>

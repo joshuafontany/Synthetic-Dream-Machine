@@ -32,6 +32,8 @@ voice-role        = "Hierophant"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Tide-Caller
@@ -55,8 +57,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #corpus >>
 
@@ -166,6 +166,6 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Coo70QhCaWhZ5jzhXHmThKkcES-S8s3lHK9bteYwAo0
+<<^ code:"&#x0003;" >>ni:///sha-256;BhOxPiAyVtb1avymCKVGsMeu788s-Um82DzpmvAMZm0
 
 <<^ code:"&#x0004;" -> ? >>

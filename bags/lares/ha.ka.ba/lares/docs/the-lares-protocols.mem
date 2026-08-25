@@ -22,6 +22,8 @@ uri-path       = "ha.ka.ba/lares/docs/the-lares-protocols"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #thesis >>
 
 ! The Purpose of Protocols
@@ -106,8 +108,6 @@ Lares answers the diagnostic with a fourth arrangement:
 
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
-
 <<~ ahu #lares-position >>
 
 !! Lares Quine Position
@@ -181,6 +181,6 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3sNrJ2iSCrjYvQLADmyw27t8TuH_4Svj5I8c555FKok
+<<^ code:"&#x0003;" >>ni:///sha-256;pLzNNImhMHczHExEuwrp8AbyenuhK-uwcomzqBWPkws
 
 <<^ code:"&#x0004;" -> ? >>

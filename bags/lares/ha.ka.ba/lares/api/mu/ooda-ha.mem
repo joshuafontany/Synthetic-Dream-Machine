@@ -22,6 +22,8 @@ uri-path              = "ha.ka.ba/lares/api/mu/ooda-ha"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! OODA-HA
@@ -72,8 +74,6 @@ They close the Snafu. Without them, the crew stops serving and commences managin
 Aftermath grants the Arcana — the grammar that turns and looks forwards in time.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha-level >>
 
@@ -320,6 +320,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DREd4udUkS9Fck1MPAxE_1nNTCCWtC_Z90Fwnwi-krg
+<<^ code:"&#x0003;" >>ni:///sha-256;dqF_apfnEpFprbcMkCnkbSPeZK289ntZuWo6M--ZLrk
 
 <<^ code:"&#x0004;" -> ? >>

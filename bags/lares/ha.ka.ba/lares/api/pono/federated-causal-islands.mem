@@ -17,6 +17,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/federated-causal-islands"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Federated Causal Islands
@@ -25,8 +27,6 @@ Fuller-Zelenka non-simultaneous apprehension as ontological basis.
 Named causal island tiers 0–3; authority-first sync order; edge-island identity, lifecycle, relay law.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -383,6 +383,6 @@ causal-island-may = [
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9sgr5Ryc_LNy77nMvzbV5bo5jCe2ya6y3qz0nRMNhSA
+<<^ code:"&#x0003;" >>ni:///sha-256;OZtvDWn1uHHYMJ6Fp7ycG00e30jsUKCo58O0hCh7XMU
 
 <<^ code:"&#x0004;" -> ? >>

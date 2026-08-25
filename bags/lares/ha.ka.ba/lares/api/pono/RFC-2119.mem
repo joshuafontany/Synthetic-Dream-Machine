@@ -17,6 +17,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/RFC-2119"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! RFC-2119 — Normative Verbs (Kānāwai)
@@ -25,8 +27,6 @@ Shared modal-force vocabulary for this stack.
 Carrier laws cite this meme; they do not re-declare the list.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -62,6 +62,6 @@ Carrier laws may explain local usage, but MUST cite this meme rather than re-dec
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;XKvva3EwaiFA0ZRjiqiUOmTkzQLUhY39ZChxDGHAmD4
+<<^ code:"&#x0003;" >>ni:///sha-256;L4cBw7ADHMDOXcbouZhdbaTMmzHQfHP-5_6yBK1JbQw
 
 <<^ code:"&#x0004;" -> ? >>

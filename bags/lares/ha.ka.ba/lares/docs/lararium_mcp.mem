@@ -20,6 +20,8 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ read the server as it runs today — not as it should run tomorrow.
@@ -29,8 +31,6 @@ uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 ↺ verify each feature claim against the test suite; mark stubs clearly; surface residue as explicit gaps rather than silence.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #running >>
 
@@ -340,6 +340,6 @@ class MyAdapter:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NmhOSQXpwjXXfbPM1ZKIfi36j-wZaMPQOIl0DwYkbxI
+<<^ code:"&#x0003;" >>ni:///sha-256;hpL6cGTWexdck0L8zwQwkyduwx1QHNGK360BR2a_i64
 
 <<^ code:"&#x0004;" -> ? >>

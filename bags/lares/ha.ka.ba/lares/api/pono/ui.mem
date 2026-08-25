@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/ui"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Ui
@@ -27,8 +29,6 @@ The `ui` sigil turns toward the data and renders whatever the filter returns. Un
 and renders whatever answers.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -64,6 +64,6 @@ TW5 filter expansion:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sgjZlrRuqLOS4oZ4xmJyZawlqKmnPIRhDi2gsNoSiNw
+<<^ code:"&#x0003;" >>ni:///sha-256;7rRw3-s4IAImBZS_6QQdv6PF7N8Eb2rA4AhUG6d1hBw
 
 <<^ code:"&#x0004;" -> ? >>

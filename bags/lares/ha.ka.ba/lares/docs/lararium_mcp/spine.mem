@@ -16,6 +16,8 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/spine"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: the MCP shelf began as planning prose around a read-only Lararium server.
@@ -25,8 +27,6 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/spine"
 ↺ verify: every child locus preserves a bounded contract and lists its consumed sources; adapt: active roadmap and backlog stay outside this consumed set until their sprints close.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #core-proposition >>
 
@@ -149,6 +149,6 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dtAD0go3XENjXgxEXaYvnWQpT0zbdp0K__XOCrznDSY
+<<^ code:"&#x0003;" >>ni:///sha-256;F9W9ehu5_KPSGYSwa6fQGuYhE7cFkpBno-CFom4mvr8
 
 <<^ code:"&#x0004;" -> ? >>

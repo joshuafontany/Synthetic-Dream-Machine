@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/hooponopono"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Hoʻoponopono — To Correct
@@ -28,8 +30,6 @@ Hoʻoponopono names the harmony-restoration ceremony that MUST wrap a ''canon MO
 Without the ceremony, the canon MOVE collapses into silent accumulation — a named failure mode.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -113,6 +113,6 @@ Boundary event fields:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-N_HgG02W2LECGX_L76Aa8rwr0eG1Kf-w7cbf4yENio
+<<^ code:"&#x0003;" >>ni:///sha-256;mln0XME_388QQCMg7Gk_9q50eoBd4JiM3y3a2snWOH8
 
 <<^ code:"&#x0004;" -> ? >>

@@ -32,6 +32,8 @@ voice-role        = "Lorekeeper"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Ink-Clerk
@@ -55,8 +57,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #corpus >>
 
@@ -168,6 +168,6 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4J0v1VzySWTTRw7O5ffUL_jW0EcNiQs2uYZSXn5Hdas
+<<^ code:"&#x0003;" >>ni:///sha-256;WtAdzCkZ60BCtHi9i8yJMYNY-dBvGx43dvXFJ0gR0vw
 
 <<^ code:"&#x0004;" -> ? >>

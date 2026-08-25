@@ -12,6 +12,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/pranala"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! Pranala — Docs
 
 This file does not bind invariant law.
@@ -34,8 +36,6 @@ Minimal inline edges:
 ```
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #sugar-long-forms >>
 
@@ -107,6 +107,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hkqDhyQXxqTWrqKYTj9QBPxEMpTKkh5UqZdfXCbTSwM
+<<^ code:"&#x0003;" >>ni:///sha-256;qYXuagw6vjVPgG-ClQzQVkA-GIPBPl-RTCDm8H6MaWA
 
 <<^ code:"&#x0004;" -> ? >>

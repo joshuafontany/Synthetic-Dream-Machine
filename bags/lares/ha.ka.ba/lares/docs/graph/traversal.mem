@@ -15,6 +15,8 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: current compiler walks no edges — it enumerates a static list, then scans a carrier index.
@@ -24,8 +26,6 @@ uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 ↺ verify: Tier 0 and Tier 1 produce the same 14-locus set before any further walk proceeds; execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #graph-planes >>
 
@@ -240,6 +240,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;cheCmM3yvT-2cTyG8sV1jhNGqkuJKRmSf_GVNWu1F_A
+<<^ code:"&#x0003;" >>ni:///sha-256;PpHOtUVloEVTxRL6GZzvph48FamWVa4Py5AVSuEC8YQ
 
 <<^ code:"&#x0004;" -> ? >>

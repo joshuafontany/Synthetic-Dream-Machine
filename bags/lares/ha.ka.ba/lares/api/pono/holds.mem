@@ -18,6 +18,8 @@ written   = "2026-06-14"
 <<~ aka lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Holds ~ one verb, fuses nothing
@@ -37,8 +39,6 @@ vows the families; each row authors one carrier's stack. The table never
 fused anything — `holds` only hands the table's silent grammar a verb.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -241,6 +241,6 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jxpNMo8jYN1zWiHmH-1AA1FBjVAoey_9UAQnI-MMGqY
+<<^ code:"&#x0003;" >>ni:///sha-256;urtDEHGDBo8QIO5IYPRVFwZOmobAC9v1yLQba6z8t5c
 
 <<^ code:"&#x0004;" -> ? >>

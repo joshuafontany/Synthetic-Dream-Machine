@@ -23,6 +23,8 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! Meme Skill
 
 [[meme.md|../meme.md]] holds the law.
@@ -43,8 +45,6 @@ Keep these points active when the skill loads:
 * the smallest lawful intervention beats a grand rewrite
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #workflow-contract >>
 
@@ -258,6 +258,6 @@ Aftermath — close by naming:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CN4FL9Y3k-Wprxq_YGBUT48U1snG-K0AhMfik9CmY-Y
+<<^ code:"&#x0003;" >>ni:///sha-256;ZgCt-2qU5WIb5oY3S4bttUwsMtwQmFzCmuL9dE2eQ98
 
 <<^ code:"&#x0004;" -> ? >>

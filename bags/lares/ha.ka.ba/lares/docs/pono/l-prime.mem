@@ -12,6 +12,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/l-prime"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! L-Prime — Docs
 
 This file does not bind invariant law.
@@ -34,8 +36,6 @@ This room should not try to become the law-room again.
 The invariant already holds elsewhere.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #research-braid >>
 
@@ -92,6 +92,6 @@ The ward does not exempt copulas from confidence marking. Every `${copula}` that
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WrlrckeDDqSuLk4f1f2Md2igTT5nNAU0LUGZN3V7BhU
+<<^ code:"&#x0003;" >>ni:///sha-256;Bx58HQot9z3Rx-4wYDT-GtlOSL--z6wLYeQW6jgqePs
 
 <<^ code:"&#x0004;" -> ? >>

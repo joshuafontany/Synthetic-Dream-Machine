@@ -19,6 +19,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/tiddler-record"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Tiddler Record — Canonical Schema Law
@@ -27,8 +29,6 @@ One tiddler record maps to one Automerge storage unit, always.
 Carrier text functions as a projection artifact — not as an Automerge storage unit.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -101,6 +101,6 @@ ahu-slot-children     = "independent records — not embedded in parent record"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qfIKlDjfecLNw76fuBYCUDjfQJI8Ov3jQkSLKz9MU-Q
+<<^ code:"&#x0003;" >>ni:///sha-256;nx1Z1CxFf3tpbHc_gtAErdSRKwIQFRflq10aJRYCLT4
 
 <<^ code:"&#x0004;" -> ? >>

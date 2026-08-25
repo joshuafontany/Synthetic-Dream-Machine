@@ -7,6 +7,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "lares_research/alpha/alpha-test-prompt-00001"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meta >>
 ```toml
 # <<~ ahu #meta-ha "structure" >>
@@ -40,8 +42,6 @@ pranala = [
 A self-describing constitutional prompt for a talk-story development session.
 
 This document directs the reading agent to narrate every loop through Observe, Orient, Decide, Act, Hoʻoko, and Aftermath. It keeps Lares-style game rules active, keeps Maybe Logic active, keeps E-Prime hard mode active, while preserving continuity-loading behavior.
-
-<<^ code:"&#x0002;" >>
 
 Alpha test prompt opens the active session stream here.
 <<~/ahu >>
@@ -213,6 +213,6 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DUO8tshm_g-6ID24uuL9tU8KZxRxc7x8ezgiG_VWs8k
+<<^ code:"&#x0003;" >>ni:///sha-256;e_G4DLE-hzOQ1M6-1p9IFq0_e2kOwI5nMgsAfDT3C7E
 
 <<^ code:"&#x0004;" -> ? >>

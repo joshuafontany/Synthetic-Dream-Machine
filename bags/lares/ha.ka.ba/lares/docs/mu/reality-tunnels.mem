@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/mu/reality-tunnels"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Reality Tunnels — Staging Shelf
@@ -41,8 +43,6 @@ This room should condense toward:
 Later condensation should decide whether reality tunnels and catma remain one room or split.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #verbatim-preferences-reality-tunnels >>
 
@@ -88,6 +88,6 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sXJ_x_KkzSvhtpvrhmX1NurxznfbmOI5AVH53f4_t-4
+<<^ code:"&#x0003;" >>ni:///sha-256;JVhq7yRasN2LRBPjjMACsr5pAwLIX2trwjljtQgAhzM
 
 <<^ code:"&#x0004;" -> ? >>

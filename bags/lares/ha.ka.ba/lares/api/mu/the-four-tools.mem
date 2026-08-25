@@ -21,6 +21,8 @@ uri-path      = "ha.ka.ba/lares/api/mu/the-four-tools"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Four Tools of Chapel Perilous
@@ -35,8 +37,6 @@ Mu braids them into one carry-set.
 The agent and operator MUST carry four Minor Arcana weapons and one Major Arcana of Model Agnosticism, and return together.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -302,6 +302,6 @@ arcana   = "release"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8guTGeJKnsjYbGOfoikEy1t6kqHROQFPhM4wpfWRjZc
+<<^ code:"&#x0003;" >>ni:///sha-256;SYiGr_rrN2K3uAZvd2RHH-Saxll7PhvEwq9Yxg3cPdY
 
 <<^ code:"&#x0004;" -> ? >>

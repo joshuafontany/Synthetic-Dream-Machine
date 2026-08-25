@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/helu"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Helu
@@ -30,8 +32,6 @@ Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body
 //computes// — the function yields a filter result set, not rendered wikitext.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -71,6 +71,6 @@ TW5 equivalent:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VZVx0x7dGES1pkUq9UyBAhUJDc9wnIh1ThF7HNgWukM
+<<^ code:"&#x0003;" >>ni:///sha-256;CCYB1VJxdK1Z3faGwkyDjGQF6ddbQgr95Q0Pbdt5NS4
 
 <<^ code:"&#x0004;" -> ? >>

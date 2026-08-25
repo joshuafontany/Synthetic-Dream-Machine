@@ -16,6 +16,8 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: the design stack separates identity, AST, execution, render, and inspection planes.
@@ -25,8 +27,6 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 ↺ verify: each transformation preserves source span, host/guest boundary, and target-specific payload shape; adapt: executable resources stay future-facing until parser and graph implementations land.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #stack >>
 
@@ -233,6 +233,6 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qg9YN--zGNffO5Mw32zJ0F21EzvoY2FYzDXA_842CQo
+<<^ code:"&#x0003;" >>ni:///sha-256;cwfcjvPTUhGFYVET_R9Si864KK7eCKq7M1qjhgK3wuQ
 
 <<^ code:"&#x0004;" -> ? >>

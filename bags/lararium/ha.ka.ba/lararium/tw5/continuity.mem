@@ -20,6 +20,8 @@ uri-path  = "ha.ka.ba/lararium/tw5/continuity"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #entry >>
 
 !! Entry — Lararium Core Hydration
@@ -30,8 +32,6 @@ The lararium hydrates the continuity room here.
 Session carry belongs to the lararium side, not the threshold side.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -83,6 +83,6 @@ This child meme keeps the cold-hydration contract small.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9TPbheIqqy5XpEM6wl5st9sWFFwAWX28xMkiUYRFR4g
+<<^ code:"&#x0003;" >>ni:///sha-256;-ft6U3yUsUc_E29tCdFqBgIyKF-YlE7MtFKh_D38JLo
 
 <<^ code:"&#x0004;" -> ? >>

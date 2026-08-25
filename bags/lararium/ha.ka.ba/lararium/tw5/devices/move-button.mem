@@ -15,6 +15,8 @@ uri-path   = "ha.ka.ba/lararium/tw5/devices/move-button"
 verb       = "MOVE"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! move-button Device
@@ -29,8 +31,6 @@ the verb intent lives here on the type meme as a `reaction:listenable` edge with
 dispatches, across any instance of this type.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #kumu >>
 
@@ -82,6 +82,6 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;t9zMlG5DtjP1cwsKtcowQM9QL7EwMHOaJkpA7yTOsGs
+<<^ code:"&#x0003;" >>ni:///sha-256;dHqNGjIOJR49H0PbChSfx0Uog1ibTvrn_SkE6gZoPVg
 
 <<^ code:"&#x0004;" -> ? >>

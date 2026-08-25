@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahea"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Kahea
@@ -30,8 +32,6 @@ The name-call form invokes a named definition at render time only (no edge creat
 Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -150,6 +150,6 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;a-wSVjju_FMdtQ4kIkmr3JwxVnisjlFS6s_O-wUf4e0
+<<^ code:"&#x0003;" >>ni:///sha-256;dpk1MCjKiz72fv84yr0cWEP0H8viFlSkmIRBD0kNV_M
 
 <<^ code:"&#x0004;" -> ? >>

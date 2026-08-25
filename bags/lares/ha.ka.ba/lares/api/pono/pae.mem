@@ -19,6 +19,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/pae"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Pae
@@ -26,8 +28,6 @@ uri-path  = "ha.ka.ba/lares/api/pono/pae"
 A carrier's phased arrival through a transmission medium.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -140,6 +140,6 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vld2ixZ88FuL6kz0OfctdbxGeRyxHeqkIb1R2R7H5sw
+<<^ code:"&#x0003;" >>ni:///sha-256;mKGHN_zLqJ1u_8vkurDjxpAl5qh74i-yMLYh_Gh-Ojc
 
 <<^ code:"&#x0004;" -> ? >>

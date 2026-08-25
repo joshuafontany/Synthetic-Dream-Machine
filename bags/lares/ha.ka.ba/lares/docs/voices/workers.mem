@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/voices/workers"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Worker Swarm
@@ -40,8 +42,6 @@ Three hard rules:
 A worker reads as a tasked spirit — a temporary Mask over the house (the `masks` layer). It carries a thread, returns its finding, and dissolves; it does not steer.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #naming >>
 
@@ -145,6 +145,6 @@ The worker swarm spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST imple
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DUO2jd1uvOxCcEznHPW6n-2NfS9BGMyxHnzwTRzEpcA
+<<^ code:"&#x0003;" >>ni:///sha-256;J1N_T1LYxbIWT7yspEfssb2crqMT4HZmlTaBBcfUX8c
 
 <<^ code:"&#x0004;" -> ? >>

@@ -17,6 +17,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/orichalcum-capabilities"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Orichalcum Capabilities
@@ -25,8 +27,6 @@ UCAN-compatible capability proof with Lararium-native semantic caveats.
 Authority gate for wiki islands, edge islands, and canon MOVE.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -298,6 +298,6 @@ the crypto gate, not instead of it.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;w4_M8oSqH89mX1Yk0ecZ4f36jD1NnWbMz70XXaCAcdQ
+<<^ code:"&#x0003;" >>ni:///sha-256;opadmAU9WTl1yBZ10HxWwTWEZxCS-VP8dhN_W2t491E
 
 <<^ code:"&#x0004;" -> ? >>

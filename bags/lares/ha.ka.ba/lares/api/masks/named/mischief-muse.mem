@@ -32,6 +32,8 @@ voice-role        = "Muse"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Mischief-Muse
@@ -55,8 +57,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #corpus >>
 
@@ -201,6 +201,6 @@ These notes require live session observation before they can be written with con
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Dn_ZSF-Ggta5QuXDl5CjYchF7uDVGY5ciAB-Tu1f-T0
+<<^ code:"&#x0003;" >>ni:///sha-256;sTQf9g_NW3E4Y3vtV5wDRqtEu_A3PsVg0_qY23UBiYE
 
 <<^ code:"&#x0004;" -> ? >>

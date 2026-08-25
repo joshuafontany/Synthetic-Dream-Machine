@@ -16,6 +16,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/widget"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! \widget
@@ -31,8 +33,6 @@ No direct Hawaiian equivalent. The `~` prefix carries the Lares convention for c
 `lar-kind: pragma-alias` — the sigil serves as the declaration; no render output.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mJlUZa3b14SWlEI4FoYP3bSquzI7RJ8tUgSfzqQK6ik
+<<^ code:"&#x0003;" >>ni:///sha-256;ztYKlz7_18T5hhInopIvhdgEbExrncBvGHt7h6JyC30
 
 <<^ code:"&#x0004;" -> ? >>

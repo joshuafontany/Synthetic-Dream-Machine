@@ -15,6 +15,8 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/ROADMAP"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! Lararium Node — Roadmap
 
 This docs meme preserves the full research-roadmap detail for migrating Lararium MCP to Lararium Node.
@@ -31,8 +33,6 @@ It adds explicit ahu markers around the major research sections so the file can 
 ↺ keep residue visible: MCP SDK churn, protocol-version drift, FFZ semantics, hostful session resolution, write-back gates, and missing formal lararium-node spec
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #m13-session-open-2026-05-02 >>
 
@@ -3287,6 +3287,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D8xisg69sl8gLmAoq1kWcw51X06aZ9EoXJ2o6rQaJME
+<<^ code:"&#x0003;" >>ni:///sha-256;fQtcS0j6pDvEHfsAYE-ybN3J2Fk66te_Gw_NaDRtiwc
 
 <<^ code:"&#x0004;" -> ? >>

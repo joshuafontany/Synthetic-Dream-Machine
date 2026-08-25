@@ -32,6 +32,8 @@ voice-role        = "Scryer"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Map-Wisp
@@ -55,8 +57,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #corpus >>
 
@@ -168,6 +168,6 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;y3_2UZypnpiZ5E76S1adEmdOinJ5jqBjpg87pB9zElc
+<<^ code:"&#x0003;" >>ni:///sha-256;Adzz-kZi9SeOcjzsYnhCJf523sDGzO9L7uMPZW9hKjc
 
 <<^ code:"&#x0004;" -> ? >>

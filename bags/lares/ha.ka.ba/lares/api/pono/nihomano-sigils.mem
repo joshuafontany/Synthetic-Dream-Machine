@@ -16,6 +16,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/nihomano-sigils"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Nihomano Sigils
@@ -61,8 +63,6 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 ''The namespace glyph stays where it lies'' — adjacent to its control character on the SOH opener, mirroring the `namespace` field the meta block declares two lines below. Black speaks, red steers, and the two channels say the same thing on purpose. ''Only the SOH openers carry it''; the later controls frame and name nothing.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #wild-magic >>
 
@@ -276,6 +276,6 @@ lives in a tiddler.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;01Ypr3-CMdqWD4kmr2jqlX_Idw0Z4ZpbLGVjz4Kckrc
+<<^ code:"&#x0003;" >>ni:///sha-256;2yShSlUe3Orjt5fpEq7Pg5GTPkl9tYW3dJ1mGlV0ITc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -20,6 +20,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/causal-islands"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Causal Islands
@@ -35,8 +37,6 @@ single linear ability-ladder fused into one rope what are really independent axe
 this version separates them.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #model >>
 
@@ -370,6 +370,6 @@ meant to escape):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kIeY-DyTO3Y-kOp32itrsaz11yPHkN7RLIOBjTfoMVo
+<<^ code:"&#x0003;" >>ni:///sha-256;HeEgWMimutyIbWzGfB_QLgl2CKv_mRJP5uVcKkH6Hy8
 
 <<^ code:"&#x0004;" -> ? >>

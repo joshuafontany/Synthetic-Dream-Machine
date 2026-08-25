@@ -16,6 +16,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/function"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! \function
@@ -28,8 +30,6 @@ No direct Hawaiian equivalent. TW5 filter-function semantics have no natural Haw
 the current vocabulary. `lar-kind: pragma-alias` — the sigil serves as the declaration; no render output.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ TW5 native equivalent:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;X5_UOXl9TxrFjnzHNts9zRWQgE0shYjSddkguEr1zpU
+<<^ code:"&#x0003;" >>ni:///sha-256;UzPhYoJkaEL4i90vzUYfW4UzX1z3zRiMwwyId7v87ko
 
 <<^ code:"&#x0004;" -> ? >>

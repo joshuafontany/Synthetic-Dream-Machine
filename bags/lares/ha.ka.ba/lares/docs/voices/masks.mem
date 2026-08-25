@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/voices/masks"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Masks
@@ -41,8 +43,6 @@ When a session context declares "action inside a lararium node," the Thirteen su
 ''What a mask does not touch:'' The Voice house structure, naming law, handback routing, and hard gate all hold beneath every mask. A mask colors the Ka/Podge face of the house. It does not alter the Ha/Hodge structure.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #anatomy >>
 
@@ -392,6 +392,6 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZVFS-3xxynwBqA-f9A80JzKh9mWYqQh_PGylBZqBCl0
+<<^ code:"&#x0003;" >>ni:///sha-256;iNSv7Quj5FqXrezaEYbEkjeMTSwK8dObI6VxA3InN_8
 
 <<^ code:"&#x0004;" -> ? >>

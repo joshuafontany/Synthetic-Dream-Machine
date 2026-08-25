@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Pranala-Header — the bearing a carrier declares about itself
@@ -29,8 +31,6 @@ keyword names a thing and this one names the speaker.
 The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -109,6 +109,6 @@ agrees-with    = "uri-path"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;_jCEkjoWcP-FBI2fIhquYpdxrqOqviQJtHP73hlbC-Q
+<<^ code:"&#x0003;" >>ni:///sha-256;o614KiRq970Pl2W6Cl9KkcatwsjO7Wkeiae760RdNBA
 
 <<^ code:"&#x0004;" -> ? >>

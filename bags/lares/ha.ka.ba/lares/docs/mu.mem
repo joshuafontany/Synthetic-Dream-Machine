@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/mu"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Mu Docs
@@ -40,8 +42,6 @@ Use this branch for:
 * model agnosticism and reality-tunnel staging shelves during archive consumption
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #sigil-arrival >>
 
@@ -72,6 +72,6 @@ AST reader: read the sockets, then route.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;nw7svrNMRrLVF-NbD-5MFu76luhCGLkYo1Qs9YYvn6E
+<<^ code:"&#x0003;" >>ni:///sha-256;hOpQgHTqygTtSeFu2-ef8oBzBY00dDPJ0pzppCGWww0
 
 <<^ code:"&#x0004;" -> ? >>

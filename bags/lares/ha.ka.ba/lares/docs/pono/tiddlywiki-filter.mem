@@ -12,6 +12,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/tiddlywiki-filter"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! X-TiddlyWiki-Filter — Docs
 
 This file does not bind invariant law.
@@ -111,8 +113,6 @@ result-shape = "set"
 
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
-
 <<~ ahu #guidance >>
 
 !! Guidance
@@ -159,6 +159,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;g4KWuspaZ6dR84aG9bm5Gh3qpYvXUENQ_Kw_PRsSRsA
+<<^ code:"&#x0003;" >>ni:///sha-256;_nUE4xnaXwl3ERvb1h2zPsFXrCWWWGOIwJ3yl3uNpVA
 
 <<^ code:"&#x0004;" -> ? >>

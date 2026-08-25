@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-four-tools"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! The Four Tools Witness Shelf
@@ -39,8 +41,6 @@ The tight invariant now lives at:
 This shelf retains the local witness braid behind that compact surface.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #witness-texts >>
 
@@ -87,6 +87,6 @@ one clean preference for model agnosticism over paranoia.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;B4MvzTjN1ZpBKaAl31N91gsaE9dJhhUKybNUyEGIPUE
+<<^ code:"&#x0003;" >>ni:///sha-256;lmU2vSuiSfcY4HzdcB0hq54JbKPIayN3qU4auRhPf-Q
 
 <<^ code:"&#x0004;" -> ? >>

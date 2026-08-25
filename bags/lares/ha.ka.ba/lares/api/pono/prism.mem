@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/prism"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Prism
@@ -29,8 +31,6 @@ A prism holds the content ''fixed'' and varies the ''viewpoint''. It generates n
 The node summons it. It never rides a turn by default.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #operation >>
 
@@ -114,6 +114,6 @@ Prism keeps the worthwhile half --- //reference a piece of content and read its 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6blxhSzOWgGtw3w6an8qVwaUYgIW1e7E1G7Aki7_ZIo
+<<^ code:"&#x0003;" >>ni:///sha-256;b0tgACpS5sLGodg9hOhkfXha9Qv39GAbB7cYOdJSVtw
 
 <<^ code:"&#x0004;" -> ? >>

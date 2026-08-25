@@ -23,6 +23,8 @@ uri-path      = "ha.ka.ba/lares/api/mu/the-law-of-5s"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Law of 5s
@@ -34,8 +36,6 @@ Hagbard Celine states the Law of Fives in Appendix Gimmel of the //Illuminatus!/
 He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos." `Canon 19/20`
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -202,6 +202,6 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hU146tLtJtbsnhPM1rOOPAqqv8fxJeQJAssTz4fhKFQ
+<<^ code:"&#x0003;" >>ni:///sha-256;PBp0M91e8XTr-9wt5d3OqPToxe_T4z2VG38nyLQp2Xc
 
 <<^ code:"&#x0004;" -> ? >>

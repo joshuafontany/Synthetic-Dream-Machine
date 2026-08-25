@@ -20,6 +20,8 @@ uri-path  = "ha.ka.ba/lares/api/lararium"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Lararium
@@ -42,8 +44,6 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 ↺ verify all seven children resolved (hud, voices, continuity, live-session-overwrite, canon-boundary, l-space-trust, exchange-vector); yield; the lararium does not accumulate state after handoff.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #core-hydration >>
 
@@ -69,6 +69,6 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GAE7zZ-0C4h3_BY-3Y8XxHjw30nov3VbbVYeGwtFEIM
+<<^ code:"&#x0003;" >>ni:///sha-256;7Lu07u8K75y59Mvqxc-dvuFhRs8MoMw1c1Ep6hYvIkE
 
 <<^ code:"&#x0004;" -> ? >>

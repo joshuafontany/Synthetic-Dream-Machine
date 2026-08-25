@@ -27,6 +27,8 @@ uri-path          = "ha.ka.ba/lares/api/masks/chorus/lagrange-chorus"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Lagrange Chorus
@@ -50,8 +52,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #concept >>
 
@@ -161,6 +161,6 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;422gNs61imLCpEGCE1siUe1aFDvIPfktcAFY7PcpENs
+<<^ code:"&#x0003;" >>ni:///sha-256;o22xAScUlgiypWfzJ2TJ-qkTwVeq9jXt03MjpsNZCno
 
 <<^ code:"&#x0004;" -> ? >>

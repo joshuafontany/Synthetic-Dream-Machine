@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Minting Over a Retirement
@@ -39,8 +41,6 @@ The node reaches for a term, finds it apt, and seats it — without checking whe
 ↺ if a retirement was walked past, the whole arc downstream carries the blur — sweep it in one pass, never span by span.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ If a ruled word exists with no residue and the node minted anyway, that reads as
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MH8HCX0Na4-83BwB3XRgKYTJdvQaKmJEmJ2K7KunNBQ
+<<^ code:"&#x0003;" >>ni:///sha-256;eR_2sRfiSOW76z2JFePjdmnSsrSEXEyUzDo7JkoDwEA
 
 <<^ code:"&#x0004;" -> ? >>

@@ -18,6 +18,8 @@ written   = "2026-06-12"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Has-Stack — the composition law
@@ -27,8 +29,6 @@ A carrier reads as a ''nameless entity'': essence lives nowhere; identity rides 
 TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter runs the type-predicate. This law governs that field's grammar; `meme` governs copy-shape; `loci` governs the address.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -112,6 +112,6 @@ the py caps consume.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GYwRCcdl4VIhKn-sIhdVigauAF5CfjIS9CoTkW0p4IE
+<<^ code:"&#x0003;" >>ni:///sha-256;NaCxJXI3-OYCo4X7ZSCOk9izDbBqpqnDpBJwkJWf8Yk
 
 <<^ code:"&#x0004;" -> ? >>

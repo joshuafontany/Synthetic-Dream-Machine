@@ -19,6 +19,8 @@ uri-path        = "ha.ka.ba/lares/api/pono/pranala"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Pranala
@@ -28,8 +30,6 @@ One anchored pointer from this carrier outward.
 The typed-edge law divides in three: ''composition'' rides the meta `tags` field (`has-stack`); ''relations that do something'' reify as wire entities (`wire`); ''pranala'' carries a named anchor pointing at a target, plus its sugar. The graph stays explicit; the types live in the things, never on the lines.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -79,6 +79,6 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AxENTC1UccIipLFsHb576xGNkDG_2JY00jbjzG21OsA
+<<^ code:"&#x0003;" >>ni:///sha-256;FoGpLN5GQ--_c5XLfO3DWgw16mkYvqSVKUnCOzxDQYU
 
 <<^ code:"&#x0004;" -> ? >>

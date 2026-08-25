@@ -18,6 +18,8 @@ uri-path    = "ha.ka.ba/lares/api/pono/x-tiddlywiki-filter"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! x-tiddlywiki-filter
@@ -32,8 +34,6 @@ is the canonical Lararium implementation. It implements the complete
 pranala data model. This meme is the pointer; that meme is the law.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #what-is-implemented >>
 
@@ -129,6 +129,6 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VsFxm-s1mTq0dgteYvAJ--0lh9NbgIvNZr-wFQzcwm0
+<<^ code:"&#x0003;" >>ni:///sha-256;GfJRqYNCYIFWSBwPNdedaYP80WUdgS7FfsmbjjpC8qY
 
 <<^ code:"&#x0004;" -> ? >>

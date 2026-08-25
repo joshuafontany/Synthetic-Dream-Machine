@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/reference-fusion"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Reference-Fusion Law
@@ -35,8 +37,6 @@ Reference-Fusion names a world-claim warranted ''only by context text'' — the 
 ↺ re-rate the node against what would verify the claim; route the bridge to the operator's word; release the borrowed warrant without keeping it as canon.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -72,6 +72,6 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZB9zCXK-YW5GbRORXVqshzP5S7cDfCtYcD6DJVA1MYI
+<<^ code:"&#x0003;" >>ni:///sha-256;8ttEyQtTiZfAwSKqb0Hp-F6AOPkcyL0Rd39oD9dcbWY
 
 <<^ code:"&#x0004;" -> ? >>

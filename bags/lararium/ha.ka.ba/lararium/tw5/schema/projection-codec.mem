@@ -17,6 +17,8 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/schema/projection-codec"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Projection Codec — Law
@@ -24,8 +26,6 @@ uri-path    = "ha.ka.ba/lararium/tw5/schema/projection-codec"
 The carrier codec translates between disk carrier format (memetic-wikitext) and canonical `LarTiddlerRecord` entries. It does not touch the sync path. It does not write to Automerge directly.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -109,6 +109,6 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pRZfQmWeI58-aYE5jSLqEHqR9lrWBSN7SmCfQS2t1NM
+<<^ code:"&#x0003;" >>ni:///sha-256;HYTWPLNBT8-3y9AlRTE7ppJDr9enBC4XG-wVInkdfcg
 
 <<^ code:"&#x0004;" -> ? >>

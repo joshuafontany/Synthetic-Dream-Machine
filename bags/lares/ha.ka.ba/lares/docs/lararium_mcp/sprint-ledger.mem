@@ -17,6 +17,8 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: the closed sprint docs mostly name exits and pointers to design contracts.
@@ -26,8 +28,6 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 ↺ verify: every closed-sprint exit marker appears here or in the child locus named by the map; adapt: future sprint docs enter this ledger only after closure.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #closed-sprints >>
 
@@ -112,6 +112,6 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mtFv3uSp4vBAdtom_z1md514wuEXYabRYyxQ7vEFeqg
+<<^ code:"&#x0003;" >>ni:///sha-256;AlIwSA9G9tIommxcCZZWnJG8J7t1zdSOMWqOS4DIzMo
 
 <<^ code:"&#x0004;" -> ? >>

@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/kapae"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Kāpae
@@ -25,8 +27,6 @@ uri-path  = "ha.ka.ba/lares/api/pono/kapae"
 A first-class ''tombstone that shadows the layers beneath it'' — a raised marker that defeats fall-through, distinct from //absent// (a missing record that falls through to the next layer down).
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #etymology >>
 
@@ -133,6 +133,6 @@ Raised over a ''relationship'' the same marker needs none of it. The shadow scop
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hTrS38zZCz7K86175VOZAQ13JCxFMSQ-stVTC-A_NR4
+<<^ code:"&#x0003;" >>ni:///sha-256;PRKvIKdB4xPY7rUzXT2ikUzhiv2pGeaEdE_t4LGW3fA
 
 <<^ code:"&#x0004;" -> ? >>

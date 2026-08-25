@@ -19,6 +19,8 @@ uri-path  = "ha.ka.ba/lararium/api/save-path"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Save-Path Invariants — IslandAdaptor Outbound
@@ -26,8 +28,6 @@ uri-path  = "ha.ka.ba/lararium/api/save-path"
 Path K / F-arc: outbound hygiene for sustained live wiki authoring.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #problem >>
 
@@ -152,6 +152,6 @@ No callbacks fire after `stop()`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fd8PARfRtWSbSu1VD6UL8Z0rrSv3kBKp8bE2pbkQ98c
+<<^ code:"&#x0003;" >>ni:///sha-256;Ywyg7coQXNkDEZuZqDL1jzqQAcMDcuXv0DBBNkTjA4Q
 
 <<^ code:"&#x0004;" -> ? >>

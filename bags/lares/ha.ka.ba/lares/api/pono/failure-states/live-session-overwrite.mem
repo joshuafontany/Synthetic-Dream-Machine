@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Live-Session Overwrite Law
@@ -36,8 +38,6 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 ↺ verify against hostless invariant memes or named sources before promotion; preserve the claim as session evidence unless an explicit canon MOVE path completes.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -81,6 +81,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dW42WmWuqz3F_mYGmbMYopMuiWIY5PBAccnqPW3b4PE
+<<^ code:"&#x0003;" >>ni:///sha-256;P8g9hh_mgicM8S9P7Ya5xd4FEMctf-IK9oJlPfXZpvg
 
 <<^ code:"&#x0004;" -> ? >>

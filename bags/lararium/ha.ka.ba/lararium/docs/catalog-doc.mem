@@ -17,6 +17,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/catalog-doc"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Catalog Doc
@@ -39,8 +41,6 @@ auth.ready
 A peer that has not completed auth MUST NOT receive catalog content.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #schema >>
 
@@ -129,6 +129,6 @@ fields = [
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3PNHDFz_DUFKQ4GarpuO5UVhmWh-C64vIE_MBqPy-uA
+<<^ code:"&#x0003;" >>ni:///sha-256;G3fNibYcVv8dEWzzWevJQbJX1_gbyDBgisiLcDjLD-M
 
 <<^ code:"&#x0004;" -> ? >>

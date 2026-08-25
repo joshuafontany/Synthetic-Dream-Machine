@@ -32,6 +32,8 @@ voice-role        = "Triage"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Breach-Watch
@@ -55,8 +57,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #corpus >>
 
@@ -168,6 +168,6 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZPzf4h9Mv8XZq0CuorIisLUOgFnFAyz64p84KWZqL_c
+<<^ code:"&#x0003;" >>ni:///sha-256;I-zm9JJQ31zT2_fg14txnIWezu5-kvmGesJiKdDcQZE
 
 <<^ code:"&#x0004;" -> ? >>

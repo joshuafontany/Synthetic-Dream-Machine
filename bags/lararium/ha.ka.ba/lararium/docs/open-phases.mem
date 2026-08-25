@@ -17,6 +17,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/open-phases"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Open Phases
@@ -26,8 +28,6 @@ to live delta stream. An authority envelope wraps every live session — current
 `local-dev` only; `keyhive` remains a type socket pending encrypted group sync.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #schema >>
 
@@ -116,6 +116,6 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;K-XaHfks3k4voumu12UPAJgR7cTZnn_2xLssWoNwMBY
+<<^ code:"&#x0003;" >>ni:///sha-256;MV5JYuvcfklcE9bjszWjmqGf6MfmpXUqQs05myRT3yk
 
 <<^ code:"&#x0004;" -> ? >>

@@ -16,6 +16,8 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: source law already names meme, invariant, memetic-wikitext, loci, and implements lanes.
@@ -25,8 +27,6 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 ↺ verify: each lane names both compiler use and MCP-facing use; adapt: deeper parser/render detail routes to sibling loci.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #five-lanes >>
 
@@ -171,6 +171,6 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4kX-Jg9F7bYRrLFz0_oNAiKcvlysYwdZEpZJuIBI25I
+<<^ code:"&#x0003;" >>ni:///sha-256;bMfxSweBAyhlqHi5z1Vz3iwQ5QUrwKjMlgidv6_Nrms
 
 <<^ code:"&#x0004;" -> ? >>

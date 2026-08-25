@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/alignment-architecture"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #thesis >>
 
 ! The Lararium — Alignment Architecture
@@ -36,8 +38,6 @@ Four words name the whole, and each grounds the next:
 The home-intranet RPG (a Referee running encounters across player wikis) reads as the ''first instantiation'', never the definition. Any operator-coordinator pair inhabiting a structured wiki node constitutes an instance.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #foundation >>
 
@@ -213,6 +213,6 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xabq8lwZzwAr93ZCn8TzUmxPF8kadZ4teQUab9C08Ik
+<<^ code:"&#x0003;" >>ni:///sha-256;3BvZC6-Mzp3Xe39lxeKpZQLbAcl-9ii__KbnIvSSSWc
 
 <<^ code:"&#x0004;" -> ? >>

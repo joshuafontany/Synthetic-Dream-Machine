@@ -15,6 +15,8 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #system-role >>
 
 ! Lararium Multiplayer Infinite-Canvas Wiki
@@ -38,8 +40,6 @@ What this system is not:
 * A public unceremonied canon-write surface. Remote/live edits may sync into room state only under the current authority model; canon MOVE remains explicit.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #room-model >>
 
@@ -1267,6 +1267,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bZs9P2kyFHdmXnf48b2OCu1CnUCnO0EMMgbcX1WgLaw
+<<^ code:"&#x0003;" >>ni:///sha-256;2tVYTl3IEvP_wdSpdoa24CDFfIAh8CtS32WH0TcRwl4
 
 <<^ code:"&#x0004;" -> ? >>

@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/wai"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Wai
@@ -29,8 +31,6 @@ The ''wikispace conditional''. A block-container holds candidate bodies, each gu
 Water chooses its channel. `wai` selects //which content renders// in the document; it tests filters, not flows. Its canvas cousin `heihei` branches //execution flow// on the TLDraw surface (the Verse conditional); `holo` (`\race`) races parallel flows by completion-time. Three principles — `wai` tests filters (wikispace), `heihei` tests a condition to branch flow (canvasspace), `holo` races flows (canvasspace) — joined only by the surface word "first".
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -118,6 +118,6 @@ close-pattern = '<<~\/wai\s*>>'
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6ZCjk5i4llakrpYiV2k7NR-JJP0nDlVHY3GFVKsnWU8
+<<^ code:"&#x0003;" >>ni:///sha-256;oaMnhu3Vz0uavm6KVAmOEFOtImTUaf8NqiUtONLiedg
 
 <<^ code:"&#x0004;" -> ? >>

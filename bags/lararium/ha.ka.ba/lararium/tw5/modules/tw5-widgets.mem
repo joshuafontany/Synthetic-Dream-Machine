@@ -19,6 +19,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/tw5-widgets"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! TW5 Widgets
@@ -28,8 +30,6 @@ Registered via `LarariumTW5._registerWidgets()` after boot.
 The widget module tiddler ships as `lar:///lararium-node/tw5/widgets`.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #schema >>
 
@@ -91,6 +91,6 @@ fields = [
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dJHGW7P1ajjhvEjHwqUwL2V2Cr56rUSNWWYj56qY4O8
+<<^ code:"&#x0003;" >>ni:///sha-256;-0IWdfpXnUbLvlj29Bh-_bIuneJn23M-vSxs2ytfaMU
 
 <<^ code:"&#x0004;" -> ? >>

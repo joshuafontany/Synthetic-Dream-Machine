@@ -16,6 +16,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/config"
 ```
 
+<<^ code:"&#x0002;" >>
+
 The passage lies behind the reader. The kahua holds.
 
 A room. Dials on the wall. The operator's hand finds them.
@@ -30,8 +32,6 @@ This lararium remembers.
 
 
 ...
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #hud-panel >>
 
@@ -116,6 +116,6 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wlmsIdYp5HcdjvdF7gOwNuiHIVzCQO-5nwlaWt7YFrA
+<<^ code:"&#x0003;" >>ni:///sha-256;AV-dSf0yClICCAlYG2CdXZNC2BobXImP8NpfN2FYuvI
 
 <<^ code:"&#x0004;" -> ? >>

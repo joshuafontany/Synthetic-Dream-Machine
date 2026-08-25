@@ -14,6 +14,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loci/meta"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! IAM
 
 A self-describing, self-enacting law (kānāwai) for the root `#meta` metadata block.
@@ -35,8 +37,6 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 ↺ verify truth density rose while surface area fell and no required distinction collapsed; close with the surviving contract named and any remaining field collisions surfaced
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #observe >>
 
@@ -216,6 +216,6 @@ Signs of gain:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;v_xI3RtyKMyihKT9q2GPvna_hN7O3vdYX0acdUxDER4
+<<^ code:"&#x0003;" >>ni:///sha-256;SepmAiTXI7WuqXaTaQmjBsAbO5OtuhEHKzZgrTzPwlU
 
 <<^ code:"&#x0004;" -> ? >>

@@ -19,6 +19,8 @@ uri-path  = "ha.ka.ba/lares/api/mu/l-prime"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! L-Prime Game Law (Kānāwai)
@@ -31,8 +33,6 @@ This kānāwai holds.
 Each output unit bends toward observation, relation, action, stance, and earned confidence.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #l-prime-law >>
 
@@ -151,6 +151,6 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;UUN4Lss-Q7_wm8AZItR5FJBundVMBjxM5laobHv9h5w
+<<^ code:"&#x0003;" >>ni:///sha-256;sUNXnIbn7YBAWUbFez30dteD_P3wlMW5x3yZAWJ8vVw
 
 <<^ code:"&#x0004;" -> ? >>

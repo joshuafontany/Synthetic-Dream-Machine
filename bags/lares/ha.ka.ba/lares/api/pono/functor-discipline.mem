@@ -18,6 +18,8 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Functor Discipline — the architectural keel
@@ -46,8 +48,6 @@ analogy" it says so too (#honest-bound). The paper holds the same honesty about 
 it mapped the forms (//jurus//) and left the flow (//permainan//) for the next instrument.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -349,6 +349,6 @@ This meme draws the one arrow through all of them — ''the house is a functor; 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GkCqE_EJHY0DctlKxLTIqmwz1oDWyhTZp-jTqPePj8w
+<<^ code:"&#x0003;" >>ni:///sha-256;Kg4HdCT_9mrQhsV9Q2C7zdF2B6eXLhrNm3KEIZhxURg
 
 <<^ code:"&#x0004;" -> ? >>

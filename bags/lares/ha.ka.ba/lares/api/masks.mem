@@ -21,6 +21,8 @@ uri-path  = "ha.ka.ba/lares/api/masks"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Masks API Tree
@@ -44,8 +46,6 @@ label = "parent-index-entry"
 <<~/pranala >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #taxonomy >>
 
@@ -124,6 +124,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;UGz5ysXUJsCoSORn7rOFHPQYZuyGLd20L1pginet0vA
+<<^ code:"&#x0003;" >>ni:///sha-256;TCtdtnW04f73RcpV2vV8wOv_8AFErRMu9mVSb7v-TNs
 
 <<^ code:"&#x0004;" -> ? >>

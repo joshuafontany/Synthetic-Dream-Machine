@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/protective-optional"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Protective Optional
@@ -37,8 +39,6 @@ A required parameter would break existing callers, so the node makes it optional
 ↺ let the break surface: requiring it SHOULD break witnesses, and each break names a place the default answered silently and wrongly.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -66,6 +66,6 @@ If the parameter is optional and a real outside consumer needs the default, that
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9_qeFuyPXT0eoLwVctoZUGkXwFqFAXiuHIGqrGw03GM
+<<^ code:"&#x0003;" >>ni:///sha-256;0CdSRC9XaD2grOkYDQCQVPqcOc3d-dOnshGJx63sOl0
 
 <<^ code:"&#x0004;" -> ? >>

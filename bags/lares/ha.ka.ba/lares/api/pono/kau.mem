@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/kau"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Kau
@@ -25,8 +27,6 @@ uri-path  = "ha.ka.ba/lares/api/pono/kau"
 A device placed with intention. The instance takes its own address.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #etymology >>
 
@@ -120,6 +120,6 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7wxsefVqeHUlSk5hdCBnSP82CICT5XPImg60Mp1-6P8
+<<^ code:"&#x0003;" >>ni:///sha-256;KO4tiYbF0Y7IkDL7EFKRrZ5lPCJWUIaBu417O8RhWMU
 
 <<^ code:"&#x0004;" -> ? >>

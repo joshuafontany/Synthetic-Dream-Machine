@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/mukuwai"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Mukuwai
@@ -28,8 +30,6 @@ Mukuwai serves as the terminal form — it carries no filter expression because 
 question itself has exhausted all candidates. The stream reaches the cut-off; this path remains.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -70,6 +70,6 @@ English alias form:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sGoiaHLHP7Gcboj-IZWwmIhS1KLnrehSc-IY7GwwuZg
+<<^ code:"&#x0003;" >>ni:///sha-256;vs3DbN1iMK5WqAWjonZy8qMH0ehZnmUN27rCLR5W2wo
 
 <<^ code:"&#x0004;" -> ? >>

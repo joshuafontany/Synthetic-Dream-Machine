@@ -22,6 +22,8 @@ written       = "2026-06-16"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Oracle ~ the turn's drift register
@@ -40,8 +42,6 @@ The oracle reads the turn's ''ebb'' — the tide the operator's feeding floods, 
 turn spends, this sigil drains.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -209,6 +209,6 @@ certifies  = "nothing"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BA2tZrzyd_RFG_y09hVE5xqIj08w8Y_bTN8PEDYtwGE
+<<^ code:"&#x0003;" >>ni:///sha-256;3UZz4rCCtWLbQiXHmAG937-U2TEAQ8BXuQ7n6etSz9w
 
 <<^ code:"&#x0004;" -> ? >>

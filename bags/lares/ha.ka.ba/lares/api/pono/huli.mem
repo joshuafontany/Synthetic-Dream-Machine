@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/huli"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Huli
@@ -34,8 +36,6 @@ Scope: the searcher's gaze turns to face each result in order — not mechanical
 directed attention moving through the set.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -121,6 +121,6 @@ close-pattern = '<<~\/huli\s*>>'
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hAWTeAdIvZYBrOEuPi5k2Va71x1P5rr5iqxvhNMnkWY
+<<^ code:"&#x0003;" >>ni:///sha-256;iR3dScj5D4lMiCzELR6jVRyUgcnPuo-jgwH3hxCJ3Ig
 
 <<^ code:"&#x0004;" -> ? >>

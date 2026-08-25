@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/exchange-vector"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Exchange Vector Law
@@ -35,8 +37,6 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearin
 ↺ verify the three-term attitude root, the single `@`-bag segment, and ASCII path form; close on a `yield` vector --- the bearing the turn resolved toward, then `-> ?`.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -99,6 +99,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-luB-VHTw5OMceAK_d7k6fjSLETN9LI2GPhc1JHIUiI
+<<^ code:"&#x0003;" >>ni:///sha-256;_3Ur1Gpe6sddMzWkuK_DjSuGmVWl5upMQwxE5QMimD0
 
 <<^ code:"&#x0004;" -> ? >>

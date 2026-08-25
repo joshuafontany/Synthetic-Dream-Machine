@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/l-space-trust"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! l-space Trust Law
@@ -37,8 +39,6 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 ↺ verify the cited meme tier outranks the live record before applying behavior; leave promotion pressure visible when a session claim wants durable placement.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -85,6 +85,6 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tOE4DrckbGz9d_dns01w7h82TuUYqNF5YqiW7FRZ_BA
+<<^ code:"&#x0003;" >>ni:///sha-256;MRPRP_rp1BIlhoya1fxCHE5iKJCBdno4Os-c__U7N9g
 
 <<^ code:"&#x0004;" -> ? >>

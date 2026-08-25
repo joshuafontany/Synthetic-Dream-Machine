@@ -16,6 +16,8 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: Sprint-02 closed the local surfaces across resources, prompts, tools, and client configs.
@@ -25,8 +27,6 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 ↺ verify: prompt names use the `lararium-` dash convention, matching tools; adapt: remote examples remain Sprint-03 residue even though local Codex config closed.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #server-start >>
 
@@ -127,6 +127,6 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;frt2giMOGZwAxHw3U7Z_f8Je8Y_YAhA_8issVZXr1KM
+<<^ code:"&#x0003;" >>ni:///sha-256;7rsUBhv0JRpLqngbPVdOAt96b5CvohS639orXeAaDaA
 
 <<^ code:"&#x0004;" -> ? >>

@@ -17,6 +17,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/mcp-tool-registry"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! MCP Tool Registry
@@ -43,8 +45,6 @@ Tools mapped onto OODA-HA phases: Observe → Orient → Decide → Act → Afte
 Two env guards gated write access and canvas connectivity.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -160,6 +160,6 @@ inputs      = ["uri: string"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;QEa3gW-zcQmNzMnnfEEsUovPQRXfRZ7CfO0ATVV-y7E
+<<^ code:"&#x0003;" >>ni:///sha-256;CsLoGAjCAx3uaRM0jFRb01lYzetkoCq0751Aq3ezUuE
 
 <<^ code:"&#x0004;" -> ? >>

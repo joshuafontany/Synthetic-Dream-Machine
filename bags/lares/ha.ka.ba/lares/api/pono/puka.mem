@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/puka"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Puka
@@ -35,8 +37,6 @@ remains open — the others may pass through later or not. The outcome already h
 Grammar only --- the selecting-race execution runtime awaits the async-first sprint.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -79,6 +79,6 @@ A puka block MUST NOT appear directly inside a `huli` (`\for`) iteration body.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;F4UUX4asegZqtDWw0lCiBvzgiOGQbqhrrlTW7RNDL8k
+<<^ code:"&#x0003;" >>ni:///sha-256;R8uUe4St0X1TUvrUcqMDSwqGlz1H5SAgnlIUclnoIKo
 
 <<^ code:"&#x0004;" -> ? >>

@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Lararium Preferences Extraction Shelf
@@ -50,8 +52,6 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 
 <<~/ahu >>
 
-<<^ code:"&#x0002;" >>
-
 <<~ ahu #tree >>
 
 !! Tree
@@ -79,6 +79,6 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sFT3hX1rceVxbsH6r3jmqM_1RK4XO29w2fcw5WftNbk
+<<^ code:"&#x0003;" >>ni:///sha-256;MKKbRv1IuaAAWFlGrgOkY4B-EMB4WR8NibbN2JVCo6Y
 
 <<^ code:"&#x0004;" -> ? >>

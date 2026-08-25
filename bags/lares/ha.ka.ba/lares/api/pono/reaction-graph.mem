@@ -18,6 +18,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/reaction-graph"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Reaction Graph
@@ -26,8 +28,6 @@ Isomorphic in-memory reaction dispatch layer — runs on server and client.
 Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subscribed; UEFN dispatch semantics.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -211,6 +211,6 @@ The reaction dispatch layer runs as a ''Scope-1'' CRDT-wave surface under the tw
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9jYnym4hPMp687LBLRmrds9D6BtnUN3_Cedq2RXJxBQ
+<<^ code:"&#x0003;" >>ni:///sha-256;lcDbSYODpNHXrH1tTqrRki9vMwbGA5hdbkAXrXEz-dQ
 
 <<^ code:"&#x0004;" -> ? >>

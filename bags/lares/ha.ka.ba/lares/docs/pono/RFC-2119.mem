@@ -12,6 +12,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/RFC-2119"
 ```
 
+<<^ code:"&#x0002;" >>
+
 ! RFC-2119 — Docs
 
 This file does not bind invariant law.
@@ -36,8 +38,6 @@ RFC 8174 (2017) clarifies that the normative force applies only when the terms a
 This stack uses ALL CAPS consistently for normative terms. The RFC 8174 clarification applies.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ietf-definitions >>
 
@@ -76,6 +76,6 @@ The stack does not import the full IETF RFC format — only the modal-force voca
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RYK8Gt-XVQEJ01q48wtAAg4EQB2ePjragoovo11iGog
+<<^ code:"&#x0003;" >>ni:///sha-256;WfnWvWggIn8ZYJuN_gBJCtG60UWYLIppYVi7a77aJf4
 
 <<^ code:"&#x0004;" -> ? >>

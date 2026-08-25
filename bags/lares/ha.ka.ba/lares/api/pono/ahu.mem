@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/ahu"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Ahu
@@ -33,8 +35,6 @@ Slots compose the structural skeleton of a meme's content; each MAY hold its own
 and wikitext body.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -116,6 +116,6 @@ slot = 1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JN5wjOFJrfz0UrslbvkjlfIxGNbxGG9QhpPEI4viurA
+<<^ code:"&#x0003;" >>ni:///sha-256;XWCUgQDD8bd7RD-3x4ohZ8qCPJ98fEIeoW77mBxraEE
 
 <<^ code:"&#x0004;" -> ? >>

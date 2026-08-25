@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/kapu"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Kapu — Above-Namespace Law (Kānāwai)
@@ -27,8 +29,6 @@ A kapu carrier stands set apart: it declares elevated authority through namespac
 This meme stands as a kapu carrier — it enacts the law by presenting as a specimen of itself.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -132,7 +132,7 @@ This meme governs the kapu rating and above-namespace trust law.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jCsgHBuJmlB9Yr1rhDEuxw1f3JrhHSxSpzxy6Dm9Op4
+<<^ code:"&#x0003;" >>ni:///sha-256;ItmQGhtfv9Siw6H_bJdnha54uZKNelKbaVIUikcuFaQ
 
 <<^ code:"&#x0004;" -> ? >>
 <<^ code:"&#x0014;" -> ? >>

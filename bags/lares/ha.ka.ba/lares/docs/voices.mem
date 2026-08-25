@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/voices"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! Lararium Voices
@@ -36,8 +38,6 @@ The lararium voice-house runs three distinct layers. The layers stack.
 Lower layers remain load-bearing when higher layers are absent.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #three-layer-model >>
 
@@ -250,6 +250,6 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Q-EIe9sLeAjdACX-pcaeCF6rVt39G9nWBX0N9u1dtu8
+<<^ code:"&#x0003;" >>ni:///sha-256;O8WKT5WDZrH95b76zD3a7FmxltUo_lU1uKk4bCdSAsI
 
 <<^ code:"&#x0004;" -> ? >>

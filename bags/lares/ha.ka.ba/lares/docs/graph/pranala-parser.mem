@@ -20,6 +20,8 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #ooda-ha >>
 
 ✶ observe: carrier files carry pranala edges in block and inline forms; `loulou`, `aka`, `kahea` sugar collapses to edges too.
@@ -29,8 +31,6 @@ uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 ↺ verify: parser produces correct `PranalaEdge` records from actual AGENTS.md source blocks; the `? ->` gate is now closed; the implementation file should implement Option A, not a stub.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #surface-forms >>
 
@@ -221,6 +221,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CSkStgyURrcs2F4qQH4eaYhlw9cBNpXpFmintad_Ag0
+<<^ code:"&#x0003;" >>ni:///sha-256;j9w1a_7jmW2MgHDX_QFZbyP_bnZJ0rIpqvt-qF1q2AY
 
 <<^ code:"&#x0004;" -> ? >>

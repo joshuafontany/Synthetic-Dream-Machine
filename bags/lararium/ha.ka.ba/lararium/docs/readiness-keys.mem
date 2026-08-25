@@ -18,6 +18,8 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/readiness-keys"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Readiness Keys
@@ -37,8 +39,6 @@ auth → catalog → snapshot → room-content → room-presence
 ```
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #schema >>
 
@@ -97,6 +97,6 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xBawW8KPzpAQyla2M3_YIrGnNPeYAx0ftuDcv-sKlEE
+<<^ code:"&#x0003;" >>ni:///sha-256;wDOQAF8NucecNXF-qxg0LHzQQnVayHBhmovDgqa4-Ho
 
 <<^ code:"&#x0004;" -> ? >>

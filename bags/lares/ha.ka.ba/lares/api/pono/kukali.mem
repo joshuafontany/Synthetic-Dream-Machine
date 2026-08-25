@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/kukali"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Kukali
@@ -29,8 +31,6 @@ Verse `suspends` analogue: the island parks without blocking; it resumes exactly
 Paired with papalohe — papalohe declares the wire; kukali declares the wait at the receiving end.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -146,6 +146,6 @@ sigilName = "kukali"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;03dWVn73H9Wnf8fpgBg-6QqlhB8hH-yMm05vbuEUznk
+<<^ code:"&#x0003;" >>ni:///sha-256;91YdVDEdBJEnEOGZ-gOx_PWK7vDMNCUaeqMPujpgKGw
 
 <<^ code:"&#x0004;" -> ? >>

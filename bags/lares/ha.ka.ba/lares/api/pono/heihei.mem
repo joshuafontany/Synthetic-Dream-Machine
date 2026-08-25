@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Heihei
@@ -29,8 +31,6 @@ The ''canvasspace conditional-branch''. The Verse `if` / `case` projected onto t
 Three principles share only the word "first": `heihei` tests a condition to branch //execution flow// (canvasspace); `wai` (`\if`) tests a filter to select //content// (wikispace); `holo` (`\race`) races //parallel flows// and the first to ''complete'' wins (canvasspace concurrency). `heihei` picks by condition-success, `holo` by completion-time — failure-logic, not a race.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -105,6 +105,6 @@ arm-wire       = "reaction"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DAhdkZ18sXrabovj-AZ_LRocvbqeuNG1giAnD60r-dg
+<<^ code:"&#x0003;" >>ni:///sha-256;iWftATSVcw1PAW7w4wgg1DjyDjcb361Ait1yZVhe4Cg
 
 <<^ code:"&#x0004;" -> ? >>

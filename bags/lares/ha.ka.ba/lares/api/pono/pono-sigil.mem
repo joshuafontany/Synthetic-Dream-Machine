@@ -13,6 +13,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Pono (Sigil)
@@ -32,8 +34,6 @@ Distinct from the system concept `pono` (rightness as a design principle). This 
 the same word because a `pono` edge asserts alignment — the naming runs intentional.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -66,6 +66,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yV2D7a1sNhZvkxLHL7KtlyosXuAK-Qx52s2kkwkVK6g
+<<^ code:"&#x0003;" >>ni:///sha-256;2rk8Oy_bT2-Hiwo0mTn2KwalRzcCNhIvL3z5qJSi05U
 
 <<^ code:"&#x0004;" -> ? >>

@@ -20,6 +20,8 @@ uri-path  = "ha.ka.ba/lares/api/mu/chao"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! The Sacred Chao
@@ -39,8 +41,6 @@ The Chao requires both faces to spin.
 The Chao spins at a level of abstraction above the Hodge and the Podge.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -155,6 +155,6 @@ A lar URI with all three slots aligned reads the address back at the Chao's rota
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oIvQw-v-Do1rKxYp-TEKeYgt8-c1Bvc89JCKcPfbhZg
+<<^ code:"&#x0003;" >>ni:///sha-256;jBEL459eTbi1cpOyUL2sBT92aPYvfs1m8suTZeSsATk
 
 <<^ code:"&#x0004;" -> ? >>

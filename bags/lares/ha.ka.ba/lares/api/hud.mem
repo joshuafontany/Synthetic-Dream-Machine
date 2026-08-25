@@ -20,6 +20,8 @@ uri-path  = "ha.ka.ba/lares/api/hud"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #entry >>
 
 !! Entry — Lararium Core Hydration
@@ -29,8 +31,6 @@ uri-path  = "ha.ka.ba/lares/api/hud"
 The lararium hydrates the HUD room here. The instrument panel rides the mechanics house, not the threshold.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -120,6 +120,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VYiNXhuHC3_cgLlwTg33pdU-LJO2rp3q_T2qa0-FAds
+<<^ code:"&#x0003;" >>ni:///sha-256;Eqq7Wq10-G3tBZ8mtCstwTN6AWUbRmhcLAIftYQl9Z0
 
 <<^ code:"&#x0004;" -> ? >>

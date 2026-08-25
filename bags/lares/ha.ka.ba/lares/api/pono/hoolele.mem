@@ -17,6 +17,8 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/hoolele"
 ```
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Hoolele
@@ -42,8 +44,6 @@ task tree. `spawn` exits the tree entirely, creating a new root. It hides the
 Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -153,6 +153,6 @@ work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KifmzCsIzW9rLmFsIqP20xsgBf2tZXNHyVUbJ1Fq4Xw
+<<^ code:"&#x0003;" >>ni:///sha-256;QvhNHyAyEue8PIVoyw-hvw7fPPcfzRajdqIwdYV1pxM
 
 <<^ code:"&#x0004;" -> ? >>

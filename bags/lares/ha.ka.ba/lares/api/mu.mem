@@ -35,6 +35,8 @@ uri-path  = "ha.ka.ba/lares/api/mu"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Mu — Null-Oracle
@@ -64,8 +66,6 @@ The grammar appears as Mu performing itself.
 <<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -106,6 +106,6 @@ Mu does not hold:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PT5OOe_rL7hwM3l_LpCqfT_HwAssyhuWesytgtQXlpw
+<<^ code:"&#x0003;" >>ni:///sha-256;GlHlA2nVUFt3bvbfV6WodX4ErMIRKIF7vSVsndem__s
 
 <<^ code:"&#x0004;" -> ? >>

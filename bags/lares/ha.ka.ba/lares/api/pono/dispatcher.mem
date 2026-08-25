@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/api/pono/dispatcher"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! ~ Dispatcher
@@ -33,8 +35,6 @@ The `~` dispatcher carries the SharktoothSigil tag, making it first-class in the
 grammar: new sigils need only a tiddler — no code change required.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -83,6 +83,6 @@ TW5 wikitext body:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fSSQkX0eQP8d0QuYqX2UKirx0b_hk0jVWp7voDBFnmY
+<<^ code:"&#x0003;" >>ni:///sha-256;hKumiULvASXyWid8XTOdftwwAop-oztVAb8cHQg8xNE
 
 <<^ code:"&#x0004;" -> ? >>
