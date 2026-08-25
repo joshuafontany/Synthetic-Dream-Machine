@@ -11,7 +11,7 @@
  *
  * Parser stays isomorphic — no fs/DOM/TW5 dependencies.
  *
- * Meme: lar:///ha.ka.ba/lares/api/pono/framing
+ * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing
  */
 
 import { describe, test, expect } from "vitest";

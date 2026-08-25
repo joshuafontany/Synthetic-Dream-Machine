@@ -12,7 +12,7 @@ namespace     = "&#x2299;"
 register      = "Synthesis-Canon"
 retain        = true
 revised-on    = "2026-08-24"
-revision-note = "the split: the transmission-frame half stands in its own sibling specification (api/pono/framing) — this document keeps the language, composes as the document production the frame wraps, and cites [FRAMING] where the frame law lives"
+revision-note = "the split: the transmission-frame half stands in its own sibling specification (api/pono/memetic-wikitext-framing) — this document keeps the language, composes as the document production the frame wraps, and cites [FRAMING] where the frame law lives"
 role          = "submittable specification for text/x-memetic-wikitext — abstract, conformance (RFC-2119), lexical structure, ABNF surface grammar, dual-layer processing model, pranala type system, media-type registration, security. Ontology referenced, not duplicated. Sibling submissions: the lar: URI spec and the carrier framing spec."
 status        = "standing"
 status-why    = "submission-draft"
@@ -58,7 +58,7 @@ This document holds ''submission-draft'' maturity. The lexical structure, dual-l
 
 ''Relation to the framing specification.'' A document travels as a ''carrier'': wrapped in the
 transmission frame — declaration, control marks, block check — defined by the sibling submission
-`lar:///ha.ka.ba/lares/api/pono/framing` (Normative Reference [FRAMING]). This document defines what a
+`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing` (Normative Reference [FRAMING]). This document defines what a
 carrier CARRIES; [FRAMING] defines the wrap, and composes over this grammar's `document` production.
 
 ''Audience.'' Implementers of parsers and renderers; authors migrating TiddlyWiki5 or Verse content; registry maintainers.
@@ -608,7 +608,7 @@ A canvas reaction wire (flow surface):
 * ''[RFC5234]'' — ABNF.
 * ''[RFC6838]'' — media-type registration procedures.
 * ''[LAR-URI]'' — the `lar:` URI specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/lar-uri`.
-* ''[FRAMING]'' — the carrier framing specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/framing`.
+* ''[FRAMING]'' — the carrier framing specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing`.
 * ''[PRANALA]'' — pranala edge law: `lar:///ha.ka.ba/lares/api/pono/pranala`.
 * ''[TW5]'' — TiddlyWiki5 WikiText grammar — the inherited base; memetic-wikitext reads as a superset.
 
@@ -656,7 +656,7 @@ A canvas reaction wire (flow surface):
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/framing >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter >>
@@ -670,6 +670,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8W5exmwdSqQBabwO8Wrm4K0J-r0iH7Nifrt2SjQ9c58
+<<^ code:"&#x0003;" >>ni:///sha-256;BnZAtl_KN2zCtvpKuCiqrWUeMrL05JolCkyjQd8GYqs
 
 <<^ code:"&#x0004;" -> ? >>

@@ -179,7 +179,7 @@ The render posture difference (live vs. frozen) lives in the template cascade se
 
 !! Suppressed Worksites — Slots That Do Not Project
 
-Some `ahu` slots are structural, not content — they MUST NOT render as tldraw body nodes on the canvas surface. The carrier spine (`framing`) carries identity and structure; the canvas projects content slots only.
+Some `ahu` slots are structural, not content — they MUST NOT render as tldraw body nodes on the canvas surface. The carrier spine (`memetic-wikitext-framing`) carries identity and structure; the canvas projects content slots only.
 
 ```toml
 # Source: packages/lararium-tldraw/src/project.ts SUPPRESSED_WORKSITES
@@ -255,6 +255,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;moPO6xXom9MFZKhSikRLsxPzTVykA0-PLaqHVxdK9Ro
+<<^ code:"&#x0003;" >>ni:///sha-256;2NONzV4yOTaz0DreKOVUuTYqnDPXqUaxt9WDPbdT1Fw
 
 <<^ code:"&#x0004;" -> ? >>

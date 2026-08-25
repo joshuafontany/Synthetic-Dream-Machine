@@ -87,10 +87,10 @@ fields = [
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/framing >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tHtz0tB5EonuPmd_QsrEdgRQYxJ_RwhVP-Cvx-OtVRc
+<<^ code:"&#x0003;" >>ni:///sha-256;dJHGW7P1ajjhvEjHwqUwL2V2Cr56rUSNWWYj56qY4O8
 
 <<^ code:"&#x0004;" -> ? >>

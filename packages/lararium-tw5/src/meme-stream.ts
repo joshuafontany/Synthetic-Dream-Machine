@@ -27,7 +27,7 @@ import type { MaskSpan } from "./meme-ast/fence-mask.js";
 
 // ---------------------------------------------------------------------------
 // Event types
-// Schema: lar:///ha.ka.ba/lares/api/pono/framing
+// Schema: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing
 // ---------------------------------------------------------------------------
 
 export interface StreamEventCarrierOpen  { kind: "carrier-open";  uri: string }
