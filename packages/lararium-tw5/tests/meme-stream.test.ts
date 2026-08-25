@@ -30,7 +30,7 @@ const FULL_CARRIER = [
   ``,
   "```toml iam",
   `uri-path = "ha.ka.ba/lares/api/mu"`,
-  `type     = "text/x-memetic-wikitext"`,
+  `type     = "text/memetic-wikitext+tiddlywiki"`,
   "```",
   ``,
   `<<^ code:"&#x0002;" >>`,

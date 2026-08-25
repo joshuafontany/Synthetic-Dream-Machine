@@ -80,17 +80,6 @@ describe.skipIf(wikiSkip)(
     expect(records[0]!["type"]).toBe(CARRIER_TYPE);
   });
 
-  test("a carrier stored under the earlier type name still dispatches", () => {
-    // The read side stays wide permanently: a carrier authored before the suffix names the same syntax
-    // and always did. This is the claim that rested on module exports COMPILING rather than on the host
-    // RESOLVING them — the one an export-key transform could have dropped with nothing here to notice.
-    const src = readFileSync(path.join(REPO, "bags/lares/ha.ka.ba/lares/api/pono/boot-loader.mem"), "utf8")
-      .replace(CARRIER_TYPE, "text/x-memetic-wikitext");
-    const records = (engine.$tw.wiki.deserializeTiddlers(
-      "text/x-memetic-wikitext", src, { title: "lar:///probe/legacy" },
-    ) ?? []) as Array<Record<string, unknown>>;
-    expect(records.length).toBeGreaterThan(1);
-  });
 
   /**
    * ROUND TRIP, THROUGH THE WIKI. `bags/` is canon and the ingest loop compares each carrier against
@@ -168,8 +157,6 @@ describe.skipIf(wikiSkip)(
       ["iam declaring a namespace, unframed", `${IAM_NS}\n\n${BODY}`, "⊙"],
       ["a frame from before the named params",
         `<<^ ⊙&#x0001; ? -> ${URI} >>\n${IAM_NS}\n<<^ &#x0002; >>\n\n${BODY}\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n`, "⊙"],
-      ["a carrier declaring the type name written before the suffix",
-        `${IAM_NS.replace(CARRIER_TYPE, "text/x-memetic-wikitext")}\n\n${BODY}`, "⊙"],
       ["an ahu slot carrying its own iam", `${IAM_NS}\n\n${BODY}\n${SLOT}\n`, "⊙"],
     ];
     const project = (src: string) => {

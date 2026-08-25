@@ -11,32 +11,25 @@
  * quietly — a record whose type does not match simply stops projecting, with no throw and no
  * diagnostic. So the STRINGS collapse here; each mechanism keeps its own binding.
  *
- * ── WHY THE READ SIDE STAYS WIDE, PERMANENTLY ───────────────────────────────────────────────────
+ * ── ONE SPELLING, EVERYWHERE ────────────────────────────────────────────────────────────────────
  * `+tiddlywiki` is an RFC 6839 structured syntax suffix: it states that this syntax is BUILT ON TW5
  * wikitext, in the form a media-type registry already understands. The registration-track name —
- * no `x-`, RFC 6838 deprecates that prefix — is what a carrier writes from here on.
+ * no `x-`, RFC 6838 deprecates that prefix — is the one spelling read and written.
  *
- * The `x-` spellings are what carriers written earlier say, and what a content-addressed store holds
- * under paths named by those bytes. Rewriting those re-addresses them. So the reader takes every
- * spelling for good — not as a migration scaffold with an end date, but because a carrier authored
- * under any of them names the same syntax and always did.
+ * A `type` outside CARRIER_TYPES surfaces as an unadmitted type, loudly, and the record does not
+ * project — the correct fate for a spelling this grammar does not mint. Admitting near-misses would
+ * trade that loud surface for a silent guess about what the author meant.
  *
  * Meme: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#media-type
  */
 
-/** What a carrier written from here on declares, and what every writer emits. */
+/** What every carrier declares and every reader dispatches on — the one spelling. */
 export const CARRIER_TYPE = "text/memetic-wikitext+tiddlywiki";
 
-/** The x-prefixed suffixed name earlier carriers carry. Read forever; never emitted. */
-export const CARRIER_TYPE_X = "text/x-memetic-wikitext+tiddlywiki";
+/** The admitted spellings — exactly one; the registration order dispatch follows. */
+export const CARRIER_TYPES: readonly string[] = [CARRIER_TYPE] as const;
 
-/** The x-prefixed name carriers written before the suffix carry. Read forever; never emitted. */
-export const CARRIER_TYPE_UNSUFFIXED = "text/x-memetic-wikitext";
-
-/** Every spelling a reader admits, canonical first — the order dispatch registration follows. */
-export const CARRIER_TYPES: readonly string[] = [CARRIER_TYPE, CARRIER_TYPE_X, CARRIER_TYPE_UNSUFFIXED] as const;
-
-/** Whether a stored `type` names a memetic carrier under any spelling this grammar has used. */
+/** Whether a stored `type` names a memetic carrier. */
 export function isCarrierType(type: unknown): boolean {
   return typeof type === "string" && CARRIER_TYPES.includes(type);
 }

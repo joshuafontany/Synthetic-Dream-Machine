@@ -730,8 +730,6 @@ function asStringFields(fields: Record<string, unknown>): TiddlerFields {
 }
 
 export { memeticWikitextDeserializer as "text/memetic-wikitext+tiddlywiki" };
-export { memeticWikitextDeserializer as "text/x-memetic-wikitext+tiddlywiki" };
-export { memeticWikitextDeserializer as "text/x-memetic-wikitext" };
 
 // ---------------------------------------------------------------------------
 // splitBodyTiddler — Path H save-side auto-split

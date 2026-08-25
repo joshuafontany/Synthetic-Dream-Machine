@@ -48,7 +48,7 @@ describe("pono grammar boundary", () => {
     const deserializer = read("src/deserializer.ts");
 
     expect(deserializer).toContain("module-type: tiddlerdeserializer");
-    expect(deserializer).toContain("text/x-memetic-wikitext");
+    expect(deserializer).toContain("text/memetic-wikitext+tiddlywiki");
     expect(deserializer).toContain("Parsing MUST happen inside the TW5 VM");
   });
 

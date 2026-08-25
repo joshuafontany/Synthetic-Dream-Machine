@@ -9,7 +9,7 @@
  *   - cascade config tiddlers at lar:///config/Lar/AhuTemplate/... (html
  *     scope — the markdown-meme templates burned at 07866b34)
  *   - template tiddlers at lar:///ha.ka.ba/lararium/templates/...
- *   - parser registered for text/x-memetic-wikitext
+ *   - parser registered for text/memetic-wikitext+tiddlywiki
  *   - sigil widget tiddlers present (kau, ahu, aka, kahea, loulou, pranala — all TW5 \\widget)
  *
  * Exit nonzero if any check fails.
@@ -64,7 +64,7 @@ async function main(): Promise<void> {
   // Probe TW5 module registry for the parser + widgets.
   const tw = (engine as unknown as { _tw: { Wiki?: { parsers?: Record<string, unknown> }; modules?: { types?: Record<string, Record<string, unknown>> } } })._tw;
   const parsers = tw?.Wiki?.parsers ?? {};
-  if (!parsers["text/x-memetic-wikitext"]) failures.push("parser not registered: text/x-memetic-wikitext");
+  if (!parsers["text/memetic-wikitext+tiddlywiki"]) failures.push("parser not registered: text/memetic-wikitext+tiddlywiki");
 
   // All sigil widgets (ahu, aka, kahea, kau, loulou, pranala, pranala-header)
   // now live as TW5 \widget definitions in tiddler text — no JS module-type:widget.
@@ -105,7 +105,7 @@ async function main(): Promise<void> {
   ].join("\n");
   type DeserializedFields = Record<string, string | string[]>;
   const deserializeTiddlers = (tw as unknown as { wiki: { deserializeTiddlers(t: string, x: string, b: Record<string, string>): DeserializedFields[] } }).wiki.deserializeTiddlers;
-  const deserialized = deserializeTiddlers.call((tw as unknown as { wiki: unknown }).wiki, "text/x-memetic-wikitext", memeWithFraming, { title: "lar:///probe-meme" });
+  const deserialized = deserializeTiddlers.call((tw as unknown as { wiki: unknown }).wiki, "text/memetic-wikitext+tiddlywiki", memeWithFraming, { title: "lar:///probe-meme" });
   const parent = deserialized?.[0];
   if (!parent) failures.push("deserializer returned no parent tiddler");
   else {
@@ -136,7 +136,7 @@ async function main(): Promise<void> {
   ].join("\n");
   const slotResults = deserializeTiddlers.call(
     (tw as unknown as { wiki: unknown }).wiki,
-    "text/x-memetic-wikitext",
+    "text/memetic-wikitext+tiddlywiki",
     slotMeme,
     { title: "lar:///probe-slot-meme" },
   );

@@ -87,7 +87,7 @@ const TEACHING = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/a
 <<^ code:"${"&#x0001;"}" ? -> ${TEACHING_URI} >>
 \`\`\`toml iam
 uri-path = "ha.ka.ba/lares/memory/fence-teaching"
-type     = "text/x-memetic-wikitext"
+type     = "text/memetic-wikitext+tiddlywiki"
 \`\`\`
 
 <<^ code:"${"&#x0002;"}" >>
@@ -153,7 +153,7 @@ describe("Kapu SOH variant survives the round trip", () => {
 <<^ code:"${"&#x0011;"}" namespace:"⊙" ? -> ${KAPU_URI} >>
 \`\`\`toml iam
 uri-path = "ha.ka.ba/lares/memory/kapu-carrier"
-type     = "text/x-memetic-wikitext"
+type     = "text/memetic-wikitext+tiddlywiki"
 \`\`\`
 
 <<^ code:"${"&#x0002;"}" >>

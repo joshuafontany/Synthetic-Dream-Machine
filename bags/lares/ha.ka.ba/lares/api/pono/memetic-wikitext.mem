@@ -530,10 +530,9 @@ bytes rather than on argument, and the marks named SOH · STX · ETX · EOT ([FR
 reference STANDS FOR, never what a file contains.
 
 The subtype carries no `x-` prefix: RFC 6838 deprecates it, and a type wearing it sits in no tree at
-all. The earlier `x-` spellings (`text/x-memetic-wikitext+tiddlywiki` and the unsuffixed
-`text/x-memetic-wikitext`) file as deprecated aliases the read side admits forever and no writer emits —
-carriers authored under any spelling name the same syntax, and content-addressed stores hold bytes under
-paths the old spellings named. The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
+all. One spelling serves both directions — every writer emits it, every reader dispatches on it, and a
+`type` outside it surfaces as unadmitted, loudly, while the carrier still parses (graceful parsing
+holds). The `+tiddlywiki` suffix earns its place by the criterion RFC 6839 asks —
 generic processing: a receiver holding only a TW5 parser processes a carrier usefully, every sigil an
 unbound macro call degrading to inert text (#conformance). That the syntax builds on TW5 states the
 lineage; the degradation property states the warrant.
@@ -643,9 +642,8 @@ A canvas reaction wire (flow surface):
 * ''Widget-tree pass.'' `resolveWidgetTree(ast, registry)` — the parse→widget→DOM middle layer — remains a pending implementation stage.
 * ''Transclusion family name. English surface `transclusion` holds; the pono Hawaiian name waits for a deliberate, mirror-reinforcing choice.
 * ''The `+tiddlywiki` suffix — adopted, corpus-wide.'' Every carrier writes
-  `text/memetic-wikitext+tiddlywiki` in its iam, and its declaration writes the matching root name; the
-  read side keeps the earlier `x-` spellings as deprecated aliases, the office RFC 6838 names for a
-  registration. What stays open: the suffix sits in no IANA registry, and registering it needs a
+  `text/memetic-wikitext+tiddlywiki` in its iam, and its declaration writes the matching root name.
+  What stays open: the suffix sits in no IANA registry, and registering it needs a
   normative reference for TW5 wikitext — the base-syntax document stands drafted
   (`lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext`) and awaits its walk to the TW5 circle.
 
@@ -671,6 +669,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TXuPjGHXRIW3GFHvvizxHWtq5yIjEZGMsN1csoWQUXY
+<<^ code:"&#x0003;" >>ni:///sha-256;q55BApADV3r1cz8q2n2pCeP3ArNpXq4yvSx7mkL5fhg
 
 <<^ code:"&#x0004;" -> ? >>

@@ -17,7 +17,7 @@ import { TW5Engine } from "../src/tw5-vm.js";
 import { bootTestWiki, wikiSkip, skipNote } from "./test-wiki.js";
 
 
-const MEMETIC = "text/x-memetic-wikitext";
+const MEMETIC = "text/memetic-wikitext+tiddlywiki";
 
 describe.skipIf(wikiSkip)(
   `the memetic parser rides the core diagnostics contract${skipNote}`,
@@ -64,7 +64,7 @@ describe.skipIf(wikiSkip)(
 /**
  * The superset law.
  *
- * `text/x-memetic-wikitext` extends TiddlyWiki's wikitext rather than replacing it, so a memetic
+ * `text/memetic-wikitext+tiddlywiki` extends TiddlyWiki's wikitext rather than replacing it, so a memetic
  * carrier inherits every recovery core performs and adds the sigil recoveries on top. Both land in
  * one diagnostics array, on one severity ladder, read by one filter. A superset that dropped the
  * substrate's recoveries would read as a fork wearing a superset's name.

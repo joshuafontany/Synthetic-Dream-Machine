@@ -30,7 +30,7 @@ module-type: startup
  * Meme: lar:///ha.ka.ba/lararium/tw5/tw5-deserializer
  */
 
-import { CARRIER_TYPE, CARRIER_TYPES } from "@lararium/mesh/carrier-type";
+import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 
 interface TwUtils {
   registerFileType(
@@ -56,5 +56,4 @@ export function startup(): void {
   // `.mem` binds to the CANONICAL type; every other spelling registers with no extension, so a stored
   // record still resolves to a deserializer while the extension resolves to one name only.
   tw.utils.registerFileType(CARRIER_TYPE, "utf8", [".mem"]);
-  for (const t of CARRIER_TYPES.slice(1)) tw.utils.registerFileType(t, "utf8", []);
 }

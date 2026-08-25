@@ -20,6 +20,7 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/content-resolution
  */
 
+import { CARRIER_TYPE } from "./carrier-type.js";
 import { cidUri, CROSSROADS_DOC_URI, CATALOG_DOC_URI } from "./lar-uris.js";
 import { niUriSha256FromHex } from "./crypto.js";
 
@@ -65,6 +66,7 @@ const VIDEO_EXT = new Set([".mp4", ".webm", ".mov", ".mkv", ".avi", ".m4v"]);
  */
 export function mediaTypeFromExt(ext: string, binary = false): string {
   const e = ext.toLowerCase();
+  if (e === ".mem") return CARRIER_TYPE;
   if (IMAGE_EXT.has(e)) return "image/" + (e === ".jpg" ? "jpeg" : e === ".tif" ? "tiff" : e.slice(1));
   if (AUDIO_EXT.has(e)) return "audio/" + e.slice(1);
   if (VIDEO_EXT.has(e)) return "video/" + e.slice(1);

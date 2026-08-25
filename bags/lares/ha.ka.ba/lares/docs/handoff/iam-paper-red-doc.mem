@@ -2,23 +2,22 @@
 
 <<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/handoff/iam-paper-red-doc >>
 ```toml iam
-cacheable      = false
-file-path      = "bags/lares/ha.ka.ba/lares/docs/handoff/iam-paper-red-doc.mem"
-first-drafted  = "2026-08-24"
-last-amended   = "2026-08-24"
-revision       = 8
-kind           = "red-doc / handoff"
-l-space        = "stable"
-mana           = 14
-manao          = 14
-manaoio        = 14
-register       = "Synthesis"
-retain         = false
-role           = "handoff: the work-order for folding the identity-as-relation research cargo into the IaM carrier — self-contained, enact-then-delete; the red acts, the black claims"
-targets        = ["ha.ka.ba/lares/docs/infrastructure-as-myth", "ha.ka.ba/lares/api/infrastructure-as-myth"]
-type           = "text/memetic-wikitext+tiddlywiki"
-uri-path       = "ha.ka.ba/lares/docs/handoff/iam-paper-red-doc"
-operators      = ["Telarus (kahu, 1st)", "Freyja (kahu, 2nd)"]
+cacheable     = false
+file-path     = "bags/lares/ha.ka.ba/lares/docs/handoff/iam-paper-red-doc.mem"
+first-drafted = "2026-08-24"
+kind          = "red-doc / handoff"
+l-space       = "stable"
+last-amended  = "2026-08-24"
+mana          = 14
+manao         = 14
+manaoio       = 14
+operators     = ["Telarus (kahu, 1st)", "Freyja (kahu, 2nd)"]
+register      = "Synthesis"
+retain        = false
+role          = "handoff: the work-order for folding the identity-as-relation research cargo into the IaM carrier — self-contained, enact-then-delete; the red acts, the black claims"
+targets       = ["ha.ka.ba/lares/docs/infrastructure-as-myth", "ha.ka.ba/lares/api/infrastructure-as-myth"]
+type          = "text/memetic-wikitext+tiddlywiki"
+uri-path      = "ha.ka.ba/lares/docs/handoff/iam-paper-red-doc"
 ```
 
 <<~ aka https://www.rfc-editor.org/rfc/rfc2119#section-1 >>

@@ -76,8 +76,8 @@ interface WikiLike {
  * Module-type: parser. TW5's standard plugin loader registers parsers via
  * `$tw.Wiki.parsers[contentType] = exports[contentType]`, iterating the
  * exports object's keys. The arbitrary-module-namespace-identifier export
- * (`export { MemeticParser as "text/x-memetic-wikitext" }`) compiles to
- * `exports["text/x-memetic-wikitext"] = MemeticParser` in CJS — the shape
+ * (`export { MemeticParser as "text/memetic-wikitext+tiddlywiki" }`) compiles to
+ * `exports["text/memetic-wikitext+tiddlywiki"] = MemeticParser` in CJS — the shape
  * TW5's loader expects.
  *
  * The standard wikitext parser is `require`d at module-load time. Vite
@@ -164,5 +164,3 @@ MemeticParser.prototype = Object.create(stdParser.prototype as object) as Parser
 // BOTH SPELLINGS EXPORT THE SAME PARSER. TW5 keys parser modules by type string, so a carrier stored
 // under the unsuffixed name needs its own export or it silently falls through to the wikitext parser.
 export { MemeticParser as "text/memetic-wikitext+tiddlywiki" };
-export { MemeticParser as "text/x-memetic-wikitext+tiddlywiki" };
-export { MemeticParser as "text/x-memetic-wikitext" };
