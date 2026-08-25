@@ -25,7 +25,7 @@ uri-path        = "ha.ka.ba/lares/api/pono/pranala"
 
 One anchored pointer from this carrier outward.
 
-The has-stack ruling (2026-06-12) split the old typed-edge law in three: ''composition'' rides the meta `tags` field (`has-stack`); ''relations that do something'' reify as wire entities (`wire`); pranala keeps only what remained — a named anchor pointing at a target, plus its sugar. The graph stays explicit; the types live in the things, never on the lines.
+The typed-edge law divides in three: ''composition'' rides the meta `tags` field (`has-stack`); ''relations that do something'' reify as wire entities (`wire`); ''pranala'' carries a named anchor pointing at a target, plus its sugar. The graph stays explicit; the types live in the things, never on the lines.
 
 <<~/ahu >>
 

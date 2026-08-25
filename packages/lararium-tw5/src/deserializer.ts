@@ -345,7 +345,7 @@ function splitMemeToTiddlers(
   // THE LAST CLOSE CLOSES; AN EARLIER ONE BELONGS TO AN EMBEDDED EXAMPLE. Documents that TEACH the
   // frame carry example marks in their prose — `meme/SKILL` holds two ETX and three EOT — and cutting
   // at the first truncated a body mid-document. `checkedSpan` already walks to the last ETX for the
-  // same reason on the same corpus; this walk is that rule, in the split.
+  // same reason on the same corpus; this walk enacts the same rule inside splitMemeToTiddlers.
   //
   // A carrier that frames no body still closes its transmission, so where no ETX stands the body ends
   // at the last EOT — otherwise the author's own close rides inside the body and the projection mints

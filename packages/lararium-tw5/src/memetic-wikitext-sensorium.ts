@@ -519,7 +519,7 @@ export interface AlignedCouplingRead {
   readonly escalate: boolean;
   /** the escalation ACTED: order-robust rank-TE (bits, both directions) on the strongest-nonlinear dim,
    * or null when the screen stayed linear. This is the read the Gaussian coupling under-reads — the gate
-   * no longer just flags nonlinearity, it answers it. */
+   * answers nonlinearity rather than only flagging it. */
   readonly rankTE: RankEscalation | null;
 }
 
@@ -608,7 +608,7 @@ export function coupleAligned(
     if (linearity !== null && anyEscalate !== linearity.escalate) linearity = { ...linearity, escalate: anyEscalate };
   }
 
-  // ACT on the verdict — the gate no longer just flags nonlinearity, it answers it. When the screen
+  // ACT on the verdict — the gate answers nonlinearity rather than only flagging it. When the screen
   // escalates, read the order-robust rank-TE (both directions) on the representative dim: symbolic TE
   // reads ORDER not magnitude, so it recovers the monotone-nonlinear / heavy-tailed coupling the Gaussian
   // read leaves on the table. Skipped on a linear screen (no cost when the Gaussian default suffices).

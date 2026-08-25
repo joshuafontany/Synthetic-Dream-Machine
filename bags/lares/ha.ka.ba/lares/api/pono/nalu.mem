@@ -82,8 +82,7 @@ shore); the ''local capture'' nalu crests on the server tick (CAPTURE waves → 
 not conflate their boundaries: rAF rides the federated/browser engine, the 20 Hz server
 tick rides the local/daemon engine.
 
-''The capture nalu folds into @daemon as an idempotent cap'' (2026-06-26): no longer a bespoke
-main-thread-fed worker_thread, nor even a standalone island — the `#has capture` cap rides the
+''The capture nalu rides @daemon as an idempotent cap'': the `#has capture` cap rides the
 ''@daemon'' (the bound-operator's vessel-only worker, severed from federation). Every @daemon
 CARRIES the cap (tending the operator's session-capture is a daemon duty); its sink (the
 `mine --source ndjson` flush) and feed (the producers) may be unwired, and that inert state is a
@@ -283,6 +282,6 @@ edges encoded with FRU orientation assumptions need migration. See `uefn-scene.m
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hVc6VqK9RYMN-5w8KPRZ0AUW7o7q7WKnKY2Vz0kiNpo
+<<^ code:"&#x0003;" >>ni:///sha-256;WPlU7v-dA8FLo7iAED8LDRSR0AcR6FvcSm6NGpI8aq4
 
 <<^ code:"&#x0004;" -> ? >>
