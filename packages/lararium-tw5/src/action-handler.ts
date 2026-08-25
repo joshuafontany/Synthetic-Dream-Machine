@@ -333,7 +333,7 @@ export function registerActionReactors(table: VerbTable, opts: ActionHandlerOpti
   });
   // PROJECT-MD — a QUERY verb (read + project, NO residency mutation, no effect-record):
   // recompose one carrier from its record group and render its submission pair — markdown body +
-  // meta sidecar — via the one mouth (`meme-markdown`, shared with `lares project-md`). Returns
+  // meta sidecar — via the one mouth (`meme-markdown`, shared with `lares carrier project-md`). Returns
   // the bytes; the gesture decides where they land. Read cap only. Deterministic: no clock rides
   // the pair, so re-running proves currency instead of asserting it.
   table.register("PROJECT-MD", async (args, ctx) => {

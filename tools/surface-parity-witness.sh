@@ -68,8 +68,15 @@ for f in CMDS.glob("*.ts"):
     subverbs |= set(re.findall(r'case\s+"([a-z][a-z0-9_-]*)"', text))                    # switch
     subverbs |= set(re.findall(r'sub\s*(?:===|!==)\s*"([a-z][a-z0-9_-]*)"', text))       # explicit compare
     subverbs |= set(re.findall(r'^\s{2,}"?([a-z][a-z0-9_-]*)"?:\s*cmd[A-Z]\w*,', text, re.M))  # verb→handler map
+    subverbs |= set(re.findall(r'^\s{2,}"?([a-z][a-z0-9_-]*)"?:\s*\{\s*(?:summary|composes|run|handler)\b',
+                               text, re.M))                                              # verb→dispatch record
     # A hyphenated verb rides as a QUOTED key (`"couple-r": cmdCoupleR`) because the bare form is no
     # identifier. Reading only the bare spelling reported three standing doors missing.
+    #
+    # AND A DOOR MAY CARRY A RECORD RATHER THAN A BARE HANDLER. `vessel.ts` and `carrier.ts` write
+    # `name: { summary, run }`, which the handler shape above cannot see — a blind spot that stayed
+    # invisible only while no MCP tool answered at such a sub-door. It stopped being invisible the day
+    # one did.
 subverbs = {s.replace("_", "-") for s in subverbs}
 
 def has_door(tool: str) -> str | None:

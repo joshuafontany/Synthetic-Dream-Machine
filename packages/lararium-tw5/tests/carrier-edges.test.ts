@@ -63,7 +63,7 @@ describe("carrier-edges — every address a carrier points at", () => {
    * the anchored form. Those five pointed at nothing before the conversion too; the old spelling was
    * not one this reader knows, so they dangled outside every count. ''Lower this whenever it can go lower'': a
    * ceiling left slack absorbs the next break silently. This holds the line where it stands: a rename that
-   * breaks edges raises the count, and that is the reading `lares normalize --edges` exists to take
+   * breaks edges raises the count, and that is the reading `lares carrier normalize --edges` exists to take
    * either side of a move.
    */
   test("the corpus points at no more nothing than it already did", () => {
@@ -81,6 +81,6 @@ describe("carrier-edges — every address a carrier points at", () => {
     const dangling = texts.flatMap(readCarrierEdges)
       .filter((e) => e.address !== null && !held.has(e.address));
     expect(files.length).toBeGreaterThan(500);
-    expect(dangling.length, "an edge broke — run `lares normalize --edges` to name it").toBeLessThanOrEqual(197);
+    expect(dangling.length, "an edge broke — run `lares carrier normalize --edges` to name it").toBeLessThanOrEqual(197);
   });
 });

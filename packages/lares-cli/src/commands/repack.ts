@@ -1,5 +1,5 @@
 /**
- * `lares repack --source <bundle-file> --to <bagUri> [--out <file>]` — the
+ * `lares carrier repack --source <bundle-file> --to <bagUri> [--out <file>]` — the
  * collect-the-residency EXPORT.
  *
  * A multi-tiddler bundle (a `.json` array of tiddlers) rides as a PACK — one file,
@@ -23,7 +23,7 @@ import { fileToUriForSource } from "../ingest-core.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 function printUsage(): void {
-  console.log("usage: lares repack --source <bundle-file> --from <bagUri> [--in-wiki] [--out <file>]");
+  console.log("usage: lares carrier repack --source <bundle-file> --from <bagUri> [--in-wiki] [--out <file>]");
   console.log("  re-renders a multi-tiddler bundle (.json / .multids) from its recorded pack members —");
   console.log("  the collect-the-residency export for an upstream TW5 PR. Reads members FROM the bag,");
   console.log("  writes the bundle to --out (default --source). Flags align the family:");
@@ -49,7 +49,7 @@ export async function cmdRepack(args: ParsedArgs): Promise<number> {
   let did: string;
   try { did = await vesselDid(); } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares repack: ${msg}`) });
+    emit(args, { ok: false, error: { code: "not-found", message: msg }, human: () => console.error(`lares carrier repack: ${msg}`) });
     return exitFor("not-found");
   }
 
@@ -67,7 +67,7 @@ export async function cmdRepack(args: ParsedArgs): Promise<number> {
     result = await runVerb(submitName, submitArgs, did);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground` and try again." }, human: () => { console.error(`lares repack: ${msg}`); console.error("  Start the daemon with `lares vessel stand --foreground` and try again."); } });
+    emit(args, { ok: false, error: { code: "daemon-unreachable", message: msg, hint: "Start the daemon with `lares vessel stand --foreground` and try again." }, human: () => { console.error(`lares carrier repack: ${msg}`); console.error("  Start the daemon with `lares vessel stand --foreground` and try again."); } });
     return exitFor("daemon-unreachable");
   }
   if (result.status === "error") {

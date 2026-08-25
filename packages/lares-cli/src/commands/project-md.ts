@@ -1,5 +1,5 @@
 /**
- * `lares project-md <file.mem ...> [--out <dir>]`
+ * `lares carrier project-md <file.mem ...> [--out <dir>]`
  *
  * The submission projection — render a spec carrier to a markdown + meta pair a standards
  * reviewer reads with no grammar taught. One mouth serves two doors: this command and the
@@ -21,7 +21,7 @@ export async function cmdProjectMd(args: ParsedArgs): Promise<number> {
   const out = args.options["out"];
   const titleBase = args.options["title-base"];
   if (files.length === 0) {
-    console.error("usage: lares project-md <file.mem ...> [--out <dir>] [--title-base <lar-uri>]");
+    console.error("usage: lares carrier project-md <file.mem ...> [--out <dir>] [--title-base <lar-uri>]");
     console.error("  render a carrier to its submission pair: <name>.md + <name>.md.meta");
     console.error("  --title-base  the shelf address the pair mounts under; the meta title becomes <base>/<name>");
     return 1;

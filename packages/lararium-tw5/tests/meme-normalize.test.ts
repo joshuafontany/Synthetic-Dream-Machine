@@ -1,5 +1,5 @@
 /**
- * meme-normalize — the SOH-namespace canonicalization the `lares normalize`
+ * meme-normalize — the SOH-namespace canonicalization the `lares carrier normalize`
  * gesture applies. The class oracle.md tripped: an meta that declares a
  * namespace whose SOH opener does not carry it (round-trip drift + lost
  * idempotence). The transform homes the meta-declared namespace into the SOH

@@ -1415,7 +1415,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
     // inner verb (MOVE/LOAD/…) routes to the island's own action reactors.
     // project-md: the submission projection as a first-class wire verb — routes to the island's
     // PROJECT-MD QUERY reactor (read-cap, no mutation; returns the markdown + meta pair bytes).
-    // Same mouth as `lares project-md` (files) and the wiki UI gesture: meme-markdown.
+    // Same mouth as `lares carrier project-md` (files) and the wiki UI gesture: meme-markdown.
     registry.register("project-md", async (args, ctx) => {
       await wikiActivation.ensureActive(slotActiveWikiId);
       return vmManager.placeWikiVerb(slotActiveWikiId, {

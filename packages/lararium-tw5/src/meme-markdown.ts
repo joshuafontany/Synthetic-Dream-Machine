@@ -35,7 +35,7 @@ module-type: library
  *                                            the separator row follows the first row
  *
  * The wiki door and the CLI door share this one mouth: the PROJECT-MD verb (action-handler) and
- * `lares project-md` both call {@link projectSubmission}.
+ * `lares carrier project-md` both call {@link projectSubmission}.
  */
 
 export interface SubmissionProjection {
@@ -201,7 +201,7 @@ export function projectSubmission(text: string, opts?: { uri?: string; title?: s
     `type: text/markdown`,
     `source: ${uri}`,
     `source-check: ${check}`,
-    `projected-by: meme-markdown (lares project-md · PROJECT-MD)`,
+    `projected-by: meme-markdown (lares carrier project-md · PROJECT-MD)`,
     `law: projected artifact — hand edits do not survive re-projection`,
   ].join("\n") + "\n";
   return { markdown: t.markdown, meta, uri, check };

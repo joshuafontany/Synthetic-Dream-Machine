@@ -1,5 +1,5 @@
 /**
- * `lares normalize <file.mem ...> [--check]`
+ * `lares carrier normalize <file.mem ...> [--check]`
  *
  * The normalize gesture — canonicalize a meme carrier's framing so the
  * round-trip lens laws hold (meme-corpus-roundtrip: single-closer · content-
@@ -60,7 +60,7 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
   if (typeof args.options["edges"] === "string") files.push(args.options["edges"]);
 
   if (files.length === 0) {
-    console.error("usage: lares normalize <file.mem ...> [--check]");
+    console.error("usage: lares carrier normalize <file.mem ...> [--check]");
     console.error("  canonicalize a meme carrier's framing (embeds the meta-declared namespace into the SOH).");
     console.error("  --check     report carriers that would change; write nothing (exit 1 if any) — for CI/pre-commit.");
     console.error("  --gradient  name each file's kind and the marks that kind requires and lacks; write nothing.");
