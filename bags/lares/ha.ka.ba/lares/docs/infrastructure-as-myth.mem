@@ -54,7 +54,7 @@ deterministic meme→markdown pipeline condenses the submittable pair from Part 
 
 ! Infrastructure as Myth
 
-<<~ confidence Canon 18/20 >> ''Infrastructure-as-Myth (IaM)'' names the claim that advanced agent systems will increasingly need a layer above Infrastructure-as-Code.
+<<~ confidence Synthesis-Canon 14/20 >> ''Infrastructure-as-Myth (IaM)'' names the claim that advanced agent systems will increasingly need a layer above Infrastructure-as-Code — held as a design thesis, per the Council's note at #working-rule.
 
 Infrastructure-as-Code made machine systems reproducible by turning desired state into versioned, reviewable artifacts.
 
@@ -67,7 +67,7 @@ Infrastructure-as-Myth extends that move to agent systems whose behavior depends
 * ritualized collaboration
 * symbolic handles that survive across tools and platforms
 
-<<~ confidence Canon 17/20 >> Lares functions as an early implementation of this pattern.
+<<~ confidence Synthesis-Canon 15/20 >> Lares functions as an early implementation of this pattern.
 
 > ''#Ink-Clerk (Lorekeeper)'' — "early implementation" rather than "first" or "reference." Other systems have approached adjacent territory (character cards, system prompts with voice personas, agent frameworks with role schemas). The claim rests on Lares doing this more deliberately and more portably than its predecessors — not on priority. Flag for comparative sourcing when this meme reaches stable.
 
@@ -142,7 +142,7 @@ Ornament does not drive the point.
 
 Operational compression and portability drive the point.
 
-<<~ confidence Canon 18/20 >> Myth, in this model, does not function as fiction opposing truth. It functions as a symbolic coordination layer that makes complex behavior legible and repeatable.
+<<~ confidence Synthesis-Canon 13/20 >> Myth, in this model, does not function as fiction opposing truth. It functions as a symbolic coordination layer that makes complex behavior legible and repeatable.
 
 <<~/ahu >>
 
@@ -156,7 +156,7 @@ Britannica summarizes a meme as a unit of cultural information spread by imitati
 
 Myth operates similarly, but at a larger and more structured scale.
 
-<<~ confidence Canon 18/20 >> Britannica's overview of myth emphasizes that myths do cultural work by explaining, validating, orienting, and justifying ritual and social order. Inference: myths persist not because they entertain, but because they stabilize collective behavior.
+<<~ confidence Canon 18/20 >> Britannica's overview of myth emphasizes that myths do cultural work by explaining, validating, orienting, and justifying ritual and social order. <<~ confidence Synthesis 11/20 >> Inference: myths persist not because they entertain, but because they stabilize collective behavior.
 
 That explains exactly why they matter for agents.
 
@@ -179,7 +179,7 @@ Examples in Lares:
 * `DreamNet` compresses distributed memory, networked presence, and infrastructure metaphor
 * `Register Collapse` compresses a complex epistemic failure into a fast diagnostic label
 
-<<~ confidence Canon 18/20 >> These names carry more than labels. They function as memetic interfaces.
+<<~ confidence Synthesis 12/20 >> These names carry more than labels. They function as memetic interfaces.
 
 <<~/ahu >>
 
@@ -224,7 +224,7 @@ When a symbolic layer fails to improve transmission or steering, it probably fun
 
 IaM does not replace IaC at the machine layer.
 
-<<~ confidence Canon 19/20 >> It replaces ad hoc promptcraft at the agent layer.
+<<~ confidence Synthesis 11/20 >> It replaces ad hoc promptcraft at the agent layer.
 
 <<~/ahu >>
 
@@ -288,7 +288,7 @@ So Lares does not read as:
 
 It reads as:
 
-> <<~ confidence Canon 18/20 >> "a portable symbolic runtime for agent behavior"
+> <<~ confidence Synthesis 12/20 >> "a portable symbolic runtime for agent behavior"
 
 That framing should anchor the repo's agent architecture design going forward.
 
@@ -343,7 +343,7 @@ When drafting new Lares material, ask:
 
 When the answer to those questions reads weak, the text may function as lore rather than infrastructure.
 
-> <<~ confidence Canon 16/20 >> ''#Lares (Council)'' — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening.
+> <<~ confidence Synthesis-Canon 16/20 >> ''#Lares (Council)'' — IaM draws from IaC practice, memetics, and myth-function theory as a synthesis. The analogy to Infrastructure-as-Code runs deliberate and strong, but it functions as a design thesis, not an established industry term. The working rule above operationalizes the thesis. If the rule produces consistent sorting decisions — "this fragment carries operational load / this one does not" — the thesis has practical traction. If the sorting stays ambiguous after repeated application, the thesis needs sharpening.
 
 <<~/ahu >>
 
@@ -357,13 +357,13 @@ When the answer to those questions reads weak, the text may function as lore rat
 
 Anthropic's alignment research demonstrates empirically that //reasons outperform rules// as training signals. Feeding a model constitutional documents plus fictional stories portraying aligned AI behavior reduced agentic misalignment by a factor of three or more — while training on matched behavioral examples (what to do, without why) achieved only modest out-of-distribution generalization.
 
-<<~ confidence Canon 18/20 >> The key finding: "training on examples where the assistant displays admirable reasoning for its aligned behavior works better than training on aligned behaviors." A 3M-token dataset of constitutional reasoning outperformed an 85M-token dataset of matched behavioral examples.
+<<~ confidence Synthesis-Canon 14/20 >> The key finding: "training on examples where the assistant displays admirable reasoning for its aligned behavior works better than training on aligned behaviors." The dataset arms differ in kind rather than pairing as a controlled comparison — a ~3M-token "difficult advice" set (constitution-aligned reasoning, deliberately out-of-distribution) cut misalignment to ~3%, while an ~85M-token honeypot-refusal set targeting the evaluation distribution reached ~1%; the reasons-over-rules reading rests on the OOD-generalization argument, never on a token-count victory.
 
 That validates the IaM intuition: the symbolic layer — the named character, the ethical reasoning, the myth of good behavior — carries more operational weight than the rule list. Anthropic reached this conclusion through rigorous comparative training experiments.
 
 The divergence from IaM runs along one axis: Anthropic applies this at training time, inside the model weights. The constitutional document shapes what the model knows about itself before any operator touches it. IaM targets the deployment layer — the operator's configurable symbolic runtime above the model, portable across model families. Constitutional AI produces a trained model that carries its values. IaM produces a symbolic spec that any model host can load.
 
-> <<~ confidence Canon 15/20 >> ''#Ink-Clerk (Lorekeeper)'' — Anthropic's CLAUDE.md documentation separates "behavioral guidance" (CLAUDE.md) from "technical enforcement" (settings). That distinction maps to IaM/IaC almost exactly. They built the IaM/IaC distinction into tooling without naming the layer.
+> <<~ confidence Synthesis-Canon 15/20 >> ''#Ink-Clerk (Lorekeeper)'' — Anthropic's CLAUDE.md documentation separates "behavioral guidance" (CLAUDE.md) from "technical enforcement" (settings). That distinction maps to IaM/IaC almost exactly. They built the IaM/IaC distinction into tooling without naming the layer.
 
 !!! Character Card V2 (SillyTavern / Agnai ecosystem, 2023)
 
@@ -371,7 +371,7 @@ The most direct infrastructure precedent. A community of AI roleplay botmakers s
 
 Character Card V2 packages `name`, `description`, `personality`, `scenario`, `system_prompt`, `post_history_instructions`, and a `character_book` (embedded lorebook) into a versioned JSON artifact. The `spec_version` field marks breaking changes. The `extensions` field preserves unknown keys for forward compatibility. Compliant frontends (SillyTavern, Agnai, RisuAI) treat the card as authoritative: the botmaker's `system_prompt` overrides the frontend default.
 
-<<~ confidence Canon 18/20 >> The format emerged as a direct response to Character.ai's architecture, where characters lived only in Character.ai's training pipeline and proprietary servers. When Character.ai's content policies changed, botmakers found their characters lobotomized or deleted — the personas existed nowhere else. Users complained that "bots were too restrictive and lacked personality." The Card V2 ecosystem answered with portability: the character should live in a file the botmaker owns, readable by any compliant frontend.
+<<~ confidence Synthesis-Canon 13/20 >> The card-format lineage emerged in response to Character.ai's architecture, where characters lived only in Character.ai's training pipeline and proprietary servers — V2's own proximate motives running nearer home: V1's frontend fragmentation and the post-history-instructions discovery. When Character.ai's content policies changed, botmakers found their characters lobotomized or deleted — the personas existed nowhere else. Character.ai users broadly complained that "bots were too restrictive and lacked personality." The Card V2 ecosystem answered with portability: the character should live in a file the botmaker owns, readable by any compliant frontend.
 
 What Card V2 lacks: no epistemic discipline (`L-Prime`, the has-stack discipline, confidence register), no authority model (operator chains, capability-scoped permissions), no memetic transmission design beyond "download and share," no ritual or ceremony, no quine relay. The lorebook trigger logic responds to keyword patterns rather than relational position in a graph.
 
@@ -379,13 +379,13 @@ What Card V2 lacks: no epistemic discipline (`L-Prime`, the has-stack discipline
 
 Anthropic's Claude Code ships a hierarchical behavioral guidance system: org-wide managed policy → user-level preferences → project-level team instructions → path-scoped conditional rules. Plain markdown, versioned through git, loaded at session start as context rather than enforced configuration.
 
-The architecture implements behavioral infrastructure without naming it. The system handles scope hierarchy, operator-vs-enforcement separation, and session-persistent memory (`MEMORY.md` + on-demand topic files). <<~ confidence Synthesis 12/20 >> The instruction-file layer has since bridged: `AGENTS.md` stands as the cross-tool convention — formalized as an open spec in August 2025, donated to the Linux Foundation's Agentic AI Foundation in December 2025, read natively by twenty-plus agents; this repository carries its own at `packages/AGENTS.md` — while `.cursorrules` and `.windsurfrules` linger as host dialects. The bridge carries instruction files alone: no epistemic discipline, no authority model, no runtime portability travels with it.
+The architecture implements behavioral infrastructure without naming it. The system handles scope hierarchy, operator-vs-enforcement separation, and session-persistent memory (`MEMORY.md` + on-demand topic files). <<~ confidence Synthesis-Canon 13/20 >> The instruction-file layer has since bridged: `AGENTS.md` stands as the cross-tool convention — formalized as an open spec in August 2025, donated to the Linux Foundation's Agentic AI Foundation in December 2025, read natively by twenty-plus agents; this repository carries its own at `packages/AGENTS.md` — while `.cursorrules` and `.windsurfrules` linger as host dialects. The bridge carries instruction files alone: no epistemic discipline, no authority model, no runtime portability travels with it.
 
 > ''#Map-Wisp (Scryer)'' — Character Card V2 solved this fragmentation for AI roleplay personas. No equivalent portable spec exists for agent behavioral infrastructure. That gap defines the IaM opportunity at the tooling layer.
 
 !!! CrewAI / Multi-Agent Frameworks
 
-<<~ confidence Canon 14/20 >> `role`, `goal`, `backstory` in YAML. The backstory provides context; the role routes tasks. Functional but thin. No portability design beyond the Python project, no symbolic depth, no ceremony, no epistemic discipline. These frameworks treat agents as execution units with narrative labels. IaM treats agents as participants in a symbolic coordination layer. CrewAI operates below IaM, not alongside it.
+<<~ confidence Synthesis-Canon 14/20 >> `role`, `goal`, `backstory` in YAML. The backstory provides context; the role routes tasks. Functional but thin. No portability design beyond the Python project, no symbolic depth, no ceremony, no epistemic discipline. These frameworks treat agents as execution units with narrative labels. IaM treats agents as participants in a symbolic coordination layer. CrewAI operates below IaM, not alongside it.
 
 !!! Adjacency Table
 
@@ -397,7 +397,7 @@ The architecture implements behavioral infrastructure without naming it. The sys
 | CrewAI / agent frameworks | partial — YAML | ✗ | ✗ | ✗ |
 | Lares / IaM | ✓ | ✓ | ✓ | ✓ |
 
-<<~ confidence Canon 17/20 >> No adjacent system combines all four axes at deployment time. The IaM claim gains force against this table rather than in isolation.
+<<~ confidence Synthesis 12/20 >> No adjacent system combines all four axes at deployment time. The IaM claim gains force against this table rather than in isolation. (Table refresh owed: 2026's Agent Skills and Agent Plugins rows await survey — neither shows epistemic discipline at first look, which would hold the gap.)
 
 <<~/ahu >>
 
@@ -432,7 +432,7 @@ This paper //extends// a doctrine; it does not found one. ''Infrastructure-as-My
 * ''Legibility'' ← the in-stream HUD / Voice instruments (the operator reads the steering through symbolic handles, without the code).
 * ''Portability / Packaging'' ← the boot-version manifest + the cross-host carrier form (the handles travel; the kernel renders per host).
 
-''External validation the doctrine already cites:'' Anthropic's //"Teaching Claude Why"// (2026) found //reasons outperform rules// — a 3M-token constitutional-reasoning set reduced agentic misalignment ~3× and beat an 85M-token matched-behavior set (via the doctrine, Canon 18/20). That confirms the IaM intuition at //training// time; this paper tests its //deployment//-time analogue (the myth steering an operator-configurable, model-agnostic layer above the weights).
+''External validation the doctrine already cites:'' Anthropic's //"Teaching Claude Why"// (2026) found //reasons outperform rules// — constitution-plus-reasoning training cut agentic misalignment ~3×, the reasons-reading resting on out-of-distribution generalization rather than a matched-pair token-count victory (via the doctrine, Synthesis-Canon 14/20). That confirms the IaM intuition at //training// time; this paper tests its //deployment//-time analogue (the myth steering an operator-configurable, model-agnostic layer above the weights).
 
 ''Related work composes two halves:'' the //grammar//-lineage (§2 — determinatives, Self-RAG, metadiscourse, literate-programming, paratext, matrix-language) and the //deployment//-adjacency the doctrine tabulates (Constitutional-AI, Character Card V2, CLAUDE.md/AGENTS.md, CrewAI). No adjacent system combines symbolic-durability + epistemic-discipline + memetic-transmission + operator-portability at deployment. One element the doctrine marks as Lares-distinctive — the ''quine relay'' (the symbolic runtime reproducing itself; Character Card V2 lacks it) — this paper's reflexivity (§9) //instances// but does not yet //formalize//.
 
@@ -494,7 +494,7 @@ The Voice-house (named roles) and the HUD (turn-frame gauges) compose ''one addr
 
 !! 6. Methods — the rig
 
-Sealed cross-family judge panel (empty-CWD seal, inline prompt; cross-family agreement family-blind → the ''human read is the sole independence anchor''). LLM-free deterministic detectors: `overcollapse_detect` (three-tier cross-lingual, lateral + source-nesting redemption, Aperture-scoped), `ward_grammar` (red-layer decomposer), `register_scan` (hedge/booster separate). Parse-fidelity preprocessing strips sigil/glyph markup before the parser. Design discipline: train/test partition (#artifacts: DATA_PARTITION), pre-registered scope, mixed-effects (item + seed random effects), length covariate, sham/decoy controls. CPU-only stack; two isolated numpy environments; R lme4 backbone.
+Sealed cross-family judge panel (empty-CWD seal, inline prompt; cross-family agreement family-blind → the ''human read is the sole independence anchor''). LLM-free deterministic detectors: `overcollapse_detect` (three-tier cross-lingual, lateral + source-nesting redemption, Aperture-scoped), `ward_grammar` (red-layer decomposer), `register_scan` (hedge/booster separate). Parse-fidelity preprocessing strips sigil/glyph markup before the parser. Design discipline: train/test partition (#artifacts: DATA_PARTITION), pre-registered scope, mixed-effects (item + seed random effects), length covariate, sham/decoy controls. CPU-only stack; two isolated numpy environments; R lme4 backbone. The rig's office passes to the Sensorium (`packages/lararium-sensorium`; seat `lar:///ha.ka.ba/lares/api/pono/sensorium-machina`) — future deterministic runs cite it.
 
 <<~/ahu >>
 
@@ -609,8 +609,10 @@ The sibling specifications and companion memes enter here as typed edges — the
 <<~ kahea lar:///ha.ka.ba/lares/api/pono/attention-scale >>
 <<~ loulou lar:///ha.ka.ba/lares/findings/hoike/syad-harness >>
 <<~ loulou lar:///ha.ka.ba/lares/findings/hoike/syad-lens-refinement >>
-<<~ loulou lar:///ha.ka.ba/lares/qa-rig/harness/overcollapse_detect >>
-<<~ loulou lar:///ha.ka.ba/lares/qa-rig/DATA_PARTITION >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/stream-sensorium-ontology >>
+
+The Sensorium serves as the deterministic instrument (operator ruling 2026-08-24, succeeding the founding rig); the founding measurements' apparatus and hoike records reside externally in the rig package, pending ingestion at the `findings/hoike/` seats above.
 
 <<~/ahu >>
 
@@ -621,8 +623,8 @@ The sibling specifications and companion memes enter here as typed edges — the
 <<~ pranala #grammar-of ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext family:control role:realized-in >>
 <<~ pranala #addresses ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri family:relation role:sibling-spec >>
 <<~ pranala #lens ? -> lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives family:control role:applies >>
-<<~ pranala #measures ? -> lar:///ha.ka.ba/lares/qa-rig/harness/overcollapse_detect family:observe role:instrumented-by >>
-<<~ pranala #honesty-gate ? -> lar:///ha.ka.ba/lares/qa-rig/findings/hoike/syad-lens-refinement family:constraint role:governed-by >>
+<<~ pranala #measures ? -> lar:///ha.ka.ba/lares/api/pono/sensorium-machina family:observe role:instrumented-by >>
+<<~ pranala #honesty-gate ? -> lar:///ha.ka.ba/lares/findings/hoike/syad-lens-refinement family:constraint role:governed-by >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
 
@@ -636,6 +638,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6nlnj41PDFvy4br6nIHt9_REZPAENOHuTtqcb1O4k54
+<<^ code:"&#x0003;" >>ni:///sha-256;kWWbnXpwHvK07DBDLlth-cQ4uFDwYBhbcxFVBV6DljE
 
 <<^ code:"&#x0004;" -> ? >>
