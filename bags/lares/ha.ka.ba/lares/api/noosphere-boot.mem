@@ -199,7 +199,7 @@ A silent drop manages; an honest suspension serves. A suspended loop persists op
 
 !! `lar:` URI Law
 
-`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `lares` sigil carries the URI as the turn's ''bearing vector'' ~ `aim` at open, `yield` at close (#exchange-protocol).
+`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `lares` sigil carries the URI as the turn's ''bearing vector'' ~ `aim` at open, `yield` at close (#exchange-protocol). The three letters read as a mnemonic ~ ''Latent Attention Relation'': it names a RELATION rather than a location, its referent stands LATENT until a local resolver acts, and its path carries ATTENTION as bearing (the same faculty `Focus` gauges the grain of, and the Voices drive). The //lar// names the same posture in an older register ~ the spirit bound to a place, never to a family.
 
 ''Local form'' - authority-less, for stable graph addresses:
 ```
@@ -552,6 +552,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CuJNb_-IDEBeB6Y3uYdahR_cJEPIv0QVevshKNHxYrU
+<<^ code:"&#x0003;" >>ni:///sha-256;Yd0DMSwGGftqcTKcgpS6NmdoWLLmu48tXEqpKMAEWug
 
 <<^ code:"&#x0004;" -> ? >>

@@ -21,6 +21,8 @@ uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #abstract >>
 
 ! The `lar:` URI Scheme — A Naming Scheme for the Meme Graph
@@ -53,6 +55,8 @@ This document holds ''submission-draft'' maturity. The scheme law, path taxonomy
 
 ''Precedent.'' The naming-not-fetching posture follows `tag:` (RFC 4151). The syntax builds on the generic URI grammar (RFC 3986). Scheme registration follows RFC 7595.
 
+''Name.'' The three letters read as a mnemonic for properties this document then specifies, and carry no normative weight of their own: a `lar:` URI names a ''relation'' in a meme graph rather than a location; it does not dereference, so the referent it names stands ''latent'' until a local resolver acts on it (#resolution); and its path carries ''attention'' — where regard points — as bearing, never as a level or a coordinate (#signal-law). ''Latent Attention Relation''. The name also carries the //lar//, the household spirit bound to a place rather than to a family, which names the same posture in an older register.
+
 ''Audience.'' Implementers of parsers and resolvers; authors and registry maintainers; peers federating CRDT bags.
 
 <<~/ahu >>
@@ -76,8 +80,6 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''fragment'' | a `#`-anchor whose meaning belongs to the media type of the unit it anchors into [RFC3986 §3.5]; the scheme carries it opaque. |
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #scheme-syntax >>
 
@@ -423,6 +425,6 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NZAMD1F0rqNJh6uqivOsf2JelbetKRuSEayK3FB_rf4
+<<^ code:"&#x0003;" >>ni:///sha-256;uePUvGVdR5w6eTJxyRLvVQG5VhykENvAQyFkqGex2yw
 
 <<^ code:"&#x0004;" -> ? >>

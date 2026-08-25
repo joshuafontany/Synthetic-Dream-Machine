@@ -30,6 +30,8 @@ This document holds **submission-draft** maturity. The scheme law, path taxonomy
 
 **Precedent.** The naming-not-fetching posture follows `tag:` (RFC 4151). The syntax builds on the generic URI grammar (RFC 3986). Scheme registration follows RFC 7595.
 
+**Name.** The three letters read as a mnemonic for properties this document then specifies, and carry no normative weight of their own: a `lar:` URI names a **relation** in a meme graph rather than a location; it does not dereference, so the referent it names stands **latent** until a local resolver acts on it (#resolution); and its path carries **attention** — where regard points — as bearing, never as a level or a coordinate (#signal-law). **Latent Attention Relation**. The name also carries the *lar*, the household spirit bound to a place rather than to a family, which names the same posture in an older register.
+
 **Audience.** Implementers of parsers and resolvers; authors and registry maintainers; peers federating CRDT bags.
 
 <a id="terminology"></a>

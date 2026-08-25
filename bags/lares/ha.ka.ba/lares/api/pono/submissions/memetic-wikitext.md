@@ -28,7 +28,7 @@ This document holds **submission-draft** maturity. The lexical structure, dual-l
 
 **Two faces of one meme.** This carrier holds the **specification face** of `memetic-wikitext`; the runtime **kernel** face (`…/memetic-wikitext/kernel`) holds the live grammar kernel, sigil registry, parse rules, and boot grammar that a node loads. The tiddler-format law keeps them distinct — this `.mem` documents the language; the kernel `.tid` runs it.
 
-**Relation to the `lar:` URI specification.** Memetic-wikitext addresses content by `lar:` URIs. The `lar:` scheme — its anatomy, path arity, and resolution discipline — forms a **separate, sibling submission**: `lar:///ha.ka.ba/lares/api/pono/lar-uri` (Normative Reference [LAR-URI]). This document treats a `lar:` URI as an opaque content identity (see `URI-ref`, #grammar) and defers its internal structure to [LAR-URI].
+**Relation to the `lar:` URI specification.** Memetic-wikitext addresses content by `lar:` URIs. The `lar:` scheme — its anatomy, path arity, and resolution discipline — forms a **separate, sibling submission**: `lar:///ha.ka.ba/lares/api/pono/lar-uri` (Normative Reference [LAR-URI]). This document treats a `lar:` URI as an opaque content identity (see `URI-ref`, #grammar) and defers its internal structure to [LAR-URI]. That scheme's name reads as a mnemonic — **Latent Attention Relation** — for the naming-not-fetching posture this document keeps with it.
 
 **Relation to the framing specification.** A document travels as a **carrier**: wrapped in the
 transmission frame — declaration, control marks, block check — defined by the sibling submission

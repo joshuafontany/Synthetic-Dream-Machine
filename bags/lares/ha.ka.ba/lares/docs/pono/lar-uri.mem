@@ -18,6 +18,8 @@ uri-path  = "ha.ka.ba/lares/docs/pono/lar-uri"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
 
+<<^ code:"&#x0002;" >>
+
 <<~ ahu #meme-header >>
 
 ! `lar:` URI Scheme — Canon Documentation
@@ -32,7 +34,7 @@ This surface carries the explanation.
 
 !! 1. Design Intent
 
-The `lar:` URI names the bearing a Lares node exchange takes — a shared navigational address. In live use the `aim` / `yield` vectors carry it as the turn's bearing; the sigil panel beside it carries per-turn signal. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
+The `lar:` URI names the bearing a Lares node exchange takes — a shared navigational address. ''The three letters read as a mnemonic'' ~ ''Latent Attention Relation''. It names a RELATION rather than a location; its referent stands LATENT until a local resolver acts on it, because a `lar:` URI names and never fetches; and its path carries ATTENTION as bearing — where regard points. That third term reaches further than the scheme: the same faculty the `Focus` gauge reads the GRAIN of, and the one a Voice drives when it takes a turn. A reader who learns to steer attention here has learned the dial the whole house turns. The //lar// names the same posture in an older register ~ the household spirit bound to a place, never to a family. In live use the `aim` / `yield` vectors carry it as the turn's bearing; the sigil panel beside it carries per-turn signal. In persistence it functions as a structured record string suitable for logs, validation, agent module, and registry metadata.
 
 Each URI component carries a distinct, non-overlapping concern across three semantic layers:
 
@@ -67,8 +69,6 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 No metric sits claimed yet. The scheme names attitude-bearing only and defines no distance function over roots.
 
 <<~/ahu >>
-
-<<^ code:"&#x0002;" >>
 
 <<~ ahu #exchange-flow >>
 
@@ -462,6 +462,6 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;s8xzJAGesaAqMtVBA4vXtym9RoKldJErg1YesOE3HDU
+<<^ code:"&#x0003;" >>ni:///sha-256;WYCtg_DXr0F1pGXTGp67myPC4JX31IagjQek58C7ELQ
 
 <<^ code:"&#x0004;" -> ? >>
