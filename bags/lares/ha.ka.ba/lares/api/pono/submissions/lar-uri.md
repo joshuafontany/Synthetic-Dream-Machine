@@ -85,7 +85,7 @@ alias         = 1*( unreserved )
 grant         = 1*( unreserved )
 ```
 
-A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class is exempt.  The words `bags`, `wikis`, and `cid` are RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
+A `lar:` URI MUST hold ASCII only. A root slot MUST hold lowercase ASCII letters and hyphens alone. EVERY path MUST carry a full three-slot root — no class escapes it.  The words `bags`, `wikis`, and `cid` stand RESERVED at `child[1]` — a meme namespace MUST NOT equal one.
 
 **The scheme-relative form: `uri-path`.** Instruments and carrier declarations abbreviate an address to
 its `uri-path` — the spelling with the leading `lar:///` removed, codepoint-identical to the path it
@@ -201,7 +201,7 @@ lar:///ha.ka.ba/cid/bafy…                        ← an immutable artifact
 Law summary:
 
 1. `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
-2. `child[1]` forks: a reserved **kind-plane** word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word is a **meme namespace** — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
+2. `child[1]` forks: a reserved **kind-plane** word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word names a **meme namespace** — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
 3. A CRDT surface carries exactly one canonical address. A wiki's per-wiki live slots extend its identity at `child[3]` (`wikis/{slug}/{kind}`).
 4. Resolution: the runtime resolves a surface to an AutomergeUrl via the resolver map carried in the device's runtime manifest. The URI carries the identity; the resolver maps it to the live doc. Two devices binding one surface URI to different doc URLs (different recipes, different personal docs) run as the normal case — the URI names the address, and the doc stands as the house.
 

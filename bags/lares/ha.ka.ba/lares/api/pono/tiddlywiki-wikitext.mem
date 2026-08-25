@@ -31,12 +31,12 @@ office follows the `text/markdown` precedent [RFC7763]: a registration-grade des
 community already writes, so that a structured-syntax suffix (`+tiddlywiki`, [RFC6839]) gains the
 normative reference every registration template demands.
 
-The format's grammar is ''open by design'': the parser composes its grammar at parse time from a
+The format's grammar stands ''open by design'': the parser composes its grammar at parse time from a
 registry of rule modules, and plugins register further rules through the same mechanism the core rules
 use. So this document enumerates the ''default rule registry'' and specifies the ''registration
 mechanism'' and the ''total-parse law'' — it does not, and cannot, enumerate every grammar a wiki may
-run, any more than [RFC7763] could enumerate every Markdown. There is no such thing as wikitext that
-fails to parse.
+run, any more than [RFC7763] could enumerate every Markdown. No wikitext exists that fails to
+parse.
 
 <<~/ahu >>
 
@@ -63,11 +63,11 @@ this record; the record's own envelope belongs to its storage format, not to the
 One property of this syntax carries every dialect that rides it, and this document exists first to
 state it precisely. It has three parts, each measured against the engine:
 
-# ''The parse is total.'' No input fails to parse. Text that matches no active rule survives into the
+# ''The parse runs total.'' No input fails to parse. Text that matches no active rule survives into the
   parse tree as text nodes; a block run that opens no block rule wraps as an ordinary paragraph
   (`wikiparser.js`, `parseBlock` / `pushTextWidget`). The parser defines processing for every input,
   conformant or otherwise — the posture the HTML specification takes for unknown elements [HTML].
-# ''An unbound macro call is harmless, and renders as nothing.'' A call `<<name>>` whose name binds no
+# ''An unbound macro call lands harmless, and renders as nothing.'' A call `<<name>>` whose name binds no
   definition parses cleanly into a transclusion node (`parseutils.js`); at render, the missing-target
   fallback of the transclusion widget emits no output (`transclude.js`, the `ts-missing` slot). The
   construct injures nothing around it — and it does ''not'' render as its own text. A dialect relying
@@ -125,11 +125,11 @@ grammar, because the grammar of any given parse follows from the rules active in
 
 !! The Extension Mechanism — the rule-object contract
 
-The grammar's openness is not an accident of implementation; it is the format's architecture, and this
-section states it normatively. ''The core rules and every extension rule register through one
+The grammar's openness follows from no accident of implementation; it forms the format's architecture,
+and this section states it normatively. ''The core rules and every extension rule register through one
 mechanism'' — the inventory below enumerates the default registry, never the possible grammar.
 
-A rule is a module of type `wikirule`. It exports exactly:
+A rule rides as a module of type `wikirule`. It exports exactly:
 
 * `name` — the string `\rules` and per-wiki configuration filter by. One rule, one name.
 * `types` — which of the three classes the rule serves: `pragma`, `block`, `inline`. A rule MAY serve
@@ -171,7 +171,7 @@ specification [MWT] under this contract.
 
 Enumerated from the implementation (`core/modules/parsers/wikiparser/rules/`, commit `69b98fc94`):
 44 distinct rule names — 8 pragma, 14 block, 25 inline, with `commentblock`, `html`, and `conditional`
-each serving two classes. Names below are the exact `name` exports — load-bearing, because `\rules`
+each serving two classes. Names below carry the exact `name` exports — load-bearing, because `\rules`
 and the configuration tiddlers filter by these strings.
 
 !!! Pragma rules
@@ -268,10 +268,10 @@ where the document type declaration stands [XML]:
 
 A ''conforming document'': under the total-parse law every input parses, so document conformance
 reduces to well-formedness of the constructs a document uses — closed fences, terminated definitions,
-matched element tags. No input reads as invalid; a document is only ever more or less well-formed.
+matched element tags. No input reads as invalid; a document only ever reads more or less well-formed.
 
 A ''core-conforming parser'' accepts every construct in the default registry (#rule-inventory),
-honours the pragma prologue, and enforces the degradation rule (#degradation). Because the parse is
+honours the pragma prologue, and enforces the degradation rule (#degradation). Because the parse runs
 total, a core-conforming parser accepts every input — the class every embedding application can rely
 on.
 
@@ -280,8 +280,8 @@ the extension rules it registers under the contract of #extension-mechanism, eac
 marked as an extension. Two extension-aware parsers agree only to the extent their declared sets
 agree — the interoperability posture RFC 7763 states for the Markdown family holds here unchanged.
 
-Normative force in this document attaches to ''parsing'' — input to parse tree. Rendering behavior is
-described where load-bearing (the unbound-call fallback, the security gates) and otherwise left to
+Normative force in this document attaches to ''parsing'' — input to parse tree. Rendering behavior
+enters the description only where load-bearing (the unbound-call fallback, the security gates) and otherwise left to
 implementations.
 
 <<~/ahu >>
@@ -336,7 +336,7 @@ whom the finished draft lands first. Under RFC 6838 §3.2 the registration prope
 producing organization; a third party may file, naming both parties, and the organization may assert
 ownership at any time.
 
-Because the grammar is open, a registration MAY carry a `variant`-style parameter on the RFC 7763
+Because the grammar stands open, a registration MAY carry a `variant`-style parameter on the RFC 7763
 model: a hint naming which rule-set family the author intended, obliging no receiver. Dialects that
 register additional parse rules (memetic-wikitext [MWT] among them) would name themselves there
 rather than minting sibling types.
@@ -374,6 +374,6 @@ rather than minting sibling types.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;I01rs1r_lTZJ060dK5k8CbLzMPmu0sPOyVFRexv6Ur0
+<<^ code:"&#x0003;" >>ni:///sha-256;M-rTvDMUr5aA0XDXY17UkTf_fuOZz0thMpwbItK7eqE
 
 <<^ code:"&#x0004;" -> ? >>

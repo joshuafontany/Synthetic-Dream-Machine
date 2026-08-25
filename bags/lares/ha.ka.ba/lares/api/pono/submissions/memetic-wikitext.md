@@ -157,7 +157,7 @@ facts the frame rests on, each the host's and not this grammar's:
 - **A quoted value reads as a TW5 string literal** — single, double, triple-double or `[[bracket]]` — and a
   string literal carries UTF-8, so `namespace:"&#x2299;"` and `namespace:"ॐ ँ"` stand as written.
 - **An unnamed value reads positional**, numbered in order. `?` and `->` ride as positional parameters,
-  which is how the bearing arrow survives inside a macro call ([FRAMING] #bearing-arrow).
+  which lets the bearing arrow survive inside a macro call ([FRAMING] #bearing-arrow).
 
 **A `lar:` URI already reads as a named parameter.** TW5 takes `lar:///ha.ka.ba/…` as the name `lar` with
 value `///ha.ka.ba/…`, because `lar` passes the strict-identifier test and `:` separates. The host has
@@ -173,14 +173,14 @@ celebrant already knows which one to say aloud.
 The `<<` `>>` family lifts the same division into a context stream. The BLACK carries content — what the turn SAYS. The RED carries
 performative instruction — what the turn DOES.
 
-**The red acts in two domains, and both are acting.** In a context stream a sigil **steers**: it names
+**The red acts in two domains, and both count as acting.** In a context stream a sigil **steers**: it names
 the stance, sets the gauge, vows the confidence, marks the phase. In a live wiki the same sigil **calls**:
 it renders, transcludes, invokes a procedure, opens a widget. Steering and calling look different and
 divide the same way — each one DOES something, and neither one SAYS anything.
 
 **A sigil steers and calls; it never asserts.** An assertion belongs to the black, where it can be
 weighed, doubted and answered. A rubric cannot be argued with; it can only be performed or ignored —
-which is exactly why the instruction channel and the claim channel must never share a colour.
+which stands exactly why the instruction channel and the claim channel must never share a colour.
 
 Memetic-wikitext SHALL read as a **superset of TW5 wikitext**: every valid TW5 wikitext document reads as valid memetic-wikitext. A processor reads bare `<<name>>` as an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 
@@ -420,10 +420,10 @@ resolved what it quotes would lie about what was said, and a record of speech su
 
 So no sigil declares which register it stands in, and none should: the register belongs to the CARRIER,
 which knows whether it holds a turn or a quotation of one. A processor MUST NOT resolve a sigil whose
-name binds no procedure, and MUST render it as the text it is.
+name binds no procedure, and MUST render it as its own text.
 
 //(A live wiki may bind such a name later — a procedure that SHOWS what was steered without performing
-it, styled as its own block. The extension point is the same one every sigil uses, so the render arrives
+it, styled as its own block. The extension point matches the one every sigil uses, so the render arrives
 without the grammar moving.)//
 
 <a id="conformance"></a>
@@ -451,7 +451,7 @@ close-tag matching; treat `filter-expr` as opaque.
 The **carrier reader** and **consumer** classes — the frame-side processors — conform to [FRAMING],
 which states their obligations beside the frame they read.
 
-**The host reading is a conformance obligation, not a courtesy.** A carrier processed by a vanilla TW5
+**The host reading carries conformance force, never courtesy.** A carrier processed by a vanilla TW5
 engine MUST parse as valid wikitext with every sigil an unbound macro call. A grammar change that breaks
 that reading breaks the superset claim this document rests on, whatever else it gains.
 

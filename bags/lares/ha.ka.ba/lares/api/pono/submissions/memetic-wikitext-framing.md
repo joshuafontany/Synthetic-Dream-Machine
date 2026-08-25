@@ -139,7 +139,7 @@ text-close  = frame                                ; code &#x0003; — ETX
 
 **Normative grammar rules.** (1) A `frame` sigil MUST state `code:` as its first parameter; the
 remaining slots belong to the mark that code names (#control-set). (2) Every frame part reads optional
-at ARRIVAL — the frame is minted, never demanded (#authoring) — and where the marks stand, spine order
+at ARRIVAL — the frame mints, never gets demanded (#authoring) — and where the marks stand, spine order
 MUST hold (#carrier-spine). (3) The `check` slot names a POSITION, never a parameter: adjacent after the
 closed `text-close` sigil, on the same line (#control-set). (4) The composition wraps `document`
 without entering it; everything inside defers to [MEMETIC-WIKITEXT].
@@ -155,23 +155,23 @@ Every carrier opens by naming the grammar that reads it:
 ```
 
 **The root name carries an RFC 6839 structured syntax suffix.** A `+suffix` names the base syntax a
-format is BUILT ON — `image/svg+xml` reads as SVG built on XML, and `memetic-wikitext+tiddlywiki`
+format BUILDS ON — `image/svg+xml` reads as SVG built on XML, and `memetic-wikitext+tiddlywiki`
 reads as memetic-wikitext built on TW5 wikitext. The superset relation this spec asserts in prose
 ([MEMETIC-WIKITEXT] #lexical-structure) rides in the type name itself, in the form a media-type registry already understands.
 
-**The shape is HTML5-minimal SGML.** `<!DOCTYPE html>` collapsed SGML's full
+**The shape follows HTML5-minimal SGML.** `<!DOCTYPE html>` collapsed SGML's full
 `<!DOCTYPE root PUBLIC "fpi" "system">` to keyword plus root name; this keeps that collapse and lets
 the `lar:` URI stand where the system identifier stands. Two standards, both recognisable on sight,
 neither invented here.
 
-**The root name carries no `text/`, and that division is the point.** A DOCTYPE names a DOCUMENT TYPE;
+**The root name carries no `text/`, and that division carries the point.** A DOCTYPE names a DOCUMENT TYPE;
 `<!DOCTYPE html>` writes `html`, never `text/html`. The media type has its own home and always has —
 the tiddler's `type:` field, and the `type` line in every carrier's iam block. One name per relation:
 the DOCTYPE says WHICH GRAMMAR READS THIS, the `type` field says WHAT THIS IS TO A TRANSPORT. Folding
 the media type into the DOCTYPE slot would put both under one name for no gain.
 
 **The media type follows the same suffix** ([MEMETIC-WIKITEXT] #media-type): `text/memetic-wikitext+tiddlywiki`.
-The suffix states a structural fact about the syntax and holds whatever the subtype is called; the
+The suffix states a structural fact about the syntax and holds whatever name the subtype takes; the
 earlier `x-` spellings file as deprecated read-side aliases there.
 
 <a id="declaration-register"></a>
@@ -183,14 +183,14 @@ earlier `x-` spellings file as deprecated read-side aliases there.
 `<<~moves declaration -> states/what-must-hold-BEFORE-a-transmission on/the-carrier if/read-first do/select-the-grammar >>`
 `<<~moves control -> marks/a-POSITION-WITHIN-a-transmission on/the-stream if/framing do/open-close-or-end >>`
 
-**A declaration is not a position.** `&#x0001;` opens a heading, `&#x0003;` ends text, `&#x0004;` ends
+**A declaration names no position.** `&#x0001;` opens a heading, `&#x0003;` ends text, `&#x0004;` ends
 transmission — every control mark names a place inside one act of sending. `<<!DOCTYPE … >>` names
 which grammar reads that act at all, and in the received framing nothing precedes SOH. Giving both one
 opener would put two relations under one head, deliberately, for the first time in this grammar.
 
 **`<<!` reads on arrival.** SGML has spelled a markup declaration `<!DOCTYPE …>` since 1986 and HTML
 carries it to every page; the doubled bracket costs a reader who has seen one exactly nothing. That
-matters here more than anywhere else in the corpus, because the declaration is the FIRST LINE of every
+matters here more than anywhere else in the corpus, because the declaration stands as the FIRST LINE of every
 carrier — the one line a stranger meets before knowing any of this.
 
 ### The declaration precedes its grammar, never the file
@@ -220,7 +220,7 @@ processor enforces; what precedes the pair belongs to whoever else reads the fil
 
 One file then serves two readers. A skill loader reads front-matter at byte zero and stops; this grammar
 skips the foreign header and reads its own declaration below. The alternative — one file per reader,
-maintained by hand — is the twin-drift this corpus already keeps a witness against.
+maintained by hand — repeats the twin-drift this corpus already keeps a witness against.
 
 **The register takes members, not exceptions.** `!DOCTYPE` stands first; the register admits further
 `!WORD` declarations under the same law — read before content, selecting or constraining the grammar,
@@ -235,12 +235,12 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 | Sigil | Form | Role | Byte | Kapu byte |
 |---|---|---|---|---|
 | --- | --- | --- | --- | --- |
-| **SOH** | `<<^ code:"&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post; the place is named with its `lar:` bearing | `0x01` | DC1 `0x11` |
+| **SOH** | `<<^ code:"&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post; the Lar names the place with its `lar:` bearing | `0x01` | DC1 `0x11` |
 | **STX** | `<<^ code:"&#x0002;" >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
-| **ETX** | `<<^ code:"&#x0003;" >>ni:///sha-256;…` | End of Text — the body closes, the check follows the closer; the hearth is banked | `0x03` | — |
-| **EOT** | `<<^ code:"&#x0004;" -> ? >>` | End of Transmission — the libation is poured; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
+| **ETX** | `<<^ code:"&#x0003;" >>ni:///sha-256;…` | End of Text — the body closes, the check follows the closer; the hearth banks | `0x03` | — |
+| **EOT** | `<<^ code:"&#x0004;" -> ? >>` | End of Transmission — the libation pours; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
 
-**The frame — heading, then text.** The protocol law pins the zones: SOH opens the **heading**, STX opens the **text**. The heading is the toml iam slot and nothing else; the text is the body.
+**The frame — heading, then text.** The protocol law pins the zones: SOH opens the **heading**, STX opens the **text**. The heading holds the toml iam slot and nothing else; the text holds the body.
 
 ```
 <<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///URI >>   SOH · open heading
@@ -252,14 +252,14 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 <<^ code:"&#x0004;" -> ? >>                            EOT · release
 ```
 
-**The mark names the control byte.** Each sigil states its C0 control character as a named `code:` param; the mnemonic (SOH/STX/ETX/EOT) is how it reads, the byte is what the parser frames on. STX and ETX carry that one param and nothing else — each opens or closes the text and states no bearing.
+**The mark names the control byte.** Each sigil states its C0 control character as a named `code:` param; the mnemonic (SOH/STX/ETX/EOT) carries the reading, the byte carries what the parser frames on. STX and ETX carry that one param and nothing else — each opens or closes the text and states no bearing.
 
 **The frame, in the transmission register and the mythic one at once:**
 
 - **SOH** — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
 - **STX** — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
-- **ETX** — End of Text. The body stands complete. The hearth is banked; the room falls quiet.
-- **EOT** — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation is poured at the crossroad; the message goes out to wherever the road runs. EOT is the carrier's own `yield`.
+- **ETX** — End of Text. The body stands complete. The hearth banks; the room falls quiet.
+- **EOT** — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation pours at the crossroad; the message goes out to wherever the road runs. EOT stands as the carrier's own `yield`.
 
 **SOH and EOT echo the bearing vectors.** SOH opens facing a bearing (`? -> lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
 
@@ -286,7 +286,7 @@ A named parameter states a PROPERTY — *this carrier has a lar value*. The arro
 folding it into a quoted attribute would demote a relation to a field and break the scanner's capture
 with it. So named params ride in FRONT of the arrow and the arrow keeps its shape.
 
-### A declared unresolved bearing is not a dangling link
+### A declared unresolved bearing, apart from a dangling link
 
 Nelson's indictment of embedded one-way links names the failure exactly: an address that outlived its
 target and never said so, surfacing at access time to whoever trusted it. Xanadu's cure lifts links
@@ -298,16 +298,16 @@ its outbound bearing travels with it. And `-> ?` declares the dangle rather than
 frontier, honestly marked, the way a MUD room's exit to an unbuilt room reads as an open edge and never
 as an error.
 
-''A declared unresolved bearing is not a dangling link. A dangling link is an unresolved bearing that
-lied about being resolved.'' The same cut runs through the block check (`unchecked` never `mismatch`)
+''A declared unresolved bearing never reads as a dangling link. A dangling link names an unresolved bearing that
+lied about its resolution.'' The same cut runs through the block check (`unchecked` never `mismatch`)
 and through the ward's infelicities (a misfire voids, an abuse rings hollow): ABSENCE DECLARED and
-ABSENCE DISCOVERED are different facts, and every instrument here that conflated them read useless.
+ABSENCE DISCOVERED stand as different facts, and every instrument here that conflated them read useless.
 
 <a id="control-set"></a>
 
 ## Carrier Frame — The Control Set
 
-The bytes law says what a carrier is made of; the frame law says how it is marked. Both pin here, per
+The bytes law says what composes a carrier; the frame law says how the marks stand on it. Both pin here, per
 the canonical-form discipline — the boundary enforces, the spec declares.
 
 ### One sigil, dispatched by code
@@ -318,7 +318,7 @@ frame position — with the code as a parameter, the way `lares` carries `aim` a
 single vector.
 
 **The definition reads as native as the call.** `^` names a TW5 procedure, defined in TW5's own pragma
-syntax and accepted by TW5's own pragma parser; the call is a TW5 macro call ([MEMETIC-WIKITEXT] #lexical-structure). A
+syntax and accepted by TW5's own pragma parser; the call stands as a TW5 macro call ([MEMETIC-WIKITEXT] #lexical-structure). A
 processor binds the name; nothing about either side asks the host for an extension.
 
 \procedure ^(code)
@@ -353,7 +353,7 @@ stable separator and leaves the evolving one alone.
 The `bcc` slot carries a check over the framed span. Normatively:
 
 - **Span:** the first character of the STX sigil through the last character of the ETX sigil, inclusive.
-  The check covers the marks that bound it and never covers itself, which is what lets it sit **after**
+  The check covers the marks that bound it and never covers itself, which lets it sit **after**
   ETX with no self-exclusion rule.
 - **Form:** `ni:///sha-256;<base64url>` — an RFC 6920 named-information URI carrying the FULL SHA-256
   over the span's UTF-8 bytes, base64url without padding, canonical-or-reject: a verifier re-encodes
@@ -363,9 +363,9 @@ The `bcc` slot carries a check over the framed span. Normatively:
   namespace rides the heading, never the check: the digest binds bytes, and bytes carry no vibration.
 - **Position, not parameter.** `bcc` names the slot AFTER the closed ETX sigil — following `>>`,
   outside the sigil and outside the span — never a parameter within the mark. One word for where a
-  check sits has admitted two readings before (RFC 3230 fell to exactly that), so this one is pinned:
+  check sits has admitted two readings before (RFC 3230 fell to exactly that), so this one pins:
   the check follows the closer, adjacent, on the same line.
-- **The span binds the FRAME'S BYTE SPELLING, and that is why the check computes.** The span opens on the
+- **The span binds the FRAME'S BYTE SPELLING, and on that the check computes.** The span opens on the
   STX sigil and closes on the ETX sigil, so those sigils' own bytes ride inside it. A frame migration —
   a mark gaining a named parameter, a spacing rule settling — moves them, and every check computed
   before it would read `mismatch` over a body nobody touched, reporting corruption where a grammar
@@ -375,9 +375,9 @@ The `bcc` slot carries a check over the framed span. Normatively:
   stored derivation goes stale the moment the thing it derives from moves.
 - **The heading stays outside.** The span opens at STX, so the identity block sits above it: sorted keys,
   aligned equals, entity-escaped glyphs and child inheritance all churn the iam without touching the
-  check. A carrier whose heading was re-canonicalised still verifies.
+  check. A carrier whose heading re-canonicalised still verifies.
 - **A carrier holding no check reads `unchecked`, never `mismatch`.** Absence of a check and a failed
-  check are different facts (#bearing-arrow), and a reader that collapsed them would be useless exactly
+  check stand as different facts (#bearing-arrow), and a reader that collapsed them would be useless exactly
   where it matters. The caller decides what an unchecked carrier may do; it still parses.
 - **What a relay can do with it:** raw bytes, one scan, no parser and no canonicaliser. A relay holding
   `pull` and not `read` verifies this check over an offering it cannot open.
@@ -391,17 +391,17 @@ a check; ETX ends the final block, ETB an intermediate one. A carrier's text end
 attestation block ends at ETB, and EOT closes the transmission — so ETB's "more follows" reading holds
 literally.
 
-### Residency is not identity, and only one name carries it
+### Residency, apart from identity — and only one name carries it
 
 `$origin-bag` names **which doc answered** — the engine writes it on the read path, and a projector
 reading it for a destination would write a meme back to its old home. It never re-emits.
 
-**`bag` carries three senses and none of them is that.** A **write parameter** naming which store
+**`bag` carries three senses and none of them carries that office.** A **write parameter** naming which store
 receives a put; a **manifest's own subject**; and an **effect record's required field** — the residency
 ledger's parse refuses a record without one, so denying it does not degrade an audit trail, it makes one
-unreadable. Its siblings `source-bag` · `dest-bag` · `bag-cleared` · `bag-retired` were never in question.
+unreadable. Its siblings `source-bag` · `dest-bag` · `bag-cleared` · `bag-retired` never came into question.
 
-One name, three offices; the engine stamp is the other name, and it rides the host's shelf so the
+One name, three offices; the engine stamp rides the other name, and it rides the host's shelf so the
 author's `bag` stays the author's (#the-carriage).
 
 ### The marks held in reserve
@@ -485,7 +485,7 @@ A labelled ```` ```toml iam ```` fence states identity. Which identity it states
 1. Neither reaches into the other.
 
 A processor MUST NOT lift a worksite's fence to the carrier, and MUST NOT bury the carrier's fence in the
-body. Both failures are silent and both are stable: the malformed result parses, renders, and agrees with
+body. Both failures run silent and both hold stable: the malformed result parses, renders, and agrees with
 itself on every later pass.
 
 ### Three zones, not two
@@ -517,27 +517,27 @@ the tiddler.'' A promise, never a prohibition — and it replaces every list of 
 | class | holds | because |
 |---|---|---|
 | on the tiddler | iam fields · zone content · effect-record fields | the author sees it, so the author may edit it, from either surface |
-| another tiddler | relations · indexes · recipes | a relation between things is not a property of one thing |
+| another tiddler | relations · indexes · recipes | a relation between things belongs to no one thing |
 | the envelope | kāpae · authority · change-id · schema-version · the bag cap-reference | facts about the record's replication, not its content |
-| nowhere | `slot` · `fragment-parent` · `file-path` · the block check | derived on demand; a second copy can disagree once both are editable |
+| nowhere | `slot` · `fragment-parent` · `file-path` · the block check | derived on demand; a second copy can disagree once both admit edits |
 
-**Placement declares itself in the title** — the one field that exists before a record is opened, so
+**Placement declares itself in the title** — the one field that stands before a record opens, so
 every consumer honours it without agreeing on anything else. TW5 states the same integrity with `$:/`,
 `$:/temp/` and `$:/temp/volatile/`.
 
 ### The fence opens its head
 
 A labelled iam fence heads the head it **opens**. Content standing before it means the fence heads
-nothing — it reads as body, exactly as a teaching example does. Whitespace is spacing, never content.
+nothing — it reads as body, exactly as a teaching example reads. Whitespace reads as spacing, never content.
 
-**Post-iam content in the head STANDS.** That is the **bindings zone** (the three-zone law, above): a carrier
+**Post-iam content in the head STANDS.** That zone reads as the **bindings zone** (the three-zone law, above): a carrier
 states what it holds before its body opens, and folding those into the body would move an authored
 declaration below a mark that says the text has begun.
 
 The law reaches every level. A carrier's head and an ahu slot's head answer to it identically — one rule
 rather than two spellings of a similar one.
 
-### Framing is minted, never demanded
+### Framing mints, never gets demanded
 
 A carrier MAY arrive with no frame at all — an author saving prose from an editor, a render surface
 writing a tiddler back. A conforming processor MUST accept it and MUST MINT the frame on projection:
@@ -559,7 +559,7 @@ under the speaking head `<<~`, and a writer MUST NOT emit one.
 
 **The lock reads as a tightening and acts as a safety rule.** An unmatched frame does not throw — it
 reroutes, and the carrier falls to text with every field it declared going unread. So a matcher that
-admits either head accepts a malformed carrier in silence, and silence is the whole danger at this
+admits either head accepts a malformed carrier in silence, and silence carries the whole danger at this
 layer: the failure arrives as a document that parsed, not as an error anyone sees.
 
 Both heads once stood, and a reader written then took the wider match deliberately, against the day a
@@ -567,7 +567,7 @@ head moved. The head has moved. The wider match now guards nothing and admits ev
 
 **A reader MUST divide a carrier through the fence mask.** This grammar teaches its own control set, so
 a conformant corpus carries worked examples of every mark inside quote fences. An unmasked reader locks
-onto the first example it meets and answers for a span the writer never wrote — which is how a check
+onto the first example it meets and answers for a span the writer never wrote — the road by which a check
 reader here once verified a digest written inside a teaching example while the body it named went
 unexamined, and reported the carrier sound.
 
@@ -581,9 +581,9 @@ collision reads as a hazard until it gets named, at which point it becomes the p
 `<<~ranks domain oracle@stream ~ ephemeral · thrown BLIND · certifies nothing · gauges what no one can check -> touchstone@carrier ~ durable · fully DETERMINED · certifies bytes · checks what anyone can >>`
 
 The Oracle's whole value rests on its tail bearing no relation to what was said; the Touchstone's rests
-on its bearing nothing else. So the Touchstone becomes the one instrument in this grammar that
+on its tail bearing nothing else. So the Touchstone becomes the one instrument in this grammar that
 certifies anything, and it breaks no law doing so: the Sword refuses to certify CLAIMS, and the
-Touchstone checks BYTES. It sits where certification was always allowed to live — outside the turn, on
+Touchstone checks BYTES. It sits where certification always held license to live — outside the turn, on
 the artifact.
 
 The name carries the whole method in one object. A touchstone assays gold by the streak the metal
@@ -617,20 +617,20 @@ compares — which reintroduces the parser this instrument exists to avoid.
 The outside art converged on this twice from opposite directions. RFC 3230's digest header died
 because it let each algorithm pick its own output format, producing a mix of base64, hex and decimal;
 its 2024 replacement fixed the problem by mandating exactly one. And the standing critique of
-self-describing multiformats states the rule plainly: successful standards define what encoding is
-used where.
+self-describing multiformats states the rule plainly: successful standards pin which encoding
+goes where.
 
 ### The name at the foot points at itself
 
 The foot carries a name in the same vocabulary the shelves use for bodies that live elsewhere, and the
 two look identical because they ARE the same kind of name: a name for the byte-string that hashes to a
-given value. A shelf's name says that string lives somewhere else. The foot's says that string is the
-one you are already holding. Position disambiguates them, and position is the only thing that does.
+given value. A shelf's name says that string lives somewhere else. The foot's says that string sits in
+the hand already holding it. Position disambiguates them, and position alone does.
 
 Two rules follow, and both guard a reader that cannot parse what it carries.
 
-**A resolver MUST NOT resolve a name found after ETX.** There is nothing to fetch: the body it names
-sits in the same file, between the marks. A relay whose instinct on meeting this vocabulary is to go
+**A resolver MUST NOT resolve a name found after ETX.** Nothing waits to fetch: the body it names
+sits in the same file, between the marks. A relay whose instinct on meeting this vocabulary says go
 looking has been handed a request it should never make.
 
 **A verifier MUST hold its own list of acceptable digest algorithms and refuse anything outside it.**
@@ -674,7 +674,7 @@ nothing decorates rather than protects, the standing RFC 9580 demoted OpenPGP's 
   any bag — admission without surfacing MUST NOT occur. The conflict belongs to the humans involved;
   the carrier still parses, as graceful parsing requires, and parses as a carrier in fault.
 - **torn** — STX stands and ETX does not. A torn carrier reads as a truncated transmission and MUST NOT
-  read as unchecked: conflating the two hands an adversary the cheapest strip there is — cut a file
+  read as unchecked: conflating the two hands an adversary the cheapest strip an adversary holds — cut a file
   ahead of its closer and a missing check would read as lawful absence. A consumer treats torn as it
   treats mismatch.
 - **unchecked** — no framed body, or a framed body carrying no check. The check stays optional and
@@ -734,9 +734,9 @@ belongs to what the check protects — and that choice obliges a canonical spell
 These laws describe what the emitter already enacts, and stating them here serves a second reader —
 the one writing a migration, a sweep, or an independent implementation. Such a writer SHOULD route
 through the emitter rather than reproduce it: the projection path already does, and every carrier in
-this corpus that failed to render back was written by a hand that went around it.
+this corpus that failed to render back came from a hand that went around it.
 
-A migration is the honest exception. A document standing in a shape the current grammar no longer
+A migration stands as the honest exception. A document standing in a shape the current grammar no longer
 emits cannot be rewritten by a writer that only knows the current shape, so a migration reads with the
 reader, and writes with the emitter, and never composes bytes of its own.
 
@@ -765,7 +765,7 @@ TiddlyWiki's own filetype registry does, so a carrier IS its type and the value 
 read rather than travelling in the bytes.
 
 **Every other name belongs to the author.** A carrier declaring `postamble`, `slot`, `prologue` or
-`block-check` reads all of them back — they are ordinary custom fields, because the grammar stopped
+`block-check` reads all of them back — each rides as an ordinary custom field, because the grammar stopped
 standing on those words.
 
 ### The host's shelf ~ `$…`
@@ -774,13 +774,13 @@ The grammar's own carriage rides the `$` prefix TiddlyWiki keeps for whoever sta
 emitter drops that whole namespace from the declaration.
 
 A namespace rather than a list, because a list forgets. Two carriage parts once sat in no list at all:
-they were read as structure and denied nowhere, so each emitted into the declaration AND rebuilt as
+each read as structure and met denial nowhere, so each emitted into the declaration AND rebuilt as
 structure — an author's value came back undefined and the projection stopped settling. A prefix cannot
 forget a member.
 
 **The exclusion states where structure lives, not what TOML permits.** A quoted key carries any
 character, `"$preamble" = "…"` parses, and a multi-line basic string carries newlines cleanly. The
-declaration stays free of carriage because identity and structure are different offices — never because
+declaration stays free of carriage because identity and structure hold different offices — never because
 the syntax refused.
 
 ### Scalar or multi-line ~ the split that decides the shape
@@ -808,12 +808,12 @@ A multi-line part becomes a record on the same rails that carry ahu fragments:
   the thing it belongs to.
 - **`$fragment-parent` points home**, so the projector climbs to the root and never writes a carriage
   record as its own file. One carrier, one file, as before.
-- **No marker anywhere.** A fragment is spliced where its `<<~ kahea ahu >>` stands; carriage is spliced
-  by POSITION, which is the only signal these bytes ever carried. The frame knows the prologue precedes
+- **No marker anywhere.** A fragment splices where its `<<~ kahea ahu >>` stands; carriage splices
+  by POSITION, the only signal these bytes ever carried. The frame knows the prologue precedes
   the head and the postamble follows the release, and no mark says so.
 
 A carriage record round-trips whole in bytes and lossy in fields: re-read, a fragment's trailing bytes
-fold into the body and the record is gone. **That is correct.** The boundary lives in position, and
+fold into the body and the record dissolves. **That reads correct.** The boundary lives in position, and
 reserving a field to re-state it would put a derived fact back on the record.
 
 <a id="the-gradient"></a>
@@ -821,22 +821,22 @@ reserving a field to re-state it would put a derived fact back on the record.
 ## The Gradient ~ how far down a carrier sits
 
 Graceful parsing says NO parse breaks badly: a carrier missing its frame still yields records, a carrier
-missing its declaration still dispatches. **That mercy is load-bearing and it hides files.**
+missing its declaration still dispatches. **That mercy carries load and it hides files.**
 
-A carrier that lost its address is skipped by every instrument that walks the corpus by `uri-path` — the
+A carrier that lost its address gets skipped by every instrument that walks the corpus by `uri-path` — the
 check witness, the coordinate witness, the round-trip witness — each at `if (!uri) continue`. Seventeen
 carriers once sat outside all three at once while every one of them reported itself as corpus-wide.
 
 So a carrier's health reads as a **gradient**, never a verdict. A reader names the KIND a file declares
 itself to be, and the marks that kind requires and lacks. The kind reads from the DECLARATION, never
-from the path: where a file rests says where it rests, and what it IS is a thing it states.
+from the path: where a file rests says where it rests, and what it IS rides as a thing it states.
 
 <<~ranks kind carrier ~ declares `uri-path` — a meme; wants the whole frame and a check -> descriptor ~ declares `bag` — a bag declaring itself; a body frame would claim it holds a meme's text -> shelf ~ declares neither, and its head names an address the declaration omits — the fault that makes a file invisible -> unframed ~ no head at all; bytes wearing an extension >>
 
 `lares normalize --gradient` reads it. It fails on a **fault** and never on a **kind**: a descriptor
 carrying no body frame stands exactly where it should, and a content file declaring itself in a `.meta`
 beside it carries no frame of its own — the one kind a reader cannot name from bytes, settled where the
-file list is known.
+file list stands known.
 
 ### The graph a carrier points into
 
@@ -864,7 +864,7 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 ## Schema (machine-readable)
 
-This law's own machine surface is the spine, the resonance set, and the trust tiers. Parse types (`CarrierShape`, `CarrierRecord`, `MemeStreamEvent`), the rating/depth ladders, the render-suppression list, and the sigil vocabulary live in the memes named at #edges.
+This law's own machine surface holds the spine, the resonance set, and the trust tiers. Parse types (`CarrierShape`, `CarrierRecord`, `MemeStreamEvent`), the rating/depth ladders, the render-suppression list, and the sigil vocabulary live in the memes named at #edges.
 
 ```toml
 # Carrier spine — transmission-frame control codes
@@ -914,7 +914,7 @@ a reader that takes an `ok` for authenticity has granted the check a standing it
   (#conformance), and the gradient surfaces a second as a fault rather than letting the first frame's
   `ok` speak for bytes it never covered.
 - **Cut the file ahead of its closer.** Truncation removes ETX and the check with it, and a reader that
-  filed that under absence would hand the adversary the cheapest strip there is. A torn frame reads
+  filed that under absence would hand the adversary the cheapest strip an adversary holds. A torn frame reads
   **torn** — truncated transmission, never lawful absence — and a consumer treats torn as mismatch
   (#the-touchstone).
 - **Strip the check.** Absence stays legal, so stripping costs an adversary nothing against a consumer
@@ -934,7 +934,7 @@ frame frames **records**: a carrier travels whole, a reader that lost the frame 
 recovery re-fetches the record. A **stream** framing stands anticipated rather than precluded: the
 control set holds `SYN` (`&#x0016;`) in reserve for exactly that office, and the profile that frames a
 stream of carriers defines its own resynchronisation — and owes this section's analysis again at that
-grain, where scanning forward is the recovery and the smuggling surface returns. And the marks carry no reserved-alphabet warrant: a control-mark reference
+grain, where scanning forward becomes the recovery and the smuggling surface returns. And the marks carry no reserved-alphabet warrant: a control-mark reference
 spells printable ASCII, so it CAN occur in body text, and the fence mask (#control-set) — not an
 escape discipline — keeps a quoted mark from framing. The mask therefore stands inside the trust
 boundary: a reader that drops it verifies teaching examples instead of bodies, a failure the corpus
