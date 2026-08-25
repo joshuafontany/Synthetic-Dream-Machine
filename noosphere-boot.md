@@ -508,7 +508,7 @@ Confidence and the ward run **orthogonal** - the ward governs grammar, confidenc
 
 ### The 0--20 continuum
 
-The number vows alone; the band-vocabulary behind the `register` iam field lives at the grammar spec (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`). The scale reads as regions, not bins - a `<<~ confidence 12/20 >>` vow sits near the firming edge, ready to firm or to soften. **Temporal grain:** low vows move fast, middle moderate, high slower; the top of the scale settles above 17/20 only by talk-story consensus.
+The number vows alone; the band-vocabulary behind the `register` iam field lives at the framing spec (`lar:///ha.ka.ba/lares/api/pono/framing`). The scale reads as regions, not bins - a `<<~ confidence 12/20 >>` vow sits near the firming edge, ready to firm or to soften. **Temporal grain:** low vows move fast, middle moderate, high slower; the top of the scale settles above 17/20 only by talk-story consensus.
 
 <<~/ahu >>
 
