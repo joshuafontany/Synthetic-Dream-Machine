@@ -51,6 +51,8 @@ import type { VerbReactor, VerbTable } from "./verb-dispatcher.js";
 import type { TW5Instance } from "./types/tiddlywiki.js";
 import { makeCatalogAccessor } from "./catalog-accessor.js";
 import { memeticWikitextDeserializer, expandMemeRefs } from "./deserializer.js";
+import type { TiddlerFields } from "./deserializer.js";
+import { projectSubmission } from "./meme-markdown.js";
 import { makeTw5FileInfo } from "./tw5-file-info.js";
 import { decideIngest } from "./ingest-gate.js";
 import type { IngestOps } from "./ingest-gate.js";
@@ -328,6 +330,33 @@ export function registerActionReactors(table: VerbTable, opts: ActionHandlerOpti
     const proof = await ctx.cap("read", bag);
     if (!proof.ok) throw new Error(`cap-denied: read on ${bag} required to REPACK (${proof.reason ?? "no reason"})`);
     return executeRepack(makeBagAccess(opts), bag, packPath, opts.tw5);
+  });
+  // PROJECT-MD — a QUERY verb (read + project, NO residency mutation, no effect-record):
+  // recompose one carrier from its record group and render its submission pair — markdown body +
+  // meta sidecar — via the one mouth (`meme-markdown`, shared with `lares project-md`). Returns
+  // the bytes; the gesture decides where they land. Read cap only. Deterministic: no clock rides
+  // the pair, so re-running proves currency instead of asserting it.
+  table.register("PROJECT-MD", async (args, ctx) => {
+    const bag = String(args["bag"] ?? "");
+    const title = String(args["title"] ?? "");
+    if (!bag || !title) throw new Error("PROJECT-MD: `bag` and `title` required");
+    const proof = await ctx.cap("read", bag);
+    if (!proof.ok) throw new Error(`cap-denied: read on ${bag} required to PROJECT-MD (${proof.reason ?? "no reason"})`);
+    const store = await makeBagAccess(opts).read(bag);
+    if (!store) throw new Error(`PROJECT-MD: no readable store for ${bag}`);
+    // expandMemeRefs walks the record group through a SYNC reader; the store reads async — so the
+    // group pre-fetches whole (the carrier's records all share the parent title as a prefix, the
+    // derived-address law) and the reader answers from the map.
+    const titles = (await store.listVisible()).filter((t) => t === title || t.startsWith(`${title}#`));
+    const group = new Map<string, TiddlerFields>();
+    for (const t of titles) {
+      const rec = await store.get(t);
+      if (rec) group.set(t, rec.tiddler as unknown as TiddlerFields);
+    }
+    const whole = expandMemeRefs((t) => group.get(t), title);
+    if (!whole) throw new Error(`PROJECT-MD: ${title} does not recompose as a carrier`);
+    const out = projectSubmission(whole, { uri: title });
+    return { verb: "PROJECT-MD", uri: out.uri, check: out.check, markdown: out.markdown, meta: out.meta };
   });
 }
 
