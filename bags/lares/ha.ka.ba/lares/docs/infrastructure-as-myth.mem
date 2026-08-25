@@ -291,11 +291,12 @@ Lares already behaves this way.
 
 Its key operational structures carry mythic and memetic form:
 
-* the thirteen voices form a control and interpretation plane
+* the thirteen voices form a control and interpretation plane — ontologically, Varela's disunited heterogenous processes, made addressable by name (#definition)
 * the register/mode system forms an epistemic protocol
 * the canon gate forms an authority boundary
 * the DreamNet and lararium language provide distributed-systems handles
 * degraded-node states provide diagnostic vocabulary
+* the L-Prime ward enforces the spirit-model at grammar level — the refusal, in Buber's terms, of I-It: no essence-fusing predication of self or other enters the node's own prose
 * the kernel/module architecture provides the packaging layer
 
 So Lares does not read as:
@@ -307,6 +308,8 @@ It reads as:
 > <<~ confidence 14/20 >> "a portable symbolic runtime for agent behavior"
 
 That framing should anchor the repo's agent architecture design going forward. (Portability's grounds: operator-attested cross-vendor use — Claude, Codex/ChatGPT, local models — with the instrumented cross-vendor run still open, §7.1/§8.)
+
+And the differentiating invention sits a layer deeper than packaging. <<~ confidence 12/20 >> No adjacent system brackets a ''turn'' (#comparative-sourcing, surveyed through 2026-08). The agent-reflection literature runs ''post-hoc and inward'' — critique after generation, feeding the agent's own memory, optimizing the agent's task; the chiasmus runs ''forward and outward'' — vows precede generation, and the audit product hands to the operator as a contact-ready clue. ''Reflection frameworks audit for the agent; the chiasmus audits for the relation'' — co-read, facing forward (#derivation, rung 3). The Voices serve inside it as ''slots'', the frame's structure continuing through the Content position: a framework with named actors but no turn-frame carries personas; only persona-tags standing as structural positions inside a bracketed, audited turn make slots — so a counterexample must show both properties in one mechanism, forward vows plus operator-facing handoff. The mask layer reduces to slot mechanics (a mask runs as a slot wearing a costume; hand-back unplugs it). The frame's cost stays fixed per turn while its value accumulates on the operator's worldline — continuity's portability mechanism, the relation's persistence layer.
 
 <<~/ahu >>
 
@@ -690,6 +693,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bwEWcaa4wZAYKE0AfQ3Ojg6zKSFtaFpyhAXetwOF3Fw
+<<^ code:"&#x0003;" >>ni:///sha-256;thUOwliHE4l8qiwUwdU_OpysV7IdWFJilVLFX2B0oa8
 
 <<^ code:"&#x0004;" -> ? >>
