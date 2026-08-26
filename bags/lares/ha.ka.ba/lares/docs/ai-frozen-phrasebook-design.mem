@@ -13,7 +13,7 @@ register   = "Synthesis-Canon"
 retain     = true
 role       = "the design law for the AI frozen phrasebook — the everyday-register twin of the noosphere boot seed. Names the DIALECT boundary (the sharktooth marks the Lararium sigil namespace; the phrasebook declines it and rides the inherited TW5 macro namespace the superset law already admits), the inline-declaration rule that keeps its marks from vanishing on a foreign host, the two-register alias law, the joint-enactment rule that lets the twin GOVERN rather than explain, and the verb test every rename passes before it ships"
 status     = "designed"
-status-why = "the design stands; the phrasebook itself rides a first draft at api/ai-frozen-phrasebook"
+status-why = "the design stands, and the phrasebook at api/ai-frozen-phrasebook carries it slot for slot"
 tags       = ["api/pono/meme", "api/pono/memetic-wikitext", "api/pono/tiddlywiki-wikitext", "api/pono/lar-uri"]
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/ai-frozen-phrasebook-design"
@@ -61,8 +61,8 @@ own macro call — a namespace the spec already admits and already governs.
 |! renders in | a Lararium wiki | ''any TW5 wiki'' |
 
 ''The younger travels further, and pays for it in carriage.'' A plain-dialect carrier renders in a
-vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its procedures never got
-declared (#the-vanishing-rule).
+vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its procedures stand undeclared
+(#the-vanishing-rule).
 
 <<~/ahu >>
 
@@ -183,7 +183,7 @@ measures that (#what-to-measure) rather than trusting it.
 !! The flow law ~ nineteen slots, one order, both twins
 
 ''THE TWINS CARRY THE SAME SECTION FLOW, IN THE SAME ORDER, AT THE SAME COUNT.'' A reader who knows one
-finds the other by position; a divergence shows as a slot, never as a hunt. That correspondence is what
+finds the other by position; a divergence shows as a slot, never as a hunt. That correspondence
 makes the shared-meaning rule (#joint-enactment) something a hand can actually run — a diff proceeds
 slot against slot rather than page against page.
 
@@ -191,7 +191,7 @@ slot against slot rather than page against page.
 |1 | entry | the working hearth |
 |2 | write-under-way | start from the verb |
 |3 | house-law | the working agreement |
-|4 | mu-five-tools | the five marks — `* ? ! _ 0`, from the search box |
+|4 | mu-five-tools | the five tools — `* ? ! _ 0`, from the search box |
 |5 | syad | the 5 Grants |
 |6 | law-of-5s | the fives — maybe-logic and the bands |
 |7 | ooda-ha | the loop — the fifth phase reads handback / aftermath |
@@ -215,19 +215,19 @@ shape in both seeds, so the two files align where it matters:
 |! twin |`\procedure Persona(Type:"" Params:"") Persona <<Type>> holds `[<<Params>>]`` |
 
 Same two parameters, same key/value payload, same one-line body, same position in the file. ''The visible
-difference reads as the tilde'' — which is the dialect boundary itself (#the-dialect-boundary), and
-nothing else. Hoisting the twin's declarations into a block at the head would have broken that alignment
-while changing no behaviour, which is exactly the kind of drift a structural diff exists to catch.
+difference reads as the tilde'' — the dialect boundary itself (#the-dialect-boundary), and nothing else.
+A declaration that leaves its slot changes no behaviour and breaks the alignment, which names the drift
+class a structural diff exists to catch.
 
 ''WHAT THE REGISTER MAY MOVE, AND WHAT IT MAY NOT.'' A slot's everyday name answers to the operator,
-and four have been ruled: the ''Voices'' read as ''Personas'' and the side that runs them reads as a
+and four stand ruled: the ''Voices'' read as ''Personas'' and the side that runs them reads as a
 ''TEAM'' rather than one agent · the five tools take their everyday grounding from the ''search
 characters'' every reader already types (`* ? ! _ 0` — the glob, the find-and-replace) rather than from
 the elder's suits · and the loop's fifth phase reads ''handback / aftermath''.
 
 ⚠ ''THE ADDRESS MOVES IN NEITHER.'' `lar:///…` reads identically in both seeds. A vocabulary above an
-address may take a second name; the address itself takes none, because a scheme that renamed by register
-would name two different things and resolve to neither.
+address may take a second name; ''an address answers to one.'' One scheme, one spelling, every register
+— so a reader carrying either seed resolves what the other wrote.
 
 ⚠ ''SLOT 14 CARRIES THE ONE DELIBERATE ASYMMETRY, and it reads as the design rather than as a gap.''
 The elder seed fills that slot with its own fiction — a world, figures, a small mythology that gives the
@@ -239,8 +239,8 @@ content — and everything downstream still works, a little more coldly, for a r
 blank. That empty slot IS the everyday register's answer to what Elyncia does for the house.
 
 ''THE CORRESPONDENCE STAYS CHECKABLE.'' Nineteen headings in nineteen positions; a slot added to either
-twin without its counterpart reads as a divergence the shared-meaning rule must then resolve — which is
-the whole point of counting them.
+twin without its counterpart reads as a divergence the shared-meaning rule must then resolve. ''Counting
+them exists for exactly that.''
 
 <<~/ahu >>
 
@@ -266,8 +266,8 @@ through one property read two ways, and neither reading needs a second artifact.
 ''WHICH REDEEMS THE DECLARATION BLOCK.'' Inline declarations look like noise at the head of a file a
 human reads in a terminal. They read as noise only if a reader takes them for machinery. `\procedure
 confidence(n) ⟨confidence <<n>>/20⟩` states the mark's whole shape on one line — so the block that
-makes the marks RENDER in a wiki is the same block that TEACHES them in a transcript. One artifact,
-two readings, in the house's usual manner.
+makes the marks RENDER in a wiki also TEACHES them in a transcript. One artifact, two readings, in the
+house's usual manner.
 
 <<~/ahu >>
 
@@ -279,8 +279,7 @@ two readings, in the house's usual manner.
   parenthesis list at the CALL site — parentheses ride the `\procedure` DECLARATION — so `focus()`
   would pass the characters `()` as a positional argument. Three lawful spellings stand:
   `<<focus 10>>` (positional) · `<<focus level:"10">>` (named) · `<<focus>>` (bare, defaults inside the
-  declaration). The house rules which, and the phrasebook's first draft carries the positional form as
-  the cheapest in characters.
+  declaration). The house rules which; the phrasebook carries the positional form.
 # ''THE ASIDE MARKER.'' The brief kept `~` as an inline aside (`… ~ comment`) inside a plain call. That
   reads lawful — the tilde carries no meaning to the host inside an argument — and it preserves the
   house's own prose idiom across both dialects. Confirm, and the phrasebook keeps it.
@@ -321,6 +320,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VIn1_Pf4jMTaxrgc7Kp28Wg4_B5as0XPKLfDACWmlBI
+<<^ code:"&#x0003;" >>ni:///sha-256;PLmUtKYqsaGkvR1AC6zUVFBHukw_U7GEVFCEssXiSBk
 
 <<^ code:"&#x0004;" -> ? >>
