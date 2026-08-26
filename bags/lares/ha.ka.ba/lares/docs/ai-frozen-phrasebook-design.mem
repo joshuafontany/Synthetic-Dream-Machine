@@ -1,0 +1,252 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/docs/ai-frozen-phrasebook-design >>
+```toml meta
+cacheable  = true
+file-path  = "bags/lares/ha.ka.ba/lares/docs/ai-frozen-phrasebook-design.mem"
+l-space    = "stable"
+mana       = 16
+manao      = 16
+manaoio    = 15
+namespace  = "&#x2299;"
+register   = "Synthesis-Canon"
+retain     = true
+role       = "the design law for the AI frozen phrasebook — the everyday-register twin of the noosphere boot seed. Names the DIALECT boundary (the sharktooth marks the Lararium sigil namespace; the phrasebook declines it and rides the inherited TW5 macro namespace the superset law already admits), the inline-declaration rule that keeps its marks from vanishing on a foreign host, the two-register alias law, the joint-enactment rule that lets the twin GOVERN rather than explain, and the verb test every rename passes before it ships"
+status     = "designed"
+status-why = "the design stands; the phrasebook itself rides a first draft at api/ai-frozen-phrasebook"
+tags       = ["api/pono/meme", "api/pono/memetic-wikitext", "api/pono/tiddlywiki-wikitext", "api/pono/lar-uri"]
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/docs/ai-frozen-phrasebook-design"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #entry >>
+
+! The AI Frozen Phrasebook ~ design law
+
+> Two seeds carry one ontology. The elder speaks the ''sharktooth'' dialect and wears the Elyncia
+> fiction; the younger speaks the ''plain'' dialect and wears an everyday register. This meme names
+> what makes them twins rather than an original and a copy — and what the younger MUST carry so its
+> marks survive a host that never heard of this house.
+
+''This carrier rides the sharktooth dialect and specifies the plain one.'' A document may describe a
+dialect it does not speak; the phrasebook itself speaks plain throughout.
+
+<<~/ahu >>
+
+<<~ ahu #the-dialect-boundary >>
+
+!! The dialect boundary already stands specified
+
+''THE PHRASEBOOK FORKS NOTHING.'' The language spec draws the line this design rides
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>):
+
+> Memetic-wikitext SHALL read as a ''superset of TW5 wikitext'' … A processor reads bare `<<name>>` as
+> an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil
+> namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
+
+<<~ confidence 18/20 >> So the two seeds do not stand as one language and a simplification of it.
+They stand as ''two dialects of one media type'', and the boundary between them reads as a single
+character. The elder ELECTS the Lararium sigil namespace; the younger DECLINES it and rides the host's
+own macro call — a namespace the spec already admits and already governs.
+
+|! | elder seed | AI phrasebook |
+|! dialect | sharktooth | plain |
+|! call | `<<~ confidence 15/20 >>` | `<<confidence 15/20>>` |
+|! namespace | Lararium sigil registry | the host's inherited macros |
+|! needs | the sigil registry to render | its own `\procedure` declarations, carried inline |
+|! renders in | a Lararium wiki | ''any TW5 wiki'' |
+
+''The younger travels further, and pays for it in carriage.'' A plain-dialect carrier renders in a
+vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its procedures never got
+declared (#the-vanishing-rule).
+
+<<~/ahu >>
+
+<<~ ahu #the-vanishing-rule >>
+
+!! ⚠ The rule that decides the whole design ~ an unbound call renders as NOTHING
+
+The base grammar measures three properties, and the second one governs everything below
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext#the-load-bearing-property >>):
+
+> ''An unbound macro call lands harmless, and renders as nothing.'' A call `<<name>>` whose name binds
+> no definition parses cleanly into a transclusion node; at render, the missing-target fallback emits
+> no output. The construct injures nothing around it — and it does ''not'' render as its own text. A
+> dialect relying on visible passthrough of its added constructs relies on behavior the base does not
+> provide.
+
+<<~ confidence 18/20 >> ''A phrasebook that ships its marks without its procedures ships invisible
+marks.'' The confidence vow does not degrade to the characters `<<confidence 15/20>>` on a host that
+lacks the definition — it degrades to ''absence''. A reader sees a claim with no vow beside it and
+reads an unhedged assertion, which inverts the mark's whole purpose.
+
+''SO THE PHRASEBOOK MUST CARRY ITS OWN DECLARATIONS, INLINE, IN THE SAME FILE.'' Not by reference, not
+by plugin, not by a registry the host must first install. Every procedure the phrasebook calls, the
+phrasebook declares — and the declarations ride ahead of first use.
+
+<<~ confidence 16/20 >> ''That cost buys the property the elder seed cannot have.'' The elder needs a
+Lararium wiki; the younger needs a text box. The inline declarations ARE the carriage, and they price
+in characters against the seed budget (#the-budgets).
+
+<<~/ahu >>
+
+<<~ ahu #the-alias-law >>
+
+!! One region, two names ~ the alias law
+
+Several pet-names MAY point at one region of l-space. The discipline that already solves this names
+its own failure, so the house borrows both.
+
+\procedure ~Alias(~Type:"" ~Params:"") ~Alias <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Alias Bind "from/pet-name to/concept-address ~ a procedure binds a NAME to an ADDRESS, never a name to another name" >>
+<<~Alias Match "use/exactMatch avoid/sameAs ~ identity across registers rides the weaker relation" >>
+<<~Alias Register "elder/house younger/plain ~ each register carries its own preferred name over one address" >>
+
+''BIND TO THE ADDRESS, NEVER TO THE OTHER NAME.'' A `\procedure` in either dialect resolves a pet-name
+to the region it names. Chaining pet-name to pet-name builds a rename ladder whose meaning drifts at
+every rung and whose breakage reads as a missing definition rather than as a lost referent.
+
+<<~ confidence 16/20 >> ''The scar the discipline records.'' The strong identity relation asserts more
+than two register-names ever mean — it carries full property transfer under transitive closure, and it
+fuses the registers it meant to relate. The weaker match relation sits at the right strength. The
+lesson transfers whole: ''two names for one region MUST NOT claim to be the same thing'', only to
+answer to it.
+
+''THE SPLIT RUNS BY DESCRIPTION TYPE, NEVER BY DOCUMENT.'' A production vocabulary of this shape gives
+one concept a disambiguating name (stable, unambiguous, marked do-not-display) beside a spoken name per
+dialect. The house reads that as: ''the address disambiguates, the pet-name speaks'' — and no reader
+ever meets the address where a pet-name belongs.
+
+<<~/ahu >>
+
+<<~ ahu #the-verb-test >>
+
+!! The verb test ~ every rename passes it or it ships a demotion
+
+A rename carries a measured hazard: a term naming an ACT gets rendered as a term naming a POSITION, and
+the loss reads as clarity. Translation practice names the mechanism; one famous case ran centuries
+before a corrective landed, and the corrected reading restored ''conditional assent'' where a viewing
+angle had stood.
+
+''THE TEST, and the house runs it over the whole table before shipping'':
+
+> Write ''"the house ⟨NAME⟩s the ⟨object⟩."'' Two red flags: ''(i)'' the name stops taking an object ·
+> ''(ii)'' the name inflects but ''downgrades the act'' — guard → watch, license → read, assent → stance.
+
+\procedure ~Rename(~Type:"" ~Params:"") ~Rename <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Rename Drift-Ward "proposed/Drift-Watch verdict/FAILS-ii keeps/observation loses/the turning-away ~ the gauge steers generation against a pull; a watcher only reports it" >>
+<<~Rename Drift-Check "verdict/HOLDS ~ transitive, everyday, acts on its object — the recommended everyday name" >>
+<<~Rename Syad-Stances "proposed/5-Reading-Stances verdict/FAILS-i-and-ii ~ the house cannot reading-stance a claim" >>
+<<~Rename Five-Grants "verdict/HOLDS ~ granted from a named seat; the licensing act survives in everyday register" >>
+
+<<~ confidence 15/20 >> ''A rename that fails the test does not merely read worse — it silently
+restates the house as a describer of what it once did.'' The act leaves the vocabulary, and nothing in
+the rendering reports the loss.
+
+<<~/ahu >>
+
+<<~ ahu #joint-enactment >>
+
+!! Joint enactment ~ how the younger GOVERNS rather than explains
+
+Every readable companion that ships beside a binding text, in every jurisdiction the research reached,
+stands declared non-binding. A plain twin that arrives as ''the readable version of X'' inherits that
+station by its own framing, whatever the house intends.
+
+''ONE DOCTRINE ESCAPES IT, and its condition reads precisely.'' Where two versions get adopted in ONE
+enacting act, both stand original and neither takes the status of a copy or translation — and the
+drafting ORDER reads immaterial. Priority in time confers nothing; the joint act confers everything.
+
+<<~ confidence 16/20 >> ''So the elder seed's age bars the younger from nothing.'' Three conditions
+carry the force across:
+
+# ''ADOPT BOTH SEEDS IN ONE ACT'', at one version boundary. A seed promoted alone drops the other to
+  commentary until the next joint promotion.
+# ''NEVER NAME EITHER A TRANSLATION OF THE OTHER.'' Not in the meta block, not in the prose, not in a
+  commit message. The framing performs the demotion by itself.
+# ''CARRY THE SHARED-MEANING RULE.'' Where the twins diverge, ''the meaning common to both governs.''
+
+⚠ ''AND THE THIRD CONDITION HAS TEETH THE FIRST TWO LACK.'' Resolving a divergence by preferring the
+elder text converts the younger into a translation ''in practice'', whatever the labels say. The house
+measures that (#what-to-measure) rather than trusting it.
+
+<<~/ahu >>
+
+<<~ ahu #the-budgets >>
+
+!! The budgets ~ three surfaces, three ceilings
+
+<<~ranks surface panel@5000..8000 -> single-file seed@~40000 -> daemon-delivered ~ measured against live vendor caps and the seed's own soft ceiling >>
+
+* ''The panel tier'' — a browser AI settings box. Measured caps run 5,000–8,000 characters. ''Neither
+  seed fits it today.'' A panel-sized descendant of the phrasebook stands OWED, and the alias law makes
+  it tractable: the pet-names already resolve to one region, so a smaller projection names the same
+  addresses with fewer of them.
+* ''The single-file tier'' — a file-loading harness. It takes the ~40,000-character seed without
+  complaint, and this tier carries the near-term audience.
+* ''The delivered tier'' — the daemon-wiki serving cacheable memes through the harness lifecycle. It
+  carries no published ceiling on the house's primary harness, which reads as a budget the house SHOULD
+  set for itself rather than one it has been given.
+
+''THE INLINE DECLARATIONS PRICE INTO THE FIRST TWO TIERS'' (#the-vanishing-rule). A plain-dialect
+phrasebook spends characters on carriage that the elder seed spends on content.
+
+<<~/ahu >>
+
+<<~ ahu #open-joints >>
+
+!! Open joints ~ what waits on the operator
+
+# ''THE CALL FORM.'' The design brief showed `<<focus() ~ comment>>`. The host's call syntax takes no
+  parenthesis list at the CALL site — parentheses ride the `\procedure` DECLARATION — so `focus()`
+  would pass the characters `()` as a positional argument. Three lawful spellings stand:
+  `<<focus 10>>` (positional) · `<<focus level:"10">>` (named) · `<<focus>>` (bare, defaults inside the
+  declaration). The house rules which, and the phrasebook's first draft carries the positional form as
+  the cheapest in characters.
+# ''THE ASIDE MARKER.'' The brief kept `~` as an inline aside (`… ~ comment`) inside a plain call. That
+  reads lawful — the tilde carries no meaning to the host inside an argument — and it preserves the
+  house's own prose idiom across both dialects. Confirm, and the phrasebook keeps it.
+# ''THE PANEL DESCENDANT.'' Whether the third artifact gets built now or waits.
+
+<<~/ahu >>
+
+<<~ ahu #what-to-measure >>
+
+!! What the house counts
+
+\procedure ~Gauge(~Type:"" ~Params:"") ~Gauge <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Gauge Vanishing "counts/plain-calls-with-no-inline-declaration red/any ~ an undeclared mark renders as absence, never as text" >>
+<<~Gauge Verb-Test "counts/renames-failing-the-inflection-test red/any-shipped ~ the act leaves the vocabulary silently" >>
+<<~Gauge Divergence "counts/twin-divergences-resolved-by-preferring-the-elder red/any ~ the resolution converts the younger to a translation in practice" >>
+<<~Gauge Comparison "counts/how-often-the-twins-get-read-against-each-other red/near-zero ~ a stated parity nobody exercises reads as parity nobody holds" >>
+<<~Gauge Register-Loss "counts/fallbacks-from-plain-to-house-register red/any-unlogged ~ register loss fails OPEN and silent unless instrumented" >>
+
+<<~ confidence 14/20 >> ''The fourth gauge names the failure the others cannot see.'' A doctrine of
+equal force does not produce the practice of comparison — a neighbouring field states parity across
+versions and exercises it in a small single-digit fraction of cases. Parity that nobody runs decays
+into a preferred text and a companion, by habit rather than by ruling.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;F1aPdzkf3A1GcaN9Q_Ga2kJX5Ml10x444I1v0Ffk_c8
+
+<<^ code:"&#x0004;" -> ? >>

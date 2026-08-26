@@ -181,7 +181,7 @@ The `ranks stage` sigil above carries the bands. Federation gate: ≥ `meme` rat
 
 <<~ ahu #ooda-ha >>
 
-## Feedback ~ The Five-Phase Loop
+## Feedback ~ The Five-Phase OODA-HA Loop
 
 <<~loops ✶ observe -> ⏿ orient -> ◇ decide -> ▶ act -> ↺ hoʻoko-aftermath >>
 
