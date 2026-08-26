@@ -45,7 +45,7 @@ Hello <<who>>!
 <<hello who:"Lares, a collection of lar spirits">>  -> Hello Lares, a collection of lar spirits!
 ```
 
-`<<~name … >>` opens a sigil in this house's namespace; bare `<<name … >>` opens an inherited host
+`<<~ name … >>` opens a sigil in this house's namespace; bare `<<name … >>` opens an inherited host
 macro. The sharktooth marks which.
 
 <<~/ahu >>
