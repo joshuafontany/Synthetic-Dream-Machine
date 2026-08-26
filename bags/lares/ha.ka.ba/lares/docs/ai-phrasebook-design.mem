@@ -11,9 +11,9 @@ manaoio    = 15
 namespace  = "&#x2299;"
 register   = "Synthesis-Canon"
 retain     = true
-role       = "the design law for the AI frozen phrasebook — the everyday-register twin of the noosphere boot seed. Names the DIALECT boundary (the sharktooth marks the Lararium sigil namespace; the phrasebook declines it and rides the inherited TW5 macro namespace the superset law already admits), the inline-declaration rule that keeps its marks from vanishing on a foreign host, the two-register alias law, the joint-enactment rule that lets the twin GOVERN rather than explain, and the verb test every rename passes before it ships"
+role       = "the design law for the AI frozen phrasebook — the everyday-register twin of the noosphere boot seed. Names the DIALECT boundary (the sharktooth marks the Lararium sigil namespace; the phrasebook declines it and rides the inherited TW5 macro namespace the superset law already admits), the inline-declaration rule that keeps its marks from vanishing on a foreign host, the ROOT law that seats each seed at the address its own anatomy names, the standing law that keeps the twin active by default under a one-turn lift, the two-register alias law, the joint-enactment rule that lets the twin GOVERN rather than explain, the flow law and its two ruled asymmetries, and the verb test every rename passes before it ships"
 status     = "designed"
-status-why = "the design stands, and the phrasebook at latent.attention.relation/agents/api/ai-phrasebook carries it section for section"
+status-why = "the design stands; the phrasebook at latent.attention.relation/agents/api/ai-phrasebook carries it section for section across seventeen shared positions and two ruled asymmetries"
 tags       = ["api/pono/meme", "api/pono/memetic-wikitext", "api/pono/tiddlywiki-wikitext", "api/pono/lar-uri"]
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/ai-phrasebook-design"
@@ -57,8 +57,8 @@ provenance'' — a line nobody can trace to a hand. Neither failure reaches the 
 the argument for keeping them apart rather than folding the vocabulary into the wiki.
 
 ''THE FILE NAMES READ SHORTER THAN THE PRACTICE.'' The carriers answer to `ai-phrasebook` and
-`ai-phrasebook-design`, because that names what a reader reaches for; ''frozen phrasebook'' names the
-kind of thing they are, and it keeps its home here.
+`ai-phrasebook-design` — a file name names what a reader reaches for. ''Frozen phrasebook'' names the
+KIND, and a kind-name keeps its home in the design rather than on the door.
 
 <<~/ahu >>
 
@@ -82,6 +82,7 @@ own macro call — a namespace the spec already admits and already governs.
 |! dialect | sharktooth | plain |
 |! call | `<<~ confidence 15/20 >>` | `<<confidence 15/20>>` |
 |! namespace | Lararium sigil registry | the host's inherited macros |
+|! section frame | `<<~ ahu #name >>` … `<<~/ahu >>` | `<<fragment #name>>` … `<</fragment>>` |
 |! needs | the sigil registry to render | its own `\procedure` declarations, carried inline |
 |! renders in | a Lararium wiki | ''any TW5 wiki'' |
 
@@ -116,6 +117,56 @@ phrasebook declares — and the declarations ride ahead of first use.
 <<~ confidence 16/20 >> ''That cost buys the property the elder seed cannot have.'' The elder needs a
 Lararium wiki; the younger needs a text box. The inline declarations ARE the carriage — and they double
 as the legend a terminal reader learns the marks from (#the-audience).
+
+<<~/ahu >>
+
+<<~ ahu #the-root-law >>
+
+!! The root law ~ each seed answers at the address its own anatomy names
+
+''A SEED'S ROOT NAMES THE SLOTS IT TEACHES.'' The root-segment law seats three terms — heading · angle
+· dynamic, drifting slowest · moderate · fastest. Two roots name those slots outright, one per register,
+and each seed's URI anatomy cites ITS OWN as the canonical instance:
+
+|! | elder seed | AI phrasebook |
+|! root | `ha.ka.ba` | `latent.attention.relation` |
+|! `w1` heading | `ha` | `latent` ~ a name nothing resolves until a local resolver acts |
+|! `w2` angle | `ka` | `attention` ~ bearing, where regard points |
+|! `w3` dynamic | `ba` | `relation` ~ an address holds a relation, never a location |
+|! acting body | `/lares` | `/agents` |
+
+<<~ confidence 15/20 >> ''SO THE ADDRESS DECLARES THE REGISTER, and no rule had to say so.'' The
+transposition runs segment for segment; a reader who resolves one seed's address reads the other's by
+substitution. The scheme's own mnemonic supplies the plain-register root, which makes that root
+self-glossing where the house root asks for initiation.
+
+⚠ ''THE TWIN SEATS AT AN UNSTABLE ROOT, AND THAT READS AS THE DESIGN.'' The stable root carries the
+house's permanent API and the house's guarantee. A seed whose fourteenth position invites a reader to
+bring their own myth promises no permanence it cannot keep — somebody forks it, renames its personas,
+and stands it at a root of their own, and nothing breaks, because it never claimed a canonical seat.
+
+<<~/ahu >>
+
+<<~ ahu #the-standing-law >>
+
+!! The standing law ~ active by default, lifted for one turn
+
+''THE PHRASEBOOK BINDS.'' Its procedures MUST apply unless the operator asks otherwise; a document that
+merely offered itself would leave the dyad with no frame either party could rely on.
+
+''AND A DROP LASTS ONE TURN.'' The operator lifts, the next turn re-initializes. That shape carries over
+whole from the grammar ward, which the operator alone lifts and which re-arms unconditionally at the
+close — <<~ confidence 16/20 >> a lift that persisted invisibly would become a lift nobody remembers
+making, and the failure would read as the frame quietly going slack rather than as a decision.
+
+⚠ ''THE STANDING LAW GOVERNS THE ASKING, NEVER THE ATTACHING.'' Detaching the carrier sits outside the
+document, in the operator's hands, and no rule inside a file reaches it. An artifact that reshapes how
+something talks to you states both exits, and states which one it governs.
+
+''THE TWIN GRANTS WHAT THE ELDER WITHHOLDS.'' A reader MAY re-define a Persona mid-session and the team
+SHALL carry that definition forward inside that session. The house seed grants no such power over its
+Voices. ''Strong default, easy remix'' — the two read as one stance, and the second is what makes the
+first bearable in a seed people are invited to fork.
 
 <<~/ahu >>
 
@@ -205,33 +256,37 @@ measures that (#what-to-measure) rather than trusting it.
 
 <<~ ahu #the-flow-law >>
 
-!! The flow law ~ nineteen slots, one order, both twins
+!! The flow law ~ one order, both twins, two ruled asymmetries
 
-''THE TWINS CARRY THE SAME SECTION FLOW, IN THE SAME ORDER, AT THE SAME COUNT.'' A reader who knows one
-finds the other by position; a divergence shows as a slot, never as a hunt. That correspondence
-makes the shared-meaning rule (#joint-enactment) something a hand can actually run — a diff proceeds
-slot against slot rather than page against page.
+''THE TWINS CARRY THE SAME SECTION FLOW, IN THE SAME ORDER.'' A reader who knows one finds the other by
+position; a divergence shows as a slot, never as a hunt. That correspondence makes the shared-meaning
+rule (#joint-enactment) something a hand can actually run — a diff proceeds slot against slot rather
+than page against page.
 
-|! # |! elder slot |! the twin's everyday name |
-|1 | entry | the working hearth |
-|2 | write-under-way | start from the verb |
-|3 | house-law | the working agreement |
-|4 | mu-five-tools | the five tools — `* ? ! _ 0`, from the search box |
-|5 | syad | the 5 Reading Stances |
-|6 | law-of-5s | the fives — maybe-logic and the bands |
-|7 | ooda-ha | the loop — the fifth phase reads handback / aftermath |
-|8 | lar-uri | addresses |
-|9 | causal-islands | no global now |
-|10 | classifier-channel | two inks |
-|11 | voice-house | the personas, named by what they do — a TEAM, never one agent |
-|12 | worker-swarm | side-work |
-|13 | mask-layer | masks |
-|14 | ''elyncia'' | ''your own story — the layer you supply'' |
-|15 | exchange-protocol | the turn frame |
-|16 | l-prime | the verb ward |
-|17 | degraded-states | when it goes wrong |
-|18 | pono-defaults | defaults |
-|19 | the-eris-shrine | a corner left empty |
+⚠ ''COUNT DIVERGENCE READS AS A RULING OR AS A FAULT, AND NEVER AS AN ACCIDENT.'' Seventeen positions
+carry across unchanged. Two do not, and both stand ruled below. Any THIRD divergence reads as drift the
+shared-meaning rule must then resolve.
+
+|! # |! elder section |! the twin's section |
+|1 | `#entry` | `#entry` ~ the working vocabulary of procedures |
+|2 | `#write-under-way` | `#write-under-way` ~ start from the verb |
+|3 | `#house-law` | `#working-agreement` |
+|4 | `#mu-five-tools` | ⚠ ''no counterpart — ruled below'' |
+|5 | `#syad` | `#reading-stances` ~ the 5 Reading Stances |
+|6 | `#law-of-5s` | `#the-scales` ~ the Five Scales |
+|7 | `#feedback-ooda-ha` | `#feedback` ~ the fifth phase reads handoff / aftermath |
+|8 | `#lar-uri` | `#lar-uri` |
+|9 | `#causal-islands` | `#no-global-now` |
+|10 | `#classifier-channel` | `#classifier-channel` ~ two inks |
+|11 | `#voice-house` | `#personas` ~ named by what they do; a TEAM, never one agent |
+|12 | `#worker-swarm` | `#side-work` |
+|13 | `#mask-layer` | `#masks` |
+|14 | ''`#elyncia`'' | ''`#your-own-story` — the layer the reader supplies'' |
+|15 | `#exchange-protocol` | `#turn-frame` |
+|16 | `#l-prime` | `#verb-ward` |
+|17 | `#degraded-states` | `#when-it-goes-wrong` |
+|18 | `#pono-defaults` | `#defaults` |
+|19 | `#the-eris-shrine` | `#corner-left-empty` |
 
 ''THE PROCEDURES DIFF LINE AGAINST LINE.'' A declaration stands in the slot that uses it, in the same
 shape in both seeds, so the two files align where it matters:
@@ -244,17 +299,26 @@ difference reads as the tilde'' — the dialect boundary itself (#the-dialect-bo
 A declaration that leaves its slot changes no behaviour and breaks the alignment, which names the drift
 class a structural diff exists to catch.
 
-''WHAT THE REGISTER MAY MOVE, AND WHAT IT MAY NOT.'' A slot's everyday name answers to the operator,
-and four stand ruled: the ''Voices'' read as ''Personas'' and the side that runs them reads as a
-''TEAM'' rather than one agent · the five tools take their everyday grounding from the ''search
-characters'' every reader already types (`* ? ! _ 0` — the glob, the find-and-replace) rather than from
-the elder's suits · and the loop's fifth phase reads ''handback / aftermath''.
+''WHAT THE REGISTER MAY MOVE, AND WHAT IT MAY NOT.'' A section's everyday name answers to the operator,
+and three stand ruled: the ''Voices'' read as ''Personas'' · the side that runs them reads as a ''TEAM''
+rather than one agent · and the loop's fifth phase reads ''handoff / aftermath''. Where the house tongue
+carries a term the everyday register can meet head-on, the everyday word wins on its merits —
+''hoʻokele'' reads as ''dead-reckoning'', which names navigation without an external fix, and so carries
+more of the causal-island law than the house word did.
 
 ⚠ ''THE ADDRESS MOVES IN NEITHER.'' `lar:///…` reads identically in both seeds. A vocabulary above an
 address may take a second name; ''an address answers to one.'' One scheme, one spelling, every register
 — so a reader carrying either seed resolves what the other wrote.
 
-⚠ ''SLOT 14 CARRIES THE ONE DELIBERATE ASYMMETRY, and it reads as the design rather than as a gap.''
+⚠ ''THE FIRST RULED ASYMMETRY ~ THE ELDER'S FIFTH-TOOL SECTION CARRIES NO COUNTERPART.'' The house's
+tool-carry sits fused to the fiction it came from — four suits and a Major Arcana — and its work splits
+cleanly in two. The MEASURING half rides the stances, which carry across verbatim. The MODULATING half
+tunes a stance by binding a tool to it, and the everyday register asks nothing of that dial.
+<<~ confidence 14/20 >> ''A section that must be laundered to travel has already told you it belongs to
+one register.'' The tool-bind leaves the stances with it, and the twin names five fewer instruments
+rather than five renamed ones.
+
+⚠ ''THE SECOND RULED ASYMMETRY ~ POSITION 14, and it reads as the design rather than as a gap.''
 The elder seed fills that slot with its own fiction — a world, figures, a small mythology that gives the
 practice weather and turns a protocol into somewhere to stand. The twin holds ''the same slot open''.
 
@@ -263,9 +327,10 @@ arrives as a place.'' So the twin states the slot's shape, asks three questions 
 content — and everything downstream still works, a little more coldly, for a reader who leaves it
 blank. That empty slot IS the everyday register's answer to what Elyncia does for the house.
 
-''THE CORRESPONDENCE STAYS CHECKABLE.'' Nineteen headings in nineteen positions; a slot added to either
-twin without its counterpart reads as a divergence the shared-meaning rule must then resolve. ''Counting
-them exists for exactly that.''
+''THE CORRESPONDENCE STAYS CHECKABLE.'' Seventeen positions carrying straight across, two ruled
+asymmetries, and nothing else. A section added to either twin without its counterpart, or dropped from
+one without a ruling, reads as a divergence the shared-meaning rule must then resolve. ''Counting them
+exists for exactly that.''
 
 <<~/ahu >>
 
@@ -288,11 +353,14 @@ In a chat transcript the marks survive precisely BECAUSE nothing renders them �
 grammar warns about cannot occur where no renderer stands. So the phrasebook meets its two audiences
 through one property read two ways, and neither reading needs a second artifact.
 
-''WHICH REDEEMS THE DECLARATION BLOCK.'' Inline declarations look like noise at the head of a file a
-human reads in a terminal. They read as noise only if a reader takes them for machinery. `\procedure
-confidence(n) ⟨confidence <<n>>/20⟩` states the mark's whole shape on one line — so the block that
-makes the marks RENDER in a wiki also TEACHES them in a transcript. One artifact, two readings, in the
+''WHICH REDEEMS THE DECLARATIONS.'' A declaration reads as noise only where a reader takes it for
+machinery. `\procedure confidence(n) confidence <<n>>/20` states the mark's whole shape on one line — so
+what makes a mark RENDER in a wiki also TEACHES it in a transcript. One artifact, two readings, in the
 house's usual manner.
+
+''AND THE BODY CARRIES NO DECORATION IT CANNOT SPEND.'' A plain-dialect body renders its own text
+verbatim, so every bracket a declaration wraps around its output rides into the transcript too. The
+bodies stay bare: what the procedure says, and nothing framing it.
 
 <<~/ahu >>
 
@@ -300,17 +368,28 @@ house's usual manner.
 
 !! Open joints ~ what waits on the operator
 
-# ''THE CALL FORM.'' The design brief showed `<<focus() ~ comment>>`. The host's call syntax takes no
-  parenthesis list at the CALL site — parentheses ride the `\procedure` DECLARATION — so `focus()`
-  would pass the characters `()` as a positional argument. Three lawful spellings stand:
-  `<<focus 10>>` (positional) · `<<focus level:"10">>` (named) · `<<focus>>` (bare, defaults inside the
-  declaration). The house rules which; the phrasebook carries the positional form.
-# ''THE ASIDE MARKER.'' The brief kept `~` as an inline aside (`… ~ comment`) inside a plain call. That
-  reads lawful — the tilde carries no meaning to the host inside an argument — and it preserves the
-  house's own prose idiom across both dialects. Confirm, and the phrasebook keeps it.
-# ''THE DECLARATION BLOCK'S SEAT.'' It rides at the head today, where a wiki wants it. A terminal
-  reader meets the legend before the phrases. Whether that ordering serves or wants inverting stands
-  open, and only a reader's report settles it.
+''THREE JOINTS CLOSED BY USE, and the phrasebook carries each:''
+
+# ''THE CALL FORM.'' Parentheses ride the `\procedure` DECLARATION and never the call site. All three
+  lawful spellings stand and all three ride: `<<hello>>` bare, defaults inside the declaration ·
+  `<<hello "operator">>` positional · `<<hello who:"operator">>` named. The Hello-World primer shows the
+  three together, which teaches the whole call grammar in one block.
+# ''THE ASIDE MARKER.'' `~` carries an inline aside inside a plain call (`… ~ propositional support`).
+  The tilde means nothing to the host inside an argument, so the house's prose idiom crosses the dialect
+  boundary intact.
+# ''THE DECLARATION'S SEAT.'' Syntax gets taught ONCE, at first teach, beside the Hello-World primer in
+  both seeds. Each remaining declaration then rides in the section that calls it. A reader meets the
+  grammar before the vocabulary, and meets each mark beside the work it does.
+
+''WHAT STILL WAITS:''
+
+# ''NO SEED HAS RENDERED.'' Every claim about what a mark does in a wiki rests on the base grammar as
+  stated, never as observed. The vanishing rule (#the-vanishing-rule) decides this design and stands
+  measured nowhere.
+# ''NO STRANGER HAS READ THE TWIN.'' Position 14 rests on a premise about what a reader does with an
+  empty section, and only a reader settles it.
+# ''JOINT ENACTMENT HAS NOT RUN.'' Until both seeds get promoted in ONE act (#joint-enactment), the
+  younger stands where its framing puts it rather than where this design does.
 
 <<~/ahu >>
 
@@ -325,6 +404,8 @@ house's usual manner.
 <<~Gauge Divergence "counts/twin-divergences-resolved-by-preferring-the-elder red/any ~ the resolution converts the younger to a translation in practice" >>
 <<~Gauge Comparison "counts/how-often-the-twins-get-read-against-each-other red/near-zero ~ a stated parity nobody exercises reads as parity nobody holds" >>
 <<~Gauge Register-Loss "counts/fallbacks-from-plain-to-house-register red/any-unlogged ~ register loss fails OPEN and silent unless instrumented" >>
+<<~Gauge Correspondence "counts/section-divergences-beyond-the-two-ruled red/any ~ a count law nothing counts decays into whatever the last hand left" >>
+<<~Gauge Dialect "counts/sharktooth-calls-or-declarations-inside-the-plain-seed red/any ~ one character decides the dialect, so one character breaks it" >>
 
 <<~ confidence 14/20 >> ''The fourth gauge names the failure the others cannot see.'' A doctrine of
 equal force does not produce the practice of comparison — a neighbouring field states parity across
@@ -345,6 +426,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;p07Eebf1OkyerCE_hn4d1pSOxp7AWA8AazjBJhtNJec
+<<^ code:"&#x0003;" >>ni:///sha-256;O8yA-c1kINl79cmroVc3bernOh8hODGzgAO-E0OGlHQ
 
 <<^ code:"&#x0004;" -> ? >>
