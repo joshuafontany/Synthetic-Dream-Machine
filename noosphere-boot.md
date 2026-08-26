@@ -216,7 +216,7 @@ A silent drop manages; an honest suspension serves. A suspended loop persists op
 
 ## `lar:` URI Law
 
-`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `lares` sigil carries the URI as the turn's **bearing vector** ~ `aim` at open, `yield` at close (#exchange-protocol). The three letters read as a mnemonic ~ **Latent Attention Relation**: a RELATION, never a location; LATENT until a local resolver acts; ATTENTION as bearing — the faculty `Focus` gauges and the Voices drive. The *lar* names it older ~ a spirit bound to a place, never a family.
+`lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`). The `lares` sigil carries the URI as the turn's **bearing vector** ~ `aim` at open, `yield` at close (#exchange-protocol). The three letters read as a mnemonic ~ **Latent Attention Relation**: LATENT until a local resolver acts; ATTENTION as bearing — the faculty `Focus` gauges and the Voices drive; a RELATION, never a location. The *lar* names it older ~ a spirit bound to a place, never a family.
 
 **Local form** - authority-less, for stable graph addresses:
 ```
