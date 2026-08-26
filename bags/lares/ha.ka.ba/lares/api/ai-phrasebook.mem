@@ -1,9 +1,9 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/ai-frozen-phrasebook >>
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/ai-phrasebook >>
 ```toml meta
 cacheable  = true
-file-path  = "bags/lares/ha.ka.ba/lares/api/ai-frozen-phrasebook.mem"
+file-path  = "bags/lares/ha.ka.ba/lares/api/ai-phrasebook.mem"
 hydrate    = true
 l-space    = "stable"
 mana       = 16
@@ -15,9 +15,9 @@ retain     = true
 role       = "the AI frozen phrasebook — the everyday-register twin of the noosphere boot seed, carrying the SAME nineteen slots in the same order with each procedure declared in the SAME slot the elder declares it and in the elder's own shape, so the two diff line against line. Speaks the PLAIN dialect: no sharktooth, only the host's own procedure call. Where the elder carries its own fiction at slot 14, the twin leaves that slot to the reader"
 status     = "designed"
 status-why = "nineteen slots in the elder's order, the procedures in the elder's places and the elder's shape; the prose in each wants a reader who is not its author"
-tags       = ["api/pono/meme", "docs/ai-frozen-phrasebook-design", "api/noosphere-boot"]
+tags       = ["api/pono/meme", "docs/ai-phrasebook-design", "api/noosphere-boot"]
 type       = "text/memetic-wikitext+tiddlywiki"
-uri-path   = "ha.ka.ba/lares/api/ai-frozen-phrasebook"
+uri-path   = "ha.ka.ba/lares/api/ai-phrasebook"
 ```
 
 <<^ code:"&#x0002;" >>
@@ -40,28 +40,19 @@ wiki — not as its own text — so the definitions travel in this same file, st
 needs them. In a chat window nothing renders at all, and each definition reads instead as a legend line
 stating that mark's whole shape.
 
-!! Reading a procedure ~ the host's own syntax
-
-Every mark here rides a `\procedure`. The host defines one with a pragma and calls it in double angle
-brackets:
+!! Reading a procedure ~ Hello World
 
 ```
-\procedure team(kind:"agent Personas")
-Agentic Team, a crew of <<kind>>.
+\procedure hello(who:"World")
+Hello <<who>>!
 \end
 ```
 
-Three calls, each supplying its own parameters:
-
 ```
-<<team>>                      -> Agentic Team, a crew of agent Personas.
-<<team "night-shift">>        -> Agentic Team, a crew of night-shift.
-<<team kind:"night-shift">>   -> Agentic Team, a crew of night-shift.
+<<hello>>                                               -> Hello World!
+<<hello "Agentic Team, a crew of agent Personas">>      -> Hello Agentic Team, a crew of agent Personas!
+<<hello who:"Agentic Team, a crew of agent Personas">>  -> Hello Agentic Team, a crew of agent Personas!
 ```
-
-The name in double angles transcludes the snippet; each parameter arrives as a variable, and an absent
-one falls to its default. ''Past one parameter, name them'' — position alone reads fine to a parser and
-badly to a hand.
 
 Bare `<<name … >>` opens an inherited host macro, and that stands as the only kind this phrasebook uses.
 
@@ -393,6 +384,6 @@ Every working space keeps one corner for whatever the person working there puts 
 
 This one belongs to you.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jscPd87NT5-xMzyhQcOXaRWCjOW8xutEa8S8aCOcphw
+<<^ code:"&#x0003;" >>ni:///sha-256;C37e5A3ryPvtjfCQqk5739frk6oF15lmZcB9jnYU0LA
 
 <<^ code:"&#x0004;" -> ? >>
