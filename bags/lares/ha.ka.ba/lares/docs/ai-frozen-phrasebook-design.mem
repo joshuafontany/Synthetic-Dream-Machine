@@ -89,8 +89,8 @@ by plugin, not by a registry the host must first install. Every procedure the ph
 phrasebook declares — and the declarations ride ahead of first use.
 
 <<~ confidence 16/20 >> ''That cost buys the property the elder seed cannot have.'' The elder needs a
-Lararium wiki; the younger needs a text box. The inline declarations ARE the carriage, and they price
-in characters against the seed budget (#the-budgets).
+Lararium wiki; the younger needs a text box. The inline declarations ARE the carriage — and they double
+as the legend a terminal reader learns the marks from (#the-audience).
 
 <<~/ahu >>
 
@@ -178,24 +178,30 @@ measures that (#what-to-measure) rather than trusting it.
 
 <<~/ahu >>
 
-<<~ ahu #the-budgets >>
+<<~ ahu #the-audience >>
 
-!! The budgets ~ three surfaces, three ceilings
+!! The audience, and the two contexts a mark gets read in
 
-<<~ranks surface panel@5000..8000 -> single-file seed@~40000 -> daemon-delivered ~ measured against live vendor caps and the seed's own soft ceiling >>
+''THE NEAR-TERM READER RUNS CLAUDE'' — at a terminal, and in a browser. Both surfaces take the
+phrasebook as a whole file the operator attaches, so the design answers to those two and to nothing
+else yet. Ceilings, panels and per-event budgets wait until a surface actually refuses something.
 
-* ''The panel tier'' — a browser AI settings box. Measured caps run 5,000–8,000 characters. ''Neither
-  seed fits it today.'' A panel-sized descendant of the phrasebook stands OWED, and the alias law makes
-  it tractable: the pet-names already resolve to one region, so a smaller projection names the same
-  addresses with fewer of them.
-* ''The single-file tier'' — a file-loading harness. It takes the ~40,000-character seed without
-  complaint, and this tier carries the near-term audience.
-* ''The delivered tier'' — the daemon-wiki serving cacheable memes through the harness lifecycle. It
-  carries no published ceiling on the house's primary harness, which reads as a budget the house SHOULD
-  set for itself rather than one it has been given.
+⚠ ''AND THOSE TWO SURFACES READ A MARK OPPOSITE WAYS.'' This governs more than it first appears:
 
-''THE INLINE DECLARATIONS PRICE INTO THE FIRST TWO TIERS'' (#the-vanishing-rule). A plain-dialect
-phrasebook spends characters on carriage that the elder seed spends on content.
+|! context |! what happens to `<<confidence 15/20>>` |! what the declarations do |
+| a wiki renders it | the procedure runs, or — undeclared — it renders as ''nothing'' | ''machinery'': they make the mark appear at all |
+| a transcript carries it | ''no renderer stands between'' — the characters appear as written | ''legend'': they teach the shape to a reader |
+
+<<~ confidence 15/20 >> ''The vanishing rule (#the-vanishing-rule) governs the rendered context alone.''
+In a chat transcript the marks survive precisely BECAUSE nothing renders them — the failure the base
+grammar warns about cannot occur where no renderer stands. So the phrasebook meets its two audiences
+through one property read two ways, and neither reading needs a second artifact.
+
+''WHICH REDEEMS THE DECLARATION BLOCK.'' Inline declarations look like noise at the head of a file a
+human reads in a terminal. They read as noise only if a reader takes them for machinery. `\procedure
+confidence(n) ⟨confidence <<n>>/20⟩` states the mark's whole shape on one line — so the block that
+makes the marks RENDER in a wiki is the same block that TEACHES them in a transcript. One artifact,
+two readings, in the house's usual manner.
 
 <<~/ahu >>
 
@@ -212,7 +218,9 @@ phrasebook spends characters on carriage that the elder seed spends on content.
 # ''THE ASIDE MARKER.'' The brief kept `~` as an inline aside (`… ~ comment`) inside a plain call. That
   reads lawful — the tilde carries no meaning to the host inside an argument — and it preserves the
   house's own prose idiom across both dialects. Confirm, and the phrasebook keeps it.
-# ''THE PANEL DESCENDANT.'' Whether the third artifact gets built now or waits.
+# ''THE DECLARATION BLOCK'S SEAT.'' It rides at the head today, where a wiki wants it. A terminal
+  reader meets the legend before the phrases. Whether that ordering serves or wants inverting stands
+  open, and only a reader's report settles it.
 
 <<~/ahu >>
 
@@ -247,6 +255,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;F1aPdzkf3A1GcaN9Q_Ga2kJX5Ml10x444I1v0Ffk_c8
+<<^ code:"&#x0003;" >>ni:///sha-256;O-D3myhCgPG0PTUIp6YHx9yIWDXfIa7oQOrKjUCG4_A
 
 <<^ code:"&#x0004;" -> ? >>
