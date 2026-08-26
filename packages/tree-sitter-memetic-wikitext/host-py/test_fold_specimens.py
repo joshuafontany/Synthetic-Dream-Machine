@@ -38,7 +38,8 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 _PKG = os.path.normpath(os.path.join(_HERE, ".."))
 _SPECIMEN_DIR = os.path.join(_PKG, "fixtures", "specimens")
 _SPECIMEN_MANIFEST = os.path.join(_PKG, "fixtures", "specimens-0.1.0.json")
-_BAGS = os.path.normpath(os.path.join(_PKG, "..", "..", "bags", "@lares"))
+# The bag carries its plain name: the entity slots dropped the @{slug} marker.
+_BAGS = os.path.normpath(os.path.join(_PKG, "..", "..", "bags", "lares"))
 
 
 def _specimens() -> list[str]:
