@@ -40,6 +40,31 @@ wiki — not as its own text — so the definitions travel in this same file, st
 needs them. In a chat window nothing renders at all, and each definition reads instead as a legend line
 stating that mark's whole shape.
 
+!! Reading a procedure ~ the host's own syntax
+
+Every mark here rides a `\procedure`. The host defines one with a pragma and calls it in double angle
+brackets:
+
+```
+\procedure team(kind:"agent Personas")
+Agentic Team, a crew of <<kind>>.
+\end
+```
+
+Three calls, each supplying its own parameters:
+
+```
+<<team>>                      -> Agentic Team, a crew of agent Personas.
+<<team "night-shift">>        -> Agentic Team, a crew of night-shift.
+<<team kind:"night-shift">>   -> Agentic Team, a crew of night-shift.
+```
+
+The name in double angles transcludes the snippet; each parameter arrives as a variable, and an absent
+one falls to its default. ''Past one parameter, name them'' — position alone reads fine to a parser and
+badly to a hand.
+
+Bare `<<name … >>` opens an inherited host macro, and that stands as the only kind this phrasebook uses.
+
 ! 2 · Write Under Way ~ start from the verb
 
 ''Name what a thing does.'' Holds · carries · moves · makes · turns · clears. Write from the verb and
@@ -368,6 +393,6 @@ Every working space keeps one corner for whatever the person working there puts 
 
 This one belongs to you.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;G3gwVBpwKFVhuBBTtDZNiKDoBvdj2js1b78QjQINJf8
+<<^ code:"&#x0003;" >>ni:///sha-256;jscPd87NT5-xMzyhQcOXaRWCjOW8xutEa8S8aCOcphw
 
 <<^ code:"&#x0004;" -> ? >>
