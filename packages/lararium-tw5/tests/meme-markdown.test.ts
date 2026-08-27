@@ -140,3 +140,31 @@ describe("against the live corpus", () => {
     expect(projectSubmission(src).markdown).toBe(projectSubmission(src).markdown);
   });
 });
+
+describe("the tooth stands at one dispatch position", () => {
+  const carrier = (open: string, close: string) =>
+    `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/probe >>\n\n` +
+    `<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/probe >>\n` +
+    `<<^ code:"&#x0002;" >>\n\n${open}\n\n! A heading\n\n${close}\n\n` +
+    `<<^ code:"&#x0003;" >>\n<<^ code:"&#x0004;" -> ? >>\n`;
+
+  const spellings: Array<[string, string, string]> = [
+    ["tooth then space", "<<~ ahu #entry >>", "<<~/ahu >>"],
+    ["close carries a space", "<<~ ahu #entry >>", "<<~ /ahu >>"],
+    ["tooth joined to the word", "<<~ahu #entry >>", "<<~/ahu >>"],
+    ["both joined", "<<~ahu #entry >>", "<<~ /ahu >>"],
+  ];
+
+  // A close word carries its own slash, matching the plain register's
+  // `<<fragment …>>` / `<</fragment>>`. Every spelling reaches the same word,
+  // so every spelling projects the same markdown.
+  const expected = transposeMarkdown(carrier(spellings[0][1], spellings[0][2])).markdown;
+
+  for (const [name, open, close] of spellings) {
+    test(name, () => {
+      const { markdown } = transposeMarkdown(carrier(open, close));
+      expect(markdown).toBe(expected);
+      expect(markdown).not.toContain("<<~");
+    });
+  }
+});

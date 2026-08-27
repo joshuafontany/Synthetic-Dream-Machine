@@ -56,9 +56,12 @@ const SOH_LINE = /^<<\^ code:"&#x00[01]1;"(?:[^>\n]|->)*\?\s*->\s*(lar:\/\/\/\S+
 /** The ETX closer with its adjacent check. */
 const ETX_LINE = /^<<\^ code:"&#x0003;"[^\n]*>>(\S+)?/;
 const DOCTYPE_LINE = /^<<!DOCTYPE (?:[^>\n]|->)* >>\s*$/;
-const AHU_OPEN = /^<<~ ahu #(\S+)(?: (?:[^>\n]|->)*)? >>\s*$/;
-const AHU_CLOSE = /^<<~\/ahu >>\s*$/;
-const EDGE_LINE = /^<<~ (?:aka|loulou) ((?:[^>\n]|->)*?) >>\s*$/;
+// The tooth stands at one dispatch position: `<<~` then LWSP then the command word,
+// and a close word carries its own slash (`ahu`, `/ahu`). Both spacings reach the same
+// word, matching the plain register's `<<fragment …>>` / `<</fragment>>`.
+const AHU_OPEN = /^<<~\s*ahu #(\S+)(?: (?:[^>\n]|->)*)? >>\s*$/;
+const AHU_CLOSE = /^<<~\s*\/\s*ahu\s*>>\s*$/;
+const EDGE_LINE = /^<<~\s*(?:aka|loulou) ((?:[^>\n]|->)*?) >>\s*$/;
 // The speaking head with or without a joined name (`<<~ ahu`, `<<~ranks`, `<<~! wehe`) — any
 // line-standing sigil not already given a markdown shape above.
 const SIGIL_LINE = /^<<~\S* ?(?:[^>\n]|->)* >>\s*$/;
