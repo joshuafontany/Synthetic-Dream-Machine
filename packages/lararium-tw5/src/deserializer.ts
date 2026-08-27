@@ -517,7 +517,7 @@ function splitMemeToTiddlers(
 // splitRecursive — full-depth ahu walk producing a flat tiddler set.
 //
 // Each ahu sigil at every depth becomes its own tiddler. The bag stays flat;
-// the URI fragment-path (`#parent/child/grandchild`) carries the hierarchy.
+// the URI fragment-path (`#/parent/child/grandchild`) carries the hierarchy.
 // The parent of each tiddler — `fragment-parent` field — points ONE LEVEL up
 // (immediate enclosing ahu, not the meme-root), so disk-projector and
 // templates can climb to the nearest tagged ancestor in a single hop chain.
@@ -528,7 +528,7 @@ function splitMemeToTiddlers(
 
 function splitRecursive(
   rootUri:          string,
-  fragmentPrefix:   string,  // "" at meme root; "#a" → "#a/b" → "#a/b/c"
+  fragmentPrefix:   string,  // "" at meme root; "#/a" → "#/a/b" → "#/a/b/c"
   text:             string,
   warnings:         string[],
 ): { children: TiddlerFields[]; rewrittenText: string } {
@@ -663,7 +663,7 @@ function extractSlotStructure(
 
   // Find LAST kahea ref — trailing prose becomes postamble. Quoted refs
   // (fenced/inline-code) stay content, never structure (fence-mask law).
-  // The slot grammar mirrors AHU_OPEN_RE: a slash-path slot (`#a/b/c`)
+  // The slot grammar mirrors AHU_OPEN_RE: a rooted slot path (`#/a/b/c`)
   // addresses a nested fragment and MUST round-trip whole — a `#[\w-]+`-only
   // match clipped the path at the first `/`, orphaning the slot's body.
   const refRe = /<<~\s*kahea\s+ahu\s+#\/?[\w-]+(?:\/[\w-]+)*\s*>>/g;
@@ -913,7 +913,7 @@ function emitMetaToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFi
 }
 
 // The captured slot mirrors AHU_OPEN_RE's grammar, slash-path included — a
-// `#a/b` slot addresses a nested fragment; a `#[\w-]+`-only capture stopped at
+// `#/a/b` slot addresses a nested fragment; a `#[\w-]+`-only capture stopped at
 // the first `/`, so the ref never matched its child and the whole slot body
 // dropped from the render (the ahu-drop). The path re-composes verbatim below.
 /**

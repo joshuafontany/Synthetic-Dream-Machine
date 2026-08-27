@@ -377,12 +377,18 @@ surfaces:
 
 The recognized sigil types ''mint'' this media type's fragment anchors — RFC 3986 §3.5 places fragment
 semantics with the representation's media type, and this section carries them. A worksite (`ahu`) mints
-an anchor under its name; a nested worksite extends its parent's anchor with `/`, so `#a/b` names the
-worksite `b` inside the worksite `a`; an anchored pointer (`pranala #name`) mints the anchor its office
-names. An anchor no sigil minted resolves to nothing — the pattern belongs to the sigils, never to
-free-form text.
+a ROOTED PATH under its name — `#/a` — and a nested worksite extends its parent's path, so `#/a/b` names
+the worksite `b` inside the worksite `a`; an anchored pointer (`pranala #name`) mints the anchor its
+office names. An anchor no sigil minted resolves to nothing — the pattern belongs to the sigils, never
+to free-form text.
 
-''A path-shaped anchor names its own parentage.'' `root#a/b` states its parent as `root#a` by the shape
+''THE LEADING SLASH PARTS TWO GRAMMARS, and the first character decides which.'' A path (`#/a/b`) names
+a worksite at any depth; a bare name (`#name`) names nothing this media type mints, and the whole bare
+space stays free for the anchors a live wiki renders on a page. RFC 3986 admits the slash unescaped
+(`fragment = *( pchar / "/" / "?" )`) and excludes a second `#`, so a nested address could never have
+taken a repeated-hash shape.
+
+''A path-shaped anchor names its own parentage.'' `root#/a/b` states its parent as `root#/a` by the shape
 alone; nothing else has to carry it. A stored field naming the same parent would stand as a second
 spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
 
@@ -518,7 +524,7 @@ Required parameters:       none
 Optional parameters:       charset (default UTF-8)
 Encoding considerations:   8-bit; UTF-8 REQUIRED
 Fragment identifier:       sigil-minted anchors (#/anchors): a worksite name,
-                           a nested worksite path (#a/b), a pranala office.
+                           a nested worksite path (#/a/b), a pranala office.
                            The scheme [LAR-URI] carries fragments opaque;
                            their meaning lives in this registration
 Security considerations:   see #security
@@ -683,6 +689,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;llLGQsPLm6RHsQp0hVyeR_x1ZY7PYleHpUFuIAv-QGA
+<<^ code:"&#x0003;" >>ni:///sha-256;r-eqtlEi2fYSb8t3nAWdOwak2pVQV_CZbg4LV0Erjr0
 
 <<^ code:"&#x0004;" -> ? >>

@@ -19,8 +19,8 @@ import { fencedSpans, maskedExecAll } from "./fence-mask.js";
  * Slot identifier — supports nested fragment paths via `/`-separated
  * segments per memetic-wikitext spec §nested-ahu and lar-uri.md §5.6.
  *
- * `<<~ ahu #parent/child/grandchild >>` opens a slot whose URI is
- * `parentURI#parent/child/grandchild` — single-hash invariant; the
+ * `<<~ ahu #parent/child/grandchild >>` opens a slot whose URI reads
+ * `parentURI#/parent/child/grandchild` — single-hash invariant; the
  * fragment-path is the addressable hierarchy.
  */
 export const AHU_OPEN_RE  = /<<~[^>]*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+\S+)?\s*>>/g;
@@ -46,7 +46,7 @@ export interface AhuBlock {
   readonly bodyEnd:   number;
   /** Position just after the closing `>>` (end of full block) */
   readonly closeEnd:  number;
-  /** Slot identifier with leading `#`, e.g. `#thesis` or `#parent/child` */
+  /** Slot identifier with leading `#`, e.g. `#thesis` or `#/parent/child` */
   readonly slot:      string;
 }
 

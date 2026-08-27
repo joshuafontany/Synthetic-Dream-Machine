@@ -103,7 +103,7 @@ ordered terms.
 
 <<~ ahu #the-uri-scheme >>
 
-!! The sibling fix ~ a scheme is not a parameter name
+!! The sibling fix ~ a scheme names no parameter
 
 ''A `lar:` URI LOSES ITS HEAD IN THE LIVE PARSER.'' `<<agent aim lar://a.b.c >>` reads `lar` as a
 parameter NAME and `//a.b.c` as its value, because `lar` passes the strict-identifier test and a colon
@@ -239,6 +239,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BhjGaLl611o20H-yDOi2iJiTjorLF6Uv-cxnQg3KaP8
+<<^ code:"&#x0003;" >>ni:///sha-256;wZZ98L3Hum0mUl-Esn3yJ4jOZd6NtpkiuoiPr8e-f9w
 
 <<^ code:"&#x0004;" -> ? >>
