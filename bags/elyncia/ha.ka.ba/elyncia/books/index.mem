@@ -33,7 +33,7 @@ uplift to live wikitext last.
 
 <<~ ahu #toc >>
 
-\procedure BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort:"uri-path">>
+\procedure BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort="uri-path">>
 
 <<BookShelf>>
 
@@ -50,6 +50,6 @@ shelf reads plainly:)//
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8g7jnhxJdAWq4aJBykA2JUvWIJLh07lGGgV-WYKifr0
+<<^ code:"&#x0003;" >>ni:///sha-256;T_6I4daZkGRcn0bUJidC9luXAHMFOitKKkWvRu-MFME
 
 <<^ code:"&#x0004;" -> ? >>

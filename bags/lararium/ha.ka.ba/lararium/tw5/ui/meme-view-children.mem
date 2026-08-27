@@ -51,7 +51,7 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-view-children"
 
 <!-- Controls only for named user-facing slots (not body, not control/structural) -->
 <$list filter="[<slotName>!matchregexp[^#(body|meta|exit|edges|stream-open|stream-close|stream-exit|body-open|body-close|meme-body-open|meme-body-close)$]]" variable="_" emptyMessage="">
-<<ahu-slot-controls childUri:<<childUri>> slot:<<slotName>>>>
+<<ahu-slot-controls childUri=<<childUri>> slot=<<slotName>>>>
 </$list>
 
 </$set>
@@ -64,6 +64,6 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-view-children"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;n0RhdJttwCieeM0qWx78HGKDc3wI-4DZ4q_YrhOeumA
+<<^ code:"&#x0003;" >>ni:///sha-256;4EH_DMxka9oLuCoWvV4rozpybK81azyaYMhedOPZcJc
 
 <<^ code:"&#x0004;" -> ? >>

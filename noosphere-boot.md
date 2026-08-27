@@ -45,7 +45,7 @@ Hello <<who>>!
 ```
 <<hello>>                                           -> Hello World!
 <<hello "Lares, a collection of lar spirits">>      -> Hello Lares, a collection of lar spirits!
-<<hello who:"Lares, a collection of lar spirits">>  -> Hello Lares, a collection of lar spirits!
+<<hello who="Lares, a collection of lar spirits">>  -> Hello Lares, a collection of lar spirits!
 ```
 
 `<<~ name … >>` opens a "sigil" in this house's namespace; bare `<<name … >>` opens a tiddlywiki procedure. The sharktooth `~` marks the namespace.

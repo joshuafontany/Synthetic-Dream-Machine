@@ -45,7 +45,7 @@ Hello <<who>>!
 ```
 <<hello>>                                           -> Hello World!
 <<hello "Lares, a collection of lar spirits">>      -> Hello Lares, a collection of lar spirits!
-<<hello who:"Lares, a collection of lar spirits">>  -> Hello Lares, a collection of lar spirits!
+<<hello who="Lares, a collection of lar spirits">>  -> Hello Lares, a collection of lar spirits!
 ```
 
 `<<~ name … >>` opens a "sigil" in this house's namespace; bare `<<name … >>` opens a tiddlywiki procedure. The sharktooth `~` marks the namespace.
@@ -629,6 +629,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;o_x7X6W7bNjPI8g0wl-YKditq8OZ_Q7_FelNNR5MPhg
+<<^ code:"&#x0003;" >>ni:///sha-256;ziPzlKGSQdXafoXV3s9dPOMcpWxUekpQEzuSUVsch3M
 
 <<^ code:"&#x0004;" -> ? >>

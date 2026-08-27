@@ -389,7 +389,7 @@ bodies stay bare: what the procedure says, and nothing framing it.
 
 # ''THE CALL FORM.'' Parentheses ride the `\procedure` DECLARATION and never the call site. All three
   lawful spellings stand and all three ride: `<<hello>>` bare, defaults inside the declaration ·
-  `<<hello "operator">>` positional · `<<hello who:"operator">>` named. The Hello-World primer shows the
+  `<<hello "operator">>` positional · `<<hello who="operator">>` named. The Hello-World primer shows the
   three together, which teaches the whole call grammar in one block.
 # ''THE ASIDE MARKER.'' `~` carries an inline aside inside a plain call (`… ~ propositional support`).
   The tilde means nothing to the host inside an argument, so the house's prose idiom crosses the dialect
@@ -445,6 +445,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;B-jPMKog5Jq7xQG74_sZ3ZP_BI5UksH25jB1eCgypPs
+<<^ code:"&#x0003;" >>ni:///sha-256;K8mBAE8la1V4AiCMqHKoDZ6QYe1k1KRudMIQ06KbdbA
 
 <<^ code:"&#x0004;" -> ? >>

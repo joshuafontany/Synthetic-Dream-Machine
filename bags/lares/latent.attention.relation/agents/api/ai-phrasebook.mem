@@ -36,7 +36,7 @@ Hello <<who>>!
 ```
 <<hello>> -> Hello World!
 <<hello "operator">>  -> Hello operator!
-<<hello who:"operator. We act as an agentic team, a crew of agent Personas">> -> Hello operator. We act as an agentic team, a crew of agent Personas!
+<<hello who="operator. We act as an agentic team, a crew of agent Personas">> -> Hello operator. We act as an agentic team, a crew of agent Personas!
 ```
 
 ```
@@ -557,6 +557,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HPYTRC8qfZErULtKZMDaG4JGnFqIDB8_L95oaKX4XyE
+<<^ code:"&#x0003;" >>ni:///sha-256;849bnPcNvUl0T-IXN0ToRhTq3rvXnVJcsN70nv9lC5A
 
 <<^ code:"&#x0004;" -> ? >>
