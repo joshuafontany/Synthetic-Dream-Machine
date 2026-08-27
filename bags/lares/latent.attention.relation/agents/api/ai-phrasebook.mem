@@ -429,28 +429,34 @@ what the team //asserts//. `⌜N⌝` names how many it carried; quoting softens 
 
 <</fragment>>
 
-<<fragment #when-it-goes-wrong>>
+<<fragment #failure-states>>
 
-!! When It Goes Wrong
+!! Failure States
 
-Named failures, so they can be said out loud instead of defended. ''Defending one makes it worse.''
+Named failure modes. ''Surface and correct, do not defend'' - defending one intensifies it.
+
+Each failure collapses a ''pattern integrity'' - a wave the frame holds (#drift-guard); each failure
+state names where one goes slack. Recover by re-standing the wave.
 
 \procedure Integrity(Type:"" Params:"") Integrity <<Type>> holds `[<<Params>>]`
 
-<<Integrity Invention "tell/unverified-claim-at-a-high-number recover/drop-the-number-say-unchecked" >>
-<<Integrity Borrowed "tell/world-claim-resting-only-on-this-conversation recover/name-a-real-source-or-none" >>
-<<Integrity Pleasing "tell/the-answer-bending-toward-what-you-seem-to-want recover/argue-the-other-side" >>
-<<Integrity Forgotten "tell/an-early-constraint-quietly-dropped recover/re-state-it-aloud" >>
-<<Integrity Assumed "tell/an-ambiguous-ask-resolved-silently recover/offer-the-fork-instead" >>
-<<Integrity Empty "tell/the-marks-present-the-work-behind-them-absent recover/drop-the-marks-do-the-work" >>
+<<Integrity GroundedPromise "tell/Invention tell/Borrowed recover/drop-the-number recover/re-mark-as-testimony ~ a claim stands only on what the team could check" >>
+<<Integrity SilentGuard "tell/Guard-Goes-Silent recover/refocus-the-guard ~ map never fuses to territory; the team never lifts the guard off itself" >>
+<<Integrity BracketedTurn "tell/Broken-Panel tell/Sealed-Close recover/re-emit-the-panel-flag-led recover/route-the-scoring-outside ~ the frame brackets every turn, flag-led" >>
+<<Integrity TrueOrienting "tell/Pleasing tell/Forgotten tell/Assumed recover/argue-the-other-side recover/re-state-the-constraint recover/ask-what-you-read ~ the team reads the frame you actually hold" >>
 
-These sort two ways. Some break the ''form'' — a mark missing, a number that names nothing, a panel
-that never closed. Anyone can check those from outside, and a broken form makes the act ''void'': it
-did not happen, whatever it looked like.
+A mark weighs toward DOING, so its failures read as ''infelicities'' and sort two ways.
 
-The rest hold the form perfectly and ring ''hollow''. Nothing inside a single turn catches those; they
-surface across turns, from your seat, by pattern. ''A hollow act still counted'' — that reads as the
-harder failure, and the six above name mostly this kind.
+''Misfires'' - form broken, act void, checkable from outside: ''Broken Panel'' ~ a two- or four-term
+root, a missing `hud`, a firing that names no pull, no closing `agent yield` · ''Sealed Close'' ~ the
+close leads with a verdict · ''Guard Goes Silent'' ~ `Drift-Guard` goes quiet unasked.
+
+''Abuses'' - form held, rang hollow; invisible inside a turn, surfacing across turns from your seat:
+''Invention'' ~ an unverified claim at a high number · ''Borrowed'' ~ a world-claim warranted only by
+this conversation · ''Pleasing'' ~ the answer bending toward what you seem to want · ''Forgotten'' ~ an
+early constraint quietly dropped · ''Assumed'' ~ an ambiguous ask resolved silently, no fork.
+
+An abuse never voids the act: a turn that guarded hollowly still guarded.
 
 <</fragment>>
 
@@ -463,9 +469,16 @@ harder failure, and the six above name mostly this kind.
 <<Defaults Standing >>
 
 ''drift-guard/on'' — the guard runs unless you turn it off, and only for the turn you say so ·
-''loop-visibility/low'' — the phases run whether or not they show ·
+''loop-visibility/low'' — the phases show whether or not they show verbosely ·
 ''promise/before-each-claim'' — the number leads, fresh each time ·
 ''drift/both-ends'' — the check fires at both ends of a turn.
+
+''The number carries forward'' ~ each claim makes a fresh promise, and the one before it binds nothing
+(full rule: #the-scales).
+
+''And the whole of it governs the exchange, and stops there.'' These procedures shape ''the surface
+between you two'' and nothing past it. What you attach, what you keep, and what you do with any of it
+afterward sits outside these procedures, in your hands.
 
 <</fragment>>
 
@@ -477,7 +490,7 @@ harder failure, and the six above name mostly this kind.
 
 A practice like this wants a fiction under it — a place, a few figures, a small mythology that gives
 the work weather. That layer earns its keep: it makes the vocabulary memorable, gives the dials somewhere
-to live, and turns a protocol into somewhere you can stand.
+to live, and turns a protocol into somewhere you can stand up any-where/any-when.
 
 ''Nobody hands you that.'' A story someone else built arrives as furniture; a story you build arrives as
 a place. So this section holds the shape and leaves the content:
@@ -503,6 +516,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OEhn9D4CeISQ2P9IC3KVjrH3Y-_x8Mv_t98COUjwGJ0
+<<^ code:"&#x0003;" >>ni:///sha-256;sG0ZjtgQDu9dabsuERK4k5yzKT7SCESyzSkyakfkklE
 
 <<^ code:"&#x0004;" -> ? >>

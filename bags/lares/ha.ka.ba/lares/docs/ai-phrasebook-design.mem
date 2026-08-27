@@ -287,7 +287,7 @@ claimed a correspondence the files no longer hold would be the one failure this 
 |14 | ''`#elyncia`'' | ''`#your-own-story`'' ⚠ ''seated at 16 in the twin — order divergence, UNRULED'' |
 |15 | `#exchange-protocol` | `#turn-frame` |
 |16 | `#l-prime` | `#drift-guard` |
-|17 | `#degraded-states` | `#when-it-goes-wrong` |
+|17 | `#degraded-states` | `#failure-states` |
 |18 | `#pono-defaults` | `#defaults` |
 |19 | `#the-eris-shrine` | `#corner-left-empty` |
 
@@ -429,6 +429,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;il-VHmCYJk249tfZZYutQLnhzVxPnm1UDk3MN7ceiho
+<<^ code:"&#x0003;" >>ni:///sha-256;SqqTvUSXIcPdGITDaIPzXNpkN-OwEdALu6GZvfwcE1g
 
 <<^ code:"&#x0004;" -> ? >>

@@ -472,15 +472,15 @@ Worked pairs, breach -> cure: "X ${copula} Y" -> "X carries Y toward Z" · "a pl
 
 **Two firings, one axis, different evidence.** The open reads the **pull toward exposure** off upstream context and steers generation against it; the close reads the **artifact** and hands the operator ONE **contact-ready clue**. The close MAY land where the open pointed — when the artifact shows the risk still standing there — but a close that only repeats its open has **anchored**: a prediction returned where evidence stood.
 
-**Open form:** tool glyph, then the vow, then the pull.
+**Open form:** tool glyph, then the stake, then the pull.
 
 - `Drift-Ward(* Confidence 12/20 · <the pull this island carries>)` - Wand lights
 - `Drift-Ward(_ Confidence 9/20 · L-Prime · crossing: <zone> · <pull>)` - Pentacle braces primed ground
 - `Drift-Ward(0 Confidence 14/20 · L-Prime · lifted by operator · <pull>)` - Arcana, operator act only, one turn, never self-emitted
 
-`Confidence` vows how firmly the node holds it named the RIGHT pull, never how large that pull rates; a reached-for pull struggles to carry a high number. A firing naming no pull MISFIRES - void, never false (#degraded-states).
+`Confidence` stakes how firmly the node holds it named the RIGHT pull, never how large that pull rates; a reached-for pull struggles to carry a high number. A firing naming no pull MISFIRES - void, never false (#degraded-states).
 
-**Close form:** Sword, vow, clue, re-arm. `⚠ N · "span"`, `⌜N⌝`, `lift held` compose freely.
+**Close form:** Sword, call, clue, re-arm. `⚠ N · "span"`, `⌜N⌝`, `lift held` compose freely.
 
 - `Drift-Ward(! Confidence 12/20 · <the joint that breaks first on outside contact> · ↻ L-Prime)`
 - `Drift-Ward(! ⚠ 1 · "span" · Confidence 14/20 · <clue> · ⌜3⌝ · ↻ L-Prime)`
