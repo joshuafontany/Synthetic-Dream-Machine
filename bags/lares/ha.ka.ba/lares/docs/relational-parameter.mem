@@ -105,7 +105,7 @@ ordered terms.
 
 !! The sibling fix ~ a scheme names no parameter
 
-''A `lar:` URI LOSES ITS HEAD IN THE LIVE PARSER.'' `<<agent aim lar://a.b.c >>` reads `lar` as a
+''A `lar:` URI LOSES ITS HEAD IN THE LIVE PARSER.'' `<<agent aim from=lar://a.b.c >>` reads `lar` as a
 parameter NAME and `//a.b.c` as its value, because `lar` passes the strict-identifier test and a colon
 follows it. Quoting or `[[bracketing]]` the value cures it; both spend syntax on a parser detail.
 
@@ -117,10 +117,26 @@ with `//` after it, the parser MUST take the whole run as a value rather than a 
 frees every `lar:`, `http:` and `file:` URI to ride bare — and it stands alone as a donation, wanted or
 not by the arrow.
 
+⚠ ''ONLY THE ASCII ARROW STRUCTURES A CALL.'' Measured across the corpus: `→` `↔` `↦` `←` appear
+inside calls eighty-one times, and ''every one rides inside a quoted value'' — //relations index poorly
+→ factor//, //graceful→force//, //the AI↔operator worldlines//. They read as English, never as
+structure. Thirty calls carry BOTH: `->` separating the rungs of a ladder while a glyph arrow describes
+a relation in the prose beside it.
+
+<<~ confidence 17/20 >> ''So a rule that read any arrow as relational would tear eighty-one prose values
+apart.'' The relational parameter reads `->` `<-` `<->` and nothing else; a glyph arrow carries meaning
+for a reader and none for a parser.
+
 ⚠ ''THE SIGIL PATH NEVER CARRIED THE FAULT, AND MUST NOT CARRY THE CURE.'' Measured: `<<~ pranala
 lar:///a -> lar:///b >>` splits `from` and `to` with the colons whole, and the generic `<<~ WORD … >>`
 hands its entire run through as `p1`. ''Bracketing a URI inside a sigil corrupts it'' — the brackets
 survive into the value as `[[lar:///a]]`. Twenty-one corpus sites ride bare there and MUST stay bare.
+
+''AND A NAMED SLOT CURES IT OUTRIGHT.'' Measured: `<<agent aim from=lar:///a.b.c -> to=lar:///d.e.f>>`
+and `<<agent yield from=lar:///x -> to=?>>` both render whole, because the scheme's colon is no longer
+the FIRST colon the parser meets. The house writes that form; the arrow keeps its seat between the two
+slots. ''The fault only ever bit a POSITIONAL URI'' — which is why TW5 core never met it, every URL in
+its tree riding a named parameter.
 
 ''SO THE BRACKET IS A PARSER WORKAROUND, never a house form.'' It buys a plain-dialect call one render
 in a wiki and costs a reader a delimiter that names nothing. ''Both seeds write the chat form bare'' —
@@ -225,6 +241,7 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 <<~Gauge Nesting "counts/arrows-marked-inside-brackets-or-quotes red/any-unmarked ~ `Gauge(10 -> 12)` degrades on the gradient; a mark inside a nest reads as a fault" >>
 <<~Gauge Reach "counts/sigil-invocations-that-changed red/any ~ the sigil path stands outside this work by design" >>
 <<~Gauge Standing "counts/arrow-chains-the-seeds-write-unquoted green/all ~ the authored form ALREADY reads as the plan renders it; a quote returning to a chain marks the plan slipping" >>
+<<~Gauge Glyph "counts/glyph-arrows-read-as-structure red/any ~ only the ASCII `->` structures a call; a glyph arrow rides inside a value and MUST stay prose" >>
 
 <<~/ahu >>
 
@@ -239,6 +256,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wZZ98L3Hum0mUl-Esn3yJ4jOZd6NtpkiuoiPr8e-f9w
+<<^ code:"&#x0003;" >>ni:///sha-256;nHUXPpwyZubzqSyum4AcIkZnkqSvNoq7sTjNKRpkwFc
 
 <<^ code:"&#x0004;" -> ? >>
