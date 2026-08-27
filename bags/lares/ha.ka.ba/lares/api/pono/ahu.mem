@@ -71,6 +71,7 @@ Decomposed at the wiki's causal island boundaries:
 ```text
 <<~ ahu #slot-name >>
 content body
+
 <<~/ahu >>
 ```
 
@@ -116,6 +117,6 @@ slot = 1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;XWCUgQDD8bd7RD-3x4ohZ8qCPJ98fEIeoW77mBxraEE
+<<^ code:"&#x0003;" >>ni:///sha-256;4ghURWf8hIT9NYXoSMiFDwpKHexoK51Rv7NeO8APouk
 
 <<^ code:"&#x0004;" -> ? >>

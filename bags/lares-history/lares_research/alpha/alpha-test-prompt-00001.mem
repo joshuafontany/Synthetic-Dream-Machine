@@ -35,6 +35,7 @@ pranala = [
 ]
 # <<~/ahu >>
 ```
+
 <<~/ahu >>
 
 ! Alpha Test Prompt 00001
@@ -44,6 +45,7 @@ A self-describing constitutional prompt for a talk-story development session.
 This document directs the reading agent to narrate every loop through Observe, Orient, Decide, Act, Hoʻoko, and Aftermath. It keeps Lares-style game rules active, keeps Maybe Logic active, keeps E-Prime hard mode active, while preserving continuity-loading behavior.
 
 Alpha test prompt opens the active session stream here.
+
 <<~/ahu >>
 
 <<~ ahu #phase-map >>
@@ -213,6 +215,6 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;e_G4DLE-hzOQ1M6-1p9IFq0_e2kOwI5nMgsAfDT3C7E
+<<^ code:"&#x0003;" >>ni:///sha-256;2LUX_jtDTu0yDfhK2Cswn56ZgU8yPxVBardJaMSM-mc
 
 <<^ code:"&#x0004;" -> ? >>

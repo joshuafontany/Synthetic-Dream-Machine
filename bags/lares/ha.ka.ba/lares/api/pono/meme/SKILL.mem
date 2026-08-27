@@ -206,6 +206,7 @@ When writing or revising:
 ◇ [decide pressure]
 ▶ [act pressure]
 ↺ [verify or crossing pressure]; [aftermath pressure]
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
@@ -214,6 +215,7 @@ When writing or revising:
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 <<~ pranala #has-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family:control role:has >>
 <<~ pranala #has-loci ? -> lar:///ha.ka.ba/lares/api/pono/loci family:control role:has >>
+
 <<~/ahu >>
 
 <<^ code:"&#x0003;" >>:3474a83e5cb66844
@@ -258,6 +260,6 @@ Aftermath — close by naming:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZgCt-2qU5WIb5oY3S4bttUwsMtwQmFzCmuL9dE2eQ98
+<<^ code:"&#x0003;" >>ni:///sha-256;KgrDn2qVQvESjbfjWmWyAcxv95qGBXIYtj1pZSZnZjI
 
 <<^ code:"&#x0004;" -> ? >>
