@@ -159,7 +159,7 @@ Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke
 
 !! Ability Scores — The Dreamer
 
-| STR | AGI | END | CHA | THT | AUR |
+| STR | AGI | END | THT | CHA | AUR |
 | 1 | 0 | 2 | 1 | 1 | 2 |
 
 *Emphasis: Aura-heavy for Dreamwalker and DreamNet interfacing. Endurance for the ancient frame's stubbornness. Charisma and Thought for a nascent mind learning to be a person. Strength sufficient but not dominant — the daemon remembers fighting, but Ichi is more dreamer than warrior.*
@@ -196,7 +196,13 @@ Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke
 
 ---
 
-!! Traits (5/8 base slots; +2 Inner Fire flex shared with Gear)
+!! Traits (4/8 base slots; +2 Inner Fire flex shared with Gear)
+
+''Slot count:'' 7 + THT 1 = ''8'' base trait slots. Four sit filled — Golem, Background: Military,
+Powered Symbiote, Dreamwalker. Heritage Construct rides ''free'' and consumes none of them; its
+three Skilled effects (Deathless, Armoured Body, Inner Fire) ride with the Heritage, not the
+trait inventory. Inner Fire adds 2 flexible slots that Ichi may assign to either inventory as it
+fills.
 
 !!! Slot 0a — Golem *(Path trait)*
 
@@ -322,6 +328,6 @@ See ''Powered Symbiote'' (1 st).
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qc0ffVXOoi9d3fChqoubjCCrxa7G_IPOiCVUTYZFF6g
+<<^ code:"&#x0003;" >>ni:///sha-256;2oaAshRhGK5-6p_a_Gk2gRCXjqgK7bFK5cjkN9Fr90I
 
 <<^ code:"&#x0004;" -> ? >>

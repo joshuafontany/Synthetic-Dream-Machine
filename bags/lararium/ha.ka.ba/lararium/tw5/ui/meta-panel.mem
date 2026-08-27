@@ -17,22 +17,6 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/meta-panel"
 
 <<^ code:"&#x0002;" >>
 
-<<~ ahu #hud-fields >>
-
-```toml
-# Canonical field ordering for meta-panel render and MCP hud tool.
-# Tier 1 — stat bars (always visible, compact)
-tier1 = ["mana", "manao", "manaoio", "confidence"]
-# Tier 2 — identity block
-tier2 = ["role", "namespace", "register", "l-space"]
-# Tier 3 — technical fields (details disclosure)
-tier3 = ["content-type", "module-type", "tw5-module-name", "body-sha256", "cacheable", "retain", "hydrate"]
-# Fields always excluded from tier 4 (raw fallback)
-exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "creator", "modifier"]
-```
-
-<<~/ahu >>
-
 \procedure lar-stat-bar(field, value, threshold:"16")
 <div class="lar-stat-row">
   <span class="lar-stat-label"><<field>></span>
@@ -110,6 +94,24 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 </div>
 \end
 
+<<~ ahu #hud-fields >>
+
+```toml
+# Canonical field ordering for meta-panel render and MCP hud tool.
+# Tier 1 — stat bars (always visible, compact)
+tier1 = ["mana", "manao", "manaoio", "confidence"]
+# Tier 2 — identity block
+tier2 = ["role", "namespace", "register", "l-space"]
+# Tier 3 — technical fields (details disclosure)
+tier3 = ["content-type", "module-type", "tw5-module-name", "body-sha256", "cacheable", "retain", "hydrate"]
+# Fields always excluded from tier 4 (raw fallback)
+exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "creator", "modifier"]
+```
+
+<<~/ahu >>
+
+
+
 <<~/ahu >>
 
 <<~ ahu #edges >>
@@ -119,6 +121,6 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Ic-SkNKrvpKkN02IrbUSNchPDK4XqHW6JhpAHZYmvvA
+<<^ code:"&#x0003;" >>ni:///sha-256;J8Oa7mVYLzSStoA28bgqePvT1s0jLDXH0axJftBAkNw
 
 <<^ code:"&#x0004;" -> ? >>

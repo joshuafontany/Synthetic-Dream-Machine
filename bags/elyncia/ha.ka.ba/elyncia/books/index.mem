@@ -33,11 +33,9 @@ uplift to live wikitext last.
 
 <<~ ahu #toc >>
 
-!! Table of Contents
+\procedure BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort:"uri-path">>
 
-\procedure ~BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort:"uri-path">>
-
-<<~BookShelf>>
+<<BookShelf>>
 
 //(The ToC walks the spines by their `books/index` tag. Until the live wiki renders it, the
 shelf reads plainly:)//
@@ -52,6 +50,6 @@ shelf reads plainly:)//
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0WP_GO4J4fcB4GM1Yry3WFtplZO0BHRZ4HYC2t806Jw
+<<^ code:"&#x0003;" >>ni:///sha-256;8g7jnhxJdAWq4aJBykA2JUvWIJLh07lGGgV-WYKifr0
 
 <<^ code:"&#x0004;" -> ? >>

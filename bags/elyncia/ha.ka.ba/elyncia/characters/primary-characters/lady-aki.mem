@@ -164,14 +164,48 @@ Good directions:
 
 !! Defenses
 
-!!! Base
+''Quickstart formulas'' (SDM Ch.1 §6): Physical = 7 + Agility + Skill + ''Armor'' ·
+Mental = 7 + Thought + Skill + ''Ward'' · Social = 7 + Charisma + Skill + ''Prestige''.
+
+!!! Base — Heritage Only
+
+Counts Aki's own body and nothing she wears.
 
 | Defense | Formula | Result |
 |---|---|---:|
 | Physical | 7 + AGI 1 + Spider Folk Armor 1 | 9 |
 | Mental | 7 + THT 3 + Spider Folk Ward 1 | 11 |
-| Social | 7 + CHA 2 | 9 |
+| Social | 7 + CHA 2 + Prestige 0 | 9 |
 | Mental vs Wizard-domain threats | 7 + THT 3 + Wizard 3 + Ward 1 | 14 |
+
+!!! Base — Heritage + Worn Gear
+
+Counts the Armor and Ward the gear ledger already buys and Aki already wears.
+
+| Defense | Formula | Result |
+|---|---|---:|
+| Physical | 7 + AGI 1 + Armor 3 //(heritage 1 + silksteel robes 2)// | 11 |
+| Mental | 7 + THT 3 + Ward 5 //(heritage 1 + hat 2 + menpo 1 + netsuke 1)// | 15 |
+| Social | 7 + CHA 2 + Prestige 0 | 9 |
+| Mental vs Wizard-domain threats | 7 + THT 3 + Wizard 3 + Ward 5 | 18 |
+
+!!! Open Fork — Which Base Row Governs
+
+<<~ pranala #defense-source-fork ? -> lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
+''Which base row governs play stays open at the table.'' The two tables differ by 2 Physical
+and 4 Mental, so the fork moves every contested roll against Aki. The gear carries canonical
+numbers — Ruffle Coat comparator `armor +2`, Moss Hat `ward +2`, Dust Face `ward +1`, Safety
+Scarab `ward +1` — and the Quickstart formulas read Armor and Ward without distinguishing worn
+sources from bodily ones. Two readings stand:
+
+# ''Gear counts.'' Worn Armor and trinket Wards feed Defense as the formula reads them; the
+  second table governs.
+# ''Trinkets feed saves only.'' Wards from trinkets grant save bonuses while heritage Ward alone
+  reaches Defense; the first table governs.
+
+Reading 2 needs a written FTLS alpha ruling to stand, because the Quickstart text grants Ward
+''both'' save bonuses and mental defenses in one sentence. Freyja's and the referee's hand decides;
+until then both tables ride, and the sheet names the fork rather than choosing it.
 
 !!! Wearing Ichi
 
@@ -183,6 +217,11 @@ Good directions:
 | Social | 7 + CHA 2 | 9 |
 | Mental vs Wizard-domain threats | 7 + THT 3 + Wizard 3 + Ward 2 | 15 |
 
+These rows count Ichi's Ward +1 and Aki's heritage Ward +1. The #defense-source-fork reaches
+here too: should trinket Wards feed Defense, the hat, menpo, and netsuke add +4 more wherever
+Aki still wears them under the armor — and whether she wears a wide-brimmed travel hat inside a
+powered symbiote asks its own question. Settle the fork first; this table follows it.
+
 !!! Domain Notes
 
 ''Wizard'' may apply against hostile Powers, glamours, illusion warfare, DreamNet intrusion, magical signal attacks, hostile noospheric pressure, and magical analysis contests.
@@ -193,6 +232,52 @@ Good directions:
 
 <<~/ahu >>
 
+<<~ ahu #inventory >>
+
+!! Inventory — Slots and Units
+
+''Item slots:'' 7 + STR 0 = ''7''. Aki carries the tightest inventory in the company; every
+addition costs something already carried.
+
+''Units'' (SDM Ch.1, //How Items Work//): 1 sack = 10 stones · 1 stone (st) = 10 soaps (sp) ·
+1 soap = 25 cash. An available item occupies a whole slot whatever its size; packing items away
+into a container trades readiness for space.
+
+!!! Slot Tally
+
+| Carried | Size | Slots | Note |
+|---|---|---:|---|
+| Spinneret Kit | 1 st | 1 | table-created Spider Folk toolkit |
+| Silksteel Ritual Miko Robes | 1 st | 1 | Ruffle Coat comparator; worn |
+| Veiled Miko Work Hat | 1 st | 1 | Moss Hat comparator |
+| Silk Filter Menpo | 1 st | 1 | Dust Face comparator |
+| Silkthorn Thawnette x2 | 1 st each | 2 | thrown; readied |
+| Ichi //(hallmark)// | 2 st | 1 | Powered Symbiote satisfies one slot; overlaps worn-armor slot in symbiosis |
+| Expedition Satchel | 1 sk container | 1 | holds 10 st of quantum gear; retrieval costs an action |
+| ''Subtotal'' | | ''8'' | ''against 7 available'' |
+
+''Riding in the robes' pockets'' (7 sp of free inventory, //not// 7 slots — 0.7 stone of small
+goods): Bell-Tikker Clicker 1 sp · Safety Netsuke 1 sp · DreamNet Prayer Relay Ofuda x5. These
+cost no slot while they stay pocketed.
+
+!!! Open Fork — The Eighth Slot
+
+<<~ pranala #inventory-overrun ? -> lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
+The tally runs ''one slot over'' at 8 against 7. Three cures reach it, each a table call:
+
+# ''Worn clothing rides free.'' The Quickstart treats a wallet as part of clothing; a table may
+  extend that to the robes and recover the slot.
+# ''The symbiosis overlap absorbs it.'' The Powered Symbiote trait reduces worn-system
+  encumbrance by 1 and overlaps the hallmark slot with the worn-armor slot — read generously,
+  Ichi and the robes share one entry while Aki wears him.
+# ''Aki drops or packs one thing.'' A Thawnette packs into the satchel, or the hat rides the
+  shrine between thresholds.
+
+Nothing here forces a choice; the sheet names the overrun so the table stops discovering it
+mid-delve.
+
+<<~/ahu >>
+
 <<~ ahu #gear-on-body >>
 
 !! Gear — On Body
@@ -200,7 +285,7 @@ Good directions:
 | Gear | Canon Basis | Rules / Effect |
 |---|---|---|
 | Spinneret Kit | Spider Folk toolkit | tool edge for silk/web/thread craft |
-| Silksteel Ritual Miko Robes | Ruffle Coat comparator | protects as leather; 7 sp free inventory |
+| Silksteel Ritual Miko Robes | Ruffle Coat comparator | ''armor +2'' (protects as leather), 1 st; pockets hold 7 sp of free inventory |
 | Veiled Miko Work Hat / Ichimegasa with Uchikatsugi Veil | Moss Hat | Ward +2; protection vs charms/nausea |
 | Silk Filter Menpo | Dust Face | Ward +1; full-face mask vs dust/haze/spores/toxins |
 | Bell-Tikker Clicker | Tikker Clicker | detects corrupting energies; bonus vs corruption |
@@ -563,6 +648,15 @@ How does the Mother Spore understand Aki's household compact?
 
 <<~ pranala #open-ephyra-rules ? -> lar:///elyncia.neo-thracia.opens/playtest/ephyra-rules >>
 Exact Ephyra task-spirit mechanics need final table handling.
+
+<<~ pranala #open-defense-source ? -> lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
+Does worn Armor and do trinket Wards feed Defense, or do trinket Wards feed saves alone?
+Two base tables ride until the referee rules (see #defense-source-fork). The answer moves Aki's
+Mental Defense by 4 and her Physical by 2.
+
+<<~ pranala #open-slot-tally ? -> lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
+Aki's carried gear tallies 8 slots against 7 available. Three cures reach it; the table picks
+one (see #inventory-overrun).
 
 <<~/ahu >>
 
