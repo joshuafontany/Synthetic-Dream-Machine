@@ -26,7 +26,9 @@ The address space grew from the work, which is the honest way to grow one — an
 
 !! The Three Relations a Name May Carry
 
+```
 \procedure ~Relation(Type:"" Params:"") ~Relation <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Relation Holding "verb/a-vessel-HOLDS-this identity/a-minted-or-derived-address mounts/yes registers/yes cap-checked/yes ~ bags · wikis · content bodies" >>
 <<~Relation Meeting "verb/principals-MEET-here identity/a-url-derived-from-a-Nexus-key mounts/no registers/no federates/by-contract ~ boards" >>
@@ -52,7 +54,9 @@ A name that carries two of these takes ''two owners''. The `@` sigil grew to car
 
 Reading up from the atom. Each rung names its relation, so a reader can tell at a glance what kind of thing they hold.
 
+```
 \procedure ~Rung(Type:"" Params:"") ~Rung <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Rung Vessel-Veil-Dyad "relation/BEING identity/two-keys ~ device-minted vessel-key ⊥ sovereign veiled-user-key; a LOCAL identity in its own right, never a component of something above it" >>
 <<~Rung PersonaGroup "relation/BEING identity/the-closure-of-mutual-bindings ~ a human's own vessels holding one handle↔DID; HOLDS exactly one artifact, its private plane" >>
@@ -157,6 +161,6 @@ Three moves, smallest first, each standing on its own.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-uris >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VIogFTagwsSBR5lphFMw4hAl0Q8ZLE7xHXIQOp0ZDkg
+<<^ code:"&#x0003;" >>ni:///sha-256;Y27XyleXtIE-fQ0e-5OnCTbMuPYCADjEBeryFl7GVLI
 
 <<^ code:"&#x0004;" -> ? >>

@@ -97,7 +97,9 @@ offices: the ''word'' (teaches the parser), the ''field-read'' (the structured
 gradient reading), the ''gradient render'' (a `\procedure`, band-dressed). The
 gauge panel the engine learns to read:
 
+```
 \procedure ~Gauge(Type:"" Params:"") ~Gauge <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Gauge Lares "form/leaf reads/aimRoot=w1.w2.w3 · yieldRoot · holding? ~ the bearing vector" >>
 <<~Gauge Hud "form/leaf reads/aperture=0..20 + band{pulse·beat·measure·arc·theme} · oodaCount · phase{✶⏿◇▶↺} · suspendReason ~ the gauges" >>
@@ -225,6 +227,6 @@ readings AND the form-capture both drain the one emitted-marker stream, no disco
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OvRiti-4PEesFmz37WGuKF6I0UavPxG_Skdw5bZvToU
+<<^ code:"&#x0003;" >>ni:///sha-256;g1--RzEpc2mTGezvKzAwbvWDIIESl3MOAVsn8VRXI1w
 
 <<^ code:"&#x0004;" -> ? >>

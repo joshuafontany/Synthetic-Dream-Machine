@@ -125,7 +125,9 @@ as one string — an absent slot just stays unwritten). It hands `~Params` to th
 `holds` verb by backtick filtered transclusion, never a nested
 `<<macro <<macro>> >>` (the parser refuses that):
 
+```
 \procedure ~Mu(Type:Arcana Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Mu Wand "ascii/* glyph/🜂 element/Fire pull/ignition" >>
 <<~Mu Arcana >>
@@ -146,7 +148,9 @@ A stack too wide for one line wears the block form — `<<~holds >>`, one
 
 ''THE SIGIL AND THE WORD BOTH STAND, and neither defines the other.''
 
+```
 \procedure ~Hold(Type:"" Params:"") ~Hold <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Hold Graph "writes/`<<~holds x >>` binds/carrier-to-component demands/x-names-a-meme reads/the-memegraph ~ the copula-free predicate; the held thing speaks" >>
 <<~Hold Stream "writes/`holds` bare binds/nothing demands/nothing reads/the-chat-stream ~ an ordinary English verb doing the ward's own cure in a sentence" >>
@@ -268,6 +272,6 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;E4yNKtl0PflJlXOeKx8WC7Zl-wCTsiJcvYe1i_6B1ec
+<<^ code:"&#x0003;" >>ni:///sha-256;FfD7XFX_qkpj79btFudgJeVpS_MdN9Up05OwPc8DZ2I
 
 <<^ code:"&#x0004;" -> ? >>

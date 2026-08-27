@@ -59,7 +59,9 @@ Rome's ''collegia compitalicia'' tended the crossroads shrines, drawn from freed
 
 ''An office attaches to the PLACE, never to the person.'' Rome's ''vicomagistri'' held a college seat at a ''compitum''; the office belonged to the vicus, the person rotated through, and the shrine kept standing. <<~ confidence 10/20 >>
 
+```
 \procedure ~Office(Type:"" Params:"") ~Office <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Office Grant "what/a-quorum-countersigns subject/the-vessel's-PLACE-DID requires/the-vessel's-own-contractSig ~ bilateral; a Nexus conscripts nobody" >>
 <<~Office Fence "what/boundEpoch >= effectiveLeaseEpoch scope/per-Nexus ~ the same comparison device-delegation already makes" >>
@@ -163,7 +165,9 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 
 !! The immune coupling ~ innate, adaptive, memory
 
+```
 \procedure ~Layer(Type:"" Params:"") ~Layer <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Layer Innate "organ/lamplighters acts/patrol · notice · repair holds/tend caps ONLY ~ presents, never condemns" >>
 <<~Layer Adaptive "organ/kahu-quorum acts/seat-a-presented-candidate holds/quorum-signature ~ the only condemning body" >>
@@ -367,6 +371,6 @@ Physical access defeats confidentiality and forward integrity of a box outright 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JPj--s95qhg-RRg-3AMZb4xjsGyqRW_nApkyMZHbk3Q
+<<^ code:"&#x0003;" >>ni:///sha-256;v1OLuPrioEguBm8bC3luIMsRyXUiApiPEs_ZlpbSi9k
 
 <<^ code:"&#x0004;" -> ? >>

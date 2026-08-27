@@ -65,7 +65,9 @@ no-imposed-prior law, never a softening.
 
 ''Per plane, concretely:''
 
+```
 \procedure ~Code(Type:"" Params:"") ~Code <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Code Content "l(G)/the shared vocabulary and embedding basis l(D|G)/the record's own bytes, the part no template reaches ~ content reaches hardest for the RESIDUAL" >>
 <<~Code Structure "l(G)/the canonical AST shapes that recur — the structural hashes l(D|G)/the leaf fills a shape does not determine ~ structure reaches hardest for the GRAMMAR" >>
@@ -180,7 +182,9 @@ and the address has ''moved into li'' as a stored prefix code (#the-grain).
 
 Under the variance test, exactly three readings extend — and no others:
 
+```
 \procedure ~Ki(Type:"" Params:"") ~Ki <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Ki Boundary "asks/where does the generating REGIME turn over extends/it reads a WINDOW, never a span — a cut exists only against its neighbours engines/Foote-novelty over the character-class channel · `ecp::e.divisive` (the nested TREE) · PELT · Harris branching-entropy product/the FFZ address — which CROSSES into li (#the-arrow)" >>
 <<~Ki Coupling "asks/who leads whom, ACROSS streams extends/irreducibly — a relation BETWEEN streams that NO coarsening of one stream can ever reach engines/effective transfer entropy (`coupling.R`, RTransferEntropy::calc_ete), surrogate-null gated; ΦID atoms (redundancy · unique · synergy) as the depth extension product/a directed, null-certified edge — a HYPOTHESIS surfaced, never a verdict" >>
@@ -237,7 +241,9 @@ reads as a ''boundary'' signal, exactly as the FFZ meme specified in June — //
 Each R leg rides the `drawer_io` NDJSON contract — one request on stdin, one response on stdout — and
 ''every one of them degrades gracefully'': a missing R never faults the run.
 
+```
 \procedure ~RLeg(Type:"" Params:"") ~RLeg <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~RLeg bands_ecp.R "owns/`ecp::e.divisive` — nonparametric, MULTIVARIATE, DIVISIVE hierarchical changepoints (Matteson & James 2014); the discovery ORDER is the nested tree verdict/SURVIVES, PROMOTED — it stops serving a frequency ladder and becomes the BOUNDARY plane's tree engine, which is what it always was fallback/`ruptures` Binseg / KernelCPD-rbf (incremental-Binseg order IS a divisive hierarchy)" >>
 <<~RLeg coupling.R "owns/`RTransferEntropy::calc_ete` — the effective (bias-corrected) TRANSFER ENTROPY, directional, model-free, with a bootstrap source-permutation null verdict/SURVIVES — the one irreducibly-ki plane's one engine fallback/NONE, by design: coupling has no python fallback, so an absent R yields the HONEST ZERO, never a fabricated edge" >>
@@ -359,7 +365,9 @@ counter manufactures a global now.
 
 !!! What it needs that a text corpus does not
 
+```
 \procedure ~Need(Type:"" Params:"") ~Need <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Need The-Beat "given/the harness hands it over — it ticks on the operator's grounding act why/a curated corpus must DETECT every band it has; the rhizome is HANDED one, and the detection budget frees for the bands nobody gives (Measure, Theme)" >>
 <<~Need The-Causal-DAG "given/the fork, the injection, the handback — a partial order the source WROTE DOWN why/''you cannot DISCOVER what you were handed.'' The DAG rides the GIVEN axis (#ki), so it lands in ''li'', and inducing it would be an instrument re-deriving its own input" >>
@@ -412,7 +420,9 @@ this goalpost sits where the operator put it.
 
 ''One machina, many sensoria. Each holds its own store; none of them federate'' (operator ruling, standing).
 
+```
 \procedure ~Sensorium(Type:"" Params:"") ~Sensorium <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Sensorium Session-Rhizome "holds/the AI↔operator worldlines mood/RHIZOME — the Beat GIVEN status/BUILT; the first memory-sensorium capture ran 2026-07-10 note/the ONE bed where coupling is well-posed (#memory-sensorium)" >>
 <<~Sensorium Text-Corpus "holds/one curated artifact per store — the Kumulipo, a codebase, TW5's own tree mood/GEOLOGY — the Beat reads NULL status/BUILT; the beds that taught us the category error note/it must EARN every band it has" >>
@@ -548,6 +558,6 @@ five-plane count (#owed, the-five-plane-count).
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;p37iXElqPPLCnrN-HpT_1AE6FWo6g-nCKWHmVdVB1ys
+<<^ code:"&#x0003;" >>ni:///sha-256;6X3GNBKBteqi4QnZza2Xqu9glnZJJDhH_jwYZVGEjXM
 
 <<^ code:"&#x0004;" -> ? >>

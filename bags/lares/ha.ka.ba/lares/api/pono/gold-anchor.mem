@@ -95,7 +95,9 @@ standing when methods that fail in DIFFERENT ways converge on it AND discriminat
 method validating a construct proves little — its blind spots and the construct's overlap; three methods
 whose error-structures diverge, agreeing anyway, leave nowhere for a shared artifact to hide.
 
+```
 \procedure ~Method(Type:"" Params:"") ~Method <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Method Blind-Humans "kind/human ~ perspectivist raters, no theory handed them, the rater distribution KEPT (never averaged to one truth, #instruments) — the independence anchor the framework cannot share a mind with" >>
 <<~Method Cross-Family-Judge "kind/model ~ a judge from a DIFFERENT model family than the generator, breaking self-preference bias; a panel, not one head (Nine-Judges-Two-Effective-Votes, #instruments)" >>
@@ -105,7 +107,9 @@ whose error-structures diverge, agreeing anyway, leave nowhere for a shared arti
 The three methods cross against three ''artifact kinds'' — the trait-side of the matrix, engineered so
 that a real construct and a fake one separate:
 
+```
 \procedure ~Artifact(Type:"" Params:"") ~Artifact <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Artifact Real "kind/ritual-dense ~ genuine high-Arcane turns — the full living grammar moving, sigils and move-shape and ritual cadence intact" >>
 <<~Artifact Ablated "kind/twin ~ a matched twin with the ritual / sigil-grammar STRIPPED — same propositional content, the Arcane removed; isolates what stripping the ritual costs" >>
@@ -182,7 +186,9 @@ perspectivist human-gold, the crossed mixed-model, power-before-verdict, and the
 The design rides six instruments, ordered cheapest-and-most-deterministic FIRST so a fast no-LLM pass can
 crack the question early before any costly judge or human runs.
 
+```
 \procedure ~Instrument(Type:"" Params:"") ~Instrument <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Instrument Register-Scan "kind/deterministic ~ NO-LLM, read FIRST — a deterministic scan of the EMITTED markers (the classifier channel: ward, confidence, oracle, Voices, aperture; #house-resonances). Zero-cost, triangulates or cracks the question before the expensive instruments spin" >>
 <<~Instrument Sealed-Judge "kind/model-panel ~ empty-CWD · locked-key · LABEL-LAST (rationale first, score last) · RANDOMIZED order · a CROSS-FAMILY panel ~5. Nine-Judges-Two-Effective-Votes: a 9-judge panel buys ~2 INDEPENDENT votes, so unanimity carries ~9% error, never ~0.02% — monitor n_eff, escalate low-confidence to humans" >>
@@ -270,7 +276,9 @@ gold-anchor does not import a foreign rig, it instruments the house's own laws.
 The design borrows its statistics from psychometrics and information geometry, yet each load-bearing piece
 rhymes with a pattern-integrity the house already stands on — the rig reads as native, never bolted-on:
 
+```
 \procedure ~Resonance(Type:"" Params:"") ~Resonance <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Resonance Perspectivist-Gold "rhymes/Plurality Pono ~ keeping the rater DISTRIBUTION instead of averaging to one truth IS the house's plurality (the Thirteen genuinely disagree; the map shows its own uncertainty, noosphere-boot #voice-house)" >>
 <<~Resonance Null-Construct "rhymes/the nameless-sink ~ the bogus-item with no referent IS the operator's nameless-entity sink, and the Eris-shrine's one unswept corner (noosphere-boot #the-eris-shrine)" >>
@@ -330,6 +338,6 @@ spirit's lane); this meme states the design they enact.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DENLF7Kvwe-Wc5-aGN21di4D92SI7gq9wrc-uJHB74s
+<<^ code:"&#x0003;" >>ni:///sha-256;3W1v7NmQZ07cP2bs5eTlUaHf8GQN7GrwJygwqTlWgZw
 
 <<^ code:"&#x0004;" -> ? >>

@@ -94,7 +94,9 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~ confidence 13/20 >> The sensorium's confidence and precision reads resist the pull toward iterative fitting. Three identities keep them closed-form — cheap, stable, and honest:
 
+```
 \procedure ~Numeric(Type:"" Params:"") ~Numeric <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Numeric Signal-Fraction "form/conf = var(t) / (var(t) + var(r)) ~ a PARTITION-OF-VARIANCE confidence — task-variance over task-plus-residual variance; the fraction of the reading explained by signal, closed-form, no fit; conf→1 as residual vanishes, conf→0 as signal drowns" >>
 <<~Numeric Closed-Form-Precision "form/π* analytic ~ the optimal precision SETTLES analytically — the precision-weighting ([[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested]], confidence = precision) has a closed-form minimizer, so the settle takes ONE step, never an iteration to convergence" >>
@@ -145,6 +147,6 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uTHTVx44YeI-0ZZpyDAMI1109yQIlAs3FM76Ap9Lol4
+<<^ code:"&#x0003;" >>ni:///sha-256;f7nZaaJZYgYZSksOUzmvCB5AVbFnFBuBtznm0lC1vtk
 
 <<^ code:"&#x0004;" -> ? >>

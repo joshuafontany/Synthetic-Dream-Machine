@@ -40,7 +40,9 @@ Ordered by how much they touch — reach for the //least// that fixes your case:
 
 <<~ranks reach serve -> reconcile -> rebuild -> refresh -> fresh -> reset -> wake >>
 
+```
 \procedure ~Cure(Type:"" Params:"") ~Cure <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Cure refresh "after/CODE-CHANGED does/`pnpm -r build` THEN reconcile --fresh — recompile dist + re-pave + re-bake genesis + serve ~ THE post-edit cure" >>
 <<~Cure reconcile "after/just-converge does/stop the incumbent on the port (graceful→force, by port-access, no PID file) + [--fresh] wipe + serve ~ no rebuild" >>
@@ -120,6 +122,6 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mU1TwVrojSEj39t5qwIw38fx9ZXTLLbGEbxAq-2orHY
+<<^ code:"&#x0003;" >>ni:///sha-256;4kHUF4iGkM4r7nj4H4YbDY1_-VSp0qmqby7ngy5X78c
 
 <<^ code:"&#x0004;" -> ? >>

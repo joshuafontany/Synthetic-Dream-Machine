@@ -37,7 +37,9 @@ The golden path for getting //any// chat session + its telemetry into the palace
 
 !! The nine locks (decisions, not options)
 
+```
 \procedure ~Lock(Type:"" Params:"") ~Lock <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Lock 1-born-annotated "every record enters as {content · source_file · lar_*-metadata} computed at enqueue, content+annotation in ONE flush — zero un-annotated window (schema-on-write)" >>
 <<~Lock 1b-grammar-in-vm "the annotation is computed by the @daemon TW5 VM's GRADIENT MODULE — a tw5 js module that runs the NATIVE TW5 parser flow (`$tw.wiki.parseText` with our `<<~` overlay wikirule loaded) to build the FULL TW5+memetic-wikitext parse tree for each nalu item, then GRADES the sigil nodes GRACEFULLY: the grammar is CREATIVE not deterministic (it drops, partial-renders, drifts mid-turn), so the gradient reads how cleanly each sigil manifests (provisional→canon; a complete sigil grades high, a drifted/partial one low). ONE grammar, ONE runtime — the @daemon engine IS the parser (we DON'T fork Jeremy's parser, we overlay it). RETIRE turn-harvest.ts / the mesh harvestTurnGradient (the VM-free regex shadow). [lar-telemetry canon]" >>
@@ -187,6 +189,6 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2WX4JrOh3D-Hyg-QrGfnvEA8-FY_p73QIgzP3aEBK94
+<<^ code:"&#x0003;" >>ni:///sha-256;wdVJp6eUC8lA-d7tUmyhZUBb2voeHgDAQFrFaaWjc84
 
 <<^ code:"&#x0004;" -> ? >>

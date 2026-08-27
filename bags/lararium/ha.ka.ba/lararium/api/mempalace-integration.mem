@@ -73,7 +73,9 @@ The net (flat scalars — chroma's law):
 
 Memory recalls //and// captures across every harness, and each drawer carries its origin in `lar_surface`:
 
+```
 \procedure ~Surface(Type:"" Params:"") ~Surface <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Surface Claude "store/~~/.claude/projects route/cwd parse/native ~ CLI + VS Code ext share the store" >>
 <<~Surface Codex "store/~~/.codex/sessions/rollout-*.jsonl route/session_meta.cwd parse/native ~ Codex CLI + VS Code ChatGPT ext share the store" >>

@@ -39,7 +39,9 @@ a wrong answer here reads identically to a right one until a founding breaks.
 
 !! The five surfaces, and what each binds TO
 
+```
 \procedure ~Surface(Type:"" Params:"") ~Surface <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Surface Seal-epoch "binds/seated-keys + threshold moved-by/a-roster-or-quorum-change ~ genesisSealEpochCid — carries NO dependency, NO blob, NO version" >>
 <<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage" >>
@@ -198,7 +200,9 @@ a rebuild at an inconvenient moment.
 They move when the operator bumps the TW5 submodule or when this repo's source changes, and ''both of those
 are acts, never upgrades''.
 
+```
 \procedure ~Rule(Type:"" Params:"") ~Rule <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Rule Runtime-deps "when/before-founding cost/a-rebuild-if-skipped surface/serde-only ~ automerge · noble · ws · vite" >>
 <<~Rule TW5-submodule "when/an-ACT-never-an-upgrade cost/every-delegation-edge surface/hearthTrueName ~ moves the PLACE half of the atom" >>
@@ -214,6 +218,6 @@ are acts, never upgrades''.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SXXA78cNZhQ7WWVsuPCJDhoSATimmbGNg55mzZC0uvk
+<<^ code:"&#x0003;" >>ni:///sha-256;4f1RB8oD5gUXhZfOfmR59pU8er-az3W2IIxUcbwC9a4
 
 <<^ code:"&#x0004;" -> ? >>

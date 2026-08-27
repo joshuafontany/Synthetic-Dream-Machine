@@ -361,9 +361,11 @@ single vector.
 syntax and accepted by TW5's own pragma parser; the call stands as a TW5 macro call ([MEMETIC-WIKITEXT] #lexical-structure). A
 processor binds the name; nothing about either side asks the host for an extension.
 
+```
 \procedure ^(code)
 <<^ code:"&#x000N;" >>
 \end
+```
 
 !!! Named, colon-paired, TW5-native
 
@@ -1059,6 +1061,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fSNU2EnsKVuS8jK0W4Be1vRtEyBERv7z_XoRmM_NjdI
+<<^ code:"&#x0003;" >>ni:///sha-256;_YLw8ybN3n-ttykXG3CqU7jeLRGKYB00f66BnSrJgqM
 
 <<^ code:"&#x0004;" -> ? >>

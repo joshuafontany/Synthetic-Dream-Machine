@@ -39,7 +39,9 @@ The invariant: ''a holder may know a thing's ADDRESS without carrying its BODY''
 
 !! The three grains — same integrity, different water
 
+```
 \procedure ~Grain(Type:"" Params:"") ~Grain <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Grain Tiddler "skinny/fields-only-no-text fat/hydrated-with-body owner/TW5 lineage/the wiki's own lazy-load ~ the envelope arrives, the body follows" >>
 <<~Grain Body "skinny/the-handle-names-a-cid resolved/the-bytes-carried owner/content-resolution lineage/skinny handle ~ the name travels, the body resolves on demand" >>
@@ -119,6 +121,6 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YXVsP3I_X7CT5ziV-3sNZvA5SP2ES8eC2zHXONwtXbY
+<<^ code:"&#x0003;" >>ni:///sha-256;9NhF7HKrdwSQQkNL4j1JLj4lNg0jBN05rGa8PREgOTQ
 
 <<^ code:"&#x0004;" -> ? >>

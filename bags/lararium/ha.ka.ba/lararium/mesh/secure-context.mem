@@ -125,7 +125,9 @@ A browser vessel persists its signing key as a hex seed, so a same-origin read y
 
 ''The vessel's own insight applies to exactly one of the two keys the browser holds.''
 
+```
 \procedure ~KeyClass(Type:"" Params:"") ~KeyClass <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~KeyClass Device "opaque/YES resurrection/never — re-mint and re-admit cure/a non-extractable handle" >>
 <<~KeyClass PersonaRoot "opaque/STRUCTURALLY-NO resurrection/losing it loses the persona cure/an at-rest seal" >>
@@ -205,6 +207,6 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Hst40B2IAmuuckchAMMaPM8PzOy1LqW1pU1HKnXs0y8
+<<^ code:"&#x0003;" >>ni:///sha-256;ckA4YpwOshLchhLYDZ2_Bxr-efgxxj6NkITyvF-1XoE
 
 <<^ code:"&#x0004;" -> ? >>

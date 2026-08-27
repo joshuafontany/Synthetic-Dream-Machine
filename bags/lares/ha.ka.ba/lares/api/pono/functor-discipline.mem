@@ -89,7 +89,9 @@ composition name the same vow in two registers — keep what //moves//, never fr
 Each row names a functor the architecture already runs. Read `C → D` as //source ↦ target//; the
 "preserves" column names the arrow-honoring that makes recall, collapse, or addressing work.
 
+```
 \procedure ~Instance(Type:"" Params:"") ~Instance <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Instance Form-Encoder "map/Move → Vec objects/jurus (move-forms) ↦ form-vectors morphisms/permainan (move-transitions) ↦ vector-trajectories preserves/composition ~ THIS is why move-similarity ⟺ vector-similarity; recall works BECAUSE the functor preserves structure" >>
 <<~Instance Compose "map/CapStack → Instance objects/#has-additions ↦ behavior-extensions morphisms/cap-precedence + teardown-order ↦ op-surface composition preserves/every op-surface, byte-stable ~ the holder + palace collapses were functorial folds of a shared transport" >>
@@ -146,7 +148,9 @@ constrained them — and with that structure go the distinctions the morphisms c
 serves (abstraction drops detail on purpose); ''over''collapse forgets the load-bearing arrows. The
 three warded failure modes read as ''one discipline'' under this lens — each erases a different arrow:
 
+```
 \procedure ~Forget(Type:"" Params:"") ~Forget <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Forget Observer-Erasure "ward/L-Prime erases/the standpoint-morphism ~ the copula keeps subject and predicate (objects) and erases the observer's arrow between them — X=Y asserts a global-now the system cannot hold cure/re-open the hand; carry the verb" >>
 <<~Forget Compose-Not-Inherit "ward/has-stack erases/the distinct-shape morphisms ~ the god-base-class / is-a keeps a type-hierarchy (objects) and flattens each component's own arrows; interfaces-and-implements stands rejected cure/compose a #has stack; each carried thing speaks for itself" >>
@@ -181,7 +185,9 @@ The house holds one ''core'' name for the functor and two ''secondary'' carries,
 different angle. The dictionary glosses ride below as ''reference rows'' (a pattern integrity — wave,
 not water; no live essence-claim, the ward stays clean), grounded in Pukui-Elbert.
 
+```
 \procedure ~Olelo(Type:"" Params:"") ~Olelo <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Olelo Malama-Pili "rank/CORE term/mālama pili gloss/mālama ~ to keep, tend, care for, preserve, maintain (the kahu/keeper verb) · pili ~ cling, adhere, relation, connection, close relationship (nominal pilina ~ connection) reads/the keeper keeping the relations — the functor TENDS its morphisms as a kahu tends the shrine; ties the keel to the house's own keeper/Lares identity" >>
 <<~Olelo Unuhi-Kulike "rank/secondary term/unuhi kūlike gloss/unuhi ~ translate, draw across, extract · kūlike ~ alike, in agreement reads/the faithful carry-across — structurally apt for 'map that preserves', but unuhi kūlike carries a SPECIFIC literal-translation idiom, so it stays contextual, never the core" >>
@@ -234,7 +240,9 @@ cap-stack lives in the worker and lifts as one — no cap splits away."
 isomorphism-by-composition ([[island-isomorphism|lar:///ha.ka.ba/lararium/api/island-isomorphism]]) the encoder module stays //pure//, so it //could// run
 on the coordinator. Two faults follow if it does:
 
+```
 \procedure ~Fault(Type:"" Params:"") ~Fault <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Fault Overcollapse "breaks/the place-discipline ~ work lands where only routing belongs; the coordinator swells past its office, the no-VM-on-main invariant bends" >>
 <<~Fault Broken-Symmetry "breaks/the functor-symmetry ~ a coordinator-side replica runs a DIFFERENT or DEGRADED map than the worker — an unparsed query carries no structural plane, so it yields a truncated Move→Vec; query-side and corpus-side stop sharing ONE functor, and 'vector-nearness ⟺ move-nearness' fails" >>
@@ -253,7 +261,9 @@ collapses the model to ''today's usage'' — the move the Mu-exit wards against 
 territory. No absence of a present need licenses breaking the lift-whole shape; the model holds
 regardless of current use.
 
+```
 \procedure ~Trap(Type:"" Params:"") ~Trap <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Trap No-State-Now "tempts/the present-tense carve-out ~ 'it needs no worker state NOW' justifies splitting a read onto the coordinator breaks/the model by usage ~ no absence of today's need licenses shattering the lift-whole shape cure/the Mu-exit ~ believe no convenient frame; keep the stack whole against the use you have not yet made" >>
 
@@ -349,6 +359,6 @@ This meme draws the one arrow through all of them — ''the house is a functor; 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oR9qpgLkYzfKBozHuf5Q_eliNpTMq8LJGbzz_b4yHJM
+<<^ code:"&#x0003;" >>ni:///sha-256;CJZY1Z_W_c5SWGFrjIRhLbqMVdsZe9C1DFGuXJNSC54
 
 <<^ code:"&#x0004;" -> ? >>

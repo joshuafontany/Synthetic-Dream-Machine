@@ -67,7 +67,9 @@ five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
 
 !! The Four Registers
 
+```
 \procedure ~Register(Type:"" Params:"") ~Register <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Register RAM "axis/sovereign·lived holder/each-peer metaphor/the-breath grain/the-turn federates/no ~ the live chat as working state, polymorphic across client-forms (cli-session · embedded-extension · floating-desktop-app · browser · Mudlet · Unreal); each turn runs a causal island, no shared now across the turn boundary; the source that drains two ways" >>
 <<~Register Seat "axis/sovereign·distilled holder/each-peer-by-kind metaphor/the-home grain/standing federates/no ~ the holder's persistent continuity — a human keeps a DreamDeckSurface (composed, spatial), a node keeps Agent.MEMORY (curated, propositional); one office, the medium each mind thinks in" >>
@@ -196,7 +198,9 @@ one `lar:` namespace.
 RAM, the lived sovereign register, drains in ''two independent directions'' at the
 turn's close. Neither drain feeds the other:
 
+```
 \procedure ~Drain(Type:"" Params:"") ~Drain <<Type>> holds [{{{ [<Params>] }}}]
+```
 
 <<~Drain Verbatim "into/MemPalace as/episodic-drawer grain/turn ground/byte-stable ~ the full turn lands as testimony; the bearing-harvest reads aim→yield over it" >>
 <<~Drain Authored "into/Quine as/standing-meme path/@working→MOVE→canon ~ the operator authors meaning, crossing the shore by a witnessed residency verb" >>
@@ -280,6 +284,6 @@ conflict press a `hoike`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;j57FCMkwmZXXhNiTjiPR0193-N79Brhuuoezjvcin-Y
+<<^ code:"&#x0003;" >>ni:///sha-256;qUPvR2THFAwMf1yOGM70GzqFTCQeDFE0Wc60KiUrA-k
 
 <<^ code:"&#x0004;" -> ? >>
