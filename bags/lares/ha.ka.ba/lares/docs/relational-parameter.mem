@@ -206,6 +206,7 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 <<~Gauge Silence "counts/invocations-that-re-read-without-erroring red/any ~ the Prolog failure arrives silent, never as a syntax error" >>
 <<~Gauge Nesting "counts/arrows-marked-inside-brackets-or-quotes red/any-unmarked ~ `Gauge(10 -> 12)` degrades on the gradient; a mark inside a nest reads as a fault" >>
 <<~Gauge Reach "counts/sigil-invocations-that-changed red/any ~ the sigil path stands outside this work by design" >>
+<<~Gauge Standing "counts/arrow-chains-the-seeds-write-unquoted green/all ~ the authored form ALREADY reads as the plan renders it; a quote returning to a chain marks the plan slipping" >>
 
 <<~/ahu >>
 
@@ -220,6 +221,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;nlb8bLC6mHeEiKdL5FqeH_M8obF0tMfuo9lqGipJyK8
+<<^ code:"&#x0003;" >>ni:///sha-256;stDIDN6U-qZdkJIZytPrBdZgifmIrBCW_C3tPsKFH2E
 
 <<^ code:"&#x0004;" -> ? >>

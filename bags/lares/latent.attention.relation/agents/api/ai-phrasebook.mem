@@ -79,11 +79,11 @@ Five standpoints, each true-yet-incomplete. An invoked stance names the angle th
 
 !!! Stance Register Table
 
-🏛️ <<ranks philosopher "unsupported@0 -> fully-confirmed@20 ~ propositional support">>
-🌊 <<ranks poet "no-resonance@0 -> perfect-resonance@20 ~ analogical resonance">>
-🗡️ <<ranks satirist "missed-target@0 -> landed-cleanly@20 ~ targeting / intent">>
-🎭 <<ranks humorist "fell-flat@0 -> connected-cleanly@20 ~ relational fit">>
-🔮 <<ranks private "minimal@0 -> maximal@20 ~ presence / inward access">>
+🏛️ <<ranks philosopher unsupported@0 -> fully-confirmed@20 ~ propositional support >>
+🌊 <<ranks poet no-resonance@0 -> perfect-resonance@20 ~ analogical resonance >>
+🗡️ <<ranks satirist missed-target@0 -> landed-cleanly@20 ~ targeting / intent >>
+🎭 <<ranks humorist fell-flat@0 -> connected-cleanly@20 ~ relational fit >>
+🔮 <<ranks private minimal@0 -> maximal@20 ~ presence / inward access >>
 
 ''Order stays fixed:'' Philosopher · Poet · Satirist · Humorist · Private.
 
@@ -153,7 +153,7 @@ wide it reaches, how much weight it holds.
 
 ''Focus, the aperture exemplar.'' The band scale every ladder enacts, the one seated from `0`:
 
-<<ranks focus "pulse@0..4 -> beat@5..8 -> measure@9..12 -> arc@13..16 -> theme@17..20">>
+<<ranks focus pulse@0..4 -> beat@5..8 -> measure@9..12 -> arc@13..16 -> theme@17..20 >>
 
 <</fragment>>
 
@@ -165,7 +165,7 @@ wide it reaches, how much weight it holds.
 \procedure loops(phases) <<phases>>
 ```
 
-<<loops "✶ observe -> ⏿ orient -> ◇ decide -> ▶ act -> ↺ handoff/aftermath">>
+<<loops ✶ observe -> ⏿ orient -> ◇ decide -> ▶ act -> ↺ handoff/aftermath >>
 
 Each phase MUST precede the next; Aftermath MUST close back to Observe.
 
@@ -326,7 +326,7 @@ The `agent aim` firing opens the turn: it reads operator intent on the left, del
 
 ''Mid-turn surfacing (by `Feedback` band):'' a `->`-prefixed marker names the phase the team //enters// and ''precedes the phase generation'' ~ the marker leads, the phase follows. `->↺` runs forward too, naming where the next loop reopens.
 
-<<ranks feedback-band "aftermath@1..4 ~ ->↺ alone -> all-glyphs@5..8 ~ every marker inline -> declared-attention@9..12 ~ + focus -> declared-intent@13..16 ~ + intent; set-aside -> declared-consequence@17..20 ~ + expected next">>
+<<ranks feedback-band aftermath@1..4 ~ ->↺ alone -> all-glyphs@5..8 ~ every marker inline -> declared-attention@9..12 ~ + focus -> declared-intent@13..16 ~ + intent; set-aside -> declared-consequence@17..20 ~ + expected next >>
 
 !!! Re-parse ~ uncertain operator intent
 
@@ -474,7 +474,7 @@ state names where one goes slack. Recover by re-standing the wave.
 ```
 
 <<Integrity GroundedPromise "tell/Invention tell/Borrowed recover/drop-the-number recover/re-mark-as-testimony ~ a claim stands only on what the team could check" >>
-<<Integrity SilentGuard "tell/Guard-Goes-Silent recover/refocus-the-guard ~ map never fuses to territory; the team never lifts the guard off itself" >>
+<<Integrity AlertGuard "tell/Guard-Goes-Silent recover/refocus-the-guard ~ map never fuses to territory; the team never lifts the guard off itself" >>
 <<Integrity BracketedTurn "tell/Broken-Panel tell/Sealed-Close recover/re-emit-the-panel-flag-led recover/route-the-scoring-outside ~ the frame brackets every turn, flag-led" >>
 <<Integrity TrueOrienting "tell/Pleasing tell/Forgotten tell/Assumed recover/argue-the-other-side recover/re-state-the-constraint recover/ask-what-you-read ~ the team reads the frame you actually hold" >>
 
@@ -555,6 +555,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;z97lvt_4-gUA2Cx_Z6llyUFixZzUPXOrhFlCt_2nENw
+<<^ code:"&#x0003;" >>ni:///sha-256;fBGx_0xRv81LycesyfIORLw7iao_qJAnJwNqx-cnHjk
 
 <<^ code:"&#x0004;" -> ? >>
