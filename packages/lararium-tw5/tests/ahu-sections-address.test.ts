@@ -17,7 +17,7 @@
  *
  *                               A NESTED section is not that fault. Nesting is deliberate house
  *                               structure — an OODA-HA phase carries its ha/ka/ba triple — and it
- *                               addresses under a compound fragment, `#observe/observe-ha`. ② reads
+ *                               addresses under a ROOTED path, `#/observe/observe-ha`. ② reads
  *                               the LEAF, so a nest passes and a swallowed section fails.
  *   ② EVERY OPEN ADDRESSES.     The stronger claim, and the one that catches the rest: whatever the
  *                               cause, an opened section resolves to a tiddler.
@@ -72,7 +72,7 @@ function addressed(file: string, disk: string): Set<string> | null {
   for (const r of records) {
     // A NESTED SECTION ADDRESSES UNDER A COMPOUND FRAGMENT — `#parent/child`. The leaf is the name
     // the `<<~ ahu #child >>` open wrote, so the leaf is what an open must be found under.
-    const frag = /#([a-z0-9-]+(?:\/[a-z0-9-]+)*)$/i.exec(String(r["title"] ?? ""));
+    const frag = /#\/?([a-z0-9-]+(?:\/[a-z0-9-]+)*)$/i.exec(String(r["title"] ?? ""));
     if (frag) { const leaf = frag[1]!.split("/").pop()!; if (!leaf.startsWith("$")) out.add(leaf); }
   }
   return out;

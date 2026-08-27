@@ -23,7 +23,7 @@ import { fencedSpans, maskedExecAll } from "./fence-mask.js";
  * `parentURI#parent/child/grandchild` — single-hash invariant; the
  * fragment-path is the addressable hierarchy.
  */
-export const AHU_OPEN_RE  = /<<~[^>]*\bahu\s+(#[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+\S+)?\s*>>/g;
+export const AHU_OPEN_RE  = /<<~[^>]*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+\S+)?\s*>>/g;
 export const AHU_CLOSE_RE = /<<~\/ahu\s*>>/g;
 
 /**
@@ -116,15 +116,32 @@ export function collectAhuSlots(text: string): Set<string> {
 /**
  * Compose a fragment-path slot identifier under an enclosing prefix.
  *
- *   composeSlotPath("",          "#thesis")   → "#thesis"          (root child)
- *   composeSlotPath("#parent",   "#child")    → "#parent/child"    (one nested)
- *   composeSlotPath("#a/b",      "#c")        → "#a/b/c"           (two nested)
+ *   composeSlotPath("",          "#thesis")   → "#thesis"          (root child, an ANCHOR)
+ *   composeSlotPath("#parent",   "#child")    → "#/parent/child"   (one nested, a PATH)
+ *   composeSlotPath("#/a/b",     "#c")        → "#/a/b/c"          (two nested)
  *
- * Slot identifiers carrying their own `/`-paths (operator-authored
- * pre-flattened) get appended verbatim under the prefix.
+ * TWO GRAMMARS SHARE THE FRAGMENT SPACE, PARTED BY THE FIRST CHARACTER — the split JSON Schema
+ * draws between a JSON Pointer (`#/$defs/x`) and an `$anchor` (`#x`), reached here for the same
+ * reason: a reader and a parser tell them apart without lookahead.
+ *
+ *   `#name`    a PLAIN-NAME ANCHOR. A root-level section answers here, and every other bare name
+ *              stays free for the page anchors a live wiki renders in a browser.
+ *   `#/a/b`    a ROOTED PATH. A nested section answers HERE AND NOWHERE ELSE — it takes no bare
+ *              alias, so it never reaches into the anchor space.
+ *
+ * The leading slash appears exactly where a path exists. A root child has none to state, so it
+ * stays bare — which is also why the corpus's existing citations neither move nor break.
+ *
+ * `/` rides a fragment unescaped by RFC 3986 §3.5 (`fragment = *( pchar / "/" / "?" )`), and a
+ * media type may define structure within it; `#` may not repeat, so a nested address could never
+ * have taken the `#a#b` shape.
+ *
+ * Slot identifiers carrying their own `/`-paths (operator-authored pre-flattened) get appended
+ * verbatim under the prefix.
  */
 export function composeSlotPath(prefix: string, slot: string): string {
-  if (!prefix) return slot;
+  if (!prefix) return slot;                                   // a root child stays an anchor
   const slotTail = slot.startsWith("#") ? slot.slice(1) : slot;
-  return `${prefix}/${slotTail}`;
+  const rooted   = prefix.startsWith("#/") ? prefix : `#/${prefix.slice(1)}`;
+  return `${rooted}/${slotTail}`;
 }

@@ -57,7 +57,7 @@ const ETX_RE  = /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
 const ETB_RE  = /<<\^(?:[^>\n]|->)*&#x0017;(?:[^>\n]|->)*>>/;
 // EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ? >>)
 const EOT_RE  = /<<[~^](?:(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*|\s*->\s*\?)\s*>>/;
-const AHU_OPEN_RE  = /<<~(?:[^>\n]|->)*\bahu\s+(#[\w-]+)\s*>>/;
+const AHU_OPEN_RE  = /<<~(?:[^>\n]|->)*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)\s*>>/;
 const AHU_CLOSE_RE = /<<~\s*\/\s*ahu\s*>>/;
 
 type Hit = { index: number; end: number; cap: string | undefined };

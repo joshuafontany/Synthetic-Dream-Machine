@@ -666,7 +666,7 @@ function extractSlotStructure(
   // The slot grammar mirrors AHU_OPEN_RE: a slash-path slot (`#a/b/c`)
   // addresses a nested fragment and MUST round-trip whole — a `#[\w-]+`-only
   // match clipped the path at the first `/`, orphaning the slot's body.
-  const refRe = /<<~\s*kahea\s+ahu\s+#[\w-]+(?:\/[\w-]+)*\s*>>/g;
+  const refRe = /<<~\s*kahea\s+ahu\s+#\/?[\w-]+(?:\/[\w-]+)*\s*>>/g;
   let lastEnd = -1;
   for (const m of maskedExecAll(remainder, refRe)) {
     lastEnd = m.index + m[0].length;
@@ -940,9 +940,20 @@ function emitMetaToml(fields: TiddlerFields, deny: ReadonlySet<string>, parentFi
 export const CARRIAGE_PARTS = ["prologue", "preamble", "header-text", "postamble"] as const;
 export type CarriagePart = (typeof CARRIAGE_PARTS)[number];
 
-/** A carriage record's address. A fragment already carries a `#`, so its carriage extends the path. */
+/**
+ * A carriage record's address.
+ *
+ * At a carrier root the carriage takes a plain-name anchor — `#$postamble`. Under a section it
+ * extends that section's path, and a path roots: `#/observe/$postamble`, never `#observe/$postamble`.
+ * The leading slash marks a path wherever one exists (composeSlotPath), and a carriage under a
+ * section is a path like any other.
+ */
 export function carriageUri(carrierUri: string, part: CarriagePart): string {
-  return carrierUri.includes("#") ? `${carrierUri}/$${part}` : `${carrierUri}#$${part}`;
+  const cut = carrierUri.indexOf("#");
+  if (cut < 0) return `${carrierUri}#$${part}`;
+  const base = carrierUri.slice(0, cut);
+  const frag = carrierUri.slice(cut + 1);
+  return `${base}#/${frag.replace(/^\//, "")}/$${part}`;
 }
 
 /** One carriage record, or nothing where the part holds no content. */
@@ -963,7 +974,7 @@ function carriageText(reader: FieldsReader, carrierUri: string, part: CarriagePa
   return r && typeof r["text"] === "string" ? (r["text"] as string) : "";
 }
 
-const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#[\w-]+(?:\/[\w-]+)*)\s*>>/g;
+const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)\s*>>/g;
 
 /**
  * Splice child definition blocks back over their kahea markers, full depth.

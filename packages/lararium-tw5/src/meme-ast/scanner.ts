@@ -62,7 +62,7 @@ export const BOOTSTRAP_SCANS: SigilScan[] = [
   // spec §5.3 + lar-uri.md §5.6, the URI fragment is a path within the meme;
   // nested ahu blocks produce child tiddlers at `parentUri#parent/child`
   // rather than dedicated `#parent#child` URIs (single-hash invariant).
-  { sigilName: "ahu", regex: /<<~(?:[^>]|->)*\bahu\s+(#[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+(\S+))?\s*>>/g, eventType: "open"  },
+  { sigilName: "ahu", regex: /<<~(?:[^>]|->)*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+(\S+))?\s*>>/g, eventType: "open"  },
   { sigilName: "ahu", regex: /<<~\/ahu\s*>>/g,                                                          eventType: "close" },
   // Pranala — block before inline (block wins at same position)
   { sigilName: "pranala", regex: /<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)(?:\s+family:([\w-]+))?(?:\s+role:([\w-]+))?\s*>>([\s\S]*?)<<~\/pranala\s*>>/gs, eventType: "leaf" },
