@@ -533,7 +533,7 @@ carrier states first ([FRAMING] #declaration-register):
 
 <<~ ahu #head >>
 Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
-<<~ pranala #governs ? -> lar:///ha.ka.ba/lares/api/pono/loci family:control role:has >>
+<<~ pranala #governs ? -> lar:///ha.ka.ba/lares/api/pono/loci family=control role=has >>
 <<~/ahu >>
 
 <<^ code:"&#x0003;" >>ni:///sha-256;…
@@ -555,7 +555,7 @@ A conditional over a guest filter, and an iteration:
 
 A canvas reaction wire (flow surface):
 ```
-<<~ papalohe DeviceA -> DeviceB trigger:OnEliminated fn:ShowScore >>
+<<~ papalohe DeviceA -> DeviceB trigger=OnEliminated fn=ShowScore >>
 ```
 
 <a id="references"></a>

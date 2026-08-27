@@ -82,7 +82,7 @@ Loulou (`loulou`) was sourced from the cultural team directly and is treated as 
 `<<~` marks the Lararium sharktooth namespace. All Dream-Code commands use this prefix.
 
 ```text
-<<~ command arg1 arg2 key:value>>          inline / self-closing
+<<~ command arg1 arg2 key=value>>          inline / self-closing
 <<~ command ...>>                           block opener (when command permits body)
 <<~/command>>                              block closer
 ```
@@ -282,11 +282,11 @@ Body text, local claims, citations, or child sigils.
 !!! Block-vs-inline rendering declaration
 
 ```text
-<<~ wehe my-procedure (param1 param2) shape:block>>
+<<~ wehe my-procedure (param1 param2) shape=block>>
 Procedure body.
 <<~/wehe>>
 
-<<~ helu my-function (input) shape:inline>>
+<<~ helu my-function (input) shape=inline>>
 Function expression.
 <<~/helu>>
 ```
@@ -416,6 +416,6 @@ When editing grammar meme or parser:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;nsejd_wcRFHHtpTf0vRxrvUi8xn6n9z3rBlCEXbQ7NA
+<<^ code:"&#x0003;" >>ni:///sha-256;UdlZ5vEtNK2b5H9Ju1phU7J32F3--Z3Yd_9jGzG7P1Y
 
 <<^ code:"&#x0004;" -> ? >>

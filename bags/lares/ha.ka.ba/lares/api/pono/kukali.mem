@@ -63,7 +63,7 @@ A kukali that cancels MUST reject its suspension Promise cleanly without leaking
 
 ```text
 <<~ kukali >>
-<<~ kukali trigger:SlotName >>
+<<~ kukali trigger=SlotName >>
 <<~ \suspends >>
 <<~ \suspends trigger:SlotName >>
 ```
@@ -79,11 +79,11 @@ Regex (canonical):
 !!! Paired usage with papalohe
 
 ```text
-<<~ papalohe #on-score DeviceA -> ScoreDisplay trigger:OnEliminated fn:Show >>
+<<~ papalohe #on-score DeviceA -> ScoreDisplay trigger=OnEliminated fn=Show >>
 
 ... body ...
 
-<<~ kukali trigger:on-score >>
+<<~ kukali trigger=on-score >>
 ```
 
 `trigger:on-score` in kukali references `#on-score` — the fragment of the papalohe wire above.
@@ -103,7 +103,7 @@ OnEliminated<override>()<suspends> : void =
 ```
 
 Kukali maps this into memetic-wikitext:
-* `<suspends>` annotation → `<<~ kukali trigger:slot-name >>`
+* `<suspends>` annotation → `<<~ kukali trigger=slot-name >>`
 * Coroutine yield point → kukali sigil position in the carrier body
 * Resume on event → papalohe trigger fires; ReactionGraph resolves the subscribeOnce Promise
 
@@ -146,6 +146,6 @@ sigilName = "kukali"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;91YdVDEdBJEnEOGZ-gOx_PWK7vDMNCUaeqMPujpgKGw
+<<^ code:"&#x0003;" >>ni:///sha-256;mMUAIcaM4aTFMlkAqoI5YmvhFm6Y5bB7BmDjArrDRmw
 
 <<^ code:"&#x0004;" -> ? >>

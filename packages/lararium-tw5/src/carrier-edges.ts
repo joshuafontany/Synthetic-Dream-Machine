@@ -43,12 +43,19 @@ export interface CarrierEdge {
 
 const PATTERNS: ReadonlyArray<readonly [EdgeForm, RegExp]> = [
   ["loulou",   /<<~\s*loulou\s+lar:\/\/\/(\S+?)\s*>>/g],
-  // THE BEARING ARROW CARRIES A `>`. A `pranala` states its target as `? -> lar:///…`, so a scan of
+  // THE BEARING ARROW CARRIES A `>`. A `pranala` states its target past the arrow, so a scan of
   // `[^>]*?` stops at the arrow and the sigil never reaches its own address — silently, as a form that
   // simply reports no edges. `(?:[^>]|->)*?` is the form every scan in this grammar uses, for this
   // reason. Measured: without it this reader found 0 of the corpus's 84 `pranala` edges, and reported
   // 163 dangling where 194 stand.
-  ["pranala",  /<<~\s*pranala(?:[^>]|->)*?lar:\/\/\/(\S+?)[\s>]/g],
+  //
+  // AN EDGE IS THE END IT POINTS AT. A `pranala` names both ends — `from=` and `to=` — and only the
+  // `to=` end is the edge; the `from=` end is where the carrier already stands. A lazy scan for the
+  // first address after the sigil reads whichever end comes first, which is the SOURCE. That reads
+  // right for the 143 carriers writing `from=?` and wrong for the 3 writing `from=lar:///…`: their
+  // sources counted as dangling edges while their targets went uncounted. Anchoring on `to=` names
+  // the end that travels.
+  ["pranala",  /<<~\s*pranala(?:[^>]|->)*?\bto=lar:\/\/\/(\S+?)[\s>]/g],
   ["kahea",    /<<~\s*kahea(?:[^>]|->)*?lar:\/\/\/(\S+?)[\s>]/g],
   ["wikilink", /\[\[[^\]|]*\|lar:\/\/\/([^\]]+)\]\]/g],
   ["wikilink", /\[\[lar:\/\/\/([^\]|]+)\]\]/g],

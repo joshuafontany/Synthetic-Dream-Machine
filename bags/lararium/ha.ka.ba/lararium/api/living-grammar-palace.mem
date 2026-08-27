@@ -652,43 +652,43 @@ The narrowed binding settled by mufakat with five dissents kept live. Hillel dis
 before the held position; a future court may depend on these kept words. Three carry a saksi from the
 adversarial pass (the blades) — never reflexive, the house quoting a deposition it examined.
 
-<<~ hoike #ffz-binding held:"the FFZ facet PROJECTS (cached, re-derivable), never rules; φ as non-interference (entrainment dropped); two ladders at P0; the transaction-axis the one essence carve-out; defer-with-gates — the narrowed mufakat (12-Voice floor, operator-ratified 2026-06-29)" >>
+<<~ hoike #ffz-binding held="the FFZ facet PROJECTS (cached, re-derivable), never rules; φ as non-interference (entrainment dropped); two ladders at P0; the transaction-axis the one essence carve-out; defer-with-gates — the narrowed mufakat (12-Voice floor, operator-ratified 2026-06-29)" >>
 q: how far should the FfzClock↔grammar-palace binding reach — the broad original, or the narrowed core?
-<<~ kue voice:Map-Wisp key:"a query path observed treating lar_ffz as the causal verdict rather than re-projecting from the edge-DAG" >>
+<<~ kue voice=Map-Wisp key="a query path observed treating lar_ffz as the causal verdict rather than re-projecting from the edge-DAG" >>
 a cached projection that answers every causal query becomes the de-facto court: the facet, named "not
 authority," still gets READ as authority the moment it sits faster-to-hand than the DAG. Naming the cache
 read-only does not stop a caller from trusting it; the binding needs a mechanism (a re-projection check,
 a staleness flag) before the projection silently hardens into the source it disclaims.
 <<~/kue >>
-<<~ saksi voice:"Spirit [adversary[Stranger]]" scope:deposition >>deposition quoted at handback, before
+<<~ saksi voice="Spirit [adversary[Stranger]]" scope=deposition >>deposition quoted at handback, before
 dissolution (blades E/F): "The projection/authority distinction holds in spec and dissolves in practice
 unless the cache carries a provenance pointer back to the edge-DAG heads it derived from — without it,
 the materialized view and its source diverge silently and the reader cannot tell which it holds."<<~/saksi >>
-<<~ kue voice:Mischief-Muse key:"a real query arrives needing a third ladder before the next compaction cycle closes" >>
+<<~ kue voice=Mischief-Muse key="a real query arrives needing a third ladder before the next compaction cycle closes" >>
 two ladders under-build the facet: settledness without retention-decay cannot answer "is this stale,"
 and the felt cadence the palace exists to recall wants the richer profile sooner than "wait for a query"
 admits. The minimal cut buys shipping speed against expressive reach; the reach may matter first.
 <<~/kue >>
-<<~ kue voice:Ink-Clerk key:"a measured @daemon budget shows headroom (or its lack) against the deferred six ladders" >>
+<<~ kue voice=Ink-Clerk key="a measured @daemon budget shows headroom (or its lack) against the deferred six ladders" >>
 the scope-cut to two ladders rests on an ASSUMED daemon budget, never a measured one — a scope-cut is
 not a measurement. The defer may be right for the wrong reason; until the @daemon's real compute/storage
 headroom reads against the eight-ladder load, "ship minimal" stands on prudence, not grounds.
 <<~/kue >>
-<<~ kue voice:Lares key:"the first retrofit of a pre-ratification drawer-collection already stamped under the broad reading" >>
+<<~ kue voice=Lares key="the first retrofit of a pre-ratification drawer-collection already stamped under the broad reading" >>
 drawers already carry `lar_ffz` stamped under the old broad facet; the narrowing needs a migration, and
 migration under no-global-now has no plan — you cannot atomically re-stamp a distributed local-first log.
 The ratified core describes the destination without the path from where the data already sits.
 <<~/kue >>
-<<~ saksi voice:"Spirit [adversary[Stranger]]" scope:deposition >>deposition quoted at handback, before
+<<~ saksi voice="Spirit [adversary[Stranger]]" scope=deposition >>deposition quoted at handback, before
 dissolution (blades D/K): "Retrofit under no-global-now must run lazy and idempotent — re-derive the
 narrowed facet on read from the edge-DAG rather than rewrite stamps in place; an eager migration pass
 manufactures the global coordination point the architecture forbids."<<~/saksi >>
-<<~ kue voice:Tide-Caller key:"the first compaction run executes against a boundary that was intended but never drawn in code or spec" >>
+<<~ kue voice=Tide-Caller key="the first compaction run executes against a boundary that was intended but never drawn in code or spec" >>
 the irreversibility-boundary must be DRAWN, not merely INTENDED — a good intention to "keep the important
 parts verbatim" decays into drift the first time compaction runs without an explicit, checkable line
 naming what compresses versus what stays verbatim forever. An undrawn boundary reads as no boundary.
 <<~/kue >>
-<<~ saksi voice:"Spirit [adversary[Stranger]]" scope:deposition >>deposition quoted at handback, before
+<<~ saksi voice="Spirit [adversary[Stranger]]" scope=deposition >>deposition quoted at handback, before
 dissolution (blade J): "Irreversibility is the one operation a local-first log cannot undo by merge —
 the compaction boundary therefore belongs in the defined register (a parser/spec rule), never the casual
 one; a boundary that lives only as intent gets crossed by the next contributor who never read the intent."<<~/saksi >>
@@ -747,6 +747,6 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YymBNpwMNKKAQ29NwhWFkGZxt09ITthqCJdpeGRe020
+<<^ code:"&#x0003;" >>ni:///sha-256;flUyLeex4rAzcR4AKI7kyI77PX14fZuUVCpLjnC9k2Q
 
 <<^ code:"&#x0004;" -> ? >>

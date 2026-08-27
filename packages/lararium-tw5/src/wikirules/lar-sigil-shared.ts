@@ -106,8 +106,11 @@ export function matchCompoundSigilAt(
   const m = COMPOUND_OPEN_RE.exec(source);
   if (!m || m.index !== start) return null;
   const word1 = m[1]!.replace(/^\\/, "");
-  // pranala is a permanent JS exception: its <<~ pranala FROM -> TO >> arrow syntax
-  // is structurally distinct from <<~ WORD ARGS >> and cannot collapse into compound.
+  // PRANALA STANDS OUT FOR ITS FIELDS, NOT ITS SHAPE. `<<~ pranala #x from=A -> to=B family=c >>`
+  // now spells its parameters the way every other sigil does, so the compound reader CAN match it —
+  // it would hand back one undifferentiated `rest`. The edge graph needs `from` and `to` as separate
+  // named ends (a reader that takes whichever address comes first names the SOURCE), so pranala keeps
+  // its own matcher to type those two fields. The arrow between them is the last of its shape.
   if (word1 === "pranala") return null;
   const rest = (m[2] ?? "").trim();
 
@@ -153,7 +156,7 @@ export function matchPranalaOpenAt(source: string, start: number): PranalaOpenMa
   const [, slot, from, to, tail] = m;
   const attrs: Record<string, string> = {};
   if (tail) {
-    const attrRe = /(\w+):([^\s>]+)/g;
+    const attrRe = /(\w+)=([^\s>]+)/g;
     let am: RegExpExecArray | null;
     while ((am = attrRe.exec(tail)) !== null) {
       attrs[am[1]!] = am[2]!;

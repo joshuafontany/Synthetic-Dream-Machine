@@ -64,9 +64,9 @@ A papalohe MUST NOT carry `traversal:both`; reciprocal wires MUST use two parall
 
 ```text
 <<~ papalohe FROM -> TO >>
-<<~ papalohe FROM -> TO listenable:EventName >>
-<<~ papalohe FROM -> TO listenable:EventName subscribable:FunctionName >>
-<<~ papalohe #fragment FROM -> TO listenable:OnEliminated subscribable:ShowScore >>
+<<~ papalohe FROM -> TO listenable=EventName >>
+<<~ papalohe FROM -> TO listenable=EventName subscribable=FunctionName >>
+<<~ papalohe #fragment FROM -> TO listenable=OnEliminated subscribable=ShowScore >>
 ```
 
 `? ->` MAY compress when enclosing pressure carries the source socket.
@@ -132,6 +132,6 @@ Two values, distinct Verse-side origins:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ImbKR2WC0od5KsNb90yWDQP78YQQshINp65zPSsc4uw
+<<^ code:"&#x0003;" >>ni:///sha-256;skoWRxZfIvsSWShzHAQprW9-WOu0gJ3_YZGQzEzUkl8
 
 <<^ code:"&#x0004;" -> ? >>

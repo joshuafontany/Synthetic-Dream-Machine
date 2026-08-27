@@ -107,7 +107,7 @@ Queries memes by reaction-family (papalohe) edges. Useful for finding UEFN devic
 [edge:family[reaction]dir[outbound]]            memes that emit reaction edges (event sources)
 ```
 
-The `trigger` property carries the event name from the `papalohe` sugar form (`<<~ papalohe FROM -> TO trigger:OnBegin >>`).
+The `trigger` property carries the event name from the `papalohe` sugar form (`<<~ papalohe FROM -> TO trigger=OnBegin >>`).
 
 <<~/ahu >>
 
@@ -229,6 +229,6 @@ Systematic find-replace for authors migrating TW5 content:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8RkW-5VXW7US7Cq96r52qrMpPDNWA6Q82MehVT3x9-M
+<<^ code:"&#x0003;" >>ni:///sha-256;j7TcTcv-YUzNEkhTQ2itjGTHIleP9MMO6HYxzbNY6nw
 
 <<^ code:"&#x0004;" -> ? >>

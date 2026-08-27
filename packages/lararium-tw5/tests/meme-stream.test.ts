@@ -40,7 +40,7 @@ const FULL_CARRIER = [
   `<<~/ahu >>`,
   ``,
   `<<~ ahu #edges >>`,
-  `<<~ pranala ? -> lar:///AGENTS family:control role:implements >>`,
+  `<<~ pranala ? -> lar:///AGENTS family=control role=implements >>`,
   `<<~/ahu >>`,
   ``,
   `<<^ code:"&#x0003;" >>`,

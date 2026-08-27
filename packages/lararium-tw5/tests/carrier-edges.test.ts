@@ -24,7 +24,10 @@ describe("carrier-edges — every address a carrier points at", () => {
   test("every form a carrier can name an address in is read", () => {
     const src = [
       "<<~ loulou lar:///ha.ka.ba/a/one >>",
-      '<<~ pranala #x ? -> lar:///ha.ka.ba/a/two family:control >>',
+      // Both ends stated, so this also holds the reader to the end that TRAVELS: the source is
+      // `a/source` and the edge is `a/two`. A reader taking the first address passes every other
+      // assertion here and still names the wrong carrier.
+      '<<~ pranala #x from=lar:///ha.ka.ba/a/source -> to=lar:///ha.ka.ba/a/two family=control >>',
       "<<~ kahea ahu lar:///ha.ka.ba/a/three >>",
       "[[a name|lar:///ha.ka.ba/a/four]]",
       "[[lar:///ha.ka.ba/a/five]]",
@@ -65,6 +68,13 @@ describe("carrier-edges — every address a carrier points at", () => {
    * ceiling left slack absorbs the next break silently. This holds the line where it stands: a rename that
    * breaks edges raises the count, and that is the reading `lares carrier normalize --edges` exists to take
    * either side of a move.
+   *
+   * 197 → 200 WHEN THE READER LEARNED WHICH END TRAVELS. A `pranala` names both of its ends, and this
+   * reader took whichever address came first — the SOURCE. Anchoring it on `to=` moved three edges into
+   * view that had always dangled: `lady-aki` points at two playtest rulings nobody wrote, and a design
+   * doc states a placeholder pair. No carrier moved and no name broke; the reader stopped reading the
+   * wrong end. A ceiling raised for a corpus break and a ceiling raised for a sharper instrument are
+   * different acts, and only the second one is allowed to be recorded this way.
    */
   test("the corpus points at no more nothing than it already did", () => {
     const files = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
@@ -81,6 +91,6 @@ describe("carrier-edges — every address a carrier points at", () => {
     const dangling = texts.flatMap(readCarrierEdges)
       .filter((e) => e.address !== null && !held.has(e.address));
     expect(files.length).toBeGreaterThan(500);
-    expect(dangling.length, "an edge broke — run `lares carrier normalize --edges` to name it").toBeLessThanOrEqual(197);
+    expect(dangling.length, "an edge broke — run `lares carrier normalize --edges` to name it").toBeLessThanOrEqual(200);
   });
 });

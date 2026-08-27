@@ -65,7 +65,7 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 ```
 <<~ kau DeviceName >>                       placement, auto-generated fragment
 <<~ kau #my-instance DeviceName >>          placement, explicit fragment
-<<~ kau #my-instance DeviceName prop:val >> placement with props
+<<~ kau #my-instance DeviceName prop=val >> placement with props
 ```
 
 The DeviceName resolves via `[all[tiddlers]tag[$:/tags/LarariumKumu]field:kumu-name[DeviceName]]`.
@@ -106,7 +106,7 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 
 !! Causal Island
 
-Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable:Event subscribable:Handler >>`.
+Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable=Event subscribable=Handler >>`.
 
 This maps directly to the Ink & Switch island model: each automerge object operates as a causally independent document. Merges happen at declared sync points, not implicitly.
 
@@ -120,6 +120,6 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KO4tiYbF0Y7IkDL7EFKRrZ5lPCJWUIaBu417O8RhWMU
+<<^ code:"&#x0003;" >>ni:///sha-256;06zK_40CIQyoQbptB8Ag49KlqWPAlBoxRN0cEJtF-T0
 
 <<^ code:"&#x0004;" -> ? >>

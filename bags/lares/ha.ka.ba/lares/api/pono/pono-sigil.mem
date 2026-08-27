@@ -51,7 +51,7 @@ An optional `role:` qualifier further specifies the constraint kind.
 !! Syntax
 
 ```text
-<<~ pono #slot FROM -> TO role:constrains >>
+<<~ pono #slot FROM -> TO role=constrains >>
 <<~ \constraint #slot FROM -> TO role:constrains >>
 ```
 
@@ -66,6 +66,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2rk8Oy_bT2-Hiwo0mTn2KwalRzcCNhIvL3z5qJSi05U
+<<^ code:"&#x0003;" >>ni:///sha-256;YboVPGJR1x7eRyEjk1A6Tk4c7R7sT7fbFY9Iti50780
 
 <<^ code:"&#x0004;" -> ? >>

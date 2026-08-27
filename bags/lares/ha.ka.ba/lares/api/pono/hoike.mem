@@ -44,10 +44,10 @@ A hoike keeps a contested ruling whole: the held position, every dissent with it
 ''Block form (ledger):''
 
 ```
-<<~ hoike #fragment held:"position (holding Voices)" >>
+<<~ hoike #fragment held="position (holding Voices)" >>
 q: the fork, one line
-<<~ kue voice:Name key:"specific external re-entry condition" >>reasoning to the travel-floor<<~/kue >>
-<<~ saksi voice:Name scope:... >>attestation<<~/saksi >>
+<<~ kue voice=Name key="specific external re-entry condition" >>reasoning to the travel-floor<<~/kue >>
+<<~ saksi voice=Name scope=... >>attestation<<~/saksi >>
 re-entry: general keys
 <<~/hoike >>
 ```
@@ -112,6 +112,6 @@ The layer carries the Eduyot pattern: minority opinions kept with attribution so
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;rlpIV1XHPYjYTyCLbQ5CdcPL9zcw_iiVVGoRkDbUsFs
+<<^ code:"&#x0003;" >>ni:///sha-256;S1a5HWoI6rDd1rVKPrHHbtY-GYds4GpQjiaRX4mLsbs
 
 <<^ code:"&#x0004;" -> ? >>

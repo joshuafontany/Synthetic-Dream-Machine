@@ -35,7 +35,7 @@ import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { REPO } from "./test-wiki.js";
 
 const ROOT = "lar:///ha.ka.ba/x/child-names";
-const KID  = `${ROOT}#kid`;
+const KID  = `${ROOT}#/kid`;
 
 const reader = (map: Record<string, TiddlerFields>) => (t: string): TiddlerFields | undefined => map[t];
 const project = (map: Record<string, TiddlerFields>) => expandMemeRefs(reader(map), ROOT)!;

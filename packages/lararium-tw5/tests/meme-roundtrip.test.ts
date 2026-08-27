@@ -128,14 +128,14 @@ describe("fence-mask — quoted sigils never frame, split, or expand", () => {
   test("quoted ahu/ETX sigils produce no records and do not truncate", () => {
     const titles = [...records.keys()];
     expect(titles).toContain(TEACHING_URI);
-    expect(titles).toContain(`${TEACHING_URI}#lesson`);
+    expect(titles).toContain(`${TEACHING_URI}#/lesson`);
     expect(titles.filter((t) => t.includes("#fake") || t.includes("#also-fake") || t.includes("#ghost"))).toEqual([]);
     // the fenced ETX did not truncate: post-fence prose survives in records
     expect(records.get(TEACHING_URI)!.text).toContain("the carrier still runs");
   });
 
   test("quoted meta (four-backtick fence) never becomes the slot's identity", () => {
-    expect(records.get(`${TEACHING_URI}#lesson`)!["mana"]).toBeUndefined();
+    expect(records.get(`${TEACHING_URI}#/lesson`)!["mana"]).toBeUndefined();
   });
 
   test("round-trips content-whole and idempotent", () => {
@@ -178,7 +178,7 @@ describe("carrier-bytes law — the boundary normalizes once (memetic-wikitext-f
   test("BOM strips and CRLF normalizes to LF; the carrier reads canonical", () => {
     const foreign = "﻿" + TEACHING.replace(/\n/g, "\r\n");
     const records = recordsOf(foreign, TEACHING_URI);
-    expect([...records.keys()]).toContain(`${TEACHING_URI}#lesson`);
+    expect([...records.keys()]).toContain(`${TEACHING_URI}#/lesson`);
     const rendered = expandMemeRefs(readerOf(records), TEACHING_URI)!;
     expect(rendered.includes("\r")).toBe(false);
     expect(rendered.charCodeAt(0)).not.toBe(0xfeff);

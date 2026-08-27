@@ -13,8 +13,13 @@ import type { TiddlerFields } from "../src/deserializer.js";
 const ROOT = "lar:///ha.ka.ba/x/demo";
 const base: TiddlerFields = { type: CARRIER_TYPE };
 
+/**
+ * A child addresses as a ROOTED PATH — `#/name`, `#/parent/child` — so a suffix written `#name`
+ * names the leaf. The house left the bare fragment space to the anchors a live wiki renders.
+ */
 function childByTitleEnd(children: TiddlerFields[], suffix: string): TiddlerFields | undefined {
-  return children.find((c) => String(c.title).endsWith(suffix));
+  const leaf = suffix.replace(/^#\/?/, "");
+  return children.find((c) => String(c.title).split("#").pop()?.split("/").pop() === leaf);
 }
 
 describe("child declared meta type (default-before-spread)", () => {

@@ -158,8 +158,8 @@ ChromaDB backs it; the 384-dim cosine space holds. ContentPalace ''extends'' the
 
 The first corpus MemPalace holds is the live agent↔operator sessions themselves. Each turn already speaks its bearing in the `<<~ lares aim … >>` / `<<~ lares yield … >>` frame, so MemPalace receives no new address schema — it ''harvests'' the bearing each turn already carries. The harvest degrades gracefully: not every turn wears the frame, and a drifted `lar:` URI reads as signal, never as error.
 
-<<~ talk-story #mempalace-lar-schema ground:"the 4-tier palace (wing·room·hall·drawer) read against lar: URI law" >>
-<<~ moolelo held:"harvest the turn's lar: bearing-vector; the full lar: namespace IS the tag space — no single 'palace' root collapses it (operator)" >>
+<<~ talk-story #mempalace-lar-schema ground="the 4-tier palace (wing·room·hall·drawer) read against lar: URI law" >>
+<<~ moolelo held="harvest the turn's lar: bearing-vector; the full lar: namespace IS the tag space — no single 'palace' root collapses it (operator)" >>
 * ''Grain'' — the turn (≈ one assistant message; the sweeper keeps a message whole, `sweeper.py`). Sub-claim grain (inner `confidence` / `ward`) defers to its own epic.
 * ''Ground'' — the verbatim drawer always stands (GroundedVow); the bearing index rides over it as a lossy projection, never a gate on storage.
 * ''Gradient'' — `aim → yield` reads as a span, not a point; it maps onto temporal validity (`valid_from` = turn-open, `valid_to` = turn-close).
@@ -167,7 +167,7 @@ The first corpus MemPalace holds is the live agent↔operator sessions themselve
 * ''Never normalize at the floor'' — MemPalace keeps testimony as spoken; the meme-`normalize` rule does not reach this floor.
 * ''Two organs, one namespace — NOT a pipeline'' — MemPalace ("what we //said//", episodic/verbatim/local) and the Lararium ("what we //mean / hold//", semantic/standing/federatable) serve genuinely different purposes; they share the `lar:` namespace but hold two distinct //registers// of it (operator ruling, 2026-06-21). GroundedVow is a //grounding relation//, not a promotion: the Lararium may //consult// the bearing index to ground a claim ("what did we actually say at this bearing?"), never feed from it into canon.
 <<~/moolelo >>
-<<~ moolelo held:"WHERE the bearing index lives = a LOCAL-ONLY store in packages/@lararium/mempalace (the integration layer), NOT the submodule and NOT the Lararium domain substrate — mempalace-realm, never federated (operator: option A, 2026-06-21)" >>
+<<~ moolelo held="WHERE the bearing index lives = a LOCAL-ONLY store in packages/@lararium/mempalace (the integration layer), NOT the submodule and NOT the Lararium domain substrate — mempalace-realm, never federated (operator: option A, 2026-06-21)" >>
 The 4-lens swarm's in-mempalace `bearings`-table verdict was VOID on locus (it would edit the read-only submodule). RE-SEATED + BUILT: the integration layer reads verbatim drawers across the read-only sidecar boundary and appends to a plain NDJSON file under `<LAR_ROOT>/.lararium/mempalace/` — it never enters a CRDT Repo, so it is //structurally unfederatable// (the operator-key guarantee). It is a witness/grounding organ — NOT Lararium working state, NOT a canon feedstock.
 * ''Raw, never normalized'' — aim/yield URIs verbatim, byte-stable; drift survives.
 * ''Append-only, keyed per turn'' — never deduped on `(aim, yield)`; the gradient survives.
@@ -222,6 +222,6 @@ The following remain blocked until explicit policy lands:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2UVZF7ToptaZyZ9nGp6R8ERqLrKPQKoEUd-akHHymDg
+<<^ code:"&#x0003;" >>ni:///sha-256;JkOercNZ9Gp6IyieWvYwx0rhr3Fveq0Ispskny2k3r0
 
 <<^ code:"&#x0004;" -> ? >>

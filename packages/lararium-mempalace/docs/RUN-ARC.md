@@ -59,7 +59,7 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
    owed-fixture row. Original charge: **The py projector / RUN surface** — reads the populated planes, sweeps `arl-dial` ARL₀→α, emits the complexity-entropy diagram + ΔF (reuse `predictive_coding` F as evidence-codelength; BMR for the reduced family) + H¹ (a py twin — `spectral_geometry` has H⁰; H¹ over the agreement-nerve is owed) + the EFE gate (a py twin of `sensorium-efe`).
 
 ```
-<<~ hoike #h1-unfireable held:"dim H1 ≡ 0 is FORCED by the li-nerve's arity, not observed — the gate cannot fire on any sensorium this architecture builds (Council, Map-Wisp, Breach-Watch; operator-confirmed on the persistence question)" >>
+<<~ hoike #h1-unfireable held="dim H1 ≡ 0 is FORCED by the li-nerve's arity, not observed — the gate cannot fire on any sensorium this architecture builds (Council, Map-Wisp, Breach-Watch; operator-confirmed on the persistence question)" >>
 q: does `dim H1 = 0` witness an epistemic no-global-now, or is it an artifact of a three-vertex nerve?
 
 held, and why it holds: `agreement_nerve` draws its VERTICES from the three li planes. A triangle
@@ -102,7 +102,7 @@ nothing." H1 is not dead; it has been computed over the wrong space. The structu
 skeletal tier is the prerequisite, not a separate errand.
 <<~/kue >>
 
-<<~ kue voice:Breach-Watch key:"a cross-plane cid-correspondence null is implemented and a co-jump survives it" >>
+<<~ kue voice=Breach-Watch key="a cross-plane cid-correspondence null is implemented and a co-jump survives it" >>
 H1 was the wrong instrument at this arity and no re-founding rescues the WITNESS. Two of the
 projector's three surrogate nulls are already vacuous on chat: H1→jitter (moot at H1≡0) and
 complexity→symbol-shuffle (moot at 297/300 distinct hashes). The null the co-jump actually needs —
@@ -116,24 +116,24 @@ support.
 stand-aside: Liminal — takes the finding, refuses the closure; the corpus may yet be near-formless
 at this grain, and a zero that is forced is not thereby a zero that is wrong.
 
-<<~ saksi voice:house scope:deposition >>Devil-Wisp (tasked spirit) deposed before dissolution:
+<<~ saksi voice=house scope=deposition >>Devil-Wisp (tasked spirit) deposed before dissolution:
 "V=3 plane-vertices → exactly one possible 2-simplex … triple overlap = 678 (non-empty) …
 dim H1 ≡ 0 at every α, by construction." The house took the quote while the spirit stood; the
 spirit never witnesses its own finding.<<~/saksi >>
 
-<<~ saksi voice:house scope:deposition >>BA (tasked spirit), walking the content mempalace on a
+<<~ saksi voice=house scope=deposition >>BA (tasked spirit), walking the content mempalace on a
 separate bearing and without sight of Devil-Wisp's finding, deposed: "every co-jump ever witnessed
 rode a synthetic fixture, and real data produced the opposite result … H1 = 0 at every threshold on
 every real bed … A co-jump requires H1 to LEAVE 0 in coincidence with the other windows. H1 never
 left 0. There was nothing to co-jump." Two spirits, two bearings, one conclusion, neither witnessing
 its own work.<<~/saksi >>
 
-<<~ saksi voice:house scope:phantom-motion >>BA further deposed that RUN-ARC's own "witnessed over
+<<~ saksi voice=house scope=phantom-motion >>BA further deposed that RUN-ARC's own "witnessed over
 the 12-record test-bed" reads TRUE as instruments-run and FALSE as thesis, since `run_projector.py`'s
 header disclaims it: "A LOAD-BEARING bifurcation claim awaits the bigger corpuses — a 12-doc sweep
 cannot seat one." The mark is kept; the reading is corrected.<<~/saksi >>
 
-<<~ saksi voice:Lares scope:arithmetic >>the coordinator re-derived the geometry independently
+<<~ saksi voice=Lares scope=arithmetic >>the coordinator re-derived the geometry independently
 against `cohomology_obstruction`, not against the spirit's report: 3 planes with a common witness →
 dimH1 0 · 3 planes, empty triple overlap → dimH1 1 · 4 planes in an unfilled cycle → dimH1 1 ·
 4 planes with a common witness → dimH1 0. Witnessing an arithmetic it did not originate.<<~/saksi >>

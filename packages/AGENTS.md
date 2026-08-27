@@ -237,18 +237,18 @@ When reporting back, use OODA-HA receipts: observe facts, orient boundary, decid
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family:control role:implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/lares/api/pono/invariant family:control role:implements >>
-<<~ pranala #implements-lar-uri ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri family:control role:implements >>
-<<~ pranala #implements-parser ? -> lar:///ha.ka.ba/lares/api/pono/parser family:control role:implements >>
-<<~ pranala #implements-render-pipeline ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline family:control role:implements >>
-<<~ pranala #to-root-agents ? -> lar:///AGENTS family:control role:adjacent >>
-<<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/lares/AGENTS family:control role:adjacent >>
-<<~ pranala #to-lares ? -> lar:///LARES family:control role:adjacent >>
-<<~ pranala #to-voices ? -> lar:///ha.ka.ba/lares/api/voices family:reference role:governs >>
-<<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/lares/docs/lararium/meme-provider family:reference role:describes >>
-<<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/lares/docs/mesh/dreamnet-architecture family:reference role:describes >>
-<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration family:reference role:describes >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family=control role=implements >>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/lares/api/pono/invariant family=control role=implements >>
+<<~ pranala #implements-lar-uri ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri family=control role=implements >>
+<<~ pranala #implements-parser ? -> lar:///ha.ka.ba/lares/api/pono/parser family=control role=implements >>
+<<~ pranala #implements-render-pipeline ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline family=control role=implements >>
+<<~ pranala #to-root-agents ? -> lar:///AGENTS family=control role=adjacent >>
+<<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/lares/AGENTS family=control role=adjacent >>
+<<~ pranala #to-lares ? -> lar:///LARES family=control role=adjacent >>
+<<~ pranala #to-voices ? -> lar:///ha.ka.ba/lares/api/voices family=reference role=governs >>
+<<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/lares/docs/lararium/meme-provider family=reference role=describes >>
+<<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/lares/docs/mesh/dreamnet-architecture family=reference role=describes >>
+<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration family=reference role=describes >>
 
 <<~/ahu >>
 

@@ -45,10 +45,10 @@ The contested exit rides its own sigil: `hoike` (`\testimony`) — law at the si
 ''Block form (floor):''
 
 ```
-<<~ talk-story #fragment ground:"the work surface convened on" >>
+<<~ talk-story #fragment ground="the work surface convened on" >>
 bearings: where we stand · where we want to go · how we get there
 telling — the Voices the moment calls co-narrate; the operator overlaps and steers
-<<~ moolelo held:"direction (operator)" >>one line; lands inline in the artifact worked<<~/moolelo >>
+<<~ moolelo held="direction (operator)" >>one line; lands inline in the artifact worked<<~/moolelo >>
 <<~/talk-story >>
 ```
 
@@ -129,6 +129,6 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;71KvVrVPEj9Ldax7lMIPDPJ7lVLL3GBHUMp8A65Zgv0
+<<^ code:"&#x0003;" >>ni:///sha-256;Yls2LWS9ZzXtKQJacm1bK9mhophCdn3k7T5fY5hJRiM
 
 <<^ code:"&#x0004;" -> ? >>

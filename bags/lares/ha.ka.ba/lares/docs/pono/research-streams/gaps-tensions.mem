@@ -59,7 +59,7 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 ''Status:'' design sharpened (2026-04-28); `kukali` candidate sigil; blocked on async `ReactionGraph`.
 
-`suspends` marks an expression that yields its causal island until an event fires — the //wait posture inside an island//, distinct from `papalohe` (the inter-island wire) and `hui`/`holo`/`puka` (parallel-island coordination). Each `kumu` instance reads as an isolated async boundary; events cross only via declared `papalohe` edges; within an island `kukali` yields until the subscribed event fires — isomorphic to `await` on a `Promise`. `ReactionGraph.fire()` must return `Promise<void>` before `kukali` carries semantics (a sequencing requirement, not a gap). Candidate: `<<~ kukali trigger:OnBegin >>` (inline) or block form (body resumes on fire).
+`suspends` marks an expression that yields its causal island until an event fires — the //wait posture inside an island//, distinct from `papalohe` (the inter-island wire) and `hui`/`holo`/`puka` (parallel-island coordination). Each `kumu` instance reads as an isolated async boundary; events cross only via declared `papalohe` edges; within an island `kukali` yields until the subscribed event fires — isomorphic to `await` on a `Promise`. `ReactionGraph.fire()` must return `Promise<void>` before `kukali` carries semantics (a sequencing requirement, not a gap). Candidate: `<<~ kukali trigger=OnBegin >>` (inline) or block form (body resumes on fire).
 
 !!! Gap 6 — UEFN `prop` vs `kumu`
 
@@ -67,7 +67,7 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 !!! Gap 7 — Verse module access modifiers
 
-''Status:'' convention proposed, not a sigil. Verse `public`/`internal`/`private` map to `<<~ kapu qualifier:public|internal|private >>`. Register as a `kapu` attrs convention note, not a new sigil.
+''Status:'' convention proposed, not a sigil. Verse `public`/`internal`/`private` map to `<<~ kapu qualifier=public|internal|private >>`. Register as a `kapu` attrs convention note, not a new sigil.
 
 !!! Gap 8 — parse → widget → DOM, the middle layer
 
@@ -127,6 +127,6 @@ Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template tran
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DmeFGRE1MRr68LuGbrrqBmV8hsF1sbgUI-rVMAx_FZk
+<<^ code:"&#x0003;" >>ni:///sha-256;eKIet_VcIqxd_xPCPhVe33-7xXf2qyMN7h5esx3bKgQ
 
 <<^ code:"&#x0004;" -> ? >>

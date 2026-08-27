@@ -35,28 +35,28 @@ describe("child meta inheritance (parent-diff)", () => {
   }
 
   test("inherited-matching field (type == parent) is NOT re-emitted on the child", () => {
-    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: CARRIER_TYPE, text: "body" };
-    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    const kid: TiddlerFields = { title: `${ROOT}#/kid`, type: CARRIER_TYPE, text: "body" };
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     expect(out).not.toBeNull();
     expect(childBlock(out!)).not.toMatch(/^type = /m);   // matches parent → skipped
   });
 
   test("distinct field (a different type, or an authored role) DOES survive on the child", () => {
     const kid: TiddlerFields = {
-      title: `${ROOT}#kid`,
+      title: `${ROOT}#/kid`,
       type: "text/plain",           // DIFFERS from parent → keep
       role: "source-text interior", // authored, parent lacks it → keep
       text: "body",
     };
-    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     const block = childBlock(out!);
     expect(block).toMatch(/^type = "text\/plain"/m);
     expect(block).toMatch(/^role = /m);
   });
 
   test("a child meta block sits FLUSH against the ahu sigil line (no blank between)", () => {
-    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: "text/plain", text: "content below" };
-    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    const kid: TiddlerFields = { title: `${ROOT}#/kid`, type: "text/plain", text: "content below" };
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     // sigil line, then IMMEDIATELY the fence — one newline, no blank line between.
     expect(out).toMatch(/<<~ ahu #kid >>\n```toml meta\n/);
     // a blank line then separates the content below the fence.
@@ -64,8 +64,8 @@ describe("child meta inheritance (parent-diff)", () => {
   });
 
   test("an empty child (no meta, no body) holds a SINGLE blank line, never balloons", () => {
-    const kid: TiddlerFields = { title: `${ROOT}#kid`, type: CARRIER_TYPE, text: "" };
-    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    const kid: TiddlerFields = { title: `${ROOT}#/kid`, type: CARRIER_TYPE, text: "" };
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     // sigil · one blank · closer — no three-blank bloat.
     expect(out).toMatch(/<<~ ahu #kid >>\n\n<<~\/ahu >>/);
     expect(out).not.toMatch(/<<~ ahu #kid >>\n\n\n/);
@@ -73,13 +73,13 @@ describe("child meta inheritance (parent-diff)", () => {
 
   test("derived coordinates (uri-path, file-path) never re-emit on a child", () => {
     const kid: TiddlerFields = {
-      title: `${ROOT}#kid`,
+      title: `${ROOT}#/kid`,
       role: "keep-me",
       "uri-path": "x/demo/kid",
       "file-path": "x/demo/kid.mem",
       text: "body",
     };
-    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#kid`]: kid }), ROOT);
+    const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     const block = childBlock(out!);
     expect(block).toMatch(/^role = /m);
     expect(block).not.toMatch(/uri-path/);
