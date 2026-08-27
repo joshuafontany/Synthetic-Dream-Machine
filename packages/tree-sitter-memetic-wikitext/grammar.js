@@ -89,7 +89,12 @@ module.exports = grammar({
 
     // `<<~/name >>` — the closing form.
     sigil_close: $ => seq(
-      '<<~/',
+      // The tooth stands at ONE dispatch position: `<<~`, then LWSP, then the command
+      // word — and a close word carries its own slash. Both spellings reach the same
+      // word, matching the plain register's `<<fragment …>>` / `<</fragment>>`.
+      // A single token, so the lexer prefers it over the bare `<<~` a sigil opens on.
+      // It stops at the slash: whatever follows belongs to the body, as it always did.
+      alias(token(prec(2, /<<~[ \t]*\//)), '<<~/'),
       optional(field('body', $.sigil_body)),
       '>>',
     ),
