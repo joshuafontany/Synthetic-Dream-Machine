@@ -3057,8 +3057,6 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * MCP `hud`/`receipt` storage-dir fix
 * Connect screen cold-boot path
 
-<<~/ahu >>
-
 !! M26 — Isomorphic VmPool + WorkerFactory Injection (2026-05-04)
 
 ''Scope:'' Moved isomorphic contracts to `@lararium/mesh`; injected `WorkerFactory` into `TW5WorkerProxy`; fixed sha256 gate error propagation; fixed node peer pool key.
@@ -3114,8 +3112,6 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * tldraw `(ed.store as any).put()` × 3 wiki-first migration
 * Connect screen cold-boot path
 * MCP `hud`/`receipt` storage-dir fix
-
-<<~/ahu >>
 
 !! M27 — tldraw Wiki-First Migration + LarOpenPhase + vmFactory Injection (2026-05-04)
 
@@ -3287,6 +3283,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fQtcS0j6pDvEHfsAYE-ybN3J2Fk66te_Gw_NaDRtiwc
+<<^ code:"&#x0003;" >>ni:///sha-256;Ue7JumQX9AK8WUDIK_M2vNmmJtoNISAu4BvoEFpCSio
 
 <<^ code:"&#x0004;" -> ? >>

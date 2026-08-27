@@ -46,8 +46,6 @@ This document directs the reading agent to narrate every loop through Observe, O
 
 Alpha test prompt opens the active session stream here.
 
-<<~/ahu >>
-
 <<~ ahu #phase-map >>
 
 !! Phase Map
@@ -215,6 +213,6 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2LUX_jtDTu0yDfhK2Cswn56ZgU8yPxVBardJaMSM-mc
+<<^ code:"&#x0003;" >>ni:///sha-256;_dgTQ9pwd85VItH02jEbujzMlWSZUb9KRjovgyORCzk
 
 <<^ code:"&#x0004;" -> ? >>

@@ -154,6 +154,8 @@ Bags now carry first-class policy tiddlers. The VM enforces highest-priority-bag
 
 ---
 
+<<~/ahu >>
+
 <<~ ahu #ooda-ha-m22-topology-vm-2026-05-03 >>
 
 !! OODA-HA: M22 — Topology-Derived VM + Wiki-First Filters (2026-05-03)
@@ -191,6 +193,8 @@ The VM sees only the recipe's bag slice. Both peers boot recipe-aware. The wiki 
 * `"draft"` bag → stable lar: URI; VmPool multi-slot (one slot per recipe); room-scoped recipe includes room bag as writable leaf; social plane UX (identity picker, group membership widgets); `catalog.corpora` Record retirement; connect screen (user-facing gate)
 
 ---
+
+<<~/ahu >>
 
 <<~ ahu #ooda-ha-m21-6root-2plane-2026-05-03 >>
 
@@ -803,6 +807,8 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 * `LarDiskProjector` move from `@lararium/tw5` → `@lararium/node`
 * Isomorphic `AutomergeStoreBase` / grammar-wired deserializer / multi-doc boot order: Sprint 6 research
 
+<<~/ahu >>
+
 <<~ ahu #ooda-ha-named-doc-pattern-m17-2026-05-03 >>
 
 !! OODA-HA: Named-Doc Oracle + Room Keys + Self-Describing Pass (M17 — 2026-05-03)
@@ -1187,6 +1193,6 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tNpSEos0DxPz7z7tqP76VEvSKEIeOqdTJQB2KM5VCYY
+<<^ code:"&#x0003;" >>ni:///sha-256;IFfSyq1tylURtNu4bj4wtFmkmfnR5Uaq12StsLSLF8Y
 
 <<^ code:"&#x0004;" -> ? >>
