@@ -76,7 +76,7 @@ antibody.
 
 The contract falls into three tiers — and answers ''what a Nexus carries vs withholds'':
 
-\procedure ~Tier(~Type:"" ~Params:"") ~Tier <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Tier(Type:"" Params:"") ~Tier <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Tier MANDATORY "who/operator↔kahu carries/@oracle + @crossroads (public + infra) + the Kapae antigen when/AT ALL TIMES ~ contracting into a Nexus IS agreeing to be an immune-propagation node" >>
 <<~Tier BILATERAL "who/operator↔operator carries/cabal + shared docs when/by direct peer contract ~ the guarded/classes tier, negotiated node-to-node, NOT via the kahu" >>
@@ -184,6 +184,6 @@ cannot.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1WAX4p9-QC1FovM068H9yxjzw6gOicfiITJ7Wecv1Zw
+<<^ code:"&#x0003;" >>ni:///sha-256;Yv3rY4x-GkHvIbGNuQXV70X6TQ4RUF5YMVLbRfKrJUU
 
 <<^ code:"&#x0004;" -> ? >>

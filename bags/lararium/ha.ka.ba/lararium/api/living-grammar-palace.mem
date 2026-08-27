@@ -73,7 +73,7 @@ proven TS pattern; the Python port stays specified, not yet built.
 The living grammar lives in three registers, by ''where its source-text sits'' and ''how its entries''
 ''entrench'':
 
-\procedure ~Register(~Type:"" ~Params:"") ~Register <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Register(Type:"" Params:"") ~Register <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Register Defined "source/TW5 *.tid + parser rules ~ the user-extendable HARD-RULE core; license-entrenched (the grammar a parser MUST honor: SharktoothSigil .tids, wikirules, the lar-sigil grammar)" >>
 <<~Register Formal "source/all of bags/ ~ the curated corpus, edited to improve structure; mana/manao ARE its fuzzy entrenchment ratings (a high-mana meme entrenches strongly; a stub reads weakly-entrenched)" >>
@@ -135,7 +135,7 @@ render pipeline projects it, a separate concern ([[render-pipeline|lar:///ha.ka.
 
 The form rides on TWO orthogonal planes, the way genesis rides two planes ([[genesis-doc|lar:///ha.ka.ba/lararium/mesh/genesis-doc]]):
 
-\procedure ~Plane(~Type:"" ~Params:"") ~Plane <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Plane(Type:"" Params:"") ~Plane <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Plane Constructicon "kind/DISCRETE ~ the grammar-SEED / spec / axes — the canonical score. Rappaport's canonical (the invariant liturgical order) · Searle's constitutive rules (the rules that CREATE the move) · Goodman's score (the notation a performance instantiates). The basis the vector measures against." >>
 <<~Plane Manifestation "kind/CONTINUOUS ~ the grammar-IN-USE — a fuzzy-membership / sanction-degree vector. Goldberg/Langacker partial sanction (a usage instantiates a construction to a DEGREE, never all-or-nothing); the manifestation a turn actually enacted." >>
@@ -366,7 +366,7 @@ whiten; un-whitened, "three planes agree" may name one plane heard three times.
 ([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]]) names the discipline this whole unification enacts: keep the arrows
 (//mālama pili// — the keeper keeping the relations). Each way the join could rot maps to one dropped arrow:
 
-\procedure ~Sin(~Type:"" ~Params:"") ~Sin <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Sin(Type:"" Params:"") ~Sin <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Sin Un-Keyed-Join "drops/the pullback morphism ~ a join with no shared-codomain (no verbatim-sha) — a cross-product, never a pullback" >>
 <<~Sin Incommensurable-Fusion "drops/the common currency ~ summing raw per-plane scores without the σ-unit / EWMA-z carry-across" >>
@@ -456,7 +456,7 @@ Retrieval reads at multiple apertures (the attention-scale ladder, [[attention-s
 The palace daemon composes pono-gating caps (the durability + concurrency guards), all already present
 in the codebase:
 
-\procedure ~Gate(~Type:"" ~Params:"") ~Gate <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Gate(Type:"" Params:"") ~Gate <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Gate FlockSingleton "kind/HARD ~ one writer, one lock (the single-writer drain; capture-annotation-model #nalu-flush-hardening)" >>
 <<~Gate AdaptiveReapServo "kind/servo ~ reaps stale work, homeostatic step (the gate-tuning servo lineage)" >>
@@ -487,7 +487,7 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 
 !! Phased Plan ~ smallest-additive-first
 
-\procedure ~Phase(~Type:"" ~Params:"") ~Phase <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Phase(Type:"" Params:"") ~Phase <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Phase P0 "does/pin the 3-layer constructicon basis (read-only) ~ name the constructions across HTML·wikitext·memetic" >>
 <<~Phase P1 "does/move-skeleton emitter (pure) ~ read the emitted markers into a move-n-gram skeleton" >>
@@ -737,6 +737,6 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;In9UYY_p2B2KUJWgTAzyDFSDqqN8IRWqXWD_U4haF_Y
+<<^ code:"&#x0003;" >>ni:///sha-256;diNrDEMElXgihMCu6B6CUhRJS53WH8Rp0__IlpISWUM
 
 <<^ code:"&#x0004;" -> ? >>

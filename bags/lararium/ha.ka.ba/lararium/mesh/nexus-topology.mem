@@ -39,7 +39,7 @@ The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this on
 
 !! The names ~ two Nexuses, one mobile reserve
 
-\procedure ~Namespace(~Type:"" ~Params:"") ~Namespace <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Namespace(Type:"" Params:"") ~Namespace <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Namespace First-Nexus "name/*.amorphousdreams.net serves/the-first-Nexus glass/desktop-and-LAN" >>
 <<~Namespace Second-Nexus "name/*.elyncia.net serves/the-second-Nexus glass/desktop-and-LAN" >>
@@ -215,6 +215,6 @@ Several memes carry these names inside ''worked examples'' — a doc-stack diagr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;_CeRGnZpLKrXb0j0ho9SbF88fNdsS7JYBtWr_qHnuTY
+<<^ code:"&#x0003;" >>ni:///sha-256;lLHjFx-sv9PF-Onst2G4kwnsfVAWCoLBYS6b1IHp2TE
 
 <<^ code:"&#x0004;" -> ? >>

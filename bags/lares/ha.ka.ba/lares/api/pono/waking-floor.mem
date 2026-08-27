@@ -73,7 +73,7 @@ floor reads as real structure rather than as a special case either occasion inve
 
 !! The shape ~ rest, announce, raise
 
-\procedure ~Wake(~Type:"" ~Params:"") ~Wake <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Wake(Type:"" Params:"") ~Wake <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Wake Stand "at/the-minimum-reachable-cap-stack ~ never a refusal" >>
 <<~Wake Serve "what/needs-no-secret ~ the public shelf serves without opening anything" >>
@@ -237,7 +237,7 @@ explicit law with a review gate'', never as an intention.
 ''An adversary CAN force the floor'' — cut the power. Cheap, deniable, repeatable. What that buys them
 splits, and only the first line reads well for us:
 
-\procedure ~Profit(~Type:"" ~Params:"") ~Profit <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Profit(Type:"" Params:"") ~Profit <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Profit Secret-harvest "verdict/NO ~ forcing the floor produces the BFU result extraction vendors call the BAD outcome. The floor holds." >>
 <<~Profit Veto "verdict/YES-and-severe ~ a permanent deniable veto to whoever can drop power (MITRE T1562.010)" >>
@@ -326,6 +326,6 @@ keeps ''the place'' — which is precisely the floor. The myth was load-bearing 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;v7mBEnrMRWZOEHE7hNhQBpZCmMCRmz54Lr1X3Vi3BbE
+<<^ code:"&#x0003;" >>ni:///sha-256;8HY5908Si1nT0T76S9xht177XukNH8Fd9_CKhGEvThA
 
 <<^ code:"&#x0004;" -> ? >>

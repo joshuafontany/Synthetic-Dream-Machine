@@ -76,7 +76,7 @@ cannot run at parse time.
 
 ''SO THE PARSE STAYS PERMISSIVE AND THE BINDING TURNS SELECTIVE:''
 
-\procedure ~Step(~Type:"" ~Params:"") ~Step <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Step(Type:"" Params:"") ~Step <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Step Parse "does/mark-the-token keeps/position keeps/value adds/relation-field ~ the tree GAINS a field; no tree LOSES one" >>
 <<~Step Declare "does/accept-a-relational-slot where/parseParameterDefinition reads/`\\procedure agent(fires from -> to)`" >>
@@ -131,7 +131,7 @@ letting the same bare form render.
 
 !! What the field already decided
 
-\procedure ~Art(~Type:"" ~Params:"") ~Art <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Art(Type:"" Params:"") ~Art <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Art Cypher "stands/FOR gives/visual-correspondence ~ arrows read as relations because the syntax looks like the graph; direction MANDATORY on write, OPTIONAL on read - the `->` `<-` `<->` triple" >>
 <<~Art DOT "stands/FOR gives/chain-desugars-pairwise ~ `A -> B -> C` becomes adjacent edges; no variable arity anywhere in the model" >>
@@ -190,7 +190,7 @@ gain the feature nor break under it.
 
 !! The plan
 
-\procedure ~Phase(~Type:"" ~Params:"") ~Phase <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Phase(Type:"" Params:"") ~Phase <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Phase One "does/free-the-scheme touches/parseMacroParameterAsAttribute risk/low ~ a colon followed by `//` reads as a value; ships alone, wanted by the arrow or not" >>
 <<~Phase Two "does/mark-the-arrow touches/both-parameter-parsers risk/low ~ the token keeps its position and value and gains a relation field; every existing parse stands" >>
@@ -210,7 +210,7 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 !! What the house counts
 
-\procedure ~Gauge(~Type:"" ~Params:"") ~Gauge <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Gauge(Type:"" Params:"") ~Gauge <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Gauge Additive "counts/parse-trees-that-differ-for-an-undeclared-procedure red/any ~ one difference and the change stops reading as additive" >>
 <<~Gauge Silence "counts/invocations-that-re-read-without-erroring red/any ~ the Prolog failure arrives silent, never as a syntax error" >>
@@ -231,6 +231,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8IX_-8_BUr2YWCguSeaCXDt_fcjAZ-205LQwXJCEUFM
+<<^ code:"&#x0003;" >>ni:///sha-256;BVHgXYKZlRZQ3d0jzGxIPNNip1Kb6Cs5ZU6FwCo8Ovk
 
 <<^ code:"&#x0004;" -> ? >>

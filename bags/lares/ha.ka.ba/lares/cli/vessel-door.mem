@@ -46,7 +46,7 @@ grows back wherever the law has not reached, and where to look when it does.
 
 Every substrate motion in this CLI composes from these, and no composition earns a primitive's seat.
 
-\procedure ~Primitive(~Type:"" ~Params:"") ~Primitive <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Primitive(Type:"" Params:"") ~Primitive <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Primitive stop "ends a running daemon by port, graceful then forced ~ never a restart in disguise" >>
 <<~Primitive wipe "pares the vessel store + the projection watermark ~ identity, seal, library and registry stand outside it" >>
@@ -230,6 +230,6 @@ reached.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3reAPKgOrW1lnNIASHGryvcXwqBoCWoGtayIEoRvieo
+<<^ code:"&#x0003;" >>ni:///sha-256;xlXjgBAGEET4NDaq9eywVWzqc3Tksmjq9lFiiKA9slo
 
 <<^ code:"&#x0004;" -> ? >>

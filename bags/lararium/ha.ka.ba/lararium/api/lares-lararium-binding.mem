@@ -68,7 +68,7 @@ one client abstraction (tailscale's shape).
 
 The load-bearing shore (UCAN/ucanto proves it battle-tested):
 
-\procedure ~Layer(~Type:"" ~Params:"") ~Layer <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Layer(Type:"" Params:"") ~Layer <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Layer Transport "the UDS channel ~ pluggable, authority-AGNOSTIC; just moves bytes fast (ucanto: transport stays agnostic to authorization)" >>
 <<~Layer Authority "the capability-bearing verb-summons ~ a UCAN-shape signed invocation; the prf chain rides WITH each call (no ambient session/bearer) — authority IS the message" >>
@@ -165,6 +165,6 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ykdmaf3qBmcAua_Wu7bF691n8iCkyGo1fpVod4CVA3E
+<<^ code:"&#x0003;" >>ni:///sha-256;2OB_Av83GbR329IBd7QISiC2p3jeZT_MdlQme2aS8QM
 
 <<^ code:"&#x0004;" -> ? >>

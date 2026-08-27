@@ -59,7 +59,7 @@ substrate separately. Naming the wave IS the contribution.
 The pattern carries FOUR parts; all four MUST hold for a grammar to live. Drop any one and the grammar
 either never wakes or quietly dies:
 
-\procedure ~Part(~Type:"" ~Params:"") ~Part <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Part(Type:"" Params:"") ~Part <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Part Kernel "carries/a discrete SEED — a finite generative core (rite-book · pattern-language · changes · prompt) that can produce far more than it states. The score, not the performance. (= the discrete constructicon plane, #data-geometry)" >>
 <<~Part Situated-Enactment "carries/the grammar comes alive ONLY when invoked in a real context — never as decontextualized drill. Meaning rides the situated move, not the rule recited. (= the continuous graded manifestation plane)" >>
@@ -165,6 +165,6 @@ seven substrates.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tEIrkwucaNSguh8OC6ZSa-beOcLqjfUC5BL_wiAVrHk
+<<^ code:"&#x0003;" >>ni:///sha-256;GWQAD11zlshMUhH5BEFs96D00QBHvnG1_7c7emcrQaY
 
 <<^ code:"&#x0004;" -> ? >>

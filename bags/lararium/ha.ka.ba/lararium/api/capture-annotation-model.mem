@@ -49,7 +49,7 @@ holds them together.
 mempalace, vendored, captures verbatim and searches it. The lararium needs five
 things it does not natively model:
 
-\procedure ~Hole(~Type:"" ~Params:"") ~Hole <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Hole(Type:"" Params:"") ~Hole <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Hole Gradient "miss/the turn's HUD instruments (confidence·ward·oracle·Voices·band·aperture·bearing) render as prose and DISSOLVE ~ no structured annotation of HOW a turn stood" >>
 <<~Hole Subagent "miss/tasked-spirit transcripts are BLURRED into the parent wing (recursive mine, issue #111) or DROPPED (our hook stages top-level only) ~ no distinct spirit memory" >>
@@ -274,7 +274,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 !! The Operator Command Surface
 
-\procedure ~Cmd(~Type:"" ~Params:"") ~Cmd <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Cmd(Type:"" Params:"") ~Cmd <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Cmd harvest "does/sweep transcripts → verbatim drawers (--all backfill; lar_hv idempotent) ~ BUILT" >>
 <<~Cmd subagents "does/mine <session>/subagents/* into wing_<w>__spirits, named, both sides ~ BUILT" >>
@@ -346,6 +346,6 @@ this model annotates from ([[lar-telemetry|lar:///ha.ka.ba/lararium/api/lar-tele
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-WM45Vb0sFRbeWIZx0JIYd-BZsXBN_4Ukl59h0QaATE
+<<^ code:"&#x0003;" >>ni:///sha-256;JsKaygZTcBZaDbL-ydraXvUf0F0QaocfMpK394o5k6s
 
 <<^ code:"&#x0004;" -> ? >>

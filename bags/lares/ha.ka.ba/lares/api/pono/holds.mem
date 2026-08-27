@@ -125,7 +125,7 @@ as one string — an absent slot just stays unwritten). It hands `~Params` to th
 `holds` verb by backtick filtered transclusion, never a nested
 `<<macro <<macro>> >>` (the parser refuses that):
 
-\procedure ~Mu(~Type:Arcana ~Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Mu(Type:Arcana Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Mu Wand "ascii/* glyph/🜂 element/Fire pull/ignition" >>
 <<~Mu Arcana >>
@@ -137,6 +137,33 @@ redirecting to its first word. The rule, spoken once for all thirteen: ''one''
 ''constructor per family sets the verb; each row invokes the named family sigil.''
 A stack too wide for one line wears the block form — `<<~holds >>`, one
 `family/member` per line, `<<~/holds >>` — the same set, the same canonical bytes.
+
+<<~/ahu >>
+
+<<~ ahu #two-holds >>
+
+!! Two holds, one word, and the sharktooth parts them
+
+''THE SIGIL AND THE WORD BOTH STAND, and neither defines the other.''
+
+\procedure ~Hold(Type:"" Params:"") ~Hold <<Type>> holds [{{{ [<Params>] }}}]
+
+<<~Hold Graph "writes/`<<~holds x >>` binds/carrier-to-component demands/x-names-a-meme reads/the-memegraph ~ the copula-free predicate; the held thing speaks" >>
+<<~Hold Stream "writes/`holds` bare binds/nothing demands/nothing reads/the-chat-stream ~ an ordinary English verb doing the ward's own cure in a sentence" >>
+
+<<~ confidence 16/20 >> ''ONE CHARACTER DECIDES WHICH, and it decides everywhere else too.'' A
+sharktooth marks a sigil the house resolves; its absence marks a word the reader reads. The two senses
+sit a keystroke apart and answer to different laws — the sigil answers to the five clauses above, the
+word answers only to L-Prime, which it satisfies by naming a verb.
+
+⚠ ''A ROW BODY TAKES THE WORD, NEVER THE SIGIL.'' `NAME <<Type>> holds [{{{ [<Params>] }}}]` reads a
+param bag, and a param bag names no carrier — clause 2 refuses it outright. Firing the sigil there
+would smuggle exactly the dead water the sigil exists to catch, so a row that reads //holds// carries
+the plain verb and makes no composition claim.
+
+''NEITHER NAME MOVES.'' Renaming one to part them would spend a good word on a distinction the
+sharktooth already draws, and would leave two names for one region in a house whose alias law binds
+each name to its act rather than to another name.
 
 <<~/ahu >>
 
@@ -241,6 +268,6 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;urtDEHGDBo8QIO5IYPRVFwZOmobAC9v1yLQba6z8t5c
+<<^ code:"&#x0003;" >>ni:///sha-256;E4yNKtl0PflJlXOeKx8WC7Zl-wCTsiJcvYe1i_6B1ec
 
 <<^ code:"&#x0004;" -> ? >>

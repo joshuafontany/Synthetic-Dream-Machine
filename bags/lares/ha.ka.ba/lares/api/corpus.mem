@@ -89,7 +89,7 @@ ONE canon, and the audit trips when they drift.
 ''--rm`'' (run-then-reap), ''nix-shell'' ephemeral environments (a derived env that exists for the duration),
 and ''mktemp + trap EXIT'' (the scratch dir guaranteed-swept on success OR error). The noun-verb tree:
 
-\procedure ~Verb(~Type:"" ~Params:"") ~Verb <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Verb(Type:"" Params:"") ~Verb <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Verb run "args/<path> [-- <analysis>] ~ EPHEMERAL-DEFAULT: open→ingest→analyze→DISSOLVE; `--keep` lands it durable" >>
 <<~Verb open "args/<path> [--name] ~ stand a scratch palace, hold it open for queries" >>
@@ -122,7 +122,7 @@ never leak past two independent reapers (the trap AND the sweep).
 <<~ confidence 14/20 >> Four of the five caps stand on built or stock ground; one
 (form) carries the research:
 
-\procedure ~Cap(~Type:"" ~Params:"") ~Cap <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Cap(Type:"" Params:"") ~Cap <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Cap content "stock/the nomic embedder over verbatim words ~ off-the-shelf, no new work" >>
 <<~Cap structure "ALREADY-SOLVED/our content-free structurepalace encoder + a tree-sitter parse-ROUTER (code · markdown · wikitext · json → one CST API; prose fallback → benepar/Stanza constituency); BONUS: a thin tree-sitter grammar for our own `<<~…>>` sigils (~1 file, high value)" >>
@@ -251,7 +251,7 @@ now homes the sensorium itself — the model reads py-side rather than behind TS
 <<~ confidence 13/20 >> S0 is UNGATED (no upstream blocker); the cap sprints follow. The
 TW5-quine runs after S0 + S2.
 
-\procedure ~Sprint(~Type:"" ~Params:"") ~Sprint <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Sprint(Type:"" Params:"") ~Sprint <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Sprint S0 "name/CLI foundation [UNGATED] ~ palaceOrgans registry · setup-wires-all-five · help-registry · `lares corpus` ephemeral-lifecycle · THIS corpus.md heleuma meme ~ ACCEPT: `lares vessel read --palaces` lists all five organs; `lares corpus run <path>` opens, analyzes, and DISSOLVES on exit; an interrupted run leaves no scratch under ~/.lares/.corpus/; `lares heleuma` ties this meme to the corpus help registry" >>
 <<~Sprint S1 "name/bands cap ~ the grain address (FFZ membership tree) + the boundary tree R leg (ecp::e.divisive nested changepoints over content+form+structure, cosine-drift the signal) ~ ACCEPT: the grain address maps Pulse→Theme as containment LEVELS; a bootstrap reproduces the locked boundaries (resampling-consensus gate fires)" >>
@@ -420,6 +420,6 @@ global-now it cannot ground. The reconciliation cost `R*_sem = log₂ dim H¹` g
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YjZKvzzUAC6_RQ2Y9--EMNKZoFZIQszV1mqXCEtVo5o
+<<^ code:"&#x0003;" >>ni:///sha-256;aqBVrX2VWJPKBlqgHO0U0q9_ezc25zsKMk-0FIi731I
 
 <<^ code:"&#x0004;" -> ? >>

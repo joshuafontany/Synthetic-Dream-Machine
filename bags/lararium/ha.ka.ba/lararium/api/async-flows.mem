@@ -47,7 +47,7 @@ Every long op returns its ''request-id fast'' (the durable idempotency key we
 already mint). On a TTY with no `--detach` it transparently attaches to `watch`;
 off-TTY / `--detach` it returns the id and exits.
 
-\procedure ~Verb(~Type:"" ~Params:"") ~Verb <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Verb(Type:"" Params:"") ~Verb <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Verb status "lares vessel read <id> ~ one-shot, authoritative current state; emits a pollInterval hint" >>
 <<~Verb watch "lares watch <id> ~ stream progress until terminal; --exit-status mirrors the job result into the CLI exit code (gh/kubectl shape)" >>
@@ -174,6 +174,6 @@ write toward, not a description of current emission.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TpckHsprfl_BxjGsXSgH0YbFaNtSM7VzAIKFZVCsodU
+<<^ code:"&#x0003;" >>ni:///sha-256;Q89Do-5gAcXguG3Tc_cNlpIFEKGCNyZQrsS4s27sZus
 
 <<^ code:"&#x0004;" -> ? >>

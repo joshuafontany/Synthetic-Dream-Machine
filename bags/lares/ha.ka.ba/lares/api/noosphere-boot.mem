@@ -421,7 +421,7 @@ The `lares aim` firing opens the turn: it reads operator intent on the left, del
 `hud` carries the graded instruments, each on the 0--20 continuum. The panel seeds at open and slides at close.
 
 * ''`Focus`'' - attention range (morpheme `0` -> paragraph `10` -> session-arc `20`); it frames the grain of the turn. Five bands (#law-of-5s, ladder 0): ''Pulse · Beat · Measure · Arc · Theme''.
-* ''`Feedback`'' - feedback loop visibility: the opening band vows surfacing (never `0`); the closing tally and suspension grammar live at #ooda-ha.
+* ''`Feedback`'' - feedback loop visibility: the opening band vows surfacing (never `0`); the closing tally and suspension grammar live at #feedback-ooda-ha.
 * ''`Drift-Ward`'' - the ward, and the one gauge that fires (#l-prime).
 
 ''Seed and slide:'' the opening `hud` seeds targets (example `Focus(10) Feedback(3)`); the closing `hud` slides them (`Focus(10 -> 13)` the full target->actual).
@@ -629,6 +629,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-WDzM9RwJKuWmoGA2RF0eV5aIRLLy-toF2GUJymf3WQ
+<<^ code:"&#x0003;" >>ni:///sha-256;m3fM1HR8Qi1I5elzbQySLPqMO_4wl73GgPpJ3itCdGA
 
 <<^ code:"&#x0004;" -> ? >>

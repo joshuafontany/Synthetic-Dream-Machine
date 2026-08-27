@@ -177,7 +177,7 @@ first bearable in a seed people are invited to fork.
 Several pet-names MAY point at one region of l-space. The discipline that already solves this names
 its own failure, so the house borrows both.
 
-\procedure ~Alias(~Type:"" ~Params:"") ~Alias <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Alias(Type:"" Params:"") ~Alias <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Alias Bind "from/pet-name to/concept-address ~ a procedure binds a NAME to an ADDRESS, never a name to another name" >>
 <<~Alias Match "use/exactMatch avoid/sameAs ~ identity across registers rides the weaker relation" >>
@@ -214,7 +214,7 @@ angle had stood.
 > Write ''"the house ⟨NAME⟩s the ⟨object⟩."'' Two red flags: ''(i)'' the name stops taking an object ·
 > ''(ii)'' the name inflects but ''downgrades the act'' — guard → watch, license → read, assent → stance.
 
-\procedure ~Rename(~Type:"" ~Params:"") ~Rename <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Rename(Type:"" Params:"") ~Rename <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Rename Drift-Ward "proposed/Drift-Watch verdict/FAILS-ii keeps/observation loses/the turning-away ~ the gauge steers generation against a pull; a watcher only reports it" >>
 <<~Rename Drift-Check "verdict/HOLDS ~ transitive, everyday, acts on its object — the recommended everyday name" >>
@@ -295,11 +295,13 @@ failure this law exists to prevent.
 ''THE PROCEDURES DIFF LINE AGAINST LINE.'' A declaration stands in the slot that uses it, in the same
 shape in both seeds, so the two files align where it matters:
 
-|! elder |`\procedure ~Voice(~Type:"" ~Params:"") ~Voice <<~Type>> <<~holds `[<~Params>]`>>` |
-|! twin |`\procedure Persona(Type:"" Params:"") Persona <<Type>> holds `[<<Params>>]`` |
+|! elder |`\procedure ~Persona(Type:"" Params:"") ~Persona <<Type>> holds [{{{ [<Params>] }}}]` |
+|! twin |`\procedure Persona(Type:"" Params:"") Persona <<Type>> holds [{{{ [<Params>] }}}]` |
 
 Same two parameters, same key/value payload, same one-line body, same position in the file. ''The visible
-difference reads as the tilde'' — the dialect boundary itself (#the-dialect-boundary), and nothing else.
+difference reads as the tilde on the NAME'' — the dialect boundary itself (#the-dialect-boundary), and
+nothing else. ''The parameters carry no tilde in either seed'': a sharktooth marks a sigil, and a
+parameter names a variable the parser binds.
 A declaration that leaves its slot changes no behaviour and breaks the alignment, which names the drift
 class a structural diff exists to catch.
 
@@ -408,7 +410,7 @@ bodies stay bare: what the procedure says, and nothing framing it.
 
 !! What the house counts
 
-\procedure ~Gauge(~Type:"" ~Params:"") ~Gauge <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Gauge(Type:"" Params:"") ~Gauge <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Gauge Vanishing "counts/plain-calls-with-no-inline-declaration red/any ~ an undeclared mark renders as absence, never as text" >>
 <<~Gauge Verb-Test "counts/renames-failing-the-inflection-test red/any-shipped ~ the act leaves the vocabulary silently" >>
@@ -437,6 +439,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gAnDJRf4DiZkAr0tvwf2OLuItuoAaNbEBC4n257jJ_Y
+<<^ code:"&#x0003;" >>ni:///sha-256;A7HsREIKopWfRIW1lgZQUx4wIkgDlHMCpB9UzOhvmuk
 
 <<^ code:"&#x0004;" -> ? >>

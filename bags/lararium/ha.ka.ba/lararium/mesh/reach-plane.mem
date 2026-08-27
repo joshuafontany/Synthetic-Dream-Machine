@@ -43,7 +43,7 @@ A human writes in their wiki and wants the words to land on Bluesky, on Kowloon,
 
 !! Three planes, unfused
 
-\procedure ~Plane(~Type:"" ~Params:"") ~Plane <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Plane(Type:"" Params:"") ~Plane <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Plane Sovereign "holds/vessel-keys holds/persona-KELs holds/the-Nexus-contract leaves/never custody/NON-CUSTODIAL-BY-TYPE" >>
 <<~Plane Reach "holds/foreign-app-credentials reads/an-instrument-never-an-identity seals/at-rest separates/per-app-HKDF-info travels/fleet-only" >>
@@ -277,6 +277,6 @@ Three consequences follow directly:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CBWNyX1RtS_vo64ArUjgCNuXwmSlNfZlziFVA0BKYhc
+<<^ code:"&#x0003;" >>ni:///sha-256;ZWoYMqaqkTBxbnXa2-83Xybbu9TFRAQa-QP_B6IPvbI
 
 <<^ code:"&#x0004;" -> ? >>

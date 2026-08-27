@@ -350,7 +350,7 @@ cleared tree, so the idempotency claim reads tested rather than asserted. 2m36s 
 ''FOUR OF THE FIVE FAILURES THAT GOT HERE WERE INSTRUMENTS, NOT THE RITE'' — and each one had reported
 green, or reported red against something innocent:
 
-\procedure ~Found(~Type:"" ~Params:"") ~Found <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Found(Type:"" Params:"") ~Found <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Found Impatience "read/no socket after 60s truth/the CLI budgets 120 for a cold boot ~ the harness out-waited what it measured" >>
 <<~Found Poisoned-seed "read/hearth-private doc unavailable truth/a `cp -r` carried one founding's address book into another ~ the vessel refused correctly" >>
@@ -379,7 +379,7 @@ rhymes with every neighbouring ruling rather than inventing a new shape: a cabal
 and never by an act; a standing lift ''EXPIRES'' and no party holds a lowering act; //nobody dissolves a Cabal
 by preventing its meetings//. ''The correct admin capability here reads as NONE.''
 
-\procedure ~Stage(~Type:"" ~Params:"") ~Stage <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Stage(Type:"" Params:"") ~Stage <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Stage Birth "verb/nexus-seal-seat admin/none ~ the operator's own personas declare and stand" >>
 <<~Stage Advance "verb/nexus-seal-rotate admin/none ~ pre-committed, quorum-bound" >>
@@ -406,7 +406,7 @@ A bag already declares ''who may read it'' (`CapTier`) and ''whether it stands l
 temperature). Neither answers ''where its bytes rest'', and one pair proves the axis stands apart: the canon
 memes and the Nexus seal read as equally PUBLIC and want ''opposite homes''.
 
-\procedure ~Home(~Type:"" ~Params:"") ~Home <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Home(Type:"" Params:"") ~Home <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Home Repository "rests/a-configured-source-control-repo clone-carries/yes ~ canon, memes, seeds — the history IS the point" >>
 <<~Home Hearth "rests/the-operator's-DATA-home clone-carries/no ~ identity · the seal · the follow-graph · the persona names · the acquired shelf" >>
@@ -775,7 +775,7 @@ what — ''the label answers //who do I call at recovery//'', nothing more.
 ''one'' share, which is nothing. The inverse matters more: ''the two guardians recover WITHOUT you''. That
 converts a death, a hospitalization, or a lost vault from the end of the lineage into a survivable event.
 
-\procedure ~Ask(~Type:"" ~Params:"") ~Ask <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Ask(Type:"" Params:"") ~Ask <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Ask Collusion "asks/would-these-two-combine-against-me ~ together they hold the Nexus; pick two whose interests differ FROM EACH OTHER" >>
 <<~Ask Correlation "asks/could-one-fire-flood-or-subpoena-reach-both ~ two cards in one house reads as a 1-of-1 wearing a costume" >>
@@ -1387,6 +1387,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;B2y2WK5eVbOBDse-fnWU0yJPVzisM94p3FtBAYhzqC4
+<<^ code:"&#x0003;" >>ni:///sha-256;o3PhwDVdRSJX-9inLhVuhVb8gKK9gWhHfrBI0SVDooQ
 
 <<^ code:"&#x0004;" -> ? >>

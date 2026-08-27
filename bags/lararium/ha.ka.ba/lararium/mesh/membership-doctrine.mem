@@ -67,7 +67,7 @@ stance (#carry-contract, #the-frame) in the one place it would otherwise erode f
 A human's posture rides the vessels in their PersonaGroup pool — a ''posture, not a caste'', chosen
 vessel by vessel (#identity-classes):
 
-\procedure ~Stack(~Type:"" ~Params:"") ~Stack <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Stack(Type:"" Params:"") ~Stack <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Stack OPERATOR "runs/a node vessel does/CONTRACTS with the Nexus (owes MANDATORY carriage) trace/a wax-sealed carriage contract — consensual, minimal, revocable (Kapae)" >>
 <<~Stack USER "runs/browser-style vessels, no infra does/SOFT-ATTACHES (boot-seeded from a node on the rhizome, own cap-stack, reads/writes through blind relays) trace/NONE — no roster, no account, no user table" >>
@@ -203,6 +203,6 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;cw7ciDtQ5nDnjkAsCyAIqBEwkvCUqp3YhvP5u3kovsQ
+<<^ code:"&#x0003;" >>ni:///sha-256;6McDi3ohhSykwDJBxPaxUXKapuY8fC3EGbcf__rDTo0
 
 <<^ code:"&#x0004;" -> ? >>

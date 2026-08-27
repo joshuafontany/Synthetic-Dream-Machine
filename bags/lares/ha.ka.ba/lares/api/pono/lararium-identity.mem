@@ -70,7 +70,7 @@ stands ''PROPOSED'' until that settles.
 
 !! The Five Scales (the group axis)
 
-\procedure ~Scale(~Type:"" ~Params:"") ~Scale <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Scale(Type:"" Params:"") ~Scale <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Scale Device-Vessel "holds/a distinct on-device key — the user×vessel bond; the base principal, a nameless #has-stack of its own caps ~ node · browser session · QA box; each a causal island, each self-signing" >>
 <<~Scale PersonaGroup "holds/the operator — a principal that #has a stack of its own vessels ~ the delegation edges land here, NOT the device key itself" >>
@@ -199,7 +199,7 @@ Zooko's triangle by layering (the unforgeable capability stays the root; the pet
 no global registry). The petname namespace ''needs no new infrastructure — it IS the `lar:` grammar''
 ''already in code'' (`STABLE_L_SPACE = "ha.ka.ba"`, `lar-uris.ts`):
 
-\procedure ~Petname(~Type:"" ~Params:"") ~Petname <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Petname(Type:"" Params:"") ~Petname <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Petname Stable "region/lar:///ha.ka.ba/'' holds/canonical · permanent · shared · persistable ~ the well-known @oracle·@lares·@catalog·@lararium ARE stable petnames already" >>''
 ''<<~Petname Unstable "region/lar:///t1.t2.t3/'' holds/per-session · per-relationship · per-place · living ~ never persisted to the stable graph; the local names a vessel grows for the peers and places it meets" >>
@@ -234,7 +234,7 @@ identity never collapses to a universal index; the veil + the capability stay lo
 
 ''Crossing a group threshold runs a gesture on the veil — LIFT or HOLD:''
 
-\procedure ~Veil(~Type:"" ~Params:"") ~Veil <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Veil(Type:"" Params:"") ~Veil <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Veil Lift "does/keeps the key · links the veil to the PersonaGroup · carries the reputation across ~ the continuity path; the signed delegation edge (#delegation-edge) ENACTS it — built" >>
 <<~Veil Hold "does/severs · spins a fresh veil over a fresh key (refound) · leaves the old veil's history unwelded ~ the unlinkability path; keeps the operator's multitude unlinkable (home-me·work-me·test-me) — the unbuilt twin" >>
@@ -267,7 +267,7 @@ hums, neglect it and it flickers back to the floor. Set foundational, never bolt
 2026-06-25). Four blind domains converged on the shape (DHCP soft-state · UCAN attenuation ·
 quorum-sensing hysteresis · the institutional lease-not-ceremony):
 
-\procedure ~Lease(~Type:"" ~Params:"") ~Lease <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Lease(Type:"" Params:"") ~Lease <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Lease Floor "rests/anon, NEVER zero ~ decay returns a vessel to the floor; its key stays valid to re-climb" >>
 <<~Lease Feed "runs/re-issue the grant before expiry ~ the grantor re-signs the edge; feeding the Lar made literal — unfed, the grant decays (soft-state, no teardown)" >>
@@ -309,7 +309,7 @@ member. ''Absent a voucher, the applicant ANERGIZES'' — it draws no ban; it ''
 ''(anon), hyporesponsive, free to re-present later'' with a vouch. Fail-closed reads //stay-at-the-floor//,
 never //destroy// (#the-lease, floor=anon).
 
-\procedure ~Gate(~Type:"" ~Params:"") ~Gate <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Gate(Type:"" Params:"") ~Gate <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Gate Relative "sets/cost = a function of the invite-graph max-flow from the kahu's trust-seeds ~ Advogato; a deep-rep voucher shortens the path, the graph topology IS the floor, non-transferable" >>
 <<~Gate Co-pay "stakes/the voucher co-pays with their own standing — and so WATCHES ~ a referral's misbehavior decays the voucher's invite-capacity (slashing-by-revocation); the graph self-polices, every voucher a sentinel over the one it let in" >>
@@ -415,7 +415,7 @@ unfed (#the-lease), the kahu's own included; no permanent write-authority stands
 
 So @oracle wears ''two faces'', joined by a publish-bridge:
 
-\procedure ~OraclePlane(~Type:"" ~Params:"") ~OraclePlane <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~OraclePlane(Type:"" Params:"") ~OraclePlane <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~OraclePlane WriteFace "holds/the kahu's mutable Automerge CRDT — the live commons + ONE pointer doc carrying the current CID ~ the only docId needing write-enforcement; the attack surface shrinks from every-doc to one index" >>
 <<~OraclePlane ReadFace "holds/the CONTENT-ADDRESSED constitutional core — genesis grammar · memes · catalog schema signed into an append-only CID manifest ~ anon fetches immutable blobs by CID; the content-address itself refuses a write — no write-auth problem on this surface" >>
@@ -426,7 +426,7 @@ So @oracle wears ''two faces'', joined by a publish-bridge:
 
 ''The pointer face carries a signed monotone lineage-linked record.'' The read face self-refuses writes but cannot, alone, name //which// snapshot stands current — so a thin ''pointer'' rides the existing channel: `{ cid, version, prev_pointer_cid, expiry, sig }`. The reader rule: verify the signature → reject any `version` below its remembered high-water (anti-rollback rides the ''epoch-lease / max-register'' already in the stack) → check `prev` links the last-known head (anti-equivocation rides Keyhive/Automerge causal ancestry, gossiped) → fetch + hash-verify the cid. Freshness leans on the ''local'' clock (the `expiry`), never a global now. Prior art: Git (object+ref), IPNS (signed record + sequence), TUF (layered freshness + explicit rollback-refusal), Certificate Transparency (gossiped extends-proofs). The hard engineering lives in the thin pointer; the heavy artifact stays a dumb immutable blob, fetch-from-anyone (Nix-style source-agnostic).
 
-\procedure ~Substrate(~Type:"" ~Params:"") ~Substrate <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Substrate(Type:"" Params:"") ~Substrate <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Substrate Floor "holds/the content-addressed snapshot — Automerge.save blob by hash, served whole over the node's HTTP server; read-only by the hash; always-on, cheapest ~ the floor every reader falls back to" >>
 <<~Substrate Pointer "holds/the signed monotone lineage-linked pointer {cid·version·prev·expiry·sig} ~ currency + anti-rollback + anti-equivocation in one small object, riding the existing channel" >>
@@ -488,7 +488,7 @@ plaintext-local easy path — it bites hard in early alpha. The keying rides ''n
 ''Automerge docs'', reusing the registry-instead-of-DNS pattern (`@oracle`/`@catalog`),
 not a parallel key-store:
 
-\procedure ~Doc(~Type:"" ~Params:"") ~Doc <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Doc(Type:"" Params:"") ~Doc <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Doc Registry "per/cabal holds/doc-ID pointers ~ a causal island, locally-anchored; bootstrap pointer travels out-of-band, the rest rides the mesh" >>
 <<~Doc Delegations "holds/signed device-delegation edges ~ the capability port; trust rides the signature, never the doc's write-ACL" >>
@@ -598,6 +598,6 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;aN4eJv_1g0m-4K53_xz2fkm5acM27n6guUd8_hp4NrE
+<<^ code:"&#x0003;" >>ni:///sha-256;0zha99NJSduSFPVbl4GyYLlIf5W-n6VsXLTpm2lCTN8
 
 <<^ code:"&#x0004;" -> ? >>

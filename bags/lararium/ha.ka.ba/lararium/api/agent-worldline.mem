@@ -44,7 +44,7 @@ hunted the shape and ''rhymed to one binding'', and that binding reads cleanly a
 
 The three faces, each its own organ, none collapsing into another:
 
-\procedure ~Face(~Type:"" ~Params:"") ~Face <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Face(Type:"" Params:"") ~Face <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Face Name "carries/descent = address ~ a derived lineage-path handle baptized at spawn (#name)" >>
 <<~Face Attribution "carries/who-drove-whom ~ a reified prov:Delegation DAG, doubling as the worldline's happened-before (#attribution)" >>
@@ -57,7 +57,7 @@ The three faces, each its own organ, none collapsing into another:
 
 !! Face I ~ Name ~ descent is the address
 
-\procedure ~Part(~Type:"" ~Params:"") ~Part <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Part(Type:"" Params:"") ~Part <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Part Handle "carries/a lineage-path handle BAPTIZED at spawn, DERIVED not minted — `run.parent.child` or `CID(parent,role,spawn-args,nonce)`; the parent recovers FROM the child; no registry. = the trace-id/span-id formalized [Meristem: the division path AB.pla IS the name · Deixis: Kripke baptism + teknonymy · Cipher: pid/span-id/BIP32-path · Archivist: local-first, no-registry]" >>
 <<~Part Self "resolves/by RULE against the spawn-context (the indexical 'I' = the agent of THIS context), never a stored referent; the handle carries identity, the pet-name labels only [Deixis: character vs content · Cipher: petname split]" >>
@@ -91,7 +91,7 @@ the verb the same way the handle does: descent IS the address, so the worldline 
 its own wing; this face names the //edges between them// — the coordination graph the
 frameworks throw away and the memory must keep. It stacks ''three layers'':
 
-\procedure ~Layer(~Type:"" ~Params:"") ~Layer <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Layer(Type:"" Params:"") ~Layer <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Layer Identity "organ/wing + #has grain/the-actor ~ PERSISTENT actors (operator, recurring specialists) keep a NAMED wing. EPHEMERAL tasked spirits go NAMELESS — identity IS their #has stack (capabilities · role · task), pet-name only a handle; they land in the project __spirits wing and recall by semantic search over captured verbatim (capability-routed comes free), never name-exact. The run-id is never the key." >>
 <<~Layer Provenance "organ/added_by grain/the-chunk ~ every drawer carries its actor (who-said-what). PROV wasAttributedTo; mem0 agent_id. The episodic provenance layer." >>
@@ -148,7 +148,7 @@ merge-point that is //not// a handback. So 'the worldline's one sync point' gene
 
 Wings stay isolated; one shared token lets the harvester draw the inter-wing edge:
 
-\procedure ~Kind(~Type:"" ~Params:"") ~Kind <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Kind(Type:"" Params:"") ~Kind <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Kind In-Process "case/Claude tasked-spirits key/IN-BAND — agentId + parentUuid + the subagents/ dir + the handoff ~ the structure already carries the link; the edge stamps at mine time. No env needed." >>
 <<~Kind Cross-Surface "case/a claude coordinator drives gh-copilot/codex key/W3C trace-id via env TRACEPARENT ~ the coordinator MINTS a trace-id + span-id once, injects TRACEPARENT into the worker env, BOTH sides record it; the harvester joins on trace-id, orients the arrow by parent-span-id. Needs a thin launcher SHIM (gh copilot ignores TRACEPARENT today)." >>
@@ -292,7 +292,7 @@ already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ti
 
 !! Lifecycle ~ ephemeral by default, a few promoted to memory
 
-\procedure ~Stage(~Type:"" ~Params:"") ~Stage <<~Type>> <<~holds `[<~Params>]`>>
+\procedure ~Stage(Type:"" Params:"") ~Stage <<Type>> holds [{{{ [<Params>] }}}]
 
 <<~Stage Mandate "carries/scope + TTL + revocability + duties on the spawn (power-of-attorney); lapses on parent-dissolution unless 'durable'; handback RATIFIES (back-dates, re-checks scope) + merges packaged-atomic-filtered (apoptosis: sealed, never spilled; the bottleneck filters what merges back) [Fiduciary: POA + ratification · Meristem: apoptosis + mtDNA bottleneck]" >>
 <<~Stage Span "runs/EPHEMERAL by default (effectors culled after task), a few promoted to MEMORY (persistent named wings); spawn-rate governed by backpressure; a parent normally holds MANY merged lineages (chimerism = health, not corruption) [Meristem: clonal effector/memory · CLV-WUS feedback]" >>
@@ -429,6 +429,6 @@ attribute to the spirit that moved them.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JZN8xTU4Hsy4fBkCq4248eUMO7ww1d9rScoXFOu2kfs
+<<^ code:"&#x0003;" >>ni:///sha-256;Zp4V29HmEmPdaqMfSwsw8AgLf0zwgb_h74nj0tO9YLo
 
 <<^ code:"&#x0004;" -> ? >>
