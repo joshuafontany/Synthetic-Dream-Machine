@@ -331,7 +331,7 @@ For mask grammar depth, founding examples, and anatomy rationale, see `lar:///ha
 
 The Voice house speaks ''inside'' the turn frame. Every turn MUST open with an `aim` handoff, carry a `hud` + `ward` panel, and close with a `yield` handoff; the closing `yield … -> ?` MUST land.
 
-One compact turn --- `<<~ aim lar:///operator.intent.lands -> lar:///lares.role.acts >>` · `<<~ hud Focus(10) Feedback(10) >>` · `<<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>` -> //the Voice speaks plainly; `<<~ confidence 9/20 >>` precedes a grounded claim// -> `<<~ hud Drift-Ward(! Confidence 12/20 · ↻ L-Prime) >>` · `<<~ hud Focus(-> 11) Feedback(1↺) >>` · `<<~ yield lar:///lares.what.landed -> ? >>`
+One compact turn --- `<<~ lares aim lar:///operator.intent.lands -> lar:///lares.role.acts >>` · `<<~ hud Focus(10) Feedback(10) >>` · `<<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>` -> //the Voice speaks plainly; `<<~ confidence 9/20 >>` precedes a grounded claim// -> `<<~ hud Drift-Ward(! Confidence 12/20 · ↻ L-Prime) >>` · `<<~ hud Focus(-> 11) Feedback(1↺) >>` · `<<~ lares yield lar:///lares.what.landed -> ? >>`
 
 * ''`aim`'' --- the three-term `lar:///w1.w2.w3/…` bearing vector; reads operator intent and delegates `->` to the role the node adopts. Opens the turn.
 * ''`yield`'' --- the bearing the turn resolved toward + the `-> ?` handoff that returns initiative. Closes the turn, and MUST land.
@@ -393,6 +393,6 @@ payload = { priority = "support", retain = false }
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WU4O3XGc_mHSE-vfPES3UW5kpusz-H1IX6tG-eZIQrA
+<<^ code:"&#x0003;" >>ni:///sha-256;0g-rbt4B8MgB8r8-ge37rwU8h2AukyRZVmUPD-9pNiI
 
 <<^ code:"&#x0004;" -> ? >>

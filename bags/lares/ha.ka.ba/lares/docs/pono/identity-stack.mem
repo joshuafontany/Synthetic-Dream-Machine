@@ -78,7 +78,7 @@ The attitude triple (`//ha.ka.ba`) sits ''before'' other instruments like confid
 | Render target | Surface | URIs canonical? | When used |
 |---|---|---|---|
 | `chat-log:post-header` | `@handle@node — timestamp — //ha.ka.ba{/path} [Reg] 🏛️{tc}…` | No — social projection with glyphs | DreamDeck feed posts, BBS thread headers |
-| `hud:exchange-pair` | `<<~ aim … >>` + `hud`·`ward` panel beneath | ''Yes — canonical ASCII URI''; only the sigil panel uses glyphs | Every exchange-span boundary (mandatory) |
+| `hud:exchange-pair` | `<<~ lares aim … >>` + `hud`·`ward` panel beneath | ''Yes — canonical ASCII URI''; only the sigil panel uses glyphs | Every exchange-span boundary (mandatory) |
 | `record:full` | `lar://alias:grant@host/ha.ka.ba/lares/` | Yes — identity projection | Storage, crystal serialization, registry |
 
 The `record:full` and `hud:exchange-pair` render targets live in the lar-uri scheme itself; `chat-log:post-header` rides here because it projects identity + bearing onto the social surface.
@@ -107,6 +107,6 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DIAkoLrE5I_3DpmLfuTxRdF4jcQDKce3R2F2bDC7Myk
+<<^ code:"&#x0003;" >>ni:///sha-256;dn02PpRHqN1EWpnc6vT4GBruqzRhND6hijPkQgw62qY
 
 <<^ code:"&#x0004;" -> ? >>
