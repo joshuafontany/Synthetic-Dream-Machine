@@ -166,6 +166,8 @@ Selection rules:
 * Roles `observes`, `throttles`, `debounces` — not reflected in spec (future: modifier semantics)
 
 <<!/ahu >>
+<<~/ahu >>
+
 
 <<~ ahu #reaction-engine-removal >>
 
@@ -181,6 +183,8 @@ No TS overlay engine runs beside TW5. The wiki IS the engine. The nalu IS the ti
 See: `lar:///ha.ka.ba/lares/api/pono/nalu#yin-collapse-law`
 
 <<!/ahu >>
+<<~/ahu >>
+
 
 <<~ ahu #edges >>
 
@@ -193,6 +197,7 @@ See: `lar:///ha.ka.ba/lares/api/pono/nalu#yin-collapse-law`
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GagMepm_om1Y6ZXj19M7JTAQlaUXtbQdXjKwZvwQXQ8
+
+<<^ code:"&#x0003;" >>ni:///sha-256;a0ncUu0AZ5Yf7LrPD6D7jXmgSFQt1dqudIeo0AcVMWQ
 
 <<^ code:"&#x0004;" -> ? >>

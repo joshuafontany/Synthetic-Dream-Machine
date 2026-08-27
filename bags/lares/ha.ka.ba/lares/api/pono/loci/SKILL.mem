@@ -32,7 +32,6 @@ This skill runs that law through the OODA-HA cycle.
 This skill does not widen, soften, or reinterpret it.
 
 Loci SKILL opens the procedural stream here.
-<<~/ahu >>
 
 
 <<~ ahu #load-contract >>
@@ -224,6 +223,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VEygzX7mEDTlZSDHYZjfxBH9WczYmUx3aS21PWeeFzk
+<<^ code:"&#x0003;" >>ni:///sha-256;3JtBhxx_wNcUU5iXyLHb2JR0XobUH3YRbBlH_Jn9QLI
 
 <<^ code:"&#x0004;" -> ? >>

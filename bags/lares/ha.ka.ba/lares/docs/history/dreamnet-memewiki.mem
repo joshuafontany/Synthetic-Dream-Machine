@@ -36,8 +36,6 @@ expectation.
 ''This memo holds no law.'' It records how a field of scattered research became an implementable
 architecture, and which of its bets the building honoured.
 
-<<~/ahu >>
-
 <<~ ahu #phase-map >>
 
 !! Phase Map
@@ -467,6 +465,6 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fGJOdb9nqWr9ptK7cWBAi1O3YBPGL4jKCxJRiLdfoIE
+<<^ code:"&#x0003;" >>ni:///sha-256;CxB9K0QSU23__do3Au5bzva-Tdwo1gqAKHEZmmTTVHY
 
 <<^ code:"&#x0004;" -> ? >>

@@ -163,13 +163,11 @@ role-as-capability; native-first by subtraction), and the node + browser suites 
 vessels through the phase sequence, so the invariant carries a live guard rather than an
 argument. What stays open sits one level out: a live-daemon exercise of the full sequence.
 
-<<~/ahu >>
-
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/causal-island >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oJxJlcoewe2o5kr2cKP_KMekkdcM9WACCpGejOYDzHM
+<<^ code:"&#x0003;" >>ni:///sha-256;Njsc0aWMxeZHrX1yI9PisJ0WgskuGzK_aHOvH5PoWJg
 
 <<^ code:"&#x0004;" -> ? >>
