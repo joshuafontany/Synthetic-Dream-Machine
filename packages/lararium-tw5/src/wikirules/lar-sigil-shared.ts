@@ -106,11 +106,10 @@ export function matchCompoundSigilAt(
   const m = COMPOUND_OPEN_RE.exec(source);
   if (!m || m.index !== start) return null;
   const word1 = m[1]!.replace(/^\\/, "");
-  // PRANALA STANDS OUT FOR ITS FIELDS, NOT ITS SHAPE. `<<~ pranala #x from=A -> to=B family=c >>`
-  // now spells its parameters the way every other sigil does, so the compound reader CAN match it —
-  // it would hand back one undifferentiated `rest`. The edge graph needs `from` and `to` as separate
-  // named ends (a reader that takes whichever address comes first names the SOURCE), so pranala keeps
-  // its own matcher to type those two fields. The arrow between them is the last of its shape.
+  // PRANALA CARRIES TWO TYPED ENDS. This reader hands back one undifferentiated `rest`, and an edge
+  // needs its `from` told apart from its `to`: whoever reads whichever address comes first reads the
+  // SOURCE, and a graph built on that points backwards. `matchPranalaOpenAt` types the two ends, so
+  // pranala routes there.
   if (word1 === "pranala") return null;
   const rest = (m[2] ?? "").trim();
 
@@ -133,8 +132,8 @@ export function matchCompoundSigilAt(
 /**
  * Pranala edge sigil — explicit edge with from/to and optional slot/family/role.
  *
- * Inline form:  `<<~ pranala #name? <from> -> <to> [family:f] [role:r] >>`
- * Block form:   `<<~ pranala #name? <from> -> <to> >>body<<~/pranala >>`
+ * Inline form:  `<<~ pranala #name? from=A -> to=B [family=f] [role=r] >>`
+ * Block form:   `<<~ pranala #name? from=A -> to=B >>body<<~/pranala >>`
  *
  * The two forms share opener parsing; closer presence distinguishes them.
  */

@@ -69,7 +69,7 @@ Declare the lenses, then delegate `->` to the target:
 ```text
 <<~ prism conformance -> lar:///ha.ka.ba/bags/some/target/content >>       # single lens, addressed
 <<~ prism syad=🏛️ 🗡️ conformance -> lar:///draft.fix.lands >>          # composed spectrum
-<<~ prism mu:*! -> "<pasted or quoted content>" >>                     # a tool facet, inline
+<<~ prism mu=*! -> "<pasted or quoted content>" >>                     # a tool facet, inline
 ```
 
 The lens list rides left of the `->`; the referenced target rides right. A target that resolves to the node's own current turn reads as a degraded invocation --- Prism reads //other// content, never the node's own live output (kin to the `conformance` rule).
@@ -114,6 +114,6 @@ Prism keeps the worthwhile half --- //reference a piece of content and read its 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;_DMtkbW-sDBPENM0F_k1ktOoK6vY4hijkmYiQfIPx9g
+<<^ code:"&#x0003;" >>ni:///sha-256;M2tHBfk1iPF-evaLtQLCL8aHJjMJDPIFuNBfATuurHY
 
 <<^ code:"&#x0004;" -> ? >>
