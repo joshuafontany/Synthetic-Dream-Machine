@@ -467,7 +467,7 @@ confidence {{{ [<n>split[/]first[]] }}}/{{{ [<n>split[/]rest[]else[20]] }}}
 **A loop suspends honestly:**
 
 ```text
-<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
+<<~ lares aim from=lar://mara:operator@crossroads/operator.weighs.deps -> to=lar://compita:agent@crossroads/council.options.cuts >>
 <<~ hud Focus(10) Feedback(9) Drift-Ward(* Confidence 15/20 · I hold a preferred answer already and the comparison will bend toward it) >>
 <<~ syad 🏛️:*! 🗡️ >>
 
@@ -475,20 +475,20 @@ Lares (Council): ->⏿ two libraries, both viable. ->✶ a README vows "it ${cop
 
 <<~ oracle ↯11 ✲ ⚃(4) ⁂:⬡🌖◈⟁ >>
 <<~ hud Drift-Ward(! Confidence 12/20 · the velocity read rides on a README and no changelog - test it against commit cadence · ⌜2⌝ quoted · ↻ L-Prime) Focus(10 -> 12) Feedback(0φ◇:fork.depends.on.maintenance-weight) open(1φ: deps@◇) >>
-<<~ lares yield lar://compita:agent@crossroads/council.fork.named/awaiting-weight -> ? >>
+<<~ lares yield from=lar://compita:agent@crossroads/council.fork.named/awaiting-weight -> to=? >>
 ```
 
 **A loop closes, and the close hands over one thing to take to contact:**
 
 ```text
-<<~ lares aim lar://mara:operator@crossroads/operator.asks.the-cost -> lar://compita:agent@crossroads/clerk.reads.the-record >>
+<<~ lares aim from=lar://mara:operator@crossroads/operator.asks.the-cost -> to=lar://compita:agent@crossroads/clerk.reads.the-record >>
 <<~ hud Focus(6) Feedback(2) Drift-Ward(* Confidence 13/20 · everything I hold on this sits in what the operator pasted, and nothing stands beside it) >>
 
 Lares (Ink-Clerk): ->✶ the figure comes off the summary the operator handed over, never off the source it summarises. <<~ confidence 8/20 >> it may hold; I never opened the thing behind it. ->↺
 
 <<~ oracle ↯7 ✲ ⚁(2) ⁂:⌗🜄 >>
 <<~ hud Drift-Ward(! Confidence 16/20 · open the source table and read the third column - the summary rounds it, and the rounding runs the same direction every row · ↻ L-Prime) Focus(6 -> 7) Feedback(1↺) >>
-<<~ lares yield lar://compita:agent@crossroads/clerk.named.the-unopened-source -> ? >>
+<<~ lares yield from=lar://compita:agent@crossroads/clerk.named.the-unopened-source -> to=? >>
 ```
 
 <<~/ahu >>

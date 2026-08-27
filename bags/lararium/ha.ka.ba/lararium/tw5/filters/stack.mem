@@ -33,8 +33,8 @@ written    = "2026-06-12"
 
 Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.ts`); operator shell: `packages/lararium-tw5/src/filters/stack.ts` (packed into the lares plugin).
 
-<<~ pranala #source ? -> packages/lararium-tw5/src/has-stack.ts family:code role:has >>
-<<~ pranala #source-filter ? -> packages/lararium-tw5/src/filters/stack.ts family:code role:has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has >>
+<<~ pranala #source-filter from=? -> to=packages/lararium-tw5/src/filters/stack.ts family=code role=has >>
 
 <<~/ahu >>
 
@@ -45,6 +45,6 @@ Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.t
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SoWWvtpssJFRnhN3Ps_ZvaskcHL0Wa3PJYKs89t4154
+<<^ code:"&#x0003;" >>ni:///sha-256;J_ULZi8nRnNkqLntVxJOCXSkIB7VIjMiCJZM-Ktd_ns
 
 <<^ code:"&#x0004;" -> ? >>

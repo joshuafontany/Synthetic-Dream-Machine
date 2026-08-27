@@ -115,11 +115,11 @@ Act V receives:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necroscript >>
 
-<<~ pranala #follows-the-shore ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore family:relation role:follows >>
-<<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necroscript family:relation role:precedes >>
+<<~ pranala #follows-the-shore from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore family=relation role=follows >>
+<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necroscript family=relation role=precedes >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;W7GirZakXE_L8WCKsQqKedLMO09HQZZaNKdm1VagXn4
+<<^ code:"&#x0003;" >>ni:///sha-256;2P4UdELPCHPJTVEuTwlhkluDBvxw_yl2b1osZtYV_Do
 
 <<^ code:"&#x0004;" -> ? >>

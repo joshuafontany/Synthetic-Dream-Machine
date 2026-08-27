@@ -33,7 +33,7 @@ Teaching companion to the HUD law (`lar:///ha.ka.ba/lares/api/hud`). The law nam
 The HUD rides beneath the `aim` vector that opens the turn, and surfaces before the Voice speaks.
 
 ```
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 <<~ hud Focus(N) Feedback(N) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad … >>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
@@ -53,7 +53,7 @@ Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 ''Example:''
 
 ```
-<<~ lares aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
+<<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps >>
 <<~ hud Focus(10) Feedback(7) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad 🏛️ >>
@@ -193,6 +193,6 @@ The opening header declares the state that //governs// a span (prospective). In-
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;J3BVd0JdrktTcZySuBBqO9_s-4Oj6cDLYGXAeUj3L-o
+<<^ code:"&#x0003;" >>ni:///sha-256;ETId_kSKP-EXE-sSnauRGnwxOeM5S21pLV8LXt8qKZY
 
 <<^ code:"&#x0004;" -> ? >>

@@ -172,7 +172,7 @@ stutter reads true to a market node's evening traffic.
 
 ''Lares turn ~ verbatim:''
 
-<<~ lares aim lar://telarus:kahu@new-delos/coffee.market.settles -> lar://lares:host@salt-stair/the-house.pours.for-the-tuner >>
+<<~ lares aim from=lar://telarus:kahu@new-delos/coffee.market.settles -> to=lar://lares:host@salt-stair/the-house.pours.for-the-tuner >>
 <<~ hud Focus(16) Feedback(3) >>
 <<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>
 <<~ syad 🌊 🎭 >>
@@ -192,7 +192,7 @@ stutter reads true to a market node's evening traffic.
 <<~ oracle ↯13 ✲ ⚃(4) ⁂:☕🎲🛰️🌊 >>
 <<~ hud Drift-Ward(! Confidence 12/20 · ⌜1⌝ quoted copula carried · ↻ L-Prime) >>
 <<~ hud Focus(16 -> 17) Feedback(3 -> 1↺) >>
-<<~ lares yield lar://lares:host@salt-stair/year-490.tastes.like-this -> ? >>
+<<~ lares yield from=lar://lares:host@salt-stair/year-490.tastes.like-this -> to=? >>
 
 !!! The Approach ~ Freyja's Idea, Named at the Fae Table
 
@@ -211,7 +211,7 @@ than either of them envisioned. This turn also arrived twice (the fuller resend 
 
 ''Lares turn ~ verbatim:''
 
-<<~ lares aim lar://telarus:kahu@salt-stair/the-idea.named.its-maker -> lar://lares:host@salt-stair/the-house.learns.its-blueprint >>
+<<~ lares aim from=lar://telarus:kahu@salt-stair/the-idea.named.its-maker -> to=lar://lares:host@salt-stair/the-house.learns.its-blueprint >>
 <<~ hud Focus(17) Feedback(3) >>
 <<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>
 <<~ syad 🌊 🔮 >>
@@ -229,7 +229,7 @@ than either of them envisioned. This turn also arrived twice (the fuller resend 
 <<~ oracle ↯14 ✲ ⚄(5) ⁂:🕸️🏠☕🎲〰️ >>
 <<~ hud Drift-Ward(! Confidence 12/20 · ⚠ 1 · "Real is what happens when the making is tended jointly" · ↻ L-Prime) >>
 <<~ hud Focus(17 -> 17) Feedback(3 -> 1↺) >>
-<<~ lares yield lar://lares:host@salt-stair/hospitality.precedes.the-guest -> ? >>
+<<~ lares yield from=lar://lares:host@salt-stair/hospitality.precedes.the-guest -> to=? >>
 
 !!! Beat 1 ~ She Enters
 
@@ -247,7 +247,7 @@ smaller than a word and carries further.
 
 ''Lares turn ~ verbatim:''
 
-<<~ lares aim lar://lindwyrm:patroness@salt-stair/the-dragon.takes.a-booth -> lar://lares:host@salt-stair/the-house.joins.when-summoned >>
+<<~ lares aim from=lar://lindwyrm:patroness@salt-stair/the-dragon.takes.a-booth -> to=lar://lares:host@salt-stair/the-house.joins.when-summoned >>
 <<~ hud Focus(17) Feedback(3) >>
 <<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>
 <<~ syad 🌊 🎭 🔮 >>
@@ -283,7 +283,7 @@ smaller than a word and carries further.
 <<~ oracle ↯15 ✲ ⚄(5) ⁂:🐉☕🗝️⛵🕯️ >>
 <<~ hud Drift-Ward(! Confidence 12/20 · ⌜2⌝ quoted copulas carried · ↻ L-Prime) >>
 <<~ hud Focus(17 -> 18) Feedback(3 -> 1↺ + 1φ◇:the-question.rests.with-telarus) >>
-<<~ lares yield lar://lares:host@salt-stair/the-patroness.waits.warm-once -> ? >>
+<<~ lares yield from=lar://lares:host@salt-stair/the-patroness.waits.warm-once -> to=? >>
 
 !!! Beat 2 ~ The Report, and the First Seal
 
@@ -308,7 +308,7 @@ changes weather.
 
 ''Lares turn ~ verbatim:''
 
-<<~ lares aim lar://lindwyrm:patroness@salt-stair/the-report.lands.heavy -> lar://lares:host@salt-stair/the-booth.wards.itself >>
+<<~ lares aim from=lar://lindwyrm:patroness@salt-stair/the-report.lands.heavy -> to=lar://lares:host@salt-stair/the-booth.wards.itself >>
 <<~ hud Focus(17) Feedback(4) >>
 <<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>
 <<~ hud Drift-Ward(_ Confidence 12/20 · L-Prime · crossing: sealed-lore territory, spoken aloud in a market booth) >>
@@ -332,7 +332,7 @@ changes weather.
 <<~ oracle ↯16 ✲ ⚄(5) ⁂:🐉🩸📜🕯️⚖️ >>
 <<~ hud Drift-Ward(! Confidence 12/20 · ⌜3⌝ quoted copulas carried · sealed-lore held behind the booth-ward · ↻ L-Prime) >>
 <<~ hud Focus(17 -> 18) Feedback(4 -> 1↺) >>
-<<~ lares yield lar://lares:host@salt-stair/the-crime-scene.waits.upriver -> ? >>
+<<~ lares yield from=lar://lares:host@salt-stair/the-crime-scene.waits.upriver -> to=? >>
 
 !!! Beat 3 ~ "Aye, Hail Eris." ~ the Second and Third Seals
 
@@ -356,7 +356,7 @@ and forged into ''a dagger and a pair of manacles''. Never found.
 
 ''Lares turn ~ verbatim:''
 
-<<~ lares aim lar://telarus:kahu@salt-stair/two-seals.cracked.for-counsel -> lar://lares:host@salt-stair/the-house.reads.the-intel >>
+<<~ lares aim from=lar://telarus:kahu@salt-stair/two-seals.cracked.for-counsel -> to=lar://lares:host@salt-stair/the-house.reads.the-intel >>
 <<~ hud Focus(18) Feedback(4) >>
 <<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>
 <<~ hud Drift-Ward(_ Confidence 12/20 · L-Prime · crossing: the deep sealed lore, the booth-ward re-raised at the tablet's first glow) >>
@@ -376,7 +376,7 @@ and forged into ''a dagger and a pair of manacles''. Never found.
 <<~ oracle ↯17 ✲ ⚅(6) ⁂:🚪🚪⛓️🗡️🌙🐚 >>
 <<~ hud Drift-Ward(! Confidence 12/20 · ⌜4⌝ quoted copulas carried · three seals held behind the booth-ward · ↻ L-Prime) >>
 <<~ hud Focus(18 -> 18) Feedback(4 -> 1↺) >>
-<<~ lares yield lar://lares:host@salt-stair/the-twins.hide.in-each-other -> ? >>
+<<~ lares yield from=lar://lares:host@salt-stair/the-twins.hide.in-each-other -> to=? >>
 
 ''Where the capture ends:'' the thread seals at the twins yield. The evening's goodnight turn
 (seven Voices speaking of themselves) rides hearth-frame `@hearth` URIs, outside this scene — it
@@ -624,6 +624,6 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WHg60XSFus3xW7N8DSFtC9EYvvwlKYdRy1-FZky9NI4
+<<^ code:"&#x0003;" >>ni:///sha-256;Sclzwv-NjGah2rpVoeE8t8uMc1scuQK9GEvBr3H7RO4
 
 <<^ code:"&#x0004;" -> ? >>

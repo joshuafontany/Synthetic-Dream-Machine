@@ -114,13 +114,13 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 <<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
-<<~ pranala #same-integrity-at ? -> lar:///ha.ka.ba/lararium/api/residency-tiers family:relation role:bag-grain >>
-<<~ pranala #same-integrity-at ? -> lar:///ha.ka.ba/lararium/mesh/content-resolution family:relation role:body-grain >>
-<<~ pranala #gated-by ? -> lar:///ha.ka.ba/lararium/api/residency-tiers#/third-tier-gate family:constraint role:governed-by >>
-<<~ pranala #projection-law ? -> lar:///ha.ka.ba/lararium/api/disk-projection family:constraint role:governed-by >>
+<<~ pranala #same-integrity-at from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers family=relation role=bag-grain >>
+<<~ pranala #same-integrity-at from=? -> to=lar:///ha.ka.ba/lararium/mesh/content-resolution family=relation role=body-grain >>
+<<~ pranala #gated-by from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers#/third-tier-gate family=constraint role=governed-by >>
+<<~ pranala #projection-law from=? -> to=lar:///ha.ka.ba/lararium/api/disk-projection family=constraint role=governed-by >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oBZCu8hucRpdxQSsX2kJl-IUdDe7uCD_nIaUy5DQ-e8
+<<^ code:"&#x0003;" >>ni:///sha-256;KkIJyfPebWSBr5cebZS3v19XsDHIM3hHnhvOFGYEoTA
 
 <<^ code:"&#x0004;" -> ? >>

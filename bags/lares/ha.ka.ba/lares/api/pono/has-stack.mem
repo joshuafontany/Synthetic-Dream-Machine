@@ -54,8 +54,8 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 
 Runtime: `qualifyStackTag` / `stackOf` and the `stack` filter operator (`[stack[]]`, `[stack:has[<name>]]`).
 
-<<~ pranala #source ? -> packages/lararium-tw5/src/has-stack.ts family:code role:has >>
-<<~ pranala #source-filter ? -> packages/lararium-tw5/src/filters/stack.ts family:code role:has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has >>
+<<~ pranala #source-filter from=? -> to=packages/lararium-tw5/src/filters/stack.ts family=code role=has >>
 
 <<~/ahu >>
 
@@ -112,6 +112,6 @@ the py caps consume.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Yk4ix5oOsrM7nVRCAy8FR2bPJ5kDB9GpYGfY6jh4gIM
+<<^ code:"&#x0003;" >>ni:///sha-256;czD1MhT_IlJMCCeRWn_O4o7L-15tSDkHgHN6RlMvWqs
 
 <<^ code:"&#x0004;" -> ? >>

@@ -27,7 +27,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/aka"
 //aka// — Hawaiian: shadow, reflection; to be like; also-known-as.
 
 A transclusion-family edge sugar. Embeds a frozen shadow of the target at the source — read-only, no ownership stake. TW5 shadow-tiddler semantics: the target's content shows through at the source position.
-Sugar for `<<~ pranala ? -> URI family:transclusion >>`. The `transclusion` family is confidence-bounded:
+Sugar for `<<~ pranala from=? -> to=URI family=transclusion >>`. The `transclusion` family is confidence-bounded:
 a frozen embed can age from its source, so edges SHOULD carry a confidence rating when the embed is uncertain.
 
 <<~/ahu >>
@@ -82,7 +82,7 @@ Groups: `[full, target-uri]`
 
 Full pranala expansion:
 ```text
-<<~ pranala ? -> URI family:transclusion lifecycle:instance traversal:source-to-target propagation:none >>
+<<~ pranala from=? -> to=URI family=transclusion lifecycle=instance traversal=source-to-target propagation=none >>
 ```
 
 <<~/ahu >>
@@ -125,6 +125,6 @@ confidence-bounded = true
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HGKBcE0W2iHNnwTBA2VmyDsefDxeLaY4HgiGfk_LUq4
+<<^ code:"&#x0003;" >>ni:///sha-256;IKiGvYJ7H77mcf22NSmc1m6leRT9NofR6EURwzmidcg
 
 <<^ code:"&#x0004;" -> ? >>

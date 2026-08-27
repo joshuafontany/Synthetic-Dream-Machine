@@ -104,11 +104,11 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddler-record >>
-<<~ pranala #source-import ? -> packages/lararium-tw5/src/meme-stream.ts family:code role:has >>
-<<~ pranala #source-export ? -> packages/lararium-node/src/disk-projector.ts family:code role:has >>
+<<~ pranala #source-import from=? -> to=packages/lararium-tw5/src/meme-stream.ts family=code role=has >>
+<<~ pranala #source-export from=? -> to=packages/lararium-node/src/disk-projector.ts family=code role=has >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HYTWPLNBT8-3y9AlRTE7ppJDr9enBC4XG-wVInkdfcg
+<<^ code:"&#x0003;" >>ni:///sha-256;WjVJO0t49h5MRqY5igu2uBa3BW04hTyWJ0fGFPwm4B8
 
 <<^ code:"&#x0004;" -> ? >>

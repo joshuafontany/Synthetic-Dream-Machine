@@ -128,7 +128,7 @@ apart.'' The relational parameter reads `->` `<-` `<->` and nothing else; a glyp
 for a reader and none for a parser.
 
 ⚠ ''THE SIGIL PATH NEVER CARRIED THE FAULT, AND MUST NOT CARRY THE CURE.'' Measured: `<<~ pranala
-lar:///a -> lar:///b >>` splits `from` and `to` with the colons whole, and the generic `<<~ WORD … >>`
+from=lar:///a -> to=lar:///b >>` splits `from` and `to` with the colons whole, and the generic `<<~ WORD … >>`
 hands its entire run through as `p1`. ''Bracketing a URI inside a sigil corrupts it'' — the brackets
 survive into the value as `[[lar:///a]]`. Twenty-one corpus sites ride bare there and MUST stay bare.
 
@@ -256,6 +256,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;nHUXPpwyZubzqSyum4AcIkZnkqSvNoq7sTjNKRpkwFc
+<<^ code:"&#x0003;" >>ni:///sha-256;qkvrrbkrERnk5RDmY7KOHkGnh5FS9oXB-Iqx178hwfo
 
 <<^ code:"&#x0004;" -> ? >>

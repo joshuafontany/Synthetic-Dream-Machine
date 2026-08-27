@@ -118,10 +118,10 @@ The W3C research additionally surfaced: the grammar still lacks its own canonica
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#/w3c-lineage-verdicts >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<~ pranala #side-car-of ? -> lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes family:relation role:accompanies >>
+<<~ pranala #side-car-of from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes family=relation role=accompanies >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KL72-m3SQ99QdGlqVFNzUENLnNRKEs90e9mCBbIyPu0
+<<^ code:"&#x0003;" >>ni:///sha-256;Qes6VOYyZKAUXj5IuWqWzi_XkZCQ4g8rsW39iwWssSA
 
 <<^ code:"&#x0004;" -> ? >>

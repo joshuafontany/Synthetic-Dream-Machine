@@ -94,7 +94,7 @@ The frame runs as follows:
 # Open the turn with the `aim` vector — operator intent `->` the role the node adopts.
 
 ```
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 ```
   The `~` prefix marks an execution-provisional heading — a declared aim, not a confirmed landed resource.
 
@@ -103,7 +103,7 @@ The frame runs as follows:
 
 # Generate, then close.
   OODA-HA phase markers MAY surface forward inline, banded by the gauge.
-  The turn closes on `<<~ lares yield lar:///lares.what.landed -> ? >>`.
+  The turn closes on `<<~ lares yield from=lar:///lares.what.landed -> to=? >>`.
 
 Detailed panel anatomy lives in the HUD room.
 Annotation thresholds and OODA-HA surfacing examples live in sibling signal rooms.
@@ -171,6 +171,6 @@ Settled child rooms in this branch:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mpII2F8oR_sK-czie7nQrs4UzgE8hgADtHpux8GaNUk
+<<^ code:"&#x0003;" >>ni:///sha-256;JextMUXunOZkrktJ66icP9D_ciTXdYxg2vOBuz2lndA
 
 <<^ code:"&#x0004;" -> ? >>

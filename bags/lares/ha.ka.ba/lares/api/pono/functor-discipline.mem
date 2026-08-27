@@ -113,9 +113,9 @@ The collapses ratified this functorially: the four Python holders folded onto a 
 foundation and the palace became a cap-stack instance — each //composed// a shared transport while
 //preserving every op-surface//, the collapse landing byte-stable.
 
-<<~ pranala #compose-island ? -> packages/lararium-tw5/src/island-caps.ts family:code role:has >>
-<<~ pranala #holder-collapse ? -> git:b18235f6 family:provenance role:evidence >>
-<<~ pranala #palace-collapse ? -> git:0af5e326 family:provenance role:evidence >>
+<<~ pranala #compose-island from=? -> to=packages/lararium-tw5/src/island-caps.ts family=code role=has >>
+<<~ pranala #holder-collapse from=? -> to=git:b18235f6 family=provenance role=evidence >>
+<<~ pranala #palace-collapse from=? -> to=git:0af5e326 family=provenance role=evidence >>
 
 ''The Voices and the Syad name functor-categories.'' A Voice ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#/voice-house]]) reads
 as a nameless office composed of move-caps — a functor `Context → Moves`, the visible name addressing a
@@ -293,8 +293,8 @@ correction ''reversed'' it and returned the read to the stack, so the cap-stack 
 <<~ confidence 12/20 >> The live proof of the rule it sharpens — no cap, not even a read,
 stays behind.
 
-<<~ pranala #in-vm-derive ? -> packages/lararium-tw5/src/capture-annotate-vm.ts family:code role:has >>
-<<~ pranala #coordinator-routes ? -> packages/lararium-node/src/multi-graph-recall.ts family:code role:has >>
+<<~ pranala #in-vm-derive from=? -> to=packages/lararium-tw5/src/capture-annotate-vm.ts family=code role=has >>
+<<~ pranala #coordinator-routes from=? -> to=packages/lararium-node/src/multi-graph-recall.ts family=code role=has >>
 
 <<~ confidence 11/20 >> A discipline, enacted once here; it earns Canon by talk-story over
 time (#/honest-bound), the same bound the whole meme keeps.
@@ -343,7 +343,7 @@ the house may test, sharpen, or contest.
 <<~ aka lar:///ha.ka.ba/lares/api/noosphere-boot#/l-prime >>
 <<~ aka lar:///ha.ka.ba/lares/docs/infrastructure-as-myth >>
 
-<<~ pranala #paper ? -> bags/lares-history/lares_research/PAPER_infrastructure_as_myth.md family:transclusion role:evidence >>
+<<~ pranala #paper from=? -> to=bags/lares-history/lares_research/PAPER_infrastructure_as_myth.md family=transclusion role=evidence >>
 
 ''Tie ~ the keel under the canon.'' [[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]] gives the nameless entity + `#has` stack (the
 //object// of every functor here) and its runtime twin (`composeIsland`, the palace-as-cap-stack);
@@ -359,6 +359,6 @@ This meme draws the one arrow through all of them — ''the house is a functor; 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZEsNsxI2wZBL7udIeD9Jd4o7bCGIk-htaB8DHGGoM2A
+<<^ code:"&#x0003;" >>ni:///sha-256;lsuOCoW7aAg9P27LUeJY_tXeiASfpLSOkga5yEX1BXQ
 
 <<^ code:"&#x0004;" -> ? >>

@@ -217,14 +217,14 @@ The identity and UCAN layer is now in place:
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:control role:informs >>
-<<~ pranala #to-multiplayer ? -> lar:///lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI family:control role:informs >>
-<<~ pranala #to-agents ? -> lar:///AGENTS family:control role:receives-law >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs >>
+<<~ pranala #to-multiplayer from=? -> to=lar:///lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI family=control role=informs >>
+<<~ pranala #to-agents from=? -> to=lar:///AGENTS family=control role=receives-law >>
 
 <<~/ahu >>
 
 <<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BqRieDKsBtfAesqfuLZFhebQVvHXGNpLCQoRbCHWyp0
+<<^ code:"&#x0003;" >>ni:///sha-256;VqaMXOCJm5K86J8D3o3I37kaOAhdrwwezgnq1u3IGlM
 
 <<^ code:"&#x0004;" -> ? >>

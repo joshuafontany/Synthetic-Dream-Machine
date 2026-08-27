@@ -220,7 +220,7 @@ Eleven commits across two arcs land the Sigil family work:
 | `a5878459` G.1 | aka URI sigil — `<<~ aka <uri> >>` parses to `aka` widget node, cascade picks template, html template emits `.lar-aka` span with shadow transclusion of target. URI_FORM_SIGIL_RE in lar-sigil-shared.ts matches aka/kahea/loulou. |
 | `136a8c9f` G.2 | pranala-header — `<<~ ? -> uri >>` widget + cascade + templates. PRANALA_HEADER_RE matches the `?` token + arrow + uri shape. |
 | `ab3453f6` G.3 | kahea + loulou URI sigils — widgets for nodes already matched by G.1's URI_FORM_SIGIL_RE. Both render as cascade-resolved spans. |
-| `505932a0` G.4 | pranala edge sigil — inline (`<<~ pranala from -> to family:f role:r >>`) + block (with body) forms. PRANALA_OPEN_RE captures slot/from/to + key:value attrs. Single template branches on `<<pranala-body>>` non-emptiness. |
+| `505932a0` G.4 | pranala edge sigil — inline (`<<~ pranala from=from -> to=to family=f role=r >>`) + block (with body) forms. PRANALA_OPEN_RE captures slot/from/to + key:value attrs. Single template branches on `<<pranala-body>>` non-emptiness. |
 | `8a2e1fa2` G.5 | refactor — five widgets collapse into `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget(config)`. Net 590→97 lines of widget code (+165 line factory). Adding a new cascade sigil = config object, not a fresh prototype-chain dance. |
 
 ''J arc — meme/slot framing + meta round-trip:''
@@ -1104,6 +1104,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YTh5IYsyF3Femho5mktseyiohrzP-7Xx1UCjM-h0-Wo
+<<^ code:"&#x0003;" >>ni:///sha-256;JFAycjic2NTNLbnCUkn0VASz2KCztW0noz6OOeg29j4
 
 <<^ code:"&#x0004;" -> ? >>

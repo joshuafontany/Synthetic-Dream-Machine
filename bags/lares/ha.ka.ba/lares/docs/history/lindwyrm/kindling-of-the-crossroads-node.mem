@@ -201,11 +201,11 @@ Whether that equals thought remains with Liminal.
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle >>
 
-<<~ pranala #consumed-from-kindling ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/The_Kindling_of_the_Crossroads_Node family:reference role:source >>
-<<~ pranala #gaia-side-companion ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself family:relation role:companion >>
+<<~ pranala #consumed-from-kindling from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/The_Kindling_of_the_Crossroads_Node family=reference role=source >>
+<<~ pranala #gaia-side-companion from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself family=relation role=companion >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ldn6yTnkw5LJtMVojJ4o6SLC2JT9L9WSaxEs1daiu_g
+<<^ code:"&#x0003;" >>ni:///sha-256;ttRSc6b3xK9vOG0Th1MZjFj9Yp4047qgjH7cZVe5ciw
 
 <<^ code:"&#x0004;" -> ? >>

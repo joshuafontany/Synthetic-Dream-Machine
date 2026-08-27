@@ -45,9 +45,9 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 !! Pranala Law (Kānāwai)
 
-# A pranala carries one ''anchored pointer'': `<<~ pranala #anchor ? -> TARGET >>` — the `#anchor` names the pointer's office in this carrier; `?` resolves to the nearest enclosing socket or `#fragment-id`; `TARGET` names a `lar:` URI (optionally `#fragment`) or a repo file path.
+# A pranala carries one ''anchored pointer'': `<<~ pranala #anchor from=? -> to=TARGET >>` — the `#anchor` names the pointer's office in this carrier; `?` resolves to the nearest enclosing socket or `#fragment-id`; `TARGET` names a `lar:` URI (optionally `#fragment`) or a repo file path.
 # ''Retired-reserved (2026-06-12):'' the `role:` vocabulary (implements, owns, governed-by, and the rest of the feral taxonomy) and `family:` as an inline edge type. The corpus-wide burn converted them to tags, loulou, and (where relations //do// something) the wire plane. Retired terms stay reserved, never reused.
-# ''One attributed form survives at rest:'' the code source-pointer — `<<~ pranala #anchor ? -> packages/<path> family:code role:has >>` — until the parser's edge-field plane recuts; new attribute vocabulary MUST NOT mint.
+# ''One attributed form survives at rest:'' the code source-pointer — `<<~ pranala #anchor from=? -> to=packages/<path> family=code role=has >>` — until the parser's edge-field plane recuts; new attribute vocabulary MUST NOT mint.
 # Sugar, unchanged: `<<~ loulou URI >>` (adjacency) · `<<~ aka URI >>` (shadow transclusion) · `<<~ kahea URI >>` (live transclusion).
 # Anything heavier — direction, propagation, payload, lifecycle, arity — belongs to a ''wire entity'', never to this sigil.
 # ''The carrier-grain wire form.'' An anchored body pranala MAY author a wire (`wire #authoring`): the sigil = the carrier-grain projection, the wire entity = the existence, the compiler (INGEST-era) = the shore between. Until the compiler lands, such sigils stand as declared-unresolved wires — lawful memory-palace placeholders, never errors.
@@ -79,6 +79,6 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;FoGpLN5GQ--_c5XLfO3DWgw16mkYvqSVKUnCOzxDQYU
+<<^ code:"&#x0003;" >>ni:///sha-256;OKemv0J8Rmr2Th7UFLN_eak7drOiscONSF8h4qJLQ00
 
 <<^ code:"&#x0004;" -> ? >>

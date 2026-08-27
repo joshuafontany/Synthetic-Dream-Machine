@@ -146,14 +146,14 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family:control role:extends >>
-<<~ pranala #to-grammar ? -> lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext family:control role:informs >>
-<<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:control role:informs >>
+<<~ pranala #to-foundations from=? -> to=lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=extends >>
+<<~ pranala #to-grammar from=? -> to=lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext family=control role=informs >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs >>
 
 <<~/ahu >>
 
 <<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;FOM2hybwwFOZqpMItZHHsexzG9_KHExWdRia_iAzHEg
+<<^ code:"&#x0003;" >>ni:///sha-256;OTcYBMshd90WEo8_-hmfAcNSF_EQcHyfK6iLHZArlNs
 
 <<^ code:"&#x0004;" -> ? >>

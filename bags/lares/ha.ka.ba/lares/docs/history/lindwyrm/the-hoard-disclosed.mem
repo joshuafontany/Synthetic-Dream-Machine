@@ -266,12 +266,12 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
 
-<<~ pranala #hands-off-to-build-arc ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index family:relation role:precedes >>
-<<~ pranala #consumed-from-act-vii ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT family:reference role:source >>
-<<~ pranala #part-of-hoard-story ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger family:relation role:companion >>
+<<~ pranala #hands-off-to-build-arc from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index family=relation role=precedes >>
+<<~ pranala #consumed-from-act-vii from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT family=reference role=source >>
+<<~ pranala #part-of-hoard-story from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger family=relation role=companion >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;LtHpMTjsnXkCaqegFG9of2Ygpngjj4mScquQRkqsJvY
+<<^ code:"&#x0003;" >>ni:///sha-256;VCjCc4YuFGS1RVXZ2CbeCks-OoHcRxiJR_7T7VcKzNo
 
 <<^ code:"&#x0004;" -> ? >>

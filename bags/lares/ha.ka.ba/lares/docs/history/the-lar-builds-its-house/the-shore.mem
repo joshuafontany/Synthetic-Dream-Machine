@@ -169,11 +169,11 @@ Act IV receives:
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
-<<~ pranala #follows-the-quine ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine family:relation role:follows >>
-<<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein family:relation role:precedes >>
+<<~ pranala #follows-the-quine from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine family=relation role=follows >>
+<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein family=relation role=precedes >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;K3H0FreDSbILQF96hVhfEvK_n4uhyv0I2tKGc2dlmvw
+<<^ code:"&#x0003;" >>ni:///sha-256;Wt0qnKfs6m14Sz3TJYrygQt244tqjVzZPia3d2hYhgI
 
 <<^ code:"&#x0004;" -> ? >>

@@ -168,12 +168,12 @@ MUST NOT:
 <<~ loulou lar:///ha.ka.ba/lares/api/mu >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes-prior-art >>
 
-<<~ pranala #precedes-lindwyrm-arc ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/index family:relation role:precedes >>
-<<~ pranala #grammar-now-formalized ? -> lar:///ha.ka.ba/lares/api/mu family:reference role:becomes >>
-<<~ pranala #design-research-side-car ? -> lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes-prior-art family:relation role:accompanies >>
+<<~ pranala #precedes-lindwyrm-arc from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/index family=relation role=precedes >>
+<<~ pranala #grammar-now-formalized from=? -> to=lar:///ha.ka.ba/lares/api/mu family=reference role=becomes >>
+<<~ pranala #design-research-side-car from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes-prior-art family=relation role=accompanies >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sY_a96_QRzmtV-bsNn25mhwZcMw-KZZ-J5bkrdY2xeg
+<<^ code:"&#x0003;" >>ni:///sha-256;wEML2atuueAySkUAUzs1tUdSwWx2wnf10UEs4ZSCIe0
 
 <<^ code:"&#x0004;" -> ? >>

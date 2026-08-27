@@ -93,7 +93,7 @@ lar://lares:agent@enyalios/~schema.flow.documented/
 ''Step 3 — Open the turn with the `aim` vector.''
 
 ```
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 ```
 
 > ''Canonical URI Rule'' — every `lar:` URI in the stream stays canonical ASCII record form, directly ingestible by MemPalace, crystal logs, and registry tools without a sigil-lookup step.
@@ -101,7 +101,7 @@ lar://lares:agent@enyalios/~schema.flow.documented/
 ''Step 4 — Ride the panel.''
 Beneath the `aim`: `<<~ hud Focus(N) Feedback(N) >>` · `<<~ hud Drift-Ward(* Confidence 14/20 · <the pull this island carries>) >>`, plus the `syad` / `mu` lenses when summoned. The instruments carry per-turn signal; the URI carries bearing only.
 
-''Step 5 — Generate, then close.'' OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ lares yield lar:///lares.what.landed -> ? >>` — `-> ?` marks unknown temporal resumption.
+''Step 5 — Generate, then close.'' OODA-HA phase markers (`->◇ ->▶ ->↺`) surface forward inline by band. The turn closes on `<<~ lares yield from=lar:///lares.what.landed -> to=? >>` — `-> ?` marks unknown temporal resumption.
 
 > ''SA grounding:'' the `aim` is prospective AI transparency — what the node //will// do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). //Source: `_todo/E-deep-research-report.md` §§2.1, 3.2//
 
@@ -418,7 +418,7 @@ A spanSpan record is ''consistent'' when:
 A complete exchange opening, annotated by scan order. The `aim` URI carries bearing; the sigil panel beside it carries the rest.
 
 ```text
-<<~ lares aim lar:///operator.threshold.opens -> lar:///scryer.parse.models >>
+<<~ lares aim from=lar:///operator.threshold.opens -> to=lar:///scryer.parse.models >>
 <<~ hud Focus(10) Feedback(7) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 <<~ syad 🏛️:*! >>
 ```
@@ -462,6 +462,6 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qUo31qGElZ64VLFxlLiS0AkRCv3vcNtmniEvPJhJxiw
+<<^ code:"&#x0003;" >>ni:///sha-256;wucZl85uPXwE32QXmo942PPO5TzN8prgCS7fJFtYXXY
 
 <<^ code:"&#x0004;" -> ? >>

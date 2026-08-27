@@ -191,7 +191,7 @@ Counts the Armor and Ward the gear ledger already buys and Aki already wears.
 
 !!! Open Fork — Which Base Row Governs
 
-<<~ pranala #defense-source-fork ? -> lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
+<<~ pranala #defense-source-fork from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
 ''Which base row governs play stays open at the table.'' The two tables differ by 2 Physical
 and 4 Mental, so the fork moves every contested roll against Aki. The gear carries canonical
 numbers — Ruffle Coat comparator `armor +2`, Moss Hat `ward +2`, Dust Face `ward +1`, Safety
@@ -262,7 +262,7 @@ cost no slot while they stay pocketed.
 
 !!! Open Fork — The Eighth Slot
 
-<<~ pranala #inventory-overrun ? -> lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
+<<~ pranala #inventory-overrun from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
 The tally runs ''one slot over'' at 8 against 7. Three cures reach it, each a table call:
 
 # ''Worn clothing rides free.'' The Quickstart treats a wallet as part of clothing; a table may
@@ -634,27 +634,27 @@ Companion sheets should preserve this rhythm: identity, quick card, modes, stats
 
 !! Open Questions
 
-<<~ pranala #open-powers ? -> lar:///elyncia.neo-thracia.opens/characters/lady-aki#/powers >>
+<<~ pranala #open-powers from=? -> to=lar:///elyncia.neo-thracia.opens/characters/lady-aki#/powers >>
 Final Powers remain deferred.
 
-<<~ pranala #open-traits ? -> lar:///elyncia.neo-thracia.opens/characters/lady-aki#/open-traits >>
+<<~ pranala #open-traits from=? -> to=lar:///elyncia.neo-thracia.opens/characters/lady-aki#/open-traits >>
 Six trait slots remain open.
 
-<<~ pranala #open-ichi-dreams ? -> lar:///elyncia.neo-thracia.opens/characters/ichi#/dreams >>
+<<~ pranala #open-ichi-dreams from=? -> to=lar:///elyncia.neo-thracia.opens/characters/ichi#/dreams >>
 What does Ichi dream?
 
-<<~ pranala #open-mother-spore ? -> lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine#/mother-spore >>
+<<~ pranala #open-mother-spore from=? -> to=lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine#/mother-spore >>
 How does the Mother Spore understand Aki's household compact?
 
-<<~ pranala #open-ephyra-rules ? -> lar:///elyncia.neo-thracia.opens/playtest/ephyra-rules >>
+<<~ pranala #open-ephyra-rules from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/ephyra-rules >>
 Exact Ephyra task-spirit mechanics need final table handling.
 
-<<~ pranala #open-defense-source ? -> lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
+<<~ pranala #open-defense-source from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
 Does worn Armor and do trinket Wards feed Defense, or do trinket Wards feed saves alone?
 Two base tables ride until the referee rules (see #defense-source-fork). The answer moves Aki's
 Mental Defense by 4 and her Physical by 2.
 
-<<~ pranala #open-slot-tally ? -> lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
+<<~ pranala #open-slot-tally from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
 Aki's carried gear tallies 8 slots against 7 available. Three cures reach it; the table picks
 one (see #inventory-overrun).
 

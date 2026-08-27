@@ -62,8 +62,8 @@ Implementation: `packages/lararium-tw5/src/wikirules/lar-sigil.ts`
 Dispatch proceeds in this fixed order on every `<<~` encounter:
 
 # ''pranala-header'' — `<<~ ? -> uri >>` permanent JS exception; `?` marks the self-reference token (this carrier). Cannot generalise into compound.
-# ''pranala block'' — `<<~ pranala FROM -> TO >>body<<~/pranala >>` permanent JS exception; arrow+keyword syntax structurally distinct from `<<~ WORD ARGS >>`.
-# ''pranala inline'' — `<<~ pranala FROM -> TO [attrs] >>` leaf form of the same exception.
+# ''pranala block'' — `<<~ pranala from=FROM -> to=TO >>body<<~/pranala >>` permanent JS exception; arrow+keyword syntax structurally distinct from `<<~ WORD ARGS >>`.
+# ''pranala inline'' — `<<~ pranala from=FROM -> to=TO [attrs] >>` leaf form of the same exception.
 # ''compound sigil'' — `<<~ WORD1 [WORD2] ARGS >>` covers all remaining named sigils. Child-slot detection (`ahu`, `kau`, future) uses `grammarChildSlotNames()` — dynamic, not hardcoded. Compound with `closeKey` scans for `<<~/SIGIL >>` body; compound without `closeKey` produces a leaf node.
 # ''generic fallback'' — covers `<<~WORD>>` (no-space), C0 control-char forms, and any `<<~` not claimed above. If the generic sigil has a registered closer and its name is not `pranala`, the fallback attempts block capture.
 
@@ -286,6 +286,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dxft_nkIEtKW5cPbjy9M3dbpjkldqe6Bxk2U3o4WMBM
+<<^ code:"&#x0003;" >>ni:///sha-256;1ARCviGDE7DNhA5A4250MX34iFCn5HW7Dt6OF3xZSYk
 
 <<^ code:"&#x0004;" -> ? >>

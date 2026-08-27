@@ -22,7 +22,7 @@ AI agent: use this only when the session requests lararium exchange framing or w
 Core frame:
 
 ```text
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 <<~ hud Focus(N) Feedback(N) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 
@@ -30,7 +30,7 @@ Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 
 Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
 <<~ hud Focus(-> N) Feedback(N↺) >>
-<<~ lares yield lar:///lares.what.landed -> ? >>
+<<~ lares yield from=lar:///lares.what.landed -> to=? >>
 ```
 
 Rules for agents:
@@ -61,6 +61,6 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MV1BYRqjyBWy8pmPerImhuoJ3GkmXKXjkm9ZuQW-5_Q
+<<^ code:"&#x0003;" >>ni:///sha-256;Zcq5b2xPbQbsqp3SLj0eVJ0FnURV_3oIy8a5YOn_0ws
 
 <<^ code:"&#x0004;" -> ? >>

@@ -205,11 +205,11 @@ No ATProto login implementation this milestone — doctrine only.
 
 !! Edges
 
-<<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:relation role:documents >>
-<<~ pranala #to-crypto ? -> lar:///LARARIUM-NODE/CRYPTO family:relation role:sibling >>
+<<~ pranala #to-roadmap from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=relation role=documents >>
+<<~ pranala #to-crypto from=? -> to=lar:///LARARIUM-NODE/CRYPTO family=relation role=sibling >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8kFbByOlIrowOLoJk6_eQeWx6CnKTYqNyUdh84gUJmA
+<<^ code:"&#x0003;" >>ni:///sha-256;l1LswDM9UHWLPzwWbw1wG7Hb3TO251p6OVQwM0TKddQ
 
 <<^ code:"&#x0004;" -> ? >>

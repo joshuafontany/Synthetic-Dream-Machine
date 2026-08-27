@@ -27,7 +27,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 //loulou// — Hawaiian: to tie, bind, fasten; to link together.
 
 An outgoing relation-family edge sugar. Names what kind of connection holds between two sockets.
-Carries no execution pulse. Sugar for `<<~ pranala ? -> URI family:relation >>`.
+Carries no execution pulse. Sugar for `<<~ pranala from=? -> to=URI family=relation >>`.
 
 <<~/ahu >>
 
@@ -78,7 +78,7 @@ Groups: `[full, target-uri]`
 
 Full pranala expansion:
 ```text
-<<~ pranala ? -> URI family:relation lifecycle:instance traversal:source-to-target propagation:none >>
+<<~ pranala from=? -> to=URI family=relation lifecycle=instance traversal=source-to-target propagation=none >>
 ```
 
 <<~/ahu >>
@@ -122,6 +122,6 @@ confidence-bounded = false
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hZcwod4e-g-1grodr-hmv5UYrEfnhupJrvWKVousMdU
+<<^ code:"&#x0003;" >>ni:///sha-256;zYB5oTvcqljyv1xEtswru_wLGL0imMBfa-EYZgBi6g8
 
 <<^ code:"&#x0004;" -> ? >>

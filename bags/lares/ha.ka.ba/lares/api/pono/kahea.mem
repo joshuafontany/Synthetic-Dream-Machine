@@ -29,7 +29,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahea"
 A transclusion-family edge sugar with dual form. The URI form creates a live transclusion edge —
 a live embed of the target's content at the source, kept fresh by subscription (push-forward).
 The name-call form invokes a named definition at render time only (no edge created).
-Sugar for `<<~ pranala ? -> URI family:transclusion propagation:push-forward >>`.
+Sugar for `<<~ pranala from=? -> to=URI family=transclusion propagation=push-forward >>`.
 
 <<~/ahu >>
 
@@ -94,7 +94,7 @@ Regex — name-call form (canonical):
 
 Full pranala expansion (URI form):
 ```text
-<<~ pranala ? -> URI family:transclusion lifecycle:instance traversal:source-to-target propagation:push-forward >>
+<<~ pranala from=? -> to=URI family=transclusion lifecycle=instance traversal=source-to-target propagation=push-forward >>
 ```
 
 <<~/ahu >>
@@ -150,6 +150,6 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Ih26WUCEkroaOU8fjaaPwg3NqFsFIunqEM8Ln8LHDKo
+<<^ code:"&#x0003;" >>ni:///sha-256;Ks3LLABvM3IK14cqee7mGpNzdetwhuJZosCWQ0lma68
 
 <<^ code:"&#x0004;" -> ? >>

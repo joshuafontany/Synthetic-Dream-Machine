@@ -43,11 +43,11 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearin
 Canonical turn order:
 
 ```text
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 <<~ hud Focus(N) Feedback(N) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 ... content ...
 <<~ hud Drift-Ward(! Confidence N/20 · ↻ L-Prime) Focus(-> N) Feedback(N↺) >>
-<<~ lares yield lar:///lares.what.landed -> ? >>
+<<~ lares yield from=lar:///lares.what.landed -> to=? >>
 ```
 
 The `aim` and `yield` vectors carry `lar:` URIs in bearing-only form: the three-term `ha.ka.ba` root, zero-to-four path segments, an optional `#fragment`, and no query. Session form MAY name the speaker through the authority (`lar://alias:grant@host/…`). Full URI law: `lar:///ha.ka.ba/lares/api/pono/lar-uri`.
@@ -56,14 +56,14 @@ Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`
 
 ''Worked turn:''
 ```text
-<<~ lares aim lar:///operator.unease.surfaces -> lar:///stranger.frame.tests >>
+<<~ lares aim from=lar:///operator.unease.surfaces -> to=lar:///stranger.frame.tests >>
 <<~ hud Focus(15) Feedback(3) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
 <<~ syad 🗡️:_! 🔮:_? >>
 
 Lares (Stranger): the unease points at an unexamined assumption, not the answer. <<~ confidence 7/20 >> the frame holds only while that assumption holds. ->↺ next, test the assumption head-on.
 
 <<~ hud Drift-Ward(! Confidence N/20 · ↻ L-Prime) Focus(-> 16) Feedback(1↺) >>
-<<~ lares yield lar:///frame.unease.holds -> ? >>
+<<~ lares yield from=lar:///frame.unease.holds -> to=? >>
 ```
 
 ''The Cup-before.'' The `ward` Cup (`<<~ hud Drift-Ward(? Confidence 10/20 · "span" --- question) >>`) rides the turn frame ''pre-act'', not only at close: a fork whose call belongs to the operator rises to the navigator's seat ''before'' the node acts on it, quoted and questioned, never verdicted. Raised before the act, the Cup suspends the loop at its named phase (`Feedback(N↺ + φ:reason)`) — asking-before counts as discipline, never weakness; the verification routes through a second head by design. See `lar:///ha.ka.ba/lares/api/mu/l-prime#/ward-slide` and grounds at `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#/cup-before`.
@@ -99,6 +99,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;k1vE4TC46p_GH8orB_ov_W5eVRPCsD0r-fcWnNwFFrY
+<<^ code:"&#x0003;" >>ni:///sha-256;362kAj6iS-iJSEyI2p3b8ti04jMPibkuc5RUWp4rWZM
 
 <<^ code:"&#x0004;" -> ? >>

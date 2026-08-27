@@ -434,8 +434,8 @@ packages/lararium-node/
 
 !! Edges
 
-<<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:relation role:companion >>
-<<~ pranala #to-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=relation role=companion >>
+<<~ pranala #to-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion >>
 
 <<~/ahu >>
 
@@ -1188,11 +1188,11 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 !! Edges
 
-<<~ pranala #to-roadmap ? -> lar:///lararium-node/ROADMAP family:relation role:companion >>
-<<~ pranala #to-wiki ? -> lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family:relation role:companion >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=relation role=companion >>
+<<~ pranala #to-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-4KQJNKjCi8fkSP80JF7lyV4R_nQvR0cAy4heml2vjA
+<<^ code:"&#x0003;" >>ni:///sha-256;iATUun3NrIo5SKPqadn-rU-0ngsJebauhX4ImqqFlL4
 
 <<^ code:"&#x0004;" -> ? >>

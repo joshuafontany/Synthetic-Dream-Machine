@@ -197,12 +197,12 @@ Act II receives:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #drafted-from-act-map ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family:reference role:source >>
-<<~ pranala #inside-hoard-frame ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed family:relation role:part-of >>
-<<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls family:relation role:precedes >>
+<<~ pranala #drafted-from-act-map from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family=reference role=source >>
+<<~ pranala #inside-hoard-frame from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed family=relation role=part-of >>
+<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls family=relation role=precedes >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1Aokstws2nJW2LdqocUQt-hagEvLUJUlWbOer-XkBpM
+<<^ code:"&#x0003;" >>ni:///sha-256;at-AuMDKFlLCNjDNwWu9XduH-HtT575QxvkLWYaOqD4
 
 <<^ code:"&#x0004;" -> ? >>

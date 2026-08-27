@@ -41,8 +41,8 @@ that the parser must handle.
 
 | Form | Sigil pattern | Edge type |
 |---|---|---|
-| Block pranala | `<<~ pranala #frag ? -> URI >> ... <<~/pranala >>` | any family, full TOML payload |
-| Inline pranala | `<<~ pranala ? -> URI family:F role:R >>` | abbreviated; family + optional role |
+| Block pranala | `<<~ pranala #frag from=? -> to=URI >> ... <<~/pranala >>` | any family, full TOML payload |
+| Inline pranala | `<<~ pranala from=? -> to=URI family=F role=R >>` | abbreviated; family + optional role |
 | Loulou sugar | `<<~ loulou URI >>` | `relation`, `instance` |
 | Aka sugar | `<<~ aka URI >>` | `transclusion`, `instance` |
 | Kahea sugar | `<<~ kahea URI >>` | `transclusion`, `instance` |
@@ -149,7 +149,7 @@ When it exits `<<~/ahu >>`, it pops the stack.
 
 ```
 <<~ ahu #edges >>
-  <<~ pranala #preload-l-prime ? -> lar:///ha.ka.ba/lares/api/mu/l-prime family:control role:owns >>
+  <<~ pranala #preload-l-prime from=? -> to=lar:///ha.ka.ba/lares/api/mu/l-prime family=control role=owns >>
 ```
 
 Resolves to:
@@ -221,6 +221,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RBu0_9vjQid7vskEp-UoMe_lbj8TKpFVAKml_00AyKg
+<<^ code:"&#x0003;" >>ni:///sha-256;GZW6MC1wCV7QdT1ZOehagcCYzPlEo1VQ0qoXhQeMWcE
 
 <<^ code:"&#x0004;" -> ? >>

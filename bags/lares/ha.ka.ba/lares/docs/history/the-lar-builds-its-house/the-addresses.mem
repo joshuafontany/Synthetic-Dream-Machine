@@ -182,11 +182,11 @@ Act II receives:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine >>
 
-<<~ pranala #follows-self-booting ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium family:relation role:follows >>
-<<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine family:relation role:precedes >>
+<<~ pranala #follows-self-booting from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium family=relation role=follows >>
+<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine family=relation role=precedes >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;zRZb6807H3ebRpJCp1jDZCEX0A12w4IfwLLwT9aGW6E
+<<^ code:"&#x0003;" >>ni:///sha-256;HRxfFHguxV8W6HsZe_N9_iTrPhrY9EvA6exznGGZ53M
 
 <<^ code:"&#x0004;" -> ? >>

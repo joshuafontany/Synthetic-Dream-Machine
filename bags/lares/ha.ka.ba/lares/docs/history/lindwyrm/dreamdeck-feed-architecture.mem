@@ -271,12 +271,12 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch //The 
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
 
-<<~ pranala #consumed-from-story-shape-a ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE family:reference role:source >>
-<<~ pranala #consumed-from-story-shape-b ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/LINDWYRM_STORY_SHAPE family:reference role:source >>
-<<~ pranala #format-for-hoard-story ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family:relation role:informs >>
+<<~ pranala #consumed-from-story-shape-a from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE family=reference role=source >>
+<<~ pranala #consumed-from-story-shape-b from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/LINDWYRM_STORY_SHAPE family=reference role=source >>
+<<~ pranala #format-for-hoard-story from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family=relation role=informs >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jzknti0Z8d4Jn_2Ey7rqw93ukLlZo_d1UN1QcGnmxHY
+<<^ code:"&#x0003;" >>ni:///sha-256;M_yTF8h1CmGwg2As0u2_T_EBiFIkPSiGHEZSH5cXlC4
 
 <<^ code:"&#x0004;" -> ? >>

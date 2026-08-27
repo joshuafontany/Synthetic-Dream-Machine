@@ -676,11 +676,11 @@ The Sensorium serves as the deterministic instrument, successor to the founding 
 
 !! Edges
 
-<<~ pranala #grammar-of ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext family:control role:realized-in >>
-<<~ pranala #addresses ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri family:relation role:sibling-spec >>
-<<~ pranala #lens ? -> lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives family:control role:applies >>
-<<~ pranala #measures ? -> lar:///ha.ka.ba/lares/api/pono/sensorium-machina family:observe role:instrumented-by >>
-<<~ pranala #honesty-gate ? -> lar:///ha.ka.ba/lares/findings/hoike/syad-lens-refinement family:constraint role:governed-by >>
+<<~ pranala #grammar-of from=? -> to=lar:///ha.ka.ba/lares/api/pono/memetic-wikitext family=control role=realized-in >>
+<<~ pranala #addresses from=? -> to=lar:///ha.ka.ba/lares/api/pono/lar-uri family=relation role=sibling-spec >>
+<<~ pranala #lens from=? -> to=lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives family=control role=applies >>
+<<~ pranala #measures from=? -> to=lar:///ha.ka.ba/lares/api/pono/sensorium-machina family=observe role=instrumented-by >>
+<<~ pranala #honesty-gate from=? -> to=lar:///ha.ka.ba/lares/findings/hoike/syad-lens-refinement family=constraint role=governed-by >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
 
@@ -694,6 +694,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4GsS1RfoEux-MwtfiJmiDtV11m3BkOMQNyn16XM14Xk
+<<^ code:"&#x0003;" >>ni:///sha-256;X8o9zS28Wha97KbPX49lI203W7-9EEI-zGQcUJH1fF0
 
 <<^ code:"&#x0004;" -> ? >>

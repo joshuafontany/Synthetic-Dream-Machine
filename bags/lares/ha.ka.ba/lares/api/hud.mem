@@ -47,14 +47,14 @@ The HUD names the sigil panel that rides each turn — the instrument readout a 
 A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before the Voice speaks. The panel renders inline sigils (`<<~ word args >>`), each a readout adjacent to the prose — never inside the URI.
 
 ```
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 <<~ hud Focus(N) Feedback(N) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad … >>                       (optional lens; `:` binds a tool to a standpoint)
 … Voice (Role): <<~ confidence Register N/20 >> claim …
 Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
 <<~ hud Focus(-> N) Feedback(N↺) >>
-<<~ lares yield lar:///lares.state.now -> ? >>
+<<~ lares yield from=lar:///lares.state.now -> to=? >>
 ```
 
 | Sigil | Carries | Law |
@@ -120,6 +120,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Q7oDIYtJzSohPqUm9AcWxOywt2G6O5UVP60ZpbSW4zQ
+<<^ code:"&#x0003;" >>ni:///sha-256;OgESM6qG1kQLZkILR8yRXkt8hVqaNP3hS_uvsJ4tY9Y
 
 <<^ code:"&#x0004;" -> ? >>

@@ -166,11 +166,11 @@ Act III receives:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-addresses >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore >>
 
-<<~ pranala #follows-the-addresses ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-addresses family:relation role:follows >>
-<<~ pranala #feeds-next-act ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore family:relation role:precedes >>
+<<~ pranala #follows-the-addresses from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-addresses family=relation role=follows >>
+<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore family=relation role=precedes >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;IHK1r7PBKBJk5ZEG6XVbQji70KDCL-6jvZohGie8xAw
+<<^ code:"&#x0003;" >>ni:///sha-256;nrONXPnIg5i8LXlEIos2v089BRWuyokYu-WihfadiFY
 
 <<^ code:"&#x0004;" -> ? >>

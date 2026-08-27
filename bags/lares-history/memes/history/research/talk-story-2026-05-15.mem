@@ -234,16 +234,16 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 !! Edges
 
-<<~ pranala #to-nalu ? -> lar:///ha.ka.ba/lares/api/pono/nalu family:control role:authors >>
-<<~ pranala #to-hoolele ? -> lar:///ha.ka.ba/lares/api/pono/hoolele family:control role:authors >>
-<<~ pranala #to-verse-task-tree ? -> lar:///ha.ka.ba/lares/api/pono/verse-task-tree family:relation >>
-<<~ pranala #to-verse-type-lattice ? -> lar:///ha.ka.ba/lares/api/pono/verse-type-lattice family:relation >>
-<<~ pranala #to-verse-event-lattice ? -> lar:///ha.ka.ba/lares/api/pono/verse-event-lattice family:relation >>
-<<~ pranala #to-reaction-graph ? -> lar:///ha.ka.ba/lares/api/pono/reaction-graph family:relation role:governs >>
-<<~ pranala #to-nihomano ? -> lar:///ha.ka.ba/lares/api/pono/nihomano-sigils family:relation >>
+<<~ pranala #to-nalu from=? -> to=lar:///ha.ka.ba/lares/api/pono/nalu family=control role=authors >>
+<<~ pranala #to-hoolele from=? -> to=lar:///ha.ka.ba/lares/api/pono/hoolele family=control role=authors >>
+<<~ pranala #to-verse-task-tree from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-task-tree family=relation >>
+<<~ pranala #to-verse-type-lattice from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-type-lattice family=relation >>
+<<~ pranala #to-verse-event-lattice from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-event-lattice family=relation >>
+<<~ pranala #to-reaction-graph from=? -> to=lar:///ha.ka.ba/lares/api/pono/reaction-graph family=relation role=governs >>
+<<~ pranala #to-nihomano from=? -> to=lar:///ha.ka.ba/lares/api/pono/nihomano-sigils family=relation >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Nm2Y0dqdyCm51DTQkXdy14kTwd4cf_w5aw-AARZegXs
+<<^ code:"&#x0003;" >>ni:///sha-256;rweiMlZYRacJkZdmybMnrJQJ2vN_KM6slQJQa3v8Jlc
 
 <<^ code:"&#x0004;" -> ? >>

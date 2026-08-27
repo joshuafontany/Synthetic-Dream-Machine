@@ -175,12 +175,12 @@ These questions don't get answered by adding more architecture. They get answere
 <<~ loulou https://www.pfrazee.com/blog/practical-decentralization >>
 <<~ loulou https://www.orionreed.com/posts/app-file-topology/ >>
 
-<<~ pranala #cites-protocols ? -> https://connectedplaces.online/the-purpose-of-protocols/ family:relation role:has >>
-<<~ pranala #cites-decentralization ? -> https://www.pfrazee.com/blog/practical-decentralization family:relation role:has >>
-<<~ pranala #cites-topology ? -> https://www.orionreed.com/posts/app-file-topology/ family:relation role:has >>
+<<~ pranala #cites-protocols from=? -> to=https://connectedplaces.online/the-purpose-of-protocols/ family=relation role=has >>
+<<~ pranala #cites-decentralization from=? -> to=https://www.pfrazee.com/blog/practical-decentralization family=relation role=has >>
+<<~ pranala #cites-topology from=? -> to=https://www.orionreed.com/posts/app-file-topology/ family=relation role=has >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pLzNNImhMHczHExEuwrp8AbyenuhK-uwcomzqBWPkws
+<<^ code:"&#x0003;" >>ni:///sha-256;PBSr85-Xfs76EtjUMPC39dZmxs6qQlIqMcaMX6MjBHE
 
 <<^ code:"&#x0004;" -> ? >>

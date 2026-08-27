@@ -60,8 +60,8 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 * Do NOT use the retired `implements` edge, and do NOT link an `interfaces/` meme. That inheritance spine retired with v0.0; v0.1 composes with flat `has`.
 
 ```text
-<<~ pranala #has ? -> lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
-<<~ pranala #has ? -> lar:///ha.ka.ba/sdm/mount-points/trait >>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait >>
 ```
 
 <<~/ahu >>
@@ -88,6 +88,6 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;eTEl0qJbNlZgVTrEKh9bFnudsBeaT2X4KfjG97TffSc
+<<^ code:"&#x0003;" >>ni:///sha-256;Y5dcBltWeYGvQk8sn-XP0Mnn7iSpgwc6-xV0SJXKtO8
 
 <<^ code:"&#x0004;" -> ? >>

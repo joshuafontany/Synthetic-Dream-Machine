@@ -282,12 +282,12 @@ It hums.
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself >>
 
-<<~ pranala #consumed-from-self-booting-archive ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE family:reference role:source >>
-<<~ pranala #consumed-from-self-booting-dev-story ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY family:reference role:source >>
-<<~ pranala #threshold-after-kindling ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node family:relation role:follows >>
+<<~ pranala #consumed-from-self-booting-archive from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE family=reference role=source >>
+<<~ pranala #consumed-from-self-booting-dev-story from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_SELF_BOOTING_LARES_ARCHITECTURE_DEV_STORY family=reference role=source >>
+<<~ pranala #threshold-after-kindling from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node family=relation role=follows >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;LAQbd8BW0BiQWxSg0fmD66kddjTnnz4bfS7Wtpgac2U
+<<^ code:"&#x0003;" >>ni:///sha-256;f3wzrLXbDkua1bwTPJd9pdgFy8YqWleGn8C2rNtNNeY
 
 <<^ code:"&#x0004;" -> ? >>

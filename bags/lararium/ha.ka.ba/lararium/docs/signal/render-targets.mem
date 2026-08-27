@@ -188,7 +188,7 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 !!! `hud:exchange-pair`
 
 ```
-<<~ lares aim lar:///operator.intent.reads -> lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
 <<~ hud Focus(N) Feedback(N) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad … >>
@@ -323,7 +323,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 ''Closed example:''
 
 ```
-<<~ lares aim lar:///operator.scope.reads -> lar:///scryer.frame.maps >>
+<<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps >>
 <<~ hud Focus(10) Feedback(3) >>
 Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 <<~ syad 🏛️ >>
@@ -415,6 +415,6 @@ Before emitting any stance block on any surface:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;V17ZnwRSBsunnjHqm1ShwK9ht4XvmRXNqJrs9FWloag
+<<^ code:"&#x0003;" >>ni:///sha-256;OpwE9b9Sm82ix7jEtLk5wgO97FsI0_ul8bQzZPonwMg
 
 <<^ code:"&#x0004;" -> ? >>

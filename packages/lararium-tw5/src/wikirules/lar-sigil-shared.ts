@@ -135,7 +135,7 @@ export function matchCompoundSigilAt(
  *
  * The two forms share opener parsing; closer presence distinguishes them.
  */
-export const PRANALA_OPEN_RE = /<<~\s*pranala\s+(?:(#[\w-]+)\s+)?(\S+)\s*->\s*(\S+)((?:\s+\w+:[^\s>]+)*)\s*>>/g;
+export const PRANALA_OPEN_RE = /<<~\s*pranala\s+(?:(#[\w-]+)\s+)?from=(\S+)\s*->\s*to=(\S+)((?:\s+\w+=[^\s>]+)*)\s*>>/g;
 
 export interface PranalaOpenMatch {
   readonly start:  number;

@@ -105,7 +105,7 @@ sigil compiles to the runtime filter operator `[holds[]]` /
 sharktooth never rides inside a filter run, so the brackets keep the query
 that composes (`[all[tiddlers]holds[element/Fire]sort[title]]`).
 
-<<~ pranala #source ? -> packages/lararium-tw5/src/holds.ts family:code role:has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/holds.ts family=code role=has >>
 
 <<~/ahu >>
 
@@ -272,6 +272,6 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;FfD7XFX_qkpj79btFudgJeVpS_MdN9Up05OwPc8DZ2I
+<<^ code:"&#x0003;" >>ni:///sha-256;9ZKhu6vtArO2eEmqILDqfnmFwlRvqpVw8JO5Dd2eug8
 
 <<^ code:"&#x0004;" -> ? >>

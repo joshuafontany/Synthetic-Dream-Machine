@@ -91,10 +91,10 @@ MUST NOT:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/index >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
 
-<<~ pranala #follows-lindwyrm-arc ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed family:relation role:follows >>
+<<~ pranala #follows-lindwyrm-arc from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed family=relation role=follows >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qVVepHvWixJr1YJcnReqYwB09By2LdU0av7nE9eXirs
+<<^ code:"&#x0003;" >>ni:///sha-256;vdtp0V1XVDAML_tJ6jwwg58VRCSm9QJZ2qpbhfYfE1w
 
 <<^ code:"&#x0004;" -> ? >>

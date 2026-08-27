@@ -133,11 +133,11 @@ Forward, open, to the arc that follows — unwritten, its outcome unclaimed:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein >>
 
-<<~ pranala #follows-the-bright-vein ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein family:relation role:follows >>
-<<~ pranala #hands-forward-open ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index family:relation role:opens-onward >>
+<<~ pranala #follows-the-bright-vein from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein family=relation role=follows >>
+<<~ pranala #hands-forward-open from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index family=relation role=opens-onward >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PdHx68uKoUtc0MFxWUzv9jmfgsS4asRvt2_8thHD98c
+<<^ code:"&#x0003;" >>ni:///sha-256;MgBBA6HT9h2QQ-eyw2fpGJp6jgO7C3rMShmMtJK0LgA
 
 <<^ code:"&#x0004;" -> ? >>

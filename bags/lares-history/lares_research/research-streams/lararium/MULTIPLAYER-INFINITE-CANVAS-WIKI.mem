@@ -1259,14 +1259,14 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~ ahu #edges >>
 
-<<~ pranala #to-roadmap ? -> lar:///LARARIUM-NODE/ROADMAP family:control role:companion >>
-<<~ pranala #to-agents ? -> lar:///AGENTS family:control role:governed-by >>
-<<~ pranala #to-altar-fire ? -> lar:///ha.ka.ba/lares/api/lararium/the-altar-fire family:control role:defines >>
-<<~ pranala #to-canon-promotion ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono family:control role:governed-by >>
-<<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family:control role:governed-by >>
+<<~ pranala #to-roadmap from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=control role=companion >>
+<<~ pranala #to-agents from=? -> to=lar:///AGENTS family=control role=governed-by >>
+<<~ pranala #to-altar-fire from=? -> to=lar:///ha.ka.ba/lares/api/lararium/the-altar-fire family=control role=defines >>
+<<~ pranala #to-canon-promotion from=? -> to=lar:///ha.ka.ba/lares/api/pono/hooponopono family=control role=governed-by >>
+<<~ pranala #to-foundations from=? -> to=lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=governed-by >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2tVYTl3IEvP_wdSpdoa24CDFfIAh8CtS32WH0TcRwl4
+<<^ code:"&#x0003;" >>ni:///sha-256;EZLXhD4o9LmPsL4GcogH67miCvVI0Y422yKHRQvRJJA
 
 <<^ code:"&#x0004;" -> ? >>

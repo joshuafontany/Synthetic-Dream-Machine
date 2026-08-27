@@ -101,17 +101,17 @@ Likely next slices:
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls >>
 
-<<~ pranala #first-consumption ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed family:reference role:records >>
-<<~ pranala #second-consumption ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself family:reference role:records >>
-<<~ pranala #third-consumption ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node family:reference role:records >>
-<<~ pranala #fourth-consumption ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium family:reference role:records >>
-<<~ pranala #fifth-consumption ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family:reference role:records >>
-<<~ pranala #sixth-consumption ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture family:reference role:records >>
-<<~ pranala #act-i-draft ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo family:reference role:records >>
-<<~ pranala #act-ii-draft ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls family:reference role:records >>
+<<~ pranala #first-consumption from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed family=reference role=records >>
+<<~ pranala #second-consumption from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself family=reference role=records >>
+<<~ pranala #third-consumption from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node family=reference role=records >>
+<<~ pranala #fourth-consumption from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium family=reference role=records >>
+<<~ pranala #fifth-consumption from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family=reference role=records >>
+<<~ pranala #sixth-consumption from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture family=reference role=records >>
+<<~ pranala #act-i-draft from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo family=reference role=records >>
+<<~ pranala #act-ii-draft from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls family=reference role=records >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0wJ98eFkprC-xwkh1INzIfm6AUS8b1zEACQ8uOGPEGg
+<<^ code:"&#x0003;" >>ni:///sha-256;sTN2e4BHQcyOaqXpxd3O0xWwMLiTm8Oj8dbSgEA4wpg
 
 <<^ code:"&#x0004;" -> ? >>

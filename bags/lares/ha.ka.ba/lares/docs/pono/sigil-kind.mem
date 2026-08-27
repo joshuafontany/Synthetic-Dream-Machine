@@ -100,8 +100,8 @@ Properties:
 
 The `pranala` sigil uses `lar-kind: edge`. It receives its own permanent dispatch path in `lar-sigil.ts` — the `FROM -> TO` arrow syntax cannot generalise into the compound `<<~ WORD ARGS >>` pattern without losing the named keyword pairs (`family:`, `role:`, `slot:`).
 
-Inline form: `<<~ pranala FROM -> TO [family:f] [role:r] >>`
-Block form: `<<~ pranala FROM -> TO >>body<<~/pranala >>`
+Inline form: `<<~ pranala from=FROM -> to=TO [family=f] [role=r] >>`
+Block form: `<<~ pranala from=FROM -> to=TO >>body<<~/pranala >>`
 
 Both forms share opener parsing; closer presence distinguishes them.
 
@@ -198,6 +198,6 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;P9SG8aayRKn0WQDh0o7sXFHGZQWW1Vp6S0u0nOuCRag
+<<^ code:"&#x0003;" >>ni:///sha-256;eFTb7ENVYKQGJCoWsxS_BL7q1CtkNcoOFCyRztx9zio
 
 <<^ code:"&#x0004;" -> ? >>

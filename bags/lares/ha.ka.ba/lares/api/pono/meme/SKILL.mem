@@ -213,8 +213,8 @@ When writing or revising:
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ pranala #has-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family:control role:has >>
-<<~ pranala #has-loci ? -> lar:///ha.ka.ba/lares/api/pono/loci family:control role:has >>
+<<~ pranala #has-meme from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme family=control role=has >>
+<<~ pranala #has-loci from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci family=control role=has >>
 
 <<~/ahu >>
 
@@ -260,6 +260,6 @@ Aftermath — close by naming:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KgrDn2qVQvESjbfjWmWyAcxv95qGBXIYtj1pZSZnZjI
+<<^ code:"&#x0003;" >>ni:///sha-256;Ga8A4Yncd19dyo5-I7y8tSVgnVPb_6okxevVZCRTnRo
 
 <<^ code:"&#x0004;" -> ? >>

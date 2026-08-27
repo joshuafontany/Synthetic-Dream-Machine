@@ -125,7 +125,7 @@ Given: tag (string), carrier-title (string)
 
 Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter operator.
 
-<<~ pranala #source ? -> packages/lararium-tw5/src/has-stack.ts family:code role:has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has >>
 
 <<~/ahu >>
 
@@ -203,6 +203,6 @@ Convention fails when:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ySdmVC-CtqUFd56BF9UxUq14c5vGY3-RO7ZGlc9_WmY
+<<^ code:"&#x0003;" >>ni:///sha-256;WKRoDUNt6dpo4X4ztexY8Ghy7RgPa0Uc5bAxhytxNxU
 
 <<^ code:"&#x0004;" -> ? >>
