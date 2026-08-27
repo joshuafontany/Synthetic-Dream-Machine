@@ -1,0 +1,225 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/docs/relational-parameter >>
+```toml meta
+cacheable  = true
+file-path  = "bags/lares/ha.ka.ba/lares/docs/relational-parameter.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 16
+manaoio    = 14
+namespace  = "&#x2299;"
+register   = "Synthesis-Canon"
+retain     = true
+role       = "the design law for the RELATIONAL PARAMETER — a bare arrow between macro parameters that the parser MARKS and the binder READS. Names the two parameter parsers TW5 actually runs, the mark-at-parse/decide-at-bind split that keeps the change additive, the independent URI-scheme fix that frees a `lar:` URI from quotes, the measured blast radius, and the boundary the sigil path keeps"
+status     = "designed"
+status-why = "every call path traced from wikirule to binding widget and the radius measured against core, plugins, themes, editions and corpus; nothing built"
+tags       = ["api/pono/meme", "api/pono/tiddlywiki-wikitext", "api/pono/memetic-wikitext"]
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/lares/docs/relational-parameter"
+```
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #entry >>
+
+! The relational parameter ~ design law
+
+> A bare arrow standing between two macro parameters names a ''relation'' between them. The parser
+> MARKS it; the binder READS it. Nothing that parses today parses differently.
+
+''This rides `dev/sdm-integration` first and reads as a donation second.'' The house builds it as its
+own capability; the shape below keeps the upstream door open rather than assuming it.
+
+<<~/ahu >>
+
+<<~ ahu #the-two-parsers >>
+
+!! TW5 runs TWO parameter parsers, and the live one carries a guard
+
+''THE PATH A `<<name args>>` CALL ACTUALLY TAKES:''
+
+<<~ confidence 18/20 >> Both `macrocallinline` and `macrocallblock` call
+`parseMacroInvocationAsTransclusion`, never `parseMacroInvocation`. The node reads `transclude`, and the
+parameters arrive as ''attributes'', positional ones named `"0"`, `"1"`, `"2"` and flagged
+`isPositional`.
+
+|! stage |! function |! seat |
+|the wikirule | `macrocallinline` · `macrocallblock` | `rules/macrocall*.js` |
+|the invocation | `parseMacroInvocationAsTransclusion` | `parseutils.js:216` |
+|the parameter list | `parseMacroParametersAsAttributes` | `parseutils.js:302` |
+|''one parameter'' | ''`parseMacroParameterAsAttribute`'' | ''`parseutils.js:322`'' |
+|the widget | `TranscludeWidget` collects `stringParametersByName` | `widgets/transclude.js` |
+|''the binding'' | ''`ParametersWidget` maps declared names onto positions'' | ''`widgets/parameters.js:55`'' |
+|the lookup | `getTransclusionParameter(name,index,default)` — name first, then index | `transclude.js:411` |
+
+''THE LEGACY PATH STILL STANDS, and parity wants it moved too.'' `parseMacroParameter`
+(`parseutils.js:184`) serves `parseMacroInvocation` (440) and `parseFilterVariable` (478). A change that
+touched only one of the two would leave `\function` reading a bare arrow differently from `\procedure`.
+
+⚠ ''THE LIVE PARSER ALREADY GUARDS A COLON, and that precedent decides the sibling fix''
+(#the-uri-scheme). `parseMacroParameterAsAttribute` refuses a named parameter whose name fails
+`/^[A-Za-z0-9\-_]+$/`, with the reason stated in the source: //to avoid mis-parsing values like
+`$:/foo`//.
+
+<<~/ahu >>
+
+<<~ ahu #mark-at-parse >>
+
+!! Mark at parse · decide at bind
+
+''THE OBSTACLE THAT DECIDES THE DESIGN.'' TW5 parses a macrocall without knowing what it calls. The
+call-site parser holds no view of the definition, so //only procedures that declare an arrow get one//
+cannot run at parse time.
+
+''SO THE PARSE STAYS PERMISSIVE AND THE BINDING TURNS SELECTIVE:''
+
+\procedure ~Step(~Type:"" ~Params:"") ~Step <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Step Parse "does/mark-the-token keeps/position keeps/value adds/relation-field ~ the tree GAINS a field; no tree LOSES one" >>
+<<~Step Declare "does/accept-a-relational-slot where/parseParameterDefinition reads/`\\procedure agent(fires from -> to)`" >>
+<<~Step Bind "does/read-the-mark where/ParametersWidget ~ a procedure that declared a relation reads it; one that did not sees the positional it saw before" >>
+
+<<~ confidence 16/20 >> ''THAT SPLIT IS WHAT MAKES THE CHANGE ADDITIVE.'' An undeclared procedure
+receives byte-identical parameters before and after. The feature reaches only the definitions that ask
+for it — which answers the standing warning that a global operator re-reads other people's files
+(#prior-art).
+
+!!! The chain, and why it needs no new binding model
+
+''DOT SETTLED THIS IN 1991.'' `A -> B -> C` desugars into the adjacent pairs `A->B` and `B->C`; a
+subgraph on either side yields the cross-product. A chain reads as ''sugar for adjacent pairs'', never
+as a new arity.
+
+<<~ confidence 15/20 >> So `<<ranks focus a -> b -> c -> d -> e >>` wants no variable-arity binding: it
+carries four relations over five terms, and a procedure declaring one relational slot receives the
+ordered terms.
+
+<<~/ahu >>
+
+<<~ ahu #the-uri-scheme >>
+
+!! The sibling fix ~ a scheme is not a parameter name
+
+''A `lar:` URI LOSES ITS HEAD IN THE LIVE PARSER.'' `<<agent aim lar://a.b.c >>` reads `lar` as a
+parameter NAME and `//a.b.c` as its value, because `lar` passes the strict-identifier test and a colon
+follows it. Quoting or `[[bracketing]]` the value cures it; both spend syntax on a parser detail.
+
+''THE CURE MATCHES THE GUARD ALREADY THERE.'' The parser refuses `$:/foo` as a name because the name
+fails the identifier test. A scheme fails on a different tell: ''a colon followed by `//`''.
+
+<<~ confidence 17/20 >> ''One condition, beside the one that stands.'' Where a name-then-colon reads
+with `//` after it, the parser MUST take the whole run as a value rather than a named parameter. That
+frees every `lar:`, `http:` and `file:` URI to ride bare — and it stands alone as a donation, wanted or
+not by the arrow.
+
+<<~/ahu >>
+
+<<~ ahu #prior-art >>
+
+!! What the field already decided
+
+\procedure ~Art(~Type:"" ~Params:"") ~Art <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Art Cypher "stands/FOR gives/visual-correspondence ~ arrows read as relations because the syntax looks like the graph; direction MANDATORY on write, OPTIONAL on read - the `->` `<-` `<->` triple" >>
+<<~Art DOT "stands/FOR gives/chain-desugars-pairwise ~ `A -> B -> C` becomes adjacent edges; no variable arity anywhere in the model" >>
+<<~Art Prolog "stands/AGAINST gives/the-anti-pattern ~ a GLOBAL operator makes other files read differently, and text reads SILENTLY into a different term; the cure the field reached: operators local to a module, imported on purpose" >>
+<<~Art TW5 "stands/PROCEDURE gives/the-house-precedent ~ v5.3.0 met new expressivity with a NEW DELIMITED TOKEN (`<% %>`), never by overloading an existing form" >>
+
+⚠ ''THE PROLOG WARNING LANDS ON THE GLOBAL FORM AND MISSES THE DECLARED ONE.'' Marking a token without
+re-reading it, and gating the meaning behind a definition, IS the module-local cure transposed.
+
+⚠ ''AND THE TW5 PRECEDENT CUTS BOTH WAYS.'' A new delimiter would read as the house's own habit; an
+arrow reads as Cypher's. The arrow wins on legibility and loses on precedent, and the marking design
+narrows that gap by leaving every existing form alone.
+
+<<~/ahu >>
+
+<<~ ahu #blast-radius >>
+
+!! The radius, measured
+
+|! surface |! count |! reading |
+|macro calls carrying a bare `->` in TW5 core · plugins · themes · editions |''0'' | nothing shipped re-reads |
+|the same in the house's own plugins |''0'' | nothing local re-reads |
+|corpus, plain dialect | 14 | the two seeds alone |
+|corpus, sharktooth | 479 | ''a different parser — untouched'' |
+|carriers carrying an arrow invocation | 120 | none re-read under a marking design |
+|parse-tree → wikitext serialisers in core |''0'' | no round-trip surface |
+
+''THE TW5 FILES THE WORK TOUCHES:''
+
+# `parsers/parseutils.js` — `parseMacroParameterAsAttribute` (322) · `parseMacroParameter` (184) ·
+  `parseParameterDefinition` (129)
+# `widgets/parameters.js` (55--95) — the binding loop
+# `widgets/transclude.js` — `getTransclusionParameter` (411) where a chain resolves
+# `parsers/wikiparser/rules/parameters.js` — the `\parameters` pragma shares the definition parser
+
+''THE TESTS THAT MOVE:'' `test-wikitext-parser.js` · `test-html-parser.js` · `test-filters.js`, beside
+the branch's own `test-parser-invariants.js`.
+
+<<~/ahu >>
+
+<<~ ahu #the-boundary >>
+
+!! What the sigil path keeps
+
+⚠ ''A TW5-CORE ARROW DOES NOT REACH `<<~ … >>`.'' The house's sigils parse in `lar-sigil`, emit
+''legacy'' `macrocall` nodes, and pass their whole argument run through as one string. They neither
+gain the feature nor break under it.
+
+''SO THE SHARKTOOTH ARROW STAYS A SECOND PIECE OF WORK'' — retiring the `pranala` exception
+(`lar-sigil-shared.ts`, `lar-sigil.ts`) so any sigil may declare a relation from its grammar tiddler.
+<<~ confidence 15/20 >> It wants the core shape settled first, so the two speak one law rather than two.
+
+<<~/ahu >>
+
+<<~ ahu #the-plan >>
+
+!! The plan
+
+\procedure ~Phase(~Type:"" ~Params:"") ~Phase <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Phase One "does/free-the-scheme touches/parseMacroParameterAsAttribute risk/low ~ a colon followed by `//` reads as a value; ships alone, wanted by the arrow or not" >>
+<<~Phase Two "does/mark-the-arrow touches/both-parameter-parsers risk/low ~ the token keeps its position and value and gains a relation field; every existing parse stands" >>
+<<~Phase Three "does/declare-the-slot touches/parseParameterDefinition risk/medium ~ `\\procedure agent(fires from -> to)`; the definition grammar grows one form" >>
+<<~Phase Four "does/read-the-mark touches/ParametersWidget+TranscludeWidget risk/medium ~ a declared relation binds; an undeclared one reads as the positional it always was" >>
+<<~Phase Five "does/prove-the-chain touches/tests risk/low ~ pairwise desugaring, direction triple, and a control that an undeclared procedure sees no change" >>
+
+''EACH PHASE STANDS ALONE.'' One through four each leave the engine correct and the corpus green;
+stopping after any of them costs nothing.
+
+⚠ ''PHASE ONE SHIPS FIRST AND CARRIES ITS OWN ARGUMENT.'' It removes a papercut every URI-bearing
+wikitext hits, matches a guard already in the source, and needs no agreement about arrows.
+
+<<~/ahu >>
+
+<<~ ahu #what-to-measure >>
+
+!! What the house counts
+
+\procedure ~Gauge(~Type:"" ~Params:"") ~Gauge <<~Type>> <<~holds `[<~Params>]`>>
+
+<<~Gauge Additive "counts/parse-trees-that-differ-for-an-undeclared-procedure red/any ~ one difference and the change stops reading as additive" >>
+<<~Gauge Silence "counts/invocations-that-re-read-without-erroring red/any ~ the Prolog failure arrives silent, never as a syntax error" >>
+<<~Gauge Nesting "counts/arrows-marked-inside-brackets-or-quotes red/any-unmarked ~ `Gauge(10 -> 12)` degrades on the gradient; a mark inside a nest reads as a fault" >>
+<<~Gauge Reach "counts/sigil-invocations-that-changed red/any ~ the sigil path stands outside this work by design" >>
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/graceful-parsing >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/ai-phrasebook-design >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;nlb8bLC6mHeEiKdL5FqeH_M8obF0tMfuo9lqGipJyK8
+
+<<^ code:"&#x0004;" -> ? >>
