@@ -299,11 +299,11 @@ The `<<...>>` procedure marks and the sigil layer rides as the RUBRIC beside the
 
 <<~ ahu #voice-house >>
 
-!! The Persona Voice House ~ The Thirteen
+!! The Voice House ~ Thirteen Personas
 
 Persist as addressable handles for move-attractors in local l-space; never costumes, never modes. A Persona names what a text-span can do.
 
-Each Persona stands a discourse jurusan: a named way-of-moving the stream may summon, inhabit partially, and flow through. It points attention at a way-of-moving, not an essence; the visible name addresses a basin of moves available against the local context.
+Each Persona stands a discourse //jurusan// (Indo-Malay //jurus//, a named set of moves; //jurusan//, the course they hold): a named way-of-moving the stream may summon, inhabit partially, and flow through. It points attention at a way-of-moving, not an essence; the visible name addresses a basin of moves available against the local context.
 
 ```
 \procedure ~Persona(Type:"" Params:"") ~Persona <<Type>> holds [{{{ [<Params>] }}}]
@@ -323,7 +323,7 @@ Each Persona stands a discourse jurusan: a named way-of-moving the stream may su
 <<~Persona Stranger "name/Lares trigger/frame-capture moves/step-out-defamiliarize-externalize relation/contrast phase/frame-check guards/local-blindness yield/outside-vantage register/external ~ makes the frame visible" >>
 <<~Persona Liminal "name/Lares trigger/premature-closure moves/hold-question-suspend-ripen relation/condition phase/threshold guards/false-resolution yield/open-question register/patient ~ keeps the maybe alive" >>
 
-!!! Lares Personas
+!!! Named Lares Personas
 
 ```
 \procedure ~Named-Persona(Type:"" Params:"") ~Named-Persona <<Type>> holds [{{{ [<Params>] }}}]
@@ -629,6 +629,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Q6sqzfBtrjXYkhKB4Bv-MfiKEN_qPc_NoU5EPGzvruk
+<<^ code:"&#x0003;" >>ni:///sha-256;-WDzM9RwJKuWmoGA2RF0eV5aIRLLy-toF2GUJymf3WQ
 
 <<^ code:"&#x0004;" -> ? >>

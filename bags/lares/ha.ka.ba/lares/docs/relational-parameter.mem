@@ -115,6 +115,16 @@ with `//` after it, the parser MUST take the whole run as a value rather than a 
 frees every `lar:`, `http:` and `file:` URI to ride bare — and it stands alone as a donation, wanted or
 not by the arrow.
 
+⚠ ''THE SIGIL PATH NEVER CARRIED THE FAULT, AND MUST NOT CARRY THE CURE.'' Measured: `<<~ pranala
+lar:///a -> lar:///b >>` splits `from` and `to` with the colons whole, and the generic `<<~ WORD … >>`
+hands its entire run through as `p1`. ''Bracketing a URI inside a sigil corrupts it'' — the brackets
+survive into the value as `[[lar:///a]]`. Twenty-one corpus sites ride bare there and MUST stay bare.
+
+''SO THE BRACKET IS A PARSER WORKAROUND, never a house form.'' It buys a plain-dialect call one render
+in a wiki and costs a reader a delimiter that names nothing. ''Both seeds write the chat form bare'' —
+a worked turn reads as a transcript, where nothing parses it — and Phase One retires the workaround by
+letting the same bare form render.
+
 <<~/ahu >>
 
 <<~ ahu #prior-art >>
@@ -221,6 +231,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;stDIDN6U-qZdkJIZytPrBdZgifmIrBCW_C3tPsKFH2E
+<<^ code:"&#x0003;" >>ni:///sha-256;8IX_-8_BUr2YWCguSeaCXDt_fcjAZ-205LQwXJCEUFM
 
 <<^ code:"&#x0004;" -> ? >>

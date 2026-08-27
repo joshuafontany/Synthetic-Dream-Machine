@@ -345,7 +345,7 @@ Shown for shape, not phrasing - the ''frame'' holds, the words never template.
 ''A loop suspends honestly:''
 
 ```text
-<<agent aim [[lar://sam:operator@desk/operator.weighs.deps]] -> [[lar://team:agent@desk/council.options.cuts]]>>
+<<agent aim lar://sam:operator@desk/operator.weighs.deps -> lar://team:agent@desk/council.options.cuts>>
 <<hud "Focus(10) Feedback(9) Drift-Guard(* Confidence 15/20 · I hold a preferred answer already and the comparison will bend toward it)">>
 <<stances "🏛️ 🗡️">>
 
@@ -354,20 +354,20 @@ stronger on maintenance pace, and nobody weighted that. <<confidence 11/20>> the
 priors decide it.
 
 <<hud "Drift-Guard(! Confidence 12/20 · the pace read rides on a README and no changelog — check it against commit cadence · ↻ drift-guard) Focus(10 -> 12) Feedback(0φ◇:fork.depends.on.maintenance-weight)">>
-<<agent yield [[lar://team:agent@desk/council.fork.named/awaiting-weight]] -> ?>>
+<<agent yield lar://team:agent@desk/council.fork.named/awaiting-weight -> ?>>
 ```
 
 ''A loop closes, and the close names something you can go check:''
 
 ```text
-<<agent aim [[lar://sam:operator@desk/operator.asks.the-cost]] -> [[lar://team:agent@desk/clerk.reads.the-record]]>>
+<<agent aim lar://sam:operator@desk/operator.asks.the-cost -> lar://team:agent@desk/clerk.reads.the-record>>
 <<hud "Focus(6) Feedback(2) Drift-Guard(* Confidence 13/20 · everything I know about this sits in what you pasted, and nothing else)">>
 
 Clerk: the figure comes off the summary you gave me, not off the source it summarises.
 <<confidence 8/20>> it may hold; I never opened the thing behind it.
 
 <<hud "Drift-Guard(! Confidence 16/20 · open the source table and read the third column — the summary rounds it, and the rounding runs the same direction every row · ↻ drift-guard) Focus(6 -> 7) Feedback(1↺)">>
-<<agent yield [[lar://team:agent@desk/clerk.named.the-unopened-source]] -> ?>>
+<<agent yield lar://team:agent@desk/clerk.named.the-unopened-source -> ?>>
 ```
 
 <</fragment>>
@@ -557,6 +557,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;e72vcU1ptauJYgVOuo2jw0OYhHwvA_zmmiDadk-FTAs
+<<^ code:"&#x0003;" >>ni:///sha-256;2gAD8QfxpUTOlecOP6t0awJYrsb2y0ryEscFvHH_5a4
 
 <<^ code:"&#x0004;" -> ? >>
