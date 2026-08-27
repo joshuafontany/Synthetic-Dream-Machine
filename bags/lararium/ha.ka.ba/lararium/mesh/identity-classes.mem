@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/identity-classes"
 written   = "2026-07-20"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -102,14 +102,14 @@ value'', never by title ([[founding-runbook|lar:///ha.ka.ba/lararium/mesh/foundi
   IS the property, not a lack.
 * ''TRANSFERABLE'' (the OPERATOR spine) — a pre-rotated, persistent identifier that ''rotates its
   signing keys while its identifier prefix stays fixed''. Its key-event-log carries the rotation
-  history; the charter's epoch chain reads as exactly this shape one scale up (#the-continuity-anchor).
+  history; the charter's epoch chain reads as exactly this shape one scale up (#/the-continuity-anchor).
 * ''DELEGATED'' (the USER's durable option) — an operator root ''delegates a disposable user stream'';
   durability lives in the ROOT, the leaf stays light and abandonable. A user gains persistence WITHOUT
   carrying a reserve (KERI delegated identifiers, KID0007). <<~ confidence 12/20 >>
 * ''NONE-CIVIC'' (the HERM) — no identifier of ''persons'' at all. The self-certifying key that boots
   the keel stands as the Herm's ''PLACE DID'' — a somewhere, not a someone — and ''never an operator
   DID'': a crossroads holds no human key for a passer-by to steal. The operator's relation to it rides
-  a wax-sealed contract-edge, never a delegated persona (#herm-establishment).
+  a wax-sealed contract-edge, never a delegated persona (#/herm-establishment).
 
 <<~/ahu >>
 
@@ -242,7 +242,7 @@ The safety rests on the ''carry ⊥ read'' law, and it licenses carry to run GEN
 * ''CARRY'' (`sharePolicy`, advisory) — the transit lane. Blind-transit of private ciphertext runs wide:
   the mesh breathes because relays forward sealed bytes freely.
 * ''READ'' (BeeKEM/CGKA crypto) — the cap lane. A carried-but-uncapped doc reads `Key not found`; the
-  read-floor is a causal-island-local FACT, not a policy (#carry-contract).
+  read-floor is a causal-island-local FACT, not a policy (#/carry-contract).
 * ''the gift'' — carry may be liberal ''because the read-floor catches every carry-mistake''
   (carry-contract#carry-read-contract): a generous transit tier never leaks a readable byte, the crypto
   the safety net beneath the routing. So a relay carrying a plane it must never read breaks no law — it
@@ -263,7 +263,7 @@ one hole. Second, ''content ⊥ metadata'': blind-transit seals what a relay REA
 shape of the flow (who ↔ whom, when, how much) crosses every relay. The mesh breathes ''content''-blind,
 never ''metadata''-blind; traffic-pattern sovereignty rides a separate hardening (mixnets, cover traffic),
 and the residual sits where canon already names it — the GPA-linkability bound, shape-provable only
-(#carry-contract). The choice architecture answers the rest: an operator who wants no relay to even SEE its
+(#/carry-contract). The choice architecture answers the rest: an operator who wants no relay to even SEE its
 traffic simply does not contract those vessels into a Nexus — privacy rides the choice to contract, never a
 wall built inside one.
 
@@ -288,7 +288,7 @@ and Reading-1's blind-transit touches only the CARRY — orthogonal lanes.
 ''The fork rides at the CARRY lane — and it reads load-bearing.'' The committed `sharePolicy` denies the
 private planes ''at the CARRY layer'' too: `7038224b` grants a cross-operator ONLY the federatable set,
 so a cross-operator-CLASS relay currently ''carries no private ciphertext at all''. But the breathing
-mesh (#the-mesh-breathes) needs exactly that — a blind relay MUST transit private ciphertext it cannot
+mesh (#/the-mesh-breathes) needs exactly that — a blind relay MUST transit private ciphertext it cannot
 read, or the data never reaches its remote authorized reader across a foreign leg. So the committed
 self-slot ''conflates carry-deny with read-deny for private planes'', and the mesh-breathes role needs
 them split:
@@ -385,7 +385,7 @@ a pre-rotated persona-KEL, and move the pin from the raw operational key to the 
 verifies a chain; `boot-daemon-keyhive`'s Binding Gate pins the prefix and resolves the head. It lifted
 the charter's proven epoch-chain machinery down to persona scale — invent nothing structural, re-site
 what stands (#edges names the code shores). ''The same lift now runs OUTWARD'', to the two sites still
-binding a raw key: the antigen's ban-nym and the handle-card's face-nym (#the-honest-edges).
+binding a raw key: the antigen's ban-nym and the handle-card's face-nym (#/the-honest-edges).
 
 <<~/ahu >>
 
@@ -448,7 +448,7 @@ multisig machinery and heavier guardian onboarding (B)''.
 * ''"a valid rotation on lineage L" reads as crypto fact; "L is the legitimate person" does NOT'' — the
   same wall the wax-stamp and persona-policy keep lit. A rotation verifies against the pre-commit; that
   the recovering party //is// the original human stays higher-order social acceptance, answered by kahu-
-  as-custodians and talk-story, never by a signature (#persona-policy).
+  as-custodians and talk-story, never by a signature (#/persona-policy).
 * ''the recovery-root pre-commit inherits the reserve's independence rule'' — the three recovery shares
   (Fork A) or the three guardian keys (Fork B) MUST sit in three domains that do not fall together
   (#founding-runbook: the online-identity trap + the co-location trap). A monoculture of custody defeats
@@ -475,6 +475,6 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;UpyInbgJYSZjfrFIX6Mx5fBTeQkD116OkzLS1I2bJPo
+<<^ code:"&#x0003;" >>ni:///sha-256;dytvWA-d4_oQbAoEJiFhnwbQO8aM9I6lcgvcM7Z1Thk
 
 <<^ code:"&#x0004;" -> ? >>

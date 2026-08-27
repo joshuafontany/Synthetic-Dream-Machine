@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -58,7 +58,7 @@ The `?` token stays reserved — MUST NOT be used as a sigil name elsewhere.
 ''Why the control head.'' A frame mark states what the reader must do before it can read anything; a
 speaking sigil states what a carrier says. The bearing stands first among the former — a reader that
 cannot find the address cannot resolve a single `?` in the body — so it rides the head that carries the
-frame (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#frame-head-lock`).
+frame (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#/frame-head-lock`).
 
 <<~/ahu >>
 
@@ -109,6 +109,6 @@ agrees-with    = "uri-path"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;o614KiRq970Pl2W6Cl9KkcatwsjO7Wkeiae760RdNBA
+<<^ code:"&#x0003;" >>ni:///sha-256;jEBS3aWrcW-RU2we34LwbUATIPo9joarGAgkoWSijB0
 
 <<^ code:"&#x0004;" -> ? >>

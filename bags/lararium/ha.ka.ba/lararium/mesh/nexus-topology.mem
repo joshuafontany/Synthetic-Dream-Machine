@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/nexus-topology"
 written   = "2026-08-08"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -31,7 +31,7 @@ written   = "2026-08-08"
 
 > Status: PROPOSED — the names stand registered; the serving layers stand unbuilt.
 
-The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this one names how it ''reaches a browser''. Two questions live here and want to stay apart: ''which public name serves a Nexus'', and ''what a name may therefore claim''. The second answer governs the first: a Nexus name grants ''rendezvous'', never ''identity'' (#name-and-key), so every layer below stays severable by construction.
+The two-axis meme (#/dreamnet-architecture) names how a mesh ''relates''; this one names how it ''reaches a browser''. Two questions live here and want to stay apart: ''which public name serves a Nexus'', and ''what a name may therefore claim''. The second answer governs the first: a Nexus name grants ''rendezvous'', never ''identity'' (#/name-and-key), so every layer below stays severable by construction.
 
 <<~/ahu >>
 
@@ -69,7 +69,7 @@ The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this on
 
 <<~ranks serving household@0..6 ~ a split-horizon resolver answers Nexus names with LAN addresses; the home node serves; no internet at all -> operator-lan@7..13 ~ a contracted operator routes their own LAN under a delegated challenge label, forwarding outward through the Nexus name -> cloud-shelf@14..20 ~ the general internet resolves to the Nexus's own hosts >>
 
-''The same name answers differently by vantage'' — which reads as the honest shape rather than a trick, because a causal island only ever knows what its own resolver told it (#causal-islands). A household that loses its uplink keeps every local answer; a visitor from the wider internet reaches the cloud shelf; neither one holds a global view, and neither needs one.
+''The same name answers differently by vantage'' — which reads as the honest shape rather than a trick, because a causal island only ever knows what its own resolver told it (#/causal-islands). A household that loses its uplink keeps every local answer; a visitor from the wider internet reaches the cloud shelf; neither one holds a global view, and neither needs one.
 
 ''THE OPERATOR'S LIFT, bounded.'' A contracted operator stands ''one resolver'' and routes their own LAN. They MUST NOT hold apex write on a Nexus zone. What they hold instead: a delegated `_acme-challenge` label for their own subtree, which splits ''proof of control'' from ''zone custody'' — the operator proves control of what they serve, and the Nexus never handles their key material (#attestation-plane, the cadence law).
 
@@ -77,7 +77,7 @@ The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this on
 
 ''RULED (operator, 2026-08-08).'' The civic kahu cabal holds a contracted operator's DNS records ''in trust''. An operator who would rather not seat that trust ''stands their own Nexus'' — which reads as the honest alternative rather than a threat, since the whole stack exists to make standing one possible.
 
-''AND WILDCARDS STAY MINIMIZED.'' A wildcard's private key stands up ''any'' name under its zone, so every wildcard handed out multiplies the origin-attestation cap (#the-caps-added). The cabal holds the zone's wildcard and hands out as few as it can.
+''AND WILDCARDS STAY MINIMIZED.'' A wildcard's private key stands up ''any'' name under its zone, so every wildcard handed out multiplies the origin-attestation cap (#/the-caps-added). The cabal holds the zone's wildcard and hands out as few as it can.
 
 <<~ confidence 12/20 >> ''THE TENSION THIS CREATES, and the shape that resolves it.'' Certificate Transparency publishes every issued certificate to public append-only logs forever, so a ''per-name'' cert publishes that name to the world permanently while ''a wildcard publishes only the wildcard''. Wildcard-only therefore reads as a privacy requirement rather than a convenience — and minimizing wildcards, read naively, would trade household privacy for containment.
 
@@ -103,7 +103,7 @@ The two-axis meme (#dreamnet-architecture) names how a mesh ''relates''; this on
 
 !!! The mechanism, as the field actually stands (2026-08)
 
-<<~ confidence 17/20 >> ''ACME External Account Binding does NOT carry this.'' RFC 8555 §7.3.4 contemplates exactly one issuer of EAB credentials — the CA operating the ACME server — so a non-CA intermediary cannot mint them; Let's Encrypt does not implement EAB at all. Every multi-tenant EAB pattern in the wild runs on a ''private CA whose root installs on every device'', the path already ruled hostile to a family (#why-dns-01).
+<<~ confidence 17/20 >> ''ACME External Account Binding does NOT carry this.'' RFC 8555 §7.3.4 contemplates exactly one issuer of EAB credentials — the CA operating the ACME server — so a non-CA intermediary cannot mint them; Let's Encrypt does not implement EAB at all. Every multi-tenant EAB pattern in the wild runs on a ''private CA whose root installs on every device'', the path already ruled hostile to a family (#/why-dns-01).
 
 ''The mechanism exists in the CA/Browser Forum Baseline Requirements §4.2.2.1.2'' — a CA MAY read `accounturi` as naming a ''Parent Account'' and, as an explicit exception to RFC 8657 §3, issue to a ''Subordinate ACME Account'' under an auditable Parent→Subordinate mapping. That names the blessing precisely: the Nexus holds the Parent, each operator holds a Subordinate with their own account key and their own private key, and the CA enforces the relation. ''It reads MAY, mandatory RFC 8657 processing waits until 2027-03-15, and NO CA has implemented it'' — a thing to ask a CA for, never a thing to build on.
 
@@ -132,7 +132,7 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 * A per-operator CAA record cures it, and ''only the apex holder may publish it'' (an operator controls their challenge label, never CAA at their own name). ''That record becomes the revocable lever.''
 * RFC 8657 §5.7 states the limit plainly: CAA reads as no effective way to restrict issuance for subdomains whose control sits delegated elsewhere. ''The apex cannot police a delegated operator through CAA'' — it can only withdraw the delegation.
 
-<<~ confidence 15/20 >> ''THE WILDCARD TRAP, and it forces the scope ruling.'' A wildcard request strips its `*.` before climbing, so a ''shared'' wildcard collapses the whole population onto ONE CAA point — and a single `issuewild` anywhere in that set silently voids every `issue` record for wildcard requests. ''A shared wildcard and per-operator account pinning cannot coexist.'' Narrow per-operator wildcards therefore stop being a preference (#records-held-in-trust) and read as the only shape that keeps pinning possible. And never stand ''wildcard DNS'' on a shared apex at all — it opens subdomain takeover even under verification.
+<<~ confidence 15/20 >> ''THE WILDCARD TRAP, and it forces the scope ruling.'' A wildcard request strips its `*.` before climbing, so a ''shared'' wildcard collapses the whole population onto ONE CAA point — and a single `issuewild` anywhere in that set silently voids every `issue` record for wildcard requests. ''A shared wildcard and per-operator account pinning cannot coexist.'' Narrow per-operator wildcards therefore stop being a preference (#/records-held-in-trust) and read as the only shape that keeps pinning possible. And never stand ''wildcard DNS'' on a shared apex at all — it opens subdomain takeover even under verification.
 
 <<~/ahu >>
 
@@ -158,7 +158,7 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 
 !! Two gates already in force
 
-* ''MULTI-PERSPECTIVE VALIDATION.'' Corroboration from four remote perspectives across two or more regions stands live since mid-2026, rising to five at the end of it, and ''DNS-01 earns no exemption''. So the ''public authoritative view MUST answer the whole internet, unfiltered'' — a geo-filtered or access-listed authoritative server fails validation ''nondeterministically'', which reads as the worst failure shape available. ''Split at the recursive layer for LAN clients; never at the authoritative one'' (#three-layers).
+* ''MULTI-PERSPECTIVE VALIDATION.'' Corroboration from four remote perspectives across two or more regions stands live since mid-2026, rising to five at the end of it, and ''DNS-01 earns no exemption''. So the ''public authoritative view MUST answer the whole internet, unfiltered'' — a geo-filtered or access-listed authoritative server fails validation ''nondeterministically'', which reads as the worst failure shape available. ''Split at the recursive layer for LAN clients; never at the authoritative one'' (#/three-layers).
 * ''DNSSEC VALIDATION READS MUST'', on validation and CAA queries alike, including the CNAME lookups taken while choosing the authorization domain, with local policy forbidden from disabling it. A SERVFAIL grants no permission to issue. ''A half-signed apex or a stale DS now converts from a warning into a hard, mesh-wide renewal failure'' — and the common delegated-challenge daemon still carries DNSSEC unimplemented. ''Test the delegation boundary before founding.''
 
 <<~/ahu >>
@@ -167,7 +167,7 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 
 !! What a Nexus name may claim ~ nothing
 
-''NORMATIVE, and it governs every layer above.'' A Nexus name grants ''rendezvous'' — where to reach — and grants ''nothing else''. It authenticates an origin, never a peer (#name-and-key). Therefore:
+''NORMATIVE, and it governs every layer above.'' A Nexus name grants ''rendezvous'' — where to reach — and grants ''nothing else''. It authenticates an origin, never a peer (#/name-and-key). Therefore:
 
 * A Nexus that stops resolving MUST drop the label and MUST NOT alter the graph. Losing an address costs a convenience, never a self (#attestation-plane, ruling 1).
 * A person's standing NEVER rides a name under these zones. Carry a host-scoped address as ''identity'' rather than as ''address'' and the arrangement repeats the failure the field has already measured — the domain owner comes to hold every identity on it.
@@ -188,7 +188,7 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 * ''The custody shell.'' These registrations sit with a legal person today. The asset shore (#attestation-plane, ruling 4) wants a purpose-built holder with a written exit clause — a ten-month track by the field's own precedent, running in parallel and blocking nothing.
 * ''The rebinding measurement.'' Does public DNS answering with a private address survive common household routers? Unmeasured, and it decides whether the household layer needs a resolver per home or none.
 * ''The preload confirmation.'' The mobile reserve's whole argument rests on the TLD's HSTS posture; confirm before the name carries load.
-* ''Renewal as the one declared bridge.'' Issuance touches the internet; serving does not (#the-web2-bridge). Two Nexus names double the renewal surface without doubling the drill — one procedure, two subjects, and a lapse on either reads the same.
+* ''Renewal as the one declared bridge.'' Issuance touches the internet; serving does not (#/the-web2-bridge). Two Nexus names double the renewal surface without doubling the drill — one procedure, two subjects, and a lapse on either reads the same.
 * ''A third name appears in canon and no ruling covers it.'' `elyncia.social` rides several memes as a handle domain. It names neither Nexus and holds no seat here; whether it stands registered, and what it would serve, wants an operator word rather than an inference.
 
 <<~/ahu >>
@@ -199,7 +199,7 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 
 Several memes carry these names inside ''worked examples'' — a doc-stack diagram reading `lar://elyncia.app/lararium`, an invitation-link sketch reading `https://elyncia.app/#catalog=…`. Those illustrate a ''shape'' (which layer holds which URL, how a fragment carries a catalog) and decide nothing about where a Nexus serves. ''This meme holds the deployment answer; a diagram holds a form.'' A reader who mistakes the second for the first will build against a placeholder.
 
-<<~ confidence 12/20 >> ''One older meme reads as prior art rather than drift.'' The render-targets layering already separates a canonical DID from a handle-as-resolution-alias and states outright that the handle stays ''not authoritative''. That IS the severability law (#the-severability-law), written before the sweep that confirmed it and before the DID-method-compatible lock (#reach-plane) chose the same shape. Where canon already holds the right split, the lock ratifies rather than introduces.
+<<~ confidence 12/20 >> ''One older meme reads as prior art rather than drift.'' The render-targets layering already separates a canonical DID from a handle-as-resolution-alias and states outright that the handle stays ''not authoritative''. That IS the severability law (#/the-severability-law), written before the sweep that confirmed it and before the DID-method-compatible lock (#/reach-plane) chose the same shape. Where canon already holds the right split, the lock ratifies rather than introduces.
 
 <<~/ahu >>
 
@@ -217,6 +217,6 @@ Several memes carry these names inside ''worked examples'' — a doc-stack diagr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;icA8nByJLwiyErCVI2J-vvaA34ZAKNTgV1KGaEYR6OE
+<<^ code:"&#x0003;" >>ni:///sha-256;1vo4i_odWciNbS3hMEX3m4-VE3tliHujNpsOEFUVcHg
 
 <<^ code:"&#x0004;" -> ? >>

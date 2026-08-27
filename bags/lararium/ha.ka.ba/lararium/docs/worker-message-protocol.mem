@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/worker-message-protocol"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -99,7 +99,7 @@ TW5 and the reaction engine occupy the ''same'' Worker thread (co-located, synch
 # ''Main → Worker'' — tier signal: `{ schema_version: 1, type: "teardown" | "hoʻowela" | "hoʻoanu" }`
 *** `hoʻowela` ("to heat") — resume a cooled slot to ''`wela`'' (live, reacting); resume = spawn + `ea` handshake.
 *** `hoʻoanu` ("to cool") — tear a slot down to ''`anu`'' (cold). Subscription teardown (`KumuCancelable.cancel()`) MUST precede a cool.
-*** The thermal axis runs ''two-state'' (`wela` / `anu`) with an orthogonal pin-flag (pinned = exempt from cooling); the transition verbs take the causative `hoʻo-` prefix. No warm middle tier exists — see `lar:///ha.ka.ba/lararium/api/residency-tiers#third-tier-gate`.
+*** The thermal axis runs ''two-state'' (`wela` / `anu`) with an orthogonal pin-flag (pinned = exempt from cooling); the transition verbs take the causative `hoʻo-` prefix. No warm middle tier exists — see `lar:///ha.ka.ba/lararium/api/residency-tiers#/third-tier-gate`.
 
 These three types cover the full P.3 boundary surface. Lock them before shipping Worker #1.
 
@@ -114,6 +114,6 @@ These three types cover the full P.3 boundary surface. Lock them before shipping
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;F_mEIFLdlQVDYQCXffN8jy_FMDmqwmxuGMTTwviMa1Q
+<<^ code:"&#x0003;" >>ni:///sha-256;yEzAebZMDvLAizRBJwN1pV4LclxJhP9_0Tf2DsuBe6k
 
 <<^ code:"&#x0004;" -> ? >>

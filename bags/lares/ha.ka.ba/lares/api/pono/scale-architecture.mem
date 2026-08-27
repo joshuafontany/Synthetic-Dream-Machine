@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/scale-architecture"
 written   = "2026-07-01"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -38,7 +38,7 @@ written   = "2026-07-01"
 
 ''One-line:'' exact tree-edit-distance (TED) is O(n³) per pair and O(N²·n³) over a corpus — never affordable and never NEEDED; descend to ''DECKARD structural embeddings + pq-gram profiles'', licensed by a ''Lipschitz argument'': pq-gram distance bounds the edit distance, so an embedding preserves the neighbor structure the sensorium reads.
 
-The structure plane ([[corpus|lar:///ha.ka.ba/lares/api/corpus#the-caps]]) reads trees. The exact structural metric — Zhang–Shasha tree-edit-distance — runs O(n³) per tree pair, and comparing every pair across a corpus of N trees runs O(N²·n³): a wall, not a slope. <<~ confidence 14/20 >> The wall is avoidable because ''the house never needs the exact distance'' — it needs the neighbor structure (who is near whom, which trees cluster), and a Lipschitz-faithful proxy preserves exactly that.
+The structure plane ([[corpus|lar:///ha.ka.ba/lares/api/corpus#/the-caps]]) reads trees. The exact structural metric — Zhang–Shasha tree-edit-distance — runs O(n³) per tree pair, and comparing every pair across a corpus of N trees runs O(N²·n³): a wall, not a slope. <<~ confidence 14/20 >> The wall is avoidable because ''the house never needs the exact distance'' — it needs the neighbor structure (who is near whom, which trees cluster), and a Lipschitz-faithful proxy preserves exactly that.
 
 <<~ranks descent exact-TED ~ the wall: Zhang–Shasha O(n³)/pair, O(N²·n³)/corpus — the metric the descent REFUSES -> pq-gram ~ constant-per-node PROFILES: shred each tree into its p-ancestor × q-sibling grams, distance = L1 / Jaccard over gram bags — linear to build, sub-quadratic to index -> deckard ~ characteristic VECTORS: the tree's structure cast to a Euclidean feature vector (Jiang 2007), Euclidean-approx clustering via LSH — an embedding, indexable in metric-tree time >>
 
@@ -56,7 +56,7 @@ The structure plane ([[corpus|lar:///ha.ka.ba/lares/api/corpus#the-caps]]) reads
 
 ''One-line:'' the consistency-radius (the H⁰ check) is CHEAP — O(edges over the overlap nerve); the THREAT is the sheaf-Laplacian EIGENSOLVE (dense O(n³)); the ESCAPE is ''Chebyshev'' — a polynomial approximation of the matrix function that needs only sparse matrix-vector products, never the eigendecomposition.
 
-The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate#the-gate]]) reads H¹ before it diffuses. Its economy rests on an asymmetry the scale architecture must preserve:
+The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate#/the-gate]]) reads H¹ before it diffuses. Its economy rests on an asymmetry the scale architecture must preserve:
 
 <<~ranks fusion consistency-radius ~ CHEAP — the H⁰-side / li-restriction check is a MAX of per-overlap pseudometrics over the nerve's edges, O(edges); it tells you WHETHER the sections glue at cost linear in the overlap graph -> laplacian-threat ~ the DANGER — the sheaf-Laplacian's spectrum (the H⁰-diffusion operator + the harmonic H¹ space) via dense eigendecomposition runs O(n³), the operation that would sink the fusion at scale -> chebyshev-escape ~ the OUT — approximate the matrix FUNCTION (heat-kernel exp(−tL), spectral filter g(L)) by a degree-L Chebyshev polynomial in L; evaluate by L sparse matrix-vector products, matrix-FREE, O(L · edges), NEVER the eigensolve >>
 
@@ -74,9 +74,9 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 ''One-line:'' quality is a continuous DIAL, never a wall — K, ε, L, nSurr each trade accuracy for compute smoothly; and the corpus is NEVER densified whole — a ''merge-and-reduce coreset tree'' keeps a bounded streaming summary, memory O(coreset) not O(corpus²).
 
-<<~ confidence 13/20 >> The house holds this as a ''catma'' ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s]] — a held-loosely stance, not a dogma): //scalable from the start.// The cheap path is the default, and every accuracy knob turns continuously so the corpus can grow without the architecture changing shape.
+<<~ confidence 13/20 >> The house holds this as a ''catma'' ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#/law-of-5s]] — a held-loosely stance, not a dogma): //scalable from the start.// The cheap path is the default, and every accuracy knob turns continuously so the corpus can grow without the architecture changing shape.
 
-<<~ranks dial K ~ neighbor count in the graph — fewer neighbors, sparser Laplacian, faster diffusion; a smooth accuracy↔compute trade -> epsilon ~ ε, the approximation tolerance on the structural proxy / LSH bucket width — looser ε, faster index, more slack -> L ~ the Chebyshev polynomial DEGREE — lower L, cheaper matrix function, coarser spectral filter; error falls as L rises -> nSurr ~ the surrogate / permutation count for the R null (the false-discovery ward, [[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#ki]]) — fewer surrogates, faster, weaker null-calibration >>
+<<~ranks dial K ~ neighbor count in the graph — fewer neighbors, sparser Laplacian, faster diffusion; a smooth accuracy↔compute trade -> epsilon ~ ε, the approximation tolerance on the structural proxy / LSH bucket width — looser ε, faster index, more slack -> L ~ the Chebyshev polynomial DEGREE — lower L, cheaper matrix function, coarser spectral filter; error falls as L rises -> nSurr ~ the surrogate / permutation count for the R null (the false-discovery ward, [[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#/ki]]) — fewer surrogates, faster, weaker null-calibration >>
 
 <<~ confidence 13/20 >> ''Never densify the whole corpus.'' The full O(corpus²) pairwise structure is never materialized. A ''merge-and-reduce coreset tree'' (Bentley–Saxe decomposition; Har-Peled–Mazumdar coresets) streams the corpus into a bounded summary: ingest a block, reduce it to a coreset, merge coresets pairwise up a binary tree, keep only O(log N) levels of bounded-size summaries. Memory stays ''O(coreset)'', the corpus never sits dense in RAM, and the summary carries the neighbor structure the DEM basins and the fusion read — so scale is a streaming property, engineered in from the first ingest rather than retrofitted when the corpus outgrows memory.
 
@@ -99,7 +99,7 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 ```
 
 <<~Numeric Signal-Fraction "form/conf = var(t) / (var(t) + var(r)) ~ a PARTITION-OF-VARIANCE confidence — task-variance over task-plus-residual variance; the fraction of the reading explained by signal, closed-form, no fit; conf→1 as residual vanishes, conf→0 as signal drowns" >>
-<<~Numeric Closed-Form-Precision "form/π* analytic ~ the optimal precision SETTLES analytically — the precision-weighting ([[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested]], confidence = precision) has a closed-form minimizer, so the settle takes ONE step, never an iteration to convergence" >>
+<<~Numeric Closed-Form-Precision "form/π* analytic ~ the optimal precision SETTLES analytically — the precision-weighting ([[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#/crucible-tested]], confidence = precision) has a closed-form minimizer, so the settle takes ONE step, never an iteration to convergence" >>
 <<~Numeric Complementary-Guard "form/π→conf via the complement ~ where the DIRECT π→conf map diverges numerically (large mean-squared-error ε̄², the precision-blows-up regime), compute through the COMPLEMENTARY form — algebraically identical, numerically stable — so the read holds at the extreme instead of overflowing" >>
 
 <<~ confidence 14/20 >> ''This path is partly ENACTED, not only designed.'' The sensorium's `settlePrecision` already carries the closed-form settle and the complementary-form guard against the large-ε̄² divergence (commit lineage `f50a35b8` //sensorium.numerics.harden — signal-fraction confidence · closed-form settle · complementary π→conf//; the QA hardening in `ab85fc2b` caught the large-ε̄² divergence and the false-critical / EWS-guard leaks). That enactment lives ''py/R'' — the full sensorium model's home, instanced per-stream — while TS keeps the pure-functor math floor these identities also seed. The record honors the enacted-vs-aimed cut: the numerical path stands in code py/R-side, where the sensorium reads; the fusion escape and the structure descent stand as design grounded in established algorithms not yet all wired.
@@ -114,9 +114,9 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~ confidence 9/20 >> The honesty gate ([[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor]]) demands the record name what is //aspirational// as aspirational. Three tools sit on the horizon, each promising, none built:
 
-<<~ranks north-star EI-aperture-selection ~ EFFECTIVE INFORMATION (Hoel's causal-emergence EI) choosing the aperture band — let the band the sensorium reads at be SELECTED by which scale maximizes effective information, so the aperture is discovered, not fixed; NAMED, not built -> bures-quantum-drift ~ the BURES / fidelity metric (the quantum-information distance between states) ridden as a DRIFT-LENS — a geometry on the reading-state finer than Fisher-Rao at the boundary; a north-star instrument, NAMED, not built -> tangled-hierarchy ~ the STRANGE-LOOP self-model (Hofstadter's tangled hierarchy) — the sensorium modeling itself modeling the stream, the Good-Regulator self-model ([[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#the-family]]) closed into a loop; the deepest aim, the least enacted >>
+<<~ranks north-star EI-aperture-selection ~ EFFECTIVE INFORMATION (Hoel's causal-emergence EI) choosing the aperture band — let the band the sensorium reads at be SELECTED by which scale maximizes effective information, so the aperture is discovered, not fixed; NAMED, not built -> bures-quantum-drift ~ the BURES / fidelity metric (the quantum-information distance between states) ridden as a DRIFT-LENS — a geometry on the reading-state finer than Fisher-Rao at the boundary; a north-star instrument, NAMED, not built -> tangled-hierarchy ~ the STRANGE-LOOP self-model (Hofstadter's tangled hierarchy) — the sensorium modeling itself modeling the stream, the Good-Regulator self-model ([[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#/the-family]]) closed into a loop; the deepest aim, the least enacted >>
 
-<<~ confidence 9/20 >> These carry Provisional-to-Synthesis weight deliberately. Recording them as north-stars keeps the atlas from mistaking a direction for a destination — the enacted numerical path (#the-numerical-path) sits at Synthesis-Canon //because// it runs; these sit low //because// they beckon. The map shows both, and shows which is which.
+<<~ confidence 9/20 >> These carry Provisional-to-Synthesis weight deliberately. Recording them as north-stars keeps the atlas from mistaking a direction for a destination — the enacted numerical path (#/the-numerical-path) sits at Synthesis-Canon //because// it runs; these sit low //because// they beckon. The map shows both, and shows which is which.
 
 <<~/ahu >>
 
@@ -147,6 +147,6 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;f7nZaaJZYgYZSksOUzmvCB5AVbFnFBuBtznm0lC1vtk
+<<^ code:"&#x0003;" >>ni:///sha-256;e-f_HvYSKRo2r-GDs6zcqU8W38McODnfMSlTySVh_yQ
 
 <<^ code:"&#x0004;" -> ? >>

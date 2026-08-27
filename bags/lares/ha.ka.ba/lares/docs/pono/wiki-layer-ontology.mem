@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/wiki-layer-ontology"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -59,7 +59,7 @@ The OCI column carries structure only. Our layers sync as CRDT coordinates, not 
 
 The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another.
 
-The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// stands //below// as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes `@oracle` — the sole universal slot, ''operator ruling 2026-06-16''). `@lares` and `@lararium` are ''DreamNet system bags'', each opening as its own ''quine wiki'' carrying a wiki-recipe of its own — `@lares` wiki = `@oracle` + `@lararium` + `@lares`; `@lararium` wiki = `@oracle` + `@lararium`. They ride a recipe as library/identity members, never as hardcoded floor slots; their oracle pointers ''and'' their wiki-recipes live in the ''`@oracle` system plane'', never `@catalog` (#oracle-planes).
+The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// stands //below// as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes `@oracle` — the sole universal slot, ''operator ruling 2026-06-16''). `@lares` and `@lararium` are ''DreamNet system bags'', each opening as its own ''quine wiki'' carrying a wiki-recipe of its own — `@lares` wiki = `@oracle` + `@lararium` + `@lares`; `@lararium` wiki = `@oracle` + `@lararium`. They ride a recipe as library/identity members, never as hardcoded floor slots; their oracle pointers ''and'' their wiki-recipes live in the ''`@oracle` system plane'', never `@catalog` (#/oracle-planes).
 
 ''The default seat (operator ruling, 2026-06-10; recipe revised 2026-06-16):'' the vessel's default pinned primary wiki = `@lares`-as-wiki — slug `lares` seats the operator-minted system doc itself as the write layer. The `@lares` wiki-recipe (seeded in the `@oracle` system plane, not `@catalog`) carries `@lararium` as a live library, so the doctrine corpus composes into the hearth; the recipe dedupes the coinciding wiki slot against the `@oracle` floor. The operator tends the personality at the hearth by default, and the disk-mirror designation carries those edits back to `bags/lares` as `.md` memes.
 
@@ -120,7 +120,7 @@ The three registries carry their authority classes below:
 
 ''The runtime island splits from the corpus (operator ruling, 2026-06-15).'' The protocol-invariant oracle (and the engine BLOBs + genesis-cid it sits beside) lives in ''`@oracle`'' — the genesis-loaded runtime system island, off-disk, federated read-only. ''`@lararium`'' is now purely the ''memetic corpus'' (the engine's authored self-docs, `bags/` seed, git-tracked). Full grain: disk-projection #oracle-split. The conflation that put per-deployment `automerge:` pointers + BLOBs in the `@lararium` seed surface is resolved by the split — `@oracle` rides the mesh (regenerable), `@lararium` stays tracked source.
 
-''System bags split from user bags (operator ruling, 2026-06-16).'' `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers ''and'' their wiki-recipes live in the ''`@oracle`'' system plane, never `@catalog`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle resolution therefore runs ''two-source'': an island resolves a system bag's pointer/recipe from the `@oracle` doc it already holds, and a user bag's from `@catalog`. `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members and each also stands as its own quine wiki (#quine). //(Pointer-plane + system-recipe wiring: ruled here, code-enactment tracked at the live handoff torch.)//
+''System bags split from user bags (operator ruling, 2026-06-16).'' `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers ''and'' their wiki-recipes live in the ''`@oracle`'' system plane, never `@catalog`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle resolution therefore runs ''two-source'': an island resolves a system bag's pointer/recipe from the `@oracle` doc it already holds, and a user bag's from `@catalog`. `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members and each also stands as its own quine wiki (#/quine). //(Pointer-plane + system-recipe wiring: ruled here, code-enactment tracked at the live handoff torch.)//
 
 Islands resolve each slot from its plane: invariants + system bags from the `@oracle` doc they already hold, user library bags from `@catalog`, public bags (future) from `@crossroads`. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies; the ''RECONCILE'' rite, engine-watch EW-6), never the catalog composition class.
 
@@ -248,6 +248,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;L_aDcMeH9J8EKUahC1GcJYQ-dZg7e8u7uSabaxgliFc
+<<^ code:"&#x0003;" >>ni:///sha-256;HIqvXapW5-1OnBP6u4Nvgyj7q3jkVzUpfvaodUcUDDc
 
 <<^ code:"&#x0004;" -> ? >>

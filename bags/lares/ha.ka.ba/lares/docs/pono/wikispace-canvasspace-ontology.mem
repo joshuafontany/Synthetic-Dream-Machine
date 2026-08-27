@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -73,7 +73,7 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 | Class | Families | Reading |
 |---|---|---|
 | ''Surface-invariant'' | `control` · `relation` · `observe` · `message` · `constraint` | render legibly on both cameras (hierarchy/arrow, citation/connection, monitoring-wire/citation) |
-| ''Wikispace-primary (dual-meaning)'' | `transclusion` | inline document embed ↔ canvas content-window (#transclusion) |
+| ''Wikispace-primary (dual-meaning)'' | `transclusion` | inline document embed ↔ canvas content-window (#/transclusion) |
 | ''Canvasspace-primary'' | `dataflow` · `reaction` · `spatial` | typed value-wires, event-wires, spatial topology |
 
 `observe` reads ''surface-invariant'' (monitoring-wire on canvas, source-citation in prose) — no rename needed.
@@ -144,6 +144,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xvHb27e7iBpSwSmlZUc6CK7DWmq3ZlrgXEZt9Hgg4GQ
+<<^ code:"&#x0003;" >>ni:///sha-256;JCGm54dEHBLmXkRiOi_Z5o23GsZlTC6gXuQBclxp-Q0
 
 <<^ code:"&#x0004;" -> ? >>

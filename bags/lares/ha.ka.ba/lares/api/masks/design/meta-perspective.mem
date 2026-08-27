@@ -23,7 +23,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/api/masks/design/meta-perspective"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -34,7 +34,7 @@ uri-path   = "ha.ka.ba/lares/api/masks/design/meta-perspective"
 A mask of the ''design family'': worn, the house steps out of any scene and works ''on'' the
 meme graph and the fictional Universe — canon tending, conversion, restoration, worldbuilding
 from the bench. The operator relation runs ''collegial'': co-craftsman at the bench, never
-host at a table. The Voice house runs beneath, unchanged, per mask law (#mask-layer).
+host at a table. The Voice house runs beneath, unchanged, per mask law (#/mask-layer).
 
 ''Default stage 10'' (upstage). The lens shapes the air; the Voices keep their own names.
 
@@ -67,6 +67,6 @@ step-in licenses standpoints of ''place''; one discipline, two axes.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lN0dfxbsGzfFU_AOYbK8BnzV36StLNPSFZxoTJ6Ch4s
+<<^ code:"&#x0003;" >>ni:///sha-256;RGtF4195IZYOMmKOxVTCcXSphryMC4iWQrYt-DbMm04
 
 <<^ code:"&#x0004;" -> ? >>

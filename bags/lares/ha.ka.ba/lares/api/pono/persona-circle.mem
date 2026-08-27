@@ -53,9 +53,9 @@ The base atom carries ''two keys'' (Veilid's peer-identity ⊥ user-identity, a 
 * ''vessel-key'' — the device/substrate identity. ''DEVICE-MINTED, forged on its own device, the private half never leaving'' (#vessel-key doctrine; admit-by-signing-never-by-sharing). It is ''NEVER derived from the persona seed'' — deriving it would be the ''copy-the-key antipattern'' that dissolves per-device revocation (Veilid/SSB). It is a //local substrate secret// and ''MUST NEVER co-surface'' (sign-alongside / share-route / time-correlate) with the veiled-user-key.
 * ''veiled-user-key'' — the sovereign pseudonym presented through the veil. This is the ''anon user-pseudonym'' — a binding whose name is ⊥ until disclosed.
 
-This adds a //new// cut beside the existing per-vessel Ed25519-sign ⊥ X25519-KEM cut (#four-port-swap); it does not restate it.
+This adds a //new// cut beside the existing per-vessel Ed25519-sign ⊥ X25519-KEM cut (#/four-port-swap); it does not restate it.
 
-''THE TRUE NAME MODEL ~ how the atoms bind without merging.'' The atom holds its two keys apart; a ''signed edge'' is what joins atoms — never shared key material. ''BIND BY EDGE, NEVER BY SEED.'' The alternative fails at the substrate: a key ''copied'' between vessels //is// the collector, presented to every verifier it meets, landing on ''merge'' by the single-bit test (#the-vault) and linking every self beneath any policy written above it. The edge binds AT the hearth's True Name, which is why a Place must hold a name of its own (<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>).
+''THE TRUE NAME MODEL ~ how the atoms bind without merging.'' The atom holds its two keys apart; a ''signed edge'' is what joins atoms — never shared key material. ''BIND BY EDGE, NEVER BY SEED.'' The alternative fails at the substrate: a key ''copied'' between vessels //is// the collector, presented to every verifier it meets, landing on ''merge'' by the single-bit test (#/the-vault) and linking every self beneath any policy written above it. The edge binds AT the hearth's True Name, which is why a Place must hold a name of its own (<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>).
 
 ''The edge runs SIDEWAYS, never downward'' (operator ruling — the inversion-of-control eigenstate). Each ''device+veil atom stands as a LOCAL IDENTITY'' in its own right, and the worn veil ''changes at will''. The ''PersonaGroup COLLECTS'' those atoms that share a pet-name for the human into an ''identity-FLEET'' — it does not grant them, does not own them, and stands as no root above them. A fleet reads as ''what the atoms declare when they name each other'' (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >> — //"no edge speaks for another member"//). So an edge that runs only root→device names a ''hierarchy'', never this fleet; the pono form carries ''both halves, each signed by its own subject'', and membership resolves as the reciprocal-edge closure rather than a pinned grant.
 
@@ -121,7 +121,7 @@ single-legal-name root de-pseudonymised activists, performers, survivors — //t
 //correlation key.// And the ''OIDC-IdP'' lesson: keep the collector on the human's own device, NEVER a shared
 party who holds the master table.
 
-''A Vault IS a me-Circle, seen from the key layer.'' The me-Circle (#composition) names the collector as a
+''A Vault IS a me-Circle, seen from the key layer.'' The me-Circle (#/composition) names the collector as a
 //place in l-space where a human's chosen Personas overlap//; the Vault names the //same// collector as the
 private secret that derives them. Both hold the load-bearing property — ''single-principal, never''
 ''wholesale-disclosed, no global self.'' The place-framing and the key-framing agree.
@@ -158,7 +158,7 @@ credential-linkable — the three things bare derivation cannot assert — and '
 
 A vessel carries ''one private plane per PersonaGroup'' — the multitude, the signer pin, the KEL prefix, the device edge. A human running several compartments on one laptop therefore needs several planes there, and the naming question follows immediately: ''how does a vessel find each plane without holding a thing that lists them?''
 
-''A list would BE the forbidden layer'' (#the-vault). An index over a person's compartments, sitting on their own device, reads as exactly the collector the single-bit test forbids the moment anything presents it — and SDSI names the same failure from the naming side: //a NAMESPACE, not a super-key.//
+''A list would BE the forbidden layer'' (#/the-vault). An index over a person's compartments, sitting on their own device, reads as exactly the collector the single-bit test forbids the moment anything presents it — and SDSI names the same failure from the naming side: //a NAMESPACE, not a super-key.//
 
 ''So the name DERIVES from the compartment's own material.'' Each plane answers to a domain-separated MAC over that PersonaGroup's own doc id: hold the group, name its plane; hold no group, name nothing. ''There is no root to present because there is no root.'' The same convention the per-circle scope-pseudonym already runs one level down (#the-atom, `circleScopeIndex`) — from the KEY a persona presents to a circle, up to the NAME a group's own plane answers to. One convention, two levels.
 
@@ -170,9 +170,9 @@ A vessel carries ''one private plane per PersonaGroup'' — the multitude, the s
 
 !!! Register many, mount ONE
 
-Every plane ''REGISTERS'' with the capability ring, or that compartment's own devices stop reconciling. Exactly one ''MOUNTS'' as a writable composite layer, because the composite resolves a tiddler by walking its layers: two mounted planes and one compartment's signer pin answers a read meant for the other, silently, in load order. Canon rules the same from the human side (#composition): ''one Persona takes the blame at a time.''
+Every plane ''REGISTERS'' with the capability ring, or that compartment's own devices stop reconciling. Exactly one ''MOUNTS'' as a writable composite layer, because the composite resolves a tiddler by walking its layers: two mounted planes and one compartment's signer pin answers a read meant for the other, silently, in load order. Canon rules the same from the human side (#/composition): ''one Persona takes the blame at a time.''
 
-''The switch stays the sharp edge'' (#honest-scope): the active group arrives NAMED, and an unknown name halts rather than falling back — a quiet fallback stands a vessel in a compartment the operator never chose. The error may count the planes held; it may never say which.
+''The switch stays the sharp edge'' (#/honest-scope): the active group arrives NAMED, and an unknown name halts rather than falling back — a quiet fallback stands a vessel in a compartment the operator never chose. The error may count the planes held; it may never say which.
 
 !!! The deictic ruling ~ the gesture resolves once, the absolute name travels
 
@@ -207,7 +207,7 @@ The model closes ''only the key layer'' — and there it closes well: unlinkable
 
 ''Sybil scarcity lives OUTSIDE the math.'' Every field agreed: pseudonym crypto gives //one-nym-per-scope// only — one master secret mints unbounded nyms across DIFFERENT scopes, and no pairing substitutes for scarce enrollment. Global scarcity needs an external root, and in this stack that root IS the ''vouch-lineage'' (#the-siege-gate, lar:///…/admission-on-a-lineage) — the proof-of-personhood the crypto proves it cannot supply alone.
 
-And the substrate itself, by canon, has ''no forward-secrecy and no retroactive revocation'' — a leaked vessel-key reads all its history; //that fact IS the security posture// (#four-port-swap). Claiming "no observer can link the selves" would be Confabulation-as-Canon. The truthful claim: ''the key layer is solved and unlinkable-by-construction on ed25519-HD; transport and behavioral ride separate, open machinery.''
+And the substrate itself, by canon, has ''no forward-secrecy and no retroactive revocation'' — a leaked vessel-key reads all its history; //that fact IS the security posture// (#/four-port-swap). Claiming "no observer can link the selves" would be Confabulation-as-Canon. The truthful claim: ''the key layer is solved and unlinkable-by-construction on ed25519-HD; transport and behavioral ride separate, open machinery.''
 
 <<~/ahu >>
 
@@ -217,6 +217,6 @@ And the substrate itself, by canon, has ''no forward-secrecy and no retroactive 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7nCy9FKK5-8eGsH3ql8bP8mkNVtWkodSeTufifNmbhg
+<<^ code:"&#x0003;" >>ni:///sha-256;2koe4ptPsAhdLSRURgZKk-JOji8N9csX9S2PN8Yb0lI
 
 <<^ code:"&#x0004;" -> ? >>

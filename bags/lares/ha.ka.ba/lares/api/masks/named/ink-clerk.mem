@@ -30,7 +30,7 @@ voice-character   = "[STUB — partially known from house entry; pending-talk-st
 voice-role        = "Lorekeeper"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -163,11 +163,11 @@ How Ink-Clerk colors each Voice register when they speak through her archival-pr
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WtAdzCkZ60BCtHi9i8yJMYNY-dBvGx43dvXFJ0gR0vw
+<<^ code:"&#x0003;" >>ni:///sha-256;KESGHrubogtleH41QtsFywdw075SjHlkiUYsduU9ibE
 
 <<^ code:"&#x0004;" -> ? >>

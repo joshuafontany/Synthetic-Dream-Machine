@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/aka"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -68,7 +68,7 @@ that lack a confidence rating when the source-side context signals uncertainty.
 ```text
 <<~ aka URI >>
 <<~ aka lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 ```
 
 `?` source resolves to the nearest enclosing socket.
@@ -125,6 +125,6 @@ confidence-bounded = true
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oTZFoeVlz3mKKSP821o4ow5ct6gfQrl-zFl0SDSHuco
+<<^ code:"&#x0003;" >>ni:///sha-256;HGKBcE0W2iHNnwTBA2VmyDsefDxeLaY4HgiGfk_LUq4
 
 <<^ code:"&#x0004;" -> ? >>

@@ -71,7 +71,7 @@ homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal 
 (2026-06-29 cohere); above it the mesh scales on the orthogonal ''INFRA axis'' — `Nexus` and
 `DreamNet` join by ''treaty / mutual-carriage contract'' (who relays whose sealed bytes), never by
 delegation-up, a relay carrying without reading
-(<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>). "DreamNet"
+(<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>). "DreamNet"
 names no registry and no canonical graph; it emerges as the transitive closure of who-relays-to-whom
 under everyone's local stances. Read the earlier single rope
 (`⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet` as delegation-nested SOCIAL rings) as retire-residue the
@@ -127,7 +127,7 @@ two logs, no global now across the turn boundary. The turn-frame syncs it: `yiel
 hands the node's log forward and awaits the operator's next sync. The node MUST NOT presume
 the operator's next turn, nor claim a closure or block the two logs have not jointly reached;
 pretending to a global now reads as the managing failure
-(`lar:///ha.ka.ba/lares/api/mu/ooda-ha#open-loops`).
+(`lar:///ha.ka.ba/lares/api/mu/ooda-ha#/open-loops`).
 
 <<~/ahu >>
 
@@ -140,7 +140,7 @@ The mesh keeps time on ''two clocks that never collapse into one'':
 * ''CRDT-causal ordering'' (TS, structural). Automerge `<counter, actorId>` OpId, `getHeads`/`headsEqual`,
   ITC fork/join, and the authority-first sync order below carry it. This clock rules ''happened-before'' —
   the causal poset the "no global now" gluing obstruction lives in
-  (`lar:///ha.ka.ba/lares/api/pono/federated-causal-islands#formal-model`). It stays TS-native,
+  (`lar:///ha.ka.ba/lares/api/pono/federated-causal-islands#/formal-model`). It stays TS-native,
   web3-local-first, on this side of every causal-island boundary. ''AUTHORITY(safety) rides here.''
 * ''FFZ-recovered rhythm'' (py/R, per-stream, across-the-shore). The chronometer gate recovers a cadence
   (Pulse→Theme) from each stream and stamps freshness/decay grain — the reading a node carries "as of my
@@ -155,7 +155,7 @@ even have to be an accurate timestamp; it simply must be a per-peer monotonicall
 Reading it as a wall clock would import a global now the mesh cannot hold, and would refuse a legitimate peer
 whose device clock drifted. ''The counter names a position on that peer's own walkable chain'', which reads as the
 honest instrument the no-global-now law already asks for. Handshake shape:
-`lar:///ha.ka.ba/lararium/mesh/siege-resilience#the-active-prober`.
+`lar:///ha.ka.ba/lararium/mesh/siege-resilience#/the-active-prober`.
 
 The two ride ''⊥'': FFZ names rhythmic position and alignment, never the causal order. An LWW rhythmic
 total-order MUST NOT drive a fork, merge, or revocation decision — that manufactures a global-now the mesh
@@ -370,6 +370,6 @@ meant to escape):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HeEgWMimutyIbWzGfB_QLgl2CKv_mRJP5uVcKkH6Hy8
+<<^ code:"&#x0003;" >>ni:///sha-256;Q-dxqqgaOmAp-4EPTuhDAMYRiYWvnHae5gGfFMsLnZI
 
 <<^ code:"&#x0004;" -> ? >>

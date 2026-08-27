@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kahea"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -72,7 +72,7 @@ The two forms are distinguished at parse time by URI shape:
 URI form (creates transclusion edge):
 ```text
 <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ kahea lar:///ha.ka.ba/lares/api/pono/meme#law >>
+<<~ kahea lar:///ha.ka.ba/lares/api/pono/meme#/law >>
 <<~ kahea relative/path >>
 ```
 
@@ -150,6 +150,6 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dpk1MCjKiz72fv84yr0cWEP0H8viFlSkmIRBD0kNV_M
+<<^ code:"&#x0003;" >>ni:///sha-256;Ih26WUCEkroaOU8fjaaPwg3NqFsFIunqEM8Ln8LHDKo
 
 <<^ code:"&#x0004;" -> ? >>

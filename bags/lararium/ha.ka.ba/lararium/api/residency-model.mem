@@ -14,7 +14,7 @@ namespace     = "&#x0950; &#x0901;"
 register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-15"
-revision-note = "non-residency verb tier seated (#non-residency-verbs): INGEST (the precedent) + RECONCILE (engine-fold into @oracle, operator-admin, preview/conflict-surface/confirm/idempotent/effect-record, conflict-SURFACING never merge-arbitrating); §5 amended to admit non-residency verbs while holding the VCS-verb ban; EPOCH named + deferred (paired, sequenced reconcile→epoch); prior: bag-grain verb pair approved"
+revision-note = "non-residency verb tier seated (#/non-residency-verbs): INGEST (the precedent) + RECONCILE (engine-fold into @oracle, operator-admin, preview/conflict-surface/confirm/idempotent/effect-record, conflict-SURFACING never merge-arbitrating); §5 amended to admit non-residency verbs while holding the VCS-verb ban; EPOCH named + deferred (paired, sequenced reconcile→epoch); prior: bag-grain verb pair approved"
 role          = "load-bearing architectural invariant — recipe/bag + CRDT as coordinate-space + query-plan; dual verb surfaces (SPARQL ALL-CAPS ACTION + archival audit annotations); two ACTION grains (title + bag); a non-residency verb tier (INGEST, RECONCILE) rides the same rail"
 status        = "standing"
 status-why    = "the residency substrate stands live across the tree"
@@ -23,7 +23,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/residency-model"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -173,7 +173,7 @@ Any implementation of this model MUST hold all five:
 # ''Work-identity preserved across residencies.'' FRBR/LRM levels: tiddler-title = Work; per-bag CRDT doc = Manifestation; independent histories by design.
 # ''Operator-visible coordinate surface.'' Every read MUST surface `$origin-bag` the way SPARQL exposes `GRAPH ?g`. TW5's `getShadowSource` carries the prior-art pattern. Without this surface, the architecture degrades to shadow-tiddler confusion at CRDT scale.
 # ''Audit-trail discipline.'' Every residency change writes an indelible effect record. Silent unlink violates the model.
-# ''Verb vocabulary from set-algebra + cataloging.'' The //residency// ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that //folds// state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#conflict-resolution), or it reads as a banned merge verb.
+# ''Verb vocabulary from set-algebra + cataloging.'' The //residency// ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#/non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that //folds// state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#/conflict-resolution), or it reads as a banned merge verb.
 
 <<~/ahu >>
 
@@ -307,6 +307,6 @@ rhymes with this model's thermal residency yet stays distinct (retrieval grain, 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jnZXN8EaCRJhgCU7BAgRJArRjAeTovsC5E2I3ux1RgQ
+<<^ code:"&#x0003;" >>ni:///sha-256;XbugQ0Fvo-uE68f1-qXOVI8Q67_gHokd2Ne0Iwnj9hk
 
 <<^ code:"&#x0004;" -> ? >>

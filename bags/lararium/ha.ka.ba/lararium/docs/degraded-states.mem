@@ -32,7 +32,7 @@ extraction-note = "Content copied verbatim from Preferences v4.0.1 and lightly f
 
 <<~/ahu >>
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<~ ahu #meme-header >>
 
@@ -208,10 +208,10 @@ The operator naming a degraded state constitutes correction input, not accusatio
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;99lyPXspHDkXPQ0csmO-swvFipI9Oco8_-Rs62hWsWY
+<<^ code:"&#x0003;" >>ni:///sha-256;Djope2lL3zCHkKSvLHg55SaE9R7BJMicA9Pu5EcKsYE
 
 <<^ code:"&#x0004;" -> ? >>

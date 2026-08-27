@@ -59,12 +59,12 @@ The cap-model names this minimal stack exactly — the ''same keel as the temple
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#lares-viales >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-relay-floor >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#repair-kit >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#/lares-viales >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-relay-floor >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/repair-kit >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Z88_GXMyVgwkMNatnG1kix-2c_wYGph_rXTX7hKT_xA
+<<^ code:"&#x0003;" >>ni:///sha-256;gAzn5bXK-TQhWLxY2b3JWM_2_xB-zp90Iou2CcTmzCI
 
 <<^ code:"&#x0004;" -> ? >>

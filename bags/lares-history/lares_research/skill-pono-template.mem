@@ -267,7 +267,7 @@ def check-r6(content: str) -> InvariantResult:
     return InvariantResult(
         "R6", "fail",
         observed="no query throats found",
-        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#meta >> query throat"
+        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#/meta >> query throat"
     )
 
 CHECKS = [check-r1, check-r3-rating-fields, check-r3-register, check-r6]
@@ -444,7 +444,7 @@ Resource: lar:///ha.ka.ba/api/{name}#{locus}  → resolves to specific #locus bl
 Resource: lar:///ha.ka.ba/api/pono/walk-graph → resolves the full ala/aka link graph
 ```
 
-MCP Resources (not Tools) expose the `lar:` URI space as addressable content. An agent that calls `list-resources()` sees the full meme registry. An agent that reads `lar:///ha.ka.ba/api/pono/meme#optional-elements` gets that specific `ahu` block without loading the full file. This closes the URI–file routing gap identified in the OODA-HA assessment without requiring agents to infer the `lar:` → `file-path` mapping.
+MCP Resources (not Tools) expose the `lar:` URI space as addressable content. An agent that calls `list-resources()` sees the full meme registry. An agent that reads `lar:///ha.ka.ba/api/pono/meme#/optional-elements` gets that specific `ahu` block without loading the full file. This closes the URI–file routing gap identified in the OODA-HA assessment without requiring agents to infer the `lar:` → `file-path` mapping.
 
 !!! Phase 4 — Async Conformance Scan
 
@@ -508,6 +508,6 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;n0OaXoXtxYw9rtK1AyUx0Uk5OcJeJyQTAVlCtVlhuUs
+<<^ code:"&#x0003;" >>ni:///sha-256;fp9ixnzYSAe73d7bCUii4qU7PFuAel0qMOX0cfgtC14
 
 <<^ code:"&#x0004;" -> ? >>

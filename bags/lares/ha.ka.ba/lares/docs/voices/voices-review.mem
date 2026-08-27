@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/voices/voices-review"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -346,7 +346,7 @@ Four open questions in `voices/masks.md#mask-grammar-open-questions` resolved in
 
 Section renamed from `#mask-grammar-open-questions` to `#grammar-decisions` in `voices/masks.md`.
 LARES.md updated: `#required-handoff-masks` revised; `#session-masks` block added with default empty declaration.
-MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono/config#session-masks`.
+MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono/config#/session-masks`.
 
 <<~/ahu >>
 
@@ -355,12 +355,12 @@ MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices/workers >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8Z5y-SkxefOBP3LjDaMdPbIIViQfUQVEpd3-GFeeu0c
+<<^ code:"&#x0003;" >>ni:///sha-256;oLwKgO0PaLZngGxk25cWFXsdXcYgZ8K4aWTdnK6iIJA
 
 <<^ code:"&#x0004;" -> ? >>

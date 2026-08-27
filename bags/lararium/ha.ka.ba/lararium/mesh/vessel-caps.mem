@@ -49,7 +49,7 @@ The two families cross the ''AUTHORITY ⊥ FLOW'' master cut: VESSEL caps carry 
 
 One vessel, one `#has`-substrate — yet a vessel ''holds'' a cap-stack and ''expresses'' a subset, the way one genome differentiates a cell by //which genes light//. So:
 
-* every lararium ''holds'' the rhizome (relay) cap intrinsically (#the-relay-floor) —
+* every lararium ''holds'' the rhizome (relay) cap intrinsically (#/the-relay-floor) —
 * but ''expresses'' it — actually carries others' traffic — only when it lights the cap.
 
 Role = the ''expressed'' cap-set, not the held one. The same vessel differentiates into full-node / bare-relay / browser-leaf / Mudlet / Unreal by which caps it lights against its context and capacity. //Holding broadly, expressing by situation// — the sovereignty dial.
@@ -97,7 +97,7 @@ Whether a vessel ''expresses'' the rhizome cap — takes on carriage duty — is
 * ''Gnutella ultrapeers'' (CS): a node self-tests reachability · spare bandwidth · uptime, advertises carriage-capable only when it measures spare capacity, and ''accepts demotion'' on request.
 * ''Response-threshold task allocation'' (ant colonies): each unit carries a threshold on a demand stimulus; it engages when demand crosses //its// threshold, the cap deepens by use (reinforcement), and the collective ''re-covers automatically'' when a carrier drops.
 
-The carriage-demand stimulus reads off `r` — the carriage-standing coordinate (#the-routing-substrate). So the relay floor was never //"every node must carry"//; it is //"every node may, and self-elects by load."// A home browser carries nothing and meshes fine; a fat reachable node volunteers heavy carriage.
+The carriage-demand stimulus reads off `r` — the carriage-standing coordinate (#/the-routing-substrate). So the relay floor was never //"every node must carry"//; it is //"every node may, and self-elects by load."// A home browser carries nothing and meshes fine; a fat reachable node volunteers heavy carriage.
 
 <<~/ahu >>
 
@@ -105,7 +105,7 @@ The carriage-demand stimulus reads off `r` — the carriage-standing coordinate 
 
 !! Lares Viales ~ the minimal wayfarer
 
-The smallest composition that still meshes — ''the Hermai'', the crossroads-markers. A Herm runs the ''same code keel as a full Lararium'' — the core ''@daemon wiki-worker'' plus its ''own mesh-palace'' — and thins only its `#has`-stack: it furnishes none of the operator-content wikis (no hot/cold user store, no sovereign `@catalog`). ''One codebase, two `#has`-stacks.'' The Herm differs from a fat node by ''composition over the shared keel'', never by a separate minimal codepath — so a Herm reads as a named point in cap-composition space (#the-vessel-is-its-caps), not a stripped-down process. Its stack:
+The smallest composition that still meshes — ''the Hermai'', the crossroads-markers. A Herm runs the ''same code keel as a full Lararium'' — the core ''@daemon wiki-worker'' plus its ''own mesh-palace'' — and thins only its `#has`-stack: it furnishes none of the operator-content wikis (no hot/cold user store, no sovereign `@catalog`). ''One codebase, two `#has`-stacks.'' The Herm differs from a fat node by ''composition over the shared keel'', never by a separate minimal codepath — so a Herm reads as a named point in cap-composition space (#/the-vessel-is-its-caps), not a stripped-down process. Its stack:
 
 * `#has {rhizome}` — it carries sealed mana along the leylines (CARRIAGE).
 * `#has {tuber}` scoped to the ''immune core'' — its own `@daemon` (the autonomy organ) and mesh-palace (the FLOW-map it routes on), carrying the ''bulb'' (the engine-blob / boot-seed) so it can seed a cold hearth.
@@ -124,8 +124,8 @@ A Herm ''boots permissionlessly'' (its own self-certifying key, anon — no bles
 
 The `#has {rhizome}` carriage now names ''built code'' (the sealed-sharing model, #cap-tier, #carry-contract). ''The carriage is dumb — the node is not:'' the WAYFARER runs the immune keel, but its CARRIAGE reads nothing by construction. Made concrete:
 
-* ''`rhizome.forward` = the authenticated carriage relay'' — it runs an Ed25519 proof-of-possession handshake, STAMPS every envelope's `from` with the sender's PROVEN key (a forged `from` never crosses), moves sealed `@cad` ciphertext (`cid = BLAKE3(ciphertext)`, verify-cap ⊥ read-cap), and reads NOTHING. "sealed mana along the leylines" now reads literal: the disclosure shore at the wire (#lares-viales) made code. A ''standing relay'' is this cap stood always-on — the Herm's whole reason to sit at the crossroads.
-* ''custody ⊥ findability = the bag-tracker'' (#the-shore) — a tuber announces //"I hold cid X"// into the Herm's DHT-free `cid → holders` hint index; any rhizome serves the hint. The Herm holds the HINT, never the read-cap; a fetcher re-verifies `BLAKE3(bytes)==cid` itself, so the hint stays a hint, never an authority on the bytes.
+* ''`rhizome.forward` = the authenticated carriage relay'' — it runs an Ed25519 proof-of-possession handshake, STAMPS every envelope's `from` with the sender's PROVEN key (a forged `from` never crosses), moves sealed `@cad` ciphertext (`cid = BLAKE3(ciphertext)`, verify-cap ⊥ read-cap), and reads NOTHING. "sealed mana along the leylines" now reads literal: the disclosure shore at the wire (#/lares-viales) made code. A ''standing relay'' is this cap stood always-on — the Herm's whole reason to sit at the crossroads.
+* ''custody ⊥ findability = the bag-tracker'' (#/the-shore) — a tuber announces //"I hold cid X"// into the Herm's DHT-free `cid → holders` hint index; any rhizome serves the hint. The Herm holds the HINT, never the read-cap; a fetcher re-verifies `BLAKE3(bytes)==cid` itself, so the hint stays a hint, never an authority on the bytes.
 * ''the Herm decides WHO-CONNECTS, never WHO-READS.'' The read-scope it never holds is the cap-tier chain (`VEIL ⊂ PERSONAGROUP ⊂ CONTRACT ⊂ PUBLIC`, #cap-tier); the Herm carries every tier's ciphertext and holds a read-cap for NONE. The member-carry gate + the read-scope live in the SERVED vessels (the cas-wire serve side), never the wayfarer. The connect gate is near-open — proof-of-possession today, the lease + rate + cost-to-vouch anti-Sybil economy the future layer (#the-relay-floor names it open).
 * ''two sockets stay two'' (#dreamnet-architecture gate-model) — the Herm is a Socket-B carriage relay (sealed `@cad` envelopes); it NEVER carries the cleartext Automerge `/ws` doc sync (Socket A). Carry ⊥ read holds at the transport because the two never cross.
 
@@ -187,9 +187,9 @@ What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/composable-keel >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-relay-floor >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-routing-substrate >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#repair-kit >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-relay-floor >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-routing-substrate >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/repair-kit >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/capability >>
@@ -197,6 +197,6 @@ What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;km38IxLoqizdSZ8_RwJ6CQD6ohIvRu3rl1kc-WW7ih0
+<<^ code:"&#x0003;" >>ni:///sha-256;BCnOiJWfrGQIQdJFo_PD0kVT3stJ9Sxi5jbB8kdWvBM
 
 <<^ code:"&#x0004;" -> ? >>

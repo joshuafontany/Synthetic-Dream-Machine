@@ -19,7 +19,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/relational-parameter"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -60,7 +60,7 @@ parameters arrive as ''attributes'', positional ones named `"0"`, `"1"`, `"2"` a
 touched only one of the two would leave `\function` reading a bare arrow differently from `\procedure`.
 
 ⚠ ''THE LIVE PARSER ALREADY GUARDS A COLON, and that precedent decides the sibling fix''
-(#the-uri-scheme). `parseMacroParameterAsAttribute` refuses a named parameter whose name fails
+(#/the-uri-scheme). `parseMacroParameterAsAttribute` refuses a named parameter whose name fails
 `/^[A-Za-z0-9\-_]+$/`, with the reason stated in the source: //to avoid mis-parsing values like
 `$:/foo`//.
 
@@ -87,7 +87,7 @@ cannot run at parse time.
 <<~ confidence 16/20 >> ''THAT SPLIT IS WHAT MAKES THE CHANGE ADDITIVE.'' An undeclared procedure
 receives byte-identical parameters before and after. The feature reaches only the definitions that ask
 for it — which answers the standing warning that a global operator re-reads other people's files
-(#prior-art).
+(#/prior-art).
 
 !!! The chain, and why it needs no new binding model
 
@@ -239,6 +239,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Fv_Dw4vrQSWkZMV_TOFPxGG2cjTGvEQnaLxvkmJMRgo
+<<^ code:"&#x0003;" >>ni:///sha-256;BhjGaLl611o20H-yDOi2iJiTjorLF6Uv-cxnQg3KaP8
 
 <<^ code:"&#x0004;" -> ? >>

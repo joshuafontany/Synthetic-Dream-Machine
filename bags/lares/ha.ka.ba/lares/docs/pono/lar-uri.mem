@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/lar-uri"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -145,7 +145,7 @@ lar://alias:grant@host/ha.ka.ba/lares/
 ''Authority-less form'' (no `user@host` segment — territory or resource reference without a named speaker):
 
 ```
-lar:///ha.ka.ba/lares/optional/path/[#section-anchor]
+lar:///ha.ka.ba/lares/optional/path/[#/section-anchor]
 ```
 
 Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use this form for stable named graph addresses, HA.KA.BA references, and any URI where the speaker identity is not the point.
@@ -462,6 +462,6 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jUhF0Rz2cNWXB4KPg7xoxMp491mTp-dlznNPE8JqJmU
+<<^ code:"&#x0003;" >>ni:///sha-256;qUo31qGElZ64VLFxlLiS0AkRCv3vcNtmniEvPJhJxiw
 
 <<^ code:"&#x0004;" -> ? >>

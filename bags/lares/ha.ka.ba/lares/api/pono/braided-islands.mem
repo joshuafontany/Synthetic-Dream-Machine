@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/api/pono/braided-islands"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -96,11 +96,11 @@ without a loom.
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#worker-swarm >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/worker-swarm >>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WbFbsOHBKcAz_xJB3Cuv03vfZhfT7dONE3bc44zeOEo
+<<^ code:"&#x0003;" >>ni:///sha-256;2RDy-z2SNssv7d4Rq3f2GcSLIh6LjpAOVBdTsXrKjAk
 
 <<^ code:"&#x0004;" -> ? >>

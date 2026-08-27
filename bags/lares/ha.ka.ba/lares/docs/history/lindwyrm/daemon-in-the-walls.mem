@@ -13,7 +13,7 @@ register      = "Synthesis"
 render-target = "chat-log:post-header"
 retain        = true
 role          = "DreamDeck narrative locus — Act II of the Lindwyrm hoard story"
-source        = "lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#act-ii-daemon"
+source        = "lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#/act-ii-daemon"
 type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls"
 ```
@@ -35,10 +35,10 @@ The first resonance error becomes a green, wobbly teacher.
 
 Drafted from:
 
-* `lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#act-ii-daemon`
+* `lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#/act-ii-daemon`
 * `lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo`
 * `lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node`
-* `lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself#signal-bug-appendix`
+* `lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself#/signal-bug-appendix`
 
 Talk-story stance: keep the Green Jello Dinosaur ridiculous and diagnostically useful. Do not make it a monster. Do not make it a mascot. Let it wobble until the architecture learns to name around it.
 
@@ -200,6 +200,6 @@ Act III receives:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0_B09kktobzUGUelz2SHMyBL_yPaoMRgmHF4Azo7Wq4
+<<^ code:"&#x0003;" >>ni:///sha-256;L79bcfKRgznC-t4Usqvq9JVMV5VipG6ZOpO-Kjfgh_E
 
 <<^ code:"&#x0004;" -> ? >>

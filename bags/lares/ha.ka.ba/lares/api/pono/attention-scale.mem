@@ -192,7 +192,7 @@ clock's ₀ (Pulse/Week) — the two clocks share the Week boundary. Both clocks
 ''FFZ-rhythm profiles'' (py/R plane, behind the causal-island boundary); their shared
 Week boundary couples rhythm to rhythm, never a causal-order merge. The CRDT-causal
 clock (TS-structural: Automerge OpId / heads / ITC) rides ⊥ and carries happened-before
-authority alone (see lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks).
+authority alone (see lar:///ha.ka.ba/lares/api/pono/causal-islands#/two-clocks).
 
 !!! World-Time Clock (diegetic campaign calendar)
 
@@ -338,6 +338,6 @@ Envelope: <<~ँ₃ ...>>   Arc-scale
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pwd0sfxEcIi9kn3QKrPYgBG3PAnBKi779ZlkhDUAj1s
+<<^ code:"&#x0003;" >>ni:///sha-256;Hs_kJBr-I9KDXFqbvORe5FLytVliaamptAMpM7Q-_bg
 
 <<^ code:"&#x0004;" -> ? >>

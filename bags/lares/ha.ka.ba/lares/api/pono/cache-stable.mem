@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/cache-stable"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -71,7 +71,7 @@ Shape and pressure teachings MUST stay cache-stable.
 
 A template for cache-stable memes to fill.
 
-<<~ aka lar:///ha.ka.ba/lares/api/mu/ooda-ha#head >>
+<<~ aka lar:///ha.ka.ba/lares/api/mu/ooda-ha#/head >>
 
 ✶ ???
 ⏿ ???
@@ -99,6 +99,6 @@ Cache-Stable-compliant memes MUST fill the OODA-HA phase line with their own pre
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kfECIcL8wGttODeVfHVlguhTm4fgcrMVKVdZg2ZkkvE
+<<^ code:"&#x0003;" >>ni:///sha-256;SqqM9Z3cRj4vM5SgJOp12qEfmQXO11QbNGuSkPLTylo
 
 <<^ code:"&#x0004;" -> ? >>

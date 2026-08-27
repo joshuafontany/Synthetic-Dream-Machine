@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/epoch-binding-surfaces"
 written   = "2026-08-08"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -45,7 +45,7 @@ a wrong answer here reads identically to a right one until a founding breaks.
 
 <<~Surface Seal-epoch "binds/seated-keys + threshold moved-by/a-roster-or-quorum-change ~ genesisSealEpochCid — carries NO dependency, NO blob, NO version" >>
 <<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage" >>
-<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS; verified at BUILD time by verifyGenesisArtifact — LOCAL integrity, never a membership criterion, and no peer path reads it (#the-real-mover)" >>
+<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS; verified at BUILD time by verifyGenesisArtifact — LOCAL integrity, never a membership criterion, and no peer path reads it (#/the-real-mover)" >>
 <<~Surface On-disk-serde "binds/automerge + keyhive byte formats moved-by/a-RUNTIME-dep-bump ~ the only npm-movable surface" >>
 
 !!! ★ ONE MECHANISM — A MONOTONE FRONTIER THAT ONLY ROLLS FORWARD ★
@@ -218,6 +218,6 @@ are acts, never upgrades''.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4f1RB8oD5gUXhZfOfmR59pU8er-az3W2IIxUcbwC9a4
+<<^ code:"&#x0003;" >>ni:///sha-256;NFlcED2YQsDq21JmDmM-MG0CRnO-2LkwLkbhTuq4dtM
 
 <<^ code:"&#x0004;" -> ? >>

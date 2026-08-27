@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/the-thing-event"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -57,7 +57,7 @@ Proto-Germanic ''*þingą''. Old Norse `þing`: a legal assembly — a regional 
 
 ''The mechanics that transpose'' (Germanic assembly practice): things met on a ''regular cadence'' at fixed accessible sites, so the conversion carries a rhythm rather than arriving on demand. They ran ''nested'' — a matter unresolved at a smaller thing escalated to a larger — which reads as strata, not as appeal to a higher authority. They held the ''lawspeaker'', who ''recited'' law from memory rather than owning it (the same integrity the house already holds at `pattern-integrities-cultural` P8 — ''recitation-or-lapse'': the law lives only while spoken, and a lapsed recitation is a lapsed law rather than a law nobody said), and whose leverage ran on the assembly's acceptance (Þorgnýr telling a king //the people, not the king, held power//). And they carried ''outlawry'' as the assembly's own act, never a lord's.
 
-''The mechanic that does NOT transpose, and the warning it carries.'' Attendance ran to //free men of full age//; women attended and stayed out of the deciding bodies. A model that took the form and not the exclusion must say so, and this one does — the thing-event's ''franchise belongs to each realm'', never to the mesh (#unmodelled).
+''The mechanic that does NOT transpose, and the warning it carries.'' Attendance ran to //free men of full age//; women attended and stayed out of the deciding bodies. A model that took the form and not the exclusion must say so, and this one does — the thing-event's ''franchise belongs to each realm'', never to the mesh (#/unmodelled).
 
 ''And the decline names our capture pattern with a date on it:'' //towards the end of the Viking Age, royal power became centralized, and the kings consolidated power and control over assemblies. As a result, things lost most of their political role and began to function mainly as courts.// The assembly was not abolished. ''It was absorbed'' — which is the Compitalia shape, and the reason `cabal-realm#the-unswept-corner` treats capture as survivable-and-visible rather than preventable.
 
@@ -100,6 +100,6 @@ That reads as the same law as //the naming layer performs, so it must never cert
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0kQC7_cZ44rkUQVmDv9exaurJCcBmCknx-CfZP7k5Mg
+<<^ code:"&#x0003;" >>ni:///sha-256;AeSnh_oHmyAM7SEkJTrNn_tyyOH3STqMzWobCNSS22M
 
 <<^ code:"&#x0004;" -> ? >>

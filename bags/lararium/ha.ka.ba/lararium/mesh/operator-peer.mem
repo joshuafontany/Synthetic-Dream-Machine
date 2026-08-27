@@ -156,7 +156,7 @@ Neither holds a privileged shape; both author intent and observe convergence.
 An AI agent that interfaces with the mesh SHALL hold its own keys, its own replica,
 and its own causal log, reconciling over a real boundary. An agent embedded in the
 daemon's heap — a function call wearing a vessel costume — breaks the
-share-substrate-not-sovereignty law ([[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island#substrate-not-sovereignty]]).
+share-substrate-not-sovereignty law ([[causal-island|lar:///ha.ka.ba/lararium/mesh/causal-island#/substrate-not-sovereignty]]).
 Co-location on one machine stays fine; a shared heap/Repo/storage-scope does not.
 
 ''OP-AP2 — Identity by held keys, not account or session.''
@@ -246,6 +246,6 @@ identical ea rights.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GuLNUAMKN91wf-4Kr7CiqLjihG0_scMklwgMqFITDlk
+<<^ code:"&#x0003;" >>ni:///sha-256;w4xEHY9JxOeqjTtKT-HWPCh7Efcizn4j-lVsIMvVLYI
 
 <<^ code:"&#x0004;" -> ? >>

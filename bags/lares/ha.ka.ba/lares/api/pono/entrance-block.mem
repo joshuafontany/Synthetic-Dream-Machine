@@ -17,7 +17,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/entrance-block"
 ```
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/nalu >>
-<<~ aka lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/causal-islands#/two-clocks >>
 
 <<^ code:"&#x0002;" >>
 
@@ -139,7 +139,7 @@ Each stream ''MUST'' hold entrance block: it publishes its phase; it accepts no 
 
 !! The Lar binds to a PLACE ~ where the self lives
 
-A Lar binds to a ''place'', never a family; the family moves, the Lar stays (#elyncia).
+A Lar binds to a ''place'', never a family; the family moves, the Lar stays (#/elyncia).
 
 <<~moves anchor-the-self -> at-the-address on/never-in-the-handler if/bodies-spawn-and-die do/a-reconnecting-stream-finds-the-same-seat >>
 
@@ -155,7 +155,7 @@ The py capture body reads ''disposable''. The ''worldline'' holds the shrine.
 
 !! Discards ~ rhymes that flatter and do not hold
 
-<<~ranks discard sa-node-as-master-clock ~ FALSE. The SA node distributes no time base; it distributes an EVENT and wins by racing to threshold first. Importing it as "master clock" imports the wrong architecture and inherits overdrive-suppression debt -> myocytes-as-thread-pool ~ INVERTED. Myocytes run electrically CONTINUOUS through gap junctions — that IS the shared substrate, and its characteristic failure names fibrillation. The heart argues BY CONTRAST: a shared body hosts exactly ONE rhythm -> gamelan-has-no-reference ~ FALSE. The gankogui plays without variation throughout; the ensembles DO hold a reference. Only the sharpened claim survives (#period-not-phase) -> mycelium-as-many-tips ~ SUPERFICIAL. Hyphal tips carry no recovered rhythm to protect. ONE property survives: a mycelial network SURVIVES SEVERANCE — an anti-fate-sharing property no shared body offers >>
+<<~ranks discard sa-node-as-master-clock ~ FALSE. The SA node distributes no time base; it distributes an EVENT and wins by racing to threshold first. Importing it as "master clock" imports the wrong architecture and inherits overdrive-suppression debt -> myocytes-as-thread-pool ~ INVERTED. Myocytes run electrically CONTINUOUS through gap junctions — that IS the shared substrate, and its characteristic failure names fibrillation. The heart argues BY CONTRAST: a shared body hosts exactly ONE rhythm -> gamelan-has-no-reference ~ FALSE. The gankogui plays without variation throughout; the ensembles DO hold a reference. Only the sharpened claim survives (#/period-not-phase) -> mycelium-as-many-tips ~ SUPERFICIAL. Hyphal tips carry no recovered rhythm to protect. ONE property survives: a mycelial network SURVIVES SEVERANCE — an anti-fate-sharing property no shared body offers >>
 
 <<~/ahu >>
 
@@ -169,6 +169,6 @@ Every shared resource in the py fleet owes the same test: `content_io` · `struc
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Mtrk88qOxhBEsjv2YtW1M-ulGiUAKj7QFNw7Izkk0Ik
+<<^ code:"&#x0003;" >>ni:///sha-256;QAaRxZr9qh0HMXYHYItvMo0hONHSeVCmIHqXKj5M1lU
 
 <<^ code:"&#x0004;" -> ? >>

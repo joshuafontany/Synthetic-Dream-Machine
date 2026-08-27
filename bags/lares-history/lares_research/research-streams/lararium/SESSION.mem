@@ -499,8 +499,8 @@ packages/lararium-node/
 
   ''Instance meme'' (fragment of type URI):
   ```
-  lar:///ha.ka.ba/elyncia/devices/altar-torch#east-wing-flame
-  lar:///ha.ka.ba/elyncia/devices/altar-torch#3f2a1b9c-...
+  lar:///ha.ka.ba/elyncia/devices/altar-torch#/east-wing-flame
+  lar:///ha.ka.ba/elyncia/devices/altar-torch#/3f2a1b9c-...
   ```
   Two identity layers coexist for the same device spawn:
 *** User-selected name fragment: `#east-wing-flame` — human readable, stable across renames of the instance content, the operator's mnemonic handle.
@@ -518,7 +518,7 @@ packages/lararium-node/
   <<~ kahea kau #east-wing-flame >>
   <<~ kahea kau #3f2a1b9c-8e4d-... >>
   ```
-  One `<<~ kahea kau #fragment >>` sigil per instance. The type meme's body thus serves as the authoritative roster of all active instances. The fragment after `#` becomes the tiddler title suffix: full title = `lar:///ha.ka.ba/elyncia/devices/altar-torch#east-wing-flame`.
+  One `<<~ kahea kau #fragment >>` sigil per instance. The type meme's body thus serves as the authoritative roster of all active instances. The fragment after `#` becomes the tiddler title suffix: full title = `lar:///ha.ka.ba/elyncia/devices/altar-torch#/east-wing-flame`.
 
 ◇ Bag assignment and movability:
 ** Instance tiddler title: full lar URI with fragment, stored as a tiddler in the room Automerge doc.
@@ -747,7 +747,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 ✶ ''Observe:'' `sync-adaptor.ts` was a dead 7-line stub. `meme-sync-adaptor.ts` didn't exist. `sync-adaptor.web2.ts` held the full prior implementation (583 lines). `meme-write.ts` had `buildDirectRecord` ready.
 
-⏿ ''Orient:'' Delta from web2 sidecar: outbound `direct` save handler no longer needs `splitCarrierToTiddlers` — in the meme model ahu slot children store as independent `lar:///parent#slot` records receiving their own `saveTiddler` calls. Inbound direction unchanged: `tw5.deserializeCarrier` still handles meme records. All guards (echo-loop, canon, temp, draft, cascade) preserved verbatim.
+⏿ ''Orient:'' Delta from web2 sidecar: outbound `direct` save handler no longer needs `splitCarrierToTiddlers` — in the meme model ahu slot children store as independent `lar:///parent#/slot` records receiving their own `saveTiddler` calls. Inbound direction unchanged: `tw5.deserializeCarrier` still handles meme records. All guards (echo-loop, canon, temp, draft, cascade) preserved verbatim.
 
 ◇ ''Decide:'' Write `MemeSyncAdaptor implements MemeProjection`. Import `buildDirectRecord` from `meme-write.js`. Drop carrier-write.js. Export from index.ts barrel.
 
@@ -1193,6 +1193,6 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;IFfSyq1tylURtNu4bj4wtFmkmfnR5Uaq12StsLSLF8Y
+<<^ code:"&#x0003;" >>ni:///sha-256;-4KQJNKjCi8fkSP80JF7lyV4R_nQvR0cAy4heml2vjA
 
 <<^ code:"&#x0004;" -> ? >>

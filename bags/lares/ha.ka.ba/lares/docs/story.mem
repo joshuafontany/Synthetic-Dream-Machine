@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/story"
 
 <<^ code:"&#x0002;" >>
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<~ ahu #meme-header >>
 
@@ -56,6 +56,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kheuRe0p5eH__gPyJUW9x1tp9QelBJmTHx7J8Z37p6w
+<<^ code:"&#x0003;" >>ni:///sha-256;0sex4AR_LYKLATqevdDoxoRDGGTpAhwIRVGtguOtxN0
 
 <<^ code:"&#x0004;" -> ? >>

@@ -33,7 +33,7 @@ Not a law surface. Explanation, evaluation guidance, and research that belongs o
 | ''Typed Meme'' | `S` or `CS` | `<<^ code:"&#x0001;" ? -> lar:///...` | Carrier WEARS `loci`; routing convention surfaces or sharpens; MCP tension may remain. |
 | ''Canon Typed Meme'' | `C` | `<<^ code:"&#x0001;" lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
 
-Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
+Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#/rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
 
 !!! Movement Criteria
 
@@ -57,7 +57,7 @@ Higher `CS` posture additionally requires:
 ''Typed Meme → Canon Typed Meme'' additionally requires:
 * all address-stability conditions satisfied
 * operator or admin confirmation
-* no outstanding declared-unresolved sub-meme addresses (O7 rule per `lar:///ha.ka.ba/lares/api/pono/meme#optional-elements`)
+* no outstanding declared-unresolved sub-meme addresses (O7 rule per `lar:///ha.ka.ba/lares/api/pono/meme#/optional-elements`)
 * no recursive self-loop closers masquerading as sub-meme declarations
 * live MCP resolver or equivalent externally governed resolution substrate operates
 * document opener `?` removed
@@ -74,13 +74,13 @@ A canon MOVE requires an external act; a meme may not self-MOVE to canon.
 | `manao` | carrier knows its loci role, names why the convention exists, keeps enacted law separate from roadmap speculation | purpose drifts, routing law mixes with unrelated concerns, promotion posture stays vague |
 | `manaoio` | local resolution repeats reliably or a live resolver operates, operator crossings stay bounded, backlog surfaces honestly | resolution depends on unstated manual recovery, promotion self-asserts, live-resolution gap stays hidden |
 
-These layer atop the generic meme ratings at `lar:///ha.ka.ba/lares/api/pono/meme#rating-targets`. A local path hit raises evidence; it never overrides honest unresolved tension.
+These layer atop the generic meme ratings at `lar:///ha.ka.ba/lares/api/pono/meme#/rating-targets`. A local path hit raises evidence; it never overrides honest unresolved tension.
 
 ---
 
 !! High-Rating Loci Conditions
 
-`lar:///ha.ka.ba/lares/api/pono/meme#rating-targets` governs the generic structural climb. Loci adds routing-and-convention predicates for memes whose carrier identity forms part of the law surface.
+`lar:///ha.ka.ba/lares/api/pono/meme#/rating-targets` governs the generic structural climb. Loci adds routing-and-convention predicates for memes whose carrier identity forms part of the law surface.
 
 * high `mana`: explicit routing convention, inspectable derivation steps, stable lifecycle naming, honest unresolved-state handling
 * high `manao`: carrier knows itself as loci law, states why the convention exists, keeps enacted law separate from roadmap speculation
@@ -124,6 +124,6 @@ Hoʻoko-class file-siting repairs in this meme's history:
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hLp6kUa2AQykjADlf9tPQIQkiYCZEIOrDx26JzllZJ4
+<<^ code:"&#x0003;" >>ni:///sha-256;Bsul4Fwo3HfSG3lguRvN2KWjoBK8ioXsaPL3wtKPisU
 
 <<^ code:"&#x0004;" -> ? >>

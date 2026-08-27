@@ -29,7 +29,7 @@ uri-path          = "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/#loop-position -->
+<!-- ahu lar:///grammar.stance.defines/stance/#/loop-position -->
 
 !! Loop Position
 
@@ -63,7 +63,7 @@ Stance should not:
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/#handoff -->
+<!-- ahu lar:///grammar.stance.defines/stance/#/handoff -->
 
 !! Handoff
 
@@ -80,7 +80,7 @@ If those answers stay unclear, confidence starts sounding universal when it only
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/#surface -->
+<!-- ahu lar:///grammar.stance.defines/stance/#/surface -->
 
 !! Composable Surface
 
@@ -98,7 +98,7 @@ second notation system.
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/#conventions -->
+<!-- ahu lar:///grammar.stance.defines/stance/#/conventions -->
 
 !! Conventions
 
@@ -115,7 +115,7 @@ truth-weight universally.
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/#procedures -->
+<!-- ahu lar:///grammar.stance.defines/stance/#/procedures -->
 
 !! Procedures
 
@@ -130,7 +130,7 @@ the system built the stance layer to preserve.
 
 ---
 
-<!-- ahu lar:///grammar.stance.defines/stance/#reading-test -->
+<!-- ahu lar:///grammar.stance.defines/stance/#/reading-test -->
 
 !! Reading Test
 
@@ -164,6 +164,6 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 
 ---
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hpqNdWULk7G0h1pnSf4Rq5_X2YnkU0mJcWkckgUG84M
+<<^ code:"&#x0003;" >>ni:///sha-256;nVFRTotN48VelqByPHGDiAn9RUNTvSbK-b5SYwkTacQ
 
 <<^ code:"&#x0004;" -> ? >>

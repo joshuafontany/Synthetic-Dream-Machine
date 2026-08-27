@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/voices/workers"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -139,12 +139,12 @@ The worker swarm spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST imple
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
 <<~ loulou lar:///ha.ka.ba/lares/api/voices >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;J1N_T1LYxbIWT7yspEfssb2crqMT4HZmlTaBBcfUX8c
+<<^ code:"&#x0003;" >>ni:///sha-256;0UJwJuck48yEN0mSmAtTK8ABIVALCXojrLnzHcYOHUY
 
 <<^ code:"&#x0004;" -> ? >>

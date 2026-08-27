@@ -19,7 +19,7 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/system-pattern-integrities"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -273,7 +273,7 @@ desc  = "LADDER_5 / OODA_HA_5 (5 stances/tools), FPI-1–5 (Fuller's pattern int
 ```toml #PENTA_2_CLOCK_ALIGNMENT
 id    = "PENTA_2_CLOCK_ALIGNMENT"
 label = "FfzClock levels map onto OODA_HA_5 stances"
-desc  = "The five FfzClock levels correspond to the five OODA_HA_5 stances: L0 = Pulse (sub-action/micro-op, sub-perceptual) = observe-inner; L1 = Beat (operator perceptual grain) = orient-act — the smallest phase transition the operator treats as a completed meaningful unit in their connected system (an exchange turn, a chess move, a DAW bar, a market trade, a pipeline stage); L2 = Measure (session) = decide-loop; L3 = Arc (day/cycle) = act-outer; L4 = Theme (epoch, unbounded) = strategic/ground. L4 remaining unbounded is not a violation of the law of fives — it is the anchoring ground that makes the four bounded levels meaningful. The epoch is the field; the stances loop within it. L0 MUST remain sub-perceptual: if a system's smallest operator-meaningful event lands at L0, the L1 anchor erodes and session bounds lose meaning. Canonical register names: Pulse / Beat / Measure / Arc / Theme (see lar:///ha.ka.ba/lares/api/pono/attention-scale). These five levels band the FFZ RHYTHMIC clock (a cadence recovered per-stream; py/R home, behind the causal-island boundary) — the alignment names a rhythmic partition, never a causal order. The FFZ rhythm rides ⊥ the CRDT-causal ordering (TS-structural: Automerge OpId / getHeads / ITC / the authority-first sync order), which alone carries happened-before authority. Structural ⊥ rhythmic; the epoch-lease reads as a liveness ratchet, not a clock. See lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks."
+desc  = "The five FfzClock levels correspond to the five OODA_HA_5 stances: L0 = Pulse (sub-action/micro-op, sub-perceptual) = observe-inner; L1 = Beat (operator perceptual grain) = orient-act — the smallest phase transition the operator treats as a completed meaningful unit in their connected system (an exchange turn, a chess move, a DAW bar, a market trade, a pipeline stage); L2 = Measure (session) = decide-loop; L3 = Arc (day/cycle) = act-outer; L4 = Theme (epoch, unbounded) = strategic/ground. L4 remaining unbounded is not a violation of the law of fives — it is the anchoring ground that makes the four bounded levels meaningful. The epoch is the field; the stances loop within it. L0 MUST remain sub-perceptual: if a system's smallest operator-meaningful event lands at L0, the L1 anchor erodes and session bounds lose meaning. Canonical register names: Pulse / Beat / Measure / Arc / Theme (see lar:///ha.ka.ba/lares/api/pono/attention-scale). These five levels band the FFZ RHYTHMIC clock (a cadence recovered per-stream; py/R home, behind the causal-island boundary) — the alignment names a rhythmic partition, never a causal order. The FFZ rhythm rides ⊥ the CRDT-causal ordering (TS-structural: Automerge OpId / getHeads / ITC / the authority-first sync order), which alone carries happened-before authority. Structural ⊥ rhythmic; the epoch-lease reads as a liveness ratchet, not a clock. See lar:///ha.ka.ba/lares/api/pono/causal-islands#/two-clocks."
 ```
 
 ```toml #PENTA_3_PATTERN_INTEGRITY
@@ -357,6 +357,6 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oquEBB_v4FNmE9VlBz6E9S5AQkKlJtP0Hy-cLQ0LsvM
+<<^ code:"&#x0003;" >>ni:///sha-256;zCSaWgkUCVYusXwGfFCsTVlZyT0IYS720X0r5mJqvvM
 
 <<^ code:"&#x0004;" -> ? >>

@@ -25,7 +25,7 @@ written    = "2026-07-14"
 
 !! The Ground ~ must fall back to anon
 
-Every vessel — a browser at elyncia.app, a node at a Lararium, any device — ''stands anon at its floor'': its own veiled-key, its own local content, no group, and it MUST always return there. Caps, node infrastructure, Handle memberships stack ABOVE the floor; none dissolves it. The whole mesh rests on this one unremovable ground (<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-base-model >>).
+Every vessel — a browser at elyncia.app, a node at a Lararium, any device — ''stands anon at its floor'': its own veiled-key, its own local content, no group, and it MUST always return there. Caps, node infrastructure, Handle memberships stack ABOVE the floor; none dissolves it. The whole mesh rests on this one unremovable ground (<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#/the-base-model >>).
 
 <<~/ahu >>
 
@@ -77,6 +77,6 @@ The identity-privacy hardening (per-handle vessel credential · scope-exclusive 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;KTjazp7qUQq58Lpm7qOGahkS6eXkjtP6zpPJpBR1FC0
+<<^ code:"&#x0003;" >>ni:///sha-256;ug4yYb1G57ZFYOXReWZxhhxfTondZIXqkDxF7-rANG0
 
 <<^ code:"&#x0004;" -> ? >>

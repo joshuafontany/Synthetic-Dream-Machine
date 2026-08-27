@@ -23,7 +23,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-grammar-wakes-prior-art"
 
 ! Prior Art Comparison Battery — Genesis Side-Car
 
-The design-research that sits beside [[the genesis arc|the-grammar-wakes.md]]: a formal prior-art review that produced the W3C lineage verdicts now in `lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#w3c-lineage-verdicts`.
+The design-research that sits beside [[the genesis arc|the-grammar-wakes.md]]: a formal prior-art review that produced the W3C lineage verdicts now in `lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#/w3c-lineage-verdicts`.
 
 Where //The Grammar Wakes// tells how the teeth found the page, this side-car holds the cold-eyed survey that ran alongside it — eight living systems weighed for what each could teach the new grammar. The verdicts landed in the live spec; this record keeps the per-system reasoning that produced them.
 
@@ -115,13 +115,13 @@ The W3C research additionally surfaced: the grammar still lacks its own canonica
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#w3c-lineage-verdicts >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext#/w3c-lineage-verdicts >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<~ pranala #side-car-of ? -> lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes family:relation role:accompanies >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WGii8m1mafKmosjWPHstoJfwc46ma5mXu25YaMiJ8R4
+<<^ code:"&#x0003;" >>ni:///sha-256;KL72-m3SQ99QdGlqVFNzUENLnNRKEs90e9mCBbIyPu0
 
 <<^ code:"&#x0004;" -> ? >>

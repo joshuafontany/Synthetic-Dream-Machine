@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/memetic-wikitext-sensorium"
 written   = "2026-07-01"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -31,8 +31,8 @@ the ''pidgin'' it speaks in chat (sessions). This meme states how the two stand 
 neither above the other, and how a coupling plane reads the directed flow //between// them.
 
 <<~ confidence 12/20 >> The composition rides the SHEAF-TRUE sensorium primitive already
-standing ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack#runtime-twin]],
-[[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance]]): a nameless
+standing ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack#/runtime-twin]],
+[[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance]]): a nameless
 entity `#has` a cap-stack, and the composition IS the filetree. Here the entity `#has` no //top// — it holds
 ''two peer sub-sensoria'' as `coupling.children`, and the base-cap coupling plane reads them.
 
@@ -41,7 +41,7 @@ entity `#has` a cap-stack, and the composition IS the filetree. Here the entity 
 <<~ranks peer formal ~ memes-on-disk = the grammar / liturgy — the inscribed classifier channel, the red that steers -> informal ~ chat-sessions = the pidgin — the lived stream, the black that speaks >>
 
 ''Neither is top.'' The manifest carries `coupling.children = [formal, informal]` — two children of one
-nameless parent, addressed as peers ([[causal-islands|lar:///ha.ka.ba/lares/api/noosphere-boot#causal-islands]]).
+nameless parent, addressed as peers ([[causal-islands|lar:///ha.ka.ba/lares/api/noosphere-boot#/causal-islands]]).
 The coupling edge reads the DIRECTED flow ''both ways'' — does liturgy inform chat (the grammar seeds the
 pidgin), or does chat crystallize into liturgy (the pidgin settles into inscribed form)? Neither direction
 is assumed; `coupleMesh` reads which one carries, and how much.
@@ -55,7 +55,7 @@ is assumed; `coupleMesh` reads which one carries, and how much.
 ''The load-bearing insight:'' the //neither-top, co-located peers// pattern is not a one-off shape at the
 corpus scale. It ''recurs'' — the same pattern holds at a finer scale, inside a single text.
 
-<<~ranks scale stratum ~ WITHIN one text: the red-sigil-register ⋈ the black-prose co-locate — the classifier channel beside the propositional stream ([[classifier-channel|lar:///ha.ka.ba/lares/api/noosphere-boot#classifier-channel]]) -> corpus ~ ACROSS texts: the formal-liturgical ⋈ the informal-pidgin co-locate — the two peer sub-sensoria and their coupling edge >>
+<<~ranks scale stratum ~ WITHIN one text: the red-sigil-register ⋈ the black-prose co-locate — the classifier channel beside the propositional stream ([[classifier-channel|lar:///ha.ka.ba/lares/api/noosphere-boot#/classifier-channel]]) -> corpus ~ ACROSS texts: the formal-liturgical ⋈ the informal-pidgin co-locate — the two peer sub-sensoria and their coupling edge >>
 
 ''So ONE structure serves both.'' The reader written for the stratum scale — split a text into
 co-located channels, window each into a signal, couple them — ''is the same shape'' composed at the
@@ -93,7 +93,7 @@ skeletal slot without //being// that slot's position. A sigil does not merely si
 
 ''A stratum reads on two independent axes; collapsing them loses the signal.''
 
-<<~ranks axis span ~ the aperture-ladder ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s]] — Pulse·Beat·Measure·Arc·Theme): the GRAIN of the stratum's own byte-range — the FFZ membership address reads it (a containment level), never a frequency band -> channel ~ the red/black classifier — a CATEGORICAL annotation (black prose · red control-sigil · base — the four Mu wildcard operators `* ? ! _`); not a scale, a KIND >>
+<<~ranks axis span ~ the aperture-ladder ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#/law-of-5s]] — Pulse·Beat·Measure·Arc·Theme): the GRAIN of the stratum's own byte-range — the FFZ membership address reads it (a containment level), never a frequency band -> channel ~ the red/black classifier — a CATEGORICAL annotation (black prose · red control-sigil · base — the four Mu wildcard operators `* ? ! _`); not a scale, a KIND >>
 
 ''The cross-band proof.'' A control-sigil at fine grain — an inline `<<~ confidence 12/20 >>`
 mid-paragraph — has a ''fine'' span-band (Pulse: its own bytes are few) yet ''associates'' to a ''coarse''
@@ -116,7 +116,7 @@ records that it ''crosses'' bands. A fine control-signal on a coarse anchor read
 ''The split maps cap-for-cap, and the cut rides VARIANCE, never storage.'' The sensorium primitive's FIBER
 caps carry the li (the restrict chain — computed from the moment's own span); its BASE caps carry the ki
 (the extend readings — reaching outside the span)
-([[sensorium|lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance]]). `readLi` returns the
+([[sensorium|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance]]). `readLi` returns the
 stratification (pattern); `readKi` returns the coupling (flow). The reader holds both faces of one text.
 
 <<~/ahu >>
@@ -136,7 +136,7 @@ named for follow-up.
 ''Where memetic-wikitext EXCEEDS phonology'' (reach past autosegmental for these): the skeleton is
 RECURSIVELY NESTED (tree-sitter / RAPTOR, not a flat tier); the tiers are themselves LANGUAGES (html ⊂
 wikitext ⊂ x-memetic grammars, not flat feature-strings); the red is NEVER REALIZED (its true cousin is
-the CLASSIFIER / determinative channel ([[classifier-channel|lar:///ha.ka.ba/lares/api/noosphere-boot#classifier-channel]]),
+the CLASSIFIER / determinative channel ([[classifier-channel|lar:///ha.ka.ba/lares/api/noosphere-boot#/classifier-channel]]),
 not tone). <<~ confidence 10/20 >> keep the WITHIN-block engine autosegmental, the recursion
 tree-sitter.
 
@@ -175,6 +175,6 @@ identically across the TS/py shore: the li-reader on one bank, the ki-model on t
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D1Nv2mEMDNmfHr4WQSS7IaCR1_AyDvYEfuiFsFRDPPM
+<<^ code:"&#x0003;" >>ni:///sha-256;sD-86JcxUYkkKFOBha6pIeB0DHDo_ctvuPgrzDC1Gss
 
 <<^ code:"&#x0004;" -> ? >>

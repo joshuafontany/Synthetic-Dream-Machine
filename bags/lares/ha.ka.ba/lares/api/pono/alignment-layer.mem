@@ -20,7 +20,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -191,8 +191,8 @@ only the //root// and the //default subscriptions// change:
 
 The veil's cost-dial reads as the ''WHO-plane membership face'' that [[group-as-closure|lar:///ha.ka.ba/lares/api/pono/group-as-closure]] now states whole. Three connections hold; the cost-dial model above stands unchanged — these links only name where it meets the newer formalizations:
 
-* ''The vouch carries the signed membership edge.'' A `vouch` (#sybil) rides one signed, severable edge; a group resolves as the reciprocal-edge closure over those vouches — evaluated, never instantiated (group-as-closure#core-claim). Refuse the vouch and the principal stays at the floor: admitted to no cabal, surfaced by no root — the no-vouch → anergy → stay-at-floor reading the closure model formalizes.
-* ''Durable eviction raises a kāpae on the membership stack.'' Severing a vouch ends the subtree's renewal (#sybil); the durable form raises a [[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
+* ''The vouch carries the signed membership edge.'' A `vouch` (#/sybil) rides one signed, severable edge; a group resolves as the reciprocal-edge closure over those vouches — evaluated, never instantiated (group-as-closure#core-claim). Refuse the vouch and the principal stays at the floor: admitted to no cabal, surfaced by no root — the no-vouch → anergy → stay-at-floor reading the closure model formalizes.
+* ''Durable eviction raises a kāpae on the membership stack.'' Severing a vouch ends the subtree's renewal (#/sybil); the durable form raises a [[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
 * ''The siege supplies the cadence.'' Siege-resilience carries the refresh that keeps a stolen vouch-edge from compounding across centuries — PSS re-randomization on a 24-hour floor — plus its correlated-compromise warning: a monoculture lets one exploit fell every vouch at once, so node-config diversity guards the cost-dial before any refresh cadence buys time.
 
 <<~/ahu >>
@@ -233,11 +233,11 @@ right — to decide whose presence the hearth refuses.
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#membership-sense >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#/membership-sense >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;esKWigkckTC3xF6Gjdi824Bl1dtcmwO3NTE-vosX-do
+<<^ code:"&#x0003;" >>ni:///sha-256;9uDXDMf6_ZFFcv4fP4U3OYl7CNzpEv_BnmORwzHrQ3s
 
 <<^ code:"&#x0004;" -> ? >>

@@ -31,7 +31,7 @@ scope-note = "Plan only — no content extracted in this memo. Extractions to fo
 
 <<~/ahu >>
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<~ ahu #meme-header >>
 
@@ -296,6 +296,6 @@ After the extraction pass closes, these questions remain for a future consolidat
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RSE_u7AlF48tBTI4Fm_yUO8tpUPmHRCaxUZpKIC3HNY
+<<^ code:"&#x0003;" >>ni:///sha-256;I_kglZP8NBHDEOEhZ5dch0lokyZPR7L-6RUkhpuODIg
 
 <<^ code:"&#x0004;" -> ? >>

@@ -20,7 +20,7 @@ uri-path   = "ha.ka.ba/lararium/mesh/carry-contract"
 written    = "2026-07-20"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -37,7 +37,7 @@ written    = "2026-07-20"
 
 ''You cannot revoke a capability globally and instantly in a no-global-now mesh.'' A
 partitioned peer holds a stale cap until it syncs; there is no global present to broadcast
-into (#causal-islands). Chasing a //firewall// — a perfect, instant, mesh-wide NO — chases a
+into (#/causal-islands). Chasing a //firewall// — a perfect, instant, mesh-wide NO — chases a
 global now, and manufactures the very thing the mesh forbids.
 
 So the mesh does not build a wall. ''It grows an immune system.'' The turn: stop trying to
@@ -64,7 +64,7 @@ adversary reading the wire cannot tell whether it faces //nothing-more-to-extrac
 the surveillance surface at the same shore it closes the immune one.
 
 ''The antigen saturates faster than a lone adversary chases partitions'' — because every honest
-operator carries as a propagation node //by contract// (#the-three-tiers). The Nexus #has an immune
+operator carries as a propagation node //by contract// (#/the-three-tiers). The Nexus #has an immune
 system: `NexusRegistryDoc.blocked{}` seeds it, drawn forward as the quorum-signed, always-carried
 antibody.
 
@@ -101,7 +101,7 @@ Three spaces that never fuse (confirmed across three files; see #edges):
   friendly users = carry generously.
 * ''READ'' (BeeKEM/CGKA crypto) — //what a peer can decrypt//. A causal-island-local FACT, not
   a policy: a carried-but-uncapped doc reads `Key not found`. The bag ''declares'' its read-tier as a
-  self-describing datum (#cap-tier), and the gate ''meets'' that declaration against the crypto floor —
+  self-describing datum (#/cap-tier), and the gate ''meets'' that declaration against the crypto floor —
   the declaration tightens who reads, never loosens below what the seal permits.
 * ''CONTRACT'' (this meme) — the grant ledger + the carry posture, causal-island-local, bilateral,
   never global.
@@ -122,7 +122,7 @@ DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter 
 * ''The antigen MUST be kahu-quorum-signed — or the immune system becomes a censorship weapon.''
   If any node could Kapae any identity, an adversary bans your legit users. A Kapae entry is a
   ''threshold-signed steward act'' (the keeper-cabal-quorum, #oracle-governance), its authority
-  attested by the nexus-charter's wax-stamp epoch-chain (#steward-doctrine). Unforgeable ban,
+  attested by the nexus-charter's wax-stamp epoch-chain (#/steward-doctrine). Unforgeable ban,
   unforgeable un-ban. This is //why// the nexus-charter provenance matters: it is the root the
   antibodies sign against.
 * ''"Faster than the adversary" is bounded, never instant.'' A deliberately-partitioned operator
@@ -132,7 +132,7 @@ DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter 
   the connected mesh far faster than a lone adversary chases partitions. ''Provable'': the
   propagation substrate (mandatory carry) + the unforgeable antigen (quorum-signed). ''Story-held'':
   that the mesh stays connected enough to outrun — the Shadowland refusal, the net heals faster
-  than the corps can burn a SIN (#the-frame).
+  than the corps can burn a SIN (#/the-frame).
 
 <<~/ahu >>
 
@@ -186,6 +186,6 @@ cannot.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2fjp3nMKWUHs46dJ5bRWdk0MgF_gatwdyCKt1kS18JI
+<<^ code:"&#x0003;" >>ni:///sha-256;6ACfFhT0VHuUT3Zvggd_w29sIq2UnbXv0EAG7Jh56nU
 
 <<^ code:"&#x0004;" -> ? >>

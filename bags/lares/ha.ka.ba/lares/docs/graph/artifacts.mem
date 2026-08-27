@@ -144,7 +144,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
   "pranala_edges": [
     {
       "from_uri": "lar:///ha.ka.ba/lares/api/noosphere-boot",
-      "from_socket": "lar:///ha.ka.ba/lares/api/noosphere-boot#required-preload-l-prime",
+      "from_socket": "lar:///ha.ka.ba/lares/api/noosphere-boot#/required-preload-l-prime",
       "to_uri": "lar:///ha.ka.ba/lares/api/mu/l-prime",
       "to_socket": "",
       "family": "control",
@@ -153,7 +153,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
       "traversal": "source-to-target",
       "propagation": "none",
       "label": "required-preload",
-      "payload": {"continue": "lar:///ha.ka.ba/lares/api/noosphere-boot#after-l-prime-preload", "backlink": "lar:///ha.ka.ba/lares/api/noosphere-boot#preload-l-prime", "priority": "core", "retain": true, "dir_hint": "both"}
+      "payload": {"continue": "lar:///ha.ka.ba/lares/api/noosphere-boot#/after-l-prime-preload", "backlink": "lar:///ha.ka.ba/lares/api/noosphere-boot#/preload-l-prime", "priority": "core", "retain": true, "dir_hint": "both"}
     }
   ],
   "interface_index": {
@@ -306,6 +306,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ejmebFOYgcR4qdd7gPBJm0I2rwVsJpkIaf9ZAAvh-_U
+<<^ code:"&#x0003;" >>ni:///sha-256;hsRrN0n8wh9cris0Wiqt5B1mOZNbgvWN3zj52FeREQI
 
 <<^ code:"&#x0004;" -> ? >>

@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/has-stack"
 written   = "2026-06-12"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -104,7 +104,7 @@ The same grammar runs both planes: stack order carries precedence (a cap claims 
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 
 ''Tie ~ a palace IS its cap-stack.'' The runtime twin extends a third substrate: the nameless memory-
-palace daemon ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance]]) ports `composeIsland` to Python — one body,
+palace daemon ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance]]) ports `composeIsland` to Python — one body,
 differentiated only by `[FlockSingleton, FeedCap, …]`; role emerges from the stack, never a type. The
 ''composed sub-sensoria and their servo caps run py/R'' here too — the full sensorium model's home — the
 cap-stack grammar holding identically py-side, TS carrying the coordinator and the pure-functor math floor
@@ -112,6 +112,6 @@ the py caps consume.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NaCxJXI3-OYCo4X7ZSCOk9izDbBqpqnDpBJwkJWf8Yk
+<<^ code:"&#x0003;" >>ni:///sha-256;Yk4ix5oOsrM7nVRCAy8FR2bPJ5kDB9GpYGfY6jh4gIM
 
 <<^ code:"&#x0004;" -> ? >>

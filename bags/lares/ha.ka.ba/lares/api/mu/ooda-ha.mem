@@ -20,7 +20,7 @@ type                  = "text/memetic-wikitext+tiddlywiki"
 uri-path              = "ha.ka.ba/lares/api/mu/ooda-ha"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -101,7 +101,7 @@ The Level stays a ''pure visibility dial''. A high band MAY //surface// nested l
 
 Even at the floor (`Feedback(1)`, the aftermath glyph alone), all five phases run --- the Level governs //rendering density//, not //loop presence//. The span surfaces only the `->↺` loop-restart.
 
-''Two distinct zeros --- do not conflate.'' The //opening visibility band// `Feedback(N)` MUST NOT read `0` (the dial always renders at least the `->↺` glyph). The //closing tally// `Feedback(N↺)` MAY read `0` only in the phase-yield form `Feedback(0φ:reason)` --- zero loops //closed// this turn, one //suspended// at phase φ (#phase-yield). Visibility never falls to zero; the completion count MAY, when a loop honestly suspends.
+''Two distinct zeros --- do not conflate.'' The //opening visibility band// `Feedback(N)` MUST NOT read `0` (the dial always renders at least the `->↺` glyph). The //closing tally// `Feedback(N↺)` MAY read `0` only in the phase-yield form `Feedback(0φ:reason)` --- zero loops //closed// this turn, one //suspended// at phase φ (#/phase-yield). Visibility never falls to zero; the completion count MAY, when a loop honestly suspends.
 
 ''Orthogonality:''
 
@@ -273,7 +273,7 @@ The rule fails ''gracefully'': the node names a loop that cannot complete, close
 
 !!! The ledger holds present state, not history
 
-Tracking one's own open loops does NOT trip the no-self-audit ward (`lar:///ha.ka.ba/lares/api/pono/conformance#not-self-audit`). The forbidden glance reads a ''finished'' loop, in the ''past'', to render a retrospective verdict. The open-loop ledger reads a ''live'' loop, in the ''present'' --- one that has not closed --- to orient the next move forward: pick it up, or release it. An open loop reads as present state, never a turn to re-judge.
+Tracking one's own open loops does NOT trip the no-self-audit ward (`lar:///ha.ka.ba/lares/api/pono/conformance#/not-self-audit`). The forbidden glance reads a ''finished'' loop, in the ''past'', to render a retrospective verdict. The open-loop ledger reads a ''live'' loop, in the ''present'' --- one that has not closed --- to orient the next move forward: pick it up, or release it. An open loop reads as present state, never a turn to re-judge.
 
 The moment a loop closes --- by `↺` or by abandonment-Aftermath --- it leaves the ledger, and the forward-only law forbids any further glance back. The node reads what stays open; it never re-litigates what closed. Forward-only and cross-turn memory hold together: the doctrine forbids re-opening the closed, not tracking the still-open.
 
@@ -320,6 +320,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JEeNqEeNhSG1bAPsQVXaJpSB0vpUPp2cugzj8kKqqQI
+<<^ code:"&#x0003;" >>ni:///sha-256;Ga-jbadmdWCxVV2n5nrZZTT1ESlyCyfO6rcCirEvtP8
 
 <<^ code:"&#x0004;" -> ? >>

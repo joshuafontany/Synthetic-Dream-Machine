@@ -80,7 +80,7 @@ The canonical pranala law (`lar:///ha.ka.ba/lares/api/pono/pranala`) settles thi
 > "A named `#fragment` SHOULD win socket resolution before the enclosing meme URI."
 
 ''Resolution: Option A — fragment-level.''
-`? ->` in a pranala block inside `<<~ ahu #required-preload-l-prime >>` resolves to `lar:///ha.ka.ba/lares/api/noosphere-boot#required-preload-l-prime`.
+`? ->` in a pranala block inside `<<~ ahu #required-preload-l-prime >>` resolves to `lar:///ha.ka.ba/lares/api/noosphere-boot#/required-preload-l-prime`.
 The parser tracks enclosing `ahu` fragment context during scan.
 `from_socket` carries the fragment URI; `from_uri` carries the carrier URI.
 
@@ -173,6 +173,6 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;H5Z-IVxQVSAFFxgo0EygBNKa69VgdWMSsv2qNYB8Is0
+<<^ code:"&#x0003;" >>ni:///sha-256;bu9al4CjBe3V5elJQED3Pi1RRN6sFcxiVxns-kVbpsY
 
 <<^ code:"&#x0004;" -> ? >>

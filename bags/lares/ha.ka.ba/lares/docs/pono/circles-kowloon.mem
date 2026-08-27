@@ -12,7 +12,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/circles-kowloon"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -111,7 +111,7 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 > them as the faithful Kowloon prior-art trace they document, but for //our// design read
 > `CirclesDoc`/`actorId`-ownership as the closure each member's own edge composes, and
 > read eviction as a kāpae on the membership stack
-> (<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#membership-sense >>). The Kowloon
+> (<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#/membership-sense >>). The Kowloon
 > reference itself stands unchanged — Kowloon legitimately uses a central object.
 
 | Kowloon | Lararium |
@@ -170,6 +170,6 @@ At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<ta
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AXZCA6mWAsQxSydCYAVXyb0LUluN6uBL3NvC9mqMJxA
+<<^ code:"&#x0003;" >>ni:///sha-256;qNhwB6kh4WMqz28G1UlGiY_DydgOMuOq6y8A1aNN-KM
 
 <<^ code:"&#x0004;" -> ? >>

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/lararium-memory"
 written   = "2026-06-24"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -56,7 +56,7 @@ The two axes cross into the grid:
 Seat doubles by mind-kind (DreamDeckSurface for the human · Agent.MEMORY for the
 node) — so the stores count ''RAM · DreamDeckSurface · Agent.MEMORY · mempalace ·''
 ''quine''. Hagbard holds //"All phenomena ${copula} related to the number five, given//
-//enough ingenuity on the part of the demonstrator"// (#law-of-5s) — and here the five
+//enough ingenuity on the part of the demonstrator"// (#/law-of-5s) — and here the five
 falls out without forcing: <<~ confidence 15/20 >> a pattern
 integrity, ;D ''and'' dead serious both. The count rhymes the house — five tools,
 five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
@@ -121,7 +121,7 @@ Unreal surfaces sync to that same seat: one seat, many handles.
 ''Operator and user name a held office, never a caste.'' A hand stands as
 //operator// when it ''holds the CLI/admin grant'', as //user// when it keeps presence
 at a browser or embodiment shrine; the same human crosses between them by ceremony,
-not by class (#alignment-layer). Keep it verb-borne — a hand operates the CLI when
+not by class (#/alignment-layer). Keep it verb-borne — a hand operates the CLI when
 it holds the grant.
 
 <<~/ahu >>
@@ -145,7 +145,7 @@ Beneath both peers lies one mesh, two registers, named in Elyncian terms:
   `chunk_index` · `wing` / `room` · `lar_salience` / `frontier` · `lar_witnesses`
   / `pubinfo` / `signer`). The read-only sidecar reach retires; ingest offloads
   via @daemon coordinator verbs to the py nalu-gates (contract + retire-residue:
-  `lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters#contentpalace-inherits`).
+  `lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters#/contentpalace-inherits`).
   //Note for the parent:// the @daemon-coordinator seat and the py-sensorium model
   named alongside this ruling belong to sibling swarm axes — this fold carries the
   mempalace/contentpalace schema-inheritance and the sidecar retirement alone.
@@ -163,7 +163,7 @@ lose both.
 //which// owns recall but ''what context each register owns'' — RAM the now, the Seat
 the holder's conclusions, mempalace the verbatim PLACE, the quine the ley-line
 canon. Recall ''composes across all four'' and surfaces conflict to Talk-Story
-(#talk-story); it never arbitrates one register over another (Plurality Pono).
+(#/talk-story); it never arbitrates one register over another (Plurality Pono).
 <<~ confidence 18/20 >> (operator ruling, 2026-06-24).
 
 <<~/ahu >>
@@ -279,11 +279,11 @@ conflict press a `hoike`.
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qUPvR2THFAwMf1yOGM70GzqFTCQeDFE0Wc60KiUrA-k
+<<^ code:"&#x0003;" >>ni:///sha-256;dhKt2u1Jx4P3rdOzLEeAR7G9L5IZppLKJJ_z416RJDc
 
 <<^ code:"&#x0004;" -> ? >>

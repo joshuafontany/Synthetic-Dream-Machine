@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/membership-doctrine"
 written   = "2026-07-21"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -65,7 +65,7 @@ stance (#carry-contract, #the-frame) in the one place it would otherwise erode f
 !! The two cap-stacks ~ operator contracts, user soft-attaches
 
 A human's posture rides the vessels in their PersonaGroup pool — a ''posture, not a caste'', chosen
-vessel by vessel (#identity-classes):
+vessel by vessel (#/identity-classes):
 
 ```
 \procedure ~Stack(Type:"" Params:"") ~Stack <<Type>> holds [{{{ [<Params>] }}}]
@@ -109,7 +109,7 @@ a record the Nexus KEEPS.'' The general invite manufactures ''no social graph.''
 
 ''The reputation-cost braid'' — the idea that an invite rides on the inviter's reputation as a cost
 (Sybil-resistance, accountability) — reserves to the ''Cabal tier'', never the general invite: a
-cabal is a bilateral verb two operators actively DO (#cabal-realm), and a reputation-priced admission
+cabal is a bilateral verb two operators actively DO (#/cabal-realm), and a reputation-priced admission
 lives THERE, where the graph is already mutual + consented, not on the traceless general invite.
 ''The reservation runs as TWO DOMAINS, never one dial.'' `boot-invite` (`lar-boot-invite/v1`) seals
 Nexus-side, names no voucher, writes no edge, and burns locally — the general invite. `cabal-invite`
@@ -205,6 +205,6 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uNSPSbEmGrpxT_BM_k3rHKDLvzSj3CuwfOdeu93vHRY
+<<^ code:"&#x0003;" >>ni:///sha-256;3SN9CfQ9B_jHzeDqU_fVCpHzdYANlFfeuOL4LrpghrE
 
 <<^ code:"&#x0004;" -> ? >>

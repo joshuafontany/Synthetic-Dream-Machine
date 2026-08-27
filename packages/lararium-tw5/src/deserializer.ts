@@ -943,14 +943,13 @@ export type CarriagePart = (typeof CARRIAGE_PARTS)[number];
 /**
  * A carriage record's address.
  *
- * At a carrier root the carriage takes a plain-name anchor — `#$postamble`. Under a section it
- * extends that section's path, and a path roots: `#/observe/$postamble`, never `#observe/$postamble`.
- * The leading slash marks a path wherever one exists (composeSlotPath), and a carriage under a
- * section is a path like any other.
+ * A carriage rides a path like everything else the house addresses — `#/$postamble` at a carrier
+ * root, `#/observe/$postamble` under a section. The bare space holds no house address at all
+ * (composeSlotPath); it belongs to the page anchors a live wiki renders.
  */
 export function carriageUri(carrierUri: string, part: CarriagePart): string {
   const cut = carrierUri.indexOf("#");
-  if (cut < 0) return `${carrierUri}#$${part}`;
+  if (cut < 0) return `${carrierUri}#/$${part}`;
   const base = carrierUri.slice(0, cut);
   const frag = carrierUri.slice(cut + 1);
   return `${base}#/${frag.replace(/^\//, "")}/$${part}`;

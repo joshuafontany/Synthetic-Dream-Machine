@@ -48,9 +48,9 @@ The three faces, each its own organ, none collapsing into another:
 \procedure ~Face(Type:"" Params:"") ~Face <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Face Name "carries/descent = address ~ a derived lineage-path handle baptized at spawn (#name)" >>
-<<~Face Attribution "carries/who-drove-whom ~ a reified prov:Delegation DAG, doubling as the worldline's happened-before (#attribution)" >>
-<<~Face Time "carries/two laws ~ Automerge owns causal order inside its CRDTs; FfzClock carries the worldline grain everywhere else (#time)" >>
+<<~Face Name "carries/descent = address ~ a derived lineage-path handle baptized at spawn (#/name)" >>
+<<~Face Attribution "carries/who-drove-whom ~ a reified prov:Delegation DAG, doubling as the worldline's happened-before (#/attribution)" >>
+<<~Face Time "carries/two laws ~ Automerge owns causal order inside its CRDTs; FfzClock carries the worldline grain everywhere else (#/time)" >>
 <<~Face Three >>
 
 <<~/ahu >>
@@ -81,7 +81,7 @@ no-registry derived handle — the convergence, not any single source, seats it.
 ''The ʻŌlelo name — //hoʻoili//.'' This worldline functor (Turn → Trajectory) carries
 the house name ''hoʻoili'' — to transmit, bequeath, inherit (from //ili//, inheritance) —
 the ''descent specialization'' of //mālama pili//, the functor discipline's core keeper-name
-([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline#glosses]]). It reads from
+([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline#/glosses]]). It reads from
 the verb the same way the handle does: descent IS the address, so the worldline functor
 ''inherits'' — passing the parent's name down the lineage-path.
 
@@ -188,7 +188,7 @@ the actor-boundary, not a preference: where Automerge owns an actorId it owns th
 order; where nothing does (agents · the outside world) the worldline-DAG and FfzClock
 carry it.
 
-<<~ranks domain inside-automerge ~ docs · wiki-CRDTs (the proximal/internal order): Automerge logical time owns causal order — `<counter,actorId>` · `getHeads` · the `drifted` frontier. FfzClock NEVER carries causal order here, and an `ffzCompare` LWW total-order MUST NOT drive a fork/revocation verdict inside the CRDT (that manufactures a global-now the mesh cannot hold) -> the-worldline ~ the agent worldline (NO Automerge actor — spirits mine into the daemon's sole replica): its causal PARTIAL order rides the ''reified edge-DAG'' (#attribution) — a `spawned` edge = happened-before, no-edge-between-siblings = concurrent, handback closes the interval (the twin-reunion). FfzClock keyed on the HANDLE carries the worldline's RHYTHMIC POSITION only (where-in-the-cadence, a membership coordinate — NOT a freshness/decay scalar; manaoio serves the memes, never this clock), never the causal verdict — by code its `ffzCompare` is a total-order LWW and `ffzMerge` a max-join (no concurrency, no merge-ancestry), so causal CANNOT ride it. ''Code divergence (2026-06-25 read):'' `FfzClock.actorId` still keys on the Automerge actor — re-key to the handle when the worldline clock is wired (the actorId slip, live in code). A separate `LarTickCounter` already carries a monotonic cross-source join key -> other-domains ~ all other non-Automerge domains (external streams: game · Mudlet · video · DAW · market feed; capability-leases): FfzClock carries the rhythmic grain per FFZ_PROFILE, pulled across the causal-island boundary inward. The domain-general primitive lives at lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
+<<~ranks domain inside-automerge ~ docs · wiki-CRDTs (the proximal/internal order): Automerge logical time owns causal order — `<counter,actorId>` · `getHeads` · the `drifted` frontier. FfzClock NEVER carries causal order here, and an `ffzCompare` LWW total-order MUST NOT drive a fork/revocation verdict inside the CRDT (that manufactures a global-now the mesh cannot hold) -> the-worldline ~ the agent worldline (NO Automerge actor — spirits mine into the daemon's sole replica): its causal PARTIAL order rides the ''reified edge-DAG'' (#/attribution) — a `spawned` edge = happened-before, no-edge-between-siblings = concurrent, handback closes the interval (the twin-reunion). FfzClock keyed on the HANDLE carries the worldline's RHYTHMIC POSITION only (where-in-the-cadence, a membership coordinate — NOT a freshness/decay scalar; manaoio serves the memes, never this clock), never the causal verdict — by code its `ffzCompare` is a total-order LWW and `ffzMerge` a max-join (no concurrency, no merge-ancestry), so causal CANNOT ride it. ''Code divergence (2026-06-25 read):'' `FfzClock.actorId` still keys on the Automerge actor — re-key to the handle when the worldline clock is wired (the actorId slip, live in code). A separate `LarTickCounter` already carries a monotonic cross-source join key -> other-domains ~ all other non-Automerge domains (external streams: game · Mudlet · video · DAW · market feed; capability-leases): FfzClock carries the rhythmic grain per FFZ_PROFILE, pulled across the causal-island boundary inward. The domain-general primitive lives at lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 
 ''The retired over-claim stays retired'' (across both domains): FfzClock measures
 //tempo/grain//, never //who-acted-first// as a CRDT verdict. Inside Automerge, Automerge
@@ -197,7 +197,7 @@ grain. The Fuller-Fontany-Zelenka Chronometer earns its name as the ''rhythm'' o
 house, not its causality court.
 
 <<~ confidence 16/20 >> The boundary holds because it follows the
-actor-boundary. Open at the mechanism (#open): `ffzCompare` must return //concurrent//
+actor-boundary. Open at the mechanism (#/open): `ffzCompare` must return //concurrent//
 (not an LWW tiebreak) when two clocks share no merge-ancestry — confirm the API
 separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
@@ -205,14 +205,14 @@ separates the causal partial-order read from the rhythmic LWW read at wire-time.
 
 ''A form-palace drawer's worldline-temporal facet PROJECTS off this DAG; it never''
 ''rules.'' When the living-grammar palace stamps a drawer's `lar_ffz` and reads the
-worldline position across its collection ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#ffz-binding]]), that
+worldline position across its collection ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/ffz-binding]]), that
 facet stands as a ''CACHED PROJECTION'' of the per-handle FfzClock (the grain) over the
 reified edge-DAG (the order) — a materialized view, re-derivable from the worldline,
 ''NEVER the causal authority''. The edge-DAG owns happened-before; the palace caches its
 position for query. This keeps the worldline as the single source: lose the cache,
 re-project from the DAG; the cache MUST NOT out-rank the structure it derives from. The
 binding ratified narrowed (12-Voice mufakat, operator-ratified 2026-06-29), with five
-kept dissents live at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#kept-hoike]].
+kept dissents live at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/kept-hoike]].
 
 !!! The epistemic/ontic cut ~ what the worldline names (Borrill 2026)
 
@@ -222,7 +222,7 @@ happened-before DAG already honors: a `spawned` edge records an ''epistemic'' bo
 //this act could have informed that one, as of the island's last sync// — never an
 ''ontic'' claim about a physical causal chain. The mistake the paper names: reading a
 logical clock's order as actual causation. Our edge-DAG sidesteps it by construction —
-it records the influence-possibility at the point the edge is created (#attribution),
+it records the influence-possibility at the point the edge is created (#/attribution),
 and the ''DAG stays per-island LOCAL'' (a union of local cones, never one global graph,
 the Lightcone rhyme #the-six-rhymes). Borrill certifies this as
 ''more-correct-than-vanilla-Lamport'': vanilla Lamport manufactures a total order that
@@ -373,7 +373,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 
 ''Build sequence — the handle first; the edge and the rhythm both ride it:''
 
-<<~ranks build handle ~ LIVE-PROVEN on real drawers (2026-06-25): SPIRIT drawers stamp `lar_agent_handle`=run.agentId + `lar_parent_handle`/`lar_root_handle`=run; MAIN drawers stamp `lar_agent_handle`=`lar_root_handle`=run (no parent — a root). A spirit's `lar_parent_handle` RESOLVES to its main agent's `lar_agent_handle` (both = the session run), so the attribution graph CLOSES. Derived from the staged source_file (in-process); cross-surface launcher shim still mints trace-id/span-id — the keystone -> edge ~ PROJECTED form LIVE (2026-06-25): stamp `lar_parent_handle` (appointed-by) + `lar_root_handle` (root-principal) on spirit drawers, single-source. The reified bi-temporal `prov:Delegation` NODE (valid/tx · status · times) awaits a code-reachable KG — MCP/tunnel-only today; when it lands the edge RE-PROJECTS from it (never a double-write) -> rhythm ~ MECHANISM LIVE (`worldline-clock.ts`, 2026-06-25): per-handle FfzClock keyed on the HANDLE (slip fixed at source) · construct-on-first-event · grounding-tick (L1 Beat on the operator's acknowledging move, NEVER on emission) · rollover-checkpoint to the LOCAL work-log (NOT the mesh SessionEventLog — work-memory is a local island). GRAIN RESOLVED (Loom-grounded, 2026-06-25): `lar_ffz` stamps a prefix-truncatable rhythmic ADDRESS `Theme.Arc.Measure.Beat.Segment.block` — ''L0 Pulse = one generation segment'' (`stop_reason`, = the OTel span), ''block = a sub-offset'' (index, not a tick); the clock reads the HARNESS transcript, never the rendered grammar (lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address). Address serializer + Claude-agent profile BUILT/TESTED; the live stamp's capture-path wiring (drawer→(turn,segment) mapping) is the next slice. Grounded by the Horologe spirit — ITC identity/event split (bearer≠replica) · Clark-Brennan/Ginzburg grounding (Pending→Moves) · Automerge/Yjs ephemeral convention · event-sourcing checkpoints -> mandate ~ carry scope+TTL+revocability+duties; handback ratifies + filters the merge -> crypto ~ at the peer/founding boundary only, anchor to keyhive >>
+<<~ranks build handle ~ LIVE-PROVEN on real drawers (2026-06-25): SPIRIT drawers stamp `lar_agent_handle`=run.agentId + `lar_parent_handle`/`lar_root_handle`=run; MAIN drawers stamp `lar_agent_handle`=`lar_root_handle`=run (no parent — a root). A spirit's `lar_parent_handle` RESOLVES to its main agent's `lar_agent_handle` (both = the session run), so the attribution graph CLOSES. Derived from the staged source_file (in-process); cross-surface launcher shim still mints trace-id/span-id — the keystone -> edge ~ PROJECTED form LIVE (2026-06-25): stamp `lar_parent_handle` (appointed-by) + `lar_root_handle` (root-principal) on spirit drawers, single-source. The reified bi-temporal `prov:Delegation` NODE (valid/tx · status · times) awaits a code-reachable KG — MCP/tunnel-only today; when it lands the edge RE-PROJECTS from it (never a double-write) -> rhythm ~ MECHANISM LIVE (`worldline-clock.ts`, 2026-06-25): per-handle FfzClock keyed on the HANDLE (slip fixed at source) · construct-on-first-event · grounding-tick (L1 Beat on the operator's acknowledging move, NEVER on emission) · rollover-checkpoint to the LOCAL work-log (NOT the mesh SessionEventLog — work-memory is a local island). GRAIN RESOLVED (Loom-grounded, 2026-06-25): `lar_ffz` stamps a prefix-truncatable rhythmic ADDRESS `Theme.Arc.Measure.Beat.Segment.block` — ''L0 Pulse = one generation segment'' (`stop_reason`, = the OTel span), ''block = a sub-offset'' (index, not a tick); the clock reads the HARNESS transcript, never the rendered grammar (lar:///ha.ka.ba/lararium/mesh/ffz-clock#/rhythmic-address). Address serializer + Claude-agent profile BUILT/TESTED; the live stamp's capture-path wiring (drawer→(turn,segment) mapping) is the next slice. Grounded by the Horologe spirit — ITC identity/event split (bearer≠replica) · Clark-Brennan/Ginzburg grounding (Pending→Moves) · Automerge/Yjs ephemeral convention · event-sourcing checkpoints -> mandate ~ carry scope+TTL+revocability+duties; handback ratifies + filters the merge -> crypto ~ at the peer/founding boundary only, anchor to keyhive >>
 
 <<~/ahu >>
 
@@ -396,7 +396,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
   carries who-drove-whom meanwhile, single-source; wire the node when the KG is code-reachable.
 * ''Chain `parent_edge_id`'' or a grandchild generation goes dark.
 * ''Ephemeral blind-dir hardening'' — sandbox tiers · cleanup · resource/leak
-  containment · the egress fork (#lifecycle) — under a dedicated research pass.
+  containment · the egress fork (#/lifecycle) — under a dedicated research pass.
 
 <<~/ahu >>
 
@@ -413,7 +413,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 * ''Borrill 2026, "The Category Mistake in Logical Clocks"'' (arXiv 2602.21730) — the
   epistemic/ontic cut; certifies no-global-now (a per-island local DAG of
   could-have-influenced edges) as more-correct than vanilla Lamport's overclaimed total
-  order. Grounds the worldline's partial order as epistemic, never causal-physical (#time).
+  order. Grounds the worldline's partial order as epistemic, never causal-physical (#/time).
 * ''OTel GenAI'' — `gen_ai.agent.id/name`, `gen_ai.operation.name=invoke_agent`. Node
   identity; a span is a NODE, parent-child a by-reference edge — confirming the dual
   node+edge treatment. ''Do NOT wait'' on the unratified multi-agent handoff spec
@@ -429,16 +429,16 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/lar-telemetry >>
-<<~ loulou lar:///ha.ka.ba/lares/api/voices#worker-swarm >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices#/worker-swarm >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 
 ''Tie ~ the form-palace as a third FeedCap.'' The nameless palace-instance that captures a turn's FORM
-([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance]]) extends the same has-stack runtime twin a spirit's worldline
+([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance]]) extends the same has-stack runtime twin a spirit's worldline
 already rides; its drawers carry the worldline's `lar_agent_handle` + `lar_ffz` address, so form-vectors
 attribute to the spirit that moved them.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kdLEX4IOTTKv7tKAezwIU_bKeY__pI7rfxqH0mnQPpk
+<<^ code:"&#x0003;" >>ni:///sha-256;IBbT58sq_3MfQEPA46Jh0y7bWGvjMioQK4Uvh73urZo
 
 <<^ code:"&#x0004;" -> ? >>

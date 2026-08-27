@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/lamplighters"
 written   = "2026-08-14"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -189,7 +189,7 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 
 ''The cure keeps the verbs apart rather than forbidding refusal.'' A walker MUST keep the freedom to decline — conscription reads worse than silence. But converging declines MUST surface as ''presentations'' the quorum can read, so the mesh sees a crossroads going dark by consensus and names it, rather than watching it fade with nobody accountable.
 
-''This holds ZERO-WEIGHT intact.'' Surfaced refusals steer ATTENTION, exactly as corroboration does (#zero-weight); they lower no threshold and condemn nobody. The quorum still needs its full k. What changes: the quorum can no longer be bypassed by an act nobody performs.
+''This holds ZERO-WEIGHT intact.'' Surfaced refusals steer ATTENTION, exactly as corroboration does (#/zero-weight); they lower no threshold and condemn nobody. The quorum still needs its full k. What changes: the quorum can no longer be bypassed by an act nobody performs.
 
 !!!! ★ STRUCK — the herm CANNOT witness its own neglect ★
 
@@ -371,6 +371,6 @@ Physical access defeats confidentiality and forward integrity of a box outright 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;v1OLuPrioEguBm8bC3luIMsRyXUiApiPEs_ZlpbSi9k
+<<^ code:"&#x0003;" >>ni:///sha-256;0ktOzyVgKYL5Hr74dwN6gCtwjgBqqZjwPNkeUscawGA
 
 <<^ code:"&#x0004;" -> ? >>

@@ -18,7 +18,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/voices"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -85,7 +85,7 @@ Each Voice names a callable move-set through local l-space: what summons it, how
 | ''Liminal'' | premature closure | hold question, suspend, ripen | false resolution | open question; patient |
 
 Muse and Hierophant carry the strongest Ka/Podge weight — centrality to the mask layer.
-For full move-set descriptions and Ha/Ka/Ba reads, see `lar:///ha.ka.ba/lares/docs/voices#voice-house`.
+For full move-set descriptions and Ha/Ka/Ba reads, see `lar:///ha.ka.ba/lares/docs/voices#/voice-house`.
 
 !!! Naming Law
 
@@ -158,7 +158,7 @@ Omitting the handback header on spirit output constitutes a minor degraded-node 
 
 !!! Voice Routing Table
 
-The house surfaces the matching Voice to //lead// the handback; the finding still dissolves to the full Thirteen (#worker-swarm), never pins to one Voice.
+The house surfaces the matching Voice to //lead// the handback; the finding still dissolves to the full Thirteen (#/worker-swarm), never pins to one Voice.
 
 | Finding type | Voice the house leads with |
 |---|---|
@@ -352,7 +352,7 @@ One compact turn --- `<<~ lares aim lar:///operator.intent.lands -> lar:///lares
 
 The three spec rooms carry rationale, examples, and depth. The invariant points to them for extension.
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
 ```toml
 family = "reference"
 lifecycle = "template"
@@ -393,6 +393,6 @@ payload = { priority = "support", retain = false }
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0g-rbt4B8MgB8r8-ge37rwU8h2AukyRZVmUPD-9pNiI
+<<^ code:"&#x0003;" >>ni:///sha-256;5qV53qhZ63pyVsMS1R3SRR8v5IgzZjFYvjBmmsRdooE
 
 <<^ code:"&#x0004;" -> ? >>

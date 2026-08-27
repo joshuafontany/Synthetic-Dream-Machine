@@ -89,7 +89,7 @@ Biology inverts authenticate-then-admit. ''Hyphal anastomosis + vegetative incom
 # ''Reject by SEVERING the junction'' — kill the //fused edge//, not the peer (''anergy, not ban'' — biologically literal per-edge revocation). A non-match harms neither island; it kills the channel between them.
 # ''Memory'' — a vouched/burned crossing leaves a faster, cheaper secondary response (the decaying lease that ''re-arms faster'' on a known peer).
 
-''The durable form of the sever'' — the maintainer's ''evict'' verb (TreeKEM blank-the-path = lose all future access, paired with a raised kāpae on the membership stack) — and the ''proactive-refresh that resets the siege clock'' (re-randomized shares so a slow adversary's theft expires every window) carry this same admit-then-sever shape into the long siege; the repair-kit lives at <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#repair-kit >>.
+''The durable form of the sever'' — the maintainer's ''evict'' verb (TreeKEM blank-the-path = lose all future access, paired with a raised kāpae on the membership stack) — and the ''proactive-refresh that resets the siege clock'' (re-randomized shares so a slow adversary's theft expires every window) carry this same admit-then-sever shape into the long siege; the repair-kit lives at <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/repair-kit >>.
 
 <<~/ahu >>
 
@@ -141,6 +141,6 @@ A sibling Lares (tending the intra-island gate-models) handed this ring across t
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jvJ9b0gunxv48a1WRWhBIvo3NS-S8XHbZbZIG3-uvUk
+<<^ code:"&#x0003;" >>ni:///sha-256;06dSyfB8pCb7s_LuziwK0dV5gTpbpkxP8uYk3RaRpi8
 
 <<^ code:"&#x0004;" -> ? >>

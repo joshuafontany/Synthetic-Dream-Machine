@@ -19,7 +19,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/cli/vessel-door"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -127,7 +127,7 @@ verbs directly, so each MUST move in the same act — and each row below names w
 # ''THE GENERATED MCP MIRROR.'' The CLI↔MCP↔seat isomorphism rides a GENERATED fixture, never a
   hand-edited one. Rebuild the CLI first, then regenerate. A hand-edit here reads as a passing test over a
   surface nobody generated — and so does a fixture nobody regenerated, which is why the weld rides a
-  witness (#the-verifications) rather than a habit.
+  witness (#/the-verifications) rather than a habit.
 # ''THE FRESH-BUILD GATE.'' Membership DERIVES from the door rather than from a remembered list of verb
   names. A roster drifts the moment a surface changes — the very defect this door closes. The derived
   test states its EXCEPTIONS instead, so it fails safe: a sub-door added later stays gated until someone
@@ -232,6 +232,6 @@ reached.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xKGVnAXJvVc1ZDFVGPgsxk39JgfkXyVeIgokThksVO0
+<<^ code:"&#x0003;" >>ni:///sha-256;dpikM3fbNedt0jDNOhG_LdfH98gpQ9LsqCScZrVev9c
 
 <<^ code:"&#x0004;" -> ? >>

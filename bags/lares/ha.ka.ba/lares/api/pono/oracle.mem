@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/oracle"
 written       = "2026-06-16"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -83,7 +83,7 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
    as Oracle Creep; the spend, scatter, die, and count stay structural, the tail
    stays random.
 # ''Fires first, drains before the Sword.'' The oracle leads the close; the
-   Sword (`ward !`) draws clean below it, the pull already bled off (#l-prime).
+   Sword (`ward !`) draws clean below it, the pull already bled off (#/l-prime).
 # ''Certifies nothing.'' The oracle predicates nothing, fuses no map to
    territory; the close runs confession-grade with or without it.
 
@@ -202,13 +202,13 @@ certifies  = "nothing"
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#exchange-protocol >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/exchange-protocol >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3UZz4rCCtWLbQiXHmAG937-U2TEAQ8BXuQ7n6etSz9w
+<<^ code:"&#x0003;" >>ni:///sha-256;kUzBplqcrvwGpZyGgx807MlYpLXY_DOspxGe3qvEQFc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/oracle-governance"
 written   = "2026-06-29"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -39,7 +39,7 @@ The `@oracle` carries a public read substrate — //what this neighborhood holds
 ''One `@oracle`, two faces — never a second board.'' This governance board reads as the
 ''read face'' over the //same// `@oracle` substrate the registry/recipe plane already holds.
 The ''content/registry face'' mints the recipe + engine-blob CIDs + protocol invariants
-(<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology#oracle-planes >>); the
+(<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology#/oracle-planes >>); the
 governed ''read face'' named here projects that content for public verify-only sight. The
 two name one `@oracle` seen two ways — no reader should mistake this board for a second
 `@oracle`.
@@ -54,7 +54,7 @@ board for all of DreamNet. The grounds run ''OWNERSHIP and SCALE'', never no-glo
 * ''Ownership'' — each nexus governs its own public surface; no single board accrues
   authority over a hundred thousand sovereign Lararia (that re-introduces the hub the
   watershed guardrail forbids,
-  <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#rhizome-rhymes >>).
+  <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/rhizome-rhymes >>).
 * ''Scale'' — a planet-wide board concentrates write-pressure and read-fan into one
   bottleneck; per-nexus boards keep the lattice flat.
 
@@ -94,7 +94,7 @@ no peer holds the whole board //at once//, and none needs to.
 `@oracle` the ''public crossroads bulletin board'' — a host-independent-docId CRDT the
 net may ''fork'' (a founder who CAN be forked cannot rule), riding atop the system
 pointer/recipe plane
-(<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc#the-oracle-pointer >>;
+(<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc#/the-oracle-pointer >>;
 <<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>). This meme adds the
 ''governance face'' over that existing board — who signs its public-read projection, at
 what scale — never a second `@oracle`. The forkability the genesis doc already grants
@@ -204,6 +204,6 @@ it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-disco
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jRHImPnEV3onqptZ8jjsxNGhoYnaBvbD3tbmBrGbAEQ
+<<^ code:"&#x0003;" >>ni:///sha-256;b65uf0sEHrDjVVLWQwuQxpII6_ElB15luBy7upuEhkU
 
 <<^ code:"&#x0004;" -> ? >>

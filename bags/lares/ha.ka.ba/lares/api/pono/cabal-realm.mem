@@ -77,7 +77,7 @@ But the Mu cuts both ways: a ''verb-realm carries a defended noun-boundary.'' Dr
 !! The Realm ~ named, ruled, lived, dissolved
 
 * ''NAMED, not ruled'' — the realm's identity rides ''content-addressed'' (its genesis CID, #GEN_2) — a name, never a DID, and never a root. The name grants no //authority// (#ISLAND_4, DocUrl-not-authority) — but, crucible-corrected, it grants no //privacy// either: a stable realm-id advanced by a same-key signed pointer carries a public ''linkability + timing surface'' — existence, version-history, activity cadence, and (via epoch-rotation timing) membership-change events leak to any reader even with the roster veiled (Pfitzmann-Hansen · PURBs). A name carries no root; it does carry a trackable handle.
-* ''RULED by the closure'' — authority runs as the ''closure of mutual maintenance edges'' (`group-as-closure`: "no central object, evaluated as a query, never instantiated"). The doc is the shared ''substrate''; the relationships are the ''authority''. Share substrate, not sovereignty (#causal-islands) — each member keeps their own vessel-key, and the realm borrows none of them.
+* ''RULED by the closure'' — authority runs as the ''closure of mutual maintenance edges'' (`group-as-closure`: "no central object, evaluated as a query, never instantiated"). The doc is the shared ''substrate''; the relationships are the ''authority''. Share substrate, not sovereignty (#/causal-islands) — each member keeps their own vessel-key, and the realm borrows none of them.
 * ''LIVED by its epoch'' — the realm carries its ''own epoch/lease'', the collective-maintenance heartbeat.
 * ''DISSOLVED by cooling'' — break the maintenance and the realm ''cools to anu'' (the residency model) — it //never deletes// (a hard-deleted CRDT item a peer still holds flows back and resurrects); it goes cold, re-warmable. //A fed node hums, a neglected one flickers.//
 
@@ -188,7 +188,7 @@ A cabal-realm shares content without materializing a reader-set. It seals each p
 
 !! Two Roots ~ a public surface may stand; a person-history may not
 
-A cabal splits at ''two roots'' (operator ruling). A ''private-held root'' — the members' own persona-clouds + private closure, causal-island-local, content predicate-keyed (#the-seal), unlinkable by the per-circle scope-pseudonym. And a ''public org root'' published to ''@crossroads'' (the public plane): a ''charter-epoch lineage'' whose ''head'' names the current co-joined membership surface (//the set is mortal// — present state), and whose ''posted data carries a wax-stamp that attests a PAST'' (#the-wax-stamp), carrying the pledged-Handle's public DID, claimed deliberately, one-way. The public reach costs ''no global-now'': the surface never composes into a per-citizen registry to scrape. This ''resolves the linkability-surface'' the stable realm-id otherwise leaks (#the-realm) — the public face shows the moment, never the trail. Kowloon Circles thus separate into private-held roots + public org roots — the veil-ladder's overlay/floor made a two-root cut (`the-veil-ladder`).
+A cabal splits at ''two roots'' (operator ruling). A ''private-held root'' — the members' own persona-clouds + private closure, causal-island-local, content predicate-keyed (#/the-seal), unlinkable by the per-circle scope-pseudonym. And a ''public org root'' published to ''@crossroads'' (the public plane): a ''charter-epoch lineage'' whose ''head'' names the current co-joined membership surface (//the set is mortal// — present state), and whose ''posted data carries a wax-stamp that attests a PAST'' (#/the-wax-stamp), carrying the pledged-Handle's public DID, claimed deliberately, one-way. The public reach costs ''no global-now'': the surface never composes into a per-citizen registry to scrape. This ''resolves the linkability-surface'' the stable realm-id otherwise leaks (#/the-realm) — the public face shows the moment, never the trail. Kowloon Circles thus separate into private-held roots + public org roots — the veil-ladder's overlay/floor made a two-root cut (`the-veil-ladder`).
 
 <<~/ahu >>
 
@@ -215,6 +215,6 @@ The honest wall, kept lit: ''"valid trace to lineage L" reads as a hard crypto f
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8TuhWn88sjezX1nMnf9PifDbP4uUgZQcWZaKXmNb7gY
+<<^ code:"&#x0003;" >>ni:///sha-256;xF8KbQ7LIJblY2JO1mo2DWuh8R4BV8uXR7oigkMO_v4
 
 <<^ code:"&#x0004;" -> ? >>

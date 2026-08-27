@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kapae"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -125,7 +125,7 @@ Raised over a ''relationship'' the same marker needs none of it. The shadow scop
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#anti-patterns >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/anti-patterns >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
@@ -133,6 +133,6 @@ Raised over a ''relationship'' the same marker needs none of it. The shadow scop
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PRKvIKdB4xPY7rUzXT2ikUzhiv2pGeaEdE_t4LGW3fA
+<<^ code:"&#x0003;" >>ni:///sha-256;qaGlpih3qoSDFcNFaSWUyQXUB9KQ9OSioa-vOX7ezvM
 
 <<^ code:"&#x0004;" -> ? >>

@@ -44,7 +44,7 @@ It adds explicit ahu markers around the major research sections so the file can 
 Session 5 opened with the full web2 sidecar rip complete from the previous session: 19 dead web2-era source files replaced by typed stubs; 19 `.web2.ts` sidecars created (verbatim originals, excluded from tsc). All 5 tsconfigs updated with `*.web2.ts` exclusions. The `tsc` surface confirmed exactly four rebuild-target errors and nothing else. Three rounds of talk-story orient ran — API surface friction, FFZ web3 redesign direction, Verse UEFN 5.6+ alignment, grammar boot model, changeset scale, graph co-existence, datablob inventory — all decisions locked.
 
 Two new design dimensions unlocked mid-session:
-# ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
+# ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#/fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
 # ''SESSION.md'' — written as the canonical session handoff crystal; three new OODA-HA ahu sections recorded.
 
 ⏿ ''Orient:''
@@ -272,7 +272,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 Sprint 5 target: `meme-sync-adaptor.ts` — replace the dead `sync-adaptor.ts` stub with a working `MemeSyncAdaptor` class. Read `sync-adaptor.web2.ts` sidecar + `meme-write.ts` before writing. Both packages clean from prior session.
 
 ⏿ ''Orient:''
-Web2 adaptor used `splitCarrierToTiddlers` (carrier-write.ts) in the outbound save handler to split carrier text into parent + children. Meme model shift: ahu slot children store as independent `lar:///parent#slot` records and receive their own `saveTiddler` calls — no outbound split needed. Inbound direction unchanged: `tw5.deserializeCarrier` still handles meme records arriving from the CRDT store (backward compat with inline-body records).
+Web2 adaptor used `splitCarrierToTiddlers` (carrier-write.ts) in the outbound save handler to split carrier text into parent + children. Meme model shift: ahu slot children store as independent `lar:///parent#/slot` records and receive their own `saveTiddler` calls — no outbound split needed. Inbound direction unchanged: `tw5.deserializeCarrier` still handles meme records arriving from the CRDT store (backward compat with inline-body records).
 
 ◇ ''Decide:''
 Write `meme-sync-adaptor.ts` — new class `MemeSyncAdaptor implements MemeProjection`. Delta from web2:
@@ -3283,6 +3283,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Ue7JumQX9AK8WUDIK_M2vNmmJtoNISAu4BvoEFpCSio
+<<^ code:"&#x0003;" >>ni:///sha-256;TZoDdVHhRRZrbe888tI-wWQOy2bxhvz_ScWDHCH2cAQ
 
 <<^ code:"&#x0004;" -> ? >>

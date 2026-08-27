@@ -21,7 +21,7 @@ uri-path   = "ha.ka.ba/lararium/mesh/secure-context"
 written    = "2026-07-23"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -67,7 +67,7 @@ Given an entity holding a ''DNS-delegation cap'' over some zone (`kahu.tld` belo
 
 ''Three clocks run here, and a single "the name lapses" story fuses them.'' ''REGISTRAR TENURE'' — years, human-paced, ends by non-payment or death of the holder; the remedy reads as succession, never automation. ''ISSUANCE / RENEWAL'' — ~60d, automatable, the declared bridge below. ''SERVE'' — offline for the cert's full validity, no internet at all. Each wants its own drill; a failure on one says nothing about the others, and only ''serve'' failing shuts a door the same day.
 
-<<~ confidence 13/20 >> DNS-01 needs the internet ''only at issuance / renewal (~every 60d), never at serve time'' — a minted cert serves the LAN for its full validity with the home internet fully down. So the causal-island law falls out clean (#causal-islands): ''cert-renewal IS the one declared web2 bridge'' — alarm it, retry it, tolerate a lapse; only a renewal that fails for the ''entire'' validity window breaks trust. The ''zero-internet sovereign fallback'' = a name-constrained local CA (RFC 5280 constraints bind it to `*.home.kahu.tld`, so a leaked root cannot MITM `bank.com`) — it issues offline forever, at the cost of the per-device install tax the DNS-01 path avoids.
+<<~ confidence 13/20 >> DNS-01 needs the internet ''only at issuance / renewal (~every 60d), never at serve time'' — a minted cert serves the LAN for its full validity with the home internet fully down. So the causal-island law falls out clean (#/causal-islands): ''cert-renewal IS the one declared web2 bridge'' — alarm it, retry it, tolerate a lapse; only a renewal that fails for the ''entire'' validity window breaks trust. The ''zero-internet sovereign fallback'' = a name-constrained local CA (RFC 5280 constraints bind it to `*.home.kahu.tld`, so a leaked root cannot MITM `bank.com`) — it issues offline forever, at the cost of the per-device install tax the DNS-01 path avoids.
 
 <<~/ahu >>
 
@@ -85,7 +85,7 @@ Given an entity holding a ''DNS-delegation cap'' over some zone (`kahu.tld` belo
 Two consequences fall straight out, and both dissolve worries the role-shaped reading manufactures:
 
 * An entity holding the DNS-delegation cap can ''withhold a signpost'' — availability. Every key, byte, and peer relation survives; nothing about sovereignty passes through a name. No delegation makes a landlord.
-* A name carried in a ''first-reach bootstrap'' leaks a rendezvous hint, never an identity. The spine stays key-derived by construction, so web2 naming cannot enter it through the bootstrap; what remains reads as ''publication'' (#the-caps-added), not authority.
+* A name carried in a ''first-reach bootstrap'' leaks a rendezvous hint, never an identity. The spine stays key-derived by construction, so web2 naming cannot enter it through the bootstrap; what remains reads as ''publication'' (#/the-caps-added), not authority.
 
 <<~/ahu >>
 
@@ -93,13 +93,13 @@ Two consequences fall straight out, and both dissolve worries the role-shaped re
 
 !! The caps this path adds ~ what stays open once the roles drop out
 
-Read from caps rather than from tiers, the landlord and bootstrap worries dissolve (#name-and-key) and ''four'' concerns survive — each a property of a capability, none of a class of person.
+Read from caps rather than from tiers, the landlord and bootstrap worries dissolve (#/name-and-key) and ''four'' concerns survive — each a property of a capability, none of a class of person.
 
-* ''ORIGIN-ATTESTATION CUSTODY.'' The wildcard's private key stands up ANY name under its zone, so whoever holds it presents trusted glass for the whole zone. <<~ confidence 12/20 >> This rhymes exactly with a ruling already made at the person layer — ''the recovery quorum IS the impersonation quorum, so no safe custodial escrow'' (#identity-classes). OPEN: whether the origin-attestation cap wants the same quorum treatment, or whether forging a door while forging no peer stays tolerable.
-* ''PERMANENT PUBLICATION.'' <<~ confidence 15/20 >> Certificate Transparency logs every issued cert to public, append-only logs. A ''wildcard publishes only the wildcard'' — which makes wildcard-only a ''privacy requirement, not a convenience''; any per-name cert publishes that name to the world forever. Sits beside the Herm's anon-veil path (#the-veil-ladder), and bounds what a rendezvous hint may safely carry.
+* ''ORIGIN-ATTESTATION CUSTODY.'' The wildcard's private key stands up ANY name under its zone, so whoever holds it presents trusted glass for the whole zone. <<~ confidence 12/20 >> This rhymes exactly with a ruling already made at the person layer — ''the recovery quorum IS the impersonation quorum, so no safe custodial escrow'' (#/identity-classes). OPEN: whether the origin-attestation cap wants the same quorum treatment, or whether forging a door while forging no peer stays tolerable.
+* ''PERMANENT PUBLICATION.'' <<~ confidence 15/20 >> Certificate Transparency logs every issued cert to public, append-only logs. A ''wildcard publishes only the wildcard'' — which makes wildcard-only a ''privacy requirement, not a convenience''; any per-name cert publishes that name to the world forever. Sits beside the Herm's anon-veil path (#/the-veil-ladder), and bounds what a rendezvous hint may safely carry.
 * ''REVOCATION ASYMMETRY.'' Keys revoke by quorum, locally, immediately. Browser cert revocation runs soft-fail, so short validity carries the real mitigation. An entity whose peer-identity gets expelled keeps a working trusted origin until its cert expires — two planes, two speeds.
-* ''THE REACH PLANE RAISES THE FIRST TWO.'' <<~ confidence 12/20 >> Once a vessel holds foreign app credentials so a human posts outward from their wiki (#reach-plane), ''the browser origin stops guarding one identity and starts guarding many instruments''. Nothing about origin-attestation custody changes; its weight roughly multiplies, and it takes the fallback question up with it — a fallback that silently degrades reads tolerable when the loss is reachability and reads very differently when the vessel is a credential store. ''The vault needs no keychain to begin'' — the scrypt passphrase KEK already carries it, and a keychain leg suits the reach plane BETTER than the sovereign floor (#reach-plane, the carrier prices the key).
-* ''THE FALLBACK'S TAX LANDS AT THE WORST MOMENT.'' The name-constrained local CA issues offline forever, at the per-device install cost this path exists to avoid — so the sovereign fallback demands precisely the ceremony ruled HOSTILE to a non-technical family (#why-dns-01), in the crisis where it gets reached for. OPEN: whether a household rehearses that install BEFORE it needs it, or the fallback stays honestly unavailable.
+* ''THE REACH PLANE RAISES THE FIRST TWO.'' <<~ confidence 12/20 >> Once a vessel holds foreign app credentials so a human posts outward from their wiki (#/reach-plane), ''the browser origin stops guarding one identity and starts guarding many instruments''. Nothing about origin-attestation custody changes; its weight roughly multiplies, and it takes the fallback question up with it — a fallback that silently degrades reads tolerable when the loss is reachability and reads very differently when the vessel is a credential store. ''The vault needs no keychain to begin'' — the scrypt passphrase KEK already carries it, and a keychain leg suits the reach plane BETTER than the sovereign floor (#reach-plane, the carrier prices the key).
+* ''THE FALLBACK'S TAX LANDS AT THE WORST MOMENT.'' The name-constrained local CA issues offline forever, at the per-device install cost this path exists to avoid — so the sovereign fallback demands precisely the ceremony ruled HOSTILE to a non-technical family (#/why-dns-01), in the crisis where it gets reached for. OPEN: whether a household rehearses that install BEFORE it needs it, or the fallback stays honestly unavailable.
 
 <<~/ahu >>
 
@@ -158,7 +158,7 @@ A minted key rests in browser storage, and browsers reclaim it. <<~ confidence 1
 
 !! Admit inertness ~ SAS, not a proximity radio
 
-The QR admit ceremony (#persona-circle) stays ''photograph-inert by construction'': the offer QR carries only an ephemeral pubkey + nonce, the grant is ECDH-sealed to a secret that never leaves the joinee, and the keyring rides bound into the persona-signed transcript (#cap-tier, #keyring-delivery). ''Under camera-to-screen, nothing more is needed'' — the single-use-nonce + freshness window + who-scans-whom already carry it.
+The QR admit ceremony (#/persona-circle) stays ''photograph-inert by construction'': the offer QR carries only an ephemeral pubkey + nonce, the grant is ECDH-sealed to a secret that never leaves the joinee, and the keyring rides bound into the persona-signed transcript (#cap-tier, #keyring-delivery). ''Under camera-to-screen, nothing more is needed'' — the single-use-nonce + freshness window + who-scans-whom already carry it.
 
 <<~ confidence 12/20 >> FIDO caBLE leans on a ''BLE proximity gate'' ONLY because its QR bootstraps a tunnel-SERVER relay (the QR is not the channel) — so a photographed / remote QR could drive auth from afar, and BLE re-adds the proximity the relay threw away. ''Our QR is the channel'', so the property BLE restores was never lost; and BLE runs beacon-relayable (~150m) and platform-broken for our surfaces (no Web Bluetooth on Safari/Firefox/iOS; no Web NFC on any desktop/home-node). ''The one residual'' — an active relay over a MODIFIABLE channel (the admit surface accepts paste; a relayed 3-hop to a distant victim) — wants a ''short-authentication-string'' (SAS), never a radio: derive a short compare (Vaudenay CRYPTO-2005; Matrix/Signal) by HKDF over material already in the signed transcript — ''bind it to the TRANSCRIPT HASH, not raw DH'', or a same-DH-different-payload substitution slips under it — render ~5-7 emoji / 3×4-digit, one human glance, gated to the relayed case only. Zero new dependency, web3-native. Skip rotating-QR (nonce+expiry already banks it) and NFC (Android-only). ''NOT built'' — a flagged follow; the SAS length + whether the relayed path stays in-scope read as operator rulings.
 
@@ -177,7 +177,7 @@ The QR admit ceremony (#persona-circle) stays ''photograph-inert by construction
 | ''Vaudenay SAS'' (CRYPTO 2005); Matrix cross-signing emoji; Signal safety numbers | the relayed-channel residual: a short human compare over the signed ECDH transcript kills an active MITM, ≈2^−k independent of compute | applied cryptography |
 | ''FIDO caBLE proximity'' | the anti-pattern: BLE's rationale is coupled to a tunnel-server relay our airgapped QR does not have — borrow the threat-model clarity, NOT the radio | authentication UX |
 
-''The honest guard:'' the prior art illuminates the ''path'' (DNS-01, TOFU, SAS) but the mesh borrows only what survives its own law — the runtime cloud control plane a Tailscale-style overlay assumes is a ''web2 bridge behind a causal-island boundary'' (#web3-only-lares), never a core dependency. Take the DNS-01 zero-install, the co-sign TOFU, the SAS compare; leave the coordination server at the island edge.
+''The honest guard:'' the prior art illuminates the ''path'' (DNS-01, TOFU, SAS) but the mesh borrows only what survives its own law — the runtime cloud control plane a Tailscale-style overlay assumes is a ''web2 bridge behind a causal-island boundary'' (#/web3-only-lares), never a core dependency. Take the DNS-01 zero-install, the co-sign TOFU, the SAS compare; leave the coordination server at the island edge.
 
 <<~/ahu >>
 
@@ -200,13 +200,13 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#publish-a-face >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/publish-a-face >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/federation >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ckA4YpwOshLchhLYDZ2_Bxr-efgxxj6NkITyvF-1XoE
+<<^ code:"&#x0003;" >>ni:///sha-256;9kCXA5TFzZSa4QWzyzb9upNCPKSyyBLotH8U-J-NX9E
 
 <<^ code:"&#x0004;" -> ? >>

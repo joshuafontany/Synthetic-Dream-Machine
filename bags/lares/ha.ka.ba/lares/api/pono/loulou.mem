@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -64,7 +64,7 @@ propagation is none. The edge says what holds between the sockets, not what runs
 ```text
 <<~ loulou URI >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme#law >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme#/law >>
 ```
 
 `?` source resolves to the nearest enclosing socket (ahu fragment or meme URI).
@@ -122,6 +122,6 @@ confidence-bounded = false
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jVQQPWozFc0qdhwB2jQR48rQIsn-YThXQTMqSM8X-yc
+<<^ code:"&#x0003;" >>ni:///sha-256;hZcwod4e-g-1grodr-hmv5UYrEfnhupJrvWKVousMdU
 
 <<^ code:"&#x0004;" -> ? >>

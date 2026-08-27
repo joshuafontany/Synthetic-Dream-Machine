@@ -19,7 +19,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/mu/the-four-tools"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -114,7 +114,7 @@ Each tool carries an ASCII symbol (canonical record form, URI-safe) and two oper
 
 The empty hand (`0`) holds a slot open, not a tool carried but a stance present and centered, agnostic rather than absent. `_0` doubles as ground-state notation (x-naught): the Pentacle-alone carry names //where the system rests//.
 
-Render mode configuration: see `lar:///ha.ka.ba/lares/api/pono/config#hud-panel`.
+Render mode configuration: see `lar:///ha.ka.ba/lares/api/pono/config#/hud-panel`.
 
 <<~/ahu >>
 
@@ -302,6 +302,6 @@ arcana   = "release"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SYiGr_rrN2K3uAZvd2RHH-Saxll7PhvEwq9Yxg3cPdY
+<<^ code:"&#x0003;" >>ni:///sha-256;7_54wrk5OZZntiNukFqR72UJ3oBRNWOiAY8rVjzMU9o
 
 <<^ code:"&#x0004;" -> ? >>

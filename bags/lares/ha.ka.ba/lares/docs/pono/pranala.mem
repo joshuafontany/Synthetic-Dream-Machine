@@ -28,11 +28,11 @@ This file holds examples, sigil-sugar long-forms, and reciprocal-edge guidance.
 Minimal inline edges:
 
 ```text
-<<~ pranala ? -> lar:///ha.ka.ba/lares/api/mu#entry family:relation >>
+<<~ pranala ? -> lar:///ha.ka.ba/lares/api/mu#/entry family:relation >>
 ```
 
 ```text
-<<~ pranala lar:///A#out -> lar:///B#in family:relation >>
+<<~ pranala lar:///A#/out -> lar:///B#/in family:relation >>
 ```
 
 <<~/ahu >>
@@ -90,8 +90,8 @@ Reciprocal pressure uses two parallel edges, not one bidirectional arc.
 Each edge remains individually directed and acyclic.
 
 ```text
-<<~ pranala lar:///A#entity -> lar:///B#entity family:control role:owns traversal:source-to-target propagation:push-back >>
-<<~ pranala lar:///B#entity -> lar:///A#entity family:message role:references propagation:push-back >>
+<<~ pranala lar:///A#/entity -> lar:///B#/entity family:control role:owns traversal:source-to-target propagation:push-back >>
+<<~ pranala lar:///B#/entity -> lar:///A#/entity family:message role:references propagation:push-back >>
 ```
 
 The two edges carry different families (`control` vs `message`) and different roles (`owns` vs `references`).
@@ -107,6 +107,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qYXuagw6vjVPgG-ClQzQVkA-GIPBPl-RTCDm8H6MaWA
+<<^ code:"&#x0003;" >>ni:///sha-256;Rk1pH5vqlRaq2LftrTK1TtLia5J9q3PU-Phsw3h20kY
 
 <<^ code:"&#x0004;" -> ? >>

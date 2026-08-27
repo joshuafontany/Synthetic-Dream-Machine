@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/corpus"
 written   = "2026-06-30"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -31,7 +31,7 @@ states how `lares corpus` stands one EPHEMERALLY over any text or code corpus, l
 grammar blind, and dissolves it on exit.
 
 <<~ confidence 14/20 >> The palace already carries the move. The living-grammar palace
-([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance]]) names a nameless palace-entity that
+([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance]]) names a nameless palace-entity that
 ACTS AS a `compose_palace(caps)` — a `#has` cap-stack ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]])
 projecting three planes off one verbatim drawer (content · structure · form). The lares-corpus
 ''instantiates that same entity transiently'' over a target path: the schema lifts out of the palace via
@@ -47,7 +47,7 @@ full machina without owning a durable home.
 ([[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]], //mālama pili// — keep the arrows): the
 ephemeral palace projects the SAME three views the durable palace does, on a borrowed corpus, under one
 discipline. The unification's product-presheaf spine
-([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification]]) governs the join here exactly as it
+([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/unification]]) governs the join here exactly as it
 governs the durable store — the corpus palace is that object read three ways, transiently.
 
 <<~/ahu >>
@@ -76,7 +76,7 @@ drift. The organ ladder wires dependency-ordered:
 
 ''The help that teaches.'' Add a per-command ''HELP REGISTRY'' — each command carries
 `{ synopsis, examples[], flags[] }`, examples-first. <<~ confidence 13/20 >> This registry
-IS the heleuma-anchored surface (#the-gate): the help text the operator reads and the meme prose stand as
+IS the heleuma-anchored surface (#/the-gate): the help text the operator reads and the meme prose stand as
 ONE canon, and the audit trips when they drift.
 
 <<~/ahu >>
@@ -111,7 +111,7 @@ Resolved-never-ambient, sweepable. Three holds bind it:
 <<~ranks law ephemeral-by-default ~ `run` reaps on exit unless `--keep` lands it -> keep-explicit ~ durability NEVER happens by accident; the operator promotes -> trap-EXIT ~ dissolve fires on success OR error; an interrupted run leaves no half-paved scratch >>
 
 ''The sweep registration closes the leak.'' Register `~/.lares/.corpus/*` into the teardown
-`palaceOrgans()` enumerator (#the-cli) — so an interrupted run that the trap missed (SIGKILL, a crashed
+`palaceOrgans()` enumerator (#/the-cli) — so an interrupted run that the trap missed (SIGKILL, a crashed
 host) still falls to `lares palace-teardown`, which reaps every orphaned scratch home. Ephemeral state can
 never leak past two independent reapers (the trap AND the sweep).
 
@@ -147,13 +147,13 @@ sensorium.
 !! The Grain + the Boundary Tree ~ a membership address, not a frequency
 
 <<~ confidence 13/20 >> ''The aperture ladder reads as a membership TREE, never a''
-''frequency decomposition.'' The five bands ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#law-of-5s]] —
+''frequency decomposition.'' The five bands ([[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#/law-of-5s]] —
 Pulse · Beat · Measure · Arc · Theme) name grain-LEVELS of a containment path — WHICH theme, which arc,
-which measure — a stored prefix code (the FFZ address, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]),
+which measure — a stored prefix code (the FFZ address, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#/the-spine]]),
 li not ki. What a band never names is HOW MANY ticks: a band counted in ticks IS a count, and a bandpass
 reporting where energy concentrates answers a different question than a change-point reporting where the
 generating regime turns over — a category error, retired
-([[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#ki]]). The organ rides two layers
+([[sensorium-machina|lar:///ha.ka.ba/lares/api/pono/sensorium-machina#/ki]]). The organ rides two layers
 plus a gate:
 
 !!! 1 — the GRAIN (the FFZ membership address, li)
@@ -170,7 +170,7 @@ a global now.
 
 <<~ confidence 13/20 >> The band-membership tree rides ''`ecp::e.divisive`'' (R,
 nonparametric) — ''MULTIVARIATE'' over content + form + structure, which IS our three-plane quorum
-([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification]]) read in the
+([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/unification]]) read in the
 changepoint domain; ''divisive'' = native-nested, so the tree falls out of the algorithm — coarse cuts
 parenting fine, which IS the membership tree, handed over for free. The ''per-chunk cosine-drift'' over
 content embeddings reads as the boundary signal — //Measure = cosine-drop// — a regime-turn read, never a
@@ -182,7 +182,7 @@ wavelet band.
 chase forever — RESOLVES on ''RESAMPLING-CONSENSUS'': lock a boundary as Canon ONLY where a bootstrap /
 jackknife reproduces it (an un-witnessed boundary NEVER reads reproduced). That gate IS our confidence
 register made statistical — Canon-vs-Provisional becomes does-the-resample-reproduce-it, witnessed against
-the baseline corpus (#baseline-corpus) before it locks Canon.
+the baseline corpus (#/baseline-corpus) before it locks Canon.
 
 <<~/ahu >>
 
@@ -223,7 +223,7 @@ house already held:
 <<~ranks resonance aperture-ladder ~ = the grain tree (Pulse→Theme as containment LEVELS, not a frequency decomposition) -> boundary ~ = ecp multivariate changepoint tree (content + form + structure) -> register ~ Canon-vs-Provisional = the resampling-consensus gate (bootstrap reproduces → Canon) -> mdl-stop ~ = our existing MDL lifted to grammar (a template pays its bits) -> nameless-discipline ~ = miners surface, the LLM names LAST (don't name-then-hunt) >>
 
 The originality lives in the ''weave'', never in any single strand — the same braid the unification
-keystone names ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification]]).
+keystone names ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/unification]]).
 
 <<~/ahu >>
 
@@ -350,7 +350,7 @@ recovery test (below). Ranked, leaning FREE:
 !!! The blend-resonance ~ the four modes STRATIFY onto the FFZ aperture ladder (load-bearing)
 
 <<~ confidence 14/20 >> The blend reads ''GRAIN-STRATIFIED, never flat.'' The modes seat
-at DISTINCT grain LEVELS (#the-bands), so the grain tree NATURALLY separates them by containment depth,
+at DISTINCT grain LEVELS (#/the-bands), so the grain tree NATURALLY separates them by containment depth,
 never by frequency:
 
 <<~ranks stratum control-code-framing ~ the OUTERMOST level — the ECMA-48 information-separator frame -> rst-discourse ~ THEME — the gold discourse tree spans the whole text -> sigil-ast + meter ~ MEASURE / ARC — the `<<~…>>` structure and the metrical foot -> uax-29-graphemes-words ~ PULSE — the deterministic grapheme / word boundaries, the finest grain >>
@@ -387,7 +387,7 @@ Depth-Bounded PCFG Induction · Grammar-VAE / SMILES CFG (Kusner 2017) · the tr
 corpus format · `eth_py150_open` · ''the NL-wing:'' Reddy & Knight 2011 (rhymedata) · For-Better-For-Verse
 (4B4V) · Prosodic · Halle-Keyser / Fabb-Halle generative metrics · RST-DT / GUM · the Biblical-Hebrew
 parallelism benchmark (arXiv 2506.24117) · UAX-29 · ECMA-48. The QA-rig compute kernel
-([[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor#instruments]] — the `qa_anchor` package) supplies the
+([[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor#/instruments]] — the `qa_anchor` package) supplies the
 signal-detection / bootstrap-CI scoring that turns a recovery score into a witnessed `(d′, criterion)`
 verdict.
 
@@ -407,7 +407,7 @@ verdict.
 ''The fusion reads H¹ before it diffuses.'' <<~ confidence 11/20 >> The band/coupling quorum that
 merges island readings gains a two-tier gate at [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]]:
 ''H⁰'' (a global section exists → diffuse, Chebyshev-cheap) versus ''H¹'' (an irreducible obstruction → hold-open,
-route to Talk-Story). The consistency-radius the [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#crucible-tested]]
+route to Talk-Story). The consistency-radius the [[li-ki-integrities|lar:///ha.ka.ba/lares/api/pono/li-ki-integrities#/crucible-tested]]
 crucible already named IS the cheap H¹-detection the gate runs first — so the machina's merge never fabricates a
 global-now it cannot ground. The reconciliation cost `R*_sem = log₂ dim H¹` gives the federation merge a price tag.
 
@@ -422,10 +422,10 @@ global-now it cannot ground. The reconciliation cost `R*_sem = log₂ dim H¹` g
 * ''Built / stock:'' the structurepalace content-free encoder · the nomic embedder · the dep-free CLI arg-walker · `palace-teardown`'s `resolveTargets()` · the existing MDL stop · the Measure servo · the drawer_io NDJSON holder contract.
 * ''House moves found standing in the literature:'' the grain tree (aperture ladder as containment levels) · ecp multivariate changepoint tree (boundary) · resampling-consensus (register) · the nameless discipline (miners-first).
 * ''Open / research-grade:'' the form-induction stack (TreeMiner · PrefixSpan/BIDE · c2xg, EM + MDL) · the cosine-drift boundary signal witnessed against the baseline · the validation baseline corpus.
-* ''Cross-links:'' [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#unification]] (the palace this generalizes) · [[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]] (the keel) · [[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor]] (the witness) · [[scale-architecture|lar:///ha.ka.ba/lares/api/pono/scale-architecture]] (the tractability discipline) · [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]] (the H¹-before-diffuse merge) · [[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]] · [[loci|lar:///ha.ka.ba/lares/api/pono/loci]] · [[lares-bin|lar:///ha.ka.ba/lares/cli/bin/lares]] · [[palace-teardown|lar:///ha.ka.ba/lares/cli/commands/palace-teardown]].
+* ''Cross-links:'' [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/unification]] (the palace this generalizes) · [[functor-discipline|lar:///ha.ka.ba/lares/api/pono/functor-discipline]] (the keel) · [[gold-anchor|lar:///ha.ka.ba/lares/api/pono/gold-anchor]] (the witness) · [[scale-architecture|lar:///ha.ka.ba/lares/api/pono/scale-architecture]] (the tractability discipline) · [[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/cohomological-gate]] (the H¹-before-diffuse merge) · [[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]] · [[loci|lar:///ha.ka.ba/lares/api/pono/loci]] · [[lares-bin|lar:///ha.ka.ba/lares/cli/bin/lares]] · [[palace-teardown|lar:///ha.ka.ba/lares/cli/commands/palace-teardown]].
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YPHeRfKL19fMo4iB76bw799ORPREEntJQpSjfFZrz4Q
+<<^ code:"&#x0003;" >>ni:///sha-256;sVkxkwHXPbKXWE0FmKg0fSr0CEhLzzWbyjKYWA5SSSc
 
 <<^ code:"&#x0004;" -> ? >>

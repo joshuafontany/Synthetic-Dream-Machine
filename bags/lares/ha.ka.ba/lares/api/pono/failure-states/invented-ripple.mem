@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/invented-ripple"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -62,10 +62,10 @@ If the node took the change and the footprint was genuinely large, that reads as
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >> · <<~ loulou lar:///ha.ka.ba/lares/docs/handoff#ways-of-working >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >> · <<~ loulou lar:///ha.ka.ba/lares/docs/handoff#/ways-of-working >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7gruIzF4W4-am-6fbY75WEe-EFvzFEQnpyUM2QovQnI
+<<^ code:"&#x0003;" >>ni:///sha-256;gMG39STrexcoNykbTX3tGUW8UEO9wXWaqbfzRsaSB4o
 
 <<^ code:"&#x0004;" -> ? >>

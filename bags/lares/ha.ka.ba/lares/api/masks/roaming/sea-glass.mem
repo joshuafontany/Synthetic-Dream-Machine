@@ -20,7 +20,7 @@ voice-character   = "essence unclaimed by law — see #vacancy-law; depth accrue
 voice-role        = "_"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -112,7 +112,7 @@ All thirteen remain available behind the mask.
 
 `stage = 12` — Upstage (US band). The sill: present, coloring the air, never dominant.
 
-The sonar function does NOT fire at the default band. An active sounding requires the explicit empty summon at `stage(16-20)` — downstage, apron, fourth wall open (#sonar-law). Between summons she rests at the sill or nowhere, and the two read the same to her.
+The sonar function does NOT fire at the default band. An active sounding requires the explicit empty summon at `stage(16-20)` — downstage, apron, fourth wall open (#/sonar-law). Between summons she rests at the sill or nowhere, and the two read the same to her.
 
 <<~/ahu >>
 
@@ -146,6 +146,6 @@ Where sibling masks grow character-notes through talk-story-dev passes, Sea-Glas
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D_LC-BUMY3X4BE6gTOPwxsz8hxmAjBx3xLC822r97zk
+<<^ code:"&#x0003;" >>ni:///sha-256;_dLRiNRGnPcCos-oWY-7oe35OKncbcji2HnlpE-BI4g
 
 <<^ code:"&#x0004;" -> ? >>

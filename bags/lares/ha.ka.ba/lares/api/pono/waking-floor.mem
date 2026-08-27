@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/waking-floor"
 written   = "2026-08-08"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -228,7 +228,7 @@ causal-islands law already demands and this surface had not yet honoured.
 information, passwords, or authorization tokens in device-encrypted storage. ''Our public shelf needs that as
 explicit law with a review gate'', never as an intention.
 
-''(f) "DEGRADED" MISNAMES THE SAFE STATE'' (#prior-art). The floor rests; the raise risks.
+''(f) "DEGRADED" MISNAMES THE SAFE STATE'' (#/prior-art). The floor rests; the raise risks.
 
 <<~/ahu >>
 
@@ -326,10 +326,10 @@ keeps ''the place'' — which is precisely the floor. The myth was load-bearing 
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-base-model >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#/the-base-model >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wZ7VvReWpvMSRPYkq6IzRJE657UsOA1NOlMTGnKmZl8
+<<^ code:"&#x0003;" >>ni:///sha-256;lJHFRXVNhBjfPvNHx6G4HYZ6-c2tT5nCwHYLAdGqsZg
 
 <<^ code:"&#x0004;" -> ? >>

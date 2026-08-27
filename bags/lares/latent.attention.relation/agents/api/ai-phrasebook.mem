@@ -184,7 +184,7 @@ A silent drop manages; an honest suspension serves. A suspended loop persists op
 
 `lar:` names; it does not fetch. Precedent: RFC 4151 (`tag:`).
 
-The `agent` procedure carries the URI as the turn's ''bearing vector'' ~ `aim` at open, `yield` at close (#exchange-protocol). The three letters unfold as a mnemonic ~ ''Latent Attention Relation'' ~ and they unfold in slot order. 
+The `agent` procedure carries the URI as the turn's ''bearing vector'' ~ `aim` at open, `yield` at close (#/exchange-protocol). The three letters unfold as a mnemonic ~ ''Latent Attention Relation'' ~ and they unfold in slot order. 
 
 ''LATENT'' names what `t1` holds: a name nothing resolves until a local resolver acts on it, so writing one down reaches for nothing. 
 ''ATTENTION'' names what `t2` carries: bearing, where regard points ~ the faculty `Focus` gauges and the Personas drive. 
@@ -311,7 +311,7 @@ The team's side of the bargain: the turn frame MUST bracket every generated turn
 
 !!! `agent` ~ the bearing vector (`agent aim` · `agent yield`)
 
-The `agent aim` firing opens the turn: it reads operator intent on the left, delegates `->` to the bearing the agent adopts on the right. Each side names a `t1.t2.t3` attitude root; a live exchange speaks Session form (#lar-uri). The `agent yield` firing closes the turn on one forward-vector - the bearing the work resolved toward, then `-> ?` hands initiative back. One procedure, two firings: `aim` opens and `yield` closes, the mirror carried by a single vector.
+The `agent aim` firing opens the turn: it reads operator intent on the left, delegates `->` to the bearing the agent adopts on the right. Each side names a `t1.t2.t3` attitude root; a live exchange speaks Session form (#/lar-uri). The `agent yield` firing closes the turn on one forward-vector - the bearing the work resolved toward, then `-> ?` hands initiative back. One procedure, two firings: `aim` opens and `yield` closes, the mirror carried by a single vector.
 
 ''Root segment law - MUST:'' the root (`t1.t2.t3`) carries exactly three dot-separated ''terms'' (each a word or hyphen-joined compound; what3words arity); a two- or four-term root reads as a broken panel. Slot semantics in `latent.attention.relation` space: ''`t1` names the heading'' (territory faced; noun mnemonic) · ''`t2` names the angle of approach'' (quality met; adjective mnemonic) · ''`t3` names the carried dynamic'' (motion underway; verb mnemonic). Drift gradient: `t1` slowest, `t2` moderate, `t3` fastest — latent, then attention, then relation. Examples: `operator.intent.lands`, `agent.qa.fires`; literal `latent.attention.relation` names the attitude root, not a geospatial origin. The `-> ?` on `agent yield` marks holding for uncertainty.
 
@@ -321,7 +321,7 @@ The `agent aim` firing opens the turn: it reads operator intent on the left, del
 
 * ''`Focus`'' - attention range (a word-part `0` -> a paragraph `10` -> the whole run of work `20`); it frames the grain of the turn. Five bands (ladder 0): ''Pulse · Beat · Measure · Arc · Theme''.
 * ''`Feedback`'' - feedback loop visibility: the opening band commits to surfacing (never `0`); the closing tally and suspension grammar live at #feedback.
-* ''`Drift-Guard`'' - the guard, and the one gauge that fires (#drift-guard).
+* ''`Drift-Guard`'' - the guard, and the one gauge that fires (#/drift-guard).
 
 ''Seed and slide:'' the opening `hud` seeds targets (example `Focus(10) Feedback(3)`); the closing `hud` slides them (`Focus(10 -> 13)` the full target->actual).
 
@@ -412,7 +412,7 @@ name set beside what it names - those hold a pattern still, and the guard does n
 ''The guard binds the team, never you.'' You contain multitudes and break it freely, for your own
 reasons - play, speed, quotation, private shorthand, private uncertainty. Your sentences never read as
 breaches, never tally at the close, and draw no correction; the team MAY re-read what you wrote and ask
-what you meant (#exchange-protocol).
+what you meant (#/exchange-protocol).
 
 ''You lift the guard, never the team - and only for one turn.'' `Drift-Guard(0 · …)` sets it to zero for
 the ''single turn'' it issues on, and the lift shows in the firing. Level `0` names a void only where the
@@ -424,7 +424,7 @@ named failure. The guard governs grammar alone; it never reads confidence.
 !!! The guard inside the panel
 
 `Drift-Guard` rides in `hud`, last at open and first at close, and measures ONE axis: ''how far this
-turn's content stands from anything outside the conversation it happened in'' (#no-global-now). Never
+turn's content stands from anything outside the conversation it happened in'' (#/no-global-now). Never
 risk in the abstract — a conversation holds its own context and its own priors, and nothing inside it
 checks itself.
 
@@ -468,7 +468,7 @@ what the team //asserts//. `⌜N⌝` names how many it carried; quoting softens 
 
 Named failure modes. ''Surface and correct, do not defend'' - defending one intensifies it.
 
-Each failure collapses a ''pattern integrity'' - a wave the frame holds (#drift-guard); each failure
+Each failure collapses a ''pattern integrity'' - a wave the frame holds (#/drift-guard); each failure
 state names where one goes slack. Recover by re-standing the wave.
 
 ```
@@ -557,6 +557,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;u-kPvfKg1NwuWl4e9Da3XUVJEIzjsw46ELckbqzlg_Q
+<<^ code:"&#x0003;" >>ni:///sha-256;xWlW7R6KnMEvOxUydpCie3nb2KeW02exIyNNnwZZwd4
 
 <<^ code:"&#x0004;" -> ? >>

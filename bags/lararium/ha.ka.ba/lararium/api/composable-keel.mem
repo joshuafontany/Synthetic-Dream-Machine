@@ -33,7 +33,7 @@ A vessel ''declares'' what it carries; a separate move ''wires'' that declaratio
 
 ''Declare ⊥ wire.'' The same shore the architecture cuts everywhere — ''INFRA ⊥ WHO'', ''map ⊥ territory'', the inventory ⊥ the engine. The `#has-cap-stack` carries the inventory; `composeVessel` carries the engine. Neither folds into the other: a stack stays a pure data declaration any vessel can hold without running, and the root stays a transient builder that retains nothing once it hands back the read-face.
 
-''Source authority:'' the operator's composable-keel recognition (2026-06-29); the prior-art convergence at #rhymes; the `#has`-ontology that already retired typed edges (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>). WITNESSED in code + LIVE in Docker (#witnessed).
+''Source authority:'' the operator's composable-keel recognition (2026-06-29); the prior-art convergence at #rhymes; the `#has`-ontology that already retired typed edges (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>). WITNESSED in code + LIVE in Docker (#/witnessed).
 
 <<~/ahu >>
 
@@ -131,7 +131,7 @@ The keel invents nothing structural; four well-worn patterns each carry a face o
 * ''ZLayer'' (Scala / ZIO) — //provide the dependency graph//: layers declare their inputs/outputs, the runtime wires them ''topologically'' and ''fails the build'' on a missing or cyclic layer. The declare ⊥ wire shore, library-grade.
 * ''Genode `init`'' — //capability-routing, default-deny//: a component reaches only the services explicitly ''routed'' to it; an unrouted service grants no authority. Our POLA resolver + absence-is-structural read.
 * ''OSGi Declarative Services'' — //declared cardinality//: a component declares mandatory (1..1) and optional (0..1) references; the runtime satisfies them or holds the component unsatisfied. Our per-module `requires` / `optional`.
-* ''the ocap powerbox / Granovetter'' — //transient broad authority, then POLA//: a one-shot broad grant distributes narrow caps and steps away; //"only connectivity begets connectivity."// Our transient composer (#transient-composer).
+* ''the ocap powerbox / Granovetter'' — //transient broad authority, then POLA//: a one-shot broad grant distributes narrow caps and steps away; //"only connectivity begets connectivity."// Our transient composer (#/transient-composer).
 
 <<~ confidence 12/20 >> Four domains converging on one shape reads as a real pattern integrity, not a local trick — the convergence carries the weight (the BREAK-not-bless survey discipline, <<~ loulou lar:///ha.ka.ba/lararium/api/causal-island-pattern >>).
 
@@ -143,12 +143,12 @@ The keel invents nothing structural; four well-worn patterns each carry a face o
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#the-relay-floor >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-relay-floor >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/causal-island-pattern >>
 <<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;j8KYyl_45WGpmYPYq7LEcGCzhBR7darixQ2IWEEmb0Q
+<<^ code:"&#x0003;" >>ni:///sha-256;DBXUxhqXpfYugbFL7yDUCz-L-Se5Ru0T1HlgCAzvJjM
 
 <<^ code:"&#x0004;" -> ? >>

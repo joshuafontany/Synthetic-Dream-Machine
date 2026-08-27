@@ -19,7 +19,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/masks"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -36,7 +36,7 @@ Grammar and stacking law defined in `lar:///ha.ka.ba/lares/docs/voices/masks`.
 
 <<~ ahu #entry >>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/voices#mask-layer >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices#/mask-layer >>
 ```toml
 family = "hydration"
 lifecycle = "template"
@@ -124,6 +124,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TCtdtnW04f73RcpV2vV8wOv_8AFErRMu9mVSb7v-TNs
+<<^ code:"&#x0003;" >>ni:///sha-256;PqmUoB2m2bFM91IT2PEjtocXCAyTQbkMXiK8AF1Ohts
 
 <<^ code:"&#x0004;" -> ? >>

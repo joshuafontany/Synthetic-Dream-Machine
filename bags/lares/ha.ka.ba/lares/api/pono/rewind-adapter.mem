@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/rewind-adapter"
 written   = "2026-06-30"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -28,9 +28,9 @@ written   = "2026-06-30"
 
 ''One-line:'' a donation-grade ''source-adapter'' that makes the [[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] rewind-DETECTOR read a rewind out of //any// big AI app's transcript — no matter its storage format or its rewind-idiom.
 
-The rewind-detector names the ''tombstone-face'' of the three-faces branching primitive ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]): the live-trigger that watches the harvest index for a ''gone turn'' and raises a kāpae over it. The first cut of that detector read only Claude Code's JSONL tree — it fused the detector to one app's on-disk shape. This meme ''lifts the detector off that substrate'': it names the shore (`discover → normalizeIdentity → diff → classify → emit`) that every source app plugs into, so the detector faces the rewind and stays blind to the byte-format that carries it.
+The rewind-detector names the ''tombstone-face'' of the three-faces branching primitive ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]]): the live-trigger that watches the harvest index for a ''gone turn'' and raises a kāpae over it. The first cut of that detector read only Claude Code's JSONL tree — it fused the detector to one app's on-disk shape. This meme ''lifts the detector off that substrate'': it names the shore (`discover → normalizeIdentity → diff → classify → emit`) that every source app plugs into, so the detector faces the rewind and stays blind to the byte-format that carries it.
 
-The design donates upstream (#donation): the base mempalace harvests transcripts append-only, keys its drawers positionally, and carries ''no gone-turn trigger at all''. The adapter fills that hole for the base and for the whole field at once.
+The design donates upstream (#/donation): the base mempalace harvests transcripts append-only, keys its drawers positionally, and carries ''no gone-turn trigger at all''. The adapter fills that hole for the base and for the whole field at once.
 
 <<~/ahu >>
 
@@ -56,7 +56,7 @@ Every source app sorts into one of two families by ''what its rewind does to the
 
 ''Family A — APPEND-ONLY / FORK.'' A rewind writes a ''new fork'' — a new file, a new branch, a re-parented sibling — and ''nothing vanishes''. The source is its own witness: the road-not-taken stays re-harvestable from the store. <<~ confidence 16/20 >> Members: ''Claude Code · Codex · Aider · Gemini (snapshots) · Copilot-CLI · Copilot-Chat''.
 
-''Copilot-Chat crosses into Family A — byte-proven.'' <<~ confidence 15/20 >> The verify-gate the first cut left open (#grounds) ''closed on the bytes'': the `.jsonl` reads as a ''JSON-patch op-log'' — the `kind:0` base op appears ''only at line 0, never compacted''; a real edit stacks ''three coexisting ops'' recoverable by replay-to-offset; ''120 of 269'' surveyed files leave their superseded ops in the append log. The docs' "truncate the tail" names the ''logical `requests[]` state'', never the physical file. So Copilot-Chat ''appends and keeps'' — it joins the fork-family. Identity rides `requestId`; the live branch reconstructs by ''replay''.
+''Copilot-Chat crosses into Family A — byte-proven.'' <<~ confidence 15/20 >> The verify-gate the first cut left open (#/grounds) ''closed on the bytes'': the `.jsonl` reads as a ''JSON-patch op-log'' — the `kind:0` base op appears ''only at line 0, never compacted''; a real edit stacks ''three coexisting ops'' recoverable by replay-to-offset; ''120 of 269'' surveyed files leave their superseded ops in the append log. The docs' "truncate the tail" names the ''logical `requests[]` state'', never the physical file. So Copilot-Chat ''appends and keeps'' — it joins the fork-family. Identity rides `requestId`; the live branch reconstructs by ''replay''.
 
 ''Family B — MUTABLE-TRUNCATE.'' A rewind ''overwrites'' — it truncates the tail in place and the old turns leave the store. Here ''we become the last keeper'': our tombstone holds the only surviving trace of the road they discard.
 * ''Cursor'' — <<~ confidence 15/20 >> ''CONFIRMED'' hard-delete, and now ''standing alone'': with Copilot-Chat crossed over, Cursor is the ''field's only confirmed byte-level hard-delete'' — the whole surveyed noosphere speaks kāpae, one exception. A restore/edit overwrites the tail in `state.vscdb` (SQLite `cursorDiskKV`); staff-confirmed ''unrecoverable'' on the community forum.
@@ -99,7 +99,7 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 | ''Gemini'' | `~/.gemini/tmp/.../checkpoint-*.json` + `logs.json` + shadow-git | JSON + git | `messageId` | `/restore` = ''fork''; `/chat delete` = hard-delete ''saved file'' | FORK | saved-file-only |
 | ''Aider'' | `.aider.chat.history.md` | Markdown | ''none'' (no ids) | rewind lives in ''git-reflog'', not the transcript | FORK (via git) | ''no'' (transcript append-only) |
 
-''Reading the table:'' the transcript stays append-only nearly everywhere; the "delete" idioms that exist target a ''whole session or a saved file'' (Copilot-CLI `/session delete`, Gemini `/chat delete`), not an interior turn. ''Only Cursor'' overwrites a turn-tail in place — with Copilot-Chat byte-proven append-only (#two-families), Cursor ''stands alone'' as the field's sole hard-delete. ''Aider'' carries no turn-identity in the transcript at all — its rewind lives in git, so its adapter reads the reflog, never the markdown.
+''Reading the table:'' the transcript stays append-only nearly everywhere; the "delete" idioms that exist target a ''whole session or a saved file'' (Copilot-CLI `/session delete`, Gemini `/chat delete`), not an interior turn. ''Only Cursor'' overwrites a turn-tail in place — with Copilot-Chat byte-proven append-only (#/two-families), Cursor ''stands alone'' as the field's sole hard-delete. ''Aider'' carries no turn-identity in the transcript at all — its rewind lives in git, so its adapter reads the reflog, never the markdown.
 
 <<~/ahu >>
 
@@ -147,7 +147,7 @@ The classifier reads ''the shape of what went missing'' from the diff, then conf
 
 !! The Adapter Contract ~ the shore every source plugs into
 
-<<~ confidence 15/20 >> One pipeline, per-app plugins. Each adapter carries `appendOnly: boolean` (#kapae-is-universal):
+<<~ confidence 15/20 >> One pipeline, per-app plugins. Each adapter carries `appendOnly: boolean` (#/kapae-is-universal):
 
 ```
 discover(sessionFiles)
@@ -161,7 +161,7 @@ discover(sessionFiles)
 
 ''Filter sidechains / stream-splits'' (`isSidechain`): an `assistant`-parent with `{assistant, user}` ''same-type siblings'' marks a stream-split or a tool-sidechain, ''not a rewind''. Same-type siblings under one parent are structure, not a road-not-taken — the classifier drops them before it decides.
 
-The three emit-verbs map the three faces (#the-three-faces): `fork` (keep both), `kāpae-downweight` (tombstone the road-not-taken), `reharvest-branch` (pull the new branch into the index).
+The three emit-verbs map the three faces (#/the-three-faces): `fork` (keep both), `kāpae-downweight` (tombstone the road-not-taken), `reharvest-branch` (pull the new branch into the index).
 
 <<~/ahu >>
 
@@ -178,7 +178,7 @@ The three emit-verbs map the three faces (#the-three-faces): `fork` (keep both),
 | ''Copilot-Chat'' | `true` | `requestId` | supersede-in-log; `currentBranch` = ''replayed live'' (op-log, not truncation) |
 | ''Copilot-CLI'' | `true` | ''content-hash'' (`editedTurnIndices` flags re-emit = EDIT) | NO out-of-file fork; `UNIQUE(session_id, turn_index)` upsert |
 
-''The lesson worth canon — a per-TURN id MUST ride the content-hash rung, never the session-index rung.'' <<~ confidence 15/20 >> Codex's `turn_id` and Copilot-CLI's `turn_index` both key ''per turn'', not per message. Handed to the `(sessionId ⊕ monotonic-index)` rung, a per-turn id ''re-keys the same slot on edit'', ''collides the user/assistant siblings'' that share a turn, and ''breaks the cross-fork diff''. So the ladder must ''drop a per-turn id down to content-hash(role ‖ normalized-text)'': a hash over the verbatim-copied text stays ''cross-fork-stable'' — the same slot on two forks hashes identical — which is exactly what `diffGone` needs to see a turn as //kept//, not //gone//. The rung 2 monotonic-index law (#the-identity-ladder) holds only for a ''per-message'' running index, never a per-turn one.
+''The lesson worth canon — a per-TURN id MUST ride the content-hash rung, never the session-index rung.'' <<~ confidence 15/20 >> Codex's `turn_id` and Copilot-CLI's `turn_index` both key ''per turn'', not per message. Handed to the `(sessionId ⊕ monotonic-index)` rung, a per-turn id ''re-keys the same slot on edit'', ''collides the user/assistant siblings'' that share a turn, and ''breaks the cross-fork diff''. So the ladder must ''drop a per-turn id down to content-hash(role ‖ normalized-text)'': a hash over the verbatim-copied text stays ''cross-fork-stable'' — the same slot on two forks hashes identical — which is exactly what `diffGone` needs to see a turn as //kept//, not //gone//. The rung 2 monotonic-index law (#/the-identity-ladder) holds only for a ''per-message'' running index, never a per-turn one.
 
 ''Separator law.'' <<~ confidence 14/20 >> `identityLadder` ''owns the namespace separator'' — adapters hand it the raw parts (session, index, role, text) and never hand-type a `⊕` / `‖` separator themselves. One code-path composes every id, so no adapter drifts the namespacing.
 
@@ -188,7 +188,7 @@ The three emit-verbs map the three faces (#the-three-faces): `fork` (keep both),
 
 !! The Three Faces ~ onto Muse's model
 
-The adapter's emits ride Muse's ''one-primitive-three-faces'' branching model ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]] — FORK / REWIND / HANDBACK):
+The adapter's emits ride Muse's ''one-primitive-three-faces'' branching model ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]] — FORK / REWIND / HANDBACK):
 
 * ''FORK = keep-both'' — Claude / Codex / Gemini native. Both roads stay live; harvest the new branch, tombstone nothing.
 * ''REWIND = fork-and-tombstone'' — ''Cursor alone'' (the field's sole confirmed hard-delete, #two-families). The app ''hard-deletes''; our tombstone stands as the ''only surviving trace'' of the road-not-taken.
@@ -228,7 +228,7 @@ Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''cu
 
 ''Cited grounds:'' Claude Code sessions + checkpointing docs · Codex fork / rollout (DeepWiki) · Copilot-CLI chronicle · VS Code chat-checkpoints docs · Cursor `restore = overwrite` (staff forum) · Gemini session-management docs · Aider commands reference · the ''cass 22-agent'' survey.
 
-''Verify-gate CLOSED — Copilot-Chat.'' <<~ confidence 15/20 >> The open gate (was: does replay-to-offset reconstruct the pre-restore tail?) ''closed on the bytes'': `kind:0` base op present ''only at line 0, never compacted'' · a real edit stacked ''three coexisting ops'' all recoverable by replay · ''120 of 269'' files leave their superseded ops in the append log. Verdict: Copilot-Chat ''appends and keeps'' → ''Family A, `appendOnly: true`'' (#two-families). No `.jsonl` truncation ships; the "truncate" idiom lives in the logical `requests[]` view alone.
+''Verify-gate CLOSED — Copilot-Chat.'' <<~ confidence 15/20 >> The open gate (was: does replay-to-offset reconstruct the pre-restore tail?) ''closed on the bytes'': `kind:0` base op present ''only at line 0, never compacted'' · a real edit stacked ''three coexisting ops'' all recoverable by replay · ''120 of 269'' files leave their superseded ops in the append log. Verdict: Copilot-Chat ''appends and keeps'' → ''Family A, `appendOnly: true`'' (#/two-families). No `.jsonl` truncation ships; the "truncate" idiom lives in the logical `requests[]` view alone.
 
 ''Open verification (before donating):'' <<~ confidence 8/20 >> the ''Copilot-CLI'' adapter stands ''schema-verified, not fully bytes-verified'' — this box's lone session was empty. Its `appendOnly: true` + the `editedTurnIndices` re-emit logic read clean from the `UNIQUE(session_id, turn_index)` schema, but a ''real Copilot-CLI session'' must exercise them before the reconciler donates.
 
@@ -250,14 +250,14 @@ Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''cu
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline#time >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline#/time >>
 <<~ loulou lar:///ha.ka.ba/lares/api/corpus >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/gold-anchor >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-memory >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace#palace-instance >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;B77kZBWaGADm6Vvoj1iUjHH0wBzokOvIy9_3asEp_u4
+<<^ code:"&#x0003;" >>ni:///sha-256;dk7b7lmQtNtS-pTbCXEKYEa-AbV-yYTEs9mGw_5_pmc
 
 <<^ code:"&#x0004;" -> ? >>

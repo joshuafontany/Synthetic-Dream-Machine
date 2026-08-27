@@ -12,7 +12,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis"
 retain    = true
-role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. MEASURED CORRECTION: the CLI does NOT read narrower — the two surfaces slice DIFFERENTLY. `lares sense` carries a wide sensorium door (capture · setup · sweep · meta · teardown · quiesce/resume/holders · the durable lifecycle · the instrument set), while the MCP roster spans SEVERAL CLI verb-groups at once (vault_* · wiki · kapae belong to `lares vault`/`wiki`/`edge`, never to `sense`). Neither is a subset of the other, so `alignment` means naming the slicing rather than widening one to match. Carries the SITING LAW (#the-planes): three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and a sensorium holds operator history and DreamNet history, so it belongs to the HOUSE and stands at `<lararium>/sensoriums/<name>` (`larariumDataHome()` / `_lararium_data_home()`, one string in both tongues). Under LAR_ROOT every directory names an XDG KIND and the two houses nest inside the data kind, so an isolated root reads as the real disk with a different prefix. The teardown preflight names the one reach that stays INTENDED: the operator's own hand."
+role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. MEASURED CORRECTION: the CLI does NOT read narrower — the two surfaces slice DIFFERENTLY. `lares sense` carries a wide sensorium door (capture · setup · sweep · meta · teardown · quiesce/resume/holders · the durable lifecycle · the instrument set), while the MCP roster spans SEVERAL CLI verb-groups at once (vault_* · wiki · kapae belong to `lares vault`/`wiki`/`edge`, never to `sense`). Neither is a subset of the other, so `alignment` means naming the slicing rather than widening one to match. Carries the SITING LAW (#/the-planes): three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and a sensorium holds operator history and DreamNet history, so it belongs to the HOUSE and stands at `<lararium>/sensoriums/<name>` (`larariumDataHome()` / `_lararium_data_home()`, one string in both tongues). Under LAR_ROOT every directory names an XDG KIND and the two houses nest inside the data kind, so an isolated root reads as the real disk with a different prefix. The teardown preflight names the one reach that stays INTENDED: the operator's own hand."
 status    = "rite"
 status-why = "the tending rite; its verb surface stands verified against the live roster"
 tags      = ["api/pono/li-ki-integrities", "api/pono/sensorium-machina", "lararium/mesh/founding-runbook", "api/pono/causal-islands", "api/lararium/living-grammar-palace"]
@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/api/sensorium-runbook"
 written   = "2026-08-04"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -45,7 +45,7 @@ taken cannot be taken later''. A rite built around irreversibility teaches the w
 whose recovery move reads //do it again, watching//.
 
 ''The lore already names this rite.'' A lararium stabilizes THROUGH USE — fed daily at the shrine, food and
-drink and incense and coin; a fed node hums and a neglected one flickers (#noosphere-boot). The founding rite runs
+drink and incense and coin; a fed node hums and a neglected one flickers (#/noosphere-boot). The founding rite runs
 the consecration. ''This one runs the daily offering.''
 
 <<~/ahu >>
@@ -173,7 +173,7 @@ information than a number would; a gauge that returned 0.0 against an unfed plan
 !!! The one instruction that governs all of them
 
 ''Name the plane and the grain before reading the number.'' A figure detached from its partition reads as a
-fact about the world when it names a fact about a choice (#capacity).
+fact about the world when it names a fact about a choice (#/capacity).
 
 <<~/ahu >>
 
@@ -279,7 +279,7 @@ Run every check before the first deletion:
 
 <<~ confidence 7/20 >> ''Command spellings UNVERIFIED as a sequence'' — the verbs
 below stand confirmed on the MCP roster, and the CLI's own subcommand set reads NARROWER than this
-sequence assumes (#surface-drift). Treat the shape as load-bearing and each spelling as a claim to check.
+sequence assumes (#/surface-drift). Treat the shape as load-bearing and each spelling as a claim to check.
 
 # ''Pause live capture'' — a bulk sweep and a live hook racing produce an unreproducible corpus.
 # ''Drain the holders'' before removing anything, so no process holds a handle into a store about to
@@ -325,7 +325,7 @@ one common space. ''Reading it as a single scalar over one substrate mistypes th
 * ''Causation.'' A change point names where content changed hands, never why.
 * ''Completeness.'' Absence of a finding and absence of looking generate identically.
 * ''A verdict on a person.'' The corpus holds acts and faces; a standing gets EVALUATED from a vantage and
-  never PUBLISHED as a property (#identity-enacts-relation).
+  never PUBLISHED as a property (#/identity-enacts-relation).
 * ''Reproducibility across a re-pour with different sources.'' Comparability requires a fixed source set;
   a corpus poured from a moved target measures the move.
 * ''Its own ground, by name.'' <<~ confidence 12/20 >> The stores carry no identity for the pour
@@ -417,11 +417,11 @@ absence of finding and absence of looking generate identically.
 <<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#elyncia >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/elyncia >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;6ITcLYZS3VIX_0R2dkPKsr22Q0fEdD9SQPE3Cl89DKA
+<<^ code:"&#x0003;" >>ni:///sha-256;cXJbhLHb6FgvRjlnl1swrFENRefZEhmEzAjFgU_JDvs
 
 <<^ code:"&#x0004;" -> ? >>

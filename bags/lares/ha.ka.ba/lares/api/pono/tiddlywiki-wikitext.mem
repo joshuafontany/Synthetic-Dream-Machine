@@ -240,7 +240,7 @@ and the configuration tiddlers filter by these strings.
 
 !! The Degradation Rule
 
-The total-parse law (#the-load-bearing-property), stated as processor obligations:
+The total-parse law (#/the-load-bearing-property), stated as processor obligations:
 
 ''A parser MUST accept every input.'' Surface matching no active rule MUST survive into the parse tree
 as text; a block run opening no block rule MUST parse as an ordinary paragraph. Parsing MUST NOT fail,
@@ -270,8 +270,8 @@ A ''conforming document'': under the total-parse law every input parses, so docu
 reduces to well-formedness of the constructs a document uses — closed fences, terminated definitions,
 matched element tags. No input reads as invalid; a document only ever reads more or less well-formed.
 
-A ''core-conforming parser'' accepts every construct in the default registry (#rule-inventory),
-honours the pragma prologue, and enforces the degradation rule (#degradation). Because the parse runs
+A ''core-conforming parser'' accepts every construct in the default registry (#/rule-inventory),
+honours the pragma prologue, and enforces the degradation rule (#/degradation). Because the parse runs
 total, a core-conforming parser accepts every input — the class every embedding application can rely
 on.
 
@@ -374,6 +374,6 @@ rather than minting sibling types.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PcMQnORcAZMTmPbuCyXtj-c_y9pPnX5K-OTp7boWWUg
+<<^ code:"&#x0003;" >>ni:///sha-256;TySgKOXz-Mo4ioqQ_UYLBO7bocwZWnRgsl4Zaa68Tzs
 
 <<^ code:"&#x0004;" -> ? >>

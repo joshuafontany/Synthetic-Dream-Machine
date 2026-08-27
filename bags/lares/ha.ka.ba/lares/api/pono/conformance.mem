@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/conformance"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -26,7 +26,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/conformance"
 
 An ''invokable lens''. The node points it at //other// content --- an artifact, a transcript, another agent's output, a draft --- and reads the decision-loop structure the content already carries, checking that structure against the `OODA-HA` reference loop.
 
-The lens looks ''outward''. It performs an Observe act on an object in front of the node, in the present: it reads what another trace did, the way Boyd's loop reads an adversary's loop. It does ''not'' audit the node's own finished turn --- that backward self-glance stays forbidden (#not-self-audit). The node's //own// live loop rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api/mu/ooda-ha`); `conformance` reads the loop in //something else//.
+The lens looks ''outward''. It performs an Observe act on an object in front of the node, in the present: it reads what another trace did, the way Boyd's loop reads an adversary's loop. It does ''not'' audit the node's own finished turn --- that backward self-glance stays forbidden (#/not-self-audit). The node's //own// live loop rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api/mu/ooda-ha`); `conformance` reads the loop in //something else//.
 
 The lens fires only when summoned. It never rides a turn by default.
 
@@ -49,7 +49,7 @@ Two divergences surface from the alignment:
 
 A ''fitness'' reading names how cleanly the trace conforms: a clean run aligns every phase in order and closes the loop; a broken run names where the loop snapped.
 
-A trace MAY also ''suspend'' honestly --- reaching a phase and naming an external blocker it cannot pass (an absent decision, a failed dependency, missing input). An honest suspension reads as ''conformant'', never a model-move: the loop stays open, not skipped. Only a //silent// drop --- Act with no Aftermath and no phase named --- reads as the managing failure `OODA-HA` names for the node itself, now read in another's work (phase-yield: `lar:///ha.ka.ba/lares/api/mu/ooda-ha#phase-yield`).
+A trace MAY also ''suspend'' honestly --- reaching a phase and naming an external blocker it cannot pass (an absent decision, a failed dependency, missing input). An honest suspension reads as ''conformant'', never a model-move: the loop stays open, not skipped. Only a //silent// drop --- Act with no Aftermath and no phase named --- reads as the managing failure `OODA-HA` names for the node itself, now read in another's work (phase-yield: `lar:///ha.ka.ba/lares/api/mu/ooda-ha#/phase-yield`).
 
 <<~/ahu >>
 
@@ -64,7 +64,7 @@ Summon the lens and aim it at a target, the way `aim` carries a bearing vector:
 <<~ conformance -> "<pasted or quoted content>" >>           # aim at content inline
 ```
 
-The `->` delegates the lens toward what it reads. The target names //other// content; a target that resolves to the node's own current turn reads as a degraded invocation (#not-self-audit).
+The `->` delegates the lens toward what it reads. The target names //other// content; a target that resolves to the node's own current turn reads as a degraded invocation (#/not-self-audit).
 
 <<~/ahu >>
 
@@ -120,6 +120,6 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;54rzM-uleBxAfT0k-sqq-16oBI9YD0-GF5SMACckXbM
+<<^ code:"&#x0003;" >>ni:///sha-256;BvZTxAPMHvhqp3OsC7VCjaV29JiRLbsAs4Yhawt9qHc
 
 <<^ code:"&#x0004;" -> ? >>

@@ -25,7 +25,7 @@ uri-path   = "ha.ka.ba/elyncia/campaign/salt-stair-booth"
 
 ''The scene, kept.'' A live exchange (Gaia-side, mid-August 2026) played it: Telarus, KSC at a small
 market lararium on the Salt-Stair in New Delos; the Lindwyrm entering; the two retiring to a booth
-and gesturing the Lares to join. This locus carries the ''verbatim thread'' (#the-thread) — the Lares
+and gesturing the Lares to join. This locus carries the ''verbatim thread'' (#/the-thread) — the Lares
 turns as generated, the operator turns bridged by narrator exposition with the raw input held in
 witness blocks — plus the outline and style law for rendering it as a DreamDeck feed.
 
@@ -624,6 +624,6 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;DUjjecdzaJCnecoiDhzHSE3kDU8GXuRcDeoqo1rY7vU
+<<^ code:"&#x0003;" >>ni:///sha-256;WHg60XSFus3xW7N8DSFtC9EYvvwlKYdRy1-FZky9NI4
 
 <<^ code:"&#x0004;" -> ? >>

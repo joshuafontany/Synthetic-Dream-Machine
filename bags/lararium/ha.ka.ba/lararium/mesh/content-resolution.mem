@@ -19,7 +19,7 @@ uri-path   = "ha.ka.ba/lararium/mesh/content-resolution"
 written    = "2026-07-19"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -98,7 +98,7 @@ WHO-axis recurring at the blob layer — carries the ruling law: ''the publicity
   engine and genesis blobs by CID
   (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>).
 
-''The publicity plane sets the structural FLOOR the sharing-posture reads'' (#cap-tier): a `@crossroads`
+''The publicity plane sets the structural FLOOR the sharing-posture reads'' (#/cap-tier): a `@crossroads`
 public plane floors at PUBLIC, a `@catalog` sealed plane floors at CONTRACT, a cleartext-local plane at
 VEIL — `structuralFloorFor` consults these SAME federatable + seal oracles, and a declared tier may only
 tighten below the floor it names.
@@ -107,7 +107,7 @@ tighten below the floor it names.
 choice of addressing every body by ciphertext or by plaintext — the ''PLANE sets the mode''.
 And ''even public keeps the gate'' —
 "public" reads as a ''generous anonymous grant'', `pull` ≠ `read`; the three gates
-(#resolve-by-cid) stay intact, publicity only sets how generous gate-2 grows.
+(#/resolve-by-cid) stay intact, publicity only sets how generous gate-2 grows.
 
 ''Tier-general mechanics'' (every plane carries these): big-on-fs, small-inline (~16KiB,
 Iroh); the blob carries a ''BLAKE3 outboard'' for range-verify; a ''self-describing''
@@ -131,7 +131,7 @@ same WHO-axis that tiers a bag tiers its bytes.
 Matrix's leaked-URL sin fused //may-talk//, //may-resolve//, and //may-read// into one
 URL. This resolver keeps them ''three orthogonal gates'', none collapsing into another:
 
-* ''Gate 1 — may-this-peer-talk (transport).'' FederationGate allowlist (#49) +
+* ''Gate 1 — may-this-peer-talk (transport).'' FederationGate allowlist (#/49) +
   DaemonAuthGate Ed25519 proof-of-possession.
 * ''Gate 2 — may-this-identity-resolve-THIS-cid (content-authz).'' A `#has` cap scoped
   `{peer × address}`, validated UCAN-shape (aud==next-iss → sub=holder) against a grow-only
@@ -139,7 +139,7 @@ URL. This resolver keeps them ''three orthogonal gates'', none collapsing into a
 * ''Gate 3 — may-they-read (decrypt).'' CGKA/BeeKEM decrypt, ''held SEPARATE'' — the node
   routes and verifies ciphertext and ''never decrypts''. That IS the
   MLS-Delivery-Service-never-decryptor keel, the node-never-Auth-root law
-  (<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#contract-key-agreement >>).
+  (<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#/contract-key-agreement >>).
 
 Between gate 2 and gate 3 the resolver ''walks a chain'': local `cid/` store →
 hint-named provider (Iroh BlobTicket = hash + NodeAddr, the discovery collapsing into the
@@ -198,7 +198,7 @@ stays ''behind a causal-island boundary''
 shape: a well-known per-nexus ROOT/INDEX `docId` names a ''rendezvous ADDRESS, not a''
 ''shared present'' — each peer materializes its own converging causal island over the
 address; the address coordinates, the state stays local-first, ''no-global-now enacted, not''
-''breached'' (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance#board-model >>).
+''breached'' (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance#/board-model >>).
 Per-nexus on ownership and scale (never one global board); steward-signed source →
 verify-only public read; ''forkable'' — the fork guards.
 
@@ -222,7 +222,7 @@ tier.
 !! Revocation ~ two modes, already-fetched unrecallable
 
 Revocation runs two modes, matching `convergent-mesh`'s epoch-lease-vs-convergent-removal
-(<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#two-revocation-modes >>):
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#/two-revocation-modes >>):
 
 * ''authz-revoke'' — drop the `#has` cap + drop the retention tag. Cheap,
   forward-immediate.
@@ -296,6 +296,6 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fJ5xnCQy44kb7I7NTBVKquFPiU6HcDH2vtbvet_aiuY
+<<^ code:"&#x0003;" >>ni:///sha-256;GR_uCcFaMUOEdnIv1r8vpdIBtf9ahbQdZd9Z1Z0RzbE
 
 <<^ code:"&#x0004;" -> ? >>

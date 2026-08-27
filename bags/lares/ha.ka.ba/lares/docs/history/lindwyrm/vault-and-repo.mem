@@ -13,7 +13,7 @@ register      = "Synthesis"
 render-target = "chat-log:post-header"
 retain        = true
 role          = "DreamDeck narrative locus — Act I of the Lindwyrm hoard story"
-source        = "lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#act-i-vault-repo"
+source        = "lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#/act-i-vault-repo"
 type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo"
 ```
@@ -35,7 +35,7 @@ The Lindwyrm finds the wrong kind of treasure and therefore the right kind of su
 
 Drafted from:
 
-* `lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#act-i-vault-repo`
+* `lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture#/act-i-vault-repo`
 * `lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture`
 * `lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed`
 
@@ -203,6 +203,6 @@ Act II receives:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5WC3QeXHQFJncsvi4cf9FuT2nfkd-D3DP4x5k6qwbwU
+<<^ code:"&#x0003;" >>ni:///sha-256;1Aokstws2nJW2LdqocUQt-hagEvLUJUlWbOer-XkBpM
 
 <<^ code:"&#x0004;" -> ? >>

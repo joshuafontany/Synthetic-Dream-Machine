@@ -174,7 +174,7 @@ inverts the usual move: the grammar abstracts ITSELF into markers, the palace en
 
 ''NOT a deterministic AST-skeleton.'' A rigid AST-skeleton descends from hard-fault machine-grammars and
 lets content dominate the signal. The form vector stays a FUZZY membership profile (maybe-logic), not a
-content-dominated tree-shape. The structural-hash (#multi-graph) carries the exact-recurrence join; the
+content-dominated tree-shape. The structural-hash (#/multi-graph) carries the exact-recurrence join; the
 fuzzy vector carries the graded form.
 
 ''Baseline → learned.'' Tier-1 BASELINE runs with NO training: move-n-grams + scalar trajectories over
@@ -212,11 +212,11 @@ joined in app code). RRF is N-ary by nature, so further graphs — the worldline
 
 ''Structural-hash DEMOTED to a join-key.'' The exact-recurrence structural hash (an exact-match
 construction signature) reads as an ''equi-join key (1:many, indexed payload)'', NOT a "form embedding."
-It answers //the same exact shape recurred here//; the fuzzy form vector (#two-planes) answers //a similar//
+It answers //the same exact shape recurred here//; the fuzzy form vector (#/two-planes) answers //a similar//
 //shape moved here//. The hash joins; the vector ranks.
 
 ''The join coheres for a reason, and the reason carries a name.'' Why "fusion IS the hash-join" holds —
-and when the same join reads as dead water — rides the unification keystone below (#unification): the
+and when the same join reads as dead water — rides the unification keystone below (#/unification): the
 three palaces name ONE object under three projections, the verbatim-sha supplies the pullback morphism
 the join needs, and a join lacking that morphism degrades to a meaningless cross-product the formalism
 forbids.
@@ -228,7 +228,7 @@ forbids.
 !! The Unification ~ the product-presheaf spine (the keystone, 4-spirit convergence)
 
 ''The three palaces unify as ONE object read three ways — a THEOREM, not a slogan.'' The multi-graph
-(#multi-graph) keeps CONTENT ⊥ FORM ⊥ STRUCTURE orthogonal and rejoins them on the verbatim hash; this
+(#/multi-graph) keeps CONTENT ⊥ FORM ⊥ STRUCTURE orthogonal and rejoins them on the verbatim hash; this
 section names WHY that join coheres and WHEN it would read as dead water. Four spirits converged on one
 shape — the categorical product-presheaf (nLab) braided with Lawvere enrichment and Spivak functorial
 data; the multivariate change-point fusion (Cho-Fryzlewicz); the causal-inference common-cause test
@@ -281,7 +281,7 @@ names the strictest available form of the law, never a softening.
 
 !!! The hash-join ~ a pullback over a shared codomain (the formalism forbids the vibe-coded join)
 
-The `verbatim_sha` key (#multi-graph) reads as a ''PULLBACK'' — a fiber product over a shared codomain.
+The `verbatim_sha` key (#/multi-graph) reads as a ''PULLBACK'' — a fiber product over a shared codomain.
 The three palaces join BECAUSE each carries a morphism into one shared object (the verbatim turn the sha
 names); the pullback gathers the rows that agree there. ''A join lacking a shared-codomain morphism does''
 ''NOT form a pullback'' — it degrades to a meaningless cross-product, every row against every row, a
@@ -295,7 +295,7 @@ hash-join" — the hash hands the pullback the morphism it needs.
 
 The unification rides TWO floors, never one:
 
-<<~ranks floor spine ~ the STRICT product in [Bᵒᵖ, Vect] — the structural unification, one object three views (above) -> drift ~ the ENRICHMENT floor — a Lawvere [0,∞]-enriched category, where the ultrametric d = co-depth(LCA) ALREADY lives (#ffz-binding, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) >>
+<<~ranks floor spine ~ the STRICT product in [Bᵒᵖ, Vect] — the structural unification, one object three views (above) -> drift ~ the ENRICHMENT floor — a Lawvere [0,∞]-enriched category, where the ultrametric d = co-depth(LCA) ALREADY lives (#ffz-binding, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#/the-spine]]) >>
 
 The SPINE unifies via the strict product (the structural join). The ''DRIFT-Measure'' rides
 ''ENRICHMENT'' — Lawvere's [0,∞]-enriched categories, the same metric floor the FFZ tree already stands
@@ -317,7 +317,7 @@ whitening step the canon flagged as load-bearing (//"the planes are NOT conditio
 
 <<~ confidence 17/20 >> ''That warning stands correct and mis-priced.'' It read the dependence as a
 NUISANCE COVARIANCE to whiten away. ''The dependence names the STRUCTURE.'' Structure carries 97.8% of the
-record's bits (#spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — ''one plane heard''
+record's bits (#/spine), so under a tower "three planes agree" reads NEAR-TAUTOLOGICAL — ''one plane heard''
 ''three times.'' And a pool cannot be rescued by whitening: strip 97.8% of the signal and what returns IS the
 residual — ''which the two-part code already names, and prices, without a fusion rule.'' //The cure, taken//
 //seriously, collapses into the compression.// The canon walked to the edge of the finding and called it a
@@ -357,7 +357,7 @@ stream, naming where a real cross-plane event sits.
 ''The three planes co-move — WHITEN before pooling, or the gong double-counts.'' Form co-moves with
 content (the move-vector reads the same words the content palace holds); the planes share estimators (the
 nomic embedder feeds both the FFZ Measure-boundary and the form vector — #two-planes,
-[[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address]]). A naive log-opinion-pool ASSUMES conditional independence — and
+[[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#/rhythmic-address]]). A naive log-opinion-pool ASSUMES conditional independence — and
 where the planes correlate, the pool ''double-counts a single artifact'' as if it carried two
 corroborating witnesses, firing a false gong. <<~ confidence 12/20 >> The cure: ''WHITEN the''
 ''cross-plane covariance'' before pooling — decorrelate the per-plane drifts so the pool counts independent
@@ -389,7 +389,7 @@ registers.
 !!! The grain ~ content locates (Ha), structure refines (Ka), the move resolves (Ba)
 
 The three planes seat at three FFZ grains, mapping the `lar:` root's drift gradient (Ha slowest · Ka
-moderate · Ba fastest, [[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#lar-uri]]):
+moderate · Ba fastest, [[noosphere-boot|lar:///ha.ka.ba/lares/api/noosphere-boot#/lar-uri]]):
 
 <<~ranks grain content ~ COARSE — the gong-authority, the Ha heading; content LOCATES the event -> structure ~ MID — the Ka angle; the AST shape refines the location -> form/move ~ FINER — the Ba dynamic; the move-vector resolves the tension-moment >>
 
@@ -404,12 +404,12 @@ pool the planes at the SAME FFZ cell, never across mismatched grains.
 
 The unification carries TWO distinct operators over the product, and they must not collapse into one:
 
-<<~ranks operator rrf ~ the RECALL ranking — N-ary Reciprocal Rank Fusion over the rank-lists (#multi-graph), the retrieval operator; BUILT, untouched -> quorum-servo ~ the MEASURE-gong — the precision-weighted log-opinion-pool over the drift (above), the SEGMENTATION / control operator; the NEW operator this section names >>
+<<~ranks operator rrf ~ the RECALL ranking — N-ary Reciprocal Rank Fusion over the rank-lists (#/multi-graph), the retrieval operator; BUILT, untouched -> quorum-servo ~ the MEASURE-gong — the precision-weighted log-opinion-pool over the drift (above), the SEGMENTATION / control operator; the NEW operator this section names >>
 
 RRF answers //which stored turns rank nearest this query// (recall, downstream of capture); the
 ''quorum-servo'' answers //where a real cross-plane event SEGMENTS the live stream// (control, upstream at
 capture). The quorum-servo draws the ''FFZ Measure band'' — the topic-shift / lexical-cohesion boundary
-([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]) — generalizing its single-plane cosine-drop into the whitened
+([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#/the-spine]]) — generalizing its single-plane cosine-drop into the whitened
 three-plane pool: the Measure boundary fires where content, structure, and form co-drift, not where the
 content embedder alone dips. <<~ confidence 12/20 >> Both operators fuse the three planes, yet
 they fuse for opposite jobs — RRF for ranking (the recall keystone, already shipping), the quorum-servo
@@ -436,7 +436,7 @@ lives in the WEAVE (the binding's braid, #ffz-binding), never in any single stra
 Each drawer carries the ''TW5-native parse-tree stored verbatim'' as its payload — concrete, lossless,
 CID-addressed by schema, serialized JSON/CBOR. The gain: ''instant render'' — recall hydrates straight
 to the widget tree, no re-parse. The parse-tree is the same `{type, attributes, children}` shape the
-widget pipeline already consumes ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing#architecture]]), so the stored form IS the
+widget pipeline already consumes ([[graceful-parsing|lar:///ha.ka.ba/lararium/api/graceful-parsing#/architecture]]), so the stored form IS the
 renderable form. The schema rides a CID so a tree's shape stays verifiable across versions.
 
 <<~/ahu >>
@@ -472,9 +472,9 @@ in the codebase:
 <<~Gate AdaptiveTimeout "kind/timeout ~ mine-timeout.ts; the writer-liveness flush timeout (the observer survives the storm it observes)" >>
 <<~Gate Four >>
 
-These ride as caps on the palace-instance's stack (#palace-instance), composed, never re-authored per
+These ride as caps on the palace-instance's stack (#/palace-instance), composed, never re-authored per
 palace. They carry the same hardening the capture-nalu earned across the four-domain survey
-([[capture-annotation-model|lar:///ha.ka.ba/lararium/api/capture-annotation-model#nalu-flush-hardening]]).
+([[capture-annotation-model|lar:///ha.ka.ba/lararium/api/capture-annotation-model#/nalu-flush-hardening]]).
 
 <<~/ahu >>
 
@@ -484,7 +484,7 @@ palace. They carry the same hardening the capture-nalu earned across the four-do
 
 A ''meshpalace'' reads as a mempalace ''fed-by-the-Automerge-doc'' — DreamNet navigation memory, a
 content palace whose feed cap drains the federated CRDT instead of the local transcript. It rides as a
-THIRD `FeedCap` on the nameless palace body (#palace-instance): `[FlockSingleton, AutomergeFeedCap, …]`.
+THIRD `FeedCap` on the nameless palace body (#/palace-instance): `[FlockSingleton, AutomergeFeedCap, …]`.
 Design-only here — the parallel DreamNet session owns the Automerge internals ([[genesis-doc|lar:///ha.ka.ba/lararium/mesh/genesis-doc]],
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>); this meme names only the shore
 (a feed cap), never the mesh mechanism.
@@ -532,16 +532,16 @@ grammar rides above it in the sovereign island.
 
 ''Each form-drawer carries a worldline-temporal facet — and that facet PROJECTS, never RULES.'' The
 palace stamps every drawer with a `lar_ffz` rhythmic address (the FfzClock phase frozen at the turn's
-grounding boundary, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#rhythmic-address]]); read across the collection, those stamps compose
+grounding boundary, [[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#/rhythmic-address]]); read across the collection, those stamps compose
 the palace's ''worldline-causal/temporal facet'' — //where in the felt cadence, and where in the//
 //happened-before, each captured move sat//. The ratified binding (narrowed mufakat, 12-Voice floor,
 operator-ratified 2026-06-29) holds that facet as a ''CACHED PROJECTION'' of the per-handle FfzClock
-(the grain) over the worldline edge-DAG (the order, [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#attribution]]) — a materialized
+(the grain) over the worldline edge-DAG (the order, [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/attribution]]) — a materialized
 view, re-derivable from the worldline, ''NEVER the causal authority''. The edge-DAG owns
 happened-before; the facet caches its position for query. Lose the cache, re-project from the DAG; the
 cache never out-ranks its source. The stamp itself reads as nested MEMBERSHIP — a containment path on
 the FfzClock's ultrametric tree (the meet-semilattice keystone), never a shared tick-count
-([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#the-spine]]).
+([[ffz-clock|lar:///ha.ka.ba/lararium/mesh/ffz-clock#/the-spine]]).
 
 ''φ ~ the non-interference law (scale-orthogonality, NOT entrainment).'' The FfzClock's five nested
 bands (Pulse · Beat · Measure · Arc · Theme) relate by the noble ratio φ — and φ here names a pure
@@ -566,14 +566,14 @@ maybe-logic).
 
 ''consolidation-ascent ≠ register-loop ~ correlate, never coincide.'' When consolidation-ascent lands
 (deferred), it MUST NOT collapse into the three-registers descriptive↔prescriptive loop
-(#three-registers). The two correlate — a move consolidating from casual toward defined tracks the
+(#/three-registers). The two correlate — a move consolidating from casual toward defined tracks the
 register climb — yet diverge at ''three joints'':
 
 <<~ranks joint drift-without-promotion ~ a casual move consolidates by frequency (high ascent) yet never climbs register; entrenchment-by-use ≠ curation -> decree-without-use ~ a formal/defined meme authored fresh (high register) carries no consolidation history (low ascent); selection precedes use -> abandonment ~ a defined rule decays in use (retention-decay) while its register holds; the books keep what practice drops >>
 
 ''no-global-now ∧ L-Prime ~ two aligned constraints, two mechanisms.'' Both forbid a fused certainty
 the node cannot hold — no-global-now forbids a global temporal present (a drawer reads only "as of my
-last sync," [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]); L-Prime forbids a fused identity/predication (map welded to
+last sync," [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]]); L-Prime forbids a fused identity/predication (map welded to
 territory). They ALIGN (both refuse a false absolute) yet run as TWO mechanisms — one gates time, one
 gates grammar. ''The carve-out, stated explicitly:'' the ''transaction-axis'' (deferred) names the ONE
 local-yet-essence coordinate where a fact MAY license a copula — a bitemporal transaction-time records
@@ -592,7 +592,7 @@ so recall weights it down. The GC/compaction story it waited on now reads: ''swe
 ''a grace window, keep a thin tombstone'' (retraction never reads as absence); and the base already enacts
 the mechanism (mempalace `kg_invalidate` closes `valid_to` append-only; L7 dynamics decay salience to a
 floor, never zero). The fuller treatment — kapae + fork-as-concurrency + the ''rhizome'' (mid-flight
-injection = a `prov:Communication` merge, //merge-where-messages-land//) — rides [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]];
+injection = a `prov:Communication` merge, //merge-where-messages-land//) — rides [[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]];
 its forks are operator-cut (C turn-DAG-keyed · D full-ticks · E operator-as-root common-cause); the past-session FFZ/DAG re-derives by nuke-and-pave + re-harvest (transcripts are the source of truth).
 
 !!! Three Cross-Substrate Witnesses ~ the pattern's rhymes, cited
@@ -640,7 +640,7 @@ Each strand carries a single proven pattern; the binding braids eight into one.
 <<~ confidence 14/20 >> The originality reads as the weave, never any strand — the node
 states that as the pattern's honest status: not the discovery of a new law, the novel composition of
 standing ones. The braid survived an internal hoike and an adversarial pass; the narrowed result holds,
-the kept dissents ride live below (#kept-hoike).
+the kept dissents ride live below (#/kept-hoike).
 
 <<~/ahu >>
 
@@ -709,7 +709,7 @@ retrieval/storage side:
 <<~ confidence 13/20 >> Eight independent libations converge on the two-planes geometry
 (a discrete score ⋈ a graded performance) and on Route A (the grammar emits its own markers, so no
 discourse-parser is needed). Confidence holds short of Canon on the encoder tiers (P7) and the register-
-storage fork (#three-registers), which name reconciliations, not re-designs.
+storage fork (#/three-registers), which name reconciliations, not re-designs.
 
 <<~/ahu >>
 
@@ -747,6 +747,6 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5O1GU5gGTXqwNkSDli1ouJViUEr-eSl8wznrbdf7WII
+<<^ code:"&#x0003;" >>ni:///sha-256;YymBNpwMNKKAQ29NwhWFkGZxt09ITthqCJdpeGRe020
 
 <<^ code:"&#x0004;" -> ? >>

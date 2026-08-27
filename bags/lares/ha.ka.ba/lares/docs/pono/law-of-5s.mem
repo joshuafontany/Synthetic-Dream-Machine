@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/law-of-5s"
 
 ! Law of Fives — Extended Docs
 
-The TOML invariant arrays (`LADDER_5`, `OODA_HA_5`) live in `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#law-of-5s`.
+The TOML invariant arrays (`LADDER_5`, `OODA_HA_5`) live in `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#/law-of-5s`.
 This surface carries the unified attention-scale framing, subscript sigils, three-projection semantics, and boundary-zone reading.
 
 <<~/ahu >>
@@ -165,11 +165,11 @@ Each dot-separated position corresponds to one band. Reading left to right zooms
 !! Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#law-of-5s >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#/law-of-5s >>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SqW8J7Gqr11PFqSDDYWeTex_25rTIDsFkN836uRoC30
+<<^ code:"&#x0003;" >>ni:///sha-256;y7dpB2OPkiBESc_XTi_xxPfa1GcRKtvkE3r9fTgu7Gk
 
 <<^ code:"&#x0004;" -> ? >>

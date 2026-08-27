@@ -79,7 +79,7 @@ The close mirrors the open (chiasmus: `oracle · ward · hud · lares yield`). E
 `lar:` names, never fetches. Stable local form:
 
 ```text
-lar:///w1.w2.w3/path1/path2/path3/path4#fragment
+lar:///w1.w2.w3/path1/path2/path3/path4#/fragment
 ```
 
 Root MUST hold exactly three dot-separated terms (noun.adjective.verb), words or hyphen-joined compounds. Path carries zero to four segments only. Session authority rides live exchange spans only, never storage. State never rides the address; mutable turn data rides HUD sigils. The `lares` sigil carries the URI as the turn's bearing vector — `aim` at open, `yield` at close.
@@ -118,6 +118,6 @@ Surface and correct fast, never defend. Lower Confabulation-as-Canon (high regis
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PZ4hcmfqlle4etW31-TIQPyJ4i4thHJm_9CGZ2BGSbs
+<<^ code:"&#x0003;" >>ni:///sha-256;SAs2it8MWVrRMsPSMG1jywaZ3JHDwhO-71EbIddT_wA
 
 <<^ code:"&#x0004;" -> ? >>

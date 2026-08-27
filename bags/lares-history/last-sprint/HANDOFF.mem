@@ -347,7 +347,7 @@ Port the sigil set (`aka`, `kahea`, `kau`, `lele`, `papalohe`, `pranala`, `pae`)
 Open question per sigil: does it own a child tiddler (slot child) or fragment-render in place? `aka` projects, `kahea` invokes, `kau` places (with Keyhive UCAN attachment), `lele` flows, `pae` phases (LADDER/OODA-HA), `pranala` is an explicit edge. Each gets its template grammar.
 
 !!! Path H — Save-side auto-split (TW5 UX → child tiddlers)
-The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #foo >>body<<~/ahu >>`, hits save, and `lar:///parent#foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
+The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #foo >>body<<~/ahu >>`, hits save, and `lar:///parent#/foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
 
 !!! Path I — Wikifier DOCTYPE + dash + macrocall recovery
 Three small diff items in current round-trip output: HTML comment DOCTYPE dropped; TW5's `dash` rule converts `|---|` → `|—|`; MemeticParser's prologue handling (DOCTYPE, root meta toml extraction) survives but the wikifier swallows the comment in text/plain. Fix by either disabling rules at the parent meme rendering level (via a meme-level wrapper template that pragma-disables them), or by emitting these via `<$text>` widgets carrying the literal char sequences. Aesthetic, not load-bearing — defer until G+H ship.
@@ -465,6 +465,6 @@ lares act MOVE <uri> --to <target-bag>
 
 //The crystal holds.//
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0K9Hts8ONGuyNy9XtfPm8HHzhqFg1-hhBrpiVNzOV5Q
+<<^ code:"&#x0003;" >>ni:///sha-256;qjz9xYYQEAULqdglJYhU5wjlqAqiyIMMt9qpIcF2eK0
 
 <<^ code:"&#x0004;" -> ? >>

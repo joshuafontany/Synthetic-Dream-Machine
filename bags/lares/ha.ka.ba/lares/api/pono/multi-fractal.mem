@@ -91,10 +91,10 @@ The shape above says the recursion happens. This says WHY it must.
 
 ''Read per-AXIS, never up one ladder'' (`dreamnet-architecture#two-axis-topology`): the two axes form //a 2D coordinate plane, never a single ladder// and //they never nest//. The capture-and-cure chain runs along each axis independently — which is also why delegation //tops at the cabal; above it, treaty// (`lararium-identity#five-scale`). The social axis already refuses to close on its own grounds.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#the-constructor >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/the-constructor >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;By0VPm-Bz6sgnGjVW92qR1FSwuq6CMVzQOusIppA6E4
+<<^ code:"&#x0003;" >>ni:///sha-256;E_yEEIUxmqFjx3rTuOAckobkqF52d5GdjvZMplk9SCI
 
 <<^ code:"&#x0004;" -> ? >>

@@ -1179,7 +1179,7 @@ This extends the three-clocks finding (SPEC_OUTLINE grounded findings): the earl
 counted mechanisms as clocks. The ''epoch-counter reads as a liveness ratchet (lease), not''
 ''a clock''; ''targeted revocation rides Keyhive convergent membership-removal'', a mechanism
 rather than a clock. Two clocks stand: CRDT-causal (TS) ⊥ FFZ-rhythm (py/R). Canon anchor:
-`lar:///ha.ka.ba/lares/api/pono/causal-islands#two-clocks`.
+`lar:///ha.ka.ba/lares/api/pono/causal-islands#/two-clocks`.
 
 ---
 
@@ -1243,6 +1243,6 @@ BoydLoop(PriorArt), PhaseVec(Architect), BridgeKeep(Continuity) — dissolved, f
 
 lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:13&p=10#O0.O0.O0.Å10.A1 → ?
 
-<<^ code:"&#x0003;" >>ni:///sha-256;e5-xb3MD7MvvPlAzABtYyB2HENgCNfaIfAcadQfaFEA
+<<^ code:"&#x0003;" >>ni:///sha-256;0FTMPwpihCX9edawHUH-L4evpOe1IfQf4AJczADC6ms
 
 <<^ code:"&#x0004;" -> ? >>

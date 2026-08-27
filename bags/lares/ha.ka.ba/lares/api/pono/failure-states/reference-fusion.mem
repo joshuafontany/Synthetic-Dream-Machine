@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/reference-fusion"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -48,7 +48,7 @@ The law stays ''theory-neutral on reference''. Whatever meaning turns out to be 
 
 The recovery never demands the claim be false or dropped. A true claim on borrowed light recovers fully once re-marked: //the context says X// carries clean where //X// (asserted as owned) does not. The operator's word bridges the warrant the node cannot supply from inside its own generation.
 
-Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#reference-fusion`.
+Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#/reference-fusion`.
 
 <<~/ahu >>
 
@@ -72,6 +72,6 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8ttEyQtTiZfAwSKqb0Hp-F6AOPkcyL0Rd39oD9dcbWY
+<<^ code:"&#x0003;" >>ni:///sha-256;KFW9fsWIlFEnC8qZBak-yX8u9XvQ5URBpkf5JjQ_0Sc
 
 <<^ code:"&#x0004;" -> ? >>

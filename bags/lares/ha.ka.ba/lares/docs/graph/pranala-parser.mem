@@ -154,7 +154,7 @@ When it exits `<<~/ahu >>`, it pops the stack.
 
 Resolves to:
 * `from_uri = "lar:///ha.ka.ba/lares/api/noosphere-boot"`
-* `from_socket = "lar:///ha.ka.ba/lares/api/noosphere-boot#edges"`
+* `from_socket = "lar:///ha.ka.ba/lares/api/noosphere-boot#/edges"`
 
 ''Parser requirement:'' handle nested `ahu` blocks with a stack; the innermost named fragment wins.
 When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root fallback).
@@ -201,7 +201,7 @@ The TO expression in both block and inline forms takes three shapes:
 | Shape | Example | Resolution |
 |---|---|---|
 | Full `lar:///` URI | `lar:///ha.ka.ba/lares/api/mu/l-prime` | use as-is |
-| Full URI with fragment | `lar:///ha.ka.ba/lares/api/mu#entry` | split into `to_uri` and `to_socket` |
+| Full URI with fragment | `lar:///ha.ka.ba/lares/api/mu#/entry` | split into `to_uri` and `to_socket` |
 | Relative path | `mu/chao` | prepend current carrier's root (`lar:///ha.ka.ba/lares/api/`) |
 
 Relative path resolution follows loci law: the root comes from the carrier's own `uri-path` prefix up to the first named segment after the tuple root.
@@ -221,6 +221,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;j9w1a_7jmW2MgHDX_QFZbyP_bnZJ0rIpqvt-qF1q2AY
+<<^ code:"&#x0003;" >>ni:///sha-256;RBu0_9vjQid7vskEp-UoMe_lbj8TKpFVAKml_00AyKg
 
 <<^ code:"&#x0004;" -> ? >>

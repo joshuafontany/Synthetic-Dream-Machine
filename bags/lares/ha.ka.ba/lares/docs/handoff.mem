@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/handoff"
 written   = "2026-06-19"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -191,7 +191,7 @@ The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/
 
 ''Co-projection (the ontology, one breath):'' the operator's mind originates; disk carriers and the CRDT record-set both //project// it, each in native grain; ''merge authority routes through the CRDT alone''. Full law: `disk-projection`. The grain ladder: disk = whole carriers · doc = tid-grain records · VM = decomposed.
 
-''The @oracle carve (2026-06-16):'' the runtime system island split from the corpus is ENACTED in code — `@oracle` carries the engine + system oracle, `@lararium` is pure tracked corpus, the seed tree stays clean across re-genesis. The two-plane pointer/recipe wiring (#next-vector) is RULED + canon-carried, code-enactment owed. Automerge upgraded to 3.2.6 / repo 2.6.0-alpha.2 (self-merge boot crash fixed).
+''The @oracle carve (2026-06-16):'' the runtime system island split from the corpus is ENACTED in code — `@oracle` carries the engine + system oracle, `@lararium` is pure tracked corpus, the seed tree stays clean across re-genesis. The two-plane pointer/recipe wiring (#/next-vector) is RULED + canon-carried, code-enactment owed. Automerge upgraded to 3.2.6 / repo 2.6.0-alpha.2 (self-merge boot crash fixed).
 
 ''Doctrine, by pointer:'' every law lives in its own meme — walk #edges.
 
@@ -246,7 +246,7 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 !! How this operator works (hard-won, honor it)
 
-''The inverse of these, as durable law.'' This file updates at each phase boundary and never archives in place, so the FAILURE modes these positives guard against live in canon instead: <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states#index >> — the craft axis names the invented ripple, the protective optional, the table that hides a plane, minting over a retirement, and not walking before minting. Each carries its own measured instance and its own diagnostic.
+''The inverse of these, as durable law.'' This file updates at each phase boundary and never archives in place, so the FAILURE modes these positives guard against live in canon instead: <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states#/index >> — the craft axis names the invented ripple, the protective optional, the table that hides a plane, minting over a retirement, and not walking before minting. Each carries its own measured instance and its own diagnostic.
 
 * ''OODA-HA plans out loud before flow''; YIN passes after landing; burrs taken immediately ("no friction for later snags").
 * ''Commits: ASK FIRST, every commit'' — two parallel sessions share the tree (bags + packages). Subject line = the `lar:///three.term.root` URI; always explicit pathspecs (`git commit --only -- <paths>`); NEVER commit blind.
@@ -272,6 +272,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VHt2BRpK2VPzkUBIa_W9-BF4vIuV0Z1D-7ywO50oh9M
+<<^ code:"&#x0003;" >>ni:///sha-256;JD5gg0wYzbulV2zV2pWIX9hcSW4VxM6FoojL8rD-hSc
 
 <<^ code:"&#x0004;" -> ? >>

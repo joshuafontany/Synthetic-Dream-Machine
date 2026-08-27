@@ -181,7 +181,7 @@ JSON-RPC and MCP show how to specify runtime packets and capability negotiation 
 
 These design tests emerge from the prior-art comparison against TiddlyWiki, XInclude, DITA, AsciiDoc, Jekyll, Hugo, XSLT, and MediaWiki, and shaped the v5 spec rebuild.
 
-The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` carries these verdicts: TW5-transclusion lineage (#introduction), an operational rule-table model plus an ABNF surface grammar (#grammar), XML-style closure discipline (#lexical-structure), fragment + media-type semantics (#media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#scope-model). The remaining open tests ride Annex B.
+The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` carries these verdicts: TW5-transclusion lineage (#/introduction), an operational rule-table model plus an ABNF surface grammar (#/grammar), XML-style closure discipline (#/lexical-structure), fragment + media-type semantics (#/media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#/processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#/scope-model). The remaining open tests ride Annex B.
 
 <<~/ahu >>
 
@@ -194,6 +194,6 @@ The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wi
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;g5QtZLUrMrSSMCNt9UHvNV_ZhiV-3RidAhPY8gtxY00
+<<^ code:"&#x0003;" >>ni:///sha-256;_AbUlt6nYLqR9ZvlSRUZBpsTN28Kt-DDmIChuBwTFlk
 
 <<^ code:"&#x0004;" -> ? >>

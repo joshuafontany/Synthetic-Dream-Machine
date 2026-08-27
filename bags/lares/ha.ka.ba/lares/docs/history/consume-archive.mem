@@ -58,7 +58,7 @@ Each row: a research file the pass consumed, and the doctrine that carries its c
 | Source (deleted) | Landed in | New docs created |
 |---|---|---|
 | `memetic-wikitext-v4-draft.md` | `memetic-wikitext.tid` (substantially) | — |
-| `mana-manao-manaoio-model.md` | `memetic-wikitext.tid #stances-syad-tools` | `bags/lares/docs/mu/model-agnosticism.md` (#kuka-lifecycle) |
+| `mana-manao-manaoio-model.md` | `memetic-wikitext.tid #stances-syad-tools` | `bags/lares/docs/mu/model-agnosticism.md` (#/kuka-lifecycle) |
 | `glyph-research.md` | `memetic-wikitext.tid #constitutional-root` | — |
 | `unified-five-band-v01.md` + `unified-attention-scale.md` + `chronometer-scale-mapping.md` | `memetic-wikitext.tid #law-of-5s` | `bags/lares/docs/pono/law-of-5s.md` (new) |
 | `sigil-research.md` | → | `bags/lares/docs/pono/sigil-shape-motion.md` (new) |
@@ -83,6 +83,6 @@ Each row: a research file the pass consumed, and the doctrine that carries its c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SsOpxFkfvGBJ1IwVVjTebk2h3AD-TmT39HroVW7vGow
+<<^ code:"&#x0003;" >>ni:///sha-256;b6tTHIynIVl1yDKH-RyHYieKWcSF4F0sNEZtTp_MQGw
 
 <<^ code:"&#x0004;" -> ? >>

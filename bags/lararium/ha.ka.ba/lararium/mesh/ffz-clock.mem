@@ -104,9 +104,9 @@ vessel boundary stays an operator-priced crossing, never a band.
 PhyloCode DISCARDS the Linnaean ranks precisely because ''the ranks were the secret count''.
 <<~ confidence 15/20 >> So here: causality rides the edge-DAG
 (`ffzCausalCompare`, the worldline happened-before —
-[[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]); it never leaks into the
+[[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]]); it never leaks into the
 grain. The grain names where-inside; the DAG names what-came-before; the two stay separate
-instruments (#the-two-domain-boundary).
+instruments (#/the-two-domain-boundary).
 
 !!! The boundary ~ Hox, where position IS the content (the counter-example)
 
@@ -121,7 +121,7 @@ turn · which topic · which session · which thread — never //how many//. Eve
 local ordinal (the Segment, the Beat) reads as a cell-''LABEL'' (//which-turn//), never as a
 count or a sequence (//how-many//): the address names the cell it sits in, and the ordinal
 SEQUENCE — what-came-before-what — belongs on the ''edge-DAG'', NEVER in the address
-([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]]). This is why the
+([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]]). This is why the
 address truncates cleanly (a label drops, the rest still reads) where a Hox sequence cannot. The
 FFZ refuses position-as-content by construction: where position-as-content earns its keep (a Hox
 sequence, a genome), a counter belongs; where label-membership serves (FFZ), a tree belongs. The
@@ -131,7 +131,7 @@ grain carries containment, never a colinear count.
 
 Three readings of one shape converge, cited as grounds:
 
-<<~ranks convergence formal ~ the ultrametric / Baire metric · the meet-semilattice · the materialized-path tree — the address IS the longest-common-prefix -> natural ~ cladistics · the prosodic hierarchy · GTTM metrical structure · the renormalization group · Schenkerian levels · X-bar · RST · biological levels-of-organization (8 of 9 surveyed domains read a nested non-counting membership) -> cached-projection ~ FfzClock as a materialized VIEW, "as of my last read" (Kleppmann local-first), re-derivable from the edge-DAG, never the authority (#the-two-domain-boundary, [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#ffz-binding]]) >>
+<<~ranks convergence formal ~ the ultrametric / Baire metric · the meet-semilattice · the materialized-path tree — the address IS the longest-common-prefix -> natural ~ cladistics · the prosodic hierarchy · GTTM metrical structure · the renormalization group · Schenkerian levels · X-bar · RST · biological levels-of-organization (8 of 9 surveyed domains read a nested non-counting membership) -> cached-projection ~ FfzClock as a materialized VIEW, "as of my last read" (Kleppmann local-first), re-derivable from the edge-DAG, never the authority (#the-two-domain-boundary, [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/ffz-binding]]) >>
 
 <<~ confidence 16/20 >> Eight of nine natural domains plus the formal linchpin
 (ultrametric ≡ LCP ≡ lattice-meet) converge on the membership-tree reading; the convergence
@@ -149,7 +149,7 @@ sharpens the boundary rather than weakening it.
 ''serves the MEMES, never this clock).'' The boundary follows the actor-boundary; it splits
 clean in two:
 
-<<~ranks domain inside-automerge ~ docs · wiki-CRDTs: ''Automerge logical time'' owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, lar:///ha.ka.ba/lares/api/pono/causal-islands) -> everywhere-else ~ all non-Automerge domains where its rhythmic position applies: the ''agent-worldline cadence'' (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see lar:///ha.ka.ba/lararium/api/agent-worldline#time; FfzClock paces the worldline's grain only) · ''external streams'' pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · ''capability-leases'' (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
+<<~ranks domain inside-automerge ~ docs · wiki-CRDTs: ''Automerge logical time'' owns causal order (`<counter,actorId>` · `getHeads` · the `drifted` frontier as a fork). FfzClock NEVER carries causal order here, and `ffzCompare`/`ffzMerge`'s LWW total-order MUST NOT drive a revocation or fork decision inside the CRDT — a rhythmic total-order ruling a causal question manufactures a global-now the mesh cannot hold (#three-instruments, lar:///ha.ka.ba/lares/api/pono/causal-islands) -> everywhere-else ~ all non-Automerge domains where its rhythmic position applies: the ''agent-worldline cadence'' (the worldline's happened-before itself rides the reified edge-DAG, NOT FfzClock — see lar:///ha.ka.ba/lararium/api/agent-worldline#/time; FfzClock paces the worldline's grain only) · ''external streams'' pulled across the causal-island boundary (game · Mudlet · video · DAW · market feed · CI/CD · IoT) · ''capability-leases'' (epoch-cadence decay). FfzClock is the temporal instrument for all of them, profile-scoped >>
 
 ''The retired over-claim stays retired.'' Earlier chronometer research read FfzClock's
 epoch-dominance as //"universal causal ordering across all instances."// That reading
@@ -182,7 +182,7 @@ same intent in integer radices — shared factors collide in hash-merge paths).
 ''Entrainment DROPS.'' Earlier chronometer research read the bands as ''coupled oscillators'' pulling one
 another toward phase-lock; that over-claim retires. <<~ confidence 15/20 >> The bands do
 not couple. A worldline ''handback'' reads as a directed ''one-shot DAG-JOIN'' — the happened-before
-merge, the twin-reunion (lar:///ha.ka.ba/lararium/api/agent-worldline#attribution) — NEVER oscillator
+merge, the twin-reunion (lar:///ha.ka.ba/lararium/api/agent-worldline#/attribution) — NEVER oscillator
 coupling. One join, one direction, once.
 
 ''The rhizome generalizes the join'' (2026-06-29). Handback is not the //only// DAG-join — a mid-flight
@@ -192,7 +192,7 @@ stays one-shot-directed (φ non-interference holds per-edge); there are simply '
 one. Mechanism: the worldline rides the ''edge-DAG stamped into the mempalace'' (the chat-session store —
 Automerge serves only the DreamNet mesh + wiki-bags, never chat); ''Interval Tree Clocks'' (fork·event·join)
 model it, ''full ticks'' (every injection), ''turn-DAG-keyed''. Causal rides the edge-DAG; this clock stays
-purely rhythmic ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#time]], the kupono models).
+purely rhythmic ([[agent-worldline|lar:///ha.ka.ba/lararium/api/agent-worldline#/time]], the kupono models).
 
 ''The φ/KAM witness ~ proof, not analogy.'' φ stands as the number the ''KAM theorem'' proves
 ''last-to-break'' under perturbation (the most robust invariant torus); the averted failure names
@@ -217,7 +217,7 @@ non-interference law needs only the independent-feature-per-band claim, which st
 !!! The grammar-palace facet ~ two P0 ladders, six deferred
 
 A form-palace reads this clock's stamps as a ''cached projection'' — its worldline-temporal facet
-(lar:///ha.ka.ba/lararium/api/living-grammar-palace#ffz-binding), never the causal authority. The
+(lar:///ha.ka.ba/lararium/api/living-grammar-palace#/ffz-binding), never the causal authority. The
 ratified P0 (12-Voice mufakat, 2026-06-29) ships only ''TWO'' ordering ladders off that facet:
 
 <<~ranks p0-ladder causal-depth ~ the bare turn-DAG coordinate, projected straight off the edge-DAG -> settledness ~ how firmly a captured move's form has entrenched >>
@@ -247,7 +247,7 @@ Three structural patterns recur across every surveyed domain: a ''bounded inner 
 below the epoch); ''continuous-to-discrete duality'' (a 120 Hz engine ticks L0 only
 when a step produces an operator-meaningful event, not 120×/s).
 
-<<~ranks profile operator-agent ~ default Lares (the Claude-agent profile) · L0/L1/L2/L3 = 64/512/64/128 (Loom-grounded @ 100+-turn scale; SHAPE grounded, constants SEEDED — calibrate against real transcript histograms): L0 Pulse = one generation SEGMENT (`stop_reason`/tool_use round) ≤64/Beat, with a block sub-offset ≤16 (index, not a tick); L1 Beat = one grounded exchange turn ≤512/Measure; L2 Measure = session ≤64/Arc; L3 Arc = day ≤128/Theme. Ticks on the operator grounding act, read from the HARNESS transcript (#rhythmic-address) -> ttrpg ~ 128/512/2048/32768; scene-beat = Beat -> strategy ~ 256/1024/8192/131072; turn-resolution = Beat -> action-rpg ~ 512/2048/16384/262144; encounter-beat = Beat -> physics-sandbox ~ Katamari-style 1024/256/4096/65536; rolling-decision-burst = Beat -> rhythm-daw ~ 191/5/31/1024 (coprime-prime near 192/4/32 — shared factors collide in hash-merge paths); measure/bar = Beat -> ci-cd ~ 64/128/1024/16384; pipeline-stage = Beat -> market-iot ~ 1024/512/4096/65536; candle-close / sensor-threshold = Beat -> async-social ~ PR/Slack 32/64/512/8192; review-round = Beat >>
+<<~ranks profile operator-agent ~ default Lares (the Claude-agent profile) · L0/L1/L2/L3 = 64/512/64/128 (Loom-grounded @ 100+-turn scale; SHAPE grounded, constants SEEDED — calibrate against real transcript histograms): L0 Pulse = one generation SEGMENT (`stop_reason`/tool_use round) ≤64/Beat, with a block sub-offset ≤16 (index, not a tick); L1 Beat = one grounded exchange turn ≤512/Measure; L2 Measure = session ≤64/Arc; L3 Arc = day ≤128/Theme. Ticks on the operator grounding act, read from the HARNESS transcript (#/rhythmic-address) -> ttrpg ~ 128/512/2048/32768; scene-beat = Beat -> strategy ~ 256/1024/8192/131072; turn-resolution = Beat -> action-rpg ~ 512/2048/16384/262144; encounter-beat = Beat -> physics-sandbox ~ Katamari-style 1024/256/4096/65536; rolling-decision-burst = Beat -> rhythm-daw ~ 191/5/31/1024 (coprime-prime near 192/4/32 — shared factors collide in hash-merge paths); measure/bar = Beat -> ci-cd ~ 64/128/1024/16384; pipeline-stage = Beat -> market-iot ~ 1024/512/4096/65536; candle-close / sensor-threshold = Beat -> async-social ~ PR/Slack 32/64/512/8192; review-round = Beat >>
 
 All profiles leave L4 = ∞ (operator-declared epoch). ''HOMONYM — this //epoch// names a RHYTHMIC BAND and no mechanism''; the mesh's fencing epoch is a different word wearing the same letters (epoch-binding-surfaces#whose-word-is-it). A grep for the fence should read past every L4 mention here. The register names
 (Pulse/Beat/Measure/Arc/Theme) apply uniformly; only the bounds differ.
@@ -280,7 +280,7 @@ above the session clock. Canonical grain reference:
 ''boundary'' — the agent-work analogue of somitogenesis (the wavefront freezes a free-running
 oscillator's phase into a permanent ordered address; the clock runs on and stores nothing,
 the boundary samples it). It stamps onto LOCAL work-memory drawers (never the mesh —
-lar:///ha.ka.ba/lararium/api/agent-worldline#time), and answers //"where in the felt cadence did this sit?"// — a query
+lar:///ha.ka.ba/lararium/api/agent-worldline#/time), and answers //"where in the felt cadence did this sit?"// — a query
 `filed_at` (wall-clock) cannot.
 
 !!! The address ~ a prefix-truncatable materialized PATH (the membership tree)
@@ -331,10 +331,10 @@ cascade); per-level radix is a ''profile'', never uniform; ''coprime/composite''
 
 ''RETIRED ~ the linear-epoch anchor.'' Earlier research carried an ''unbounded linear epoch''
 ''beneath'' the cyclic levels (Julian Day · `LarTickCounter`) for cross-island total-order +
-anti-alias; that anchor retires as the rejected global-now (#the-spine). <<~ confidence
+anti-alias; that anchor retires as the rejected global-now (#/the-spine). <<~ confidence
 Synthesis-Canon 16/20 >> A single monotone counter every island reads names the un-pono failure
 (`Date.now()`'s exact shape); no cross-island total-order returns. The anti-alias job it claimed
-now rides φ (#non-interference) and the tree itself — with no shared counter, nothing aliases.
+now rides φ (#/non-interference) and the tree itself — with no shared counter, nothing aliases.
 Local-first reads its own section only; a per-island ratchet (Beat) stays local and partial.
 
 !!! The implementation seat ~ the tools (design-only)
@@ -346,7 +346,7 @@ choices follow the spine:
 <<~ranks tool materialized-path ~ a dendrogram / TREE, NOT the p-adic metric (a fixed prime couples the bands — integer coupling, the very thing φ refuses, #non-interference) -> nested-intervals ~ store nested INTERVALS, never integer lft/rgt (lft/rgt is a global positional count that re-breaks on every insert) -> measure-boundary ~ reuse the nomic embedder, cosine-drop = the topic-shift, the same encoder the formpalace holds -> theme-community ~ python-igraph CPM-Leiden + a label-propagation delta — INCREMENTAL, so a fresh node joins a community with no global recompute (no-global-now) -> the-cap-boundary ~ @endo (Far / CapTP) carries the #has-cap-stack boundary ([[has-stack|lar:///ha.ka.ba/lares/api/pono/has-stack]]) >>
 
 <<~ confidence 11/20 >> These name the implementation seat, never a built surface; the
-serializer + Claude-agent profile already stand (#open), the membership-derivation (Measure
+serializer + Claude-agent profile already stand (#/open), the membership-derivation (Measure
 cosine-drop, Theme community-detection) names the next slice.
 
 <<~/ahu >>
@@ -386,7 +386,7 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
   hash-based merge paths; choose primes near natural domain rhythms (191 / 5 / 31).
   Per-profile values need empirical validation against CRDT merge collision rates.
 * ''The actorId slip'' — `FfzClock.actorId` keys on the Automerge actor (code header +
-  field doc); for a worldline clock it must re-key on the handle (lar:///ha.ka.ba/lararium/api/agent-worldline#open).
+  field doc); for a worldline clock it must re-key on the handle (lar:///ha.ka.ba/lararium/api/agent-worldline#/open).
   `ffzCompare` stays a rhythmic total-order — causal never rides it (it rides Automerge
   inside a CRDT, or the edge-DAG on a worldline), so no concurrency verdict is owed here.
 * ''`ExchangeState` FSM'' — a held exchange (`agent-responded`, awaiting grounding) carries
@@ -398,7 +398,7 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
   built/tested (worldline-clock.ts); the live STAMP needs a stateful transcript pass mapping
   each drawer back to its `(turn, segment)` position (mempalace chunks ≠ transcript segments),
   threaded to the writeback the way the handle rode the staged filename. The grain is RESOLVED
-  (#rhythmic-address); the mapping is the next slice.
+  (#/rhythmic-address); the mapping is the next slice.
 
 <<~/ahu >>
 
@@ -412,6 +412,6 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;iFJ9k5AEDdHOIYSNbZ5IgU_joWTRK5RsYBX45hWTAuo
+<<^ code:"&#x0003;" >>ni:///sha-256;Kc8T3e8ImsB5hOsN2Kpb4CW6SaR7s57egsGpi6Te2_Q
 
 <<^ code:"&#x0004;" -> ? >>

@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -23,7 +23,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions"
 
 ! Gaps, Tensions, and Conflicts — Living Catalogue
 
-The design-history record for memetic-wikitext. Each entry tracks a gap (missing capability), tension (two correct pulls in friction), or conflict (a hard incompatibility). Resolved entries preserve how each item closed; open entries sync to the submission's ''Annex B'' (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#annex-open`).
+The design-history record for memetic-wikitext. Each entry tracks a gap (missing capability), tension (two correct pulls in friction), or conflict (a hard incompatibility). Resolved entries preserve how each item closed; open entries sync to the submission's ''Annex B'' (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#/annex-open`).
 
 Family assignments here read post the 2026-06-05 transclusion reorg: `aka` (frozen) and `kahea` (live) carry ''`family:transclusion`'', not the older observe / dataflow assignments. `wai` retired into `heihei`.
 
@@ -127,6 +127,6 @@ Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template tran
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VldY0NeZcLYEevUJuYCRrJdHi7aqm4b1V7YmPixBL6A
+<<^ code:"&#x0003;" >>ni:///sha-256;DmeFGRE1MRr68LuGbrrqBmV8hsF1sbgUI-rVMAx_FZk
 
 <<^ code:"&#x0004;" -> ? >>

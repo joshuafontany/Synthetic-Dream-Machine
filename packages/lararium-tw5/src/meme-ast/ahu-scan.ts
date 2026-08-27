@@ -116,7 +116,7 @@ export function collectAhuSlots(text: string): Set<string> {
 /**
  * Compose a fragment-path slot identifier under an enclosing prefix.
  *
- *   composeSlotPath("",          "#thesis")   → "#thesis"          (root child, an ANCHOR)
+ *   composeSlotPath("",          "#thesis")   → "#/thesis"         (root child, a PATH)
  *   composeSlotPath("#parent",   "#child")    → "#/parent/child"   (one nested, a PATH)
  *   composeSlotPath("#/a/b",     "#c")        → "#/a/b/c"          (two nested)
  *
@@ -124,13 +124,13 @@ export function collectAhuSlots(text: string): Set<string> {
  * draws between a JSON Pointer (`#/$defs/x`) and an `$anchor` (`#x`), reached here for the same
  * reason: a reader and a parser tell them apart without lookahead.
  *
- *   `#name`    a PLAIN-NAME ANCHOR. A root-level section answers here, and every other bare name
- *              stays free for the page anchors a live wiki renders in a browser.
- *   `#/a/b`    a ROOTED PATH. A nested section answers HERE AND NOWHERE ELSE — it takes no bare
- *              alias, so it never reaches into the anchor space.
+ *   `#/a`      a ROOTED PATH — EVERY ahu section, at every depth. `#/entry`, `#/observe/observe-ha`.
+ *   `#name`    a PLAIN-NAME ANCHOR, and the house claims none of them. The whole bare space stays
+ *              free for the anchors a live wiki renders on a page — HTML ids, and whatever else
+ *              wants to name a spot rather than a section.
  *
- * The leading slash appears exactly where a path exists. A root child has none to state, so it
- * stays bare — which is also why the corpus's existing citations neither move nor break.
+ * A section is always a path, so the slash is always there. One shape, one reading, no depth-one
+ * exception to remember.
  *
  * `/` rides a fragment unescaped by RFC 3986 §3.5 (`fragment = *( pchar / "/" / "?" )`), and a
  * media type may define structure within it; `#` may not repeat, so a nested address could never
@@ -140,7 +140,8 @@ export function collectAhuSlots(text: string): Set<string> {
  * verbatim under the prefix.
  */
 export function composeSlotPath(prefix: string, slot: string): string {
-  if (!prefix) return slot;                                   // a root child stays an anchor
+  const tail = slot.startsWith("#") ? slot.slice(1) : slot;
+  if (!prefix) return `#/${tail.replace(/^\//, "")}`;         // a root child is a path too
   const slotTail = slot.startsWith("#") ? slot.slice(1) : slot;
   const rooted   = prefix.startsWith("#/") ? prefix : `#/${prefix.slice(1)}`;
   return `${rooted}/${slotTail}`;

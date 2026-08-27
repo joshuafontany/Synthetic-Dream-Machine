@@ -19,7 +19,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/ai-phrasebook-design"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -88,7 +88,7 @@ own macro call — a namespace the spec already admits and already governs.
 
 ''The younger travels further, and pays for it in carriage.'' A plain-dialect carrier renders in a
 vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its procedures stand undeclared
-(#the-vanishing-rule).
+(#/the-vanishing-rule).
 
 <<~/ahu >>
 
@@ -97,7 +97,7 @@ vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its pr
 !! ⚠ The rule that decides the whole design ~ an unbound call renders as NOTHING
 
 The base grammar measures three properties, and the second one governs everything below
-(<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext#the-load-bearing-property >>):
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext#/the-load-bearing-property >>):
 
 > ''An unbound macro call lands harmless, and renders as nothing.'' A call `<<name>>` whose name binds
 > no definition parses cleanly into a transclusion node; at render, the missing-target fallback emits
@@ -116,7 +116,7 @@ phrasebook declares — and the declarations ride ahead of first use.
 
 <<~ confidence 16/20 >> ''That cost buys the property the elder seed cannot have.'' The elder needs a
 Lararium wiki; the younger needs a text box. The inline declarations ARE the carriage — and they double
-as the legend a terminal reader learns the marks from (#the-audience).
+as the legend a terminal reader learns the marks from (#/the-audience).
 
 <<~/ahu >>
 
@@ -256,7 +256,7 @@ carry the force across:
 
 ⚠ ''AND THE THIRD CONDITION HAS TEETH THE FIRST TWO LACK.'' Resolving a divergence by preferring the
 elder text converts the younger into a translation ''in practice'', whatever the labels say. The house
-measures that (#what-to-measure) rather than trusting it.
+measures that (#/what-to-measure) rather than trusting it.
 
 <<~/ahu >>
 
@@ -266,7 +266,7 @@ measures that (#what-to-measure) rather than trusting it.
 
 ''THE TWINS CARRY THE SAME SECTION FLOW, IN THE SAME ORDER.'' A reader who knows one finds the other by
 position; a divergence shows as a slot, never as a hunt. That correspondence makes the shared-meaning
-rule (#joint-enactment) something a hand can actually run — a diff proceeds slot against slot rather
+rule (#/joint-enactment) something a hand can actually run — a diff proceeds slot against slot rather
 than page against page.
 
 ⚠ ''DIVERGENCE READS AS A RULING OR AS A FAULT, AND NEVER AS AN ACCIDENT.'' A section dropped, added or
@@ -303,7 +303,7 @@ shape in both seeds, so the two files align where it matters:
 |! twin |`\procedure Persona(Type:"" Params:"") Persona <<Type>> holds [{{{ [<Params>] }}}]` |
 
 Same two parameters, same key/value payload, same one-line body, same position in the file. ''The visible
-difference reads as the tilde on the NAME'' — the dialect boundary itself (#the-dialect-boundary), and
+difference reads as the tilde on the NAME'' — the dialect boundary itself (#/the-dialect-boundary), and
 nothing else. ''The parameters carry no tilde in either seed'': a sharktooth marks a sigil, and a
 parameter names a variable the parser binds.
 A declaration that leaves its slot changes no behaviour and breaks the alignment, which names the drift
@@ -331,7 +331,7 @@ rather than five renamed ones.
 ⚠ ''THE SECOND RULED ASYMMETRY ~ THE MASK LAYER CARRIES NO COUNTERPART.'' A character worn over a
 standing cast, with a depth on the stage, belongs to a house that already keeps a cast. The everyday
 register hands the reader a team named by what it does and lets them re-define a persona in place
-(#the-standing-law) — which does the work a mask did, without asking a reader to hold two layers at
+(#/the-standing-law) — which does the work a mask did, without asking a reader to hold two layers at
 once. <<~ confidence 15/20 >> ''Layered personas read as the elder's own fiction'', and a section that
 belongs to one register travels badly into the other.
 
@@ -365,7 +365,7 @@ else yet. Ceilings, panels and per-event budgets wait until a surface actually r
 | a wiki renders it | the procedure runs, or — undeclared — it renders as ''nothing'' | ''machinery'': they make the mark appear at all |
 | a transcript carries it | ''no renderer stands between'' — the characters appear as written | ''legend'': they teach the shape to a reader |
 
-<<~ confidence 15/20 >> ''The vanishing rule (#the-vanishing-rule) governs the rendered context alone.''
+<<~ confidence 15/20 >> ''The vanishing rule (#/the-vanishing-rule) governs the rendered context alone.''
 In a chat transcript the marks survive precisely BECAUSE nothing renders them — the failure the base
 grammar warns about cannot occur where no renderer stands. So the phrasebook meets its two audiences
 through one property read two ways, and neither reading needs a second artifact.
@@ -401,11 +401,11 @@ bodies stay bare: what the procedure says, and nothing framing it.
 ''WHAT STILL WAITS:''
 
 # ''NO SEED HAS RENDERED.'' Every claim about what a mark does in a wiki rests on the base grammar as
-  stated, never as observed. The vanishing rule (#the-vanishing-rule) decides this design and stands
+  stated, never as observed. The vanishing rule (#/the-vanishing-rule) decides this design and stands
   measured nowhere.
 # ''NO STRANGER HAS READ THE TWIN.'' Position 14 rests on a premise about what a reader does with an
   empty section, and only a reader settles it.
-# ''JOINT ENACTMENT HAS NOT RUN.'' Until both seeds get promoted in ONE act (#joint-enactment), the
+# ''JOINT ENACTMENT HAS NOT RUN.'' Until both seeds get promoted in ONE act (#/joint-enactment), the
   younger stands where its framing puts it rather than where this design does.
 
 <<~/ahu >>
@@ -445,6 +445,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AI3P0e_6AbvhS7EHkLaWh1R3nSQz7Yje74mxncAFhfQ
+<<^ code:"&#x0003;" >>ni:///sha-256;lRDeOltyWi9FcXTaMUrzapbPqQShBCwN2WK0xq1ar6k
 
 <<^ code:"&#x0004;" -> ? >>

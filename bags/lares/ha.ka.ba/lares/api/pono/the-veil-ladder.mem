@@ -58,7 +58,7 @@ it stands rather than refuses. <<~ loulou lar:///ha.ka.ba/lares/api/pono/waking-
 
 ''Burning the Handle severs the overlay FORWARD, never the floor.'' The vessels lose sync over //new// shared content until the user or operator resolves it (re-invite, re-key), and drop back to their anon floor — keeping their own content AND whatever shared content they ''already decrypted''. <<~ confidence 16/20 >> keyhive (BeeKEM) carries ''post-compromise security'' but NOT forward secrecy: revoke re-keys the group so the burned vessel reads nothing shared //after// the burn, yet it never erases the past it already read. The cut runs one-way — future, not history (`persona-content-crossing`, the burn test). That forward severance names the DreamNet's ''risk / reward / cost''.
 
-Two reversibilities stay distinct: ''doc-syncs revoke and restore'' (an overlay burns and re-forms), while a ''public post the Handle CLAIMED publishes a link that never un-publishes'' (#the-price). Collecting two anon vessels into one Handle rides this model — both keep their floors and share a Handle overlay — but the claim over their public posts crosses the one-way door, and the human wills it deliberately.
+Two reversibilities stay distinct: ''doc-syncs revoke and restore'' (an overlay burns and re-forms), while a ''public post the Handle CLAIMED publishes a link that never un-publishes'' (#/the-price). Collecting two anon vessels into one Handle rides this model — both keep their floors and share a Handle overlay — but the claim over their public posts crosses the one-way door, and the human wills it deliberately.
 
 <<~/ahu >>
 
@@ -130,18 +130,18 @@ For a thing with ''no king'', this is not a gap — it is the only honest archit
 
 !! The Recovery ~ the involuntary-loss flip-side of the burn (the lone 1-vessel citizen)
 
-The burn (#the-price) reads as a //chosen// shedding; ''involuntary key-loss'' is the same cut made by accident — and it lands hardest on the ''lone 1-vessel citizen'' (one device, no Circle) whose declared Handle, unlike a cheap anon-veil, carries accreted standing a dead key forfeits. The floor, held: recovery ''re-admits, never escrows a secret at rest'' (device re-admission, the G-recovery keel). The one bound that governs all of it: ''the recovery quorum IS the impersonation quorum'' (Camenisch-Lysyanskaya) — no party can restore you without being able to //become// you, so there reads ''no safe custodial escrow, only priced quorums'' (raise k · hide guardians · time-delay + live-key veto). <<~ confidence 14/20 >>
+The burn (#/the-price) reads as a //chosen// shedding; ''involuntary key-loss'' is the same cut made by accident — and it lands hardest on the ''lone 1-vessel citizen'' (one device, no Circle) whose declared Handle, unlike a cheap anon-veil, carries accreted standing a dead key forfeits. The floor, held: recovery ''re-admits, never escrows a secret at rest'' (device re-admission, the G-recovery keel). The one bound that governs all of it: ''the recovery quorum IS the impersonation quorum'' (Camenisch-Lysyanskaya) — no party can restore you without being able to //become// you, so there reads ''no safe custodial escrow, only priced quorums'' (raise k · hide guardians · time-delay + live-key veto). <<~ confidence 14/20 >>
 
 For the citizen with ''no quorum yet'', the floor is a ''standalone recorded code as the FIRST non-device share'' of their own threshold (not a vault-key — the one recovery act a lone citizen performs alone, Apple-shape blind escrow; Google/Samsung both need a second device and fail the lone case). Birth quorum = `{device, recorded-code}`; a peer node MAY hold one share (Delivery-Service) but ''never a quorum'' (never Auth-Root). The quorum grows `code → +2nd device → +Circle guardians → FROST/TSS` (no reconstruction window), retiring imported trust as the Circle forms. Across every migration the ''anonymity ⊥ non-transferability'' bound holds (the same law that prices the burn, #the-price): ''positive rep rides holder-continuity proofs'' (no watcher), ''negative marks bind to the RETIRED key as anergy'' — tolerated-inert, ''never laundered'' by a recovery. Recovery restores the seat + earned standing, never a clean slate. <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-recovery-keel >>
 
 <<~/ahu >>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm#two-roots >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm#/two-roots >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;nGuZKJ86ttJXeQXFkkI9mkDDWIlLobE1D0GhNz1RucE
+<<^ code:"&#x0003;" >>ni:///sha-256;TCBYOT96N1_jrLgTbXtKuoY8IzNx84fIrLjHiRuGK9Y
 
 <<^ code:"&#x0004;" -> ? >>

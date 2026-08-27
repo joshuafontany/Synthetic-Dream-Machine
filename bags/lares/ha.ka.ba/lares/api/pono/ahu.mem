@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/ahu"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -40,7 +40,7 @@ and wikitext body.
 
 ✶ sense the slot name — a `#name` anchor; the boundary scope of this content unit
 ⏿ orient: child-slot, parent-relative addressing; slot name becomes tiddler title suffix
-◇ parent at `lar:///uri`; this slot creates child at `lar:///uri#name`; content stays inside boundary
+◇ parent at `lar:///uri`; this slot creates child at `lar:///uri#/name`; content stays inside boundary
 ▶ emit child-slot block node; deserializer produces a separate tiddler for each slot
 ↺ parent tiddler references child via `<<~ kahea ahu #name >>`; child is independently addressable; confirm round-trip: parent body contains kahea~ahu summons; child has meta fields + content
 
@@ -117,6 +117,6 @@ slot = 1
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4ghURWf8hIT9NYXoSMiFDwpKHexoK51Rv7NeO8APouk
+<<^ code:"&#x0003;" >>ni:///sha-256;JcCwNVdpukV-BEF0wHiYovCb7LnlHCxi-NNqo86hdZM
 
 <<^ code:"&#x0004;" -> ? >>

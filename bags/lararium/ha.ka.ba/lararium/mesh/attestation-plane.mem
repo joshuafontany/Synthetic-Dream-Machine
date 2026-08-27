@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -220,7 +220,7 @@ namespace whose expiry does not invalidate resolution converts forgetfulness int
 ''AND THE CAUTION THE LEASE CARRIES:'' the sweeps' cross-cut finding reads — in both failed models the name
 bound to a ''rented substrate'' (an on-chain rental contract, a hostname) and never to a key the holder keeps.
 So the lease stays right for RECIRCULATION and wrong as IDENTITY. It composes here only while the severability
-boundary (#1) holds absolutely: ''lease the address, never the self.''
+boundary (#/1) holds absolutely: ''lease the address, never the self.''
 
 <<~/ahu >>
 
@@ -253,7 +253,7 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
   willing to bear cost.
 * ''The rival good — RULED (operator, 2026-07-26).'' A fork that walks away with vessels ''pays in socially
   managed resources.'' Everything the mesh reaches OUTWARD to — the first two Nexus namespaces
-  `*.amorphousdreams.net` and `*.elyncia.net` among them (#nexus-topology) — rides socially-held custody
+  `*.amorphousdreams.net` and `*.elyncia.net` among them (#/nexus-topology) — rides socially-held custody
   rather than cryptographic custody. A fork leaving those behind ''accepts that cost'' and re-founds
   equivalent capability ''as a new place.''
 
@@ -285,14 +285,14 @@ boundary (#1) holds absolutely: ''lease the address, never the self.''
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#the-standing >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#the-siege-gate >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-price >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#/the-standing >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-siege-gate >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#/the-price >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;A740EJsbjv8_SxGHaoqdOqeFCv4MJ0CEV213_NLKO2k
+<<^ code:"&#x0003;" >>ni:///sha-256;slOyiiyeu0uxmzj-DrNhJFw2FEYTsNi9X68Z-aJ9Xug
 
 <<^ code:"&#x0004;" -> ? >>

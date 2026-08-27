@@ -34,7 +34,7 @@ A house with doors learns to raise its own walls from a plan it keeps inside its
 
 Drafted from the Gaia-side git record:
 
-* `91a6a939` — lararium-node-3 (#36); the third hull (May 14, 2026)
+* `91a6a939` — lararium-node-3 (#/36); the third hull (May 14, 2026)
 * `1ff28a25` — the grammar migrates to TW5-native wikitext, shedding its borrowed script
 * `33660b0f` — the sigil registry moves from a TOML shelf into a tiddler //inside// the wiki
 * `0842f243` — grammar self-hosting completes
@@ -171,6 +171,6 @@ Act III receives:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZlTH57LAGvn9yf_NtOj0xD3ZgxxIIgCeNELvKO0vwjQ
+<<^ code:"&#x0003;" >>ni:///sha-256;IHK1r7PBKBJk5ZEG6XVbQji70KDCL-6jvZohGie8xAw
 
 <<^ code:"&#x0004;" -> ? >>

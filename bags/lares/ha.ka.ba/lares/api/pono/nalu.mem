@@ -78,7 +78,7 @@ lives) crests, backpressure-gated; one drain files the batch to the mempalace we
 sidecar via the RFC-002 source-adapter. Two nalu engines, one pattern, ''two cadences'':
 the ''federated'' in-wiki nalu crests on `requestAnimationFrame` (CRDT waves → the widget
 shore); the ''local capture'' nalu crests on the server tick (CAPTURE waves → the palace
-— lar:///ha.ka.ba/lararium/api/capture-annotation-model#forward-facing-nalu). Do
+— lar:///ha.ka.ba/lararium/api/capture-annotation-model#/forward-facing-nalu). Do
 not conflate their boundaries: rAF rides the federated/browser engine, the 20 Hz server
 tick rides the local/daemon engine.
 
@@ -282,6 +282,6 @@ edges encoded with FRU orientation assumptions need migration. See `uefn-scene.m
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WPlU7v-dA8FLo7iAED8LDRSR0AcR6FvcSm6NGpI8aq4
+<<^ code:"&#x0003;" >>ni:///sha-256;5ULJgbZTsUerJ4xD4Gu86AkKw1nHVPnxGb1_bxEKsGk
 
 <<^ code:"&#x0004;" -> ? >>

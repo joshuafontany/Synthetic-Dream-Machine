@@ -19,7 +19,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/mu/the-syad-perspectives"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -218,7 +218,7 @@ The number does not widen itself. Each claim carries its own confidence, and the
 
 The naya↔predication relationship grounds in the Jain canon: Umāsvāti's //Tattvārtha Sūtra// 1.34–35 (five standpoints unfolding to seven), Matilal's two-wings framing of anekānta, and Akalaṅka's //krama/////yugapad// distinction that sets the `avaktavya` pole apart. The extracted derivation lives in docs space; Discordian witness texts rest in library space.
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives#provenance >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives#/provenance >>
 
 ```toml
 family = "reference"
@@ -233,7 +233,7 @@ payload = {
 
 <<~/pranala >>
 
-<<~ loulou lar:///ha.ka.ba/lares/library/discordia/malaclypse-the-younger/are-discordians-serious#reading >>
+<<~ loulou lar:///ha.ka.ba/lares/library/discordia/malaclypse-the-younger/are-discordians-serious#/reading >>
 
 ```toml
 family = "reference"
@@ -305,6 +305,6 @@ satirist-operational = "nasti-avaktavya"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2r4qt4rrVbZLFnpdnyJ_ioi3apH5oK3bq2VzZh7cJkQ
+<<^ code:"&#x0003;" >>ni:///sha-256;tXR3dm1F82sqx368SKXJ9MPBmNzHZH3LNw9J1JK6KPY
 
 <<^ code:"&#x0004;" -> ? >>

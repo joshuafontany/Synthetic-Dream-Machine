@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/re-anchoring-record"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -27,7 +27,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/re-anchoring-record"
 
 A guest dwells WITH a host — a dyad, one edge, and the historically fatal shape: across six surveyed hospitality institutions, one-sided admission always booked the shortfall as ''rank''. A realm's own ceremony then re-anchors that dwelling INTO the realm (`the-thing-event`).
 
-''The mesh records THAT the re-anchoring happened. It never records what made it valid.'' Those name a DECLARATION and the grounds beneath it, and only the first belongs to this stack — with the attestor count riding as a MEASUREMENT and its sufficiency as a DECISION owned elsewhere (#the-depth-fold).
+''The mesh records THAT the re-anchoring happened. It never records what made it valid.'' Those name a DECLARATION and the grounds beneath it, and only the first belongs to this stack — with the attestor count riding as a MEASUREMENT and its sufficiency as a DECISION owned elsewhere (#/the-depth-fold).
 
 ''One artifact, folded two ways'': an EVENT on write · accrued DEPTH on read. Dwelling deposits `papa`; the depth erodes when dwelling stops. Building them separately would build them twice, because a re-anchoring attested at a position IS the datum depth accrues from.
 
@@ -108,7 +108,7 @@ Applied here: ''as the attestor count rises, the intersection of realms whose dw
 
 !! The depth fold ~ PROPOSED: the history IS the reading, and reducing it mints what the plane forbids
 
-The record folds two ways — an EVENT on write, accrued DEPTH on read (#head) — and the write half stands built. Reaching for the read half turns up ''a fold no hand should write''.
+The record folds two ways — an EVENT on write, accrued DEPTH on read (#/head) — and the write half stands built. Reaching for the read half turns up ''a fold no hand should write''.
 
 `dwellingHistory` already hands back the verified, attested, chain-ordered acts: which epochs this dwelling stood re-anchored at, and who marked each. ''The obvious next move reduces that to a scalar'' — a depth, a standing, a number. ''Three standing rulings each forbid it independently'':
 
@@ -122,7 +122,7 @@ And the EROSION half needs a rate nobody has seated. Two candidate shapes stand 
 
 ''One more split rides here.'' `verifiedAttestors` returns a COUNT and refuses a verdict, which reads correct — and names why: the count carries a MEASUREMENT, and whether it suffices rides as a DECISION belonging to a different party. The record already enforces that by carrying no threshold; the ruling now has the vocabulary to say so.
 
-> ''PROPOSED, not ruled:'' the depth read stands COMPLETE at `dwellingHistory`. What accrues reads as a history a party can show, never a score a system can compare. A realm that wants a threshold applies its own to the acts, in its own rite (#unmodelled) — the same law as //the naming layer performs, so it must never certify//, one fold over.
+> ''PROPOSED, not ruled:'' the depth read stands COMPLETE at `dwellingHistory`. What accrues reads as a history a party can show, never a score a system can compare. A realm that wants a threshold applies its own to the acts, in its own rite (#/unmodelled) — the same law as //the naming layer performs, so it must never certify//, one fold over.
 
 <<~/ahu >>
 
@@ -134,6 +134,6 @@ And the EROSION half needs a rate nobody has seated. Two candidate shapes stand 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1SlvHzBGJ9SFui8n2cd9dOgc8XMZe9mq7oNQs0XTh4A
+<<^ code:"&#x0003;" >>ni:///sha-256;F8QyzUZytNtrxDR47HsbikwOg2nng3V9NV6TZSpQ5DM
 
 <<^ code:"&#x0004;" -> ? >>

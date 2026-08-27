@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -68,10 +68,10 @@ If the entities share a plane but differ in degree, that reads as an ordinary ta
 
 <<~ ahu #edges >>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#two-axis-topology >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VuU5luCC8O-RLu2CgTiRCgOcwlyh8AwyVYrl8Msw2Ho
+<<^ code:"&#x0003;" >>ni:///sha-256;HVYdqxkCWHez2ET4FvMyuUKPOz0MlgJuvrwMs_DV0Qw
 
 <<^ code:"&#x0004;" -> ? >>

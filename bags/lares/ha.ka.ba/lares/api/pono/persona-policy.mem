@@ -20,7 +20,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/persona-policy"
 written           = "2026-07-20"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
 <<^ code:"&#x0002;" >>
 
@@ -48,7 +48,7 @@ The wall stays custody-by-TYPE: wearing a persona ''REQUIRES that this vessel HO
 
 !! Ruling 2 ~ each PersonaGroup a cryptographic individual (Sybil-of-one, the accepted cost)
 
-''You CANNOT pin "one human = one custodian" in crypto — that pinning IS the sin.'' A cryptographic layer that asserted "these N faces trace to one person" would rebuild the global identity-now the mesh forbids (the Nymwars root, persona-circle#the-vault). So the ruling ''declines the pin'': each ''PersonaGroup stands as its OWN cryptographic individual'', with its own root, its own device-delegation edge, and its own escrow (#distinct-recovery).
+''You CANNOT pin "one human = one custodian" in crypto — that pinning IS the sin.'' A cryptographic layer that asserted "these N faces trace to one person" would rebuild the global identity-now the mesh forbids (the Nymwars root, persona-circle#the-vault). So the ruling ''declines the pin'': each ''PersonaGroup stands as its OWN cryptographic individual'', with its own root, its own device-delegation edge, and its own escrow (#/distinct-recovery).
 
 ''A human faking a cabal of their own PersonaGroups — a Sybil-of-one — reads as the ACCEPTED COST'' of the inversion-of-control. The crypto ''prices'' Sybil per-scope; it never eliminates it (persona-circle#honest-scope: scarcity lives outside the math). The answer runs ''SOCIAL, never cryptographic'': ''kahu as custodians, NOT rulers'' — vouch-and-price, exit-not-voice, legitimacy-held-in-talk-story (cabal-realm#the-unswept-corner; carry-contract#the-frame). The mesh ''holds the residual adversary in story tension'' rather than pretending a signature closes it. <<~ confidence 14/20 >>
 
@@ -134,6 +134,6 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TmLF2QM-JcFfkrUE_O5f8-tL5z3idBdVv6SDYTlxeww
+<<^ code:"&#x0003;" >>ni:///sha-256;OHrIeCEWjV4CyEYwkAa3pDzBGGOXReRk7vRZZH6cafo
 
 <<^ code:"&#x0004;" -> ? >>
