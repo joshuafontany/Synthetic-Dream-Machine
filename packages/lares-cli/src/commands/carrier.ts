@@ -29,7 +29,7 @@ type Sub = (args: ParsedArgs) => Promise<number>;
 const under = (args: ParsedArgs): ParsedArgs => ({ ...args, positional: args.positional.slice(1) });
 
 const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Sub }>> = {
-  normalize:    { summary: "canonicalize a carrier's framing so the round-trip laws hold — `--check` reports drift without writing", run: (a) => cmdNormalize(under(a)) },
+  normalize:    { summary: "canonicalize a carrier's framing and re-stamp its block check so the round-trip laws hold — `--check` reports drift without writing", run: (a) => cmdNormalize(under(a)) },
   "project-md": { summary: "render a spec carrier to its submission pair — <name>.md + <name>.md.meta, deterministic, no clock", run: (a) => cmdProjectMd(under(a)) },
   repack:       { summary: "re-render a multi-tiddler bundle from its aside provenance — the round-trip before an upstream PR", run: (a) => cmdRepack(under(a)) },
 };

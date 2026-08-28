@@ -56,7 +56,7 @@ Prism supplies the ''target slot'' the self-applied lenses lack, and reuses the 
 * ''`syad`'' --- refracts the content into standpoint bands: the five perspectives read the same content, each measuring within its own frame. (`lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`)
 * ''`mu`'' --- reads the content through the four tools as cognitive facets. (`lar:///ha.ka.ba/lares/api/mu/the-four-tools`)
 
-A lens reads its tool-bind through the `syad` `:` grammar (`syad:🏛️:*!`); each lens also runs alone.
+A lens reads its tool-bind through the `syad` `/` grammar (`syad=🏛️/*!`); each lens also runs alone.
 
 <<~/ahu >>
 
@@ -83,7 +83,7 @@ The lens list rides left of the `->`; the referenced target rides right. A targe
 Prism returns the composed overlay: each declared band, what it found, anchored to the same fixed content. Plain glyphs name what the lenses //found// --- the forward `->` declaration prefix stays reserved for the node's own loop.
 
 ```text
-prism syad:🏛️ 🗡️ conformance -> lar:///draft.fix.lands:
+prism syad=🏛️ 🗡️ conformance -> lar:///draft.fix.lands:
   🏛️ Philosopher  the claim holds where the import graph shows; unsupported where it asserts "cleaner"
   🗡️ Satirist     the fix knifes the symptom, not the cycle --- wrong target, landed anyway
   ↺ conformance   loop snapped at Orient; Act ran before the cause got read; Aftermath never closed
@@ -114,6 +114,6 @@ Prism keeps the worthwhile half --- //reference a piece of content and read its 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;M2tHBfk1iPF-evaLtQLCL8aHJjMJDPIFuNBfATuurHY
+<<^ code:"&#x0003;" >>ni:///sha-256;OGXRwd0646c5k0DPp145Pd4qOr2XJwH6LUD13sf1wOU
 
 <<^ code:"&#x0004;" -> ? >>

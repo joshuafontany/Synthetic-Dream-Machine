@@ -246,3 +246,6 @@ export { readCarrierShape } from "./carrier-shape.js";
 export type { CarrierShape, CarrierKind, CarrierMarks } from "./carrier-shape.js";
 export { readCarrierEdges } from "./carrier-edges.js";
 export type { CarrierEdge, EdgeForm } from "./carrier-edges.js";
+// The check a carrier carries, and the span it covers. `carrier normalize` re-stamps with these, so a
+// carrier whose framing it rewrites leaves the door holding a check that matches the body it follows.
+export { bccOf, verifyBcc, checkSpan } from "./carrier-check.js";

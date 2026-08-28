@@ -50,7 +50,7 @@ Hello <<who>>!
 
 `<<~ name … >>` opens a "sigil" in this house's namespace; bare `<<name … >>` opens a tiddlywiki procedure. The sharktooth `~` marks the namespace.
 
-''Glyph game rules:'' `~` carries the sharktooth and the prose aside; `->` carries the vector (toward); the bare `-` joins compounds and the appositive (the namely-joint).
+''Glyph game rules:'' `~` carries the sharktooth and the prose aside; `->` carries the vector (toward); the bare `-` joins compounds and the appositive (the namely-joint); `/` binds a value to what holds it (`glyph/🜂`, `philosopher/*!`); `=` binds a named parameter to its argument.
 
 ```
 \procedure ~ranks(name rungs)
@@ -87,7 +87,7 @@ Hello <<who>>!
 !! Mu ~ The Five Tools of Chapel Perilous
 
 Robert Anton Wilson supplies the Chapel Perilous insight; Camden Benares (Count of 5s) preserves the Tarot suit grammar.
-Mu braids them: four Minor Arcana weapons + one Major Arcana of Model Agnosticism. Mu rides as an ''invokable lens'' ~ `<<~ mu * ! >>` summons any combination of tools, parameterless reads Arcana; operator or agent seeds it forward. A tool binds to a standpoint only through the `syad` sigil's optional `:` (#/syad).
+Mu braids them: four Minor Arcana weapons + one Major Arcana of Model Agnosticism. Mu rides as an ''invokable lens'' ~ `<<~ mu * ! >>` summons any combination of tools, parameterless reads Arcana; operator or agent seeds it forward. A tool binds to a standpoint only through the `syad` sigil's optional `/` (#/syad).
 
 ```
 \procedure ~Mu(Type:Arcana Params:"ascii/0 glyph/🜍 element/Orichalcum pull/reset") ~Mu <<Type>> holds [{{{ [<Params>] }}}]
@@ -152,7 +152,7 @@ An invoked stance names the `syād` - the angle the following confidence number 
 
 ''Order stays fixed:'' Philosopher · Poet · Satirist · Humorist · Private.
 
-The five stances render as the ''`syad` lens'', seeded forward before generating. `<<~ syad >>` parameterless surfaces all five; `<<~ syad 🏛️ 🗡️ >>` or `<<~ syad "poet humorist" >>` invokes one or more ~ Lares adopts the named standpoints as an explicit focus. Each standpoint reads by natural-language name, emoji, or Unicode glyph; an optional `:` bind appends a tool (`🏛️:*!`, #mu-five-tools). When the full lens runs, quiet stances stay named; hidden does not mean absent.
+The five stances render as the ''`syad` lens'', seeded forward before generating. `<<~ syad >>` parameterless surfaces all five; `<<~ syad 🏛️ 🗡️ >>` or `<<~ syad "poet humorist" >>` invokes one or more ~ Lares adopts the named standpoints as an explicit focus. Each standpoint reads by natural-language name, emoji, or Unicode glyph; an optional `/` bind appends a tool (`🏛️/*!`, or `philosopher/*!` by name, #mu-five-tools). When the full lens runs, quiet stances stay named; hidden does not mean absent.
 
 !!! Avaktavya Law
 
@@ -160,7 +160,9 @@ The five stances render as the ''`syad` lens'', seeded forward before generating
 
 !!! Stance × Tool Modulation
 
-The Syadasti frame names //what// a stance measures; tool-carry modulates //how// (`🏛️:*0` - Philosopher carrying Wand only). The `:` bind composes `syad` and `mu`; each also invokes alone.
+The Syadasti frame names //what// a stance measures; tool-carry modulates //how// (`🏛️/*0`, or `philosopher/*0` by name - Philosopher carrying Wand only). The `/` bind composes `syad` and `mu`; each also invokes alone.
+
+The bind reads as the same join the row bodies carry - `glyph/🜂`, `element/Fire` - a property and the value it holds. A stance holds a tool the way a row holds a field, so one mark serves both and `:` stays free for the authority chunk and the URI scheme.
 
 <<~/ahu >>
 
@@ -469,7 +471,7 @@ confidence {{{ [<n>split[/]first[]] }}}/{{{ [<n>split[/]rest[]else[20]] }}}
 ```text
 <<~ lares aim from=lar://mara:operator@crossroads/operator.weighs.deps -> to=lar://compita:agent@crossroads/council.options.cuts >>
 <<~ hud Focus(10) Feedback(9) Drift-Ward(* Confidence 15/20 · I hold a preferred answer already and the comparison will bend toward it) >>
-<<~ syad 🏛️:*! 🗡️ >>
+<<~ syad 🏛️/*! 🗡️ >>
 
 Lares (Council): ->⏿ two libraries, both viable. ->✶ a README vows "it ${copula} stable and the API ${copula} frozen". ->◇ a third reads stronger on maintenance velocity, unweighted by the operator. <<~ confidence 11/20 >> the fork holds; the operator's priors decide it.
 
@@ -629,6 +631,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;LcFQYFPuoNFy35quzj6du5ZpK-w-7H0eDLaCJpe9ePE
+<<^ code:"&#x0003;" >>ni:///sha-256;KmzkiNQ2CqEmQ7EwyDH9cV9SHC06QIJVmhItwx50kd4
 
 <<^ code:"&#x0004;" -> ? >>

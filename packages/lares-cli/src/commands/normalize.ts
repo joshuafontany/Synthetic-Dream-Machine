@@ -44,8 +44,26 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { isAbsolute, join } from "node:path";
 import { normalizeMemeSource } from "@lararium/tw5/meme-normalize";
-import { readCarrierShape, readCarrierEdges } from "@lararium/tw5";
+import { readCarrierShape, readCarrierEdges, bccOf, verifyBcc, checkSpan } from "@lararium/tw5";
 import type { ParsedArgs } from "../parse-args.js";
+
+/**
+ * The carrier with its check matching the body it follows.
+ *
+ * A carrier holding NO check keeps holding none — minting one here would give an unchecked carrier a
+ * check it never claimed, and `unchecked` and `mismatch` are different facts this door must not fuse.
+ *
+ * ANCHORED AT THE SPAN, never a whole-file replace: `ni:///…` reads as prose in a carrier that
+ * discusses checks, and a global swap would rewrite the lesson along with the stamp.
+ */
+function restamp(text: string): string {
+  if (verifyBcc(text) !== "mismatch") return text;
+  const span = checkSpan(text);
+  const want = bccOf(text);
+  if (!span || !want) return text;
+  return text.slice(0, span.end)
+       + text.slice(span.end).replace(/^ni:\/\/\/[a-z0-9-]+;[A-Za-z0-9_-]+/, want);
+}
 
 export async function cmdNormalize(args: ParsedArgs): Promise<number> {
   // parse-args reads `--check` as a boolean only when the next token is another
@@ -61,7 +79,8 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
 
   if (files.length === 0) {
     console.error("usage: lares carrier normalize <file.mem ...> [--check]");
-    console.error("  canonicalize a meme carrier's framing (embeds the meta-declared namespace into the SOH).");
+    console.error("  canonicalize a meme carrier's framing (embeds the meta-declared namespace into the SOH)");
+    console.error("  and re-stamp its block check over the body that check follows.");
     console.error("  --check     report carriers that would change; write nothing (exit 1 if any) — for CI/pre-commit.");
     console.error("  --gradient  name each file's kind and the marks that kind requires and lacks; write nothing.");
     console.error("  --edges     name the addresses these carriers point at, and which of them answer.");
@@ -93,16 +112,29 @@ export async function cmdNormalize(args: ParsedArgs): Promise<number> {
       for (const fl of res.flags) console.log(`  ⚠ ${fl}`);
     }
 
-    if (!res.changed) continue;
+    // THE CHECK COVERS THE BODY, SO IT IS PART OF BEING CANONICAL. Framing rides inside the checked
+    // span: canonicalizing a carrier and leaving its old check standing hands the next door a carrier
+    // this gesture just made non-canonical. A carrier whose body drifted for any other reason gets the
+    // same repair here, which is what a sweep needs — it edits, then re-stamps at one door.
+    //
+    // STAMPED AFTER FRAMING, never before: the bytes the check covers are the ones normalize leaves.
+    const stamped = restamp(res.text);
+    const changed = res.changed || stamped !== res.text;
+
+    if (!changed) continue;
     drifted++;
 
     if (check) {
       console.log(`would normalize: ${f}`);
     } else {
-      writeFileSync(abs, res.text);
+      writeFileSync(abs, stamped);
       console.log(`normalized: ${f}`);
     }
     for (const n of res.notes) console.log(`  - ${n}`);
+    if (stamped !== res.text) {
+      console.log(check ? "  - block check would re-stamp over the body it follows"
+                        : "  - block check re-stamped over the body it follows");
+    }
   }
 
   const tail = flagged > 0 ? ` (${flagged} flagged for triage)` : "";
