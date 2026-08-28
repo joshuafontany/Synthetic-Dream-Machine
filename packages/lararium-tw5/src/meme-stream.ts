@@ -4,9 +4,9 @@
  * Carrier framing uses HTML-entity control sigils as stream boundaries:
  *
  *   <<^ code="&#x0001;" namespace="[prefix?]"  ? -> lar:///URI >>   SOH — opens a carrier, declares URI
- *   <<^ code:"&#x0002;" [^>]*>>               STX — header→body boundary
- *   <<^ code:"&#x0003;" [^>]*>>               ETX — closes body (carrier done)
- *   <<^ code:"&#x0004;" [^>]*>>               EOT — carrier exit sigil
+ *   <<^ code="&#x0002;" [^>]*>>               STX — header→body boundary
+ *   <<^ code="&#x0003;" [^>]*>>               ETX — closes body (carrier done)
+ *   <<^ code="&#x0004;" [^>]*>>               EOT — carrier exit sigil
  *   <<~ -> ? >>                                return-throat — EOT variant
  *   <<~ ahu #slot >>...<<~/ahu >>             ahu section — incremental child event
  *
