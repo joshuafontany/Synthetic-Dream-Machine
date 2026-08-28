@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth >>
 ```toml meta
 cacheable  = false
 confidence = 8
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/salt-stair-booth"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -624,6 +624,6 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Sclzwv-NjGah2rpVoeE8t8uMc1scuQK9GEvBr3H7RO4
+<<^ code="&#x0003;" >>ni:///sha-256;-wb_yNeUGuGupe7qT76Sf4dk4RwO3W99KJIUInZG2a0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

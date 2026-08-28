@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/hoike >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/hoike >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/hoike.mem"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -112,6 +112,6 @@ The layer carries the Eduyot pattern: minority opinions kept with attribution so
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;S1a5HWoI6rDd1rVKPrHHbtY-GYds4GpQjiaRX4mLsbs
+<<^ code="&#x0003;" >>ni:///sha-256;mV5JX85iiNUZq_C-FYn57k5O6ES_Y6EGQERLHkOtwNg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

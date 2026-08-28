@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/epic/powers-composition-rewrite.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Epic — Powers Composition Rewrite
 
@@ -777,6 +777,6 @@ history if ever needed.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-m9iHwqK-7YIQ6K4kgmXUvdWMiqQt5sFFRqv8aWNT3k
+<<^ code="&#x0003;" >>ni:///sha-256;dSE0Sk8GvtpBySvwpm5rKmMRSQ5KNybhxIlqQrysE2Q
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

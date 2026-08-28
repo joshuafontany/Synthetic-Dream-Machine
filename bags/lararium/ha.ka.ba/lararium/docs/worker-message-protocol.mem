@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/worker-message-protocol >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/worker-message-protocol >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/worker-message-protocol.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/docs/worker-message-protocol"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -114,6 +114,6 @@ These three types cover the full P.3 boundary surface. Lock them before shipping
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yEzAebZMDvLAizRBJwN1pV4LclxJhP9_0Tf2DsuBe6k
+<<^ code="&#x0003;" >>ni:///sha-256;-HNKMqEgXweS6gwMfPiKmDPoUkIR8Uk9hQItrPD-C5g
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

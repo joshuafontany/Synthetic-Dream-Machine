@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/causal-island >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/causal-island >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/causal-island.mem"
@@ -17,7 +17,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/causal-island"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Causal Island — Ontological Law
 
@@ -136,6 +136,6 @@ Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorp
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NU_9X9sOFtZvmMY6ymOcbeKH_LgHS4xTnA7b8rPwXjE
+<<^ code="&#x0003;" >>ni:///sha-256;dHcLko8ntlETlSPbHYG1VTVbjTKQk5U4u2HRvwS8Nlo
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

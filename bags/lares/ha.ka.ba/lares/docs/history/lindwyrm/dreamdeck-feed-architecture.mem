@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
 ```toml meta
 cacheable       = false
 confidence      = 14
@@ -18,7 +18,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -277,6 +277,6 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch //The 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;M_yTF8h1CmGwg2As0u2_T_EBiFIkPSiGHEZSH5cXlC4
+<<^ code="&#x0003;" >>ni:///sha-256;jGYtr6IQykW2ofO_ZshEoZHTGcU_f-cxWAhyiaGjnsI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

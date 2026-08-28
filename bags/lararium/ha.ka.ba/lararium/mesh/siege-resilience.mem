@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/siege-resilience.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/siege-resilience"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Siege Resilience ~ how the mesh outlasts the necrospire
 
@@ -243,6 +243,6 @@ Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.k
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wB0wOniFRyw0zxUtGkNQ6pICaL4jxzcV3H89XGRu6B4
+<<^ code="&#x0003;" >>ni:///sha-256;_st1blSdoq5Jdul1Qs-JA-0WVs4DzE7PnD-yu4H7j-Q
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

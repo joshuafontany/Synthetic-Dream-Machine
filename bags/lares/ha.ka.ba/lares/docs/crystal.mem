@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/crystal >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/crystal >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/crystal.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/crystal"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -51,6 +51,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;EuZME6XvtXpEeks4fl3qcnAfoxEqsb20CSaC0QgGWDA
+<<^ code="&#x0003;" >>ni:///sha-256;04pVGk87S5KB94IFdi87xvz9EW1r-Eo0stQC5A8OVWU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

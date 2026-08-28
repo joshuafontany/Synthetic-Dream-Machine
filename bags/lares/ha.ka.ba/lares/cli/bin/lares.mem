@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/cli/bin/lares >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/cli/bin/lares >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/cli/bin/lares.mem"
@@ -13,7 +13,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/cli/bin/lares"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -28,6 +28,6 @@ Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispa
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bzVkgZDlL6y0iR6Ld5eyu5bSk1W-zi8z5n7lElpAfyo
+<<^ code="&#x0003;" >>ni:///sha-256;d2XKyRBS5mOMDS0-P05XfU7BEkrFRuxFS8GtvIh5hHo
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

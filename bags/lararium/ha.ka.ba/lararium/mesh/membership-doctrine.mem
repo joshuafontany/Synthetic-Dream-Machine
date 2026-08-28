@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⚕" ? -> lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/membership-doctrine.mem"
@@ -23,7 +23,7 @@ written   = "2026-07-21"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! The Membership Doctrine ~ track contracts, never identities
 
@@ -205,6 +205,6 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3SN9CfQ9B_jHzeDqU_fVCpHzdYANlFfeuOL4LrpghrE
+<<^ code="&#x0003;" >>ni:///sha-256;T4FgDAr_B5TawSu2yLz5ck0K2I3S3Ik26cxTX2dDNlU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

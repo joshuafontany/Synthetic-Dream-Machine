@@ -189,15 +189,19 @@ export function memeticWikitextDeserializer(
     // The Kapu SOH variant (&#x0011; DC1) carries its own semantics — the
     // code survives on the parent as `carrier-soh`, never normalized away.
     // A NAMED PARAM WINS OVER THE BARE PREFIX, and the order matters more than it looks. The bare form
-    // takes everything between the head and the control entity as the namespace — which reads correctly
-    // only while nothing else stands there. Put one named param in front of the entity and the prefix
-    // scan returns `code:"` as a namespace: no throw, no diagnostic, a wrong glyph carried forward into
-    // every render and every re-emission. The reader that breaks FIRST under a frame migration breaks
-    // SILENTLY, so it learns the new shape before any carrier writes one.
-    const nsParam = /^<<[~^][^>\n]*?\bnamespace[:=]\s*"([^"]*)"/.exec(ev.fullText);
-    const nsBare  = /^<<\^([^&:\n]*)&#x(0001|0011)/.exec(ev.fullText);
-    // The heading variant rides its own capture: a `code:` param names it, else the bare entity does.
-    const sohCode = /^<<\^[^>\n]*?\bcode[:=]\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
+    // takes everything between the head and the control entity as the namespace, which reads correctly
+    // only while nothing else stands there. Put one named param in front of the entity and an unfenced
+    // prefix scan returns `code=` as a namespace: no throw, no diagnostic, a wrong glyph carried into
+    // every render and every re-emission — the quietest way this frame has ever broken.
+    //
+    // SO THE BARE SCAN STOPS AT A BINDING MARK. Its class excludes them, and that exclusion is the
+    // whole guard: a namespace is glyphs, and a glyph is never a mark that binds. This reader breaks
+    // FIRST and SILENTLY under any change to the frame's spelling, so the class is the line to check
+    // whenever the frame's binding changes.
+    const nsParam = /^<<[~^][^>\n]*?\bnamespace=\s*"([^"]*)"/.exec(ev.fullText);
+    const nsBare  = /^<<\^([^&:=\n]*)&#x(0001|0011)/.exec(ev.fullText);
+    // The heading variant rides its own capture: a `code=` param names it, else the bare entity does.
+    const sohCode = /^<<\^[^>\n]*?\bcode=\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
       ?? nsBare?.[2];
     const namespace = (nsParam?.[1] ?? nsBare?.[1] ?? "").trim();
     if (namespace.length > 0 && tiddlers.length > 0) {
@@ -782,7 +786,7 @@ export function splitBodyTiddler(
 //
 // Canonical-form law (handoff #pattern-integrities §2) binds the output:
 //   1. idempotent render — canonical input round-trips byte-identical
-//      (sigil spacing `<<^ code:"&#x0002;" >>`, one-blank-line block margins);
+//      (sigil spacing `<<^ code="&#x0002;" >>`, one-blank-line block margins);
 //   2. framing normalizes once — the meta block re-emits sorted + aligned
 //      from fields (authored key order and padding do not survive the
 //      record stratum);
@@ -1054,14 +1058,14 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // nothing here has to check whether one stands — a suppression check and the field it guarded, gone
   // together. What the author wrote ABOVE the declaration still rides in `prologue` and emits first.
   out += `${DECLARATION}\n\n`;
-  out += `<<^ code:"${sohCode}"${ns ? ` namespace:"${ns}"` : ""} ? -> ${memeUri} >>\n`;
+  out += `<<^ code="${sohCode}"${ns ? ` namespace="${ns}"` : ""} ? -> ${memeUri} >>\n`;
   out += carriageText(reader, memeUri, "preamble");
   if (meta) out += "```toml meta\n" + meta + "```\n\n";
   out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f);
   // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
   // where the body begins and computes over the bytes it has actually assembled — never over a field.
   const spanStart = out.length;
-  out += `<<^ code:"${MARK("STX")}" >>\n\n`;
+  out += `<<^ code="${MARK("STX")}" >>\n\n`;
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
   // attestation block follows and ETB terminates it.
@@ -1076,11 +1080,11 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // record, and a carrier that arrived unchecked gains its check on the first projection rather than
   // staying unchecked because it always had been.
   const sila = str("$carrier-sila");
-  out += `\n\n<<^ code:"${MARK("ETX")}" >>`;
+  out += `\n\n<<^ code="${MARK("ETX")}" >>`;
   out += bccOfSpan(out.slice(spanStart));
   out += "\n";
-  if (sila) out += `\n${sila}\n<<^ code:"${MARK("ETB")}" >>\n`;
-  out += `\n<<^ code:"${MARK("EOT")}" -> ? >>\n`;
+  if (sila) out += `\n${sila}\n<<^ code="${MARK("ETB")}" >>\n`;
+  out += `\n<<^ code="${MARK("EOT")}" -> ? >>\n`;
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
@@ -1116,7 +1120,7 @@ export function deserializeCarrier(
         from: 0, to: text.length, severity: "error",
         source: "memetic-wikitext", code: "postamble-content",
         message: `${stranded} line(s) stand between ETX and EOT. The text ends at ETX; that slot `
-               + "carries the block check alone. Move the content above the `<<^ code:\"&#x0003;\" >>` close.",
+               + "carries the block check alone. Move the content above the `<<^ code=\"&#x0003;\" >>` close.",
       });
     }
     if (!String(record.title ?? "").includes("/parse-warning/")) continue;

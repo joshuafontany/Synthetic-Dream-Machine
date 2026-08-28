@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/spine >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/spine >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/spine.mem"
 l-space         = "stable"
@@ -16,7 +16,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/spine"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -149,6 +149,6 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;F9W9ehu5_KPSGYSwa6fQGuYhE7cFkpBno-CFom4mvr8
+<<^ code="&#x0003;" >>ni:///sha-256;so3h7yCk-0MKJPFSEPMK5tC1Jkb6Dv6UJPzKGiaP8oE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

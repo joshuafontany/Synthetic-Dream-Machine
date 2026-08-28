@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/braided-islands >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/braided-islands >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -19,7 +19,7 @@ uri-path   = "ha.ka.ba/lares/api/pono/braided-islands"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -101,6 +101,6 @@ without a loom.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2RDy-z2SNssv7d4Rq3f2GcSLIh6LjpAOVBdTsXrKjAk
+<<^ code="&#x0003;" >>ni:///sha-256;OitTmstGFTrS2udrT0-g7pAxB6i9o7qyhbOZ96C98K8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

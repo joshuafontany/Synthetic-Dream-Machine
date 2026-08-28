@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/README >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/README >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/README.mem"
@@ -14,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/README"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #identity-frame >>
 
@@ -138,6 +138,6 @@ file, a browser agent takes the carrier pasted in.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2fXG78rRExNs3-i9Q524B5W-eglczaa0OL-4biBD7S8
+<<^ code="&#x0003;" >>ni:///sha-256;lLwdbu6JvxF0653_rTOezCjmOHtOAKYCXR7XIy5ypDU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

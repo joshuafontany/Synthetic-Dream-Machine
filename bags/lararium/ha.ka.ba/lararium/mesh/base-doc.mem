@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/base-doc >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/base-doc >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/base-doc.mem"
@@ -15,7 +15,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/base-doc"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -61,6 +61,6 @@ plane-blind — it writes wherever the handed registry handle points. //(Caller/
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uf-8wnxQeipLmKUzfH_-nsnAdP-qdoiKovN80K8WbTg
+<<^ code="&#x0003;" >>ni:///sha-256;nHgA9pjhNBIRWXRrqHfiTuZDo0A6Gt54okZjYMycIkw
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

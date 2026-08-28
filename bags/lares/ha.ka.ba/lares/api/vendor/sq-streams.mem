@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/vendor/sq-streams >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/vendor/sq-streams >>
 ```toml meta
 cacheable          = true
 file-path          = "bags/lares/ha.ka.ba/lares/api/vendor/sq-streams.mem"
@@ -17,7 +17,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/vendor/sq-streams"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #about >>
 
@@ -71,6 +71,6 @@ version bumped in the file and not here leaves the tree carrying one thing and s
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;EQQbhNEtBnkeTlMlq__KifvWdU4xrmoZ0SO60cyK0NM
+<<^ code="&#x0003;" >>ni:///sha-256;a6a_Zk0fp_z6FstIs5g6g69ETaNOrjZWeVTKINjrcic
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

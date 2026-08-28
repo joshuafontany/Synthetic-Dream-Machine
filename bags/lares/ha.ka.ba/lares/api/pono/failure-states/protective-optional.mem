@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/protective-optional.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/protective-optional"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -66,6 +66,6 @@ If the parameter is optional and a real outside consumer needs the default, that
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0CdSRC9XaD2grOkYDQCQVPqcOc3d-dOnshGJx63sOl0
+<<^ code="&#x0003;" >>ni:///sha-256;TlX0yyDRjqqI2LAMHbFvZgELt1IP2rmbaqvR1wyyQoc
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

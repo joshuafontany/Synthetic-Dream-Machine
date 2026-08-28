@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/consume-archive >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/consume-archive >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/history/consume-archive.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/history/consume-archive"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -83,6 +83,6 @@ Each row: a research file the pass consumed, and the doctrine that carries its c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;b6tTHIynIVl1yDKH-RyHYieKWcSF4F0sNEZtTp_MQGw
+<<^ code="&#x0003;" >>ni:///sha-256;DmGiXbjJupXERDB2JG3lbf78MYqZOCwHSu1FlLmIhMI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

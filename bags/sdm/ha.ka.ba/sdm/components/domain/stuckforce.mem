@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/domain/stuckforce >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/domain/stuckforce >>
 ```toml meta
 cacheable = true
 caption   = "stuckforce"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/domain/stuckforce"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Stuckforce
 
@@ -71,6 +71,6 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YjUCBXGgcpNnz3cvq2D2oSkf7OC_lS1XoRgW0gUiYws
+<<^ code="&#x0003;" >>ni:///sha-256;ZBgIF8yK98QI3sZg-p65MaBQgP88M7LG92w2I4XNbBE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

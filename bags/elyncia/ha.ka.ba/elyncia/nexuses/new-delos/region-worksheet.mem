@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
 ```toml meta
 cacheable  = true
 confidence = 11
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -197,6 +197,6 @@ First-Breaking cult fragment? Where do the smuggling wars actually land their ca
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZBw19gPPzFFjvTXDGuJR-JRO4yWM7k4AXrYtkKzSAeY
+<<^ code="&#x0003;" >>ni:///sha-256;ZtdO5vyM8m9HwOcYWuD6_7mdmoJQ6Ve4kFm32Q-1Yg4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

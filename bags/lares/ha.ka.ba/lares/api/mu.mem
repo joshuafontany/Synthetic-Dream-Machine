@@ -15,7 +15,7 @@ They arrive already moving.
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/mu.mem"
@@ -35,7 +35,7 @@ uri-path  = "ha.ka.ba/lares/api/mu"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -106,6 +106,6 @@ Mu does not hold:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GlHlA2nVUFt3bvbfV6WodX4ErMIRKIF7vSVsndem__s
+<<^ code="&#x0003;" >>ni:///sha-256;LMojRdJipeKZnAngEoNm0Su_oSYBqE5Gq-hTcH7pngU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

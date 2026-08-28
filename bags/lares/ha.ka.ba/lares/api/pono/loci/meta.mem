@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci/meta >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci/meta >>
 ```toml meta
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci/meta.mem"
 mana      = 15
@@ -14,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loci/meta"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! IAM
 
@@ -216,6 +216,6 @@ Signs of gain:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SepmAiTXI7WuqXaTaQmjBsAbO5OtuhEHKzZgrTzPwlU
+<<^ code="&#x0003;" >>ni:///sha-256;FGRv06044nHys3VB6CQxlQRqJT3XcDCgc96zqJJ1xRU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

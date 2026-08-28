@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/sigil >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/sigil >>
 ```toml meta
 body-sha256   = "466661b14ac6fd3d3b560f87f698927c6857905c5ff020e21b965a05a24cf902"
 cacheable     = true
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/sigil"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -39,6 +39,6 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/sigil"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PAnp9qNV99Oy6Ow9v8Tf7MZ4Ci7VrD-tePoQW_6x7j0
+<<^ code="&#x0003;" >>ni:///sha-256;c7RFyE-36ATpfqLgFcgQ4dBod7KR7XSN1KPRmmzMFTo
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

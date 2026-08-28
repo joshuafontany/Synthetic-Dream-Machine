@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/bags/crossroads >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/bags/crossroads >>
 ```toml meta
 bag       = "crossroads"
 cap-tier  = "public"
@@ -18,4 +18,4 @@ clone carries it) · `ley` (nowhere durable — it lives while the mesh carries 
 
 A repository home names a REGISTERED id, never a path: the bag names WHAT, each vessel resolves WHERE.
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

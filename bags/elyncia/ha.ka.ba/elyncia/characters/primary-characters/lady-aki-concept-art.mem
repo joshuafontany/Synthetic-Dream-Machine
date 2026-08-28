@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-art"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -225,6 +225,6 @@ When Aki walks into a settlement:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;5IVunyTN9TqUhoslKxwa-vfoh_Za7BM38TwiMHx0kjw
+<<^ code="&#x0003;" >>ni:///sha-256;iyxnYm6rkkSUW7FsJI0RkbslfHMZ-LT-c-7ZgosZVB0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

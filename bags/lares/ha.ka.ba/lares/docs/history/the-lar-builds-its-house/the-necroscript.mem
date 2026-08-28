@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necroscript >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necroscript >>
 ```toml meta
 cacheable     = false
 confidence    = 11
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necroscript"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -138,6 +138,6 @@ Forward, open, to the arc that follows — unwritten, its outcome unclaimed:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MgBBA6HT9h2QQ-eyw2fpGJp6jgO7C3rMShmMtJK0LgA
+<<^ code="&#x0003;" >>ni:///sha-256;M5GzBx8iMQc5VPYk7RCxLdZtt-owXeRSRk7TsAjbR9U
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

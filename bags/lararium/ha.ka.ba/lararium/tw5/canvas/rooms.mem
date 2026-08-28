@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/canvas/rooms >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/canvas/rooms >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/canvas/rooms.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/canvas/rooms"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -135,6 +135,6 @@ label      = "← System"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oUt0ok2i0_HVFtdifuX2fFgteh88ZlX89yJNs64rBl4
+<<^ code="&#x0003;" >>ni:///sha-256;26-8MhUZ_LBM1mnjBzaANh155jS5QTzVF7v1E2muAwE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

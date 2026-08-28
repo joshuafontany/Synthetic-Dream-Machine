@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meta-panel.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/meta-panel"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 \procedure lar-stat-bar(field, value, threshold:"16")
 <div class="lar-stat-row">
@@ -119,6 +119,6 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hdvrsU4xJJTLJAFZb2oGrXqgWrc1q3A2-qf3_50h1dM
+<<^ code="&#x0003;" >>ni:///sha-256;_ivkye1484JAw1la-HHum7GIyWOeeqnTcAB8DBxEhyY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

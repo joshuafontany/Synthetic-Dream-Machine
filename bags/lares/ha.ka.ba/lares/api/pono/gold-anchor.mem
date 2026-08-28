@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/gold-anchor >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/gold-anchor >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/gold-anchor.mem"
@@ -20,7 +20,7 @@ written   = "2026-06-30"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -338,6 +338,6 @@ spirit's lane); this meme states the design they enact.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;02mf5EFlwMKkzSmCBlW-s1ly4g-W16r4Z5xOs3VmDyE
+<<^ code="&#x0003;" >>ni:///sha-256;Ty4YE6CM0xoTSAIH6AagImMKxOU8VtrS5l2BIg0n23Y
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

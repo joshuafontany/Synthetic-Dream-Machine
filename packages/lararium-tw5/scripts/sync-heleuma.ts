@@ -609,7 +609,7 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
 
   const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
 
-<<^ code:"&#x0001;" ? -> lar:///${uriPath} >>
+<<^ code="&#x0001;" ? -> lar:///${uriPath} >>
 \`\`\`toml meta
 uri-path    = "${uriPath}"
 file-path   = "${filePath}"
@@ -630,7 +630,7 @@ cacheable   = true
 status-date = "${new Date().toISOString().slice(0, 10)}"
 \`\`\`
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -656,9 +656,9 @@ Exported symbols: \`${d.symbols.join("`, `")}\`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>
+<<^ code="&#x0003;" >>
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>
 `;
 
   writeFileSync(memePath, meme, "utf8");

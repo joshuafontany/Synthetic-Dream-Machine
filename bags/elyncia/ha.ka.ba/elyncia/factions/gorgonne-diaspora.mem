@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/gorgonne-diaspora"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -57,6 +57,6 @@ rigged with cloth, and a crew's toasts run in rounds, in sequence, by rank.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;R2YXayD-cylyiVTuJwUx8Jfc7255cmRLgy9B0ni7fdw
+<<^ code="&#x0003;" >>ni:///sha-256;Qla9Z6ZkYNcGJXi8Q-Yz0bbv4HR9rHLiZRlMIxAYOHI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/papalohe >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/papalohe >>
 ```toml meta
 body-sha256   = "83587b80cdb7cd55e8b02a4034336053d5003d87a403a97c80c6f39d3ebff759"
 cacheable     = true
@@ -19,7 +19,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/papalohe"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -45,6 +45,6 @@ Exported symbols: `PapaloheWidget`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;8w3VumNTIuHFyY_RgaPvGR9m0caGnrJ4SIZtJN1c5pk
+<<^ code="&#x0003;" >>ni:///sha-256;jntStBNGPWsiE0qFVCAX8d16j1B7D_xM5O758Qt8OlU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

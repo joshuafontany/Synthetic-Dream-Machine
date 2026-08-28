@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -42,6 +42,6 @@ the cleanup pass rules it.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GqkA4qtZmMGKUcwUbDsMqV1MU73CrK8KKuDpdmzGObk
+<<^ code="&#x0003;" >>ni:///sha-256;kas4HtiuWNeanFzL1y5Psu8GB5wXReZPkXcVEgU06Mk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -8,11 +8,11 @@
  * idempotent) hold — rather than loosening the gate that guards the graph.
  *
  * Classes closed here (the ones a hand-authored or lifted carrier most often trips):
- *   1. **SOH opener.** The opener canonicalizes to `<<^ code:"&#x0001;" namespace:"[namespace-glyphs]" `
+ *   1. **SOH opener.** The opener canonicalizes to `<<^ code="&#x0001;" namespace="[namespace-glyphs]" `
  *      — one space after `<<^`, then the meta-declared namespace as LITERAL glyphs
  *      (or none), then the SOH char. Two drifts trip it: a missing/stale namespace
  *      (the renderer re-injects → round-trip breaks), and a missing space
- *      (`<<^ code:"&#x0001;" `, the lifted-corpus form — 10 stragglers against 102 canonical
+ *      (`<<^ code="&#x0001;" `, the lifted-corpus form — 10 stragglers against 102 canonical
  *      siblings). The meta field is authoritative; the SOH is derived from it.
  *   2. **Register band.** The meta `register` expands its band CODE (P · PS · S ·
  *      SC · C) to the canonical band word (Provisional … Canon). A value OFF the
@@ -48,7 +48,7 @@ const DECLARATION =
   "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
 
 const SOH_OPENER_RE =
-  /(<<\^)[ \t]*(?:code[:=]"(&#x(?:0001|0011);)"(?:[ \t]+namespace[:=]"([^"]*)")?|([^&\n]*?)(&#x(?:0001|0011);))/;
+  /(<<\^)[ \t]*(?:code="(&#x(?:0001|0011);)"(?:[ \t]+namespace="([^"]*)")?|([^&\n]*?)(&#x(?:0001|0011);))/;
 
 /** Decode `&#xNNNN;` entities to literal glyphs; non-entity chars pass through. */
 function decodeEntities(s: string): string {
@@ -128,7 +128,7 @@ export function normalizeMemeSource(src: string): NormalizeResult {
     // Canonical opener: the control head, the code param, then the namespace param where the meta
     // declares one. Comparing the WHOLE matched head rather than the namespace alone canonicalizes
     // spacing and param order together, so one rewrite settles every drift the head can carry.
-    const rebuilt = `${soh[1]} code:"${code}"${want ? ` namespace:"${want}"` : ""}`;
+    const rebuilt = `${soh[1]} code="${code}"${want ? ` namespace="${want}"` : ""}`;
     if (soh[0]! !== rebuilt) {
       text = text.slice(0, soh.index) + rebuilt + text.slice(soh.index + soh[0]!.length);
       notes.push(have !== want

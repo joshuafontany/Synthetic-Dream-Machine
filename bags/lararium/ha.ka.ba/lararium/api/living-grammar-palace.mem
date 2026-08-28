@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/living-grammar-palace.mem"
@@ -20,7 +20,7 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -747,6 +747,6 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;flUyLeex4rAzcR4AKI7kyI77PX14fZuUVCpLjnC9k2Q
+<<^ code="&#x0003;" >>ni:///sha-256;casZKveg_FNWXzw3T8q881MVnrn8ur8r6SaSMB7cr20
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

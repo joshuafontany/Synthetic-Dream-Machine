@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -40,6 +40,6 @@ their host Realms; host-region worksheets may cross-reference.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ZlYeX4Jgkp0vGJ4e1XfNimh_Suetxy8woYThBxlUlK4
+<<^ code="&#x0003;" >>ni:///sha-256;vtzsPpEsqtsuGW3jvIVMo96Dh69N_fFBc2vMvnoaOOI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

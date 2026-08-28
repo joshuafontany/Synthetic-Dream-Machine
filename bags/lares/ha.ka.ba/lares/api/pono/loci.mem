@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loci"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -203,6 +203,6 @@ Convention fails when:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WKRoDUNt6dpo4X4ztexY8Ghy7RgPa0Uc5bAxhytxNxU
+<<^ code="&#x0003;" >>ni:///sha-256;8288qgm0ofyWDNkpz-mPb6fD67PqjJPmlPNWe65Ba3M
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

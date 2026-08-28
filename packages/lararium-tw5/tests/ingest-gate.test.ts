@@ -97,7 +97,7 @@ describe("ingest-gate — the Confluence triangle decides", () => {
   test("unparseable carrier → refuse, loudly", () => {
     // a closer swallowed by a TRULY unclosed fence (opened at the tail,
     // nothing after it to close on) — the doubling hazard
-    const broken = source.replace("\n<<^ code:\"&#x0003;\" >>", "\n```text\n<<^ code:\"&#x0003;\" >>");
+    const broken = source.replace("\n<<^ code=\"&#x0003;\" >>", "\n```text\n<<^ code=\"&#x0003;\" >>");
     expect(broken).not.toBe(source);
     const d = decideIngest({
       uri: URI, diskText: broken, diskHash: sha(broken),

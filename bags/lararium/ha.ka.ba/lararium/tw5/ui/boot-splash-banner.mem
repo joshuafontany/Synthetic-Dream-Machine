@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/boot-splash-banner >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/boot-splash-banner >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/boot-splash-banner.mem"
@@ -15,12 +15,12 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/boot-splash-banner"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <$reveal type="nomatch" state="$:/lararium/boot-splash/active" text="">
 <div class="lar-boot-banner">⬡ lararium — warming causal islands…</div>
 </$reveal>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BMguAyp9yIVe4gi_rr1ujAQ4JqHR8bbpwtLF72BbzeY
+<<^ code="&#x0003;" >>ni:///sha-256;KCWWSVDtfKyNn6Al0kGmOByUgQRfWRpLa5PeP3ESA3M
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

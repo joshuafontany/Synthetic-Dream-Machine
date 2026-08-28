@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/sigil-aka >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/sigil-aka >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/sigil-aka.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-aka"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -118,6 +118,6 @@ could include thumbnail + og-title in the handshake). Hold open.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;NTY-T97SPIrokdhPIVJP5OrI7Ani6tgZz52vFu4nqbw
+<<^ code="&#x0003;" >>ni:///sha-256;Q3yLix4nX_YwME7tA_1NNHO9C7_jM7eVdJMyjV-spE4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

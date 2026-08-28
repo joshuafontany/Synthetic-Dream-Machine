@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/docs/tw5-calls-colon-caveat >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/docs/tw5-calls-colon-caveat >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/tw5-calls-colon-caveat.mem"
@@ -13,13 +13,13 @@ register   = "Synthesis-Canon"
 retain     = true
 role       = "the upstream docs correction for TiddlyWiki's `Calls` tiddler — an unquoted parameter value carrying a colon reads as a named parameter, which the prose there permits and the grammar does not"
 status     = "designed"
-status-why = "every example rendered in a booted wiki; the pull request stands unopened and wants a TiddlyWiki5 checkout"
+status-why = "every example rendered on upstream/master 516135e1b; the pull request stands unopened"
 tags       = ["api/pono/tiddlywiki-wikitext"]
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/tw5-calls-colon-caveat"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -105,6 +105,6 @@ A time of day trips the case a URI trips, so the warning leads with the general 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vwEHiHVcozo5HA30G6qbfUjxeytoEQmB-agD4qGGoY8
+<<^ code="&#x0003;" >>ni:///sha-256;tFVQoTtGpdMBNskct7fyeilFq8DyR30Q-hAKm-XVYkA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

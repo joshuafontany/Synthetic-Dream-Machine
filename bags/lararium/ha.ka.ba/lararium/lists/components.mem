@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/lists/components >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/lists/components >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/lists/components.mem"
@@ -14,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/lists/components"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -43,6 +43,6 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;v0xsugAoVh9FhoOQY8Z_FCIYeYGRZe_zZl6x52T9azU
+<<^ code="&#x0003;" >>ni:///sha-256;6SiYjHUGFy59Q92iW9ySaQQuy7o4bXgvzAta8eYb9-I
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

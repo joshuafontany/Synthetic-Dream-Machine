@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -86,6 +86,6 @@ A heleuma API meme that acquires:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;oMo2_JdF-H8U8vdQDZV4UR3_xt_IjJMF5oaHA0zu5HI
+<<^ code="&#x0003;" >>ni:///sha-256;jCu5K0dZh9Dd6aBMNz1jpoYsEKKNnq6o1HErWk8nytM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

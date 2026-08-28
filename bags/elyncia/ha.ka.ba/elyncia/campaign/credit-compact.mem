@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/credit-compact >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/credit-compact >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/credit-compact"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -69,6 +69,6 @@ They may:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0o4fk57S9-GGxcn4W5C3H5d3_8bmVAqFxFSPyLJYgTg
+<<^ code="&#x0003;" >>ni:///sha-256;WKzBzAnqvBY__r127WZs21MMKOoCRmpUzhY0kLA_Z6Y
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

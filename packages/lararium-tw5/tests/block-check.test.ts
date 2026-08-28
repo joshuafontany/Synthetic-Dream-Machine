@@ -11,8 +11,8 @@ import { classifyPostamble, checkedSpan } from "../src/block-check.js";
 import { bccOfSpan } from "../src/carrier-check.js";
 
 const frame = (slot: string): string =>
-  `<<^ code:"&#x0001;" ? -> lar:///t/x >>\n\`\`\`toml meta\nuri-path = "t/x"\n\`\`\`\n\n` +
-  `<<^ code:"&#x0002;" >>\n\n<<~ ahu #a >>\n\n! Heading\n\n<<~/ahu >>\n\n<<^ code:"&#x0003;" >>\n${slot}\n<<^ code:"&#x0004;" -> ? >>\n`;
+  `<<^ code="&#x0001;" ? -> lar:///t/x >>\n\`\`\`toml meta\nuri-path = "t/x"\n\`\`\`\n\n` +
+  `<<^ code="&#x0002;" >>\n\n<<~ ahu #a >>\n\n! Heading\n\n<<~/ahu >>\n\n<<^ code="&#x0003;" >>\n${slot}\n<<^ code="&#x0004;" -> ? >>\n`;
 
 const stranded = (text: string): string[] =>
   deserializeCarrier(text, { title: "lar:///t/x" }).diagnostics
@@ -42,7 +42,7 @@ describe("the checked span follows the frame, not the prose", () => {
     // BSC's BCC covered "all the characters following STX up to the end of the ETX character".
     // A span that stopped short of ETX would attest to a different block than the one transmitted.
     const span = checkedSpan(frame("")) ?? "";
-    expect(span.startsWith("<<^ code:\"&#x0002;\" ")).toBe(true);
+    expect(span.startsWith("<<^ code=\"&#x0002;\" ")).toBe(true);
     expect(span).toContain("&#x0003;");
     expect(span).not.toContain("&#x0004;");     // EOT ends the transmission, never the text
   });
@@ -55,7 +55,7 @@ describe("the checked span follows the frame, not the prose", () => {
 describe("classifyPostamble", () => {
   test("whitespace and a bare EOT both read as an empty slot", () => {
     expect(classifyPostamble("\n\n").kind).toBe("empty");
-    expect(classifyPostamble("\n<<^ code:\"&#x0004;\" -> ? >>\n").kind).toBe("empty");
+    expect(classifyPostamble("\n<<^ code=\"&#x0004;\" -> ? >>\n").kind).toBe("empty");
   });
 
   test("it counts the stranded lines, so a refusal can name the size of what it refused", () => {

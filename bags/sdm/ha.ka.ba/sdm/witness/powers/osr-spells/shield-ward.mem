@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! OSR Witness — Shield Ward
 
@@ -103,6 +103,6 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-A28E55KhpkJthPv-byK1oDpwFEoEmd-YOXZeiLqISI
+<<^ code="&#x0003;" >>ni:///sha-256;_QoBO_eUwhJRUcjcKklnp_l5tAHgZFj0beYUeqe1ywY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

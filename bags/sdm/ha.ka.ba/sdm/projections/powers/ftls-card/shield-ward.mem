@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Shield Ward — FTLS Card
 
@@ -58,6 +58,6 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BO31e1OixGyjDVVxIw8kfpFXRF0n4IyBeZqcfvXJ9Mc
+<<^ code="&#x0003;" >>ni:///sha-256;XvqwTJvkmo0fO-lMh8ORls8gQS6eXoilKH3SkdJqrVg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

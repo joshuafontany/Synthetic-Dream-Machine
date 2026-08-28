@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⬡" ? -> lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
+<<^ code="&#x0001;" namespace="⬡" ? -> lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/group-as-closure.mem"
@@ -22,7 +22,7 @@ written   = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -200,6 +200,6 @@ group-object, the closure model carries a real pattern integrity, not a stylisti
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bbyB92RLoZdaA2bd9jQ8flLfzR10nqz4b0Js8yPUV_c
+<<^ code="&#x0003;" >>ni:///sha-256;MZuibRZCf51nRTp7el5Wvxx_SG2BKC4T-a2CcsogzWQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/ROADMAP >>
+<<^ code="&#x0001;" ? -> lar:///lares_research/research-streams/lararium/ROADMAP >>
 ```toml meta
 cacheable  = false
 confidence = 18
@@ -15,7 +15,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/ROADMAP"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Lararium Node — Roadmap
 
@@ -3283,6 +3283,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OIKYPiDZI25RDmI6tM6icBkKdwfq4jeO3HY11gjId8o
+<<^ code="&#x0003;" >>ni:///sha-256;cXq5sE-gTkk8BtdUFUMrgP6GBKKfU3K7pJKiI4jGP-A
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/register-stance-complementarity.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/register-stance-complementarity"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -76,6 +76,6 @@ Current comparison surfaces:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tcZXfX3URxc41R3hXC3JZ2oz2H5MmGvNdbI8_99y9-0
+<<^ code="&#x0003;" >>ni:///sha-256;bq1hbuYMG2gswsFuLT31MJiXQZaZcqQ2Ag8HF-MXZys
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

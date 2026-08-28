@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -52,6 +52,6 @@ Use this branch for:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MrgnZxdWFJDs0Kd7gqobimOh2uh0yfa4CRbMAFD2YMk
+<<^ code="&#x0003;" >>ni:///sha-256;oDoNHCwENqRwXm0AX0FD3Aj23u0LF6HeZjwtDBlPZTY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

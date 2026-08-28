@@ -82,7 +82,7 @@ export function renderBagManifest(m: BagManifest): string {
   const lines = [
     DECLARATION,
     "",
-    `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/bags/${m.bag} >>`,
+    `<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/bags/${m.bag} >>`,
     "```toml meta",
     `bag       = "${m.bag}"`,
     `cap-tier  = "${m.tier}"`,
@@ -101,7 +101,7 @@ export function renderBagManifest(m: BagManifest): string {
     "",
     `A repository home names a REGISTERED id, never a path: the bag names WHAT, each vessel resolves WHERE.`,
     "",
-    '<<^ code:"&#x0004;" -> ? >>',
+    '<<^ code="&#x0004;" -> ? >>',
     "",
   ];
   return lines.join("\n");

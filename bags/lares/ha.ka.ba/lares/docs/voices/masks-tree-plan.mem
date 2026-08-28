@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/masks-tree-plan >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/masks-tree-plan >>
 ```toml meta
 cacheable = false
 created   = "Invalid Date"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices/masks-tree-plan"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -263,6 +263,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lK62fSa2IkAYI7XI-rSX0dz2ulkFdY4WxT9X2QZazqc
+<<^ code="&#x0003;" >>ni:///sha-256;EAsYi9_QOXcIu4evNXqRomEDzAVpXkqcciykGIh-4Y8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

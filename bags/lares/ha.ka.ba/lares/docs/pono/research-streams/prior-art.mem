@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/prior-art >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/prior-art >>
 ```toml meta
 cacheable   = false
 file-path   = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams/prior-art.mem"
@@ -16,7 +16,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/prior-art"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -71,6 +71,6 @@ Source: https://owasp.org/www-project-application-security-verification-standard
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-YwleWX5sdGegPw_rvNKnogEa3IooQr7QfTrEeFbBHE
+<<^ code="&#x0003;" >>ni:///sha-256;RTLnGJUMpHhXV1bnTFOmXUHwiETwDGATp_-SkAEp3Ww
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

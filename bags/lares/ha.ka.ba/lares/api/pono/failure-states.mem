@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -74,6 +74,6 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1lqRu1esX1p7JYd-sv-o5foDJ30EgqeUFySnraozeVo
+<<^ code="&#x0003;" >>ni:///sha-256;7XqV1FpV4D3aOQi1QbDO4ynb2D30wsNaITt-fjlVUOU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

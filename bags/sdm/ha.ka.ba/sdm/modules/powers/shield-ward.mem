@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/modules/powers/shield-ward >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/modules/powers/shield-ward >>
 ```toml meta
 cacheable = true
 caption   = "Shield Ward"
@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/modules/powers/shield-ward"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Shield Ward
 
@@ -91,6 +91,6 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4tcaeFi2pyD66ZMtFGTVoGAtjK6U8FcPe3jh7leZuxU
+<<^ code="&#x0003;" >>ni:///sha-256;6hWSNar3bFegi3daQF6WXLJ1W6Wzm2wtRylXbFsAB4s
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

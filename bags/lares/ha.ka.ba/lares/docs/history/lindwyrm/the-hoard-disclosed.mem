@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
 ```toml meta
 cacheable       = false
 confidence      = 14
@@ -18,7 +18,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -272,6 +272,6 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VCjCc4YuFGS1RVXZ2CbeCks-OoHcRxiJR_7T7VcKzNo
+<<^ code="&#x0003;" >>ni:///sha-256;aboMYKnkJyrUQHqpkjq3RNGM2bGyMOh3gwSk6POqCJY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

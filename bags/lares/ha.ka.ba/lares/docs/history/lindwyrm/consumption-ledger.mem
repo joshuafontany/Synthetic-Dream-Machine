@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger >>
 ```toml meta
 cacheable  = false
 confidence = 14
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -112,6 +112,6 @@ Likely next slices:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sTN2e4BHQcyOaqXpxd3O0xWwMLiTm8Oj8dbSgEA4wpg
+<<^ code="&#x0003;" >>ni:///sha-256;G63v2zoO3rCAnR03ozgg9piIVGyaKO3N_RhlxNAokek
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

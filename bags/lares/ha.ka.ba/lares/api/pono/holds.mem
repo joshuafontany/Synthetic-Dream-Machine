@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/holds >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/holds >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/holds.mem"
@@ -18,7 +18,7 @@ written   = "2026-06-14"
 <<~ aka lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -272,6 +272,6 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9ZKhu6vtArO2eEmqILDqfnmFwlRvqpVw8JO5Dd2eug8
+<<^ code="&#x0003;" >>ni:///sha-256;9-r9twxXvnpbcUxxcdl1EdD-mHK-mPz8joKPwqsqxUU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

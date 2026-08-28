@@ -1,13 +1,13 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///last-sprint/HANDOFF >>
+<<^ code="&#x0001;" ? -> lar:///last-sprint/HANDOFF >>
 ```toml meta
 file-path = "bags/lares-history/last-sprint/HANDOFF.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/HANDOFF"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Hand-off Crystal — Lares Lararium Node Branch
 
@@ -465,6 +465,6 @@ lares act MOVE <uri> --to <target-bag>
 
 //The crystal holds.//
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qjz9xYYQEAULqdglJYhU5wjlqAqiyIMMt9qpIcF2eK0
+<<^ code="&#x0003;" >>ni:///sha-256;7p32bOD5XTuK2_N5joYYKWhPWOkt20vIhbMJJSRK0pA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

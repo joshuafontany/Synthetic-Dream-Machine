@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/browser/deletion-map >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/browser/deletion-map >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/browser/deletion-map.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/browser/deletion-map"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! lararium-browser Deletion Map
 
@@ -137,6 +137,6 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MTttDBDwqVFwsanNdeLZsCSJrgaSRnicPTJud9xkin0
+<<^ code="&#x0003;" >>ni:///sha-256;kTywNhyAoJdueSMmvrfU-IT2sR1Z5Nupe-MswnZOGXY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

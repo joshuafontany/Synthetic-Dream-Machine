@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/disk-projection-law >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/disk-projection-law >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/disk-projection-law.mem"
@@ -16,7 +16,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/disk-projection-law"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #pointer >>
 
@@ -32,6 +32,6 @@ The full, load-bearing statement — surfaces, bag roles, projection routing, th
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D9QXmd270AZeMzAYMsQV_hwkhF58hmjVxBGbKn9ILAQ
+<<^ code="&#x0003;" >>ni:///sha-256;zFspva1yJp3d9KnEJELQmFf7iG8cM4wTUKzjgPfQVH8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

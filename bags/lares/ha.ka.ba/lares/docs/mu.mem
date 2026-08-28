@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -72,6 +72,6 @@ AST reader: read the sockets, then route.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hOpQgHTqygTtSeFu2-ef8oBzBY00dDPJ0pzppCGWww0
+<<^ code="&#x0003;" >>ni:///sha-256;zV33i3OYMrZM-fYjP320liF9SqsN_BG5kirXE0Cahk8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

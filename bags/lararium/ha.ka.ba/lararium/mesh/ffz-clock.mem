@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/ffz-clock.mem"
@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/ffz-clock"
 
 <<~ aka lar:///ha.ka.ba/lararium/api/agent-worldline >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -412,6 +412,6 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Kc8T3e8ImsB5hOsN2Kpb4CW6SaR7s57egsGpi6Te2_Q
+<<^ code="&#x0003;" >>ni:///sha-256;Goq-XajS_SwIejs3wku372Dn_YdCvtOTRUh0BZj_sLM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

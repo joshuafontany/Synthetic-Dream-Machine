@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/l-space >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/l-space >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/l-space.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/l-space"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -72,6 +72,6 @@ Working definition:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-3XMBjirG03knZhJMT_L5FwFFLLPoUE412WXir7lQYA
+<<^ code="&#x0003;" >>ni:///sha-256;SeNPzQ9-djKS9EOCQ4Vag8_IIRzQKtreahsto32tgXk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⚷" ? -> lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
+<<^ code="&#x0001;" namespace="⚷" ? -> lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/api/pono/lararium-identity.mem"
@@ -23,7 +23,7 @@ written    = "2026-06-23"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -614,6 +614,6 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;n4Ch-1Mc7angN858ikvCKHLD0D_tSUbcup0fO5ksnpM
+<<^ code="&#x0003;" >>ni:///sha-256;ylWLKGAq-IrtFhvxw8_VsZ5ZRfLTJ431fE7IOvnUsJM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

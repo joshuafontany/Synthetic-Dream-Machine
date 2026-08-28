@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/lares-lararium-binding >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/lares-lararium-binding >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/lares-lararium-binding.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-25"
 
 <<~ aka lar:///ha.ka.ba/lararium/mesh/operator-peer >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -167,6 +167,6 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;91-GEK62kLO31ogwGNYbMXQAkcAmucbDFhs1C93g4dA
+<<^ code="&#x0003;" >>ni:///sha-256;5WA-x8rDc1zAXBk603n2A8LB2mlFpVQl89HSO92DL9I
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

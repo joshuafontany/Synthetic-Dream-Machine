@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/the-thing-event >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/the-thing-event >>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/the-thing-event.mem"
@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/the-thing-event"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -100,6 +100,6 @@ That reads as the same law as //the naming layer performs, so it must never cert
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AeSnh_oHmyAM7SEkJTrNn_tyyOH3STqMzWobCNSS22M
+<<^ code="&#x0003;" >>ni:///sha-256;zUwcfnG-NTTdZQD5cMUzO_fLLNV1BDjLGNvrYkiB8KE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls >>
 ```toml meta
 cacheable     = false
 confidence    = 13
@@ -18,7 +18,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -200,6 +200,6 @@ Act III receives:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;74tK9YPGriCs4YtcRkkjrDPPnpx7RfvIoSxGDCUoE4E
+<<^ code="&#x0003;" >>ni:///sha-256;CuC-McRDws8gfkW-iQhKLwZwMdwBefr6Kriq9Pi1Sik
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

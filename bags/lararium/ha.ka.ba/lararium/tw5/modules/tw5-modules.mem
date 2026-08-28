@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules >>
 ```toml meta
 body-sha256     = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 cacheable       = true
@@ -18,7 +18,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lararium/tw5/modules/tw5-modules"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #source >>
 
@@ -41,6 +41,6 @@ Run `pnpm --filter @lararium/tw5 build` to regenerate.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uKS-6u1J4cx_6VFmQblKRqAgsQ2VUvd3D1BmnXv7Iuw
+<<^ code="&#x0003;" >>ni:///sha-256;nVWf0pifL8cVB5ocR9lbbnjXdww3N9dQkMUHP17W6J0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/workspace-trust-gate.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/workspace-trust-gate"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -69,6 +69,6 @@ The workspace trust gate explains when the node must pause anyway.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;riAP8KRfo7oDsW0b3sGqGEbJ6zG50VWM-vfgyHh2JhQ
+<<^ code="&#x0003;" >>ni:///sha-256;z4NRSiUAxIfP9sLdXqcu5kERCv-sIOnvPALjeeCgo5c
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

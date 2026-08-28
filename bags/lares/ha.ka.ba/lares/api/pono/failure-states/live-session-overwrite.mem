@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -81,6 +81,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;P8g9hh_mgicM8S9P7Ya5xd4FEMctf-IK9oJlPfXZpvg
+<<^ code="&#x0003;" >>ni:///sha-256;EvtKAHOc0XpCzsilTWtoR6o3nB2Ci9aPlqiGLoGhzd8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

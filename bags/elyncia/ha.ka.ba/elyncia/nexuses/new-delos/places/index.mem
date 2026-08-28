@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
 ```toml meta
 cacheable  = true
 confidence = 11
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/index"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -52,6 +52,6 @@ miles (near the Izmir-coast) — constellation members hanging over other Realms
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3AUEl50ke8Y0TWaMiIU_ax-DZZfOKUs-UNyfamH2wBo
+<<^ code="&#x0003;" >>ni:///sha-256;AsF9usMN6CuqEMw5v1IsZHkZIxH_TUdzJ6Yapn0WPRU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

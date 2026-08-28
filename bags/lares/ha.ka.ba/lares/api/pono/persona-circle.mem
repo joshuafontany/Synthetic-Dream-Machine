@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/persona-circle >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/persona-circle >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/persona-circle.mem"
@@ -19,7 +19,7 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/persona-circle"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -217,6 +217,6 @@ And the substrate itself, by canon, has ''no forward-secrecy and no retroactive 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;2koe4ptPsAhdLSRURgZKk-JOji8N9csX9S2PN8Yb0lI
+<<^ code="&#x0003;" >>ni:///sha-256;CwnqPkqHeqresF4zCX4qCajijBUd-raFvmzM6HzFFsU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

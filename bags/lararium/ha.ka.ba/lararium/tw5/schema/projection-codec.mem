@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/schema/projection-codec.mem"
@@ -17,7 +17,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/schema/projection-codec"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -109,6 +109,6 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WjVJO0t49h5MRqY5igu2uBa3BW04hTyWJ0fGFPwm4B8
+<<^ code="&#x0003;" >>ni:///sha-256;vLL_qQCb72mQckwQsU3D-UfwUyC3EJdi9UYRShL0R90
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

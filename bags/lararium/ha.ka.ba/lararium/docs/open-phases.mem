@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/open-phases >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/open-phases >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/open-phases.mem"
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/open-phases"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -116,6 +116,6 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MV5JYuvcfklcE9bjszWjmqGf6MfmpXUqQs05myRT3yk
+<<^ code="&#x0003;" >>ni:///sha-256;lMfarOTOAyBiICAwpdEFzS1cvAoXU0NUNlpOHFJU2bY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

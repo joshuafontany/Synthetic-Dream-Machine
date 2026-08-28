@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/scale-architecture >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/scale-architecture >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/scale-architecture.mem"
@@ -20,7 +20,7 @@ written   = "2026-07-01"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -147,6 +147,6 @@ The cohomological gate ([[cohomological-gate|lar:///ha.ka.ba/lares/api/pono/coho
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;e-f_HvYSKRo2r-GDs6zcqU8W38McODnfMSlTySVh_yQ
+<<^ code="&#x0003;" >>ni:///sha-256;NrFgfT6UXXYEw595XUx0fxDGRBrhLIfhEt3geysdR78
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

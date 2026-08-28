@@ -101,7 +101,7 @@ describe("the frame head locks to control, in both directions", () => {
    * THE ACCEPTING HALF, which the corpus proves every run.
    */
   test("a control-headed frame divides a carrier", () => {
-    const carrier = `<<^ code:"&#x0002;" >>\n${BODY}\n<<^ code:"&#x0003;" >>\n`;
+    const carrier = `<<^ code="&#x0002;" >>\n${BODY}\n<<^ code="&#x0003;" >>\n`;
     expect(checkSpan(carrier)).not.toBeNull();
   });
 
@@ -114,13 +114,13 @@ describe("the frame head locks to control, in both directions", () => {
    * still admitting the speaking head passes every corpus test there is.
    */
   test("a speaking-headed frame does not", () => {
-    const malformed = `<<~ code:"&#x0002;" >>\n${BODY}\n<<~ code:"&#x0003;" >>\n`;
+    const malformed = `<<~ code="&#x0002;" >>\n${BODY}\n<<~ code="&#x0003;" >>\n`;
     expect(checkSpan(malformed)).toBeNull();
   });
 
   /** A frame opening on control and closing on the speaking head divides nothing either. */
   test("a mixed frame does not", () => {
-    const mixed = `<<^ code:"&#x0002;" >>\n${BODY}\n<<~ code:"&#x0003;" >>\n`;
+    const mixed = `<<^ code="&#x0002;" >>\n${BODY}\n<<~ code="&#x0003;" >>\n`;
     expect(checkSpan(mixed)).toBeNull();
   });
 });

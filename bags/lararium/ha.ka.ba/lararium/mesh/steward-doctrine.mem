@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/steward-doctrine.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/steward-doctrine"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Steward Doctrine ~ the cabal that engineers its own inability to rule
 
@@ -109,6 +109,6 @@ Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.k
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3bQPs4nCH9OGOHIrretYzro63NybQm7ISWXlovkOYyE
+<<^ code="&#x0003;" >>ni:///sha-256;w-hnmLC5n5MGYVmTmJ4gr7sFESKOW368wGi9hQyW0o8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/collaboration-model.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/collaboration-model"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -84,6 +84,6 @@ This room leans toward future deeper articulation in:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;jlotMpR2TqVr9OjwmMtkrtOzpg2gCWbnIYpbsw44HMc
+<<^ code="&#x0003;" >>ni:///sha-256;yeTe2B0-OJH8GxbIh2TaPc8aTSt88Q8ZEYtGS0qmt9c
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

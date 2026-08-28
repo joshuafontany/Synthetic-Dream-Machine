@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pono-sigil >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pono-sigil >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/pono-sigil.mem"
@@ -13,7 +13,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -66,6 +66,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;YboVPGJR1x7eRyEjk1A6Tk4c7R7sT7fbFY9Iti50780
+<<^ code="&#x0003;" >>ni:///sha-256;q5PF2GjhQv_qGJB1cnmQOgJ6bZmvOjTemB42vdm9zro
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

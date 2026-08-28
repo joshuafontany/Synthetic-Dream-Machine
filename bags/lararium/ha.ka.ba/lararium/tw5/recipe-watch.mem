@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/recipe-watch >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/recipe-watch >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/recipe-watch.mem"
@@ -15,7 +15,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/recipe-watch"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -87,6 +87,6 @@ CRDT slot the oracles point at.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Vy8_-ruS4VE8rflKiJ4AGHGb-fwfQYv2fF1vqua3QEI
+<<^ code="&#x0003;" >>ni:///sha-256;L1PbOMSwu9B9Mukq0momZbktsTVwhfFm9pykOkb0zak
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

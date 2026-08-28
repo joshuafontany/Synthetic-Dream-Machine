@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/hooponopono >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/hooponopono.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hooponopono"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -113,6 +113,6 @@ Boundary event fields:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mln0XME_388QQCMg7Gk_9q50eoBd4JiM3y3a2snWOH8
+<<^ code="&#x0003;" >>ni:///sha-256;ZgCA_7TX5Xo2fzymkc1pVjlDkSZXLujewILJ8th9Mps
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/index >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/index >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/index"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -87,6 +87,6 @@ Derived from the court-dragon alignment canon, never invented whole:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;k4jbkZj9fpya0DNvdPL-Yip2BAJ_EZpIViiDJhNkE3E
+<<^ code="&#x0003;" >>ni:///sha-256;g3qnbX7tK3IF2TjksQgFG8cwa7_rFHta2xLL2UKNRl8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

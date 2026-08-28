@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/federated-causal-islands.mem"
@@ -17,7 +17,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/federated-causal-islands"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -383,6 +383,6 @@ causal-island-may = [
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gHvzLSKxRd7_DjtDR5IzeeGcCfJhquBpVPG3Az3KfH8
+<<^ code="&#x0003;" >>ni:///sha-256;2ByjQQA-5Nmr-G8AbZ012niWnvip3gpc_Wm1TVhOmyU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

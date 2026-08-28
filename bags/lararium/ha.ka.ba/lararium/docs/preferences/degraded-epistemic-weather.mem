@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -76,6 +76,6 @@ Current comparison surfaces:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0pahHYeNMy_EhcwMKCcFH4SYEKTHx9F1yORK70Rni5w
+<<^ code="&#x0003;" >>ni:///sha-256;Qdc4lRt6bs1gFyZi8VODP3BRAlBivBlDo1nOvQx-row
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/api/island-isomorphism >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/api/island-isomorphism >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/island-isomorphism.mem"
@@ -21,7 +21,7 @@ written   = "2026-06-12"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -98,6 +98,6 @@ re-entry: the kue key; or the migration's step 4 boundary, where the residue get
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gRTZtJ5qk-jrr1TNJSlvCd0-K-5Vl9B4cAZrcOlhtio
+<<^ code="&#x0003;" >>ni:///sha-256;tUV9Kh6lzNzNLKXHXAnGJbe1ltKxen_ilGda6Ya8IJg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -15,8 +15,8 @@
  *   · the bootstrap scanner scans `(?:[^>]|->)*` — it runs before grammar loads and takes the wider
  *     read deliberately;
  *   · the deserializer's SOH scan reads the head's NAMED PARAMS and falls back to the bare prefix,
- *     stopping at a colon — a prefix scan that runs past one reads `code:"` as a namespace and returns
- *     a wrong glyph with no throw, which is the quietest way this frame has ever broken.
+ *     stopping at a binding mark — a prefix scan that runs past one reads `code=` as a namespace and
+ *     returns a wrong glyph with no throw, which is the quietest way this frame has ever broken.
  *
  * Collapsing those into one regex would re-introduce three bugs their comments record. So this module
  * carries the CODE and the NAME; each reader keeps the scan its own context earned.

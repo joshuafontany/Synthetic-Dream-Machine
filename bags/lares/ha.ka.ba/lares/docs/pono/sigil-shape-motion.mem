@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-shape-motion >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-shape-motion >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-shape-motion.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-shape-motion"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -113,6 +113,6 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;HCYBne8EBIdUkPlihkVMfJ6XkY-WzeQh1IOkUvGnMtM
+<<^ code="&#x0003;" >>ni:///sha-256;FXimMKG7qNueR7-PXwlYQ6SleVI_L8h0rEu4-SvueAw
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

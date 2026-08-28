@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/carrier-law.mem"
 l-space         = "stable"
@@ -16,7 +16,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -171,6 +171,6 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bMfxSweBAyhlqHi5z1Vz3iwQ5QUrwKjMlgidv6_Nrms
+<<^ code="&#x0003;" >>ni:///sha-256;PgGUTGvnpfu1dvV2qjiqk3D0CT_pHhseWqEWjdQ_300
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///memes/history/research/talk-story-2026-05-15 >>
+<<^ code="&#x0001;" ? -> lar:///memes/history/research/talk-story-2026-05-15 >>
 ```toml meta
 cacheable   = true
 confidence  = 18
@@ -16,7 +16,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "memes/history/research/talk-story-2026-05-15"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -244,6 +244,6 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;rweiMlZYRacJkZdmybMnrJQJ2vN_KM6slQJQa3v8Jlc
+<<^ code="&#x0003;" >>ni:///sha-256;pkB-zx-vfYWL-G5I8Fs3gKIRt5xsRqgRaOiPoAs5oKY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

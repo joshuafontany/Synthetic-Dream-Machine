@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant stays the semantic root; this skill does not widen or outrank it", "S2: primitive roles stay distinct — ahu, loulou, aka, kahea, kapu, ui, hana, and ? do not silently trade jobs", "S3: uncertainty stays explicit and bounded; kapu qualifies an act instead of replacing it", "S4: boot grammar stays minimal but sufficient for identity, body thresholds, relation, invocation, query, and honest residue", "S5: parse legality, normalization detail, render lowering, long examples, and archive commentary move outward when they stop earning invariant residency"]
@@ -24,7 +24,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Memetic-Wikitext Skill
 
@@ -222,6 +222,6 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;y5vHrEipJqlTcAfrcSXXP1YPS_1MfLHADUYEK5oy258
+<<^ code="&#x0003;" >>ni:///sha-256;ybWEH5a6miaKGK5y_iL8xogScoTHH-g6vOGcAZspV_U
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

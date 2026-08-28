@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lararium/api/ingest-canon >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lararium/api/ingest-canon >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/ingest-canon.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/api/ingest-canon"
 written   = "2026-06-27"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -189,6 +189,6 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;wdVJp6eUC8lA-d7tUmyhZUBb2voeHgDAQFrFaaWjc84
+<<^ code="&#x0003;" >>ni:///sha-256;uRwlHyDXLF_6JL5qZ3_p0zYjyH-c4UMxYF5FGJ0G_m0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

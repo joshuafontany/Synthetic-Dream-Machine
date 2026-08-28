@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/witness/powers/osr-spells.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/sdm/templates/witness/powers/osr-spells"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Template — OSR Spell Witness
 
@@ -64,6 +64,6 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hXc5btGpL_GxtC02hpeerHah19AP3Cv8LUFnBAQi8nM
+<<^ code="&#x0003;" >>ni:///sha-256;j7gFu1X5Q-OvLaa-yvqUcK6uR3BDrNGEQU9iglAodPg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

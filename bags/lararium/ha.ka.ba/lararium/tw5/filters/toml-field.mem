@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/filters/toml-field >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/filters/toml-field >>
 ```toml meta
 body-sha256   = "be6b13cb4d87d73e9447e498196e8ab7d28344a46a5dc322727e4cba7d201158"
 cacheable     = true
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -39,6 +39,6 @@ uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Zm3Yv96AUVVDtKa4AZXy6-N1gbiaao-HxYAO2GQu2jU
+<<^ code="&#x0003;" >>ni:///sha-256;kxQvADzu8wJHNPZBsGq8h-3LipuRGZfVlVfebywj6MM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/prism >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/prism >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/prism.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/prism"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -114,6 +114,6 @@ Prism keeps the worthwhile half --- //reference a piece of content and read its 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OGXRwd0646c5k0DPp145Pd4qOr2XJwH6LUD13sf1wOU
+<<^ code="&#x0003;" >>ni:///sha-256;64rPQmo8RgpWzBVCot6VsaOlBwMxOEAQRP3o4ltEY2o
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

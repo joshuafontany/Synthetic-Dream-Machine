@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-grammar-research >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-grammar-research >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-grammar-research.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-grammar-research"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #purpose >>
 
@@ -416,6 +416,6 @@ When editing grammar meme or parser:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;UdlZ5vEtNK2b5H9Ju1phU7J32F3--Z3Yd_9jGzG7P1Y
+<<^ code="&#x0003;" >>ni:///sha-256;ajGHZUvO4IR7asgUS6dcq_qVMxIz7ZoyTnA7S1cfgvw
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

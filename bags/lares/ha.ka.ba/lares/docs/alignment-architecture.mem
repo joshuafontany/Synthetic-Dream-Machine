@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/alignment-architecture >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/alignment-architecture >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/alignment-architecture.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/alignment-architecture"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #thesis >>
 
@@ -213,6 +213,6 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3BvZC6-Mzp3Xe39lxeKpZQLbAcl-9ii__KbnIvSSSWc
+<<^ code="&#x0003;" >>ni:///sha-256;Skq3S08Q_VvajAkOB4nfdLKHp7_hk5m-WBatQTS1W-o
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/operations-review >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/operations-review >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/operations-review.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/operations-review"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #provenance >>
 
@@ -296,6 +296,6 @@ After the extraction pass closes, these questions remain for a future consolidat
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;I_kglZP8NBHDEOEhZ5dch0lokyZPR7L-6RUkhpuODIg
+<<^ code="&#x0003;" >>ni:///sha-256;5WRiAEuxdv-R7skMssNVubcPSw4GDsBYb9rW6Qf3FJo
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

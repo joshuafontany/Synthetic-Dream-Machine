@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/region-worksheet >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/region-worksheet >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/templates/region-worksheet"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -130,6 +130,6 @@ grain, blessed before moving:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;s3wak41FnMW7QJOkRKCPhFClTeWpMu03O0ajI28H-O0
+<<^ code="&#x0003;" >>ni:///sha-256;3U_t9ejbSK566iht0zC6vXDwnK71Cy-c4Oh0PUw5bPU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

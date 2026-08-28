@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/memetic-wikitext.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/memetic-wikitext"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -69,14 +69,14 @@ Profiles tune posture, not primitive meaning.
 !!! Minimum document
 
 ````markdown
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
 
 
 
 
-<<^ code:"&#x0003;" >>:e4165dad924ed38d
+<<^ code="&#x0003;" >>:e4165dad924ed38d
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>
 ````
 
 !!! Minimum relation, inclusion, invocation
@@ -194,6 +194,6 @@ The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wi
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;_AbUlt6nYLqR9ZvlSRUZBpsTN28Kt-DDmIChuBwTFlk
+<<^ code="&#x0003;" >>ni:///sha-256;gvHYOk_F6NwgOUZT22DjCuymPDFicu6x-iPvX8P9YUM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -31,11 +31,10 @@ const MD  = "noosphere-boot.md";
 /**
  * Both bodies open at the SOH — everything above it belongs to the file's own frame.
  *
- * The frame binds its parameters with either mark, so this reads both. A literal match on one of
- * them fails a carrier whose frame is correct, and fails it as "no SOH opener" — a message that
- * sends the reader looking for a missing sigil rather than a mark they can see is present.
+ * Read as a pattern rather than matched as a literal: a near-miss here fails as "no SOH opener",
+ * which sends the reader hunting for a sigil that is plainly present.
  */
-const SOH_RE = /<<\^ code[:=]"&#x0001;" namespace[:=]"ॐ ँ"/;
+const SOH_RE = /<<\^ code="&#x0001;" namespace="ॐ ँ"/;
 
 function body(text: string, path: string): string {
   const m = SOH_RE.exec(text);

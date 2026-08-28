@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/dominion-of-magic >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/dominion-of-magic >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/dominion-of-magic"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -69,6 +69,6 @@ on an answer their founder knows was a lie.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uQKVOOKkZUxJanHm5K4lrgSbP6R7U9jGUPt8jNrDNw8
+<<^ code="&#x0003;" >>ni:///sha-256;wU6Gbzd6MLSS5PEQX8Rk4i5G7yZPddiTcSDxzkBhaHw
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

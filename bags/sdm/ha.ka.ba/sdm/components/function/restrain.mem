@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/restrain >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/restrain >>
 ```toml meta
 cacheable = true
 caption   = "restrain"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/restrain"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Restrain
 
@@ -72,6 +72,6 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yVw0I0EYYQ2u6XatyK_dqslnlV7Jctqj6wA8geEBMho
+<<^ code="&#x0003;" >>ni:///sha-256;KmmFk8RIl7nRf_xpYe7XqGzW4edrKmPGmmjyGqVMqKQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

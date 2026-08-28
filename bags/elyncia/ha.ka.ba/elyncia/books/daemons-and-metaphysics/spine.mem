@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -18,7 +18,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -61,6 +61,6 @@ comes only after all source text reads as moved.)//
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;X8chmRPoGXRBYjkAZ-lKv9AF7E8Kkn4DSsCvNTqCjqs
+<<^ code="&#x0003;" >>ni:///sha-256;GNZ5k0-5ZJKsF6QUWnPSXtkH7sOrP5wwGbVCxHkyJS0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

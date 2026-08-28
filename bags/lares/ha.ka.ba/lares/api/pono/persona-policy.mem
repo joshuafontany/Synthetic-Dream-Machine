@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/persona-policy >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/persona-policy.mem"
@@ -22,7 +22,7 @@ written           = "2026-07-20"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -134,6 +134,6 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OHrIeCEWjV4CyEYwkAa3pDzBGGOXReRk7vRZZH6cafo
+<<^ code="&#x0003;" >>ni:///sha-256;0YUyoKgyCQbeVLVgIi5a8Kq7i0sbeZx227ZNX1h_9g0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

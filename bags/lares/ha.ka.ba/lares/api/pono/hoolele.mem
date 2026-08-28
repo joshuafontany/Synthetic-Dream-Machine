@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/hoolele >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/hoolele >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/hoolele.mem"
@@ -17,7 +17,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/hoolele"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -153,6 +153,6 @@ work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;QvhNHyAyEue8PIVoyw-hvw7fPPcfzRajdqIwdYV1pxM
+<<^ code="&#x0003;" >>ni:///sha-256;f39c57qtqmAYRnAWbYVYM3Ssh2kVMKBX3WxGjw4MZiE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

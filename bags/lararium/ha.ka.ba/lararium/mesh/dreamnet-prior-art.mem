@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/dreamnet-prior-art.mem"
@@ -16,7 +16,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! DreamNet/Lares: Prior Art Research Synthesis
 
@@ -671,6 +671,6 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;i7N5c1US70wPcHquNHRYvLtTqOt-eQFXebdeHmNpExs
+<<^ code="&#x0003;" >>ni:///sha-256;pZIzrZrMgEUW32U_PlE9HuuV4ucdrddbObcuGB8i1h0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/tiddlywiki-filter.mem"
@@ -12,7 +12,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/tiddlywiki-filter"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! X-TiddlyWiki-Filter — Docs
 
@@ -159,6 +159,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;_nUE4xnaXwl3ERvb1h2zPsFXrCWWWGOIwJ3yl3uNpVA
+<<^ code="&#x0003;" >>ni:///sha-256;Aopcq21cyD79eehsfsVQBny8jSXzDB0mETDJKjfQCDs
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

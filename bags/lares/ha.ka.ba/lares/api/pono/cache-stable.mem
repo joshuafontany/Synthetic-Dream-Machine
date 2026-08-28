@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/cache-stable.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/cache-stable"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -99,6 +99,6 @@ Cache-Stable-compliant memes MUST fill the OODA-HA phase line with their own pre
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;SqqM9Z3cRj4vM5SgJOp12qEfmQXO11QbNGuSkPLTylo
+<<^ code="&#x0003;" >>ni:///sha-256;vGt2rOmIu9BSsq_1H9gqL-gF0gKK1SGSZzGVxb7tXTM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

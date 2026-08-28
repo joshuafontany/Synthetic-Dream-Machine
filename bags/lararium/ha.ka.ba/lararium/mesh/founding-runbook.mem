@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⚕" ? -> lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem"
@@ -23,7 +23,7 @@ written    = "2026-07-20"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! The Founding Runbook ~ the go-live rite
 
@@ -1395,6 +1395,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;w94QGZD1gew-GSv-KVahnOhXj--Un2qViDsS9A7zlhE
+<<^ code="&#x0003;" >>ni:///sha-256;MgIydqxR-AKt1u7GiBdRDrxR94NmshcLuR--RRY5hRE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

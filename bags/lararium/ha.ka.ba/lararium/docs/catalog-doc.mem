@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/catalog-doc >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/catalog-doc >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/catalog-doc.mem"
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/catalog-doc"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -129,6 +129,6 @@ fields = [
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;G3fNibYcVv8dEWzzWevJQbJX1_gbyDBgisiLcDjLD-M
+<<^ code="&#x0003;" >>ni:///sha-256;1flTiNUpAuqcz-8_LziH0XID_wOMfdwxHkKrKvpR-J0
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

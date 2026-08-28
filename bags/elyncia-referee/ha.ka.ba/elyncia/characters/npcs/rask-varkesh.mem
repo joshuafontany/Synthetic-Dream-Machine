@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/rask-varkesh >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/rask-varkesh >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/rask-varkesh"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -176,6 +176,6 @@ Run these fast; they’re competent but not heroic.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;BXa23lR0hkfSicEnZfYB9Lti4acPMfhAPpktero32HQ
+<<^ code="&#x0003;" >>ni:///sha-256;RgJaeb0fAgyeMCJO2cRhEKDYd4CFYXTVpRdlED4mii8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

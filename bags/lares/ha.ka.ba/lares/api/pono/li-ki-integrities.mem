@@ -1,12 +1,12 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "ha.ka.ba/lares/api/pono/li-ki-integrities"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ॐ ँ ? -> lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
 ```toml meta
@@ -163,6 +163,6 @@ Named empty seats, held open: ''value/preference'' (nothing yet reads what the n
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3qSV-vh5S_sLGIUAbcuSBiwPdMKY56xjqIsaJueUtBo
+<<^ code="&#x0003;" >>ni:///sha-256;SrWMHg_IImTKIb9cbQApx38qbNQSjcjSaYYeIWnK5UA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

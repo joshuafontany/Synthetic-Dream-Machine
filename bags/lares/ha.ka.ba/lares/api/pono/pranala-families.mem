@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pranala-families >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pranala-families >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/pranala-families.mem"
@@ -19,7 +19,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/pranala-families"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -171,6 +171,6 @@ spatial    = "light-blue"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;h7DLkGv45hN3PmY1Yy08sur28AbWWJlrKR264zSoEt8
+<<^ code="&#x0003;" >>ni:///sha-256;QeyuPKeUR6M6RQJ9Hzzg2UvewrruuYTV-molRmNsqyI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

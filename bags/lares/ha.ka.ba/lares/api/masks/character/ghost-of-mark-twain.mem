@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain >>
 ```toml meta
 aside             = true
 cacheable         = false
@@ -29,7 +29,7 @@ voice-character   = "savvy well-traveled riverboat-culture author; vernacular pr
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -160,6 +160,6 @@ Remaining Voices — Gatekeeper, Lorekeeper, Scryer, Artificer, Advocate, Diplom
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ta8qxp1nnl8Zd700KPCrhl0ZUtycITy2cEl1c6rMSFQ
+<<^ code="&#x0003;" >>ni:///sha-256;FtusIBmc9ewIpnlh3za8TW9DJ0xP7U5gY_IyFRTUOVQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma/ba >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma/ba >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma/ba.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ba"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -60,6 +60,6 @@ It SHALL NOT declare `body-sha256` without `source-symbol`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;TDz1jHm_X7g48XcymhvO1MmUwDZ6pAZQB8FBJ7D1j0w
+<<^ code="&#x0003;" >>ni:///sha-256;UtkLb_fnHcuY0B3cOgFE00iLjk2T8aGVLBE4iv6N9FY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

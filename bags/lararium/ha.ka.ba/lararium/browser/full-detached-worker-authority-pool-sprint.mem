@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! lararium-browser: Full Detached island-Authority Pool Sprint
 
@@ -123,6 +123,6 @@ Do not guess. Measure and document.
 * Monaco worker integration: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
 * VS Code Webview API: https://code.visualstudio.com/api/extension-guides/webview
 
-<<^ code:"&#x0003;" >>ni:///sha-256;_d0xtZRlk464ZFN8rPrRzriW50DrFmC2Z0OX1zYh6KA
+<<^ code="&#x0003;" >>ni:///sha-256;JurkUcP453EL0e3zRkPM2TpSCrHG6LOiyAvJ3CevYN4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

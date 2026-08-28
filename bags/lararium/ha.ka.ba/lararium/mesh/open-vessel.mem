@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/open-vessel >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/open-vessel >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/open-vessel.mem"
@@ -17,7 +17,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! The Vessel — One Composable Web3 Design
 
@@ -168,6 +168,6 @@ argument. What stays open sits one level out: a live-daemon exercise of the full
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Te3KYFnqtOu15tDAdFWYucmF04JKK_CY_GNOMH0JlAQ
+<<^ code="&#x0003;" >>ni:///sha-256;MrLAy-2xsG2jKhSdrDll6ddggVrvvIK8xGt-GeO0lAc
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

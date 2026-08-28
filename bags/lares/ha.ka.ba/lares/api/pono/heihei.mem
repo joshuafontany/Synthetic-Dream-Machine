@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heihei >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heihei >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heihei.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -105,6 +105,6 @@ arm-wire       = "reaction"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;iWftATSVcw1PAW7w4wgg1DjyDjcb361Ait1yZVhe4Cg
+<<^ code="&#x0003;" >>ni:///sha-256;kpv-vFeEZXOiJzxjYAG2XQgEmM1Qn8HtSlhYGD1aLvk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

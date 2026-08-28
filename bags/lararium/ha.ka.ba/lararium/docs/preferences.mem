@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -79,6 +79,6 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MKKbRv1IuaAAWFlGrgOkY4B-EMB4WR8NibbN2JVCo6Y
+<<^ code="&#x0003;" >>ni:///sha-256;bj5-845jYa-5MQqR2GMwG9LHiPqWaeVF6sjZfliXasQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

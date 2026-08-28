@@ -116,7 +116,7 @@ The `<<` `>>` pair forms the outer delimiter family for every active sigil. The 
 | `<<~/` | `~/name` | block close | `<<~/ahu >>` |
 | `<<~!` | `~!` | pragma (definition) | `<<~! wehe name(p) >>` |
 | `<<~?` | `~?` | unresolved-pressure | `<<~? #fragment >>` |
-| `<<^` | `^` | control set — the carrier frame ([FRAMING]) | `<<^ code:"&#x0002;" >>` |
+| `<<^` | `^` | control set — the carrier frame ([FRAMING]) | `<<^ code="&#x0002;" >>` |
 | `<<!` | `!WORD` | declaration register ([FRAMING] #declaration-register) | `<<!DOCTYPE … >>` |
 | `<<` *(bare)* | *the name itself* | inherited TW5 macro call (superset) | `<<macroName params>>` |
 
@@ -155,7 +155,7 @@ facts the frame rests on, each the host's and not this grammar's:
 - **The colon separator requires a strict identifier** — TW5 tests the name against `/^[A-Za-z0-9\-_]+$/`
   before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
 - **A quoted value reads as a TW5 string literal** — single, double, triple-double or `[[bracket]]` — and a
-  string literal carries UTF-8, so `namespace:"&#x2299;"` and `namespace:"ॐ ँ"` stand as written.
+  string literal carries UTF-8, so `namespace="&#x2299;"` and `namespace="ॐ ँ"` stand as written.
 - **An unnamed value reads positional**, numbered in order. `?` and `->` ride as positional parameters,
   which lets the bearing arrow survive inside a macro call ([FRAMING] #bearing-arrow).
 
@@ -524,21 +524,21 @@ carrier states first ([FRAMING] #declaration-register):
 ````
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
 ```toml meta
 … bare toml-meta slot: identity payload (uri-path, type, role, register) …
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
 <<~ pranala #governs ? -> lar:///ha.ka.ba/lares/api/pono/loci family=control role=has >>
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;…
+<<^ code="&#x0003;" >>ni:///sha-256;…
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>
 ````
 
 A definition summoned by name:

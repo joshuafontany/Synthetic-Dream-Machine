@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/cli/vessel-door >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/cli/vessel-door >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/cli/vessel-door.mem"
@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/cli/vessel-door"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #the-law >>
 
@@ -232,6 +232,6 @@ reached.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dpikM3fbNedt0jDNOhG_LdfH98gpQ9LsqCScZrVev9c
+<<^ code="&#x0003;" >>ni:///sha-256;CzwwGO5qrfepEG5p5xHwsXnM_Xj3vaegXB-8dbJR5XE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

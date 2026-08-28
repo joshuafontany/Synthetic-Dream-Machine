@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/ward >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/ward >>
 ```toml meta
 cacheable = true
 caption   = "ward"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/ward"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Ward
 
@@ -71,6 +71,6 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;umHphozvKi4YzN7IY47BQvNsTD1BwTLe6x6NpsQOwVo
+<<^ code="&#x0003;" >>ni:///sha-256;grWYkf-mdqEu06IY09MbXUlKMuvVWd4u7b7fz5lPMMI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

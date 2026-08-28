@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/RFC-2119 >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/RFC-2119 >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/RFC-2119.mem"
@@ -12,7 +12,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/RFC-2119"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! RFC-2119 — Docs
 
@@ -76,6 +76,6 @@ The stack does not import the full IETF RFC format — only the modal-force voca
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WfnWvWggIn8ZYJuN_gBJCtG60UWYLIppYVi7a77aJf4
+<<^ code="&#x0003;" >>ni:///sha-256;uD5ocs366qEBj4AiKV-o-vScb-vaizMOYpn3-ZM6rAA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

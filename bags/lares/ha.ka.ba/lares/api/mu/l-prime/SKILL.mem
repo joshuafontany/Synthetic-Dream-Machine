@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/mu/l-prime/SKILL >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/mu/l-prime/SKILL >>
 ```toml meta
 cacheable          = true
 constraints        = ["any copula left standing carries a confidence marker", "smallest lawful intervention; never widen a local fix into a rewrite", "quotations, code, and literal examples never normalize silently", "has runs free --- never policed"]
@@ -24,7 +24,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/mu/l-prime/SKILL"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #place >>
 
@@ -95,6 +95,6 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pqib4XfmSaZ0ZLSGN67WOW0qQR-mJ7y8jEKL645tpS0
+<<^ code="&#x0003;" >>ni:///sha-256;JlN5CayK5I3UZPIZr0BMciewR5LgOI-tL2e02KxzeII
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

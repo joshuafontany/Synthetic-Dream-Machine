@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/tick >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/tick >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/tick.mem"
@@ -13,7 +13,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/tick"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -38,6 +38,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hWZ8K4T4yddSI0fVr3ptRmaBjLVzYCqzFpTsMBpZQok
+<<^ code="&#x0003;" >>ni:///sha-256;v1lzLwRNR16Mp9H9QneKO8-_ZXQqWirbeDy_VNptUcE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

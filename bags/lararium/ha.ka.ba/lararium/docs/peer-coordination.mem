@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/peer-coordination >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/peer-coordination >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/peer-coordination.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/peer-coordination"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Peer Coordination — Automerge Rendezvous Doctrine
 
@@ -204,6 +204,6 @@ island definition bundle to new nodes.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;u3jZpC5qC1DyIxIUqh930pQ5mepHRQ1HZ5OguBQVtZ4
+<<^ code="&#x0003;" >>ni:///sha-256;LQJ-rmVki1x83VqcdsGZIH-xSyTMzdSNzzmEyqS9lCA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

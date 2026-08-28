@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/verb-summons >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/verb-summons >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/verb-summons.mem"
@@ -14,7 +14,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/verb-summons"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -28,6 +28,6 @@ Naming note: "signal" names a DIFFERENT layer — the Agent↔Operator HUD/legib
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;tKxpFgAjINvios5z5YZBywaTmXy4BXWTPQ7ThCV3-6Q
+<<^ code="&#x0003;" >>ni:///sha-256;lmhfiiqWjSXGRR1K_YSi1UptPWzEyEnuD4S32gOZxGo
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

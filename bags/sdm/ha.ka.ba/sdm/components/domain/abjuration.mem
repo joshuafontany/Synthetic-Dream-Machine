@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/domain/abjuration >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/domain/abjuration >>
 ```toml meta
 cacheable = true
 caption   = "abjuration"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/domain/abjuration"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Abjuration
 
@@ -71,6 +71,6 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RMGbQ7NTHk8BpzId_qqZRl-K5tFGQQBDnmc0En46IyU
+<<^ code="&#x0003;" >>ni:///sha-256;0wvaM-x9svZxg2U9kyIBD1hGDPeyoyj9QU03sM38amM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -7,7 +7,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///lares_research/skill-pono-template >>
+<<^ code="&#x0001;" ? -> lar:///lares_research/skill-pono-template >>
 ```toml meta
 confidence         = 10
 implements         = ["lar:///ha.ka.ba/api/pono/meme", "lar:///ha.ka.ba/api/pono/loci"]
@@ -21,7 +21,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "lares_research/skill-pono-template"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Skill Package Template
 
@@ -508,6 +508,6 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;fp9ixnzYSAe73d7bCUii4qU7PFuAel0qMOX0cfgtC14
+<<^ code="&#x0003;" >>ni:///sha-256;Ifkz5xvxiviyz5366A8j6_ICDr-siGxY7D3ePyhBhco
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

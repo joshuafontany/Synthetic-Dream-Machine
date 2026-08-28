@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
 ```toml meta
 cacheable  = false
 confidence = 7
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/high-delos-cabaret"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -326,6 +326,6 @@ The played record lands in this locus using the shelf's witness pattern
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;In46ob_hGQ8ZPd2mavDHfvpLdLJJy2eUv3N8pL-wKHk
+<<^ code="&#x0003;" >>ni:///sha-256;jAyIOsBOIOTO7izrWD7zSEBwuORPRrhRTgRWTXywrK4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

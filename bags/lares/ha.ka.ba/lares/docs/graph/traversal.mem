@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/traversal >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/traversal >>
 ```toml meta
 file-path   = "bags/lares/ha.ka.ba/lares/docs/graph/traversal.mem"
 l-space     = "stable"
@@ -15,7 +15,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -240,6 +240,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PpHOtUVloEVTxRL6GZzvph48FamWVa4Py5AVSuEC8YQ
+<<^ code="&#x0003;" >>ni:///sha-256;LKqLIoKa8BRXfsNUjmiHFHGeM9g-_JCO55gaGv5Vg3M
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

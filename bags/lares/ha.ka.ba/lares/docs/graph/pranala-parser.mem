@@ -4,7 +4,7 @@
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
 ```toml meta
 file-path   = "bags/lares/ha.ka.ba/lares/docs/graph/pranala-parser.mem"
 l-space     = "stable"
@@ -20,7 +20,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -221,6 +221,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GZW6MC1wCV7QdT1ZOehagcCYzPlEo1VQ0qoXhQeMWcE
+<<^ code="&#x0003;" >>ni:///sha-256;O9FoZkmIoIzDPo_wgcRqVrpIxHdpk8369Z_e2uHUb1s
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

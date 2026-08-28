@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/compaction-handlers.mem"
@@ -15,7 +15,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/compaction-handlers"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #disambiguation >>
 
@@ -131,6 +131,6 @@ is free recovery until growth on a long-lived high-churn bag actually bites
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;g_9NRKjm4MySBQnnNy3Ttx-KsFzjcmzm0_QV3_DjboE
+<<^ code="&#x0003;" >>ni:///sha-256;w4qLOX1M1Mcm_paQTjRRZbr6Q8gaLNB9gnol8Lv39k4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

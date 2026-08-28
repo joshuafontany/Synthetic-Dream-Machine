@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu/model-agnosticism >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu/model-agnosticism >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/model-agnosticism.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/model-agnosticism"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -135,6 +135,6 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;1wu5plkspm32MBHRoGecP0S5cqhRJmp1yI7PwdyBBcw
+<<^ code="&#x0003;" >>ni:///sha-256;hp32QmyvTaDg0sHEoAZ2oSHZag8nV_eKJiZ5Y4VqEVM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

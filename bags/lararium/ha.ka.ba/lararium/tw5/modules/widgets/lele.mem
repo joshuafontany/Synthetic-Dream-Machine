@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele >>
 ```toml meta
 body-sha256   = "56423ffb8c7522db2c9dad9d9d0ba316de67a03636c05a4be596b5d5020c88f1"
 cacheable     = true
@@ -19,7 +19,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/lele"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -45,6 +45,6 @@ Exported symbols: `LeleWidget`.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xgt1WcVHDEMZM6U4N9l0zIJvPuRhwHaCsPOqldLR5Tw
+<<^ code="&#x0003;" >>ni:///sha-256;rn87js9mYHE1uF8Cd32X5SXClhCKTG7Z3GHHaMHPXLc
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

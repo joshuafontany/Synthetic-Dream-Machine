@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/handoff >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/handoff >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/handoff.mem"
@@ -19,7 +19,7 @@ written   = "2026-06-19"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #next-vector >>
 
@@ -272,6 +272,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VF6BpKNjz30SzozBayrGZ2pFDKMyQycGWDt-f8FvqUM
+<<^ code="&#x0003;" >>ni:///sha-256;iPr5IA4ixnieu-_x7dGt6FdH0j4URV2RMhNb3JC5UNU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

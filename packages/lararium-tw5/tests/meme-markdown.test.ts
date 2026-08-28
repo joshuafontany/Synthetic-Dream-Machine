@@ -14,13 +14,13 @@ const REPO = new URL("../../..", import.meta.url).pathname;
 
 const CARRIER = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/probe >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/probe >>
 \`\`\`toml meta
 register = "Synthesis-Canon"
 uri-path = "ha.ka.ba/lares/api/pono/probe"
 \`\`\`
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -42,14 +42,14 @@ A confidence of 12/20 stays 12/20, and \`lar:///a//b\` keeps its slashes.
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
 
 \`\`\`\`
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 a teaching frame stays byte-identical, ''unrendered''
 \`\`\`\`
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AAAA_probe_check
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0003;" >>ni:///sha-256;AAAA_probe_check
+<<^ code="&#x0004;" -> ? >>
 `;
 
 describe("the submission projection", () => {
@@ -99,7 +99,7 @@ describe("the submission projection", () => {
   });
 
   test("a fence seals its interior — the teaching frame passes byte-identical", () => {
-    expect(p.markdown).toContain('<<^ code:"&#x0002;" >>\na teaching frame stays byte-identical');
+    expect(p.markdown).toContain('<<^ code="&#x0002;" >>\na teaching frame stays byte-identical');
     expect(p.markdown).toContain("''unrendered''");
   });
 
@@ -144,9 +144,9 @@ describe("against the live corpus", () => {
 describe("the tooth stands at one dispatch position", () => {
   const carrier = (open: string, close: string) =>
     `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/probe >>\n\n` +
-    `<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/probe >>\n` +
-    `<<^ code:"&#x0002;" >>\n\n${open}\n\n! A heading\n\n${close}\n\n` +
-    `<<^ code:"&#x0003;" >>\n<<^ code:"&#x0004;" -> ? >>\n`;
+    `<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/probe >>\n` +
+    `<<^ code="&#x0002;" >>\n\n${open}\n\n! A heading\n\n${close}\n\n` +
+    `<<^ code="&#x0003;" >>\n<<^ code="&#x0004;" -> ? >>\n`;
 
   const spellings: Array<[string, string, string]> = [
     ["tooth then space", "<<~ ahu #entry >>", "<<~/ahu >>"],

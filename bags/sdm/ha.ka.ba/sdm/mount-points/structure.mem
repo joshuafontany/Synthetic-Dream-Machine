@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/mount-points/structure >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/mount-points/structure >>
 ```toml meta
 cacheable = true
 caption   = "structure"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/mount-points/structure"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Mount-Point — Structure (Site)
 
@@ -93,6 +93,6 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gRbjrIsb1aY7VBO1_NbJtAXzbXD1Uxa22e7DvFac3Eg
+<<^ code="&#x0003;" >>ni:///sha-256;G5jhB2HGE_EnWv8q7pvvZloVlEiySnBH8wDjSD1fBPs
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

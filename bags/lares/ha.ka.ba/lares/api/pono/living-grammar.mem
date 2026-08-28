@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/living-grammar >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/living-grammar >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/living-grammar.mem"
@@ -21,7 +21,7 @@ written           = "2026-06-29"
 
 <<~ aka lar:///ha.ka.ba/lares/api/noosphere-boot >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -167,6 +167,6 @@ seven substrates.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;xEvXupJCvF-fn3svmEOvAGmAToDAU7H5D2j212ODp-M
+<<^ code="&#x0003;" >>ni:///sha-256;3OihhNlz-u2FZegwQZeqQ6tyZqYAHhTiHakewFlZYjM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/projections/powers/ftls-card.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/sdm/templates/projections/powers/ftls-card"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Template — FTLS Power Card Projection
 
@@ -78,6 +78,6 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;S2D3J6MZSJK5VLwgVQEe9O7hxC4StiewS5xj1x2WQ8Q
+<<^ code="&#x0003;" >>ni:///sha-256;lP3uBxpA0Zbw3cxhjPht1p3ecM-l_M0BxLxwoomy0yQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

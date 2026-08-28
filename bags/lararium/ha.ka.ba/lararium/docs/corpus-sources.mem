@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/corpus-sources >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/corpus-sources >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/corpus-sources.mem"
@@ -18,7 +18,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/corpus-sources"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -148,6 +148,6 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qx9x3G-FKDVjzgye7oClQeLNYwGMvycTMGjg1rSWyZ8
+<<^ code="&#x0003;" >>ni:///sha-256;nVLmYOKipJKRCw9_yNRi1NAHsLyscdTNPGwaV9226ao
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

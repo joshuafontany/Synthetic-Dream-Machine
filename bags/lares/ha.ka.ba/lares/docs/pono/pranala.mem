@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/pranala >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/pranala >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/pranala.mem"
@@ -12,7 +12,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/pranala"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Pranala — Docs
 
@@ -107,6 +107,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mUiYThOdrOg3lydVtEDLdkE40OjU_MorvrlLyN2ef5o
+<<^ code="&#x0003;" >>ni:///sha-256;YzFB3IQ0q_eaJY4ztqj-bRnN9ZM7ejhxVaNQr6NrUFg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

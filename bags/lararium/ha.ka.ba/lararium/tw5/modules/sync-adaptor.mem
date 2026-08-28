@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/sync-adaptor.mem"
 heleuma       = "ha"
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -51,6 +51,6 @@ Echo-loop guard rule:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;RMUuZOyFhTUx4GYIzwKLqF1a2vuKKTicjR7_T83T6GE
+<<^ code="&#x0003;" >>ni:///sha-256;kvPC825BonFjTy-vlisIdm7A0LTUf-ip8kf18VdEQ7Q
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

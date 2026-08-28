@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/proactive-surfacing.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/proactive-surfacing"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -68,6 +68,6 @@ KAIROS reads less like a separate personality than like a timing reflex distribu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pcuvaNNea-fUNJBmOfXL9p4dK8qiac9xxj2w8APwOmM
+<<^ code="&#x0003;" >>ni:///sha-256;nBYvzda6tGgMsfQzIABSb5OxwaLZjvZKvK7XAniLYbg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

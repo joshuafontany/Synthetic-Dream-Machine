@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/adapters.mem"
 l-space         = "stable"
@@ -16,7 +16,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/adapters"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -222,6 +222,6 @@ The following remain blocked until explicit policy lands:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JkOercNZ9Gp6IyieWvYwx0rhr3Fveq0Ispskny2k3r0
+<<^ code="&#x0003;" >>ni:///sha-256;1xdmTZ0YPaPqTWKw7ON4pfa5cCdfoKYZq-PfiC--l-4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

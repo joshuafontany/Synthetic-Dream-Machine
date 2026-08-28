@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/meme >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/meme >>
 ```toml meta
 file-path                    = "bags/lares/ha.ka.ba/lares/docs/graph/meme.mem"
 l-space                      = "stable"
@@ -19,7 +19,7 @@ uncertainty-meme-class-name  = "Meme preferred over CarrierMeme or Locus; not ye
 uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #terminology-note >>
 
@@ -252,6 +252,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;t9nxan0n_dUyfRccFJW2d2T1T58OtmgdJ4pzIJarPLc
+<<^ code="&#x0003;" >>ni:///sha-256;wT1depKqISspSJGVxwU4Uzcgd5zQcbiL5bf881HLNCE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

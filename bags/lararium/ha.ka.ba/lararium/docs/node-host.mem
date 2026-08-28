@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/node-host >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/node-host >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/node-host.mem"
@@ -19,7 +19,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/node-host"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -129,6 +129,6 @@ export interface CorpusSource {
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;S-7F7EPRLqVeF4d4IhURmfvlED5XxBMbwwXG5bBpuPw
+<<^ code="&#x0003;" >>ni:///sha-256;wcG_epXxiGsZ5bThzs1hBzOSqNciN6TmLiWMkmchGBU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

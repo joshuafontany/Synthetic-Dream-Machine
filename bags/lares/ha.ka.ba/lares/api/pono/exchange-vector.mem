@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/exchange-vector >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/exchange-vector >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/exchange-vector.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/exchange-vector"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -99,6 +99,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;362kAj6iS-iJSEyI2p3b8ti04jMPibkuc5RUWp4rWZM
+<<^ code="&#x0003;" >>ni:///sha-256;IDPJmafLMKBUdG_13ZHLpNCw8yueFpD2l3xXQQ7rTNA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

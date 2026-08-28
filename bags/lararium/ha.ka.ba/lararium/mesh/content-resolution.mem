@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/content-resolution.mem"
@@ -21,7 +21,7 @@ written    = "2026-07-19"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -296,6 +296,6 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;GR_uCcFaMUOEdnIv1r8vpdIBtf9ahbQdZd9Z1Z0RzbE
+<<^ code="&#x0003;" >>ni:///sha-256;xbwS90UtprjgCIjzCc7kpqWfF1Ww7f_w9DwbTQqgJV8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

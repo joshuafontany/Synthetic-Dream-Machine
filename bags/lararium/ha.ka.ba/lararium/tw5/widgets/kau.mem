@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/kau >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/kau >>
 ```toml meta
 body-sha256   = "6cc6ce1e6d1dc43e399f3c00735763a804c36fdf3b646670588cc2505b9f5af2"
 cacheable     = true
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/kau"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -66,6 +66,6 @@ Per-instance capability hooks and UUID write-back surface as explicit TW5 action
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pW1z1w_v73CuY8XQ90QkZxrxVdSQz7AYslrdogBUAsQ
+<<^ code="&#x0003;" >>ni:///sha-256;l6FXSwT8ujYk9v-Igp10ioITIcw2_QUuuYVgUs8qaig
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

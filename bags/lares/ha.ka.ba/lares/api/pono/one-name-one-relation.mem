@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/one-name-one-relation >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/one-name-one-relation >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/one-name-one-relation.mem"
@@ -16,7 +16,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/one-name-one-relation"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! One Name, One Relation
 
@@ -161,6 +161,6 @@ Three moves, smallest first, each standing on its own.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-uris >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Y27XyleXtIE-fQ0e-5OnCTbMuPYCADjEBeryFl7GVLI
+<<^ code="&#x0003;" >>ni:///sha-256;axHOHCuq95We14RoYg-e53UW4is6EKFseS23kitX3Hg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

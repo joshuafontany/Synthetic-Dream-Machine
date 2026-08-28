@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/breach-watch >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/breach-watch >>
 ```toml meta
 aside             = false
 cacheable         = false
@@ -32,7 +32,7 @@ voice-role        = "Triage"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -168,6 +168,6 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7nsdwdgmg7_L9eJYrElOBrK_nI5ZO2MYvHQIId407wE
+<<^ code="&#x0003;" >>ni:///sha-256;YIgl6yuQlncNUlUOX3lCYyPEdYJRpvsK5Q58be98mRk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/genesis-doc >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/genesis-doc >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/genesis-doc.mem"
@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/genesis-doc"
 
 <<~ aka lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Genesis & the Two Planes
 
@@ -199,6 +199,6 @@ Worse for a shelter brief: an implementation hash ''mandates a monoculture'', an
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4NOko55cUIiaLMhUg3XVB4PI-rKwGgYnTbGcmZvZgH4
+<<^ code="&#x0003;" >>ni:///sha-256;Ew0dm-eCnIGJSM2hcpNbtCQOmQNMF84VDk2XPpazSss
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
 ```toml meta
 cacheable  = true
 confidence = 11
@@ -16,7 +16,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -95,6 +95,6 @@ MUST NOT:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vdtp0V1XVDAML_tJ6jwwg58VRCSm9QJZ2qpbhfYfE1w
+<<^ code="&#x0003;" >>ni:///sha-256;71QafyUYj5Z6IdDZY3Xr1a6rN0ZfZLoDefkKvvikyr4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

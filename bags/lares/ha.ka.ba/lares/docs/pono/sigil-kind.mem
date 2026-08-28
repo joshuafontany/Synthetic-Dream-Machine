@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-kind >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/sigil-kind >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-kind.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-kind"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -198,6 +198,6 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;eFTb7ENVYKQGJCoWsxS_BL7q1CtkNcoOFCyRztx9zio
+<<^ code="&#x0003;" >>ni:///sha-256;miSEoYxInSBMdKlGvI1QdEps4MQZZWFZE15TyFeWl8s
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

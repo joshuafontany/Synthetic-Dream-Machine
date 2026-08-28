@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/infrastructure-as-myth >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/infrastructure-as-myth >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/infrastructure-as-myth.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/infrastructure-as-myth"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #seat >>
 
@@ -32,6 +32,6 @@ The working design surface — the doctrine-and-paper draft the submission conde
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;Rsjy5_-F52dBNqptgMJm0TlWFx5VH63Hu1yxPpuBjDc
+<<^ code="&#x0003;" >>ni:///sha-256;8BhYkTvwcEf2lfLmwCusfVZ689T6nnyHDBwF-4GfN1c
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

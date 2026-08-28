@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/memetic-wikitext-sensorium >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/memetic-wikitext-sensorium.mem"
@@ -20,7 +20,7 @@ written   = "2026-07-01"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -175,6 +175,6 @@ identically across the TS/py shore: the li-reader on one bank, the ki-model on t
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sD-86JcxUYkkKFOBha6pIeB0DHDo_ctvuPgrzDC1Gss
+<<^ code="&#x0003;" >>ni:///sha-256;Uo-JNTSQhllsLYAcKvssrHIkEDnAtaqo6CfPs_gag5o
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

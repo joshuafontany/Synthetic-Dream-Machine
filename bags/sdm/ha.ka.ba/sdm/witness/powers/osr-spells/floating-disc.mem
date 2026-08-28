@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! OSR Witness — Floating Disc
 
@@ -91,6 +91,6 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;mu42PkjhzjvppdQDQIzQDW5c9IhpP50xrrbbtvTCQ7E
+<<^ code="&#x0003;" >>ni:///sha-256;SJB1uYEKi3dNc0JFK5oiqPltCTKQEH_vB2syEGYyBbk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

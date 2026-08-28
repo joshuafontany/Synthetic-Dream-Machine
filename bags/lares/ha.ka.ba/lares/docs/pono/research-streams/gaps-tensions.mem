@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions.mem"
@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -127,6 +127,6 @@ Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template tran
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;eKIet_VcIqxd_xPCPhVe33-7xXf2qyMN7h5esx3bKgQ
+<<^ code="&#x0003;" >>ni:///sha-256;y9GXRINqnclsXxMI6DRcWpXsTeuTuTgxHeMYWQ8qVvM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

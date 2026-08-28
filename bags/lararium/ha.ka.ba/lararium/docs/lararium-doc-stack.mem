@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/lararium-doc-stack.mem"
@@ -17,7 +17,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/lararium-doc-stack"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 > ''Supersession note (2026-06-10).'' This meme records the research-era six-layer model. The current composition law lives at `lar:///ha.ka.ba/lararium/mesh/recipe` (stored composition shape), `lar:///ha.ka.ba/lararium/mesh/island-protocol` (IslandGrants — typed ocap manifest; library layers resolve island-side from @catalog, boot = first reconcile), and `lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology` (the layer stack and its laws). Read what follows as lineage, not law.
 
@@ -157,6 +157,6 @@ infrastructure rather than rolling a separate exporter.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;hRXqvY4S5LE7RoNzVrag-l9oB_IkvA4TK-XED7QB_Ck
+<<^ code="&#x0003;" >>ni:///sha-256;qgaP4g4WT2OQEr8GV5PvWDetwSSl-gCdId3pPo3GpQE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/render-targets.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/render-targets"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -415,6 +415,6 @@ Before emitting any stance block on any surface:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;OpwE9b9Sm82ix7jEtLk5wgO97FsI0_ul8bQzZPonwMg
+<<^ code="&#x0003;" >>ni:///sha-256;2u2NPz-SNqJkpJDLrgRI0eW3KQSof583hlRgwXmdym8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

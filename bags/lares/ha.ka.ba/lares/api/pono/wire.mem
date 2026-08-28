@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/wire >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/wire >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/wire.mem"
@@ -18,7 +18,7 @@ written   = "2026-06-12"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -88,6 +88,6 @@ Co-projection applied to wires: the operator's mind originates; the carrier body
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;omk72OzURT2nFTRKB9oQPc3T2xQlzvXZ3SpaYww2oNg
+<<^ code="&#x0003;" >>ni:///sha-256;PZYErYxhzSC4WLsTVOzau4EoMitWUKmXF4WbjR6X71Y
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

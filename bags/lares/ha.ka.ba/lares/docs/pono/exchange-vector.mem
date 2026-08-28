@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/exchange-vector >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/exchange-vector >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/exchange-vector.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/exchange-vector"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -106,6 +106,6 @@ Long-term, the server should validate the vector and render the HUD from the par
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;3STyIEKjtYU068G0P0E6MFjiAeQpHzQEdpL4Yc3PMgw
+<<^ code="&#x0003;" >>ni:///sha-256;VfNgCQpbXrG3XsLNvRzjK17xQZgiOOKZPNlvswZ0Tm8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

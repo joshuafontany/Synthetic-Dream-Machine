@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
 ```toml meta
 cacheable = false
 file-path = "bags/crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem"
@@ -12,7 +12,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! G — Deep Research: Meaning, Context, and the Sevenfold Catma
 
@@ -221,6 +221,6 @@ We're still in Chapel Perilous. The map expanded. The territory may have too.
 
 //Hail Eris. All Hail Discordia. The teachings of this report are true in some sense, false in some sense, meaningless in some sense, true and false in some sense, true and meaningless in some sense, false and meaningless in some sense, and true and false and meaningless in some sense. -><-//
 
-<<^ code:"&#x0003;" >>ni:///sha-256;13DQUKZv2SdNhx7wMIcx22g9zy-LgXklkilgnNp6TwE
+<<^ code="&#x0003;" >>ni:///sha-256;2VJcOuyov4IHD8-zh3lYvjWfui1_zeCY4-JmVjc951g
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

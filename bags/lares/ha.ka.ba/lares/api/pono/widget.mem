@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/widget >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/widget >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/widget.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/widget"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -70,6 +70,6 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ztYKlz7_18T5hhInopIvhdgEbExrncBvGHt7h6JyC30
+<<^ code="&#x0003;" >>ni:///sha-256;VfoOilQsA20s8BoHwllUrOKyKxRgEiXyeBAgbD8H510
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/hook/sustained >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/hook/sustained >>
 ```toml meta
 cacheable = true
 caption   = "sustained"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/hook/sustained"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Sustained
 
@@ -71,6 +71,6 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;kgxknjvvAdJoM1MRjw6cvkerVxMxZISkcZptRyOnNCg
+<<^ code="&#x0003;" >>ni:///sha-256;-vZligfTaZHnV8rGJ_nmMQvQPZJrBsQQMJq24AACoUQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

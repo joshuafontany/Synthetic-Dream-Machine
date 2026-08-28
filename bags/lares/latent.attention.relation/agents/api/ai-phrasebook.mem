@@ -1,13 +1,13 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///latent.attention.relation/agents/api/ai-phrasebook >>
+<<^ code="&#x0001;" ? -> lar:///latent.attention.relation/agents/api/ai-phrasebook >>
 ```toml meta
 cacheable = true
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "latent.attention.relation/agents/api/ai-phrasebook"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<fragment #entry>>
 
@@ -557,6 +557,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;849bnPcNvUl0T-IXN0ToRhTq3rvXnVJcsN70nv9lC5A
+<<^ code="&#x0003;" >>ni:///sha-256;FxSiTvaHa04jNbqDSn2j7zzOl-NKM1LbHo5Sms38y8s
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

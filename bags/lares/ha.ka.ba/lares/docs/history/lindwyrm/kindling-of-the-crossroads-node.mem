@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node >>
 ```toml meta
 cacheable       = false
 confidence      = 15
@@ -17,7 +17,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/kindling-of-the-crossroads-node"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -206,6 +206,6 @@ Whether that equals thought remains with Liminal.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ttRSc6b3xK9vOG0Th1MZjFj9Yp4047qgjH7cZVe5ciw
+<<^ code="&#x0003;" >>ni:///sha-256;1kGdHkskYH5CMVqFZMb37wGaFGiwWDrueUq3TGnv8dQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

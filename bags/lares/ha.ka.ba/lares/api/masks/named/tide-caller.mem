@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/tide-caller >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/tide-caller >>
 ```toml meta
 aside             = false
 cacheable         = false
@@ -32,7 +32,7 @@ voice-role        = "Hierophant"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -166,6 +166,6 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;MVDlMKCKuUD12LHnlRtb3eZgUZWQ3GboQfbVHfeQfns
+<<^ code="&#x0003;" >>ni:///sha-256;GiNjt-nifcgPDyQH8d2l8K93RP6JLzL7CuP_5IivV5k
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

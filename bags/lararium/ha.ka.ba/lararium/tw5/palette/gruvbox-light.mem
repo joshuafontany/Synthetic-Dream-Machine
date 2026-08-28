@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/palette/gruvbox-light >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/palette/gruvbox-light >>
 ```toml meta
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/palette/gruvbox-light.mem"
 l-space   = "adjacent"
@@ -11,7 +11,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/palette/gruvbox-light"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 background: #fbf1c7
 foreground: #3c3836
@@ -102,6 +102,6 @@ wikilist-item: #ebdbb2
 wikilist-toolbar-background: #f2e5bc
 wikilist-toolbar-foreground: #3c3836
 
-<<^ code:"&#x0003;" >>ni:///sha-256;nBKuSx9V7rpxrGHDKnILTRs_5xuSneNGL14j7jSndWI
+<<^ code="&#x0003;" >>ni:///sha-256;L8F5aVn1FAB6Y2XcbCnc7egFjYGmkjfvD0zbZaemZ34
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

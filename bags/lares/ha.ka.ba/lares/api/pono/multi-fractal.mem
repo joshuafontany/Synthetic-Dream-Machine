@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/multi-fractal >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/multi-fractal.mem"
@@ -19,7 +19,7 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/multi-fractal"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -95,6 +95,6 @@ The shape above says the recursion happens. This says WHY it must.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;E_yEEIUxmqFjx3rTuOAckobkqF52d5GdjvZMplk9SCI
+<<^ code="&#x0003;" >>ni:///sha-256;AOoi2KYNhe-OFIf5oDFcHlLb3lXo5n4YWCXvfvn43Ss
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

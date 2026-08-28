@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts >>
 ```toml meta
 cacheable  = false
 confidence = 9
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -118,6 +118,6 @@ its island's red for the rest.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PE2Wxu9CMKdBR6-9iTs967qwOopAyTNe_s7qDpH9NLU
+<<^ code="&#x0003;" >>ni:///sha-256;19u7h7TfKek21-MJT_bJW4Rx9kAWkaq8r2e8PjW0x7M
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
 ```toml meta
 cacheable      = false
 file-path      = "bags/lares/ha.ka.ba/lares/docs/the-lares-protocols.mem"
@@ -22,7 +22,7 @@ uri-path       = "ha.ka.ba/lares/docs/the-lares-protocols"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #thesis >>
 
@@ -181,6 +181,6 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;PBSr85-Xfs76EtjUMPC39dZmxs6qQlIqMcaMX6MjBHE
+<<^ code="&#x0003;" >>ni:///sha-256;2W2goDXXoBGVb5WCmIjHK_H_WtF4sKtPvikGwLrk9AM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

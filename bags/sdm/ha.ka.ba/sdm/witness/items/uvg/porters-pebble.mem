@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/items/uvg/porters-pebble >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/items/uvg/porters-pebble >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/items/uvg/porters-pebble.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/items/uvg/porters-pebble"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! UVG Witness — Porter's Pebble
 
@@ -63,6 +63,6 @@ The v0.1 ''Porter's Pebble'' is the epic's first ''module-nesting'' proof:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;P5YtYjRzmYyBDSpWbg39prnPrafpIIme3dCdQAGZSgc
+<<^ code="&#x0003;" >>ni:///sha-256;gonMVGYThrWs2htaAajmCrH4bzeFej1O0YflkwnXuok
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

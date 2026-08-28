@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb.mem"
@@ -16,7 +16,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 \whitespace trim
 <$list filter="[all[current]has[ahu-slot]]" variable="_" emptyMessage="">
@@ -36,6 +36,6 @@ uri-path    = "ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb"
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;D9dyglwXtmTBbic4EEw__xge11SSWwtTlIqpZnw0490
+<<^ code="&#x0003;" >>ni:///sha-256;wGMwQCEfd6ocH4FkpbE4eDpxmtLcErsEO5zDPqDCHm4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

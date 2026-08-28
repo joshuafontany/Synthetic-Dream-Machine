@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/filters/stack >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/filters/stack >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/filters/stack.mem"
@@ -15,7 +15,7 @@ uri-path   = "ha.ka.ba/lararium/tw5/filters/stack"
 written    = "2026-06-12"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -45,6 +45,6 @@ Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.t
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;J_ULZi8nRnNkqLntVxJOCXSkIB7VIjMiCJZM-Ktd_ns
+<<^ code="&#x0003;" >>ni:///sha-256;wglOdaCvE5-AP0A0jaVzBN9l8KlowtUB_RBw0sESE4E
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

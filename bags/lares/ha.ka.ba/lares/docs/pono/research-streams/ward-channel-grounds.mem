@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds >>
 ```toml meta
 cacheable   = false
 file-path   = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds.mem"
@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds"
 
 <<~ aka lar:///ha.ka.ba/lares/api/noosphere-boot >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -102,6 +102,6 @@ Keys still open: a second token-clean essence-fusion case (Map-Wisp) · an essen
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;i6Qa7cDnshCN0b_ELl0I0RIuTpfVs9KErvlxrVhb0Wc
+<<^ code="&#x0003;" >>ni:///sha-256;HvytdLR5a-PvqR1gzHhtzidVBxH9h3T5dm0fa9pqwjY
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

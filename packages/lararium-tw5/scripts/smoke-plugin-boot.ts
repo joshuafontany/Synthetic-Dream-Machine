@@ -95,11 +95,11 @@ async function main(): Promise<void> {
   const memeWithFraming = [
     "<!-- <<~ !DOCTYPE = lar:///probe-meme >> -->",
     "",
-    "<<^ code:\"&#x0001;\" ? -> lar:///probe-meme >>",
+    "<<^ code=\"&#x0001;\" ? -> lar:///probe-meme >>",
     "<<~ ahu #head >>",
     "body",
     "<<~/ahu >>",
-    "<<^ code:\"&#x0003;\" >>",
+    "<<^ code=\"&#x0003;\" >>",
     "",
     "trailing prose after etx",
   ].join("\n");
@@ -121,7 +121,7 @@ async function main(): Promise<void> {
   // whose slot body has prose before its meta toml and trailing prose
   // after its inner kahea ref.
   const slotMeme = [
-    "<<^ code:\"&#x0001;\" ? -> lar:///probe-slot-meme >>",
+    "<<^ code=\"&#x0001;\" ? -> lar:///probe-slot-meme >>",
     "<<~ ahu #parent >>",
     "leading slot prose",
     "```toml meta",
@@ -132,7 +132,7 @@ async function main(): Promise<void> {
     "<<~/ahu >>",
     "trailing slot prose",
     "<<~/ahu >>",
-    "<<^ code:\"&#x0003;\" >>",
+    "<<^ code=\"&#x0003;\" >>",
   ].join("\n");
   const slotResults = deserializeTiddlers.call(
     (tw as unknown as { wiki: unknown }).wiki,

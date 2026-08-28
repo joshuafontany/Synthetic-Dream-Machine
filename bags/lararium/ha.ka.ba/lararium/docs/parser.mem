@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/parser >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/parser >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/parser.mem"
@@ -13,7 +13,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/parser"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -47,6 +47,6 @@ Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, retu
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/pranala-parser >>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/memetic-parser >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JAJz25f1U7zjzU-TMPfumJ7UP7dsKqIL6FSDZ6F49Xo
+<<^ code="&#x0003;" >>ni:///sha-256;7RE1vFWSZzyHItFXDbbIl2D0_nQX6pFY0oQjoF93mNo
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

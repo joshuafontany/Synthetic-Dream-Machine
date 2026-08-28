@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/period-forms >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/period-forms >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/history/period-forms.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/history/period-forms"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #law >>
 
@@ -71,6 +71,6 @@ glyph-definition drafts and the `lares-*.instructions` files.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;yF7T9m3qKlhOerOMzsLLDI5i2vcuRLjbDGnl2wGrjY8
+<<^ code="&#x0003;" >>ni:///sha-256;aLkaBYZGjSErPKEkoE1lSpc-5VHoymOUM9DVrgEpv2Y
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

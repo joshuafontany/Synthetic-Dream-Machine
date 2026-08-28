@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -236,6 +236,6 @@ Current answer: yes, provisionally.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;m4im7fb7mD0F3IsyxMuYdKW6pQAMjtRMYr1-EFJfPiE
+<<^ code="&#x0003;" >>ni:///sha-256;wcNEkPbbMNzQHgZ2rS4QXGBiHsj1e0ZESuEq0W8Wcco
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

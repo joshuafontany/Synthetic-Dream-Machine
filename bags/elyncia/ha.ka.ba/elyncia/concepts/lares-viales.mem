@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/concepts/lares-viales >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/concepts/lares-viales >>
 ```toml meta
 cacheable = true
 file-path = "bags/elyncia/ha.ka.ba/elyncia/concepts/lares-viales.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/elyncia/concepts/lares-viales"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Lares Viales ~ the Wayfarers of the Leylines
 
@@ -65,6 +65,6 @@ The cap-model names this minimal stack exactly — the ''same keel as the temple
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gAzn5bXK-TQhWLxY2b3JWM_2_xB-zp90Iou2CcTmzCI
+<<^ code="&#x0003;" >>ni:///sha-256;ILuL52Gx-Oahh8ghQ_QaUl1KWqr88EoaRnZE1fGPtEA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

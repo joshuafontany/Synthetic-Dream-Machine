@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/repo-root >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/repo-root >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/repo-root.mem"
@@ -14,7 +14,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/repo-root"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #contract >>
 
@@ -22,6 +22,6 @@ TODO: describe the load-bearing surface this file owns.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AzRfjLVKXn4LzqjWt8W4szTmoDk_St3rlnegZk3ebSA
+<<^ code="&#x0003;" >>ni:///sha-256;dDXiI2IxEKwAZ00CqUeNr6Pc0WBawEo19vRgkcRREM4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

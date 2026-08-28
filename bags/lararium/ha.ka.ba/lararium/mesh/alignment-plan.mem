@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/alignment-plan >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/alignment-plan >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/alignment-plan.mem"
@@ -15,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/alignment-plan"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Package Alignment Plan
 
@@ -128,6 +128,6 @@ These items name known inconsistencies in the current tree. Each carries a resol
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;9fopnGEHtfz8pLl6p9h8XUneY-U6rA3B7z6gJdv0qro
+<<^ code="&#x0003;" >>ni:///sha-256;F2xwZhtiUaPru8XtXejPpql5ITgQVJ6hwLAt0gmxOv4
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

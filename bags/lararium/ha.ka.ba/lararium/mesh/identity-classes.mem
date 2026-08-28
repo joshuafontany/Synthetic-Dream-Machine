@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⚕" ? -> lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/identity-classes.mem"
@@ -23,7 +23,7 @@ written   = "2026-07-20"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Identity Classes ~ who runs, who carries, who rotates
 
@@ -475,6 +475,6 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dytvWA-d4_oQbAoEJiFhnwbQO8aM9I6lcgvcM7Z1Thk
+<<^ code="&#x0003;" >>ni:///sha-256;J5ZUEwHiUMExq4vLfH4MB6z-D0-eiFlToNm5JKmrbCg
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

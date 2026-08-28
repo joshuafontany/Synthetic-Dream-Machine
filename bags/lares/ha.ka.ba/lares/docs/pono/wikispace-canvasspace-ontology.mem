@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -144,6 +144,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;JCGm54dEHBLmXkRiOi_Z5o23GsZlTC6gXuQBclxp-Q0
+<<^ code="&#x0003;" >>ni:///sha-256;zoybtfHMLvQkZNFrF5ExlqkIRMrtD4gmV1UAIZr53dU
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

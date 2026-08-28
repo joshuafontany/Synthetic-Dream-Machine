@@ -3,7 +3,7 @@
  *
  * Carrier framing uses HTML-entity control sigils as stream boundaries:
  *
- *   <<^ code:"&#x0001;" namespace:"[prefix?]"  ? -> lar:///URI >>   SOH — opens a carrier, declares URI
+ *   <<^ code="&#x0001;" namespace="[prefix?]"  ? -> lar:///URI >>   SOH — opens a carrier, declares URI
  *   <<^ code:"&#x0002;" [^>]*>>               STX — header→body boundary
  *   <<^ code:"&#x0003;" [^>]*>>               ETX — closes body (carrier done)
  *   <<^ code:"&#x0004;" [^>]*>>               EOT — carrier exit sigil
@@ -64,7 +64,7 @@ type Hit = { index: number; end: number; cap: string | undefined };
 
 /**
  * Fence-aware find (fence-mask law): quoted sigils never frame
- * a carrier — a fenced `<<^ code:"&#x0003;" >>` in teaching text MUST NOT close
+ * a carrier — a fenced `<<^ code="&#x0003;" >>` in teaching text MUST NOT close
  * the body. The parse cursor always rests outside quoted spans (a sigil
  * inside a span never gets consumed), so masking `remaining` per call
  * stays sound across streaming chunks. An unclosed fence masks its open

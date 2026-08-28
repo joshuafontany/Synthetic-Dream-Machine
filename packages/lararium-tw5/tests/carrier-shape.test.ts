@@ -23,7 +23,7 @@ import { REPO } from "./test-wiki.js";
 
 const DECL = "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
 const head = (uri: string, ns = "") =>
-  `<<^ code:"&#x0001;"${ns ? ` namespace:"${ns}"` : ""} ? -> ${uri} >>`;
+  `<<^ code="&#x0001;"${ns ? ` namespace="${ns}"` : ""} ? -> ${uri} >>`;
 
 describe("carrier-shape — the kind a file declares, and what that kind owes", () => {
   /**
@@ -69,7 +69,7 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
 
   test("a bag descriptor carrying no body frame stands at its floor, not below it", () => {
     const d = readCarrierShape(
-      `${DECL}\n\n${head("lar:///ha.ka.ba/bags/lares")}\n\`\`\`toml meta\nbag = "lares"\n\`\`\`\n\nprose\n\n<<^ code:"&#x0004;" -> ? >>\n`,
+      `${DECL}\n\n${head("lar:///ha.ka.ba/bags/lares")}\n\`\`\`toml meta\nbag = "lares"\n\`\`\`\n\nprose\n\n<<^ code="&#x0004;" -> ? >>\n`,
     );
     expect(d.kind).toBe("descriptor");
     expect(d.faults, "a descriptor faulted for lacking a body it never holds").toEqual([]);
@@ -121,7 +121,7 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
    * its tail, and the gradient faults the second.
    */
   test("a torn frame reads as truncated, never as unchecked", () => {
-    const torn = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml meta\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code:"&#x0002;" >>\n\nbody cut mid-transmissi`;
+    const torn = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml meta\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code="&#x0002;" >>\n\nbody cut mid-transmissi`;
     const shape = readCarrierShape(torn);
     expect(shape.marks.check).toBe("torn");
     expect(shape.faults.join(" ")).toContain("torn reads as truncated");
@@ -133,7 +133,7 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
    * than blessed by the first frame's `ok`.
    */
   test("a second text frame surfaces as a fault rather than riding beneath the first frame's verdict", () => {
-    const two = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml meta\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code:"&#x0002;" >>\n\nfirst body\n\n<<^ code:"&#x0003;" >>\n\n<<^ code:"&#x0002;" >>\n\nsmuggled body\n\n<<^ code:"&#x0003;" >>\n\n<<^ code:"&#x0004;" -> ? >>\n`;
+    const two = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml meta\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code="&#x0002;" >>\n\nfirst body\n\n<<^ code="&#x0003;" >>\n\n<<^ code="&#x0002;" >>\n\nsmuggled body\n\n<<^ code="&#x0003;" >>\n\n<<^ code="&#x0004;" -> ? >>\n`;
     const shape = readCarrierShape(two);
     expect(shape.faults.join(" ")).toContain("2 text frames");
   });
@@ -141,10 +141,10 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
   /** ADJACENT, EXACTLY. A check shifted off its closer by even one space does not verify — slack there
    *  would let two byte-different files share one verdict, the class the span law exists to close. */
   test("a shifted check does not verify", () => {
-    const base = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml meta\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code:"&#x0002;" >>\n\nbody\n\n<<^ code:"&#x0003;" >>`;
-    const good = readCarrierShape(`${base}ni:///sha-256;AAAA\n\n<<^ code:"&#x0004;" -> ? >>\n`);
+    const base = `${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n\`\`\`toml meta\nuri-path = "ha.ka.ba/x/y"\ntype = "${CARRIER_TYPE}"\n\`\`\`\n\n<<^ code="&#x0002;" >>\n\nbody\n\n<<^ code="&#x0003;" >>`;
+    const good = readCarrierShape(`${base}ni:///sha-256;AAAA\n\n<<^ code="&#x0004;" -> ? >>\n`);
     expect(good.marks.check).toBe("mismatch");   // adjacent but wrong digest — SEEN, judged
-    const shifted = readCarrierShape(`${base} ni:///sha-256;AAAA\n\n<<^ code:"&#x0004;" -> ? >>\n`);
+    const shifted = readCarrierShape(`${base} ni:///sha-256;AAAA\n\n<<^ code="&#x0004;" -> ? >>\n`);
     expect(shifted.marks.check).toBe("unchecked"); // one space off — not a check at all
   });
 

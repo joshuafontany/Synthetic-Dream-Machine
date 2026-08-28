@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/arcana-model >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/arcana-model >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/docs/arcana-model"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -143,6 +143,6 @@ verb × capability saturation × capability totality. One word, three owners, no
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;VDUw2bLaJiaNSVfonP5JINMpZwo7lBTc38OOnHZOBAE
+<<^ code="&#x0003;" >>ni:///sha-256;u4ktXhqM0BzLMefsnRB4Hyp46e9siALJunwmg65cNfc
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

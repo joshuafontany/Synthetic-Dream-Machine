@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/library/oracles/doa/index >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/library/oracles/doa/index >>
 ```toml meta
 cacheable  = true
 confidence = 15
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/library/oracles/doa/index"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -74,6 +74,6 @@ opening the DOA.html blob in any browser, offline, forever.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;-SBnXRbpeeQbLbymszNn9SHykn62slode5R3IIXui3w
+<<^ code="&#x0003;" >>ni:///sha-256;pNn_W7gX3SdJfYPcPB6bhTrrkyGt9Syhq1BtL3bjDsM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

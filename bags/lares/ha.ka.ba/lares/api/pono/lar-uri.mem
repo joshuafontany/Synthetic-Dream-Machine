@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/api/pono/lar-uri.mem"
@@ -21,7 +21,7 @@ uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #abstract >>
 
@@ -425,6 +425,6 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ujr0nAN4UIk1F-QcuWoy6aM7S1TZ3IFrCNTcFavJxMU
+<<^ code="&#x0003;" >>ni:///sha-256;WI-XqM2MpNZT9ucHux3ZOPm34i2qOUKtNeDsdfTa2zs
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

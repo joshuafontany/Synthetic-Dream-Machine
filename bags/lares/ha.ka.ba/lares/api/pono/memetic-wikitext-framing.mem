@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/memetic-wikitext-framing.mem"
@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext-framing"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #abstract >>
 
@@ -143,10 +143,10 @@ Every frame construct stands as a `macro-call` in the host's reading, exactly as
 ```abnf
 ; ── the carrier frame ───────────────────────────────────────
 frame       = "<<" control LWSP code-param params LWSP ">>"
-code-param  = "code:" DQUOTE "&#x" 4HEXDIG ";" DQUOTE
+code-param  = "code=" DQUOTE "&#x" 4HEXDIG ";" DQUOTE
 header      = "<<" control LWSP code-param [ LWSP ns-param ]
               LWSP "?" LWSP "->" LWSP URI-ref LWSP ">>"
-ns-param    = "namespace:" string-literal
+ns-param    = "namespace=" string-literal
 footer      = "<<" control LWSP code-param LWSP "->" LWSP "?" LWSP ">>"
 
 ; ── the declaration register (#/declaration-register) ────────
@@ -247,7 +247,7 @@ The order stands fixed:
 |0 |BOM |encoding detection |
 |1 |foreign header — YAML front-matter, shebang |the outside consumer that reads this file too |
 |2 |`<<!DOCTYPE … >>` |this grammar |
-|3 |`<<^ code:"&#x0001;" … >>` |this carrier |
+|3 |`<<^ code="&#x0001;" … >>` |this carrier |
 
 ''The DOCTYPE and the SOH bind tightly.'' Nothing stands between them. That pair IS the invariant a
 processor enforces; what precedes the pair belongs to whoever else reads the file.
@@ -270,23 +270,23 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 
 | Sigil | Form | Role | Byte | Kapu byte |
 |---|---|---|---|---|
-| ''SOH'' | `<<^ code:"&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post and names the place with its `lar:` bearing | `0x01` | DC1 `0x11` |
-| ''STX'' | `<<^ code:"&#x0002;" >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
-| ''ETX'' | `<<^ code:"&#x0003;" >>ni:///sha-256;…` | End of Text — the body closes, the check follows the closer; the hearth banks | `0x03` | — |
-| ''EOT'' | `<<^ code:"&#x0004;" -> ? >>` | End of Transmission — the libation pours; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
+| ''SOH'' | `<<^ code="&#x0001;" ? -> lar:///URI >>` | Start of Heading — the Lar takes its post and names the place with its `lar:` bearing | `0x01` | DC1 `0x11` |
+| ''STX'' | `<<^ code="&#x0002;" >>` | Start of Text — cross the threshold; the body opens | `0x02` | — |
+| ''ETX'' | `<<^ code="&#x0003;" >>ni:///sha-256;…` | End of Text — the body closes, the check follows the closer; the hearth banks | `0x03` | — |
+| ''EOT'' | `<<^ code="&#x0004;" -> ? >>` | End of Transmission — the libation pours; the carrier releases to the crossroad | `0x04` | DC4 `0x14` |
 
 ''Kapu'' names the restricted, admin-only trust tier (#/trust-tiers); the kapu byte column gives each mark's substitute code in that tier.
 
 ''The frame — heading, then text.'' The protocol law pins the zones: SOH opens the ''heading'', STX opens the ''text''. The heading holds the toml meta slot and nothing else; the text holds the body.
 
 ```
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///URI >>   SOH · open heading
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///URI >>   SOH · open heading
   ‹toml meta slot — the identity heading›
   <<~ aka lar:///…RFC-2119 >>                          (optional carrier-level binding)
-<<^ code:"&#x0002;" >>                                 STX · open text (body)
+<<^ code="&#x0002;" >>                                 STX · open text (body)
   # title · ## sections · #edges                       the text (body)
-<<^ code:"&#x0003;" >>                                 ETX · close text
-<<^ code:"&#x0004;" -> ? >>                            EOT · release
+<<^ code="&#x0003;" >>                                 ETX · close text
+<<^ code="&#x0004;" -> ? >>                            EOT · release
 ```
 
 ''The mark names the control byte.'' Each sigil states its C0 control character as a named `code:` param; the mnemonic (SOH/STX/ETX/EOT) carries the reading, the byte carries what the parser frames on. STX and ETX carry that one param and nothing else — each opens or closes the text and states no bearing.
@@ -363,7 +363,7 @@ processor binds the name; nothing about either side asks the host for an extensi
 
 ```
 \procedure ^(code)
-<<^ code:"&#x000N;" >>
+<<^ code="&#x000N;" >>
 \end
 ```
 
@@ -481,9 +481,9 @@ Resonance glyphs do ''not'' join the spine. They ride the ''SOH opener only'', a
 ''The set stays open.'' These name the resonance characters known now; the registry admits more as layers and trust tiers emerge. A new glyph enters under the same two laws below — SOH-prefix only, EOT bare — and registers its layer in this table.
 
 ```
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/… >>   ← pono layer
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/… >>      ← mu/lares/lararium layer
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/… >>                     ← docs/library, no namespace
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/… >>   ← pono layer
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/… >>      ← mu/lares/lararium layer
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/… >>                     ← docs/library, no namespace
 ```
 
 Two laws govern the namespace:
@@ -774,7 +774,7 @@ belongs to what the check protects — and that choice obliges a canonical spell
 
 * ''A control-mark reference spells `&#x`, exactly four hex digits, `;`'' — one spelling, the one the
   recogniser reads. `&#X…;`, shortened forms (`&#1;`), and raw octets stand outside the grammar.
-* ''A frame sigil's canonical spelling = the one the emitter mints'' — `<<^ code:"&#xNNNN;" … >>`,
+* ''A frame sigil's canonical spelling = the one the emitter mints'' — `<<^ code="&#xNNNN;" … >>`,
   single spaces. A reader admits a spelling variant (graceful parsing); the projection re-mints
   canonical; and the check follows the bytes, so a re-minted carrier restamps. Two spellings of one
   sigil never share a check, and neither claims the other's.
@@ -1061,6 +1061,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;sxzNJsDfN_U7amkJWC1bjP_nqzxrVx7SUQATZYBqHN0
+<<^ code="&#x0003;" >>ni:///sha-256;RBpT4XOnxCcTfidFQzbBe9QIJ2zNxevbK8UYcJ6gnDk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

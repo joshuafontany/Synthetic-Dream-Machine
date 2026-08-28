@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/drift-ward >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/drift-ward >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/drift-ward.mem"
@@ -17,7 +17,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/drift-ward"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -127,6 +127,6 @@ yesterday's hazard recurring unchanged deserves its own suspicion.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;WECGZ9tldg4iu3bWN9WJ65Ww6EelVtdVbTXkwF0n9qY
+<<^ code="&#x0003;" >>ni:///sha-256;MywYQ6QkGV-7r91FYnb6Zzm2rrBZPkNMPcqrZ5A3Z3c
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

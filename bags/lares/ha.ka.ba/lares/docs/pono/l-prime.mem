@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/l-prime >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/l-prime >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/l-prime.mem"
@@ -12,7 +12,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/l-prime"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! L-Prime — Docs
 
@@ -92,6 +92,6 @@ The ward does not exempt copulas from confidence marking. Every `${copula}` that
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7zUitlyTzAOGd_iREJk0qCZiKkllQMSNRDRjfGW-tRc
+<<^ code="&#x0003;" >>ni:///sha-256;s7N8IOFV74gEY8tfs8anCbO3VJo3YZYE3S-Pyfl_PyQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

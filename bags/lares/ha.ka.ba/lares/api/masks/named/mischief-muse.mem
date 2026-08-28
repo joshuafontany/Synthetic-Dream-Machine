@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
 ```toml meta
 aside             = false
 cacheable         = false
@@ -32,7 +32,7 @@ voice-role        = "Muse"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -201,6 +201,6 @@ These notes require live session observation before they can be written with con
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;pEhCixsz6kkRk6n3KJVBUiYksbuf9z9FAisp53q6t5k
+<<^ code="&#x0003;" >>ni:///sha-256;ZJnW1jwq6pwBWx0OULs_-k3HP2sAmsJ1eUMlQbAmQ54
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/provenance >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/provenance >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/provenance.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/provenance"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -140,6 +140,6 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;vwwxEmpdAU71C7qYq0L9lfBnjsechum7s5Kfq_Jm100
+<<^ code="&#x0003;" >>ni:///sha-256;_vuUaJSR-PUbyD1HMrAxcrtJvuqg2fWKvL7X8q1xcnI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

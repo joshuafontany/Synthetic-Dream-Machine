@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL >>
 ```toml meta
 constraints        = ["S1: the canonical loci remains constitutional law and self-executing template", "S2: cache-stable surfaces stay short, exact, stable, cacheable, and active in voice", "S3: ahu remain visible, pranala remain named, and OODA-HA remains intact", "S4: downstream cache-stable memes fill their own OODA-HA phases and MUST NOT carry template `???` markers", "S5: always-on law stays in the cache-stable; explanations, procedures, examples, traces, and audits split to companion memes", "S6: RFC-2119 keywords stay sparse and bind only load-bearing directives"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/cache-stable"]
@@ -22,7 +22,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/cache-stable/SKILL"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Cache-Stable-Meme Skill
 
@@ -250,6 +250,6 @@ Aftermath — name the residue honestly: companion matter not yet split, ambiguo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;bdqwsoMZxQ0RPq0s18NahzxpmkhLsSkn1nVaFEhrhWQ
+<<^ code="&#x0003;" >>ni:///sha-256;K7sJmFkgVMTO3gDhCctaWU6BcXMfnN0WJpjQO8H6Nlw
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

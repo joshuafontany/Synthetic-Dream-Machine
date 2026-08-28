@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///lares_research/research-streams/lararium/AUTH-ATPROTO >>
+<<^ code="&#x0001;" ? -> lar:///lares_research/research-streams/lararium/AUTH-ATPROTO >>
 ```toml meta
 cacheable  = true
 confidence = 18
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/AUTH-ATPROTO"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #oauth-position >>
 
@@ -210,6 +210,6 @@ No ATProto login implementation this milestone — doctrine only.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;l1LswDM9UHWLPzwWbw1wG7Hb3TO251p6OVQwM0TKddQ
+<<^ code="&#x0003;" >>ni:///sha-256;ZhPH5ek-Nm9ZQOej-Y90Xz76rFfvaSiC_7U_jm8CtSM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

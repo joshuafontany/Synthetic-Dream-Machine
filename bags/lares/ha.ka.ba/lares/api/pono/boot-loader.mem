@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/boot-loader >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/boot-loader >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/boot-loader.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/boot-loader"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -122,6 +122,6 @@ the only place the question means anything.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;owLmRMnr8aJbhJ9qZhVJmU5ngNXOB51d7M69T7vYXiw
+<<^ code="&#x0003;" >>ni:///sha-256;9UBhu_NqLms4RouvZNiv9g0p8xQVPIStTwzx5-uSd2E
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki >>
 ```toml meta
 confidence = 14
 file-path  = "bags/lares/ha.ka.ba/lares/docs/history/dreamnet-memewiki.mem"
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/dreamnet-memewiki"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! DreamNet MemeWiki — the consolidation that staged the kernel
 
@@ -465,6 +465,6 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CxB9K0QSU23__do3Au5bzva-Tdwo1gqAKHEZmmTTVHY
+<<^ code="&#x0003;" >>ni:///sha-256;9S7aaizXmk2LCIzl0buHYhrpo388zsKrHN-mVP243mk
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

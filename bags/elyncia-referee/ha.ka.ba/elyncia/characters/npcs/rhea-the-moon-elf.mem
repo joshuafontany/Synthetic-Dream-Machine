@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -59,6 +59,6 @@ Since her arrival she has ''trained a cadre of agents'' and runs a ''small intel
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;viD4ObrFsIZJkf3VJKrKRxsD8J7wVR6TBQU8WEvA0EU
+<<^ code="&#x0003;" >>ni:///sha-256;PxQufgCBtDF-K5oK9bqyTVFli2j6s95lO4sichVlnLQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

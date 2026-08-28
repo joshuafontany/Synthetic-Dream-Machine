@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/dreamnet-rhizome >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/dreamnet-rhizome >>
 ```toml meta
 cacheable  = true
 confidence = 15
@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/lares/docs/dreamnet-rhizome"
 written    = "2026-07-14"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #the-ground >>
 
@@ -77,6 +77,6 @@ The identity-privacy hardening (per-handle vessel credential · scope-exclusive 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;ug4yYb1G57ZFYOXReWZxhhxfTondZIXqkDxF7-rANG0
+<<^ code="&#x0003;" >>ni:///sha-256;lUgTEc9bFsVnIS33F27Dms8eWqoRqAV5ik27XWWPM8U
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

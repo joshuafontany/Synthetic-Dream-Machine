@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/procedure >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/procedure >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/procedure.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/procedure"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -31,6 +31,6 @@ Use whichever reads more naturally in context.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AKk3Uzuy5jF606n6Fn3QgeKUsfzoVhNoEGiFCU4gVsU
+<<^ code="&#x0003;" >>ni:///sha-256;lVJZwoHTMdyOzg4Bqyx82n5ybcLJC4tc_a0YtxBS1LA
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

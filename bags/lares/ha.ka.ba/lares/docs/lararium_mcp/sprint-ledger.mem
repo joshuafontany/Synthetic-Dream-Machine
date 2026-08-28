@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger.mem"
 l-space         = "stable"
@@ -17,7 +17,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -112,6 +112,6 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;AlIwSA9G9tIommxcCZZWnJG8J7t1zdSOMWqOS4DIzMo
+<<^ code="&#x0003;" >>ni:///sha-256;6ZL_0YEZ3Dwh_XUf7aX3JcsorjMdN6S4IQ_WzqMU2ng
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

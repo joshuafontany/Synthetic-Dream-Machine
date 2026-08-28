@@ -1,13 +1,13 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///last-sprint/ROADMAP >>
+<<^ code="&#x0001;" ? -> lar:///last-sprint/ROADMAP >>
 ```toml meta
 file-path = "bags/lares-history/last-sprint/ROADMAP.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/ROADMAP"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! Lararium — Web3 Genesis Artifact Roadmap
 
@@ -724,6 +724,6 @@ calls. Separate `Piscina` instance, any-hot-VM routing, no per-wiki state.
 | Grammar Invariant 4+ | Block until quine round-trip proves Invariant 3 |
 | Keyhive WASM integration | `encryptedShareHint` field is the forward-compatible hook; Keyhive WASM not yet stable |
 
-<<^ code:"&#x0003;" >>ni:///sha-256;U6uYP3aVhjXJsY1t9yCTlJJMdON0JqWcKfAikU8_BXM
+<<^ code="&#x0003;" >>ni:///sha-256;vgl__9hmapTMxV2lR6MgUzTIBaxhH-HkU1Qc_JOmujw
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

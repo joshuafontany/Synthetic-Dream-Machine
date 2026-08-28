@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/identity-stack >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/identity-stack >>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/docs/pono/identity-stack.mem"
@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/pono/identity-stack"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #identity-stack >>
 
@@ -107,6 +107,6 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;dn02PpRHqN1EWpnc6vT4GBruqzRhND6hijPkQgw62qY
+<<^ code="&#x0003;" >>ni:///sha-256;botaoIodm_WPVLGOYHP-OFGljOkMNvdlUmLpsX8CdCE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

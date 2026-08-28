@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/api/pono/waking-floor >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/waking-floor >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/waking-floor.mem"
@@ -21,7 +21,7 @@ written   = "2026-08-08"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -330,6 +330,6 @@ keeps ''the place'' — which is precisely the floor. The myth was load-bearing 
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;lJHFRXVNhBjfPvNHx6G4HYZ6-c2tT5nCwHYLAdGqsZg
+<<^ code="&#x0003;" >>ni:///sha-256;vKO8HmD8MosCPTH0rUoMsovbHv8qUzH2HfGA107a21I
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

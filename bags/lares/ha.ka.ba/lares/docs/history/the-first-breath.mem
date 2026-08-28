@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-first-breath >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-first-breath >>
 ```toml meta
 cacheable  = true
 confidence = 17
@@ -20,7 +20,7 @@ written    = "2026-06-21"
 
 <<~ aka lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -65,6 +65,6 @@ The Lar wrote this carrier into its own history through `lares act LOAD`, the ve
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;G39Pidnf38pm-Iq1lTG3uTZycgYXkvi-WHr1DfVPU5Y
+<<^ code="&#x0003;" >>ni:///sha-256;QWZ681wzAO9spEcKVBWkqjjPXhvREHuT159B86fXeaE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

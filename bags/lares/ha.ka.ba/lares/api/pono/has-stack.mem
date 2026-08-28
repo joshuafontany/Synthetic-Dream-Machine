@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/has-stack >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/has-stack >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/has-stack.mem"
@@ -18,7 +18,7 @@ written   = "2026-06-12"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -112,6 +112,6 @@ the py caps consume.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4T_GqZ48vCEaejnZT1OiPzs_vGtpi_FwDM55_a8ypMs
+<<^ code="&#x0003;" >>ni:///sha-256;DMNnPE9-2cHnXh_Z5B27_PLN-NDb-CTzCbZRIgySkcc
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

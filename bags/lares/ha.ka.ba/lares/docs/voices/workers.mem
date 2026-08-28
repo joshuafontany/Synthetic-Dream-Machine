@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/workers >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/workers >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices/workers.mem"
@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices/workers"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -145,6 +145,6 @@ The worker swarm spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST imple
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;0UJwJuck48yEN0mSmAtTK8ABIVALCXojrLnzHcYOHUY
+<<^ code="&#x0003;" >>ni:///sha-256;flWlAsbyhp0_4kpSG_T01TIW-X0aQexU9zj-4aUWEhI
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

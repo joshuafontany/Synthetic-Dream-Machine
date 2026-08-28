@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/lares/docs/ai-phrasebook-design >>
+<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/docs/ai-phrasebook-design >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/ai-phrasebook-design.mem"
@@ -21,7 +21,7 @@ uri-path   = "ha.ka.ba/lares/docs/ai-phrasebook-design"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -445,6 +445,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;K8mBAE8la1V4AiCMqHKoDZ6QYe1k1KRudMIQ06KbdbA
+<<^ code="&#x0003;" >>ni:///sha-256;__XjgVY2ZrQBmdfVmoE5_7MIA7csiMgmP8gPwH0ZN5s
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

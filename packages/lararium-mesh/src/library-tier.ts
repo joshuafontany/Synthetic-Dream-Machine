@@ -114,7 +114,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
   return [
     DECLARATION,
     "",
-    `<<^ code:"&#x0001;" namespace:"⊙" ? -> lar:///ha.ka.ba/library/${collection} >>`,
+    `<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/library/${collection} >>`,
     "```toml meta",
     `collection = "${collection}"`,
     `entries    = "${rows.length}"`,
@@ -137,7 +137,7 @@ export function renderLibraryIndex(collection: string, entries: readonly Library
     "",
     `Reference this collection as \`${libraryRef(collection)}\` — a name that travels, never a path.`,
     "",
-    '<<^ code:"&#x0004;" -> ? >>',
+    '<<^ code="&#x0004;" -> ? >>',
     "",
   ].join("\n");
 }

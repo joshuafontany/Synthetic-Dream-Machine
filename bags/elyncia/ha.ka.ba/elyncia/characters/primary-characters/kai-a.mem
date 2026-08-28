@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
 ```toml meta
 cacheable  = false
 confidence = 10
@@ -17,7 +17,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/kai-a"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #head >>
 
@@ -87,6 +87,6 @@ stays a table question.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;CjOD-tPPDz0-E3_uWGGOonbFU4LRlKN3o0tjg-yWnKI
+<<^ code="&#x0003;" >>ni:///sha-256;BAYrk29HU4MHb-2KS_7yUocRzwEQJS7mjzS4ck60frM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

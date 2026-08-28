@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant (lar-uri) stays the scheme-law root; this skill does not widen or outrank it", "S2: path classes stay distinct — stable (ha.ka.ba), unstable (attitude triple), adjacent (no triple); never blur them", "S3: exactly one @-bag segment, at child[1] only; child[2]+ never carry @", "S4: a lar: URI NAMES; resolution runs against the local graph, never as a network fetch", "S5: local form for stable addresses and system names; session form for exchange spans only — it never persists into storage"]
@@ -24,7 +24,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/lar-uri/SKILL"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 ! lar: URI Skill
 
@@ -109,6 +109,6 @@ Prefer another surface when the work concerns:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;gls17ukZM38ykhvNgSGoqK3TAXKp6dD3dnF2Cs_R1AA
+<<^ code="&#x0003;" >>ni:///sha-256;kxHUgd27LU0zbRBUw6we57DuYdjJ6KOJPLszInsfqsc
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

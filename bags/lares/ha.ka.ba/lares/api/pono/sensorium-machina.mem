@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" namespace:"ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/sensorium-machina.mem"
@@ -20,7 +20,7 @@ written   = "2026-07-13"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #entry >>
 
@@ -558,6 +558,6 @@ five-plane count (#owed, the-five-plane-count).
 
 <<~ ॐ ँ -> ? >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;diPOXGKP9jTLLN0-2oTs0Zu9yISEZoaivgzCmY3k3D4
+<<^ code="&#x0003;" >>ni:///sha-256;7_0P2PVqIAMN6-AVjjHR2YZkBVGVxz1OUwBkkUfgxsQ
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

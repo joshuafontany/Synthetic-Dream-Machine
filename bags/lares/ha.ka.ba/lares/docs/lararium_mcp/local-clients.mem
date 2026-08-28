@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/local-clients.mem"
 l-space         = "stable"
@@ -16,7 +16,7 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #ooda-ha >>
 
@@ -127,6 +127,6 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;7rsUBhv0JRpLqngbPVdOAt96b5CvohS639orXeAaDaA
+<<^ code="&#x0003;" >>ni:///sha-256;eY_AaCcM_ukZVf7_FjFYXpa02pKOIL0FGc8R9RKFMpM
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

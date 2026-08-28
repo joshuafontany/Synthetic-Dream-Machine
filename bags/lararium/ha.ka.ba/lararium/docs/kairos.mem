@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/kairos >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/kairos >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/kairos.mem"
@@ -16,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/kairos"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -322,6 +322,6 @@ free coarse breakpoint; a scheduled sweep needs its own justification.
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;uF9I-5uKxO70nJIH6q1aDmccTsMiA_EN74RrpUz-30U
+<<^ code="&#x0003;" >>ni:///sha-256;W_vKRjGb4RSQ4Fzx-xyVpOyDHXlvoYO2iw1Ty5fxsL8
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>

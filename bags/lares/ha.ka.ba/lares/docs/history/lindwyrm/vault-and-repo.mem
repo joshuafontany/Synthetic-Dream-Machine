@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo >>
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo >>
 ```toml meta
 cacheable     = false
 confidence    = 13
@@ -18,7 +18,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo"
 ```
 
-<<^ code:"&#x0002;" >>
+<<^ code="&#x0002;" >>
 
 <<~ ahu #meme-header >>
 
@@ -203,6 +203,6 @@ Act II receives:
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;at-AuMDKFlLCNjDNwWu9XduH-HtT575QxvkLWYaOqD4
+<<^ code="&#x0003;" >>ni:///sha-256;PJa7x2KVN5RJKo_hpaKnGolSXjMNUI9eylh-Nw423qE
 
-<<^ code:"&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ? >>
