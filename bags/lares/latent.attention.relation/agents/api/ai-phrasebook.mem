@@ -3,6 +3,8 @@
 <<^ code="&#x0001;" ? -> lar:///latent.attention.relation/agents/api/ai-phrasebook >>
 ```toml meta
 cacheable = true
+l-space   = "latent.attention.relation"
+retain    = true
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "latent.attention.relation/agents/api/ai-phrasebook"
 ```
