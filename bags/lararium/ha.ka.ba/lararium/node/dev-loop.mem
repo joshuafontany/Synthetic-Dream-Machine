@@ -75,7 +75,7 @@ HOUSE, ''lar'' names the NAMESPACE. Every siting answers ''whose is this?'':
 | `<lararium>` (`~/.local/share/lararium`) | `library/` the acquired shelf · `sensoriums/` operator history + DreamNet history | the HOUSE'S — nothing here re-derives |
 | `<state>` (`~/.local/state/lares`) | `projection/` synced-tree watermark · `harvest/` · `harvest-stage/` | nobody's for long — all of it re-derives |
 
-<<~ranks corpus repo/genesis:baked-island.bin-seed+bootstrap -> repo/bags:seed-memes -> repo/packages:code >>
+<<~ranks corpus repo/genesis/baked-island.bin-seed+bootstrap -> repo/bags/seed-memes -> repo/packages/code >>
 
 ''The resolver'' — ONE source, `@lararium/node/vessel-paths.ts` (`larHome` · `larDataDir` ·
 `larIdentityDir` · `larProjectionDir` · `larHarvest*`) over `@lararium/mempalace/xdg-base`
@@ -122,6 +122,6 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;4kHUF4iGkM4r7nj4H4YbDY1_-VSp0qmqby7ngy5X78c
+<<^ code:"&#x0003;" >>ni:///sha-256;ywr4wSl24lkD4pfY_SpqBWNvSP5ufhn-D13cyTdARY0
 
 <<^ code:"&#x0004;" -> ? >>

@@ -102,7 +102,7 @@ The survey named more than the engines yet carry. Held here, built when a sink n
 
 Every collect-then-fire system ''servos its threshold to a set-point'' — the gate stops being a guess and tracks the load. A 2026-06-26 prior-art survey (Linux Net DIM · NIC interrupt coalescing · AIMD · Nagle/triple-buffering · rAF/React scheduler) grounded the law, and the keel finding: ''the two families servo in OPPOSITE directions, because one is lossless and one is lossy.''
 
-<<~ranks servo accumulate:shrink-depth-when-slow -> coalesce:GROW-window-when-slow -> display:stay-frame-pinned >>
+<<~ranks servo accumulate/shrink-depth-when-slow -> coalesce/GROW-window-when-slow -> display/stay-frame-pinned >>
 
 * ''Accumulate'' (lossless — every item must flush): under load, ''shrink'' the batch depth so per-flush latency stays bounded. Engine: `adaptGate` (`mesh/gate-tuning.ts`) on the EWMA'd flush latency.
 * ''Coalesce/reconcile'' (lossy/newest-wins): under load, ''GROW'' the window — rendering while the prior flush still drains is pure waste, so spacing flushes wider makes each carry a fresher state for less work (Net DIM widens under flood; AIMD: back off multiplicatively, recover additively). Engine: `adaptWindow` (`mesh/gate-tuning.ts`), opt-in on `KeyedCoalesceGate`.
@@ -122,7 +122,7 @@ Every collect-then-fire system ''servos its threshold to a set-point'' — the g
 
 The three nalus do not live in bespoke worker classes. Each rides a ''sovereign causal island'' composed as a `#has` ''cap stack'' — the RUNTIME twin of the data-plane has-stack law (`lar:///ha.ka.ba/lares/api/pono/has-stack`): a worker is a NAMELESS entity whose cap stack IS its behavior. `composeIsland([...caps])` (`tw5/island-caps.ts`) folds the stack into one `IslandBehavior` the sovereign kernel drives.
 
-<<~ranks cap hasCapture:IN-accumulate -> hasProjection:OUT-coalesce -> hasDispatch:the-synapse -> hasEngineWatch/hasRecipeWatch:drift >>
+<<~ranks cap hasCapture/IN-accumulate -> hasProjection/OUT-coalesce -> hasDispatch/the-synapse -> hasEngineWatch/hasRecipeWatch/drift >>
 
 A wiki island = `[hasDispatch, hasProjection, hasEngineWatch, hasRecipeWatch]`; the ''@daemon'' (the bound-operator's vessel-only worker, severed from federation) = `[hasDispatch, hasEngineWatch, hasCapture]` — telemetry ''folds into @daemon as an IDEMPOTENT cap'': every @daemon carries it (tending the operator's session-capture is a daemon duty), no longer a bespoke worker nor a standalone island. The capture cap stays a DISTINCT `#has` unit (FLOW) beside dispatch (AUTHORITY) — the master cut holds at the cap shore, never the worker — and is INERT until a sink + feed are wired (a valid resting state). The breath is two gate-families on one island substrate (IN-axon + OUT-dendrite, the neuron rhyme); dispatch is the third, non-gate channel. A cap injects its substrate shore, never imports it — the same stack composes on node, browser, any vessel.
 
@@ -154,7 +154,7 @@ The DOM nalu (`tw5-projection.ts`) draws `CoalesceGate`; the disk nalu (`disk-pr
 
 ''Intent set here for a parallel session to steer by'' — the network uplift is NOT built here (YIN; the wire is the other session's). The recognition to carry: ''this gate model already IS a transport-protocol kernel.'' The uplift lifts it one ring of the scale ladder (Lararium → Nexus → DreamNet), the SINK moving local → peer → many. The rhyme map the next session inherits:
 
-<<~ranks ring intra-island:SINK=local -> inter-island:SINK=peer -> mesh:SINK=many >>
+<<~ranks ring intra-island/SINK=local -> inter-island/SINK=peer -> mesh/SINK=many >>
 
 * ''accumulate → reliable-ordered transport'' (TCP/ARQ rhyme): the reserve becomes the retransmit buffer · dead-letter the give-up · the CRDT-as-dedup the at-least-once + idempotent guarantee. Cross-peer ordering rides vector clocks — never a global now (#/causal-islands).
 * ''coalesce → gossip / epidemic dissemination'' (Plumtree eager+lazy push): newest-wins becomes last-write-wins state-sync, one→many, eventual consistency. The lossy drop stays the correct dual at mesh scale.
@@ -180,6 +180,6 @@ The DOM nalu (`tw5-projection.ts`) draws `CoalesceGate`; the disk nalu (`disk-pr
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;t54XxYWGmN9BYuaZCfFPH8EaYIpNHR8Lzg1StnmYI1Y
+<<^ code:"&#x0003;" >>ni:///sha-256;v--Ow5bUDBhrH50kDUSl-F0ZxGBbl4cMMW_laM8ReL4
 
 <<^ code:"&#x0004;" -> ? >>
