@@ -114,13 +114,13 @@ describe("INGEST — the gate composed with replace-by-group", () => {
 
     const carriers = result["carriers"] as Array<Record<string, unknown>>;
     expect(carriers[0]!["decision"]).toBe("ingest");
-    expect(carriers[0]!["tombstoned"]).toContain(`${URI}#classifier-channel`);
+    expect(carriers[0]!["tombstoned"]).toContain(`${URI}#/classifier-channel`);
 
     const after = await liveGroup(composite);
-    expect(after).not.toContain(`${URI}#classifier-channel`);
+    expect(after).not.toContain(`${URI}#/classifier-channel`);
     // The heading lives in the #entry child (FFZ grain); the fresh changeId
     // rides every landed record.
-    const entry = (await composite.resolveAll(`${URI}#entry`)).find((e) => e.bagId === BAG)!.record;
+    const entry = (await composite.resolveAll(`${URI}#/entry`)).find((e) => e.bagId === BAG)!.record;
     expect(String(entry.tiddler["text"] ?? "")).toContain("(ingested)");
     expect(entry.meta?.["changeId"]).toBe("chg-ingest-1");
   });

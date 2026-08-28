@@ -30,7 +30,7 @@
  * generate identically, so the reading names a local sighting and never a total.
  */
 
-import { runCabalVouch, CabalVouchError, loadPersonaGroupRootVerifyingKey, listPersonaRoots } from "@lararium/node";
+import { runCabalVouch, CabalVouchError, runCabalJoin, CabalJoinError, loadPersonaGroupRootVerifyingKey, listPersonaRoots } from "@lararium/node";
 import type { ParsedArgs } from "../parse-args.js";
 import { larDataDir, vesselDid } from "../env.js";
 import { runVerb } from "../verb-call.js";
@@ -38,10 +38,12 @@ import { summaryOutput } from "../verb-result.js";
 import { emit, exitFor } from "../render.js";
 
 function usage(): number {
-  console.error("usage: lares cabal <vouch | feed | clock>");
+  console.error("usage: lares cabal <vouch | join | feed | clock>");
   console.error("");
   console.error("  vouch <joiner-nym> --realm <realm-doc-id> [--expires <iso8601>] [--as <root-index>]");
   console.error("        stake YOUR standing on a joiner crossing into that realm. Dilutes you, admits nobody.");
+  console.error("  join --realm <realm-doc-id> [--as <root-index>] [--cap <n>]");
+  console.error("        PRESENT and cross. Reads the lineage, prices it, writes nothing either way.");
   console.error("  feed --realm <realm-doc-id> [--as <root-index>]");
   console.error("        the OFFERING — roll your face's lease slot, keeping the realm alive.");
   console.error("  clock --realm <realm-doc-id>");
@@ -53,6 +55,7 @@ function usage(): number {
 export async function cmdCabal(args: ParsedArgs): Promise<number> {
   switch (args.positional[0]) {
     case "vouch": return await cmdVouch(args);
+    case "join":  return await cmdJoin(args);
     case "feed":  return await cmdFeed(args);
     case "clock": return await cmdClock(args);
     default:      return usage();
@@ -196,5 +199,48 @@ async function cmdVouch(args: ParsedArgs): Promise<number> {
   } catch (err) {
     if (err instanceof CabalVouchError) { console.error(`refused: ${err.message}`); return 1; }
     throw err;
+  }
+}
+
+/** `lares cabal join` — the applicant's half. Reads only; a refusal anergizes and bans nobody. */
+async function cmdJoin(args: ParsedArgs): Promise<number> {
+  try {
+    const realm = realmOf(args);
+    // Names a face outright, else this vessel's acting one — a steward reads a crossing for a face
+    // they do not hold.
+    const applicant = (args.options["applicant"] ?? await actingFace(args)).trim().toLowerCase();
+    const capRaw = args.options["cap"];
+    const cap = capRaw === undefined ? undefined : Number(capRaw);
+    if (cap !== undefined && !Number.isInteger(cap)) {
+      throw new CabalUsageError(`--cap expects an integer out-degree ceiling, got "${capRaw}"`);
+    }
+
+    const v = await runCabalJoin({
+      realm, applicant,
+      ...(cap !== undefined ? { maxVouchesPerVoucher: cap } : {}),
+    });
+
+    emit(args, {
+      ok: true,
+      data: { admitted: v.admitted, refusal: v.refusal, voucherDid: v.voucherDid, capped: v.capped.length },
+      human: () => {
+        if (v.admitted) {
+          console.log("ADMITTED");
+          console.log(`  applicant: ${applicant}`);
+          console.log(`  realm:     ${realm}`);
+          console.log(`  voucher:   ${v.voucherDid}  (the hand the co-pay falls on)`);
+        } else {
+          console.log(`REFUSED — ${v.refusal}`);
+          console.log(`  applicant: ${applicant}`);
+          console.log(`  realm:     ${realm}`);
+          console.log("  nothing was written; the applicant stands where it stood.");
+        }
+        // The fold's budget, stated rather than trusted.
+        if (v.capped.length > 0) console.log(`  capped:    ${v.capped.length} edge(s) the per-voucher choke turned away`);
+      },
+    });
+    return v.admitted ? 0 : 1;
+  } catch (err) {
+    return cabalFailure(args, "join", err);
   }
 }
