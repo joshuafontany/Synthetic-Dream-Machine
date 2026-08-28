@@ -1,0 +1,327 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code:"&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/kairos >>
+```toml meta
+cacheable = false
+file-path = "bags/lararium/ha.ka.ba/lararium/docs/kairos.mem"
+l-space   = "stable"
+mana      = 15
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = false
+role      = "KAIROS as an instrument — the iterative posture reviewer that surfaces drift to one operator; gate, budget, check anatomy, decay, trust ledger"
+tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/docs/kairos"
+```
+
+<<^ code:"&#x0002;" >>
+
+<<~ ahu #meme-header >>
+
+! KAIROS — The Proactive Monitor as an Instrument
+
+Not invariant law. The forks at #ruled carry the operator's rulings of 2026-08-27.
+
+The sibling room at `preferences/proactive-surfacing` holds the recovered ''principle''.
+This room holds the ''instrument'' — what a check looks like, how many surface, when they
+surface, and what happens to one the operator sets down.
+
+KAIROS keeps its recovered shape throughout: a timing reflex distributed through the house,
+never a subsystem bolted beside it.
+
+<<~/ahu >>
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+
+<<~ ahu #provenance >>
+
+!! Provenance
+
+```toml
+myth-source      = "elyncia/Elyncia_02_The_Lares_DreamNet.md — KAIROS, The Proactive Monitor"
+spec-source      = "bags/lares-history/lares_research/github-instructions/lares-operations.instructions.md#proactive-surfacing"
+principle-source = "bags/lararium/ha.ka.ba/lararium/docs/preferences/proactive-surfacing.mem"
+seat-source      = "packages/lares-cli/.claude-plugin/hooks/lares-wake-hook.mjs"
+contract-source  = "packages/lares-cli/src/integration-check.ts"
+field-research   = "two tasked spirits, 2026-08-27 — permission-surface hazards; advisory-instrument design constraints"
+occasion         = "a permission allow-list sweep that found 22 dead or over-wide rules nobody had authored deliberately"
+created          = "2026-08-27"
+```
+
+''Standing of the field citations:'' the research spirit marked four of its highest-value
+sources as fetched-at-403 — search digests, never the papers. Every number below carries the
+confidence its spirit vowed, and the digest-only ones cap near 12/20. Open the papers before
+quoting any of them onward.
+
+<<~/ahu >>
+
+<<~ ahu #the-gate >>
+
+!! The Gate
+
+The myth already wrote the arithmetic, and the instrument MUST NOT improve on it:
+
+<<< 
+Is there something nearby worth surfacing, and will the cost of interrupting be less than
+the cost of silence? When the answer is yes, it speaks — briefly, with high signal, and then
+returns to watching.
+<<<
+
+The field supplies the threshold the myth left as a feeling.
+
+<<~ confidence 16/20 >> Google's Tricorder ships a check only under ''< 10% effective false
+positives'', where an ''effective false positive'' names a finding ''the operator took no
+action on''. A finding that reads correct and gets ignored has failed identically to one that
+reads wrong.
+
+The definition relocates truth: ''the operator sets the false-positive rate, never the check
+author''. A check the operator keeps waving past does not stand vindicated by being right.
+
+!!! The discredited channel
+
+<<~ confidence 11/20 >> Drug-interaction alerts run ~10% clinical relevance and reach ''90%
+physician override'' — and ''88.2% of very-severe alerts get overridden too''. Once a channel
+discredits itself the severity field carries no force.
+
+''Law:'' severity inflation spends a reserve that never refills. The instrument MUST NOT
+raise an item's rank to win attention it did not earn.
+
+!!! Habituation arrives on exposure two
+
+<<~ confidence 13/20 >> fMRI work measured visual-processing collapse ''after the second
+exposure''; polymorphic presentation resisted it where fixed presentation did not.
+
+''Law:'' the instrument MUST NOT render the same item identically on repeat. An item either
+changes shape or stops surfacing.
+
+<<~/ahu >>
+
+<<~ ahu #tiers >>
+
+!! The Ladder as Budget
+
+The myth scales KAIROS by node tier — Household a faint one-line flag, Crossroads detectable,
+Temple full assessments unprompted. That ladder carries a noise governor, and the alarm
+standards give it an envelope.
+
+<<~ confidence 14/20 >> EEMUA 191 / ANSI-ISA-18.2 name ''>10 items in 10 minutes'' as an
+''alarm flood'' — the point a human stops processing items one at a time.
+
+| Tier | Myth signal | Proposed cap |
+|---|---|---|
+| Household | "a faint note at the end of a session, a one-sentence anomaly flag" | 1 |
+| Crossroads | KAIROS detectable | 3 |
+| Temple | "full assessments unprompted" | 5 |
+
+''The numbers came from this design pass, never from the myth'' — which names no integers
+anywhere. ''Ruled adopted (operator, 2026-08-27); this lararium stands at Temple, cap 5.''
+A node surfacing ten items has left the ladder rather than climbed it.
+
+!!! Overflow — the cap governs SURFACING, never finding
+
+A wide sweep finds more than a tier surfaces, and the two MUST NOT be reconciled by widening
+the cap. Renovate's dependency dashboard names the pattern: ''a small surfaced set, plus one
+standing place where the remainder stays inspectable on demand''.
+
+# The sweep runs wide and ranks everything it finds.
+# The tier surfaces its cap — 5 here — and no more.
+# The remainder rests at one addressable place the operator MAY open by asking; it MUST NOT
+push, and the surfaced set MUST name how many wait behind it.
+# A finding held back by overflow MUST NOT count as dismissed — it never reached the operator,
+so it spends neither compliance nor reliance (#trust-ledger).
+
+!!! Never silent
+
+<<~ confidence 15/20 >> A randomized field experiment (n=237) measured notifications ''off
+entirely'' scoring ''worse'' than the status quo — more anxiety, not less; coarse batching
+(3×/day) won, while hourly batching bought nothing over control.
+
+The house already holds this as law — `Focus(N)` rides every turn, and the signal room rules
+''Aperture — never silent''. The instrument MUST report ''checked, nothing stands'' rather
+than fall quiet. Silence reads as absence, and absence reads as broken.
+
+<<~/ahu >>
+
+<<~ ahu #anatomy >>
+
+!! Check Anatomy
+
+The contract already stands at `integration-check.ts` as `{ name, ok, detail }` — cheap,
+running on every stand. KAIROS extends the same shape rather than raising a second one.
+
+| Field | Carries | Grounds |
+|---|---|---|
+| `id` | a `lar:` URI naming the ''drift class'', never the instance | the addressing law gives stable finding identity for free; `git fsck` message-IDs name the same need |
+| `stands` | held · clear · ''inconclusive'' | Scorecard's `-1`; the house reads it as avaktavya — the pole where the true/false axis does not fit |
+| `detail` | what the check saw, in one line | the existing contract |
+| `dimensions` | the evidence carried beside the verdict | Powerpipe: a finding ships with its own grounds |
+| `fix` | the one-line corrective the operator MAY run | Google's gate — an item with no action attached MUST NOT ship |
+| `receptivity` | whether the operator can act ''now'' | see #two-gates |
+| `stage` | the 0–20 band the item surfaces at | the house's own ladder |
+
+!!! Two gates, not one
+
+<<~ confidence 12/20 >> The JITAI literature names two conditions — ''vulnerability'' (the
+need exists) and ''receptivity'' (the person can act) — and its own systematic reviews record
+that receptivity ''almost never gets measured''. The field named the right variable and then
+failed to instrument it.
+
+''Drift alone MUST NOT fire.'' A dirty tree, a rebase in flight, a live incident all read as
+low receptivity: a true finding stays withheld, kept for the next coarse breakpoint.
+
+!!! The moment
+
+<<~ confidence 15/20 >> Session boot stands as a ''coarse breakpoint by construction'' — no
+task in flight, so no resumption lag to pay. The wake hook already fires there. Mid-session
+surfacing MUST clear a much higher bar.
+
+<<~/ahu >>
+
+<<~ ahu #refusal >>
+
+!! The Refusal to Act
+
+The instrument surfaces; the operator acts. The wake hook already rules this for its own
+reason, and KAIROS inherits it rather than arguing it:
+
+<<< 
+`--observe` withholds the standing half: the frame still reports the node, the recall and the
+sidecar, while standing one remains the operator's act.
+<<<
+
+<<~ confidence 15/20 >> `brew doctor` holds the same discipline — it prints, exits nonzero,
+and leaves the corrective command to the operator. Google's contrary rule (fix automatically
+what can be fixed automatically) holds ''only under code review'', where a human approves the
+diff before it lands. An unattended scheduled runner carries no equivalent consent gate, so
+the rule MUST NOT port without it.
+
+<<~/ahu >>
+
+<<~ ahu #decay >>
+
+!! Decay — the re-entry key
+
+The field research returned this gap open and refused to fill it: no literature found on
+which findings expire and which persist.
+
+''The house already holds the model.'' A finding the operator sets down files a `kue` —
+attributed dissent carrying a ''re-entry key'': the named condition under which the dispute
+reopens. A dismissed check neither expires on a timer nor persists forever; ''it sleeps until
+its key turns''.
+
+<<~ confidence 13/20 >> A study across 1,425 projects found suppressions mostly
+''undocumented'', encoding technical debt and tool misassumptions that never reached the check
+author. The `kue` form cannot go undocumented — it requires the reason and the key.
+
+''Laws:''
+
+# A dismissal MUST bind to the `lar:` id — the drift class, never the instance.
+# A dismissed finding MUST NOT resurface unchanged. A finding returning after dismissal
+teaches the operator that dismissal does nothing, and that lesson generalizes to every check.
+# A dismissal MUST route to the ''check'', never only to the instance. Google's "Not useful"
+button files against the ''analyzer author'', and analyzers with high dismissal rates ''get
+disabled''. A dismissal that silences one instance teaches the instrument nothing.
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike >>
+
+<<~/ahu >>
+
+<<~ ahu #trust-ledger >>
+
+!! The Trust Ledger — two accounts, never one
+
+<<~ confidence 13/20 >> Dixon & Wickens separate two channels that MUST NOT trade against
+each other:
+
+<<~ranks compliance acting-when-it-fires ~ degraded by FALSE ALARMS >>
+<<~ranks reliance trusting-the-silence ~ degraded by MISSES >>
+
+''A quiet run makes a claim.'' Suppressing a noisy check to protect compliance draws down
+reliance, and nothing surfaces that draw unless the instrument counts both.
+
+<<~ confidence 11/20 >> Two counterweights against over-tuning: reliability as low as 0.6
+still aided performance, and the cry-wolf effect measured weaker than assumed in air traffic
+control. Perfect precision does not name the bar.
+
+Parasuraman & Riley name the failure this guards: ''disuse'' — neglect of ''reliable''
+automation, root-caused to false alarms and to a base rate nobody weighed.
+
+<<~/ahu >>
+
+<<~ ahu #check-set-one >>
+
+!! Check Set One
+
+Drawn from the sweep that occasioned this room. Each carries a `lar:` id, a cheap test, and a
+one-line fix.
+
+| `lar:` id | Holds when | Fix |
+|---|---|---|
+| `lar:///allow-rule.path.dissolves` | a rule names a path that no longer resolves | drop the rule |
+| `lar:///allow-rule.wildcard.overreaches` | a `*` sits before the rest of the command | move the `*` past the verb, or drop |
+| `lar:///allow-rule.interpreter.opens` | a rule matches the vendor's stripped-interpreter class | drop; a pattern cannot bound an interpreter |
+| `lar:///deny-list.stands.empty` | `permissions.deny` carries nothing | seat a floor the allow side cannot lift |
+| `lar:///sandbox.stands.unconfigured` | the OS boundary sits off while the allow-list carries one it cannot hold | configure filesystem + network together |
+| `lar:///mcp-record.names.the-departed` | enabled/disabled MCP entries name servers no config defines | clear the stale names |
+| `lar:///vessel.sock.stands.absent` | a configured MCP holder exits for want of the daemon | `lares vessel stand` |
+
+!!! The law under the first three
+
+<<~ confidence 17/20 >> ''A pattern can bound the string; only a runtime can bound the
+authority.'' Wherever an allowed program can name another program — `-c`, `-e`, `-exec`,
+`--pre`, `--compress-program`, `core.fsmonitor` — the allow-list has delegated its whole
+authority to a string the pattern never sees.
+
+Three independent lines converge: the vendor strips the class in auto mode rather than
+publishing a safe glob for it; sudoers reached the same place decades earlier, and its
+`NOEXEC` interposition leaks through `system()`/`popen()` by its own advisory; and the eight
+published Claude Code escapes land at the ''argument'' layer, never the verb.
+
+''You can allow-list an interpreter invocation. You cannot allow-list an interpreter.''
+
+<<~/ahu >>
+
+<<~ ahu #ruled >>
+
+!! Rulings — operator, 2026-08-27
+
+| Fork | Ruling |
+|---|---|
+| Tier cap | 1/3/5 adopted; ''this lararium stands at Temple'' — 5 items surfaced at boot |
+| Seat | ''its own verb'' — `lares kairos` stands alone; the wake hook calls it ''beside'' `vessel stand --observe`, so boot carries both frames |
+| Scope | ''wider posture sweep'' — permissions, sandbox and deny floor, repo and config drift, MCP topology, hook paths |
+| Exec-shaped allow-rules | ''cut'' — five wildcarded interpreter grants plus the stdin-fed `Bash(python -)` that carried no wildcard for any glob check to catch |
+
+!!! The tension the rulings carry
+
+Widest sweep, tightest surfacing. The two hold together only through #tiers overflow, and the
+instrument MUST NOT resolve them by widening the cap when the ranking gets hard. A sweep that
+finds forty things and surfaces five stands healthy; one that surfaces forty has become the
+alarm flood the standard names.
+
+!!! Standing open
+
+# ''Cadence'' — session boot alone, or boot plus a coarse scheduled sweep. Boot stands as the
+free coarse breakpoint; a scheduled sweep needs its own justification.
+# ''Ledger persistence'' — where compliance and reliance counts live across sessions.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/operations-review >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/degraded-states >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike >>
+
+<<~/ahu >>
+
+<<^ code:"&#x0003;" >>ni:///sha-256;uF9I-5uKxO70nJIH6q1aDmccTsMiA_EN74RrpUz-30U
+
+<<^ code:"&#x0004;" -> ? >>
