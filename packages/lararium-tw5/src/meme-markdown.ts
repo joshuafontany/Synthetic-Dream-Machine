@@ -50,11 +50,11 @@ export interface SubmissionProjection {
 }
 
 /** Line-standing frame sigil (any control code), with whatever rides after the closer. */
-const FRAME_LINE = /^<<\^ code:"&#x00[0-9A-Fa-f]{2};"(?:[^>\n]|->)* >>.*$/;
+const FRAME_LINE = /^<<\^ code[:=]"&#x00[0-9A-Fa-f]{2};"(?:[^>\n]|->)* >>.*$/;
 /** The SOH heading, capturing the carrier's declared address. The tail admits `->`. */
-const SOH_LINE = /^<<\^ code:"&#x00[01]1;"(?:[^>\n]|->)*\?\s*->\s*(lar:\/\/\/\S+) >>/;
+const SOH_LINE = /^<<\^ code[:=]"&#x00[01]1;"(?:[^>\n]|->)*\?\s*->\s*(lar:\/\/\/\S+) >>/;
 /** The ETX closer with its adjacent check. */
-const ETX_LINE = /^<<\^ code:"&#x0003;"[^\n]*>>(\S+)?/;
+const ETX_LINE = /^<<\^ code[:=]"&#x0003;"[^\n]*>>(\S+)?/;
 const DOCTYPE_LINE = /^<<!DOCTYPE (?:[^>\n]|->)* >>\s*$/;
 // The tooth stands at one dispatch position: `<<~` then LWSP then the command word,
 // and a close word carries its own slash (`ahu`, `/ahu`). Both spacings reach the same
@@ -245,5 +245,5 @@ export function transposeSeed(body: string): string {
         .replace(/^(\s*)\*\s+/, (_, s: string) => `${s}- `),
     );
   }).join("\n");
-  return rendered.replace(/(<<\^ code:"&#x0003;" >>)[^\n]*/g, "$1");
+  return rendered.replace(/(<<\^ code[:=]"&#x0003;" >>)[^\n]*/g, "$1");
 }

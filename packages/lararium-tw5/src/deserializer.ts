@@ -194,10 +194,10 @@ export function memeticWikitextDeserializer(
     // scan returns `code:"` as a namespace: no throw, no diagnostic, a wrong glyph carried forward into
     // every render and every re-emission. The reader that breaks FIRST under a frame migration breaks
     // SILENTLY, so it learns the new shape before any carrier writes one.
-    const nsParam = /^<<[~^][^>\n]*?\bnamespace:\s*"([^"]*)"/.exec(ev.fullText);
+    const nsParam = /^<<[~^][^>\n]*?\bnamespace[:=]\s*"([^"]*)"/.exec(ev.fullText);
     const nsBare  = /^<<\^([^&:\n]*)&#x(0001|0011)/.exec(ev.fullText);
     // The heading variant rides its own capture: a `code:` param names it, else the bare entity does.
-    const sohCode = /^<<\^[^>\n]*?\bcode:\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
+    const sohCode = /^<<\^[^>\n]*?\bcode[:=]\s*"&#x(0001|0011);"/.exec(ev.fullText)?.[1]
       ?? nsBare?.[2];
     const namespace = (nsParam?.[1] ?? nsBare?.[1] ?? "").trim();
     if (namespace.length > 0 && tiddlers.length > 0) {

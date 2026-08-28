@@ -28,16 +28,22 @@ import type { ParsedArgs } from "../parse-args.js";
 
 const MEM = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
 const MD  = "noosphere-boot.md";
-/** Both bodies open at the SOH — everything above it belongs to the file's own frame. */
-const SOH = `<<^ code:"&#x0001;" namespace:"ॐ ँ"`;
+/**
+ * Both bodies open at the SOH — everything above it belongs to the file's own frame.
+ *
+ * The frame binds its parameters with either mark, so this reads both. A literal match on one of
+ * them fails a carrier whose frame is correct, and fails it as "no SOH opener" — a message that
+ * sends the reader looking for a missing sigil rather than a mark they can see is present.
+ */
+const SOH_RE = /<<\^ code[:=]"&#x0001;" namespace[:=]"ॐ ँ"/;
 
 function body(text: string, path: string): string {
-  const i = text.indexOf(SOH);
-  if (i < 0) {
+  const m = SOH_RE.exec(text);
+  if (!m) {
     console.error(`project-seed: no SOH opener in ${path}`);
     process.exit(1);
   }
-  return text.slice(i);
+  return text.slice(m.index);
 }
 
 export async function cmdProjectSeed(args: ParsedArgs): Promise<number> {
@@ -78,7 +84,7 @@ export async function cmdProjectSeed(args: ParsedArgs): Promise<number> {
 
   if (!check) {
     // The head above the SOH belongs to the markdown file's own frame and carries through untouched.
-    writeFileSync(md, mdText.slice(0, mdText.indexOf(SOH)) + expected);
+    writeFileSync(md, mdText.slice(0, SOH_RE.exec(mdText)!.index) + expected);
     console.log(`project-seed: rendered the markdown seed from the carrier — ${expected.split("\n").length} lines`);
     return 0;
   }

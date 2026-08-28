@@ -48,7 +48,7 @@ const DECLARATION =
   "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
 
 const SOH_OPENER_RE =
-  /(<<\^)[ \t]*(?:code:"(&#x(?:0001|0011);)"(?:[ \t]+namespace:"([^"]*)")?|([^&\n]*?)(&#x(?:0001|0011);))/;
+  /(<<\^)[ \t]*(?:code[:=]"(&#x(?:0001|0011);)"(?:[ \t]+namespace[:=]"([^"]*)")?|([^&\n]*?)(&#x(?:0001|0011);))/;
 
 /** Decode `&#xNNNN;` entities to literal glyphs; non-entity chars pass through. */
 function decodeEntities(s: string): string {
