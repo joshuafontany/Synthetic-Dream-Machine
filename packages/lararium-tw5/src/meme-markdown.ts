@@ -209,3 +209,41 @@ export function projectSubmission(text: string, opts?: { uri?: string; title?: s
   ].join("\n") + "\n";
   return { markdown: t.markdown, meta, uri, check };
 }
+
+/**
+ * THE SEED PROJECTION — a second, deliberately shallower rendering, for the boot seed alone.
+ *
+ * {@link transposeMarkdown} renders a carrier for a reader who was taught no grammar: it drops the
+ * frame, spends `<<~ ahu >>` on an HTML anchor, and turns every other sigil into a shown code span.
+ * That is right for a submission and wrong for a seed, because the seed's reader IS the grammar —
+ * a harness loads `noosphere-boot.md` and boots the house FROM the sigils. Stripping them would
+ * hand the harness a description of a seed instead of a seed.
+ *
+ * So this projection converts markup and nothing else: headings, ordered runs, bullets, emphasis.
+ * Every sigil, the frame, and the meta fence ride through verbatim. The block check is the one
+ * carrier artifact dropped — a relay verifies it beside the ETX, and the markdown seed is bytes a
+ * harness loads with no relay anywhere in the path.
+ *
+ * ONE DIRECTION, so the markdown is a projection and never a source. A hand that edits the twin is
+ * reconstructing by eye what this function derives, and the line it mistypes reads as authored.
+ */
+export function transposeSeed(body: string): string {
+  let fenced = false;
+  let ordinal = 0;
+  const rendered = body.split("\n").map((line) => {
+    if (line.startsWith("```")) { fenced = !fenced; return line; }
+    if (fenced) return line;
+    const ordered = /^(\s*)#\s+(.*)$/.exec(line);
+    if (ordered) {
+      ordinal += 1;
+      return `${ordered[1]}${ordinal}. ${inline(ordered[2] ?? "")}`;
+    }
+    ordinal = 0;                                     // any other line closes the run
+    return inline(
+      line
+        .replace(/^(!{1,5})\s+/, (_, h: string) => "#".repeat(h.length) + " ")
+        .replace(/^(\s*)\*\s+/, (_, s: string) => `${s}- `),
+    );
+  }).join("\n");
+  return rendered.replace(/(<<\^ code:"&#x0003;" >>)[^\n]*/g, "$1");
+}

@@ -49,12 +49,11 @@ const PATTERNS: ReadonlyArray<readonly [EdgeForm, RegExp]> = [
   // reason. Measured: without it this reader found 0 of the corpus's 84 `pranala` edges, and reported
   // 163 dangling where 194 stand.
   //
-  // AN EDGE IS THE END IT POINTS AT. A `pranala` names both ends — `from=` and `to=` — and only the
-  // `to=` end is the edge; the `from=` end is where the carrier already stands. A lazy scan for the
-  // first address after the sigil reads whichever end comes first, which is the SOURCE. That reads
-  // right for the 143 carriers writing `from=?` and wrong for the 3 writing `from=lar:///…`: their
-  // sources counted as dangling edges while their targets went uncounted. Anchoring on `to=` names
-  // the end that travels.
+  // AN EDGE IS THE END IT POINTS AT. A `pranala` names both ends, and only `to=` is the edge — `from=`
+  // is where the carrier already stands. Anchored on `to=` rather than on position, because a scan for
+  // the first address after the sigil reads whichever end is written first: it agrees wherever the
+  // source is `?` and inverts wherever the source is an address, counting a carrier's own ground as a
+  // dangling edge while the target it points at goes uncounted. Position is not the relation.
   ["pranala",  /<<~\s*pranala(?:[^>]|->)*?\bto=lar:\/\/\/(\S+?)[\s>]/g],
   ["kahea",    /<<~\s*kahea(?:[^>]|->)*?lar:\/\/\/(\S+?)[\s>]/g],
   ["wikilink", /\[\[[^\]|]*\|lar:\/\/\/([^\]]+)\]\]/g],

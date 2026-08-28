@@ -1,14 +1,15 @@
 /**
  * normalize re-stamps — the door leaves no carrier holding a check its body does not match.
  *
- * THE GAP THIS CLOSES. `normalize` canonicalizes framing, and framing rides INSIDE the span the block
- * check covers. A door that rewrote the framing and left the old check standing reported `canonical`
- * on a carrier it had just made non-canonical — and `--check`, the form a CI gate runs, exited 0 on it.
- * Any sweep that edits carrier bodies then normalizes hits the same silence.
+ * FRAMING RIDES INSIDE THE CHECKED SPAN, so canonicalizing a carrier moves the very bytes its check
+ * covers. A door that stamps nothing therefore reports `canonical` on a carrier it just made
+ * non-canonical, and `--check` — the form a CI gate runs — exits 0 on it. The silence is total: every
+ * other law still holds, so nothing else in the suite has anything to say. Any sweep that edits
+ * carrier bodies and then normalizes rests on this test.
  *
- * MEASURED THROUGH THE BUILT BINARY, not the function. The fault lived in what the command composed,
- * not in `bccOf`, which was correct the whole time and agreed with nothing that called it. A unit test
- * over the helper passes on the broken door.
+ * DRIVEN THROUGH THE BUILT BINARY, never the helper. This law lives in what the command composes;
+ * `bccOf` satisfies it alone and can agree with nothing that calls it. A unit test over the helper
+ * passes on a door that never calls it, which makes the binary the only honest witness.
  */
 import { describe, test, expect, beforeAll } from "vitest";
 import { execFileSync } from "node:child_process";
@@ -39,8 +40,8 @@ describe("carrier normalize — the check follows the body", () => {
     dir = mkdtempSync(path.join(tmpdir(), "lares-normalize-"));
     file = path.join(dir, "prism.mem");
     copyFileSync(SOURCE, file);
-    // Move a byte inside the checked span. The carrier stays well-formed and every other law still
-    // holds — only the check now disagrees with what it covers.
+    // Move a byte inside the checked span. The carrier stays well-formed and every other law holds —
+    // the check alone disagrees with what it covers, which is the one fault this door owes a repair.
     writeFileSync(file, readFileSync(file, "utf8").replace("The node summons it.", "The node summons it, once."));
   });
 

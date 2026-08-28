@@ -61,20 +61,18 @@ describe("carrier-edges — every address a carrier points at", () => {
   });
 
   /**
-   * THE CORPUS, AS A CEILING RATHER THAN A FLOOR. 197 edges name no carrier here — nearly all of them older than any instrument that could
-   * see them, and five of them countable only since a carrier's retired `<<~ ? -> uri >>` pointers took
-   * the anchored form. Those five pointed at nothing before the conversion too; the old spelling was
-   * not one this reader knows, so they dangled outside every count. ''Lower this whenever it can go lower'': a
-   * ceiling left slack absorbs the next break silently. This holds the line where it stands: a rename that
-   * breaks edges raises the count, and that is the reading `lares carrier normalize --edges` exists to take
-   * either side of a move.
+   * THE CORPUS, AS A CEILING RATHER THAN A FLOOR. Some edges here name no carrier — a corpus writes
+   * toward addresses before it stands them, and an aspirational pointer is not a fault. The number
+   * below is the count that stands today, held as a ceiling so a rename that breaks edges raises it.
+   * `lares carrier normalize --edges` takes the reading either side of a move.
    *
-   * 197 → 200 WHEN THE READER LEARNED WHICH END TRAVELS. A `pranala` names both of its ends, and this
-   * reader took whichever address came first — the SOURCE. Anchoring it on `to=` moved three edges into
-   * view that had always dangled: `lady-aki` points at two playtest rulings nobody wrote, and a design
-   * doc states a placeholder pair. No carrier moved and no name broke; the reader stopped reading the
-   * wrong end. A ceiling raised for a corpus break and a ceiling raised for a sharper instrument are
-   * different acts, and only the second one is allowed to be recorded this way.
+   * ''Lower this whenever it can go lower.'' A ceiling left slack absorbs the next break in silence.
+   *
+   * TWO REASONS THE CEILING RISES, AND THEY ARE NOT THE SAME ACT. A rename that orphans a target is a
+   * corpus break, and the repair is to the corpus. A reader that learns to see a form it was blind to
+   * raises the count without anything having broken — the edges it surfaces dangled all along, unread.
+   * A rise is only allowed to be absorbed here for the second reason, and only with the cause named;
+   * absorbing the first one silently is how a ceiling stops measuring anything.
    */
   test("the corpus points at no more nothing than it already did", () => {
     const files = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })

@@ -133,10 +133,11 @@ hands its entire run through as `p1`. ''Bracketing a URI inside a sigil corrupts
 survive into the value as `[[lar:///a]]`. Twenty-one corpus sites ride bare there and MUST stay bare.
 
 ''AND A NAMED SLOT CURES IT OUTRIGHT.'' Measured: `<<agent aim from=lar:///a.b.c -> to=lar:///d.e.f>>`
-and `<<agent yield from=lar:///x -> to=?>>` both render whole, because the scheme's colon is no longer
-the FIRST colon the parser meets. The house writes that form; the arrow keeps its seat between the two
-slots. ''The fault only ever bit a POSITIONAL URI'' — which is why TW5 core never met it, every URL in
-its tree riding a named parameter.
+and `<<agent yield from=lar:///x -> to=?>>` both render whole, because a named slot puts its `=` ahead
+of the scheme's colon, so that colon never stands as the FIRST one the parser meets. The house writes
+that form; the arrow keeps its seat between the two slots.
+''The fault only ever bit a POSITIONAL URI'' — which is why TW5 core never met it, every URL in its
+tree riding a named parameter.
 
 ''SO THE BRACKET IS A PARSER WORKAROUND, never a house form.'' It buys a plain-dialect call one render
 in a wiki and costs a reader a delimiter that names nothing. ''Both seeds write the chat form bare'' —
@@ -256,6 +257,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu >>
 
-<<^ code:"&#x0003;" >>ni:///sha-256;qkvrrbkrERnk5RDmY7KOHkGnh5FS9oXB-Iqx178hwfo
+<<^ code:"&#x0003;" >>ni:///sha-256;yXI1iaNbRz2e1vI_F2L90Xp9p1E-y5GFJ4tWxcB8kIw
 
 <<^ code:"&#x0004;" -> ? >>
