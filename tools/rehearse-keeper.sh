@@ -55,7 +55,7 @@ ROOT=""
 # The seed set the operator approved for throwaway runs — the two system bags plus the public plane.
 # Deliberately NOT the whole corpus: a founding needs the doctrine and the public floor, and a smaller
 # copy keeps a cycle cheap enough to run until it bores.
-SEED_BAGS=(@lares @lararium @crossroads)
+SEED_BAGS=(lares lararium crossroads)
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -232,6 +232,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   run "persona new 2"                        lares persona new 2 --name rehearsal-2 --handle 'Kahu Gamma' --seat
   run "persona list reads three"             sh -c "node '$LARES' persona list | grep -q 'Kahu Gamma'"
 
+
   # ── ③ RESERVE + SEAT ───────────────────────────────────────────────────────────────────────────
   say "③ reserve — forge the pre-rotation, then seat the genesis epoch"
   # PLACEHOLDER LABELS, never real people. A guardian label names a living person, and this harness rides a
@@ -264,7 +265,13 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # the TCP port answered the whole time, which let every movement after it pass. A harness that
   # out-waits the thing it measures reports on its own patience.
   step "the node from ② answers"
-  SOCK="$ROOT/data/lares/vessel/lares.sock"
+  # THE SOCKET DOES NOT LIVE UNDER THE DATA DIR. It stands at the RENDEZVOUS — `/tmp/lares-<uid>/<digest>.sock`,
+  # where the digest is sha256 of the substrate dir, first 12 hex (`rendezvousPath`). A lararium serves as
+  # civic infrastructure, so the socket sits where a logout cannot reach it. Watching the old
+  # `<dataDir>/lares.sock` waits on a path nothing creates: the full 120s budget, every run, and the vessel
+  # breathing the whole time.
+  SOCK_DIGEST=$(printf '%s' "$ROOT/data/lares/vessel" | sha256sum | cut -c1-12)
+  SOCK="/tmp/lares-$(id -u)/${SOCK_DIGEST}.sock"
   STAND_LOG="$ROOT/data/lares/vessel/stand.log"
   WAITED=0
   while [ ! -S "$SOCK" ] && [ "$WAITED" -lt 120 ]; do sleep 1; WAITED=$((WAITED + 1)); done
@@ -294,6 +301,17 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # sealed vessel commits its operator to and the harness walks the operator's own order.
   export LARES_ARCHIVE_PASSPHRASE="$PASS_DRILL"
   run "④ vault status"                      lares vault status
+
+  # ⚠ THE DAEMON FROM ② CANNOT SERVE ⑤, AND IT REPORTS `up` THE WHOLE TIME. It booted before any persona
+  # existed and before the seal, so it stands at the WAKING FLOOR — faceless, carrying the public shelf,
+  # every sovereign act waiting. A standing is read ONCE, at boot: lighting a face afterward does not
+  # raise a running vessel off the floor, and exporting the passphrase above reaches only NEW processes.
+  #
+  # So the restart belongs HERE, after the face exists AND the seal's var rides — not earlier. Placed
+  # after `persona new` it re-boots into the same floor and takes ⑥ down with it. Measured: without this,
+  # `crossroads` (a LOAD, which the daemon serves) fails "holds no face" while `lares` and `lararium`
+  # (INGEST) both land — 2 of 3 holdings converge and the movement reads half-green.
+  run "restand — face lit, vault open"      lares vessel stand --restart
   # ⑤ SEEDS, and does not rebirth. Rebirth composes stop · clear · bake · stand · seed, which on a fresh
   # founding tears down what ② built and re-bakes a genesis nothing touched. Only the seeding belongs here.
   run "⑤ seed --apply"                      lares vessel seed --apply --yes
@@ -304,7 +322,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # standing, and its `up` reads a connection, so this asks the one question that means live.
   run "⑥ LIVE — the daemon ANSWERS" \
     sh -c "node '$LARES' vessel stand --json --observe | grep -q '\"up\":true'"
-  run "bag list — declarations survive"     sh -c "node '$LARES' bag list | grep -q '@lares'"
+  run "bag list — declarations survive"     sh -c "node '$LARES' bag list | grep -q '\"bag\":\"lares\"'"
 
   # ── ⑦ READY TO CONTRACT ────────────────────────────────────────────────────────────────────────
   say "⑦ ready — the door a second operator walks through"

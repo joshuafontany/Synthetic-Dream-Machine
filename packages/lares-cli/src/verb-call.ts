@@ -3,7 +3,7 @@
  * daemon. One transport: the pono sock.
  *
  * The CLI and the daemon share a machine, so they share a socket. A verb-summons
- * rides one capability-bearing line into <dataDir>/lares.sock; the outcome line
+ * rides one capability-bearing line into the rendezvous socket; the outcome line
  * rides back. The socket's 0600 owner-only perms gate PRESENCE; the requestedBy
  * did rides the invocation for the daemon's verify-then-delegate (authority); the
  * daemon's warm replica records the durable CRDT outcome (record). Transport,

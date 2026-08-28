@@ -50,23 +50,6 @@ Reading the specification requires an implementation of what it specifies. The r
 | `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` | `text/memetic-wikitext` — abstract, conformance under RFC 2119, lexis |
 | `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing` | the memetic carrier frame — the declaration and control set |
 | `lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext` | TiddlyWiki 5 wikitext base syntax — the normative reference the dialect extends |
-| `lar:///ha.ka.ba/lares/api/pono/wikitext-filter` | the wikitext-filter grammar dialect |
-| `lar:///ha.ka.ba/lares/docs/voices` | the three-layer voice house, with `…/docs/voices/masks` and `…/docs/voices/workers` beside it |
-
-### Laws, doctrines and capabilities
-
-| `lar:` address | holds |
-|---|---|
-| `…/api/pono/RFC-2119` | the shared normative vocabulary every other meme cites |
-| `…/api/pono/meme` | meme invariant law — copy-shape authority and rating posture |
-| `…/api/pono/exchange-vector` | canonical exchange vectors and HUD emission order |
-| `…/api/pono/causal-islands` · `…/api/pono/federated-causal-islands` | causal island doctrine, and non-simultaneous apprehension |
-| `…/api/pono/local-first` | the seven local-first ideals the storage layer answers to |
-| `…/api/pono/guest-grammar` | admission of a guest grammar, and the host–guest boundary |
-| `…/api/pono/quine-principles` | quine principles P1–P4 |
-| `…/api/pono/tiddler-record` | the canonical Automerge storage unit |
-| `…/api/pono/orichalcum-capabilities` | the capability profile, UCAN-compatible at wire boundaries |
-| `…/api/mu/pattern-integrity` | Fuller's pattern integrities as applied here |
 
 ### Reading a meme
 

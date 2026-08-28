@@ -53,7 +53,7 @@ export interface UdsChannelOptions {
    * this channel awaits via `daemonHandle`.
    */
   readonly placeVerb: (o: { verb: string; args: Record<string, unknown>; requestedBy: string; requestId: string }) => void;
-  /** Socket path — both sides agree on <dataDir>/lares.sock via the env contract. */
+  /** Socket path — both sides derive the RENDEZVOUS, `/tmp/lares-<uid>/<digest>.sock` (`rendezvousPath`). */
   readonly socketPath: string;
   /** Per-verb await budget (default 30s — recall cold-starts chromadb). */
   readonly timeoutMs?: number;

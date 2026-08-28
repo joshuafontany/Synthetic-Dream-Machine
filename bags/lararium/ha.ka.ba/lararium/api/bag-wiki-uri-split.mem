@@ -53,7 +53,14 @@ The per-wiki live layers ride above the fold, each rooted at the wiki's identity
 
 ''The decoupling is the safety.'' The boot floor is CID-frozen in @daemon and the live wikis never mount it, so editing `wikis/lares` cannot break the boot. Promotion to the mesh renders the live edits to fresh CIDs and launches them to @daemon; only then does @daemon behaviour change. Edit freely, promote deliberately, immune core sealed until mint.
 
-''The engine is universal; the corpus is content.'' The memetic-wikitext plugin (parser, grammar, all-memes modules) rides ''`@oracle`'' — the genesis `pluginsCid`/`engineCid` CID blobs, referenced by the `@oracle` system doc (`${ORACLE_DOC_URI}/genesis-cid-plugins`), pulled by CID by every island (`pluginCidsFromIslandBlobs`). `expandRecipe` always appends `@oracle`, so the engine renders in every wiki, including a primary mount with no libraryBags. `@lararium` is the corpus CONTENT — a per-recipe library ride, not the engine.
+''The engine is universal; the corpus is content.'' `@oracle` names ONE doc — the genesis island — and every wiki reaches it by ''two independent paths'' that must not be read as one:
+
+* ''By CID, for its blobs — off the recipe entirely.'' The oracle doc's `blobs` carry the engine core (`engineCid`) and the memetic-wikitext plugin tiddlers (parser, grammar, all-memes modules). `pluginCidsFromIslandBlobs(islandHandle.doc()?.blobs)` derives that CID set once, and the daemon and every wiki island resolve the bytes ''from the local CAS by hash'' (the breath path), never CRDT-syncing them over the port. A wiki renders the grammar because CAS answers its hashes. No slot lays the engine, and no recipe can withhold it.
+* ''By slot, for its tiddlers — the cascade's floor.'' `expandRecipe` closes every recipe with `ORACLE_BAG`, lowest priority, so the system island's content (bag→doc oracle, `genesis-cid-engine`, `genesis-cid-plugins`) stands under every wiki, including a primary mount with no libraryBags.
+
+The catalog binds the two: `bags/oracle` → the genesis island's own doc URL, so the address a recipe floors on and the doc a CID pull reads are the same doc.
+
+`@oracle` splits from the memetic corpus (`disk-projection#oracle-split`); `@lares` and `@lararium` never stand as the floor — they ride a wiki's `libraryBags` (the lares wiki-recipe = oracle floor + lararium bag + lares bag). `@lararium` carries the engine's authored self-doc memes: corpus, never engine.
 
 !! The isomorphic wiki core
 
@@ -66,8 +73,8 @@ Two registries, cleanly separated:
 * ''bags'' — `bags/{slug}` → automerge url. Composable recipe pieces, each one doc, shared per the user's wish.
 * ''wikis'' — `wikis/{slug}` → recipe (the `#has` bag-stack). Per-wiki layers route from here.
 
-`@oracle` stays the DreamNet read-face for the Cabal-rendered CIDs of `bags/lares` + `bags/lararium`. `@lares`/`@lararium` are ordinary catalog-registered operator bags — the local operator owns them until a Cabal ownership layer stands.
+`@oracle` names the runtime system island, and the node's public read-face serves ''the oracle doc itself'' as a content-addressed snapshot (`GET /oracle/pointer` · `GET /oracle/<cid>.bin`, `exportOracleSnapshot`) — the Two-Faced Substrate's read plane, which a cold Lararium pulls to kindle its engine by CID. `@lares`/`@lararium` are ordinary catalog-registered operator bags carrying corpus, reached through a recipe's `libraryBags` rather than through the oracle floor — the local operator owns them until a Cabal ownership layer stands.
 
-<<^ code="&#x0003;" >>ni:///sha-256;EzE7G30RqECJnnDgEBpJz_jCuDuVKjOuYbGQhjvLLos
+<<^ code="&#x0003;" >>ni:///sha-256;N6vv2Nk-JrpXgEEInPFW3O0osjyAkbF2bNN2SQ2UzNQ
 
 <<^ code="&#x0004;" -> ? >>

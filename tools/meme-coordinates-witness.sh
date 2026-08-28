@@ -12,7 +12,7 @@
 #
 # The first pass here checked `file-path` alone, and the second coordinate was left to a reader's eye.
 #
-# `@lares-history` sits exempt BY KIND: it archives prior worldlines, and its memes record the
+# `lares-history` sits exempt BY KIND: it archives prior worldlines, and its memes record the
 # coordinates they were written with. Correcting those would edit the record rather than the map.
 #
 # Exit 0 = every coordinate names its own file. Exit 1 = the drift, listed.
@@ -24,7 +24,7 @@ import pathlib, re, sys
 
 drift = []
 for f in sorted(pathlib.Path("bags").rglob("*.mem")):
-    if f.parts[1] == "@lares-history":
+    if f.parts[1] == "lares-history":
         continue
     head = f.read_text(errors="replace")[:4000]
 

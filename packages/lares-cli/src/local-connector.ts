@@ -1,7 +1,7 @@
 /**
  * local-connector — the co-located fast path of the lares↔lararium binding.
  *
- * A thin Unix-domain-socket invoker: connect <dataDir>/lares.sock, write ONE
+ * A thin Unix-domain-socket invoker: connect the rendezvous socket, write ONE
  * capability-bearing invocation line, read the outcome line, done. No Repo, no
  * leaf replica, no WS sync-on-connect — the daemon already holds the warm replica
  * and runs the verb through the same worker VerbDispatcher.
@@ -20,7 +20,7 @@ import { rendezvousPath } from "@lararium/mesh/rendezvous-path";
 import { larDataDir } from "./env.js";
 import type { SubmitResult, SubmitOptions } from "./verb-result.js";
 
-/** The agreed socket path — both sides resolve <dataDir>/lares.sock (env contract). */
+/** The agreed socket path — both sides derive the rendezvous from the substrate dir (`rendezvousPath`). */
 export function udsSocketPath(dataDir?: string): string {
   // ONE DERIVATION, BOTH SIDES. The daemon binds `rendezvousPath` over its resolved substrate dir; this
   // reads the same function over the same default. A `--storage`/`LAR_STORAGE` override moves the

@@ -52,7 +52,7 @@ function surveyDir(args: ParsedArgs): string {
 /** The bag name. The dispatcher already shifted its own verb off, so the name sits FIRST here. */
 function bagArg(args: ParsedArgs, verb: string): string {
   const raw = (args.positional[0] ?? "").trim();
-  if (!raw) throw new BagUsageError(`\`bag ${verb}\` wants a bag name (e.g. @lares)`);
+  if (!raw) throw new BagUsageError(`\`bag ${verb}\` wants a bag name (e.g. lares)`);
   return raw.replace(/^@/, "");   // an entity name carries no marker; the kind-plane segment names it
 }
 

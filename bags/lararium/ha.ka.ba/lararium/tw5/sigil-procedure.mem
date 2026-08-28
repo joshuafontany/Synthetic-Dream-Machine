@@ -9,7 +9,7 @@ manao     = 16
 manaoio   = 16
 register  = "Synthesis"
 retain    = true
-role      = "design record: \\procedure English alias sigil — pragma-alias, wehe cross-ref, declaration form"
+role      = "design record: \\procedure pragma-alias sigil — pono(right) to TW5 procedure definition and call patterns, wehe cross-ref, declaration form"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-procedure"]
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-procedure"
@@ -21,9 +21,9 @@ uri-path  = "ha.ka.ba/lararium/tw5/sigil-procedure"
 
 ! ~\procedure Sigil Design
 
-`<<~ \procedure name(params) >>body<<~/ \procedure >>` — English-form procedure declaration.
+`<<~ \procedure name(params) >>body<<~/ \procedure >>` — TW5 procedure declaration form.
 
-The `\procedure` sigil makes TW5's `\procedure` pragma first-class in memetic-wikitext.
+The `\procedure` sigil makes TW5's `\procedure` pragma first-class in memetic-wikitext and aligns the meme with the submodule-on-disk definition and call patterns.
 Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary).
 
 <<~/ahu >>
@@ -34,7 +34,7 @@ Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary)
 
 `\procedure` and `wehe` share executor semantics:
 * Both declare a named callable body.
-* `\procedure` = English alias; reads naturally to non-Hawaiian operators.
+* `\procedure` = direct pragma alias for TW5 procedure definition and invocation.
 * `wehe` = Hawaiian form; carries cultural weight of "outside/exit boundary" — the procedure defines a crossing point from declaration-space into execution-space.
 
 `lar-kind: pragma-alias` — the sigil IS the declaration mechanism; it produces no render output.

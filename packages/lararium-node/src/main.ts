@@ -7,7 +7,7 @@
  *
  * Three surfaces mount here, not one:
  *   ws://localhost:{port}/ws     → Automerge sync protocol (browser + remote mesh peers)
- *   {storage}/lares.sock         → UDS verb channel (co-located CLI fast path)
+ *   /tmp/lares-<uid>/<digest>.sock → UDS verb channel (the rendezvous; co-located CLI fast path)
  *   http://localhost:{port}/…    → oracle read-face; federation pulls + verifies through it
  *
  * Usage:

@@ -8,7 +8,7 @@ grammar-key = "wikitext-filter"
 guest-mime  = "text/x-wikitext-filter"
 l-space     = "stable"
 mana        = 17
-manao       = 17
+manao       = 8
 namespace   = "&#x2299;"
 register    = "Synthesis-Canon"
 retain      = true
@@ -37,7 +37,6 @@ for new authoring.
 | `##index` — DataTiddler JSON index | Legacy JSON-in-tiddler pattern; fragile, opaque | `[stack:has[X]]` — query worn components (the has-stack law) |
 | `+currentMeme` ambient variable | Dynamic scope leaks to siblings; modern systems reject ambient lookup | Explicit `meme` sigil context; or `[self[]]` for the carrier's own URI |
 | `currentTiddler` implicit | Same as above | `[self[]]` in filter expressions |
-| `is[system]` tiddler metaphysics | TW5-specific system namespace concept | `[toml:l-space[system]]` — explicit l-space query |
 
 ''Preserved from TW5 filter'' (all standard filter operators remain valid):
 `tag`, `title`, `field` (renamed — see below), `links`, `backlinks`, `all`, `each`,
