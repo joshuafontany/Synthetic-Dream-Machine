@@ -4,9 +4,18 @@
 # identity in-container (lares vessel found), then booting its cap-stack. Proves the composable keel being a
 # mesh — daemon-FULL Hermai carrying the FLOW-map, container-to-container.
 #
-#   lararium-a    composeLararium (substrate+daemon+wiki+pool+read-face)                    :18090
+# THREE CLASSES stand here, and they differ by what they hold rather than by what they run:
+#
+#   lararium-a    operator A — the Nexus founder, three kahu faces                           :18090
+#   lararium-b    operator B — an independent root; contracts into A's Nexus, then the cabal :18093
 #   herm-source   composeHerm + LAR_SEED=alpha (announces a dial on its FLOW-map)            :18092
 #   herm-relay    composeHerm + carriage (LAR_PEERS=herm-source → pulls + re-serves)         :18091
+#   browser-a     a REAL Chromium vessel sharing A's namespace — floor, veiled, then admitted
+#   browser-b     the same, in B's namespace
+#
+# A browser vessel needs a SECURE CONTEXT to mint, and Node never grants one — it defines no
+# `isSecureContext`. So the browser class runs a real engine and shares its operator's network
+# namespace, which makes `localhost` name that operator's vessel and the localhost exemption apply.
 #
 # Run:     docker compose -f docker-compose.mesh.yml up -d
 # Witness: ./tools/herm-mesh-witness.sh        (relay carries the alpha dial; daemon-full, wiki-less)
@@ -57,6 +66,70 @@ services:
     # `on-failure:3` rides the race and still surfaces a real fault — a vessel that genuinely cannot boot
     # fails three times and stays down, which reads differently from one that failed once and stood.
     restart: "on-failure:3"
+
+  # OPERATOR B — a second, independent hearth. Its own root, its own keys, its own vault: A holds no
+  # seed of B's, so every handshake between them crosses a real custody boundary rather than reading
+  # one seal home twice. B is the first to contract into A's Nexus and then into the kahu cabal.
+  lararium-b:
+    image: node:24-slim
+    working_dir: /app
+    volumes:
+      - ".:/app"
+      - "lararium-b-data:/lar-b"
+    environment:
+      LAR_ROOT: "/lar-b"
+      LAR_PORT: "8080"
+      LAR_PEERS: "http://herm-source:8080"
+      LAR_PUBLIC_URL: "http://lararium-b:8080"
+      LAR_STAND_FACE: "beta"
+    entrypoint: ["sh", "tools/lararium-container-boot.sh"]
+    networks: [mesh]
+    ports:
+      - "18093:8080"
+    depends_on: [herm-source]
+    restart: "on-failure:3"
+
+  # ── BROWSER VESSELS ─────────────────────────────────────────────────────────────────────────────
+  # THE THIRD CLASS, and it needs a real engine. A browser vessel mints through `crypto.subtle`, which
+  # a browser withholds off a SECURE CONTEXT. Node grants none — it defines no `isSecureContext` at all
+  # — so a Node probe can never stand as one, whatever address it reaches.
+  #
+  # `network_mode: service:<operator>` shares the operator's network namespace, so `localhost` inside
+  # this container NAMES THAT OPERATOR'S VESSEL. Chromium then reads a secure context by the localhost
+  # exemption and mints Ed25519 for real. Measured, not assumed.
+  #
+  # ⚠ THE EXEMPTION IS NOT TLS, and the difference is the whole household case. A phone reaching a
+  # hearth from across the room crosses a real origin and needs a real certificate — the DNS-01 path.
+  # These two prove the browser half of the ceremony; they prove nothing about a browser that is not
+  # co-located, and that leg waits on live DNS-01 config.
+  #
+  # `network_mode` REPLACES `networks`, so these carry no `networks:` key — the namespace they share
+  # already sits on the mesh.
+  browser-a:
+    image: mcr.microsoft.com/playwright:v1.62.1-noble
+    working_dir: /app
+    volumes: [".:/app"]
+    environment:
+      LAR_BROWSER_LABEL: "browser-a"
+      LAR_VESSEL_WS:     "ws://localhost:8080/ws"   # lararium-a, over the shared namespace
+      LAR_APP_PORT:      "5173"
+    network_mode: "service:lararium-a"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/browser-vessel.ts"]
+    depends_on: [lararium-a]
+    restart: "no"
+
+  browser-b:
+    image: mcr.microsoft.com/playwright:v1.62.1-noble
+    working_dir: /app
+    volumes: [".:/app"]
+    environment:
+      LAR_BROWSER_LABEL: "browser-b"
+      LAR_VESSEL_WS:     "ws://localhost:8080/ws"   # lararium-b
+      LAR_APP_PORT:      "5173"
+    network_mode: "service:lararium-b"
+    command: ["sh", "-c", "node_modules/.bin/tsx packages/lararium-node/probes/browser-vessel.ts"]
+    depends_on: [lararium-b]
+    restart: "no"
 
   # A SOURCE Herm — composeHerm, announces a dial (carrying its REACHABLE read-face) on its FLOW-map.
   herm-source:
@@ -115,6 +188,7 @@ networks:
 
 volumes:
   lararium-a-data:
+  lararium-b-data:
   herm-source-data:
   herm-relay-data:
   herm-relay-2-data:
