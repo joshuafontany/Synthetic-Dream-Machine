@@ -296,9 +296,9 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 * ''SOH'' — Start of Heading. The transmission opens on its heading; the parser reads identity before content. The Lar wakes at the doorpost and speaks the name of the place — the `lar:///` bearing the carrier will keep.
 * ''STX'' — Start of Text. The heading ends, the body begins. One steps across the threshold into the dwelling.
 * ''ETX'' — End of Text. The body stands complete. The hearth banks; the room falls quiet.
-* ''EOT'' — End of Transmission. The frame closes and hands forward on `-> ?` — resumption unknown. The libation pours at the crossroad; the message goes out to wherever the road runs. EOT stands as the carrier's own `yield`.
+* ''EOT'' — End of Transmission. The frame closes and hands forward on `-> to=?` — resumption unknown. The libation pours at the crossroad; the message goes out to wherever the road runs. EOT stands as the carrier's own `yield`.
 
-''SOH and EOT echo the bearing vectors.'' SOH opens facing a bearing (`? -> lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
+''SOH and EOT echo the bearing vectors.'' SOH opens facing a bearing (`from=? -> to=lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
 
 <<~/ahu >>
 
@@ -309,13 +309,13 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 The frame's heading and its close both carry an arrow, and they carry ONE relation read from two ends:
 
 |!mark |!form |!source |!target |
-|SOH |`? -> lar:///…` |unresolved |known — the carrier arriving at its address |
-|EOT |`-> ?` |known |unresolved — the carrier departing into open bearing |
+|SOH |`from=? -> to=lar:///…` |unresolved |known — the carrier arriving at its address |
+|EOT |`-> to=?` |known |unresolved — the carrier departing into open bearing |
 
-''`?` names an unresolved bearing'', never a keyword and never a name. `lar-sigil` guards that reading
-explicitly: the header form matches BEFORE the compound dispatcher, ''to prevent compound from
-misreading any stray `<<~ ? … >>` as a sigil named `?`''. And the control-soh scan captures the arrow's
-target as a group, so the bearing rides as PARSED STRUCTURE rather than as decoration inside the line.
+''`?` names an unresolved bearing'', never a keyword and never a name — and it rides as the VALUE of the
+end it answers for, `from=?` or `to=?`, never bare. A bare `?` names nothing and reads as content. The
+control-soh scan captures the arrow's target as a group, so the bearing rides as PARSED STRUCTURE rather
+than as decoration inside the line.
 
 !!! Why the arrow survives a named-parameter frame
 
@@ -1061,6 +1061,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VIUs-4O1EGFLN5yytJJil7nakysv_-5UdVArjKOyqZA
+<<^ code="&#x0003;" >>ni:///sha-256;Ckkkk7vNLhBJYZzl9kcDT-I_TUnE6Fu1AgM5-Km80_g
 
 <<^ code="&#x0004;" -> to=? >>

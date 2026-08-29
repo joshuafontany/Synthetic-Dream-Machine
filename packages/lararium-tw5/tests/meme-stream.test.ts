@@ -26,7 +26,7 @@ const URI = "lar:///ha.ka.ba/lares/api/mu";
 const FULL_CARRIER = [
   `<!-- <<~ !DOCTYPE = ${URI} >> -->`,
   ``,
-  `<<^ code="&#x0001;" ? -> ${URI} >>`,
+  `<<^ code="&#x0001;" from=? -> to=${URI} >>`,
   ``,
   "```toml meta",
   `uri-path = "ha.ka.ba/lares/api/mu"`,
@@ -44,7 +44,7 @@ const FULL_CARRIER = [
   `<<~/ahu >>`,
   ``,
   `<<^ code="&#x0003;" >>`,
-  `<<^ code="&#x0004;" -> ? >>`,
+  `<<^ code="&#x0004;" -> to=? >>`,
 ].join("\n");
 
 // ---------------------------------------------------------------------------
@@ -106,7 +106,7 @@ describe("MemeStreamParser — incremental streaming", () => {
     const parser = new MemeStreamParser();
     // Push the opening portion — no carrier-close yet
     const partial = [
-      `<<^ code="&#x0001;" ? -> ${URI} >>`,
+      `<<^ code="&#x0001;" from=? -> to=${URI} >>`,
       `<<^ code="&#x0002;" >>`,
       `<<~ ahu #body >>`,
       `body text`,
@@ -130,7 +130,7 @@ describe("MemeStreamParser — minimal carrier (no ahu body)", () => {
   test("emits open and close for a data carrier with no ahu body", () => {
     const URI2   = "lar:///ha.ka.ba/lares/api/pono/invariant";
     const minimal = [
-      `<<^ code="&#x0001;" ? -> ${URI2} >>`,
+      `<<^ code="&#x0001;" from=? -> to=${URI2} >>`,
       `<<^ code="&#x0002;" >>`,
       `<<^ code="&#x0003;" >>`,
     ].join("\n");

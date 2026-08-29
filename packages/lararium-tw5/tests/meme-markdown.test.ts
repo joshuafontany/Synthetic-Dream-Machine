@@ -14,7 +14,7 @@ const REPO = new URL("../../..", import.meta.url).pathname;
 
 const CARRIER = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/probe >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/probe >>
 \`\`\`toml meta
 register = "Synthesis-Canon"
 uri-path = "ha.ka.ba/lares/api/pono/probe"
@@ -49,7 +49,7 @@ a teaching frame stays byte-identical, ''unrendered''
 <<~/ahu >>
 
 <<^ code="&#x0003;" >>ni:///sha-256;AAAA_probe_check
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>
 `;
 
 describe("the submission projection", () => {
@@ -144,9 +144,9 @@ describe("against the live corpus", () => {
 describe("the tooth stands at one dispatch position", () => {
   const carrier = (open: string, close: string) =>
     `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/probe >>\n\n` +
-    `<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/probe >>\n` +
+    `<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/probe >>\n` +
     `<<^ code="&#x0002;" >>\n\n${open}\n\n! A heading\n\n${close}\n\n` +
-    `<<^ code="&#x0003;" >>\n<<^ code="&#x0004;" -> ? >>\n`;
+    `<<^ code="&#x0003;" >>\n<<^ code="&#x0004;" -> to=? >>\n`;
 
   const spellings: Array<[string, string, string]> = [
     ["tooth then space", "<<~ ahu #entry >>", "<<~/ahu >>"],
@@ -170,14 +170,15 @@ describe("the tooth stands at one dispatch position", () => {
 });
 
 describe("the projector reads a framing opener that names its ends", () => {
-  // The reader stays forgiving across the migration: a carrier written either way still arrives, and the
-  // address it names reaches the projection the same.
+  // One spelling reads. A carrier written before the ends took names arrives through `carrier normalize`,
+  // which homes it — so the projector answers to the current form alone and keeps no second branch.
+  const URI = "lar:///a.b.c/x";
   const body = (ends: string) =>
     [`<<^ code="&#x0001;" ${ends} >>`, "", "A line of body.", "", '<<^ code="&#x0004;" -> to=? >>'].join("\n");
 
-  test("the named spelling yields the same address as the positional one", () => {
-    const named = projectSubmission(body("from=? -> to=lar:///a.b.c/x"), { title: "lar:///t" });
-    const positional = projectSubmission(body("? -> lar:///a.b.c/x"), { title: "lar:///t" });
-    expect(named.markdown).toBe(positional.markdown);
+  test("the named end reaches the projection as the carrier's address", () => {
+    const p = projectSubmission(body(`from=? -> to=${URI}`), { title: "lar:///t" });
+    expect(p.markdown).toBeTruthy();
+    expect(p.markdown).not.toContain("to=lar:///");
   });
 });

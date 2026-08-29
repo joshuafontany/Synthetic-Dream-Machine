@@ -40,7 +40,7 @@ const squeeze = (s: string) =>
 /** Law-mandated normalizations the render MAY apply (glyph-ward ruling). */
 const sigilNorm = (s: string) => s
   .replace(/<<~\s*/g, "<<~ ").replace(/\s*>>/g, " >>")
-  .replace(/<<\^ code="&#x(0001|0011);"[^>\n]*?( from=\?| \?)/g, '<<^ code="&#x$1;"$2')  // the namespace re-homes (framing)
+  .replace(/<<\^ code="&#x(0001|0011);"[^>\n]*?( from=\?)/g, '<<^ code="&#x$1;"$2')  // the namespace re-homes (framing)
   .replace(/<<\^ code="&#x0002;" >>\n*/g, "").replace(/<<\^ code="&#x0003;" >>[^\n]*\n*/g, "")
   .replace(/<<\^ code="&#x0004;"[^\n]*>>\n*/g, "");
 const lawView = (s: string) => squeeze(sigilNorm(contentView(s)));
@@ -50,7 +50,7 @@ function carriers(): Array<{ rel: string; src: string; uri: string }> {
   const out: Array<{ rel: string; src: string; uri: string }> = [];
   for (const f of files) {
     const src = readFileSync(f, "utf8");
-    const sohs = maskedExecAll(src, /<<\^[^&\n]*&#x(?:0001|0011);[^>\n]*?\? -> (?:to=)?(\S+) >>/g);
+    const sohs = maskedExecAll(src, /<<\^[^&\n]*&#x(?:0001|0011);[^>\n]*?\? -> to=(\S+) >>/g);
     if (sohs.length !== 1) continue;   // multi-meme carriers ride their own law
     out.push({ rel: f.slice(CORPUS.length + 1), src, uri: sohs[0]![1]! });
   }

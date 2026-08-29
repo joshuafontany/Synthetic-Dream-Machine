@@ -50,7 +50,7 @@ export type MemeStreamEvent =
 // bracket closes a call only when a second one follows, so a bearing arrow and a resonance marker
 // (ॐ, ⊙) alike ride as content. A sigil NEVER crosses a line: the multi-line form let a quoted
 // `<<~` mention swallow text down to a distant real sigil (loci.md).
-const SOH_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x(?:0001|0011);(?:[^>\n]|>(?!>))*\?\s*->\s*(?:to=)?([^\s>]+)\s*>>/;
+const SOH_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x(?:0001|0011);(?:[^>\n]|>(?!>))*\?\s*->\s*to=([^\s>]+)\s*>>/;
 const STX_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/;
 const ETX_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/;
 // ETB: the attestation block terminator — stands between ETX and EOT, never framing text.
