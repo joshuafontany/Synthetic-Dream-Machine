@@ -100,12 +100,16 @@ run_nexus() {
 
   # CARRIAGE IS THE ONLY THING THIS READING ADDS. Both hearths bootstrap from a Herm, so a merge line
   # names the federation actually moving records rather than two vessels standing near each other.
-  # ⚠ THIS STEP CURRENTLY FAILS, AND IT IS REPORTING A REAL FAULT.
-  # On a cold seven-service mesh ONE of the two hearths loses the `@daemon` resolve race and exits —
-  # which one varies between runs, and raising `on-failure` from 3 to 8 did not settle it. `herm-relay-2`
-  # loses the same way. The lone-operator scenarios above stand green, so the fault belongs to the COLD
-  # START ORDER rather than to either operator's boot: a hearth starts when its herm's container starts,
-  # and a started herm is not yet a carrying one. The cure is a readiness condition, not more retries.
+  # ⚠ THIS STEP IS INTERMITTENT, and the flake is the finding.
+  # Measured 2 green in 3 runs after the catalog-pointer fix, against 0 in 3 before it — so that fix
+  # reached this and did not close it. What remains: on a cold seven-service mesh a hearth can still
+  # lose the `@daemon` resolve, and which one varies. Raising `on-failure` from 3 to 8 changed nothing,
+  # so it is not patience. The lone-operator scenarios above stay green, which places the residue in the
+  # COLD START ORDER — a hearth starts when its herm's CONTAINER starts, and a started herm is not yet a
+  # carrying one. A readiness condition is the open cure.
+  #
+  # A red here is worth re-running once before chasing: this step reports a race, and a race reports
+  # itself differently each time.
   #
   # POLL. Carriage runs on its own cadence, well after the browsers have exited — a single read here
   # times the harness rather than the federation.
