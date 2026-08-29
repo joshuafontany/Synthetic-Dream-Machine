@@ -13,8 +13,8 @@ normative reference every registration template demands.
 
 The format's grammar stands **open by design**: the parser composes its grammar at parse time from a
 registry of rule modules, and plugins register further rules through the same mechanism the core rules
-use. So this document enumerates the **default rule registry** and specifies the ''registration
-mechanism** and the **total-parse law'' — it does not, and cannot, enumerate every grammar a wiki may
+use. So this document enumerates the **default rule registry** and specifies the **registration
+mechanism** and the **total-parse law** — it does not, and cannot, enumerate every grammar a wiki may
 run, any more than [RFC7763] could enumerate every Markdown. No wikitext exists that fails to
 parse.
 
@@ -97,8 +97,8 @@ grammar, because the grammar of any given parse follows from the rules active in
 ## The Extension Mechanism — the rule-object contract
 
 The grammar's openness comes by design, not by accident of implementation — it forms the format's
-architecture, and this section states it normatively. ''The core rules and every extension rule register through one
-mechanism'' — the inventory below enumerates the default registry, never the possible grammar.
+architecture, and this section states it normatively. **The core rules and every extension rule register through one
+mechanism** — the inventory below enumerates the default registry, never the possible grammar.
 
 A rule ships as a module of type `wikirule`. It exports exactly:
 
@@ -210,7 +210,7 @@ and the configuration tiddlers filter by these strings.
 
 ## The Degradation Rule
 
-The total-parse law (#the-load-bearing-property), stated as processor obligations:
+The total-parse law (#/the-load-bearing-property), stated as processor obligations:
 
 **A parser MUST accept every input.** Surface matching no active rule MUST survive into the parse tree
 as text; a block run opening no block rule MUST parse as an ordinary paragraph. Parsing MUST NOT fail,
@@ -238,8 +238,8 @@ A **conforming document**: under the total-parse law every input parses, so docu
 reduces to well-formedness of the constructs a document uses — closed fences, terminated definitions,
 matched element tags. No input reads as invalid; a document only ever reads more or less well-formed.
 
-A **core-conforming parser** accepts every construct in the default registry (#rule-inventory),
-honours the pragma prologue, and enforces the degradation rule (#degradation). Because the parse runs
+A **core-conforming parser** accepts every construct in the default registry (#/rule-inventory),
+honours the pragma prologue, and enforces the degradation rule (#/degradation). Because the parse runs
 total, a core-conforming parser accepts every input — the class every embedding application can rely
 on.
 

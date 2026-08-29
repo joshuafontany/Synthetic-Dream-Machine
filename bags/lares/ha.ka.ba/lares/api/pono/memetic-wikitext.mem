@@ -182,6 +182,10 @@ never opens a TW5 macro name in practice, so the declaration register costs the 
 TW5 parses a macro parameter as an attribute: an optional `name` and separator, then a value. Three
 facts the frame rests on, each the host's and not this grammar's:
 
+* ''The memetic standard writes `key=value`.'' TW5 reads `=` as the new-style separator and `:` as the
+  older one, and only `=` admits a filtered, indirect or macro value. A carrier holding either renders the
+  same. A DEFINITION keeps the colon: `\procedure greet(name:"world")` is the host's own parameter-list
+  syntax, where `=` does not stand.
 * ''The colon separator requires a strict identifier'' — TW5 tests the name against `/^[A-Za-z0-9\-_]+$/`
   before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
 * ''A quoted value reads as a TW5 string literal'' — single, double, triple-double or `[[bracket]]` — and a
@@ -189,10 +193,12 @@ facts the frame rests on, each the host's and not this grammar's:
 * ''An unnamed value reads positional'', numbered in order. `?` and `->` ride as positional parameters,
   which lets the bearing arrow survive inside a macro call ([FRAMING] #bearing-arrow).
 
-''A `lar:` URI already reads as a named parameter.'' TW5 takes `lar:///ha.ka.ba/…` as the name `lar` with
-value `///ha.ka.ba/…`, because `lar` passes the strict-identifier test and `:` separates. The host has
-been reading every `lar:` reference in this corpus as a `lar` parameter from the beginning; the grammar
-inherits that reading rather than declaring one.
+''A `lar:` URI carries a scheme, not a parameter.'' `lar` passes the strict-identifier test and a colon
+follows it, so TW5's own reading takes the name `lar` with value `///ha.ka.ba/…`. That reading costs
+nothing — no procedure here declares a `lar` parameter, and the address renders as written — which is the
+superset law holding at the one place the two readers differ. The memetic reading names the colon a
+SCHEME separator, because only `=` names a parameter. A URI's query follows the same law: `?stances=…&p=3`
+carries named parameters and `#/anchor` a fragment.
 
 ''The sigils ride as the RUBRIC.'' A missal writes the words to be spoken in black and the instructions for
 performing them in red — //rubrica//, red ochre, the practice standing in liturgical manuscripts from the
@@ -603,7 +609,7 @@ Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
 A definition summoned by name:
 ```
 <<~! wehe greeting(name "World") >>Hello, <<~ kahea name >>!<<~/wehe >>
-<<~ kahea greeting(name:"Operator") >>
+<<~ kahea greeting(name="Operator") >>
 ```
 
 A conditional over a guest filter, and an iteration:
@@ -689,6 +695,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;f1jUTXQBVEMQaDnLfXNETI60FYwwCYmJl-ZKOng2Ymk
+<<^ code="&#x0003;" >>ni:///sha-256;BqrgbK84ZESs410oBD6JT-Ts5nM_NDQhbQX9W9v-ySE
 
 <<^ code="&#x0004;" -> ? >>

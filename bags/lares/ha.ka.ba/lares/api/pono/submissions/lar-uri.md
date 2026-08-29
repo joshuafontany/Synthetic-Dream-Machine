@@ -1,6 +1,6 @@
 
 
-- `lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language`
+- `lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language`
 
 <a id="abstract"></a>
 
@@ -30,7 +30,7 @@ This document holds **submission-draft** maturity. The scheme law, path taxonomy
 
 **Precedent.** The naming-not-fetching posture follows `tag:` (RFC 4151). The syntax builds on the generic URI grammar (RFC 3986). Scheme registration follows RFC 7595.
 
-**Name.** The three letters read as a mnemonic for properties this document then specifies, and carry no normative weight of their own: a `lar:` URI names a **relation** in a meme graph rather than a location; it does not dereference, so the referent it names stands **latent** until a local resolver acts on it (#resolution); and its path carries **attention** — where regard points — as bearing, never as a level or a coordinate (#signal-law). **Latent Attention Relation**. The name also carries the *lar*, the household spirit bound to a place rather than to a family, which names the same posture in an older register.
+**Name.** The three letters read as a mnemonic for properties this document then specifies, and carry no normative weight of their own: a `lar:` URI names a **relation** in a meme graph rather than a location; it does not dereference, so the referent it names stands **latent** until a local resolver acts on it (#/resolution); and its path carries **attention** — where regard points — as bearing, never as a level or a coordinate (#/signal-law). **Latent Attention Relation**. The name also carries the *lar*, the household spirit bound to a place rather than to a family, which names the same posture in an older register.
 
 **Audience.** Implementers of parsers and resolvers; authors and registry maintainers; peers federating CRDT bags.
 
@@ -94,7 +94,7 @@ its `uri-path` — the spelling with the leading `lar:///` removed, codepoint-id
 abbreviates. A carrier's identity block declares its own address in this form, and every corpus
 instrument walks it. The abbreviation carries no semantics of its own: `uri-path = "ha.ka.ba/x/y"` and
 `lar:///ha.ka.ba/x/y` name one address, related by exactly seven leading characters, and the equality
-rule (#equality) reads through the abbreviation unchanged. Defined here and only here: substructure
+rule (#/equality) reads through the abbreviation unchanged. Defined here and only here: substructure
 within a scheme lives in the scheme's defining document [RFC7320].
 
 <a id="path-taxonomy"></a>
@@ -150,7 +150,7 @@ The canonical spelling therefore carries the whole burden, and a conforming prod
   an address silently before any comparison — the spoofing surface this rule closes;
 - no empty segments — `//` within a path and a trailing `/` each produce one, and neither conforms.
 
-The session form never names a stable address (#path-taxonomy), so equality across the two forms never
+The session form never names a stable address (#/path-taxonomy), so equality across the two forms never
 holds: `lar://alias:grant@host/p` and `lar:///p` spell different strings and name different things —
 the first a speaker's span, the second a place in the graph.
 
@@ -251,7 +251,7 @@ Slot order carries the drift gradient: **Ha** drifts slowest, **Ka** at moderate
 No metric stands yet claimed. The scheme names attitude and section; it defines no distance function over roots.
 
 **Lineage.** The Ha-Ka-Ba reading carries a declared palimpsest lineage; the citation and its audit
-anchors ride the documentation companion (lar:///ha.ka.ba/lares/docs/pono/lar-uri#lineage).
+anchors ride the documentation companion (lar:///ha.ka.ba/lares/docs/pono/lar-uri#/lineage).
 
 Fragment (`#`) carries an anchor whose meaning the anchored unit's media type defines; the scheme carries it opaque.
 
@@ -307,7 +307,7 @@ The scheme registers as **provisional**; a future submission MAY seek permanent 
 
 A stable API address with a fragment:
 ```
-lar:///ha.ka.ba/lares/api/pono/meme#law
+lar:///ha.ka.ba/lares/api/pono/meme#/law
 ```
 
 An unstable session territory:

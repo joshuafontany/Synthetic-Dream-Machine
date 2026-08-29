@@ -79,8 +79,8 @@ and consumer here as well.
 
 ## Conformance Classes
 
-Two kinds of thing conform: the **carrier** (the artifact) and the frame-side processors — ''carrier
-reader** and **consumer''. Authors carry SHOULD-strength guidance only: the corpus gets written by hand,
+Two kinds of thing conform: the **carrier** (the artifact) and the frame-side processors — **carrier
+reader** and **consumer**. Authors carry SHOULD-strength guidance only: the corpus gets written by hand,
 and the projection re-mints what a hand leaves non-canonical.
 
 A **conforming carrier** MUST: state `code:` as the first parameter of every frame sigil (#/control-set);
@@ -200,8 +200,8 @@ and it has never claimed it alone: `<?xml … ?>` outranks `<!DOCTYPE>`, a BOM o
 `#!` shebang outranks everything because an operating system says so. Each claimant knows its place and
 none negotiates.
 
-So the declaration's claim reads weaker and truer than "first": ''it MUST precede the grammar it
-declares'', and nothing else. A carrier MAY open on a FOREIGN HEADER — YAML front-matter, a shebang, a
+So the declaration's claim reads weaker and truer than "first": **it MUST precede the grammar it
+declares**, and nothing else. A carrier MAY open on a FOREIGN HEADER — YAML front-matter, a shebang, a
 BOM — where an outside consumer requires one, and the declaration follows it.
 
 `<<~moves prologue -> admits/a-foreign-header on/byte-zero if/an-outside-reader-requires-it do/yield-the-slot >>`
@@ -277,8 +277,8 @@ The frame's heading and its close both carry an arrow, and they carry ONE relati
 | EOT | `-> ?` | known | unresolved — the carrier departing into open bearing |
 
 **`?` names an unresolved bearing**, never a keyword and never a name. `lar-sigil` guards that reading
-explicitly: the header form matches BEFORE the compound dispatcher, ''to prevent compound from
-misreading any stray `<<~ ? … >>` as a sigil named `?`''. And the control-soh scan captures the arrow's
+explicitly: the header form matches BEFORE the compound dispatcher, **to prevent compound from
+misreading any stray `<<~ ? … >>` as a sigil named `?`**. And the control-soh scan captures the arrow's
 target as a group, so the bearing rides as PARSED STRUCTURE rather than as decoration inside the line.
 
 ### Why the arrow survives a named-parameter frame
@@ -300,8 +300,8 @@ its outbound bearing travels with it. And `-> ?` declares the dangle rather than
 frontier, honestly marked, the way a MUD room's exit to an unbuilt room reads as an open edge and never
 as an error.
 
-''A declared unresolved bearing never reads as a dangling link. A dangling link names an unresolved bearing that
-lied about its resolution.'' The same cut runs through the block check (`unchecked` never `mismatch`)
+**A declared unresolved bearing never reads as a dangling link. A dangling link names an unresolved bearing that
+lied about its resolution.** The same cut runs through the block check (`unchecked` never `mismatch`)
 and through the ward's infelicities (a misfire voids, an abuse rings hollow): ABSENCE DECLARED and
 ABSENCE DISCOVERED stand as different facts, and every instrument here that conflated them read useless.
 
@@ -515,8 +515,8 @@ A band names a region on the continuum, not a discrete bin; Canon stays reserved
 
 ### The placement law
 
-''A field visible on the tiddler MUST round-trip. A fact that cannot round-trip MUST NOT be visible on
-the tiddler.'' A promise, never a prohibition — and it replaces every list of names an author may not use.
+**A field visible on the tiddler MUST round-trip. A fact that cannot round-trip MUST NOT be visible on
+the tiddler.** A promise, never a prohibition — and it replaces every list of names an author may not use.
 
 | class | holds | because |
 |---|---|---|
@@ -899,8 +899,8 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 The frame carries its own analysis, apart from the language's ([MEMETIC-WIKITEXT] #security). The
 media-type registration ([MEMETIC-WIKITEXT] #media-type) owes one [RFC6838 §4.6] and draws on both.
 
-**The threat model, first.** The frame defends one thing: ''the text span against accidental corruption
-in carriage'' — a truncated transfer, a mangled byte, a re-encoding that moved what it touched. It
+**The threat model, first.** The frame defends one thing: **the text span against accidental corruption
+in carriage** — a truncated transfer, a mangled byte, a re-encoding that moved what it touched. It
 defends nothing against an adversary who can rewrite the carrier: whoever holds the bytes rewrites the
 check beside them, so the mark detects **corruption, never forgery**, and it grants no authentication,
 no authorization, and no privacy. Authenticity belongs to an outer layer — a seal or a signature — and

@@ -84,7 +84,7 @@ A flat skill format discloses in three stages, one directory level deep: frontma
 bundled file. It concatenates.
 
 Transclusion ''renders'': recursive, addressable, parameterized, filter-driven, cap-gated at
-the door. `{{tiddler}}` · `<<procedure arg:"…">>` · `{{{ [filter] }}}` compose through the
+the door. `{{tiddler}}` · `<<procedure arg="…">>` · `{{{ [filter] }}}` compose through the
 ahu cascade. A disclosure hands over a file; a transclusion hands over ''an answer at an
 address, with arguments, through a template cascade''.
 
@@ -224,6 +224,6 @@ else moves first.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;yyQ5VQVElN2n_dy_QCffnVi0oFbVmoWWr9OpuLNqwac
+<<^ code="&#x0003;" >>ni:///sha-256;hU8dkoCfQ20b65IQlzNZe8dci21UJwxLJaoPdQ8_YCQ
 
 <<^ code="&#x0004;" -> ? >>

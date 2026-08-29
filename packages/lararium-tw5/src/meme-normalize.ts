@@ -80,6 +80,37 @@ const REGISTER_CODES: Record<string, string> = {
 };
 const REGISTER_BANDS = new Set(Object.values(REGISTER_CODES));
 
+/**
+ * The command word a `<<` … `>>` opens with, definition registers named.
+ *
+ * TiddlyWiki's parameter-list syntax takes `:` and refuses `=`, so a definition keeps the colon it was
+ * written with. The pragma spellings all lead with a backslash; wehe, kumu and helu are their sigil names.
+ */
+const DEFINITION_HEAD = /^[~^!]?\s*(\\[A-Za-z_]|wehe\b|kumu\b|helu\b)/;
+
+/** A colon separates a parameter only where a QUOTED value follows — a scheme colon never does. */
+const COLON_PARAM = /\b([A-Za-z0-9_-]+):(?=["']|\[\[)/g;
+
+/**
+ * Rewrite every CALL-site colon separator to `=`, leaving definitions and scheme colons untouched.
+ *
+ * Exported so a corpus sweep moves the graph by the same law the gate reads it with.
+ *
+ * A sigil closes on the line it opens. Letting the match cross a newline reaches from a bare `<<` in prose
+ * to the next sigil and rewrites everything between — measured at eight files on this graph.
+ */
+export function normalizeParamSeparators(src: string): { text: string; moved: number } {
+  let moved = 0;
+  const text = src.replace(/<<([^\n>]*(?:>(?!>)[^\n>]*)*)>>/g, (whole, inner: string) => {
+    if (DEFINITION_HEAD.test(inner)) return whole;
+    const next = inner.replace(COLON_PARAM, "$1=");
+    if (next === inner) return whole;
+    moved += 1;
+    return `<<${next}>>`;
+  });
+  return { text, moved };
+}
+
 export interface NormalizeResult {
   readonly text: string;
   readonly changed: boolean;
@@ -156,6 +187,17 @@ export function normalizeMemeSource(src: string): NormalizeResult {
         flags.push(`register "${val}" off the band ladder — needs triage (not a register band)`);
       }
     }
+  }
+
+  // ── 3. Named-parameter separator (call sites only) ───────────────────────
+  //
+  // The memetic standard writes key=value; TiddlyWiki reads both spellings, so a carrier holding the colon
+  // renders identically and only its spelling drifts. A DEFINITION is left alone — `=` is not valid in a
+  // parameter list — and so is every scheme colon, which the quoted-value test excludes by shape.
+  const sep = normalizeParamSeparators(text);
+  text = sep.text;
+  if (sep.moved > 0) {
+    notes.push(`named parameter separator: ${sep.moved} call site${sep.moved === 1 ? "" : "s"} took the equals sign`);
   }
 
   return { text, changed: text !== src, notes, flags };
