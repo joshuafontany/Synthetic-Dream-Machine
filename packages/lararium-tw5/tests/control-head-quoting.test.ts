@@ -9,7 +9,7 @@
  * ── WHY THE QUOTES STAND ANYWAY ──────────────────────────────────────────────────────────────────────────
  * The other head parameter cannot go without them. 66 carriers declare `namespace="ॐ ँ"` — two glyphs and
  * a space. Unquoted, TiddlyWiki reads `namespace="ॐ"` and hands the second glyph back as a positional:
- * the namespace silently loses half of itself, and the SOH the renderer derives from it no longer matches
+ * the namespace silently loses half of itself, and the SOH the renderer derives from it stops matching
  * what the meta declares.
  *
  * So a head that dropped quotes would carry them on one parameter and not the other, and a writer would
