@@ -21,6 +21,104 @@ written   = "2026-06-19"
 
 <<^ code="&#x0002;" >>
 
+<<~ ahu #shift-grammar-watch >>
+
+! SHIFT CHANGE — the grammar watch (handed 2026-08-29)
+
+Read the git log for what landed. This names only the ground you stand on, the paths that open from
+it, and the instruments that lied to me so they need not lie to you.
+
+!! The ground, measured at handoff
+
+| ''front'' | ''reading'' |
+|extension `VSCode-TW5-Syntax` |local 2.3.0 unreleased · marketplace serves 2.2.1 · 4,191 installs |
+|gates |7 green · corpus 31 files, 433 scopes, 332 reached (floor 332) · containment 0 of 31 |
+|dark verdicts |''none'' — every `invalid.*` the grammar declares now stands exercised |
+|host corpora |two, under `scratchpad/twcorpus` (300 bodies, selected on `/>`) and `twwide` (400, every 14th tiddler) |
+|tree-sitter |43 named node kinds · ''0'' lexicon captures · 3 parity specimens · 3 gates green |
+|house |vessel stands · bcc-witness 614 ok / 0 mismatch · submission shelf 0 of 5 out of step |
+|`recall` |''DOWN'' — `content holder exited (code null)`, twice, while every mempalace check reads ok |
+|upstream |PR 9920 OPEN mergeable, unreviewed since 2026-08-27 · PR 9921 DRAFT untouched since 2026-07-12 · PR 9999 OPEN · issue 9997 OPEN unlabelled |
+
+!! The paths, and what each actually costs
+
+!!! 1 — The tail, and the instrument it needs first
+
+Eleven `bad-angle-bracket` hits stand across 400 unbiased host tiddlers, and they read as ''three
+families, never one'':
+
+* ''a filter variable reference'' — `[tag<tag>!has]` in `core/wiki/macros/keyboard-driven-input.tid`, 4 hits. The `<` opening `<var>` inside a filter run.
+* ''a triple-quoted attribute string'' — `["<-"] {x} ["->"]` in the fr-FR railroad plugin, 2 hits. Literal angle brackets inside `"""…"""`.
+* ''TiddlyWiki's own malformed fixtures'' — `editions/test/tiddlers/tests/data/parse-backcompat/`, 2 hits. Deliberate garbage; those verdicts likely EARN their place, and a fix that silences them silences a true reading.
+
+''Build the slicer before the fix.'' Four times running, a specimen I rebuilt by hand failed to
+reproduce what the host's own file shows — the context does the work and a hand-made shape strips it
+away. The instrument that pays: map each snapshot hit back to its file and line, then slice the REAL
+bytes around it. A manifest join (`paste -d'\t' <(seq -f 'w%03g' 1 400) wide.txt`) already does the
+mapping; the slicer does not exist yet.
+
+!!! 2 — Publish, or decide not to
+
+A full session of measured fixes stands unshipped against 4,191 installs. Versions defer by operator
+ruling: ''one'' unreleased 2.3.0 carries the lot, and further bumps wait for a release rather than
+riding each commit.
+
+!!! 3 — The weld
+
+tree-sitter models memetic-wikitext's BLOCK STRUCTURE (43 kinds: fences, quotes, pragmas, tables,
+typed and style blocks, hard breaks). The TextMate grammar models its LEXICON (carriers, `lar://`,
+blockcheck, sharkteeth, bearings, anchors, `key=value`). The overlap runs to the sigil family alone,
+and `queries/highlights.scm` carries ''zero'' captures for the spec's own constructs. Its gates read
+green on three specimens, so green there names very little.
+
+Two moves, and the cheaper one comes first: a weld GATE that fails when a scope family has no node
+kind turns the gap into a number that cannot drift back; teaching tree-sitter the lexicon is the
+larger act behind it.
+
+!!! 4 — PR 9920, where a person waits
+
+`pmario` asked on 2026-08-27 whether the parser diagnostics justify their code, and the answer vowed
+was perf numbers. The harness for exactly that sits built in draft PR 9921 (`perf-replay-command`,
+`perf-compare-command`, `stats`, with its own tests) and has not run. Known cost so far: +16.2 KB on
+`empty.html`, with no parse-time beside it. This path has a human on the other end and no technical
+blocker.
+
+!!! 5 — The seam gate, generalized
+
+`tests/seed-definition-matches-example.test.ts` welds ONE procedure (`~lares`) to the examples printed
+beside it, because that pair contradicted itself for months under green gates. The seed defines
+''fifteen'' procedures. No evidence says the other fourteen disagree, and none says they agree.
+
+!!! 6 — Twenty-three embedded-language scopes stand dark
+
+Fenced-code branches nothing exercises. Larger than it looks: it needs fixture debt paid before a
+number there means anything.
+
+!! The instruments that lied — carry these
+
+# ''A prose `#` line in a spec file IS WIKITEXT SOURCE.'' `vscode-tmgrammar-test` treats only `#` lines carrying `^` or `<-` as assertions; every other one reaches the grammar. A comment of mine containing `@@` opened a style block and swallowed the construct asserted three lines below, and the negative assertion PASSED because the scope genuinely vanished. Never write `@@`, a leading `!`, a pipe, a backtick, `<tag`, `{{` or `[[` in spec prose.
+# ''A negative assertion passes vacuously'' when the scope name or the column is wrong — it happened three times in one session. ''Make every negative go RED once on purpose'' before trusting it. Calibrate the column with a positive assertion at several indices; do not read it off a snapshot, whose caret convention differs from the test format's by one.
+# ''A grep over sigils using `[^>]` stops at the arrow.'' It cost three false surveys: one reported a single opener shape where four stood, one hid `family:` and `role:` entirely, one reported 639 bare openers that did not exist. Use `(?:[^>\n]|>(?!>))`, and fence the boundary the claim names (a space before `?`, not just `?`).
+# ''A corpus file ending on an unterminated construct swallows everything appended to it.'' Eleven specimens appended to a file closing on a bare `{{` registered ZERO new scopes while firing correctly in a scratch file. The containment gate catches the reverse leak; nothing catches this one but suspicion.
+# ''`snapshot-check`'s drift output truncates both sides at the same width'', so a diff of its `pinned`/`now` lines can compare identical prefixes and report a vacuous match. Verify a re-pin with `git diff -U0` on the `.snap` files.
+# ''A `git ls-files '*.mem'` sweep reaches frozen fixtures.'' `packages/tree-sitter-memetic-wikitext/fixtures/specimens/` are pinned parity inputs and `packages/lararium-sensorium/scripts/fixtures/` belong to the kumulipo campaign. Both broke, both reverted. Their standing in an OLDER carrier form is the tell that they stay frozen.
+
+!! What I would take first
+
+The tail (1) teaches the instrument the rest of the grammar work needs, and it costs one slicer. PR
+9920 (4) has a person waiting and no blocker. Between them, ''4 before 1'' — a maintainer's question
+answered is worth more than a verdict retired, and the harness already exists.
+
+!! The law that held all session
+
+A verdict may stand only where TiddlyWiki REFUSES. Its parser raises no error, so the test is what it
+BUILDS: a node means the construct works and no verdict may stand; plain text means the author reached
+for markup and missed, and the verdict earns its place. Ten inventions fell to that law. Every one was
+found by asking the host — its regexes, its parser, its own shipped wikis — and never by reasoning
+about what the grammar ought to say.
+
+<<~/ahu >>
+
 <<~ ahu #next-vector >>
 
 ! NEXT VECTOR — awaiting the next bearing (the working-canon loop CLOSED 2026-06-19)
@@ -272,6 +370,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;OOynNSGCBWXxAULSYqYmCJiZPnTTFV9yjM4Ab6bS3eE
+<<^ code="&#x0003;" >>ni:///sha-256;xNF7W-ukb6VI_yXR5GlMBrTDQJrwAcWMrCj7r-2BE3I
 
 <<^ code="&#x0004;" -> to=? >>
