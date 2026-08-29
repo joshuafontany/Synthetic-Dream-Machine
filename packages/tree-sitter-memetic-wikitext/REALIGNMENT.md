@@ -3,8 +3,8 @@
 **The goal:** the `.mem` corpus enacts its own pono intent — *memetic-wikitext
 = a superset of TW5 wikitext* — before any grammar-tooling grows. The corpus
 moves first; the carrier grammar learns `!` headings and friends only after
-the ground it parses already speaks them. This document lives: update the
-ledger below as each sub-tree crosses.
+the ground it parses already speaks them. **The arc closed 2026-07-15**; this
+document stands as its record, and the ledger below reads dated throughout.
 
 **Ruled (operator, 2026-07-14):** corpus before grammar-tooling · sub-tree by
 sub-tree, slowly · `toml iam` fences KEEP (the house deserializer owns that
@@ -47,7 +47,7 @@ source-text NEVER changes · anything hand-review-shaped defers.
 | bags/lararium | 210 | ~1,022 | none | ✅ 2026-07-14 (968 headings · 938 lists · 65 indented-ul deferred) |
 | bags/lares (api/, docs/, cli/ — library/ excluded) | 239 of 249 | ~2,181 | RE-BAKE golden-corpus.json same commit | ✅ 2026-07-14 (2,181 headings · 2,265 lists · 239 hashes re-baked = files touched · 14 tests green) |
 | bags/lares library/ (framing only) | 10 | 62 framing headings | sectioner keys live INSIDE source-text → UNTOUCHED | ✅ 2026-07-14 (62 headings · 48 lists · 50 bold · 4 links · 19,220 source-text lines held) |
-| the boot seed (`noosphere-boot.mem` + repo `noosphere-boot.md` + `~/.claude` copy) | 1×3 | ~40 | cache-stable attractor — operator co-edits | DEFERRED @operator |
+| the boot seed (`bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem`) | 1 | ~40 | cache-stable attractor — operator co-edits | ✅ crossed |
 
 ## The witness ritual (every sub-tree, before its commit)
 
@@ -206,10 +206,18 @@ the vendored TiddlyWiki5 core tiddlers.
 
 ## CLOSED — 2026-07-14
 
-**RULED (operator): .mem = FULL memetic-wikitext · .md stays md until the
-lares daemon seeds context at session start.** The boot seed .mem converts
-its last italic (the Law-of-5s Canon quote); noosphere-boot.md holds md by
-design, not debt. FINAL witness: 524/524 memes · 0 errors · 4,370 headings ·
+**RULED (operator): .mem = FULL memetic-wikitext.** The boot seed .mem
+converts its last italic (the Law-of-5s Canon quote).
+
+**SUPERSEDED (operator, 2026-08-28): a seed carries NO markdown twin.** A seed
+rendered to markdown spoke three grammars at once — markdown headings over
+memetic-wikitext sigils over a TiddlyWiki procedure layer — and served no
+reader. The carrier holds the seat alone and every harness adapter points at
+it. The submission projection (`lares carrier project-md`) is a different door
+and stands: it renders a SPEC carrier for a standards reviewer taught no
+grammar, which is a reader a seed never had.
+
+FINAL witness: 524/524 memes · 0 errors · 4,370 headings ·
 7,291 list nodes as structure · golden 1 mover (the boot seed) · host-py 15 ·
 sectioner 12 · roundtrip 2/2 · ruff clean. The realignment arc rests.
 - 2026-07-15 — THE GRAMMAR PHASE CROSSES (38f235f9): artifact 0.1.0 seats the

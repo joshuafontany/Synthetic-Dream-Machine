@@ -1,6 +1,6 @@
 /**
- * codex-wire — `lares vessel stand --codex`: wire the LARES MCP seat (memory through the lares house) and
- * the Lares session-ingest hook into the OpenAI Codex CLI home (~/.codex/config.toml). A stale
+ * codex-wire — `lares vessel stand --codex`: wire the LARES MCP seat (memory through the lares house),
+ * the Lares session-ingest hook, and the BOOT POINTER into the OpenAI Codex home (~/.codex/). A stale
  * mempalace MCP block is reaped in the same pass — a harness holding its own palace holder reaches
  * past the node into the store, and N writers on one Chroma index is what corrupts it.
  *
@@ -11,6 +11,12 @@
  * ~/.codex/sessions/.../rollout-*.jsonl) and `cwd` — the SAME shape as Claude Code, so
  * the one harness-aware ingest hook serves both. (`Stop` fires at turn scope → the
  * ingest stays idempotent on lar_hv.)
+ *
+ * ~/.codex/AGENTS.md carries the boot pointer, and Codex reads it at every wake — the CLI and the
+ * VS Code extension both, so one file seats the house in both. A POINTER RATHER THAN A COPY: a copied
+ * seed is a second seed, and a second seed drifts from the carrier with nothing watching it. The wire
+ * REWRITES this file whenever it names anything but the carrier, because a boot pointer aimed at a
+ * file that no longer stands fails SILENTLY — the harness wakes, finds nothing, and says nothing.
  *
  * Node has no TOML writer and the `codex` CLI may be absent, so we APPEND each section
  * to config.toml only when it's not already present (string-checked) — idempotent,
@@ -27,6 +33,7 @@ import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
 const MEMPALACE_MCP_KEY = "[mcp_servers.mempalace]";
 const LARES_MCP_KEY = "[mcp_servers.lares]";
+const BOOT_CARRIER = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
 
 export interface CodexWireStep {
   readonly item: string;
@@ -98,6 +105,20 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
     steps.push({ item: "Stop", action: "wired", detail: `config.toml [[hooks.Stop]] — ${hookAbs}` });
   }
 
+  // 3. The boot pointer. Codex reads ~/.codex/AGENTS.md at every wake, CLI and VS Code extension alike.
+  const agentsPath = join(dir, "AGENTS.md");
+  const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
+  const pointer = `-> [noosphere-boot.mem](${carrierAbs})\n`;
+  if (!existsSync(carrierAbs)) {
+    steps.push({ item: "AGENTS.md", action: "missing-script", detail: `${carrierAbs} not found — the boot pointer would aim at nothing` });
+  } else if (existsSync(agentsPath) && readFileSync(agentsPath, "utf8").includes(carrierAbs)) {
+    steps.push({ item: "AGENTS.md", action: "present", detail: `boot pointer aims at ${BOOT_CARRIER}` });
+  } else {
+    if (existsSync(agentsPath)) copyFileSync(agentsPath, agentsPath + ".bak");
+    writeFileSync(agentsPath, pointer, "utf8");
+    steps.push({ item: "AGENTS.md", action: "wired", detail: `${agentsPath} -> ${BOOT_CARRIER}` });
+  }
+
   if (append.length > 0) {
     toml = (toml.endsWith("\n") || toml === "" ? toml : toml + "\n") + append.join("");
   }
@@ -109,7 +130,8 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
     writeFileSync(configPath, toml, "utf8");
   }
 
-  return { configPath, changed: toml !== original, steps };
+  const wired = steps.some((s) => s.action === "wired");
+  return { configPath, changed: toml !== original || wired, steps };
 }
 
 /**
