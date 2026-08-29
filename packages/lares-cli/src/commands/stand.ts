@@ -107,13 +107,20 @@ function faceStandsOnDisk(bootstrap: string): boolean {
   } catch { return false; }
 }
 
-/** Free the port so the next stand boots fresh. A vessel that will not stop leaves the lift unmade. */
-async function stopIncumbentQuietly(port: number): Promise<void> {
-  try {
-    const { stopIncumbent } = await import("../port-control.js");
-    await stopIncumbent(port);
-    await new Promise((r) => setTimeout(r, 1500));   // past the durable flush the daemon runs on SIGTERM
-  } catch { /* the stand below reports whatever answers */ }
+/**
+ * Free the port so the lift's next stand boots fresh, and say how it went.
+ *
+ * `stopIncumbent` already polls until the port actually frees — SIGTERM, then SIGKILL past its grace —
+ * so nothing here needs to wait behind it. What it returns MATTERS: `forced` means the daemon met
+ * SIGKILL and never finished the durable flush it runs on SIGTERM, and a lift that booted over that
+ * silently would hand the next vessel a store written mid-sentence with nothing said. A port still
+ * held after both signals throws, and swallowing that would surface later as a confusing bind failure
+ * instead of the fault itself.
+ */
+async function freePortForLift(port: number): Promise<string | null> {
+  const { stopIncumbent } = await import("../port-control.js");
+  const r = await stopIncumbent(port);
+  return r.forced ? "the incumbent met SIGKILL and never flushed — its last writes may be short" : null;
 }
 
 export async function cmdStand(args: ParsedArgs): Promise<number> {
@@ -201,7 +208,11 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
     if (verdict.act === "restand") {
       liftReason = verdict.reason;
       console.log(`[lares vessel stand] lifting: ${verdict.reason}`);
-      await stopIncumbentQuietly(port);
+      const forced = await freePortForLift(port);
+      if (forced !== null) {
+        liftReason = `${verdict.reason} — ${forced}`;
+        console.log(`[lares vessel stand] ${forced}`);
+      }
       nodeUp = false;
       nodeNote = "re-stood — the standing no longer matched the face on disk";
     }
