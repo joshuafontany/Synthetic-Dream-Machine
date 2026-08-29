@@ -44,7 +44,7 @@ export function checkMempalaceIntegration(): IntegrationReport {
   checks.push({
     name: "submodule",
     ok: submoduleOk,
-    detail: submoduleOk ? MEMPALACE_DIR : "absent — `lares vessel stand --install` (git submodule update --init mempalace)",
+    detail: submoduleOk ? MEMPALACE_DIR : "absent — `lares mempalace install` (submodule + pip)",
   });
 
   const pkgOk = existsSync(join(MEMPALACE_PKG, "package.json"));

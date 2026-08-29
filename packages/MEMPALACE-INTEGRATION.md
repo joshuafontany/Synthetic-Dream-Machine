@@ -16,7 +16,9 @@ and sweeps every harness's transcripts into per-project wings.
 ```bash
 rm -rf ~/.mempalace ~/.lares ~/.mempalace.bak.pre350   # palace + derived stage + stale backup
 pnpm -r build                                          # CLI reflects latest (no-op if current)
-lares vessel stand --init --claude --codex --copilot --vscode  # palace up + every surface wired
+lares mempalace install && lares mempalace setup   # the library, then the guest
+lares vessel rite founding                        # found · stand · seed
+lares vessel wire                                 # every AI surface points here
 lares harvest --all                                    # sweep every transcript surface → wings
 # reload the editor / fresh session so the live Stop/SessionEnd hooks activate
 ```

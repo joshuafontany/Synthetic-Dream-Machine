@@ -57,7 +57,7 @@ function resolveBin(name: string): string | null {
  */
 export function linkConsoleScript(name: string): LinkResult {
   const src = resolveBin(name);
-  if (src === null) return { ok: false, detail: `${name} not on PATH — run \`lares vessel stand --install\` (pip install)` };
+  if (src === null) return { ok: false, detail: `${name} not on PATH — run \`lares mempalace install\` (submodule + pip)` };
   if (process.platform === "win32") {
     // pip writes <name>.exe into its Scripts dir (on PATH at install); not a symlink idiom.
     return { ok: true, detail: `${name} at ${src} (ensure its dir is on PATH)` };

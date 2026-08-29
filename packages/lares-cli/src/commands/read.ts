@@ -29,7 +29,7 @@ const CLAUDE_DEFAULT_CLEANUP_DAYS = 30; // Claude's own default when the key is 
 
 /**
  * `lares vessel read --palaces` — the palace-organ health table (re-runnable). Reads the SAME registry
- * `lares vessel stand --init` stands up + `lares sense teardown` removes, so the health view never drifts
+ * `lares sense setup` stands up + `lares sense teardown` removes, so the health view never drifts
  * from what setup/teardown act on. Pure inspection (each organ's cheap probe), no vm boot.
  */
 function cmdReadPalaces(args: ParsedArgs): number {
@@ -62,7 +62,7 @@ function cmdReadPalaces(args: ParsedArgs): number {
         const verdict = coupling.fusion ? coupling.fusion.verdict : "insufficient";
         console.log(`\n  coupling (${coupling.sensorium}): ${verdict} — ${coupling.note}`);
       }
-      if (!allHealthy) console.log("\n  → stand up absent organs:  lares vessel stand --init");
+      if (!allHealthy) console.log("\n  → stand up absent organs:  lares sense setup");
       if (!guest.healthy) console.log("  → raise the guest sidecar: lares mempalace setup");
     },
   });

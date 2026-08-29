@@ -113,7 +113,9 @@ The verbatim journey stays on the island — ''local-only, always''. Only the di
 ```bash
 rm -rf ~/.mempalace ~/.lares ~/.mempalace.bak.pre350     # palace + derived stage + stale backup
 pnpm -r build                                            # CLI carries the latest (no-op if current)
-lares vessel stand --init --claude --codex --copilot --vscode    # palace up (auto_save=false) + every surface wired
+lares mempalace install && lares mempalace setup   # the library, then the guest (auto_save=false)
+lares vessel rite founding                        # found · stand · seed
+lares vessel wire                                 # every AI surface points here
 lares harvest --all                                      # sweep every transcript surface → per-project wings
 # then reload the editor / fresh session so the live hooks fire
 ```

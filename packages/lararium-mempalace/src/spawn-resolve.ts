@@ -7,7 +7,7 @@
  * MempalaceClient, not in the CLI (the dependency must not point node→cli).
  *
  * ONE VENV — `~/.venv`, the root venv, beside `~/.lares`. The whole stack resolves the SAME
- * interpreter, and `lares vessel stand --install` stands it.
+ * interpreter, and `lares mempalace install` stands it.
  *
  * Two interpreters with different powers diverge SILENTLY, which is the whole hazard. A second venv
  * carries its own onnxruntime, its own chromadb, its own accelerators — so the machina embeds on the
@@ -23,7 +23,7 @@
  * it gets refused here rather than discovered three layers down.
  *
  * No `$VIRTUAL_ENV` capture, and no bare-`python3` fallback — a PEP-668 system python holds no chroma,
- * and falling back to it converts a clear "run `lares vessel stand --install`" into an obscure import error.
+ * and falling back to it converts a clear "run `lares mempalace install`" into an obscure import error.
  * `null` refuses loudly; the callers render the cure.
  *
  * Mirrors the CLI's integration-check.resolvePython (kept in lockstep; that copy serves `lares vessel stand`
@@ -38,7 +38,7 @@ import { repoRoot } from "@lararium/mesh/node";
 
 let _python: string | null | undefined;
 
-/** `~/.venv` — THE venv. One interpreter for the whole stack; `lares vessel stand --install` stands it. */
+/** `~/.venv` — THE venv. One interpreter for the whole stack; `lares mempalace install` stands it. */
 export function laresVenvPython(): string {
   const win = process.platform === "win32";
   return join(homedir(), ".venv", win ? "Scripts" : "bin", win ? "python.exe" : "python3");
@@ -60,7 +60,7 @@ function holdsMempalace(python: string, submoduleRoot: string): boolean {
 
 /**
  * THE interpreter, verified to hold mempalace — or null, which the callers render as
- * "run `lares vessel stand --install`". Cached for the process.
+ * "run `lares mempalace install`". Cached for the process.
  */
 export function resolveMempalacePython(): string | null {
   if (_python !== undefined) return _python;
