@@ -1,20 +1,20 @@
 /**
- * A NAMED PARAMETER IS WRITTEN key=value.
+ * A NAMED PARAMETER CARRIES AN EQUALS SIGN.
  *
  * ── THE STANDARD ─────────────────────────────────────────────────────────────────────────────────────────
  * TiddlyWiki accepts two separators in a macro parameter (`parseMacroParameterAsAttribute`): `=` and `:`.
  * Only `=` admits a filtered, indirect or macro value, so the memetic standard writes `key=value` and the
- * colon spelling stays legal-but-legacy. A stock TiddlyWiki reads either, which is what keeps the superset
- * law intact whichever one a carrier holds.
+ * colon spelling stays legal beside it. A stock TiddlyWiki reads either, which keeps the superset law intact
+ * whichever one a carrier holds.
  *
  * ── WHAT MUST NOT MOVE ───────────────────────────────────────────────────────────────────────────────────
- * A DEFINITION still requires the colon. `\procedure greet(name:"world")` is TiddlyWiki's own parameter-list
- * syntax and `=` is not valid there, so rewriting a definition would break the carrier it meant to canonicalize.
- * The definition registers are the TW5 pragmas and their sigil spellings — wehe, kumu, helu.
+ * A DEFINITION still requires the colon. `\procedure greet(name:"world")` spells TiddlyWiki's own parameter
+ * list, which refuses `=`, so rewriting a definition breaks the carrier it meant to canonicalize. The
+ * definition registers cover the TW5 pragmas and their sigil spellings — wehe, kumu, helu.
  *
- * A SCHEME COLON is not a separator either. `lar:`, `ni:`, `https:` all pass the strict-identifier test that
+ * A SCHEME COLON separates no parameter either. `lar:`, `ni:`, `https:` all pass the strict-identifier test that
  * guards TiddlyWiki's colon, so a rewrite keyed on the identifier alone would eat every address in the graph.
- * The colon only separates a parameter when a QUOTED value follows it, which is the one shape this moves.
+ * The colon separates a parameter only where a QUOTED value follows it — the one shape this moves.
  */
 
 import { describe, test, expect } from "vitest";
@@ -76,8 +76,8 @@ describe("a named parameter is written key=value", () => {
 
   test("★ a sigil never reaches across a line, so prose between two sigils is not a parameter list ★", () => {
     // MEASURED on the graph: a pattern that let `<<` … `>>` span lines matched from one sigil to a later
-    // one and rewrote everything between. `''Status:''` is BOLD WIKITEXT — the colon is punctuation and the
-    // quotes are emphasis markers — and eight files moved that way before the bound was put back.
+    // one and rewrote everything between. `''Status:''` spells BOLD WIKITEXT — the colon reads as punctuation
+    // and the quotes as emphasis markers — and eight files on this graph moved that way.
     const src = [
       'A line mentioning << in prose.',
       "",

@@ -154,8 +154,8 @@ facts the frame rests on, each the host's and not this grammar's:
 
 - **The memetic standard writes `key=value`.** TW5 reads `=` as the new-style separator and `:` as the
   older one, and only `=` admits a filtered, indirect or macro value. A carrier holding either renders the
-  same. A DEFINITION keeps the colon: `\procedure greet(name:"world")` is the host's own parameter-list
-  syntax, where `=` does not stand.
+  same. A DEFINITION keeps the colon: `\procedure greet(name:"world")` spells the host's own parameter
+  list, which refuses `=`.
 - **The colon separator requires a strict identifier** — TW5 tests the name against `/^[A-Za-z0-9\-_]+$/`
   before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
 - **A quoted value reads as a TW5 string literal** — single, double, triple-double or `[[bracket]]` — and a
@@ -165,8 +165,8 @@ facts the frame rests on, each the host's and not this grammar's:
 
 **A `lar:` URI carries a scheme, not a parameter.** `lar` passes the strict-identifier test and a colon
 follows it, so TW5's own reading takes the name `lar` with value `///ha.ka.ba/…`. That reading costs
-nothing — no procedure here declares a `lar` parameter, and the address renders as written — which is the
-superset law holding at the one place the two readers differ. The memetic reading names the colon a
+nothing — no procedure here declares a `lar` parameter, and the address renders as written — the superset
+law holding at the one place the two readers differ. The memetic reading names the colon a
 SCHEME separator, because only `=` names a parameter. A URI's query follows the same law: `?stances=…&p=3`
 carries named parameters and `#/anchor` a fragment.
 
