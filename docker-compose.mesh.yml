@@ -7,7 +7,7 @@
 # THREE CLASSES stand here, and they differ by what they hold rather than by what they run:
 #
 #   lararium-a    operator A — the Nexus founder, three kahu faces                           :18090
-#   lararium-b    operator B — an independent root; contracts into A's Nexus, then the cabal :18093
+#   lararium-b    operator B — an independent root; contracts into A's Nexus, then the cabal :18094
 #   herm-source   composeHerm + LAR_SEED=alpha (announces a dial on its FLOW-map)            :18092
 #   herm-relay    composeHerm + carriage (LAR_PEERS=herm-source → pulls + re-serves)         :18091
 #   browser-a     a REAL Chromium vessel sharing A's namespace — floor, veiled, then admitted
@@ -35,9 +35,13 @@ x-herm: &herm
   # vessel: the peer is still standing. `restart: "no"` turned a transient loss permanent, so a harness
   # built to prove federation reported a dead node instead.
   #
-  # `on-failure:3` rides the race and still surfaces a real fault — a vessel that genuinely cannot boot
-  # fails three times and stays down, which reads differently from one that failed once and stood.
-  restart: "on-failure:3"
+  # The budget rides the race and still surfaces a real fault — a vessel that genuinely cannot boot
+  # exhausts it and stays down, which reads differently from one that failed once and stood.
+  #
+  # IT SCALES WITH THE MESH, not with the vessel. Three sufficed for four services; seven make a colder
+  # storm, and `lararium-b` and `herm-relay-2` both exhausted three on `@daemon … no peer carries it` —
+  # the very moment this policy exists to ride.
+  restart: "on-failure:8"
 
 services:
   # A FULL Lararium — composeLararium (substrate + daemon + wiki + pool).
@@ -50,7 +54,9 @@ services:
     environment:
       LAR_ROOT: "/lar-a"
       LAR_PORT: "8080"
-      LAR_PEERS: "http://herm-source:8080"       # the hearth ALSO carries: bootstraps from a Herm, then navigates
+      # A SCENARIO DECIDES WHETHER AN OPERATOR CARRIES. Blank stands a sovereign hearth alone —
+      # `peers` filters empty away, so a lone vessel is a supported shape rather than a broken one.
+      LAR_PEERS: "${LAR_A_PEERS-http://herm-source:8080}"
       LAR_PUBLIC_URL: "http://lararium-a:8080"
       LAR_STAND_FACE: "alpha"                    # a FULL Lararium stands as a hearth — a face lifts it off the floor
     entrypoint: ["sh", "tools/lararium-container-boot.sh"]
@@ -65,7 +71,7 @@ services:
     #
     # `on-failure:3` rides the race and still surfaces a real fault — a vessel that genuinely cannot boot
     # fails three times and stays down, which reads differently from one that failed once and stood.
-    restart: "on-failure:3"
+    restart: "on-failure:8"
 
   # OPERATOR B — a second, independent hearth. Its own root, its own keys, its own vault: A holds no
   # seed of B's, so every handshake between them crosses a real custody boundary rather than reading
@@ -79,15 +85,15 @@ services:
     environment:
       LAR_ROOT: "/lar-b"
       LAR_PORT: "8080"
-      LAR_PEERS: "http://herm-source:8080"
+      LAR_PEERS: "${LAR_B_PEERS-http://herm-source:8080}"
       LAR_PUBLIC_URL: "http://lararium-b:8080"
       LAR_STAND_FACE: "beta"
     entrypoint: ["sh", "tools/lararium-container-boot.sh"]
     networks: [mesh]
     ports:
-      - "18093:8080"
+      - "18094:8080"
     depends_on: [herm-source]
-    restart: "on-failure:3"
+    restart: "on-failure:8"
 
   # ── BROWSER VESSELS ─────────────────────────────────────────────────────────────────────────────
   # THE THIRD CLASS, and it needs a real engine. A browser vessel mints through `crypto.subtle`, which
