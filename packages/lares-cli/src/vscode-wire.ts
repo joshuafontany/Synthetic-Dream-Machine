@@ -55,18 +55,31 @@ function variantRoots(home: string): Array<{ name: string; dir: string }> {
 }
 
 /**
- * The user-scoped boot pointer, one per present variant.
+ * The user-scoped boot pointer.
  *
- * A workspace reads `.github/copilot-instructions.md` and that file ships with the repo. A USER
- * carries their own instructions in the profile's `prompts/` folder, as `*.instructions.md` with an
- * `applyTo` glob — so a window opened on any other folder still wakes into the house.
+ * VS Code reads user instructions from HARNESS-AGNOSTIC homes, not from the profile. Its own source
+ * table names them: `~/.copilot/instructions` as `copilot-personal` and `~/.claude/rules`, both at
+ * `storage:"user"` — so ONE pair of files seats every variant at once, stable and Insiders, remote
+ * server and local profile alike. The profile's `prompts` folder held user instructions in an earlier
+ * scheme and no longer does; a pointer written there is inert and reports success.
  *
- * <<~ confidence 12/20 >> The prompts-folder mechanism is version-gated behind `chat.promptFiles`,
- * and a variant that does not read it simply carries an inert file. The cost of being wrong here is a
- * few hundred bytes; the cost of skipping it is a window that wakes with no house and says nothing.
+ * The two homes spell their glob differently — `~/.copilot/instructions` takes `applyTo`, the Claude
+ * rules folder takes `paths` — so each gets its own rendering, and `**` means every file in both.
  */
-const promptPointer = (target: string): string =>
-  `---\napplyTo: '**'\n---\n\n-> [noosphere-boot.mem](${target})\n`;
+const INSTRUCTION_HOMES: ReadonlyArray<{ name: string; rel: string; file: string; render: (t: string) => string }> = [
+  {
+    name: "copilot-personal",
+    rel: ".copilot/instructions",
+    file: "lares-boot.instructions.md",
+    render: (t) => `---\napplyTo: '**'\n---\n\n-> [noosphere-boot.mem](${t})\n`,
+  },
+  {
+    name: "claude-rules",
+    rel: ".claude/rules",
+    file: "lares-boot.md",
+    render: (t) => `---\npaths: ['**']\n---\n\n-> [noosphere-boot.mem](${t})\n`,
+  },
+];
 
 /** Register the LARES MCP seat into every PRESENT VS Code variant's mcp.json, reaping a stale
  *  mempalace entry in the same pass. Idempotent. */
@@ -80,21 +93,24 @@ export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
     return { changed: false, steps: [{ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares vessel stand --init`" }] };
   }
 
+  // The boot pointer — two homes, read by every variant.
+  const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
+  if (!existsSync(carrierAbs)) {
+    steps.push({ item: "boot pointer", action: "missing-script", detail: `${carrierAbs} not found — the pointer would aim at nothing` });
+  } else {
+    for (const h of INSTRUCTION_HOMES) {
+      const step = tendBootPointer(join(home, h.rel, h.file), carrierAbs, h.render, `${h.name}: boot pointer`);
+      steps.push(step);
+      if (step.action === "wired") changed = true;
+    }
+  }
+
   let found = 0;
   for (const v of variantRoots(home)) {
     if (!existsSync(v.dir)) continue; // sweep only variants the user actually has
     found += 1;
 
-    // The boot pointer, per variant — the operator runs stable AND Insiders.
-    const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
-    if (existsSync(carrierAbs)) {
-      const step = tendBootPointer(
-        join(v.dir, "prompts", "lares-boot.instructions.md"),
-        carrierAbs, promptPointer, `${v.name}: boot pointer`,
-      );
-      steps.push(step);
-      if (step.action === "wired") changed = true;
-    }
+
     const mcpPath = join(v.dir, "mcp.json");
     let cfg: McpFile = {};
     if (existsSync(mcpPath)) {
