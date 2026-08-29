@@ -11,7 +11,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync, readFileSync, existsSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { wireCodexHome } from "../src/codex-wire.js";
-import { tendBootPointer, asInclude, asLink } from "../src/boot-pointer.js";
+import { tendBootPointer, asInclude, asLink, tendRepoAdapters, BOOT_CARRIER } from "../src/boot-pointer.js";
 
 const CARRIER = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
 let home: string;
@@ -73,5 +73,44 @@ describe("boot-pointer — one law, three spellings", () => {
     expect(s.action).toBe("wired");
     expect(existsSync(deep)).toBe(true);
     rmSync(dir, { recursive: true, force: true });
+  });
+});
+
+describe("boot-pointer — a re-aim keeps everything that is not the pointer", () => {
+  let dir: string;
+  beforeEach(() => { dir = mkdtempSync(join(tmpdir(), "reaim-")); });
+  afterEach(() => { rmSync(dir, { recursive: true, force: true }); });
+
+  // The hazard: these files carry operator prose, and a whole-file rewrite would take it.
+  it("swaps the seed line and leaves the operator's own prose standing", () => {
+    const f = join(dir, "CLAUDE.md");
+    writeFileSync(f, "@/gone/noosphere-boot.md\n\n## My notes\n\n- never lose this line\n");
+    const s = tendBootPointer(f, "/abs/carrier.mem", asInclude, "CLAUDE.md");
+    expect(s.action).toBe("wired");
+    const after = readFileSync(f, "utf8");
+    expect(after).toContain("@/abs/carrier.mem");
+    expect(after).toContain("- never lose this line");
+    expect(after).not.toContain("/gone/");
+    expect(readFileSync(f + ".bak", "utf8")).toContain("/gone/");
+  });
+
+  it("heads a file that names no seed at all, so the pointer is read before the prose it governs", () => {
+    const f = join(dir, "AGENTS.md");
+    writeFileSync(f, "## Adapter Surface\n\n- thin\n");
+    tendBootPointer(f, "/abs/carrier.mem", asLink("-> "), "AGENTS.md");
+    const lines = readFileSync(f, "utf8").split("\n");
+    expect(lines[0]).toBe("-> [noosphere-boot.mem](/abs/carrier.mem)");
+    expect(readFileSync(f, "utf8")).toContain("## Adapter Surface");
+  });
+});
+
+describe("boot-pointer — the repo's own adapters", () => {
+  it("aims all four at the carrier, repo-relative so every clone reads", () => {
+    const steps = tendRepoAdapters(process.cwd().replace(/packages.*$/, ""));
+    expect(steps.map((s) => s.item)).toEqual(
+      ["CLAUDE.md", "AGENTS.md", "copilot-instructions.md", ".github/copilot-instructions.md"],
+    );
+    expect(steps.every((s) => s.action === "present")).toBe(true);
+    expect(BOOT_CARRIER.startsWith("bags/")).toBe(true);
   });
 });

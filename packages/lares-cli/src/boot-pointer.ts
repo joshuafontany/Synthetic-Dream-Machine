@@ -21,7 +21,7 @@
  * Copilot follow a markdown link — so the RENDERING is per-harness and the LAW is not.
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, join } from "node:path";
 import type { WireAction } from "./mcp-resolve.js";
 
 /** The carrier every pointer names, repo-relative. */
@@ -50,14 +50,32 @@ export function tendBootPointer(
   if (standing !== null && standing.includes(target)) {
     return { item, action: "present", detail: `${file} -> ${BOOT_CARRIER}` };
   }
-  if (standing !== null) copyFileSync(file, file + ".bak");
   mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, render(target), "utf8");
-  return {
-    item,
-    action: "wired",
-    detail: `${file} ${standing === null ? "seated" : "re-aimed"} -> ${BOOT_CARRIER}`,
-  };
+  if (standing === null) {
+    writeFileSync(file, render(target), "utf8");
+    return { item, action: "wired", detail: `${file} seated -> ${BOOT_CARRIER}` };
+  }
+  // A STANDING FILE KEEPS EVERYTHING THAT IS NOT THE POINTER. These files carry operator prose —
+  // an adapter surface, personal instructions — and a re-aim that rewrote the file whole would take
+  // that with it. The line naming the seed is the only line this law owns.
+  copyFileSync(file, file + ".bak");
+  writeFileSync(file, reaim(standing, render(target)), "utf8");
+  return { item, action: "wired", detail: `${file} re-aimed -> ${BOOT_CARRIER}` };
+}
+
+/**
+ * Swap the line that names the seed, and leave the rest of the file standing.
+ *
+ * A file with no such line gets the pointer at its head, because a pointer read after the prose it
+ * governs has already missed its turn — the harness loads top-down.
+ */
+function reaim(standing: string, pointer: string): string {
+  const line = pointer.replace(/\n+$/, "");
+  const lines = standing.split("\n");
+  const at = lines.findIndex((l) => l.includes("noosphere-boot"));
+  if (at === -1) return line + "\n\n" + standing.replace(/^\n+/, "");
+  lines[at] = line;
+  return lines.join("\n");
 }
 
 /** Claude expands `@path` as an include, so its pointer IS the include line. */
@@ -66,3 +84,28 @@ export const asInclude = (t: string): string => `@${t}\n`;
 /** Codex and Copilot follow a markdown link; the lead-in reads as the instruction it is. */
 export const asLink = (lead: string) => (t: string): string =>
   `${lead}[noosphere-boot.mem](${t})\n`;
+
+/**
+ * The repo's own adapters — the files a harness reads when it opens THIS folder.
+ *
+ * VS Code names them in its own source table (`CLAUDE.md`, `AGENTS.md`, `copilot-instructions.md`),
+ * and the Claude, Codex and Copilot CLIs each read their own. They sat correct and UNTENDED: nothing
+ * re-aimed them when the carrier moved, which is the state all four harness homes were found in.
+ *
+ * The pointer here reads REPO-RELATIVE. An absolute path would break for every other clone of this
+ * repository, and these files travel with it.
+ */
+const ADAPTERS: ReadonlyArray<{ file: string; render: (t: string) => string }> = [
+  { file: "CLAUDE.md", render: (t) => `@${t}\n\n## Claude Adapter Surface\n\n- Keep this file thin.\n- Add only Claude-specific customizations here.\n` },
+  { file: "AGENTS.md", render: (t) => `-> [noosphere-boot.mem](${t})\n\n## Codex Adapter Surface\n\n- Keep this file thin.\n- Add only Codex-specific customizations here.\n` },
+  { file: "copilot-instructions.md", render: (t) => `-> [noosphere-boot.mem](${t})\n\n## Copilot Adapter Surface\n\n- Keep this file thin.\n- Add only Copilot-specific customizations here.\n` },
+  { file: ".github/copilot-instructions.md", render: (t) => `Always load -> [noosphere-boot.mem](${t})\n` },
+];
+
+/** Aim every repo adapter at the carrier, creating any that do not stand. */
+export function tendRepoAdapters(root: string): BootPointerStep[] {
+  if (!existsSync(join(root, BOOT_CARRIER))) {
+    return [{ item: "repo adapters", action: "missing-script", detail: `${BOOT_CARRIER} not found — the pointers would aim at nothing` }];
+  }
+  return ADAPTERS.map((a) => tendBootPointer(join(root, a.file), BOOT_CARRIER, a.render, a.file));
+}

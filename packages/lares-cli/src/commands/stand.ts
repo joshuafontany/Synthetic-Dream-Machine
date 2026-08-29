@@ -32,6 +32,7 @@ import { checkMempalaceIntegration } from "../integration-check.js";
 import { foundIfAbsent, type FoundStep } from "../standup.js";
 import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
 import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
+import { tendRepoAdapters, type BootPointerStep } from "../boot-pointer.js";
 import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
 import { wireVscode, type VscodeWireResult } from "../vscode-wire.js";
 import type { ParsedArgs } from "../parse-args.js";
@@ -143,6 +144,11 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
     try { claude = await wireClaudeHome(); }
     catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
   }
+  // The repo's own adapters ride the same law as the harness homes — created when absent, re-aimed
+  // when they name anything else. Nothing tended them before, which is how three homes went stale.
+  let adapters: BootPointerStep[] | undefined;
+  if (initAll) adapters = tendRepoAdapters(repoRoot);
+
   let codex: CodexWireResult | undefined;
   if (initAll || (!observeOnly && args.flags["codex"])) {
     try { codex = wireCodexHome(); }
@@ -337,6 +343,7 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
       ...(foundingHint !== undefined ? { foundingHint } : {}),
       ...(claude !== undefined ? { claude } : {}),
       ...(codex !== undefined ? { codex } : {}),
+      ...(adapters !== undefined ? { adapters } : {}),
       ...(copilot !== undefined ? { copilot } : {}),
       ...(vscode !== undefined ? { vscode } : {}),
       root,
@@ -370,6 +377,10 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
       if (claude !== undefined) {
         console.log(`  claude (--claude): ${claude.changed ? "wired" : "already wired"}${claude.backedUp ? " (settings.json backed up)" : ""}`);
         for (const s of claude.steps) console.log(`    ${s.action.padEnd(8)} ${s.item}: ${s.detail}`);
+      }
+      if (adapters !== undefined) {
+        console.log("  repo adapters:");
+        for (const a of adapters) console.log(`    ${a.action.padEnd(8)} ${a.item}: ${a.detail}`);
       }
       if (codex !== undefined) {
         console.log(`  codex (--codex): ${codex.changed ? "wired" : "already wired / nothing to do"}`);
