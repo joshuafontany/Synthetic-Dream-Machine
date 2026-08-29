@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/tw5/continuity >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/tw5/continuity >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/continuity.mem"
@@ -85,4 +85,4 @@ This child meme keeps the cold-hydration contract small.
 
 <<^ code="&#x0003;" >>ni:///sha-256;9ewIypNrbFGg-Juwys12FGgAldhMaNCHvypHoY9r4n0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

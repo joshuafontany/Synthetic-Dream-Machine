@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/worker-message-protocol >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/worker-message-protocol >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/worker-message-protocol.mem"
@@ -116,4 +116,4 @@ These three types cover the full P.3 boundary surface. Lock them before shipping
 
 <<^ code="&#x0003;" >>ni:///sha-256;-HNKMqEgXweS6gwMfPiKmDPoUkIR8Uk9hQItrPD-C5g
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

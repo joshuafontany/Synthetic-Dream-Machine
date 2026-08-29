@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/ahu >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/ahu >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/ahu.mem"
@@ -119,4 +119,4 @@ slot = 1
 
 <<^ code="&#x0003;" >>ni:///sha-256;b_cwk-NkKnmnuz2n-ZoZqlepx3vzAojD4GrcTWS9ocs
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

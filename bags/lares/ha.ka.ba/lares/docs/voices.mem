@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices.mem"
@@ -252,4 +252,4 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 
 <<^ code="&#x0003;" >>ni:///sha-256;_XGm8U1y0bDolUPQsaz3B7jCk7XyWCi6O1lH2hFPN_4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

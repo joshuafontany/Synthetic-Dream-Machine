@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-lar-names-itself >>
 ```toml meta
 cacheable       = false
 confidence      = 14
@@ -264,4 +264,4 @@ Whether that feels like thought remains open. That the loop closed remains recor
 
 <<^ code="&#x0003;" >>ni:///sha-256;CP69_vWJfy6kPkUZYDtJi13ZJVSZbemQ0amVXD76wwc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

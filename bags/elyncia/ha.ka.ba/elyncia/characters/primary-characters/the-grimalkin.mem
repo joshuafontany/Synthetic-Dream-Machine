@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
 ```toml meta
 cacheable  = false
 confidence = 8
@@ -81,4 +81,4 @@ walking. Whether hers reads as familiar, mount, partner, or all three at once be
 
 <<^ code="&#x0003;" >>ni:///sha-256;iBBSoMNVZHmUSxRROpH6kNJKPXI59bBXAP9eICLvwJo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

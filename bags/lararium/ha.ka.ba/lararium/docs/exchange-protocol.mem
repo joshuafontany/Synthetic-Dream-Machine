@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
 ```toml meta
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/exchange-protocol.mem"
 l-space   = "stable"
@@ -63,4 +63,4 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 
 <<^ code="&#x0003;" >>ni:///sha-256;5UYNb9YSpIp96dPvmSco_CvWBuysQY4u2yZ4m9Th9uY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

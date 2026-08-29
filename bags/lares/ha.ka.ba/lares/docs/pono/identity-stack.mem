@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/identity-stack >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/identity-stack >>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/docs/pono/identity-stack.mem"
@@ -109,4 +109,4 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 
 <<^ code="&#x0003;" >>ni:///sha-256;botaoIodm_WPVLGOYHP-OFGljOkMNvdlUmLpsX8CdCE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

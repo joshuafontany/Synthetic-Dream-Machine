@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
 ```toml meta
 cacheable  = false
 confidence = 10
@@ -89,4 +89,4 @@ stays a table question.
 
 <<^ code="&#x0003;" >>ni:///sha-256;BAYrk29HU4MHb-2KS_7yUocRzwEQJS7mjzS4ck60frM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

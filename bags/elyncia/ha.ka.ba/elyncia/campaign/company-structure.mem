@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/company-structure >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -242,4 +242,4 @@ The intended play pattern: ''the company can do more than a normal small party, 
 
 <<^ code="&#x0003;" >>ni:///sha-256;tP-kbrqPIPS_EiTg06YD1gc6l9674mzYeJQ7p_M7T_8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

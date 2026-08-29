@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/implementors >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/implementors >>
 ```toml meta
 body-sha256   = "281fba79de184bd211bec73fddb08dafad85527b4c64bd91ca70824b64fd1577"
 cacheable     = true
@@ -47,4 +47,4 @@ Exported symbols: `registerImplementors`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;9IlmD10LqpJeEJgd_QYr9hnebGpQ508Heae_ID_Wugg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

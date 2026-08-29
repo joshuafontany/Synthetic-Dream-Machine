@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/widgets/papalohe >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/papalohe >>
 ```toml meta
 body-sha256   = "2519de34cc3e6cfbf78423bda0389369f1e4d504f194a4c04934f87dda56f6a1"
 cacheable     = true
@@ -41,4 +41,4 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/papalohe"
 
 <<^ code="&#x0003;" >>ni:///sha-256;Ljwg3X-jlO4dpZ8WrRtPPGIK8VYw1ZCQykKTh1UzJmw
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/story >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/story >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/story.mem"
@@ -58,4 +58,4 @@ Use this branch for:
 
 <<^ code="&#x0003;" >>ni:///sha-256;Kh0l3za0LbYUQo6PrgYYsvv1v_Uae8iWsyogEobF0K0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

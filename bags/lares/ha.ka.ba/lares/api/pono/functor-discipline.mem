@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/functor-discipline >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/functor-discipline >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/functor-discipline.mem"
@@ -361,4 +361,4 @@ This meme draws the one arrow through all of them — ''the house is a functor; 
 
 <<^ code="&#x0003;" >>ni:///sha-256;LXbEQgbQcl_Pknkam1AwY_9v3AojI-ObEjx_Tqz9tPk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

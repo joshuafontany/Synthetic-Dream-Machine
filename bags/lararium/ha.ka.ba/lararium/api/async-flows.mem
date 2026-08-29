@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/async-flows >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/async-flows >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/async-flows.mem"
@@ -178,4 +178,4 @@ write toward, not a description of current emission.
 
 <<^ code="&#x0003;" >>ni:///sha-256;EgBRaMdJdpRDaK3TWDdIVeZFy-tai7hnFbuJk43bfvc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

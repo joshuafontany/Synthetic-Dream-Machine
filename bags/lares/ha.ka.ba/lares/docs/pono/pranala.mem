@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/pranala >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/pranala >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/pranala.mem"
@@ -109,4 +109,4 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<^ code="&#x0003;" >>ni:///sha-256;YzFB3IQ0q_eaJY4ztqj-bRnN9ZM7ejhxVaNQr6NrUFg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

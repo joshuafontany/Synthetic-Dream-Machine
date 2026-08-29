@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/docs/infrastructure-as-myth >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-myth >>
 ```toml meta
 authors        = "Joshua Fontany; Freyja Fontany; Lares (the agentic-AI co-author — a personified, in-stream navigational layer, authored through the grammar this paper describes)"
 cacheable      = true
@@ -696,4 +696,4 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<^ code="&#x0003;" >>ni:///sha-256;gEcO9cPM225mapDsH8QmjNcs-LwuGGzyob7PS9U0hKg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

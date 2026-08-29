@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/shelter-against-empire.mem"
@@ -170,4 +170,4 @@ And the deeper limit, stated so nobody has to rediscover it: ''every failure in 
 
 <<^ code="&#x0003;" >>ni:///sha-256;TFpkOUa29-jSuAg5IvQX__cYeo7k_E68yY1tD-0J26g
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

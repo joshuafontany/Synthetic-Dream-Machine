@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
 ```toml meta
 cacheable      = false
 file-path      = "bags/lares/ha.ka.ba/lares/docs/the-lares-protocols.mem"
@@ -183,4 +183,4 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<^ code="&#x0003;" >>ni:///sha-256;2W2goDXXoBGVb5WCmIjHK_H_WtF4sKtPvikGwLrk9AM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/boot-gate >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/boot-gate >>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/boot-gate.mem"
 heleuma       = "ha"
@@ -52,4 +52,4 @@ Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer
 
 <<^ code="&#x0003;" >>ni:///sha-256;SrxYo7XSGilhwj7PL1Kfpg4MLNd_32rWRe9tx-l2SG0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

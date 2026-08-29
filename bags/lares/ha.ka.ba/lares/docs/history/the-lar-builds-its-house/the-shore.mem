@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore >>
 ```toml meta
 cacheable     = false
 confidence    = 11
@@ -176,4 +176,4 @@ Act IV receives:
 
 <<^ code="&#x0003;" >>ni:///sha-256;LgGDF7J4xwklXPERevGO3hB2YilxNCvF8h8JP0TQQmg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

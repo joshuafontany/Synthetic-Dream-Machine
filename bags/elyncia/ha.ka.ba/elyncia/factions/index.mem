@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/index >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -89,4 +89,4 @@ Derived from the court-dragon alignment canon, never invented whole:
 
 <<^ code="&#x0003;" >>ni:///sha-256;g3qnbX7tK3IF2TjksQgFG8cwa7_rFHta2xLL2UKNRl8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

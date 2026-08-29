@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/residency-model >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/residency-model >>
 ```toml meta
 approved-on   = "2026-05-30"
 cacheable     = true
@@ -309,4 +309,4 @@ rhymes with this model's thermal residency yet stays distinct (retrieval grain, 
 
 <<^ code="&#x0003;" >>ni:///sha-256;yA0TjmzNyhjb6XbJljJqTckfw8nF0TEyH3R0J6q_qnY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

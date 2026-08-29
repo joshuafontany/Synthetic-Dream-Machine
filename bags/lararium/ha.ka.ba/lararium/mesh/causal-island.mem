@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/causal-island >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/causal-island >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/causal-island.mem"
@@ -138,4 +138,4 @@ Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorp
 
 <<^ code="&#x0003;" >>ni:///sha-256;dHcLko8ntlETlSPbHYG1VTVbjTKQk5U4u2HRvwS8Nlo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

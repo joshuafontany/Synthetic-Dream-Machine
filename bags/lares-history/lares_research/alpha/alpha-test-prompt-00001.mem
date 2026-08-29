@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///lares_research/alpha/alpha-test-prompt-00001 >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/alpha/alpha-test-prompt-00001 >>
 ```toml meta
 file-path = "bags/lares-history/lares_research/alpha/alpha-test-prompt-00001.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
@@ -215,4 +215,4 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<^ code="&#x0003;" >>ni:///sha-256;OnSAsAKCd_VBmv__h8NdhRNLkTkiWbpgwnq5rkf2d4U
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

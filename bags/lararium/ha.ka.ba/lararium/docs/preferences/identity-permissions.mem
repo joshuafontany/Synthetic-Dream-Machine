@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/identity-permissions.mem"
@@ -86,4 +86,4 @@ This shelf keeps the older bundle intact for now.
 
 <<^ code="&#x0003;" >>ni:///sha-256;h2hr6tD0NFGRJmDsaFqPKBDV1VWCA3LzSiK6UgjuZh4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

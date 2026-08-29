@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/save-path >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/save-path >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/save-path.mem"
@@ -154,4 +154,4 @@ No callbacks fire after `stop()`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;BNLjSMc6byOWDNliBTQsT4w6RNvJSukcDAXkzbHXxYc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

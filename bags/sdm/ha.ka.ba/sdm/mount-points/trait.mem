@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/mount-points/trait >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait >>
 ```toml meta
 cacheable = true
 caption   = "trait"
@@ -88,4 +88,4 @@ Past capacity, additional patterns become Burdens (−1 to all rolls each) or wa
 
 <<^ code="&#x0003;" >>ni:///sha-256;F0Ak-3tcMI7UNgTJbKwbAukOLGmvoY2FrA08n_01qM4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

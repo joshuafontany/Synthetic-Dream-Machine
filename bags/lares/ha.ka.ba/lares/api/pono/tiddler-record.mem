@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/tiddler-record >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/tiddler-record >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/tiddler-record.mem"
@@ -103,4 +103,4 @@ ahu-slot-children     = "independent records — not embedded in parent record"
 
 <<^ code="&#x0003;" >>ni:///sha-256;XbiH2aq59W8qqCEMXTvkfjvuCp6Xtdc8Kn65r6DYgO8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

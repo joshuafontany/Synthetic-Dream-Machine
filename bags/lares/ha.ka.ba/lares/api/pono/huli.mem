@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/huli >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/huli >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/huli.mem"
@@ -123,4 +123,4 @@ close-pattern = '<<~\/huli\s*>>'
 
 <<^ code="&#x0003;" >>ni:///sha-256;h8L6xn0HreIc1MCIInQ5AGSdrlUZ6uPX9naquxkBiJw
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

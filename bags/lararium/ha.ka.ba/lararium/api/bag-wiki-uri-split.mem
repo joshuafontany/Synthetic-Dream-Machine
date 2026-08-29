@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
 ```toml meta
 confidence   = 16
 content-type = "text/memetic-wikitext+tiddlywiki"
@@ -77,4 +77,4 @@ Two registries, cleanly separated:
 
 <<^ code="&#x0003;" >>ni:///sha-256;mwIrdvcUO9KC-w-AVkUpm1wahQ_m9NU7BqP2t6vP3YI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

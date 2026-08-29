@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/low-delos-mouth >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/low-delos-mouth >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -41,4 +41,4 @@ bottom · what the nineteen-minute cycle breathes FOR.
 
 <<^ code="&#x0003;" >>ni:///sha-256;tubb8MqVgCfwTIhxYrEyMH6_DRYN-Fc-iD3WD924cWI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

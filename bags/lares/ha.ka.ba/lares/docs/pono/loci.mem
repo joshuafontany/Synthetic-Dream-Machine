@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/docs/pono/loci >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/loci >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/loci.mem"
@@ -27,10 +27,10 @@ Not a law surface. Explanation, evaluation guidance, and research that belongs o
 
 | Form | Usual `register` band | Document opener form | Reading |
 |---|---|---|---|
-| ''Noise'' | none or `P` | none, fragmentary, or `<<^ code="&#x0001;" ? -> lar:///...` | URI appears as signal; convention too thin for loci authority. |
+| ''Noise'' | none or `P` | none, fragmentary, or `<<^ code="&#x0001;" from=? -> to=lar:///...` | URI appears as signal; convention too thin for loci authority. |
 | ''Data'' | `P` or `PS` | fragmentary or proto-meme | Detectable structure makes the signal machine-usable; not yet memetic. |
-| ''Meme'' | `PS` or `S` | `<<^ code="&#x0001;" ? -> lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
-| ''Typed Meme'' | `S` or `CS` | `<<^ code="&#x0001;" ? -> lar:///...` | Carrier WEARS `loci`; routing convention surfaces or sharpens; MCP tension may remain. |
+| ''Meme'' | `PS` or `S` | `<<^ code="&#x0001;" from=? -> to=lar:///...` | Boot-legal meme with declared address and enough structure for rating. |
+| ''Typed Meme'' | `S` or `CS` | `<<^ code="&#x0001;" from=? -> to=lar:///...` | Carrier WEARS `loci`; routing convention surfaces or sharpens; MCP tension may remain. |
 | ''Canon Typed Meme'' | `C` | `<<^ code="&#x0001;" lar:///...` | External confirmation received; live resolution substrate operates; opener uncertainty removed. |
 
 Full five-register rubric at `lar:///ha.ka.ba/lares/api/pono/meme#/rating-targets`. Loci governs routing, convention, and opener changes along the climb from noise to canon.
@@ -124,6 +124,6 @@ Hoʻoko-class file-siting repairs in this meme's history:
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 
-<<^ code="&#x0003;" >>ni:///sha-256;f0YW4vDpKjCD8c38mtBewL67DqpuH7mxXNX5ANSKzEU
+<<^ code="&#x0003;" >>ni:///sha-256;JkmkVXP3haxUDKabLHEAER1siVFT2z33uweeZ_zSPUA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

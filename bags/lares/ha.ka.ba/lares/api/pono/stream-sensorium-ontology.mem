@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⚷" ? -> lar:///ha.ka.ba/lares/api/pono/stream-sensorium-ontology >>
+<<^ code="&#x0001;" namespace="⚷" from=? -> to=lar:///ha.ka.ba/lares/api/pono/stream-sensorium-ontology >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/stream-sensorium-ontology.mem"
@@ -75,4 +75,4 @@ One recursion — ''ki &rarr; li &rarr; ki &rarr; li'' — repeating at every sc
 
 <<^ code="&#x0003;" >>ni:///sha-256;ik25lfIt4OgY0HM8O2obc5JHPdgYlwZVHOKlZWWn7vY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

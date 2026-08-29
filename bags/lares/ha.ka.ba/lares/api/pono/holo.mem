@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/holo >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/holo >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/holo.mem"
@@ -78,4 +78,4 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<^ code="&#x0003;" >>ni:///sha-256;XnyroM_5NAaE-CW7bbid88QgR-vAEvBI6oXpz-iW_3o
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

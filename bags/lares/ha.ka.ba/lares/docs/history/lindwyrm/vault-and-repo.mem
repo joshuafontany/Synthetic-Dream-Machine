@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo >>
 ```toml meta
 cacheable     = false
 confidence    = 13
@@ -205,4 +205,4 @@ Act II receives:
 
 <<^ code="&#x0003;" >>ni:///sha-256;PJa7x2KVN5RJKo_hpaKnGolSXjMNUI9eylh-Nw423qE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

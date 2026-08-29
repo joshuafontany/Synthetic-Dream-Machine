@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE >>
 ```toml meta
 type = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE"
@@ -820,4 +820,4 @@ lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:6&p=
 
 <<^ code="&#x0003;" >>ni:///sha-256;GNbh3DfzyPlU3KbM34IKCYzyEgHVJm_heIIEDbTA9g4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

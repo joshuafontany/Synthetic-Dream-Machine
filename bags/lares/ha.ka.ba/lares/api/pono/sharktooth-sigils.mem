@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/sharktooth-sigils.mem"
@@ -49,4 +49,4 @@ discovered sigil set.
 
 <<^ code="&#x0003;" >>ni:///sha-256;UQmX7cI22vpha0UnupXfw7IK9DMKFLbD9b6daWu-AS0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/disk-projection >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/disk-projection >>
 ```toml meta
 approved-on   = "2026-06-02"
 cacheable     = true
@@ -206,4 +206,4 @@ between casual chat-use and the defined parser core.
 
 <<^ code="&#x0003;" >>ni:///sha-256;VnSg4FK9HuF1Dg5uQvr_1BANNuiSzgfVZ6I3lVYPA0g
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

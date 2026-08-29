@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/braided-islands >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/braided-islands >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -103,4 +103,4 @@ without a loom.
 
 <<^ code="&#x0003;" >>ni:///sha-256;OitTmstGFTrS2udrT0-g7pAxB6i9o7qyhbOZ96C98K8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

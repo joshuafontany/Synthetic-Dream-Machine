@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/the-veil-ladder.mem"
@@ -144,4 +144,4 @@ For the citizen with ''no quorum yet'', the floor is a ''standalone recorded cod
 
 <<^ code="&#x0003;" >>ni:///sha-256;C_2u48EDudhMS5XgmeHptyCM63CWyd8FMo9gcHXArlM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

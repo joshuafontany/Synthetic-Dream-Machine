@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/what-a-nexus-wants.mem"
@@ -63,4 +63,4 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 <<^ code="&#x0003;" >>ni:///sha-256;zpw3zbqI-UiStJ5smTWqNty7h9h_Q62HwccL3sfREaU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

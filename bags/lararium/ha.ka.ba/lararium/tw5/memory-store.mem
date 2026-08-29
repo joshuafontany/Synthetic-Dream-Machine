@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/memory-store >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/memory-store >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/memory-store.mem"
@@ -142,4 +142,4 @@ same change record any AutomergeDocStore would emit.
 
 <<^ code="&#x0003;" >>ni:///sha-256;aKGAoyuRHht53eu3r0ptsmxEhdPMY66QLNreuY67qLI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

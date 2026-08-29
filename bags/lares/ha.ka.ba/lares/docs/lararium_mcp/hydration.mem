@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/hydration.mem"
 l-space         = "stable"
@@ -172,4 +172,4 @@ Minimal boot should remain small enough to avoid compaction.
 
 <<^ code="&#x0003;" >>ni:///sha-256;WgVffV47QUattH42vH7ohP4LDpMOmWdga3nxK-QvalA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/library/mark-twain >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/library/mark-twain >>
 ```toml meta
 bytes      = 16715743
 collection = "mark-twain"
@@ -34,4 +34,4 @@ Reference this collection as `library:mark-twain` — a name that travels, never
 
 <<^ code="&#x0003;" >>ni:///sha-256;vZfg2flCFsvG--oizAlAcsjKGqSWwFnK6cARt2IiKLo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

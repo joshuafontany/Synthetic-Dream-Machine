@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint.mem"
@@ -125,4 +125,4 @@ Do not guess. Measure and document.
 
 <<^ code="&#x0003;" >>ni:///sha-256;JurkUcP453EL0e3zRkPM2TpSCrHG6LOiyAvJ3CevYN4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

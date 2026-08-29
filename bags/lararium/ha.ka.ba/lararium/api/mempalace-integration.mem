@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/mempalace-integration >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/mempalace-integration.mem"
@@ -138,4 +138,4 @@ lares harvest --all                                      # sweep every transcrip
 
 <<^ code="&#x0003;" >>ni:///sha-256;TTROiK_mUk1Sc6pko5pCqMaDJ6cUGShJ_qgFzcgwHaU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

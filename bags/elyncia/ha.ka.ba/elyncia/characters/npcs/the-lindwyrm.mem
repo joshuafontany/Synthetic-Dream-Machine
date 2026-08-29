@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -88,4 +88,4 @@ only as much as suits her.''
 
 <<^ code="&#x0003;" >>ni:///sha-256;hqax2H1CtxnsI86IqTBFcp9FqIt01roPZcJEIBH_r6s
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

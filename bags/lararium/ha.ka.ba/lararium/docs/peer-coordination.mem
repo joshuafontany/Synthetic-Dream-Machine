@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/peer-coordination >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/peer-coordination >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/peer-coordination.mem"
@@ -206,4 +206,4 @@ island definition bundle to new nodes.
 
 <<^ code="&#x0003;" >>ni:///sha-256;LQJ-rmVki1x83VqcdsGZIH-xSyTMzdSNzzmEyqS9lCA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

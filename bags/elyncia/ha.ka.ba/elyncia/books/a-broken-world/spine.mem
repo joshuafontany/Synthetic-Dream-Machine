@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/a-broken-world/spine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/a-broken-world/spine >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -70,4 +70,4 @@ comes only after all source text reads as moved.)//
 
 <<^ code="&#x0003;" >>ni:///sha-256;Ba-Ol3IoNluCnqczBd1m2QXPYiux7DPO9cgNjVcVpRo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

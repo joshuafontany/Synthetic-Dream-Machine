@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -294,4 +294,4 @@ The strandbeest legs lock into aggressive posture — stabbing, sweeping, and tr
 
 <<^ code="&#x0003;" >>ni:///sha-256;C3ADN5QOEOPwnGhMplCtzVAnwRcoJPRO4PetyV1aE7E
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

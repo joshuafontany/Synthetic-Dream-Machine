@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="◉" ? -> lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
+<<^ code="&#x0001;" namespace="◉" from=? -> to=lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/oracle-governance.mem"
@@ -206,4 +206,4 @@ it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-disco
 
 <<^ code="&#x0003;" >>ni:///sha-256;WfHMFHI_bRaG0pfLnUJnPVJEk3-8Lox5SKYE_gXBAKo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

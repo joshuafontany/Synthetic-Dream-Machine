@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/parser >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/parser >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/parser.mem"
@@ -198,7 +198,7 @@ The ''toml meta slot'' (`#meta`) carries the canonical identity payload for a me
 
 Canonical form:
 ````text
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/path/to/meme >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/path/to/meme >>
 ```toml meta
 uri-path  = "..."
 file-path = "..."
@@ -286,6 +286,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DEyq9EMVNtKc4u5NkQdQXlWrPz-1K4Xei6X7P0w94_A
+<<^ code="&#x0003;" >>ni:///sha-256;vcvuYgtods7t4ks1Zcah80qd-WD5kWF2tdZT0ebY-tE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

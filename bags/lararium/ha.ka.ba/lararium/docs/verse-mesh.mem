@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/verse-mesh >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/verse-mesh >>
 ```toml meta
 cacheable = true
 docs      = "lar:///ha.ka.ba/lararium/docs/verse-mesh"
@@ -261,4 +261,4 @@ The tick source changes; the drain contract does not.
 
 <<^ code="&#x0003;" >>ni:///sha-256;yoHCzeDhFKFgxbRrUPTbVpymOBG_JNAwTwf5R9_SmDw
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

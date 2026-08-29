@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/mu/the-four-tools.mem"
@@ -304,4 +304,4 @@ arcana   = "release"
 
 <<^ code="&#x0003;" >>ni:///sha-256;ib2ZLDvustkylg-AsIKL4Lp4Gl0fxvgI4YhGsnp961w
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/conformance >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/conformance >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/conformance.mem"
@@ -122,4 +122,4 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<^ code="&#x0003;" >>ni:///sha-256;OWRYz1ZgQpmX6Nh63idapkI9snpsYTBJvzUp89bJRTc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

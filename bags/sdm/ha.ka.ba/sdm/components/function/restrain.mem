@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/restrain >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/restrain >>
 ```toml meta
 cacheable = true
 caption   = "restrain"
@@ -74,4 +74,4 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<^ code="&#x0003;" >>ni:///sha-256;KmmFk8RIl7nRf_xpYe7XqGzW4edrKmPGmmjyGqVMqKQ
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

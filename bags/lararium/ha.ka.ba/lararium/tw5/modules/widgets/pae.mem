@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/pae >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/pae >>
 ```toml meta
 body-sha256   = "31c1258031922e15ce7d5ea2ba0336b074b728221e4c8708b30e3c1875bca392"
 cacheable     = true
@@ -47,4 +47,4 @@ Exported symbols: `PaeWidget`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;3RgAXColwJUyM0naW0CVEIy5L83Q_0sSXkJIIjx-dzM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

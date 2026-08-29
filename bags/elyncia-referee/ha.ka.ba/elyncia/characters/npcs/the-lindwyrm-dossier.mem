@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -104,4 +104,4 @@ dragon builds meshes. These live referee-side of even this bag — the operator'
 
 <<^ code="&#x0003;" >>ni:///sha-256;RG3434du6Bbbq4VE3Kvw3o_DJG23eL7249o-5v-6VKg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

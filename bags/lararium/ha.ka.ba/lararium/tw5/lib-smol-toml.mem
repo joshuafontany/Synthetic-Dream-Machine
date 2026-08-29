@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/lib-smol-toml >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/lib-smol-toml >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/lib-smol-toml.mem"
@@ -74,4 +74,4 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 <<^ code="&#x0003;" >>ni:///sha-256;W4uhq7dM1SW2LKpKAlZcZQSbHci8gj_Kpr3-eBIxyeU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

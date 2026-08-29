@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/sensorium-bed-manifests >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/sensorium-bed-manifests >>
 ```toml meta
 cacheable  = true
 l-space    = "lararium"
@@ -60,4 +60,4 @@ The register split rides as a ''hypothesis the harness itself tests'': liturgica
 
 <<^ code="&#x0003;" >>ni:///sha-256;wLrWRlWsmF6izd9SKM0wNEeKIEDCM5gEKCGKW35oqOY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

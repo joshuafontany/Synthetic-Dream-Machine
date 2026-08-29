@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/convergent-mesh.mem"
@@ -141,4 +141,4 @@ This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CR
 
 <<^ code="&#x0003;" >>ni:///sha-256;v1KNSEZiXbuzcRMpORHqJ7KU5tViw4omlgtXbzoWYJA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

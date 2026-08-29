@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/secure-context >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/secure-context >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/secure-context.mem"
@@ -209,4 +209,4 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 
 <<^ code="&#x0003;" >>ni:///sha-256;qCfTMaXQNJD3kmqzr3r9YPijQOeiDTYfMd4RmamGFjE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/memes >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/memes >>
 ```toml meta
 body-sha256   = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
 cacheable     = true
@@ -47,4 +47,4 @@ Exported symbols: `collectMemes`, `registerMemes`, `registerMemesSource`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;-W_dYtbSiwC4PFJHrCbmj4uZoxaJ2BC1QxtCr7kluds
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

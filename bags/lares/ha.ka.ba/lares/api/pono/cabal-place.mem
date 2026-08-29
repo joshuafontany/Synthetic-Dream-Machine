@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/cabal-place >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/cabal-place >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/cabal-place.mem"
@@ -45,4 +45,4 @@ So ''cabal-place'' released the word ''place'' back to the hearth, and the model
 
 <<^ code="&#x0003;" >>ni:///sha-256;pKIWB1CMqWr46Exy605_maKYALCxOAAzNxgZzRV0Yfg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/docs/relational-parameter >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/relational-parameter >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/relational-parameter.mem"
@@ -259,4 +259,4 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<^ code="&#x0003;" >>ni:///sha-256;VLH7Gl-wbkh8dxKFruLfQfmLcC5EZp6wWa9oohGd_M8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

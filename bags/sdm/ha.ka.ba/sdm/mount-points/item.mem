@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/mount-points/item >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/mount-points/item >>
 ```toml meta
 cacheable = true
 caption   = "item"
@@ -90,4 +90,4 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 <<^ code="&#x0003;" >>ni:///sha-256;pcpZDWf0TMpwvZC6l1YJP5JP1VAb_qSC4w8cCGRtQ1U
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

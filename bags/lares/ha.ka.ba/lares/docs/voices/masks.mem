@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/masks >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/masks >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices/masks.mem"
@@ -394,4 +394,4 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 
 <<^ code="&#x0003;" >>ni:///sha-256;A5mP9N14u0vjOueVE8jXbzBYu2dedjiEXX5rDWMY_-o
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

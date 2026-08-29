@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/posture/ritual >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/posture/ritual >>
 ```toml meta
 cacheable = true
 caption   = "ritual"
@@ -73,4 +73,4 @@ A posture, not a hook — it gates //how// a module is reached, akin to Sera's b
 
 <<^ code="&#x0003;" >>ni:///sha-256;KPQsociEPYZbvnN1KC_dWSdwLdzr5sOrH3dxhLi9e8s
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

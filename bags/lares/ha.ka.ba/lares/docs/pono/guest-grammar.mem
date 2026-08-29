@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/guest-grammar >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/guest-grammar >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/guest-grammar.mem"
@@ -97,4 +97,4 @@ The current shape keeps:
 
 <<^ code="&#x0003;" >>ni:///sha-256;v2OeimamMjm947MZfcT1a87q3OUPjlZ18rCHB-4_qGE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

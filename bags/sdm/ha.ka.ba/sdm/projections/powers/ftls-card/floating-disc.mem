@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc.mem"
@@ -60,4 +60,4 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<^ code="&#x0003;" >>ni:///sha-256;mFo4tSbYztE44K_EF1_A8dCaE0wd1ZByv5jK9ONdUP8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

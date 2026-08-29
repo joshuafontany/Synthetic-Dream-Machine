@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/projections/powers/ftls-card/read-magic.mem"
@@ -61,4 +61,4 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<^ code="&#x0003;" >>ni:///sha-256;YoNcSfcCb6H2D-0s6bi-6taDUH_5ss-ROTQRt3FfaB8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

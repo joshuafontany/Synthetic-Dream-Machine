@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/sigil-english-aliases >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-english-aliases >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/sigil-english-aliases.mem"
@@ -77,4 +77,4 @@ the canonical dispatch through the Hawaiian implementation.
 
 <<^ code="&#x0003;" >>ni:///sha-256;OEJnQAYtwjgL4kQgxI2pSJ0bgP7DeYrBf2GWMTolw10
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -94,4 +94,4 @@ your exits memorized.// Some information they hold stays locked — not by the f
 
 <<^ code="&#x0003;" >>ni:///sha-256;Udt1k58zFIGZQ1oMGK602t_qLciNxNCGzBzLQpcfocM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

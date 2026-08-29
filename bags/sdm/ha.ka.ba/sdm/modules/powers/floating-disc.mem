@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
 ```toml meta
 cacheable = true
 caption   = "Floating Disc"
@@ -91,4 +91,4 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 
 <<^ code="&#x0003;" >>ni:///sha-256;U3KvFlXZgEZY1LRJQu94nGMhFK8UIHBL2v07ua6ksEE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

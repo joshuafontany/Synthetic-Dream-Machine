@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/pattern-integrity >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/pattern-integrity >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/mu/pattern-integrity.mem"
@@ -224,4 +224,4 @@ Run this against any new code before merging:
 
 <<^ code="&#x0003;" >>ni:///sha-256;ADKIJXbOkmDYLbBAdeM9dfXUxWIdkTUjPFnzM7anzTM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

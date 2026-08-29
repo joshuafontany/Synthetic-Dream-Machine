@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/readiness-keys >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/readiness-keys >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/readiness-keys.mem"
@@ -99,4 +99,4 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<^ code="&#x0003;" >>ni:///sha-256;YJYolymviRVK0-yPXNOlUrMa14Dk5cEnsm_Z_-26dNE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

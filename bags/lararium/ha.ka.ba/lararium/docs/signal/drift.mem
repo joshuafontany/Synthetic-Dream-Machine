@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/drift >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/drift >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/drift.mem"
@@ -62,4 +62,4 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 <<^ code="&#x0003;" >>ni:///sha-256;LqveqV8X-5PsYY8wHk8FgEQ_yaN7IusQ0EGyc0BnD8w
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

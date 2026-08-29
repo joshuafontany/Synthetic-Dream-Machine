@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/chao >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/chao >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/mu/chao.mem"
@@ -157,4 +157,4 @@ A lar URI with all three slots aligned reads the address back at the Chao's rota
 
 <<^ code="&#x0003;" >>ni:///sha-256;qzlxfYobSnTW0cjTqFKjS9sv1NF1FtPK6qBMOEfnzvc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

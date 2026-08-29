@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml >>
 ```toml meta
 body-sha256   = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a022"
 cacheable     = true
@@ -47,4 +47,4 @@ Exported symbols: `TomlWidget`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;ZCcXomPxK8tnsbLS4g2JSxjm8MyaNA1yICt7NcemVu4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

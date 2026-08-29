@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/island-adaptor >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/island-adaptor >>
 ```toml meta
 cacheable = true
 docs      = "lar:///ha.ka.ba/lararium/docs/verse-mesh"
@@ -113,4 +113,4 @@ its seed state synchronously before `behavior.onEa` runs.
 
 <<^ code="&#x0003;" >>ni:///sha-256;OP6uGOj2Iv3ShXjYNgQm1gFmH-2KAPKcLYIybjr_yJY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

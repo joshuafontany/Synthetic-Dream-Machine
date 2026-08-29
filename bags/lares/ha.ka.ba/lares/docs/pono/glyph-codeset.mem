@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/glyph-codeset >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/glyph-codeset >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/glyph-codeset.mem"
@@ -332,4 +332,4 @@ Round-trip fidelity: Storage → Interchange → Storage MUST produce identical 
 
 <<^ code="&#x0003;" >>ni:///sha-256;nylrGyxYAPMFBKfZHBQUHoRdjhzzKc5uRT77c8tmIow
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

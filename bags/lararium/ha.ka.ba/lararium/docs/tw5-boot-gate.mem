@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/tw5-boot-gate >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-boot-gate >>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/tw5-boot-gate.mem"
 last-reviewed = "2026-07-18"
@@ -82,4 +82,4 @@ The distinction is the whole gate. ''Authority is what a carrier holds and who g
 
 <<^ code="&#x0003;" >>ni:///sha-256;DV6uQDSADRDDkPkVeu6H3K9P-uaLPvBMYGpWR1D9uWQ
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

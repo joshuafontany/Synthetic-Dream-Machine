@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
 ```toml meta
 cacheable = true
 caption   = "Porter's Pebble"
@@ -89,4 +89,4 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<^ code="&#x0003;" >>ni:///sha-256;weAfo22eIeOc8As6zNRMR9mOSzwVaj6w311Vhs4Y2v8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

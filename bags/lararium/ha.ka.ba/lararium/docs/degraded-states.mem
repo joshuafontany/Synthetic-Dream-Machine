@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/degraded-states >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/degraded-states >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/degraded-states.mem"
@@ -214,4 +214,4 @@ The operator naming a degraded state constitutes correction input, not accusatio
 
 <<^ code="&#x0003;" >>ni:///sha-256;BAVqnd0CsTgNB867847xO5EewVPQH3OI-aqe7r2RLKI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

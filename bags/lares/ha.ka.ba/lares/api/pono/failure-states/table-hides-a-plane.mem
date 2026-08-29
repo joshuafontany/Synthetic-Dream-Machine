@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane.mem"
@@ -74,4 +74,4 @@ If the entities share a plane but differ in degree, that reads as an ordinary ta
 
 <<^ code="&#x0003;" >>ni:///sha-256;cKz04u--6RMnnUcNtLIdpXe0YG4amDksebHWz8bDQ0E
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

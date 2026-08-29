@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/agent-worldline >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/agent-worldline >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/agent-worldline.mem"
@@ -441,4 +441,4 @@ attribute to the spirit that moved them.
 
 <<^ code="&#x0003;" >>ni:///sha-256;hObk7Dd6F6NkEyxcOc7OJmutC4tAqKxbDFuKRH9fqXE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

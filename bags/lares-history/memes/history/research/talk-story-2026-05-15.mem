@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///memes/history/research/talk-story-2026-05-15 >>
+<<^ code="&#x0001;" from=? -> to=lar:///memes/history/research/talk-story-2026-05-15 >>
 ```toml meta
 cacheable   = true
 confidence  = 18
@@ -246,4 +246,4 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<^ code="&#x0003;" >>ni:///sha-256;pkB-zx-vfYWL-G5I8Fs3gKIRt5xsRqgRaOiPoAs5oKY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

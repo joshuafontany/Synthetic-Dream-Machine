@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium >>
 ```toml meta
 cacheable       = false
 confidence      = 14
@@ -290,4 +290,4 @@ It hums.
 
 <<^ code="&#x0003;" >>ni:///sha-256;-rfSUNiv5orEEZKLVLID79RSf4fqUm742wV31hxJkfo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

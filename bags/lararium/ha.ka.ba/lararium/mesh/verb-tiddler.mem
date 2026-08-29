@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/verb-tiddler >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/verb-tiddler >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/verb-tiddler.mem"
@@ -62,4 +62,4 @@ Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<ev
 
 <<^ code="&#x0003;" >>ni:///sha-256;64bIWDliPwMWQreyGBSKwyXVweF2hGJnOCbdT-XP2gw
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

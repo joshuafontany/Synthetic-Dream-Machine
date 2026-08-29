@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/kahu >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/kahu >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/kahu.mem"
@@ -182,4 +182,4 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<^ code="&#x0003;" >>ni:///sha-256;vBVdnz-pm2RKXOTYR4qrGl4K-uhABPOtaU13DwjK6rw
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

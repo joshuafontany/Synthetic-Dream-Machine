@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/alignment-layer.mem"
@@ -240,4 +240,4 @@ right — to decide whose presence the hearth refuses.
 
 <<^ code="&#x0003;" >>ni:///sha-256;_e1StBLNBTxMb53mXQ5fepnT-fdeat6ONWNUecArBLE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

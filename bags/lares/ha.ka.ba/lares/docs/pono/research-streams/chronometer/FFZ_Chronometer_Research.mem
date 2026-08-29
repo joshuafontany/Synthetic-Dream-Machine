@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research >>
 ```toml meta
 type = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research"
@@ -1245,4 +1245,4 @@ lar:///research.active.grows/chronometer/?stances=^.^.?.^.-&confidence=S:13&p=10
 
 <<^ code="&#x0003;" >>ni:///sha-256;kl7P9_Kjs1Gawi0BcdvPzlgy4i2FjEX-NW-VMFfrask
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

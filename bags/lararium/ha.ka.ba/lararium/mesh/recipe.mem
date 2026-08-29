@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/recipe >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/recipe >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/recipe.mem"
@@ -81,4 +81,4 @@ class, where the alert stays the permanent mechanism.
 
 <<^ code="&#x0003;" >>ni:///sha-256;Vx59cFpBhbrf-p-f087F041jzwHTCkZgzntEfaQYy84
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

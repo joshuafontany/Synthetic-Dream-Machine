@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -330,4 +330,4 @@ See ''Powered Symbiote'' (1 st).
 
 <<^ code="&#x0003;" >>ni:///sha-256;XkRwO_IQti1y9AFyGG8ydiSlffClu6J3Vv1hCJdtV8Y
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

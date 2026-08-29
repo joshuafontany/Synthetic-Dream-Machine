@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/witness/powers/osr-spells.mem"
@@ -66,4 +66,4 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<^ code="&#x0003;" >>ni:///sha-256;j7gFu1X5Q-OvLaa-yvqUcK6uR3BDrNGEQU9iglAodPg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

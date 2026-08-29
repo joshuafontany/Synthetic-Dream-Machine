@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/lararium >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/lararium >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/lararium.mem"
@@ -71,4 +71,4 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 
 <<^ code="&#x0003;" >>ni:///sha-256;666IIqFw337FBbV4pr9I1xwRwus83sVcBofIQKQsBRc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

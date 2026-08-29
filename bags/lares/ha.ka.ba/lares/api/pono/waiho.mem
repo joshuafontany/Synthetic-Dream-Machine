@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/waiho >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/waiho >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/waiho.mem"
@@ -94,4 +94,4 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<^ code="&#x0003;" >>ni:///sha-256;bwuD2iQoYpCCPosBnw3qetD8WiNTeEIs2U9mbq4JuVI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
 ```toml meta
 constraints        = ["S1: the canonical loci remains the stable-address capability law", "S2: derivation algorithm runs in full step order without skipping", "S3: resolved and declared-unresolved stay distinct; neither collapses into the other", "S4: rating commitment stays truthful; a path hit never overrides honest unresolved tension", "S5: file-siting mutations and opener changes cross as distinct bounded Hoʻoko transactions", "S6: aftermath names all declared-unresolved addresses; none silently disappear"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -120,7 +120,7 @@ Read the target before any decomposition.
 
 * the full `lar:` URI string, verbatim
 * known `meme-type`, prior rating posture, or prior canon-MOVE context if present
-* document opener form: `<<^ code="&#x0001;" ? -> ...` (unbound) or `<<^ code="&#x0001;" lar:///...` (confirmed canon)
+* document opener form: `<<^ code="&#x0001;" from=? -> to=...` (unbound) or `<<^ code="&#x0001;" to=lar:///...` (confirmed canon)
 * visible convention surfaces: `#meta`, `register`, `file-path`, canon-MOVE note
 * first-pass or re-resolution of a previously declared-unresolved address
 * calling context: mid-parse urgency differs from session-load intake
@@ -223,6 +223,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zk8bL5__tNCT6BmhUMggOA-jQe0YIq1qYQVEMyIdSAY
+<<^ code="&#x0003;" >>ni:///sha-256;YQSSk7-zvaBL8vA23rhY2iZehNLhGJbFS0gaCTtl6FM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

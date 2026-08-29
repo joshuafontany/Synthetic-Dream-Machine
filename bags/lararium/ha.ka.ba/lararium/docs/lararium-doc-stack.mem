@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/lararium-doc-stack.mem"
@@ -159,4 +159,4 @@ infrastructure rather than rolling a separate exporter.
 
 <<^ code="&#x0003;" >>ni:///sha-256;qgaP4g4WT2OQEr8GV5PvWDetwSSl-gCdId3pPo3GpQE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

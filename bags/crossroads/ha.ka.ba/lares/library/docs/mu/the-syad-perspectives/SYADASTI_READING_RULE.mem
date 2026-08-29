@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
 ```toml meta
 cacheable = false
 file-path = "bags/crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.mem"
@@ -153,4 +153,4 @@ The HUD tag is therefore a ''memory prosthetic'' — it carries calibration forw
 
 <<^ code="&#x0003;" >>ni:///sha-256;gQg5lh7GnceLG9HY3qaSf0aCq7DpRir9DxOPWxk4_1A
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

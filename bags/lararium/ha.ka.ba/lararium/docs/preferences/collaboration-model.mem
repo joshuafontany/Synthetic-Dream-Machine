@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/collaboration-model.mem"
@@ -86,4 +86,4 @@ This room leans toward future deeper articulation in:
 
 <<^ code="&#x0003;" >>ni:///sha-256;yeTe2B0-OJH8GxbIh2TaPc8aTSt88Q8ZEYtGS0qmt9c
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

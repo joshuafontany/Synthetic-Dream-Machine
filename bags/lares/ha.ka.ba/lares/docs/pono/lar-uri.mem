@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/lar-uri.mem"
@@ -464,4 +464,4 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 <<^ code="&#x0003;" >>ni:///sha-256;9E9o8YIHuDpAdnI9x1lPV41_QzEd_8-FlbGeI__dnTI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

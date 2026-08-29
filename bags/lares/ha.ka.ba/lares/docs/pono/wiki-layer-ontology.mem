@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/wiki-layer-ontology.mem"
@@ -250,4 +250,4 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<^ code="&#x0003;" >>ni:///sha-256;qoH66N5py3mUwnMCD8eUD-00k-7rxKj5vzqoWF0BHEc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

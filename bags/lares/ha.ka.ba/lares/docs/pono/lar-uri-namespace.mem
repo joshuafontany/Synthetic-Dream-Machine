@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/lar-uri-namespace.mem"
@@ -112,4 +112,4 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 <<^ code="&#x0003;" >>ni:///sha-256;TST-rQL2d82HtGQFuhIFjkOHo-_7qj0Ftp0ciZ8Vn1E
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

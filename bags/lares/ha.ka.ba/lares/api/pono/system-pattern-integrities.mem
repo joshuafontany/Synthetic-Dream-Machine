@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/system-pattern-integrities.mem"
@@ -359,4 +359,4 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<^ code="&#x0003;" >>ni:///sha-256;8EadebRXzNbeNDNT_6_Z0bY-kHgEW0GTYYAtQLBDp1U
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

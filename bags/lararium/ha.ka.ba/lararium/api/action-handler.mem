@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/action-handler >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/action-handler >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/api/action-handler.mem"
@@ -118,4 +118,4 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<^ code="&#x0003;" >>ni:///sha-256;PEusLP51ETAYxhBBUD56RbjYSInzj93Kn-NFcszcL5Q
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

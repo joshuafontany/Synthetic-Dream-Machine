@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -86,4 +86,4 @@ have defined each other's borders ever since.
 
 <<^ code="&#x0003;" >>ni:///sha-256;RS2gqT7MZ1Ufpq4hQ6j2TDN-63wvS_ZSEmMbPS3N86o
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

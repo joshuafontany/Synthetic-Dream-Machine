@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/mesh/kumu-device >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/mesh/kumu-device >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/kumu-device.mem"
@@ -199,4 +199,4 @@ See: `lar:///ha.ka.ba/lares/api/pono/nalu#/yin-collapse-law`
 
 <<^ code="&#x0003;" >>ni:///sha-256;W-EiW9UHUqF19RZ81c8PTopIZt0CetCxvtKKnMYCohA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

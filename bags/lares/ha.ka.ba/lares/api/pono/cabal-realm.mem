@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/cabal-realm.mem"
@@ -217,4 +217,4 @@ The honest wall, kept lit: ''"valid trace to lineage L" reads as a hard crypto f
 
 <<^ code="&#x0003;" >>ni:///sha-256;ZNAdGJ7gKd3mJoD65aQII8ZKdnVVdVmtpf8ODodHJGk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -63,4 +63,4 @@ comes only after all source text reads as moved.)//
 
 <<^ code="&#x0003;" >>ni:///sha-256;GNZ5k0-5ZJKsF6QUWnPSXtkH7sOrP5wwGbVCxHkyJS0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

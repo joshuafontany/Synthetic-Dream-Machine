@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
 ```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
@@ -227,4 +227,4 @@ The identity and UCAN layer is now in place:
 
 <<^ code="&#x0003;" >>ni:///sha-256;1ntJuvl0FVFwrAZYtS_JuAt93dEOglsCF3dQ05I65xU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

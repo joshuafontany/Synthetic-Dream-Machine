@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/melantha-vex >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/melantha-vex >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -297,4 +297,4 @@ Use Melantha when the table needs:
 
 <<^ code="&#x0003;" >>ni:///sha-256;v2qs7d0MK3O8SjeTEdHKRL_qvcyYy2eaj9cVSba0Y-E
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/operating-modes >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/operating-modes >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/operating-modes.mem"
@@ -86,4 +86,4 @@ This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<^ code="&#x0003;" >>ni:///sha-256;9D7nikDQAwF8exUIbBjCphXWsQs49KKrsd4xEI5o568
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

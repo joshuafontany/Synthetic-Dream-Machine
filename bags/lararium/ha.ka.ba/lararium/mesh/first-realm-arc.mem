@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/first-realm-arc.mem"
@@ -93,4 +93,4 @@ The runbook stands ''Synthesis-Canon and complete for what it covers''. These si
 
 <<^ code="&#x0003;" >>ni:///sha-256;PJnQxxpUxAhpVbsrS-H_ldq3cYUaXWjUMhMBVgyHfRg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -259,4 +259,4 @@ Each result yields: ''texture'' (3–5 sensory lines) · ''movement modifier'' �
 
 <<^ code="&#x0003;" >>ni:///sha-256;DrcLFvsOQERiGDs3NwWXKk4xTYWKIQQNvq5trK2398w
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/heleuma/ka >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ka >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma/ka.mem"
@@ -85,4 +85,4 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<^ code="&#x0003;" >>ni:///sha-256;R1t2lY5WNjx0IdOpjw9uS6NuYjk2slisiJAx7e6pxYQ
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

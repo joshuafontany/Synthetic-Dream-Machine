@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/ahu >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/ahu >>
 ```toml meta
 body-sha256   = "12b3869aa70d01761a960fe2bc881fa66b007d8b6559676b0de68e85508f52fc"
 cacheable     = true
@@ -47,4 +47,4 @@ Exported symbols: `AhuWidget`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;5GOjN-wEkSJ9T_7mgMr7lo4yJDQCLtfz4WHXqYAFk_c
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

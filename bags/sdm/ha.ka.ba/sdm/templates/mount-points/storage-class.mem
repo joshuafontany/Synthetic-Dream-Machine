@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/mount-points/storage-class.mem"
@@ -65,4 +65,4 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 
 <<^ code="&#x0003;" >>ni:///sha-256;uHI0slUW8Ckx2O9JUPStcMMzQFT6KO8zd-nPwRtYDiM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

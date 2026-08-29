@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/widgets/dynamic >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/dynamic >>
 ```toml meta
 body-sha256   = "0518ad22472bdea6dffd686dcd663ab93e9bbcecc3d69b54c8b49fba36aa2090"
 cacheable     = true
@@ -47,4 +47,4 @@ Exported symbols: `DynamicWidget`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;BdTSsLDTpKF-yTHffXbCD0epv7xPxBjExNuels8DcnU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

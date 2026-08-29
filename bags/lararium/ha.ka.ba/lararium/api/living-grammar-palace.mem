@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/living-grammar-palace.mem"
@@ -749,4 +749,4 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<^ code="&#x0003;" >>ni:///sha-256;casZKveg_FNWXzw3T8q881MVnrn8ur8r6SaSMB7cr20
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

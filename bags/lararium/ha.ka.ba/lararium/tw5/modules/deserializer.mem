@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/deserializer >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/deserializer >>
 ```toml meta
 body-sha256   = "d689443fc704d96b7c2e3802de2f76541b33cd3f9fe422199387a4bd1ce74b21"
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/deserializer.mem"
@@ -62,4 +62,4 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<^ code="&#x0003;" >>ni:///sha-256;M8ZzSqh31Grx4kDSyUprK6LxK9Du8FBHqOHMiMqdS5s
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

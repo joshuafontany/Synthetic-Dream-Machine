@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/ffz-clock.mem"
@@ -414,4 +414,4 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<^ code="&#x0003;" >>ni:///sha-256;Goq-XajS_SwIejs3wku372Dn_YdCvtOTRUh0BZj_sLM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

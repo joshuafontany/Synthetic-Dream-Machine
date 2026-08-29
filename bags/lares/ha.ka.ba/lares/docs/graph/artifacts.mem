@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/graph/artifacts >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/artifacts >>
 ```toml meta
 file-path   = "bags/lares/ha.ka.ba/lares/docs/graph/artifacts.mem"
 l-space     = "stable"
@@ -308,4 +308,4 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<^ code="&#x0003;" >>ni:///sha-256;bFSFH7Pbp1VV1lvIKsOrm5hZmYxY8RQ-tGROoJGeh7c
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

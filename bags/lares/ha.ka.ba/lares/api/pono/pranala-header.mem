@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/pranala-header >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pranala-header >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/pranala-header.mem"
@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 
 ! Pranala-Header — the bearing a carrier declares about itself
 
-`<<^ code="&#x0001;" ? -> uri >>` stands on a carrier's head and declares the address it holds. The
+`<<^ code="&#x0001;" from=? -> to=uri >>` stands on a carrier's head and declares the address it holds. The
 `?` token means ''this carrier itself'' — a self-reference no sigil keyword can express, since a
 keyword names a thing and this one names the speaker.
 
@@ -67,8 +67,8 @@ frame (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#/frame-head-lock
 !! Syntax
 
 ```text
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/path/to/this-carrier >>
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/path/to/this-carrier >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/path/to/this-carrier >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/path/to/this-carrier >>
 ```
 
 The bearing reads off the SOH scan, which anchors on the control code and admits the namespace slot
@@ -109,6 +109,6 @@ agrees-with    = "uri-path"
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;RK3VzLRQ7mv3abwyYWE_nA2vpXiThFA_4M414bMJrsw
+<<^ code="&#x0003;" >>ni:///sha-256;3cNu8cLUH7GyYfTgmxf6AFRE4xiI5XhQY823cY4Z2Ls
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

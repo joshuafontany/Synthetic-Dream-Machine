@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-grammar-wakes >>
 ```toml meta
 cacheable  = true
 confidence = 7
@@ -176,4 +176,4 @@ MUST NOT:
 
 <<^ code="&#x0003;" >>ni:///sha-256;5k_aqYs79aPS00TKxkjHuX27e4frpSc4WfU1yS3Jh5c
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

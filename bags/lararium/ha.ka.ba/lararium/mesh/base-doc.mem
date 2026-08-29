@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/base-doc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/base-doc >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/base-doc.mem"
@@ -63,4 +63,4 @@ plane-blind — it writes wherever the handed registry handle points. //(Caller/
 
 <<^ code="&#x0003;" >>ni:///sha-256;fxJMnS2d0UCbo9zEAURLK65plI-Mu16jDkKgX-D1ap0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/masks/named/map-wisp >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/named/map-wisp >>
 ```toml meta
 aside             = false
 cacheable         = false
@@ -170,4 +170,4 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<^ code="&#x0003;" >>ni:///sha-256;Xi1RAT4UQ06WKy2aJP4nAlBOSAc3ahdBzY6PHKjMyyg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

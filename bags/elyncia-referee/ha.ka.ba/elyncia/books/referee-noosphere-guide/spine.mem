@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/referee-noosphere-guide/spine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/referee-noosphere-guide/spine >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -68,4 +68,4 @@ comes only after all source text reads as moved.)//
 
 <<^ code="&#x0003;" >>ni:///sha-256;RjWim8KTwAK0U1fKg87XPXIkGOXn4Elm3UKDC-HrTL0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/loci/meta >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci/meta >>
 ```toml meta
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci/meta.mem"
 mana      = 15
@@ -218,4 +218,4 @@ Signs of gain:
 
 <<^ code="&#x0003;" >>ni:///sha-256;FGRv06044nHys3VB6CQxlQRqJT3XcDCgc96zqJJ1xRU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

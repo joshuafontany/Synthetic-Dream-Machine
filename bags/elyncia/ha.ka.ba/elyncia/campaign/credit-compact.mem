@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/credit-compact >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/credit-compact >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -71,4 +71,4 @@ They may:
 
 <<^ code="&#x0003;" >>ni:///sha-256;WKzBzAnqvBY__r127WZs21MMKOoCRmpUzhY0kLA_Z6Y
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/mookuauhau.mem"
@@ -116,4 +116,4 @@ No one has made ''one composition primitive serve simultaneously as the code-wir
 
 <<^ code="&#x0003;" >>ni:///sha-256;n51r_rfKfNV1cxD887vXWksJqq4ep5ID9lRah9w5s1E
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

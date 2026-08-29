@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/quine-principles >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/quine-principles >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/quine-principles.mem"
@@ -262,4 +262,4 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 <<^ code="&#x0003;" >>ni:///sha-256;7hKQYQwL9vlwJARBGDKFrd-HN0dOSYAqQHarjxElCfM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/invented-ripple.mem"
@@ -68,4 +68,4 @@ If the node took the change and the footprint was genuinely large, that reads as
 
 <<^ code="&#x0003;" >>ni:///sha-256;DNcCnc9ihBLGZPnw_W49qcN2ho3eufwv6io2DDV02WM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

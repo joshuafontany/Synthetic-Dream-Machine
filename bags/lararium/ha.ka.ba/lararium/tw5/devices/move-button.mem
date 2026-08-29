@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lararium/tw5/devices/move-button >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lararium/tw5/devices/move-button >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/devices/move-button.mem"
@@ -84,4 +84,4 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<^ code="&#x0003;" >>ni:///sha-256;fJt5heZ7kPO15rwLLmaTIP_QZaW_PF0QFv73NMMO_hE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

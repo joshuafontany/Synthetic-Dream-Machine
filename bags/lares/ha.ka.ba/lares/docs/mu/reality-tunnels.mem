@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu/reality-tunnels >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/reality-tunnels >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/reality-tunnels.mem"
@@ -90,4 +90,4 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 
 <<^ code="&#x0003;" >>ni:///sha-256;NLisuOnsQ6qo9-0R_POSdEetHo4nlCDbNTvzsWwGhNQ
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

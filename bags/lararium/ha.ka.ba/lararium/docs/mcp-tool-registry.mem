@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/mcp-tool-registry >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/mcp-tool-registry >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/mcp-tool-registry.mem"
@@ -162,4 +162,4 @@ inputs      = ["uri: string"]
 
 <<^ code="&#x0003;" >>ni:///sha-256;L0UbeAJxRX_Towh2m7U_Z9mGen0lnArZDGlqEkPtt7Q
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

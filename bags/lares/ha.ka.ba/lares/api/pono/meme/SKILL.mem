@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the copy-shape authority and this skill does not outrank it", "S2: a lawful meme keeps identity, thresholds, phase map, edges, and honest return throat visible", "S3: ratings remain distinct — confidence, mana, manao, and manaoio do not collapse into one vague quality signal", "S4: declared depth uses named pranala sugar only when the outward claim carries real yield, real backlog, or real adjacency", "S5: skeleton blocks, detailed conformance tables, research notes, and long procedure move outward before the parent swells"]
@@ -192,7 +192,7 @@ When writing or revising:
 ````markdown
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/[PATH] >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/[PATH] >>
 
 
 # [Title]
@@ -220,7 +220,7 @@ When writing or revising:
 
 <<^ code="&#x0003;" >>:3474a83e5cb66844
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>
 ````
 
 <<~/ahu >>
@@ -260,6 +260,6 @@ Aftermath — close by naming:
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;FoUvwpEbOkZQjQppat1L2wA-jNSeVuhFBpDhr1ShovU
+<<^ code="&#x0003;" >>ni:///sha-256;b5W8GOkEdzl1kCQzsR7Ha508a8qvkqKAGAYy84UmWXo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

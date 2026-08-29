@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/index >>
 ```toml meta
 cacheable  = true
 confidence = 16
@@ -68,4 +68,4 @@ Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle 
 
 <<^ code="&#x0003;" >>ni:///sha-256;me0I-BBE0e2WMgkOnPxkuAZOOcYhIOfcYpGlz6_pt5w
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

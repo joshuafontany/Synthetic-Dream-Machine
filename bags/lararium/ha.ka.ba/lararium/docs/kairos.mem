@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/kairos >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/kairos >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/kairos.mem"
@@ -324,4 +324,4 @@ free coarse breakpoint; a scheduled sweep needs its own justification.
 
 <<^ code="&#x0003;" >>ni:///sha-256;W_vKRjGb4RSQ4Fzx-xyVpOyDHXlvoYO2iw1Ty5fxsL8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

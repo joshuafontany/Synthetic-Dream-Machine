@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
 ```toml meta
 cacheable  = true
 confidence = 11
@@ -54,4 +54,4 @@ miles (near the Izmir-coast) — constellation members hanging over other Realms
 
 <<^ code="&#x0003;" >>ni:///sha-256;AsF9usMN6CuqEMw5v1IsZHkZIxH_TUdzJ6Yapn0WPRU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

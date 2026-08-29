@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/sync/save-cascade >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sync/save-cascade >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/sync/save-cascade.mem"
@@ -101,4 +101,4 @@ rationale     = "canonical lar: URI memes — write one LarTiddlerRecord per tid
 
 <<^ code="&#x0003;" >>ni:///sha-256;j5RzKNzgzH-62pWaTGQfUEH1sUjYdNpyFQhZ1sP4zeo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

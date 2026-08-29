@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/pono/rewind-adapter >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/pono/rewind-adapter >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/rewind-adapter.mem"
@@ -260,4 +260,4 @@ Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''cu
 
 <<^ code="&#x0003;" >>ni:///sha-256;b4R3WRZiM7BdEAtS7UPU1XpFb7O7bzmcKQ_nVskmLhs
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

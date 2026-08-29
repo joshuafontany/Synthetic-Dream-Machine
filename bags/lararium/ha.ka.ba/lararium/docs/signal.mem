@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal.mem"
@@ -173,4 +173,4 @@ Settled child rooms in this branch:
 
 <<^ code="&#x0003;" >>ni:///sha-256;bvgzv7b_KlRRwEQzOIx5fwr2tE2-65_pMRYkD2y8i2A
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

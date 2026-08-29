@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/lar-uris >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/lar-uris >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/lar-uris.mem"
@@ -24,4 +24,4 @@ TODO: describe the load-bearing surface this file owns.
 
 <<^ code="&#x0003;" >>ni:///sha-256;dDXiI2IxEKwAZ00CqUeNr6Pc0WBawEo19vRgkcRREM4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

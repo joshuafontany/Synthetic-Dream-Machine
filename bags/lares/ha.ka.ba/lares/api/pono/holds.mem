@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/holds >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/holds >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/holds.mem"
@@ -274,4 +274,4 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<^ code="&#x0003;" >>ni:///sha-256;9-r9twxXvnpbcUxxcdl1EdD-mHK-mPz8joKPwqsqxUU
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/npcs/rask-varkesh >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/rask-varkesh >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -178,4 +178,4 @@ Run these fast; they’re competent but not heroic.
 
 <<^ code="&#x0003;" >>ni:///sha-256;RgJaeb0fAgyeMCJO2cRhEKDYd4CFYXTVpRdlED4mii8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

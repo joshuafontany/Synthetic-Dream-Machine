@@ -11,7 +11,7 @@ description: File or reopen a hoike (\testimony) — a kept record of a conteste
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/hoike/SKILL.mem"
@@ -113,4 +113,4 @@ Read the three together and the grammar teaches itself: dissent gets a name and 
 
 <<^ code="&#x0003;" >>ni:///sha-256;7A8UCPm4S9YnmRtoJF-VIdX2PBygC9GEcVW_x2SdQCI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

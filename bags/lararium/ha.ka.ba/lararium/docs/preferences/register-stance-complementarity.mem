@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/register-stance-complementarity.mem"
@@ -78,4 +78,4 @@ Current comparison surfaces:
 
 <<^ code="&#x0003;" >>ni:///sha-256;bq1hbuYMG2gswsFuLT31MJiXQZaZcqQ2Ag8HF-MXZys
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

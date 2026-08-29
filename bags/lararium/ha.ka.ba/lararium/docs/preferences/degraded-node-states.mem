@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/preferences/degraded-node-states >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/degraded-node-states >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/degraded-node-states.mem"
@@ -81,4 +81,4 @@ A fuller future recovery may sort the old failure lexicon by domain.
 
 <<^ code="&#x0003;" >>ni:///sha-256;MzOzT1oWYk8IFHKVTIqBPQS5-_WtYQA7ToQhsCa9WQ0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

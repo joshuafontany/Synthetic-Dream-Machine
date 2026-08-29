@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/admission-on-a-lineage.mem"
@@ -325,4 +325,4 @@ model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments 
 
 <<^ code="&#x0003;" >>ni:///sha-256;38eZdbmqHewGZMJQYNv5grLdYoD9XLO6lW4B0kEw5E0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

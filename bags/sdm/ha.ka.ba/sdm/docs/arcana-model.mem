@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/arcana-model >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/arcana-model >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -145,4 +145,4 @@ verb × capability saturation × capability totality. One word, three owners, no
 
 <<^ code="&#x0003;" >>ni:///sha-256;u4ktXhqM0BzLMefsnRB4Hyp46e9siALJunwmg65cNfc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

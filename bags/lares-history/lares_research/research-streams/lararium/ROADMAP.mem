@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///lares_research/research-streams/lararium/ROADMAP >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/ROADMAP >>
 ```toml meta
 cacheable  = false
 confidence = 18
@@ -3285,4 +3285,4 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 
 <<^ code="&#x0003;" >>ni:///sha-256;cXq5sE-gTkk8BtdUFUMrgP6GBKKfU3K7pJKiI4jGP-A
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/templates/modules/power >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/modules/power >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/modules/power.mem"
@@ -90,4 +90,4 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<^ code="&#x0003;" >>ni:///sha-256;iSbZA-ooz53ucY0tRp2xZt6L1vvC0UiLWZmcBqK2HAc
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

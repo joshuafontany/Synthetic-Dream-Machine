@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/reach-plane >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reach-plane >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/reach-plane.mem"
@@ -281,4 +281,4 @@ Three consequences follow directly:
 
 <<^ code="&#x0003;" >>ni:///sha-256;ff4Vpfg0hrrfPe-OHJd6wehE0L-2PR368SEt2NVnbVk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

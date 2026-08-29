@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/epoch-binding-surfaces.mem"
@@ -220,4 +220,4 @@ are acts, never upgrades''.
 
 <<^ code="&#x0003;" >>ni:///sha-256;xfyeP6rQ086AgS6FjOlFQ1QQQvQKA4f_yzpTshA4O1w
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

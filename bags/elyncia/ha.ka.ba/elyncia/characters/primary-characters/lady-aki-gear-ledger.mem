@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger >>
 ```toml meta
 cacheable  = true
 confidence = 13
@@ -238,4 +238,4 @@ Current answer: yes, provisionally.
 
 <<^ code="&#x0003;" >>ni:///sha-256;wcNEkPbbMNzQHgZ2rS4QXGBiHsj1e0ZESuEq0W8Wcco
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/identity-enacts-relation.mem"
@@ -312,4 +312,4 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 <<^ code="&#x0003;" >>ni:///sha-256;Lt_20kBBK1-j8A4RD250QPIAF2ZmX6mG78Q_UetG220
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

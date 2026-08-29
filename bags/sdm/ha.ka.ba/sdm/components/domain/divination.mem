@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/domain/divination >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/domain/divination >>
 ```toml meta
 cacheable = true
 caption   = "divination"
@@ -74,4 +74,4 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<^ code="&#x0003;" >>ni:///sha-256;vRIMB0_5HSqsx1nB5LcpZptWpV1F5JT6QVLfPHt737U
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/node-host >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/node-host >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/node-host.mem"
@@ -131,4 +131,4 @@ export interface CorpusSource {
 
 <<^ code="&#x0003;" >>ni:///sha-256;IbhGTDTQdYJPlkfr5ihG1fjlzrWt-a8rruCneRwJaGs
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

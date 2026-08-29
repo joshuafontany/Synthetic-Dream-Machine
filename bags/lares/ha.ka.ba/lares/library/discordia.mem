@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/library/discordia >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/library/discordia >>
 ```toml meta
 bytes      = 694457
 collection = "discordia"
@@ -33,4 +33,4 @@ Reference this collection as `library:discordia` — a name that travels, never 
 
 <<^ code="&#x0003;" >>ni:///sha-256;x4H17-Hu6asevxLWalcGRSyeTwjQMTS8AkZcwdmUS-A
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

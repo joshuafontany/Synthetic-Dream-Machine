@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/grammar-invariants.mem"
@@ -52,4 +52,4 @@ uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 
 <<^ code="&#x0003;" >>ni:///sha-256;Lyfj92JSXwTP5YqHlYhDsd5CGVc_VgMq-Je1_cDbcJA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

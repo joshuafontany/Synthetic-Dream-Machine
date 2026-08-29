@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/entrance-block >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/entrance-block >>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/entrance-block.mem"
@@ -171,4 +171,4 @@ Every shared resource in the py fleet owes the same test: `content_io` · `struc
 
 <<^ code="&#x0003;" >>ni:///sha-256;_qrq9hrG2XmaMw1U1If2bJmCmNE_-O6y4BZQp_Kv6Qg
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/kumu >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kumu >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/kumu.mem"
@@ -70,4 +70,4 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<^ code="&#x0003;" >>ni:///sha-256;iupTfXHURMln_XV98nDOPHkwaspzI3AzuP5wSJIwKrE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/tw5-deserializer.mem"
 last-reviewed = "2026-07-18"
@@ -51,4 +51,4 @@ The paired `carrier-filetype` startup module registers `.mem` as `text/memetic-w
 
 <<^ code="&#x0003;" >>ni:///sha-256;-tWw2Kq27YfAu6K7bH_Q-qNf-eRa2BCcN9HJa9QZ6U0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

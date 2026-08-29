@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/composition-model >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/composition-model >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/docs/composition-model.mem"
@@ -135,4 +135,4 @@ Full lineage table lives in the epic. See edges.
 
 <<^ code="&#x0003;" >>ni:///sha-256;VFG3S9JQr4ZPbaCCawElf0uvqg1AXpznTC-CccTCSq4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

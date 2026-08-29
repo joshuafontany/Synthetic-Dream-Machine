@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine >>
 ```toml meta
 cacheable     = false
 confidence    = 11
@@ -173,4 +173,4 @@ Act III receives:
 
 <<^ code="&#x0003;" >>ni:///sha-256;xacw7ULopdR147nZ3DhhhfjzNqQy4_7lmJUh-iYhA-Y
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic >>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/powers/osr-spells/read-magic.mem"
@@ -94,4 +94,4 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<^ code="&#x0003;" >>ni:///sha-256;hP65KYBENu7B_IrKClPqASezW4KtOeijdkdNonU4XPY
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

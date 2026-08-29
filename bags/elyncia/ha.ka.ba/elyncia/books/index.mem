@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/index >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -52,4 +52,4 @@ shelf reads plainly:)//
 
 <<^ code="&#x0003;" >>ni:///sha-256;NWPaQCUIhwEwam3yrRD2W3q2KncXF7QjRKv5bGH0T4A
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

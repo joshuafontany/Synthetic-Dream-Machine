@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/camera-mount >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/camera-mount >>
 ```toml meta
 cacheable = true
 docs      = "lar:///ha.ka.ba/lararium/docs/verse-mesh"
@@ -151,4 +151,4 @@ The `mountCamera` interface stays identical. The `document` type changes; the ch
 
 <<^ code="&#x0003;" >>ni:///sha-256;RPp_n68ELF57TRKZCj7gEnHga_NhfKxyT-GM2j3pJXk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

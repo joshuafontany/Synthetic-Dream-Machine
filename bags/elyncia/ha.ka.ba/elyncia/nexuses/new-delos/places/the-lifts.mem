@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -39,4 +39,4 @@ politics.
 
 <<^ code="&#x0003;" >>ni:///sha-256;8pseCJc6JepF1bhjofcRmqDEIHXA6Bv6e1a2307xOZE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

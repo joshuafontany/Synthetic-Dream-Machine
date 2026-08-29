@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/docs/three-lineage-convergence >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/three-lineage-convergence >>
 ```toml meta
 cacheable  = true
 confidence = 12
@@ -95,4 +95,4 @@ Three magic-system designs, independently derived across four decades, factor ma
 
 <<^ code="&#x0003;" >>ni:///sha-256;2ps7tSM6fSrQLoVdbniAXw6rAGOgK9bCJ8E1I7DKGYA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

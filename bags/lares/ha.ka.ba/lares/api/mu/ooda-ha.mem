@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
 ```toml meta
 cacheable             = true
 file-path             = "bags/lares/ha.ka.ba/lares/api/mu/ooda-ha.mem"
@@ -322,4 +322,4 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<^ code="&#x0003;" >>ni:///sha-256;qzZd2PEzHumiYPGE6_zRlx0vv0d7Z3K2LHegKh9Xy74
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

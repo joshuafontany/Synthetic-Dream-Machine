@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/the-four-tools.mem"
@@ -89,4 +89,4 @@ one clean preference for model agnosticism over paranoia.
 
 <<^ code="&#x0003;" >>ni:///sha-256;aleVy52kwpIZ6LbqDpw28udYrf4ahhKoisxOsjxSxPk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

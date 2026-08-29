@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony >>
 ```toml meta
 body-sha256   = "09e7f52ebcb8617e2f675e8a4f09f043474488b34b93ff3c857615a923153300"
 cacheable     = true
@@ -57,4 +57,4 @@ Caller MUST check the identity tiddler does not already exist before writing (id
 
 <<^ code="&#x0003;" >>ni:///sha-256;B_qy57gvYQybbOF5VLbeGMDtkc9KU_vrxc6flxXv6RE
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

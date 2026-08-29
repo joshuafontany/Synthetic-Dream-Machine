@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle >>
 ```toml meta
 cacheable    = false
 file-path    = "bags/lares/ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle.mem"
@@ -116,4 +116,4 @@ Use this witness carrier for provenance.
 
 <<^ code="&#x0003;" >>ni:///sha-256;v-xGU2YDY8lMyVg2ig-6RHnblvu1CHmZfzNuBSQ0xqk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

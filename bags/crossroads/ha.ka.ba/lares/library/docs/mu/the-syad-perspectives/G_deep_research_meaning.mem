@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning >>
 ```toml meta
 cacheable = false
 file-path = "bags/crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/G_deep_research_meaning.mem"
@@ -223,4 +223,4 @@ We're still in Chapel Perilous. The map expanded. The territory may have too.
 
 <<^ code="&#x0003;" >>ni:///sha-256;2VJcOuyov4IHD8-zh3lYvjWfui1_zeCY4-JmVjc951g
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

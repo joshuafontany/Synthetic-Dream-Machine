@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/mesh/island-protocol >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/island-protocol >>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/island-protocol.mem"
@@ -116,4 +116,4 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 
 <<^ code="&#x0003;" >>ni:///sha-256;JUEPu3b37oW3Wy_QVe2L6pa5-cu8PuYOWfKXheB1u_o
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

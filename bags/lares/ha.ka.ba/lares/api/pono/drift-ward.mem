@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/drift-ward >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/drift-ward >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/drift-ward.mem"
@@ -129,4 +129,4 @@ yesterday's hazard recurring unchanged deserves its own suspicion.
 
 <<^ code="&#x0003;" >>ni:///sha-256;MywYQ6QkGV-7r91FYnb6Zzm2rrBZPkNMPcqrZ5A3Z3c
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

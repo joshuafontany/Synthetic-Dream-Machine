@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/function/cargo >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/cargo >>
 ```toml meta
 cacheable = true
 caption   = "cargo"
@@ -73,4 +73,4 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<^ code="&#x0003;" >>ni:///sha-256;szFh20Hru727MkwCWeEP90JgX6A0cvPqSYK5e6yguhA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

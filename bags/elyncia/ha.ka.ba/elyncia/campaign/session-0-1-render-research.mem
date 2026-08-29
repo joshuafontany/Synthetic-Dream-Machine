@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research >>
 ```toml meta
 cacheable  = false
 confidence = 12
@@ -617,4 +617,4 @@ Finding: Corpus yields strong *object* and *tag* vocabulary (Wild Mage item tabl
 
 <<^ code="&#x0003;" >>ni:///sha-256;R93aH-0ftMuitKhfIra4arZX2TkdHf6jGMQZ7jumEC8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

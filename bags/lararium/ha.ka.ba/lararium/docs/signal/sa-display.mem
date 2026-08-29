@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/sa-display.mem"
@@ -123,4 +123,4 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<^ code="&#x0003;" >>ni:///sha-256;zlH0W1olut11VOS1_ubyfYZCxYb17TxxhLDkO3gOao8
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

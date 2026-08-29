@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls >>
 ```toml meta
 cacheable     = false
 confidence    = 13
@@ -202,4 +202,4 @@ Act III receives:
 
 <<^ code="&#x0003;" >>ni:///sha-256;CuC-McRDws8gfkW-iQhKLwZwMdwBefr6Kriq9Pi1Sik
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

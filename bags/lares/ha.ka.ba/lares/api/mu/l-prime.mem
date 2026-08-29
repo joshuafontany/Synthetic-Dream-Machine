@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/mu/l-prime >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/l-prime >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/mu/l-prime.mem"
@@ -153,4 +153,4 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<^ code="&#x0003;" >>ni:///sha-256;pUF6tOIzE5oCnYIecBlEk2TWjDEHzG5S2SEuhGJl_Jo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

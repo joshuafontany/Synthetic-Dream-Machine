@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///lares_research/research-streams/lararium/AUTH-ATPROTO >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/AUTH-ATPROTO >>
 ```toml meta
 cacheable  = true
 confidence = 18
@@ -212,4 +212,4 @@ No ATProto login implementation this milestone — doctrine only.
 
 <<^ code="&#x0003;" >>ni:///sha-256;ZhPH5ek-Nm9ZQOej-Y90Xz76rFfvaSiC_7U_jm8CtSM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

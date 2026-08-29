@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
 ```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
@@ -156,4 +156,4 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<^ code="&#x0003;" >>ni:///sha-256;1XNivUj4o-VWTSC-LEcxxbXU0zVrHf4T7N3LepbbOjk
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

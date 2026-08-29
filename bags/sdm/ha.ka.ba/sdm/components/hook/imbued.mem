@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/sdm/components/hook/imbued >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/hook/imbued >>
 ```toml meta
 cacheable = true
 caption   = "imbued"
@@ -73,4 +73,4 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<^ code="&#x0003;" >>ni:///sha-256;k6zIQz7pKwjorV4c4qi_LdhU27i9ys5IHy_DHNz3eJI
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/wehe >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/wehe >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/wehe.mem"
@@ -120,4 +120,4 @@ close-pattern = '<<~\/wehe\s*>>'
 
 <<^ code="&#x0003;" >>ni:///sha-256;o8f3Vtio3uOu67cKXvms7pA2qxcCCiIZsIj_wsoXQeM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

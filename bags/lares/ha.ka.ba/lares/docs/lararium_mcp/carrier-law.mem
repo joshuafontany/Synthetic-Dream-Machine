@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/carrier-law.mem"
 l-space         = "stable"
@@ -173,4 +173,4 @@ Carrier truth stays ahead of syntax swell.
 
 <<^ code="&#x0003;" >>ni:///sha-256;PgGUTGvnpfu1dvV2qjiqk3D0CT_pHhseWqEWjdQ_300
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

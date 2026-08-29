@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/signal-review >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal-review >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal-review.mem"
@@ -254,4 +254,4 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 
 <<^ code="&#x0003;" >>ni:///sha-256;NZ8Qs1iJbgwEN70jJxWSWzCIuYFxGZ0joV8V1t0OsZA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

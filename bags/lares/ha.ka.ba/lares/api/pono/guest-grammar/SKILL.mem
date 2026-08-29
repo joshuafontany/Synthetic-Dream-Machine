@@ -6,7 +6,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the admission law and this skill does not outrank it", "S2: guest work enters only through explicit host admission; ambient leakage does not count as lawful guest grammar", "S3: root primitives stay host-side and do not become guest-family proxies", "S4: hana keeps opener, optional priming payload, and guest body distinct", "S5: parser legality, lowering schemas, fixture execution, and long examples move outward before the parent swells"]
@@ -238,4 +238,4 @@ Aftermath — close by naming:
 
 <<^ code="&#x0003;" >>ni:///sha-256;1C8tPlP-ROhlOQAIOjHQbAew60cFX4LPUIH0CaVWb0A
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/ahu-styles >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/ahu-styles >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/ahu-styles.mem"
@@ -165,4 +165,4 @@ span[data-lar-kind="worksite"]:not([data-lar-slot="#body"]) {
 
 <<^ code="&#x0003;" >>ni:///sha-256;NMKKPxkZ0pPvI20QD99ziU1-Vlhc9ibai9L2ZZBIzS0
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/elyncia/books/the-lares-dreamnet/spine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/the-lares-dreamnet/spine >>
 ```toml meta
 cacheable  = true
 confidence = 10
@@ -70,4 +70,4 @@ comes only after all source text reads as moved.)//
 
 <<^ code="&#x0003;" >>ni:///sha-256;Rprn36954ot9iIwgWEPDb0fJs-LT1qyjD5FOb71H8ow
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

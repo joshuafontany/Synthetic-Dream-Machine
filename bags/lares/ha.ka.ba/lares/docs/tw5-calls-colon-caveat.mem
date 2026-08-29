@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/docs/tw5-calls-colon-caveat >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/tw5-calls-colon-caveat >>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/tw5-calls-colon-caveat.mem"
@@ -107,4 +107,4 @@ A time of day trips the case a URI trips, so the warning leads with the general 
 
 <<^ code="&#x0003;" >>ni:///sha-256;tFVQoTtGpdMBNskct7fyeilFq8DyR30Q-hAKm-XVYkA
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

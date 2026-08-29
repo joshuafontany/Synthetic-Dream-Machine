@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/talk-story >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/talk-story >>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/talk-story.mem"
@@ -131,4 +131,4 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<^ code="&#x0003;" >>ni:///sha-256;hotV5ZD9IjRp03PD88MVsimruRtdK01GBAfbXhZLmdM
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

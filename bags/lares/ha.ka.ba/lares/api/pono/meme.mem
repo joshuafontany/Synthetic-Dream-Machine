@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⊙" ? -> lar:///ha.ka.ba/lares/api/pono/meme >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme >>
 ```toml meta
 cacheable      = true
 control-glyphs = ["&#x0001;", "&#x0002;", "&#x0003;", "&#x0004;", "&#x0005;", "&#x0006;"]
@@ -173,4 +173,4 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 
 <<^ code="&#x0003;" >>ni:///sha-256;ZOywV_35hbQIiiwOFKJqnOOyn1Cp8HAHN2uQ9kJB-9w
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

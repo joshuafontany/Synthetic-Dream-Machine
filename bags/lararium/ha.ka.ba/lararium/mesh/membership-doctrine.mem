@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="⚕" ? -> lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/membership-doctrine.mem"
@@ -207,4 +207,4 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<^ code="&#x0003;" >>ni:///sha-256;ytYUSWdy2YcqPlQ5le68wRrX-8EHXmaslpEOfeDTUm4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

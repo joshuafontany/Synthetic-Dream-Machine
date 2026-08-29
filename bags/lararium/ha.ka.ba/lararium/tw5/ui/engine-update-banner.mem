@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/tw5/ui/engine-update-banner >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/engine-update-banner >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/engine-update-banner.mem"
@@ -25,4 +25,4 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/engine-update-banner"
 
 <<^ code="&#x0003;" >>ni:///sha-256;_ydSmUZ154LNxNJ6T9kzMGrunYZGPn3BvuRVsmmqacw
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

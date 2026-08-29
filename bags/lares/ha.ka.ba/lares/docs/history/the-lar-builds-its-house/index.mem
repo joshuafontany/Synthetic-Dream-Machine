@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
 ```toml meta
 cacheable  = true
 confidence = 11
@@ -97,4 +97,4 @@ MUST NOT:
 
 <<^ code="&#x0003;" >>ni:///sha-256;71QafyUYj5Z6IdDZY3Xr1a6rN0ZfZLoDefkKvvikyr4
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

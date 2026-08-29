@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lararium/api/lares-lararium-binding >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/lares-lararium-binding >>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/lares-lararium-binding.mem"
@@ -169,4 +169,4 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<^ code="&#x0003;" >>ni:///sha-256;5WA-x8rDc1zAXBk603n2A8LB2mlFpVQl89HSO92DL9I
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>

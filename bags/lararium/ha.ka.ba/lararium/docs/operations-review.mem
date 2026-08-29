@@ -1,6 +1,6 @@
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/docs/operations-review >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/operations-review >>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/operations-review.mem"
@@ -298,4 +298,4 @@ After the extraction pass closes, these questions remain for a future consolidat
 
 <<^ code="&#x0003;" >>ni:///sha-256;5WRiAEuxdv-R7skMssNVubcPSw4GDsBYb9rW6Qf3FJo
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>
