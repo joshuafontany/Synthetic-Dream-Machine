@@ -470,17 +470,26 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
   if (!resolvedCatalogUrl) {
     try { resolvedCatalogUrl = readFileSync(catalogUrlFile, "utf8").trim() || null; } catch { /* first boot */ }
   }
-  const blankCatalog = (): DocHandle<LarDoc> => {
+  // ⚠ THE POINTER MUST NEVER OUTLIVE ITS DOCUMENT. `repo.create` mints in MEMORY and the doc reaches
+  // storage only when the repo flushes, while this pointer file lands synchronously. A process killed
+  // between the two leaves a `catalog-url` naming a document no store holds — and the next boot reads
+  // that pointer, asks for a doc nobody has, and fails TERMINAL on a vessel whose store is intact.
+  // Measured exactly so: six healthy documents, and the id in the pointer among none of them.
+  //
+  // So the flush comes FIRST. A pointer written after its referent is durable can be stale; one written
+  // before can be a lie, and a lie here reads as a corrupt vessel.
+  const blankCatalog = async (): Promise<DocHandle<LarDoc>> => {
     const h = repo.create<LarDoc>(emptyLarDoc());
     h.change((doc) => {
       doc.tiddlers[CATALOG_DOC_URI] = mutableLarRecord(CATALOG_DOC_URI, { text: h.url }, "lararium-seed");
     });
+    await repo.flush();
     try { mkdirSync(storageDir, { recursive: true }); writeFileSync(catalogUrlFile, h.url, "utf8"); } catch { /* quota */ }
     return h;
   };
   const catalogHandle: DocHandle<LarDoc> = resolvedCatalogUrl
     ? await resolveBootDoc<LarDoc>(repo, resolvedCatalogUrl as AutomergeUrl, { tideline: "hearth-private", label: "@catalog" })
-    : blankCatalog();  // first boot (no url yet): legitimate founder-mint, not a ghost fallback
+    : await blankCatalog();  // first boot (no url yet): legitimate founder-mint, not a ghost fallback
   if (resolvedCatalogUrl && resolvedCatalogUrl !== catalogUrl) {
     try { mkdirSync(storageDir, { recursive: true }); writeFileSync(catalogUrlFile, catalogHandle.url, "utf8"); } catch { /* quota */ }
   }

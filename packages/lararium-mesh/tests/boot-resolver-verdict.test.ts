@@ -70,4 +70,22 @@ describe("a boot fault names the condition it observed", () => {
       expect(v.reason).toMatch(/^[a-z][a-z0-9-]*$/);
     }
   });
+
+  test("★ the terminal verdict never claims the store HOLDS the doc ★", () => {
+    // The branch knows the library answered UNAVAILABLE. It never read the store, and a vessel with a
+    // perfectly healthy store reaches here whenever a pointer outlived its document. Asserting the
+    // store's contents sends that operator to a destructive rite for a one-file fault.
+    const v = bootFaultVerdict({ reason: "terminal", label: "@catalog", url: "automerge:abc" });
+    expect(v.message).not.toMatch(/the store holds it/i);
+  });
+
+  test("★ the terminal verdict leads with the cheap cure, and names the rite as last ★", () => {
+    const v = bootFaultVerdict({ reason: "terminal", label: "@catalog", url: "automerge:abc" });
+    const readAt = v.message.search(/vessel read vessel/);
+    const riteAt = v.message.search(/rite rebirth/);
+    expect(readAt).toBeGreaterThan(-1);
+    expect(riteAt).toBeGreaterThan(-1);
+    expect(readAt).toBeLessThan(riteAt);
+    expect(v.message).toMatch(/LAST resort/);
+  });
 });

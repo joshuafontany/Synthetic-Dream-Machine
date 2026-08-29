@@ -91,8 +91,19 @@ export function bootFaultVerdict(
   if (obs.reason === "terminal") {
     return {
       reason:  "doc-unavailable",
-      message: `[boot] ${where} — the store holds it and no peer carries it; `
-             + "diagnose with `lares vessel read vessel`, recover with `lares vessel rite rebirth`",
+      // WHAT THIS BRANCH KNOWS, AND WHAT IT DOES NOT. The library answered UNAVAILABLE: no reachable
+      // copy, here or on any peer. It did NOT read the store, so it cannot say the store holds the
+      // doc — and the earlier wording said exactly that, then handed over a rite composing
+      // stop · clear · bake · stand · seed. Measured: a vessel with SIX healthy documents, the named
+      // id among none of them, cured by deleting one stale pointer file.
+      //
+      // So the cheap cure leads and the destructive one is named as last. A message that asserts more
+      // than its branch established spends an operator's store to sound certain.
+      message: `[boot] ${where} — no reachable copy: this vessel's store did not answer with it, `
+             + "and no peer carries it. Read the store first with `lares vessel read vessel` — if that "
+             + "id is ABSENT there, a POINTER OUTLIVED ITS DOCUMENT and clearing the pointer is the whole "
+             + "cure. `lares vessel rite rebirth` rebuilds the vessel and is the LAST resort, for a store "
+             + "that reads damaged.",
     };
   }
   return {
