@@ -112,7 +112,7 @@ They fall into eight families:
 
 ''Structural sigils'' (addressable scope boundaries):
 * `ahu` — child-slot worksite; the named scope boundary; skeleton of meme structure
-* `pranala-header` — carrier self-declaration; `<<~ ? -> uri >>` opens every meme
+* the carrier's own head — self-declaration, and it rides the CONTROL frame rather than a sharktooth: `<<^ code="&#x0001;" … from=? -> to=lar:///… >>` opens every meme
 
 ''Edge-sugar sigils'' (pranala family shortcuts):
 * `pranala` — full edge with FROM → TO arrow + keyword attrs (permanent JS exception)
@@ -276,6 +276,6 @@ lives in a tiddler.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;6T9QGv5bxcqBdOixhCAJFjsZYQ201o-NkvX1lGwPBqE
+<<^ code="&#x0003;" >>ni:///sha-256;DN2BH0U3xTlcRqMdau6RPEivnYhhqjySwzT5UUIRoAA
 
 <<^ code="&#x0004;" -> to=? >>

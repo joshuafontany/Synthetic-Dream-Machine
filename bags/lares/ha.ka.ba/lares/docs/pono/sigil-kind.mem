@@ -43,7 +43,7 @@ lar-kind        Rule type    Dispatch path                  Render
 child-slot      SigilRule    compound with closeKey          template cascade; produces child tiddler
 edge-sugar      SigilRule    compound leaf or compound block template cascade; no child tiddler
 edge            SigilRule    permanent JS exception          template cascade; FROM -> TO arrow syntax
-header          SigilRule    permanent JS exception          template cascade; <<~ ? -> uri >>
+header          ControlFrame the `<<^` scanner, not a `<<~` rule  template cascade; <<^ code="&#x0001;" … from=? -> to=uri >>
 guest-grammar   SigilRule    compound block                  delegates body to guest interpreter
 query           SigilRule    compound leaf                   TW5 filter eval; $list over p1
 query-alias     SigilRule    compound leaf                   same render as query; aliasFor points to target
@@ -111,11 +111,11 @@ Both forms share opener parsing; closer presence distinguishes them.
 
 !! header
 
-The `pranala-header` sigil uses `lar-kind: header`. It receives its own permanent dispatch path — the `?` self-reference token is not a sigil keyword and cannot generalise into compound.
+A carrier's head declares its own address, and it rides the ''control frame'' rather than a sharktooth sigil — so no `<<~` dispatch path stands for it, and the `<<^` scanner reads it instead.
 
-Form: `<<~ ? -> uri >>`
+Form: `<<^ code="&#x0001;" [namespace="…"] from=? -> to=lar:///… >>`
 
-Appears near the document top, declaring the canonical address of this carrier. `?` marks "this carrier itself." Parser claims pranala-header before any other path.
+Appears at the document top; `from=?` marks "this carrier itself", and `to=` names the address it stands at. The close mirrors it: `<<^ code="&#x0004;" -> to=? >>`, resolving to a bearing it cannot know.
 
 <<~/ahu >>
 
@@ -198,6 +198,6 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;miSEoYxInSBMdKlGvI1QdEps4MQZZWFZE15TyFeWl8s
+<<^ code="&#x0003;" >>ni:///sha-256;MvJXCM4F97thcopnEXeEEVXEqnAhv-wrPFHBdoEfbGs
 
 <<^ code="&#x0004;" -> to=? >>

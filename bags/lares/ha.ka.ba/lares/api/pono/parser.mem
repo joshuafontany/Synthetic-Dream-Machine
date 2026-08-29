@@ -61,11 +61,11 @@ Implementation: `packages/lararium-tw5/src/wikirules/lar-sigil.ts`
 
 Dispatch proceeds in this fixed order on every `<<~` encounter:
 
-# ''pranala-header'' — `<<~ ? -> uri >>` permanent JS exception; `?` marks the self-reference token (this carrier). Cannot generalise into compound.
-# ''pranala block'' — `<<~ pranala from=FROM -> to=TO >>body<<~/pranala >>` permanent JS exception; arrow+keyword syntax structurally distinct from `<<~ WORD ARGS >>`.
-# ''pranala inline'' — `<<~ pranala from=FROM -> to=TO [attrs] >>` leaf form of the same exception.
+# ''pranala'' — `<<~ pranala from=FROM -> to=TO [attrs] >>`, and the block form closing at `<<~/pranala >>`. It keeps its own matcher because the edge graph needs `from` and `to` as SEPARATELY TYPED ends: a reader taking whichever address comes first names the SOURCE, and a graph built on that points backwards. Its parameters spell like every other sigil's; only the arrow between the two ends stands apart.
 # ''compound sigil'' — `<<~ WORD1 [WORD2] ARGS >>` covers all remaining named sigils. Child-slot detection (`ahu`, `kau`, future) uses `grammarChildSlotNames()` — dynamic, not hardcoded. Compound with `closeKey` scans for `<<~/SIGIL >>` body; compound without `closeKey` produces a leaf node.
 # ''generic fallback'' — covers `<<~WORD>>` (no-space), C0 control-char forms, and any `<<~` not claimed above. If the generic sigil has a registered closer and its name is not `pranala`, the fallback attempts block capture.
+
+''The carrier's own head rides the CONTROL frame, never a sharktooth.'' A carrier opens at `<<^ code="&#x0001;" … from=? -> to=lar:///… >>` and closes at `<<^ code="&#x0004;" -> to=? >>` — the `<<^` scanner reads those, so no `<<~` rule stands for a header and none is tried here.
 
 Dispatch output: `macrocall` nodes with `$variable = "~"` and `name = SIGIL` for compound forms; `$variable = "~pranala"` with `from`/`to`/`body` keyword attrs for pranala forms.
 
@@ -286,6 +286,6 @@ trigger = "end of stream"
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vcvuYgtods7t4ks1Zcah80qd-WD5kWF2tdZT0ebY-tE
+<<^ code="&#x0003;" >>ni:///sha-256;WiHYZPk-3-PULzNSbJDRK8qKxjEDkLRIYb3R7jkVuhI
 
 <<^ code="&#x0004;" -> to=? >>
