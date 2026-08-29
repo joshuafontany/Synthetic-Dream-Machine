@@ -41,6 +41,7 @@ import { cmdStand }     from "./stand.js";
 import { cmdSeed }     from "./seed.js";
 import { cmdRead, cmdStop } from "./read.js";
 import { cmdRebirth } from "./rebirth.js";
+import { cmdWire } from "./wire.js";
 import {
   cmdBake, cmdStandForeground, cmdStandWithApp, cmdClear, cmdRestart, cmdRiteRebuild, cmdRiteRefresh,
 } from "./scripted.js";
@@ -161,6 +162,9 @@ async function runRite(args: ParsedArgs): Promise<number> {
 const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Sub }>> = {
   found: { summary: "mint the vessel identity, persona root, social planes and bootstrap (idempotent)", run: (a) => cmdFound(under(a)) },
   stand: { summary: "bring the daemon up and report — [--foreground] [--with-app] [--restart [--clear]]", run: standVessel },
+  // THE ONE VESSEL VERB THAT REACHES OUTSIDE THE ROOT. Standing stays inside `LAR_ROOT`; wiring
+  // always touches the operator's home. Two radii, two verbs — a reader sees the reach in the name.
+  wire:  { summary: "point every AI surface on this machine at this vessel — idempotent, re-aims drift",  run: (a) => cmdWire(under(a)) },
   stop:  { summary: "halt the daemon on the port (graceful → forced); a free port reads as stopped",     run: (a) => cmdStop(under(a)) },
   clear: { summary: "wipe the store + projection watermark, re-bake and re-found (identity survives)",   run: (a) => cmdClear(under(a)) },
   bake:  { summary: "re-derive the genesis island from the engine + packed plugin (moves no identity)",  run: (a) => cmdBake(under(a)) },

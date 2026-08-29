@@ -66,11 +66,17 @@ export function tendBootPointer(
 /**
  * Swap the line that names the seed, and leave the rest of the file standing.
  *
+ * ONLY THE POINTER LINE MOVES. `render` spells a whole adapter — the pointer, then a heading and the
+ * thin-file prose — because a file that does not yet exist wants all of it. A file that DOES exist
+ * already carries that prose, so swapping in the whole render duplicates the body on every re-aim,
+ * and a file re-aimed three times carries three copies. The first line of a render is its pointer in
+ * every adapter here; that line is the only one this law owns.
+ *
  * A file with no such line gets the pointer at its head, because a pointer read after the prose it
  * governs has already missed its turn — the harness loads top-down.
  */
 function reaim(standing: string, pointer: string): string {
-  const line = pointer.replace(/\n+$/, "");
+  const line = pointer.replace(/\n+$/, "").split("\n")[0] ?? "";
   const lines = standing.split("\n");
   const at = lines.findIndex((l) => l.includes("noosphere-boot"));
   if (at === -1) return line + "\n\n" + standing.replace(/^\n+/, "");

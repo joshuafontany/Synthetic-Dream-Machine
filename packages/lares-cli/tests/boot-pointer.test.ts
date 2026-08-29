@@ -9,7 +9,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync, readFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 import { wireCodexHome } from "../src/codex-wire.js";
 import { tendBootPointer, asInclude, asLink, tendRepoAdapters, BOOT_CARRIER } from "../src/boot-pointer.js";
 
@@ -51,6 +51,30 @@ describe("codex-wire — the boot pointer", () => {
     expect(step(r).action).toBe("wired");
     expect(readFileSync(agents, "utf8")).toContain(CARRIER);
     expect(existsSync(agents + ".bak")).toBe(true);
+  });
+
+  it("★ a re-aim moves the POINTER and nothing else — the body never doubles ★", () => {
+    // THE REPO ADAPTERS ARE WHERE THIS BITES. A harness home renders a bare pointer line, so swapping
+    // the whole render there costs nothing; a repo adapter renders the pointer AND its thin-file prose,
+    // because an ABSENT file wants all of it. A standing file already carries that prose, so a re-aim
+    // that swapped in the whole render left two copies — and three after a third wake.
+    const repo = mkdtempSync(join(tmpdir(), "adapters-"));
+    // The tender refuses to aim at a carrier that is not there, so the fixture stands one.
+    mkdirSync(join(repo, dirname(BOOT_CARRIER)), { recursive: true });
+    writeFileSync(join(repo, BOOT_CARRIER), "carrier\n");
+    const claude = join(repo, "CLAUDE.md");
+    writeFileSync(claude, "@old/path/noosphere-boot.md\n\n## Claude Adapter Surface\n\n- operator prose\n");
+
+    tendRepoAdapters(repo);
+    const once = readFileSync(claude, "utf8");
+    expect(once).toContain(BOOT_CARRIER);
+    expect(once.split("## Claude Adapter Surface").length - 1).toBe(1);
+    expect(once).toContain("- operator prose");
+
+    // And it converges: a second wake finds the pointer standing and writes nothing at all.
+    tendRepoAdapters(repo);
+    expect(readFileSync(claude, "utf8")).toBe(once);
+    rmSync(repo, { recursive: true, force: true });
   });
 });
 

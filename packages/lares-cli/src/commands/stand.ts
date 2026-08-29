@@ -132,12 +132,14 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
   // tool serves the operator and installing one behind their back does not.
   const integration = checkMempalaceIntegration();
 
-  // 1b. The AI-SURFACE SEATS — every harness reaches the memory sensorium through the same lares seat.
-  //     `--init` stands the WHOLE house, so it tends EVERY surface: each wire converges on the RESOLVED
-  //     spawn (aligned passes untouched · drifted re-aims · absent wires), which keeps running them on
-  //     every init both safe AND load-bearing — a seat aimed at a moved holder script otherwise stays
-  //     shut while its wire reports success, and only re-aiming heals it. A single surface flag still
-  //     targets that one alone; every wire stays graceful when its tool sits un-installed here.
+  // 1b. THE AI-SURFACE SEATS, AND THE ONE PLACE STANDING LEAVES LAR_ROOT.
+  //     Every harness reaches the memory sensorium through the same lares seat, and each wire converges
+  //     on the RESOLVED spawn — aligned passes untouched, drifted RE-AIMS, absent gets written — so
+  //     running them again is how a stale seat heals rather than a waste. A seat aimed at a moved
+  //     holder script otherwise stays shut while its wire reports success.
+  //
+  //     `lares vessel wire` is the door for this alone, and it names the reach the way a verb should.
+  //     These flags stand beside it for the caller who wants a founding and its wiring in one breath.
   const initAll = !observeOnly && args.flags["init"] === true;
   let claude: ClaudeWireResult | undefined;
   if (initAll || (!observeOnly && args.flags["claude"])) {
