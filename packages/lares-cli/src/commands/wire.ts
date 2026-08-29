@@ -29,10 +29,10 @@ import { emit } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 /** The surfaces this door tends. A flag names one; no flag names them all. */
-const SURFACES = ["claude", "codex", "copilot", "vscode"] as const;
-type Surface = (typeof SURFACES)[number];
+export const SURFACES = ["claude", "codex", "copilot", "vscode"] as const;
+export type Surface = (typeof SURFACES)[number];
 
-interface WireReport {
+export interface WireReport {
   claude?:   ClaudeWireResult;
   codex?:    CodexWireResult;
   copilot?:  CopilotWireResult;
@@ -58,10 +58,45 @@ function usage(): number {
 }
 
 /** A wire that throws still reports — a missing tool names itself rather than ending the run. */
-async function attempt<T>(item: string, run: () => T | Promise<T>, onFail: (detail: string) => T): Promise<T> {
+async function attempt<T>(run: () => T | Promise<T>, onFail: (detail: string) => T): Promise<T> {
   try { return await run(); }
   catch (e) { return onFail(e instanceof Error ? e.message : String(e)); }
 }
+
+/**
+ * Tend the named surfaces, and report what each one did.
+ *
+ * THE ONE IMPLEMENTATION. `stand --init` wires as part of a founding and this door wires alone; two
+ * copies of the same eight calls would drift the moment one grew a surface the other did not.
+ */
+export async function tendSurfaces(
+  wanted: readonly Surface[], tendAdapters: boolean,
+): Promise<WireReport> {
+  const r: WireReport = {};
+  if (wanted.includes("claude")) {
+    r.claude = await attempt(() => wireClaudeHome(),
+      (detail) => ({ settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail }] }));
+  }
+  if (wanted.includes("codex")) {
+    r.codex = await attempt(() => wireCodexHome(),
+      (detail) => ({ configPath: "", changed: false, steps: [{ item: "codex", action: "missing-script", detail }] }));
+  }
+  if (wanted.includes("copilot")) {
+    r.copilot = await attempt(() => wireCopilotHome(),
+      (detail) => ({ home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail }] }));
+  }
+  if (wanted.includes("vscode")) {
+    r.vscode = await attempt(() => wireVscode(),
+      (detail) => ({ changed: false, steps: [{ item: "vscode", action: "missing-script", detail }] }));
+  }
+  if (tendAdapters) r.adapters = tendRepoAdapters(repoRoot);
+  return r;
+}
+
+/** Whether a report names anything this pass actually moved. */
+export const wireChanged = (r: WireReport): boolean =>
+  [r.claude, r.codex, r.copilot, r.vscode].some((x) => x?.changed === true)
+  || (r.adapters ?? []).some((a) => a.action !== "present");
 
 export async function cmdWire(args: ParsedArgs): Promise<number> {
   if (args.flags["help"] === true) return usage();
@@ -87,27 +122,8 @@ export async function cmdWire(args: ParsedArgs): Promise<number> {
     return 0;
   }
 
-  const r: WireReport = {};
-  if (wanted.includes("claude")) {
-    r.claude = await attempt("claude", () => wireClaudeHome(),
-      (detail) => ({ settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail }] }));
-  }
-  if (wanted.includes("codex")) {
-    r.codex = await attempt("codex", () => wireCodexHome(),
-      (detail) => ({ configPath: "", changed: false, steps: [{ item: "codex", action: "missing-script", detail }] }));
-  }
-  if (wanted.includes("copilot")) {
-    r.copilot = await attempt("copilot", () => wireCopilotHome(),
-      (detail) => ({ home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail }] }));
-  }
-  if (wanted.includes("vscode")) {
-    r.vscode = await attempt("vscode", () => wireVscode(),
-      (detail) => ({ changed: false, steps: [{ item: "vscode", action: "missing-script", detail }] }));
-  }
-  if (tendAdapters) r.adapters = tendRepoAdapters(repoRoot);
-
-  const changed = [r.claude, r.codex, r.copilot, r.vscode].some((x) => x?.changed === true)
-    || (r.adapters ?? []).some((a) => a.action !== "present");
+  const r = await tendSurfaces(wanted, tendAdapters);
+  const changed = wireChanged(r);
 
   emit(args, {
     ok: true,

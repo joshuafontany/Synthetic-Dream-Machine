@@ -30,11 +30,7 @@ import { summaryOutput } from "../verb-result.js";
 import { runVerb } from "../verb-call.js";
 import { checkMempalaceIntegration } from "../integration-check.js";
 import { foundIfAbsent, type FoundStep } from "../standup.js";
-import { wireClaudeHome, type ClaudeWireResult } from "../claude-wire.js";
-import { wireCodexHome, type CodexWireResult } from "../codex-wire.js";
-import { tendRepoAdapters, type BootPointerStep } from "../boot-pointer.js";
-import { wireCopilotHome, type CopilotWireResult } from "../copilot-wire.js";
-import { wireVscode, type VscodeWireResult } from "../vscode-wire.js";
+import { tendSurfaces, SURFACES } from "./wire.js";
 import type { ParsedArgs } from "../parse-args.js";
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
@@ -141,32 +137,12 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
   //     `lares vessel wire` is the door for this alone, and it names the reach the way a verb should.
   //     These flags stand beside it for the caller who wants a founding and its wiring in one breath.
   const initAll = !observeOnly && args.flags["init"] === true;
-  let claude: ClaudeWireResult | undefined;
-  if (initAll || (!observeOnly && args.flags["claude"])) {
-    try { claude = await wireClaudeHome(); }
-    catch (e) { claude = { settingsPath: "", backedUp: false, changed: false, steps: [{ item: "claude", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
-  }
-  // The repo's own adapters ride the same law as the harness homes — created when absent, re-aimed
-  // when they name anything else. Nothing tended them before, which is how three homes went stale.
-  let adapters: BootPointerStep[] | undefined;
-  if (initAll) adapters = tendRepoAdapters(repoRoot);
-
-  let codex: CodexWireResult | undefined;
-  if (initAll || (!observeOnly && args.flags["codex"])) {
-    try { codex = wireCodexHome(); }
-    catch (e) { codex = { configPath: "", changed: false, steps: [{ item: "codex", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
-  }
-  let copilot: CopilotWireResult | undefined;
-  if (initAll || (!observeOnly && args.flags["copilot"])) {
-    try { copilot = wireCopilotHome(); }
-    catch (e) { copilot = { home: "", changed: false, steps: [{ item: "copilot", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
-  }
-  // Every present VS Code variant (stable + Insiders, remote-server + local-profile).
-  let vscode: VscodeWireResult | undefined;
-  if (initAll || (!observeOnly && args.flags["vscode"])) {
-    try { vscode = wireVscode(); }
-    catch (e) { vscode = { changed: false, steps: [{ item: "vscode", action: "missing-script", detail: e instanceof Error ? e.message : String(e) }] }; }
-  }
+  const named = SURFACES.filter((s) => args.flags[s] === true);
+  // A founding wires every surface; a single flag wires that one. The repo's own adapters ride the
+  // whole-house pass alone — naming one harness says nothing about where this checkout points.
+  const wanted = initAll ? SURFACES : (observeOnly ? [] : named);
+  const wires = wanted.length > 0 ? await tendSurfaces(wanted, initAll) : undefined;
+  const { claude, codex, copilot, vscode, adapters } = wires ?? {};
 
   // 2. Ensure the node is up — attach if healthy, start detached if down. NOT a restart.
   // "Up" for the CLI means the UDS verb socket answers — the CLI reaches the daemon there
