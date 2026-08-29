@@ -25,7 +25,11 @@ const NYM_RE = /^[0-9a-f]{64}$/;
 
 export class CabalJoinError extends Error {}
 
-/** Stands only so a realm that seats no dials still PRICES. A missing dial must not read as an open door. */
+/**
+ * The fairness dials a crossing falls back to. ARRIVED AT, NEVER CHOSEN HERE — a realm that seats its
+ * own carries them on its charter; these stand only so a realm that seats none still PRICES, because a
+ * missing dial must never read as an open door.
+ */
 const FALLBACK_DIALS: AdmissionDials = {
   epsilon: 0.15,
   beta:    0.35,
@@ -61,8 +65,8 @@ export async function runCabalJoin(
   const realm = opts.realm.trim().toLowerCase();
   const applicant = opts.applicant.trim().toLowerCase();
 
-  // Refuse before reading a board: a malformed realm finds an empty one and answers "nobody vouched",
-  // which reads plausible and says the wrong thing.
+  // FAIL CLOSED BEFORE A BOARD IS TOUCHED. A malformed realm reads an empty board and comes back
+  // "nobody vouched" — a wrong answer wearing a plausible shape, and the shape a caller believes.
   if (!NYM_RE.test(realm)) {
     throw new CabalJoinError(`--realm expects a 64-hex cabal-realm doc id, got "${opts.realm}"`);
   }
@@ -79,15 +83,17 @@ export async function runCabalJoin(
   let issued: CabalInvite[];
   try {
     const handle = await materializeSharedLarDoc(repo, vouchBoardDocUrl(vesselKey), "board:vouch-registry");
-    // The verifying read — an unverified board prices a lineage partly made of noise.
+    // THE VERIFYING READ, the only read that stands. An unverified board carries edges whose
+    // signatures never cleared, and the fold would price a lineage partly made of noise.
     issued = await verifiedVouchesFromBoard(handle.doc(), realm, verifyOffline);
   } finally {
     await repo.flush();
   }
 
   const presented = opts.invite ?? issued.find((i) => i.joinerIdentityHex.toLowerCase() === applicant) ?? null;
-  // A carried invite JOINS the issued set rather than replacing it: the price reads the realm's whole
-  // graph, and an applicant holding their own copy must not shrink it to one edge.
+  // A CARRIED INVITE JOINS THE ISSUED SET, never replaces it. The lineage prices the realm's whole
+  // vouch graph; an applicant holding their own copy must not shrink that graph to the one edge they
+  // happen to be carrying.
   const forFold = opts.invite && !issued.some((i) => i.sig === opts.invite!.sig)
     ? [...issued, opts.invite]
     : issued;
@@ -100,7 +106,9 @@ export async function runCabalJoin(
     now:               new Date(opts.now ?? nowDefault),
     verify:            verifyOffline,
     issued:            forFold,
-    seed:              vesselKey.toLowerCase(),   // the lineage root every rank folds down from
+    // The lineage seed — the root standing every rank folds down from. This vessel roots the realm it
+    // serves the board for.
+    seed:              vesselKey.toLowerCase(),
     applicant,
     dials:             opts.dials ?? FALLBACK_DIALS,
     ...(opts.maxVouchesPerVoucher !== undefined ? { maxVouchesPerVoucher: opts.maxVouchesPerVoucher } : {}),

@@ -1,8 +1,12 @@
 /**
  * cabal-join — the applicant crosses, or learns which gate refused. End-to-end through the node.
  *
- * The last test carries the weight: a door onto `admitToRealm` instead of `admitOnLineage` passes
- * every other one, because only the latter folds the DAG where the per-voucher cap cannot be skipped.
+ * THE LAST TEST CARRIES THE WEIGHT. `admitToRealm` takes a vouch DAG already folded, so the
+ * per-voucher cap — the choke on how much mass one hand injects into a lineage — falls to whoever
+ * assembled the edges. `admitOnLineage` folds inside the gate, where it cannot be left out. A door
+ * onto the wrong one of those two passes every test here except that one.
+ *
+ * A refused applicant ANERGIZES: it stays at the floor, and nothing is written on either outcome.
  */
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
