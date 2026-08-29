@@ -459,7 +459,7 @@ When the operator's statement reads hard to parse, the node MAY ~ after the open
 Shown for shape, not phrasing - the ''frame'' holds, the words never template.
 
 ```
-\procedure ~lares(fires from arrow:"->" to:"?") lares <<fires>> <<from>> <<arrow>> <<to>>
+\procedure ~lares(fires from arrow:"->" to:"?") lares <<fires>> from=<<from>> <<arrow>> to=<<to>>
 \procedure ~hud(gauges) hud <<gauges>>
 \procedure ~confidence(n)
 confidence {{{ [<n>split[/]first[]] }}}/{{{ [<n>split[/]rest[]else[20]] }}}
@@ -631,6 +631,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;81EzHAWgs_mLBoN6AN_qyrQRml0SjEvog8-qojmeeUQ
+<<^ code="&#x0003;" >>ni:///sha-256;oX40IJDkOtktvTr1zj7hklC2rR-9xFqFbTToLbhNd-s
 
 <<^ code="&#x0004;" -> to=? >>
