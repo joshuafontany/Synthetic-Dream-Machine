@@ -38,6 +38,7 @@
 import type { ParsedArgs } from "../parse-args.js";
 import { cmdFound }     from "./found.js";
 import { cmdStand }     from "./stand.js";
+import { posturePlan, posturePlanNotice } from "./posture-plan.js";
 import { cmdSeed }     from "./seed.js";
 import { cmdRead, cmdStop } from "./read.js";
 import { cmdRebirth } from "./rebirth.js";
@@ -67,9 +68,19 @@ const withFlag = (args: ParsedArgs, key: string, value = true): ParsedArgs =>
  * Standing a vessel runs ONE motion with several postures, and each posture rides a flag:
  * `--foreground` chooses who owns the terminal, `--with-app` adds the Vite face beside it, `--restart`
  * clears the port first. None of them names a different motion.
+ *
+ * THEY DO, HOWEVER, REACH IT THROUGH FOUR PROGRAMS, and each program reads a different slice of the
+ * command line — `cmdStandWithApp` reads none of it. `posturePlan` holds that difference so a flag
+ * the chosen posture cannot carry names itself, and `--observe` refuses rather than performing the
+ * act it vowed to withhold.
  */
 async function standVessel(args: ParsedArgs): Promise<number> {
   const a = under(args);
+
+  const plan = posturePlan(Object.keys(a.flags).filter((k) => a.flags[k] === true));
+  if (plan.refuse !== null) { console.error(`lares vessel stand: ${plan.refuse}`); return 2; }
+  for (const line of posturePlanNotice(plan)) console.error(`lares vessel stand: ${line}`);
+
   if (a.flags["with-app"])    return cmdStandWithApp(a);
   if (a.flags["restart"])     {
     // `--clear` reads as the operator's word for the wipe; the handler beneath spells it `fresh`.
