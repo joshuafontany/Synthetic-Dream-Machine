@@ -28,7 +28,8 @@
 # founding that reached outside LAR_ROOT could never be rehearsed without touching the operator's machine.
 # The two sidecar lanes carry their own doors (`lares mempalace install`, `lares sense setup`).
 #
-# `wake --init` fans out to the AI-surface wires (~/.claude, ~/.codex, ~/.copilot), so this harness passes
+# `lares vessel stand --init` fans out to the AI-surface wires (`lares vessel wire` is that act's own
+# door), so this harness passes
 # `--install` and never `--init` — the wiring leg stays un-walked, a machine-setup concern rather than a
 # founding one.
 #
@@ -146,7 +147,7 @@ trap cleanup EXIT
 
 say "rehearse-keeper — the KEEPER sequence, ${CYCLES} cycle(s), throwaway at:"
 echo "  $ROOT"
-echo "  founding with \`wake --install\` — the rite AS WRITTEN. Founding stands the VESSEL and nothing"
+echo "  founding with \`lares vessel stand --install\` — the rite AS WRITTEN. Founding stands the VESSEL and nothing"
 echo "  else, so every byte it writes lands inside LAR_ROOT."
 echo "  NOT exercised here: the AI-surface wiring (rides \`--init\`), and the vault's TTY prompt (this"
 echo "  harness supplies the passphrase by env, so the no-echo leg goes unwalked)."
@@ -222,7 +223,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # and five later steps still reported green. A cascade of green under a red foundation reads worse than
   # a failure, because it invites belief.
   BEFORE=$FAILED
-  run "wake --install (founds the vessel)"   lares vessel stand --install
+  run "stand --install (founds the vessel)" lares vessel stand --install
   if [ "$FAILED" -ne "$BEFORE" ]; then
     say "CYCLE $CYCLE ABANDONED — the founding failed; every movement below would measure an unfounded tree."
     continue
@@ -318,7 +319,7 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # ⑥ ASSERTS BY CONNECTING, never by inspecting. `node status` reads local facts alone — bootstrap
   # present, storage size, port in use — and the label "LIVE" claimed far more than the verb answers. A
   # node that fataled mid-boot keeps its port bound, so `portInUse` stayed true over a dead vessel and the
-  # movement reported LIVE across two cycles that never served anything. `wake --observe` REPORTS without
+  # movement reported LIVE across two cycles that never served anything. `stand --observe` REPORTS without
   # standing, and its `up` reads a connection, so this asks the one question that means live.
   run "⑥ LIVE — the daemon ANSWERS" \
     sh -c "node '$LARES' vessel stand --json --observe | grep -q '\"up\":true'"

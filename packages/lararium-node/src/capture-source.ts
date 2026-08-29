@@ -117,7 +117,7 @@ export type SourceCaptureSpawn = PalaceHolderSpawn;
 function defaultSpawn(sensoriumRoot: string): SourceCaptureSpawn {
   return (_holderPalace: string): PalaceHolderProc => {
     const { python, script, submoduleRoot, scriptPresent } = resolveCaptureSessionSpawn();
-    if (!python) throw new Error("no python holds mempalace — run `lares vessel stand --install`");
+    if (!python) throw new Error("no python holds mempalace — run `lares mempalace install`");
     if (!scriptPresent) throw new Error(`capture-session helper missing at ${script}`);
     const env = {
       ...process.env,

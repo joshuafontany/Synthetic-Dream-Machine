@@ -23,7 +23,7 @@ export interface RecallHolder {
 function defaultSpawn(sensoriumRoot: string): PalaceHolderSpawn {
   return (_holderPalace: string): PalaceHolderProc => {
     const { python, script: captureScript, submoduleRoot } = resolveCaptureSessionSpawn();
-    if (!python) throw new Error("no python holds the sensorium — run `lares vessel stand --install`");
+    if (!python) throw new Error("no python holds the sensorium — run `lares mempalace install`");
     // recall_session.py sits BESIDE capture_session.py in the sensorium scripts dir.
     const script = captureScript.replace(/capture_session\.py$/, "recall_session.py");
     if (!existsSync(script)) throw new Error(`recall-session helper missing at ${script}`);

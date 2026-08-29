@@ -71,7 +71,7 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   //     lares house. Codex reads `env` as an inline TOML table.
   const laresMcp = resolveLaresMcp();
   if (laresMcp === null) {
-    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares vessel stand --init`" });
+    steps.push({ item: "mcp:lares", action: "missing-script", detail: "lares_mcp.py / python / sensorium not found — run `lares mempalace install`, then `lares sense setup`" });
   } else {
     // Converge on the RESOLVED spawn, never on mere presence. A seat aimed at a re-homed script (a
     // package that moves its holder) otherwise sits drifted forever while the wire reports it present —

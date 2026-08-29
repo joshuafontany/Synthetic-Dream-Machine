@@ -1,6 +1,6 @@
 /**
  * palace-organs — the ONE shared enumerator for the local palace organs (the durable stores the
- * operator's vessel stands), so setup (`lares vessel stand --init`) and teardown (`lares palace-teardown`)
+ * operator's vessel stands), so setup (`lares sense setup`) and teardown (`lares palace-teardown`)
  * read the SAME list and can never drift.
  *
  * SOVEREIGN ORGANS ONLY. Every organ this registry stands lives inside the lararium's own tree. Each
@@ -96,8 +96,8 @@ function errText(e: unknown): string {
  * settings.json, so without this the `sessions` mega-wing returns on the first turn). Both legs
  * idempotent.
  *
- * The GUEST LANE, never the boot path. `wake --init` no longer calls this — writing `~/.mempalace`
- * from the boot contradicts the comparator ruling (`RUN-ARC.md:14`). `lares mempalace setup` calls
+ * The GUEST LANE, never the boot path: writing `~/.mempalace` from a boot contradicts the comparator
+ * ruling (`RUN-ARC.md:14`), so no founding reaches here. `lares mempalace setup` calls
  * it, so the operator raises the guest DELIBERATELY: as a standalone sanity-check sidecar to compare
  * the sovereign sensorium against, or as the source of the one-way import Act (`guest-import.ts`).
  */
@@ -185,8 +185,8 @@ function ensureDirOrgan(name: string, dir: string): () => PalaceSetupStep[] {
 
 /**
  * The GUEST organ — `~/.mempalace` (or `$MEMPALACE_PALACE_PATH`). Enumerated SEPARATELY from
- * {@link palaceOrgans} and reached only through the guest lane (`lares mempalace …`), never from
- * `wake --init`: the sovereign vessel must not write the comparator it measures itself against.
+ * {@link palaceOrgans} and reached only through the guest lane (`lares mempalace …`), never from a
+ * founding: the sovereign vessel must not write the comparator it measures itself against.
  */
 export function guestMempalaceOrgan(): PalaceOrgan {
   const dir = larMempalaceDir();

@@ -1,5 +1,5 @@
 /**
- * palace-organs — the shared enumerator setup (`wake --init`) and teardown (`palace-teardown`)
+ * palace-organs — the shared enumerator setup (`lares sense setup`) and teardown (`palace-teardown`)
  * BOTH consume, plus the idempotent wire-once contract (re-run ⇒ all "present").
  */
 
@@ -55,7 +55,7 @@ describe("palaceOrgans — the ONE registry both consumers read", () => {
   });
 
   test("the GUEST ~/.mempalace never enters the sovereign registry (the comparator ruling)", () => {
-    // `wake --init` stands ONLY what the lararium owns. Standing the guest from the boot wrote the
+    // A founding stands ONLY what the lararium owns. Standing the guest from the boot wrote the
     // very comparator the RUN arc measures against (RUN-ARC.md:14). It rides its own lane now.
     // The ruling discriminates by LOCATION, never by name: the sovereign registry carries an in-tree
     // organ that shares the guest's name, so asserting on the name alone would read the wrong thing.
