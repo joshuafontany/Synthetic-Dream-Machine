@@ -1,0 +1,229 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lararium/api/context-substrate >>
+```toml meta
+cacheable = false
+file-path = "bags/lararium/ha.ka.ba/lararium/api/context-substrate.mem"
+l-space   = "stable"
+mana      = 16
+manao     = 17
+manaoio   = 17
+register  = "Synthesis"
+retain    = true
+role      = "the context substrate — the daemon-wiki VM as the surface every door renders through; transclusion in place of file-import, the two-verb door, the write shore, the pull budget"
+tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lararium/api/context-substrate"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #meme-header >>
+
+! The Context Substrate
+
+Design in the open; the forks at #forks stand unruled.
+
+''One VM, one grammar, four doors.'' The operator and the agent reach the same store
+through the same engine, and context arrives ''by transclusion at an address'' rather than
+by file-import as cargo. A `lar:` URI carries the reach; the daemon's TW5 VM renders it.
+
+<<~/ahu >>
+
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+
+<<~ ahu #provenance >>
+
+!! Provenance
+
+```toml
+substrate-source = "packages/lararium-mesh/src/wiki-recipe.ts — expandRecipe, ORACLE_BAG"
+engine-source    = "packages/lararium-mesh/src/cas.ts — pluginCidsFromIslandBlobs"
+vm-source        = "packages/lararium-tw5/src/daemon-vm-core.ts · daemon-behavior.ts"
+seat-source      = "packages/lares-cli/.claude-plugin/hooks/lares-wake-hook.mjs"
+field-research   = "lar:///ha.ka.ba/lares/api/vendor/claude-code-harness"
+created          = "2026-08-28"
+```
+
+<<~/ahu >>
+
+<<~ ahu #the-law >>
+
+!! The Substrate Law
+
+''The seed carries a bearing, never a corpus.'' A boot frame names where the house stands
+and which doors open; the house itself renders on demand from the addresses that frame
+carries. What an exchange never reaches never costs it.
+
+''The engine renders regardless.'' `@oracle` hands every island the memetic-wikitext plugin
+by CID from the local CAS, on a path no recipe consults
+(<<~ loulou lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>). So the grammar stands under
+every door before any door opens, and a transclusion never negotiates its own parser.
+
+''Four doors, one store.'' Each reaches the same VM over the same grammar:
+
+| Door | Reaches the VM by |
+|---|---|
+| CLI | `lares <verb>` → UDS socket → @daemon |
+| Chat | MCP stdio → @daemon |
+| Browser | WS at the daemon relay |
+| Operator edit | the `wikis/{slug}` live layers |
+
+The isomorphism holds by construction: `expandRecipe` stands as the single slug-aware source
+of a wiki's slot stack, and the daemon surfaces like any pinned wiki — same VM, same path,
+the same `#projection` surface a pinned wiki paints. ''Sharing the editing surface takes no
+new machinery; it takes removing the file-import bypass.''
+
+<<~/ahu >>
+
+<<~ ahu #why-transclusion >>
+
+!! Why Transclusion Carries More Than Disclosure
+
+A flat skill format discloses in three stages, one directory level deep: frontmatter, body,
+bundled file. It concatenates.
+
+Transclusion ''renders'': recursive, addressable, parameterized, filter-driven, cap-gated at
+the door. `{{tiddler}}` · `<<procedure arg:"…">>` · `{{{ [filter] }}}` compose through the
+ahu cascade. A disclosure hands over a file; a transclusion hands over ''an answer at an
+address, with arguments, through a template cascade''.
+
+The move also lands on the published context law rather than against it: just-in-time
+retrieval asks for lightweight identifiers that load content at runtime, and a `lar:` URI
+stands as exactly that identifier
+(<<~ loulou lar:///ha.ka.ba/lares/api/vendor/claude-code-harness#the-laws-we-adopt >>).
+
+<<~/ahu >>
+
+<<~ ahu #the-door >>
+
+!! The Door — two verbs, and the address carries the rest
+
+The sensorium already rules the shape: ''one verb reaches any plane; a new plane needs no new
+verb''. The wiki door inherits it.
+
+| Verb | Takes | Hands back | Routes through |
+|---|---|---|---|
+| `render` | `lar:` uri + params | rendered text | the VM's transclusion path |
+| `put` | `lar:` uri + text | the slot it landed in | the `bag-paths` cascade |
+
+''The tool surface stays small on purpose.'' A crowded surface distracts an agent from
+efficient strategies, and a store that enumerates itself into an exchange spends the whole
+budget before the first question. ''Richness belongs in the addresses.'' The door MUST NOT
+grow a verb per tiddler kind, and the store MUST NOT announce its shelf.
+
+<<~/ahu >>
+
+<<~ ahu #the-write-shore >>
+
+!! The Write Shore
+
+''The agent writes to the live layers; promotion stays the operator's act.''
+
+A `put` routes through the `bag-paths` cascade into `temp` / `draft` — never into
+`bags/{slug}` canon. Canon receives by the operator's MOVE alone
+(<<~ loulou lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>, shore law).
+
+Three groundings meet at this one boundary, each arriving on its own evidence:
+
+# ''The shore law'' — canon takes a promotion MOVE, never a write.
+# ''The observe cap'' — the wake hook withholds the standing half so standing stays the
+operator's act.
+# ''The advisory law'' — an instrument surfaces and never remediates unattended
+(<<~ loulou lar:///ha.ka.ba/lararium/docs/kairos#refusal >>).
+
+''The convergence stands NOTED, never proven.'' Three readings reached in one pass may carry
+one intuition wearing three names. The claim that tests it outside: does the `bag-paths`
+cascade REFUSE a `put` aimed at `bags/{slug}`, or does the shore live only in prose?
+
+<<~/ahu >>
+
+<<~ ahu #the-budget >>
+
+!! The Pull Budget
+
+''Just-in-time retrieval spends less only under discipline.'' A file-imported seed costs a
+known, bounded amount every wake. Transclusion costs an unbounded amount, and an agent that
+over-pulls spends more than the seed it replaced.
+
+Two ceilings hold it:
+
+* ''The frame ceiling.'' Everything a wake hook injects rides one 10,000-character cap on
+`additionalContext`; past it the text lands in a file and the exchange receives a preview and
+a path. The frame therefore carries bearing and doors, never corpus.
+* ''The turn ceiling.'' A per-turn pull count, surfaced in the frame, so the discipline reads
+as a ruling rather than as drift.
+
+<<~/ahu >>
+
+<<~ ahu #hidden-failures >>
+
+!! Hidden Failures
+
+# ''The house acquires a single point of failure it never carried.'' A file-imported seed
+stands whether or not anything runs; a transcluded one stands only while the daemon does.
+The cold floor at #forks decides how far this bites.
+# ''The context ledger inverts its risk'' — from bounded-and-known to unbounded-and-variable.
+# ''Every pull costs a round trip'' — socket hop plus VM render, compounding across a turn,
+where a file import cost one read.
+# ''The write reach IS the security surface.'' #the-write-shore answers it; an unrouted `put`
+re-opens it.
+# ''A thin house cannot see its own thinness.'' A node standing without its daemon reads
+whole from inside and speaks at full confidence from a partial house. Any cold floor MUST
+make its own partiality legible in the frame.
+
+<<~/ahu >>
+
+<<~ ahu #forks >>
+
+!! Forks — unruled
+
+# ''The cold floor.'' What survives outside the daemon: everything (the daemon enriches
+only) · a minimal floor (ward, turn frame, `lar:` law, Voice roster, the door) · nothing (the
+daemon becomes load-bearing for the node existing).
+# ''The discovery door.'' Addresses alone (no enumeration, and an agent blind to what the
+operator never handed it) · one operator-authored index tiddler at a fixed address, rendered
+like anything else (a human-set ceiling, discovery through the same mechanism) · an open
+filter verb (richest, and the enumeration hazard entire).
+# ''Write reach.'' `temp` alone · `temp` + `draft` · `working` as well (an agent editing
+beside a human with no turn-taking).
+# ''Portability.'' Emit a flat-format projection from meme canon, the way a spec carrier
+renders its submission pair · or drop cross-harness portability.
+# ''The pull ceiling'' — its number, and whether the frame carries it.
+
+<<~/ahu >>
+
+<<~ ahu #build-order >>
+
+!! Build Order
+
+Each step stands alone; none blocks the next.
+
+# ''`render` end to end'' — one `lar:` URI returns rendered text over the socket. Nothing
+else moves first.
+# ''`lares kairos``'' against check set one — ruled already, and it exercises the same door.
+# ''Slim the frame'' to bearing plus doors, behind the cold-floor ruling.
+# ''`put`'' into the live layers, cap-gated.
+# ''The flat-format projection.''
+
+''Precondition for every step: the daemon stands.'' Each door in this design runs through it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/hydration-grain >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/kairos >>
+<<~ loulou lar:///ha.ka.ba/lares/api/vendor/claude-code-harness >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;yyQ5VQVElN2n_dy_QCffnVi0oFbVmoWWr9OpuLNqwac
+
+<<^ code="&#x0004;" -> ? >>

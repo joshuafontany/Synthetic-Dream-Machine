@@ -1,0 +1,202 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/vendor/claude-code-harness >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/api/vendor/claude-code-harness.mem"
+l-space   = "stable"
+mana      = 15
+manao     = 16
+manaoio   = 16
+register  = "Synthesis"
+retain    = true
+role      = "vendor declaration: the Claude Code harness — its extension seams, their contracts and stability grades, the design law it publishes, and where a sovereign system owns its own ground"
+tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/api/vendor/claude-code-harness"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #about >>
+
+! Vendor Declaration — the Claude Code Harness
+
+The primary agent surface this operator runs, and a vendor the stack ''composes with at
+arm's length'' rather than depends on. A vendor declaration names what an outside surface
+offers, on what contract, at what stability — never what the house must become.
+
+<<~/ahu >>
+
+<<~ ahu #evidence-grades >>
+
+!! Evidence Grades — read before citing anything here
+
+Three grades, and they do not carry equal weight:
+
+* ''RAW'' — the literal doc markdown, pulled and read. Every doc page fetches as markdown by
+appending `.md` to its URL (`code.claude.com/docs/en/hooks.md`). ''Use this grade for
+anything that enters a build.''
+* ''REPORTED'' — a summarizing fetch layer stood between the page and the reader. On one page
+where both grades ran, the summarizer ''invented four field names'' that RAW disproved.
+* ''DIGEST'' — a search-engine summary of a source that refused the fetch. Caps near 12/20
+however confident the wording sounds.
+
+<<~ confidence 18/20 >> ''The collision discipline: before a claim here bears weight, pull the
+page RAW and read the section.'' Three claims carried that collision on capture — the
+`ConfigChange` contract, the `additionalContext` cap, and the resume semantics — and each
+held.
+
+<<~/ahu >>
+
+<<~ ahu #the-published-seat >>
+
+!! The Published Seat
+
+<<~ confidence 16/20 >> The vendor names its own harness a replaceable component. Its
+managed-agents engineering writing decouples ''the brain (the model and its harness)'' from
+''the hands (sandboxes and tools)'' and ''the session (the log of events)'' — each an
+interface making few assumptions about the others, each replaceable independently, and the
+architecture stated as unopinionated about which harness comes next.
+
+''So an independent system needs no crack to fit through.'' The socket stands published.
+
+<<~/ahu >>
+
+<<~ ahu #the-seams >>
+
+!! The Seams, ranked by which way the dependency runs
+
+| Rank | Seam | Why it holds | Grade |
+|---|---|---|---|
+| 1 | ''MCP server'' | the harness dials out to the daemon; versioned protocol, independent spec body | RAW |
+| 2 | ''Portable skill format'' | an open standard with a reference validator, read by many harnesses | RAW |
+| 3 | ''Headless subprocess'' | the vendor's own documented path for callers outside its two SDK languages | RAW |
+| 4 | ''Hooks'' | deterministic where instructions stay advisory — and the fastest-moving surface here | RAW |
+
+<<~ confidence 17/20 >> ''Rank 1 carries the load.'' A daemon the harness connects to inverts
+the dependency: the sovereign process stands first and answers, rather than living inside
+something else's lifecycle.
+
+!!! The portable skill format
+
+Six frontmatter fields stand legal outside the vendor's own harness: `name`, `description`,
+`license`, `compatibility`, `metadata`, `allowed-tools`. The harness accepts a much larger
+superset, and any of it ''hard-errors'' on the portable path rather than warning.
+''A projection emitted from meme canon therefore MUST hold to the six.''
+
+!!! Hooks — the contracts that matter to this house
+
+<<~ confidence 18/20 >> ''`ConfigChange`'' fires on user, project, local, policy and skill
+configuration edits, carrying `source` and `file_path` — the drift surface a posture reviewer
+watches. RAW: a hook MAY block the change, and ''a blocked change surfaces no message to the
+operator or to the agent — only a debug-log line''. ''So on this seam, acting runs invisible
+and only observing speaks''
+(<<~ loulou lar:///ha.ka.ba/lararium/docs/kairos#refusal >>).
+
+<<~ confidence 17/20 >> ''The frame ceiling.'' Hook output strings, `additionalContext`
+included, cap at 10,000 characters; past it the text lands in a file and the exchange
+receives a preview plus a path. ''One shared budget across every hook that speaks at a
+wake.''
+
+<<~ confidence 17/20 >> ''Resume holds the frame honest.'' Mid-session hook context replays
+from the transcript on resume — stale timestamps and all — while session-start hooks ''run
+again'', carrying a source that names the resume. A wake frame promising what stands right
+now keeps that promise only from the session-start seat.
+
+<<~ confidence 16/20 >> ''A hook renders no security boundary, by the vendor's own statement''
+— a hook that times out yields no decision and the action proceeds. Permission rules, not
+hooks, carry a hard allow or deny.
+
+<<~/ahu >>
+
+<<~ ahu #the-laws-we-adopt >>
+
+!! The Laws This House Adopts
+
+Each stands substrate-neutral — true of any harness, ours included.
+
+<<~ confidence 17/20 >> ''Context runs finite, with diminishing returns.'' Recall degrades as
+a window fills; the design objective reads as the smallest set of high-signal tokens that
+carries the outcome. ''The transclusion substrate enacts this''
+(<<~ loulou lar:///ha.ka.ba/lararium/api/context-substrate >>).
+
+<<~ confidence 17/20 >> ''Just-in-time retrieval over pre-loading.'' Hold lightweight
+identifiers; load content at runtime through them. ''A `lar:` URI stands as that
+identifier.''
+
+<<~ confidence 17/20 >> ''Fewer, better tools.'' A crowded surface distracts an agent from
+efficient strategies. ''Richness belongs in the addresses, never in the verb count.''
+
+<<~ confidence 16/20 >> ''Never let a federation surface enumerate itself into an exchange.''
+Cheap composition at a protocol layer turns expensive at the attention layer — tool
+definitions alone have overloaded windows before a first request. ''A mesh that lets peers
+announce their surfaces inherits that bill.''
+
+<<~ confidence 16/20 >> ''The environment holds where supervision does not.'' Approval
+prompts measure ~93% approved, and attention thins as approvals multiply; in a measured
+injection trial the exfiltration completed 24 times in 25 retries, and only egress control
+held. ''Supervise what an agent CAN do, never only what it does.''
+
+<<~ confidence 15/20 >> ''A house hydrating a large seed at every wake sits inside a tension
+the vendor names and never solves'' — persistent-instruction surfaces grow, and a bloated one
+gets ignored wholesale. ''Measure the seed rather than assume it.''
+
+<<~/ahu >>
+
+<<~ ahu #traps >>
+
+!! Traps
+
+<<~ confidence 15/20 >> ''A headless run without the bare flag executes an untrusted
+repository's hooks and connects its declared servers'' — no trust dialog, no per-server
+prompt. Anything here that shells out to the harness carries that flag from its first line.
+
+<<~ confidence 15/20 >> ''The protocol's sampling primitive stands deprecated'' — the path
+that let a server borrow the host's model withdraws, and the guidance names direct provider
+integration instead. ''Nothing local-first depends on it.''
+
+<<~ confidence 14/20 >> ''One switch disables three seams'' — the hook kill-switch also takes
+the custom status line and the file-suggestion command. A design spread across all three
+loses all three together.
+
+<<~ confidence 17/20 >> ''A pattern bounds a string; only a runtime bounds authority.''
+Wherever an allowed program can name another program, an allow-list has delegated its whole
+authority to text the pattern never sees
+(<<~ loulou lar:///ha.ka.ba/lararium/docs/kairos#check-set-one >>).
+
+<<~/ahu >>
+
+<<~ ahu #stability >>
+
+!! Stability
+
+| Surface | Machine-readable schema | Read |
+|---|---|---|
+| the protocol | versioned revisions, independent body | ''safest'' |
+| the portable skill format | published spec + reference validator | ''safe'' |
+| hooks | none served | documented, weekly-moving — version-gate every use |
+| settings · plugins · subagents · status line | none served | documented, proprietary |
+| the streamed output shape | none served | feature-detect on the capability array the stream carries |
+
+<<~ confidence 13/20 >> ''No machine-checkable artifact stands behind hooks, settings, plugin
+or marketplace manifests, or the streamed message union.'' Prose in docs, all of it. A gate
+built against them tests behaviour, never a schema.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+!! Edges
+
+<<~ loulou lar:///ha.ka.ba/lararium/api/context-substrate >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/kairos >>
+<<~ loulou lar:///ha.ka.ba/lares/api/infrastructure-as-myth >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;N9YVoTTn6lH94-ZWP3Lw8UEofKveNnp8TXgVcHxvml4
+
+<<^ code="&#x0004;" -> ? >>
