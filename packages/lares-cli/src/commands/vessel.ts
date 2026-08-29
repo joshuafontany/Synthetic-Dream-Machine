@@ -178,7 +178,15 @@ function printVesselHelp(): void {
   for (const [name, s] of Object.entries(SUBS)) {
     console.log(`  ${name.padEnd(7)} ${s.summary}`);
   }
-  console.log("\n  A fresh founding: lares vessel rite founding   (found · stand · seed)");
+  // THE WHOLE ARC, not the third of it this door owns. A founding leaves a vessel standing at the
+  // WAKING FLOOR — carrying, serving the public shelf, every sovereign act waiting — and the two acts
+  // that follow live at other doors. A reader who meets only the first stops there and reads the floor
+  // as a fault.
+  console.log("\n  A fresh founding, end to end:");
+  console.log("    lares vessel rite founding            found · stand · seed");
+  console.log("    lares persona new 0 --name '<label>'  light a face — this lifts it off the floor");
+  console.log("    lares vessel stand                    stand again; the lift lands here");
+  console.log("    lares vessel wire                     point this machine's AI surfaces at it");
 }
 
 export async function cmdVessel(args: ParsedArgs): Promise<number> {
