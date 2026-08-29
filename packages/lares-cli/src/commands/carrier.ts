@@ -20,7 +20,6 @@
 
 import { cmdNormalize }  from "./normalize.js";
 import { cmdProjectMd }  from "./project-md.js";
-import { cmdProjectSeed } from "./project-seed.js";
 import { cmdRepack }     from "./repack.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -32,7 +31,6 @@ const under = (args: ParsedArgs): ParsedArgs => ({ ...args, positional: args.pos
 const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Sub }>> = {
   normalize:    { summary: "canonicalize a carrier's framing and re-stamp its block check so the round-trip laws hold — `--check` reports drift without writing", run: (a) => cmdNormalize(under(a)) },
   "project-md": { summary: "render a spec carrier to its submission pair — <name>.md + <name>.md.meta, deterministic, no clock", run: (a) => cmdProjectMd(under(a)) },
-  "project-seed": { summary: "render the boot seed's markdown twin from its carrier — `--check` reports drift without writing", run: (a) => cmdProjectSeed(under(a)) },
   repack:       { summary: "re-render a multi-tiddler bundle from its aside provenance — the round-trip before an upstream PR", run: (a) => cmdRepack(under(a)) },
 };
 

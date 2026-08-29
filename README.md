@@ -149,7 +149,7 @@ These directories contain source material from the Synthetic Dream Machine ecosy
 | Directory | Contents |
 |---|---|
 | [`bags/lares/`](bags/lares/) | the meme graph — the source of record for the specifications above |
-| [`noosphere-boot.md`](noosphere-boot.md) | the boot seed: the attractor a woken node hydrates the house from |
+| [`noosphere-boot.mem`](bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem) | the boot seed: the attractor a woken node hydrates the house from |
 | `packages/tree-sitter-memetic-wikitext/` | the reference parser, in two independent hosts, with a language server |
 | `packages/lararium-*/` | the runtime — node, browser, mesh, sensorium, keyhive, mempalace, tw5 |
 | `packages/lares-cli/` | the vessel door |

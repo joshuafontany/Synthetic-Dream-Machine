@@ -26,7 +26,7 @@ const OLD_OPENER = /<<~[ \t]*(?:[^\x00-\x7F][ \t]?)*&#x00[01][0-9A-Fa-f];/;
 function trackedCarriers(): string[] {
   const out = execFileSync(
     "git",
-    ["ls-files", "*.mem", "*.tid", "noosphere-boot.md", "packages/AGENTS.md"],
+    ["ls-files", "*.mem", "*.tid", "packages/AGENTS.md"],
     { cwd: REPO, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 },
   );
   return out.split("\n").filter(Boolean);

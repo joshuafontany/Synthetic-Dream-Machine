@@ -61,7 +61,7 @@ This license applies to all Licensed Material in this repository. This includes 
 - The Elyncia setting material (`elyncia/`)
 - The Synthetic Dream Machine RPG conversion, witness, and design content (`bags/@sdm`, `sdm/`) — dual-covered with the SDM 3rd Party License where it adapts SDM rules mechanics; see Section IX
 - Original conversion and design work in pipeline directories
-- Agent Instructions: `noosphere-boot.md`, the root `CLAUDE.md`/`AGENTS.md` adapters, skill files, and all agent prompt files in other repository directories
+- Agent Instructions: `noosphere-boot.mem`, the root `CLAUDE.md`/`AGENTS.md` adapters, skill files, and all agent prompt files in other repository directories
 
 Where Licensed Material overlaps with content also covered by the SDM 3rd Party License (such as SDM rules mechanics), that content is subject to **both** licenses. See Section IX for how dual-coverage resolves.
 

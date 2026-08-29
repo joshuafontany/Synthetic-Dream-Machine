@@ -87,7 +87,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
   "closure": [
     {
       "uri": "lar:///ha.ka.ba/lares/api/noosphere-boot",
-      "file_path": "noosphere-boot.md",
+      "file_path": "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem",
       "content_hash": "<sha256>",
       "kind": "caps-file",
       "virtual": false,
@@ -306,6 +306,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bqNv7F5T5UIft2Eiyd1m4t_0fAdLKHEhHcZMRIYc1Q4
+<<^ code="&#x0003;" >>ni:///sha-256;bFSFH7Pbp1VV1lvIKsOrm5hZmYxY8RQ-tGROoJGeh7c
 
 <<^ code="&#x0004;" -> ? >>

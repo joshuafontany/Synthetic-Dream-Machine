@@ -41,7 +41,7 @@ resolve before threshold yield.
 
 | # | URI | File path | Hydration socket |
 |---:|---|---|---|
-| 1 | `lar:///ha.ka.ba/lares/api/noosphere-boot` | `noosphere-boot.md` | entry |
+| 1 | `lar:///ha.ka.ba/lares/api/noosphere-boot` | `noosphere-boot.mem` | entry |
 | 2 | `lar:///ha.ka.ba/lares/api/mu/l-prime` | `packages/lares-core/memes/api/pono/l-prime.md` | `AGENTS#preload-l-prime` |
 | 3 | `lar:///ha.ka.ba/lares/api/mu/ooda-ha` | `packages/lares-core/memes/api/pono/ooda-ha.md` | `AGENTS#preload-ooda-ha` |
 | 4 | `lar:///ha.ka.ba/lares/api/pono/lar-uri` | `packages/lares-core/memes/api/pono/lar-uri.md` | `AGENTS#preload-lar-uri` |
@@ -170,6 +170,6 @@ Minimal boot should remain small enough to avoid compaction.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Gx64YJxhAkc9OWGnmQCYyUwo1x6hr3L41ulDNNW4i98
+<<^ code="&#x0003;" >>ni:///sha-256;WgVffV47QUattH42vH7ohP4LDpMOmWdga3nxK-QvalA
 
 <<^ code="&#x0004;" -> ? >>
