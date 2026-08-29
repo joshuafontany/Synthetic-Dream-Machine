@@ -45,8 +45,8 @@ const PATTERNS: ReadonlyArray<readonly [EdgeForm, RegExp]> = [
   ["loulou",   /<<~\s*loulou\s+lar:\/\/\/(\S+?)\s*>>/g],
   // A `>` CLOSES A CALL ONLY WHEN A SECOND ONE FOLLOWS — TiddlyWiki's own `reUnquotedAttribute` law. A
   // `pranala` states its target past a bearing arrow, so a scan of `[^>]*?` stops at that arrow and the
-  // sigil never reaches its own address — silently, as a form that simply reports no edges. `(?:[^>]|>(?!>))*?` is the form every scan in this grammar uses, for this
-  // reason. Measured: without it this reader found 0 of the corpus's 84 `pranala` edges, and reported
+  // sigil never reaches its own address — silently, as a form that simply reports no edges. Every scan in this grammar spells it
+  // `(?:[^>]|>(?!>))*?`, for that reason. Measured: without it this reader found 0 of the corpus's 84 `pranala` edges, and reported
   // 163 dangling where 194 stand.
   //
   // AN EDGE IS THE END IT POINTS AT. A `pranala` names both ends, and only `to=` is the edge — `from=`

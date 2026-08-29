@@ -26,8 +26,8 @@ describe("a framing sigil names its ends", () => {
   });
 
   test("a namespace keeps its place ahead of the ends", () => {
-    // The namespace comes from the META, which is the authority the SOH opener derives from — stating it
-    // on the head alone reads as drift and clears. So a faithful carrier declares it.
+    // The META holds the authority the SOH opener derives from — stating a namespace on the head alone
+    // reads as drift and clears. So a faithful carrier declares it.
     const head = (ends: string) =>
       ['```toml meta', 'namespace = "glyph"', '```', '', `<<^ code="&#x0001;" namespace="glyph" ${ends} >>`].join("\n");
     expect(norm(head('? -> lar:///a.b.c/x'))).toBe(head('from=? -> to=lar:///a.b.c/x'));
@@ -70,8 +70,8 @@ describe("a framing sigil names its ends", () => {
 });
 
 describe("the writer emits the ends already named", () => {
-  // A reader that stays forgiving and a writer that emits one spelling is what carries a grammar
-  // migration. Where the writer keeps the old spelling, every round trip mints it back.
+  // A forgiving reader beside a writer that emits ONE spelling carries a grammar migration. Where the
+  // writer keeps the earlier spelling, every round trip mints it back.
   const URI = "lar:///test.ends";
 
   test("★ the minted opener and closer name their ends ★", async () => {

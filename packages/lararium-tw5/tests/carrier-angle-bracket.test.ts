@@ -11,7 +11,7 @@
  *
  * ── WHAT THIS FILE HOLDS THE SCANS TO ────────────────────────────────────────────────────────────────────
  * A scan naming ONE spelling — the bearing arrow — reads `->` and refuses `a>b`, so a carrier TiddlyWiki
- * parses reads as unframed here. The two readings must agree, and the host's is the authority.
+ * parses reads as unframed here. The two readings must agree, and the host holds the authority.
  */
 
 import { describe, test, expect } from "vitest";
