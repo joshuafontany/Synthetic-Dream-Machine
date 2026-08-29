@@ -16,10 +16,11 @@
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, renameSync, openSync, closeSync, rmSync, statSync } from "node:fs";
 import { spawnSync } from "node:child_process";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
 import { resolveLaresMcp } from "./mcp-resolve.js";
+import { tendBootPointer, asInclude, BOOT_CARRIER } from "./boot-pointer.js";
 
 /**
  * Acquire an exclusive write-lock (git-lockfile pattern: O_CREAT|O_EXCL) to serialize
@@ -261,6 +262,16 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
   }
   steps.push(reapMempalaceMcp());
   steps.push(registerLaresMcp());
+
+  // The boot pointer. Claude reads ~/.claude/CLAUDE.md at every wake and expands `@path` as an include.
+  const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
+  if (!existsSync(carrierAbs)) {
+    steps.push({ item: "CLAUDE.md", action: "missing-script", detail: `${carrierAbs} not found — the boot pointer would aim at nothing` });
+  } else {
+    const step = tendBootPointer(join(dirname(settingsPath), "CLAUDE.md"), carrierAbs, asInclude, "CLAUDE.md");
+    steps.push(step);
+    if (step.action === "wired") changed = true;
+  }
 
   if (changed) {
     const tmp = settingsPath + ".tmp";

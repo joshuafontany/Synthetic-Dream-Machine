@@ -29,11 +29,11 @@ import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
 import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
+import { tendBootPointer, asLink, BOOT_CARRIER } from "./boot-pointer.js";
 
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
 const MEMPALACE_MCP_KEY = "[mcp_servers.mempalace]";
 const LARES_MCP_KEY = "[mcp_servers.lares]";
-const BOOT_CARRIER = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
 
 export interface CodexWireStep {
   readonly item: string;
@@ -106,17 +106,11 @@ export function wireCodexHome(opts: { home?: string } = {}): CodexWireResult {
   }
 
   // 3. The boot pointer. Codex reads ~/.codex/AGENTS.md at every wake, CLI and VS Code extension alike.
-  const agentsPath = join(dir, "AGENTS.md");
   const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
-  const pointer = `-> [noosphere-boot.mem](${carrierAbs})\n`;
   if (!existsSync(carrierAbs)) {
     steps.push({ item: "AGENTS.md", action: "missing-script", detail: `${carrierAbs} not found — the boot pointer would aim at nothing` });
-  } else if (existsSync(agentsPath) && readFileSync(agentsPath, "utf8").includes(carrierAbs)) {
-    steps.push({ item: "AGENTS.md", action: "present", detail: `boot pointer aims at ${BOOT_CARRIER}` });
   } else {
-    if (existsSync(agentsPath)) copyFileSync(agentsPath, agentsPath + ".bak");
-    writeFileSync(agentsPath, pointer, "utf8");
-    steps.push({ item: "AGENTS.md", action: "wired", detail: `${agentsPath} -> ${BOOT_CARRIER}` });
+    steps.push(tendBootPointer(join(dir, "AGENTS.md"), carrierAbs, asLink("-> "), "AGENTS.md"));
   }
 
   if (append.length > 0) {

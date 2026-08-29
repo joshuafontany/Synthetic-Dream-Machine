@@ -11,6 +11,7 @@ import { mkdtempSync, mkdirSync, rmSync, writeFileSync, readFileSync, existsSync
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { wireCodexHome } from "../src/codex-wire.js";
+import { tendBootPointer, asInclude, asLink } from "../src/boot-pointer.js";
 
 const CARRIER = "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem";
 let home: string;
@@ -50,5 +51,27 @@ describe("codex-wire — the boot pointer", () => {
     expect(step(r).action).toBe("wired");
     expect(readFileSync(agents, "utf8")).toContain(CARRIER);
     expect(existsSync(agents + ".bak")).toBe(true);
+  });
+});
+
+describe("boot-pointer — one law, three spellings", () => {
+  it("spells the include form for a harness that expands one, and the link form for one that follows one", () => {
+    const dir = mkdtempSync(join(tmpdir(), "pointer-"));
+    const inc = join(dir, "CLAUDE.md"), lnk = join(dir, "AGENTS.md");
+    tendBootPointer(inc, "/abs/carrier.mem", asInclude, "CLAUDE.md");
+    tendBootPointer(lnk, "/abs/carrier.mem", asLink("-> "), "AGENTS.md");
+    expect(readFileSync(inc, "utf8")).toBe("@/abs/carrier.mem\n");
+    expect(readFileSync(lnk, "utf8")).toBe("-> [noosphere-boot.mem](/abs/carrier.mem)\n");
+    rmSync(dir, { recursive: true, force: true });
+  });
+
+  // --init creates what it does not find, home directory included.
+  it("creates the directory a pointer needs", () => {
+    const dir = mkdtempSync(join(tmpdir(), "pointer-"));
+    const deep = join(dir, "User", "prompts", "lares-boot.instructions.md");
+    const s = tendBootPointer(deep, "/abs/carrier.mem", asLink("-> "));
+    expect(s.action).toBe("wired");
+    expect(existsSync(deep)).toBe(true);
+    rmSync(dir, { recursive: true, force: true });
   });
 });

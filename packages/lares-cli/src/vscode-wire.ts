@@ -18,6 +18,8 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from
 import { join } from "node:path";
 import { homedir } from "node:os";
 import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
+import { repoRoot } from "@lararium/mesh/node";
+import { tendBootPointer, BOOT_CARRIER } from "./boot-pointer.js";
 
 export interface VscodeWireStep {
   readonly item: string;
@@ -52,6 +54,20 @@ function variantRoots(home: string): Array<{ name: string; dir: string }> {
   ];
 }
 
+/**
+ * The user-scoped boot pointer, one per present variant.
+ *
+ * A workspace reads `.github/copilot-instructions.md` and that file ships with the repo. A USER
+ * carries their own instructions in the profile's `prompts/` folder, as `*.instructions.md` with an
+ * `applyTo` glob — so a window opened on any other folder still wakes into the house.
+ *
+ * <<~ confidence 12/20 >> The prompts-folder mechanism is version-gated behind `chat.promptFiles`,
+ * and a variant that does not read it simply carries an inert file. The cost of being wrong here is a
+ * few hundred bytes; the cost of skipping it is a window that wakes with no house and says nothing.
+ */
+const promptPointer = (target: string): string =>
+  `---\napplyTo: '**'\n---\n\n-> [noosphere-boot.mem](${target})\n`;
+
 /** Register the LARES MCP seat into every PRESENT VS Code variant's mcp.json, reaping a stale
  *  mempalace entry in the same pass. Idempotent. */
 export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
@@ -68,6 +84,17 @@ export function wireVscode(opts: { home?: string } = {}): VscodeWireResult {
   for (const v of variantRoots(home)) {
     if (!existsSync(v.dir)) continue; // sweep only variants the user actually has
     found += 1;
+
+    // The boot pointer, per variant — the operator runs stable AND Insiders.
+    const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
+    if (existsSync(carrierAbs)) {
+      const step = tendBootPointer(
+        join(v.dir, "prompts", "lares-boot.instructions.md"),
+        carrierAbs, promptPointer, `${v.name}: boot pointer`,
+      );
+      steps.push(step);
+      if (step.action === "wired") changed = true;
+    }
     const mcpPath = join(v.dir, "mcp.json");
     let cfg: McpFile = {};
     if (existsSync(mcpPath)) {

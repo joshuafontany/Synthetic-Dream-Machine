@@ -22,6 +22,7 @@ import { join } from "node:path";
 import { homedir } from "node:os";
 import { repoRoot } from "@lararium/mesh/node";
 import { resolveLaresMcp, type WireAction } from "./mcp-resolve.js";
+import { tendBootPointer, asLink, BOOT_CARRIER } from "./boot-pointer.js";
 
 const INGEST_HOOK = "packages/lares-cli/.claude-plugin/hooks/lares-mempalace-ingest-hook.sh";
 
@@ -114,6 +115,16 @@ export function wireCopilotHome(opts: { home?: string } = {}): CopilotWireResult
       steps.push({ item: "sessionEnd", action: "wired", detail: `hooks/lares.json — ${hookAbs}` });
       changed = true;
     }
+  }
+
+  // The boot pointer. The Copilot CLI reads ~/.copilot/copilot-instructions.md at every wake.
+  const carrierAbs = join(repoRoot, BOOT_CARRIER).replace(/\\/g, "/");
+  if (!existsSync(carrierAbs)) {
+    steps.push({ item: "copilot-instructions.md", action: "missing-script", detail: `${carrierAbs} not found — the boot pointer would aim at nothing` });
+  } else {
+    const step = tendBootPointer(join(dir, "copilot-instructions.md"), carrierAbs, asLink("Always load -> "), "copilot-instructions.md");
+    steps.push(step);
+    if (step.action === "wired") changed = true;
   }
 
   return { home: dir, changed, steps };
