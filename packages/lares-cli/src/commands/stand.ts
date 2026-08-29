@@ -22,6 +22,7 @@ import { existsSync, mkdirSync, openSync, readFileSync, statSync } from "node:fs
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
+import { standingPath, standingVerdict } from "@lararium/mesh/rendezvous-path";
 import { larRoot, larBootstrapPath, larDataDir, larCasDir, vesselDid } from "../env.js";
 import { udsAlive, reapStaleSocket } from "../local-connector.js";
 import { readVesselStanding, conditionOk } from "@lararium/mesh/vessel-condition";
@@ -90,6 +91,31 @@ function fatalLine(attestation: string): string | null {
   return line.replace(/^.*?fatal:\s*/, "").replace(/^Error:\s*/, "").split("\n")[0]!.trim().slice(0, 300);
 }
 
+/** The standing a running vessel published beside its socket, or null when it published none. */
+function readStandingMarker(): string | null {
+  try { return readFileSync(standingPath({ root: larDataDir(), uid: process.getuid?.() ?? 0 }), "utf8"); }
+  catch { return null; }
+}
+
+/** Whether a PersonaGroup stands in the bootstrap on disk — the same sentinel the daemon reads at boot. */
+function faceStandsOnDisk(bootstrap: string): boolean {
+  try {
+    const packed = JSON.parse(readFileSync(bootstrap, "utf8")) as { text?: string };
+    const inner = JSON.parse(packed.text ?? "{}") as { tiddlers?: Record<string, { text?: string }> };
+    const tiddlers = inner.tiddlers ?? (inner as unknown as Record<string, { text?: string }>);
+    return Object.entries(tiddlers).some(([k, v]) => k.includes("persona-group/doc-id") && Boolean(v?.text));
+  } catch { return false; }
+}
+
+/** Free the port so the next stand boots fresh. A vessel that will not stop leaves the lift unmade. */
+async function stopIncumbentQuietly(port: number): Promise<void> {
+  try {
+    const { stopIncumbent } = await import("../port-control.js");
+    await stopIncumbent(port);
+    await new Promise((r) => setTimeout(r, 1500));   // past the durable flush the daemon runs on SIGTERM
+  } catch { /* the stand below reports whatever answers */ }
+}
+
 export async function cmdStand(args: ParsedArgs): Promise<number> {
   const port = Number(args.options["port"] ?? process.env["LAR_PORT"] ?? "8080");
   const root = larRoot();
@@ -156,6 +182,30 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
   const reaped = reapStaleSocket(nodeUp);
   let started = false;
   let nodeNote = nodeUp ? "attached (already serving)" : reaped ? "cleared a stale socket (nothing answered there)" : "";
+
+  // IDEMPOTENT TO INTENT, NEVER MERELY TO PRESENCE. A vessel reads its standing once, at boot, from the
+  // face it found then — so a face lit afterward leaves a daemon serving the public shelf and refusing
+  // every persona-scoped act, while its own refusal counsels an act that only attaches. Reading the
+  // published standing against the face on disk is what lets a stand mean "stand as this vessel's state
+  // implies" rather than "answer if something answers".
+  //
+  // Absence never licenses this: no marker, an unreadable one, or a writer that is gone all read
+  // `attach`, so an older vessel or a crash never becomes a restart nobody asked for. `--observe`
+  // withholds it like every other acting half.
+  let liftReason: string | null = null;
+  if (nodeUp && !observeOnly) {
+    const verdict = standingVerdict({
+      marker:     readStandingMarker(),
+      faceOnDisk: existsSync(bootstrap) && faceStandsOnDisk(bootstrap),
+    });
+    if (verdict.act === "restand") {
+      liftReason = verdict.reason;
+      console.log(`[lares vessel stand] lifting: ${verdict.reason}`);
+      await stopIncumbentQuietly(port);
+      nodeUp = false;
+      nodeNote = "re-stood — the standing no longer matched the face on disk";
+    }
+  }
 
   if (!nodeUp && observeOnly) {
     nodeNote = reaped
@@ -314,6 +364,9 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
       // `cap` names which half the caller HELD, so a reader tells a vessel that refused to stand from one
       // nobody asked. Without it `up:false` reads identically under both, and that difference carries the
       // whole point of holding one cap rather than two.
+      // A LIFT NAMES ITSELF IN THE RECORD. Killing a daemon and booting another is the largest thing
+      // this verb does, so a caller reading the JSON learns it happened and why.
+      ...(liftReason !== null ? { lifted: liftReason } : {}),
       node: { up: nodeUp, started, port, note: nodeNote, cap: observeOnly ? "observe" : "observe+stand" },
       ...(recall !== undefined ? { recall } : {}),
       mempalace: { ok: integration.ok, checks: integration.checks },
