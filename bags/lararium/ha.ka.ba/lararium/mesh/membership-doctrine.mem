@@ -37,7 +37,7 @@ written   = "2026-07-21"
 
 > ''The Nexus tracks operator CONTRACTS, never user IDENTITIES. The only persistent trace a human
 > leaves is (a) a carriage contract they consciously signed, or (b) a public Handle-card they
-> consciously posted to `@crossroads`. Everything else — who used the protocols, when, what they
+> consciously posted to `crossroads`. Everything else — who used the protocols, when, what they
 > read, their private data — leaves no central record.''
 
 !!! ★ BELONGING CARRIES TWO CONDITIONS — the contract, and the grammar ★
@@ -152,7 +152,7 @@ the public planes + its own private data ''through that node's blind relay'' (tr
 
 ''Users build their OWN social graphs — inversion of control.'' The user owns the graph (its own
 handle-book of others' nyms, #persona-policy), never the Nexus. The Nexus federates only the public
-Handle-cards a user consciously posts to `@crossroads`; the connections a user draws between them stay
+Handle-cards a user consciously posts to `crossroads`; the connections a user draws between them stay
 the user's own, off any central plane. <<~ confidence 11/20 >> The Kowloon-submodule pattern
 carries this (partially wired, polish deferred — a 2a build).
 
@@ -205,6 +205,6 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;T4FgDAr_B5TawSu2yLz5ck0K2I3S3Ik26cxTX2dDNlU
+<<^ code="&#x0003;" >>ni:///sha-256;ytYUSWdy2YcqPlQ5le68wRrX-8EHXmaslpEOfeDTUm4
 
 <<^ code="&#x0004;" -> ? >>

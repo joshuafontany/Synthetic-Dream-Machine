@@ -35,8 +35,8 @@ tells a vessel what to do. The treaty does.
 
 The corpus bags are the written grammar of DreamNet:
 
-* `@lararium` — the engine and protocol package definitions
-* `@lares` — the API grammar and canonical meme vocabulary
+* `lararium` — the engine and protocol package definitions
+* `lares` — the API grammar and canonical meme vocabulary
 * genesis artifact — the founding CRDT document that bootstraps every vessel
 
 These bags do not contain user content, operator wikis, or social state. They carry
@@ -99,7 +99,7 @@ These two live in separate registers:
 
 An operator may hold `cap=admin` on their own cabalGroup's infrastructure bags. That
 does not make them kahu of DreamNet. Kahu attaches to the //corpus// specifically —
-`@lararium`, `@lares`, and the genesis artifact.
+`lararium`, `lares`, and the genesis artifact.
 
 <<~/ahu >>
 
@@ -109,7 +109,7 @@ does not make them kahu of DreamNet. Kahu attaches to the //corpus// specificall
 
 The Cabal holds kahu over DreamNet's protocol corpus. In practice this means:
 
-* They hold `cap=admin` on the `@lararium` and `@lares` Keyhive bag docs.
+* They hold `cap=admin` on the `lararium` and `lares` Keyhive bag docs.
 * Grammar revisions (new sigil tiddlers, new protocol invariants, new ABILITY_LADDER rungs)
   arrive via ceremony, not dispatch.
 * No vessel obeys a live command from the Cabal. Vessels enforce their own founding
@@ -160,8 +160,8 @@ itself encode kahu. A vessel that clears all three gates knows:
 * that PersonaGroup belongs to a MeshCabal (Gate C)
 
 Gate C proves the vessel belongs to //some// cabal. Whether that cabal holds kahu over
-the corpus bags is a separate claim, encoded in the Keyhive docs for `@lararium` and
-`@lares`. The genesis founding ceremony initializes those docs with the Amorphous
+the corpus bags is a separate claim, encoded in the Keyhive docs for `lararium` and
+`lares`. The genesis founding ceremony initializes those docs with the Amorphous
 Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<~/ahu >>
@@ -180,6 +180,6 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;uLmBU6V0eHTD3RxqqGY57ojQpbIls2v-_5jXGW8MtA4
+<<^ code="&#x0003;" >>ni:///sha-256;vBVdnz-pm2RKXOTYR4qrGl4K-uhABPOtaU13DwjK6rw
 
 <<^ code="&#x0004;" -> ? >>

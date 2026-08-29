@@ -75,7 +75,7 @@ Private docs spawn fresh and isolated per vessel — they hide in `@catalog` —
 
 !! The Beelay bypass ~ what rides the relay, what stays Beelay's
 
-<<~ confidence 13/20 >> The ''public layer'' — base canon (`@lares`/`@lararium`), capability-as-identity public //signatures//, the epoch-lease, Keyhive convergent-revoke — rides ''public CRDT state over the WS relay'', no Beelay. Beelay shrinks from "the multi-vessel blocker" to its one irreplaceable job: ''forward-secrecy of //private// encrypted content's data-keys'' (key-agreement, BeeKEM-class) — needed only for private bags, and ''Keyhive already carries BeeKEM'', so the work is to //anchor it at the contract//, never to re-invent it.
+<<~ confidence 13/20 >> The ''public layer'' — base canon (`lares`/`lararium`), capability-as-identity public //signatures//, the epoch-lease, Keyhive convergent-revoke — rides ''public CRDT state over the WS relay'', no Beelay. Beelay shrinks from "the multi-vessel blocker" to its one irreplaceable job: ''forward-secrecy of //private// encrypted content's data-keys'' (key-agreement, BeeKEM-class) — needed only for private bags, and ''Keyhive already carries BeeKEM'', so the work is to //anchor it at the contract//, never to re-invent it.
 
 <<~ confidence 12/20 >> Consistent with the bypass, the content-resolution design (`content-resolution`) holds ''the relay ciphertext-only'' — the node routes and verifies `BLAKE3(ciphertext)==cid`, ''never decrypts'' (MLS Delivery-Service-never-decryptor = node-never-Auth-root). Substrate-not-sovereignty: bytes ride `@cad` as ciphertext, data-keys stay behind Beelay's one job.
 
@@ -118,7 +118,7 @@ This meme stands ''PROPOSED'' (crucible-before-binding). The model held through 
 
 This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace ''networking'' pipe, the special-case TS reaches through the full tools-stack, coordinated by `@daemon` verbs. Its ''CRDT-causal clock runs in TS'' (structural causality — the Automerge logical time of #three-clocks, `getHeads`/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates that ''Scope 2'' (the general Sensorium-palaces) rides. The convergent membership + coordinator-free key-agreement worked here ''consume the whole model''; both scopes braid TS-coordination with py/R-tooling. <<~ confidence 12/20 >> the ruling firms the networking/sensorium split, and lands the FfzClock↔Automerge distinction (#/three-clocks) inside it.
 
-<<~ confidence 13/20 >> The Scope-1 CAD-blob pipe now carries a ''concrete design'' (`content-resolution`, doubly-grounded — two astral-sea research waves ∪ this canon): large bodies ''leave the CRDT'' as a ''skinny TW5 handle'' (a stable logical-name + provider-hint, riding TW5's own `lazyLoad` engine) resolving through an ''@cad ciphertext-addressed CAS'' (`cid = BLAKE3(ciphertext)`, so an untrusted holder verifies/pins/repairs blind) via a ''`resolveByCid`'' host callback — three gates never fused, chaining local → hint-named provider → connected peers → PENDING (first-class lawful state). Design-north, ''NOT built''; the content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, `genesis/cas`; handles in the publicity-tiered bags — public `@crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`) = this meme's Scope-1 pipe made concrete (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>).
+<<~ confidence 13/20 >> The Scope-1 CAD-blob pipe now carries a ''concrete design'' (`content-resolution`, doubly-grounded — two astral-sea research waves ∪ this canon): large bodies ''leave the CRDT'' as a ''skinny TW5 handle'' (a stable logical-name + provider-hint, riding TW5's own `lazyLoad` engine) resolving through an ''@cad ciphertext-addressed CAS'' (`cid = BLAKE3(ciphertext)`, so an untrusted holder verifies/pins/repairs blind) via a ''`resolveByCid`'' host callback — three gates never fused, chaining local → hint-named provider → connected peers → PENDING (first-class lawful state). Design-north, ''NOT built''; the content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, `genesis/cas`; handles in the publicity-tiered bags — public `crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`) = this meme's Scope-1 pipe made concrete (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>).
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
 
@@ -139,6 +139,6 @@ This meme rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CR
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;cNaXIRQe19wPinB3ZI4TOBt535Vi7rDmVMDvjWm6Dt8
+<<^ code="&#x0003;" >>ni:///sha-256;v1KNSEZiXbuzcRMpORHqJ7KU5tViw4omlgtXbzoWYJA
 
 <<^ code="&#x0004;" -> ? >>

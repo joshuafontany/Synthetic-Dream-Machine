@@ -37,7 +37,7 @@ The node vessel SHALL write an editable, re-readable ''Artifact'' of a bag's CRD
 
 | Surface | Role | Bags | Source of record | Format |
 |---|---|---|---|---|
-| ''`bags/`'' | ''seed / canon'' — definitions, rules, templates, protocol memes | `@lares`, `@lararium`, `@sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
+| ''`bags/`'' | ''seed / canon'' — definitions, rules, templates, protocol memes | `lares`, `lararium`, `sdm` (corpus) | disk-leaning (authored seed; round-trips through the store) | whole-carrier `.md` (see #granularity) |
 | ''`wikis/{slug}/`'' | ''projection / output'' — instantiated playspace content | `@<wikiSlug>` (per-wiki content) | store-leaning (the merge seat; disk projects the rendered artifact) | memetic-wikitext `.md` |
 
 The distinction reads ''definition vs instance''. An FTLS Power Card //definition// (its rules, its template) lives in `bags/sdm/`; a character's //filled-in// card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the ''live working surface'' — saved-but-unpromoted content, fed by the typed ''`@working`'' write layer (saved tiddlers, never drafts) — and `bags/` reads as ''canon'', reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this ''working↔canon shore'' (`wiki-layer-ontology#shore-law`).
@@ -52,7 +52,7 @@ Disk projection is for ''content'' bags (definitions + instances). ''State / vie
 
 | Bag | Role | Disk surface |
 |---|---|---|
-| `@lares` / `@lararium` / `@sdm` | seed / canon (definitions; `@lararium` = the engine's ''memetic corpus'' — see #oracle-split) | `bags/` |
+| `lares` / `lararium` / `sdm` | seed / canon (definitions; `lararium` = the engine's ''memetic corpus'' — see #oracle-split) | `bags/` |
 | `@<wikiSlug>` | wiki content (instance) | `wikis/{slug}/` |
 | `@oracle` | ''runtime system island'' — genesis-loaded engine BLOBs + bag→doc oracle + genesis-cid | ''none'' — genesis-loaded + federated read-only; regenerable (see #oracle-split) |
 | `@personal` | operator view-state, wiki-instance-bound | ''none'' — mesh-synced (see #personal) |
@@ -69,20 +69,20 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 
 !! @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
 
-`@lararium` once carried ''two ontological kinds under one bag'' — and that conflation made it fit //neither// on-disk pattern (a seed surface that also held per-deployment runtime). The ruling splits them, and each half then snaps onto an existing canon pattern:
+`lararium` once carried ''two ontological kinds under one bag'' — and that conflation made it fit //neither// on-disk pattern (a seed surface that also held per-deployment runtime). The ruling splits them, and each half then snaps onto an existing canon pattern:
 
 | Kind | Bag | What it holds | Origin | Disk | Authority | Versioning |
 |---|---|---|---|---|---|---|
-| ''memetic corpus'' | ''`@lararium`'' | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | ''`bags/` seed (tracked)'' | kahu / Cabal (#/kahu) | git |
-| ''runtime system island'' | ''`@oracle`'' | engine BLOBs · the ''system'' bag→doc ''oracle'' pointers (`@oracle`/`@lararium`/`@lares`) · the ''system wiki-recipes'' · `genesis-cid` · descriptors | built (deterministic genesis) | ''none — rides the mesh'' (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#/compaction-handlers) |
+| ''memetic corpus'' | ''`lararium`'' | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | ''`bags/` seed (tracked)'' | kahu / Cabal (#/kahu) | git |
+| ''runtime system island'' | ''`@oracle`'' | engine BLOBs · the ''system'' bag→doc ''oracle'' pointers (`@oracle`/`lararium`/`lares`) · the ''system wiki-recipes'' · `genesis-cid` · descriptors | built (deterministic genesis) | ''none — rides the mesh'' (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#/compaction-handlers) |
 
 ''Why `@oracle` carries no disk mirror.'' Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate >>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, rides the vessel's own runtime state (matching `<lares>/vessel/social-bootstrap.json`), never the `bags/` seed surface.
 
-''Why `@lararium` stays a seed bag.'' The engine self-docs are authored prose — the same disk-leaning seed kind as `@lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
+''Why `lararium` stays a seed bag.'' The engine self-docs are authored prose — the same disk-leaning seed kind as `lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
 
 The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesis); a newer engine folds into `@oracle` through the ''RECONCILE'' rite (engine-watch #EW-5), never silently at boot.
 
-''The two pointer planes (operator ruling, 2026-06-16).'' `@oracle` is not only the engine home — it is the ''system-bag'' oracle plane. `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers //and// their wiki-recipes (each a quine wiki) live in `@oracle`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle reach runs two-source: system bags from `@oracle`, user bags from `@catalog` (full law: `wiki-layer-ontology#oracle-planes`). `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members, never as hardcoded floor slots.
+''The two pointer planes (operator ruling, 2026-06-16).'' `@oracle` is not only the engine home — it is the ''system-bag'' oracle plane. `lares` and `lararium` are DreamNet ''system bags'': their bag→doc pointers //and// their wiki-recipes (each a quine wiki) live in `@oracle`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle reach runs two-source: system bags from `@oracle`, user bags from `@catalog` (full law: `wiki-layer-ontology#oracle-planes`). `@oracle` stands as the sole universal recipe floor; `lares`/`lararium` ride recipes as members, never as hardcoded floor slots.
 
 <<~/ahu >>
 
@@ -204,6 +204,6 @@ between casual chat-use and the defined parser core.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;CJc96zX7zwv7r7uY-avfvPS2fQJ_JIl5J9M4j2U_TXs
+<<^ code="&#x0003;" >>ni:///sha-256;VnSg4FK9HuF1Dg5uQvr_1BANNuiSzgfVZ6I3lVYPA0g
 
 <<^ code="&#x0004;" -> ? >>

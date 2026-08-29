@@ -84,7 +84,7 @@ ride the ''publicity-tiered bags''. The ''three-plane oracle model'' — the gra
 WHO-axis recurring at the blob layer — carries the ruling law: ''the publicity plane''
 ''decides the addressing mode.''
 
-* ''Public → `@crossroads`.'' A ''plaintext `ni://` multihash'' (RFC-6920): a stranger
+* ''Public → `crossroads`.'' A ''plaintext `ni://` multihash'' (RFC-6920): a stranger
   fetches AND verifies, foreign-legible, federates at ≥meme-rating, archival to 500 years.
   No confirmation-oracle risk — the content stands public by design.
 * ''Private → `@catalog`.'' A ''ciphertext cid'', capability-gated. Here the ciphertext
@@ -98,7 +98,7 @@ WHO-axis recurring at the blob layer — carries the ruling law: ''the publicity
   engine and genesis blobs by CID
   (<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>).
 
-''The publicity plane sets the structural FLOOR the sharing-posture reads'' (#/cap-tier): a `@crossroads`
+''The publicity plane sets the structural FLOOR the sharing-posture reads'' (#/cap-tier): a `crossroads`
 public plane floors at PUBLIC, a `@catalog` sealed plane floors at CONTRACT, a cleartext-local plane at
 VEIL — `structuralFloorFor` consults these SAME federatable + seal oracles, and a declared tier may only
 tighten below the floor it names.
@@ -178,7 +178,7 @@ differing ''only in the extraction boundary'':
 Both route to the ''SAME `cid/` byte store + `resolveByCid`''. Stage-1 (whole-body
 transport) covers B-shaped whole bodies; Stage-2/3 add the A-shaped ''intra-ahu''
 ''extraction'' (the `#source-text` boundary) + the publicity-plane addressing. The moved
-`@crossroads` library holds BOTH today — raw `.txt` books (B) and structured `.mem` memes
+`crossroads` library holds BOTH today — raw `.txt` books (B) and structured `.mem` memes
 with large source ahus (A).
 
 <<~ confidence 12/20 >> A and B differ only where the cut falls; the byte store
@@ -296,6 +296,6 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;xbwS90UtprjgCIjzCc7kpqWfF1Ww7f_w9DwbTQqgJV8
+<<^ code="&#x0003;" >>ni:///sha-256;LjX72PpQ1EHIxbhMpVlDo8AtkUX3SodUWpeSDbp9kR4
 
 <<^ code="&#x0004;" -> ? >>

@@ -43,13 +43,13 @@ shelf reads plainly:)//
 # [[Elyncia 01 ~ A Broken World|a-broken-world/spine.md]]
 # [[Elyncia 02 ~ The Lares DreamNet|the-lares-dreamnet/spine.md]] //(the pilot)//
 # [[Elyncia 03 ~ Daemons and the Metaphysics of Play|daemons-and-metaphysics/spine.md]]
-# Elyncia 04 ~ The Referee Noosphere Guide — ''referee tier'': the spine rides `@elyncia-referee`
+# Elyncia 04 ~ The Referee Noosphere Guide — ''referee tier'': the spine rides `elyncia-referee`
   and renders only in referee recipes
 # The Style Base Layer — migrates as a ''single meme'' (already chunk-sized), referee-side,
   when the RNG moves
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kg9wEHdTAaEdFQKkkhlRkIovRzS0XZz0NVaeAHA4SJ8
+<<^ code="&#x0003;" >>ni:///sha-256;NWPaQCUIhwEwam3yrRD2W3q2KncXF7QjRKv5bGH0T4A
 
 <<^ code="&#x0004;" -> ? >>

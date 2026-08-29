@@ -231,7 +231,7 @@ The six-tier ladder above discovers ''doc URLs'' — random UUIDs the CRDT sync
 protocol reconciles. A second, distinct problem rides beside it: resolving the
 large ''body content'' that leaves the CRDT and lives in the
 content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane,
-handles in the publicity-tiered bags: public `@crossroads` plaintext, private
+handles in the publicity-tiered bags: public `crossroads` plaintext, private
 `@catalog` ciphertext). The two never conflate — a doc URL names a mutable
 Automerge document; a blob names immutable bytes.
 
@@ -291,6 +291,6 @@ state stays local-first, no-global-now enacted rather than breached.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;P8GZhvm9yQGOU8vp4xFMQwgyebwR5Zv7GTwynpUlq04
+<<^ code="&#x0003;" >>ni:///sha-256;ezDfu1Lt-0jl2K2y_BN_VenWS0D2Hlpjernw_oPVfHE
 
 <<^ code="&#x0004;" -> ? >>

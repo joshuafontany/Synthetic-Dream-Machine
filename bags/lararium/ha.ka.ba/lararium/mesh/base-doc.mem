@@ -32,7 +32,7 @@ turns a bag-URI into a live doc handle:
   TW5 boot kernel.
 * ''`blobDescriptorUri(blobId)`'' → `lar:///ha.ka.ba/bags/oracle/blobs/<safe>`.
   Blobs live in the ''`@oracle`'' runtime system island beside the engine
-  bytes — never in the `@lararium` corpus seed (the 2026-06-16 carve; see
+  bytes — never in the `lararium` corpus seed (the 2026-06-16 carve; see
   `disk-projection#oracle-split`).
 * ''`resolveOracleDoc(registryHandle, oracleKey, resolve, provenance)`'' — the
   read → resolve → write-back-on-first-mint shape for a bag→doc pointer.
@@ -50,7 +50,7 @@ turns a bag-URI into a live doc handle:
 `resolveOracleDoc` takes the ''registry handle'' as an argument, so the same
 primitive serves both pointer planes (`wiki-layer-ontology#oracle-planes`):
 
-* ''system bags'' (`@oracle`, `@lararium`, `@lares`) resolve and write their
+* ''system bags'' (`@oracle`, `lararium`, `lares`) resolve and write their
   pointer in the ''`@oracle`'' system-island doc the vessel already holds.
 * ''user bags'' resolve and write in ''`@catalog`''.
 
@@ -61,6 +61,6 @@ plane-blind — it writes wherever the handed registry handle points. //(Caller/
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;nHgA9pjhNBIRWXRrqHfiTuZDo0A6Gt54okZjYMycIkw
+<<^ code="&#x0003;" >>ni:///sha-256;fxJMnS2d0UCbo9zEAURLK65plI-Mu16jDkKgX-D1ap0
 
 <<^ code="&#x0004;" -> ? >>

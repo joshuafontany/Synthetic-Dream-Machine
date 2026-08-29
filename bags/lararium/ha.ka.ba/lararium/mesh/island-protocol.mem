@@ -49,7 +49,7 @@ The keel cut (2026-06-09) retired the `resolver` dictionary (slot URI → Autome
 | `wikiUrl?` | the island's OWN write-layer bag | `@{wikiSlug}`; `@daemon` under the one-recipe model |
 | `personalUrl?` / `draftUrl?` | keyhive-bound sovereign instance mounts | minted by admin `resolveBinding` |
 
-The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the oracle-plane rulings 2026-06-15/06-16): `@lares` and `@lararium` are ''DreamNet system bags'' — islands resolve their pointers + wiki-recipes from the ''`@oracle`'' runtime system-island doc's own well-known tiddlers, the substrate they already hold (the bag-oracle moved out of the `@lararium` corpus in the carve). Three oracle planes, three authorities: ''system bags'' (`@oracle` doc — `@oracle`/`@lararium`/`@lares` pointers + system recipes) · ''user bags'' (`@catalog`, ocap grants) · public/infrastructure (`@crossroads`, future). See `wiki-layer-ontology#oracle-planes`.
+The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the oracle-plane rulings 2026-06-15/06-16): `lares` and `lararium` are ''DreamNet system bags'' — islands resolve their pointers + wiki-recipes from the ''`@oracle`'' runtime system-island doc's own well-known tiddlers, the substrate they already hold (the bag-oracle moved out of the `lararium` corpus in the carve). Three oracle planes, three authorities: ''system bags'' (`@oracle` doc — `@oracle`/`lararium`/`lares` pointers + system recipes) · ''user bags'' (`@catalog`, ocap grants) · public/infrastructure (`crossroads`, future). See `wiki-layer-ontology#oracle-planes`.
 
 ''Library layers never ride the manifest.'' The island resolves them itself from its registry plane (recipe-watch reconcile — system bags from `@oracle`, user bags from `@catalog`) — boot runs the same path as live composition (boot = first reconcile). See `wiki-layer-ontology` Law 2.
 
@@ -114,6 +114,6 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1W8zUTWlEIBrUQmA91p0JBBjN8Pprr2mZyh4JHfBShs
+<<^ code="&#x0003;" >>ni:///sha-256;JUEPu3b37oW3Wy_QVe2L6pa5-cu8PuYOWfKXheB1u_o
 
 <<^ code="&#x0004;" -> ? >>

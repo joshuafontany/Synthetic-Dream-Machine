@@ -46,7 +46,7 @@ Callers acquire a `BrowserAuthorityLease` and return it. The pool decides what t
 ''BV-4 — Plugin shore defines the TW5-content boundary.''
 TW5-native rendering content (tiddlers, startup modules, page-chrome fragments)
 lives inside the compiled plugin blob. Host TS carries no TW5 page chrome.
-The island reads the plugin blob bytes from the `@lararium` CRDT doc after Repo sync —
+The island reads the plugin blob bytes from the `lararium` CRDT doc after Repo sync —
 no blob bytes transfer in the manifest. `coreHash` identifies the blob; the mesh delivers it.
 
 ''BV-5 — Projection adapters mark edges, not shores.''
@@ -140,6 +140,6 @@ These questions do not block charter adoption. They require measurement before r
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-lXH4PIalaaweGNhFUXtKuW3LVChDku30TBuVM66FE4
+<<^ code="&#x0003;" >>ni:///sha-256;UbzLpfhBMAmB48vjB_Aaym3ZeyRzGY6Qlq_RdNqL1y8
 
 <<^ code="&#x0004;" -> ? >>

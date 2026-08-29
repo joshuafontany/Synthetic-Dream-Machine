@@ -125,7 +125,7 @@ The outermost reach. ''≥2 nexuses.'' No central server, no authority vessel. T
 
 Some nexuses carry degraded connections (network partition, protocol fork). Some evolve oppositional constitutions — different charter values, different grant policies. The protocol stays legible across these boundaries because the ''grammar'' (not the data) stays shared.
 
-The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protocol corpus (`@lararium`, `@lares`, genesis artifact). The Cabal authors grammar revisions and signs them into the corpus bags. Vessels enforce their own founding proofs. No live command crosses the DreamNet layer from the Cabal to any operator. (See <<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>.)
+The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protocol corpus (`lararium`, `lares`, genesis artifact). The Cabal authors grammar revisions and signs them into the corpus bags. Vessels enforce their own founding proofs. No live command crosses the DreamNet layer from the Cabal to any operator. (See <<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>.)
 
 <<~/ahu >>
 
@@ -270,7 +270,7 @@ Two tiers cross the read/sealed cut:
 
 //(design-north, NOT built — the #51 16MB-Twain overflow birthed it)//
 
-A byte-blob that dwarfs the doc ''must not ride the Automerge CRDT'' — a 16MB library file, an image, an audio body bloats every replica and every sync. So the large body ''leaves the doc and rides the blob floor'': the tiddler shrinks to a ''skinny handle'' (a stable logical name + a provider-locality hint), and the bytes resolve ''on demand'' off the content-addressed tier `@cad` — its bytes in the `cid/<hash>` KIND-plane (`genesis/cas`; `cid = BLAKE3(ciphertext)`, so an untrusted holder verifies, pins, and repairs blind, never the key), its handles riding the publicity-tiered bags (public `@crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`). TW5's own lazy engine fires the fetch (`_is_skinny → lazyLoad`); the syncer answers with `resolveByCid`. ''Only bytes leave; the small logical-name→cid indirection map stays in the doc.''
+A byte-blob that dwarfs the doc ''must not ride the Automerge CRDT'' — a 16MB library file, an image, an audio body bloats every replica and every sync. So the large body ''leaves the doc and rides the blob floor'': the tiddler shrinks to a ''skinny handle'' (a stable logical name + a provider-locality hint), and the bytes resolve ''on demand'' off the content-addressed tier `@cad` — its bytes in the `cid/<hash>` KIND-plane (`genesis/cas`; `cid = BLAKE3(ciphertext)`, so an untrusted holder verifies, pins, and repairs blind, never the key), its handles riding the publicity-tiered bags (public `crossroads` plaintext · private `@catalog` ciphertext · system `@oracle`). TW5's own lazy engine fires the fetch (`_is_skinny → lazyLoad`); the syncer answers with `resolveByCid`. ''Only bytes leave; the small logical-name→cid indirection map stays in the doc.''
 
 ''This rides the INFRA/FLOW axis whole.'' A resolved body travels as ''blind carriage of content-addressed ciphertext'' — the relay carries the sealed blob without reading it, exactly the relay-floor cut (#/the-relay-floor): `#has {forward}` · `#has-NOT {read, decrypt}`. Content-resolution adds no new plane; it ''extends the sealed tier'' above with a fetch-on-demand shore.
 
@@ -318,7 +318,7 @@ Each rung names what an actor may do to a specific Keyhive bag doc. The distinct
 | SOCIAL | cabalGroup | cabal member | cabal infrastructure bags | read |
 | INFRA | relay floor | any lararium | //(sealed stream — no read)// | forward only |
 | INFRA | nexusGroup | nexus-contracted vessel | nexus shared bags | sync or read |
-| — | DreamNet corpus | Kahu (Cabal) | `@lararium`, `@lares`, genesis | admin |
+| — | DreamNet corpus | Kahu (Cabal) | `lararium`, `lares`, genesis | admin |
 
 <<~/ahu >>
 
@@ -480,6 +480,6 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PugDUBBSnoCcKWQlcEhcjf4ojoTdrP9kG9KhV3eUhs8
+<<^ code="&#x0003;" >>ni:///sha-256;qOqk-fPFYjSbkZL566XZffWgLehTB0J_66RH8vmwQIM
 
 <<^ code="&#x0004;" -> ? >>

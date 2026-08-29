@@ -53,15 +53,15 @@ The OCI column carries structure only. Our layers sync as CRDT coordinates, not 
 
 !! The Wiki-as-Bag Quine
 
-''The name names the bag; a wiki reads as that bag opened through a recipe'' — write layer + library list + instance mounts. `@lares`-the-wiki and `@lares`-the-bag never compete for the name: the wiki projects the bag, the way a git repo and its checkout share a name without confusion.
+''The name names the bag; a wiki reads as that bag opened through a recipe'' — write layer + library list + instance mounts. `lares`-the-wiki and `lares`-the-bag never compete for the name: the wiki projects the bag, the way a git repo and its checkout share a name without confusion.
 
 ''The write layer rides live; the canon rides below (operator ruling, 2026-06-18).'' A wiki's saved edits land in its ''`@working`'' layer — a typed instance mount (Law 2), persisted, projecting to the live surface (`wikis/{slug}`), distinct from `@draft`'s //unsaved// drafts — never straight into canon. The wiki's `@{slug}` bag mounts ''read-only as a library member''; its canon (`bags/{slug}`) is reached only by a cap-gated promotion `MOVE` (`@working → @{slug}`, the working↔canon shore — #shore-law). ''No wiki writes into its own canon'', system or user alike: write layer and canon stay distinct coordinates, so saved content lives where a save lands and canon publishes only on promotion. A quine wiki obeys the same split as every other — standing as its own bag grants it no shortcut through the shore. The checkout/repo image holds: `@working` reads as the working tree, `@{slug}` as the committed canon, promotion as the commit.
 
-The pattern runs fractal on purpose: `@sdm` mounts into `@elyncia`, `@elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another.
+The pattern runs fractal on purpose: `sdm` mounts into `elyncia`, `elyncia` into `@caverns-of-neo-thracia` — every wiki's write layer can serve as another wiki's library layer. Healthy prior art carries the same quine property: every TiddlyWiki can act as another's plugin library; every OCI image can base another.
 
-The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// stands //below// as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes `@oracle` — the sole universal slot, ''operator ruling 2026-06-16''). `@lares` and `@lararium` are ''DreamNet system bags'', each opening as its own ''quine wiki'' carrying a wiki-recipe of its own — `@lares` wiki = `@oracle` + `@lararium` + `@lares`; `@lararium` wiki = `@oracle` + `@lararium`. They ride a recipe as library/identity members, never as hardcoded floor slots; their oracle pointers ''and'' their wiki-recipes live in the ''`@oracle` system plane'', never `@catalog` (#/oracle-planes).
+The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// stands //below// as the protocol-invariant floor every recipe inherits structurally (`expandRecipe` hardcodes `@oracle` — the sole universal slot, ''operator ruling 2026-06-16''). `lares` and `lararium` are ''DreamNet system bags'', each opening as its own ''quine wiki'' carrying a wiki-recipe of its own — `lares` wiki = `@oracle` + `lararium` + `lares`; `lararium` wiki = `@oracle` + `lararium`. They ride a recipe as library/identity members, never as hardcoded floor slots; their oracle pointers ''and'' their wiki-recipes live in the ''`@oracle` system plane'', never `@catalog` (#/oracle-planes).
 
-''The default seat (operator ruling, 2026-06-10; recipe revised 2026-06-16):'' the vessel's default pinned primary wiki = `@lares`-as-wiki — slug `lares` seats the operator-minted system doc itself as the write layer. The `@lares` wiki-recipe (seeded in the `@oracle` system plane, not `@catalog`) carries `@lararium` as a live library, so the doctrine corpus composes into the hearth; the recipe dedupes the coinciding wiki slot against the `@oracle` floor. The operator tends the personality at the hearth by default, and the disk-mirror designation carries those edits back to `bags/lares` as `.md` memes.
+''The default seat (operator ruling, 2026-06-10; recipe revised 2026-06-16):'' the vessel's default pinned primary wiki = `lares`-as-wiki — slug `lares` seats the operator-minted system doc itself as the write layer. The `lares` wiki-recipe (seeded in the `@oracle` system plane, not `@catalog`) carries `lararium` as a live library, so the doctrine corpus composes into the hearth; the recipe dedupes the coinciding wiki slot against the `@oracle` floor. The operator tends the personality at the hearth by default, and the disk-mirror designation carries those edits back to `bags/lares` as `.md` memes.
 
 > Two faces on one bag — library-face turned down-stack to the consumers, dwelling-face turned up-stack to the instance. The threshold looks both ways. — Tide-Caller
 
@@ -79,7 +79,7 @@ content-addressed shelf, or a plugin.
 tiddlers, the shape TW5 has always used; unpacked, its tiddlers stand as ordinary members. Either way it
 answers the same cap, which is why the Rosetta row reads //plugin ↔ image layer ↔ lower bag//.
 
-''And a plugin rides in other bags.'' A packed plugin inside `@lares` is a bag held inside a bag — the
+''And a plugin rides in other bags.'' A packed plugin inside `lares` is a bag held inside a bag — the
 cap is recursive, so one of the tiddlers a bag enumerates may itself answer the cap. Healthy prior art
 carries the same property: every TiddlyWiki can act as another's plugin library.
 
@@ -108,21 +108,21 @@ An oracle (a bag-URI → doc-URL pointer) resolves from the home that owns it; n
 | ''bootstrap'' | a vessel's own planes before a registry stands | this vessel, local-first |
 | ''`@oracle`'' | the SYSTEM island — engine blobs, system bag→doc, genesis-cid | every vessel |
 | ''`@catalog`'' | the operator's PRIVATE bag oracles, under OCAP grants | the operator's grant graph |
-| ''`@crossroads`'' | PUBLIC + infrastructure (the dreamnet layer) | a stranger, no grant |
+| ''`crossroads`'' | PUBLIC + infrastructure (the dreamnet layer) | a stranger, no grant |
 
 The three registries carry their authority classes below:
 
 | Plane | Oracle home | Holds | Authority class |
 |---|---|---|---|
-| ''System bags'' | the ''`@oracle`'' runtime-island doc's well-known tiddlers | the ''system'' bag→doc oracle (`@oracle`, `@lararium`, `@lares`) + the ''system wiki-recipes'' (`@lares` wiki, `@lararium` wiki) + engine BLOBs + genesis-cid | genesis / engine-epoch (operator-admin; engine-watch EW-5) |
+| ''System bags'' | the ''`@oracle`'' runtime-island doc's well-known tiddlers | the ''system'' bag→doc oracle (`@oracle`, `lararium`, `lares`) + the ''system wiki-recipes'' (`lares` wiki, `lararium` wiki) + engine BLOBs + genesis-cid | genesis / engine-epoch (operator-admin; engine-watch EW-5) |
 | ''User registry'' | `@catalog` | the operator's ''user'' bags + ''user'' wiki-recipes (minted by init-wiki), each under OCAP grants | operator composition (recipes, ACTION verbs) |
-| ''Public / Infrastructure'' | `@crossroads` *(unbuilt — `lar:///ha.ka.ba/lararium/docs/crossroads`)* | ring-1 public bags | federation / community |
+| ''Public / Infrastructure'' | `crossroads` *(unbuilt — `lar:///ha.ka.ba/lararium/docs/crossroads`)* | ring-1 public bags | federation / community |
 
-''The runtime island splits from the corpus (operator ruling, 2026-06-15).'' The protocol-invariant oracle (and the engine BLOBs + genesis-cid it sits beside) lives in ''`@oracle`'' — the genesis-loaded runtime system island, off-disk, federated read-only. ''`@lararium`'' is now purely the ''memetic corpus'' (the engine's authored self-docs, `bags/` seed, git-tracked). Full grain: disk-projection #oracle-split. The conflation that put per-deployment `automerge:` pointers + BLOBs in the `@lararium` seed surface is resolved by the split — `@oracle` rides the mesh (regenerable), `@lararium` stays tracked source.
+''The runtime island splits from the corpus (operator ruling, 2026-06-15).'' The protocol-invariant oracle (and the engine BLOBs + genesis-cid it sits beside) lives in ''`@oracle`'' — the genesis-loaded runtime system island, off-disk, federated read-only. ''`lararium`'' is now purely the ''memetic corpus'' (the engine's authored self-docs, `bags/` seed, git-tracked). Full grain: disk-projection #oracle-split. The conflation that put per-deployment `automerge:` pointers + BLOBs in the `lararium` seed surface is resolved by the split — `@oracle` rides the mesh (regenerable), `lararium` stays tracked source.
 
-''System bags split from user bags (operator ruling, 2026-06-16).'' `@lares` and `@lararium` are DreamNet ''system bags'': their bag→doc pointers ''and'' their wiki-recipes live in the ''`@oracle`'' system plane, never `@catalog`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle resolution therefore runs ''two-source'': an island resolves a system bag's pointer/recipe from the `@oracle` doc it already holds, and a user bag's from `@catalog`. `@oracle` stands as the sole universal recipe floor; `@lares`/`@lararium` ride recipes as members and each also stands as its own quine wiki (#/quine). //(Pointer-plane + system-recipe wiring: ruled here, code-enactment tracked at the live handoff torch.)//
+''System bags split from user bags (operator ruling, 2026-06-16).'' `lares` and `lararium` are DreamNet ''system bags'': their bag→doc pointers ''and'' their wiki-recipes live in the ''`@oracle`'' system plane, never `@catalog`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle resolution therefore runs ''two-source'': an island resolves a system bag's pointer/recipe from the `@oracle` doc it already holds, and a user bag's from `@catalog`. `@oracle` stands as the sole universal recipe floor; `lares`/`lararium` ride recipes as members and each also stands as its own quine wiki (#/quine). //(Pointer-plane + system-recipe wiring: ruled here, code-enactment tracked at the live handoff torch.)//
 
-Islands resolve each slot from its plane: invariants + system bags from the `@oracle` doc they already hold, user library bags from `@catalog`, public bags (future) from `@crossroads`. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies; the ''RECONCILE'' rite, engine-watch EW-6), never the catalog composition class.
+Islands resolve each slot from its plane: invariants + system bags from the `@oracle` doc they already hold, user library bags from `@catalog`, public bags (future) from `crossroads`. Rotation of a protocol invariant rides the engine-epoch class (offer-never-push, reboot-re-verifies; the ''RECONCILE'' rite, engine-watch EW-6), never the catalog composition class.
 
 ''Invariant mint law (operator-gated, 2026-06-10):'' minting a protocol invariant rides the ''most-restricted grant — operator(admin), timed''. Only the node home (the base @lararium node, the genesis office) mints; the keel only READS the oracle, and wild vessels receive the invariant plane by federating the ''@oracle'' runtime-island doc — absent reads //not-yet-federated//, never mint-it-yourself. Mint-if-absent self-heals at the node's genesis load (boot = first reconcile); two node homes sharing one @oracle doc settle a concurrent mint by LWW: write, re-read, ''adopt the winner''. Grant-proof enforcement arrives with keyhive; placement enforces the gate today. Content arrives by its own arc; the empty doc stands the structure.
 
@@ -167,7 +167,7 @@ Shareability reads off //where a name lives//, not off a flag:
 
 !! Law 3 — Only the Write Layer Crosses; Motion Rides ACTION Verbs
 
-When `@sdm` injects into `@elyncia`, exactly one thing travels: `@sdm`'s write layer, mounted as a library layer. The instance mounts ''never travel'' — they belong to `@sdm`-as-wiki, not `@sdm`-as-bag. //A wiki shares its content, never its dwelling.//
+When `sdm` injects into `elyncia`, exactly one thing travels: `sdm`'s write layer, mounted as a library layer. The instance mounts ''never travel'' — they belong to `sdm`-as-wiki, not `sdm`-as-bag. //A wiki shares its content, never its dwelling.//
 
 ''Crossing requires a rite, never a drift — and the rite speaks residency canon.'' Content gains residency in a registry-named coordinate through the existing ACTION surface (`ADD` / `COPY` / `MOVE` with `change-id` preserved), each act audited by effect records (`accession` / `deaccession` / `transfer`); registration mints the `@catalog` name. No in-place "now-shared" flag exists, and no `commit` / `push` / `fork` verb names the rite — the coordinate-space ruling holds (`residency-model#five-pono-properties` §5). The reverse crossing (demoting a shared layer to private) does not exist; new residency gets granted //outward// instead. Grain and composition of the bag-level rite: settled at #crossing-grain.
 
@@ -177,7 +177,7 @@ When `@sdm` injects into `@elyncia`, exactly one thing travels: `@sdm`'s write l
 
 !! Law 4 — Writes Flow Through the Layer's Own Wiki
 
-The write layer marks the write boundary. From a consuming wiki's vantage, every library layer mounts ''read-only''; writes land at or above the consumer's own write layer. A local override of an upstream record (an `@elyncia` shadow of an `@sdm` entry) lands in the consumer's write layer — cascade shadowing exists for exactly this, and the read MUST surface `origin-bag` (`residency-model`, anti-pattern #4). CRDT multi-writer makes down-stack writes //possible//; this law names them a degraded act. To change upstream canon, open the upstream bag as its own wiki and write at //its// write layer.
+The write layer marks the write boundary. From a consuming wiki's vantage, every library layer mounts ''read-only''; writes land at or above the consumer's own write layer. A local override of an upstream record (an `elyncia` shadow of an `sdm` entry) lands in the consumer's write layer — cascade shadowing exists for exactly this, and the read MUST surface `origin-bag` (`residency-model`, anti-pattern #4). CRDT multi-writer makes down-stack writes //possible//; this law names them a degraded act. To change upstream canon, open the upstream bag as its own wiki and write at //its// write layer.
 
 ''The edit/action split (operator ruling, 2026-06-16).'' A ''user edit MUST land in a TOP-LEVEL bag'', even when the base-tiddler comes from a bag deeper in the stack — the deep record ''shadows up'', never written back down. //Which// top-level bag follows the tiddler ''type'', routed by the bag-paths cascade: a normal tiddler belonging to the wiki → the wiki's own ''`@working`'' live write layer (saved, pre-promotion — never its canon directly); a draft/volatile tiddler → `@temp`; and so on. Writes to ''deeper'' bags happen ''only'' as explicit operator ''residency actions'' (`ADD`/`COPY`/`MOVE`/`LOAD`), each effect-record audited — never as a side-effect of an edit. Mechanism consequence: a write with ''no explicit bag'' routes top-level by type (this law); a write naming an explicit deeper `{bag}` reaches it ''by access'' (the registry accessor) + audit, or fails loud — it MUST NOT silently fall through to the default writable layer.
 
@@ -217,7 +217,7 @@ The wiki-level crossing earns a ''bag-grain verb pair'', SPARQL Update derived: 
 
 !! Open — Transitive Closure (held, not settled)
 
-When `@caverns-of-neo-thracia` mounts `@elyncia`, does it inherit `@elyncia`'s library list automatically, or does its recipe name the full flattened stack? Auto-transitive reads convenient yet imports diamond/version conflicts into cascade order; explicit-flattened reads verbose yet keeps every wiki's shadowing order operator-visible and deterministic. Current lean (Provisional): explicit-flattened with a mint-time helper that //suggests// the closure — convenience at registration, determinism at boot, in the spirit of a lockfile. The decision waits on live witness of real chains mounting.
+When `@caverns-of-neo-thracia` mounts `elyncia`, does it inherit `elyncia`'s library list automatically, or does its recipe name the full flattened stack? Auto-transitive reads convenient yet imports diamond/version conflicts into cascade order; explicit-flattened reads verbose yet keeps every wiki's shadowing order operator-visible and deterministic. Current lean (Provisional): explicit-flattened with a mint-time helper that //suggests// the closure — convenience at registration, determinism at boot, in the spirit of a lockfile. The decision waits on live witness of real chains mounting.
 
 <<~/ahu >>
 
@@ -248,6 +248,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;2TxmsLyndEUtsuThQ8Bo61BU7sIjoDZj_aE3hG2TbwA
+<<^ code="&#x0003;" >>ni:///sha-256;qoH66N5py3mUwnMCD8eUD-00k-7rxKj5vzqoWF0BHEc
 
 <<^ code="&#x0004;" -> ? >>

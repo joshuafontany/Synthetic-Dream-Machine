@@ -92,7 +92,7 @@ The ward runs ''binary'' --- lit (the discipline applies) or lifted (`0 L-Prime`
 
 !! Possession --- `#has` runs free
 
-Possession (`has`) runs ''free''. The ward catches only the identity/predication copula (`${copula}`); it never gates `has`. The `#has` edge carries load across the `@sdm` composition corpus and the bag-graph --- a verb the composable ontology depends on. A possession-gate degrades that composability, so the discipline leaves `has` alone.
+Possession (`has`) runs ''free''. The ward catches only the identity/predication copula (`${copula}`); it never gates `has`. The `#has` edge carries load across the `sdm` composition corpus and the bag-graph --- a verb the composable ontology depends on. A possession-gate degrades that composability, so the discipline leaves `has` alone.
 
 <<~/ahu >>
 
@@ -151,6 +151,6 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;241Pfuk_nyDuXbeN1h_vGDu9YYZnpG87bsb9LFwZjgo
+<<^ code="&#x0003;" >>ni:///sha-256;pUF6tOIzE5oCnYIecBlEk2TWjDEHzG5S2SEuhGJl_Jo
 
 <<^ code="&#x0004;" -> ? >>

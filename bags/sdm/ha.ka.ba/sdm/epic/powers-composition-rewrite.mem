@@ -46,8 +46,8 @@ No new game mechanics. No new player-facing rules. The architecture lives
 in the bag, surfaces on cards as clickable tag pills, and serves the
 referee's improvisation and the converter's workflow.
 
-''Version law.'' Existing `@sdm` → `@sdm/v0.0` (prototype archive).
-New `@sdm` built from scratch.
+''Version law.'' Existing `sdm` → `@sdm/v0.0` (prototype archive).
+New `sdm` built from scratch.
 
 ''Two layers.'' Pattern (Pranala graph, stable): what Read Magic consists of.
 Instance (TW5 data, mutable): what Lady Aki currently holds, how it mutated.
@@ -777,6 +777,6 @@ history if ever needed.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;dSE0Sk8GvtpBySvwpm5rKmMRSQ5KNybhxIlqQrysE2Q
+<<^ code="&#x0003;" >>ni:///sha-256;UwZBgQ4EZV7Xz6__vryxBuQemkFpiwYNZ9XKiVX4cm0
 
 <<^ code="&#x0004;" -> ? >>

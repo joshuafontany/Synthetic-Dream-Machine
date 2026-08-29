@@ -85,13 +85,13 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 | Seeded | Held as |
 |---|---|
 | engine + plugin descriptors | `{id, version, sha256}` in `.blobs` (NO bytes); the bytes ride `genesis/cas/<cid>` + `island.manifest.json` |
-| system bag descriptors | `ROOT_BAGS`: `@oracle`, `@lararium`, `@catalog`, `@lares` — the universal floor, and nothing else |
-| system wiki-recipes | the ''`@lares` wiki'' (`@oracle`+`@lararium`+`@lares`) and the ''`@lararium` wiki'' — DreamNet system bags as quine wikis |
+| system bag descriptors | `ROOT_BAGS`: `@oracle`, `lararium`, `@catalog`, `lares` — the universal floor, and nothing else |
+| system wiki-recipes | the ''`lares` wiki'' (`@oracle`+`lararium`+`lares`) and the ''`lararium` wiki'' — DreamNet system bags as quine wikis |
 | genesis-cid | `lar:///ha.ka.ba/bags/oracle/genesis-cid` (two-pass CID witness, GD-4) |
 
 ''GD-7 — genesis declares only the floor it stands.'' A FACE'S PLANES ARE NOT DECLARED HERE. `@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>` and `@sessions-<tag>` each derive their id from the tag their PersonaGroup mints, so no name for them exists when this seed gets built, and a genesis every vessel shares can describe no plane belonging to one person. They describe themselves at founding, where the knowledge lives, and resolve from `@catalog` — `@oracle` names what every vessel carries, and a person's relations reach no such universality.
 
-''GD-6 — system recipes are substrate; user recipes are not (operator ruling 2026-06-16).'' Genesis seeds the ''system'' wiki-recipes (`@lares`, `@lararium`); user recipes mint into `@catalog` by init-wiki. A user recipe in genesis, or a system recipe in `@catalog`, reads as a plane-leak.
+''GD-6 — system recipes are substrate; user recipes are not (operator ruling 2026-06-16).'' Genesis seeds the ''system'' wiki-recipes (`lares`, `lararium`); user recipes mint into `@catalog` by init-wiki. A user recipe in genesis, or a system recipe in `@catalog`, reads as a plane-leak.
 
 <<~/ahu >>
 
@@ -199,6 +199,6 @@ Worse for a shelter brief: an implementation hash ''mandates a monoculture'', an
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Ew0dm-eCnIGJSM2hcpNbtCQOmQNMF84VDk2XPpazSss
+<<^ code="&#x0003;" >>ni:///sha-256;88nUhS0Ozuufb4stA8ERmFDa8ADnpE7YsbjJEyjbb5I
 
 <<^ code="&#x0004;" -> ? >>

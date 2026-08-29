@@ -26,14 +26,14 @@ uri-path    = "ha.ka.ba/lararium/tw5/recipe-watch"
 recipe record (field `bag-stack`), and applies the diff to the island's own
 composite. The recipe + bag-oracle reach run ''two-source'' (operator ruling,
 2026-06-16, `wiki-layer-ontology#oracle-planes`): a ''system'' wiki
-(`@lares`/`@lararium`) reads its recipe from the ''`@oracle`'' doc
+(`lares`/`lararium`) reads its recipe from the ''`@oracle`'' doc
 (`recipeUri("@oracle", slug)`) and resolves system bags from `@oracle`; a
 ''user'' wiki reads `recipeUri("@catalog", slug)` and resolves user bags from
 `@catalog`. //(Code reads single-source `@catalog` today; the plane split is//
 //ruled, enactment tracked at the live handoff torch.)//
 
 * ''bag added'' → resolve via the owning plane's oracle, insert the layer above
-  `@lares` (library position, below the wiki bag), replay its content into
+  `lares` (library position, below the wiki bag), replay its content into
   the running wiki.
 * ''bag removed'' → `CompositeStore.removeLayerLive`: departed titles
   tombstone to projections, records the bag shadowed resurface.
@@ -64,14 +64,14 @@ resolves to nothing gets skipped — the admin's alert stays standing until the
 oracle lands or the operator reboots.
 
 ''RW-4 — Structural slots stay structural.'' Membership reconcile touches
-library bags only; `@temp`/`@draft`/`@working`/`@personal`/wiki/`@lares`/`@oracle`
+library bags only; `@temp`/`@draft`/`@working`/`@personal`/wiki/`lares`/`@oracle`
 never mount or unmount by stack diff (the structural set in code —
 `ORACLE_BAG` is the floor since the 2026-06-16 carve). `@working` joined the
 structural set 2026-06-19: it is a per-(PersonaGroup×fingerprint) grant slot
 (peer to `@personal`/`@draft`) threaded through the manifest, never named in a
 recipe `bag-stack` — so the reconcile MUST exempt it, else it evicts the live
-write layer the island just mounted (the OCI writable-upper-layer law). `@lararium` is ''not''
-structural: it mounts as a ''library layer'' (above `@lares`), so the corpus
+write layer the island just mounted (the OCI writable-upper-layer law). `lararium` is ''not''
+structural: it mounts as a ''library layer'' (above `lares`), so the corpus
 composes into a recipe that names it. Oracle-move swaps apply to any mounted
 CRDT slot the oracles point at.
 
@@ -87,6 +87,6 @@ CRDT slot the oracles point at.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;L1PbOMSwu9B9Mukq0momZbktsTVwhfFm9pykOkb0zak
+<<^ code="&#x0003;" >>ni:///sha-256;rmd1G7nIGXB7ECP9rjdqVR7scD9Pz1fsD3t5EwM2npU
 
 <<^ code="&#x0004;" -> ? >>

@@ -46,9 +46,9 @@ The content plane rides one, rooted at ha. A face rides the tetrahedron above it
 
 | Vertex | Doc | URI | SDM force | Oracle role |
 |---|---|---|---|---|
-| ''ha'' | `LarariumDoc` | `@lararium` | structure / stability | root oracle — holds all five non-ha tiddlers |
+| ''ha'' | `LarariumDoc` | `lararium` | structure / stability | root oracle — holds all five non-ha tiddlers |
 | ''ka'' | `CatalogDoc` | `@catalog` | fire / motion | motion oracle — holds corpus and wiki tiddlers |
-| ''ba'' | `LaresDoc` | `@lares` | personality / flow | personality oracle — holds `@lares` system tiddlers |
+| ''ba'' | `LaresDoc` | `lares` | personality / flow | personality oracle — holds `lares` system tiddlers |
 
 !!! A Face's Four Planes — one tag, and no root above them
 
@@ -178,6 +178,6 @@ The two-plane Automerge geometry rides ''Scope 1'' of the two-scopes ruling — 
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;4-jlHQZPxb2EM4t-cMwUilWuKewPy7esbTehXcsAfpM
+<<^ code="&#x0003;" >>ni:///sha-256;srfye7QpiCIft06l3pHin8p2feBP75Zwq-P17Cui_6M
 
 <<^ code="&#x0004;" -> ? >>

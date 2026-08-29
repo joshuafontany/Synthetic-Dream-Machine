@@ -302,16 +302,16 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   export LARES_ARCHIVE_PASSPHRASE="$PASS_DRILL"
   run "④ vault status"                      lares vault status
 
-  # ⚠ THE DAEMON FROM ② CANNOT SERVE ⑤, AND IT REPORTS `up` THE WHOLE TIME. It booted before any persona
-  # existed and before the seal, so it stands at the WAKING FLOOR — faceless, carrying the public shelf,
-  # every sovereign act waiting. A standing is read ONCE, at boot: lighting a face afterward does not
-  # raise a running vessel off the floor, and exporting the passphrase above reaches only NEW processes.
+  # ⚠ ⑤ CANNOT FULLY CONVERGE YET, AND THE CAUSE SITS OUTSIDE THIS HARNESS.
+  # The daemon from ② booted before any persona existed and before the seal, so it stands at the WAKING
+  # FLOOR — faceless, serving the public shelf, every sovereign act waiting. `lares` and `lararium` land
+  # anyway (INGEST asks no face); `crossroads` needs one and comes back "holds no face", so 2 of 3
+  # holdings converge and the movement reads half-green.
   #
-  # So the restart belongs HERE, after the face exists AND the seal's var rides — not earlier. Placed
-  # after `persona new` it re-boots into the same floor and takes ⑥ down with it. Measured: without this,
-  # `crossroads` (a LOAD, which the daemon serves) fails "holds no face" while `lares` and `lararium`
-  # (INGEST) both land — 2 of 3 holdings converge and the movement reads half-green.
-  run "restand — face lit, vault open"      lares vessel stand --restart
+  # A restart is the obvious cure and it does NOT work: `vessel stand --restart` dies on
+  # `@catalog — the store holds it and no peer carries it`, the same verdict a mesh hearth dies on
+  # beside its siblings. A vessel that stands clean COLD fails to re-stand, so the cure has to land in
+  # the boot resolver rather than in another verb here.
   # ⑤ SEEDS, and does not rebirth. Rebirth composes stop · clear · bake · stand · seed, which on a fresh
   # founding tears down what ② built and re-bakes a genesis nothing touched. Only the seeding belongs here.
   run "⑤ seed --apply"                      lares vessel seed --apply --yes

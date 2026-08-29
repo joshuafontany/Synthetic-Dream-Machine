@@ -30,7 +30,7 @@ The lararium does this: it holds an ''AI-operator alignment relation'' on a foun
 
 Four words name the whole, and each grounds the next:
 
-* ''Vessel-swarm'' — the floor. A `@lararium` runs as a distributed wiki-quine-relay across a person's device-vessels; a ''personGroup'' holds one human's vessels (phone, laptop, server-peer) as causal-island peers sharing the same bags.
+* ''Vessel-swarm'' — the floor. A `lararium` runs as a distributed wiki-quine-relay across a person's device-vessels; a ''personGroup'' holds one human's vessels (phone, laptop, server-peer) as causal-island peers sharing the same bags.
 * ''Quine-wiki'' — the store. The meme graph describes itself in the same primitives it uses for everything else: a tiddler that holds schema rules //serves as// the schema at runtime; a meme that holds device bindings //operates as// the device. Bags hold the canonical records; files project them.
 * ''AI-operator alignment'' — the constitutive relation. The threshold between a human operator and the Lares coordinator forms the system, not a feature on top of it. The meme graph carries the operator's standing intentions; the Voices, the OODA-HA loop, and the LARES dials calibrate the coordinator against them.
 * ''HUD'' — the surface. The operator reads the node's state the way a pilot reads instruments — confidence, mana, stage bands, pranala edges — rendered continuously in a form that supports decision.
@@ -213,6 +213,6 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Skq3S08Q_VvajAkOB4nfdLKHp7_hk5m-WBatQTS1W-o
+<<^ code="&#x0003;" >>ni:///sha-256;VvdqeTsNyHdiCht0sOhUjI3AmcN9rBnjaRqILCrVLNw
 
 <<^ code="&#x0004;" -> ? >>

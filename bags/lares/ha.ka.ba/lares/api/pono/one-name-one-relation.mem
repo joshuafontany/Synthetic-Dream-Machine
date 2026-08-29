@@ -83,7 +83,7 @@ Reading up from the atom. Each rung names its relation, so a reader can tell at 
 
 Each of these reads as ''one name carrying two relations''. None came from carelessness; each came from a name that meant one thing on the day it was written and grew a second meaning later.
 
-* ''`@crossroads` — HOLDING × MEETING.'' It stands as a bag id in the bag registry with a disk projection, ''and'' as the seed of a per-Nexus board. The registry entry keyed by the bag id carries the ''board's'' url, so "the crossroads doc" resolves to a different document per Nexus, with no signal to the reader.
+* ''`crossroads` — HOLDING × MEETING.'' It stands as a bag id in the bag registry with a disk projection, ''and'' as the seed of a per-Nexus board. The registry entry keyed by the bag id carries the ''board's'' url, so "the crossroads doc" resolves to a different document per Nexus, with no signal to the reader.
 * ''`@nexus` — BEING × MEETING × HOLDING.'' One string serves as a registry key, as two board seeds distinguished only by fragment, and as the `bagId` of a mounted layer.
 * ''`@operator/…`, `@mesh/…` — BEING wearing HOLDING's clothes.'' Sentinel membership documents named in bare-`@` form, seeded through the SAME hash function that seeds bags, so a principal and an artifact share one string-space at the capability ring.
 * ''`@oracle` — HOLDING × MEETING'', stable rather than per-Nexus, so the fusion sits still and costs nothing today.
@@ -161,6 +161,6 @@ Three moves, smallest first, each standing on its own.
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-uris >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;axHOHCuq95We14RoYg-e53UW4is6EKFseS23kitX3Hg
+<<^ code="&#x0003;" >>ni:///sha-256;VZm1WNk4aWDTtLlYlizDRRCLJPbY2ulIs4mh-cTokKk
 
 <<^ code="&#x0004;" -> ? >>

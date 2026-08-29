@@ -40,7 +40,7 @@ every downstream stratum reads one path law.
 climbs from the compiled module to its package root, `packages/lararium-node`.
 `BAGS_ROOT` and `LARES_MEMES_ROOT` derive from `repoRoot` (imported from
 `@lararium/mesh/node`): `BAGS_ROOT` joins `repoRoot` with `bags`, and
-`LARES_MEMES_ROOT` names the `@lares` bag under it. `REPO_ROOT` re-exports
+`LARES_MEMES_ROOT` names the `lares` bag under it. `REPO_ROOT` re-exports
 `repoRoot` directly.
 
 <<~/ahu >>
@@ -129,6 +129,6 @@ export interface CorpusSource {
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;wcG_epXxiGsZ5bThzs1hBzOSqNciN6TmLiWMkmchGBU
+<<^ code="&#x0003;" >>ni:///sha-256;IbhGTDTQdYJPlkfr5ihG1fjlzrWt-a8rruCneRwJaGs
 
 <<^ code="&#x0004;" -> ? >>

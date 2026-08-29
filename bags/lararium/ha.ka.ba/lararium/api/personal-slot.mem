@@ -194,7 +194,7 @@ lar:///ha.ka.ba/bags/daemon/draft-bindings/${fingerprintHex}
   text: <automerge:url-of-the-@draft-doc-for-this-recipe>
 ```
 
-`fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, libraryBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, libraryBagDocIds: sorted})`. `@lares` and `@lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
+`fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, libraryBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, libraryBagDocIds: sorted})`. `lares` and `lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
 
 <<~/ahu >>
 
@@ -466,7 +466,7 @@ This unified ledger renumbers once; every in-body cross-reference resolves here.
 Q1 (slot priority order) ✅ approved — `personal` among the per-wiki live slots, above the `bags/{slug}` canon.
 Q2 (one @personal or per-wiki) ✅ resolved — a per-wiki slot URI (`wikis/{slug}/personal`); the resolver binds the doc per `(PersonaGroup × recipe-fingerprint)`.
 Q3 (`$:/palette` scope) ✅ resolved — palette routes to the personal layer (operator-across-devices). The cascade rule `[prefix[$:/palette]then{lar:///ha.ka.ba/lararium/config/current-wiki-personal}]` lands above the `$:/state/` catch-all. Custom palette definitions under `$:/palettes/*` are NOT covered — open follow-up if operator-built palettes need to travel across recipes.
-Q4 (fingerprint algorithm) ✅ resolved — SHA-256 over canonical encoding of `(bags/{slug}-doc-id + sorted libraryBags doc-ids)` only. `@lares` and `@lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same rule.
+Q4 (fingerprint algorithm) ✅ resolved — SHA-256 over canonical encoding of `(bags/{slug}-doc-id + sorted libraryBags doc-ids)` only. `lares` and `lararium` doc-ids do NOT participate — switching Lares personality or system bag does not fork the operator's view state across devices. `EPIC-RESIDENCY-MODEL.md` S7.4 carries the same rule.
 
 ''Binding storage''
 
@@ -506,6 +506,6 @@ register's lived surface — the living grammar in use before curation lifts it 
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;oXcfc-Tx2eJb-IyF_jBS9bUja1HHA8cHhPsZEPBY2NU
+<<^ code="&#x0003;" >>ni:///sha-256;BXdZ5L3LDZq8p3p2ZhKBty5maB76SB4d6_FocC5g2Ag
 
 <<^ code="&#x0004;" -> ? >>

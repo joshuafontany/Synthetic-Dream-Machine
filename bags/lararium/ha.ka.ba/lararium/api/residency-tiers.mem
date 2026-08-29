@@ -89,7 +89,7 @@ Consequences:
 
 * A bag referenced by ANY `wela` island is ''`wela`'' — its handle stays in cache.
 * A bag referenced by NO `wela` island is ''`anu`'' — its handle MAY drop (the eviction `automerge-repo` does not do on its own; see [[issue #358|https://github.com/automerge/automerge-repo/issues/358]]).
-* ''Referenced bags inherit liveness.'' `@lares` / `@lararium` corpus and the session event-bus bag ride in multiple recipes; a wiki's own per-wiki live slots (`wikis/{slug}/{personal,draft,working}`) each bind one recipe. Either way, referenced by the pinned admin/primary/Session islands, they are ''`wela` by derivation'', never dropped while a pinned island holds them.
+* ''Referenced bags inherit liveness.'' `lares` / `lararium` corpus and the session event-bus bag ride in multiple recipes; a wiki's own per-wiki live slots (`wikis/{slug}/{personal,draft,working}`) each bind one recipe. Either way, referenced by the pinned admin/primary/Session islands, they are ''`wela` by derivation'', never dropped while a pinned island holds them.
 
 Two disciplines survive the collapse as bag-level mechanism (now driven by the pool, not an independent authority):
 
@@ -146,6 +146,6 @@ through #third-tier-gate, and only after the research that meme charges.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;V4_ANyeiTnOIOiJZg8NpvPileNTnvVaP9MZLEqd8P9o
+<<^ code="&#x0003;" >>ni:///sha-256;qk7pRJsGvviKPr7m2lWkaxbG1PKB41Tff-6NFNsOApk
 
 <<^ code="&#x0004;" -> ? >>
