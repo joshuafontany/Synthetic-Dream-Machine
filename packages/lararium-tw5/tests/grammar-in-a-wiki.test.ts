@@ -174,7 +174,7 @@ describe.skipIf(wikiSkip)(
       for (const [claim, mark] of [["STX", "0002"], ["ETX", "0003"]] as const) {
         if (!first.out.includes(`<<^ code="&#x${mark};" >>`)) faults.push(`${name}: no ${claim}`);
       }
-      if (!/^<<\^ code="&#x(?:0004|0014);"[^>\n]*?-> \? >>/m.test(first.out)) faults.push(`${name}: EOT releases nothing`);
+      if (!/^<<\^ code="&#x(?:0004|0014);"[^>\n]*?-> to=\? >>/m.test(first.out)) faults.push(`${name}: EOT releases nothing`);
       const gotNs = /^<<\^ code="&#x(?:0001|0011);" namespace="([^"]*)"/m.exec(first.out)?.[1] ?? "";
       if (gotNs !== wantNs) faults.push(`${name}: namespace "${gotNs}" where the meta declares "${wantNs}"`);
       const second = project(first.out);

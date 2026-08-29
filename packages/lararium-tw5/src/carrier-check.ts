@@ -108,10 +108,10 @@ export type FrameStanding =
 
 export function frameStanding(text: string): FrameStanding {
   const spans = fencedSpans(text);
-  const stxM = maskedExec(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans);
+  const stxM = maskedExec(text, /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/g, spans);
   if (!stxM) return { kind: "absent" };
   const rest = text.slice(stxM.index);
-  const etxM = maskedExec(rest, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g, fencedSpans(rest));
+  const etxM = maskedExec(rest, /<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/g, fencedSpans(rest));
   if (!etxM) return { kind: "torn" };
   return { kind: "framed", start: stxM.index, end: stxM.index + etxM.index + etxM[0].length };
 }

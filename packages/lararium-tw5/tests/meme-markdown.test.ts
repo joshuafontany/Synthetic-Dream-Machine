@@ -168,3 +168,16 @@ describe("the tooth stands at one dispatch position", () => {
     });
   }
 });
+
+describe("the projector reads a framing opener that names its ends", () => {
+  // The reader stays forgiving across the migration: a carrier written either way still arrives, and the
+  // address it names reaches the projection the same.
+  const body = (ends: string) =>
+    [`<<^ code="&#x0001;" ${ends} >>`, "", "A line of body.", "", '<<^ code="&#x0004;" -> to=? >>'].join("\n");
+
+  test("the named spelling yields the same address as the positional one", () => {
+    const named = projectSubmission(body("from=? -> to=lar:///a.b.c/x"), { title: "lar:///t" });
+    const positional = projectSubmission(body("? -> lar:///a.b.c/x"), { title: "lar:///t" });
+    expect(named.markdown).toBe(positional.markdown);
+  });
+});

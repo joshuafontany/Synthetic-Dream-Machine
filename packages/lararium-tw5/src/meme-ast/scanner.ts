@@ -46,27 +46,27 @@ export interface ParseEvent {
 
 export const BOOTSTRAP_SCANS: SigilScan[] = [
   // ASCII control-character framing — SOH / STX / ETX / EOT
-  { sigilName: "control-soh", regex: /<<\^(?:[^>]|->)*&#x0001;(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/g, eventType: "pragma" },
-  { sigilName: "control-stx", regex: /<<\^(?:[^>]|->)*&#x0002;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
-  { sigilName: "control-etx", regex: /<<\^(?:[^>]|->)*&#x0003;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
-  { sigilName: "control-eot", regex: /<<\^(?:[^>]|->)*&#x0004;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-soh", regex: /<<\^(?:[^>]|>(?!>))*&#x0001;(?:[^>]|>(?!>))*\?\s*->\s*(?:to=)?([^\s>]+)\s*>>/g, eventType: "pragma" },
+  { sigilName: "control-stx", regex: /<<\^(?:[^>]|>(?!>))*&#x0002;(?:[^>]|>(?!>))*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-etx", regex: /<<\^(?:[^>]|>(?!>))*&#x0003;(?:[^>]|>(?!>))*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-eot", regex: /<<\^(?:[^>]|>(?!>))*&#x0004;(?:[^>]|>(?!>))*>>/g,                        eventType: "pragma" },
   // ETB (&#x0017;) — the attestation block's terminator, between ETX and EOT. A cold parse must find
   // it or a carrier that gained a seal loses it on the first write-back, silently, because nothing
   // on the read path ever saw what went missing.
-  { sigilName: "control-etb", regex: /<<\^(?:[^>]|->)*&#x0017;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-etb", regex: /<<\^(?:[^>]|>(?!>))*&#x0017;(?:[^>]|>(?!>))*>>/g,                        eventType: "pragma" },
   // Kapu extended range — DC1 (&#x0011;) SOH variant, DC4 (&#x0014;) EOT variant
-  { sigilName: "control-soh", regex: /<<\^(?:[^>]|->)*&#x0011;(?:[^>]|->)*\?\s*->\s*([^\s>]+)\s*>>/g, eventType: "pragma" },
-  { sigilName: "control-eot", regex: /<<\^(?:[^>]|->)*&#x0014;(?:[^>]|->)*>>/g,                        eventType: "pragma" },
+  { sigilName: "control-soh", regex: /<<\^(?:[^>]|>(?!>))*&#x0011;(?:[^>]|>(?!>))*\?\s*->\s*(?:to=)?([^\s>]+)\s*>>/g, eventType: "pragma" },
+  { sigilName: "control-eot", regex: /<<\^(?:[^>]|>(?!>))*&#x0014;(?:[^>]|>(?!>))*>>/g,                        eventType: "pragma" },
   // Structural: ahu — slot identifier supports nested fragment paths via
   // `/`-separated segments (`#/parent/child/grandchild`). Per memetic-wikitext
   // spec §5.3 + lar-uri.md §5.6, the URI fragment is a path within the meme;
   // nested ahu blocks produce child tiddlers at `parentUri#/parent/child`
   // rather than dedicated `#parent#child` URIs (single-hash invariant).
-  { sigilName: "ahu", regex: /<<~(?:[^>]|->)*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+(\S+))?\s*>>/g, eventType: "open"  },
+  { sigilName: "ahu", regex: /<<~(?:[^>]|>(?!>))*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+(\S+))?\s*>>/g, eventType: "open"  },
   { sigilName: "ahu", regex: /<<~\/ahu\s*>>/g,                                                          eventType: "close" },
   // Pranala — block before inline (block wins at same position)
-  { sigilName: "pranala", regex: /<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)(?:\s+family:([\w-]+))?(?:\s+role:([\w-]+))?\s*>>([\s\S]*?)<<~\/pranala\s*>>/gs, eventType: "leaf" },
-  { sigilName: "pranala", regex: /<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)(?:\s+family:([\w-]+))?(?:\s+role:([\w-]+))?\s*>>/g, eventType: "leaf" },
+  { sigilName: "pranala", regex: /<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)((?:\s+[\w-]+\s*[=:]\s*(?:"[^"]*"|'[^']*'|[^\s>"']+))*)\s*>>([\s\S]*?)<<~\/pranala\s*>>/gs, eventType: "leaf" },
+  { sigilName: "pranala", regex: /<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)((?:\s+[\w-]+\s*[=:]\s*(?:"[^"]*"|'[^']*'|[^\s>"']+))*)\s*>>/g, eventType: "leaf" },
   // Edge sugar
   { sigilName: "loulou",  regex: /<<~\s*loulou\s+(\S+)\s*>>/g,             eventType: "leaf" },
   // aka — URI form then child-slot form
@@ -141,7 +141,7 @@ export const BOOTSTRAP_SCANS: SigilScan[] = [
   // (`<<~ aperture(0->20) >>`, `<<~ keyword(p) ~~ note >>`) or an unknown word. group 1 = sigil-name,
   // group 2 = raw params (lazy, `->`-aware). The builder grades it `missing` — the partial rung — so
   // a form-variant survives as a recognized sigil instead of dropping to water.
-  { sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|->)*?)\s*>>/g, eventType: "leaf" },
+  { sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|>(?!>))*?)\s*>>/g, eventType: "leaf" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -170,7 +170,7 @@ export function buildScansFromGrammar(sigils: SigilRule[]): SigilScan[] {
   // GENERIC catch-all — appended LAST so every specific grammar scan claims its position first (the same
   // partial-rung the bootstrap carries, now in grammar-mode too: an unmatched sharktooth grades `missing`
   // in the FULL-grammar in-VM parse, not only bootstrap).
-  scans.push({ sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|->)*?)\s*>>/g, eventType: "leaf" });
+  scans.push({ sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|>(?!>))*?)\s*>>/g, eventType: "leaf" });
   // Control scans must win at identical positions even in grammar-hydrated mode
   return scans.sort((a, b) => (a.sigilName.startsWith("control-") ? 0 : 1) - (b.sigilName.startsWith("control-") ? 0 : 1));
 }
@@ -184,7 +184,7 @@ export function collectEvents(text: string, grammar?: GrammarRules): ParseEvent[
 
   // Pranala block spans: inline events inside a pranala block body are excluded
   const blockSpans: [number, number][] = [];
-  for (const m of text.matchAll(/<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)\s*>>([\s\S]*?)<<~\/pranala\s*>>/gs)) {
+  for (const m of text.matchAll(/<<~\s*pranala\s+(#[\w-]+\s+)?(\S+)\s*->\s*(\S+)((?:\s+[\w-]+\s*[=:]\s*(?:"[^"]*"|'[^']*'|[^\s>"']+))*)\s*>>([\s\S]*?)<<~\/pranala\s*>>/gs)) {
     blockSpans.push([m.index!, m.index! + m[0].length]);
   }
   const inBlock = (pos: number): boolean => blockSpans.some(([s, e]) => pos >= s && pos < e);

@@ -299,8 +299,8 @@ function safeSplitMeme(uri: string, text: string, fields: TiddlerFields): Tiddle
 // Control sigils live on ONE line by law — `[^>\n]` keeps the scan from
 // crossing lines (a greedy multi-line match once swallowed from a quoted
 // `<<~` mention down to the real closer; found on loci.md).
-const SOH_LINE_RE = /^<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*>>\n?/;
-const STX_LINE_RE = /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>\n?/;
+const SOH_LINE_RE = /^<<\^(?:[^>\n]|>(?!>))*&#x(?:0001|0011);(?:[^>\n]|>(?!>))*>>\n?/;
+const STX_LINE_RE = /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>\n?/;
 
 function stripLeadingNewlines(text: string): string {
   return text.replace(/^\n+/, "");
@@ -355,10 +355,10 @@ function splitMemeToTiddlers(
   // at the last EOT — otherwise the author's own close rides inside the body and the projection mints
   // a second one below it.
   let etxM: { index: number } | null = null;
-  for (const m of maskedExecAll(noSoh, /\n?<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g)) etxM = m;
+  for (const m of maskedExecAll(noSoh, /\n?<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/g)) etxM = m;
   let eotM: { index: number } | null = null;
   if (!etxM) {
-    for (const m of maskedExecAll(noSoh, /\n?<<\^(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*>>/g)) eotM = m;
+    for (const m of maskedExecAll(noSoh, /\n?<<\^(?:[^>\n]|>(?!>))*&#x(?:0004|0014);(?:[^>\n]|>(?!>))*>>/g)) eotM = m;
   }
   const stripped = etxM ? noSoh.slice(0, etxM.index) : (eotM ? noSoh.slice(0, eotM.index) : noSoh);
   // Degraded-carrier surfacing: a closer swallowed by an UNCLOSED fence
@@ -1043,9 +1043,10 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // the grammar leaves here too, instead of surviving as a literal no reader still scans for.
   const MARK = (name: string): string => frameMark(FRAME_BY_NAME[name]!)!.code;
   const sohCode = f["$carrier-soh"] === "0011" ? MARK("SOH2") : MARK("SOH");
-  // NAMED PARAMS RIDE IN FRONT; THE ARROW KEEPS ITS SHAPE. A parameter states a PROPERTY, the arrow
-  // states a RELATION — `? -> uri` reads "this carrier resolves toward that address". Folding the
-  // bearing into a quoted attribute would demote a relation to a field and break the scan that reads it.
+  // THE ENDS TAKE NAMES; THE ARROW KEEPS ITS SHAPE. `from=? -> to=uri` reads "this carrier resolves
+  // toward that address", the spelling `pranala` and `lares aim` already write. The arrow rides as an
+  // unnamed positional, which TiddlyWiki parses as one — folding the bearing into a quoted attribute
+  // would demote a relation to a field.
   const ns = str("namespace").trim();
 
   let out = carriageText(reader, memeUri, "prologue");
@@ -1058,7 +1059,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // nothing here has to check whether one stands — a suppression check and the field it guarded, gone
   // together. What the author wrote ABOVE the declaration still rides in `prologue` and emits first.
   out += `${DECLARATION}\n\n`;
-  out += `<<^ code="${sohCode}"${ns ? ` namespace="${ns}"` : ""} ? -> ${memeUri} >>\n`;
+  out += `<<^ code="${sohCode}"${ns ? ` namespace="${ns}"` : ""} from=? -> to=${memeUri} >>\n`;
   out += carriageText(reader, memeUri, "preamble");
   if (meta) out += "```toml meta\n" + meta + "```\n\n";
   out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f);
@@ -1084,7 +1085,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += bccOfSpan(out.slice(spanStart));
   out += "\n";
   if (sila) out += `\n${sila}\n<<^ code="${MARK("ETB")}" >>\n`;
-  out += `\n<<^ code="${MARK("EOT")}" -> ? >>\n`;
+  out += `\n<<^ code="${MARK("EOT")}" -> to=? >>\n`;
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;

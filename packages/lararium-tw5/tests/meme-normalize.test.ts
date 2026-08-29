@@ -21,18 +21,18 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
     const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x >>", "&#x2299;");
     const { text, changed, notes } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x >>");
     expect(notes.join()).toMatch(/namespace homed to "⊙"/);
   });
 
   test("decodes a multi-glyph entity namespace (noosphere ॐ ँ)", () => {
     const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x >>", "&#x0950; &#x0901;");
     const { text } = normalizeMemeSource(src);
-    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" from=? -> to=lar:///x >>");
   });
 
   test("idempotent — a carrier already carrying its namespace is unchanged", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x >>", "&#x2299;");
+    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x >>", "&#x2299;");
     const r1 = normalizeMemeSource(src);
     expect(r1.changed).toBe(false);
     expect(r1.text).toBe(src);
@@ -45,7 +45,7 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
     const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///x >>", "&#x2299;");
     const { text, changed } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x >>");
     expect(text).not.toContain("ॐ ँ&#x0001;");
   });
 
@@ -53,7 +53,7 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
     const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x >>", "");
     const { text, changed } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" ? -> lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" from=? -> to=lar:///x >>");
   });
 
   test("no SOH opener → no change (not a single-meme carrier)", () => {
@@ -68,19 +68,19 @@ describe("normalizeMemeSource — SOH opener spacing", () => {
     const src = HEAD("<<^&#x0001; ? -> lar:///x >>", "");
     const { text, changed, notes } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" ? -> lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" from=? -> to=lar:///x >>");
     expect(notes.join()).toMatch(/spacing canonicalized/);
   });
 
   test("idempotent — a correctly-spaced bare opener is left untouched", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x >>", "");
+    const src = HEAD("<<^ code=\"&#x0001;\" from=? -> to=lar:///x >>", "");
     expect(normalizeMemeSource(src).changed).toBe(false);
   });
 });
 
 // meta head with a register field, for the register-band class.
 const REG_HEAD = (register: string) =>
-  `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n<<^ code="&#x0001;" ? -> lar:///x >>\n` +
+  `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n<<^ code="&#x0001;" from=? -> to=lar:///x >>\n` +
   "```toml meta\n" +
   `cacheable = true\n` +
   `register = "${register}"\n` +

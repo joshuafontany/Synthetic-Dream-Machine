@@ -46,18 +46,18 @@ export type MemeStreamEvent =
 // ---------------------------------------------------------------------------
 
 // SOH: both standard &#x0001; and Kapu DC1 &#x0011;
-// All control sigils use (?:[^>\n]|->) — resonance markers (ॐ, ⊙) and ->
-// sequences allowed, but a sigil NEVER crosses a line: the multi-line form
-// once let a quoted `<<~` mention swallow text down to a distant real sigil
-// (loci.md).
-const SOH_RE  = /<<\^(?:[^>\n]|->)*&#x(?:0001|0011);(?:[^>\n]|->)*\?\s*->\s*([^\s>]+)\s*>>/;
-const STX_RE  = /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/;
-const ETX_RE  = /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/;
+// All control sigils scan (?:[^>\n]|>(?!>)) — TiddlyWiki's own reUnquotedAttribute law: an angle
+// bracket closes a call only when a second one follows, so a bearing arrow and a resonance marker
+// (ॐ, ⊙) alike ride as content. A sigil NEVER crosses a line: the multi-line form let a quoted
+// `<<~` mention swallow text down to a distant real sigil (loci.md).
+const SOH_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x(?:0001|0011);(?:[^>\n]|>(?!>))*\?\s*->\s*(?:to=)?([^\s>]+)\s*>>/;
+const STX_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/;
+const ETX_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/;
 // ETB: the attestation block terminator — stands between ETX and EOT, never framing text.
-const ETB_RE  = /<<\^(?:[^>\n]|->)*&#x0017;(?:[^>\n]|->)*>>/;
+const ETB_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0017;(?:[^>\n]|>(?!>))*>>/;
 // EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ? >>)
-const EOT_RE  = /<<[~^](?:(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*|\s*->\s*\?)\s*>>/;
-const AHU_OPEN_RE  = /<<~(?:[^>\n]|->)*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)\s*>>/;
+const EOT_RE  = /<<[~^](?:(?:[^>\n]|>(?!>))*&#x(?:0004|0014);(?:[^>\n]|>(?!>))*|\s*->\s*\?)\s*>>/;
+const AHU_OPEN_RE  = /<<~(?:[^>\n]|>(?!>))*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)\s*>>/;
 const AHU_CLOSE_RE = /<<~\s*\/\s*ahu\s*>>/;
 
 type Hit = { index: number; end: number; cap: string | undefined };

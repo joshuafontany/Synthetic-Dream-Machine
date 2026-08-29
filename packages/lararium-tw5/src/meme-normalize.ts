@@ -92,6 +92,19 @@ const DEFINITION_HEAD = /^[~^!]?\s*(\\[A-Za-z_]|wehe\b|kumu\b|helu\b)/;
 const COLON_PARAM = /\b([A-Za-z0-9_-]+):(?=["']|\[\[)/g;
 
 /**
+ * The framing opener's two ends, positional.
+ *
+ * `pranala` and `lares aim` name theirs; the four framing codes carried a bare `?` and a bare address with
+ * the bearing arrow between. The arrow stays — TiddlyWiki parses it as an unnamed positional — and the ends
+ * it terminates take the names every other sigil already gives them.
+ */
+const FRAME_OPEN_ENDS =
+  /(<<\^ code="&#x(?:0001|0011);"(?:[ \t]+namespace="[^"]*")?[ \t]+)\?([ \t]*->[ \t]*)(\S+)([ \t]*>>)/g;
+
+/** The closer states one end: the arrow reaches an unresolved address. */
+const FRAME_CLOSE_ENDS = /(<<\^ code="&#x(?:0004|0014);"[ \t]*->[ \t]*)\?([ \t]*>>)/g;
+
+/**
  * Rewrite every CALL-site colon separator to `=`, leaving definitions and scheme colons untouched.
  *
  * Exported so a corpus sweep moves the graph by the same law the gate reads it with.
@@ -199,6 +212,18 @@ export function normalizeMemeSource(src: string): NormalizeResult {
   if (sep.moved > 0) {
     notes.push(`named parameter separator: ${sep.moved} call site${sep.moved === 1 ? "" : "s"} took the equals sign`);
   }
+
+  // ── 4. Framing ends (positional → named) ─────────────────────────────────
+  let ends = 0;
+  text = text.replace(FRAME_OPEN_ENDS, (_m, head: string, arrow: string, target: string, tail: string) => {
+    ends += 1;
+    return `${head}from=?${arrow}to=${target}${tail}`;
+  });
+  text = text.replace(FRAME_CLOSE_ENDS, (_m, head: string, tail: string) => {
+    ends += 1;
+    return `${head}to=?${tail}`;
+  });
+  if (ends > 0) notes.push(`framing ends: ${ends} sigil${ends === 1 ? "" : "s"} named from= and to=`);
 
   return { text, changed: text !== src, notes, flags };
 }

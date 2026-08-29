@@ -74,7 +74,11 @@ function walkForEdges(nodes: MemeAstNode[], memeUri: string, ahuStack: string[],
 // Token resolution: "?" → current URI/socket; "#frag" → URI+frag; lar:/// absolute
 // ---------------------------------------------------------------------------
 
-function tok(token: string, memeUri: string, ahuStack: string[]): [string, string] {
+function tok(raw: string, memeUri: string, ahuStack: string[]): [string, string] {
+  // AN END NAMES ITSELF. `pranala`, `lares aim` and the framing sigils write `from=`/`to=` in front of the
+  // address, so the value a reader resolves sits past the separator. A token still carrying its parameter
+  // name matches no branch below and falls through to the meme's own address — an edge pointing home.
+  const token = raw.replace(/^(?:from|to)=/, "");
   if (token === "?") return [memeUri, ahuStack[ahuStack.length - 1] ?? memeUri];
   if (token.startsWith("#")) return [memeUri, memeUri + token];
   if (token.startsWith("lar:///") && token.includes("#")) {

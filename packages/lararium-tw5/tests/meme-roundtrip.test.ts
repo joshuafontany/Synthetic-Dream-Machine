@@ -84,7 +84,7 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
 const TEACHING_URI = "lar:///ha.ka.ba/lares/memory/fence-teaching";
 const TEACHING = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="${"&#x0001;"}" ? -> ${TEACHING_URI} >>
+<<^ code="${"&#x0001;"}" from=? -> to=${TEACHING_URI} >>
 \`\`\`toml meta
 uri-path = "ha.ka.ba/lares/memory/fence-teaching"
 type     = "text/memetic-wikitext+tiddlywiki"
@@ -119,7 +119,7 @@ After the fence, the carrier still runs.
 
 <<^ code="${"&#x0003;"}" >>ni:///sha-256;FQysnSrznq4cdM66EtuY6AkQHPmrKrzFXtGAEWIieSc
 
-<<^ code="${"&#x0004;"}" -> ? >>
+<<^ code="${"&#x0004;"}" -> to=? >>
 `;
 
 describe("fence-mask — quoted sigils never frame, split, or expand", () => {
@@ -150,7 +150,7 @@ describe("Kapu SOH variant survives the round trip", () => {
   const KAPU_URI = "lar:///ha.ka.ba/lares/memory/kapu-carrier";
   const KAPU = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="${"&#x0011;"}" namespace="⊙" ? -> ${KAPU_URI} >>
+<<^ code="${"&#x0011;"}" namespace="⊙" from=? -> to=${KAPU_URI} >>
 \`\`\`toml meta
 uri-path = "ha.ka.ba/lares/memory/kapu-carrier"
 type     = "text/memetic-wikitext+tiddlywiki"
@@ -162,14 +162,14 @@ kapu body.
 
 <<^ code="${"&#x0003;"}" >>
 
-<<^ code="${"&#x0004;"}" -> ? >>
+<<^ code="${"&#x0004;"}" -> to=? >>
 `;
   test("the DC1 code and namespace re-emit on the SOH line", () => {
     const records = recordsOf(KAPU, KAPU_URI);
     const rendered = expandMemeRefs(readerOf(records), KAPU_URI)!;
     expect(rendered.startsWith(`<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="${"&#x0011;"}" namespace="⊙" ? -> ${KAPU_URI} >>`)).toBe(true);
+<<^ code="${"&#x0011;"}" namespace="⊙" from=? -> to=${KAPU_URI} >>`)).toBe(true);
     expect(rendered).toBe(expandMemeRefs(readerOf(recordsOf(rendered, KAPU_URI)), KAPU_URI));
   });
 });

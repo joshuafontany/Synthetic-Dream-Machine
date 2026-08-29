@@ -68,12 +68,13 @@ function metaValue(text: string, key: string): string | null {
 
 export function readCarrierShape(text: string): CarrierShape {
   const spans = fencedSpans(text);
-  // THE ARROW CARRIES A `>`. A head sigil states its bearing as `? -> lar:///…`, so a tail scanned as
-  // `[^>\n]*` stops at the arrow and the sigil never closes — the whole corpus then reads unframed.
-  // `(?:[^>\n]|->)*` is the form every other scan in this grammar uses, for this reason.
+  // A `>` CLOSES A CALL ONLY WHEN A SECOND ONE FOLLOWS. That reads TiddlyWiki's own
+  // `reUnquotedAttribute` (core/modules/parsers/parseutils.js), which admits `(?:>(?!>))|[^\s>"']` inside
+  // an unquoted value — so a bearing arrow, a comparison, any bracket at all rides as content. A tail
+  // scanned as `[^>\n]*` stops at the first one and the sigil never closes, and the corpus reads unframed.
   // The PREFIX still stops at `&`: a namespace written as entities would otherwise be read as the
   // control code, which is the quietest way this frame has broken.
-  const headM = maskedExec(text, /<<\^[^&\n]*&#x(?:0001|0011);(?:[^>\n]|->)*>>/g, spans);
+  const headM = maskedExec(text, /<<\^[^&\n]*&#x(?:0001|0011);(?:[^>\n]|>(?!>))*>>/g, spans);
   const marks: CarrierMarks = {
     doctype: /^<<!DOCTYPE /m.test(text),
     head:    headM !== null,
@@ -84,9 +85,9 @@ export function readCarrierShape(text: string): CarrierShape {
     uriPath: metaValue(text, "uri-path"),
     bag:     metaValue(text, "bag"),
     headUri: headM ? (/-> (\S+) >>/.exec(headM[0])?.[1] ?? null) : null,
-    stx:     marked(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g),
-    etx:     marked(text, /<<\^(?:[^>\n]|->)*&#x0003;(?:[^>\n]|->)*>>/g),
-    eot:     marked(text, /<<\^(?:[^>\n]|->)*&#x(?:0004|0014);(?:[^>\n]|->)*>>/g),
+    stx:     marked(text, /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/g),
+    etx:     marked(text, /<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/g),
+    eot:     marked(text, /<<\^(?:[^>\n]|>(?!>))*&#x(?:0004|0014);(?:[^>\n]|>(?!>))*>>/g),
     check:   verifyBcc(text),
   };
 
@@ -127,7 +128,7 @@ export function readCarrierShape(text: string): CarrierShape {
   // ONE TEXT FRAME PER CARRIER. The check covers the first STX..ETX span and only that, so a second
   // frame would ride beneath a verdict computed over the first — the smuggling shape. The gradient
   // surfaces it rather than letting the first frame's `ok` speak for bytes it never covered.
-  const stxCount = maskedExecAll(text, /<<\^(?:[^>\n]|->)*&#x0002;(?:[^>\n]|->)*>>/g, spans).length;
+  const stxCount = maskedExecAll(text, /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/g, spans).length;
   if (stxCount > 1) faults.push(`${stxCount} text frames stand where the grammar admits one — only the first verifies`);
 
   return { kind, marks, faults };

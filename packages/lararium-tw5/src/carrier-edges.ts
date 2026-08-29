@@ -43,9 +43,9 @@ export interface CarrierEdge {
 
 const PATTERNS: ReadonlyArray<readonly [EdgeForm, RegExp]> = [
   ["loulou",   /<<~\s*loulou\s+lar:\/\/\/(\S+?)\s*>>/g],
-  // THE BEARING ARROW CARRIES A `>`. A `pranala` states its target past the arrow, so a scan of
-  // `[^>]*?` stops at the arrow and the sigil never reaches its own address — silently, as a form that
-  // simply reports no edges. `(?:[^>]|->)*?` is the form every scan in this grammar uses, for this
+  // A `>` CLOSES A CALL ONLY WHEN A SECOND ONE FOLLOWS — TiddlyWiki's own `reUnquotedAttribute` law. A
+  // `pranala` states its target past a bearing arrow, so a scan of `[^>]*?` stops at that arrow and the
+  // sigil never reaches its own address — silently, as a form that simply reports no edges. `(?:[^>]|>(?!>))*?` is the form every scan in this grammar uses, for this
   // reason. Measured: without it this reader found 0 of the corpus's 84 `pranala` edges, and reported
   // 163 dangling where 194 stand.
   //
@@ -54,8 +54,8 @@ const PATTERNS: ReadonlyArray<readonly [EdgeForm, RegExp]> = [
   // the first address after the sigil reads whichever end is written first: it agrees wherever the
   // source is `?` and inverts wherever the source is an address, counting a carrier's own ground as a
   // dangling edge while the target it points at goes uncounted. Position is not the relation.
-  ["pranala",  /<<~\s*pranala(?:[^>]|->)*?\bto=lar:\/\/\/(\S+?)[\s>]/g],
-  ["kahea",    /<<~\s*kahea(?:[^>]|->)*?lar:\/\/\/(\S+?)[\s>]/g],
+  ["pranala",  /<<~\s*pranala(?:[^>]|>(?!>))*?\bto=lar:\/\/\/(\S+?)[\s>]/g],
+  ["kahea",    /<<~\s*kahea(?:[^>]|>(?!>))*?lar:\/\/\/(\S+?)[\s>]/g],
   ["wikilink", /\[\[[^\]|]*\|lar:\/\/\/([^\]]+)\]\]/g],
   ["wikilink", /\[\[lar:\/\/\/([^\]|]+)\]\]/g],
   // THE FORM THAT PREDATES THE ADDRESS. Before the corpus poured to `.mem`, a carrier linked its

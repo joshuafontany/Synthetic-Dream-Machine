@@ -160,8 +160,10 @@ facts the frame rests on, each the host's and not this grammar's:
   before accepting `:`, so `$:/foo` never mis-reads as a named parameter. `code:` and `namespace:` pass.
 - **A quoted value reads as a TW5 string literal** — single, double, triple-double or `[[bracket]]` — and a
   string literal carries UTF-8, so `namespace="&#x2299;"` and `namespace="ॐ ँ"` stand as written.
-- **An unnamed value reads positional**, numbered in order. `?` and `->` ride as positional parameters,
-  which lets the bearing arrow survive inside a macro call ([FRAMING] #bearing-arrow).
+- **An unnamed value reads positional**, numbered in order, and `reUnquotedAttribute` admits any `>` that
+  no second one follows — so `->` rides as a positional parameter and needs no rule of its own
+  ([FRAMING] #bearing-arrow). A framing sigil names the ends the arrow stands between: `from=? -> to=…`,
+  the spelling `pranala` and `lares aim` already write.
 
 **A `lar:` URI carries a scheme, not a parameter.** `lar` passes the strict-identifier test and a colon
 follows it, so TW5's own reading takes the name `lar` with value `///ha.ka.ba/…`. That reading costs
@@ -536,7 +538,7 @@ carrier states first ([FRAMING] #declaration-register):
 ````
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
-<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/lares/api/pono/example >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/example >>
 ```toml meta
 … bare toml-meta slot: identity payload (uri-path, type, role, register) …
 ```
@@ -551,7 +553,7 @@ Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
 
 <<^ code="&#x0003;" >>ni:///sha-256;…
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> to=? >>
 ````
 
 A definition summoned by name:

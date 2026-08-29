@@ -10,9 +10,9 @@
  * or it does not, and every reader and the writer must agree on which.
  *
  * The PATTERNS do not, and the difference is scarred rather than accidental:
- *   · the stream framer scans `(?:[^>\n]|->)*` — a sigil NEVER crosses a line, because the multi-line
+ *   · the stream framer scans `(?:[^>\n]|>(?!>))*` — a sigil NEVER crosses a line, because the multi-line
  *     form once let a quoted `<<~` mention swallow text down to a distant real sigil;
- *   · the bootstrap scanner scans `(?:[^>]|->)*` — it runs before grammar loads and takes the wider
+ *   · the bootstrap scanner scans `(?:[^>]|>(?!>))*` — it runs before grammar loads and takes the wider
  *     read deliberately;
  *   · the deserializer's SOH scan reads the head's NAMED PARAMS and falls back to the bare prefix,
  *     stopping at a binding mark — a prefix scan that runs past one reads `code=` as a namespace and

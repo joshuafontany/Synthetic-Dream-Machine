@@ -108,6 +108,11 @@ describe("pono grammar boundary", () => {
       // It tests parser RESILIENCE, never blesses the grammar surface as canonical. (Operator: redirect
       // if you'd rather route recovery through a blessed surface.)
       .filter((f) => !f.endsWith("meme-resilient.test.ts"))
+      // pranala-attribute-spellings.test.ts is the unit test of the compile layer's ATTRIBUTE reading —
+      // which separator and which quoting a sigil's trailing parameters may carry. The blessed edge reader
+      // anchors on `to=` alone and never exposes family or role, so the claim has no other surface. It
+      // blesses no grammar; it holds one layer to the range TiddlyWiki itself parses.
+      .filter((f) => !f.endsWith("pranala-attribute-spellings.test.ts"))
       .filter((f) => {
         // The boundary guards the RUNTIME grammar surface — reaching past a blessed entry point to
         // drive the compile layer directly. A `import type` of a rule SHAPE binds no runtime surface

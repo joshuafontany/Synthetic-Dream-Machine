@@ -91,6 +91,18 @@ function attrsFromGroups(
 // kaheaInvokeNode — dispatch <<~ kahea <type> <args> >> to correct AST node
 // ---------------------------------------------------------------------------
 
+/**
+ * One named attribute out of a sigil's trailing parameter list.
+ *
+ * TiddlyWiki takes `=` or `:` as the separator and a value either quoted or bare, so a reader keyed on one
+ * spelling recovers a fraction of what the host parses. Across the lares bags this attribute stands written
+ * all three ways.
+ */
+function attrOf(tail: string, name: string): string | null {
+  const m = new RegExp(`\\b${name}\\s*[=:]\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>"']+))`).exec(tail);
+  return m ? (m[1] ?? m[2] ?? m[3] ?? null) : null;
+}
+
 function kaheaInvokeNode(
   type:     string,
   args:     string,
@@ -121,9 +133,9 @@ function closeFrame(frame: Frame, memeUri: string, grammar?: GrammarRules): Meme
     return kaheaInvokeNode(g(1), g(2), base, memeUri, children);
   }
   if (sigilName === "pranala") {
-    const body   = groups[4] ?? "";
-    const family = body.match(/\bfamily\s*=\s*"([\w-]+)"/)?.[1] ?? "relation";
-    const role   = body.match(/\brole\s*=\s*"([\w-]+)"/)?.[1]   ?? null;
+    const tail   = groups[4] ?? "";
+    const family = attrOf(tail, "family") ?? "relation";
+    const role   = attrOf(tail, "role");
     return { kind: "Pranala", ...base, slot: g(1) || null, fromRaw: g(2), toRaw: g(3), family, role, body: children } as PranalaNode;
   }
   if (CANONICAL_SIGILS.has(sigilName)) {
@@ -152,7 +164,7 @@ function makeLeaf(
 
   switch (sigilName) {
     case "pranala":
-      return { kind: "Pranala", ...base, slot: g(1) || null, fromRaw: g(2), toRaw: g(3), family: g(4) || "relation", role: g(5) || null, body: [] } as PranalaNode;
+      return { kind: "Pranala", ...base, slot: g(1) || null, fromRaw: g(2), toRaw: g(3), family: attrOf(g(4), "family") ?? "relation", role: attrOf(g(4), "role"), body: [] } as PranalaNode;
 
     case "loulou":
       return { kind: "PranalaSugar", ...base, sigil: "loulou", slot: null, fromRaw: null, toRaw: g(1), family: "relation", role: null, listenable: null, subscribable: null } as PranalaSugarNode;
