@@ -35,7 +35,10 @@ for f in sorted(pathlib.Path("bags").rglob("*.mem")):
     # `uri-path` answers to the HEAD SIGIL, never to the tree: a root resource may deliberately carry a
     # rootless address (`lar:///AGENTS`), and the field must follow the address rather than the folder.
     u = re.search(r'(?m)^uri-path\s*=\s*"(.*?)"', head)
-    h = re.search(r'<<[\^~][^>]*?->\s*lar:///(\S+?)\s*>>', head)
+    # THE HEAD NAMES ITS TARGET WITH `to=`. A reader that wants a bare `lar:///` after the arrow does
+    # not match the head at all — and then matches the first TEACHING EXAMPLE further down instead,
+    # reporting a carrier as standing at an address its own prose only quoted.
+    h = re.search(r'<<[\^~][^>]*?->\s*(?:to=)?lar:///(\S+?)\s*>>', head)
     if u and h and u.group(1) != h.group(1):
         drift.append((str(f), "uri-path", u.group(1), h.group(1)))
 

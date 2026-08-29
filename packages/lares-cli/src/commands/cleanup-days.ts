@@ -5,8 +5,9 @@
  *
  * Those session files (~/.claude/projects/…) ARE the mempalace's verbatim harvest
  * source, so a short window evaporates the raw memory before the ingest hook mines it.
- * `lares vessel stand --claude` sets the floor when absent (no-clobber); THIS command forces a
- * value — the explicit lever to raise an existing-but-low setting.
+ * Any wiring RAISES a value below the floor — retention is the one setting this house does not
+ * leave short, because memory recovers from those files. THIS command reads it, or sets a
+ * value — the lever for anyone who wants a number of their own.
  *
  *   lares cleanup-days            show the current value (+ the floor)
  *   lares cleanup-days 99999      set it to 99999 (keep session files ~forever)

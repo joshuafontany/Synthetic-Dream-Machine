@@ -240,17 +240,29 @@ function wireUnderLock(settingsPath: string): ClaudeWireResult {
     changed = true;
   }
 
-  // Retention floor — keep the session files (the mempalace's harvest source) from
-  // evaporating. SET-IF-ABSENT only: an operator who already chose a value keeps it
-  // (don't-clobber); `lares cleanup-days` raises an existing-but-low value explicitly.
-  if (settings["cleanupPeriodDays"] === undefined) {
-    settings["cleanupPeriodDays"] = CLEANUP_PERIOD_DAYS_FLOOR;
-    steps.push({ item: "cleanupPeriodDays", action: "wired", detail: `set ${CLEANUP_PERIOD_DAYS_FLOOR} (session files kept ~forever — the mempalace harvest source)` });
-    changed = true;
+  // ⚠ THE ONE SETTING THIS HOUSE RAISES RATHER THAN OFFERS (operator ruling).
+  //
+  // Everything else here yields to a value the operator already chose. This one cannot: the session
+  // files under ~/.claude/projects ARE the mempalace's verbatim harvest source, and MEMORY RECOVERS
+  // FROM DISK. A short cleanup window evaporates the raw ground before the ingest hook mines it, so a
+  // low value here does not degrade a convenience — it silently ends the house's ability to remember.
+  //
+  // So a value below the floor RISES to it, every install, every time. A value at or above the floor
+  // stands: someone who chose to keep MORE serves this purpose better than we would by lowering them.
+  const cur = settings["cleanupPeriodDays"];
+  const held = typeof cur === "number" ? cur : null;
+  if (held !== null && held >= CLEANUP_PERIOD_DAYS_FLOOR) {
+    steps.push({ item: "cleanupPeriodDays", action: "present", detail: `${String(held)} days — at or above the floor` });
   } else {
-    const cur = settings["cleanupPeriodDays"];
-    const low = typeof cur === "number" && cur < CLEANUP_PERIOD_DAYS_FLOOR;
-    steps.push({ item: "cleanupPeriodDays", action: "present", detail: low ? `${String(cur)} days (below floor — raise with \`lares cleanup-days\`)` : `${String(cur)} days` });
+    settings["cleanupPeriodDays"] = CLEANUP_PERIOD_DAYS_FLOOR;
+    steps.push({
+      item: "cleanupPeriodDays",
+      action: "wired",
+      detail: held === null
+        ? `set ${CLEANUP_PERIOD_DAYS_FLOOR} (session files kept ~forever — the mempalace harvest source)`
+        : `raised ${String(held)} → ${CLEANUP_PERIOD_DAYS_FLOOR} (memory recovers from these files; a short window loses it)`,
+    });
+    changed = true;
   }
 
   // Memory reaches the harness through the LARES seat, never a palace holder of the harness's own.

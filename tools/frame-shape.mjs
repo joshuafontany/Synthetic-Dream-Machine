@@ -49,9 +49,11 @@ for (const f of files) {
   if (soh && masked(/^<<\^[^>\n]*&#x(?:0001|0011);[^>\n]*?\?\s*->\s*\S+\s*>>/gm).length === 0) {
     faults.push([f, "SOH carries no `? -> uri` — the heading states no bearing"]);
   }
+  // THE CLOSE NAMES ITS SLOT. The frame's ends took `from=` and `to=`, so an EOT reads `-> to=?` —
+  // and a check wanting a bare `?` after the arrow matches nothing, then reports the whole corpus.
   const eot = masked(/^<<\^[^>\n]*&#x(?:0004|0014);[^\n]*$/gm).length > 0;
-  if (eot && masked(/^<<\^[^>\n]*&#x(?:0004|0014);[^>\n]*?->\s*\?\s*>>/gm).length === 0) {
-    faults.push([f, "EOT carries no `-> ?` — the close resolves a bearing it cannot know"]);
+  if (eot && masked(/^<<\^[^>\n]*&#x(?:0004|0014);[^>\n]*?->\s*(?:to=)?\?\s*>>/gm).length === 0) {
+    faults.push([f, "EOT carries no `-> to=?` — the close resolves a bearing it cannot know"]);
   }
 
   // AN OPENED BODY CLOSES — and a carrier that never opens one carries no fault. The frame acts as a
