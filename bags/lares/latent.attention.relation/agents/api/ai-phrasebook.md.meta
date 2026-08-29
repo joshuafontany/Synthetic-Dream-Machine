@@ -1,0 +1,11 @@
+title: lar:///latent.attention.relation/agents/api/ai-phrasebook
+type: text/markdown
+source: lar:///latent.attention.relation/agents/api/ai-phrasebook
+source-check: ni:///sha-256;2YOtSWnFTKaKWCEDDAw8KnXycnx3NcozkMHKeSttq5g
+projected-by: meme-markdown (lares carrier project-seed)
+law: projected artifact — hand edits do not survive re-projection
+cacheable: true
+l-space: latent.attention.relation
+retain: true
+source-type: text/memetic-wikitext+tiddlywiki
+uri-path: latent.attention.relation/agents/api/ai-phrasebook

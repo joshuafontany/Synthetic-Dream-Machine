@@ -69,6 +69,12 @@ const SIGIL_LINE = /^<<~\S* ?(?:[^>\n]|->)* >>\s*$/;
 /**
  * Emphasis, applied outside code spans. Spans mask to NUL-delimited tokens and restore after —
  * a bare-digit token would collide with prose numerals ("12/20") and eat them on restore.
+ *
+ * THE DELIMITERS TRANSPOSE ONE AT A TIME, NEVER AS PAIRS. Markdown opens and closes emphasis with
+ * the same characters, so a transposition needs no pairing at all — and pairing is what broke here:
+ * this runs a line at a time, a matching regex cannot see past a newline, and every span wrapping a
+ * line break silently kept its wikitext marks. The failure landed in prose, mid-sentence, where a
+ * reader meets `''` as literal quote characters and cannot tell what the author meant.
  */
 function inline(s: string): string {
   const spans: string[] = [];
@@ -78,8 +84,10 @@ function inline(s: string): string {
     return NUL + String(spans.length - 1) + NUL;
   });
   const emphasised = masked
-    .replace(/''(.+?)''/g, "**$1**")
-    .replace(/\/\/(.+?)\/\//g, "*$1*");
+    .replace(/''/g, "**")
+    // A scheme separator carries its own double slash — `lar://`, `https://`, `ni:///` — so the
+    // italic mark yields wherever a colon or another slash stands immediately before it.
+    .replace(/(^|[^:/])\/\//g, "$1*");
   // NUL delimits the mask tokens - a byte the carrier-bytes law keeps out of prose, so a
   // numeral in the text ("12/20") never reads as a token and never restores to a span.
   return emphasised.replace(new RegExp(NUL + "(\\d+)" + NUL, "g"), (_, i) => spans[Number(i)] ?? "");
@@ -227,6 +235,76 @@ export function projectSubmission(text: string, opts?: { uri?: string; title?: s
  * ONE DIRECTION, so the markdown is a projection and never a source. A hand that edits the twin is
  * reconstructing by eye what this function derives, and the line it mistypes reads as authored.
  */
+/**
+ * The provenance a projected seed carries in its own head, as YAML frontmatter.
+ *
+ * A SIDECAR IS A FILE THAT TRAVELS SEPARATELY AND THEREFORE EVENTUALLY DOES NOT. The submission pair
+ * can afford one, landing beside its markdown in a shelf nothing moves; a seed gets copied into a
+ * harness, a gist, a chat window, and arrives alone. So a seed's provenance rides INSIDE it.
+ *
+ * NO CLOCK RIDES IT. Currency gets proven by re-projection and never asserted by a stamp, so the
+ * head carries the source address and the source's block check and nothing that ages on its own.
+ * `source-check` names the bytes this projection was taken FROM — a reader who re-projects and gets
+ * different markdown has found a moved carrier, which is the one thing a stamp could never tell them.
+ */
+export function seedFields(text: string): Array<[string, string]> {
+  const { uri, check } = seedIdentity(text);
+  const fields: Array<[string, string]> = [
+    ["title", uri ?? ""],
+    ["type", "text/markdown"],
+    ["source", uri ?? ""],
+    ["source-check", check ?? "unchecked"],
+    ["projected-by", "meme-markdown (lares carrier project-seed)"],
+    ["law", "projected artifact — hand edits do not survive re-projection"],
+  ];
+  // THE CARRIER'S OWN META RIDES ALONG, renamed only where it would collide. `type` names what a
+  // reader is holding, and a reader here holds markdown — so the carrier's type keeps its fact under
+  // `source-type`, where it describes the thing this was projected FROM rather than the thing in hand.
+  for (const [k, v] of tomlMetaFields(text)) fields.push([k === "type" ? "source-type" : k, v]);
+  return fields;
+}
+
+/** The carrier's ```toml meta fence, read as flat key/value. Quotes and comments come off. */
+export function tomlMetaFields(text: string): Array<[string, string]> {
+  const fence = /^```toml meta\n([\s\S]*?)^```/m.exec(text);
+  if (!fence) return [];
+  const out: Array<[string, string]> = [];
+  for (const line of (fence[1] ?? "").split("\n")) {
+    const kv = /^\s*([A-Za-z0-9_-]+)\s*=\s*(.+?)\s*$/.exec(line);
+    if (!kv) continue;
+    out.push([kv[1]!, (kv[2] ?? "").replace(/^"(.*)"$/, "$1")]);
+  }
+  return out;
+}
+
+/** The projection's head, as YAML frontmatter. */
+export function seedFrontmatter(text: string): string {
+  return ["---", ...seedFields(text).map(([k, v]) => `${k}: ${v}`), "---"].join("\n") + "\n";
+}
+
+/**
+ * The same fields as a TiddlyWiki sidecar.
+ *
+ * THE COPY IS DELIBERATE. A markdown reader reads frontmatter and a wiki importer reads a `.meta`,
+ * and neither reads the other — so one fact stands twice rather than standing once where half the
+ * readers cannot reach it. Both derive from the carrier in the same pass, so they cannot disagree.
+ */
+export function seedMeta(text: string): string {
+  return seedFields(text).map(([k, v]) => `${k}: ${v}`).join("\n") + "\n";
+}
+
+/** The toml meta fence, lifted out of a projected body — the frontmatter and sidecar now carry it. */
+export function stripTomlMeta(body: string): string {
+  return body.replace(/^```toml meta\n[\s\S]*?^```\n/m, "");
+}
+
+/** The carrier's declared address and block check, read off its own frame. */
+export function seedIdentity(text: string): { uri?: string; check?: string } {
+  const uri = /^<<\^ code="&#x00[01]1;"(?:[^>\n]|->)*\?\s*->\s*(lar:\/\/\/\S+) >>/m.exec(text)?.[1];
+  const check = /<<\^ code="&#x0003;"[^>\n]*>>(ni:\/\/\/sha-256;[A-Za-z0-9_-]+)/.exec(text)?.[1];
+  return { ...(uri ? { uri } : {}), ...(check ? { check } : {}) };
+}
+
 export function transposeSeed(body: string): string {
   let fenced = false;
   let ordinal = 0;

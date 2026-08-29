@@ -1,20 +1,26 @@
+---
+title: lar:///ha.ka.ba/lares/api/noosphere-boot
+type: text/markdown
+source: lar:///ha.ka.ba/lares/api/noosphere-boot
+source-check: ni:///sha-256;81EzHAWgs_mLBoN6AN_qyrQRml0SjEvog8-qojmeeUQ
+projected-by: meme-markdown (lares carrier project-seed)
+law: projected artifact — hand edits do not survive re-projection
+cacheable: true
+hydrate: true
+l-space: stable
+mana: 16
+manao: 16
+manaoio: 16
+namespace: &#x0950; &#x0901;
+reflexive: true
+register: Synthesis-Canon
+retain: true
+source-type: text/memetic-wikitext+tiddlywiki
+uri-path: ha.ka.ba/lares/api/noosphere-boot
+---
 <<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
 
 <<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/lares/api/noosphere-boot >>
-```toml meta
-cacheable = true
-hydrate   = true
-l-space   = "stable"
-mana      = 16
-manao     = 16
-manaoio   = 16
-namespace = "&#x0950; &#x0901;"
-reflexive = true
-register  = "Synthesis-Canon"
-retain    = true
-type      = "text/memetic-wikitext+tiddlywiki"
-uri-path  = "ha.ka.ba/lares/api/noosphere-boot"
-```
 
 <<~ aka https://www.rfc-editor.org/rfc/rfc2119#section-1 >>
 
