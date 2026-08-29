@@ -44,14 +44,14 @@ import { faceStands } from "./commands/init.js";
 import { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
-import { rendezvousPath, rendezvousDir } from "@lararium/mesh/rendezvous-path";
+import { rendezvousPath, rendezvousDir, standingPath } from "@lararium/mesh/rendezvous-path";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed, generateOrLoadVesselIdentity } from "./node-vessel-identity.js";
 import { getMempalaceClient }           from "@lararium/mempalace";
 import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
-import { mkdirSync } from "fs";
+import { mkdirSync, writeFileSync, rmSync } from "fs";
 import { REPO_ROOT }   from "./node-host.js";
 import { loadLaresConfig } from "./lares-config.js";
 
@@ -94,6 +94,26 @@ function parseArgs(): { port: number; storageDir: string; genesisDir: string; wi
 // ---------------------------------------------------------------------------
 // Boot
 // ---------------------------------------------------------------------------
+
+/**
+ * Publish this vessel's standing beside its socket, and clear it when the vessel goes.
+ *
+ * The file carries the standing, whether a face was lit at boot, and the pid that wrote it — so a
+ * reader can tell a live marker from one a killed process left behind. Best-effort throughout: a
+ * vessel that cannot write this still serves, and a caller that finds nothing simply learns nothing.
+ */
+function publishStanding(storageDir: string, standing: string, faceLit: boolean): void {
+  const uid = process.getuid?.() ?? 0;
+  const at = standingPath({ root: storageDir, uid });
+  try {
+    mkdirSync(rendezvousDir(uid), { recursive: true, mode: 0o700 });
+    writeFileSync(at, JSON.stringify({ standing, faceLit, pid: process.pid }) + "\n", "utf8");
+    const drop = (): void => { try { rmSync(at, { force: true }); } catch { /* the pid read covers it */ } };
+    process.once("exit", drop);
+    process.once("SIGTERM", drop);
+    process.once("SIGINT", drop);
+  } catch { /* a vessel that cannot publish still stands */ }
+}
 
 async function main(): Promise<void> {
   const { port, storageDir, genesisDir, wikiId, rootDir, catalogUrl, askedStanding } = parseArgs();
@@ -268,6 +288,7 @@ async function main(): Promise<void> {
     // derive from the SAME resolved dir, so the client finds what this bound.
     const hermSocketPath = rendezvousPath({ root: storageDir, uid: process.getuid?.() ?? 0 });
     mkdirSync(rendezvousDir(process.getuid?.() ?? 0), { recursive: true, mode: 0o700 });
+    publishStanding(storageDir, standing, faceLit);
     const hermUds = startUdsChannel({
       daemonHandle: herm.daemon.daemonHandle,
       placeVerb:    (o) => herm.daemon.placeVerb(o),
@@ -375,6 +396,11 @@ async function main(): Promise<void> {
   // logout cannot reach it (operator ruling — a lararium serves as civic infrastructure).
   const socketPath = rendezvousPath({ root: storageDir, uid: process.getuid?.() ?? 0 });
   mkdirSync(rendezvousDir(process.getuid?.() ?? 0), { recursive: true, mode: 0o700 });
+  // WHAT THIS VESSEL STANDS AS, published beside the socket that serves it. A standing is decided at
+  // boot from the face found then, so a caller holding a face lit AFTERWARD has no way to see the
+  // mismatch — and `stand` attaches to a floor and a hearth alike. Written here, once the channel
+  // answers: a marker that outlives what it names repeats the fault this vessel already met.
+  publishStanding(storageDir, standing, faceLit);
   const uds = startUdsChannel({
     daemonHandle: result.daemon.daemonHandle,
     placeVerb:    (o) => result.daemon.placeVerb(o),

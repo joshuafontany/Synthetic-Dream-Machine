@@ -67,3 +67,17 @@ export function rendezvousPath(opts: { root: string; uid: number }): string {
 export function rendezvousDir(uid: number): string {
   return `/tmp/lares-${uid}`;
 }
+
+/**
+ * Where a standing vessel publishes WHAT IT STANDS AS, beside its own socket.
+ *
+ * A vessel decides its standing ONCE, at boot, from the face it finds. Nothing published it, so a
+ * caller could not tell a live hearth from one still at the waking floor — and `stand` attached to
+ * both, which made the floor's own cure ("light a face, then stand again") a no-op.
+ *
+ * Written AFTER the standing is real, never before: a marker that outlives what it names is the same
+ * fault as a pointer that outlives its document.
+ */
+export function standingPath(opts: { root: string; uid: number }): string {
+  return rendezvousPath(opts).replace(/\.sock$/, ".standing");
+}
