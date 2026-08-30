@@ -46,7 +46,18 @@ class SensoriumPaths:
 
 
 def sensorium_paths(root: str) -> SensoriumPaths:
-    """Derive the standard palace stack for any text/input-stream sensorium."""
+    """Derive the standard palace stack for any text/input-stream sensorium.
+
+    THE ROOT MUST BE NAMED. `expanduser("")` returns "" and `realpath("")` returns the CURRENT WORKING
+    DIRECTORY, so an unnamed root is not a default — it is wherever the process happens to stand, and
+    every plane path below hangs off it. A caller whose root came back empty composed a whole sensorium
+    there: manifest, content palace, locks, worldline, silently and with a clean exit.
+
+    A store is the one thing that must never be created by accident, so the absence is the failure."""
+    if not isinstance(root, str) or not root.strip():
+        raise ValueError(
+            "sensorium_paths: the sensorium root must be named — a blank root resolves to the current "
+            "working directory and composes a store there")
     root = os.path.realpath(os.path.expanduser(root))
     return SensoriumPaths(
         root=root,

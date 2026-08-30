@@ -10,7 +10,7 @@ import os
 
 import pytest
 
-from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, WIKI_VERBS, VAULT_VERBS, SENSE_LIFECYCLE_VERBS,
+from lares_mcp import (LIFECYCLE_VERBS, PLANE_VERBS, WIKI_VERBS, CARRIER_VERBS, VAULT_VERBS, SENSE_LIFECYCLE_VERBS,
                        VERB_SEATS, DaemonCoordinator,
                        LaresCoordinator, build_mcp, guard_hitl, seat_of)
 from worldline_veil import veiled_root
@@ -225,7 +225,7 @@ def test_mcp_tools_mirror_the_cli_lifecycle_verbs(tmp_path):
     # the /mcp tool-set equals the declared lifecycle verb-set PLUS the per-plane query-door verbs, the
     # vault seal-lifecycle, and the DURABLE sensorium-lifecycle sub-verbs — name-for-name (the growth floor).
     assert _mcp_tool_names(tmp_path) == (set(LIFECYCLE_VERBS) | set(PLANE_VERBS) | set(WIKI_VERBS)
-                                         | set(VAULT_VERBS) | set(SENSE_LIFECYCLE_VERBS))
+                                         | set(CARRIER_VERBS) | set(VAULT_VERBS) | set(SENSE_LIFECYCLE_VERBS))
 
 
 def test_recall_tool_args_are_isomorphic_with_the_recall_api(tmp_path):

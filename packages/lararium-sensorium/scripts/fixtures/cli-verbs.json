@@ -47,6 +47,7 @@
     "mismatch",
     "flow",
     "wiki",
+    "project_md",
     "roster",
     "inspect",
     "build",
@@ -74,6 +75,7 @@
     "mismatch": "sense mismatch",
     "flow": "flow",
     "wiki": "wiki switch",
+    "project_md": "carrier project-md",
     "roster": "sense roster",
     "inspect": "sense inspect",
     "build": "sense build",
@@ -84,6 +86,7 @@
     "purge": "sense purge"
   },
   "mirror_hosts": [
+    "carrier",
     "flow",
     "sense",
     "wiki"
@@ -91,7 +94,6 @@
   "not_yet_mirrored": [
     "vessel",
     "herm",
-    "carrier",
     "act",
     "ingest",
     "watch",

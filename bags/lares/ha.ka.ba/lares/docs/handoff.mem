@@ -138,7 +138,33 @@ own shipped wikis — and none by reasoning about what the grammar ought to say.
 
 <<~ ahu #next-vector >>
 
-! NEXT VECTOR — awaiting the next bearing (the working-canon loop CLOSED 2026-06-19)
+! NEXT VECTOR — the plane roster, and the three answers it gives
+
+''THE MEMORY SENSORIUM'S PLANE ROSTER DISAGREES WITH ITSELF, THREE WAYS.'' Measured 2026-08-29 against
+a live node:
+
+|! source |! what it names |
+| `manifest.json` `has` | content · structure · form · persistence · worldline — FIVE |
+| the `sense` door's `--lens` help | content · structure · form · persistence — FOUR |
+| the daemon, asked | content (2,843) · structure (2,448) · form (0) — THREE answer, `persistence` refuses |
+
+''Three states wear two answers.'' A plane can be DECLARED in the manifest, COMPOSED on disk, and FED by
+a pour, and those are independent: `form` stands declared and composed and empty, `persistence` stands
+declared and never composed. Both leave an instrument reading nothing, and only one of them names a
+sensorium that is merely young. ''An unfed plane and an absent one must not answer alike'' — a reader
+who cannot tell them apart cannot tell a quiet corpus from a broken door.
+
+''The roster is the design's, not the code's.'' It reads as the seam between a plane-set that settled in
+the operator's hand and one that settled on disk, so the fix is a RULING before it is a patch: which
+planes does a memory sensorium hold, what composes them, and what does a door say about one declared and
+unbuilt. `plane_base.PLANE_BASE` is the map to read it off, never memory.
+
+''Held as the next bearing by operator ruling, 2026-08-29.'' The tending rite (`sensorium-runbook`
+#surface-drift) carries the surrounding law; this names the one gap it cannot close by walking.
+
+!! Broader torch — what stands beside it
+
+!! PRIOR BEARING — awaiting a steer (the working-canon loop CLOSED 2026-06-19)
 
 > ''DESTALED 2026-06-21:'' the `lar:///working-canon.live-loop.completes` vector below COMPLETED — its three "remaining" threads all landed green 2026-06-19 (see the CLOSED block). This torch had still named them open, trailing HEAD by ~1.5 days. The forward bearing for the next phase stands open for the operator's steer; candidates ride "Broader torch" below.
 
@@ -387,6 +413,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;pTv1G3-YDRDlLu4gVRB7yBpon-5VK_8rzb3PZtiVJN8
+<<^ code="&#x0003;" >>ni:///sha-256;sTmfCZLQfCpCxVfydJipgT_v0CgYpw2IIAqF0IxCUPk
 
 <<^ code="&#x0004;" -> to=? >>

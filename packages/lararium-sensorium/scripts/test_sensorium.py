@@ -117,3 +117,26 @@ def test_persistence_cap_declares_policy_without_materializing_a_store(tmp_path)
 def test_every_sensorium_carries_inactive_persistence_until_a_lifecycle_activates_it(tmp_path):
     sensorium = _sensorium(str(tmp_path / "generic"))
     assert sensorium._persistence.path is None and sensorium._persistence.active is False
+
+
+def test_a_blank_root_refuses_rather_than_landing_in_the_cwd():
+    """A sensorium root must be NAMED — an unnamed one is not a default, it is the cwd.
+
+    `expanduser("")` returns "" and `realpath("")` returns the current working directory, so a caller
+    whose root came back empty composed a whole sensorium — manifest, content palace, locks, worldline —
+    wherever the process happened to stand, silently and with a clean exit. Measured: a repo checkout
+    grew four sensorium directories that way.
+
+    The root is the one argument every plane path hangs off, so its absence is the failure.
+    """
+    import pytest
+    for blank in ("", "   ", None):
+        with pytest.raises((ValueError, TypeError)):
+            sensorium_paths(blank)
+
+
+def test_a_named_root_still_derives_every_plane():
+    """The refusal reaches blanks only — a real root keeps deriving the full stack."""
+    paths = sensorium_paths("/tmp/lares-test-sensorium-root")
+    assert paths.content.endswith("/content")
+    assert paths.worldline.endswith("/worldline")

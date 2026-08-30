@@ -45,6 +45,13 @@ PLANE_VERBS = ("plane_record",)
 # uniformly low-trust · reversible · LOCAL residency ops (one conservative VERB_SEATS seat covers them).
 WIKI_VERBS = ("wiki",)
 
+# The CARRIER namespace — a carrier is a FILE a meme travels as, with no island beneath it, so these
+# verbs answer at `lares carrier` rather than at any sensorium door. `project_md` renders a spec carrier
+# to its submission pair (<name>.md + <name>.md.meta), deterministic and clock-free, which is what lets a
+# witness prove a pair current by re-projecting it. A PROPER CLI mirror — the host `carrier` is a real
+# top-level command — so it rides `mirrored`/`cli_forms`, never an ahead-of-CLI allowance.
+CARRIER_VERBS = ("project_md",)
+
 # The VAULT namespace — the at-rest seal LIFECYCLE the operator drives (status/seal/rotate/export the two
 # sovereign secret carriers: the keyhive archive + the recovery share). Each MCP tool rides the @daemon
 # vault verb over the owner-only 0600 UDS, so the passphrase crosses the SAME trust boundary a CLI arg
@@ -81,6 +88,7 @@ VERB_SEATS = {
     "kapae": (True, False),      # move-not-delete mute — reversible, trusted
     "un_kapae": (True, False),   # restore — reversible, trusted
     "plane_record": (True, False),      # cross-plane read — reversible, trusted (structure/form fold onto recall --lens)
+    "project_md": (True, False),        # renders a carrier to its submission pair — deterministic, writes beside the source, trusted
     "rejim": (True, False),             # read the landed rhythm/geology (repour rides the reversible refresh) — trusted
     "analyze": (True, False),           # DETECT-ONLY change-point compute — read-only, mutates nothing → HOTL
     "ki": (True, False),                # the Ki coupling verdict — routed read (the TS hull's H¹ fuse) → HOTL

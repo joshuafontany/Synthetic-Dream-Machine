@@ -95,6 +95,66 @@ EXEMPT: dict[str, str] = {
     # A future entry states WHY where the next reader meets it, never in a commit message.
 }
 
+# ── THE SECOND AXIS: A NAME SHARED IS NOT A MOTION SHARED ───────────────────────────────────────
+# Matching rosters proves a tool has a door. It proves nothing about what either one DOES, and two
+# opposite motions wearing one word pass a name check cleanly — measured: `pour` named the bearing
+# harvest on the CLI and the drawer capture at MCP, while every witness stayed green over it.
+#
+# The motion is DERIVED, not declared: which daemon verb does each side reach? Both surfaces route
+# through the same @daemon, so the verb each invokes is the honest signature of what it writes. A
+# same-named pair reaching different daemon verbs is either drift or a slicing — and a slicing states
+# itself below, where the next reader meets it.
+
+def daemon_verbs_mcp(name: str) -> set:
+    """The daemon verbs an MCP tool routes to — read off its own `_call(...)`."""
+    body = re.search(rf'@mcp\.tool\(\)\s*\n\s*(?:async )?def {re.escape(name)}\b.*?(?=\n    @mcp\.tool|\Z)',
+                     MCP.read_text(), re.S)
+    found = set(re.findall(r'_call\(\s*"(\w+)"', body.group(0))) if body else set()
+    return {v.replace("_", "-") for v in found}
+
+def daemon_verbs_cli(name: str) -> set:
+    """The daemon verbs a CLI sense verb routes to — read off the handler its dispatch names."""
+    sense = (CMDS / "sense.ts").read_text()
+    m = re.search(rf'^\s{{2,}}"?{re.escape(name)}"?:\s*(cmd[A-Z]\w*)', sense, re.M)
+    if not m: return set()
+    handler = m.group(1)
+    for f in CMDS.glob("*.ts"):
+        text = f.read_text()
+        fn = re.search(rf'export async function {handler}\b.*?(?=\nexport |\Z)', text, re.S)
+        if fn: return {v.replace("_", "-") for v in re.findall(r'runVerb\(\s*"([\w-]+)"', fn.group(0))}
+    return set()
+
+# A SLICING STATES ITSELF. Each entry names a verb the two surfaces spell alike and mean differently,
+# and says what each one writes — so a reader meeting either door learns the difference here rather
+# than by running both and comparing stores.
+SLICING: dict[str, str] = {
+    "pour": ("CLI `pour` harvests ONE pointer's bearing gradient into the harvest index that "
+             "`sense worldline` joins; `pour --all` walks the whole tending movement. The MCP tool "
+             "captures one pointer's DRAWERS, and its `all` rides the same sweep spine the CLI's "
+             "drawers leg reaches. Both fill a sensorium; they enter at different legs."),
+}
+
+drift = []
+for tool in tools:
+    name = tool.replace("-", "_")
+    mcp_v, cli_v = daemon_verbs_mcp(name), daemon_verbs_cli(tool)
+    if not mcp_v or not cli_v:      continue      # one side routes locally — nothing to compare
+    if mcp_v & cli_v:               continue      # they meet at a shared daemon verb
+    if tool in SLICING:             continue
+    drift.append((tool, sorted(mcp_v), sorted(cli_v)))
+
+if SLICING:
+    print("[surface-parity] declared slicings — one name, two motions, each stated:")
+    for k, why in SLICING.items():
+        print(f"      {k}: {why}")
+
+if drift:
+    print("[surface-parity] SAME NAME, DIFFERENT MOTION — and no slicing declared:")
+    for tool, m, c in drift:
+        print(f"      {tool}: MCP reaches {m or ['(nothing)']} · CLI reaches {c or ['(nothing)']}")
+    print("      Either route them to one daemon verb, or state the slicing in SLICING with what each writes.")
+    sys.exit(1)
+
 missing = [t for t in tools if not has_door(t) and t not in EXEMPT]
 exempt  = [t for t in tools if not has_door(t) and t in EXEMPT]
 

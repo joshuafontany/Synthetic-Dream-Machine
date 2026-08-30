@@ -62,6 +62,11 @@ const CLI_FORMS = {
   // The wiki-SWITCHER: one MCP `wiki` tool mirrors the `lares wiki <verb>` namespace
   // (switch/hold/release/active) — the host verb is `wiki`, a real top-level CLI command.
   wiki:      "wiki switch",
+  // The CARRIER door: a carrier is the FILE a meme travels as, with no island beneath it, so this
+  // mirrors `lares carrier`, never a sensorium door. `project_md` renders a spec carrier to its
+  // submission pair (<name>.md + <name>.md.meta) deterministically and clock-free — which is what lets
+  // a witness prove a pair current by re-projecting rather than by trusting a timestamp.
+  project_md: "carrier project-md",
   // The DURABLE sensorium-lifecycle sub-verbs — each mirrors `lares sense <verb>` (the one `sense` door),
   // routed over the @daemon wire to the pure manifest.json reducer. Reads + reversible re-settle seat HOTL;
   // promote·retire·purge carry HITL (the operator-approval capability, the twin of the CLI's `--approve`).
