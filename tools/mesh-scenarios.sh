@@ -110,7 +110,12 @@ run_quorum() {
   # ASSERT THE SEATS, NOT ONLY THE THRESHOLD. Majority over TWO is also two, so a threshold check
   # alone passed a roster that had silently lost a chair. The count of seated keys is what names the
   # roster; the threshold is what derives from it.
-  if printf '%s' "$SHOW" | grep -q '"seatedKeys":3' && printf '%s' "$SHOW" | grep -q '"threshold":2'; then ok; else
+  # AND THE QUORUM MUST SURVIVE A LOSS. Three chairs over a threshold of two tolerate one seat going
+  # dark; two over two tolerate none, and lock the Nexus the day one is lost — including for the
+  # rotation that would repair it. A civic roster that cannot lose a kahu is not seated, it is armed.
+  if printf '%s' "$SHOW" | grep -q '"seatedKeys":3' \
+     && printf '%s' "$SHOW" | grep -q '"threshold":2' \
+     && printf '%s' "$SHOW" | grep -q '"fragile":false'; then ok; else
     bad "no quorum seated"
     printf '%s\n' "$SHOW" | tail -3 | sed 's/^/      /'
   fi

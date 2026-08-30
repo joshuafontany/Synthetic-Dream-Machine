@@ -308,3 +308,5 @@ export * from "./persona-scope.js";
 export * from "./persona-planes.js";
 export * from "./holdings-witness.js";
 export * from "./crossroads-cry.js";
+
+export { rosterStanding, type RosterStanding } from "./roster-standing.js";

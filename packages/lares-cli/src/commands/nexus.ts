@@ -41,6 +41,7 @@ import {
 } from "@lararium/mesh";
 import { larSealHome, larDataDir } from "../env.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
+import { rosterStanding } from "@lararium/mesh";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -724,6 +725,11 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       rotationArmed: head ? head.nextKeyCommit.length > 0 : false,
       seatedKeys: roster.keys.length,
       quorumSeated: quorum,
+      // WHAT THE QUORUM SURVIVES, beside what it is. A threshold met by every seated chair passes
+      // every gate and locks the Nexus the day one seat goes dark — including for the rotation that
+      // would repair it. The reading rides the payload so a harness can assert it, and the human
+      // path prints it where the numbers already are.
+      standing: rosterStanding({ seated: roster.keys.length, threshold: roster.threshold }),
       kahu: (doc?.kahu ?? []).map((k) => ({ displayName: k.displayName, seated: Boolean(k.verifyingKey) })),
     },
     human: () => {
@@ -739,6 +745,14 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       console.log(`  head epoch: ${roster.sealEpochCid || "(unestablished)"}`);
       console.log(`  rotation:   ${head && head.nextKeyCommit.length > 0 ? "ARMED" : "UNARMED"}`);
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);
+      const standing = rosterStanding({ seated: roster.keys.length, threshold: roster.threshold });
+      // A FRAGILE ROSTER EARNS THE LINE; a sound one earns silence. The cure is only available before
+      // the loss, so it prints while it is still worth something.
+      if (standing.fragile) {
+        console.log(`  ⚠ survives:  ${standing.reading}`);
+      } else if (standing.seated) {
+        console.log(`  survives:   ${standing.tolerance} seat(s) going dark`);
+      }
       console.log(`  posture:    ${federationPostureFromDoc(doc)} (cross-Nexus federation — default private)`);
       const reserve = readCharterReserveState();
       console.log(`  reserve:    ${reserve ? `commit ${reserve.nextKeyCommit.slice(0, 16)}… (epoch ${reserve.reserveEpoch}, guardians ${reserve.guardianA ?? "unassigned"}/${reserve.guardianB ?? "unassigned"})` : "(none — run `lares nexus seal reserve` to custody the pre-rotation)"}`);
