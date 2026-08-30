@@ -27,10 +27,17 @@ cd "$(dirname "$0")/.."
 python3 - <<'PY'
 import re, json, pathlib, subprocess, sys
 
-RITE = pathlib.Path("bags/lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem")
+# EVERY RITE, not only the founding one. A rite states commands as CLAIMS a reader resolves the next
+# move from, and that property belongs to the tending rite too — it asks to be walked end to end, each
+# step either running or naming a friction. A rite outside this list drifts unwatched.
+RITES = [
+    pathlib.Path("bags/lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem"),
+    pathlib.Path("bags/lararium/ha.ka.ba/lararium/api/sensorium-runbook.mem"),
+]
 BIN  = "packages/lares-cli/dist/src/bin/lares.js"
-if not RITE.exists():
-    print(f"[rite-commands] no rite at {RITE}"); sys.exit(1)
+for _r in RITES:
+    if not _r.exists():
+        print(f"[rite-commands] no rite at {_r}"); sys.exit(1)
 
 help_out = subprocess.run(["node", BIN, "help"], capture_output=True, text=True)
 if help_out.returncode != 0 or not help_out.stdout.strip():
@@ -39,7 +46,7 @@ if help_out.returncode != 0 or not help_out.stdout.strip():
     sys.exit(1)
 
 live = set(re.findall(r'^\s{2,4}(?:\S+ )?([a-z][a-z0-9-]+)\s', help_out.stdout, re.M))
-rite = RITE.read_text()
+rite = "\n".join(r.read_text() for r in RITES)
 
 cmds = sorted({m.group(1) for m in re.finditer(
     r'(?m)^\s*lares ((?:[a-z][a-z0-9-]*)(?: [a-z][a-z0-9-]*)?)', rite)})
@@ -101,8 +108,18 @@ for c in cmds:
 # reader to a symbol they cannot find, on a night when the reader is deciding whether to trust the step.
 # One was already stale — the founding chain cited `charterKeySetHash`, and the code calls
 # `sealKeySetHash`.
+# THE STACK A RITE CITES IS WIDER THAN ITS TYPESCRIPT. The tending rite explains itself by pointing
+# at the python that holds the palaces — `EmbedderIdentityUnknownWarning` lives in the mempalace
+# backend — so a scan of `packages/**/src/*.ts` alone reports a standing symbol as a ghost and sends
+# a reader chasing a citation that was true all along.
 blob = "".join(q.read_text(errors="replace") for q in pathlib.Path("packages").rglob("*.ts")
                if "/dist/" not in str(q) and "/src/" in str(q))
+blob += "".join(q.read_text(errors="replace") for q in pathlib.Path("packages").rglob("*.py")
+                if "/node_modules/" not in str(q))
+for _root in ("mempalace/mempalace", "mempalace/tests"):
+    _p = pathlib.Path(_root)
+    if _p.exists():
+        blob += "".join(q.read_text(errors="replace") for q in _p.rglob("*.py"))
 cited = sorted({m for m in re.findall(r'`([a-zA-Z_][a-zA-Z0-9_]*(?:#[a-zA-Z][a-zA-Z0-9_]*)?)`', rite)
                 if re.search(r'[a-z][A-Z]|#', m)})
 ghosts = [c for c in cited if c.split("#")[-1] not in blob]
