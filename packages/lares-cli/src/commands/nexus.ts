@@ -44,7 +44,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { larSealHome, larDataDir } from "../env.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
-import { rosterStanding, nexusPhase, sealImportVerdict } from "@lararium/mesh";
+import { rosterStanding, nexusPhase, sealImportVerdict, foreignSeats } from "@lararium/mesh";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -538,6 +538,15 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
   if (doc.sealLineage && doc.sealLineage.length > 1) {
     throw new UsageError("the charter chain has already ROTATED past genesis — advance it with `lares nexus seal rotate`, never re-seat");
   }
+
+  // A SEAT NEVER BUILDS ON A CHARTER THIS VESSEL DID NOT FOUND. A joining operator holds her partner's
+  // charter in her own seal home — she cannot consent to one she has never seen — and seats her own
+  // there too. Seating onto his MERGES the quorums: measured, six seated kahu at threshold two, so the
+  // partner holds quorum over her Nexus using his own keys with no further act by her.
+  const heldKeys = await Promise.all(
+    (await listPersonaRoots(dataDir)).map(async (i) => (await generateOrLoadPersonaGroupRoot(dataDir, i)).verifyingKey));
+  const foreign = foreignSeats(doc.kahu ?? [], heldKeys);
+  if (!foreign.ok) throw new UsageError(foreign.why);
 
   const { kahu, seatedKeys } = await seatKahuFromVault(doc, dataDir);
   const nextKeyCommit = normHex(args.options["next-key-commit"]);
