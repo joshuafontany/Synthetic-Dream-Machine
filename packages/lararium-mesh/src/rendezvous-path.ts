@@ -137,7 +137,7 @@ export function standingVerdict(args: {
  *
  * THE MARKER PATH DERIVES FROM THE ROOT, so two vessels standing at one root in sequence share a
  * single file. A departing daemon that deletes unconditionally removes whatever stands there — and a
- * successor that published while the old one was still shutting down loses its own standing to a
+ * successor that published while the outgoing one was still shutting down loses its standing to a
  * process that no longer describes it.
  *
  * Measured on the founding rehearsal: the outgoing daemon's exit handler fired after the incoming

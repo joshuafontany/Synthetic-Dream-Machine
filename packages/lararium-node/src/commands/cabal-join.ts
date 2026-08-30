@@ -166,7 +166,7 @@ export async function runCabalJoin(
     invite:            presented,
     // THE REALM'S OWN FENCE, read off the same board the vouches came from — a max-register over the
     // per-writer lease slots, so every replica that has seen this board reads the same number. The
-    // clock that used to sit here belonged to the machine being gated.
+    // fence belongs to the realm; an instant would belong to the machine being gated.
     effectiveEpoch:    opts.epoch ?? boardEpoch,
     verify:            verifyOffline,
     issued:            forFold,

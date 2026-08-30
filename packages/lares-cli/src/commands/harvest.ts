@@ -391,7 +391,7 @@ export interface RepaveStage {
  *
  *   QUIESCE  a bulk pass racing the live capture hook produces a corpus no re-run reproduces.
  *   BASELINE one clean before/after boundary exists per re-pave, and it opens exactly once. A
- *            reading taken after the fact needs a second whole pass and still lacks the old state.
+ *            reading taken after the fact needs a second whole pass and still has nothing to compare.
  *   VERIFY   counts against source counts, before any instrument reads the result.
  *
  * RESUME closes what QUIESCE opened, on every path out — a re-pave that halted holding the hooks
