@@ -35,12 +35,17 @@ async function mint(over: Partial<CabalInvite> = {}): Promise<CabalInvite> {
     joinerIdentityHex: JOINER,
     voucherDid,
     expiresAt:         "2026-08-13T00:00:00.000Z",
+    boundEpoch:        "0",
   }, sign);
   return { ...inv, ...over };
 }
 
-const decide = (invite: CabalInvite | null, now = NOW, policy = DEFAULT_JOIN_POLICY) =>
-  decideCabalJoin({ policy, realmDocIdHex: REALM, joinerIdentityHex: JOINER, invite, now, verify });
+/** The realm's lease epoch these readings price against — a fence, never an instant. */
+const EPOCH = 0;
+
+/** A crossing priced against the realm's FENCE — the second argument is an epoch, never an instant. */
+const decide = (invite: CabalInvite | null, effectiveEpoch = EPOCH, policy = DEFAULT_JOIN_POLICY) =>
+  decideCabalJoin({ policy, realmDocIdHex: REALM, joinerIdentityHex: JOINER, invite, effectiveEpoch, verify });
 
 describe("the DreamNet opens invite-only", () => {
   test("a vouched joiner crosses — and the VOUCHER is named, because the co-pay needs someone to charge", async () => {
@@ -69,7 +74,7 @@ describe("the DreamNet opens invite-only", () => {
     const v = await decideCabalJoin({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM,
       joinerIdentityHex: "ee".repeat(16),              // ← a different joiner presents it
-      invite: stolen, now: NOW, verify,
+      invite: stolen, effectiveEpoch: EPOCH, verify,
     });
     expect(v).toEqual({ admitted: false, refusal: "wrong-joiner" });
   });
@@ -84,15 +89,18 @@ describe("the DreamNet opens invite-only", () => {
     expect((await decide(forSomeoneElse)).refusal).toBe("wrong-joiner");
   });
 
-  test("the VOUCH LAPSES — standing decays unless fed, and a lapse is not a revocation", async () => {
-    const v = await decide(await mint(), LATER);
+  test("the VOUCH LAPSES — the realm rolls its fence, and a lapse is not a revocation", async () => {
+    // THE ROLL IS THE LAPSE. An invite bound at epoch 0 stands until the realm's lease epoch passes
+    // it; rolling to 1 lapses it on every replica at once, with no clock consulted and no message
+    // sent. Nothing here supplies a time, so nothing here can be moved by owning a machine.
+    const v = await decide(await mint(), EPOCH + 1);
     expect(v.refusal).toBe("expired");
     // A vouch that never lapsed leaves no way to withdraw it from a mesh the voucher can no longer reach —
     // precisely the mesh where a stale vouch does the most damage.
   });
 
   test("THE DIAL TURNS — the same shore, opened, admits without a vouch and changes no code", async () => {
-    const open = await decide(null, NOW, { kind: "open" });
+    const open = await decide(null, EPOCH, { kind: "open" });
     expect(open.admitted).toBe(true);
     // Invite-only and open protocol ride as two SETTINGS of one dial, never two implementations. That is what
     // makes "invite-only at first, open protocol later" a ruling the operator turns rather than a rewrite.

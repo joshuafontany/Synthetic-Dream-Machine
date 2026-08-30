@@ -32,9 +32,13 @@ const DIALS: AdmissionDials = { epsilon: 0.15, beta: 0.9, rho: 1, supply: 1, alp
 async function inviteTo(joiner: string): Promise<CabalInvite> {
   return signCabalInvite({
     realmDocIdHex: REALM, joinerIdentityHex: joiner,
-    voucherDid: await pubOf(VOUCHER_SEED), expiresAt: LATER,
+    voucherDid: await pubOf(VOUCHER_SEED), expiresAt: LATER, boundEpoch: "0",
+    boundEpoch:        "0",
   }, signer(VOUCHER_SEED));
 }
+
+/** The realm's lease epoch these readings price against — a fence, never an instant. */
+const EPOCH = 0;
 
 describe("admitOnLineage — the cap rides INSIDE the gate", () => {
   test("the cap BITES, and what it turned away comes back visible", async () => {
@@ -46,7 +50,7 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
 
     const v = await admitOnLineage({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: issued[0]!, now: NOW, verify,
+      invite: issued[0]!, effectiveEpoch: EPOCH, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
       maxVouchesPerVoucher: 2,
     });
@@ -62,12 +66,12 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
 
     const viaShore = await admitOnLineage({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: issued[0]!, now: NOW, verify,
+      invite: issued[0]!, effectiveEpoch: EPOCH, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
     });
     const byHand = await admitToRealm({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: issued[0]!, now: NOW, verify,
+      invite: issued[0]!, effectiveEpoch: EPOCH, verify,
       edges: vouchDagFromInvites(issued).edges,
       seed: voucherDid, applicant: JOINER, dials: DIALS,
     });
@@ -86,7 +90,7 @@ describe("admitOnLineage — the cap rides INSIDE the gate", () => {
 
     const v = await admitOnLineage({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: issued[1]!, now: NOW, verify,
+      invite: issued[1]!, effectiveEpoch: EPOCH, verify,
       issued, seed: voucherDid, applicant: JOINER, dials: DIALS,
       maxVouchesPerVoucher: 1,
     });

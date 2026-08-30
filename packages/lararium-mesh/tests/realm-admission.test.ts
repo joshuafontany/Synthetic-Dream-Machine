@@ -42,14 +42,18 @@ async function invite(over: Partial<{ realm: string; joiner: string; expiresAt: 
     joinerIdentityHex: over.joiner ?? JOINER,
     voucherDid:        await pubOf(VOUCHER_SEED),
     expiresAt:         over.expiresAt ?? LATER,
+    boundEpoch:        "0",
   }, signer(VOUCHER_SEED));
 }
+
+/** The realm's lease epoch these readings price against — a fence, never an instant. */
+const EPOCH = 0;
 
 describe("the shore runs BOTH signals, structural first", () => {
   test("invite-only with no invite refuses at the structural gate — no price is walked", async () => {
     const v = await admitToRealm({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: null, now: NOW, verify,
+      invite: null, effectiveEpoch: EPOCH, verify,
       edges: [], seed: "s", applicant: JOINER, dials: DIALS,
     });
     expect(v.admitted).toBe(false);
@@ -66,7 +70,7 @@ describe("the shore runs BOTH signals, structural first", () => {
     ];
     const v = await admitToRealm({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: await invite(), now: NOW, verify,
+      invite: await invite(), effectiveEpoch: EPOCH, verify,
       edges, seed: "s", applicant: JOINER, dials: DIALS,
     });
     expect(v.admitted).toBe(true);
@@ -85,7 +89,7 @@ describe("the shore runs BOTH signals, structural first", () => {
     ];
     const v = await admitToRealm({
       policy: DEFAULT_JOIN_POLICY, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: await invite(), now: NOW, verify,
+      invite: await invite(), effectiveEpoch: EPOCH, verify,
       edges, seed: "s", applicant: JOINER, dials: TIGHT,
     });
     expect(v.admitted).toBe(false);
@@ -100,7 +104,7 @@ describe("open policy skips the invite but STILL prices", () => {
   test("no invite, open policy — the crossing prices with an empty (dispersed) cluster", async () => {
     const v = await admitToRealm({
       policy: { kind: "open" }, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: null, now: NOW, verify,
+      invite: null, effectiveEpoch: EPOCH, verify,
       edges: [], seed: "s", applicant: JOINER, dials: DIALS,
     });
     expect(v.admitted).toBe(true);
@@ -114,7 +118,7 @@ describe("open policy skips the invite but STILL prices", () => {
   test("open policy prices every crossing — the wall runs even with no invite to gate it", async () => {
     const v = await admitToRealm({
       policy: { kind: "open" }, realmDocIdHex: REALM, joinerIdentityHex: JOINER,
-      invite: null, now: NOW, verify,
+      invite: null, effectiveEpoch: EPOCH, verify,
       edges: [], seed: "s", applicant: JOINER, dials: TIGHT,
     });
     expect(v.price).toBeDefined();               // priced, always — never skipped under open

@@ -67,8 +67,24 @@ export interface CabalInvite {
   readonly joinerIdentityHex: string;
   /** The VOUCHER: an already-licensed member, staking their standing. Attributable by construction. */
   readonly voucherDid:  string;
-  /** ISO-8601. An invite that never expires is a key left under a mat for five centuries. */
+  /**
+   * A HINT for the voucher's own tools, and NEVER a gate.
+   *
+   * A causal island holds no global now: two members reading one board at the same causal moment
+   * differ by exactly their clock skew, and the divergence runs the dangerous way — a fast clock
+   * refuses a live vouch, a SLOW one admits a dead one. So the lease that the machine being gated
+   * could extend cannot be the lease that gates it. Admission reads `boundEpoch`; this reads to a
+   * human.
+   */
   readonly expiresAt:   string;
+  /**
+   * THE FENCE. The realm's lease epoch this invite is bound to — a 1-15 digit decimal, mirroring
+   * `device-delegation`. `epoch-lease` holds that epoch as a coordinator-free MAX-REGISTER in
+   * per-writer slots, so it converges without a coordinator and never decreases. Roll the realm's
+   * epoch and every invite bound behind it lapses at once, on every replica, with no clock consulted
+   * and no message sent.
+   */
+  readonly boundEpoch:  string;
   /** Ed25519 over the canonical bytes of everything above, hex. */
   readonly sig:         string;
 }
@@ -81,6 +97,7 @@ export function cabalInviteBytes(parts: Omit<CabalInvite, "sig">): Uint8Array {
     joinerIdentityHex: parts.joinerIdentityHex,
     voucherDid:        parts.voucherDid,
     expiresAt:         parts.expiresAt,
+    boundEpoch:        parts.boundEpoch,
   });
 }
 
@@ -124,7 +141,14 @@ export async function decideCabalJoin(args: {
   readonly realmDocIdHex:     string;
   readonly joinerIdentityHex: string;
   readonly invite:            CabalInvite | null;
-  readonly now:               Date;
+  /**
+   * The realm's effective lease epoch — the max over `epoch-lease`'s per-writer slots.
+   *
+   * THIS REPLACES A CLOCK, and the replacement had to remove the clock rather than stop reading it.
+   * A `now` this gate merely ignored would still be suppliable, and the next hand to touch the file
+   * would find an instant sitting in the arguments and reach for it.
+   */
+  readonly effectiveEpoch:    number;
   /** Verify an Ed25519 signature against the voucher's DID. The CALLER owns which vouchers count. */
   readonly verify:            (bytes: Uint8Array, sigHex: string, voucherDid: string) => Promise<boolean>;
 }): Promise<JoinVerdict> {
@@ -141,10 +165,13 @@ export async function decideCabalJoin(args: {
   if (inv.realmDocIdHex !== args.realmDocIdHex) return { admitted: false, refusal: "wrong-realm" };
   if (inv.joinerIdentityHex !== args.joinerIdentityHex) return { admitted: false, refusal: "wrong-joiner" };
 
-  // The lease. Standing decays unless fed; an invite carries a vouch with a shelf life, and a vouch that
-  // never lapses leaves the voucher no way to withdraw it from a mesh they can no longer reach.
-  const exp = Date.parse(inv.expiresAt);
-  if (!Number.isFinite(exp) || exp <= args.now.getTime()) return { admitted: false, refusal: "expired" };
+  // THE LEASE, READ AS A FENCE. Standing decays unless fed, and a vouch that never lapses leaves the
+  // voucher no way to withdraw it from a mesh they can no longer reach. But the shelf life cannot be a
+  // timestamp: the reader supplies the instant, so the party being gated would hold the dial. The
+  // realm's lease epoch is a max-register every replica converges on, and rolling it lapses every
+  // invite bound behind it at once — no clock consulted, no message sent.
+  const lease = inviteLeaseVerdict({ boundEpoch: inv.boundEpoch, effectiveEpoch: args.effectiveEpoch });
+  if (!lease.live) return { admitted: false, refusal: "expired" };
 
   const ok = await args.verify(cabalInviteBytes(inv), inv.sig, inv.voucherDid);
   if (!ok) return { admitted: false, refusal: "bad-signature" };
@@ -155,4 +182,33 @@ export async function decideCabalJoin(args: {
 /** A stable fingerprint of an invite — for a seen-cache, so one vouch admits one joiner one time. */
 export function cabalInviteId(inv: CabalInvite): Promise<string> {
   return Promise.resolve(hex(cabalInviteBytes(inv)));
+}
+
+/** A 1-15 digit decimal epoch — the same shape `device-delegation` binds to. */
+const INVITE_EPOCH_RE = /^[0-9]{1,15}$/;
+
+/** Whether an invite still stands against the realm's effective lease epoch. */
+export interface InviteLeaseVerdict {
+  readonly live: boolean;
+  readonly why:  string;
+}
+
+/**
+ * Read an invite's lease against the realm's epoch — the whole admission clock, and it holds no time.
+ *
+ * TAKES NO `now`, BY CONSTRUCTION. A reading that accepted an instant could be handed one by the very
+ * party it gates, and a lease the gated party can extend is not a lease. The only inputs are the fence
+ * the voucher signed and the epoch the realm converged on.
+ *
+ * Fails CLOSED on an unreadable bound: a fence nobody can parse is not an open gate.
+ */
+export function inviteLeaseVerdict(args: { boundEpoch: string; effectiveEpoch: number }): InviteLeaseVerdict {
+  if (!INVITE_EPOCH_RE.test(args.boundEpoch)) {
+    return { live: false, why: `the bound epoch ${JSON.stringify(args.boundEpoch)} reads as no epoch at all — an unreadable fence stands closed` };
+  }
+  const bound = Number(args.boundEpoch);
+  if (bound < args.effectiveEpoch) {
+    return { live: false, why: `the realm's lease epoch has rolled to ${args.effectiveEpoch}, past this invite's bound of ${bound} — the vouch has lapsed` };
+  }
+  return { live: true, why: `bound at ${bound}, and the realm stands at ${args.effectiveEpoch}` };
 }

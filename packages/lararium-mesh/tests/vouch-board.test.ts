@@ -32,7 +32,8 @@ const LATER = "2026-08-01T00:00:00Z";
 async function vouch(seed: Uint8Array, joiner: string, realm = REALM): Promise<CabalInvite> {
   return signCabalInvite({
     realmDocIdHex: realm, joinerIdentityHex: joiner,
-    voucherDid: await pubOf(seed), expiresAt: LATER,
+    voucherDid: await pubOf(seed), expiresAt: LATER, boundEpoch: "0",
+    boundEpoch:        "0",
   }, signer(seed));
 }
 
@@ -42,6 +43,9 @@ function boardOf(invites: readonly CabalInvite[]): LarDoc {
   for (const i of invites) writeVouch(doc, i);
   return doc;
 }
+
+/** The realm's lease epoch these readings price against — a fence, never an instant. */
+const EPOCH = 0;
 
 describe("vouch-board — an unverified vouch is an unbounded one", () => {
   test("★ a FORGED signature is dropped — it never becomes lineage mass ★", async () => {

@@ -41,8 +41,10 @@ export interface CabalVouchOptions {
   readonly joiner:      string;
   /** The cabal-realm this vouch crosses INTO. A vouch never grants a general pass. */
   readonly realm:       string;
-  /** ISO-8601. Absent → 30 days out; a vouch that never expires leaves a key under a mat. */
+  /** ISO-8601. Absent → 30 days out. A HINT the voucher's tools render; it gates no admission. */
   readonly expiresAt?:  string;
+  /** The realm lease epoch to bind to — the fence that actually gates. Absent → 0 (genesis). */
+  readonly boundEpoch?: number;
   /** WHICH held persona root vouches — the human's own face. Absent → the first held root. */
   readonly handleIndex?: number;
   readonly storageDir?: string;
@@ -53,6 +55,7 @@ export interface CabalVouchResult {
   readonly joiner:      string;
   readonly realm:       string;
   readonly expiresAt:   string;
+  readonly boundEpoch:  string;
   readonly boardUrl:    string;
   /**
    * The FLOOR on this voucher's out-degree — how many edges THIS REPLICA can see, never how many exist. A sibling
@@ -89,6 +92,11 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
   }
 
   const expiresAt = opts.expiresAt ?? defaultExpiry(now);
+  // THE FENCE THE VOUCH IS BOUND TO. A vouch minted now binds to the realm's epoch as this vessel
+  // reads it: roll the realm past that number and every vouch bound behind it lapses at once, on
+  // every replica, with no clock consulted. `expiresAt` above rides along as a HINT for the
+  // voucher's own tools — it gates nothing, because the reader supplies the instant.
+  const boundEpoch = String(opts.boundEpoch ?? 0);
   if (!(Date.parse(expiresAt) > now)) {
     throw new CabalVouchError(`the expiry ${expiresAt} sits at or before now — a vouch that arrives expired vouches for nobody.`);
   }
@@ -116,7 +124,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
 
   const seed   = await loadPersonaGroupRootSeed(storageDir, handleIndex);
   const invite = await signCabalInvite(
-    { realmDocIdHex: realm, joinerIdentityHex: joiner, voucherDid, expiresAt },
+    { realmDocIdHex: realm, joinerIdentityHex: joiner, voucherDid, expiresAt, boundEpoch },
     ed25519SignerFromSeed(seed),
   );
 
@@ -145,7 +153,7 @@ export async function runCabalVouch(opts: CabalVouchOptions, now = Date.now()): 
     }
 
     const outDegreeFloor = vouchDagFromInvites(after).edges.filter((e) => e.voucher === voucherDid).length;
-    return { voucherDid, joiner, realm, expiresAt, boardUrl, outDegreeFloor, reMinted };
+    return { voucherDid, joiner, realm, expiresAt, boundEpoch, boardUrl, outDegreeFloor, reMinted };
   } finally {
     await repo.flush().catch(() => { /* best-effort final flush */ });
   }

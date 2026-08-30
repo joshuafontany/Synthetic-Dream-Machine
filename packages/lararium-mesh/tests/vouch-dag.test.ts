@@ -22,9 +22,13 @@ const LATER    = "2030-01-01T00:00:00Z";
 async function invite(voucherDid: string, joinerIdentityHex: string, signSeed: Uint8Array): Promise<CabalInvite> {
   return signCabalInvite(
     { realmDocIdHex: "p".repeat(64), joinerIdentityHex, voucherDid, expiresAt: LATER },
+    boundEpoch:        "0",
     signer(signSeed),
   );
 }
+
+/** The realm's lease epoch these readings price against — a fence, never an instant. */
+const EPOCH = 0;
 
 describe("canonicalIdentity folds the DID/raw split into one vertex", () => {
   test("a 0x-DID and the bare hex of the same key canonicalise equal", () => {
