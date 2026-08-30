@@ -595,6 +595,12 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
         console.log(`  ${k.verifyingKey ? "seated  " : "UNSEATED"} ${k.displayName}${k.verifyingKey ? `  ${k.verifyingKey.slice(0, 16)}…` : ""}`);
       }
       console.log(`  threshold:  ${next.threshold} of ${kahu.length}`);
+      // WHAT IT SURVIVES, AT THE MOMENT IT IS WRITTEN. The seed floor keeps a GENESIS roster off the
+      // unanimity trap, but a RE-SEAT of a live chain meets no floor — that is deliberate, since an
+      // operator who has lost a kahu must still be able to re-seat. It is also exactly the case that
+      // can land fragile, so the reading rides here as well as at `show`.
+      const seatStanding = rosterStanding({ seated: seatedKeys.length, threshold: next.threshold });
+      if (seatStanding.fragile) console.log(`  ⚠ survives:  ${seatStanding.reading}`);
       console.log(`  epoch0:     ${sealEpochCid ?? "(unestablished — seat a quorum first)"}`);
       if (quorum) {
         console.log(`  quorum STANDS — the antigen now reads a live roster rooted on the genesis epoch.`);
