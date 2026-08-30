@@ -83,6 +83,37 @@ run_operator() {          # $1 = a|b
   clear_all
 }
 
+# ── THE QUORUM SCENARIO ─────────────────────────────────────────────────────────────────────────
+# A HEARTH THAT CARRIES IS NOT YET A HEARTH THAT TENDS. Every reading above proves motion — browsers
+# mint, hearths stand, records merge — and none of them proves that a founding operator seated the
+# kahu who govern the Nexus those records cross. A mesh can be fully green with no quorum anywhere.
+#
+# The roster forms from what STOOD: a persona that declared a Handle AND took a chair. So this reads
+# the seal's own show, not a persona count — three faces that never sat leave an empty roster while
+# `persona list` reads three, and that gap is exactly what the reading is for.
+run_quorum() {
+  say "QUORUM — the founding kahu seat, and the seal reads them"
+  clear_all
+  step "lararium-a up, alone"
+  if LAR_A_PEERS= $COMPOSE up -d --no-deps lararium-a >/dev/null 2>&1; then ok; else bad "up"; return; fi
+
+  step "the hearth stands"
+  local deadline=$((SECONDS + 240))
+  while ! $COMPOSE logs lararium-a 2>&1 | grep -q "\[lararium\]" && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
+  if $COMPOSE logs lararium-a 2>&1 | grep -q "\[lararium\]"; then ok; else bad "no lararium standing"; clear_all; return; fi
+
+  # THE SEAL'S OWN WORD. `nexus seal show` reports the seated roster and the threshold derived from
+  # it — majority over what stood. A hearth with no cabal answers honestly and names nobody.
+  step "the seal reads a seated quorum"
+  local SHOW
+  SHOW=$($COMPOSE exec -T lararium-a node packages/lares-cli/dist/src/bin/lares.js nexus seal show --json 2>&1)
+  if printf '%s' "$SHOW" | grep -q '"threshold":2'; then ok; else
+    bad "no quorum seated"
+    printf '%s\n' "$SHOW" | tail -3 | sed 's/^/      /'
+  fi
+  clear_all
+}
+
 run_nexus() {
   say "NEXUS — every class, carrying"
   clear_all
@@ -129,8 +160,9 @@ case "$WANT" in
   operator-a) run_operator a ;;
   operator-b) run_operator b ;;
   nexus)      run_nexus ;;
-  all)        run_operator a; run_operator b; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | all)" >&2; exit 2 ;;
+  quorum)     run_quorum ;;
+  all)        run_operator a; run_operator b; run_quorum; run_nexus ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"

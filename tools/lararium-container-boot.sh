@@ -46,5 +46,32 @@ if [ -n "${LAR_STAND_FACE:-}" ]; then
     || echo "[boot] the face did NOT light (see the error above) — serving faceless, at the waking floor"
 fi
 
+# A HEARTH THAT CARRIES IS NOT YET A HEARTH THAT TENDS. A single face lifts a vessel off the floor and
+# leaves the Nexus ungoverned: the roster forms from personas that declared a HANDLE and took a CHAIR,
+# so a face minted with neither seats nobody and `nexus seal show` reads an empty quorum with a
+# fail-closed threshold. `LAR_STAND_KAHU` names the chairs, comma-separated, and this container seats
+# them before it serves.
+#
+# THE SEAL IS FILE-LOCAL, so it lands before the exec below rather than against a running daemon —
+# `seal reserve` and `seal seat` read and write this vessel's own nexus home. A container seats its
+# own founding quorum for the same reason it founds its own identity: nothing in the mesh grants it.
+if [ -n "${LAR_STAND_KAHU:-}" ]; then
+  echo "[boot] seating the founding kahu: ${LAR_STAND_KAHU}"
+  _i=0
+  # THREE ACTS PER COMMAND, never one: --name labels privately, --handle declares outward, --seat
+  # stands for a chair. Only the last two reach the roster.
+  printf '%s' "$LAR_STAND_KAHU" | tr ',' '\n' | while IFS= read -r _handle; do
+    [ -z "$_handle" ] && continue
+    LAR_PEERS= node packages/lares-cli/dist/src/bin/lares.js persona new "$_i" \
+      --name "kahu-$_i" --handle "$_handle" --seat \
+      || echo "[boot] kahu $_i ('$_handle') did NOT stand — the roster will read short"
+    _i=$((_i + 1))
+  done
+  # `rite cabal` composes seal reserve · seal seat · seal show — the reserve arms the next epoch, the
+  # seat writes the roster from what stood, and the threshold derives majority over it.
+  LAR_PEERS= node packages/lares-cli/dist/src/bin/lares.js nexus rite cabal \
+    || echo "[boot] the cabal did NOT seat (see above) — this hearth carries but does not tend"
+fi
+
 echo "[boot] serving…"
 exec node packages/lararium-node/dist/src/main.js

@@ -59,6 +59,9 @@ services:
       LAR_PEERS: "${LAR_A_PEERS-http://herm-source:8080}"
       LAR_PUBLIC_URL: "http://lararium-a:8080"
       LAR_STAND_FACE: "alpha"                    # a FULL Lararium stands as a hearth — a face lifts it off the floor
+      # OPERATOR A FOUNDS THE NEXUS, so it seats the founding kahu who tend it. Three chairs derive a
+      # majority threshold of 2; a hearth with no cabal carries records it cannot govern.
+      LAR_STAND_KAHU: "${LAR_A_KAHU-Kahu Alpha,Kahu Beta,Kahu Gamma}"
     entrypoint: ["sh", "tools/lararium-container-boot.sh"]
     networks: [mesh]
     ports:
