@@ -77,7 +77,8 @@ type Verb = (typeof VERBS)[number];
  * The SOVEREIGN sensorium's LIFECYCLE + verbatim verbs — the tend/write/read-verbatim half of the one
  * door, beside the four plane-READ verbs above. Each OWNS its handler outright — no top-level twin.
  * `sense` tends the sovereign lar_* planes; `mempalace` tends the guest comparator: one island per
- * namespace. `pour` = the sovereign harvest (content + planes + worldline in one pass), NOT the guest miner.
+ * namespace. `pour` harvests ONE pointer's bearing gradient; `pour --all` walks the whole tending movement
+ * (quiesce · baseline · drawers · bearing · projection · verify · resume). Never the guest miner.
  * `recall` reads the verbatim drawers (the rich stamp-filter reader) over the SOVEREIGN content plane —
  * the SAME dir `sense search --lens content` opens (both derive memorySensoriumContentDir() through
  * mempalace-pool; the daemon recall verb NAMES it, never the guest). Guest-shaped recall output means a
