@@ -41,7 +41,7 @@ import {
 } from "@lararium/mesh";
 import { larSealHome, larDataDir } from "../env.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
-import { rosterStanding, seedFloorVerdict } from "@lararium/mesh";
+import { rosterStanding, nexusPhase } from "@lararium/mesh";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -543,13 +543,16 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
     );
   }
 
-  // THE SEED FLOOR. Two chairs derive a threshold of two, which is unanimity — the roster locks the
-  // day one seat goes dark, and the rotation that would repair it needs the quorum that just went
-  // dark. That state has no exit, which is why this refuses where `rosterStanding` only names: a
-  // warning is the wrong shape for a trap. It binds the SEED alone, so a chain already standing can
-  // still be re-seated after a loss.
-  const floor = seedFloorVerdict({ seated: seatedKeys.length, isGenesis: !doc.sealLineage?.length });
-  if (!floor.ok) throw new UsageError(floor.why);
+  // NO FLOOR ON THE SEED. The keeper ladder starts at ONE — "founder (n=1, genesis) -> founder-multisig
+  // (a 2nd keeper contracts in -> the group, not the original key, becomes root) -> k-of-n quorum"
+  // (genesis-doc#governance). A floor of three refused phase 1 outright, so phase 2 could never be
+  // reached and the ladder could not start.
+  //
+  // AND THE COUNT WAS NEVER THE THING. Every key a seat draws comes from THIS vessel's own vault, so
+  // three chairs at genesis are three faces of one operator — one relationship, the operator with
+  // themselves. A second OPERATOR is the first relation, and the Nexus is the relation. `nexusPhase`
+  // reads that and the seal reports it; `rosterStanding` still names a fragile quorum without
+  // refusing one.
 
   // THE THRESHOLD, and where it comes from. A doc that already carries one keeps it; otherwise the seat
   // derives MAJORITY over the roster that stood. Neither a constant in the source nor a silent guess: majority
@@ -727,6 +730,11 @@ async function sealShow(args: ParsedArgs): Promise<number> {
   const quorum = foundingQuorumSeated(doc);
   const head = sealLineageHead(doc);
   const chainDepth = doc?.sealLineage?.length ?? 0;
+  // THE ONLY INPUT THAT MOVES THE PHASE. A contracted operator is a key this vessel has never held,
+  // so it names a hand outside this vault — which is what a seated chair can never do. Unreachable
+  // members read as none, which keeps the phase honest rather than optimistic.
+  let contracted = 0;
+  try { contracted = (await runNexusMembersList({ sealHome })).members.length; } catch { contracted = 0; }
 
   emit(args, {
     ok: true,
@@ -744,6 +752,9 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       // would repair it. The reading rides the payload so a harness can assert it, and the human
       // path prints it where the numbers already are.
       standing: rosterStanding({ seated: roster.keys.length, threshold: roster.threshold }),
+      // WHERE THIS VESSEL STANDS ON THE KEEPER LADDER, read from RELATIONS rather than from the seat
+      // count — every seated key came from this vault, so no number of them names a second hand.
+      phase: nexusPhase({ seatedKeys: roster.keys.length, contractedOperators: contracted }),
       kahu: (doc?.kahu ?? []).map((k) => ({ displayName: k.displayName, seated: Boolean(k.verifyingKey) })),
     },
     human: () => {
@@ -759,6 +770,10 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       console.log(`  head epoch: ${roster.sealEpochCid || "(unestablished)"}`);
       console.log(`  rotation:   ${head && head.nextKeyCommit.length > 0 ? "ARMED" : "UNARMED"}`);
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);
+      // THE PHASE COMES BEFORE THE FRAGILITY. A seed has no quorum to be fragile about, and a reader
+      // who meets "quorum: STANDS" without it mistakes three faces of one operator for three hands.
+      const phase = nexusPhase({ seatedKeys: roster.keys.length, contractedOperators: contracted });
+      console.log(`  ${phase.isNexus ? "phase:     " : "⚠ phase:   "} ${phase.reading}`);
       const standing = rosterStanding({ seated: roster.keys.length, threshold: roster.threshold });
       // A FRAGILE ROSTER EARNS THE LINE; a sound one earns silence. The cure is only available before
       // the loss, so it prints while it is still worth something.

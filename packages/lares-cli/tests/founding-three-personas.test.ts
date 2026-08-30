@@ -37,9 +37,8 @@ import { ownPersonaPetname, declaredHandle, foundingQuorumSeated } from "@larari
 
 /** The three chair names the seal seeds — the PUBLIC Handles each founding persona answers to. */
 const KAHU = ["Kahu Alpha", "Kahu Beta", "Kahu Gamma"];
-/** A FOURTH chair, for the readings that need one persona to stand OUTSIDE the seated roster. A Nexus
- *  founds on three at least (the seed floor), so a test proving what does NOT sit needs a fourth to
- *  hold back — otherwise it proves the floor rather than the property it came for. */
+/** A FOURTH chair, for the reading that needs one persona to stand OUTSIDE the seated roster — the
+ *  declaration that never took a seat, proving the roster holds only what stood. */
 const KAHU_SPARE = "Kahu Delta";
 const LABEL_SPARE = "veil-four";
 /** The human's PRIVATE labels for the same three compartments — deliberately unlike the Handles above. */
@@ -191,12 +190,6 @@ describe("the three symmetric founding commands (CLI, real vault + disk)", () =>
     // NODE-LOCAL to the caller. A mirror that threw here would fail the founding on exactly the vessels that
     // reach no fleet.
     expect(await cmdPersona(personaArgs(["new", "0"], { name: LABELS[0]!, handle: KAHU[0]! }, { seat: true }))).toBe(0);
-    // Two more stand so the seat meets the seed floor — the reading here is about the MIRROR, not the
-    // roster size, and a founding that refused for want of chairs would measure the wrong thing.
-    for (let i = 1; i < KAHU.length; i++) {
-      await cmdPersona(personaArgs(["new", String(i)], { name: LABELS[i]!, handle: KAHU[i]! }, { seat: true }));
-    }
-
     // The names stand LOCALLY regardless, so the seat still joins them.
     expect(await ownPersonaPetname(await makeNodePersonaPetnameStore(), 0)).toBe(LABELS[0]);
     expect(await declaredHandle(await makeNodePersonaDeclarationStore(), 0)).toBe(KAHU[0]);
