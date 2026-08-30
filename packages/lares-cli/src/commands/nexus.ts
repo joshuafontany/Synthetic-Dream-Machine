@@ -25,7 +25,7 @@
  */
 
 import {
-  readNexusDoc, writeNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice, nexusCharterDocPath,
+  readNexusDoc, writeNexusDoc, writeNexusSeal, writeNexusKahu, writeNexusPractice, nexusCharterDocPath, nexusCharterDocRelPath,
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaDeclarationStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
   runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
@@ -39,9 +39,12 @@ import {
   RESERVE_THRESHOLD, RESERVE_KAHU_COUNT, defaultCryptoProvider,
   type NexusDoc, type NexusCharterKahu, type SealEpoch, type ReserveCard,
 } from "@lararium/mesh";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from "node:fs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
 import { larSealHome, larDataDir } from "../env.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
-import { rosterStanding, nexusPhase } from "@lararium/mesh";
+import { rosterStanding, nexusPhase, sealImportVerdict } from "@lararium/mesh";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -50,7 +53,7 @@ class UsageError extends Error {}
 function usage(): void {
   console.error("usage: lares nexus <seal | rite | kapae | un_kapae | contract | revoke | members | accept-carriage | posture>");
   console.error("");
-  console.error("  seal <seat | reserve | rotate | commit | show>      the founding-kahu roster + pre-rotated epoch chain");
+  console.error("  seal <seat | reserve | rotate | commit | show | export | import>  the founding-kahu roster + pre-rotated epoch chain");
   console.error("  kapae <nym> [--reason <text>]             raise a quorum-signed ban on a presenter nym");
   console.error("  kapae --list                              read the currently-Kapae'd set (the fold)");
   console.error("  un_kapae <nym>                            mint a quorum-signed lift at a higher version");
@@ -63,7 +66,7 @@ function usage(): void {
 }
 
 function sealUsage(): void {
-  console.error("usage: lares nexus seal <seat | reserve | rotate | commit | show>");
+  console.error("usage: lares nexus seal <seat | reserve | rotate | commit | show | export | import>");
   console.error("");
   console.error("  seat    form the roster from the personas that DECLARED a Handle + STOOD for a chair, then");
   console.error("          establish the GENESIS epoch over their verifying keys:");
@@ -340,6 +343,8 @@ async function cmdSeal(args: ParsedArgs): Promise<number> {
       case "rotate":  return await sealRotate(args);
       case "commit":  return sealCommit(args);
       case "show":    return await sealShow(args);
+      case "export":  return sealExport(args);
+      case "import":  return sealImport(args);
       case "reserve": return await cmdCharterReserve(args);
       default:
         if (sub) console.error(`lares nexus seal: unknown sub-verb "${sub}"`);
@@ -720,6 +725,80 @@ function sealCommit(args: ParsedArgs): number {
       console.log(`  hold the matching SIGNING seeds in offline custody until the rotate ceremony reveals them.`);
     },
   });
+  return 0;
+}
+
+
+/**
+ * `lares nexus seal export` — the public charter material, for a partner who must consent to it.
+ *
+ * An operator cannot consent to a charter she has never seen, so this is what travels FIRST. Seated
+ * keys, threshold and epoch lineage are public by construction — the material a joiner verifies a
+ * quorum signature against — so the channel needs INTEGRITY and no secrecy. Nothing here is a key
+ * this vessel holds; the charter grants its reader no quorum, which the crossing witness asserts.
+ */
+function sealExport(args: ParsedArgs): number {
+  const sealHome = larSealHome();
+  const path = nexusCharterDocPath(sealHome);
+  const raw = existsSync(path) ? readFileSync(path, "utf8") : null;
+  if (raw === null) {
+    emit(args, { ok: false, error: { code: "not-found", message: `no charter at ${path} — seat one first: \`lares nexus rite cabal\`` },
+                 human: () => console.error(`lares nexus seal export: no charter at ${path} — seat one first: \`lares nexus rite cabal\``) });
+    return 4;
+  }
+  emit(args, {
+    ok: true, data: { path, charter: raw },
+    human: () => {
+      console.log(raw);
+      console.error(`\n  ${path}`);
+      console.error("  public material — hand it over any channel that preserves INTEGRITY. It grants its");
+      console.error("  reader no quorum; it lets them verify yours and consent to carriage.");
+    },
+  });
+  return 0;
+}
+
+/**
+ * `lares nexus seal import <file>` — place a partner's charter, and refuse to destroy your own.
+ *
+ * `accept-carriage` signs a contract-in against whatever charter stands in the seal home it reads, so
+ * dropping a partner's roster over your own does not add a file — it REPLACES a founding, and every
+ * contract-in signed afterwards binds to the wrong epoch. The crossing witness carries this file with
+ * `cp` onto a vessel that had no charter to lose, which is why nothing has met the destructive case.
+ */
+function sealImport(args: ParsedArgs): number {
+  const from = args.positional[2] ?? "";
+  if (!from) {
+    console.error("usage: lares nexus seal import <path-to-founding-roster.mem>");
+    return 2;
+  }
+  let incomingRaw: string;
+  try { incomingRaw = readFileSync(from, "utf8"); }
+  catch { console.error(`lares nexus seal import: cannot read ${from}`); return 4; }
+
+  const sealHome = larSealHome();
+  const dest = nexusCharterDocPath(sealHome);
+  // READ THE INCOMING THROUGH THE CANONICAL PARSER, never a second one. A hand-rolled read of the
+  // seal fence would drift from `readNexusDoc` exactly when the doc shape moves, and this decision
+  // gates a destructive write. A throwaway home costs one file and keeps one parser.
+  const probe = mkdtempSync(join(tmpdir(), "lares-seal-probe-"));
+  let incoming = "";
+  try {
+    writeFileSync(join(probe, nexusCharterDocRelPath()), incomingRaw, "utf8");
+    incoming = rosterFromNexusDoc(readNexusDoc(probe)).sealEpochCid;
+  } finally { rmSync(probe, { recursive: true, force: true }); }
+  const standing = existsSync(dest) ? rosterFromNexusDoc(readNexusDoc(sealHome)).sealEpochCid || null : null;
+
+  const v = sealImportVerdict({ incoming, standing });
+  if (!v.ok) {
+    emit(args, { ok: false, error: { code: "refused", message: v.why },
+                 data: { from, dest }, human: () => console.error(`lares nexus seal import: ${v.why}`) });
+    return 3;
+  }
+  mkdirSync(sealHome, { recursive: true });
+  writeFileSync(dest, incomingRaw, "utf8");
+  emit(args, { ok: true, data: { from, dest, epoch: incoming },
+               human: () => { console.log(`imported → ${dest}`); console.log(`  ${v.why}`); } });
   return 0;
 }
 
