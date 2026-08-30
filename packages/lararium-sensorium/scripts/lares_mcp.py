@@ -232,9 +232,9 @@ class LaresCoordinator:
         the shipping path; the sweep/writeback/preview SHAPING rides the CLI skin + the deferred
         @daemon-cap-wire, so the params stand in the signature and thread through as the wire lands them."""
         if all:
-            # `pour --all` = the bulk backfill across EVERY surface, now wired onto the ONE spine: it rides
-            # `sweep` (the same method the CLI's `lares sense pour --all` reaches). No refusal where the CLI
-            # works — the surfaces match.
+            # `pour --all` = the bulk backfill across EVERY surface, on the ONE spine: it rides `sweep`,
+            # which is the drawers leg of the re-pave the CLI's `pour --all` walks. Both surfaces reach the
+            # same discovery, gate and tally, so a daemon-DOWN standalone captures identically.
             return self.sweep("all", wing=wing, room=room)
         if writeback or dry_run:
             # STILL refuse honestly: dry_run especially would otherwise LAND on the append-only ground (the

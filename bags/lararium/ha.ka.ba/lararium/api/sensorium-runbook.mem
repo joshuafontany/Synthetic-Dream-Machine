@@ -12,7 +12,7 @@ manaoio   = 14
 namespace = "&#x2695;"
 register  = "Synthesis"
 retain    = true
-role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. MEASURED CORRECTION: the CLI does NOT read narrower — the two surfaces slice DIFFERENTLY. `lares sense` carries a wide sensorium door (capture · setup · sweep · meta · teardown · quiesce/resume/holders · the durable lifecycle · the instrument set), while the MCP roster spans SEVERAL CLI verb-groups at once (vault_* · wiki · kapae belong to `lares vault`/`wiki`/`edge`, never to `sense`). Neither is a subset of the other, so `alignment` means naming the slicing rather than widening one to match. Carries the SITING LAW (#/the-planes): three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and a sensorium holds operator history and DreamNet history, so it belongs to the HOUSE and stands at `<lararium>/sensoriums/<name>` (`larariumDataHome()` / `_lararium_data_home()`, one string in both tongues). Under LAR_ROOT every directory names an XDG KIND and the two houses nest inside the data kind, so an isolated root reads as the real disk with a different prefix. The teardown preflight names the one reach that stays INTENDED: the operator's own hand."
+role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. The two surfaces SLICE DIFFERENTLY and neither is a subset of the other: `lares sense` holds one wide door over one sensorium, while the MCP roster spans several CLI doors at once (vault_* · wiki · kapae answer at `lares vault`/`wiki`/`edge`). Alignment means naming the slicing rather than widening one to match — and a name shared is not a motion shared, so a door and its tool agree on what they WRITE. The movement runs as `lares sense pour --all`; the destroying step stays the operator's own hand. Carries the SITING LAW (#/the-planes): three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and a sensorium holds operator history and DreamNet history, so it belongs to the HOUSE and stands at `<lararium>/sensoriums/<name>` (`larariumDataHome()` / `_lararium_data_home()`, one string in both tongues). Under LAR_ROOT every directory names an XDG KIND and the two houses nest inside the data kind, so an isolated root reads as the real disk with a different prefix. The teardown preflight names the one reach that stays INTENDED: the operator's own hand."
 status    = "rite"
 status-why = "the tending rite; its verb surface stands verified against the live roster"
 tags      = ["api/pono/li-ki-integrities", "api/pono/sensorium-machina", "lararium/mesh/founding-runbook", "api/pono/causal-islands", "api/lararium/living-grammar-palace"]
@@ -277,19 +277,25 @@ Run every check before the first deletion:
 
 !!! The movement
 
-<<~ confidence 7/20 >> ''Command spellings UNVERIFIED as a sequence'' — the verbs
-below stand confirmed on the MCP roster, and the CLI's own subcommand set reads NARROWER than this
-sequence assumes (#/surface-drift). Treat the shape as load-bearing and each spelling as a claim to check.
+<<~ confidence 16/20 >> ''THE MOVEMENT RUNS AS ONE COMMAND, and the steps that land
+nothing are the reason it is one.'' `lares sense pour --all` walks the sequence below; the steps stand
+here because a reader tending a sensorium by hand needs to know what each one buys, and because a step
+skipped silently is what the single door exists to prevent.
 
 # ''Pause live capture'' — a bulk sweep and a live hook racing produce an unreproducible corpus.
+# ''Take the baseline'' — the before-reading, while it can still be taken (#catastrophe ⑥).
 # ''Drain the holders'' before removing anything, so no process holds a handle into a store about to
   vanish.
 # ''Remove the store directory'' for a bare slate — a drain releases the holders and leaves every byte
-  in place, so a drain alone re-pours ON TOP of what stands.
-# ''Sweep'', detached — a full structure parse across every session runs long. Per-surface tallies land at
-  the end.
+  in place, so a drain alone re-pours ON TOP of what stands. ''This step stays the operator's own hand'':
+  it is the one move that destroys, and the rite carries it, never a flag.
+# ''Sweep'', detached — a full structure parse across every session runs long, and the per-op budget is
+  sized for it rather than for a short read. Per-surface tallies land at the end.
+# ''Stamp the bearing'' onto the drawers that landed, then ''re-derive the projection'' over them. The
+  order is a dependency: the stamp reads what the sweep wrote.
 # ''Verify the shape'' — counts against source counts, before trusting any reading.
-# ''Resume live capture.''
+# ''Resume live capture'', on every path out. A pass that halted holding the hooks down leaves the
+  machine quietly not remembering, which reads as calm rather than as fault.
 # ''Take the new baseline'' immediately, against the kept old one.
 
 <<~/ahu >>
@@ -369,21 +375,23 @@ a movement of this rite rather than a later courtesy:
 
 <<~ ahu #surface-drift >>
 
-!! The surface drift ~ measured, and standing open
+!! The two surfaces ~ how they slice
 
-<<~ confidence 15/20 >> ''The sensorium's verbs live at MCP; the CLI exposes a narrower,
-differently-named set.'' Measured 2026-08-04:
+<<~ confidence 17/20 >> ''NEITHER SURFACE IS A SUBSET OF THE OTHER, and alignment means naming the
+slicing rather than widening one to match.'' `lares sense` holds ONE door over one sensorium and carries
+its whole lifecycle — stand up, feed, read, tend the holders, the durable seats, the instrument set. The
+MCP roster spans SEVERAL CLI doors at once: `vault_*` answers at `lares vault`, `wiki` at `lares wiki`,
+`kapae` at `lares edge`. A tool absent from `sense` is not a gap where its own door holds it.
 
-* ''MCP roster'' — `analyze` `couple_r` `flow` `forecast` `jing` `ki` `li` `mismatch` `plane_record` `pour`
-  `recall` `reconcile` `rejim` `status` `sweep` `worldline`.
-* ''CLI `sense` subcommands'' — `accept-name` `dissolve` `keep` `ls` `name` `names` `open` `propose-name`
-  `query` `relate` `run` `search` `status` `structure`.
-* Flags an operator-facing draft named (`--surface`, `--speaker`) ''appear nowhere in the CLI source''.
+''One rule does hold in one direction'': every MCP tool answers to SOME CLI door, because a tool an agent
+may call and an operator may not is a surface the operator cannot audit by hand. The converse stays
+deliberately false — the key-holding ceremonies (founding, persona minting, the charter quorum, the vault
+beyond a status read) keep the operator's own hand, since MCP speaks stdio-per-client and N sessions would
+put N unsynchronised holders on one operator's keys.
 
-''This gap IS the CLI/MCP/daemon alignment work'', and this rite cannot state a stable command sequence
-until it closes. Until then #teardown's movement carries its shape as load-bearing and its spellings as
-claims. ''A runbook stating a command it has not run makes the same error as a comment claiming what its
-code does not do.''
+''A NAME SHARED IS NOT A MOTION SHARED.'' The two surfaces may spell one verb alike and mean different
+work by it, and a witness that matches rosters passes cleanly over exactly that. So a door and its tool
+agree on WHAT THEY WRITE, or the difference stands declared where a reader meets it.
 
 !!! The rite's second job ~ a friction detector, not merely a document
 
@@ -402,9 +410,10 @@ vocabulary rather than the implementer's. Two properties follow, and both matter
   gap an implementer's inventory of exported symbols never shows: a verb may exist at every layer and
   still leave a flow unwalkable.
 
-<<~ confidence 11/20 >> ''An unwalked rite reports nothing about the surfaces.'' The list above
-stands measured by reading source, which finds what EXISTS and stays blind to what a flow REQUIRES —
-absence of finding and absence of looking generate identically.
+<<~ confidence 14/20 >> ''A roster read off source finds what EXISTS and stays blind to what a
+flow REQUIRES'' — absence of finding and absence of looking generate identically. So no count stands
+transcribed here: `tools/surface-parity-witness.sh` derives both rosters, and the movement below is what
+reports whether they carry a flow between them.
 
 <<~/ahu >>
 
@@ -422,6 +431,6 @@ absence of finding and absence of looking generate identically.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NVcUDj1CEEpj5q0-L92mCAsYx1We6y0BM8mN3tiaBoY
+<<^ code="&#x0003;" >>ni:///sha-256;DN6cjlIJLt3uYemI4-XKDEUG1Ghzpl6k7ldPlbdwgZs
 
 <<^ code="&#x0004;" -> to=? >>

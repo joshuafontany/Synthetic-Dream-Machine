@@ -1,9 +1,12 @@
 /**
  * `lares sense pour` — idempotent, re-runnable session-history harvest.
  *
- * The save-hook firehose that mempalace shipped hardcoded one `--wing sessions`
- * mega-wing and re-chewed the whole transcript dir on every Stop. This replaces
- * it: ONE idempotent command the operator (or a thin hook) re-runs safely.
+ * TWO REACHES, ONE VERB. A bare `pour` harvests ONE pointer's bearing gradient — the navigational
+ * structure the stream already authored, which `lares sense worldline` joins each node against.
+ * `pour --all` walks the whole tending movement: quiesce · baseline · drawers · bearing · projection ·
+ * verify · resume, in that order, because each landing step reads what the one before it wrote.
+ *
+ * ONE idempotent command the operator (or a thin hook) re-runs safely.
  *
  *   - Reads a session transcript (.jsonl) — or every transcript under a dir —
  *     turn by turn, full message structure (text blocks; tool blocks noted, not
@@ -37,6 +40,7 @@ import { wingFromDir } from "../wing-law.js";
 import { partitionEphemeral } from "../ephemeral.js";
 import { atomicWriteFileSync } from "@lararium/node";
 import { runVerb } from "../verb-call.js";
+import { readVerbOutcome } from "../verb-result.js";
 import { emit, exitFor, type LaresError } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -361,13 +365,163 @@ function guardRoom(args: ParsedArgs, verb: string): number | null {
   return exitFor("verb-error");
 }
 
+/**
+ * The sovereign re-pave — the three legs of filling a sensorium, in dependency order.
+ *
+ * DRAWERS land the verbatim content. The BEARING writeback reads those drawers and stamps the
+ * navigational gradient onto them. The PROJECTION re-derives the lexical and entity view over the
+ * content plane. The second reads what the first wrote, so the sequence is a dependency: a writeback
+ * across drawers that have not landed reports zero harvested and exits clean.
+ */
+export type RepaveStageName =
+  | "quiesce" | "baseline" | "drawers" | "bearing" | "projection" | "verify" | "resume";
+
+export interface RepaveStage {
+  readonly name: RepaveStageName;
+  /** What this stage does — the line a person reads while a long pass runs. */
+  readonly why: string;
+}
+
+/**
+ * The tending rite's movement, as a sequence a door can run.
+ *
+ * The rite states this order and names each spelling a CLAIM to check; running it here turns the
+ * claims into a pass or a friction at the step that stalls. Three of the seven stages exist because
+ * a re-pave that skips them cannot be trusted afterwards rather than because they land anything:
+ *
+ *   QUIESCE  a bulk pass racing the live capture hook produces a corpus no re-run reproduces.
+ *   BASELINE one clean before/after boundary exists per re-pave, and it opens exactly once. A
+ *            reading taken after the fact needs a second whole pass and still lacks the old state.
+ *   VERIFY   counts against source counts, before any instrument reads the result.
+ *
+ * RESUME closes what QUIESCE opened, on every path out — a re-pave that halted holding the hooks
+ * down leaves live capture silently off, which reads as a quiet machine rather than a fault.
+ */
+export function repaveStages(): readonly RepaveStage[] {
+  return [
+    { name: "quiesce",    why: "live capture paused — a bulk pass racing the hook is not reproducible" },
+    { name: "baseline",   why: "the before-reading, taken while it can still be taken" },
+    { name: "drawers",    why: "every transcript on every surface, landed verbatim into the content plane" },
+    { name: "bearing",    why: "the navigational gradient, stamped onto the drawers that just landed" },
+    { name: "projection", why: "the lexical and entity view, re-derived over the content plane" },
+    { name: "verify",     why: "the landed counts read against the sources they came from" },
+    { name: "resume",     why: "live capture handed back" },
+  ];
+}
+
+/** The stages that land nothing and whose absence a later reading cannot recover. */
+export const REPAVE_GUARDS: readonly RepaveStageName[] = ["quiesce", "baseline", "verify", "resume"];
+
+/**
+ * The wing a re-pave fills, from the ONE law.
+ *
+ * `wingFromDir` is that law, and the hook already reaches it through `lares wing-of`. A second
+ * derivation sends a bulk pass to a wing the per-transcript pass never writes, so a recall over
+ * either name reads half a corpus while both verbs report success.
+ */
+export function repaveWing(args: ParsedArgs): string {
+  const named = args.options["wing"];
+  return typeof named === "string" && named.length > 0 ? named : wingFromDir(larRoot());
+}
+
+/** One leg's outcome. */
+export interface RepaveLeg { readonly name: string; readonly code: number }
+
+/**
+ * Run every leg in order, halting at the first refusal.
+ *
+ * The runner is a parameter so the ORDER can be witnessed without walking the operator's corpus —
+ * the contract worth holding is the sequence and the halt, not the landing.
+ */
+export async function runRepave(
+  args: ParsedArgs,
+  run: (stage: RepaveStage["name"], args: ParsedArgs) => Promise<number> = runRepaveLeg,
+): Promise<{ stages: RepaveLeg[]; code: number }> {
+  const wing = repaveWing(args);
+  // ONE WING REACHES EVERY LEG. Threaded here rather than defaulted per-leg, which is how the two
+  // fill-verbs came to disagree.
+  const threaded: ParsedArgs = { ...args, options: { ...args.options, wing } };
+  const stages: RepaveLeg[] = [];
+  let halted = 0;
+  for (const stage of repaveStages()) {
+    // RESUME RUNS ON EVERY PATH OUT. Skipping it after a halt would leave the operator's live capture
+    // paused with nothing on screen saying so — a machine that has quietly stopped remembering.
+    if (halted !== 0 && stage.name !== "resume") continue;
+    const code = await run(stage.name, threaded);
+    stages.push({ name: stage.name, code });
+    if (code !== 0 && halted === 0) halted = code;
+  }
+  return { stages, code: halted };
+}
+
+/** The legs as the door actually runs them — each at the verb that owns it. */
+async function runRepaveLeg(stage: RepaveStageName, args: ParsedArgs): Promise<number> {
+  switch (stage) {
+    case "quiesce": return await runHooks("pause");
+    case "baseline": return readBaseline(args, "before");
+    case "drawers":
+      return await cmdSweep({ ...args, options: { ...args.options, surface: args.options["surface"] ?? "all" } });
+    case "bearing": return runWriteback(args, repaveWing(args));
+    case "projection": {
+      const { cmdRefresh } = await import("./refresh.js");
+      return await cmdRefresh({ ...args, positional: [] });
+    }
+    case "verify": return readBaseline(args, "after");
+    case "resume": return await runHooks("resume");
+  }
+}
+
+/** Hold or hand back the capture hooks, through the lever that owns the marker. */
+async function runHooks(verb: "pause" | "resume"): Promise<number> {
+  const { cmdHooks } = await import("./hooks.js");
+  return await cmdHooks({ positional: [verb], flags: {}, options: {} } as unknown as ParsedArgs);
+}
+
+/**
+ * A reading of the sensorium as it stands, kept beside the pass that changed it.
+ *
+ * The comparison is the whole point: a count means little alone and a great deal against the count
+ * before it. Both readings land in the harvest state home under the wing, so the series survives the
+ * pass that produced it.
+ */
+function readBaseline(args: ParsedArgs, when: "before" | "after"): number {
+  const wing = repaveWing(args);
+  const at = join(HARVEST_DIR, `${wing}.baseline.ndjson`);
+  try {
+    mkdirSync(HARVEST_DIR, { recursive: true });
+    const index = join(HARVEST_DIR, `${wing}.ndjson`);
+    const bearing = existsSync(index) ? readFileSync(index, "utf8").split("\n").filter(Boolean).length : 0;
+    appendFileSync(at, JSON.stringify({ when, wing, bearing, at: isoWholeSeconds(new Date().toISOString()) }) + "\n", "utf8");
+    console.log(`  baseline   ${when}: ${bearing} bearing row(s) — kept at ${at}`);
+    return 0;
+  } catch (e) {
+    // A BASELINE THAT CANNOT BE WRITTEN MUST NOT PASS QUIETLY. It is the one reading no later pass
+    // can recover, so its absence is the failure rather than a missing convenience.
+    console.error(`  baseline   ${when}: could not be taken — ${e instanceof Error ? e.message : String(e)}`);
+    return 5;
+  }
+}
+
 export async function cmdHarvest(args: ParsedArgs): Promise<number> {
   const roomGuard = guardRoom(args, "harvest");
   if (roomGuard !== null) return roomGuard;
 
-  // The bulk `--all` backfill ceased to exist here — the sovereign lane routes through `lares sense
-  // sweep` (the daemon `sweep` op) and the guest comparator through `lares mempalace harvest` (the
-  // python guest_harvest lane). This command harvests one pointer's bearing gradient only.
+  // `--all` IS THE WHOLE MOTION, not a wider target. A bare `pour` harvests one pointer's bearing
+  // gradient; `--all` runs the three legs a sensorium needs filled — drawers, bearing, projection —
+  // in the order the second's dependency on the first sets.
+  if (args.flags["all"] === true) {
+    const r = await runRepave(args);
+    emit(args, {
+      ok: r.code === 0,
+      ...(r.code === 0 ? {} : { error: { code: "repave-halted", message: `the ${r.stages.at(-1)?.name} leg refused`,
+                                         hint: "the legs stand alone: `lares sense sweep`, `lares sense pour --writeback`, `lares sense refresh`" } }),
+      data: { mode: "repave", wing: repaveWing(args), stages: r.stages },
+      human: () => {
+        for (const s of r.stages) console.log(`  ${s.name.padEnd(11)} ${s.code === 0 ? "landed" : `refused (${s.code})`}`);
+      },
+    });
+    return r.code;
+  }
 
   // --writeback: operate on mempalace DRAWERS (the tensegrity shore), not JSONL.
   if (args.flags["writeback"] === true) {
@@ -555,8 +709,10 @@ export async function cmdHarvest(args: ParsedArgs): Promise<number> {
  *  Idempotent — a re-run catches up, a fresh sensorium fills fully. */
 export async function cmdSweep(args: ParsedArgs): Promise<number> {
   const surface = typeof args.options["surface"] === "string" ? (args.options["surface"] as string) : "all";
-  const wing = typeof args.options["wing"] === "string" && args.options["wing"]
-    ? (args.options["wing"] as string) : `wing_${basename(homedir())}`;
+  // ONE WING LAW. `wingFromDir` decides it everywhere — the hook reaches it through `lares wing-of`,
+  // the bearing leg calls it directly. A second derivation here sent this leg to a name the
+  // per-transcript leg never wrote, so an unflagged fill split one corpus across two wings.
+  const wing = repaveWing(args);
   const sensoriumRoot = typeof args.options["sensorium-root"] === "string" ? (args.options["sensorium-root"] as string) : undefined;
   const project = typeof args.options["project"] === "string" ? (args.options["project"] as string) : undefined;
   const limitRaw = typeof args.options["limit"] === "string" ? Number(args.options["limit"]) : undefined;
@@ -569,9 +725,23 @@ export async function cmdSweep(args: ParsedArgs): Promise<number> {
     ...(limit !== undefined ? { limit } : {}),
     ...(sensoriumRoot ? { sensoriumRoot } : {}),
   }, did, { timeoutMs: TIMEOUT_CEIL_MS });
-  const result = (r.results as Record<string, unknown> | undefined) ?? {};
-  emit(args, { ok: true, data: { surface, wing, result }, human: () => console.log(`[sweep] ${JSON.stringify(result, null, 2)}`) });
-  return 0;
+  // THE OUTCOME CARRIES ITS OWN VERDICT. The bulk spine returns a tally — sessions, landed, skipped,
+  // by_surface — and a refusal returns none of it. Reading the envelope alone rendered `{}` over both,
+  // so a pass the daemon cut short printed exactly like one that found nothing left to land.
+  const outcome = readVerbOutcome(r);
+  const tally = (k: string): number => (typeof outcome.output[k] === "number" ? outcome.output[k] as number : 0);
+  const landed = tally("landed"), skipped = tally("skipped"), sessions = tally("sessions");
+  emit(args, {
+    ok: outcome.ok,
+    ...(outcome.ok ? {} : { error: { code: "verb-error", message: outcome.error ?? "the sweep refused",
+                                     hint: "a long backfill outruns the daemon's adaptive budget — narrow it with `--limit` or `--surface`, and re-run: the sweep is idempotent." } }),
+    data: { surface, wing, landed, skipped, sessions, output: outcome.output },
+    human: () => {
+      if (!outcome.ok) { console.error(`lares sense sweep: ${outcome.error}`); return; }
+      console.log(`[sweep] ${sessions} session(s) → ${landed} landed · ${skipped} re-derived (${surface}, wing ${wing})`);
+    },
+  });
+  return outcome.ok ? 0 : exitFor("verb-error");
 }
 
 export async function cmdCapture(args: ParsedArgs): Promise<number> {
@@ -629,8 +799,11 @@ export async function cmdCapture(args: ParsedArgs): Promise<number> {
       // The CALLER'S patience = the servo CEIL, so the CLI never cliffs before the daemon's adaptive
       // (gradient) budget resolves — a big session lands honestly; a real hang still dies within CEIL.
       const r = await runVerb("capture", { surface, pointer, wing, room: DEFAULT_ROOM, ...(surface === "copilot" && sessionId ? { sessionId } : {}), ...(sensoriumRoot ? { sensoriumRoot } : {}) }, did, { timeoutMs: TIMEOUT_CEIL_MS });
-      const output = ((r.results as { summary?: { output?: Record<string, unknown> } } | undefined)?.summary?.output) ?? {};
-      passes.push({ pointer, ...output });
+      // A capture that the daemon refused belongs with the failures, never among the passes with an
+      // empty tally — the per-pointer loop is exactly where a swallowed refusal hides in a count.
+      const outcome = readVerbOutcome(r);
+      if (!outcome.ok) { failures.push({ pointer, error: outcome.error ?? "the capture refused" }); continue; }
+      passes.push({ pointer, ...outcome.output });
     } catch (err) {
       failures.push({ pointer, error: err instanceof Error ? err.message : String(err) });
     }

@@ -7,6 +7,7 @@
  */
 
 import { spawn } from "node:child_process";
+import { TIMEOUT_CEIL_MS } from "@lararium/mempalace";
 
 import { resolveCaptureSessionSpawn, resolveHolderCapEnv } from "@lararium/mempalace";
 import type { SubagentEdgePair } from "@lararium/tw5";
@@ -140,7 +141,10 @@ export function makeSourceCapture(
     capture: async (request) => await p.send("capture", sourceCaptureDescriptor(request)) as SourceCaptureResult,
     // The BULK backfill: the holder iterates its OWN discovery through the ONE warm stream. No session text
     // crosses (the holder discovers the pointers itself), only the sweep shape (surface/wing/project/limit).
-    sweep: async (request) => await p.send("sweep", { ...(request ?? {}) }) as Record<string, unknown>,
+    // A BULK SWEEP IS NOT A HANG. It walks every transcript on every surface on one warm stream, so
+    // it outruns the per-op default the holder's short ops are sized for; the ceiling still bounds it.
+    sweep: async (request) =>
+      await p.send("sweep", { ...(request ?? {}) }, TIMEOUT_CEIL_MS) as Record<string, unknown>,
     // A refresh carries no session text — only the optional `which` — so it needs no admission descriptor;
     // the holder RE-DERIVES its whole derived layer (or the one named) from the content it already owns.
     refresh: async (request) => await p.send("refresh", { ...(request ?? {}) }) as Record<string, unknown>,

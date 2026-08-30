@@ -40,7 +40,7 @@ import {
 // observed durations and clamps FLOOR..CEIL. The machine-code work stays Python; this is the
 // coordinator's PATIENCE, servo'd so a long-but-honest verb (a big-session capture, a refresh queued
 // behind a capture pass) is never false-killed the way a fixed 30s cliff killed them.
-import { adaptiveTimeoutMs, recordMineDuration } from "@lararium/mempalace";
+import { adaptiveTimeoutMs, recordMineDuration, verbBudgetMs } from "@lararium/mempalace";
 
 export interface UdsChannelOptions {
   /** The daemon's warm daemon doc handle (result.daemon.daemonHandle). */
@@ -65,6 +65,8 @@ interface Invocation {
   args?: Record<string, unknown>;
   requestedBy: string;
   requestId?: string;
+  /** The caller's own budget, raising the servo's wait within this side's ceiling. Read, never trusted. */
+  timeoutMs?: number;
 }
 
 export interface UdsChannel { close: () => void; }
@@ -130,9 +132,14 @@ export function startUdsChannel(opts: UdsChannelOptions): UdsChannel {
       const onChange = () => check();
       daemonHandle.on("change", onChange);
       // Fail on a GRADIENT: the wait grows with this verb's learned durations (EWMA·K, clamped
-      // FLOOR..CEIL) — headroom for an honest long verb, while a real hang still dies within CEIL. The
-      // caller's own budget acts as a floor (never wait LESS than asked).
-      const budget = Math.max(timeoutMs, adaptiveTimeoutMs(inv.verb));
+      // FLOOR..CEIL) — headroom for an honest long verb, while a real hang still dies within CEIL.
+      // The INVOCATION's own ask raises it within that bound: the servo cannot learn that a first
+      // bulk pass runs long until one completes, so a caller that knows must be able to say so.
+      const budget = verbBudgetMs({
+        ...(typeof inv.timeoutMs === "number" ? { asked: inv.timeoutMs } : {}),
+        adaptive: adaptiveTimeoutMs(inv.verb),
+        floor: timeoutMs,
+      });
       const timer = setTimeout(() => settle(() => reject(new Error(`verb "${inv.verb}" timed out after ${budget}ms (adaptive)`))), budget);
       const cleanup = () => { daemonHandle.off("change", onChange); clearTimeout(timer); };
       check(); // the outcome may already exist (idempotent re-submission)

@@ -39,3 +39,25 @@ export interface SubmitResult {
 export function summaryOutput(result: SubmitResult): Record<string, unknown> | undefined {
   return result.results?.[VERB_RESULT_KEY]?.output;
 }
+
+/** A verb's outcome, read whole: whether it ran, what it landed, and why it refused. */
+export interface VerbOutcome {
+  readonly ok:     boolean;
+  readonly output: Record<string, unknown>;
+  readonly error:  string | null;
+}
+
+/**
+ * Read an outcome without losing its verdict.
+ *
+ * THE STATUS IS PART OF THE PAYLOAD. Reaching straight for `results` skips it, and a refused
+ * invocation carries no payload — so the reader falls to an empty object and renders success over a
+ * verb that never ran. A pass that landed nothing because everything was already landed and a pass
+ * the daemon cut short then print identically, and only one of them leaves work owed.
+ */
+export function readVerbOutcome(result: SubmitResult): VerbOutcome {
+  if (result.status === "error") {
+    return { ok: false, output: {}, error: result.errorMessage ?? "the daemon refused and named no reason" };
+  }
+  return { ok: true, output: summaryOutput(result) ?? {}, error: null };
+}

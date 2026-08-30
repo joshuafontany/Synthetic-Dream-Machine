@@ -156,3 +156,28 @@ export async function timeMineAsync<T>(
   recordMineDuration(pathKey, Date.now() - t0, items);
   return r;
 }
+
+/**
+ * How long the daemon waits on one verb — the servo's learned wait, raised by an honest caller.
+ *
+ * THREE WORDS DECIDE IT, IN ONE ORDER. The servo's `adaptive` wait is the ground; the daemon's own
+ * `floor` keeps a cold key from cutting early; and a caller that KNOWS its pass runs long may raise
+ * the wait — a bulk backfill over a whole corpus is not a hang, and the servo has no way to learn
+ * that before the first one completes.
+ *
+ * The ceiling stays the daemon's. A budget a caller could raise without limit is a hang a caller
+ * could request, so an ask outruns nothing: it lifts the wait within a bound this side owns.
+ *
+ * An ask arrives over a wire, so it is READ rather than trusted — anything that is not a positive
+ * finite number is no ask at all.
+ */
+export function verbBudgetMs(opts: {
+  readonly asked?:    number;
+  readonly adaptive:  number;
+  readonly floor:     number;
+}): number {
+  const ground = Math.max(opts.adaptive, opts.floor);
+  const asked = typeof opts.asked === "number" && Number.isFinite(opts.asked) && opts.asked > 0
+    ? opts.asked : 0;
+  return Math.min(TIMEOUT_CEIL_MS, Math.max(ground, asked));
+}

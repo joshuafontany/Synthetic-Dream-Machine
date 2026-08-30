@@ -115,7 +115,11 @@ export async function invokeLocal(
     );
     sock.setEncoding("utf8");
     sock.on("connect", () => {
-      sock.write(JSON.stringify({ verb, args, requestedBy, ...(opts.requestId ? { requestId: opts.requestId } : {}) }) + "\n");
+      // THE ASK RIDES WITH THE INVOCATION. The daemon runs its own servo, and a caller that knows its
+      // pass runs long — a bulk backfill over a whole corpus — can only say so if the number crosses.
+      // Left off the wire, this side waited an hour while the daemon cut the same pass at two minutes.
+      sock.write(JSON.stringify({ verb, args, requestedBy, timeoutMs,
+                                  ...(opts.requestId ? { requestId: opts.requestId } : {}) }) + "\n");
     });
     sock.on("data", (chunk: string) => {
       buf += chunk;

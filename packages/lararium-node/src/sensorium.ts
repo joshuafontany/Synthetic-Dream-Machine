@@ -584,13 +584,15 @@ export class PalaceHolder {
     this.dropSelf(this);
   }
 
-  private request(op: string, fields: Record<string, unknown>): Promise<unknown> {
+  private request(op: string, fields: Record<string, unknown>, opTimeoutMs?: number): Promise<unknown> {
     const id = this.nextId++;
+    const budget = typeof opTimeoutMs === "number" && Number.isFinite(opTimeoutMs) && opTimeoutMs > 0
+      ? opTimeoutMs : this.timeoutMs;
     return new Promise<unknown>((res, rej) => {
       const timer = setTimeout(() => {
         this.pending.delete(id);
-        rej(new Error(`${this.label} '${op}' timed out after ${this.timeoutMs}ms`));
-      }, this.timeoutMs);
+        rej(new Error(`${this.label} '${op}' timed out after ${budget}ms`));
+      }, budget);
       this.pending.set(id, { resolve: res, reject: rej, timer });
       try {
         if (!this.proc?.stdin) throw new Error(`${this.label} holder not started`);
@@ -604,9 +606,17 @@ export class PalaceHolder {
   }
 
   /** Ensure the holder is up (handshake once), then issue one RPC and await its result. */
-  async send(op: string, fields: Record<string, unknown> = {}): Promise<unknown> {
+  /**
+   * Speak one op, optionally with its own patience.
+   *
+   * ONE DEADLINE CANNOT SERVE EVERY OP ON A HOLDER. A `ping` that takes two minutes names a wedged
+   * process; a bulk sweep across a whole corpus takes longer than that honestly, and the holder has
+   * no way to tell them apart from the op name alone. So the caller that knows says so, and the
+   * holder's own budget stands for everything that does not.
+   */
+  async send(op: string, fields: Record<string, unknown> = {}, opTimeoutMs?: number): Promise<unknown> {
     await this.ensure();
-    return this.request(op, fields);
+    return this.request(op, fields, opTimeoutMs);
   }
 
   shutdown(): void {
@@ -663,7 +673,7 @@ export class PalaceHolderRegistry {
  */
 export interface ComposedHolder {
   /** issue one line-RPC to the holder (the op-surface's single verb). */
-  send(op: string, fields?: Record<string, unknown>): Promise<unknown>;
+  send(op: string, fields?: Record<string, unknown>, opTimeoutMs?: number): Promise<unknown>;
   /** release this reference; the holder process dies when the last reference closes. Idempotent. */
   close(): Promise<void>;
 }
@@ -686,7 +696,8 @@ export function composeHolder(label: string, key: string, spawn: PalaceHolderSpa
   const holder = reg.acquire(key, spawn, timeoutMs);
   let closed = false;
   return {
-    send: (op: string, fields: Record<string, unknown> = {}) => holder.send(op, fields),
+    send: (op: string, fields: Record<string, unknown> = {}, opTimeoutMs?: number) =>
+      holder.send(op, fields, opTimeoutMs),
     close: async (): Promise<void> => { if (closed) return; closed = true; reg.release(holder); },
   };
 }
