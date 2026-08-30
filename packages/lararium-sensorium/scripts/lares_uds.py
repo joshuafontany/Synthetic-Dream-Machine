@@ -13,7 +13,7 @@ included — reaches memory THROUGH it, over this socket. All the COMPUTE stays 
 search, and store); the TS @daemon only ROUTES. Routing a verb counts as coordination, never compute:
 `@daemon coordinates, py computes`.
 
-THE WIRE (mirrors the TS `invokeLocal`): connect `<dataDir>/lares.sock`, write ONE JSON line
+THE WIRE (mirrors the TS `invokeLocal`): connect the RENDEZVOUS (see `socket_path`), write ONE JSON line
 `{verb, args, requestedBy[, requestId]}`, read ONE outcome line back. 0600 owner-only perms gate
 presence; the `requestedBy` did rides the invocation for the daemon's verify-then-delegate.
 
@@ -28,6 +28,7 @@ never come through here; reads may.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import socket
@@ -58,7 +59,23 @@ def data_dir() -> str:
 
 
 def socket_path() -> str:
-    return os.path.join(data_dir(), "lares.sock")
+    """`/tmp/lares-<uid>/<sha256(dataDir)[0:12]>.sock` — the rendezvous, mirroring TS `rendezvousPath()`.
+
+    A RENDEZVOUS IS NOT A RESIDENCE. The data homes answer whose it is; a socket answers where two
+    processes MEET, under a limit the other question never heard of — `sockaddr_un.sun_path` caps near
+    104 bytes. Sited beside the data, the meeting place inherited the substrate's depth, and a root a
+    few directories deeper than expected took it down while every other part of the vessel stood.
+
+    So the name derives from the root instead: the uid keeps two operators apart, the digest keeps two
+    roots apart, and the path holds a fixed 40 bytes however deep the root runs. Deriving rather than
+    sharing one short directory matters — two throwaway roots on a common socket would let a rehearsal
+    reach the real machine's daemon while believing itself isolated.
+
+    THIS SIDE DERIVES; IT DOES NOT IMPORT. No module crosses the language seam, so agreement is the
+    only thing joining these two spellings — and `tools/rendezvous-parity-witness.sh` is what holds
+    them to it. Move one and fix the other in the same breath."""
+    digest = hashlib.sha256(data_dir().encode("utf-8")).hexdigest()[:12]
+    return os.path.join("/tmp", f"lares-{os.getuid()}", f"{digest}.sock")
 
 
 def available() -> bool:

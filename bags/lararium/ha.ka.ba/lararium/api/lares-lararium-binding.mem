@@ -134,9 +134,13 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 !! Wiring (when the identity work pauses)
 
-# ''Daemon UDS verb-channel'' (lararium-node): a Unix-domain listener at
-   `<lares>/vessel/lares.sock` — the socket rides WITH the substrate it serves, in the
-   spirits' house (perms `0600`, stale-cleanup, Windows named-pipe fallback)
+# ''Daemon UDS verb-channel'' (lararium-node): a Unix-domain listener at the RENDEZVOUS,
+   `/tmp/lares-<uid>/<sha256(substrate)[0:12]>.sock` — a meeting place, not a residence: it
+   answers WHERE TWO PROCESSES MEET under a limit the data homes never heard of, and
+   `sockaddr_un.sun_path` caps near 104 bytes. Sited beside the substrate it served, a root a
+   few directories deeper took it down while the vessel stood. The uid parts two operators,
+   the digest parts two roots, and the path holds 40 bytes however deep the root runs
+   (perms `0600`, stale-cleanup, Windows named-pipe fallback)
    that decodes a capability-bearing invocation, runs it through the ''existing''
    VerbDispatcher, and returns the durable outcome. Alongside the WS — not replacing
    it. //(Touches the node boot/ingress — coordinate with the identity/boot work.)//
@@ -167,6 +171,6 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5WA-x8rDc1zAXBk603n2A8LB2mlFpVQl89HSO92DL9I
+<<^ code="&#x0003;" >>ni:///sha-256;Z3NnrAMJU-ltBx3-oju5cj2sv8biYBNxhgZ93cI_rhw
 
 <<^ code="&#x0004;" -> to=? >>
