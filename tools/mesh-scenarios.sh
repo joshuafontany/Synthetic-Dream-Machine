@@ -107,7 +107,10 @@ run_quorum() {
   step "the seal reads a seated quorum"
   local SHOW
   SHOW=$($COMPOSE exec -T lararium-a node packages/lares-cli/dist/src/bin/lares.js nexus seal show --json 2>&1)
-  if printf '%s' "$SHOW" | grep -q '"threshold":2'; then ok; else
+  # ASSERT THE SEATS, NOT ONLY THE THRESHOLD. Majority over TWO is also two, so a threshold check
+  # alone passed a roster that had silently lost a chair. The count of seated keys is what names the
+  # roster; the threshold is what derives from it.
+  if printf '%s' "$SHOW" | grep -q '"seatedKeys":3' && printf '%s' "$SHOW" | grep -q '"threshold":2'; then ok; else
     bad "no quorum seated"
     printf '%s\n' "$SHOW" | tail -3 | sed 's/^/      /'
   fi

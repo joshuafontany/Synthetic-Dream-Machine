@@ -60,7 +60,11 @@ if [ -n "${LAR_STAND_KAHU:-}" ]; then
   _i=0
   # THREE ACTS PER COMMAND, never one: --name labels privately, --handle declares outward, --seat
   # stands for a chair. Only the last two reach the roster.
-  printf '%s' "$LAR_STAND_KAHU" | tr ',' '\n' | while IFS= read -r _handle; do
+  # `printf '%s'` ENDS WITHOUT A NEWLINE, and `while read` returns false on a final unterminated line
+  # after assigning it — so the last chair silently never stood. Measured: three handles named, two
+  # kahu seated, and the roster still met a majority-of-two threshold, so the reading stayed green
+  # over a quorum missing a third of itself.
+  printf '%s\n' "$LAR_STAND_KAHU" | tr ',' '\n' | while IFS= read -r _handle; do
     [ -z "$_handle" ] && continue
     LAR_PEERS= node packages/lares-cli/dist/src/bin/lares.js persona new "$_i" \
       --name "kahu-$_i" --handle "$_handle" --seat \
