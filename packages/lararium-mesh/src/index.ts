@@ -309,4 +309,5 @@ export * from "./persona-planes.js";
 export * from "./holdings-witness.js";
 export * from "./crossroads-cry.js";
 
-export { rosterStanding, type RosterStanding } from "./roster-standing.js";
+export { rosterStanding, seedFloorVerdict, NEXUS_SEED_FLOOR,
+         type RosterStanding, type SeedFloorVerdict } from "./roster-standing.js";

@@ -41,7 +41,7 @@ import {
 } from "@lararium/mesh";
 import { larSealHome, larDataDir } from "../env.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
-import { rosterStanding } from "@lararium/mesh";
+import { rosterStanding, seedFloorVerdict } from "@lararium/mesh";
 import { emit, exitFor } from "../render.js";
 import type { ParsedArgs } from "../parse-args.js";
 
@@ -542,6 +542,14 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
       "  lares persona new <index> --name '<label>' --handle '<Handle>' --seat",
     );
   }
+
+  // THE SEED FLOOR. Two chairs derive a threshold of two, which is unanimity — the roster locks the
+  // day one seat goes dark, and the rotation that would repair it needs the quorum that just went
+  // dark. That state has no exit, which is why this refuses where `rosterStanding` only names: a
+  // warning is the wrong shape for a trap. It binds the SEED alone, so a chain already standing can
+  // still be re-seated after a loss.
+  const floor = seedFloorVerdict({ seated: seatedKeys.length, isGenesis: !doc.sealLineage?.length });
+  if (!floor.ok) throw new UsageError(floor.why);
 
   // THE THRESHOLD, and where it comes from. A doc that already carries one keeps it; otherwise the seat
   // derives MAJORITY over the roster that stood. Neither a constant in the source nor a silent guess: majority

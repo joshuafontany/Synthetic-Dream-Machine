@@ -20,7 +20,7 @@
  * house of two, and a reading that blocked it would be wrong about somebody's life.
  */
 import { describe, it, expect } from "vitest";
-import { rosterStanding } from "../src/roster-standing.js";
+import { rosterStanding, seedFloorVerdict } from "../src/roster-standing.js";
 
 describe("roster-standing — what the quorum survives", () => {
   it("★ two chairs over a threshold of two survive NOTHING, and say so ★", () => {
@@ -64,5 +64,37 @@ describe("roster-standing — what the quorum survives", () => {
     for (const args of [{ seated: 2, threshold: 2 }, { seated: 3, threshold: 2 }, { seated: 1, threshold: 1 }]) {
       expect(rosterStanding(args).reading.length).toBeGreaterThan(30);
     }
+  });
+});
+
+describe("the seed floor — a Nexus never founds below three chairs", () => {
+  it("★ two chairs REFUSE at genesis, however sound they look ★", () => {
+    // Two seats derive a threshold of two, which is unanimity: the roster locks on its first loss,
+    // and the act that would repair it needs the quorum it just lost. A warning is the wrong shape
+    // for a state with no exit — the seed refuses, and the operator seats a third.
+    const v = seedFloorVerdict({ seated: 2, isGenesis: true });
+    expect(v.ok).toBe(false);
+    expect(v.why).toMatch(/three|3/i);
+  });
+
+  it("★ one chair refuses — a Nexus is not a person ★", () => {
+    expect(seedFloorVerdict({ seated: 1, isGenesis: true }).ok).toBe(false);
+  });
+
+  it("★ three chairs stand — the smallest roster that survives a loss ★", () => {
+    expect(seedFloorVerdict({ seated: 3, isGenesis: true }).ok).toBe(true);
+    expect(seedFloorVerdict({ seated: 7, isGenesis: true }).ok).toBe(true);
+  });
+
+  it("★ the floor binds the SEED, never a roster already standing ★", () => {
+    // A live chain that has lost a kahu is already in trouble; refusing to re-seat it would strand
+    // the operator in exactly the state the floor exists to prevent. The floor guards the founding.
+    expect(seedFloorVerdict({ seated: 2, isGenesis: false }).ok).toBe(true);
+  });
+
+  it("★ the refusal says what to do next, not merely what it refused ★", () => {
+    const v = seedFloorVerdict({ seated: 2, isGenesis: true });
+    expect(v.why).toMatch(/persona new/);
+    expect(v.why.length).toBeGreaterThan(60);
   });
 });
