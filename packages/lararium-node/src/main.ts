@@ -44,14 +44,14 @@ import { faceStands } from "./commands/init.js";
 import { ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 import { deriveMeshSelf } from "./node-caps.js";
 import { startUdsChannel }              from "./uds-channel.js";
-import { rendezvousPath, rendezvousDir, standingPath } from "@lararium/mesh/rendezvous-path";
+import { rendezvousPath, rendezvousDir, standingPath, markerIsOurs } from "@lararium/mesh/rendezvous-path";
 import { mountOracleReadFace }          from "./oracle-read-face.js";
 import { loadVesselSigningSeed, generateOrLoadVesselIdentity } from "./node-vessel-identity.js";
 import { getMempalaceClient }           from "@lararium/mempalace";
 import { larDataDir }                   from "./vessel-paths.js";
 import type { AutomergeUrl }            from "@automerge/automerge-repo";
 import { join } from "path";
-import { mkdirSync, writeFileSync, rmSync } from "fs";
+import { mkdirSync, writeFileSync, rmSync, readFileSync } from "fs";
 import { REPO_ROOT }   from "./node-host.js";
 import { loadLaresConfig } from "./lares-config.js";
 
@@ -108,7 +108,17 @@ function publishStanding(storageDir: string, standing: string, faceLit: boolean)
   try {
     mkdirSync(rendezvousDir(uid), { recursive: true, mode: 0o700 });
     writeFileSync(at, JSON.stringify({ standing, faceLit, pid: process.pid }) + "\n", "utf8");
-    const drop = (): void => { try { rmSync(at, { force: true }); } catch { /* the pid read covers it */ } };
+    // DROP ONLY WHAT IS STILL OURS. The path derives from the ROOT, so a successor standing at the
+    // same root writes this very file — and an unconditional delete on the way out removes the
+    // standing of a vessel that has already replaced us. Measured on the founding rehearsal: the
+    // outgoing daemon's exit landed after the incoming one had published, the next lift read an
+    // absent standing, correctly declined to disturb an unknown state, and left the vessel at the
+    // waking floor with every sovereign act refusing beneath a step that reported success.
+    const drop = (): void => {
+      try {
+        if (markerIsOurs(readFileSync(at, "utf8"), process.pid)) rmSync(at, { force: true });
+      } catch { /* absent or unreadable — nothing of ours to drop */ }
+    };
     process.once("exit", drop);
     process.once("SIGTERM", drop);
     process.once("SIGINT", drop);

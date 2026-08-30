@@ -322,7 +322,16 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # with `crossroads (load) → exit 4`, the daemon counselling `persona new 0` to an operator holding
   # three. The vessel door's own arc names this step; the rehearsal skipped it and the rite could not
   # seed its own corpus.
-  run "the lift — stand again, now that faces stand"  lares vessel stand
+  # THE STEP ASSERTS THE LIFT, NEVER MERELY THE COMMAND. `lares vessel stand` exits 0 whether it
+  # re-stood or attached, so a step reading only the exit code reports `ok` over a floor that stayed
+  # down — which is how ⑤ came to fail beneath a green lift. The verdict rides the payload; read it.
+  step "the lift — the floor actually lifts"
+  if LIFT=$(lares vessel stand --json 2>&1) && printf '%s' "$LIFT" | grep -q '"act":"restand"'; then
+    ok
+  else
+    bad "the standing did not lift"
+    printf '%s\n' "$LIFT" | tail -3 | sed 's/^/      /'
+  fi
   run "⑤ seed --apply"                      lares vessel seed --apply --yes
   # ⑥ ASSERTS BY CONNECTING, never by inspecting. `node status` reads local facts alone — bootstrap
   # present, storage size, port in use — and the label "LIVE" claimed far more than the verb answers. A

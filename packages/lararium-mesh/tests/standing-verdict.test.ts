@@ -15,7 +15,7 @@
  * half-written file into a restart nobody asked for.
  */
 import { describe, it, expect } from "vitest";
-import { standingVerdict } from "../src/rendezvous-path.js";
+import { standingVerdict, markerIsOurs } from "../src/rendezvous-path.js";
 
 /** A marker as a standing vessel publishes one. */
 const marker = (standing: "hearth" | "herm", faceLit: boolean, pid = process.pid) =>
@@ -60,5 +60,27 @@ describe("standing-verdict — attach, or lift off the floor", () => {
     // convert an operator's choice into a fault.
     expect(standingVerdict({ marker: marker("herm", false), faceOnDisk: true, askedHerm: true }).act)
       .toBe("attach");
+  });
+});
+
+describe("the standing marker — a departing vessel drops only its OWN", () => {
+  it("★ a dying vessel must not delete the marker its successor just published ★", () => {
+    // MEASURED on the founding rehearsal, cycle 2. The marker path derives from the ROOT, so two
+    // vessels standing at that root in sequence share one file. The outgoing daemon's exit handler
+    // fired AFTER the incoming one had published, deleting a marker that no longer described it —
+    // and the lift then read an absent standing, correctly refused to disturb the unknown, and left
+    // the vessel at the waking floor with every sovereign act refusing beneath a green step.
+    //
+    // The drop is therefore conditional: a marker naming another live process is not this one's to
+    // remove. Nothing here deletes on a mismatch — an unreadable or foreign marker is left standing,
+    // because a wrong delete is what this exists to prevent.
+    expect(markerIsOurs(JSON.stringify({ standing: "herm", faceLit: false, pid: process.pid }), process.pid)).toBe(true);
+    expect(markerIsOurs(JSON.stringify({ standing: "herm", faceLit: false, pid: process.pid + 1 }), process.pid)).toBe(false);
+  });
+
+  it("★ an unreadable or absent marker is never ours to delete ★", () => {
+    expect(markerIsOurs(null, process.pid)).toBe(false);
+    expect(markerIsOurs("{ not json", process.pid)).toBe(false);
+    expect(markerIsOurs(JSON.stringify({ standing: "herm" }), process.pid)).toBe(false);
   });
 });

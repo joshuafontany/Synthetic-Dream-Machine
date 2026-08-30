@@ -192,11 +192,19 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
   // `attach`, so an older vessel or a crash never becomes a restart nobody asked for. `--observe`
   // withholds it like every other acting half.
   let liftReason: string | null = null;
+  let standingReason: string | null = null;
+  let standingAct: "attach" | "restand" | null = null;
   if (nodeUp && !observeOnly) {
     const verdict = standingVerdict({
       marker:     readStandingMarker(),
       faceOnDisk: existsSync(bootstrap) && faceStandsOnDisk(bootstrap),
     });
+    // THE VERDICT SPEAKS EITHER WAY. A reading that only announces itself when it acts leaves the
+    // common case — attach — indistinguishable from never having read at all. Measured: a rehearsal
+    // step reported `ok` while the floor stayed down, and nothing on screen said whether the door had
+    // decided to attach or had never reached the decision. The reason rides the payload always.
+    standingReason = verdict.reason;
+    standingAct = verdict.act;
     if (verdict.act === "restand") {
       liftReason = verdict.reason;
       console.log(`[lares vessel stand] lifting: ${verdict.reason}`);
@@ -370,6 +378,7 @@ export async function cmdStand(args: ParsedArgs): Promise<number> {
       // A LIFT NAMES ITSELF IN THE RECORD. Killing a daemon and booting another is the largest thing
       // this verb does, so a caller reading the JSON learns it happened and why.
       ...(liftReason !== null ? { lifted: liftReason } : {}),
+      ...(standingAct !== null ? { standing: { act: standingAct, reason: standingReason } } : {}),
       node: { up: nodeUp, started, port, note: nodeNote, cap: observeOnly ? "observe" : "observe+stand" },
       ...(recall !== undefined ? { recall } : {}),
       mempalace: { ok: integration.ok, checks: integration.checks },

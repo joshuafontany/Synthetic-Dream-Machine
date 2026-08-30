@@ -131,3 +131,26 @@ export function standingVerdict(args: {
   }
   return { act: "attach", reason: "the standing still reads as this vessel's own state implies" };
 }
+
+/**
+ * Whether a published standing is this process's to remove.
+ *
+ * THE MARKER PATH DERIVES FROM THE ROOT, so two vessels standing at one root in sequence share a
+ * single file. A departing daemon that deletes unconditionally removes whatever stands there — and a
+ * successor that published while the old one was still shutting down loses its own standing to a
+ * process that no longer describes it.
+ *
+ * Measured on the founding rehearsal: the outgoing daemon's exit handler fired after the incoming
+ * one had published, the lift then read an absent standing, correctly declined to disturb an unknown
+ * state, and left the vessel at the waking floor beneath a step reporting success.
+ *
+ * Only an exact pid match answers true. Absent, unreadable, and foreign all read false — a marker
+ * this process cannot prove is its own stays where it is, because a wrong delete is the whole fault.
+ */
+export function markerIsOurs(marker: string | null, pid: number): boolean {
+  if (marker === null) return false;
+  try {
+    const held = JSON.parse(marker) as { pid?: unknown };
+    return typeof held.pid === "number" && held.pid === pid;
+  } catch { return false; }
+}
