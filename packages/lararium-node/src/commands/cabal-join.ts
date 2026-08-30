@@ -10,16 +10,17 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#/the-standing
  */
 
+import { readFileSync } from "node:fs";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import * as ed from "@noble/ed25519";
 import {
   admitOnLineage, verifiedVouchesFromBoard, vouchBoardDocUrl, materializeSharedLarDoc,
-  leaseEpochPrefix, effectiveLeaseEpoch,
+  leaseEpochPrefix, effectiveLeaseEpoch, DAEMON_BAG_ID,
   DEFAULT_JOIN_POLICY, alphaFromHalfLife, hexToBytes,
   type CabalInvite, type CabalJoinPolicy, type AdmissionDials, type LineageAdmission,
 } from "@lararium/mesh";
-import { larDataDir } from "../vessel-paths.js";
+import { larDataDir, larBootstrapPath } from "../vessel-paths.js";
 import { loadVesselVerifyingKey } from "../node-vessel-identity.js";
 
 const NYM_RE = /^[0-9a-f]{64}$/;
@@ -37,14 +38,33 @@ export class CabalJoinError extends Error {}
  * An absent slot-set reads 0 — a realm that has rolled nothing yet, not an open gate: an invite bound
  * at 0 stands until the first roll, and one bound behind 0 cannot exist.
  */
+/**
+ * The daemon doc's URL, off the social bootstrap this vessel already holds.
+ *
+ * The realm's lease slots live under the daemon bag, so a fence that never opens that doc reads a
+ * genesis epoch for every realm forever. Absent or unreadable reads null, and the caller then prices
+ * against genesis — the honest floor when this vessel cannot see the board at all.
+ */
+export function daemonDocUrlFromBootstrap(): string | null {
+  try {
+    const packed = JSON.parse(readFileSync(larBootstrapPath(), "utf8")) as { text?: string };
+    const tiddlers = (JSON.parse(packed.text ?? "{}") as { tiddlers?: Record<string, { text?: string }> }).tiddlers ?? {};
+    return tiddlers[DAEMON_BAG_ID]?.text ?? null;
+  } catch { return null; }
+}
+
 export function realmLeaseEpoch(doc: unknown, realmDocIdHex: string): number {
-  const tiddlers = (doc as { tiddlers?: Record<string, { text?: unknown }> } | null)?.tiddlers;
+  const tiddlers = (doc as { tiddlers?: Record<string, unknown> } | null)?.tiddlers;
   if (!tiddlers) return 0;
   const prefix = leaseEpochPrefix(realmDocIdHex);
   const slots: string[] = [];
   for (const [title, rec] of Object.entries(tiddlers)) {
     if (!title.startsWith(prefix)) continue;
-    if (typeof rec?.text === "string") slots.push(rec.text);
+    // A LAR RECORD NESTS ITS TIDDLER. `rollLeaseEpochOnBoard` writes `mutableLarRecord`, which carries
+    // `{ tiddler: { text }, meta }` — a reader reaching for `rec.text` finds undefined on every slot,
+    // folds an empty set, and reads epoch 0 forever. The daemon's own lease read takes `.tiddler.text`.
+    const text = (rec as { tiddler?: { text?: unknown } } | undefined)?.tiddler?.text;
+    if (typeof text === "string") slots.push(text);
   }
   return effectiveLeaseEpoch(slots);
 }
@@ -117,9 +137,16 @@ export async function runCabalJoin(
     // THE VERIFYING READ, the only read that stands. An unverified board carries edges whose
     // signatures never cleared, and the fold would price a lineage partly made of noise.
     issued = await verifiedVouchesFromBoard(handle.doc(), realm, verifyOffline);
-    // THE FENCE COMES OFF THE SAME READ. Folding the lease epoch from a second, later look at the
-    // board would price a lineage against a fence that had moved beneath it.
-    boardEpoch = realmLeaseEpoch(handle.doc(), realm);
+    // THE FENCE LIVES ON THE DAEMON DOC, NOT THIS BOARD. `realm-feed` rolls a realm's per-writer lease
+    // slot "over the sovereign daemon doc — one slot per writer under the daemon bag", so a reader
+    // scanning the VOUCH board for that prefix matches nothing and folds epoch 0 forever. Measured: the
+    // fence read this board, every invite compared against 0, and no vouch could ever lapse — a clock
+    // that at least expired, replaced by a fence that never fired.
+    const daemonUrl = daemonDocUrlFromBootstrap();
+    if (daemonUrl) {
+      const dh = await materializeSharedLarDoc(repo, daemonUrl as never, "daemon");
+      boardEpoch = realmLeaseEpoch(dh.doc(), realm);
+    }
   } finally {
     await repo.flush();
   }
