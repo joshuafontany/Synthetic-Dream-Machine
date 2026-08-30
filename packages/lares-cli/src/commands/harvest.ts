@@ -409,6 +409,48 @@ export function repaveStages(): readonly RepaveStage[] {
   ];
 }
 
+/** How a finished re-pave reads: what it did, whether it may be trusted, and what to do about it. */
+export interface RepaveVerdict {
+  readonly ok:    boolean;
+  readonly state: "landed" | "empty" | "barren" | "shrank";
+  readonly why:   string;
+}
+
+/**
+ * Read the verdict off the counts, never off the exit codes.
+ *
+ * EVERY LEG CAN RETURN 0 OVER AN EMPTY SENSORIUM. A sweep that discovered no sources exits clean, a
+ * bearing pass over zero drawers stamps nothing and succeeds, and a projection re-derived from an
+ * empty plane is honestly empty. So a green run proves the legs ran, not that anything landed — and
+ * an instrument answering over an unfed plane reads exactly like one answering over a broken door.
+ *
+ * The distinction that matters is SOURCES: with none, an empty palace is the honest state of a fresh
+ * machine; with a thousand, it is work that silently did not happen.
+ */
+export function repaveVerdict(counts: {
+  readonly sources: number; readonly before: number; readonly after: number;
+}): RepaveVerdict {
+  const { sources, before, after } = counts;
+  const n = (x: number): string => x.toLocaleString("en-US");
+  if (after < before) {
+    return { ok: false, state: "shrank",
+             why: `the palace holds ${n(after)} drawers where it held ${n(before)} — a re-pave that shrinks the corpus `
+                + `has lost what the ${n(sources)} source(s) still carry; the archive is where to compare` };
+  }
+  if (sources === 0) {
+    return { ok: true, state: "empty",
+             why: "no transcript sources stand on this machine — an empty sensorium is the honest reading, not a fault" };
+  }
+  if (after === 0) {
+    return { ok: false, state: "barren",
+             why: `${n(sources)} source(s) stand and no drawer landed — every leg exited clean over an empty palace; `
+                + "check the holder (`lares sense recall <word>`) before trusting any instrument here" };
+  }
+  return { ok: true, state: "landed",
+           why: `${n(after)} drawers over ${n(sources)} source(s)`
+              + (after === before ? " — nothing new landed, which is the idempotent re-run working" : ` (up from ${n(before)})`) };
+}
+
 /** The stages that land nothing and whose absence a later reading cannot recover. */
 export const REPAVE_GUARDS: readonly RepaveStageName[] = ["quiesce", "baseline", "verify", "resume"];
 
@@ -458,7 +500,7 @@ export async function runRepave(
 async function runRepaveLeg(stage: RepaveStageName, args: ParsedArgs): Promise<number> {
   switch (stage) {
     case "quiesce": return await runHooks("pause");
-    case "baseline": return readBaseline(args, "before");
+    case "baseline": return await readBaseline(args, "before");
     case "drawers":
       return await cmdSweep({ ...args, options: { ...args.options, surface: args.options["surface"] ?? "all" } });
     case "bearing": return runWriteback(args, repaveWing(args));
@@ -466,9 +508,36 @@ async function runRepaveLeg(stage: RepaveStageName, args: ParsedArgs): Promise<n
       const { cmdRefresh } = await import("./refresh.js");
       return await cmdRefresh({ ...args, positional: [] });
     }
-    case "verify": return readBaseline(args, "after");
+    case "verify": return await runVerify(args);
     case "resume": return await runHooks("resume");
   }
+}
+
+/**
+ * The rite's verify step — the landed counts read against the sources they came from.
+ *
+ * It reads the CONTENT plane rather than the bearing index, because drawers are what every instrument
+ * downstream answers over. The before-count comes from the baseline this pass already took, so the
+ * comparison is against this run rather than against a remembered number.
+ */
+async function runVerify(args: ParsedArgs): Promise<number> {
+  const wing = repaveWing(args);
+  const before = readBaselineRow(wing, "before");
+  const after = await countDrawers();
+  const sources = countSources();
+
+  const v = repaveVerdict({ sources, before, after });
+  appendBaseline(wing, { when: "after", drawers: after, sources, state: v.state });
+  console.log(`  verify     ${v.state}: ${v.why}`);
+  return v.ok ? 0 : 6;
+}
+
+/** Every AI transcript this machine holds — the denominator the verdict reads against. */
+function countSources(): number {
+  const roots = [join(homedir(), ".claude", "projects"), join(homedir(), ".codex"), join(homedir(), ".copilot")];
+  let n = 0;
+  for (const root of roots) { try { n += walkJsonl(root, () => true).length; } catch { /* absent is zero */ } }
+  return n;
 }
 
 /** Hold or hand back the capture hooks, through the lever that owns the marker. */
@@ -484,15 +553,14 @@ async function runHooks(verb: "pause" | "resume"): Promise<number> {
  * before it. Both readings land in the harvest state home under the wing, so the series survives the
  * pass that produced it.
  */
-function readBaseline(args: ParsedArgs, when: "before" | "after"): number {
+async function readBaseline(args: ParsedArgs, when: "before" | "after"): Promise<number> {
   const wing = repaveWing(args);
-  const at = join(HARVEST_DIR, `${wing}.baseline.ndjson`);
   try {
-    mkdirSync(HARVEST_DIR, { recursive: true });
     const index = join(HARVEST_DIR, `${wing}.ndjson`);
     const bearing = existsSync(index) ? readFileSync(index, "utf8").split("\n").filter(Boolean).length : 0;
-    appendFileSync(at, JSON.stringify({ when, wing, bearing, at: isoWholeSeconds(new Date().toISOString()) }) + "\n", "utf8");
-    console.log(`  baseline   ${when}: ${bearing} bearing row(s) — kept at ${at}`);
+    const drawers = await countDrawers();
+    appendBaseline(wing, { when, bearing, drawers, sources: countSources() });
+    console.log(`  baseline   ${when}: ${drawers} drawer(s) · ${bearing} bearing row(s)`);
     return 0;
   } catch (e) {
     // A BASELINE THAT CANNOT BE WRITTEN MUST NOT PASS QUIETLY. It is the one reading no later pass
@@ -500,6 +568,40 @@ function readBaseline(args: ParsedArgs, when: "before" | "after"): number {
     console.error(`  baseline   ${when}: could not be taken — ${e instanceof Error ? e.message : String(e)}`);
     return 5;
   }
+}
+
+/** The kept comparison series — both readings of a pass, in the state home beside the harvest index. */
+function appendBaseline(wing: string, row: Record<string, unknown>): void {
+  mkdirSync(HARVEST_DIR, { recursive: true });
+  appendFileSync(join(HARVEST_DIR, `${wing}.baseline.ndjson`),
+                 JSON.stringify({ wing, ...row, at: isoWholeSeconds(new Date().toISOString()) }) + "\n", "utf8");
+}
+
+/** This pass's own before-reading — the comparison is against this run, never a remembered number. */
+function readBaselineRow(wing: string, when: "before" | "after"): number {
+  try {
+    const rows = readFileSync(join(HARVEST_DIR, `${wing}.baseline.ndjson`), "utf8")
+      .split("\n").filter(Boolean).map((l) => JSON.parse(l) as Record<string, unknown>);
+    for (let i = rows.length - 1; i >= 0; i--) {
+      if (rows[i]?.["when"] === when) { const d = rows[i]?.["drawers"]; return typeof d === "number" ? d : 0; }
+    }
+  } catch { /* no series yet reads as a fresh start */ }
+  return 0;
+}
+
+/**
+ * The drawers the content plane holds, asked of the daemon that owns it.
+ *
+ * Zero on an unreachable daemon, which the verdict reads as an honest absence rather than a claim —
+ * a count nobody could take is not a count of nothing.
+ */
+async function countDrawers(): Promise<number> {
+  try {
+    let did = ""; try { did = await vesselDid(); } catch { /* the read still routes */ }
+    const out = readVerbOutcome(await runVerb("status", {}, did, { timeoutMs: 120_000 })).output;
+    const total = out["total"] ?? (out["result"] as Record<string, unknown> | undefined)?.["total"];
+    return typeof total === "number" ? total : 0;
+  } catch { return 0; }
 }
 
 export async function cmdHarvest(args: ParsedArgs): Promise<number> {
