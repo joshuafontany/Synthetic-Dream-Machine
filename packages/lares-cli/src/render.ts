@@ -20,6 +20,8 @@
 
 import { stdout } from "node:process";
 import type { ParsedArgs } from "./parse-args.js";
+import { floorCure, faceStandsOnDisk } from "./floor-cure.js";
+import { larBootstrapPath } from "./env.js";
 
 /**
  * Does the actor want machine output? Explicit `--json` wins; `--no-json` forces
@@ -82,7 +84,30 @@ export interface Emission {
  * Project an emission to the reading actor. Renders prose XOR a JSON object; the
  * caller owns the process exit code (commands carry their own code vocabulary).
  */
-export function emit(args: ParsedArgs, e: Emission): void {
+/**
+ * Correct a floor refusal's cure before it renders, wherever the daemon's advice cannot be right.
+ *
+ * ONE CHOKE POINT, ONE NARROW CORRECTION. Every error surfaces through `emit`, and the daemon's
+ * waking-floor counsel — "light a face" — is wrong for the operator who already has three. Only that
+ * refusal is touched, and only when a face actually stands on disk; everything else keeps the
+ * daemon's own words, because a surface that re-worded errors would bury the reading under a guess.
+ *
+ * The disk is read ONLY when the message matches, so an ordinary error costs nothing.
+ */
+function withFloorCure(e: Emission): Emission {
+  const err = typeof e.error === "string" ? { code: "error", message: e.error } : e.error;
+  if (!err?.message) return e;
+  // The disk read costs nothing on an ordinary error: `floorCure` returns null on any message that is
+  // not the floor, so the probe below runs only for the refusal this correction is about.
+  if (floorCure(err.message, { faceOnDisk: true }) === null) return e;
+  let cure: string | null = null;
+  try { cure = floorCure(err.message, { faceOnDisk: faceStandsOnDisk(larBootstrapPath()) }); }
+  catch { return e; }   // a vessel whose bootstrap cannot be read keeps the daemon's own words
+  return cure === null ? e : { ...e, error: { ...err, hint: cure } };
+}
+
+export function emit(args: ParsedArgs, e0: Emission): void {
+  const e = withFloorCure(e0);
   if (!wantsJson(args)) { e.human(); return; }
   const payload: Record<string, unknown> = { ok: e.ok };
   if (e.requestId !== undefined) payload["requestId"] = e.requestId;

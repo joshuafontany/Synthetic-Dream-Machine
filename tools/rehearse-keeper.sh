@@ -315,6 +315,14 @@ while [ "$CYCLE" -lt "$CYCLES" ]; do
   # the boot resolver rather than in another verb here.
   # ⑤ SEEDS, and does not rebirth. Rebirth composes stop · clear · bake · stand · seed, which on a fresh
   # founding tears down what ② built and re-bakes a genesis nothing touched. Only the seeding belongs here.
+  # THE FACES CAME AFTER THE STANDING, SO THE STANDING HAS TO MOVE. ② stood the vessel before any
+  # persona existed, which is a WAKING FLOOR by design — the daemon decided its class from the face it
+  # found, and it found none. Minting three kahu afterward changes the disk and not the running daemon,
+  # so every persona-scoped act below refuses until the vessel stands again. Measured: ⑤ failed here
+  # with `crossroads (load) → exit 4`, the daemon counselling `persona new 0` to an operator holding
+  # three. The vessel door's own arc names this step; the rehearsal skipped it and the rite could not
+  # seed its own corpus.
+  run "the lift — stand again, now that faces stand"  lares vessel stand
   run "⑤ seed --apply"                      lares vessel seed --apply --yes
   # ⑥ ASSERTS BY CONNECTING, never by inspecting. `node status` reads local facts alone — bootstrap
   # present, storage size, port in use — and the label "LIVE" claimed far more than the verb answers. A

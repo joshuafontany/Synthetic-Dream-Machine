@@ -22,6 +22,7 @@ import { existsSync, mkdirSync, openSync, readFileSync, statSync } from "node:fs
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { repoRoot } from "@lararium/mesh/node";
+import { faceStandsOnDisk } from "../floor-cure.js";
 import { standingPath, standingVerdict } from "@lararium/mesh/rendezvous-path";
 import { larRoot, larBootstrapPath, larDataDir, larCasDir, vesselDid } from "../env.js";
 import { udsAlive, reapStaleSocket } from "../local-connector.js";
@@ -97,15 +98,6 @@ function readStandingMarker(): string | null {
   catch { return null; }
 }
 
-/** Whether a PersonaGroup stands in the bootstrap on disk — the same sentinel the daemon reads at boot. */
-function faceStandsOnDisk(bootstrap: string): boolean {
-  try {
-    const packed = JSON.parse(readFileSync(bootstrap, "utf8")) as { text?: string };
-    const inner = JSON.parse(packed.text ?? "{}") as { tiddlers?: Record<string, { text?: string }> };
-    const tiddlers = inner.tiddlers ?? (inner as unknown as Record<string, { text?: string }>);
-    return Object.entries(tiddlers).some(([k, v]) => k.includes("persona-group/doc-id") && Boolean(v?.text));
-  } catch { return false; }
-}
 
 /**
  * Free the port so the lift's next stand boots fresh, and say how it went.
