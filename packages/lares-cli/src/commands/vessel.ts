@@ -43,6 +43,7 @@ import { cmdSeed }     from "./seed.js";
 import { cmdRead, cmdStop } from "./read.js";
 import { cmdRebirth } from "./rebirth.js";
 import { cmdWire } from "./wire.js";
+import { cmdVesselCard } from "./vessel-card.js";
 import {
   cmdBake, cmdStandForeground, cmdStandWithApp, cmdClear, cmdRestart, cmdRiteRebuild, cmdRiteRefresh,
 } from "./scripted.js";
@@ -172,6 +173,9 @@ async function runRite(args: ParsedArgs): Promise<number> {
 /** The door's map. Every entry names a primitive, a read, or the one composed sub-door. */
 const SUBS: Readonly<Record<string, { readonly summary: string; readonly run: Sub }>> = {
   found: { summary: "mint the vessel identity, persona root, social planes and bootstrap (idempotent)", run: (a) => cmdFound(under(a)) },
+  // THE HANDOFF ARTIFACT. A second operator cannot enter a relation with this vessel until she holds
+  // its card; the founding mints one and nothing surfaced it.
+  card: { summary: "print this vessel's ContactCard — the artifact another operator needs to relate to it", run: cmdVesselCard },
   stand: { summary: "bring the daemon up and report — [--foreground] [--with-app] [--restart [--clear]]", run: standVessel },
   // THE ONE VESSEL VERB THAT REACHES OUTSIDE THE ROOT. Standing stays inside `LAR_ROOT`; wiring
   // always touches the operator's home. Two radii, two verbs — a reader sees the reach in the name.
