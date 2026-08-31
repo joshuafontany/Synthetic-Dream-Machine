@@ -78,6 +78,25 @@ describe("realm-standing — one firing is a visit, two opposed firings are belo
     }
   });
 
+  // ── THE COUNT IS THIS REPLICA'S, AND THAT IS NOW MEASURED ─────────────────────────────────────
+  // Walked in docker (`mesh-scenarios.sh realm-crossing`): two CONTRACTED operators fed one realm
+  // through a live relay, and A counted her own two faces and never B's third. The slots ride
+  // `bags/daemon/lease-epoch/`, whose bag URL each vessel reads off its OWN bootstrap, so a peer's
+  // offering never arrives. `unfed` already said "here"; the fed readings implied a complete count.
+  it("★ EVERY reading scopes its count to this replica — a peer's offering never arrives ★", () => {
+    for (const slots of [[], [{ writer: "a", epoch: 1 }],
+                         [{ writer: "a", epoch: 1 }, { writer: "b", epoch: 2 }]]) {
+      expect(realmStanding(slots).reading).toMatch(/this replica|this vessel|\bhere\b/i);
+    }
+  });
+
+  it("★ a fed reading never claims a count across the Nexus ★", () => {
+    const r = realmStanding([{ writer: "a", epoch: 1 }, { writer: "b", epoch: 2 }]);
+    // The word that would manufacture it: a count presented as the realm's, rather than as what
+    // this replica can see. A contracted peer's faces are absent from these slots by construction.
+    expect(r.reading).toMatch(/peer|replica|vessel/i);
+  });
+
   it("★ every reading says what it is, so a visit is never read as a realm ★", () => {
     for (const s of [[], [{ writer: "a", epoch: 1 }], [{ writer: "a", epoch: 1 }, { writer: "b", epoch: 2 }]]) {
       expect(realmStanding(s).reading.length).toBeGreaterThan(30);

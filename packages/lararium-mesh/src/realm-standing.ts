@@ -12,6 +12,16 @@
  * ONE principal's instruments and buys REACH; at and above it `hoʻokipa` binds DISTINCT LOCI OF COST
  * and deposits DEPTH.
  *
+ * ── NOR CAN THEY SEE PAST THIS VESSEL ───────────────────────────────────────────────────────────
+ * The count is a FLOOR, never a total. The slots ride `bags/daemon/lease-epoch/`, and each vessel
+ * reads that bag's URL off its OWN social bootstrap, so a contracted peer's offering rides its own
+ * vessel's slots and never arrives here. Two operators contracted into one Nexus, both feeding one
+ * realm, read only their own faces — walked in `mesh-scenarios.sh realm-crossing`.
+ *
+ * Every reading therefore names its scope. A caller that needs a fact about the realm ACROSS a Nexus
+ * has no instrument here, and none elsewhere either: residency temperature is local for the same
+ * reason one axis over.
+ *
  * ── AND THE SLOTS CANNOT SEE A LOCUS ────────────────────────────────────────────────────────────
  * The constituting condition wants DISTINCT LOCI. The slots carry FACES: the writer rides as the
  * persona-root DID, and the daemon "cannot re-verify from its side that the caller custodies that
@@ -66,14 +76,17 @@ export function realmStanding(slots: readonly RealmFeedSlot[]): RealmStanding {
   }
   if (faces === 1) {
     return { standing: "visit", faces,
-             reading: "ONE face feeds this realm — the founding offering, and a visit rather than a "
-                    + "dwelling. Depth changes nothing here: one hand cannot carry non-aggregative state, "
-                    + "so this reads nominal BY LAW rather than by measurement." };
+             reading: "ONE face feeds this realm on this replica — the founding offering, and a visit "
+                    + "rather than a dwelling. Depth changes nothing here: one hand cannot carry "
+                    + "non-aggregative state, so this reads nominal BY LAW rather than by measurement. A "
+                    + "contracted peer's offering does not appear in these slots at all." };
   }
   return { standing: "many-faces", faces,
-           reading: `${faces} faces feed this realm. Whether they are ${faces} HANDS is not readable from `
-                  + "this side — a human running several of their own faces reads as the Sybil-of-one, which "
-                  + "this plane prices SOCIALLY and never in crypto. The mutual hold that constitutes a realm "
-                  + "wants distinct loci of cost; these slots carry faces, so the count is a fact and the "
-                  + "constitution stays your reading." };
+           reading: `${faces} faces feed this realm ON THIS REPLICA, and the count is a floor rather than a `
+                  + "total: a contracted peer's offering rides its own vessel's slots and never arrives here. "
+                  + `Whether these are ${faces} HANDS is a second thing this side cannot read — a human `
+                  + "running several of their own faces reads as the Sybil-of-one, which this plane prices "
+                  + "SOCIALLY and never in crypto. The mutual hold that constitutes a realm wants distinct "
+                  + "loci of cost; these slots carry faces, so the count is a fact and the constitution "
+                  + "stays your reading." };
 }
