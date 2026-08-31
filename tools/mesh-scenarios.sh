@@ -98,6 +98,7 @@ up_and_answering() {
 # whether a hearth has stood — the boot line every lararium prints.
 stood() { logs_have "[lararium]" "$1"; }
 
+# COVERS: private/seed/unfed
 run_operator() {          # $1 = a|b
   local who="$1" hearth="lararium-$1" browser="browser-$1"
   say "OPERATOR ${who^^} — standing alone, nothing to carry from"
@@ -390,6 +391,7 @@ run_relation() {
   clear_all
 }
 
+# COVERS: private/seed/unfed
 run_nexus() {
   say "NEXUS — every class, carrying"
   clear_all

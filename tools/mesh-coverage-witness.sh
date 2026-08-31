@@ -65,11 +65,20 @@ UNREACHABLE: dict[str, str] = {
        for p in ("private", "open") for r in ("unfed", "visit", "many-faces")},
 }
 
+# A SCENARIO THAT DECLARES NOTHING IS AMBIGUOUS, and the ambiguity is the hazard: a reader cannot
+# tell "walks a cell somebody else already claimed" from "nobody ever wrote the claim". Duplicate
+# claims are fine and expected — several scenarios legitimately walk the same cell from different
+# directions — so this asks only that every scenario SAY which one.
+scenarios = re.findall(r'^run_([a-z_]+)\(\)', text, re.M)
+declared  = re.findall(r'#\s*COVERS:[^\n]*\n(?:#[^\n]*\n)*run_([a-z_]+)\(\)', text, re.M)
+silent    = sorted(set(scenarios) - set(declared))
+
 unknown = sorted(c for c in claims if c not in cells)
 missing = sorted(c for c in cells if c not in claims and c not in UNREACHABLE)
 
 print(f"[mesh-coverage] axes: posture {posture} · phase {phases} · realm {realms}")
-print(f"[mesh-coverage] {len(cells)} reachable cell(s) · {len(claims)} claimed · {len(UNREACHABLE)} declared unreachable")
+print(f"[mesh-coverage] {len(cells)} reachable cell(s) · {len(claims)} claimed · {len(UNREACHABLE)} declared unreachable "
+      f"· {len(scenarios)} scenario(s)")
 for c, why in UNREACHABLE.items():
     print(f"      unreachable {c}: {why}")
 
@@ -80,7 +89,10 @@ if missing:
     print("[mesh-coverage] NO SCENARIO WALKS THESE:")
     for c in missing: print(f"      {c}")
     print("      Add a scenario with `# COVERS: <cell>`, or declare the cell unreachable with its reason.")
-if unknown or missing:
+if silent:
+    print("[mesh-coverage] a scenario DECLARES NO CELL — say which one it walks, even if another scenario shares it:")
+    for s in silent: print(f"      run_{s}")
+if unknown or missing or silent:
     sys.exit(1)
 print("[mesh-coverage] every reachable cell is walked")
 PY
