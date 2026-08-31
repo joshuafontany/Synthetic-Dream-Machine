@@ -82,12 +82,12 @@ export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): st
  *   · anu  ("cold") → "dissolved"  — cooled BECAUSE UNFED; re-warmable, never deleted
  *                                    (#the-realm DISSOLVED-by-cooling), and scoped bilaterally:
  *                                    `carry-contract` reads it "you are out, BETWEEN US".
- *   · anu, cap-trimmed
- *            or cause unknown → "unread" — this vessel stopped holding the substrate. `enforceCap`
- *                                    LRU-trims a bag the moment residents pass `hotCap`, and that
- *                                    trim is blind to how well the realm is fed. Reporting it as a
- *                                    dissolution answers a question about a polity with this
- *                                    vessel's memory budget.
+ *   · anu, RECLAIMED
+ *            or cause unknown → "unread" — this vessel took the memory back and holds no reading.
+ *                                    An LRU trim fires the moment residents pass `hotCap`, and an
+ *                                    evict request arrives from the daemon; both are blind to how
+ *                                    well the realm is fed. Reporting either as a dissolution
+ *                                    answers a question about a polity with a resource decision.
  *   · no reading    → "unread"     — THIS vessel has not synced the substrate.
  *
  * ── WHY ABSENCE TAKES ITS OWN STATE ─────────────────────────────────────────
@@ -116,8 +116,8 @@ export function deriveCabalRealmLiveness(
   // Absence arrives as either shape depending on the reader; the point is the absence, never its spelling.
   if (temp === undefined || temp === null) return "unread";
   if (temp === "wela") return "alive";
-  // Cold. Only an UNFED cooling is a fact about the realm; a cap trim is a fact about this vessel's
-  // memory budget, and a cooling whose cause went unrecorded cannot be told from either.
+  // Cold. Only an UNFED cooling is a fact about the realm; a reclaim is a fact about this vessel's
+  // resources, and a cooling whose cause went unrecorded cannot be told from either.
   return cause === "unfed" ? "dissolved" : "unread";
 }
 

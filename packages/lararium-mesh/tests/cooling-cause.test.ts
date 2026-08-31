@@ -10,9 +10,10 @@
  * tell apart:
  *   · UNFED  — nobody touched it past `idleMs`. Canon-relevant: `carry-contract` has a cabal
  *              "dissolving to `anu` when unfed", scoped bilaterally ("you are out, BETWEEN US").
- *   · CAP    — `enforceCap` LRU-trimmed it because this vessel held more resident bags than
- *              `hotCap`. The sweeper's own note concedes it is "pure-age LRU and so is not
- *              scan-resistant — a one-shot sweep over many bags can evict the genuine working set."
+ *   · RECLAIMED — this vessel took the memory back: `enforceCap` LRU-trimmed it past `hotCap`, or
+ *              the daemon sent an evict request. The sweeper's own note concedes the trim is "pure-age
+ *              LRU and so is not scan-resistant — a one-shot sweep over many bags can evict the
+ *              genuine working set." Neither mechanism can see how well the realm is fed.
  *
  * So a realm a dozen faces are actively feeding reads `dissolved` because THIS vessel's cache filled.
  * No canon supports "a realm dissolves because its holder held too many realms" — that is a memory
@@ -20,9 +21,10 @@
  *
  * ── THE RULE ────────────────────────────────────────────────────────────────────────────────────
  * `one-name-one-relation`: defaulting an absence is correct WITHIN an axis, a fabricated verdict
- * ACROSS one. Cache → polity is across. Cap-cooling therefore reports `unread` — this vessel stopped
- * holding it, and that says nothing about who feeds it — and only UNFED cooling carries the reading
- * canon scopes bilaterally.
+ * ACROSS one. Resources → polity is across. A reclaim therefore reports `unread` — this vessel
+ * stopped holding it, and that says nothing about who feeds it — and only UNFED cooling carries the
+ * reading canon scopes bilaterally. The two causes are named for WHAT THE FACT IS ABOUT, so a new
+ * mechanism that frees memory joins `reclaimed` rather than arriving as a third spelling.
  */
 import { describe, it, expect } from "vitest";
 import { BagStowage } from "../src/bag-residency.js";
@@ -31,8 +33,8 @@ import { deriveCabalRealmLiveness, livenessIsAboutTheRealm } from "../src/cabal-
 const URL_A = "automerge:realmA";
 
 describe("cooling-cause — why a bag went cold decides what may be said about the realm", () => {
-  it("★ a CAP-evicted realm reads `unread`, never `dissolved` — that was my budget, not their silence ★", () => {
-    expect(deriveCabalRealmLiveness("anu", "cap")).toBe("unread");
+  it("★ a RECLAIMED realm reads `unread`, never `dissolved` — that was my budget, not their silence ★", () => {
+    expect(deriveCabalRealmLiveness("anu", "reclaimed")).toBe("unread");
   });
 
   it("★ an UNFED realm still reads `dissolved` — canon's dissolve-by-cooling survives ★", () => {
@@ -40,7 +42,7 @@ describe("cooling-cause — why a bag went cold decides what may be said about t
   });
 
   it("★ warm is alive whatever the cause field says ★", () => {
-    expect(deriveCabalRealmLiveness("wela", "cap")).toBe("alive");
+    expect(deriveCabalRealmLiveness("wela", "reclaimed")).toBe("alive");
     expect(deriveCabalRealmLiveness("wela", null)).toBe("alive");
   });
 
@@ -55,13 +57,21 @@ describe("cooling-cause — why a bag went cold decides what may be said about t
     expect(deriveCabalRealmLiveness("anu")).toBe("unread");
   });
 
-  it("★ the engine RECORDS the cause — an LRU trim is marked `cap` ★", async () => {
+  it("★ the engine RECORDS the cause — an LRU trim is marked `reclaimed` ★", async () => {
     const mgr = new BagStowage({ hotCap: 1 });
     mgr.touch(URL_A);
     mgr.touch("automerge:realmB");   // pushes past hotCap; oldest (A) is LRU-trimmed
     await mgr.sweepOnce();
     expect(mgr.tier(URL_A)).toBe("anu");
-    expect(mgr.cooledBy(URL_A)).toBe("cap");
+    expect(mgr.cooledBy(URL_A)).toBe("reclaimed");
+  });
+
+  it("★ `evict` records a RECLAIM — the name means freeing memory, and the cause follows it ★", async () => {
+    // The daemon's evict-request path runs through here. An administrative evict is a resource act.
+    const mgr = new BagStowage({ hotCap: 8 });
+    await mgr.touch(URL_A);
+    await mgr.evict(URL_A);
+    expect(mgr.cooledBy(URL_A)).toBe("reclaimed");
   });
 
   it("★ an explicit cool is UNFED — the ordinary starve path keeps its meaning ★", async () => {

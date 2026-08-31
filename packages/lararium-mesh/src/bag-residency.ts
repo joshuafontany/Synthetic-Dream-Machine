@@ -53,15 +53,17 @@ export type BagUrl = string;
 export type ResidencyTemperature = "wela" | "anu";
 
 /**
- * WHY a bag went cold. `anu` arrives from two causes that the temperature alone cannot tell apart,
- * and they carry different authority:
- *   · `unfed` — untouched past `idleMs`, or cooled outright. A fact about the bag.
- *   · `cap`   — LRU-trimmed because this vessel held more residents than its cap. A fact about THIS
- *               VESSEL'S BUDGET, and about nothing else.
- * A reader converting temperature into a claim about a polity must consult this first: cap-cooling
- * licenses no such claim (see `deriveCabalRealmLiveness`).
+ * WHY a bag went cold. `anu` arrives from causes the temperature alone cannot tell apart, and the
+ * axis that matters is WHAT THE FACT IS ABOUT — never which mechanism happened to fire:
+ *   · `unfed`     — nobody made an offering: untouched past `idleMs`, or starved outright. A fact
+ *                   about the GRAIN.
+ *   · `reclaimed` — this vessel took the memory back: an LRU cap trim, or an explicit evict request
+ *                   from the daemon. A fact about THIS VESSEL'S RESOURCES, and about nothing else.
+ * A reader converting temperature into a claim about a polity must consult this first — a reclaim
+ * licenses no such claim (see `deriveCabalRealmLiveness`). Both mechanisms that reclaim share one
+ * name because they share the only property a reader may act on.
  */
-export type CoolingCause = "unfed" | "cap";
+export type CoolingCause = "unfed" | "reclaimed";
 
 /**
  * A bag's residency derives from the islands whose recipes reference it: if ANY
@@ -290,9 +292,11 @@ export class BagStowage {
     return true;
   }
 
-  /** Alias for `cool` — drops the handle, cooling a bag to anu. */
-  async evict(url: BagUrl): Promise<boolean> {
-    return this.cool(url);
+  /** Drops the handle, cooling a bag to anu. Named for the RECLAIM it performs, and it records that
+   *  cause: an eviction frees this vessel's memory and says nothing about whether the grain is fed.
+   *  Reach for `cool(url, "unfed")` when the grain genuinely went without an offering. */
+  async evict(url: BagUrl, cause: CoolingCause = "reclaimed"): Promise<boolean> {
+    return this.cool(url, cause);
   }
 
   /** Count of UNPINNED wela (live) grains of a type. Pinned grains are exempt from
@@ -316,7 +320,7 @@ export class BagStowage {
       while (this.residentCount(grainType) > cap) {
         const target = this._oldestWela(grainType);
         if (!target) break;        // every wela grain of this type is pinned or mid-sync
-        const ok = await this.cool(target, "cap");
+        const ok = await this.cool(target, "reclaimed");
         if (!ok) break;            // race or refusal — bail; next sweep retries
       }
     }

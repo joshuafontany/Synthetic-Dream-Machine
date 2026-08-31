@@ -179,7 +179,9 @@ export function makeVesselResidency(
     //    (cool → onEvict → unmountWiki) so the collector stays authoritative — never a direct
     //    unmount that would desync its wela/anu view (and it refuses a pinned grain, correctly).
     //    The daemon's pin/unpin/register-cold ops drive the same collector. ──
-    daemon.onEvictRequest(async (bagId) => { await residency.cool(bagId); });
+    // "reclaimed": an evict request is this vessel freeing memory, never the grain going unfed. A
+    // reader converting temperature into a claim about a polity must not read a resource act as one.
+    daemon.onEvictRequest(async (bagId) => { await residency.cool(bagId, "reclaimed"); });
     daemon.onResidencyOp(async (op, bagId, reason) => {
       if (op === "pin")        await residency.pin(bagId, reason);
       else if (op === "unpin") residency.unpin(bagId);
