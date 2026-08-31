@@ -55,7 +55,21 @@ fi
 # THE SEAL IS FILE-LOCAL, so it lands before the exec below rather than against a running daemon —
 # `seal reserve` and `seal seat` read and write this vessel's own nexus home. A container seats its
 # own founding quorum for the same reason it founds its own identity: nothing in the mesh grants it.
-if [ -n "${LAR_STAND_KAHU:-}" ]; then
+# SEATING IS ONCE, NEVER EVERY BOOT. `seal seat` at genesis RE-DERIVES the genesis epoch, and every
+# carriage entry roots on the epoch that stood when it was signed — so a re-seat on restart mints a new
+# epoch and the fold denies every existing member. Measured: a contracted operator vanished from
+# `members --list` across a plain container restart, with the admit entry still on the board, because
+# the entry's epoch no longer matched the roster's.
+#
+# A vessel that already carries a seated quorum has nothing to seat.
+_already_seated() {
+  node packages/lares-cli/dist/src/bin/lares.js nexus seal show --json 2>/dev/null \
+    | grep -q '"quorumSeated":true'
+}
+
+if [ -n "${LAR_STAND_KAHU:-}" ] && _already_seated; then
+  echo "[boot] a quorum already stands — leaving the charter alone (a re-seat would orphan every member)"
+elif [ -n "${LAR_STAND_KAHU:-}" ]; then
   echo "[boot] seating the founding kahu: ${LAR_STAND_KAHU}"
   _i=0
   # THREE ACTS PER COMMAND, never one: --name labels privately, --handle declares outward, --seat
