@@ -220,6 +220,50 @@ describe("MOVE handler", () => {
 // ---------------------------------------------------------------------------
 
 describe("COPY handler", () => {
+  // ── THE SOURCE IS A CAPABILITY TOO ────────────────────────────────────────────────────────────
+  // Every verb cap-checks its DESTINATION, and MOVE additionally checks its source because it mutates
+  // there. COPY and ADD only READ the source — and reading it still reaches across a bag boundary the
+  // caller may hold nothing on.
+  //
+  // The bag access declines to help: "read and write share the store: the doc carries no read-only
+  // flag — the cap-gate is the authority". The routing layer picks its bag as
+  // `bagUrl ?? toBag ?? dest ?? bag ?? targetBag`, so it names the destination too. With the source
+  // unchecked at both layers, a caller holding admin on a destination names any source and the handler
+  // reads it with its own reach — the caller supplies the path, the deputy performs the read.
+  //
+  // `read` suffices and `admin` would over-tighten: COPY takes a copy and leaves the source as it
+  // stands, so a bag one may read is a bag one may copy from.
+
+  test("★ COPY refuses when the caller holds nothing on the SOURCE ★", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_LOW, "T", "x", "c-1");
+
+    const handler = table.get("COPY")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c-1" };
+    const ctx: VerbContext = {
+      ...makeContext(composite, "COPY", args),
+      cap: denyCap(BAG_LOW),
+    };
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*low/);
+  });
+
+  test("★ ADD refuses when the caller holds nothing on the SOURCE ★", async () => {
+    const composite = makeComposite();
+    const table = new VerbTable();
+    registerActionReactors(table, { composite });
+    await seedTiddler(composite, BAG_LOW, "T", "x", "c-1");
+
+    const handler = table.get("ADD")!;
+    const args = { title: "T", "from-bag": BAG_LOW, "to-bag": BAG_HIGH, "change-id": "c-1" };
+    const ctx: VerbContext = {
+      ...makeContext(composite, "ADD", args),
+      cap: denyCap(BAG_LOW),
+    };
+    await expect(handler(args, ctx)).rejects.toThrow(/cap-denied.*low/);
+  });
+
   test("overwrites destination preserving change-id", async () => {
     const composite = makeComposite();
     const table = new VerbTable();

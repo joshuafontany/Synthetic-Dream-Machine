@@ -426,8 +426,24 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     const destProof = await ctx.cap("admin", destBag);
     if (!destProof.ok) throw new Error(`cap-denied: admin on ${destBag} required (${destProof.reason ?? "no reason"})`);
 
-    // MOVE additionally requires source-bag admin
-    if (action.verb === "MOVE") {
+    // THE SOURCE CARRIES A CAP TOO, and every transfer verb reaches across it. The caller names the
+    // source, and this handler reads it with its own reach across both planes — so an unchecked source
+    // lets a holder of the destination pull titles out of a bag they hold nothing on. The store offers
+    // no second line: read and write share it, and the cap-gate stands as the authority. The routing
+    // layer names the destination as well (`bagUrl ?? toBag ?? dest ?? bag ?? targetBag`), so nothing
+    // upstream covers it either.
+    //
+    // AND THE SOURCE SIDE CARRIES THE HEAVIER HALF, which reads backwards until the direction is
+    // named. A household bag holds the MORE confidential material and a public plane the less, so a
+    // grant outward RELAXES a policy rather than raising one — the act information-flow work calls
+    // declassification, and the authority for it belongs to the principal who owns the source policy,
+    // never to whoever holds the destination. Robust declassification adds the second half: the
+    // DECISION to relax must itself carry integrity, which the destination's own cap supplies.
+    //
+    // So both sides answer at the same grade. A weaker source grade would let a holder of the public
+    // plane originate the crossing by naming a household bag, which is the confused deputy in its
+    // ordinary dress, and publication admits no compensation to fall back on.
+    if (action.verb === "MOVE" || action.verb === "ADD" || action.verb === "COPY") {
       const srcProof = await ctx.cap("admin", action.fromBag);
       if (!srcProof.ok) throw new Error(`cap-denied: admin on ${action.fromBag} required (${srcProof.reason ?? "no reason"})`);
     }
