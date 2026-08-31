@@ -187,6 +187,57 @@ run_quorum() {
 # The reading it proves is the one that must NOT over-claim: one face feeding is a VISIT, and several
 # faces of ONE operator are MANY-FACES rather than a mutual hold — the slots carry faces, and a human
 # running several of their own reads as the Sybil-of-one this plane prices socially.
+# ── THE CROSSING: A RELATION AND A FED REALM AT ONCE ────────────────────────────────────────────
+# EVERY SCENARIO ABOVE WALKS ONE AXIS. This one crosses two, because that is the shape an operator
+# actually stands in: two nodes contracted into a Nexus AND faces feeding a realm. The axes are
+# ORTHOGONAL by canon — "carriage and dwelling run on orthogonal axes; a contracted operator carries
+# sealed traffic and may dwell in no realm at all" — so the crossing must show each reading holding
+# its own value while the other moves.
+#
+# THAT IS THE ASSERTION, not the sum: feeding a realm must not move the phase, and contracting an
+# operator must not move the realm. A harness that only ever walked one axis could not tell an
+# orthogonal pair from a coupled one.
+# COVERS: private/multisig/visit
+run_crossing() {
+  say "CROSSING — a relation and a fed realm, each holding its own reading"
+  clear_all
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+  local REALM; REALM=$(printf 'c%.0s' $(seq 1 64))
+
+  step "both hearths up and answering"
+  if ! LAR_A_PEERS= LAR_B_PEERS= $COMPOSE up -d --no-deps lararium-a lararium-b >/dev/null 2>&1; then
+    bad "up"; return; fi
+  if up_and_answering lararium-a && up_and_answering lararium-b; then ok; else
+    bad "a hearth never answered"; clear_all; return; fi
+
+  step "A feeds a realm — VISIT, while the phase stays SEED"
+  $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1
+  if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"visit"' \
+     && $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
+  else bad "feeding a realm moved the phase, or did not register"; fi
+
+  step "B contracts in — the phase moves, the realm does NOT"
+  local CHARTER ACC NYM SIG
+  CHARTER=$($COMPOSE exec -T lararium-a $LARES nexus seal export --no-json 2>/dev/null)
+  printf '%s' "$CHARTER" | $COMPOSE exec -T lararium-b sh -c 'cat > /tmp/a.mem'
+  $COMPOSE exec -T lararium-b $LARES nexus seal import /tmp/a.mem >/dev/null 2>&1
+  ACC=$($COMPOSE exec -T lararium-b $LARES nexus accept-carriage --json 2>/dev/null)
+  NYM=$(printf '%s' "$ACC" | grep -oE '"nym":"[a-f0-9]{64}"' | head -1 | cut -d'"' -f4)
+  SIG=$(printf '%s' "$ACC" | grep -oE '"contractSig":"[a-f0-9]+"' | head -1 | cut -d'"' -f4)
+  if [ -z "$NYM" ] || [ -z "$SIG" ]; then bad "B minted no contract-in"; clear_all; return; fi
+  $COMPOSE exec -T lararium-a $LARES nexus contract "$NYM" --sig "$SIG" >/dev/null 2>&1
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"isNexus":true' \
+     && $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"visit"'; then ok
+  else bad "the contract moved the realm, or the phase never moved"; fi
+
+  # THE ORTHOGONALITY, STATED AS A REFUSAL TO COUPLE. B carries for A and dwells in no realm — canon's
+  # own example — so B's view of that realm stays UNFED however deep the carriage relation runs.
+  step "B carries and dwells nowhere — her realm reads UNFED"
+  if $COMPOSE exec -T lararium-b $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"'; then ok
+  else bad "B's realm read as fed without B ever feeding"; fi
+  clear_all
+}
+
 # ── THE OPEN POSTURE ────────────────────────────────────────────────────────────────────────────
 # POSTURE IS THE ONE-WAY, LEAST-GATED ACT IN THE DESIGN: `cap-tier` makes loosening a ratchet that
 # runs one way under no-global-now, and nothing but the operator's hand gates the flip. It had never
@@ -389,8 +440,9 @@ case "$WANT" in
   relation)   run_relation ;;
   realm)      run_realm ;;
   open)       run_open ;;
-  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | all)" >&2; exit 2 ;;
+  crossing)   run_crossing ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_crossing; run_nexus ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"
