@@ -67,8 +67,28 @@ _already_seated() {
     | grep -q '"quorumSeated":true'
 }
 
+# WHAT THE SEATED CHARTER ACTUALLY NAMES — so a boot can tell "nothing to do" from "you asked for
+# something else and I am not doing it".
+_seated_handles() {
+  node packages/lares-cli/dist/src/bin/lares.js nexus seal show --json 2>/dev/null \
+    | tr ',' '\n' | sed -n 's/.*"displayName":"\([^"]*\)".*/\1/p' | paste -sd, -
+}
+
 if [ -n "${LAR_STAND_KAHU:-}" ] && _already_seated; then
-  echo "[boot] a quorum already stands — leaving the charter alone (a re-seat would orphan every member)"
+  _seated="$(_seated_handles)"
+  if [ "$_seated" = "$LAR_STAND_KAHU" ]; then
+    echo "[boot] a quorum already stands, naming these same chairs — nothing to seat"
+  else
+    # A SILENT NO-OP IS THE WRONG ANSWER TO A CHANGED CONFIG. The operator edited the chair list and
+    # this boot is deliberately not honouring it, because a re-seat at genesis re-derives the epoch
+    # and orphans every carriage entry rooted on the PRIOR epoch. Changing a SEATED roster is what a
+    # rotation is for — under the standing quorum, against a key-set pre-committed an epoch earlier.
+    echo "[boot] ⚠ the seated charter names: ${_seated}"
+    echo "[boot] ⚠ but LAR_STAND_KAHU asks for: ${LAR_STAND_KAHU}"
+    echo "[boot] ⚠ NOT re-seating — a re-seat re-derives the genesis epoch and orphans every member."
+    echo "[boot] ⚠ To change who holds a STANDING charter, rotate it: \`lares nexus seal rotate\`."
+    echo "[boot] ⚠ To start over instead, burn this vessel's volume and boot fresh."
+  fi
 elif [ -n "${LAR_STAND_KAHU:-}" ]; then
   echo "[boot] seating the founding kahu: ${LAR_STAND_KAHU}"
   _i=0
