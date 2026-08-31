@@ -128,4 +128,13 @@ describe("nexus-identity — the whole fallback chain, one rule for node and lea
     expect(r.scope).toBe(OWN);
     expect(r.shared).toBe(false);
   });
+
+  it("★ a LEAF cannot outrank its anchor, because a leaf holds no charter to outrank it with ★", () => {
+    // Structural, never a policy: seating a charter, contracting an operator, accepting carriage and
+    // flipping a posture all reach the SEAL HOME on disk, and a leaf has none. So a leaf supplies an
+    // anchor and no genesis, and the ordering never gets to decide against it.
+    const r = nexusIdentity({ anchorGateKey: ANCHOR, ownVesselKey: OWN });
+    expect(r.scope).toBe(ANCHOR);
+    expect(r.reading).toMatch(/anchor|crosses into|dials/i);
+  });
 });

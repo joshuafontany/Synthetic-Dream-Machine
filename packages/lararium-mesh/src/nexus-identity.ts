@@ -24,6 +24,17 @@
  * That model covers a fleet and stops at a peer relation: when two sovereign operators contract,
  * neither dials the other, so neither gate key names their island. The charter does.
  *
+ * ── AND A CHARTER CANNOT OUTRANK AN ANCHOR WHERE IT CANNOT EXIST ────────────────────────────────
+ * A charter term ahead of an anchor term looks like it could move a leaf off the board its anchor
+ * stands. It cannot, and the reason is structural rather than chosen: seating a charter, contracting
+ * an operator, accepting carriage and flipping a posture all reach the SEAL HOME on disk, and a leaf
+ * has none. A leaf supplies an anchor and no genesis, so the anchor term wins by construction — the
+ * ordering only ever decides for a vessel that could hold both, which is a vessel that keeps a hearth.
+ *
+ * That is the operator/user seam in one line: an operator KEEPS a hearth and may declare where it
+ * stands; a user WALKS the road and is told which shrine they arrived at. The household lararium
+ * answers to its operator; the crossroads answers to whoever walks the road.
+ *
  * ── THE GENESIS EPOCH IS THAT NAME ──────────────────────────────────────────────────────────────
  * `genesisSealEpochCid` content-addresses the seated key-set and the threshold, so every vessel
  * holding the charter derives the same value from public material, it names no vessel, and it
