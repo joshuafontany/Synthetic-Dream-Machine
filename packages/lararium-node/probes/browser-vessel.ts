@@ -60,6 +60,14 @@ interface Reading {
   readonly secureContext: boolean;
   readonly subtle: boolean;
   readonly ed25519: string;
+  /**
+   * The minted vessel's PUBLIC verifying key, hex — the value a `device-admit` needs.
+   *
+   * A browser vessel that mints and cannot say WHAT it minted leaves the admit unwalkable: the
+   * operator's node has nothing to name. Public material by construction, and the private half never
+   * leaves the page.
+   */
+  readonly verifyingKey: string;
   readonly origin: string;
 }
 
@@ -67,14 +75,20 @@ interface Reading {
 async function readContext(page: Page): Promise<Reading> {
   return await page.evaluate(async () => {
     let ed25519 = "absent";
+    let verifyingKey = "";
     try {
       const k = await crypto.subtle.generateKey({ name: "Ed25519" } as EcKeyGenParams, true, ["sign", "verify"]);
       ed25519 = ((await crypto.subtle.exportKey("jwk", k.publicKey)) as JsonWebKey).crv ?? "unnamed";
+      // THE RAW PUBLIC HALF, so the operator's node can name this vessel in an admit. `raw` is the
+      // 32 Ed25519 bytes; the private half stays in the page and is never exported.
+      const raw = new Uint8Array(await crypto.subtle.exportKey("raw", k.publicKey));
+      verifyingKey = Array.from(raw, (b) => b.toString(16).padStart(2, "0")).join("");
     } catch (e) { ed25519 = `refused: ${(e as Error).message}`; }
     return {
       secureContext: globalThis.isSecureContext === true,
       subtle: typeof globalThis.crypto?.subtle === "object",
       ed25519,
+      verifyingKey,
       origin: location.origin,
     };
   });
@@ -105,6 +119,8 @@ async function main(): Promise<number> {
       console.error(`[browser-vessel:${LABEL}] REFUSED at the floor — this origin cannot mint an identity.`);
       return 1;
     }
+    // THE KEY THE ADMIT NAMES. Printed on its own line so a harness can lift it without parsing prose.
+    console.log(`[browser-vessel:${LABEL}] verifying-key ${r.verifyingKey}`);
     console.log(`[browser-vessel:${LABEL}] stands at the floor, veiled — ready for a PersonaGroup admit.`);
     return 0;
   } finally {

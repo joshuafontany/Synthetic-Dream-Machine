@@ -188,6 +188,60 @@ run_quorum() {
 # The reading it proves is the one that must NOT over-claim: one face feeding is a VISIT, and several
 # faces of ONE operator are MANY-FACES rather than a mutual hold — the slots carry faces, and a human
 # running several of their own reads as the Sybil-of-one this plane prices socially.
+# ── THE LEAF CONTRACT: A BROWSER INTO ITS OPERATOR'S FLEET ──────────────────────────────────────
+# CANON CALLS THIS "named, never walked" — and the pieces are all BUILT: `lares device-admit`,
+# `runDeviceAdmitEdge`, the browser's own `admit-carriage`. Five test files exercise it in process and
+# NO harness had ever walked it across real vessels, which is where every real defect this harness
+# found today has lived: the seam between built pieces, never the pieces.
+#
+# THE ACT IS ONE DELEGATION EDGE, and the leaf mints no root. A browser is a DEVICE of its operator,
+# so this rides the fleet axis — `compose` binding one principal's instruments, which buys REACH and
+# deposits no depth. It is emphatically not a carriage contract and not a realm dwelling.
+# COVERS: private/seed/unfed
+run_leaf() {
+  say "LEAF — a browser vessel admitted into its operator's own fleet"
+  clear_all
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+
+  step "lararium-a + browser-a up"
+  if LAR_A_PEERS= $COMPOSE up -d --no-deps lararium-a browser-a >/dev/null 2>&1; then ok; else bad "up"; return; fi
+
+  step "the hearth stands AND answers"
+  if up_and_answering lararium-a; then ok; else
+    bad "no lararium answering"; $COMPOSE logs lararium-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return; fi
+
+  # THE BROWSER SAYS WHAT IT MINTED. A vessel that mints and cannot name its own key leaves the admit
+  # unwalkable — the operator's node has nothing to point at.
+  step "the browser mints and NAMES its verifying key"
+  local deadline=$((SECONDS + 240)) KEY=""
+  while [ -z "$KEY" ] && [ "$SECONDS" -lt "$deadline" ]; do
+    KEY=$($COMPOSE logs browser-a 2>&1 | grep -oE 'verifying-key [0-9a-f]{64}' | tail -1 | awk '{print $2}')
+    [ -z "$KEY" ] && sleep 3
+  done
+  if [ -n "$KEY" ]; then ok; else
+    bad "the browser named no key"; $COMPOSE logs browser-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return; fi
+
+  step "A admits it — one delegation edge, the leaf minting no root"
+  local OUT
+  # THE PAYLOAD IS THE OUTPUT — `device-admit --json` emits the admit itself, with no `ok` envelope,
+  # because what the operator carries to the joining vessel IS the artifact. A first draft asserted
+  # `"ok":true` and read a successful admit as a refusal.
+  #
+  # And the edge must NAME THIS BROWSER: an admit that verified but bound some other device would
+  # satisfy any check that only asked whether one was produced.
+  OUT=$($COMPOSE exec -T lararium-a $LARES device-admit --as 0 --joinee-key "$KEY" --json 2>/dev/null)
+  if printf '%s' "$OUT" | grep -q 'device-admit/v1' \
+     && printf '%s' "$OUT" | grep -q "$KEY"; then ok; else
+    bad "the admit refused, or bound a different device"; printf '%s\n' "$OUT" | head -3 | sed 's/^/      /'; fi
+
+  # REACH, NEVER DEPTH. A fleet binds one principal's instruments, so admitting a device must not move
+  # the Nexus phase — a browser is not a second operator however many of them an operator runs.
+  step "the phase is UNMOVED — a fleet buys reach, never depth"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
+  else bad "admitting a device moved the Nexus phase"; fi
+  clear_all
+}
+
 # ── OPEN, ACROSS A LIVE RELATION ────────────────────────────────────────────────────────────────
 # THE `open` SCENARIO PROVED POSTURE MOVES NOTHING — against a SEED vessel, where there is no peer to
 # move. That is the weaker half of the claim. Posture governs what the public shelf CARRIES, and a
@@ -497,8 +551,9 @@ case "$WANT" in
   open)       run_open ;;
   crossing)   run_crossing ;;
   open-relation) run_open_relation ;;
-  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_open_relation; run_crossing; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | open-relation | all)" >&2; exit 2 ;;
+  leaf)       run_leaf ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_open_relation; run_leaf; run_crossing; run_nexus ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | open-relation | leaf | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"
