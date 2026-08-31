@@ -684,14 +684,19 @@ run_realm_crossing() {
   # A NEXUS *IS* THE RELATION — "a second OPERATOR is the first relation, and a Nexus IS the relation"
   # — and a relation has two sides. The phase counts the members board (`contracted = members.length`).
   #
-  # TWO CAUSES SAT UNDER ONE SYMPTOM, and the board line below separates them. The ADDRESS was the first:
-  # the board is a shared doc at `carriageDocUrl(<key>)` and the reader took this vessel's OWN key, so A
-  # and B folded different documents. The charter now names its board root and B addresses A's (measured:
-  # one root on both sides, `boardIsOwn=false` on B). The DOC is the second and it stands open: B folds
-  # an EMPTY board at the right address, so an "always-carried" registry is not reaching a member.
+  # AND THE ANSWER IS NOT ON THIS PLANE AT ALL. `contracted` counts the members board, which is the
+  # Kapae-antigen's ALLOW-twin: an IMMUNE surface governing whom THIS vessel blind-transits for. The
+  # immune plane carries no global roster by design — the mesh has no list of devices or users to
+  # approve against, so the daemon reads behaviour it can observe. B folding her own empty board is
+  # therefore CORRECT, and a draft that pointed her at A's board would have let A's future admits
+  # widen B's carriage without her consent.
+  #
+  # A relation between operators is a WHO-plane fact, and the house already has that plane: a signed,
+  # self-certifying card announced on a read-open synced doc — "NEXUS-SCOPED, NEVER GLOBAL", the WHO
+  # plane sibling to the meshpalace FLOW-map's WHERE plane. Until the relation is published there, the
+  # phase reads an immune count and B cannot see the Nexus she stands in.
   # AND B ASKS. The daemon re-folds on its own when carriage re-dials, so an operator who has just
-  # imported a charter would otherwise wait on a reconnect she cannot see. The refresh also OPENS the
-  # named board on the networked repo, which is what lets a board this vessel never held arrive.
+  # imported a charter would otherwise wait on a reconnect she cannot see.
   step "B refreshes — re-read the charter, re-fold the board it names"
   if $COMPOSE exec -T lararium-b $LARES nexus refresh --json >/dev/null 2>&1; then ok
   else bad "B could not refresh"; fi
@@ -705,12 +710,12 @@ run_realm_crossing() {
     printf '      B reads: %s\n' "$(printf '%s' "$BPHASE" | grep -oE '"phase":\{"phase":"[a-z]+"' | head -1)"
     # WHICH BOARD B ADDRESSED, so a failure here separates "wrong address" from "right address, no doc".
     printf '      B board: %s\n' "$($COMPOSE exec -T lararium-b $LARES nexus members --list --json 2>&1 \
-        | grep -oE '"boardRoot":"[a-f0-9]*"|"boardIsOwn":(true|false)|"members":\[[^]]*\]' | tr '\n' ' ')"
+        | grep -oE '"boardRoot":"[a-f0-9]*"|"members":\[[^]]*\]' | tr '\n' ' ')"
     printf '      A board: %s\n' "$($COMPOSE exec -T lararium-a $LARES nexus members --list --json 2>&1 \
-        | grep -oE '"boardRoot":"[a-f0-9]*"|"boardIsOwn":(true|false)|"members":\[[^]]*\]' | tr '\n' ' ')"
-    printf '      the ADDRESS is shared — both vessels name one board root, and B reads boardIsOwn=false.\n'
-    printf '      what is missing is the DOC: B folds an empty board at the right address, so the members\n'
-    printf '      registry does not reach a contracted operator. Wakes when the board is CARRIED to members.\n'
+        | grep -oE '"boardRoot":"[a-f0-9]*"|"members":\[[^]]*\]' | tr '\n' ' ')"
+    printf '      B folding her OWN empty board is correct — the members registry is an immune surface,\n'
+    printf '      and the immune plane carries no global roster. The phase asks a WHO-plane question of it.\n'
+    printf '      Wakes when the relation is announced on the read-open oracle plane and the phase reads THAT.\n'
   fi
 
   step "A feeds her own face — a VISIT on A's side"

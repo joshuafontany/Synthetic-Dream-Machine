@@ -91,11 +91,6 @@ export interface NexusDoc {
    * verify AND its head MUST bind the seated key-set, or the roster reads empty (fail-closed).
    */
   readonly sealLineage?:   readonly SealEpoch[];
-  /**
-   * The verifying key whose carriage doc holds this charter's members board. Public material; a
-   * joining operator reads the board she was admitted onto by this address. See `membersBoardRoot`.
-   */
-  readonly boardRoot?:     string;
   /** The founding kahu, each seated (verifyingKey set) or unseated (null). */
   readonly kahu:            readonly NexusCharterKahu[];
   /**

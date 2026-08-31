@@ -70,52 +70,25 @@ function standHolders(bags: string) {
   return { antigen, membership, peerMap, dispose: () => { antigen.dispose(); membership.dispose(); } };
 }
 
-describe("nexus-refresh — WHICH members board a refresh folds", () => {
+describe("nexus-refresh — the members board is ALWAYS this vessel's own", () => {
   let bags: string;
   let storage: string;
   beforeEach(() => { bags = mkdtempSync(join(tmpdir(), "lares-refresh-bags-")); storage = mkdtempSync(join(tmpdir(), "lares-refresh-store-")); });
   afterEach(async () => { await drainStorageThrottle(); rmSync(bags, { recursive: true, force: true }); rmSync(storage, { recursive: true, force: true }); });
 
-  // ── THE DEFECT THIS CLOSES, MEASURED IN DOCKER ────────────────────────────────────────────────
-  // The members board is a SHARED doc at `carriageDocUrl(<key>)`, and every reader took that key from
-  // this vessel's own identity under a variable named `nexusPubkey` — which `antigen-ring` documents
-  // plainly as "the node's own gate key". So a joining operator folded HER OWN board and read `seed`
-  // after a completed crossing, while the founder read `isNexus`.
+  // ── WHY THIS IS PINNED, AND NOT AN OMISSION ───────────────────────────────────────────────────
+  // The members registry is the Kapae-antigen's ALLOW-twin: it governs the CARRY-SPLIT — whom THIS
+  // vessel blind-transits a sealed plane for. The immune plane holds no global roster by design,
+  // because the mesh has no global list of devices or users to approve against; the daemon reads
+  // BEHAVIOUR it can observe instead.
   //
-  // A charter names the board it governs (`boardRoot`). A refresh folds THAT board, so a vessel that
-  // joined a Nexus folds the registry the relation was written on rather than its own empty one.
+  // So a refresh folds this vessel's OWN board and no other. Folding a partner's would let their
+  // future admits widen this vessel's carriage: an operator consents to a Nexus at ONE epoch, never
+  // to every admit made afterwards, and `nexus-contract` holds that "a Nexus cannot conscript an
+  // operator into carriage". Whether two operators stand in a relation is a WHO-plane question,
+  // answered on the read-open oracle plane where a Handle announces — never on an immune surface.
 
-  const FOREIGN = "f".repeat(64);
-
-  test("★ a charter naming ANOTHER vessel's board folds THAT board, not this vessel's ★", async () => {
-    const keys = await Promise.all(SEEDS.map(pubOf));
-    const holders = standHolders(bags);
-    try {
-      writeNexusDoc(bags, { ...seatedCharter(keys), boardRoot: FOREIGN });
-      const r = await runNexusRefresh({
-        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
-        antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
-      });
-      expect(r.boardRoot).toBe(FOREIGN);
-      expect(r.boardIsOwn).toBe(false);
-    } finally { holders.dispose(); }
-  });
-
-  test("★ a founder's own charter folds her own board, unchanged ★", async () => {
-    const keys = await Promise.all(SEEDS.map(pubOf));
-    const holders = standHolders(bags);
-    try {
-      writeNexusDoc(bags, { ...seatedCharter(keys), boardRoot: NEXUS_PUBKEY });
-      const r = await runNexusRefresh({
-        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
-        antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
-      });
-      expect(r.boardRoot).toBe(NEXUS_PUBKEY.toLowerCase());
-      expect(r.boardIsOwn).toBe(true);
-    } finally { holders.dispose(); }
-  });
-
-  test("★ a charter with NO root recorded folds this vessel's own board — no regression ★", async () => {
+  test("★ a refresh folds THIS vessel's board, and reports which one so no caller assumes ★", async () => {
     const keys = await Promise.all(SEEDS.map(pubOf));
     const holders = standHolders(bags);
     try {
@@ -125,7 +98,21 @@ describe("nexus-refresh — WHICH members board a refresh folds", () => {
         antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
       });
       expect(r.boardRoot).toBe(NEXUS_PUBKEY.toLowerCase());
-      expect(r.boardIsOwn).toBe(true);
+    } finally { holders.dispose(); }
+  });
+
+  test("★ nothing in the charter can redirect it — a partner cannot widen this vessel's carriage ★", async () => {
+    // The charter is material a PARTNER hands over. If anything in it could name the board this
+    // vessel folds, importing a charter would hand its author authority over this vessel's carry-split.
+    const keys = await Promise.all(SEEDS.map(pubOf));
+    const holders = standHolders(bags);
+    try {
+      writeNexusDoc(bags, { ...seatedCharter(keys), boardRoot: "f".repeat(64) } as never);
+      const r = await runNexusRefresh({
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
+        antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
+      });
+      expect(r.boardRoot).toBe(NEXUS_PUBKEY.toLowerCase());
     } finally { holders.dispose(); }
   });
 });

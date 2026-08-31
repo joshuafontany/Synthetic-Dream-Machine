@@ -208,7 +208,7 @@ async function cmdNexusRefresh(args: ParsedArgs): Promise<number> {
       human: () => {
         console.log("nexus refresh — charter re-read, boards re-folded:");
         console.log(`  posture:        ${String(out["posture"] ?? "?")}`);
-        console.log(`  members board:  ${String(out["boardRoot"] ?? "?")}${out["boardIsOwn"] === false ? "  (the Nexus you joined)" : "  (your own)"}`);
+        console.log(`  members board:  ${String(out["boardRoot"] ?? "?")}  (this vessel's own immune surface)`);
         console.log(`  member entries: ${String(out["memberEntries"] ?? 0)} · antigen entries: ${String(out["antigenEntries"] ?? 0)}`);
       },
     });
@@ -289,7 +289,7 @@ async function cmdMembers(args: ParsedArgs): Promise<number> {
         sealEpochCid: r.sealEpochCid || null, threshold: r.threshold,
         // WHOSE board this fold read. A members list is meaningless without it: the board is a shared
         // doc addressed by a key, so the same command on two vessels can fold two different Nexuses.
-        boardRoot: r.boardRoot, boardIsOwn: r.boardIsOwn, boardReading: r.boardReading,
+        boardRoot: r.boardRoot,
         seatedKeys: r.seatedKeys, members: r.members, entries: r.entries,
       },
       human: () => {
@@ -646,21 +646,14 @@ async function sealSeat(args: ParsedArgs): Promise<number> {
     sealEpochCid = genesis.epochCid;
   }
 
-  // THE CHARTER NAMES THE BOARD IT GOVERNS. A joining operator holds this charter before she can
-  // consent, and until it carried an address she read her OWN members board — so a completed crossing
-  // left her reading `seed` while the founder read `isNexus`. The root is public material and sits
-  // outside the epoch CID, so recording it re-founds nothing. See `membersBoardRoot`.
-  const boardRoot = (await loadVesselVerifyingKey(larDataDir())).toLowerCase();
-
-  const nextBase: NexusDoc = sealLineage
+  const next: NexusDoc = sealLineage
     ? { kind: doc.kind, threshold, sealEpochCid, sealLineage, kahu }
     : { kind: doc.kind, threshold, sealEpochCid, kahu };
-  const next: NexusDoc = { ...nextBase, boardRoot };
   // A seat moves TWO joints — the roster it seats and the genesis epoch it establishes — so it writes both
   // narrowly rather than re-emitting the practice dials it never touched.
   writeNexusKahu(sealHome, { threshold: next.threshold, kahu: next.kahu }, next);
   const path = writeNexusSeal(sealHome,
-    sealLineage ? { kind: next.kind, sealEpochCid, sealLineage, boardRoot } : { kind: next.kind, sealEpochCid, boardRoot }, next);
+    sealLineage ? { kind: next.kind, sealEpochCid, sealLineage } : { kind: next.kind, sealEpochCid }, next);
   const quorum = foundingQuorumSeated(next);
   const armed = Boolean(sealLineage) && nextKeyCommit.length > 0;
 
