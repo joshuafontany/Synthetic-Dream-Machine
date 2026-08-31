@@ -682,9 +682,13 @@ run_realm_crossing() {
   else bad "the phase never moved off seed"; fi
 
   # A NEXUS *IS* THE RELATION — "a second OPERATOR is the first relation, and a Nexus IS the relation"
-  # — and a relation has two sides. A reads `isNexus` the moment her members board folds B in, because
-  # the phase counts that board (`contracted = members.length`). Whether B reads the same Nexus is a
-  # different fact, and nothing in the spread had ever asserted it from her side.
+  # — and a relation has two sides. The phase counts the members board (`contracted = members.length`).
+  #
+  # TWO CAUSES SAT UNDER ONE SYMPTOM, and the board line below separates them. The ADDRESS was the first:
+  # the board is a shared doc at `carriageDocUrl(<key>)` and the reader took this vessel's OWN key, so A
+  # and B folded different documents. The charter now names its board root and B addresses A's (measured:
+  # one root on both sides, `boardIsOwn=false` on B). The DOC is the second and it stands open: B folds
+  # an EMPTY board at the right address, so an "always-carried" registry is not reaching a member.
   step "★ does B read the Nexus too? a relation has two sides ★"
   local BPHASE
   BPHASE=$($COMPOSE exec -T lararium-b $LARES nexus seal show --json 2>&1)
@@ -692,8 +696,14 @@ run_realm_crossing() {
   else
     gap "B still reads a SEED — the relation stands in A's board alone"
     printf '      B reads: %s\n' "$(printf '%s' "$BPHASE" | grep -oE '"phase":\{"phase":"[a-z]+"' | head -1)"
-    printf '      `accept-carriage` mints B a contract-in; only A runs `nexus contract`, and only her board folds\n'
-    printf '      wakes when the admit returns a receipt B can fold, so both sides read the relation they are in\n'
+    # WHICH BOARD B ADDRESSED, so a failure here separates "wrong address" from "right address, no doc".
+    printf '      B board: %s\n' "$($COMPOSE exec -T lararium-b $LARES nexus members --list --json 2>&1 \
+        | grep -oE '"boardRoot":"[a-f0-9]*"|"boardIsOwn":(true|false)|"members":\[[^]]*\]' | tr '\n' ' ')"
+    printf '      A board: %s\n' "$($COMPOSE exec -T lararium-a $LARES nexus members --list --json 2>&1 \
+        | grep -oE '"boardRoot":"[a-f0-9]*"|"boardIsOwn":(true|false)|"members":\[[^]]*\]' | tr '\n' ' ')"
+    printf '      the ADDRESS is shared — both vessels name one board root, and B reads boardIsOwn=false.\n'
+    printf '      what is missing is the DOC: B folds an empty board at the right address, so the members\n'
+    printf '      registry does not reach a contracted operator. Wakes when the board is CARRIED to members.\n'
   fi
 
   step "A feeds her own face — a VISIT on A's side"

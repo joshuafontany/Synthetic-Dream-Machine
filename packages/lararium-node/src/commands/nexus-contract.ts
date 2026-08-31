@@ -35,6 +35,7 @@ import {
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
 import { readNexusDoc } from "../nexus-doc.js";
+import { membersBoardRoot } from "@lararium/mesh";
 import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
   loadVesselVerifyingKey,
@@ -231,6 +232,12 @@ export async function runNexusAcceptCarriage(opts: {
 }
 
 export interface NexusMembersListResult {
+  /** The verifying key whose carriage doc this fold read — WHICH Nexus these members belong to. */
+  readonly boardRoot:       string;
+  /** Whether that board is this vessel's own. False when reading a charter this vessel joined. */
+  readonly boardIsOwn:      boolean;
+  /** Whose board this is, so a caller never reads a local fold under a Nexus-scoped name. */
+  readonly boardReading:    string;
   readonly sealEpochCid: string;
   readonly threshold:       number;
   readonly seatedKeys:      number;
@@ -245,13 +252,24 @@ export async function runNexusMembersList(opts: { sealHome: string; storageDir?:
   const storageDir = opts.storageDir ?? larDataDir();
   const roster     = foundingRoster(readNexusDoc(opts.sealHome));
 
-  const nexusPubkey = await loadVesselVerifyingKey(storageDir);
+  // WHOSE BOARD THIS IS. The board is a SHARED doc at `carriageDocUrl(<key>)`, so the key decides
+  // which Nexus is being read. Reading this vessel's own key is right for the operator who FOUNDED
+  // the charter and wrong for every operator she contracts: a joining operator was admitted onto the
+  // FOUNDER's board, so that is where the relation both sides entered is written.
+  const doc   = readNexusDoc(opts.sealHome);
+  const board = membersBoardRoot({
+    charterRoot: doc?.boardRoot ?? null,
+    ownVesselKey: await loadVesselVerifyingKey(storageDir),
+  });
   const repo        = new Repo({ storage: new NodeFSStorageAdapter(storageDir) });
   try {
-    const handle  = await materializeSharedLarDoc(repo, carriageDocUrl(nexusPubkey), "board:members-registry");
+    const handle  = await materializeSharedLarDoc(repo, carriageDocUrl(board.root), "board:members-registry");
     const entries = carriageEntriesFromBoard(handle.doc());
     const folded  = await foldCarriageSet(entries, roster);
     return {
+      boardRoot:       board.root,
+      boardIsOwn:      board.own,
+      boardReading:    board.reading,
       sealEpochCid: roster.sealEpochCid,
       threshold:       roster.threshold,
       seatedKeys:      roster.keys.length,

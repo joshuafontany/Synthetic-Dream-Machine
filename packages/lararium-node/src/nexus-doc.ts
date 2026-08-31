@@ -73,6 +73,13 @@ export interface NexusSealBlock {
   readonly kind:         typeof NEXUS_DOC_DOMAIN;
   readonly sealEpochCid: string | null;
   readonly sealLineage?: readonly SealEpoch[];
+  /**
+   * The verifying key whose carriage doc holds THIS charter's members board. Public material, and it
+   * rides outside the epoch CID (`sealEpochCidOf` covers epoch, keySetHash, nextKeyCommit and
+   * prevEpochCid only), so carrying it re-founds nothing. A joining operator reads the board she was
+   * admitted onto by this address; absent, a reader falls back to its own board and says so.
+   */
+  readonly boardRoot?:   string;
 }
 
 /** The KAHU joint on disk — the founding roster and the quorum it answers at. */
@@ -175,8 +182,14 @@ function composeDoc(seal: unknown, kahu: unknown, practice: unknown): NexusDoc |
   const p = (typeof practice === "object" && practice !== null ? practice : {}) as Record<string, unknown>;
   const posture = p["federationPosture"] === "open" ? ("open" as const) : undefined;
 
+  // The board root reads as opaque text and is validated where it is USED (`membersBoardRoot`), so a
+  // torn value falls back to this vessel's own board rather than closing the doc.
+  const rootRaw = s["boardRoot"];
+  const boardRoot = typeof rootRaw === "string" && rootRaw.trim().length > 0 ? rootRaw.trim().toLowerCase() : undefined;
+
   const base: NexusDoc = { kind: NEXUS_DOC_DOMAIN, threshold: k["threshold"] as number, sealEpochCid, kahu: seats };
-  const withLineage = lineage === undefined ? base : { ...base, sealLineage: lineage };
+  const withRoot    = boardRoot === undefined ? base : { ...base, boardRoot };
+  const withLineage = lineage === undefined ? withRoot : { ...withRoot, sealLineage: lineage };
   return posture === undefined ? withLineage : { ...withLineage, federationPosture: posture };
 }
 
@@ -207,9 +220,10 @@ export function renderNexusDoc(doc: NexusDoc): string {
   const seated = doc.kahu.filter((k) => k.verifyingKey).length;
   const depth  = doc.sealLineage?.length ?? 0;
   const lineageLine = depth > 0 ? ` · pre-rotated lineage: ${depth} epoch(s), head at seq ${depth - 1}` : "";
-  const seal: NexusSealBlock = doc.sealLineage === undefined
+  const sealBase: NexusSealBlock = doc.sealLineage === undefined
     ? { kind: NEXUS_DOC_DOMAIN, sealEpochCid: doc.sealEpochCid }
     : { kind: NEXUS_DOC_DOMAIN, sealEpochCid: doc.sealEpochCid, sealLineage: doc.sealLineage };
+  const seal: NexusSealBlock = doc.boardRoot === undefined ? sealBase : { ...sealBase, boardRoot: doc.boardRoot };
   const kahu: NexusKahuBlock = { threshold: doc.threshold, kahu: doc.kahu };
   const practice: NexusPracticeBlock =
     doc.federationPosture === undefined ? {} : { federationPosture: doc.federationPosture };
