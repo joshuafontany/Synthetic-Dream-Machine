@@ -638,20 +638,25 @@ run_realm_crossing() {
   if $COMPOSE up -d herm-source >/dev/null 2>&1 && up_and_answering herm-source; then ok
   else bad "the relay never answered"; clear_all; return; fi
 
+  # AND THE HEARTHS STAND ONE AT A TIME, which is not tidiness either. `@daemon` is a hearth-private
+  # doc at VESSEL scale, and `SCALE_PATIENCE_MS` grants that scale 3s on the reasoning that "a wider
+  # scale traverses more of the mesh". Patience is therefore graded by DISTANCE while the delay that
+  # actually bites is LOAD — two hearths booting into one relay queue behind each other, and 3s
+  # expires. Measured: lararium-a died `reason: 'resolve-timeout'` on 8 of 8 restarts with the relay
+  # already up and answering, while lararium-b stood. Booting them in sequence removes the mutual
+  # load, and the error text prescribes exactly this — "Stand again; a vessel under load from its
+  # peers commonly resolves on a second reading."
+  #
   # NO peer override: both hearths take the compose default (herm-source) and carry through the relay.
   # This is the only scenario in the file that stands one.
-  step "both hearths up, PEERED through herm-source"
-  if $COMPOSE up -d --no-deps lararium-a lararium-b >/dev/null 2>&1; then ok; else bad "up"; return; fi
+  step "A stands FIRST, alone against the relay"
+  if $COMPOSE up -d --no-deps lararium-a >/dev/null 2>&1 && up_and_answering lararium-a; then ok; else
+    bad "A never stood"; $COMPOSE logs lararium-a 2>&1 | tail -5 | sed 's/^/      /'; clear_all; return
+  fi
 
-  step "both hearths stand AND answer"
-  local deadline=$((SECONDS + 300))
-  while ! { stood lararium-a && stood lararium-b; } && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
-  if up_and_answering lararium-a && up_and_answering lararium-b; then ok; else
-    bad "a hearth never stood"
-    for s in lararium-a lararium-b; do
-      printf '      --- %s\n' "$s"; $COMPOSE logs "$s" 2>&1 | tail -4 | sed 's/^/      /'
-    done
-    clear_all; return
+  step "then B, into a mesh that is already standing"
+  if $COMPOSE up -d --no-deps lararium-b >/dev/null 2>&1 && up_and_answering lararium-b; then ok; else
+    bad "B never stood"; $COMPOSE logs lararium-b 2>&1 | tail -5 | sed 's/^/      /'; clear_all; return
   fi
 
   step "the realm reads UNFED on BOTH sides"
@@ -675,6 +680,21 @@ run_realm_crossing() {
   step "the phase leaves SEED — a Nexus stands over BOTH operators"
   if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"isNexus":true'; then ok
   else bad "the phase never moved off seed"; fi
+
+  # A NEXUS *IS* THE RELATION — "a second OPERATOR is the first relation, and a Nexus IS the relation"
+  # — and a relation has two sides. A reads `isNexus` the moment her members board folds B in, because
+  # the phase counts that board (`contracted = members.length`). Whether B reads the same Nexus is a
+  # different fact, and nothing in the spread had ever asserted it from her side.
+  step "★ does B read the Nexus too? a relation has two sides ★"
+  local BPHASE
+  BPHASE=$($COMPOSE exec -T lararium-b $LARES nexus seal show --json 2>&1)
+  if printf '%s' "$BPHASE" | grep -q '"isNexus":true'; then ok
+  else
+    gap "B still reads a SEED — the relation stands in A's board alone"
+    printf '      B reads: %s\n' "$(printf '%s' "$BPHASE" | grep -oE '"phase":\{"phase":"[a-z]+"' | head -1)"
+    printf '      `accept-carriage` mints B a contract-in; only A runs `nexus contract`, and only her board folds\n'
+    printf '      wakes when the admit returns a receipt B can fold, so both sides read the relation they are in\n'
+  fi
 
   step "A feeds her own face — a VISIT on A's side"
   $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1
