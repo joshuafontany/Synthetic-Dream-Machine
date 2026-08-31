@@ -53,8 +53,12 @@ describe("deriveCabalRealmLiveness — pure read off the residency temperature",
   test("wela → alive (fed, humming)", () => {
     expect(deriveCabalRealmLiveness("wela")).toBe("alive");
   });
-  test("anu → dissolved (cooled, unfed — re-warmable, never deleted)", () => {
-    expect(deriveCabalRealmLiveness("anu")).toBe("dissolved");
+  test("anu + UNFED → dissolved (re-warmable, never deleted)", () => {
+    expect(deriveCabalRealmLiveness("anu", "unfed")).toBe("dissolved");
+  });
+  test("anu with no recorded cause → unread — cold alone cannot convict", () => {
+    // A cap trim and a starve both land on `anu`; only one is about the realm.
+    expect(deriveCabalRealmLiveness("anu")).toBe("unread");
   });
 });
 
@@ -62,8 +66,12 @@ describe("feedCabalRealm — member maintenance warms the substrate (commoning)"
   test("touch heats the substrate to wela → the realm reads alive", async () => {
     const mgr = new BagStowage();
     mgr.registerCold(REALM.substrateUrl);
-    expect(mgr.tier(REALM.substrateUrl)).toBe("anu");           // unfed → cold
-    expect(deriveCabalRealmLiveness(mgr.tier(REALM.substrateUrl)!)).toBe("dissolved");
+    expect(mgr.tier(REALM.substrateUrl)).toBe("anu");           // known, never loaded
+    // `registerCold` with NO cause is the never-synced case: this vessel holds a URL and no reading
+    // behind it, so it reads `unread`. A founding rite passes `"unfed"` here and gets the verdict
+    // that belongs to a realm nobody has fed. Cold alone never carried it; the CAUSE does.
+    expect(deriveCabalRealmLiveness(
+      mgr.tier(REALM.substrateUrl)!, mgr.cooledBy(REALM.substrateUrl))).toBe("unread");
 
     await feedCabalRealm(mgr, REALM);                            // hoʻowela
 
@@ -92,7 +100,7 @@ describe("★ absence of a load is NOT absence of a polity ★", () => {
 
   test("a reading this vessel DOES hold still speaks about the realm", () => {
     expect(deriveCabalRealmLiveness("wela")).toBe("alive");
-    expect(deriveCabalRealmLiveness("anu")).toBe("dissolved");
+    expect(deriveCabalRealmLiveness("anu", "unfed")).toBe("dissolved");
   });
 
   test("★ a caller can tell a verdict from a blind spot ★", () => {

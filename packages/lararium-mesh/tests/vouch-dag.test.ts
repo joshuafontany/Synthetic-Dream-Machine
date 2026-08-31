@@ -21,8 +21,7 @@ const LATER    = "2030-01-01T00:00:00Z";
 
 async function invite(voucherDid: string, joinerIdentityHex: string, signSeed: Uint8Array): Promise<CabalInvite> {
   return signCabalInvite(
-    { realmDocIdHex: "p".repeat(64), joinerIdentityHex, voucherDid, expiresAt: LATER },
-    boundEpoch:        "0",
+    { realmDocIdHex: "p".repeat(64), joinerIdentityHex, voucherDid, expiresAt: LATER, boundEpoch: "0" },
     signer(signSeed),
   );
 }

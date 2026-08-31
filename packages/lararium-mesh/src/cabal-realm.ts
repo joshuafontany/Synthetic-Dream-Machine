@@ -40,7 +40,7 @@
  */
 
 import { leaseEpochSlotUri } from "./epoch-lease.js";
-import type { BagStowage, ResidencyTemperature } from "./bag-residency.js";
+import type { BagStowage, ResidencyTemperature, CoolingCause } from "./bag-residency.js";
 
 /**
  * A cabal-realm — a virtual REALM three primitives co-define:
@@ -79,8 +79,15 @@ export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): st
 /**
  * The realm's liveness, read FROM the residency temperature of its substrate:
  *   · wela ("hot")  → "alive"      — fed, humming.
- *   · anu  ("cold") → "dissolved"  — cooled, unfed; re-warmable, never deleted
- *                                    (#the-realm DISSOLVED-by-cooling).
+ *   · anu  ("cold") → "dissolved"  — cooled BECAUSE UNFED; re-warmable, never deleted
+ *                                    (#the-realm DISSOLVED-by-cooling), and scoped bilaterally:
+ *                                    `carry-contract` reads it "you are out, BETWEEN US".
+ *   · anu, cap-trimmed
+ *            or cause unknown → "unread" — this vessel stopped holding the substrate. `enforceCap`
+ *                                    LRU-trims a bag the moment residents pass `hotCap`, and that
+ *                                    trim is blind to how well the realm is fed. Reporting it as a
+ *                                    dissolution answers a question about a polity with this
+ *                                    vessel's memory budget.
  *   · no reading    → "unread"     — THIS vessel has not synced the substrate.
  *
  * ── WHY ABSENCE TAKES ITS OWN STATE ─────────────────────────────────────────
@@ -102,10 +109,16 @@ export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): st
  */
 export type CabalRealmLiveness = "alive" | "cooling" | "dissolved" | "unread";
 
-export function deriveCabalRealmLiveness(temp: ResidencyTemperature | undefined | null): CabalRealmLiveness {
+export function deriveCabalRealmLiveness(
+  temp:   ResidencyTemperature | undefined | null,
+  cause?: CoolingCause | null,
+): CabalRealmLiveness {
   // Absence arrives as either shape depending on the reader; the point is the absence, never its spelling.
   if (temp === undefined || temp === null) return "unread";
-  return temp === "wela" ? "alive" : "dissolved";
+  if (temp === "wela") return "alive";
+  // Cold. Only an UNFED cooling is a fact about the realm; a cap trim is a fact about this vessel's
+  // memory budget, and a cooling whose cause went unrecorded cannot be told from either.
+  return cause === "unfed" ? "dissolved" : "unread";
 }
 
 /** Whether a liveness reading says anything about the REALM at all — `unread` says only that this

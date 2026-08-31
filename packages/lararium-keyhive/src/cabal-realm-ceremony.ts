@@ -40,6 +40,7 @@
  */
 
 import {
+  DEFAULT_GRAIN_TYPE,
   cabalRealmJoinGate,
   cabalRealmLeaseSlot,
   deriveCabalRealmLiveness,
@@ -92,7 +93,10 @@ export async function foundCabalRealm(
   };
 
   // The substrate begins COLD — it warms only when the members feed it.
-  if (opts.residency) opts.residency.registerCold(substrateUrl);
+  // "unfed", not blindness: the rite KNOWS this substrate was born and that nobody has made the
+  // first offering yet. `first-realm-arc` puts the founding IN that offering, so an unfed realm is
+  // a fact about the realm — never this vessel failing to look.
+  if (opts.residency) opts.residency.registerCold(substrateUrl, DEFAULT_GRAIN_TYPE, "unfed");
 
   // Register this writer's liveness lease slot at genesis epoch 0 (max-register).
   if (opts.leaseWriterId && opts.leaseSlots) {
@@ -204,10 +208,17 @@ export async function dwellersHolding(
  * The absence travels rather than collapsing: a substrate this replica never synced says
  * nothing about whether the polity stands, so answering "dissolved" there would report the
  * vessel's own blindness as the realm's death. The caller receives the gap and decides.
+ *
+ * The COOLING CAUSE travels with the temperature for the same reason. A cold substrate that the
+ * residency cap LRU-trimmed went cold on this vessel's memory budget, not on the realm's neglect,
+ * and only an UNFED cooling carries a reading about the polity.
  */
 export function cabalRealmLiveness(
   residency: BagStowage,
   realm:     CabalRealm,
 ): CabalRealmLiveness {
-  return deriveCabalRealmLiveness(residency.tier(realm.substrateUrl));
+  return deriveCabalRealmLiveness(
+    residency.tier(realm.substrateUrl),
+    residency.cooledBy(realm.substrateUrl),
+  );
 }

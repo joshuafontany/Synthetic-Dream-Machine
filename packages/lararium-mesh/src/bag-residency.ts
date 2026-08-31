@@ -53,6 +53,17 @@ export type BagUrl = string;
 export type ResidencyTemperature = "wela" | "anu";
 
 /**
+ * WHY a bag went cold. `anu` arrives from two causes that the temperature alone cannot tell apart,
+ * and they carry different authority:
+ *   · `unfed` — untouched past `idleMs`, or cooled outright. A fact about the bag.
+ *   · `cap`   — LRU-trimmed because this vessel held more residents than its cap. A fact about THIS
+ *               VESSEL'S BUDGET, and about nothing else.
+ * A reader converting temperature into a claim about a polity must consult this first: cap-cooling
+ * licenses no such claim (see `deriveCabalRealmLiveness`).
+ */
+export type CoolingCause = "unfed" | "cap";
+
+/**
  * A bag's residency derives from the islands whose recipes reference it: if ANY
  * referencing island is `wela`, the bag is `wela`; otherwise `anu`. No
  * referencing island → anu. The collapse rule — bags carry no
@@ -134,6 +145,8 @@ interface ResidencyState {
   /** Transient: set while an async `onEvict` is in flight. A concurrent touch /
    *  sync-start / pin clears it, which aborts the cool (TOCTOU guard). */
   evicting?:   boolean;
+  /** Why this bag is `anu`. Cleared on re-warm, so a live bag never carries a stale cause. */
+  cooledBy?:   CoolingCause;
 }
 
 /**
@@ -231,15 +244,23 @@ export class BagStowage {
     s.temperature = "wela";
     s.lastTouched = Date.now();
     delete s.evicting;            // cancel any in-flight cool — grain is live again
+    delete s.cooledBy;            // a fed bag carries no verdict about why it was once cold
     await this.enforceCap();
   }
 
-  /** Register a URL we know about but haven't loaded. Oracle traversal calls
-   *  this when it sees a `tiddler.text → automerge:URL` pointer for a bag not
-   *  already tracked. No-op if already known (never cools a live grain). */
-  registerCold(url: BagUrl, grainType: string = DEFAULT_GRAIN_TYPE): void {
+  /** Register a URL we know about but haven't loaded. No-op if already known (never cools a live
+   *  grain).
+   *
+   *  `cause` says WHICH cold this is, and the two callers own different facts. Oracle traversal
+   *  passes none: it saw a `tiddler.text → automerge:URL` pointer and holds no reading behind it,
+   *  which is blindness. A founding rite passes `"unfed"`: it knows the grain was born and that
+   *  nobody has made the first offering, which is a fact about the grain. Readers that convert
+   *  temperature into a verdict depend on the difference. */
+  registerCold(url: BagUrl, grainType: string = DEFAULT_GRAIN_TYPE, cause?: CoolingCause): void {
     if (this._bags.has(url)) return;
-    this._bags.set(url, { temperature: "anu", pinned: false, lastTouched: Date.now(), grainType });
+    const s: ResidencyState = { temperature: "anu", pinned: false, lastTouched: Date.now(), grainType };
+    if (cause) s.cooledBy = cause;
+    this._bags.set(url, s);
   }
 
   /** `hoʻoanu` — cool a wela bag to anu (compact-then-drop the handle).
@@ -252,7 +273,7 @@ export class BagStowage {
    *  freshly-live bag (the llama.cpp `unload_lru` race). `onEvict` MUST be
    *  idempotent: if a cool aborts after onEvict ran, the bag stays wela and the
    *  next sweep retries. Returns true only when the bag actually moved to anu. */
-  async cool(url: BagUrl): Promise<boolean> {
+  async cool(url: BagUrl, cause: CoolingCause = "unfed"): Promise<boolean> {
     const s = this._bags.get(url);
     if (!s || s.pinned || s.temperature === "anu" || s.syncActive) return false;
     s.evicting = true;
@@ -263,6 +284,7 @@ export class BagStowage {
       return false;   // raced — a touch / pin / sync-start cleared the intent
     }
     after.temperature = "anu";
+    after.cooledBy = cause;
     delete after.evicting;
     delete after.syncActive;
     return true;
@@ -294,7 +316,7 @@ export class BagStowage {
       while (this.residentCount(grainType) > cap) {
         const target = this._oldestWela(grainType);
         if (!target) break;        // every wela grain of this type is pinned or mid-sync
-        const ok = await this.cool(target);
+        const ok = await this.cool(target, "cap");
         if (!ok) break;            // race or refusal — bail; next sweep retries
       }
     }
@@ -386,6 +408,13 @@ export class BagStowage {
    *  the thermal tier only — use `isPinned()` for the orthogonal pin flag. */
   tier(url: BagUrl): ResidencyTemperature | null {
     return this._bags.get(url)?.temperature ?? null;
+  }
+
+  /** Why a bag is `anu` — `null` when it is warm, unknown, or cooled before the cause was tracked.
+   *  A caller reading liveness off temperature MUST pass this through; `null` means "cannot tell". */
+  cooledBy(url: BagUrl): CoolingCause | null {
+    const s = this._bags.get(url);
+    return s && s.temperature === "anu" ? (s.cooledBy ?? null) : null;
   }
 
   /** The orthogonal pin flag — true if this bag is exempt from cooling. */
