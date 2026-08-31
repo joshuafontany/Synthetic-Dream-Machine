@@ -71,6 +71,22 @@ Ordinary speech fuses these. The model runs them as four distinct acts with four
 
 <<~ ahu #what-the-runbook-lacks >>
 
+!! What a maintenance roll must carry, wherever the ledger sits
+
+A realm's standing rides ''per-writer lease slots'' — one slot per face, the effective epoch the MAX
+over all of them. That shape is why a low roll costs nothing and a high one converges without a
+coordinator, and it decides what a roll must prove.
+
+''A roll binds REALM, WRITER and EPOCH together.'' Each alone is liftable: a roll carried to another
+realm would offer maintenance a face never made, and a roll lifted to a higher number could never be
+undone — ''the max never decreases, so a forged high roll is IRREVERSIBLE''. The property that makes
+the lease safe under no-global-now is exactly what makes forgery unfixable.
+
+Where the slots sit under a vessel's own bag the seal asks nothing the bag did not already answer:
+one hand owns the bag. It becomes load-bearing wherever the ledger is ''shared'' — a doc every dweller
+may write, where a slot uri is guessable and the seal is the only thing tying a roll to its writer. An
+unverifiable slot reads IGNORED: never folded, never fatal.
+
 !! Three stretches the rite does not walk
 
 The runbook stands ''Synthesis-Canon and complete for what it covers''. These sit outside it rather than wrong within it:
@@ -91,6 +107,6 @@ The runbook stands ''Synthesis-Canon and complete for what it covers''. These si
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PJnQxxpUxAhpVbsrS-H_ldq3cYUaXWjUMhMBVgyHfRg
+<<^ code="&#x0003;" >>ni:///sha-256;Qf17vct5qGnv3zNVIXB_Rou2HkW0oTz7vKaoGzUuQKk
 
 <<^ code="&#x0004;" -> to=? >>
