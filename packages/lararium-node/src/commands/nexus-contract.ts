@@ -25,6 +25,8 @@
  * Meme: lar:///ha.ka.ba/lararium/mesh/membership-doctrine#the-operator-contract
  */
 
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { join, dirname } from "node:path";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
@@ -214,6 +216,54 @@ export async function runNexusContract(opts: NexusContractOptions): Promise<Nexu
  * and returns the token hex the kahu supply to `runNexusContract({ contractSig })`. FAIL CLOSED: an unseated charter
  * has no epoch to bind consent to → REFUSE.
  */
+/**
+ * WHERE THIS VESSEL KEEPS ITS OWN CONSENT.
+ *
+ * A relation has two sides and each holds its own evidence. The founding operator's is the admit on
+ * her members board — an immune surface, and hers alone. The joining operator's is the contract-in SHE
+ * signed, so it is kept here: a vessel must be able to tell itself what it has joined without holding
+ * any partner's document.
+ *
+ * BOUND TO AN EPOCH, so it cannot outlive what it consented to. Carriage was accepted under one
+ * charter epoch; a rotation moves the frontier, and a consent rooted behind it names a Nexus whose
+ * terms have changed. The reader compares before it counts, so a stale record grants nothing.
+ */
+export function carriageConsentPath(sealHome: string): string {
+  return join(sealHome, "nexus", "carriage-consent.json");
+}
+
+export interface CarriageConsent {
+  /** The persona-root nym this vessel signed as. */
+  readonly nym:          string;
+  /** The charter epoch the consent binds to — a consent rooted elsewhere does not carry here. */
+  readonly sealEpochCid: string;
+  /** The signature handed to the founding kahu, kept so the act is reconstructible from this side. */
+  readonly contractSig:  string;
+}
+
+/** Read this vessel's kept consent, or null when it has consented to nothing. */
+export function readCarriageConsent(sealHome: string): CarriageConsent | null {
+  try {
+    const raw = JSON.parse(readFileSync(carriageConsentPath(sealHome), "utf8")) as Partial<CarriageConsent>;
+    if (typeof raw.nym !== "string" || typeof raw.sealEpochCid !== "string" || typeof raw.contractSig !== "string") return null;
+    if (raw.nym.length === 0 || raw.sealEpochCid.length === 0) return null;
+    return { nym: raw.nym.toLowerCase(), sealEpochCid: raw.sealEpochCid, contractSig: raw.contractSig };
+  } catch { return null; }
+}
+
+/**
+ * Whether this vessel has CONTRACTED INTO the charter now standing in its seal home.
+ *
+ * True only when a kept consent roots on the epoch that stands: an unseated charter binds nothing, and
+ * a consent behind the current epoch consented to terms that have since moved.
+ */
+export function hasContractedInto(sealHome: string): boolean {
+  const consent = readCarriageConsent(sealHome);
+  if (!consent) return false;
+  const epoch = foundingRoster(readNexusDoc(sealHome)).sealEpochCid;
+  return epoch.length > 0 && epoch === consent.sealEpochCid;
+}
+
 export async function runNexusAcceptCarriage(opts: {
   handleIndex: number; sealHome: string; storageDir?: string;
 }): Promise<{ nym: string; sealEpochCid: string; contractSig: string }> {
@@ -227,7 +277,13 @@ export async function runNexusAcceptCarriage(opts: {
   const sig  = await signCarriageContract(
     nym, roster.sealEpochCid, ed25519SignerFromSeed(await loadPersonaGroupRootSeed(storageDir, opts.handleIndex)),
   );
-  return { nym, sealEpochCid: roster.sealEpochCid, contractSig: sig.sig };
+  // KEEP IT. The signature travels to the founding kahu, and a copy stays here so this vessel can read
+  // its own half of the relation without a partner's document.
+  const consent: CarriageConsent = { nym, sealEpochCid: roster.sealEpochCid, contractSig: sig.sig };
+  mkdirSync(dirname(carriageConsentPath(opts.sealHome)), { recursive: true });
+  writeFileSync(carriageConsentPath(opts.sealHome), JSON.stringify(consent, null, 2), "utf8");
+
+  return consent;
 }
 
 export interface NexusMembersListResult {

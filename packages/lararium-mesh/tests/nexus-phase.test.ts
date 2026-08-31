@@ -70,3 +70,50 @@ describe("nexus-phase — the ladder, read from relations", () => {
     }
   });
 });
+
+describe("nexus-phase — the OTHER half of the relation, read from this vessel's own consent", () => {
+  // ── WHY A JOINING OPERATOR READ `seed` FOREVER ────────────────────────────────────────────────
+  // `contractedOperators` counts operators THIS vessel admitted onto its own members board, which is
+  // an immune surface and rightly local. A joining operator admits nobody, so she counted zero and
+  // read `seed` after a completed crossing — while the founder read `isNexus`.
+  //
+  // A relation has two sides and each holds its own evidence. The founder's is the admit on her board.
+  // The joiner's is HER OWN SIGNED CONSENT: she bound a contract-in to a charter epoch, and that is a
+  // fact about her vessel that no partner's document is needed to read. Canon: "a second OPERATOR is
+  // the first relation, and a Nexus IS the relation"; a relation legible from one side only is not one.
+
+  it("★ a vessel that CONTRACTED IN reads the Nexus, though it admitted nobody ★", () => {
+    const p = nexusPhase({ seatedKeys: 3, contractedOperators: 0, contractedInto: true });
+    expect(p.isNexus).toBe(true);
+    expect(p.phase).toBe("multisig");
+    expect(p.reading).toMatch(/contracted in|consent|joined/i);
+  });
+
+  it("★ and it never claims to know the roster — one side sees its own relation only ★", () => {
+    const p = nexusPhase({ seatedKeys: 3, contractedOperators: 0, contractedInto: true });
+    // Counting the Nexus's operators from here would fabricate: a joiner cannot see who else joined.
+    expect(p.reading).toMatch(/cannot|only|its own|this vessel/i);
+    expect(p.reading).not.toMatch(/\b2 contracted operators\b/);
+  });
+
+  it("★ the founder's reading is unchanged — she admitted one, and that is one relation ★", () => {
+    const p = nexusPhase({ seatedKeys: 3, contractedOperators: 1, contractedInto: false });
+    expect(p.phase).toBe("multisig");
+    expect(p.isNexus).toBe(true);
+  });
+
+  it("★ relations ADD — a vessel that joined one Nexus and admitted another stands at quorum ★", () => {
+    expect(nexusPhase({ seatedKeys: 3, contractedOperators: 1, contractedInto: true }).phase).toBe("quorum");
+  });
+
+  it("★ a lone seed is unmoved — no admit, no consent, no relation ★", () => {
+    const p = nexusPhase({ seatedKeys: 3, contractedOperators: 0, contractedInto: false });
+    expect(p.phase).toBe("seed");
+    expect(p.isNexus).toBe(false);
+  });
+
+  it("★ the flag is OPTIONAL — an omitted consent reads exactly as it did ★", () => {
+    expect(nexusPhase({ seatedKeys: 3, contractedOperators: 0 }).phase).toBe("seed");
+    expect(nexusPhase({ seatedKeys: 3, contractedOperators: 1 }).phase).toBe("multisig");
+  });
+});

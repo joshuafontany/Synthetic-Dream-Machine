@@ -47,6 +47,7 @@ import {
   listPersonaRoots, generateOrLoadPersonaGroupRoot, makeNodePersonaDeclarationStore,
   runNexusKapae, runNexusKapaeList, NexusKapaeError,
   runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
+  hasContractedInto,
   loadVesselVerifyingKey,
   sealReserveMineShare, writeCharterReserveState, readCharterReserveState,
 } from "@lararium/node";
@@ -886,6 +887,8 @@ async function sealShow(args: ParsedArgs): Promise<number> {
   // members read as none, which keeps the phase honest rather than optimistic.
   let contracted = 0;
   try { contracted = (await runNexusMembersList({ sealHome })).members.length; } catch { contracted = 0; }
+  // This vessel's own consent, bound to the epoch that stands — a stale one grants nothing.
+  const joined = hasContractedInto(sealHome);
 
   emit(args, {
     ok: true,
@@ -905,7 +908,10 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       standing: rosterStanding({ seated: roster.keys.length, threshold: roster.threshold }),
       // WHERE THIS VESSEL STANDS ON THE KEEPER LADDER, read from RELATIONS rather than from the seat
       // count — every seated key came from this vault, so no number of them names a second hand.
-      phase: nexusPhase({ seatedKeys: roster.keys.length, contractedOperators: contracted }),
+      // BOTH HALVES OF THE RELATION. `contracted` counts operators THIS vessel admitted; the consent
+      // counts the one it gave. A vessel that joined a Nexus admits nobody and would otherwise read a
+      // seed forever, unable to see the relation it is standing in.
+      phase: nexusPhase({ seatedKeys: roster.keys.length, contractedOperators: contracted, contractedInto: joined }),
       kahu: (doc?.kahu ?? []).map((k) => ({ displayName: k.displayName, seated: Boolean(k.verifyingKey) })),
     },
     human: () => {
@@ -923,7 +929,7 @@ async function sealShow(args: ParsedArgs): Promise<number> {
       console.log(`  quorum:     ${quorum ? "STANDS (roster live)" : "SHORT (fail-closed — antigen inert)"}`);
       // THE PHASE COMES BEFORE THE FRAGILITY. A seed has no quorum to be fragile about, and a reader
       // who meets "quorum: STANDS" without it mistakes three faces of one operator for three hands.
-      const phase = nexusPhase({ seatedKeys: roster.keys.length, contractedOperators: contracted });
+      const phase = nexusPhase({ seatedKeys: roster.keys.length, contractedOperators: contracted, contractedInto: joined });
       console.log(`  ${phase.isNexus ? "phase:     " : "⚠ phase:   "} ${phase.reading}`);
       const standing = rosterStanding({ seated: roster.keys.length, threshold: roster.threshold });
       // A FRAGILE ROSTER EARNS THE LINE; a sound one earns silence. The cure is only available before

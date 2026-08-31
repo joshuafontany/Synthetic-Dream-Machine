@@ -684,39 +684,30 @@ run_realm_crossing() {
   # A NEXUS *IS* THE RELATION — "a second OPERATOR is the first relation, and a Nexus IS the relation"
   # — and a relation has two sides. The phase counts the members board (`contracted = members.length`).
   #
-  # AND THE ANSWER IS NOT ON THIS PLANE AT ALL. `contracted` counts the members board, which is the
-  # Kapae-antigen's ALLOW-twin: an IMMUNE surface governing whom THIS vessel blind-transits for. The
-  # immune plane carries no global roster by design — the mesh has no list of devices or users to
-  # approve against, so the daemon reads behaviour it can observe. B folding her own empty board is
-  # therefore CORRECT, and a draft that pointed her at A's board would have let A's future admits
-  # widen B's carriage without her consent.
+  # A RELATION HAS TWO SIDES, AND EACH HOLDS ITS OWN EVIDENCE. The phase counts operators a vessel
+  # ADMITTED onto its members board — an immune surface, rightly local, and empty forever on a vessel
+  # that joined someone else's Nexus. B's evidence is the contract-in SHE signed: a fact about her own
+  # vessel that needs no partner's document. `accept-carriage` now KEEPS it, bound to the charter epoch
+  # it consented under, so a rotation cannot carry a consent across terms it never read.
   #
-  # A relation between operators is a WHO-plane fact, and the house already has that plane: a signed,
-  # self-certifying card announced on a read-open synced doc — "NEXUS-SCOPED, NEVER GLOBAL", the WHO
-  # plane sibling to the meshpalace FLOW-map's WHERE plane. Until the relation is published there, the
-  # phase reads an immune count and B cannot see the Nexus she stands in.
-  # AND B ASKS. The daemon re-folds on its own when carriage re-dials, so an operator who has just
-  # imported a charter would otherwise wait on a reconnect she cannot see.
-  step "B refreshes — re-read the charter, re-fold the board it names"
-  if $COMPOSE exec -T lararium-b $LARES nexus refresh --json >/dev/null 2>&1; then ok
-  else bad "B could not refresh"; fi
-
+  # A draft chased this the other way — pointing B at A's members board — and that was an AUTHORITY
+  # DEFECT: it would let A's future admits widen B's carriage without her consent.
   step "★ does B read the Nexus too? a relation has two sides ★"
   local BPHASE
   BPHASE=$($COMPOSE exec -T lararium-b $LARES nexus seal show --json 2>&1)
   if printf '%s' "$BPHASE" | grep -q '"isNexus":true'; then ok
   else
-    gap "B still reads a SEED — the relation stands in A's board alone"
+    bad "B still reads a SEED — her own kept consent did not reach the phase"
     printf '      B reads: %s\n' "$(printf '%s' "$BPHASE" | grep -oE '"phase":\{"phase":"[a-z]+"' | head -1)"
-    # WHICH BOARD B ADDRESSED, so a failure here separates "wrong address" from "right address, no doc".
     printf '      B board: %s\n' "$($COMPOSE exec -T lararium-b $LARES nexus members --list --json 2>&1 \
         | grep -oE '"boardRoot":"[a-f0-9]*"|"members":\[[^]]*\]' | tr '\n' ' ')"
-    printf '      A board: %s\n' "$($COMPOSE exec -T lararium-a $LARES nexus members --list --json 2>&1 \
-        | grep -oE '"boardRoot":"[a-f0-9]*"|"members":\[[^]]*\]' | tr '\n' ' ')"
-    printf '      B folding her OWN empty board is correct — the members registry is an immune surface,\n'
-    printf '      and the immune plane carries no global roster. The phase asks a WHO-plane question of it.\n'
-    printf '      Wakes when the relation is announced on the read-open oracle plane and the phase reads THAT.\n'
   fi
+
+  # AND SHE NEVER CLAIMS THE ROSTER. A joiner sees her own relation; how many others joined is not
+  # readable from her side, and a reading that counted them would fabricate what no vessel can see.
+  step "and B's members board stays her OWN and EMPTY — no roster was imported"
+  if $COMPOSE exec -T lararium-b $LARES nexus members --list --json 2>&1 | grep -q '"members":\[\]'; then ok
+  else bad "B's immune surface folded somebody else's admits"; fi
 
   step "A feeds her own face — a VISIT on A's side"
   $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1

@@ -202,7 +202,8 @@ export type { EdgeKapaeOptions, EdgeKapaeResult } from "./commands/edge-kapae-cm
 export type { CabalVouchOptions, CabalVouchResult } from "./commands/cabal-vouch.js";
 export type { CabalJoinOptions, CabalJoinResult } from "./commands/cabal-join.js";
 export { runRaiseSign, readRaiseChallenge, RaiseSignError } from "./commands/raise-sign.js";
-export { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "./commands/nexus-contract.js";
+export { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
+  hasContractedInto, readCarriageConsent, carriageConsentPath, type CarriageConsent } from "./commands/nexus-contract.js";
 export type { NexusContractOptions, NexusContractResult, NexusMembersListResult } from "./commands/nexus-contract.js";
 
 // The traceless BOOT-INVITE burn (Build-2) — mint a sealed single-use invite; decide + spend-on-boot LOCALLY.

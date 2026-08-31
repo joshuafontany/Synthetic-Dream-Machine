@@ -26,7 +26,8 @@ import { hex, genesisSealEpochCid, type NexusDoc } from "@lararium/mesh";
 import { generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot, loadVesselVerifyingKey } from "../src/node-vessel-identity.js";
 import { larDataDir } from "../src/vessel-paths.js";
 import { writeNexusDoc } from "../src/nexus-doc.js";
-import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError } from "../src/commands/nexus-contract.js";
+import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
+  hasContractedInto, readCarriageConsent } from "../src/commands/nexus-contract.js";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
 
 let root: string;
@@ -178,5 +179,71 @@ describe("the members{} ∪ kahu-floor UNION — the sharePolicy member gate (SE
     await holder.refold();
     expect(holder.membership.holdsCarriagePeer("peer-kahu")).toBe(false);   // no charter, no board → nobody member
     holder.dispose();
+  });
+});
+
+describe("accept-carriage — this vessel keeps its own half of the relation", () => {
+  // ── THE DEFECT THIS CLOSES, MEASURED IN DOCKER ────────────────────────────────────────────────
+  // After a completed crossing the founder read `isNexus` and the joining operator read `seed`. The
+  // phase counts operators THIS vessel admitted, which is an immune-surface fact and rightly local,
+  // and a joiner admits nobody. Her evidence is the contract-in SHE signed — and `accept-carriage`
+  // minted that signature, printed it for the founding kahu, and remembered nothing, so her vessel
+  // could not tell itself it had joined anything.
+  //
+  // Canon: "a second OPERATOR is the first relation, and a Nexus IS the relation". A relation legible
+  // from one side only is not one.
+
+  /** Three seated kahu keys from this vessel's own vault — the founding shape every case here needs. */
+  async function threeKeys(): Promise<string[]> {
+    await generateOrLoadVesselIdentity(larDataDir());
+    const roots = await Promise.all([0, 1, 2].map((i) => generateOrLoadPersonaGroupRoot(larDataDir(), i)));
+    return roots.map((r) => r.verifyingKey);
+  }
+
+  it("★ a signed contract-in is KEPT, bound to the epoch it consented under ★", async () => {
+    const keys = await threeKeys();
+    seatCharter(keys);
+    const r = await runNexusAcceptCarriage({ handleIndex: 0, sealHome: sealHome() });
+    const kept = readCarriageConsent(sealHome());
+    expect(kept).not.toBeNull();
+    expect(kept!.nym).toBe(r.nym);
+    expect(kept!.sealEpochCid).toBe(r.sealEpochCid);
+    expect(kept!.contractSig).toBe(r.contractSig);
+  });
+
+  it("★ a vessel that consented reads that it CONTRACTED IN ★", async () => {
+    const keys = await threeKeys();
+    seatCharter(keys);
+    await runNexusAcceptCarriage({ handleIndex: 0, sealHome: sealHome() });
+    expect(hasContractedInto(sealHome())).toBe(true);
+  });
+
+  it("★ a vessel that consented to NOTHING says so ★", async () => {
+    seatCharter(await threeKeys());
+    expect(hasContractedInto(sealHome())).toBe(false);
+    expect(readCarriageConsent(sealHome())).toBeNull();
+  });
+
+  it("★ a consent rooted BEHIND the standing epoch grants nothing — terms have moved ★", async () => {
+    // The load-bearing case. Carriage was accepted under one charter epoch; a rotation moves the
+    // frontier, and a kept consent must not carry a relation across terms it never read.
+    const keys = await threeKeys();
+    seatCharter(keys);
+    await runNexusAcceptCarriage({ handleIndex: 0, sealHome: sealHome() });
+    expect(hasContractedInto(sealHome())).toBe(true);
+
+    seatCharter(keys, 3);                       // a different charter epoch stands
+    expect(hasContractedInto(sealHome())).toBe(false);
+  });
+
+  it("★ an UNSEATED charter carries no consent, however the record reads ★", async () => {
+    const keys = await threeKeys();
+    seatCharter(keys);
+    await runNexusAcceptCarriage({ handleIndex: 0, sealHome: sealHome() });
+    writeNexusDoc(sealHome(), {
+      kind: NEXUS_DOC_DOMAIN, threshold: 2, sealEpochCid: null,
+      kahu: [{ displayName: "Kahu Alpha", verifyingKey: null }],
+    });
+    expect(hasContractedInto(sealHome())).toBe(false);
   });
 });

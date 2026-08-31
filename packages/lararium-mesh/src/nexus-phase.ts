@@ -42,8 +42,20 @@ export interface NexusPhase {
  * never held. That is the only input that can move the phase, because it is the only one that names
  * a hand outside this vault.
  */
-export function nexusPhase(at: { seatedKeys: number; contractedOperators: number }): NexusPhase {
-  if (at.contractedOperators <= 0) {
+export function nexusPhase(
+  at: { seatedKeys: number; contractedOperators: number; contractedInto?: boolean },
+): NexusPhase {
+  // A RELATION HAS TWO SIDES, AND EACH HOLDS ITS OWN EVIDENCE. `contractedOperators` counts operators
+  // this vessel ADMITTED onto its members board — an immune surface, rightly local, and empty forever
+  // on a vessel that joined someone else's Nexus. Her evidence is her OWN SIGNED CONSENT: a contract-in
+  // bound to a charter epoch, a fact about this vessel that needs no partner's document to read.
+  //
+  // So relations ADD from both directions, and neither side's count is the Nexus's roster: a founder
+  // sees whom she admitted, a joiner sees that she joined, and no vessel sees the whole.
+  const joined = at.contractedInto === true;
+  const relations = at.contractedOperators + (joined ? 1 : 0);
+
+  if (relations <= 0) {
     return {
       phase: "seed", isNexus: false,
       reading: at.seatedKeys > 0
@@ -54,16 +66,21 @@ export function nexusPhase(at: { seatedKeys: number; contractedOperators: number
           + "The Nexus begins when a second operator contracts in.",
     };
   }
-  if (at.contractedOperators === 1) {
+  if (relations === 1) {
     return {
       phase: "multisig", isNexus: true,
-      reading: "FOUNDER-MULTISIG — a second operator has contracted in, so the relation stands and the "
-             + "GROUP is root rather than the founding key. This is the Nexus beginning.",
+      reading: joined && at.contractedOperators === 0
+        ? "FOUNDER-MULTISIG — this vessel CONTRACTED IN to a charter it holds, so the relation stands "
+          + "and the GROUP is root rather than the founding key. This side sees only its own consent: "
+          + "how many other operators joined is not readable from here, and this vessel never claims it."
+        : "FOUNDER-MULTISIG — a second operator has contracted in, so the relation stands and the "
+          + "GROUP is root rather than the founding key. This is the Nexus beginning.",
     };
   }
   return {
     phase: "quorum", isNexus: true,
-    reading: `a QUORUM of relations — ${at.contractedOperators} contracted operators, admission and `
-           + "eviction by quorum, and the founding key may vanish without ending it.",
+    reading: `a QUORUM of relations — ${relations} this vessel can see (${at.contractedOperators} admitted`
+           + `${joined ? " plus its own contract-in" : ""}), admission and eviction by quorum, and the `
+           + "founding key may vanish without ending it. The Nexus may hold more; no vessel sees the whole.",
   };
 }
