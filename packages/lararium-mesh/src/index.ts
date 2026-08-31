@@ -316,6 +316,7 @@ export { signerClass, type SignerClass, type SignerReading, type HeldKeys } from
 export { nexusScopeIndex } from "./persona-identity.js";
 export { identityHomeClosure, type IdentityHomeClosure } from "./identity-home-closure.js";
 export { bagCopyPlan, type BagCopyPlan, type TitleAtRest } from "./bag-copy-plan.js";
+export { crossingDirection, type CrossingDirection, type CrossingCost } from "./crossing-direction.js";
 export { sealImportVerdict, foreignSeats,
          type SealImportVerdict, type ForeignSeatVerdict, type CharterChair } from "./seal-import.js";
 export { realmStanding, type RealmStanding, type RealmStandingName, type RealmFeedSlot } from "./realm-standing.js";

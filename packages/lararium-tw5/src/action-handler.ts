@@ -440,12 +440,23 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     // never to whoever holds the destination. Robust declassification adds the second half: the
     // DECISION to relax must itself carry integrity, which the destination's own cap supplies.
     //
-    // So both sides answer at the same grade. A weaker source grade would let a holder of the public
-    // plane originate the crossing by naming a household bag, which is the confused deputy in its
-    // ordinary dress, and publication admits no compensation to fall back on.
+    // AND THE PRICE FOLLOWS THE DIRECTION, which this gate cannot yet read. A copy INWARD — a public
+    // tiddler shadowed into a more private bag — raises confinement and reaches fewer readers than the
+    // original: the recipe stack runs on that shape and it stays cheap. A copy OUTWARD relaxes
+    // confinement with no return crossing, and belongs to the kahu-cabal signers.
+    //
+    // Grading both directions alike would refuse the shadow copy, so the source answers at READ here:
+    // strictly more than the nothing it answered before, and no cost on the path a user depends on.
+    // MOVE keeps ADMIN because it tombstones the title where it stood, which mutates the source
+    // whichever way the copy runs.
+    //
+    // `crossingDirection` carries the full rule and this gate cannot reach it: telling the directions
+    // apart wants each bag's publicity tier, and no reader for that stands here yet. Until one does,
+    // an OUTWARD crossing passes on a read cap alone.
     if (action.verb === "MOVE" || action.verb === "ADD" || action.verb === "COPY") {
-      const srcProof = await ctx.cap("admin", action.fromBag);
-      if (!srcProof.ok) throw new Error(`cap-denied: admin on ${action.fromBag} required (${srcProof.reason ?? "no reason"})`);
+      const grade: "read" | "admin" = action.verb === "MOVE" ? "admin" : "read";
+      const srcProof = await ctx.cap(grade, action.fromBag);
+      if (!srcProof.ok) throw new Error(`cap-denied: ${grade} on ${action.fromBag} required (${srcProof.reason ?? "no reason"})`);
     }
 
     // Resolve each bag's store by ACCESS — the daemon mounts nothing, it reaches
