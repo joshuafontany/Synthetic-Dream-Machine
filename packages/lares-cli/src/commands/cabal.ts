@@ -30,6 +30,7 @@
  * generate identically, so the reading names a local sighting and never a total.
  */
 
+import { realmStanding } from "@lararium/mesh";
 import { runCabalVouch, CabalVouchError, runCabalJoin, CabalJoinError, loadPersonaGroupRootVerifyingKey, listPersonaRoots } from "@lararium/node";
 import type { ParsedArgs } from "../parse-args.js";
 import { larDataDir, vesselDid } from "../env.js";
@@ -138,9 +139,14 @@ async function cmdClock(args: ParsedArgs): Promise<number> {
     const out = await realmVerb("realm-clock", { realm });
     const maintainers = Array.isArray(out["maintainers"])
       ? (out["maintainers"] as Array<{ writerId: string; epoch: number }>) : [];
+    // THE STANDING SITS BESIDE THE CLOCK, NEVER INSIDE IT. The clock stays verdict-free by
+    // construction — a verdict baked into that read would become the captured object. This is a
+    // separate reading over the same slots, and it says only what the model constitutes: one locus
+    // feeding is a VISIT, two opposed firings are BELONGING. It decides nothing about capture.
+    const standing = realmStanding(maintainers.map((m) => ({ writer: m.writerId, epoch: m.epoch })));
     emit(args, {
       ok: true,
-      data: out,
+      data: { ...out, standing },
       human: () => {
         console.log(`realm ${realm}`);
         if (maintainers.length === 0) {
@@ -150,7 +156,8 @@ async function cmdClock(args: ParsedArgs): Promise<number> {
         console.log(`  maintainers: ${out["maintainerCount"]}   effective epoch: ${out["effectiveEpoch"]}`);
         console.log(`  spread:      ${out["spread"]} (leaders ${out["leadingCount"]} at the edge, trailing at ${out["trailingEpoch"]})`);
         for (const m of maintainers) console.log(`    ${String(m.epoch).padStart(6)}  ${m.writerId}`);
-        console.log("  no verdict rides here — what these numbers mean stays your calibration.");
+        console.log(`  standing:    ${standing.standing.toUpperCase()} — ${standing.reading}`);
+        console.log("  no CAPTURE verdict rides here — what these numbers mean stays your calibration.");
       },
     });
     return 0;
