@@ -140,9 +140,12 @@ async function cmdClock(args: ParsedArgs): Promise<number> {
     const maintainers = Array.isArray(out["maintainers"])
       ? (out["maintainers"] as Array<{ writerId: string; epoch: number }>) : [];
     // THE STANDING SITS BESIDE THE CLOCK, NEVER INSIDE IT. The clock stays verdict-free by
-    // construction — a verdict baked into that read would become the captured object. This is a
-    // separate reading over the same slots, and it says only what the model constitutes: one locus
-    // feeding is a VISIT, two opposed firings are BELONGING. It decides nothing about capture.
+    // construction — a verdict baked into that read would become the captured object.
+    //
+    // AND IT STOPS WHERE THE DATA STOPS. The slots carry FACES, not loci: a human feeding from
+    // several of their own faces reads as the Sybil-of-one, which this plane prices socially and
+    // never in crypto. So this names one face as a VISIT and several as MANY-FACES, and never
+    // converts a face count into the mutual hold that constitutes a realm.
     const standing = realmStanding(maintainers.map((m) => ({ writer: m.writerId, epoch: m.epoch })));
     emit(args, {
       ok: true,

@@ -1,5 +1,5 @@
 /**
- * realm-standing — whether a realm has been visited or is dwelt in, read off who feeds it.
+ * realm-standing — what the feed slots can honestly say, and where the claim stops.
  *
  * ── A REALM IS CONSTITUTED, NEVER CREATED ───────────────────────────────────────────────────────
  * A realm mints no DID and hosts on no machine; nothing stands to create. It begins when someone
@@ -12,10 +12,20 @@
  * ONE principal's instruments and buys REACH; at and above it `hoʻokipa` binds DISTINCT LOCI OF COST
  * and deposits DEPTH.
  *
- * THEREFORE THIS COUNTS LOCI, NEVER FEEDS. One face feeding a hundred times has visited a hundred
- * times: a fleet reads nominal BY LAW rather than by measurement, because one locus of cost cannot
- * carry non-aggregative state however deep it rolls. That zero reports which side of the seam a thing
- * sits on and never a weakness to cure.
+ * ── AND THE SLOTS CANNOT SEE A LOCUS ────────────────────────────────────────────────────────────
+ * The constituting condition wants DISTINCT LOCI. The slots carry FACES: the writer rides as the
+ * persona-root DID, and the daemon "cannot re-verify from its side that the caller custodies that
+ * root" — so "a human running several of their own faces at one realm reads as the Sybil-of-one the
+ * plane already prices SOCIALLY, never in crypto."
+ *
+ * SO A FACE COUNT IS NOT A LOCUS COUNT, and this must not convert one into the other. Several faces
+ * feeding is a fact; whether they are several hands is a reading this side cannot make. Calling it
+ * "belonging" would manufacture the reciprocity the morphology requires be earned — the same
+ * fake reciprocity the model's own Sybil definition names when one hand sits at both ends.
+ *
+ * What DOES hold either way: one face feeding a hundred times has visited a hundred times. Depth
+ * never becomes a second hand, and that zero reports which side of the seam a thing sits on rather
+ * than a weakness to cure.
  *
  * ── AND IT SITS BESIDE THE CLOCK, NEVER INSIDE IT ───────────────────────────────────────────────
  * `realm-clock` stays verdict-free by construction: it reports who feeds and how deep so a human can
@@ -31,12 +41,15 @@ export interface RealmFeedSlot {
   readonly epoch:  number;
 }
 
-export type RealmStandingName = "unfed" | "visit" | "belonging";
+export type RealmStandingName = "unfed" | "visit" | "many-faces";
 
 export interface RealmStanding {
   readonly standing: RealmStandingName;
-  /** DISTINCT loci of cost that have actually fed — never a count of offerings. */
-  readonly loci:     number;
+  /**
+   * DISTINCT FACES that have actually fed — never a count of offerings, and never a count of HANDS.
+   * The slots cannot distinguish one human's several faces from several humans.
+   */
+  readonly faces:    number;
   readonly reading:  string;
 }
 
@@ -44,21 +57,23 @@ export function realmStanding(slots: readonly RealmFeedSlot[]): RealmStanding {
   // A SLOT AT ZERO IS NO OFFERING. A writer may hold a slot without ever having rolled it, and a
   // hand that has not fed has not visited.
   const fed = new Set(slots.filter((s) => s.epoch > 0).map((s) => s.writer.toLowerCase()));
-  const loci = fed.size;
+  const faces = fed.size;
 
-  if (loci === 0) {
-    return { standing: "unfed", loci,
+  if (faces === 0) {
+    return { standing: "unfed", faces,
              reading: "nobody feeds this realm here — which reads the same as a realm this replica has "
                     + "never synced, and the model offers no way to tell those apart from one side." };
   }
-  if (loci === 1) {
-    return { standing: "visit", loci,
-             reading: "ONE locus of cost feeds this realm — the founding offering, and a visit rather than "
-                    + "a dwelling. Depth changes nothing here: one hand cannot carry non-aggregative state, "
-                    + "so this reads nominal BY LAW rather than by measurement. A second locus feeding is "
-                    + "what constitutes the realm." };
+  if (faces === 1) {
+    return { standing: "visit", faces,
+             reading: "ONE face feeds this realm — the founding offering, and a visit rather than a "
+                    + "dwelling. Depth changes nothing here: one hand cannot carry non-aggregative state, "
+                    + "so this reads nominal BY LAW rather than by measurement." };
   }
-  return { standing: "belonging", loci,
-           reading: `${loci} distinct loci of cost feed this realm — opposed firings, so the mutual hold `
-                  + "stands and the realm is constituted. Depth sediments from here; it does not gate this." };
+  return { standing: "many-faces", faces,
+           reading: `${faces} faces feed this realm. Whether they are ${faces} HANDS is not readable from `
+                  + "this side — a human running several of their own faces reads as the Sybil-of-one, which "
+                  + "this plane prices SOCIALLY and never in crypto. The mutual hold that constitutes a realm "
+                  + "wants distinct loci of cost; these slots carry faces, so the count is a fact and the "
+                  + "constitution stays your reading." };
 }

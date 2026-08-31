@@ -1,5 +1,5 @@
 /**
- * realm-standing — a visit, or belonging, read off who actually feeds.
+ * realm-standing — what the FEED SLOTS can honestly say, and where the claim stops.
  *
  * ── THE TWO RULINGS THIS SITS BETWEEN ───────────────────────────────────────────────────────────
  * `first-realm-arc`: "A realm mints no DID and hosts on no machine; nothing stands to create. It
@@ -12,10 +12,15 @@
  * below the living human `compose` binds one principal's instruments and buys REACH; at and above it
  * `hoʻokipa` binds DISTINCT LOCI OF COST and deposits DEPTH.
  *
- * ── SO THE READING IS A COUNT OF LOCI, NEVER OF FEEDS ───────────────────────────────────────────
- * One face feeding a hundred times has visited a hundred times and constituted nothing: a fleet reads
- * "nominal BY LAW rather than by measurement", because one locus of cost cannot carry non-aggregative
- * state. Two distinct loci, each having fed, are the mutual hold.
+ * ── AND THE SLOTS CANNOT SEE A LOCUS ────────────────────────────────────────────────────────────
+ * The constituting condition wants DISTINCT LOCI OF COST. The slots carry FACES: "the writer rides as
+ * the persona-root DID — a FACE feeds a realm, not a device". And the daemon "cannot re-verify from
+ * its side that the caller custodies that root", so "a human running several of their own faces at one
+ * realm reads as the Sybil-of-one the plane already prices SOCIALLY, never in crypto."
+ *
+ * So a face count is not a locus count, and this reading MUST NOT convert one into the other. Several
+ * faces feeding is a fact; whether they are several hands is a reading this side cannot make. Naming
+ * it "belonging" would manufacture the reciprocity the morphology requires be earned.
  *
  * The clock stays VERDICT-FREE by construction — it reports who feeds and how deep so a human can see
  * a minority out-feeding a realm. This reading sits beside it and never inside it.
@@ -27,41 +32,50 @@ describe("realm-standing — one firing is a visit, two opposed firings are belo
   it("★ nobody feeding reads UNFED — no realm stands, and that is honest ★", () => {
     const r = realmStanding([]);
     expect(r.standing).toBe("unfed");
-    expect(r.loci).toBe(0);
+    expect(r.faces).toBe(0);
     // Canon: this reads the same as a realm this replica has never synced.
     expect(r.reading).toMatch(/never synced|nobody|unfed/i);
   });
 
-  it("★ ONE locus feeding is a VISIT — the founding offering, and nothing constituted yet ★", () => {
+  it("★ ONE face feeding is a VISIT — the founding offering, and nothing constituted yet ★", () => {
     const r = realmStanding([{ writer: "aa", epoch: 4 }]);
     expect(r.standing).toBe("visit");
-    expect(r.loci).toBe(1);
-    expect(r.reading).toMatch(/visit|one locus|nominal/i);
+    expect(r.faces).toBe(1);
+    expect(r.reading).toMatch(/visit|one face|nominal/i);
   });
 
-  it("★ ONE locus feeding DEEPLY is still a visit — depth is not a second hand ★", () => {
+  it("★ ONE face feeding DEEPLY is still a visit — depth is not a second hand ★", () => {
     // The load-bearing case. A fleet reads nominal BY LAW: one locus of cost cannot carry
     // non-aggregative state however many times it rolls.
     const r = realmStanding([{ writer: "aa", epoch: 900 }]);
     expect(r.standing).toBe("visit");
-    expect(r.loci).toBe(1);
+    expect(r.faces).toBe(1);
   });
 
-  it("★ TWO distinct loci, each having fed, is BELONGING ★", () => {
+  it("★ SEVERAL faces feeding is NOT belonging — the slots cannot see a locus ★", () => {
+    // The correction that matters. Two of one human's own faces produce two writer ids, and calling
+    // that a mutual hold manufactures the reciprocity the morphology requires be earned.
     const r = realmStanding([{ writer: "aa", epoch: 1 }, { writer: "bb", epoch: 1 }]);
-    expect(r.standing).toBe("belonging");
-    expect(r.loci).toBe(2);
-    expect(r.reading).toMatch(/belong|mutual|two/i);
+    expect(r.standing).toBe("many-faces");
+    expect(r.faces).toBe(2);
+    expect(r.reading).toMatch(/sybil-of-one|socially|cannot/i);
+    expect(r.reading).not.toMatch(/\bbelonging\b/i);
   });
 
-  it("★ a locus that has NOT fed does not count — a slot at zero is no offering ★", () => {
+  it("★ a face that has NOT fed does not count — a slot at zero is no offering ★", () => {
     const r = realmStanding([{ writer: "aa", epoch: 3 }, { writer: "bb", epoch: 0 }]);
     expect(r.standing).toBe("visit");
-    expect(r.loci).toBe(1);
+    expect(r.faces).toBe(1);
   });
 
-  it("★ the same writer twice is ONE locus, however the slots are spelled ★", () => {
-    expect(realmStanding([{ writer: "AA", epoch: 2 }, { writer: "aa", epoch: 5 }]).loci).toBe(1);
+  it("★ the same writer twice is ONE face, however the slots are spelled ★", () => {
+    expect(realmStanding([{ writer: "AA", epoch: 2 }, { writer: "aa", epoch: 5 }]).faces).toBe(1);
+  });
+
+  it("★ NO reading ever claims a locus — the word the slots cannot support ★", () => {
+    for (const s of [[], [{ writer: "a", epoch: 1 }], [{ writer: "a", epoch: 1 }, { writer: "b", epoch: 2 }]]) {
+      expect(realmStanding(s).reading).not.toMatch(/distinct loci of cost feed/i);
+    }
   });
 
   it("★ every reading says what it is, so a visit is never read as a realm ★", () => {
