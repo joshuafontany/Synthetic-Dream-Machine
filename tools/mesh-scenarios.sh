@@ -72,6 +72,29 @@ logs_have() {
   [ "${n:-0}" -gt 0 ]
 }
 
+# WHETHER A HEARTH'S VERB SOCKET ANSWERS — which is not the same as having stood.
+#
+# `[lararium]` in the log proves the boot printed; it does not prove the UDS verb-channel is taking
+# calls. Measured: a scenario that trusted the log line fired three verbs into a socket that was not
+# yet listening, and read the empty results as failures of the thing it was testing.
+#
+# The founding rite carries the same law for its own LIVE movement — "⑥ ASSERTS BY CONNECTING, never
+# by inspecting" — because local facts (a file, a port, a log line) all read true while the vessel
+# answers nothing.
+# THE PROBE MUST CROSS THE SOCKET. A first draft used `vessel read` — "the pure inspection that starts
+# nothing", which reads local files and answers true while the verb channel is still deaf. The probe
+# rides a DAEMON-ROUTED verb, so a pass means a verb actually completed.
+answers() {
+  $COMPOSE exec -T "$1" node packages/lares-cli/dist/src/bin/lares.js bag stats --json >/dev/null 2>&1
+}
+
+# Wait until a hearth both STANDS and ANSWERS. Either alone is a half-truth.
+up_and_answering() {
+  local svc="$1" deadline=$(( SECONDS + ${2:-300} ))
+  while ! { stood "$svc" && answers "$svc"; } && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
+  stood "$svc" && answers "$svc"
+}
+
 # whether a hearth has stood — the boot line every lararium prints.
 stood() { logs_have "[lararium]" "$1"; }
 
@@ -114,6 +137,7 @@ run_operator() {          # $1 = a|b
 # The roster forms from what STOOD: a persona that declared a Handle AND took a chair. So this reads
 # the seal's own show, not a persona count — three faces that never sat leave an empty roster while
 # `persona list` reads three, and that gap is exactly what the reading is for.
+# COVERS: private/seed/unfed
 run_quorum() {
   say "QUORUM — the founding kahu seat, and the seal reads them"
   clear_all
@@ -155,6 +179,60 @@ run_quorum() {
 # material over, `seal import` places it on B, refusing to land on a founding. That is the handoff
 # the runbook instructs ("B cannot consent to a charter it has never seen"), performed rather than
 # simulated.
+# ── THE REALM AXIS ──────────────────────────────────────────────────────────────────────────────
+# A REALM IS CONSTITUTED BY FEEDING, never created — "the first offering IS the founding of the realm,
+# never a step after it". Nothing in this harness has ever fed one, so `realmStanding` has run only in
+# unit tests and the `cabal feed` / `cabal clock` doors have never been walked in a container.
+#
+# The reading it proves is the one that must NOT over-claim: one face feeding is a VISIT, and several
+# faces of ONE operator are MANY-FACES rather than a mutual hold — the slots carry faces, and a human
+# running several of their own reads as the Sybil-of-one this plane prices socially.
+# COVERS: private/seed/visit
+# COVERS: private/seed/many-faces
+run_realm() {
+  say "REALM — fed once is a visit; fed by a second face is many-faces, never belonging"
+  clear_all
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+  local REALM; REALM=$(printf 'a%.0s' $(seq 1 64))
+
+  step "lararium-a up, alone"
+  if LAR_A_PEERS= $COMPOSE up -d --no-deps lararium-a >/dev/null 2>&1; then ok; else bad "up"; return; fi
+
+  step "the hearth stands AND answers"
+  if up_and_answering lararium-a; then ok; else
+    bad "no lararium answering"
+    $COMPOSE logs lararium-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return
+  fi
+
+  step "an unfed realm reads UNFED"
+  if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 \
+     | grep -q '"standing":"unfed"'; then ok; else
+    bad "an unfed realm did not read unfed"
+    $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | tail -2 | sed 's/^/      /'
+  fi
+
+  step "ONE face feeds — a VISIT, and depth changes nothing"
+  $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1
+  $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1
+  if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 \
+     | grep -q '"standing":"visit"'; then ok; else bad "one face twice did not read as a visit"; fi
+
+  # THE READING THAT MUST NOT OVER-CLAIM. A second FACE of the same operator is a second writer id
+  # and not a second hand; naming it belonging would manufacture the reciprocity the model requires
+  # be earned.
+  step "a SECOND face feeds — MANY-FACES, and never belonging"
+  $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 1 >/dev/null 2>&1
+  local CLK
+  CLK=$($COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1)
+  if printf '%s' "$CLK" | grep -q '"standing":"many-faces"' \
+     && ! printf '%s' "$CLK" | grep -q '"standing":"belonging"'; then ok; else
+    bad "the second face did not read as many-faces"
+    printf '%s\n' "$CLK" | tail -2 | sed 's/^/      /'
+  fi
+  clear_all
+}
+
+# COVERS: private/multisig/unfed
 run_relation() {
   say "RELATION — two operators contract, and the phase moves off SEED"
   clear_all
@@ -263,8 +341,9 @@ case "$WANT" in
   nexus)      run_nexus ;;
   quorum)     run_quorum ;;
   relation)   run_relation ;;
-  all)        run_operator a; run_operator b; run_quorum; run_relation; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | all)" >&2; exit 2 ;;
+  realm)      run_realm ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_nexus ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"
