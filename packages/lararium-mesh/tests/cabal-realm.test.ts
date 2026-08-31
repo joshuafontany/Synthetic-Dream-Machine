@@ -106,7 +106,9 @@ describe("★ absence of a load is NOT absence of a polity ★", () => {
   test("★ a caller can tell a verdict from a blind spot ★", () => {
     // Without this, every gate on liveness silently treats its own blindness as the realm's death.
     expect(livenessIsAboutTheRealm("unread")).toBe(false);
-    expect(livenessIsAboutTheRealm("dissolved")).toBe(true);
+    // `dissolved` reports a DEPARTURE, not an ending — residency is local, so it cannot see the
+    // collective that IS the realm. Warmth is evidence; cold is only the absence of it.
+    expect(livenessIsAboutTheRealm("dissolved")).toBe(false);
     expect(livenessIsAboutTheRealm("alive")).toBe(true);
   });
 });

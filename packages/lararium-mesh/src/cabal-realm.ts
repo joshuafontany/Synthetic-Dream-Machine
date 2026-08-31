@@ -121,11 +121,30 @@ export function deriveCabalRealmLiveness(
   return cause === "unfed" ? "dissolved" : "unread";
 }
 
-/** Whether a liveness reading says anything about the REALM at all — `unread` says only that this
- *  vessel has not looked. A caller gating on liveness asks this first, or it treats its own blindness
- *  as the realm's death. */
+/**
+ * Whether a liveness reading says anything about the REALM at all. A caller gating on liveness asks
+ * this first, or it treats its own condition as the realm's.
+ *
+ * ── WARMTH IS EVIDENCE; COLD IS ABSENCE OF EVIDENCE ─────────────────────────────────────────────
+ * A realm is a COLLECTIVE BOUND BY INTERACTION — group identity carried as relations, with several
+ * realms living inside one Nexus. Residency temperature cannot see a collective: every warming act
+ * is LOCAL (`feedCabalRealm`, wiki activation, composite-store), and replication is not wired to
+ * residency at all. A remote face feeding this realm never warms this replica.
+ *
+ * So the two directions carry different weight, and this reading is asymmetric on purpose:
+ *   · `alive`     — this vessel holds a synced substrate it is actively working. Weak evidence, but
+ *                   evidence: something stands here to interact with.
+ *   · `dissolved` — this vessel stopped feeding it. `carry-contract` scopes that bilaterally — "you
+ *                   are out, BETWEEN US" — so it reports a DEPARTURE, never an ending. The collective
+ *                   may be humming without this replica, and other meshes stand out of view.
+ *   · `unread`    — this vessel never looked.
+ *
+ * The instrument that CAN see the collective is `realmStanding`, which reads the per-writer epoch
+ * lease slots: those replicate, so other faces' offerings arrive. A gate that needs a fact about the
+ * realm reads the slots; this reading answers only for the vessel holding it.
+ */
 export function livenessIsAboutTheRealm(l: CabalRealmLiveness): boolean {
-  return l !== "unread";
+  return l === "alive";
 }
 
 /**

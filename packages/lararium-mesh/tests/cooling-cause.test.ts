@@ -26,7 +26,7 @@
  */
 import { describe, it, expect } from "vitest";
 import { BagStowage } from "../src/bag-residency.js";
-import { deriveCabalRealmLiveness } from "../src/cabal-realm.js";
+import { deriveCabalRealmLiveness, livenessIsAboutTheRealm } from "../src/cabal-realm.js";
 
 const URL_A = "automerge:realmA";
 
@@ -81,5 +81,26 @@ describe("cooling-cause — why a bag went cold decides what may be said about t
 
   it("★ a bag never registered reports no cause, not a fabricated one ★", () => {
     expect(new BagStowage({}).cooledBy("automerge:nothing")).toBe(null);
+  });
+
+  // ── THE SECOND CONFLATION, ONE LEVEL UP ───────────────────────────────────────────────────────
+  // A realm is a COLLECTIVE BOUND BY INTERACTION, and residency temperature cannot see a collective:
+  // every warming act is local and replication is not wired to residency (`setSyncActive` has no
+  // production caller). So a cold substrate means "I stopped feeding it", never "it ended".
+
+  it("★ `dissolved` is NOT a fact about the realm — it reports a DEPARTURE ★", () => {
+    // carry-contract scopes this bilaterally: "you are out, BETWEEN US". The collective may be
+    // humming without this replica, and other meshes stand out of view entirely.
+    expect(livenessIsAboutTheRealm("dissolved")).toBe(false);
+  });
+
+  it("★ `alive` IS about the realm — warmth is evidence, cold is only absence of it ★", () => {
+    // The asymmetry is the point. A synced substrate this vessel actively works is weak evidence
+    // that something stands here; ceasing to look is evidence of nothing.
+    expect(livenessIsAboutTheRealm("alive")).toBe(true);
+  });
+
+  it("★ `unread` stays outside — this vessel never looked ★", () => {
+    expect(livenessIsAboutTheRealm("unread")).toBe(false);
   });
 });
