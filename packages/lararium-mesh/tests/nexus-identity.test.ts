@@ -19,9 +19,11 @@
  * A shared scope is safe exactly where sharing cannot widen a vessel's own authority:
  *   · WHO board       — no write-ACL, cards self-certifying; reading grants nothing.
  *   · antigen (DENY)  — quorum-signed against the charter roster; a foreign ban only TIGHTENS.
- *   · members (ALLOW) — REFUSED. Unsigned local admits that only WIDEN; a partner's admits would
- *                       conscript this vessel into carriage it never consented to.
- * The asymmetry is the point: a deny may be shared, an allow may not.
+ *   · members (ALLOW) — held apart. Those admits ARE quorum-signed against the charter epoch, so the
+ *                       objection is CONSENT rather than forgery: an admit only widens whom a vessel
+ *                       carries for, and folding a partner's board accepts every admit their quorum
+ *                       makes after the epoch this vessel consented at.
+ * The asymmetry is the point: a deny may be shared, an allow wants a fresh consent.
  */
 import { describe, it, expect } from "vitest";
 import { nexusIdentity } from "../src/nexus-identity.js";

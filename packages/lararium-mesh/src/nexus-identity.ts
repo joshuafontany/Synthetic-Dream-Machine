@@ -47,14 +47,22 @@
  *                       nothing.
  *   · antigen (DENY)  — quorum-signed against the charter roster, and an entry whose signature does
  *                       not verify is ignored. A foreign ban can only TIGHTEN this vessel.
- *   · members (ALLOW) — REFUSED, and this module is not for it. Those admits are unsigned local acts
- *                       that only WIDEN: folding a partner's would let their future admits conscript
- *                       this vessel into carriage it never consented to.
- * The asymmetry carries the rule — a deny may be shared, an allow may not. It is the anti-flickering
- * property of a deny list: once disallowed, never allowed again, so the set is MONOTONE and replicates
- * without total consistency. An allow set has no such property — it widens, and widening it from
- * elsewhere is how a partner conscripts a vessel. Independently: CRDTs cannot enforce global
- * invariants, and a roster of who belongs IS one.
+ *   · members (ALLOW) — held apart, and this module is not for it. Those admits ARE quorum-signed
+ *                       against the charter epoch, so the objection is not forgery: a partner's board
+ *                       verifies. It is CONSENT. An admit only ever WIDENS whom a vessel carries for,
+ *                       and folding a partner's board accepts every admit their quorum makes AFTER the
+ *                       epoch this vessel consented at.
+ * The asymmetry carries the rule — a deny may be shared, an allow wants a fresh consent. A deny list
+ * carries the anti-flickering property: once disallowed, never allowed again, so the set is MONOTONE and
+ * replicates without total consistency. An allow set has no such property. Independently: CRDTs cannot
+ * enforce global invariants, and a roster of who belongs IS one.
+ *
+ * ⚠ AND THE FIELD DISPUTES THE COMFORT IN THAT. Shared moderation lists are measured to carry no
+ * selection criteria, to be binary, to grow only, and to make inclusion effectively permanent — a
+ * ratchet that cannot un-ratchet is safe to ADD to and impossible to correct. They also sever third
+ * parties who never joined the operator's threat model, and a widely-imported list becomes the global
+ * registry the architecture removed. Sharing a deny wants EXPIRY, PROVENANCE, and defined MERGE
+ * semantics; a quorum signature answers forgery and never legitimacy.
  */
 
 /** `epoch0-` plus 64 hex — the shape `genesisSealEpochCid` mints. Anything else names no island. */

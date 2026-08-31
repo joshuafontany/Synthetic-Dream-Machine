@@ -30,6 +30,8 @@
  */
 
 import { leaseEpochPrefix, leaseEpochSlotUri, effectiveLeaseEpoch, rolledLeaseEpoch } from "./epoch-lease.js";
+import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
+import * as ed25519 from "@noble/ed25519";
 import { tiddlerText, type LarDoc } from "./base-doc.js";
 import type { CabalRealm } from "./cabal-realm.js";
 
@@ -185,4 +187,56 @@ export function realmFeedWrite(
     priorEffective,
     first: !leaseSlots.has(slotUri),
   };
+}
+
+// ── SEALING THE WRITE PATH ────────────────────────────────────────────────────────────────────────
+
+/** Signing domain for a realm roll — kept distinct so a seal made here presents nowhere else. */
+const REALM_FEED_DOMAIN = "lar/realm-feed" as const;
+
+/**
+ * The bytes a roll signs over — the realm, the writer and the epoch bound TOGETHER.
+ *
+ * All three travel in the seal because each alone is liftable: a roll lifted to another realm would
+ * carry maintenance a face never offered, and a roll lifted to a higher epoch could never be undone.
+ * The lease is a MAX-REGISTER, chosen so a low roll costs nothing and a high one converges — and that
+ * same property makes a forged high roll IRREVERSIBLE, since the max never decreases.
+ */
+export function realmFeedBytes(parts: { realm: string; writer: string; epoch: number }): Uint8Array {
+  return canonicalJsonBytes({
+    kind:   REALM_FEED_DOMAIN,
+    realm:  parts.realm.trim().toLowerCase(),
+    writer: parts.writer.trim().toLowerCase(),
+    epoch:  parts.epoch,
+  });
+}
+
+/** Seal a roll with the feeding face's own persona root — "a FACE feeds a realm, not a device". */
+export async function signRealmFeed(
+  parts: { realm: string; writer: string; epoch: number },
+  sign: (bytes: Uint8Array) => Promise<string>,
+): Promise<string> {
+  return sign(realmFeedBytes(parts));
+}
+
+/**
+ * Does this slot prove whose hand rolled it?
+ *
+ * Where the ledger sits under a vessel's own daemon bag this asks nothing the bag did not already
+ * answer: the only hand that can write there owns it. It becomes load-bearing the moment the ledger
+ * moves to the realm's own substrate — a doc every dweller may write, where a slot uri is guessable
+ * and the seal is the only thing tying a roll to its writer.
+ *
+ * A torn or absent seal reads FALSE rather than throwing: an unverifiable slot is IGNORED, never
+ * folded and never fatal, exactly as an antigen entry that fails its quorum is ignored.
+ */
+export async function verifyRealmFeedSlot(
+  slot: { realm: string; writer: string; epoch: number; sig: string },
+): Promise<boolean> {
+  const writer = slot.writer.trim().toLowerCase();
+  if (!/^[0-9a-f]{64}$/.test(writer)) return false;
+  if (!/^[0-9a-f]+$/.test(slot.sig) || slot.sig.length === 0) return false;
+  const bytes = realmFeedBytes({ realm: slot.realm, writer, epoch: slot.epoch });
+  try { return await ed25519.verifyAsync(hexToBytes(slot.sig), bytes, hexToBytes(writer)); }
+  catch { return false; }
 }
