@@ -311,6 +311,7 @@ export * from "./crossroads-cry.js";
 
 export { rosterStanding, type RosterStanding } from "./roster-standing.js";
 export { nexusPhase, type NexusPhase, type NexusPhaseName } from "./nexus-phase.js";
+export { nexusIdentity, type NexusIdentity } from "./nexus-identity.js";
 export { sealImportVerdict, foreignSeats,
          type SealImportVerdict, type ForeignSeatVerdict, type CharterChair } from "./seal-import.js";
 export { realmStanding, type RealmStanding, type RealmStandingName, type RealmFeedSlot } from "./realm-standing.js";
