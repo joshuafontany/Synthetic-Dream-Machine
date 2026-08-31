@@ -31,6 +31,7 @@ import {
   materializeSharedLarDoc, kapaeAntigenDocUrl, carriageDocUrl,
   antigenEntriesFromBoard, carriageEntriesFromBoard,
   federationPostureFromDoc, type FederationPosture,
+  membersBoardRoot,
 } from "@lararium/mesh";
 import { readNexusDoc } from "./nexus-doc.js";
 import type { AntigenRingHolder } from "./antigen-ring.js";
@@ -49,6 +50,17 @@ export interface NexusRefreshDeps {
   readonly membership: NexusMembershipHolder;
   /** Reassign the sharePolicy's live `federationPosture` closure var. Called ONLY with a freshly-read posture. */
   readonly setPosture: (posture: FederationPosture) => void;
+  /**
+   * The LIVE networked repo, for SUBSCRIPTION only.
+   *
+   * A charter naming ANOTHER vessel's board needs that doc opened on a networked repo or it never
+   * syncs into storage, and the throwaway read repo below carries storage ALONE — it can only ever
+   * read what this vessel already holds. Opening the doc here is what lets it arrive; the fold still
+   * reads cold from disk afterwards, because a live handle hands back stale in-memory bytes.
+   *
+   * Optional: a caller with no network (a CLI writer) refreshes without one and folds what it has.
+   */
+  readonly liveRepo?: Repo;
 }
 
 export interface NexusRefreshResult {
@@ -58,6 +70,10 @@ export interface NexusRefreshResult {
   readonly antigenEntries: number;
   /** The members board entry count folded this pass (0 when the board is absent / unsynced). */
   readonly memberEntries: number;
+  /** WHICH members board this pass folded — the charter's own root, or this vessel's when none is named. */
+  readonly boardRoot: string;
+  /** Whether that board is this vessel's own. False on a vessel that JOINED someone else's Nexus. */
+  readonly boardIsOwn: boolean;
 }
 
 /**
@@ -68,15 +84,29 @@ export interface NexusRefreshResult {
  */
 export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefreshResult> {
   // 1. POSTURE — fresh disk read; PRIVATE on absent / torn (fail-closed: a broken read only ever tightens).
-  const posture = federationPostureFromDoc(readNexusDoc(deps.sealHome));
+  const charter = readNexusDoc(deps.sealHome);
+  const posture = federationPostureFromDoc(charter);
   deps.setPosture(posture);
 
   // 2. BOARDS — a throwaway repo on the SAME storage dir reads the flushed on-disk bytes cold (the running
   //    repo's cached handle would hand back its stale in-memory board). Read-only here; disposed on return.
+  // WHICH members board. The board is a SHARED doc addressed by a key, so the key decides WHICH Nexus
+  // this pass folds. A vessel that JOINED a Nexus was admitted onto the FOUNDER's board, and folding
+  // its own instead reads an empty registry — a completed crossing then reports no relation at all.
+  // The antigen board stays on this vessel's OWN key: it is the node's gate, not the Nexus's.
+  const board = membersBoardRoot({ charterRoot: charter?.boardRoot ?? null, ownVesselKey: deps.nexusPubkey });
+
+  // OPEN THE FOREIGN BOARD ON THE NETWORK before reading cold, or the right address folds an empty
+  // registry forever. Idempotent — automerge-repo hands back the same handle for a URL already open.
+  if (!board.own && deps.liveRepo) {
+    try { await materializeSharedLarDoc(deps.liveRepo, carriageDocUrl(board.root), "board:members-registry"); }
+    catch { /* a board that has not arrived is not an error — the fold below reads what stands */ }
+  }
+
   const repo = new Repo({ storage: new NodeFSStorageAdapter(deps.storageDir) });
   try {
     const antigenBoard = await materializeSharedLarDoc(repo, kapaeAntigenDocUrl(deps.nexusPubkey), "board:kapae-antigen");
-    const membersBoard = await materializeSharedLarDoc(repo, carriageDocUrl(deps.nexusPubkey), "board:members-registry");
+    const membersBoard = await materializeSharedLarDoc(repo, carriageDocUrl(board.root), "board:members-registry");
     const antigenDoc = antigenBoard.doc();
     const membersDoc = membersBoard.doc();
     // Fold the fresh boards into the live holders. Each swaps its set whole; a fold fault throws BEFORE the
@@ -87,6 +117,8 @@ export async function runNexusRefresh(deps: NexusRefreshDeps): Promise<NexusRefr
       posture,
       antigenEntries: antigenEntriesFromBoard(antigenDoc).length,
       memberEntries:  carriageEntriesFromBoard(membersDoc).length,
+      boardRoot:      board.root,
+      boardIsOwn:     board.own,
     };
   } finally {
     // Dispose the throwaway repo whole — flush its docs AND disconnect its subsystems, so no Repo, no

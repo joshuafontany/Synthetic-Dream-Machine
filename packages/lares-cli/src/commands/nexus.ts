@@ -61,7 +61,9 @@ import {
 import { existsSync, readFileSync, writeFileSync, mkdirSync, mkdtempSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { larSealHome, larDataDir } from "../env.js";
+import { larSealHome, larDataDir, vesselDid } from "../env.js";
+import { runVerb } from "../verb-call.js";
+import { summaryOutput } from "../verb-result.js";
 import { makeFleetDeclarationStore, fleetPeerDid } from "../daemon-persona-store.js";
 import { rosterStanding, nexusPhase, sealImportVerdict, foreignSeats } from "@lararium/mesh";
 import { emit, exitFor } from "../render.js";
@@ -82,6 +84,7 @@ function usage(): void {
   console.error("  accept-carriage [--index N]               (joining operator) mint the 'accepts carriage' contract-in");
   console.error("  posture [private | open]                  read / flip the cross-Nexus federation posture");
   console.error("  rite <petname>                            the pet-named procedures — `cabal` seats the founding quorum");
+  console.error("  refresh                                   re-read the charter and re-fold the boards it names");
 }
 
 function sealUsage(): void {
@@ -118,6 +121,7 @@ export async function cmdNexus(args: ParsedArgs): Promise<number> {
     case "accept-carriage": return await cmdAcceptCarriage(args);
     case "posture":         return await cmdPosture(args);
     case "rite":            return await runNexusRite(args);
+    case "refresh":         return await cmdNexusRefresh(args);
     default:
       if (verb) console.error(`lares nexus: unknown verb "${verb}"`);
       usage();
@@ -177,6 +181,43 @@ async function runCabalRite(args: ParsedArgs): Promise<number> {
     return seated;
   }
   return await sealShow(rest);
+}
+
+/**
+ * `lares nexus refresh` — re-read the disk charter and re-fold the boards it names.
+ *
+ * THE DOOR AN IMPORT NEEDS. A joining operator places a partner's charter and signs a contract-in,
+ * and from that moment her vessel should fold the FOUNDER's members board rather than her own. The
+ * daemon re-folds on its own when carriage re-dials, so nothing was wrong — there was simply no way
+ * to ask, and an operator who had just imported a charter had to wait on a reconnect she cannot see.
+ *
+ * The refresh also OPENS the named board on the networked repo, which is what lets a board this
+ * vessel has never held arrive at all.
+ */
+async function cmdNexusRefresh(args: ParsedArgs): Promise<number> {
+  try {
+    const r = await runVerb("nexus-refresh", {}, await vesselDid());
+    if (r.status === "error") {
+      emit(args, { ok: false, error: { code: "error", message: r.errorMessage ?? "nexus-refresh failed" },
+                   human: () => console.error(`lares nexus refresh: ${r.errorMessage ?? "failed"}`) });
+      return 1;
+    }
+    const out = summaryOutput(r) ?? {};
+    emit(args, {
+      ok: true, data: out,
+      human: () => {
+        console.log("nexus refresh — charter re-read, boards re-folded:");
+        console.log(`  posture:        ${String(out["posture"] ?? "?")}`);
+        console.log(`  members board:  ${String(out["boardRoot"] ?? "?")}${out["boardIsOwn"] === false ? "  (the Nexus you joined)" : "  (your own)"}`);
+        console.log(`  member entries: ${String(out["memberEntries"] ?? 0)} · antigen entries: ${String(out["antigenEntries"] ?? 0)}`);
+      },
+    });
+    return 0;
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    emit(args, { ok: false, error: { code: "error", message: msg }, human: () => console.error(`lares nexus refresh: ${msg}`) });
+    return 1;
+  }
 }
 
 async function runNexusRite(args: ParsedArgs): Promise<number> {

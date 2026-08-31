@@ -70,6 +70,66 @@ function standHolders(bags: string) {
   return { antigen, membership, peerMap, dispose: () => { antigen.dispose(); membership.dispose(); } };
 }
 
+describe("nexus-refresh — WHICH members board a refresh folds", () => {
+  let bags: string;
+  let storage: string;
+  beforeEach(() => { bags = mkdtempSync(join(tmpdir(), "lares-refresh-bags-")); storage = mkdtempSync(join(tmpdir(), "lares-refresh-store-")); });
+  afterEach(async () => { await drainStorageThrottle(); rmSync(bags, { recursive: true, force: true }); rmSync(storage, { recursive: true, force: true }); });
+
+  // ── THE DEFECT THIS CLOSES, MEASURED IN DOCKER ────────────────────────────────────────────────
+  // The members board is a SHARED doc at `carriageDocUrl(<key>)`, and every reader took that key from
+  // this vessel's own identity under a variable named `nexusPubkey` — which `antigen-ring` documents
+  // plainly as "the node's own gate key". So a joining operator folded HER OWN board and read `seed`
+  // after a completed crossing, while the founder read `isNexus`.
+  //
+  // A charter names the board it governs (`boardRoot`). A refresh folds THAT board, so a vessel that
+  // joined a Nexus folds the registry the relation was written on rather than its own empty one.
+
+  const FOREIGN = "f".repeat(64);
+
+  test("★ a charter naming ANOTHER vessel's board folds THAT board, not this vessel's ★", async () => {
+    const keys = await Promise.all(SEEDS.map(pubOf));
+    const holders = standHolders(bags);
+    try {
+      writeNexusDoc(bags, { ...seatedCharter(keys), boardRoot: FOREIGN });
+      const r = await runNexusRefresh({
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
+        antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
+      });
+      expect(r.boardRoot).toBe(FOREIGN);
+      expect(r.boardIsOwn).toBe(false);
+    } finally { holders.dispose(); }
+  });
+
+  test("★ a founder's own charter folds her own board, unchanged ★", async () => {
+    const keys = await Promise.all(SEEDS.map(pubOf));
+    const holders = standHolders(bags);
+    try {
+      writeNexusDoc(bags, { ...seatedCharter(keys), boardRoot: NEXUS_PUBKEY });
+      const r = await runNexusRefresh({
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
+        antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
+      });
+      expect(r.boardRoot).toBe(NEXUS_PUBKEY.toLowerCase());
+      expect(r.boardIsOwn).toBe(true);
+    } finally { holders.dispose(); }
+  });
+
+  test("★ a charter with NO root recorded folds this vessel's own board — no regression ★", async () => {
+    const keys = await Promise.all(SEEDS.map(pubOf));
+    const holders = standHolders(bags);
+    try {
+      writeNexusDoc(bags, seatedCharter(keys));
+      const r = await runNexusRefresh({
+        storageDir: storage, sealHome: bags, nexusPubkey: NEXUS_PUBKEY,
+        antigen: holders.antigen, membership: holders.membership, setPosture: () => {},
+      });
+      expect(r.boardRoot).toBe(NEXUS_PUBKEY.toLowerCase());
+      expect(r.boardIsOwn).toBe(true);
+    } finally { holders.dispose(); }
+  });
+});
+
 describe("nexus-refresh — POSTURE re-read (D2)", () => {
   let bags: string;
   let storage: string;

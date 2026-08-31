@@ -689,6 +689,13 @@ run_realm_crossing() {
   # and B folded different documents. The charter now names its board root and B addresses A's (measured:
   # one root on both sides, `boardIsOwn=false` on B). The DOC is the second and it stands open: B folds
   # an EMPTY board at the right address, so an "always-carried" registry is not reaching a member.
+  # AND B ASKS. The daemon re-folds on its own when carriage re-dials, so an operator who has just
+  # imported a charter would otherwise wait on a reconnect she cannot see. The refresh also OPENS the
+  # named board on the networked repo, which is what lets a board this vessel never held arrive.
+  step "B refreshes — re-read the charter, re-fold the board it names"
+  if $COMPOSE exec -T lararium-b $LARES nexus refresh --json >/dev/null 2>&1; then ok
+  else bad "B could not refresh"; fi
+
   step "★ does B read the Nexus too? a relation has two sides ★"
   local BPHASE
   BPHASE=$($COMPOSE exec -T lararium-b $LARES nexus seal show --json 2>&1)

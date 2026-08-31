@@ -593,6 +593,7 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
             storageDir, sealHome, nexusPubkey: vesselIdentity.verifyingKey,
             antigen: antigenHolder, membership: nexusMembershipHolder,
             setPosture: (p) => { federationPosture = p; },
+            liveRepo: repo,
           });
         },
         onLog:        (line) => console.log(`[carriage] ${line}`),
@@ -1457,6 +1458,8 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
         membership:  nexusMembershipHolder,
         // Reassign the live posture the sharePolicy closure reads each call (fail-closed PRIVATE on a torn read).
         setPosture:  (p) => { federationPosture = p; },
+        // The networked repo, so a charter naming a partner's board can actually pull it.
+        liveRepo:    repo,
       });
       return { verb: "nexus-refresh", ...r };
     });
