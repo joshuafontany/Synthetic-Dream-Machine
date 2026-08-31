@@ -73,3 +73,59 @@ describe("nexus-identity — a shared island names no vessel", () => {
     }
   });
 });
+
+describe("nexus-identity — the whole fallback chain, one rule for node and leaf", () => {
+  // ── THE SHAPE A BROWSER LEAF ALREADY RUNS ─────────────────────────────────────────────────────
+  // A browser vessel is a leaf-node lararium — a herm carrying operator/user CRDT caps — and it
+  // already resolves `inviteNexusPubkey ?? relayGatePubKey ?? own DID`, documented as "the Nexus this
+  // vessel crosses into". Composing a shared plane under a FOREIGN key is therefore a supported,
+  // witnessed shape rather than a new one: "a node anchors its confederation, so its gate key IS the
+  // Nexus key its leaves pass back".
+  //
+  // The node has only the last term, and the gap sits in the middle. An anchor names its confederation
+  // by its gate key, and that works for a fleet. TWO SOVEREIGN OPERATORS contracting as peers have no
+  // anchor between them — neither dials the other — so neither key names their island. The charter's
+  // genesis AID does, and it belongs to neither.
+
+  const ANCHOR = "d".repeat(64);
+
+  it("★ an explicit island wins — a caller that knows its Nexus is never second-guessed ★", () => {
+    const r = nexusIdentity({ explicitScope: GENESIS, anchorGateKey: ANCHOR, ownVesselKey: OWN });
+    expect(r.scope).toBe(GENESIS);
+    expect(r.shared).toBe(true);
+  });
+
+  it("★ a CONTRACTED PEER names the island by its charter, not by either operator ★", () => {
+    // The case the anchor model cannot reach: no vessel here dials the other.
+    const r = nexusIdentity({ genesisEpochCid: GENESIS, ownVesselKey: OWN });
+    expect(r.scope).toBe(GENESIS);
+    expect(r.scope).not.toBe(OWN);
+    expect(r.reading).toMatch(/charter|genesis|belongs to no/i);
+  });
+
+  it("★ a LEAF with no charter joins the island it crosses into ★", () => {
+    const r = nexusIdentity({ anchorGateKey: ANCHOR, ownVesselKey: OWN });
+    expect(r.scope).toBe(ANCHOR);
+    expect(r.shared).toBe(true);
+    expect(r.reading).toMatch(/anchor|crosses into|dials/i);
+  });
+
+  it("★ a charter OUTRANKS the anchor — a contracted peer is not merely a leaf ★", () => {
+    // A vessel may both dial an anchor and hold a charter. The charter names a relation it consented
+    // to; the anchor names a relay it happens to reach.
+    const r = nexusIdentity({ genesisEpochCid: GENESIS, anchorGateKey: ANCHOR, ownVesselKey: OWN });
+    expect(r.scope).toBe(GENESIS);
+  });
+
+  it("★ a vessel with neither stands alone, and says so ★", () => {
+    const r = nexusIdentity({ ownVesselKey: OWN });
+    expect(r.scope).toBe(OWN);
+    expect(r.shared).toBe(false);
+  });
+
+  it("★ a malformed anchor key is REFUSED like a malformed genesis ★", () => {
+    const r = nexusIdentity({ anchorGateKey: "nope", ownVesselKey: OWN });
+    expect(r.scope).toBe(OWN);
+    expect(r.shared).toBe(false);
+  });
+});

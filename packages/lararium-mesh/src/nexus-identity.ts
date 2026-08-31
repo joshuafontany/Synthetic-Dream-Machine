@@ -15,6 +15,15 @@
  * Choosing some operator's key instead would make the others read a vessel where they meant to read
  * their shared island. The island needs a name that belongs to none of them.
  *
+ * ── AN ANCHOR NAMES ITS CONFEDERATION; A PEER RELATION HAS NO ANCHOR ────────────────────────────
+ * A browser vessel is a LEAF-NODE lararium — a herm carrying operator/user CRDT caps — and it already
+ * resolves `explicit ?? the gate key it dials ?? its own DID`, because "a node anchors its
+ * confederation, so its gate key IS the Nexus key its leaves pass back". Composing a shared plane
+ * under a FOREIGN key is therefore a witnessed shape, not a new one.
+ *
+ * That model covers a fleet and stops at a peer relation: when two sovereign operators contract,
+ * neither dials the other, so neither gate key names their island. The charter does.
+ *
  * ── THE GENESIS EPOCH IS THAT NAME ──────────────────────────────────────────────────────────────
  * `genesisSealEpochCid` content-addresses the seated key-set and the threshold, so every vessel
  * holding the charter derives the same value from public material, it names no vessel, and it
@@ -40,6 +49,9 @@
 /** `epoch0-` plus 64 hex — the shape `genesisSealEpochCid` mints. Anything else names no island. */
 const GENESIS_RE = /^epoch0-[0-9a-f]{64}$/;
 
+/** A gate key names an island only as hex — anything else addresses a board no peer resolves. */
+const KEY_RE = /^[0-9a-f]{16,64}$/;
+
 export interface NexusIdentity {
   /** The value a shared plane addresses its board under. */
   readonly scope:   string;
@@ -57,25 +69,53 @@ export interface NexusIdentity {
  * split that reports as agreement.
  */
 export function nexusIdentity(
-  at: { genesisEpochCid?: string | null; ownVesselKey: string },
+  at: {
+    /** An island this caller already knows — never second-guessed. */
+    explicitScope?:  string | null;
+    /** The genesis epoch of a charter this vessel holds — a relation it CONSENTED to. */
+    genesisEpochCid?: string | null;
+    /** The gate key of an anchor this vessel dials — a relay it happens to reach. */
+    anchorGateKey?:  string | null;
+    ownVesselKey:    string;
+  },
 ): NexusIdentity {
-  const own     = at.ownVesselKey.trim().toLowerCase();
-  const genesis = (at.genesisEpochCid ?? "").trim().toLowerCase();
+  const own      = at.ownVesselKey.trim().toLowerCase();
+  const explicit = (at.explicitScope ?? "").trim().toLowerCase();
+  const genesis  = (at.genesisEpochCid ?? "").trim().toLowerCase();
+  const anchor   = (at.anchorGateKey ?? "").trim().toLowerCase();
 
-  if (genesis.length === 0) {
-    return { scope: own, shared: false,
-             reading: "this vessel holds no seated charter, so it stands as its OWN ISLAND and resolves its "
-                    + "shared planes under its own key. Nothing is wrong here — a vessel alone is a Nexus of "
-                    + "one, and the scope widens when a charter seats." };
+  if (explicit.length > 0) {
+    return { scope: explicit, shared: explicit !== own,
+             reading: "this caller named its island outright, so nothing here infers one. A vessel that "
+                    + "knows which Nexus it is composing for is the most reliable source there is." };
   }
-  if (!GENESIS_RE.test(genesis)) {
+  if (genesis.length > 0 && GENESIS_RE.test(genesis)) {
+    return { scope: genesis, shared: true,
+             reading: `this vessel holds a charter, so its island is the genesis epoch that charter names `
+                    + `(${genesis.slice(0, 18)}…) — derived alike by every holder and belonging to no operator. `
+                    + "A charter OUTRANKS an anchor: it names a relation this vessel consented to, where an "
+                    + "anchor names only a relay it reaches." };
+  }
+  if (genesis.length > 0) {
     return { scope: own, shared: false,
              reading: "this charter's genesis epoch is unreadable, so it names no island and this vessel falls "
                     + "back to its own key. Addressing a board by a malformed scope would mint a clean empty "
                     + "one that no peer resolves, and a private island reads exactly like an agreeing one." };
   }
-  return { scope: genesis, shared: true,
-           reading: `this vessel resolves the island named by its charter's genesis epoch (${genesis.slice(0, 18)}…), `
-                  + "which every vessel holding that charter derives alike and which belongs to no operator. "
-                  + "Shared planes only: a board that could WIDEN this vessel's authority stays its own." };
+  if (anchor.length > 0 && KEY_RE.test(anchor)) {
+    return { scope: anchor, shared: anchor !== own,
+             reading: "this vessel holds no charter and dials an anchor, so it joins the island it crosses "
+                    + "into: an anchor names its confederation by its gate key, and a leaf passes that key "
+                    + "back to resolve the one board its anchor stands." };
+  }
+  if (anchor.length > 0) {
+    return { scope: own, shared: false,
+             reading: "the anchor key this vessel dials reads as no key at all, so it names no island and this "
+                    + "vessel falls back to its own. A board addressed by a malformed scope mints clean and "
+                    + "empty, and a vessel alone on one cannot tell that from agreement." };
+  }
+  return { scope: own, shared: false,
+           reading: "this vessel holds no charter and dials no anchor, so it stands as its OWN ISLAND and "
+                  + "resolves its shared planes under its own key. Nothing is wrong here — a vessel alone is "
+                  + "a Nexus of one, and the scope widens when a charter seats or an anchor is dialled." };
 }
