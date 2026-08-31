@@ -38,7 +38,7 @@
  * Meme: lar:///ha.ka.ba/lararium/api/persona-identity
  */
 
-import { CIRCLE_SCOPE_INFO } from "./domains.js";
+import { CIRCLE_SCOPE_INFO, NEXUS_SCOPE_INFO } from "./domains.js";
 import { hmac } from "@noble/hashes/hmac.js";
 import { sha256 } from "@noble/hashes/sha2.js";
 import { derivePersonaKeypair } from "./persona-hd.js";
@@ -95,6 +95,7 @@ export async function deriveVeiledUserKey(
 // ── Per-circle SCOPE-PSEUDONYM (the beyond-Ink&Switch unlinkability FLOOR) ──
 
 const CIRCLE_SCOPE_HMAC_KEY = new TextEncoder().encode(CIRCLE_SCOPE_INFO);
+const NEXUS_SCOPE_HMAC_KEY  = new TextEncoder().encode(NEXUS_SCOPE_INFO);
 
 /**
  * circleScopeIndex — the per-circle hardened index for the scope-pseudonym leaf.
@@ -133,3 +134,31 @@ export async function deriveCircleScopedKey(
   return derivePersonaKeypair(seed, [handleIndex, contextIndex, circleScopeIndex(circleDocIdHex)]);
 }
 
+/**
+ * nexusScopeIndex — the per-ISLAND hardened index for a Nexus scope leaf.
+ *
+ * Canon states the shape: "the name DERIVES from the compartment's own material. Each plane answers to
+ * a domain-separated MAC over that PersonaGroup's own doc id." An island carries its own material —
+ * the genesis epoch AID, content-addressed over the seated key-set and threshold — so a leaf derives
+ * from that and from nothing a vessel owns.
+ *
+ * SEPARATE FROM `circleScopeIndex` BY DOMAIN, and deliberately. A circle names a human's own
+ * compartment; a Nexus names an island several operators share. One MAC domain across both would let a
+ * leaf derived for a compartment collide with a leaf derived for an island — the collision the two
+ * levels stay apart to forbid.
+ *
+ * Same island → same index → same leaf, so a face rejoining an island presents the key it presented
+ * before. Different islands → different leaves, so an observer reading two islands finds no shared key.
+ * The 31-bit space bounds a human's own islands far below a birthday concern, and a collision would
+ * link only two of ONE human's own islands — a floor-tier leak rather than a break.
+ *
+ * IT NORMALISES CASE WHERE `circleScopeIndex` DOES NOT, and the difference follows the material rather
+ * than an inconsistency. An AID carries hex, where two spellings name one value, so folding case keeps
+ * one island from deriving two leaves. A circle answers to a doc id in base58, where case CARRIES —
+ * two spellings name two documents — and folding it there would merge distinct circles.
+ */
+export function nexusScopeIndex(nexusAid: string): number {
+  const mac = hmac(sha256, NEXUS_SCOPE_HMAC_KEY, new TextEncoder().encode(nexusAid.trim().toLowerCase()));
+  const u32 = new DataView(mac.buffer, mac.byteOffset, 4).getUint32(0, false);
+  return u32 & 0x7fffffff;
+}

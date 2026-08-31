@@ -104,6 +104,9 @@ export const RELAY_GATE_INFO = d("relay-gate");
 export const PERSONA_SCOPE_INFO = d("persona-scope");
 /** The per-circle hardened index — the key a persona presents to one circle. */
 export const CIRCLE_SCOPE_INFO = d("circle-scope");
+/** The per-NEXUS scope leaf. Distinct from `circle-scope`: a compartment and an island must never
+ *  derive into one another, so their MAC domains stay apart. */
+export const NEXUS_SCOPE_INFO = d("nexus-scope");
 
 // ── ARTEFACTS + BOARDS ──────────────────────────────────────────────────────────────────────────
 /** The served `oracle` pointer doc. */
@@ -127,6 +130,6 @@ export const ALL_DOMAINS: readonly string[] = [
   MEMBERSHIP_RELAY_DOMAIN, EDGE_KAPAE_DOMAIN, VOUCH_EDGE_DOMAIN, RE_ANCHORING_DOMAIN,
   GUARDIAN_CONFIRM_DOMAIN,
   KEYRING_ENVELOPE_DOMAIN, KEYRING_ENVELOPE_SEAL_INFO, CAD_KEYSTREAM_INFO, RELAY_GATE_INFO,
-  PERSONA_SCOPE_INFO, CIRCLE_SCOPE_INFO,
+  PERSONA_SCOPE_INFO, CIRCLE_SCOPE_INFO, NEXUS_SCOPE_INFO,
   ORACLE_POINTER_DOMAIN, PLUGIN_ATTESTATION_DOMAIN, MU_VOID_DOMAIN, RAISE_CHALLENGE_DOMAIN,
 ];

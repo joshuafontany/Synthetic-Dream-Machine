@@ -162,6 +162,14 @@ different key to each circle it joins'' and rejoining the same circle returns th
 ''An artifact scoped to ONE circle wants the SCOPED leaf.'' A stamp re-keyed to a bare Handle would
 drop the device-overlay and keep the cross-circle link — a fix shaped like one.
 
+''An ISLAND takes its own domain, never the circle's.'' Canon sets the shape — //the name DERIVES from
+the compartment's own material; each plane answers to a domain-separated MAC over that PersonaGroup's
+own doc id// — and a circle names a human's own compartment where a Nexus names an island several
+operators share. One MAC domain across both would let a compartment leaf collide with an island leaf,
+which the levels stay apart to forbid. An island answers to its ''genesis epoch AID'', content-addressed
+over the seated key-set, so the leaf derives from the island's own material and from nothing a vessel
+owns.
+
 
 ''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags
 and genesis — eleven by re-siting, and the UDS socket ''by DERIVATION'': the rendezvous stands at
@@ -1437,6 +1445,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1QNh9UwBDY70pIxn_vJDCSXVZ_y1NfmxKuDnVJOtHis
+<<^ code="&#x0003;" >>ni:///sha-256;M7lfbUwgTxedQk8yCREIT9Qz-YYh2mxw3PectjloNX0
 
 <<^ code="&#x0004;" -> to=? >>
