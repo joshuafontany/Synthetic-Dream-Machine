@@ -89,6 +89,27 @@ describe("cooling-cause — why a bag went cold decides what may be said about t
     expect(mgr.cooledBy(URL_A)).toBe(null);
   });
 
+  // ── A RESTART FORGETS, AND THAT IS THE HONEST ANSWER ──────────────────────────────────────────
+  // Residency state lives in one in-memory map; nothing persists it. So a vessel that restarts holds
+  // no reading for any bag, and every realm reads `unread` until something touches it.
+  //
+  // That is CORRECT rather than a gap: after a restart this vessel genuinely has not looked, and
+  // `unread` names exactly that. Persisting the temperature across a boot would carry a verdict the
+  // vessel can no longer stand behind — the substrate may have moved while it was down, so a restored
+  // `dissolved` would report a stale departure and a restored `alive` would vouch for a bag it has not
+  // opened. The forgetting is the guard.
+
+  it("★ a restarted vessel holds NO reading, and reports unread rather than a remembered one ★", () => {
+    const restarted = new BagStowage({});
+    expect(restarted.tier(URL_A)).toBe(null);
+    expect(restarted.cooledBy(URL_A)).toBe(null);
+    expect(deriveCabalRealmLiveness(restarted.tier(URL_A))).toBe("unread");
+  });
+
+  it("★ and `unread` is not about the realm — a boot is not a dissolution ★", () => {
+    expect(livenessIsAboutTheRealm("unread")).toBe(false);
+  });
+
   it("★ a bag never registered reports no cause, not a fabricated one ★", () => {
     expect(new BagStowage({}).cooledBy("automerge:nothing")).toBe(null);
   });
