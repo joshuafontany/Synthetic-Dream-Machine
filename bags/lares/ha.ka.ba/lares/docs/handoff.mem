@@ -363,7 +363,7 @@ The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/
 
 !! Vectors after ingest, in order — each lives whole in its design meme
 
-* ''2. `lar:///residency.create.lands`'' — design: `@lararium/api/residency-model` (CREATE + bag-grain COPY, approved; @catalog holdings accession)
+* ''2. `lar:///residency.create.lands`'' — design: `@lararium/api/residency-model` (CREATE + bag-grain COPY, approved; @catalog holdings accession). ✓ CREATE stands BUILT (`action-handler` reactor + `lares act` door). ✓ bag-grain COPY now carries a PLANNER (`bagCopyPlan`): one transfer family per batch, each title keeping its own change-id, refusing a self-copy, a duplicate title and a lineage-less grant. ⚠ ''The family rides the PLAN, never the action'' — a residency action grants and an effect record audits, and only the second carries a `transferId`; a draft stamped it onto each `CopyAction` behind an `as` cast that hid the mismatch. REMAINS: the rail (VERB → SUMMONS → OUTCOME in the admin island) and the `@catalog` holdings accession.
 * ''3. `lar:///closure.transitive.decided`'' — ruling: `pattern-integrities` §3 (resolve-transitive, record-flattened; ratify against real multi-wiki use only)
 * ''4. `lar:///admin.hull.unified`'' — law + hoike + migration playbook: `@lararium/api/island-isomorphism`
 
@@ -455,6 +455,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1RCibW6PYKGe1F0QvrXt0M1qP73p7drpwBoj-6rSxXM
+<<^ code="&#x0003;" >>ni:///sha-256;Iv8pq4qKlV3tmIE1zAYn5gapdGpVIEhaO8CP9OYSITo
 
 <<^ code="&#x0004;" -> to=? >>
