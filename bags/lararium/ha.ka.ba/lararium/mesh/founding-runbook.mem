@@ -140,11 +140,18 @@ given member stays this vessel's own reading OVER that record.'' Sharing a recor
 fusing the record with the decision would, because an admit only ever WIDENS whom a vessel carries
 for and an operator consents at ONE epoch, never to every admit made after it.
 
-⚠ ''What a shared stamp may carry.'' A stamp is signed by the ''public Handle'' — the veiled-user
-pseudonym presented through the veil. A human's ''vessel keys'' and the ''PersonaGroup'' those devices
-compose stay private, so a stamp must never publish either: a PersonaGroup root on a shared board
-would correlate one human's memberships across every Cabal they stamp into, by a key that also names
-their device-group.
+⚠ ''What an artifact that TRAVELS may carry.'' A charter travels before a partner can consent, and a
+shared board carries the stamps that contracted in — so whichever key class they name is ''published,
+and a key published once cannot be unpublished''. Three key classes stand and they do not
+interchange: a ''vessel key'' is device-minted and must never co-surface; a ''PersonaGroup root'' binds
+one human's own devices into an overlay; a ''veiled-user Handle'' is the sovereign pseudonym presented
+through the veil, and it is the only one of the three meant to be seen.
+
+''The Handle carries the same verification and none of the exposure.'' A PersonaGroup root on a
+travelling artifact names that human's device-group — and several drawn from one vault correlate to
+each other, which is what a founding seat does when it draws every chair from one identity home. An
+unrecognised key reads UNKNOWN rather than safe: a vessel cannot classify a key it did not mint, and a
+travelling artifact is the wrong place to guess.
 
 
 ''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags
@@ -1421,6 +1428,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8ZYMUMOAIEKB08QqvuyDDfWFMdAQnG5xXCwZlUbuFHY
+<<^ code="&#x0003;" >>ni:///sha-256;gfOqSGBp3ryshZf9rFDJ8h21YEFshH7oGGmDahjpliA
 
 <<^ code="&#x0004;" -> to=? >>
