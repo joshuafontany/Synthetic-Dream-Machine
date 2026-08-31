@@ -314,6 +314,7 @@ export { nexusPhase, type NexusPhase, type NexusPhaseName } from "./nexus-phase.
 export { nexusIdentity, type NexusIdentity } from "./nexus-identity.js";
 export { signerClass, type SignerClass, type SignerReading, type HeldKeys } from "./signer-class.js";
 export { nexusScopeIndex } from "./persona-identity.js";
+export { identityHomeClosure, type IdentityHomeClosure } from "./identity-home-closure.js";
 export { sealImportVerdict, foreignSeats,
          type SealImportVerdict, type ForeignSeatVerdict, type CharterChair } from "./seal-import.js";
 export { realmStanding, type RealmStanding, type RealmStandingName, type RealmFeedSlot } from "./realm-standing.js";

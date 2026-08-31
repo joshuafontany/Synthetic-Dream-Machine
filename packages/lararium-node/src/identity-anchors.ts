@@ -10,11 +10,11 @@
  * daemon store while re-reading the SAME anchors — the Handle survives the substrate.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, chmodSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { larIdentityDir } from "./vessel-paths.js";
 import { atomicWriteFileSync } from "./fs-atomic.js";
-import { readIdentityAnchors, type AnchorStore, type IdentityAnchors } from "@lararium/mesh";
+import { readIdentityAnchors, type AnchorStore, type IdentityAnchors, identityHomeClosure } from "@lararium/mesh";
 import { resolveSealPolicy, sealArchiveBytes, openArchiveBytes, asSelfSovereignSecret, ARCHIVE_PASSPHRASE_ENV } from "./archive-seal.js";
 
 // The IdentityAnchors SHAPE + the AnchorStore shore lift to @lararium/mesh (platform-blind); this node
@@ -58,10 +58,37 @@ function recordAnchor(handleIndex: number): void {
   try { chmodSync(file, 0o600); } catch { /* best-effort on a non-POSIX fs */ }
 }
 
+/**
+ * Read the identity home's mode and report an opening, once per process.
+ *
+ * The identity module states the invariant and leaves it to its caller — "caller must ensure the
+ * identity dir is not world-readable" — so this stands where the directory gets made. It reports and
+ * never repairs, and it says plainly what a mode bit declines to cover.
+ */
+let identityHomeReported = false;
+export function warnIfIdentityHomeOpen(): void {
+  if (identityHomeReported) return;
+  identityHomeReported = true;
+  let mode: number | null = null;
+  try { mode = statSync(larIdentityDir()).mode & 0o777; } catch { mode = null; }
+  if (mode === null) return;                       // no reading, and a guess would reassure on nothing
+  const verdict = identityHomeClosure(mode);
+  if (!verdict.closed) console.warn(`[identity] ${verdict.reading}`);
+}
+
 /** Write ONE persona's anchor set to the identity home (0o600), founding + admit both land it here, and
  *  record the index into the explicit roster. `handleIndex` selects which persona (0 = founding). */
 export function persistIdentityAnchors(anchors: IdentityAnchors, handleIndex = 0): void {
-  mkdirSync(larIdentityDir(), { recursive: true });
+  // THE HOME CARRIES THE MODE, not just the file. Each anchor lands at 0600, and a recursive mkdir
+  // takes the process umask for the directory around them — ordinarily 0755. Signing seeds rest here
+  // in cleartext, so a reader of this directory mints this vessel's signatures as one of its faces.
+  //
+  // Created owner-only, then READ BACK and reported: a home that already stood open keeps its mode,
+  // because a vessel widened on purpose has reasons and a silent chmod would hide the misconfiguration
+  // an operator wants to see. The warning names other USERS alone — a same-uid neighbour reaches this
+  // home whatever the bits hold, and canon runs sovereign vessels on one machine by design.
+  mkdirSync(larIdentityDir(), { recursive: true, mode: 0o700 });
+  warnIfIdentityHomeOpen();
   const path = anchorsPath(handleIndex);
   writeFileSync(path, JSON.stringify(anchors, null, 2), "utf8");
   try { chmodSync(path, 0o600); } catch { /* best-effort — a non-POSIX fs still holds the bytes */ }
