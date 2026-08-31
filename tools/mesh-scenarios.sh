@@ -52,19 +52,28 @@ browser_verdict() {
   docker inspect -f '{{.State.ExitCode}}' "dreamnet-mesh-${svc}-1" 2>/dev/null || echo "absent"
 }
 
-# WHETHER A SERVICE HAS STOOD — and why this is not a bare `grep -q`.
+# DOES A SERVICE'S LOG CARRY THIS LINE — and why this is never a bare `grep -q`.
 #
-# `set -o pipefail` + `grep -q` is a trap: `grep -q` exits at the FIRST match and closes the pipe, the
-# producer takes SIGPIPE and returns non-zero, and the pipeline therefore reads as FAILURE precisely
-# when the pattern matched. Measured: a hearth that had stood in 13 seconds reported "never stood",
-# and the failure dump printed the very line the check was looking for.
+# `set -o pipefail` + `grep -q` over a LONG producer is a trap: `grep -q` exits at the FIRST match and
+# closes the pipe, the producer takes SIGPIPE and returns non-zero, and the pipeline reads as FAILURE
+# precisely when the pattern MATCHED. Measured: a hearth that had stood in 13 seconds reported "never
+# stood", and the failure dump printed the very line the check was looking for.
 #
-# `grep -c` reads its input to the end, so nothing is signalled and the count is the answer.
-stood() {
+# IT BITES BY OUTPUT SIZE, WHICH IS WHY IT READS AS A FLAKE. A short log finishes before grep exits and
+# the pipeline passes; the same check over a longer log fails. Every wait here reads a container log
+# that grows with the run, so "intermittent" is the shape this bug wears.
+#
+# `grep -c` reads its input to the end, so nothing is signalled and the count is the answer. A short
+# producer (`printf` into grep) is unaffected and stays as it is.
+logs_have() {
+  local pattern="$1"; shift
   local n
-  n=$($COMPOSE logs "$1" 2>&1 | grep -cF "[lararium]")
+  n=$($COMPOSE logs "$@" 2>&1 | grep -cF "$pattern")
   [ "${n:-0}" -gt 0 ]
 }
+
+# whether a hearth has stood — the boot line every lararium prints.
+stood() { logs_have "[lararium]" "$1"; }
 
 run_operator() {          # $1 = a|b
   local who="$1" hearth="lararium-$1" browser="browser-$1"
@@ -89,8 +98,8 @@ run_operator() {          # $1 = a|b
   # first form failed here while the log said "lighting the face" one line down.
   step "the hearth stood without a peer"
   deadline=$((SECONDS + 240))
-  while ! $COMPOSE logs "$hearth" 2>&1 | grep -q "\[lararium\]" && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
-  if $COMPOSE logs "$hearth" 2>&1 | grep -q "\[lararium\]"; then ok; else
+  while ! stood "$hearth" && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
+  if stood "$hearth"; then ok; else
     bad "no lararium standing"
     $COMPOSE logs "$hearth" 2>&1 | tail -6 | sed 's/^/      /'
   fi
@@ -113,8 +122,8 @@ run_quorum() {
 
   step "the hearth stands"
   local deadline=$((SECONDS + 240))
-  while ! $COMPOSE logs lararium-a 2>&1 | grep -q "\[lararium\]" && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
-  if $COMPOSE logs lararium-a 2>&1 | grep -q "\[lararium\]"; then ok; else bad "no lararium standing"; clear_all; return; fi
+  while ! stood lararium-a && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
+  if stood lararium-a; then ok; else bad "no lararium standing"; clear_all; return; fi
 
   # THE SEAL'S OWN WORD. `nexus seal show` reports the seated roster and the threshold derived from
   # it — majority over what stood. A hearth with no cabal answers honestly and names nobody.
@@ -238,10 +247,10 @@ run_nexus() {
   # times the harness rather than the federation.
   step "the hearths carry from the herm"
   deadline=$((SECONDS + 240))
-  while ! $COMPOSE logs lararium-a lararium-b 2>&1 | grep -q "carriage: merged" && [ "$SECONDS" -lt "$deadline" ]; do
+  while ! logs_have "carriage: merged" lararium-a lararium-b && [ "$SECONDS" -lt "$deadline" ]; do
     sleep 5
   done
-  if $COMPOSE logs lararium-a lararium-b 2>&1 | grep -q "carriage: merged"; then ok; else
+  if logs_have "carriage: merged" lararium-a lararium-b; then ok; else
     bad "no carriage"
     $COMPOSE logs lararium-a 2>&1 | tail -5 | sed 's/^/      /'
   fi
