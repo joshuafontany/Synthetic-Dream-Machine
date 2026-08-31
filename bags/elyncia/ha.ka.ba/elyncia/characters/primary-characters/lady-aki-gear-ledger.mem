@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledge
 
 ! Lady Aki ~ Discounted Gear Ledger
 
-//Migrated verbatim from `elyncia/Shattered Isles/Lady_Aki_Discounted_Gear_Ledger.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -95,8 +92,8 @@ Use this table whenever a canonical SDM+ item is renamed for Aki.
 !! On Body
 
 | Aki Reskin | Canon Basis | List | Discount | Final | Pay | Rules / Effect | FTLS Notes |
-| Spinneret Kit | table-created Spider Folk toolkit | 20.00 | SF | 10.00 | Cash | Tool edge for silk/web/thread craft; not armor or weapon. | Approved fixed spend. Magitech crochet kit: hooks, bobbins, shuttle, tension cards, repair needles. |
-| Silksteel Ritual Miko Robes | Ruffle Coat comparator | 350.00 | SF+AG | 148.75 | Cash | Silksteel coat; protects as leather; 7 sp free inventory. | Accepted robe chassis. Re-skin as red/white miko workwear, Spider Folk textile cut, ritual pockets, under-Ichi passive utility. |
+| Spinneret Kit | table-created Spider Folk toolkit | 20.00 | SF | 10.00 | Cash | Tool edge for silk/web/thread craft; not armor or weapon. | Magitech crochet kit: hooks, bobbins, shuttle, tension cards, repair needles. |
+| Silksteel Ritual Miko Robes | Ruffle Coat comparator | 350.00 | SF+AG | 148.75 | Cash | ''Armor +2'' (silksteel, protects as leather), 1 st; pockets hold 7 sp of free inventory. | Red/white miko workwear, Spider Folk textile cut, ritual pockets, under-Ichi passive utility. |
 | Veiled Miko Work Hat | Moss Hat | 10.00 | AG | 8.50 | Cash | Ward +2; protection vs charms/nausea. | Reskin as an ''ichimegasa'' with ''uchikatsugi-style travel veil'': wide-brimmed shrine travel hat, dust/sun/insect veil, anonymity screen, wandering miko silhouette. |
 | Silk Filter Menpo | Dust Face | 25.00 | AG | 21.25 | Cash | Ward +1; full-face mask vs dust, haze, spores, toxins. | Reskin as lacquered silk-and-chitin mask with replaceable fungal filters. |
 | Bell-Tikker Clicker | Tikker Clicker | 30.00 | AG | 25.50 | Cash | Detects corrupting energies; grants bonus vs corruption. | Reskin as suzu-bell/clicker charm tied to Aki's sash. |
@@ -106,11 +103,11 @@ Use this table whenever a canonical SDM+ item is renamed for Aki.
 
 !!! On Body Notes
 
-* ''Veiled Miko Work Hat'' replaces the previous ''Spore-Mother Moss Cap'' label. It keeps the Moss Hat rules exactly but expresses them through traveling-miko protective dress: veil, ritual modesty, dust/sun/insect protection, and soft anonymity.
+* ''Veiled Miko Work Hat'' keeps the Moss Hat rules exactly and expresses them through traveling-miko protective dress: veil, ritual modesty, dust/sun/insect protection, and soft anonymity.
 * The hat should ''not'' be drawn as a tall ritual hat. It is the wide-brimmed travel form: ichimegasa + uchikatsugi-style veil.
 * The Ruffle-Coat comparator makes Aki's robes a real Spider Folk textile investment instead of a cheap robe reskin.
 * Thawnettes stay mechanically canonical: thrown, 1d4, very entangling, 1 stone each.
-* Spinneret Kit remains a table-created Spider Folk associated tool, priced by approved ruling.
+* The Spinneret Kit stands as a Spider Folk associated tool, priced at the Spider Folk channel.
 
 ---
 
@@ -236,6 +233,6 @@ Current answer: yes, provisionally.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;wcNEkPbbMNzQHgZ2rS4QXGBiHsj1e0ZESuEq0W8Wcco
+<<^ code="&#x0003;" >>ni:///sha-256;XpP81Y5KZBFbkqejg6VqX7WfTeYB67vswd0mNh-Eczg
 
 <<^ code="&#x0004;" -> to=? >>

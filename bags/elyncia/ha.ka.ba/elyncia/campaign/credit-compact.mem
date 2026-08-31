@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/campaign/credit-compact"
 
 ! The Lindwyrm's Expedition Credit Compact
 
-//Migrated verbatim from `elyncia/Shattered Isles/Sidebar_Lindwyrm_Neo-Thracia_Expedition_Credit_Compact.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -69,6 +66,6 @@ They may:
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;WKzBzAnqvBY__r127WZs21MMKOoCRmpUzhY0kLA_Z6Y
+<<^ code="&#x0003;" >>ni:///sha-256;1BZfy8tAH-zyxdpHNHwwwwiAwZI_qch4tPWk4LguiKs
 
 <<^ code="&#x0004;" -> to=? >>

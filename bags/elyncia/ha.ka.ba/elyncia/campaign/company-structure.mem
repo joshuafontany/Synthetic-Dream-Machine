@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/campaign/company-structure"
 
 ! Sidebar ~ Company Structure & Multi-PC Play
 
-//Migrated verbatim from `elyncia/Shattered Isles/Sidebar_Alpha_Playtest_Company_Structure_and_Multi_PC_Play.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -240,6 +237,6 @@ The intended play pattern: ''the company can do more than a normal small party, 
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;tP-kbrqPIPS_EiTg06YD1gc6l9674mzYeJQ7p_M7T_8
+<<^ code="&#x0003;" >>ni:///sha-256;G7Fba8mYwhf6rd56WV0iFWGiuiIdA4jEtj2Mo9QhY1Y
 
 <<^ code="&#x0004;" -> to=? >>

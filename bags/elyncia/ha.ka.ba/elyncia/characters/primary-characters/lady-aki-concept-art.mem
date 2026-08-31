@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-ar
 
 ! Lady Aki ~ Concept Art Package
 
-//Migrated verbatim from `elyncia/Shattered Isles/Lady_Aki_Concept_Art_Package_v1.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -183,7 +180,6 @@ Negative direction:
 * no generic witch hat,
 * no modern sci-fi armor replacing shrine/ashigaru language.
 
-
 ! Talk Story Notes — Concept Art Package v1
 
 !! What Changed
@@ -225,6 +221,6 @@ When Aki walks into a settlement:
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;iyxnYm6rkkSUW7FsJI0RkbslfHMZ-LT-c-7ZgosZVB0
+<<^ code="&#x0003;" >>ni:///sha-256;acHLvpPG-Khqd-GhbltoSiQ3wj8Sfln_LCats9U0LYI
 
 <<^ code="&#x0004;" -> to=? >>

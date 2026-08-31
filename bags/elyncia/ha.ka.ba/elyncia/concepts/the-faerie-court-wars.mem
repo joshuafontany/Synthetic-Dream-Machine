@@ -1,0 +1,154 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+```toml meta
+cacheable  = true
+confidence = 12
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/the-faerie-court-wars.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 15
+manaoio    = 14
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "concept canon — the Faerie Court Wars, YOLD ~3195-4200: the clan wars of the settlement age that raised Neo-Thracia; and the era-ladder law that makes this span and the imperial one open ground for pattern-integrities"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/concepts/the-faerie-court-wars"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Faerie Court Wars
+
+''YOLD ~3195 – ~4200.'' The clan wars of the settlement age — a thousand years in which the fae
+clans of Elyncia fought over a world that had just changed shape, and out of which the
+''Neo-Thracian Empire'' rose as the thing that won.
+
+''The Wars stand distinct from the War of the Immortals.'' That older conflict — YOLD 1, a decade
+of strife among gods and immortals, ending in the First Breaking — belongs to the elder age and
+its cast. The Court Wars run two thousand years later, among clans, over ground.
+
+<<~/ahu >>
+
+<<~ ahu #the-bracket >>
+
+!! Why the Era Sits Where It Sits
+
+''The lower bound: the Apophis Datum, YOLD 3195.'' The Datum re-based every coast, delta, harbor,
+and reef-line on the planet. The clans that spread inland afterward followed rivers and shorelines
+''the Datum had just built'' — which is why human settlement of the interior valleys dates to
+~3300–3500 and not earlier. ''You cannot settle a coast that does not exist yet.''
+
+''The upper bound: Neo-Thracia consolidates.'' By ~4200 the Empire stands as a political power in
+its own right, opening the eight-century golden age that runs to the Fall at YOLD 5000. The Wars
+belong to the era ''before'' that consolidation — the fighting that produced it.
+
+''So the Wars and the settlement name one event.'' The clans spread across new geography; the
+clans already holding that ground disputed it; the argument ran a thousand years and ended with an
+empire. ''What the Court Wars settled was who got the world the Datum made.''
+
+<<~/ahu >>
+
+<<~ ahu #the-combatants >>
+
+!! Who Fought
+
+''Fae against fae, throughout'' — humanity counting as one of the clans
+(`lar:///ha.ka.ba/elyncia/concepts/the-fae-clans`). No inter-species war ever happened on Elyncia,
+because the category was never available.
+
+What ran through the Wars instead: the ''human clan's ascendancy'', pressed under the conceit that
+it stood as the best of the clans; older clans defending holdings that predated the newcomers by
+three thousand years; Courts gathering, breaking, and re-gathering as allegiances shifted faster
+than descent could follow.
+
+''The war left its metal behind.'' Powered armor, personal daemon-cores, and the sacral-military
+kit of the losing clans survive as relics — found, inherited, and re-used for millennia afterward.
+Ichi's armor stands as one such piece: made in these Wars, recovered and carried down three
+generations by a clan native to the eastern shelf of Mu — the ground that became the Broken Isles —
+and turned against Neo-Thracian invaders twenty centuries after the war that forged it ended.
+//(Full line: [[ichi|lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi]].)//
+
+<<~/ahu >>
+
+<<~ ahu #the-era-ladder >>
+
+!! Design Law ~ the Era Ladder
+
+''Tech and Arcane levels re-set as the timeline advances.'' Elyncia's history runs long enough,
+and its Breakings cut deep enough, that ''no single technological register governs the whole
+span''. Each era carries its own ladder rung — and the Court Wars and the imperial age that
+follows them stand as ''deliberately open ground'' for drawing pattern-integrities in from other
+games and fictions.
+
+''What this permits.'' An era may take a whole cultural-technological vector whole, so long as the
+vector reads as ''integral'' — a pattern with its own internal logic, not a decoration. The
+timeline supplies the slot; the borrowed pattern supplies the texture; the Breakings supply the
+reason the register changed.
+
+''The ladder's sibling.'' Where an era absorbs a pattern as ''texture'', the Loom delivers other
+worlds' patterns as ''objects and places'' — wrack on the shore, relics out of the flux-lands,
+dream realms in the noosphere. Same discipline, different door:
+[[the-reachable-worlds|lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds]].
+
+''Worked example — Neo-Thracia at its Fall (YOLD 5000).'' The Empire at its height had acquired:
+
+* ''Jakub Różalski 1920+ dieselpunk'' — walking war-machines over agrarian country; peasantry and
+  towering mechanized force sharing one horizon; the mundane and the enormous in a single frame.
+* ''Late-Roman Thracian cavalry mythos'' — the soldier-emperor pattern, where the cavalry arm
+  becomes the decisive force and then becomes the throne; provincial horsemen taking an empire that
+  no longer knows how to refuse them.
+
+''The hint already stands in the Caverns.'' The garden-palace's wonders — the false sun, the
+teleport globes, the escape pods, the boiler-works — never read as anachronism. They read as
+''imperial magitech'', because at its height that is exactly the register the Empire ran at.
+
+//(Referee note: the ladder cuts both ways. An era's register also tells you what a ruin from that
+era should feel like when the party walks into it five hundred years later.)//
+
+!!! The Middle Stays Loose ~ ruled
+
+''The Court Wars carry no named internal phases, and shall not acquire them.'' A thousand-year span
+of cascading wars resists periodization by design: the era stays ''deliberately loose'' so that any
+pattern-integrity drawn into it can find its own depth, rather than being told in advance which rung
+it lands on.
+
+''Tech and Arcane levels fluctuated wildly across the whole planet through these wars.'' Not one
+ladder rung for the era — ''many, simultaneously, and unevenly distributed''. A front running
+high magitech and a front running bronze and oath could stand a week's sail apart, and often did.
+Local registers rose, collapsed, and rose again as ley-access, patronage, and planar reach shifted
+under the fighting.
+
+''What this gives a referee:'' the middle era answers "what technology do they have here" with
+''whatever this place's war left it'' — and answers it differently for every place. A ruin from the
+Court Wars carries no default register; it carries the register of the front it belonged to.
+
+<<~/ahu >>
+
+<<~ ahu #open >>
+
+!! Open
+
+* ''What the clans did for the three thousand years between'' the First Breaking and the Wars —
+  the long coexistence, whatever its character, that the fighting finally ended.
+* ''Which Courts stood on which side'', and whether the modern Court roster took its present shape
+  during the Wars or after them.
+* ''Which Nexuses ran which register when'' — the flux stands canon, its map does not.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-necrospire >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;UuS8GF5XSDoTUPp6_kWLB-NTc-R4RnGugK5mx672PnI
+
+<<^ code="&#x0004;" -> to=? >>

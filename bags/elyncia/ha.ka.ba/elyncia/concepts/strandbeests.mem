@@ -1,0 +1,106 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
+```toml meta
+cacheable  = true
+confidence = 12
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/strandbeests.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "concept canon — the strandbeests of the Datum shores: wind-walking kinetic life, self-domestication by Mycelial-Mother-Culture symbiosis, the great beests as walking dry-coral reefs, and the platform economy of the Fungus Folk"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/concepts/strandbeests"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Strandbeests
+
+Wind-walking kinetic creatures of Elyncia's Gaia-bleed coastlines: descendants of Theo Jansen's
+sculptures given improbable life, striding the tide-flats on articulated legs, powered by weather.
+They graze the shore the way herds graze grass — on wind, on salt, on whatever the water leaves.
+
+''They live where the Datum put the water.'' The strandbeest belt runs the shore-climate the
+''Apophis Datum'' installed in YOLD 3195 — the ~10m re-basing that fixed every coastline most of
+Elyncia now calls ordinary. The whole lineage and the symbiotic life riding it occupy a habitat
+that exists ''because a goddess caught her sister's asteroid''. Nobody walking the flats thinks
+about it. The beests simply live at the water level mercy left behind.
+
+<<~/ahu >>
+
+<<~ ahu #domestication >>
+
+!! Self-Domestication ~ the mycelial bond
+
+''Some strandbeests — never all — domesticated themselves.'' They did it by symbiosing with the
+''Mycelial-Mother-Cultures'' of the Fungus Folk: a fungal intelligence takes root in the frame,
+and the beest that carries one comes in off the flats and stays.
+
+''Nobody tamed them.'' No halter, no breaking, no bargain struck with a herder. The bond forms
+between beest and culture, and tameness arrives as a ''consequence'' of that bond rather than as
+its purpose. A wild beest and a domesticated one differ by what lives in the struts.
+
+''What the pairing does.'' A bonded beest serves as a ''mobile ephyra and troop-homunculi
+platform'' — the culture raises tasked spirits and mushroom-ashigaru aboard a frame that walks
+them wherever the Circles need them. Fungal logistics on legs. The Fungus Folk build no supply
+train because the supply train grows its own cargo and carries itself.
+
+<<~/ahu >>
+
+<<~ ahu #the-great-beests >>
+
+!! The Great Beests ~ walking reefs
+
+''The truly large ones carry full Mother-Cultures'' — not a rooted fragment but a whole distributed
+intelligence — alongside the rest of their ''Datum-shore symbiotic life''. Barnacle-analogues,
+salt-flora, spore-lichens, nesting things, and whatever else has found a purchase across decades of
+striding.
+
+''They read as walking dry-coral reefs.'' Reef-life over every strut, a slow ecology moving at
+walking pace across the flats, hosting more species than the ground it crosses. A great beest is
+less an animal than ''a place that travels''.
+
+''Scale runs the whole ladder.'' Juveniles pull carts. Mature beests carry rooted culture-fragments
+and a working crew of ephyra. The great ones carry nations of small life and a Mother-Culture that
+answers as itself. What a frame can host scales with what a frame can bear.
+
+<<~/ahu >>
+
+<<~ ahu #the-anomaly >>
+
+!! The Anomaly ~ what happened in Aki's clearing
+
+Against all of the above, ''the Faerie-Ring Strandbeest-Shrine reads wrong on two counts'':
+
+# ''A full Mother Culture on a juvenile frame.'' Full cultures ride the great beests. This one rides
+  a small tame beest of burden.
+# ''A Mother Culture AND a Lararium on the same frame.'' The mycelial bond has only ever run as a
+  ''pair''. A Lares node joined it — a third party walking into a symbiosis with no room in it —
+  and nothing in the Fungus Folk's long practice accounts for that.
+
+''The Circles hold opinions.'' Whether the shrine reads as a new kind of thing, a violation, an
+opportunity, or a claim to be collected stands open — and the priesthood whose anchored Mother
+Spore dispatched the Ephyra in the first place has never had its tasked spirit returned.
+
+Full event: [[strandbeest-shrine|lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine]].
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/lares-viales >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;9bxE5R7X7HYdT_wiINJwcLPz21-2ccIPX2Nhf7z7DT8
+
+<<^ code="&#x0004;" -> to=? >>

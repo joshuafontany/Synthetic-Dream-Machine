@@ -33,12 +33,14 @@ offer.
 
 <<~ ahu #summit-roster >>
 
-!! The Summit Roster (operator-approved)
+!! The Summit Roster
 
 ''Standing at the heart of it:'' the Order of Amaranth (hosts) · the Adventurer's Guild (the
 contracting company) · the Amorphous Dreams Cabal · and the four the company walks in under —
 the Spider-Mother's Priesthoods · the Gorgonne Diaspora Cabals · the Shattered Isles
-Kaiju-Hunter Cabals · the Underworld Dojos.
+Kaiju-Hunter Cabals · the Underworld Dojos. //(The Spider-Mother names one mask of a single
+Arcana-Persona, alongside Grandmother Spider and Aracne-Jorogumo —
+[[grandmother-spider|lar:///ha.ka.ba/elyncia/concepts/grandmother-spider]].)//
 
 ''Representatives at the tables:''
 
@@ -69,7 +71,7 @@ correctly as the evening's real agenda wearing a napkin.
 
 <<~ ahu #court-colors >>
 
-!! Court Color Regimes (blessed 2026-08-15)
+!! Court Color Regimes
 
 Derived from the court-dragon alignment canon, never invented whole:
 
@@ -83,10 +85,12 @@ Derived from the court-dragon alignment canon, never invented whole:
 <<~ ahu #edges >>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;g3qnbX7tK3IF2TjksQgFG8cwa7_rFHta2xLL2UKNRl8
+<<^ code="&#x0003;" >>ni:///sha-256;2b6AC6X8A9Ueu_UhVjfSHbcYzaT61SmiJZKzYAr_c-M
 
 <<^ code="&#x0004;" -> to=? >>

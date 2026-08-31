@@ -23,8 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/concepts/the-burned-library"
 
 ! The Burned Library
 
-''Operator-spoken canon (in-scene at the House of Masks, players present — player-safe).''
-
 The ''Floating Librarians of Mu'' have spent nearly five hundred years recording the lost and
 wild magics into ''a new grammar'' — one attested working at a time, patient as coral, from the
 High Delos Archive and the Library's own drifting stacks.
@@ -32,7 +30,7 @@ High Delos Archive and the Library's own drifting stacks.
 Then the ''Dream-zone Library of Alexander caught fire during the time-glitch event'' — within
 the last hundred years, and ''the exact date stands lost to the time-glitch itself'': every
 record that would fix the day rides locked or contradicts its neighbors, which the Bureau of
-Chronometry (Remnant) names ''their oldest cold case'' (blessed canon). Because //when// itself
+Chronometry (Remnant) names ''their oldest cold case''. Because //when// itself
 ran unreliable, the fire did what no honest fire can: ''it spread through l-space instead of
 shelf-space, and LOCKED much of the records.''
 
@@ -89,9 +87,10 @@ your exits memorized.// Some information they hold stays locked — not by the f
 
 <<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model >>
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds >>
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Udt1k58zFIGZQ1oMGK602t_qLciNxNCGzBzLQpcfocM
+<<^ code="&#x0003;" >>ni:///sha-256;athecy2kl3KfPGYz1jFH1F9oXEWLtuXys-MBNSUpjZs
 
 <<^ code="&#x0004;" -> to=? >>

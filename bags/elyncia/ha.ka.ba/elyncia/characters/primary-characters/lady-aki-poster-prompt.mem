@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-pro
 
 ! Lady Aki ~ Poster Sheet Prompt
 
-//Migrated verbatim from `elyncia/Shattered Isles/Lady_Aki_Concept_Art_Poster_Sheet_Prompt_v1.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -57,6 +54,6 @@ No spider legs on Ichi. No tall ritual hat. No generic witch hat. No polished fi
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ohDkJDZxLlQ0IjCA_tP8RGVtAsfj1qvOMnGBdbRNyKI
+<<^ code="&#x0003;" >>ni:///sha-256;kPTaqy4vhOgiSxDu2ApoBtadWf4j-P39ejfrNwcWaoU
 
 <<^ code="&#x0004;" -> to=? >>

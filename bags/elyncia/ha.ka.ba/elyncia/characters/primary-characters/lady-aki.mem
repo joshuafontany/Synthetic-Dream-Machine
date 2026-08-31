@@ -45,6 +45,36 @@ Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her
 
 <<~/ahu >>
 
+<<~ ahu #origin >>
+
+!! Origin ~ How the Household Began
+
+Aki came up in a ''Spider-Mother priesthood'' of the Shattered Isles, tending an anchored Mother
+Spore cluster in the settled country. She followed one of its Ephyra out past the cultivated ground
+into the fungal jungle — the wild interior, where a Neo-Thracian invasion force and the clans
+resisting it died together of a planet-wide comms failure in the year the Necrospire fell.
+
+The Ephyra came down on a ruined roadside shrine with powered armor lying in the wreck. Aki warded
+the site — ''Web'' and ''Alarm'' — and the shrine read her ward as a handshake, answered //security
+perimeter established, re-routing mana//, and routed that mana through everything inside her circle.
+She lost the next stretch of time entirely.
+
+''She walked in a priesthood's daughter and walked out an operator.'' Ichi woke; the shrine, the
+Ephyra, and her juvenile strandbeest merged into a Level 1 mobile Lararium; and Aki acquired —
+without asking, and without any rite her training covered — ''a house''.
+
+''The two relations, held apart.'' Aki serves a ''mask of the Arcana'' through her priesthood, and
+she operates a ''node'' that woke in her presence. A god and a piece of infrastructure. She owes
+each something categorically different, and the difference stands as this character's live tension
+rather than a thing to resolve
+([[grandmother-spider|lar:///ha.ka.ba/elyncia/concepts/grandmother-spider]]).
+
+''The open claim.'' The priesthood's anchored Mother Spore dispatched a tasked spirit on an errand
+and never got it back. From the Glade's side, Aki's household reads as ''an unreturned asset with
+opinions''.
+
+<<~/ahu >>
+
 <<~ ahu #quick-card >>
 
 !! Quick Card
@@ -525,8 +555,6 @@ Typical duties:
 
 !! Tasked Spirits — Fungus Gumi
 
-//(harvested from the roadmap MD, 2026-08-14, verbatim-converted)//
-
 Small batches of multibody mushroom homonculi tasked spirits.
 
 Typical duties:
@@ -541,8 +569,6 @@ Typical duties:
 <<~ ahu #spore-mother-ontology >>
 
 !! Spore-Mother Ontology
-
-//(harvested from the roadmap MD, 2026-08-14, verbatim-converted)//
 
 The Spore-Mother rides as:
 * distributed fungal intelligence,
@@ -665,6 +691,8 @@ one (see #inventory-overrun).
 !! Edges
 
 <<~ loulou lar:///elyncia.neo-thracia.opens/characters/ichi >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
 <<~ loulou lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine >>
 <<~ loulou lar:///elyncia.neo-thracia.opens/company/alpha-playtest-company >>
 <<~ loulou lar:///elyncia.neo-thracia.opens/gear/lady-aki-ledger >>
@@ -689,8 +717,6 @@ Do not collapse these roles.
 <<~/ahu >>
 <<^ code="&#x0002;" >>
 
-
-
-<<^ code="&#x0003;" >>ni:///sha-256;TTROiK_mUk1Sc6pko5pCqMaDJ6cUGShJ_qgFzcgwHaU
+<<^ code="&#x0003;" >>ni:///sha-256;vKOSCN4I71sej2BOATUaykHzCaLE9PbrUBUvX_lrVXQ
 
 <<^ code="&#x0004;" -> to=? >>

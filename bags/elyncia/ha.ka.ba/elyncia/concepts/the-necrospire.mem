@@ -23,8 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/concepts/the-necrospire"
 
 ! The Necrospire
 
-''(Operator canon, Josh & Freyja, 2026-08-15 — the core pattern integrity of the fall.)''
-
 ''The needle.'' Deep in the Oort cloud the gods found it: a needle-like rock of the far void,
 older than any orbit worth naming. When the War of the Immortals ended and the necromancer who
 had torn the sky was cast out, the gods ''lifted his fortress-ziggurat whole from Elyncia'' —
@@ -66,9 +64,10 @@ sinking.
 
 <<~ loulou lar:///ha.ka.ba/elyncia/nexuses/illyria/region-worksheet >>
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZIZvLE8bVkfr_of2qzTBTpiSdv9vOjP0UUfatqXpA0U
+<<^ code="&#x0003;" >>ni:///sha-256;l9mO2HXBpBwaOF8Q6vJVV9sxp1lhi3OacT_ieU_L1AY
 
 <<^ code="&#x0004;" -> to=? >>

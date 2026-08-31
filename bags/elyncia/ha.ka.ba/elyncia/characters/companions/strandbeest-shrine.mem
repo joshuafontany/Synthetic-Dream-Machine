@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/characters/companions/strandbeest-shrine"
 
 ! The Faerie-Ring Strandbeest Shrine
 
-//Migrated verbatim from `elyncia/Shattered Isles/Faerie_Ring_Strandbeest_Shrine_Sheet.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -42,13 +39,61 @@ untouched; md table separator rows dropped.//
 
 ---
 
-!! Origin
+!! Origin ~ The Warding Circle
 
-When Lady Aki bonded with Ichi at the old fantascience shrine site, the shrine itself remained — damaged, leaking mana, but still anchored to a ley-line thread. Ichi's Mother Spore, the fairy ring of mycelium that had birthed the spore-jelly tasked spirit, rooted into the shrine's foundation and began stabilizing it.
+!!! What Stands Ordinary
 
-Freyja saw an opportunity. A juvenile strandbeest — one of the wind-walking kinetic creatures that wander Elyncia's Gaia-bleed coastlines, descendants of Theo Jansen's sculptures given improbable life — had been grazing near the shrine site. She convinced the Mother Spore to transplant into the strandbeest's frame, synthesizing shrine, fairy ring, and walking machine into a single mobile platform.
+''A strandbeest carrying a Mother Culture reads as commonplace.'' Some — never all — of the
+wind-walking kinetic creatures of the Datum shores ''domesticated themselves'' by symbiosing with
+the Fungus Folk's Mycelial-Mother-Cultures, and the pairing serves as a ''mobile ephyra and
+troop-homunculi platform''. The truly great beests carry ''full Mother-Cultures'' among the rest
+of their shore-climate symbionts — walking dry-coral reefs, reef-life over every strut. Full canon:
+[[strandbeests|lar:///ha.ka.ba/elyncia/concepts/strandbeests]].
 
-The result: a miniature roadside shrine mounted on articulated wind-walking legs, trailing silk-and-mycelium sails, pulling an armored wagon. The Mother Spore's fairy ring glows faintly orange at the shrine's base. The strandbeest's legs move with the eerie smooth gait of something that learned to walk from the wind.
+Aki's beest of burden stood in that tradition: tame, ''juvenile'', small enough to pull a wagon —
+one of the domesticated ones, and unremarkable for it.
+
+!!! What Stands Odd
+
+''One event, in one clearing.'' The Ephyra came down on a ruined roadside shrine — blast-damaged,
+lichen-grown, powered armor lying in the wreck beside it. Lady Aki, following, did the careful
+thing: she threw a warding circle, ''Web'' threads and ''Alarm'', and put a line around the site
+before touching anything inside it.
+
+''The shrine answered in protocol.'' Something still live under the damage read the perimeter not
+as a ward but as ''a perimeter being established'', and replied in the flat register of a node
+coming up: //security perimeter established, re-routing mana.// ''Octarine sparks'' scattered
+across the warded ground. Aki went down.
+
+''What she woke to.'' Ichi on his feet, helping her toward the shrine — and the shrine no longer a
+shrine. Hokora, Ephyra, and juvenile strandbeest had merged into one body, and that body had come
+up as a full ''Level 1 mobile Lararium''.
+
+''Why the result reads strange to anyone who knows beests:'' a Mother Culture on a strandbeest
+frame surprises nobody, and a ''full'' culture on a ''juvenile'' frame already raises an eyebrow.
+But this frame carries ''a Mother Culture AND a Lararium'' — a Lares node joined a symbiosis that
+has only ever run as a pair. Nothing in the Fungus Folk's long practice accounts for a third party
+walking into that bond, and the Circles have opinions about it.
+
+''The law underneath it:'' a cold node kindles from the nearest fire (the wayfarer's law —
+[[lares-viales|lar:///ha.ka.ba/elyncia/concepts/lares-viales]]). Aki carried the fire and did not
+know it. ''Everything she drew a line around got enrolled.''
+
+''The fairy ring is a daughter, not the mother.'' The priesthood's anchored Mother Spore cluster
+stands where it always stood, in the settled Isles. What rooted into this shrine's foundation grew
+''from the Ephyra'' — a daughter ring, and the shrine's own. The home Glade's claim on what it
+dispatched stands open.
+
+''What a troop platform grew.'' The Ephyra's errand named it plainly: raise a batch of
+mushroom-ashigaru homunculi and send them home for jobs. This platform raised ''exactly one
+soldier'', and he turned out to be a person.
+
+''Since:'' the shrine has advanced from Level 1 to its present Level 2 in Aki's service.
+
+The result as it walks: a miniature roadside shrine mounted on articulated wind-walking legs,
+trailing silk-and-mycelium sails, pulling an armored wagon. The Mother Spore's fairy ring glows
+faintly orange at the shrine's base. The legs move with the eerie smooth gait of something that
+learned to walk from the wind.
 
 Freyja describes her as "a mushroom shrine tachikoma... pulling a wagon."
 
@@ -292,6 +337,6 @@ The strandbeest legs lock into aggressive posture — stabbing, sweeping, and tr
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;C3ADN5QOEOPwnGhMplCtzVAnwRcoJPRO4PetyV1aE7E
+<<^ code="&#x0003;" >>ni:///sha-256;t8cMrwzjhojabYuOerPuSkT80EUVAeYSmBqEXRn5KD8
 
 <<^ code="&#x0004;" -> to=? >>

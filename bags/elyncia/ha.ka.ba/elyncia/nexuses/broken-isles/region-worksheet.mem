@@ -1,0 +1,167 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet >>
+```toml meta
+cacheable  = true
+confidence = 11
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "ano"
+register   = "Provisional-Synthesis"
+retain     = true
+role       = "region worksheet — the Broken Isles: Mu's severed eastern shelf, three isles and their sky-islands, the fungal jungles, and the home water of Aki, Kai, and Ichi's clan; grown by play"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Broken Isles ~ Region Worksheet
+
+''The severed shelf.'' Once ''the eastern shelf of the great Nexus of Mu'' — coast of the drowned
+low kingdoms, half-submerged pagodas and temple gates under warm reef-strewn seas — the shelf was
+''ripped away during the fall of the Necrospire'' at YOLD 5000. What remains stands as three great
+islands divided by deep Astral Sea rifts, fringed with sky-islands, threaded with ancient fungal
+jungles.
+
+''Two names, and the difference matters.'' Charts read ''the Broken Isles''. The rift-coast locals
+say ''the Shattered Isles'', //and keep the older grief in it//. Anyone using the chart-name in a
+harbor tavern is announcing where they are from.
+
+''Dream-mirror source:'' Japan · Nusantara (mythic Thailand, Myanmar, Malaysia, Indonesia) · New
+Zealand · //Nausicaä and the Valley of the Wind//.
+
+''Why this worksheet matters at the table:'' ''two of three player-daemon PCs come from here'', and
+so does the clan that carried Ichi's armor. Lady Aki's priesthood, Kai ʻĀ's hunting ranges, and the
+battlefield where the household was born all sit inside this Nexus.
+
+<<~/ahu >>
+
+<<~ ahu #the-severing >>
+
+!! The Severing ~ what YOLD 5000 did here
+
+''Three catastrophes in one season.'' The Isles carry a compound wound that no other Nexus quite
+matches:
+
+# ''The shelf tore free.'' A continuous coastline of Mu became three islands with Astral rifts
+  between them. Ground that had been contiguous for aeons stopped being reachable on foot.
+# ''A war was already on it.'' A ''Neo-Thracian expeditionary force'' was fighting here — several
+  factional fronts at once, supply chain at its end, as far from Neo-Thracia as an imperial soldier
+  could physically stand.
+# ''Then the network died.'' Web 2 failed planet-wide in a day, and both sides went dark together.
+  //They did not lose a battle. They lost the continent, the network, and the war at once.//
+
+''Which is why the local name keeps the grief.'' The severing runs 492 years back and the Isles
+still name themselves after it.
+
+''What the rifts do now:'' deep Astral Sea channels between the three isles, crossed by wave-jammer,
+sky-lane, or Underdark rift-gate — never on foot. The severance is permanent geography.
+
+''Prompts:'' which clans lost kin on the far side of a rift that opened in a night · what the Mu
+mainland owes, or thinks it owes, its severed shelf · whether any stretch of old coast road still
+runs to a cliff and stops.
+
+<<~/ahu >>
+
+<<~ ahu #the-three-isles >>
+
+!! The Three Isles
+
+''The Northern Isle ~ the fungal country.'' Lowest-lying, prone to flooding, ''dominated by fungal
+megaflora'' whose root networks may conceal a slow semi-sentient hivemind. ''Mycohaven'' — a
+port-city partially grown from fungal architecture — seats the ''Fungal Druid Circles''. This is
+Mother-Culture country: anchored Mother Spore clusters in the settled parts, and beyond them the
+deep fungal jungle the locals reckon in weeks rather than miles.
+
+''The Southeastern Isle ~ the mist.'' Perpetually swathed in fog, geothermal ley-nodes feeding a
+labyrinth of waterfall canyons and hidden terraces. The ''Mist Monastery'' rings ships and flyers
+through the fog channels by resonant bell. ''Seelie Fae Clans'' predominate — healing plants, fog
+navigation rites, frequent alliance with Hawaiki voyagers.
+
+''The Southwestern Isle ~ the cavern cities.'' Mountainous jungle riddled with bamboo-built cavern
+cities and ''Underdark rift-gates'' that serve as trade arteries and deadly hazards both.
+''Kōra Caverns'' — bamboo-scaffolded, suspended markets, the Underdark trade hub for goods moving
+to Mu and Hawaiki. The ''Root-Gate Chasms'' open to Nexuses across ''both Nets'' when fed the
+correct spore key.
+
+''Above all three ~ the sky-islands.'' Rooted rock masses carrying ''insect fae clans'' — hornet,
+beetle, dragonfly lineages — casting shifting shadows on the seas below. ''Hivewind Heights'' holds
+the hive-complex: aerial trade, mounts, and pollen diplomacy.
+
+''Prompts:'' which isle holds Aki's priesthood and which holds Kai's ranges · what a spore key costs
+and who cuts them · which sky-island has drifted somewhere it should not have.
+
+<<~/ahu >>
+
+<<~ ahu #powers >>
+
+!! Powers, Hazards, Nodes
+
+''Factions:'' ''Insect Fae Clans'' (sky-island trade, aerial mounts, pollen enchantment) ·
+''Cave-City Elders'' (merchant councils over Underdark commerce and jungle resources) · ''Fungal
+Druid Circles'' (guardians of the megaflora, possible intermediaries to the hivemind) · ''Seelie
+Fae Clans'' (mist isle) · the ''Mycelial Hivemind'' (rumored — //a distributed consciousness in the
+fungal root systems; may function as a hidden Lares network//).
+
+''Also standing here:'' the ''Shattered Isles Kaiju-Hunter Cabals'', one of the four factions the
+alpha-playtest company walks in under, and the ''Spider-Mother's Priesthoods''
+([[grandmother-spider|lar:///ha.ka.ba/elyncia/concepts/grandmother-spider]]).
+
+''Lares:'' fragmented but adaptive. Grove-Lares embedded in fungal root networks; Sky-Lares in the
+insect hives; Path-Lares riding with migrating aerial mounts. ''Some nodes interface only through
+mycelial dream-roots'', requiring fungal communion rites to reach — a node you must be admitted to
+biologically rather than by token.
+
+''Hazards:'' spore storms drifting from the north (dangerous to breathe, and excellent cover) ·
+riftquakes collapsing or flooding Underdark tunnels · mist illusions hiding reefs, and fog-spirits
+luring vessels into ''temporal pockets'' · sky-island collisions.
+
+''Strategic weight:'' the primary bridge between the Eastern Net and the Western continental
+Nexuses, linked to Hawaiki's seasonal orbital path. Rich in biomagitech — ''spore engines, fungal
+composites, insect-derived enchantments''.
+
+''Prompts:'' what the hivemind wants, if it wants · who brokers between the Circles and the hives
+this season · what a temporal pocket returns you into.
+
+<<~/ahu >>
+
+<<~ ahu #the-wilds >>
+
+!! The Wilds ~ the Nausicaä register
+
+''The fungal jungles run ancient and they run deep.'' The dream-mirror names //Nausicaä and the
+Valley of the Wind// outright, and the register holds: spore-air that kills the unmasked, megaflora
+older than any settlement, an ecology that reads as hostile and turns out to be doing something
+else, and a small number of people who have learned to walk in it without a filter and decline to
+explain how.
+
+''What the wilds hold:'' the wreck-fields of old wars, including ''the Neo-Thracian battle-grounds
+of YOLD 5000'' — a whole invasion's kit lying where the network died, blast-scarred roadside
+shrines among it. This is where Lady Aki followed an Ephyra and came back with a household
+([[strandbeest-shrine|lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine]]).
+
+''Prompts:'' what else is still standing out there with a daemon in it · what the Circles permit to
+be salvaged and what they do not · why kaiju range these islands and what the hunters have learned
+not to say about it.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;MBTUg7EAJ82a_AVYjrmg4lRX8qXNh4c_dVE3hx-qoyI
+
+<<^ code="&#x0004;" -> to=? >>

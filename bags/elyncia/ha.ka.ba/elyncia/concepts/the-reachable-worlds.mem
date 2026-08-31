@@ -1,0 +1,158 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds >>
+```toml meta
+cacheable  = true
+confidence = 12
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/the-reachable-worlds.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 15
+manaoio    = 14
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "concept canon — the other worlds as real, reachable, and dream-mirrored: the Loom's stitches and its offcuts, the four arrival channels, and the referee law for what washes up"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/concepts/the-reachable-worlds"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Reachable Worlds
+
+''Elyncia stands primary. Everywhere else stands real.''
+
+The Goddess lies dreaming at the Loom, ''drawing in threads from other worlds and embroidering them
+onto her living pattern''. That work has run for five thousand years. It does not run cleanly. Every
+stitch she takes leaves an ''offcut'', and every offcut lands somewhere — on a shore, in a rift, or
+in the noosphere as a realm nobody built.
+
+''So the other worlds arrive here in two registers at once:'' as ''places'' a navigator can reach
+and a dreamwalker can enter, and as ''debris'' that turns up in a market stall with no chain of
+provenance and no local smith who can name the alloy.
+
+<<~/ahu >>
+
+<<~ ahu #the-dream-mirror >>
+
+!! The Dream-Mirror ~ the doctrine already in the gazetteer
+
+Every Nexus entry in the gazetteer carries a field: ''Origin / Dream-Mirror Source''. Elyncia's own
+geography stands admitted as borrowed — the gods took whole pieces of terrain from Gaia's dreams to
+patch her after the First Breaking, and the Loom has kept taking since.
+
+''Gaia stands as the first case and the special one.'' The gods and immortal fae lords kept
+''summer houses'' there until the First Breaking cut the road
+([[the-fae-clans|lar:///ha.ka.ba/elyncia/concepts/the-fae-clans]]) — so Gaia and Elyncia rhyme
+because the same powers lived in both, not because either copied the other. Every ''other''
+dream-mirror source stands at one remove from that: a world the Loom reaches, rather than a world
+the family lived in.
+
+''The doctrine widens the field from there.'' A dream-mirror source has never meant only Gaia. Worlds
+beyond Gaia — their skies, their histories, their catastrophes and their surviving arts — mirror
+into Elyncia's noosphere as ''dream realms'': some gentle and open to trade and passage, some
+snapping shut like traps, all of them ''real enough to walk in and to be hurt in''.
+
+''What the Orrery keeps'' is the map of exactly this: //Lares node maps showing where Elyncia's
+pattern has reached into neighbouring worlds to patch her own seams//. The instrument that knows
+where the worlds touch, and therefore where the offcuts fall.
+
+<<~/ahu >>
+
+<<~ ahu #the-channels >>
+
+!! Four Channels
+
+# ''The shore.'' The Astral Sea carries //the ruins of sky-cities and forgotten demi-planes,
+  drifting like flotsam in the void//, and a sea that carries things is a sea that ''beaches''
+  them. Coastal Nexuses run a wrack-line of impossible objects. The oldest attested case needs no
+  explaining to a merchant: ''Vastlands coins pass in Elyncian markets'', and have for centuries.
+# ''The flux-lands.'' Semi-unstable reality rifts extrude what they hold. Inland relics arrive
+  without a tide to explain them — a rift-maze opens onto a corridor that belongs to another
+  world's architecture, and shuts again with something on this side of it.
+# ''The gates.'' Root-Gate Chasms opening across Nets when fed the correct spore key; aurora gates
+  that bloom and wither unless anchored by an astral key; the demi-plane portals of the Rootwell
+  Chasms; the high-mana wormholes that opened for Gaia's refugees and have never entirely stopped.
+  ''These carry travelers, not just cargo.''
+# ''The deep dream.'' Astral forms walking the noosphere links reach dream realms directly. No
+  object crosses; the traveler does, and comes back changed, informed, or followed.
+
+<<~/ahu >>
+
+<<~ ahu #the-wrack >>
+
+!! What Washes Up
+
+''An arrival reads as foreign.'' That stands as the whole test. Elyncia's own eras run a known
+ladder — orichalcum and bronze, the Court Wars' wild uneven registers, imperial magitech,
+post-Fall salvage. A thing from elsewhere ''matches none of them'', and every competent
+artificer, archivist, and fence on the planet knows the feeling of holding an object whose
+workmanship answers no question they know how to ask.
+
+''Aeon-lost'' names the usual condition: an artifact older than any Elyncian chronology can seat,
+from a world whose own age for it may have been last Tuesday. The Sea does not carry time evenly.
+
+''What still applies, no matter where a thing came from:''
+
+* ''The blight does not care about provenance.'' Un-Named worked iron rots on schedule whether it
+  was forged in the Brimstone crucibles or somewhere with a different sun. Foreign iron needs a
+  true naming like any other, and the naming rite has to ''fit'' the thing — which is its own
+  problem when nobody knows what the thing is.
+* ''The Curse, the Datum, and the Silence hold locally.'' An arriving object enters Elyncian
+  physics. Whatever it did at home, here it does that under this world's law.
+* ''Locked works stay locked.'' A relic whose grammar burned in another world's fire reads exactly
+  like one that burned in the Library of Alexander — which is why the kahu take an interest in the
+  wrack-line, and why the ''Cartographers of Unmade Places'' pay in coin or true memory for surveys
+  of places that do not exist yet.
+
+<<~/ahu >>
+
+<<~ ahu #the-walkers >>
+
+!! Those Who Have Been
+
+Reaching another world stands as rare, expensive, and survivable. It has been done.
+
+''Telarus, KSC'' — Arch-Sorcerer and Guru of the Amorphous Dreams Cabal — walked a great many of
+them in an earlier condition, as a ''demi-god of wild magic''. What he brought back, what he left
+behind, and what still recognizes him there ride at his own hand.
+
+The ''Guild of Navigators'' of Hawaiki charts what can be charted. The ''Floating Librarians of
+Mu'' file what can be filed. Between them sits everything neither will put in writing.
+
+<<~/ahu >>
+
+<<~ ahu #referee >>
+
+!! Referee Law
+
+''Elyncia's patterns govern every scene.'' Another world's material arrives as ''an object, a
+place, or a rumor'' — never as a rules-set that displaces this one. A Spelljammer hull beached on a
+Delian shore stays a hull in an Elyncian harbor: it draws Elyncian tariffs, rusts under the
+Elyncian curse, and gets salvaged by people with Elyncian debts.
+
+''Import a pattern-integrity, not a bibliography.'' Take the thing that carries its own internal
+logic — a technology, an institution, a catastrophe, an aesthetic — and let it arrive as ''wrack''.
+The moment it needs its home world's rules to make sense, it has stopped being an artifact and
+started being a crossover.
+
+''The naming stays open.'' A wrack-line, an arrival, an offcut of the Loom — the house has no
+settled pet-name for the tideline of worlds yet.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;n-KM5F68Bwr8SU0k2sAeGiKi4doQNaomQW0jYgsalFc
+
+<<^ code="&#x0004;" -> to=? >>

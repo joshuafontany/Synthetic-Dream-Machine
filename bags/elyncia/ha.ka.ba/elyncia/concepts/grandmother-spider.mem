@@ -1,0 +1,91 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
+```toml meta
+cacheable  = true
+confidence = 13
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/grandmother-spider.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 15
+manaoio    = 14
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "concept canon — Grandmother Spider as one Persona of the Arcana wearing three masks (void-weaver, treaty-architect, cult-mother); and what the Mother Spore is NOT"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/concepts/grandmother-spider"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Grandmother Spider ~ Three Masks, One Persona
+
+''Grandmother Spider'', ''Aracne-Jorogumo'', and ''the
+Spider-Mother'' name ''one Persona of the Arcana'' wearing three masks. Three names in three
+registers, one weaver behind them.
+
+''On the word "Arcana":'' the house's pet-name for the cap-G Gods — the great Personas whose
+presence reaches mortals through masks, cults, sacred routes, relics, and infrastructural miracles
+rather than through one stable body. Reading a god as a Persona wearing masks stands as the
+setting's ordinary grammar, not a special case made for this one.
+
+<<~/ahu >>
+
+<<~ ahu #the-masks >>
+
+!! The Three Masks
+
+''Grandmother Spider ~ the void-side face.'' She spun the lattice across nexus and orbital arcs at
+the First Breaking, one of the three great works that kept Elyncia whole. She keeps ''the far side
+of the pattern'' — where the Loom draws threads in, the Spider walks them out — and strings the
+''Lares Lagrange Chorus'' across the still points, holding its ten nodes singing. The Lamplighters'
+Union tends her infrastructure and speaks of the beings she allied with and drew in from the void:
+''the Lamplights'', of whom the record holds only that.
+
+''Aracne-Jorogumo ~ the treaty face.'' Co-architect of the DreamNet at the conclave of YOLD 5002,
+named beside Hermes, Hephaestus, and Eris-Enyo among the powers the Lindwyrm called debts from.
+Contributes ''web-architecture, distributed continuity, and knotwork across fractured realities''
+— the mask that shows up where a network needs designing rather than a world needs saving.
+
+''the Spider-Mother ~ the cult face.'' Holds ''Priesthoods''. One of the four factions the
+alpha-playtest company walks in under. The mask that keeps shrines, trains daughters, anchors
+Mother Spore clusters in settled country, and sends tasked spirits out on errands.
+
+''Reading the three together:'' she saves the world, she designs the replacement network, and she
+keeps the local shrine. Same weaver, three scales, and the mortals at each scale rarely suspect the
+other two.
+
+<<~/ahu >>
+
+<<~ ahu #not-the-mother-spore >>
+
+!! What the Mother Spore Is NOT
+
+''The Mother Spore stands apart.'' A distributed fungal intelligence and mobile lararium node — an
+''ecology and a piece of infrastructure'', never a mask of any god. It has mycelium, sclerotia,
+rhizomorphs, and fruiting bodies; it does not have worshippers.
+
+''Which puts Lady Aki at a joint, deliberately.'' Her ''priesthood'' serves a mask of the Arcana.
+Her ''shrine'' is a Mother Spore installation that woke in her presence and never asked her
+permission. A god and a node. She owes each of them something categorically different, and the two
+debts do not reduce to one.
+
+''Do not collapse them.'' A priestess who mistakes her node for her god has stopped serving either.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;nCUAxPDmA-JrZx_jjGVL33Dazo8-EwRmJYRseWb9c4k
+
+<<^ code="&#x0004;" -> to=? >>

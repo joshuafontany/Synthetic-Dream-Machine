@@ -23,9 +23,6 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/ichi"
 
 ! Ichi ~ Powered Symbiote & Construct Golem
 
-//Migrated verbatim from `elyncia/Shattered Isles/Powered_Symbiote_Trait_and_Ichi_Construct_Golem.md` (2026-08-14); md→wikitext conversion mechanical — prose
-untouched; md table separator rows dropped.//
-
 <<~/ahu >>
 
 <<~ ahu #body >>
@@ -103,7 +100,7 @@ The number of available mod slots depends on the system's item inventory (7 + ST
 
 !!! Hull/Vitality Mods
 
-In combat, the operator of a Powered Symbiote is the target of all incoming damage. Hull/Vitality mods are available, and many come as standard upgrades on light mecha and large vehicles. This structure or hull serves as an additional pool of temporary Life, aside from any force-field or other temporary Life. Damage is tracked to this pool first, unless traits or other effects over-ride this. Non-symbiote vehicles serve as the target in combat, have their own Life total, and rely on their operator and crew to perform tests or rolls (See SDM chapters and UVG/VBLG/OGA for core vehicle and mod rules). Parking-lot note: synthesize this into a better flow later. This Hallmark Trait eventually belongs in the FTLS Magitech and Fantascience chapter.
+In combat, the operator of a Powered Symbiote is the target of all incoming damage. Hull/Vitality mods are available, and many come as standard upgrades on light mecha and large vehicles. This structure or hull serves as an additional pool of temporary Life, aside from any force-field or other temporary Life. Damage is tracked to this pool first, unless traits or other effects over-ride this. Non-symbiote vehicles serve as the target in combat, have their own Life total, and rely on their operator and crew to perform tests or rolls (See SDM chapters and UVG/VBLG/OGA for core vehicle and mod rules).
 
 !!! Ejection Systems
 
@@ -133,11 +130,58 @@ When the operator (or the system) suffers a ''Defeat trigger'' while in Symbiosi
 
 !! Origin
 
-A Mother Spore (fairy ring mushroom spirit) dispatched a floating Ephyra spore-jellyfish tasked spirit to an old shrine where Lady Aki had detected remnant magitech signal. The mission: settle, colonize, grow a batch of mushroom-ashigaru homunculi, send them home for jobs.
+!!! The Armor's Long Line
 
-The spore-jelly found broken ashigaru powered armor — a relic of the Faerie Court Wars, pre-Necrospire. The armor's personal daemon was still inside: not dead, not functional, dreaming in the wreckage after millennia.
+''Designed in the Faerie Court Wars'' (''YOLD ~3195–4200'' —
+[[the-faerie-court-wars|lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars]]). The powered
+armor and its personal daemon-core came out of the clan wars of the settlement age: after the
+Apophis Datum re-based the world's shores, while the human clan pressed its ascendancy across the
+new geography, and ''before the Neo-Thracian Empire stood as a power at all''. Roughly two thousand
+years before the present day.
 
-Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke up. Not a homunculus, not a daemon, not a suit of armor — something new.
+''Found, then inherited, by a people already there.'' The clan that recovered the wreck reads
+''native to the Broken Isles'' — a mostly-human-fae people of that ground, not incomers to it.
+When the armor was made, their country was not islands at all: it stood as ''the eastern shelf of
+Mu'', attached to the largest Nexus in the Western Net, coast of the drowned low kingdoms. The
+clan held that shelf through the Court Wars and the two thousand years after, and the armor passed
+down ''three generations'' among them — fae-blooded generations, which run long. The third wearer
+carried it against the ''invading Neo-Thracian forces''.
+
+''The year that took everything at once.'' YOLD 5000 did not deal this clan a defeat. It dealt them
+three things in one season: the ''Necrospire's fall tore their shelf away from Mu'', leaving three
+great islands split by Astral rifts where a coastline had been; a ''Neo-Thracian expedition'' was
+fighting on their ground, several factional fronts at once, its supply chain already spent; and
+then ''Web 2 died across the whole planet in a day''.
+
+''They did not lose a battle. They lost the continent, the network, and the war together'' — and
+the invaders lost with them, stranded at the farthest point from Neo-Thracia a soldier could stand.
+
+''The name keeps the wound.'' Charts still read ''the Broken Isles''. The rift-coast locals say
+''the Shattered Isles'', //and keep the older grief in it//. That grief is this clan's, and Ichi
+was standing in it when the sky fell.
+
+''What Ichi holds of it:'' the sky falling. The signal cutting out. Nothing after. Whether that
+memory rides locked, extracted, burned, or otherwise, ''Ichi cannot tell from the inside'' — the
+Burned Library's own condition, worn by a person instead of a shelf.
+
+!!! The Waking
+
+A floating Ephyra spore-jellyfish — a tasked spirit of the ''anchored Mother Spore cluster'' that
+serves Lady Aki's priesthood in the settled Isles — went out on an ordinary errand: settle,
+colonize, raise a batch of mushroom-ashigaru homunculi, send them home for jobs. Aki followed it
+out past the cultivated ground into the fungal jungle, and it came down on a blast-scarred
+roadside shrine with the armor still lying in the wreck beside it.
+
+Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke up. Not a
+homunculus, not a daemon, not a suit of armor — something new. //(The clearing's full event, and
+what else woke in it, rides at
+[[strandbeest-shrine|lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine]].)//
+
+''The anomaly, named.'' A tasked spirit ''cannot exceed its assigned scope'' — the DreamNet's own
+law. This one did. Whether the binding had decayed across the errand, or the waking shrine
+re-bound it when it announced //re-routing mana// (a node holds the authority to bind tasked
+spirits), or something else entirely, ''stands open''. Ichi therefore reads as neither miracle nor
+malfunction but as a ''jurisdictional question with a person standing in it''.
 
 ---
 
@@ -186,7 +230,7 @@ Instead of colonizing, the spore-jelly symbiosed with the daemon. Something woke
 
 !! Heritage: Construct *(free, no trait slot)*
 
-> Ichi is a Construct Golem, part modern Elyncian mycelial tasked spirit, part dreaming daemon, and part lost magitech powered armor from the ancient Faerie Court Wars.
+> Ichi is a Construct Golem, part modern Elyncian mycelial tasked spirit, part dreaming daemon, and part lost magitech powered armor from the Faerie Court Wars of the settlement age.
 
 ''Deathless'' //(Skilled slot 1)// — Ichi doesn't die at 0 Life. They enter a dormant state. Recovery requires upkeep: organic matter, mana-rich nutrients, ambient ley-line signal, or time at a functioning node. Sacrifice something to trigger reconstitution — biomass, a potion, a watch spent at a lararium.
 
@@ -216,9 +260,11 @@ fills.
 
 !!! Slot 0b — Background: Military *(Court Wars sergeant)*
 
-The original daemon served as an NCO in the Faerie Court Wars — an era before the Necrospire's return. This background grants competence in: formation discipline, tactical assessment, field logistics, recognition of rank insignia and command structures (including ancient/obsolete ones).
+''Two military strata, and both stand playable.'' The daemon's own craft runs back to the ''Faerie Court Wars'' (YOLD ~3195–4200) — the armor is that old, and the sergeant's habits come with it: formation discipline, tactical assessment, field logistics, and recognition of rank insignia and command structures, ''including ancient and obsolete ones''. Its ''last'' service ran far younger: three generations in a mostly-human-fae Broken Isles clan, ending against the Neo-Thracian invasion in the year of the Fall (YOLD 5000).
 
-When Ichi encounters military architecture, fortifications, or unit formations from or inspired by the Court Wars era, the daemon's buried memory may surface as instinct or déjà vu.
+''Why the second stratum matters at the table:'' the company sails for Neo-Thracia, and the kit, ranks, road-signs, camp habits, and siege-marks Ichi knows in his hands are ''that Nexus's own, from the losing side of an invasion''. He reads their architecture the way a veteran reads a rival regiment's trenches.
+
+When Ichi encounters military architecture, fortifications, or unit formations from either era, the daemon's buried memory may surface as instinct or déjà vu.
 
 ---
 
@@ -328,6 +374,6 @@ See ''Powered Symbiote'' (1 st).
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;XkRwO_IQti1y9AFyGG8ydiSlffClu6J3Vv1hCJdtV8Y
+<<^ code="&#x0003;" >>ni:///sha-256;1ujDk7b9EghZtCbPATnj1n4YO7ahUgJlw357uOHdvGU
 
 <<^ code="&#x0004;" -> to=? >>

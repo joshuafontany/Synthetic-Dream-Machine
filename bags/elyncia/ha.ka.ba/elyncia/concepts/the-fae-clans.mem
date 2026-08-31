@@ -1,0 +1,131 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
+```toml meta
+cacheable  = true
+confidence = 13
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/the-fae-clans.mem"
+l-space    = "stable"
+mana       = 15
+manao      = 15
+manaoio    = 14
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "concept canon — the fae clans of Elyncia, humans among them: the staged portal arrivals of the post-First-Breaking age, the clan taxonomy, and the Neo-Thracian conceit"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/concepts/the-fae-clans"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Fae Clans
+
+''Humanity stands as one of the fae clans of Elyncia.'' Not a separate species that arrived among
+the fae, and not a rival kind — ''a clan'', filed where elves, dwarves, goblins, insect-kin, and
+the rest are filed. Every argument about who belongs on this world runs ''inside'' the fae
+taxonomy, never across its border, because no such border was ever drawn.
+
+<<~/ahu >>
+
+<<~ ahu #the-elder-residents >>
+
+!! The Elder Residents ~ whose world this is
+
+''The Gods have always been here.'' Not visitors, not later arrivals, not powers who found Elyncia
+after she was made — the gods and the ''immortal fae lords'' have shared this world from the
+beginning, and the fae lords are the elder clans' own heads. Divinity and faerie nobility stand as
+co-native to Elyncia, and neither one holds a deed the other lacks.
+
+''Gaia was the summer home.'' Many of them kept a second residence on Elyncia's sister world and
+went there as one goes to a summer house — for the season, for the company, for reasons of their
+own. Traffic ran both ways along the void-web for as long as the void-web held.
+
+''The First Breaking closed the summer road.'' When the web shattered at YOLD 1, the powers who had
+kept two homes were reduced to one, and Gaia was left with the memory of visitors who stopped
+coming. What Gaia's own histories record as gods withdrawing from the world reads, from this side,
+as ''the road home being cut''.
+
+''Which inverts the obvious reading of the dream-mirror.'' Elyncia does not echo Gaia because she
+copied her. The two worlds rhyme because ''the same powers walked both'', kept houses on both, and
+left the same handprints on both — and then one of the two lost the company.
+
+<<~/ahu >>
+
+<<~ ahu #the-arrivals >>
+
+!! The Arrivals ~ how the human clan reached Elyncia
+
+''The portals failed slowly.'' When the First Breaking tore the void-web joining Gaia to her
+sister, the standing portals did ''not'' all fail at once. They went over an age — some closing
+within the decade, some holding open across generations, some reopening in periods of high mana
+long after everyone had stopped expecting them. Gaia's mages spent that whole failing age
+''sending populations through'', in waves, from a Bronze Age collapsing on its own terms.
+
+''And they arrived somewhere their gods already summered.'' The refugees came from a world their
+powers had kept a house on for aeons — which is one reason the human clan reads as ''fae'' at all,
+rather than as something the taxonomy had to make room for. The family had been visiting for a very
+long time.
+
+''So arrival ran staged, not singular.'' The human clan of Elyncia descends from an entire era of
+refugees — different centuries, different cultures, different reasons for running — which is why
+the modern populations read ''extremely multi-cultural'' and why no single origin-story serves
+them all. Other demi-planes fed the same door. The clan was assembled in transit.
+
+''What they took as their own.'' The human clan's Affinity runs ''Hearth & Ways'' — the two
+domains the Lares themselves keep, the household and the road. A clan that arrived through
+thresholds took the threshold as its birthright, and its sub-lineages carry the same signature:
+''Changeling'', ''Frontierling'', ''Rainbowlander''. Crossroads people, all of them.
+
+<<~/ahu >>
+
+<<~ ahu #the-conceit >>
+
+!! The Neo-Thracian Conceit
+
+''The empire's founding vanity:'' that humans stood as ''the best of the fae clans''.
+
+Read it exactly. Not //better than the fae// — the claim never denies the kinship, because denying
+it would forfeit the argument. Neo-Thracian supremacism runs ''intra-fae'': the youngest clan,
+arrived through a failing door, declaring itself the finest expression of the family that took it
+in. That conceit built an empire, and the empire's magitech, bureaucracy, and eight-century golden
+age all stood as the evidence it offered.
+
+''What the other clans made of it'' runs from indulgence to open war, and the ''Faerie Court
+Wars'' (`lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars`) name the era where the argument
+stopped being rhetorical.
+
+''Where the conceit sits now:'' the Neo-Thracian Scions still claim imperial bloodlines in a Nexus
+whose empire fell 492 years ago, and the claim still carries weight with people who cannot
+remember why. A conceit outlives the thing it justified. That is generally what conceits are for.
+
+<<~/ahu >>
+
+<<~ ahu #the-courts >>
+
+!! Clans and Courts ~ not the same axis
+
+''A clan names descent. A Court names allegiance.'' The old ''Summer'' and ''Winter'' Courts
+gathered many clans each; the modern Courts — ''Seelie'', ''Unseelie'', ''Ouroborous'',
+''Brimstone'', ''Crystal'', and others — gather them differently. A clan may scatter across every
+Court; a Court holds whichever clans swore to it.
+
+''Which is why the Ouroborous Court reads as it does:'' led by a mortal raised to Faerie Lord
+status. A human-clan warlord holding a Faerie Court surprises nobody who has the taxonomy right,
+and reads as an outrage to anyone who does not.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;eF4ETPl8AjDxG0xufaXZWuJmNS6tMwT8m1Hpl47r__s
+
+<<^ code="&#x0004;" -> to=? >>

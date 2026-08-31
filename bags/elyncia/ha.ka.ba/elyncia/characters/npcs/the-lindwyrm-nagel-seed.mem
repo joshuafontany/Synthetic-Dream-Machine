@@ -1,0 +1,130 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed >>
+```toml meta
+cacheable  = true
+confidence = 12
+file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed.mem"
+l-space    = "stable"
+mana       = 14
+manao      = 14
+manaoio    = 13
+rating     = "ano"
+register   = "Synthesis"
+retain     = true
+role       = "image-design seed — the Lindwyrm in the Patrick Nagel register: the verbatim prompt block, what the renders returned, and the witness law that keeps her form unfixed"
+type       = "text/memetic-wikitext+tiddlywiki"
+uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The Lindwyrm ~ Nagel Seed
+
+''One of the seeds.'' This meme records a render seed and its returns — ''not'' a canonical
+appearance. The Patroness's form stands ''unrecorded by design'': witnesses disagree, and she
+corrects none of them ([[the-lindwyrm|lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm]]).
+
+''So read what follows as one witness's account, painted.'' A Nagel Lindwyrm joins the pile of
+mutually incompatible descriptions rather than settling it. The pile ''is'' the canon.
+
+''Why the register suits her.'' Nagel's method runs by ''subtraction'' — the nose bridge goes, the
+ear cartilage goes, the shading goes, the background goes, until only the minimum remains, and the
+face reads ''more'' present for it. A Nagel portrait declines to be fully specified and gains
+authority by declining. That stands as the Lindwyrm's own law, executed as technique.
+
+<<~/ahu >>
+
+<<~ ahu #prompt >>
+
+!! The Prompt (verbatim)
+
+```
+Ageless woman, pinup style, full body shot, immortal dragon in human form revealed through
+luminous reptilian eyes and iridescent scale hints.
+<<Artist style:"Patrick Nagel"
+mood:"1980s materialism, hedonic detachment, seductive power, aloof mystery. Cold glamour,
+transactional posture, distant expressions, sharp cheekbone smirks."
+medium:"Acrylic on stretched canvas, hand cut stencil serigraph, silkscreen ink bleed, opaque
+color fields. Zero texture flat opacity, analog pigments, zero micro grain."
+geometry:"Surgical precision, economy of means, frozen permanence, flattened perspective,
+bisected negative space. Bold lines, stark porcelain/alabaster negative space dominant."
+dna:"Pop art illustration, Japanese woodblock silhouette, Ukiyo e flat plane, bold minimalist
+line work. Eastern print layouts merged with fashion illustration; high contrast ink boundaries,
+zero 3D depth shading.">>
+```
+
+<<~/ahu >>
+
+<<~ ahu #returns >>
+
+!! What the Renders Returned
+
+''Seed A — the triptych sheet.'' Full figure at left on a flat cobalt rectangle, that rectangle
+pasted onto a cream sheet whose margins run dense with ''illegible handwritten script''. Black
+lacquered greatcoat, one shoulder built into a hard geometric wing; ''red'' at gloves, throat, and
+boots and nowhere else. Face turned three-quarters away. Top-right panel takes the face close:
+porcelain field, hard black brow-strokes, gold hoops, carmine lips — and ''yellow-green eyes''
+carrying the entire reptilian tell. Bottom-right panel gives the dragon head in ''the same flat
+plate grammar'' as the coat: blue-black and olive scales, a yellow slit eye, cream throat-scutes.
+
+''Seed B — the cover.'' Blue trench with white topstitching, collar up. Blue-lensed rimless
+spectacles pushed ''down the nose'', ice-blue eyes looking over them straight out of the frame.
+Black lacquered glove, one long pale claw-nail raised vertical against red lips: ''the shush''.
+Iridescent teardrop earrings reading as scale-hints. Red masthead bleeding off the top edge, a
+column of small unreadable type down the left margin.
+
+<<~/ahu >>
+
+<<~ ahu #what-it-caught >>
+
+!! What the Register Caught
+
+* ''The tell lives in the eyes alone.'' Everything else reads as a woman in very good outerwear.
+  The scale-hints stay ornamental; the eyes do the work. This matches the canon of a Great Dragon
+  arriving under a ''mana-muting glamour'' — the glamour holds everywhere except where she permits
+  it not to.
+* ''One grammar for both bodies.'' The dragon panel and the lacquered coat are painted in the same
+  flat plates with the same ink boundaries. Scale and lacquer read as ''one material'', which is the
+  right answer for a being who is not wearing a disguise so much as choosing a silhouette.
+* ''The shush is her manner as a gesture.'' She answers short and spends real words only on the
+  substrate. A claw-tipped finger to the lips renders that without a line of dialogue.
+* ''The spectacles, pushed down.'' Smoked-glass gaze-courtesy belongs to the Gorgonne cabals and
+  the harbor guilds who copied it. Wearing the courtesy and then ''declining'' it — lenses down,
+  eyes out — reads as exactly the kind of manners she keeps.
+* ''She stands on a page of writing nobody can read.'' Seed A mounts her figure on a field of
+  illegible script. For a Patroness whose hoard was records, junk, and off-world artifacts, and who
+  co-built an archive-network, the accident lands well enough to keep.
+
+<<~/ahu >>
+
+<<~ ahu #craft-notes >>
+
+!! Craft Notes (for the next seed)
+
+* ''`zero micro grain` did not hold'' in Seed B — visible halftone and dotted stitch-lines
+  throughout. The silkscreen clauses (`silkscreen ink bleed`, `hand cut stencil serigraph`) appear
+  to outvote it. Choose one: press for true flat opacity ''or'' accept the print artifacts as part
+  of the look.
+* ''`full body shot` yielded a triptych'' in Seed A rather than a single figure. The multi-panel
+  return reads well here; name it deliberately if it is wanted again.
+* ''Red discipline'': Seed A confines red to throat, hands, and feet. Worth keeping as a stated
+  palette rule rather than leaving to chance.
+* ''Never fix the form.'' Any future seed should keep at least one element deliberately unstable
+  between renders, so the boards stay honest about disagreeing.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;_JljQ_je-XadKQYq7s-yYYW1lgUUUFRsshy62HmUjUs
+
+<<^ code="&#x0004;" -> to=? >>
