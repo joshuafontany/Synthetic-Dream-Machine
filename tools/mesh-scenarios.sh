@@ -187,6 +187,52 @@ run_quorum() {
 # The reading it proves is the one that must NOT over-claim: one face feeding is a VISIT, and several
 # faces of ONE operator are MANY-FACES rather than a mutual hold — the slots carry faces, and a human
 # running several of their own reads as the Sybil-of-one this plane prices socially.
+# ── THE OPEN POSTURE ────────────────────────────────────────────────────────────────────────────
+# POSTURE IS THE ONE-WAY, LEAST-GATED ACT IN THE DESIGN: `cap-tier` makes loosening a ratchet that
+# runs one way under no-global-now, and nothing but the operator's hand gates the flip. It had never
+# been walked in a container, so the claim that it "applies on a node bounce" stood untested.
+#
+# WHAT THIS PROVES is narrow on purpose: the flip lands in the charter, SURVIVES a bounce, and moves
+# NOTHING else — the phase still reads what the relations say. Posture governs what the public shelf
+# CARRIES; it never admits an operator, and a scenario that let those two blur would teach the wrong
+# thing about the least-reversible act here.
+# COVERS: open/seed/unfed
+run_open() {
+  say "OPEN — the posture flips, survives a bounce, and moves nothing else"
+  clear_all
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+
+  step "lararium-a up, alone"
+  if LAR_A_PEERS= $COMPOSE up -d --no-deps lararium-a >/dev/null 2>&1; then ok; else bad "up"; return; fi
+
+  step "the hearth stands AND answers"
+  if up_and_answering lararium-a; then ok; else
+    bad "no lararium answering"; $COMPOSE logs lararium-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return
+  fi
+
+  # FAIL-CLOSED IS THE DEFAULT, and it earns an assertion: a Nexus develops in isolation until the
+  # operator opens it, so a harness that only ever saw `open` could not tell a default from a flip.
+  step "posture reads PRIVATE by default"
+  if $COMPOSE exec -T lararium-a $LARES nexus posture --json 2>&1 | grep -q '"posture":"private"'; then ok
+  else bad "the default was not private"; fi
+
+  step "the flip lands in the charter"
+  if $COMPOSE exec -T lararium-a $LARES nexus posture open --json 2>&1 | grep -q '"posture":"open"'; then ok
+  else bad "the flip did not land"; fi
+
+  # THE CLAIM THE DOOR MAKES — "a node bounce applies it" — and nothing had tested it.
+  step "OPEN survives a node bounce"
+  $COMPOSE restart lararium-a >/dev/null 2>&1
+  if up_and_answering lararium-a \
+     && $COMPOSE exec -T lararium-a $LARES nexus posture --json 2>&1 | grep -q '"posture":"open"'; then ok
+  else bad "the posture did not survive the bounce"; fi
+
+  step "and the phase is UNMOVED — posture carries, it never admits"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
+  else bad "opening the posture moved the phase"; fi
+  clear_all
+}
+
 # COVERS: private/seed/visit
 # COVERS: private/seed/many-faces
 run_realm() {
@@ -342,8 +388,9 @@ case "$WANT" in
   quorum)     run_quorum ;;
   relation)   run_relation ;;
   realm)      run_realm ;;
-  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | all)" >&2; exit 2 ;;
+  open)       run_open ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_nexus ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"
