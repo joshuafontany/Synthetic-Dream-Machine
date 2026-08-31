@@ -27,7 +27,10 @@ import { signerClass } from "../src/signer-class.js";
 const ROOT   = "a".repeat(64);
 const VEILED = "b".repeat(64);
 const VESSEL = "c".repeat(64);
-const held = { personaGroupRoots: [ROOT], veiledHandles: [VEILED], vesselKeys: [VESSEL] };
+const SCOPED = "e".repeat(64);
+const held = {
+  personaGroupRoots: [ROOT], veiledHandles: [VEILED], vesselKeys: [VESSEL], circleScopedKeys: [SCOPED],
+};
 
 describe("signer-class — what may hang outside, and what stays in the household", () => {
   it("★ a veiled Handle MAY stand on a travelling artifact ★", () => {
@@ -71,8 +74,38 @@ describe("signer-class — what may hang outside, and what stays in the househol
     expect(r.klass).toBe("persona-group-root");
   });
 
+  // ── PUBLISHABLE IS NOT THE WHOLE QUESTION ─────────────────────────────────────────────────────
+  // A Handle is MEANT to be seen: a HandleCard announces it, and recognition needs it stable. That
+  // same stability correlates a human across every circle they present it in. The persona tree already
+  // carries the floor — `m/handle\'/context\'/circle-scope\'`, where the scope index is HMAC(circleDocId),
+  // so "the SAME persona presents a DIFFERENT key to each circle it joins" and rejoining is stable.
+  //
+  // So an artifact scoped to ONE circle wants the SCOPED key. Re-keying a stamp to a bare Handle would
+  // remove the device-overlay and keep the cross-circle correlation — a fix that looks like one.
+
+  it("★ a CIRCLE-SCOPED key is the one a per-circle stamp wants ★", () => {
+    const r = signerClass(SCOPED, held);
+    expect(r.klass).toBe("circle-scoped");
+    expect(r.publishable).toBe(true);
+    expect(r.crossCircleLinkable).toBe(false);
+    expect(r.reading).toMatch(/scope|circle|unlinkab/i);
+  });
+
+  it("★ a bare Handle publishes, but LINKS across circles — the trap named ★", () => {
+    const r = signerClass(VEILED, held);
+    expect(r.publishable).toBe(true);
+    expect(r.crossCircleLinkable).toBe(true);
+    expect(r.reading).toMatch(/correlat|link|every circle/i);
+  });
+
+  it("★ a private class links nothing because it publishes nothing ★", () => {
+    for (const k of [ROOT, VESSEL, "d".repeat(64)]) {
+      expect(signerClass(k, held).publishable).toBe(false);
+    }
+  });
+
   it("★ every reading says which class it found and why that answers ★", () => {
-    for (const k of [VEILED, ROOT, VESSEL, "d".repeat(64)]) {
+    for (const k of [VEILED, ROOT, VESSEL, SCOPED, "d".repeat(64)]) {
       expect(signerClass(k, held).reading.length).toBeGreaterThan(40);
     }
   });

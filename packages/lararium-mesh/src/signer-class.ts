@@ -28,12 +28,20 @@
  */
 
 /** The key classes a vessel can tell apart from the material it holds. */
-export type SignerClass = "veiled-handle" | "persona-group-root" | "vessel-key" | "unknown";
+export type SignerClass = "circle-scoped" | "veiled-handle" | "persona-group-root" | "vessel-key" | "unknown";
 
 export interface SignerReading {
   readonly klass:       SignerClass;
-  /** Whether this key may stand on an artifact that travels. True for the public Handle alone. */
+  /** Whether this key may stand on an artifact that travels at all. */
   readonly publishable: boolean;
+  /**
+   * Whether standing it on a circle-scoped artifact CORRELATES this human across circles.
+   *
+   * Publishable is not the whole question. A Handle is meant to be seen and recognition needs it
+   * stable, and that same stability links every circle it appears in. A key that publishes nothing
+   * links nothing, so this reads false for the private classes too — read it beside `publishable`.
+   */
+  readonly crossCircleLinkable: boolean;
   /** Which class was found and why it answers, so a caller never publishes on a guess. */
   readonly reading:     string;
 }
@@ -43,6 +51,8 @@ export interface HeldKeys {
   readonly personaGroupRoots: readonly string[];
   readonly veiledHandles:     readonly string[];
   readonly vesselKeys:        readonly string[];
+  /** Leaves of `m/handle'/context'/circle-scope'` — one per circle, from HMAC(circleDocId). */
+  readonly circleScopedKeys?: readonly string[];
 }
 
 const has = (list: readonly string[], key: string): boolean =>
@@ -59,25 +69,34 @@ export function signerClass(key: string, held: HeldKeys): SignerReading {
   const k = key.trim().toLowerCase();
 
   if (has(held.personaGroupRoots, k)) {
-    return { klass: "persona-group-root", publishable: false,
+    return { klass: "persona-group-root", publishable: false, crossCircleLinkable: false,
              reading: "this key is a PersonaGroup root — the overlay binding one human's OWN DEVICES. "
                     + "Publishing it names that device-group on the artifact, and publishing several from "
                     + "one vault correlates them to each other. The public Handle carries the same "
                     + "verification and none of that." };
   }
   if (has(held.vesselKeys, k)) {
-    return { klass: "vessel-key", publishable: false,
+    return { klass: "vessel-key", publishable: false, crossCircleLinkable: false,
              reading: "this key is a vessel key — device-minted, its private half never leaving, and it "
                     + "must never co-surface with the layer above. It identifies a machine rather than a "
                     + "face, so nothing that travels should carry it." };
   }
-  if (has(held.veiledHandles, k)) {
-    return { klass: "veiled-handle", publishable: true,
-             reading: "this key is a veiled-user Handle — the sovereign pseudonym presented through the "
-                    + "veil, and the one layer of the three meant to be seen. It verifies a signature "
-                    + "without naming a device or a device-group." };
+  if (has(held.circleScopedKeys ?? [], k)) {
+    return { klass: "circle-scoped", publishable: true, crossCircleLinkable: false,
+             reading: "this key is a circle-scope leaf — the same persona presenting a DIFFERENT key to "
+                    + "each circle it joins, so a host seeing this human in two circles reads no shared "
+                    + "key. The scope index derives from the circle's own doc id, so rejoining the same "
+                    + "circle returns the same key. This is what a per-circle stamp wants." };
   }
-  return { klass: "unknown", publishable: false,
+  if (has(held.veiledHandles, k)) {
+    return { klass: "veiled-handle", publishable: true, crossCircleLinkable: true,
+             reading: "this key is a veiled-user Handle — the pseudonym presented through the veil, and "
+                    + "the layer meant to be seen. It names no device and no device-group, and it is what "
+                    + "a HandleCard announces. ⚠ It is STABLE, which is what recognition needs and what "
+                    + "correlates this human across every circle it stands in: on an artifact scoped to "
+                    + "ONE circle, the circle-scope leaf carries the same verification without the link." };
+  }
+  return { klass: "unknown", publishable: false, crossCircleLinkable: false,
            reading: "this vessel holds no key matching this one, so it cannot tell which class it "
                   + "belongs to — a key it did not mint may be anybody's layer. An artifact that travels "
                   + "is the wrong place to guess, because a key published once cannot be unpublished." };

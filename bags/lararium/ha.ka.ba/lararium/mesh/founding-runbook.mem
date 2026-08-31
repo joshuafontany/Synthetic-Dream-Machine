@@ -153,6 +153,15 @@ each other, which is what a founding seat does when it draws every chair from on
 unrecognised key reads UNKNOWN rather than safe: a vessel cannot classify a key it did not mint, and a
 travelling artifact is the wrong place to guess.
 
+⚠ ''AND PUBLISHABLE IS NOT THE WHOLE QUESTION.'' A Handle is MEANT to be seen — a HandleCard announces
+it, and recognition needs it ''stable''. That same stability ''correlates a human across every circle
+it stands in''. The persona tree already carries the floor one level down: `m / handle' / context' /
+circle-scope'`, the scope index derived from the circle's own doc id, so ''the same persona presents a
+different key to each circle it joins'' and rejoining the same circle returns the same key.
+
+''An artifact scoped to ONE circle wants the SCOPED leaf.'' A stamp re-keyed to a bare Handle would
+drop the device-overlay and keep the cross-circle link — a fix shaped like one.
+
 
 ''ONE ENV VAR ISOLATES EVERYTHING.'' `LAR_ROOT` re-roots data, state, the seal, the acquired library, bags
 and genesis — eleven by re-siting, and the UDS socket ''by DERIVATION'': the rendezvous stands at
@@ -1428,6 +1437,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;gfOqSGBp3ryshZf9rFDJ8h21YEFshH7oGGmDahjpliA
+<<^ code="&#x0003;" >>ni:///sha-256;1QNh9UwBDY70pIxn_vJDCSXVZ_y1NfmxKuDnVJOtHis
 
 <<^ code="&#x0004;" -> to=? >>
