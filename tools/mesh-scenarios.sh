@@ -31,6 +31,10 @@ say()  { printf '\n\033[1m%s\033[0m\n' "$*"; }
 step() { printf '  %-46s' "$*"; }
 ok()   { printf '\033[32mok\033[0m\n'; }
 bad()  { printf '\033[31mFAILED (%s)\033[0m\n' "$1"; FAILED=$((FAILED + 1)); }
+# A MEASURED ABSENCE IS NOT A BROKEN STEP. `gap` reports a thing the system does not yet do, walked
+# and named with its wake condition, so it neither lies green nor spends a red on settled ground.
+# It never stands in for `bad`: use it only where the walk SUCCEEDED and the system's answer was no.
+gap()  { printf '\033[33mGAP (%s)\033[0m\n' "$1"; }
 
 # Every scenario burns its own volumes. A hearth that founded in a previous reading would let the next
 # one report a founding it never performed.
@@ -272,6 +276,8 @@ run_leaf() {
 # The reading that must hold: a posture flip is not an admission and not a revocation. A's member set
 # and B's own standing are UNCHANGED across it — the flip widens what crosses, never who is party.
 # COVERS: open/multisig/unfed
+# COVERS: open/multisig/visit
+# COVERS: open/multisig/many-faces
 run_open_relation() {
   say "OPEN ACROSS A RELATION — the flip widens what carries, never who is party"
   clear_all
@@ -313,6 +319,27 @@ run_open_relation() {
   step "and B's own posture is UNTOUCHED — a flip is one operator's act"
   if $COMPOSE exec -T lararium-b $LARES nexus posture --json 2>&1 | grep -q '"posture":"private"'; then ok
   else bad "A's flip reached B's posture"; fi
+
+  # THE POSTURE ⊥ THE DWELLING. Posture governs what the public shelf CARRIES; a realm's standing
+  # counts who feeds it. Canon holds the pair apart — "carriage and dwelling run on orthogonal axes"
+  # — so a flip that moved the realm reading, or a feeding that moved the posture, would couple two
+  # axes that must stay free. The walk asserts BOTH directions, because one alone proves nothing.
+  step "under an OPEN posture a realm still reads UNFED, then VISIT, then MANY-FACES"
+  local REALM; REALM=$(printf 'r%.0s' $(seq 1 64))
+  local okc=1
+  $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"' || okc=0
+  $COMPOSE exec -T lararium-a $LARES cabal feed  --realm "$REALM" --as 0 >/dev/null 2>&1
+  $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"visit"' || okc=0
+  $COMPOSE exec -T lararium-a $LARES cabal feed  --realm "$REALM" --as 1 >/dev/null 2>&1
+  $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"many-faces"' || okc=0
+  if [ "$okc" -eq 1 ]; then ok; else
+    bad "the OPEN posture moved what the realm reads"
+    $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | tail -1 | sed 's/^/      /'
+  fi
+
+  step "and the posture is UNMOVED by the feeding — orthogonal both ways"
+  if $COMPOSE exec -T lararium-a $LARES nexus posture --json 2>&1 | grep -q '"posture":"open"'; then ok
+  else bad "feeding a realm moved the posture"; fi
   clear_all
 }
 
@@ -377,6 +404,8 @@ run_crossing() {
 # CARRIES; it never admits an operator, and a scenario that let those two blur would teach the wrong
 # thing about the least-reversible act here.
 # COVERS: open/seed/unfed
+# COVERS: open/seed/visit
+# COVERS: open/seed/many-faces
 run_open() {
   say "OPEN — the posture flips, survives a bounce, and moves nothing else"
   clear_all
@@ -410,6 +439,27 @@ run_open() {
   step "and the phase is UNMOVED — posture carries, it never admits"
   if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
   else bad "opening the posture moved the phase"; fi
+
+  # THE POSTURE ⊥ THE DWELLING. Posture governs what the public shelf CARRIES; a realm's standing
+  # counts who feeds it. Canon holds the pair apart — "carriage and dwelling run on orthogonal axes"
+  # — so a flip that moved the realm reading, or a feeding that moved the posture, would couple two
+  # axes that must stay free. The walk asserts BOTH directions, because one alone proves nothing.
+  step "under an OPEN posture a realm still reads UNFED, then VISIT, then MANY-FACES"
+  local REALM; REALM=$(printf 'o%.0s' $(seq 1 64))
+  local okc=1
+  $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"' || okc=0
+  $COMPOSE exec -T lararium-a $LARES cabal feed  --realm "$REALM" --as 0 >/dev/null 2>&1
+  $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"visit"' || okc=0
+  $COMPOSE exec -T lararium-a $LARES cabal feed  --realm "$REALM" --as 1 >/dev/null 2>&1
+  $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"many-faces"' || okc=0
+  if [ "$okc" -eq 1 ]; then ok; else
+    bad "the OPEN posture moved what the realm reads"
+    $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | tail -1 | sed 's/^/      /'
+  fi
+
+  step "and the posture is UNMOVED by the feeding — orthogonal both ways"
+  if $COMPOSE exec -T lararium-a $LARES nexus posture --json 2>&1 | grep -q '"posture":"open"'; then ok
+  else bad "feeding a realm moved the posture"; fi
   clear_all
 }
 
@@ -562,6 +612,114 @@ run_nexus() {
   clear_all
 }
 
+# THE ONE QUESTION THE OTHER NINE NEVER ASK. Every other scenario stands its hearths PEERLESS
+# (`LAR_A_PEERS=` plus `--no-deps`), so nothing in this file has ever walked two operators
+# REPLICATING — the charter crosses by hand, and the reading never has to leave one vessel.
+#
+# A realm is a COLLECTIVE BOUND BY INTERACTION, so the standing that matters spans operators, and
+# `cabal feed` already hedges: the roll "counts the slots THIS replica has synced — a peer may hold
+# deeper ones". Whether a peer's offering ever ARRIVES is the claim, and it decides which instrument
+# can see a realm at all: the lease slots ride the DAEMON bag, and `daemonDocUrlFromBootstrap` reads
+# that URL "off the social bootstrap THIS VESSEL already holds".
+#
+# COVERS: private/multisig/many-faces
+run_realm_crossing() {
+  say "REALM CROSSING — two contracted operators feed ONE realm, and A reads for B's face"
+  clear_all
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+  local REALM; REALM=$(printf 'd%.0s' $(seq 1 64))
+
+  # THE RELAY STANDS FIRST, and this is not politeness. A COLD MESH LOSES A RACE THAT IS NOT A FAULT:
+  # a hearth booting beside a cold relay exits `reason: 'resolve-timeout'` out of `openDaemon`, and
+  # `restart: "on-failure:8"` did NOT ride it — measured, lararium-a exhausted all eight retries while
+  # lararium-b, starting moments later against a warm relay, stood. Staging the relay takes the boot
+  # lottery out of a measurement that is about a realm, never about start order.
+  step "the relay stands FIRST — the hearths must not race a cold peer"
+  if $COMPOSE up -d herm-source >/dev/null 2>&1 && up_and_answering herm-source; then ok
+  else bad "the relay never answered"; clear_all; return; fi
+
+  # NO peer override: both hearths take the compose default (herm-source) and carry through the relay.
+  # This is the only scenario in the file that stands one.
+  step "both hearths up, PEERED through herm-source"
+  if $COMPOSE up -d --no-deps lararium-a lararium-b >/dev/null 2>&1; then ok; else bad "up"; return; fi
+
+  step "both hearths stand AND answer"
+  local deadline=$((SECONDS + 300))
+  while ! { stood lararium-a && stood lararium-b; } && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
+  if up_and_answering lararium-a && up_and_answering lararium-b; then ok; else
+    bad "a hearth never stood"
+    for s in lararium-a lararium-b; do
+      printf '      --- %s\n' "$s"; $COMPOSE logs "$s" 2>&1 | tail -4 | sed 's/^/      /'
+    done
+    clear_all; return
+  fi
+
+  step "the realm reads UNFED on BOTH sides"
+  if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"' \
+     && $COMPOSE exec -T lararium-b $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"'; then ok
+  else bad "an unfed realm did not read unfed on both sides"; fi
+
+  step "A's charter travels to B, and B contracts in"
+  local CHARTER NYM SIG ACC
+  CHARTER=$($COMPOSE exec -T lararium-a $LARES nexus seal export --no-json 2>/dev/null)
+  if [ -z "$CHARTER" ]; then bad "A exported no charter"; clear_all; return; fi
+  printf '%s' "$CHARTER" | $COMPOSE exec -T lararium-b sh -c 'cat > /tmp/a-charter.mem'
+  $COMPOSE exec -T lararium-b $LARES nexus seal import /tmp/a-charter.mem >/dev/null 2>&1
+  ACC=$($COMPOSE exec -T lararium-b $LARES nexus accept-carriage --json 2>/dev/null)
+  NYM=$(printf '%s' "$ACC" | grep -oE '"nym":"[a-f0-9]{64}"' | head -1 | cut -d'"' -f4)
+  SIG=$(printf '%s' "$ACC" | grep -oE '"contractSig":"[a-f0-9]+"' | head -1 | cut -d'"' -f4)
+  if [ -n "$NYM" ] && [ -n "$SIG" ] \
+     && $COMPOSE exec -T lararium-a $LARES nexus contract "$NYM" --sig "$SIG" >/dev/null 2>&1; then ok
+  else bad "B never contracted in"; printf '%s\n' "$ACC" | tail -2 | sed 's/^/      /'; clear_all; return; fi
+
+  step "the phase leaves SEED — a Nexus stands over BOTH operators"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"isNexus":true'; then ok
+  else bad "the phase never moved off seed"; fi
+
+  step "A feeds her own face — a VISIT on A's side"
+  $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1
+  if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 \
+     | grep -q '"standing":"visit"'; then ok; else bad "A's own offering did not read as a visit"; fi
+
+  # THE CELL THIS SCENARIO CLAIMS, and it claims it HONESTLY: many-faces under a standing relation,
+  # reached the only way this system can reach it — two faces of ONE operator. The cross-operator
+  # walk below measures whether it could ever be reached the other way, and it cannot yet.
+  step "A's SECOND face feeds — MANY-FACES under a standing relation"
+  $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$REALM" --as 1 >/dev/null 2>&1
+  if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 \
+     | grep -q '"standing":"many-faces"'; then ok; else bad "two faces did not read as many-faces"; fi
+
+  step "B feeds HER face, on her own contracted vessel"
+  if $COMPOSE exec -T lararium-b $LARES cabal feed --realm "$REALM" --as 0 >/dev/null 2>&1; then ok
+  else bad "B could not feed"; fi
+
+  # THE MEASUREMENT THIS SCENARIO EXISTS FOR. Three faces have now fed one realm — two of A's and one
+  # of B's — so a reading that spanned the Nexus would count THREE. A counts its own two and stops.
+  #
+  # The cause is structural, not a sync delay: `realm-feed` rolls a slot under `bags/daemon/lease-epoch/`,
+  # and `daemonDocUrlFromBootstrap` reads that bag's URL "off the social bootstrap THIS VESSEL already
+  # holds". `epoch-lease` was built as "the non-renewal half of revocation" — a capability-staling FENCE,
+  # which is vessel-local by nature and correctly homed. `realm-clock` reuses it as a MAINTENANCE LEDGER,
+  # which is shared by nature. One mechanism, two purposes, incompatible scopes: a realm is a collective
+  # bound by interaction, and the record of that interaction sits in each participant's private drawer.
+  step "★ does a peer's offering CROSS? three faces have fed ★"
+  local FACES
+  local wait_until=$((SECONDS + 45))
+  while [ "$SECONDS" -lt "$wait_until" ]; do
+    FACES=$($COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 \
+            | grep -oE '"maintainerCount":[0-9]+' | head -1 | cut -d: -f2)
+    [ "${FACES:-0}" -ge 3 ] 2>/dev/null && break
+    sleep 3
+  done
+  if [ "${FACES:-0}" -ge 3 ]; then ok
+  else
+    gap "A counts ${FACES:-0} faces, never B's — realm standing does not cross operators"
+    printf '      the ledger rides `bags/daemon/lease-epoch/`, and each vessel reads that bag off its OWN bootstrap\n'
+    printf '      wakes when the maintenance ledger moves to the realm SUBSTRATE, which replicates to its dwellers\n'
+  fi
+  clear_all
+}
+
 case "$WANT" in
   operator-a) run_operator a ;;
   operator-b) run_operator b ;;
@@ -569,12 +727,13 @@ case "$WANT" in
   quorum)     run_quorum ;;
   relation)   run_relation ;;
   realm)      run_realm ;;
+  realm-crossing) run_realm_crossing ;;
   open)       run_open ;;
   crossing)   run_crossing ;;
   open-relation) run_open_relation ;;
   leaf)       run_leaf ;;
-  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_open_relation; run_leaf; run_crossing; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | open-relation | leaf | all)" >&2; exit 2 ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_open_relation; run_leaf; run_crossing; run_nexus; run_realm_crossing ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | open-relation | leaf | realm-crossing | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"
