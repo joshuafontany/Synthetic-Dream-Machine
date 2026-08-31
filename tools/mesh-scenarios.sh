@@ -52,6 +52,20 @@ browser_verdict() {
   docker inspect -f '{{.State.ExitCode}}' "dreamnet-mesh-${svc}-1" 2>/dev/null || echo "absent"
 }
 
+# WHETHER A SERVICE HAS STOOD — and why this is not a bare `grep -q`.
+#
+# `set -o pipefail` + `grep -q` is a trap: `grep -q` exits at the FIRST match and closes the pipe, the
+# producer takes SIGPIPE and returns non-zero, and the pipeline therefore reads as FAILURE precisely
+# when the pattern matched. Measured: a hearth that had stood in 13 seconds reported "never stood",
+# and the failure dump printed the very line the check was looking for.
+#
+# `grep -c` reads its input to the end, so nothing is signalled and the count is the answer.
+stood() {
+  local n
+  n=$($COMPOSE logs "$1" 2>&1 | grep -cF "[lararium]")
+  [ "${n:-0}" -gt 0 ]
+}
+
 run_operator() {          # $1 = a|b
   local who="$1" hearth="lararium-$1" browser="browser-$1"
   say "OPERATOR ${who^^} — standing alone, nothing to carry from"
@@ -122,6 +136,76 @@ run_quorum() {
   clear_all
 }
 
+# ── THE RELATION SCENARIO ───────────────────────────────────────────────────────────────────────
+# EVERY READING ABOVE PROVES STANDING AND CARRYING — vessels up, browsers minting at the floor,
+# hearths merging from a Herm. None of them proves two operators entering a RELATION, which is the
+# act a Nexus IS: "the Nexus begins when a second operator contracts in" (genesis-doc's keeper
+# ladder). A hearth that seats its own quorum and never contracts stands a SEED, however green.
+#
+# The charter travels by its own doors here rather than by `cp` — `seal export` hands A's public
+# material over, `seal import` places it on B, refusing to land on a founding. That is the handoff
+# the runbook instructs ("B cannot consent to a charter it has never seen"), performed rather than
+# simulated.
+run_relation() {
+  say "RELATION — two operators contract, and the phase moves off SEED"
+  clear_all
+  step "both hearths up, peerless"
+  if LAR_A_PEERS= LAR_B_PEERS= $COMPOSE up -d --no-deps lararium-a lararium-b >/dev/null 2>&1; then ok
+  else bad "up"; return; fi
+
+  step "both hearths stand"
+  local deadline=$((SECONDS + 300))
+  while ! { stood lararium-a && stood lararium-b; } && [ "$SECONDS" -lt "$deadline" ]; do sleep 3; done
+  if stood lararium-a && stood lararium-b; then ok
+  else
+    # A STEP THAT REFUSES MUST SHOW ITS EVIDENCE. A bare verdict here sent three runs chasing the
+    # wait loop while the cause sat in the boot log.
+    bad "a hearth never stood"
+    for s in lararium-a lararium-b; do
+      printf '      --- %s\n' "$s"; $COMPOSE logs "$s" 2>&1 | tail -4 | sed 's/^/      /'
+    done
+    clear_all; return
+  fi
+
+  # A HEARTH THAT SEATED ITS OWN QUORUM IS STILL A SEED. This is the reading the whole scenario
+  # exists to move, so it gets asserted BEFORE the contract as well as after — a phase that read
+  # "multisig" here would mean the reading, not the relation, had done the work.
+  step "A stands a SEED before any relation"
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
+  else bad "A did not read as a seed"; fi
+
+  step "A's charter travels to B by its own doors"
+  local CHARTER
+  CHARTER=$($COMPOSE exec -T lararium-a $LARES nexus seal export --no-json 2>/dev/null)
+  if [ -z "$CHARTER" ]; then bad "A exported no charter"; clear_all; return; fi
+  if printf '%s' "$CHARTER" | $COMPOSE exec -T lararium-b sh -c 'cat > /tmp/a-charter.mem' \
+     && $COMPOSE exec -T lararium-b $LARES nexus seal import /tmp/a-charter.mem >/dev/null 2>&1; then ok
+  else bad "B could not take A's charter"; fi
+
+  step "B signs her contract-in, A's quorum admits her"
+  local NYM SIG ACC
+  ACC=$($COMPOSE exec -T lararium-b $LARES nexus accept-carriage --json 2>/dev/null)
+  NYM=$(printf '%s' "$ACC" | grep -oE '"nym":"[a-f0-9]{64}"' | head -1 | cut -d'"' -f4)
+  SIG=$(printf '%s' "$ACC" | grep -oE '"contractSig":"[a-f0-9]+"' | head -1 | cut -d'"' -f4)
+  if [ -z "$NYM" ] || [ -z "$SIG" ]; then
+    bad "B minted no contract-in"; printf '%s\n' "$ACC" | tail -2 | sed 's/^/      /'; clear_all; return
+  fi
+  if $COMPOSE exec -T lararium-a $LARES nexus contract "$NYM" --sig "$SIG" >/dev/null 2>&1; then ok
+  else bad "A's quorum refused the admit"; fi
+
+  # THE READING THE SCENARIO EXISTS FOR. A relation stands, so the phase leaves SEED — and the
+  # members board folds a key A has never held.
+  step "the phase leaves SEED — a Nexus stands"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"isNexus":true'; then ok
+  else bad "the phase never moved off seed"; fi
+
+  step "A's members board folds B IN"
+  if $COMPOSE exec -T lararium-a $LARES nexus members --list 2>&1 | grep -qi "$NYM"; then ok
+  else bad "B never landed on the board"; fi
+  clear_all
+}
+
 run_nexus() {
   say "NEXUS — every class, carrying"
   clear_all
@@ -169,8 +253,9 @@ case "$WANT" in
   operator-b) run_operator b ;;
   nexus)      run_nexus ;;
   quorum)     run_quorum ;;
-  all)        run_operator a; run_operator b; run_quorum; run_nexus ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | all)" >&2; exit 2 ;;
+  relation)   run_relation ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_nexus ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"
