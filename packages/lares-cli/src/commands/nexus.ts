@@ -22,6 +22,24 @@
  *
  * The pre-rotation is the recovery keel: stealing today's council keys cannot forge tomorrow's charter,
  * because each epoch pre-commits a digest of the NEXT epoch's keys before those keys ever sign.
+ *
+ * ── WHICH QUORUM THIS IS, BECAUSE ONE WORD NAMES TWO ────────────────────────────────────────────
+ * "Kahu" names two k-of-n bodies that govern different objects, and reading one as the other produces
+ * a wrong build every time:
+ *
+ *   THIS ONE — the NEXUS SEAL. Governs exactly three acts: carriage membership (`contract`/`revoke`),
+ *   the antigen (`kapae`/`un_kapae`), and its own succession (`rotate`). Its chairs are seated from
+ *   THIS vessel's own vault — `listPersonaRoots` reaches no other — so a seal quorum is one operator's
+ *   faces by construction, which is why `nexusPhase` reads a fresh one as a SEED rather than a Nexus.
+ *   `attestation-plane#3` rules the roles apart: the kahu HOST, and a Nexus's CONTRACTED OPERATORS
+ *   ATTEST — so a contracted operator never becomes a chair here.
+ *
+ *   THE OTHER — the AMORPHOUS DREAMS CABAL (`kahu`). Holds `admin` on the ACCESS axis over the CORPUS
+ *   bags and the genesis artifact: the written grammar, not any Nexus's membership. Multi-human by
+ *   design, and it carries NO live command into a vessel — "the Cabal authors; the protocol
+ *   distributes; the vessels enforce." No delegation grants it today and no sentinel names it.
+ *
+ * GOVERNING A REALM ⊥ GOVERNING THE METAL (operator ruling 2026-08-09). This door is the metal.
  */
 
 import {

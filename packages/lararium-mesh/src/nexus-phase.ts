@@ -16,6 +16,12 @@
  * first relation, and a Nexus IS the relation. Until then a vessel holds a seed: prepared to carry
  * this relation and every one after it, and carrying none.
  *
+ * ── AND WHICH KAHU THESE ARE ────────────────────────────────────────────────────────────────────
+ * The chairs this phase counts belong to the NEXUS SEAL — carriage, antigen, succession — seated from
+ * one vessel's own vault. They are NOT the Amorphous Dreams Cabal, which holds `admin` on the ACCESS
+ * axis over the corpus bags and the genesis artifact, carries no live command into any vessel, and
+ * has no bearing on whether a Nexus stands.
+ *
  * Meme: lar:///ha.ka.ba/lararium/mesh/genesis-doc
  */
 
