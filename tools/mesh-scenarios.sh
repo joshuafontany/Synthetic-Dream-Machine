@@ -199,7 +199,7 @@ run_quorum() {
 # deposits no depth. It is emphatically not a carriage contract and not a realm dwelling.
 # COVERS: private/seed/unfed
 run_leaf() {
-  say "LEAF — a browser vessel admitted into its operator's own fleet"
+  say "LEAF — an operator mints a device edge naming her browser, and it parses back"
   clear_all
   local LARES="node packages/lares-cli/dist/src/bin/lares.js"
 
@@ -236,6 +236,27 @@ run_leaf() {
 
   # REACH, NEVER DEPTH. A fleet binds one principal's instruments, so admitting a device must not move
   # the Nexus phase — a browser is not a second operator however many of them an operator runs.
+  # THE ARTIFACT MUST BE CONSUMABLE, not merely produced. A payload the browser's own parser rejects
+  # would satisfy every check above and hand the operator a fragment that goes nowhere. This runs the
+  # BROWSER-SIDE parser over the carriage the operator would actually paste.
+  #
+  # WHAT IT DOES NOT PROVE, and the scenario no longer claims: that a browser CONSUMED it. The probe
+  # mints and reports; carrying the fragment into a live page and completing the join is the half that
+  # stays unwalked, and calling this "admitted into its fleet" would have papered over exactly that.
+  step "the carriage PARSES back through the browser's own reader"
+  local CARRIAGE
+  CARRIAGE=$($COMPOSE exec -T lararium-a $LARES device-admit --as 0 --joinee-key "$KEY" 2>&1 \
+             | grep -oE '#admit=[A-Za-z0-9_-]+' | tail -1)
+  if [ -z "$CARRIAGE" ]; then bad "the admit printed no carriage to hand over"; else
+    # THE VALUES MUST BE HANDED IN. `exec` carries no host environment, so a probe reading
+    # `process.env` inside the container would compare two empty strings and pass.
+    if $COMPOSE exec -T -e CARRIAGE="$CARRIAGE" -e KEY="$KEY" lararium-a node --input-type=module -e "
+      import { parseAdmitCarriage } from './packages/lararium-browser/dist/admit-carriage.js';
+      const p = parseAdmitCarriage(process.env.CARRIAGE ?? '');
+      if (!p || p.deviceEdge?.deviceVerifyingKey !== process.env.KEY) process.exit(1);
+    " >/dev/null 2>&1; then ok; else bad "the browser's reader refused the carriage, or it named another device"; fi
+  fi
+
   step "the phase is UNMOVED — a fleet buys reach, never depth"
   if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
   else bad "admitting a device moved the Nexus phase"; fi
