@@ -27,7 +27,10 @@ import { generateOrLoadVesselIdentity, generateOrLoadPersonaGroupRoot, loadVesse
 import { larDataDir } from "../src/vessel-paths.js";
 import { writeNexusDoc } from "../src/nexus-doc.js";
 import { runNexusContract, runNexusAcceptCarriage, runNexusMembersList, NexusContractError,
-  hasContractedInto, readCarriageConsent } from "../src/commands/nexus-contract.js";
+  hasContractedInto, readCarriageConsent, carriageConsentPath } from "../src/commands/nexus-contract.js";
+import { signCarriageContract, verifyCarriageConsent } from "@lararium/mesh";
+import { writeFileSync, mkdirSync } from "node:fs";
+import { dirname } from "node:path";
 import { makeNexusMembership } from "../src/nexus-carriage.js";
 
 let root: string;
@@ -215,12 +218,12 @@ describe("accept-carriage — this vessel keeps its own half of the relation", (
     const keys = await threeKeys();
     seatCharter(keys);
     await runNexusAcceptCarriage({ handleIndex: 0, sealHome: sealHome() });
-    expect(hasContractedInto(sealHome())).toBe(true);
+    expect(await hasContractedInto(sealHome())).toBe(true);
   });
 
   it("★ a vessel that consented to NOTHING says so ★", async () => {
     seatCharter(await threeKeys());
-    expect(hasContractedInto(sealHome())).toBe(false);
+    expect(await hasContractedInto(sealHome())).toBe(false);
     expect(readCarriageConsent(sealHome())).toBeNull();
   });
 
@@ -230,10 +233,10 @@ describe("accept-carriage — this vessel keeps its own half of the relation", (
     const keys = await threeKeys();
     seatCharter(keys);
     await runNexusAcceptCarriage({ handleIndex: 0, sealHome: sealHome() });
-    expect(hasContractedInto(sealHome())).toBe(true);
+    expect(await hasContractedInto(sealHome())).toBe(true);
 
     seatCharter(keys, 3);                       // a different charter epoch stands
-    expect(hasContractedInto(sealHome())).toBe(false);
+    expect(await hasContractedInto(sealHome())).toBe(false);
   });
 
   it("★ an UNSEATED charter carries no consent, however the record reads ★", async () => {
@@ -244,6 +247,35 @@ describe("accept-carriage — this vessel keeps its own half of the relation", (
       kind: NEXUS_DOC_DOMAIN, threshold: 2, sealEpochCid: null,
       kahu: [{ displayName: "Kahu Alpha", verifyingKey: null }],
     });
-    expect(hasContractedInto(sealHome())).toBe(false);
+    expect(await hasContractedInto(sealHome())).toBe(false);
+  });
+
+
+  it("★ a PLANTED consent is refused — the file's location is not evidence ★", async () => {
+    // Disk is not a trust boundary: `LAR_ROOT` names the whole seal home. A reading that trusted the
+    // record's presence would report a Nexus this vessel never joined.
+    const keys = await threeKeys();
+    seatCharter(keys);
+    const epoch = genesisSealEpochCid(keys, 2);
+    mkdirSync(dirname(carriageConsentPath(sealHome())), { recursive: true });
+    writeFileSync(carriageConsentPath(sealHome()),
+      JSON.stringify({ nym: keys[0], sealEpochCid: epoch, contractSig: "00".repeat(64) }), "utf8");
+    expect(await hasContractedInto(sealHome())).toBe(false);
+  });
+
+  it("★ ANOTHER operator's genuine consent is refused — the nym must be a root this vessel holds ★", async () => {
+    // The half that verification alone misses. The seal is real; it just names somebody else's hand,
+    // and copying it here would claim a relation another party entered.
+    const keys = await threeKeys();
+    seatCharter(keys);
+    const foreignSeed = new Uint8Array(32).fill(9);
+    const foreignNym  = Buffer.from(await ed.getPublicKeyAsync(foreignSeed)).toString("hex");
+    const q = await signCarriageContract(foreignNym, genesisSealEpochCid(keys, 2),
+      async (b) => Buffer.from(await ed.signAsync(b, foreignSeed)).toString("hex"));
+    mkdirSync(dirname(carriageConsentPath(sealHome())), { recursive: true });
+    writeFileSync(carriageConsentPath(sealHome()),
+      JSON.stringify({ nym: foreignNym, sealEpochCid: genesisSealEpochCid(keys, 2), contractSig: q.sig }), "utf8");
+    expect(await verifyCarriageConsent({ nym: foreignNym, sealEpochCid: genesisSealEpochCid(keys, 2), contractSig: q.sig })).toBe(true);
+    expect(await hasContractedInto(sealHome())).toBe(false);
   });
 });

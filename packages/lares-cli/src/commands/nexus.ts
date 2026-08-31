@@ -888,7 +888,7 @@ async function sealShow(args: ParsedArgs): Promise<number> {
   let contracted = 0;
   try { contracted = (await runNexusMembersList({ sealHome })).members.length; } catch { contracted = 0; }
   // This vessel's own consent, bound to the epoch that stands — a stale one grants nothing.
-  const joined = hasContractedInto(sealHome);
+  const joined = await hasContractedInto(sealHome);
 
   emit(args, {
     ok: true,

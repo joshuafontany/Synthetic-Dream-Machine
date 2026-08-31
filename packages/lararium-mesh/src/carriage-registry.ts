@@ -183,6 +183,34 @@ export async function signCarriageQuorum(
  * epoch. The caller supplies the operator's own signer (the module holds no key). The returned `QuorumSignature`
  * rides an admit entry's `contractSig`.
  */
+/**
+ * Does a KEPT contract-in prove itself?
+ *
+ * A joining operator keeps the consent she signed so her vessel can read the relation it stands in
+ * without holding a partner's document. That record sits on disk, and disk is not a trust boundary —
+ * `LAR_ROOT` names the whole seal home, so anything running as its owner may write there. Reading it
+ * by LOCATION would report a Nexus a vessel never joined.
+ *
+ * So the kept copy earns its reading the way the admit path earns its own: the seal binds the nym and
+ * the epoch TOGETHER, and only the operator holding that nym's seed can produce it. Moving either
+ * field breaks it, so a consent cannot be lifted onto a later charter to carry a relation across terms
+ * it never read.
+ *
+ * NOT THE WHOLE GATE. A consent signed by ANOTHER operator verifies here, correctly — it is genuine
+ * evidence that somebody joined. A caller asking "did I join?" must also establish that the nym is a
+ * root IT holds; this answers only whether the seal is real.
+ */
+export async function verifyCarriageConsent(
+  consent: { nym: string; sealEpochCid: string; contractSig: string },
+): Promise<boolean> {
+  const nym = consent.nym.trim().toLowerCase();
+  if (!/^[0-9a-f]{64}$/.test(nym)) return false;
+  if (!/^[0-9a-f]+$/.test(consent.contractSig) || consent.contractSig.length === 0) return false;
+  const bytes = carriageContractBytes({ nym, sealEpochCid: consent.sealEpochCid });
+  try { return await ed25519.verifyAsync(hexToBytes(consent.contractSig), bytes, hexToBytes(nym)); }
+  catch { return false; }
+}
+
 export async function signCarriageContract(
   nym: string,
   sealEpochCid: string,

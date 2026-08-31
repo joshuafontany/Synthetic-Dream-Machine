@@ -30,15 +30,16 @@ import { join, dirname } from "node:path";
 import { Repo } from "@automerge/automerge-repo";
 import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import {
-  carriageEntriesFromBoard, writeCarriageEntry, signCarriageQuorum, signCarriageContract,
+  carriageEntriesFromBoard, writeCarriageEntry, signCarriageQuorum, signCarriageContract, verifyCarriageConsent,
   carriageEntryCounts, foldCarriageSet, holdsCarriage, foundingRoster,
   carriageDocUrl, materializeSharedLarDoc, ed25519SignerFromSeed,
   type CarriageAction, type CarriageEntry, type KahuRoster, type QuorumSignature,
 } from "@lararium/mesh";
 import { larDataDir } from "../vessel-paths.js";
 import { readNexusDoc } from "../nexus-doc.js";
+
 import {
-  listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed,
+  listPersonaRoots, generateOrLoadPersonaGroupRoot, loadPersonaGroupRootSeed, loadPersonaGroupRootVerifyingKey,
   loadVesselVerifyingKey,
 } from "../node-vessel-identity.js";
 
@@ -254,14 +255,36 @@ export function readCarriageConsent(sealHome: string): CarriageConsent | null {
 /**
  * Whether this vessel has CONTRACTED INTO the charter now standing in its seal home.
  *
- * True only when a kept consent roots on the epoch that stands: an unseated charter binds nothing, and
- * a consent behind the current epoch consented to terms that have since moved.
+ * THREE THINGS MUST HOLD, and the file satisfies none of them by sitting there. Disk is not a trust
+ * boundary — `LAR_ROOT` names the whole seal home — so a reading that trusted the record's LOCATION
+ * would report a Nexus this vessel never joined.
+ *
+ *   · THE EPOCH STANDS. A consent binds to the charter epoch it was given under; an unseated charter
+ *     binds nothing, and a consent behind the current epoch consented to terms that have since moved.
+ *   · THE SEAL IS REAL. The signature binds nym and epoch together and only the holder of that nym's
+ *     seed can produce it, so a planted record fails rather than reads.
+ *   · THE NYM IS OURS. Another operator's consent is GENUINE evidence that SHE joined; copied here it
+ *     would let this vessel claim a relation somebody else entered. So the nym must be a persona root
+ *     this vessel actually holds.
+ *
+ * Grants nothing either way — this answers a reading, never a capability. It is held to this standard
+ * because a vessel that misreports the relation it stands in is lying to its own operator.
  */
-export function hasContractedInto(sealHome: string): boolean {
+export async function hasContractedInto(sealHome: string, storageDir?: string): Promise<boolean> {
   const consent = readCarriageConsent(sealHome);
   if (!consent) return false;
+
   const epoch = foundingRoster(readNexusDoc(sealHome)).sealEpochCid;
-  return epoch.length > 0 && epoch === consent.sealEpochCid;
+  if (epoch.length === 0 || epoch !== consent.sealEpochCid) return false;
+
+  if (!(await verifyCarriageConsent(consent))) return false;
+
+  const dir = storageDir ?? larDataDir();
+  for (const index of await listPersonaRoots(dir)) {
+    const key = await loadPersonaGroupRootVerifyingKey(dir, index);
+    if (key && key.toLowerCase() === consent.nym) return true;
+  }
+  return false;
 }
 
 export async function runNexusAcceptCarriage(opts: {
