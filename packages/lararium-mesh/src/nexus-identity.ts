@@ -47,11 +47,13 @@
  *                       nothing.
  *   · antigen (DENY)  — quorum-signed against the charter roster, and an entry whose signature does
  *                       not verify is ignored. A foreign ban can only TIGHTEN this vessel.
- *   · members (ALLOW) — held apart, and this module is not for it. Those admits ARE quorum-signed
- *                       against the charter epoch, so the objection is not forgery: a partner's board
- *                       verifies. It is CONSENT. An admit only ever WIDENS whom a vessel carries for,
- *                       and folding a partner's board accepts every admit their quorum makes AFTER the
- *                       epoch this vessel consented at.
+ *   · members (SHARED) — a stamp is a public contract into the Cabal, quorum-countersigned, so the
+ *                       board records who stamped in. The record shares; the DECISION does not. Whether
+ *                       this vessel carries for a given member is its own reading OVER that record, and
+ *                       fusing the two is what would conscript it — an admit only ever WIDENS whom a
+ *                       vessel carries for, and an operator consents at ONE epoch. ⚠ A stamp must be
+ *                       signed by the PUBLIC HANDLE: a PersonaGroup root on a shared board correlates
+ *                       one human's memberships by a key that also names their device-group.
  * The asymmetry carries the rule — a deny may be shared, an allow wants a fresh consent. A deny list
  * carries the anti-flickering property: once disallowed, never allowed again, so the set is MONOTONE and
  * replicates without total consistency. An allow set has no such property. Independently: CRDTs cannot
