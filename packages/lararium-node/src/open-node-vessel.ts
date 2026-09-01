@@ -745,7 +745,10 @@ async function prepareNodeBoot(opts: NodeVesselOptions): Promise<NodeBootPrep> {
 
   // Read the daemon doc (idempotent re-resolve; openDaemonVm finds the same handle).
   const readDaemonDoc = async (): Promise<DocHandle<LarDoc>> =>
-    resolveBootDoc<LarDoc>(repo, bootstrap.daemonUrl as AutomergeUrl, { tideline: "hearth-private", label: "@daemon" });
+    resolveBootDoc<LarDoc>(repo, bootstrap.daemonUrl as AutomergeUrl,
+      // THE BOOTSTRAP NAMES THIS DOC, so an absence here reads as a write still landing rather than as
+      // a doc nobody wrote — a founding seeds it moments earlier in this same process.
+      { tideline: "hearth-private", label: "@daemon", expectPresent: true });
 
   const keel: VesselOrchestration<VesselIslandPool>["keel"] = {
     repo,

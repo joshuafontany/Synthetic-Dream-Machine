@@ -70,7 +70,11 @@ export interface VesselKeel {
   // ── substrate atoms (resolved native-first by each piece) ──
   repo:          Repo;
   catalogHandle: DocHandle<LarDoc>;
-  /** Resolve-or-fallback a doc handle (the unified allowableStates strategy, D2). */
+  /** Resolve-or-fallback a doc handle.
+   *
+   *  ⚠ NOT `allowableStates` — that option carries `@deprecated This no longer has any effect` in the
+   *  pinned automerge-repo, so a strategy resting on it rests on nothing. Progress reads through
+   *  `findWithProgress`, which reports per-source state rather than one collapsed verdict. */
   waitHandle:    <T>(url: AutomergeUrl, fallback: () => DocHandle<T>) => Promise<DocHandle<T>>;
   /** Genesis island piece → handle + coreHash + the social-plane bootstrap it carries.
    *  Genesis REQUIRED (coreless boot deleted) — the vessel derives bootstrap from the

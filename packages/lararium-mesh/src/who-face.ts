@@ -14,7 +14,8 @@
  * still holds (pull ≠ read) — a garbage or unsigned tiddler is simply ignored at ingest.
  *
  * Pure and platform-blind: the caller supplies the repo `resolve` strategy (node races whenReady, browser
- * uses allowableStates), exactly as resolveOracleDoc already splits. Holds no key, mounts no HTTP.
+ * reads progress through `findWithProgress`, since `allowableStates` no longer has any effect),
+ * exactly as resolveOracleDoc already splits. Holds no key, mounts no HTTP.
  *
  * Canon: lar:///ha.ka.ba/lararium/docs/crossroads (the public plane); persona-circle#the-vault (the WHO model).
  */
