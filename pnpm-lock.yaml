@@ -77,8 +77,8 @@ importers:
         version: 0.7.4
     devDependencies:
       '@keyhive/keyhive':
-        specifier: 0.1.0-alpha.6
-        version: 0.1.0-alpha.6
+        specifier: 0.1.0-alpha.8
+        version: 0.1.0-alpha.8
       '@lararium/keyhive':
         specifier: workspace:*
         version: link:../lararium-keyhive
@@ -138,8 +138,8 @@ importers:
   packages/lararium-keyhive:
     dependencies:
       '@keyhive/keyhive':
-        specifier: 0.1.0-alpha.6
-        version: 0.1.0-alpha.6
+        specifier: 0.1.0-alpha.8
+        version: 0.1.0-alpha.8
       '@lararium/mesh':
         specifier: workspace:*
         version: link:../lararium-mesh
@@ -635,8 +635,8 @@ packages:
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
 
-  '@keyhive/keyhive@0.1.0-alpha.6':
-    resolution: {integrity: sha512-SbZkc08VBD1jIPgaGxTl/hN5jCSpdv4PrhC0lJlLcHs94LOQsR2CvXkTWESsxN6laCq+f9+ReewfF7xzRMA1pQ==}
+  '@keyhive/keyhive@0.1.0-alpha.8':
+    resolution: {integrity: sha512-juyDs15N3xyKl9mtGHoghdxiCGiXVReS4GufjUMATE3TsgASA/fznISCic+sKc9mMg+aAOXWFAbNELfBe3GyvA==}
 
   '@noble/ciphers@2.3.0':
     resolution: {integrity: sha512-Clu/xdfgVTf9o7ngLOURaxePwR0j8sjclKEtVij10/jGulwFsPWCvvRgG/XjUVf8Nei+jLG6uwyXzUTGY1DQrw==}
@@ -2123,7 +2123,7 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 
-  '@keyhive/keyhive@0.1.0-alpha.6': {}
+  '@keyhive/keyhive@0.1.0-alpha.8': {}
 
   '@noble/ciphers@2.3.0': {}
 

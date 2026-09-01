@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@automerge/automerge": "3.4.1",
@@ -18,7 +19,7 @@
     "idiomorph": "0.7.4"
   },
   "devDependencies": {
-    "@keyhive/keyhive": "0.1.0-alpha.6",
+    "@keyhive/keyhive": "0.1.0-alpha.8",
     "@lararium/keyhive": "workspace:*",
     "vite": "8.2.1",
     "vite-plugin-arraybuffer": "0.1.4",
