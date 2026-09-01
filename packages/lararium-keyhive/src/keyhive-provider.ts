@@ -422,12 +422,14 @@ export class KeyhiveProvider implements CapabilityProvider {
   /**
    * Create a sentinel Document used as a membership principal.
    *
-   * NOTE: Keyhive's Group primitive is the semantically correct vehicle for
-   * membership cabals (Person-Group, Mesh kahu-cabal). However, GroupId has a
-   * private constructor in alpha.56c — no round-trip from stored bytes. We
-   * use Document here because DocumentId has a public constructor, enabling
-   * hex-in-tiddler persistence. Migrate to Group when the API exposes
-   * GroupId serialization or a getGroup(Identifier) path.
+   * Keyhive's Group primitive carries the semantically correct shape for a
+   * membership cabal (Person-Group, Mesh kahu-cabal), and GroupId round-trips
+   * through `constructor(bytes)` / `toBytes()`, so persistence does not decide it.
+   *
+   * Document remains the vehicle because canon #the-realm names a realm by its
+   * content-addressed DOC identity. A Group subduction would buy `transitiveMembers()`
+   * — reach through nested cabals, which a Document cannot report — at the cost of
+   * that naming. It stands unbuilt pending an operator ruling.
    *
    * Returns both the DocumentId hex (for bag-level accessForDoc checks) and
    * the Document's agent Identifier hex (for adding this sentinel as a member
@@ -494,6 +496,28 @@ export class KeyhiveProvider implements CapabilityProvider {
       throw new Error("[keyhive] revokeSentinelMember produced no revocation events");
     }
     return { bytes: revocations[0]!.signature };
+  }
+
+  /**
+   * ENUMERATE the individuals reaching a sentinel Document, from its CGKA tree.
+   *
+   * `verifySentinelMembership` answers "does THIS hex hold access" and so needs a
+   * candidate already in hand; this answers "who reaches here" with no candidate at
+   * all. A realm whose dwellers arrived through a peer can be read only this way.
+   *
+   * The tree carries the EFFECTIVE reader set, which a delegation list does not: a
+   * member joining a group that already holds access widens this and moves no
+   * delegation. Empty where the document has no initialized CGKA.
+   *
+   * The count is this replica's. An offering that has not synced here is absent, so
+   * a caller MUST NOT read the length as a total across the mesh.
+   */
+  async sentinelCgkaMembers(sentinelDocIdHex: string): Promise<string[]> {
+    const docId = new KH.DocumentId(hexToBytes(sentinelDocIdHex));
+    const doc   = await this.requireKh().getDocument(docId);
+    if (!doc) throw new Error(`[keyhive] sentinel doc not found for cgka read: ${sentinelDocIdHex.slice(0, 16)}…`);
+    const ids = await doc.cgkaMembers();
+    return ids.map((id) => bytesToHex(id.toBytes()));
   }
 
   /**

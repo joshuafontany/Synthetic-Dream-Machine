@@ -11,12 +11,12 @@
  * the LIVENESS (lease + residency); this carries the AUTHORITY graph (Keyhive).
  *
  * DESIGN CONSTRAINTS:
- *   · DOCUMENT-now, not Group. Keyhive's Group carries the semantically-correct shape
- *     for a membership cabal, but GroupId holds a private constructor in alpha (no
- *     round-trip from stored bytes), so it cannot persist hex-in-tiddler. Document
- *     (public DocumentId ctor) supplies the working skeleton AND lands partly
- *     correct architecturally — canon #the-realm names the realm by its content-addressed *doc*
- *     identity. The Group subduction stands unbuilt (provider NOTE ~line 281).
+ *   · DOCUMENT, not Group. Keyhive's Group carries the semantically-correct shape for a
+ *     membership cabal and its GroupId round-trips from stored bytes, so persistence does
+ *     not decide this. Document holds the seat because canon #the-realm names the realm by
+ *     its content-addressed *doc* identity. What a Group would buy is `transitiveMembers()`
+ *     — reach through nested cabals, which no Document reports. The subduction stands
+ *     unbuilt pending an operator ruling (provider note at createSentinelDoc).
  *   · forward_secrecy STAYS false — a deliberate THREAT-MODEL CHOICE, not an
  *     architectural impossibility (BeeKEM the substrate DOES keep
  *     FS against a passive adversary; the FS falls away one layer up, at Keyhive's
@@ -27,7 +27,10 @@
  *   · membership rides the Keyhive DOC-ROSTER — a LIST verified per-member against the
  *     sentinel (dwellersHolding below), NOT the closure-query of canon
  *     #RULED-by-the-closure. The closure ("evaluated as a query, never instantiated")
- *     stands unbuilt.
+ *     stands unbuilt. `dwellersHolding` FILTERS and so needs candidates already in hand;
+ *     where none are, `KeyhiveProvider.sentinelCgkaMembers` enumerates the effective
+ *     reader set instead. Both read THIS replica — an unsynced offering is absent from
+ *     each, so neither length is a count across the mesh.
  *
  * THIN CEREMONY: this calls the provider + the mesh floor and bakes NO legitimacy.
  * The join routes through cabalRealmJoinGate (INERT — the Ostrom-P1 voucher/capture
