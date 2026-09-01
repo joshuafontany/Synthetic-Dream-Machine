@@ -2,7 +2,7 @@
   "name": "@lararium/keyhive",
   "version": "0.1.0",
   "private": true,
-  "description": "Keyhive (Ink & Switch concap) integration for the Lares stack \u2014 capability layer + probes against pre-alpha @keyhive/keyhive WASM bindings.",
+  "description": "Keyhive (Ink & Switch concap) integration for the Lares stack — capability layer + probes against pre-alpha @keyhive/keyhive WASM bindings.",
   "type": "module",
   "exports": {
     ".": {
