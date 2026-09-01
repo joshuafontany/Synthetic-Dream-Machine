@@ -139,9 +139,11 @@ export function deriveCabalRealmLiveness(
  *                   may be humming without this replica, and other meshes stand out of view.
  *   · `unread`    — this vessel never looked.
  *
- * The instrument that CAN see the collective is `realmStanding`, which reads the per-writer epoch
- * lease slots: those replicate, so other faces' offerings arrive. A gate that needs a fact about the
- * realm reads the slots; this reading answers only for the vessel holding it.
+ * ⚠ NO INSTRUMENT HERE SEES THE COLLECTIVE, and `realmStanding` does not either. Its per-writer lease
+ * slots ride `bags/daemon/lease-epoch/`, whose bag URL each vessel reads off its OWN social bootstrap,
+ * so a contracted peer's offering never arrives — measured on two hearths through a live relay, where
+ * the founder counted her own faces and never her partner's. Both readings answer for the vessel
+ * holding them; they differ in WHAT they answer about, never in how far they see.
  */
 export function livenessIsAboutTheRealm(l: CabalRealmLiveness): boolean {
   return l === "alive";
