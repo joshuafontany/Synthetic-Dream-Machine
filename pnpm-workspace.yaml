@@ -14,3 +14,12 @@ allowBuilds:
   cbor-extract: true
   esbuild: true
   tree-sitter-cli: true
+
+# ONE AUTOMERGE, ONE WASM MODULE. `automerge-repo` declares `^3.2.6` and resolved its own 3.4.0 beside
+# our 3.4.1, standing two copies of the engine — two wasm instances to compile at boot, on the path a
+# cold found already races. The override collapses them to the version this workspace pins.
+#
+# pnpm 11 reads settings HERE, not from package.json — a block left there resolves nothing and reads
+# as applied.
+overrides:
+  "@automerge/automerge": "3.4.1"

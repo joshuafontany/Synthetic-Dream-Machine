@@ -111,7 +111,7 @@
     "vitest": "4.1.10"
   },
   "dependencies": {
-    "@automerge/automerge": "3.4.0",
+    "@automerge/automerge": "3.4.1",
     "@automerge/automerge-repo": "2.6.0-alpha.3",
     "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.3",
     "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.3",

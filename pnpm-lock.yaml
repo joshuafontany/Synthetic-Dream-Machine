@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@automerge/automerge': 3.4.1
+
 importers:
 
   .:
@@ -55,8 +58,8 @@ importers:
   packages/lararium-app:
     dependencies:
       '@automerge/automerge':
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
@@ -92,8 +95,8 @@ importers:
   packages/lararium-browser:
     dependencies:
       '@automerge/automerge':
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
@@ -164,8 +167,8 @@ importers:
   packages/lararium-mesh:
     dependencies:
       '@automerge/automerge':
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
@@ -198,8 +201,8 @@ importers:
   packages/lararium-node:
     dependencies:
       '@automerge/automerge':
-        specifier: 3.4.0
-        version: 3.4.0
+        specifier: 3.4.1
+        version: 3.4.1
       '@automerge/automerge-repo':
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
@@ -379,8 +382,8 @@ packages:
     resolution: {integrity: sha512-Rn/KdoVHUQwYU0TXqHyy9PdBgVE009JJWnh2YxT2blk5EnbZckh+RfGfu6ngjMGw0DZcZtJLvK3dKDNdAvtQVA==}
     engines: {node: '>=22.13'}
 
-  '@automerge/automerge@3.4.0':
-    resolution: {integrity: sha512-THmghtTNGGt2xsI0pM3o1i3PM8oZKcYFgOj25FOzW7l6e94SQOivNtCwy6xc0I8hVJsQSSotoBNs+yk/9hM2dg==}
+  '@automerge/automerge@3.4.1':
+    resolution: {integrity: sha512-zsZpbs/iDPvp+ZojIYd+gxmbcPVz2Xbkcx778G8zrt3E0zS+6saHJOm666lOuZyNRlTV4wHw9qzGTKueedeCsQ==}
 
   '@blazediff/core@1.9.1':
     resolution: {integrity: sha512-ehg3jIkYKulZh+8om/O25vkvSsXXwC+skXmyA87FFx6A/45eqOkZsBltMw/TVteb0mloiGT8oGRTcjRAz66zaA==}
@@ -1947,7 +1950,7 @@ snapshots:
 
   '@automerge/automerge-repo@2.6.0-alpha.3':
     dependencies:
-      '@automerge/automerge': 3.4.0
+      '@automerge/automerge': 3.4.1
       bs58check: 4.0.0
       cbor-x: 1.6.4
       debug: 4.4.3
@@ -1958,7 +1961,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@automerge/automerge@3.4.0': {}
+  '@automerge/automerge@3.4.1': {}
 
   '@blazediff/core@1.9.1': {}
 
