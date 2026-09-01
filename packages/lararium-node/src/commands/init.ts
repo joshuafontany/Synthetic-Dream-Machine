@@ -241,11 +241,17 @@ export async function runInit(opts: InitOptions = {}): Promise<InitResult> {
   // re-presents it on every peer handshake without booting keyhive (OP-AP5).
   await persistVesselCard(storageDir, place.contactCardJson);
 
+  // THE FLUSH COMES FIRST, and the catalog pointer already carries the reason: a pointer written
+  // after its referent is durable can be stale; one written BEFORE can be a LIE. Automerge saves ride
+  // a throttle, so `foundThePlace` returning does not put the daemon doc on disk — and this bootstrap
+  // is the only thing that names it. A process that stopped between the two would leave a pointer to
+  // a doc no later boot can find, and the next vessel would read its own daemon as absent.
+  await repo.flush();
+
   writeFileSync(bootstrap, JSON.stringify(
     bootstrapPlugin(placeTiddlers(place.daemonUrl)), null, 2), "utf8");
   // NO anchors land here. The veiled-Handle anchor set keys by handle-index and names a PERSONA's
   // planes — a place that holds no face holds no handle to anchor. `runFoundTheFace` writes the set.
-  await repo.flush();
 
   console.log(`[lares vessel found] ${bootstrap} written`);
   console.log(`  daemon-doc    ${place.daemonUrl}`);
