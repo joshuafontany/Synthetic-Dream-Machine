@@ -325,7 +325,7 @@ run_open_relation() {
   # — so a flip that moved the realm reading, or a feeding that moved the posture, would couple two
   # axes that must stay free. The walk asserts BOTH directions, because one alone proves nothing.
   step "under an OPEN posture a realm still reads UNFED, then VISIT, then MANY-FACES"
-  local REALM; REALM=$(printf 'r%.0s' $(seq 1 64))
+  local REALM; REALM=$(printf 'f%.0s' $(seq 1 64))
   local okc=1
   $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"' || okc=0
   $COMPOSE exec -T lararium-a $LARES cabal feed  --realm "$REALM" --as 0 >/dev/null 2>&1
@@ -445,7 +445,7 @@ run_open() {
   # — so a flip that moved the realm reading, or a feeding that moved the posture, would couple two
   # axes that must stay free. The walk asserts BOTH directions, because one alone proves nothing.
   step "under an OPEN posture a realm still reads UNFED, then VISIT, then MANY-FACES"
-  local REALM; REALM=$(printf 'o%.0s' $(seq 1 64))
+  local REALM; REALM=$(printf 'e%.0s' $(seq 1 64))
   local okc=1
   $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$REALM" --json 2>&1 | grep -q '"standing":"unfed"' || okc=0
   $COMPOSE exec -T lararium-a $LARES cabal feed  --realm "$REALM" --as 0 >/dev/null 2>&1
@@ -753,6 +753,106 @@ run_realm_crossing() {
   clear_all
 }
 
+# THE QUORUM PHASE, and why it took a third hearth. A Nexus counts one relation per operator a vessel
+# ADMITS plus one for a contract-in it gave, and reaches quorum at two. Two operators cannot make two:
+# a joiner holds the founder charter, a seal home takes one charter, and she seats none of her own to
+# admit anyone onto. So the second relation arrives with a second partner.
+#
+# The realm ladder rides along under BOTH postures, because posture and dwelling run on orthogonal
+# axes and a quorum changes neither. Six cells close here.
+#
+# COVERS: private/quorum/unfed
+# COVERS: private/quorum/visit
+# COVERS: private/quorum/many-faces
+# COVERS: open/quorum/unfed
+# COVERS: open/quorum/visit
+# COVERS: open/quorum/many-faces
+run_quorum_realm() {
+  say "QUORUM — two partners contract in, and a realm reads the same under either posture"
+  clear_all
+  local LARES="node packages/lares-cli/dist/src/bin/lares.js"
+
+  step "the relay stands FIRST"
+  if $COMPOSE up -d herm-source >/dev/null 2>&1 && up_and_answering herm-source; then ok
+  else bad "the relay never answered"; clear_all; return; fi
+
+  # ONE AT A TIME. `@daemon` carries a 3s boot patience at vessel scale, and three hearths racing one
+  # relay queue behind each other past it. Sequence removes the load rather than the race.
+  for svc in lararium-a lararium-b lararium-c; do
+    step "$svc stands, alone against a mesh already up"
+    if $COMPOSE up -d --no-deps "$svc" >/dev/null 2>&1 && up_and_answering "$svc"; then ok
+    else bad "$svc never stood"; $COMPOSE logs "$svc" 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return; fi
+  done
+
+  step "A stands a SEED before any relation"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"seed"'; then ok
+  else bad "A did not read as a seed"; fi
+
+  # Each partner takes A's charter, signs its own contract-in, and A's quorum admits it. Both crossings
+  # run the same way, so the second proves the first was no accident of ordering.
+  local CHARTER
+  CHARTER=$($COMPOSE exec -T lararium-a $LARES nexus seal export --no-json 2>/dev/null)
+  if [ -z "$CHARTER" ]; then bad "A exported no charter"; clear_all; return; fi
+
+  for partner in lararium-b lararium-c; do
+    step "$partner takes the charter and contracts in"
+    printf '%s' "$CHARTER" | $COMPOSE exec -T "$partner" sh -c 'cat > /tmp/a-charter.mem'
+    $COMPOSE exec -T "$partner" $LARES nexus seal import /tmp/a-charter.mem >/dev/null 2>&1
+    local ACC NYM SIG
+    ACC=$($COMPOSE exec -T "$partner" $LARES nexus accept-carriage --json 2>/dev/null)
+    NYM=$(printf '%s' "$ACC" | grep -oE '"nym":"[a-f0-9]{64}"' | head -1 | cut -d'"' -f4)
+    SIG=$(printf '%s' "$ACC" | grep -oE '"contractSig":"[a-f0-9]+"' | head -1 | cut -d'"' -f4)
+    if [ -n "$NYM" ] && [ -n "$SIG" ] \
+       && $COMPOSE exec -T lararium-a $LARES nexus contract "$NYM" --sig "$SIG" >/dev/null 2>&1; then ok
+    else bad "$partner never contracted in"; printf '%s\n' "$ACC" | tail -2 | sed 's/^/      /'; clear_all; return; fi
+  done
+
+  step "★ TWO relations stand — A reads QUORUM ★"
+  if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"quorum"'; then ok
+  else
+    bad "two admits did not read as a quorum"
+    $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 \
+      | grep -oE '"phase":\{"phase":"[a-z]+"' | head -1 | sed 's/^/      /'
+  fi
+
+  # THE REALM LADDER, walked once per posture. A quorum moves neither reading, and a posture flip moves
+  # neither either — that is the orthogonality the grid exists to hold.
+  # A REALM ID READS 64 HEX. A letter outside 0-9a-f mints no doc id and the verb refuses at usage,
+  # so the ladder reports a realm that never existed rather than a reading that disagreed.
+  _realm_ladder() {
+    local letter="$1" label="$2" realm
+    realm=$(printf "${letter}%.0s" $(seq 1 64))
+    step "under $label the realm reads UNFED"
+    if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$realm" --json 2>&1 | grep -q '"standing":"unfed"'; then ok
+    else
+      bad "an unfed realm did not read unfed under $label"
+      printf '      realm %s reads: %s\n' "${letter}…" "$($COMPOSE exec -T lararium-a $LARES cabal clock --realm "$realm" --json 2>&1 \
+        | grep -oE '"standing":"[a-z-]+"|"maintainerCount":[0-9]+|"error".*' | tr '\n' ' ' | cut -c1-200)"
+    fi
+
+    step "under $label one face feeds — a VISIT"
+    $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$realm" --as 0 >/dev/null 2>&1
+    if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$realm" --json 2>&1 | grep -q '"standing":"visit"'; then ok
+    else bad "one face did not read as a visit under $label"; fi
+
+    step "under $label a second face feeds — MANY-FACES"
+    $COMPOSE exec -T lararium-a $LARES cabal feed --realm "$realm" --as 1 >/dev/null 2>&1
+    if $COMPOSE exec -T lararium-a $LARES cabal clock --realm "$realm" --json 2>&1 | grep -q '"standing":"many-faces"'; then ok
+    else bad "two faces did not read as many-faces under $label"; fi
+  }
+
+  _realm_ladder b "a PRIVATE posture"
+
+  step "the posture flips OPEN, and the quorum stands unmoved"
+  if $COMPOSE exec -T lararium-a $LARES nexus posture open --json 2>&1 | grep -q '"posture":"open"' \
+     && $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"quorum"'; then ok
+  else bad "opening the posture moved the phase"; fi
+
+  _realm_ladder 9 "an OPEN posture"
+
+  clear_all
+}
+
 case "$WANT" in
   operator-a) run_operator a ;;
   operator-b) run_operator b ;;
@@ -761,12 +861,13 @@ case "$WANT" in
   relation)   run_relation ;;
   realm)      run_realm ;;
   realm-crossing) run_realm_crossing ;;
+  quorum-realm)   run_quorum_realm ;;
   open)       run_open ;;
   crossing)   run_crossing ;;
   open-relation) run_open_relation ;;
   leaf)       run_leaf ;;
-  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_open_relation; run_leaf; run_crossing; run_nexus; run_realm_crossing ;;
-  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | open-relation | leaf | realm-crossing | all)" >&2; exit 2 ;;
+  all)        run_operator a; run_operator b; run_quorum; run_relation; run_realm; run_open; run_open_relation; run_leaf; run_crossing; run_nexus; run_realm_crossing; run_quorum_realm ;;
+  *) echo "mesh-scenarios: unknown scenario \"$WANT\" (operator-a | operator-b | nexus | quorum | relation | realm | open | crossing | open-relation | leaf | realm-crossing | quorum-realm | all)" >&2; exit 2 ;;
 esac
 
 say "═══ RESULT ═══"

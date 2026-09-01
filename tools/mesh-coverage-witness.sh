@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # mesh-coverage-witness — every reachable mesh state has a scenario, or is declared unreachable.
 #
+# ⚠ IT READS CLAIMS, NEVER PASSES. A `# COVERS:` line says a scenario MEANS to walk a cell; whether the
+# walk stands green is what running the scenario answers. Measured the hard way: four ladder steps
+# claimed their cells while carrying a realm id outside 0-9a-f, so the verb refused at usage on every
+# run and this witness still reported the cells walked. Read it beside a green run, never instead of one.
+#
 # ── WHY THE MATRIX IS DERIVED AND NOT WRITTEN ───────────────────────────────────────────────────
 # This tree's own record names the failure six times: a hand-written enumeration cannot notice what
 # it missed. A scenario list maintained by hand drifts the moment the code grows a state, and drifts
@@ -58,11 +63,14 @@ claims = set(re.findall(r'#\s*COVERS:\s*([a-z-]+/[a-z-]+/[a-z-]+)', text))
 # A cell nothing can reach states WHY, and prints every run. An absence with no reason is how a gap
 # becomes permanent: the next reader cannot tell "impossible" from "nobody got to it".
 UNREACHABLE: dict[str, str] = {
-    # THE HARNESS STANDS TWO OPERATORS. `quorum` phase reads >= 2 CONTRACTED operators, and this
-    # compose file carries exactly two lararium services — so A can hold at most one contracted
-    # peer (B). Reaching these cells means a third operator in the mesh, not a new assertion.
-    **{f"{p}/quorum/{r}": "the harness stands two operators; the quorum phase needs a third"
-       for p in ("private", "open") for r in ("unfed", "visit", "many-faces")},
+    # EMPTY, and it stays a table rather than a deleted idea. The quorum cells sat here while the
+    # harness stood two operators: a Nexus counts one relation per operator a vessel ADMITS plus one
+    # for a contract-in it gave, and two operators cannot make two — a joiner holds the founder
+    # charter, a seal home takes one charter, so she seats none of her own to admit anyone onto.
+    # `lararium-c` supplies the second partner and `run_quorum_realm` walks all six.
+    #
+    # A cell belongs here when nothing CAN reach it, never when nobody has. Adding one costs a reason
+    # a later reader can check and overturn, exactly as this entry was overturned.
 }
 
 # A SCENARIO THAT DECLARES NOTHING IS AMBIGUOUS, and the ambiguity is the hazard: a reader cannot
