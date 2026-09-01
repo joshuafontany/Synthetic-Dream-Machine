@@ -92,6 +92,19 @@ answers() {
   $COMPOSE exec -T "$1" node packages/lares-cli/dist/src/bin/lares.js bag stats --json >/dev/null 2>&1
 }
 
+# WHY A HEARTH NEVER ANSWERED, in the words the boot used.
+#
+# A four-line tail catches the stack and loses the sentence above it, and that sentence carries the
+# NUMBER: a boot that spent 3000ms and one that spent 15000ms fail identically at the tail and mean
+# different things — the first says a budget went unraised, the second says raising it did not answer.
+# So the dump reaches for the resolve line first and falls back to the tail only when none stands.
+dump_boot_failure() {
+  local svc="$1" line
+  line=$($COMPOSE logs "$svc" 2>&1 | grep -oE "did not resolve within [0-9]+ms|reason: '[a-z-]+'" | sort -u | tr '\n' ' ')
+  [ -n "$line" ] && printf '      %s: %s\n' "$svc" "$line"
+  $COMPOSE logs "$svc" 2>&1 | tail -6 | sed 's/^/      /'
+}
+
 # Wait until a hearth both STANDS and ANSWERS. Either alone is a half-truth.
 up_and_answering() {
   local svc="$1" deadline=$(( SECONDS + ${2:-300} ))
@@ -212,7 +225,7 @@ run_leaf() {
 
   step "the hearth stands AND answers"
   if up_and_answering lararium-a; then ok; else
-    bad "no lararium answering"; $COMPOSE logs lararium-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return; fi
+    bad "no lararium answering"; dump_boot_failure lararium-a; clear_all; return; fi
 
   # THE BROWSER SAYS WHAT IT MINTED. A vessel that mints and cannot name its own key leaves the admit
   # unwalkable — the operator's node has nothing to point at.
@@ -416,7 +429,7 @@ run_open() {
 
   step "the hearth stands AND answers"
   if up_and_answering lararium-a; then ok; else
-    bad "no lararium answering"; $COMPOSE logs lararium-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return
+    bad "no lararium answering"; dump_boot_failure lararium-a; clear_all; return
   fi
 
   # FAIL-CLOSED IS THE DEFAULT, and it earns an assertion: a Nexus develops in isolation until the
@@ -476,8 +489,7 @@ run_realm() {
 
   step "the hearth stands AND answers"
   if up_and_answering lararium-a; then ok; else
-    bad "no lararium answering"
-    $COMPOSE logs lararium-a 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return
+    bad "no lararium answering"; dump_boot_failure lararium-a; clear_all; return
   fi
 
   step "an unfed realm reads UNFED"

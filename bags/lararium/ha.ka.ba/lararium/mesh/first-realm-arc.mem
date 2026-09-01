@@ -71,6 +71,25 @@ Ordinary speech fuses these. The model runs them as four distinct acts with four
 
 <<~ ahu #what-the-runbook-lacks >>
 
+!! A realm and a Nexus name different things, and neither contains the other
+
+''A CABAL REALM'' names //a set of CRDT documents and CID/CAD pointers a cabal of nakama-friends share
+amongst each other//. Its members hold it because they hold each other; its reach ends where that
+company ends.
+
+''A NEXUS'' names //all operators and users on a magically-federated mesh//. More than one may stand,
+public or private, because entering one asks for a ''contract'' and for ''grammar agreement'' — a mesh
+admits by consent and by a shared way of reading, never by proximity.
+
+''THE KAHU CABAL'' names neither: it stands as the ''group-seed of the Nexus'', the seat from which a
+community manages the mesh IT-as-a-community keeps. A cabal of friends sharing documents and a cabal
+of stewards seeding a mesh wear one word and do different work — ''read which one a sentence means
+before carrying a rule across''.
+
+The scope leaves follow the same cut. A ''circle-scope'' leaf answers to a compartment of friends; a
+''nexus-scope'' leaf answers to the island a charter names. One MAC domain across both would let the
+company a human keeps collide with the mesh they stand on.
+
 !! What a maintenance roll must carry, wherever the ledger sits
 
 A realm's standing rides ''per-writer lease slots'' — one slot per face, the effective epoch the MAX
@@ -107,6 +126,6 @@ The runbook stands ''Synthesis-Canon and complete for what it covers''. These si
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Qf17vct5qGnv3zNVIXB_Rou2HkW0oTz7vKaoGzUuQKk
+<<^ code="&#x0003;" >>ni:///sha-256;V5wV9ktlOfg2LOYBuRI-Z485BylduFeOlrPKB0-Q0XQ
 
 <<^ code="&#x0004;" -> to=? >>

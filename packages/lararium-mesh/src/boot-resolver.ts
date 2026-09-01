@@ -40,7 +40,26 @@ const SCALE_PATIENCE_MS: Record<MeshScale, number> = {
   nexus:          45_000,
   dreamnet:       90_000,
 };
-const HEARTH_READY_MS = 3_000;
+/**
+ * How long a HEARTH-PRIVATE doc may take to read ready.
+ *
+ * This budget covers a LOCAL read, so it never waits on the mesh — an absent hearth-private doc
+ * answers `unavailable` and fails fast on that signal rather than on this clock. What it must cover is
+ * the moment a vessel asks for a doc IT JUST WROTE, and a cold founding puts real work in that window:
+ * keypair generation, a pre-rotation inception, keyhive wasm init, the ContactCard and the bootstrap,
+ * all in one process before the daemon doc is read back.
+ *
+ * MEASURED: at 3s a relay founding on a cold volume failed to resolve the very doc id it had just
+ * seeded — on an idle machine, with no peer involved — and exhausted eight container restarts doing
+ * it. The budget was sized for a warm read and spent on a cold found.
+ *
+ * A local doc that stays unready past this is broken rather than slow, so the ceiling stays low enough
+ * to keep failing usefully. `LAR_HEARTH_READY_MS` moves it for a constrained host without a rebuild.
+ */
+export function hearthReadyMs(): number {
+  const raw = Number(globalThis.process?.env?.["LAR_HEARTH_READY_MS"]);
+  return Number.isFinite(raw) && raw > 0 ? raw : 15_000;
+}
 
 /**
  * A mesh-shared required doc that has not arrived within its scale-patience.
@@ -134,7 +153,7 @@ export async function resolveBootDoc<T>(
   const scale = opts.scale ?? "dreamnet";
   const q = repo.findWithProgress<T>(url);
   const deadlineMs = opts.tideline === "hearth-private"
-    ? HEARTH_READY_MS
+    ? hearthReadyMs()
     : SCALE_PATIENCE_MS[scale];
 
   // The handle rides the READY QueryState (whenReady resolves to it; subscribe carries
