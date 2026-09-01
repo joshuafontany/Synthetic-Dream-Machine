@@ -55,6 +55,17 @@ export function nexusPhase(
   const joined = at.contractedInto === true;
   const relations = at.contractedOperators + (joined ? 1 : 0);
 
+  // A QUORUM COUNTS PERSONAS, WHERE MULTISIG COUNTS THE RELATION. The middle rung asks whether root
+  // has moved off the founding key, and one contracting partner answers it. The top rung asks whether
+  // a threshold describes a CHECK, and that wants enough chairs for k-of-n to bind across operators:
+  // three seated by the founder plus one carried in by the partner.
+  //
+  // Both sides count the same four without either counting a roster. The founder counts her seated
+  // chairs plus the partner she admitted; the joiner counts the roster she holds plus the consent she
+  // gave. Each counts only what it can see, and at the quorum seed the two happen to agree.
+  const QUORUM_PERSONA_FLOOR = 4;
+  const personas = at.seatedKeys + relations;
+
   if (relations <= 0) {
     return {
       phase: "seed", isNexus: false,
@@ -66,7 +77,16 @@ export function nexusPhase(
           + "The Nexus begins when a second operator contracts in.",
     };
   }
-  if (relations === 1) {
+  if (personas >= QUORUM_PERSONA_FLOOR) {
+    return {
+      phase: "quorum", isNexus: true,
+      reading: `a QUORUM — ${personas} personas stand across more than one operator (${at.seatedKeys} chair(s) `
+             + `seated here and ${relations} relation(s)), so a threshold describes a CHECK rather than a `
+             + "formality: chairs drawn from one vault supply no hand that can refuse, and this roster does. "
+             + "Admission and eviction answer to the threshold, and the founding key may vanish without ending it.",
+    };
+  }
+  if (relations >= 1) {
     return {
       phase: "multisig", isNexus: true,
       reading: joined && at.contractedOperators === 0
@@ -77,10 +97,11 @@ export function nexusPhase(
           + "GROUP is root rather than the founding key. This is the Nexus beginning.",
     };
   }
+  // relations >= 1 with too few personas: root has moved to the group and the threshold waits.
   return {
-    phase: "quorum", isNexus: true,
-    reading: `a QUORUM of relations — ${relations} this vessel can see (${at.contractedOperators} admitted`
-           + `${joined ? " plus its own contract-in" : ""}), admission and eviction by quorum, and the `
-           + "founding key may vanish without ending it. The Nexus may hold more; no vessel sees the whole.",
+    phase: "multisig", isNexus: true,
+    reading: `FOUNDER-MULTISIG — ${relations} relation(s) stand, so the GROUP is root rather than the founding `
+           + `key, and ${personas} persona(s) fall short of the ${QUORUM_PERSONA_FLOOR} a quorum seeds at. A `
+           + "threshold over this few describes no check yet.",
   };
 }

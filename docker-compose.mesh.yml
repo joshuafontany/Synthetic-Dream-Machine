@@ -98,33 +98,6 @@ services:
     depends_on: [herm-source]
     restart: "on-failure:8"
 
-  # OPERATOR C — the THIRD hearth, and the harness stands it for one reason: a Nexus reaches its
-  # QUORUM phase at two relations, and a vessel counts one for each operator it admits plus one for a
-  # contract-in it gave. Two operators cannot make two: a joiner holds the founder's charter and a seal
-  # home takes one charter, so she seats none of her own to admit anyone onto. The second relation has
-  # to come from a second partner.
-  #
-  # Sovereign like the others — own root, own volume, own keys — so an admit here crosses a real
-  # custody boundary rather than reading a second face of one operator.
-  lararium-c:
-    image: node:24-slim
-    working_dir: /app
-    volumes:
-      - ".:/app"
-      - "lararium-c-data:/lar-c"
-    environment:
-      LAR_ROOT: "/lar-c"
-      LAR_PORT: "8080"
-      LAR_PEERS: "${LAR_C_PEERS-http://herm-source:8080}"
-      LAR_PUBLIC_URL: "http://lararium-c:8080"
-      LAR_STAND_FACE: "gamma"
-    entrypoint: ["sh", "tools/lararium-container-boot.sh"]
-    networks: [mesh]
-    ports:
-      - "18096:8080"
-    depends_on: [herm-source]
-    restart: "on-failure:8"
-
   # ── BROWSER VESSELS ─────────────────────────────────────────────────────────────────────────────
   # THE THIRD CLASS, and it needs a real engine. A browser vessel mints through `crypto.subtle`, which
   # a browser withholds off a SECURE CONTEXT. Node grants none — it defines no `isSecureContext` at all
@@ -225,7 +198,6 @@ networks:
 volumes:
   lararium-a-data:
   lararium-b-data:
-  lararium-c-data:
   herm-source-data:
   herm-relay-data:
   herm-relay-2-data:

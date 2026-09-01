@@ -753,10 +753,13 @@ run_realm_crossing() {
   clear_all
 }
 
-# THE QUORUM PHASE, and why it took a third hearth. A Nexus counts one relation per operator a vessel
-# ADMITS plus one for a contract-in it gave, and reaches quorum at two. Two operators cannot make two:
-# a joiner holds the founder charter, a seal home takes one charter, and she seats none of her own to
-# admit anyone onto. So the second relation arrives with a second partner.
+# THE QUORUM SEED — two operators and FOUR personas, which is where a threshold starts describing a
+# check. Operator A seats three chairs from her own vault and operator B carries one in. Three chairs
+# from one identity home stay three faces of one operator, supplying no hand that can refuse; the
+# fourth arrives with one, and only then does k-of-n mean anything.
+#
+# So a quorum wants no third hearth. It wants the partner a multisig already has, plus enough chairs
+# for the threshold to bind ACROSS the two.
 #
 # The realm ladder rides along under BOTH postures, because posture and dwelling run on orthogonal
 # axes and a quorum changes neither. Six cells close here.
@@ -778,7 +781,7 @@ run_quorum_realm() {
 
   # ONE AT A TIME. `@daemon` carries a 3s boot patience at vessel scale, and three hearths racing one
   # relay queue behind each other past it. Sequence removes the load rather than the race.
-  for svc in lararium-a lararium-b lararium-c; do
+  for svc in lararium-a lararium-b; do
     step "$svc stands, alone against a mesh already up"
     if $COMPOSE up -d --no-deps "$svc" >/dev/null 2>&1 && up_and_answering "$svc"; then ok
     else bad "$svc never stood"; $COMPOSE logs "$svc" 2>&1 | tail -4 | sed 's/^/      /'; clear_all; return; fi
@@ -794,7 +797,7 @@ run_quorum_realm() {
   CHARTER=$($COMPOSE exec -T lararium-a $LARES nexus seal export --no-json 2>/dev/null)
   if [ -z "$CHARTER" ]; then bad "A exported no charter"; clear_all; return; fi
 
-  for partner in lararium-b lararium-c; do
+  for partner in lararium-b; do
     step "$partner takes the charter and contracts in"
     printf '%s' "$CHARTER" | $COMPOSE exec -T "$partner" sh -c 'cat > /tmp/a-charter.mem'
     $COMPOSE exec -T "$partner" $LARES nexus seal import /tmp/a-charter.mem >/dev/null 2>&1
@@ -807,10 +810,10 @@ run_quorum_realm() {
     else bad "$partner never contracted in"; printf '%s\n' "$ACC" | tail -2 | sed 's/^/      /'; clear_all; return; fi
   done
 
-  step "★ TWO relations stand — A reads QUORUM ★"
+  step "★ FOUR personas across TWO operators — A reads QUORUM ★"
   if $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 | grep -q '"phase":{"phase":"quorum"'; then ok
   else
-    bad "two admits did not read as a quorum"
+    bad "three seated chairs plus one contracted partner did not read as a quorum"
     $COMPOSE exec -T lararium-a $LARES nexus seal show --json 2>&1 \
       | grep -oE '"phase":\{"phase":"[a-z]+"' | head -1 | sed 's/^/      /'
   fi
