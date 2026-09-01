@@ -87,8 +87,9 @@ export function cabalRealmMaintenanceProvenance(
   const maintainers: MaintainerStanding[] = [];
   for (const [slotUri, value] of leaseSlots) {
     if (!slotUri.startsWith(prefix)) continue;            // a foreign realm's slot
-    const epoch = Number(value);
-    if (!Number.isInteger(epoch)) continue;               // a malformed slot value
+    const parsed = readRealmFeedSlot(value);
+    if (!parsed) continue;                                // a malformed slot value
+    const epoch = parsed.epoch;
     const writerId = decodeURIComponent(slotUri.slice(prefix.length));
     maintainers.push({ writerId, epoch });
   }
@@ -187,6 +188,52 @@ export function realmFeedWrite(
     priorEffective,
     first: !leaseSlots.has(slotUri),
   };
+}
+
+// ── WHAT A SLOT HOLDS ─────────────────────────────────────────────────────────────────────────────
+
+/** One writer's roll as a slot holds it — the epoch, and the seal proving whose hand rolled it. */
+export interface RealmFeedSlotValue {
+  readonly epoch: number;
+  /** Absent where the board answers for the writer (a vessel's own bag) — see `verifyRealmFeedSlot`. */
+  readonly sig?:  string;
+}
+
+/**
+ * Write a slot's value.
+ *
+ * A bare integer where no seal rides, so a board that nobody else can write stays exactly what it was
+ * and no reader has to learn a format for a fact it already holds. Sealed rolls carry JSON.
+ */
+export function realmFeedSlotValue(value: RealmFeedSlotValue): string {
+  return value.sig ? JSON.stringify({ epoch: value.epoch, sig: value.sig }) : String(value.epoch);
+}
+
+/**
+ * Read a slot's value, in either form — or null where it holds neither.
+ *
+ * BOTH FORMS READ, and that is what lets the seal arrive without a board migration: a sealed writer can
+ * start rolling into a board full of bare integers, and every reader already folds both. A malformed
+ * slot reads null rather than throwing, so one bad entry never costs the whole fold.
+ *
+ * READING A SEAL IS NOT CHECKING ONE. This reports the seal a slot CARRIES; whether that seal verifies
+ * is `verifyRealmFeedSlot`, which is async and has no caller while the board answers for its writers.
+ * A `sig` present here is a claim, never a proof, and a gate that treated it as one would admit any
+ * string. The check becomes required at the same moment the board starts taking a peer's write.
+ */
+export function readRealmFeedSlot(text: string): RealmFeedSlotValue | null {
+  // DIGITS ONLY, and that is stricter than a Number() cast on purpose: `Number("")` is 0, so an empty
+  // slot would fold as a maintainer standing at genesis, and `Number("0x10")` is 16, so a value that
+  // is not a decimal epoch would still count. An epoch is a run of digits or it is not one.
+  if (/^\d+$/.test(text)) return { epoch: Number(text) };
+  try {
+    const parsed = JSON.parse(text) as { epoch?: unknown; sig?: unknown };
+    if (!Number.isInteger(parsed.epoch)) return null;
+    const epoch = parsed.epoch as number;
+    return typeof parsed.sig === "string" && parsed.sig.length > 0
+      ? { epoch, sig: parsed.sig }
+      : { epoch };
+  } catch { return null; }
 }
 
 // ── SEALING THE WRITE PATH ────────────────────────────────────────────────────────────────────────

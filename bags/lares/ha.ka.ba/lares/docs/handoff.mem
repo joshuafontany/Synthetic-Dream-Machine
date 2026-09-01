@@ -421,6 +421,7 @@ The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/
 ** ⚠ ''`@keyhive/keyhive`'s npm `latest` TAG POINTS AT A YEAR-OLD PLACEHOLDER'' (`0.0.0-alpha.0`, 2025-09-22); the live line rides `next`. ✓ Our two pins read EXACT and the lockfile resolves only `0.1.0-alpha.6`, so nothing bites today — ''any loose add anywhere silently takes the placeholder''.
 ** ⚠ ''TWO SIDE LINES READ AS TRAPS'': `subduction` moves (48 releases, tracking PR #601) but ''downgrades `@automerge/automerge` to a pinned 3.3.2'' and swaps the sync protocol wholesale — an evaluation project. `authors` has not moved since 2026-07-03 and its `2.7.0-` version ''does NOT mean a 2.7 line exists''. ''WATCH, never track'', PR #725 `improve-adapter-contract`: it adds exactly the distinction this bug needs (`DocumentUnavailable` vs `DocumentLoadFailed` — //I don't have it// against //I could not check//) and stands unmerged, 5 behind main.
 * ⚠ ''THE FLAKE'S MECHANISM, READ FROM UPSTREAM SOURCE — and the cure sits on OUR side''. `StorageSource.attach()` on the create path fires the throttled save and ''IMMEDIATELY calls `query.sourceUnavailable("storage")`''; `DocSynchronizer.#updateAvailability()` reports `sourceUnavailable("automerge-sync")` when ''`peers.size === 0`''; `DocumentQuery.#computeState()` reads ready only when `handle.heads().length > 0`, and otherwise — ''all sources settled, none pending'' — returns `unavailable`. ''On a cold start with no peers and a write still in the 100ms throttle, `unavailable` arrives immediately and BY DESIGN.'' ✓ ''alpha.3 ALREADY exposes the per-source map'' (`sources: Record<string, SourceState>` via `peek()`), so ''we can separate //storage answered nothing// from //settled with zero peers// TODAY'' without waiting on #725. ⚠ And `Repo.shutdown()` reads BEST-EFFORT since #719 — it swallows flush failures, and its own comment says call `flush()` explicitly first.
+* ⚠ ''ONE CARRIER FAILS THE CORPUS ROUND-TRIP — PRE-EXISTING, and it wants an owner''. `lararium-tw5` `tests/grammar-in-a-wiki.test.ts` reports ''`bags/elyncia/…/primary-characters/lady-aki.mem: body does not render back''`. ✓ ''Proven not to be a build gap and not a regression'': it survives a full `lararium-tw5` rebuild, and against the pre-session tree the ''carrier is byte-identical and every parser source matches''. The whole rest of the corpus (>500 carriers) renders back. ''One carrier, one shape — read it before trusting any corpus-wide render claim.''
 * tombstone/whiteout verb — reserved (§3); wakes when layered delete needs it
 * Automerge history growth — DXOS-epoch pattern watched (§1); wakes on real growth; the §7 bus-doc law = a second consumer
 * `lares wiki` subcommands print human-only; `wiki open` selects-for-next-boot only
@@ -479,6 +480,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ggiBeA6HM52vaPFQNX7qv7XAYq_YO7TvgjeKQS3oWmU
+<<^ code="&#x0003;" >>ni:///sha-256;-svxmbpptr2vrp76Xy2LHTlcnLWTnfxT8oyolcA7aZ4
 
 <<^ code="&#x0004;" -> to=? >>

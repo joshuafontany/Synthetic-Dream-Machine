@@ -14,7 +14,7 @@ import { describe, expect, test } from "vitest";
 import { MemoryTiddlerStore } from "../src/memory-store.js";
 import { makeCabalRealmReactors } from "../src/cabal-realm-verbs.js";
 import type { VerbContext } from "../src/verb-dispatcher.js";
-import { DAEMON_BAG_ID, leaseEpochSlotUri } from "@lararium/mesh";
+import { DAEMON_BAG_ID, realmFeedSlotUri } from "@lararium/mesh";
 
 const CTX   = {} as VerbContext;
 const REALM = "ab".repeat(32);
@@ -34,7 +34,7 @@ describe("realm-feed — the offering rolls one writer's own slot", () => {
     expect(await r.feed({ realm: REALM, writer: FACE_A }, CTX)).toMatchObject({
       verb: "realm-feed", realm: REALM, writer: FACE_A, epoch: 1, priorEffective: 0, first: true, federated: false,
     });
-    expect((await s.get(leaseEpochSlotUri(REALM, FACE_A)))?.tiddler.text).toBe("1");
+    expect((await s.get(realmFeedSlotUri(REALM, FACE_A)))?.tiddler.text).toBe("1");
   });
 
   test("feeding again rolls again — the clock measures how hard a hand feeds, so a repeat SHOULD register", async () => {
@@ -48,8 +48,8 @@ describe("realm-feed — the offering rolls one writer's own slot", () => {
     const r = reactorsOver(s);
     await r.feed({ realm: REALM, writer: FACE_A }, CTX);      // A → 1
     await r.feed({ realm: REALM, writer: FACE_B }, CTX);      // B → 2 (it sees A's slot)
-    expect((await s.get(leaseEpochSlotUri(REALM, FACE_A)))?.tiddler.text).toBe("1");
-    expect((await s.get(leaseEpochSlotUri(REALM, FACE_B)))?.tiddler.text).toBe("2");
+    expect((await s.get(realmFeedSlotUri(REALM, FACE_A)))?.tiddler.text).toBe("1");
+    expect((await s.get(realmFeedSlotUri(REALM, FACE_B)))?.tiddler.text).toBe("2");
   });
 
   test("★ a feed never touches ANOTHER realm's slots ★", async () => {
@@ -58,7 +58,7 @@ describe("realm-feed — the offering rolls one writer's own slot", () => {
     await r.feed({ realm: OTHER, writer: FACE_A }, CTX);
     await r.feed({ realm: REALM, writer: FACE_A }, CTX);
     // The other realm's roll stays where it was — the prefix scopes both the read and the write.
-    expect((await s.get(leaseEpochSlotUri(OTHER, FACE_A)))?.tiddler.text).toBe("1");
+    expect((await s.get(realmFeedSlotUri(OTHER, FACE_A)))?.tiddler.text).toBe("1");
     expect(await r.clock({ realm: OTHER }, CTX)).toMatchObject({ maintainerCount: 1, effectiveEpoch: 1 });
   });
 

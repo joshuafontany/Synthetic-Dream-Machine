@@ -26,7 +26,7 @@
  */
 
 import {
-  realmLeaseSlotsFromBoard, realmFeedWrite, cabalRealmMaintenanceProvenance,
+  realmLeaseSlotsFromBoard, realmFeedWrite, realmFeedSlotValue, cabalRealmMaintenanceProvenance,
   type LarTiddlerStore, type LarTiddlerRecord, type LarDoc,
 } from "@lararium/mesh";
 import type { VerbReactor } from "./verb-dispatcher.js";
@@ -84,7 +84,7 @@ export function makeRealmFeedReactor(opts: CabalRealmVerbOptions): VerbReactor {
     const feed  = realmFeedWrite(realm, writer, slots);
 
     const next: LarTiddlerRecord = {
-      tiddler: { title: feed.slotUri, text: String(feed.epoch) } as LarTiddlerRecord["tiddler"],
+      tiddler: { title: feed.slotUri, text: realmFeedSlotValue({ epoch: feed.epoch }) } as LarTiddlerRecord["tiddler"],
       meta: { authority: "lares-verb" },
     };
     await store.put(next, { kind: "lares-verb", requestId: `realm-feed-${realm.slice(0, 8)}-${writer.slice(0, 8)}-${feed.epoch}` });
