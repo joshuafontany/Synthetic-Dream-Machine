@@ -29,11 +29,11 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import { leaseEpochPrefix, leaseEpochSlotUri, effectiveLeaseEpoch, rolledLeaseEpoch } from "./epoch-lease.js";
+import { effectiveLeaseEpoch, rolledLeaseEpoch } from "./epoch-lease.js";
 import { canonicalJsonBytes, hexToBytes } from "./crypto.js";
 import * as ed25519 from "@noble/ed25519";
 import { tiddlerText, type LarDoc } from "./base-doc.js";
-import type { CabalRealm } from "./cabal-realm.js";
+import { realmFeedPrefix, realmFeedSlotUri, type CabalRealm } from "./cabal-realm.js";
 
 /** One maintainer's standing — the writer and how deep it has rolled the realm's lease. */
 export interface MaintainerStanding {
@@ -83,7 +83,7 @@ export function cabalRealmMaintenanceProvenance(
   // about a realm it does not itself dwell in) may pass the hex, and a caller holding the whole realm may
   // pass that. Narrowing the demand rather than demanding the whole shape for one field.
   const realmDocIdHex = typeof realm === "string" ? realm : realm.realmDocIdHex;
-  const prefix = leaseEpochPrefix(realmDocIdHex);
+  const prefix = realmFeedPrefix(realmDocIdHex);
   const maintainers: MaintainerStanding[] = [];
   for (const [slotUri, value] of leaseSlots) {
     if (!slotUri.startsWith(prefix)) continue;            // a foreign realm's slot
@@ -118,7 +118,7 @@ export function cabalRealmMaintenanceProvenance(
  * decides who can SEE it, and that choice belongs above this line.
  */
 export function realmLeaseSlotsFromBoard(doc: LarDoc, realmDocIdHex: string): Map<string, string> {
-  const prefix = leaseEpochPrefix(realmDocIdHex);
+  const prefix = realmFeedPrefix(realmDocIdHex);
   const slots  = new Map<string, string>();
   for (const [key, record] of Object.entries(doc.tiddlers ?? {})) {
     if (!key.startsWith(prefix)) continue;
@@ -174,8 +174,8 @@ export function realmFeedWrite(
   writerId:      string,
   leaseSlots:    ReadonlyMap<string, string>,
 ): RealmFeedWrite {
-  const slotUri = leaseEpochSlotUri(realmDocIdHex, writerId);
-  const prefix  = leaseEpochPrefix(realmDocIdHex);
+  const slotUri = realmFeedSlotUri(realmDocIdHex, writerId);
+  const prefix  = realmFeedPrefix(realmDocIdHex);
   const mine: string[] = [];
   for (const [uri, value] of leaseSlots) {
     if (uri.startsWith(prefix)) mine.push(value);

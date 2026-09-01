@@ -39,7 +39,6 @@
  * Meme: lar:///ha.ka.ba/lares/api/pono/cabal-realm
  */
 
-import { leaseEpochSlotUri } from "./epoch-lease.js";
 import type { BagStowage, ResidencyTemperature, CoolingCause } from "./bag-residency.js";
 
 /**
@@ -66,14 +65,44 @@ export interface CabalRealm {
   readonly genesisUri: string;
 }
 
+// ── THE FEED'S OWN ADDRESS SPACE ──────────────────────────────────────────────────────────────────
+
 /**
- * The realm's LIVENESS lease slot a single writer owns — = the epoch-lease slot
- * keyed by the realm's sentinel DocId as the resourceId. Coordinator-free
- * max-register (effectiveLeaseEpoch = max over slots); the realm's own
+ * Prefix for a realm's per-writer FEED slots.
+ *
+ * SEPARATE FROM THE FENCE BY OWNER, and that separation is load-bearing.
+ *
+ * A REALM CARRIES TWO EPOCHS UNDER ONE DOC ID. `leaseEpochPrefix` addresses its ADMISSION FENCE, which
+ * bounds outstanding invites — rolling it stales every one at once, so it belongs to the vessel alone.
+ * This addresses its FEED, the heartbeat its members keep together, which has to take a peer's write.
+ * Addressed alike they are ONE SLOT, and each drives the other: feeding a realm stales its own invites,
+ * and revoking an invite reads as somebody maintaining it.
+ *
+ * Both fold by MAX and neither verifies a seal before folding, so one slot carrying a large number is
+ * enough to stale a resource. A shared board carrying both senses would hand any peer that reach. These
+ * slots therefore carry no daemon root — they are relative to whichever board holds them, and no fence
+ * scan reaches them.
+ */
+export function realmFeedPrefix(realmDocIdHex: string): string {
+  return `realm-feed/${encodeURIComponent(realmDocIdHex)}/`;
+}
+
+/** The feed slot a single writer owns for a realm (LWW-safe — one owner holds it). */
+export function realmFeedSlotUri(realmDocIdHex: string, writerId: string): string {
+  return `${realmFeedPrefix(realmDocIdHex)}${encodeURIComponent(writerId)}`;
+}
+
+/**
+ * The realm's LIVENESS feed slot a single writer owns, keyed by the realm's sentinel DocId.
+ * Coordinator-free max-register (effectiveLeaseEpoch = max over slots); the realm's own
  * collective-maintenance heartbeat, NOT an authority epoch (#the-tie-break).
+ *
+ * A realm ALSO carries an admission fence under the same DocId, in the epoch-lease space
+ * (`realmLeaseEpoch`) — that one bounds outstanding invites and is authority. The two spaces
+ * stay apart so neither drives the other.
  */
 export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): string {
-  return leaseEpochSlotUri(realmDocIdHex, writerId);
+  return realmFeedSlotUri(realmDocIdHex, writerId);
 }
 
 /**

@@ -30,11 +30,13 @@ const REALM: CabalRealm = {
 };
 
 describe("cabalRealmLeaseSlot — the realm's liveness lease, DocId-keyed", () => {
-  test("deterministic + = the epoch-lease slot keyed by the sentinel DocId", () => {
+  test("deterministic, and NOT the fence slot — the feed keeps its own space", () => {
     expect(cabalRealmLeaseSlot(REALM.realmDocIdHex, "writer-1"))
       .toBe(cabalRealmLeaseSlot(REALM.realmDocIdHex, "writer-1"));
+    // A realm's heartbeat must take a peer's write; the revocation fence must never. Sharing one
+    // address space would let a peer stale grants by feeding a realm. See tests/lease-ownership.
     expect(cabalRealmLeaseSlot(REALM.realmDocIdHex, "writer-1"))
-      .toBe(leaseEpochSlotUri(REALM.realmDocIdHex, "writer-1"));
+      .not.toBe(leaseEpochSlotUri(REALM.realmDocIdHex, "writer-1"));
   });
 
   test("keyed by docId — different realms → different slots", () => {

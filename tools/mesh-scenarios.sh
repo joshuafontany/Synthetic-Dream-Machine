@@ -741,12 +741,15 @@ run_realm_crossing() {
   # THE MEASUREMENT THIS SCENARIO EXISTS FOR. Three faces have now fed one realm — two of A's and one
   # of B's — so a reading that spanned the Nexus would count THREE. A counts its own two and stops.
   #
-  # The cause is structural, not a sync delay: `realm-feed` rolls a slot under `bags/daemon/lease-epoch/`,
-  # and `daemonDocUrlFromBootstrap` reads that bag's URL "off the social bootstrap THIS VESSEL already
-  # holds". `epoch-lease` was built as "the non-renewal half of revocation" — a capability-staling FENCE,
-  # which is vessel-local by nature and correctly homed. `realm-clock` reuses it as a MAINTENANCE LEDGER,
-  # which is shared by nature. One mechanism, two purposes, incompatible scopes: a realm is a collective
-  # bound by interaction, and the record of that interaction sits in each participant's private drawer.
+  # The cause is structural, not a sync delay. `daemonDocUrlFromBootstrap` reads the daemon bag's URL
+  # "off the social bootstrap THIS VESSEL already holds", so a realm's feed is read from a board nobody
+  # else writes. A realm is a collective bound by interaction, and the record of that interaction sits
+  # in each participant's private drawer.
+  #
+  # The two senses now hold SEPARATE ADDRESS SPACES (`realmFeedPrefix` vs `leaseEpochPrefix`), which is
+  # what the move waits on rather than the move itself. Both fold by MAX and neither verifies a seal
+  # before folding, so a shared board carrying both would let any peer stale grants on resources it has
+  # no authority over. The feed carries no daemon root and can travel alone.
   step "★ does a peer's offering CROSS? three faces have fed ★"
   local FACES
   local wait_until=$((SECONDS + 45))
@@ -759,8 +762,8 @@ run_realm_crossing() {
   if [ "${FACES:-0}" -ge 3 ]; then ok
   else
     gap "A counts ${FACES:-0} faces, never B's — realm standing does not cross operators"
-    printf '      the ledger rides `bags/daemon/lease-epoch/`, and each vessel reads that bag off its OWN bootstrap\n'
-    printf '      wakes when the maintenance ledger moves to the realm SUBSTRATE, which replicates to its dwellers\n'
+    printf '      the feed is read off the DAEMON board, which each vessel reads from its OWN bootstrap\n'
+    printf '      wakes when the feed moves to the realm SUBSTRATE; its address space is already separate\n'
   fi
   clear_all
 }

@@ -41,9 +41,12 @@ export class CabalJoinError extends Error {}
 /**
  * The daemon doc's URL, off the social bootstrap this vessel already holds.
  *
- * The realm's lease slots live under the daemon bag, so a fence that never opens that doc reads a
- * genesis epoch for every realm forever. Absent or unreadable reads null, and the caller then prices
- * against genesis — the honest floor when this vessel cannot see the board at all.
+ * This is the board a realm's feed is read from, so a caller that never opens the doc reads a genesis
+ * epoch for every realm forever. Absent or unreadable reads null, and the caller then prices against
+ * genesis — the honest floor when this vessel cannot see the board at all.
+ *
+ * THE BOARD IS THIS VESSEL'S OWN, which is correct for a fence: an admission bound is an authority
+ * this vessel holds alone, and a peer able to roll it could stale every outstanding invite.
  */
 export function daemonDocUrlFromBootstrap(): string | null {
   try {
