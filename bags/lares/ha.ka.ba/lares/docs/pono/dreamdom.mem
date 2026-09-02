@@ -1,0 +1,132 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/dreamdom.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 17
+manao             = 16
+manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Synthesis-Design"
+retain            = true
+role              = "dreamdom — the DESIGN. DreamDOM pet-names this house's REPLACEMENT for TiddlyWiki's `$tw.fakeDocument`: a DOM implementation instanced TWICE — one in the live wiki VM, one on the main thread — with tight bindings between them, so the thread boundary lives INSIDE the DOM rather than layered over it. Carries the position (four places it is genuinely unusual, three it is merely borrowed), the seven pono vectors, and the one fork a replacement DOM forces: a mutating DOM ships deltas, and this house's drop-safety rests on frames being ABSOLUTE. Collide against `dreamdom-prior-art`."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! DreamDOM ~ the DOM the wiki dreams in, on both sides of the thread
+
+''DreamDOM replaces `$tw.fakeDocument`.'' Not a projection over it — ''the thing itself''. TiddlyWiki's fake document is 372 lines whose `addEventListener` body is literally `// Do nothing`: no events, no `dispatchEvent`, no geometry, no `querySelector`, no `focus`, no `activeElement`, no selection. It exists so TW5 can render where no browser stands, and it succeeds by ''subtracting'' until nothing interactive remains.
+
+''DreamDOM instances TWICE, with tight bindings between them'': one inside the ''live wiki VM'', one on the ''main thread''. The boundary lives INSIDE the DOM implementation rather than above it. The widget tree talks to a document; that document happens to be spread across two threads; ''the widget tree never learns this''.
+
+That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worker with a main-thread twin and a node map between — and the field's reading of that shape applies to us directly rather than by analogy (#dreamdom-prior-art).
+
+<<~/ahu >>
+
+<<~ ahu #the-position >>
+
+!! Where the position is genuinely unusual ~ four
+
+# ''THE FRAMES ARE ABSOLUTE, and nobody else's are.'' Every system in the corpus ships MUTATIONS — WorkerDOM fifteen opcode kinds, remote-dom four, Blazor and LiveView diffs — and every one of them ''must queue'', because dropping a delta corrupts. Whole rendered state can be DROPPED, so newest-wins coalescing is sound. This was never cleverness; it falls out of the engine rendering a whole story river. ⚠ ''It is also the property a replacement DOM most endangers'' (#the-fork).
+# ''THE STORE IS A CRDT, and theirs is not.'' LiveView's hardest machinery — monotone clocks, `PHX_REF_LOCK`, patches morphed into a private clone tree — exists to stop ''one authoritative server overwriting a client edit made after the frame was generated''. Blazor did not solve it and documents the caveat instead. That bug class is a consequence of ''last-writer-wins between an authority and a subordinate''. Two replicas that converge do not have it.
+# ''WE NEVER RASTERIZE — and this is the one that carries the rest.'' Flutter and Qt moved rendering into engines that own pixels, ''lost the semantic layer'', and had to rebuild accessibility as an absolutely-positioned shadow-DOM overlay: opt-in, off by default for performance, re-positioned every scroll, racing the screen reader. Google Docs shipped the assertion that accessibility was unaffected and WebAIM refused it. ''They paid because after rasterizing the semantics were gone and had to be re-invented as a parallel artifact.'' The tiddler is always here. The widget tree is always here. A rendered surface is ''one camera on a live semantic structure'', never a destination.
+# ''ISOMORPHIC BY CONSTRUCTION — which answers Surma structurally.'' His objection to worker offloading is that it ''"just MOVES the problem… a 2nd main thread, with all the same problems"''. Ours is not a second main thread; it is ''a vessel'' running the same `makeWikiBehavior` the node hearth runs headless, differing only by the capability its `onBoot` mounts — fs there, main thread here. `role = capability ≠ platform`. WorkerDOM is browser-only, LiveView server-only, Blazor picks a side. ''The worker is the ORDINARY environment; the browser is the special case that adds a camera.''
+
+!!! And the idiom already stands
+
+`browser-wiki-worker` mounts ''TWO projection-nalus over ONE island'' today — the story river and the coherence radius, coalescing on the same beat, torn down LIFO. ''Multiple cameras is an established pattern here, not a proposal.'' A third camera is a composition.
+
+<<~/ahu >>
+
+<<~ ahu #the-borrowed >>
+
+!! Where it is merely borrowed ~ three, and they must not be forgotten
+
+* ''NO EXEMPTION FROM THE SHADOW-DOM TAX.'' ARIA IDREFs do not cross a shadow boundary — `aria-labelledby`, `aria-controls`, `aria-activedescendant`, `label for` all break; the standards-track fix takes ''element references, which serialized HTML cannot express''. `document.activeElement` returns the HOST. Selection across a boundary has been open since 2015. Building a good camera does not exempt the surface it hands to.
+* ''NO EXEMPTION FROM THE FAKE-DOM BLIND SPOT — measured here, not inherited.'' jsdom returns zeros for geometry; fakeDom has no events, focus, selection or geometry; ''TW5's whole widget suite runs on it and so does ours''. A green unit suite over a fake document certified an interaction leg that broke on the first real click. ''The fixture WAS the blind spot.''
+* ''PROGRAMMATIC FOCUS FROM THE VM STAYS UNSOLVED.'' Seven years of WorkerDOM and `focus()`, `blur()`, `activeElement`, `getSelection()`, `createRange()` remain unimplemented. We inherit that whole, and a DreamDOM does not conjure it — it only decides where the refusal is stated.
+
+<<~/ahu >>
+
+<<~ ahu #the-fork >>
+
+!! ⚠ THE FORK a replacement DOM forces ~ absolute frames versus a mutating document
+
+''This is the design's sharpest tension and it MUST be decided rather than discovered.''
+
+A DOM ''mutates''. Nodes are appended, attributes set, text changed. The natural implementation of a two-instance DOM with tight bindings is therefore ''the WorkerDOM shape'': the VM-side document emits a mutation stream, the main-thread twin applies it against a node map. That is exactly what WorkerDOM does, and it is why WorkerDOM ''must queue and cannot drop''.
+
+But drop-safety — the property that lets a burst of wiki changes collapse to one post, and a stale arrival be discarded on a monotone revision — ''rests entirely on the payload being ABSOLUTE STATE''. The moment a delta enters, dropping corrupts, and the corruption is ''silent'': the two documents simply diverge, and nothing says so.
+
+''So a replacement DOM does not inherit the advantage. It must be BUILT to keep it.'' Three shapes, and the choice is an operator ruling:
+
+# ''ABSOLUTE-ONLY.'' DreamDOM mutates VM-side; the binding still ships whole rendered state. Keeps drop-safety and coalescing exactly as they stand; pays serialization of the whole surface every beat. ⚠ Prices badly on large documents — TW5's own baseline is ''100–300 ms per keypress'' and ''~500 ms to open a tiddler past forty open''.
+# ''DELTA WITH AN ANCHOR.'' Ship mutations, but each batch carries the revision it applies TO, and a mismatch forces a whole-state resync rather than an apply. Buys WorkerDOM's economy; ''re-introduces queueing''; the resync path becomes load-bearing and therefore must be exercised, not merely present.
+# ''SPLIT BY CAMERA.'' The story-river camera stays absolute (it is a projection and its payload IS state); a separate binding carries mutation-shaped traffic for what genuinely needs it. Keeps the covenant where it earns its keep and pays economy where it does not. ''Costs two protocols and the discipline to keep them apart.''
+
+''What must NOT happen is drift into (2) by increment.'' A delta added "just for this one case" ends drop-safety for every case, silently, and the instrument that would notice does not exist yet.
+
+<<~/ahu >>
+
+<<~ ahu #what-a-replacement-un-skips >>
+
+!! What replacing the fake document UN-SKIPS
+
+TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and degrades. ''Exactly five core sites check `isTiddlyWikiFakeDom`'':
+
+* `editor/factory.js:211` — forces the SimpleEngine, ''never'' the iframe FramedEngine. The framed editor exists for one stated reason: //"the selection is preserved even when clicking away from the textarea."//
+* `simple.js:72,105` and `framed.js:126,161` — the two editor engines' own guards.
+* `list.js:58` — ''storyviews skipped entirely''.
+* `reveal.js:45,279` — ''popup positioning and animation skipped''.
+
+''A DreamDOM that presents as a real document un-skips all of them.'' That is the point — those degradations are the interactive surface being subtracted — and it is also the risk: each un-skipped path is a code path this house has ''never once executed''. They arrive together, at once, the first time the check returns false.
+
+⚠ ''Therefore the check-site list is a TEST ROSTER, not trivia.'' Whatever DreamDOM lands must walk those five, deliberately, in a real browser, before anything downstream is believed. The house already learned this at smaller scale: a leg unit-tested against the fake document passed its own suite and failed on first contact.
+
+<<~/ahu >>
+
+<<~ ahu #the-vectors >>
+
+!! The pono vectors ~ seven, written to be CHECKED rather than admired
+
+# ''NEVER RASTERIZE — every surface is a camera; the store is the deliverable.'' The moment DreamDOM becomes //the way we draw// rather than //one projection over an island//, this house has taken Flutter's trade and will pay Flutter's price. ''Test: can a second camera mount over the same island without touching the first?'' Today, yes — twice.
+# ''DECLARE AT BINDING, NEVER DECIDE AT HANDLING.'' `preventDefault` must be a subscription-time declaration, because a handler running later and elsewhere ''cannot cancel'' — WorkerDOM put a flag in its subscribe opcode; partytown lost the capability outright; ''the field has no third answer''. Generalize: anything a later-and-elsewhere handler cannot do gets declared where the binding is made. The same law as signed-versus-attached, and as a cap-tier declared before a crossing — one law in three coats.
+# ''ABSOLUTE FRAMES ARE A COVENANT, NOT AN OPTIMIZATION.'' No delta enters a frame that claims drop-safety. It belongs in the do-not-collapse register beside the test serialization law and the THRASHERS roster. See #the-fork: a replacement DOM does not inherit this, it must be built to keep it.
+# ''BOTH SIDES STAY REPLICAS — never make one authoritative.'' LiveView needed clocks, locks and clone trees because a server outranks a client. The CRDT dissolves that class. ''If the VM ever outranks the main thread, or the node the browser, the entire bug family arrives with the promotion.''
+# ''REFUSE WHERE THE FIELD NO-OPS.'' Qt: //"has no effect."// Unity: //"has no effect."// partytown: //"may silently fail."// This house fails closed and already splits `gap` from `FAILED`. Extend it: ''a capability DreamDOM cannot carry REFUSES and says so.'' The field's characteristic failure is silence, and silence is the one thing these instruments are built against.
+# ''ACCESSIBILITY IS A CAMERA WE OWE, NOT A TAX WE PAY.'' Because the semantics are never lost, this house can build what Flutter and Qt structurally could not. That turns an industry excuse into an obligation, and it is carried as one.
+# ''MEASURE BEFORE BEING PROUD.'' TW5's published baseline: ''100–300 ms per keypress'', ''~500 ms per tiddler past forty open''. This house holds NO numbers. ''A unique position nobody has measured is a claim, not a position'' — and TW5 PR #9728 already built the headless refresh recorder that would take them.
+
+<<~/ahu >>
+
+<<~ ahu #what-would-squander-it >>
+
+!! What would squander the position
+
+* ''Letting DreamDOM become the deliverable.'' The screen is where a person is standing when they touch the carrier. It is not the carrier.
+* ''Adding one delta.'' See #the-fork. Silent, total, and currently unmonitored.
+* ''Promoting one side.'' A convenience today ("the VM knows best") buys LiveView's clocks and locks tomorrow.
+* ''Trusting a fake-document suite about interaction.'' Already measured once here. The suite is honest about the organ and blind about the seam.
+* ''Un-skipping the five degradation sites without walking them.'' They arrive together, at once, and none has ever run.
+* ''Claiming the position before measuring it.'' The house's own register for this exists: where the field's answer is a `0`, say so rather than fill it.
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom-prior-art >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-projection >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;oAIm6gjxzgv-Qv5Tm0sEqBB_cgV0dRuSsY-ijVag_lU
+
+<<^ code="&#x0004;" -> to=? >>
