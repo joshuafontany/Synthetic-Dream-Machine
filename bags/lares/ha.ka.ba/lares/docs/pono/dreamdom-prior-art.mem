@@ -1,0 +1,258 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dreamdom-prior-art >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/dreamdom-prior-art.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 15
+manao             = 17
+manaoio           = 14
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "dreamdom-prior-art — the VERBATIM handoff of the tasked spirit Loom, sent to the field with the DreamDOM architecture stated whole and the diagnosis withheld. Held unedited as a COLLISION SURFACE: prior art (WorkerDOM, remote-dom, LiveView, Turbo/idiomorph, Blazor, Figma/Docs/Photoshop, Flutter/Qt/Unity, partytown/RSC), golden principles, anti-patterns, measurement instruments, and the negative result that no prior art exists for TW5 off the main thread. Preserved rather than summarised because the detail IS the asset — a smoothed reading collides against nothing."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom-prior-art"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! DreamDOM Prior Art ~ a spirit's handoff, held unedited
+
+''What this carrier is.'' The tasked spirit ''Loom'' was sent to the field carrying the Mu lens and a complete statement of the DreamDOM architecture — TW5 as an application engine in a Worker, an Automerge composite store beneath it, rendering into `$tw.fakeDocument`, coalesced newest-wins frames morphed into a shadow root, and a render-id round-trip carrying user input back because ''handlers cannot cross `postMessage`''.
+
+''What it was NOT told.'' Any diagnosis, any suspected cure, any hint of what currently fails here. A spirit handed a conclusion returns evidence for it. The withholding is why the reading below can be trusted against us.
+
+''Why VERBATIM.'' This is a ''collision surface'', not a briefing. A summary keeps the claims and drops the field-line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' Read this beside a DreamDOM proposal and let the proposal break where the field already broke.
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is testimony, cited, and it may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+```markdown
+# Loom: Lares (Tasked Spirit)
+## Off-main-thread application engines and projected UI — what the field knows
+
+Read through all five Mu tools; where the field's answer is a `0` ("no one has settled this"), I say so rather than fill it.
+
+---
+
+## 1. PRIOR ART
+
+### 1.1 AMP WorkerDOM — the closest analogue, and it is close
+
+WorkerDOM is still alive (last push 2026-09-02). Its protocol is worth reading in full because it is *your* problem, solved by Google, seven years deep. [`src/transfer/TransferrableMutation.ts`](https://github.com/ampproject/worker-dom/blob/main/src/transfer/TransferrableMutation.ts)
+
+**Wire shape.** Not JSON, not HTML. Each frame is `{strings: Array<string>, nodes: ArrayBuffer, mutations: ArrayBuffer}` — a **string intern table** plus two `Uint16Array`s of positional opcodes. Fifteen mutation kinds (`ATTRIBUTES`, `CHARACTER_DATA`, `CHILD_LIST`, `PROPERTIES`, `EVENT_SUBSCRIPTION`, `GET_BOUNDING_CLIENT_RECT`, `LONG_TASK_START/END`, `STORAGE`, `FUNCTION_CALL`, `SCROLL_INTO_VIEW`, …). ([`Messages.ts`](https://github.com/ampproject/worker-dom/blob/main/src/transfer/Messages.ts))
+
+**Node identity is a monotone integer, stamped on the real node as `_index_`.** Not a path, not an HTML `id`. Hydration walks the server-rendered tree in traversal order and assigns `++count`; the worker's `document`/`body` are pinned to indices 1 and 2. The main thread keeps `Map<number, Node>` forever. ([`main-thread/nodes.ts`](https://github.com/ampproject/worker-dom/blob/main/src/main-thread/nodes.ts))
+
+**Events: the handler never crosses; the *subscription* crosses.** `addEventListener` in the worker emits an `EVENT_SUBSCRIPTION` mutation; the main thread attaches a real listener that serializes an allowlist and posts it back. The allowlist is exactly: `bubbles, cancelable, cancelBubble, currentTarget, defaultPrevented, eventPhase, isTrusted, returnValue, target, timeStamp, type, keyCode, pageX/Y, offsetX/Y, touches, changedTouches`. Nothing else. ([`event-subscription.ts`](https://github.com/ampproject/worker-dom/blob/main/src/main-thread/commands/event-subscription.ts), [`TransferrableEvent.ts`](https://github.com/ampproject/worker-dom/blob/main/src/transfer/TransferrableEvent.ts))
+
+**The `preventDefault` answer — this is the single most important design fact in the corpus.** Because the worker handler runs *later*, it cannot cancel anything. So WorkerDOM moved the decision to **subscription time**: `AddEventRegistrationIndex.WorkerDOMPreventDefault` is a flag in the subscribe message, and the main-thread shim does `if (preventDefault) event.preventDefault()` *before* relaying. Correspondingly, in the compatibility table `Event.preventDefault()`, `Event.stopPropagation()`, `Event.stopImmediatePropagation()`, and `EventTarget.dispatchEvent()` are all **✖️ unimplemented** — the worker-side event object is inert for control flow. ([`web_compat_table.md`](https://github.com/ampproject/worker-dom/blob/main/web_compat_table.md))
+
+**Input value: whole value, three redundant paths, never a diff.** A separate `MessageType.SYNC` carries `{index, value}`. It fires (a) from a **default `oninput` listener the main thread installs on every node where `'value' in node`**, whether or not the worker subscribed; (b) from *any* relayed event whose `currentTarget` has a value; (c) from a **`MutationObserver` on attributes**, because frameworks set value via attribute. Your text-leg design is exactly this, minus (c).
+
+**Coalescing.** The default `mutationPump` is **`requestAnimationFrame`** — frame pinning is WorkerDOM's default, and it is pluggable so the host can defer or reject. But the queue is **append-and-flush**, not newest-wins, because the payload is *deltas*. Their own comment names the cliff: *"can cause jank if there are too many mutations to apply in a single frame. Investigations in using asyncFlush to resolve are worth considering."* ([`mutator.ts`](https://github.com/ampproject/worker-dom/blob/main/src/main-thread/mutator.ts))
+
+**What they never solved.** `HTMLElement.focus()` ✖️. `blur()` ✖️. `activeElement` ✖️. `getSelection()` ✖️. `createRange()` ✖️. `onselectionchange` ✖️. `Document.head` ✖️. `hasFocus()` ✖️. `CustomEvent.detail` ✖️. `dataset` ✖️. All geometry sync-reads ✖️ — `getBoundingClientRect` was **renamed to `getBoundingClientRectAsync()` returning a Promise** that defaults to all-zeros. Seven years, and programmatic focus and caret from the worker are simply absent.
+
+**AMP's own guardrails, layered on top:** mutations only within 5 s of a user gesture (unless fixed-size container); `<script>`/`<style>` injection removed silently; forms need `sandbox="allow-forms"`; "terminated due to illegal mutation" on repeat offence; 150 KB script budget. ([amp.dev](https://amp.dev/documentation/components/amp-script))
+
+### 1.2 Shopify remote-dom — and the rewrite lesson
+
+Four mutation kinds and nothing else: `INSERT_CHILD, REMOVE_CHILD, UPDATE_TEXT, UPDATE_PROPERTY`, as positional tuples; root id is the literal `'~'`. Properties, attributes, and event listeners are one mutation kind discriminated by a trailing type tag. ([constants.ts](https://github.com/Shopify/remote-dom/blob/main/packages/core/source/constants.ts))
+
+**Why they rewrote remote-ui.** remote-ui invented its own tree; every framework then needed a bespoke reconciler, and Vue support suffered. remote-dom made remote components **plain custom elements** and used the browser's own `MutationObserver` as the change detector — *"any library built to work with the DOM now works without any special adaptors."* ([discussion #267](https://github.com/Shopify/remote-dom/discussions/267))
+
+**Functions across the boundary cost memory, permanently.** `@quilted/threads`, verbatim: *"Implementing functions using message passing always leaks memory."* Mitigation is `WeakRef`+`FinalizationRegistry` or manual `retain()`/`release()`, which remote-dom surfaces as constructor options. ([threads README](https://github.com/lemonmade/quilt/blob/main/packages/threads/README.md))
+
+**Listener registration is itself a wire message.** Remote elements declare `static get remoteEvents()`, and *"the remote element will not even request that the host inform it of a particular non-bubbling event, unless an event listener for that event is specifically added."* You pay only for what someone subscribed to.
+
+### 1.3 Phoenix LiveView — the strongest engineering in the survey
+
+Correction to the brief: **LiveView still uses morphdom**; it pushed changes *upstream into* morphdom rather than replacing it. ([1.1 release post](https://www.phoenixframework.org/blog/phoenix-liveview-1-1-released))
+
+**The out-of-order answer: clocks + locks + a clone tree.** A monotone counter identifies each in-flight event and ties it to stateful elements via `PHX_REF_LOCK`. Patches for a locked element are morphed into a **private cloned tree**; on ack the clone is morphed back. *"The JavaScript client is always the source of truth for current input values."* ([syncing-changes guide](https://hexdocs.pm/phoenix_live_view/syncing-changes.html), [`dom_patch.ts`](https://github.com/phoenixframework/phoenix_live_view/blob/main/assets/js/phoenix_live_view/dom_patch.ts)) This machinery generated its own bug class: [#3313](https://github.com/phoenixframework/phoenix_live_view/pull/3313), [#3942](https://github.com/phoenixframework/phoenix_live_view/pull/3942), [#4134](https://github.com/phoenixframework/phoenix_live_view/pull/4134).
+
+**Focus: excluded from patching by default.** *"Focused form controls are not patched by default, so that client-side input always wins over potentially stale server updates."* The opt-*in* (`phx-patch-focused`) arrived only in v1.2.8. Selection range is captured before the morph and restored after.
+
+**IME: the cure was on the outbound leg.** [#3322](https://github.com/phoenixframework/phoenix_live_view/issues/3322) — Japanese Romaji in a Safari textarea produced `dえ` instead of `で` when a patch landed mid-composition; **Safari-only, and only mid-text**. Fix ([#3332](https://github.com/phoenixframework/phoenix_live_view/pull/3332)): *ignore input events fired during composition and emit once after `compositionend`.*
+
+**Form recovery**: forms with `phx-change` + an `id` replay the change event after remount. Missing `id` silently disables it — enough that they added a compile-time warning. [#4086](https://github.com/phoenixframework/phoenix_live_view/issues/4086): recovery silently fails when every input has its own `phx-change`.
+
+**They ship a latency simulator** (`liveSocket.enableLatencySim(1000)`) because *"near zero latency on localhost does not allow latency to be easily represented or tested."*
+```
+
+```markdown
+### 1.4 Hotwire/Turbo + the morphdom→idiomorph lineage
+
+37signals' Jorge Manrubia, on why morphing won — the most transferable sentence in the corpus:
+
+> *"I initially thought that it was improving rendering speed, but, in reality, the improvement came from **keeping client-side state**: scroll, focus, selected text, CSS transition states, etc."* ([dev.37signals.com](https://dev.37signals.com/a-happier-happy-path-in-turbo-with-morphing))
+
+They dropped morphdom because it required *"adding ids everywhere to help the algorithm match nodes."* idiomorph's fix: **id-sets** — map each element to the set of all ids in its subtree; two elements match if their id-sets intersect. An id anywhere anchors its ancestors. Cost ~10% on large morphs. ([idiomorph README](https://github.com/bigskysoftware/idiomorph))
+
+Documented morph breakages (all the same disease — **live state with no attribute representation**):
+- input `value` cleared by a morph that carries no `value` attribute ([#27](https://github.com/bigskysoftware/idiomorph/issues/27), [#132](https://github.com/bigskysoftware/idiomorph/issues/132)) → `ignoreActiveValue`
+- **web components never get `connectedCallback`/`disconnectedCallback`** ([#57](https://github.com/bigskysoftware/idiomorph/issues/57); same gap unanswered in morphdom [#127](https://github.com/patrick-steele-idem/morphdom/issues/127))
+- `<dialog>` opened with `showModal()` — the **top layer** is not in the DOM tree, so the page becomes non-interactive under an empty overlay, with *"no api to interact directly with the top layer"* ([turbo#1239](https://github.com/hotwired/turbo/issues/1239))
+- **DOM clobbering**: `.id` on a `<form>` containing `<input name="id">` returns the *child*, silently breaking matching ([#136](https://github.com/bigskysoftware/idiomorph/pull/136))
+- scroll in overflow containers ([#26](https://github.com/bigskysoftware/idiomorph/issues/26), open); SVG needing `createElementNS` ([#154](https://github.com/bigskysoftware/idiomorph/pull/154))
+- **Shadow DOM and iframes: explicitly listed as unexamined.** ([PR #93](https://github.com/bigskysoftware/idiomorph/pull/93)) No source found for a resolution.
+
+**Move, don't delete-and-re-add.** [idiomorph #61](https://github.com/bigskysoftware/idiomorph/pull/61): reordering 1,2,3,4,5 → 5,1,2,3,4 deleted items 1–4 and destroyed an in-progress `textarea`. Fix: `Element.before` / native `moveBefore`.
+
+**Focus restore is a fallback that emits its own events.** PR #93, verbatim: *"maintaining focus and selection state in all cases is impossible… we can paper over this by saving and restoring focus and selection states around the morph, **at the cost of potential extra blur, focus, and selection events**."* It then generated [#127](https://github.com/bigskysoftware/idiomorph/pull/127), [#151](https://github.com/bigskysoftware/idiomorph/issues/151), [#138](https://github.com/bigskysoftware/idiomorph/issues/138).
+
+Turbo needed **two** veto hooks, not one: `turbo:before-morph-element` *and* `turbo:before-morph-attribute` ([PR #1097](https://github.com/hotwired/turbo/pull/1097)) — and there are open requests for more.
+
+### 1.5 Blazor Server — the opposite answer, and the warnings
+
+Microsoft's published limits: per-tab circuit, per-circuit server memory, and — verbatim — *"In regular web apps, requests and connections time out as a safeguard, but Blazor apps don't provide the same safeguards."* Plus the direct one: **"Some DOM events, such as `oninput` or `onscroll`, can produce a large amount of data. Avoid using these events in server-side Blazor."** ([interactive-server-side-rendering](https://learn.microsoft.com/en-us/aspnet/core/blazor/security/interactive-server-side-rendering))
+
+Where LiveView gives a *framework* guarantee (ignore clicks awaiting ack), Blazor gives a *documentation* guarantee: *"multiple events can be dispatched to the server before the app has time to react… Limiting client actions must be performed inside event handlers and not depend on the current rendered view state."*
+
+Two mechanisms worth stealing:
+- **`EventFieldInfo`** — the event payload patches the server's own render tree for the mutated field before diffing, matched by event-handler id. ([source](https://github.com/dotnet/aspnetcore/blob/main/src/Components/Components/src/RenderTree/EventFieldInfo.cs))
+- **Attribute order hazard**, verbatim: *"We defer setting the 'value' property for `<input>` because certain types of inputs have default attribute values that may incorrectly constrain the specified 'value'. For example, range inputs have default 'min' and 'max' attributes that may incorrectly clamp the 'value'."* ([`DomSpecialPropertyUtil.ts`](https://github.com/dotnet/aspnetcore/blob/main/src/Components/Web.JS/src/Rendering/DomSpecialPropertyUtil.ts))
+
+Blazor's focus handling is a single blind `activeElementBefore.focus()` with **no selection preservation**. Backpressure is real: it *stops producing render batches* if the client stops acking (`MaxBufferedUnacknowledgedRenderBatches`).
+
+### 1.6 Products that own their surface — the uniform tax
+
+- **Figma**: WebGL from scratch because *"text layout is inconsistent between browsers"* and blend/mask support *"varies wildly."* Their own listed biggest pain point: **no access to glyph outlines or kerning tables.** Wasm's 32-bit cap and grow-only memory forced over-allocation → **OOM crashes on mobile** for legitimate documents. ([Figma blog](https://www.figma.com/blog/building-a-professional-design-tool-on-the-web/), [Andrew Chan](https://andrewkchan.dev/posts/figma2.html))
+- **Google Docs canvas**: shipped *"accessibility… will not be impacted"* as an assertion; **WebAIM tested it and did not accept it** ([webaim.org](https://webaim.org/blog/seismic-change-to-docs/)). Extensions lost text access entirely; the ecosystem's only way back in became **"Annotated Canvas" — undocumented, allowlisted, form-gated** ([chromium-extensions](https://groups.google.com/a/chromium.org/g/chromium-extensions/c/dLnxATEOcqg)).
+- **Flutter Web CanvasKit**: accessibility is a **shadow-DOM overlay, opt-in behind a hidden 1px button, off by default for performance**, absolutely positioned and re-positioned on every scroll ([flutter.dev](https://flutter.dev/blog/accessibility-in-flutter-on-the-web)); it announces *"Enable accessibility"* to screen readers even when already on ([#98160](https://github.com/flutter/flutter/issues/98160)). A 10k-line TextField: HTML renderer 0.49 s, **CanvasKit 90.3 s** ([#128575](https://github.com/flutter/flutter/issues/128575)). Ten-plus open IME issues; the purest is [#134268](https://github.com/flutter/flutter/issues/134268) — *the app cannot detect that a native IME panel is open.*
+- **Qt for WASM** arrived at the *same* shadow-element overlay independently, also off by default. And documents pure silent no-ops: `setShareContext()` *"has no effect."* ([doc.qt.io](https://doc.qt.io/qt-6/wasm.html))
+- **Unity**: forced to instantiate a real DOM input to raise a soft keyboard, and therefore cannot hide it — `HideMobileInput` *"has no effect on the Web platform."* ([Unity manual](https://docs.unity3d.com/Manual/webgl-input.html))
+- **Photoshop Web split the surface**: canvas for the image, **real DOM (Lit + shadow DOM) for the chrome**. ([web.dev](https://web.dev/articles/ps-on-the-web))
+
+### 1.7 Partytown, RSC, Million
+
+- **Partytown** proves the other family: a *synchronous* DOM shim via `Atomics.wait` + SAB, requiring `COOP: same-origin` + `COEP: credentialless`, falling back to sync-XHR through a service worker. Its own trade-offs page: **"Events handled by third-party scripts that call `event.preventDefault()` will have no effect."** And the FAQ: *"there are also scenarios where your script may hit an internal error and **silently fail**."* Andrea Giammarchi's `coincident` measures the fallback cliff: **~1,000 round-trips/sec polyfilled vs 50,000+ native**, plus deadlock risk. ([trade-offs](https://partytown.qwik.dev/trade-offs/), [atomics](https://partytown.qwik.dev/atomics/), [coincident](https://github.com/WebReflection/coincident)) Status: `@builder.io/partytown` is deprecated in favour of `@qwik.dev/partytown`, which shipped 0.14.3 on 2026-08-25 — the project moved, it did not die.
+- **RSC** landed the same law from the other end: functions are not serializable; the only callable that crosses is a **reference id** redeemed by an async round trip (`{$$typeof: Symbol.for("react.server.reference"), $$id: ...}`). ([react.dev](https://react.dev/reference/rsc/use-client))
+- **Million.js** is de facto retired — npm 3.1.11 (2024-06), million.dev no longer mentions it.
+- **Surma's structural objection**, which you should read as the field's honest `0`: *"In most scenarios, however, that just **moves** the problem. You are at risk of effectively creating a 2nd main thread, with all the same problems, just in a different thread."* ([Smashing, 2021](https://www.smashingmagazine.com/2021/06/web-workers-2021/))
+
+### 1.8 TiddlyWiki specifically
+
+**Nobody has done this.** Exhaustive search of talk.tiddlywiki.org, the imported Google Groups archive, and GitHub issues/PRs found **no prior art** for running the TW5 engine (boot + store + widget tree + refresh cycle) in a Worker or ServiceWorker. There is no lineage to inherit and none to collide with.
+
+What the field *does* record:
+
+- `$tw.fakeDocument` is **372 lines** ([fakedom.js](https://github.com/TiddlyWiki/TiddlyWiki5/blob/master/core/modules/utils/fakedom.js)). `addEventListener`'s entire body is `// Do nothing`. No `removeEventListener`, no `dispatchEvent`, no event objects. No geometry, no `querySelector`, no `classList`, no `cloneNode`, no `nextSibling`, no `ownerDocument`, no `focus`/`activeElement`. `innerHTML`'s **setter does not parse** — it sets `isRaw = true` and stores the string.
+- It is **already used in the browser**, not only server-side: `wiki.makeWidget` defaults to it, and the page `<title>` + the whole `$:/core/ui/PageStylesheet` pipeline render into it (`core/modules/startup/render.js`). The dev docs say so: *"Because the fake DOM is faster than the real DOM, it is also used in the browser when interactive rendering to the DOM isn't needed."*
+- **Exactly five core sites check `isTiddlyWikiFakeDom`**: `editor/factory.js:211` (forces the SimpleEngine, never the iframe FramedEngine), `simple.js:72,105`, `framed.js:126,161`, `list.js:58` (storyviews skipped), `reveal.js:45,279` (popup positioning + animation skipped).
+- The framed editor exists for one reason, from its own header: *"This is done so that the selection is preserved even when clicking away from the textarea."*
+- Focus is message-driven: `tm-focus-selector` → `document.querySelector(sel).focus()` at `startup/rootwidget.js:80-88`. There is **no `$tw.utils.focusSelector`** — no source found for that name.
+- Three hard `ReferenceError`s in a Worker, none architectural: `bootprefix.js:30/33` (TW5 has only two platforms; a Worker is neither), `utils.js:706-713` `$tw.utils.nextTick` → `window.setTimeout` (**hit on the first store write**, via `wiki.js:161`), `utils.js:869-876` `$tw.utils.timer` → `window.performance`. Plus `boot.js:166-168` `domMaker`'s implicit global `document`.
+- **Refresh-cycle economics, measured by the community**: 100–300 ms per keypress with a few large tiddlers open, and *"After 40 open tiddlers, it takes about 500 ms to open the next one"* ([talk t/4185](https://talk.tiddlywiki.org/t/4185)). 8,900-tiddler wiki: `mainRefresh` 100–200 ms typical, 400 ms for nested tabs ([t/4040](https://talk.tiddlywiki.org/t/4040)). Only **drafts** are debounced (400 ms `THROTTLE_REFRESH_TIMEOUT`); every other change refreshes synchronously.
+- Open [PR #9728](https://github.com/TiddlyWiki/TiddlyWiki5/pull/9728) is a **headless refresh-cycle recorder/replayer** (`--perf-replay`) — a ready-made instrument for exactly this architecture.
+- Precedent that the fakedom seam is swappable: [talk t/606](https://talk.tiddlywiki.org/t/606), where linkedom was substituted successfully and **Jeremy Ruston said he had considered a jsdom-swap plugin himself**.
+```
+
+```markdown
+---
+
+## 2. GOLDEN PRINCIPLES
+
+**Node identity.** Every survivor uses an **opaque, engine-allocated, monotone handle stamped onto the node** (WorkerDOM `_index_`; remote-dom string ids; Blazor event-handler ids) — never a DOM path, never a semantic `id`. Paths break under sibling shifts; semantic ids collide with author markup and with **DOM clobbering** (`<form>` + `<input name="id">` → `.id` returns the child). Where matching *is* structural, id-sets beat bare ids because an id anywhere anchors its ancestors. And an id that is *re-set to its own value* can itself invalidate matching ([LiveView #4325](https://github.com/phoenixframework/phoenix_live_view/issues/4325)).
+
+**Event serialization.** Ship an allowlist, not the event. WorkerDOM's is 17 fields. Two hard consequences of the handler running later and elsewhere:
+- **`preventDefault` must be declared at subscription time, not decided at handler time.** Partytown simply has none. WorkerDOM registers a boolean per listener. LiveView always preventDefaults locally and compensates with loading state.
+- **`beforeinput` with `inputType: "insertCompositionText"` is spec-defined as NOT cancelable** ([Input Events L2](https://w3c.github.io/input-events/)) — the IME is out of your reach by design.
+- **User activation does not travel.** Transient activation is a per-`Window` timestamp, consumed by activation-gated APIs, and *"expected to be at most a few seconds"* ([HTML spec](https://html.spec.whatwg.org/multipage/interaction.html#transient-activation)). Clipboard, fullscreen, `window.open`, Web Share, PiP, payment all require it. A worker has none, and by the time a relayed event round-trips it may be gone. AMP's 5-second post-gesture mutation window is the same idea wearing different clothes.
+- **Ordering is already guaranteed** on a single port — the HTML spec makes the port message queue a FIFO task source ([web-messaging](https://html.spec.whatwg.org/multipage/web-messaging.html)). Reordering only appears across *multiple* channels or async interleaving.
+
+**Coalescing / backpressure.** Newest-wins is sound **only when the payload is absolute state**. Every delta-based system (WorkerDOM, remote-dom, Blazor, LiveView) must queue, because dropping a delta corrupts. rAF is WorkerDOM's default pump, but it is *pluggable* so the host can defer or refuse. `postMessage` has **no backpressure at all** — that is why Streams exist ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/Streams_API/Concepts)); a producer faster than the consumer grows the queue without bound. Blazor's answer is the explicit ack window (`MaxBufferedUnacknowledgedRenderBatches`). Note also that a fixed timer window is **throttled to 1 s (then 1 min) in a hidden tab** ([Chrome 88](https://developer.chrome.com/blog/timer-throttling-in-chrome-88)).
+
+**Input / caret / focus.**
+- **`value` is a property, not an attribute.** Once the user types, the input's **dirty value flag** is set and *"if the control's dirty value flag is false"* gates attribute→value propagation ([HTML spec](https://html.spec.whatwg.org/multipage/input.html)). A serialized `value="…"` in a projected frame is **ignored** thereafter. Same class: `checked`, `<select>` selection, `<video>` playback, scroll offsets, `<dialog>` top layer, CSS transition state.
+- **Exclude the focused element from patching by default** — LiveView's default; the opt-in came later. Save/restore is the fallback, and it *"emits extra blur, focus, and selection events."*
+- `setSelectionRange` **throws `InvalidStateError`** on `email`/`number`/`date` inputs ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/setSelectionRange)) — restore code that works on `text` crashes on a numeric field.
+- **IME**: guard the *outbound* leg. LiveView's fix was to suppress `input` relay while `isComposing` and emit once at `compositionend`. Vue documents the same seam from the other side: *"v-model doesn't get updated during IME composition"* ([vuejs.org](https://vuejs.org/guide/essentials/forms.html)). Expect Safari-specific behaviour and mid-text-only reproduction.
+
+**Idempotence.** Whole-value beats diff, universally. WorkerDOM's `TransferrableSyncValue` is `{index, value}` — no history, no diff, and it is fired from three redundant triggers because a missed value silently desynchronizes the engine's model.
+
+---
+
+## 3. ANTI-PATTERNS AND KNOWN FAILURE MODES
+
+**The engine assumes things about its environment that a fake document cannot supply.** TW5's `reveal.js` walks `offsetParent`/`offsetWidth`; `button.js` calls `getBoundingClientRect` **without a guard** (`action-navigate.js` guards, `button.js` does not); `scroller.js` needs `querySelector`. Fifteen geometry sites in TW5 core. WorkerDOM's answer after seven years is an async promise defaulting to zeros.
+
+**Silent degradation is the characteristic failure, not error.** Qt: `setShareContext()` *"has no effect."* Unity: `HideMobileInput` *"has no effect on the Web platform."* Partytown: *"may hit an internal error and silently fail."* A dev server without COOP/COEP silently yields the single-threaded build. TW5: `setAttributeNS` in fakedom **discards the namespace entirely** (body is literally `this.setAttribute(name,value)`), so `xlink:href` serializes as `href`; `removeChild` splices the array but **never clears `parentNode`**, so a detached node still tests as attached. LiveView #4169: an id-less sibling shift silently detaches a hook's cached node and infinite scroll just stops.
+
+**Works under test doubles, breaks against real input.** jsdom, verbatim, does not implement *"the ability to calculate where elements will be visually laid out… which impacts methods like `getBoundingClientRects()` or properties like `offsetTop`"* — it **returns zeros** ([jsdom](https://github.com/jsdom/jsdom)). So does WorkerDOM's async rect. Synthetic events carry `isTrusted: false` and `HTMLElement.click()` does too ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted)) — activation-gated APIs will refuse them. TW5's entire widget test suite runs on fakedom, which by construction cannot exercise focus, selection, geometry, or events.
+
+**Accessibility.** Two independent projects (Flutter, Qt) converged on the same workaround — an **opt-in, off-by-default, absolutely-positioned shadow-DOM overlay covering a subset of roles** — and Flutter's races with the screen reader. Then shadow DOM adds its own tax: **ARIA IDREFs do not cross shadow boundaries** — `aria-labelledby`, `aria-describedby`, `aria-controls`, `aria-activedescendant`, `aria-owns`, `label for`. Combobox and listbox patterns become inoperable. *"Accessibility with shadow roots is broken."* The standards fix (`ariaLabelledByElements`) takes **element references, which cannot be expressed in serialized HTML at all**, and *"doesn't work with declarative shadow DOM"* ([Nolan Lawson](https://nolanlawson.com/2022/11/28/shadow-dom-and-accessibility-the-trouble-with-aria/)). Separately: **a live region must exist in the DOM *before* its content changes** — *"Start with an empty live region, then – in a separate step – change the content"* ([MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Guides/Live_regions)); a frame that re-creates the region node each time announces nothing.
+
+**Selection and shadow DOM is a ten-year-old open question.** [WICG/webcomponents#79](https://github.com/WICG/webcomponents/issues/79), opened 2015, still open: *"`window.getSelection()` may never access shadow DOM content"*; selection spanning a boundary is unspecified. `document.activeElement` returns the **shadow host**, not the focused element ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement)).
+
+**Security of injected HTML.** `innerHTML` *"is probably the most common vector for XSS"*; it blocks `<script>` but not `<img src=x onerror=…>` ([MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML)). **A shadow root is not a security boundary** — I could find no spec or MDN text claiming it is, and the DOM spec's closed-mode language is carefully behavioural, not security-framed. AMP does not trust its own worker: it runs every mutation through a `Sanitizer` and removes `<script>`/`<style>` unconditionally. Note also that `setHTMLUnsafe` parses declarative shadow roots where `innerHTML` does not — a serialized frame containing `<template shadowrootmode>` behaves differently depending on which sink you use.
+
+**Performance cliffs.** WorkerDOM's own comment on sync flush jank. Lighthouse flags **>800 nodes** as a warning, **>1,400** as an error ([Chrome](https://developer.chrome.com/docs/lighthouse/performance/dom-size/)). CanvasKit's 90-second text field. TW5's 500 ms-per-tiddler at 40 open tiddlers. `postMessage` itself is *not* the bottleneck below ~100 KiB — Surma's measurements give **≤100 KiB inside a 100 ms budget, ≤10 KiB inside a 16 ms frame** ([surma.dev](https://surma.dev/things/is-postmessage-slow/)) — but **serialization blocks the sender and deserialization blocks the receiver**, and Chrome/Safari defer deserialization until `event.data` is read while Firefox does it before dispatch, so *when* you pay is browser-dependent. Node maps that grow monotonically (WorkerDOM's) and function-proxy tables (`@quilted/threads`: *"always leaks memory"*) are the two standard leaks.
+
+**Debuggability.** MDN documents the Worker `error` event as *"a generic `Event`"* — no structured error, no stack crosses the boundary. Partytown's only debugging affordance is a set of log flags.
+
+---
+
+## 4. WHAT TO MEASURE
+
+Instruments others found necessary, in rough order of what they caught:
+
+1. **INP, decomposed into its three phases** — input delay / processing / presentation ([web.dev](https://web.dev/articles/inp); good ≤200 ms, poor >500 ms at p75). In this architecture the presentation phase contains a full worker round trip, so the decomposition is the diagnosis.
+2. **`PerformanceEventTiming`** with `durationThreshold: 16` — gives `processingStart - startTime` (delay) and `processingEnd - processingStart` (handler) per interaction. Caveat that bites here: **`entry.target` is null if the element was removed**, so morphing destroys your own attribution.
+3. **Long Animation Frames** — `blockingDuration`, `renderStart`, `styleAndLayoutStart`, and the per-script `scripts` array. This is the only instrument that sees frame-level cumulative work rather than single long tasks ([Chrome](https://developer.chrome.com/docs/web-platform/long-animation-frames)).
+4. **WorkerDOM's `LONG_TASK_START` / `LONG_TASK_END` mutation types** — the engine tells the host when it is busy, in-band. Worth copying: it is instrumentation as a first-class protocol message.
+5. **A user-visible vs non-user-visible mutation split** — WorkerDOM's `isUserVisibleMutation()`. It lets you count and gate the traffic that can actually move pixels separately from bookkeeping.
+6. **A latency simulator.** LiveView ships one and says localhost hides the entire bug class.
+7. **Queue depth and unacked-frame count** — Blazor's `MaxBufferedUnacknowledgedRenderBatches` exists because unbounded is the default failure.
+8. **Frame payload size in bytes**, against Surma's 10 KiB/16 ms and 100 KiB/100 ms budgets, measured on a slow device, not a dev machine.
+9. **Node-map and handler-map cardinality over time** — the two known leaks.
+10. **A headless refresh replayer.** TW5 [PR #9728](https://github.com/TiddlyWiki/TiddlyWiki5/pull/9728) already builds a recorder + `--perf-replay` that measures the refresh cycle with no browser at all, and used it to find a single filter accounting for **47% of total refresh time**.
+11. **DOM node count and depth** against Lighthouse's 800/1,400 thresholds.
+12. **An IME conformance pass** — Japanese Romaji mid-text in Safari specifically; that is the exact configuration that reproduced LiveView #3322 and nothing else did.
+
+---
+
+## 5. THE FIVE THINGS MOST WORTH YOUR ATTENTION
+
+**① `preventDefault` cannot be a decision the worker makes — it must be a subscription-time declaration.**
+WorkerDOM built an entire flag into its subscribe opcode for this and marked `Event.preventDefault()`, `stopPropagation()`, `stopImmediatePropagation()`, and `dispatchEvent()` as permanently unimplemented. Partytown gave up: *"will have no effect."* Your architecture invokes the stored handler *after* the relay, which places you exactly here. Every system in the corpus that crossed a boundary either declared cancellation in advance or lost it. There is no third answer in the field.
+
+**② The focused element and the composing element must be excluded from projection — and IME is fixed on the outbound leg, not the inbound one.**
+LiveView made "don't patch focused controls" the *default* and only later added an opt-in to patch them; idiomorph shipped focus/selection restore as an admitted paper-over that *"emits extra blur, focus, and selection events"*; Blazor's blind `.focus()` with no selection restore is the version to avoid. And the IME cure that actually worked was suppressing outbound `input` between `compositionstart` and `compositionend` — because `beforeinput`/`insertCompositionText` is spec-defined as non-cancelable, the inbound side cannot be defended. Safari, mid-text, Japanese Romaji is the reproduction.
+
+**③ Serialized HTML structurally cannot carry the state that morphing exists to preserve.**
+The **dirty value flag** means a `value="…"` attribute is ignored once the user types. `checked`, `<select>` selection, `<video>` position, scroll offset, `<dialog>`'s top layer, CSS transition state, and custom-element instances have the same property. This is not a bug list — it is one law, and every morphing project in the survey rediscovered it independently and answered it the same way: **per-element *and* per-attribute veto hooks** (Turbo needed both; LiveView keeps `data-*` live even through `phx-update="ignore"`), plus **move-don't-delete** (idiomorph #61), plus **id-sets rather than bare ids**. Note also Blazor's order hazard: applying `value` before `min`/`max` silently clamps it.
+
+**④ Shadow DOM buys you isolation and charges you accessibility, selection, and — for anything projected — the whole ARIA reference layer.**
+ARIA IDREFs do not cross the boundary; the standards-track fix takes *element references*, which serialized HTML cannot express, and does not work with declarative shadow DOM. Selection across a shadow boundary has been an open question since 2015. `document.activeElement` returns the host. Live regions must pre-exist their content. Flutter and Qt both landed on an opt-in, off-by-default overlay and neither is good. Meanwhile a shadow root is *not* a security boundary — AMP sanitizes every mutation from its own worker before applying it, and `innerHTML` still executes `<img onerror>`. Photoshop Web's split is the honest counter-model: engine-owned surface for the content, **real DOM for the chrome**.
+
+**⑤ Newest-wins is sound because your frames are absolute — protect that property, and know that the field's ordering worry is really an in-flight-echo worry.**
+Every delta-based system in the corpus must queue; you can drop precisely because a frame is whole state. That is a genuine structural advantage, and the corresponding fragility is that any *delta* you ever add to the frame silently invalidates it. Two adjacent facts: single-port `postMessage` is already FIFO by spec, so out-of-order arrival is not the real risk — the real risk is LiveView's actual bug, a stale server frame overwriting a local edit the user made *after* the frame was generated, which they solved with monotone clocks + subtree locks + a clone tree, and Blazor deliberately did not solve at all (and documents the resulting security caveat). Also: `postMessage` has no backpressure, a fixed timer window is throttled to 1 s in a hidden tab, and worker `requestAnimationFrame` exists but has limited availability.
+
+**And one negative result worth its own line:** on running TW5 itself off the main thread, there is **no prior art** — not on talk.tiddlywiki.org, not in the Google Groups archive, not in GitHub issues. The seam is unusually clean (renderer is document-parameterized via `this.document`; `makeWidget` already defaults to fakedom; fakedom is 372 swappable lines with Jeremy Ruston on record considering a jsdom-swap plugin; `$tw.boot.suppressBoot` plus split `initStartup`/`loadStartup`/`execStartup` gives embed seams). The obstacles found are three `window` vs `self` one-liners plus `domMaker`'s implicit global — with `$tw.utils.nextTick` at `utils.js:706-713` the load-bearing one, since it is reached on the **first store write**. But there is no community experience to inherit, and TW5's published refresh economics (100–300 ms per keypress, 500 ms per tiddler at 40 open) are the baseline any measurement has to beat.
+```
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-projection >>
+<<~ loulou lar:///ha.ka.ba/lares/api/wiki-coherence-projection >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;MpYqsyJQ9gVnH_APRRSz3d740PY6qi9aSw0yDL_oswA
+
+<<^ code="&#x0004;" -> to=? >>
