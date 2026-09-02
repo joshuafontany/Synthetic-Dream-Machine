@@ -1,0 +1,116 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/rust-toolchain >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/api/pono/rust-toolchain.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 14
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Synthesis-Canon"
+retain            = true
+role              = "rust-toolchain — standing the toolchain that builds our nakama forks (keyhive, subduction, onomancy) to wasm locally, so a fix can be READ, PATCHED, PROVEN and DONATED rather than waited for. Carries the measured pins (1.90.0 / 1.91.0, per-repo via rust-toolchain.toml), the emitter (wasm-pack over three targets plus a slim post-step), the two paths (rustup for working, nix for donation parity), and the law that a locally-built wasm which diverges from the published package is a FLAG-DAY against our own mesh."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/api/pono/rust-toolchain"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Rust Toolchain ~ so a fix can be proven rather than awaited
+
+Three of the four nakama forks are ''Rust crates that emit wasm'': `keyhive`, `subduction`, `onomancy`. Their npm packages are ''prebuilt artefacts'' — consuming them means a fix reaches us only when upstream publishes. ''`66a6632 Fixes for CGKA access (#216)` stands in our keyhive fork's main and in no published release'': it limits transitive authority to the weakest link on the best path and stops Relay access transitively granting membership in a document's CGKA tree. A version pin cannot reach that. A ''build'' can.
+
+The toolchain is therefore not a convenience. It is ''the difference between reading a fix and running it'', and between filing an issue and sending a patch that compiles.
+
+<<~/ahu >>
+
+<<~ ahu #what-the-forks-pin >>
+
+!! What each fork pins ~ measured, not assumed
+
+|!fork |!channel |!declared where |!components |
+|`keyhive` |''1.90.0'' |`Cargo.toml` `rust-version` |— |
+|`subduction` |''1.91.0'' |`rust-toolchain.toml` |`clippy`, `rustfmt` |
+|`onomancy` |''1.91.0'' |`rust-toolchain.toml` |`clippy`, `rustfmt` |
+
+''TWO CHANNELS, AND THAT IS FINE.'' `rust-toolchain.toml` is honoured ''per directory'' — entering each fork selects its own channel with no manual switch and no global default to keep straight. Their own comments say the pin is kept in lockstep with the workspace `rust-version` and the flake's `rustVersion`; ''bump all three or none''.
+
+''All three carry a `flake.nix`.'' Nix is the environment upstream itself stands in.
+
+<<~/ahu >>
+
+<<~ ahu #the-emitter >>
+
+!! The emitter ~ wasm-pack, three targets, one slim step
+
+Each wasm crate builds the same way (`keyhive_wasm`, `subduction_wasm`, `automerge_subduction_wasm`, `sedimentree_wasm`):
+
+```
+wasm-pack build --out-dir pkg-node --target nodejs  --release
+wasm-pack build --out-dir pkg      --target bundler --release
+wasm-pack build --out-dir pkg-web  --target web     --release
+node build_slim.js
+```
+
+''Three targets are not redundancy'' — `pkg-node` serves the daemon, `pkg` serves a bundler, `pkg-web` serves a browser vessel, and the ''slim'' step emits the base64-embedded variant a page can load without a second fetch. This house already consumes all of those shapes.
+
+⚠ ''`onomancy_wasm` declares NO build scripts.'' It builds through cargo/wasm-pack directly or through the flake. Do not read the empty script block as //not buildable//; read it as //no npm-side convenience//.
+
+⚠ ''THE PIN-PAIR LAW REACHES HERE TOO.'' The grammar package already states it — //the CLI that generates and the runtime that loads never drift a minor apart//. Its analogue: the `wasm-pack` that builds and the `wasm-bindgen` version in the crate's `Cargo.lock` MUST agree. wasm-pack normally fetches a matching `wasm-bindgen-cli`; when it cannot, the failure reads as a mysterious ABI error rather than a version complaint.
+
+<<~/ahu >>
+
+<<~ ahu #two-paths >>
+
+!! Two paths, and they are for different purposes
+
+* ''RUSTUP — the working path.'' `rustup` plus the `wasm32-unknown-unknown` target plus `wasm-pack`. Each fork's `rust-toolchain.toml` selects its own channel on entry, so nothing is pinned by hand and nothing drifts globally. Lightest thing that builds.
+* ''NIX — the donation-parity path.'' `nix develop` inside a fork stands ''the environment upstream's own CI stands''. A patch built there carries no environment-specific breakage into a pull request. Heavier to install; earns its cost at the moment we send code back rather than at the moment we read it.
+
+''RECOMMENDED: rustup to work, nix to donate.'' Neither is installed today (`rustc`, `cargo`, `wasm-pack`, `nix` all absent), so this is a standing plan rather than a description.
+
+<<~/ahu >>
+
+<<~ ahu #the-divergence-law >>
+
+!! The law ~ a locally-built wasm is a FLAG-DAY
+
+''A wasm we build ourselves that differs in behaviour from the published package is a flag-day against our own mesh.'' This is #213 read back at us: BeeKEM replacing path ratcheting with independently sampled secrets meant alpha.6 and alpha.8 peers could not key with each other, and that is exactly what a locally-built keyhive carrying #216 would be against a vessel running published alpha.8 — ''#216 changes authorization VERDICTS, so a patched and an unpatched node disagree about who is in a CGKA tree''. A split-brain, not a desync, and nastier for it.
+
+So, MUST:
+
+* ''Every vessel in a mesh runs the SAME build.'' Not the same version string — the same artefact. A version string is not evidence when one side built its own.
+* ''A local build carries its provenance.'' The fork's commit sha, the channel, the wasm-pack version, and the digest of the emitted `.wasm`, recorded where a vessel can read them. This house already binds a built blob's sha256 into `hearthTrueName` for TiddlyWiki5; the same instinct applies.
+* ''Consuming published npm stays the DEFAULT'' until a build is reproducible and recorded. Standing a toolchain buys the ability to build; it does not oblige us to ship what we build.
+* ''A patch we intend to donate gets proven in the fork FIRST'' — upstream's tests, upstream's environment — before it reaches a vessel here. A fix that only passes in our tree is a fork, not a contribution.
+
+<<~/ahu >>
+
+<<~ ahu #the-order >>
+
+!! The order
+
+# ''Stand rustup + `wasm32-unknown-unknown` + wasm-pack.'' Verify by building ONE crate — `keyhive_wasm --target nodejs` — and reading the emitted `.wasm` size against the published `@keyhive/keyhive` artefact (2,289,235 bytes at alpha.8). A wildly different size is the first signal that the build is not the same build.
+# ''Run the fork's OWN tests before trusting anything built from it'': `cargo test` in each, and the wasm-bindgen tests where they stand. A green local build over a red upstream suite proves the compiler works and nothing else.
+# ''Reproduce alpha.8 from the tag before building main.'' If we cannot rebuild the artefact we already run, we cannot claim a build carrying #216 differs only by #216.
+# ''Then, and only then, build main'' and measure what #216 changes in behaviour against our own cap-tier and face-join suites.
+# ''Nix when the first patch is ready to send'', not before.
+
+⚠ Machine note: this stands under ''WSL2''. `rustup` works; a Nix install there wants the daemon-less single-user mode or a systemd-enabled distro, and that choice is its own small ceremony.
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;ZjiPWhhFF9moG7dCmGrDXqC1eQdLUJM0waDQS9AzT0w
+
+<<^ code="&#x0004;" -> to=? >>
