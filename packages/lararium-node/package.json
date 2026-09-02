@@ -27,6 +27,7 @@
     "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.3",
     "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.3",
     "@automerge/automerge-repo-storage-nodefs": "2.6.0-alpha.3",
+    "@automerge/automerge-subduction": "0.16.1",
     "@lararium/keyhive": "workspace:*",
     "@lararium/mempalace": "workspace:*",
     "@lararium/mesh": "workspace:*",

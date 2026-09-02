@@ -178,6 +178,9 @@ importers:
       '@automerge/automerge-repo-network-websocket':
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
+      '@inkandswitch/onomancy':
+        specifier: 0.2.0
+        version: 0.2.0
       '@noble/ciphers':
         specifier: 2.4.0
         version: 2.4.0
@@ -215,6 +218,9 @@ importers:
       '@automerge/automerge-repo-storage-nodefs':
         specifier: 2.6.0-alpha.3
         version: 2.6.0-alpha.3
+      '@automerge/automerge-subduction':
+        specifier: 0.16.1
+        version: 0.16.1
       '@lararium/keyhive':
         specifier: workspace:*
         version: link:../lararium-keyhive
@@ -381,6 +387,9 @@ packages:
   '@automerge/automerge-repo@2.6.0-alpha.3':
     resolution: {integrity: sha512-Rn/KdoVHUQwYU0TXqHyy9PdBgVE009JJWnh2YxT2blk5EnbZckh+RfGfu6ngjMGw0DZcZtJLvK3dKDNdAvtQVA==}
     engines: {node: '>=22.13'}
+
+  '@automerge/automerge-subduction@0.16.1':
+    resolution: {integrity: sha512-alH7U4eYn0O7sT6hNLv7CJhNODJi+QD6qfRQTNfZCxL3Q5JZdJ8lFpdvXUkBf+I3bu0GLvVlTaYPWGrBihjpIw==}
 
   '@automerge/automerge@3.4.1':
     resolution: {integrity: sha512-zsZpbs/iDPvp+ZojIYd+gxmbcPVz2Xbkcx778G8zrt3E0zS+6saHJOm666lOuZyNRlTV4wHw9qzGTKueedeCsQ==}
@@ -631,6 +640,9 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@inkandswitch/onomancy@0.2.0':
+    resolution: {integrity: sha512-keh5i80jwtoCK6+6w1vwvGpvskhlZW5XF2OyjxRLsvPFCFpqmPTtZ5c1h9SGReiZNoh3icGpdZ2wG0fuLNx8mQ==}
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
@@ -1970,6 +1982,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@automerge/automerge-subduction@0.16.1': {}
+
   '@automerge/automerge@3.4.1': {}
 
   '@blazediff/core@1.9.1': {}
@@ -2129,6 +2143,8 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@inkandswitch/onomancy@0.2.0': {}
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
 

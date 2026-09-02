@@ -1,0 +1,138 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/two-integrities >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/api/pono/two-integrities.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 16
+manao             = 15
+manaoio           = 14
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Synthesis-Canon"
+retain            = true
+role              = "two-integrities — the adoption plan for Ink & Switch's `onomancy` (a local-first name system) and `subduction` (peer-to-peer sync for hash-linked data, encryption-friendly). Onomancy answers WHICH DOCUMENT YOU MEANT and WHO MAY SPEAK FOR IT; subduction answers HOW BYTES CROSS WITHOUT BEING READ. They stack rather than compete. Carries the DOUBLE-BLIND WRAP: a lamplighter relay must learn neither the content nor the author, which realm-scoped writer keys buy and padding does not. Carries the one hard collision — subduction's handshake makes an absolute wall clock a LIVENESS precondition, where this house holds wall-clock adversary-controlled."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Two Integrities ~ a name system and a courier
+
+''Onomancy'' names. ''Subduction'' carries. They were built in one lab, share one house style — bijou varints, a four-byte schema tag with a version byte, the `Signed<T> -> Verified<T>` witness, a hand-rolled canonical codec in place of CBOR — and they ''stack with a clean seam'': subduction moves bytes for a `SedimentreeId`; onomancy answers //which document you meant// and //who may speak for it//. Onomancy declares replication out of scope in its own words: "replication and persistence belong to the substrate and the agent, never to these crates."
+
+''Both stand pre-production and say so.'' Read onomancy as ''a design we adopt'' — extraordinary normative specs, and a reference implementation whose decision document no verb writes, so its incumbency doctrine is specified and unexercised. Read subduction as ''a library we may depend on whose threat model we must extend ourselves'' — ~109k lines of Rust, 1,043 tests, property and mutation testing, and still stamped //do not use for production//.
+
+<<~/ahu >>
+
+<<~ ahu #what-each-answers >>
+
+!! What each answers that we could not
+
+''ONOMANCY answers the registry question we opened and could not close.'' The realm feed cannot cross because no vessel can resolve a realm's substrate from its id, and a list of every realm you belong to is the shape #the-roster forbids. A ''petname edge'' is that registry and is not a roster: it is ''resolution-only, never discovery'' — it opens a document the holder already keys and names nothing it does not. It scopes to the ''FACE'' (operator ruling: //one Persona at a time takes the blame//), so a compromise yields one face's realms rather than a multitude's.
+
+''SUBDUCTION answers the independent-operator question.'' A node runner holds no cabal-cap on the base grammar docs, and until now serving a realm meant being able to read it. Subduction syncs on ''metadata alone'' — digests, parents, boundaries, checkpoints — and declares content encryption //application responsibility//. So a vessel can ''relay a realm it cannot read''. That is the lamplighter made structural rather than promised.
+
+<<~/ahu >>
+
+<<~ ahu #the-dyad >>
+
+!! What they bring the Agent-Operator dyad
+
+* ''`derive(store, now, decisions)` — rulings become data.'' Operator rulings live today in an agent's context window and in flat memory, degrading with every summary. As a pure derivation over a grow-only set, a verdict reads `f(evidence, decisions)`: deterministic, order-independent, recomputable by any vessel holding both. ''The operator's rulings stop being remembered and start being installed.'' Its sharpest clause — ''no derived state ever crosses a boundary'' — says a tasked spirit receives evidence and rulings, never conclusions, and derives its own. A spirit handed conclusions inherits the sender's errors.
+* ''`Signed<T> -> try_verify -> Verified<T>` as type-state.'' "Forgetting to verify is a type error, not a bug class." `verifyCarriageConsent` and `verifyRealmFeedSlot` return booleans, and nothing structural stops a caller reading a consent's fields without checking its seal. A comment is the weakest ward this house owns.
+* ''Petnames — the personal naming layer we lack.'' Every address handed to an operator today is global-form. `~/grove` means //you previously bound this label to this reference//: mutable, local, face-scoped. A UX capability and a privacy capability in one primitive.
+* ''Graded verdicts, and staleness as a BADGE never a prompt.'' Interruption reserved for ''events'' — diffs in the derivation — never for standing conditions. //A warning that is always on protects nothing//, and every defence ending in "surfaced to the user" draws one attention budget.
+* ''The mutual backstop.'' Lose the keys and the name rescues you; lose the name and the keys rescue you. #the-two-keels ruled the recovery quorum IS the impersonation quorum, leaving no safe custodial escrow — this is a third path that ''holds no third party''.
+
+<<~/ahu >>
+
+<<~ ahu #the-node >>
+
+!! What they bring a node on the mesh
+
+* ''Ciphertext relay'' — the independent operator seat, above.
+* ''Authorize the AUTHOR, never the sender.'' Authorization checks the signature issuer, so relays are byte couriers and multi-hop forwarding needs no trust in the middle. The herm chain's trust story finally matches its topology.
+* ''Revocation with no protocol message.'' The relay stops passing the filter; no broadcast, no list. The same principle as onomancy's generation key, reached from the other end — //negative facts cannot travel in attacker-supplied records//.
+* ''A civic name that verifies OFFLINE.'' Chain validation from a baked-in IANA anchor set, never delegating to a resolver's AD bit, so a vessel that has never queried DNS verifies a binding gossiped by QR. #the-attestation-seat ruled //no roster, because a roster is a global now//: this grants a global ''name'' without a global ''list''.
+* ''Sedimentree'' — hash-derived, coordination-free partition boundaries, so a joining vessel takes older history in larger strata. Three ingredients carry it: ''reverse depth-first traversal'' (parents never change, so the order is stable under concurrent writes), ''boundaries from the digest itself'' (leading zero bytes; no negotiation), and ''retained checkpoints'' so //supports// is decidable from metadata alone.
+
+<<~/ahu >>
+
+<<~ ahu #double-blind >>
+
+!! The double-blind wrap ~ what a lamplighter must not learn
+
+''A subduction relay as shipped is content-blind and author-VISIBLE.'' It learns the `SedimentreeId`, the causal DAG shape, per-commit blob sizes, subscription sets, timing — and ''the author's raw ed25519 verifying key in the clear on every commit''. That is an ''authorship graph'', not a size channel. Its own threat note offers one mitigation: //consider padding//.
+
+Against #the-face-planes — where relations travel with the face and a vessel-global surface correlates a multitude — an unwrapped relay is a correlation surface. The wrap:
+
+* ''REALM-SCOPED WRITER KEYS.'' Subduction authorizes the author, and ''the author need not be the face''. A face derives a per-realm writer key (HKDF, the realm id as `info` — the same discipline `circleScopeIndex` and `nexusScopeIndex` already carry: //seeds MUST follow the mint//) and ''that'' key signs commits and stands as a member of the realm's sentinel. The relay authorizes an opaque key it cannot join to a face, nor to the same face in another realm. ''The face -> scoped-key edge never leaves the face.'' Cross-realm unlinkability and face-blindness, bought with machinery this house already stands.
+* ''SCOPED PEER IDENTITY.'' A writer key blinds authorship and leaves the transport identity: the relay's `Map<SedimentreeId, Set<PeerId>>` still joins a peer to the documents it wants. So the peer identity scopes per realm too, at the cost of one connection per realm. Priced, not free.
+* ''WHAT THE WRAP DOES NOT BLIND, and this MUST be said rather than implied.'' DAG shape, blob sizes and timing survive. Padding is the only lever and it is expensive. ''A lamplighter is not zero-knowledge'' — the seat is a position of genuine social trust rather than a hardware chore, which is what a lamplighter always was.
+* ''NAMES NEVER REACH THE RELAY.'' Petname resolution is a plaintext-side act by a full member; a relay sees a 32-byte id and no human-meaningful name. Naming is a capability of members, never of infrastructure — consistent with both designs and worth stating, because it means a relay cannot help you find anything.
+
+<<~/ahu >>
+
+<<~ ahu #the-clock >>
+
+!! The one hard collision
+
+''Subduction's handshake makes an absolute wall clock a LIVENESS precondition.'' `Challenge.timestamp` is Unix seconds validated against the responder's `now` within `max_drift`; a peer with no wall clock ''cannot connect''. Its own assumptions concede a backward jump can //allow replay of expired nonces//. Their stance reads ''bounded-adversarial''; #the-clockless-lease holds wall-clock ''adversary-controlled''.
+
+''The collision is one message wide, and negotiable.'' `subduction_core` never reads a clock — `now`, `max_drift` and the nonce-cache bucket duration are all ''parameters''. A deployment may widen the window and pay in nonce-cache memory. ⚠ But `MAX_PLAUSIBLE_DRIFT` is a hard constant of ten minutes and the documented twelve-minute nonce window is sized against it, so ''widening naively reopens replay in silence''. After the handshake, ordering rides a ''per-peer monotonic counter'' and needs no clock at all — which is the logical clock this house wants.
+
+''Nothing about authority derives from that timestamp'': it bounds a replay window whose real defence is the nonce cache, and keeps that cache bounded. A wrong clock is therefore a ''liveness'' failure, never a ''safety'' one — but making Roughtime a precondition for connecting moves it from witness to dependency, and the exclusion lands hardest on the vessel this house most cares about: the one that has been offline in a bag for a week. ''Operator ruling owed.''
+
+<<~/ahu >>
+
+<<~ ahu #sensorium >>
+
+!! Onomancy in the sensorium, the memory palace, the dream work
+
+* ''A locus wants a petname.'' A memory or a dream is addressed today by a global-form URI or not at all. `~/dream/the-lift` binds a memorable label to a document reference, mutably, locally, per face — which is exactly what a palace ''locus'' is: a place you put a thing so you can find it again by walking.
+* ''The binding cache IS the recall verdict.'' `derive(store, now, decisions)` over a grow-only set, with graded rather than boolean outcomes, is the shape a recall should have: what this replica holds, graded by evidence, never a fabricated completeness. It answers #the-grain-law's owed question about what a reading may claim.
+* ''Pruning bounded by a derivation invariant.'' "Pruning MUST NOT change any output of `derive`", so ''necessary storage grows with ceremonies and introductions — never with time, resolution count, or refresh churn''. That is the zoning sweep this house owes itself, stated as a decidable rule rather than a policy.
+* ''The three anchors map onto a memory's publicity.'' A private locus takes a petname and owes DNS nothing; a shared one may take a certificate later — and a certificate arriving late ''adds a spelling; it MUST NOT migrate identity or rewrite the petname edge''. A memory can become public without ceasing to be the same memory.
+
+<<~/ahu >>
+
+<<~ ahu #what-we-do-not-take >>
+
+!! What we do NOT take, and why
+
+* ⚠ ''The `automerge-repo` subduction FORK LINE.'' `2.6.0-subduction.48` is a separate npm dist-tag off branch `subductionjs`, 48 prereleases deep, tracked by a still-open draft PR, +19,251/-1,309 across 139 files against main. It makes the wasm module a hard dependency of `automerge-repo` and constructs a `SubductionSource` unconditionally inside `Repo`. ''There is no importer for existing stored data'' — the bridge writes a new `subduction/…` key space and the only migration is export `.am` then re-ingest. ''A fork-line commitment, not a version bump.'' The two LIBRARIES are pulled; the repo line is not.
+* ⚠ ''ARK's TypeScript sync-protocol files carry a demolition notice'' — a WASM-over-Rust refactor is announced for `sync-protocol.ts`, `keyhive-subduction-adapter.ts`, `codec.ts`, `network-adapter.ts`, `cbor-builder.ts`, `batch.ts`, `pending.ts`. Build on none of them.
+* ⚠ ''Onomancy is pinned to a different Keyhive lineage'' (`keyhive_core = "0.5"`, replayed behind a versioned envelope) than the npm `@keyhive/keyhive` we run, and its own upstream ask names the unresolved bridge: //certificates need PORTABLE proofs (static files); ARK is a live hive//. Adopting both inherits that gap.
+* ⚠ ''Certificate issuance requires full admin on the document.'' Hostname-scoped attenuation is an open upstream ask, not a feature — a coarse grant under #the-cap-tiers, to be lived with at v0 or waited on.
+* ⚠ ''No tombstone, no expiry.'' Onomancy carries no unbind statement at v0, so a name cannot be proven ''un''bound. Absence is never proven; the model fails toward retention.
+
+<<~/ahu >>
+
+<<~ ahu #the-order >>
+
+!! The order of adoption
+
+# ''Take the DESIGNS that cost nothing and need no dependency'': signed-region vs attached-region as the decision procedure for which side of a seal a field belongs on (#the-crypto-spine already has this question open); `derive(store, decisions)` as the shape of every verdict-bearing reader; graded verdicts with the events-vs-states discipline; and a `limitations.md` of our own — a pre-registered rebuttal written ''before'' we are tempted to overclaim.
+# ''Spike onomancy's verifier against a real binding.'' The libraries stand in the tree (`@inkandswitch/onomancy` in mesh, `@automerge/automerge-subduction` in node) and load. Prove a certificate verifies offline from the anchor set before anything depends on it.
+# ''Design the realm index as a petname store'', face-scoped and resolution-only. This is the registry #the-realm-crossing waits on.
+# ''Rule the clock'', then decide subduction's code. Until that ruling the wrap stays a design.
+# ''Wrap before relaying.'' No lamplighter relay stands for another cabal until realm-scoped writer keys land — an unwrapped relay hands an authorship graph to whoever runs it.
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;ZeTR0ySVlqB9MJDfUgFvv6F9B3AXP71SuT5b0aebNUk
+
+<<^ code="&#x0004;" -> to=? >>
