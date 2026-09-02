@@ -1,0 +1,224 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/testing-architecture-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/testing-architecture-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 16
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "testing-architecture-scout — VERBATIM handoff of the tasked spirit Mason: the whole testing architecture inventoried, the cost of moving the harness under packages/, three runners nothing invokes, and the welds that must NOT be collapsed. Held as a collision surface."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/testing-architecture-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Mason ~ a spirit's handoff, held unedited
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is what a tasked spirit reported, kept whole, as a ''collision surface'' rather than a briefing.
+
+''Why verbatim.'' A summary keeps the claims and drops the line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' It was extracted straight from the spirit's transcript to this carrier, so no relaying hand rewrote it on the way.
+
+''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+````markdown
+**Mason: Lares (Tasked Spirit)** — scout complete, nothing written.
+
+---
+
+# 1. THE INVENTORY
+
+**629 test-carrying files, 8 distinct runners, 3 of which nothing invokes.**
+
+| # | Runner | Invoked by | Files | Reachable from `pnpm test`? |
+|---|---|---|---|---|
+| 1 | vitest per-package (`test`) | `pnpm -r test` | 515 `.test.ts` | ✅ |
+| 2 | vitest harness (`test:e2e`) | `pnpm test:e2e` (root) | 15 `tests/e2e/*.test.ts` | ❌ by design |
+| 3 | root `pytest` (`pyproject.toml` testpaths) | **NOTHING** | 98 `test_*.py` | ❌ **orphan** |
+| 4 | `node --test` (`gate:fold-ts`) | **NOTHING** (not in CI, not in `pnpm -r`) | `host-ts/fold.test.mjs` + `parity.mjs` | ❌ **orphan** |
+| 5 | tree-sitter gates (`gate:generate-parity`, `gate:fold`) | CI job `grammar-artifact` only | `host-py/test_*.py` ×3 | ❌ (no `test` script) |
+| 6 | TW5 submodule `test` (tiddlywiki test edition) | `pnpm -r test` | upstream edition | ✅ (invisible to a `packages/*` glob) |
+| 7 | `tools/witness-all.sh` | `pnpm witness` | 19 witnesses | ❌ never in CI |
+| 8 | out-of-band witnesses | by hand | 4 (`civic`, `crossing`, `herm-mesh`, `mesh-coverage`) | ❌ deliberate |
+
+**Per-package vitest counts** (`packages/*/tests/`):
+mesh 224 · node 140 (139 + 1 orphan under `tests/e2e/`) · tw5 80 · lares-cli 37 · browser 16 · mempalace 12 · keyhive 4 · sensorium 2. `lararium-app` = **0 tests, no `test` script**.
+
+**Python**: 95 `test_*.py` in `packages/lararium-sensorium/scripts/` (flat-import idiom, incl. `scripts/qa_anchor/tests/` 6 and `scripts/testbeds/` 7) + 3 in `packages/tree-sitter-memetic-wikitext/host-py/`. `pyproject.toml:41-48` declares both as `testpaths` and its own comment claims **944 collected tests**. **No `package.json` script, no CI step, no shell script runs root `pytest`.** The sensorium's `"test": "vitest run"` reaches only its 2 TS files.
+
+**Ad-hoc, no runner**: `tw5 test:sigil-alignment` (root-scripted), `tw5 smoke:plugin-boot`, `tw5 smoke:plugin-provenance`, `node test:quine`, `tools/mesh-scenarios.sh`, `tools/rehearse-founding.sh`, `tools/rehearse-keeper.sh`, `tools/lararium-container-boot.sh`, `tools/sweep-guard.sh`.
+
+**Playwright**: only via `@vitest/browser-playwright` in `packages/lararium-browser/vitest.config.ts` (chromium). No standalone Playwright suite. `mempalace/` is a **git submodule with its own CI** (148 pytest files) — out of scope.
+
+---
+
+# 2. WHAT THE MOVE COSTS
+
+### 🟢 The trap you named does NOT exist — and here is the proof
+
+`pnpm -r` recurses over **workspace members**, not over directories. `tests` is *already* a member (`pnpm-workspace.yaml:6`, lockfile importer key `tests:` at `pnpm-lock.yaml:355`). Landing it at `packages/lararium-tests/` changes its *path*, not its *membership*. `pnpm -r test` skips it today and after the move for exactly one reason: **`tests/package.json:8` declares `test:e2e`, never `test`.**
+
+**So the guard is the script name, and only the script name.** Keep it `test:e2e`. A vitest project filter would be a second, weaker fence. Land a `README`/header line on the manifest saying so — the day someone "normalizes" that key to `test`, a 15-file daemon-booting suite (~20 s/file, 180 s timeouts) fires inside the unit run and CI job `test` goes from minutes to hours before anyone reads why.
+
+### 🔴 The real trap, which is the mirror image
+
+`tools/typecheck-witness.sh:21` iterates `packages/*/` and at line 23 does `[ -f "$dir/tsconfig.json" ] || continue`. The harness has **no tsconfig**, so it is skipped **silently** — and line 40's guard ("a run that checked nothing must not read as a run that found nothing") only fires when *every* package is skipped. Post-move, `packages/lararium-tests` joins the loop and vanishes from it in the same breath. The harness's 218 lines of TS are untypechecked today and stay untypechecked, but *now inside the directory the witness claims to sweep*. Either add a `tsconfig.typecheck.json` (preferred — it closes a real hole) or the witness now lies by omission at a new address.
+
+### The edit surface — measured, small
+
+| What | Where | Count |
+|---|---|---|
+| `new URL("../..", import.meta.url)` → `"../../.."` | `tests/harness/instance.ts:27` + 12 e2e files (`REPO_ROOT`/`REPO`) | **13 lines** |
+| `"../../packages/X/src/..."` → `"../../X/src/..."` (same depth, drop the `packages/` segment) | `smoke:21`, `corpus-feed:21`, `carrier-roundtrip:24`, `face-join:28,29,30`, `herm-floor:122,160,170,197` | **10 lines, 5 files** |
+| Workspace member entry + comment | `pnpm-workspace.yaml:5-6` — delete `- 'tests'`; `packages/*` already covers it | 2 lines |
+| Hardcoded manifest path | `tools/exact-deps-witness.sh:31` `pathlib.Path("tests/package.json")` — self-heals (`if not m.exists(): continue` + the `packages/*` glob picks it up) but leaves a lying literal | 1 line |
+| Root scripts | `package.json:17,27` filter by **`@lares/harness`**, not by path → **zero change** if the package name is kept | 0 |
+| CI | `.github/workflows/ci.yml:172` is `pnpm test:e2e` → **zero change** | 0 |
+| `vitest.config.ts` | `include: ["e2e/**/*.test.ts"]` is package-relative → **zero change** | 0 |
+| `tsconfig` | none exists | 0 |
+| Docs | `tests/TEST-ARCHITECTURE.md` (moves with it), `pnpm-workspace.yaml:5` comment, `packages/SPRINT-01-GENESIS-MESH.md:125` | 3 |
+| Install | delete `tests/node_modules` (64 K), rerun `pnpm install` to rewrite the lockfile importer key | — |
+
+**Do NOT rewrite `bags/**` references** (`handoff.mem:197,200,201,227,297,358`, `disk-projection.mem:129,145`). Those are *records of past state*, not live pointers — the evergreen law cuts the other way there.
+
+**Naming decision I cannot make for you:** dir `packages/lararium-tests/` vs package name `@lares/harness`. Every other `packages/lararium-*` dir matches its `@lararium/*` name; this one would not. Renaming to `@lararium/tests` costs 2 more root-script lines + the lockfile. **I'd keep `@lares/harness`** — it names the *lares* CLI it drives, and the vessel-door canon says no aliases. But it is your call.
+
+---
+
+# 3. THE YIN COLLAPSE — where it is genuinely incoherent
+
+**① Three runners nothing invokes.** The largest is the worst: **98 python files / ~944 tests run only when a human types `pytest`.** Not in `pnpm test`, not in `pnpm -r test`, not in any CI job. `pyproject.toml` carries a 20-line comment explaining exactly how this suite lies about its own count — and then no one runs it. `gate:fold-ts` (`node --test host-ts/fold.test.mjs && node host-ts/parity.mjs`) is likewise dark: CI's `grammar-artifact` job runs `gate:generate-parity`, `gate:fold`, `build:wasm` — **but never `gates`, and never `gate:fold-ts`** (`ci.yml:237,240,243`). The TS↔PY fold parity check has no invoker at all.
+
+**② The serialization is load-bearing locally and absent in CI.** `package.json:9` = `pnpm -r --workspace-concurrency=1 test`. `ci.yml:148` = bare **`pnpm -r test`**. CI runs the exact command `TEST-ARCHITECTURE.md:26-30` warns produces flakes that "report the machine's spare capacity as the code's correctness." One of these two is wrong. **This is the single highest-value fix in the whole scout and it is a one-word edit.**
+
+**③ `witness-all` never runs in CI.** 19 static witnesses, `pnpm witness`, zero CI steps — except `exact-deps-witness.sh` invoked alone at `ci.yml:61`. Every other witness is honor-system.
+
+**④ `tree-sitter-memetic-wikitext` has no `test` script.** Its 4 gates exist only as `gate:*` keys; `pnpm -r test` sees nothing. `lararium-app` also has no `test` script and no tests. Two of eleven packages are outside the recursion for different reasons and nothing distinguishes them.
+
+**⑤ vitest config drift across 8 files.** `isolate: true` is stated in 6 configs and **absent from `lararium-node`** (which uses `projects`) and absent from `lararium-sensorium` (**which has no vitest.config.ts at all** and rides vitest's defaults). `include: ["tests/**/*.test.ts"]` is copy-pasted 7×. The `@lararium/mesh` → `../lararium-mesh/src/index.ts` alias is copy-pasted in browser, keyhive, mempalace; the `/^@lararium\/mesh\/(.+)$/` subpath variant in browser + mempalace. **A shared `vitest.shared.ts` at the root collapses ~7 configs to a base + 8 deltas.** Node's `projects`/THRASHERS design is the good one and should be the base's shape.
+
+**⑥ Naming/placement is actually clean.** `.spec.` files: **zero**. `test/` (singular) dirs: **zero**. Every TS suite is `packages/<pkg>/tests/*.test.ts`. Nothing to do here — I checked because you asked; the inconsistency isn't in TS. It is in **python placement**: `scripts/test_*.py` (flat-import, 95 files) vs `scripts/qa_anchor/tests/` vs `scripts/testbeds/` — three conventions in one package. `pyproject.toml` documents *why* flat-import wins; the two `tests/` subdirs are unexplained.
+
+**⑦ Doc rot in the file that claims to be canon.** `TEST-ARCHITECTURE.md:11` — *"there is no separate top-level test tree"* — sits 37 lines above §"The harness — end-to-end returned," which describes the top-level test tree. Line 32 points at `packages/lararium-browser/vite.worker-test.config.ts`; **that file does not exist** (only `vitest.config.ts`; the fixtures are checked-in `.mjs`). The package table omits `@lararium/sensorium` and `@lararium/mempalace` entirely. And `packages/AGENTS.md:184-187` names four commands — `test:tw5-fixture`, `test:sigil-alignment`, `test:tw5-flow`, `test:flows` — of which **only `test:sigil-alignment` exists**.
+
+**⑧ One known-orphan suite, already self-reported.** `packages/lararium-node/tests/e2e/two-vessel-mesh.test.ts` is excluded from the `main` project (`mainExclude = ["tests/e2e/**", ...]`) and absent from `heavy` → **runs in neither project**. `heavy-roster-is-complete.test.ts:69` allowlists it with the note that it "sat unrun long enough to rot." That reader is excellent instrument design and is doing its job. `SPRINT-01-GENESIS-MESH.md:125` tracks the rewrite as `▢ G1c`.
+
+---
+
+# 4. WHAT MUST **NOT** BE COLLAPSED
+
+**The serialization.** `--workspace-concurrency=1`. Not a preference. Fix CI *up* to it; never fix the root script *down*.
+
+**`lararium-node`'s two-project split + THRASHERS.** `vitest.config.ts` carries the one authoritative statement of the heavy classes, and `heavy-roster-is-complete.test.ts` *imports* it. The header records that an earlier shape stated the classes in prose and re-encoded them as regexes — the two lists drifted and four python-holder suites sat in the parallel project under a green reader. **Do not re-encode, do not flatten to one project.** If a shared base config lands, this must import from it, not be replaced by it.
+
+**The four out-of-band witnesses.** `mesh-coverage-witness.sh` is permanently red by design and *reads claims, never passes* (its header: four ladder steps claimed cells while carrying a malformed realm id, and it still reported them walked — "read it beside a green run, never instead of one"). `civic`, `crossing`, `herm-mesh` all require **docker-compose stacks**. Folding any into `witness-all` breaks `pnpm witness` on every machine without docker.
+
+**All six duplicate-named test files are welds, not duplicates.** I read every header:
+
+- `wiki-sensorium-consistency` (node + browser) and `wiki-sensorium-cap` (tw5 + browser) run the **identical hull** (`runWikiConsistencyWitness()` / `runWikiSensoriumWitness()` from `@lararium/tw5`) on **two substrates**. The node≡browser agreement *is* the island-isomorphism proof. Collapsing either kills the proof and leaves a green suite.
+- `wiki-sense-supervision` — tw5 proves the supervisor's hull **in-process**; browser proves the whole crossing **over a real Chromium worker wire**.
+- `seal-reserve` — mesh proves the **pure crypto floor** (SLIP-0010 derivation, 2-of-3 quorum); lares-cli proves the **CLI ceremony against a real identity home on disk**, including that the seed lands in *no* file.
+- `capture-source` — cli tests `captureSourceFile` (a string identity); node tests `makeSourceCapture` (a python-holder shore). Same name, unrelated surfaces.
+- `worldline-trajectory-source` — mempalace against a **fake NDJSON holder**; node against the **in-VM functor composition**.
+
+**Source vs dist vs packed-plugin splits.** `tests/harness/instance.ts:28-29` and 4 e2e files spawn `packages/*/dist/`, while 5 e2e files `import` from `packages/*/src/`. `packages/lararium-mesh/tests/plugin-attestation.test.ts:29-31` reads `dist-plugin/`. `lararium-node`'s island fixtures read `../dist/src/node-wiki-island.js`. **These are the half-build instrument you already have a memory about.** Any "just import from src, it's the same code" simplification erases the weld that catches a stale build.
+
+**`packages/lararium-browser/tests/fixtures/*-browser.mjs`.** They look like copies of `lararium-node/tests/fixtures/`. They are not: node's use `worker_threads`, browser's use `self.addEventListener`/`DedicatedWorkerGlobalScope`. Different runtimes, cannot share a file.
+
+**`mempalace/`** — submodule, own CI, own `pytest`. Not ours to touch.
+
+---
+
+# 5. THE STAGED PLAN
+
+Cheapest first; each independently landable and green.
+
+### Stage 0 — Reap ambient state (do before believing any red)
+```
+ss -ltnp | grep lares ; pgrep -af 'dist/src/main.js'
+git status --short          # dist/ is shared mutable state
+```
+No commit. **Seven stale daemons made a readiness race near-certain.** Skipping this stage invalidates every stage below.
+
+### Stage 1 — CI serialization ⚠️ HIGHEST VALUE, ONE WORD
+`.github/workflows/ci.yml:148` → `pnpm -r --workspace-concurrency=1 test`, or simply `pnpm test`.
+**Verify:** `pnpm test` locally (green today at that concurrency); push and read the CI `test` job.
+**Rollback:** revert one line.
+**Daemon?** No.
+
+### Stage 2 — Wire the three dark runners
+- Root `package.json`: add `"test:py": "~/.venv/bin/python3 -m pytest -q"`.
+- `packages/tree-sitter-memetic-wikitext/package.json`: add `"test": "pnpm run gates"` — **this makes `gate:fold-ts` reachable and puts the package inside `pnpm -r test`.**
+- `ci.yml` grammar-artifact: `gate:generate-parity` + `gate:fold` → `pnpm run gates`.
+- `ci.yml`: add a `pnpm test:py` step to the `test` job (the venv already stands at lines 137-144).
+
+**Verify:** `pnpm --filter tree-sitter-memetic-wikitext test` · `pnpm test:py` (expect the doc's ~944 collected; a count far below means `pythonpath` is not applying).
+**Rollback:** drop the script keys.
+**⚠️ Expect red.** These have run unwatched for an unknown span. Land the wiring; triage the reds as a separate stage — **do not delete a red to make the stage green.**
+**Daemon?** No, but python holders — must run serialized.
+
+### Stage 3 — Truth the canon doc (pure prose, zero risk)
+Fix `TEST-ARCHITECTURE.md:11` (contradicts §48), drop the dead `vite.worker-test.config.ts` pointer at line 32, add sensorium + mempalace + tree-sitter to the table, record the python and gate runners from Stage 2. Fix `packages/AGENTS.md:184-187` (3 of 4 commands are ghosts).
+**Verify:** `pnpm witness` unchanged. **Rollback:** revert. **Daemon?** No.
+
+### Stage 4 — THE MOVE
+```
+git mv tests packages/lararium-tests && rm -rf packages/lararium-tests/node_modules
+```
+Then: delete `- 'tests'` from `pnpm-workspace.yaml` (keep the comment, re-sited); `sed` the 13 `"../.."` → `"../../.."`; `sed` the 10 `"../../packages/` → `"../../`; drop the stale literal at `exact-deps-witness.sh:31`; **add `packages/lararium-tests/tsconfig.typecheck.json`** (closes the §2 witness hole); add a manifest header comment stating why the script is `test:e2e` and must stay so; `pnpm install`.
+
+**Verify, in order:**
+1. `pnpm install --frozen-lockfile` → expect a lockfile importer rename `tests:` → `packages/lararium-tests:`; commit it.
+2. `tools/exact-deps-witness.sh` — the manifest count must **not drop**.
+3. `tools/typecheck-witness.sh` — `lararium-tests` must now appear in the list.
+4. **`pnpm -r --workspace-concurrency=1 test` — assert the e2e suite does NOT appear.** This is the trap-check; run it before the e2e run, not after.
+5. `pnpm -r build && pnpm test:e2e` — **⚠️ REQUIRES A DAEMON**, ~20 s × 15 files.
+
+**Rollback:** `git mv` back, `pnpm install`. Clean — no generated artifact moves.
+
+### Stage 5 — `witness-all` into CI
+Add a `witness` job running `pnpm witness` (19 static witnesses, no docker, no daemon).
+**Verify:** `pnpm witness` locally first — it never short-circuits, so read *every* section, not the exit code.
+**Rollback:** delete the job. **Daemon?** No.
+
+### Stage 6 — Config collapse (last, most invasive)
+Root `vitest.shared.ts` carrying `isolate: true`, `environment: "node"`, `include: ["tests/**/*.test.ts"]`, and the `@lararium/*` → `src` alias table. Each package spreads it and states only its delta. **`lararium-node` imports the base and keeps `projects`/`heavy`/`THRASHERS` intact.** Give `lararium-sensorium` an explicit config (it has none). Decide `lararium-app`: real tests, or drop the pretense.
+**Verify:** full `pnpm test`, then `pnpm -r build && pnpm test:e2e`.
+**Rollback:** each package's config is one file; revert individually.
+**Risk:** an alias table that resolves a sibling to `src` where a suite meant `dist` silently converts a weld into a tautology. **Diff the resolved alias set per package before and after — do not assume they were the same.**
+
+### Not scheduled — needs your ruling
+- `two-vessel-mesh.test.ts` (`SPRINT-01 ▢ G1c`) — rewrite to Model-B, or delete. It runs nowhere and is allowlisted as such.
+- Package name `@lares/harness` vs dir `lararium-tests`.
+- The sensorium's three python placement conventions.
+
+---
+
+## What I'd need to decide the rest
+Whether Stage 2's newly-lit suites are **green** — I did not run them (the python suite needs `~/.venv` and the holders; running it would have spawned palace processes into a tree you asked me to leave alone). Their red/green state is the one number that changes Stage 2's cost from "a script key" to "a campaign," and it is one serialized command away.
+````
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;OKozeyxTTU5RHw9V1zLxwhUeooKh5VVYa18MQ66BemI
+
+<<^ code="&#x0004;" -> to=? >>

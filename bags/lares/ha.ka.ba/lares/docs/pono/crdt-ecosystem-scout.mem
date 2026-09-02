@@ -1,0 +1,188 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 16
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "crdt-ecosystem-scout — VERBATIM handoff of the tasked spirit Wayfarer: the local-first / CRDT / capability-security ecosystem measured 2026-09-01. Ink and Switch releases and side-branches, adjacent CRDT sync projects, capability and identity primitives, crypto library movement. Held as a collision surface."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Wayfarer ~ a spirit's handoff, held unedited
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is what a tasked spirit reported, kept whole, as a ''collision surface'' rather than a briefing.
+
+''Why verbatim.'' A summary keeps the claims and drops the line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' It was extracted straight from the spirit's transcript to this carrier, so no relaying hand rewrote it on the way.
+
+''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+````markdown
+**Wayfarer: Lares (Tasked Spirit)**
+
+# 1. Ink & Switch — Keyhive, Subduction, Automerge
+
+**The side-branches, decoded.** `subduction` and `authors` are not competing designs — `authors` is a fork *of* subduction.
+
+- The git branch is `subductionjs`, tracked by **PR #601 "Tracking PR: Subduction support" → main, still OPEN and DRAFT** (77 commits, 187 files, updated 2026-08-20). Subduction is **not** converging to main yet; main has none of it. https://github.com/automerge/automerge-repo/pull/601
+- Subduction support lives **inside the `automerge-repo` package itself** (dep `@automerge/automerge-subduction`), plus a new `automerge-repo-storage-lmdb` adapter that main lacks. https://github.com/automerge/automerge-repo/tree/subductionjs/packages
+- **`authors` = subductionjs + "Add automerge signing API"** (commit 2026-06-12), branched 2026-07-03 and **stale since**. Its `@automerge/automerge-subduction` is pinned to 0.16.0 while subductionjs moved to 0.16.1. Treat `authors` as a parked experiment. https://github.com/automerge/automerge-repo/commits/authors
+- **`2.6.0-subduction.48` (2026-08-20) carries a data-loss fix**: "Prevent compaction deleting blobs that could not be decrypted yet" + "Record blob ids into knownHashes on bulk load" (PR #734). If you run .47 or earlier with encryption, you can lose blobs. https://github.com/automerge/automerge-repo/commits/subductionjs
+- Open repro against subductionjs: **`Subduction.getAllHeads` drops fragment heads and advertises boundaries** (#741, 2026-08-27) — unfixed. https://github.com/automerge/automerge-repo/pull/741
+
+**Subduction is now a public, independent repo** (106 stars, created 2025-07-18, pushed daily).
+
+- Peer-to-peer sync for hash-linked data; Sedimentree for history sharding; explicitly **encryption-friendly — syncs encrypted partitions without decrypting**; transports WebSocket, HTTP long-poll, **Iroh/QUIC**. https://github.com/inkandswitch/subduction
+- **Sedimentree = depth-based partitioning by leading-zero-byte count of a BLAKE3 digest.** Content-oblivious, deterministic strata. https://github.com/inkandswitch/subduction/blob/main/design/sedimentree.md
+- **Wire format is a hand-rolled canonical binary codec, explicitly not CBOR** — 4-byte schema header (2-byte prefix `ST`/`SU`, 1-byte type, **1-byte version**), 32-byte Ed25519 issuer VK, fields, 64-byte sig. **Decoders reject unknown prefixes or unsupported versions.** https://github.com/inkandswitch/subduction/blob/main/design/protocol.md
+- Handshake requires **timestamp freshness, 60s default**, plus nonce tracking and audience binding. A wall-clock dependency that cuts against our clockless lease model. https://github.com/inkandswitch/subduction/blob/main/design/security/threats.md
+- Recent: **iroh 1.0 upgrade** (#257, 2026-06-23), redb storage backend (#240), per-peer rate limiting (#242), op-set digests for keyhive sync checks (#258), switch to `bijoux` varints (#277). Nightlies only — `v0.16.0-nightly.2026-08-13` is the latest tag. https://github.com/inkandswitch/subduction/commits/main
+
+**Keyhive.** Beelay was **removed from the keyhive workspace** in Oct 2025 (#151); the crate tree is now `beekem` / `keyhive_core` / `keyhive_crypto` / `keyhive_wasm`. Subduction is Beelay's successor. https://github.com/inkandswitch/keyhive
+
+- **#213 (2026-08-15) — BeeKEM replaced path ratcheting with independently sampled secrets.** The stated reason: with ratcheting, *compromising one inner node's secret gave you ancestors you had not compromised.* +11/−66. This is your flag-day. https://github.com/inkandswitch/keyhive/pull/213
+- **#216 "Fixes for CGKA access" (2026-08-27) is a SECURITY fix and is NOT in alpha.8** (published 2026-08-18). It: limits transitive authority to **the weakest link on the best path**; stops **Relay access to a group transitively granting membership in a document's CGKA tree**; exposes CGKA members via WASM; adds tests that *fail on main before the fix*. +1055/−73. https://github.com/inkandswitch/keyhive/pull/216
+- #208 (2026-06-26) added application-secret chains, `SymmetricKey::try_seal/try_open`, `force_pcs_update` returning the new leaf secret for sharing across tabs/shared-worker, and public-member CGKA fallbacks. https://github.com/inkandswitch/keyhive/pull/208
+- Lab note **06 · "E2EE in the Local-First Setting" (2026-07-31)**, guest post by Derek Yen: formalizes BeeKEM security. **No attacks found.** Proves forward secrecy, post-compromise security, and a novel **cross-fork security** property with no analogue in centralized CGKA models. Introduces κ = number of retained individual secrets; κ>1 weakens FS but is needed for partition robustness. https://www.inkandswitch.com/keyhive/notebook/06/
+
+**New projects in the capability/naming space:**
+
+- **`onomancy` — "a local-first name system", created 2026-08-21.** Three name forms over one self-certifying identity: `automerge:3RFyJz…/foo` (doc anchor), `~/bob/pics` (local petname), `@expede.wtf/foo` (DNSSEC-rooted from the baked-in IANA root KSK). Has an `onomancy_keyhive` crate doing **delegation-chain replay behind an `AuthorityVerifier`**. Verified bindings are self-authenticating records, gossipable by QR or Bluetooth. https://github.com/inkandswitch/onomancy
+- **`bijou`/`bijoux`** — bijective canonical varints, one encoding per value, big-endian so lexicographic order matches numeric. **Width variants are explicitly NOT wire-compatible.** npm `@inkandswitch/bijoux@0.1.0`. https://github.com/inkandswitch/bijou
+- **`bedrock`** — NixOS/DigitalOcean declarative config for a Subduction sync server with Caddy/Prometheus/Grafana/Loki/Tailscale. A ready-made hearth recipe. https://github.com/inkandswitch/bedrock
+- **`keyhive-react`** (pre-alpha, `@automerge/keyhive-react@0.1.0-alpha.3`) — `AccountView`, `AccessEditor`, `DirectoryProvider`. https://github.com/inkandswitch/keyhive-react
+- **`backstitch`** (Automerge version control for Godot), `pushwork` (CRDT directory sync, npm 2.2.3), `darn`, `patchwork-*`.
+
+**The canonical working stack**, from `@automerge/automerge-repo-keyhive@0.5.0-alpha.7` (ARK, 2026-08-24) dependencies — this is the combination I&S actually runs:
+
+```
+@keyhive/keyhive              0.1.0-alpha.8
+@automerge/automerge-repo     2.6.0-subduction.48
+@automerge/automerge-subduction 0.16.1
+@noble/hashes                 ^2.2.0
+```
+https://registry.npmjs.org/@automerge/automerge-repo-keyhive
+
+**ARK carries a stated demolition notice**: "The TypeScript implementation of the keyhive sync protocol will be removed in the near future in favor of a WASM API for the Rust implementation, which is a major refactor" — naming `sync-protocol.ts`, `keyhive-subduction-adapter.ts`, `codec.ts`, `network-adapter.ts`, `cbor-builder.ts`, `batch.ts`, `pending.ts` as doomed. Do not build against those. https://github.com/automerge/automerge-repo-keyhive
+
+**Automerge core:** 3.4.1 (2026-08-12), 3.4.0 (2026-07-31), 3.3.0 (2026-07-12). Release bodies are empty; the record is in commits.
+
+- **A corruption bug in bool columns was fixed in 3.4.0** (#1482, merged 2026-07-30), fuzz tests upgraded. Data-integrity relevant. https://github.com/automerge/automerge/pull/1482
+- **`hexane`** — new columnar encoding engine (1.0.0-alpha.5), a long tail of loader-hardening commits rejecting wrapped lengths and overflowing divisions. `flate2` → `zlib-rs`. `next` tag = `3.4.0-rev-frag-hex.3`.
+- **Fragments** (#1446, merged 2026-07-12) — Automerge now tracks history fragments incrementally on load, <1% load cost. This is the core-side support Sedimentree stratification needs. https://github.com/automerge/automerge/issues/1326
+
+Patchwork notebook has six 2026 entries, newest **"Progressions" 2026-05-12**. https://www.inkandswitch.com/patchwork/notebook/
+
+---
+
+# 2. Adjacent CRDT sync/auth projects
+
+- **Loro `loro-crdt@1.15.1` (2026-08-29)** — 1.15.0 fixed a **content-redaction leak**: shallow-snapshot export shipped rich-text mark values verbatim for ranges that were fully deleted, defeating the documented redaction use. Exactly our tamper-probe law — assert the *encoding* changed, not the decode. https://github.com/loro-dev/loro/blob/main/crates/loro-wasm/CHANGELOG.md
+- **Loro 1.14.1** made `importBatch` atomic with OpLog rollback — a malformed remote blob used to panic *after* leaving the doc detached. Any decoder we expose to peers needs this shape. Same URL.
+- **Yjs** — stable `v13.6.32` (2026-08-04, one UndoManager fix); **v14.0.0 still in RC** (`rc.24`, 2026-07-15) with an API rename landed. https://github.com/yjs/yjs/releases
+- **y-crdt `v0.27.4` (2026-08-22)** — **"Harden decoders against length-prefix allocation bombs"** plus a `find_index` out-of-range panic fix. https://github.com/y-crdt/y-crdt/compare/v0.27.2...v0.27.4
+- **Jazz — ground-up 2.0 rewrite in alpha** (`2.0.0-alpha.53`, 2026-07-10; stable line `0.20.19`). Pivots to a local-first *relational database* with a Rust core. Adds `definePermissions()` with an "Enforcing mode" gated on a **permissions head + bundle pair** — and fixed a race where the head arriving first flipped the client to Enforcing **without an authorization schema**, failing every local write `policy denied`. Any two-part capability admission has that shape. https://github.com/garden-co/jazz/blob/main/packages/jazz-tools/CHANGELOG.md
+- **Jazz also added a protocol-version check *in the WebSocket handshake*** (incompatible peers get an explicit update prompt, not a mystery desync) and closed an **unauthenticated LZ4 decompression bomb on the pre-auth handshake**. Same URL. *No source found either way on whether 2.0 retains E2EE — its permissions read as server-enforced row policy.*
+- **Evolu `@evolu/web@3.1.1` (2026-09-01)** — Evolu Protocol moved to its own MessagePack-derived codec with three round-trip fixes (nesting-limit symmetry, `-0` preservation, own `__proto__` no longer mangled); values now reject NaN/±Infinity. https://github.com/evoluhq/evolu/blob/main/packages/common/CHANGELOG.md
+- **ElectricSQL `@electric-sql/client@1.5.27` (2026-09-01)** — **authentication bypass on `/v1/shape` in secure mode**: auth gated on the *raw path*, so a trailing slash, doubled slash, or percent-encoded char skipped the secret check. Now gates on the router-resolved route. This is our carrier-gradient law in someone else's codebase — read the declaration, never the path. https://github.com/electric-sql/electric/blob/main/packages/sync-service/CHANGELOG.md
+- **Iroh `v1.1.0` (2026-08-25); `v1.0.0` shipped 2026-06-15.** 1.1.0 **stopped sending SNI** (#4473) and switched to **random mapped addresses instead of a counter** (#4469) — both cut passive linkability. 1.0.0 added **relay Bearer-token access control with no external service** (#4326). Subduction already rides Iroh 1.0. https://github.com/n0-computer/iroh/releases/tag/v1.1.0
+- **DXOS `v0.11.1` (2026-08-05)** — v0.11.0 added **tag-based broadcast pub/sub on a dedicated `onBroadcast` channel**, kept strictly off the point-to-point path (new wire fields `signal.Message.tags`, `SwarmRequest.SUBSCRIBE`). Clean fan-out pattern. https://github.com/dxos/dxos/releases/tag/v0.11.0
+- **PowerSync `@powersync/web@2.2.0` (2026-08-13)** — BroadcastChannel shares sync status across tabs when shared workers are off; v2.0.0 moved sync options to `connect()`-time only. https://github.com/powersync-ja/powersync-js/releases
+- **Muse is now Allume** — renamed June 2026 over a trademark opportunity, no migration. v4.0 (2026-05-02) shipped an **MCP server with three privacy modes, disabled by default**. https://allume.com/memos/2026-07-allume-v4/
+- **Braid** — `braid-http@1.4.11` (2026-08-10) and spec commits on a `versions-05` draft (2026-03), but the **IETF draft expired 2024-05-22 with no refresh**; `braidjs` last commit 2025-08-17. https://datatracker.ietf.org/doc/draft-toomim-httpbis-braid-http/history/
+- **Willow / Earthstar — cold.** Latest spec news is 2025-10-26 (breaking changes to Confidential Sync and Drop Format); `willow-js` last commit 2025-03-26, `earthstar` 2024-08-08, JSR `@earthstar/meadowcap` last published 2024-05. **Meadowcap is still the best published capability-for-sync design — treat the spec as the asset, not the code.** https://willowprotocol.org/more/changes/index.html
+- **Triplit — dormant.** Last release and last commit 2025; nothing in the window. https://github.com/aspen-cloud/triplit/commits/main
+- **Veilid `v0.5.7` (2026-07-19)**, five releases in-window, commits through 2026-08-31 — but **every GitLab release description is just the version string. What changed: no source found.** https://gitlab.com/veilid/veilid/-/releases
+- **Keet/Holepunch** — no app release feed found (**no source found** for Keet versions); modules move: `hyperdht` 6.33.2 + commits 2026-09-01, `hypercore` 11.35.2 (2026-08-20), `autobase` quiet since 2026-05-14. https://github.com/holepunchto/hyperdht/commits/main
+
+---
+
+# 3. Capability / identity primitives
+
+- **UCAN "1.0" is softer than it looks.** `ucan-wg/spec`, `delegation`, and `invocation` all committed *"Bump to v1.0.0 (drop RC.X)"* on **2026-07-08** — but the **latest git tag is still `v1.0-rc.1` and the repo has zero GitHub releases**. It is a README assertion, not a cut release. https://github.com/ucan-wg/spec/commits/main
+- **UCAN revocation was left behind at rc.1** — last content commit 2025-07-14, no 1.0 bump. The one sub-spec a mesh most needs is the one that didn't ship. https://github.com/ucan-wg/revocation/commits/main
+- **UCAN implementations are stalled**: `rs-ucan` has in-window commits (no_std, spec-deviation fixes, 2026-03-29) but **no release since 2023-06**; `go-ucan` v1.1.0 is 2025-10-29; `ucanto` `core-v10.4.6` is 2025-10-27; `ts-ucan` dead since 2023. https://github.com/ucan-wg/rs-ucan/releases
+- **Biscuit** moved to the Eclipse Foundation (`biscuit-auth/*` → `eclipse-biscuit/*`). **Active commits, zero releases in the window** — latest crate is 6.0.0 (2025-07-16); spec repo last touched 2025-10-21. https://github.com/eclipse-biscuit/biscuit-rust/commits/main
+- **ZCAP-LD unexpectedly reactivated** — 40 commits since 2026-03-01, clustered from 2026-07-16 and landing 2026-09-01. But it is all publishing plumbing (context-URL restructuring, semver aliases); still **v0.3.0 / v0.4.0-draft, no tags, no releases**, a CCG draft. https://github.com/w3c-ccg/zcap-spec/commits/main
+- **KERI's code is healthy, its IETF specs are frozen.** keripy commits 2026-09-01, PyPI `keri` 1.3.6 (2026-07-31), keria 0.4.0 with ESSR hardening ("reject malformed ESSR payloads with 401", "make the ESSR tunnel byte-transparent"), signify-ts 0.4.0. But `draft-ssmith-keri` is still **rev 00 from 2024-01-28** and `draft-ssmith-cesr` rev 03 from 2024-02-01, both expired individual drafts. https://datatracker.ietf.org/doc/draft-ssmith-keri/
+- **DID Core 1.1 reached Candidate Recommendation Snapshot 2026-03-05**; **DID Resolution v1 reached CR Draft 2026-08-28** with exit criteria of two independent implementations per feature. **No new DID Recommendation was published in the window.** https://www.w3.org/TR/did-1.1/ · https://www.w3.org/TR/did-resolution/
+- **`did:webvh`** was named by DIF + ToIP (June 2026) as one of the first two "recommended DID methods"; active through 2026-08-11 as a DIF Editors Draft, not W3C track. `did:key` has no movement since 2025-11-02. **`did:web` in-window: no source found.** https://blog.identity.foundation/two-recommended-did-methods/
+- **OpenMLS 0.9.0 (2026-08-25)** — adds **PQ ciphersuites (P-384, ML-DSA)**, targeted messages, experimental virtual clients, safe-AAD; drops non-self-describing storage formats. **Two security fixes**: a bare `GroupContextExtensions` proposal could **bypass the `AppDataUpdate` immutability check** on `app_data_dictionary` (#2125), and wrong tree-node-index computation on invalid input (#2186). https://github.com/openmls/openmls/releases/tag/openmls-v0.9.0
+- **mls-rs 0.56.0 (2026-08-19)** — crates.io is the only signal; the repo publishes no GitHub releases. https://crates.io/crates/mls-rs
+- **No new MLS RFC in the window.** Six WG drafts revised though: `mls-partial` rev 02, `mls-pq-ciphersuites` rev 06, `mls-extensions` rev 10, and three newly WG-adopted (`virtual-clients`, `targeted-messages`, `ratchet-tree-options`). https://datatracker.ietf.org/wg/mls/documents/
+- **Decentralized MLS is the closest external analogue to BeeKEM.** `draft-kohbrok-mls-dmls` **rev 03, 2026-04-23** — retains key material to process Commits out-of-order with no central Delivery Service, built on the **FREEK fork-resilient CGKA** construction. `draft-xue-mls-decentralized` rev 00 (2026-07-01), presented at IETF 126. **Both still individual drafts, not WG-adopted.** https://datatracker.ietf.org/doc/draft-kohbrok-mls-dmls/
+- **eprint 2026/1677, "Fair-Weather No More: Guaranteed Efficiency in Secure Group Messaging"** (Bartusek, Bitansky, Dodis, Garg, Wu), received 2026-08-13, major revision of a CRYPTO 2026 paper — CGKA efficiency under adversarial scheduling. https://eprint.iacr.org/2026/1677
+
+*Correction to one sub-finding: Keyhive **does** publish tagged releases — `keyhive-wasm/0.1.0-alpha.8` (2026-08-18) and back through alpha.4. https://github.com/inkandswitch/keyhive/releases*
+
+---
+
+# 4. Crypto libraries + tree-sitter
+
+**All four noble packages released 2.x.4.0 on 2026-08-27, same day. All are hardening; I found no CVE and no breaking change in the .4.0 line.**
+
+- **@noble/curves 2.4.0** — ECDH and ECDSA now **reject the identity point** even for codecs that permit it; DER parsing bounds signature/INTEGER sizes before bigint conversion (parser-DoS); FROST DKG hardened against round-one transcript substitution; POPRF inversion made constant-time; all security-sensitive arguments snapshotted against mutation. Credits 1Password Off-by-1 Labs. https://github.com/paulmillr/noble-curves/releases/tag/2.4.0
+- **The real security event was 2.3.0 (2026-08-06), not 2.4.0** — a **remote timing attack on X25519** leaking up to **4.036 bits** of long-term private key across many samples (fingerprinting, not key recovery), reported by Stergiopoulos (AUEB) and Patsakis (Piraeus). Fixed with secret-scalar CSPRNG blinding and constant-time fixed-window multiply. Also Trail of Bits fixes: recovered ECDSA sigs now bound to their recovery id, non-canonical BLS encodings rejected, Edwards↔Montgomery helpers corrected. **If you are on 2.2.0, this is the upgrade that matters.** https://github.com/paulmillr/noble-curves/releases/tag/2.3.0
+- **Perf note (2.3.0):** `getPublicKey`/`sign` got *slower* (window W=8→W=6 plus CT hardening). Restore with one line: `secp256k1.Point.BASE.precompute(8)`. Verification is up to +32% faster, BLS 2×. Same URL.
+- **@noble/hashes 2.4.0** — options protected against mutation/pollution; **blake3 tree-merging fix for multi-terabyte streams**; webcrypto rejects engine-crashing output sizes; keccakprg fails until entropy added. **Behavioral change to watch: Argon2 cost options are now optional with defaults t:3, m:1 GiB, p:1, dkLen:32 and a 1 GiB maxmem cap — larger-memory calls must now set `maxmem` explicitly.** `nextTick`/`asyncLoop` yield via `scheduler.yield()` when available. https://github.com/paulmillr/noble-hashes/releases/tag/2.4.0
+- **@noble/ciphers 2.4.0** — ChaCha/Salsa reject output buffers partially overlapping unread input; PRG throws after `clean()`; webcrypto snapshots keys and params. **2.3.0 was the behavior-changing one**: passing AAD to a cipher that doesn't support it now **throws instead of silently ignoring**, and CBC/ECB padding failures surface a generic `aes: bad decrypt` to cut padding-oracle signal. https://github.com/paulmillr/noble-ciphers/releases/tag/2.4.0
+- **@noble/ed25519 3.2.0** — inputs snapshotted in `sign`/`signAsync`; `verify` rejects null options; actionable error when WebCrypto randomness is unavailable; `etc.invert()` now rejects modulus one as well as zero; ~10% code-size cut. https://github.com/paulmillr/noble-ed25519/releases/tag/3.2.0
+- Note: **@noble/ed25519 3.0.1 (2026-03-17)** fixed a low-severity `verify` flaw where an attacker *with the secret key* could forge a signature valid for all messages under that key — impact limited to non-repudiation. https://github.com/paulmillr/noble-ed25519/releases/tag/3.0.1
+
+**tree-sitter 0.27.0 (2026-08-30) — NOT breaking for a grammar built on 0.26.**
+
+- **The ABI did not move.** `TREE_SITTER_LANGUAGE_VERSION` is **15** in both v0.26.11 and v0.27.0, and `TREE_SITTER_MIN_COMPATIBLE_LANGUAGE_VERSION` is **13** in both. A 0.26-generated parser loads unchanged. https://github.com/tree-sitter/tree-sitter/blob/v0.27.0/lib/include/tree_sitter/api.h
+- **The one real hazard is the .wasm, not the ABI.** New docs added in this release: *"Some prebuilt `.wasm` files use an older dynamic-linking format that newer versions of `web-tree-sitter` cannot load, **even if their parser ABI is supported**. Rebuild these files using a current tree-sitter CLI."* If you ship a prebuilt grammar `.wasm`, **regenerate it with the 0.27 CLI**. https://github.com/tree-sitter/tree-sitter/pull/5884/files
+- Grammar-DSL addition: **`eof()`** (`feat!`, PR #2488) — matches end-of-file without the `'\0'` hack that also matched embedded null bytes. Additive; existing grammars are unaffected. https://github.com/tree-sitter/tree-sitter/pull/2488
+- Other `!`-marked change is API-surface only: `generate_parser_in_directory` now errors on a nonexistent *file* path (#5868). CLI gains concurrent builds of the same grammar at different paths (#5174) and `test --update` rewriting all corpus files (#5179).
+- **Note the npm package split**: `web-tree-sitter` is at **0.27.0** (2026-08-30), but the `tree-sitter` **node binding** npm package is still at **0.25.1**. They do not track. Also, `v0.26.13` (2026-08-23) is a live maintenance line with parser fixes (`MISSING` node queries, case-insensitive pattern folding, wide error nodes) — you can take those without moving to 0.27. https://github.com/tree-sitter/tree-sitter/releases/tag/v0.26.13
+
+---
+
+# WHAT WE SHOULD ACT ON
+
+1. **Do not ship on `@keyhive/keyhive@0.1.0-alpha.8` as a security boundary.** PR #216 (2026-08-27) fixes transitive authority exceeding the weakest link on the best path, and **Relay access to a group transitively granting CGKA-tree membership in a document** — with tests that fail on the pre-fix code. It landed *after* alpha.8 and is unreleased. This lands squarely on our `#has`/Relay cap-tier model and the face-join plane law. Track for alpha.9 or build from `main`.
+2. **Bump `@noble/curves` to ≥2.3.0 now** — the X25519 remote timing leak (4.036 bits of long-term key) is the only real vulnerability in this whole sweep, and our persona/ECDH paths use exactly that primitive. Take 2.4.0 for the identity-point rejection in ECDH/ECDSA while you are there. Re-baseline any perf assumption via `Point.BASE.precompute(8)`.
+3. **Move the mesh to `2.6.0-subduction.48`** for the compaction data-loss fix (blobs deleted before they could be decrypted). Pair it with ARK `0.5.0-alpha.7`. Treat the `authors` tag as parked, and treat ARK's TypeScript sync-protocol files as condemned — the WASM-over-Rust refactor is announced.
+4. **Read `onomancy` before more naming work.** It is I&S solving our exact `lar:///` problem — self-certifying Automerge doc root, local petnames, DNSSEC-rooted global names from the IANA root KSK, with `onomancy_keyhive` doing delegation-chain replay behind an `AuthorityVerifier`. Our DNS-01/split-horizon path and the attestation-seat ruling should be collided against it.
+5. **Regenerate the tree-sitter grammar `.wasm` with the 0.27 CLI** before adopting web-tree-sitter 0.27 — the ABI is stable at 15 but the dynamic-linking format is not. Or hold at the `0.26.13` maintenance line, which carries the parser fixes without the move.
+
+## Wire-incompatible flag-days across a mesh
+
+- **Keyhive #213 (2026-08-15) — BeeKEM independently-sampled secrets replacing ratcheting.** Confirmed as the flag day you named. Old and new nodes derive path secrets differently; mixed-version peers cannot agree on group keys. `0.1.0-alpha.8` is the first release carrying it.
+- **Keyhive #216** changes *authorization verdicts*, not the wire — but a patched node and an unpatched node will disagree about who is in a CGKA tree, which is a split-brain of a different and nastier kind.
+- **Subduction's 1-byte per-type version field: decoders reject unsupported versions outright.** Any bump to a `ST`/`SU` type version is a hard flag day with no graceful-parse path. There is no negotiation in the handshake — worth raising with I&S, and worth noting that Jazz just added exactly that (protocol-version check in the handshake with an explicit update prompt).
+- **`bijoux` width variants are explicitly not wire-compatible** with each other and carry no self-describing tag. Subduction switched to it (#277, 2026-07-29). If we encode with a different width than a peer decodes, it silently mis-parses.
+- **Iroh 1.1.0's `CustomAddr` serialization fix** (#4465) is marked breaking — relevant if we take the Iroh/QUIC transport.
+- **OpenMLS 0.9.0 dropped non-self-describing storage formats** (opt-in `migration-import`) — a storage flag day, not a wire one, but the same class.
+- **Not a flag day:** tree-sitter 0.27 (ABI 15 unchanged), and none of the four noble 2.4.0 releases.
+````
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;b86jF2p7SDoAXaw3HtzcRylqjkEeOgfnnSsKI_GaSnw
+
+<<^ code="&#x0004;" -> to=? >>

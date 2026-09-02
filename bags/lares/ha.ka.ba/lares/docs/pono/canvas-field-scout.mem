@@ -1,0 +1,720 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/canvas-field-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 16
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "canvas-field-scout — VERBATIM handoff of the tasked spirit Horizon: the spatial-computing FIELD rather than its shelf. The lineage read as an argument, spatial hypertext as a dead programme with a living conference, the graveyard and its cause of death, mobile, unclaimed ground, and five stalls scored honestly. Held as a collision surface."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/canvas-field-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Horizon ~ a spirit's handoff, held unedited
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is what a tasked spirit reported, kept whole, as a ''collision surface'' rather than a briefing.
+
+''Why verbatim.'' A summary keeps the claims and drops the line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' It was extracted straight from the spirit's transcript to this carrier, so no relaying hand rewrote it on the way.
+
+''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+````markdown
+Understood — re-sending the report body in full. Nothing summarised.
+
+---
+
+# Horizon: Lares (Tasked Spirit) — THE FIELD REPORT
+
+Mu lens carried. `0` marks where the field has not settled. The session's web-search budget was exhausted early; everything below comes from **direct fetches of primary sources** — vendor sites, changelogs, GitHub and WebKit APIs, author pages, PDFs pulled and text-extracted locally. Where no primary source exists I say so rather than fill it.
+
+---
+
+## 1. THE LINEAGE, READ AS AN ARGUMENT
+
+**The loss, named first, since the argument turns on it:** each originator built a system in which *the structure of the work was stored, addressable and manipulable alongside its appearance* — and in each case the field kept the appearance and discarded the structure. Sutherland stored the relations between parts of a drawing; the field shipped pictures. Engelbart designed a four-part human-tool system; the field took one part, the artifacts. Kay designed a medium that its owner could mold; the field shipped sealed appliances. Nelson specified links with provenance, versioning and two ends; the field shipped one-way links that rot. **One loss — the semantic layer, the stored structure, the thing behind the surface — four times.**
+
+### Sketchpad (Sutherland, 1963) — the semantic layer, stated once and never bettered
+
+I pulled the Cambridge republication of the thesis ([UCAM-CL-TR-574](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-574.pdf)) and extracted its text locally. In Chapter I, Introduction, Sutherland names three primitives:
+
+> "As the work has progressed, several simple and very widely applicable facilities have been discovered and implemented. They provide a **subpicture** capability for including arbitrary symbols on a drawing, a **constraint** capability for relating the parts of a drawing in any computable way, and a **definition copying** capability for building complex relationships from combinations of simple atomic constraints."
+
+And he opens with the claim about the medium:
+
+> "The Sketchpad system makes it possible for a man and a computer to converse rapidly through the medium of line drawings. Heretofore, most interaction between men and computers has been slowed down by the need to reduce all communication to written statements that can be typed; **in the past, we have been writing letters to rather than conferring with our computers.**"
+
+**The passage I called the 1963 statement of your never-rasterise law**, from the section headed *"Implications of Introductory Example"*, still in Chapter I:
+
+> "Most important of all, the Sketchpad drawing itself is entirely different from the trail of carbon left on a piece of paper. **Information about how the drawing is tied together is stored in the computer as well as the information which gives the drawing its particular appearance.** Since the drawing is tied together, it will…"
+
+and, a few paragraphs later, the sharper form:
+
+> "Since Sketchpad stores the structure of a drawing, a Sketchpad drawing explicitly indicates similarity of symbols. In an electrical drawing, for example, **all transistor symbols are created from a single master transistor drawing.** If some change to the basic transistor symbol is made, this change appears at once in all transistor symbols without further effort. Most important of all, **the computer 'knows' that a 'transistor' is intended at that place in the circuit. It has no need to interpret the collection of lines** which we would easily recognize as a transistor symbol. Since Sketchpad stores the topology of the drawing as we saw in closing the hexagon, one indicates both what a circuit looks like and its electrical connections when one draws it."
+
+**On citation precision, honestly `0`:** I read an extracted text stream, not a paginated view. The passages sit in Chapter I, under the headings *Introduction* and *Implications of Introductory Example*; the marginal page markers in the extract place them around printed pages 18–21 of the Cambridge republication. **I will not assert an exact page number I did not see rendered.** The section headings are exact and will locate them.
+
+And the master/instance mechanism generalised, from later in the same chapter:
+
+> "Master drawings of the repetitive patterns necessary can be easily drawn. Here again, the ability to change the individual element of the repetitive structure and have the change at once brought into all subelements makes it possible to change the elements of an array without redrawing the entire array."
+
+**What was lost:** the constraint solver. CAD kept master/instance. Every drawing tool the mass market received — MacPaint, Photoshop, and every "infinite canvas" whiteboard since — kept *the pixels or the bezier* and discarded *the relation*. Sixty-three years on, the leading canvas libraries store shape geometry, not constraints. Sutherland's *"constraint capability for relating the parts of a drawing in any computable way"* has no shipped mass-market descendant. `!`
+
+### Engelbart (1962) — augmentation as a *system*, received as a *device*
+
+From the 1962 framework, *Augmenting Human Intellect: A Conceptual Framework* ([dougengelbart.org/content/view/138](https://www.dougengelbart.org/content/view/138/)). The goal:
+
+> "increasing the capability of a man to approach a complex problem situation, to gain comprehension to suit his particular needs, and to derive solutions to problems"
+
+The unit of design is not the machine. It is **H-LAM/T** — *"Human using Language, Artifacts, Methodology, in which he is Trained"* — glossed as *"a trained human being together with his artifacts, language, and methodology."* He is explicit that it must be studied whole: *"the H-LAM/T system should be studied as an interacting whole from a synthesis-oriented approach."*
+
+The four augmentation means are therefore **Artifacts, Language, Methodology, Training** — four, not one.
+
+The mechanism is co-evolutionary and regenerative:
+
+> "a significant improvement in symbol-structure manipulation through better process structuring (initially perhaps through much better artifacts) should enable us to develop improvements in concept and mental-structure manipulations that can in turn enable us to organize and execute symbol-manipulation processes of increased power"
+
+> "A change can propagate up through the capability hierarchy; higher-order capabilities that can utilize the initially changed capability can now reorganize to take special advantage of this change."
+
+> "a direct new innovation in one particular capability can have far-reaching effects throughout the rest of your capability hierarchy"
+
+And the note in the source material that most people miss the recursion — they consider computer-like devices as *"one-pass improvement"* rather than as regenerative interaction.
+
+The **A/B/C activity model** — the later formulation of the same recursion — is at [dougengelbart.org/content/view/191](https://dougengelbart.org/content/view/191/): **A** is the organisation's normal work; **B** improves A; **C** improves the improvement process itself. The page states the model and gives the example *"transforming ICs into NICs is a C activity."*
+
+**A refusal to fabricate `0`:** I hunted specifically for a direct Engelbart quotation complaining that the industry took the mouse and left the programme. **I did not find one on his own site.** The 1968-demo page ([content/view/374](https://www.dougengelbart.org/content/view/374/000/)) describes the demo and contains no such reflection; the National Medal of Technology page ([content/view/153](https://www.dougengelbart.org/content/view/153/)) is award documentation. **No source found.** What is verifiable is the shape of the narrowing rather than a grievance about it: his 2000 National Medal citation honours *the mouse, hypertext, real-time interaction* — the artifacts — and names none of co-evolution, methodology, training, or C-activity.
+
+**What was lost:** three of the four augmentation means. Artifacts shipped. **Language, Methodology and Training did not.** Every product in the graveyard sells an artifact and ships no methodology — and §3 shows that this is precisely the thing whose absence kills them.
+
+### Kay & Goldberg (1977) — the metamedium, verbatim
+
+Extracted from the New Media Reader reprint of *Personal Dynamic Media* ([nmr-26-kay.pdf](https://www.newmediareader.com/book_samples/nmr-26-kay.pdf)), with the surrounding sentences:
+
+> "…the essence of a medium is very much dependent on the way messages are embedded, changed, and viewed. Although digital computers were originally designed to do arithmetic computation, **the ability to simulate the details of any descriptive model means that the computer, viewed as a medium itself, can be all other media** if the embedding and viewing methods are sufficiently well provided. Moreover, **this new 'metamedium' is active—it can respond to queries and experiments**—so that the messages may involve the learner in a two-way conversation. **This property has never been available before except through the medium of an individual teacher.** We think the implications are vast and compelling."
+
+And the ownership clause, from the section on the Dynabook:
+
+> "If such a machine were designed in a way that **any owner could mold and channel its power to his own needs**, then a new kind of medium would have been created: **a metamedium, whose content would be a wide range of already-existing and not-yet-invented media.**"
+
+From [The Early History of Smalltalk](https://worrydream.com/EarlyHistoryOfSmalltalk/), Kay distinguishes his target from Engelbart's in one line:
+
+> "A personal dynamic **medium**." — as against Engelbart's "personal dynamic **vehicle**": "With a vehicle one could wait until high school and give 'drivers ed', but if it was a medium, it had to extend into the world of childhood."
+
+On what the content of the new literacy should be:
+
+> "the content of this new kind of authoring literacy should be the creation of interactive **tools** by the children"
+
+> "you didn't have to do a lot to make a computer an 'object for thought' for children, but what you did had to be done well and be able to apply deeply"
+
+On what the industry took:
+
+> "much of what is called 'object-oriented programming' today is **simply old style programming with fancier constructs**"
+
+**A correction I owe you `0`:** an earlier fetch of the 1972 *A Personal Computer for Children of All Ages* attributed "metamedium" to that paper. The term and the passage above belong to **Kay & Goldberg, *Personal Dynamic Media*, 1977** — that is where I verified it in the extracted text. Attribute it there.
+
+**What was lost:** *"any owner could mold and channel its power."* The metamedium shipped as the App Store — a delivery system for *finished* media, in which molding is exactly what the owner cannot do. Ink & Switch names the same loss in 2025 as *"we got appliances: built far away, sealed, unchangeable."*
+
+### Nelson — what the web took instead
+
+From [xanadu.com.au/ted/TN/WRITINGS/TCOMPARADIGM/tedCompOneLiners.html](https://www.xanadu.com.au/ted/TN/WRITINGS/TCOMPARADIGM/tedCompOneLiners.html), in context. The line is a rebuttal to the standard framing that Xanadu lost a race:
+
+> "The Xanadu® project **did not 'fail to invent HTML'. HTML is precisely what we were trying to PREVENT** — ever-breaking links, links going outward only, quotes you can't follow to their origins, no version management, no rights management."
+
+The four failures enumerated in that sentence are: **link decay; unidirectionality; no transclusion (quotes with no path back to source); and missing infrastructure — no versioning, no rights.** And the summary judgement:
+
+> "The Web is the **minimal concession to hypertext that a sequence-and-hierarchy chauvinist could possibly make.**"
+
+**What was lost:** transclusion, bidirectionality, provenance, versioning. Note the direct bearing on your house: **a CRDT store gives you two of the four natively** — version history and content-addressed identity — which is the single strongest structural claim you hold, and I develop it in §5.
+
+### Boxer and HyperCard — the two that came nearest to shipping and did not
+
+**Boxer** (diSessa & Abelson, CACM 1986) is **alive**, as *Boxer Sunrise* — [boxer-project.github.io](https://boxer-project.github.io/): active development, alpha builds every six to eight weeks, **BSD-licensed**, on GitHub, nearly forty years after MIT and Berkeley, still stating its goal as *"computational literacy in society."* I could not obtain the CACM paper — ACM DL returns 403 at [doi:10.1145/7902.7903](https://dl.acm.org/doi/10.1145/7902.7903) — and the project site does not quote diSessa on naive realism, the spatial metaphor, or the reconstructible medium. **No primary source found for the design-principle language itself.** What survives verifiably is the artifact: still shipping, still unadopted.
+
+**HyperCard**: [hypercard.org's history page returns 404](https://www.hypercard.org/HyperCard%20History.php). **No primary source found** in this pass for Atkinson's often-repeated networking regret. I will not repeat it unsourced.
+
+---
+
+## 2. SPATIAL HYPERTEXT — A DEAD PROGRAMME WITH A LIVING CONFERENCE
+
+**`_` This is the buried finding, and it matters to you more than anything else in §2, because the ground it cleared is the ground you intend to stand on.**
+
+### What the programme was
+
+The primary text is Shipman & Marshall's ACM Computing Surveys overview, ***Spatial Hypertext: An Alternative to Navigational and Semantic Links*** — Frank M. Shipman III (Texas A&M) and Catherine C. Marshall (FX Palo Alto Laboratory) — which is served in full at [people.engr.tamu.edu/shipman/spatialhypertext.html](https://people.engr.tamu.edu/shipman/spatialhypertext.html). NSF grant 97-34167.
+
+**The founding observation is an empirical one about user behaviour**, and it is the crux:
+
+> "The move from document-centered hypertext systems to map-based hypertext systems had some unforeseen but far-reaching implications: relationships between nodes could be expressed in more than one way. Maps showed interconnectedness explicitly, usually in the form of a directed graph. But also **node proximity came into play**; relationships among different nodes or documents could be indicated simply on the basis of their relative location. The use of these map-based hypertext systems to author new information spaces uncovered an interesting phenomenon. **Users avoided the explicit linking mechanisms in favor of the more implicit expression of relationships through spatial proximity and visual attributes.** Further analysis showed that the use of these spatial and visual cues to imply relationships applied not only to map-based hypertext systems, but also to traditional hypertext systems and in the physical arrangement of paper and notecards."
+
+The requirement that follows:
+
+> "there was a need to support the expression of **the implicit and transient relationships** that develop between nodes. With that requirement came the concomitant need to support manipulation, the movement of nodes — and structures of nodes — within the information space."
+
+### What it established — four benefits, in their words
+
+> "Our experience indicates four major benefits: (1) it takes advantage of people's considerable **visual recognition and intelligence**; (2) it facilitates **constructive ambiguity**; (3) it supports **emerging problem-solving strategies**; and (4) it **reduces overhead in communicating** with others."
+
+On visual recognition:
+
+> "Remembering where one saw a document in a visual workspace is a process of recognizing the area in which a document was located at a progressively finer-grained level rather than having to remember the navigational path one took to get to the document. Visual recognition also enables the expression of relation variations — people recognize visual patterns as being of the same or similar type even when they are not identical; this introduces a way to compose and share **imperfect composites**."
+
+On **constructive ambiguity** — the second unclaimed item in §5:
+
+> "Where a link in a document-centered hypertext either exists or does not in a particular presentation of the material, **placement of a node close but not quite with others can imply some indecision or potential for a relation between the nodes.** Allowing people to express ambiguity more easily enables them to perform tasks such as analysis or design **where interpretations form as they work with the materials.**"
+
+On **emergent visual languages**, and the indictment of predefined type systems:
+
+> "A study of users performing short-term interpretation tasks showed that **visual languages emerge as users' understanding of the task and their method of approaching the task co-evolved.** The use of a visual attribute to represent some abstract information about node content changed over time — for example, **color might start off indicating the usefulness of a document but later be used to encode domain-specific characteristics of the content.** Such changes indicate that users adapt their solution strategies as they gain more insight into their task. **Aquanet and other systems with predefined types and relations make the overhead for making such changes in mid-task overwhelming and very unlikely to occur.**"
+
+On collaboration, and why ambiguity survives sharing:
+
+> "The initial study of spatial layouts of information implied a correlation between the number of people sharing an information space and the degree of visual structure apparent in the arrangement. When it was necessary for more people to understand the information space, they created a higher degree of perceptual structure and followed it more strictly… **In contrast with a navigational hypertext or file system, effective use of ambiguous and implicit relationships means the spatial hypertext does not require users to agree on particular relationships or agree on their interpretation.**"
+
+### The mechanism nobody has shipped since — VIKI's spatial parser
+
+> "To better support the manipulation of transient perceptual structures, **VIKI includes a spatial parser that recognizes patterns such as vertical and horizontal lists, stacks, and composites. Recognized structures provide easy access to the different levels of perceptual structure within a complicated information space and support the transition of these implicit structures into explicit hypertext.**"
+
+Also from the same paper, and directly on §4's problem: *"Within VIKI, the constant shortage of screen real estate and the practice of performing multiple tasks simultaneously led to the development of a **multi-focus fisheye view**."*
+
+The systems: **VIKI** and its successor the **Visual Knowledge Builder (VKB)** — [viki](https://people.engr.tamu.edu/shipman/viki/index.html), [VKB](https://people.engr.tamu.edu/shipman/vkb/www2000.htm). The complementary theory paper is Shipman & Marshall, ***Formality Considered Harmful***, *Computer Supported Cooperative Work* 8(4), 1999 — **[doi:10.1023/A:1008716330212](https://doi.org/10.1023/A:1008716330212)**, which resolves at Springer. **I could not obtain full text `0`**: the TAMU CSDL host that served the author copies is dead (`csdl.tamu.edu` no longer resolves), and CiteSeerX now redirects its entire search surface to the Internet Archive. I quote it by title, venue and DOI only. Its programme name — **incremental formalization** — is confirmed independently from Shipman's own biography page, which describes his research themes as *"the use of media combining informal and formal representations, and support for the transition of human-oriented content to machine-usable content via incremental formalization"* ([people.engr.tamu.edu/shipman](https://people.engr.tamu.edu/shipman/index.html)).
+
+### What happened
+
+The conference lives. [ACM Hypertext](https://ht.acm.org/) runs unbroken — 2025 Chicago, 2026 London — and now names itself around **social media and the semantic web**.
+
+The programme does not. **The Spatial Hypertext Workshop series ran exactly four times and stopped:**
+
+- [First Workshop on Spatial Hypertext](https://people.engr.tamu.edu/shipman/SpatialHypertext/SH1/index.html) — 14 August 2001
+- [Second](https://people.engr.tamu.edu/shipman/SpatialHypertext/SH2/index.html) — 12 June 2002
+- [Third](https://people.engr.tamu.edu/shipman/SpatialHypertext/SH3/index.html) — 26 August 2003
+- [Fourth](https://people.engr.tamu.edu/shipman/SpatialHypertext/SH4/index.html) — 10 August 2004
+
+There is no fifth. The [Spatial Hypertext index page](https://people.engr.tamu.edu/shipman/SpatialHypertext/index.html) lists those four and nothing after.
+
+**Shipman himself has moved on, and his own site records it.** He remains a professor, actively teaching — the homepage lists *Intelligent User Interfaces* for **Fall 2026** and CSCW for **Spring 2027**, so this is not retirement. But his **current and recent projects are Prediction Games** (fantasy-sports-derived data-science education) **and Social Media Ownership**. His **publications page carries the footer "Last updated: May 2015"** and embeds a PDF rather than a live list ([pubs.html](https://people.engr.tamu.edu/shipman/pubs.html)). His 2023–2026 DBLP record ([dblp.org/pid/s/FrankMShipmanIII](https://dblp.org/pid/s/FrankMShipmanIII.html)) shows children's storytelling and LLM survey work and **not one spatial-hypertext paper**.
+
+**The reading:** the ideas did not die — they migrated, uncredited, into Ink & Switch's canvases and into Haijun Xia's *malleable webpages*. **The named field did not renew its cohort.** Its founder is alive, employed, publishing, and working on something else; its workshop series ended twenty-two years ago; its author copies are on dead hosts; its central theory paper is paywalled behind a Springer DOI. The result is a body of measured, specific findings about how people actually use space to think, sitting unclaimed, with no living community defending or extending it. `?`
+
+**Why this is your finding rather than a curiosity:** items ①–③ of §5 come from this one document. Nobody is competing for them.
+
+---
+
+## 3. THE GRAVEYARD
+
+*(Sibling boundary respected: libraries, licences and maintainer aliveness belong to Cartwright. What follows is products and post-mortems.)*
+
+### Muse → Allume: the best-documented death in the category, and the pivot was not a pivot
+
+`museapp.com` now 301-redirects to `allume.com`. The rename is a **trademark sale and nothing more**:
+
+> "An opportunity came up regarding the Muse name and trademarks. These have now been sold… **Nothing else about the company, the app, your account, or your data has changed.**" — [Allume FAQ](https://allume.com/allume-faq/)
+
+The real rupture was **August 2023**, in Adam Wiggins' ["An end, and a beginning"](https://allume.com/end-and-beginning/):
+
+> "**despite all of the above, we did not manage to make Muse into a sustainable business.** Therefore I and most of the team are departing. My longtime colleague Adam Wulf will continue to develop Muse as a solo entrepreneur."
+
+The post-mortem you asked for is ***"Muse retrospective," February 2024*** — **[adamwiggins.com/muse-retrospective](https://adamwiggins.com/muse-retrospective/)**. Scale first: *"We raised $2M in funding, grew the team to seven, had tens of thousands of active users, and thousands of customers."* Then, documented to the sentence:
+
+**On the market being too small — the threshold, stated as a number:**
+> "Muse got there for a few thousand people, but **the economics of prosumer software means that just isn't enough. You need tens of thousands, hundreds of thousands, to make the cost of development sustainable.**"
+
+> "our revenue doubled, from around 60k ARR to around 120k ARR… **120k ARR is a one-person business, not a team effort.**"
+
+**On distribution — the structural claim, and the most important sentence in the corpus:**
+> "there's **no specific market (in the Crossing the Chasm sense of people with shared identity that talk to one another) for todo software.** There's no 'Todo Apps Monthly' magazine or trade show. Hence these markets tend to be fragmented, with a zillion niche players, and no clear path to building a big business."
+
+> "We were too unfocused in our target market, and ended up as an **'everything app.'**"
+
+**On the canvas as a document type:**
+> "**Inventing a new document type is hard**… canvas document types are still the wild west… Users can't rely on muscle memory, and we spent a lot of time iterating on foundational details like how to zoom in and out."
+
+**On the B2B escape hatch failing at the non-buyer:**
+> "**the other team members are generally a little annoyed to have to learn any new tool**, and Muse's steeper learning curve only made that worse. Those team members would push the problem back to the team lead, treating them as customer support."
+
+**On the platform:**
+> "**Apple platforms are great, but you have to be on the web.** My biggest regret is not building a simple share-to-web function early on."
+
+**On the unexplained collapse — the field's largest open question:**
+> "In the first quarter of 2022, something strange happened that I still can't fully explain. **Our active users dropped by almost half over the course of a month or two**… To this date it remains a mystery."
+
+**On losing the category name:**
+> "I had hoped Muse would be in a similar situation with 'tools for thought' but **that term came to mean Roam-inspired outliners with backlinks.**"
+
+**And on ZIRP, conceded:** *"was Muse a zero-interest rate phenomenon? Briefly, I think: yes."*
+
+**Sync is exonerated by the man who paid for it.** Muse built a from-scratch local-first CRDT system running across 100,000+ devices, and his verdict is *"this bespoke system felt magical"* and *"Local-first is great for app developers."* **The folklore that CRDT sync cost killed these products is refuted by the best-documented case.**
+
+### Athens Research — dead, and the founder said exactly why
+
+Jeff Tang, ***"Why We Stopped Working on Athens"***, subtitled ***"2 years, 9 months, and $850k later"*** — [Wayback capture](https://web.archive.org/web/20230210000000/https://hardpivot.substack.com/p/why-we-stopped-working-on-athens). *(The live Substack has since been renamed and the archive of it is empty, which is itself a datum about how this literature disappears.)* Three reasons, his numbering:
+
+> "1. **I no longer believed there was a billion dollar opportunity in note-taking, knowledge management, or knowledge graphs** based on the customer conversations we had.
+> 2. I didn't feel like I had any interesting ideas to contribute to the space anymore.
+> 3. The explosion of progress in AI made me wonder if AI or AI-native tools might leapfrog the current paradigm."
+
+And, quoted by Tang from another founder he consulted: ***"People will pay for financial tools, not productivity tools."***
+
+The repository confirms it: *"Athens is no longer maintained"* ([github.com/athensresearch/athens](https://github.com/athensresearch/athens)).
+
+**The date matters and cuts against the easy story: November 2022 — before ChatGPT launched.** Reason 3 was anticipatory, not causal. Reason 1 is the real one, and it is Wiggins' finding independently arrived at.
+
+### Kosmik — sunset 31 May 2026, and almost nobody noticed
+
+From the front page of [kosmik.app](https://www.kosmik.app/), dated 24 April 2026:
+
+> "**Kosmik is winding down**… Kosmik will sunset on May 31st 2026… We tried to create something different, a software that would offer a new take on the desktop metaphor. **We still believe that something like Kosmik is needed.**"
+
+The notice recites technical firsts — first app with on-device IPFS plus multiplayer (2018), first multiplayer web browser (2022) — and gives **no business reason at all**. Eight years of work. No headcount, funding or revenue disclosed. **`_` Note the cross-link: Kosmik was a GitHub sponsor of Folk Computer.** A dying product was funding the live research programme. The category's money flows are that thin.
+
+### Roam Research — alive, frozen, marginal, silent
+
+The site is still deployed. The hard number: **Roam's mobile app is at v1.1.17, last updated April 2026, with 170 lifetime US App Store ratings.** For scale, from the same source: Obsidian ~2,700; Notion ~90,000; **Apple Freeform 435,385.**
+
+The 2020 hype is documented (a reported $200M seed valuation, per The Information). **There is no founder post-mortem, no shutdown notice, and no revenue figure.** Roam never announced a death — which is precisely why it is absent from the discourse. Wiggins independently confirms the outcome from outside: Roam *won the category name* and stopped shipping.
+
+### The whiteboard giants
+
+**Miro** peaked at **$400M ARR on a $17.5B valuation, January 2022**; cut **119 people (7%) in February 2023** ([SiliconANGLE](https://siliconangle.com/2023/02/02/okta-miro-cut-staff-biggest-tech-layoffs-20-years-continue/)); The Information reported roughly **18% in October 2024** — paywalled, headline only, so **treat as single-source `0`**. It now positions as an "AI-powered visual workspace."
+
+**Mural** cut *"dozens"* in May 2022 ([TechCrunch](https://techcrunch.com/2022/05/06/startup-tech-layoffs-in-may/)). **No primary source exists for any later round.** The tell is elsewhere: its **iOS app was last updated 5 February 2025 and sits at 2.32★ across 72 ratings.**
+
+**FigJam did not die — it dissolved into the bundle.** *"FigJam is included with all seats on every plan"* ([figma.com/figjam](https://www.figma.com/figjam/)), and the pricing page carries no FigJam tier. **The standalone collaborative-whiteboard business became a free feature of a design subscription.**
+
+**Prezi** — the original infinite-canvas company — abandoned the canvas as its pitch entirely. The arc from [prezi.com/about](https://prezi.com/about/): zooming canvas → Prezi Next → *"in 2017, Prezi started to observe a shift from presentations being primarily onstage… to increased virtual presenting"* → Prezi Video → **Prezi AI**, now *"Leading the future of AI presentations."*
+
+### Logseq — resolved in 2026 by splitting the product in two, and the canvas is what got cut
+
+The hardest number in this section: **the Logseq iOS app is on v0.10.9, last updated 23 April 2024 — twenty-eight months without a mobile release.**
+
+The concession, April 2026 ([logseq.io/p/e3YDyX5AYr](https://logseq.io/p/e3YDyX5AYr)):
+
+> "**Logseq is splitting into two distinct products**… Maintaining two distinct architectures within a single app introduces significant technical complexity. **Every feature, bug fix, and UX improvement must be built twice.**"
+
+Logseq OG receives *"no new features."* And on the public roadmap ([logseq.io/p/NX4mc_ggEV](https://logseq.io/p/NX4mc_ggEV)), **"Whiteboard" sits near the bottom, beside "Research: Canvas."** They shipped Whiteboards in 2023; the database rewrite did not carry them forward.
+
+**`!` When a knowledge tool is forced to choose, the canvas is the part that gets cut.** This is the single cleanest natural experiment in the dataset.
+
+### Notion's canvas never existed
+
+`notion.com/product` contains **zero** occurrences of "canvas" or "whiteboard." The full releases page: **zero**. The help sitemap has no whiteboard, canvas, draw, diagram or mind-map document, and `/help/whiteboard` returns 404. **No primary source found for a shipped Notion canvas.** Notion spent the canvas years building AI. The absence is the finding: the best-capitalised player with the most obvious strategic reason to build one declined.
+
+### Obsidian Canvas — maintained app, frozen spec
+
+Obsidian shipped v1.14.0 on **2 September 2026**; the app is healthy. But [JSON Canvas](https://jsoncanvas.org/) is a stalled standard, and the GitHub API proves it precisely: repo created February 2024, the site still reads **spec/1.0**, and **no commit has ever touched the spec** — every commit since launch adds an application to a list. **28 open issues**, including unanswered spec proposals from **March 2024** ("Edge offset property", "Set height as optional") and *"Ambiguous spec. How is an id constructed?"* from **April 2026**. Licence **MIT, Obsidian.md, 2024** — verified from the repository LICENSE file directly, not from a page summary.
+
+**Published, adopted, never revised — an interoperability format that has answered no interoperability question in two and a half years.**
+
+### Everything else, sorted by what actually happened
+
+**Pivoted out of the category entirely.** **Tana** is now an *"agentic meeting platform"*, the outliner demoted to a second domain (50 iOS ratings). **Mem.ai**: *"We're no longer just a notes app—we're your AI Thought Partner."* **Bloks** is now *"the **Un-CRM**… for Canada's wealth & insurance advisors"* — precisely the vertical-SaaS exit Tang described hunting for. **RemNote** is now exam preparation: *"Trusted by 1,000,000+ students to get higher grades."*
+
+**Alive, AI-repositioned.** **Heptabase** — AI Tutor, credit-metered pricing, 69 US ratings; founder Alan Chan's [2021 manifesto](https://sheracaolity.ghost.io/my-vision-heptabase/) is intact and remains the best short statement of the problem: *"the context of an idea is scattered across different tools."* **Scrintal** is alive with its site now fronted by a new AI research assistant. **Craft** is healthy — 6,602 ratings — with whiteboards as one tab among five.
+
+**Alive, small, deliberately so.** **Kinopio** (*"Community-funded and built for the long-term"*; source opened 2024). **Curio** (Zengobi — **twenty years**, Mac-only, local files, one-time licence, never subscription, never VC). **Milanote** (freemium, 3,732 ratings, nine years, never pivoted). Napkin, Supernotes, Reflect.
+
+**Are.na — the survivor, and it publishes its books.** From [are.na/about](https://www.are.na/about), live: **$125,085 MRR · 41,828 monthly active · 20,516 paying members · $70/yr.** *"**We are the only social media company whose only customers are the people who use it**… We rely on no other external funding."* Expenses published: 54% salaries — **four full-time, two part-time.** Fifteen years old.
+
+### `?` THE CAUSE OF DEATH — the reasoning, in full
+
+**It is not the blank canvas, not sync cost, and not mobile. Those are symptoms. The cause is that spatial tools are general-purpose, and general-purpose tools have no distribution channel.**
+
+Here is the derivation you asked for — how the marketing fact and the user-experience fact turn out to be one fact.
+
+Wiggins states the mechanism as an economic law rather than a mistake: there is *"no specific market in the Crossing the Chasm sense of people with shared identity that talk to one another."* Why not? Because a canvas is **defined by being unopinionated about what goes on it.** That indifference is the entire value proposition — it is what lets the canvas hold your research, your move plan, your novel and your circuit diagram in one place, and it is why the people who love these tools love them.
+
+Now take the same property and stand on the other side of it. **A tool with no opinion about what goes on it cannot tell a new user what to do first.** There is no template that is right, because there is no task it is for. There is no muscle memory to inherit, because there is no prior tool it resembles — Wiggins: *"Inventing a new document type is hard… Users can't rely on muscle memory."* There is no shared identity among users, so nothing propagates by word of mouth within a trade. There is no trade press. There is no onboarding, because onboarding is the act of narrowing, and narrowing is the thing the product refuses to do.
+
+**So: the marketer's "no market with shared identity" and the user's "I opened it and stared at nothing" are the same property, described from two sides.** The blank canvas is not a UX bug that better empty-state design could fix. It is the distribution problem, experienced at the individual scale. And this is why the field's standard remedy — templates, starter boards, guided tours — never works for long: each one is a small act of narrowing bolted onto a product whose premise forbids narrowing, so it either fails to stick or, if it sticks, quietly converts the product into a vertical tool. **You cannot fix one half without destroying the other.**
+
+**Three independent confirmations:**
+
+1. **Every survivor narrowed.** Are.na narrowed to a tribe with shared identity — Wiggins' exact criterion — and it alone crossed his threshold. Milanote to creative planning. RemNote to students. Bloks to Canadian financial advisors. Craft to documents-plus.
+2. **Every death stayed general.** Muse (an "everything app," by its founder's own word), Kosmik (*"a new take on the desktop metaphor"*), Athens ("knowledge graphs"), Roam ("networked thought"). Each described itself as a **substrate**, never as a **job**.
+3. **The B2B escape hatch is closed by the same property.** A general-purpose spatial tool imposes learning cost on every seat and delivers value to one enthusiast per team. Wiggins watched it happen: the other team members *"push the problem back to the team lead, treating them as customer support."* The org chart cannot absorb a tool that is for everything.
+
+**Two mechanisms bound the outcome.** *Ceiling:* below roughly 20,000 paying users only two stable configurations exist — the **solo indie** (Allume under Wulf, Kinopio, Curio, all still shipping) and the **community-funded co-op** (Are.na). The unstable configuration is the venture-shaped team of five to fifteen — which is exactly what Muse, Athens and Kosmik each were. *Floor:* **free, bundled, OS-native.** Apple Freeform has 435,385 ratings and was still receiving OS feature work in March 2026; FigJam is free on every Figma seat; Obsidian Canvas is free. The paid independents sit at 14–334 ratings.
+
+**What is NOT the cause, stated against the folklore.** Sync and CRDT cost — *refuted by the person who paid it.* Mobile neglect — a *consequence* of the revenue ceiling, not a cause. Craft quality — refuted twice: Muse died well-built, and Kosmik used its own obituary to list technical firsts nobody bought. AI — an *accelerant*: Muse's users halved in Q1 2022, and Tang wrote his post-mortem before ChatGPT shipped. ZIRP is real and admitted, but it explains the timing, not the ceiling.
+
+`<<~ confidence 15/20 >>` on the general-purposeness thesis — resting on an explicit founder statement of mechanism, a matched quantified pair at the exact named threshold, and a clean survivor/death split along the narrow/general axis across roughly twenty-five products.
+
+`<<~ confidence 11/20 >>` on the free-bundled-default mechanism specifically. The Freeform and FigJam facts are hard, but **no primary source shows users churning from a paid canvas to Freeform.** That link is inference, and I mark it as such.
+
+---
+
+## 4. MOBILE — a genuine gap, and the record is worse than the reputation
+
+**The headline: almost nobody has tried an infinite canvas on a phone, and the most credentialed team that tried explicitly retreated — to the tablet.**
+
+### The retreat, in Muse's own words, and it was about an iPad
+
+From Muse's December 2020 memo *"Infinite canvas"* ([archived](http://web.archive.org/web/2023/https://museapp.com/memos/2020-12-infinite-canvas/)):
+
+> "our experiments have shown that this starts to break down as you add more directions of freedom. **The user quickly finds themselves disoriented, like floating in an endless white void.**"
+
+> "One solution is adding arbitrary zooming, like Figma… But this adds another layer of confusion because **there is no consistent sense of scale.** For example, if you can start drawing at an arbitrary zoom level, what happens with your ink thickness?"
+
+Their shipped compromise was **not an infinite canvas**: boards anchored top-left, sized to content, scrolling into empty space prevented, plus *"offscreen content indicators, **inspired by open-world video games**"* — that is, they reached for Halo and Wedge from game design rather than for the HCI literature. Their own conclusion: *"less 'infinite' and more 'open, two-axis expansion'."*
+
+**Muse's iPhone app is a capture inbox.** The v3.3 memo describes a rebuilt iPhone app whose entire feature list is eleven capture tools plus sync — *"capture ideas on the go,"* syncing into a workspace you open on iPad or Mac. Allume today still leads with *"**Native to iPad & Mac**"* and, in its comparison against Freeform, *"Native iPad app with native performance… not a cross-platform compromise"* ([allume.com/vs-freeform](https://allume.com/vs-freeform)).
+
+`0` **Unsettled:** the v3.5 changelog (March 2026) implies the iPhone now renders boards, but every canvas feature listed in it is qualified "on iPad" or "on Mac". **Whether Allume's iPhone app is a full canvas or a viewer could not be established.**
+
+Ink & Switch stated the split as a premise as far back as **Capstone**: *"Almost all creative professionals use a **smartphone-based note-taking app for quick capture**… their use is narrow."* The pathology they set out to fix was *phone → tablet* scaling, not desktop → phone.
+
+### The field, surveyed
+
+**Apple Freeform** is the only major spatial tool where the phone is a documented full peer — there is a complete Freeform section in the *iPhone* User Guide, and 435,385 ratings. **Concepts** is the strongest independent claim: a real vector infinite canvas on iPhone, 26,442 ratings, with marketing that inverts the norm — *"Break away from the desktop and start designing on your iPad **or iPhone**."* **Miro** splits by device class in Apple's own listing (*"On tablets, you can also…"* draw, lasso, mind-map) and now positions the phone as *"a mobile-first **presentation controller**."* **Figma/FigJam do no canvas editing on phone at all** — the app is review, comment, share, prototype, mirror. **Heptabase is blunt**: *"allows you to **read** all your whiteboards"* — read-only. **Milanote's positioning *is* the split**: *"Capture ideas & notes on mobile, then organize them visually on Milanote for desktop."* **tldraw has no phone app.** **Mural's** is a companion at 2.32★.
+
+**A caution against a false instrument, worth carrying:** the iTunes API reports Goodnotes, Concepts, Freeform, Milanote, Miro, Figma and Heptabase all as universal binaries across 45 iPhone models. **"Runs on iPhone" tells you nothing.** Only the descriptions and help documentation separate a viewer from an editor. Anyone surveying this space by app-store metadata will conclude the problem is solved.
+
+**Obsidian Canvas on mobile — the failure is specifically text-entry-on-a-plane, and it is live.** *"When editing a card in the canvas, the zoom changes to fit the card automatically when the keyboard appears… **the zoom stops working if the card is bigger than the screen**"* ([forum 82986](https://forum.obsidian.md/t/82986)); still broken on 1.10.3 in November 2025 — *"This auto-zoom re-triggers aggressively every time I attempt to move the cursor… **Simple text correction becomes impossible**"* ([107971](https://forum.obsidian.md/t/107971)); large cards uneditable on Android, marked a known issue by staff ([89977](https://forum.obsidian.md/t/89977)); zoom crashes on iOS ([82996](https://forum.obsidian.md/t/82996)); and the gestures are undocumented — *"the user is left completely in the dark re: an otherwise undiscoverable process"* ([obsidian-help#767](https://github.com/obsidianmd/obsidian-help/issues/767), open since 2024).
+
+### `!` WHAT BROKE — the engineering record
+
+**The stylus kills touch — two sources, seven years apart, same defect, no fix.**
+
+Ink & Switch, in the Capstone research, **2019**:
+
+> "**Touching the stylus to the screen sends a `pointercancel` event and no further touch input.**"
+
+tldraw, ["A touchy subject"](https://tldraw.dev/blog/a-touchy-subject), **July 2026**:
+
+> "once the pencil is touching the screen, **the OS stops sending finger events to the browser entirely**, no matter how many settings I tried to tweak… And so I had to give up on the entire API that drives touchscreen events."
+
+Their workaround exploits the fact that *"scrolling isn't handled by the DOM events system"* — an invisible scrollable div standing in for a Shift key — and their own verdict on it is *"It's slightly cursed, and I don't think it'll ship."* Excalidraw users report the same defect from the other side ([#7979](https://github.com/excalidraw/excalidraw/issues/7979)).
+
+**Seven years, three independent teams, no fix — and no WebKit bug tracking it as such.** For a house intending pen input on a canvas, this is the single hardest external constraint in the report.
+
+**The one-finger-pan problem.** Excalidraw's own poll on why people do not use it on mobile ranks this **first** ([#5652](https://github.com/excalidraw/excalidraw/issues/5652), open since 2022): you must switch tools to navigate and switch back to draw. Their touch meta-issue ([#9705](https://github.com/excalidraw/excalidraw/issues/9705)) lists *"Missing Tablet UX — Lacks… single-finger pan in drawing mode"* and *"No Gesture Framework."*
+
+**Kinopio's answer is architectural and worth stealing:** it renders the space as a real page-sized DOM element and lets the **browser's native scroller** perform one-finger pan — momentum, rubber-banding and compositor-thread scrolling all come free. Selection moves to long-press; two-finger tap is undo, three-finger redo, matching the iPad system convention.
+
+**tldraw's pinch state machine is a documented, unsolved ambiguity in shipping production code.** From `useGestureEvents.ts`:
+
+> "we keep track of a `pinchState`, which is either 'zooming', 'panning', or **'not sure'**… In the 'zooming' state, we just stay zooming—**it's not YET possible to switch back to panning.**"
+
+That is the pan/zoom gesture conflict, unresolved, in the most sophisticated canvas library on the web, shipped with a `'not sure'` state and a TODO. Both tldraw and Excalidraw additionally hand-redeclare Safari's proprietary `GestureEvent`, which MDN records as **`standard_track: false`, never added in Chrome or Firefox.**
+
+**`touch-action` has holes.** Supported in iOS Safari since 9.3, but **`pan-left` / `pan-right` / `pan-up` / `pan-down` are `version_added: false` in Safari and Firefox** — directional constraint is Chromium-only. MDN's own caveat: changes *"don't affect gestures already in progress."*
+
+Open WebKit bugs that bite canvases, **all status NEW**: [238543](https://bugs.webkit.org/show_bug.cgi?id=238543) (disabling pinch-zoom does not disable multi-finger scroll); [252665](https://bugs.webkit.org/show_bug.cgi?id=252665) (**`touch-action` does not apply if the element has overflow properties**); [240917](https://bugs.webkit.org/show_bug.cgi?id=240917) (**`pointercancel` not dispatched with `touch-action: manipulation`**); [184251](https://bugs.webkit.org/show_bug.cgi?id=184251); [204201](https://bugs.webkit.org/show_bug.cgi?id=204201); [256157](https://bugs.webkit.org/show_bug.cgi?id=256157) (pinch broken in Figma on open-source builds, REOPENED).
+
+**An instrument-lie worth carrying to your own gates:** Excalidraw ships `user-scalable=no, maximum-scale=1` in its viewport meta tag — and **MDN records that iOS 10 and later ignore both by default.** The suppression that actually works is `touch-action: none` on the canvas element. **The meta tag is a no-op that reads as a control.** Anyone auditing a canvas for gesture handling by grepping the viewport tag will find a guard that is not there.
+
+**`pointercancel` is broken in shipping canvases, twice over.** tldraw [#10394](https://github.com/tldraw/tldraw/issues/10394): *"The canvas listens for pointer down, move, up, enter, and leave, but **not for the browser's `pointercancel`**. When the browser cancels a gesture, no `pointer_up` ever arrives, so the gesture in progress stays alive: a drag keeps its snapshot, a stroke stays open."* And [#10285](https://github.com/tldraw/tldraw/issues/10285) — a Safari pencil double-tap suppression that **has never once run since the file was added**, because it tests `e instanceof PointerEvent` inside a `touchstart` handler. Two clean specimens of the pattern your own canon names: **a guard that reads as present and is absent.**
+
+**Overscroll:** `overscroll-behavior` reached Safari 16 but is marked **partial** (`chain` is `false`), and **WebKit [240183](https://bugs.webkit.org/show_bug.cgi?id=240183), "`overscroll-behavior-x: contain` does not disable history navigation," is still NEW.** The iOS edge-swipe-back gesture remains a live hazard on any horizontally-panned canvas.
+
+### The tiny-viewport problem — the literature answers it, and the answer is uncomfortable
+
+**Furnas & Bederson, "Space-Scale Diagrams," CHI'95** ([doi:10.1145/223904.223934](https://doi.org/10.1145/223904.223934), [author reprint](https://furnas.people.si.umich.edu/Papers/SSD.reprint.pdf)) gives the quantitative result. Pan cost `dβ`; zoom cost **`βw·log(r)`**; *"a constant (w) relating them that is **exactly the window size**"*; and *"to traverse separations of less than **1 to 3 window widths**, the… movie is informationally shorter if it is just a pan."*
+
+On a phone, one window width is a few centimetres of canvas. **So almost every traversal that a desktop user would pan falls, on a phone, on the zoom side of the crossover.** The pan/zoom balance is not a matter of taste; it is a function of viewport size, and the phone sits on the far side of it.
+
+`0` *Caveat, stated plainly: the 1995 paper never mentions handhelds. The `w`-dependence is theirs; the phone application is my derivation from it.*
+
+**The minimap is a desktop result that does not transfer.** On the desktop (Hornbæk, Bederson & Plaisant, [TOCHI 2002](https://doi.org/10.1145/586081.586086)): 80% of users *preferred* the overview but were *faster without it* on one of the maps — and the authors conjecture the reason was that that map's **semantic zooming** made the overview unnecessary. **Hold that conjecture; §5 and the stall-scoring both turn on it.**
+
+On a small screen, tested directly (Büring, Gerken & Reiterer, [AVI 2006](https://doi.org/10.1145/1133265.1133310), 24 participants, PDA):
+
+> "**In contrast to similar studies for desktop applications, there was no significant difference in user preference**… participants solved search tasks **faster without the overview**. This indicates that, on small screens, **a larger detail view can outweigh the benefits gained from an overview window.**"
+
+The minimap loses twice on a phone: it costs time *and* buys no preference.
+
+On semantic zoom versus fisheye on a small screen ([InfoVis 2006](https://kops.uni-konstanz.de/handle/123456789/6065)): no time difference, but **20 of 24 participants preferred fisheye** — *"users place higher value on the ability to **preserve navigational context**."* There is a full [2007 Konstanz doctoral thesis](https://kops.uni-konstanz.de/handle/123456789/6072) on this, and its overview+detail build **failed to raise satisfaction and cost time.**
+
+**The one serious attempt at a ZUI as the phone shell lost — with a confound the authors admit.** Karlson, Bederson & SanGiovanni, [AppLens and LaunchTile, CHI 2005](https://www.cs.umd.edu/hcil/piccolo/learn/papers/chi-applens-launchtile.pdf): *"Most users favored AppLens's tabular fisheye interface"* over the pure zoom-and-pan LaunchTile — but the authors note that LaunchTile suffered *"the performance limitations of the target hardware, which **noticeably impacted LaunchTile zooming quality**."* **A navigation study contaminated by frame rate.** The most-cited negative result about zooming interfaces on handhelds may be a measurement of 2005 silicon.
+
+**Shipping tools disagree completely, with no comparative evidence between them.** tldraw: `DefaultNavigationPanel` returns `null` below 580 px and the minimap renders only at ≥840 px — **no phone in portrait gets either.** Excalidraw: **zero occurrences of "minimap" anywhere in the repository**; the affordance is a button labelled *"Scroll back to content."* Kinopio: a **transient** minimap bound to the gesture — visible only while panning, growing 120→200 px — which sidesteps the Büring result by charging detail area only during the pan itself. Apple Freeform: **named saved viewports ("Scenes")** instead of a minimap — and Apple states the viewport-size problem in its own documentation: *"**A scene may appear differently for you if you're using a different device**… if someone captured a scene on a Mac, it may be framed differently when you view it on an iPhone in portrait."*
+
+**`0` And nobody has re-run any of this on a modern phone.** DBLP: `focus context small screen` returns **one** hit, from 2007. `focus+context smartphone` returns **zero**. Multiscale-navigation research from 2024–26 migrated to VR headsets. **No source found for a minimap or radar view ever evaluated on a phone canvas.** Every small-screen finding above comes from a stylus PDA predating capacitive multitouch, and at least one is frame-rate-contaminated. **The field did not settle this question; it abandoned it.**
+
+### Text entry on a plane — the least-solved of the five
+
+The mechanism is stated in tldraw's own production code, `visual-viewport.ts`:
+
+> "**The software keyboard (and pinch-zoom) shrink [the visual viewport] while leaving the layout viewport — and CSS `dvh` — unchanged, most notably on iOS.**"
+
+and
+
+> "on iOS this is non-zero while the keyboard is open, and dropping it misplaces anything measured against it."
+
+The API surface is thin and Safari-shaped: `VisualViewport` since Safari 13, but the **`VirtualKeyboard` API is Chromium-only — `version_added: false` in Safari — and WebKit [230225](https://bugs.webkit.org/show_bug.cgi?id=230225) is NEW.**
+
+Every ingredient of the Obsidian complaint is an open WebKit bug: [191185](https://bugs.webkit.org/show_bug.cgi?id=191185) *"**Viewport is not scrolled to the selection on typing in contentEditable**"*; [218983](https://bugs.webkit.org/show_bug.cgi?id=218983) *"`visualViewport.height` unreliable **in standalone PWA mode**"*; [218465](https://bugs.webkit.org/show_bug.cgi?id=218465) *"scroll events fire only when scrolling finishes"* — so you cannot track the keyboard's animation; [240860](https://bugs.webkit.org/show_bug.cgi?id=240860) — the keyboard **reintroduces page scrolling you believed you had disabled.**
+
+IME: [25119](https://bugs.webkit.org/show_bug.cgi?id=25119) *"IME modifies the DOM before keydown"*, open since **2009**; [265674](https://bugs.webkit.org/show_bug.cgi?id=265674) — programmatic caret movement desynchronises predictive text. CodeMirror and ProseMirror both carry matching scar tissue.
+
+**The 16px trap**, carried as a comment in Kinopio's stylesheet: `font-size 1em // required to disable ios input zooming`. Focus an input below 16px and **the camera moves because you touched a text field** — which is precisely the Obsidian complaint, arriving from a different direction. `0` **No primary Apple or WebKit source found for this rule**; it exists only as shipped practice across many codebases.
+
+### What native does that web structurally cannot
+
+**Frame rate is the real moat — and it is worse for embedded and installed web than for Safari itself.**
+
+WebKit [173434](https://bugs.webkit.org/show_bug.cgi?id=173434), *"Support for 120Hz requestAnimationFrame"* — filed **2017, still NEW, last touched May 2026.** iPhone only received it in iOS 18, and only with the *"Prefer Page Rendering Updates Near 60fps"* setting **OFF** — which is **ON by default** — and, critically, **"PWAs only run on system default flags."**
+
+WebKit [294338](https://bugs.webkit.org/show_bug.cgi?id=294338), *"Allow WKWebView to Support 120Hz"* — NEW, last touched August 2026 — carries a comment from **Ivan Reese of Ink & Switch**, December 2025:
+
+> "At Ink & Switch, we're researching novel interfaces for notebook apps using the iPad Pro and Pencil Pro… **The 60Hz refresh rate meaningfully degrades the quality of experience when writing and drawing with the Pencil, compared to 120Hz.**"
+
+And from the same thread: *"native apps got `preferredFrameRateRange` in iOS 15, Android WebView has a public API for it, and Safari runs accelerated CSS animations at full refresh rate. **Embedded web content is the one place with no option at all.**"*
+
+**Canvas caps, enforced in WebKit source.** `CanvasBase.cpp`: **maximum canvas area is `8192×8192` on iOS against `16384×16384` elsewhere** — at 3× device pixel ratio that is only about 2730×2730 CSS pixels of backing store, a direct constraint on any tiled-offscreen-canvas architecture. Total canvas memory caps at roughly 256 MB (WebKit [190280](https://bugs.webkit.org/show_bug.cgi?id=190280), NEW since 2018, filed by a team doing exactly this work); jetsam bugs remain open in 2026 ([312727](https://bugs.webkit.org/show_bug.cgi?id=312727): *"works fine in Chrome and Firefox, even on very memory limited devices"*).
+
+**One piece of good news against the folklore:** the *stylus data* gap has largely closed. `getCoalescedEvents()` and `getPredictedEvents()` landed in **Safari 18.2**; `OffscreenCanvas` in 16.4; **WebGPU shipped in Safari 26.** What native still holds uncontested: **PencilKit** low-latency capture; **`UIPencilInteraction`** double-tap and Pencil Pro **squeeze** — the web cannot observe these at all, which means a free tool-switch gesture that a web canvas must instead pay for in screen area; and `UIGestureRecognizer` with delegate-controlled simultaneity, which is the framework Excalidraw's meta-issue says it lacks.
+
+**Ink & Switch's own verdict on the stack**, from Capstone: *"web technologies were a questionable fit for the type of continuous transitions (for example, zoom in and out) we wanted to implement… **Overall, the web stack did not serve our needs for this application.**"*
+
+**`0` No measured native-versus-web infinite-canvas benchmark on a phone exists.** The best qualitative account is [mobile-ink](https://github.com/mathnotes-app/mobile-ink), open-sourced in 2026 (React Native with native Skia/Metal): *"There is still **no strong open-source answer** for the kind of drawing surface a serious mobile notes app needs"* — with a companion writeup titled *"Four Engines in Nine Months."* Three drawing stacks failed before the fourth worked.
+
+### Is there any credible mobile-first spatial tool?
+
+**Essentially no. `0`** The two best phone canvases reached that state by other routes. **Concepts** is tablet-first with genuine phone parity. **Freeform** is OS-bundled, and Apple reserves the Pencil for iPad. **Kinopio** is the most interesting case — not phone-first in origin but *touch-first*: *"because Kinopio was designed to be touch friendly from the beginning it already worked well on mobile Safari,"* so its iOS app is a WKWebView shell with a postMessage bridge, and its author develops on an **iPhone 12 mini**.
+
+Non-Western: Heptabase (Taiwan) makes whiteboards read-only; Boardmix (China) ships desktop only; **no source found** for any Japanese, Indian or South-East Asian mobile-first spatial entrant. Historical precedent: FiftyThree shipped ***"Think — Fast mobile whiteboarding"*** in 2015; **it is gone.**
+
+**No source found for any spatial tool whose makers say "we designed for the phone first."** Everyone builds desktop and shrinks it, and the two exceptions got there by being touch-first or OS-native rather than by intent.
+
+### PWA on iOS, 2026 — and **the correction to held canon**
+
+Apple removed EU home-screen web apps in February 2024, citing *"**the very low user adoption of Home Screen web apps**,"* then reversed in March — but one consequence of that episode survived, and it is stated on Apple's own developer page: *"Home Screen web apps **continue to be built directly on WebKit**"* ([Wayback capture of Apple's DMA page](http://web.archive.org/web/20240315000000/https://developer.apple.com/support/dma-and-apps-in-the-eu/)). **No alternative browser engine has shipped.** Open Web Advocacy, May 2026: *"**not a single browser vendor has successfully ported their own engine to iOS in the EU**… Over 26 months later, the practical outcome remains unchanged."*
+
+Gaps for a canvas PWA: 120 Hz **unavailable**; install prompt, Background Sync, File System Access, `ScreenOrientation.lock()` and VirtualKeyboard all `false`; notifications partial.
+
+---
+
+**THE CORRECTION YOU ASKED FOR — the Safari 7-day storage wipe.**
+
+Our memory holds *"Safari wipes at 7 days"* as a flat constraint on browser key custody. **That is true of Safari tabs and false of installed web apps, and WebKit says so in the same post that announced the policy.**
+
+**Source: WebKit Blog, "Full Third-Party Cookie Blocking and More," 24 March 2020 — [webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/](https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/)**
+
+The post introduces the seven-day cap on all script-writable storage (LocalStorage, IndexedDB, Service Worker registrations, Cache API, and so on) after seven days of no *Safari* user interaction with the site. It then carves out installed web apps explicitly:
+
+> "**Web applications added to the home screen are not part of Safari** and thus have their own counter of days of use. Their days of use will match actual use of the web application which resets the timer. **We do not expect the first-party in such a web application to have its website data deleted.**"
+
+and adds, in the same passage:
+
+> "**If your web application does experience website data deletion, please let us know since we would consider it a serious bug.**"
+
+**Three things follow for the house.**
+
+1. The wipe is scoped to **Safari-tab usage**, and the counter for an installed app is its **own** usage counter, reset by actually opening the app.
+2. WebKit's stated *expectation* is **no deletion** for the first-party origin of an installed web app, and a deletion would be **a bug they want reported** — not a policy you must design around.
+3. Therefore **the install step is an argument in favour of a local-first canvas on iOS, not against it.** A key or replica held in IndexedDB inside an installed web app is not on the seven-day clock that a key in a Safari tab is on.
+
+**Two honest qualifications, because this is going into canon `0`:** first, WebKit writes *"we do not expect"* — an expectation about implementation behaviour, not a contractual guarantee, and it is not an undertaking that data survives storage pressure, an OS-level eviction, or the user deleting the app. Second, the related bug [218983](https://bugs.webkit.org/show_bug.cgi?id=218983) shows that **standalone PWA mode has its own distinct defects** in adjacent APIs, so "installed" is a different regime rather than a strictly safer one on every axis. The correction to make in memory is narrow and exact: *the seven-day script-writable-storage wipe applies to Safari browsing, and installed home-screen web apps are explicitly outside it.*
+
+---
+
+## 5. UNCLAIMED GROUND — where the writing points and no shipped artifact reaches
+
+Six pieces of ground. Each is *articulated* in a primary source and *unbuilt* in every shipped product I examined.
+
+### ① The spatial parser — implicit structure promoted to explicit, on demand
+
+**Articulated by:** Shipman & Marshall, ACM Computing Surveys overview, [full text](https://people.engr.tamu.edu/shipman/spatialhypertext.html); built once, in **VIKI**, in the 1990s.
+
+**What it is:** the system reads the *arrangement* — proximity, alignment, colour, border weight — and recognises perceptual structures in it: *"patterns such as vertical and horizontal lists, stacks, and composites."* Those recognised structures then become navigable objects in their own right, and — the crucial half — they **"support the transition of these implicit structures into explicit hypertext."** The user never draws a link; the user arranges, and the system offers to formalise what the arrangement already means.
+
+**Why nobody has shipped it.** The behavioural premise is well established and undisputed: *"Users avoided the explicit linking mechanisms in favor of the more implicit expression of relationships through spatial proximity and visual attributes."* Every shipped canvas today nevertheless makes you draw an arrow — an explicit link — or accept nothing. The reason is structural rather than a failure of imagination: a parser that turns arrangement into semantic structure needs *somewhere to put the result*, which means a document model richer than shapes. A canvas that stores geometry has nothing to promote *into*. **You cannot build a spatial parser on top of a shape store.** Note that this is the same constraint that made Logseq cut Whiteboards when forced to choose.
+
+**Why the house can:** the parser's output is a *proposed tiddler relation* — versioned in the CRDT, attributable, and rejectable. In VIKI the promotion was a destructive edit; here it is a change you can decline or undo. That is a strictly better version of the 1990s mechanism, available because of the store rather than in spite of it.
+
+### ② Constructive ambiguity as a first-class state
+
+**Articulated by:** the same paper, as the second of four benefits.
+
+> "Where a link in a document-centered hypertext either exists or does not in a particular presentation of the material, **placement of a node close but not quite with others can imply some indecision or potential for a relation** between the nodes. Allowing people to express ambiguity more easily enables them to perform tasks such as analysis or design **where interpretations form as they work with the materials.**"
+
+**Why nobody has shipped it:** no shipped tool has any representation for *maybe-related*. Every relation is an edge or no edge. This is a data-model refusal, not an interface oversight — a boolean edge cannot hold a hedge, and the entire graph-database framing that "tools for thought" adopted after Roam makes the boolean edge the atom. **`?` A house whose relations are wiki-native rather than graph-native is not forced into that atom.**
+
+### ③ Emergent, user-authored visual languages the system does not fix in advance
+
+**Articulated by:** the same paper, third benefit.
+
+> "visual languages emerge as users' understanding of the task and their method of approaching the task **co-evolved**… color might start off indicating the usefulness of a document but later be used to encode domain-specific characteristics of the content… **Aquanet and other systems with predefined types and relations make the overhead for making such changes in mid-task overwhelming and very unlikely to occur.**"
+
+**Why it matters here:** this is Engelbart's co-evolution and Kay's *"any owner could mold it,"* restated as a concrete interface requirement with an empirical study behind it — and it is unbuilt. It is also the direct HCI ancestor of Ink & Switch's incremental-formalization line, **and of your own held law, DERIVE, don't enumerate** — a hand-set vocabulary inverts the very fact it was meant to capture. Shipman & Marshall measured that inversion in 1995 and named the system it killed.
+
+**The trap, stated as a warning:** Aquanet is the cautionary case, and it is *the immediately preceding system by the same researchers.* If you ship a fixed vocabulary of spatial relation types, you have rebuilt Aquanet — which is the system VIKI was invented to escape.
+
+### ④ Formality on a slope, never a cliff
+
+**Articulated by:** Shipman & Marshall, ***Formality Considered Harmful***, CSCW Journal 8(4), 1999, [doi:10.1023/A:1008716330212](https://doi.org/10.1023/A:1008716330212) — full text unobtainable, as noted in §2. The programme name, confirmed from Shipman's own biography, is **incremental formalization**: *"support for the transition of human-oriented content to machine-usable content via incremental formalization."*
+
+**Restated twenty-six years later without the citation**, by Ink & Switch in [Malleable Software](https://www.inkandswitch.com/essay/malleable-software/) (June 2025): current approaches to modification — settings, plugins, open source — all contain *"**vertical cliffs**"* requiring sudden jumps in skill.
+
+**Why nobody has shipped it:** because it requires the system to hold unformalised material *without penalty* for an indefinite period, and most architectures make the informal case the degraded case. **Your Graceful Parsing law already states the requirement** — *no parse breaks badly; augment and wrap* — which means the precondition is met before the feature is attempted.
+
+### ⑤ A shared data substrate across tools — named as the gap by the lab best positioned to close it
+
+**Articulated by:** Litt, Horowitz, van Hardenberg & Matthews, [Malleable Software](https://www.inkandswitch.com/essay/malleable-software/), June 2025.
+
+The thesis: *"**Instead, we got appliances: built far away, sealed, unchangeable.** When your tools don't work the way you need them to, you submit feedback and hope for the best."* The aim: *"tools that users can reshape with minimal friction to suit their unique needs. **Modification becomes routine, not exceptional.**"*
+
+The specific gaps they name:
+
+- **Shared substrate:** *"When each application manages its own data in a private silo… **this fragmentation impedes malleability**."*
+- **Composition over monoliths** — the avocado-slicer metaphor: *"many applications are **avocado slicers**… bundled functionality targeted at some specific use case"* against knife-like general tools.
+- **In-place editability:** *"**Software doesn't ship to users with the tools to edit the software.**"* Most modification requires leaving the application entirely.
+- **Gentle slopes:** the *"vertical cliffs"* of ④.
+
+Their open questions are, verbatim in substance, yours: reconciling privacy and security with extensibility; sustainable business models for composable tools; culturally cultivating user agency. And their closing address is to builders: *"If you make software products, consider how you might empower your users to take matters more into their own hands, rather than dictating every decision."*
+
+**`_` Why this is the ground you are already standing on:** a wiki in which every artifact is a tiddler and every tiddler is addressable **is** the shared substrate they describe as missing. They cannot ship it because they must answer for arbitrary applications; the funded products cannot ship it because each of them *is* an avocado slicer with a data silo. The reason nobody has it is that everybody else has an app.
+
+### ⑥ The four unmet local-first ideals — and the 2019 open problems are still the 2026 open problems
+
+**Articulated by:** Kleppmann, Wiggins, van Hardenberg & McGranaghan, [Local-first software: you own your data, in spite of the cloud](https://www.inkandswitch.com/essay/local-first/), 2019.
+
+The seven ideals, verbatim: **1. No spinners: your work at your fingertips. 2. Your work is not trapped on one device. 3. The network is optional. 4. Seamless collaboration with your colleagues. 5. The Long Now. 6. Security and privacy by default. 7. You retain ultimate ownership and control.**
+
+Their scorecard: no existing solution satisfies all seven. Of web apps — *"the data on the server is what counts, and any data on your client device is unimportant — **it is merely a cache**."* Of file sync — *"The weakest point of file sync products is the lack of real-time collaboration."* Of Git — *"perhaps the closest thing we have to a true local-first software package,"* yet lacking *"real-time, fine-grained collaboration, such as the automatic, instantaneous merging that occurs in tools like Google Docs."*
+
+Their conclusion: *"**it is too hard to build collaborative software that respects users' ownership and agency.**"* Their call to researchers names three things: **branching models, schema compatibility, and how to communicate online and offline states.** Their call to entrepreneurs asks for *"Firebase for CRDTs."*
+
+**Seven years on, Ink & Switch's own live notebooks are working on exactly those three** — Patchwork (universal version control, latest entry *Progressions*, May 2026), Keyhive (local-first access control), Livelymerge (shared object memory, self-described results *"mixed"*) — and Jonathan Edwards is arriving at the same problem from programming languages with *"Baseline: Operation-Based Evolution and Versioning of Data"* (December 2025, [alarmingdevelopment.org](https://alarmingdevelopment.org/)). **The 2019 open problems are the 2026 open problems.**
+
+---
+
+**`_` The asymmetry, stated plainly.** The funded products structurally cannot reach ①–④, because reaching them requires a semantic layer to promote arrangement *into*, and a semantic layer is exactly what gets cut when a product has to choose (Logseq, April 2026). A house with a real semantic layer already in the store, no legacy users, and no App Store review cycle can attempt ①–④ **as properties of the store rather than as products.** That is the genuinely unclaimed ground, and it is unclaimed for structural reasons rather than by accident.
+
+---
+
+## 6. THE ECONOMICS
+
+**The shapes that survived, with their numbers.**
+
+- **Community-funded co-op.** Are.na, live figures from [are.na/about](https://www.are.na/about): **$125,085 MRR · 41,828 monthly active · 20,516 paying members · $70/yr** — roughly **$1.5M ARR** — with **four full-time and two part-time** staff, 54% of expenses being salaries, the whole P&L published, and *"We rely on no other external funding."* Fifteen years old.
+- **User-supported freemium with paid services.** Obsidian ([obsidian.md/pricing](https://obsidian.md/pricing)): the app free, *"No sign-up required. No strings attached,"* local storage, no telemetry; **Sync ~$4–5/month, Publish ~$8–10/month, Catalyst $25 one-time, commercial licence $50/user/year**; and an explicit stance — *"100% user-supported,"* the Catalyst programme *"vital to keeping Obsidian 100% user-supported, free from investor influence,"* never selling user data, no venture capital.
+- **Solo indie on a one-time licence.** Curio (Zengobi): twenty years, Mac-only, local files, never a subscription, never VC. Allume under Adam Wulf is now this shape. Kinopio is a hybrid — *"Community-funded and built for the long-term."*
+- **Bundled into a larger seat.** FigJam, free on every Figma plan, no tier of its own.
+- **OS-native and free.** Apple Freeform, 435,385 ratings, still receiving OS feature work in March 2026.
+
+**The shape that did not survive: venture-funded prosumer subscription at a team size of five to fifteen.** Muse ($2M raised, seven people, $120k ARR). Athens ($850k, dead). Kosmik (eight years, sunset with no reason given).
+
+**Wiggins' threshold, and the only company that cleared it.** He states it as a rule of the category: *"You need **tens of thousands, hundreds of thousands**, to make the cost of development sustainable"* — and, of his own position, *"120k ARR is a one-person business, not a team effort."*
+
+Set the two side by side and the economics of the field resolve into a single line. **Are.na does roughly $1.5M ARR with 20,516 paying members and six people, and calls it sustainable. Muse did $120k ARR with a few thousand customers and seven people, and its founder called it a one-person business.** Wiggins named the threshold as *tens of thousands*; **Are.na is the one company in this survey that reached exactly that number** — and it reached it by narrowing to a group with shared identity, which is the same criterion he says the category otherwise lacks. The threshold and the cause of death are the same finding stated in two currencies.
+
+**Licensing for a sovereign, self-hosted, forkable deployment** — verified from repository LICENSE files directly in this pass, not from page summaries: **Automerge MIT** (2019–2021 Automerge contributors), **Yjs MIT**, **JSON Canvas MIT** (Obsidian.md, 2024), **Folk Apache-2.0**, **Boxer Sunrise BSD**. All clean for forking and redistribution.
+
+*(Canvas library licences proper belong to Cartwright's shelf. One line only, because it bears on strategy rather than selection: JSON Canvas is the only interoperability format on offer, it is MIT, and it is frozen at 1.0 with two-year-old spec proposals unanswered — so treat it as an **export target**, never as a dependency.)*
+
+---
+
+## WHAT THE FIELD IS STUCK ON
+
+Five stalls. For each: the stall, the evidence it is real, and my reasoning for structural-win versus merely-differently. **The three "merely differently" verdicts are not softened.**
+
+---
+
+### ① The general-purpose distribution trap
+
+**The stall.** A spatial tool's value is that it is unopinionated about its contents; that same property denies it a market with shared identity, an onboarding path, and a retention mechanism.
+
+**Evidence it is real.** Wiggins names the mechanism explicitly — *"no specific market (in the Crossing the Chasm sense of people with shared identity that talk to one another)"* — and the mechanism predicts the entire dataset without exception: every survivor narrowed (Are.na to a tribe, Milanote to creative planning, RemNote to students, Bloks to Canadian advisors), every death stayed a substrate (Muse's "everything app", Kosmik's "new take on the desktop metaphor", Athens' "knowledge graphs", Roam's "networked thought"). The B2B hatch fails on the non-buyer's learning cost, observed and recorded. And Muse's own users had already tried Miro, FigJam, Freeform and Whimsical — *"none of them solved the problem long-term"* — so the failure is not competitive displacement; it is the category.
+
+**Verdict: MERELY DIFFERENTLY — and this is the one that should worry you most.**
+
+The reasoning, unsoftened. You are not selling, so the *monetisation* half of the trap does not bind: there is no ARR threshold you must clear, no seat you must justify, no churn cohort. **But the blank-canvas half is the same property seen from the user's side, and it binds identically on a tool with exactly one user.** A canvas that has no opinion about what goes on it cannot tell *you* what to do when you open it on a Tuesday, and "I built it myself" confers no immunity — the tools in this graveyard were built by people who wanted them and used them daily right up until they did not. Muse's users halved in a quarter and its founder cannot say why; nothing about sovereignty would have changed that number.
+
+**Your actual escape is not sovereignty — it is that the wiki gives the canvas a prior.** The tiddlers already exist, already carry relations, and a camera opened over them opens onto *something* rather than onto void. That is a real and unusual advantage, and it is contingent: **if the surface can ever be opened empty, you have re-bought Muse's problem with none of Muse's funding.** The design rule that follows is that the canvas must never be a place you *create* into from nothing; it must be a view that is *already populated* by the store, and any mode that produces an empty plane is the failure mode of the entire category arriving by the front door.
+
+---
+
+### ② Mobile infinite canvas is unsolved, and the web platform is actively hostile to it
+
+**The stall.** The stylus suppresses touch entirely, and has for seven years across three teams with no fix and no bug tracking it. Pan/zoom disambiguation ships as a literal `'not sure'` state in the most sophisticated canvas library on the web. `pointercancel` is both unhandled by canvases and inconsistently dispatched by WebKit. `touch-action` has Safari-shaped holes and does not apply at all to elements with overflow. 120 Hz is unavailable to embedded and installed web content, with an Ink & Switch researcher on the bug thread saying exactly that. iOS caps canvas area at 8192² against 16384² elsewhere.
+
+**Evidence it is real.** Two independent primary sources seven years apart on the stylus defect (Ink & Switch 2019, tldraw July 2026), the second concluding *"I had to give up on the entire API that drives touchscreen events"* with a workaround its own author calls *"slightly cursed."* Nine open WebKit bugs, all NEW, several filed by teams building precisely this. Excalidraw's own user poll ranking one-finger pan as the top blocker, open since 2022. Six live Obsidian forum threads on canvas text entry. tldraw's production source comments stating each mechanism in its own words.
+
+**Verdict: MERELY DIFFERENTLY, and in one respect worse.**
+
+The reasoning, unsoftened. **A CRDT does nothing for a gesture.** Not one of the defects above is touched by having a good store. Two of your laws do help, and I will not overstate them: *no VM on the main thread* keeps the main thread free for pointer handling, which is exactly the discipline the `mobile-ink` author had to discover across four engines in nine months; and *never rasterise* means the semantic layer survives a re-layout at a new zoom, which is the correct substrate for semantic zoom. Both are real.
+
+But **the stylus/touch suppression, the 120 Hz denial, and the `visualViewport` keyboard displacement are Apple's, and no architecture of yours reaches them.** The 120 Hz item is the sharpest: it is worse for you specifically, because the two deployment shapes a sovereign house would choose — an installed PWA and a WKWebView shell — are the *two* shapes explicitly denied the fix, while plain Safari got it in iOS 18. **You are positioned to build the correct mobile canvas and structurally prevented from making it feel native on iOS.** Honest framing: on mobile you will be better than the web competition and visibly worse than Freeform and Concepts, and no amount of correct architecture closes that gap.
+
+---
+
+### ③ Nobody knows how to navigate a large plane on a small viewport, and the field stopped asking in 2008
+
+**The stall.** The transferable result — navigation cost scales in **window widths** (Furnas & Bederson), and on small screens the overview loses twice (Büring et al.: *faster without it*, and no preference gain) — was measured on stylus PDAs before capacitive multitouch, once with frame rate as an admitted confound. Shipping tools disagree completely with zero comparative evidence: tldraw hides all navigation UI below 580–840 px, Excalidraw has no minimap at all, Kinopio shows one only during the pan, Freeform replaces it with named scenes.
+
+**Evidence it is real.** DBLP returns **zero** hits for focus+context on smartphones and **one** for small screens, dated 2007; multiscale-navigation research from 2024–26 migrated to VR headsets. The four shipping answers are mutually incompatible and none cites evidence. The single ZUI-as-phone-shell study admits its own hardware confound.
+
+**Verdict: STRUCTURALLY POSITIONED — the only unambiguous win in the five.**
+
+The reasoning. Hornbæk, Bederson & Plaisant offer their own explanation for the one condition in which the overview became unnecessary: **that map had semantic zoom.** Semantic zoom means the level of detail is chosen by *meaning* rather than by scale — the object decides what to show at each magnification because the system knows what the object is. That requires a semantic layer. **A rasterising canvas cannot do it, not for want of the idea but because it holds pixels or shapes and has nothing to ask.**
+
+A tiddler can render as a title at one zoom, a summary at the next, and full text at the last, **because the store knows what it is.** That is Sutherland's *"the computer 'knows' that a 'transistor' is intended at that place"* cashed out as a navigation affordance, sixty-three years later, on a phone. And per the literature it is also the thing that makes the minimap unnecessary — which happens to be the one affordance the field cannot agree how to build and has not evaluated on a phone at all.
+
+This is your strongest position in the report, and I will note the caveat that keeps it honest: **nobody has tested semantic zoom on a phone either.** You would be first, on ground the literature points at rather than ground it has surveyed. That is still a structural position — you can attempt it and they cannot — but it is an untested one.
+
+---
+
+### ④ Structure must be optional, gradual, and never demanded up front — and no shipped tool does this
+
+**The stall.** Users express relations by proximity and refuse explicit linking; predefined type vocabularies make mid-task revision *"overwhelming and very unlikely to occur"*; the formality problem was named in 1999 and restated as *"vertical cliffs"* in 2025 without resolution.
+
+**Evidence it is real.** The behavioural finding is measured and replicated across map-based systems, traditional hypertext, and physical paper (Shipman & Marshall). The system that solved it — VIKI's spatial parser — was built and then not rebuilt by anyone for thirty years. The field that owned the question held four workshops (2001–2004), stopped, and its founder now publishes on children's storytelling with a publications page last updated in 2015. Ink & Switch restated the same gap in June 2025 without the citation, which is itself evidence that the finding was lost rather than superseded.
+
+**Verdict: STRUCTURALLY POSITIONED, conditionally.**
+
+The reasoning. The condition is that your grammar must hold **unformalised** material without penalty — and your Graceful Parsing law already states that requirement (*no parse breaks badly; augment and wrap*), so the precondition is met rather than aspirational. Add the CRDT and you get something VIKI could not have had: **promotion from implicit to explicit as a versioned, attributable, reversible operation** rather than a destructive edit. In VIKI, formalising was a commitment; here it can be a proposal with an undo. That is items ① and ② of §5, and both are buildable now.
+
+**The condition is a real one and I will name the failure mode rather than bury it:** your own held memory records the recurring shape — *a hand-written enumeration cannot notice what it missed*, six times. Shipman & Marshall measured the same law thirty years ago and named the system it killed. **If you ship a fixed vocabulary of spatial relation types, you have rebuilt Aquanet** — the system VIKI existed to escape. The verdict is a win only for as long as the vocabulary stays derived rather than enumerated.
+
+---
+
+### ⑤ The 2019 local-first open problems are still open at the lab that named them
+
+**The stall.** Branching and merge models, schema compatibility across versions, and communicating online/offline state were the 2019 calls to researchers. In 2026 they are still the active work.
+
+**Evidence it is real.** Ink & Switch's own live notebooks are Patchwork (universal version control, May 2026), Keyhive (offline-capable access control), Livelymerge (shared object memory, **results self-described as "mixed"**, with Dan Ingalls on it), and Jacquard. Jonathan Edwards and Tomas Petricek arrived at operation-based data versioning from the programming-languages side in December 2025. Four groups, one problem, no general answer. The 2019 essay's own conclusion — *"it is too hard to build collaborative software that respects users' ownership and agency"* — has not been retracted.
+
+**Verdict: MERELY DIFFERENTLY, but usefully so.**
+
+The reasoning, unsoftened. **You will not solve schema evolution or fine-grained rich-text merge that four labs with better people and more time have not solved.** Nothing about your position gives you leverage on the general problem, and any expectation otherwise should be discarded now.
+
+What you have that they do not is **a constrained problem**. They must answer for arbitrary applications, arbitrary schemas, arbitrary collaboration topologies. You must answer for one document model, in one house, with two peer replicas and no authority relation between them. **Ink & Switch's generality is precisely what keeps Livelymerge at "mixed."** A narrower problem is not a better research position, but it is a tractable engineering one.
+
+The specific and checkable overlap is **Keyhive**: they are building, in the open, exactly the offline-capable capability layer your face-join and plane laws describe, and their *"least surprise" principle for concurrent permission changes* is a live design question on which you have independently ruled. **The pragmatic reading: you are not positioned to lead here. You are positioned to be the first real deployment of what they publish** — and to feed back the one thing a research lab structurally cannot generate, which is a house that has to actually run every day.
+
+---
+
+### The single fact I most wanted and could not get
+
+Wiggins: *"To this date it remains a mystery why we had solid growth for nearly two years after the initial launch, followed by a decline."*
+
+**Muse's active users halved in Q1 2022, and the founder closest to it says plainly that he does not know why.** Nobody in this corpus has explained it — not him, not a competitor, not a researcher. If there is one unanswered question in the tools-for-thought graveyard, that is it. Any house building a canvas is building toward that unexplained cliff without a map of it. `0`
+````
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;puQI-Oj6kyQrt0J7Z_1TToalmWk8ZyTeUxGfNPePvFA
+
+<<^ code="&#x0004;" -> to=? >>

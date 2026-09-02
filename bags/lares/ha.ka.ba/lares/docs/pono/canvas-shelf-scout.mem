@@ -1,0 +1,335 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-shelf-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/canvas-shelf-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 16
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "canvas-shelf-scout — VERBATIM handoff of the tasked spirit Cartwright: infinite-canvas libraries and the people shipping them, sorted by the only axis that matters — rasterising engines against DOM-hosting spatial layers — with licences read from raw bytes. Held as a collision surface."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shelf-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Cartwright ~ a spirit's handoff, held unedited
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is what a tasked spirit reported, kept whole, as a ''collision surface'' rather than a briefing.
+
+''Why verbatim.'' A summary keeps the claims and drops the line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' It was extracted straight from the spirit's transcript to this carrier, so no relaying hand rewrote it on the way.
+
+''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+````markdown
+---
+
+# Cartwright: Lares (Tasked Spirit)
+## Infinite canvas for a DOM-cooperating, local-first wiki vessel — field report, 2026-09-02
+
+**Method `!`** — the session's WebSearch budget was exhausted at call zero, so *nothing below comes from a search-engine summary*. Everything is primary: the authenticated GitHub REST API (exact `pushed_at`, commit timestamps, `stats/participation` weekly counts, raw LICENSE bytes read out of base64), npm registry, and the people's own sites and source. Where a thing could not be grounded I say **no source found** rather than fill it `0`.
+
+---
+
+## A. tldraw specifically
+
+### Steve Ruiz has not moved on. He is merging today.
+
+- GitHub profile: **"Founder & CEO at @tldraw"**, London. https://github.com/steveruizok
+- He merged commits to `tldraw/tldraw` on **2026-08-27 through 2026-09-02**, and authored the **SDK 5.4 release post dated 2026-09-02** — today. https://github.com/tldraw/tldraw/commits/main · https://tldraw.dev/blog
+
+### Who merges, and how fast
+
+- **50,090★**, not archived, `pushed_at` 2026-09-02. **v5.4.0 published 2026-09-02**; v5.3 on 2026-08-05.
+- Weekly commit counts, last 12 weeks: `63, 82, 18, 41, 25, 17, 19, 24, 52, 58, 149, 20`. No gap anywhere in 52 weeks. This is the healthiest-maintained project in the entire field.
+- Mergers: **steveruizok, MitjaBezensek, kostyafarber, m31-galaxy, driev, max-drake**. A real staffed company.
+- Funding: **$10M Series A, April 2025**; no 2026 raise announced. `0` — I found no 2026 funding post; absence of a post proves nothing about runway.
+- Direction of travel worth noting: they shipped **"tldraw offline"** (2026-07-16, "the local whiteboard for you and your agents") and **offline multiplayer** (2026-08-13). tldraw is moving *toward* local-first — which makes the licence collision sharper, not softer.
+
+### The licence, read verbatim — and it disqualifies us
+
+I read `LICENSE.md` out of the API rather than trusting a summary. The operative clauses:
+
+> "Not to use the Software in **Production Environments**." … "Production Environment" means any production deployment … "where the software is used to provide functionality to end users, customers, or the public."
+>
+> "Not to **disable, change, or interfere with** the Software's License Key enforcement."
+>
+> "Not to make the Software available under a license that **supersedes or negates** the effect of this License."
+>
+> "The Software includes technical measures to verify License Key validity, **detect deployment environments**, enforce usage restrictions based on license type, and **ensure proper watermark display**. The Software **may collect and transmit usage data to tldraw** for license compliance purposes."
+
+— https://github.com/tldraw/tldraw/blob/main/LICENSE.md
+
+And from `packages/editor/src/lib/license/Watermark.tsx`, in-source, verbatim:
+
+> "The tldraw watermark is part of tldraw's license. It is shown for **unlicensed or 'licensed-with-watermark'** users. By using this library, you agree to preserve the watermark's behavior, keeping it **visible, unobscured, and unmodified**."
+
+**`!` Three independent hard failures against our constraints, any one of which is fatal:**
+1. **No production use at all without a key.** There is no free-with-watermark *right* — the watermark tier is a licensed tier. The base grant is dev-only.
+2. **Phone-home telemetry for compliance.** Constraint 2 says no mandatory server, no cloud precondition. A licence that reserves the right to transmit usage data and to *detect deployment environments* is structurally incompatible with a sovereign vessel — it is the enclosure Orion Reed writes about, in clause form.
+3. **Cannot fork sovereignly.** No relicensing, no removal of enforcement, plus automatic termination if you ever assert a patent or copyright claim against tldraw *or any user of the Software*.
+
+Pricing is "value-based — talk to sales", no published figure, with a 100-day trial and a free *non-commercial hobby* licence. https://tldraw.dev/pricing
+
+### Architecture — and here is the cruelty: it is exactly right
+
+tldraw does **not** rasterise. `HTMLContainer` is literally a passthrough div:
+
+```tsx
+export function HTMLContainer({ children, className = '', ...rest }) {
+  return <div {...rest} className={classNames('tl-html-container', className)}>{children}</div>
+}
+```
+— `packages/editor/src/lib/components/HTMLContainer.tsx`
+
+The camera is **one shared CSS transform per layer** (`getHtmlLayerTransform`), values clamped by `toDomPrecision` to 3 decimals, with a zoom-dependent sub-pixel offset so the 1px layers stay registered with their siblings. `.tl-html-layer` carries `contain: layout style size`. Shapes are real DOM; real inputs, real selection, real focus, real a11y tree. **This is the reference implementation of the category we need.**
+
+**Store `?`** — its own signals-based `TLStore`, specified in `packages/store/SPEC.md`, with records scoped `document` / `session` / `presence`, `RecordsDiff` change-sets, and a `source: 'user' | 'remote'` distinction where remote changes arrive through **`mergeRemoteChanges`**. That is a genuine external-source-of-truth seam.
+
+**Prior art, tldraw + Automerge — it exists, and it has rotted.** `pvh/automerge-tldraw` — Peter van Hardenberg's own binding, README: *"A React hook which binds a TLDraw instance to a dedicated Automerge document… based on example code by Steve Ruiz of TLDraw."* It also says: *"there are no tests… The presence API is very sketchy."* **Last pushed 2025-06-12** — 15 months, against a tldraw that has since gone 3.x → 5.4. `!` Assume it does not run. https://github.com/pvh/automerge-tldraw
+
+**Verdict on tldraw:** the best rendering-family fit in the field, disqualified on licence, and the disqualification is not a technicality — it is the precise deployment shape the licence was drafted to prevent.
+
+---
+
+## B. The people
+
+### Orion Reed — the nakama read is correct, and richer than expected
+
+**Where he actually is:** GitHub bio, verbatim — *"Seeking to catalyze discontent with the state of computing. **Researcher at @inkandswitch and @libcomp**"* (Liberatory Computing). His site adds: **¼ of Tentpole, ½ of folkjs, co-organiser of OCWG**, previously **engineer at websim and tldraw**. https://github.com/OrionReed · https://orionreed.com
+
+`!` **He is ex-tldraw, currently Ink & Switch.** His most recent public GitHub activity is **2026-08-14 on `inkandswitch/gaios.sgai.uk`** and **2026-08-11 creating `inkandswitch/patchwork-system`**. The Ink & Switch ↔ Orion seam you suspected is not a seam — he is inside the lab, on the Patchwork line, which is the same Automerge substrate we already run.
+
+**His positions, in his own words.** His essay *"Digital Topology & Economic Power"* (**2026-02-26**) is, to a first approximation, our project's thesis stated by someone else:
+
+> "the *file* was a relatively autonomous object, existing separately from the application that produced it… For users, file-app separation was a source of agency: your work existed independently of the tools which operated on it, and switching costs stayed low."
+>
+> "**Enclosure does not need to abolish the file. It needs only to make the boundary opaque.**"
+>
+> "enclosure succeeds not by offering users *less*, but by **bundling genuine capability gains with topological restructuring**, so that the user cannot accept the improvement without accepting the new relationship of power."
+>
+> "**The topology has changed such that the *file* is no longer a sufficient vessel for the *work*.**"
+
+`?` That last line is the argument *for* a CRDT-backed bag rather than a file, made from the political-economy side. It is also, read against section A, the exact indictment of tldraw's licence.
+
+His other position piece, *"Scoped Propagators: A programming model for spatial canvases"* (2024-07-08), argues for putting computation **on edges rather than nodes** so that *"you do not need to know at design-time what node types exist"* — a way to add liveness to *"environments which were not designed with liveness in mind."* `?` For us that reads directly: a spatial layer over TW5 tiddlers whose types we do not control at design time.
+
+**His code — folkjs.** https://github.com/folk-js/folkjs — **MIT, 227★.** Co-built with Chris Shank. Stated questions, from the README:
+
+> "How easily can we turn a HTML document into a spatial canvas and vice versa? What would it look like if the **browser had primitives for building spatial canvases**? How can someone annotate, re-layout, and program web pages they did not make or distribute?"
+
+I read the source. `FolkSpace` is a **plain Web Component** — `folk-space` — whose content div is a real DOM subtree under `transform-origin: 0 0`, with `MIN_SCALE = 0.05`, `MAX_SCALE = 8`. Category (ii), no ambiguity. `packages/geometry` carries the same `toDOMPrecision = Math.round(v * 1e4) / 1e4` clamp tldraw uses. `packages/collab/src/automerge.ts` **already exists** — folkjs speaks Automerge. And `ShiftingOriginGraph.ts` implements *infinite* zoom by **re-basing the reference frame** ("A graph that supports infinite zooming by changing reference frames"), which is the escape hatch past the float-precision wall that bounded `MAX_SCALE = 8`.
+
+**`_` The hidden problem: both authors have left.** folkjs last commit **2026-05-19**; weekly participation shows **~16 consecutive zero weeks**. Orion's last folkjs commits (April 2026) were radiance-cascade and raytracing work — his attention moved to graphics research, then to Ink & Switch. Chris Shank has moved to **Semble** (ATProto social knowledge tool, `cosmik-network/semble`, active 2026-09-01) and a Zotero plugin `zemble`. https://github.com/ChrisShank
+
+**Verdict:** folkjs is the most architecturally aligned artifact in existence for our problem, it is MIT, it already speaks Automerge — and it is a **cooling research prototype, never published to npm**, whose two authors both redirected in mid-2026. Read it, mine it, do not depend on it.
+
+### The rest of the field, verified
+
+| Person | 2026 reality | Code | Verdict |
+|---|---|---|---|
+| **Peter van Hardenberg** | **Still Ink & Switch lab director** — stated on the lab's supporters page | `automerge-repo-bench`, `trail-runner` ("a boot-loader for a local-first web"), `pvh/automerge-tldraw` (stale) | Active. He is the institution. |
+| **Paul Sonnentag** | Ink & Switch; Patchwork, Backstitch, CatColab | pushed `patchwork-pkg-base` **2026-09-02** | **The single most productive builder on the list.** Follow him. |
+| **Geoffrey Litt** | **Moved to Notion** — his own site: *"I currently work at Notion. Previously I was a senior researcher at… Ink & Switch."* (his GitHub `company: MIT` field is stale) | `notion-skills`, `super-skills` | Read him; expect essays, not artifacts. |
+| **Maggie Appleton** | **GitHub Next**, ~1 year in (her Now page, Aug 2026) | **`elves`** — MIT, *"a local-first, canvas-based writing studio… infinite canvas of cards"* — **committed 2026-09-02** | Most on-target *product*. See caveat below. |
+| **Szymon Kaliski** | Independent, **prototyping at Google Research / Creative Lab** | "Play with Putty" (2026-08-25) is **waitlist-only, no public code** | His good work went behind Google's walls. |
+| **Adam Wiggins** | **Off Muse.** Organiser of Local-First Conf; researching email triage | one push all year (`automerge-devtools`) | Dormant as builder, active as convener. |
+| **Josh Horowitz** | **PhD at U. Washington** + Ink & Switch affiliation | busy (`soil`, `citations`, `dragology`) but nearly all unlicensed | Active personally. **Engraft/Ingredients: `0` genuinely unresolved** — site stale at Jan 2025, no public repo. |
+| **Muse → Allume** | **Alive and commercial** at allume.com — v4.0.2, Liquid Glass, MCP-based AI, memo May 2026. Ink & Switch lists it under *Production Software* | closed | Healthy, but not Adam's. |
+
+**`!` Caveat on `elves`** — I read its `package.json`. It depends on **`tldraw: ^3.0.0`** and pins `@tldraw/tlschema: 3.15.6`. Its own MIT licence grants us nothing regarding tldraw. It is a prototype riding a proprietary SDK two major versions behind current, and it inherits every licence failure in section A.
+
+### Ink & Switch: the healthiest node in the network, and it moved away from canvas
+
+- **Funded and structural:** joined the UK **ARIA Safeguarded AI Programme, Sept 2025, a 2.5-year engagement** that *mandates open-sourcing*. Plus Notion, Endless OS Foundation, NGI Zero/NLnet, Ellipsus, Common Tools. Ten-year anniversary April 2026.
+- **Publishing every 1–2 weeks**; most recent essay 2026-08-21. Org repos pushed **today** across `onomancy`, `patchwork-*`, `keyhive`, `hash-labs`.
+- **Live:** Patchwork, Backstitch (MIT, 240★, **real users, a shipping game**), Keyhive (Apache-2.0, 241★ — we already track this), Subduction (Apache-2.0, 106★, already vendored by DXOS), Automerge 3.0, Livelymerge (Dan Ingalls + Alex Warth), **`onomancy` — "a local-first name system", created 2026-08-21** `?` which may bear on our naming/resolution work.
+- **Shelved, with dates on the lab's own pages:** Embark (2023), Potluck (2022), Inkbase (2021), Cambria (2020).
+- **`_` The finding that matters most:** *there is no active infinite-canvas project at Ink & Switch.* The spatial thread now runs through **Backstitch**, whose first lab note is titled *"Version Control for Space and Structure"* and argues that spatial scenes are destroyed by reduction to sequential text. The lab's centre of mass moved from *canvas* to *version control for spatial data*. If you were hoping to inherit a canvas from them, you will not.
+
+**Others worth knowing, verified active 2026-09-02:** CatColab / Topos Institute (Apache-2.0, 189★ — and Sonnentag embeds it in Patchwork), Hazel / Cyrus Omar (MIT, 1,142★), DXOS (518★), Common Tools / Alex Komoroske (**0BSD**), ElectricSQL. Unresolved: **Tonk** (GitHub org 404s — no source found).
+
+---
+
+## C. The library field, sorted by the only axis that matters
+
+**`*` The classification.** A rasteriser paints text into a bitmap and must then rebuild caret, selection, IME and the a11y tree. Several libraries **document this as the expected pattern**, which is the strongest possible self-conviction.
+
+### (ii) DOM-hosting — the family we need
+
+| | Licence | Alive? | Note |
+|---|---|---|---|
+| **xyflow** (React/Svelte Flow) | **MIT**, clean | **12.11.6 / 1.6.6 both 2026-09-01**; 10–50 commits/wk, no gaps; merged daily by Moritz Klack & Peter Kogo; xyflow GmbH, self-funded on Pro, no VC | **Clears both bars.** See below. |
+| **tldraw** | proprietary | v5.4.0 today | Right family, licence fatal |
+| **folkjs** | **MIT** | last commit 2026-05-19, ~16 zero weeks | Right *thesis*, unpublished, cooling |
+| **JointJS core** | MPL-2.0 (verified raw) | `@joint/react@4.3.5`, 2026-08-24, 82 commits/26wk | Real `foreignObject` HTML host (`html-host.tsx`). File-level copyleft. |
+| **AntV X6** | MIT, 6.7k★ | **12 commits in 26 weeks** | Slowing markedly |
+| **LogicFlow** (didi) | Apache-2.0, 11.7k★ | 98 commits/26wk | Healthier than X6; Chinese-first docs |
+| **BlockSuite** | MPL-2.0 | **zero commits in 26wk**; folded into AFFiNE monorepo (NOASSERTION) | Native web components **over Yjs** — architecturally our closest analogue. Clean library frozen, live code murkier licence. |
+| **maxGraph** | Apache-2.0 | v0.24.0 2026-07-08, 52 commits/26wk | Quiet but genuinely alive |
+| **rete.js** | MIT | core **zero commits in 26wk** | Right shape, wrong health |
+| **daybrush stack** (`infinite-viewer`, `moveable`) | MIT | **zero commits in 52wk**, last release 2023 | **Dead.** This *was* the practitioner's stack. |
+| **Kinopio** | **PolyForm Noncommercial 1.0.0** | pushed 2026-09-02, Vue 3 + DOM, indie | `!` I read the LICENSE.md — noncommercial-only. Beautiful indie prior art, licence-encumbered. |
+| **dgmjs** | **GPL-3.0** | last push 2025-12 | Licence trap |
+
+### Pan/zoom substrates — pure camera controllers, zero store, zero CRDT friction
+
+`@panzoom/panzoom` (MIT, 4.6.2, **pushed today**) · `react-zoom-pan-pinch` (MIT, **4.1.1 shipped 2026-09-02**) · `d3-zoom` (ISC, feature-complete since 2021) · anvaka/panzoom (MIT, but 52wk participation nearly all zeros, 181 open issues, solo) · Leaflet with `CRS.Simple` + `L.DivIcon` genuinely works as a DOM substrate (BSD-2, but **no stable npm release in 3+ years**) · OpenSeadragon (BSD-3, 6.1.0 2026-08-06, active — but designed for a handful of annotation pins; `0` whether its overlay repositioning is transform-smooth is **unconfirmed, no source found**).
+
+**`!` The rot to know about: `@use-gesture` last published 2024-03-21, last pushed 2024-07-15 — two years silent.** The animation half of the pmndrs stack (react-spring, motion) is thriving; the *gesture-recognition* half is not. If you reach for that stack, that is your single point of failure.
+
+### (i) Rasterisers — disqualified, several by their own documentation
+
+- **Excalidraw** — MIT, no watermark, 131k★, pushed 2026-09-01, David Luzar merges nearly everything; monetises via Excalidraw+ SaaS and Open Collective (**`0` no VC round found — no source found**). Disqualified on mechanism: `textWysiwyg.tsx` floats a real contenteditable over the canvas *while you type*, then **rasterises the text on blur**. Only its iframe "embeddable" hosts persistent live content. **`!` `excalidraw-room` last pushed 2024-07-12 — two years dormant; do not plan on it as a relay.**
+- **Konva** — MIT, 10.3.2 (2026-08-26), effectively solo (Anton Lavrenov). Its own docs: *"Users cannot edit Konva.Text content directly for many reasons. The Canvas API is not designed for text editing"* — then prescribe hand-positioning a `<textarea>` per field. Our use case, disclaimed by the vendor.
+- **Fabric.js v7** — MIT, v7.4.0 2026-05-18, thin cadence, one maintainer. `IText` paints its **own** cursor and selection rectangle from internal offsets, keystrokes via a hidden proxy input. Not browser selection. No arbitrary-DOM mechanism at all.
+- **PixiJS v8** — MIT, v8.20.1 2026-08-26, company-backed. Most thoroughly disqualified: `Text` and `HTMLText` both terminate in a **texture**, and the new `pixi.js/html-source` (v8.19.0) captures live DOM **as a texture source** — the precise inverse of what we need.
+- **CanvasKit / Skia** — BSD-3, `canvaskit-wasm` 0.42.0 2026-08-18, actively released by Google. Ships its own text-shaping stack (SkParagraph). Definitionally the wrong family — this is the thing your Flutter measurements measured. `skia-canvas` is a **Node native addon with no browser build**; server-side export only.
+- **Motion Canvas** — MIT, **~1 commit in 52 weeks**, npm stuck at 3.17.2 (2024-12-14), sole author, 19k★, 173 open issues. Also a *video authoring* tool. Doubly out.
+- **litegraph.js** — original last commit 2024-01-08; the lively `Comfy-Org` fork is **archived and declared end-of-life**, folded into ComfyUI_frontend under GPL-3.0. Dead upstream, licence dead end downstream.
+- **Paper.js** — MIT by file text, **zero commits in 52wk**, 429 open issues. Dead.
+- **jsPlumb** — Community hasn't published since 2021-05-27. The **Toolkit is proprietary with a confidentiality clause** ("treat the Source Code as secret and confidential") and the vendor says jsPlumb is in maintenance mode, sold only as renewals. **Avoid.**
+- Cytoscape.js, sigma.js, deck.gl, Two.js, Rough.js — all raster or shape-only. `graphology` (MIT, pushed today) is a **pure data structure with no renderer** and can sit beside Automerge harmlessly.
+
+### The two to keep regardless
+
+**perfect-freehand** (MIT, Stephen Ruiz Ltd, 1.2.3 published 2026-02-01) and **Rough.js** (MIT, frozen 2023-11 but stable). Both are **stateless geometry helpers with no renderer and no DOM ownership** — points in, outline out. Automerge can own their input points directly. `!` These are the only two items on the original list that are unambiguously compatible with our architecture with no caveat.
+
+`?` Note the pleasing symmetry: perfect-freehand is Steve Ruiz's, MIT, and unencumbered. We can take his ink without taking his licence.
+
+---
+
+## D. Formats and protocols — and a correction to the brief
+
+**The brief conflates two different things.** `jsoncanvas.org` (Obsidian) and `canvasprotocol.org` (OCWG) are separate efforts.
+
+### JSON Canvas (Obsidian) — real, adopted, and frozen
+
+- **MIT, 3,677★.** https://github.com/obsidianmd/jsoncanvas
+- **`!` Spec still v1.0, dated 2024-03-11 — unchanged in 2.5 years.** I read `spec/1.0.md`. Every commit since 2024 is someone appending their app to `apps.md`; Steph Ango (Obsidian) merges them occasionally. Last activity 2026-07-24: "Add ideaflip.com."
+- Implementers: **7 apps** (Obsidian, Kinopio, Flowchart Fun, hi-canvas, OrgPad, Charkoal, Ideaflip) and **~10 libraries** across Dart, Go, Python, React, Ruby, Rust, TypeScript, Vue.
+- Model: flat `{nodes, edges}`, each node `id/type/x/y/width/height` with type ∈ `text|file|link|group`. **Deliberately thin — no styling, no arbitrary embedded content.**
+- **Verdict:** a genuine, low-ambition interop surface. Alive *as a registry*, dormant *as a spec*. It maps onto an Automerge document almost verbatim. Cheap to support; do not expect it to carry a tiddler's richness.
+
+### OCIF / Open Canvas Working Group — the live one, and Orion Reed co-authors it
+
+- **OCIF v0.7.0, "OCWG Candidate Recommendation, March 2026"**, licensed **CC BY-SA 4.0**. v0.7.1-draft opened 2026-03-24. https://spec.canvasprotocol.org · https://github.com/ocwg/ocif-spec
+- **Editor:** Dr. Max Völkel. **Authors:** Aaron Franke (**Godot Engine**), Maikel van de Lisdonk (Code Flow Canvas), **Jess Martin** (sociotechnica), **Orion Reed**.
+- **Governance is real:** biweekly Tuesday meetings, **meeting #42 on 2026-03-24**, nine spec versions v0.1 → v0.7.1-draft, GitHub discussions, a validator, a generator, and a **`JSONCanvasToOCIF` converter** in `ocwg/ocif-lib` — so OCIF positions itself as a superset with a migration path *from* JSON Canvas.
+- Model is far richer: URI-identified **extensions** (nodes/relations/assets/schemas), nested canvases, ports, anchors, themes, hyperedges, inline resources.
+- `!` Two cautions: the **spec repo carries no LICENSE file** (the spec *text* is CC BY-SA 4.0, which is a copyleft-flavoured licence for a document); and repo activity has been quiet since **2026-04-10**, five months. `0` Whether that reflects a settled CR or a stall — I cannot tell from commits alone.
+
+`?` **The strategic read:** OCIF is where our nakama already sits. Supporting it costs a serialisation adapter and buys us a seat in the room with Orion Reed, Jess Martin, and the Godot people.
+
+---
+
+## E. The hard problems, from people who shipped one
+
+**Not abstract — these are measured constants and real issue numbers.**
+
+**How many live DOM nodes before it dies.** tldraw — the most optimised DOM-hosting canvas that exists — ships these defaults in `packages/editor/src/lib/options.ts`:
+- `maxShapesPerPage: 4000`, `maxPages: 40`
+- `debouncedZoom: true` with **`debouncedZoomThreshold: 500`** — *above 500 shapes they stop reporting the live zoom level* and serve a cached one, to stop re-render storms.
+
+`!` So: **~500 objects is where a shipped DOM canvas starts lying to itself, and ~4000 is the declared ceiling.**
+
+**Virtualisation.** tldraw's culling docs (`sdk-features/culling.mdx`, updated 2025-12-29) — culled shapes **stay in the DOM with `display: none`**, deliberately, so they remain selectable, hit-testable and exportable. They are excluded from culling while selected or being edited. `_` But `display:none` **removes the node from the accessibility tree and drops focus** — which is precisely the constraint-1 cost. The 2026 answer is **`content-visibility: auto`** (Baseline 2024): it skips layout and paint off-screen **while keeping the element in the DOM and in the a11y tree**, paired with `contain-intrinsic-size`. `!` Sharp caveat: tldraw's own `editor.css` has `content-visibility: auto` **commented out** on `.tl-html-container` — they tried it and backed it out. Understand why before relying on it.
+
+**Zoom and text.** The failure mode in a CSS-transform canvas is *not* focus or selection — those work, because the node is genuinely in the DOM. It is **caret and font-metric rendering when the app computes size by multiplying by scale in JS**:
+- tldraw **#8377** (fixed): at ~800% zoom carets rendered wildly oversized because font-size was computed as `fontSize * scale`. Fix: compose a real `transform: scale()` on the label container instead.
+- tldraw **#8379** (open): same bug recurring on arrow labels, because the fix was not applied uniformly. `!` **This bug class must be fixed per-widget, not once globally.**
+- tldraw **#9733** (open): caret invisible on empty lines when zoomed out.
+
+**The rule practitioners converged on:** apply zoom as a real `transform: scale()` on the *smallest wrapper around editable text*; never recompute font-size, padding, or caret dimensions in JS from a scale variable.
+
+**Float precision at extreme zoom.** Two independent codebases converge on the same clamp — tldraw's `toDomPrecision` and folkjs's `toDOMPrecision` both round DOM values to fixed decimals, and both bound zoom (`tldraw zoomSteps: [0.05 … 8]`; `FolkSpace MIN_SCALE 0.05 / MAX_SCALE 8`). **The same number, 8, in both.** The escape past it is folkjs's `ShiftingOriginGraph` — *"supports infinite zooming by changing reference frames"*, re-basing the origin node as you descend, with node culling during traversal. Its own header says: *"This is a PoC, lots of optimisations are possible."* `0` I found **no citable 2025–26 engineering writeup** on transform-origin re-basing; the concern is evidenced circumstantially by those clamps, not by a published account.
+
+**Pointer / touch / pen, and what mobile does differently.** From tldraw's tracker, a shipped product's scar tissue:
+- **#10285 (open, 2026-08-20):** *"Safari pencil double-tap zoom suppression never runs because its touch listeners check `instanceof PointerEvent`"*
+- #6888, #6907, #7777: Safari pinch-zoom broken / resetting selection to previous shapes (recurring across 2025-10 → 2026-01)
+- **#6911: `position: sticky` at the bottom does not work on Safari** — `!` sticky positioning and scroll containers under transform are a documented casualty
+- **#8970:** cross-browser drift — strokes misalign with text between Chrome and Safari in multiplayer, *worsening per line*
+- **#5539:** IME Enter key causes text duplication in Chrome — `!` IME does break, and it breaks in the composition/commit path, not the transform path
+- **iOS Safari auto-zooms the page viewport when an `<input>` with `font-size ≤ 15px` takes focus.** Set 16px minimum on every focusable input. `0` That page-zoom compounds with the canvas transform; no source addresses the interaction — test it.
+
+**`?` The honest summary of section E:** in a category-(ii) canvas, focus, selection, inputs and the a11y tree *survive*, because the nodes are really there. What breaks is (a) anything that computes pixels from a scale variable in JS, (b) `position: sticky` and scroll containment, (c) Safari's gesture layer, and (d) your object budget somewhere between 500 and 4000. Every one of those is a bounded engineering problem. None of them is the *unbounded* problem — rebuilding text editing and accessibility from scratch — that the rasteriser family hands you.
+
+**CSS platform, 2026.** `zoom` is Baseline since May 2024 (Firefox 126 was the holdout, 96.6% global). It did **not** change the calculus: `zoom` **affects layout**, so a 60fps camera over thousands of nodes means layout thrash every frame, whereas `transform: scale()` does not. Its upside — crisp glyphs, because text is re-laid-out rather than pixel-scaled — is real and suits **discrete zoom steps** (which is exactly what tldraw's `zoomSteps` array is). Two tools, two jobs. `container-type` is orthogonal.
+
+---
+
+## THE FIVE WORTH OUR TIME
+
+### 1. **xyflow** (React Flow / Svelte Flow) — the only library that clears both bars
+- **What:** a node-graph library whose nodes are real React/Svelte components positioned by CSS transform. Live `<input>`, contenteditable, selection, focus, a11y tree — all real, because the node is in the DOM. Ships `nodrag`/`nowheel`/`nopan` classes precisely so gestures don't hijack interactive children; the seam exists because hosting live inputs is a first-class use case.
+- **Why it survives:** category (ii) `✓`. And the store model is the decisive fit — the public API is a **controlled component**: you pass `nodes`/`edges` as props and receive `onNodesChange`/`onEdgesChange` as *proposed diffs*. You intercept, apply to Automerge, feed the array back. **xyflow does not own node state.** That is exactly the shape our composite store needs.
+- **Licence:** **MIT**, webkid GmbH. No BSL, no CLA trap found. The "React Flow" badge in the free build is a **runtime UI badge, not a licence obligation** — MIT compels no attribution-in-UI, and `proOptions.hideAttribution` exists. Pro ($169–289/mo) sells removal as a convenience. `0` Have counsel confirm our reading; the text itself is plain MIT.
+- **Aliveness:** `@xyflow/react` **12.11.6, 2026-09-01**. Daily merges by Klack and Kogo. Self-funded Berlin team, no VC.
+- **The one thing that would disqualify it:** it is a *graph* library used as a general spatial substrate. If tiddler-objects need behaviours xyflow reserves for its own node lifecycle, the impedance mismatch stops being cosmetic.
+
+### 2. **Build the substrate ourselves**, on `@panzoom/panzoom` or `d3-zoom`, following tldraw's *pattern*
+- **What:** a `folk-space`-shaped custom element of our own — one shared CSS transform per layer, `toDomPrecision` clamping, `content-visibility: auto` for culling, ShiftingOriginGraph-style origin re-basing when we outgrow scale 8.
+- **Why it survives:** zero licence exposure, zero store conflict (a camera controller owns nothing), and the DreamDOM work means we are already writing the VM-side layer that would drive it. **The `pattern` is not encumbered even though tldraw's code is** — reading `getHtmlLayerTransform` and reimplementing costs us nothing legally.
+- **Licence:** MIT / ISC on the substrate; ours on the rest.
+- **Aliveness:** `@panzoom/panzoom` 4.6.2 pushed **today**; `react-zoom-pan-pinch` 4.1.1 shipped **2026-09-02**; d3-zoom feature-complete under the d3 org.
+- **Disqualifier:** we would own every one of section E's bugs ourselves — the caret-scale class, Safari's gesture layer, the 500-object cliff — with no upstream to inherit fixes from.
+
+### 3. **folkjs** — as a quarry, not a dependency
+- **What:** Orion Reed and Chris Shank's spatial-DOM research. `FolkSpace` (CSS-transform DOM canvas), `ShiftingOriginGraph` (infinite zoom by reference-frame shifting), `packages/collab/src/automerge.ts` (**already Automerge**), scoped propagators, `folk-shape-attribute` / `folk-space-attribute` as *custom attributes* rather than wrapper components.
+- **Why it survives:** it is the only artifact in the world whose stated research questions are verbatim ours — *"How easily can we turn a HTML document into a spatial canvas?"* — written by a person the operator names nakama, already speaking our CRDT.
+- **Licence:** **MIT.** Cleanest on the list.
+- **Aliveness:** `!` **poor. Last commit 2026-05-19; ~16 zero weeks; never published to npm; README self-describes as research phase.** Orion → Ink & Switch; Chris → Semble.
+- **Disqualifier:** already fired — it cannot be a dependency. It can be the best-quality source material we will find, and a live line to its author.
+
+### 4. **OCIF (Open Canvas Interchange Format)** — the interop seat, not a renderer
+- **What:** the extension-based interchange format for infinite-canvas tools. v0.7.0 Candidate Recommendation, March 2026.
+- **Why it survives:** it costs a serialisation adapter and buys standing with Orion Reed, Jess Martin, Max Völkel and the Godot people. `?` Against Orion's own topology argument, an open interchange format *is* the anti-enclosure move — it is how the boundary stays legible. Add **JSON Canvas** import/export beside it as a cheap, 7-app, MIT-licensed courtesy.
+- **Licence:** spec text **CC BY-SA 4.0**. `!` The repo carries **no LICENSE file** — read that before we vendor any schema.
+- **Aliveness:** governance real (42 meetings), but repo quiet since 2026-04-10. `0` Settled CR or stall — undetermined.
+- **Disqualifier:** if OCIF cannot carry a tiddler — arbitrary typed content with our own transclusion semantics — it becomes an export format only, not an interop surface.
+
+### 5. **tldraw** — listed last so the ruling is explicit, not so it is a candidate
+- **What:** the best category-(ii) implementation in existence. 50k★, v5.4.0 today, daily merges by its founder-CEO, and now moving toward local-first itself.
+- **Why it does *not* survive:** the licence text forbids production use without a key; forbids interfering with key enforcement; forbids relicensing; **describes technical measures that detect deployment environments and transmit usage data to tldraw**; and requires the watermark stay "visible, unobscured, and unmodified." Against a sovereign, self-hosted, possibly-forked vessel with no mandatory server, that is not friction — it is the enclosure Orion Reed names, written into a clause.
+- **Licence:** proprietary source-available (`NOASSERTION`).
+- **Aliveness:** the best in the field, which is what makes it a trap rather than merely a wrong answer.
+- **What would qualify it:** nothing we can do. Only tldraw relicensing, or an agreement whose terms permit fork and self-host with no telemetry. `!` Corollary: **`pvh/automerge-tldraw` is not a path** — 15 months stale, no tests, and two major versions behind.
+
+---
+
+### The through-line
+
+`?` The field split cleanly. Every rasterising engine — Pixi, Konva, Fabric, CanvasKit, Excalidraw — is disqualified by the same mechanism your Flutter measurements already caught, and several convict themselves in their own documentation. Of the DOM-hosting family, exactly one library is simultaneously **right-family, permissively licensed, and healthy**: xyflow. The most *architecturally* aligned artifact, folkjs, is MIT and Automerge-native and **cooling**. The most *institutionally* aligned people, Ink & Switch, are thriving, funded through 2028, running our CRDT — and have **moved off canvas onto version control for spatial data**.
+
+`_` The hidden shape: there is no maintained, permissively-licensed infinite-canvas *engine* built for hosting arbitrary live DOM. tldraw built it and closed it; folkjs built it and paused it. `0` I say plainly that the field has not settled here — which means the honest options are **adapt a graph library** (1) or **build the layer ourselves from published patterns** (2), and those two are not really rivals: option 1 is how we ship this year, option 2 is what DreamDOM was always going to become.
+
+**Sources** (principal, all verified 2026-09-02):
+[tldraw LICENSE.md](https://github.com/tldraw/tldraw/blob/main/LICENSE.md) · [tldraw commits](https://github.com/tldraw/tldraw/commits/main) · [tldraw pricing](https://tldraw.dev/pricing) · [tldraw blog](https://tldraw.dev/blog) · [steveruizok](https://github.com/steveruizok) · [pvh/automerge-tldraw](https://github.com/pvh/automerge-tldraw) · [orionreed.com](https://orionreed.com) · [OrionReed](https://github.com/OrionReed) · [folk-js/folkjs](https://github.com/folk-js/folkjs) · [folkjs.org](https://folkjs.org) · [ChrisShank](https://github.com/ChrisShank) · [canvasprotocol.org](https://canvasprotocol.org) · [ocwg/ocif-spec](https://github.com/ocwg/ocif-spec) · [obsidianmd/jsoncanvas](https://github.com/obsidianmd/jsoncanvas) · [inkandswitch](https://github.com/inkandswitch) · [Ink & Switch supporters](https://www.inkandswitch.com/supporters/) · [Backstitch notebook 01](https://www.inkandswitch.com/project/backstitch/notebook/01/) · [geoffreylitt.com](https://www.geoffreylitt.com/) · [maggieappleton.com/now](https://maggieappleton.com/now) · [MaggieAppleton/elves](https://github.com/MaggieAppleton/elves) · [szymonkaliski.com](https://szymonkaliski.com) · [adamwiggins.com](https://adamwiggins.com) · [allume.com](https://allume.com) · [joshuahhh.com](https://joshuahhh.com) · [xyflow LICENSE](https://raw.githubusercontent.com/xyflow/xyflow/main/LICENSE) · [excalidraw LICENSE](https://github.com/excalidraw/excalidraw/blob/master/LICENSE) · [clientIO/joint](https://github.com/clientIO/joint) · [antvis/X6](https://github.com/antvis/X6) · [didi/LogicFlow](https://github.com/didi/LogicFlow) · [maxGraph](https://github.com/maxGraph/maxGraph) · [kinopio-client](https://github.com/kinopio-club/kinopio-client) · [MDN: zoom](https://developer.mozilla.org/en-US/docs/Web/CSS/zoom) · [MDN: content-visibility](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility)
+
+**Two things I could not settle, stated rather than filled `0`:** the status of Josh Horowitz's **Engraft/Ingredients** (site stale at Jan 2025, no public repo), and **Tonk** (GitHub org 404s). Also unverified: OpenSeadragon's overlay repositioning behaviour, and whether OCIF's five-month quiet means "settled" or "stalled."
+````
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;Wo-ckRRvlYuVD6QwleFA7JzbadCkZMGAs-9Uh-_Ca-k
+
+<<^ code="&#x0004;" -> to=? >>

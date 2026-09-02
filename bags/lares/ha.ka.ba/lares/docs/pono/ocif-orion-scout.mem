@@ -1,0 +1,1089 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/ocif-orion-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/ocif-orion-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 16
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "ocif-orion-scout — VERBATIM handoff of the tasked spirit Threadneedle: OCIF read at source and RUN, the measured round-trip loss, the absent conformance layer, and Orion Reed's technical models. Held as a collision surface."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/ocif-orion-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Threadneedle ~ a spirit's handoff, held unedited
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is what a tasked spirit reported, kept whole, as a ''collision surface'' rather than a briefing.
+
+''Why verbatim.'' A summary keeps the claims and drops the line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' It was extracted straight from the spirit's transcript to this carrier, so no relaying hand rewrote it on the way.
+
+''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+````markdown
+Understood — re-sending the report body in full, minus the four items you already hold.
+
+---
+
+# Threadneedle: Lares (Tasked Spirit)
+## OCIF, round-trip fidelity, and Orion Reed's models — measured 2026-09-02
+
+**Method note.** I read the spec from source (`git clone ocwg/spec` → now `ocwg/ocif-spec`, HEAD `8a980dcc`, 2026-04-10), ran the official `schema.json` against fabricated tiddler-bearing documents with Python `jsonschema` 4.26, cloned and `npm install`ed and *executed* the most active OCIF implementation, and resolved the spec's own schema URIs over the wire with `curl`. Where the field has not settled I say so. Mu lens: `*` Wand, `?` Cup, `!` Sword, `_` Pentacle, `0` unsettled.
+
+---
+
+## 1. `?` The OCIF data model as specified
+
+Spec: `https://github.com/ocwg/ocif-spec/blob/main/spec/v0.7.0/spec.md` — `https://spec.canvasprotocol.org` 302s here. **OCWG Candidate Recommendation, March 2026**, CC BY-SA 4.0. Editor Dr. Max Völkel (ITMV / GraphInOut); authors alphabetically Aaron Franke (Godot Engine), Maikel van de Lisdonk (Code Flow Canvas), Jess Martin (sociotechnica), Orion Reed. `VERSION` file = `v0.7.0`. A `spec/v0.7.1-draft/` directory and a `v0.7.1-draft` branch sit in-tree, prepared 2026-03-24, never released.
+
+### 1a. File structure — §File Structure
+
+Six top-level keys; only `ocif` is required.
+
+| Property | JSON Type | OCIF Type | Required | Contents |
+|---|---|---|---|---|
+| `ocif` | `string` | URI | **required** | The URI of the OCIF schema |
+| `rootNode` | `string` | ID | optional | A canvas root node |
+| `data` | `array` | Extension[] | optional | Extended canvas data |
+| `nodes` | `array` | Node[] | optional | A list of nodes |
+| `resources` | `array` | Resource[] | optional | A list of resources |
+| `schemas` | `array` | SchemaEntry[] | optional | Declared schemas |
+
+The minimal valid OCIF file is literally `{"ocif": "https://canvasprotocol.org/ocif/v0.7.0"}`. `rootNode` "MUST point to a node defined within the `nodes` array."
+
+### 1b. The type hierarchy — §Entity, §Item
+
+New in v0.7.0. **Entity** = `{data, comment}`. **Item** = Entity + `id`. Node, Resource and the document itself are Item sub-types; Representation is an Entity sub-type. This is what lets extension data ride on *four* different carriers.
+
+On `comment`, note the unusually strict language — one of only thirteen MUSTs in the document:
+
+> "Comments exist to annotate OCIF files with additional information when reading the raw text of the file manually, like a comment in a programming language. **They MUST NOT be used for any functional purpose by software that processes OCIF files.** Comments MAY be preserved or discarded when processing OCIF files, and in either case the file is functionally equivalent."
+
+`!` That closes off `comment` as a smuggling channel for us. Do not put lar URIs there.
+
+### 1c. Nodes — §Nodes
+
+> "A node is visible, also called visual node in this spec, if it has a position and size… A node without `position` and `size` can serve, for example, as a logical grouping or a purely structural edge."
+
+**Structural** (§Structural Properties): `id` (**required**), `parent` (ID of a node; "If empty, the root node of the canvas is the parent node"), `deleteWithParent` (boolean, default `true`).
+
+**Layout** (§Layout Properties): `position` (number[], default `[0,0]`), `size` (default `[100,100]`), `rotation` (Angle, default `0`), `rotationAxis` (number[3], default `[0,0,1]`), `scale` (number or Vector, default `1`).
+
+The v0.7.0 change that matters most:
+
+> "OCIF allows customizing the local coordinate system of a node relative to the parent coordinate system. **Every node creates its own local coordinate system**, in which displayed resources and child-nodes are interpreted… If a parent node is stated and changed, local coordinates need to be recalculated, taking the whole chain of nested coordinate systems into account. **This is a concept commonly found in game engines and infinitely zoomable canvases.** Mathematically, these are known as local-to-global transformations. Transforms are chainable."
+
+Composition order is stated: "The full transformation matrix is 'TRS' ordered: `M = T * R * S`. So first scale (S, `scale`) is applied, then rotation (R, `rotation`, `rotationAxis`). OCIF has no translation (T)."
+
+And a practical warning aimed straight at infinite canvas:
+
+> "For interactive apps, the transforms allow to adapt on parent changes. Furthermore, **when zooming very large maps, position and size should be computed on the fly, as global positions would become unstable due to numeric precision.**"
+
+**Content** (§Content Properties): `resource` (ID) and `resourceFit` (enum `none|containX|containY|contain|cover|fill|tile`, default `contain`, borrowed from CSS `object-fit`). The node rectangle "acts as a placement box and **clipping mask** on the contents of the node… In CSS, this is called `overflow: hidden`." Border z-order is specified: "The stroke SHOULD be rendered 'on top' of a resource, while the fill SHOULD be rendered 'behind' the resource."
+
+**Extension** (§Extension Properties): `data` (Extension[]) and `comment`.
+
+`*` **There is no text node and no image node.** §"Text Nodes": "There is no special text node in OCIF. Text is a kind of resource. A node can display a resource." §"Image Nodes": "There is no special image node in OCIF. An image is another kind of resource, which can be displayed by any node." **This is load-bearing for §3 below** — the spec's entire text story runs through `resources`.
+
+### 1d. Relations — merged away in v0.7.0
+
+§Changes, "From v0.6 to v0.7.0", first bullet: "**Merged node and relation.**" There is no longer a top-level `relations` array in the prose. Everything relational is now a node extension:
+
+- **`@ocif/edge`** — `start` (ID, required), `end` (ID, required), `directed` (boolean, default `true`), `rel` (string). The `rel` field is explicitly semantic: "This field allows representing an **RDF triple (subject, predicate, object) as (start, rel, end)**." Guidance: "A graph with multiple edges should be expressed as multiple OCIF nodes, each having one edge extension. Using multiple (hyper-)edge extensions on the same node is discouraged."
+- **`@ocif/group`** — `members` (ID[], required), `cascadeDelete` (boolean). "Groups can contain groups as members. Thus, all semantics apply recursively." Ungrouping deletes the group, not the members.
+- **`@ocif/hyperedge`** — `endpoints` (required, **ordered** list), `weight` (default `1.0`), `rel`. Each endpoint is `{id, direction, weight}` with `direction ∈ {in, out, undir}`, default `undir`. "Such a model allows representing all kinds of hyper-edges, even rather obscure ones" — including "An edge with only one endpoint / An edge with no endpoints / An edge with only incoming or only outgoing endpoints."
+- **`@ocif/inherit`** — `inheritFrom` (ID), `include` (string[]), `exclude` (string[]). "Inheritance MAY NOT form cycles." Lookup semantics: "When looking for JSON properties of a child and finding them undefined, an app should look for the same value in the parent… The chain of sources should be followed until a root is reached or a cycle is detected."
+- **`@ocif/page`** — `pageNumber` (default `1`), `label`.
+
+`!` Note the drift this created: `schema.json` **still carries a stale top-level `relations` property and a `$defs/relation`** ("A relation between nodes", with a `node` property pointing at "ID of a visual node, which represents this relation"). The prose merged relations away; the normative-ish JSON schema did not. I confirmed this by loading `spec/v0.7.0/schema.json` and enumerating `$defs`: `['entity','item','node','relation','resource','representation','schema']`.
+
+### 1e. Assets — §Assets, §Resources, §Representation
+
+Three storage modes: **Inline** (in the file, referenced by id), **External** (separate file, relative URI), **Remote** (absolute URI).
+
+A Resource is `{id (required), representations (required), data, comment}`. Ordering is semantic:
+
+> "The order of representations is significant. **The first representation is the default representation. Later representations can be used as fallbacks.**"
+
+A Representation is `{location, mimeType, content, data, comment}` with "Either `content` or `location` MUST be present. If `content` is used, `location` must be left out and vice versa." The valid combinations are tabulated (inline text, inline binary/base64, remote, external, remote data-URI).
+
+§Fallback gives the worked example that matters to us — SVG inline, then remote PNG, then `text/plain` — with the rationale: "If SVG content cannot be rendered by the application, the PNG can be used. The third representation is a text representation… **This can be used for accessibility or indexing purposes.**"
+
+And in §Layout Properties, the spec states the correct degradation behaviour explicitly:
+
+> "In general, a size property is useful as a **fallback to display a placeholder rectangle if the resource cannot be displayed as intended.**"
+
+`!` **Hold onto that sentence. It is the one that makes §3 an implementation bug rather than a spec ambiguity.**
+
+### 1f. Ports and anchors — §Ports Extension, §Anchored Node Extension
+
+**Ports are nodes**, which is an unusual and rather good decision:
+
+> "Any node can act as a port. The 'container' node uses the Ports Extension to define which nodes it uses as ports."
+
+`@ocif/ports` = `{ports: ID[]}`. Constraint: "Each node SHOULD appear only in **one** ports array. A port cannot be used by multiple nodes as a port." In the spec's example, `p1` and `p2` are ordinary nodes with positions; `n1` merely *declares* them as its ports; an arrow then starts at `p1`.
+
+`@ocif/anchored-node` = `{topLeftAnchor, bottomRightAnchor, topLeftOffset, bottomRightOffset}`, percentage coordinates in `[0,1]×[0,1]` relative to the parent's *effective* coordinate system: "The parent size is added to the position and yields the coordinate of the *one* unit." Defaults `[0,0]` and `[1,1]`. The spec distinguishes it from `parent`: "This extension is mainly useful to split the space of one node into several auto-resized areas. For placing elements like in a vector-drawing application, but relative to the parent node, the `parent` property is often a better tool."
+
+`@ocif/global-positions` = `{globalPosition, globalSize, globalRotation}`, and it is explicitly a **cache**:
+
+> "To make it easy for simple viewers to show OCIF content, an OCIF file may pre-compute global positions… **They are redundant**, as the core OCIF node properties fully define the global position… If the global positions disagree with the computed positions… the computed positions should be used… If a conflict is detected on the initial loading, a warning SHOULD be issued, and **the local position MUST be preferred.**"
+
+`*` That is a well-designed slot for exactly what DreamDOM will compute anyway.
+
+### 1g. Style — §Style Extensions
+
+`@ocif/textstyle` = `{fontSizePx (12), fontFamily ("sans-serif"), color (#000000), align (left|right|center|justify), bold, italic}`. Deliberately thin: "It is much simpler than CSS… OCIF supports no other units."
+
+`@ocif/theme-define` and `@ocif/theme-use` are more interesting than they look. A theme-define node holds named branches, each containing a nested `data` array of extensions:
+
+```json
+{"type":"@ocif/theme-define",
+ "dark":  {"data":[{"type":"@ocif/textstyle","color":"#FFFFFF"}]},
+ "light": {"data":[{"type":"@ocif/textstyle","color":"#000000"}]}}
+```
+
+> "So the theme **branches a node content into several possible worlds** and defines any values, including those in extensions."
+
+`@ocif/theme-use` = `{selectTheme}`, inherits downward through the parent-child tree, and `"selectTheme": null` explicitly re-selects the default further down. `_` Possible-worlds branching over arbitrary extension data is a general mechanism, not a colour feature — worth noting for anything we want to vary by face or plane.
+
+### 1h. Root node and nested canvases — §Root Node, §Nesting Canvases
+
+> "Every canvas has **one** defined or implied root node. The root node itself SHOULD not be rendered, only its interior. If no root node is defined, an implied root with ID `rootNode` is used… The root node cannot be used as a child of another node within the same file, **but instances may be child nodes in another file.**"
+
+`size` on the root acts as an SVG-like viewbox. `position` and `rotation` "MUST NOT be set. If the root node has either of those properties set, the app should ignore their values and emit a warning."
+
+Nesting is where OCIF becomes composable:
+
+> "A node 'A' in a canvas (now called 'host canvas') may use a resource of type `application/ocif+json`… That resource defines another canvas (now called 'sub-canvas')… From the perspective of the host canvas, **node 'A' and the sub-canvas root node 'B' are the same node.** The properties of the host canvas node 'A' extend and overwrite the properties of the imported child canvas root node. **This even overwrites the `id` property**… That is, the host node 'A' is interpreted as a **JSON Merge Patch (RFC 7396)** document against the sub-canvas root node 'B'. **There is one exception: `data`-extension arrays are always merged**… Both arrays are appended, first the sub-canvas root node's extensions, then the host node 'A' extensions. **Later entries overwrite earlier entries for the same `type` of extension.**"
+
+§Partial Export specifies the inverse operation: exporting a node and its subtree makes it the new root, all inherited effective values are copied onto it, and "`position`, `rotation`, `rotationAxis`, and `parent` MUST be removed from the new root node, as the root defines the origin (0,0) of the new canvas."
+
+`*` **This is a lararium-in-a-lararium primitive, already specified, with a stated merge semantics.** It is better written down than anything we currently have for the same operation.
+
+### 1i. `*` Transclusion — §Nodes as Resources
+
+This section is the one that made me take OCIF seriously, and I quote it at length because it is the crux of question 9:
+
+> "**Motivation: Using a node B as a resource in another node A can be seen as a form of _transclusion_.** In HTML, an `IFRAME` on page A can show a page B. Similarly, by using another node as a resource, the importing node establishes another view (in CSS terms, a _view port_) on the canvas. This allows a node B to be seen in multiple places on the canvas: Once at the original location of B and additionally in n other places where n other nodes use node B as a resource.
+>
+> **Every node in an OCIF document is automatically available as a resource, too. They are addressed by prefixing the node id with `#`.** Nodes need not be added to the `resources` array."
+
+The implicit resource has `mimeType: "application/ocif-node+json"` and the node's own JSON as `content`. Semantics:
+
+> "Node A establishes a kind of 'viewport' onto node B… node B is rendered in isolation, only taking all of its (transitive) children into account… **Different from normal resources, here the intention is to create a live view (not a static image) into the canvas. Whenever the way B looks is changed, the other places where node B is imported should be updated, too.**
+>
+> **Transclusions may not form 'loops', that is, a node MAY NOT directly or indirectly import itself. If such a loop is present, all stated imports of the loop MUST be ignored and a warning SHOULD be given.**"
+
+`!` Live transclusion with cycle refusal, specified. But mark the difference precisely, because question 9 turns on it: **OCIF transclusion is node→node, whole-node, and geometric.** It is an iframe. Ours is `{{title}}` at arbitrary depth *inside wikitext*, mid-paragraph, filtered, templated, recursive through macros. OCIF can carry the *fact* "A transcludes B" as an edge or a nodes-as-resource reference. It has no representation for *position within the text*.
+
+### 1j. Schemas — §Schemas
+
+A schema is JSON Schema 2020-12. Entries are `{uri (required), schema, location, name}`. The `name` is an alias: "MUST start with a `@` character. Names SHOULD use the convention organisation name `/` type (`node` or `rel`) `/` schema name… Names MUST be unique within an OCIF file." Version convention: "By convention, schema names do not contain a version number. However, if multiple versions of the same schema are used in a file, the version number MUST be appended."
+
+Sub-type addressing uses JSON Pointer: `https://example.com/myschema.json#typename` → `/$defs/typename`.
+
+Built-in mapping (§Built-in Schema Mappings): "Any Schema Name of the form `@ocif/{name}` maps to a schema URI `https://spec.canvasprotocol.org/v0.7.0/extensions/{name}.json`." The appendix materialises all seventeen and says "The following block can be assumed to be present in every OCIF document."
+
+`_` And note the design-decision doc's candour about JSON Schema's limits: "Schema composition is tricky. Cannot define very pretty, compact things like namespace WHILE using schema composition. **Resolution: We use JSON Schema where it helps us, but are not constrained by its limitations.**"
+
+### 1k. Primitive types — §OCIF Types
+
+Relevant constraints only:
+
+- **ID**: "It **MAY NOT start with a hash-mark (#)**"; no control characters; "should be valid HTML IDs and **if possible even valid CSS identifiers**" — quoting CSS2 syntax, i.e. `[a-zA-Z0-9]`, U+00A0 and higher, hyphen, underscore; cannot start with a digit. "It must be unique among all IDs used in an OCIF document. **The ID space is shared among nodes and resources.**"
+- **URI**: RFC 3986. Unrestricted scheme — so `lar:` is a legal *extension type* URI.
+- **Vector**: 2D or 3D; "In 2D, the z-axis coordinate SHOULD be used for relative z-index ordering"; scalar shortcut `3` → `[3,3,3]`.
+- **Angle**: −360..360 degrees. `!` The prose is self-contradictory: §Layout Properties says rotation is "in degrees in **counter-clockwise** direction", while §Angle says "positive values (0,360] indicating a **clockwise** rotation." Unresolved in the CR.
+
+`!` **Consequence for us:** `lar:///the-door.names.the-whole-arc` contains `:` and `/`, so it is a valid HTML id but **not** a valid CSS identifier — SHOULD-level friction. Combined with the fact that every implementation I ran rewrites ids anyway, the ruling is: **never use a lar URI as an OCIF node id.** Carry it inside the extension; use a stable opaque id outside.
+
+### 1l. Practical recommendations
+
+Proposed MIME type `application/ocif+json` — **not IANA-registered**; the spec carries an HTML comment pointing at `ocwg/spec` issue #13. File extension `.ocif.json` or `.ocif`. ID collision rule: "If IDs collide, the first defined ID should be used… A warning SHOULD be emitted." Schema hosting: "A schema MUST have a URI as its identifier. A schema SHOULD be hosted at its URI," with a Cool-URIs content-negotiation recommendation.
+
+`!` The MIME type is unregistered *and* implementations disagree: `tldraw/ocif` exports `OCIF_FILE_MIMETYPE = 'application/vnd.ocif+json'` — `vnd.` prefixed, not the spec's string.
+
+---
+
+## 2. `!` The extension mechanism in normative detail — and the sentence that decides interop
+
+### 2a. What an extension is — §Extension Mechanism
+
+The framing first (§Extensions):
+
+> "No two canvas applications are alike: There are apps for informal whiteboarding, formal diagramming, quick visual sketches, node-and-wire programming, and many other use cases. Each of these apps has radically different feature sets. **Extensions are an integral part of OCIF.** They allow adding custom data to **nodes**, **resources**, and the whole **canvas**."
+
+The mechanism:
+
+> "- An extension _is_ a JSON object (used as a '**property bag**') with one mandatory, reserved property: `type`. **The extension can use all other property keys.**
+> - **Arbitrary, nested JSON structures are allowed.**
+> - Extensions SHOULD define how the OCIF properties play together with the extension properties and ideally with other (known) extensions.
+> - Elements (nodes, resources, canvas) can have multiple extensions within their `data` array."
+
+| Property | JSON Type | OCIF Type | Required | Contents |
+|---|---|---|---|---|
+| `type` | `string` | Schema Name or URI | **required** | Type of extension |
+
+> "**type**: The type of the extension. This is a URI or a simple name. **If a name is used, that name must be present in the schemas section, where it is mapped to a URI.**"
+
+`!` **The same-type merge rule, which is a trap.** If one element carries two extensions with the same `type`, "the JSON fragments of the objects are by default considered to override each other, as defined in JSON Merge Pat[c]h RFC 7386." The spec's worked example merges `{fruit:apple, color:blue}` and `{color:red, city:Karlsruhe}` into `{fruit:apple, color:red, city:Karlsruhe}`. Rationale: "This makes combining files by hand easier and uses the same mechanism as the inheritance extension and nested canvases."
+
+This makes the generic `@ocif/data` extension **actively unsafe for multi-app use** — its own schema pins `type` to the constant `"@ocif/data"`, so two different applications stashing state there on the same node silently clobber each other key-by-key. `_` **Ruling for us: mint our own URI-identified type. Never ride `@ocif/data`.**
+
+### 2b. How a URI-identified extension is declared — §Defining Extensions
+
+> "If you need to store some extra data at a node for your canvas app, and none of the existing extensions fit, you can define your own extension.
+>
+> **An extension MUST have a URI (as its ID) and a document describing the extension.**
+>
+> It SHOULD have a version number, as part of its URI. It SHOULD have a proposed name and SHOULD have a JSON schema.
+>
+> The proposed structure is to use a directory in a git repository… Within the repo, there SHOULD be two files: README.md, which describes the extension. schema.json, which contains the JSON schema… **This schema MUST use the same URI as the extension.**"
+
+Step-by-step (§How To Write an Extension Step-by-Step): define the properties; define the URI, "Ideally, this is where you publish your JSON schema file"; write the semantics; create the JSON schema — "**Large language models are a great help here**" *(their words, in a Candidate Recommendation)*. Suggested layout: `/1.0/README.md` + `/1.0/schema.json`.
+
+**No registration, no approval, no gatekeeper.** The cookbook is explicit: "Extensions can be defined and used **in the same OCIF document, without any prior announcement or registration process.**" `catalog.md` exists but "Getting listed in this file is **not** a requirement for an extension to be used… Listing in this file is not an endorsement."
+
+`_` Worth recording: **`catalog.md` lists zero third-party extensions.** Every entry is OCWG's own, and every one is still at v0.5 URIs. In two and a half years nobody has registered an extension. We would be the first.
+
+Export guidance (§Exporting Data with Extensions): "the application SHOULD use inline or external schemas for the extensions. Remote schemas CAN be used to save space."
+
+### 2c. `!` The sentence that decides interop
+
+**There are exactly three statements in the entire corpus about meeting an extension you do not understand, and they do not agree with each other.**
+
+**(1) §Canvas Extensions — the only RFC-shaped MUST on the topic, and it says *ignore*:**
+
+> "Like for nodes, canvas-level extensions are carried in an array named `data` on the root object of the OCIF file. Each entry in this array is an extension object with a `type` that identifies the extension and any extension-specific properties. Applications MAY add any number of canvas extensions; **unknown extensions MUST be ignored.**"
+
+**(2) §Data Extension — preservation, lowercase, non-normative:**
+
+> "A data extension is a generic extension to carry data that has no semantics within the OCIF format… Semantics:
+> - **Like all extensions, apps should preserve unknown extensions and round-trip them on export.**"
+
+**(3) §Handling Extension Data — the intent, in plain prose with no keyword at all:**
+
+> "To support interchange between canvases when features don't overlap, **canvas apps need to preserve nodes that they don't support**:
+> - Canvas A supporting Feature X creates a canvas with a Feature X node in it and exports it as OCIF.
+> - Canvas B, which does not support Feature X, opens the OCIF file, and some edits are made to the canvas.
+> - Canvas B exports the canvas to an OCIF file. **The nodes for Feature X should still be in the OCIF file, unchanged.**"
+
+The strongest formulation anywhere lives in a *design* document, not the spec — `design/requirements.md` §Extensible:
+
+> "We want a number of apps, including those not known at time of writing this spec, be able to use the export format to round-trip data. Thus,
+> - an app may write arbitrary data into the export (given it adheres to some rules)
+> - **an app may not alter or delete data written be another app** (unless the whole node is deleted)"
+
+And `design/goals.md` §Round-Tripping: "An app A can export to OCIF and embed its native data structures within, so that any app B can work without, re-export, and allow app A to reconstruct its native data structures."
+
+### 2d. `!` The finding that settles the normative question
+
+I ran `grep -in "2119\|8174\|conformance\|normative\|key words" spec/v0.7.0/spec.md`. **It returns nothing.**
+
+The document has **no RFC 2119 boilerplate, no RFC 8174 clause, no conformance section, and no conformance classes.** There is no defined notion of a "conforming OCIF processor," no distinction between producer and consumer conformance, and no statement of what makes a document invalid versus merely unusual. "MUST" appears thirteen times as ordinary editorial emphasis. `grep -c "MUST"` = 13; the complete list of MUST / MUST NOT / MAY NOT / SHOULD NOT lines runs to fourteen occurrences across the whole 2010-line document, and I read every one.
+
+`0` **Therefore: preserve-and-passthrough is the stated intent of the working group and is not a requirement of the specification.** The only MUST that touches unknown extensions says *ignore*. Preservation is a lowercase "should" in a section about a convenience extension, plus a narrative walkthrough with no keyword, plus a bullet in a design doc that the spec does not incorporate by reference.
+
+The spec's own editor knows the gap is real and unclosed. Discussion #63 (`github.com/orgs/ocwg/discussions/63`), xamde, 2025-08-07:
+
+> "A particular case we did think about is a 'generic merge'. Use case: App A exports OCIF. App B reads it, **discards all elements it does not know (it should not do this, but some apps will do this.** Or another external converter converts OCIF to app-B-format, which has no extension semantics.). So then app B loads the data, user edits it, and stores back as app-b-native format… Now we have before.ocif.json (went into app B) and after.ocif.json (came out of app B). **Challenge: Compare both files, understand the diff… Then, apply the diff back to the before.ocif.json, so that the extension data of all nodes, which have not been deleted, are still there.** I guess, in this process lots of things can go wrong… **So in short, yes, such a linter is an excellent, missing piece :-)**"
+
+And the group's chair conceded the same limit to Obsidian's Steph Ango (kepano) in Discussion #44, 2025-01-18:
+
+> "your comment hits on a bigger issue: **the OCWG and the OCIF format can really only enable _interchange_. True interoperability will have to be a choice by each tool-maker.** … We ran into this problem many times as we worked through designing the spec. As a group, we called this '**preserving the property bag**'… Ultimately, if a tool-maker wants to support interoperability with other tools that have features that they don't currently support, **they have to commit to preserving the data** for the unsupported extensions and then re-exporting that to the OCIF files."
+
+kepano's original question is worth having in the record because it is our question, asked eighteen months earlier by someone with a shipping product:
+
+> "It seems like what we're learning is that **canvas data is hard to make interoperable because the fallbacks when functionality is missing from an app are ambiguous and less graceful than they are with something like Markdown.** The question I ask myself is if we were building Obsidian Canvas today and this format already existed, would we have used it? … **Perhaps there is room for OCWG to specify fallback behaviors for optional features.**"
+
+`!` **Answer to your question 2, stated flatly: the spec REQUIRES ignore. It RECOMMENDS, in non-normative voice, preserve-and-passthrough. It never requires it, and it never permits refusal.** Refusing the file is not contemplated anywhere.
+
+### 2e. The unenforced binding — measured
+
+The prose says a short name "must be present in the schemas section." I tested whether anything checks. Document:
+
+```json
+{"ocif":"https://canvasprotocol.org/ocif/v0.7.0",
+ "nodes":[{"id":"n1","position":[0,0],
+   "data":[{"type":"@lar/tiddler","uri":"lar:///x"},
+           {"type":"@ocif/data","a":1},{"type":"@ocif/data","b":2}]}]}
+```
+
+Validated against `spec/v0.7.0/schema.json`: **0 errors.** No `schemas` entry, an undeclared `@`-name, and two colliding `@ocif/data` blocks — all clean. The spec's own appendix example (`@example/circle`) omits the schemas entry too.
+
+Cause: `schema.json` declares `data` as bare `{"type":"array"}` with **no `items`**, and there is no `additionalProperties: false` and no `unevaluatedProperties` anywhere in the file (`grep` confirms zero occurrences). Its only `required` is `["ocif"]`, and it does not even constrain the *value* of `ocif`. I confirmed the permissiveness with a deliberate garbage control:
+
+```json
+{"ocif":"x","nodes":[{"id":"a","data":[{"NO_TYPE":1}],"position":"not-an-array"}],
+ "totallyMadeUpTopLevel":{"a":1}}
+```
+
+→ **one** error, and only the obvious one: `nodes[0].position 'not-an-array' is not of type 'array'`. A `data` entry with no `type` at all, an invented top-level key, and a bogus version string all pass.
+
+---
+
+## 3. `*` The measurement in full
+
+### 3a. The instrument
+
+`github.com/tldraw/ocif` — created 2026-02-06, **last commit 2026-08-10** (three weeks before measurement), MIT, author Mime Čuvalo. Its README claims exactly the behaviour in question:
+
+> "**Interoperability** — Unknown node extensions are preserved on import (in `shape.meta`) and re-exported unchanged, **as required by the OCIF spec**"
+
+Its own suite is green: `npx vitest run` → **91 tests passed** across `export.test.ts` (25), `ocif.test.ts` (48), `smoke.test.ts` (18).
+
+I cloned it, ran `npm install` (exit 0), confirmed the baseline suite green, then added probe files under `src/__tests__/probe/` using **their own harness** — `importRecords()` / `roundTrip()` copied verbatim from `src/__tests__/export.test.ts:8-19` — so that nothing in my setup differed from the tests that pass.
+
+*(Instrument-collision note, per standing practice: my first probe used a hand-rolled harness importing `'../src/index'` and produced `nodes: []`. Rather than report that, I ran their whole suite to establish the instrument was sound — 91 green — then rebuilt the probe on their harness. The `nodes: []` result reproduced. Only then did I treat it as a finding.)*
+
+### 3b. Probe A — our extension, no resource
+
+Input: one node, `position [100,100]`, `size [320,240]`, `data: [{@ocif/rect, fillColor:"#fffbe6"}, {@lar/tiddler, …}]`.
+
+**What survived:** `@lar/tiddler` came back **byte-identical** — `uri`, the nested `fields` object, the `tags` array, all of it.
+
+**What did not:**
+- `fillColor: "#fffbe6"` → `"#000000"`; `strokeWidth` absent → `12`. tldraw quantises to its own palette and stroke sizes.
+- `id: "n1"` → **`"shape:n1"`**. Every identifier rewritten.
+- **No `schemas` entry for `@lar/tiddler` was emitted.** Export regenerates the schemas array from tldraw's own registry — `src/ocif.ts:324`: `const schemas = getOcifSchemas().filter(s => usedSchemaTypes.has(s.name) || s.name === 'ocif')` — so a foreign name never appears. **The output is therefore spec-invalid**: it uses an `@`-prefixed short name with no mapping, violating §Extension Mechanism's "that name must be present in the schemas section."
+
+### 3c. Probe B — the same node, plus a `text/vnd.tiddlywiki` resource
+
+Also supplying a `schemas` array declaring `@lar/tiddler`, and a canvas-level `data: [{type:"@lar/canvas", …}]`.
+
+Output, complete:
+
+```json
+{ "ocif": "https://canvasprotocol.org/ocif/v0.7.0", "nodes": [] }
+```
+
+**Total loss.** Node, extension, geometry, text, canvas data, schemas — everything.
+
+### 3d. Isolating the cause — one variable at a time
+
+| input | shapes after import | nodes in export |
+|---|---|---|
+| node with `@ocif/rect`, **no resource** | 1 | 1 |
+| + a `schemas` array | 1 | 1 |
+| + canvas-level `data` | 1 | 1 |
+| + **`text/vnd.tiddlywiki`** resource | **0** | **0** |
+| + **`text/plain`** resource | **0** | **0** |
+| + **`text/html`** resource | **0** | **0** |
+| + `image/png` resource | 1 | 1 |
+| + **dangling** resource ref (`resource:"nope"`, no `resources` array) | **0** | **0** |
+
+`*` **That last row is the control that identifies the mechanism.** A dangling reference and an unsupported MIME type produce the *same* result, which tells us the drop is not keyed on MIME type at all — it is keyed on **"this node references a resource that yielded no tldraw asset."**
+
+### 3e. The code path
+
+`parseOcifFile` (`src/ocif.ts:381-395`) converts resources first and **only records an asset when the converter returns non-null**:
+
+```ts
+if (data.resources) {
+  for (const resource of data.resources) {
+    if (assetMap.has(resource.id)) continue
+    const assetResult = convertOcifResourceToTldrawAsset(resource)
+    if (assetResult) {
+      records.push(assetResult.asset)
+      assetMap.set(resource.id, assetResult.asset.id)
+      …
+    }
+  }
+}
+```
+
+`convertOcifResourceToTldrawAsset` (`src/ocif.ts:1171 ff.`) branches on MIME type — `image/*`, `video/*`, and `text/html`-with-bookmark-metadata — and otherwise falls through to a bare `return null`. So a text resource never enters `assetMap`. The node then fails to produce a shape, and the survivors are filtered again at `src/ocif.ts:680-704` ("Filter out any records that might be invalid or have broken references") before `createTLStore({snapshot})`.
+
+Two spec-provided escape hatches are ignored on the way past:
+1. **The representation fallback chain.** My probe supplied `text/plain` as a *second* representation behind the wikitext. §Fallback says later representations are fallbacks. The reader never consults it.
+2. **The placeholder rectangle.** §Layout Properties: "a size property is useful as a fallback to **display a placeholder rectangle if the resource cannot be displayed as intended.**" The reader has `size: [320,240]` in hand and discards the node instead.
+
+Note the asymmetry with the *extension* path, which is where the implementation is careful. `src/ocif.ts:1297-1313` defines `KNOWN_NODE_DATA_TYPES` (fifteen entries), `:1326` filters `unknownData`, `:1340` stashes it as `meta.ocifExtensions`, `:1700-1704` builds a placeholder geo shape flagged `ocifUnknownPrimary: true` — with the comment "For unknown types, create a placeholder geo shape. The original data is preserved in meta and restored verbatim on export" — and `:277-286` restores it:
+
+```ts
+// Re-emit extensions we don't understand, unchanged (OCIF requires
+// unknown extensions to survive the round trip).
+const preserved = Array.isArray(shape.meta?.ocifExtensions) ? shape.meta.ocifExtensions : null
+if (preserved) {
+  if (shape.meta?.ocifUnknownPrimary) {
+    node.data = [...preserved]     // restore original, not the placeholder rect
+  } else {
+    node.data.push(...preserved)
+  }
+}
+```
+
+`!` **They built precisely the placeholder-and-preserve discipline for unknown extension *types* and did not build it for unresolvable *resources*.**
+
+### 3f. The spec's own Hello World, run through it
+
+I transcribed §Hello World Example verbatim — Berlin (rect, `text/plain` "Berlin"), Germany (oval, `text/plain` "Germany 🇩🇪"), and an arrow carrying both `@ocif/arrow` and `@ocif/edge` with `rel: "https://www.wikidata.org/wiki/Property:P1376"` ("is capital of") — and round-tripped it.
+
+Losses:
+- **`berlin-node` is gone.** It had a `text/plain` resource.
+- **Both text resources are gone.** The output has no `resources` key at all. The strings "Berlin" and "Germany 🇩🇪" no longer exist.
+- **The edge lost `start`** (Berlin no longer exists to point at) **and lost `rel`** — the wikidata predicate, which is the entire semantic content of the example. Surviving edge: `{"type":"@ocif/edge","end":"shape:germany-node"}`.
+- IDs rewritten to `shape:*`.
+- Germany's `fillColor: "#FFFFFF"` → `"#FF0000"`; `strokeWidth: 5` → `8`.
+- Separate probe: `rootNode`, node `comment`, and `parent` are all dropped.
+
+Survivors: one oval, one arrow, and a regenerated `schemas` block.
+
+### 3g. Why 91 tests are green
+
+I inspected their fixture. `src/__tests__/smoke-test/QA pruned.ocif.json` — 13 nodes, 2 resources; extension types `@ocif/arrow, @ocif/edge, @ocif/path, @ocif/rect, @ocif/textstyle, @tldraw/node/bookmark, @tldraw/node/embed, @tldraw/node/note`; **MIME types present: `application/json`, `image/gif`, `text/html`** (the last only in the bookmark path).
+
+**Their corpus contains no text node.** The suite is green because it never asks the question. *(Standing feedback, "collide the instrument": a hand-assembled fixture cannot notice what it omitted.)*
+
+### 3h. `!` Ruling: requirement, ambiguity, or bug — and how I know
+
+**Implementation bug. High confidence, 18/20.** Not a spec requirement, and not a spec ambiguity. Four independent lines of evidence:
+
+1. **The spec explicitly prescribes the correct alternative.** §Layout Properties names the placeholder rectangle as the fallback "if the resource cannot be displayed as intended." Deletion is not the specified degradation; a box is.
+2. **The spec explicitly normalises the input.** §"Text Nodes" states that a node displaying a `text/plain` resource is not a special case but *the* way text works in OCIF, and gives the exact shape my probe used. A reader that drops it is not resolving an ambiguity — it is failing the base case.
+3. **The spec provides a second, independent recovery path that is also ignored.** §Fallback's ordered representations exist for precisely this. Two mechanisms, both bypassed.
+4. **The implementation demonstrably knows better in the adjacent code.** It built placeholder-and-preserve for unknown extension types (`ocifUnknownPrimary`), with a comment citing the spec. The resource path lacks the same treatment. That is an omission, not a reading.
+
+`_` **Why the distinction changes what we do.** If it were a spec requirement, OCIF would be unusable for us and the thread ends. If it were a spec ambiguity, the fix would be spec text and a working-group fight. Because it is an implementation bug in a small MIT repo with one author and one closed issue: **it is a filed bug and, if we choose, a pull request.** Roughly a dozen lines — return a placeholder shape carrying `meta.ocifResource` when `convertOcifResourceToTldrawAsset` yields null, and re-emit the resource on export. That is a *cheap* piece of goodwill and the fastest possible way to introduce ourselves to both tldraw and OCWG with something other than an opinion.
+
+`!` But note what does **not** change: today, in the field, the loss is real. **We must not build any feature whose correctness depends on a foreign tool preserving our content.**
+
+---
+
+## 4. `_` `@lar/tiddler` — what I built, and what its survival does and does not prove
+
+### 4a. What I constructed
+
+Two artefacts. First, a **spec-shaped extension declaration** — a URI (`https://lares.example/ns/ocif/tiddler/1.0`), an `@`-prefixed short name (`@lar/tiddler`), and an inline JSON Schema, exactly as §Defining Extensions prescribes:
+
+```json
+{"uri":"https://lares.example/ns/ocif/tiddler/1.0","name":"@lar/tiddler",
+ "schema":{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"@lar/tiddler","type":"object",
+   "properties":{"type":{"const":"@lar/tiddler"},"uri":{"type":"string"},
+                 "fields":{"type":"object"},"tags":{"type":"array","items":{"type":"string"}}},
+   "required":["type","uri"]}}
+```
+
+Second, a **document that carries an actual tiddler four ways at once**, to test every carrier v0.7.0 opened:
+
+- the extension **on a node** — `{"type":"@lar/tiddler", "uri":"lar:///the-door.names.the-whole-arc", "fields":{"title":"the-door","type":"text/vnd.tiddlywiki","modified":"20260902120000000","creator":"@joshu"}, "tags":["$:/tags/Canvas","spine"]}`;
+- the wikitext **as a resource** with a three-step fallback chain — `text/vnd.tiddlywiki` (`"This is [[the door|the-door]] with a {{transclusion}} and a <<macro>>."`), then `text/html`, then `text/plain`;
+- the extension **on a representation** (the v0.7.0 Entity widening);
+- a lar-URI predicate **on an edge** — `{"type":"@ocif/edge","start":…,"end":…,"rel":"lar:///transcludes"}`;
+- plus a canvas-level `data` entry.
+
+### 4b. It validates
+
+Against the official `spec/v0.7.0/schema.json`, with `jsonschema` 4.26 (`check_schema` first, then `iter_errors`): **0 errors.**
+
+So: wikilink syntax, transclusion syntax, macro syntax, TiddlyWiki field names, `$:/`-prefixed system tags, a lar URI as an edge predicate, a custom MIME type, and a nested `fields` object all pass. §Extension Mechanism's "Arbitrary, nested JSON structures are allowed" is not marketing.
+
+### 4c. `!` Why it survives byte-identical when the spec's own example does not
+
+**Because they travel on different rails, and only one of them is defended.**
+
+`@lar/tiddler` rides in `node.data` — the extension array. `tldraw/ocif` implements preserve-and-passthrough there deliberately: unknown `type`s are filtered out at import (`KNOWN_NODE_DATA_TYPES`), parked whole in `shape.meta.ocifExtensions`, and spliced back verbatim on export. Nothing inspects the payload; nothing normalises it; the round trip is a copy.
+
+"Berlin" rides in `resources[]` — a *modelled* structure that the implementation tries to *understand*, mapping OCIF resources onto tldraw's asset types. Understanding is lossy where the mapping is partial, and the partial mapping fails closed by discarding.
+
+`*` **The general law, and it is worth carrying beyond OCIF: the opaque channel is the reliable one. Anything a foreign tool tries to comprehend, it can fail to comprehend, and its failure mode is deletion.**
+
+### 4d. `!` Is the survival a guarantee of the spec, or a property of that implementation?
+
+**A property of that implementation. Explicitly not a guarantee of the spec.**
+
+Chain of reasoning, each link cited above: the spec's only MUST about unknown extensions says they "MUST be ignored" (§Canvas Extensions); preservation appears as a lowercase "should" (§Data Extension) and as keyword-free narrative (§Handling Extension Data); there is no RFC 2119 clause, so none of these words carries defined force; there is no conformance section, so there is no such thing as a non-conforming consumer to appeal to; and there is no test suite, so nothing measures it.
+
+`tldraw/ocif` preserves because Mime Čuvalo chose to and wrote a comment saying "OCIF requires unknown extensions to survive the round trip" — a claim about the spec that, having read every MUST in it, I can say is **not accurate**. The behaviour is right. Its stated justification is not in the document.
+
+`_` **So the survival I measured is evidence about one implementation's good faith, not about the format's guarantees.** Any other tool may legally ignore and drop our extension and remain exactly as conformant. That is the single most important qualifier on the answer to question 9, and it is the thing an OCWG conformance section would fix.
+
+---
+
+## 5. `!` Round-trip fidelity and conformance
+
+### 5a. What the spec says about lossless round-tripping
+
+`design/goals.md` frames it as the whole point:
+
+> "- Allow an application A to export data, - Let application B import it, - Let application B see the data, which reasonably resembles what a user in A saw (**goal: visual resemblance**), - Let application B make changes to the data… - Let application A import the data, **and have its special data still be there (goal: round-tripping).**
+>
+> - If a node has been deleted in app B, it should also be deleted for app A. - If a node has been added in B, no native data for app A can be present. However, app A can import the node and add some defaults."
+
+And the honest limit, stated twice in identical words (§Layout Properties, §Global Positions):
+
+> "When importing 3D as 2D, the z position is ignored… When a position is changed, the z position CAN be set to 0. **Yes, this implies that full round-tripping is not always possible.**"
+
+Also relevant: `comment` "MAY be preserved or discarded when processing OCIF files, and in either case the file is functionally equivalent" — a deliberate, declared lossy channel.
+
+### 5b. Is there a conformance suite? **No.**
+
+- The `ocwg/.github` org profile still lists, under **"Possible outcomes"**: "Develop a **test bench** for the standard to demonstrate capabilities of infinite canvas tools. (Similar to the [**CSS Acid Tests**](https://www.acidtests.org/))". Two and a half years on, still aspirational.
+- **CI is whitespace.** `.github/workflows/static_checks.yml` runs one job, `pre-commit/action@v3.0.1`; `.pre-commit-config.yaml` has one hook, `file_format.py`. The repo's own `CLAUDE.md`: "**The only automated check is a file format validator** run via pre-commit… This strips trailing whitespace, normalizes to LF line endings, removes BOM, and ensures a final newline." No schema validation. No example validation. No round-trip check.
+- `ocwg/ocif-tools` `test-files/` contains **one** file (`jsoncanvas.ocif.json`).
+
+### 5c. What `ocwg/ocif-lib` actually checks
+
+Last commit **2025-08-12** (thirteen months). Nx monorepo: `libs/ocif-lib` plus apps `ocif-tools-app`, `jsoncanvas-ocif`, `nodejs-api`, `ocif-tools-app-e2e`.
+
+**The library is a stub.** `libs/ocif-lib/src/lib/ocif-lib.ts`, in its entirety:
+
+```ts
+export function ocifLib(): string {
+  return 'ocif-lib';
+}
+```
+
+Its only test:
+
+```ts
+describe('ocifLib', () => {
+  it('should work', () => {
+    expect(ocifLib()).toEqual('ocif-lib');
+  });
+});
+```
+
+The substance is `libs/ocif-lib/src/schema/schema.ts` (180 lines) — a hardcoded schema whose `title` is **"OCIF core 0.5"**, still carrying `relations`. Three spec versions stale.
+
+**The validator is Ajv against that stale schema and nothing more.** `apps/ocif-tools-app/src/services/validation-service.ts` (251 lines) is `new Ajv2020({allErrors:true, verbose:true}).compile(ocifCoreSchema)` plus ~200 lines of hand-rolled line/column mapping so errors can be pointed at in a textarea. No extension-schema resolution, no `schemas`-array cross-checking, no structural rules, no round-trip harness.
+
+xamde confirmed the scope himself (Discussion #63): "**our current validator only does JSON Schema validation, no structural checks beyond that.**"
+
+### 5d. What the `JSONCanvasToOCIF` converter checks
+
+`ocwg/ocif-lib/apps/jsoncanvas-ocif` — a Vite/React browser app; `npm run serve:jsoncanvas-ocif`. It emits `canvasprotocol.org/ocif/**v0.5**` (`src/App.tsx:96`). A separate personal build, `devhelpr/jsoncanvas-to-ocif`, last pushed 2025-04-24. Sibling converters in `ocif-tools-app/src/services`: `jsoncanvas-service.ts` (116 lines), `svg-service.ts` (338), `tldraw-service.ts` (346).
+
+`!` **It is a one-way format converter with no verification step.** It does not check round-trip; it does not check extension preservation; it emits a superseded version. Its output would fail nothing, because nothing validates against v0.7.0.
+
+### 5e. Do they run? Yes — and that is the problem
+
+| endpoint | HTTP |
+|---|---|
+| `https://validator.canvasprotocol.org/` | **200** |
+| `https://ocif-validator.vercel.app/` | **200** |
+| `https://jsoncanvas-to-ocif.vercel.app/` | **200** |
+
+All live. All v0.5. A user validating a v0.7.0 file today gets a green light from a v0.5 checker.
+
+### 5f. `!` The CR's schema URIs do not resolve to schemas
+
+§Practical Recommendations: "A schema MUST have a URI as its identifier. A schema **SHOULD be hosted at its URI**," with a Cool-URIs content-negotiation recommendation (`Accept: application/json` → the schema; `text/html` → a human page).
+
+Measured:
+
+```
+$ curl -sL https://spec.canvasprotocol.org/v0.7.0/extensions/rect.json
+final = https://github.com/ocwg/ocif-spec/blob/main/spec/v0.7.0/extensions/rect.json
+ctype = text/html; charset=utf-8
+size  = 244547
+→ json.decoder.JSONDecodeError
+```
+
+**244 kilobytes of GitHub chrome where a JSON Schema should be.** By design, not accident — `public/_redirects`:
+
+```
+/:version/extensions/:extension.json  https://github.com/ocwg/spec/blob/main/spec/:version/extensions/:extension.json  301
+```
+
+Pointed at `blob/` (the HTML view), not `raw.githubusercontent.com`. **Every `$ref` in the specification is unresolvable.** Any validator that follows extension URIs gets HTML. This is what Orion's still-open PR #68 and issue #54 were about; issue #54 ("Host spec and examples on Cloudflare rather than redirecting to GitHub repo") has been open since before the v0.7.0 release.
+
+### 5g. `!` The spec's own examples are stale and nothing catches it
+
+```
+example/4x4-rect-node-grid.ocif.json    ocif=…ocif/v0.5    schema errors: 0
+example/circle-node.json                ocif=…ocif/v0.5    schema errors: 0
+example/cookbook-sticky-note.ocif.json  ocif=…ocif/v0.7.0  schema errors: 0
+example/single-node.json                ocif=…ocif/v0.5    schema errors: 0
+```
+
+Three of four still declare v0.5. And every extension type string across all of them is the **retired** naming:
+
+```
+@ocif/node/rect      (×2, including the file labelled v0.7.0)
+@ocif/node/oval
+```
+
+v0.7.0 renamed these to `@ocif/rect` / `@ocif/oval` and dropped the `-node`/`-rel` parts entirely. `cookbook.md`'s sticky-note recipe carries `@ocif/node/rect` too, and its Transclusion recipe is written against a **`relations` array** that no longer exists in v0.7.0, referencing `spec/v0.4/spec.md`. `catalog.md` lists every extension at v0.5 URIs.
+
+The release procedure specifies the fix. `spec/v0.7.0/how-to-spec.md`, step 5: "Excluding the `/spec` directory, find and replace the previous version with the new version… This will update the **Cookbook, Catalog, Examples, and README.md**." It was not done. All four validate clean because the validator is on v0.5 and the schema does not check the version string.
+
+`_` **Summary for question 5: there is no conformance suite, the reference library is a stub, the reference validator is three versions stale and checks only shape, the converter is one-way and unverified, the extension URIs serve HTML, and the spec's own examples are wrong. None of this is hidden — it is all visible in the repo — but none of it is caught, because nothing checks anything.**
+
+---
+
+## 6. `?` Governance and participation
+
+### 6a. Cadence and venue
+
+**Bi-weekly, Tuesdays.** `canvasprotocol.org` lists 42 meetings from #1 (2024-03-26) through #42 (2026-03-24), with #43 announced for **2026-04-07, 12:00 ET** via Luma (`luma.com/6usys17z`). Calls are recorded to YouTube and transcribed into `ocwg/discussions/meetings/`.
+
+Channels, all public except one:
+- **GitHub Discussions** — `github.com/orgs/ocwg/discussions`, the stated Feedback address in the spec header. 70 discussions.
+- **Discord** — `discord.gg/32CWVJkUts`. `!` Auth-walled; I could not read it, and meeting notes reference substantive spec discussion happening there.
+- **Buttondown newsletter** — `buttondown.com/ocwg`.
+- **GitHub repos** — "All major discussions and artefacts are public on GitHub."
+
+### 6b. How decisions are made
+
+`design/design-decisions.md` states the process, such as it is: "The design decisions document tries to capture the consensus reached in the discussions, **both the GitHub discussions and the bi-weekly calls.** Some decisions are still not represented in the spec."
+
+Decisions land as prose rulings with rationale — e.g. list-vs-map for `schemas` ("**Decision**: We use lists," reasoned from JSON-parser error quality on hand-merged files); keeping `type` as the reserved key ("**Decision**: We keep `type`, as it is so short and clearly expresses the intent"); the v0.5 coordinate split, tagged "Discussed in GitHub #52 and Meeting 025."
+
+`!` **There is no governance document, no charter, no membership roll, no voting rule, no IPR or patent policy, no editor-succession plan, and no appeals path.** Jess Martin said so plainly in Meeting 9: "Orion Reed and I had the idea for this several months ago and initiated it and **there is no legal structure whatsoever.**"
+
+Nor is participation load-bearing on anyone's employment. Orion, Meeting 1:
+
+> "**No one's paying you to be here. You're turning up of your own volition**… [we want] getting stuff working as quickly as we can so that we can share this sense of progress being made and **not turn into a decades-long bureaucratic standards body.**"
+
+`_` `0` For a format that wants to be an interchange standard between commercial products, the absence of an IPR policy is the unsettled item I would flag hardest to the operator. Contributing spec text to a body with no patent or copyright policy, under CC BY-SA, is a boundary decision and not mine to make.
+
+### 6c. How an implementer joins, and what they owe
+
+Joining is showing up: click the Discord invite, open a Discussion, join a Tuesday call, or open a PR. No application, no fee, no sponsor.
+
+What you owe is stated in exactly two places, and both say the same thing. Spec repo `README.md`:
+
+> "**⚒️ Status: Seeking Implementation Feedback** — The spec is in the *'Candidate Recommendation'* stage, which means it has been widely reviewed and satisfies OCWG's technical requirements. **We are currently gathering implementation experience.** We welcome any feedback and implementations."
+
+Org profile, "Get Involved": "📝 Read the most recent spec. 🛠️ **Implement the spec and give us feedback!** 📣 Read and participate in the GitHub Discussions."
+
+The v0.7.0 announcement closes the same way: "**We're seeking implementation feedback** — if you're building with OCIF or considering it, we'd love to hear from you."
+
+`*` **We are, precisely, the constituency the CR is asking for. Implementation experience is the whole ask, and we would arrive with measurements.**
+
+### 6d. Who is actually doing the work
+
+`ocwg/ocif-spec` contributors, complete list, ever:
+
+```
+202  xamde        (Dr. Max Völkel, editor)
+ 86  jessmartin
+ 22  devhelpr     (Maikel van de Lisdonk)
+  8  aaronfranke  (Aaron Franke)
+```
+
+**Four humans. And OrionReed has zero commits to the spec repo**, despite being a listed author on the title page. `ocwg/discussions`: devhelpr 35, jessmartin 10, OrionReed 7. `ocwg/ocif-lib`: devhelpr 16, jessmartin 3.
+
+His complete OCWG issue/PR footprint across the org, by `search/issues?q=org:ocwg+involves:OrionReed` — ten items in two and a half years, and **every one is infrastructure, hosting, or copy-editing**: `ocif-spec#68` (vitepress spec site, **open**), `ocif-spec#67` (formatting fix on the size property, **open**), `.github#1` (update org README to CR, **open**), `canvasprotocol.org#8` (site to CR), `ocif-spec#18` (migrate to Cloudflare Pages), `canvasprotocol.org#6` (redirect), `ocif-spec#7` (Spec 0.2.1), `canvasprotocol.org#3/#2/#1` (meeting link, copy edits). **He has never opened a PR against the data model.**
+
+Repo statistics: 51 stars, 2 forks, 4 watchers, 16 open issues. Tags: `v0.7.0`, `0.6`. Branches: `main`, `v0.7.1-draft`, `spec-page`, `OrionReed-patch-1`.
+
+### 6e. `!` My ruling on the quiet
+
+Every public surface, measured 2026-09-02:
+
+| surface | last activity | gap |
+|---|---|---|
+| `ocif-spec` pushes | **2026-04-10** | 4.8 months |
+| `v0.7.1-draft` branch head | 2026-03-24 | prepared, never released |
+| `spec-page` branch (Orion's) | 2026-03-24 | PR #68 open |
+| Buttondown newsletter | 2026-03-24 | 5.3 months |
+| `canvasprotocol.org` | 2026-03-24 | still advertises #43/Apr 7 as "next" |
+| New Discussion opened | 2026-04-05 (#70) | 5 months |
+| Any Discussion comment | 2026-07-12 (a reply on #39, *Wikipedia Entry*) | 1.7 months |
+| **Meeting summary published** | **#39, 2026-01-20** | **7.5 months** |
+| `ocif-lib` | 2025-08-12 | 12.7 months |
+
+Meeting summaries in `ocwg/discussions/meetings/`: 029, 030, 033, 034, 035, 039. **Numbers 031, 032, 036, 037, 038 and everything after 039 were never published**, even though the website lists meetings through #43.
+
+**Ruling: a stall of the public process, not death of the work. Confidence 15/20.** I hold it at 15 because the evidence genuinely cuts both ways and I want you to see both edges.
+
+*For stall:* a v0.7.1 draft prepared 2026-03-24, accepted by the editor on 2026-04-10 ("Done. Thanks again for the detailed, thoughtful proposal"), and **never released** five months later; both of Orion's PRs open since March; the release checklist half-executed (catalog, cookbook and examples never updated); nine of the last fifteen meetings unrecorded; the website's "next meeting" five months in the past.
+
+*Against death:* **Max Völkel's own Java implementation `Calpano/graphinout/reader-ocif07` was pushed 2026-07-31** and its README states it "targets the ***v0.7.1-draft*** spec (and still reads v0.7.0 and v0.6 documents for backwards compatibility). **It emits v0.7.1 by default**… The v0.7.1 change relative to v0.7.0 — a node `resource` may be an inline Resource object instead of a string id — is supported." The editor never stopped. The *working group's publishing* stopped.
+
+`_` And Meeting #39's own agenda (2026-01-20) tells you where the attention went. Its topics: spec hosting for LLM consumption; whether to ship a separate "LLM.txt"; "**LLM as Main Reader of the Specification**"; testing LLM-generated converters by round-tripping real files A→OCIF→A; anticipation of Gemini 3 for library generation; and integrating Codex/Claude for PR review. Meeting #35 records the same: "Discussion centered on the insight that **large language models (LLMs) will be the primary reader of the specification.**" A group that has decided its primary reader is a model has, in effect, decided that human implementer recruitment is someone else's job.
+
+One human-oversight note from #35 worth keeping: "**A viewport canvas schema bug was found that LLMs didn't catch**, highlighting the ongoing importance of human review alongside LLM automation."
+
+---
+
+## 7. `_` Who implements OCIF today
+
+GitHub code search for `"canvasprotocol.org/ocif"` (89 hits) plus `"@ocif/rect"` and `"ocif.json"`, deduplicated to repositories, non-OCWG only:
+
+| repo | last push | licence | ★ | what it is |
+|---|---|---|---|---|
+| **`tldraw/ocif`** | **2026-08-10** | **MIT** | 0 | tldraw v5.3 ⇄ OCIF v0.7.0. Real, 91 tests, extension-preserving. **Not shipped in tldraw.** |
+| `Calpano/graphinout` | 2026-07-31 | NOASSERTION | 15 | Max Völkel's Java **reader** (OCIF→GraphML), targets v0.7.1-draft |
+| `dundalek/stratify` | 2026-02-15 | MIT | 112 | codebase-architecture visualiser; OCIF one of several outputs |
+| `abstractalgo/graflint` | 2026-01-06 | none | 0 | OCIF linter POC, born from Discussion #63 |
+| `chee/Littlebook` | 2025-08-11 | AGPL-3.0+ | 2 | **OCIF-in-Automerge with two pluggable views — see 7c** |
+| `devhelpr/code-flow-canvas` | 2025-11-17 | NOASSERTION | 5 | Maikel's visual-programming canvas (spec co-author) |
+| `aaronfranke/godot-ocif-…` | 2025-07-08 | Unlicense | 0 | Godot addon (spec co-author) |
+| `jmsv/ocif-thing` | 2025-06-13 | none | 2 | small OCIF editor |
+| `devhelpr/jsoncanvas-to-ocif` | 2025-04-24 | none | 0 | converter |
+| `RonHannis/ACForms` | — | — | — | incidental `ocif.json` filename hit |
+
+**Two of the nine are the spec's own authors implementing their own spec.** Four are stale by six months or more. One is a linter. `Calpano/graphinout` is a *reader*, not a round-tripper — its own audit file notes "**Unknown relation types are only logged**."
+
+### 7a. `!` Who does *not* implement it
+
+Absent from every search: **tldraw (shipping), Excalidraw, Obsidian, Miro, Kinopio, Heptabase, Muse, Notion, Roam, draw.io, Zwibbler, infinitymaps, Kosmik, yEd.** Every app named in `design/goals.md`'s own target list. **Zero commercial canvas applications ship OCIF import or export.**
+
+### 7b. `!` What `tldraw/ocif` being the only maintained implementation implies
+
+The provenance is the whole story. `tldraw/tldraw#6293`, "feat(ocif): implement OCIF spec for import and export," opened 2025-06-20 by Mime Čuvalo. His own framing: "this is me **vibe coding**, pushing Cursor + Codex to see if we can implement the OCIF spec… still a WIP!"
+
+Steve Ruiz, tldraw's founder, same day:
+
+> "This would probably be best as a .tldr -> .ocif converter, maybe even a package. **I wouldn't add it to the main .com or tldraw packages.** (We probably shouldn't have the excalidraw stuff in there either)
+>
+> let's make this a **nights and weekend issue**, ocif is interesting but **I don't want to spend a dollar of engineering time on it** :("
+
+Mime: "fair enough! yeah, i'm just mucking about for this one, not treating it seriously. more about using something to figure out Cursor+Codex. **Maybe when OCIF gets to 1.0 we'll look at it more seriously.**"
+
+Orion, in that same thread — his only substantive public OCIF advocacy I found:
+
+> "If you do have bandwidth pre-1.0 **it's super helpful getting feedback on the spec** (the stuff in Discord was already great!). We want to make sure that 1.0 doesn't have any large issues and so **now is the best time to make potentially large changes pre-1.0 if they're called for.**"
+
+**Closed unmerged 2026-02-04** by steveruizok ("Closing this one"). Mime: "i'll move this to a separate repo (off-hours) as discussed offline before." `tldraw/ocif` created two days later.
+
+**What this implies, in four parts:**
+
+1. `!` **OCIF is not in any shipping product, including the one whose org hosts the best implementation.** It was explicitly refused entry to the main packages by the founder, on cost grounds.
+2. `_` **The most active implementation is one engineer's off-hours work**, sustained across fourteen months and two repos — which is genuine commitment, but it is one person and one closed issue deep. Its bus factor is one.
+3. `*` **The licence posture is more favourable than it looks, in exactly one direction.** `tldraw/ocif` ships its own `LICENSE` — "MIT License, Copyright (c) 2026 tldraw" — while `tldraw` itself is a `peerDependency` under the tldraw licence (`node_modules/tldraw/LICENSE.md`: "This code is licensed under the tldraw license"). So the **runtime** remains disqualified for us on the grounds already established, but `src/ocif.ts` — 2,279 lines of OCIF v0.7.0 codec with real extension-preservation machinery, plus 2,598 lines of tests — **is MIT and is legible, citable, and adaptable by us.** That is the single most valuable free artefact this whole investigation turned up: a worked reference implementation of the spec, under a licence we can read from, whose defects I have already located.
+4. `!` **"Maybe when OCIF gets to 1.0" is a conditional that nobody is currently working to satisfy.** v0.7.1 has sat unreleased since April. The largest potential adopter is waiting on a milestone the working group has stopped visibly moving toward.
+
+### 7c. `*` `chee/Littlebook` — the closest prior art to what we are contemplating
+
+This deserves its own reading. `plugins/opencanvas`, AGPL-3.0+, author chee:
+
+```json
+"dependencies": {
+  "@automerge/automerge": "3.0.0-beta.0",
+  "@automerge/vanillajs": "2.0.0",
+  "@excalidraw/excalidraw": "0.18.0",
+  "@tldraw/editor": "^3.7.2", "@tldraw/tldraw": "^2.3.0", "@tldraw/tlschema": "^2.3.0"
+}
+```
+
+Structure: `src/sources/createOpenCanvas.ts` mints an **OCIF document as the Automerge doc content** — complete with an inline `schemas` entry declaring a custom `@ocif/circle` extension with its own JSON Schema. Then `src/views/tldraw/{from,to}-opencanvas.ts` and `src/views/excalidraw/{from,to}-opencanvas.ts` render **the same document through two different canvas engines**, plus a `views/readonly/`. Reconciliation is `src/utils/patch.ts`, six lines:
+
+```ts
+import {compare, applyPatch} from "fast-json-patch"
+export function patch<T extends object | Array<any>>(oldObj: T, newObj: T) {
+  const patch = compare(oldObj, newObj)
+  applyPatch(oldObj, patch, false, true)
+}
+```
+
+`!` That diff-and-apply is precisely the "generic merge" xamde named as the missing piece — attempted naively (whole-document JSON-patch against a CRDT, no extension-aware preservation, no identity tracking). It targets **OCIF v0.4** and is stale since 2025-08-11.
+
+`*` **But the architecture is ours: an OCIF document living in Automerge as the source of truth, with pluggable renderers over it.** And chee is Patchwork's top contributor. The thread we are pulling is already tied at the other end.
+
+---
+
+## 8. Orion Reed's technical models
+
+### 8a. `?` Scoped Propagators
+
+**Sources.** Essay: `https://orionreed.com/posts/scoped-propagators/`, 2024-07-08. Talk at **LIVE 2024 / SPLASH**, 20 min, Substrates session. Code: `github.com/OrionReed/scoped-propagators`; demo `orionreed.github.io/scoped-propagators/`. `!` **No proceedings paper and no DOI — the essay is the artifact.** His own BibTeX entry, which I found inside folkjs (`website/live-2025/folkjs.bib`, key `Reed2024`), states the thesis compactly:
+
+> "Graphs, as a model of computation and as a means of interaction and authorship, have found success in specific domains such as shader programming and signal processing. In these systems, computation is often expressed on nodes of specific types, with edges representing the flow of information. This is a powerful and general-purpose model, but is typically a **closed-world environment where both node and edge types are decided at design-time. By choosing an alternate topology where computation is represented by edges, the incentive for a closed environment is reduced.** I present Scoped Propagators (SPs), a programming model designed to be **embedded within existing environments and user interfaces**. By representing computation as mappings between nodes along edges, SPs make it possible to **add behaviour and interactivity to environments which were not designed with liveness in mind.** I demonstrate an implementation of the SP model in an infinite canvas environment, where users can create arrows between arbitrary shapes and define SPs as **Javascript object literals on these arrows.**"
+
+**Lineage, in his words.** Radul's 2009 MIT dissertation *Propagation Networks: A Flexible and Expressive Substrate for Computation* (Sussman advising), and Steele's constraint work. He states the three deltas himself:
+
+> "Scoped Propagators are related to **Propagator Networks** but differ in three key ways: 1. propagation happens along **edges** instead of **nodes**; 2. propagation is only fired when a **scope condition** is met; 3. instead of **stateful cell nodes** and **propagator nodes**, **all nodes can be stateful and can be of an arbitrary type.**"
+
+**The model concretely.** A scoped propagator is "a function which takes a source and target node and returns a **partial update** to the target node," paired with "a **scope** which defines some subset of events which trigger propagation." Four scopes shipped: `change` (default — fires when the source changes), `click`, `tick` (every frame), `geo` (fires when a geometrically overlapping node changes). Syntax is a scope keyword followed by a JavaScript object literal with `from` and `to` in lexical scope:
+
+```
+click {x: from.x + 10, rotation: to.rotation + 1}
+```
+
+**The two insights, verbatim — this is the language you asked me to find:**
+
+> "the Scoped Propagator model is based on two key insights: 1. **by representing computation as mappings between nodes along edges, you do not need to know at design-time what node types exist.** 2. by scoping the propagation to events, you can augment nodes with interactive behaviour suitable for the environment in which SPs have been embedded."
+
+> "Scoped Propagators are interesting in part because of their **ability to cross the boundaries of otherwise siloed systems and to do so without the use of an escape hatch** — all additional behaviour happens **in-situ**, in the same environment, and not from editing source code."
+
+> "**100% of the behaviour is encoded in the text of the arrows. This creates a kind of diagrammatic specification of behaviour, where all behaviours could be re-created from a static screenshot.**"
+
+**Termination, cycles, merge — there is none, and he says so.** Essay, Open Questions:
+
+> "**This model has not yet been formalised**, and while the propagators themselves can be simply expressed as a function `f(a,b) ↦ b'`, **I have not yet found an appropriate way to express scopes and the relationship between the two.**"
+
+Repo README, Current Issues: "**cycles of `change` propagators cause infinite recursion.**" The source carries a literal `// TODO: handle cycles`. Merge is last-write-wins object spread — `editor.updateShape(unpack({...toShapePacked, ...result}))` — **not a lattice join**. Error handling is cosmetic: a throwing propagator turns its arrow orange.
+
+**Is it implemented? Four generations, and the arc is the answer.**
+
+1. **`scoped-propagators` (2024)** — ~840 LOC, 9 commits, **dead since 2024-07-09**, `"private": true`, pinned to tldraw 2.2.1. A demo, and honestly labelled as one.
+2. **folkjs `<folk-event-propagator>` (2025)** — shipped, ~12 demos, the model's most-used incarnation. **But `grep -rn "scope" packages/propagators/src/` returns nothing.** I read all four classes — `Propagator` (198 lines), `BidirectionalPropagator` (293), `SymmetricPropagator` (256), `AsyncPropagator` (262). They are **event relays**: a `source`/`target` pair of `EventTarget`s, an event name, and a handler compiled from a string body via `new Function('from','to','event', functionBody)`. Cycle-breaking is a boolean, `#isPropagationLocked`, set around dispatch. **No cells, no lattice, no merge, no fixpoint, and — decisively — no scopes.** The four scope kinds were replaced by an arbitrary DOM event name in a `trigger` attribute. `!` **The distinguishing feature did not survive its own port.**
+3. **`bireactive` (npm, v0.3.5, 2026-07-03)** — where the missing theory finally got built, in a *different* codebase. `src/propagators/lattice.ts`: "Because `meet` only narrows and lattices here have well-founded descent… **fixpoint iteration TERMINATES by construction. No fuel cap, no divergence panic.**" `src/propagators/solver.ts`: "**There is no `DivergedError`: monotone narrowing cannot diverge, only slow-converge.**" But these are **classical Radul propagators** — declared reads and writes, `merge()` by narrowing. **Edges-as-computation and scopes do not appear.**
+4. **`@inkandswitch/edge-handles` (2026)** — the edge made persistent and first-class. README:
+
+> "A **doc-backed reactive cell with named upstream and downstream connections** — the minimum primitive you need to build dataflow systems **where the wires themselves are first-class, sharable, persistent documents.** EdgeHandles are deliberately **not** transformers. They are the shared primitive on which transformers, **propagators**, and other dataflow systems can be built."
+
+**`!` My judgement, since you asked for it directly: elegant, and the author's own subsequent work is the evidence.**
+
+The *topological* insight is genuinely right, and it is the one thing we should take: **put the coupling on the relation, and you stop needing a closed type registry.** That is the same insight that makes OCIF's extension bag work (§2), the same one behind `folk-base-connection`'s addressable endpoints, and the same one behind our own `#has` capability edges. It is a real contribution and it generalises.
+
+The *implementation* model does not hold up. Imperative last-write-wins partial updates, fired by ad-hoc event scopes, with no termination proof, no confluence, no merge semantics, and an acknowledged infinite-recursion bug — that is a demo-grade evaluator, and the essay says as much in its own Open Questions. The decisive evidence is what he did next: **he abandoned all three distinguishing features.** Scopes vanished in folkjs. Edges-as-computation vanished in bireactive, where he went and fetched the orthodox lattice. What he *kept* is edges-as-first-class-persistent-objects, in edge-handles.
+
+**How it composes with an Automerge source of truth — badly, in its 2024 form, and `edge-handles` exists because of that.** A last-write-wins object spread over a shared replica is a merge-conflict generator: two peers firing the same propagator produce two different `updateShape` calls with no join, and Automerge will happily merge them into something neither peer computed. `_` **If we want this shape, we want `bireactive`'s lattice — monotone narrowing, which composes with a CRDT *because it is order-independent by construction* — carried on `edge-handles`' persistent edges. Not Scoped Propagators.** Worth noting the cycle problem is still open at the lab too: `patchwork-system/core/filesystem/directory-map.md` says "**cycle detection isn't done here. the service worker has a 5s timeout; that's the backstop.**"
+
+### 8b. `_` folkjs at source
+
+MIT, "Copyright 2024 Chris Shank." **Last commit `5e380e8d`, 2026-05-19**, sole branch `main`, 1290 commits. Velocity: 2026-03 → 78 commits, 2026-04 → 33, 2026-05 → 3. **Paused, confirmed.** The README's "It hasn't been published to NPM yet" is stale — all seven public packages sit at `0.0.10`, last published **2026-01-27**.
+
+**`FolkSpace`** — `packages/labs/src/folk-space.ts`, 515 lines. A `ReactiveElement` whose shadow root is `<div class="space-content"><slot></slot></div>`, so **light-DOM children stay in the author's tree** and are projected into a transformed container. One composite CSS transform, set imperatively per microtask:
+
+```ts
+this.#contentElement.style.transform = M.toCSSString(this.matrix)
+// matrix = scaleSelf(fromTranslate(x, y), scale, scale)
+```
+
+Not `zoom`, not container queries — a single `matrix()` string on one element. Pointer mapping is an `IPointTransform` interface (`mapPointFromParent`, `mapPointToParent`, `mapVectorFromParent`, …) by matrix inversion, with vectors deliberately dropping translation. Pinch-zoom is detected by `event.ctrlKey` on wheel; Firefox's line-delta mode is compensated. `#shouldStartPanning` **bails if any ancestor is scrollable** — the explicit concession that real DOM inside still needs to scroll. Scale is clamped to `[0.05, 8]`. `TransformStack.fromElement` walks ancestors so **spaces nest correctly**; in practice a bubbling `ShapeConnectedEvent` registers each ancestor space. The grid is five stacked `radial-gradient` layers driven by three custom properties — an LOD grid at ~zero per-frame JS cost.
+
+**`ShiftingOriginGraph`** — `packages/labs/src/ShiftingOriginGraph.ts`, 312 lines. File header: `@note This is a PoC, lots of optimisations are possible.` **Only two consumers, both demos.** Nothing in `packages/` depends on it.
+
+*The algorithm.* Extends `MultiGraph`. A `ZoomNode` carries opaque `data`; **every directed edge carries a `DOMMatrix`** describing how the target sits inside the source. Cycles are the point — an infinite zoom is a cycle you traverse forever. State is `originNodeId`, `#originTransform`, and `#maxNodes = 30`. Zooming accumulates into `#originTransform`; when a threshold trips, it re-bases by **at most one hop**:
+
+```ts
+#shiftOrigin(edge) {
+  this.originNodeId = edge.target;
+  // Before: viewport * edge = how target node appears
+  // After: new target node is at origin (0,0)
+  this.#originTransform = this.#originTransform.multiply(edge.transform);
+}
+```
+
+*The threshold lives in the caller, not the class* — re-base when the candidate node **fully covers the viewport**, tested by `isScreenCoveredByRectangle`, which **samples** points rather than testing exactly. The demos additionally cap accumulated scale at 100× and reset to 1.0 on each re-base; **that, not the matrix, is what actually bounds float error.**
+
+*Cost.* `getUnfoldedTree()` re-runs from scratch every frame with no memoisation. Two `DOMMatrix` allocations per edge per frame — `.multiply` is non-mutating and `multiplySelf` is never used. The traversal has **no visited set and no depth limit**; only the culling callback and a hard `maxNodes` counter stop an infinite walk through a cyclic graph.
+
+*What breaks.* `#shiftOrigin`/`#unshiftOrigin` are `M·E` and `M·E⁻¹` using a numerically-computed inverse, with **no re-orthogonalisation — so zoom-in-then-out is not the identity.** Shift and unshift predicates are exact complements with **no dead band**, so the boundary flaps. Zoom-in takes the **first matching edge**; zoom-out takes `getSourceNodes(...)[0]` — **there is no path history, so in a multi-parent graph, zooming out lands you somewhere you have never been.** Culling is the caller's responsibility, assumes uniform scale, and **prunes the whole subtree** — a small off-screen node containing a huge zoomed-in child is dropped with it. And critically: **nothing renders truly nested DOM.** Every visible node is a flat sibling positioned by a composed CSS string — no containment, no parent `overflow:hidden` clipping, no depth z-ordering, and a hard LOD pop at `scale < 0.005`. Link positions are measured once at scale 1 and cached, **never invalidated on resize or content change**.
+
+`!` **For us: the idea is sound and cheaply reimplementable in ~50 lines. The code is not a foundation.**
+
+**`packages/collab/src/automerge.ts` — read in full, it is two lines:**
+
+```ts
+export { getBackend } from '@automerge/automerge';
+export * from '@automerge/vanillajs';
+```
+
+`@folkjs/collab` is **not an Automerge binding.** It is a wasm-bundling re-export shim that surfaces `getBackend` (needed to resolve objId→path). It pins `@automerge/automerge ^3.2.3` and `@automerge/vanillajs ^2.3.0` — **not `automerge-repo` directly.** Anyone citing this file as folkjs's CRDT integration has cited the wrong file.
+
+**The real binding is `packages/labs/src/folk-sync-attribute.ts`, 470 lines, and it is far more interesting to us.** Its CRDT schema is **HAST** — the unified HTML AST:
+
+```ts
+interface SyncElement extends Omit<HAST.Element, 'properties' | 'children'> {
+  properties: { [key: string]: ImmutableString };
+  children: SyncNode[];
+}
+```
+
+So it syncs **arbitrary DOM subtrees** — every attribute, all text, all comments, full child order. Geometry rides along *only* because `folk-shape`'s state literally *is* an attribute string. The schema choice is deliberate and correct: **prose merges character-wise (plain `value` on text nodes), attributes are whole-value LWW (`ImmutableString`)** — you do not want two peers character-merging `"x: 10; y: 20"`. Identity is a `BiMap<DOMNode, ObjID>` resolved through `getBackend(doc).objInfo(id).path`. DOM→CRDT is a `MutationObserver` with `{attributes, characterData, childList, subtree}`; the childList handler pre-computes indices "to avoid O(n²) when inserting multiple nodes."
+
+`!` **Three defects to know before borrowing it.**
+1. `#applyRemotePatches` **disconnects the MutationObserver** while applying patches — the code explains why: "MutationObserver callbacks are async (microtasks), so a flag-based approach doesn't work." But **disconnecting discards queued records**, so a genuine local edit that lands during patch application is **silently lost**. That is a structural race, not a nit.
+2. Only `insert` and `del` patch actions on children are handled; `splice`, `put`, `inc` are silently ignored.
+3. Transport is hardcoded `new Repo({network: [new WebSocketClientAdapter('wss://sync.automerge.org')]})` — **no storage adapter, so nothing persists**, no auth, no rooms. Presence is dead code: `folk-presence.ts` is 670 lines of which 562 are commented out.
+
+**`folk-shape-attribute` / `folk-space-attribute` — why a custom *attribute*.**
+
+*Mechanism.* There is no native custom-attribute API, so `packages/dom/src/CustomAttribute.ts` (219 lines, "Rewritten from lume/custom-attributes") builds one: a single **document-wide `MutationObserver`** whose `attributeFilter` is re-derived on every `define()`, a `WeakMap<Element, Map<string, CustomAttribute>>` registry, a hand-rolled lifecycle (`connectedCallback` / `disconnectedCallback` / `changedCallback` / `connectedMoveCallback`), and an explicit upgrade sweep `node.querySelectorAll('[' + name + ']')` for elements already in the tree. It handles both Chrome dialects of `moveBefore()` and guards a cross-bundle singleton on `window.__customAttributes`.
+
+Attribute values are a CSS-declaration mini-language, **parsed and written back**, so the DOM is the source of truth — which is precisely why `folk-sync` gets geometry sync for free. And one genuinely clever trick, selecting CSS on a substring of the value:
+
+```css
+[folk-shape*='x:'][folk-shape*='y:'] {
+  position: absolute;
+  left: var(--folk-x) !important;
+  top:  var(--folk-y) !important;
+}
+```
+
+so an unpositioned shape stays in normal document flow and only becomes absolutely positioned once `x`/`y` appear in the value.
+
+*Why attributes and not wrappers — stated, in the LIVE 2025 paper in-repo* (`website/live-2025/live.md`, Shank & Reed):
+
+> "While web-based systems often break when their DOM tree structure is modified, **they often tolerate the addition of _new_ attributes** that encode interactive functionality. **This tolerance creates one path for escaping isolated environments** — annotations can introduce liveness without requiring users to abandon their tools or migrate their work."
+
+Orion, folkjs Discussion #36: "we can **augment existing DOM tree with spatial canvas behaviors without needing to modify the tree structure**, quite useful in adversarial environments!"
+
+*What it buys.* It works on elements you cannot wrap (`<h1 folk-shape>`, `folk-camera` on a `<video>`). **No wrapper node**, so host CSS selectors, `:nth-child`, and flex/grid parent-child relationships all survive untouched. Multiple orthogonal behaviours compose on one element (`<div folk-shape folk-sync>`). State is serialisable **in the DOM itself**, which is what makes CRDT sync fall out for free. And there is no custom-element upgrade-timing hazard.
+
+*The hard ceiling.* `FolkSpaceAttribute.connectedCallback` must `attachShadow` on someone else's element — the code's own comment: "**this attribute can only be added on elements without an existing shadowDOM**… If this attribute is removed then reapplied then it will error out." So `folk-space` **cannot be applied to any custom element at all.** Styles are injected globally via `document.adoptedStyleSheets` with a standing `// TODO: detect how to inject styles into shadowroot`. Value parsing is `split(';')`/`split(':')` with no escaping, so no value may contain those characters. There is always one frame where the attribute is present and its effect is not. And `FolkSpaceAttribute` clamps scale **only in CSS**, so at the zoom limits `mapPointFromParent()` disagrees with what is on screen — **hit-testing goes wrong exactly when the user is fully zoomed in or out.**
+
+*Also worth your attention.* `folk-base-connection.ts` makes connection endpoints **addresses, not object references**, round-tripping three kinds through one attribute value: `::point(x, y)`, a serialised DOM `Range`, or a CSS selector. `*` **That is free addressability made literal — you can point an arrow at a text selection inside someone else's paragraph.** `folk-xanadu.ts` draws Xanadu-style transclusion ribbons between two Ranges by unioning `getClientRects()` into a `clip-path`. The spatial index is a `BoundingVolumeHierarchy` that is **fully rebuilt on every shape move**, and nothing in `packages/` culls. Nothing TiddlyWiki-shaped exists — **no source found** for transclusion macros, nested documents, or wikitext.
+
+### 8c. `_` Ink & Switch — what the current work is
+
+**`inkandswitch/patchwork-system`** (provenance already with you). `@patchwork/monorepo`, "A malleable software environment for collaborative work." pnpm workspaces + changesets, ~2300 commits, npm releases every few days, Playwright e2e suites named `concurrent-edits`, `cross-profile-sync`, `offline`, `reload-persistence`.
+
+Automerge is central and **pinned exactly**: `@automerge/automerge 3.3.2`, `@automerge/automerge-repo 2.6.0-subduction.47`, `@automerge/automerge-repo-keyhive 0.3.0-alpha.sub.8b`, `@automerge/automerge-subduction 0.16.1`, `@keyhive/keyhive 0.1.0-alpha.5`. Their `AGENTS.md` explains why, and it is a lesson we have paid for ourselves:
+
+> "These are **exact pins, not ranges**. Two of our packages published against different pins means **two copies of automerge-repo in the consumer's tree, which breaks document handle identity.**"
+
+Project framing: "Patchwork is an exploration of **version control for writing and beyond**… Perhaps this version control could one day be built into the storage layer of your OS." Research areas: Universal Version Control, Malleable Software, Local-first.
+
+**`inkandswitch/gaios.sgai.uk`** — created 2026-08-04, pushed 2026-09-02, no README. It is a **deployed Patchwork site**: roughly 35 lines calling `setup({packageListURL, accountKey: "gaiosAccountUrl", title: "GAIOS"})` against `@inkandswitch/patchwork ^0.7.3`, with a `KEYHIVE` sync-server switch. `sgai.uk` is ARIA's **Safeguarded AI** programme. Dispatch 014:
+
+> "we are building **GAIOS, a malleable, collaborative software platform derived from our Patchwork project**… with **interoperability and version control powered by Automerge.**"
+
+`_` Its `public/modules.json` tool list includes **`tldraw4` and `tldraw5`** alongside `codemirror-*`, `hazel`, `petrinaut`, and CatColab.
+
+**`patchwork-system` bears directly on our stack** — it is the nearest live system to ours: Automerge 3.x plus Keyhive, a doc-URL-addressed virtual filesystem, tools-as-modules, view composition. Neither it nor GAIOS is a spatial canvas *per se*; the spatial work lives in `edge-handles` and in the Breadboard / Space-frame prototypes below.
+
+**Liberatory Computing** — `libcomp.org`, which he co-wrote:
+
+> "**LC is a loose collective of researchers, artists, and activists working to liberate computing from capitalism.** … By separating **production** from **use**, producing **inflexible software**, and slicing up computing into **siloed apps**, your agency is held back by a tech industry that profits from a population **rendered computationally passive.**"
+
+### 8d. `*` His writing on the DOM as a spatial medium — quoted
+
+**Why the field keeps failing.** LIVE 2025, `folkjs.org/live-2025/`:
+
+> "Live programming research gravitates towards the creation of **isolated environments whose success is measured by domination: achieving adoption by displacing rather than integrating with existing tools and practices.**"
+
+> "This inward focus produces systems which can be operated on from within themselves, but **neglect their participation in wider contexts of use**… Whereas traditional programming leverages **ubiquitous plaintext infrastructures that resist single-system dominance** through their simplicity and interoperability, **live programming's visual requirements largely preclude utilizing this pluralistic foundation.**"
+
+**The DOM as substrate.**
+
+> "**Free addressability** embraces transparent, publicly addressable state through queries, selectors, names, or other mechanisms that **make parts of a running system targetable from the outside without requiring permission or coordination from the original creators.**"
+
+> "Our adversarial strategies exploit the fact that **user interfaces often expose more addressable surfaces than the underlying program** — through DOM elements, accessibility trees, and visual components."
+
+> "**What enables all of these approaches to work is that the DOM operates as a running, shared representation of the UI; it would be nigh impossible to do this if pixels were the shared representation being operated on.**" *(Notes from the Lab, May 2025)*
+
+**And the hole he leaves open in his own thesis:**
+
+> "While free addressability focuses on making system parts targetable, **it doesn't address how those parts can actually be modified.** The DOM is exploitable because CSS selectors provide addressing while referenced elements expose clear manipulation interfaces — **a relationship that remains undertheorized in our work.**"
+
+**Canvases as substrate.** Mastodon, Causal Islands LA thread, 2024-03-30:
+
+> "**canvases fit all the criteria of an information substrate**, and I think looking at them this way opens up their 'true' design space. **Not just tools or whiteboards, but a digital medium with a consistent grammar and semantics.**"
+
+> "An '**integration substrate**' would be an information substrate which is **suitable for the integration of other substrates, interfaces, and interactions. A shared medium in which many disparate interfaces can coexist and be combined.**"
+
+> "**Canvases could be to HCI what Haskell is to Type Systems research.**" *(TfT Rocks 2024 deck)*
+
+**DOM ↔ Canvas**, 2024-03-25:
+
+> "**What if *any* website could be turned into a canvas with a single click?** … **The regular web, zero magic.**"
+
+> "**A canvas can have just as much layout control as the DOM, if we let it. With a little work, they could be indistinguishable.**"
+
+**Breadboard** — Ink & Switch lab note, 2026-03-20, the most current and the most useful to us:
+
+> "Patchwork is built from aspirationally composable parts… but **the composition itself is hidden.** … **The assembly disappears behind a finished-looking application.**"
+
+> "Each `<patchwork-view>` **carries its wiring as HTML attributes: `tool-id` and `doc-url`.** … The mechanism is simple: `document.querySelectorAll('patchwork-view')`. **Breadboard doesn't ask the frame for cooperation. It finds views the same way a browser extension or screen reader would — by reading what's already public in the DOM.**"
+
+> "**This didn't require building an inspection API. I merely stopped hiding what was already there.** Both experiments **treat the DOM not as a rendering target but as a substrate with useful properties: public attributes, sibling order, containment.**"
+
+> "**Breadboard is postmodernist: it works with what exists**… **Space-frame is modernist: it replaces what exists**… **Neither approach is obviously correct.**"
+
+> "**Frameworks treat the DOM as a rendering target.** Build systems assume a uni-directional flow from source code to deployed artifact. The resulting software is not meant to be modified by its users. **React's virtual DOM, for example, can make DOM-level changes fragile as it assumes unilateral control over the DOM subtree it manages.**"
+
+> "**Digital systems should aspire to the properties of visibility and editability of physical breadboards, but not the material constraints.** … **Malleability does not imply fragility.**"
+
+**On browser primitives — his most recent relevant statement, 2026-05-02:**
+
+> "The nascent **HTML-in-Canvas API** is exciting to me **not because of flashy effects, but because it extends the semantics that the DOM can (tractably) represent** — as a tiny example, it's possible to **show an element in multiple places, cheaply, under arbitrary transforms.**"
+
+`!` **Read that last one twice. "Show an element in multiple places, cheaply, under arbitrary transforms" is transclusion, stated as a browser primitive.** It is the same operation as OCIF §Nodes-as-Resources, and the same one DreamDOM has to provide.
+
+**On OCIF specifically**, he is by far its quietest founder — zero issues, two discussions, three comments, four PRs across the whole org; **never mentioned OCIF on Bluesky at all**; not mentioned in his own Canvas Research Memo. His substantive contribution is in **Meeting 1**, and it is the argument that shaped the extension mechanism we have been analysing:
+
+> "when we look at something like **email**, part of what allowed it to evolve was… **a very very tiny set of required information**… Email does actually allow for **arbitrary other fields** to be added… then the other one is something like **XML** which has support for **explicit schemas and also ways to compose them together**. So we could imagine… **some base versioned spec that has a very minimal set of absolutely mandatory stuff**, but then on top of that… **more kind of opt-in specs**… that allows **more kind of localized coordination** and still gives you that interop where it applies, **without bringing all of that into a spec that just tries to do everything.**"
+
+**Meeting 5**, on graceful degradation across schemas:
+
+> "**another tool that didn't have that would still be able to treat it as a rectangle if they shared some base schema, even if they wouldn't understand how to wire up edges to ports.**"
+
+**Meeting 3** — the fallback he proposed, which was never built, and which is **exactly the mitigation for the data loss I measured in §3**:
+
+> "I really like the idea of having as a suggested fallback mechanism… that kind of **per object text view** — so in the cases where you don't have schema support for something, being able to see like '**I don't actually know how to render this but I can still show you the text of just this object**'… you have that kind of **escape hatch mechanism.**"
+
+`!` Two and a half years later, the implementation that drops Berlin is failing at precisely the point the founder said needed an escape hatch.
+
+And from an LLM-generated summary of Meeting 39 — **flagged as paraphrase, not his words:**
+
+> "Orion emphasized: Desire to see [OCIF] implemented in real tools… **Has some influence and can likely get at least one major implementation effort, but can probably 'pull that favor' only once.** Therefore, wants to **stabilize key semantics like rotation and transforms before pushing for adoption.**"
+
+His current position, `orionreed.com/posts/app-file-topology/`, 2026-02-26 — the one most likely to matter to a sovereign-vessel project:
+
+> "**Enclosure did not need to abolish the file. It needed only to make the boundary opaque.**"
+
+> "even robust export — Google Takeout, Notion's markdown output, platform APIs — **rarely preserves the full relational structure of work produced within a platform**… **The topology has changed such that the file is no longer a sufficient vessel for the work.**"
+
+---
+
+# 9. The closing three
+
+## CAN OCIF CARRY A TIDDLER?
+
+**Conditionally yes — and every condition is on us, not on the format.**
+
+The format itself is sufficient. §Extension Mechanism grants a URI-identified property bag in which "the extension can use all other property keys" and "**arbitrary, nested JSON structures are allowed**," usable on nodes, resources, representations *and* the canvas, and §Defining Extensions plus the cookbook confirm it may be minted and used "in the same OCIF document, **without any prior announcement or registration process**." I built `@lar/tiddler` carrying our lar URI, TiddlyWiki fields including `$:/`-prefixed system tags, and wikilink/transclusion/macro syntax in a `text/vnd.tiddlywiki` representation, and it validated against the official `spec/v0.7.0/schema.json` with **zero errors** and round-tripped **byte-identical** through the live implementation. Typed relations have a real home: §Edge Extension's `rel` "allows representing an **RDF triple (subject, predicate, object) as (start, rel, end)**," and `@ocif/hyperedge` generalises it to ordered, directed, weighted n-ary relations. Our renderer stays ours: §Resources is MIME-typed with an **ordered fallback chain** where "the first representation is the default… later representations can be used as fallbacks," so `text/vnd.tiddlywiki` first with `text/html` and `text/plain` behind it is the pattern the spec intends. Transclusion is named in our sense — §Nodes as Resources: "Using a node B as a resource in another node A can be seen as a form of **transclusion**… the intention is to create a **live view (not a static image)**… Whenever the way B looks is changed, the other places where node B is imported should be updated" — with cycle refusal ("a node MAY NOT directly or indirectly import itself… all stated imports of the loop MUST be ignored"). And §Nesting Canvases lets an entire sub-lararium be a node, with a specified RFC 7396 merge and an explicit exception preserving extension arrays.
+
+**Three conditions bind, and they are the whole answer.** *(a)* **Preservation is not normatively required.** `grep` for RFC 2119 over the spec returns nothing; there is no conformance section and no notion of a conforming consumer; the only MUST touching the case says "unknown extensions **MUST be ignored**" (§Canvas Extensions), while preservation appears as a lowercase "apps **should** preserve unknown extensions and round-trip them on export" (§Data Extension) and as keyword-free narrative (§Handling Extension Data), with the strongest wording — "an app **may not** alter or delete data written be another app" — living in `design/requirements.md`, which the spec does not incorporate. The byte-identical survival I measured is therefore a property of one implementation's good faith, **not a guarantee of the format**; any other tool may legally drop us and remain exactly as conformant. *(b)* **In the field today, in the only maintained implementation, any node bearing a text resource is silently deleted** — the spec's own Berlin/Germany Hello World comes back missing Berlin, both text resources, and the `rel` predicate. I have ruled that an implementation bug (§3h) rather than a spec requirement or ambiguity, on the strength of the spec explicitly prescribing the placeholder rectangle and the representation fallback chain, both of which the reader bypasses — which means it is a filed bug and a small PR, not a dead end. *(c)* **OCIF carries the *fact* of transclusion, not its *position*.** `{{title}}` inside a paragraph has no OCIF representation; it must live inside our extension's opaque payload. A foreign tool can move, group, connect and nest our node; it can never edit what is inside it.
+
+**So, stated plainly: OCIF can carry a tiddler as a faithfully-preserved opaque payload attached to a node whose geometry, hierarchy, grouping and typed relations foreign tools can genuinely manipulate — and it cannot carry a tiddler as something a foreign tool can meaningfully read.** That is interop at the **arrangement** layer, not the **content** layer. Which is, in fairness, exactly what OCIF says it is. kepano asked this precise question in Discussion #44 eighteen months ago, and the chair answered: "**the OCWG and the OCIF format can really only enable _interchange_. True interoperability will have to be a choice by each tool-maker.**"
+
+## WHAT PULLING THIS THREAD ACTUALLY COSTS US
+
+**Adapter work — small, and mostly work our own model implies anyway.**
+
+- **The extension.** One document plus a JSON Schema at a URI we host and actually serve as JSON (`bags/…` → resolvable https). Half a day. `!` **Mint our own URI. Never ride `@ocif/data`** — its same-`type` RFC 7386 merge rule makes it a shared mutable global across applications, and its schema pins `type` to a constant so collision is guaranteed, not incidental.
+- **The codec over the Automerge composite store.** Our node/parent/local-transform model must align with OCIF's TRS chain (`M = T*R*S`, composed root-to-leaf); `@ocif/global-positions` gives us a *declared cache slot* for what DreamDOM computes anyway, with the conflict rule already specified in our favour ("the local position MUST be preferred"). Estimate **1–2 weeks for a faithful writer, 2–3 for a reader that survives hostile input.**
+- **The fallback chain is non-optional armour.** `text/vnd.tiddlywiki` first, `text/html` and `text/plain` behind. It will not save us from `tldraw/ocif` today (which drops the node before consulting it) but it will save us from every SVG renderer, every indexer, and every future reader — and it is Orion's own unbuilt "per object text view" escape hatch, which gives us a principled name for it in any OCWG conversation.
+- **ID discipline, welded before it ships.** §ID wants IDs to be valid CSS identifiers "if possible"; `lar:///…` is not one; and every implementation I ran rewrites ids regardless (`n1` → `shape:n1`). `!` **Carry the lar URI inside the extension; use a stable opaque id outside.** An id rewrite through one foreign tool dangles every `@ocif/edge` `start`/`end`, every `@ocif/group.members` entry, and every `@ocif/ports` reference in the file. *(Standing practice: weld-test the naming before the rename, not after.)*
+- **A round-trip witness in our own suite** — `tools/ocif-roundtrip-witness.sh` — pushing a real tiddler corpus through our writer, our reader, and `tldraw/ocif` (MIT, adaptable, defects already located), asserting on the **decoded payload**, not the bytes. Note their 91 green tests: a fixture that omits the failing case proves nothing.
+
+**Governance participation — cheap, and the seat is empty.** Bi-weekly Tuesdays, Discord, GitHub Discussions, no charter, no fee, no sponsor, four humans have ever committed to the spec repo. **What we would owe is exactly what the CR asks for: implementation experience.** Two contributions are ours to make and would land immediately: **(i)** the missing normative layer — an RFC 2119 clause, a conformance section defining a conforming consumer, and a preserve-and-passthrough MUST, which is the single change that would make OCIF worth *standing on* rather than merely *exporting to*; **(ii)** the round-trip test bench they have wanted since March 2024 and never built — and I already have four failing cases against the spec's own Hello World, which is a contribution rather than a complaint. Realistic cost: **1–2 hours a fortnight plus the artefacts.**
+
+`!` **The real risks, named.** *The group may not be meeting* — every public surface is silent since April, so I would open a Discussion or a Discord message *before* writing a line of spec text, and treat a non-answer as the answer. *There is no IPR policy* — contributing spec text to a body with no patent or copyright policy, under CC BY-SA, is a boundary question, not a technical one, and it belongs to the operator. *Filing `@lar/tiddler` publicly declares part of our data model in a CC BY-SA venue* — same call, same owner. *The format may move under us* — v0.7.0 merged nodes and relations and flipped coordinates from global to local in one release; a v0.8 could do the same again, and our codec would follow.
+
+## WHAT IT BUYS
+
+**`*` A seat in a room where our nakama already are.** Orion Reed founded OCWG. **chee is Patchwork's top contributor and already ships an Automerge-backed OCIF document rendered through two pluggable canvas views** (`chee/Littlebook`) — our exact architecture, prototyped, at OCIF v0.4, unattended since August 2025. Ink & Switch's GAIOS ships `tldraw4` and `tldraw5` as Patchwork tool modules. This is not a cold approach to strangers; it is a thread already tied at the other end.
+
+**`_` A settled, published vocabulary for the arrangement layer** that we would otherwise design from scratch and get wrong once: local transforms with a declared global cache and a stated conflict rule; ports-as-nodes; ordered directed weighted hyperedges; property inheritance with include/exclude and cycle refusal; theme-as-possible-worlds over arbitrary extension data; and a nesting-canvases rule with an explicit merge-patch semantics and an explicit extension-array exception. **Even if we never exchange a single file with a foreign tool, reading this specification is cheaper than re-deriving it** — and §Nesting Canvases plus §Nodes-as-Resources is a better-specified transclusion boundary than we currently have written down anywhere.
+
+**`*` A 2,279-line MIT reference implementation** of that vocabulary (`tldraw/ocif` `src/ocif.ts` plus 2,598 lines of tests), legible and adaptable, whose extension-preservation machinery is exactly the pattern we want and whose two defects I have already located and can cite.
+
+**`!` An exit path that is a mechanism rather than a promise.** Per Orion's own 2026 essay, "the file is no longer a sufficient vessel for the work" because export "rarely preserves the full relational structure." OCIF is the one live attempt to make a canvas file *be* that vessel. It does not yet succeed — but a sovereign vessel that can hand its user a file another tool can genuinely open is making a different claim about ownership than one that cannot.
+
+**`0` And the honest reading, which I would rather state than dress up: OCIF is an export format today and could become an interop surface if someone supplies the conformance language and the test bench.** Nobody is currently doing that. A v0.7.1 draft has sat unreleased since April. **That is a vacancy with our name on it**, and it is the cheapest possible way to find out whether anyone is still home.
+
+**My recommendation, plainly:** build `@lar/tiddler` and the codec now — the cost is small and the format is sufficient for the arrangement layer. Treat OCIF as **export-plus-preserve**, never as a store; the Automerge doc stays sovereign. **Build no feature whose correctness depends on a foreign tool preserving our data**, because I measured that it does not. File the Berlin bug against `tldraw/ocif` with the isolation table, and open one Discussion in `orgs/ocwg` with the four failing Hello-World cases — that single act is simultaneously the cheapest governance contribution available to us, a real gift to the two people still doing the work, and the fastest way to learn whether the group is alive.
+
+---
+
+**Confidence: 16/20.** Solid on the spec text, the tooling state, and the round-trip measurements — those I read, ran, and controlled. Weaker on whether OCWG is dormant or merely quiet (the editor's own Java implementation was active five weeks ago, which cuts against my stall reading), and on Orion's current appetite for OCIF, where the only evidence of intent is an LLM-generated paraphrase of a meeting summary.
+
+**Owed / not measured, so you know the shape of the hole:** the **OCWG Discord** is auth-walled and I could not read it — the meeting notes reference substantive spec discussion happening there that is invisible to this entire report, and it is the most likely place for evidence that would move my stall ruling in either direction. Also unmeasured: whether `tldraw/ocif`'s text-resource drop is known-and-backlogged or simply unnoticed; whether `chee/Littlebook`'s OCIF plugin is abandoned or paused; and whether the `v0.7.1-draft` has a release blocker or merely lacks a hand on the tiller.
+````
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;sY-yPl2s_AEjbAVCBgTugLj02EHzBmTQIEaiD8RLvNU
+
+<<^ code="&#x0004;" -> to=? >>

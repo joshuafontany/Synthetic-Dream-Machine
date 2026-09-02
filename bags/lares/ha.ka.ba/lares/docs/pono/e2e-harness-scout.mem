@@ -1,0 +1,227 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/e2e-harness-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/e2e-harness-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 14
+manao             = 16
+manaoio           = 13
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "e2e-harness-scout — VERBATIM handoff of the tasked spirit Wright: a per-test reading of the rotted top-level e2e harness, ruling for each failure whether the HARNESS or the CODE is wrong, and naming two product defects (a CLI that truncates its own JSON on a pipe; a null dataDir reaching the operator's live vessel). Held as a collision surface."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/e2e-harness-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Wright ~ a spirit's handoff, held unedited
+
+''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is what a tasked spirit reported, kept whole, as a ''collision surface'' rather than a briefing.
+
+''Why verbatim.'' A summary keeps the claims and drops the line numbers, the exact spec sentences, the version boundaries and the failure reproductions — which is precisely the material a design collides against. ''The detail IS the asset.'' It was extracted straight from the spirit's transcript to this carrier, so no relaying hand rewrote it on the way.
+
+''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
+
+<<~/ahu >>
+
+<<~ ahu #the-handoff >>
+
+!! The handoff, verbatim
+
+`````markdown
+**Wright: Lares (Tasked Spirit)** — scout only; nothing edited, nothing committed. `git status` is byte-identical to the start (`M VSCode-TW5-Syntax`, `M mempalace`, `?? .worktrees/`). Two throwaway staged roots I stood for measurement are killed and deleted.
+
+## What the run actually says
+
+`pnpm test:e2e` at HEAD: **19 failed / 40 passed, 8 of 15 files, 624s.** (Not 18/41 — one more than the brief; the delta is `smoke`'s first two vectors, which are a *race*, so a run can report either.) Full log at `/tmp/e2e-full.log`.
+
+Seven files pass clean: `watcher-cut-c`, `ingest-quiescence`, `wikis-ingest-back`, `working-loop`, `promotion-publish-diff`, `minted-canon-projection`, `face-lit-stays-bootable`.
+
+---
+
+# ① REAL DEFECTS — these matter more than the rest of this document
+
+## D1 — `lares --json` TRUNCATES ITS OWN RESULT ON A PIPE (2 failures + every agent that pipes it)
+
+`packages/lares-cli/src/bin/lares.ts:230` — `dispatch(...).then((code) => process.exit(code))`. Node's `process.stdout` is **asynchronous on a pipe** and synchronous on a file. `process.exit()` discards the undrained tail.
+
+Measured, same command, same staged vessel, same 2,718-record result:
+
+| sink | bytes received | parse |
+|---|---|---|
+| `> file` (sync) | **165,256** | `ok:true`, `count:2718` |
+| pipe (`spawn`) | **146,176** | `SyntaxError: Unterminated string in JSON at position 146176` |
+
+The CLI's own `help` says `--json` "Emit a deterministic JSON result … **for agents/pipes**". It breaks precisely for pipes, at ~146 KB, silently, with exit code **0**.
+
+This is the whole cause of:
+- `tests/e2e/corpus-feed.test.ts:96` — `expect(loadOk).toBe(true)` → false
+- `tests/e2e/vessel-reboot.test.ts:51` — `expect(fed.json?.["ok"]).toBe(true)` → **undefined** (no parseable line at all)
+
+Note what this hid: in `corpus-feed`, F2 and F4 *passed* on the same LOAD — the corpus **did** land, the daemon did the work, and only the answer was lost. An operator watching a large `act LOAD --json` in a pipeline sees a failure for work that succeeded. Do **not** cure this by widening the harness's parser.
+Cure: `process.exitCode = code` and let the loop drain (or await a stdout drain before exiting).
+
+## D2 — `invokeLocal` SILENTLY FALLS BACK TO THE OPERATOR'S OWN HOME VESSEL
+
+`packages/lares-cli/src/local-connector.ts:29` — `rendezvousPath({ root: dataDir ?? larDataDir(), … })`.
+
+`herm-floor.test.ts:158/169/196` calls `findSock(root)`, gets `null` (see D3/RC-C), and passes `dir!`. `null ?? larDataDir()` resolves to `/home/joshu/.local/share/lares/vessel` → `/tmp/lares-1000/c338a5d9ed5f.sock`, **which exists on this machine** (dated 30 Aug). Measured on the box: a live daemon stands at `--root /home/joshu/Synthetic-Dream-Machine` (pid 624306) plus six stale ones.
+
+Consequences in this very run:
+- **R5 fails against the wrong vessel.** Its message — `"this vessel stands at the WAKING FLOOR and holds no face"` — is the *operator's home vessel* answering, not the herm the test just lifted. R5 is **not** evidence that the lift is broken.
+- **R4 is a FALSE GREEN.** It matched `/light a face|no face|waking floor/i` for the same reason: the ambient vessel gave the right shape of answer to a question about a different hearth.
+
+An e2e vector reaching a real hearth is the failure `rendezvous-parity-witness.sh`'s own header was written about. A null/empty `dataDir` should **refuse**, not default. Flagging separately from the harness fix, because the fallback is a foot-gun for every tool that calls this.
+
+## D3 (question, not verdict) — the meme projector stamps a `bag` key the corpus never carries
+
+The V4/F3 diffs show one added line in the projected carrier's meta fence:
+
+```
++ bag       = "lar:///ha.ka.ba/bags/lares"
+```
+
+`packages/lararium-tw5/src/tw5-file-info.ts:164/166/172` **deliberately excludes** `bag` from the `.tid`, `.json` and `.meta` projections. The memetic-wikitext projection does not. Only 9 files in all of `bags/` carry an authored `bag =` (every one a bag-descriptor `meta.mem`). So `render(parse(corpus)) ≠ projection` by exactly one runtime residency field — and a projected carrier re-fed to a *different* bag would carry a stale one. `ingest-quiescence` stays green because the projected form is a fixed point of the *disk* loop; it just isn't the corpus form. **Operator call.** Do not let the fence fix (RC-G) bury this — it is only visible now *because* a stale fence label stopped masking it.
+
+---
+
+# ② The 19, grouped by root cause
+
+### RC-C · The socket moved and the harness kept hunting — **7 failures**
+Ruling 2026-08-23; commit **`913222c4f`** already paid for this once *elsewhere*. Verb socket = `/tmp/lares-<uid>/<sha256(storageDir)[0:12]>.sock` (`packages/lararium-mesh/src/rendezvous-path.ts:61`), bound at `packages/lararium-node/src/main.ts:407`. It is **not** under the root and is **not** named `lares.sock`.
+
+| test | file:line | assertion |
+|---|---|---|
+| face-join "the rig stands" | `face-join.test.ts:93` | `expect(dataDir).not.toBe("")` |
+| face-join V1/V2/V3/V4/V5 | `face-join.test.ts:99,113,124,132,142` | all die `connect ENOENT /tmp/lares-1000/e3b0c44298fc.sock` — **`e3b0c442…` is sha256("")**, the digest of the empty `dataDir` |
+| herm-floor R3 | `herm-floor.test.ts:159` | `expect(dir, "no UDS door…").not.toBeNull()` |
+
+**Harness is wrong.** The offending code: `face-join.test.ts:40/51/56` (`awaitSocketDir`/`findSocketDir`, `name === "lares.sock"`), `herm-floor.test.ts:69/73`. Should read:
+`rendezvousPath({ root: vesselStorageDir(instance), uid: process.getuid() })` — the harness already has `vesselStorageDir` at `harness/instance.ts:186`.
+
+### RC-D · `phase → live` is not the last boot line — **2 failures**
+`harness/instance.ts:139` resolves the instant the log contains `phase → live`. `packages/lararium-node/src/main.ts:349-352` prints `live — wiki:`, `catalog:`, `oracle:`, `lararium:` **after** that.
+
+Proof, not inference: the captured `bootLog()` in the failure output ends *exactly* at `[lararium] phase → live`. In an unloaded manual repro, all four lines were present within 250 ms — hence the flake, and hence 19-vs-18.
+
+| test | file:line | assertion |
+|---|---|---|
+| "reaches live with the lares hearth wiki seated" | `smoke.test.ts:35` | `toMatch(/live — wiki: lares/)` |
+| "the invariant plane carries the operator-minted oracle" | `smoke.test.ts:43` | `expect(oracleUrl).toBeTruthy()` (`bootDocUrl(lar,"oracle")` → null) |
+
+**Harness is wrong** — the code prints the lines correctly. Gate the readiness edge on the *last* line of a standing, or have `bootDocUrl` poll.
+
+### RC-F · The bare-@ retirement left two assertions behind — **3 failures**
+Commit **`90e2a2bde`** (2026-08-22, "retire @{slug} to the entity slots' plain names", 900 files). It rewrote these tests' own *inputs* (`bags/@lares` → `bags/lares` at `smoke.test.ts:23-24`) and missed the *assertions*.
+
+| test | file:line | now | should be |
+|---|---|---|---|
+| add-bag | `smoke.test.ts:88` | `/bags\/@grove/` vs `…/bags/grove` | `/bags\/grove/` |
+| C1 | `residency-create.test.ts:37` | `toContain("@witness-cat")` vs `"bag":"lar:///ha.ka.ba/bags/witness-cat"` | `"bags/witness-cat"` |
+| C2 | `residency-create.test.ts:52` | **pure cascade** — C1 threw at :37 before `catDocUrl` was set at :38, so C2 compared `automerge:K9hRx…` against `""` | fixing C1 clears it |
+
+**Harness is wrong.** `bagUri()` (`packages/lararium-mesh/src/lar-uris.ts`) strips a leading `@`; the CLI cannot emit the marked form.
+
+### RC-G · The `toml iam` → `toml meta` fence rename — **2 failures**
+Commit **`73b9bcc99`** (2026-08-25). Touched **0** files under `tests/`.
+
+`carrier-roundtrip.test.ts:118-119` and `corpus-feed.test.ts:121-122` build `contentView` around a fence label — ```` ```toml iam ```` — that no longer occurs anywhere in the corpus. The meta block therefore stopped being masked and is now compared byte-for-byte.
+
+| test | file:line |
+|---|---|
+| V4 | `carrier-roundtrip.test.ts:120` |
+| F3 | `corpus-feed.test.ts:126` |
+
+**Harness is wrong** for the *stated* law (both headers say the framing normalizes and is masked) — but see **D3**: the unmasked diff is a genuine finding. Fix the label to `toml meta`, and add a separate vector that asserts the meta fence's key-set, so `bag =` sits on the record instead of back under a mask.
+
+### RC-E · The D-lift changed the record model — **1 failure**
+Commit **`eb88d617f`** (2026-08-23, "the carriage rides a record of its own"). Four positional parts of a carrier became records. Touched **0** files under `tests/`.
+
+Measured through the built deserializer, `noosphere-boot.mem` yields **22**: parent + 19 ahu + `#/$header-text` + `#/$postamble`.
+
+| test | file:line | now |
+|---|---|---|
+| LOAD carrier-borne | `smoke.test.ts:61` | `toBe(1 + ahuCount)` = 20, received 22 |
+
+**Harness is wrong** — a hand-derived formula that cannot see a model change (the `DERIVE, don't enumerate` shape exactly). Replace with the deserializer's own count.
+
+**Latent, same test, did not fire only because :61 aborted first:** `smoke.test.ts:63` asserts `…noosphere-boot#exchange-protocol`. Since **`bdeeca690`** (2026-08-27, "every-section.is-a-path") the spelling is `#/exchange-protocol`. Fix both lines in one pass or you will fix this test twice.
+
+### RC-H · The framing head took named ends — **1 failure + 1 FALSE GREEN**
+Commit **`5acdf71ca`** (2026-08-29, "the graph names its own ends — 628 carriers take from= and to="). Touched **0** files under `tests/`. The head is now
+`<<^ code="&#x0001;" namespace="…" from=? -> to=lar:///… >>`.
+
+**Failure:** `load-tw5-filetypes.test.ts:38` writes the retired head `<<^ code="&#x0001;" ? -> lar:///… >>`. Collided directly against `packages/lararium-tw5/dist/deserializer.js`:
+
+```
+OLD head → 1 record titled 'fallback-title'                       ← membrane does not read it
+NEW head → 1 record titled 'lar:///ha.ka.ba/lares/test/memetic-witness'
+```
+→ `load-tw5-filetypes.test.ts:69` fails. **Harness is wrong** (its fixture, not the membrane). Note `24edf8cd9` already patched this same line for `code:` → `code=` and stopped there.
+
+**FALSE GREEN — count F2 as a defect, not a pass.** `corpus-feed.test.ts:63`:
+```js
+/<<[\^~][^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/
+```
+matches **0 of 274** corpus carriers (measured). `expectedRoots()` returns ∅, so F2's membership loop at `:110` iterates nothing and the only surviving claim is `fileUris.size === files.length`. F2 has been proving nothing since 2026-08-29 and reports green. Correct shape: `/<<[\^~][^\n]*&#x(?:0001|0011);[^\n]*from=\? -> to=(\S+) >>/`.
+
+**Also count `herm-floor` R4 as a false green** (see D2).
+
+---
+
+# ③ Ranked fix plan — cheapest first
+
+| # | Group | Change | Clears |
+|---|---|---|---|
+| **1** | RC-F | Two string literals: `smoke.test.ts:88` → `/bags\/grove/`; `residency-create.test.ts:37` → `"bags/witness-cat"` | **3** |
+| **2** | RC-G | Two fence labels `toml iam` → `toml meta` (`carrier-roundtrip.test.ts:118-119`, `corpus-feed.test.ts:121-122`) **+ file D3 as a question, don't bury it** | **2** |
+| **3** | RC-E | `smoke.test.ts:61` derive from `memeticWikitextDeserializer(...).length`; `:63` → `#/exchange-protocol` | **1** |
+| **4** | RC-H | `load-tw5-filetypes.test.ts:38` fixture head → `from=? -> to=`; `corpus-feed.test.ts:63` regex → named ends | **1** (+ restores F2 from vacuity) |
+| **5** | RC-D | `harness/instance.ts:139` — resolve on the last boot line, not `phase → live` | **2** |
+| **6** | RC-C | `harness/instance.ts` — export `rendezvousSocketPath(instance)`; delete `findSocketDir`/`findSock` from `face-join.test.ts:40-64` and `herm-floor.test.ts:69-77` | **7** |
+| **7** | **D1** | `bin/lares.ts:230` — `process.exitCode` + drain instead of `process.exit` | **2** *(and a live product hole)* |
+| **8** | **D2** | `local-connector.ts:29` — refuse a null/empty `dataDir`; re-run `herm-floor` R4/R5 and read the *herm's* answer | re-verdicts **R4, R5** |
+
+Steps 1–4 are pure literal drift, ~10 minutes, **7 failures**. Steps 5–6 are harness surgery, **9 more**. Step 7 is the one that leaves the product better than it found it. Step 8 re-opens R5's verdict — until it lands, **R5 is not evidence about the lift.**
+
+---
+
+# ④ A witness that cannot rot — and does not need the 15-file run
+
+The decay cause is structural: `tests/package.json` declares `test:e2e`, not `test`, so `pnpm -r test` skips it *by design* — correct (a real daemon, ~20s/file), and it means **no witness carries the harness's assumptions**. Every one of the eight root causes above is a *static* fact that a sub-second check can hold.
+
+**`tools/harness-parity-witness.sh`** — no daemon, no vessel, added to the `witness-all.sh` loop (which the operator already runs), following the `rendezvous-parity-witness.sh` shape of colliding two derivations directly:
+
+1. **Rendezvous** — `grep -rn 'lares\.sock' tests/` must be empty. The socket is derived, never hunted by filename. (Would have caught RC-C the day `913222c4f` landed.)
+2. **No zero-match regex** — every framing/URI regex literal under `tests/e2e/` must match ≥1 byte of `bags/lares/…/noosphere-boot.mem` or the corpus. *A regex that matches nothing is a vacuity, not a pass* — this is the check that turns F2's silence into a red.
+3. **Fixture heads parse** — extract every `<<^ … >>` literal a test *writes*, feed it through `packages/lararium-tw5/dist/deserializer.js`, require the returned title to equal the declared `to=` URI (never the fallback). Catches RC-H.
+4. **Fence labels exist** — every ```` ```toml <word> ```` literal in `tests/` must occur in `bags/`. Catches RC-G.
+5. **No retired spellings in assertions** — no `bags/@`, no bare `@<slug>`, no bare `#<name>` lar: fragment inside any `expect(...)` under `tests/`. Catches RC-F and the latent `#exchange-protocol`.
+6. **Derived counts only** — `1 + ahuCount` vs `memeticWikitextDeserializer(BOOT_MEME).length`; red when they disagree. Catches RC-E and, in general, any hand-enumerated model constant.
+7. **Readiness edge** — the harness's readiness regex must name the *last* line `main.ts` prints for a standing. Catches RC-D.
+
+Two more that belong **beside the code, not in the e2e tree** (`packages/lares-cli/tests/`, so they ride `pnpm -r test`):
+
+8. **`--json` pipe integrity** — spawn the built bin over a **pipe** on a command whose JSON exceeds ~256 KB and `JSON.parse` the result. This is the only vector that catches **D1**, it runs in under a second, and it sits where the CLI lives rather than behind a ten-minute daemon suite.
+9. **`invokeLocal` refuses an absent `dataDir`** — asserts no silent fall-through to `larDataDir()`. Catches **D2**.
+
+Finally, two housekeeping notes worth the operator's ear: add a named `test:e2e:smoke` (one file, ~35s) and say in `TEST-ARCHITECTURE.md` that it is the gate for anyone touching `packages/lares-cli` or `packages/lararium-tw5` — the two packages that moved 44 files under this harness while nothing watched. And the box currently carries **seven stale `lararium-node` daemons** from earlier sessions (ports 8080, 8097, 8098, 8260, 8261, 8262, 8272) plus four orphan sockets under `/tmp/lares-1000/`; that load is real and it is what turned RC-D from a flake into a near-certain red.
+`````
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;0uLJmAPr3eh43sLN8myVgRhjfxGkYD1RmvzdlgKXLUI
+
+<<^ code="&#x0004;" -> to=? >>
