@@ -60,6 +60,13 @@ describe("① many cabals on one Nexus", () => {
     expect(Object.keys(mesh)).toContain("standingIsPerRealm");
   });
 
+  test.skip("A NEXUS OUTLIVES ITS FOUNDING CABAL'S PHASE — DEFERRED: nexusPhase reads seed/multisig/quorum off the NEXUS SEAL's seated chairs, which are the kahu cabal's. That coincides with the Nexus at the seed, because the kahu cabal is its group-seed, and DIVERGES the moment the Nexus succeeds: a Nexus carrying a dormant kahu cabal and twenty thriving ones sits in a state this reading cannot express. The name is honest today and becomes a fusion on success — wants a Nexus-plane reading that counts hardware in the federation rather than chairs in one cabal", () => {
+    // Today this reads `quorum` off twenty relations with NO chair seated, which is the cabal's
+    // ladder answering a question about hardware. A Nexus-plane reading would answer separately.
+    expect(nexusPhase({ seatedKeys: 0, contractedOperators: 20 }).phase).toBe("quorum");
+    expect(Object.keys(mesh)).toContain("nexusFederationStanding");
+  });
+
   test.skip("TWO CABALS SHARE HARDWARE WITHOUT SHARING RESOURCES — DEFERRED: the Nexus is the hardware mesh and the realm is the resources, so two cabals on one relay must reach each other's vessels and NOT each other's docs. Wants a docker scenario standing two realms across one herm fleet; the harness carries a single REALM= and no cell varies cabal count", () => {
     expect(Object.keys(mesh)).toContain("nexusCarriesCabal");
   });
@@ -74,12 +81,12 @@ describe("② the feed crosses its members", () => {
     expect(realmFeedPrefix(REALM_A)).not.toContain("bags/daemon");
   });
 
-  test.skip("A REALM RESOLVES ITS OWN SUBSTRATE FROM ITS ID — DEFERRED: substrateUrl lives only in the in-memory CabalRealm a founding ceremony returns, and that ceremony has no production caller, so the daemon's realm verbs take an id and can find no board. Wants a realm-id -> substrateUrl registry; WHERE that registry lives is a correlation surface (a list of every realm you belong to is the shape 'a roster IS a global now' forbids) and wants an operator ruling before it is built", () => {
-    expect(Object.keys(mesh)).toContain("realmSubstrateFor");
+  test.skip("A REALM RESOLVES ITS OWN SUBSTRATE FROM ITS ID, PER FACE — DEFERRED: substrateUrl lives only in the in-memory CabalRealm a founding ceremony returns, and that ceremony has no production caller, so the daemon's realm verbs take an id and can find no board. The index is RESOLUTION-ONLY and never discovery: it opens a doc the holder already keys, and names no realm they hold no key to, so it is not the roster 'a roster IS a global now' forbids. It scopes to the FACE, never the vessel — one Persona at a time takes the blame, so a compromise yields one face's realms and not a multitude's, the same blast radius the persona planes already buy (a vessel-global index correlates, exactly as a vessel-global @circles does)", () => {
+    expect(Object.keys(mesh)).toContain("faceScopedRealmIndex");
   });
 
   test.skip("A PEER'S OFFERING ARRIVES — DEFERRED: measured red in docker (mesh-scenarios.sh realm-crossing). Two contracted operators fed one realm through a live relay and A counted her own two faces, never B's third, because the feed is read off the DAEMON board each vessel reads from its own bootstrap. The address space is now separate so the move carries no revocation fence with it; the move itself wants the registry above", () => {
-    expect(Object.keys(mesh)).toContain("realmSubstrateFor");
+    expect(Object.keys(mesh)).toContain("faceScopedRealmIndex");
   });
 
   test.skip("A SHARED BOARD IGNORES AN UNVERIFIABLE SLOT — DEFERRED: verifyRealmFeedSlot is deliberately unwired because under a vessel's own bag the only hand that can write a slot owns it. The moment the board takes a peer's write, an unsealed or forged slot must be IGNORED rather than folded — and the fold is sync today while verification is async, so this wants a verifying fold beside the plain one", () => {

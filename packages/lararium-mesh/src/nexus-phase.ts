@@ -18,9 +18,17 @@
  *
  * ── AND WHICH KAHU THESE ARE ────────────────────────────────────────────────────────────────────
  * The chairs this phase counts belong to the NEXUS SEAL — carriage, antigen, succession — seated from
- * one vessel's own vault. They are NOT the Amorphous Dreams Cabal, which holds `admin` on the ACCESS
- * axis over the corpus bags and the genesis artifact, carries no live command into any vessel, and
- * has no bearing on whether a Nexus stands.
+ * one vessel's own vault. They are NOT the Amorphous Dreams Cabal's.
+ *
+ * THAT CABAL CARRIES TWO CAP-SETS, and they are separable even where one cabal holds both. KAHU-PRIEST
+ * caps run `admin` on the ACCESS axis over the corpus bags and the genesis artifact — authorship of the
+ * grammar, and the only hand that promotes into canon. LAMPLIGHTER caps run infrastructure: who tends
+ * which metal, who lights a Herm into a lararium (`composeHerm` -> `composeLararium`), who holds an
+ * archive passphrase. Canon #112 rules those apart — "two managements wear one word, and a reading that
+ * fuses them mis-sites every seat it names" — and a cabal holding both does not merge them.
+ *
+ * Neither set bears on whether a Nexus STANDS: that reads from relations and seated chairs, and a hand
+ * that tends metal or authors grammar seats nothing by doing so.
  *
  * Meme: lar:///ha.ka.ba/lararium/mesh/genesis-doc
  */
