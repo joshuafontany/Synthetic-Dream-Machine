@@ -37,3 +37,7 @@
 	path = onomancy
 	url = git@github.com:amorphous-dreams/onomancy.git
 	branch = main
+[submodule "folkjs"]
+	path = folkjs
+	url = git@github.com:amorphous-dreams/folkjs.git
+	branch = main
