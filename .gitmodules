@@ -21,3 +21,19 @@
 [submodule "VSCode-TW5-Syntax"]
 	path = VSCode-TW5-Syntax
 	url = git@github.com:joshuafontany/VSCode-TW5-Syntax.git
+[submodule "automerge-repo"]
+	path = automerge-repo
+	url = git@github.com:amorphous-dreams/automerge-repo.git
+	branch = subductionjs
+[submodule "keyhive"]
+	path = keyhive
+	url = git@github.com:amorphous-dreams/keyhive.git
+	branch = main
+[submodule "subduction"]
+	path = subduction
+	url = git@github.com:amorphous-dreams/subduction.git
+	branch = main
+[submodule "onomancy"]
+	path = onomancy
+	url = git@github.com:amorphous-dreams/onomancy.git
+	branch = main
