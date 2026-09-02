@@ -404,8 +404,9 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     // CREATE — mint a NEW bag; the destination doesn't exist yet, so it bypasses
     // the generic destBag cap + writable-store check. The cap is PLANE-AWARE
     // the catalog plane (household) -> read; the oracle plane (temple) -> admin.
-    // This is the existing-primitive expression of the user<admin ladder; tighten
-    // to verifySentinelMembership / Keyhive-native membership when that surface lands.
+    // This is the existing-primitive expression of the user<admin ladder. The Keyhive-native surface
+    // it defers to now STANDS — `KeyhiveProvider.verifySentinelMembership` answers per-candidate and
+    // `sentinelCgkaMembers` enumerates — so switching is a design choice rather than a wait.
     if (action.verb === "CREATE") {
       const grade: "read" | "admin" = action.plane === "oracle" ? "admin" : "read";
       const root  = action.plane === "oracle" ? ORACLE_DOC_URI : CATALOG_DOC_URI;
@@ -451,8 +452,11 @@ export function makeActionReactorFor(verb: ActionVerb, opts: ActionHandlerOption
     // whichever way the copy runs.
     //
     // `crossingDirection` carries the full rule and this gate cannot reach it: telling the directions
-    // apart wants each bag's publicity tier, and no reader for that stands here yet. Until one does,
-    // an OUTWARD crossing passes on a read cap alone.
+    // apart wants each bag's publicity tier, and `VerbContext` carries no reader for it — it holds
+    // `daemon`, `invocation` and `cap`, nothing that answers a bag's tier. A reader now EXISTS one
+    // package over (`bagManifest` parses `cap-tier`, and `bag-declare` reads it), so what is missing is
+    // the injection rather than the source. Until it lands, an OUTWARD crossing passes on a read cap
+    // alone — the DESTINATION still demands admin, so canon is reached only by a holder of admin on it.
     if (action.verb === "MOVE" || action.verb === "ADD" || action.verb === "COPY") {
       const grade: "read" | "admin" = action.verb === "MOVE" ? "admin" : "read";
       const srcProof = await ctx.cap(grade, action.fromBag);
