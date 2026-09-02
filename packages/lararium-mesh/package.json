@@ -107,17 +107,17 @@
     "dev": "tsx src/index.ts"
   },
   "devDependencies": {
-    "tsx": "4.23.11",
-    "vitest": "4.1.10"
+    "tsx": "4.23.13",
+    "vitest": "4.1.11"
   },
   "dependencies": {
     "@automerge/automerge": "3.4.1",
     "@automerge/automerge-repo": "2.6.0-alpha.3",
     "@automerge/automerge-repo-network-messagechannel": "2.6.0-alpha.3",
     "@automerge/automerge-repo-network-websocket": "2.6.0-alpha.3",
-    "@noble/ciphers": "2.3.0",
-    "@noble/curves": "2.3.0",
-    "@noble/ed25519": "3.1.0",
-    "@noble/hashes": "2.3.0"
+    "@noble/ciphers": "2.4.0",
+    "@noble/curves": "2.4.0",
+    "@noble/ed25519": "3.2.0",
+    "@noble/hashes": "2.4.0"
   }
 }

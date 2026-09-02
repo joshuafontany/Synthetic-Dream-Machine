@@ -28,11 +28,11 @@
   },
   "devDependencies": {
     "@lares/cli": "workspace:*",
-    "@types/node": "26.2.0",
-    "concurrently": "10.0.4",
+    "@types/node": "26.4.0",
+    "concurrently": "10.0.5",
     "playwright": "1.62.1",
     "playwright-mcp-wsl": "1.0.0",
-    "tsx": "4.23.11",
+    "tsx": "4.23.13",
     "typescript": "7.0.2"
   },
   "engines": {

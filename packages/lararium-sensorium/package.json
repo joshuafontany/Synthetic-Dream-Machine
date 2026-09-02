@@ -19,8 +19,8 @@
     "test": "vitest run"
   },
   "devDependencies": {
-    "tsx": "4.23.11",
-    "vitest": "4.1.10"
+    "tsx": "4.23.13",
+    "vitest": "4.1.11"
   },
   "dependencies": {
     "@lararium/mempalace": "workspace:*",
