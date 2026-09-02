@@ -15,6 +15,18 @@
 # each declare their states in one place, this reads them there, and a new state appears in the
 # matrix the day it is added rather than the day somebody remembers.
 #
+# ── AND THE AXIS LIST IS ITSELF HAND-WRITTEN ────────────────────────────────────────────────────
+# A new STATE on an existing axis appears here on its own. A new DIMENSION does not: the three
+# `union(...)` calls below are chosen by hand, so this reports 18/18 green while whole dimensions sit
+# unmeasured. That is the same failure one level up, and naming it here is cheaper than rediscovering
+# it from a green run.
+#
+# WHAT THESE AXES DO NOT REACH, measured: every cell holds ONE cabal (the harness carries a single
+# `REALM=`), one principal class (every vessel a full-caps founder or joiner — never an independent
+# operator running a node without caps on the base grammar), one cap tier, and one crossing direction.
+# Those are TOPOLOGY, not vessel state, so they do not belong on these axes — they want an instrument
+# beside this one. A Nexus is defined by many cabals sharing hardware, and nothing here varies that.
+#
 # ── WHAT A SCENARIO CLAIMS ──────────────────────────────────────────────────────────────────────
 # Each scenario in `mesh-scenarios.sh` declares the cell it walks with a `# COVERS:` line. The
 # witness compares claims against the derived space and reports what nothing claims.
@@ -63,14 +75,19 @@ claims = set(re.findall(r'#\s*COVERS:\s*([a-z-]+/[a-z-]+/[a-z-]+)', text))
 # A cell nothing can reach states WHY, and prints every run. An absence with no reason is how a gap
 # becomes permanent: the next reader cannot tell "impossible" from "nobody got to it".
 UNREACHABLE: dict[str, str] = {
-    # EMPTY, and it stays a table rather than a deleted idea. The quorum cells sat here while the
-    # harness stood two operators: a Nexus counts one relation per operator a vessel ADMITS plus one
-    # for a contract-in it gave, and two operators cannot make two — a joiner holds the founder
-    # charter, a seal home takes one charter, so she seats none of her own to admit anyone onto.
-    # `lararium-c` supplies the second partner and `run_quorum_realm` walks all six.
+    # EMPTY, and it stays a table rather than a deleted idea. The quorum cells sat here on a reading
+    # that a Nexus counts one relation per operator a vessel ADMITS, so two operators could never
+    # make two.
     #
-    # A cell belongs here when nothing CAN reach it, never when nobody has. Adding one costs a reason
-    # a later reader can check and overturn, exactly as this entry was overturned.
+    # THE FLOOR IS PERSONAS, AND THAT IS A KEY-LAYER LAW RATHER THAN A HARNESS CONVENIENCE. Neither a
+    # human's base VEIL key nor the vessel-veil-dyad root signs anything above the PersonaGroup layer,
+    # so a face is the only thing that CAN take a seat — a quorum counts faces because it has nothing
+    # else to count. Quorum wants 2 operators and 4 personas, which `lararium-a` (three) and
+    # `lararium-b` (one) reach between them, so `run_quorum_realm` walks all six on the two vessels
+    # the fleet already stands. A third vessel would add operators, never seats.
+    #
+    # A cell belongs here when nothing CAN reach it, never when nobody has.
+    # Adding one costs a reason a later reader can check and overturn, exactly as this was overturned.
 }
 
 # A SCENARIO THAT DECLARES NOTHING IS AMBIGUOUS, and the ambiguity is the hazard: a reader cannot

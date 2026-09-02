@@ -12,8 +12,9 @@
  * reading that fuses them mis-sites every seat it names… those seats sit on the vessel and the charter,
  * never in the realm."
  *
- * So `realmDocIdHex` here names the cabal by its realm's doc, because A CABAL CARRIES NO IDENTITY OF ITS
- * OWN. The key is honest — it IS a realm doc id — but a reader must not conclude the realm owns the act.
+ * So `realmDocIdHex` here names the cabal by its realm's doc, and that is CORRECT rather than a missing
+ * name: a cabal IS the shared relation over its realm's resources, so identity-as-relation gives it no
+ * other name to have. What a reader must not conclude is that the realm therefore owns the ACT.
  * `cabal-invite`, `vouchEntryKey` and `cabalAdmissionEpoch` all sit on this side of that line; the realm's
  * own epoch is its maintenance feed, addressed separately (`realmFeedPrefix`).
  *

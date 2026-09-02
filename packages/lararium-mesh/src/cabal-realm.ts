@@ -76,8 +76,9 @@ export interface CabalRealm {
  * resources; the cabal is the collective holding them. `leaseEpochPrefix` addresses the CABAL'S
  * admission fence — it bounds outstanding invites, and rolling it stales every one at once, so it
  * belongs to the vessel that admits. This addresses the REALM'S feed, the heartbeat its members keep
- * together, which has to take a peer's write. They share a key only because a cabal carries no identity
- * of its own and is named by its realm's doc.
+ * together, which has to take a peer's write. They share a key BY CONSTRUCTION, not by debt: a cabal IS
+ * the shared relation over its realm's resources, so identity-as-relation names it by that realm's doc.
+ * One name is correct; one SLOT was not.
  *
  * Addressed alike they are ONE SLOT, and each drives the other: feeding a realm stales its own invites,
  * and revoking an invite reads as somebody maintaining it.

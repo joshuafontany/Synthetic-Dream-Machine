@@ -60,6 +60,11 @@ export function nexusPhase(
   // a threshold describes a CHECK, and that wants enough chairs for k-of-n to bind across operators:
   // three seated by the founder plus one carried in by the partner.
   //
+  // PERSONAS BECAUSE NOTHING ELSE CAN SIT. A human's base VEIL key and the vessel-veil-dyad root sign
+  // nothing above the PersonaGroup layer, so a FACE is the only principal a seat can hold. The floor
+  // reads four faces rather than four humans or four vessels because faces are what the key layer
+  // offers — a third vessel adds operators and seats none.
+  //
   // Both sides count the same four without either counting a roster. The founder counts her seated
   // chairs plus the partner she admitted; the joiner counts the roster she holds plus the consent she
   // gave. Each counts only what it can see, and at the quorum seed the two happen to agree.
