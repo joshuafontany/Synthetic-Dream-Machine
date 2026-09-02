@@ -108,9 +108,30 @@ So, MUST:
 
 <<~/ahu >>
 
+<<~ ahu #open-loops >>
+
+!! Open loops ~ deferred, not dropped
+
+''Held here because they were deferred in the same breath the toolchain was approved.'' None is blocked on the toolchain; each is blocked on a hand.
+
+!!! The testing architecture (scouted 2026-09-02, plan in hand)
+
+# ⚠ ''CI RUNS THE UNSERIALIZED COMMAND.'' Root `package.json` reads `pnpm -r --workspace-concurrency=1 test`; `.github/workflows/ci.yml:148` reads bare ''`pnpm -r test`''. `TEST-ARCHITECTURE.md` says that exact command makes several packages contend for one python holder, so ''the suite reports the machine's spare capacity as the code's correctness''. ''One word. Highest value in the whole scout.''
+# ''THREE RUNNERS NOTHING INVOKES.'' ~944 python tests across 98 files (`pyproject.toml` `testpaths`) run only when a human types `pytest` — no script, no CI. `gate:fold-ts` (the TS↔PY fold parity) has ''no invoker at all''. `witness-all`'s 19 witnesses never run in CI. ⚠ Expect red when lit: wire first, triage as its own stage, and ''never delete a red to make a stage green''.
+# ''THE MOVE'' — `tests/` to `packages/lararium-tests/`. The trap is NOT that `pnpm -r test` would pick it up: `pnpm -r` recurses over ''workspace members'', and `tests` is already one, so the move changes its path and not its membership. ''The only fence is the script name `test:e2e`'' — keep it, and say so on the manifest. ⚠ The REAL trap is `typecheck-witness.sh`, which iterates `packages/*/` and ''silently skips any directory without a tsconfig''. The harness has none, so post-move its 218 lines vanish from the witness ''at the very address the witness claims to sweep''. Land a `tsconfig.typecheck.json` with the move.
+# ''D2 — `invokeLocal` falls back to the operator's home vessel'' (`local-connector.ts`: `dataDir ?? larDataDir()`). A null dataDir reaches a live vessel. It made `herm-floor` R4 a FALSE GREEN and means ''R5's failure is not evidence about the lift''. It should refuse, never default.
+# ''D3 — the meme projector stamps a `bag` key the corpus never carries.'' `tw5-file-info.ts` excludes `bag` from `.tid`/`.json`/`.meta`; the memetic projection does not. Only 9 corpus files carry an authored `bag =`. Operator call, and it only became visible when a stale fence label stopped masking it.
+# ''Seven socket failures'' await deriving the rendezvous path in the harness rather than hunting a filename.
+
+!!! What must NOT be collapsed when that work fires
+
+''The serialization'' — fix CI up to it, never the root script down. ''`lararium-node`'s two-project split and its THRASHERS list'' — one authoritative statement the roster reader imports; an earlier shape stated the classes twice and they drifted. ''The four out-of-band witnesses'' — `mesh-coverage` is permanently red BY DESIGN and reads claims never passes; three others need docker. ''Six duplicate-named test files are WELDS, not duplicates'' — node≡browser agreement IS the island-isomorphism proof, and `seal-reserve` splits pure crypto from on-disk ceremony. ''Source vs dist vs packed-plugin splits'' are the half-build instrument; collapsing one converts a weld into a tautology.
+
+<<~/ahu >>
+
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZjiPWhhFF9moG7dCmGrDXqC1eQdLUJM0waDQS9AzT0w
+<<^ code="&#x0003;" >>ni:///sha-256;isQ_hyjVHi4O54Ir8MCmuq7j8J-L7-HCN3orUv2Vawk
 
 <<^ code="&#x0004;" -> to=? >>
