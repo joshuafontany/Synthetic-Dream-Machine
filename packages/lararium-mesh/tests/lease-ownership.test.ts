@@ -1,14 +1,19 @@
 /**
- * lease-ownership — the fence and the feed share a fold, and must never share a board.
+ * lease-ownership — the cabal's fence and the realm's feed share a fold, never a board.
  *
- * ── THE TWO SENSES ──────────────────────────────────────────────────────────────────────────────
- * `epoch-lease` addresses the REVOCATION fence: rolling a slot stales every outstanding grant on a
+ * ── TWO PLANES, NOT TWO SENSES OF ONE THING ─────────────────────────────────────────────────────
+ * A REALM is a cabal's shared CRDT and resources. A CABAL is the collective holding them. A NEXUS is
+ * the federated mesh of hardware. Each epoch here belongs to a different one of those.
+ *
+ * `epoch-lease` addresses the CABAL'S fence: rolling a slot stales every outstanding grant on a
  * resource at once (`lease-rekey` — "the non-renewal half of revocation"). That is an authority act,
- * and it belongs to the vessel alone.
+ * and it belongs to the vessel that admits.
  *
  * A realm's FEED is the opposite. `cabal-realm` calls it "the realm's own collective-maintenance
  * heartbeat, NOT an authority epoch", and a realm only its owner can feed cannot be read across the
  * members who keep it. It has to take a peer's write.
+ *
+ * They share a key because a cabal carries no identity of its own — it is named by its realm's doc.
  *
  * ── WHY THE SEPARATION IS LOAD-BEARING ──────────────────────────────────────────────────────────
  * Both fold by MAX, and neither verifies a seal before folding. One slot carrying a large number is
@@ -26,7 +31,7 @@ import { cabalRealmMaintenanceProvenance } from "../src/cabal-realm-clock.js";
 const REALM  = "0x" + "cd".repeat(32);
 const WRITER = "0x" + "ab".repeat(32);
 
-describe("lease-ownership — one fold, two owners, two spaces", () => {
+describe("lease-ownership — one fold, two planes, two spaces", () => {
   it("★ neither prefix contains the other — no scan crosses the seam ★", () => {
     const fence = leaseEpochPrefix(REALM);
     const feed  = realmFeedPrefix(REALM);

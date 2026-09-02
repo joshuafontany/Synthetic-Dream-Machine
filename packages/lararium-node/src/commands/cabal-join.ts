@@ -56,7 +56,15 @@ export function daemonDocUrlFromBootstrap(): string | null {
   } catch { return null; }
 }
 
-export function realmLeaseEpoch(doc: unknown, realmDocIdHex: string): number {
+/**
+ * The epoch outstanding invites to a CABAL are bounded by — a max-register over its per-writer slots.
+ *
+ * THE CABAL'S, NOT THE REALM'S. A realm is a cabal's shared CRDT and resources; admission is a fact
+ * about the collective, not about the stuff it holds. The two share a key only because a cabal carries
+ * no identity of its own — it is named by its realm's doc, and `admitOnLineage` keys on that same hex.
+ * The realm's OWN epoch is its maintenance feed, which lives in a separate space (`realmFeedPrefix`).
+ */
+export function cabalAdmissionEpoch(doc: unknown, realmDocIdHex: string): number {
   const tiddlers = (doc as { tiddlers?: Record<string, unknown> } | null)?.tiddlers;
   if (!tiddlers) return 0;
   const prefix = leaseEpochPrefix(realmDocIdHex);
@@ -148,7 +156,7 @@ export async function runCabalJoin(
     const daemonUrl = daemonDocUrlFromBootstrap();
     if (daemonUrl) {
       const dh = await materializeSharedLarDoc(repo, daemonUrl as never, "daemon");
-      boardEpoch = realmLeaseEpoch(dh.doc(), realm);
+      boardEpoch = cabalAdmissionEpoch(dh.doc(), realm);
     }
   } finally {
     await repo.flush();
@@ -167,9 +175,9 @@ export async function runCabalJoin(
     realmDocIdHex:     realm,
     joinerIdentityHex: applicant,
     invite:            presented,
-    // THE REALM'S OWN FENCE, read off the same board the vouches came from — a max-register over the
+    // THE CABAL'S FENCE, read off the same board the vouches came from — a max-register over the
     // per-writer lease slots, so every replica that has seen this board reads the same number. The
-    // fence belongs to the realm; an instant would belong to the machine being gated.
+    // fence belongs to the cabal that admits; an instant would belong to the machine being gated.
     effectiveEpoch:    opts.epoch ?? boardEpoch,
     verify:            verifyOffline,
     issued:            forFold,

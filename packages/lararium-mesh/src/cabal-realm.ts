@@ -70,11 +70,15 @@ export interface CabalRealm {
 /**
  * Prefix for a realm's per-writer FEED slots.
  *
- * SEPARATE FROM THE FENCE BY OWNER, and that separation is load-bearing.
+ * SEPARATE FROM THE FENCE BY PLANE, and that separation is load-bearing.
  *
- * A REALM CARRIES TWO EPOCHS UNDER ONE DOC ID. `leaseEpochPrefix` addresses its ADMISSION FENCE, which
- * bounds outstanding invites — rolling it stales every one at once, so it belongs to the vessel alone.
- * This addresses its FEED, the heartbeat its members keep together, which has to take a peer's write.
+ * A CABAL AND ITS REALM CARRY ONE EPOCH EACH, AND SHARE ONE NAME. A realm is a cabal's shared CRDT and
+ * resources; the cabal is the collective holding them. `leaseEpochPrefix` addresses the CABAL'S
+ * admission fence — it bounds outstanding invites, and rolling it stales every one at once, so it
+ * belongs to the vessel that admits. This addresses the REALM'S feed, the heartbeat its members keep
+ * together, which has to take a peer's write. They share a key only because a cabal carries no identity
+ * of its own and is named by its realm's doc.
+ *
  * Addressed alike they are ONE SLOT, and each drives the other: feeding a realm stales its own invites,
  * and revoking an invite reads as somebody maintaining it.
  *
@@ -97,9 +101,9 @@ export function realmFeedSlotUri(realmDocIdHex: string, writerId: string): strin
  * Coordinator-free max-register (effectiveLeaseEpoch = max over slots); the realm's own
  * collective-maintenance heartbeat, NOT an authority epoch (#the-tie-break).
  *
- * A realm ALSO carries an admission fence under the same DocId, in the epoch-lease space
- * (`realmLeaseEpoch`) — that one bounds outstanding invites and is authority. The two spaces
- * stay apart so neither drives the other.
+ * The CABAL holding this realm carries its own epoch under the same DocId, in the epoch-lease space
+ * (`cabalAdmissionEpoch`) — that one bounds outstanding invites and is authority. The two spaces stay
+ * apart so neither drives the other.
  */
 export function cabalRealmLeaseSlot(realmDocIdHex: string, writerId: string): string {
   return realmFeedSlotUri(realmDocIdHex, writerId);

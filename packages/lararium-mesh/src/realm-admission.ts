@@ -5,6 +5,18 @@
  * cabal-realm that priced it, and nothing beyond. DreamNet names what realms federate INTO, never a thing
  * anyone crosses into by admission.
  *
+ * ── WHICH PLANE THIS SITS ON ────────────────────────────────────────────────────────────────────
+ * A REALM is a cabal's shared CRDT and resources. A CABAL is the collective holding them. A NEXUS is the
+ * federated mesh of hardware. Admission is a fact about the COLLECTIVE — who joins — and reaching the
+ * realm is what joining grants. Canon #112 rules those apart: "Two managements wear one word, and a
+ * reading that fuses them mis-sites every seat it names… those seats sit on the vessel and the charter,
+ * never in the realm."
+ *
+ * So `realmDocIdHex` here names the cabal by its realm's doc, because A CABAL CARRIES NO IDENTITY OF ITS
+ * OWN. The key is honest — it IS a realm doc id — but a reader must not conclude the realm owns the act.
+ * `cabal-invite`, `vouchEntryKey` and `cabalAdmissionEpoch` all sit on this side of that line; the realm's
+ * own epoch is its maintenance feed, addressed separately (`realmFeedPrefix`).
+ *
  * The two gates stand apart and complete: `cabal-invite` answers the STRUCTURAL question (does a licensed
  * member vouch for this joiner, into THIS realm, unexpired?) and `admission-price` answers the MARGINAL one
  * (what does this crossing cost, given the applicant's lineage rank and the vouching cluster's
