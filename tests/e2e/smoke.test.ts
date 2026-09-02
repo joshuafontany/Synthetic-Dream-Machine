@@ -18,9 +18,11 @@ import { NodeFSStorageAdapter } from "@automerge/automerge-repo-storage-nodefs";
 import { join } from "node:path";
 import { readFileSync } from "node:fs";
 import { targetInstance, bootDocUrl, vesselStorageDir, type LarInstance } from "../harness/instance.js";
+import { memeticWikitextDeserializer } from "../../packages/lararium-tw5/src/deserializer.js";
 
 const REPO_ROOT = new URL("../..", import.meta.url).pathname;
 const BOOT_MEME = join(REPO_ROOT, "bags/lares/ha.ka.ba/lares/api/noosphere-boot.mem");
+const BOOT_URI  = "lar:///ha.ka.ba/lares/api/noosphere-boot";
 const LARES_URI = "lar:///ha.ka.ba/bags/lares";
 
 let lar: LarInstance;
@@ -55,12 +57,14 @@ describe("smoke — residency canon through the real CLI", () => {
     const r = await lar.cli(["act", "LOAD", "--source-uri", BOOT_MEME, "--to", LARES_URI, "--yes", "--json"]);
     expect(r.json?.["ok"]).toBe(true);
     const data = r.json?.["data"] as { count: number; titles: string[] };
-    // Derive the expectation from the source itself — the boot grows; the law
-    // (parent + one record per ahu block) stays.
-    const ahuCount = (readFileSync(BOOT_MEME, "utf8").match(/<<~ ahu #/g) ?? []).length;
-    expect(data.count).toBe(1 + ahuCount);
+    // DERIVE FROM THE DESERIALIZER, never from a formula over the source. `1 + ahuCount` encoded a
+    // model — parent plus one record per ahu — that the D-lift changed under it: four positional parts
+    // of a carrier became records of their own, so the boot meme now yields 22 where the formula says
+    // 20. A count the membrane computes cannot drift from the membrane.
+    const expected = memeticWikitextDeserializer(readFileSync(BOOT_MEME, "utf8"), { title: BOOT_URI }).length;
+    expect(data.count).toBe(expected);
     expect(data.titles).toContain("lar:///ha.ka.ba/lares/api/noosphere-boot");
-    expect(data.titles).toContain("lar:///ha.ka.ba/lares/api/noosphere-boot#exchange-protocol");
+    expect(data.titles).toContain("lar:///ha.ka.ba/lares/api/noosphere-boot#/exchange-protocol");
   });
 
   test("LOAD refuses a carrier-less gesture loudly (islands never fetch)", async () => {
@@ -85,7 +89,7 @@ describe("smoke — residency canon through the real CLI", () => {
     expect(a.json?.["ok"]).toBe(true);
     const data = a.json?.["data"] as { status?: string; stack?: string[] };
     expect(data?.status).toBe("added");
-    expect(data?.stack?.join(" ")).toMatch(/bags\/@grove/);
+    expect(data?.stack?.join(" ")).toMatch(/bags\/grove/);
   });
 
   test("bag stats answers with the operator's real identity (no placeholder DID)", async () => {

@@ -115,8 +115,8 @@ describe("carrier-whole at rest — the kupono vectors", () => {
     // while the source file sits mid-edit under the operator's other hand
     // (tests witness laws, never police WIP).
     const source    = renderOf(readFileSync(BOOT_MEME, "utf8"), BOOT_URI);
-    const iamFence = /```toml iam\n[\s\S]*?```\n/g;
-    const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
+    const metaFence = /```toml meta\n[\s\S]*?```\n/g;
+    const contentView = (s: string) => s.replace(metaFence, "```toml meta\n<normalized>\n```\n");
     expect(contentView(projected)).toBe(contentView(source));
     // The normalized iam still carries the identity whole: spot-check keys.
     expect(projected).toMatch(/^uri-path\s+= "ha\.ka\.ba\/lares\/api\/noosphere-boot"$/m);

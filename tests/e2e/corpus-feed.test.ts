@@ -60,7 +60,7 @@ function expectedRoots(): Set<string> {
   const files = execSync(`find ${CORPUS} -name '*.mem'`, { encoding: "utf8" }).trim().split("\n");
   const roots = new Set<string>();
   for (const f of files) {
-    const m = /<<[\^~][^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/.exec(readFileSync(f, "utf8"));
+    const m = /<<[\^~][^\n]*&#x(?:0001|0011);[^\n]*from=\? -> to=(\S+) >>/.exec(readFileSync(f, "utf8"));
     if (m?.[1]?.startsWith("lar:///ha.ka.ba/lares/")) roots.add(m[1]);
   }
   return roots;
@@ -118,8 +118,8 @@ describe("corpus feed — the whole hearth in one gesture (staged witness)", () 
     if (lar.mode !== "staged") return;
     const projected = join(lar.root, "bags/lares", BOOT_PROJ);
     expect(existsSync(projected)).toBe(true);
-    const iamFence = /```toml iam\n[\s\S]*?```\n/g;
-    const contentView = (s: string) => s.replace(iamFence, "```toml iam\n<normalized>\n```\n");
+    const metaFence = /```toml meta\n[\s\S]*?```\n/g;
+    const contentView = (s: string) => s.replace(metaFence, "```toml meta\n<normalized>\n```\n");
     expect(contentView(readFileSync(projected, "utf8")))
       // The law: projected == render(parse(source)) — robust to a source
       // file mid-edit under the other hand (tests witness laws, not WIP).

@@ -224,11 +224,21 @@ const invokedAsScript = (() => {
   }
 })();
 
-/** Entry for the committed bin shim (bin/lares.mjs) — same path as direct invocation. */
+/**
+ * Entry for the committed bin shim (bin/lares.mjs) — same path as direct invocation.
+ *
+ * SET THE CODE, NEVER CALL EXIT. `process.stdout` is asynchronous on a PIPE and synchronous on a
+ * file, so `process.exit()` discards whatever has not drained — and `--json` exists "for
+ * agents/pipes", which is exactly the sink that loses bytes. Measured: a 165,256-byte result
+ * arrived whole in a file and truncated to 146,176 through a pipe, mid-string, exit code 0.
+ * Setting `exitCode` lets the loop drain and exit on its own with the same status.
+ *
+ * A caller that must stop the process NOW still may — this only governs the ordinary return.
+ */
 export function runCli(): void {
   dispatch(process.argv.slice(2)).then(
-    (code) => process.exit(code),
-    (err)  => { console.error(err); process.exit(1); },
+    (code) => { process.exitCode = code; },
+    (err)  => { console.error(err); process.exitCode = 1; },
   );
 }
 

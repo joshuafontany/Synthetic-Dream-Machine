@@ -34,7 +34,7 @@ describe("residency CREATE — mint + register + plane-aware gate (staged witnes
     expect(r.json?.["ok"], `CREATE on the catalog plane failed: ${JSON.stringify(r.json)}`).toBe(true);
     const data = r.json?.["data"] as Record<string, unknown> | undefined;
     expect(data?.["verb"]).toBe("CREATE");
-    expect(JSON.stringify(data), "minted bag not named in the result").toContain("@witness-cat");
+    expect(JSON.stringify(data), "minted bag not named in the result").toContain("bags/witness-cat");
     catDocUrl = String(data?.["docUrl"] ?? "");
     expect(catDocUrl, "no docUrl minted").toMatch(/^automerge:/);
   }, 90_000);
