@@ -28,9 +28,9 @@
     "gate:fold-ts": "node --test host-ts/fold.test.mjs && node host-ts/parity.mjs"
   },
   "devDependencies": {
-    "tree-sitter-cli": "0.26.11"
+    "tree-sitter-cli": "0.27.0"
   },
   "dependencies": {
-    "web-tree-sitter": "0.26.11"
+    "web-tree-sitter": "0.27.0"
   }
 }

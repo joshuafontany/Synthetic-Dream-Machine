@@ -11,12 +11,12 @@
  * the LIVENESS (lease + residency); this carries the AUTHORITY graph (Keyhive).
  *
  * DESIGN CONSTRAINTS:
- *   · DOCUMENT, not Group. Keyhive's Group carries the semantically-correct shape for a
- *     membership cabal and its GroupId round-trips from stored bytes, so persistence does
- *     not decide this. Document holds the seat because canon #the-realm names the realm by
- *     its content-addressed *doc* identity. What a Group would buy is `transitiveMembers()`
- *     — reach through nested cabals, which no Document reports. The subduction stands
- *     unbuilt pending an operator ruling (provider note at createSentinelDoc).
+ *   · DOCUMENT, not Group, and that is RULED rather than pending. A Group carries one HUMAN'S
+ *     cloud — a veil, a PersonaGroup — where nested membership is the real shape. A CABAL takes
+ *     a Document: canon #the-realm names the realm by its content-addressed *doc* identity, and
+ *     a cabal IS the shared relation over that realm's resources, so it has no other name to
+ *     take. `transitiveMembers()` would answer a question nobody asks of a cabal here.
+ *     GroupId round-trips from stored bytes, so persistence never decided this either way.
  *   · forward_secrecy STAYS false — a deliberate THREAT-MODEL CHOICE, not an
  *     architectural impossibility (BeeKEM the substrate DOES keep
  *     FS against a passive adversary; the FS falls away one layer up, at Keyhive's

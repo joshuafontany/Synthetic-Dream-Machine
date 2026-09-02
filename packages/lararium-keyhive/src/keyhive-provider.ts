@@ -426,10 +426,14 @@ export class KeyhiveProvider implements CapabilityProvider {
    * membership cabal (Person-Group, Mesh kahu-cabal), and GroupId round-trips
    * through `constructor(bytes)` / `toBytes()`, so persistence does not decide it.
    *
-   * Document remains the vehicle because canon #the-realm names a realm by its
-   * content-addressed DOC identity. A Group subduction would buy `transitiveMembers()`
-   * — reach through nested cabals, which a Document cannot report — at the cost of
-   * that naming. It stands unbuilt pending an operator ruling.
+   * WHICH PRINCIPAL TAKES A GROUP IS RULED, and it is not the cabal. A Group carries one
+   * HUMAN'S cloud — a veil, a PersonaGroup, the footprints of a single person — where
+   * membership really is nested and `transitiveMembers()` answers a question somebody asks.
+   * A CABAL keeps its Document: canon #the-realm names a realm by its content-addressed doc
+   * identity, and a cabal IS the shared relation over that realm's resources, so it has no
+   * other name to take. Cabals-as-Groups stands OUT OF SCOPE rather than merely unbuilt.
+   *
+   * Today every principal here is a sentinel Document, PersonaGroup included.
    *
    * Returns both the DocumentId hex (for bag-level accessForDoc checks) and
    * the Document's agent Identifier hex (for adding this sentinel as a member
