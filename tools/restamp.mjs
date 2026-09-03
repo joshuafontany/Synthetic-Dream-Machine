@@ -6,15 +6,20 @@
  * The habit this replaces was a one-liner over `git diff --name-only`: stamp everything that moved.
  * It works right up until something OTHER than the session moves a file — a live daemon's projector,
  * a parallel agent, a watcher — and then the stamp signs a rewrite nobody here authored as correct.
- * Measured: two boot carriers arrived rewritten in a working tree (the space stripped before every
- * `>>`, `reflexive` and `register` dropped from the meta block, 217 insertions against 210
- * deletions), and a diff-driven re-stamp blessed both before the diff was read.
+ * Measured: two boot carriers arrived rewritten in a working tree, and a diff-driven re-stamp
+ * blessed both before the diff was read. THE OTHER WRITER WAS THE OPERATOR, editing by hand — which
+ * is the first hypothesis about any unexplained change to a working tree and the one easiest to skip.
  *
  * A check exists to answer "do these bytes match their hash". Stamping whatever moved converts it
  * into "these bytes are whatever was last written", which answers nothing.
  *
  * So: PATHS ARE NAMED, ONE BY ONE. The friction is the point — naming a file is the moment a hand
  * decides it authored the change.
+ *
+ * ⚠ AND A DIRTY FILE THIS RUN DID NOT NAME IS REPORTED, NEVER TOUCHED. Not stamped, and not reverted
+ * either: `git checkout --` on uncommitted work has no recovery path, and "this looks foreign" is a
+ * claim about authorship that a tree cannot answer. Set something aside by COPYING it aside and
+ * saying where it went. Reporting costs a sentence; guessing wrong costs somebody their work.
  *
  * Usage:  node tools/restamp.mjs <carrier.mem> [more.mem ...]
  *         node tools/restamp.mjs --check <carrier.mem> ...   (report, write nothing)
