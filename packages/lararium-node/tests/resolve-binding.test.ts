@@ -26,6 +26,7 @@ import {
   tiddlerText,
   PERSONAL_BINDINGS_PREFIX,
   DRAFT_BINDINGS_PREFIX,
+  WORKING_BINDINGS_PREFIX,
 } from "@lararium/mesh";
 import type { DocHandle } from "@automerge/automerge-repo";
 import { resolveOrMintBinding, type CapabilityProvider, type DelegateArgs } from "@lararium/keyhive";
@@ -147,5 +148,72 @@ describe("resolveOrMintBinding", () => {
     const doc = daemonHandle.doc();
     expect(tiddlerText(doc?.tiddlers?.[`${PERSONAL_BINDINGS_PREFIX}/${FINGERPRINT}`])).toBe(personal.url);
     expect(tiddlerText(doc?.tiddlers?.[`${DRAFT_BINDINGS_PREFIX}/${FINGERPRINT}`])).toBe(draft.url);
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════════════════
+// THE FACELESS FLOOR — a vessel binds on its OWN key, and a face composes onto it
+// ════════════════════════════════════════════════════════════════════════════════════════════════
+/**
+ * A HERM HOLDS NO FACE AND STILL HOLDS ITS OWN DOCS. The binding resolver gated itself behind a
+ * PersonaGroup agent because Herm and Lararium were once separate CLASSES; they are one
+ * capability-stack now, and the gate is what is left of the seam. Operator ruling: the VESSEL KEY
+ * binds, the way the daemon bag itself always has — then operator and vessel COMPOSE their caps over
+ * every critical doc, and a Herm can still stand a `@daemon` wiki for lamplighters to reach.
+ *
+ * ⚠ The mint is what confers authority, not the delegation. `registerBag` calls
+ * `generateDocument`, and the minting device is the document's admin by construction — the comment
+ * in `resolveOrMintBinding` says so. So a faceless mint is not a doc nobody holds; it is a doc the
+ * VESSEL holds, which is exactly the posture the daemon bag already stands in ("OPEN to its founding
+ * operator rather than sealed to a group"). The delegation ADDS the persona; it never creates the
+ * ownership.
+ */
+describe("resolveOrMintBinding — the faceless floor", () => {
+  test("★ a vessel with NO face still mints and records its binding ★", async () => {
+    const repo = new Repo();
+    const { daemonStore, daemonHandle } = makeDaemonStore(repo);
+    const { provider, registered, delegations } = makeFakeKeyhive();
+
+    const result = await resolveOrMintBinding({
+      ...commonArgs(repo, daemonStore, provider),
+      personaGroupAgentIdHex: undefined,           // the waking floor: no face stands
+      kind: "working-binding", prefix: WORKING_BINDINGS_PREFIX,
+    });
+
+    expect(result.minted, "a faceless vessel minted nothing").toBe(true);
+    expect(registered, "the doc was never registered, so the vessel holds no admin on it").toEqual([result.url]);
+    expect(delegations, "a faceless vessel delegated to somebody — to whom?").toHaveLength(0);
+
+    const key = `${WORKING_BINDINGS_PREFIX}/${FINGERPRINT}`;
+    expect(daemonHandle.doc()?.tiddlers?.[key]?.tiddler?.["text"], "the binding was not recorded, so the next boot re-mints").toBe(result.url);
+  });
+
+  /** Reuse-on-present must not depend on a face either — a Herm reboots and finds its own doc. */
+  test("a faceless vessel reuses the binding it minted, rather than minting a second", async () => {
+    const repo = new Repo();
+    const { daemonStore } = makeDaemonStore(repo);
+    const { provider } = makeFakeKeyhive();
+    const args = { ...commonArgs(repo, daemonStore, provider), personaGroupAgentIdHex: undefined,
+                   kind: "working-binding" as const, prefix: WORKING_BINDINGS_PREFIX };
+
+    const first  = await resolveOrMintBinding(args);
+    const second = await resolveOrMintBinding(args);
+    expect(second.minted).toBe(false);
+    expect(second.url).toBe(first.url);
+  });
+
+  /** The control: where a face DOES stand, the delegation composes onto the vessel's own hold. */
+  test("a face still composes onto the vessel's hold when one stands", async () => {
+    const repo = new Repo();
+    const { daemonStore } = makeDaemonStore(repo);
+    const { provider, registered, delegations } = makeFakeKeyhive();
+
+    const result = await resolveOrMintBinding({
+      ...commonArgs(repo, daemonStore, provider),
+      kind: "working-binding", prefix: WORKING_BINDINGS_PREFIX,
+    });
+    expect(registered).toEqual([result.url]);
+    expect(delegations).toHaveLength(1);
+    expect(delegations[0]?.audience).toBe(AGENT_HEX);
   });
 });

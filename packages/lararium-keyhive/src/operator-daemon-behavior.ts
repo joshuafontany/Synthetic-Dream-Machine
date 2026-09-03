@@ -549,26 +549,31 @@ export function operatorDaemonOptions(manifest: IslandMsg_Manifest, extra: Daemo
       return { ...verdict, identifier: id, proofVerified, reason: verdict.reason ?? cross.reason };
     },
 
-    ...(daemonAuth.personaGroupAgentIdHex ? {
-    // A HERM RESOLVES NO PERSONA-SEALED BINDINGS.
+    // A VESSEL BINDS ON ITS OWN KEY, AND A FACE COMPOSES ONTO THAT.
     //
-    // These name a wiki's personal/draft/working layers, each keyed under a PERSONA. The floor of the cap
-    // stack carries its daemon bag and no operator bag a human decrypts locally — that plane reads OPEN to its
-    // founding operator rather than sealed to a group — so there is nothing here to key, and nothing to
-    // resolve. Supplied only where a face stands, the gate the vault verbs already keep; a floor that offered
-    // this callback would throw reaching for a face DURING BOOT and take its own standing with it.
-      resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {
-        if (!kh) throw new Error("keyhive not booted");
-        const common = {
-          fingerprint, repo: ctx.repo, daemonStore: ctx.composite, keyhive: kh,
-          personaGroupAgentIdHex: faceAgent(), mintedByHex, recipeTrace,
-        } as const;
-        const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
-        const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });
-        const working  = await resolveOrMintBinding({ ...common, kind: "working-binding",  prefix: WORKING_BINDINGS_PREFIX });
-        return { personalUrl: personal.url, draftUrl: draft.url, workingUrl: working.url };
-      },
-    } : {}),
+    // These name a wiki's personal/draft/working layers. Gating them behind a face read as
+    // "a Herm resolves no persona-sealed bindings" — which is what was left of Herm and Lararium
+    // having once been separate CLASSES rather than one capability stack. The MINT is what confers
+    // authority (`registerBag` generates the document; its generator is admin by construction), so a
+    // faceless vessel's binding is a doc the VESSEL holds — the posture its daemon bag has always
+    // stood in. Where a face stands, `resolveOrMintBinding` delegates the same doc to the
+    // PersonaGroup on top, so operator and vessel compose over every critical doc.
+    //
+    // ⚠ And the callback no longer reaches for a face, which is what made the gate necessary: it
+    // reads `daemonAuth.personaGroupAgentIdHex` directly rather than through `faceAgent()`, so a
+    // floor offering it cannot throw during boot and take its own standing with it.
+    resolveBinding: async (ctx: IslandContext, fingerprint: string, recipeTrace: { wikiDocId: string; libraryBagDocIds: readonly string[] }) => {
+      if (!kh) throw new Error("keyhive not booted");
+      const common = {
+        fingerprint, repo: ctx.repo, daemonStore: ctx.composite, keyhive: kh,
+        ...(daemonAuth.personaGroupAgentIdHex ? { personaGroupAgentIdHex: daemonAuth.personaGroupAgentIdHex } : {}),
+        mintedByHex, recipeTrace,
+      } as const;
+      const personal = await resolveOrMintBinding({ ...common, kind: "personal-binding", prefix: PERSONAL_BINDINGS_PREFIX });
+      const draft    = await resolveOrMintBinding({ ...common, kind: "draft-binding",    prefix: DRAFT_BINDINGS_PREFIX });
+      const working  = await resolveOrMintBinding({ ...common, kind: "working-binding",  prefix: WORKING_BINDINGS_PREFIX });
+      return { personalUrl: personal.url, draftUrl: draft.url, workingUrl: working.url };
+    },
 
   };
 }

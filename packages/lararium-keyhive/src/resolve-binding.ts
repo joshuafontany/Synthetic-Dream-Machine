@@ -64,8 +64,14 @@ export interface ResolveBindingArgs {
   /**
    * PersonaGroup AGENT Identifier hex (getAgent-resolvable) — the delegation
    * audience. NOT the group's DocumentId (that is the membership-check target).
+   *
+   * ABSENT AT THE WAKING FLOOR, and that is a posture rather than a fault. A vessel holding no face
+   * still holds its own docs: the MINT is what confers authority (`registerBag` generates the
+   * document, and its generator is admin by construction), so a faceless binding is not a doc nobody
+   * holds — it is a doc the VESSEL holds, the posture the daemon bag itself has always stood in. The
+   * delegation ADDS a persona over that hold; it never creates it.
    */
-  readonly personaGroupAgentIdHex: string;
+  readonly personaGroupAgentIdHex?: string | undefined;
   /** Vessel Individual hex — the binding tiddler's `minted-by` audit field. */
   readonly mintedByHex: string;
   /** Fingerprint inputs, stored verbatim as the `recipe-trace` audit field (Q5: keep). */
@@ -104,16 +110,23 @@ export async function resolveOrMintBinding(args: ResolveBindingArgs): Promise<Re
   // registerBag mints it first. The minting device becomes implicit admin.
   await args.keyhive.registerBag(handle.url);
 
-  // Bind to the STABLE agent-id. access: "admin" — POLA-correct grain for
-  // co-edited view-state is "edit", but the live Keyhive gate exposes only
-  // read | admin, so edit-intent rounds UP to admin as documented interim debt
-  // (marginal authority ≈ 0; every PersonaGroup device already holds admin on
-  // the daemon bag). Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
-  await args.keyhive.delegate({
-    bagUrl:   handle.url,
-    audience: args.personaGroupAgentIdHex,
-    access:   "admin",
-  });
+  // COMPOSE A FACE ONTO THE VESSEL'S HOLD, where one stands. The vessel is already this document's
+  // admin by having generated it; this delegation widens the hold to the operator's PersonaGroup so
+  // the binding follows them across devices. A vessel at the waking floor delegates to nobody and
+  // keeps the doc on its own key — a Herm stands its `@daemon` wiki that way, which is how a
+  // lamplighter reaches one.
+  //
+  // access: "admin" — POLA-correct grain for co-edited view-state is "edit", but the live Keyhive
+  // gate exposes only read | admin, so edit-intent rounds UP to admin as documented interim debt
+  // (marginal authority ≈ 0; every PersonaGroup device already holds admin on the daemon bag).
+  // Adopt "edit" the moment the gate accepts it. Debt: causal-islands.md.
+  if (args.personaGroupAgentIdHex) {
+    await args.keyhive.delegate({
+      bagUrl:   handle.url,
+      audience: args.personaGroupAgentIdHex,
+      access:   "admin",
+    });
+  }
 
   // Record the binding in the daemon doc — replicates to the operator's other
   // devices, where reuse-on-present finds it next boot.

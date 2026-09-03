@@ -177,11 +177,18 @@ describe("⑤ the outward gate", () => {
 // prune for want of a handle; `island-recipe` falls the write layer back to the daemon's own bag; and
 // `disk-projector` excludes `daemon` from every mirror. Three layers, no working↔canon shore, no disk.
 //
-// WHAT BLOCKS IT, and it is structural rather than an oversight: the instance slots bind per
-// (PersonaGroup × recipe-fingerprint) through `resolveBinding`, which the DAEMON supplies — so the
-// daemon cannot be a client of it during its own boot, and the fail-closed boot window MUST NOT move.
-// `CompositeStore.addLayer(layer, at)` already splices live and fans projections, so a late attach
-// after a face lights is mechanically supported; what is missing is the act, not the machinery.
+// WHAT NO LONGER BLOCKS IT. The instance slots once bound only where a FACE stood, so the daemon
+// could not be a client of the resolver it supplies and a faceless floor got no layers at all. That
+// gate was what remained of Herm and Lararium having been separate CLASSES; operator ruling made the
+// VESSEL KEY the binder, and the mint already confers it — `registerBag` generates the document and
+// its generator is admin by construction, so a faceless binding is a doc the VESSEL holds, with a
+// face composing on top where one stands. A Herm now resolves its own bindings and can stand a
+// `@daemon` wiki for a lamplighter to reach.
+//
+// WHAT REMAINS IS WIRING, not authority: the daemon VM's grants are built before the VM that hosts
+// the resolver exists, so its own working layer arrives by a LATE ATTACH rather than at open.
+// `CompositeStore.addLayer(layer, at)` already splices into a live cascade and fans projections to
+// the arriving layer — the act is missing, never the machinery, and it needs no face to run.
 describe("⑦ the daemon wiki, held to the laws every other wiki obeys", () => {
   test("the recipe already NAMES the slots the daemon is not granted", () => {
     // Not a gap in the model — `expandRecipe` mints the same five slots for every slug, daemon
@@ -201,7 +208,7 @@ describe("⑦ the daemon wiki, held to the laws every other wiki obeys", () => {
     expect(Object.keys(mesh)).toContain("daemonWorkingGrant");
   });
 
-  test.skip("THE DAEMON'S WORKING LAYER ATTACHES AFTER A FACE LIGHTS, WITHOUT MOVING THE BOOT WINDOW — DEFERRED: the instance slots bind per (PersonaGroup × recipe-fingerprint) through the resolveBinding the daemon itself supplies, so it cannot resolve its own during its own boot. `addLayer(layer, at)` splices live and fans projections already; nothing calls it for the daemon, and no vector proves a vessel that boots faceless later gains the layer rather than needing a reboot", () => {
+  test.skip("THE DAEMON'S WORKING LAYER ATTACHES AFTER ITS OWN BOOT — DEFERRED: the daemon VM's grants are built before the VM that hosts the binding resolver exists, so its working layer can only arrive by a late attach. `addLayer(layer, at)` splices live and fans projections already, and since the binder is the VESSEL key this needs no face to run — a Herm gains the layer too. Nothing calls it for the daemon, and no vector proves a booted vessel gains the layer rather than needing a reboot", () => {
     expect(Object.keys(mesh)).toContain("attachWorkingLayerLive");
   });
 

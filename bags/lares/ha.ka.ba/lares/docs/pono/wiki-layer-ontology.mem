@@ -217,7 +217,13 @@ The recipe is not the gap. `expandRecipe` mints the same five slots for every sl
 
 !!! What has to be respected while closing it
 
-⚠ ''The instance slots bind per (PersonaGroup × recipe-fingerprint), through the resolver the daemon ITSELF supplies.'' So the daemon cannot be a client of that resolution during its own boot, and ''the fail-closed boot window MUST NOT move'' to make it one. A LATE ATTACH is the shape that respects both: the daemon boots as it boots, and gains its working layer once a face stands. The machinery is already there — `addLayer(layer, at)` splices into a live cascade and fans projections to the arriving layer — so what is missing is the act rather than the mechanism.
+!!! The vessel key binds; a face composes onto it (operator ruling, 2026-09-03)
+
+''A wiki's instance slots once bound only where a FACE stood'' — so a Herm resolved none, and the daemon could not be a client of the resolver it supplies. That gate was what remained of Herm and Lararium having been separate ''classes'' before they became one capability stack, and it read as structure while it was residue.
+
+''The MINT is what confers the hold.'' `registerBag` generates the document and its generator is admin by construction, so a faceless binding is not a doc nobody holds — it is a doc the ''vessel'' holds, exactly the posture the daemon bag has always stood in. Where a face stands, the same doc delegates to the PersonaGroup on top: ''operator and vessel compose their caps over every critical doc'', and neither is a precondition for the other. A Herm resolves its own bindings and can stand a `@daemon` wiki for a lamplighter to reach.
+
+''What remains is wiring rather than authority.'' The daemon VM's grants are built before the VM that hosts the resolver exists, so its own working layer arrives by a LATE ATTACH — `addLayer(layer, at)` splices into a live cascade and fans projections to the arriving layer, and needs no face to run. ⚠ ''The fail-closed boot window still MUST NOT move'' to make the attach earlier than it is.
 
 ''The mirror already tells the two coordinates apart.'' `resolveDiskMirrors` resolves a `wikiSlot` designation (working → `wikis/{slug}`) separately from a `selfCanon` one (`bags/{slug}`), so the daemon's working layer reaches disk while the bag beneath it does not — which matters, because that bag carries verb tiddlers, outcomes, flows and binding records, and mirroring it would put the control plane on the operator's tracked tree. Designate one and not the other; no new mechanism is owed.
 
@@ -288,6 +294,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kziQm5vQMbn5oUMnyMuhrU4q4nNLRH87-cCxX1vzq0w
+<<^ code="&#x0003;" >>ni:///sha-256;68wVdeccyUA6XGPy440buJLSYOqMtdiIsI1HjH2V0Wo
 
 <<^ code="&#x0004;" -> to=? >>
