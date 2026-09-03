@@ -31,11 +31,12 @@ uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANV
 |`#canon-boundary` |✓ MIGRATED |`docs/pono/canon-boundary#the-promotion-boundary` |
 |`#views` |✓ MIGRATED |`docs/pono/wikispace-canvasspace-ontology#semantic-zoom` |
 |`#kinopio-ux-model` |✓ MIGRATED |`docs/pono/canvas-shell-ux` |
-|`#room-model`, `#trust-grants` |◇ CHECK |a live `tw5/canvas/rooms` stands — confirm coverage, then mark |
-|`#causal-islands` |◇ CHECK |`api/pono/causal-islands` stands — confirm coverage |
-|`#lar-uri-assignment` |◇ CHECK |the lar-URI canon stands — confirm coverage |
-|`#platform-targets` |◇ CHECK |`lararium/api/camera-mount` carries a platform table |
-|`#meme-store-substrate` |◇ CHECK |meme-store foundations |
+|`#room-model` |✓ RESOLVED |its "is not" laws are held by `wikispace-canvasspace-ontology#model-view-boundary` (view-state as its own entity; a meme MUST NOT carry canvas coordinates) and `#graph-primacy`. The live `tw5/canvas/rooms` is a REGISTRY and covers something else — a shared word, not shared content |
+|`#trust-grants` |▢ NEEDS A HOME |room-model extended; unread |
+|`#causal-islands` |✗ SURFACE-BOUND |NOT the causal-island doctrine — room reseeding, content-addressed room keys, a vendor store's IndexedDB adapter. The live `api/pono/causal-islands` is invariant law and a different thing. ''One keeper extracted'': dual-load → `docs/pono/canvas-shell-ux#dual-load` |
+|`#lar-uri-assignment` |✓ RESOLVED |`api/pono/lar-uri` holds the canon; the section's portal-shape record is vendor-typed and dies with the surface |
+|`#platform-targets` |✓ RESOLVED |`lararium/api/camera-mount` carries the platform table |
+|`#meme-store-substrate` |▢ NEEDS A HOME |''no live home found'' — `meme-store` / `AutomergeMemeStore` appear nowhere in live canon. Either migrate or rule it superseded by the composite store |
 |`#seeding`, `#hidden-skeleton`, `#write-back-architecture`, `#trust-tiers`, `#ux-shell`, `#theme-system`, `#deployment`, `#mcp-surface`, `#open-questions` |▢ NEEDS A HOME |unassigned — read each before deletion |
 |`#tldraw-template-model` |✗ SURFACE-BOUND |dies with the surface; nothing to migrate |
 
@@ -1289,6 +1290,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;c7dJm1LtbWJtyJGJwq1Rv5gqvjWyQP0TVtdKSjd4Lzo
+<<^ code="&#x0003;" >>ni:///sha-256;cuPLAENH4QkEbKziZjj2Sk_QOB5FfZWg8BfNALQF6K8
 
 <<^ code="&#x0004;" -> to=? >>

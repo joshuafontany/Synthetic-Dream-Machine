@@ -95,6 +95,36 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 <<~/ahu >>
 
+<<~ ahu #the-proposal-channel >>
+
+!! The proposal channel ~ arrangement may SPEAK, and still never assert
+
+''Graph-primacy forbids INFERENCE. It does not forbid PROPOSAL, and the difference is the whole of it.''
+
+`spatial-arrangement → inferred-edge` is banned and stays banned: a reader may drag two shapes adjacent without meaning anything, and a surface that quietly mints an edge from that has fabricated a relation nobody made. ''No arrangement is ever an edge.''
+
+But a surface may ''RECOGNISE'' an arrangement and ''OFFER'' it:
+
+```
+spatial-arrangement  →  PROPOSED entity  →  (a hand accepts)  →  explicit graph entity
+```
+
+The proposal is not an edge and does not render as one. It becomes an entity ''only when a hand takes it'', at which point it is an ordinary explicit entity and graph-primacy's arrow is unbroken.
+
+!!! Why the channel is worth having
+
+Spatial hypertext's own measurement — the programme this doctrine inverts — is that ''users avoid explicit linking mechanisms in favour of expressing relationships through proximity and visual attributes''. That behaviour does not stop because a system forbids inference; it simply goes ''unrecorded''. A house with no proposal channel loses exactly the structure its readers are working hardest to express.
+
+Its second finding names the state the channel carries: ''placement close but not quite with others can imply indecision, or POTENTIAL for a relation''. ''Constructive ambiguity is a first-class state and no shipped tool has one'' — every relation elsewhere is an edge or nothing, and a boolean edge cannot hold a hedge.
+
+!!! What this house can do that the original could not
+
+In the system that first built a spatial parser, promotion was a ''destructive edit''. Here a proposal is a ''versioned, attributable, declinable'' record — it can be refused, undone, and read back to whoever made it. ''That is a strictly better mechanism, available because of the store rather than in spite of it.''
+
+⚠ ''AND THE TRAP, which is this house's own recurring shape.'' The system that spatial hypertext was invented to ESCAPE was one with ''predefined types and relations'', whose overhead made mid-task revision //overwhelming and very unlikely to occur//, and whose users' visual languages ''co-evolved with the task'' — colour meaning usefulness early and something domain-specific later. ''A fixed vocabulary of spatial relation types rebuilds precisely that system.'' The vocabulary stays DERIVED, never enumerated (#/derive-dont-enumerate).
+
+<<~/ahu >>
+
 <<~ ahu #model-view-boundary >>
 
 !! The Model/View Boundary — Both Sides Addressed
@@ -188,6 +218,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;CWq2fxlYApGtzkIyOu6FU5HG6hzSLaKbzKY_QvCJbhM
+<<^ code="&#x0003;" >>ni:///sha-256;RNi-35P2XcJVmjt0JPNlHeOghX7nCyryrCUzZcAHouU
 
 <<^ code="&#x0004;" -> to=? >>

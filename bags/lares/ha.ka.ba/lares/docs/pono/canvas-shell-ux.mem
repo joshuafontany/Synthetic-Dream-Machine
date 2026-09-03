@@ -72,6 +72,22 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 <<~/ahu >>
 
+<<~ ahu #dual-load >>
+
+!! Dual-load ~ the local replica renders first, the network merges after
+
+''A place opens from local storage IMMEDIATELY and renders before any peer is reached.'' The transport connects in parallel and its deltas merge into what is already on screen.
+
+# open a place → restore the local snapshot → ''render at once''
+# in parallel → connect → receive deltas → merge into live state
+# on disconnect → ''keep editing'' → queue → replay on reconnect
+
+''This is the local-first ideal stated as a shell behaviour'' — //no spinners: your work at your fingertips//, and //the network is optional//. A surface that waits for a peer before drawing has made the network a precondition, and a vessel whose canvas cannot open offline is not sovereign in the way the rest of the stack is.
+
+⚠ ''The merge must not clear the surface.'' A remote delta arriving after first paint updates what stands; it never replaces the tree. A camera that re-renders wholesale on connect throws away the reader's caret, scroll and selection, which is the state the shell exists to keep.
+
+<<~/ahu >>
+
 <<~ ahu #layout >>
 
 !! The layout, surface-invariant
@@ -102,6 +118,6 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;woyvCp6eSSk8tIRHd3lY5lCY-vT8KWxC6h_lk7gMJp8
+<<^ code="&#x0003;" >>ni:///sha-256;e6NPNsOs9L5ht7Rcj2q0dFSybsS6LwFRbWelvbsUtXI
 
 <<^ code="&#x0004;" -> to=? >>
