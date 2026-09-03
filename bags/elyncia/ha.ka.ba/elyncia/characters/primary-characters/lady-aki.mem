@@ -31,6 +31,8 @@ type                                   = "text/memetic-wikitext+tiddlywiki"
 uri-path                               = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki"
 ```
 
+<<^ code="&#x0002;" >>
+
 <<~ ahu #head >>
 
 ! Lady Aki — Character Sheet
@@ -715,8 +717,7 @@ Keep silhouettes distinct:
 Do not collapse these roles.
 
 <<~/ahu >>
-<<^ code="&#x0002;" >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vKOSCN4I71sej2BOATUaykHzCaLE9PbrUBUvX_lrVXQ
+<<^ code="&#x0003;" >>ni:///sha-256;zUN4SmzXgy6L6ZkTp_a6UAMcSB2ks2KdflKLQBDwsYk
 
 <<^ code="&#x0004;" -> to=? >>

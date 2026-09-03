@@ -130,6 +130,16 @@ export function readCarrierShape(text: string): CarrierShape {
   // surfaces it rather than letting the first frame's `ok` speak for bytes it never covered.
   const stxCount = maskedExecAll(text, /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/g, spans).length;
   if (stxCount > 1) faults.push(`${stxCount} text frames stand where the grammar admits one — only the first verifies`);
+  // THE FRAME MUST OPEN BEFORE THE BODY IT CLAIMS TO COVER. An STX seated after the last block leaves
+  // a span of nearly nothing, and the check over nothing matches its own recomputation — so the file
+  // reads `ok` at every gate while none of its bytes are covered. Two carriers stood that way, and the
+  // check-witness counted both among its greens. Ahu openers outside the frame are the reading: they
+  // are body, and body before the frame is body the verdict never saw.
+  const stxAt = maskedExecAll(text, /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/g, spans)[0]?.index;
+  if (stxAt !== undefined) {
+    const outside = maskedExecAll(text, /<<~ ahu\b/g, spans).filter((m) => m.index < stxAt).length;
+    if (outside > 0) faults.push(`${outside} block(s) stand ahead of the text frame — the check covers a span that is not the body`);
+  }
 
   return { kind, marks, faults };
 }

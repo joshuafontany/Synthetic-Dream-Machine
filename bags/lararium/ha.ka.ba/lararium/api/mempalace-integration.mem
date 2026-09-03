@@ -20,6 +20,8 @@ uri-path  = "ha.ka.ba/lararium/api/mempalace-integration"
 
 <<~ aka lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>
 
+<<^ code="&#x0002;" >>
+
 <<~ ahu #entry >>
 
 ! mempalace ~ the lararium's memory-library
@@ -134,10 +136,7 @@ lares harvest --all                                      # sweep every transcrip
 * ''The source-adapter shore'' ~ when upstream wires `mempalace mine --source`, the declared `lares` schema slots in whole.
 
 <<~/ahu >>
-<<^ code="&#x0002;" >>
 
-
-
-<<^ code="&#x0003;" >>ni:///sha-256;TTROiK_mUk1Sc6pko5pCqMaDJ6cUGShJ_qgFzcgwHaU
+<<^ code="&#x0003;" >>ni:///sha-256;y9zn-IFHqSCkX9QyyRkcwGaBm5yChVCRmlxCFhTb-8k
 
 <<^ code="&#x0004;" -> to=? >>

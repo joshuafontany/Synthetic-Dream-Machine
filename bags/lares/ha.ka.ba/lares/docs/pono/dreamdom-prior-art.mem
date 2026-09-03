@@ -249,10 +249,10 @@ Every delta-based system in the corpus must queue; you can drop precisely becaus
 
 <<~/ahu >>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-projection >>
-<<~ loulou lar:///ha.ka.ba/lares/api/wiki-coherence-projection >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MpYqsyJQ9gVnH_APRRSz3d740PY6qi9aSw0yDL_oswA
+<<^ code="&#x0003;" >>ni:///sha-256;LiavVFnsd9qCUpPc9N8AFKzP8WQr0ufBigcah8yCwvM
 
 <<^ code="&#x0004;" -> to=? >>
