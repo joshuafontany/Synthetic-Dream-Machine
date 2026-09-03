@@ -36,10 +36,11 @@ uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANV
 |`#causal-islands` |✗ SURFACE-BOUND |NOT the causal-island doctrine — room reseeding, content-addressed room keys, a vendor store's IndexedDB adapter. The live `api/pono/causal-islands` is invariant law and a different thing. ''One keeper extracted'': dual-load → `docs/pono/canvas-shell-ux#dual-load` |
 |`#lar-uri-assignment` |✓ RESOLVED |`api/pono/lar-uri` holds the canon; the section's portal-shape record is vendor-typed and dies with the surface |
 |`#platform-targets` |✓ RESOLVED |`lararium/api/camera-mount` carries the platform table |
-|`#meme-store-substrate` |▢ NEEDS A HOME |''no live home found'' — `meme-store` / `AutomergeMemeStore` appear nowhere in live canon. Either migrate or rule it superseded by the composite store |
+|`#meme-store-substrate` |✓ RESOLVED |three named laws, three different verdicts. ''Law 2'' `pranala-schema-binding` stands as `api/pono/pranala-families`. ''Law 3'' `grammar-as-memes` stands as `api/pono/parser#grammar-self-hosting` — the grammar loads from the live wiki, no code change to add a sigil. ''Law 1'' `meme-immutability` is ''REFUTED by daily practice'' — carriers are edited in place and re-stamped, and the ruling that replaces it is now `docs/pono/canon-boundary` (an address is stable; its bytes are versioned). Its `AutomergeMemeStore` naming carries into nothing live |
 |`#hidden-skeleton` |✓ MIGRATED |the law under the vendor detail — containment is a graph fact, never the render tree's parent pointer — now `docs/pono/wikispace-canvasspace-ontology#ownership-is-a-graph-fact`. The shape counts and opacity table die with the surface |
 |`#seeding` |✗ SURFACE-BOUND |the M10 opening path: reseed routes, a legacy SQLite room, boot-receipt meta tags. Its one durable line — disk write → watcher → CRDT patch → browser → wiki change — is `lararium/docs/disk-projection-law` and `api/pono/vm-projection-bus` |
-|`#write-back-architecture`, `#ux-shell`, `#theme-system`, `#deployment`, `#mcp-surface`, `#open-questions` |▢ NEEDS A HOME |unassigned — read each before deletion |
+|`#write-back-architecture` |✓ MIGRATED |two keepers, two refusals. The three-tier commit ladder → `docs/pono/canon-boundary#the-promotion-boundary` (the live layer holds TWO durabilities, and only one syncs); the visible pending/confirmed distinction → `docs/pono/canvas-shell-ux#the-boundary-is-visible`. Its `LarStorageBackend` interface is covered by the residency verbs; its write-gate table is the superseded ladder above |
+|`#ux-shell`, `#theme-system`, `#deployment`, `#mcp-surface`, `#open-questions` |▢ NEEDS A HOME |unassigned — read each before deletion |
 |`#tldraw-template-model` |✗ SURFACE-BOUND |dies with the surface; nothing to migrate |
 
 ⚠ ''DO NOT DELETE while any row reads CHECK or NEEDS A HOME.'' Deleting early does not lose the bytes — git holds them — but it loses the keeper from the ''memegraph'', which is the entire purpose of the drain.
@@ -1292,6 +1293,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;sk2ILkULagnj6HtEUOKi-4UsUwr3DFQ5YCIzhNsXXQ4
+<<^ code="&#x0003;" >>ni:///sha-256;C5KL9KYPDD0nsq-84Tpk54B7X3_UlR7fkmOFI-pR1n0
 
 <<^ code="&#x0004;" -> to=? >>

@@ -72,6 +72,16 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 <<~/ahu >>
 
+<<~ ahu #the-boundary-is-visible >>
+
+!! A boundary the reader cannot see is a boundary the reader will cross by accident
+
+''Where a thing sits on the durability ladder must be legible from the surface itself'', without a menu, a hover or a second click. Pending and promoted look different; a thing that will survive a reconnect looks different from a thing that will not.
+
+This is not decoration. The `canon-boundary` crossing is enforced by capability and it is ''obeyed'' by people who can tell which side they are working on. A reader who cannot see the line does not experience a refusal as protection — they experience it as the tool losing their work, and they route around it. ⚠ The visible distinction never ENFORCES anything: it makes the enforced line predictable, which is the only thing a surface can honestly contribute to a rule the store already keeps.
+
+<<~/ahu >>
+
 <<~ ahu #dual-load >>
 
 !! Dual-load ~ the local replica renders first, the network merges after
@@ -118,6 +128,6 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;e6NPNsOs9L5ht7Rcj2q0dFSybsS6LwFRbWelvbsUtXI
+<<^ code="&#x0003;" >>ni:///sha-256;nVkRGKjXT7UgULBMo4NV8ZXyq2tPG8bLi3FHw7ylt0M
 
 <<^ code="&#x0004;" -> to=? >>

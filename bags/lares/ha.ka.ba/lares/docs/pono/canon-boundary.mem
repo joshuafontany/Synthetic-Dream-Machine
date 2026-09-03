@@ -67,6 +67,18 @@ The crossing model above says a crossing must be explicit. This says ''who makes
 * ''CANON LAYER'' — `lares/` carrier files, git-trackable, hostless `lar:///…` addresses.
 * ''LIVE LAYER'' — the CRDT records materialized into TW5 and projected onto a camera. ''This layer MAY diverge locally and offline and sync later.'' Divergence is its correct behaviour, never a fault.
 
+!!! The live layer holds TWO durabilities, and only one of them syncs
+
+Naming the live layer as one thing hides the distinction a person actually feels. Three durabilities stand, and the boundary crossing sits between the second and the third:
+
+# ''SESSION'' — pending surface state: a drag in flight, a selection, an uncommitted keystroke. ''Volatile'': it dies with the connection and belongs to one viewer. Nothing here has diverged, because nothing here has been recorded.
+# ''SHARED'' — the CRDT records. ''Durable across a disconnect and visible to every peer of the place'', and NOT canon. This is the layer whose divergence is correct behaviour.
+# ''CANON'' — carrier files at hostless addresses. Reached only by the crossing below.
+
+''The failure the split prevents:'' a surface that treats session state as shared publishes a half-finished gesture to everyone; a surface that treats shared state as session throws away work on a reconnect and calls it a refresh. Both read as one bug — "my edit vanished" — from two opposite causes, and a model with one live layer cannot tell them apart.
+
+⚠ ''A promotion never crosses two boundaries at once.'' Nothing may travel from SESSION to CANON: an unrecorded gesture has no content hash to sign and no source to name, so the receipt below could not be written even in principle. A thing is recorded before it is promoted, always in that order.
+
 !!! The direction is the whole rule
 
 ''COPY-UP IS FREE. PROMOTION-DOWN IS THE PRIESTHOOD'S ACT.'' (operator ruling) A user may copy and alter a public tiddler into a more private bag — a personal shadow copy — and that path MUST stay cheap; the recipe stack runs on it. Moving in the other direction, from any private bag into canon, belongs to the ''kahu-cabal signers''.
@@ -80,6 +92,17 @@ The stack order makes //down// literal: ''core < canon < wiki < user < session''
 ⚠ ''THE RECORD IS MISSING, and it is the declared blocker.'' `tiddler-store` states it: //canon promotion is disabled until a Keyhive-backed proposal/receipt graph exists; `store.put()` never writes to `lares/`//. So promotion is PERMITTED by capability and RECORDED by nothing. A cap gate is a decision at a moment; ''a receipt is a record you can walk backwards'', and without one a promotion leaves no artifact to audit or revoke against. ''The receipt is the audit half of the priesthood act.''
 
 ⚠ ''The source side is loose on the residency path.'' Canon's read-only mount does not protect it there — a residency MOVE/COPY reaches the bag's own doc and mounts nothing, so only the destination check applies. `crossingDirection` holds the full rule with `needsCabal`, and `VerbContext` carries `daemon`, `invocation`, `cap` and ''nothing that answers a bag's publicity tier''. The reader exists one package over (`bagManifest` parses `cap-tier`); the gap is the injection.
+
+!!! An address is stable; its bytes are versioned ~ and those are different claims
+
+⚠ ''A carrier at a hostless address is NOT immutable, and reading it that way inverts the model.'' A stricter law is available and reads plausible — //a promoted meme is never mutated; the only lawful write is a full replacement producing a new address// — and the corpus refutes it in practice on every working day. Carriers are edited in place, re-stamped, and committed; the address stands while the bytes move.
+
+The two properties it fuses:
+
+* ''ADDRESS STABILITY'' — the thing an address names does not become a different thing. This is what makes an edge worth writing, and it is what the corpus actually keeps.
+* ''BYTE HISTORY'' — every state the bytes passed through remains reachable. This is what git and the block check keep together: the check says //these bytes//, and the history says //which ones, when//.
+
+''Address-per-version buys neither.'' It scatters one subject across many names, so every edge points at a snapshot and the graph decays with each edit — while the history it claims to provide is exactly what version control already holds. The distinction it was reaching for is real and lives one level up: a name may be RETIRED when the thing it names stops standing, which is an act on the graph, never a consequence of editing a file.
 
 !!! The shape the receipt should take
 
@@ -168,6 +191,6 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VqbG-UTpvDqDdlLpF3-XtDFJk_A1NmpfKA84FAsb4QE
+<<^ code="&#x0003;" >>ni:///sha-256;hNl1d3_lHh0Sm9Ji59KPbo703SDk_AgsULxU3ahqMco
 
 <<^ code="&#x0004;" -> to=? >>
