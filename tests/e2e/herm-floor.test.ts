@@ -152,6 +152,16 @@ describe("the herm — the floor of the lararium cap stack", () => {
     const { live, log } = await standHerm(root);
     // The failure carries the next reach-for-a-face by name — that is what this vector is for.
     expect(live, `the floor did not stand:\n${log.slice(-1200)}`).toBe(true);
+
+    // ★ THE FLOOR IS THE CLAIM, so prove it POSITIVELY rather than by the absence of a `persona new`.
+    // Every vector below reads as "the floor carries / refuses / lifts", and each of those is a
+    // different verdict on a hearth. A rig that quietly lit a face would turn R5's LIFT green by
+    // having nothing to lift — the shape `founding-witness` already refuses on the place half.
+    const held = execFileSync(process.execPath, [CLI, "persona", "list", "--json"], {
+      env: { ...process.env, LAR_ROOT: root }, cwd: REPO, encoding: "utf8",
+    });
+    expect(held, `a face stands on the floor rig — every vector below measures a hearth, not a floor:\n${held.slice(0, 400)}`)
+      .not.toMatch(/"index"\s*:\s*\d/);
   }, 200_000);
 
   test("R2 — a herm serves the public shelf with no hearth-fire lit", async () => {

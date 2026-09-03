@@ -872,12 +872,24 @@ The DIVERGENCE from the reserve card path (#/reserve-custody): threshold-attest 
 <<~ confidence 12/20 >> ''Operator ruling (2026-07-20):'' recovery ROTATES a fresh op-key
 rather than resurrecting the old — ''continuity anchors on the identifier, not the key''. The persona-KEL
 (the stable prefix) + the threshold-attest rotation stand BUILT + tested (mesh: `persona-kel` +
-`recovery-keel-core#attestAndRotate`). The ''Binding-Gate pin-move'' — moving the edge pin from the raw
-op-key `signerDid` to `inception.prefix`, and walking the KEL to the current head at
-`verifyDeviceDelegation` — rides a SURFACED plan (identity-classes#the-continuity-anchor): the pure
-gate-walk (`verifyEdgeAgainstPersonaKel`) stands + tested, but wiring it into the live founding ceremony
-+ `bootDaemonKeyhive` + `verifyPeer` needs the KEL's storage/sync placement decided first (a security
-surface main gates hunk-by-hunk; no hybrid pin — a fresh founding pins the prefix from inception).
+`recovery-keel-core#attestAndRotate`).
+
+''THE BINDING-GATE PIN-MOVE LANDED.'' `bootDaemonKeyhive` pins `personaKel.prefix` and walks the local
+chain to its current authoritative head, halting fail-closed on a genesis-prefix mismatch, a broken or
+below-quorum head, or an edge that fails to chain — and it records //no raw-pin hybrid//, because
+accepting both a raw op-key pin and a prefix would open a downgrade. So ''continuity rides the log'' and
+this movement waits on no storage/sync placement (identity-classes#the-honest-edges carries the
+correction and its reason: //a stale wall misroutes every reader who trusts it//).
+
+⚠ ''WHAT REMAINS IS THE FORK, not a prerequisite.'' `identity-classes#the-two-forks` holds the one open
+choice — whether the recovery authority EVER materializes as a single secret (Fork A reconstruct-then-sign,
+maximal reuse of the guardian-card machinery, a shrunk transient window) or NEVER does (Fork B
+threshold-attest, each guardian signs independently, new multisig and heavier onboarding). ''Both stand
+built''; neither is wired into `runInit`, and the wiring waits on the ruling rather than on code.
+
+⚠ ''TWO SITES STILL BIND A RAW KEY where a prefix belongs'', each with its own consequence: the antigen
+bans a presenter `nym`, so a lawful rotation ''sheds the ban''; and a handle-card names a bare key as its
+`nym`, so a face carries no chain to break.
 
 <<~/ahu >>
 
@@ -1445,6 +1457,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;M7lfbUwgTxedQk8yCREIT9Qz-YYh2mxw3PectjloNX0
+<<^ code="&#x0003;" >>ni:///sha-256;rQ0a2SRHe-iQqrIxhGEYmhbUbF32sS-PS0hVomb7Zjo
 
 <<^ code="&#x0004;" -> to=? >>

@@ -17,6 +17,34 @@ cd "$(dirname "$0")/.."
 
 fail=0
 
+# ── THE THIRD SPELLING ──────────────────────────────────────────────────────────────────────────
+# TS and python were gated against each other while the E2E HARNESS carried a third derivation
+# nobody checked — it walked an instance root hunting a file named `lares.sock`, found nothing, and
+# nine vectors across the join ceremony and the herm floor reported broken CEREMONIES for a rig that
+# never reached them. A shared address needs one derivation used by EVERY side, harnesses included.
+harness_check() {
+  local root="$1"
+  local from_harness from_connector
+  from_harness=$(node --input-type=module -e '
+    import { rendezvousPath } from "./packages/lararium-mesh/dist/rendezvous-path.js";
+    import { join } from "node:path";
+    const root = process.argv[1];
+    // The harness derivation: substrate dir = <LAR_ROOT>/data/lares/vessel (tests/harness/instance.ts).
+    process.stdout.write(rendezvousPath({ root: join(root, "data", "lares", "vessel"), uid: process.getuid() }));
+  ' "$root")
+  from_connector=$(env LAR_ROOT="$root" node --input-type=module -e '
+    import { rendezvousPath } from "./packages/lararium-mesh/dist/rendezvous-path.js";
+    import { larDataDir }     from "./packages/lararium-node/dist/src/vessel-paths.js";
+    process.stdout.write(rendezvousPath({ root: larDataDir(), uid: process.getuid() }));
+  ')
+  printf '  %-30s %s\n' "harness (staged root)" "$from_harness"
+  if [ "$from_harness" = "$from_connector" ]; then
+    printf '  %-30s agree\n' "harness vs connector"
+  else
+    printf '  %-30s DRIFT — connector says %s\n' "harness vs connector" "$from_connector"; fail=1
+  fi
+}
+
 check() {
   local label="$1" root_env="$2"
   local ts py
@@ -56,6 +84,8 @@ else
   echo "  OVER  sun_path budget  ${len} bytes — a deep root takes the rendezvous down"
   fail=1
 fi
+
+harness_check "/tmp/lares-staged-parity-probe"
 
 if (( fail == 0 )); then echo "rendezvous-parity: clean"; else echo "rendezvous-parity: DRIFT"; fi
 exit $fail
