@@ -18,8 +18,8 @@ import { REPO } from "./test-wiki.js";
 
 describe("carrier-edges — every address a carrier points at", () => {
   /**
-   * FIVE SPELLINGS, ONE RELATION. A reader counting only `loulou` sees 147 of the corpus's 197
-   * dangling edges and reports a clean move over a broken one.
+   * FIVE SPELLINGS, ONE RELATION. A reader counting only `loulou` sees 147 of the corpus's dangling
+   * edges and reports a clean move over a broken one.
    */
   test("every form a carrier can name an address in is read", () => {
     const src = [
@@ -89,6 +89,6 @@ describe("carrier-edges — every address a carrier points at", () => {
     const dangling = texts.flatMap(readCarrierEdges)
       .filter((e) => e.address !== null && !held.has(e.address));
     expect(files.length).toBeGreaterThan(500);
-    expect(dangling.length, "an edge broke — run `lares carrier normalize --edges` to name it").toBeLessThanOrEqual(200);
+    expect(dangling.length, "an edge broke — run `lares carrier normalize --edges` to name it").toBeLessThanOrEqual(196);
   });
 });
