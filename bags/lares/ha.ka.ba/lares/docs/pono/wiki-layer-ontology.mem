@@ -201,6 +201,28 @@ The write layer marks the write boundary. From a consuming wiki's vantage, every
 
 <<~/ahu >>
 
+<<~ ahu #the-daemon-wiki >>
+
+!! The daemon wiki ~ the first one built, and no exception (operator ruling, 2026-09-02)
+
+''`@daemon` was devised before this ontology grew around it'', and it stands today as the one wiki exempt from the laws every other wiki obeys. ''The ruling: it behaves like any other.'' It takes foreground sometimes, it will likely seed a canon-bag layer of its own, and the ordinary shape — instance mounts above, a write layer, a canon bag below — is the shape it should wear.
+
+!!! Its role, and why the exemption costs something
+
+''`@daemon` is the WORKING-MEMORY STAGE'': the surface an operator and an agent share, belonging to ''no other composed knowledge domain''. Every other wiki is //about// something; this one is where two minds leave things for each other before either knows where they belong. That is precisely why the exemption is not cosmetic — ''the one place work is meant to be handed across is the one place nothing lands on disk to read, diff or commit''.
+
+!!! What the exemption actually is
+
+The recipe is not the gap. `expandRecipe` mints the same five slots for every slug, `daemon` included; the slots ''prune for want of a handle'' because the vessel grants the daemon `islandUrl`, `wikiUrl` and `catalogUrl` and no instance slots. So the write layer falls back to the daemon's OWN bag — the one arrangement #write-law names a degraded act everywhere else — and the mirror config excludes `daemon` outright.
+
+!!! What has to be respected while closing it
+
+⚠ ''The instance slots bind per (PersonaGroup × recipe-fingerprint), through the resolver the daemon ITSELF supplies.'' So the daemon cannot be a client of that resolution during its own boot, and ''the fail-closed boot window MUST NOT move'' to make it one. A LATE ATTACH is the shape that respects both: the daemon boots as it boots, and gains its working layer once a face stands. The machinery is already there — `addLayer(layer, at)` splices into a live cascade and fans projections to the arriving layer — so what is missing is the act rather than the mechanism.
+
+⚠ ''The mirror follows the WORKING layer and never the bag beneath it.'' The daemon bag carries verb tiddlers, outcomes, flows and binding records; mirroring it would put the control plane on the operator's tracked tree. Two coordinates of one wiki need opposite answers here, which a bag-keyed mirror list cannot yet express.
+
+<<~/ahu >>
+
 <<~ ahu #dag-law >>
 
 !! Law 5 — The Recipe Graph Stays a DAG
@@ -266,6 +288,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;l_cS1K2luWQuSD4N5dGW-hOX3ivT6RmU2pvPH-E6rsk
+<<^ code="&#x0003;" >>ni:///sha-256;Q13-1fW38e7SgEWxbt6K8bI8taSSdkOOrL5I_8lUGXk
 
 <<^ code="&#x0004;" -> to=? >>

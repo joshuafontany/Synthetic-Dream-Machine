@@ -161,6 +161,55 @@ describe("⑤ the outward gate", () => {
 });
 
 // ════════════════════════════════════════════════════════════════════════════════════════════════
+// ⑦ @daemon IS AN ORDINARY WIKI — the one the ontology was written after
+// ════════════════════════════════════════════════════════════════════════════════════════════════
+// The daemon wiki was devised BEFORE the recipe/layer ontology grew around it, so it stands as the
+// one wiki exempt from the laws every other wiki obeys. Operator ruling: it should behave like any
+// other — it takes foreground sometimes, it will likely seed a canon-bag layer, and it serves as the
+// WORKING-MEMORY STAGE: a shared surface for the operator and the AI that belongs to no other
+// composed knowledge domain. That last role is why the exemption costs something rather than merely
+// looking untidy — the one place two minds are meant to leave things for each other is the one place
+// nothing lands on disk.
+//
+// WHAT STANDS TODAY, measured: `open-node-vessel` grants the daemon VM `{islandUrl, wikiUrl,
+// catalogUrl}` and no `workingUrl`/`personalUrl`/`draftUrl`, so `expandRecipe`'s three instance slots
+// prune for want of a handle; `island-recipe` falls the write layer back to the daemon's own bag; and
+// `disk-projector` excludes `daemon` from every mirror. Three layers, no working↔canon shore, no disk.
+//
+// WHAT BLOCKS IT, and it is structural rather than an oversight: the instance slots bind per
+// (PersonaGroup × recipe-fingerprint) through `resolveBinding`, which the DAEMON supplies — so the
+// daemon cannot be a client of it during its own boot, and the fail-closed boot window MUST NOT move.
+// `CompositeStore.addLayer(layer, at)` already splices live and fans projections, so a late attach
+// after a face lights is mechanically supported; what is missing is the act, not the machinery.
+describe("⑦ the daemon wiki, held to the laws every other wiki obeys", () => {
+  test("the recipe already NAMES the slots the daemon is not granted", () => {
+    // Not a gap in the model — `expandRecipe` mints the same five slots for every slug, daemon
+    // included. The absence is entirely in the grants, which is what makes this a small change.
+    const slots = mesh.expandRecipe({ wikiSlug: "daemon" });
+    for (const kind of ["temp", "draft", "personal", "working"] as const) {
+      expect(slots).toContain(mesh.wikiSlotUri("daemon", kind));
+    }
+    expect(slots).toContain(mesh.wikiBagUri("daemon"));
+  });
+
+  test.skip("THE DAEMON WIKI HOLDS A WRITE LAYER ABOVE ITS OWN BAG — DEFERRED: the vessel grants no workingUrl, so `island-recipe` falls the write layer back to the daemon bag and an operator edit lands in the control plane rather than in a saved working layer. Every other wiki keeps write layer and canon as distinct coordinates (wiki-layer-ontology#quine); the daemon is the sole exemption, and it is the surface the operator and the AI share", () => {
+    expect(Object.keys(mesh)).toContain("daemonWorkingGrant");
+  });
+
+  test.skip("A DAEMON EDIT REACHES DISK — DEFERRED: `disk-projector` excludes daemon from every mirror, so nothing written through the daemon surface appears in wikis/ or bags/. The working-memory stage is the one surface where an operator and an agent leave work for each other, and it is the one with no on-disk form to read, diff or commit", () => {
+    expect(Object.keys(mesh)).toContain("daemonWorkingGrant");
+  });
+
+  test.skip("THE DAEMON'S WORKING LAYER ATTACHES AFTER A FACE LIGHTS, WITHOUT MOVING THE BOOT WINDOW — DEFERRED: the instance slots bind per (PersonaGroup × recipe-fingerprint) through the resolveBinding the daemon itself supplies, so it cannot resolve its own during its own boot. `addLayer(layer, at)` splices live and fans projections already; nothing calls it for the daemon, and no vector proves a vessel that boots faceless later gains the layer rather than needing a reboot", () => {
+    expect(Object.keys(mesh)).toContain("attachWorkingLayerLive");
+  });
+
+  test.skip("THE CONTROL PLANE STAYS OFF THE MIRROR WHEN THE WORKING LAYER ARRIVES — DEFERRED: the daemon bag carries verb tiddlers, outcomes, flows and binding records, and mirroring it would put the control plane on the operator's tracked tree. The mirror must follow the WORKING layer and not the bag beneath it, which is a distinction no current mirror config can express — mirrorBags names bags, and here two coordinates of one wiki need opposite answers", () => {
+    expect(Object.keys(mesh)).toContain("attachWorkingLayerLive");
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════════════════
 // ⑥ THE INDEPENDENT OPERATOR — a principal class the fleet has never stood
 // ════════════════════════════════════════════════════════════════════════════════════════════════
 describe("⑥ the node runner without grammar caps", () => {
