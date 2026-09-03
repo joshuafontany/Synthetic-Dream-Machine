@@ -145,6 +145,23 @@ describe("surveyBags + moveBagHome — the drift surface and the act", () => {
     expect(existsSync(join(corpus, "lares", "a.mem"))).toBe(true);
   });
 
+  /**
+   * THE SURVEY COMPARES PATHS, AND EVERY VECTOR HANDED IT AN ABSOLUTE ONE. `mkdtempSync` returns an
+   * absolute path, so a raw string compare was right in every test here and wrong for any caller who
+   * passed a relative directory — which read all seven corpus bags as adrift at once. Both sides
+   * resolve now, and this vector is the one that can tell.
+   */
+  test("a relative directory reads the same drift as an absolute one", () => {
+    writeBagManifest(join(corpus, "lares"), { bag: "lares", tier: "public", home: "repository", repository: "canon" });
+    const prior = process.cwd();
+    try {
+      process.chdir(root);
+      expect(surveyBags("corpus")[0]?.adrift).toBe(false);
+      expect(surveyBags("./corpus/")[0]?.adrift).toBe(false);
+    } finally { process.chdir(prior); }
+    expect(surveyBags(corpus)[0]?.adrift).toBe(false);
+  });
+
   test("★ a MOVE relocates the bytes AND re-anchors the declaration, together ★", () => {
     const [seen] = surveyBags(corpus);
     const out = moveBagHome(seen!, { home: "hearth" });

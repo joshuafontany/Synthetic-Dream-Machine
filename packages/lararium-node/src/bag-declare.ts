@@ -23,7 +23,7 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, statSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import {
   BAG_MANIFEST_FILE, bagManifestFromMeta, defaultBagManifest, renderBagManifest, planBagMove,
   type BagHome, type BagHomeRoots, type BagManifest, type BagMove, type RepoRegistration,
@@ -145,7 +145,11 @@ export function surveyBags(dir: string, roots: BagHomeRoots = bagHomeRoots()): B
     const declared = plan.to.resolution;
     out.push({
       bag: name, dir: bagDir, manifest,
-      adrift: declared.ok ? join(declared.dir, name) !== bagDir : false,
+      // BOTH SIDES RESOLVED. `declared.dir` comes from the roots and is always absolute; `bagDir` is
+      // whatever the caller handed in. Compared as raw strings, a caller passing a RELATIVE directory
+      // reads every bag in it as adrift — seven false alarms about the one condition this row exists to
+      // report, and the survey has no way to be right about a path it never normalized.
+      adrift: declared.ok ? resolve(declared.dir, name) !== resolve(bagDir) : false,
     });
   }
   return out;
