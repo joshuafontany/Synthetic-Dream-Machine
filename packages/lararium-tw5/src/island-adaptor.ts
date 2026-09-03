@@ -34,7 +34,14 @@ import type {
 import { toLarTiddlerRecord } from "@lararium/mesh";
 
 /** Cascade config tiddler — newline-separated filter expressions; first non-empty result wins. */
-const BAG_PATHS_CONFIG = "lar:///ha.ka.ba/lararium/config/bag-paths";
+const BAG_PATHS_CONFIG   = "lar:///ha.ka.ba/lararium/config/bag-paths";
+const CURRENT_WIKI_BAG   = "lar:///ha.ka.ba/lararium/config/current-wiki-bag";
+
+/** What the cascade did with a title. A withholding and a gap both stop a write and mean opposite things. */
+type RouteVerdict =
+  | { readonly kind: "slot";     readonly uri:  SlotUri }
+  | { readonly kind: "withheld"; readonly rule: string }
+  | { readonly kind: "gap";      readonly why:  string };
 import type { TW5Engine } from "./tw5-vm.js";
 import type { LaresTw5Extension } from "./types/lares-globals.js";
 import { splitBodyTiddler } from "./deserializer.js";
@@ -92,26 +99,29 @@ export class IslandAdaptor implements MemeProjection {
   /**
    * Walk the in-wiki bag-path cascade to pick a target slot URI.
    *
-   * Mirrors TW5's `$:/config/FileSystemPaths` pattern: newline-separated
-   * filter expressions evaluated against a single-tiddler source. First
-   * filter returning a non-empty string wins. Empty string result means
-   * "match found, skip the write" (used for `$:/*` system tiddlers).
+   * ── THE CASCADE ROUTES; IT DOES NOT DECIDE WHETHER TO WRITE ───────────────────────────────────
+   * Everything a hand edits and saves — memes, `.tid`s, and every other TW5 filetype — travels
+   * through the CRDT and round-trips. The cascade answers WHICH slot; the only thing that may
+   * withhold a write is a rule that NAMES what it withholds.
    *
-   * Returns `null` when:
-   *   - the config tiddler is absent or empty
-   *   - the cascade exhausts without any filter matching
-   *   - the matching filter returned an empty string (explicit skip)
+   * Mirrors TW5's `$:/config/FileSystemPaths` pattern: newline-separated filter expressions
+   * evaluated against a single-tiddler source, first non-empty result wins. And it takes TW5's
+   * OTHER shape too — `$:/config/SyncFilter` is total (`[is[tiddler]]`) minus a named exclusion
+   * list, so the shipped cascade ends in a catch-all and opens with the exclusions.
    *
-   * The cascade lives as a tiddler in the wiki — operator-configurable at
-   * runtime. Per-wiki overlays compose naturally via the recipe cascade
-   * (a `lar:///ha.ka.ba/lararium/config/bag-paths` overlaid in @<wikiSlug> wins over the
-   * default in the lararium bag).
+   * ⚠ THE THREE OUTCOMES ARE NOT ONE. A rule may route a title, a rule may withhold it, or no rule
+   * may reach it at all — and the third is a ROUTER GAP rather than a decision. Read as one, a gap
+   * drops the write in silence: the promise resolves, the wiki shows the edit, nothing persists, and
+   * the tiddler is gone on the next boot. So the walk reports which of the three happened and the
+   * callers act differently on each.
    */
-  private _routeBag(title: string): SlotUri | null {
+  private _routeBag(title: string): RouteVerdict {
     const wiki = this.tw5.$tw.wiki;
-    if (typeof wiki.getTiddlerText !== "function" || typeof wiki.filterTiddlers !== "function") return null;
+    if (typeof wiki.getTiddlerText !== "function" || typeof wiki.filterTiddlers !== "function") {
+      return { kind: "gap", why: "the wiki exposes no filter engine" };
+    }
     const config = wiki.getTiddlerText(BAG_PATHS_CONFIG, "");
-    if (!config) return null;
+    if (!config) return { kind: "gap", why: `no cascade at ${BAG_PATHS_CONFIG}` };
     const filters = config.split("\n").map((s: string) => s.trim()).filter((s: string) => s.length > 0);
     // Single-tiddler iterator — equivalent to TW5's wiki.makeTiddlerIterator([title]).
     const source = (fn: (t: unknown, ti: string) => void): void => fn(wiki.getTiddler(title), title);
@@ -119,10 +129,33 @@ export class IslandAdaptor implements MemeProjection {
       const result = wiki.filterTiddlers(filter, undefined, source as never);
       if (result.length === 0) continue;
       const first = result[0] ?? "";
-      // Empty result = explicit skip (filter matched but returned no path).
-      return first === "" ? null : first;
+      // An empty operand is the WITHHOLDING form, and it is only lawful from a rule that names its
+      // subject — the cascade carries `[[$:/core]then[]]`, never a bare `[…]then[]` standing for
+      // "whatever fell this far".
+      return first === "" ? { kind: "withheld", rule: filter } : { kind: "slot", uri: first };
     }
-    return null;
+    return { kind: "gap", why: "no rule reached this title — the cascade lost its catch-all" };
+  }
+
+  /**
+   * Resolve a write's destination, and say so out loud when the cascade cannot.
+   *
+   * A GAP IS A BUG IN THE CASCADE, never a property of the tiddler, so it MUST NOT pass as a quiet
+   * no-op. The write still lands — at the write layer, which is where an unrouted save belongs — and
+   * the console carries the title that had no rule, because the alternative is an operator losing
+   * work and having nothing to read.
+   */
+  private _destination(title: string): SlotUri | null {
+    const verdict = this._routeBag(title);
+    if (verdict.kind === "slot")     return verdict.uri;
+    if (verdict.kind === "withheld") return null;
+    const fallback = this.tw5.$tw.wiki.getTiddlerText?.(CURRENT_WIKI_BAG, "") ?? "";
+    console.warn(
+      `[island-adaptor] no cascade rule routes "${title}" (${verdict.why}) — ` +
+      (fallback ? `writing to the write layer ${fallback}. ` : "and no write layer resolves. ") +
+      `Add a rule to ${BAG_PATHS_CONFIG}; a save must never vanish for want of one.`,
+    );
+    return fallback ? (fallback as SlotUri) : null;
   }
 
   // ---------------------------------------------------------------------------
@@ -219,8 +252,10 @@ export class IslandAdaptor implements MemeProjection {
     // Cascade pre-check: skip if no rule routes this title AND no explicit
     // `bag` override (ceremony). Routing filters live in the in-wiki bag-paths
     // cascade — operator-editable, per-wiki overlayable.
+    // A ceremony write names its own bag and bypasses the cascade. Otherwise the cascade answers,
+    // and only a NAMED withholding stops the write (`_destination` fills a router gap and says so).
     const explicitBag = fields["bag"];
-    if (!explicitBag && this._routeBag(title) === null) return Promise.resolve();
+    if (!explicitBag && this._destination(title) === null) return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
@@ -251,8 +286,10 @@ export class IslandAdaptor implements MemeProjection {
 
   deleteTiddler(title: string): Promise<void> {
     if (this._isApplying()) return Promise.resolve();
-    // Cascade pre-check — skip the tombstone if no rule routes the title.
-    if (this._routeBag(title) === null) return Promise.resolve();
+    // A DELETE ROUTES LIKE A SAVE, and the tiddler is already gone from the wiki when this runs — so
+    // any rule keyed on a tiddler's EXISTENCE would route its creation and drop its deletion, leaving
+    // a record that resurrects on the next boot. The cascade keys on titles for exactly this reason.
+    if (this._destination(title) === null) return Promise.resolve();
 
     const origin: ChangeOrigin = { kind: "tw-local", instanceId: this.instanceId };
 
@@ -316,7 +353,7 @@ export class IslandAdaptor implements MemeProjection {
     // (e.g. $:/* system tiddlers).
     // Explicit `bag` field (ceremony writes) short-circuits the cascade; only
     // walk the in-wiki cascade when no override is present.
-    const targetBag = (fields["bag"] as SlotUri | undefined) ?? this._routeBag(title);
+    const targetBag = (fields["bag"] as SlotUri | undefined) ?? this._destination(title) ?? undefined;
     if (!targetBag) return;
     const { bag: _bag, ...persistedParent } = parent;
 

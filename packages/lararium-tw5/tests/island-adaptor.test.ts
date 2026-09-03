@@ -60,6 +60,8 @@ class FakeTW5Engine {
     [
       "lar:///ha.ka.ba/lararium/config/bag-paths",
       [
+        "[match[$:/core]then[]]",
+        "[match[$:/library/sjcl.js]then[]]",
         "[prefix[$:/temp/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]",
         "[prefix[$:/status/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]",
         "[prefix[$:/boot/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]",
@@ -71,6 +73,7 @@ class FakeTW5Engine {
         "[prefix[$:/state/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]",
         "[prefix[Draft of ]then{lar:///ha.ka.ba/lararium/config/current-wiki-draft}]",
         "[prefix[lar:]then{lar:///ha.ka.ba/lararium/config/current-wiki-bag}]",
+        "[regexp[.]then{lar:///ha.ka.ba/lararium/config/current-wiki-bag}]",
       ].join("\n"),
     ],
     ["lar:///ha.ka.ba/lararium/config/current-wiki-bag",      wikiSlotUri("test-wiki", "working")],
@@ -91,16 +94,23 @@ class FakeTW5Engine {
     getTiddlerText:  (title: string, fallback?: string): string =>
       this.tiddlerTexts.get(title) ?? fallback ?? "",
     filterTiddlers:  (filter: string, _widget: unknown, source: unknown): string[] => {
-      // Minimal cascade-rule parser: [prefix[X]then[Y]] or [prefix[X]then{Z}].
-      const re = /^\[prefix\[([^\]]*)\]then(?:\[([^\]]*)\]|\{([^}]+)\})\]$/;
+      // Minimal cascade-rule parser: `<op>[X]then[Y]` or `<op>[X]then{Z}`, for the three operators
+      // the shipped cascade uses. ⚠ Each MUST read the SOURCE: TW5's `[[X]]` and `[title[X]]` are
+      // CONSTRUCTORS that yield X whatever the source holds, so an exclusion written that way
+      // withholds every write in the vessel. Measured against the real engine before it shipped.
+      const re = /^\[(prefix|match|regexp)\[([^\]]*)\]then(?:\[([^\]]*)\]|\{([^}]+)\})\]$/;
       const m  = re.exec(filter);
       if (!m) return [];
-      const prefix      = m[1] ?? "";
-      const literalThen = m[2];
-      const refThen     = m[3];
+      const op          = m[1] ?? "";
+      const operand     = m[2] ?? "";
+      const literalThen = m[3];
+      const refThen     = m[4];
       let title = "";
       (source as (fn: (t: unknown, ti: string) => void) => void)((_t, ti) => { title = ti; });
-      if (!title.startsWith(prefix)) return [];
+      const hit = op === "prefix" ? title.startsWith(operand)
+                : op === "match"  ? title === operand
+                :                   new RegExp(operand).test(title);
+      if (!hit) return [];
       if (literalThen !== undefined) return [literalThen]; // empty string = explicit skip
       if (refThen) {
         const text = this.tiddlerTexts.get(refThen) ?? "";
@@ -415,12 +425,30 @@ describe("IslandAdaptor — outbound saveTiddler", () => {
     expect(bags).toContain(wikiSlotUri("test-wiki", "personal"));
   });
 
-  test("plain text title (no cascade rule) → skipped", async () => {
+  /**
+   * A PLAIN TITLE PERSISTS. The cascade answers WHICH slot, never WHETHER to write — everything a
+   * hand edits and saves travels through the CRDT and round-trips, and the trailing catch-all rule
+   * carries every title no earlier rule claimed to the write layer. `routing-totality` holds the
+   * whole law against a real wiki; this holds the adaptor's own leg of it.
+   */
+  test("plain text title (the cascade's catch-all) → the write layer", async () => {
     const puts: string[] = [];
     const orig = store.put.bind(store);
     store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
 
-    await adaptor.saveTiddler({ fields: { title: "Some Plain Tiddler" } });
+    const done = adaptor.saveTiddler({ fields: { title: "Some Plain Tiddler", text: "kalo" } });
+    await flush();
+    await done;
+    expect(puts).toContain("Some Plain Tiddler");
+  });
+
+  /** The named exclusion still withholds — and it is the ONLY thing that does. */
+  test("the engine's own bytes are withheld by the rule that names them", async () => {
+    const puts: string[] = [];
+    const orig = store.put.bind(store);
+    store.put = async (rec, o) => { puts.push(rec.tiddler.title); return orig(rec, o); };
+
+    await adaptor.saveTiddler({ fields: { title: "$:/core", text: "megabytes of engine" } });
     expect(puts).toHaveLength(0);
   });
 });

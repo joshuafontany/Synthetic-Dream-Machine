@@ -183,6 +183,24 @@ The write layer marks the write boundary. From a consuming wiki's vantage, every
 
 <<~/ahu >>
 
+<<~ ahu #totality-law >>
+
+!! Law 4b — The Cascade Routes; It Never Decides Whether to Write
+
+''Everything a hand edits and saves travels through the CRDT and round-trips'' — memes, `.tid`s, and every other TW5 filetype. The bag-paths cascade answers ''WHICH slot''; it does not answer ''whether''.
+
+''Three outcomes, and only two of them are decisions.'' A rule may ROUTE a title, a rule may WITHHOLD it, or no rule may reach it at all — and the third is a ''router gap'', a fault in the cascade rather than a property of the tiddler. Read as one outcome, a gap drops the write in silence: the save resolves, the surface shows the edit, nothing persists, and the work is gone at the next boot with nothing anywhere to read. So a gap MUST announce itself and MUST still land the write at the write layer.
+
+''A withholding MUST name its subject.'' `[match[$:/core]then[]]` withholds by naming; a rule standing for //whatever fell this far// withholds by silence, and silence is the thing this law exists to end. The only lawful withholdings are the engine's own bytes — build output, regenerable, reaching the vessel by content-address rather than by any bag.
+
+''TW5 already answers this question and we take its shape.'' `$:/config/SyncFilter` is TOTAL — `[is[tiddler]]` — minus a named exclusion list. So the cascade opens with its exclusions and ''ends in a catch-all''.
+
+⚠ ''A rule MUST read the title, never construct one.'' TW5's `[[X]]` and `[title[X]]` are CONSTRUCTORS: handed a single-tiddler source they yield `X` regardless of what that source holds, so an exclusion written either way withholds ''every write in the vessel''. `match` and `prefix` read the source; `regexp` carries the catch-all. Measured against the live filter engine, never inferred from the syntax.
+
+⚠ ''A DELETE routes like a save, and the tiddler is already gone when it runs.'' Any rule keyed on a tiddler's EXISTENCE routes a creation and drops the matching deletion, leaving a record that resurrects at the next boot. The cascade keys on ''titles'' for exactly this reason.
+
+<<~/ahu >>
+
 <<~ ahu #dag-law >>
 
 !! Law 5 — The Recipe Graph Stays a DAG
@@ -248,6 +266,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;qoH66N5py3mUwnMCD8eUD-00k-7rxKj5vzqoWF0BHEc
+<<^ code="&#x0003;" >>ni:///sha-256;l_cS1K2luWQuSD4N5dGW-hOX3ivT6RmU2pvPH-E6rsk
 
 <<^ code="&#x0004;" -> to=? >>

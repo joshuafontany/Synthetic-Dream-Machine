@@ -2,6 +2,8 @@ title: lar:///ha.ka.ba/lararium/config/bag-paths
 tags: $:/tags/Global lar:///ha.ka.ba/tags/LarariumConfig
 type: text/vnd.tiddlywiki
 
+[match[$:/core]then[]]
+[match[$:/library/sjcl.js]then[]]
 [prefix[$:/temp/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]
 [prefix[$:/status/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]
 [prefix[$:/boot/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]
@@ -13,3 +15,4 @@ type: text/vnd.tiddlywiki
 [prefix[$:/state/]then{lar:///ha.ka.ba/lararium/config/current-wiki-temp}]
 [prefix[Draft of ]then{lar:///ha.ka.ba/lararium/config/current-wiki-draft}]
 [prefix[lar:]then{lar:///ha.ka.ba/lararium/config/current-wiki-bag}]
+[regexp[.]then{lar:///ha.ka.ba/lararium/config/current-wiki-bag}]
