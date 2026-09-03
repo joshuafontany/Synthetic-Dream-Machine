@@ -26,7 +26,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shell-ux"
 
 ! Canvas Shell UX ~ the canvas is primary, the chrome wraps it
 
-''Migrated from the multiplayer-canvas constitution and evergreened.'' The research stands; the surface it was written against does not (#/wikispace-canvasspace-ontology, the surface correction). Nothing here names a vendor, because ''nothing here depends on one''.
+''Nothing here names a vendor, because nothing here depends on one.'' Every law below holds for any DOM-hosting camera (#/wikispace-canvasspace-ontology).
 
 ''THE CORE LAW: the canvas is primary; UI wraps around it and never blocks it.''
 
@@ -102,6 +102,6 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;6hY0d6l6qNPboVgq6Q2-THBMLcSmIpHCANbLoTd_8cs
+<<^ code="&#x0003;" >>ni:///sha-256;woyvCp6eSSk8tIRHd3lY5lCY-vT8KWxC6h_lk7gMJp8
 
 <<^ code="&#x0004;" -> to=? >>

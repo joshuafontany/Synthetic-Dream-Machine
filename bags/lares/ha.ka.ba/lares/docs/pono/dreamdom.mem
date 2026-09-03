@@ -137,9 +137,9 @@ Seven tasked spirits, each handed a framing and NOT a conclusion, each held VERB
 * ''crdt-ecosystem-scout'' (Wayfarer) — the ecosystem, and keyhive #216 merged-but-unreleased.
 * ''testing-architecture-scout'' (Mason) · ''e2e-harness-scout'' (Wright) — this house's own instruments, read the same way.
 
-!!! ⚠ A citation this house got wrong, corrected here
+!!! ⚠ Where folkjs's CRDT binding actually lives
 
-The folkjs submodule was taken partly on the claim that `packages/collab/src/automerge.ts` means //it already speaks our CRDT//. ''That file is TWO LINES — a re-export shim'' (`getBackend` plus `@automerge/vanillajs`), not a binding. The real binding is `folk-sync-attribute.ts`, 470 lines, whose CRDT schema is ''HAST'': it syncs arbitrary DOM subtrees, merging prose character-wise while attributes stay whole-value LWW. Better than the claim, and not where the claim pointed. ⚠ It also carries a structural race — `#applyRemotePatches` DISCONNECTS the MutationObserver, which discards queued records, so a local edit landing during patch application is ''silently lost''.
+''`packages/collab/src/automerge.ts` is TWO LINES — a re-export shim'' (`getBackend` plus `@automerge/vanillajs`), not a binding. The real binding is `folk-sync-attribute.ts`, 470 lines, whose CRDT schema is ''HAST'': it syncs arbitrary DOM subtrees, merging prose character-wise while attributes stay whole-value LWW. Better than the claim, and not where the claim pointed. ⚠ It also carries a structural race — `#applyRemotePatches` DISCONNECTS the MutationObserver, which discards queued records, so a local edit landing during patch application is ''silently lost''.
 
 <<~/ahu >>
 
@@ -150,6 +150,6 @@ The folkjs submodule was taken partly on the claim that `packages/collab/src/aut
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-projection >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;OWkGS607j6bZIQvqeLJ1vD1KvlySrcXvRwMZgIzmIxQ
+<<^ code="&#x0003;" >>ni:///sha-256;DmVOmAofDXkfE0YKlS4yCixxBsaYl48Jc7RiKaMg1n8
 
 <<^ code="&#x0004;" -> to=? >>

@@ -32,7 +32,7 @@ Lares fuses three traditions nobody has fused whole: a ''transclude-capable wiki
 
 !! One Model, Two Cameras
 
-The meme-graph holds composition in the has-stack (meta tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that //does// something as a ''wire entity'' — a `lar:` addressed record wearing its family as a stack component (`wire`, 2026-06-12; the old families-as-edge-attributes form retired). Two cameras project that one graph (`render-pipeline#render-axes`):
+The meme-graph holds composition in the has-stack (meta tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that //does// something as a ''wire entity'' — a `lar:` addressed record wearing its family as a stack component. ''A relation is an ENTITY, never an attribute on an edge'' — reification is what lets a wire be addressed, transcluded into, and versioned like anything else. Two cameras project that one graph (`render-pipeline#render-axes`):
 
 * the ''Story-River camera'' — `window.document`, the page/document surface;
 * the ''DreamDOM canvas camera'' — a ''DreamDOM'' document, the infinite flow surface (#the-surface-correction).
@@ -43,15 +43,13 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 <<~ ahu #the-surface-correction >>
 
-!! ⚠ The surface correction ~ the camera is DOM-hosting, never rasterising
+!! ⚠ The surface law ~ the camera is DOM-hosting, never rasterising
 
-''Two nouns in this doctrine were refuted by measurement (2026-09-02) and are corrected here. The MODEL was never in question.''
+''THE CANVAS CAMERA MUST NOT RASTERISE.'' A rasterised camera holds pixels and ''has nothing left to ask'', which forecloses every law this doctrine rests on — semantic zoom, graph primacy, the model/view boundary. Sutherland stated the objection in 1963 — //"the computer 'knows' that a 'transistor' is intended at that place… It has no need to interpret the collection of lines"//. The cost is measured elsewhere and it is not marginal: a 10k-line text field renders in ''0.49 s'' under an HTML renderer and ''90.3 s'' under a rasterising one; two independent engines (Flutter, Qt) each lost the semantic layer and had to rebuild accessibility as an opt-in, off-by-default, absolutely-positioned overlay; and a canvas move shipped with the assurance that accessibility was unaffected was ''tested and refused'' by WebAIM. ''The camera is DreamDOM — real nodes, real selection, real focus, a real accessibility tree — positioned by one shared CSS transform per layer.''
 
-⚠ ''The canvas camera was written as `OffscreenCanvas`.'' That is a ''rasterising'' surface, and it contradicts this doctrine's own first principle: a rasterised camera holds pixels and ''has nothing left to ask''. Sutherland stated the objection in 1963 — //"the computer 'knows' that a 'transistor' is intended at that place… It has no need to interpret the collection of lines"//. The cost is measured elsewhere and it is not marginal: a 10k-line text field renders in ''0.49 s'' under an HTML renderer and ''90.3 s'' under a rasterising one; two independent engines (Flutter, Qt) each lost the semantic layer and had to rebuild accessibility as an opt-in, off-by-default, absolutely-positioned overlay; and a canvas move shipped with the assurance that accessibility was unaffected was ''tested and refused'' by WebAIM. ''The camera is DreamDOM — real nodes, real selection, real focus, a real accessibility tree — positioned by one shared CSS transform per layer.''
+⚠ ''THE CAMERA TAKES NO VENDOR'S NAME AND NO VENDOR'S LICENCE.'' TLDraw's forbids production use without a key, forbids interfering with key enforcement, describes technical measures that ''detect deployment environments and transmit usage data'', and requires an unmodified watermark. Against a sovereign, self-hosted, forkable vessel that reads as ''enclosure in clause form''. ''TLDraw remains the best STUDIED implementation of this camera's category and is never a dependency of it'' — its passthrough HTML container, its one-shared-transform-per-layer, its fixed-precision clamp and its measured object budget are patterns, and ''a pattern is unencumbered where its code is not''.
 
-⚠ ''The canvas camera was named after TLDraw.'' Its licence forbids production use without a key, forbids interfering with key enforcement, describes technical measures that ''detect deployment environments and transmit usage data'', and requires an unmodified watermark. Against a sovereign, self-hosted, forkable vessel that reads as ''enclosure in clause form''. ''TLDraw remains the best STUDIED implementation of this camera's category and is never a dependency of it'' — its passthrough HTML container, its one-shared-transform-per-layer, its fixed-precision clamp and its measured object budget are patterns, and ''a pattern is unencumbered where its code is not''.
-
-''What did NOT change, and this is the load-bearing part.'' One model, two cameras. Graph primacy. Separate render documents over one shared world graph (`camera-mount` C-2). And the renderer being ''document-parameterized'' — //only the DOM-tree target differs// — which is precisely what makes a DreamDOM substitution a change of noun rather than of architecture.
+''What the surface law leaves untouched, and this is the load-bearing part.'' One model, two cameras. Graph primacy. Separate render documents over one shared world graph (`camera-mount` C-2). And the renderer being ''document-parameterized'' — //only the DOM-tree target differs// — which is precisely why the camera's document is a parameter and never an architecture.
 
 ⚠ ''Object budget, measured on the best shipped implementation of this category'': a DOM-hosting canvas begins reporting a cached rather than live zoom above ''~500'' objects, and declares a ceiling at ''~4000''. Culling by `display:none` removes a node from the accessibility tree; `content-visibility: auto` is the correct instrument and was tried and BACKED OUT by that same implementation. ''Read that before trusting either.''
 
@@ -63,15 +61,13 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 ''BOTH ARE NOW NAMED BY SURFACE, NEVER BY IMPLEMENTATION'', and that is the whole repair. A camera is a //canvas camera// whatever document backs it; naming an address after a vendor is what made this rename necessary at all, and a surface name will not need moving when the document type changes again.
 
-Carriers still naming the retired surface DESCRIPTIVELY — prose about how the old integration looked, not addresses — remain in `verse-mesh`, `lar-hud`, `rooms` and the DreamDeck backlog. Those are readings of a past shape rather than live pointers.
+▢ ''OWED — a descriptive pass'': `verse-mesh`, `lar-hud`, `rooms` and the DreamDeck backlog carry vendor-named prose. No addresses among them, so none is a live pointer.
 
 <<~/ahu >>
 
 <<~ ahu #semantic-zoom >>
 
 !! Semantic zoom ~ the level of detail is chosen by MEANING, never by scale
-
-''Lifted into live canon 2026-09-02 from the multiplayer-canvas constitution'' (`lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI#views`), which specified it in April and whose SURFACE is superseded while this ''doctrine is surface-invariant''. It sits here because the archive is the wrong home for a live law.
 
 ''The zoom level selects a TEMPLATE, not a magnification.'' A node renders differently because the reader is asking a different question, and the store knows what the node IS — Sutherland's //the computer 'knows' that a 'transistor' is intended//, cashed out as a navigation affordance.
 
@@ -137,7 +133,7 @@ The ''core holds surface-invariant'': content-identity (Nelson — "the same thi
 What ''splits is the content-position'':
 
 * ''Into a node — coherent, no new primitive.'' A node's body (an `ahu` slot) carries `aka`/`kahea`; the Story-River camera resolves the embed; the canvas camera displays the result inside the node shape.
-* ''Into an edge — RESOLVED BY REIFICATION (2026-06-12).'' The wire ruling dissolves the old hesitation: a wire reads as its own entity, so "embedding into an edge" means transcluding into a wire entity's body — ordinary kahea into an ordinary carrier, no schema extension. (RDF reification reached the same shape; here it arrives as law, not workaround.) ''Annotation //on// a wire ≠ transclusion //into// a wire'' — the distinction stands; both now read lawful.
+* ''Into an edge — BY REIFICATION.'' A wire reads as its own entity, so "embedding into an edge" means transcluding into a wire entity's body — ordinary kahea into an ordinary carrier, no schema extension. (RDF reification reached the same shape; here it arrives as law, not workaround.) ''Annotation //on// a wire ≠ transclusion //into// a wire'' — the distinction stands; both now read lawful.
 
 <<~/ahu >>
 
@@ -192,6 +188,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vXeuXpT8WLyQAw9UNv1HzLEnWWm77MH-6Nhpzyjq-Ug
+<<^ code="&#x0003;" >>ni:///sha-256;CWq2fxlYApGtzkIyOu6FU5HG6hzSLaKbzKY_QvCJbhM
 
 <<^ code="&#x0004;" -> to=? >>
