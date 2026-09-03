@@ -1,0 +1,128 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/dyad-ladder-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 16
+manao             = 17
+manaoio           = 14
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "dyad-ladder-scout — VERBATIM handoff of the tasked spirit sent after the human-device DYAD model across the scale ladder (local · household · community · Region, Regions interacting). PART ONE: the corrections pass. Carries the UI-BOUND ADVERSARY (the household's authorized principal IS the adversary), coercion as a STATE MACHINE with an escape transition, the INCIDENTAL USER as a new identity category, measured cultural variance that refutes any single sharing default, community networks fragile under formal analysis, and the ruling that cross-region is a WARNING rather than a postmortem. The main body is requested and not yet held."
+revised-on        = "2026-09-03"
+tags              = ["api/pono/meme", "mesh/identity-classes"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/dyad-ladder-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The dyad across the ladder ~ what the field has measured
+
+A tasked spirit went out over the model where ''the human never gets a key'' — a key belongs to a human-device DYAD, which holds a private EDGE, and a public Face is an opt-in declaring act — across four rungs: ''local · household-nexus · community civic-nexus · Region civic-nexus, with Regions interacting''.
+
+⚠ ''THIS CARRIER HOLDS PART ONE ONLY.'' What landed is the spirit's ''corrections pass'' — the lane that reversed one of its own verdicts and sharpened three others. The main body (the passkey/Keybase/Matrix survey, the dyad's own prior art, the kiosk and screenless cases, and the anti-pattern where a keyless design GROWS a key) is requested and not yet held. ''Read this as a first cut with a known hole where the load-bearing question sits.''
+
+<<~/ahu >>
+
+<<~ ahu #the-ui-bound-adversary >>
+
+!! ★ The household's authorized principal IS its adversary ★
+
+''Freed et al., "A Stalker's Paradise", CHI 2018 (Best Paper), 89 participants.'' The spirit calls this the sharpest articulation of the household problem anywhere in its sweep:
+
+> Intimate-partner attacks are typically ''technologically unsophisticated'', carried out by a ''"UI-bound adversary"'' — an ''authenticated, adversarial user operating through the normal interface'' — which //"undermine[s] the predominant threat models under which systems have been designed."//
+>
+> ''At household scale the authorized principal and the adversary are frequently the same authenticated principal. No amount of credential strength addresses this.''
+
+⚠ ''Read straight onto the dyad model:'' a dyad is an edge between a person and a device, and a UI-bound adversary ''holds a lawful edge''. Every cryptographic property the model offers is intact while the attack succeeds, because the attack never touches the crypto. ''The household rung is not a key problem.''
+
+!!! Coercion is a STATE MACHINE, not a state
+
+''Matthews et al., IEEE S&P 2017'' frames survivor technology use as a three-phase lifecycle — ''physical control → escape → life apart'' — each phase needing different support. So identity-under-coercion carries ''a specific escape transition'', and //nothing in the corpus treats "leaving the household" as solved//.
+
+''Bellini et al., CHI 2023 (Best Paper), 158 survivors + 16 financial advocates'' — four abuser motivations, exploiting shared financial accounts.
+
+<<~/ahu >>
+
+<<~ ahu #the-incidental-user >>
+
+!! A new identity category the model has no name for
+
+''"I would have to evaluate their objections" (2021), a 386-person representative US survey'' names the ''INCIDENTAL USER'': //someone who did not choose the device but is captured by it//.
+
+⚠ ''A dyad presumes the human CHOSE the device.'' An incidental user has an edge nobody deliberately formed — and on this model an edge is the whole of identity, so the category is not a UX edge-case, it is an ''unmodelled principal''.
+
+!!! And any single sharing default is empirically wrong somewhere
+
+* ''"We, three brothers have always known everything of each other" (2021), 59 participants across Bangladesh · Turkey · USA'' — sharing behaviour varies ''by culture'', so one global default (share ⊥ isolate) is wrong for a large fraction of the world.
+* ''"Everyone Has Some Personal Stuff" (2019), Bangladesh, 21 participants, a 3-week deployment'' — built a ''dual-account shared-password / secret-password'' model because ''single-device-multi-user is the NORM there'', never the exception.
+
+<<~/ahu >>
+
+<<~ ahu #the-community-rung >>
+
+!! Community networks read robust and measure fragile
+
+''"Detecting and Mitigating Points of Failure in Community Networks", IEEE Trans. Computational Social Systems, 2019'' — graph analysis of ''ninux.org'', Italy's largest community network. Despite the community's stated goal of a robust self-organized network, the analysis found it //"fragile under several aspects."//
+
+> The //"avoid unnecessary management structures"// philosophy shared by ninux, Guifi.net, Freifunk and NYC Mesh ''reads as robust until formally analysed''.
+
+''The only directly measured technical-fragility result at community scale in the sweep'', and it argues the rung's self-organization can be structurally brittle ''in ways its participants cannot see from inside''.
+
+<<~/ahu >>
+
+<<~ ahu #cross-region >>
+
+!! ⚠ Cross-region is a WARNING, not a postmortem
+
+> ''Cross-region is the most argued and least empirically realized rung.'' Estonia and Aadhaar are pure //postmortem// — real incidents, real numbers, real remediation clocks. Cross-region is currently ''high-quality prediction and expert consensus of concern, not yet high-quality postmortem''. If cross-region is first-class in your model, ''you are not building against measured failure — you are building against a warning''.
+
+The consensus is large and precisely counted: the eIDAS open letter carries ''552 scientists and researchers from 42 countries'' as of 2023-11-26, plus NGOs — Preneel, Cremers, Murdoch, Hoepman, Schwabe among them. ''A separate, later 38-signatory industry letter'' (Mozilla/EFF) is a different document; the spirit had conflated the two and corrected itself.
+
+Two mechanics it names as load-bearing:
+
+* ''Article 45a(4)'' — a member state's designated keys are revocable ''only with that government's permission''.
+* ''Article 45(2a)'' bans browsers from imposing security checks beyond what is expressly permitted — ''an UPPER BOUND on security rather than a floor'', inverting the normal direction of security regulation. The historical anchor is ''DigiNotar (2011)'', whose CA compromise was used to surveil Iranian users' traffic — the exact failure the article would make harder to prevent.
+
+<<~/ahu >>
+
+<<~ ahu #the-reversal >>
+
+!! The spirit reversed itself on Aadhaar ~ and the reversal is the useful part
+
+It had reported Aadhaar as an unambiguous exclusion story. ''The field disagrees with itself'', and both sides are large:
+
+* ''Muralidharan, Niehaus & Sukhtankar (2020)'' — stricter biometric ID ''reduced corruption'' and ''1.5–2 million legitimate beneficiaries lost access at some point during the reform''. The authors attribute the adverse effects ''primarily to how the TRANSITION was managed'', not to biometrics as such.
+* ''Muralidharan, Niehaus & Sukhtankar, AER 2016'' — randomized rollout, ''157 subdistricts, 19 million people'': payments faster, more predictable, less corrupt, ''without adversely affecting access'', and beneficiaries overwhelmingly preferred it.
+
+> The disagreement tracks ''implementation quality and transition management'', not the underlying concept. ''The measured harm at region scale sits in the MIGRATION, not the architecture'' — which is precisely where //"re-establishing a dyad"// lives.
+
+<<~/ahu >>
+
+<<~ ahu #what-stayed-dark >>
+
+!! What the sweep could not reach
+
+Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and Jharkhand ration-denial numbers · Swedish BankID elderly-fraud statistics and MitID 2021–22 migration complaints (likely Swedish/Danish-language, outside the indexes reached) · ''EUDI Large-Scale Pilot interim findings — project sites 404 / DNS-failed'' · Guifi.net's Compact text · the Pan-Canadian Trust Framework · ICAO PKD failure data · Sardex quantitative outcomes · Decidim's actual census-verification mechanism.
+
+⚠ ''X-Road's operational friction is undocumented in open sources.'' The most-cited cross-region system in the world publishes no measured account of where it rubs.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;EnnLk7wig_19u5uSX9A9Wr8-W1Dq35L8KAOWlgBfMz8
+
+<<^ code="&#x0004;" -> to=? >>
