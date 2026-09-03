@@ -16,7 +16,7 @@
  *                  additional realm/portal VMs register as projection:<id> keys
  *                  (e.g. a canvas portal to a different wiki gets its own VM + projection key)
  *   wiki-content — wiki Automerge doc ready (starts empty → fast; parallel with tw-vm)
- *   tldraw-doc   — tldraw canvas doc ready
+ *   canvas-doc   — canvas camera doc ready (a DreamDOM document; DOM-hosting, never rasterising)
  *   corpus:<id>  — per-corpus island ready (arrive async, non-blocking)
  *   wiki-presence  — presence channel (never blocks content or render)
  *   mcp-index    — MCP resource index built
@@ -28,7 +28,7 @@
  *   auth → sw-shell → catalog → tw-vm (VM kernel, early gate)
  *                             → wiki-content (parallel)
  *                             ↘ corpus:<id> (async, non-blocking)
- *   tw-vm → tldraw-doc
+ *   tw-vm → canvas-doc
  *         ↘ mcp-index → disk-projector → kowloon-feed
  *   wiki-presence lights independently — never blocks render.
  *
@@ -48,7 +48,7 @@ export const READINESS_KEYS = [
   "tw-vm",          // VM kernel for primary wiki — C≈1; boots before wiki hydration
   "wiki-content",   // wiki Automerge doc ready; parallel with tw-vm
   // Branches off tw-vm (all require a running VM to render)
-  "tldraw-doc",
+  "canvas-doc",
   "mcp-index",
   "disk-projector",
   "kowloon-feed",

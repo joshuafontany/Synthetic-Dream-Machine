@@ -112,7 +112,7 @@ outbound writes.  The input path stays identical across all cameras.
 ```typescript
 // Mount the parse→widget→fakeDOM chain:
 const teardownMount = tw5.mountCamera({
-  rootTiddler: "lar:///ha.ka.ba/camera/tldraw-root",
+  rootTiddler: "lar:///ha.ka.ba/camera/canvas-root",
   document:    tlDrawFakeDoc,
   container:   canvasRootElement,
 });
@@ -149,6 +149,6 @@ The `mountCamera` interface stays identical. The `document` type changes; the ch
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;eaySjfFMWAaBQuvsYg9SP5_nBaalIevEXmDRJ7VFNRE
+<<^ code="&#x0003;" >>ni:///sha-256;mTF93FqSHxA_BrLsJhyoM67Y586P9xoxgMFtY_75AJ4
 
 <<^ code="&#x0004;" -> to=? >>

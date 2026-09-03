@@ -59,7 +59,33 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 ''No licence exposure stands.'' Measured 2026-09-02: ''no tldraw dependency in any manifest, no submodule, nothing installed'', and neither `packages/lararium-tldraw` nor `packages/dreamdeck-tldraw` exists. Three carriers named files in those packages as //sources of truth//; each is now corrected in place. ''A pointer that names a file which is not there is the same defect this house keeps finding at every scale — a claim that reads as present and is absent.''
 
-⚠ ''ADDRESSES WERE NOT RENAMED, deliberately.'' `lar:///ha.ka.ba/camera/tldraw-root` is an ADDRESS, and the readiness key `tldraw-doc` is an identifier other carriers wait on. This house's own law is that a rename greps the addresses FIRST — three carriers once moved and left sixty-six dangling references. ''The surface renaming is OWED as a weld-tested sweep, never as hygiene folded into a doctrine fix.'' Carriers still naming the old surface descriptively: `verse-mesh`, `lar-hud`, `readiness-keys`, `rooms`, `camera-mount` (its root tiddler), and the DreamDeck epic backlog.
+✓ ''ADDRESSES RENAMED, WELD-TESTED FIRST (2026-09-02).'' The weld test ran before any edit: the address `camera/tldraw-root` stood at ''three meme sites and no code''; the readiness key `tldraw-doc` stood in ''`packages/lararium-mesh/src/readiness.ts`'' as well as its meme, and `READINESS_KEYS` proved to have ''no consumer anywhere'' — exported, typed, unimported, with no key used as a literal. So both moved: `camera/tldraw-root` → ''`camera/canvas-root`'', `tldraw-doc` → ''`canvas-doc`''.
+
+''BOTH ARE NOW NAMED BY SURFACE, NEVER BY IMPLEMENTATION'', and that is the whole repair. A camera is a //canvas camera// whatever document backs it; naming an address after a vendor is what made this rename necessary at all, and a surface name will not need moving when the document type changes again.
+
+Carriers still naming the retired surface DESCRIPTIVELY — prose about how the old integration looked, not addresses — remain in `verse-mesh`, `lar-hud`, `rooms` and the DreamDeck backlog. Those are readings of a past shape rather than live pointers.
+
+<<~/ahu >>
+
+<<~ ahu #semantic-zoom >>
+
+!! Semantic zoom ~ the level of detail is chosen by MEANING, never by scale
+
+''Lifted into live canon 2026-09-02 from the multiplayer-canvas constitution'' (`lares-history/lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANVAS-WIKI#views`), which specified it in April and whose SURFACE is superseded while this ''doctrine is surface-invariant''. It sits here because the archive is the wrong home for a live law.
+
+''The zoom level selects a TEMPLATE, not a magnification.'' A node renders differently because the reader is asking a different question, and the store knows what the node IS — Sutherland's //the computer 'knows' that a 'transistor' is intended//, cashed out as a navigation affordance.
+
+|!Level |!Threshold |!Template |!`ahu` visible |!Ownership arrows |!OODA-HA phase |
+|strategic |< 0.15 |`meme-strategic` |✗ |✗ |aftermath |
+|operational |0.15–0.35 |`meme-operational` |✗ |✗ |observe |
+|tactical |0.35–0.80 |`meme-tactical` |✗ |✗ |orient |
+|combat |0.80–1.50 |`meme-combat` |✓ |✓ |decide |
+
+''WHY THIS IS THE HOUSE'S STRONGEST POSITION, and it is measured elsewhere.'' A study of overview+detail found users //preferred// an overview yet were //faster without it//, and its authors conjectured the cause: the one map that made the overview unnecessary ''had semantic zoom''. On a small viewport the case is worse still — navigation cost scales in ''window widths'', so almost every traversal a desktop reader would pan falls, on a phone, on the zoom side of the crossover, while a minimap there costs time and buys no preference.
+
+''A rasterising camera cannot do this'' — not for want of the idea, but because it holds pixels and has nothing to ask. ''Only a store that knows what a thing IS can choose what to show of it.'' That is why #the-surface-correction and this section are one ruling wearing two coats.
+
+⚠ ''Untested on a phone by anyone.'' The literature points here and never surveyed it. This house would be first, on ground the field abandoned rather than ground it settled.
 
 <<~/ahu >>
 
@@ -166,6 +192,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;dYkkC2R_K_bvz-4KXvDr23wr0CMh1dlzBD_imtW1i04
+<<^ code="&#x0003;" >>ni:///sha-256;vXeuXpT8WLyQAw9UNv1HzLEnWWm77MH-6Nhpzyjq-Ug
 
 <<^ code="&#x0004;" -> to=? >>

@@ -64,7 +64,7 @@ Peer
       │    │    └── fake DOM     ← window.document
       │    ├── Camera[tldraw]
       │    │    ├── IslandAccumulator  (setInterval 16ms)
-      │    │    ├── widget tree  ← wiki.makeTranscludeWidget("lar:.../camera/tldraw-root", ...)
+      │    │    ├── widget tree  ← wiki.makeTranscludeWidget("lar:.../camera/canvas-root", ...)
       │    │    └── fake DOM     ← OffscreenCanvas doc
       │    └── Camera[...]        ← additional cameras at their own tick rates
       │
@@ -259,6 +259,6 @@ The tick source changes; the drain contract does not.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;yoHCzeDhFKFgxbRrUPTbVpymOBG_JNAwTwf5R9_SmDw
+<<^ code="&#x0003;" >>ni:///sha-256;MRVe4-_GTfVNsHMdeW8oxoaNkxP9ECOJtVqlAjILVkM
 
 <<^ code="&#x0004;" -> to=? >>
