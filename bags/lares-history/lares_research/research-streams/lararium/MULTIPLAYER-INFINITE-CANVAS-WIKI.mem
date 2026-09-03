@@ -40,7 +40,12 @@ uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANV
 |`#hidden-skeleton` |✓ MIGRATED |the law under the vendor detail — containment is a graph fact, never the render tree's parent pointer — now `docs/pono/wikispace-canvasspace-ontology#ownership-is-a-graph-fact`. The shape counts and opacity table die with the surface |
 |`#seeding` |✗ SURFACE-BOUND |the M10 opening path: reseed routes, a legacy SQLite room, boot-receipt meta tags. Its one durable line — disk write → watcher → CRDT patch → browser → wiki change — is `lararium/docs/disk-projection-law` and `api/pono/vm-projection-bus` |
 |`#write-back-architecture` |✓ MIGRATED |two keepers, two refusals. The three-tier commit ladder → `docs/pono/canon-boundary#the-promotion-boundary` (the live layer holds TWO durabilities, and only one syncs); the visible pending/confirmed distinction → `docs/pono/canvas-shell-ux#the-boundary-is-visible`. Its `LarStorageBackend` interface is covered by the residency verbs; its write-gate table is the superseded ladder above |
-|`#ux-shell`, `#theme-system`, `#deployment`, `#mcp-surface`, `#open-questions` |▢ NEEDS A HOME |unassigned — read each before deletion |
+|`#deployment` |✓ MIGRATED |two durable invariants — bind loopback behind a terminator, and derive the self-URL from the request rather than configuration — now `lararium/mesh/secure-context#behind-the-terminator`, where they belong: the topology that earns the secure context is the one that breaks a hardcoded `host:port`. Its port table and data-directory layout are `lararium/docs/node-host` |
+|`#federation` |✗ SUPERSEDED |`api/pono/federated-causal-islands` carries all of it and more — the authority-first sync order, edge-island identity/lifecycle/offset, the visibility predicate, and the pull⊥read relay law. The section is a shorter copy |
+|`#ux-shell`, `#theme-system`, `#mcp-surface`, `#open-questions` |✗ SURFACE-BOUND |vendor chrome slots, a CSS-variable theme override, a planned tool table over rooms and reseeds, and a resolved/open list whose every durable entry is already migrated or already stands. Nothing survives the surface |
+|`#room-model-v2` |✓ MIGRATED |the law worth keeping — a place is a capability-and-view SCOPE over the one corpus, never a partition of it — now `docs/pono/wikispace-canvasspace-ontology#a-place-is-a-scope`. Its room-name table and portal shape type are vendor-typed |
+|`#tw5-versegraph-binding` |✓ MIGRATED |the hostful→hostless rename at the crossing → `docs/pono/canon-boundary#the-promotion-boundary`. Its isomorphic law (one wiki, both hosts, identical adaptor wiring) already stands as the vessel's own; the draft→canon call chain is surface |
+|`#system-role` |✓ RESOLVED |this ledger's own home. Its "is not" list is `#model-view-boundary` + `#graph-primacy`; its "is" list is the retired implementation |
 |`#tldraw-template-model` |✗ SURFACE-BOUND |dies with the surface; nothing to migrate |
 
 ⚠ ''DO NOT DELETE while any row reads CHECK or NEEDS A HOME.'' Deleting early does not lose the bytes — git holds them — but it loses the keeper from the ''memegraph'', which is the entire purpose of the drain.
@@ -1293,6 +1298,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;C5KL9KYPDD0nsq-84Tpk54B7X3_UlR7fkmOFI-pR1n0
+<<^ code="&#x0003;" >>ni:///sha-256;klkENXw1DDO9SsKYjGWeJjUdkzUQSAt-Z0O65SUcrYQ
 
 <<^ code="&#x0004;" -> to=? >>

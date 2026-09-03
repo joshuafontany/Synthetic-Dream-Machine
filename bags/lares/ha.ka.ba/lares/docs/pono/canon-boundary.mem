@@ -67,6 +67,12 @@ The crossing model above says a crossing must be explicit. This says ''who makes
 * ''CANON LAYER'' — `lares/` carrier files, git-trackable, hostless `lar:///…` addresses.
 * ''LIVE LAYER'' — the CRDT records materialized into TW5 and projected onto a camera. ''This layer MAY diverge locally and offline and sync later.'' Divergence is its correct behaviour, never a fault.
 
+!!! The crossing is the one moment an address changes
+
+A thing worked on live carries a ''hostful'' address — `lar://alias:grant@host/…` — which names who is speaking, under what grant, from where. Canon carries a ''hostless'' one. ''The promotion assigns the hostless address, and that is the only moment the address of a subject moves.'' Everything after is an edit to bytes at a standing name — an address is stable while its bytes are versioned, as below.
+
+Which gives the crossing a shape you can check from either side: a hostful address in a canon bag is a promotion that did not complete, and a hostless address on the live layer is a promotion that never happened. Neither needs a policy to detect.
+
 !!! The live layer holds TWO durabilities, and only one of them syncs
 
 Naming the live layer as one thing hides the distinction a person actually feels. Three durabilities stand, and the boundary crossing sits between the second and the third:
@@ -191,6 +197,6 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;hNl1d3_lHh0Sm9Ji59KPbo703SDk_AgsULxU3ahqMco
+<<^ code="&#x0003;" >>ni:///sha-256;J56n_1omhwkpi8-Uqe07V9WCyv6KhgAClrne-EIybbc
 
 <<^ code="&#x0004;" -> to=? >>

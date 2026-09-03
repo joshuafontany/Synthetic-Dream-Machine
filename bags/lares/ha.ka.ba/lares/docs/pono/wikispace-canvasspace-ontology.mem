@@ -140,6 +140,18 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 <<~/ahu >>
 
+<<~ ahu #a-place-is-a-scope >>
+
+!! A place is a scope over the corpus ~ never a partition of it
+
+A named place — a room, a board, a shelf — is a ''capability-and-view scope'': a recipe that selects from the one corpus. ''It is NOT a container that owns the memes it shows.'' The same meme stands in as many places as select it, and it is one meme in all of them.
+
+''What partitioning would cost, stated as the failures it produces:'' a meme placed in two rooms becomes two memes that drift; an edge between memes in different rooms has nowhere to live; moving a meme between rooms becomes a copy, so its history forks at the move. Every one of those is a data-model consequence, and none of them is visible while a single room is open — which is why the choice has to be made before the second room exists.
+
+''The scoping reading keeps all three'': one meme, one history, edges that cross freely, and a place that says only //which of them you are looking at, and by what right//. `#graph-primacy` is the same law from the other end — the graph is the model and the arrangement is a view, so a view cannot own what it shows.
+
+<<~/ahu >>
+
 <<~ ahu #ownership-is-a-graph-fact >>
 
 !! Containment is a graph fact ~ never the surface's parent hierarchy
@@ -235,6 +247,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;FDirfFnwKu0H4_rKUHMbpIs1R8bWG5aWz22_kmqzmS8
+<<^ code="&#x0003;" >>ni:///sha-256;A-XgaSpBx0pX3TBbo4mX8Ox_PWKI4vCWUi8hLtSsOYY
 
 <<^ code="&#x0004;" -> to=? >>
