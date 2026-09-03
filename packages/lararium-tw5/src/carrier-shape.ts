@@ -84,7 +84,11 @@ export function readCarrierShape(text: string): CarrierShape {
     meta:     maskedExec(text, /```toml meta\n/g, spans, true) !== null,
     uriPath: metaValue(text, "uri-path"),
     bag:     metaValue(text, "bag"),
-    headUri: headM ? (/-> (\S+) >>/.exec(headM[0])?.[1] ?? null) : null,
+    // THE ARROW'S FAR SIDE IS A NAMED FIELD, and reading the token after `->` takes the name with it.
+    // Every carrier in the corpus writes `from=? -> to=lar:///…`, so an unnamed read returned
+    // `to=lar:///…` on 639 of 639 files while the only vector for it built its fixture in the bare form
+    // and stayed green. The name is optional in the grammar and stripped when present.
+    headUri: headM ? (/->\s*(?:to=)?(\S+)\s*>>/.exec(headM[0])?.[1] ?? null) : null,
     stx:     marked(text, /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/g),
     etx:     marked(text, /<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/g),
     eot:     marked(text, /<<\^(?:[^>\n]|>(?!>))*&#x(?:0004|0014);(?:[^>\n]|>(?!>))*>>/g),

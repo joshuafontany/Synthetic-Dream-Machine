@@ -22,8 +22,10 @@ import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 import { REPO } from "./test-wiki.js";
 
 const DECL = "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
+/** The head sigil as the CORPUS writes it — the far side is a named `to=` field, and 639 of 639
+ *  carriers name it. A fixture in the bare form is legal grammar and measures a shape no file has. */
 const head = (uri: string, ns = "") =>
-  `<<^ code="&#x0001;"${ns ? ` namespace="${ns}"` : ""} ? -> ${uri} >>`;
+  `<<^ code="&#x0001;"${ns ? ` namespace="${ns}"` : ""} from=? -> to=${uri} >>`;
 
 describe("carrier-shape — the kind a file declares, and what that kind owes", () => {
   /**
@@ -34,6 +36,27 @@ describe("carrier-shape — the kind a file declares, and what that kind owes", 
     const shape = readCarrierShape(`${DECL}\n\n${head("lar:///ha.ka.ba/x/y")}\n`);
     expect(shape.marks.head).toBe(true);
     expect(shape.marks.headUri).toBe("lar:///ha.ka.ba/x/y");
+  });
+
+  /** The bare form stays legal, so the reader must not REQUIRE the field it now strips. */
+  test("an unnamed far side reads the same address", () => {
+    const bare = `${DECL}\n\n<<^ code="&#x0001;" ? -> lar:///ha.ka.ba/x/y >>\n`;
+    expect(readCarrierShape(bare).marks.headUri).toBe("lar:///ha.ka.ba/x/y");
+  });
+
+  /**
+   * THE CORPUS IS THE SPEC. A reader green against a hand-built fixture said nothing about the files:
+   * this one asks every carrier and refuses an address carrying a field name into itself.
+   */
+  test("no carrier's head address carries a field name into it", () => {
+    const files = execSync("git ls-files 'bags/**/*.mem'", { encoding: "utf8", cwd: REPO })
+      .split("\n").filter(Boolean);
+    const mangled = files
+      .map((f) => [f, readCarrierShape(readFileSync(path.join(REPO, f), "utf8")).marks.headUri] as const)
+      .filter(([, u]) => u !== null && !u.startsWith("lar:"))
+      .map(([f, u]) => `${f} — ${u}`);
+    expect(files.length).toBeGreaterThan(500);
+    expect(mangled).toEqual([]);
   });
 
   /**
