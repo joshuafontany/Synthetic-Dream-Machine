@@ -145,6 +145,36 @@ They turned on, every time:
 
 <<~/ahu >>
 
+<<~ ahu #our-own-ground >>
+
+!! ★ Traced against OUR OWN keel — three measurements, not readings ★
+
+The sweep names three things unmeasured at home. All three are measurable, and they change the shape of the decision.
+
+!!! ① The system ALREADY RUNS BOTH FORKS — one per scale
+
+* ''CIVIC scale'' (charter / nexus reserve) runs ''Fork A'': `splitReserveSeed`, guardian cards, a 2-of-3 reconstruct.
+* ''HUMAN scale'' (persona-KEL) runs ''Fork B'': `attestAndRotate` gathers ≥k independent guardian signatures and its own comment states the property — //"each signs with their OWN recovery key and returns a signature, and NOTHING assembles (no seed, no share)."//
+
+So a move //off// the wired mechanism is not a move toward an unbuilt thing. ''Each scale currently holds the fork that answers its own failure mode'', and whether that coincidence is right is the question — not whether the other branch exists.
+
+!!! ② The counterweight is ALREADY CLOSED at the human scale
+
+The sweep's warning against Fork B — a rogue sub-quorum emitting a rotation nobody intended, //"closable only by making the rotation body canonically derived"// — is closed here already. `personaRotationSigningBytes(head, freshOpKeyDid)` ''derives'' the signed body from the head and the fresh key; `mintPersonaRotation` recomputes identical bytes to verify. ''Guardians sign a derived body, never a proposed one.''
+
+!!! ③ ⚠ AND THE THIRD AXIS IS OPEN — our identifiers are NOT delegated
+
+```
+personaPrefixOf(inceptionOpKeyDid, recoverySetHash)
+  → `persona-${sha256(domain, op, recoverySetHash)}`
+```
+
+''Self-certifying, with no delegator.'' Under the KERI rule the sweep surfaced — a non-delegated rotation cannot supersede another rotation — ''a compromise of the recovery authority is TERMINAL on our KEL as it stands today''. That is the axis the sweep called larger in severity than the fork, and it is the one presently open.
+
+<<~ confidence 15/20 >> Read from `persona-kel.ts` and `recovery-keel-core.ts` at their current heads. ⚠ ''Read, not run'' — no vector walks a rotation against live key material at either scale.
+
+<<~/ahu >>
+
 <<~ ahu #how-far-to-trust-this >>
 
 !! How far to trust this sweep
@@ -162,6 +192,6 @@ They turned on, every time:
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-recovery-keel >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;pCdNHNxfvf5aVKTeKhCc9cl0sydYYQ-1djUd5SLza7Y
+<<^ code="&#x0003;" >>ni:///sha-256;KTKSKk8rorG4dNHyYv9zSqpSruYYqf3LwJADTE_DZS0
 
 <<^ code="&#x0004;" -> to=? >>
