@@ -21,7 +21,16 @@ import { larDataDir } from "./env.js";
 import type { SubmitResult, SubmitOptions } from "./verb-result.js";
 
 /** The agreed socket path — both sides derive the rendezvous from the substrate dir (`rendezvousPath`). */
-export function udsSocketPath(dataDir?: string): string {
+export function udsSocketPath(dataDir?: string | null): string {
+  // ABSENT AND UNRESOLVED ARE DIFFERENT ASKS, and only one of them may fall back. Omitting the argument
+  // means "the caller's own vessel", and the ambient default is the right answer. Passing `null` means a
+  // root was LOOKED FOR AND NOT FOUND — a staged root, a discovered socket directory — and falling back
+  // there aims a caller at the operator's live vessel while it believes it is talking to a fixture.
+  // The failure is silent and it PASSES: the real daemon answers correctly, so the vector goes green
+  // having measured the wrong hearth. Refusing is the only reading that cannot be mistaken for success.
+  if (dataDir === null) {
+    throw new Error("[lares] a substrate root was required and none resolved — refusing to fall back to the ambient vessel");
+  }
   // ONE DERIVATION, BOTH SIDES. The daemon binds `rendezvousPath` over its resolved substrate dir; this
   // reads the same function over the same default. A `--storage`/`LAR_STORAGE` override moves the
   // daemon's dir and not this one — that divergence predates the relocation and is inherited here
@@ -36,8 +45,12 @@ export function udsSocketPath(dataDir?: string): string {
  * answers `true` for a vessel that died months ago. Reach for it to decide whether a path merits a try —
  * never to decide whether anything breathes there. {@link udsAlive} answers that.
  */
-export function udsSocketPresent(dataDir?: string): boolean {
-  try { return existsSync(udsSocketPath(dataDir)); } catch { return false; }
+export function udsSocketPresent(dataDir?: string | null): boolean {
+  // The derivation's refusal is not a stat failure and must not be swallowed as one. `false` here reads
+  // "no daemon there", which is an answer about a hearth — and an unresolved root names no hearth to
+  // answer about. Let it out; catch only the filesystem's own noise.
+  const path = udsSocketPath(dataDir);
+  try { return existsSync(path); } catch { return false; }
 }
 
 /**
@@ -56,7 +69,7 @@ export function udsSocketPresent(dataDir?: string): boolean {
  * implies presence at a place, and a check that fuses them reports on the filesystem while claiming to
  * report on the mesh.
  */
-export async function udsAlive(dataDir?: string, timeoutMs = 1_500): Promise<boolean> {
+export async function udsAlive(dataDir?: string | null, timeoutMs = 1_500): Promise<boolean> {
   const path = udsSocketPath(dataDir);
   if (!udsSocketPresent(dataDir)) return false;   // no name — nothing to probe
   return await new Promise<boolean>((resolve) => {
@@ -94,7 +107,7 @@ export async function invokeLocal(
   verb:        string,
   args:        Record<string, unknown>,
   requestedBy: string,
-  opts:        SubmitOptions & { readonly dataDir?: string } = {},
+  opts:        SubmitOptions & { readonly dataDir?: string | null } = {},
 ): Promise<SubmitResult> {
   const socketPath = udsSocketPath(opts.dataDir);
   const timeoutMs  = opts.timeoutMs ?? 30_000;

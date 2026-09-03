@@ -161,14 +161,14 @@ describe("the herm — the floor of the lararium cap stack", () => {
     // A WELL-FORMED call. `where` requires `args.tiddler`; an empty payload earns "args.tiddler is
     // required" — the channel answering correctly, which a vector reading only `status` scores as a floor
     // that does not carry.
-    const r = await invokeLocal("where", { tiddler: "$:/lares/oracle" }, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 });
+    const r = await invokeLocal("where", { tiddler: "$:/lares/oracle" }, await operatorDid(root), { dataDir: dir, timeoutMs: 20_000 });
     expect(JSON.stringify(r), "the verb channel never answered a well-formed call").toMatch(/"status":"done"/);
   }, 60_000);
 
   test("R4 — a herm refuses a hearth-scoped act LEGIBLY, never by stack trace", async () => {
     const dir = findSock(root);
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
-    const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 })
+    const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir, timeoutMs: 20_000 })
       .catch((e: Error) => ({ error: e.message }));
     // Either an unknown verb or a named refusal — both say "light a face". Neither may be a raw throw.
     expect(JSON.stringify(r)).toMatch(/light a face|unknown verb|no face|waking floor/i);
@@ -177,7 +177,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
     // bootstrap carries the daemon bag alone — so a follow verb on this floor must name the lift too. Answering
     // "circles-<tag> unresolved: the oracle registry names no such plane" is true and useless: it reads
     // as a broken registry to the one human who could fix it by lighting a face.
-    const c = await invokeLocal("circle-list", { circle: "following" }, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 })
+    const c = await invokeLocal("circle-list", { circle: "following" }, await operatorDid(root), { dataDir: dir, timeoutMs: 20_000 })
       .catch((e: Error) => ({ error: e.message }));
     expect(JSON.stringify(c), "a follow verb on the floor refused in registry-fault language").toMatch(/light a face|unknown verb|no face|waking floor/i);
   }, 90_000);
@@ -194,8 +194,9 @@ describe("the herm — the floor of the lararium cap stack", () => {
     expect(live, `the lift left the vessel unable to stand:\n${log.slice(-2000)}`).toBe(true);
 
     const dir = findSock(root);
+    expect(dir, "the lifted hearth bound no UDS door — nothing to ask, and no fallback that would be this hearth").not.toBeNull();
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
-    const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir!, timeoutMs: 20_000 });
+    const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir, timeoutMs: 20_000 });
     expect(JSON.stringify(r), "the lifted hearth still refuses its own face-scoped verb").toMatch(/"status":"done"/);
   }, 240_000);
 });
