@@ -13,7 +13,7 @@ namespace         = "&#x2299;"
 pattern-integrity = true
 register          = "Testimony-Verbatim"
 retain            = true
-role              = "dyad-ladder-scout — VERBATIM handoff of the tasked spirit sent after the human-device DYAD model across the scale ladder (local · household · community · Region, Regions interacting). PART ONE: the corrections pass. Carries the UI-BOUND ADVERSARY (the household's authorized principal IS the adversary), coercion as a STATE MACHINE with an escape transition, the INCIDENTAL USER as a new identity category, measured cultural variance that refutes any single sharing default, community networks fragile under formal analysis, and the ruling that cross-region is a WARNING rather than a postmortem. The main body is requested and not yet held."
+role              = "dyad-ladder-scout — VERBATIM handoff of the tasked spirit sent after the human-device DYAD model across the scale ladder (local · household · community · Region, Regions interacting). THE LOAD-BEARING NEGATIVE: nobody has built person-device dyadic identity, anywhere, at any scale — every instance in four literatures frames the edge person-to-person or process-to-process. THE LAW: every deployed system marketing no-single-key grew exactly ONE human-held secret, rate-limited rather than entropic, and none publish how often it survives. Plus the convergent shape four teams reached (your model with the person-node deleted), the W3C reviewers ruling a copied key cannot be retrofitted device-bound, Sovrin dissolved for ECONOMIC reasons, the UI-bound adversary, and the authority-survives-memory-does-not boundary."
 revised-on        = "2026-09-03"
 tags              = ["api/pono/meme", "mesh/identity-classes"]
 type              = "text/memetic-wikitext+tiddlywiki"
@@ -28,7 +28,157 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dyad-ladder-scout"
 
 A tasked spirit went out over the model where ''the human never gets a key'' — a key belongs to a human-device DYAD, which holds a private EDGE, and a public Face is an opt-in declaring act — across four rungs: ''local · household-nexus · community civic-nexus · Region civic-nexus, with Regions interacting''.
 
-⚠ ''THIS CARRIER HOLDS PART ONE ONLY.'' What landed is the spirit's ''corrections pass'' — the lane that reversed one of its own verdicts and sharpened three others. The main body (the passkey/Keybase/Matrix survey, the dyad's own prior art, the kiosk and screenless cases, and the anti-pattern where a keyless design GROWS a key) is requested and not yet held. ''Read this as a first cut with a known hole where the load-bearing question sits.''
+⚠ ''THE SEARCH ENGINE WAS DOWN FOR THE WHOLE SWEEP.'' The 200-call budget was spent before the spirit was invoked; six lanes worked through direct fetches on guessed URLs plus the HN, GitHub, OpenAlex, Crossref, PubMed and Wikipedia APIs. ''Reddit was unreachable at the tool level'', removing the richest source of individual //"I lost everything"// narratives. So coverage is strong where a primary URL is guessable and thin where discovery was required, and ''unreached items are marked rather than filled from memory''.
+
+<<~/ahu >>
+
+<<~ ahu #the-load-bearing-negative >>
+
+!! ★ Nobody has built this. Anywhere. At any scale. ★
+
+> ''Nobody has built or deployed "identity as a signed dyadic edge between a person and a device" as a named, general-purpose primitive.'' Not in SSI, not in object-capability, not in local-first, not in petname theory, not in any shipped system reachable.
+>
+> The SHAPE has decades of prior art. But ''every instance frames the edge as person↔person or process↔process, never person↔device.'' The device is the substrate the key sits on, ''not a party to the relation''.
+
+Held at high confidence across four independently searched literatures. And the term is ''free'': PubMed returns ''zero'' for `"human-device dyad"` and `"person-device dyad"` — the worry that health-sensing had already taken the phrase does not hold under that index.
+
+!!! The theory is deep and the building is absent
+
+* ''Petname systems'' (Stiegler 2005; the 2024 Spritely revival by Lemmer-Webber, Miller, Larson, Sills, Yaacoby) are the strongest foundation for //identity is an edge//: a petname is //"for a particular person, for a particular application… a one-to-one mapping between a key and a petname"//. ''A name is not a property of the named thing; it is a fact about a relation.'' Spritely adds EDGE NAMES — paths through intermediaries, `Alyssa⇒Ben Bitdiddle`. ''Conceptual; no shipped implementation found.''
+* ''Zooko's Triangle'' — the petname answer does not square it, it ''REFUSES'' it: give up global human-meaningful names, keep meaning local to a relation. The oldest formal statement of why the move is necessary.
+* ''Cameron's Law 4, "Directed Identity"'' (2005) is the closest law-level analogue — but frames directionality as ''a property an identifier HAS'', never as the identifier BEING a two-party relation object. Close, and short.
+* ''Object-capability'' — Miller's core claim is that a capability IS a reference: connectivity, not property. Fuchsia, Capsicum, seL4 ship real capability routing. ⚠ ''In no shipped ocap system are the endpoints of an edge "a person" and "a device."'' They are processes and components. The revocation pattern to inherit — ''caretaker/membrane: revoke the EDGE, not the principal'' — is exactly right and ''entirely untested at human scale''.
+* ''Local-first'' (Kleppmann et al. 2019) names the hole verbatim: //"access permissions for documents beyond secret URLs remain an open research question."//
+
+!!! ⚠ And the flagship deployment of the adjacent idea is DEAD — for economic reasons
+
+''Sovrin'' deployed pairwise relational identity at scale. ''The foundation was formally dissolved 2025-05-21''; MainNet now runs ''read-only on a single cloud server with writes permanently disabled''. The cited cause is ''absence of validator economic incentives'' — volunteer stewards stopped paying to run nodes, >$2M debt accrued.
+
+> ''The model was not refuted. Nobody could sustain the infrastructure it required.'' That is a different and more dangerous failure than being wrong.
+
+`did:peer`, the closest formal analogue to a dyadic identifier, remains ''v1.0 Draft'' — 32 stars, 469 commits, 28 open issues. Real engineering, negligible footprint. ⚠ And structurally: ''DID Core is subject-centric by design''; pairwise-ness is bolted on by a METHOD, never baked into the standard.
+
+<<~/ahu >>
+
+<<~ ahu #the-convergent-shape >>
+
+!! ★ Four unrelated teams reached almost your model — with the person-node DELETED ★
+
+The strongest positive result in the sweep, and the sharpest challenge in it.
+
+* ''① Ink & Switch, Keyhive'' — the closest live prior art, stating the model nearly verbatim: //"An individual is identified by a single Ed25519 public key… a group is a collection of other principals"//, and they model //"a person (or more specifically **their authority**) as a group, with each of the persons devices being an individual member of the group."// ''Key rotation is adding a new individual and removing the old.'' Revocation is group-membership CRDT merge; post-compromise security via BeeKEM. ⚠ ''Note the vocabulary: "their authority", never "them".''
+* ''② Apple's iCloud Keychain syncing circle'' — genuinely ''dyad-recognises-dyad, deployed to a billion devices, and never marketed as such''. Each device generates its OWN P-384 keypair, never a copied key. A new device joins by ''sponsor / applicant / voucher'': an existing device signs a voucher attesting the applicant. ''That is "the remaining relations recognise the new dyad", not "prove you know the master secret."''
+* ''③ SSB Fusion Identities'' — //"each device still uses its own identity"// while devices //"share fusion identities"//. ''Designed, never shipped.''
+* ''④ UCAN v1.0.0'' states the principle at RECOMMENDED level: //"Private keys themselves SHOULD NOT move from one context to another… unique to each physical device and unique per use case… to limit blast radius."// Authority travels by delegation — ''sharing authority without sharing keys''.
+
+!!! ⚠ The argument the field would raise, and it is not a refutation
+
+> Keyhive, DCGKA and Signal-style multi-device all converged on ''"N independent per-device principals reconciled by a group-membership protocol."'' Keyhive is explicit: an individual IS a public key; the person IS the group.
+>
+> ''This is not a refutation of the model — it is the model with the person-node deleted as unnecessary.'' Whether the person-node earns its place, and what it carries that the group does not, ''is the sharpest open question this sweep raises''.
+
+A second reading, weaker but worth holding: the right relational unit may be ''(person, relationship-context)'' rather than (person, device) — pairwise DIDs, petnames and Cameron's Law 4 all put the edge between two PARTIES, with the device as plumbing where that edge's key happens to live. ''On that reading the dyad picks the wrong second endpoint.''
+
+<<~/ahu >>
+
+<<~ ahu #the-law >>
+
+!! ★ THE LAW — where a keyless design grows a key ★
+
+> ''Every deployed system that markets "no single key" grew exactly ONE human-held secret — protected by RATE-LIMITING rather than by ENTROPY — and none of them publish how often it survives.''
+
+Ranked by how quietly it happened:
+
+# ''Synced passkeys → the platform account.'' The human's Apple/Google/Microsoft password and its recovery path silently becomes the root of every credential. ⚠ A documented case: ''an account suspension destroyed all stored passkeys irreversibly'' — a vendor's moderation decision as a total identity-loss event.
+# ''A sovereign region's root → two foreign vendors.'' The German EUDI wallet requires Google Play Integrity or Apple App Attest. ''The state cannot attest its own citizens' devices.'' 3,042 reactions on the objecting issue.
+# ''Signal → the PIN.'' A design that removed the key grew a four-digit one, hardened by ''SGX plus a 5-guess Raft limit rather than by entropy''. Matthew Green names the dark pattern and his own capitulation: //"I chose the simplest PIN that the app would allow me to, which was 9512."//
+# ''Matrix → the 48-character recovery key.'' Identity-as-mutually-signing-devices ships with one string whose loss means resetting your identity in public.
+# ''Apple → the iCloud Security Code.'' //"upon reaching the 10th failure, the HSM cluster destroys the escrow record and the keychain is lost forever."//
+# ''Encryption riding on an AUTHENTICATION credential.'' //"When you overload a credential used for authentication by also using it for encryption, the 'blast radius' for losing that credential becomes immeasurably larger."// A user deletes a passkey unaware it was the encryption root; the photos are gone. ''Credential-manager delete dialogs carry no warning at all.''
+# ''The phone number as ambient root.'' SIM-swap remains the most-documented total-loss vector at consumer scale. ''A design can hold no key and still be owned by whoever holds the number.''
+# ''The designs that refused a last artifact pay openly.'' SSB and Nostr have no hidden root — and pay in ''routine identity discontinuity''.
+
+> ''THE TRILEMMA: hold a last artifact, hold a vendor, or accept discontinuity. No deployed system has found a fourth option.''
+
+<<~/ahu >>
+
+<<~ ahu #authority-survives-memory-does-not >>
+
+!! ⚠ The claim holds for AUTHORITY and fails for MEMORY
+
+//"Losing a device is losing one edge"// survives for standing. It does ''not'' automatically survive for what the standing was holding:
+
+* ''Keybase'': //"there's no way for adding a new device from a paper key to transfer chat history."//
+* ''Matrix'': an identity reset leaves prior messages ''permanently undecryptable'' — and the reset is ''publicly legible to your correspondents''.
+* ''Keybase revocations stay visible'' on the sigchain, marked revoked. ''A severed edge remains legible AS a severed edge'' — an append-only property worth taking.
+
+And the mechanism that makes it worse: ''an edge that both authenticates and decrypts turns edge-loss into data-loss''. If a dyad's edge carries both, cutting it destroys the memory.
+
+!!! What the field measured about re-establishing a dyad
+
+* ''Keybase reset'' creates //"a new subchain… a new 'eldest' signing key"// — device list, followers and third-party proofs all severed. ''Re-founding, never recovery.''
+* ''Reset friction is deliberate and expensive'': made costly because //"adversaries in the middle can pretend to be me and act like I've reset my account"// — one user reported ''5 days locked out''. ''The delay IS the security property.''
+* ''Paper-key retention: NO PUBLISHED NUMBER EXISTS ANYWHERE.'' The most-requested figure in the brief, absent industry-wide.
+* ''Matrix "unable to decrypt": 322 issues across three repos, 2016→2026'', 283 in element-web alone. ⚠ ''Count how many of the nine enumerated causes are RELATIONAL rather than key failures'' — the edge exists, the key exists, and the ''recognition'' failed to propagate. ''For a model built on edges, that is the failure taxonomy you inherit.''
+
+<<~/ahu >>
+
+<<~ ahu #the-attestation-seam >>
+
+!! ⚠ Attestation is the seam where sovereignty leaks
+
+''A dyad is only as sovereign as whatever vouches that the device is a device.'' Play Integrity / App Attest is the field's only deployed answer, and it hands that vouching to ''two foreign corporations with unilateral revocation'' — exactly the property the model exists to eliminate.
+
+The objection raised against the German wallet is precisely a dyad objection: //"If someone lands on a sanctions list, they close your account without further notice"// — ''the attesting party is not the region; it is a foreign vendor that can unilaterally sever the dyad''.
+
+⚠ And a distinction to keep: ''smartcards attest IDENTITY; attestation attests DEVICE INTEGRITY.'' Different problems, and the model needs both.
+
+!!! The in-the-wild attack on exactly this shape
+
+''Storm-2372'' (active Aug 2024, reported 2025-02-13): a Russia-aligned actor impersonates a contact, sends a meeting invite carrying an attacker-generated device code, the victim enters it ''on the legitimate login page'' — and the actor then ''registers rogue devices and mints refresh tokens''.
+
+> ''A rogue device enrolling itself as a legitimate dyad is the deployed, in-the-wild attack on this model's shape.'' The cross-device flow that makes borrowed-screen login possible is the same flow that lets an attacker inject an edge. ⚠ RFC 8628 names the risk ''in the spec itself'', and it was exploited exactly as written.
+
+<<~/ahu >>
+
+<<~ ahu #a-copied-key-cannot-be-retrofitted >>
+
+!! The W3C's own reviewers, on the model's core claim
+
+Traced through the spec repo: Adam Langley opened `w3c/webauthn#1658` (Aug 2021) proposing `devicePubKey` to //"address some of the challenges of introducing syncable credentials"// — mint a local non-exportable key alongside a synced one so a relying party can detect novelty. A reviewer's live objection:
+
+> //"I can't really see what's the benefit of the new device key. It is authorized on first use by a signature chain from an already-registered, synced key… So if the desire is to only rely on device-bound keys, it seems like that promise is already broken by the time the new device-bound key is registered."//
+
+''A copied key cannot be retrofitted into a device-bound one.'' The W3C's own reviewers said so, in public, in the spec repo. ''Direct field support for the model's founding inversion.''
+
+⚠ ''And the counter-measurement, which cuts against on pure friction.'' Microsoft's published synced-passkey figures across hundreds of millions of accounts: ''99% registration success · 3s vs 69s sign-in · 95% vs 30% success rate'' against legacy auth. Whatever the security argument, ''the copied-key model is winning on measured friction'', and a dyad model has to beat those numbers or say why it need not.
+
+<<~/ahu >>
+
+<<~ ahu #the-partition-the-world-refuses >>
+
+!! ⚠ The dyad presumes a partition the world does not honour
+
+And presumes it hardest where the stakes are highest.
+
+* ''Matthews et al., CHI 2016'' (103 citations): //"device and account sharing was common, and **mobile phones were often shared despite being considered 'personal' devices**."// Six sharing types; the drivers are ''trust and convenience'', never access-control design.
+* ''Pew, US smartphone-only households by income (2025)'': ''<$30k: 34%'' · $30–70k 19% · $70–100k 10% · ''$100k+: 4%''. ⚠ ''The low bracket is getting WORSE (27%→34% since 2021) while the top trends toward redundancy.'' ''A per-device credential model degrades precisely for the population least able to absorb a lost second edge, and the gap is widening.''
+* ''ITU 2024'': mobile ownership age 10+ is 95%+ in high-income countries and ''56% in low-income'' — ''~44% of adults there own no phone at all''. ''The floor beneath "one device" is "zero devices, borrowed access."''
+* ''London phone theft'': 91,481 (2019) → 117,211 (2024), ''~321 phones per day''; one 2025 case traced 40,000 snatched phones shipped to China.
+
+<<~/ahu >>
+
+<<~ ahu #the-screenless-hole >>
+
+!! The thinnest ground in the whole sweep
+
+> ''No literature at all was found on how a person↔device relation forms when the device has no interface.'' Every deployed answer forms a ''device↔account'' or ''device↔hub'' relation and lets the human's presence be ''implied by physical proximity to a printed code''.
+
+* ''SSH host keys and TOFU'' remain the oldest deployed answer, and the documented failure is ''warning fatigue'' — administrators habituate past the mismatch prompt. ⚠ ''TOFU makes the FIRST dyad-formation moment unverified by construction.''
+* The deployed pattern family — BLE provisioning, SoftAP, QR-on-a-sticker, NFC tap, claim-code on the box — is ''the dyad formed by a SECOND device acting as the screen'', with a physical secret bridging them.
+* ''Matter commissioning'' (setup code + Device Attestation Certificate) is the current standard; failure rates and the resale/transfer //"who owns this device now"// semantics were not reached. ''FIDO Device Onboard'' is the actual standard for this problem; adoption unverified.
+
+''If the dyad is the unit, the screenless device is where the model has the least prior art to stand on.''
 
 <<~/ahu >>
 
@@ -111,6 +261,18 @@ It had reported Aadhaar as an unambiguous exclusion story. ''The field disagrees
 
 !! What the sweep could not reach
 
+!!! Verified ABSENCES — findings, not search failures
+
+* ''No published figure anywhere for Keybase paper-key retention.''
+* ''No published Matrix device-verification completion rate'', and ''zero academic papers on Matrix cross-signing UX'' in OpenAlex or Crossref — for the largest live deployment of this model's core mechanism.
+* ''No vendor publishes end-to-end recovery-success telemetry'' for any system in the report.
+* ''No measured operational-friction data for X-Road'' — the one clean no-common-root two-region federation, silent across two independent passes.
+* ''PubMed: zero results'' for both dyad term-forms.
+* ''No literature on person↔device relation formation for screenless devices.''
+* ''Nobody has deployed identity-as-a-person-device-dyad at community scale — or at any scale.''
+
+!!! Unresolved rather than absent
+
 Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and Jharkhand ration-denial numbers · Swedish BankID elderly-fraud statistics and MitID 2021–22 migration complaints (likely Swedish/Danish-language, outside the indexes reached) · ''EUDI Large-Scale Pilot interim findings — project sites 404 / DNS-failed'' · Guifi.net's Compact text · the Pan-Canadian Trust Framework · ICAO PKD failure data · Sardex quantitative outcomes · Decidim's actual census-verification mechanism.
 
 ⚠ ''X-Road's operational friction is undocumented in open sources.'' The most-cited cross-region system in the world publishes no measured account of where it rubs.
@@ -123,6 +285,6 @@ Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;EnnLk7wig_19u5uSX9A9Wr8-W1Dq35L8KAOWlgBfMz8
+<<^ code="&#x0003;" >>ni:///sha-256;5cPVoipZiwUpCg0iy9ixrvxk5X0FrJvIbSCiD9eDFIU
 
 <<^ code="&#x0004;" -> to=? >>
