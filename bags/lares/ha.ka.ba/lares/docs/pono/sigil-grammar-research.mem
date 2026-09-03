@@ -36,9 +36,9 @@ explicit avoidance of direct natural-language overwrite.
 
 <<~/ahu >>
 
-<<~ ahu #new-findings >>
+<<~ ahu #findings >>
 
-!! New Findings (2026-04-27)
+!! Findings (2026-04-27)
 
 !!! Operator rulings confirmed
 
@@ -416,6 +416,6 @@ When editing grammar meme or parser:
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ajGHZUvO4IR7asgUS6dcq_qVMxIz7ZoyTnA7S1cfgvw
+<<^ code="&#x0003;" >>ni:///sha-256;7lRE8yezqhjuSD2HwIwDnJhzvRPn7ZBxwZnkUo8TTi0
 
 <<^ code="&#x0004;" -> to=? >>

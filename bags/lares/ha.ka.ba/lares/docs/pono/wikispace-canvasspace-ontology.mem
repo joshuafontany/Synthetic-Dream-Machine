@@ -35,13 +35,13 @@ Lares fuses three traditions nobody has fused whole: a ''transclude-capable wiki
 The meme-graph holds composition in the has-stack (meta tags), adjacency in `loulou`, embedding in `aka`/`kahea`, and every relation that //does// something as a ''wire entity'' — a `lar:` addressed record wearing its family as a stack component. ''A relation is an ENTITY, never an attribute on an edge'' — reification is what lets a wire be addressed, transcluded into, and versioned like anything else. Two cameras project that one graph (`render-pipeline#render-axes`):
 
 * the ''Story-River camera'' — `window.document`, the page/document surface;
-* the ''DreamDOM canvas camera'' — a ''DreamDOM'' document, the infinite flow surface (#the-surface-correction).
+* the ''DreamDOM canvas camera'' — a ''DreamDOM'' document, the infinite flow surface (#the-surface-law).
 
 The worn family component carries the ''meaning''; the surface picks the ''render template''. A `wires/dataflow` entity //means// "typed value between pins" whether the canvas draws it as a wire or the Story River renders it as a dependency note. The discipline mirrors projectional editing (JetBrains MPS): ''the model node carries no intrinsic surface form'' — every appearance reads as a projection. Confirmed novel — no prior system fuses content-identity transclusion + infinite canvas + typed-pin dataflow under one addressed graph.
 
 <<~/ahu >>
 
-<<~ ahu #the-surface-correction >>
+<<~ ahu #the-surface-law >>
 
 !! ⚠ The surface law ~ the camera is DOM-hosting, never rasterising
 
@@ -79,7 +79,7 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 ''WHY THIS IS THE HOUSE'S STRONGEST POSITION, and it is measured elsewhere.'' A study of overview+detail found users //preferred// an overview yet were //faster without it//, and its authors conjectured the cause: the one map that made the overview unnecessary ''had semantic zoom''. On a small viewport the case is worse still — navigation cost scales in ''window widths'', so almost every traversal a desktop reader would pan falls, on a phone, on the zoom side of the crossover, while a minimap there costs time and buys no preference.
 
-''A rasterising camera cannot do this'' — not for want of the idea, but because it holds pixels and has nothing to ask. ''Only a store that knows what a thing IS can choose what to show of it.'' That is why #the-surface-correction and this section are one ruling wearing two coats.
+''A rasterising camera cannot do this'' — not for want of the idea, but because it holds pixels and has nothing to ask. ''Only a store that knows what a thing IS can choose what to show of it.'' That is why #the-surface-law and this section are one ruling wearing two coats.
 
 ⚠ ''Untested on a phone by anyone.'' The literature points here and never surveyed it. This house would be first, on ground the field abandoned rather than ground it settled.
 
@@ -247,6 +247,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;A-XgaSpBx0pX3TBbo4mX8Ox_PWKI4vCWUi8hLtSsOYY
+<<^ code="&#x0003;" >>ni:///sha-256;Kp7kW2Qt_7jjzjWGKWrSPeSDhsSMgdSS-rX77vROBc8
 
 <<^ code="&#x0004;" -> to=? >>

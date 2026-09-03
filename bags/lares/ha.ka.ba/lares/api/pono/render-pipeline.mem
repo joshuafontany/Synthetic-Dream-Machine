@@ -56,7 +56,7 @@ One surface passes through three trees:
 Two cameras read the ''one shared'' wiki world graph and render into ''separate'' documents (`camera-mount` law C-2):
 
 * ''Story River camera'' — backed by `window.document`; the ''page'' surface; child-slot widgets transclude content into the DOM (the `transclusion` family lands here).
-* ''DreamDOM canvas camera'' — backed by a ''DreamDOM'' document (a DOM-hosting surface, never a rasterising one — the ruling and its evidence live at `wikispace-canvasspace-ontology#the-surface-correction`); the ''flow'' surface; pranala edges render as wired shapes (the `dataflow` / `reaction` / `spatial` families land here).
+* ''DreamDOM canvas camera'' — backed by a ''DreamDOM'' document (a DOM-hosting surface, never a rasterising one — the ruling and its evidence live at `wikispace-canvasspace-ontology#the-surface-law`); the ''flow'' surface; pranala edges render as wired shapes (the `dataflow` / `reaction` / `spatial` families land here).
 
 The stage pipeline runs once per camera over the shared graph; only the DOM-tree target (which fakeDom) differs. ''World graph shared; render surfaces separate.''
 
@@ -257,6 +257,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;oTnFhJvsHtXHByM1w1DBsQe_Wn-fxt73E_w_-nSw5zQ
+<<^ code="&#x0003;" >>ni:///sha-256;GAXRwipQRx9eTMVCTxVtbd8BTRYSYhpbdzVunlJc8AQ
 
 <<^ code="&#x0004;" -> to=? >>

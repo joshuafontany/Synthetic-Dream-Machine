@@ -81,7 +81,7 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 * `room-content` lights after room Automerge doc materializes from IndexedDB or network.
 * `room-presence` lights independently — never blocks room-content.
 * `tw-vm` lights after TW5 wiki boots and loads from store.
-* `canvas-doc` lights after the canvas camera's projection derives from TW5 state. ''Named by SURFACE, never by implementation'' — the camera's document is a DreamDOM (DOM-hosting, never rasterising; ruling at `wikispace-canvasspace-ontology#the-surface-correction`), and a later change of document type must not move this key again.
+* `canvas-doc` lights after the canvas camera's projection derives from TW5 state. ''Named by SURFACE, never by implementation'' — the camera's document is a DreamDOM (DOM-hosting, never rasterising; ruling at `wikispace-canvasspace-ontology#the-surface-law`), and a later change of document type must not move this key again.
 * `corpus:<id>` lights per corpus island — independently of other corpora.
 * `projection:<id>` lights per projection cache — never grants authority.
 * Presence does not share fate with content.
@@ -97,6 +97,6 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;TEKc5HJMOQptLneBgml-VNYjfeKMh-5eEm9iFDqfetM
+<<^ code="&#x0003;" >>ni:///sha-256;cHWsmCSOWvZMnDpC4swzy81SM0dUeMnb0mbNH-jFk8I
 
 <<^ code="&#x0004;" -> to=? >>
