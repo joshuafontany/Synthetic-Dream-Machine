@@ -162,6 +162,41 @@ describe("⑤ the outward gate", () => {
 });
 
 // ════════════════════════════════════════════════════════════════════════════════════════════════
+// ⑧ ONE CROSSROADS SERVES ONE NEXUS — and a joined node reads the wrong one
+// ════════════════════════════════════════════════════════════════════════════════════════════════
+// `crossroads#open` settles the model: "One crossroads serves ONE Nexus… the reach is the Nexus,
+// never the DreamNet: no confederation-wide floor exists, by design, because a bulletin belongs to
+// the body that keeps it." So a board per Nexus is CORRECT, and a founder deriving its own board
+// from its own key is correct with it.
+//
+// THE CONSEQUENCE IS UNBUILT. A vessel that JOINS Nexus A must read A's board — and a node has no
+// path to any key but its own (`nexusPubkey: vesselIdentity.verifyingKey`, seven sites). The BROWSER
+// leaf already does the other thing: `const nexusPubkey = relayGatePubKey`, gated on
+// `admittedToNexus`. And the key is already handed over out of band — `lares herm` prints the dial
+// URL(s) AND the gate pubkey "to hand a hearth". The node never stores or reads it.
+//
+// So this is not a design question. It is a settled design with one leg unwalked, and the shape of
+// the fix is visible in the sibling vessel that walks it.
+describe("⑧ a joined vessel reads its Nexus's board", () => {
+  test("the board is derived from a key, so adopting a Nexus is adopting its key", () => {
+    // Not a gap — the derivation is total and pure, which is what makes the adoption a one-value
+    // change rather than a new mechanism.
+    const a = mesh.crossroadsDocUrl("0x" + "aa".repeat(32));
+    const b = mesh.crossroadsDocUrl("0x" + "bb".repeat(32));
+    expect(a).not.toBe(b);
+    expect(mesh.crossroadsDocUrl("0x" + "aa".repeat(32))).toBe(a);
+  });
+
+  test.skip("A NODE ADOPTS ITS NEXUS'S KEY WHEN IT JOINS ONE — DEFERRED: `open-node-vessel` binds nexusPubkey to vesselIdentity.verifyingKey at seven sites with no alternative path, so a node admitted to a foreign Nexus still materializes a board derived from ITSELF. The browser leaf takes relayGatePubKey gated on admittedToNexus; the node has no equivalent, and `device-admit` carries a hearthDaemonUrl and no nexus key because it admits a DEVICE to a fleet rather than a vessel to a Nexus", () => {
+    expect(Object.keys(mesh)).toContain("adoptedNexusPubkey");
+  });
+
+  test.skip("THE HERM'S GATE PUBKEY REACHES THE HEARTH THAT DIALS IT — DEFERRED: `lares herm` prints the dial URL and the gate pubkey for an operator to hand over, and nothing on the receiving side stores it. The out-of-band hand-off is designed and instructed; the leg that keeps what was handed over does not exist, so a hearth re-learns its Nexus by hand every boot or not at all", () => {
+    expect(Object.keys(mesh)).toContain("adoptedNexusPubkey");
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════════════════
 // ⑦ @daemon IS AN ORDINARY WIKI — the one the ontology was written after
 // ════════════════════════════════════════════════════════════════════════════════════════════════
 // The daemon wiki was devised BEFORE the recipe/layer ontology grew around it, so it stands as the
