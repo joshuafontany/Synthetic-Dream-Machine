@@ -1,0 +1,167 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/recovery-custody-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 16
+manao             = 17
+manaoio           = 15
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "recovery-custody-scout — VERBATIM handoff of the tasked spirit sent after the reconstruct-then-sign ⊥ threshold-attest fork. Carries the decisive comparative finding (every civic-scale m-of-n in the world is SECRET SHARING, never threshold signing), the availability inversion that makes Fork A's worst property its best one, nineteen measured ceremony failures, the distro-archive survey including a key actually lost, and a THIRD AXIS that dominates the one we asked about. Held as a collision surface, not a recommendation."
+revised-on        = "2026-09-03"
+tags              = ["api/pono/meme", "mesh/identity-classes"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/recovery-custody-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Recovery custody ~ what the field has MEASURED
+
+A tasked spirit went out over `identity-classes#the-two-forks` — Fork A ''reconstruct-then-sign'' against Fork B ''threshold-attest'' — briefed on both key scales and given no recommendation to confirm. ''It came back with a finding that cuts against the direction most of its own evidence pointed'', and with a third axis that dominates the fork on severity.
+
+⚠ ''Held VERBATIM.'' The register is testimony, not doctrine: what a reader collides against, never what they inherit. Where the spirit corrected itself, both readings stand.
+
+<<~/ahu >>
+
+<<~ ahu #the-decisive-finding >>
+
+!! ★ The decisive comparative finding ★
+
+> ''Every m-of-n scheme in the entire public-CA and root-zone world is SECRET SHARING — Shamir-style reconstruction — not threshold signing.''
+
+* ''WebTrust'' defines m-of-n in terms of //"key shareholders"// and //"key shares"// — reconstruction. §4.4.1 requires //"multi-party control (i.e., m of n) with a minimum value of m (e.g., m greater than 2 for Root CAs)."//
+* ''Entrust nShield'', the dominant CA HSM: recovery keys are //"split among the cards in the ACS using the same K/N mechanism as for an OCS"//, and with K cards a module can //"**re-create all the keys** stored on the device."//
+* ''IANA'': 7 shares of one Storage Master Key, reassembled inside an HSM.
+
+⚠ ''The nShield warning that reads straight onto a 2-of-3:'' //"We do not recommend creating card sets in which **K is equal to N** because an error on one card would render the whole card set unusable."// A hard cliff below K.
+
+!!! The inversion — and it is the whole ruling
+
+> In every one of these systems the key is ''materialized in one place at activation time'', and the quorum is ''a lock on the box, not a distributed signing protocol''. ICANN's April 2020 workaround — ''four TCRs couriering their credentials to staff surrogates'' — is only possible //because// the shares are transferable bearer secrets. ''Under threshold signing it would be meaningless.''
+>
+> ''Secret sharing degrades gracefully under a pandemic precisely because it can be subverted by courier. Threshold signing cannot be couriered, and therefore cannot bend.''
+
+''Fork A's assembled secret is simultaneously its worst security property and its best availability property. They are the same property.'' Fork B's guarantee that no secret ever reconstructs is equally a guarantee that ''no guardian can ever delegate, courier, or improvise their way through a crisis'' — the guardian signs personally or the rotation does not happen.
+
+<<~/ahu >>
+
+<<~ ahu #the-counterweight >>
+
+!! ⚠ And the counterweight — Fork B carries a risk the in-house framing also missed
+
+The courier finding cuts toward A. This cuts back:
+
+> Independent-signature quorums are a ''DESTRUCTION'' quorum, not merely an impersonation quorum — closable, but ''only by making the rotation body canonically derived''.
+
+Read plainly: where a recovery authority ''reconstructs'', a rogue sub-quorum can impersonate. Where it ''attests independently'', a rogue sub-quorum can also ''emit a rotation nobody intended and leave the identifier somewhere its holder never chose'' — and unless the rotation body is derived canonically rather than proposed, there is nothing for the honest guardians' signatures to disagree WITH.
+
+''So neither branch is the safe one.'' A prices a transient assembly; B prices a rogue rotation. The mitigation named — canonical derivation of the body — is small, specific, and belongs in whichever branch is taken.
+
+<<~/ahu >>
+
+<<~ ahu #the-third-axis >>
+
+!! ⚠ The axis that dominates the one we asked about
+
+> Under KERI's own rules, ''a non-delegated rotation cannot supersede another rotation'' — so whichever fork you take, ''a compromise of the recovery authority is terminal unless the identifier is DELEGATED''. That is a third axis, and on severity it dominates the one you asked about.
+
+This changes the SHAPE of the decision rather than answering it: the fork prices the recovery authority's transient exposure, and delegation decides whether that exposure is ''recoverable at all''.
+
+<<~/ahu >>
+
+<<~ ahu #what-actually-fails >>
+
+!! What actually fails — nineteen measured cases, and none of them is the fork
+
+> Across five research streams, ''not one documented failure in the entire public record turned on Shamir-versus-multisig.''
+
+They turned on, every time:
+
+* ''quorum counts that were not counts of distinct signers'' — four sightings, one a recurrence in the same library six years later;
+* ''custody correlated in ways nobody re-checked'' — Ronin's 5-of-9 that was 1-of-1, Loopring's guardians-of-guardians, FNMT's access codes stored beside the HSM;
+* ''ceremonies whose script and reality diverged undetected'' for six months to six years;
+* ''guardians who forgot, went dark, or folded to a warm phone call'';
+* ''vendors who left''.
+
+!!! The dominant public-CA failure mode
+
+''Not lost quorum — the script and the executed reality diverging, undetected, for months.''
+
+|!CA |!what went wrong |
+|''IdenTrust'' 2024 |generated a ''self-signed ROOT'' meaning an intermediate — //"a PKI operator entered the wrong command parameter"// and //"the ceremony witness missed noticing the invocation of the wrong command."// ''Fix: split the tool into two binaries so the wrong object type is not selectable'' |
+|''SecureTrust'' 2020 |the ceremony ''video recorder failed''; the recording was unrecoverable. ''All 7 intermediates revoked.'' The ceremony was fine; the PROOF was not |
+|''SwissSign'' 2018 |the field //"had been set correctly in the key ceremony protocol"// and was mistyped in the GUI, then copy-pasted across five more CAs. ''~17 months undetected'' |
+|''iTrusChina'' |root ceremony held 2018 with ''no Key Generation Ceremony audit report at all'' — //"due to our inexperience."// ''Six years undetected'', found by a root program rather than an auditor |
+|''Let's Encrypt'' 2026 |''three non-compliant cross-certificates'' from a root ceremony, reported by a third party ~8 months later. //"compliance review fatigue"//. ''The CA with the best ceremony tooling in the industry still emitted three defective CA certs'' |
+|''DigiCert'' 2020 |a banned SHA-1 intermediate created in ceremony — linters //"evaluate the individual certificate being signed"//, ''never the signer/signee relationship'' |
+
+''And the offline root whose failure mode was the keyboard'' (single-source, unverified): a root-CA laptop //"sitting in a safe for five years undisturbed had its 1 key on the keyboard go bad"// — and both split-knowledge password halves contained a "1".
+
+!!! Golden principles, each earned by an incident
+
+* ''Make the wrong operation UNSELECTABLE, not merely discouraged.''
+* ''Lint the test artifacts generated with the identical production settings, INSIDE the ceremony.''
+* ''Fold compliance sign-off into the ceremony script itself.''
+* ''Losing the EVIDENCE is as fatal as losing the key'' — seven intermediates revoked over a dead camcorder.
+* ''Publish rehearsal artifacts in advance'' — `letsencrypt/ceremony-demos` predates the ceremony it rehearses.
+
+<<~/ahu >>
+
+<<~ ahu #the-archives >>
+
+!! The distro archives ~ nobody does threshold signing, and one project lost its key
+
+> ''Nobody does threshold SIGNING.'' Every archive is signed by one online key. Where m-of-n appears it is in one of two adjacent places — ''RECOVERING'' a lost secret (Debian 3-of-5), or ''ADMITTING'' a key to the trust set (Debian 2 DDs, kernel.org 2 account holders, Arch 3 master keys).
+
+* ''Debian'' — single online key on a YubiKey, ''PIN in a file beside it''. Recovery is Shamir 3-of-5; ''revocation is 1-of-5''. ⚠ ''The asymmetry is worth stealing: destroying trust is cheap and restoring it is expensive.'' Any single designated revoker can kill the archive key; it takes three to bring one back.
+* ''kernel.org'' — ''no archive key at all''. The web of trust IS the recovery mechanism: ≥2 existing-member signatures re-admit a re-keyed developer. Its governing principle: //"trust must always be placed with developers and never with the code hosting infrastructure."// The 2011 recovery required ''in-person'' signatures.
+* ''Kali'' — ''they lost it''. Key created 2012, never rotated, access lost 2025; ''every installation on earth fails `apt update`'' until the user manually fetches the new keyring. The whole cryptographic bridge was developers' personal keys signing the new key on a public keyserver. Precedent at the same project: they let the key ''expire by accident'' in 2018.
+
+!!! Fedora ⊥ Red Hat, August 2008 — one intrusion, opposite calls
+
+''Fedora'' was saved by ICANN-style split custody — //"the passphrase was not used during the time of the intrusion and is not stored on any of the Fedora servers"// — ''and rotated anyway'', because packages travel through third-party mirrors. Nine steps, ~5 weeks, ~3.5 of them with no updates at all, every package re-signed. ''Red Hat'', facing attackers who had signed real packages with a real key, ''did not rotate'' — it shipped a blacklist.
+
+⚠ ''The bootstrap trick:'' Fedora's transitional RPMs were signed by the ''OLD'' key. The compromised-adjacent key was used one last time to establish trust in its successor. Both promised post-mortems were never published; kernel.org's promise was quietly deleted from the site.
+
+<<~/ahu >>
+
+<<~ ahu #the-negative-results >>
+
+!! The negative results ~ load-bearing
+
+* ''No public-CA incident of lost activation shares, a lost HSM quorum card set, or an unreachable keyholder causing an inability to sign.'' Searched by phrase across the whole CA program. ⚠ ''Best read: this class happens and is only REPORTABLE if it causes a missed CRL or a misissuance'', so it is systematically absent from the record. Kali and the keyboard are the same failure surfacing where no root program compels disclosure.
+* ''The only real quorum-unavailability event in public PKI is ICANN Ceremony 41''; the only physical lockout is Ceremony 40 — the safe was ''drilled'', it took ~20 hours, and //"drilling is, in fact, the manufacturer-indicated method."// ''Three key-holders sat on site for days'', because the ceremony could not proceed without them.
+* ''No incident of a CA ACCIDENTALLY destroying or bricking a root key'' — only deliberate, audited destructions.
+* ''The 5-of-7 IANA shares went ~14 years untested.'' The unreachable-holder scenario IS written down (KSK Key Management Procedure §6.8, ending //"the recovery key shares should be considered lost"//) — ''contemplated, never walked''.
+
+<<~/ahu >>
+
+<<~ ahu #how-far-to-trust-this >>
+
+!! How far to trust this sweep
+
+* ''Four claims were corrected in place mid-sweep'', by the spirit against itself — including a material error in the social-recovery figures and a wrong claim that ICANN never wrote down the unavailable-shareholder case. ''A report that corrects itself twice is worth more than one that never does''; read the corrections as the instrument working.
+* ''The search budget was exhausted at the first call and general engines were bot-walled.'' Primary documents and academic PDFs were reached and read in full; ''forum evidence and removed pre-2020 pages were not''. So absence of a finding here reads weaker than presence of one.
+* ''Thirteen negative results'' are listed, and two carry weight on their own: ''no wallet vendor has ever published a recovery success rate'', and no public-CA record of an unreachable keyholder blocking a signature.
+* ''No fork is recommended, deliberately.'' Where the evidence points in opposite directions — the courier property, the strict-versus-relaxed threshold question — both sides stand.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-recovery-keel >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;pCdNHNxfvf5aVKTeKhCc9cl0sydYYQ-1djUd5SLza7Y
+
+<<^ code="&#x0004;" -> to=? >>

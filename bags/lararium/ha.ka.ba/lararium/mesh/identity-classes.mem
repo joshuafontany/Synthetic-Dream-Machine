@@ -419,12 +419,34 @@ verified against the pre-committed set. ''No secret ever reconstructs — the st
   a card"); the rotation event carries k separate signatures. This reads the FROST/TSS direction
   recovery-core already gestures at ("the seed then never assembles").
 
+!!! ⚠ What the outside sweep changed about this fork (2026-09-03)
+
+A tasked spirit read the field (`docs/pono/recovery-custody-scout` carries it verbatim). Three findings move this section, and none of them picks the fork:
+
+* ''EVERY civic-scale m-of-n in the world is SECRET SHARING'' — WebTrust defines it in //key shareholders// and //key shares//, the dominant CA HSM //re-creates// keys from K cards, IANA reassembles inside an HSM. ''Fork A is the shape the whole field runs''; Fork B has no civic-scale precedent to inherit.
+* ''THE INVERSION.'' Fork A's assembled secret is a bearer token — courierable, delegable, improvisable — and that is ''simultaneously its worst security property and its best availability property''. ICANN held a key ceremony during a pandemic only because four key-holders could ''courier their credentials to surrogates''; under threshold signing that move is meaningless. ''Fork B cannot bend in either direction.''
+* ''AND THE COUNTERWEIGHT.'' Independent-signature quorums are a ''DESTRUCTION quorum'', not merely an impersonation one: a rogue sub-quorum can emit a rotation nobody intended. Closable — but ''only by deriving the rotation body canonically'' rather than proposing it, and that mitigation belongs in whichever branch is taken.
+
+⚠ ''Nothing in the public record turns on Shamir-versus-multisig.'' Every documented failure across the sweep turned on quorum counts that were not counts of distinct signers, correlated custody nobody re-checked, ceremony scripts diverging from reality undetected for months to years, guardians who forgot or folded, and vendors who left. ''The fork prices a risk the field has never been bitten by; the risks that bite are orthogonal to it.''
+
 <<~ confidence 14/20 >> ''Both satisfy the ruling'' — neither resurrects the operational
 key; that part settled. The fork decides ONLY whether the RECOVERY authority itself ever briefly
 materializes as one secret. The guardian-CARD survives either way — Fork A's card carries a share of the
 recovery root; Fork B's card carries a guardian's recovery public key + a signing prompt. The operator
 picks the axis: ''maximal reuse + a shrunk single-secret window (A)'' vs ''zero single-secret + new
 multisig machinery and heavier guardian onboarding (B)''.
+
+<<~/ahu >>
+
+<<~ ahu #the-delegation-axis >>
+
+!! ⚠ The axis that dominates the fork ~ delegation
+
+> Under KERI's own rules, ''a non-delegated rotation cannot supersede another rotation''. So whichever fork is taken, ''a compromise of the recovery authority is TERMINAL unless the identifier is delegated''.
+
+This is orthogonal to A-versus-B and larger in severity than either. The fork prices how briefly the recovery authority is exposed; ''delegation decides whether that exposure is survivable at all''. A recovery keel settled on the fork and silent on delegation has answered the smaller question.
+
+<<~ confidence 12/20 >> Surfaced by the outside sweep (`docs/pono/recovery-custody-scout#the-third-axis`) and ''not yet traced against our own KEL'' — whether our persona-KEL identifiers are delegated, and what delegating them would cost, stands unmeasured.
 
 <<~/ahu >>
 
@@ -475,6 +497,6 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;J5ZUEwHiUMExq4vLfH4MB6z-D0-eiFlToNm5JKmrbCg
+<<^ code="&#x0003;" >>ni:///sha-256;hrmEwoeEVAWgEjcgJzVTBrovBQFTv__ix8j8YVEao_M
 
 <<^ code="&#x0004;" -> to=? >>
