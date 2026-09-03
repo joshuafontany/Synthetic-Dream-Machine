@@ -10,7 +10,7 @@ manao     = 16
 manaoio   = 13
 register  = "Synthesis-Canon"
 retain    = false
-role      = "docs sister for the canon boundary — crossing examples, event shape, and review pressure"
+role      = "docs sister for the canon boundary — crossing examples, event shape, review pressure, and THE PROMOTION BOUNDARY: copy-up is free, promotion-down is the kahu-cabal act; the cap gate holds the line and the proposal/receipt record does not yet exist"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/canon-boundary"
@@ -53,6 +53,39 @@ Without that crossing, the system cannot tell the difference between:
 * an operator-confirmed canon change
 
 The boundary keeps all five available without collapsing them.
+
+<<~/ahu >>
+
+<<~ ahu #the-promotion-boundary >>
+
+!! The promotion boundary ~ who may cross, and in which direction
+
+''Folded here 2026-09-02 from the multiplayer-canvas constitution, whose surface was superseded and whose doctrine is surface-invariant.'' The crossing model above says a crossing must be explicit. This says ''who makes it''.
+
+!!! Two layers, and only one is canon
+
+* ''CANON LAYER'' — `lares/` carrier files, git-trackable, hostless `lar:///…` addresses.
+* ''LIVE LAYER'' — the CRDT records materialized into TW5 and projected onto a camera. ''This layer MAY diverge locally and offline and sync later.'' Divergence is its correct behaviour, never a fault.
+
+!!! The direction is the whole rule
+
+''COPY-UP IS FREE. PROMOTION-DOWN IS THE PRIESTHOOD'S ACT.'' (operator ruling) A user may copy and alter a public tiddler into a more private bag — a personal shadow copy — and that path MUST stay cheap; the recipe stack runs on it. Moving in the other direction, from any private bag into canon, belongs to the ''kahu-cabal signers''.
+
+The stack order makes //down// literal: ''core < canon < wiki < user < session''. Canon sits low; a shadow copy rises; a promotion descends. Canon mounts ''read-only'', so an edit seen through it copies UP by overlayfs semantics — structural, not a name check.
+
+!!! What stands today, and what does not
+
+✓ ''The cap gate holds the line.'' Every residency verb demands `cap("admin", destBag)`, so a promotion into a canon bag is reached only by a holder of admin on it. ''Kahu = whoever holds admin on the lares/lararium canon bags'' — kahu-priest caps, held distinctly from lamplighter (infrastructure) caps even where one cabal carries both.
+
+⚠ ''THE RECORD IS MISSING, and it is the declared blocker.'' `tiddler-store` states it: //canon promotion is disabled until a Keyhive-backed proposal/receipt graph exists; `store.put()` never writes to `lares/`//. So promotion is PERMITTED by capability and RECORDED by nothing. A cap gate is a decision at a moment; ''a receipt is a record you can walk backwards'', and without one a promotion leaves no artifact to audit or revoke against. ''The receipt is the audit half of the priesthood act.''
+
+⚠ ''The source side is loose on the residency path.'' Canon's read-only mount does not protect it there — a residency MOVE/COPY reaches the bag's own doc and mounts nothing, so only the destination check applies. `crossingDirection` holds the full rule with `needsCabal`, and `VerbContext` carries `daemon`, `invocation`, `cap` and ''nothing that answers a bag's publicity tier''. The reader exists one package over (`bagManifest` parses `cap-tier`); the gap is the injection.
+
+!!! The shape the receipt should take
+
+''A receipt is content-level provenance, not an authority record.'' A capability delegation says //who may write canon//, which the cap gate already answers. What is missing is ''what was promoted, by whom, from where'' — proposer, approver, source, destination, content hash — signed, with membership checked at the time of signing (`verifySentinelMembership`, which now stands).
+
+⚠ And it wants the ''signed-region vs attached-region'' discipline: what the signer ASSERTS rides inside the signature; what ''the world can check'' — chains, memberships, freshness — rides attached and unsigned, so refreshing evidence never wakes a cold key. //Signing evidence causes freshness coupling and pins staleness.//
 
 <<~/ahu >>
 
@@ -135,6 +168,6 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;p5xsZL5dEHWxjq8itLG-iLyqPdva7K8glNDcQWCRNpo
+<<^ code="&#x0003;" >>ni:///sha-256;4TVEK4WWKGEZLcR0WDzN16yPg6FTXfa4NQbeESlIW10
 
 <<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,107 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-shell-ux >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/canvas-shell-ux.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 15
+manao             = 15
+manaoio           = 14
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Synthesis-Canon"
+retain            = true
+role              = "canvas-shell-ux — the shell doctrine for the canvas camera: the canvas is PRIMARY and chrome wraps it without blocking it. Migrated 2026-09-02 out of the superseded multiplayer-canvas constitution and evergreened off its retired surface. Carries the pointer-events discipline, the iOS visual-viewport tracking that a fixed header needs, and the native-scroller answer to one-finger pan."
+revised-on        = "2026-09-02"
+tags              = ["api/pono/meme"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shell-ux"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Canvas Shell UX ~ the canvas is primary, the chrome wraps it
+
+''Migrated from the multiplayer-canvas constitution and evergreened.'' The research stands; the surface it was written against does not (#/wikispace-canvasspace-ontology, the surface correction). Nothing here names a vendor, because ''nothing here depends on one''.
+
+''THE CORE LAW: the canvas is primary; UI wraps around it and never blocks it.''
+
+The reference implementation studied is ''Kinopio'' (`kinopio.club`, Vue 3, open source, community-funded) — and a later field survey found the same house independently, as ''one of the category's few survivors'' and one of only two credible touch-first spatial tools. Two arrivals at one door is the cheapest evidence available that a design is load-bearing rather than a taste.
+
+<<~/ahu >>
+
+<<~ ahu #pointer-events >>
+
+!! The pointer-events discipline
+
+Chrome sits at ''fixed viewport corners'' with `position: fixed; pointer-events: none`, and interaction is re-enabled ''only on the child controls that need it''. The canvas fills 100% of the viewport ''beneath'' it.
+
+''Why this rather than a layout that reserves space:'' a shell that reserves space makes the canvas smaller, and on a small viewport the canvas is the scarce resource — measured elsewhere, an overview panel on a phone ''costs time and buys no preference'', because a larger detail view outweighs what the panel provides. Chrome that floats costs nothing but the pixels under it.
+
+⚠ ''A canvas-mode toggle must exist.'' Dimming the shell (`opacity` down, `pointer-events: none`) and restoring the drawing surface's own tools is a mode, not a preference — freeform drawing and structured arrangement want different chrome, and a shell that cannot get out of the way will be fought.
+
+<<~/ahu >>
+
+<<~ ahu #the-ios-viewport >>
+
+!! ⚠ The iOS visual viewport ~ a fixed header is not fixed
+
+''On iOS the software keyboard and pinch-zoom shrink the VISUAL viewport while leaving the LAYOUT viewport — and CSS `dvh` — unchanged.'' A `position: fixed` header therefore drifts off-screen or floats mid-canvas exactly when a user is typing or zooming.
+
+The studied answer is to ''reposition the chrome against `visualViewport` on a frame cadence'' rather than trusting `fixed`. Android Chrome does not exhibit the same behaviour, so this is a platform branch and not a general rule.
+
+⚠ Two adjacent traps, both measured and both live at WebKit:
+* ''Scroll events fire only when scrolling FINISHES'' on iOS, so the keyboard's animation cannot be tracked — only its endpoints.
+* ''An input with `font-size` under 16px makes iOS Safari zoom the page on focus.'' Set 16px minimum on every focusable control, or the camera moves ''because the user touched a text field''.
+
+<<~/ahu >>
+
+<<~ ahu #one-finger-pan >>
+
+!! One-finger pan ~ let the browser do it
+
+''The single most valuable structural borrowing.'' Render the space as a ''real, page-sized DOM element'' and let the browser's ''native scroller'' perform one-finger pan. Momentum, rubber-banding and compositor-thread scrolling all arrive free, and none of them has to be reimplemented in JavaScript on the main thread.
+
+''What it buys, measured against the alternative:'' the category's most-reported mobile blocker is that a user must switch tools to navigate and switch back to draw. A canvas that pans by native scroll never asks. Selection moves to long-press; two-finger tap and three-finger tap take undo and redo, matching the platform convention rather than inventing one.
+
+⚠ ''This composes with the pointer-events discipline and NOT with a rasterised surface.'' A real DOM element under a real scroller is available only to a DOM-hosting camera — one more consequence of #/wikispace-canvasspace-ontology's surface correction, arriving from the mobile side.
+
+<<~/ahu >>
+
+<<~ ahu #layout >>
+
+!! The layout, surface-invariant
+
+```
+┌─ viewport (100vw × 100vh) ─────────────────────────────────┐
+│  ┌─ HEADER  position:fixed  pointer-events:none ─────────┐ │
+│  │  place · presence · share                             │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                                                            │
+│  ┌─ CANVAS CAMERA  fills viewport, pans, zooms ──────────┐ │
+│  │  meme frames · pranala wires · ahu boxes              │ │
+│  │  portals · drop zones                                 │ │
+│  │  remote cursors — canvas-relative, move with pan/zoom │ │
+│  └───────────────────────────────────────────────────────┘ │
+│                                                            │
+│  ┌─ FOOTER  position:fixed ──────────────────────────────┐ │
+│  │  zoom% · place id · count · standing badge            │ │
+│  └───────────────────────────────────────────────────────┘ │
+└────────────────────────────────────────────────────────────┘
+```
+
+''Remote cursors are canvas-relative, never viewport-relative'' — they move with pan and zoom because they mark a place in the space, not a place on the glass.
+
+<<~/ahu >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;6hY0d6l6qNPboVgq6Q2-THBMLcSmIpHCANbLoTd_8cs
+
+<<^ code="&#x0004;" -> to=? >>
