@@ -32,12 +32,14 @@ uri-path   = "lares_research/research-streams/lararium/MULTIPLAYER-INFINITE-CANV
 |`#views` |✓ MIGRATED |`docs/pono/wikispace-canvasspace-ontology#semantic-zoom` |
 |`#kinopio-ux-model` |✓ MIGRATED |`docs/pono/canvas-shell-ux` |
 |`#room-model` |✓ RESOLVED |its "is not" laws are held by `wikispace-canvasspace-ontology#model-view-boundary` (view-state as its own entity; a meme MUST NOT carry canvas coordinates) and `#graph-primacy`. The live `tw5/canvas/rooms` is a REGISTRY and covers something else — a shared word, not shared content |
-|`#trust-grants` |▢ NEEDS A HOME |room-model extended; unread |
+|`#trust-grants`, `#trust-tiers` |✗ SUPERSEDED |an `anon/user/operator/admin` ladder ''fuses axes the canon holds apart'' — the read-cap chain (`mesh/cap-tier`: VEIL⊂PERSONAGROUP⊂CONTRACT⊂PUBLIC, ONE axis, answering WHO READS and nothing else), standing — itself two things (`api/pono/identity-enacts-relation`: accrued `kūlana` ⊥ standing-to-object) — and capability-to-act. Four rows made from four axes leaves every row over-determined and none of them checkable. Nothing to migrate: each row is expressible on those axes, and no row carries a fact they lack |
 |`#causal-islands` |✗ SURFACE-BOUND |NOT the causal-island doctrine — room reseeding, content-addressed room keys, a vendor store's IndexedDB adapter. The live `api/pono/causal-islands` is invariant law and a different thing. ''One keeper extracted'': dual-load → `docs/pono/canvas-shell-ux#dual-load` |
 |`#lar-uri-assignment` |✓ RESOLVED |`api/pono/lar-uri` holds the canon; the section's portal-shape record is vendor-typed and dies with the surface |
 |`#platform-targets` |✓ RESOLVED |`lararium/api/camera-mount` carries the platform table |
 |`#meme-store-substrate` |▢ NEEDS A HOME |''no live home found'' — `meme-store` / `AutomergeMemeStore` appear nowhere in live canon. Either migrate or rule it superseded by the composite store |
-|`#seeding`, `#hidden-skeleton`, `#write-back-architecture`, `#trust-tiers`, `#ux-shell`, `#theme-system`, `#deployment`, `#mcp-surface`, `#open-questions` |▢ NEEDS A HOME |unassigned — read each before deletion |
+|`#hidden-skeleton` |✓ MIGRATED |the law under the vendor detail — containment is a graph fact, never the render tree's parent pointer — now `docs/pono/wikispace-canvasspace-ontology#ownership-is-a-graph-fact`. The shape counts and opacity table die with the surface |
+|`#seeding` |✗ SURFACE-BOUND |the M10 opening path: reseed routes, a legacy SQLite room, boot-receipt meta tags. Its one durable line — disk write → watcher → CRDT patch → browser → wiki change — is `lararium/docs/disk-projection-law` and `api/pono/vm-projection-bus` |
+|`#write-back-architecture`, `#ux-shell`, `#theme-system`, `#deployment`, `#mcp-surface`, `#open-questions` |▢ NEEDS A HOME |unassigned — read each before deletion |
 |`#tldraw-template-model` |✗ SURFACE-BOUND |dies with the surface; nothing to migrate |
 
 ⚠ ''DO NOT DELETE while any row reads CHECK or NEEDS A HOME.'' Deleting early does not lose the bytes — git holds them — but it loses the keeper from the ''memegraph'', which is the entire purpose of the drain.
@@ -1290,6 +1292,6 @@ Phase 5 — long-lived actor runtime for edge islands
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;cuPLAENH4QkEbKziZjj2Sk_QOB5FfZWg8BfNALQF6K8
+<<^ code="&#x0003;" >>ni:///sha-256;sk2ILkULagnj6HtEUOKi-4UsUwr3DFQ5YCIzhNsXXQ4
 
 <<^ code="&#x0004;" -> to=? >>

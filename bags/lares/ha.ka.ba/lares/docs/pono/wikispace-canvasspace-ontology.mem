@@ -140,6 +140,23 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 <<~/ahu >>
 
+<<~ ahu #ownership-is-a-graph-fact >>
+
+!! Containment is a graph fact ~ never the surface's parent hierarchy
+
+A meme owns its blocks, and a block owns its ports. ''That containment is a queryable relation in the model, and it is NOT the render tree's parent pointer.'' A camera reads the relation; it never authors it.
+
+''The reason this must be stated rather than assumed:'' at coarse level-of-detail a meme's frame shrinks toward a label, while the blocks it owns keep their own extent and ''leave the parent's visible bounds''. A surface that answers "what does this contain?" by asking its own tree then reports children that no longer look contained — and a drag that crosses those bounds ''reparents'' by the surface's rules rather than the model's. The containment relation stays true through every zoom because it never depended on the drawing.
+
+* the relation is ''explicit'' — a `control:owns` edge in the model, distinguished from a semantic `pranala` edge by kind, never by appearance
+* it is ''structural, not cosmetic'' — no hand drags it; a camera may render it at zero opacity and it still holds
+* a template asks ''"what blocks does this meme own?"'' of the graph, and gets the same answer at every level of detail
+* it is the model-side analogue of the widget tree: the render pass walks OWNERSHIP to find its targets, ''never'' the surface's own hierarchy
+
+⚠ A surface whose containment IS its render tree has fused the two halves of `#model-view-boundary` in the one place the fusion looks harmless — and the break only shows at the zoom where the rendering stops agreeing with the model.
+
+<<~/ahu >>
+
 <<~ ahu #family-classification >>
 
 !! The Nine Families by Surface
@@ -218,6 +235,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;RNi-35P2XcJVmjt0JPNlHeOghX7nCyryrCUzZcAHouU
+<<^ code="&#x0003;" >>ni:///sha-256;FDirfFnwKu0H4_rKUHMbpIs1R8bWG5aWz22_kmqzmS8
 
 <<^ code="&#x0004;" -> to=? >>
