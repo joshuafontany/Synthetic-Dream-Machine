@@ -144,8 +144,17 @@ jobs:
         run: ~/.venv/bin/python3 -c "import mempalace; print('holder ok')"
       - name: Install Playwright Chromium (browser-vessel suite)
         run: pnpm exec playwright install --with-deps chromium
+      # ONE SERIALIZATION, BOTH PLACES. The root `test` script pins `--workspace-concurrency=1`
+      # because packages share a build tree and a rendezvous directory; running them in parallel
+      # measures a different repository than the one an operator measures locally, and its flakes
+      # are unreproducible by construction.
       - name: Run all package suites
-        run: pnpm -r test
+        run: pnpm test
+      # THE WITNESS FLEET RAN NOWHERE IN CI. Twenty-five witnesses stand in `tools/`, and this
+      # workflow reached exactly one of them — so every carrier, coordinate, parity and rite gate
+      # was an operator's local habit rather than a branch's floor.
+      - name: Witness fleet
+        run: pnpm witness
 
   # ─── e2e (residency / ingest witnesses) ────────────────────────────────────
   e2e:
@@ -238,6 +247,12 @@ jobs:
       - name: fold + golden manifest gates (py host)
         working-directory: packages/tree-sitter-memetic-wikitext
         run: pnpm run gate:fold
+      # TWO HOSTS, TWO GATES. `gates` chains all three with `&&`; this job named two of them and the
+      # TS host's fold + parity ran nowhere. Kept as its own step rather than folded into the chain,
+      # so a red in the py host cannot hide a red here.
+      - name: fold + parity gates (ts host)
+        working-directory: packages/tree-sitter-memetic-wikitext
+        run: pnpm run gate:fold-ts
       - name: wasm builds under the pinned CLI
         working-directory: packages/tree-sitter-memetic-wikitext
         run: pnpm run build:wasm
