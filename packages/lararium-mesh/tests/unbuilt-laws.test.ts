@@ -169,14 +169,19 @@ describe("⑤ the outward gate", () => {
 // the body that keeps it." So a board per Nexus is CORRECT, and a founder deriving its own board
 // from its own key is correct with it.
 //
-// THE CONSEQUENCE IS UNBUILT. A vessel that JOINS Nexus A must read A's board — and a node has no
-// path to any key but its own (`nexusPubkey: vesselIdentity.verifyingKey`, seven sites). The BROWSER
-// leaf already does the other thing: `const nexusPubkey = relayGatePubKey`, gated on
-// `admittedToNexus`. And the key is already handed over out of band — `lares herm` prints the dial
-// URL(s) AND the gate pubkey "to hand a hearth". The node never stores or reads it.
+// ⚠ THE GRAIN IS THE WHOLE POINT, and today's node has the wrong one. Deriving the board from the
+// vessel's own key yields ONE BOARD PER VESSEL; the law says one per NEXUS. Those coincide for a
+// founder and diverge for everyone else, so the defect is invisible in a fleet of one and structural
+// in a community. A vessel does one of two things (operator ruling, 2026-09-03): it FOUNDS a Nexus,
+// and its key names that Nexus; or it JOINS one, and adopts that Nexus's key. Standing up a fresh
+// Nexus rather than joining a local civic one stays a LAWFUL CHOICE — it is simply a choice, and
+// right now every vessel makes it by accident on every boot.
 //
-// So this is not a design question. It is a settled design with one leg unwalked, and the shape of
-// the fix is visible in the sibling vessel that walks it.
+// THE LEG IS UNWALKED, not undesigned. A node has no path to any key but its own
+// (`nexusPubkey: vesselIdentity.verifyingKey`, seven sites). The BROWSER leaf already walks it:
+// `const nexusPubkey = relayGatePubKey`, gated on `admittedToNexus`. And the key already travels —
+// `lares herm` prints the dial URL(s) AND the gate pubkey "to hand a hearth". Nothing on the
+// receiving side keeps it.
 describe("⑧ a joined vessel reads its Nexus's board", () => {
   test("the board is derived from a key, so adopting a Nexus is adopting its key", () => {
     // Not a gap — the derivation is total and pure, which is what makes the adoption a one-value
@@ -187,7 +192,7 @@ describe("⑧ a joined vessel reads its Nexus's board", () => {
     expect(mesh.crossroadsDocUrl("0x" + "aa".repeat(32))).toBe(a);
   });
 
-  test.skip("A NODE ADOPTS ITS NEXUS'S KEY WHEN IT JOINS ONE — DEFERRED: `open-node-vessel` binds nexusPubkey to vesselIdentity.verifyingKey at seven sites with no alternative path, so a node admitted to a foreign Nexus still materializes a board derived from ITSELF. The browser leaf takes relayGatePubKey gated on admittedToNexus; the node has no equivalent, and `device-admit` carries a hearthDaemonUrl and no nexus key because it admits a DEVICE to a fleet rather than a vessel to a Nexus", () => {
+  test.skip("A NODE THAT JOINS A NEXUS READS THAT NEXUS'S BOARD, NOT ITS OWN — DEFERRED: `open-node-vessel` binds nexusPubkey to vesselIdentity.verifyingKey at seven sites with no alternative path, so a node admitted to a foreign Nexus still materializes a board derived from ITSELF. The browser leaf takes relayGatePubKey gated on admittedToNexus; the node has no equivalent, and `device-admit` carries a hearthDaemonUrl and no nexus key because it admits a DEVICE to a fleet rather than a vessel to a Nexus", () => {
     expect(Object.keys(mesh)).toContain("adoptedNexusPubkey");
   });
 
