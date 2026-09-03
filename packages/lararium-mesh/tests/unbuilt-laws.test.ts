@@ -28,6 +28,7 @@ import * as mesh from "../src/index.js";
 import { realmFeedSlotUri, realmFeedPrefix } from "../src/cabal-realm.js";
 import { cabalRealmMaintenanceProvenance, realmFeedSlotValue } from "../src/cabal-realm-clock.js";
 import { crossingDirection } from "../src/crossing-direction.js";
+import { resolveDiskMirrors } from "../src/vessel-island-pool-core.js";
 import { nexusPhase } from "../src/nexus-phase.js";
 
 const REALM_A = "0x" + "aa".repeat(32);
@@ -204,8 +205,20 @@ describe("⑦ the daemon wiki, held to the laws every other wiki obeys", () => {
     expect(Object.keys(mesh)).toContain("attachWorkingLayerLive");
   });
 
-  test.skip("THE CONTROL PLANE STAYS OFF THE MIRROR WHEN THE WORKING LAYER ARRIVES — DEFERRED: the daemon bag carries verb tiddlers, outcomes, flows and binding records, and mirroring it would put the control plane on the operator's tracked tree. The mirror must follow the WORKING layer and not the bag beneath it, which is a distinction no current mirror config can express — mirrorBags names bags, and here two coordinates of one wiki need opposite answers", () => {
-    expect(Object.keys(mesh)).toContain("attachWorkingLayerLive");
+  // THE MIRROR CAN ALREADY TELL THEM APART, which a first reading of this section denied.
+  // `resolveDiskMirrors` resolves a `wikiSlot` grant (working → bag `wikis/{slug}/working`, disk
+  // `wikis/{slug}`) separately from a `selfCanon` grant (`bags/{slug}` → disk `bags/{slug}`), so a
+  // recipe may designate the daemon's working layer for disk WITHOUT designating the bag beneath it.
+  // The control plane — verb tiddlers, outcomes, flows, binding records — stays off the operator's
+  // tracked tree by designating one and not the other, and no new mechanism is owed.
+  test("the mirror resolver already separates a wiki's working slot from its canon bag", () => {
+    const grant = [
+      { bagId: "", mirrorRoot: "wikis", wikiSlot: "working" as const },
+      { bagId: "", mirrorRoot: "bags",  selfCanon: true },
+    ];
+    const workingOnly = resolveDiskMirrors(grant, [mesh.wikiSlotUri("daemon", "working")], "daemon");
+    expect(workingOnly.map((g) => g.bagId)).toEqual([mesh.wikiSlotUri("daemon", "working")]);
+    expect(workingOnly[0]?.mirrorRoot).toBe("wikis/daemon");
   });
 });
 
