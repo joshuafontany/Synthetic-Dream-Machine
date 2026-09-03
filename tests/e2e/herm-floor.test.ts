@@ -27,6 +27,23 @@ import { mkdtempSync, rmSync, existsSync, readdirSync, statSync, readFileSync } 
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync, spawn } from "node:child_process";
+import { rendezvousPath } from "../../packages/lararium-mesh/src/rendezvous-path.js";
+
+/**
+ * The herm's rendezvous — DERIVED from its root, never hunted under it.
+ *
+ * A walk for a file named `lares.sock` beneath the root found nothing, because the rendezvous stands
+ * at `/tmp/lares-<uid>/<root-digest>.sock` — a fixed 40 bytes however deep a root runs. Three vectors
+ * then read a floor that never answered as a floor that refused, which is the opposite verdict.
+ * `invokeLocal` re-derives the socket from the root it is handed, so the ROOT is what to hand it.
+ */
+function substrateDir(r: string): string { return join(r, "data", "lares", "vessel"); }
+function rendezvousFor(r: string): string {
+  // The digest is over the SUBSTRATE dir (`<root>/data/lares/vessel`), which is what `larDataDir()`
+  // resolves to and what `local-connector` hashes. Hashing the bare root names a socket nothing binds.
+  return rendezvousPath({ root: substrateDir(r), uid: process.getuid?.() ?? 0 });
+}
+function sockStands(r: string): boolean { return existsSync(rendezvousFor(r)); }
 
 const REPO = new URL("../..", import.meta.url).pathname;
 const CLI  = join(REPO, "packages/lares-cli/dist/src/bin/lares.js");
@@ -66,16 +83,6 @@ async function stopVessel(): Promise<void> {
   }
 }
 
-function findSock(dir: string, depth = 5): string | null {
-  if (depth < 0 || !existsSync(dir)) return null;
-  for (const n of readdirSync(dir)) {
-    const p = join(dir, n);
-    if (n === "lares.sock") return dir;
-    let d = false; try { d = statSync(p).isDirectory(); } catch { d = false; }
-    if (d) { const hit = findSock(p, depth - 1); if (hit) return hit; }
-  }
-  return null;
-}
 
 /**
  * Stand the floor and report what it reached. Resolves the boot log either way — a fault is a result.
@@ -155,7 +162,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
   }, 60_000);
 
   test("R3 — a herm carries: its verb channel answers a caller", async () => {
-    const dir = findSock(root);
+    const dir = sockStands(root) ? substrateDir(root) : null;
     expect(dir, "no UDS door — a herm that carries nothing has no floor under anything").not.toBeNull();
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
     // A WELL-FORMED call. `where` requires `args.tiddler`; an empty payload earns "args.tiddler is
@@ -166,7 +173,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
   }, 60_000);
 
   test("R4 — a herm refuses a hearth-scoped act LEGIBLY, never by stack trace", async () => {
-    const dir = findSock(root);
+    const dir = sockStands(root) ? substrateDir(root) : null;
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
     const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir, timeoutMs: 20_000 })
       .catch((e: Error) => ({ error: e.message }));
@@ -193,7 +200,7 @@ describe("the herm — the floor of the lararium cap stack", () => {
     // lifted boot was doing when it did. The log the vessel wrote is the only witness to that.
     expect(live, `the lift left the vessel unable to stand:\n${log.slice(-2000)}`).toBe(true);
 
-    const dir = findSock(root);
+    const dir = sockStands(root) ? substrateDir(root) : null;
     expect(dir, "the lifted hearth bound no UDS door — nothing to ask, and no fallback that would be this hearth").not.toBeNull();
     const { invokeLocal } = await import("../../packages/lares-cli/src/local-connector.js");
     const r = await invokeLocal("persona-selves", {}, await operatorDid(root), { dataDir: dir, timeoutMs: 20_000 });

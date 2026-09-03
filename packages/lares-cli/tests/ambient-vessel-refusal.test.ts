@@ -17,6 +17,18 @@ describe("the ambient vessel is reached by asking, never by failing to resolve",
     expect(() => udsSocketPath(null)).toThrow(/refusing to fall back to the ambient vessel/);
   });
 
+  /**
+   * AN EMPTY STRING SLIPS A NULL-ONLY GUARD AND IS WORSE THAN THE FALLBACK IT DODGES. `"" ?? x` is
+   * `""`, so it reaches the derivation and hashes to a real, stable path — the digest of nothing,
+   * `/tmp/lares-<uid>/e3b0c44298fc.sock`. Every caller who lost their root converges on that ONE
+   * socket. Measured: a harness handing `""` produced exactly it, and the connect failed with a path
+   * that looked plausible enough to read as a dead daemon rather than as a lost root.
+   */
+  test("an EMPTY root is refused, not hashed", () => {
+    expect(() => udsSocketPath("")).toThrow(/refusing to fall back to the ambient vessel/);
+    expect(() => udsSocketPresent("")).toThrow(/refusing to fall back/);
+  });
+
   /** The control: an ABSENT argument is a different ask and keeps the default it always had. */
   test("an absent root still resolves a path", () => {
     expect(udsSocketPath()).toMatch(/\.sock$/);

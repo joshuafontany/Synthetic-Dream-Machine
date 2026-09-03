@@ -24,7 +24,7 @@
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import { existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { targetInstance, type LarInstance } from "../harness/instance.js";
+import { targetInstance, type LarInstance, awaitRendezvous, vesselStorageDir } from "../harness/instance.js";
 import { KeyhiveProvider } from "../../packages/lararium-keyhive/src/keyhive-provider.js";
 import { invokeLocal } from "../../packages/lares-cli/src/local-connector.js";
 import type { DeviceDelegationTiddler } from "../../packages/lararium-mesh/src/device-delegation.js";
@@ -37,31 +37,6 @@ let edge: DeviceDelegationTiddler | null = null;
 
 /** Wait for the daemon's UDS home to appear under this root. The socket lands a beat AFTER the boot phase
  *  resolves, so a single sample races it — and a raced sample reads as "no socket" rather than "not yet". */
-async function awaitSocketDir(root: string, timeoutMs = 60_000): Promise<string> {
-  const deadline = Date.now() + timeoutMs;
-  for (;;) {
-    const hit = findSocketDir(root);
-    if (hit) return hit;
-    if (Date.now() > deadline) return "";
-    await new Promise((r) => setTimeout(r, 500));
-  }
-}
-
-/** Find the daemon's UDS home under this instance's root — the socket names it, whatever the layout. */
-function findSocketDir(root: string, depth = 5): string | null {
-  const walk = (dir: string, left: number): string | null => {
-    if (left < 0 || !existsSync(dir)) return null;
-    for (const name of readdirSync(dir)) {
-      const p = join(dir, name);
-      if (name === "lares.sock") return dir;
-      let isDir = false;
-      try { isDir = statSync(p).isDirectory(); } catch { isDir = false; }
-      if (isDir) { const hit = walk(p, left - 1); if (hit) return hit; }
-    }
-    return null;
-  };
-  return walk(root, depth);
-}
 
 async function summon(body: Record<string, unknown>): Promise<Record<string, unknown>> {
   const r = await invokeLocal("face-join", { summons: { kind: "face-join/v1", ...body } },
@@ -72,7 +47,11 @@ async function summon(body: Record<string, unknown>): Promise<Record<string, unk
 
 beforeAll(async () => {
   lar = await targetInstance();
-  dataDir = await awaitSocketDir(lar.root);
+  // THE ROOT IS THE ANSWER, and the connector re-derives the socket from it. A hunt for a file named
+  // `lares.sock` under the root found nothing — the rendezvous stands at
+  // `/tmp/lares-<uid>/<root-digest>.sock` — and every vector below then failed on an empty string,
+  // reading as a broken join ceremony the run never reached.
+  dataDir = (await awaitRendezvous(lar)) ? vesselStorageDir(lar) : "";
 
   // A THROWAWAY vessel stands its own keyhive and offers its own card — the joinee half, never this hearth's.
   const p = new KeyhiveProvider();

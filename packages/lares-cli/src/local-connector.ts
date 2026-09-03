@@ -28,7 +28,12 @@ export function udsSocketPath(dataDir?: string | null): string {
   // there aims a caller at the operator's live vessel while it believes it is talking to a fixture.
   // The failure is silent and it PASSES: the real daemon answers correctly, so the vector goes green
   // having measured the wrong hearth. Refusing is the only reading that cannot be mistaken for success.
-  if (dataDir === null) {
+  // ⚠ AN EMPTY STRING IS AS UNRESOLVED AS A NULL, and it is WORSE than the ambient fallback: `"" ?? x`
+  // is `""`, so it slips a null-only guard and hashes to a real, stable, deterministic path —
+  // `/tmp/lares-<uid>/e3b0c44298fc.sock`, the digest of nothing. Every caller who lost their root
+  // converges on that ONE socket, which is a rendezvous no daemon ever binds and, worse, one any
+  // process on the machine could bind and be mistaken for every one of them.
+  if (dataDir === null || dataDir === "") {
     throw new Error("[lares] a substrate root was required and none resolved — refusing to fall back to the ambient vessel");
   }
   // ONE DERIVATION, BOTH SIDES. The daemon binds `rendezvousPath` over its resolved substrate dir; this

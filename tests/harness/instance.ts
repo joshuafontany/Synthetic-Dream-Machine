@@ -20,6 +20,7 @@
 
 import { spawn, type ChildProcess } from "node:child_process";
 import { createServer } from "node:net";
+import { rendezvousPath } from "../packages/lararium-mesh/src/rendezvous-path.js";
 import { mkdtempSync, rmSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
@@ -192,6 +193,41 @@ export async function targetInstance(): Promise<LarInstance> {
  * NAME THE ADDRESS EXACTLY. A wrong path here does not fail loudly — it opens an absent directory, finds
  * no chunks, and reports the document "unavailable", which reads as a replication fault.
  */
+/**
+ * The rendezvous socket a staged instance's daemon binds — DERIVED, never hunted.
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────────────────────────
+ * Two suites walked the instance ROOT looking for a file named `lares.sock`, and the rendezvous is
+ * neither there nor called that: `rendezvousPath` mints `/tmp/lares-<uid>/<sha256(root)[0..12]>.sock`
+ * so the whole path stays a fixed 40 bytes however deep a root runs, and so two roots on one machine
+ * stay apart. The hunt returned nothing, every vector downstream failed on an empty string, and
+ * NINE e2e reds read as broken civic ceremonies when the ceremonies were never reached.
+ *
+ * Both sides of a rendezvous MUST derive it from one function — the CLI's own connector says so, and
+ * `rendezvous-parity-witness` gates the TS and python spellings against each other. A harness that
+ * greps for a filename is a third spelling nobody gated.
+ *
+ * Returns the DIRECTORY, which is what `invokeLocal({ dataDir })` wants: the connector re-derives the
+ * socket from the root, so handing it the instance root is the honest answer.
+ */
+export function rendezvousSocket(instance: LarInstance): string {
+  // THE DIGEST IS OVER THE SUBSTRATE DIR, NOT THE INSTANCE ROOT. `local-connector` derives
+  // `rendezvousPath({ root: dataDir ?? larDataDir() })`, and `larDataDir()` resolves to
+  // `<LAR_ROOT>/data/lares/vessel` — so hashing the bare root names a socket nothing ever binds.
+  return rendezvousPath({ root: vesselStorageDir(instance), uid: process.getuid?.() ?? 0 });
+}
+
+/** Wait until this instance's daemon has BOUND its rendezvous — a name standing, not a listener answering. */
+export async function awaitRendezvous(instance: LarInstance, timeoutMs = 60_000): Promise<boolean> {
+  const sock = rendezvousSocket(instance);
+  const deadline = Date.now() + timeoutMs;
+  for (;;) {
+    if (existsSync(sock)) return true;
+    if (Date.now() > deadline) return false;
+    await new Promise((r) => setTimeout(r, 250));
+  }
+}
+
 export function vesselStorageDir(instance: LarInstance): string {
   return join(instance.root, "data", "lares", "vessel");
 }
