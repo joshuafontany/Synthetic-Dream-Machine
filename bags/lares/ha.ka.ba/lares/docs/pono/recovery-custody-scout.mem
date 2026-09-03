@@ -153,10 +153,16 @@ The sweep names three things unmeasured at home. All three are measurable, and t
 
 !!! ① The system ALREADY RUNS BOTH FORKS — one per scale
 
-* ''CIVIC scale'' (charter / nexus reserve) runs ''Fork A'': `splitReserveSeed`, guardian cards, a 2-of-3 reconstruct.
+* ''CIVIC scale'' — ⚠ ''corrected on a second read''. The charter ROTATION does not reconstruct anything: `sealRotate` seats the key-set that STANDS and verifies its digest against the head's `nextKeyCommit`, fail-closed. That is ''pre-rotation with a key-set reveal'' (TUF≈KERI), neither fork. ''Fork A's Shamir sits one layer beneath'' — `splitReserveSeed` 2-of-3 custodies the RESERVE SEED, the material `deriveReserveKeySet` turns into the successor key-set. So the 2-of-3 recovers ''the pre-committed future'', never the rotation authority.
 * ''HUMAN scale'' (persona-KEL) runs ''Fork B'': `attestAndRotate` gathers ≥k independent guardian signatures and its own comment states the property — //"each signs with their OWN recovery key and returns a signature, and NOTHING assembles (no seed, no share)."//
 
 So a move //off// the wired mechanism is not a move toward an unbuilt thing. ''Each scale currently holds the fork that answers its own failure mode'', and whether that coincidence is right is the question — not whether the other branch exists.
+
+!!! ①′ ⚠ And the KEL board is PER-VESSEL, so identity cannot federate
+
+`personaKelBoardDocUrl(nexusPubkey)` mints the ''identifier → current-op-key'' map, and every vessel derives it from ''its own'' key — the node's KEL ring holder and the browser leaf's materialize both pass `vesselIdentity.verifyingKey`. It is a sibling of the crossroads bulletin and the WHO face, and `federation-gate` federates it deliberately, so these boards are ''meant'' to be shared.
+
+⚠ ''The Binding Gate walks a LOCAL replica and HALTS fail-closed on an absent chain.'' So a member on the wrong board does not misread a fellow member — ''it cannot verify them at all''. The grain error compounds from "reads the wrong bulletin" to "refuses the people it is federated with", and it lands squarely on the recovery question: ''a rotation propagates by reaching the board its readers walk''.
 
 !!! ② The counterweight is ALREADY CLOSED at the human scale
 
@@ -192,6 +198,6 @@ personaPrefixOf(inceptionOpKeyDid, recoverySetHash)
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-recovery-keel >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;KTKSKk8rorG4dNHyYv9zSqpSruYYqf3LwJADTE_DZS0
+<<^ code="&#x0003;" >>ni:///sha-256;Cz39XNfZvWFcMVT_iFxmE502uSIXJqUSY_-NX3veF9Q
 
 <<^ code="&#x0004;" -> to=? >>

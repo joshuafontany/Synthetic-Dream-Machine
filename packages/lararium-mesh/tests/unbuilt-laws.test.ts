@@ -196,6 +196,30 @@ describe("⑧ a joined vessel reads its Nexus's board", () => {
     expect(Object.keys(mesh)).toContain("adoptedNexusPubkey");
   });
 
+  /**
+   * ⚠ AND IT COMPOUNDS ACROSS THREE BOARDS, not one. Every deterministic per-Nexus board derives from
+   * the same key — the crossroads bulletin, the WHO face, and the PERSONA-KEL board that maps an
+   * identifier to its current op-key head. `federation-gate` federates the KEL board deliberately, so
+   * the boards are MEANT to be shared; federating boards derived from different keys federates boards
+   * that name different things.
+   *
+   * The KEL one carries the sharpest consequence: the Binding Gate walks a LOCAL replica and
+   * FAIL-CLOSES when a chain is absent. A vessel on the wrong board therefore cannot walk a fellow
+   * member's identifier to its head — it halts. So the grain error is not only "reads the wrong
+   * bulletin"; it is "cannot verify the people it is federated with."
+   */
+  test("all three per-Nexus boards derive from the SAME key, so the grain error is one error in three places", () => {
+    const a = "0x" + "aa".repeat(32), b = "0x" + "bb".repeat(32);
+    for (const mint of [mesh.crossroadsDocUrl, mesh.personaKelBoardDocUrl]) {
+      expect(mint(a)).not.toBe(mint(b));
+      expect(mint(a)).toBe(mint(a));
+    }
+  });
+
+  test.skip("A JOINED NODE WALKS ITS NEXUS'S PERSONA-KEL BOARD — DEFERRED: `personaKelBoardDocUrl(nexusPubkey)` is derived per-vessel from its own key (open-node-vessel's kel ring holder, and the browser leaf's own materialize), so two members of one Nexus hold two different identifier→head maps. The Binding Gate walks a LOCAL replica and HALTS fail-closed on an absent chain, so a member on the wrong board cannot verify a fellow member at all — it refuses the boot rather than misreading it", () => {
+    expect(Object.keys(mesh)).toContain("adoptedNexusPubkey");
+  });
+
   test.skip("THE HERM'S GATE PUBKEY REACHES THE HEARTH THAT DIALS IT — DEFERRED: `lares herm` prints the dial URL and the gate pubkey for an operator to hand over, and nothing on the receiving side stores it. The out-of-band hand-off is designed and instructed; the leg that keeps what was handed over does not exist, so a hearth re-learns its Nexus by hand every boot or not at all", () => {
     expect(Object.keys(mesh)).toContain("adoptedNexusPubkey");
   });
