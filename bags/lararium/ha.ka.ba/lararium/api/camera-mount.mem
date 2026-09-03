@@ -132,7 +132,7 @@ const unmount = () => { teardownLoop(); teardownMount(); };
 | Camera surface | `document` type | Role |
 |---|---|---|
 | Story River (browser) | `window.document` | HUD layer floating over the infinite canvas; shadow root isolates TW5 stylesheet |
-| TLDraw canvas (browser) | `OffscreenCanvas`-backed custom doc | Canvas camera below the HUD |
+| DreamDOM canvas (browser) | ''DreamDOM'' document — DOM-hosting, never rasterising | Canvas camera below the HUD (ruling: `wikispace-canvasspace-ontology#the-surface-correction`) |
 | Node SSR | `$tw.fakeDocument` | Headless render |
 | Mobile native | platform fake doc (React Native bridge) | Native surface |
 | Headless / MCP | `$tw.fakeDocument` or null render | Tool-side projection |
@@ -149,6 +149,6 @@ The `mountCamera` interface stays identical. The `document` type changes; the ch
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;RPp_n68ELF57TRKZCj7gEnHga_NhfKxyT-GM2j3pJXk
+<<^ code="&#x0003;" >>ni:///sha-256;eaySjfFMWAaBQuvsYg9SP5_nBaalIevEXmDRJ7VFNRE
 
 <<^ code="&#x0004;" -> to=? >>

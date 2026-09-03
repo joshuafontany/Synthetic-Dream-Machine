@@ -148,7 +148,7 @@ Unlocks portal-as-graph-edge and multi-level room navigation.
 !! Canvas Color Map
 
 Canonical tldraw color per family.
-Source of truth for `FAMILY_COLORS` in `packages/lararium-tldraw/src/tldraw-shapes.ts`.
+⚠ ''NO SOURCE OF TRUTH STANDS.'' This named `packages/lararium-tldraw/src/tldraw-shapes.ts`, and ''that package does not exist'' — no tldraw dependency stands in any manifest, no submodule, nothing installed (measured 2026-09-02). The palette below is the record; the code that would consume it is unbuilt. When the DreamDOM canvas camera lands, it takes this table and this table is the source.
 
 ```toml
 [family-canvas-color]
@@ -171,6 +171,6 @@ spatial    = "light-blue"
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;QeyuPKeUR6M6RQJ9Hzzg2UvewrruuYTV-molRmNsqyI
+<<^ code="&#x0003;" >>ni:///sha-256;ulAP5Nk9id19DB5MN9ePOYb0AsK9bEW7dR9WZdPZ6Ww
 
 <<^ code="&#x0004;" -> to=? >>

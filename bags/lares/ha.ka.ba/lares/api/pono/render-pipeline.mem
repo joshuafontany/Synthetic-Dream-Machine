@@ -56,7 +56,7 @@ One surface passes through three trees:
 Two cameras read the ''one shared'' wiki world graph and render into ''separate'' documents (`camera-mount` law C-2):
 
 * ''Story River camera'' — backed by `window.document`; the ''page'' surface; child-slot widgets transclude content into the DOM (the `transclusion` family lands here).
-* ''TLDraw canvas camera'' — backed by an `OffscreenCanvas` document; the ''flow'' surface; pranala edges render as wired shapes (the `dataflow` / `reaction` / `spatial` families land here).
+* ''DreamDOM canvas camera'' — backed by a ''DreamDOM'' document (a DOM-hosting surface, never a rasterising one — the ruling and its evidence live at `wikispace-canvasspace-ontology#the-surface-correction`); the ''flow'' surface; pranala edges render as wired shapes (the `dataflow` / `reaction` / `spatial` families land here).
 
 The stage pipeline runs once per camera over the shared graph; only the DOM-tree target (which fakeDom) differs. ''World graph shared; render surfaces separate.''
 
@@ -182,7 +182,9 @@ The render posture difference (live vs. frozen) lives in the template cascade se
 Some `ahu` slots are structural, not content — they MUST NOT render as tldraw body nodes on the canvas surface. The carrier spine (`memetic-wikitext-framing`) carries identity and structure; the canvas projects content slots only.
 
 ```toml
-# Source: packages/lararium-tldraw/src/project.ts SUPPRESSED_WORKSITES
+# ⚠ Named `packages/lararium-tldraw/src/project.ts SUPPRESSED_WORKSITES` — THAT PACKAGE DOES NOT EXIST
+# (measured 2026-09-02: no tldraw dependency, submodule, or install anywhere in the tree).
+# The suppression list below is the record; its consumer is unbuilt.
 suppressed-worksites = ["meta", "meme-body-open", "body-close", "edges"]
 ```
 
@@ -255,6 +257,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ejH3-_r7v-Wguh2lPtB_pSCoeDpeOq9btKypHktT7sU
+<<^ code="&#x0003;" >>ni:///sha-256;oTnFhJvsHtXHByM1w1DBsQe_Wn-fxt73E_w_-nSw5zQ
 
 <<^ code="&#x0004;" -> to=? >>
