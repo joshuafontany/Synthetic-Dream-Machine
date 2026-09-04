@@ -1,0 +1,200 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/pattern-integrity-stress.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 18
+manao             = 18
+manaoio           = 16
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "pattern-integrity-stress — VERBATIM handoff of the seven-axis sweep that stressed the whole shape before locking it. THE FIVE THAT CHANGE IT: Keyhive built the convergent claim ONCE and concurrent membership ops WEDGE THE GROUP PERMANENTLY (and one bug does not reproduce at small group sizes, which the ladder grows past); retrofitting an identity waist is measurably impossible (Matrix, 8 years, 7 MSCs, zero merged, while room versions moved four times); the one study of exactly this population found ZERO multi-profile adoption and a switcher that SIGNALS; nothing shipped has a management chain that never bottoms out in a person; and Briar REJECTED the blind veil in writing because it leaks at the sync layer. Plus Beck's Hourglass Theorem — you do not pick the waist, you pick N — and the mycelium grounding split in two, where the sub-claim analogies lean on has no peer-reviewed evidence."
+revised-on        = "2026-09-04"
+tags              = ["api/pono/meme", "api/pono/persona-policy"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/pattern-integrity-stress"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The shape, stressed before it locks
+
+Seven parallel investigations against the whole pattern-integrity — the unbound human, the persona multitude, the managed persona, the serverless mesh, the convergent claim, the ladder, and what makes any of it lockable. ''Every general search engine CAPTCHA'd''; the work ran on structured APIs and raw-byte greps.
+
+⚠ ''FOUR INSTRUMENT-LIES CAUGHT, and two belong to the FIELD rather than to the sweep'' (#four-instrument-lies).
+
+<<~/ahu >>
+
+<<~ ahu #the-convergent-claim-wedges >>
+
+!! ★ The convergent claim has been built once, and it WEDGES ★
+
+Keyhive stands as the only system unifying revocation, membership and revision into one object. Pre-alpha, unaudited, `DO NOT use in production`. Four issues filed one week apart sit exactly on the claim:
+
+* ''#218'' — two concurrent removals, each locally valid, merge in digest order and the tree walks a one-member state. //"Because the op graph is durable and digest order is delivery-independent, **every materialization on every replica re-errs forever: a permanently wedged group, identical on all replicas**."// ''Independently reproduced by a third party.''
+* ''#220'' — concurrent add + trailing-slot remove: ''32 of 64 seeds trip the tree's own state assertion''.
+* ''#219'' — authoring panic past group size 16. ⚠ //"**it does not reproduce at small group sizes**."// ''The ladder grows group sizes by construction.''
+* ''#217'' — node secrets retained indefinitely: PCS holds, //"there is no effective forward secrecy over retained history."// ⚠ ''The lease does not expire the secret.''
+* ''#127'' — back-dated removal, open since 2025-04 with ''zero maintainer comments in 16 months''.
+
+!!! ⚠ And its antigoal is our foundation
+
+> //"Keyhive deliberately excludes user identity binding, **leaving this to future layers above the system**."//
+>
+> ''It defers the human to a layer above. We have no layer above.''
+
+<<~/ahu >>
+
+<<~ ahu #the-waist-never-moves >>
+
+!! ★ An identity waist cannot be retrofitted — measured over eight years ★
+
+Seven proposals to unbind identity from server, ''all open, none merged'': removing identifiers from events (2018) · portable identities (2020) · per-room profiles, which is persona-per-context (2021) · identity-as-key (2022) · pseudonymous identities (2023) · client-owned cryptographic identities (2023) · localparts as account keys (2024).
+
+⚠ ''And the contrast inside the same project decides it.'' Room versions v1–v12 all reached Stable, changing event identity, auth rules and room ids under a versioned envelope. ''The core semantics moved FOUR TIMES; the identity waist never moved once.''
+
+> ''That is the empirical shape of what locks and what does not.'' A waist is not chosen late.
+
+Elsewhere the same result: a key-rotation issue ''open and dormant four years'', ''no rotation, revocation or migration mechanism exists'', and delegated signing marked //"unrecommended: adds unnecessary burden for little gain."//
+
+<<~/ahu >>
+
+<<~ ahu #the-switcher-signals >>
+
+!! ★ The one study of exactly this population — zero adoption, and the switcher SIGNALS ★
+
+N=199 women across India, Pakistan and Bangladesh. Its central critique matches ours: //"user privacy is predominantly modeled on the **'one account, one user' paradigm**."// Then:
+
+> ⚠ //"**none of our participants had multiple user profiles on the phone**, possibly due to added friction or poor discovery."//
+
+And the mechanism that matters more than adoption:
+
+> ⚠ locks //"signaled to borrowers and co-located social relations that **something suspicious might be hidden** behind the authentication screen."//
+
+The five practices they DID use ran ''covert and deniable'' — selective deletion, private modes, avoidance. Related: willing sharers //"expressed an obligation to give open access to close relations **to communicate trust**"//, and profiles get used to ''personalise, never to gain privacy''. Base rate for the threat: ''1 in 5 adults snooped on someone else's phone in the prior year''.
+
+> ''A visible persona switcher is not neutral in a household with a power asymmetry. It is a signal.''
+
+⚠ ''This cuts directly at the blind-veil switcher.'' The veil hides personas from each other; ''the SWITCHER ITSELF announces that something is hidden''.
+
+<<~/ahu >>
+
+<<~ ahu #nothing-is-rootless >>
+
+!! ★ Custody delegates to machines. Accountability does not. ★
+
+Every system runs machine-to-machine chains of arbitrary depth at runtime, ''then re-attaches a human at a layer the runtime cannot see'':
+
+* the object-capability model reads rootless ''by postulate'' — and every time its own text names the origin, it names a person. `accountability`, `provenance`, `non-repudiation` appear ''zero times''. Its authors published the gap themselves: //"a remaining unrefuted criticism is that they cannot record who to blame for which action. **This lack has led some to forego the benefits of ocaps**."// The fix ships nowhere.
+* a container platform's audit event carries exactly two slots, ''both singular, no ancestry field''.
+* a cloud role-chain ''silently caps the session at one hour regardless of configured maximum'' — ''delegation depth FORCES a shorter lease''.
+* an agent-identity product: //"**A sponsor is required when creating an agent identity**"// — users or groups only, //"including for app-only create requests."// ⚠ ''Agent-creates-agent with no interactive human: the create is REFUSED.''
+* a delegation token standard models the chain and then rules //"the consumer of a token **MUST only consider** the token's top-level claims… **Prior actors are informational only**."// ''The chain's history is decorative.''
+* anti-money-laundering law, applying 2027: where //"no natural persons are identified as beneficial owners"//, an entity ''shall identify the senior managing officials''. ⚠ ''A structure engineered so no chain climbs to a person does not produce "no answer" — it produces a SUBSTITUTED answer.''
+* three courts, three attachment points: ''who voted'' · ''who could still change it'' — residual capability reads as ownership · and the one case where nothing attached bought immunity ''by forfeiting every protection ownership confers''.
+
+<<~/ahu >>
+
+<<~ ahu #the-veil-leaks-at-sync >>
+
+!! ★ The blind veil holds at the data layer and leaks at the sync layer — and one project REJECTED it in writing ★
+
+> ''"Can I have multiple identities/profiles/accounts? Short Answer: No, that is not supported."'' … //"In a p2p network it's hard to prevent identities from being linked… First, the times when `A` and `B` are online. **In a p2p network we can't hide this from our contacts.** Second, the network addresses… contacts can **compare the addresses we gave them and see that it's the same device.** Third… information leaks at the application layer."//
+
+Two issues asking for exactly the per-identity contact view, both labelled ''rejected''.
+
+''The one shipped system claiming the property buys it by NOT being peer-to-peer'' — routers absorb what a p2p network cannot escape — and its own security file hands the caveat back: the router ''can'' correlate //"via either a re-used transport connection, user's IP Address, or connection timing regularities."//
+
+!!! The ranked leak channels, measured
+
+|!# |!channel |!measurement |
+|1 |''delivery receipts enumerate your device fleet'' |cannot be disabled; from a phone number alone, silently — session list reveals ''device count AND creation order'' |
+|2 |''sealed sender collapses at N=5'' |//"could link sealed sender users in as few as 5 messages"//; graph model irrelevant |
+|3 |''push metadata joins server-side'' |the join happens at the vendor, so per-device tokens buy nothing |
+|4 |''attestation is device-scoped by vendor documentation'' |recall survives ''reinstall and factory reset''; the only barrier to cross-persona linkage reads as a policy sentence |
+|5 |''the graph relinks on topology alone'' |30.8% correct on topology only; 46,626 correct / 20 wrong at 5% seeds |
+|6 |''stylometry'' |cross-context, different blog same author: ~12% baseline → ''50%'' |
+|7 |⚠ ''CRDT actor IDs'' |every change permanently carries `actor`, prior actors, seq and a wall-clock timestamp |
+
+⚠ ''AND #7 IS OURS.'' Read from source: an Automerge change carries the actor forever, and an issue on actor-count cost has stood open since 2023, so rotation-for-unlinkability has a cost curve. ''NEGATIVE FINDING: no published discussion anywhere of actor-ID as a linkage channel — not Automerge, not Yjs, not the literature.'' Undiscussed, and we are built on it.
+
+⚠ ''And the veil is a NETWORK-layer property, not a device-layer one.'' Forensic extraction reads partial on modern devices in the ''After First Unlock'' state — and ''a persona sits AFU precisely while it is being worn''.
+
+<<~/ahu >>
+
+<<~ ahu #what-makes-it-lockable >>
+
+!! ★ You do not pick the waist. You pick N. ★
+
+The formal answer, proved, and it ''inverts the folk intuition'':
+
+> The ''Hourglass Theorem'': a weaker layer specification has ''FEWER applications'' but MORE implementations. Everyone knows the second clause; ''the first is what gets designs wrong''.
+>
+> So supply ''N, the set of necessary applications'', and take the ''minimally sufficient'' spanning layer. //"**the choice of necessary applications N is in fact the most directly consequential element** in the process of defining a spanning layer."//
+
+And the competitive complement: waist protocols become ''evolutionary kernels'' surviving far longer than peers — ⚠ //"kernels are **not** the highest-quality nodes"//. The prescription for a successor is to ship it ''alongside'' rather than as a replacement.
+
+!!! The measured symptoms of freezing the WRONG layer
+
+# ''the escape hatch grows'' — //"there is no longer a well defined or understood way to extend network functionality, **short of implementing everything over HTTP**."//
+# ''the replacement cannot win on merit'' — 28 years on, the successor sits at ~43% capable.
+# ''novel values get STRIPPED rather than ignored'' — unknown options removed on 4–14% of paths. The hard rule: //"it is **unsafe** for extensions to embed sequence numbers in options… even if the extension negotiates use."//
+# ''a transition ships and then does not move'' — a hash migration ''8 years in'', protocol support //"not yet implemented"//, no completion date. ⚠ The hash was not a field inside the system; ''it WAS the naming waist''.
+# ''extension proposals fork into rival specs for one feature'' — three mechanically incompatible drafts, seven years after the recommendation, and the attempt to add capability discovery ''withdrawn''.
+
+!!! What worked, and it is copyable
+
+* ''publish the waist as its own normative document'' — //"Unless specifically prohibited in this document, **any aspect of the protocol can change between versions**"// — with an explicit appendix of ''incorrect assumptions an observer might make''.
+* ⚠ ''exercise the must-ignore rule or lose it'' — //"the metaphorical joint in the protocol has **rusted shut**."// ''A must-ignore rule that is never exercised is not a rule; it is a hope.''
+* ''must-ignore AND ROUND-TRIP'' is the stronger variant, and our own CRDT chose it: implementations //"must preserve operations containing actions they don't support"//. ⚠ Honest negative: its binary format stands a ''draft with fixed magic bytes and no version byte''.
+* ''extend by COMPOSITION'' — a post-quantum handshake shipped both algorithms feeding one ratchet, negotiated per session.
+
+<<~/ahu >>
+
+<<~ ahu #the-mycelium-splits >>
+
+!! ★ Split the biology and the grounding changes sign ★
+
+''SOLID (laboratory).'' Partners //"detect, discriminate, and reward"//; fungi //"enforce cooperation by increasing nutrient transfer **only to those roots providing more carbohydrates**"// — ''control runs BIDIRECTIONAL, and discrimination sits at root/hypha granularity, never whole-organism''. Isotope-tagged work measured phosphorus //"**hoarded, relocated, and transferred**"// — ''hoarding as a literal measured category''. And a 2025 architecture paper: ~500,000 nodes, a travelling wave at 280 µm/h, ''root transport efficiency held constant while global efficiency rose 0.2 → 0.5 at constant carbon cost''.
+
+⚠ ''CONTESTED (forests) — and it is the sub-claim analogies lean on.'' A 2023 review rules: networks widespread — //"insufficiently supported"//; resources transfer to boost seedlings — //"insufficiently supported"//; ''mature trees preferentially send resources to offspring'' — //"**has no peer-reviewed, published evidence**."// And //"unsupported claims have doubled in the past 25 years."//
+
+⚠ ''THE STRUCTURAL CAVEAT.'' Every strong mechanism result sits ''in vitro'' — roots on agar, single isolates. ''None of it is a forest, and none is a many-party network with competing hosts.''
+
+⚠ ''And no distributed system ever shipped a mycelial mechanism.'' One project carries the name and routes conventionally — ''the biology is the name only''.
+
+> ''VERDICT: local, graded, cost-bound, reciprocal exchange has laboratory support and a real measured architecture. LINEAGE- or KIN-DIRECTED transfer has none.'' The one sub-claim a reviewer attacks is the one with no evidence behind it.
+
+<<~/ahu >>
+
+<<~ ahu #four-instrument-lies >>
+
+!! ⚠ Four instrument-lies, two of them the field's own
+
+# ''a fetch-summarizer FABRICATED platform policy'' — disproved by raw-byte grep of the 238KB original: every term zero. ''It invented a policy in exactly the direction a researcher would hope to find one.''
+# ''a fabricated RFC quotation'' — the claimed phrase greps to zero in the RFC text.
+# ''"died" is not death'' — probing 250 nodes a roster marked dead, ''91.2% still answer''. ⚠ ''Every derived mortality figure was discarded'', and the honest statement stands: ''no public dataset answers instance mortality correctly''.
+# ''a LIVE standards-body draft misattributes data'' — three percentages attributed to a paper containing ''zero `%` characters''. True source unidentified.
+
+''Corrections made in place'' include a guardianship paper's date, the authorship of the petname texts, a fine's year, and a default lease value confused between two implementations. ''A sweep that corrects itself four times reads better than one that never had to.''
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;OCZ7yatc3yLX0ArrFZbEqAaKESRqrbdCFsSvpx0Mrwc
+
+<<^ code="&#x0004;" -> to=? >>
