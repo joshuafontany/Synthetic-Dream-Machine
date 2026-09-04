@@ -184,6 +184,8 @@ export { SyncedTree, contentHash, syncedTreeKey } from "./synced-tree.js";
 export { bagsFileToUri, wikisFileToUri } from "./bag-paths.js";
 
 export { runInit, runFoundTheFace, faceStands } from "./commands/init.js";
+// The live read path onto `mesh/dyad` — a vessel enumerates the relationships it already holds.
+export { vesselDyads } from "./vessel-dyads.js";
 export type { InitOptions, InitResult, FoundFaceOptions, FoundFaceResult } from "./commands/init.js";
 
 export { runDeviceAdmit } from "./commands/device-admit.js";
