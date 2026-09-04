@@ -56,6 +56,26 @@ The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as cry
 
 <<~/ahu >>
 
+<<~ ahu #the-managed-persona >>
+
+!! Ruling 2b ~ the MANAGED persona, and why the human stays unbound (operator ruling, 2026-09-04)
+
+''A human `#has` multiple PersonaGroups, and a Persona is WORN on a device.'' The identity object is the Persona; the human is not an object here at all.
+
+''THE MANAGER IS ROUTINELY NOT THE WEARER, and that is the DESIGNED case.'' A device owner ''sets up and manages'' PersonaGroups for any Persona they manage — which in much of the world means ''family members they share a device with''. The canonical shape: //mom hands the kid the phone, and the kid wears "Mom's Kid" persona on that device//. PersonaGroups are local-first and fleet-synced across the manager's own device group.
+
+⚠ ''SHARED DEVICES ARE NOT AN EDGE CASE HERE, they are the reason the model has this shape.'' A design that bound one human to one device would have to call the majority of the world's households an exception. This one calls the managed persona ordinary and has nothing to except.
+
+!!! Why the human is REFUSED rather than merely omitted
+
+''Ruling 2 declines to pin one-human-to-one-custodian because the pinning IS the sin.'' This ruling is the same refusal read forward: ''the human is not bound to the system at all''. There is no human node, no human key, no human record — because ''binding a person is what creates the thing that can be seized, correlated, or lost''.
+
+⚠ ''The field converged on the same instinct and stopped one step short.'' Ink & Switch's Keyhive models //"a person (or more specifically **their authority**) as a group, with each of the persons devices being an individual member"// — the same refusal to name the human, expressed as ''a group of DEVICE KEYS''. This model keeps the layer they collapsed: ''a Persona is a wearable role with a manager, never a bag of a device's keys'', which is what lets the wearer differ from the manager. (`docs/pono/dyad-ladder-scout#the-convergent-shape` carries the field's reading and the challenge it puts back.)
+
+<<~ confidence 13/20 >> ⚠ ''SURFACED FROM AN OPERATOR STATEMENT, not yet from built code.'' Nothing in the live corpus carried the managed persona before this ruling — it stood in the operator's hand alone, which is exactly the state this carrier exists to end. ''What manages a Persona, how management transfers, and whether a managed wearer can ever LEAVE with their Persona all stand open'', and the abuse surface the manager relation opens is priced nowhere yet.
+
+<<~/ahu >>
+
 <<~ ahu #distinct-recovery >>
 
 !! Ruling 3 ~ distinct recovery custodians per persona
@@ -134,6 +154,6 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;0YUyoKgyCQbeVLVgIi5a8Kq7i0sbeZx227ZNX1h_9g0
+<<^ code="&#x0003;" >>ni:///sha-256;YzyisOiZJXG5z7bOCbmysPFmM5Rs2qfsFIujR1jFhmo
 
 <<^ code="&#x0004;" -> to=? >>
