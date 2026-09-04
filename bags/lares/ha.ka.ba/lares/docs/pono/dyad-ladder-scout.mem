@@ -60,6 +60,44 @@ Held at high confidence across four independently searched literatures. And the 
 
 <<~/ahu >>
 
+<<~ ahu #the-house-exception >>
+
+!! ⚠ "Nobody has built this" is true of the FIELD and false of this house
+
+`packages/lararium-mesh/src/dyad.ts` stands, and its opening line is the model:
+
+> ''dyad — the vessel×veil RELATIONSHIP, made first-class.'' A dyad names neither a place nor a person: it names ''ONE HUMAN'S RELATIONSHIP WITH ONE DEVICE''… the dyad does not JOIN two identities; ''the dyad ENACTS the identity-relationship''.
+
+Under an operator ruling of 2026-07-26 that says it plainly: ''IDENTITY ALWAYS NAMES A RELATIONSHIP, NEVER A THING.''
+
+⚠ ''The sweep's headline negative holds for the field and NOT for this house.'' It is a finding about the world, and a reader who carries it inward will go looking for something to build that already stands.
+
+⚠ ''AND THE DOCTRINE MEMES DO NOT CARRY IT.'' The word `dyad` appears in `persona-policy` and two docs; ''the model lives in a source comment'' at `packages/lararium-mesh/src/dyad.ts`. A search of the memegraph for this model finds prose about it and never the thing itself, so ''the corpus reads as though the model were unbuilt''. That is the gap this section closes and the reason to close it: a memegraph that cannot find its own foundations sends every reader back to the field.
+
+!!! THREE NAMES, THREE JOBS — and this is the answer to the person-node challenge
+
+* the ''BINDING'' — the PersonaGroup's keys, //"which make the fleet a fact rather than a claim"//
+* the ''INTERNAL name'' — one usable label over that group, ''private and local, for the human alone''
+* the ''HANDLE'' — an optional public pet-name over the same group, ''and the only one that ever federates''
+
+!!! ★ The tiering the membership-CRDT family cannot offer ★
+
+Written in `dyad.ts` before the field raised the objection, and answering it exactly:
+
+> ''A foreign peer verifies presented edges and never sees the fleet; only co-members hold the wider graph. The membership-CRDT family cannot offer that split — it buys convergence by replicating the op graph to everyone, handing each member THE ROSTER AND THE DEVICE-TO-HUMAN LINKAGE.''
+
+Keyhive and DCGKA ''are'' that family. So the challenge — //the person-node is surplus, delete it// — has a priced answer: ''deleting it costs the tiering''. A group of device keys converges by handing every member the map of who is whose.
+
+!!! And the fleet never instantiates
+
+> ''the fleet EVALUATES AS A QUERY over that binding and never instantiates: nothing stores a fleet object to seize, forge, or sync.'' The internal name never crosses a wire, so //"a captured vessel spills the dyads admitted TO IT and never the human's map of themselves."//
+
+`fleetOfGroup(dyads, groupRootDid)` filters by ''the group's signature'', never a label — //"a fleet assembled from labels would let a forged record walk into a human's own map of themselves."// ⚠ ''An UNBOUND dyad joins no fleet'': absence of a binding reads as //not yet gathered//, never as membership in a default group. And a verify that THROWS reads as refusal, //"an unreachable check must never WIDEN a fleet"//.
+
+''The Venn-diagram of fleets needs no model'' because there is no fleet object to diagram: each PersonaGroup queries its own from the same dyads, and overlaps are simply devices holding dyads bound to several groups.
+
+<<~/ahu >>
+
 <<~ ahu #the-convergent-shape >>
 
 !! ★ Four unrelated teams reached almost your model — with the person-node DELETED ★
@@ -285,6 +323,6 @@ Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5cPVoipZiwUpCg0iy9ixrvxk5X0FrJvIbSCiD9eDFIU
+<<^ code="&#x0003;" >>ni:///sha-256;rAQmTnj_qJQoqDVETnoofXuK0v9HPlt2ZXddo5Tm6X8
 
 <<^ code="&#x0004;" -> to=? >>
