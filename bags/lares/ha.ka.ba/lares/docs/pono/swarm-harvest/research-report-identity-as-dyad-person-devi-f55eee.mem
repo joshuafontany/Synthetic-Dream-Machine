@@ -1,0 +1,159 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-identity-as-dyad-person-devi-f55eee >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-identity-as-dyad-person-devi-f55eee.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Research Report: Identity-as-Dyad (Person–Device Relational Edge). Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-identity-as-dyad-person-devi-f55eee"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Research Report: Identity-as-Dyad (Person–Device Relational Edge)
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 21,296 characters
+
+````
+# Research Report: Identity-as-Dyad (Person–Device Relational Edge)
+
+**Methodological note:** WebSearch was exhausted (200/200) before I began — consumed by another agent in this session. I worked entirely via WebFetch on guessed direct URLs plus Bash/curl against OpenAlex, Crossref, HN Algolia, PubMed, and GitHub's search API (Bing/DuckDuckGo returned garbage — mismatched or captcha'd). This got me real primary sources but missed most W3C-WG/DIF mailing-list threads, which needed general web search to locate. That gap is flagged inline below.
+
+## Bottom line
+
+**No one has built or deployed "identity as a signed dyadic edge between a person and a device" as a named, general-purpose primitive.** The closest formal analogues all converge on the same idea from different angles — pairwise DIDs, petnames, object-capabilities, KERI's per-relationship key state — but every one of them frames the edge as **person↔person** or **process↔process**, not **person↔device**. The device is usually the *substrate carrying the key*, not a first-class party to the relation. The one field that says the phrase "human-device dyad" out loud (HCI/health-sensing) means something completely different (a wearable + its wearer as a *measurement unit*), not identity. And the flagship deployed system built on pairwise relational identity (Sovrin/Hyperledger Indy) **failed and its foundation dissolved** — a genuine negative result, high confidence.
+
+---
+
+## 1. Pairwise/relational DIDs — closest formal analogue, and its collapse
+
+**did:peer** (DIF spec, `identity.foundation/peer-did-method-spec`, still "v1.0 Draft" after years) defines DIDs meant for *private, enumerated relationships between parties* rather than public registration. Numalgo 0 = single inception key (≈did:key); numalgo 1 = genesis-doc hash; numalgo 2 = multiple purpose-coded keys + services inline; numalgo 4 = short/long dual form. This is explicitly relational: a peer DID exists *for* a specific relationship, not for the world. (Confidence: high — read the spec directly.)
+
+Adoption signal I could measure directly: the GitHub repo `decentralized-identity/peer-did-method-spec` has **32 stars, 19 forks, 469 commits, 28 open issues** — a spec with real engineering behind it but a tiny public footprint, consistent with "used inside enterprise Aries/Indy deployments, not a broad developer ecosystem." (Confidence: medium — star counts are a weak proxy, but I couldn't reach adoption-survey data because WebSearch was down.)
+
+**Sovrin** was the flagship production network built on this pairwise model (each holder↔verifier relationship gets its own DID, unlinkable across relationships — this is literally "identity as an edge, not a credential"). Per Sovrin's own site and a secondary source (autheo.com — medium confidence, single source, numbers not independently cross-checked):
+- **The Sovrin Foundation formally dissolved May 21, 2025.**
+- Sovrin MainNet now runs **read-only, on a single cloud server operated by Trinsic, writes permanently disabled** — no new credentials can be issued.
+- Root cause per an IEEE study cited in that piece: **absence of validator economic incentives** — the network ran on volunteer "stewards" who eventually stopped paying to run nodes; >$2M accumulated debt; steward attrition; Indy's codebase made rapid evolution hard.
+
+This is the single clearest **negative result** in this whole inquiry: the most mature real-world deployment of "identity as a private per-relationship edge" ran for ~8 years on a permissioned ledger and **died for economic/governance reasons, not technical ones** — the relational-identity *model* wasn't refuted, but nobody could sustain the infrastructure it needed. (Confidence: medium-high on the fact of dissolution — corroborated by sovrin.org's own banner "The Sovrin Foundation Has Been Dissolved — but Sovrin MainNet Remains"; medium on the specific causal narrative, single secondary source.)
+
+I could not reach (WebSearch-dependent, blocked): the DIF/W3C-DID-WG mailing-list or GitHub-issue threads explicitly debating "identity is a relationship, not an attribute of a subject." I did check `w3c/did-core`'s open issues directly and found **no live thread on this** — but closed issues and the mailing list archive were unreachable. What I *could* pull is the spec text itself: DID Core (`w3.org/TR/did-core/`) defines the **DID subject** as "the entity identified by a DID... anything can be a DID subject," and treats a DID as pointing to **one subject** (however many controllers) — i.e., the standard explicitly does **not** adopt a relational/pairwise identifier as its base model; pairwise-ness is something did:peer bolts on as a *different method*, not baked into DID Core itself. (Confidence: high, read directly.)
+
+Daniel Hardman's writing on peer DIDs ("Peer DIDs: an off-ledger DID method") is exactly the kind of source this vein needed, but the specific URL(s) I guessed 404'd and I couldn't search to relocate it — **not covered, flag as a gap**.
+
+**KERI** (Sam Smith, arXiv 1907.02143, "Key Event Receipt Infrastructure") is a different and arguably more rigorous model: identity is a **self-certifying identifier bound to a key-event log** (append-only, signed transfer statements, pre-rotation, witnessed for duplicity detection). This is not quite "identity as an edge between two parties" — it's "identity as a *history*," verified independently by any witness, with **direct mode** (1:1 relationships via verified signatures) and **indirect mode** (1:many via witnessed receipts) as two separate trust postures layered on top. So KERI keeps identity subject-centric (one controller, one log) but makes trust *relational at the verification layer*. Citation count on the arXiv paper is only **2** (OpenAlex) — this is a spec/protocol effort, not an academic one, so citation count undercounts real influence (it lives inside Trust-over-IP governance work instead), but it is a low signal for independent scholarly uptake. (Confidence: medium.)
+
+did:webs (KERI-over-did:web) — could not fetch (404 on my guessed URL, no search available to relocate). Gap.
+
+## 2. Kim Cameron's 7 Laws — the directional distinction, not the dyad
+
+Law 4, "Directed Identity," distinguishes **omnidirectional identifiers** (public, discoverable, one identity for anyone to find) from **unidirectional identifiers** (private, unique per relationship, non-correlatable across contexts). This is the theoretical ancestor of pairwise DIDs and is *close* to "identity as an edge" — a unidirectional identifier only has meaning *within* one relationship — but Cameron frames it as a property an identifier can have (public vs. private-facing), not as the identifier literally *being* a two-party relation object. (Confidence: high, read directly.) Phil Windley's "relationships not identities" writing — which per the user's brief is directly on-point and would likely be the single best citation for this whole inquiry — I could **not** reach: every windley.com URL I guessed 404'd, and the archive index also 404'd. This needs a live web search to recover the exact post. **Gap, flag clearly.**
+
+## 3. Petname systems — the deepest theoretical support, confirmed relational
+
+Marc Stiegler's "An Introduction to Petname Systems" (2005, `skyhunter.com/marcs/petnames/IntroPetNames.html`, confirmed live via HN listings back to 2012) gives the precise three-layer model:
+- **Keys** — global, secure, not memorable.
+- **Nicknames** — global, memorable, not secure (non-unique — "John Smith").
+- **Petnames** — secure, memorable, **private**: "for a particular person, for a particular application, there is a one-to-one mapping between a key and a petname." A petname "exists only in the mind of one individual regarding one specific entity" — this is the clearest possible prior statement that **a name/identity is not a property of the named thing, but a fact about a relation between namer and named.**
+
+This is *the* closest theoretical analogue to "identity as a dyad holding a signed private edge" that I found — but note it's about naming a *key* (any principal), not specifically about a person-device pair.
+
+The 2024 revival, "Petnames: A humane approach to secure, decentralized naming" (Lemmer-Webber, Miller, Larson, Sills, Yaacoby; Spritely Institute; `files.spritely.institute/papers/petnames.html`; HN front-paged Nov 2024, 48 comments), extends the model to three name-types: **petnames** (locally assigned, "Mom"), **edge names** (paths through trusted intermediaries, "Alyssa⇒Ben Bitdiddle"), and **proposed names** (self-presented). It explicitly frames "identity becomes relational — anchored through connections to entities users trust," but per my fetch it is **conceptual/design-principles-focused, does not describe a shipped implementation, OCapN status, or adoption metrics**. (Confidence: high on content, medium on "no deployment" — the fetch tool may have truncated/summarized past a deployment section.)
+
+**Zooko's Triangle** (2001): human-meaningful / secure / decentralized — pick two. Aaron Swartz's "Squaring the Triangle" (proposing Namecoin/blockchain as squaring it) — I could not fetch (`aaronsw.com` DNS/connection failure) — but Wikipedia's summary is corroborating: DNSSEC gets meaningful+secure (not decentralized), .onion/Bitcoin addresses get secure+decentralized (not meaningful), and blockchain name systems (Namecoin, ENS, Handshake) *claim* to square it but remain Sybil-vulnerable under weaker-than-assumed BFT conditions. The petname-systems answer is different from the blockchain answer: it doesn't try to square the triangle globally at all — it **gives up on global human-meaningful names and keeps meaning local to a relation**, which is exactly the dyad-framing move.
+
+## 4. Object-capabilities — "only connectivity begets connectivity"
+
+I could not fetch Mark Miller's dissertation directly (erights.org connection refused/DNS failure both attempts) — this is a real gap since it's the single most rigorous formal treatment of "authority as a relation/edge, not a property." From training knowledge (medium confidence, unverified this session): Miller's *Robust Composition* (2006) formalizes capabilities as **references** — an actor can only exercise authority it was handed via an existing edge in the reference graph; "connectivity begets connectivity" means new authority can only be created by composing edges you already hold, never invented from nothing or derived from mere "identity." This is structurally the same claim as the dyad framing: **authority (and by extension, in some ocap-adjacent identity proposals, "who you are to me") is not a global fact but a live edge in a graph, and it can be revoked by cutting the edge (caretaker/membrane pattern) without touching the "identity" of either party.**
+
+**Confused Deputy** (Norm Hardy, 1988) — I could not fetch the canonical page (cert error), but its content is well established: ambient authority (identity-based ACLs) lets an authorized-but-confused program misuse authority it holds *by virtue of who it is* rather than *by virtue of what it was handed*; ocap's fix is to make authority itself the edge, so there is nothing to confuse.
+
+**What actually shipped**, confirmed live this session:
+- **Fuchsia** (Google's capability-based OS) — confirmed via direct fetch of `fuchsia.dev`: Zircon kernel is capability-based, "no global file system," each component gets "its own local namespace," capabilities are explicitly declared and routed between components — this is a **real, shipped** (if narrowly deployed — smart displays, some Google Nest hardware) capability-as-edge system, but at the *process/component* level, not at the *person-identity* level. It does not use this machinery to model person↔device identity.
+- **Capsicum** (FreeBSD) — could not fetch (cert error) but it is well documented as *actually merged into FreeBSD mainline and shipped* (also influenced macOS Sandbox and Capsicum-inspired work in Chromium), the most successful "capability confinement actually reached production OSes" story — but again, process sandboxing, not person-identity.
+- KeyKOS/EROS/Coyotos, seL4, WASI preview 2 component-model capabilities — not independently re-verified this session (training knowledge only, medium confidence); all are real but niche/research-adjacent, none treat *person↔device* as the capability's endpoints.
+
+**None of these shipped systems apply the capability-as-edge idea to the specific pair (person, device) as an identity primitive.** The capability graph's nodes are processes, components, or objects — never "a person" as a graph-theoretic peer of "a device."
+
+## 5. Local-first / Ink & Switch — closest to naming the actual gap
+
+Confirmed live via direct fetch of `inkandswitch.com/essay/local-first/` (Kleppmann, Wiggins, van Hardenberg, McGranaghan, 2019): the seven ideals include multi-device sync as a first-class requirement, but the essay is candid that **identity/authorization across devices is explicitly unsolved**: *"access permissions for documents beyond secret URLs remain an open research question,"* and *"any user who has a copy of some data cannot be prevented from locally modifying it; however, other users may choose whether or not to subscribe to those changes."* This is a direct, named admission from the most-cited local-first source that **the multi-device identity/authorization problem — exactly where a person-device dyad would live — was open as of 2019 and, per the phrasing, still unresolved at time of writing.** (Confidence: high, read directly.)
+
+I could **not** fetch Ink & Switch's Keyhive essay directly (both `inkandswitch.com/keyhive/` and `/keyhive` returned empty bodies to WebFetch — likely a JS-rendered page WebFetch's HTML→markdown conversion couldn't handle) and could not search to find a cached/alternate description. This is a real gap given the prompt specifically flagged Keyhive as likely the most relevant *current* (2024-2026) work — Keyhive/Beehive is Ink & Switch's capabilities+encryption system for local-first group membership, and from training knowledge (medium confidence, unverified this session) it models group membership and device authorization via capability delegation graphs where each **device** gets its own key and capabilities are granted device-to-device — which would be the closest thing to "device as identity-graph node" I'm aware of, but I cannot confirm this session whether it frames the *person* as one endpoint of an edge to the *device*, or treats each device as its own independent principal (the more common design, and the one Kleppmann's DCGKA paper explicitly uses — devices are independent Signal-like clients, not dyad-bound to a person as a first-class relation).
+
+**DCGKA** (Weidner, Kleppmann, Hugenroth, Beresford — IACR ePrint 2020/1281, "Key Agreement for Decentralized Secure Group Messaging with Strong Security Guarantees") — confirmed to exist and match topic via direct fetch, but the abstract-only page didn't surface enough detail to confirm or deny dyad framing; per its stated scope ("handles mobile devices frequently being offline, group members being added or removed") it treats **devices as independent group members**, which is the opposite of dyad-framing — each device is its own node, not bound as an edge to a person-node. (Confidence: medium.)
+
+## 6. The literal "dyad" search — negative result, confirmed
+
+I ran PubMed phrase searches directly: **"human-device dyad" returns zero results. "person-device dyad" returns zero results.** These are clean negative results from a live, authoritative database, not an absence-of-search-effort artifact. (Confidence: high.) This contradicts the brief's assumption that HCI/health-sensing literature has *taken* this exact term — either it's used informally in non-indexed venues (conference workshops, blog posts, preprints not in PubMed), or the brief's premise about the term being "taken by another field" doesn't hold under this specific index. I was not able to check Google Scholar, IEEE Xplore, or ACM DL directly (no API access, WebSearch down), so this is a **partial** negative result — PubMed-specific, not literature-wide. Semantic Scholar/ACM DL checks are a clear gap.
+
+I did not find, in anything I could fetch, an explicit "identity as a dyad" or "identity as an edge in a graph" framing stated as such in security/identity literature — the *concept* is everywhere (petnames, ocap, KERI's relational trust modes, pairwise DIDs) but the **literal dyad/edge vocabulary applied to identity, and specifically to person+device**, did not turn up. This is consistent with my training-knowledge sense of the field: **the idea is well-precedented piecewise (relation-not-attribute, key-event-log-not-registration, capability-not-credential) but nobody has assembled it specifically as "(person, device) → signed private edge" as a named unit of identity.**
+
+---
+
+## What the field would likely say against the dyad framing (synthesis, not sourced this session — flag as inference)
+
+Two arguments recur across the material I *did* verify and are worth naming even though I can't cite a specific paper making them explicitly against a person-device dyad:
+1. **Devices are too ephemeral / plural to anchor identity** — DCGKA and Signal-style multi-device protocols both treat each device as an *independent* principal precisely because binding identity to one device (or even one fixed dyad) breaks under device loss, replacement, and the common case of one person owning several concurrent devices. The industry's actual answer to "multi-device identity" has been "N independent per-device keys, reconciled by a group-membership protocol," not "one privileged person-device edge."
+2. **The right relational unit is (person, relationship-context), not (person, device)** — this is exactly what pairwise DIDs, petnames, and Cameron's Law 4 all converge on: the edge that matters is between **two parties in a relationship** (Alice↔Bob, holder↔verifier), with the device relegated to being *where the key for that edge happens to live*. Sovrin's architecture makes this precise: a pairwise DID is per-*relationship*, and a person may hold that relationship's key on any number of devices — the device is plumbing, not a party to the identity relation.
+
+Both of these, if correct, would suggest the **dyad is the wrong unit** — the field's converging answer, where it has an answer at all, is closer to "identity is an edge between two *parties* (often two people, or a person and a service), instantiated redundantly across a person's *fleet* of devices," rather than "an edge between one person and one device."
+
+---
+
+## Summary table (confidence-graded)
+
+| Claim | Status | Confidence |
+|---|---|---|
+| did:peer exists, is relational-by-design, remains Draft, small OSS footprint (32 stars) | Verified | High |
+| Sovrin Foundation dissolved May 2025; MainNet read-only on Trinsic infra | Verified (2 sources, 1 secondary) | Medium-high |
+| Pairwise-DID production deployment failed for economic/governance, not technical, reasons | Plausible per source | Medium |
+| DID Core spec is subject-centric, not relational, by design | Verified (spec text) | High |
+| Cameron's Law 4 (directed identity) is the closest "law-level" analogue | Verified | High |
+| Windley's "relationships not identities" content | Not reached this session | — (gap) |
+| Petname systems formalize identity/naming as strictly relational | Verified (2 primary sources) | High |
+| 2024 Spritely petnames paper extends this, no deployment evidence found | Verified content / absence may be fetch-artifact | Medium |
+| Zooko's Triangle + blockchain "squaring" claims contested | Verified via secondary (Wikipedia) | Medium |
+| Ocap = authority as edge/connectivity ("Miller's thesis") | Not independently reverified | Medium (training knowledge) |
+| Fuchsia ships real capability routing at component level | Verified | High |
+| Capsicum shipped in FreeBSD | Not reverified this session | Medium (training knowledge) |
+| Local-first essay admits multi-device identity/authz is open | Verified, direct quote | High |
+| Keyhive/Beehive device-authorization model details | Not reached | — (gap) |
+| DCGKA treats devices as independent nodes, not person-bound edges | Weakly verified (abstract only) | Medium |
+| "Human/person-device dyad" absent from PubMed | Verified, live query | High |
+| No literal "identity as a dyad/edge" framing found anywhere reachable | Absence of evidence across ~20 direct fetches | Medium (limited by tool access, not exhaustive) |
+
+**Net assessment:** the *shape* of the idea — identity as a relation, not a possession — has strong, decades-deep prior art (petnames 2005, Cameron 2005, pairwise DIDs ~2016-2019, ocap since the 1970s/formalized 2006) and one major real-world deployment that **failed for non-technical reasons** (Sovrin). But the specific **(person, device)** pairing as the dyad, with a signed private edge as the identity object, does not appear to have been named or built by anyone I could reach. The field's actual convergent answer treats the device as plural/ephemeral plumbing under a person-to-person or person-to-context relation, which is an implicit argument that a person-device dyad is the wrong unit.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;i9IQRkVq2UeZ-JYCfbDyvxO13VztpKjyiuMkypfEka0
+
+<<^ code="&#x0004;" -> to=? >>

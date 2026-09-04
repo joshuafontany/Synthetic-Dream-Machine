@@ -1,0 +1,193 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-pgp-web-of-trust-keyserver-collapse-47552e >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-pgp-web-of-trust-keyserver-collapse-47552e.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: TOPIC A — PGP Web of Trust / keyserver collapse. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-pgp-web-of-trust-keyserver-collapse-47552e"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! TOPIC A — PGP Web of Trust / keyserver collapse
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 25,114 characters
+
+````
+## TOPIC A — PGP Web of Trust / keyserver collapse
+
+### What actually happened (dated, sourced)
+
+**Late June 2019 — SKS certificate poisoning.** Robert J. Hansen published "SKS Keyserver Network Under Attack" as a GitHub gist: https://gist.github.com/rjhansen/67ab921ffb4084c865b3618d6955275f (raw text fetched and quoted below). Verbatim from the gist:
+
+- Timing: *"In the last week of June 2019"*
+- Targets: *"Robert J. Hansen and Daniel Kahn Gillmor, better known in the community as 'rjh' and 'dkg'"*
+- Scale: *"My public certificate as found on the keyserver network now has just short of 150,000 signatures on it."* (Hansen's; the gist gives **no** count for dkg's.)
+- Effect: *"Any time GnuPG has to deal with such a spammed certificate, GnuPG grinds to a halt."*
+- Mechanism: the OpenPGP spec places no limit on how many third-party signatures may be attached to a certificate; keyservers accept and gossip them.
+- Why no deletion: keyservers were deliberately built never to delete, as a cold-war-era anti-censorship property — *"The design goal of the keyserver network is 'baked into' essentially every part of the infrastructure."*
+- Why no fix: *"It's written in an unusual programming language called OCaml"* and there is *"literally no one in the keyserver community who feels qualified to do a serious overhaul"* of it. The reconciliation algorithm is attributed to Yaron Minsky — *"Yaron Minsky devised a brilliant algorithm that could do reconciliations very quickly."*
+- Verdict: *"At present I (speaking only for myself) do not believe the global keyserver network is salvageable."*
+- Mitigation: *"stop using the keyserver network immediately"*; add *"keyserver hkps://keys.openpgp.org"* to `gpg.conf`, described as not a drop-in replacement.
+
+Confidence: **high** — direct quotes from the primary document.
+
+⚠️ **Could not find: the word "Hell" applied to the recon algorithm.** It does not appear in the gist. Either it is from a different rjhansen writing or the recollection is wrong. Also **no mention of Hagrid, Enigmail, or dirmngr** appears in the gist itself. Do not attribute those to it.
+
+**2019-06-29 — CVE-2019-13050 published.** Description verbatim (via https://cve.circl.lu/api/cve/CVE-2019-13050): *"Interaction between the sks-keyserver code through 1.2.0 of the SKS keyserver network, and GnuPG through 2.2.16, makes it risky to have a GnuPG keyserver configuration line referring to a host on the SKS keyserver network. Retrieving data from this network may cause a persistent denial of service, because of a Certificate Spamming Attack."* CVE references cite Hansen's gist directly. Confidence: **high**.
+
+**2019-06-12 — keys.openpgp.org launches.** Announcement is the inaugural entry on https://keys.openpgp.org/about/news, dated 2019-06-12, positioning it as an alternative to the SKS pool with privacy-preserving identity validation. It reached >70,000 verified addresses by 2019-09-12 and 100,000 by 2019-11-12 (same news page). It adopted written governance with a board (Proton, GPGTools, Sequoia-PGP, independents) on 2023-04-28. Confidence: **high**.
+
+The FAQ (https://keys.openpgp.org/about/faq) states third-party signatures are *"a mechanism to attach arbitrary data to anyone's key, which can be problematic if a third party can unilaterally cause them to be published with the target certificate"*, and that it distributes only certifications the key holder has explicitly marked as **attested certifications**. This is the operative fact: **the replacement keyserver does not carry the WoT graph.** Confidence: **high**. anarcat's write-up puts it bluntly: *"keys.openpgp.org does not store third-party UID certifications at all, which means it doesn't propagate the web of trust"* — https://anarc.at/blog/2019-07-30-pgp-flooding-attacks/ (2019-07-30). Confidence: **medium-high** (secondary, but consistent with the FAQ).
+
+**2019-07-09 — GnuPG 2.2.17 released** (https://lists.gnupg.org/pipermail/gnupg-announce/2019q3/000439.html). This is the single most load-bearing artifact for "the WoT was formally abandoned in the software":
+- *"Ignore all key-signatures received from keyservers"* — now the default, to counter flooding.
+- New import filter option **`self-sigs-only`**.
+- Automatic fallback to `self-sigs-only,import-clean` when an imported keyblock exceeds limits.
+- **Web Key Directory preferred over keyservers** for automatic key retrieval.
+
+Confidence: **high**. Note the framing: GnuPG did not deprecate the WoT model in the abstract; it stopped *transporting* third-party signatures over keyservers, which amounts to the same thing operationally.
+
+**2021-06-21 — `pool.sks-keyservers.net` DNS turned off.** The stated reason was GDPR takedown pressure, not the poisoning: *"Due to even more GDPR takedown requests, the DNS records for the pool will no longer be provided at all."* Cited from https://github.com/irods/externals/issues/121 (dated 2021-06-21) and echoed on Frank Sauerburger's keyserver list (https://frank.sauerburger.io/2020/01/15/openpgp-keyservers.html, updated 2021-06-27). Confidence: **medium-high** — I could reach only secondary citations of the announcement, not Fiskerstrand's original post. Independently: **`sks-keyservers.net` today resolves to 127.0.0.128** (my fetch returned `ECONNREFUSED 127.0.0.128:443`), i.e. it is deliberately sinkholed. Confidence on that observation: **high**.
+
+Also documented: a Debian bug (#1002880) for `signing-party`'s `caff` still defaulting to the retired pool — the classic dangling-default tail. https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1002880
+
+**Replacement landscape:** keys.openpgp.org (verifying, no WoT), Web Key Directory (`openpgpkey.` HTTPS under the mail domain), keyserver.ubuntu.com, and Hockeypuck-based servers replacing SKS software. Participating SKS servers fell from ~100 to ~20 with only 1–2 offering HKPS (secondary source, superuser.com, ~2023 — confidence **low-medium**).
+
+### The prior "PGP is finished" essays
+
+- **Moxie Marlinspike, "GPG And Me", 2015-02-24** — https://moxie.org/2015/02/24/gpg-and-me.html. *"Even though GPG has been around for almost 20 years, there are only ~50,000 keys in the 'strong set.'"* and *"Instead of developing opinionated software with a simple interface, GPG was written to be as powerful and flexible as possible."* Note: it argues from design philosophy and adoption; it does **not** center on the WoT. Confidence: **high**.
+- **Filippo Valsorda, "I'm giving up on PGP", 2016-12-06** — canonical URL is now https://words.filippo.io/giving-up-on-long-term-pgp/ (blog.filippo.io 301s there). *"I never ever ever successfully used the WoT to validate a public key."*; *"A long term key is as secure as the minimum common denominator of your security practices over its lifetime."* Confidence: **high**.
+
+### Flags — Topic A
+
+- ⚠️ **I found no dkg blog post about certificate flooding.** His blog index (https://dkg.fifthhorseman.net/blog/) shows nothing on it; the nearest contemporaneous post is *"DANE OPENPGPKEY for debian.org"*, 2019-07-09. There is also a WKD-for-debian.org post (undated in my fetch). Do not cite a dkg flooding post without finding it first.
+- ⚠️ **I found no evidence Debian formally abandoned WoT-based keyring checks.** https://keyring.debian.org/replacing_keys.html still asserts keyring-maint *"reserve the right to ask Alice to obtain more signatures if it is deemed the key replacement will weaken the Debian web of trust."* What Debian actually did was move key *distribution* off SKS (WKD, DANE OPENPGPKEY, its own keyring server) while keeping a curated, signature-based keyring. Certificate flooding was still an open topic at **DebConf24** ("Protecting OpenPGP Keyservers from Certificate Flooding"). Treat "Debian abandoned the WoT" as **unsupported**.
+- ⚠️ **GnuPG 2.3-specific changes: not verified.** All the load-bearing behavior change I could source is in 2.2.17.
+- ⚠️ **No single authoritative "the WoT is dead" declaration exists.** The consensus is inferred from the above artifacts, not proclaimed.
+
+---
+
+## TOPIC B — CEREMONY ROT
+
+### A. What actually happened
+
+**2011-10 (weekend) — Knight Capital's DR test itself caused a loss.** From the SEC order (below): Knight used test data for a weekend disaster-recovery test; afterward *"Knight's LMM desk mistakenly continued to use the test data to generate automated quotes when trading began that Monday morning. Knight experienced a nearly $7.5 million loss as a result of this event."* Remediation was *"adding an item to a disaster recovery checklist that required a check of the test data"* — a checklist patch, not a systemic fix. Confidence: **high** (primary).
+
+**2012-08-01 — Knight Capital, $460M in 45 minutes.** SEC Admin. Proc. 34-70694, dated 2013-10-16: https://www.sec.gov/litigation/admin/2013/34-70694.pdf. Exact facts from the order:
+- 2005: Knight moved the cumulative-quantity tracking function earlier in the SMARS code sequence. *"Knight did not retest the Power Peg code after moving the cumulative quantity function to determine whether Power Peg would still function correctly if called."* The dead code sat unexercised for **seven years**.
+- Deployment beginning 2012-07-27: *"one of Knight's technicians did not copy the new code to one of the eight SMARS computer servers. Knight did not have a second technician review this deployment... Knight had no written procedures that required such a review."*
+- Result: 212 parent orders → **4 million executions in 154 stocks, >397 million shares, ~45 minutes**; ~$3.5B net long / ~$3.15B net short; **$460 million** realized loss. Penalty **$12 million**.
+- Also: *"Knight did not have supervisory procedures concerning incident response."*
+
+Confidence: **high** (all figures pulled from the order text itself).
+
+**2017-01-31 — GitLab.com database loss; five recovery paths, none working.** Postmortem: https://about.gitlab.com/blog/2017/02/10/postmortem-of-database-outage-of-january-31/ (the modern `/blog/postmortem-.../` URL 403s; the dated URL works via r.jina.ai). Facts:
+- ~17:20 UTC, an engineer removed ~300 GB from the primary while trying to repair replication on the secondary.
+- `pg_dump` backups silently produced nothing — the backup ran with **PostgreSQL 9.2 binaries against a 9.6 server**; the failure emails were **rejected because of missing DMARC signing**, so nobody saw them.
+- Replication had broken because **WAL archiving was not enabled** and segments were removed before the secondary consumed them.
+- **Azure disk snapshots were not enabled** for the DB servers.
+- **LVM snapshots** existed only as a 6-hour-old dev-staging convenience, not a DR mechanism.
+- Loss: roughly **5,000 projects, 5,000 comments, 700 new user accounts**; Git repos/wikis survived (separate storage). Service restored ~2017-02-01 18:00 UTC, ~25 hours.
+- The ownership sentence is the whole lesson: *"there was no ownership, as a result nobody was responsible for testing this procedure."*
+
+Confidence: **high**.
+
+**2017-11-06 — Parity multisig library self-destruct.** GitHub issue openethereum/parity-ethereum#6995, *"anyone can kill your contract"*, opened 2017-11-06, labeled F1-security / M8-contracts / P0-dropeverything: https://github.com/openethereum/parity-ethereum/issues/6995. The referenced library contract is `0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4`.
+⚠️ **The Parity postmortem blog post is gone** — https://www.parity.io/blog/a-postmortem-on-the-parity-multi-sig-library-self-destruct/ now redirects to the blog index and the article is not served. I therefore **could not verify the 513,774 ETH figure from a primary source.** Treat that number as **unconfirmed** here. Confidence on the issue/date: high; on the amount: **low**.
+
+**2020-02-11/12 — ICANN root KSK Ceremony 40 postponed because a safe would not open.** Bruce Schneier, *"DNSSEC Keysigning Ceremony Postponed Because of Locked Safe"*, 2020-02-14: https://www.schneier.com/blog/archives/2020/02/dnssec_keysigni.html — *"IANA staff discovered that they couldn't open one of the two safes. One of the locking mechanism wouldn't retract."* The ceremony had been scheduled for 2020-02-12 at El Segundo; the safe held the HSMs. Both the primary and the backup date were lost. IANA's ceremony page confirms **Ceremony 40 eventually completed 2020-02-16 at 01:00 UTC**, objective "Sign the ZSK for 2020Q2": https://www.iana.org/dnssec/ceremonies/40 — and that page carries **no note of the delay at all**. Confidence: **high** on the incident; **high** on the ceremony page's silence about it (which is itself a finding: the public record of the ceremony erases its own failure).
+
+This is the cleanest ceremony-rot artifact in the set: an extremely well-rehearsed *cryptographic* procedure defeated by an unrehearsed *physical* dependency.
+
+**2020-04-23 — Ceremony 41** ran *"with a reduced agenda and with minimal in-person participation to limit risks associated with the COVID-19 pandemic"* (https://www.iana.org/dnssec/ceremonies/41). A ceremony bending under an unrehearsed condition, though it succeeded. Confidence: **high**.
+
+**2022-04-05 → 2022-04-18 — Atlassian: restore existed, restore-at-scale did not.** PIR: https://www.atlassian.com/blog/how-we-build/post-incident-review-april-2022-outage.
+- 07:38 UTC 2022-04-05: a cleanup script was handed **site** identifiers where it expected **app** identifiers; *"The API used to perform the deletion accepts both site and app identifiers and assumes the input is correct."* **883 sites across 775 customers** permanently deleted.
+- The rehearsal gap, stated by Atlassian: *"At the time of the incident, we did not have the ability to select a large set of customer sites and restore all of their inter-connected products from backups."*
+- First restores 2022-04-08; last 2022-04-18 (**up to 14 days**). The initial approach took ~48 hours per batch and would have needed **three weeks**; a second, purpose-built approach cut it to ~12 hours per site.
+- Backups themselves were fine: *"no customer lost more than five minutes of data."*
+
+Confidence: **high**. The precise shape: **the backups worked and the recovery procedure did not**, because it had only ever been exercised at single-site grain.
+
+**2017-06-27 — Maersk / NotPetya: recovery survived by accident.** The Active Directory rebuild depended on a **single domain controller in Ghana that happened to be offline during a power outage** when NotPetya propagated; because of low bandwidth it had to be physically carried Ghana → Nigeria → London. ~45,000 endpoints rebuilt over roughly ten days. Primary long-form: Andy Greenberg, WIRED, *"The Untold Story of NotPetya"* — https://www.wired.com/story/notpetya-cyberattack-ukraine-russia-code-crashed-the-world/. Confidence: **medium-high** — the Ghana detail is widely and consistently reported and originates with Maersk's own executives, but I reached it via aggregated search snippets rather than reading the WIRED text directly.
+
+**2019-06 — QuadrigaCX. ⚠️ Correct the framing.** The Ontario Securities Commission's *"QuadrigaCX: A Review by Staff of the Ontario Securities Commission"* (https://www.osc.ca/quadrigacxreport/; PDF at https://www.osc.gov.on.ca/quadrigacxreport/web/files/QuadrigaCX-A-Review-by-Staff-of-the-Ontario-Securities-Commission.pdf) concludes: *"The downfall of crypto asset trading platform QuadrigaCX resulted from a fraud committed by Quadriga's co-founder and CEO Gerald Cotten... In reality, Cotten spent, traded and used those assets at will."* Shortfall ~**$169 million**. So Quadriga is **not** a clean "sole keyholder died, keys lost" case — the OSC found the assets were largely already gone. It remains valid as a *governance* example (no second signer, no tested succession), but citing it as a lost-key/ceremony-rot case is **not supported by the regulator's finding**. Confidence: **high** on the OSC conclusion.
+
+### B. What guidance merely prescribes
+
+**NIST SP 800-34 Rev. 1, "Contingency Planning Guide for Federal Information Systems", May 2010** (https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-34r1.pdf — read in full via pdftotext). Exact positions:
+- Cadence is **deferred, not fixed**: *"Organizations should conduct TT&E events periodically, following organizational or system changes, or the issuance of new TT&E guidance"*, and SP 800-53 **CP-4** requires exercises *"around an organization-defined frequency."*
+- By FIPS 199 impact tier (§3.5.4): **low** → tabletop at an organization-defined frequency; **moderate** → functional exercise including *"an element of system recovery from backup media"*; **high** → *"full-scale functional exercise"* including *"a system failover to the alternate location"* and *"a full recovery and reconstitution of the information system to a known state."*
+- **Training: *"Training should be provided at least annually."*** — this is the only hard "annual" in the body text.
+- The **annual** number people cite comes from the ISCP templates' signature block, not the guidance body: *"I further attest that this ISCP for {system name} will be tested at least annually. This plan was last tested on {insert exercise date}."* And in the template guidance: *"All ISCPs should be reviewed and tested at the organization defined frequency (e.g. yearly)."*
+- The most quotable design goal for your purposes: *"ISCP personnel should be trained to the extent that they are able to execute their respective recovery roles and responsibilities without aid of the actual ISCP document."*
+
+Confidence: **high** — all verbatim from the PDF.
+
+**FFIEC BCM booklet, section VII "Exercises and Tests"** (https://ithandbook.ffiec.gov/it-booklets/business-continuity-management/vii-exercises-and-tests/): requires *"exercises and tests occurring at appropriate intervals and when significant changes affect the entity's operating environment"*; formats *"full scale, limited scale, or tabletop"*; *"the board and senior management should provide for appropriate exercises and tests."* It distinguishes **exercises** (people/process, discussion or simulation) from **tests** (system performance against quantifiable metrics).
+⚠️ **I could not confirm a hard "annual" mandate in the FFIEC primary text** — the only "annually, at minimum" phrasing I saw came from an SEO blog of dubious provenance. Do not cite FFIEC as mandating annual DR testing without re-verifying. Confidence: **medium** on the section text (fetched via r.jina.ai proxy); **low** on any annual figure.
+
+**ISO 22301:2019 clause 8.5** requires an exercise programme validating BC procedures *"at planned intervals"* — no fixed frequency specified. Confidence: **medium** — I reached only implementation-guide secondary sources, not the standard (paywalled).
+
+**NIST SP 800-57 Part 1 Rev. 5, May 2020** (https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-57pt1r5.pdf — read in full). ⚠️ **Negative finding, and a strong one:** it treats key recovery at length (§8.2.2.2, §8.3.1, Appendix B "Key Recovery", B.4 Key Recovery Systems, B.5 Key Recovery Policy) but **contains no rehearsal or drill cadence for key recovery**. A full-text grep for *rehears*, *drill*, *dry run* returns nothing; the only relevant lines are *"Any system should be tested before it is deployed"* and *"The integrity of each copy should be periodically checked."* The framework tells you to *have* a Key Recovery System and Policy; it never tells you to *practice using it*. Confidence: **high**.
+
+**ICANN / IANA root KSK ceremonies. ⚠️ I could not substantiate "a full dry run before each ceremony."**
+- The **DPS (Root Zone KSK Operator, 8th ed., effective 2025-04-14)**, https://www.iana.org/dnssec/procedures/ksk-operator/ksk-dps-20250414.html, contains **no** occurrence of dry run / rehearsal / walkthrough / exercise tied to ceremonies. It has only §4.3.3 on-hire training, §4.3.4 *"refresher training and updates... to the extent and frequency required"*, and §4.5.4: *"These plans are regularly tested, validated, and updated"* — "regularly" undefined.
+- Ceremony 54 (2024-07-17) materials, https://www.iana.org/dnssec/ceremonies/54, publish annotated scripts, six camera angles, HSM and signing-computer logs, and OS images — plus an *"Administrative Ceremony 54 HSM Acceptance Testing"*. That is **acceptance testing of hardware, not a rehearsal of the ceremony.**
+- APNIC's George Michaelson, 2025-07-08, https://blog.apnic.net/2025/07/08/signing-the-root-in-public-the-foundations-of-trust/, describes participating in real ceremonies and improvement arriving via *"Each ceremony concludes with a review of lessons learned"* — i.e. **the ceremony is its own rehearsal**, roughly quarterly (IANA: *"Ceremonies are usually conducted four times a year"*, https://www.iana.org/dnssec/ceremonies).
+
+So the honest version is stronger than the assumed one: **IANA's defense against ceremony rot is high frequency and full public recording, not a pre-ceremony dry run.** And Ceremony 40 shows exactly what that leaves uncovered — the safe.
+
+⚠️ **CA/Browser Forum and WebTrust dry-run requirement: NOT FOUND.** Every "dry run" statement I could surface is from commercial consultancies, e.g. encryptionconsulting.com's *"'Dry-run': rehearse the entire script without generating live key material, catching any procedural or logistical issues"* (https://www.encryptionconsulting.com/education-center/root-ca-key-ceremony/) — vendor best-practice, **not** a CABF Network and Certificate System Security Requirements or WebTrust criterion. Do not represent it as a requirement.
+
+**Let's Encrypt / ISRG:** they publish ceremony configs at https://github.com/letsencrypt/ceremony-demos (*"ceremony config files nearly identical to those used for various root and intermediate ceremonies"*) and ran a Gen-Y root ceremony in September 2025 (https://letsencrypt.org/2025/11/24/gen-y-hierarchy.html). ⚠️ **The repo README does not mention rehearsals or dry runs.** Publishing the executable script is their transparency mechanism; rehearsal is not documented. Confidence: **high** on the negative.
+
+**Crypto custody rehearsal guidance:**
+- **Casa** is the only custody provider I found publishing an actual cadence: **semi-annual health checks**, with automated reminders — https://support.casa.io/knowledge/what-is-a-health-check, https://support.casa.io/knowledge/health-checks-in-the-casa-app, and specifically for inheritance recipients every six months, https://support.casa.io/knowledge/inheritance-recipient-health-checks. The stated threat model is the right one: **silent key failure**, where a device or backup degrades without the owner noticing. Confidence: **medium-high**.
+- **Unchained Capital: negative finding.** I downloaded and grepped their *Operational Security Guide* PDF (linked from unchained.com; hosted at `8198895.fs1.hubspotusercontent-na1.net/hubfs/8198895/PDFs/`). Full-text search for *practice / rehears / drill / test / annual / periodic / verify* yields **exactly one hit**, and it is about key rotation after compromise, not rehearsal. They ship Caravan (https://help.unchained.com/what-is-caravan) as a stateless recovery tool — a *capability*, with **no published rehearsal cadence**. Confidence: **high**.
+
+### Flags — Topic B
+
+- ⚠️ **"2017 Docker Hub" backup incident: NOT FOUND.** I could not locate any 2017 Docker Hub backup/restore failure. There is a 2019 Docker Hub credential breach, which is a different thing. Drop or re-specify.
+- ⚠️ **A first-party HSM disaster-recovery restore failure: NOT FOUND.** Searches surfaced only content-farm material (axelspire.com, htlin222.github.io, qcecuring.com) that reads as generated and cites nothing. Thales Luna docs reportedly say *"Execute your recovery plan at least semi-annually... to ensure that your recovery plan works as documented"* — **I could not verify this**; thalesdocs.com returned 403. Treat both as unsourced.
+- ⚠️ **"Escrowed key or break-glass credential found unusable": NOT FOUND** in any primary, dated, attributable form. The nearest real analogue is the ICANN safe (physical break-glass path failed) and Maersk (recovery root survived by luck, not by design).
+- ⚠️ **Parity's 513,774 ETH figure unverified** — Parity's own postmortem has been removed from the web.
+- ⚠️ **QuadrigaCX is a fraud finding, not a lost-key finding.** See above.
+
+### Tooling note
+
+Brave Search returned HTTP 429 on every attempt across the whole session, and `r.jina.ai` in front of Brave hit the same CAPTCHA. The working search path was **`https://r.jina.ai/https://duckduckgo.com/html/?q=<query>`**, and it only returns results for **short, unquoted queries** — long or quote-heavy queries silently return DDG's "no results" suggestion page, which is easy to mistake for a genuine negative. Mojeek, Ecosia, searx.disroot (Anubis), and bare DDG all blocked. web.archive.org is blocked at the tool level. Large PDFs come back as unreadable binary but are written to disk, so `pdftotext` + `grep` is the reliable way to read NIST/SEC documents — that is how the SP 800-34, SP 800-57, SEC 34-70694, and Unchained findings above were obtained verbatim.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;k6MHCj4OPDyS3TtWeK-anvr7H5js6JedFbHH7wJ1ZEQ
+
+<<^ code="&#x0004;" -> to=? >>

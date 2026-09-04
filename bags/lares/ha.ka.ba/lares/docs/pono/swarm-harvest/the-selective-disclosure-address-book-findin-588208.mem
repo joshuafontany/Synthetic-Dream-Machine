@@ -1,0 +1,206 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-selective-disclosure-address-book-findin-588208 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/the-selective-disclosure-address-book-findin-588208.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: THE SELECTIVE-DISCLOSURE ADDRESS BOOK — findings. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-selective-disclosure-address-book-findin-588208"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! THE SELECTIVE-DISCLOSURE ADDRESS BOOK — findings
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 33,899 characters
+
+````
+All five research streams are complete. Report follows.
+
+---
+
+# THE SELECTIVE-DISCLOSURE ADDRESS BOOK — findings
+
+**Tooling note.** WebSearch untouched (exhausted). OpenAlex hit a hard daily budget wall (`Insufficient budget`, resets midnight UTC) early and was unusable all session; Crossref, arXiv, HN Algolia, `gh`, GitLab/Codeberg/npm APIs, and direct WebFetch carried the work. Hosts hard-blocked from this egress: Reuters, AP, Wired, Verge, Guardian, BBC, Ars Technica, Washington Post, Le Monde, ZDNet, Axios, medium.com, support.google.com (CAPTCHA), web.archive.org (intermittent). Marked **NOT REACHED** inline.
+
+**One instrument-lie caught, worth stating first.** A WebFetch summarizer returned a fabricated quotation from RFC 9498 — that publishing zone delegations can "reveal the social graph of zone users." I collided it against the RFC text: `grep -c -i "social graph" rfc9498.txt` → **0**. The phrase does not appear in the RFC. I re-derived §9.8 from the raw text instead. Treat every summarizer-produced "quote" below as verified only where I say I pulled the primary bytes.
+
+---
+
+## HEADLINE 1 — Has anyone shipped a contact list where each identity authors its own view of the others?
+
+**Yes, exactly one, and it is in beta: VeilidChat.** Nobody has shipped the second half of your design — the absence of a system-level roster.
+
+**VeilidChat** (`gitlab.com/veilid/veilidchat`, last tag v0.4.9, 2025-08-07; tree active to 2026-09-03). Read from code: `lib/proto/veilidchat.proto` gives every `Account` its own `contact_list`, `contact_invitation_records`, `chat_list`, `group_chat_list` as `OwnedDHTRecordPointer`s marked `// DHT Private` — owned by, and reachable only from, that one account's keypair. `lib/account_manager/models/device_identity_store.dart` carries "This device's stable random tag for **one account**" — the device tag is account-scoped, not device-global. There is a `lib/wipe/` subsystem and a `hiddenAccount` flag ("Keep account hidden unless account password is entered"). **But:** `lib/init.dart` initializes ONE `Veilid.instance` and ONE `DHTRecordPool` for the whole app — every account shares one node, one NodeId, one set of DialInfo — and `LocalAccount` is a device-level table enumerating every account present. veilid.com/chat/ still reads: *"there are no official builds yet."*
+
+**Delta Chat** ships the same shape, GA, on every platform — multi-profile, each profile its own account DB and contacts, and the FAQ actively recommends it: *"You may want to use separate profiles for political, family or work related activities."* It also says relays see your IP. **It never connects the two.** Three real audits exist (Include Security 2019 and 2020; Cure53 2023-03-27 — 8 findings, 1 High).
+
+**The canonical texts say the property, and none of their authors shipped it.**
+- Mark Miller, *Lambda for Humans: The PetName Markup Language*, erights.org/elib/capability/pnml.html (retrieved via archive): *"petnames are understood to be specific (and private!) to the relationship between two people"*; *"each PNML user-agent has a persistent mutable private 1-to-1 mapping from petnames to keys."*
+- Marc Stiegler, *Petname Systems*, **HP Labs HPL-2005-148, August 15, 2005** (PDF retrieved, 16pp) and *An Introduction to Petname Systems* (Feb 2005, upd. June 2010). **Correction to your brief: both petname documents are Stiegler's, not Miller's**; Miller's contribution is PNML. Stiegler: *"The petname must be assigned to the key only by explicit user action."*
+- Zooko, *Names: Decentralized, Secure, Human-Meaningful: Choose Two*, v0.9.9.0, **2003-09-22** (retrieved). His own 2006-01-30 addendum points readers to Stiegler.
+- Lemmer-Webber, Miller, Larson, Sills, Yaacoby, RWoT Spring 2018 petnames draft: *"Every entity in a petname system may act as its own namespace."*
+
+**GNU Name System is the only standardized per-identity namespace — RFC 9498, November 2023**, Schanzenbach/Grothoff/Fix, **Independent Submission, Informational** (not IRTF). It explicitly adopts petname architecture: *"users can autonomously and freely delegate control of names to zones through their local configurations"*; the resolver *"MUST determine the Start Zone through a local suffix-to-zone mapping… at the sole discretion of the local system administrator or user"*; §9.9 states Start Zones give *"secure delegation of authority using local petnames."* Two conforming implementations (C in GNUnet, Go). **Measured deployment/adoption: NONE FOUND.** stats.gnunet.org does not resolve; no evaluation paper surfaced via Crossref; HN interest is real (RFC 9498 post, 142 pts, 2023-11-21) and adoption data is absent. Negative finding.
+
+**Spritely — the near-exact prior art, abandoned in 2022.** `codeberg.org/spritely/brux`: *"A petname system which can be used by any application / Multiple personas as a way of providing user identities."* Its design doc states your requirements verbatim: *"Applications don't know what personas exist, just have access to the persona chosen by the user"*; *"Other users cannot find out what (if any) other personas exist for a person."* Real Racket code: `brux/petnames.rkt`, `brux/persona.rkt`, `brux/edgenames.rkt` (~89 KB, 2 stars). **Last commit 2022-03-11.** I then checked every live Spritely repo for any petname or persona module — `goblins` (2026-08-11), `goblin-chat` (2026-04-25), `navi` (2025-10-22), `pumpkin-chat` (2026-09-01), `brassica-chat` (2026-03-30): **petname/persona files: NONE, in all five.** Goblins v0.18.0 shipped 2026-04-21; petnames are not in it.
+
+**Agoric — petnames shipped in the wallet that is out of production, not in the one on mainnet.** `gh api search/code` finds 32 hits for `petname` in agoric-sdk. The old ag-solo wallet (`packages/wallet/api/src/lib-wallet.js`) has **159** occurrences. The mainnet `packages/smart-wallet/src/smartWallet.js` has the type imported and one use: `// adopt edgeName as petname` / `const petname = edgeName;` — i.e. the petname is copied from the chain's **global NameHub**, not authored per-user. Issue **#7226** ("Smart wallet equivalent to `suggestIssuer(petname, issuerBoardId)`", opened 2023-03-23) is still **open**; a code comment defers user-set petnames to **#6126**, opened 2022-09-03, **still open**. Issue #1449 "Straighten out wallet 'petnames'" ran 2020-08-12 → closed 2025-04-21.
+
+**Ink & Switch traded the property away deliberately.** Keyhive's notebook lists under **Antigoals**: *"Keyhive deliberately excludes user identity."* Its `design/threat_model.md` contains exactly one line: `# Threat Model`. Its `design/edge_names.md`: petnames are *"fully trusted and kept private,"* then *"Edge names (EN) **relax the PN privacy restriction** to gain a minimalist name discovery system."* Their brand-new **`inkandswitch/onomancy`** (alpha, first pushed ~2026-09-01) ships `~/bob/pics` as `Anchor::Local — never leaves this device`, and rejects transparency logs on precisely your grounds — they *"create a globally enumerable roster of participants."*
+
+**Systems that publish the address book by design (anti-examples).** Nostr **NIP-02** is a public `kind:3` event carrying `["p", <pubkey>, <relay>, <petname>]` — **your private nickname for someone is broadcast to every relay**, and the spec encourages mining it. **Zero NIPs** exist on multiple identities, personas, or account switching (grepped the whole repo). SSB: *"It's normal for a person to have several Scuttlebutt identities"* — and *"each feed publicly announces which feeds it is following"*, replicated 2–3 hops out. Bluesky, measured unauthenticated by the agent: `app.bsky.graph.follow` and `app.bsky.graph.block` are world-readable records, and `plc.directory/export` bulk-exports **every operation for every account** (12M+ DIDs). Keybase: *"Your username, devices, proofs, and followers are visible on your Keybase profile."*
+
+**The one system that explicitly claims your mutual-blindness property is SimpleX Chat.** I pulled the primary file and verified verbatim (`simplexmq/protocol/security.md`, lines 189–191, under **"A user's contact"** → ***cannot***):
+
+> - prove that two contacts they have is the same user.
+> - cannot collaborate with another of the user's contacts to confirm they are communicating with the same user.
+
+It buys this by **not being peer-to-peer** — routers absorb the channels Briar cannot escape. Audits: Trail of Bits 2022-11 (4 findings: 2 medium, 2 low; one was an X3DH KDF omission) and a July 2024 design review (3 medium, 1 low, 3 info). And the same file hands the caveat back, at lines 95 and 119 — the router **can**:
+
+> perform the correlation of the queue used to receive messages (matching multiple queues to a single user) via either a **re-used transport connection, user's IP Address, or connection timing regularities**.
+
+**Briar is the strongest negative result in the corpus: it considered this exact design and refused it, in writing.** FAQ retrieved via GitLab API v4, verbatim:
+
+> Can I have multiple identities/profiles/accounts? **Short Answer: No, that is not supported by Briar.**
+> Long Answer: In a p2p network it's hard to prevent identities from being linked to each other if they live on the same device… A contact of `A` and a contact of `B` get together and try to find out whether `A` and `B` are the same person. What information could they use?
+> * First, **the times when `A` and `B` are online. In a p2p network we can't hide this from our contacts.**
+> * Second, the network addresses… **with Wi-Fi and Bluetooth, the contacts can compare the addresses we gave them and see that it's the same device.**
+> * Third, they could look for **information leaks at the application layer**. For example they could try to introduce `A` to `B`, and see if the protocol behaves differently than it would if `A` and `B` were on different devices.
+
+Tracker corroboration: issues **#34** and **#202** (both "Identity management" / per-identity contact views) are labeled **`R: rejected`**, closed 2018-06-12; **#1122** "Different identities in different contexts" open since 2017-11-30, stale. Briar's own scope line: *"Does Briar provide anonymity? No… It provides unlinkability but not anonymity."*
+
+Cwtch does ship multiple profiles, one Tor v3 onion each — but **nowhere claims they are mutually blind**, and its own Tor page supplies the breaking mechanism (below). **Negative finding on its audit:** no Radically Open Security audit of Cwtch exists in any of its own documentation; `github.com/radicallyopensecurity/reports` → 404.
+
+---
+
+## HEADLINE 2 — What leaks across the veil, ranked by evidence
+
+**Tier 1 — measured, device-scoped, defeats data-layer separation outright.**
+
+1. **Push notification metadata.** Wyden to Garland, **2023-12-06** (primary PDF): the data *"detail[s] which app received a notification and when, as well as the phone and associated Apple or Google account to which that notification was intended to be delivered."* Apple now publishes a standing **Push Token Requests** category whose stated purpose is to resolve *"identifying details of the Apple Account associated with the device's push token."* From Apple's own `push_token_requests.csv`: **70 requests / 794 tokens (2022 H2) → 489 requests / 867 tokens (2025 H2)**, a **7.0× rise**, across **15+ requesting countries**; UK volume 27 → 290 at 80–90% fulfilment. Bulk requests occur (Israel 2023 H2: **1 request / 694 tokens**). APNs tokens are genuinely per-app-per-device (*"You can't use the same device token for more than one app, even when the apps are on the same device"*) — **and that buys nothing, because the join happens server-side at Apple, on the account.** Negative findings: no 2024/2025 Wyden follow-up exists (site searched, three pages); Google publishes no push-specific category (NOT REACHED — CAPTCHA).
+
+2. **Silent delivery receipts enumerate your device fleet.** *Careless Whisper*, Gegenhuber et al. (U. Vienna / SBA Research), **RAID 2025 Best Paper**, DOI 10.1109/raid67961.2025.00068, arXiv:2411.11194v4. Read receipts can be disabled; **delivery receipts cannot**. From a phone number alone, silently, no prior conversation: probing returned a session list `[0, 1, 9]` — *"three existing sessions, one main device (index 0), and two companion devices… Due to the (auto-incrementing) index, we know in which order the sessions were created."* Screen on/off leaks through RTT (≤1s on, >1s off). An open-world capture on a volunteer with no prior relation identified a macOS desktop, its 19:28 shutdown, a Wi-Fi→LTE handover, a phone call, office arrival at 19:45, and a work laptop waking. Affects **WhatsApp and Signal**. Resource side: **13.3 GB/hour** forced traffic, 14–18%/hour battery on iOS. **This is the transport layer publishing your fleet topology while the data layer holds perfectly.**
+
+3. **Signal sealed sender collapses at N=5.** Martiny, Kaptchuk, Aviv, Roche, **Wustrow** (not Rubin — correction to your brief), *Improving Signal's Sealed Sender*, NDSS 2021. A statistical disclosure attack keyed on **delivery receipts, which are on by default and are themselves sealed-sender messages**. Simulation: **1,000,000 users, 800 msgs/epoch, 1-second epochs, 100 runs per config.** Result: *"Signal could link sealed sender users in as few as 5 messages"* (Alice-only case, uniquely identified). Worst case with 5 co-associates + 1,000 popular users: *"on the order of 60 epochs."* Measured on the real app: delivery-receipt round trip **median 1,480 ms, 90% within ~5,000 ms**. The graph model is irrelevant — Erdős–Rényi, Barabási–Albert, Watts–Strogatz and fully-connected all gave similar epoch counts. Formal verdict: *"Signal's sealed sender does not meet this ideal functionality."* Their fix costs **<$40/month**. Signal's own 2018 post already conceded: *"additional resistance to traffic correlation via timing attacks and IP addresses are areas of ongoing development."*
+
+4. **Device attestation is device-scoped, in the vendors' own words.** Apple **DeviceCheck**: *"set and query **two binary digits of data per device**"* — strictly device-scoped. Android **Play Integrity `deviceRecall`** (beta) is worse: *"**three custom values or bits for each device**… stored on Google's servers, allowing your app to reliably recall your custom data **even after your app is reinstalled or the device is reset**."* The only thing between that and cross-persona linkage is a policy sentence: *"You may not use device recall to fingerprint or track individual users or devices."* SafetyNet Attestation was deprecated 2022 and **fully turned down January 2025**. Favourable counterpoint: Apple's **App Attest** guidance is per-account — *"For each user account on each device… generate a unique, hardware-based, cryptographic key pair… Don't reuse a key among multiple users on a device."* Google's abandoned **Web Environment Integrity** conceded the vector in its own explainer: *"attestation tokens themselves could enable cross-site tracking if they are re-used between sites"* (proposal withdrawn Nov 2023; W3C TAG: *"has no standing at W3C"*). **Real gap: there is no measured study of Play Integrity / App Attest / DeviceCheck as a fingerprinting channel.** arXiv for `"remote attestation" AND privacy AND linkability` returns **0 results**. The risk is vendor-documented and researcher-unmeasured.
+
+**Tier 2 — measured, high accuracy, requires an observer position.**
+
+5. **End-to-end flow correlation.** *DeepCorr*, Nasr/Bahramali/Houmansadr, CCS 2018, arXiv:1808.07285: *"by collecting only about **900 packets** of each target Tor flow… **96%** flow correlation accuracy compared to **4%** by the state-of-the-art system of RAPTOR using the same exact setting."* At 300 packets: TP ≈ 0.8 at FP=10⁻³. Trained on 25,000 flows, ~1 day on a TITAN X; *"an adversary needs to re-train DeepCorr only about **once every month**."* 2 ms per correlation. *"meek and obfs4-iat0 provide little protection."*
+
+6. **Long-lived pseudonymous services are priced in uptime.** Kwon et al., USENIX Security 2015: detecting *that* a user touches a hidden service at all — **>98% TPR, <0.1% FPR** — *"reduces the anonymity set of a user from millions of Tor users to just the users of hidden services."* Then WF within that set: **88% TPR / 7.8% FPR** open-world for deanonymizing 50 hidden-service servers. Their framing rebuts the scaling critique directly: *"the world of hidden services is the ideal setting to wage WF attacks."* Biryukov/Pustogarov/Weinmann, IEEE S&P 2013: harvest **all** hidden-service descriptors in **~2 days** on 50 EC2 instances; become a target service's guard with **>90% probability within 8 months for EUR 8,280 (~USD 11,000)**, and *"this scales well."*
+
+7. **Browser/device fingerprinting crosses the browser boundary.** Cao/Li/Wijmans, NDSS 2017: **99.24%** single-browser identification, and **83.24% cross-browser uniqueness at 91.44% cross-browser stability** (IE+Edge on one machine: **100% / 95.7%**). Laperdrix et al., IEEE S&P 2016 (N=118,934): **90% desktop, 81% mobile** uniquely identified; removing plugins + standardizing headers cuts desktop uniqueness by **36%**. Eckersley, PETS 2010 (N=470,161): ≥**18.1 bits**, and the persona-relevant number — re-linking a *changed* fingerprint to its earlier self at **99.1% correct, 0.86% FP**. FP-Stalker's figures (~54-day average tracking) come from a conference program page only — **PDF NOT REACHED, re-verify before use.**
+
+8. **Cross-app identifiers reconstitute themselves server-side within a year.** Kollnig et al., FAccT 2022 (N=1,759 iOS apps, before/after ATT): ATT works as designed — only **24.7%** of post-ATT apps can reach the IDFA, and **60–95%** of users refuse — *"but the number of tracking libraries has – on average – roughly stayed the same"* (3.7 → 3.6; **86.39%** still carry one), and pre-interaction tracking domains rose 4.0 → 4.7. The measured reconstitution: *"we found **9 apps** that were able to generate a mutual user identifier that can be used for cross-app tracking, **through the use of server-side code**"* — Umeng's "AAID," an Alibaba subsidiary, **violating Apple's policies**. General mechanism, stated plainly: *"large tracking companies can likely still use these identifiers to build profiles… using their server-side code to link different identifiers together (e.g. through the user's IP address, other device information, and first-party data)."* Their PETS 2022 companion (N=24,000 apps): AdId shared by **55.4% of Android / 31.0% of iOS** apps; device model + phone name by **85.1% / 61.4%**.
+
+9. **Contact discovery over low-entropy identifiers is an enumeration oracle.** Hagen et al., NDSS 2021: queried **10% of all US mobile numbers against WhatsApp and 100% against Signal**; Telegram leaked data about *unregistered* numbers. Verdict: *"hashing-based contact discovery protocols are severely broken."* Threema's own contact discovery (HMAC-SHA256 under a fixed static key) is judged by the ETH paper: *"phone numbers carry little entropy and can be brute-forced. **This allows the service provider to build a partial social graph for an entire population.**"*
+
+10. **Keystroke/typing timing.** Song/Wagner/Tian, USENIX Security 2001: *"every individual keystroke… is sent to the remote machine in a separate IP packet immediately after the key is pressed."* ~**1.2 bits per character pair**; their Herbivore *"reduces the cost of password cracking by a factor of 50."* Any typing indicator emitted at keystroke granularity reproduces this at the application layer, across whichever persona is typing.
+
+**Tier 3 — mechanism documented, accuracy unmeasured.**
+
+11. **IP / relay correlation.** FTC Cross-Device Tracking staff report, January 2017: *"Because devices on the same local network often have the same public IP address, the ad platform might infer that a computer, smartphone, and tablet that use the same public IP address belong to the same household."* The report is **entirely qualitative — it gives no match rate.** I found no public measurement of IP-based household-graph precision; the graphs are proprietary. This is a genuine gap.
+
+12. **Backup metadata.** Apple's own CSVs: account requests rose to **32,240 requests / 95,241 accounts (2025 H2)**; device requests peaked at **662,705 devices specified (2025 H1)**. Design fact: standard iCloud Backup is not E2EE, and *"if iCloud Backup is enabled, the encryption key for Messages in iCloud is part of the backup"* — the backup layer undoes the E2EE messaging layer. ADP shipped 2022-12-13 (US) / 2023-01-23 (worldwide), opt-in; **February 2025 Apple disabled ADP for new UK users** under government pressure — note that the UK is also by far the largest push-token requester. **No measured study of backup metadata as a cross-persona linkage vector exists.** Google's Android backup E2EE primary text **NOT REACHED**.
+
+13. **CRDT sync metadata — read from source, unmeasured in the literature.** `ActorId::random()` is 16 bytes from `getrandom` (`rust/automerge/src/types.rs:63-68`). Every change permanently carries `actor: ActorId`, **`other_actors: Vec<ActorId>`**, `seq`, and a wall-clock `timestamp: i64` (`rust/automerge/src/storage/change.rs:46-60`) — so the document itself is a per-writer log with timestamps baked in. JS `init()` mints a fresh random actor per document unless one is passed; `time` is settable and can be suppressed (`time?: number | undefined` — *"When set to `undefined` no timestamp is used"*), and I confirmed both in the **published** `@automerge/automerge@3.4.1` `.d.ts`. The sharper item is **unreleased**: current Rust `main` adds an `Authors` index — *"For each author, there will be one or more actors associated with the author, giving a 1-to-N relationship"* — and `set_author` rotates the ActorId while the document keeps the actor→author mapping. I verified this is **NOT in the shipped JS 3.4.1 bundle** (`grep setAuthor package/` → no hits). **Negative finding: I found no published discussion anywhere of actor-ID as a deanonymization or linkage channel** — not in `automerge/automerge`, not `automerge-repo`, not `yjs`, and Crossref for CRDT + privacy/metadata returns only editing-algorithm papers. This channel is undiscussed.
+
+---
+
+## HEADLINE 3 — Does the graph relink when the data layer holds?
+
+**Yes, and the numbers are old, replicated, and not close.**
+
+**Narayanan & Shmatikov, IEEE S&P 2009** (arXiv:0903.3276, PDF retrieved). Twitter crawled late 2007, Flickr late 2006; ~27,000 ground-truth mappings (human-verified error well under 5%); seed = **150 node pairs** of degree ≥80. Result, verbatim: *"**30.8% of the mappings were re-identified correctly, 12.1% were identified incorrectly, and 57% were not identified.**"* Of the incorrect ones, 41% landed at distance 1 from truth and 55% in the right geographic location; only **27% of errors (3.3% overall) were completely erroneous.** Abstract framing: *"a third of the users who can be verified to have accounts on both Twitter… and Flickr… can be re-identified in the anonymous Twitter graph with only a 12% error rate."* Topology only, no sybils, *"robust to noise and all existing defenses."* They also report 30–150 seeds suffice for 10⁵-node networks.
+
+**Backstrom, Dwork, Kleinberg, WWW 2007** (cs.cornell.edu/home/kleinber/www07-anon.pdf, retrieved). Active walk-based attack: *"with **k = Θ(log n)** new accounts, a randomly generated subgraph H will be unique with high probability, regardless of what G looks like"*; if max degree in H is Θ(log n), H is efficiently recoverable together with **b = Θ(log² n)** targeted nodes. Practice beats theory: on the **4.4-million-node, 77-million-edge LiveJournal** graph (Feb 2006 crawl), *"With **7 nodes**, we can attack an average of **34 and 70** nodes for the smaller and larger degree choices."* Stealth argument: every 7-node Hamiltonian graph already occurs in LiveJournal, and >90% of nodes sit in a dense 7-node subgraph. Passive attack: *"a coalition of size **5** is needed to give a high probability of success"* and finding a size-6 coalition takes *"less than a tenth of a second"* on a desktop; a coalition of k compromises at most 2ᵏ−1 users, empirically far fewer, but the **semi-passive** variant grows exponentially in coalition size.
+
+**Korula & Lattanzi, VLDB 2014** (pvldb/vol7/p377-korula.pdf, retrieved). Facebook subgraphs, edge survival 0.75, matching threshold 2, seed link probability **5%**: *"we correctly identify **46,626** nodes and incorrectly identify **20**, an **error rate of well under 0.05%**."* Independent-cascade model, 5% seeds: **16,273 / 16,533 = 98.4%**, zero errors. Even Enron (avg degree ~4, very sparse) yields near-total identification of degree-≥5 nodes at 4.8% error. Pedarsani & Grossglauser, KDD 2011, DOI 10.1145/2020408.2020596 — confirmed to exist; **its numbers NOT REACHED** (it is a theoretical seedless-matching result).
+
+**Stylometry — I got the paper you could not reach.** Narayanan, Paskov, Gong, Bethencourt, Stefanov, Shin, Song, *On the Feasibility of Internet-Scale Author Identification*, IEEE S&P 2012, DOI 10.1109/SP.2012.46. Draft PDF retrieved from `cs.princeton.edu/~arvindn/publications/author-identification-draft.pdf`, dated **February 20, 2012**, and text-extracted. Real numbers:
+
+- **Dataset: 100,000 blogs, 2,443,808 posts, "almost a billion words"** — ICWSM 2009 Spinn3r corpus, plus a cross-context set built by scanning **3.5 million Google profile pages** (3,628 retained profiles; 1,763 listed a single blog).
+- **Features: 1,188 real-valued** (function-word and character frequencies plus Stanford-Parser syntactic-category pairs; deliberately no bag-of-words/topic markers).
+- **Top-1: "In over 20% of cases, our classifiers can correctly identify an anonymous author given a corpus of texts from 100,000 authors."** With 40–50 labeled posts, 30–35%.
+- **Top-20: "in about 35% of cases the correct author is one of the top 20 guesses."**
+- **Confidence-thresholded: "increase the precision of the top guess from 20% to over 80% with only a halving of recall"** — i.e. ~10% recall, correctly naming ~10,000 of 100,000 authors.
+- **Cross-context (different blog by the same author): ~12% baseline, "about 50% precision with 50% recall"** with confidence estimation.
+- Their own stated limits: *"unlikely to work if the victim intentionally obfuscates their writing style,"* and untested cross-*domain* (blog vs email).
+
+**Adversarial stylometry: NOT REACHED.** Brennan, Afroz, Greenstadt, *Adversarial Stylometry*, ACM TISSEC, **November 2012, DOI 10.1145/2382448.2382450** — confirmed via Crossref. Four PDF mirrors tried (Drexel, PSU, CMU, freehaven anonbib, CiteSeerX, dl.acm.org), all 403/404. **Its obfuscation-effectiveness numbers are not in this report.**
+
+---
+
+## What has broken in the field (per-identity separation promised, defeated)
+
+- **Facebook PYMK, the canonical case.** Kashmir Hill, Gizmodo, **2017-10-11**, *How Facebook Outs Sex Workers*: "Leila" ran two accounts with **different names, emails and phone numbers**; PYMK surfaced her clients to her civilian identity. Facebook declined to say which of *"100+ signals"* did it, and on opt-out: *"An opt out is not something we think people would find useful."* Mechanism, Hill 2017-11-07 (built on 100+ reader accounts): **shadow contact information** — data other people uploaded about you — plus contact chaining. Facebook stated it **cannot show you your shadow profile**. Companion measured artifact: Venkatadri et al., PoPETs 2019(1), DOI 10.2478/popets-2019-0013 — phone numbers from **2FA** and from **friends' address books** became ad-targetable *"despite all the relevant privacy controls on our test accounts being set to their most private settings."* **Negative finding: the psychiatrist story is Facebook, not LinkedIn; no measured LinkedIn PYMK veil-leak was found.**
+- **Twitter/X.** FTC/DOJ **2022-05-25**, **$150M**: **>140 million users** gave phone/email for account security 2014–2019; Twitter let advertisers target on it — also a violation of the 2011 order. *(Your "who to follow leaking shadow contacts" item: **NOT REACHED**, no measured source; don't conflate it with the ad-targeting action.)*
+- **Venmo.** *Public By Default*, July 2018: **207,984,218 public transactions** from an unauthenticated API. FTC matter 162 3102, final **2018-05-24**: Venmo *"misled consumers about the extent to which they could control the privacy of their transactions."* BuzzFeed, **2021-05-14**: found Biden's account in under 10 minutes — and the exposed surface was **the friend list, which had no privacy control at all**. PoPETs 2022 (USC): **389 million** public notes; 2 in 5 users reveal sensitive information. *(2024 Trump-campaign finding: **NOT REACHED**.)*
+- **Rounding is not separation.** Tinder 2014 (Include Security): distance returned as a **64-bit double**, trilateration to **~100 ft**. Bumble 2021 (Heaton, fixed in 72h, $2,000): **rounded the display, computed from exact coordinates** — hunt the flipping points. Grindr 2014: **>2 million detections in a few days**. And the general form, Hoang/Asano/Yoshikawa, arXiv:1604.07850 (2016): colluding trilateration works **even when the victim hides distance** — *"any LBS that lists nearby profiles in proximity order."* **The ordering is the channel.** *(Correction to your brief: the Grindr NOK 65M / €6.5M fine is **December 2021**, upheld 2023-09-29 and again 2025-10-21 — not January 2024. €10M was the January 2021 *notice* amount.)*
+- **Low-entropy handles are not capabilities.** Georgiev & Shmatikov, arXiv:1604.02734 (2016): 5–6 character short-URL tokens brute-forced; **7% of exposed OneDrive accounts granted write access to anyone**. This is a capability-URL scheme defeated in production at two major vendors.
+- **Yik Yak, May 2022:** API returned **GPS accurate to 10–15 feet alongside persistent user IDs**. The pseudonym was decorative.
+- **Fog Data Science** (EFF/AP, Aug 2022): **>250 million devices/month, 15 billion signals/day**, ~700 apps, $6–9k/year to police — and Fog's own documents note Apple's ATT *"made services like Fog less useful."* **The ad ID, not any account, was the identity spine.** Gravy Analytics (Jan 2025): ~**17 TB** leaked, confirming sourcing via **real-time bidding**, not SDKs — the app authors were not party to it.
+- **Matrix:** Albrecht, Celi, Dowling, Jones (IEEE S&P 2023): *"room management messages are not authenticated in the Matrix specification (even for end-to-end encrypted rooms),"* so *"a malicious homeserver can add users under their control to end-to-end encrypted rooms."* Detection *"requires careful manual membership list inspection."*
+- **Threema:** ETH Zurich, USENIX Security 2023, seven attacks (Android v4.831). Disclosed 2022-10-03, mitigations from **Threema 5.0, 2022-11-29**, public 2023-01-09. Contact-relevant: the Threema Safe backup JSON **contains the whole contact list** beside the private key; the compression side-channel against it used **nicknames** as the chosen-plaintext injection point — **10,000+ experiments, 4,727 successes, median 19,382 oracle queries**. Prior work (Rösler et al., EuroS&P 2018) found *"leakage of group membership information to non-members."* *(Threema's rebuttal post: **NOT REACHED** — every slug 404s.)*
+- **SGX, on which Signal's private contact discovery rests:** Foreshadow (**CVE-2018-3615**, USENIX Sec 2018) and **SGAxe** (2020, riding CVE-2020-0549) both **extracted the attestation signing keys** — precisely the primitive a client uses to tell a real enclave from a server pretending. Plus Plundervolt (**CVE-2019-11157**) and ÆPIC Leak (**CVE-2022-21233**, architectural, bypasses all existing mitigations; Intel has deprecated SGX on client CPUs). Signal's Aug 2022 post still says SGX and does not acknowledge these.
+
+---
+
+## What I could NOT reach
+
+- Adversarial stylometry (Brennan/Afroz/Greenstadt 2012) numbers — 6 mirrors tried, all blocked.
+- Pedarsani & Grossglauser KDD 2011 experimental figures.
+- FP-Stalker (IEEE S&P 2018) PDF — its cited numbers come from a conference program page only.
+- Google's Transparency Report and all `support.google.com` (CAPTCHA); Google's Android backup E2EE primary text.
+- Threema's Q1-2023 rebuttal post; USENIX's own Threema page (403).
+- Fusion/Splinter psychiatrist article body (URL + date confirmed, host dead, archive.org blocked).
+- Le Monde Oct-2024 bodyguard piece body; Strava's own heatmap scale figures (Medium 403); The Pillar's methodology (paywalled).
+- Bumble 2023 follow-up (404); Grindr/Kyoto 2016 metre figures (PDF-only).
+- Briar's funded 2023 audit; SimpleX's announced early-2025 implementation assessment; VeilidChat's routing-context configuration (GitLab blob search needs auth); `veilid.com/chat/known-issues/` and `/chat/privacy/` (both 404).
+
+## Things that appear not to exist at all
+
+- Any measured deployment or adoption figure for GNS/GNUnet.
+- Any published discussion of CRDT actor IDs as a deanonymization channel (Automerge, Yjs, or the literature).
+- Any measured study of device attestation as a fingerprinting/linkage channel (0 arXiv hits).
+- Any measured accuracy figure for IP-based cross-device/household graphs.
+- Any measured study of backup metadata as a cross-persona linkage vector.
+- Any measured study of passively linking N pseudonyms on one device by correlated activity timing. The "user identity linkage" literature is graph-, content-, and GPS-based, and most of it reports only improvements over baselines rather than absolute rates — it is not calibrated for threat modelling. *Careless Whisper* gets there actively instead.
+- Any NIP on multiple identities, personas, or account switching (whole repo grepped).
+- Any independent security audit of Cwtch; any academic cryptanalysis of SimpleX or of Session.
+- Any measured LinkedIn PYMK leak, Instagram "Suggested for you" finsta outing, or Blind deanonymization incident.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;WY37ZltaduNZSpcVpjXzlFhgM5dnRs6pGYzegx3mEYg
+
+<<^ code="&#x0004;" -> to=? >>

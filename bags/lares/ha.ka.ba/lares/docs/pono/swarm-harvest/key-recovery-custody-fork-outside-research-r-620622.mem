@@ -1,0 +1,661 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 49,619 characters
+
+````
+Both remaining agents were nudged to hand back and have not; I'm delivering with what I have and flagging the gaps.
+
+---
+
+# KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT
+
+**Method / caveat.** The session's WebSearch budget was exhausted at the outset (200/200) and every general search engine (Google, Bing, DDG, Brave, Ecosia, Mojeek, searx) is bot-walled from this host. I worked entirely from **primary documents fetched directly by URL**, plus API-mediated discovery (NVD, GitHub advisories, OpenAlex, Crossref, IACR eprint, HN Algolia, `gh`). Coverage is therefore narrower than a full sweep; fidelity on what I did retrieve is high. Two delegated lanes (civic ceremonies; social-recovery post-mortems) did not fully hand back — see §9.
+
+**I do not recommend a fork.** Below: what the field *measured*, separated from what it *recommends*, and three findings that change the fork's shape rather than answer it.
+
+---
+
+## 1. THE MEASURED SPINE — where the blood actually is
+
+You asked which failure mode has more real-world blood: the Shamir reconstruction window, or threshold-signing complexity. The honest answer is **neither — the blood is overwhelmingly in a third place: quorum-counting bugs and correlated custody.** Both forks are exposed to that third place; Fork B more so on the first count, Fork A more so on the second.
+
+### 1a. Fork B's measured failure class: "the threshold you verified was not a count of distinct signers"
+
+This is the most striking thing I found, because it is a **repeat offense in the same codebase, six years apart.**
+
+| CVE / GHSA | Date | System | What broke |
+|---|---|---|---|
+| **CVE-2020-6174** / **CVE-2020-15093** (GHSA-5q2r-92f9-4m49) | 2020-07-09 | python-tuf reference impl **and** AWS `tough` | *"does not properly verify the **uniqueness of keys** in the signatures provided to meet the threshold… allows someone with access to a valid signing key to create **multiple valid signatures** in order to circumvent TUF requiring a minimum threshold of unique keys."* Fixed in tough 0.7.1. |
+| **CVE-2026-6966** (GHSA-8m7c-8m39-rv4x) | advisory 2026-05-05 | **awslabs/tough, delegated roles** | **The identical bug, again, in the same library**, in the delegated-role path. *"bypass the TUF signature threshold requirement by duplicating a valid signature."* Fixed 0.22.0 / tuftool 0.15.0. Found by Emily Albini (Oxide) and Oleh Konko (1seal). |
+| **CVE-2026-23992** (GHSA-fphv-w9fq-2525) | 2026-01-21 | theupdateframework/go-tuf v2 | `metadata.VerifyDelegate` did not validate the configured threshold before comparison — **a threshold of 0 or negative disables signature verification entirely.** Fixed 2.3.1. |
+| **CVE-2025-2885** (GHSA, tough < 0.20.0) | fixed 2025-03-27 | awslabs/tough | Root metadata **version-rollback**: no check that a received root is the next sequential version, so an attacker can substitute *an adequately signed previous root*. Found via the TUF-Conformance project with Google. |
+
+And a fourth, independent sighting in a *design* document rather than a CVE: the InterCooperative Network's own architecture review found that in its codebase, `sync.rs:263-269` *"neither verifies signatures nor deduplicates"*, and SDIS's `approve_by_steward()` is *"a bare `+= 1`"* — an M-of-N quorum implemented as an integer counter. They promoted "**M-of-N counts distinct authenticated participants**" to a HARD requirement (R9.4) as a result.
+
+**Reading.** Four independent sightings, three of them shipped and CVE'd, one of them a recurrence in the very library that fixed it. If you take Fork B, this is the bug you will write. KERI structurally forecloses it — see §2c.
+
+*Confidence: 19/20 on the CVEs (read from GitHub Advisory API and NVD directly); 16/20 that this is the dominant Fork-B implementation risk.*
+
+### 1b. Fork A's measured failure class: the reconstruction step itself is an attack surface
+
+There is **no publicly documented incident of a Shamir reconstruction window being exploited to steal funds or an identity.** That is a genuine negative result and it matters. What exists is the next best thing — a vulnerability *in the reconstruction step* of the most widely deployed reconstruct-a-secret system in production:
+
+- **CVE-2023-25000 / HCSEC-2023-10 (2023-03-30) — HashiCorp Vault.** *"Vault's implementation of Shamir's secret sharing used precomputed table lookups, and was vulnerable to cache-timing attacks. An attacker with access to, and the ability to observe a large number of unseal operations on the host through a side channel may reduce the search space of a brute force effort to recover the Shamir shares."* Affects ≤1.13.0/1.12.4/1.11.8; fixed 1.13.1/1.12.5/1.11.9. Reported by Giuseppe Cocomazzi. **HashiCorp's own bulletin says "it is unclear how practical such an attack is."** Vault unseal is a 3-of-5 reconstruct-in-memory — structurally the closest production analogue to Fork A that exists.
+- **CVE-2025-29779 / CVE-2025-29780 (2025-03-14)** — Feldman VSS Python library, `secure_redundant_execution` and related flaws.
+- **CVE-2026-44368 (2026-05-13)** — PyQuorum secret-sharing library: `mul_mod` implemented via a binary-expansion loop whose execution time depends on the operand — non-constant-time arithmetic on secret shares.
+
+**Reading.** The reconstruction window is a real, CVE-bearing attack surface, not a theoretical one — but it has produced **side-channel research, not incidents**. Whereas the quorum-counting class in §1a has produced *shipped, exploitable bypasses of the threshold itself*. On published evidence, **Fork B's characteristic bug is more likely to actually be exploitable; Fork A's characteristic hazard is more likely to be catastrophic if it is.**
+
+*Confidence: 17/20 that no public Shamir-window exploitation incident exists (search was API-mediated, not exhaustive).*
+
+### 1c. Threshold/MPC signing complexity: critical and repeatedly broken
+
+- **CVE-2023-33241 (2023-08-09, CRITICAL)** — *"Crypto wallets implementing the **GG18 or GG20** TSS protocol might allow an attacker to extract a **full ECDSA private key** by injecting a malicious Paillier key and cheating in the range proof… the attack might require **16 signatures or more** to fully exfiltrate the other parties' private key shares."* This is the Fireblocks "BitForge" / Verichains "TSSHOCK" disclosure cluster, presented at Black Hat USA 2023, affecting a large set of MPC wallet vendors. (I could not fetch the Fireblocks or Verichains write-ups — both URLs 404'd — so I have the CVE text and not the vendor count.)
+- **CVE-2025-58359 / GHSA-wgq8-vr6r-mqxm (2025-09-03)** — **ZF FROST (`frost-core` 2.0.0–2.2.0)**: refreshing shares with a smaller `min_signers` silently reduces group security. ZF's own advisory: *"If for some reason you have done a refresh share procedure with a smaller `min_signers` we strongly recommend **migrating to a new key**."* Reported by BlockSec. Even the reference FROST implementation shipped a threshold footgun.
+
+*Confidence: 19/20 on the CVE text; 8/20 on scale-of-impact claims I could not source.*
+
+### 1d. The class with the most actual money lost: **correlated custody**
+
+- **Ronin bridge, 23 March 2022, ~US$624M** (173,600 ETH + 25.5M USDC). Threshold was **5 of 9 validators** — nominally robust. The attacker compromised **4 validator keys controlled by Sky Mavis**, and obtained the 5th because *Sky Mavis had been granted allowlist authority to sign on behalf of the Axie DAO validator in **November 2021**; the delegation expired the following month but **the allowlist was never revoked**.* **Undetected for six days.** Attributed to Lazarus/APT38.
+
+This is neither a Shamir failure nor a threshold-crypto failure. It is: **the threshold you wrote down was not the threshold you had**, because five of the nine seats answered to one party, and one of those five was a stale grant nobody retired.
+
+*Confidence: 18/20 (Halborn write-up + Wikipedia corroborate amount, date, and 6-day detection lag).*
+
+---
+
+## 2. KERI'S OWN ANSWER — and three places it changes the shape of your fork
+
+I read the ToIP KERI specification body (`trustoverip/kswg-keri-specification`, ~338KB) and the IETF draft (`draft-ssmith-keri`) directly.
+
+### 2a. KERI natively *is* Fork B, and has no notion of Fork A anywhere
+
+Pre-rotation commits **digests of a list of next public keys plus a next threshold** `nt`. A rotation event *"MUST include a list of the set of pre-rotated public keys (not their digests) thereby exposing them and MUST be signed by a set of private keys from these newly exposed… keypairs that satisfy the pre-rotated threshold."* There is no secret reconstruction anywhere in the protocol. **Fork B is not an alternative to KERI's model; it is KERI's model.**
+
+Reference implementation `WebOfTrust/keripy` ships a full multisig CLI — `multisig incept | rotate | join | update | delegate` plus `multisig-delegate.sh` / `multisig-quartet.sh` demos — actively maintained (last push 2026-09-02). **81 GitHub stars.** Small ecosystem; the code exists.
+
+### 2b. SHAPE-CHANGER #1 — weighted thresholds already give you "can rotate, can never sign"
+
+You framed Fork A's blast-radius shrink (the recovery root can *only* authorize a rotation, never sign content) as a property you engineer by convention. KERI gives it **structurally, for free, in Fork B**, via fractionally weighted thresholds. From the spec's worked example:
+
+> *"The current signing authority of A¹⁶ and A¹⁷ is **none** because they are assigned a **weight of 0** in the new current signing threshold… This illustrates how reserved keypairs may be used **exclusively for rotation authority and not for signing authority**."*
+
+And the "custodial rotation" pattern goes further: *"a designated custodial agent can hold **signing authority** while the original controller can hold **exclusive rotation authority**. The holder of the rotation authority can then at any time **without the cooperation of the custodial agent** revoke the agent's signing authority."*
+
+So guardians can be committed as weight-0 reserve rotation keys: they can *only* rotate, can *never* sign content, and this is enforced by threshold arithmetic in the verifier rather than by discipline in your recovery tool. **This removes Fork A's stated blast-radius advantage entirely.**
+
+*Confidence: 18/20 — quoted from spec text I read.*
+
+### 2c. SHAPE-CHANGER #2 — KERI's indexed signatures foreclose the §1a bug class
+
+CESR **controller-indexed signatures** bind each signature to a *position* in the ordered key list. A rotation event's signatures carry **two indices** — one into the new current signing key list, one into the *prior next key digest list*:
+
+> *"the second index is used to look up the public key digest from the prior next key digest list, then the first index is used to look up the exposed public key from the signing key list, then the digest is verified against the exposed public key, and finally, the doubly indexed signature is verified using the exposed public key."*
+> *"A set of controller-indexed signatures on a rotation event MUST at least satisfy **both** the current signing threshold **and** the prior next rotation threshold."*
+
+Duplicating one signature cannot satisfy a threshold when signatures are positionally indexed. The TUF bug is not expressible. **If you take Fork B, take indexed signatures with it** — that is the single design choice that separates you from the field's most-repeated multisig defect.
+
+*Confidence: 17/20.*
+
+### 2d. SHAPE-CHANGER #3 — KERI says a NON-delegated identifier cannot recover from a compromised *rotation*
+
+This is the most consequential thing I found for your architecture, and it is a hard constraint, not a preference. KERI's **Superseding Rules for Recovery**:
+
+> **A0.** Any rotation event may supersede an Interaction event at the same `sn`…
+> **A1. A non-delegated rotation may NOT supersede another rotation.**
+> **A2.** An interaction event may not supersede any event.
+> **B.** *A **delegated** rotation may supersede the latest-seen delegated rotation at the same `sn`* — under three conditions, all of which route through the delegator's KEL.
+
+Consequence: a compromise of a *signing* key is recoverable by rotation (A0). A compromise of the *pre-rotated rotation* keys is **not recoverable at all for a non-delegated AID**. And even for a delegated AID, *"recovery can not happen for any compromise of pre-rotated keys, only the **latest-seen**… Recovery is possible after the first compromised rotation by superseding it but **not after the subsequent** compromised rotation."*
+
+KERI's own answer to "how do you recover the recovery authority" is **cooperative delegation**:
+
+> *"any exploiter that merely compromises only the delegate's authoritative keys may not capture the control authority of the delegate. A successful exploiter must **also** compromise the delegator's authoritative keys… **Both sets of keys must be compromised simultaneously.** This **joint compromise requirement** is a distinctive security feature of cooperative delegation… this cooperative feature also enables **recovery of a joint compromise of a delegation at any set of delegation levels by a recovery at the next higher delegation level.**"*
+
+**What this does to your fork.** Your persona root and your charter are, as described, non-delegated AIDs. Under KERI's rules, *whichever fork you pick*, a compromise of the recovery authority is terminal. The option that isn't on your list — **make the persona a delegated AID whose delegator is the guardian council / charter** — converts a terminal compromise into a recoverable one, and does so under *both* forks. This is a third axis (delegated vs. not), orthogonal to A-vs-B, and on the evidence it dominates the A-vs-B choice in severity.
+
+*Confidence: 18/20 on the spec rules; 14/20 on my inference that your AIDs are non-delegated in the relevant sense.*
+
+---
+
+## 3. SOCIAL RECOVERY AS PRACTICED — the measured record
+
+*(This lane's agent returned a partial handback; what follows is its verified content plus my own.)*
+
+### Measured
+
+- **Schechter, Egelman & Reeder, CHI 2009** ("It's Not What You Know, But Who You Know" — trustee-based last-resort authentication, the founding empirical study of guardian recovery):
+  - Field experiment: **89 participants → 4 succeeded, 52 failed, 33 never got a response from trustees.** A **4.5% success rate** in the wild.
+  - **72% (13 of 18)** of participants who *did* succeed **had to be reminded who their own trustees were** — days after enrollment, not years.
+  - Relaxing the threshold from 3-of-4 to 2-of-4 moved success from **17/19 (89%) to 18/19 (94%)** in the lab arm.
+  - Social-engineering phone attack on trustees succeeded **56% (14/25)** when the caller personally knew the trustee, **29% (5/17)** when not.
+  - Completion timing: 47% under 100 minutes, 66% within a day, **88% within two days**.
+- **Brainard, Juels, Rivest, Szydlo & Yung, "Fourth-Factor Authentication: Somebody You Know", ACM CCS 2006** — the paper that *invented* guardian recovery — **contains no empirical user data at all** (*"We are presently in the process of conducting a small pilot study."*). Schechter 2009, three years later, confirms: *"To our knowledge, no usability results have been made available."*
+- **Bonneau, Bursztein, Caron, Jackson & Williamson, WWW 2015, "Secrets, Lies, and Account Recovery"** — **11 million real Google account-recovery claims.** **~40% of English-speaking US users could not recall their own security-question answers when they actually needed to recover**, versus **>80% success for SMS reset codes**. 37% of users who gave false answers did so to "harden" them, which made them *more* guessable. Conclusion: *"next to impossible to find secret questions that are both secure and memorable."*
+- **Lassak, Markert, Golla, Stobert & Dürmuth, CHI 2024, "A Comparative Long-Term Study of Fallback Authentication Schemes"** (doi:10.1145/3613904.3642889) — **18-month longitudinal** comparison of the four most common fallback methods. Abstract conclusion, verbatim: *"users prefer email and SMS-based methods, while mechanisms based on PKQs and **trustees lag regarding successful resets and convenience**."* I could not obtain the paper body (ACM DL 403; no OA copy; author sites unreachable), so **I do not have the trustee success rate — only the direction.**
+- **Facebook Trusted Contacts was removed (~May 2022).** Facebook's own help-page notice: *"Trusted contacts is going away soon. This means your chosen friends will no longer be able to help you get back on Facebook if you lose access to your account."* The largest consumer deployment of guardian recovery ever built was **retired**.
+- **Apple iCloud Keychain escrow** (Apple Platform Security guide): HSM clusters, SRP so Apple never sees the code, **exactly 10 attempts**, and *"upon the 10th failed attempt, the HSM cluster **destroys the escrow record** and the keychain is lost forever."* And the ceremony detail worth stealing: *"The administrative access cards that permit the firmware to be changed **have been destroyed**."*
+- **Vitalik Buterin, 11 Jan 2021, "Why we need wide adoption of social recovery wallets"** — the canonical *recommendation*. Explicitly critiques splitting a mnemonic between parties as "increas[ing] the mental overhead even further," and concedes guardian collusion as a residual risk. **No adoption or success data.**
+
+### Not obtained
+Argent's own funnel numbers or wind-down; Safe / ERC-4337 recovery-module usage; Signal SVR2/SVR3 PIN-loss rates; WhatsApp E2E-backup lockout data; Casa/Unchained key-loss and recovery-exercise statistics. All four candidate Casa/Unchained URLs 404'd, and I had no working search engine to locate the live ones. **Treat these as unresearched, not as absent.**
+
+### The reading
+**Every deployment that measured guardian recall found it collapsing, and no shipped wallet has a mechanism against it.** Schechter's 72%-forgot-their-trustees, Google's 40%-couldn't-recall-their-own-answer across 11M real claims, and CHI 2024's 18-month finding that trustee schemes lag on successful resets all point the same direction. **This is a hazard both forks share equally** — it is about the guardians, not about what they hold.
+
+---
+
+## 4. THE ONBOARDING-COST QUESTION — measured, and the answer is "nobody has measured it"
+
+**No study directly compares "guardian mints and custodies a keypair" against "guardian stores an opaque share."** Not in SOUPS, USENIX Security, CHI, or the FIDO deployment literature. *(Confidence 13/20 that none exists.)*
+
+The closest measured proxy is passkey enrollment — the cheapest keypair ceremony that has ever existed at consumer scale:
+
+- **FIDO Alliance "Passkey Index", October 2025** — nine member orgs with 1–3 years of deployment (Amazon, Google, LY Corp, Mercari, Microsoft, NTT DOCOMO, PayPal, Target, TikTok): **93% of accounts eligible, 36% enrolled, 26% of sign-ins.** Post-enrollment the keypair wins on everything — 93% vs 63% login success, 8.5s vs 31.2s, up to 81% fewer help-desk tickets. **The entire cost sits at enrollment: 57 percentage points of eligible users did not complete it.**
+- **Lassak et al., USENIX Security 2024** (28 interviews with CISOs/auth managers): one deploying org reported *"Uptake did not exceed **65%** even after a year"*; another had a cohort that could not be moved *"until the company made security keys **mandatory**."* Named barriers, in order: **account recovery**, friction, technical issues.
+- **Krombholz et al., FC 2016 (n=990 Bitcoin users)**: **~46% use a custodial solution for at least some coins** — i.e. actively declined to hold their own key, in the most crypto-literate population one could assemble. **22.5% had already lost coins**, about half by their own error. *(Caveat: one lane rated the 22.5% figure 8/20 because the primary PDF was unreachable from its host and the number came via a citing paper; my own fetch of the IFCA preproceedings PDF corroborates it. Call it 15/20.)*
+- **Ruoti et al. 2015, "Why Johnny Still, Still Can't Encrypt"**: 20 participants in 10 pairs, 60 minutes, **1 of 10 pairs succeeded.** The named blocker is the one that matters here: participants stalled *waiting on their counterparty to set up keys*. **Key-minting cost is multiplicative across a group, not additive** — which is exactly the shape of a k-of-n guardian set.
+- **Abu-Salma et al., IEEE S&P 2017 (n=60)**: **none of the 60 participants used a PGP-based tool at all.**
+
+**The counterweight you must not suppress.** An opaque card is cheap to accept *and cheap to lose silently*. Krombholz's 22.5% loss rate and the ~1/3 of custodial users who didn't know whether their data was backed up are the Fork-A-shaped failure. The honest framing is not "cards are easier" but **"cards move the failure from visible enrollment refusal to invisible later loss"** — strictly better only if you can *detect* a dead share. Fork B detects it trivially (challenge the guardian to sign a nonce); Fork A cannot detect a corrupted card without reconstructing.
+
+**And a fact that may dissolve the cost objection entirely: the WebAuthn `prf` extension is standardized in WebAuthn Level 3 and listed by MDN as Baseline widely available.** It lets a relying party derive a *stable* secret from a credential the guardian already carries — *"generate a symmetric key for encrypting sensitive data… only be decrypted by a user who has the seed and the associated authenticator."* A guardian recovery keypair can therefore be **derived from a passkey the guardian already has** rather than minted and custodied. Custody becomes "have your phone," not "keep a new secret." *(Confidence 16/20 on the spec status; 11/20 that PRF output survives authenticator replacement in practice — verify before relying on it.)*
+
+---
+
+## 5. CIVIC / ORGANIZATIONAL CUSTODY — what the closest analogues actually do
+
+### The DNSSEC root — and it is a **hybrid**, which is the finding
+
+From ICANN's DNSSEC Practice Statement for the Root Zone KSK Operator (2020-11-04):
+
+- **Routine signing authority: 3 of 7.** *"The threshold number of cards needed to sign using the RZ KSK is **three out of seven**."* These are **HSM activation smartcards** — an m-of-n *activation* quorum. **No secret is reconstructed; the key never leaves the HSM.**
+- **Recovery authority: 5 of 7, and it IS secret sharing.** *"Reconstruction of the **SMK** used for encryption of the application keys requires **five out of seven** Recovery Key Share Holders."* *"The key used to encrypt the private key(s) is backed up using a **five out of seven threshold scheme** with smartcards distributed to trusted individuals."*
+
+**Golden principle, with the strongest pedigree available: the recovery quorum is set STRICTER than the operating quorum (5/7 vs 3/7), and the two are different mechanisms entirely.** The daily path never reconstructs; only the disaster path does — and it demands more consent to do so.
+
+- **Decorrelated custody is explicit:** share holders are *"selected from members of the Internet community not already part of Root Zone management operations. Specifically, **organizationally separate parties, not affiliated with PTI, ICANN, or Verisign**."*
+- **Ceremony cadence:** quarterly signing ceremonies; KSK rolled *"as required, or after 5 years."* Emergency capability: interim trust anchor within **48 hours**.
+- **The negative result, and it is load-bearing:** **the DPS does not specify what happens if a Crypto Officer or a Recovery Key Share Holder becomes unavailable or leaves.** It mentions "Job Rotation Frequency and Sequence" and says only *"Other positions are rotated and replaced as needed."* No succession procedure. **In the world's most audited key ceremony, the "guardian is unreachable" case is unwritten.** And as far as the public record shows, **the 5-of-7 recovery path has never been exercised.**
+- COVID-era ceremonies ran with *"a reduced agenda and with minimal in-person participation"* (Ceremony 41, 2020-04-23). Ceremony 40's main event is logged at **2020-02-16**, consistent with the widely-reported February 2020 postponement over a credentials-safe lock failure — **but I could not retrieve ICANN's postponement announcement (403/404), so treat the lock story as unverified here (7/20).**
+
+### TUF / Sigstore — pure independent multi-signature, no reconstruction anywhere
+TUF root rotation rule (spec §6.1), which is *exactly* the answer to your question 6:
+> *"When replacing root keys, an application will sign the new root.json file with **both the new and old root keys**."*
+> *"each current version of the root metadata is signed by a threshold of keys specified by its **immediate predecessor** as well as a threshold of keys specified by **itself**."*
+> *"if there is a 1.root.json that has threshold 2 and a 2.root.json that has threshold 3, 2.root.json MUST be signed by at least **2** keys defined in 1.root.json and at least **3** keys defined in 2.root.json."*
+
+Clients walk root versions **incrementally**. This is dual authority that is **conjunctive (AND), not disjunctive (OR)** — which is why it is safe.
+
+**Sigstore** runs this in production with **5 active keyholders** signing with **personal hardware keys** in explicit "signing events" (PRs on `sign/*` branches), with **2 emeritus** keyholders (Luke Hinds, Dan Lorenc) — i.e. the authority set has actually changed twice, in July 2022 and July 2025, in the open. Human-quorum signing is structurally separated from routine KMS-backed online signing.
+
+### The split, stated plainly
+| System | Operating authority | Recovery authority |
+|---|---|---|
+| DNSSEC root KSK | 3-of-7 **HSM activation** (no reconstruction) | 5-of-7 **Shamir reconstruction** of the SMK |
+| TUF / Sigstore / Notary | k-of-n **independent signatures** | k-of-n independent signatures (same mechanism, higher threshold) |
+| HashiCorp Vault | — | 3-of-5 **Shamir reconstruction** in process memory (CVE-2023-25000) |
+| Apple iCloud escrow | — | HSM + 10-guess destruction; **admin cards destroyed** |
+| Ledger Recover | — | 3 fragments across Ledger / Coincover / EscrowTech in 3 countries; **2 of 3 returned and reconstituted inside the Secure Element** |
+| KERI / keripy | k-of-n indexed signatures | k-of-n indexed signatures over pre-committed digests |
+
+**Reconstruction survives in production only where the reconstruction happens inside dedicated hardware** (ICANN's HSM, Ledger's Secure Element, Apple's HSM cluster). Nobody reconstructs a root secret in an ordinary process on purpose — except Vault, which got a CVE for it.
+
+*Confidence: 18/20 on the DPS numbers; 19/20 on the TUF rule; 17/20 on the Sigstore roster.*
+
+---
+
+## 6. MIGRATING AN ALREADY-SHIPPED RECOVERY MODEL
+
+### The structural answer: pre-rotation makes the dual-authority window impossible
+
+Each KERI establishment event commits to **exactly one** next key set and **one** next threshold. A rotation must satisfy **both** the new current threshold **and** the prior-next threshold. So an A→B migration is **one rotation event**, signed by the reconstructed Fork-A recovery root (satisfying prior-next) *and* by the incoming guardian keys (satisfying new-current), committing the guardians' public-key digests as the new pre-rotated set. **One transient reconstruction, ever. No period in which both authorities are independently sufficient.** This is TUF's "signed by both old and new" rule expressed in KERI's grammar.
+
+### The named anti-pattern: never arm two next-authorities at one position
+The InterCooperative Network's architecture makes this **normative**, after five rounds of adversarial review:
+> *"**Each position commits to exactly ONE next authority.** Pre-rotation must not arm two alternative recovery paths at the same position; the person selects path (a) *or* path (b) at each rotation, **never both**. Otherwise the two paths reveal different material and derive two different canonical bodies, and the race returns."*
+
+**A dual-authority transition period is exactly this forbidden state.** Do not build one.
+
+### The measured cost of an overlap, if you have one anyway
+The 2017–18 DNSSEC root KSK rollover is the field's only large-scale natural experiment:
+- ICANN **postponed the 2017-10-11 roll on 2017-09-27** on RFC 8145 telemetry: *"approximately **5% of the total validators and about 6%-8% on any given day** report they are using KSK-2010… these validators would not resolve correctly after the planned root KSK roll."* (~12,000 unique source IPs, ~1,400/day, from six root-server addresses.)
+- The roll finally ran **2018-10-11**. ICANN afterwards: *"**far fewer** Internet users negatively affected than anyone expected… only **a handful of resolvers**… only **two** Internet Service Providers."* And on the delay: *"postponed due to **confusing signals**."*
+- **The instrument built to de-risk the transition was the thing that went wrong** — RFC 8145 was five months old and supported only by the newest resolver builds.
+- Verisign's telemetry on cost: root DNSKEY queries went from **~15M/day** pre-roll → **~75M/day** after the new key was introduced → **~1.15 **billion**/day by 2019-03-21** (nearly **7% of all root-server traffic**) after the old key was marked **revoked** on 2019-01-11, normalizing only when the revoked key was removed on 2019-03-22. **Retiring the old authority cost 75×; introducing the new one cost 5×.**
+
+### Grade the old authority per capability rather than retiring it as a unit
+Two large deployments converged on this independently:
+- **APK Signature Scheme v3** carries `self-trusted-old-certs` flags marking, *per ancestor certificate*, which operations it remains trusted for. Lineages are strictly **linear — no branching or merging**. Android's own guidance: *"Key rotation is discouraged for Android 12 and earlier."*
+- **Microsoft's 2026 Secure Boot rollover** replaces the single *Microsoft Corporation UEFI CA 2011* with **two** 2023 certificates *"which together allow for more granular control."*
+
+### Argent's shipped, adversarially-exercised guardian-change design (worth copying verbatim)
+| Operation | Rule |
+|---|---|
+| Add/remove a guardian | confirm **after 36h, no later than 48h** |
+| Pending change | **cancelled** if the wallet is locked or recovered meanwhile |
+| Recovery execution | **⌈n/2⌉** guardian signatures |
+| Recovery finalization | **48h** later, unless cancelled |
+| **Cancel a recovery** | **⌈(n+1)/2⌉** signatures — *and the owner may sign*; `n` pinned to the roster **at execution time** |
+
+Three moves: **cancelling is deliberately cheaper than executing**; the cancel threshold is frozen against mid-recovery roster manipulation; and **a pending authority change and a recovery cannot run concurrently** — the two state machines are made to destroy each other on purpose.
+
+### The hazard has no name
+I searched for an established term for "an attacker selects whichever of two concurrently-valid authorities is easier to subvert." **There isn't one.** Downgrade/rollback attacks are about *versions*; TUF's freeze attack is the adjacent hazard (withholding updates so a client never leaves the old authority); RFC 5011 describes the scenario — one compromised trust-anchor key lets an attacker add theirs and revoke the legitimate ones during the 30-day add-hold-down — but gives it no name. **If you need to reason about it, you will have to coin the term.** *(Confidence 14/20 that no standard term exists.)*
+
+---
+
+## 7. ANTI-PATTERNS AND GOLDEN PRINCIPLES
+
+**The ceremony, not the cryptography, is the object of design.** Carl Ellison, *Ceremony Design and Analysis* (IACR eprint 2007/399): a ceremony includes *"human nodes alongside computer nodes and with communication links that include UI, human-to-human communication and transfers of physical objects that carry data,"* and — the load-bearing line — ***"some secure protocols imply ceremonies that cannot be made secure."***
+
+**Ceremony rot is real and it has a canonical war story.** Max Levchin's PayPal account: a **3-of-8** Shamir split protecting the master key for 100M+ credit-card numbers. At the reconstruction, three shard-holders entered their passphrases and got *"Sorry, one or more wrong passphrases. Can't reconstruct the key. Goodbye"* — while a deployment script simultaneously overwrote the master key file. Root cause: **Solaris's `getpass()` silently truncates at 8 characters; the Linux `getpass()` used at generation time did not.** Only the holder whose passphrase was `a$$word` (8 chars) could decrypt his shard. **The shares had been unusable since the day they were created, and nobody knew, because nobody had ever tried.** *(The complementary failure mode: plain Shamir has **no verifiability** — a bad share yields a wrong key with no attribution. Feldman/Pedersen VSS fixes this. Fork B cannot have this failure: a bad guardian signature simply fails to verify, and you know exactly which guardian.)*
+
+**The recovery path must be no weaker than the primary path.** NIST SP 800-63B §6.1: *"When any new authenticator is bound to a subscriber account, the CSP SHALL ensure that the binding protocol and the protocol for provisioning the associated key(s) are done at a level of security **commensurate with the AAL** at which the authenticator will be used."* ICANN operationalizes this by making recovery **stricter** (5/7) than operation (3/7).
+
+**A ready-made requirements checklist, from an outside civic system.** The InterCooperative Network's identity architecture (`docs/architecture/HUMAN_IDENTITY_ARCHITECTURE.md`) enumerates:
+- **R9.1 [HARD]** Recovery is possible from total device loss.
+- **R9.2 [HARD]** Recovery is an authenticated, auditable event, never a silent substitution.
+- **R9.3 [HARD]** Competing recovery attempts resolve deterministically.
+- **R9.4 [HARD]** M-of-N counts **distinct authenticated** participants.
+- **R9.5 [STRONG]** Recovery does not create a new permanent single point of failure.
+- **R9.6 [STRONG]** Recovery is contestable by the legitimate subject (delay + veto).
+
+**R9.6 has a subtlety worth carrying.** ICN found the contest window **cannot be position-denominated** — *"in a takeover the attacker controls log advancement and would simply advance past any positional window."* It must be **wall-clock**, and they accept the consequence honestly: *"two nodes of the same institution with identical durable state but skewed clocks can reach different verdicts during the window… **This is the only place in the design where a receiver's clock decides anything.**"* Argent reached the same conclusion empirically (36h/48h wall-clock windows), and Schechter's data says a 48h window covers **88%** of successful guardian recoveries.
+
+**Correlated custody is the failure that actually costs money.** Ronin: 5-of-9 that was really 1-of-1. ICANN's counter-practice: share holders drawn from *"organizationally separate parties, not affiliated with PTI, ICANN, or Verisign."* **Count independent custody domains, not keys — and re-count after every delegation, because the Ronin allowlist was a grant that outlived its purpose by four months.**
+
+**Physical coercion is now a live threat to human guardians**, not a thought experiment — the January 2025 kidnapping of a Ledger co-founder in France, and the surrounding wave of similar attacks, are the reason "three guardians in one jurisdiction" is a real correlation and not merely a legal one.
+
+**Make the recovery authority structurally unable to be re-exercised where you can.** Apple: *"The administrative access cards that permit the firmware to be changed have been destroyed."*
+
+---
+
+## 8. THINGS THAT DISSOLVE OR RESHAPE THE FORK
+
+There are more than two options, and at least two of them subsume both branches.
+
+### Option C — FROST(Ed25519), one ordinary Ed25519 signature, no verifier change
+RFC 9591 §6.1 specifies **FROST(Ed25519, SHA-512)**, *"meant to produce **Ed25519-compliant signatures** as specified in Section 5.1 of RFC 8032."* Guardians hold shares; the KEL sees **one key and one signature** and needs no threshold logic at all. Real costs, all from the RFC and the ZF implementation book:
+- **Two synchronous rounds**, with per-participant state between them, and a Coordinator.
+- ***"FROST does not provide robustness"*** — *"all participants are required to complete the protocol honestly."* One misbehaving or absent guardian **DoSes the round**. Identifiable abort catches bad shares but *"does not provide accommodations for identifying participants that **refuse to participate**."*
+- ZF's book: *"**ALL** participants who are selected for generating the signature need to produce their share, even if there are more than `t` of them."*
+- **Nonce reuse ⇒ complete key recovery.** Nonces must be deleted after use.
+- Trusted-dealer keygen (Appendix C) is *"simpler but requires the entire key in memory temporarily"* — **Fork A's exact hazard, paid ONCE at inception instead of once per recovery.** DKG removes it but needs *"a broadcast channel plus authenticated, confidential peer-to-peer channels between all participants."*
+- **Even the reference implementation shipped a threshold bug** (CVE-2025-58359).
+- **Real-world adoption for personal key recovery is negligible.** The one genuine attempt is Nostr's **FROSTR** (`bifrost`, `igloo`, 2024–2026) — **and it uses a trusted dealer** (`generate_dealer_package`), not DKG. Star counts 33/14/12. GitHub search for FROST-based wallet recovery returned nothing else.
+
+### Option D — cooperative delegation (see §2d)
+Make the persona a delegated AID with the council as delegator. Converts an unrecoverable rotation-key compromise into a recoverable one, and requires **joint** compromise of two independently-held key sets. This is KERI's own prescribed answer and it is orthogonal to A-vs-B.
+
+### The ceremony-cost ordering, which is the cleanest way to see the option space
+| Option | Times a full secret exists in one place |
+|---|---|
+| Fork A (reconstruct-then-sign) | **once per recovery, forever** |
+| FROST with trusted dealer | **exactly once, at inception** |
+| FROST with DKG | **never** (cost: all-pairs confidential channels) |
+| Fork B (independent multisig) | **never** (cost: nothing — no ceremony at all) |
+
+### Two more that reshape rather than answer
+
+**Guardian churn is cheaper under Fork B, not more expensive.** Replacing one guardian in Fork B is *one rotation event* committing a new pre-rotated set — the same operation as recovery, already implemented. Replacing one card in Fork A requires re-splitting the recovery root, which requires reconstructing it. Unless you add **proactive secret sharing** (Herzberg/Jarecki/Krawczyk/Yung; Ostrovsky–Yung mobile-adversary model), which lets the honest holders regenerate a lost share *and* periodically re-randomize all shares so an attacker must collect k within one epoch. That is a genuine Fork-A hardening you should price before ruling — but it adds a periodic multi-party protocol, which is most of the complexity Fork A was chosen to avoid.
+
+**Multi-persona compartments break the symmetry.** Fork B lets one guardian keypair be committed into some personas' pre-rotation lists and deliberately not others, at zero extra custody cost — disjoint guardian sets per compartment. Fork A costs a fresh card per persona per guardian. ICN names the correlated hazard on the other side: *"A person recovering after device loss rotates in **every context within one window**, and an observer of two coops' logs correlates on timing. R6.4 is weakened by the very auditability R9.2 requires — a genuine tension between two requirements, not an oversight."* And on shared guardians: *"Shared guardians are better UX and worse privacy (the guardian learns the linkage); per-context is the reverse."*
+
+### And the hazard your in-house framing does not contain
+
+**A guardian quorum signing independently is a destruction quorum, not merely an impersonation quorum.** ICN, after five review rounds:
+> *"With M-of-N guardians signing **independently**, two quorums yield two authorized bodies at `p` ⇒ permanent halt, so **any M guardians hold a kill switch, not merely a takeover**."* And: *"it can happen with **no adversary at all**, if a phrase-holder rotates at `p` while a guardian quorum recovers at `p`."*
+
+In a KERI-shaped system this lands as **duplicity**: two rotation events at the same `sn`, rule A1 says neither supersedes the other, and *"either there is one-and-only-one valid KEL or none at all"* — validators may stop trusting the AID entirely. **Same hazard, same shape, and it transfers.**
+
+ICN's own remedy is instructive because they explicitly say FROST **does not fix it**: *"a group key authenticates a quorum, it does not restrict that quorum to signing **one message**."* Two rules are required, and both are cheap:
+1. **`authorized` must ENFORCE canonical derivation** — a rotation body is authorized only if it *equals* the body canonically derived from the revealed pre-committed material. Any honest quorum then produces byte-identical events; a malicious quorum's non-canonical body never enters the log.
+2. **Exactly one next authority armed per position.**
+
+This is, I think, the most decision-relevant thing in this report that your framing did not already contain: **the cost of Fork B is not "k signatures on the event"; it is that you must make the rotation body deterministic.**
+
+*Confidence: 17/20 that the hazard transfers to a KERI-shaped log; 15/20 that canonical derivation fully closes it.*
+
+---
+
+## 9. NEGATIVE RESULTS (each is a finding)
+
+1. **No prior art at community scale for either fork in a local-first system.** GLEIF's vLEI is the only production KERI deployment I could confirm (KERI Infrastructure Technical Requirements Part 1 v1.4, dated 2026-03-25) — and **GLEIF publishes no deployment numbers**, no QVI counts, no credential counts. keripy: 81 stars. **ICN designed both forks in extraordinary detail and has built neither** (*"The protected backup / recovery / threshold-share protocol belongs to N7 (#2603)"*; the codebase uses XOR-then-hash, not FROST).
+2. **No FROST-based guardian recovery has shipped at scale.** FROSTR is the only attempt; it uses a trusted dealer; adoption is negligible.
+3. **No documented incident of a Shamir reconstruction window being exploited.** Only side-channel research (Vault, Feldman VSS, PyQuorum).
+4. **No study measures the mint-vs-store onboarding delta.** The question appears unasked.
+5. **No published guardian-enrollment or guardian-churn rates for any social-recovery wallet.** Argent published the mechanism; never the funnel.
+6. **No published SLIP-39 / Trezor Shamir Backup adoption or transcription-error data.**
+7. **ICANN's DPS does not specify what happens when a Crypto Officer or Recovery Key Share Holder is unavailable**, and the 5-of-7 recovery path appears never to have been exercised.
+8. **No standard name exists for the "attacker picks the weaker of two live authorities" hazard.**
+9. **The founding paper of guardian recovery (CCS 2006) contains zero empirical data**, and CHI 2009 remains close to the only measurement.
+10. **Not researched, due to unretrievable URLs:** Argent's abandonment/wind-down; Safe & ERC-4337 recovery usage; Signal SVR2/SVR3; WhatsApp E2E backups; Casa/Unchained/Nunchuk key-loss statistics; Fireblocks BitForge and Verichains TSSHOCK vendor counts; the ICANN Ceremony 40 lock-failure announcement; CT-log key incidents; Debian/Fedora/kernel.org key-rollover post-mortems; Tor directory-authority quorum incidents. **The civic-ceremonies lane did not hand back**, so §5 rests on my own direct reads of the ICANN DPS, the TUF spec, and the Sigstore repo rather than on a full sweep.
+
+---
+
+## 10. CONFIDENCE LEDGER — load-bearing claims only
+
+| Claim | Conf. |
+|---|---|
+| TUF signature-uniqueness bypass recurred in the same library in 2020 and 2026 | 19/20 |
+| Vault's Shamir reconstruct step was CVE'd for cache timing (CVE-2023-25000) | 19/20 |
+| No public incident of a Shamir reconstruction window being exploited | 17/20 |
+| KERI pre-rotation is Fork B; no reconstruction anywhere in the protocol | 19/20 |
+| KERI weighted thresholds give "rotate-only, never sign" via weight 0 | 18/20 |
+| KERI indexed signatures foreclose the duplicate-signature threshold bypass | 17/20 |
+| A non-delegated KERI rotation cannot supersede another rotation (rule A1) | 18/20 |
+| Independent-signature quorums create a **destruction** quorum, not just takeover | 17/20 |
+| ICANN: 3-of-7 to sign, **5-of-7 Shamir** to recover; recovery stricter than operation | 18/20 |
+| ICANN DPS is silent on unavailable share holders | 16/20 |
+| TUF: new root signed by a threshold of **both** old and new key sets | 19/20 |
+| DNSSEC revocation cost 75× the query load that introduction cost | 18/20 |
+| ICANN delayed the roll a year on telemetry that over-stated breakage | 18/20 |
+| FIDO Passkey Index: 93% eligible → 36% enrolled across 9 orgs, Oct 2025 | 18/20 |
+| Schechter CHI 2009: 4/89 field success; 72% forgot their own trustees | 17/20 |
+| Google WWW 2015: 40% couldn't recall their own answer, 11M claims | 18/20 |
+| Facebook retired Trusted Contacts (~May 2022) | 16/20 |
+| Ronin: 5-of-9 defeated by 4 keys + a never-revoked Nov-2021 delegation, $624M | 18/20 |
+| PayPal 3-of-8 shares were unusable from creation (Solaris `getpass()` truncation) | 18/20 |
+| FROST(Ed25519) yields RFC 8032-verifiable signatures; not robust; 2 rounds | 19/20 |
+| WebAuthn PRF could let guardians *derive* rather than mint a key | 16/20 |
+| PRF-derived keys survive authenticator replacement | 11/20 |
+| ICANN Ceremony 40 lock-failure story | 7/20 — **unverified** |
+| Anything about Casa/Unchained, Signal SVR, Argent's funnel | not researched |
+
+---
+
+**Sources:** [RFC 9591 (FROST)](https://www.rfc-editor.org/rfc/rfc9591.html) · [ZF FROST book](https://frost.zfnd.org/frost.html) · [KERI ToIP spec](https://github.com/trustoverip/kswg-keri-specification) · [draft-ssmith-keri](https://github.com/WebOfTrust/ietf-keri) · [KERI white paper](https://arxiv.org/abs/1907.02143) · [keripy](https://github.com/WebOfTrust/keripy) · [GHSA-5q2r-92f9-4m49](https://github.com/advisories/GHSA-5q2r-92f9-4m49) · [GHSA-8m7c-8m39-rv4x](https://github.com/advisories/GHSA-8m7c-8m39-rv4x) · [GHSA-fphv-w9fq-2525](https://github.com/advisories/GHSA-fphv-w9fq-2525) · [GHSA-wgq8-vr6r-mqxm](https://github.com/advisories/GHSA-wgq8-vr6r-mqxm) · [GHSA-5cjx-95fx-68q9 (GG18/GG20)](https://github.com/advisories/GHSA-5cjx-95fx-68q9) · [HCSEC-2023-10](https://discuss.hashicorp.com/t/hcsec-2023-10-vault-vulnerable-to-cache-timing-attacks-during-seal-and-unseal-operations/52078) · [ICANN KSK DPS](https://www.iana.org/dnssec/procedures/ksk-operator/ksk-dps-20201104.html) · [IANA Ceremony 40](https://www.iana.org/dnssec/ceremonies/40) · [Ceremony 41](https://www.iana.org/dnssec/ceremonies/41) · [ICANN on the KSK delay](https://www.icann.org/news/blog/the-story-behind-icann-s-decision-to-delay-the-ksk-rollover) · [ICANN rollover summary](https://www.icann.org/news/blog/the-recent-ksk-rollover-summary-and-next-steps) · [CircleID on rollover traffic](http://www.circleid.com/posts/20190326_unexpected_effects_of_the_2018_root_zone_ksk_rollover/) · [RFC 5011](https://www.rfc-editor.org/rfc/rfc5011.html) · [TUF spec](https://theupdateframework.github.io/specification/latest/) · [sigstore/root-signing](https://github.com/sigstore/root-signing) · [ICN human identity architecture](https://github.com/InterCooperative-Network/icn/blob/main/docs/architecture/HUMAN_IDENTITY_ARCHITECTURE.md) · [Ellison, Ceremony Design and Analysis](https://eprint.iacr.org/2007/399) · [Levchin, Shamir Secret Sharing](https://max.levch.in/post/724289457144070144/shamir-secret-sharing-its-3am-paul-the-head-of) · [Buterin on social recovery](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [Apple iCloud Keychain escrow](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/web) · [Ledger Recover](https://www.ledger.com/academy/what-is-ledger-recover) · [Halborn on Ronin](https://www.halborn.com/blog/post/explained-the-ronin-hack-march-2022) · [FIDO Passkey Index Oct 2025](https://fidoalliance.org/wp-content/uploads/2025/10/FIDO-Passkey-Index-October-2025.pdf) · [Lassak et al., USENIX Sec 2024](https://www.usenix.org/system/files/usenixsecurity24-lassak.pdf) · [Krombholz et al., FC 2016](https://www.ifca.ai/fc16/preproceedings/33_Krombholz.pdf) · [Ruoti et al. 2015](https://arxiv.org/pdf/1510.08555) · [Abu-Salma et al., IEEE S&P 2017](https://discovery.ucl.ac.uk/1560502/1/ASBDNS17-IEEESP-secure_messaging_obstacles.pdf) · [Bonneau et al., WWW 2015](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf) · [Lassak et al., CHI 2024](https://doi.org/10.1145/3613904.3642889) · [Argent contracts spec](https://raw.githubusercontent.com/argentlabs/argent-contracts/develop/specifications/specifications.pdf) · [APK Signature Scheme v3](https://source.android.com/docs/security/features/apksigning/v3) · [Microsoft Secure Boot 2026](https://techcommunity.microsoft.com/blog/windows-itpro-blog/act-now-secure-boot-certificates-expire-in-june-2026/4426856) · [WebAuthn PRF extension](https://w3c.github.io/webauthn/#prf-extension) · [MDN WebAuthn extensions](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API/WebAuthn_extensions) · [Bitcoin Optech: threshold signatures](https://bitcoinops.org/en/topics/threshold-signature/) · [FROSTR/bifrost](https://github.com/FROSTR-ORG/bifrost) · [NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html)
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 18,254 characters
+
+````
+The social-recovery lane has now handed back in full. It **corrects a material error** in what I sent, and closes most of §3 and §9. The civic-ceremonies lane never returned; §5 still rests on my own direct reads.
+
+---
+
+# ADDENDUM — §3 REPLACED, §9 REVISED
+
+## ⚠ CORRECTION to what I sent earlier
+
+In §3 I wrote *"Schechter CHI 2009: 89 participants → 4 succeeded, 52 failed, 33 never got a response from trustees."* **That is wrong and must be struck.** The 4/52/33 split is **Experiment 2 — the behaviour of 89 *trustees* under a forged-email attack**, not participants attempting recovery. I conflated two experiments. The corrected figures are below. My "4.5% success rate" claim was a fabrication of that conflation; the real completion rate is **40%**. Everything else in my §3 stands.
+
+---
+
+## 3 (REPLACEMENT) — SOCIAL RECOVERY AS PRACTICED
+
+### 3a. Schechter, Egelman & Reeder, CHI 2009 — still the only end-to-end measurement, 17 years on
+Deployed as a real-looking feature at recover.live.com; 4 trustees, 3-of-4; **trustees were not told they were in a study.** [PDF](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf)
+
+**Experiment 1 — reliability. The funnel, from 43 invitees:**
+
+| Attrition step | Lost | Left |
+|---|---|---|
+| Never loaded the instructions page | −13 | 30 |
+| Never responded to any survey request (**despite a $10 gift card just for replying**) | −4 | 26 |
+| **Couldn't remember who their trustees were**, and didn't look them up | −2 | 24 |
+| Too busy to attempt the task | −2 | 22 |
+| Worried trustees would fear viruses in the emails | −1 | 21 |
+| Never spoke with any trustee | −2 | 19 |
+| Configured **invalid emails for all trustees** | −1 | 18 |
+| Only reached 2 of the required 3 trustees | −1 | **17** |
+
+- The paper's headline — *"seventeen of the nineteen participants who made the effort to reach one trustee (89%) were able to authenticate"* — **is conditional.** The unconditional rate is **17/43 = 40% of enrolled users completed recovery.**
+- **18 of 19 (94%)** would have succeeded at a relaxed 2-of-4.
+- **72% (13 of 18) of the participants who SUCCEEDED had to be reminded who their own trustees were** — days after enrollment.
+- Timing: **47% under 100 min · 66% within 1 day · 88% within 2 days.**
+- Paper's own stated lesson: *"users must be reminded of who their trustees are."*
+
+**Experiment 2 — forged-email attack on trustees (attack emails co-designed with Dan Kaminsky), 89 trustees reached:** 4 (4%) sent a recovery code to the attacker; **52 (58%) broke channel and contacted the account holder instead**; 33 (37%) never responded. Modelled attacker success against the live system: **0.46% at a 2-code threshold, 0.019% at 3.**
+
+**Experiment 3 — a phone call from someone close to the victim, 42 usable calls:** **19 (45%) yielded a recovery code or trustee-authentication email.** Refusals: 12% unwilling, 33% *unable*, 10% too confused. **56% (14/25) when the caller personally knew the trustee vs 29% (5/17) when not.** Authors' caveat: mostly spouses and long-term friends, so this *"reflects the upper bound for attack efficacy."*
+
+> **The single most load-bearing fact in this field: guardians resist a cold email (4%) and fold to a warm phone call (45%).** Google prices that call at *"on the order of $750 USD"* per account.
+
+### 3b. The founding paper has no data
+Brainard, Juels, Rivest, Szydlo & Yung, **"Fourth-Factor Authentication: Somebody You Know", ACM CCS 2006** — the originating paper of guardian recovery — contains **no empirical user data at all**: *"We are presently in the process of conducting a small pilot study."* Schechter, citing it three years later: *"To our knowledge, no usability results have been made available."* Twenty years on, that is still true.
+
+### 3c. Loopring — the only guardian-recovery breach published **with denominators**
+[Postmortem, 2024-10-11](https://medium.com/@byron.loopring/postmortem-incident-report-and-path-forward-aa64f7e5f7d1)
+- 2024-04-24: operator keys compromised via `secretManager`; an admin key *"was not strictly managed, and several internal members had access to it."* Loopring reset keys but *"did not conduct a thorough review of the backend environment."*
+- 2024-06-09: **the 2FA server itself was compromised.** The attacker *"temporarily replaced affected users' 2FA data with their own email addresses,"* initiated social recovery, received the code, and Loopring's relayer *"signed 'YES' to the social recovery request."* **The attacker did not defeat recovery — they invoked it, exactly as designed.**
+- **Denominators, verbatim: *"Out of 40,000+ Loopring Smart Wallets currently deployed, 58 Loopring Smart Wallet addresses lost assets"*** — ~0.145%, ~$5M.
+- **Root cause is the adoption failure, stated by the vendor:** *"Most impacted wallets relied solely on the default Loopring Official Guardian, which only uses users' 2FA information for verification."*
+- **Correlated-guardian edge case:** *"Four wallets with more than one guardian were also compromised because the second guardian (another Loopring Smart Wallet) had already been compromised, also relying on the default Loopring Official Guardian only."*
+- Singapore police declined the report (no local victims, US server). **No reimbursement**; the company pivoted to "Loopring DeFi." Contracts repo last pushed 2024-10-25.
+
+### 3d. Argent — the vendor's own docs collapse the "social" quorum to 1-of-1
+[Guardian FAQ, live](https://support.argent.xyz/hc/en-us/articles/360007981757-Ethereum-account-guardian-FAQ), verbatim:
+> *"**You only need one guardian for a recovery.**"* · *"**One guardian is sufficient** … however with more guardian approvals at once, **the transaction might become more expensive fees-wise**."*
+
+The default guardian **is Argent**, verified by SMS. Recovery: **48-hour delay**; 1 guardian → 1 approval; 2–3 → majority; 4+ → ⌈N/2⌉. The doc **does not address unavailable guardians** — it says email support.
+
+**Did Argent abandon social recovery?** Not formally. But: `argentlabs/argent-contracts` (the guardian suite, 600 stars) **last pushed 2024-07-29 — ~2 years idle**; the company rebranded to **Ready** in late 2025; Ready's live blog has **no social-recovery messaging**; and **the 2020 guardian manifesto that Argent's own support FAQ still links to as the canonical explainer now 404s.** It was quietly de-emphasized, not announced dead.
+
+### 3e. Safe — the social tier was never built
+[Safe's own help doc](https://help.safe.global/articles/9622260218-account-recovery-with-saferecoveryhub): *"As of December 2023 the only implemented solution is a decentralized custom solution."* A **"Recoverer" is a single account — no n-of-m threshold at all**: *"Recoverers can bypass any threshold and propose ownership changes."* The only defence is a delay window. Safe's own admission: *"There is no centralized authority to help you in case the Recoverer's key is lost"* — **the recovery mechanism has the same loss problem as the thing it recovers.** Underlying primitive `zodiac-modifier-delay`: **31 stars.** No usage numbers ever published.
+
+### 3f. ERC-4337 / account abstraction — the Ethereum Foundation's own SDK has 8 stars
+[PSE, "Social Recovery SDK"](https://pse.dev/blog/social-recovery-sdk), verbatim: *"Social recovery has been discussed for years, but **developers still lack a practical, trustless SDK**"* … *"including Vitalik Buterin's writing on social recovery in January 2021, **yet there is still no simple, trustless, developer-friendly SDK**."* Repo created 2026-01-12, last push 2026-03-02, **8 stars**. Timelocks declared non-optional: *"without them, a colluding guardian set can potentially take over a wallet before the owner can react."* Three open problems, **all human-coordination, none cryptographic**: manual owner↔guardian salt handoff; DKIM registry rotation (*"DNSSEC coverage is still incomplete across providers"*); and cross-chain config (*"users must reconfigure and repeat recovery setup across chains … **affects real adoption**"*). Adjacent `zkemail/email-recovery`: **61 stars, idle ~14 months.**
+
+**And the gap that explains everything:** Vitalik recommended **7+ guardians**; Argent shipped a default of **1** and told users more costs gas. Practitioners called it on day one — the [HN thread](https://news.ycombinator.com/item?id=25722131) (129 pts) predicted guardians converge on institutions: *"All roads lead to banks."* **HN carries essentially no other discussion of social recovery in its entire archive.**
+
+### 3g. Facebook Trusted Contacts — the largest deployment ever built, killed
+Launched 2011, relaunched 2013, ~**2 billion accounts**, 3-friend confirmation. **Removed 2022.** Facebook's own help-page notice, verbatim: *"Trusted contacts is going away soon. This means your chosen friends will no longer be able to help you get back on Facebook if you lose access to your account."* Replacement advice: keep your email and phone current. **Meta ran the largest possible experiment in social recovery for ~9 years, published no results, and shut it down.** *(This supersedes my earlier 16/20 — the verbatim notice was retrieved.)*
+
+### 3h. Signal SVR — measured cost, unmeasured forgetting
+SVR3 (Connell et al., **USENIX OSDI 2024**): **$0.0025/user/year**, **365 ms** to recover, *"millions of real users in a deployment with capacity for over 500 million users."* n=3 trust domains across AWS Nitro / Intel SGX / AMD SEV-SNP, s=2 supermajority, 7 servers.
+**The design admission, verbatim:** the system *"does not support recovering the user PIN … **if a user forgets their PIN, they cannot recover their key**."* **Mitigation, verbatim:** *"We mitigate this in practice by **periodically prompting the user to re-enter their PIN**."*
+**Signal has never published a PIN-forgetting rate** — not in 2019, not in 2020, not in the OSDI paper. All three were checked. **The engineered periodic re-prompt is the strongest indirect evidence the rate was high enough to build around.**
+Matthew Green's [critique](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/): *"The key weakness of the SVR approach is that it depends strongly on the security and integrity of SGX execution"* — memory dump → offline dictionary attack whose difficulty rests *"entirely on the strength of a user's password"* (Signal encouraged **4-digit** PINs); retry-limit bypass; attestation-key leakage forcing replication into simulated non-SGX enclaves. On consent: *"My major issue with SVR is consent"* — he calls the rollout a *"dark pattern."*
+
+### 3i. Apple — where the recovery path became the attack
+- **Recovery Contacts:** up to **5**; the contact relays a **six-digit code**; *"Your recovery contacts won't have any access to your account."* **No published success rate, no delay figure.**
+- **Recovery Key:** a 28-character code that **turns off Apple's standard recovery path entirely.**
+- **Advanced Data Protection** requires at least one of the two; **no adoption number ever published**; Apple **withdrew ADP from the UK** in Feb–Mar 2025 rather than comply with a Technical Capability Notice.
+- **The failure that actually happened (WSJ, Feb & Apr 2023):** thieves shoulder-surfed passcodes **in bars at night**, stole the phone, reset the Apple ID password in Settings, disabled Find My, **then set a Recovery Key** — permanently locking out the owner. *"Apple's policy gives users virtually no way back into their accounts without that recovery key."* **The thief did not defeat the Recovery Key; the thief set one.**
+- Apple's fix, **iOS 17.3 (Jan 2024)**: Stolen Device Protection — biometrics with *"no passcode alternative or fallback"*, a **one-hour security delay** then a **second** biometric check before an Apple ID password change. **Crucial limit: only away from "familiar locations"** unless the user opts into always-on.
+
+### 3j. WhatsApp and Bitcoin collaborative custody — all denominators absent
+- **WhatsApp E2E backups (2021-09-10):** HSM "Backup Key Vault"; password or 64-digit key; the vault renders the key *"permanently inaccessible after a limited number of unsuccessful attempts."* **Meta does not state the attempt count anywhere.** The widely-repeated "5 attempts" figure **could not be verified and should not be cited.** **No adoption number has ever been published.**
+- **Casa:** $21/mo 2-of-3, $175/mo 3-of-5; self-reported *"$10+ Billion Protected"*, *"40,000+ Clients."* **"Casa Covenant" no longer exists as a product** — it is now "Casa Inheritance" with a **six-month verification window.** The oft-cited "X% of Casa clients have lost a key" statistic **could not be located** despite checking the blog archive to 2018. Casa's guidance is a key health-check *"about once every six months"* — **advice, not a mechanism.**
+- **Unchained:** *"$0 Capital losses"*, *"100,000+ BTC"* — self-reported, no methodology. **No key-loss or recovery data.**
+- **Nunchuk** is the only vendor publishing an honest caveat — *"it's impossible to know exactly how many of these losses are due to failed inheritance plans"* — **and the only design found anywhere that treats vendor mortality as a requirement**: a Miniscript on-chain timelock "Failsafe" that works if Nunchuk disappears.
+- **The descriptor problem is real:** Bitcoin Optech #351 (2025-04-25) covers a proposal for standardized encrypted wallet-descriptor backup. **The existence of that proposal is the evidence: holding your seed is not sufficient — losing the descriptor loses the funds.**
+
+### 3k. Two folklore numbers to stop citing
+- **"~20% of BTC is lost"** traces via Wikipedia to a **2018 WSJ article**, not Chainalysis; the Chainalysis URLs 404. **Vitalik's 2021 post repeats it with no citation.** This unsourced number has been the motivating statistic for the entire social-recovery program.
+- **Krombholz FC 2016's "22% lost money"** is **secondhand** (via a 2018 citing paper); the primary PDF is unreachable. *(This lowers my earlier 15/20 to ~8/20 — do not cite it.)*
+
+---
+
+## 9 (REVISED) — NEGATIVE RESULTS
+
+Now much stronger, and each was hunted for specifically:
+
+1. **No wallet vendor has ever published what fraction of users configure guardians.** Not Argent, not Loopring, not Safe.
+2. **No wallet vendor has ever published how many recoveries were performed, attempted, or abandoned.** **Zero recovery-success data exists for any production smart-contract wallet.**
+3. **No guardian non-response rate has ever been published by any deployment.**
+4. **No longitudinal study exists** on whether guardian-enrolled users can recover months or years later. Schechter's window was *days*. **This gap has stood open for 17 years.** Partially closed from an unexpected direction: Bonneau/Google's 40% at 11M-claim scale.
+5. **Signal has never published a PIN-forgetting rate**, despite engineering a re-prompt against it.
+6. **WhatsApp has never published an E2E-backup adoption number or its attempt threshold.**
+7. **Apple has never published a Recovery Contact success rate or an ADP adoption number.**
+8. **Casa / Unchained / Nunchuk publish no key-loss or recovery-exercise rates** — only "$0 losses" marketing.
+9. **No Buterin retrospective revisiting the 2021 claims against outcomes was found** (medium confidence; search access degraded).
+10. **No documented real-world incident of an attacker socially engineering a *human* guardian into approving a recovery.** Every documentable incident attacked the **vendor-operated** guardian (Loopring's 2FA server) or the **device passcode** (Apple). *(This is the sharpest negative in the set: the human-guardian threat is measured only in a 2009 lab, never in the wild — because in the wild there were almost no human guardians to attack.)*
+11. **No academic study empirically measures usage or success rates of guardian-based social-recovery crypto wallets.** OpenAlex across SOUPS/CHI/USENIX/PETS/CCS/FC/NDSS surfaces only scheme proposals and surveys.
+12. **Facebook published no outcome data in nine years and none when killing it.**
+13. **(Unchanged) The civic-ceremonies lane did not hand back** — CT logs, Debian/Fedora/kernel.org key rollovers, Tor DirAuth quorum incidents, and the ICANN Ceremony 40 lock-failure verification remain unresearched.
+
+---
+
+## What this changes about the fork
+
+**Nothing about the cryptography — and that is the point.** Not one of the eleven documented failures above turned on Shamir-versus-multisig. They turned on: nobody enrolled real guardians; the "social" guardian was the vendor; the recovery path became the attack path; users forgot who their guardians were; and the vendor left.
+
+Two additions to the record that bear directly on your ruling:
+
+- **The delay window plus an out-of-band owner alert is the load-bearing control, not the threshold.** It is the one thing that worked across every incident class — Argent 48h, Apple 1h+biometric, Safe's rejection window, and Schechter's **58% of attacked trustees who broke channel to warn the victim.** And Schechter's completion distribution (88% within 2 days) says **48 hours covers essentially the whole legitimate distribution.** This maps exactly onto ICN's R9.6 wall-clock veto in my §7 — two independent lines of evidence converging on the same number.
+- **Guardian liveness is the unbuilt mechanism.** Three independent measurements point the same way — Schechter's 72%, Google's 40% across 11M claims, Signal's engineered re-prompt — and **no wallet ships a check.** Under Fork B this is nearly free: challenge each guardian to sign a nonce, on a schedule. Under Fork A a card cannot be proven live without reconstructing. **That asymmetry is decision-relevant and I had it at lower confidence before this handback.**
+
+Finally, on threshold choice: Schechter measured **3-of-4 → 89% reliability at 0.019% attack success**, versus **2-of-4 → 94% at 0.46%**. Five points of reliability for a 24× increase on a still-tiny attack probability. The paper's own suggestion — **start strict, relax for dormant accounts** — is the mirror image of ICANN's rule that recovery be *stricter* than operation, and the two are reconcilable only by deciding which failure you fear more. That is a ruling, and it is yours.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-3 >>
+
+!! Message 3 ~ 17,911 characters
+
+````
+The civic-ceremonies lane has now returned. It **corrects two claims** I made and supplies the decisive comparative finding of the whole sweep.
+
+---
+
+# FINAL ADDENDUM — §5 REPLACED, §7 EXTENDED
+
+## ⚠ TWO CORRECTIONS to what I sent earlier
+
+**1. I said "in the world's most audited key ceremony, the 'guardian is unreachable' case is unwritten." That is wrong.** I read the DPS; the operational detail lives in a different document. [KSK Key Management Procedure v3.4 (2021-09-22)](https://www.iana.org/dnssec/procedures/ksk-operator/KSK_Key_Management_Procedure_v3.4.pdf) **§6.8 "Unavailable RKSH Credential Recovery"** is a full prescribed procedure, ending: *"If an RKSH is no longer able to access their recovery key shares, the recovery key shares should be **considered lost**."* The same document enumerates unplanned ceremony events explicitly — *"Hardware failures · Software failures · CO credentials failure · **Recovery Key Share failure** · **Safe failure** · **Safe deposit box failure** · General facility failure."*
+**What survives: the 5-of-7 shares themselves went ~14 years untested.** The scenario was *contemplated*; the path was never *walked*.
+
+**2. The Ceremony 40 lock failure is confirmed, and I had it at 7/20.** Raise to 17/20. The safe had to be **drilled**; it took ~20 hours; ICANN's CSC briefing calls it *"one of the worst-case disaster recovery scenarios that had been contemplated"*; and drilling *"is, in fact, the manufacturer-indicated method."* [Damas, APNIC, 2020-03-04](https://blog.apnic.net/2020/03/04/drilling-for-the-ksk/). **The detail that matters most: three TCRs sat on site for days waiting, because the ceremony could not proceed without them.** *(Date conflict unresolved — IANA's list says 2020-02-16, RIPE Labs says the ceremony ran 2020-02-12, Damas says the safe opened Saturday evening 2020-02-15. The failure and the drilling are not in dispute; the calendar is.)*
+
+**And the sharper Ceremony 41 fact I did not have:** RIPE Labs, ICANN-sourced — ***"Four TCRs transferred their credentials to IANA staff to act as surrogates."***
+
+---
+
+## 5 (EXTENDED) — CIVIC / ORGANIZATIONAL CUSTODY
+
+### 5a. The m-of-n requirement exists — in WebTrust, not the Baseline Requirements
+The CA/B Forum BRs are near-empty here (§6.2.2/6.2.3/6.2.4 are headings with no text; §5.2.2 requires only *dual control*). The real rule is [WebTrust for CA Principles and Criteria v2.2.2](https://www.lawtrust.co.za/wp-content/uploads/2023/11/MDS21216WebTrustCA-222FINAL.pdf) *(third-party mirror; currency unverified)*:
+- **§3.6.1(d)** — document the *"**m of n rule** where m represents the number of **key shareholders** required to perform an operation and n represents the total number of **key shares**."*
+- **§4.4.1** — *"The activation of the CA private signing key is performed using multi-party control (i.e., m of n) with a minimum value of m (e.g., m greater than 2 for Root CAs)."*
+- §4.1 requires the ceremony script to carry *"sign-off from participants and witnesses"* and *"notation of any **deviations** from the key generation ceremony script."*
+- The **Key Generation Report is a standalone deliverable**, separate from the annual audit — Mozilla tracks them as their own bug class.
+
+### 5b. **THE DECISIVE COMPARATIVE FINDING**
+
+> **Every m-of-n scheme in the entire public-CA and root-zone world is SECRET SHARING — Shamir-style reconstruction — not threshold signing.**
+
+- WebTrust defines m-of-n in terms of *"key shareholders"* and *"key shares."* Reconstruction.
+- [Entrust nShield](https://nshielddocs.entrust.com/security-world-docs/v13.4.5/edge-ug/security-worlds.html), the dominant CA HSM: recovery keys are *"split among the cards in the ACS using the same K/N mechanism as for an OCS"*; *"Provided that K is less than N … you have at least K cards available, a hardware security module can **re-create all the keys** stored on the device."* With the warning that matters for your 2-of-3: *"We do not recommend creating card sets in which **K is equal to N** because an error on one card would render the whole card set unusable."* **A hard cliff below K.**
+- IANA: 7 shares of one Storage Master Key, reassembled inside an HSM.
+
+**The consequence, stated exactly, and it is the single most useful sentence the sweep produced:**
+
+> In every one of these systems the key is **materialized in one place at activation time**, and the quorum is **a lock on the box, not a distributed signing protocol.** **ICANN's April 2020 workaround — four TCRs couriering their credentials to staff surrogates — is only possible *because* the shares are transferable bearer secrets. Under threshold signing it would be meaningless.**
+>
+> **Secret sharing degrades gracefully under a pandemic precisely because it can be subverted by courier. Threshold signing cannot be couriered, and therefore cannot bend.**
+
+That is the real tradeoff, and it cuts *against* the direction most of my other evidence pointed. Fork A's assembled-secret is simultaneously its worst security property and its best availability property. **They are the same property.** Fork B's guarantee that no secret ever reconstructs is also a guarantee that **no guardian can ever delegate, courier, or improvise their way through a crisis** — the guardian must personally sign or the rotation does not happen. Whether that is a feature or a fatal rigidity is a values question, and it is yours.
+
+### 5c. Distro archive keys — nobody does threshold signing, and one distro actually lost its key
+
+| System | Signing | Backup / recovery |
+|---|---|---|
+| **Debian archive** | Single key, **online YubiKey on ftp-master, PIN in a file beside it** | **SECRET SHARING — Shamir 3-of-5** (`gfshare`). Revocation **1-of-5** |
+| **Fedora** | Single key per release; **passphrase never stored on any Fedora server** (split by *factor*, not by shares) | None. 2008 recovery = new key + re-sign the entire archive |
+| **Red Hat (RHEL)** | Single key | Not published. 2008 response was a **blacklist, not a rotation** |
+| **kernel.org** | **No archive key at all.** Per-developer signatures; signed git tags are the anchor | **The web of trust IS the recovery mechanism** — ≥2 existing-member signatures re-admit a re-keyed developer |
+| **Arch** | m-of-n **TRUST**, not signing: one maintainer signature per package; that maintainer key needs **≥3 master-key signatures** | Master key replaced on holder departure |
+| **Kali** | Single key, **2012–2025, never rotated** | **None. They lost it.** |
+
+**Debian's design lesson is an asymmetry worth stealing: destroying trust is 1-of-5, restoring the key is 3-of-5.** Any single designated revoker can kill the archive key unilaterally; it takes three to bring one back. Verified from dak's production config and [ftp-master.debian.org/keys.html](https://ftp-master.debian.org/keys.html): *"**gfshare** … is used to produce **5 shares of which 3 are needed** to recover the secret key."* Each share is individually PGP-encrypted to its holder; the generator refuses to run unless `GNUPGHOME` is on tmpfs.
+
+**The answer to "has anyone ever actually lost a root/archive key?" — YES. [Kali Linux, 2025-04-28](https://www.kali.org/blog/new-kali-archive-signing-key/):** ***"We lost access to the signing key of the repository, so we had to create a new one."*** Repository frozen from 2025-04-18; **every Kali installation on earth fails `apt update` until the user manually `wget`s the new keyring.** Old key created **2012-03-05 — 13 years, no rotation.** They pre-empt the obvious suspicion: *"So your key was compromised and you don't want to admit it, right?" — "No. As you can see we still include the old key in the keyring; if it was compromised we would have removed it and provided a revocation certificate."* **The entire cryptographic bridge is developers' personal keys signing the new key on a public keyserver.** No secret sharing, no escrow, no revocation certificate. Precedent at the same project: **they let the key expire by accident in 2018** — same custody failure, milder symptom.
+
+**The most instructive pair of decisions in the whole survey — Fedora vs Red Hat, August 2008, one intrusion, opposite calls.** Fedora's [decision mail](https://web.archive.org/web/20210202162244/https://www.redhat.com/archives/fedora-announce-list/2008-August/msg00012.html): ICANN-style split custody saved them — *"the passphrase was not used during the time of the intrusion and is not stored on any of the Fedora servers"* — **and they rotated anyway**, because *"Fedora packages are distributed via multiple third-party mirrors."* Red Hat, facing attackers who had **actually signed OpenSSH packages with a real Red Hat key** ([RHSA-2008:0855](https://access.redhat.com/errata/RHSA-2008:0855)), **did not rotate** — it shipped `openssh-blacklist`. Fedora's [nine-step plan](https://fedoraproject.org/wiki/New_signing_key) took ~5 weeks (Aug 14 → Sept 18), ~3.5 of them with no updates at all, and required re-signing every package. **The bootstrap trick is worth noting: the transitional RPMs were signed by the OLD key `4f2a6fd2`** — the compromised-adjacent key was used one last time to establish trust in its successor. **This is the origin of Fedora's per-release key practice.** The promised post-mortem was never published.
+
+**kernel.org 2011** is the pure Fork-B analogue: no archive key, so recovery was an **N-way developer re-keying** requiring **in-person signatures from as many kernel developers as possible** (phone signing only if you'd testify in court). A revocation-certificate escrow was considered and **never built**. The promised incident report was never delivered, and *the promise itself was quietly deleted from kernel.org between 2013-03-01 and 2013-03-02* ([Ars, 2013](https://arstechnica.com/information-technology/2013/09/who-rooted-kernel-org-servers-two-years-ago-how-did-it-happen-and-why/)). Today's [governing principle](https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.html): ***"trust must always be placed with developers and never with the code hosting infrastructure."***
+
+> **The generalization: nobody does threshold *signing*.** Every archive is signed by one online key. Where m-of-n appears it is in one of two adjacent places — **recovering** a lost secret (Debian 3-of-5), or **admitting** a key to the trust set (Debian 2 DDs, kernel.org 2 account holders, Arch 3 master keys). And every recovery in the record has the same shape: **mint a new key, get humans to sign it out of band, re-sign or re-point the archive, and push the new anchor through the old key if it still works — by hand if it doesn't.**
+
+---
+
+## 7 (EXTENDED) — CEREMONY FAILURE, MEASURED: 19 CASES
+
+**The dominant public-CA failure mode is not lost quorum. It is the script and the executed reality diverging, undetected, for months.**
+
+| CA | Bug / date | What went wrong |
+|---|---|---|
+| **IdenTrust** | [1895006](https://bugzilla.mozilla.org/show_bug.cgi?id=1895006), 2024-05-03 | **Generated a self-signed ROOT when they meant an intermediate.** *"A PKI operator entered the wrong command parameter"* and *"The ceremony witness missed noticing the invocation of the wrong command."* **Fix: split the tool into two binaries so the wrong object type is not selectable mid-ceremony.** |
+| **SecureTrust** | [1671037](https://bugzilla.mozilla.org/show_bug.cgi?id=1671037), 2020-10 | **The ceremony video recorder failed; the recording was unrecoverable.** CPS required 7-year retention. **All 7 intermediates were revoked.** The ceremony was fine; the *proof* wasn't, and the keys were thrown away anyway. |
+| **Camerfirma** | [1532333](https://bugzilla.mozilla.org/show_bug.cgi?id=1532333), 2019-03 | A **stale template file** carried the wrong serial number into a CRL ceremony → **revoked the wrong intermediate CA**, disrupting Portuguese electronic payments. |
+| **SwissSign** | [1506607](https://bugzilla.mozilla.org/show_bug.cgi?id=1506607), 2018-11 | *"The organizationIdentifier had been set correctly in the key ceremony protocol"* — but mistyped in the GUI and copy-pasted across five more CAs. **The canonical script-vs-reality divergence.** ~17 months undetected. |
+| **iTrusChina** | [1923279](https://bugzilla.mozilla.org/show_bug.cgi?id=1923279), 2024-10 | **Root key ceremony held 2018-07-31 with no Key Generation Ceremony audit report at all** — *"due to our inexperience."* **Undetected for six years**, found by the Chrome Root Program, not by any auditor. |
+| **GlobalSign** | [2058503](https://bugzilla.mozilla.org/show_bug.cgi?id=2058503), 2026-07 | subCA created with the **EV Code Signing OID instead of OV TLS** (a missing ".10"). Passed *"standard multi-person review"* because reviewers and linters checked CA/B OIDs, not internal CPS OIDs. **~10 months undetected.** |
+| **Let's Encrypt** | [2038351](https://bugzilla.mozilla.org/show_bug.cgi?id=2038351), 2026-05, **still open** | **Three non-compliant cross-certificates issued as part of the 2025-09-03 "Gen Y" root ceremony**, reported by a third party ~8 months later. Causes: no lint coverage for cross-cert rules, *"compliance review fatigue,"* and the rule living in CCADB Policy rather than the BRs. **The CA with the best ceremony tooling in the industry still emitted three defective CA certs.** |
+| **DigiCert** | [1684442](https://bugzilla.mozilla.org/show_bug.cgi?id=1684442), 2020-12 | SHA-1 intermediate created in a ceremony, banned since 2016. Linters *"evaluate the individual certificate being signed"* — **not the signer/signee relationship** — so a ceremony can emit a policy-violating cert while every automated check passes. |
+| **FNMT** | [1626805](https://bugzilla.mozilla.org/show_bug.cgi?id=1626805), 2020-04 | Auditor finding: *"Unsafe storage of access codes in PKI Data Centre"* — **activation material co-located with the modules, defeating split custody.** |
+| **GlobalSign** | [1591005](https://bugzilla.mozilla.org/show_bug.cgi?id=1591005), 2020/2021 | **Deliberate key-DESTRUCTION ceremonies.** They destroyed timestamping-CA private keys rather than revoke, because revocation would invalidate historical signatures. Qualified auditors witnessed and issued **ISAE 3000 reports attesting genuine destruction.** |
+
+**And the one where the offline root's failure mode was the keyboard.** Roger Grimes, ["My Key Signing Ceremony Gone Wrong"](https://www.linkedin.com/pulse/my-key-signing-ceremony-gone-wrong-roger-grimes) *(single-source, ~2015, unverifiable)*: Fortune-500 root CA update, C-levels and auditors and legal and both split-knowledge password holders in the room. Boot password fails. Windows password fails. Root cause: ***"a laptop sitting in a safe for five years undisturbed had its 1 key on the keyboard go bad"*** — and both password halves contained a "1."
+
+**Golden principles this yields, each earned by an incident:**
+- **Make the wrong operation unselectable, not merely discouraged** (IdenTrust split the binary).
+- **Lint the test certificates generated with the *identical production ceremony settings*, inside the ceremony** (GoDaddy [1777128](https://bugzilla.mozilla.org/show_bug.cgi?id=1777128)).
+- **Fold compliance sign-off into the ceremony script itself** (DigiCert [1563573](https://bugzilla.mozilla.org/show_bug.cgi?id=1563573)).
+- **Losing the evidence is as fatal as losing the key** (SecureTrust revoked 7 intermediates over a dead camcorder).
+- **Publish rehearsal artifacts in advance** — [`letsencrypt/ceremony-demos`](https://github.com/letsencrypt/ceremony-demos) was created **2020-08-13**, before the September 2020 ISRG Root X2 ceremony. *(Caveat: the demo configs are public; the production YAMLs and logs are not.)*
+
+### The negative result, and it is load-bearing
+**After direct Bugzilla phrase-substring searching across the whole CA Program product — `"key custodian"`, `"quorum of"`, `"shares of"`, `"ceremony was aborted"`, `"zeroized"` — there is NO public-CA incident of lost activation shares, a lost HSM quorum card set, or an unreachable keyholder causing an inability to sign.** *(In modern CA bugs, "quorum" means MPIC validation quorum, not HSM quorum.)*
+
+**Best read: this class of failure happens — Grimes is one, Kali is another — but it is only *reportable* to root programs if it causes a missed CRL or a misissuance, so it is systematically absent from the public record.** The only real quorum-unavailability event in public PKI is **ICANN Ceremony 41**; the only physical lockout is **Ceremony 40**. Also not found: any incident of a CA **accidentally** destroying or bricking a root key — only deliberate, audited destructions.
+
+---
+
+## THE SWEEP, IN ONE PARAGRAPH
+
+Across five research streams, **not one documented failure in the entire public record turned on Shamir-versus-multisig.** They turned on: quorum counts that weren't counts of distinct signers (four sightings, one a recurrence in the same library six years later); custody that was correlated in ways nobody re-checked (Ronin's 5-of-9 that was 1-of-1, Loopring's guardians-of-guardians, FNMT's access codes stored beside the HSM); ceremonies whose script and reality diverged undetected for six months to six years; guardians who forgot, went dark, or folded to a warm phone call; and vendors who left. **The two forks differ most in a place neither branch names: Fork A's assembled secret is a bearer token that can be couriered, delegated, and improvised with — which is simultaneously its worst security property and the only reason ICANN could hold a ceremony during a pandemic. Fork B cannot bend, in either direction.** And the finding that changes the shape rather than answering it: under KERI's own rules, **a non-delegated rotation cannot supersede another rotation** — so whichever fork you take, a compromise of the recovery authority is terminal unless the identifier is delegated. That is a third axis, and on severity it dominates the one you asked about.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;l03bo3LByCr-gpqmhHs3CN31fc39GDmTzI1ZQT1v7b4
+
+<<^ code="&#x0004;" -> to=? >>

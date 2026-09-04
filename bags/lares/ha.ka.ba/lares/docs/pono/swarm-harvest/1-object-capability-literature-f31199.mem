@@ -1,0 +1,246 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. Object‑capability literature. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. Object‑capability literature
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 31,666 characters
+
+````
+## FINDINGS — Does any shipped delegation chain never bottom out in a person?
+
+**Plain answer: No. Nothing shipped is rootless.** Every system reached runs machine‑to‑machine chains of arbitrary depth at *runtime*, and every one of them re‑attaches a human at a layer the runtime chain cannot see — a payment instrument, a legally‑named payments profile, an account‑creation email that becomes a root user, or an operator‑written config file. The ocap literature is the only place a genuinely rootless chain is *designed*, and its own authors published the accountability gap as an unrefuted criticism in 2007.
+
+Measured 2026‑09‑04 unless noted.
+
+---
+
+## 1. Object‑capability literature
+
+### Miller's thesis — genuinely rootless *in the model*, human‑rooted *in the deployment*
+
+`erights.org` and `www.erights.org` are **unreachable** (port 80 `Failed to connect`, port 443 `ECONNREFUSED 209.59.210.181`) — measured 2026‑09‑04. The thesis is served instead at `https://papers.agoric.com/assets/pdf/papers/robust-composition.pdf` (1,882,311 bytes, retrieved and converted).
+
+- **§9.2.5 "Only Connectivity Begets Connectivity"**: *"By these rules, only connectivity begets connectivity—all access must derive from previous access. Two disjoint subgraphs cannot become connected, as no one can introduce them."* Four rules only: initial conditions, parenthood, endowment, introduction.
+- **§9.2.1 Connectivity by Initial Conditions**: *"For purposes of analysis, there is always a first instant of time. Bob might already refer to Carol when our universe of discourse comes into existence."* — The model **postulates** the root and declines to say where it comes from. This is the rootlessness, and it is explicitly an analytic convenience.
+- Where the thesis *does* name the origin, it is a person. **§11.3**: *"Policies like the \*-properties are generally assumed to govern a computer system as a whole… In a capability system, this is a matter of initial conditions. **If the owner of the system wishes such a policy to govern the entire system, she can run such code when the system is first generated**, and when new users join."*
+- **§22.1**: *"The **organization** decides what Alan's responsibilities are, and its **administrators** configure Alan's initial authorities accordingly. **Doug** uses CapDesk to endow CapMail with access to his SMTP server by static configuration."*
+- **§7.4 Bootstrapping Initial Connectivity** — the network root is literally a human: *"the **human operator** of VatC might read the URI from his screen over the phone to the **human operator** of VatA, who might type it into a prompt feeding Alice… For initial connectivity, the responsibility for conveying these strings securely must reside with external agents."*
+- **Measured negative**: the string `"ambient authority"` appears **zero times** in the thesis text. "Accountability", "provenance", "non‑repudiation" also appear **zero times**. Every hit on "audit" is the *type‑verification* `auditor` framework (§6.3, Data/stamp auditors) — unrelated to audit logging. The thesis does not address "who granted this."
+
+### The accountability critique — named and conceded by the ocap authors themselves
+
+Miller, Donnelley, Karp, *"Delegating Responsibility in Digital Systems: Horton's 'Who Done It?'"*, USENIX HotSec'07 — `https://www.usenix.org/legacy/event/hotsec07/tech/full_papers/miller/miller.pdf` (589,597 bytes, 5 pp.):
+
+> *"Because ocaps operate on an anonymous 'bearer right' basis, they seem to make reactive control impossible. Indeed, although many historical criticisms of ocaps have since been refuted [11, 16, 10, 17], **a remaining unrefuted criticism is that they cannot record who to blame for which action** [6]. **This lack has led some to forego the benefits of ocaps.**"*
+
+Horton's answer is notable for your design because it is **not** a human root: *"What represents a responsible identity?… In ocap systems, the sealer/unsealer pattern provides a similar logic. Rectangles such as the one labeled 'Alice' represent **Who objects**, providing a `seal(contents)` operation… The corresponding **BeAlice** object provides the authority to be the entity identified by Alice's Who object."* A "Who" is a sealer/unsealer pair — a keypair‑equivalent, bindable to anything. Conclusion: *"today we have no means for delegating responsibility, that is, delegating authority coupled with assigning responsibility for using that authority."*
+
+Tyler Close, *"ACLs don't"* (`https://papers.agoric.com/assets/pdf/papers/acls-dont.pdf`), §2.6 **"ACLs don't assign accountability correctly"**: *"For a principal to be usefully held accountable for a message, that principal must have had intent associated with that message… The access matrix does not record the source of permissions held by the Compiler."* Cites Horton as *"a comprehensive way to track delegations, and take appropriate redress action."*
+
+**Horton shipped nowhere current — measured.** `gh search code` for `Horton`: `Agoric/agoric-sdk` → **0 hits** (control term `makeZoe` → hits, so the search works); `ocapn/ocapn` → **0**; `endojs/endo` → **0**. The 2007 paper says *"Complete Horton implementations in Java and E are available at erights.org/download/horton/"* — that host is unreachable today. **DESIGNED 2007, not present in any shipping ocap stack reached.**
+
+### OCapN / Spritely — pre‑specification, and it contains no notion of a person
+
+`github.com/ocapn/ocapn`, `pushed_at: 2026-09-04T08:52:48Z` (active), 242 stars. Directory is literally `draft-specifications`. README: **"OCapN is still pre-specification,"** and *"will likely be the output of examining to what extent the Agoric, Spritely, and potentially Cap'N Proto implementations can be unified."*
+
+**Measured grep across `CapTP Specification.md` (1,168 lines), `Locators.md` (143), `Model.md` (584)** for `human|person|audit|accountab|provenance|owner|revoc`: the only hits are `session identity` (Gifter‑Receiver, CapTP §3rd‑party handoff) and `object identity for every Target`. **Zero occurrences of human, person, audit, accountability, provenance, owner, or revocation.** This is the closest thing to your design that exists, and it is a draft with no owner concept at all — which is also why it has no answer for you when someone asks who is responsible.
+
+`spritely.institute/goblins` — Goblins for Guile/Racket **v0.18.0**; describes ocap security and the netlayer abstraction; **no accountability, audit, or human‑principal material on the page**. `gh search code --repo spritely/goblins` returned nothing even for a control term → that mirror is not on GitHub. **Goblins accountability model: NOT REACHED.**
+
+### Agoric — the runtime is ocap; the deploy root is an economic account
+
+`docs.agoric.com/guides/coreeval/` — deployment is **"Permissioned Contract Deployment"** via `swingset.CoreEval`, *"an extension to Cosmos SDK Governance"*: *"if such a proposal passes, its JavaScript code is run with ocaps extracted using the proposal's permitted capabilities."* Proposals carry a `BootstrapManifestPermit` bounding the capabilities they may access (`docs.agoric.com/guides/coreeval/permissions.html`). Docs reference **"BLD staker governance."** So: root authority over what code gets ocaps is **held by staking accounts**, not by any named human. That is an *economic* re‑attachment (a keypair with capital at stake), not an identity one — the same shape as the cloud billing finding below but weaker, because a Cosmos address needs no KYC. Voting mechanics and deposit: **NOT REACHED**. The wallet docs (`docs.agoric.com/guides/wallet/`) describe the smart wallet only as *"a user's trusted agent"*; address/provisioning-fee binding **NOT REACHED**.
+
+### ZCAP‑LD — a CCG draft, and its root bottoms out in the verifier's database, not a person
+
+`https://w3c-ccg.github.io/zcap-spec/` redirects to `/v0.4.0-draft/`; `/v0.3.0/` also published.
+
+- **Status — MEASURED, decisive**: the ReSpec config in both v0.4.0-draft and v0.3.0 is `specStatus: "CG-DRAFT"`, `group: "credentials"`. Spec body: *"This specification is currently being **drafted to be considered as a work item** for the Community Credentials Group."* **It is not a W3C Recommendation. It is not even an adopted CCG work item by its own text.** Repo `w3c-ccg/zcap-spec` description: `"WORK ITEM: Authorization Capabilities (ZCAP) specification"`; `pushed_at 2026-09-02T23:56:37Z` — actively edited two days ago (recent commits are gh-pages/versioning plumbing).
+- **Terminology moved**: `invoker` appears **0 times** in both v0.3.0 and v0.4.0-draft. The model is `controller` (43 occurrences) + `invocationTarget` + `parentCapability` + `proof.capabilityChain`.
+- **The root**: *"A root zcap MUST have a `controller` that is a string or an array of strings that each express a **URI** that identifies a controller… The controller (or controllers) may create delegated zcaps from the root zcap."* Example: `"controller": "did:key:example"`. **A `did:key` is a raw public key. Nothing in the spec requires a person, a legal entity, or any resolvable owner.**
+- **But the actual root of trust is the verifier's own record**: *"A root zcap can be invoked by referencing only its ID because the verifier can (and MUST) always dereference the zcap locally using a trusted dereferencing mechanism. This is because a root zcap does not have a capability delegation proof; **it is the root of trust for a capability chain**."* And operationally: *"store a controller value with every resource at the base of a hierarchy… the verifier can look up the `controller` property (or receive it from another system in some kind of decentralized setup) for that resource and include it in a 'dynamically dereferenced' root zcap."* **The chain terminates in a row in the service operator's database.** That row's provenance is outside the spec.
+- **Audit — measured**: the string `audit` appears **0 times** in v0.4.0-draft. There is a **"Handling abuse"** section, and it re‑attaches a human by name: *"In some object capability systems (such as many object capability programming languages) **it is not even possible to see what entity is invoking a capability**. In the case of zcaps, it is always possible to inspect an invocation to check which authentication material authorized to invoke the capability is being used… **Alice, or a program Alice runs, is able to analyze a log of past invocations called.** Having finished the analysis, Alice realizes that the abuse is coming from the invocation of a capability granted to some of Mallet's authentication material, and Alice revokes that capability."* It cites **Horton** as prior art. The spec's own answer to abuse is: a named administrator reads a log and revokes.
+
+---
+
+## 2. Kubernetes ServiceAccounts
+
+**Can an SA create and own another SA with no human? Yes at runtime — trivially.**
+
+- `kubernetes.io/docs/concepts/security/service-accounts/`: *"A service account is a type of **non-human account** that, in Kubernetes, provides a distinct identity in a Kubernetes cluster."* / *"Service accounts are different from user accounts, which are authenticated human users in the cluster. By default, **user accounts don't exist in the Kubernetes API server**; instead, the API server treats user identities as opaque data."* Comparison table: ServiceAccount → *"Workloads, automation"*; User or group → *"People"*.
+- `serviceaccounts` is an ordinary namespaced core resource. `.../reference/access-authn-authz/rbac.md` shows a ServiceAccount as a first‑class RBAC **subject**: `subjects: [{kind: ServiceAccount, name: default, namespace: kube-system}]`, and group forms `system:serviceaccount:` (username prefix) / `system:serviceaccounts:` (group prefix). Nothing distinguishes `create serviceaccounts` from any other verb. **A controller SA granted `create` on `serviceaccounts` + `create` on `rolebindings` mints and empowers successor SAs with no human in the request path.**
+- **The one real bound** (`rbac.md`, "Privilege escalation prevention and bootstrapping"): *"You can only create/update a role if… **You already have all the permissions contained in the role**… or **You are granted explicit permission to perform the `escalate` verb**."* And for bindings, the `bind` verb. So the chain **cannot gain authority** as it descends — it can only re‑package what its creator already held. Attenuation‑only, exactly like ocap. That is a depth bound on *authority*, not on *chain length*.
+
+**KEY — what the audit log records at the root of an impersonation chain.** Authoritative source: `staging/src/k8s.io/apiserver/pkg/apis/audit/v1/types.go` (kubernetes/kubernetes master, retrieved):
+
+```go
+// Authenticated user information.
+User authnv1.UserInfo `json:"user"`
+// Impersonated user information.
+// +optional
+ImpersonatedUser *authnv1.UserInfo `json:"impersonatedUser,omitempty"`
+```
+
+**Two slots. Both singular. Both can be `system:serviceaccount:ns:name`. Neither is required to be a human.** There is no chain field, no ancestry, no originator. Levels are `None | Metadata | Request | RequestResponse` (`docs/tasks/debug/debug-cluster/audit.md`); other fields are `sourceIPs` (docs warn *"All but the last IP can be arbitrarily set by the client"*), `userAgent` (*"provided by the client, and must not be trusted"*), `verb`, `objectRef`, `annotations`.
+
+Nesting is structurally impossible within a request. `.../endpoints/filters/impersonation/impersonation.go`, after applying the switch:
+
+```go
+// clear all the impersonation headers from the request
+req.Header.Del(authenticationv1.ImpersonateUserHeader)
+req.Header.Del(authenticationv1.ImpersonateGroupHeader)
+req.Header.Del(authenticationv1.ImpersonateUIDHeader)
+```
+
+`docs/reference/access-authn-authz/user-impersonation.md`: *"Impersonation requests first authenticate as the requesting user, then switch to the impersonated user info."* The `impersonate` verb over `resources: ["users","groups","serviceaccounts"]` is grantable to a ServiceAccount subject — the doc's own **Constrained Impersonation** examples (feature gate `ConstrainedImpersonation`) use `subjects: [{kind: ServiceAccount, name: my-controller}]` impersonating `jane.doe@example.com`. Note the direction: the *impersonator* is the machine and the *impersonated* is the human, and the audit record shows `user=SA`, `impersonatedUser=jane`. Nothing forbids the inverse or SA→SA.
+
+**Verdict for k8s: it is SAs all the way down, and the audit log will faithfully show that.** The human is not in the record. The human is in whoever `kubectl apply`'d the first RoleBinding — and that act is a separate audit event, joinable only by an analyst who thinks to look.
+
+---
+
+## 3. SPIFFE / SPIRE
+
+**No human anywhere in the runtime. The human is in a config file and a shell command.**
+
+- `SPIFFE-ID.md` (spiffe/spiffe main, 21,044 bytes) §2.1: *"The trust domain corresponds to the **trust root** of a system. A trust domain could represent an individual, organization, environment or department running their own independent SPIFFE infrastructure."* §2.1: *"Trust domain names are **nominally self-registered**, unlike public DNS **there is no delegating authority** that acts to assert and register a base domain name to an actual legal real-world entity, or assert that legal entity has fair and due rights to any particular trust domain name."* §2.1.1: *"there is **no centralized authority** for regulation or registration of trust domain names."*
+- What actually roots it: §3.1 *"A signing authority MUST exist in each trust domain, and this signing authority MUST carry an SVID of its own… **In the event that trust is not being chained, then the authority's SVID is self-signed.**"* **A self‑signed key. That is the entire root.**
+- §2.2: *"The meaning behind the path is left open-ended and is the responsibility of the **administrator** to define."* / *"These are conventions defined by the **SPIFFE administrator**, not assertions guaranteed by this specification."*
+
+**Who registers the first entry.** `spiffe.io/docs/latest/deploying/registering/`: *"You register a workload either by issuing the **`spire-server entry create` command at the command line**"* — canonical form in the docs is `kubectl exec -n spire spire-server-0 -- /opt/spire/bin/spire-server entry create …`. **A person at a shell.** API access is gated by a static config: SPIRE Server config `admin_ids` — *"SPIFFE IDs that, when present in a caller's X509-SVID, grant that caller admin privileges. The admin IDs must reside on the server trust domain or a federated one, and need not have a corresponding admin registration entry with the server."* (`spiffe.io/docs/latest/deploying/spire_server/`)
+
+**Nested SPIRE — workload-to-workload delegation, zero humans in the loop.** `spiffe.io/docs/latest/architecture/nested/readme/`: *"Nested topologies work by co-locating a SPIRE Agent with every downstream SPIRE Server being 'chained'. **The downstream SPIRE Server obtains credentials over the Workload API** that it uses to directly authenticate with the upstream SPIRE Server to obtain an intermediate CA."* The downstream server is registered as an ordinary entry with `-downstream` (*"A boolean value that, when set, indicates that the entry describes a downstream SPIRE server"*). So a *server* is attested exactly like a workload, and can mint for further servers — arbitrary depth, no human per hop. But the **first** `entry create` with `-downstream` is typed by a person.
+
+**Delegated Identity API** (`spire-api-sdk/proto/spire/api/agent/delegatedidentity/v1/delegatedidentity.proto`): *"This service is intended for use cases where a process (different than the workload one) should access the workload's SVID to **perform actions on behalf of the workload**."* And the gate — *"**The caller must be local and its identity must be listed in the allowed clients on the spire-agent configuration.**"* **The delegation is authorized by an operator‑written config file, not by a capability.** That is the re‑attachment point.
+
+---
+
+## 4. Cloud IAM — THE CRUX
+
+### GCP
+
+- Service accounts: *"A service account is a special kind of account typically used by an application or compute workload… **rather than a person**"*; *"service accounts are **principals**"*; *"each service account is located in a project. After you create a service account, you cannot move it to a different project."* (`docs.cloud.google.com/iam/docs/service-account-overview`)
+- Impersonation: *"Service account impersonation always involves two identities: an authenticated principal, and the service account that the principal impersonates."* Permission `iam.serviceAccounts.getAccessToken`, in `roles/iam.serviceAccountTokenCreator`. (`docs.cloud.google.com/iam/docs/service-account-impersonation`)
+- **Chains are a first-class API parameter.** Measured from the live discovery document (`https://iamcredentials.googleapis.com/$discovery/rest?version=v1`, 24,192 bytes), `GenerateAccessTokenRequest.delegates`:
+
+  > *"The **sequence of service accounts in a delegation chain**. This field is required for delegated requests… **Each service account must be granted the `roles/iam.serviceAccountTokenCreator` role on its next service account in the chain.** The last service account in the chain must be granted the `roles/iam.serviceAccountTokenCreator` role on the service account that is specified in the `name` field… format: `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`."*
+
+  Same field on `GenerateIdTokenRequest`. **No maximum chain length appears in the schema, and the "delegated request" help page does not state one.** Max chain depth: **NOT REACHED** (no documented limit found). Token lifetime default 1h, extensible to 12h only under the org policy `constraints/iam.allowServiceAccountCredentialLifetimeExtension`.
+  `docs.cloud.google.com/iam/help/credentials/delegated-request`: *"The resulting credential only represents the final service account, and not the intermediate service accounts in the delegation chain."*
+
+- **The audit record is built to re-attach an authority — and the schema calls it that.** `google/cloud/audit/audit_log.proto` (googleapis master, 15,317 bytes):
+
+  ```proto
+  // Identity delegation history of an authenticated service account that makes
+  // the request. It contains information on the real authorities that try to
+  // access GCP resources by delegating on a service account. When multiple
+  // authorities present, they are guaranteed to be sorted based on the original
+  // ordering of the identity delegation events.
+  repeated ServiceAccountDelegationInfo service_account_delegation_info = 6;
+  ```
+  and
+  ```proto
+  // Entity that creates credentials for service account and assumes its
+  // identity for authentication.
+  oneof Authority {
+    FirstPartyPrincipal first_party_principal = 1;  // { principal_email; service_metadata }
+    ThirdPartyPrincipal third_party_principal = 2;
+  }
+  ```
+  Unlike Kubernetes, **GCP records the whole ordered chain** and names its members *"the real authorities."* Docs: *"most audit logs include both their identity and the identity of the service account they're impersonating."* **Caveat that matters for your design:** `FirstPartyPrincipal.principal_email` is *"The email address of a Google account"* — and a service account **is** a Google account with an email. So the chain can read SA→SA→SA end to end. The schema *invites* a human root; it does not *require* one.
+
+- **Where the human is actually required — billing and org.**
+  `docs.cloud.google.com/billing/docs/concepts`: a Cloud Billing account *"defines **who pays** for a given set of Google Cloud resources"* and *"is connected to a **Google payments profile**, which includes a **payment instrument**, defining how you pay for your charges."* The payments profile *"stores information like your country/region…, the payments profile type, and **the name, address, and tax ID (when required legally) of who is responsible for the profile**."* If a project *"isn't linked to an active, valid Cloud Billing account"* you cannot use paid services.
+  `docs.cloud.google.com/resource-manager/docs/creating-managing-organization`: *"An organization resource is available for Google Workspace and Cloud Identity customers"*; *"Each Google Workspace or Cloud Identity account is associated with exactly one organization resource. An organization resource is associated with exactly one **domain**"*; *"The Google Workspace or Cloud Identity **super administrator account that creates the organization resource** is automatically assigned the Organization Administrator role."* Super admin is also *"a point of contact in case of recovery issues."*
+  Google Cloud ToS (`cloud.google.com/terms/`): *"you represent and warrant that (i) you have full legal authority to bind Customer to this Agreement"*; §1.3(a) *"**Customer must have an Account to use the Services and is responsible for the information it provides to create the Account**, the security of its passwords for the Account (including any keys for Google APIs) and **for any use of its Account**."*
+
+### AWS
+
+- **Role chaining** (`docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html`): *"**Role chaining is when you use a role to assume a second role.**… For example, `RoleA` has permission to assume `RoleB`."* Principals that may assume a role include *"**IAM roles in the same account**"* and *"**Service principals**"* — so a chain can begin at an EC2/Lambda/ECS role with no user at the head.
+  **Documented limit is time, not depth**: *"**Role chaining limits your AWS Management Console, AWS CLI or AWS API role session to a maximum of one hour.** It applies regardless of the maximum session duration configured for individual roles… if you assume a role using role chaining and provide a `DurationSeconds` parameter value greater than one hour, **the operation fails**."* **No maximum chain depth is documented** (searched this page; none stated).
+  Transitivity exists only for tags: *"Transitive session tags are passed to all subsequent sessions in a role chain."*
+
+- **CloudTrail records ONE hop, not the chain.** `docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html`: `sessionContext.sessionIssuer` — *"if they obtained temporary security credentials by assuming a role, this element provides information about **the assumed role**."* Its fields are `type | userName | principalId | arn | accountId` — a **single** issuer. In a chain A→B→C, an event made by C shows `sessionIssuer = RoleC`'s issuer only. **The chain is not in the record by default.**
+
+- **AWS's own fix is an opt‑in field whose entire purpose is re‑attaching the originating human.** Same page, "AWS STS source identity":
+  > *"An IAM administrator can configure AWS Security Token Service to require that users specify their identity when they use temporary credentials to assume roles… The `sourceIdentity` field **identifies the original user identity making the request**, whether that user's identity is an IAM user, an IAM role, a user authenticated by using SAML-based federation, or a user authenticated by using OIDC-compliant web identity federation."*
+
+  and explicitly for chains: *"The AWS STS `AssumeRole`… calls that a user identity makes **if it uses a role to assume another role, known as role chaining**. `sourceIdentity` is found in the `requestParameters` block."* Also `sourceIdentity` propagates into the `sessionContext` of every downstream service API event. **This is the clearest instance in the whole survey of a vendor shipping a machine-to-machine chain and then bolting a human-originator field onto it.** It is off unless an admin configures `sts:SetSourceIdentity`.
+
+  Related newer fields on the same element: `invokedBy` (AWS service that made the request), `invokedByDelegate.accountId`, `onBehalfOf.{userId, identityStoreArn}` for Identity Center, `inScopeOf.{sourceArn, credentialsIssuedTo}`. Every one of them exists to walk *back up* past the immediate machine principal.
+
+- **THE FINDING YOU ASKED FOR — the ownership record.**
+  **AWS Customer Agreement (`aws.amazon.com/agreement/`, Last Updated August 14, 2026), §2.1:**
+  > *"**To access the Services, you must have an AWS account associated with a valid email address and a valid form of payment.**"*
+  > *"You represent to us that **you are lawfully able to enter into contracts (e.g., you are not a minor)**."*
+  > *"**you are responsible for all activities that occur under your account, regardless of whether the activities are authorized by you** or undertaken by you, your employees or a third party."*
+  §2.5: *"You are responsible for End Users' use of Your Content and the Services, and for their compliance with your obligations under this Agreement."*
+
+  Root user (`docs.aws.amazon.com/accounts/latest/reference/root-user.html`): *"When you create an AWS account, you begin with one sign-in identity called the AWS account **root user** that has complete access to all AWS services and resources."* / *"Anyone who has root user credentials for your AWS account has unrestricted access to all the resources in your account, **including billing information**."*
+
+- **The machine-creates-an-account case, and where it still re-attaches.** `organizations:CreateAccount` is a plain API call — assumable-role callable, no console, no person. AWS CLI example in the docs: `aws organizations create-account --email susan@example.com --account-name "Production Account"`. But:
+  > *"For **Email address of the account's owner**, enter the email address of the account's owner. **This email address cannot already be associated with another AWS account because it becomes the user name credential for the root user of the account.**"*
+
+  And Organizations *"automatically copies the following **Primary contact** information from the management account to the new member account: Phone number, Company name, Website URL, Address."* Plus `OrganizationAccountAccessRole` is auto-created *"that enables users and roles in the management account to exercise full administrative control over the member account."*
+  Management account (`orgs_getting-started_concepts.html`): *"The management account is the **ultimate owner of the organization**, having final control over security, infrastructure, and finance policies. This account has the role of a **payer account** and is **responsible for paying all charges accrued by the accounts in its organization**."* / *"You cannot change which account in your organization is the management account."*
+
+  **So: a machine can create AWS accounts recursively, and every one of them acquires a root user bound to an email plus inherited human contact details, and all of them bill to one payer account that AWS's own agreement requires to carry a valid payment instrument and a contract-capable signatory.**
+
+`docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html` — page body returned only the section title through the fetcher; the signup-step quotes (verification code, card, phone verification) are **NOT REACHED**. The Customer Agreement §2.1 quote above carries the same claim normatively and is stronger.
+
+---
+
+## Where the human re‑attaches, by mechanism
+
+| System | Runtime chain rootless? | Re‑attachment | Nature |
+|---|---|---|---|
+| Miller ocap model | **Yes**, by postulate (§9.2.1) | *"the owner of the system"* runs code at generation (§11.3); human operator reads the URI aloud (§7.4) | Design text |
+| Horton | Yes — "Who" is a sealer pair, not a person | none required; answers *blame*, not *personhood* | Designed 2007, **0 hits in agoric-sdk / ocapn / endo** |
+| OCapN / Goblins | **Yes** — 0 mentions of human/owner/audit in drafts | none | Pre‑specification |
+| ZCAP‑LD | Root `controller` is any URI (`did:key`) | root zcap dereferenced from **the verifier's own DB row**; abuse handled by *"Alice… analyzes a log… and revokes"* | **CG‑DRAFT, not a W3C REC** |
+| Kubernetes | **Yes** — SAs can create/empower SAs; audit shows SA in both slots | RBAC escalate/bind bounds authority; human is whoever applied the bootstrap binding, in a *different* audit event | Config + operator act |
+| SPIFFE/SPIRE | **Yes** — self‑signed root, nested servers attest servers | `spire-server entry create` at a shell; `admin_ids`; Delegated Identity's *"allowed clients on the spire-agent configuration"* | Config file |
+| GCP | Yes for N hops via `delegates` | audit proto records the ordered *"real authorities"*; **payments profile carries "the name, address, and tax ID of who is responsible"**; org = a Cloud Identity domain + super admin | **Billing + legal** |
+| AWS | Yes; `sourceIdentity` off by default | **Customer Agreement §2.1: "a valid email address and a valid form of payment"**; root user per account; payer account; `CreateAccount` requires an owner email that *becomes* the root user | **Billing + ToS + root user** |
+
+**Negative results worth keeping:** no system reached documents a maximum delegation-chain depth (GCP, AWS, k8s, SPIRE). Depth is bounded by *time* (AWS 1h chained sessions, GCP 1h default token) and by *attenuation* (k8s escalate/bind, GCP `serviceAccountTokenCreator` per hop, ocap "only connectivity begets connectivity") — never by a hop count and never by a required human. Kubernetes is the only system whose audit record structurally **cannot** carry a chain (`ImpersonatedUser` is a single optional field). GCP is the only one whose audit schema is `repeated` and calls the entries *"the real authorities."* AWS is the only one that shipped a purpose-built originating-human field (`sourceIdentity`) and left it opt-in.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;xBYz-hQfJlQueZePq9ovEf-cZtGASR3HDrJRKVhQhrs
+
+<<^ code="&#x0004;" -> to=? >>

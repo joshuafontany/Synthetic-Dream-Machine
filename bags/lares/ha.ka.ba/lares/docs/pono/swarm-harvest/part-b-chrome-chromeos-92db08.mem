@@ -1,0 +1,279 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/part-b-chrome-chromeos-92db08 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/part-b-chrome-chromeos-92db08.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: PART B — Chrome / ChromeOS. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-b-chrome-chromeos-92db08"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! PART B — Chrome / ChromeOS
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 29,109 characters
+
+````
+Findings below. Every claim carries a URL. Nothing filled from memory.
+
+---
+
+# PART B — Chrome / ChromeOS
+
+## B1. "Chrome profiles are not a security boundary" — the exact statement does NOT exist
+
+**NEGATIVE FINDING (measured, not assumed).** I fetched the canonical Chromium security FAQ raw (`?format=TEXT`, base64-decoded, 82,581 bytes) from
+https://chromium.googlesource.com/chromium/src/+/main/docs/security/faq.md
+and grepped the full text. The word "profile" appears **7 times only**, at lines 695–700, 1280, 1285, 1289, 1291. **There is no sentence anywhere in the FAQ asserting that Chrome profiles are not a security boundary.** `grep -i "security boundary"` returns 5 hits, none about profiles.
+
+https://www.chromium.org/Home/chromium-security/security-faq/ is a stub that points at the source-tree FAQ; it contains no profile or boundary text. (Verified by fetch.)
+
+**What the FAQ actually says instead** — the functional equivalent, expressed as a threat-model exclusion:
+
+> "### Why aren't physically-local attacks in Chrome's threat model?
+> We consider these attacks outside Chrome's threat model, because there is no way for Chrome (or any application) to defend against a malicious user who has managed to log into your device as you, or who can run software with the privileges of your operating system user account. Such an attacker can modify executables and DLLs, change environment variables like `PATH`, change configuration files, read any data your user account owns, email it to themselves, and so on. Such an attacker has total control over your device, and nothing Chrome can do would provide a serious guarantee of defense. This problem is not special to Chrome — all applications must trust the physically-local user."
+
+And the mitigation Chromium itself prescribes — note it delegates separation to the **OS account**, not to Chrome profiles:
+
+> "*    If you share your computer with other people, take advantage of your operating system's ability to manage multiple login accounts, and use a distinct account for each person. For guests, Chrome OS has a built-in Guest account for this purpose."
+
+Related exclusions in the same file:
+
+> "Enterprise policies applying to running, enterprise-enrolled Chrome instances are not by default a security boundary." (line 402) — with the explicit exception: "ChromeOS is an exception to this. On ChromeOS, Chrome integrates more deeply with the host operating system and is able to provide stronger guarantees about policies. Therefore, an enterprise policy bypass by a local user of a ChromeOS device may still be a security bug."
+
+> "On an unmanaged machine, Chrome profiles can be managed via cloud policy if users sign into Chrome using a managed account… the Chrome enterprise administrator should have privileges only to *view and mutate state within the profile that they administer*. Any access outside that profile requires end-user consent." — this is the **only** place the FAQ treats a profile as a scoping unit, and it scopes an *admin*, not an attacker.
+
+**Incognito** (same file, line 426):
+> "Bugs in Incognito mode are tracked as privacy bugs, not security bugs."
+> "When in Incognito mode, Chrome does not store any new history, cookies, or other state in non-volatile storage. However, Incognito windows will be able to access some previously-stored state, such as browsing history."
+> "Note that Incognito mode **provides no protection** if the system has already been compromised as described above."
+
+**Passwords at rest per platform** (line ~1270), directly relevant to profile-directory separation:
+> "On Windows, Chrome uses App-Bound encryption to store them on disk encrypted with a key only accessible to the Chrome process as well as admin processes."
+> "On Linux… it has switched to storing the credentials in 'Login Data' in the Chrome user's profile directory, but encrypted on disk with a key that is then stored in the user's Gnome Secret Service or KWallet. **If there is no available Secret Service or KWallet, the data is not encrypted when stored.**"
+> "On ChromeOS passwords are only obfuscated since all profile data is encrypted by the OS."
+
+### The vendor statement that DOES exist — Chrome Help, not Chromium
+https://support.google.com/chrome/answer/2364824 ("Manage Chrome with multiple profiles"). Literal sentences extracted from the served HTML:
+
+> "What others can see when you share Chrome — Only share your device with people you trust."
+> "If someone has your device, they can switch to any other Chrome profile on it."
+> "If they open your Chrome profile, they can see info like what websites you visited."
+
+That is the closest thing to an official "profiles are not a security boundary" — it is a **CLAIM in consumer help copy**, stated as a UX warning, not as a threat-model rule.
+
+### The boundaries Chromium DOES name
+https://chromium.googlesource.com/chromium/src/+/main/docs/security/web-platform-security-guidelines.md
+> "The security team maintains several security boundaries in the WebPlatform: origin, site, secure contexts, cross-origin isolated contexts."
+> "The origin is the security boundary we aim to defend."
+> "The origin is the primary security boundary of the web, as per the Same-origin policy."
+> "User activation is not a security boundary, it is a way to protect users from abusive UX behavior from sites."
+
+Site Isolation (https://www.chromium.org/Home/chromium-security/site-isolation/) defines the process boundary as "the scheme and registered domain name, including the public suffix, but ignoring subdomains, port, or path", ensuring "pages from different websites are always put into different processes". **The enumerated list of maintained boundaries — origin, site, secure context, COI — contains no "profile" entry.** That absence is the finding.
+
+## B2. ChromeOS multi-sign-in — vendor caveats
+
+- https://support.google.com/chrome/a/answer/6023717 → **404 (NOT REACHED)**, both via WebFetch and curl. Also 404: `.../a/answer/9722661`, `.../a/answer/6178258`, `.../a/answer/7130158`. The admin-side multi-sign-in article is not at any URL I could resolve.
+- https://support.google.com/chromebook/answer/6088201 → REACHED. Quoted caveats:
+  > "You'll receive a reminder to use the feature only with people you trust."
+  > "All active people share some settings, such as networks. Other settings, like profile pictures and bookmarks, are specific to each person."
+  > "The Google Play Store and any downloaded Android apps are only available for the account that is signed in first. To use them with a different account, sign out of all your accounts and sign in with the account you want to use."
+  > "If you're signed in to multiple Google Accounts on your Chromebook, you can't sign out one by one. You'll need to sign out of all accounts at the same time."
+
+  **Google publishes NO cryptographic or data-isolation claim for multi-sign-in.** The only security framing is "use with people you trust" — i.e. the same social-trust framing as Chrome profiles. Networks are explicitly *shared* state. The all-or-nothing sign-out means one user's session lifetime is coupled to every co-signed user's.
+- ChromiumOS design doc for multiple sign-in: https://www.chromium.org/chromium-os/chromiumos-design-docs/multiple-sign-in/ → **404, NOT REACHED**.
+- MultiProfileUserBehavior policy description at chromeenterprise.google/policies/ → page is a JS shell; content not served to fetch. **NOT REACHED.**
+- Corroborating source-tree artifact: cryptohome's own filesystem layout doc marks the multi-user bind mount **deprecated**:
+  > "`/home/chronos/u-<s_h_o_u>`: bind mount of `/home/.shadow/<s_h_o_u>/mount/user` used for multi-user support. (deprecated)"
+  https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/cryptohome/docs/filesystem_layout.md
+
+## B3. ChromeOS guest mode + cryptohome encryption
+
+Guest mode, from the **primary source-tree doc** (stronger than the help center, which Google rate-limited me off — support.google.com/chromebook/answer/1057090 returned a `/sorry/` CAPTCHA redirect, **NOT REACHED**):
+
+https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/cryptohome/docs/mount.md
+> "### Ephemeral mount — Ramfs based vault, which is torn down upon session termination. Doesn't have any persistently stored encryption/credentials data."
+> "### Guest mount (public session) — The same with ephemeral, except it is not tied to a particular gaia id. Do not confuse with 'public mount'"
+> "### Public mount (kiosk session) — This is a regular persistent mount with the difference, that the credentials for it are not supplied, but derived from the user name (application id)."
+
+So guest data is **ramfs, never written to disk**; kiosk ("public mount") is **persistent with credentials derived from the app id** — i.e. no user secret, a designed weak point.
+
+Filesystem encryption mechanism, current state (https://chromium.googlesource.com/chromiumos/platform2/+/HEAD/cryptohome/docs/filesystem_layout.md):
+> "The underlying filesystem mechanisms are using one of the following: `ecryptfs` (deprecated, used on old kernels), fscrypt (current, v1 is used on 4.x boards and v2 is used on 5.4+ boards) and lvm+dmcrypt (upcoming vault management and encryption mechanism). The filesystem encryption keys are themselves encrypted via various mechanisms."
+
+Mount sequence, per the same doc: keys are inserted into **the kernel keyring** for persistent vaults, an out-of-process mounter performs the mount, then PKCS11 token, lock-screen verifier and WebAuthn token are initialized.
+
+Original design doc (https://www.chromium.org/chromium-os/chromiumos-design-docs/protecting-cached-user-data/) — CLAIM/DESIGN, predates dircrypto:
+- per-user "vault" directory + keyset created at first login; directory named by "a hash of the user name with a salt value", mounted via eCryptfs at login
+- key derivation: "SHA-256 digest of a user-specific salt concatenated with the user's passphrase. The first 128 bits of the digest are used as the user's 'weak password hash.'"
+- TPM: system-wide RSA key wrapped with the TPM Storage Root Key; "current TPMs can take around half a second for a private key operation" — rate-limiting is the anti-brute-force mechanism
+- **explicitly out of scope**: remote compromise of a currently-logged-in user, running machines with screen lock disabled, cold-boot key extraction from RAM, root-partition compromise
+- **not encrypted**: "shared Operating System files and programs"
+- guest: "While it does not provide access to the encrypted user data, and the session history is not stored, it does always allow use of the system."
+
+**Verified Access**: https://developers.google.com/chrome/verified-access/overview reached but thin — it attests "policy compliance and (optionally) the identity of the client device". **It does not distinguish device- from user-level attestation and publishes no limitations on that overview page.** Treat "Verified Access proves *which user*" as unsupported by the vendor doc.
+
+## B4. CVEs — ChromeOS/profile
+
+NVD REST API, `keywordSearch`:
+
+**cryptohome (3 total):**
+| CVE | Published | CVSS | What crosses |
+|---|---|---|---|
+| CVE-2017-15405 | 2019-01-09 | 7.0 HIGH | "Inappropriate symlink handling and a race condition in the stateful recovery feature… could lead to a persistance established by a malicious code running with root privileges in cryptohomed" — <61.0.3163.113 |
+| CVE-2020-16020 | 2021-01-08 | 8.8 HIGH | "Inappropriate implementation in cryptohome… allowed a remote attacker who had compromised the browser process to **bypass discretionary access control** via a malicious file." <87.0.4280.66 |
+| CVE-2021-21117 | 2021-02-09 | 7.8 HIGH | "Insufficient policy enforcement in Cryptohome… allowed a local attacker to perform **OS-level privilege escalation** via a crafted file." <88.0.4324.96 |
+
+**"chrome profile" (13 total; Chrome-relevant ones):** CVE-2021-37988 (2021-11-02, 8.8, UAF in Profiles), CVE-2022-0456 (2022-04-05, 8.8, UAF via profile destruction), CVE-2022-1145 (2022-07-23, 7.5, UAF in Extensions via profile destruction), **CVE-2022-1862 (2022-07-27, 6.5 MEDIUM — "Inappropriate implementation in Extensions… allowed an attacker who convinced a user to install a malicious extension to *bypass profile restrictions* via a crafted HTML page")**, CVE-2022-4191 (2022-11-30, 8.8, UAF in Sign-In via profile destruction), CVE-2022-4440 (2022-12-14, 8.8), CVE-2023-5472 (2023-10-25, 8.8), CVE-2023-5854 (2023-11-01, 8.8), CVE-2025-1916 (2025-03-05, 8.8, UAF in Profiles via malicious extension).
+
+CVE-2022-1862 is the one that names a **profile restriction bypass** as the impact — and Chromium rated it only "Medium", consistent with profiles not being a hardened boundary.
+
+**"multi-profile"**: 1 result, CVE-2025-47342, a Qualcomm QHS DOS — **irrelevant. Negative finding: NVD holds no "multi-profile Chrome" cross-profile vulnerability class.**
+
+**"Chrome OS user"**: 66 results, dominated by generic Chrome renderer/UAF bugs. Notable ChromeOS-local ones: CVE-2011-2169 (2011-05-24, 7.2 — "allows local users to gain privileges by creating a /var/lib/chromeos-aliases.conf file"), CVE-2013-0927 (2013-04-10, 7.5 — Pango loads `.pangorc` from the user's home directory), CVE-2022-0107 (2022-02-12, 8.8, UAF in File Manager API), CVE-2022-0808 (2022-04-05, 8.8, UAF in Chrome OS Shell). **None is a cross-*user* data-read on ChromeOS.** The cryptohome vault model appears to hold in the CVE record.
+
+---
+
+# PART D — Windows
+
+## D5. Shared PC mode — documented model
+
+Canonical URLs (the ones in the brief 404; these are the live ones):
+- https://learn.microsoft.com/en-us/windows/configuration/shared-pc/set-up-shared-or-guest-pc (ms.date 2024-10-31)
+- https://learn.microsoft.com/en-us/windows/configuration/shared-pc/shared-pc-technical (ms.date 2024-10-31)
+- https://learn.microsoft.com/en-us/windows/client-management/mdm/sharedpc-csp (ms.date 2025-03-12)
+
+**Deletion policy (CSP, exact):**
+> "DeletionPolicy — Configures when accounts will be deleted. Allowed values: 0 (delete immediately), 1 (delete at disk space threshold), 2 (Delete at disk space threshold and inactive threshold)." **Default Value: 1.**
+
+**Storage-based cleanup (exact):**
+> "DiskLevelDeletion — Accounts will start being deleted when available disk space falls below this threshold, given as percent of total disk capacity. Accounts that have been inactive the longest will be deleted first." Default **25**.
+> "DiskLevelCaching — Stop deleting accounts when available disk space reaches this threshold, given as percent of total disk capacity." Default **50**.
+> "For example, if the DiskLevelCaching is set to 50 and the DiskLevelDeletion is set to 25 (both default values). Accounts will be cached while the free disk space is above 25%. When the free disk space is less than 25% (the deletion number) during a daily maintenance period, accounts will be deleted (oldest last used first) when the system is idle until the free disk space is above 50% (the caching number). **Accounts will be deleted immediately on signing out from an account if free space is under half of the deletion threshold and disk space is low**, regardless of whether the PC is actively in use or not."
+
+> "InactiveThreshold — Accounts will start being deleted when they haven't been logged-on during the specified period, given as number of days." Default **30**.
+> "AccountModel — Allowed values: 0 (only guest), 1 (domain-joined only), 2 (domain-joined and guest)." Default **0**.
+
+**What actually gets removed (exact, from set-up-shared-or-guest-pc):**
+> "When a device is configured in *shared PC mode* with the default deletion policy, **accounts will be cached automatically until disk space is low**. Then, accounts will be deleted to reclaim disk space… Both Microsoft Entra ID and Active Directory domain accounts are managed in this way. **Any accounts created through Guest and Kiosk will be deleted automatically at sign out.**"
+> "**Local accounts that already exist on a PC won't be deleted** when turning on shared PC mode. **New local accounts** that are created using Settings > Accounts > Other people > Add someone else to this PC after shared PC mode is turned on **won't be deleted.**"
+> "The account management service supports accounts that are **exempt from deletion**… by adding the account SID to the registry key: `HKEY_LOCAL_MACHINE\SOFTARE\Microsoft\Windows\CurrentVersion\SharedPC\Exemptions\`" (typo "SOFTARE" is Microsoft's, verbatim in the doc).
+
+**The load-bearing finding — Shared PC mode deliberately WEAKENS cross-user data isolation.** From the technical reference's table of LGPO settings applied by `EnableSharedPCMode`:
+
+> "Windows Components/App Package Deployment/**Allow a Windows app to share application data between users** | **Enabled**"
+
+Also enabled by the same switch, security-relevant: UAC "Behavior of elevation prompt for standard user → **Automatically deny elevation requests**"; "Hide entry points for Fast User Switching → Enabled"; "Allow the use of biometrics → **Disabled**"; "Allow users to log on using biometrics → **Disabled**"; "Windows Hello for Business / Use Windows Hello for Business → **Disabled**"; "Turn on convenience PIN sign-in → Disabled"; "Turn off picture password sign-in → Enabled"; "Enumerate local users on domain-joined computers → Disabled"; "Turn off File History → Enabled"; phone sign-in registry value set to 0.
+
+`EnableAccountManager` does exactly one thing: "the following schedule task is turned on: `\Microsoft\Windows\SharedPC\Account Cleanup`". **Deletion is a scheduled maintenance task, not a sign-out guarantee** — except for Guest/Kiosk and the low-disk case.
+
+Troubleshooting surface: `C:\Windows\SharedPCSetup.log`, `HKLM\Software\Microsoft\Windows\CurrentVersion\SharedPC`.
+
+**No security caveat section exists in either doc.** Microsoft nowhere states what shared PC mode does *not* isolate. That silence + the "share application data between users → Enabled" row is the whole story: Shared PC mode is a **storage-hygiene and account-lifecycle feature, not an isolation feature.**
+
+## D6. Windows cross-account CVEs (NVD REST, keywordSearch)
+
+**Correction to the brief: CVE-2021-1665 is NOT a Profile Service bug.** Fetched by cveId: published 2021-01-12, "**GDI+ Remote Code Execution Vulnerability**", CVSS 7.8 / v2 6.8. Unrelated.
+
+**Windows User Profile Service (ProfSvc) EOP family — the real ones (11 results):**
+| CVE | Published | CVSS | Note |
+|---|---|---|---|
+| CVE-2015-0004 | 2015-01-13 | 7.2 (v2) | ProfSvc, Server 2003 → 2012R2 |
+| CVE-2019-0986 | 2019-06-12 | 6.3 | "improperly handles symlinks… could delete files" |
+| CVE-2019-1454 | 2020-01-24 | 5.5 | symlinks |
+| CVE-2020-0730 | 2020-02-11 | 7.1 | symlinks |
+| CVE-2020-0785 | 2020-03-12 | 7.1 | symlinks |
+| CVE-2020-16940 | 2020-10-16 | 7.8 | **junction points** |
+| CVE-2021-26873 | 2021-03-11 | 7.0 | |
+| CVE-2021-34484 | 2021-08-12 | **7.8, CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H** | the one with the famous incomplete patch |
+| CVE-2022-21895 | 2022-01-11 | 7.8 | |
+| CVE-2022-21919 | 2022-01-11 | 7.0 | |
+| CVE-2022-26904 | 2022-04-15 | 7.0 | the 0-day continuation of the 34484 chain |
+
+Vector on 34484: **local, low privilege required, no user interaction, C/I/A all High** — a *logged-in standard user* reaches SYSTEM, which subsumes every other user's profile. This is the measured shape of "user boundary held by ACLs on a profile directory + a service that follows symlinks."
+
+**Windows DPAPI (4 results, only 2 are Microsoft's):**
+- **CVE-2022-34723**, 2022-09-13, **5.5 CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N** — "Windows DPAPI Information Disclosure Vulnerability". Local, low-priv, **Confidentiality High** — an unprivileged local account reading DPAPI-protected data.
+- **CVE-2023-36004**, 2023-12-12, 7.5 CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:H — "Windows DPAPI Spoofing Vulnerability".
+- CVE-2016-5720 (Skype `dpapi.dll` planting) and CVE-2026-18759 (third-party) are not Windows DPAPI itself.
+
+**Credential Guard (12 results, all 2022 + one 2024):** CVE-2022-21921 (4.4, SFB), CVE-2022-30150 (7.5, Remote Credential Guard EOP), CVE-2022-22031 (7.8, "Domain-joined Public Key EOP"), CVE-2022-34704 (**4.7, CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:H/I:N/A:N — Information Disclosure**), CVE-2022-34710 (5.5 info disc), CVE-2022-34712 (5.5 info disc), CVE-2022-34705 / CVE-2022-34711 / CVE-2022-35771 (7.8 EOP), CVE-2022-34709 (6.0 SFB), CVE-2022-35822 (7.1 SFB), CVE-2024-26237 (7.8 EOP). The August 2022 cluster (8 CVEs in one Patch Tuesday) is a measured burst against the VBS credential isolation boundary — three of them **local low-priv reads of high-confidentiality data**.
+
+**Windows Hello (17 results):** CVE-2021-34466 (2021-07-16, 5.7 SFB), CVE-2021-42288 (2021-11-10, 5.7), CVE-2022-35797 (2022-08-09, 6.1), CVE-2023-32018 (2023-06-14, 7.8 RCE), CVE-2025-26635 (2025-04-08, 6.5 "Weak authentication… bypass a security feature over a network"), CVE-2025-26644 (2025-04-08, 5.1 — "**Automated recognition mechanism with inadequate detection or handling of adversarial input perturbations… allows an unauthorized attacker to perform spoofing**"), CVE-2025-47969 (2025-06-10, 4.4 local info disclosure), CVE-2025-53139 (2025-10-14, 7.7 cleartext transmission), CVE-2026-20804 / CVE-2026-20852 (2026-01-13, both 7.7, "Incorrect privilege assignment… tampering locally"), CVE-2026-27906 (2026-04-14, 4.4), CVE-2026-27928 (2026-04-14, **8.7, unauthorized attacker, security-feature bypass over a network**), CVE-2026-61928 (2026-08-11, 5.5, "**Cleartext storage of sensitive information in Windows Hello**"). Plus third-party sensor failures that break the Hello trust chain: CVE-2023-50430 (Goodix, Dell Inspiron 15, SDCP not followed on Linux enrollment), CVE-2024-23592 (Lenovo/Synaptics fingerprint replay, physical access), CVE-2024-0454 (ELAN Match-on-Chip, "valid SID leakage and enumeration with spoof sensor").
+
+**Windows Cloud Files Mini Filter Driver (cldflt.sys)** — the densest single cross-boundary family, 20 Microsoft CVEs found, essentially one per quarter for four years: CVE-2020-17103, CVE-2020-17134, CVE-2020-17136 (2020-12-10; 7.0/7.8/7.8), CVE-2021-31969 (2021-06-08, 7.8), CVE-2021-33784 (2021-07-14, 7.8), CVE-2021-40475 (2021-10-13, 5.5 **info disclosure**), CVE-2022-23286 (2022-03-09, 7.0), CVE-2022-35757 (2023-05-31, 7.3), CVE-2023-29361 (2023-06-14, 7.0), CVE-2023-33155 (2023-07-11, 7.8), CVE-2023-36904 (2023-08-08, 7.8), CVE-2023-35355 (2023-09-12, 7.8), CVE-2023-36036 (2023-11-14, 7.8 — **exploited in the wild**, per MSRC's own labeling of that month), CVE-2023-36696 (2023-12-12, 7.8), CVE-2024-21310 (2024-01-09, 7.8), CVE-2024-26160 (2024-03-12, 5.5 info disc), CVE-2024-30034 (2024-05-14, 5.5 info disc), CVE-2024-30085 (2024-06-11, 7.8), CVE-2024-38215 (2024-08-13, 7.8), CVE-2024-49114 (2024-12-12, 7.8), CVE-2025-21271 (2025-01-14, 7.8). This is the **OneDrive/cloud-placeholder filter driver** — precisely the component Shared PC mode's `EnableSharedPCModeWithOneDriveSync` turns on.
+
+**"%TEMP% cross user" / "another user profile" as keyword searches: NEGATIVE.** 53 and 31 results respectively, essentially all web-app profile-tampering CVEs and unrelated symlink-in-`/tmp` Unix bugs. NVD's keyword index does not carry a "cross-user Windows temp" class. Two incidental hits worth naming: **CVE-2007-0351** (2007-01-19, XP/Server 2003, "do not properly handle user logoff, which might allow local users to gain the privileges of a previous system user") and **CVE-2019-9377** (Android FingerprintService, "possible bypass for operating system protections that isolate user profiles from each other due to a missing permission check") — the latter is the exact phrasing that does *not* exist for Windows.
+
+**The strongest measured cross-account read on Windows** — fetched by cveId:
+> **CVE-2021-36934** (HiveNightmare/SeriousSAM), published 2021-07-22, **CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H = 7.8**: "An elevation of privilege vulnerability exists because of **overly permissive Access Control Lists (ACLs) on multiple system files, including the Security Accounts Manager (SAM) database**."
+
+Any non-admin interactive user could read every local account's password hashes from VSS shadow copies. That is a total collapse of the Windows multi-user boundary, caused by **file ACLs alone**, shipped for months in Windows 10/11. It is the empirical answer to "how strong is Windows local user separation": as strong as the ACL that was last set on the file.
+
+## D7. DPAPI cross-user decryption — measured, and it is by design
+
+**Primary source, MEASURED demonstration:** harmj0y (Will Schroeder, SpecterOps), "Operational Guidance for Offensive User DPAPI Abuse", **2018-08-22**, https://blog.harmj0y.net/redteaming/operational-guidance-for-offensive-user-dpapi-abuse/ (the posts.specterops.io mirror returned no output — **NOT REACHED**; the harmj0y.net original is live).
+
+Exact claims from the post:
+> "Domain user master keys are also protected with a domain-wide *backup* DPAPI key" — and "*this backup key doesn't change!*"
+
+He frames it as intended architecture: "a failsafe in case users change/lose their passwords, and to support various smart cards' functionality."
+
+The measured chain, verbatim commands:
+1. `lsadump::backupkeys /system:<DOMAIN CONTROLLER> /export`
+2. `dpapi::masterkey /in:b8854128-023c-433d-aac9-232b4bca414c /pvk:ntds_capi_0_32d021e7-ab1c-4877-af06-80473ca3e4d8.pvk`
+3. `dpapi::chrome /in:Cookies /masterkey:f35cfc2b44aedd7…`
+
+**Result: the author decrypted user "harmj0y"'s Chrome cookie database offline, from the domain backup key alone, without that user's password.** That is a MEASURED cross-user decryption, and step 3 lands squarely on Part B — the DPAPI-protected Chrome profile directory is readable by anyone holding a key the user never controlled and cannot rotate.
+
+**Vendor confirmation of the mechanism** (CLAIM, but it is Microsoft describing its own protocol) — [MS-BKRP] BackupKey Remote Protocol, revision 27.0 dated 2024-04-23, https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-bkrp/:
+> "This protocol encrypts secret values (such as cryptographic keys) so they can be backed up to storage that is not specially protected, and enables decryption of such values if recovery is necessary."
+
+The deep-link `.../ms-bkrp/044ea320-...` 404'd; the landing page above is the reachable canonical. Full spec PDF: https://winprotocoldocs-bhdugrdyduf5h2e4.b02.azurefd.net/MS-BKRP/%5bMS-BKRP%5d.pdf (not fetched — **NOT REACHED**, it is a binary PDF).
+
+**Academic corroboration: NOT REACHED.** OpenAlex is hard-exhausted for the day — `{"error":"Rate limit exceeded","message":"Insufficient budget… Resets at midnight UTC"}`. The Picod/Bursztein DPAPI offline-recovery line of work could not be confirmed and I will not cite it from memory. HN Algolia returned 4 hits for "DPAPI backup key" but every record had `title: null, url: null` — comment hits with no story attached; **no usable practitioner discussion found.**
+
+---
+
+## Cross-cutting synthesis
+
+1. **Chrome profiles**: the "not a security boundary" statement is folklore in the exact form the brief assumed. What exists is (a) a threat-model *exclusion* of the whole local-attacker class, (b) an enumerated list of maintained boundaries — origin, site, secure context, cross-origin-isolated — that omits profiles, and (c) a consumer help-page warning. Chromium's own prescribed remedy for a shared machine is **the OS account**, not a second Chrome profile.
+
+2. **That remedy is itself measured-weak.** Windows local user separation rests on file ACLs (CVE-2021-36934 read every SAM hash from a standard account), on a symlink-following profile service (11 ProfSvc EOPs, 2015–2022, still recurring after two patches on the same chain), and on DPAPI — whose domain backup key decrypts *any* domain user's Chrome cookies by design, demonstrated end-to-end in 2018 and unchanged since ("this backup key doesn't change!").
+
+3. **ChromeOS is the only one of the three that separates users with a cryptographic mechanism rather than an ACL** — per-user fscrypt/dmcrypt vault, TPM-wrapped keys, ramfs-only guest — and its CVE record reflects that: 3 cryptohome CVEs ever, none a cross-user data read. But **multi-sign-in undoes it at the policy layer** (shared networks, single joint sign-out, Play Store bound to the first account, and no published isolation claim at all), and **kiosk "public mounts" derive their vault key from the application id, not a secret.**
+
+4. **Shared PC mode is the mirror image of the assumption behind it**: it is a disk-reclamation and account-lifecycle feature (25%/50% thresholds, 30-day inactivity, a nightly `Account Cleanup` task), and it *explicitly enables* "Allow a Windows app to share application data between users" while disabling Windows Hello, biometrics, and PIN sign-in. It deletes Guest/Kiosk profiles at sign-out and **leaves every pre-existing and manually-added local account permanently**. Microsoft publishes no statement of what it fails to isolate.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;jKDW_CL25q1zZkS4MapuPK9G4br7lA8wkKnIfC2vUZE
+
+<<^ code="&#x0004;" -> to=? >>

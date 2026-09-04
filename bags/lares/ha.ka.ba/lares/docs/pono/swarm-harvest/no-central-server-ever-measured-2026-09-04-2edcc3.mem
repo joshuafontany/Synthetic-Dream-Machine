@@ -1,0 +1,323 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/no-central-server-ever-measured-2026-09-04-2edcc3 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/no-central-server-ever-measured-2026-09-04-2edcc3.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 'NO CENTRAL SERVER, EVER' — MEASURED, 2026-09-04. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/no-central-server-ever-measured-2026-09-04-2edcc3"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! "NO CENTRAL SERVER, EVER" — MEASURED, 2026-09-04
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 34,759 characters
+
+````
+All four parallel threads are in. Report follows.
+
+---
+
+# "NO CENTRAL SERVER, EVER" — MEASURED, 2026-09-04
+
+Everything below was fetched or computed this session. **MEASURED** = numbers with a source. Where I ran my own probes I say so. NOT REACHED items are listed at the end.
+
+---
+
+## THE THREE HEADLINE ANSWERS
+
+**1. Annual mortality of federated instances.** The best directly-measured figure remains Raman et al., IMC 2019: **across a 15-month window, 21.3% of 4,328 Mastodon instances went offline and never came back** (≈17%/yr). The only vendor-grade modern series is Mastodon gGmbH's own crawler: **9,446 servers (1 Jan 2024) → 8,851 (31 Dec 2024), net −6.3% in one year** — net, so gross mortality is higher. What happens to identities on a dead instance: **followers are lost, posts are never moved, and the migration cannot be executed at all unless the dying server is still up and you can still log into it.**
+
+**2. Has any serverless/federated identity system sustained at community-or-larger scale without a central funder?** Across everything measured here: **no.** Every survivor has either a central funder (Tor: 29–54% US government every year FY2019–24; Mastodon: 86% of 2024 revenue from two gifts; Matrix: Element's £3M/yr in-kind), a corporate operator (Bluesky $100M Series B; iroh/n0 with a $19–$199/mo price sheet), or near-zero cash cost with in-kind hardware (Libera.Chat: **FY2025 operating loss ≈ −3,500 SEK, about US$350**; NTP Pool). The systems with neither died: Sovrin, Ceramic, SSB pubs, Briar (decided to shut down in 2025, reversed to security-only life support July 2026).
+
+**3. What does the relay floor cost, and who paid?** It depends entirely on whether the "relay" holds identities. A **stateless relay is nearly free**: a full-network atproto relay is **$34/month** non-archiving, **$152/month** archiving (Bryan Newbold, measured) — **$0.000009–0.000042 per user-year** across Bluesky's 43M users. An **identity-holding node is 3–5 orders of magnitude more expensive per user**: mastodon.social+online cost **€84,000 in technical hosting in 2024** (≈**€0.32/MAU-year**), and matrix.org's homeserver consumes **~50% of the entire Matrix Foundation's £910,821 FY2025 budget** (≈**£1.23/MAU-year**). The floor was paid, historically, by governments (Tor), one-off philanthropy (Mastodon), a single commercial sponsor (Matrix/Element), token pre-sales (Sovrin), or nobody (I2P, SSB).
+
+---
+
+## A. MASTODON / ACTIVITYPUB CHURN
+
+### A.1 Raman et al., "Challenges in the Decentralised Web: The Mastodon Case," IMC 2019
+https://arxiv.org/abs/1909.05801 · https://doi.org/10.1145/3355369.3355572 · N = 4,328 instances, 1.75K online May 2018, 15-month window
+
+- **21.3% of instances went offline and never came back** over the 15-month cycle.
+- **Top 5% of instances hold 90.6% of all users** and **94.8% of all toots**. "10% of instances host almost half of the users."
+- **98% of instances go down at least once**; a quarter are unavailable ≥1 day at a stretch; **21% for over a day, 7% for over a month**.
+- **11% of instances are inaccessible more than half the measurement period.** Only 4.5% achieve 99.5% uptime.
+- Mean instance downtime **10.95% vs Twitter's 1.25%** at comparable age (2007 Pingdom data). Popularity does not predict availability: correlation of toot count to downtime = **−0.04**.
+- **Outages in just 10 instances would remove 62.69% of global toots.** Top 3 ASes hold 62% of toots; losing them loses **70% of toots** with no replication, **11.4%** with federation-based replication.
+- AS-wide outages: **6 observed**; the largest (AS9370 Sakura) rendered **3.89M toots** unavailable simultaneously. Five AS outages cut the follower graph's largest connected component **from 92% to 46% of users**. Removing the top 1% of accounts cuts the LCC from **99.95% to 26.38%**.
+- Certificate expiry alone caused **6.3% of all observed outages**.
+
+### A.2 The post-Twitter-migration decay curve — MEASURED, from Mastodon's own annual reports
+PDFs: https://joinmastodon.org/reports/Mastodon%20Annual%20Report%202023.pdf and `...2024.pdf`
+
+| Date | Mastodon servers | Registered accounts | MAU |
+|---|---|---|---|
+| Nov/Dec 2022 (peak) | — | — | **2.5M** (Rochko, via The Verge 2022-12-20) |
+| 1 Jan 2023 | 9,780 | 6.36M | 1.50M |
+| 31 Dec 2023 | 9,800 | — | 1.56M |
+| 1 Jan 2024 | 9,446 | 8.67M | 1.51M |
+| **31 Dec 2024** | **8,851** | **9.10M** | **938,000** |
+| **4 Sep 2026 (FediDB, live)** | **8,791** | **8.73M** | **965,550** |
+
+- **MAU fell 38% during 2024 alone** while registered accounts grew — activity collapsed, registrations did not.
+- Peak-to-plateau: **2.5M → ~0.94M MAU, −62%** in two years.
+- **Registered accounts fell 9.10M → 8.73M (−370,000) between Dec 2024 and Sep 2026** while MAU was flat. Accounts vanish when instances vanish.
+- Mastodon's own two servers had a **37% retention rate** on the 2022 cohort (TechCrunch, 2023-10-02, reporting the FY2022 annual report).
+- FediDB network-wide right now (https://api.fedidb.org/v1/stats, 2026-09-04): **42,846 instances, 14,384,860 total users, 1,146,568 MAU** — i.e. **8.0% of all fediverse accounts are monthly-active; 92% are dormant.**
+
+### A.3 Zia/Bin Zia et al., "Flocking to Mastodon," IMC 2023 (arXiv 2302.14294)
+The migration cohort itself was already centralized on arrival: **96% of migrating users joined the top 25% of instances**. **11.58% of instances were down at crawl time.** 30.68% of users who moved to a second instance landed on mastodon.social. 21% of the Mastodon accounts were not new.
+
+### A.4 My own measurement of concentration TODAY (fediverse.observer GraphQL, 2026-09-04)
+13,674 live core-fediverse nodes (Mastodon/Pleroma/Misskey/Akkoma/Sharkey/Pixelfed/Lemmy/PeerTube/Friendica/GoToSocial/etc.), 998,074 MAU, 14,409,718 accounts:
+
+- **mastodon.social alone = 26.5% of all fediverse MAU and 23.5% of all accounts.**
+- Top 3 = 46.6% of MAU · Top 10 = 54.1% · Top 100 = **77.4%**.
+- **Top 10% of instances = 97.4% of MAU and 99.0% of accounts.** Top 1% = 80.9% of MAU.
+- Compare Raman 2019 ("10% of instances host almost half of users") — **concentration roughly doubled in seven years.**
+- **22.7% of live instances have ≤1 account. 69.9% have ≤10. 25.1% have zero monthly-active users.**
+- Hosting concentration: **top 3 hosts = 48.7% of instances, 38.7% of MAU** — OVH 17.8%, Cloudflare 15.9% (20.1% of MAU), Hetzner 15.0%. Countries: DE 2,916 · FR 2,765 · US 1,971.
+- Uptime (all-time, observer's own metric): median 99.76%, 10th percentile 96.81%, **7.3% of live instances below 95%**.
+
+### A.5 ⚠ AN INSTRUMENT THAT LIES — and why my own mortality numbers are void
+I computed annual mortality from fediverse.observer's `date_diedoff` field (it yielded 2.2–14.6%/yr and a median dead-node lifespan of 445 days), then **collided the instrument**. I probed a random sample of 250 nodes the observer marks as died-off:
+
+- **91.2% of "dead" nodes still return a valid `/.well-known/nodeinfo`** (control: 97.6% of live-marked nodes do). Root HTTP 200: 88.8%. Only **3.2%** fail DNS/connect entirely.
+- Named large "dead" nodes still serving today: baraag.net (299,883 accounts), tkz.one, pxlmo.com, hexbear.net, lemmynsfw.com, wirtube.de. Only poa.st was genuinely gone.
+
+**Conclusion: `date_diedoff` conflates "stopped answering the crawler / blocked it" with "died." Every mortality figure derived from it is discarded.** Worse, the roster is survivor-biased: probing the observer's own cohorts gave **97.6% survival for nodes first seen in 2019** and 95.8% for 2022 — implausible against Raman's directly-measured 21.3%/15mo, and explained by the observer pruning fully-vanished domains from its list. **There is no public dataset that can answer instance mortality correctly.** The Internet Archive was offline this session, so I could not reconstruct a historical roster and probe it.
+
+### A.6 What actually happens to an identity when an instance dies — MEASURED from the docs and the code
+From https://docs.joinmastodon.org/user/moving/, verbatim:
+- **"Your posts will not be moved, due to technical limitations."**
+- Migration "does not automatically transfer your follows, blocks, mutes, or bookmarks" — those require manually exported/imported CSVs.
+- **Step 6 requires logging into the OLD account with the OLD password, on the OLD server.** If it is down, the move is impossible.
+- **30-day cooldown** between migrations.
+
+The two structural fixes have been open for years and are still open:
+- **mastodon/mastodon#12423 "Support Post Migration"** — opened **2019-11-18**, **632 reactions, 308 comments, STILL OPEN** (~7 years).
+- **mastodon/mastodon#23401 "Allow migration of followers to new instance when old instance is unresponsive"** — opened **2023-02-04**, STILL OPEN.
+
+**Lemmy has no documented account migration at all** (join-lemmy.org tells users to "create another account on a different instance").
+
+### A.7 Named deaths, with what was lost
+
+| Instance | Date | Scale | What happened |
+|---|---|---|---|
+| **mstdn.plus** | froze 2023-01-30 07:45 UTC | "well over 4000 active users" | Admin went silent and never returned. Author of the report **lost ~640 of 700+ followers — 91% of his social graph** — because the move could not complete. Archive export never finished. DMs permanently inaccessible. Same admin ran mstdn.party (~12,000 users). https://lapcatsoftware.com/articles/mastodon.html |
+| **mastodon.technology** | read-only 2022-11-01, off 2022-12-01 | one of the largest tech instances | Admin Ash Furrow: *"A member of my family was very recently diagnosed with a terminal illness… I am exhausted… how little joy I've been getting from being an admin. The server has also gotten too large and too complex for me to administer."* https://ashfurrow.com/blog/mastodon-technology-shutdown/ |
+| **mastodon.lol** | announced 2023-02-11, closed 2023-05-09 | — | **The domain lapsed and was re-registered by an unrelated party on 2024-08-23** (RDAP, registrar XYZ.com LLC, currently `inactive` with no nameservers). The entire handle namespace of a dead instance is now someone else's property. This is the identity-hijack surface, measured. |
+| **mozilla.social** | announced 2024-09-17, closed 2024-12-17 | Mozilla-operated | Corporate operator exited. |
+
+### A.8 Admin economics — the qualitative side, N=16
+Zhang et al., "Trouble in Paradise?", CSCW 2024, https://doi.org/10.1145/3687059 (PDF: https://discovery.ucl.ac.uk/id/eprint/10201276/1/Zhang_et_al_2024_Trouble_in_paradise.pdf). 16 admins, 7 countries. Manual moderation, CSAM exposure ("I was exposed to the content of child abuse. And it was a hard day."), personal harassment of identifiable moderators, and unresolved legal exposure (*"I want to find those servers so I can block them, but that could be an illegal activity… I'm not an expert in law"*). The paper reports **no cost figures** — that is a gap in the literature.
+
+---
+
+## B. MATRIX HOMESERVER ECONOMICS
+
+### B.1 The Foundation's finances, in its own words
+
+| | Figure | Source |
+|---|---|---|
+| Community donations vs Element subsidy, 2022 | **$6,000/mo vs $400,000/mo** | matrix.org 2022-12-01 |
+| 2023 revenue | £82K → **£364K**; expenses **£440K** | matrix.org 2024-01-30 |
+| Projected 2024 full-scope cost | **north of £900K** (£550K staffing / £250K servers / £100K admin) | ibid. |
+| 2024 actual | revenue **$561K**, cost **$1.2M**, deficit **$356K**; liquidated **$283K of crypto donations** | matrix.org 2025-02-20 |
+| FY2025 (Nov 24–Oct 25) | costs **−£910,821**, net loss **−£310,596**, revenue ≈**£600,225** | 2025 Public Annual Report |
+| Element's continuing in-kind | **£3M+/yr** in core development; wrote **>95%** of core code | matrix.org 2024-01-30; element.io 2023-11-06 |
+
+Verbatim, 2025-02-20 (https://matrix.org/blog/2025/02/crossroads/): *"unless the Foundation manages to raise $100,000 of funding by the end of March 2025, we will shut down all the remaining bridges"* … *"the end of the road is in sight"* … the $100K *"would extend our runway 1 month."* The bridges (Slack, XMPP, OFTC, Snoonet) **were in fact shut down in 2025**.
+
+Revenue concentration, FY2025 annual report verbatim: *"We churned a Gold member, and the one left (Automattic) now corresponds to **50% of our revenue**."* … *"**We didn't get any grants.**"* … *"the Foundation is still disproportionately dependent on Element's in-kind donations and financial support, **which is unsustainable**."*
+
+### B.2 The homeserver eats the budget
+https://matrix.org/blog/2025/06/funding-homeserver-premium/ verbatim:
+> "**20% of the Foundation's expenditure goes towards hosting the matrix.org free and public homeserver.** If we add in the cost of the moderation work done by the Trust and Safety team, the total share of the costs attributable to the matrix.org homeserver account for **almost 50% of all expenditure**." … "before we get to the extreme position of **being forced to turn it off** leaving its **370k monthly active users** in the awkward position of finding a new home"
+
+**One homeserver = half the budget of the entire protocol's foundation.** Matrix has since introduced a freemium tier with attachment/upload caps (https://matrix.org/homeserver/pricing/); the price is still unpublished.
+
+### B.3 Centralization despite federation
+Foundation's own figures, 31 Oct 2025: **190M known federated users, 1.15M MAU on the open federation, 234K DAU on matrix.org.** With matrix.org at 370K MAU (Jun 2025), **~32% of the entire open federation's monthly-active users sit on one server.** Note matrix.org DAU *fell* from >250K (Jan 2024) to 234K (Oct 2025).
+
+The Foundation says it out loud (https://matrix.org/blog/2024/03/why-matrix-org/): *"**The Matrix.org Foundation doesn't want to become the Gmail.com or Outlook.com of Matrix.**"*
+
+The only peer-reviewed crawl — Jacob, Grashöfer, Hartenstein, arXiv:1910.06295, snapshot 2018-07-25, 2,003 homeservers / 131,463 users:
+- Largest server: **76,271 users = 58.0% of all observed users**. **Top 1% of homeservers = 87% of users.** Only **15 servers had >100 users**.
+- The finding that matters for the cost argument: *"the single, largest server is involved in 44.5% of all messages, **sends 88.4%**, but receives only 0.6%"* … *"**moving from a centralized network to a more decentralized one will not improve the load distribution, but can actually make it worse**."*
+
+### B.4 Resource cost
+- Synapse documented minimum: **1 GB RAM** to join large public rooms. Dendrite: **2–4 cores + 8 GB RAM**, "more if your user count increases," plus headroom for Postgres.
+- On a 2×1 GHz / 2 GiB board (Element's own SBC guide), joining `#synapse:matrix.org` took **911.6 seconds**; presence pegs CPU at 100%; the guide recommends blocking rooms over ~1,500 state events.
+- Database bloat, measured in the field: `state_groups_state` **51 GB / 274,929,152 rows** against 14.5M events (matrix-org/synapse#7472); one personal homeserver **shrank from 100 GB to under 8 GB** (levans.fr, 2020-06-11) — **~92% waste**. Issue #3364 on unreferenced state groups has been **open since 2018-06-07**.
+- matrix.org's ceiling: **51 TB Postgres**, hundreds of workers, bare metal at Mythic Beasts; a **~24-hour outage on 2025-09-02** with a 5.5-hour restore. A 2024 post-mortem states plainly: *"An extra server introduces a recurring cost and requires additional work that **the Foundation cannot afford right now**."*
+
+### B.5 Homeserver churn
+No public tracker measures it. The etke.cc Matrix Rooms Search series (https://api.matrixrooms.info/stats) runs 2024-02-10 → 2026-09-04: servers online **8,837 → 20,232** (2.3×), but **indexed rooms flat-to-down (20,573 → 19,980)** and indexable servers' share fell from ~29% to **20.4%**. One month shows **−16.3% (12,810 → 10,726, Sep→Oct 2025)** straddling the matrix.org outage — that is an instrument artifact candidate, not a churn measurement. matrixstats.org and stats.matrix.org are **dead**.
+
+---
+
+## C. OTHER SERVERLESS/P2P SYSTEMS — DID THEY SUSTAIN?
+
+**Sustained (2 of 9), and both have a company and a revenue model:**
+
+**Iroh / n0** — the directly relevant case: *a "no server" system that runs servers, and now sells them.* n0's own docs: *"Public relays are operated by n0.computer and hardcoded into Iroh, available free of charge"* with *"no uptime or performance guarantees."* Pricing (https://www.iroh.computer/pricing): **$19/mo Pro** (10K concurrent connections, 100 GB egress), **$199/mo per region Dedicated**, overages **$0.09/GB egress**. Scale: **>200 million endpoints created on n0's public relays in 30 days** (Iroh 1.0, 2026-06-15). Relay outage 2024-11-05: degraded 11:00 GMT, full outage 17:00, resolved 23:01 — **~1M new nodes onboarded during the incident, 100,000 concurrent connections at failure**, detected internally ~12h late. Relay abuse forced **API-key authentication, default-on from June 2026** — the moment the serverless network acquired an account system. **Free public relay operation ends 2026-12-31 for v0.35x.**
+  - **Hole-punching success rates: only partially published.** The two URLs specified do not exist (404; I enumerated all 82 blog slugs). What n0 publishes: *"Roughly 90% of network conditions allow direct P2P connections"* (docs, no methodology/N/date) and *"It's normal to see 95% of data transferred in a connection pass directly between devices"* (a *bytes* figure, not a connection-success figure). Their retrospective states the design principle explicitly: *"Our goal was to get holepunching to work reliably, **even at the expense of compromising p2p purity**. If we would need a small server to help, so be it."* **n0's funding structure and investors: NOT REACHED** — undisclosed everywhere.
+
+**Bluesky/atproto** — never claimed serverless, publishes its costs, **$100M Series B** (Bain Capital Crypto, announced 2026-03-19 for an April 2025 round), **43M users**, ~20 billion public records.
+
+**Dead or dying (7 of 9):**
+
+- **Ceramic** — deprecated by its own operator. 2025-04-17 (https://blog.ceramic.network/the-future-of-ceramic-focusing-on-recall/): **js-ceramic and ComposeDB deprecated effective immediately; ComposeDB and the Ceramic Anchor Service to shut down**; *"ComposeDB-dependent apps will break if not migrated."* Blog silent since that date (17 months). **forum.ceramic.network: connection refused.** rust-ceramic (the anointed survivor): 51 stars, last push 2026-01-21. The company is now **Recall**, an AI-agent leaderboard with an ERC-20 on Base.
+- **Secure Scuttlebutt** — `ssbc/ssb-server`, the pub server itself: **last commit 2022-06-17, over four years dead.** planetary.social now displays, above its own unchanged marketing copy: *"We're moving to Nostr."* The VC-backed flagship client left for a protocol with explicit relay servers. Manyverse survives on GitLab (last activity 2026-07-01).
+- **Briar** — https://briarproject.org/news/2026-maintenance-mode/ (2026-07-09), verbatim: *"**the project didn't have funding**, we were reluctant to look for funding without having a long-term plan, and so we could only work on Briar in our spare time. **Last year, we decided that we wouldn't realistically be able to solve these issues and so we reluctantly decided to shut down the project.**"* Reversed to security-only maintenance. **35-month product silence** (Aug 2023 → Jul 2026). Funders were all grants (OTF, Prototype Fund, NLnet, NGI, Access Now, Internews…); last funding announcement **2022-12-05**. **No user numbers have ever been published.**
+- **Willow / Earthstar** — NLnet/NGI Assure, EC grant № 957073. Complete, candidate-status spec. **willow-rs, the reference Rust implementation, is ARCHIVED.** willow-js dormant since 2025-03. n0's `iroh-willow`: dependabot-only since 2025-11-17. Earthstar has been in **v11 beta since 2024-05-21**. **No shipped end-user application on Willow was found.**
+- **Veilid** (cDc, DEF CON 31, Aug 2023) — technically alive, socially dead. Still **v0.5.7, pre-1.0 three years in**; **9 of the last 10 commits by one person** (Christien Rioux). VeilidChat still 0.4.9. HN attention: 180 pts at launch → **4 points (2025-11-12), 2 points (2025-06-05)**. Funding: NOT REACHED.
+- **OrbitDB** — alive but thin: **38 commits in the trailing 52 weeks**, nothing since 2026-05-14, one active maintainer, funded by an Open Collective plus a wall of crypto addresses.
+- **IPFS / Protocol Labs** — **89 roles eliminated, ~21% of workforce, 2023-02-03** (https://pl.xyz/blog/2023-02-03-crypto-winter-update/). Governance handed to independent foundations Nov 2023; **the core IPFS/libp2p team left PL in April 2024** to form Interplanetary Shipyard. **Cloudflare shut down its public IPFS gateway — no IPFS connection after 2024-08-14** — and redirected the traffic to *the other* centralized gateway (ipfs.io/dweb.link). Shipyard's own admission: *"public gateways became entrenched as the default to access IPFS content on the web to the detriment of the principles of IPFS."* Gateway operators also absorb DMCA carpet-bombing. **libp2p circuit-relay economics: no published cost model, operator census, or reimbursement scheme exists anywhere I could reach — a genuine negative finding.**
+
+### The atproto relay cost, precisely (the price tag for a stateless floor)
+Bryan Newbold, https://whtwnd.com/bnewbold.net/3lo7a2a4qxg2l (2025-08-27): **$34/month** — 8 vCPU, 16 GB RAM, 160 GB disk, 1 Gbps; **21 GB relay data**, 30 Mbps sustained firehose, 600 events/sec. Archiving version: **$152/mo + $92 setup**, 12 vCPU / 32 GB ECC / 3.84 TB NVMe, **447 GB Postgres + 722 GB CAR**. Full archive ceiling: **~16 TB NVMe**. Firehose volume (Jaz, 2024-09-24): **24 GB/day baseline → 232 GB/day** at the Brazil surge (**~3.16 TB/month**); Jetstream+zstd cuts it to ~18 GB/day, tested on a **$5/month VPS**.
+
+---
+
+## D. WHO PAID FOR THE RELAY FLOOR
+
+### Tor — the longest-lived volunteer relay floor, and the split nobody mentions
+**The Tor Project funds software, not relays.** Relay operators pay their own hosting; there is no compensation program.
+
+US-government share of Tor Project Inc. revenue (Form 990 line 1e ÷ line 12, EIN 20-8096820):
+
+| FY | Revenue | Gov't grants | % |
+|---|---|---|---|
+| Jul18–Jun19 | $4,868,034 | $2,025,910 | **41.6%** |
+| Jul19–Jun20 | $4,400,782 | $2,372,145 | **53.9%** |
+| Jul20–Jun21 | $7,413,548 | $2,829,250 | **38.2%** |
+| Jul21–Jun22 | $5,999,891 | $3,058,724 | **51.0%** |
+| Jul22–Jun23 | $8,470,139 | $3,684,992 | **43.5%** |
+| Jul23–Jun24 | $7,287,566 | $2,135,763 | **29.3%** |
+
+Pre-2018 this undercounts — $1.3M–$2.8M/yr of "fee for services" program revenue (US-gov subcontracting) sat on a different line. The 2012 annual report prints **"U.S. Government based income 60%"** for 2011. FY2019 was a genuine stress point: expenses exceeded revenue by $582,900, net assets fell $1.68M → $836K.
+
+**The relay floor itself, from Tor Metrics CSVs:**
+- 2007: 1,300 relays, 2.06 Gbit/s advertised. 2026 (to Sep 1): **9,853 relays, 1,320.89 Gbit/s.** Relay count grew **5.4×**; bandwidth grew **641×**. The volunteer body count was **flat at 6.3k–7.1k from 2014 to 2023** while traffic tripled. Growth came from bigger relays, not more volunteers.
+- **Exit relays fell from 46.4% of the network (2007) to 11.7% (2017)** — the legally-exposed role is the one volunteers refuse.
+- My reading of Onionoo today (2026-09-04, 3,215 running exits, 413.4 Gbit/s): **one operator, nothingtohide.nl, carries 21.7% of all Tor exit traffic. The top 12 contacts carry 71.4%.** The "volunteer" exit floor is in practice about twelve foundation-backed non-profits.
+
+### Sovrin — the full arc, to the dollar
+Own annual reports, https://sovrin.org/annual-reports/ (US$ thousands):
+
+| | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 |
+|---|---|---|---|---|---|---|
+| Support & revenue | 2,956 | 1,897 | 453 | 91 | 120 | 94 |
+| Expense | 2,569 | **3,931** | 967 | 134 | 106 | 84 |
+| Net | +387 | **(2,034)** | (514) | (43) | +14 | +9 |
+
+Seed money was **$4.3M donated by Evernym from token pre-sales**. 2019 legal spend alone: **$1.5M, of which $1.1M on regulatory advice for a public token distribution.** Ledger revenue was never material: **$2,500 in network use fees in 2019; $17,000 in 2020; $76,000 in 2021.** In 2022 a 90% write-fee discount meant *"Sovrin hereby subsidized the industry with more than $300K"* — four times its annual revenue.
+
+**2020-03-13**: all paid staff terminated. Treasurer, verbatim: *"they brought the 2019 average monthly burn rate of **$328,000** down to approximately **$4,000**."* Inherited debt **~$2.3M**.
+
+Stewards: **10 founding (Jul 2017) → ~60 (2018) → 50 nodes flat 2020–21** (12 added in 2020, only 6 spun up a node, 4 removed theirs). By 2023 the Board **lowered node requirements specifically to reduce Stewards' cloud costs**. Shutdown announced **2025-02-08**, cause stated as *"In 2024, no new Transaction Endorsers joined"* plus *"limited Steward involvement in governance."* **Foundation dissolved by the State of Utah 2025-05-21.** MainNet now runs **read-only on a single virtual cloud server operated by Trinsic — one steward, from sixty.**
+
+### Usenet — the historical parallel
+Daily feed volume: **4.5 GiB (Dec 1996) → 82 GiB (2000) → 2.27 TiB (2005) → 62.40 TiB (2020) → 274.49 TiB (Feb 2024)** — ~61,000× in 28 years, on a peering model where every full-feed carrier pays for all of it regardless of demand. Exits: **AOL early 2005** ("growing popularity of weblogs"); **NY AG Cuomo agreement 2008** → Time Warner Cable dropped it entirely, Sprint dropped all of `alt.*`, Verizon cut to the Big 8; **Verizon full stop 2009-09-30**; **AT&T 2009-07-15**; **Microsoft 2010-06-01**; **Duke University — Usenet's birthplace — May 2010, "low usage and rising costs"**; **UNC 2011-02-04** after 32 years. *(Comcast's date: NOT REACHED.)* Usenet did not die; it moved entirely to paid commercial providers.
+
+Server census (top1000.org monthly archives, counted directly): **22,245 distinct servers (Jun 2001) → 780 (Jul 2026), −96.5%.** Contributing servers have been **flat at 80–81 since 2021** — a hard floor of committed operators. Eternal-September, a hobbyist text-only server, ranks **#7 among all Usenet feeders worldwide**.
+
+### freenode 2021 — federation with a single point of governance capture
+The largest FOSS IRC network was owned by **PDPC Limited, a UK charity that reported £3,060 in net assets for 2009 and was dissolved in 2013**. In 2017 ownership was transferred to Andrew Lee. On **2021-05-19 at least 14 volunteer staff resigned**; Libera.Chat was founded the same day. On **2021-05-26 freenode seized ~700 registered channels** from migrating projects; on **2021-06-14 it reset the network entirely** with no data migrated.
+
+netsplit.de crawler averages (via Wayback + live):
+
+| Date | freenode users | channels |
+|---|---|---|
+| 2021-04-30 | **77,905** | 42,001 |
+| 2021-06-29 | 41,171 | 29,252 |
+| 2022-01-28 | 9,931 | 14,148 |
+| **2026-09-04** | **5,191** | **7,918** |
+
+**−47% in six weeks; −93.3% in five years.** Libera hit **16,500 concurrent in week one**, peaked at **51,728 concurrent** in 2021, and sits at **31,519 users / 22,488 channels today** — 6.1× freenode, but ~39% off its own peak. The infrastructure was replaceable in one week; **twenty years of channel and nick registrations were not.**
+
+### XMPP — and the loss of its own instrumentation
+Google Talk federated **2006-01-17**; Google announced dropping s2s federation **May 2013**; Facebook dropped XMPP **April 2014**. **There is no publicly retrievable longitudinal dataset of XMPP server counts** — data.xmpp.net 403s, list.jabber.at publishes no totals or history, and neither Crossref nor arXiv has a measurement paper. The federation that lost also lost its instrumentation.
+
+### Mastodon — where the money actually goes
+| | 2021 | 2022 | 2023 | 2024 |
+|---|---|---|---|---|
+| Revenue | €55.6k | €325.9k | €545k | **€2,191k** |
+| Total costs | €23.2k | €127.1k | €473k | **€774k** |
+| — **Technical hosting** | — | €16.7k | **€73k** | **€84k** |
+| — Personnel | €18.4k | €79.7k | €383k | **€585k** |
+
+**Hosting is the cheapest line by an order of magnitude.** €84K runs mastodon.social + mastodon.online (together ~26.5% of all fediverse MAU); €585K runs six people. **86% of 2024 revenue was two philanthropic gifts** ($1.5M for restructuring, $100K for the web UI); the recurring community base (Patreon €248,531) covers hosting but only 42% of payroll. Patrons **fell 22.9% in 2023**.
+
+Individual instances: **Hachyderm took 30,000 users in 30 days** on four donated Dell PowerEdge boxes in a residential basement (peak day **999.80 GiB RX/TX, 2022-11-21**) and has received **$785 lifetime on OpenCollective — $0.026 per user.** Its founder stepped down in April 2023 and died that August.
+
+---
+
+## E. THE COUNTER-EVIDENCE — WHAT SUSTAINED, AND WHAT THEY SHARE
+
+**Email/SMTP** — ~44 years, and measurably a duopoly at the operator layer. Berezin, RIPE Labs (snapshot 18 Jul 2026, OpenINTEL over Tranco top-1M, N ≈ 659,000 MX-publishing domains): **Google Workspace 21.8% + Microsoft 365 16.8% = 38.6%**; next largest, Proofpoint, **1.9%** — then a cliff. **Self-hosting fell from 44.6% (2016) to 22.4% (July 2026) — halved in a decade.** And Benjamin Mako Hill's personal-corpus measurement: **>50% of the mail he replied to came from Google every year since 2010** — despite self-hosting. RFC 9518 (Nottingham, Dec 2023) names the mechanism: *"if a large MTA decides that email from a small one is unwanted, there is significant impact."*
+
+**DNS** — **2,005 anycast instances, 12 operators, 13 identities** (root-servers.org, 2026-09-04); capacity grew ~154× under a frozen namespace with zero new governance seats. Internally skewed: F/ISC 366 instances, B/USC-ISI and G/DISA **6 each**. Resolver share (APNIC, Huston/Damas, ~303M tests Aug–Sep 2019): **Google Public DNS 9.12% first-resolver / 22.36% of full resolver sets; all open resolvers 28.27%.**
+
+**NTP Pool** — 23 years, **~6,136 servers** (Europe 62.5%), grown from 500 in 2006, on donated machines plus donated hub hosting (Equinix, Netactuate). And the sharpest number in the set — Beverly & Rye, arXiv:2602.12321 (submitted 2026-02-12, 9 months, >15,000 servers): **only 19.7% of active servers are fully independent**, and **an adversary can capture the preponderance of pool traffic in 90% of countries with 10 or fewer malicious servers.** The abuse history is the cost story: **Netgear 2003 — 707,147 affected units, 250,000 packets/sec, 150 Mbit/s** at one university; **D-Link 2005–06 — 75–90% of one volunteer's traffic, with a DKK 54,000/yr (~US$9,081) bill**; TP-Link at 0.72 GB/month/device; CSIRO simply closed its server to the public.
+
+**IRC/Libera** — nonprofit förening, 38 members, **FY2025 annual result ≈ −2,000 SEK, operating loss ≈ −3,500 SEK (~US$350)**, because servers and bandwidth are sponsored in kind. Its notable 2025 cost driver was **legal advice on the UK Online Safety Act**.
+
+**BitTorrent mainline DHT** — ~21 years, no operator. **16M–28M concurrent users in 2013** (Wang & Kangasharju, IEEE P2P 2013, ~2.5 years of continuous measurement). **No population estimate has been published since 2014** that I could reach. Ungoverned survival and unmeasurable survival came as a pair.
+
+### The properties the survivors share (derived only from the above)
+1. **Operator-layer centralization did not kill any of them.** Email 38.6% duopoly, resolvers 28.27%, NTP 19.7% independent, root 5-of-12 operators holding ~56% of instances. Concentration killed *entry*, not *operation*.
+2. **Near-zero mandatory cash at the node.** Libera's whole FY2025 cash loss was ~US$350; NTP grew 500 → 6,100 servers on donated hardware. **Usenet, the only one with real per-server cost, fell 96.5%.**
+3. **The client was already installed and could not cheaply switch.** NTP, DNS, and MX lookup are compiled into every OS. Usenet and IRC required an affirmative client choice — and are the two that collapsed (−96.5%; Libera at 13% of IRC's all-time single-network peak of 240,000 on QuakeNet in 2005).
+4. **Survivors had a cheap absorb-and-redirect path for hostile externalities.** Every NTP abuse incident was solved by firmware, redirection, vendor zones, or donated servers — never by recourse. The one operator that could not absorb it (CSIRO) exited.
+5. **Replication grew without renegotiating the protocol.** The root went 13 machines → 2,005 instances with no protocol change and no new governance seats.
+6. **Participation decays even where the protocol thrives.** Self-hosted email 44.6% → 22.4%; Usenet contributing servers 347 (2006) → 80 (flat since 2021); DMARC enforcement stuck at 46.9%. In every series, protocol health and operator-population health diverged.
+
+---
+
+## WHAT I COULD NOT REACH
+
+- **A correct measurement of instance mortality.** fediverse.observer's `date_diedoff` is wrong (**91.2% of "dead" nodes still answer nodeinfo** — my probe, N=250) and its roster is survivor-biased. instances.social requires a token. **The Internet Archive was offline for the whole session** ("Internet Archive services are temporarily offline"), so I could not reconstruct and probe a historical roster. Raman's 21.3%/15-months (2019) remains the only defensible directly-measured figure, and it is seven years old.
+- **n0's funding structure, investors, and a real hole-punching success-rate publication.** The two URLs I was pointed at return 404; no such post exists among n0's 82 blog slugs. Only "roughly 90% of network conditions" (undated, no method) and a 95%-of-*bytes* figure exist.
+- Tor's blog transparency posts (all 404 in 2026), hence the widely-cited "~85% US government in 2015" — **unverified**. Also: torservers.net / Wau Holland / Nos Oignons dollar figures; Tor sponsor amounts (never disclosed, for any sponsor, any year).
+- Any Comcast Usenet-drop date. Libera.Chat revenue figures. Any longitudinal XMPP server-count dataset (does not exist publicly). I2P financials of any kind (never existed). libp2p circuit-relay economics (apparently undocumented anywhere).
+- IPFS public-gateway traffic share (no operator publishes it). Planetary Social's exact SSB shutdown date. NLnet grant amounts for Willow. Matrix Foundation premium-account ARR (chart image only).
+- Paywalled: Zembruzki et al. ISCC 2023 email-centralization numbers (IEEE, no OA copy exists); MDPI *Applied Sciences* 13(9):5739 (403); ACM DL PDFs for the IPFS SIGCOMM'22 and SPF IMC'23 papers (403).
+- BitTorrent DHT population after 2014; tracker-mortality longitudinal studies (none found).
+- **OpenAlex exhausted its daily API budget mid-session** ("Insufficient budget… Resets at midnight UTC") and arXiv's API began returning empty responses under our parallel load; later literature search ran on Crossref, HN Algolia, gh, and direct fetches only. WebSearch was never called.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;YurYWhBLkpR6ldc4slIMac3M55Rt0NfPZl1ciYKs26Q
+
+<<^ code="&#x0004;" -> to=? >>

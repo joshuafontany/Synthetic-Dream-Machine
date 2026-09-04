@@ -1,0 +1,563 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Social / guardian key recovery as actually practiced and measured. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Social / guardian key recovery as actually practiced and measured
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 44,394 characters
+
+````
+The full report was already queued to that agent (our messages crossed). Rendering it here as well so it's in the transcript.
+
+---
+
+# Social / guardian key recovery as actually practiced and measured
+
+**Method note (affects every confidence rating).** The session's WebSearch budget was exhausted at the first call. Everything below was gathered by fetching primary URLs directly and routing search-engine result pages through a text proxy (`r.jina.ai` over DuckDuckGo HTML). Google, Bing, Brave (after ~4 calls), Mojeek, Ecosia, Startpage and Reddit were all bot-walled from this machine; `web.archive.org` was intermittently offline. **Consequence: primary sources and academic PDFs were reachable and read in full; forum/complaint evidence and removed pre-2020 pages were not.** Several DuckDuckGo results were AI-generated content farms (`eco.com`, `chainscorelabs.com`, `nadcab.com`, `whysogeek.com`, `ibex.fi`, `stealthcloud.ai`, `spark.money`) — all excluded. Every number below traces to a primary source or a peer-reviewed paper read directly.
+
+---
+
+## PART 1 — MEASURED NUMBERS
+
+### 1.1 The only rigorous end-to-end measurement of guardian recovery (2009)
+
+Schechter, Egelman, Reeder, *"It's Not What You Know, But Who You Know: A Social Approach to Last-Resort Authentication"*, **CHI 2009**, Microsoft Research. PDF: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf · https://dl.acm.org/doi/10.1145/1518701.1519003
+Deployed as a real-looking feature at `recover.live.com`; 4 trustees, threshold 3-of-4; trustees were **not** told they were in a study. **Confidence: HIGH** — I read the primary PDF in full, and a second agent read it independently; our extractions agree exactly. **This is 17 years old and remains the best measurement in the field.**
+
+**Experiment 1 — reliability funnel, 43 invitees (Table 1):**
+
+| Drop-out stage | n | Remaining |
+|---|---|---|
+| Invited | — | 43 |
+| Never loaded the instructions page | 13 | 30 |
+| Never responded to any survey request (despite $10 gift card just for replying) | 4 | 26 |
+| **Couldn't remember who their trustees were**, didn't look them up | 2 | 24 |
+| Too busy to attempt | 2 | 22 |
+| Worried trustees would fear viruses | 1 | 21 |
+| Never spoke with any trustee | 2 | 19 |
+| Configured invalid emails for **all** trustees | 1 | 18 |
+| Only succeeded with 2 of the required 3 | 1 | 17 |
+
+- Paper's headline, verbatim: *"seventeen of the nineteen participants who made the effort to reach one trustee (89%) were able to authenticate."* **That 89% is conditional. The unconditional rate is 17/43 = 40% of enrolled users completed recovery.**
+- **18 of 19 (94%)** would have succeeded at a relaxed **2-of-4** threshold.
+- **72% (13 of 18) of the participants who *succeeded* had to be reminded who their own trustees were.** Days after enrollment, not years.
+- Timing: 47% under 100 min; 66% within 1 day; 88% within 2 days.
+- Baseline given in the paper: highest aggregate recall for personal/secret questions in prior work is 80%.
+- Paper's stated lesson: *"users must be reminded of who their trustees are."*
+
+**Experiment 2 — forged-email attack on trustees** (emails co-designed with Dan Kaminsky):
+- Reached **89 trustees**. **4 (4%) sent a recovery code to the attacker** (one then phoned the victim, having second thoughts). **52 (58%) failed the attack** — did not respond to the attacker but contacted the account holder through another channel. **33 (37%) never responded at all.**
+- Within the sequestered lab window only 16 of 97 trustees responded at all; of those, 2 (12.5%) fell for it.
+- Modeled attacker success using Pc=4/89, Pd=33/89: **0.46% against a 2-code threshold; 0.019% against a 3-code threshold.**
+
+**Experiment 3 — phone call from someone close to the victim** (9 pairs: 3 spouse/equivalent, 1 son + mother-in-law, 4 friends of 5+ years, 1 of 1 year):
+- Calls reached 49 trustees; 7 discarded. **Of the remaining 42 calls, 19 (45%) got the caller a recovery code or a trustee-authentication email.**
+- Refusals: 5 (12%) unwilling, 14 (33%) unable, 4 (10%) too confused.
+- Split by acquaintance: **56% (14/25)** when the caller already knew the trustee vs **29% (5/17)** when not (N small, directional).
+- Authors' caveat: pairs were mostly spouses/long-term friends, so this *"reflects the upper bound for attack efficacy."* Conclusion: *"telephone attacks by those well acquainted with the account holder posed a significant risk."*
+
+**→ The single most load-bearing fact in the field: guardians resist a cold email (4%) and fold to a warm phone call (45%).**
+
+### 1.2 The founding paper has no data at all
+
+Brainard, Juels, Rivest, Szydlo, Yung, *"Fourth-Factor Authentication: Somebody You Know"*, **ACM CCS 2006** — https://people.csail.mit.edu/rivest/pubs/BJRSY06.pdf. **Confidence: HIGH** (full text read). The originating paper of the entire guardian idea contains **no empirical user data whatsoever** — protocol design and threat modeling only. Its own text: *"We are presently in the process of conducting a small pilot study."* Schechter 2009, citing it three years later: *"To our knowledge, no usability results have been made available."*
+**→ The field's founding paper shipped zero measurements, and the one follow-up is still the only one, 20 years on.**
+
+### 1.3 The largest-scale data on "can an enrolled user reach their recovery factor"
+
+**(a) Google Security Blog, 2019-05-17** — https://security.googleblog.com/2019/05/new-research-how-effective-is-basic.html (year-long study with NYU and UC San Diego). **Confidence: HIGH**, verbatim from Google's own post.
+- Recovery phone blocks *"up to 100% of automated bots, 99% of bulk phishing attacks, and 66% of targeted attacks."* SMS to recovery phone: 100% / 96% / 76%. On-device prompt: 100% / 99% / 90%. Without a recovery phone, phishing protection *"can drop to as low as 10%."*
+- **The number that matters, verbatim: *"In an experiment, 38% of users did not have access to their phone when challenged. Another 34% of users could not recall their secondary email address."***
+- "Hack for hire" groups charge *"on the order of $750 USD"* per account and persist *"for upwards of a month."* That is the market price of the 45% phone call in §1.1. Users who exclusively used security keys: zero compromised.
+- **38%/34% is for the *easiest possible* factors — your own phone, your own backup email. A human guardian is strictly harder to reach.**
+
+**(b) Bonneau, Bursztein, Caron, Jackson, Williamson, *"Secrets, Lies, and Account Recovery"*, WWW 2015** — https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf. **Confidence: HIGH** (primary PDF read). **11 million account-recovery claims** analyzed.
+- **40% of English-speaking US users could not recall their secret-question answers when they actually needed to recover.** SMS reset codes succeeded **>80%**. 37% of users who gave fake answers said they did so to make them "harder to guess."
+- **→ At 11M-claim scale, two in five users cannot reproduce a thing *they themselves* chose and enrolled.**
+
+### 1.4 Ethereum smart-contract wallets
+
+**LOOPRING — the only fully-documented guardian-recovery breach with denominators.**
+Byron @ Loopring, *"Postmortem Incident Report and Path Forward"*, **2024-10-11** — https://medium.com/@byron.loopring/postmortem-incident-report-and-path-forward-aa64f7e5f7d1 (full text read). Secondary: The Block 2024-06-09; Unchained 2024-06-10; Halborn 2024-06-11 https://www.halborn.com/blog/post/explained-the-loopring-hack-june-2024. **Confidence: HIGH.**
+- **Incident #1, 2024-04-24:** attacker compromised L1/L2 operator keys via the `secretManager`. An admin key *"was not strictly managed, and several internal members had access to it."* Loopring reset keys but *"did not conduct a thorough review of the backend environment."*
+- **Incident #2, 2024-06-09:** the **Loopring 2FA server** was compromised (full read/write). The attacker *"temporarily replaced affected users' 2FA data with their own email addresses"*, initiated social recovery, received the code, and Loopring's relayer *"signed 'YES' to the social recovery request"* — transferring ownership on-chain, **exactly as designed**.
+- **Verbatim: *"Out of 40,000+ Loopring Smart Wallets currently deployed, 58 Loopring Smart Wallet addresses lost assets due to this attack."*** ≈**0.145%**. Loss ≈**$5M**.
+- **Root cause is the adoption failure, stated by the vendor:** *"Most impacted wallets relied solely on the default Loopring Official Guardian, which only uses users' 2FA information for verification."*
+- **Correlated-guardian edge case:** *"Four wallets with more than one guardian were also compromised because the second guardian (another Loopring Smart Wallet) had already been compromised, also relying on the default Loopring Official Guardian only."*
+- Post-hoc guidance: *"the Loopring wallet is only considered secure when users opt for multiple trusted guardians (minimum 3…)"*
+- Malware on AWS traced from 2024-04-19. **Singapore police declined the report** (no Singaporean victims; US-hosted server), so KYC tracing failed. **No reimbursement announced** — users *"are responsible for their own self-custodial security"*; company pivoted to "Loopring DeFi." `Loopring/protocols` last pushed 2024-10-25.
+
+**ARGENT — the vendor's own docs collapse the "social" quorum to 1-of-1.**
+https://support.argent.xyz/hc/en-us/articles/360007981757-Ethereum-account-guardian-FAQ. **Confidence: HIGH**, verbatim.
+- *"If my only guardian is Argent, can I recover my wallet? **Yes. You only need one guardian for a recovery.**"*
+- *"**One guardian is sufficient** for recovery, locking and approving large transactions… however with more guardian approvals at once, the transaction might become **more expensive fees-wise**."*
+- **→ The default guardian is Argent itself, verified by SMS, and the vendor actively discourages adding more because L1 gas costs money.** Loopring's 58 drained wallets are what this configuration looks like when the vendor's guardian server is breached.
+
+Mechanics (https://support.argent.xyz/hc/en-us/articles/360007338877, last seen dated 2025-05-06): **48-hour delay** *"to give time to cancel any unwanted recovery attempts"*; guardian types = Argent (SMS), other Argent users (matching-emoji review), MetaMask, Ledger, Trezor; threshold 1→1, 2–3→majority, 4+→ceil(N/2). **The doc does not address what happens if guardians are unavailable** — it says email support.
+
+**Argent's fate — was social recovery abandoned?**
+- Rebranded to **Ready** in late 2025 (@argentHQ → @ready_co). The wallet did **not** shut down; guardian docs are still live. *Confidence: MEDIUM on the rebrand date (search-summary, not a fetched announcement); HIGH that the docs are live.*
+- **Directly observed via GitHub API:** `argentlabs/argent-contracts` (L1 guardian suite, 600 stars) **last pushed 2024-07-29** — ~2 years without a commit. `argentlabs/argent-x` last pushed 2025-03-14. *Confidence: HIGH.*
+- Ready's live blog (fetched 2026-09) leads with **"Introducing Community Finance," Aug 6 2026** — no social-recovery messaging. *HIGH.*
+- **The 2020 guardian manifesto at `argent.xyz/blog/a-new-era-for-crypto-security/` — which Argent's own FAQ still links to as the canonical explanation of guardians — now 404s to the blog index.** `ready.co/learn/what-is-social-recovery` also 404s. *HIGH, directly observed.*
+- *LOW-MEDIUM, could not fetch primary:* The Defiant reportedly covered Ready shutting down its **card program on 2026-07-30** after issuer Kulipa wound down without warning (~1 hour notice; assets stayed in self-custody, subscriptions refunded). **Treat as unverified — a card-program shutdown, not a wallet shutdown.**
+- **Verdict: not formally deprecated, still documented — but contracts unmaintained ~2 years, marketing gone, canonical explainer a dead link. Quietly de-emphasized, not announced dead.**
+
+**SAFE{WALLET} — the "social" tier was never built.**
+https://help.safe.global/articles/9622260218-account-recovery-with-saferecoveryhub. **Confidence: HIGH**, verbatim.
+- ***"As of December 2023 the only implemented solution is a decentralized Custom solution."*** The trusted-third-party tier (Sygnum/Coincover) was announced but not shipped.
+- A **Recoverer is a single account — no N-of-M threshold at all.** *"Recoverers can bypass any threshold and propose ownership changes."* Only defence: a delay during which signers can reject.
+- Safe's own framing: *"The only downside of this trustless approach is reliance on the Recoverer account(s) and the safety of their private key. **There is no centralized authority to help you in case the Recoverer's key is lost.**"* — the recovery mechanism has the same loss problem as the thing it recovers.
+- `gnosis/zodiac-modifier-delay`: **31 stars**, last pushed 2026-06-08. `safe-global/safe-modules`: 197 stars. **No usage numbers ever published.**
+
+**ERC-4337 / account abstraction — the Ethereum Foundation is still on v1, with 8 stars.**
+PSE (EF Privacy & Scaling Explorations), *"Social Recovery SDK: design, implementation and learnings"* — https://pse.dev/blog/social-recovery-sdk. **Confidence: HIGH.**
+- *"Social recovery has been discussed for years, but **developers still lack a practical, trustless SDK** they can integrate directly into wallets."*
+- *"…including Vitalik Buterin's writing on social recovery in January 2021, **yet there is still no simple, trustless, developer-friendly SDK**…"*
+- Repo `privacy-ethereum/social-recovery-sdk`: **created 2026-01-12, last pushed 2026-03-02, 8 stars.** 155 passing tests. Guardians: EOA, Google email via zkJWT (Noir), passkeys. Monolithic RecoveryManager chosen because *"For social recovery, timelocks are not optional: without them, a colluding guardian set can potentially take over a wallet before the owner can react."*
+- **Three open problems, all human coordination not cryptography:** (1) private salt sync owner↔guardian — *"intentionally left to the wallet owner (manual handoff)"*; (2) DKIM rotation — *"DNSSEC coverage is still incomplete across providers (including major ones)"*; (3) cross-chain — *"users must reconfigure and repeat recovery setup across chains, which degrades UX and increases operational risk… affects real adoption."*
+- `zkemail/email-recovery`: created 2024-05-28, **last pushed 2025-06-25, 61 stars** — stalled ~14 months.
+- **→ Five years after Vitalik's post, the EF's own reference implementation has 8 GitHub stars and three unsolved coordination problems.**
+
+**Vitalik's 2021 post** — https://vitalik.eth.limo/general/2021/01/11/recovery.html, 2021-01-11. *HIGH.* Recommends *"high guardian counts (ideally 7+)"*, 1–3 day delay on guardian changes. Loss motivation: *"1500 BTC may be lost every day"*, *"20% of the total supply"*, Stefan Thomas's 7,000 BTC, allinvain's 25,000 BTC. Names as risks: guardian collusion, relayer centralization, high L1 fees, guardian identity disclosure. Example: *"for a wallet with 7 guardians to be compromised, 4 of the 7 guardians would need"* to collude.
+**→ Vitalik recommended 7+. Argent shipped a default of 1 and told users more costs gas. That gap is where every loss lives.**
+
+HN thread (https://news.ycombinator.com/item?id=25722131, 129 pts, 43 comments) called it on day one: commenters argue N-of-M guardians is indistinguishable from Electrum's cosigner model and predict convergence on institutions — *"All roads lead to banks."* Loopring and Argent both shipped exactly that. **HN carries essentially no other discussion of social recovery wallets in its entire archive** (full-text Algolia searches for "argent wallet", "guardian recovery wallet", "social recovery wallet", "loopring guardian" return this one thread plus noise). *HIGH.*
+
+### 1.5 Signal Secure Value Recovery
+
+- **SVR1** — https://signal.org/blog/secure-value-recovery/, **2019-12-19**. *HIGH.* PIN → Argon2 → auth token + master key; server-side 256-bit `c2` in an Intel SGX enclave; enclave enforces a max failed-guess count; Raft across distributed enclaves to prevent rollback via disk imaging; Noise Protocol; forked BOLT to auto-insert LFENCE and retpolines. **Contains no user statistics whatsoever.** Also: https://signal.org/blog/improving-registration-lock (2020-01-27); support doc says forgetting the PIN with registration lock can lock you out *"for up to 7 days."*
+- **SVR3** — Connell (Signal), Fang (Berkeley), Schmidt (Signal), Dauterman (Berkeley), Popa (Berkeley), USENIX **OSDI 2024**, https://www.usenix.org/conference/osdi24/presentation/connell. *HIGH.* **$0.0025/user/year**; **365ms** to recover a key ("a rare operation"); *"millions of real users in a deployment with capacity for over 500 million users"*; n=3 trust domains across three cloud providers (Nitro/SGX/SEV-SNP), s=2, 7 geographically distributed servers; throughput ~1,700 / 1,000 / 3,300 req/s.
+- **The critical admission, verbatim:** the system *"does not support recovering the user PIN that is used in secret key recovery (i.e., **if a user forgets their PIN, they cannot recover their key**)."* **Mitigation, verbatim:** *"We mitigate this in practice by **periodically prompting the user to re-enter their PIN** on the messaging client to prevent permanent lockout."*
+- **Signal has never published a PIN-forgetting rate** — not in 2019, not in 2020, not in OSDI 2024. I checked all three. *HIGH on the negative.* The engineered re-prompt is the strongest indirect evidence the rate was high enough to build around.
+- **Critique** — Matthew Green, 2020-07-10, https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/. *HIGH.* *"The key weakness of the SVR approach is that it depends strongly on the security and integrity of SGX execution."* Three failure modes: enclave memory dump → offline dictionary attack whose difficulty depends *"entirely on the strength of a user's password"*; retry-limit bypass; attestation-key leak → forced replication into simulated non-SGX enclaves. Catalogs Plundervolt, Foreshadow, ÆPIC, and attestation-signing-key extraction — **twice**. Signal encouraged 4-digit PINs (10,000-space); Green admits picking **"9512"** to stop the nag. On consent: *"My major issue with SVR is consent"*; a *"dark pattern… basically forcing users to add the PIN"* by *"blocking access to the entire app"*; *"I basically don't want, and don't trust"* SVR. Backlash: Android Police 2020-05-29, https://www.androidpolice.com/2020/05/29/many-signal-users-arent-happy-with-new-pin-requirements/ — no quantified complaint numbers exist. A small comprehension datapoint (GWU, https://gwusec.seas.gwu.edu/understanding-of-signal-pins/): *"67% of enthusiasts mention that they use a password manager while casuals are mostly annoyed (42%)"* — *LOW-MEDIUM, snippet only.*
+
+### 1.6 Apple
+
+**Recovery Contacts** — https://support.apple.com/en-us/HT212513 (also /102641). *HIGH.* **Up to 5** contacts; both parties iOS 15+/macOS 12+ with iMessage, both 13+; contact relays a **six-digit code**; *"Your recovery contacts won't have any access to your account."* **No time-delay figure and no success rate published.** Architecture: https://support.apple.com/guide/security/account-recovery-contact-security-secafa525057/web
+
+**Recovery Key** — https://support.apple.com/en-us/HT208072. *HIGH.* **28-character** code. **Enabling it turns off Apple's standard account-recovery path entirely** — lose the key and all trusted devices and access is gone permanently. Apple warns not to store it in Apple's own apps (circular lockout).
+
+**Advanced Data Protection** — https://support.apple.com/en-us/102651. With ADP on, **at least one of {Recovery Contact, Recovery Key} is mandatory** and Apple states it cannot recover the data. **No ADP adoption number has ever been published.** Confirmed adjacent: Apple **withdrew ADP from the UK entirely in Feb–Mar 2025** rather than comply with a Technical Capability Notice.
+
+**Legacy Contact** (post-mortem access, distinct from Recovery Contact) — https://support.apple.com/en-us/102431.
+
+**iCloud Keychain HSM escrow** (Ivan Krstić, Black Hat 2016; current restatement in Apple Platform Security) — https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1. *HIGH on quotes.* HSM clusters, majority quorum, SRP so the security code never reaches Apple. **Verbatim: *"The escrow service allows only 10 attempts to authenticate and retrieve an escrow record"*** — on the 10th, *"the HSM cluster destroys the escrow record and the keychain is lost forever."* And: ***"The administrative access cards that permit the firmware to be changed have been destroyed."*** The original Black Hat deck (https://www.blackhat.com/docs/us-16/materials/us-16-Krstic.pdf) fetched but returned unparseable scanned content. **No peer-reviewed critique of this design was located, and no independent verification or dispute of the "cards destroyed" claim was found** — *LOW confidence on that negative, given degraded search.*
+
+**The Apple failure mode that actually happened — recovery as the attack.** *HIGH.* WSJ (Nicole Nguyen & Joanna Stern), Feb 2023 and **2023-04-19**: https://www.wsj.com/tech/the-iphone-setting-thieves-use-to-lock-you-out-of-your-apple-account-716d350d; corroboration fetched at https://www.macrumors.com/2023/04/19/apple-responds-to-iphone-theft-recovery-key-report/ and https://www.macrumors.com/2023/02/24/iphone-stolen-passcodes-report/. Thieves shoulder-surfed passcodes in bars, stole the phone, reset the Apple ID password in Settings (works even with Face ID on), disabled Find My, **then set a Recovery Key** — permanently locking out the owner. *"Apple's policy gives users virtually no way back into their accounts without that recovery key."* All victims in the initial report were robbed *"while they were out socializing at bars and other public places at night."*
+**Apple's fix:** Stolen Device Protection, iOS 17.3 (Jan 2024), https://support.apple.com/en-us/120340 — biometric with *"no passcode alternative or fallback"* for sensitive actions, plus a **one-hour security delay** then a **second** Face ID/Touch ID check before an Apple Account password change. **Crucial limit: only when away from "familiar locations"** unless the user opts into always-on.
+**No published success or failure rate for Apple Recovery Contacts exists** — not from Apple, not from journalism. *MEDIUM on the negative.* Apple Discussions threads showing failures exist (255237279, 255203290) but are anecdotal and were not fetched in full.
+
+### 1.7 WhatsApp end-to-end encrypted backups
+
+Launched **2021-09-10** — https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp and https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/. *HIGH on quotes and negatives.*
+- **Backup Key Vault** of HSMs across multiple data centers behind ChatD; *"either a password of your choice or a 64-digit encryption key that only you know."*
+- Verbatim on lockout: the vault is *"responsible for enforcing password verification attempts and rendering the key permanently inaccessible after a limited number of unsuccessful attempts."*
+- **Meta does not state the attempt count anywhere in its own engineering post. The widely-repeated "5 attempts" figure could not be verified and should not be cited.**
+- **WhatsApp has never published an adoption number for E2E backups.** No Meta statement, no journalism with numbers.
+- The security whitepaper PDF fetched but returned unparseable binary. No measured lockout-complaint rate found anywhere; forum access was bot-walled.
+
+### 1.8 Bitcoin multisig / collaborative custody
+
+**CASA** (casa.io). *HIGH on what's published; the claims themselves are unaudited marketing.* Standard $21/mo or $250/yr for 2-of-3; Premium $175/mo or $2,100/yr for 3-of-5 with three shipped devices; Private Client optional 6th key. Homepage: **"$10+ Billion Protected"**, **"40,000+ Clients"** — self-reported, no methodology or period.
+**"Casa Covenant" no longer exists as a product name** — it is now plain **Casa Inheritance** (casa.io/inheritance), with a **six-month verification window** during which Casa notifies the owner of a claim; Private Client "Enhanced Verification" (US-only) removes the wait. **No statistics on how many inheritance transfers have actually executed.**
+**The "X% of Casa clients have lost at least one key" statistic could NOT be located** despite checking the blog archive back to 2018 and the key-management tag. **Unconfirmed / not found — not proven nonexistent;** it may live in a talk or podcast. The **"we have never lost a client's funds"** phrasing was **not found** on the current site. Casa guidance: run a key health-check *"about once every six months"* — advice, not a mechanism.
+
+**UNCHAINED** (unchained.com/about). *HIGH on what's published.* Headlines **"$0 Capital losses"**, **"₿100,000+"** secured, **"$1 Billion+"** loans originated — self-reported, no methodology. Collaborative custody 2-of-3; Caravan open-source multisig tool (https://www.unchained-capital.com/blog/the-caravan-arrives/, 2019). **No published data on how often clients lose keys or exercise recovery.**
+
+**NUNCHUK** — the only vendor publishing an honest epistemic caveat. Bitcoin inheritance guide, 2025-12-09 (nunchuk.io/blog/bitcoin-inheritance-guide), verbatim: ***"it's impossible to know exactly how many of these losses are due to failed inheritance plans."*** Design splits a *"Smooth Path"* (vendor-assisted) from a **Miniscript on-chain timelock "Failsafe"** that works if Nunchuk itself disappears (nunchuk.io/blog/miniscript-wallet-recovery, 2025-10-31) — **the only vendor-independence mechanism found anywhere in this research.** Their recovery guide treats descriptor/BSMS-file possession as a hard precondition.
+
+**The descriptor problem is real and being standardized against.** Bitcoin Optech #351, **2025-04-25**, https://bitcoinops.org/en/newsletters/2025/04/25/ — Salvatore Ingala's proposal for a standardized **encrypted wallet-descriptor backup** so a holder of one of the descriptor's pubkeys can recover the descriptor from an xpub. **The existence of that proposal is the evidence: holding your seed is not sufficient; losing the descriptor loses the funds.**
+
+**"~20% of BTC is lost" — do not cite as established.** Wikipedia sources it to a **2018 WSJ** article, not Chainalysis. The commonly-cited Chainalysis Nov-2020 figure **could not be verified** (blog URLs 404, archive.org unreachable). Vitalik's 2021 post repeats it **uncited**. This folklore number has been the motivating statistic for the entire social-recovery program.
+
+**No one publishes a multisig-specific or collaborative-custody-specific failure rate.** Only aggregate "% of all BTC ever lost" estimates, which conflate death, forgotten passwords, discarded hardware, pre-2013 exchange failures and deliberate burns.
+
+*MEDIUM confidence, could not verify against the primary:* Coinkite reportedly disclosed a **Coldcard RNG defect on 2026-07-30** (entropy chip skipped; ~40 bits on Mk2/Mk3 firmware 4.0.1–5.0.3, ~72 bits on Mk4/Mk5/Q), with **1,366.58 BTC drained on 30–31 July 2026** per Casa's writeup, BIP-39 passphrases not fully protecting victims. Casa and Unchained both published advisories recommending key rotation via a **private transaction relay** to avoid mempool front-running. Corroborated across two vendor blogs but not the primary disclosure. **Relevant here only as evidence that the mitigation for a compromised key is itself an expert-level operation.**
+
+### 1.9 Facebook Trusted Contacts — the largest deployment ever, killed
+
+*HIGH on the removal and the quote; MEDIUM on the exact date.* Launched 2011 as "Trusted Friends", relaunched 2013 as "Trusted Contacts"; 3 friends confirm your identity. Deployed across roughly 2 billion accounts — **the largest social-recovery deployment in history. Removed in 2022.**
+Facebook's **own help-page disclaimer**, quoted verbatim in contemporaneous coverage at https://askleo.com/facebook-trusted-contacts-is-going-away-prepare-now/ (~May 2022):
+> *"Trusted contacts is going away soon. This means your chosen friends will no longer be able to help you get back on Facebook if you lose access to your account. Make sure your email address and phone number are up to date in your account settings."*
+
+Corroborated by azcentral 2022-05-30 (https://www.azcentral.com/story/money/business/tech/2022/05/30/facebook-trusted-contacts-going-away-what-you-need-know/9967473002/), Screen Rant, Central Oregon Daily, Local 3 News. Facebook's replacement advice: keep your email and phone number current. *(A parallel research pass could not verify this and rated it 3/20; my verification supersedes that — I retrieved the verbatim notice text.)*
+**→ Meta ran the largest possible experiment in social recovery, ran it for roughly nine years, published no results, and shut it down.**
+
+### 1.10 Crypto-wallet usability literature — qualitative only, no rates
+
+- **Eskandari, Barrera, Stobert, Clark, NDSS USEC 2015**, https://arxiv.org/pdf/1802.04351 — **expert cognitive walkthrough** on 6 clients, **not** a user study; **no quantitative percentages**. States the structural problem: *"if access to [a password] is lost, online services generally offer account recovery mechanisms… No such recovery mechanism exists for self-managed cryptographic keys."* *HIGH on contents.*
+- **Krombholz et al., FC 2016**, DOI 10.1007/978-3-662-54970-4_33 — **primary PDF unreachable** (all mirrors 404 or paywalled). A secondary source (Bushager et al. 2018) cites it as finding *"22% of the users have lost money due to security violations or self-induced errors."* **Confidence on the 22%: LOW (8/20) — secondhand, unverified against primary. Do not cite as established.** *HIGH that the paper exists at that DOI/venue.*
+- **Voskobojnikov et al., CHI 2021** — 45,821 app-store reviews, 6,859 qualitatively coded. Rich qualitative evidence of seed-phrase and recovery failure. **No aggregate percentage of users experiencing recovery failure is reported.** *HIGH on contents.*
+- **Mai, Pfeffer, Gusenbauer, Weippl, Krombholz, SOUPS 2020** — N=29, Grounded Theory interviews. Participants misunderstand seed-phrase backup; recommends wallets *"enforce seed phrase back-ups"* and *"periodic seed phrase querying."* **No numeric rates.** *HIGH on contents.*
+- **No academic study empirically measuring usage or success rates of guardian-based social-recovery crypto wallets exists.** OpenAlex searches across SOUPS/CHI/USENIX/PETS/CCS/FC/NDSS surfaced only scheme proposals (IEEE Access 2018) and surveys (ACM CSUR 2023). *MEDIUM-HIGH (15/20) that this gap is real.*
+- Could not retrieve Singh et al., *"Password Sharing"*, CHI 2007 — content unverified.
+
+---
+
+## PART 2 — EXPLICIT NEGATIVE RESULTS (verbatim)
+
+These are findings. Every one was hunted for specifically.
+
+1. **No wallet vendor has ever published what fraction of its users configure guardians.** Not Argent/Ready, not Loopring, not Safe. The closest inference is Loopring's postmortem stating *"most impacted wallets relied solely on the default"*, plus Argent's FAQ telling users one is enough and more costs gas.
+2. **No wallet vendor has ever published how many recoveries were actually performed, attempted, or abandoned.** Zero recovery-success-rate data exists for any production smart-contract wallet.
+3. **No guardian non-response rate has ever been published by any deployment.** The only figures in existence are Schechter 2009's funnel and Google's 38%/34% for non-guardian factors.
+4. **No longitudinal study exists** measuring whether users who enrolled guardians can complete a recovery months or years later. Schechter's was days. This has stood open for 17 years. *(Partially closed from an unexpected direction by Bonneau WWW 2015: 40% could not recall their own secret answers across 11M claims.)*
+5. **Signal has never published a PIN-forgetting rate**, despite engineering a periodic re-prompt specifically to suppress it.
+6. **WhatsApp has never published an E2E-backup adoption number or its lockout attempt threshold** — Meta's own engineering post declines the number.
+7. **Apple has never published a Recovery Contact success rate or an ADP adoption number.**
+8. **Casa/Unchained/Nunchuk publish no key-loss or recovery-exercise rates.** Only "$0 losses" style marketing.
+9. **No Vitalik Buterin retrospective admitting the model underperformed was found.** He has kept writing on account abstraction and wallets, but no post revisits the 2021 claims against outcomes. Meaningful but not proof — search access was degraded. *MEDIUM.*
+10. **No documented real-world incident of an attacker socially engineering a human guardian** into approving a wallet recovery was found. Every documented incident attacked the **vendor-operated** guardian (Loopring's 2FA server) or the **device passcode** (Apple). *MEDIUM — searches on this phrasing returned literally nothing.*
+
+Plus: **Facebook never published outcome data for Trusted Contacts** in nine years, and published none when killing it. And the **founding paper of the field (Brainard et al., CCS 2006) contains no empirical data at all.**
+
+---
+
+## PART 3 — FAILURE TAXONOMY OBSERVED IN THE WILD
+
+Ordered by weight of evidence, not attention received.
+
+1. **Users never enroll, or enroll the degenerate configuration.** *(Strongest evidence.)* Argent's FAQ steers to one guardian and names gas as the reason. Loopring's 58 drained wallets were overwhelmingly single-default-guardian. Vitalik recommended 7+; the shipped default was 1. **The gap between the recommended and the shipped threshold is where every loss lives.**
+2. **The "social" guardian is the vendor, so the model is custodial in fact.** Argent → Argent by SMS. Loopring → Loopring by 2FA email. Safe → a single Recoverer with no threshold. Compromise the vendor and you compromise every wallet that took the default — which is what happened 2024-06-09. HN called it in Jan 2021: *"All roads lead to banks."*
+3. **The recovery mechanism becomes the attack vector.** Apple 2023: the thief doesn't defeat the Recovery Key, the thief *sets* one. Loopring: the attacker doesn't defeat recovery, they *invoke* it. **Any recovery path that can change ownership is an ownership-change path for whoever reaches it first.** The only defence that worked in both: **delay + out-of-band alert to the owner** (Argent 48h, Apple 1h+biometric, Safe's rejection window, Schechter's 38-of-89 trustees who broke channel to warn the victim).
+4. **Users forget who their guardians are.** Schechter: **72% of *successful* participants** had to be reminded; 2 of 43 dropped out at exactly this step. Bonneau/Google: **40%** could not recall their own secret answers across 11M claims. Signal engineered periodic PIN re-prompts against the same failure. **Nobody in the wallet space ships a guardian liveness check.** Casa's six-month key check is advice, not a mechanism.
+5. **Guardians are reachable but unavailable.** Google: **38%** couldn't reach their own phone, **34%** couldn't recall their backup email. Schechter: 4 of 43 never responded even for $10; 2 more "too busy"; 1 configured invalid emails for *all* trustees. **A guardian set is a liveness assumption, and liveness decays silently between enrollment and need.**
+6. **Guardians fold to a warm phone call — 45%.** Upper bound per the authors. Cold email: 4%. 56% when the caller knew the trustee, 29% when not. **The threat model that matters is the person who knows you, not the spammer.** Google prices this at ~$750.
+7. **Guardian collusion / no threshold at all.** Safe's Recoverer can *"bypass any threshold"* single-handedly. PSE: timelocks are non-negotiable because *"without them, a colluding guardian set can potentially take over a wallet before the owner can react."*
+8. **Correlated guardians.** Loopring's four-wallet edge case: users who *did* add a second guardian added another Loopring wallet whose only guardian was the Official Guardian. **N-of-M means nothing if the M are not independent, and users cannot see the dependency graph.**
+9. **Cost is a security parameter.** Argent's own FAQ: more guardians means *"more expensive fees-wise."* On L1, gas priced people into 1-of-1.
+10. **Recovery state doesn't travel.** PSE: *"users must reconfigure and repeat recovery setup across chains… affects real adoption."* Same class as the Bitcoin descriptor problem — **the configuration is a second secret you must not lose, distinct from the key.**
+11. **The vendor exits.** Facebook killed Trusted Contacts after ~9 years. Argent's guardian contracts: no commits in ~2 years. ZK Email's recovery repo: idle ~14 months. The EF's own SDK: 8 stars. Loopring pivoted and reimbursed nobody. **Nunchuk's Miniscript Failsafe is the only design found anywhere that treats vendor mortality as a requirement.**
+
+---
+
+## PART 4 — RECOMMENDATIONS, IN FINAL PRIORITY ORDER
+
+1. **Ship a guardian liveness *and recall* check.** Highest-value item, backed by three independent measurements pointing the same way: Schechter's **72%** of successful recoverers who could not name their own trustees (days after enrollment), Google/Bonneau's **40%** who could not recall their own secret answers across 11M real claims, and Signal's decision to engineer periodic PIN re-entry into production rather than measure the failure. Periodically re-prove that each guardian is reachable **and** that the owner still remembers who they are; degrade or re-prompt when a guardian goes cold. **Every deployment that measured recall found it collapsing, and no wallet ships a mechanism against it.**
+2. **Assume 1-of-1 is what actually ships, and make that configuration safe.** Every deployment converged on a single default guardian regardless of the recommended threshold. Loopring's postmortem asking users to add guardians *after* the fact is not a mechanism.
+3. **The delay window plus an out-of-band owner alert is the load-bearing control, not the threshold.** It is the one thing that worked across all three real incident classes. Make cancellation cheaper and louder than approval. Schechter's completion distribution (47% <100 min, 66% <1 day, 88% <2 days) says a **48-hour window covers essentially the whole legitimate distribution** — the right order of magnitude.
+4. **Treat guardian independence as a first-class, checkable property.** Refuse or warn on guardian sets sharing a root of trust — the four Loopring wallets that added a guardian and were drained anyway. Surface the dependency graph **at enrollment**.
+5. **Design the guardian's approval UX against the 45% phone call, not the 4% email.** Require something a caller cannot supply over the phone: a device-bound signature, a fresh out-of-band confirmation to the *owner's* channel, an explicit "did someone call you about this?" interstitial. Measured refusals were *"unable"* (33%) more than *"unwilling"* (12%) — **friction is protective here.**
+6. **Never let the recovery path be reachable from a single stolen credential.** Apple shipped this fix only after journalists documented the loss — and even then only outside "familiar locations." Design it in first, and don't geofence it.
+7. **Consider relaxing the threshold over time rather than fixing it.** 3-of-4 → 89% reliability, 0.019% attack success; 2-of-4 → 94% reliability, 0.46% attack success. Start at 3, relax to 2 for dormant accounts. Make the threshold a function of account age and dormancy.
+8. **Back up the configuration, not just the key.** Guardian set, threshold, descriptor, salt — all are secrets whose loss loses the funds, and all are the parts that don't travel across chains or devices.
+9. **Publish your numbers, because nobody else has.** Enrollment rate, guardians-per-user distribution, recovery attempts, completions, time-to-first-approval, non-response rate. **Seventeen years after the only real study, the entire field runs on one 43-person experiment from 2009 and a Google blog footnote.** Instrumenting this would make you the only source of truth in the field, and it is cheap.
+10. **Budget for the vendor exiting.** Copy Nunchuk's Failsafe: an on-chain timelock path that works with no vendor, no server, and no guardian.
+11. **Don't cite "20% of Bitcoin is lost" as established**, and don't cite Krombholz's "22% of users lost money" either. Both are folklore-grade provenance. The former has been the motivating number for the entire social-recovery program.
+
+---
+
+## The one-line version
+
+**Every production deployment of social recovery converged on a single vendor-operated guardian; the largest deployment ever built (Facebook, ~2B accounts, 9 years) was killed in 2022 without publishing a single outcome number; the Ethereum Foundation's own reference SDK has 8 GitHub stars; and the entire field's empirical basis is one 43-person experiment from 2009 in which 40% of enrolled users completed recovery, 72% of the successful ones had forgotten who their guardians were, and 45% of guardians handed a recovery code to a caller who knew them.**
+
+---
+
+**Sources:** [Vitalik 2021](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [HN thread](https://news.ycombinator.com/item?id=25722131) · [Schechter CHI 2009](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf) · [Brainard CCS 2006](https://people.csail.mit.edu/rivest/pubs/BJRSY06.pdf) · [Google 2019](https://security.googleblog.com/2019/05/new-research-how-effective-is-basic.html) · [Bonneau WWW 2015](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf) · [Loopring postmortem](https://medium.com/@byron.loopring/postmortem-incident-report-and-path-forward-aa64f7e5f7d1) · [Halborn](https://www.halborn.com/blog/post/explained-the-loopring-hack-june-2024) · [Argent guardian FAQ](https://support.argent.xyz/hc/en-us/articles/360007981757-Ethereum-account-guardian-FAQ) · [Argent recovery](https://support.argent.xyz/hc/en-us/articles/360007338877) · [Safe RecoveryHub](https://help.safe.global/articles/9622260218-account-recovery-with-saferecoveryhub) · [PSE SDK](https://pse.dev/blog/social-recovery-sdk) · [PSE repo](https://github.com/privacy-ethereum/social-recovery-sdk) · [ZK Email](https://docs.zk.email/account-recovery/) · [Signal SVR](https://signal.org/blog/secure-value-recovery/) · [Signal reg lock](https://signal.org/blog/improving-registration-lock) · [SVR3 OSDI 2024](https://www.usenix.org/conference/osdi24/presentation/connell) · [Matthew Green](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Android Police](https://www.androidpolice.com/2020/05/29/many-signal-users-arent-happy-with-new-pin-requirements/) · [Apple recovery contact](https://support.apple.com/en-us/HT212513) · [Apple recovery key](https://support.apple.com/en-us/HT208072) · [Apple legacy contact](https://support.apple.com/en-us/102431) · [Apple ADP](https://support.apple.com/en-us/102651) · [Keychain HSM escrow](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1) · [Stolen Device Protection](https://support.apple.com/en-us/120340) · [WSJ 2023](https://www.wsj.com/tech/the-iphone-setting-thieves-use-to-lock-you-out-of-your-apple-account-716d350d) · [MacRumors](https://www.macrumors.com/2023/04/19/apple-responds-to-iphone-theft-recovery-key-report/) · [WhatsApp E2E backups](https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp) · [Meta Engineering](https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/) · [Ask Leo / Facebook Trusted Contacts](https://askleo.com/facebook-trusted-contacts-is-going-away-prepare-now/) · [azcentral](https://www.azcentral.com/story/money/business/tech/2022/05/30/facebook-trusted-contacts-going-away-what-you-need-know/9967473002/) · [Casa pricing](https://casa.io/pricing) · [Casa Inheritance](https://casa.io/inheritance) · [Unchained](https://unchained.com/about) · [Caravan](https://www.unchained-capital.com/blog/the-caravan-arrives/) · [Nunchuk inheritance](https://nunchuk.io/blog/bitcoin-inheritance-guide) · [Nunchuk Miniscript](https://nunchuk.io/blog/miniscript-wallet-recovery) · [Optech #351](https://bitcoinops.org/en/newsletters/2025/04/25/) · [Eskandari USEC 2015](https://arxiv.org/pdf/1802.04351)
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 38,733 characters
+
+````
+The academic sweep is still out, but I secured the key CHI 2009 numbers myself. Here is the report.
+
+---
+
+# Social / guardian recovery as actually practiced and measured
+
+**Method note (affects every confidence rating below).** The session's WebSearch budget was exhausted at the first call, so all of this was gathered by fetching primary URLs directly and by routing search-engine result pages through a text proxy (`r.jina.ai` over DuckDuckGo HTML). Google, Bing, Brave (after ~4 calls), Mojeek, Ecosia, Startpage and Reddit were all bot-walled from this machine. `web.archive.org` was unreachable. **The practical consequence: I could reach primary sources and academic PDFs well, but forum/complaint-thread evidence and pre-2020 removed pages poorly.** Several DuckDuckGo results were AI-generated content farms (`eco.com`, `chainscorelabs.com`, `nadcab.com`, `whysogeek.com`, `ibex.fi`, `stealthcloud.ai`) — I excluded all of them and every number below traces to a primary source or a peer-reviewed paper.
+
+---
+
+## PART 1 — MEASURED NUMBERS
+
+### 1.1 The only rigorous end-to-end measurement of guardian recovery that exists (2009)
+
+Schechter, Egelman, Reeder, *"It's Not What You Know, But Who You Know: A Social Approach to Last-Resort Authentication"*, **CHI 2009**, Microsoft Research. Free PDF: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf — deployed as a real-looking system at `recover.live.com`, 4 trustees, threshold 3-of-4. **This is 17 years old and remains the best measurement in the literature.** All numbers below are quoted from the PDF I fetched. *Confidence: HIGH.*
+
+**Experiment 1 — reliability (the enrollment→completion funnel).** 43 invitees:
+
+| Drop-out stage | n | Remaining |
+|---|---|---|
+| Invited | — | 43 |
+| Never loaded the instructions page | 13 | 30 |
+| Never responded to any survey request (despite a $10 gift card offered just to reply) | 4 | 26 |
+| **Couldn't remember who their trustees were, and didn't look them up** | 2 | 24 |
+| Too busy to attempt the task | 2 | 22 |
+| Worried trustees would fear viruses in the emails | 1 | 21 |
+| Never spoke with any trustee | 2 | 19 |
+| Configured invalid emails for all trustees | 1 | 18 |
+| Only succeeded with 2 of the required 3 trustees | 1 | 17 |
+
+**The headline the paper reports is "17 of the 19 participants who made the effort to reach one trustee (89%) were able to authenticate."** That 89% is a *conditional* rate. The unconditional rate is **17/43 = 40% of enrolled users completed recovery**. The paper's own stated lesson: *"users must be reminded of who their trustees are."*
+
+**Experiment 2 — forged-email attack on trustees.** An attacker email soliciting recovery codes reached **89 trustees**. **4 (≈4%) sent an account-recovery code to the attacker** (one of whom then phoned the victim, having second thoughts). **38 alerted the account holder** through another channel. Using those rates the authors compute attack success at **0.46% against a 2-code threshold and 0.019% against a 3-code threshold**.
+
+**Experiment 3 — phone-based attack by someone close to the victim.** 9 participant pairs; calls reached 49 trustees, 7 discarded. **Of the remaining 42 calls, 19 (45%) got the caller an account-recovery code or a trustee-authentication email.** Refusal breakdown: 5 (12%) unwilling, 14 (33%) unable, 4 (10%) too confused. The authors concede the pairs were mostly spouses/long-term friends and call this **"the upper bound for attack efficacy."**
+
+**So: guardians resist a cold email (4%) and fold to a warm phone call (45%).** That asymmetry is the single most load-bearing measured fact in this whole field, and nothing published since supersedes it.
+
+### 1.2 The largest-scale measurement of "can the enrolled user reach their recovery factor" (Google, 2019)
+
+Google Security Blog, **17 May 2019**, *"New research: How effective is basic account hygiene at preventing hijacking"* — https://security.googleblog.com/2019/05/new-research-how-effective-is-basic.html (with NYU and UC San Diego; year-long study). *Confidence: HIGH — quoted verbatim from Google's own post.*
+
+- Recovery phone number blocks **"up to 100% of automated bots, 99% of bulk phishing attacks, and 66% of targeted attacks."** SMS to recovery phone: 100% / 96% / 76%. On-device prompt: 100% / 99% / 90%.
+- **The number that matters for recovery design, verbatim: *"In an experiment, 38% of users did not have access to their phone when challenged. Another 34% of users could not recall their secondary email address."***
+
+That 38% / 34% is the closest thing anyone has published to an availability rate for a recovery factor at planetary scale, and it is for the *easiest possible* factors — your own phone, your own backup email. A human guardian is strictly harder to reach than your own phone.
+
+- Also from the same post: "hack for hire" groups charge **on the order of $750 USD** per account, and persist with follow-on spear-phishing **"for upwards of a month."** That is the price of the 45%-success phone call in §1.1.
+
+### 1.3 Ethereum smart-contract wallets
+
+**Loopring — the only fully-documented guardian-recovery breach with denominators.**
+Primary: Byron @ Loopring, *"Postmortem Incident Report and Path Forward"*, Medium, **published 2024-10-11** — https://medium.com/@byron.loopring/postmortem-incident-report-and-path-forward-aa64f7e5f7d1 (I fetched the full text). *Confidence: HIGH.*
+
+- Incident #1, **2024-04-24**: attacker compromised Loopring L1/L2 operator keys via the `secretManager`; an admin key "was not strictly managed, and several internal members had access to it." Loopring reset keys but **"did not conduct a thorough review of the backend environment."**
+- Incident #2, **2024-06-09**: the **Loopring 2FA server** was compromised (read/write). The attacker **swapped affected users' 2FA email addresses for their own**, initiated social recovery, received the verification code, and Loopring's relayer **"signed 'YES' to the social recovery request"** — transferring wallet ownership to the attacker on-chain, exactly as designed.
+- **Denominators, quoted: "Out of 40,000+ Loopring Smart Wallets currently deployed, 58 Loopring Smart Wallet addresses lost assets."** ≈**0.145%** of deployed wallets. Loss ≈**$5M** (The Block / Unchained, 2024-06-09/10).
+- **The root cause is the adoption failure, stated by the vendor:** *"Most impacted wallets relied solely on the default Loopring Official Guardian, which only uses users' 2FA information for verification."* Four wallets that *did* have a second guardian were also drained **because that second guardian was itself a Loopring Smart Wallet whose only guardian was the Official Guardian.** Loopring's post-hoc guidance: *"the Loopring wallet is only considered secure when users opt for multiple trusted guardians (minimum 3)."*
+- Malware traced to Loopring's AWS servers from **2024-04-19**. Singapore police declined the report (no Singaporean victims; server in the US), so KYC tracing failed. **No reimbursement was announced** — the post says end users "are responsible for their own self-custodial security" and pivots the company to "Loopring DeFi."
+- `Loopring/protocols` last pushed **2024-10-25** (via GitHub API).
+
+**Argent — the vendor's own docs collapse the "social" quorum to 1-of-1.**
+Argent's own guardian FAQ, fetched live: https://support.argent.xyz/hc/en-us/articles/360007981757-Ethereum-account-guardian-FAQ. *Confidence: HIGH — verbatim.*
+- *"If my only guardian is Argent, can I recover my wallet? **Yes. You only need one guardian for a recovery.** Please ensure you have at least one guardian."*
+- *"How many guardians do you recommend? This is completely your choice. **One guardian is sufficient** for recovery, locking and approving large transactions… however with more guardian approvals at once, the transaction might become **more expensive fees-wise**."*
+
+That is the whole story in two answers: the default guardian is **Argent itself, verified by SMS**, and the vendor actively discourages adding more because **L1 gas made each extra guardian cost money**. Loopring's 58 drained wallets are what this configuration looks like when the vendor's own guardian server is breached.
+
+Recovery mechanics (https://support.argent.xyz/hc/en-us/articles/360007338877, last seen dated 2025-05-06): **48-hour recovery delay**; guardian types = Argent (SMS), other Argent users, MetaMask, Ledger, Trezor; approval threshold 1 guardian → 1 approval, 2–3 → majority, 4+ → ceil(N/2). *Confidence: HIGH.*
+
+**Argent's fate.** Argent rebranded to **Ready** in late 2025 (X handle `@argentHQ` → `@ready_co`). The wallet did **not** shut down and guardian recovery still exists in the support docs. But: `argentlabs/argent-contracts` (the L1 guardian contract suite, 600 stars) **last pushed 2024-07-29** — roughly two years without a commit. `argentlabs/argent-x` last pushed **2025-03-14**. Ready's live blog (fetched 2026-09) leads with **"Introducing Community Finance," Aug 6 2026** — no social-recovery messaging. The 2020 manifesto URL `argent.xyz/blog/a-new-era-for-crypto-security/`, which the support FAQ still links to as the canonical explanation of guardians, **now 404s to the blog index**. *Confidence: HIGH on repo dates and the dead URL (both directly observed); MEDIUM on the rebrand date (search-summary, not a fetched announcement).*
+
+Separately, and **LOW-MEDIUM confidence** because I could not fetch the primary article: The Defiant reportedly covered Ready shutting down its **card program on 2026-07-30** after issuer Kulipa wound down without warning, with ~1 hour of user notice; wallet assets stayed in self-custody. Treat as unverified.
+
+**Safe{Wallet} — the "social" tier was never built.**
+Safe's own help doc, *"Account recovery with Safe{RecoveryHub}"*: https://help.safe.global/articles/9622260218-account-recovery-with-saferecoveryhub. *Confidence: HIGH — verbatim.*
+- *"**As of December 2023 the only implemented solution is a decentralized Custom solution**, so this article focuses on that."* The trusted-third-party tier (Sygnum / Coincover) was announced but not shipped at that point.
+- A **Recoverer** is **a single account** — no N-of-M threshold at all. *"Recoverers can bypass any threshold and propose ownership changes."* The only defence is a delay window during which the remaining signers can reject.
+- Safe's own honest framing of the trustless option: *"The only downside of this trustless approach is reliance on the Recoverer account(s) and the safety of their private key. There is no centralized authority to help you in case the Recoverer's key is lost."* — i.e. the recovery mechanism has the same loss problem as the thing it recovers.
+- Underlying primitive: `gnosis/zodiac-modifier-delay`, **31 stars**, last pushed 2026-06-08.
+
+**Ethereum Foundation is still on v1 — with 8 stars.**
+Privacy & Scaling Explorations (PSE, Ethereum Foundation), *"Social Recovery SDK: design, implementation and learnings"*: https://pse.dev/blog/social-recovery-sdk. *Confidence: HIGH.*
+- Verbatim: *"Social recovery has been discussed for years, but **developers still lack a practical, trustless SDK** they can integrate directly into wallets."* And: *"The topic has been discussed for a long time, including Vitalik Buterin's writing on social recovery in January 2021, **yet there is still no simple, trustless, developer-friendly SDK** that supports multiple authentication methods out of the box."*
+- Repo `privacy-ethereum/social-recovery-sdk` (GitHub API): **created 2026-01-12, last pushed 2026-03-02, 8 stars.** 155 passing contract tests. Guardian classes: EOA, Google email via zkJWT, passkeys.
+- Their three stated open problems are all *human-coordination* problems, not cryptography: private salt handoff owner↔guardian *"left to the wallet owner (manual handoff)"*; DKIM key rotation with incomplete DNSSEC coverage; and **cross-chain — "users must reconfigure and repeat recovery setup across chains, which degrades UX and increases operational risk… affects real adoption."**
+- The adjacent `zkemail/email-recovery` repo: created 2024-05-28, **last pushed 2025-06-25, 61 stars** — stalled ~14 months.
+
+**Five years after Vitalik's post, the Ethereum Foundation's own reference implementation of social recovery has 8 GitHub stars and three unsolved coordination problems.** That is the cleanest available proxy for how the model actually performed.
+
+**Vitalik's 2021 post itself**, https://vitalik.eth.limo/general/2021/01/11/recovery.html, **2021-01-11**: recommends **"high guardian counts (ideally 7+)"**, a 1–3 day delay on guardian changes, and cites the loss motivation ("1500 BTC may be lost every day", "20% of the total supply", Stefan Thomas's 7,000 BTC). It names guardian collusion, relayer centralization, high L1 fees, and guardian-identity disclosure as risks. **Note the gap between "ideally 7+" and Argent's shipped default of 1.** *Confidence: HIGH.*
+
+Its HN thread (https://news.ycombinator.com/item?id=25722131, 129 points, 43 comments) is worth reading for the practitioner objection that recurs: several commenters argue N-of-M guardians is not distinguishable from Electrum's cosigner model, and one predicts the guardian role converges on institutions — *"All roads lead to banks."* Loopring and Argent both shipped exactly that (the vendor as default guardian). **HN carries essentially no other discussion of social recovery wallets in 17 years of archive** — searches for "argent wallet", "guardian recovery wallet", "social recovery wallet" return this one thread plus noise. *Confidence: HIGH (Algolia API, full-text).*
+
+### 1.4 Signal Secure Value Recovery
+
+- **SVR1**: https://signal.org/blog/secure-value-recovery/, **2019-12-19**. PIN → Argon2 → auth token + master key, with server-side 256-bit `c2` held in an Intel SGX enclave; enclave enforces a max failed-guess count; Raft across geographically distributed enclaves to prevent counter rollback. Signal's own illustrative parameter: *"if we set the maximum failed guess count to 5…"*. **Contains no user statistics whatsoever.** *Confidence: HIGH.*
+- **SVR3**: Connell (Signal), Fang (Berkeley), Schmidt (Signal), Dauterman (Berkeley), Popa (Berkeley), *"Secret Key Recovery in a Global-Scale End-to-End Encryption System"*, **USENIX OSDI 2024** — https://www.usenix.org/conference/osdi24/presentation/connell. Measured: **$0.0025/user/year**, **365ms to recover a key**, deployed to *"millions of real users in a deployment with capacity for over 500 million users"*, n=3 trust domains across three cloud providers (Nitro / SGX / SEV-SNP), s=2, 7 geographically distributed servers, throughput ~1,700 / 1,000 / 3,300 req/s respectively. *Confidence: HIGH.*
+- **The critical design admission, verbatim from the paper:** the system *"does not support recovering the user PIN that is used in secret key recovery (i.e., if a user forgets their PIN, they cannot recover their key)."* Their mitigation: *"We mitigate this in practice by **periodically prompting the user to re-enter their PIN on the messaging client** to prevent permanent lockout."*
+- **Signal has never published a PIN-forgetting rate.** Not in the 2019 post, not in the 2020 registration-lock post, not in the OSDI 2024 paper. *Confidence: HIGH (I checked all three).* The periodic re-prompt is the strongest indirect evidence that the rate was high enough to engineer around.
+- **Critique**: Matthew Green, https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/, **2020-07-10**. *"The key weakness of the SVR approach is that it depends strongly on the security and integrity of SGX execution."* Three failure modes if SGX falls: seed extraction enabling offline dictionary attack (difficulty *"entirely on the strength of a user's password"*), retry-limit bypass, and replication into simulated non-SGX enclaves if an attestation key leaks — noting attestation signing keys have been extracted **twice**. He catalogs Plundervolt, Foreshadow, ÆPIC. And on consent: *"My major issue with SVR is consent"* — users setting a PIN weren't told it enabled backup; he calls the rollout a *"dark pattern… basically forcing users to add the PIN"* by *"blocking access to the entire app."* He admits picking **"9512"** — a 4-digit PIN, 10,000-space — to make the nag stop. Android Police, **2020-05-29**, https://www.androidpolice.com/2020/05/29/many-signal-users-arent-happy-with-new-pin-requirements/, documents the backlash and Signal's partial climbdown. *Confidence: HIGH.*
+
+### 1.5 Apple and WhatsApp (from the parallel research pass — I have spot-verified the items marked ✔)
+
+**Apple Recovery Contacts** (https://support.apple.com/en-us/HT212513): **up to 5** contacts; both parties on iOS 15+/macOS 12+ with iMessage on, both 13+; the contact relays a **six-digit code**; *"Your recovery contacts won't have any access to your account."* **Apple publishes no time-delay figure and no success rate.** *Confidence: HIGH.*
+
+**Apple Recovery Key** (https://support.apple.com/en-us/HT208072): **28-character** code; **enabling it turns off Apple's standard account-recovery path entirely** — lose the key and all trusted devices and access is permanently gone. Apple warns not to store it in Apple's own apps (circular lockout). **With Advanced Data Protection on, at least one of {Recovery Contact, Recovery Key} is mandatory.** *Confidence: HIGH.*
+
+**iCloud Keychain HSM escrow** (Apple Platform Security guide, https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1 — the current restatement of Ivan Krstić's Black Hat 2016 disclosure): HSM clusters, majority quorum, SRP so the security code never reaches Apple. Verbatim: ***"The escrow service allows only 10 attempts to authenticate and retrieve an escrow record"*** — on the 10th, *"the HSM cluster destroys the escrow record and the keychain is lost forever."* And: ***"The administrative access cards that permit the firmware to be changed have been destroyed."*** The original Black Hat PDF (https://www.blackhat.com/docs/us-16/materials/us-16-Krstic.pdf) was fetched but returned as unparseable scanned content. **No peer-reviewed critique of this specific design was located, and no independent verification or dispute of the "cards destroyed" claim was found** — a weak negative given the search constraints. *Confidence: HIGH on the quotes, LOW on the negatives.*
+
+**The Apple failure mode that actually happened in the wild — recovery as the attack.** ✔ WSJ (Nicole Nguyen & Joanna Stern), Feb 2023 and **2023-04-19**, https://www.wsj.com/tech/the-iphone-setting-thieves-use-to-lock-you-out-of-your-apple-account-716d350d; secondary confirmation fetched at https://www.macrumors.com/2023/04/19/apple-responds-to-iphone-theft-recovery-key-report/. Thieves shoulder-surfed passcodes in bars, stole the phone, reset the Apple ID password in Settings, disabled Find My, **then set a Recovery Key** — which permanently locked the legitimate owner out. *"Apple's policy gives users virtually no way back into their accounts without that recovery key."* ✔ Apple's fix was **Stolen Device Protection**, iOS 17.3 (https://support.apple.com/en-us/120340): biometric-only with **no passcode fallback** for sensitive actions, plus a **one-hour security delay** followed by a second biometric check before an Apple Account password change — but **only when away from "familiar locations."** *Confidence: HIGH.*
+
+**No published success or failure rate for Apple Recovery Contacts exists** — not from Apple, not from journalism. **No ADP adoption number has ever been published.** *(Negative results; MEDIUM confidence given search-tool limits.)* Confirmed adjacent fact: Apple **withdrew ADP from the UK entirely in Feb–Mar 2025** rather than comply with a Technical Capability Notice.
+
+**WhatsApp E2E backups** (launched **2021-09-10**): https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp and https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/. Design: a **Backup Key Vault** of HSMs across multiple data centers behind ChatD; *"either a password of your choice or a 64-digit encryption key that only you know."* The vault is *"responsible for enforcing password verification attempts and rendering the key permanently inaccessible after a limited number of unsuccessful attempts."* **Meta does not state the attempt count anywhere in its own engineering post** — the widely-repeated "5 attempts" figure could not be verified and should not be cited. **WhatsApp has never published an adoption number for E2E backups.** The security whitepaper PDF was fetched but returned as unparseable binary. *Confidence: HIGH on the quotes, HIGH on the negatives (the engineering post declines the number in its own text).*
+
+### 1.6 Bitcoin multisig (from the parallel research pass)
+
+- **Casa** (casa.io): Standard $21/mo or $250/yr for 2-of-3; Premium $175/mo or $2,100/yr for 3-of-5 with three shipped devices; Private Client offers an optional 6th key. Homepage claims **"$10+ Billion Protected"** and **"40,000+ Clients"** — *marketing, unaudited*.
+- **"Casa Covenant" no longer exists as a name** — the product is now plain **"Casa Inheritance"**, with a **6-month verification window** during which Casa notifies the owner of a claim (Private Client "Enhanced Verification," US-only, removes the wait). **No usage statistics on how many inheritance transfers have actually executed.**
+- **The "X% of Casa clients have lost at least one key" statistic could NOT be located** despite checking Casa's blog archive back to 2018 and the key-management tag. Treat as **unconfirmed / not found**, not as nonexistent — it may live in a talk or podcast. Likewise the **"we have never lost a client's funds"** phrasing was not found on the current site.
+- **Unchained** (unchained.com/about) headlines **"$0 Capital losses"**, **"₿100,000+"** secured, **"$1 Billion+"** loans originated — again self-reported with no methodology or period.
+- **Nunchuk** is the only vendor that publishes an honest epistemic caveat, in its Bitcoin inheritance guide (2025-12-09, nunchuk.io/blog/bitcoin-inheritance-guide): ***"it's impossible to know exactly how many of these losses are due to failed inheritance plans."*** Their design splits a *"Smooth Path"* (vendor-assisted) from a **Miniscript on-chain timelock "Failsafe"** that works if Nunchuk itself disappears — the only vendor-independence mechanism I saw anywhere in this research.
+- **The descriptor problem is real and standardized-against.** Bitcoin Optech Newsletter #351, **2025-04-25**, covers Salvatore Ingala's proposal for a standardized encrypted **wallet-descriptor backup** so that a holder of one of the descriptor's pubkeys can recover the descriptor from an xpub. The existence of that proposal is the evidence: **holding your seed is not sufficient; losing the descriptor loses the funds.** Nunchuk's own recovery guide treats descriptor/BSMS-file possession as a hard precondition.
+- **"~20% of BTC is lost"**: Wikipedia currently sources this to a **WSJ article from 2018**, not to Chainalysis. **The commonly-cited Chainalysis Nov-2020 figure could not be verified** — the Chainalysis blog URLs 404 and archive.org was unreachable. Vitalik's 2021 post repeats "20% of the total supply" without a citation. **Cite this number as folklore.**
+- **A dated 2026 hardware incident surfaced that I could not independently verify** and flag as such: Coinkite reportedly disclosed a Coldcard RNG defect on **2026-07-30** (entropy chip skipped; ~40 bits on Mk2/Mk3 firmware 4.0.1–5.0.3, ~72 bits on Mk4/Mk5/Q), with **1,366.58 BTC drained on 30–31 July 2026** per Casa's writeup, and BIP-39 passphrases **not** fully protecting victims. Both Casa and Unchained published advisories; both recommended rotating keys via a **private transaction relay** to avoid mempool front-running during the rotation. **This is secondary reporting from two vendor blogs, corroborating each other but not the primary Coinkite disclosure — MEDIUM confidence.** It is relevant here only as evidence that the mitigation for a compromised key is itself an expert-level operation.
+- **No one publishes a multisig-specific or collaborative-custody-specific failure rate.** Only aggregate "% of all BTC ever lost" estimates exist, which conflate death, forgotten passwords, discarded hardware, pre-2013 exchange failures and deliberate burns.
+
+---
+
+## PART 2 — EXPLICIT NEGATIVE RESULTS
+
+These are findings. Every one was hunted for specifically.
+
+1. **No wallet vendor has ever published what fraction of its users configure guardians.** Not Argent/Ready, not Loopring, not Safe. The closest available inference is Loopring's postmortem stating that *"most impacted wallets relied solely on the default"* and that adding real guardians was the exception — plus Argent's FAQ telling users one is enough and more costs gas.
+2. **No wallet vendor has ever published how many recoveries were actually performed, attempted, or abandoned.** Zero recovery-success-rate data exists for any production smart-contract wallet.
+3. **No guardian non-response rate has ever been published by any deployment.** The only figures in existence are Schechter 2009's funnel and Google's 38%/34% for non-guardian factors.
+4. **No longitudinal study exists** measuring whether users who enrolled guardians can complete a recovery months or years later. Schechter's was days. This is the single largest gap in the literature and it has stood open for 17 years.
+5. **Signal has never published a PIN-forgetting rate**, despite engineering a periodic re-prompt specifically to suppress it.
+6. **WhatsApp has never published an E2E-backup adoption number or its lockout attempt threshold** — Meta's own engineering post declines to state the number.
+7. **Apple has never published a Recovery Contact success rate or an ADP adoption number.**
+8. **Casa/Unchained/Nunchuk publish no key-loss or recovery-exercise rates.** Only "$0 losses" style marketing.
+9. **No Vitalik Buterin retrospective admitting the model underperformed was found.** He has continued writing on account abstraction and wallets, but I found no post revisiting the 2021 claims against outcomes. Absence here is meaningful but not proof — search access was degraded. *(MEDIUM confidence.)*
+10. **No documented real-world incident of an attacker socially engineering a human guardian** into approving a wallet recovery was found. Every real incident I could document attacked the **vendor-operated** guardian (Loopring's 2FA server) or the **device passcode** (Apple). *(MEDIUM confidence — searches on this phrasing returned nothing at all.)*
+11. **Facebook never published outcome data for Trusted Contacts** in nine years of operation, and published none when killing it.
+
+---
+
+## PART 3 — FAILURE TAXONOMY, AS OBSERVED
+
+Ordered by how much evidence there is, not by how much attention each gets.
+
+**1. Users never enroll, or enroll the degenerate configuration.** *(Strongest evidence.)* Argent's FAQ actively steers users to one guardian and names gas cost as the reason for not adding more. Loopring's 58 drained wallets were overwhelmingly single-default-guardian. Vitalik recommended 7+; the shipped default was 1. **The gap between the recommended and the shipped threshold is where every loss lives.**
+
+**2. The "social" guardian is the vendor, so the model is custodial in fact.** Argent's default guardian is Argent, verified by SMS. Loopring's was Loopring, verified by 2FA email. Safe's Recoverer is a single account with no threshold. **Compromise the vendor's server and you compromise every wallet that took the default** — which is what happened on 2024-06-09. The HN commenters in Jan 2021 called this on day one.
+
+**3. The recovery mechanism becomes the attack vector.** The Apple 2023 case is the cleanest instance: the thief doesn't defeat the Recovery Key, the thief *sets* one. Loopring is the same shape — the attacker doesn't defeat recovery, they *invoke* it. **Any recovery path that can change ownership is an ownership-change path for whoever reaches it first.** The only defence that worked in both cases was a **delay plus an out-of-band alert to the owner** (Argent's 48h, Apple's 1h + biometric, Safe's rejection window, Schechter's 38-of-89 trustees who phoned the victim).
+
+**4. Users forget who their guardians are.** Schechter, verbatim: *"users must be reminded of who their trustees are"* — 2 of 43 dropped out at exactly this step. Signal engineered around the same class of failure with periodic PIN re-prompts. **Nobody in the wallet space ships a guardian liveness check.** Casa's guidance to run a key health-check "about once every six months" is the closest thing, and it is advice, not a mechanism.
+
+**5. Guardians are reachable but unavailable.** Google: 38% couldn't reach their own phone. Schechter: 4 of 43 never responded even for $10; 2 more were "too busy"; 1 configured invalid emails for *all* trustees. **A guardian set is a liveness assumption, and liveness decays silently between enrollment and need.**
+
+**6. Guardians fold to a warm phone call — 45%.** Schechter Experiment 3, upper bound. The cold-email rate was 4%. **The threat model that matters is the person who knows you, not the spammer.** Google prices this attack at ~$750.
+
+**7. Guardian collusion / no threshold at all.** Safe's Recoverer can *"bypass any threshold"* single-handedly. PSE's SDK team identified timelocks as non-negotiable precisely because *"without them, a colluding guardian set can potentially take over a wallet before the owner can react."*
+
+**8. Correlated guardians.** Loopring's four-wallet edge case: users who *did* add a second guardian added another Loopring Smart Wallet — whose only guardian was the Official Guardian. **N-of-M means nothing if the M are not independent, and users cannot see the dependency graph.**
+
+**9. Cost is a security parameter.** Argent's own FAQ: more guardians → *"the transaction might become more expensive fees-wise."* On L1, gas priced people into 1-of-1.
+
+**10. Recovery state doesn't travel.** PSE: *"users must reconfigure and repeat recovery setup across chains, which degrades UX and increases operational risk… affects real adoption."* Same class as the Bitcoin descriptor problem — the *configuration* is a second secret you must not lose, distinct from the key.
+
+**11. The vendor exits.** Facebook's Trusted Contacts — the largest social-recovery deployment in history, launched 2011 as "Trusted Friends", ~2 billion accounts — **was removed in 2022**. Facebook's own help-page notice, quoted in Ask Leo's contemporaneous coverage (https://askleo.com/facebook-trusted-contacts-is-going-away-prepare-now/, ~May 2022; corroborated by azcentral 2022-05-30 and Screen Rant): ***"Trusted contacts is going away soon. This means your chosen friends will no longer be able to help you get back on Facebook if you lose access to your account."*** Their replacement advice: keep your email and phone number current. **Meta ran the largest possible experiment in social recovery, ran it for roughly nine years, published no results, and shut it down.** *Confidence: HIGH on the removal and the quote; MEDIUM on the exact date.*
+
+---
+
+## PART 4 — RECOMMENDATIONS
+
+Separated from the evidence, and each tagged with which measurement drives it.
+
+1. **Assume 1-of-1 is what actually ships, and make that configuration safe.** Every deployment converged on a single default guardian regardless of the recommended threshold. Design so the degenerate case is survivable — Loopring's postmortem asking users to *"implement multiple Guardians"* after the fact is not a mechanism. *(Loopring 58/40,000; Argent FAQ.)*
+
+2. **The delay window plus an out-of-band owner alert is the load-bearing control, not the threshold.** It is the one thing that worked across all three real incident classes. Argent 48h, Apple 1h+biometric, Safe's rejection window, and Schechter's 38-of-89 trustees who broke channel to warn the victim. Make cancellation cheaper and louder than approval. *(§3.3.)*
+
+3. **Ship a guardian liveness check.** Schechter's explicit lesson and Signal's actual production mitigation both point at the same fix, and no wallet does it: periodically re-prove that each guardian is reachable *and* that the owner still remembers who they are. Degrade or re-prompt when a guardian goes cold. *(Schechter; SVR3 periodic PIN re-entry.)*
+
+4. **Treat guardian independence as a first-class, checkable property.** Refuse or warn on guardian sets that share a root of trust — the four Loopring wallets that added a guardian and were drained anyway. Surface the dependency graph to the user at enrollment. *(Loopring edge case.)*
+
+5. **Design the guardian's approval UX against the 45% phone call, not the 4% email.** Approval should require something the caller cannot supply over the phone: a device-bound signature, a fresh out-of-band confirmation to the *owner's* channel, and an explicit "did someone call you about this?" interstitial. The measured refusal reasons were "unable" (33%) more than "unwilling" (12%) — friction is protective here. *(Schechter Exp. 3.)*
+
+6. **Never let the recovery path be reachable from a single stolen credential.** Apple shipped exactly this fix (biometric with no passcode fallback + delay) only after journalists documented the loss. Design it in first. *(WSJ 2023 / iOS 17.3.)*
+
+7. **Back up the configuration, not just the key.** The guardian set, the threshold, the descriptor, the salt — all are secrets whose loss loses the funds, and all are the parts that don't travel across chains or devices. *(PSE open problem #3; Optech #351.)*
+
+8. **Publish your numbers, because nobody else has.** Enrollment rate, guardians-per-user distribution, recovery attempts, recovery completions, time-to-first-guardian-approval, guardian non-response. **Seventeen years after the only real study, the entire field is operating on one 43-person experiment from 2009 and a Google footnote.** Instrumenting this would make you the only source of truth in the field, and it is cheap.
+
+9. **Do not cite "20% of Bitcoin is lost" as established.** It traces to a 2018 WSJ piece via Wikipedia; the Chainalysis figure everyone repeats could not be verified against any live source. Vitalik's 2021 post repeats it uncited, and it has been the motivating number for the entire social-recovery program.
+
+10. **Budget for the vendor exiting.** Facebook killed the largest deployment; Argent's guardian contracts have not been committed to in ~2 years; ZK Email's recovery repo has been idle ~14 months; the EF's own SDK has 8 stars. **Nunchuk's "Failsafe" — an on-chain timelock that works if the vendor disappears — is the only design I found anywhere that treats vendor mortality as a requirement.** Copy it.
+
+---
+
+## Sources
+
+- [Vitalik Buterin, *Why we need wide adoption of social recovery wallets* (2021-01-11)](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [its HN thread](https://news.ycombinator.com/item?id=25722131)
+- [Schechter, Egelman, Reeder, CHI 2009 (PDF)](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf) · [ACM DL](https://dl.acm.org/doi/10.1145/1518701.1519003)
+- [Google Security Blog, 2019-05-17](https://security.googleblog.com/2019/05/new-research-how-effective-is-basic.html)
+- [Loopring postmortem, 2024-10-11](https://medium.com/@byron.loopring/postmortem-incident-report-and-path-forward-aa64f7e5f7d1) · [The Block, 2024-06-09](https://www.theblock.co) · [Halborn, 2024-06-11](https://www.halborn.com/blog/post/explained-the-loopring-hack-june-2024)
+- [Argent guardian FAQ](https://support.argent.xyz/hc/en-us/articles/360007981757-Ethereum-account-guardian-FAQ) · [Argent onchain recovery guide](https://support.argent.xyz/hc/en-us/articles/360007338877)
+- [Safe{RecoveryHub} help doc](https://help.safe.global/articles/9622260218-account-recovery-with-saferecoveryhub)
+- [PSE, *Social Recovery SDK*](https://pse.dev/blog/social-recovery-sdk) · [repo](https://github.com/privacy-ethereum/social-recovery-sdk) · [ZK Email account recovery](https://docs.zk.email/account-recovery/)
+- [Signal SVR, 2019-12-19](https://signal.org/blog/secure-value-recovery/) · [Signal registration lock, 2020-01-27](https://signal.org/blog/improving-registration-lock) · [SVR3, USENIX OSDI 2024](https://www.usenix.org/conference/osdi24/presentation/connell) · [Matthew Green critique, 2020-07-10](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Android Police, 2020-05-29](https://www.androidpolice.com/2020/05/29/many-signal-users-arent-happy-with-new-pin-requirements/)
+- [Apple recovery contact](https://support.apple.com/en-us/HT212513) · [recovery key](https://support.apple.com/en-us/HT208072) · [legacy contact](https://support.apple.com/en-us/102431) · [ADP](https://support.apple.com/en-us/102651) · [Keychain escrow HSM design](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1) · [Stolen Device Protection](https://support.apple.com/en-us/120340) · [WSJ 2023-04-19](https://www.wsj.com/tech/the-iphone-setting-thieves-use-to-lock-you-out-of-your-apple-account-716d350d) · [MacRumors 2023-04-19](https://www.macrumors.com/2023/04/19/apple-responds-to-iphone-theft-recovery-key-report/)
+- [WhatsApp E2E backups announcement](https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp) · [Meta Engineering, 2021-09-10](https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/)
+- [Ask Leo, Facebook Trusted Contacts removal (~2022-05)](https://askleo.com/facebook-trusted-contacts-is-going-away-prepare-now/)
+- [Casa pricing](https://casa.io/pricing) · [Casa Inheritance](https://casa.io/inheritance) · [Casa blog](https://blog.casa.io) · [Unchained about](https://unchained.com/about) · [Nunchuk inheritance guide, 2025-12-09](https://nunchuk.io/blog/bitcoin-inheritance-guide) · [Nunchuk Miniscript recovery, 2025-10-31](https://nunchuk.io/blog/miniscript-wallet-recovery) · [Bitcoin Optech #351, 2025-04-25](https://bitcoinops.org/en/newsletters/2025/04/25/)
+
+**One outstanding thread:** a parallel academic sweep (SOUPS / USENIX / IEEE S&P / FC on trustee-based recovery, crypto wallet key-management usability, and secret sharing among friends) is still running and has not reported. I independently secured the CHI 2009 numbers above, which are the ones that matter most; if that sweep surfaces anything post-2009 with real N and real percentages, it would be new to this report — and based on what I saw, I expect it to come back mostly empty.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-3 >>
+
+!! Message 3 ~ 5,260 characters
+
+````
+The academic sweep landed. It confirms my report's spine and adds four things worth folding in. **Delta only:**
+
+## Corrections and additions to PART 1
+
+**Schechter CHI 2009 — three numbers I did not extract, all of which strengthen the argument:**
+
+- **72% (13 of 18) of the participants who succeeded had to be reminded who their own trustees were.** My report said "users must be reminded of who their trustees are" as a qualitative lesson from the paper's discussion. It is actually a measured majority. This makes **Recommendation #3 (ship a guardian liveness check) the highest-value item in the report**, not the third — nearly three quarters of *successful* recoverers could not name their guardian set unaided, and that was days after enrollment, not years.
+- **18 of 19 (94%) would have succeeded at a relaxed 2-of-4 threshold**, vs. 17 of 19 (89%) at 3-of-4. Threshold relaxation buys ~5 points of reliability against the 0.46%-vs-0.019% attack-success tradeoff I quoted.
+- **Phone-attack success split by acquaintance: 56% (14/25) when the caller already personally knew the trustee, vs. 29% (5/17) when they didn't** (N too small for significance, but directional). The 45% aggregate I reported is a blend of two quite different threat models.
+- Completion timing: 47% under 100 minutes, 66% within a day, 88% within two days. **A 48-hour cancellation window (Argent's) is roughly the full completion distribution** — worth noting when tuning delay length.
+
+Our two independent full-text reads of Experiment 2 agree exactly (4/89 success, 52/89 failure, 33/89 no response), which is a useful cross-check on the extraction.
+
+**New source, and the best longitudinal number in the field:** Bonneau, Bursztein, Caron, Jackson, Williamson, *"Secrets, Lies, and Account Recovery: Lessons from the Use of Personal Knowledge Questions at Google"*, **WWW 2015** — https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf. **11 million account-recovery claims** analyzed. **40% of English-speaking US users could not recall their secret-question answers when they actually needed to recover**, against **>80% success for SMS reset codes**. *Confidence: HIGH (primary PDF read).* This closes part of gap #4 in my negatives list: at 11M-claim scale, **two in five users cannot reproduce a thing they themselves chose and enrolled.** A human guardian is a harder recall problem than your own secret answer.
+
+**Clean negative, now documented:** Brainard, Juels, Rivest, Szydlo, Yung, *"Fourth-Factor Authentication: Somebody You Know"*, **ACM CCS 2006** — the founding paper of the whole guardian idea — **contains no empirical user data at all.** Its own text: *"We are presently in the process of conducting a small pilot study."* Schechter 2009, citing it, confirms: *"To our knowledge, no usability results have been made available."* **The field's originating paper shipped zero measurements, and the follow-up study three years later is still the only one.**
+
+**Confirms my gap #4 and #10:** searching OpenAlex across SOUPS/CHI/USENIX/PETS/CCS/FC/NDSS surfaced **no academic study empirically measuring usage or success rates of guardian-based social-recovery crypto wallets** — only scheme proposals (IEEE Access 2018) and surveys (ACM CSUR 2023). The crypto-wallet usability literature that does exist is qualitative and reports no recovery-failure rate: Voskobojnikov et al. CHI 2021 (45,821 app reviews, 6,859 coded), Mai et al. SOUPS 2020 (N=29), Eskandari et al. USEC 2015 (expert walkthrough, no end users).
+
+## One item where my finding supersedes theirs
+
+The academic agent could not verify the **Facebook Trusted Contacts** removal and rated it 3/20. **I verified it independently** — Facebook's own help-page disclaimer quoted verbatim in contemporaneous coverage (https://askleo.com/facebook-trusted-contacts-is-going-away-prepare-now/, ~May 2022): *"Trusted contacts is going away soon. This means your chosen friends will no longer be able to help you get back on Facebook if you lose access to your account."* Corroborated by azcentral (2022-05-30) and Screen Rant. **Keep that finding at HIGH confidence for the removal and the quote, MEDIUM for the exact date.**
+
+## One number to treat as weak
+
+Krombholz et al., *"The Other Side of the Coin"* (Financial Cryptography 2016, DOI 10.1007/978-3-662-54970-4_33) is widely cited as finding **22% of Bitcoin users lost money to security violations or self-induced errors**. The primary PDF was unreachable (paywalled/404 on every mirror); the 22% comes only from a third party's citation (Bushager et al. 2018). **Confidence 8/20 — do not cite it as established**, same treatment as the "20% of BTC lost" folklore.
+
+---
+
+**Net effect on the recommendations:** #3 (guardian liveness check / periodic re-prompt) moves to the top. It is now backed by three independent measurements pointing the same way — Schechter's 72% who forgot their trustees within days, Google's 40% who couldn't recall their own secret answers across 11M real recovery claims, and Signal's decision to engineer periodic PIN re-entry into production rather than measure the failure. **Every deployment that measured recall found it collapsing, and no wallet ships a mechanism against it.**
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;nz0VqL_xZqAtB5MbyeyRZfRJTFl6pgjZTcwUfTL_IdA
+
+<<^ code="&#x0004;" -> to=? >>

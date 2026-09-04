@@ -1,0 +1,163 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-casa-e44425 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-casa-e44425.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. CASA. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-casa-e44425"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. CASA
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 19,706 characters
+
+````
+I have enough evidence across all five areas. Compiling the final report now.
+
+## Evidence Report: Bitcoin Multisig / Collaborative Custody as Practiced and Measured
+
+Method note: WebSearch was exhausted after 4 queries (session budget hit at 200/200 before this task's searches could run), so this report was built entirely via targeted `WebFetch` calls against primary sources and known/guessed URLs — including following links discovered on those pages. `web.archive.org` was inaccessible to the fetch tool. This constrained coverage of older/removed content (noted explicitly below).
+
+---
+
+### 1. CASA
+
+**Current product structure (fetched live, casa.io/pricing, Sept 2026):**
+- **Standard** — $21/mo or $250/yr — "3-key vaults" (2-of-3 multisig), covers BTC, ETH, USDT, USDC. Client brings own hardware (Ledger, Trezor, Coldcard, Keystone). — **HIGH confidence**, directly fetched pricing page.
+- **Premium** — $175/mo or $2,100/yr — "5-key vaults" (3-of-5), Casa ships 3 hardware devices + Faraday/tamper-evident bags, 1 free device replacement/yr. — **HIGH**.
+- **Private Client** — custom pricing, optional 6th key on BTC vaults (implying 4-of-6 available), unlimited annual device replacements. — **HIGH**.
+- Homepage (casa.io) claims **"$10+ Billion Protected"** and **"40,000+ Clients"** — **marketing claim, unaudited, no methodology given** — LOW-MEDIUM confidence as a factual figure, HIGH confidence that Casa is currently making this claim.
+- Casa now brands its overall approach the **"Wealth Security Protocol"** (docs.casa.io/wealth-security-protocol) — described only in philosophy/architecture terms ("balance loss vs. theft risk"); **no quantified loss-prevention or recovery-success statistics found in this document.**
+
+**"Casa Covenant" — NOT FOUND, apparently renamed/retired.** I searched casa.io's navigation and the dedicated `/inheritance` page directly. The product is now called plain **"Casa Inheritance"**, not "Covenant" — the word "Covenant" appears nowhere on the current site. This is a negative result worth flagging: either Casa renamed the product at some point, or "Covenant" was never an official Casa name (possibly conflated with a similarly-named third-party protocol). **MEDIUM confidence** this represents an actual rename (current live site clearly shows "Inheritance," not "Covenant") — I could not date the rename since archive.org was unreachable.
+
+Current Casa Inheritance mechanics (casa.io/inheritance, fetched live): designate a recipient in-app → owner retains full control → on death/incapacity, recipient initiates a claim → Casa sends the *account owner* notifications over a **6-month verification window** to catch false claims (no court order needed) → after that, vault transfers. "Enhanced Verification" (Private Client, US residents only) removes the 6-month wait. **No usage statistics provided** (how many inheritance transfers have actually executed). — **HIGH confidence** on mechanics (directly fetched), **explicit negative result** on usage stats.
+
+**"We have never lost a client's funds" claim: NOT LOCATED.** I fetched casa.io homepage, /security guess (404), /pricing, /inheritance, docs.casa.io/wealth-security-protocol, and multiple blog posts — none contained this or an equivalent phrase. **Negative result** — either it isn't current messaging, or it lives on a page/format I didn't hit (support.casa.io was 404 on the URL I tried).
+
+**Published loss-rate statistics ("X% of clients have lost at least one key"): NOT LOCATED, despite a targeted hunt.** I fetched:
+- blog.casa.io front page and its "key-management" tag archive (23 posts total, checked titles back to 2018)
+- "The Dos and Don'ts of Bitcoin Key Management" (blog.casa.io/the-dos-and-donts-of-bitcoin-key-management/, ~2020, by Jameson Lopp) — cites only third-party incidents (a vlogger losing $2M on stream, a Redditor losing 40.5 BTC, an $8k loss in 15 minutes) as illustrative anecdotes, **no aggregate Casa client statistics**.
+- "Should you trust a third party for bitcoin security?" (2022, John Tinkelenberg) — cites only FBI bank-robbery and FDIC bank-failure numbers, **no Casa client data**.
+- "Casa is a personal key manager" (2020, Nick Neuman) — raises key loss only as a hypothetical, **no data**.
+- "Key distribution: Tips for making the most of your multisig vault" (2025) — only guidance to run key health-checks "about once every six months," **no loss-rate stat**.
+- casa.io/learn-more/multisig-wallets — explicitly **no statistics** present.
+
+This is a genuine negative result: **despite checking Casa's own blog archive across ~8 years of posts and several product pages, I could not find a published "X% of our clients have lost at least one key" statistic.** It's possible this specific number came from a conference talk, podcast, or tweet (not indexed on the blog) rather than a written blog post, or it's on a page this fetch-only approach didn't reach (no search engine access). Flag this to the requester as **unconfirmed / not found**, not as "doesn't exist."
+
+**Incidents / product changes actually found:**
+- **Coldcard RNG vulnerability (July 30–31, 2026)** — see cross-cutting section 4 below; Casa published "The Coldcard Vulnerability, Explained: Who's at Risk and What to Do Now" (blog.casa.io/coldcard-vulnerability/, ~1 month before Sept 2026 fetch). Casa's response: free security consultations for affected members, migration guidance via private relay (MARA Slipstream) to avoid mempool-visible re-keying, advice to diversify hardware vendors across a multisig quorum. **No Casa-specific client-impact numbers disclosed.** — **HIGH confidence** the incident and Casa's post are real (directly fetched, corroborated independently by Unchained's parallel advisory, below).
+- **"Evolving Casa's defenses against social engineering"** (blog.casa.io, ~3 months before Sept 2026 fetch, so ~June 2026) — cites external stat: "crypto investment fraud was the single largest category of cybercrime losses in the United States in 2025, with Americans losing a collective $9.94 billion" and "20% of social engineering attacks start with an unexpected call." New features shipped: Guardian Mode (Premium), Phone Call Detection, Whitelisting, Suspicious Account Activity monitoring. This reads as Casa responding to a real attack pattern (SIM-swap/social-engineering targeting of high-net-worth self-custody users) rather than a one-off incident post-mortem — **no incident-specific loss figures for Casa clients given**. — **MEDIUM confidence** on the $9.94B figure being accurately attributed (couldn't verify the primary source in this session).
+- **Casa Node:** not mentioned anywhere on the current casa.io site (pricing, homepage) — consistent with this hardware product having been discontinued. I could not date the deprecation (no archive.org access). **LOW-MEDIUM confidence**, inferred from absence rather than an explicit deprecation notice.
+
+---
+
+### 2. UNCHAINED CAPITAL
+
+- 2-of-3 collaborative custody / "Vaults" product confirmed to exist (unchained.com), described as "Institutional-grade cold storage with collaborative multisig custody." **Could not fetch detailed pricing or mechanics** — the specific `/collaborative-custody` page I fetched returned only marketing copy, no pricing table. — **LOW confidence on specifics**, this is a gap, not a negative finding about the product's existence.
+- **Track record claim: "$0 Capital losses"** — displayed as a headline metric on unchained.com/about, alongside **"₿100,000+"** BTC secured on-platform and **"$1 Billion+"** in loans originated. **No methodology, audit, or time-period stated for the "$0 capital losses" figure** — this is a self-reported marketing claim, not an audited statistic. — **MEDIUM confidence** the claim is currently live (directly fetched), **LOW confidence** it should be read as a rigorously verified zero.
+- **"From vaults to networks: Rethinking bitcoin custody"** (unchained.com/blog, published April 11, 2026, updated April 17, 2026) — discusses custody architecture; only quantitative content is a general recommendation that "2-of-3 is more than sufficient" for most cases. Mentions historical losses (landfill hard drive, Mt. Gox, Bitfinex) anecdotally. **No Unchained-specific key-loss/recovery statistics.**
+- **"How multisig protected thousands of bitcoin during the Coldcard incident"** (unchained.com/blog, published August 12, 2026, updated August 25, 2026) — see section 4.
+- **"Coldcard Security Advisory"** (unchained.com/blog, published July 31, 2026, updated August 2, 2026) — Unchained's own incident advisory; states Mk3, Mk4, Mk5 and Q Coldcard models affected (Mk3 most severe), warns "funds in your Unchained vault may be at risk of loss," but **reports no confirmed instances of actual client fund loss** and states they "do not believe there are many clients" in the highest-risk configuration (two Coldcard keys + reused addresses) — **no precise client-impact count given**.
+- **"Introducing the Inheritance Boot Camp"** and a **"Wrench attacks: A closer look at prevalence and prevention"** post exist on the blog (titles/URLs confirmed) but were not deep-fetched in this session — flagging as an area for follow-up if needed.
+
+---
+
+### 3. NUNCHUK
+
+- **"Bitcoin inheritance guide"** (nunchuk.io/blog/bitcoin-inheritance-guide, published **December 9, 2025**) — describes Nunchuk's inheritance approach as "Autonomous Collaborative Custody (On-Chain Solutions)" combining two mechanisms:
+  - **"Smooth Path"** — Nunchuk-assisted recovery for heirs.
+  - **"Failsafe"** — a Miniscript on-chain timelock letting heirs recover funds autonomously if Nunchuk itself becomes unavailable (removes single-vendor dependency risk that plagues company-mediated inheritance flows).
+  - The post cites the general "several million Bitcoin lost forever" claim (unattributed to a specific study in the fetched text) but **explicitly states**: "it's impossible to know exactly how many of these losses are due to failed inheritance plans" — a candid negative-data admission from Nunchuk itself. — **HIGH confidence** this quote is accurate (directly fetched).
+- **"Miniscule/Miniscript wallet recovery"** guide (nunchuk.io/blog/miniscript-wallet-recovery, published **October 31, 2025**) — technical recovery guide confirming the **wallet-descriptor dependency**: recovery requires "Your Nunchuk wallet configuration file (in BSMS or descriptor format)." Descriptors shown are multi-path (`/<0;1>/*`) Miniscript scripts directly loadable into Bitcoin Core. The guide does not explicitly walk through the failure case where the descriptor itself is lost — it assumes descriptor possession as a precondition, implicitly confirming that a lost descriptor (not just a lost seed) is the practical failure mode. — **HIGH confidence** on content, **note**: no recovery-frequency statistics published.
+- No published statistics on how often Nunchuk clients actually exercise recovery/inheritance were located.
+
+---
+
+### 4. "Multisig is harder than it looks" — the Coldcard RNG incident (the strongest, best-dated evidence found in this whole research pass)
+
+This is a real, recent, cross-confirmed postmortem-class event, corroborated independently by two competing custody providers (Casa and Unchained) plus general web knowledge of the disclosure:
+
+- **What happened:** Coinkite disclosed on **July 30, 2026** that Coldcard hardware wallets had a firmware defect causing them to **skip their dedicated entropy-generation chip**, producing seed phrases with far less randomness than intended.
+- **Severity by model (per Casa's writeup):**
+  - Mk2 & Mk3, firmware 4.0.1–5.0.3: ~40 bits of entropy instead of the intended 128.
+  - Mk4, Mk5, Q (pre-hotfix): ~72 bits, potentially as low as ~32 bits under targeted attack.
+- **Hotfixes released July 31, 2026.**
+- **Confirmed real-world loss: 1,366.58 BTC drained from Coldcard wallets on July 30–31, 2026**, per Casa's blog post — this is a **measured, dated, on-chain-traceable figure**, not a marketing estimate. — **HIGH-MEDIUM confidence**: figure came from Casa's own writeup (secondary reporting of the drain, not a primary Coinkite disclosure I fetched directly), but it's stated as a specific, falsifiable on-chain number rather than a vague claim.
+- **Critically: passphrases did NOT fully protect users.** Casa's post explicitly notes "people who had a passphrase in place have still lost funds," including "at least one reported case of a Mk3 drained despite a passphrase" — directly contradicting the common self-custody advice that a BIP-39 passphrase is a reliable mitigation against a compromised-seed scenario.
+- **Multisig's actual protective value, per Unchained's own postmortem** ("How multisig protected thousands of bitcoin during the Coldcard incident," Aug 12–25, 2026): multisig helped via (1) requiring multiple compromised keys, not one; (2) public keys not being needed/revealed until broadcast, limiting attacker reconnaissance; (3) added computational cost to match compromised keys to specific addresses. Unchained's own language is that multisig provided "substantial security enhancement" and "additional fault-tolerance and time to respond" — **not immunity**. No specific dollar/BTC figure was given for Unchained-specific savings.
+- **Neither company disclosed precise client-level impact numbers** (accounts affected, BTC at risk in their own vaults, keys rotated) — both advisories are qualitative/precautionary in tone despite being detailed technically.
+- **Both companies' prescribed remedy converged on the same non-trivial operational step**: migrate funds off the compromised keys using a **private transaction relay** (Casa recommended MARA Slipstream) to avoid revealing the destination/rotation on the public mempool where an attacker racing to derive the compromised key could front-run the move. This is itself evidence that "multisig is harder than it looks" — the mitigation isn't just "rotate a key," it requires understanding mempool visibility attacks during the rotation itself.
+- This event is a much better-documented, more recent instance of the "multisig failure modes" literature than anything I found from Lopp's own writing in this session (his front-page posts from the last year — Aug 2026 back to Mar 2025 — are dominated by BIP-110/block-size/quantum/FCC-KYC topics; **I did not find a live, fetchable Lopp post specifically titled "The Uncomfortable Truths of Bitcoin Self-Custody"** — likely it exists as a conference talk/slide deck rather than a blog.lopp.net post, or it's an older post no longer surfaced by the URLs I tried. **Negative result**, flagged explicitly.).
+
+**Wallet-descriptor-not-just-seeds problem — corroborated from two independent angles:**
+- Bitcoin Optech Newsletter #351 (**April 25, 2025**, bitcoinops.org) covered a proposal by **Salvatore Ingala** for **"a standardized backup scheme for wallet descriptors"**: encrypts a descriptor with a deterministic 32-byte secret, XORed per-pubkey, so that anyone holding one of the descriptor's public keys can later decrypt a backed-up copy using their BIP-32 xpub — explicitly designed to solve the case where a user has their seed but has lost the wallet's descriptor/configuration and therefore cannot reconstruct which script/derivation path their funds live under. The fact that this needed a standardized cryptographic scheme is itself strong evidence the "lost descriptor, not lost seed" failure mode is real and recognized industry-wide, not a hypothetical.
+- Nunchuk's own recovery documentation (above) treats descriptor/BSMS-file possession as a hard prerequisite for recovery, independent of seed possession.
+
+---
+
+### 5. Aggregate bitcoin loss estimates
+
+- **Wikipedia's "Bitcoin" article** (fetched live) currently cites: **"It is estimated that around 20% of all bitcoins are lost"** — sourced to a **Wall Street Journal article from 2018** (citation id `wsj_1530798731-84` in Wikipedia's reference list). — **MEDIUM confidence**: this is Wikipedia's currently-cited source, but WSJ 2018 is not Chainalysis, and I could not independently verify the WSJ article's own methodology (didn't fetch WSJ directly).
+- **The commonly-cited "Chainalysis ~2.78–3.79 million BTC lost (~17–23% of supply), November 2020" figure — I could NOT locate or verify this directly in this session.** I tried:
+  - chainalysis.com/blog/bitcoin-lost-supply/ — 404
+  - chainalysis.com/blog/bitcoin-supply-in-profit-2024/ — 404
+  - chainalysis.com/blog/ index — the live blog listing (paginated to 47 pages, dated July–September 2026) **does not surface any post about lost/dormant bitcoin** in what the fetch returned; would need to page back further or use their search, which I don't have access to.
+  - coindesk.com's Nov 2020 writeup of the report — 429 (rate limited)
+  - forbes.com's parallel writeup — 403 (blocked)
+  - web.archive.org — blocked entirely for this tool ("Claude Code is unable to fetch from web.archive.org")
+  - This is a genuine, explicit **negative result**: the widely-repeated "Chainalysis ~20% lost" figure could not be confirmed against a live primary or easily-reachable secondary source in this session. It should be treated as **commonly cited but unverified here** — report it to the user with that caveat rather than as confirmed.
+- I found **no other measured, peer-reviewed, or firm-published study of self-custody *failure rates*** (as opposed to one-time aggregate lost-supply estimates) in this session — i.e., nothing quantifying "what fraction of self-custody or multisig setups fail per year," only the aggregate "X% of all BTC ever mined is lost" framing, which conflates all causes (death, forgotten passwords, discarded hardware, exchange failures pre-2013, deliberate burns) into one number without attribution by custody model. This is itself a notable negative finding: **no one appears to publish a multisig-specific or collaborative-custody-specific loss/failure rate** — only aggregate single-key self-custody loss estimates and anecdotal incident writeups (like the Coldcard event) exist in what I could reach.
+
+---
+
+### Summary of confidence levels
+
+| Finding | Confidence | Basis |
+|---|---|---|
+| Casa current pricing tiers (2-of-3 / 3-of-5 / optional 4-of-6) | HIGH | directly fetched casa.io/pricing |
+| "Casa Covenant" now branded "Casa Inheritance" | MEDIUM | live site has no "Covenant" mention; couldn't date the rename |
+| Casa/Unchained published client key-loss-rate statistics | **NOT FOUND** | targeted search of ~8 years of Casa blog archive + product pages |
+| Casa "$10B+ protected / 40,000+ clients" | MEDIUM (as current marketing claim) | directly fetched, no audit/methodology given |
+| Unchained "$0 capital losses / ₿100,000+ secured" | MEDIUM (as current marketing claim) | directly fetched, self-reported, no audit |
+| Coldcard RNG vulnerability, disclosed July 30, 2026, 1,366.58 BTC drained | HIGH-MEDIUM | corroborated independently by both Casa's and Unchained's own advisories |
+| Passphrases did not fully protect against the Coldcard bug | HIGH | direct quote from Casa's post |
+| Standardized wallet-descriptor backup scheme (Ingala, via Optech #351, Apr 25 2025) | HIGH | directly fetched Optech newsletter |
+| "~20% of BTC lost" (Wikipedia, citing WSJ 2018) | MEDIUM | Wikipedia's stated source, WSJ primary not verified |
+| "Chainalysis ~2.78-3.79M BTC / 17-23% lost, Nov 2020" | **NOT VERIFIED THIS SESSION** | primary and secondary sources unreachable (404/403/429/archive.org blocked) |
+| Jameson Lopp's "Uncomfortable Truths of Bitcoin Self-Custody" essay | **NOT LOCATED** on blog.lopp.net | likely a talk/deck, not a blog post, or an older URL no longer resolving |
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;v7-6Q_yn7XZ68nlyzXqH2oHf0icNQXWmAvHTKMIR5jU
+
+<<^ code="&#x0004;" -> to=? >>

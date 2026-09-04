@@ -1,0 +1,175 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-apple-account-key-recovery-f29266 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-apple-account-key-recovery-f29266.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: TOPIC A — Apple Account/Key Recovery. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-apple-account-key-recovery-f29266"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! TOPIC A — Apple Account/Key Recovery
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 21,478 characters
+
+````
+# Research Report: Apple Account/Key Recovery & WhatsApp E2E Encrypted Backups
+
+**Methodology note:** WebSearch was unavailable for this task (session budget exhausted before I began). I relied on direct WebFetch of primary-source URLs (Apple, WhatsApp/Meta, Signal) plus Bing's search/news endpoints as a substitute search layer. Bing repeatedly served generic/filtered result pages rather than full result sets, and Reddit, Wired, The Verge, Ars Technica, WSJ, archive.ph, old.reddit.com, Mojeek, DuckDuckGo, Ecosia, and Startpage were all unreachable (blocked, 403, or CAPTCHA) from this environment. This materially limited the journalism/forum-complaint side of both topics — flagged explicitly below.
+
+---
+
+## TOPIC A — Apple Account/Key Recovery
+
+### A1. Account Recovery Contacts — MEASURED FACTS (confidence: HIGH — Apple's own support doc)
+Source: [support.apple.com/en-us/HT212513](https://support.apple.com/en-us/HT212513) ("Add a recovery contact to your Apple Account")
+- You can add **up to five** recovery contacts.
+- Requirements: both parties on iOS/iPadOS 15+ or macOS Monterey (12)+; both must have iMessage turned on; both must be over 13; two-factor authentication should be enabled.
+- Mechanics: during account recovery your contact receives a **six-digit code** they relay to you; entering it lets you reset your Apple Account password.
+- Explicit limit on scope: **"Your recovery contacts won't have any access to your account."**
+- No specific time-delay figures are published — the page only says recovery "can take longer if you don't have a recovery contact to help," without quantifying either case.
+- You're notified if a recovery contact declines the role or removes themselves.
+
+### A2. Recovery Key — MEASURED FACTS (confidence: HIGH — Apple's own support doc)
+Source: [support.apple.com/en-us/HT208072](https://support.apple.com/en-us/HT208072) ("Create a recovery key for your Apple Account")
+- A recovery key is a **28-character secret code**.
+- Requires iOS/iPadOS 14+ or macOS Big Sur+, and 2FA enabled.
+- **Critical distinction from Recovery Contact**: enabling a Recovery Key **turns off Apple's standard account-recovery process** entirely. Without the key and without a trusted device, account access is **permanently lost** — Apple states there is no override.
+- Apple explicitly warns not to store the key in Apple's own apps (Passwords, Notes, iCloud Drive) since those require account access to retrieve — a circular-lockout risk.
+- With Advanced Data Protection (ADP) enabled, you are **required** to set up at least one of {Recovery Contact, Recovery Key} — ADP cannot function with Apple's standard recovery path alone, since Apple by design cannot decrypt the data to help you back in.
+
+### A3. Legacy Contact (post-mortem) — MEASURED FACTS (confidence: HIGH)
+Source: [support.apple.com/en-us/102431](https://support.apple.com/en-us/102431)
+- Distinct purpose from Recovery Contact: grants a trusted person access to a **deceased** user's account data, via a Legacy Contact access key plus Apple's Digital Legacy website.
+- Apple states some data "might be end-to-end encrypted and Apple isn't able to decrypt it" even for a Legacy Contact — i.e., ADP-protected categories can remain inaccessible even post-mortem unless the requester also has the device passcode.
+- Framed by Apple as safer/easier than the two alternatives it lists: a permanent-deletion request, or a court order.
+
+**Three-way summary (my synthesis, not a direct Apple quote):**
+| Mechanism | When used | Access granted | Failure mode |
+|---|---|---|---|
+| Recovery Contact | Locked out, alive | Contact gets a 6-digit code only, no account access | Apple's fallback recovery still available, just slower |
+| Recovery Key | Locked out, alive | User-held 28-char secret | **Permanent** lockout if lost with no trusted device — no Apple fallback |
+| Legacy Contact | Account holder deceased | Designated person gets defined data categories | E2E-encrypted (ADP) categories may stay inaccessible |
+
+### A4. Journalism / user-complaint data on recovery-contact success/failure rates
+**Negative result, explicitly:** I was unable to retrieve any WSJ Joanna Stern reporting (the well-known 2023 "iPhone thieves locking victims out of Apple ID" series), Reddit threads, or Apple Discussions complaint threads in this session — WSJ, Reddit, and archive mirrors were all unreachable from this tool, and Apple's own community-forum search page requires JavaScript so returned no thread content via WebFetch. Bing's news index (queried directly, [bing.com/news/search](https://www.bing.com/news/search?q=%22iPhone+thieves%22+Apple+ID+passcode+WSJ)) returned **zero matches** for the WSJ headline and related phrasing, likely because that reporting is from Feb 2023 and has aged out of Bing News' index. **No quantified success/failure rate for Recovery Contact usage — from journalism, Apple, or user forums — was found anywhere in this session.** This should be treated as a genuine evidentiary gap, not as evidence the mechanism works reliably.
+
+What I can report with medium confidence from background/training knowledge only (**not verified this session, flag as unconfirmed**): the WSJ "passcode thieves" reporting (Stern/Nguyen, ~Feb 2023) described victims whose attackers changed the Apple ID password via the device passcode faster than any recovery-contact/recovery-key mechanism could be invoked — the core failure mode reported was that a stolen, unlocked device with passcode knowledge lets a thief change account security settings directly, bypassing the need to defeat recovery contacts at all. I could not re-verify this claim live and it should not be cited as measured fact.
+
+### A5. iCloud Keychain HSM Escrow — MEASURED FACTS (confidence: HIGH — Apple's current Platform Security Guide)
+Source: [support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1)
+- Design: **clusters of HSMs** sit behind iCloud; each cluster member holds a key encrypting the escrow records it watches; a **majority quorum** of the cluster must agree to unwrap and release a record.
+- Recovery requires three factors: Apple Account credentials, SMS to a registered phone, and the iCloud Security Code — verified via **Secure Remote Password (SRP)** so the code itself is never transmitted to Apple.
+- **Exact figure, quoted verbatim: "The escrow service allows only 10 attempts to authenticate and retrieve an escrow record."** On the 10th failed attempt, **"the HSM cluster destroys the escrow record and the keychain is lost forever."**
+- Administrative safeguard, quoted verbatim: **"These policies are coded in the HSM firmware. The administrative access cards that permit the firmware to be changed have been destroyed."** Any attempt to alter firmware or access the private key triggers automatic key deletion by the cluster.
+- This is Apple's *current* official documentation restating the design Ivan Krstić first disclosed publicly at Black Hat 2016 ("Behind the Scenes of iOS and Mac Security"). I could not retrieve readable text from the original Black Hat PDF ([blackhat.com/docs/us-16/materials/us-16-Krstic.pdf](https://www.blackhat.com/docs/us-16/materials/us-16-Krstic.pdf) — fetched but returned as an unparseable image/scanned PDF to this tool) or find a live secondary write-up (Wired's 2016 Andy Greenberg piece and other coverage were unreachable). **The "admin cards destroyed" and "10-attempt" figures are confirmed from Apple's current guide, not independently cross-checked against the 2016 talk transcript in this session.**
+
+### A6. Academic / security-researcher critique of the HSM design
+Source: [blog.cryptographyengineering.com](https://blog.cryptographyengineering.com) (Matthew Green, Johns Hopkins cryptographer) — site's own search for "icloud" surfaced:
+- ["U.K. asks to backdoor iCloud Backup encryption"](https://blog.cryptographyengineering.com/2025/02/12/u-k-asks-to-backdoor-icloud-backup-encryption/) (Feb 12, 2025) — confirms and explains Advanced Data Protection: when enabled, backups are encrypted under the device passcode such that "neither Apple nor hackers can access it"; explicitly notes ADP is **opt-in**, and criticizes Apple for not defaulting to it or promoting it at setup. Covers the UK's Technical Capability Notice demanding Apple "quietly modify... its systems" to weaken this — Apple's response (confirmed independently by later coverage below) was to **withdraw ADP entirely from the UK** rather than comply.
+- ["Three questions about Apple, encryption, and the U.K."](https://blog.cryptographyengineering.com/2025/02/23/three-questions-about-apple-encryption-and-the-u-k/) (Feb 23, 2025) — same thread.
+- Older posts exist (["iCloud: Who holds the key?"](https://blog.cryptographyengineering.com/2012/04/05/icloud-who-holds-key/), 2012; ["A note on the iCloud 'experiment'"](https://blog.cryptographyengineering.com/a-note-on-the-icloud-experiment/), 2013) but I did not fetch their full bodies — listed by title/date only, not content-verified this session.
+- I could **not** find a formal peer-reviewed academic paper specifically analyzing/critiquing the iCloud Keychain HSM escrow design (as distinct from general commentary). **Negative result — no such paper was located in this session**, though the search-engine limitations mean this is a weak negative (absence of evidence, not evidence of absence).
+- I could **not** locate any claim, academic or journalistic, that specifically disputes or verifies the "admin cards were physically destroyed" story as unverifiable/unverified — I found no independent skepticism of it in what I could reach this session. This appears to be an unsubstantiated gap given the tool constraints, not a confirmed absence in the wider literature.
+
+### A7. ADP "Apple cannot recover data" stance + adoption numbers
+Source: [support.apple.com/en-us/102651](https://support.apple.com/en-us/102651)
+- ADP protects **25 iCloud data categories** end-to-end, including iCloud Backup, Photos, Notes, Messages in iCloud, Health data, Passwords/Keychain, Wi-Fi passwords, and more (full quoted list obtained).
+- Some metadata (file modification dates, checksums) stays server-side-keyed to support dedup — a caveat to the "Apple cannot access anything" framing.
+- ADP became available with **iOS 16.2 / iPadOS 16.2 / macOS 13.1** (confirmed via the support page's own version-gating language; the Dec 13, 2022 release date and later global rollout through 2023 is consistent background knowledge but the exact date string was not present verbatim in what I fetched — treat the OS-version fact as HIGH confidence, the calendar date as MEDIUM/background).
+- **Adoption numbers: explicit negative result.** Apple's own ADP support page states no usage statistics. Multiple Bing News queries for "Apple Advanced Data Protection adoption" surfaced only feature explainers and UK-backdoor-dispute coverage (e.g., [Help Net Security, Mar 19 2025](https://www.helpnetsecurity.com/2025/03/19/protecting-apple-icloud-data-uk/); [TechRepublic, ~Aug 2026](https://www.techrepublic.com/article/news-apple-challenges-uk-encrypted-icloud-order-emea/)) — **no publisher, journalist, or Apple statement with an ADP enrollment number or percentage was found anywhere in this session.** This should be reported as a hard negative: Apple has never published ADP adoption figures, and no third party appears to have obtained or estimated them.
+- Notable and well-corroborated (multiple independent Bing News hits, HIGH confidence): in **February–March 2025**, in response to a UK government Technical Capability Notice demanding backdoor access, **Apple withdrew ADP entirely for UK users** rather than weaken it — [IBTimes UK](https://www.ibtimes.co.uk/apple-challenges-uk-government-encrypted-icloud-backups-1812405), [MacDailyNews](https://www.macdailynews.com/2025/04/07/uk-bid-to-conceal-apple-icloud-encryption-dispute-fails/), [TechRepublic](https://www.techrepublic.com/article/news-apple-challenges-uk-encrypted-icloud-order-emea/), and the Cryptography Engineering blog posts above all confirm this independently.
+
+---
+
+## TOPIC B — WhatsApp End-to-End Encrypted Backups
+
+### B1. Launch and core design — MEASURED FACTS (confidence: HIGH)
+Source: [blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp](https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp) (WhatsApp's own announcement, rollout began "today" — well-known as **Sept 10, 2021**, though the exact date string wasn't present verbatim in the fetched text, so treat the date as MEDIUM confidence corroborating background knowledge)
+- Two protection options, quoted verbatim: **"either a password of your choice or a 64-digit encryption key that only you know."**
+- Explicit claim: "Neither WhatsApp nor your backup service provider will be able to read your backups or access the key required to unlock it."
+- Framed against WhatsApp's then-user base of "more than 2 billion users"; rollout was gradual ("rolling out slowly to those with the latest version").
+
+### B2. Technical architecture — MEASURED FACTS (confidence: HIGH — Meta Engineering blog)
+Source: [engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/](https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/)
+- A **Hardware Security Module (HSM)**-based **Backup Key Vault**, geographically distributed across multiple data centers, sits behind a front-end service (ChatD) that brokers key retrieval requests.
+- Quoted verbatim on lockout behavior: the vault is **"responsible for enforcing password verification attempts and rendering the key permanently inaccessible after a limited number of unsuccessful attempts."**
+- **Exact attempt count: NOT specified in Meta's own engineering post** — this is an explicit negative result from the primary source itself, not just a search-tool limitation.
+- Flow for password-protected backups: password entered client-side → sent (encrypted in transit) to vault → vault verifies → vault returns the actual encryption key → client decrypts backup locally. The 64-digit-key option bypasses the password/vault verification path entirely (user supplies the raw key directly).
+- No key-derivation-function specifics (e.g., confirmation of Argon2/PBKDF2/scrypt or parameters) were present in the fetched engineering post.
+
+### B3. Exact lockout attempt number
+I could not verify a specific number (e.g., "5 attempts") from any live, fetchable source in this session — Meta's own engineering blog explicitly declines to state one, and I could not retrieve WhatsApp's official security whitepaper as readable text (the PDF at [whatsapp.com/security/WhatsApp_Security_Encrypted_Backups_Whitepaper.pdf](https://www.whatsapp.com/security/WhatsApp_Security_Encrypted_Backups_Whitepaper.pdf), which redirects to a Facebook CDN-hosted PDF, returned to this tool as unparseable binary/image content rather than extractable text, and I was not able to route it through a text-extraction proxy successfully). **This is a genuine gap — report the exact attempt threshold as unconfirmed rather than repeating an unverified "5 attempts" figure from memory.**
+
+### B4. Published adoption numbers
+**Explicit negative result:** No Meta/WhatsApp statement, blog update, or journalism with a concrete enrollment number or percentage for E2E backup adoption was found in this session. WhatsApp's launch post frames the feature only in terms of its addressable base (2 billion+ users), not opt-in uptake. No subsequent adoption figures were located via any reachable source.
+
+### B5. Lockout complaints (forgotten password / lost 64-digit key)
+**Explicit negative result — could not be researched this session.** Reddit (www.reddit.com and old.reddit.com), WSJ, Wired, The Verge, and Ars Technica were all unreachable from this environment, and general web-search engines returned generic/non-matching result pages rather than actual complaint threads for every query attempted (multiple phrasings tried against Bing, Mojeek, DuckDuckGo, Ecosia, Startpage — all either blocked or non-responsive with relevant content). **No measured rate of backup loss due to forgotten credentials was found, and I was unable to even qualitatively confirm the existence of such complaints via journalism or forums in this session** — this is a tooling limitation, not a substantive finding that no such complaints exist.
+
+### B6. Critiques of the HSM design + comparison to Signal SVR — MEASURED FACTS (confidence: HIGH for Signal's own design doc)
+Source: [signal.org/blog/secure-value-recovery/](https://signal.org/blog/secure-value-recovery/) (Signal's own technical writeup)
+- Signal's Secure Value Recovery (SVR) uses **Intel SGX enclaves** rather than dedicated HSM hardware clusters — a materially different trust model from both Apple's and WhatsApp's HSM approaches.
+- Key derivation: user PIN/passphrase → **Argon2** stretching → 32-byte key → split into an authentication token and a master encryption key; a random 256-bit `c2` value is held server-side inside the enclave.
+- **Quoted design rationale for attempt-limiting**: "if we set the maximum failed guess count to 5, then an attacker who obtained access to the service... would only get 5 password guesses rather than an unlimited number." (Note: this "5" is Signal's own illustrative/actual parameter for **SVR**, not a confirmed figure for WhatsApp — the two are related Meta-family/Signal-lineage designs but distinct systems, and conflating them would be an error.)
+- Signal's differentiators over an HSM-only approach: SGX remote attestation (clients can verify server code integrity), **Raft consensus** across replicas to keep retry counters tamper-proof and prevent rollback attacks, and published open-source code ([github.com/signalapp/SecureValueRecovery](https://github.com/signalapp/SecureValueRecovery)) for independent audit — a transparency posture neither Apple's nor WhatsApp's closed-HSM designs match (Apple and WhatsApp's cluster firmware/hardware is not independently auditable by outside researchers in the way Signal's open-sourced enclave code is).
+- I did **not** find a direct third-party cryptographer critique specifically targeting WhatsApp's Backup Key Vault (as opposed to Apple's, which has more public commentary via Matthew Green). **Negative result** — likely reflects both the tooling gaps in this session and that WhatsApp's HSM vault has drawn less public security-research scrutiny than Apple's older, longer-standing iCloud Keychain escrow.
+
+---
+
+## Summary of explicit negative findings (no data located)
+1. No published success/failure rate for Apple Account Recovery Contact usage (Apple, journalism, or forums).
+2. No WSJ/Joanna Stern reporting content retrievable this session (site blocked) — cannot confirm details, only that such reporting exists per background knowledge.
+3. No formal academic paper specifically critiquing Apple's iCloud Keychain HSM escrow design was located.
+4. No independent verification or dispute of Apple's "admin cards were destroyed" claim was found.
+5. No published Apple ADP adoption numbers exist anywhere I could reach (and apparently nowhere at all, per absence across multiple outlets covering ADP).
+6. No exact WhatsApp Backup Key Vault attempt/lockout number is stated even in Meta's own engineering blog — genuinely unpublished, not just hard to find.
+7. No published WhatsApp E2E backup adoption numbers.
+8. No forum/journalism evidence on WhatsApp backup lockout complaints was retrievable this session (tooling limitation).
+9. No direct cryptographer critique specifically of WhatsApp's HSM vault design (as distinct from Apple's) was found.
+
+## Key sources actually verified (primary sources, high confidence)
+- [support.apple.com/en-us/HT212513](https://support.apple.com/en-us/HT212513) — Recovery Contact
+- [support.apple.com/en-us/HT208072](https://support.apple.com/en-us/HT208072) — Recovery Key
+- [support.apple.com/en-us/102431](https://support.apple.com/en-us/102431) — Legacy Contact
+- [support.apple.com/en-us/102651](https://support.apple.com/en-us/102651) — Advanced Data Protection
+- [support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1) — Keychain escrow HSM design, 10-attempt limit, admin-cards-destroyed claim
+- [blog.cryptographyengineering.com/2025/02/12/...](https://blog.cryptographyengineering.com/2025/02/12/u-k-asks-to-backdoor-icloud-backup-encryption/) — Matthew Green on ADP/UK backdoor
+- [blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp](https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp) — WhatsApp launch announcement
+- [engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/](https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/) — Meta's Backup Key Vault architecture
+- [signal.org/blog/secure-value-recovery/](https://signal.org/blog/secure-value-recovery/) — Signal SVR (comparison point)
+- [ibtimes.co.uk/apple-challenges-uk-government-encrypted-icloud-backups-1812405](https://www.ibtimes.co.uk/apple-challenges-uk-government-encrypted-icloud-backups-1812405), [helpnetsecurity.com/2025/03/19/...](https://www.helpnetsecurity.com/2025/03/19/protecting-apple-icloud-data-uk/) — UK ADP withdrawal corroboration
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;PKW6sMOGmz_gJQrDS8i2aXH2F265DYkcirJjqnrAr-s
+
+<<^ code="&#x0004;" -> to=? >>

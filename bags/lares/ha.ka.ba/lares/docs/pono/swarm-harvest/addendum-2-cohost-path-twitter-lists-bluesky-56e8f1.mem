@@ -1,0 +1,503 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 19,191 characters
+
+````
+Both agents in. Final addendum and synthesis.
+
+---
+
+# ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky
+
+## Cohost — design stance stated, never instrumented
+
+**The thesis, verbatim** — `cohost.org/rc/welcome`, **Wayback capture 2024-01-01**: https://web.archive.org/web/20240101002259/https://cohost.org/rc/welcome (confidence: high)
+> *"**algorithm? what algorithm?** all your follows' posts, in the order they were posted, in a timeline that goes vertically."*
+> *"**metrics are ruining our lives** — modern social media is designed around a vicious feedback loop that keeps users Engaged at the expense of their mental health…"*
+> *"**finding new things** — discovering new posts is tricky without algorithms, but we're committed to getting it right and trying new things until we get there. **curation should be done by people, not computers.**"*
+
+They explicitly rejected the private-garden answer: *"on a web without functioning search engines, blogs and friends-only sites may be okay for some, but they leave people who are scraping by on public visibility and word of mouth in the lurch."*
+
+**Staff's own admission of the cost** — `cohost.org/staff/post/1254822-introducing-numbers`, **2023-04-01** (an April Fools post; the framing sentence is real):
+> *"**Many potential users bounce off of cohost due to a lack of metrics. They want a number that gets bigger the more they post good.**"*
+
+**Reader-side primitives:** bookmarked tags shipped **2022-04-22** (`staff/post/5327`); tag synonyms **2024-08-18**; account silencing confirmed via staff thread `staff/post/3273958`, **2023-10-23**. Notably, a plain chronological **following feed shipped only 2023-10-23 — ~16 months after public launch.** *Tag-level* silencing: **NOT REACHED** (help.antisoftware.club Wayback captures replay as JS shells).
+
+**The shutdown post** — `cohost.org/staff/post/7611443-cohost-to-shut-down`, jae, **2024-09-09 7:48 PM**, Wayback capture **2024-12-30**. HN: https://news.ycombinator.com/item?id=41492807 (136 pts). Confidence: high.
+> *"lack of funding and burnout… **we have never been profitable**… policy changes from **Stripe** forced us to cancel [eggbux] earlier this year."*
+> *"**We have all been on-call 24/7/365 since we launched two and a half years ago.**"*
+> *"**MAU and MRR are down across the year.** We've managed to build a social media platform that many of our users love, but **we just don't have enough users and we don't have the resources to safely scale up.**"*
+
+**Final published financials (Aug 2024)** — expenses **$41,605**, income **$16,307**, net **−$25,297**; **3,046** subscribers, MRR **$19,477**, churn 3.18%; **MAU 16,846** (−9.49% MoM); MAU→subscriber 18%. Staff commentary: *"Not great!"*
+⚠️ **Caveat on the 18%:** that is MAU→subscriber, **not** registered→subscriber. Against a registered base in the low hundreds of thousands it is ~1%.
+
+**Full arc** via lori, *"Cohost's Financials — A Retrospective"*, **2024-03-14**, https://d-shoot.net/cohostfinance.html (live; numbers quoted from staff posts; confidence medium-high for figures, medium for her interpretation — she is a critic). **Instrument warning: ASSC changed its MAU definition between Jul and Aug 2022** ("activated users" → "users who acted"), so the series is not continuous.
+
+| Period | Registered | MAU | Subs | MRR |
+|---|---|---|---|---|
+| Aug 2022 | 19,056 | 4,314 | 476 | $2,223 |
+| Nov 2022 (Twitter exodus) | **111,128** | **37,000** | 1,852 | $8,648 |
+| Dec 2022 | 118,000 | 21,000 | 2,027 | $9,440 |
+| Jun 2023 | ~130,000 | **12,000** | ~1,900 | $9,008 |
+| Nov 2023 | — | ~21,000 | 2,576 | $14,367 |
+| Aug 2024 | — | 16,846 | 3,046 | $19,477 |
+
+ASSC's own stated sustainability gap (June 2023): they *"would need five times the number of subscriptions they have to be sustainable, and more active users than they have total users now."*
+
+**NOT REACHED:** individual monthly financial posts as primaries (CDX indexes them, availability API returns no snapshot); any post-shutdown post-mortem by jae/Colin — **the 2024-09-09 announcement appears to be the last word**; `blog.cohostcafe.com` (unresolvable).
+
+**The negative finding:** ASSC published two years of financials and **never once reported tag-bookmark, silence, or following-feed usage. The design thesis was never instrumented.** Confidence: high.
+
+## Path — **correction to the brief: the cap was 50, not 150**
+
+**Dave Morin, "Introducing The Personal Network," blog.path.com, 2010-11-15** — **Wayback capture 2010-11-16**: https://web.archive.org/web/20101116122646/http://blog.path.com/ (confidence: high)
+> *"Path allows you to capture your life's most personal moments and share them with **the 50 close friends and family** in your life who matter most."*
+> *"**We chose 50 based on the research of Oxford Professor of Evolutionary Psychology Robin Dunbar**… Dunbar's research also shows that personal relationships tend to expand in factors of roughly 3… **50 is roughly the outer boundary of our personal networks.**"*
+> *"**No following, no friending…just sharing with the people who matter most.**"*
+
+**That last line matters for the brief: Path did not invert the follower graph — it abolished it.**
+
+They pre-announced the escape hatch in the FAQ (**Wayback capture 2011-05-14**, https://web.archive.org/web/20110514002743/http://blog.path.com:80/faq):
+> *"**Currently, we have chosen to focus on 50 but we may expand to 150 in the future.**"*
+
+**The 50→150 raise: primary source NOT REACHED.** Wikipedia confirms the sequence (*"Later, Path raised its friend limit to 150 and then removed it entirely"*) but I could not date or source it. Checked and confirmed absent: Path 2.0 announcement (2011-11-29), Path 2.5 (2012-07-25), `/about` (2013-01-14), `/story` (2013-08-23). `path.com/questions` has **no Wayback snapshot**. The 2011-11-29 TechCrunch piece now 404s.
+
+The only account of *why* is an **uncorroborated HN comment (2013-05-05) — confidence low, do not cite**: *"most active users had less then 20 friends… So they upped it to 150, and now they are seeing users in the 50 range they originally wanted."* Note the shape though: **the cap never bound**, and raising the ceiling raised realized behavior — an anchoring effect, not a capacity constraint.
+
+**The product inverted completely by 2017** — `blog.path.com`, "Be the Inspiration," **2017-05-02** (Wayback 2018-09-20):
+> *"**now anyone can be a source of inspiration**… **you can create public moments**… **your friends will stay just that – friends on Path, not public followers.** Also, you can easily turn on or turn off the public follower feature."*
+
+2017-07-14: *"We've replaced the Activity tab with **Explore**… **public moments from millions of Path users around the world**."* Public posts, public followers, global discovery — the Dunbar product was gone in all but name.
+
+**Shutdown** — "The Last Goodbye," **2018-09-17** (Wayback 2018-09-20): *"it is now inevitable to wind down the service to prioritize our work."* Service terminated **2018-10-18**. **No cause given.** Kakao acquired 2015-05-28; Path had turned down a **$100M Google offer in Feb 2011** and raised $2.5M + $8.5M + $30M + $25M — a VC-funded company carrying a growth-hostile constraint.
+
+**Measured evidence the cap helped or hurt: NONE. NOT REACHED.** The only revealed evidence is the progression itself, and it is one-directional: **50 → 150 → removed → public followers. The cap was relaxed three times and never once tightened.**
+
+## Twitter/X Lists — reader-authored, public-by-default, unmeasured
+
+**Nick Kallen, "Soon to Launch: Lists," Twitter blog, 2009-09-30** — **Wayback capture 2016-02-07**: https://web.archive.org/web/20160207143108/https://blog.twitter.com/2009/soon-to-launch-lists (confidence: high)
+> *"**The idea is to allow people to curate lists of Twitter accounts.**"*
+> *"**Lists are public by default (but can be made private)**… **Other Twitter users can then subscribe to your lists. This means lists have the potential to be an important new discovery mechanism**"*
+> *"We started working on this feature because of the frequent requests we received from people who were looking for a better way to organize information on Twitter."*
+
+**Usage numbers: NOT REACHED — none located.** Twitter never published a Lists adoption figure I could find. Sysomos' "Inside Twitter" report series has **no Lists section**; a separate Sysomos Lists report has no Wayback snapshot (**NOT REACHED**).
+
+**The academic literature treats Lists as an *instrument*, not a behavior to measure** — it studies what lists reveal about the *listed*, never how many people make them:
+- Sharma et al., *"Inferring who-is-who in the Twitter social network,"* WOSN 2012, `10.1145/2342549.2342563`, 94 cites — *"can accurately and comprehensively infer attributes of millions of Twitter users, including a vast majority of Twitter's **influential** users."* The scoping to the influential tail implicitly concedes sparse coverage of the body. **PDF paywalled, NOT REACHED.**
+- Rakesh et al., *"Personalized Recommendation of Twitter Lists,"* ICWSM 2014, `10.1609/icwsm.v8i1.14558` — **the existence of a recommender for Lists is itself evidence of an adoption problem.**
+
+**Confidence caveat, stated plainly:** Semantic Scholar returned 429 on exactly the queries that would settle this. Confidence that no measurement exists: **medium**, not high.
+
+## Bluesky — the most articulate statement of the thesis, and of its own trap
+
+**Jay Graber, "Algorithmic choice," 2023-03-30**, https://bsky.social/about/blog/3-30-2023-algorithmic-choice (live; confidence high):
+> *"**A feed of content from the people you follow ordered only by time is also an algorithm** (albeit a very simple one)… **The problem isn't 'algorithms' — the problem is a lack of transparency and control**"*
+> *"We aim to replace the conventional **'master algorithm,' controlled by a single company, with an open and diverse 'marketplace of algorithms.'**"*
+
+**"Algorithmic Choice with Custom Feeds," 2023-07-27** (updated 2023-08-17), https://bsky.social/about/blog/7-27-2023-custom-feeds:
+> *"**You can also think of these feeds as super-powered hashtags or lists.**"* — Bluesky itself places feed generators in the Twitter Lists lineage.
+> *"the vast majority of feeds on the network are built by independent third-party developers."*
+
+**And in the same post, the sentence that eats the thesis:**
+> *"**Even though users have a wide variety of custom feeds to choose from, defaults are still powerful.**"* — announcing `Discover`, its own opinionated default, two months after shipping choice.
+
+**Ozone / stackable moderation, 2024-03-12**, https://bsky.social/about/blog/03-12-2024-stackable-moderation:
+> *"**When you sign up for Bluesky, you will be subscribed to Bluesky's built-in moderation service by default.**"*
+
+**The key number does not exist. Confidence: high.** Every candidate Bluesky post was fetched and grepped:
+- 2023 Moderation Report (`01-16-2024`) — report volumes only.
+- 2024 Moderation Report (`01-17-2025`) — same.
+- **2025 Transparency Report (`01-29-2026`)** — the most detailed doc they've published: 6.97M reports (+54%), 15.49M labels (+200%), full label taxonomy (adult 10.79M, suggestive 3.42M, spam 761.77K), *"daily reports of anti-social behavior dropped by approximately 79%."* **Zero numbers on labeler subscription or custom-feed usage.** Every "choice" statistic measures *Bluesky's own moderation output*, not users exercising choice.
+- Oct 2025 update announces a **"dislike" beta** — *"a new feedback signal to improve personalization in **Discover**."* Investment flows to improving the default, not to measuring migration off it.
+
+**The one hard measured result — and it is negative.** Wang & Singhal, *"Whose Posts Get Ranked: Identical-Text Exposure Gaps in Bluesky Custom Feeds,"* **arXiv:2608.13879**, submitted **2026-08-14** (abstract read in full; confidence high):
+> *"…repeated snapshots of the Top-50 lists that **1,366 public feeds** return… **in 33% of sets, one copy appears on the list while another does not.** … **Authors new to a feed receive less exposure for the same text**… **A new author with more followers than the competing author still loses 74% of head-to-head comparisons.** … These results are early evidence that **access to many independent feeds is not enough to give identical texts equal exposure.**"*
+
+Companion: arXiv:2608.13874, panel of **5,000 monitored feeds**, 17.8M posts — useful as a scale marker; no user-side adoption data. Of the 40 most recent arXiv "Bluesky" papers (2025-10→2026-09), **none measures default-feed opt-out or labeler subscription.**
+
+---
+
+# 5. SYNTHESIS — what survived, what died, and what was actually measured
+
+## The single dominant finding: **the question has never been measured.**
+
+Across **all eight systems** — Google+ Circles, Diaspora aspects, Facebook friend lists, Twitter Lists, Path, Cohost, Mastodon lists, Bluesky feeds/labelers — **not one operator has published data on whether users do the curation work.**
+
+- Google published one study whose denominator was self-selected weekly posters in an invite-only trial.
+- Diaspora's telemetry is *structurally incapable* of answering (user/post/comment counts only).
+- Twitter published nothing.
+- Path published friendship counts, never cap utilization.
+- Cohost published two years of financials, never a tag-bookmark number.
+- Mastodon exposes no aggregate.
+- Bluesky publishes a seven-decimal label taxonomy and **not one figure on labeler subscription.**
+
+This is not an accident of my search budget — it is a consistent pattern, and it is the most defensible thing in this report. Confidence: **high**.
+
+## What *is* measured, and it all measures the failure side
+
+| Source | Date | Number |
+|---|---|---|
+| Google, Project Strobe | 2018-10-08 | *"90 percent of Google+ user sessions are less than five seconds"* |
+| Stone Temple (516,246 profiles) | 2015-04-14 | **91.8%** of Google profiles never posted publicly |
+| Stone Temple | 2015-04-14 | ≥50 posts ever: **0.3%** of profiles (6.66M of 2.2B) |
+| fediverse.observer | 2026-09-04 | Diaspora: **1,675 MAU** / 129,502 registered ≈ **1.3%** |
+| Cohost final financials | 2024-08-31 | **MAU 16,846**, −9.49% MoM, net −$25,297/mo |
+| Wang & Singhal, arXiv:2608.13879 | 2026-08-14 | Reader-chosen feeds: **33%** exposure divergence on identical text; incumbency beats followers **74%** |
+
+## The burden critique is real, primary-sourced, and predates Google+ by 10 months
+
+The strongest evidence is **confessional, not statistical** — and it comes from the two people best positioned to know:
+
+- **Zuckerberg, 2010-08-26**: *"**But guess what? Nobody wants to make lists.**"* (https://techcrunch.com/2010/08/26/facebook-friend-lists/)
+- **Facebook official, 2011-09-13**: *"**you've told us how time-consuming it is to organize lists**… **Managing lists is boring. That's why smart lists do the work for you.**"*
+- **Paul Adams, 2011-07-12**: *"**Google values technology, not social science.**"* — and his book *Social Circles* was suppressed by Google until after G+ launched.
+
+⚠️ **Correction to the brief:** the widely-cited **"5% of users ever made a list" stat has no primary source I could find.** The related "99%" figure is **MG Siegler's rhetorical gloss in the 2010 TechCrunch piece, not a Facebook measurement.** Treat both as unsourced.
+
+## Three structural laws the evidence supports
+
+**1. Every survivor relaxed the constraint; none tightened it.**
+Path 50→150→removed→public followers→Explore (2010–2017). Facebook manual lists → inferred Smart Lists → Friend List Feeds killed (2018-08-09). Google+ → shut down. Cohost shipped a chronological following feed only in year two and conceded *"discovering new posts is tricky without algorithms."* Bluesky shipped algorithmic choice in May 2023 and shipped `Discover` in the same announcement two months later, then began tuning it with dislikes in Oct 2025. Confidence: **high**.
+
+**2. Defaults beat choice — stated by the party most committed to choice.** Bluesky: *"Even though users have a wide variety of custom feeds to choose from, **defaults are still powerful.**"* Facebook's answer was identical in 2011: **infer the groups, keep manual curation as an opt-in nobody must touch.**
+
+**3. Sender-side audience tools collapse into reader-side filters.** Observed independently in four places:
+- Kairam's top "Other" circle names: *church, music, tech, twitter, photographers, news* — **topical, not relational**; 43.1% of the top-1000 fell outside all relationship categories.
+- Diaspora's FAQ makes aspects a read-filter as well as a write-audience.
+- dredmorbius (the same **Edward Morbius** Stone Temple credits): *"The best use I've found for Circles is to group profiles very roughly by interest level, usually into 2–4 tiers."*
+- Mastodon's highest-traffic list issue (#7692, 57 comments, **open since 2018-05-31**) asks for **hashtags in lists.**
+
+## The sharpest single mechanism finding
+
+**ActivityPub's addressable collections were built *specifically* to carry Diaspora's aspects — and the scaling optimization the whole network runs on is structurally incompatible with them.**
+
+Christine Lemmer-Webber, AP co-editor, 2018-04-14: *"**That's the whole reason collections are addressable, in order to be able to handle the design of Diaspora's aspects.**"*
+FEP-8fcf thread, 2020-12-19: *"**`bto` doesn't work with sharedInbox delivery.**"*
+Mastodon's running code (`status_parser.rb`, `main`, 2026-09-04): reads `to` and `cc` only — **no `bto`, no `bcc`, and the `audience` property is not read at all.** `bto`/`bcc` appear **zero times** in Mastodon's entire AP spec-compliance document.
+
+The capability existed for seven years at W3C Recommendation grade, was designed for exactly this use case, and the efficiency path everyone took made it unimplementable.
+
+## Where the honest gaps are
+
+**NOT REACHED, itemized:** Bradley Horowitz / Vic Gundotra statements · Edward Morbius' own 2015 G+ analysis (G+ is gone; only Stone Temple's credit survives) · Watson/Besmer/Lipford SOUPS 2012 (paywalled) · Kelley et al. INTERACT 2011 (paywalled) · Bernstein CHI 2013 (located, not read) · Bielenberg INFOCOM 2012 (paywalled) · Cohost monthly financials as primaries · **any Cohost post-shutdown post-mortem — appears not to exist** · Path's primary source for 50→150 · Twitter's own Lists numbers · Sysomos Lists report · Sharma WOSN 2012 coverage stats · **any operator figure anywhere on default-feed opt-out or curation-tool adoption.**
+
+**Confidence asymmetry to carry forward:** "no measurement exists" is **high** confidence for Bluesky (every candidate doc read and grepped), Diaspora (telemetry schema inspected in source), and Mastodon (no such endpoint). It is **medium** for Twitter Lists — Semantic Scholar 429'd on precisely the queries that would settle it.
+
+**Recommending nothing, per the brief.** One thing worth flagging for whoever writes the design doc: the recurring collapse of sender-side audience into reader-side topic filter shows up in four independent datasets, and it is the only user-behavior regularity in this entire corpus that reproduces across systems.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 15,492 characters
+
+````
+The fediverse agent has returned. Addendum below; the Cohost/Path/Twitter/Bluesky agent is **still running**.
+
+---
+
+# ADDENDUM — sections 2 (Diaspora), 4-partial (Mastodon, ActivityPub, Nostr)
+
+## 2. Diaspora* "aspects" — shipped 9 months before Circles, still alive, never measured
+
+**Origin, verbatim primary sources:**
+- Developer release, **2010-09-15**, `blog.joindiaspora.com` — **Wayback capture 2010-11-27**: https://web.archive.org/web/20101127021833/http://blog.joindiaspora.com/2010/09/15/developer-release.html
+  > *"We live our real lives in context, speaking from whatever aspect of ourselves that those around us know. Social tools should work the same way."*
+- Private alpha, **2010-11-23** — **Wayback capture 2010-11-25**: https://web.archive.org/web/20101125104227/http://blog.joindiaspora.com/2010/11/23/private-alpha-released.html
+  > *"Diaspora lets you create 'aspects,' which are personal lists that let you group people according to the roles they play in your life. We think that aspects are a simple, straightforward, lightweight way to make it really clear who is receiving your posts and who you are receiving posts from."*
+- Priority claim, **2011-09-08** — **Wayback capture 2011-10-02**: https://web.archive.org/web/20111002033716/http://blog.diasporafoundation.org/2011/09/08/we-are-making-a-difference.html
+  > *"We're proud that Google+ imitated one of our core features, aspects, with their circles."*
+
+Confidence: high. Aspects predate Circles by ~9 months.
+
+**Still there.** https://diasporafoundation.org/ (fetched 2026-09-04) still leads with them. `develop` branch retains `app/models/aspect.rb`, `AspectsController`, `AspectMembership`; `user.rb` seeds four defaults (family / friends / work / acquaintances) and carries the literal `aspect_ids == "all"` path plus a `post_default_public` flag. 202 aspect-related GitHub issues 2010→2021 — maintained, not deprecated.
+
+**Semantics that differ from Circles** (FAQ, https://wiki.diasporafoundation.org/FAQ_for_users):
+> *"Do my contacts know which aspects I have put them in? — **No. They cannot see the name of the aspect under any circumstances.**"*
+> *"Are aspects like 'groups'? — **No. Sharing in diaspora\* is asymmetrical.**"*
+> *"Can I restrict the posts I see to just those from certain aspects? — Yes."* — so aspects are **both** sender-side audience and reader-side filter, same dual role Circles had.
+> *"Once I have posted something, can I change the aspect(s) that can see it? — No."*
+
+**Measured aspect usage: NONE EXISTS.** Diaspora's own opt-in telemetry (`node_info_presenter.rb`) exposes exactly `total`, `active_halfyear`, `active_month`, `local_posts`, `local_comments` — **no aspect field, no public/limited split, no "all aspects" counter anywhere in the statistics surface.** Their own explainer (2014-06-04, https://blog.diasporafoundation.org/2-how-many-users-are-there-in-the-diaspora-network, Wayback 2014-07-22) concedes: *"the most we can say… is: 'at least this many'."* The one known academic measurement — Bielenberg et al., *"The growth of Diaspora"*, IEEE INFOCOM Workshops 2012, DOI `10.1109/INFCOMW.2012.6193476` — is **paywalled, NOT REACHED**. Confidence: high that no measurement is public; medium that none exists.
+
+**Closest thing to evidence is one anecdote** — and it is the same collapse Kairam's circle-name data hinted at. HN comment, `dredmorbius`, **2021-11-18**, https://news.ycombinator.com/item?id=29265456:
+> *"The problem with G+ Circles (or Diaspora\* Aspects, which were an earlier version of the same thing) is that **the people and profiles in your circles have no idea how you've classified them.** … It turns out that what you actually really want are *groups*, not Circles. … **The best use I've found for Circles is to group profiles very roughly by interest level, usually into 2–4 tiers**… I've used that model on G+, Diaspora\*, and Mastodon, pretty effectively."*
+
+Sender-side curation degraded, in practice, into a reader-side volume dial. Confidence: low as population evidence, high that the quote says this. (Note: this is almost certainly the same **Edward Morbius** credited in the Stone Temple study — `dredmorbius`.)
+
+**Survived, barely.** `the-federation.info` returned **502** (NOT REACHED). Via `api.fediverse.observer` GraphQL, queried **2026-09-04**: **58 pods, 129,502 registered users, 1,675 monthly active, 4,817 half-year active** — roughly **1.3% MAU/registered**. Largest: diaspora-fr.org (68,541 / 379 MAU). Version 0.9.1.0 shipped early 2026. Confidence: high for the figures as reported; medium for completeness (opt-in reporting).
+
+## 4a. Mastodon lists — reader-side only, strictly subordinate to the follow graph
+
+https://docs.joinmastodon.org/entities/List/ (updated 2025-06-30):
+> *"**Represents a list of some users that the authenticated user follows.**"*
+
+https://docs.joinmastodon.org/methods/lists/:
+> *"Add accounts to the given list. **Note that the user must be following these accounts.**"* — 422 otherwise.
+
+https://docs.joinmastodon.org/user/network/ (updated 2025-11-27):
+> *"Lists are subsets of your home timeline."*
+
+Version history: lists shipped **2.1.0** (Nov 2017); `replies_policy` added **3.3.0**; `exclusive` (remove members from Home) added **4.2.0**. Lists are private to the owner. **There is no way to post *to* a list.** Confidence: high.
+
+**Feature pressure, all confirmed via GitHub API — the open issues are the finding:**
+- **#7876** "Add accounts to lists without having them in your main timeline" — opened 2018-06-23, closed 2023-05-20 as duplicate, 30 comments.
+- **#16556** exclusive lists — opened 2021-08-02; implemented by **PR #22048** (opened 2022-12-04, merged **2023-06-05**), whose own text says *"Exclusive lists are a mature (3 year old!) Hometown feature"* — upstream took three years to adopt a fork's feature.
+- **#8208** "make lists public" — opened 2018-08-15, **still open** (8 years).
+- **#18292** "Shared/Collaborative User Lists" — 2022-05-03, **still open**.
+- **#7692** "Ability to add hashtags to lists" — 2018-05-31, **still open**, 57 comments (highest-traffic list issue). Note the direction of demand: *topics*, not people.
+
+**Measured list usage: NONE FOUND.** No aggregate endpoint exists. arXiv's API returned empty bodies all session (**NOT REACHED**), so third-party measurement is not ruled out. Confidence: high for Mastodon publishing nothing; low-medium that none exists.
+
+## 4b. ActivityPub / AS2 addressing — **the claim is confirmed, and the intent is documented**
+
+**AS2 Vocabulary §5.1** (W3C REC 2017-05-23, https://www.w3.org/TR/activitystreams-vocabulary/):
+> *"Conceptually, every Object has both a Primary and Secondary audience. … The `to`, `cc`, `bto` and `bcc` properties MAY be used… **This is precisely the same model used by the `to` and `cc` fields in email systems.**"*
+> *"an implementation generating an object MAY use the `bto` and `bcc` properties to list entities to whom the object should be privately targeted. When an intermediary receives an object containing these properties, it MUST remove those values prior to redistributing the object."*
+> *"**Audience targeting information included within an Object only describes the intent of the object creator.** … **this specification leaves it up to implementations to determine how the audience targeting information is used.**"* ← the escape hatch that made non-use conformant.
+
+**ActivityPub §7.1** (W3C REC 2018-01-23, https://www.w3.org/TR/activitypub/):
+> *"If a recipient is a Collection or OrderedCollection, then the server MUST dereference the collection (with the user's credentials) and discover inboxes for each item in the collection."*
+
+That collection-dereference **is** the circle/aspect primitive, and the co-editor says so outright. Christine Lemmer-Webber, HN, **2018-04-14**, https://news.ycombinator.com/item?id=16836027:
+> *"Co-editor of ActivityPub here. … **We also built ActivityPub so that Diaspora could use it. That's the whole reason collections are addressable, in order to be able to handle the design of Diaspora's aspects.**"*
+
+Confidence: high. The capability was designed *specifically* for aspects, and aspects never came.
+
+**Mastodon collapses it to five levels** — https://docs.joinmastodon.org/spec/activitypub/:
+> *"**public**: … `as:Public` in `to` · **unlisted**: … `as:Public` in `cc` · **private**: … follower collection in `to` or `cc` … · **limited**: … actors in `to` or `cc`, at least one of which is not `Mention`ed in `tag` · **direct**: … all of which are `Mention`ed"*
+
+**`bto`/`bcc` appear ZERO times in that entire document** (grep count 0, 2026-09-04). Confirmed in running code — `app/lib/activitypub/parser/status_parser.rb` on `main` reads only `audience_to` and `audience_cc`; **no `audience_bto`, no `audience_bcc`, and the `audience` property is not read at all.** Confidence: high — this is the shipped source.
+
+**Why it died, from implementers.** `nightpool` (Mastodon core), SocialHub, **2023-01-28**, https://socialhub.activitypub.rocks/t/like-activity/2925:
+> *"`to`, `cc`, `bto`, and `bcc` are primarily instructions to the *delivering* server about which inboxes to send the activity to. … Third and least their hints for the receiving client… **For activities not delivered to sharedInbox where the reason for receiving them is patently obvious, it seems like nobody really felt the need to include them.**"*
+
+And the structural cause — FEP-8fcf thread, **2020-12-19**, https://socialhub.activitypub.rocks/t/fep-8fcf-followers-collection-synchronization-across-servers/1172:
+> *"Only directly delivering messages to actors' inboxes works with `bto` and `bcc` semantics currently. **`bto` doesn't work with sharedInbox delivery**"*
+
+**The scaling optimization the whole network runs on is structurally incompatible with blind addressing.** That is the sharpest single finding in this addendum. Confidence: high for the quote, medium that it is the decisive cause.
+
+The W3C implementation report (https://activitypub.rocks/implementation-report/, now banner-labeled *"(Of historic interest only)"*) shows `outbox:removes-bto-and-bcc`: **5 yes of 13**, most N/A, distbin explicitly **No**. Mastodon N/A — it implements no C2S at all.
+
+**No quantitative measurement of live `to`/`cc`/`bto`/`bcc`/`audience` usage exists.** No FEP measures it. FEP-cd47 is misleadingly named (content-addressing, not audience). Adjacent open drafts: FEP-7502 (2023-12-24), FEP-db0e (2024-05-03). A SocialHub thread *"Overlapping taxonomies and the `audience` property"* (topic 4229, **2024-05-10**) shows the community still unresolved on what `audience` means, seven years after REC. Confidence: high.
+
+## 4c. Nostr — relay lists are routing, not audience
+
+**NIP-65** (https://github.com/nostr-protocol/nips/blob/master/65.md), status `draft` `optional`, from PR #218 (Mike Dilger, opened 2023-02-03, merged 2023-02-07):
+> *"Defines a replaceable event using `kind:10002` to advertise relays where the user generally **writes** to and relays where the user generally **reads** mentions."*
+> *"Clients SHOULD guide users to keep `kind:10002` lists small (2-4 relays of each category)."*
+
+Its author is explicit that it is **not** access control — "The Outbox Model", https://mikedilger.com/gossip-model/ (rewritten 2024-09-26):
+> *"**To be clear, this model does not apply to all the 'other stuff' on nostr. It only applies to public content.**"*
+> *"It is the website model. It is the RSS model."*
+
+And his own unresolved critique, verbatim:
+> *"I can direct (via my relay list) your client to come over to a relay which you have never even heard of before, which you did not configure, and which you have not vetted. **If privacy is a concern to you, then this is a privacy attack vector.** … **If someone can come up with a relay model that is fully distributed, and lets you find everything you need to find, and doesn't have this privacy concern, PLEASE SHARE. I was unable to think one up.**"*
+
+**Where nostr does put curation: NIP-51 Lists** (https://github.com/nostr-protocol/nips/blob/master/51.md):
+> *"Lists can contain references to anything, and these references can be **public** or **private**. … private items are specified in a JSON array that mimics the structure of the event `tags` array, but stringified and **encrypted using the same scheme from NIP-44**"*
+
+Kinds include `kind:30000` **Follow sets**, `kind:30002` **Relay sets** — and the spec's own framing is sender-side audience selection *expressed as relay choice*:
+> *"relay sets can be displayed in a dropdown UI to give users the option to switch to which relays they will publish an event or from which relays they will read the replies"*
+
+**Open tensions (GitHub API, 2026-09-04):** **#1282 "Relay Type Nomenclature"** (opened 2024-06-02, **still open**, 42 comments) proposes Private Inbox / Private Storage / Community Manager relay types — i.e. relays being asked to carry audience semantics with no agreed vocabulary. **#1179 "Follow lists don't scale"** (2024-04-16, still open, 29 comments). Meanwhile actual audience privacy went a different route entirely: **NIP-17 sealed gift-wrapped DMs** (PR #686, 2023-07-28, 178 comments — the repo's highest-traffic thread) — **encryption, not addressing.**
+
+**NIP-65 adoption measurement: NONE.** Only the author's impression, as of 2024-09-26: *"Unfortunately few clients are creating these (at the time of writing), so these cannot be relied on either."*
+
+---
+
+## The cross-cutting negative finding (now confirmed across six systems)
+
+**Every system in this study ships the curation primitive, and not one publishes — nor has had published about it — any data on whether people use it.** Diaspora's telemetry is structurally incapable of answering (user/post/comment counts only). Mastodon exposes no aggregate. The W3C AP implementation report covers 13 implementations, measures conformance not field usage, and is self-labeled historic. NIP-65 adoption is anecdote from its own author. Google published one study (Kairam CHI 2012) whose denominator was self-selected weekly posters in an invite-only trial.
+
+**The only population-scale numbers that exist anywhere in this corpus are the ones measuring the failure**: Stone Temple's 90–91.8% never-posted, and Google's own *"90 percent of Google+ user sessions are less than five seconds."*
+
+**And the only first-party statements about the burden are confessions, not measurements:** Zuckerberg's *"Nobody wants to make lists"* (2010-08-26), Facebook's *"you've told us how time-consuming it is"* / *"Managing lists is boring"* (2011-09-13), and Paul Adams' *"Google values technology, not social science"* (2011-07-12).
+
+**Recurring shape worth flagging:** in three independent places the sender-side audience tool was observed collapsing into a reader-side filter — Kairam's top "Other" circle names (*church, music, tech, twitter, photographers, news*), Diaspora's FAQ making aspects a read-filter too, and dredmorbius' *"group profiles very roughly by interest level, usually into 2–4 tiers."* Mastodon's highest-traffic list issue (#7692, 57 comments) asks for exactly this: **hashtags in lists.**
+
+**Instrument notes unchanged, plus:** `the-federation.info` **502**; arXiv API returned empty bodies to curl all session; GitHub code-search API needs auth (raw file fetch works); OpenAlex budget resets midnight UTC.
+
+**Still pending:** Cohost, Path, Twitter/X lists, Bluesky feed generators/labelers — second agent in flight.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-3 >>
+
+!! Message 3 ~ 15,267 characters
+
+````
+Wrapping up as requested. Note: two parallel research agents (fediverse slice; Cohost/Path/Twitter/Bluesky slice) are **still running** and have not reported — their material is marked pending below.
+
+---
+
+# Circles as inversion of control over the social graph — comparative research
+
+## 1. Google+ Circles
+
+### 1a. Kairam, Brzozowski, Huffaker, Chi — "Talking in Circles: Selective Sharing in Google+" (CHI 2012) — **PRIMARY, FULL TEXT OBTAINED**
+
+- DOI: `10.1145/2207676.2208552` · ACM: https://dl.acm.org/doi/10.1145/2207676.2208552
+- Open PDF (author copy, live today): **https://sanjaykairam.com/pdf/Kairam-CHI2012.pdf**
+- Published 2012-05-05. 202 citations (Semantic Scholar, checked 2026-09-04). Authors: Kairam (Stanford), Brzozowski/Huffaker/Chi (Google Inc.) — i.e. Google's own researchers.
+- Confidence: **high** (read the full PDF text).
+
+**Method (this is the load-bearing caveat):** log data from the **Google+ field trial**, week of **July 20–26, 2011** — i.e. weeks after launch, invite-only, self-selected early adopters. Sample: *"User IDs were hashed and sampled randomly from the population of users who **had shared at least once** during the data collection period, providing a representative sample of 100K active users… resulting in a data set of 64,005 users who shared content during this week."*
+
+**Table 1 (verbatim numbers), % of users who used each option at least once / % of items:**
+
+| Sharing | % Users | % Items |
+|---|---|---|
+| Public | 33.9% | 33.8% |
+| Selective (Circles) | **74.8%** | **67.6%** |
+| Targeted (+Mention) | 10.3% | 5.8% |
+
+Verbatim: *"about three quarters (74.8%) of users who share during the period engaged in selective sharing using Circles at least once."*
+
+**Critical read:** the denominator is *users who posted at least once in a week during an invite-only field trial*. It is **not** a measure of whether ordinary users will curate. Stone Temple (below) later measured that ~90% of Google profile holders **never posted publicly at all**. So 74.8% is 74.8% of a sliver.
+
+**A buried defect finding, verbatim:** *"We note that sharing a post both publicly and to Circles functioned the same as sharing the post publicly alone; this pattern in the data signaled that a small portion of users may have been mistaken about the function of Circles."* — users misunderstood their own audience selection.
+
+**Circle-name content analysis** (snapshot 2011-09-06, top 1,000 non-empty user-created circle names, Cohen's κ = 0.91). Percentages of circles by category:
+
+| Rank | Work | School | Strong ties | Weak ties | Other |
+|---|---|---|---|---|---|
+| Top 10 | 74.1% | 13.8% | 7.2% | 0.0% | 4.9% |
+| Top 100 | 47.5% | 16.0% | 9.0% | 3.5% | 24.0% |
+| Top 1000 | 31.4% | 12.6% | 8.8% | 4.0% | 43.1% |
+| **All circles (lower bound)** | **10.8%** | **4.3%** | **3.0%** | **1.4%** | — |
+
+Top-1000 names covered only **34.5% of all non-empty circles** — the long tail is idiosyncratic. Top "Other" names: *church, music, google, tech, twitter, photographers, celebrities, news, relatives* — i.e. **topical interest**, not social relation. That is a meaningful signal: a large fraction of what users built circles for was **reader-side topic filtering**, not sender-side audience control.
+
+Default circles shipped: **Family, Friends, Acquaintances, Following**.
+
+**Negative finding:** the paper contains **no measurement of curation burden**. `grep` for burden/effort/cumbersome/tedious/overhead returns only the framing sentence about *email*: *"the creation and maintenance of persistent groups for access in these systems can often be cumbersome or difficult."* Google's own study deliberately studied *"'expert' users"* sharing comfortably. **Nobody at Google published a measurement of the population that didn't do the work.** Confidence: high.
+
+### 1b. Watson, Besmer, Lipford — "+Your circles: sharing behavior on Google+" (SOUPS 2012)
+- DOI `10.1145/2335356.2335373` · 56 citations. **Closed access — abstract elided by publisher; Unpaywall reports `is_oa: false`, no OA location.** **NOT REACHED** (no full text, no numbers extracted).
+
+### 1c. Stone Temple Consulting — the "ghost town" hard numbers
+- Eric Enge, **"Hard Numbers for Public Posting Activity on Google Plus"**, dated **4/14/2015**.
+- Live URL dead; read via **Wayback capture 2015-04-19 (timestamp 20150419171939)**: https://web.archive.org/web/20150419171939/https://www.stonetemple.com/real-numbers-for-the-activity-on-google-plus/
+- Method: *"a hardcore analysis of 516,246 randomly selected Google+ profiles"*. Confidence: **high** for what they say; **medium** for the 2.2B extrapolation base.
+
+Verbatim numbers:
+- *"90 percent of the people who create a Google profile have never posted publicly on Google+."*
+- *"it looks like **91.8 percent** of profiles have not posted publicly on Google+."*
+- Active profiles: 49,975 of 516,246 = *"9.7 percent of all tested profiles"* → extrapolated *"more than 212 million people who have had some level of activity."*
+- ≥50 public posts ever: *"0.3% percent of all tested profiles… 7.67 million users"*, adjusted **6.66 million**.
+- ≥50 posts AND posted in last 30 days: adjusted **3.54 million users**.
+- ≥10 posts ever: adjusted **21.8 million**. ≥5: **32.9 million**. ≥1: **111.9 million**.
+- Public posting in a 30-day window: *"about 23.4 million people"*, adjusted **16M**; hyperactive (50+/month) 358K → adjusted **106K**.
+- Private-activity probe (credited explicitly to **Edward Morbius**): compared 42,282 publicly-active vs 42,282 publicly-silent accounts by profile view counts. *"People showing public posts on their profile averaged more than 45,000 views per profile. People showing no public posts on their profile averaged just under 2,000 views per profile. This would suggest that the incremental usage levels of people who do no public posting at all might be about **4.3 percent**."*
+
+**Edward Morbius' own 2015 G+ analysis: NOT REACHED** (his posts lived on Google+ itself and the platform is gone; I did not locate a mirror in the time available). Stone Temple's credit to him is the confirmed trace.
+
+### 1d. Google's shutdown statement
+- **"Project Strobe"**, Ben Smith, **2018-10-08**: https://blog.google/technology/safety-security/project-strobe/
+- Verbatim: *"**90 percent of Google+ user sessions are less than five seconds.**"*
+- *"while our engineering teams have put a lot of effort and dedication into building Google+ over the years, it has not achieved broad consumer or developer adoption, and has seen limited user interaction with apps."*
+- Consumer shutdown over 10 months, to end of August 2019. Confidence: high.
+- Consumer G+ actually shut **2019-04-02** (The Verge, https://www.theverge.com/2019/4/2/18290637/google-plus-shutdown-consumer-personal-account-delete).
+- **Bradley Horowitz / Vic Gundotra individual statements: NOT REACHED** (ran out of budget before hunting them).
+
+### 1e. Paul Adams — the research behind Circles
+- **"The Real Life Social Network v2"**, SlideShare, posted **2010-07-01**, 254,482 views: https://www.slideshare.net/padday/the-real-life-social-network-v2 — Adams described as *"a UX researcher at Google who leads user research for social products."* Confidence: high (fetched).
+  - Verbatim slide content: *"People tend to have between 4 and 6 groups, each of which tends to have between 2 and 10 people."*
+  - *"People have multiple independent groups of friends."* / *"One friends group means mixed up conversations."*
+  - Of 342 studied groups, only **3%** were actually called "friends"; **85%** didn't contain the word.
+- His blog (thinkoutsidein.com, since domain-squatted; read via **Wayback**). Key related posts found in CDX: `/blog/2010/03/we-dont-have-one-group-of-friends/`, `/blog/2010/07/data-behind-real-life-social-network/`, `/blog/2011/05/small-connected-groups/`.
+- **"Why I left Google. What happened to my book. What I work on at Facebook."** — **2011-07-12**, read via **Wayback capture 2011-07-15 (20110715215123)**: https://web.archive.org/web/20110715215123/http://www.thinkoutsidein.com:80/blog/2011/07/why-i-left-google-what-happened-to-my-book-what-i-work-on-at-facebook/ · Confidence: high.
+  - *"Ultimately I felt that although my research formed a cornerstone of the Google social strategy, and I had correctly predicted how other products in the market would play out, I wasn't being listened to when it came to executing that strategy… **Google values technology, not social science.**"*
+  - His book was titled **"Social Circles"**; *"in June 2010 they officially gave me written permission to publish it. The book content, the title, and the cover all existed prior to Emerald Sea (Google+). However, after the PR frenzy around the leaking of the project in July 2010, Google verbally rescinded permission to publish."* Reissued as **Grouped**.
+  - *"Some people have wondered whether my Real Life Social Network deck was leaked. It wasn't. I first presented it months before Emerald Sea had started."*
+  - Notably: at Facebook he worked on **ads**, not grouping — *"I don't work on Groups or Friend Lists."*
+
+---
+
+## 2. Facebook friend lists — **the strongest curation-burden evidence found**
+
+### The Zuckerberg quote (predates Google+ by 10 months)
+- MG Siegler, TechCrunch, **2010-08-26, 8:45 PM PDT**: https://techcrunch.com/2010/08/26/facebook-friend-lists/ (live, fetched directly). Confidence: **high**.
+- Verbatim: *"Tonight at a Facebook Developer's Garage meeting at Facebook's headquarters in Palo Alto, Zuckerberg fielded a question about the service's privacy controls. He said that the ideal solution for sharing different things with different people is to make a friend list. **"But guess what? Nobody wants to make lists,"** Zuckerberg admitted."*
+- Siegler's gloss, verbatim: *"While the idea behind friend lists is great, for the average user (in other words, 99 percent of Facebook's 500 million users) it's simply not something they're going to do. Or even if they make them at first, it's not likely something they're going to keep up with. Facebook has tried to lower the barrier to entry a few times… but they are still simply too time-consuming to set up and maintain."*
+- **Important correction to the brief:** the widely-repeated "99%" is **Siegler's rhetorical figure, not a measurement**. It is not a Facebook statistic.
+
+### The "5% of users ever made a list" stat — **SOURCE NOT FOUND**
+I could not locate a primary source. Checked: TechCrunch 2011-09-08 Smart Lists piece (https://techcrunch.com/2011/09/08/facebook-begins-auto-grouping-colleagues-school-mates-and-local-friends-into-smart-lists/) — no percentage. TechCrunch 2011-09-20 Smart Lists piece — no percentage (it is a Joe Green guest post). Facebook's own launch post — no percentage. **Treat the "5%" figure as unsourced until someone finds the primary.** Confidence in the negative: medium-high.
+
+### What Facebook *did* say, officially
+- Blake Ross, **"Improved Friend Lists"**, The Facebook Blog, **2011-09-13 9:59am**, read via **Wayback capture 2011-10-01 (20111001175408)**: https://web.archive.org/web/20111001175408/http://blog.facebook.com/blog.php?post=10150278932602131 · Confidence: high.
+- Verbatim: *"Lists have existed for several years, but **you've told us how time-consuming it is to organize lists for different parts of your life and keep them up to date.**"*
+- Verbatim: *"**Managing lists is boring. That's why smart lists do the work for you.**"*
+- Verbatim: *"**Friend Lists are completely optional. If you don't like lists, you don't have to use them.**"*
+- The remedy was **automatic inference** (Work / School / Family / City smart lists from profile fields), with manual curation retained only where inference can't reach: *"Unlike your smart lists… we don't create Close Friends and Acquaintances lists for you. Since these types of relationships are unique, it's important for you to decide who goes in your Close Friends, Acquaintances or Restricted lists — if you use them at all."*
+- Endpoint: Facebook **shut down Friend List Feeds** on **2018-08-09** (https://techcrunch.com/2018/08/09/facebook-is-shutting-down-friend-list-feeds-today/) — **NOT FETCHED**, HN-index only, confidence medium.
+
+### Academic
+- Kelley, Brewer, Mayer, Cranor, Sadeh — **"An Investigation into Facebook Friend Grouping"**, INTERACT 2011, LNCS. DOI `10.1007/978-3-642-23765-2_15`. **Full text NOT REACHED** (paywalled; CMU CUPS copy not found in Wayback CDX).
+- Bernstein et al., **"Quantifying the invisible audience in social networks"**, CHI 2013, DOI `10.1145/2470654.2470658` (2013-04-27). **Located but full text NOT REACHED.**
+- Also surfaced, not pursued: **"Are Circles Communities? A Comparative Analysis of Selective Sharing in Google+"**, ICDCSW 2014, DOI `10.1109/icdcsw.2014.34`.
+
+---
+
+## 3–4. Diaspora aspects, Mastodon lists, ActivityPub addressing, Nostr, Cohost, Path, Twitter lists, Bluesky
+**PENDING** — two subagents are still running on these. Nothing to report from my own work; I did not duplicate their scope. One trace worth keeping from the HN index: Doug Belshaw, *"Bonfire's latest trick shows Google+ circles came a decade early"* (2022-07-30), https://dougbelshaw.com/blog/2022/07/30/bonfire-granular-boundaries/ — **NOT FETCHED**.
+
+---
+
+## 5. What the evidence supports so far
+
+1. **The curation-burden critique is real, is primary-sourced, and predates Google+.** Zuckerberg said it publicly in Aug 2010; Facebook restated it as official product rationale in Sept 2011 (*"time-consuming… keep them up to date"*, *"Managing lists is boring"*). Confidence: high.
+2. **Facebook's answer was to remove the curation step entirely** — infer the groups from profile data, keep manual lists as an opt-in nobody must touch. The manual half was eventually retired (Friend List Feeds, 2018).
+3. **Google never published a burden measurement.** Their one public study (Kairam CHI 2012) sampled *only people already posting weekly during an invite-only trial* and found 74.8% used Circles. That number gets cited as evidence Circles worked; it is evidence that self-selected active sharers used them. Confidence: high that this is the correct reading of the method section.
+4. **The population-level number is Stone Temple's:** ~90–91.8% of Google profiles never posted publicly at all. The two studies are not in conflict — they have different denominators, and the gap between them *is* the finding.
+5. **A quiet counter-signal in Google's own data:** 43.1% of the top-1000 circle names fell outside work/school/strong/weak ties, and the most common of those were topical (*church, music, tech, twitter, photographers, news*). Users given a sender-side audience tool substantially repurposed it as a **reader-side topic filter**. Confidence: medium-high (the paper says *"hints that Circles based on topical interest may be common as well"* — it is a hint, not a measurement).
+
+**Instrument notes for whoever continues this:** WebSearch budget exhausted; **OpenAlex out of daily budget** (resets midnight UTC); **Semantic Scholar rate-limits hard** (429 on unkeyed bursts, ~4s spacing works); **Google Scholar blocked**; **WebFetch refuses web.archive.org** — use `curl -sL -A "Mozilla/5.0"` for Wayback. Crossref and HN Algolia were reliable throughout.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;DsMy2vtQtGm9mwkC9xK2NWNA0sdaglPjWONLTwm0si0
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,357 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 40,659 characters
+
+````
+Research complete. Report below.
+
+---
+
+# Report: teen-side evidence on parental control apps; LGBTQ+ youth and monitoring; family location sharing as coercive control
+
+Every claim below is tagged **MEASURED** (I read the number in the primary source), **CLAIMED** (secondary source reports it), or **NOT REACHED**.
+
+---
+
+## PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS
+
+### 1.1 The real "1.7 stars from teens" paper — FOUND, FULL TEXT READ
+
+**Ghosh, A.K., Badillo-Urquiola, K., Guha, S., LaViola, J.J. Jr., Wisniewski, P.J. (2018). "Safety vs. Surveillance: What Children Have to Say about Mobile Apps for Parental Control." CHI 2018, Montreal, April 21–26, 2018.**
+- DOI: https://doi.org/10.1145/3173574.3173698 (Crossref: published-online **2018-04-19**)
+- Free full-text PDF (the only reachable copy; ACM, UCF STARS and Marquette all returned 403 or metadata-only): **https://www.cs.ucf.edu/icerc/isuelab/publications/pubs/pn1838-ghoshA.pdf** (14pp; also served from `www.eecs.ucf.edu/icerc/...` — note the `/icerc/` path segment; the `/isuelab/` path without it 404s)
+- Citations: 181 (Semantic Scholar), 162 (OpenAlex), as of 2026-09-04
+
+**Method — MEASURED:**
+- Scraped Google Play reviews in **August 2016** using "Heedzy," seeded from Wisniewski et al.'s (CSCW 2017) list of **75** adolescent online-safety apps. **9 apps had been delisted → 66 apps remained.**
+- **29,272 total user reviews** scraped across those 66 apps.
+- First author hand-read all ~29K reviews to identify child-authored ones; an undergrad RA re-read the entire set for misses. Keyword seeds: "my parents," "my mom," "my dad," "my father," "I am * old," "years old," "my step" (targeted keyword pass alone surfaced "over 450").
+- **Final child dataset: 736 reviews across 37 apps** (29 of the 66 apps had no child reviews at all). Reviewer ages **8–19**. At least **~700 distinct child users** (10 users reviewed multiple apps; 6 reviews anonymous "A Google User").
+- No IRB protocol — all data public, no human-subject interaction.
+- Review dates: 2012 (<1%), 2013 (3%), 2014 (22%), 2015 (39%), 2016 (36%).
+- Concentration: **Screen Time Companion App = 216 reviews (29% of the dataset)**; Qustodio Parental Control and Mobile Fence Parental Control = **80 each (22% combined)**.
+
+**Ratings — MEASURED (this is the origin of the "~1.7 stars" claim):**
+- Child star distribution: **1★ = 76%; 2★ = 3%; 3★ = 4%; 4★ = 3%; 5★ = 14%.**
+- **Child mean rating M = 1.79, SD = 1.48** (n=736).
+- **Remaining (presumed-parent) reviews: N = 28,536, M = 3.66, SD = 1.79.**
+- Difference: **parents 1.866 points higher, 95% CI [1.76, 1.98], t(793.34) = 33.77, p < 0.05.**
+- Split at ≤2★ = "disliked": **581 low-rated (79%)** vs **155 high-rated (21%)**.
+
+**Coded complaints — MEASURED (percentages are theme frequency; multiple codes per review allowed and double-counted):**
+
+Disliked (79% of reviews):
+| Theme | % | Codes |
+|---|---|---|
+| Overly Restrictive | **35%** | restriction, rebellion, blocking, lack of freedom, oppressive, anger |
+| **Privacy Invasive** | **23%** | monitoring, privacy, **stalking**, lack of respect |
+| Bad Parenting / Lack of Communication | **14%** | active mediation, upfront, communication, **lazy** |
+| Faulty Design & Usability | **14%** | usability, design flaws, performance, bugs |
+
+Liked (21% of reviews):
+| Theme | % |
+|---|---|
+| Control Unhealthy Behaviors | **23%** |
+| Kept them Safe | **17%** |
+| Ability to Negotiate / More Freedom | **12%** |
+
+Sub-detail: within the "overly restrictive" set, **28%** objected to time restrictions specifically; **21%** of reviews mentioned screen time. Total emergent codes: **24 additional codes** beyond the TOSS template codes, grouped into **7 main themes**.
+
+**On the "abuse" / "emotional abuse" question — MEASURED NEGATIVE RESULT:**
+I grepped the full extracted text of the paper. **The string "abuse" appears ZERO times in Ghosh et al. CHI 2018.** There is no count of teens describing monitoring as abusive in this paper. The strongest published language is:
+- children "equated the apps to a form of **parental stalking**";
+- verbatim teen quotes the authors reproduce: *"I can't even talk to my biological dad, or my boyfriend, or best friend without being stalked by my mom"* (1★, SecureTeen, 2015); *"Awful invasion of privacy! ... Parents should be ashamed of themselves ... This is **evil**!"* (1★, SecureTeen, 2014); *"if you love your kids at all, why don't you try communicating with them instead of buying **spyware**"* (1★, SecureTeen, 2016); *"Now my mom is **stalking** me... Too invasive and down right disrespectful. Thanks for the trust, mom"* (1★, MamaBear, 2014);
+- the authors' own strong-language finding: children using "restrict/block/limit" also used **"hate," "horrible," "dumb," "bad," "sucks"** — "they did not simply dislike the apps... **they despised them**."
+- Authors' framing: parents "create **asymmetric power differentials**"; apps violate **contextual integrity** (Nissenbaum); apps "may undermine trust and harm children's relationship with their parents, and thus, are **not the ideal solution** for protecting them, at least in their present form."
+
+**⚠️ Correction to a common citation error:** the widely-repeated "1.7 stars" figure is a *mean of teen reviews only* (M=1.79), not an app-store rating. And the paper's own preferred headline number is **76% one-star**, not the mean.
+
+---
+
+### 1.2 "A Matter of Control or Safety?" — the restriction→MORE risk finding
+
+**Ghosh, Badillo-Urquiola, Rosson, Xu, Carroll, Wisniewski (2018). CHI 2018.** DOI https://doi.org/10.1145/3173574.3173768 · Crossref published 2018-04-19 · 90 citations (S2).
+
+**MEASURED (from the publisher abstract, which I retrieved in full via Semantic Scholar):**
+- **Web-based survey of 215 parents and their teens (ages 13–17)** — matched dyads.
+- **Two separate logistic regression models** (one parent-reported, one teen-reported) predicting parental use of technical monitoring apps.
+- Both models: **low autonomy-granting (authoritarian) parents were the most likely to use parental control apps.**
+- Teen model additionally: **teens who were victimized online and had peer problems were MORE likely to be monitored.**
+- **"Overall, increased parental control was associated with MORE (not fewer) online risks."**
+
+**NOT REACHED:** the odds ratios, βs, pseudo-R², and per-predictor p-values. The PDF is gated: `dl.acm.org/doi/pdf/...` returns **403** even though Unpaywall/S2 label it GOLD OA; UCF STARS (scopus2015/7882) is metadata-only; NSF PAR has no record; fatcat.wiki was down (timeout); Marquette e-Publications returns a DOI link only. **The effect sizes for this finding are unverified.** Treat "restriction correlates with more risk" as MEASURED-but-cross-sectional (it is a correlation in a single-wave dyadic survey; the authors themselves do not claim direction).
+
+---
+
+### 1.3 Independent replication/extension of the review analysis — FULL TEXT READ
+
+**Wang, G., Zhao, J., Van Kleek, M., Shadbolt, N. (2021). "Protection or Punishment? Relating the Design Space of Parental Control Apps and Perceptions About Them to Support Parenting for Online Safety." PACM HCI 5, CSCW2, Article 343, October 2021, 26pp.**
+- DOI https://doi.org/10.1145/3476084 · arXiv **2109.05347** (2021-09-11) · full PDF: https://arxiv.org/pdf/2109.05347 · 46 citations
+- Explicitly "replicating the method by Wisniewski et al. [75]"
+
+**MEASURED:**
+- **58 top Android parental control apps** analysed (including child-side app versions).
+- Scraped **93,404 reviews**; after de-duplication **81,488**; after bigram/NLTK feature-mention filtering + two-author manual verification, **3,264 reviews** retained.
+- Of those 3,264: **746 child reviews** and **2,518 parent reviews** (identified with the same "my mom / my dad / I'm a kid / I'm xx years old" keyword approach as Ghosh et al.).
+- Three axes of feature variation found: **granularity, feedback/transparency, parent–child communications support.**
+- Finding restated: children "mainly felt these apps were overly restrictive and invasive of their privacy and negatively impacting" the parent-child relationship; all-or-nothing (coarsest) controls least desirable because they "denied children access to basic, risk-free, and unproblematic aspects of their devices."
+- **NOT REACHED:** this paper does not report a child-vs-parent mean-star comparison, so it does not independently replicate the 1.79-vs-3.66 gap.
+
+---
+
+### 1.4 Circle of Trust — FOUND, and it is CHI **2020**, not 2018
+
+**Ghosh, A.K., Hughes, C.E., Wisniewski, P.J. (2020). "Circle of Trust: A New Approach to Mobile Online Safety for Families." CHI 2020, Honolulu, April 25–30, 2020.** DOI https://doi.org/10.1145/3313831.3376747
+- Free PDF: **https://par.nsf.gov/servlets/purl/10213815** (NSF PAR 10213815)
+- (Note: DOI 10.1145/3173574.3174200, sometimes miscited for this, is actually a Vertanen et al. virtual-keyboard paper.)
+
+**MEASURED:** mixed-methods **within-subjects user study of 17 parent–child pairs**; power analysis stated a sample of **15** was needed (Power = 80%). Parents *and* children **significantly preferred** the Circle of Trust design over a baseline traditional parental-control app on perceived usefulness, ease of use, and behavioral intent to use; Circle of Trust rated **significantly less privacy-invasive for children**. Value-Sensitive-Design lens: families valuing **privacy, trust, freedom, balance of power** preferred the new app; families valuing **transparency and control** preferred the status quo. **Better suited to teens than younger children.**
+
+---
+
+### 1.5 Other measured work in this line (all reachable)
+
+| Work | Locator | MEASURED content |
+|---|---|---|
+| **Akter, Godfrey, Kropczynski, Lipford, Wisniewski (2022), "From Parental Control to Joint Family Oversight" PACM HCI (CSCW1), doi 10.1145/3512904** | PDF https://par.nsf.gov/servlets/purl/10374187 | In-depth user study, **19 parent–teen (13–17) pairs**, CO-oPS community-oversight app. Transparency into one another's devices valued; co-management "beneficial but also quite difficult to implement in practice." |
+| **Badillo-Urquiola, Wisniewski et al. (2020), "Beyond Parental Control: Designing Adolescent Online Safety Apps Using Value Sensitive Design," J. Adolescent Research, doi 10.1177/0743558419884692** | PDF https://par.nsf.gov/servlets/purl/10133416 · 53 citations | Value-Sensitive-Design study of teen-centric safety app design. |
+| **Park, Akter, Wisniewski, Badillo-Urquiola (2024), "It's Still Complicated: From Privacy-Invasive Parental Control to Teen-Centric Solutions for Digital Resilience," IEEE Security & Privacy, doi 10.1109/MSEC.2024.3417804** | PDF https://par.nsf.gov/servlets/purl/10530845 | Position/overview by the same lab: "**relying solely on restrictive approaches to online safety may be ineffective in protecting adolescents from online risks, as it limits the potential opportunities for youth to interact with others online**"; names Life360 and Bark by name as the restrictive-mediation exemplars. |
+| **Stoilova, M., Bulger, M., Livingstone, S. (2023), "Do parental control tools fulfil family expectations for child protection? A rapid evidence review," Journal of Children and Media, published online 2023-10-29, doi 10.1080/17482798.2023.2265512** | Abstract read at https://researchonline.lse.ac.uk/id/eprint/120219/ · 65 citations | **1,656 articles keyword-searched across 5 databases; 40 studies full-text coded.** Verdict: "**the consequences of use were mixed, with evidence of parental controls having both beneficial and adverse outcomes, limiting other outcomes or simply having no outcomes**"; "the review found **little support for advocating parental controls as a stand-alone strategy**." **NOT REACHED:** the per-outcome counts (how many of the 40 fell in each bucket) — the LSE eprints "full text" file is a 2-page cover sheet only, T&F returns 403, and the Wayback snapshot has no body. |
+| **Nouwen, M. & Zaman, B.** — the two papers you asked for, by DOI (abstracts only, bodies NOT REACHED): "A value sensitive design approach to parental software for young children," IDC 2015, **doi 10.1145/2771839.2771917** (36 cites); "Redefining the role of parents in young children's online interactions. A value-sensitive design case study," Int. J. Child-Computer Interaction, Nov 2018, **doi 10.1016/j.ijcci.2018.06.001** (34 cites). |
+| **Ko / Choi — FamiLync**, UbiComp 2015, **doi 10.1145/2750858.2804283**, 98 citations. Participatory parental-mediation system for smartphone use. Body NOT REACHED. |
+| **Maier, E-M., & Tanczer, L.M. (2025), "Surveillance Disguised as Protection: A Comparative Analysis of Sideloaded and In-Store Parental Control Apps," arXiv 2504.16087 (2025-03-08)** | https://arxiv.org/pdf/2504.16087 | See §3.4 below — this is the strongest recent *measured* security work on the app category. |
+
+**Note on a related paper you may have been thinking of:** Alelyani, Ghosh, Moralez, Guha, Wisniewski (2019), "Examining Parent Versus Child Reviews of Parental Control Apps on Google Play" — this is the machine-learning follow-up to the 2018 paper. Cited as ref [4] in Wang et al. 2021. I did not reach its full text.
+
+---
+
+## PART 2 — LGBTQ+ YOUTH AND PARENTAL MONITORING / FORCED OUTING
+
+### 2.1 Warford et al. — the at-risk-user taxonomy — FULL TEXT READ
+
+**Warford, N., Matthews, T., Yang, K., Akgul, O., Consolvo, S., Kelley, P.G., Malkin, N., Mazurek, M.L., Sleeper, M., Thomas, K. (2022). "SoK: A Framework for Unifying At-Risk User Research." IEEE Symposium on Security & Privacy 2022.**
+- arXiv **2112.07047** (v2 dated **2025-11-10**); PDF https://arxiv.org/pdf/2112.07047
+- Authors: **University of Maryland (∗) + Google (†)**
+
+**MEASURED:**
+- **Meta-analysis of 95 papers.** **10 unifying contextual risk factors** in 3 groups: three **societal factors** (legal/political, marginalization, social norms), three **relationship factors** (access to other at-risk users; **relationship with the attacker**; **reliance on a third party**), four **personal circumstances** (prominence; access to a sensitive resource; underserved accessibility needs; resource/time constrained).
+- Table I population rows include, separately: **Children** (10 cited papers), **Teens** (7), **Foster teens** (1), and **LGBTQ+ people** (6), **LGBTQ+ people × With HIV** (2). **NOT REACHED:** the black-circle grid itself — the ● glyphs do not survive `pdftotext`, including with `-layout`. So I cannot state which factors are marked for "Children"/"Teens" from the table.
+
+**Where it puts children-under-parental-authority — this is the key finding for your question, and it is a *split*:**
+
+The framework has a factor that *does* name authority as the danger — but it assigns it to intimate-partner abuse, not to parents:
+
+> **"Relationship with the attacker.** A personal relationship with an attacker can lead to heightened risk of what Levy and Schneier classify as 'intimate threats.' It can be particularly difficult for individuals targeted by intimate threats to prevent and detect harm, because the attackers are likely to have **physical access to the target's devices and accounts, implicit or explicit authority over the target**, and potentially detailed knowledge about the target they can leverage."
+
+Children and teens are instead placed under a *separate, deliberately benign-intent* factor:
+
+> **"Reliance on a third party.** Individuals may be at risk due to their reliance on a third party for safety-focused care... **Unlike intimate threats associated with a relationship with the attacker, the third parties in this context typically have helpful or safety-focused reasons for 'privacy invasions.'** However, even with generally supportive intentions, these invasions can increase the individual's digital-safety risks due to reduced privacy (from the third party), leading at-risk users to feel uncomfortable or that their autonomy is limited... For example, **children and teens often shared their devices and personal data with parents or caregivers, or had applications or privacy settings enabled that allowed parental monitoring.**"
+
+And in the protective-practices section it is explicitly balanced:
+
+> "**Tracking and monitoring applications.** Caregivers... sometimes used tracking or monitoring applications with the goal of protecting the at-risk user's digital safety. Parents of foster teens reported using router settings to limit internet access at certain times of day and parental control apps to watch for potentially dangerous behavior. **These applications can create conflict between autonomy and privacy, but some children and teenagers indicated that they can be helpful, particularly when used as part of an ongoing dialogue with parents.**"
+
+**Bottom line, MEASURED from the text: Warford et al. does NOT name the manager-as-adversary case for children.** The vocabulary for "attacker who holds explicit authority over you and physical access to your devices" exists in the framework, and children/teens are not filed under it. The framework cites both Ghosh CHI 2018 papers (refs at lines 1533–1537 of the extracted text) — it knows the teen-review evidence and still codes parental monitoring as helpful-intent third-party reliance.
+
+One adjacent LGBTQ+ finding it does record: "separate studies found that **LGBTQ+ parents and transgender** [users]..." and "Blackwell et al. reported on **LGBT+ parents**" managing posts about their children — i.e. the LGBTQ+ material in the SoK is about *adults*, largely LGBT+ parents, not youth under parental monitoring.
+
+### 2.2 Population-level survey numbers on LGBTQ+ youth and the home
+
+**The Trevor Project 2023 U.S. National Survey on the Mental Health of LGBTQ Young People** (https://www.thetrevorproject.org/survey-2023/):
+- **N = 28,524** LGBTQ young people ages 13–24; fieldwork **2022-09-01 → 2022-12-12**.
+- **Fewer than 40% (38%) found their home to be LGBTQ-affirming.**
+- Trans/nonbinary youth on household pronoun respect: **50% "none of the people I live with," 23% "some," 27% "all."**
+- Suicide-attempt rate: **21%** where nobody in the household respects pronouns vs **12%** where all do.
+- **27%** of LGBTQ youth who wanted mental-health care but could not access it cited: **"I was not out about my LGBTQ identity and was afraid of being outed."**
+
+**Trevor Project 2024 survey** (https://www.thetrevorproject.org/survey-2024/):
+- **N = 18,663**, ages 13–24; fieldwork **2023-09-13 → 2023-12-16**.
+- Home affirming: **40%** overall, **38%** of trans/nonbinary.
+- Household pronoun respect: **none 37% / some 27% / all 37%**; suicide attempts **20% / 17% / 11%** respectively.
+
+**HRC 2023 LGBTQ+ Youth Report** (https://reports.hrc.org/2023-lgbtq-youth-report):
+- **N = 12,615** youth ages 13–18; survey period **January–October 2022**; all 50 states + DC.
+- **82.7%** out to at least one immediate family member; **56.3%** out to some but not all; **26.4%** out to all.
+- **80.1%** of LGB+ vs **67.4%** of transgender/gender-expansive youth out to at least one family member.
+- **40.9%** out to *all* parents/guardians; **34.3%** out to all siblings; **4.1%** out to all grandparents/extended family.
+- **63.1%** reported ≥1 positive parental support instance; **57.4%** reported ≥1 negative/rejecting instance.
+- **NOT REACHED / measured-absent:** this report contains **no** percentages on feeling safe at home, on privacy, on monitoring, or on being outed.
+
+**GLSEN, CiPHR & CCRC (2013), "Out Online: The Experiences of Lesbian, Gay, Bisexual and Transgender Youth on the Internet."** ISBN 978-19340-9212-5. Authors: Palmer, Kosciw, Greytak, Ybarra, Korchmaros, Mitchell.
+- Retrieved only via the Wayback Machine (`glsen.org` now 301s to `glisten.org`, and the Out Online PDF is gone from the new site): **https://web.archive.org/web/2019/https://www.glsen.org/sites/default/files/Out%20Online%20FINAL.pdf**
+- **MEASURED:** fielded **2010–January 2011**; initial online sample **5,907** U.S. 13–18-year-olds (n=3,989 via panel + n=1,918 via GLSEN referral); after fraud screening, **final sample N = 5,680**.
+- **94%** of LGBT youth went online via a home computer.
+- **LGBT youth were 3× as likely as non-LGBT youth to not feel safe AT HOME (16% vs 6%)** — vs 29% vs 14% at school, 34% vs 8% at a place of worship, 27% vs 21% online.
+- **Sexual harassment was more common at home than at school: 36% experienced it via ≥1 mode while at home (30% online, 20% by text) vs 26% at school.**
+- **29%** said they were **more out online than in person**; only **6%** were out to no one anywhere.
+- **52%** of youth who were not out to anyone offline had connected with other LGBT people online. GLSEN's framing: online spaces "may be crucial for LGBT youth who are **not safe or comfortable being out about their identity at home**."
+
+### 2.3 Qualitative HCI evidence on outing risk (small-N)
+
+- **Geeng, C., Hiniker, A. (2021), "LGBTQ Privacy Concerns on Social Media," arXiv 2112.00107.** **MEASURED: semi-structured interviews with 11 queer participants**, $10 gift card. Findings include a participant blocking family members before posting from a Pride parade then unblocking after; a participant who "felt unsafe coming out, because there was a lot of extended family who might disown her"; P6: *"The constant worry is **my parents** or my job."* Authors: interviews "call attention to the **high risk of being accidentally outed specific to the LGBTQ community**."
+- **Geeng, C., Harris, M., Redmiles, E., Roesner, F. (2022), "'Like Lesbians Walking the Perimeter': Experiences of U.S. LGBTQ+ Folks With Online Security, Safety, and Privacy Advice," USENIX Security '22.** PDF https://www.usenix.org/system/files/sec22-geeng.pdf. **MEASURED: 14 queer participants**, saturation determined at 14, 45–90 min remote interviews, $30 gift card, 10 urban / 3 rural. Notes that queer youth are "often homeless because they are **thrown out by their parents upon learning they are gay**." **These are adults, not minors under parental control.**
+
+### 2.4 What I could NOT find — state this plainly
+
+**NOT REACHED / apparently does not exist as measured research:**
+- **No study I could reach measures LGBTQ+ youth outed *by* a parental-control app, family location sharing, or a managed/shared account.** I searched OpenAlex (until its free budget hit $0 mid-session), Crossref (`query.bibliographic`, 4 distinct phrasings), Semantic Scholar (search endpoint intermittently returned empty sets / HTTP 429), and arXiv full-text (`all:"LGBTQ" AND all:"parental"` returned exactly **2** hits, neither on point; `all:"outing" AND all:"LGBTQ" AND all:"privacy"` returned **1**, the Geeng workshop paper above).
+- **No counts of youth who could not exit a parent-controlled account, and no measured harms following such non-exit.** Nothing. Not in Warford's 95-paper meta-analysis, not in Ghosh, not in the LSE 40-study review.
+- Blackwell et al. 2016, "LGBT Parents and Social Media: Advocacy, Privacy, and Disclosure During Shifting Social Movements," CHI 2016 — confirmed to exist and to be cited by both Geeng and Warford, but its subject is **LGBT parents**, not LGBTQ+ youth under parental monitoring. Full text NOT REACHED.
+- Scheuerman; Hardy & Vargas — **NOT REACHED.** No search route I had available surfaced them with retrievable full text.
+
+**The honest summary of Part 2: the survey literature measures the *precondition* (large fractions of LGBTQ+ youth are not out at home, do not find home affirming, and fear being outed) and the HCI literature measures the *fear* (accidental outing named as the distinctive queer threat model), but the causal link — "monitoring tool X outed N youth, with outcomes Y" — is not measured anywhere I could reach.**
+
+---
+
+## PART 3 — FAMILY LOCATION SHARING AS COERCIVE CONTROL
+
+### 3.1 The Life360 data-selling investigation — REACHED, all three articles
+
+**Article 1 (the original): Keegan, J. & Ng, A., "The Popular Family Safety App Life360 Is Selling Precise Location Data on Its Tens of Millions of Users," The Markup, published 2021-12-06.**
+- **Exact URL (note: slug ends `-user`, singular — the plural form 404s):**
+  **https://themarkup.org/privacy/2021/12/06/the-popular-family-safety-app-life360-is-selling-precise-location-data-on-its-tens-of-millions-of-user**
+- (Confirmed against Hacker News Algolia: submitted 2021-12-06, 269 points.)
+
+**Numbers, MEASURED from the article:**
+- **33 million** users worldwide at time of writing.
+- CEO Chris Hulls: **"approximately one dozen"** data partners. Six named in the piece: **X-Mode (now Outlogic), Cuebiq, Allstate's Arity, SafeGraph, Veraset (a SafeGraph spinoff), Jiobit** (Jiobit being an acquisition).
+- **Revenue from data sales: $693,000 in 2016 → $16 million in 2020 (~20% of annual revenue).** Plus **$6 million** from the Arity partnership in 2020.
+- Fields sold: **mobile advertising IDs, IP addresses, latitude/longitude coordinates** — raw, not aggregated.
+- Hulls (verbatim): *"We see data as an important part of our business model that allows us to keep the core Life360 services free."*
+- A former X-Mode engineer: raw Life360 data was **"among X-Mode's most valuable offerings due to the sheer volume and precision."**
+- Wolfie Christl: *"An app that claims to be a family safety service selling exact location data to several other companies, this is a total disaster."*
+
+**Article 2: Keegan & Ng, "Life360 Says It Will Stop Selling Precise Location Data," The Markup, 2022-01-27.**
+- **https://themarkup.org/privacy/2022/01/27/life360-says-it-will-stop-selling-precise-location-data**
+- Will stop selling precise location to the ~dozen brokers **including X-Mode, SafeGraph, Cuebiq**. **Will continue**: selling *aggregated* location to **Placer.ai**, and sharing **precise** location with **Arity** (Allstate) for driving-safety features. User base restated as **35 million**. No completion date given. Hulls: *"Life360 recognises that aggregated data analytics (for example, 150 people drove by the supermarket) is the wave of the future."*
+
+**Article 3: Keegan, J., "Life360 Sued for Selling Location Data," The Markup, 2023-06-01.**
+- **https://themarkup.org/privacy/2023/06/01/life360-sued-for-selling-location-data**
+- **Proposed class action filed 2023-01-12, U.S. District Court, Northern District of California.** Plaintiffs: **a Florida minor and his family.** Alleges sale to ~a dozen data brokers without consent; the complaint names the inference risk explicitly — data could reveal visits to *"places of religious worship, places that may be used to infer an **LGBTQ+ identification**, domestic abuse shelters, medical facilities, and welfare and homeless shelters."* Seeks compensatory, statutory and punitive damages; jury demanded. Life360: *"Life360 remains committed to transparency and choice... including the ability to opt out of even aggregated data sales,"* and intends to defend. As of **2023-05-26** the judge approved a stay pending private mediation set for **2023-08-21**. **Class size NOT stated in the article. NOT REACHED: the outcome of the mediation or the case's disposition.**
+
+**Regulatory follow-up on the downstream buyer (not on Life360):**
+**FTC, "FTC Order Prohibits Data Broker X-Mode Social and Outlogic from Selling Sensitive Location Data," 2024-01-09.**
+- **https://www.ftc.gov/news-events/news/press-releases/2024/01/ftc-order-prohibits-data-broker-x-mode-social-outlogic-selling-sensitive-location-data**
+- **Commission vote 3–0.** Order requires **deletion/destruction of all previously collected location data** absent consent or deidentification; creation of a **sensitive-locations list**; supplier consent assessments; recipient-use restrictions specifically **preventing association with LGBTQ+ locations or protests**; consent-withdrawal mechanisms; a comprehensive privacy program. Findings: X-Mode sold raw location tied to mobile advertising IDs, served **"hundreds of clients,"** supplied private government contractors, and **until May 2023 had no policy at all for removing sensitive locations.** Sensitive destinations in the data included **medical and reproductive-health clinics, places of worship, domestic-abuse shelters, LGBTQ+ service locations and bars, political protests, specialty infusion centers.** Civil penalty exposure up to **$50,120 per violation.** **NOT REACHED: any FTC or state-AG action naming Life360 itself.**
+- **NOT REACHED:** current Life360 MAU/subscriber figures — `investors.life360.com` timed out at 60s.
+
+### 3.2 Prevalence — how many parents track, and how many young adults are still tracked
+
+| Source | N / dates | MEASURED figures |
+|---|---|---|
+| **Pew Research Center, "Parents, Teens and Digital Monitoring," 2016-01-07** — https://www.pewresearch.org/internet/2016/01/07/parents-teens-and-digital-monitoring/ | Parents of teens 13–17; fieldwork **2014-09-25→10-09** and **2015-02-10→03-16**. (Sample size/MoE NOT REACHED — the methodology sub-page 404s and the main page omits it.) | **61%** ever checked which websites their teen visits · **60%** checked social media profiles · **48%** looked through call records/texts · **39%** use parental controls for blocking/filtering/monitoring · **16% use monitoring tools on the teen's cellphone to track location** · **16%** use parental controls to restrict cellphone use · 48% know the email password, 43% the phone password, 35% the social-media password. |
+| **Pew, "Parenting Children in the Age of Screens," 2020-07-28** — https://www.pewresearch.org/internet/2020/07/28/parenting-children-in-the-age-of-screens/ | **N = 3,640** U.S. parents with ≥1 child under 18; fieldwork **2020-03-02→03-15**. | Parents of a child **5–11**: **75%** check websites/apps · **72%** use parental controls to restrict screen time · **49%** look at call records or texts · **33% track the child's location via GPS apps or software.** (No 12–17 breakdown for these items in the report.) |
+| **Burnell, K., Andrade, F.C., Kwiatek, S.M., Hoyle, R.H. (2023), "Digital Location Tracking: A Preliminary Investigation of Parents' Use of Digital Technology to Monitor their Adolescent's Location," Journal of Family Psychology 37(4):561–567, doi 10.1037/fam0001067** | **N = 729 adolescents, M_age = 15.03** (dyadic; a downstream paper cites the parent-report subsample as **646 parents**) | **"About half of parents and adolescents reported digital location tracking."** Girls and younger adolescents more likely tracked. Tracking associated with greater externalizing problems and alcohol consumption — **but "these associations were not robust across multiple informants and sensitivity analyses"** and "results were not robust after statistical correction." Positive links to externalizing/cannabis emerged only for **older adolescents** and those reporting **lower positive parenting**. **No parent demographics linked to tracking; no SES association.** |
+| **Davis, I.S., Thornburg, M.A., Patel, H., Pelham, W.E. (2024), "Digital Location Tracking of Children and Adolescents: A Theoretical Framework and Review," Clinical Child & Family Psychology Review 27:943–965, doi 10.1007/s10567-024-00500-8** | First theoretical review of DLT | **"DLT use is now common from childhood to emerging adulthood, with 33–69% of U.S. families using it."** Also: "there is much speculation, but **minimal data**, about the new ethical and developmental issues that might arise from DLT use (e.g., privacy invasions)"; "**vastly understudied**." |
+| **Chase, G.E., Brown, M.T., Navarro, J.L., Lippold, M.A., Jensen, M. (2024), "Digital location tracking in the parent/caregiver–college student dyad," Journal of Adolescence 96(4):855–864, doi 10.1002/jad.12300** — OA PDF https://onlinelibrary.wiley.com/doi/pdfdirect/10.1002/jad.12300 | **N = 706** community-college and 4-year university students, Southeastern U.S., cross-sectional | **THIS IS YOUR "young adults still tracked" NUMBER: "nearly half of the sample endorsing currently or previously being digitally location tracked by their parent/caregiver."** Younger, White, and higher-SES students more likely to be tracked. **Students currently being tracked perceived their primary parent/caregiver as engaging in MORE helicopter parenting and as LESS supportive of their autonomy.** |
+| **Boele, S., Bülow, A., Keijsers, L. (accepted, Journal of Adolescence), "Parental Digital Tracking of Adolescents' School Performance, Location, and Finances: Widespread, Often Accepted, and Linked to Overprotection"** — PsyArXiv **10.31234/osf.io/mzry3_v2**, PDF https://osf.io/download/mzry3/, data https://osf.io/znu9w/ | **Study 1: 525 Dutch parent–adolescent dyads (2024)**; adolescents M_age=14.1, range 11–18, 53% female; parents M_age=46.7, 81% mothers. **Study 2 replication: 175 dyads (2019)**. Preregistered; ERC PARADOx grant 101043536; ethics ETH2324-0156 (2024-08-23). | **99.6% of parents tracked ≥1 domain.** By domain: **school performance 96.4% (506/525); finances 90.1% (473); location 65.7% (346)**. Only **7.8%** tracked all domains equally often. **Adolescent acceptance: location tracking viewed as "not okay" by ~one quarter** — significantly less accepted than school or financial tracking (Friedman χ²(2) = 220.8, p < .001; rs = .52–.54); only 0.8% rejected tracking in all domains, 28.2% found all domains entirely acceptable. **Tracking was UNRELATED to adolescent well-being (e.g., anxiety) but POSITIVELY associated with parental overprotection, control, and "dangerous worldviews."** School and location tracking **increased 2019→2024**, as did adolescents' acceptance. Informant discrepancy: **in 4–7% of dyads adolescents believed they were NOT tracked despite parental reports; in 3–12%, the reverse.** Their 65.7% location figure "falls at the **upper end of the 33–69% range** reported across prior studies." |
+
+### 3.3 Coercive-control evidence — the dual-use finding
+
+**Chatterjee, R., Doerfler, P., Orgad, H., Havron, S., Palmer, J., Freed, D., Levy, K., Dell, N., McCoy, D., Ristenpart, T. (2018), "The Spyware Used in Intimate Partner Violence," IEEE S&P 2018.**
+**MEASURED:**
+- Measurement pipeline crawled **>10,000 apps**; **9,224 apps** collected in the app-store crawl; **1,629 active apps** listed in Google Play matched; **32 unique off-store apps**; **70 apps** manually investigated; of a 1,000-app hand-labeled sample, **280 (28%) were marked as IPS tools.**
+- **"The majority are 'dual-use' apps — they have a legitimate purpose (e.g., child safety or anti-theft), but are easily and effectively repurposed for spying on a partner."** Their taxonomy names three tiers: **personal tracking / mutual tracking (family trackers) / subordinate tracking (child monitoring apps)** — i.e. parental control is the *subordinate* tier by construction.
+- **"All of the off-store spyware apps that we analyzed describe child safety as one of their use cases."** mSpy's own text markets child-safety and employee monitoring.
+- **Review mining: 464,625 reviews from >9,000 apps → 103 reviews on 82 apps explicitly describing use to track or spy on a current/former intimate partner.** Example, on **SMS Tracker Plus — "an app which claims to be for parental control"**: *"Love it!!! I've been suspecting my gf cheating and this gave me answers really quick."*
+- One counter-example measured: **TeenSafe** checks the age of the Google account the device is registered to, making IPS misuse harder — and **abusers complain in reviews about that difficulty.** (Proof that an age/role check is an effective, and noticed, control.)
+- Anti-virus/anti-spyware tools **"universally fail to identify dual-use apps as a threat."**
+
+**Maier, E-M., & Tanczer, L.M. (2025), "Surveillance Disguised as Protection: A Comparative Analysis of Sideloaded and In-Store Parental Control Apps," arXiv 2504.16087 (dated 2025-03-08).** PDF https://arxiv.org/pdf/2504.16087
+**MEASURED:** dynamic analysis of **20 sideloaded + 20 Google Play parental control apps** on a physical device running **Android 9.0**; disclosure to all 20 sideloaded vendors per OWASP.
+- **Stalkerware IOC matching: 40% of the 20 most popular apps matched TinyCheck IOCs; against the Echap IOC database, 50% of the 44 identified sideloaded parental control apps were flagged as stalkerware.** Their own framing: "**more than half of the identified sideloaded parental control apps were matched to stalkerware IOC**" and "the market of sideloaded parental control apps appears to be **subverted by stalkerware**."
+- **17 of 20 sideloaded apps instruct the user to disable Google Play Protect** (some also to suppress its notifications, so the user never learns protection was turned off). **13 of 20 were in fact detected as harmful by Google Play Protect v42.1.27-31**; the 7 not detected: **Bark, EvaSpy, FlexiSpy, Spapp Monitoring, SPYX, TheOneSpy, TiSpy.**
+- **8 of 20 (40%)** sideloaded apps obfuscate their icon and/or name.
+- **Anti-misuse safeguards** (periodic monitoring reminders, permanent notification-bar icon, accessible dashboards) were implemented by **17 in-store apps** and "largely absent" in sideloaded ones; where present in sideloaded apps they rely on **unverified user-entered data**, so "the measure is ineffective in preventing misuse."
+- **3 apps had no TLS encryption at all.**
+- **11** in-store apps specified a DPO contact; sideloaded far fewer.
+- Context cited: **Kaspersky's 2023 report identified 31,031 stalkerware victims** (Kaspersky users only, so a floor).
+
+**Also reachable, adjacent (Cornell Tech IPV corpus, all with free PDFs):** Tseng et al., "The Tools and Tactics Used in Intimate Partner Surveillance: An Analysis of Online Infidelity Forums," USENIX Security 2020 (109 cites); Roundy et al., "The Many Kinds of Creepware Used for Interpersonal Attacks," IEEE S&P 2020; Havron et al., USENIX Security 2019; Freed et al., CSCW 2019. **These measure the partner case, not the parent case.**
+
+### 3.4 Qualitative family-surveillance work
+
+**Mols, A., Pereira Campos, J., Pridmore, J. (2023), "Family Surveillance: Understanding Parental Monitoring, Reciprocal Practices, and Digital Resilience," Surveillance & Society 21(4), doi 10.24908/ss.v21i4.15645.** Erasmus University Rotterdam. **MEASURED: in-depth interviews with 11 early adolescents + 11 parents (22 total).** Location tracking and screen-time monitoring were the primary tools; **some children reciprocally monitored their parents**; the authors propose "family surveillance" as a framework that captures **bidirectional dynamics and power relations** better than "parental monitoring" or "lateral surveillance." PDF: https://ojs.library.queensu.ca/index.php/surveillance-and-society/article/view/15645/11067
+
+**NOT REACHED:** any measured (quantitative or systematically-coded-qualitative) study of Life360 / Find My / Google Family Link used *coercively*. I found no academic paper and no journalism-with-numbers on this specific case. The nearest measured things are (a) Chase et al.'s finding that currently-tracked college students perceive **more helicopter parenting and less autonomy support**, (b) Boele et al.'s finding that tracking frequency correlates with **parental overprotection and "dangerous worldviews"** but **not** with adolescent maladjustment, and (c) the dual-use stalkerware literature, which is about partners.
+
+---
+
+## TOOLING NOTES (for the next pass)
+
+- **OpenAlex hit its free daily budget mid-session** (`{"error":"Rate limit exceeded"... "Resets at midnight UTC"}`). Crossref `api.crossref.org/works?query.bibliographic=` and the arXiv API stayed reliable; Semantic Scholar's `/paper/DOI:` lookups worked but its `/paper/search` endpoint returned empty arrays or 429s ~60% of the time.
+- **fatcat.wiki (`api.fatcat.wiki`) timed out** (>120s) — dead for this purpose.
+- **ACM DL, T&F, and bepress `cgi/viewcontent.cgi` all return 403** to both curl and WebFetch, regardless of user-agent.
+- **The two productive open-PDF routes were `par.nsf.gov/servlets/purl/<id>` (for anything NSF-funded — this is how I got 4 Wisniewski-lab papers) and university lab publication pages** (the Ghosh CHI 2018 PDF exists only at `cs.ucf.edu/icerc/isuelab/publications/pubs/pn1838-ghoshA.pdf`; note the page's `href`s omit the leading `/icerc/`... they don't — the *host* differs: `www.eecs.ucf.edu` 404s, `www.cs.ucf.edu` serves it).
+- **The Markup slug for the Life360 story ends in `-user`, not `-users`** — the plural 404s. HN Algolia (`hn.algolia.com/api/v1/search`) was the tool that recovered the correct slug.
+- **glsen.org now 301-redirects to glisten.org**, and the 2013 Out Online PDF is not on the new site. Wayback (`web.archive.org/web/2019/<url>`) served it.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 2,507 characters
+
+````
+The report was already finished and delivered in my previous message; I've now relayed a condensed version to the requesting agent. Nothing was cut short.
+
+**What landed, in one line each:**
+
+1. **The "1.7 stars" paper is real and I read the full PDF.** Ghosh et al., CHI 2018, doi `10.1145/3173574.3173698` — 736 child-authored reviews of 37 apps (from 29,272 scraped reviews of 66 apps, Aug 2016), ages 8–19. **M = 1.79 (SD 1.48) for children vs 3.66 (SD 1.79) for parents**, t(793.34)=33.77. **76% one-star.** Complaints coded: Overly Restrictive 35%, Privacy Invasive 23%, Bad Parenting 14%, Faulty Design 14%. Only free copy: `https://www.cs.ucf.edu/icerc/isuelab/publications/pubs/pn1838-ghoshA.pdf`
+
+2. **A load-bearing negative result:** the word **"abuse" occurs zero times** in that paper. The "teens call it abuse" framing is not sourced there. The paper's own language is "parental stalking," and teen quotes using "spyware" and "evil."
+
+3. **The restriction→more-risk finding is real but its effect sizes are NOT REACHED.** N=215 dyads, two logistic regressions, "increased parental control was associated with more (not fewer) online risks" — but every route to the PDF 403s, so no ORs or p-values.
+
+4. **The LGBTQ+ forced-outing causal link does not exist as measured research** anywhere I could reach. The preconditions are heavily measured (Trevor N=28,524: 38% affirming home; HRC N=12,615: 40.9% out to all parents; GLSEN N=5,680: LGBT youth 3× as likely to not feel safe at home). The bridge is not.
+
+5. **Warford's SoK actively declines to name the parent-as-adversary case.** It has the exact vocabulary — "implicit or explicit authority over the target" plus physical device access — and assigns it to intimate-partner abuse, while filing children/teens under a separate factor defined as third parties with "helpful or safety-focused reasons for 'privacy invasions'." It cites both Ghosh CHI 2018 papers and codes it that way anyway.
+
+6. **Life360 is fully documented,** including the correct URL (slug ends `-user`, singular — the plural 404s), the $693K→$16M revenue arc, and the fact that the 2023 class action was brought by **a minor and his family**, with the complaint naming LGBTQ+-inferable locations.
+
+Two tooling notes for whoever picks this up: **OpenAlex hit its free daily budget mid-session** and resets at midnight UTC, and the two routes that actually yielded gated PDFs were `par.nsf.gov/servlets/purl/<id>` for NSF-funded work and university lab publication pages.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;l0K3VZX8EwoNcTcUojpDWC4e52OYmDCtft5UiKzCPWM
+
+<<^ code="&#x0004;" -> to=? >>

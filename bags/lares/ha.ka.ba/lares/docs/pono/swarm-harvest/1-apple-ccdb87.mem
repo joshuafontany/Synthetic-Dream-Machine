@@ -1,0 +1,393 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-apple-ccdb87 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-apple-ccdb87.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. APPLE. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-apple-ccdb87"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. APPLE
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 51,141 characters
+
+````
+# Does anyone ship a managed identity with an EXIT the manager cannot block?
+
+**ANSWER: NO.** Across every system I could reach — Apple Family Sharing, Apple Business/School Manager, Google Family Link, Google Workspace, Sovrin/Aries SSI guardianship — the subject's exit is *always* gated on either (a) the manager's cooperation, (b) an age threshold plus a manager-controlled toggle, or (c) an external legal/governance process. The single design where the subject holds an unblockable power over a delegated party is **Ethereum social-recovery wallets** — and that is the *inverse* relation (the subject is the controller; the "guardians" can only recover, not supervise). No shipped supervised-identity product has an unblockable escape hatch. No paper I reached names "the admin cannot be revoked by the subject" as a *named design pattern hazard*, though two come close.
+
+---
+
+## 1. APPLE
+
+### 1a. Safety Check (iOS 16, Sept 2022) — scope is SHARING + CREDENTIALS ONLY
+
+**SHIPPED-SPEC.** `https://support.apple.com/guide/personal-safety/safety-check-iphone-ios-16-ips2aad835e1/web` — **Published Date: March 2026** (Apple Personal Safety User Guide).
+
+**Emergency Reset does exactly five things** (verbatim from that page):
+- "Quickly stop sharing with all people and apps"
+- "Review your emergency contacts."
+- "Review devices connected to your Apple Account."
+- "Review phone numbers used to verify your identity."
+- "Change your Apple Account password and review device and account security."
+
+**What it can reach** (Safety Check FAQ, `https://support.apple.com/guide/personal-safety/safety-check-faq-ips5f85e089f/web`, **Published Date: October 2024**):
+- Apple apps for person-to-person sharing: Activity, Check In, Health, Home, Shared Calendars, Shared items in Find My, Shared location using Find My, Shared Maps ETA, Shared Notes, Shared Passwords, Shared Photos (Shared Library + Shared Albums). **11 apps.**
+- Third-party app permission classes it can revoke: Bluetooth, Calendars, Camera, Contacts, Files and Folders, Health, Local Network, Location Services, Media and Apple Music, Microphone, Motion & Fitness, Photos, Reminders, Research, Speech Recognition. **15 permission classes.**
+- Apple Account changes: remove signed-in devices; update trusted phone numbers; change Apple Account password; update emergency contacts; update device passcode / Face ID / Touch ID. iOS 17+: remove synced computers, enable Private Relay. iOS 18+: remove iPhone Mirroring computers.
+
+**What it explicitly does NOT reach** — Apple's own "Beyond Safety Check" list on the same page:
+> "Safety Check can't review or change some types of shared information, including: Non-Apple accounts and passwords. Social media sharing. Devices where you're signed in to a different Apple Account. An iPad or Mac with information sharing settings turned on for other apps."
+
+**And the decisive line, same page:**
+> "If your iPhone has Screen Time restrictions turned on or has a mobile device management (MDM) profile installed, you can still use Safety Check but some options may not be available."
+
+**Family Sharing, Screen Time, Managed Apple IDs, child accounts, and organizer authority appear NOWHERE in the Safety Check flow or FAQ.** Safety Check is a *peer-relationship* tool. It has zero authority over the *supervisory* relation. Confirmed by reading both pages in full.
+
+### 1b. Can a child/teen use Safety Check to exit the family? NO.
+
+**SHIPPED-SPEC.** `https://support.apple.com/en-us/102652` — "How to leave or remove a member from a Family Sharing group" (current as fetched 2026-09-04; redirected from the legacy `HT201081`). Verbatim:
+
+> "**If there are members in the Family Sharing group between 13-17\*** and Screen Time is enabled for their device, **the family organizer must turn off Screen Time before the member can leave or be removed from the family group.** Depending on a child's age and their state, country, or region, they might have to stay connected to a family group until they turn 18 and can confirm that they're an adult."
+
+> "**If a child in the Family Sharing group is under 13\***, the family organizer needs to delete the child's Apple Account and let the deletion take effect before they can remove the child from the family group. Or, the family organizer can move the child's Apple Account to another family group."
+
+> "\*Age varies by state, country, or region. **Where legally required, an Apple Account created for a child under 18 needs to be part of a Family Sharing group.**"
+
+> "**Any adult** can remove themselves from a Family Sharing group."
+
+> "The family organizer can **usually** remove anyone 13\* or older from the family Sharing group, but it varies depending on the state, country, or region of the user's Apple Account."
+
+**This is an explicit manager-blockable exit.** A 13–17-year-old with Screen Time on cannot leave until the *organizer* turns Screen Time off. A sub-13 account cannot leave at all except by account deletion or transfer to another organizer — both organizer-initiated.
+
+**⚠ DOCUMENTATION CONTRADICTION (instrument-lie).** The *Personal Safety User Guide* — the page an abuse victim is directed to — still says the opposite:
+`https://support.apple.com/guide/personal-safety/manage-family-sharing-ips75b3b794f/web`:
+> "Any family member over the age of 13 can remove themselves from a family group at any time. Just select your name and then select Leave Family."
+> "For security reasons, a child (under 13) account can't be removed from a family and can't stop sharing details such as Screen Time without the Screen Time passcode. The organizer has access to shared family content on your device, such as shared photo albums and shared calendars, and can view Screen Time activity."
+
+The safety-facing doc promises a 13+ unilateral exit; the operational doc (`102652`) conditions that exit on the organizer disabling Screen Time. **Apple's own two pages disagree on whether the exit is blockable.** I could not reach a page reconciling them — treat the operational page as authoritative for behavior.
+
+Roles (Personal Safety guide, same page): Organizer (adult who set up group; can invite, remove, disband) · Adult (18+) · Parent/Guardian (adult designated by organizer to manage parental controls) · Child or teen (under 18). Max 5 additional members + organizer = 6.
+
+### 1c. "Device and Data Access when Personal Safety is At Risk" — REACHED, with hard date
+
+**MEASURED metadata.** The manual is gone from `manuals.info.apple.com` (301 → `support.apple.com/en-us/docs`). Recovered from Wayback: `https://web.archive.org/web/20201218001506if_/https://manuals.info.apple.com/MANUALS/1000/MA1976/en_US/device-and-data-access-when-personal-safety-is-at-risk.pdf`
+
+- `pdfinfo`: **CreationDate Thu Dec 17 13:37:05 2020 PST**, Creator: Pages, Producer: macOS 11.1. So the manual is **December 2020**, not January 2021 (Jan 2021 is when press covered it). 20 pages.
+- Scope (verbatim, p.1): "If you'd like to revisit what you share with other people, or restore your device's original settings for any reason, this guide can help you understand what information you are sharing via your Apple devices, and how to make changes to protect your safety. It includes step-by-step instructions on how to remove someone's access to information you've previously granted: from location data on the Find My app, to meetings you've scheduled via Calendar."
+- Contents: Update your software (p3) · Restoring to factory settings (p3) · Protect your device (p4) · Protect your Apple ID (p5) · Unrecognized sign-in location (p7) · Check privacy settings (p8) · Find My (p9) · Sharing your location (p10) · Sharing with iCloud (p11) · Shared Albums (p12) · Shared Calendars (p12) · Activity with Apple Watch (p13) · Delete unknown third-party apps (p14) · Delete unknown configuration profiles (p15) · **If you use Family Sharing (p16)** · Phishing (p17) · 3 checklists (pp18–20).
+- The **Family Sharing** section (p16) carries the *identical* rule, verbatim, to today's Personal Safety guide:
+> "Also, any family member over the age of 13 can remove themselves from a family group at any time... **For security reasons, a child (under 13) account cannot remove themselves from a family and cannot stop sharing details such as Screen Time without the Screen Time passcode.** If you use a child account, the family organizer has access to shared family content on your device, such as shared photo albums and shared calendars, and can view Screen Time activity."
+
+**So: Apple has documented "the supervised subject cannot exit" continuously from December 2020 through March 2026, and has never built an exit that the organizer cannot block.** The under-13 case is stated as a *security feature*, not a gap.
+
+### 1d. Managed Apple IDs / Apple Business Manager & Apple School Manager — total org authority, no user exit
+
+**SHIPPED-SPEC.** Live ABM guide pages now all return only "Apple Business Manager is now Apple Business" (rename in progress as of 2026-09-04); content recovered from Wayback snapshot **2026-03-29**.
+
+`https://support.apple.com/guide/apple-business-manager/about-managed-apple-accounts-axm78b477c81/web` (**Published Date: March 31, 2025**), verbatim:
+> "Managed Apple Accounts function much like Apple Accounts but are specifically designed for, **owned, and managed by, an organization**... This also includes role-based administration and—in certain instances—password resets."
+> "A user with a Managed Apple Account can be locked out of their account if they enter an incorrect password more than 10 times... **To reset their password, the user needs to contact any user with the role of Administrator or People Manager.**"
+> "If an unmanaged (personal) Apple Account goes through the formal deletion request process, it can't be recreated nor can it be used as a Managed Apple Account **for six years**."
+
+`https://support.apple.com/guide/apple-business-manager/create-or-reset-user-passwords-axmd9c4cbc33/web`:
+> "**Administrator:** Can reset passwords for all other users, regardless of role."
+> "**People Manager:** Can reset passwords for all other users except those with the role of Administrator."
+> Temporary passwords valid **90 days**. Admin self-reset via `iforgot.apple.com`: if >1 Administrator, other admins are emailed and can reset it themselves; if not reset within **72 hours**, a link goes to the verified email/phone, valid **7 days**.
+
+Admin surface (from the guide TOC): manually add users · manage existing users · create/reset passwords · assign roles and privileges · **deactivate user accounts** · **delete user accounts** · **account transfers** · edit Managed Apple Accounts · change a user's domain · **sign federated users out of devices** · lock a domain · view activity / read log files.
+
+**There is no user-initiated exit anywhere in the guide.** The Managed Apple Account is *owned by the organization*; the user's only "exit" is the org deleting or transferring the account. Apple School Manager carries the **identical article slugs** (`about-managed-apple-accounts-axm78b477c81`, `create-or-reset-user-passwords-axmd9c4cbc33`, `deactivate-user-accounts-axmde8c63e5b`, `delete-user-accounts-apdac0d6f213`, `set-password-policies-axme4faad4d4`, `manage-student-progress-axm921383508`) — same authority model applied to students.
+
+*NOT REACHED:* the "What Managed Apple Accounts can't access" article body (referenced from the overview but not fetched).
+
+---
+
+## 2. GOOGLE
+
+### 2a. Family Link at 13 — the exit is EXPLICITLY parent-gated until 18
+
+**SHIPPED-SPEC.** `https://support.google.com/families/answer/7106787?hl=en` — "How Google Accounts work when children turn 13 (or the applicable age in your country)". Verbatim:
+
+> "When a child turns 13 (or the applicable age in their country), Google sends an email to the parent who supervises the account and to the child to let them know that they can update the child's account."
+> Option 1: "**Continue their current parental supervision settings** — The child can choose to maintain their existing supervision settings and have a parent continue to manage their account by not acting on the email. **Tip: Supervision settings remain the same until your child decides to update their account.**"
+> Option 2: "Update their account with supervision for children over 13..."
+> **"Tip: Children under 18 need parent approval to stop supervision."**
+> **"Children over 13 (or applicable age of consent in your country) need parent permission to stop supervision"** — "Parents of children over 13 can choose to stop supervision at any time. **Children need parent approval to stop supervision until they turn 18.** Parents and children will both get notified when supervision is stopped."
+
+**This is a documented, unambiguous manager-blockable exit, and Google says so in a heading.** Age 13→18 is a five-year window in which the child cannot unilaterally exit.
+
+### 2b. Cannot even leave the family group
+
+`https://support.google.com/families/answer/6317858?hl=en` — "Join or leave a family on Google", verbatim:
+> "**Important: If you're a family manager or supervised member, you can't leave your family group.**"
+
+Also from that page (constraints on the exit even for adults): must not be in another family group; must not have switched family groups in the last 12 months; "You can only change to a different family group once every 12 months if you have a paid Google subscription, like Play Pass, Play Family Library, YouTube Premium."
+
+### 2c. Age thresholds (the "applicable age")
+
+`https://support.google.com/accounts/answer/1350409` (Wayback 2026-08-28). Default **13** for all countries not listed. Listed exceptions: Aruba 16 · Bermuda 14 · Caribbean Netherlands 16 · Chile 14 · Colombia 14 · Curaçao 16 · Peru 14 · Sint Maarten 16 · Venezuela 14 · South Korea 14 · Vietnam 15 · Albania 16 · Andorra 16 · Austria 14 · Bulgaria 16 · Croatia 16 · Cyprus 14 · Czech Republic 15 · Denmark 15 · France 15 · Germany 16 · Greece 15 · Hungary 16 · Ireland 16 · Italy 14 · Lithuania 14 · Luxembourg 16 · Monaco 15 · Netherlands 16 · North Macedonia 14 · Poland 16 · Romania 16 · San Marino 16 · Serbia 15 · Slovakia 16 · Slovenia 16 · Spain 14.
+
+**⚠ SECOND DOCUMENTATION CONTRADICTION.** This same page says: "For younger children, parents can help create and manage a Google Account with Family Link. **When a child reaches their country's minimum age, they can manage their own account.**" That directly contradicts `7106787`'s "Children need parent approval to stop supervision until they turn 18." Both are live Google pages. Same class of instrument-lie as Apple's.
+
+### 2d. Google Security Checkup
+
+Google has **no** "Safety Check" analogous to Apple's. Security Checkup (`myaccount.google.com/security-checkup`) covers devices, recent security activity, 2SV, third-party access, saved passwords. **NOT REACHED** — support.google.com/accounts/answer/9924334 has no Wayback capture and live fetch hits Google's CAPTCHA interstitial. I did not verify its scope; do not fill from memory. No page I reached links Security Checkup to supervision removal.
+
+---
+
+## 3. GOOGLE WORKSPACE ADMIN AUTHORITY
+
+All fetched via Wayback (live `support.google.com/a/` serves `google.com/sorry` CAPTCHA to this environment).
+
+**Super Admin powers** — `https://support.google.com/a/answer/2405986` (Wayback 2026-02-05), verbatim:
+> "**Super Admin** — Has access to all features in the Google Admin console and Admin API and can manage every aspect of your organization's account. **Super admins also have full access to all users' calendars and event details.**"
+> "Only super admins can... Create and assign administrator roles · **Manage other admins, including changing passwords** · **Transfer ownership of files during the user deletion process** · Accept the Terms of Service for a product · Invite unmanaged user accounts to become Google Workspace managed user accounts · **Restore deleted users** · Turn Multi-party approval settings on or off · Allow users to turn on 2-Step Verification · Install Marketplace apps · Manage Calendar resource access-level controls · **Use the data migration service** · **Grant domain-wide delegation and manage API client access** · Set up Google as a SAML IdP."
+
+**Password reset** — `https://support.google.com/a/answer/33319` (Wayback 2026-02-03): admin resets any user's password from the Admin console; "After resetting a user's password, you should also reset the user's sign-in cookies." Steps: reset password → reset sign-in cookies.
+
+**Suspend** — `https://support.google.com/a/answer/33312` (Wayback 2025-12-08): "you can temporarily block a user's access... Email, documents, calendars, and other data aren't deleted... **Collaborators who have been granted access to shared documents will retain their ability to view, edit, and collaborate.**"
+
+**Delete + seize data** — `https://support.google.com/a/answer/33314` (Wayback 2026-01-22): "**To keep data like Gmail messages or Drive files in your organization, you need to transfer their data to another user.**" Deleted user restorable for **20 days**.
+
+**Take ownership of files without the owner** — `https://support.google.com/a/answer/1247799` (Wayback 2026-03-13), verbatim:
+> "As an administrator, you can change the owner of a file stored in Google Drive if the current owner and the proposed owner are in your organization."
+> "If you don't know who the owner is, the owner isn't an active account, **or you don't want to involve the owner, you can change ownership with the security investigation tool.**"
+> Transfer prep step 1: "**Suspend the current owner's account. This action prevents them from creating or moving content during the transfer.**"
+
+**Read everything (Vault)** — `https://support.google.com/vault/answer/2462365` (Wayback 2026-06-05): "**retain, hold, search, and export users' Google Workspace data**" across Gmail, Drive, Calendar, Chat (when history on), Meet recordings + chat/Q&A/polls logs, Groups, Voice SMS/voicemail/transcripts/call logs, Sites. Licensing: since **November 1, 2025** admins must hold a Vault license.
+
+**There is no user-side exit from a Workspace account.** Google's own Family Link doc even forbids using one to escape into a family: "You can't join a family with a Google Account from your work, school, or other organization" (`answer/6317858`).
+
+### 3a. Documented incident of school-account admin authority used to out students
+
+**MEASURED, nationally representative.** Center for Democracy & Technology, *Hidden Harms: The Misleading Promise of Monitoring Students Online*, August 2022.
+PDF (live cdt.org returns 403 to this environment; recovered via Wayback): `https://cdt.org/wp-content/uploads/2022/08/Hidden-Harms-The-Misleading-Promise-of-Monitoring-Students-Online-Research-Report-Final-Accessible.pdf`
+
+Methodology (verbatim): "Online surveys of nationally representative samples of **1,606** 6th- to 12th-grade parents and **1,008** 6th- to 10th-grade teachers, as well as two surveys of 9th- to 12th-grade students (with n-sizes of **400 and 460**) were fielded **May/June 2022**." Fourth wave for parents/teachers (prior waves May/July 2020, Feb 2021, June/July 2021), second wave for students.
+
+Findings (verbatim):
+> "**Thirteen percent** of all students at schools doing student activity monitoring report that they or another student they know who is LGBTQ+ has been outed because of student activity monitoring, and that percentage rises to **29 percent among LGBTQ+ students**."
+> "**51 percent of parents and 57 percent of teachers** agree that student online activity monitoring could have unintended consequences such as outing LGBTQ+ students."
+> "**Ninety-five percent of teachers** report that their school or school district supported students this past year by providing and/or maintaining tablets and laptops"; **96%** expect it to continue in 2022–23.
+> "**Sixty-one percent of parents, 57 percent of students, and 42 percent of teachers** report that they are very or somewhat concerned about the privacy and security of students' data."
+> Chilling effect, by subgroup: students with learning differences (**n=92**) 60% vs 45% without; students with physical disabilities (**n=48**) 67% vs 46% without, agreeing "I do not share my true thoughts or ideas because I know what I do online may be monitored."
+
+Companion CDT brief, *School Safety Technology Carries Big Risks for Vulnerable Students*, 2022-09-09 (`https://cdt.org/wp-content/uploads/2022/09/2022-09-09-CDT-School-Safety-Technology-Carries-Big-Risks-for-Vulnerable-Students-brief.pdf`):
+> "nearly **90% of teachers** report that their school uses software to track what students are doing online."
+> "more LGBTQ+ students say that they or someone they know got in trouble with the teacher or school when the school or district's student activity monitoring saw that the person visited an inappropriate site online or said something inappropriate in a document or message (**56% LGBTQ+ vs. 40% non-LGBTQ+**)"
+> "**one in five parents** do not know if their school uses student activity monitoring software."
+> "**58 percent of parents** have some level of concern about student data being shared with law enforcement, a concern that is heightened for Black parents over white parents."
+
+**Named vendor incident.** The 74, 2023-01-28: "Gaggle Drops LGBTQ Keywords from Student Surveillance Tool Following Bias Concerns" — `https://www.the74million.org/article/gaggle-drops-lgbtq-keywords-from-student-surveillance-tool-following-bias-concerns/`. Gaggle removed LGBTQ-specific keywords ("gay", "lesbian", "queer", "bisexual") from its alert dictionary; the removal happened "late last year" (i.e., late 2022) per spokesperson Paget Hetherington. Fight for the Future's Evan Greer, quoted: "I don't see how this actually in any meaningful way mitigates the potential for this software to nonconsensually out LGBTQ students to administrators." Related: The Guardian, 2022-09-30, "The Trevor Project teams up with controversial student surveillance company" — `https://www.theguardian.com/education/2022/sep/30/trevor-project-gaggle-student-surveillance-lgbtq-bias`; the Trevor Project returned Gaggle's donation within hours.
+
+*Note the mechanism:* the outing is not a rogue admin — it is the **legitimate exercise of the school's admin authority over a Workspace/Chromebook account the student cannot leave.** That is the exact hazard shape of the question.
+
+---
+
+## 4. SAFETY-BY-DESIGN / TRAUMA-INFORMED LITERATURE
+
+### 4a. Trauma-Informed Computing (CHI 2022) — six principles, and a NULL result on account managers
+
+Chen, McDonald, Zou, Tseng, Roundy, Tamersoy, Schaub, Ristenpart, Dell. *Trauma-Informed Computing: Towards Safer Technology Experiences for All.* CHI '22, 2022-04-29, pp. 1–20. DOI `10.1145/3491102.3517475`. Crossref cited-by **148**; Semantic Scholar **198**. Closed access; full text recovered from Wayback of the ACM PDF (`https://web.archive.org/web/20251213230101if_/https://dl.acm.org/doi/pdf/10.1145/3491102.3517475`).
+
+**The six principles** (adapted from SAMHSA, verbatim definitions from §4):
+1. **Safety** — "ensuring that people feel safe when using, designing, or otherwise interacting with technology"; encompasses "not only digital safety... but also feeling psychologically safe."
+2. **Trust** — renamed from SAMHSA's "trustworthiness and transparency." "ensuring technology artifacts, processes and organizations operate transparently, predictably, and reliably while providing users with the ability to make mistakes and corrections."
+3. **Peer Support** — "connecting with fellow trauma survivors as a vital part of healing and recovery."
+4. **Collaboration** — "ensuring that trauma survivors are actively involved in decisions regarding their care and support... treated as 'experts in their own lives'." Operationalized as: "(1) ensuring interfaces and user interactions with a platform... are **collaborative rather than autocratic**; (2) encouraging interaction and support from the broader ecosystem...; and (3) ensuring survivors have representation and input during the development and evaluation of new technologies."
+5. **Enablement** — deliberately renamed from SAMHSA's "empowerment, voice, and choice", following Dombrowski et al., "to avoid a techno-determinism narrative, since trauma survivors may be enabled to find their own strength, but not necessarily empowered when the underlying structures that cause trauma remain unchanged." "what changes could be made to **give people greater control over their decisions and well-being**."
+6. **Intersectionality** — replaces SAMHSA's "cultural, historical, and gender issues."
+
+SAMHSA's originals, per the paper: "safety; trustworthiness and transparency; peer support; collaboration and mutuality; empowerment, voice, and choice; and cultural, historical, and gender issues."
+
+**On account managers / delegated authority: NOTHING.** I grepped the full text for `family shar`, `parental`, `account manager`, `administrator`, `admin `, `guardian`, `delegat`, `revoke`, `multi-user`, `shared account`, `child` — **zero substantive hits.** The word "child" appears only in citation titles and in "child welfare services." The paper's control/consent language ("collaborative rather than autocratic", "greater control over their decisions") is stated as a *principle*, never applied to a supervisor–subject account relationship. The paper's closest artifact is the "Max" vignette — outed as transgender by a social media platform against his wishes — which is a *platform*, not a manager.
+
+### 4b. Geeng & Roesner, "Who's In Control? Interactions In Multi-User Smart Homes" (CHI 2019)
+
+DOI `10.1145/3290605.3300498`, published 2019-05-02, pp. 1–13. Crossref cited-by **166**; Semantic Scholar **255**. Full text via Wayback (`https://web.archive.org/web/20220626052005if_/https://dl.acm.org/doi/pdf/10.1145/3290605.3300498`).
+
+**Sample: N=18** (4 female, 14 male), ages 17–44, all in multi-person households with smart devices, all different households. 17 US + 1 Australia. All 18 did the initial interview; **14** completed experience sampling (**46 logs**, mean 3.3 each); **11** completed all three sections. Composition: 3 college students with roommates, 14 living with partner and/or family, 1 adolescent. Terms: "smart home driver" vs "passive user."
+
+**Measured findings about non-admin members:**
+- "we observed the smart home driver having **outsized control** over smart device data and functionality, as compared to other home occupants. This situation often arose **by default**."
+- "When only the device installer has access to the device's account, **functionality is limited to this user by default.**" (P10's Microsoft Invoke: "Only he has access to the history of voice command searches.")
+- Explicit deliberate demotion of a child: "P6 added his 8-year old daughter as a secondary user in the Apple Home app... **By adding her as a secondary user, P6 prevented her from taking administrative actions like deleting a device.**"
+- Account-tied control beats physical possession: P10's 13-year-old sister took a device during a conflict; "she cannot use it because P10 will remotely lock the device, since it is connected to his account... **In this case, control of the device requires more than just physical control.**"
+- P9's 4-year-old: automated bedroom light "scared her because, 'she feels she has no control over how it behaves... She doesn't like it in her room. She won't talk to it ever.'"
+- "In some cases, this power difference simply reflects existing power dynamics in co-occupant relationships (such as parent and child). In other cases, **the inclusion of technology can exacerbate these dynamics or allow for increased control or abuse by the smart home driver.**"
+- **NULL result, honestly reported:** "we found that **none of our participants expressed particular concern over these power differences**, nor about issues related to interpersonal privacy." Three offered reasons: stable trusting relationships; incomplete mental models; "most of our participants are smart home drivers."
+- **Limitation:** "all except two of our participants were smart home drivers... our results do not fully reflect the experiences of passive users." "We were **unsuccessful at recruiting other (passive) household members** of our smart home driver participants."
+- **Gender:** "the majority of smart home drivers that we interviewed were men. These drivers frequently had female partners who were (claimed to be) passive users. A similar gender dynamic was reported in an older paper by Mennicken et al. (2012)."
+- **Open question directly adjacent to the research question, posed but not answered:** "what happens—or what should happen—**when children grow up**"; "as children grow up, the changes in parent-child relationships can significantly impact smart home interactions and may require fundamental changes to how the smart home is setup and managed." "at what age do children gain the agency to have a say on smart devices in their personal spaces?"
+- Adjacent hazard: "**this design choice prevents an attacker from resetting a lock to gain access to the home, [but] it can also raise security concerns when the former owner is an adversary who may wish to prevent the lock from being reset** (e.g., a former spouse in an abusive relationship)." — the closest the paper comes to naming an unrevocable-admin hazard.
+
+Design recommendations: analog/mechanical fallbacks; account creation should onboard the whole household ("The Nest app already does so"); "Consider Different Relationship Types" including landlord/tenant. **No recommendation for a subject-initiated, unblockable exit.**
+
+### 4c. Zeng & Roesner, USENIX Security 2019 (open access — the closest measured work on non-admin agency)
+
+*Understanding and Improving Security and Privacy in Multi-User Smart Homes: A Design Exploration and In-Home User Study.* USENIX Sec '19, Aug 14–16 2019, Santa Clara. `https://www.usenix.org/system/files/sec19-zeng.pdf` (freely downloadable — the only paper here not behind a paywall).
+
+- **Method:** built a prototype smart-home system with access control, then ran a **month-long in-home study with 7 households** in the Seattle metro area, "including couples, roommates, and families with children of various ages."
+- Prototype roles: "also assigned to roles (**admin, child, guest**). **Only admins have** [full privileges]." Plus location-based access control.
+- Names the structural problem: current platform design "forces home administrators to choose between provisioning additional accounts with **administrator privileges** or [not provisioning at all]."
+- Measured behavior: "them quickly settled on the **least restrictive** access control policy"; households largely declined to use "supervisory access controls to restrict access to devices"; H8A "did not want her children to either change or override [settings]"; H1A: "I certainly don't want them having admin control."
+- Scope caveat stated by the authors: study is of "generally non-adversarial (e.g., non-abusive) households."
+
+### 4d. A paper naming "admin cannot be revoked by the subject" as a hazard — CLOSEST HIT, but not by that name
+
+The nearest explicit statement is **not** in the CHI/HCI literature but in **Hyperledger Aries RFC 0103** (see §6 below): "the dependent in a guardianship relationship is **particularly vulnerable to abuse from _within_**." That is a named hazard for indirect identity control, with an accompanying diagram (`guardianship-risk.png`).
+
+**I found no paper naming the pattern "the administrator cannot be revoked by the subject" as a design hazard under any such label.** Freed, Palmer, Minchala, Levy, Ristenpart, Dell, *"A Stalker's Paradise": How Intimate Partner Abusers Exploit Technology*, CHI 2018, DOI `10.1145/3173574.3174241` — **NOT REACHED** (closed access, no Wayback PDF found, no OA mirror reachable); I did not read it and will not summarize it from memory. Slupska & Tanczer, *Threat Modeling Intimate Partner Violence: Tech Abuse as a Cybersecurity Challenge in the Internet of Things*, in *The Emerald International Handbook of Technology Facilitated Violence and Abuse*, 2021, DOI `10.1108/978-1-83982-848-520211049`, CC-BY hybrid — **metadata confirmed, full text NOT REACHED** (Emerald served HTML, not the PDF). Bellini, Tseng, and the "multi-user problem" framing appear in these works; I cannot quote them.
+
+---
+
+## 5. BELLINI, "PAYING THE PRICE" (CHI 2023) — delegated financial authority
+
+Rosanna Bellini (Cornell). *Paying the Price: When Intimate Partners Use Technology for Financial Harm.* CHI '23, Hamburg, **April 23–28 2023**, pp. 1–17. DOI `10.1145/3544548.3581101`. **Gold OA, CC-BY.** Crossref cited-by **50**; Semantic Scholar **59**. (dl.acm.org blocks direct fetch here; full text obtained via Wayback `https://web.archive.org/web/20251213225940if_/https://dl.acm.org/doi/pdf/10.1145/3544548.3581101`.)
+
+**N and method:**
+- Retrospective analysis of a clinic case-management system (Cornell IPV Tech Clinic). Keyword-search + manual relevance coding, run three times: **October 2021, February 2022, August 2022**.
+- "Our search strategy identified **174 consultations with 158 tech abuse survivors** who reported experiencing financial abuse." Final dataset: **158 client cases** (case notes, recorded-conversation transcripts, referral forms) totalling **~45,000 words**.
+- Plus **16 interviews with financial advocates** (victim support workers, family lawyers, financial therapists, financial planners, insurance agents, customer support agents), **35–65 minutes** each, **13 by video / 3 in person**. Recruited across US consumer-finance/banking/insurance professional networks; B2B and B2C orgs excluded; selective sampling for minoritized/racialized-serving orgs. 5 advocates had firsthand experience of *using* financially abusive behavior; all 16 of being subject to it.
+- Analysis: adapted Glaserian Grounded Theory; two rounds of open coding; advocate member-checking; theoretical coding. Cornell IRB. Participants denoted **S1–S158** and **A1–A16**.
+- Limitations, stated: non-representative; single major US metro; survivors predominantly women, English-speaking, **post-separation**, currently receiving IPV services; keyword-driven case retrieval may miss cases; indirect data.
+
+**Five attack categories** (extending the Freed et al. taxonomy to finance): (1) **ownership-/authorized-user-based**, (2) account compromise, (3) harmful posts or reports, (4) deception and identity theft, (5) bypass physical defences. **Four motivations**: exploit, monitor, restrict, sabotage.
+
+**Findings on DELEGATED financial authority — the core of the question:**
+- "abusers exercise authority **as owners or authorized users** of a survivor's accounts to rack up coerced debt or deplete a survivor's service allowance."
+- "survivors described **being convinced by an abuser to add them as an authorized user** on their online financial accounts and credit card plans, allowing an abuser to make purchases on a survivor's credit account and card. Authorized users differ from being added to a family plan as **the account holder (often a survivor in our dataset) is legally responsible for any expenditure accrued, while an authorized user is not.** If an abuser deliberately abuses their authorized user privileges, this hurts the account holder's credit score."
+- The **reverse** delegation — the survivor as the delegated party, i.e., exactly the "manager can block the exit" shape: "a survivor (S51) shared that she was **an authorized user on her ex-husband's credit account**, allowing her access to finances when she could not work. However, **her ex-husband continuously threatened her with removal from his account should she do something that upset him.**"
+- Sole-ownership as control: S21 — "He made sure that I don't get anywhere near finances ... everything, every single thing, all accounts, all bank accounts, any accounts, everything is 100% under his name ... **I was invisible to the banks and utility providers.**"
+- "As transfers and changes often have to be done by the account holder or as an authorized user, survivors shared they had been **unable to make savings or transfer money to their children**."
+- Allowance model: "the only income they received was through their abuser, which they referred to as **'an allowance' (S128)**."
+- Legal-ownership seizure: S157 — "he brought the cops [police] around to where I lived, he showed them the receipts and **since we were the legal owner** ... and he took all my devices ... phones, tablet, laptop ... everything ... even the kids' devices."
+- Family-plan abuse: "abusers were reported to abuse these privileges, such as refusing to pay 'their fair share' (S45)... deplete their paid-for service allowance."
+- **The design finding:** "Despite often being designed into the fabric of many financial products (**e.g., joint, family accounts**), users who have a close intimate relationship with another user are **rarely considered as adversarial or a potential intimate threat toward users whom they share an account with.**" And: "financial services have predominantly focused on **protecting consumers from external threats**, often at the expense of considering attacks closer to home."
+- On consent: the paper warns systems "may interpret **consent performed under the coercion** of financial [abuse]" as valid.
+
+**Guardianship/conservatorship: essentially absent.** Grepping the full text for `conservator`, `power of attorney`, `guardian` yields **zero** substantive hits; elder financial abuse is cited only as adjacent related work ([7,31,47], Greene 2021 "Elder Financial Abuse and Electronic Financial Instruments"). Bellini calls for "designing for intimate threats through adversarial thinking" — **she does not propose an unblockable unilateral exit** for the delegated party.
+
+---
+
+## 6. PROTOCOLS / STANDARDS WITH AN UNBLOCKABLE ESCAPE HATCH
+
+### 6a. Sovrin, "On Guardianship in Self-Sovereign Identity" — DESIGNED, and the exit is explicitly a LEGAL-LAYER obligation, not a technical mechanism
+
+**Version 2, Sovrin Guardianship Task Force, dated "April 2023"** on the cover; PDF `CreationDate: Sun May 28 08:16:58 2023 PDT`, ~9,700 words. URL: `https://sovrin.org/wp-content/uploads/Guardianship-Whitepaper-V2.0.pdf` (linked from `https://sovrin.org/guardianship/`). *Note: `Guardianship-Whitepaper.pdf` and `Guardianship-Whitepaper2.pdf` also resolve 200 at ~3.69 MB each — near-identical byte sizes, likely the same doc under legacy names.*
+
+**What it says about the guardian→self transition:**
+- Requirement (§ "why SSI needs guardianship"): "**Support revocation so that each person can reclaim their self-sovereign identity as and when they are able.**"
+- Sovrin Governance Framework Guardianship principle, quoted in the paper: "**Guardians must respect the fundamental right of a dependent to reclaim self-sovereign identity if changes in the dependent's circumstances enable it.**"
+- Stage 4 (Evolution): for the child case (Mya), "**Zo's credentials may not be actively revoked, but can be considered to be practically expired**, because Mya has reached the age at which Zo cannot act on her behalf." For the capacity-recovery case (Jamie), "**A legal process is required for Jamie to go through to prove his independence** and ability to be responsible for his own actions and credentials."
+- Stage 5 (End active guardianship): termination "may be explicit, with the guardianship credential and guardian-held credentials **being revoked or deactivated**, or implicit, due to the verifier recognizing the jurisdictional rules that make the arrangement void." Triggers listed are all external: formal capacity reassessment; a law or legal judgment; the dependent gaining their own commercial arrangements; a social-context change; a change in organizational rules.
+- **Layer Four (Governance Frameworks) is where the exit lives**, verbatim: "Layer Four may be the most critical layer for guardianship as a human right... These specialized governance frameworks should address all the topics in this paper... **Above all, they should ensure a dependent's right to independence, revoking any guardianship arrangement, if necessary.**"
+
+**Can the guardian block it? The paper never says no — and the architecture implies yes.** The guardian is the credential **holder**; the dependent is only the credential **subject**. Layer Two: "**The Guardian does not use the Dependent's DID as part of any of this interaction.** The Guardian establishes interactions with others to allow them to issue VCs to the Guardian *as the Guardian*." The dependent holds no key that can terminate anything. Revocation is performed by the credential **issuer** under a governance framework. **There is no cryptographic capability held by the dependent that the guardian cannot obstruct.**
+
+**Risks the paper does name** (§ "Risks of SSI in Guardianship"): **Recentralization** ("There is a particular risk that some organizations or governments may try to act as their customers' or citizens' guardians instead of as their peers and delegates"; mitigation: "Prohibiting 'bulk load' processes where whole populations are converted to guardianship without involvement or consent"); **Violating the trust relationship**; **Impersonation and commingling of identity data**; **Complexity, Conflict, and Competition**; **Risks at moments of transition** ("that a dependent is not 'digitally stranded' with no guardian after a point of transition"). Mitigations offered are procedural: certification/requalification cycles, audit trails, second-guardian authorization for high-value transactions, and "**Including appeal, objection and whistle-blower mechanisms** in guardianship regulations or governance frameworks."
+
+**Verdict: DESIGNED intent for a right of exit; NO technical mechanism the guardian cannot block.** The Sovrin paper is an honest statement that the exit is delegated to law.
+
+### 6b. Hyperledger Aries RFC 0103 "Indirect Identity Control" — names the hazard, offers no subject-held exit
+
+`https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0103-indirect-identity-control` (README + `guardianship-details.md`, `delegation-details.md`, `guardianship-sample/trust-framework.md`, `guardianship-sample/schema.json`).
+
+- Distinguishes three forms: **delegation, guardianship, controllership.**
+- **The hazard, verbatim:** "Since guardianship does not always derive from dependent consent (that is, the dependent is often unable to exercise sovereignty), **the dependent in a guardianship relationship is particularly vulnerable to abuse from _within_**." (accompanied by `guardianship-risk.png`).
+- Consequence drawn: "Because of this risk, guardianship is the most likely of the three forms of indirect control to require an **audit trail** and to involve legal formalities."
+- Revocation: the README says only "**Delegation needs to be revokable**" and that guardianship inherits "revocation" from delegation. Revocation is exercised by the issuer/trust framework — **the README never grants the dependent a revocation power.** Open TODO at line 272: "[TODO: discuss offline mode, freshness, and revocation]."
+- Credential structure: holder = guardian, `proxied` subject = dependent; `rationaleURI` **required** for guardian credentials; permissions enumerated as e.g. `financial`, `medical`, `do_not_resuscitate`, `foreign_travel`, `new_relationships`; constraints e.g. `geo_radius`, `jurisdiction`, `biometric_consent_freshness`. Proxy credential type string form: `Proxy.<D|G|C>/<trust framework>/<version>/<role>`, e.g. `Proxy.G/UNICEF Vulnerable Populations Trust Framework/1.0/ChildGuardian`.
+- `guardianship-details.md` is a **73-word stub** — its substance lives entirely in unfetched Google Docs/Slides links, with "## Guardians and Delegation — TODO" and empty "## Privacy Considerations" / "## Diffuse Trust" headings. **The guardianship-termination design in Aries is unwritten.**
+
+### 6c. W3C DID Core — guardianship is out of scope
+
+`https://www.w3.org/TR/did-1.0/`: the word "guardian" **does not appear**. The spec has `capabilityDelegation` and `capabilityInvocation` verification relationships — "the DID subject... chooses to delegate their capability" — i.e., delegation always flows *from* the subject, who retains the DID controller keys. There is no supervised-principal model at all.
+`https://www.w3.org/TR/did-use-cases/` mentions guardianship exactly **once**: "the Controller, but in cases of guardianship, agents (human or software)..." — a passing acknowledgement, no mechanism.
+
+*NOT REACHED:* IIW (Internet Identity Workshop) session notes on guardianship; the Sovrin "Guardianship Credentials Implementation Guidelines V1" and "Guardianship Credentials Technical Requirements V1" (referenced in the whitepaper's footnotes 3 and 4 but with no resolvable URL in the PDF text).
+
+### 6d. Social recovery — the ONE design where the delegated party cannot become the controller
+
+Vitalik Buterin, *Why we need wide adoption of social recovery wallets*, **2021-01-11**. `https://vitalik.eth.limo/general/2021/01/11/recovery.html` (thanks credited to Itamar Lesuisse of Argent and Daniel Wang of Loopring).
+
+Mechanism, verbatim:
+> "There is a single '**signing key**' that can be used to approve transactions."
+> "There is a set of at least 3 (or a much higher number) of '**guardians**', of which **a majority can cooperate to change the signing key of the account**."
+> "**The signing key has the ability to add or remove guardians**, though only after a delay (often 1-3 days)."
+
+**This is the clean separation the question asks about — but pointed the other way.** The guardians can *recover* but can never *transact*; the subject holds the signing key and can add or remove guardians unilaterally (subject only to a 1–3 day timelock). Recommended guardian counts: "**ideally 7+**"; "for a wallet with 7 guardians to be compromised, **4 of the 7** guardians would need to somehow discover each other and agree to steal." Guardian privacy: store a hash of the guardian list on chain and publish the full list only at recovery time; or per-recovery deterministic single-purpose addresses. Guardian classes: own other devices/paper mnemonics; friends and family; institutions verifying by phone/email/video call. Named implementations: **Argent**, **Loopring** (`security.loopring.io`) — "the wallet companies provide one guardian for free."
+
+**Why it does not answer the question:** the guardian set here is *appointed by* and *revocable by* the subject. It models a subject who is already sovereign. It contains **no supervised-principal role at all** — no one is ever managed against their will, so there is no exit to block. It is the correct *primitive* (recoverer ≠ controller, timelocked unilateral guardian removal) but has never, in anything I could reach, been applied to a manager–subject relationship.
+
+---
+
+## 7. SUMMARY TABLE
+
+| System | Manager's powers over the subject | Subject-initiated exit? | Manager can block it? | Evidence class |
+|---|---|---|---|---|
+| Apple Family Sharing, adult member | organizer can remove | **Yes, unilateral** | No | SHIPPED-SPEC (`102652`) |
+| Apple Family Sharing, teen 13–17 w/ Screen Time on | Screen Time, location, purchase approval, activity view | Only after organizer disables Screen Time | **YES — documented** | SHIPPED-SPEC (`102652`) |
+| Apple Family Sharing, child <13 | full | **None**; org must delete or transfer the account | **YES — total** | SHIPPED-SPEC (`102652`, Dec-2020 PDF p.16, Personal Safety guide) |
+| Apple Safety Check | n/a | n/a — out of scope | Screen Time / MDM "some options may not be available" | SHIPPED-SPEC (Mar 2026) |
+| Managed Apple ID (ABM/ASM) | org owns account; reset password, deactivate, delete, transfer, force sign-out, read logs | **None documented** | **YES — total** | SHIPPED-SPEC (Mar 31 2025) |
+| Google Family Link, <13 | full | none | **YES** | SHIPPED-SPEC (`7106787`, `6317858`) |
+| Google Family Link, 13–17 | full, unless parent releases | **"Children need parent approval to stop supervision until they turn 18"** | **YES — stated as a heading** | SHIPPED-SPEC |
+| Google family group, supervised member | — | **"you can't leave your family group"** | **YES** | SHIPPED-SPEC (`6317858`) |
+| Google Workspace user | reset password + cookies, suspend, delete, take file ownership without involving owner, Vault search/export/hold, full calendar access | **None** | **YES — total** | SHIPPED-SPEC |
+| Sovrin SSI guardianship | guardian is credential holder; dependent holds no key | Right asserted at governance Layer Four; no mechanism | **YES in practice** | DESIGNED (Apr/May 2023) |
+| Aries RFC 0103 | same; hazard named ("abuse from _within_") | revocation is issuer-side; details are a TODO | **YES** | DESIGNED, incomplete |
+| W3C DID Core | no supervised-principal model | n/a | n/a | Out of scope |
+| Social recovery wallet (Argent/Loopring) | guardians can recover, cannot transact | **subject removes guardians unilaterally (1–3 day delay)** | **NO** | SHIPPED, but no supervised role exists |
+
+---
+
+## 8. THINGS I COULD NOT REACH
+
+- **Freed et al., "A Stalker's Paradise" (CHI 2018, DOI 10.1145/3173574.3174241)** — closed access, no Wayback PDF, no OA mirror. Not read.
+- **Slupska & Tanczer (2021, DOI 10.1108/978-1-83982-848-520211049)** — CC-BY per Semantic Scholar, but Emerald served HTML instead of the PDF. Metadata only; full text not read. The "multi-user problem" framing attributed to them in the task brief is therefore **unverified here**.
+- **Tseng et al.** — no specific work identified or fetched.
+- **Bellini's other work on financial coercive control** — not searched (OpenAlex quota exhausted mid-session: `"Rate limit exceeded... Insufficient budget... Resets at midnight UTC"`).
+- **CDT live site** — 403 to this environment throughout; all CDT content above came from Wayback copies of the original PDFs.
+- **`support.google.com/a/` and `support.google.com/vault/` live** — Google served `google.com/sorry` CAPTCHA; all Workspace content above came from Wayback (dates given per page).
+- **Apple Business Manager live guide** — every article now returns only "Apple Business Manager is now Apple Business"; the successor guide at `/guide/apple-business/` is 404. Content from Wayback 2026-03-29. **The rename is in flight as of 2026-09-04** and the Managed Apple Account authority model may change with it.
+- **Apple "What Managed Apple Accounts can't access"** article body — referenced, not fetched.
+- **Google Security Checkup scope** — no Wayback capture of `accounts/answer/9924334`; live blocked.
+- **IIW session notes**, **Sovrin Guardianship Implementation Guidelines V1 / Technical Requirements V1** — no resolvable URLs.
+- **Any specific named lawsuit or news incident of a Google Workspace *admin* (as opposed to monitoring software) outing a student** — not found. The documented harm channel is monitoring software running on the managed account, not an admin's manual action.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;-TDY6ei5XpfTW-jl28B6LDfTkK3j9PT8O6ilam1wI78
+
+<<^ code="&#x0004;" -> to=? >>

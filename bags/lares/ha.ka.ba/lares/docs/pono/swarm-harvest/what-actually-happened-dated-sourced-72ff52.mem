@@ -1,0 +1,189 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated-sourced-72ff52 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated-sourced-72ff52.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: WHAT ACTUALLY HAPPENED (dated, sourced). Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated-sourced-72ff52"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! WHAT ACTUALLY HAPPENED (dated, sourced)
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 25,487 characters
+
+````
+## WHAT ACTUALLY HAPPENED (dated, sourced)
+
+### A. Public CA key ceremonies that went wrong (Mozilla CA-compliance bugs)
+
+All bugs are `https://bugzilla.mozilla.org/show_bug.cgi?id=<N>`; I read the comment threads via the REST API (`/rest/bug/<N>/comment`).
+
+**1. IdenTrust — accidentally generated a self-signed ROOT instead of an intermediate. Bug 1895006, filed 2024-05-03.** *(high confidence — direct quotes from the incident report)*
+Ceremony began 2024-04-29 13:45 MDT; at 15:00 MDT the operator "inadvertently created a self-signed malformed Root CA certificate when they had intended to generate an ICA." Two causes: "A PKI operator entered the wrong command parameter using an in-house developed application" and "The ceremony witness missed noticing the invocation of the wrong command until just after the certificate was created." A correct ICA was generated 5 minutes later (15:05); the bogus root was revoked 2024-05-07. Fix: split the in-house tool into **two separate binaries**, one for roots and one for ICAs, so the wrong object type is not selectable mid-ceremony. This is the single cleanest "wrong thing generated in a ceremony, had to be redone" case I found.
+
+**2. SecureTrust — ceremony video recording destroyed by hardware failure; 7 intermediates revoked. Bug 1671037, filed 2020-10-13.** *(high confidence)*
+Ceremony 2020-09-21 generated 7 email/client-auth intermediates. On 2020-09-28 IT found the recording hardware had failed and the video was unrecoverable. Their own CPS §6.1.1.1(3) requires ceremonies be "videotaped" with 7-year retention. Because the evidentiary record could not be produced, **all 7 intermediates were revoked on 2020-10-08**. Remediation: a second, independent permanent camera with separate storage (installed by Feb 2021). This is the closest public analogue to "ceremony without a valid auditor/video record" — the ceremony happened correctly, but the *proof* died, and the keys were thrown away.
+
+**3. Camerfirma — offline CRL ceremony used a stale config file and revoked the WRONG intermediate CA. Bug 1532333, filed 2019-03-04.** *(high confidence)*
+"In an off-line ceremony we issued the first subCA certificate for 'MULTICERT SSL Certification Authority 001'" (2018-06-29). A second CA with the *same CN* was issued 2018-07-03. On 2018-07-17: "For this offline ceremony was used one template file that included by mistake the serial number of the certificate that was issued on 2018-07-03 instead of the one issued on 2018-06-29." The stale template survived into the 2019-02-14 annual CRL ceremony: "In this ceremony the configuration file used had the erroneous serial number … and this error wasn't detected." Discovered 2019-02-19. Impact reported: Portuguese electronic payments disrupted. The "fix" — un-revoking the wrongly-revoked CA — was itself the compliance violation the bug is titled after.
+
+**4. GoDaddy — ceremony OpenSSL profile had wrong time encoding; two cross-signed subCAs misissued. Bug 1777128, filed 2022-06-28.** *(high confidence)*
+2022-06-22 11:11 MST generated; 11:37 discovered; 12:13 config fixed; revoked 2022-06-27. "The ceremony process is a manual process that had an error in the time format encoding for the OpenSSL profile configuration" — `generalizedTime` instead of `UTCTime` for 2032 expiries (RFC 5280 violation). Test certs were eyeballed but not linted. Remediation (done 2022-08-10): **lint test certificates generated with the identical production ceremony settings, inside the ceremony.**
+
+**5. GlobalSign — subCA created in a ceremony with the wrong CPS policy OID, undetected for ~10 months. Bug 2058503, filed 2026-07-28.** *(high confidence)*
+Created in a key ceremony 2025-09-17 carrying the **EV Code Signing OID instead of the OV TLS OID** (a missing ".10"). It passed "standard multi-person review" because the review and the linters only checked CA/B Forum OIDs, not internal CPS OIDs. Discovered 2026-07-28, revoked 2026-08-04.
+
+**6. Let's Encrypt — its own 2025 root ceremony produced three non-compliant cross-certificates. Bug 2038351, filed 2026-05-08 (still ASSIGNED).** *(high confidence)*
+The three bad cross-certs were "issued as part of a root key ceremony" on **2025-09-03** (the "Generation Y" ceremony). Missing `serverAuth` EKU / CCADB-policy violation; reported by a third party 2026-05-08, i.e. **~8 months undetected**; a remedial ceremony on 2026-05-13 revoked and reissued. Stated causes included insufficient cross-cert vetting rigor, no linting coverage for cross-certificate rules, "compliance review fatigue," and requirements sprawl (the rule lived in CCADB Policy, not the BRs). Worth noting: this is the CA with the best ceremony tooling in the industry, and the ceremony still emitted three defective CA certs.
+
+**7. DigiCert — SHA-1 intermediate created in a ceremony, 2020-12-17. Bug 1684442.** *(high confidence)* `DigiCert Timestamp RSA SHA-1 2020 CA1` was signed `sha1WithRSAEncryption`, banned since 2016-01-01. Found 2020-12-28 in routine review, revoked same day. Linters "evaluate the individual certificate being signed" — not the signer/signee relationship — so a ceremony can emit a policy-violating cert while every automated check passes.
+
+**8. Google Trust Services — re-signed a GlobalSign root in a "modification ceremony" 2020-08-13, keeping SHA-1. Bug 1709223, filed 2021-05-03.** *(high confidence)* The ceremony was itself remediation for bug 1652581; they retained the SHA-1 signature and proceeded on "informal verbal communications with root programs."
+
+**9. SSL.com — post-ceremony verification steps skipped, CRL published to a dead URL for ~3.5 months. Bug 1548720, filed 2019-05-03.** *(medium-high confidence)* "Post ceremony actions were initiated. The CRL is published to the wrong location. Part of the post-ceremony actions, including the checks and verification of proper CRL handling were delayed." Issued 2019-01-16, found by Mozilla 2019-05-02.
+
+**10. DigiCert — no two-person control over post-ceremony CCADB disclosure. Bug 1563573, 2019-07-04.** *(medium-high)* 22 ICAs (Oct 2018–Jul 2019) undisclosed >7 days. Jeremy Rowley: "we don't have a good two-person process to ensure quality control over CCADB listings." Fix folded compliance sign-off **into the ceremony script**: "During the key ceremony, as part of the script, approval by compliance is confirmed."
+
+**11. SwissSign — 6 intermediates with a mistyped `organizationIdentifier`, ceremony protocol said otherwise. Bug 1506607, 2018-11-12.** *(medium confidence)* Ceremony 2017-06-26/27; found 2018-11-09; revoked 2018-11-14/15. "The organizationIdentifier had been set correctly in the key ceremony protocol (for all 6 IC)" — but the GUI value was mistyped and copy-pasted across 5 more CAs. Ryan Sleevi pressed on whether "your Key Ceremony was not appropriately followed." A documented case of the **script and the executed reality diverging**.
+
+### B. Ceremony *audit evidence* failures
+
+**12. iTrusChina — root Key Generation Ceremony held with no KGC audit report at all. Bug 1923279, 2024-10-08.** *(high confidence)* KGC for two roots on **2018-07-31**; the CA assumed the 2018-10-08 point-in-time audit covered it — "due to our inexperience, we wrongly thought the key generation could be covered by the point-in-time audit report." The gap went unnoticed until **Google's Chrome Root Program found it on 2024-04-12** — six years. Retroactive KGC report delivered 2024-08-01; gap-period reports 2024-09-30.
+
+**13. DigiCert 2019 WebTrust qualifications. Bug 1613505, filed 2020-02-05.** *(medium-high)* Among the "matters to be resolved": "some HSMs used for backing up offline keys are not operated at FIPS 140-2 Level 3 as per our CPS" — a firmware upgrade had moved backup HSMs off certified firmware; they rolled back.
+
+**14. FNMT 2020 AENOR audit finding #5. Bug 1626805, 2020-04-01.** *(medium)* "Unsafe storage of access codes in PKI Data Centre," remediated by separating cryptographic material from passwords — i.e. activation material and the modules were co-located, defeating split custody.
+
+### C. Deliberate key/HSM destruction that actually happened
+
+**15. GlobalSign key destruction ceremonies, 2020-03-18 and 2021-01-20. Bug 1591005.** *(high confidence)* 30 no-EKU ICAs; for timestamping CAs they **destroyed the private keys instead of revoking**, because revocation would have invalidated historical signatures. Active keypairs destroyed 2020-03-18, backups after; final destruction of "GlobalSign CA for AATL - SHA256 - G2" on 2021-01-20. Qualified auditors witnessed the destructions and issued **ISAE 3000 reports** attesting the material was genuinely destroyed. This is the only well-documented *root-program-facing* key-destruction ceremony chain I found.
+
+**16. IANA destroyed root-zone KSK HSMs on schedule** — Ceremony 38 (2019-08-14): "Destroy HSMs 1&2; Introduce HSM5W"; Ceremony 39 (2019-11-14): "Destroy HSM3 (East)". Source: https://www.iana.org/dnssec/ceremonies *(high confidence — from the published ceremony agendas)*.
+
+### D. Physical/quorum failures at ceremony time — the DNSSEC root
+
+**17. Root KSK Ceremony 40, February 2020 — the safe would not open and had to be drilled.** *(high confidence, two independent sources; exact dates conflict slightly)*
+- RIPE Labs (ICANN-sourced): on **2020-02-11**, during pre-ceremony maintenance, "the safe would not open. The device indicated that the combination was dialed correctly, but the bolt did not retract to allow safe access." — "It took approximately 20 hours across two days to drill into the lock assembly, remove the bolt, to allow the safe to open." https://labs.ripe.net/author/mirjam/managing-the-trust-anchor-of-the-dns-against-adversity/
+- ICANN's CSC briefing (2020-03-31) calls it exercising "one of the worst-case disaster recovery scenarios that had been contemplated — 'drilling the safe'." https://www.icann.org/en/system/files/files/csc-root-ksk-management-briefing-overview-31mar20-en.pdf *(I could not fetch this PDF directly — 403 — so I have it only via search snippet; medium confidence on that exact wording.)*
+- A TCR who was there, João Damas, APNIC blog 2020-03-04: a certified locksmith drilled the safe, which "is, in fact, the manufacturer-indicated method"; three TCRs sat on site waiting because **the ceremony could not proceed without them**. https://blog.apnic.net/2020/03/04/drilling-for-the-ksk/
+- Date discrepancy to flag: IANA's ceremony list dates Ceremony 40 as **2020-02-16**; RIPE Labs says the ceremony ran 2020-02-12; Damas says the safe opened Saturday evening **2020-02-15**. The failure and the drilling are not in dispute; the calendar is.
+
+**18. Root KSK Ceremony 41, 2020-04-23 — share holders could not physically attend, so credentials were couriered to surrogates.** *(high confidence)* Per RIPE Labs: "Four TCRs transferred their credentials to IANA staff to act as surrogates"; scope was cut to essentials (TCR replacement and HSM induction deferred); and they signed **nine months** of ZSKs instead of three "to give us more time to deal with the pandemic before needing to hold another ceremony." IANA's agenda for Ceremony 41 confirms: "Sign 2020Q3-2021Q1 ZSKs." **This is the best-documented real case of m-of-n holders being unreachable at ceremony time** — resolved by moving the credentials rather than the people.
+
+### E. Anecdote
+
+**19. Roger Grimes, "My Key Signing Ceremony Gone Wrong," LinkedIn, published 2020-02-17** (incident ~2015). https://www.linkedin.com/pulse/my-key-signing-ceremony-gone-wrong-roger-grimes *(high confidence in the retelling; single-source, unverifiable anecdote)*
+Fortune-500 root CA update. C-levels, auditors, physical security, legal, and the two split-knowledge password holders all in the room. Boot password fails. Windows password fails. Root cause: "a laptop sitting in a safe for five years undisturbed had its 1 key on the keyboard go bad" — and both password halves contained a "1". Fixed by moving the disk to another laptop. His conclusion: "All those great security controls can sometimes work against you." The lesson generalizes past PKI: **the offline root's failure mode was the keyboard, not the crypto.**
+
+---
+
+## WHAT THE STANDARDS MERELY PRESCRIBE
+
+### CA/Browser Forum TLS Baseline Requirements — **v2.2.9, dated 6-Aug-2026** (source of truth: https://github.com/cabforum/servercert/blob/main/docs/BR.md; I diffed the raw markdown) *(high confidence)*
+
+**Correction to the premise of the question: the ceremony requirement is in §6.1.1.1, not §6.2, and §6.2.2/6.2.3/6.2.4 are essentially EMPTY.** Verbatim, the BRs contain:
+
+> ### 6.2.2 Private key (n out of m) multi-person control
+> ### 6.2.3 Private key escrow
+> ### 6.2.4 Private key backup
+> See [Section 5.2.2].
+
+That is the entire text. **There is no m-of-n requirement in the Baseline Requirements.** §5.2.2 says only: "The CA Private Key SHALL be backed up, stored, and recovered only by personnel in Trusted Roles using, at least, **dual control** in a physically secured environment." The Code Signing BRs (CSBR) carry the identical empty headings and the identical §6.1.1.1 — verified against https://github.com/cabforum/code-signing/blob/main/docs/CSBR.md.
+
+BR **§6.1.1.1** is the real ceremony clause. For a root, or a subordinate whose operator is unaffiliated with the root, the CA **SHALL**:
+> 1. prepare and follow a Key Generation Script,
+> 2. have a Qualified Auditor **witness** the CA Key Pair generation process **or record a video** of the entire CA Key Pair generation process, and
+> 3. have a Qualified Auditor issue a report opining that the CA followed its key ceremony during its Key and Certificate generation process…
+
+Note the **or** — a video substitutes for a live auditor. For the CA's own subordinates this drops to SHOULD. In all cases the CA SHALL generate the key "using personnel in Trusted Roles under the principles of **multiple person control and split knowledge**", in a FIPS 140-2/140-3 L3 or CC EAL4+ module (§6.2.7), and log the activity. "Key Generation Script" is defined (line 388) as merely "A documented plan of procedures for the generation of a CA Key Pair." "Qualified Auditor" points to §8.2.
+
+### WebTrust for CA — **Principles and Criteria v2.2.2, effective for engagement periods commencing on or after 1 June 2021** *(high confidence — read the PDF)*
+
+This, not the BRs, is where m-of-n lives.
+
+- **§3.6.1(d)** — access control policy must document "number of persons required to perform specific CA operations (i.e., **m of n rule where m represents the number of key shareholders required to perform an operation and n represents the total number of key shares**)."
+- **§4.1 CA Key Generation** — key pairs generated "in accordance with … detailed key generation ceremony scripts"; keys generated "under the principles of multiple person control and split knowledge"; and "generation of CA keys are **witnessed by an independent party and/or videotaped**." The script must contain: roles and responsibilities; approval to conduct the ceremony; "cryptographic hardware and **activation materials** required for the ceremony"; the specific steps; physical security of the location; post-ceremony secure storage of hardware and activation materials; "**sign-off from participants and witnesses** indicating whether key generation ceremony was performed in accordance with the detailed key generation ceremony script"; and "**notation of any deviations** from the key generation ceremony script."
+- **§4.2.3** — keys exported for backup go out "as encrypted key fragments using multiple control and split knowledge/ownership," or inside another module under multiple control. §4.2.4 — recovery under multi-person control.
+- **§4.4.1** — "The activation of the CA private signing key is performed using **multi-party control (i.e., m of n) with a minimum value of m (e.g., m greater than 2 for Root CAs)**." This is the actual m-of-n rule the industry runs on.
+- **§4.5-ish transport guidance** — activation materials ("passwords, PINs, tokens (i.e., **m of n tokens**) and/or key-wrapping keys") MUST NOT travel with the keys.
+- Parallel scripted-ceremony requirements exist for **key destruction** (management approval, steps, sign-off, "notation of any deviations from the key destruction ceremony script") and **key migration**.
+
+The PDF I read: https://www.lawtrust.co.za/wp-content/uploads/2023/11/MDS21216WebTrustCA-222FINAL.pdf (a third-party mirror of the CPA Canada document — content matches the version Let's Encrypt cites, but flag it as a mirror). I could **not** confirm whether a version later than 2.2.2 is now current; searches returned only 2.2.x and unrelated VMC criteria. **Treat "2.2.2 is current" as unverified.**
+
+**"Key Generation Report" is a distinct deliverable, not part of the annual audit.** Let's Encrypt's repository lists a standalone "**Key Generation Report – WebTrust Principles and Criteria for Certification Authorities – Version 2.2.2**, September 30, 2025" — covering the 2025-09-03 Gen Y ceremony — separate from its 2025-11-19 annual WTCA/BR/NetSec reports (https://letsencrypt.org/repository/). Mozilla's Bugzilla has a matching class of tracking bugs: "2023 Key Generation Audit Report - SECOM" (1850688), "2024 Key Generation Audit Report - SECOM" (1915531), "KIR S.A. CCADB 2026 - Key Generation Audit Report" (2025909).
+
+### IANA Root Zone KSK Key Management Procedure v3.4, dated 2021-09-22 *(high confidence — read the PDF)*
+https://www.iana.org/dnssec/procedures/ksk-operator/KSK_Key_Management_Procedure_v3.4.pdf
+
+- **Seven Recovery Key Share Holders (RKSHs)**, each custodian of "one of the seven (7) key shares of the **Storage Master Key** (SMK)," each share kept in a bank safe deposit box, with an **annual proof-of-possession inventory**. Two independent sets of shares are split and exported (§5.2.2).
+- **§6.8 "Unavailable RKSH Credential Recovery"** — a whole prescribed procedure for a share holder who cannot be reached: emergency contacts, tamper-evidence inspection of returned shares in "a secure ceremony environment," and "If an RKSH is no longer able to access their recovery key shares, the recovery key shares should be **considered lost**."
+- The procedure enumerates unplanned ceremony events explicitly: "Hardware failures · Software failures · **CO credentials failure** · **Recovery Key Share failure** · **Safe failure** · **Safe deposit box failure** · General facility failure" — and if the ceremony must be aborted and cannot restart in the critical window, it escalates to the PMA. The Feb 2020 event was line-item "Safe failure," pre-written.
+- Physical model: 7 tiers, Tier 4 = Key Ceremony Room, Tier 5 = Safe Room, Tier 6 = Equipment Safe + Credentials Safe, Tier 7 = the HSM and the safe deposit boxes inside them. Tiers 4 and 5 are under **dual occupancy** — no one is ever alone with the material.
+
+### Published ceremony tooling — Let's Encrypt *(high confidence)*
+- The tool: https://github.com/letsencrypt/boulder/tree/main/cmd/ceremony. Design principle, verbatim: "unlike most ceremony tooling there is a **single user input, a configuration file** … The goal is to make ceremonies as simple as possible and allow for simple verification of a single file, instead of verification of a large number of independent commands." Modes: `root`, `intermediate`, `cross-csr`, `cross-certificate`, `key`, `crl`. YAML config, "mainly as it allows for commenting." PKCS#11 to the HSM.
+- The demos: https://github.com/letsencrypt/ceremony-demos — "Demo files demonstrating what the new hierarchy we generate in 2024 will look like," with `ceremonies/`, `outputs/`, `softhsm/`, `init-softhsm.sh`, `run-all.sh`, `verify.go`. Repo created 2020-08-13, i.e. published *before* the Sept 2020 ISRG Root X2 ceremony.
+- The 2020 writeup: https://letsencrypt.org/2020/09/17/new-root-and-intermediates/ — ISRG Root X2 (ECDSA P-384, valid to 2040) plus R3/R4/E1/E2 generated **2020-09-03**; "Our SREs put together a replica network, complete with Hardware Security Modules, and **practiced the ceremony multiple times**"; ceremony recorded for audit.
+- The 2025 "Generation Y" ceremony (ISRG Root YE and YR + six intermediates, cross-signed from X2/X1), held **September 2025**, announced 2025-09-04 on the community forum and 2025-11-24 at https://letsencrypt.org/2025/11/24/gen-y-hierarchy.html — the same ceremony that produced the three defective cross-certs in bug 2038351.
+- **Caveat I could not resolve:** the *demo* configs are public; I did not find the actual production ceremony YAMLs or ceremony logs published. Their public artifact for a real ceremony is the WebTrust Key Generation Report.
+
+---
+
+## SECRET SHARING vs THRESHOLD SIGNING — unambiguous answer
+
+**Everything above is SECRET SHARING (Shamir-style reconstruction), not threshold signing.** *(high confidence)*
+
+- **WebTrust §3.6.1(d)** defines m-of-n in terms of "**key shareholders**" and "**key shares**" — reconstruction, not m independent signatures.
+- **Entrust nShield** (the dominant CA HSM): the Security World recovery keys are "split among the cards in the ACS using the same *K/N* mechanism as for an OCS"; the docs warn "We do not recommend creating card sets in which *K* is equal to *N* because an error on one card would render the whole card set unusable," and "Provided that *K* is less than *N* … and you have at least *K* cards available, a hardware security module can re-create all the keys stored on the device." https://nshielddocs.entrust.com/security-world-docs/v13.4.5/edge-ug/security-worlds.html — a threshold *reconstruction* scheme with a hard cliff at fewer than K surviving cards.
+- **IANA**: 7 shares of one Storage Master Key, reassembled into HSMs (§5.2.2). Again reconstruction.
+- Consequence worth carrying: in every one of these systems the key is **materialized in one place** at activation time, and the quorum is a lock on the *box*, not a distributed signing protocol. No public-CA or root-zone system I found uses threshold signatures (FROST/MPC-style) for the root key. The ICANN April 2020 workaround — four TCRs *mailing their credentials to staff surrogates* — is only possible because the shares are transferable bearer secrets; it would be meaningless under threshold signing.
+
+---
+
+## WHAT I COULD NOT FIND — flagged explicitly
+
+1. **No public-CA incident where a ceremony was performed with no auditor and no video at all.** Closest: SecureTrust 1671037 (video destroyed post-hoc → keys discarded) and iTrusChina 1923279 (no KGC report for six years). Searched Bugzilla comment substrings "without an auditor", "no auditor", "auditor was present", "video recording of the ceremony" — all empty or irrelevant.
+2. **No public-CA incident of lost activation shares, a lost HSM quorum card set, or a keyholder unreachable causing an inability to sign a CRL or perform a rotation.** Substring searches for "key custodian", "quorum of", "shares of", "ceremony was aborted", "ceremony had to be", "zeroized/zeroised", "ceremony smartcard/activation cards" over the whole CA Program product returned nothing on point ("quorum" in modern CA bugs means **MPIC validation quorum**, not HSM quorum). The only real-world quorum-unavailability event I found in public PKI is **ICANN Ceremony 41**, and the only physical lockout is **Ceremony 40**. My read: this class of failure happens (Grimes' anecdote is one), but it is not *reportable* to root programs unless it causes a missed CRL or a misissuance, so it is systematically absent from Bugzilla.
+3. **Certinomis:** only ceremony-adjacent hits are the 2017 StartCom cross-signing bugs (1386891, 1402158). I found **no** Certinomis root-ceremony failure. Its 2019 distrust is a separate matter I did not chase.
+4. **Entrust:** **zero** CA Program bugs whose comments mention "ceremony" (my "Entrust" substring search returned only IdenTrust). Its 2024 distrust was about delayed revocation and incident handling, not ceremonies.
+5. **e-Tugra:** bug **1801345** (2022-11-18, Ian Carroll's findings — note: not 1801270, which is an unrelated Firefox XPCOM bug). Access-control failure in a customer-facing app that plausibly allowed reissuing any e-Tugra certificate; e-Tugra asserted CA systems and network HSMs were "physically and logically separated" and "isolated," which Carroll disputed. **Not a ceremony failure** — a key-*use* failure. I did not verify the subsequent distrust action.
+6. **"Root key destroyed / HSM destroyed" as an incident** — I found only *deliberate, audited* destructions (GlobalSign 2020-2021; IANA HSMs 2019). No case of a CA accidentally destroying or bricking a root key.
+7. **Conference talks** on ceremonies gone wrong: I found none beyond SEO-marketing content from PKI vendors. Not searched exhaustively.
+8. The **CA/Browser Forum's own page** gave BR v2.2.9 / 2026-08-06; I confirmed this against the raw `BR.md` front matter ("Version 2.2.9", "date: 6-Aug-2026"). High confidence.
+
+**Method note / instrument caveat:** Bugzilla's `longdesc_type=allwordssubstr` matches each word *anywhere in the bug*, so it produces heavy false positives; `longdesc_type=substring` does exact phrase matching and is what the good hits above came from. WebSearch was unavailable and Brave now serves a bot-check to both WebFetch and the jina proxy; I used `https://r.jina.ai/https://lite.duckduckgo.com/lite/?q=…` as the search engine and plain `curl` for raw documents (which works fine in this sandbox for GitHub raw, IANA, and CPA-Canada-mirrored PDFs).
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;1A489I82cVcQ4Mf0BT2ZKakoNUMl2TkvauBimjhkLxc
+
+<<^ code="&#x0004;" -> to=? >>

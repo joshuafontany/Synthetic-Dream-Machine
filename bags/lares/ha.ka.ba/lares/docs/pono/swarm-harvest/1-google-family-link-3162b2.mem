@@ -1,0 +1,347 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-google-family-link-3162b2 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-google-family-link-3162b2.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. GOOGLE FAMILY LINK. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-google-family-link-3162b2"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. GOOGLE FAMILY LINK
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 36,414 characters
+
+````
+Report complete. Below are the findings.
+
+---
+
+# DISCLOSURE OBLIGATIONS OF SHIPPED FAMILY-MANAGEMENT SYSTEMS TOWARD THE SUPERVISED PARTY
+
+**Method note.** `support.google.com` and `play.google.com` IP-blocked both WebFetch and curl mid-session (302 → `google.com/sorry/index`). All Google evidence below was recovered through the Wayback Machine (`web.archive.org`), with snapshot timestamps given. Apple, Microsoft and FTC pages were fetched live. OpenAlex ran out of daily budget before the academic-literature pass; that item is NOT REACHED.
+
+**Instrument warning (measured).** The WebFetch summarizer *fabricated* policy text on one call. Asked about Apple's App Store Review Guidelines it returned: *"Apps cannot monitor or track other users without explicit consent. Parental control apps and similar monitoring tools must: Obtain clear, informed consent from users being monitored… Not operate covertly or without the knowledge of the person being tracked."* I then pulled the raw guidelines HTML (238 KB, 2026-09-04) and grepped it: **`monitor` — zero hits. `stalk` — zero hits. `covert` — zero hits. `another person` — zero hits. `spouse` — zero hits.** That paragraph does not exist. Every quote below was verified against raw fetched bytes, not against a summarizer.
+
+---
+
+## 1. GOOGLE FAMILY LINK
+
+### 1a. Is there a child-facing disclosure page? YES — and it is unusually explicit.
+
+**`https://support.google.com/families/answer/9092383` — "Supervision for users over 13 or the applicable age"** (Wayback `20260512035026`; live URL blocked from this host). This page is written in second person **to the supervised user**, not to the parent. It enumerates both sides of the boundary:
+
+> "We take your privacy seriously, and want you to know how supervision works when it's added to your Google Account…"
+
+> **"What parents can supervise with the Family Link App"** — "Update some of your account settings · Help you sign in to other devices with your Google Account · Control Google's data collection with settings like Web & App Activity and Location History · Approve or block apps on supervised devices · … Find where you are with your Android devices · … Remotely lock devices when it's time to study or sleep · Block or allow sites on Chrome · Turn SafeSearch on or off · … View your YouTube channel activity"
+
+> **"What parents can't check or do"** — "If you and your parent choose to supervise your Google Account, your parent can't use Family Link to: Remotely monitor your screen · Check your past searches · Check your Chrome browsing history · Check your YouTube watch history · Check or reset your account password · Read your emails or messages · Listen to your calls · Delete your account · Choose a new screen lock password on your device · Erase the data on your device · **Remove your ability to stop supervision**"
+
+That last bullet is the load-bearing one: **the supervised user's ability to initiate un-supervision is documented as non-removable by the supervisor.** DOCUMENTED-POLICY.
+
+### 1b. Is there a persistent indicator on the child's device? PARTIAL — a settings-menu surface, not a notification.
+
+Same page, and **`answer/7101025` "Get started with Family Link"** (Wayback `20260820090641`), both document a supervision surface *on the child's own device*:
+
+> "On your child's device, open Settings. On Android versions 8.1 (O) and later, tap **Digital Wellbeing & parental controls**. On other Android versions, tap Google → Parental controls. To check the current settings, tap Daily limit. To edit Daily limit settings, sign in or use your Parent Access Code to verify that you're a parent." (`7101025`)
+
+And the child-initiated exit path from the same menu (`9092383`):
+
+> "**Stop supervision from your child's Android device**: Open Settings app. Tap **Digital Wellbeing & parental controls**. At the top left, tap More → **Stop supervision**." — plus a web path: "Go to **Supervision Opt-Out**. At the bottom of the page, tap Stop supervision."
+
+So on a supervised Android device the relation is discoverable in system Settings, and the exit control is present *in the child's own UI*. What I did **not** find documented anywhere: a persistent status-bar icon, lock-screen banner, or ambient indicator. That is **NOT REACHED / NOT DOCUMENTED** — Google's help corpus does not describe one.
+
+### 1c. Does it name WHO supervises? NOT DOCUMENTED.
+
+No page I reached states that the supervised user is shown the supervising account's identity (name/email). `9092383` says "your parent" generically throughout. The Family Link parent app has an explicit member switcher ("At the top left, select your child") but no reciprocal documented affordance is described on the child side. **NOT REACHED** — I could not confirm either way from Google's documentation.
+
+### 1d. Is the child notified when a parent changes settings, adds location, or views activity? MOSTLY NO.
+
+The only notification-to-child event I found documented anywhere in the Family Link corpus is **supervision ending**:
+
+> "You'll need your parent's approval to stop supervision. They'll need to enter their Google Account password or Family Link parent access code to do so. **You and your parent will be notified when supervision is stopped.**" (13–18)
+> "You don't need your parent's approval to stop supervision. **You and your parent will be notified when supervision is stopped.**" (18+) — `answer/9092383`
+
+There is a documented in-the-moment signal for **app blocking**, but it is a mechanical consequence, not a disclosure:
+
+> "In about 5 minutes, or once the device is connected to the Internet, the app will be blocked or unblocked. **If your child is using the app when you block it, they'll get a one minute warning to finish up before the app is blocked.**" — `answer/7101025`
+
+For **location sharing being turned on**, `7101025` documents the parent-side flow ("Tap Location → Set up location… select which ones you want to turn on location sharing for → Next → Turn on") with **no documented child notification**. The child-facing page `9092383` discloses the *capability* in the abstract ("Find where you are with your Android devices") but not any per-event notice. For **activity viewing** there is likewise no documented notice — and note that the "what parents can't do" list already narrows what is viewable (no search history, no browsing history, no messages), so the disclosure is architectural rather than per-access.
+
+Location on *termination* is documented as failing safe toward the child:
+
+> "When supervision stops, parents can no longer… **Location Sharing will be off and children can decide if they want to turn it on again.**" — `answer/9092383`
+
+### 1e. Can a parent hide Family Link from the child? NO DOCUMENTED MECHANISM, and one documented anti-hiding rule.
+
+`answer/7101025` states:
+
+> "**Important: Some apps can't be blocked because they're required for parent supervision settings to work**, or for your child's device to work."
+
+i.e. the supervision components are themselves un-blockable, which cuts both ways but does mean they cannot be removed from the device by anyone. Combined with `9092383`'s "your parent can't… **Remove your ability to stop supervision**", Google documents **no icon-hiding, no silent-install, and no stealth mode**. I found no support article describing any hidden-supervision configuration. This is a NEGATIVE finding from a reasonably complete crawl (I enumerated 82 distinct archived `support.google.com/families/answer/*` article IDs and title-scanned them).
+
+### 1f. Supervised device the child does not own — the Chromebook case.
+
+**`https://support.google.com/families/answer/7680868` — "Manage your child's account on Chromebook"** (Wayback `20260821104958`):
+
+> "**Important:** After your child is signed in to their Chromebook, a parent's password is required to add new users."
+> "**Recommended:** If you (the parent) are the Chromebook's **owner account**, disable guest mode and control who can sign in to your child's Chromebook. If you allow guest mode or the addition of new users **your child may be able to use their Chromebook without Family Link settings applying**."
+> "**Prevent changes to family settings**: You can use a **parent access code** to prevent your child from removing supervision without your consent."
+> "Children can't **browse in private**."
+
+Note the tension: on Chromebook, "prevent your child from removing supervision" is an advertised parent capability, whereas `9092383` tells the child "your parent can't… Remove your ability to stop supervision." The reconciliation appears to be that the *account-level* opt-out survives, while the *device-level* removal is gated by the parent access code. Google does not reconcile these two sentences anywhere I reached.
+
+Also documented on `7101025`: **"iPhones, iPads, and computers other than Chromebooks can't be supervised with Family Link"** and "Google Workspace for Education accounts can't be managed by Family Link."
+
+---
+
+## 2. APPLE — SCREEN TIME / FAMILY SHARING
+
+### 2a. There IS a dedicated safety-framed disclosure document — the Personal Safety User Guide.
+
+**`https://support.apple.com/guide/personal-safety/manage-family-sharing-ips75b3b794f/web`** (fetched live 2026-09-04). This is written *for the person who may be being controlled*, and it discloses the organizer's reach in plain terms:
+
+> "For security reasons, **a child (under 13) account can't be removed from a family and can't stop sharing details such as Screen Time without the Screen Time passcode. The organizer has access to shared family content on your device, such as shared photo albums and shared calendars, and can view Screen Time activity.**"
+
+> "**To see if you're part of a Family Sharing group, go to Settings > [your name] > Family.** If you see Set Up Family Sharing, you aren't using Family Sharing with this Apple Account. **If you see an icon with Family Sharing, you can tap the icon to see your family members and roles.**"
+
+That second quote is the strongest **"who supervises you"** disclosure I found on any of the three platforms: Apple documents a settings path where the supervised person can enumerate *both the members and their roles* (Organizer / Adult / Parent-Guardian / Child-or-teen, all four defined on the same page). MEASURED-from-documentation.
+
+> "**Any family member over the age of 13 can remove themselves from a family group at any time.** Just select your name and then select Leave Family."
+
+So Apple's documented exit right attaches at 13; below 13 the member is documented as *unable* to leave and *unable* to stop Screen Time sharing without the passcode — Apple states this openly rather than obscuring it.
+
+### 2b. Location sharing — is there a documented rule that it cannot be hidden from the shared person?
+
+**Not as an absolute rule.** What is documented (`https://support.apple.com/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web`, live) is a set of *audit affordances* rather than a prohibition:
+
+> "If you set up Family Sharing and use Location Sharing, your family members automatically appear in the People tab **but location sharing doesn't start until you share your location with each other**."
+> "Tap People at the bottom of the screen, then tap the name of the person you don't want to share your location with."
+> The Find My **Me** tab carries a "**Notifications About You**" section, letting you view location-change notifications others have created about you.
+> "**When you stop sharing your location, the people you previously shared with may notice that you've stopped.**"
+
+So: sharing is documented as opt-in-per-pair and inspectable in People, and third-party geofence alerts *about you* are surfaced to you in "Notifications About You". But I found **no** Apple statement of the form "location sharing cannot be hidden from the person being shared." **That specific documented rule: NOT FOUND.** The nearest structural guarantee is the under-13 clause above, which is a *disclosure of an asymmetry*, not a symmetry guarantee.
+
+The Personal Safety guide's table of contents (fetched live) also has **no dedicated Screen Time section** — the topics are Safety Check, Apple Account access, device access, Find My/location, AirTag/unwanted-tracker detection, "Review and delete configuration profiles", "Manage iPhone Mirroring", and Family Sharing. Screen Time appears only inside the Family Sharing page.
+
+### 2c. What the child is shown when a restriction bites — SILENT HIDING.
+
+**`https://support.apple.com/en-us/105121`** ("Use parental controls on your child's iPhone/iPad", live):
+
+> "If you turn off an app or feature, the app or feature won't be deleted, **it's just temporarily hidden from the Home Screen**. For example, if you turn off Mail, the Mail app won't appear on the Home Screen until you turn it back on."
+
+This is the sharpest counter-example in the whole survey: an Apple-documented restriction whose *only* on-device manifestation is the silent disappearance of an icon, with no notice, no explanation, and no attribution to who did it. The page documents an *upward* channel — "you can allow your child to request an exception to the limit or restriction that you set in Screen Time" — but the child must already have inferred the restriction to use it.
+
+**Ask to Buy notification to the child: NOT REACHED.** I did not reach an Apple page stating whether the child is told Ask to Buy is on before their first purchase attempt.
+
+### 2d. App Store Review Guidelines — the monitoring rules Apple actually publishes.
+
+Fetched live, raw, 2026-09-04, `https://developer.apple.com/app-store/review/guidelines/`. **There is no "Stalkerware" section and no persistent-notification requirement.** The relevant clauses are:
+
+**5.1.2(i)** — "Unless otherwise permitted by law, **you may not use, transmit, or share someone's personal data without first obtaining their permission.** You must provide access to information about how and where the data will be used… Apps that share user data without user consent or otherwise complying with data privacy laws may be removed from sale…"
+
+**5.1.2(iii)** — "Apps should not attempt to **surreptitiously build a user profile** based on collected data and may not attempt, facilitate, or encourage others to identify anonymous users…"
+
+**5.1.1(vi)** — "Developers that use their apps to **surreptitiously discover passwords or other private data** will be removed from the Apple Developer Program."
+
+**5.5 Mobile Device Management** — "Apps that offer Mobile Device Management (MDM) services must request this capability from Apple. Such apps may only be offered by commercial enterprises, educational institutions, or government agencies, **and in limited cases, companies using MDM for parental control services or device security**. You must make a clear declaration of what user data will be collected and how it will be used on an app screen **prior to any user action to purchase or otherwise use the service**. … Apps offering MDM services may not sell, use, or disclose to third parties any data for any purpose."
+
+**5.4 VPN Apps** — "**Parental control**, content blocking, and security apps, among others, from approved providers may also use the NEVPNManager API."
+
+The disclosure duty in 5.5 runs to the *purchaser* ("prior to any user action to purchase"), not to the monitored party. Apple's written rules are consent-shaped; **Google's are notification-shaped.** That is the sharpest divergence in this whole report.
+
+---
+
+## 3. MICROSOFT FAMILY SAFETY
+
+Fetched live 2026-09-04.
+
+**`https://support.microsoft.com/en-us/account-billing/how-activity-is-shared-in-microsoft-family-safety-f97b4874-3215-42e3-9824-bf076586a53e`** (also served at `.../see-your-child-s-device-and-app-use-with-activity-reports-b7b8501e-e35c-2224-bed8-115d5da4fbaf` — both URLs resolve to the identical article, titled "View device and app use with Family Safety activity reporting"):
+
+> "This feature allows family organizers to view certain web, search, app and game activity of another family member."
+> "**Only Organizers can enable, disable and view activity reports.**"
+> "When activity reporting is turned on, **information from connected Family Safety devices will be shared with family organizers**. Activity is collected from Windows, XBOX, and Android devices…"
+> "Web and search activity include websites your family member visited and terms they searched for using the Bing search engine. If you have enabled web and search filters, **any attempts to visit blocked websites will be shown as well**."
+> "**Tip:** On XBOX, remind your family member to sign out if they leave the console. **Activity is reported while they are signed in, even if others are using the device.**"
+
+**`https://support.microsoft.com/en-us/account-billing/roles-permissions-and-data-sharing-in-family-safety-2d0764e1-5ec5-f6a1-6898-0bc18f71e318`**:
+
+> "In Microsoft Family Safety, two separate roles distinguish individuals in the family group: **organizer** and **member**."
+> "**Family organizers are the administrators of a family group.** They can add and remove members, manage limits and permissions, and view activity for members that have reporting enabled."
+> Organizers can manage: "**Screen time**: set limits and review activity. **Website and search filters**: block sites and see searches made in Edge. **App and game filters**: control app access and see app activity. **Purchases**… **Consent**…"
+> "**Family members can be people of any age.** Members need to add a device to enable screen time and app & web filters. They can also **request purchase approvals or ask for more time** on their devices easily through their Family Safety app."
+
+**Findings.** Microsoft's documented model is the **least** disclosing of the three:
+- The activity report is **organizer-only** by explicit statement. There is no documented child-facing copy of the report, no digest to the member, no per-view notice.
+- The member's documented affordances are *requests upward* (purchase approval, more time) — never *inspection sideways or upward*.
+- There is a page titled **"Family Safety settings enforced on adults"** (`.../family-safety-settings-enforced-on-adults-9051e939-ad68-44c3-97f8-318e2935c93e`), confirming the mechanism is not age-bound — "Family members can be people of any age" — which is precisely the surface that Google's Play policy forbids third parties from building ("These apps cannot be used to track anyone else (a spouse, for example) even with their knowledge and permission").
+- I found **no** Microsoft page documenting what the monitored member sees, whether the member is told reporting was switched on, or how a member discovers who the organizer is. **NOT REACHED / NOT DOCUMENTED.**
+- Removal is documented as an organizer act: "a family organizer will need to sign in at `account.microsoft.com/family/home/settings` … Turn off the Activity reporting toggles on each of the four device platform tabs" — framed as "When a child becomes an adult, they may wish to have earlier restrictions lifted," i.e. the exit is a *petition*, not a right.
+
+---
+
+## 4. WAS VISIBILITY A DELIBERATE SAFETY DECISION? — GOOGLE PLAY'S STALKERWARE POLICY
+
+**This is the strongest documentary evidence in the report, and it is a platform rule imposed on third parties — not a rule the platforms bind themselves with.**
+
+### Current text — `https://support.google.com/googleplay/android-developer/answer/9888380` ("Malware" policy, **Stalkerware** subsection), Wayback snapshot `20260802124057`:
+
+> **Policy Summary** — "Google Play prohibits apps from monitoring another individual by collecting and transmitting personal and sensitive user data, **unless the app is exclusively designed and marketed for parents to monitor their children or enterprise management for the monitoring of individual employees**, provided they fully comply with strict requirements."
+
+> **Full Policy** — "Code that collects personal or sensitive user data from a device and transmits the data to a third party (enterprise or another individual) for monitoring purposes. Apps must provide **adequate prominent disclosure and obtain consent** as required by the User Data policy."
+
+> **Guidelines for Monitoring Applications** — "Apps exclusively designed and marketed for monitoring another individual, for example parents to monitor their children or enterprise management for the monitoring of individual employees… are the only acceptable monitoring apps. **These apps cannot be used to track anyone else (a spouse, for example) even with their knowledge and permission, regardless if persistent notification is displayed.** These apps must use the **`IsMonitoringTool` metadata flag in their manifest file** to appropriately designate themselves as monitoring apps.
+> Monitoring apps must comply with these requirements:
+> • **Apps must not present themselves as a spying or secret surveillance solution.**
+> • **Apps must not hide or cloak tracking behavior or attempt to mislead users about such functionality.**
+> • **Apps must present users with a persistent notification at all times when the app is running and a unique icon that clearly identifies the app.**
+> • **Apps must disclose monitoring or tracking functionality in the Google Play store description.**
+> • Apps and app listings on Google Play must not provide any means to activate or access functionality that violate these terms…"
+
+### Provenance and date — the policy landed **1 October 2020**.
+
+`https://support.google.com/googleplay/android-developer/answer/10065487` — "**Developer Program Policy: September 16, 2020 announcement**" (Wayback `20260413125427`):
+
+> "We're updating the following policies. All new and existing apps will receive a grace period of at least 15 days from the September 16, 2020 issuance of this notification… **Stalkerware — effective October 1, 2020**. Code that collects and/or transmits personal or sensitive user data from a device **without adequate notice or consent and doesn't display a persistent notification that this is happening**. Stalkerware apps target device users by monitoring personal or sensitive user data, and transmitting or making this data accessible to third parties…"
+
+Confirmed carried forward verbatim into the consolidated policy effective **5 May 2021** (`answer/10959797`, Wayback `20210730161644`), where "Stalkerware" sits in the Malware taxonomy between "Toll Fraud" and "Denial of Service (DoS)".
+
+**The delta between 2020 and current text is itself informative:** the 2020 language framed the rule as *"Non-stalkerware apps distributed on the Play Store which monitor or track a user's behavior on a device must minimally comply…"*; the current text renames the section "Guidelines for Monitoring Applications", adds the machine-readable **`IsMonitoringTool` manifest flag**, and adds the store-listing disclosure requirement. The requirement hardened from prose into a declaration the platform can enforce mechanically.
+
+**Not in the Device and Network Abuse policy.** I checked `answer/9888379` ("Device and Network Abuse", Wayback `20250618152731`) — zero occurrences of "stalkerware". The rule lives in **Malware**, i.e. Google classifies covert monitoring as a *potentially harmful application*, not as a UX defect.
+
+**Apple equivalent: DOES NOT EXIST.** Verified by exhaustive grep of the live guidelines (§1 above). Apple's coverage is 5.1.2(i) consent + 5.5 MDM gating; there is no persistent-notification requirement, no unique-icon requirement, no anti-spyware naming rule, and no "cannot be used to track a spouse" clause.
+
+**Published design rationale from Google/Apple safety teams: NOT REACHED.** I could not reach blog posts or safety-team statements explaining *why* visibility was chosen — WebSearch was unavailable and I had no index to locate them.
+
+---
+
+## 5. REGULATOR PRESSURE
+
+### 5a. FTC v. Retina-X Studios — **22 October 2019** — the icon requirement.
+
+`https://www.ftc.gov/news-events/news/press-releases/2019/10/ftc-brings-first-case-against-developers-stalking-apps` (fetched live). Respondents: **Retina-X Studios, LLC and James N. Johns, Jr.** Apps: MobileSpy, PhoneSheriff, TeenShield.
+
+The alleged harm was *icon hiding specifically*:
+
+> "**Each of the apps provided purchasers with instructions on how to remove the app's icon from appearing on the mobile device's screen so that the device's user would not know the app was installed on the device**, according to the complaint."
+
+The remedy was *icon restoration, with an asymmetric removal right*:
+
+> "Under the proposed settlement, Retina-X and Johns must **require purchasers to state that they will only use the app to monitor a child or an employee, or another adult who has provided written consent**. In addition, they **must include an icon with the name of the app on the mobile device, which is only removable by a parent or legal guardian who has installed the app on their minor child's phone.**"
+
+Read the shape of that: the FTC did *not* mandate a symmetric right. It mandated a **visible marker that the supervised party can see but cannot remove, and that the supervisor alone can remove**. Visibility to the supervised party is compulsory; removability is the supervisor's. This is the closest thing in US law to a *disclosure-of-the-management-relation* obligation, and it is a consent-decree term, not a statute.
+
+Also: "The settlement prohibits Retina-X and Johns from promoting, selling, or distributing any monitoring app that requires users to **circumvent a device's security protections** to install it, absent reasonable steps to ensure that the app is being used for legitimate purposes." Counts pled: FTC Act §5 unfairness/deception **and COPPA** (the apps collected GPS, texts and photos from under-13s). Plus: delete collected data, comprehensive infosec program, **biennial third-party assessments**, annual senior-management certification.
+
+*Note:* the FTC press release describes the settlement's affirmative obligation only for the minor-child case. The full Decision and Order PDF is **NOT REACHED** — `ftc.gov/system/files/...` PDF paths all returned 404 with an HTML error body, and the legal-library case page slug did not resolve on two guesses.
+
+### 5b. FTC v. Support King / SpyFone.com — **1 September 2021** — notification to device owners, and the first ban.
+
+`https://www.ftc.gov/news-events/news/press-releases/2021/09/ftc-bans-spyfone-ceo-surveillance-business-orders-company-delete-all-secretly-stolen-data` (fetched live). Respondents: **Support King, LLC d/b/a SpyFone.com, and CEO Scott Zuckerman**.
+
+> "In addition to imposing the surveillance-business ban, the FTC's order requires SpyFone to delete the illegally harvested information and **notify device owners that the app had been secretly installed**."
+
+> "**This is the second case the FTC has brought against stalkerware apps, and the first where the FTC is obtaining a ban.**"
+
+> Samuel Levine, Acting Director, FTC Bureau of Consumer Protection: "SpyFone is a brazen brand name for a surveillance business that helped stalkers steal private information. **The stalkerware was hidden from device owners, but was fully exposed to hackers** who exploited the company's slipshod security."
+
+> Complaint allegations: Support King "sold stalkerware apps that allowed purchasers to **surreptitiously monitor** photos, text messages, web histories, GPS locations, and other personal information of the phone on which the app was installed **without the device owner's knowledge**. To install its software, SpyFone required purchasers who used the apps on Android devices to **bypass many of the phone's restrictions**. The stalkerware company also **provided instructions on how to hide the app so that the device user was unaware the device was being monitored**."
+
+**The retrospective-notice remedy is the notable innovation:** Retina-X (2019) fixed the *future* — put an icon on it. SpyFone (2021) fixed the *past* — go tell everyone you monitored that you monitored them. The order was "subject to public comment for 30 days after publication in the Federal Register" before finalization; the **final Decision and Order text is NOT REACHED** (same PDF 404s).
+
+Timeline worth noting: Google's Play stalkerware policy took effect **1 October 2020** — **eleven months after** the Retina-X settlement (Oct 2019) and **eleven months before** SpyFone (Sept 2021). The policy sits squarely between the two FTC actions. I cannot document causation; the sequence is CLAIMED-by-adjacency only.
+
+### 5c. FTC/NY v. Google & YouTube — **4 September 2019** — $170M COPPA.
+
+`https://www.ftc.gov/news-events/news/press-releases/2019/09/google-youtube-will-pay-record-170-million-alleged-violations-childrens-privacy-law` (fetched live). **$170 million total: $136M to the FTC, $34M to the New York Attorney General.** "The $136 million penalty is by far the largest amount the FTC has ever obtained in a COPPA case since Congress enacted the law in 1998."
+
+Alleged conduct: collecting **persistent identifiers (cookies)** from viewers of child-directed channels without verifiable parental consent, to serve targeted ads. Order terms: develop and maintain a system for **channel owners to designate child-directed content**; **notify channel owners** that child-directed content may carry COPPA obligations; **annual COPPA training** for employees dealing with channel owners; obtain **verifiable parental consent** before collecting personal information from children; provide notice of data collection practices.
+
+**Relevance caveat, stated plainly:** this decree governs *content designation and consent for data collection*. It contains **nothing** about the supervised party's visibility into a management relation. It is the money in the room, not the mechanism. Anyone citing it as a disclosure-to-the-child precedent is over-reading it.
+
+### 5d. Any FTC/EU requirement that a monitored person be told, generally?
+
+**Retina-X and SpyFone are the two documented instruments**, and both are consent decrees binding named respondents — not rules of general application. I found **no** general FTC rule and reached **no** EU/GDPR source. **GDPR angle: NOT REACHED.** (Articles 13/14 transparency duties and the DPA/legitimate-interest analysis for household monitoring would be the place to look; I could not reach EDPB or eur-lex material without search.)
+
+---
+
+## 6. DOCUMENTED CASES OF HIDDEN SUPERVISION
+
+**In third-party apps: two, both above, both adjudicated.** Retina-X *shipped instructions for hiding its own icon*; SpyFone *shipped instructions for hiding the app so the device user was unaware*. Both are FTC-alleged, settled — the strongest available evidentiary class short of litigated findings.
+
+**In the three shipped platform family systems: none found, but one near-miss and two documentation gaps.**
+
+- **Apple, `support.apple.com/en-us/105121`** — the strongest documented instance of *silent* supervision inside a shipped first-party system: a restricted app "**is just temporarily hidden from the Home Screen**", with no documented notice, no explanation, and no attribution. The relation is not hidden — Settings > Family still names the organizer — but any *individual exercise* of it is invisible and unattributed.
+- **Microsoft** — the *relation* is visible (the member is in a family group and uses the Family Safety app to request time), but **who sees what is not disclosed to the member** in any page I reached, and activity reporting is documented as organizer-only. Whether a member can determine that reporting is on: **NOT DOCUMENTED**.
+- **Google Chromebook (`answer/7680868`)** — "You can use a parent access code to **prevent your child from removing supervision** without your consent" sits in unreconciled tension with the child-facing promise that a parent "can't… **Remove your ability to stop supervision**." Not hidden supervision; *unremovable* supervision, documented in two places with two different emphases depending on who is reading.
+
+**Academic literature on covert parental monitoring: NOT REACHED** (OpenAlex daily budget exhausted mid-session; HN Algolia returned one irrelevant hit for the obvious queries).
+
+---
+
+## PLAIN ANSWER
+
+**Do the three big shipped family systems require the supervised party to be able to see that they are managed, and by whom?**
+
+**"That they are managed" — yes, in all three, but only Google and Apple document it as a first-class disclosure.**
+
+- **Google** publishes a page addressed to the supervised user (`answer/9092383`) that enumerates the supervisor's powers *and their limits*, and guarantees that the supervisor cannot remove the supervised user's ability to stop supervision. On-device, `Settings > Digital Wellbeing & parental controls` carries both the current settings and the `Stop supervision` control. **Strongest of the three.**
+- **Apple** publishes the disclosure inside its *Personal Safety* guide — i.e. it is framed as something a possibly-coerced person needs to know — and states the under-13 asymmetry openly rather than eliding it.
+- **Microsoft** documents the roles and the organizer's powers, but publishes nothing addressed to the member about what the member is shown. Disclosure is inferable from the org chart, not delivered.
+
+**"By whom" — only Apple documents an answer.** "Go to Settings > [your name] > Family… you can tap the icon to **see your family members and roles**" is the single clear "who supervises you, and in what capacity" affordance I found. Google says "your parent" and never documents identity disclosure. Microsoft documents neither.
+
+**Can the supervisor hide the relation? No documented mechanism in any of the three.** No icon-hiding, no stealth install, no silent mode appears anywhere in the fetched corpora. But note *what that means*: the absence of a hiding feature is not the presence of an indicator. **None of the three documents a persistent, ambient, always-on marker of the kind Google Play forces on third-party monitoring apps.** The relation is discoverable in Settings; it is not announced.
+
+**And that is the finding that matters most.** The persistent-notification-plus-unique-icon rule — the strongest disclosure obligation in this entire survey, and the one the FTC independently arrived at from the other direction in Retina-X — **binds only third parties.** Google Play requires an ambient indicator of every monitoring app in its store, uses a manifest flag (`IsMonitoringTool`) to enforce it mechanically, and forbids monitoring even a *consenting* spouse. Family Link itself ships no such indicator. Apple, which writes no such rule at all, ships the one documented case of a restriction whose sole manifestation is an icon quietly vanishing. Microsoft ships an organizer-only activity report over web history and search terms, for members "of any age", with a support page acknowledging the settings get enforced on adults.
+
+The platforms wrote the persistent-notification rule for everyone but themselves. Whether the exemption is earned — a supervised Google account is *created* as supervised, so there is no moment of covert conversion to disclose — or merely unexamined, no source I reached says. The published design rationale is **NOT REACHED**.
+
+---
+
+### NOT REACHED (do not fill from memory)
+1. Live `support.google.com` and `play.google.com` (IP-blocked; all Google evidence is Wayback, timestamps given inline).
+2. Google/Apple published design rationale or safety-team statements on family-system visibility.
+3. Whether Family Link discloses the *supervising account's identity* to the child.
+4. Whether Family Link emits any persistent/ambient supervision indicator beyond the Settings menu entry.
+5. Whether Apple notifies a child when Ask to Buy, Screen Time limits, or location sharing are first enabled.
+6. Any Apple rule that Family Sharing location cannot be hidden from the shared person — searched, not found; absence is not proof.
+7. Whether Microsoft tells a member that activity reporting was switched on, or lets a member identify the organizer.
+8. Full text of the Retina-X and SpyFone Decisions and Orders (all `ftc.gov/system/files/...` PDF paths 404'd; press releases only).
+9. EU / GDPR obligations regarding notice to a monitored person.
+10. Academic literature on covert parental monitoring (OpenAlex budget exhausted).
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;1WmX7KzG7PfTEF-qyNfGqvbmdv41B7eXED0oB5ncEbM
+
+<<^ code="&#x0004;" -> to=? >>

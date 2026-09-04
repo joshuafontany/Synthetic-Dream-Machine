@@ -1,0 +1,197 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Research findings: what the field has measured, by rung. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Research findings: what the field has measured, by rung
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 19,404 characters
+
+````
+I have enough now to compose a substantially strengthened final report. Let me deliver it.
+
+## Research findings: what the field has measured, by rung
+
+**Session note on methodology:** WebSearch was unavailable for this whole task (budget exhausted before I started). All findings below came from direct WebFetch to known URLs, the OpenAlex works API, Crossref-adjacent OpenAlex abstracts, and HN Algolia full-text search via curl — as directed by the parallel session. This got me real primary sources and abstracts, but it is a narrower net than a live search engine, so treat the "not found" gaps as genuinely unexplored, not as negative evidence.
+
+---
+
+### RUNG 1–2: Household / Family — **the qualitatively hardest rung, confirmed**
+
+**Matthews et al., "She'll just grab any device that's closer," CHI 2016** (verified abstract, OpenAlex W2315891070): a multi-method study of household device/account sharing. Key finding: sharing was *common*, and phones were shared "despite being considered 'personal' devices." They built a **taxonomy of six sharing types**, and identified two cross-cutting drivers: **trust in the sharee** and **convenience** — not access-control design. This is the load-bearing empirical fact for your ladder: household-scale identity systems are fighting a default human behavior (ambient sharing), not a rare edge case.
+
+**Matthews et al., "Security and Privacy Experiences and Practices of Survivors of Intimate Partner Abuse," IEEE S&P 2017** (= "Stories from Survivors," OpenAlex W2762667264, verified): frames survivor tech use across **three phases** — physical control, escape from abuser, life apart — arguing each phase needs different security/privacy support. High confidence: this is a *lifecycle* model, i.e., identity-under-coercion is not a static state but a state machine with a specific "escape" transition that most systems don't design for.
+
+**Freed et al., "A Stalker's Paradise," CHI 2018, Best Paper Award** (verified abstract, OpenAlex W2795566406): qualitative study, **89 participants**. Central finding, stated almost as a thesis: IPV attacks are typically **technologically unsophisticated** — carried out by a "**UI-bound adversary**" (an authenticated, adversarial user operating through the normal UI, not a hacker) or via off-the-shelf spyware apps. This explicitly "undermine[s] the predominant threat models under which systems have been designed." This is the single strongest piece of evidence for your hypothesis: the attacker at household scale is *inside the trust boundary by design*, which no scale-up of authentication strength addresses.
+
+**Havron et al., "Clinical Computer Security for Victims of IPV," USENIX Security 2019** — founded the "computer security clinic" model (medical-intake framing) precisely because standard security posture assumes the adversary is external.
+
+**Bellini et al., "Paying the Price: When Intimate Partners Use Technology for Financial Harm," CHI 2023, Best Paper** (verified abstract, OpenAlex W4366587741): **158 survivors + 16 financial advocates**. Identifies four abuser motivations and mechanisms to exploit/monitor/restrict/sabotage financial access via shared financial accounts/apps.
+
+**Daffalla et al., "Account Security Interfaces: Important, Unintuitive, and Untrustworthy," USENIX Security 2023, Distinguished Paper** (confirmed via ipvtechresearch.org bibliography) — measures how account-recovery UX itself is an abuse vector. **Daffalla et al., USENIX Security 2025**, extends this specifically to **passkeys** in interpersonal threat models — directly relevant if your ladder uses device-bound credentials, since passkey recovery/device-loss flows reintroduce exactly the shared-device problem.
+
+**Multi-user smart home literature** (all verified abstracts via OpenAlex):
+- "Amazon vs. My Brother" (2020): 26 participants/21 households — housemates, not manufacturers, are the primary perceived privacy threat around shared smart speakers; coping strategies were "suboptimal."
+- "I would have to evaluate their objections" (2021): 386-person representative US survey on device-owner vs. "incidental user" tension — a genuinely new identity category (someone who didn't choose the device but is captured by it).
+- "Everyone Has Some Personal Stuff" (2019, Bangladesh, 21 participants, 3-week deployment): designed a **dual-account (shared password / secret password) model** specifically because South Asian households treat single-device-multi-user as the norm, not the exception.
+- "We, three brothers have always known everything of each other" (2021): cross-cultural study, **59 participants, Bangladesh/Turkey/USA** — sharing behavior varies by culture/social background, meaning a single global default (share vs. isolate) is empirically wrong for at least a third of the world.
+
+**Net finding for Rung 1–2:** The literature does NOT frame the household as "many devices, one shared identity" — it measures it as **ambient, non-negotiated, culturally-variable sharing that coexists with an adversary who is also a household member**, and no paper in this corpus treats "leaving the household" as a solved transition. This is the strongest evidence in the whole sweep for your hypothesis that household is the hardest rung: it's the only one where the field has built a *separate clinical discipline* (computer security clinics) because ordinary security engineering assumptions fail structurally, not just in degree.
+
+---
+
+### RUNG 3: Community (~100 people)
+
+**Guifi.net** (OpenAlex, multiple verified titles, abstracts partially retrieved): "guifi.net, a crowdsourced network infrastructure held in common" (Computer Networks, 2015); "Cloudy in guifi.net: Establishing and sustaining a community cloud as open commons" (2018); "On the Sustainability of Community Clouds in guifi.net" (2016); "Making Community Networks economically sustainable, the guifi.net experience" (2016) — a real, sustained academic research program exists (medium-high confidence this data is representative, but I could not extract full abstract text for the sustainability-focused papers — **gap**).
+
+**Ninux.org (Italy) — "Detecting and Mitigating Points of Failure in Community Networks: A Graph-Based Approach," IEEE Trans. Computational Social Systems, 2019** (verified abstract, OpenAlex W2914317637): analyzed the largest Italian community network. **Explicit finding: despite the community's stated goal of building a robust, self-organized network, graph analysis showed the network is "fragile under several aspects."** This is a genuinely negative, measured result at community scale — the "avoid unnecessary management structures" governance philosophy (shared by guifi.net, Freifunk, NYC Mesh) produces technical/social fragility that only shows up under formal analysis, not casual observation.
+
+**Freifunk** (verified via Wikipedia): ~400 local communities, ~41,000 access points in Germany, loosely coordinated by the Picopeering Agreement (no central membership register at all). **The dominant measured failure mode here is legal, not technical or identity-related**: German *Störerhaftung* (network-operator secondary liability) suppressed open-hotspot deployment for years; the field's own workaround was VPN-tunneling traffic through Sweden until ECJ/German Federal Court rulings (2016–2018) narrowed the liability doctrine. **This is qualitatively different from every other rung in this sweep** — it's a governance/liability failure, not an identity-scale failure.
+
+**NYC Mesh** (verified via Wikipedia): >2,000 active member nodes, nonprofit since 2019/501(c)(3) since 2020, ran on pure volunteer labor until a **2026 grant of $898,035** to hire its first paid staff. No explicit burnout data found, but the funding history itself is evidence that ~2,000-node/community scale is where volunteer-only governance stops being sustainable without institutionalization.
+
+**Sardex** (Sardinia mutual credit, founded 2010): confirmed a real, substantial econometrics literature exists — "Cyclic motifs in the Sardex monetary network," *Nature Human Behaviour* 2018; "From complementary currency to institution," LSE 2016; "Self-Funded Social Impact Investment," *J. Social Entrepreneurship* 2017; "Liquidity-Saving through Obligation-Clearing and Mutual Credit," 2020 (documents Sardex functioning as counter-cyclical SME liquidity during the Eurozone crisis). Membership mechanism: annual fee €200–3,000 scaled to company size, unsecured credit line by capacity; the system has had to sue members to recover debt in some cases. **Gap: I could not extract the quantitative outcome numbers (turnover, default rates) from these papers this session** — the citations are solid but the numbers inside them are not yet in hand.
+
+**Decidim / Consul (Barcelona/Madrid participatory platforms):** Decidim confirmed at **311 instances across 20 countries (2022)**, Barcelona 2017 pilot **~40,000 participants, ~11,000 proposals, ~8,000 accepted**. Three-tier identity model (visitor/registered/verified) confirmed structurally, but **the actual census-verification mechanism for "verified" status was not retrievable this session** — genuine gap. Measured governance failures found: in Lucerne's top-down deployment the platform "strengthened the digital divide rather than overcoming it"; in Badalona, participation collapsed when the sponsoring city government changed after an election — i.e., **the measured failure at this rung is political durability, not technical identity architecture.**
+
+**Net finding for Rung 3:** community-scale identity/governance failures cluster around **legal liability** (Freifunk) and **political/institutional durability** (Decidim, NYC Mesh needing to professionalize), plus one directly measured technical-fragility result (ninux.org). This is a different failure class than household (relational/coercive) or region (infrastructural-root/statistical-exclusion).
+
+---
+
+### RUNG 4: Region, and Cross-Region
+
+**Aadhaar (India) — this rung has the best quantified adversarial evidence in the whole sweep:**
+- Scale: ~1.383B enrolled (Oct 2024 figure, Wikipedia), >99.9% of adults.
+- UIDAI's own 2018 reported figure: **12% biometric authentication error rate**.
+- **Muralidharan, Niehaus & Sukhtankar-type study, "Identity Verification Standards in Welfare Programs: Experimental Evidence from India" (2020, verified abstract, OpenAlex W3004515645):** large-scale randomized/natural experiments on stricter biometric ID requirements in India's largest social protection program. **Corruption fell, but 1.5–2 million legitimate beneficiaries lost access to benefits at some point during the reform**, and the paper attributes adverse effects primarily to *how the transition was managed*, not to biometrics per se.
+- Countervailing evidence — **"Building State Capacity: Evidence from Biometric Smartcards in India," American Economic Review 2016** (verified abstract, OpenAlex W1543347785): a large randomized rollout across **157 subdistricts, 19 million people** in Andhra Pradesh found biometric smartcards delivered *faster, more predictable, less corrupt* payments **without adversely affecting program access**, and beneficiaries overwhelmingly preferred the new system. **The field disagrees with itself here**, and the disagreement tracks implementation quality (rollout management), not the underlying biometric-identity concept — report both sides as instructed.
+- 2015 Andhra Pradesh/Telangana Aadhaar–voter-ID linkage disenfranchised **~3 million voters**, later cancelled by the Supreme Court (Wikipedia, verified).
+- Sept 2018 Supreme Court judgment upheld Aadhaar's constitutionality but barred mandatory use for bank accounts, SIM cards, school admissions (Wikipedia, verified).
+- **Gap: could not retrieve Reetika Khera/Jean Drèze's specific ration-denial-death case studies or Jharkhand-specific numbers this session** — real, well-known literature, but not independently verified live.
+
+**Estonia ROCA/Infineon crisis (2017)** — verified, high confidence, and directly relevant to "what does root-key compromise cost at region scale":
+- ~**750,000** ID/e-residency cards (issued Oct 2014–Oct 2017) vulnerable to a flaw allowing private-key inference from public keys.
+- Certificates suspended Nov 2–3, 2017; renewal window ran through **March 31, 2018** (~5-month remediation); unrenewed certs revoked April 1, 2018.
+- Manufacturer Gemalto paid **€2.2M** compensation (Feb 2021) for failing to disclose the flaw promptly.
+- **This is the cleanest "single-root, mass-revocation, measured recovery time" data point in the whole sweep.**
+
+**X-Road Estonia–Finland federation** (verified mechanism, no measured-friction data found): connected Feb 7, 2018; architecture is genuinely peer-to-peer — each organization holds its own signing/auth keypairs, no central broker of trust. **Gap: this is the one clean real-world "two regions federate without a common root" example in the sweep, and I could not find measured operational-friction data for it** — worth flagging as a real gap in the literature, not just my search limits, since even the parallel-session tools didn't surface anything beyond the architecture description.
+
+**eIDAS / EUDI Wallet — cross-region seam, strongest sourced material:**
+- **The actual cryptographer/researcher open letter** (I mis-tracked this at first — it is NOT the 38-signatory Mozilla/EFF industry letter, which is a separate, later document): **downloaded and read the primary-source PDF** (`nce.mpi-sp.org`, redirected from `eidas-open-letter.org`). Verified text: **"As of the 26th November 2023, the letter has been signed by 552 scientists and researchers from 42 countries, as well as numerous NGOs."** Signatories include Bart Preneel, Cas Cremers, Steven Murdoch, Jaap-Henk Hoepman, Peter Schwabe, and others — genuinely top-tier cryptography/security academics. **This matches your brief's "500+ cryptographers" framing almost exactly (552).**
+- Core technical objection (verified from the letter text directly): Article 45a(4) lets any EU member state (or recognized third country) designate cryptographic keys that browsers **must trust**, revocable only with that government's permission — meaning a single state, acting alone, gains the technical means to intercept EU citizens' encrypted web traffic with "no effective recourse." Article 45(2a) bans browsers from imposing security checks beyond what's expressly permitted, i.e., it sets an **upper bound** on web security rather than a floor — inverting the normal direction of security regulation.
+- Separately, the 38-signatory **Mozilla/EFF letter** (verified via WebFetch) and the EFF's **"Article 45 will roll back web security by 12 years"** piece (verified) make the same point with a historical anchor: DigiNotar's 2011 CA compromise was used to spy on Iranian users' traffic — precisely the failure mode Article 45(2a) would make it harder for browsers to prevent recurring.
+- **This is a genuinely first-class, directly relevant finding for your "cross-region seam" question**: it's a measured (well, documented-and-argued, not yet empirically realized) case of a *federation trust mechanism itself becoming the attack surface* the moment cross-region recognition is made mandatory rather than negotiated.
+- **Gap: could not retrieve EUDI Large-Scale Pilot (POTENTIAL/NOBID/DC4EU/EWC) interim findings** — pilot project sites returned 404/DNS failures; this remains unverified. Given the letter above is dated Nov 2023 (pre-most-pilot-results), the actual pilot data would need a separate pass.
+
+**ICAO PKD** (verified via prior fetch): centralized broker model — **111 countries participate**, avoiding a fully bilateral mesh; explicitly a trust-list pattern rather than a single root. No measured failure data retrieved this session — **gap**.
+
+**Nordic BankID / MitID** (verified via Wikipedia, low detail): Norway BankID ~4.3M users, Finnish Trust Network ~5.5M users, MitID ~5.4M users; all bank-rooted or bank/government joint, not purely state-rooted — a real example of "federation of private issuers at region scale," confirming your framing. **Gap: could not source the measured Swedish BankID elderly-fraud statistics or MitID 2021–2022 migration-complaint data this session** — repeated attempts (Wikipedia, OpenAlex, HN) returned nothing usable. This looks like a genuine hole in *openly indexed* sources (the numbers likely exist in Swedish Police / Finansiell ID-Teknik reports and Danish Consumer Council material not covered by OpenAlex/HN/Wikipedia) rather than a nonexistent literature — flag as unresolved, not negative.
+
+---
+
+## Cross-cutting assessment
+
+**Confirms your hypothesis (high confidence):** the household rung is the only one in this sweep where the field had to invent a *new clinical discipline* (Havron et al.'s "clinical computer security") because the standard adversary model — attacker outside the trust boundary — is empirically false at that scale. Freed et al. 2018's "UI-bound adversary" concept is the sharpest single articulation of why: at household scale, the identity system's authorized user and its adversary are frequently the same authenticated principal.
+
+**Qualitative discontinuity between rungs (high confidence):** each rung's dominant *measured* failure mode is a different category entirely —
+- Household: relational/coercive (same person is both principal and adversary).
+- Community: legal/liability (Freifunk) and political/institutional durability (Decidim, NYC Mesh), with one directly measured technical-fragility case (ninux.org) showing that "no formal governance" reads as robust until graph-analyzed.
+- Region: infrastructural-root failure (Estonia, 750K cards, ~5 month recovery) and statistical exclusion-at-scale (Aadhaar, 12% error rate, 1.5–2M benefit losses in one study — contradicted by a different large RCT finding net-positive access effects).
+- Cross-region: the seam itself becomes attack surface the moment recognition is made *mandatory* rather than *negotiated* — this is the eIDAS Article 45 finding, and it's arguably the most novel result for your specific question, since it's evidence about the federation mechanism's failure mode, not just a bigger version of a lower-rung problem.
+
+**Weakest-evidenced rung:** cross-region is the *most argued* but *least empirically realized* — X-Road's actual friction is undocumented in open sources, and the EUDI pilots' results are not yet retrievable. The 552-signatory letter is a measured *expert consensus of concern*, not yet a measured *incident*. This is worth being honest about: cross-region identity federation is currently a site of high-quality prediction, not yet high-quality postmortem — the opposite of Estonia and Aadhaar, which are pure postmortem.
+
+**Explicit gaps not reached this session:** Reetika Khera/Jean Drèze primary sources and Jharkhand numbers; Swedish BankID fraud statistics; MitID 2021–2022 migration complaint data; EUDI Large-Scale Pilot (POTENTIAL/NOBID/DC4EU/EWC) interim results; Guifi.net's "Compact for a Free, Open and Neutral Network" text and critiques; Pan-Canadian Trust Framework; ICAO PKD failure/gap data; Sardex quantitative outcome numbers (papers identified, contents not extracted). These are plausible-to-exist, not confirmed-absent — a next pass with a live search engine or targeted publisher-site scraping would likely close most of them.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 9,840 characters
+
+````
+I've hit the practical limit of what I can retrieve this session: WebSearch was exhausted after my very first batch of queries (the session's 200-query budget was already spent before this task), so all further research had to go through WebFetch against guessed/known URLs — which succeeded for well-established Wikipedia pages and failed (404/403) for ACM DL, specific research-lab pages, and several niche sites. I was not able to complete the 30+ search sweep the task called for. Below is what I actually verified live this session, clearly separated from gaps I could not fill and from background knowledge I'm not able to re-verify right now.
+
+## What I verified live this session (WebFetch, cited)
+
+**Estonia ROCA/Infineon crisis (high confidence, verified):** ~750,000 Estonian ID/e-residency cards issued Oct 2014–Oct 2017 were vulnerable to a flaw letting private keys be inferred from public keys. Certificates were suspended Nov 2–3, 2017; renewal window ran through March 31, 2018; unrenewed certs were revoked April 1, 2018. Card manufacturer Gemalto later paid €2.2M compensation (Feb 2021) over failing to timely disclose. This is a real single-root mass-revocation event with a measured remediation window (~5 months) — a concrete data point for "what does recovery from a compromised root actually cost in wall-clock time." Source: en.wikipedia.org/wiki/Estonian_identity_card
+
+**X-Road Estonia–Finland federation (high confidence on mechanism, no failure data found):** Connected Feb 7, 2018. Architecture is peer-to-peer — each organization holds its own signing/auth keypairs, no central intermediary brokers trust. This is a genuinely federated two-region model, but Wikipedia documents no operational difficulties; I could not source a measured account of what was actually hard about it. Source: en.wikipedia.org/wiki/X-Road — **gap: no measured friction data found.**
+
+**Aadhaar scale and failure modes (medium-high confidence):** ~1.383B enrolled (Oct 2024), >99.9% of adult population. UIDAI itself reported (2018) a 12% biometric authentication error rate. Andhra Pradesh/Telangana's 2015 Aadhaar–voter-ID linkage disenfranchised ~3 million voters, later cancelled by the Supreme Court. The Sept 2018 Supreme Court judgment upheld the Aadhaar Act's constitutionality but barred mandatory use for bank accounts, mobile SIMs, and school admissions. I could not retrieve the Reetika Khera/Jean Drèze ration-denial-death studies or Jharkhand-specific numbers directly this session (404s on targeted fetches) — that material is real and well-known from training but I could not re-verify or get exact figures live. Source: en.wikipedia.org/wiki/Aadhaar. **Gap: exclusion-death studies not independently re-verified this session.**
+
+**IPV tech-abuse research corpus (high confidence — this is the strongest hit of the session):** Fetching ipvtechresearch.org returned a real, current bibliography confirming and extending your target list:
+- Freed et al., "A Stalker's Paradise: How Intimate Partner Abusers Exploit Technology," CHI 2018, Best Paper Award.
+- Freed et al., "Is my phone hacked? Analyzing Clinical Computer Security Interventions with Survivors of IPV," CSCW 2019, Best Paper Honorable Mention.
+- Havron et al., "Clinical Computer Security for Victims of Intimate Partner Violence," USENIX Security 2019 (founding paper of the "clinical computer security" model — treating device compromise like a medical intake).
+- Chatterjee et al., "The Spyware Used in Intimate Partner Violence," IEEE S&P (Oakland) 2018.
+- Tseng et al., "The Tools and Tactics Used in Intimate Partner Surveillance," USENIX Security 2020, Distinguished Paper.
+- Roundy et al., "The Many Kinds of Creepware Used for Interpersonal Attacks," IEEE Oakland 2020.
+- Daffalla et al., "Account Security Interfaces: Important, Unintuitive, and Untrustworthy," USENIX Security 2023, Distinguished Paper — this is squarely on-point for your identity-model question: it measures how account-recovery UX itself creates an attack surface for a co-resident abuser.
+- Daffalla et al., "A Framework for Abusability Analysis: The Case of Passkeys in Interpersonal Threat Models," USENIX Security 2025 — directly relevant if your ladder touches passkey-style device-bound credentials.
+- Bellini et al., "Shortchanged: … Intimate Partner Financial Abuse," CHI 2024; "Paying the Price," CHI 2023 Best Paper; "The Digital-Safety Risks of Financial Technologies for Survivors of IPV," USENIX Security 2023.
+- Bellini et al., "SoK: Safer Digital-Safety Research Involving At-Risk Users," IEEE Oakland 2024.
+Source: ipvtechresearch.org. I could not fetch individual abstracts (404s on guessed permalink paths), so I have titles/venues/awards confirmed live but not the numeric findings inside each paper — **treat the specific numbers from this cluster as training-knowledge, medium confidence, not re-verified this session.**
+
+**Decidim (medium confidence):** 311 instances across Spain + 19 countries (2022), ~400 governments/institutions by Decidim's own count. Barcelona's 2017 pilot: ~40,000 participants, ~11,000 proposals, ~8,000 accepted. Three-tier user model (visitor / registered / verified) confirmed, but the actual residency-verification mechanism behind "verified" was not in the fetched page — **gap: census-verification method not confirmed live.** Documented failure modes: in Lucerne's top-down deployment the platform "strengthened the digital divide rather than overcoming it"; in Badalona, participation stopped when the sponsoring administration changed after an election — i.e., civic participation infrastructure measured as politically non-durable, not technically fragile. Source: en.wikipedia.org/wiki/Decidim
+
+**NYC Mesh (medium confidence):** >2,000 active member nodes across NYC boroughs, incorporated nonprofit 2019, 501(c)(3) 2020, a 2026 grant of $898,035 to hire its first paid staff — implying the network ran purely on volunteer labor up to that point. No explicit burnout data surfaced. Source: en.wikipedia.org/wiki/NYC_Mesh
+
+**Freifunk (medium-high confidence):** ~400 independent local communities, ~41,000 access points in Germany, coordinated loosely via the Picopeering Agreement (no central membership register). The dominant *measured* failure at community-mesh scale here isn't identity at all — it's legal: German *Störerhaftung* (operator secondary liability) suppressed public hotspot deployment for years until ECJ/German Federal Court rulings 2016–2018 narrowed it; Freifunk's workaround was VPN-tunneling all traffic through Sweden. This is a genuinely different failure class than anything in the household or Aadhaar rungs — a governance/liability problem, not an authentication or account-sharing problem. Source: en.wikipedia.org/wiki/Freifunk
+
+**Sardex (low-medium confidence, thin data):** Founded 2010, Sardinia. Annual participation fee €200–3,000 by company size; new members get unsecured mutual credit up to a capacity-based limit; system has "occasional problems of needing to sue participants to recover debt." No scale/turnover numbers or academic-outcome citations were retrievable from the fetched page — **gap: the well-known Sardex econometric studies (Sardex as counter-cyclical liquidity during the Eurozone crisis) exist in the literature but I could not source them live this session.**
+
+**Guifi.net, MitID, ICAO PKD detail, Pan-Canadian Trust Framework, Reetika Khera/Drèze primary sources, Swedish BankID fraud statistics, EUDI Large-Scale Pilot findings, the cryptographers' Article 45 open letter: all returned 404/no-data on the URLs I could construct, and WebSearch was unavailable for the rest of the session to find the correct URLs.** These are real, well-documented items I have background familiarity with, but I am not able to certify current figures without live verification, and presenting them as newly-confirmed would misrepresent what this session actually checked.
+
+## Assessment against your hypothesis
+
+Even on this partial pull, one pattern is visible and worth flagging at high confidence: **the failure modes are categorically different at each rung, not just larger in scale.**
+- Household rung: failures are *relational/coercive* — the account-recovery flow, the shared device, the "who has the passcode" question become an attack surface between people who trust each other in every sense except this one (Daffalla et al. 2023/2025, Havron et al. 2019 "clinical" framing exists precisely because no ordinary security model anticipates the adversary living in the house).
+- Community rung: failures are *legal/governance* (Störerhaftung) and *political durability* (Decidim's Badalona case), not identity-technical.
+- Region rung: failures are *infrastructural-root* (Estonia's 750K-card revocation) and *statistical-exclusion-at-scale* (Aadhaar's 12% biometric error rate translating into real exclusion).
+- Cross-region: the only clean example I could verify (X-Road) is deliberately peer-to-peer with no common root, but I could not find measured friction data for it — suggesting this seam is under-measured in the literature relative to the others, which is itself a finding worth noting as a negative result.
+
+This is consistent with — though not sufficient on its own to prove — your hypothesis that the household rung is hardest: it's the only rung where the literature treats the adversary and the trusted party as the same person, which no purely technical identity model (however well it handles scale) is designed to survive.
+
+**Given the WebSearch outage, I'd recommend re-running the remaining items (Guifi.net compact critique, Sardex econometrics, MitID complaint data, Swedish BankID fraud numbers, EUDI pilot results, the Article 45 open letter, Reetika Khera primary sources) once the search budget resets — I can pick this back up.**
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;MmbyMsLRbC2Lhdmtpv2dQGXyddU4UBGxqNZC6ZcSV8U
+
+<<^ code="&#x0004;" -> to=? >>

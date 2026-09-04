@@ -1,0 +1,422 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-curated-set-addressing-ances-e5dcbe >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-curated-set-addressing-ances-e5dcbe.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Research report — curated-set addressing: ancestors and moderns. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-curated-set-addressing-ances-e5dcbe"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Research report — curated-set addressing: ancestors and moderns
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 45,019 characters
+
+````
+## Research report — curated-set addressing: ancestors and moderns
+
+All URLs given. Wayback captures marked with capture date. Confidence per claim in brackets.
+
+---
+
+# A. THE ANCESTORS
+
+## A1. LISTSERV — the single best primary source on why hand-curated subscription broke
+
+**Source:** L-Soft, "Early History of LISTSERV®" — https://www.lsoft.com/products/listserv-history.asp (live, fetched 2026-09-04)
+
+The pre-LISTSERV BITNIC model was literally a human curating the set. Verbatim:
+
+> "To join a mailing list, you would write to INFO@BITNIC (which, in spite of what the name might suggest nowadays, was a human being) and ask to be added to the list. The staff person reading INFO would then edit the file containing the addresses of all the subscribers…"
+
+The measured failure, verbatim (section "Problems in sight"):
+
+> "In the summer of 1986, however, the flaws of this original LISTSERV service became apparent. **Hundreds of requests were received by INFO@BITNIC every day, and it could take days or even weeks to be added to a mailing list** (or, worse, to be removed from a list that had turned out to be totally uninteresting). Most importantly, **the lists generated thousands of messages every day**, a large fraction of which had to travel over the saturated transatlantic lines (**two 9600bps analog lines**, of which at least one always turned out to be down at any given time). So, every time someone posted a message to LINKFAIL, **hundreds of copies** of the message added to the thousands of messages that were already waiting to cross the Atlantic. In fact, **the traffic from the mailing lists alone was threatening to make private email totally unusable, with delivery delays approaching a week.** Some people were starting to use the lists to discuss whether mailing lists should be allowed, adding their comments to the growing backlogs."
+
+The moderation-load-as-adoption-blocker point, verbatim:
+
+> "Computing centres had been reticent to implement mailing lists thus far because of **the tremendous amount of manpower required to process all the 'add me' requests** from subscribers. Everyone knew that **INFO@BITNIC was now manned full-time by someone who did nothing but add and remove people from lists all day long**, and that they were still unable to meet demand."
+
+The architectural fix was *peering* — replicating the audience set across sites so the fan-out crossed the expensive link once:
+
+> "This 'Revised LISTSERV'… would be based on a distributed model, as opposed to BITNIC's centralised model… You would set up two (or more) mailing lists, and tell LISTSERV to 'peer' them… When a user requested to join a peered list, LISTSERV would automatically forward the request to the peer that was closest to the user. **With all the Europeans on the European peer, only one copy of the message ever had to cross the Atlantic. The backlogs melted away.**"
+
+Hard adoption numbers, verbatim from the same page:
+- "The first version of this Revised LISTSERV was released in **June 1986**."
+- "By **November 1986**, there were already **41 sites** running Revised LISTSERV."
+- "On **May 6, 1988**, the **1,000th public LISTSERV list** was created."
+- January 1988: "the automatically maintained list of lists feature was added." (i.e. the *directory* of curated sets became itself a machine artifact, ~18 months in.)
+
+[Confidence: high — vendor-authored but first-person from the author, Eric Thomas; corroborated on origin/date by Wikipedia https://en.wikipedia.org/wiki/LISTSERV which states "In 1986, Éric Thomas developed an independent application, originally named 'Revised Listserv'" and that pre-LISTSERV "To join or leave a list, people would write to a list administrator and ask to be added or removed, a process that became more time-consuming as discussion lists grew in popularity."]
+
+**NOT REACHED:** no list-size / messages-per-day / moderation-queue numbers for LISTSERV in the commercial era, and none for majordomo at all. Wikipedia's LISTSERV page explicitly carries no usage metrics.
+
+## A2. GNU Mailman
+
+**Sources:** https://www.list.org/ , https://www.list.org/features.html , https://docs.mailman3.org/en/latest/
+
+Feature vocabulary only, verbatim from list.org/features.html: "Emergency moderation", "Flexible moderation and privacy controls", "Through the web membership management", "Subscription invitations", "MIME-based content filtering, with demime/stripmime like options", "Regular expression based topic filtering", "Urgent: header support (bypasses digests to reach all users immediately)". list.org front page: Mailman "supports built-in archiving, automatic bounce processing, content filtering, digest delivery, spam filters, and more."
+
+**NOT REACHED — negative result:** I found **no** published Mailman design doc, retrospective, or docs page giving numbers on list sizes, moderation-queue volume, or where moderation load broke. Tried: list.org root, list.org/features.html, docs.mailman3.org root. The Mailman 3 docs root is a table of contents with no such content. Nothing in the reachable corpus quantifies Mailman moderation load. Worth noting as a real gap: the mailing-list ancestor with the *most* deployed installs has the *least* published scaling measurement.
+
+[Confidence: high that these are the published feature claims; high that the quantitative material is absent from these pages, medium that it is absent from Mailman's corpus overall — I did not exhaust mail-archive/wiki.list.org.]
+
+## A3. Usenet — group creation as an explicit, costed rite
+
+**Source (primary, Wayback):** "GUIDELINES FOR USENET GROUP CREATION" / "How to Create a New Usenet Newsgroup", David C. Lawrence (newgroups-request@isc.org), original author Greg Woods, edited to 5/93 by Gene Spafford. Message-ID `<nan.howto.970317@isc.org>`, last-change 31 Jan 1997.
+**Wayback capture 1997-08-13** — https://web.archive.org/web/19970813072225/http://www.faqs.org:80/faqs/usenet/creating-newsgroups/part1/
+
+The audience set was created by a *vote with a hard quorum*. Verbatim thresholds:
+
+> "2) The voting period should last for **at least 21 days and no more than 31 days**, no matter what the preliminary results of the vote are."
+
+> "3) AFTER the waiting period, and if there were no serious objections that might invalidate the vote, and if **100 more valid YES/create votes are received than NO/don't create AND at least 2/3 of the total number of valid votes received are in favor of creation**, a newgroup control message may be sent out. **If the 100 vote margin or 2/3 percentage is not met, the group should not be created.**"
+
+Other load-bearing mechanics, verbatim:
+- Discussion period: "If there is no general agreement on these points among the proponents of a new group at the end of **30 days of discussion**, the discussion should be taken offline…"
+- Post-tally cooling: "there will be a **5 day waiting period**… during which the net will have a chance to correct any errors in the voter list or the voting procedure."
+- Anti-proxy rule (directly relevant to curated-set addressing): "**ONLY votes MAILED to the vote-taker will count.** Votes posted to the net for any reason… and **proxy votes (such as having a mailing list maintainer claim a vote for each member of the list) will not be counted.**"
+- Failure cooldown: "A proposal which has failed under point (3) above should not again be brought up for discussion until **at least six months** have passed."
+- The advisory scaffolding was itself institutional: `group-mentors@acpub.duke.edu`, `group-advice@isc.org`, and the "Usenet Volunteer Votetakers (UVV)… a group of neutral third-party vote-takers who currently handle vote gathering and counting for **all** newsgroup proposals."
+
+And the crucial disclaimer that the vote never actually bound the carriers — the set was advisory, not enforced:
+
+> "It should be pointed out here that, **as always, the decision whether or not to create a newsgroup on a given machine rests with the administrator of that machine.** These guidelines are intended merely as an aid in making those decisions."
+
+[Confidence: very high — primary control document, verbatim.]
+
+## A4. Usenet — the Big-8 Management Board, and the explicit admission that a newsgroup has no identifiable membership
+
+**Source (Wayback capture 2015-01-18):** https://web.archive.org/web/20150118063107/http://www.big-8.org:80/articles/b/i/g/Big-8_Management_FAQ.html
+
+This is the single most on-scope ancestor document you have: it is a governance body stating, in writing, **why it cannot treat a newsgroup as a curated set**. Verbatim:
+
+> "**Will the board make the people in our newsgroup obey the charter of the group?** — **No.**
+> **Why not?**
+> • **There are too many newsgroups—and too many disagreements about the meaning of charters!—for the board to become involved.**
+> • **There is no way to identify who 'the people in our newsgroup' are.**
+> • **There is no mechanism in NNTP to enforce punishments on people who refuse to follow the charters.**
+> • There is no mechanism to erase old charters and replace them with new charters.
+> • **Except for moderated groups (a whole different kettle of fish), newsgroups have no 'owners'** who can impose and enforce charters or changes in charters."
+
+Charters degrade to a memory of intent: "the charter provides some kind of touchstone for the original purpose and scope of the group."
+
+Managed vs. unmanaged hierarchies, verbatim: "The idea of management distinguishes these eight subsets of Usenet from unmanaged hierarchies such as alt.* … **The design philosophy of unmanaged hierarchies is that there is no central authority that can issue control messages.**" And for alt.*: "Where do I go if I want an alt.* group? — **alt.config**."
+
+Board opacity, verbatim: "We discuss things among ourselves on a private mailing list… **Publishing the transcript of the discussions would invite commentary, which would mean that everything any member said would have to be publicly explained and defended.** Keeping the discussion private allows us to speak our minds freely." And: "Why doesn't the Board reveal how its members voted? — **We do not see any use for that information other than to make the members of the Board targets of ridicule and harassment.**" Terms of office: "**Roughly 18 months (renewable).**"
+
+The regime change is dated in the same document's timeline: 2005-09-19 "RFD Process on Hold / Call for Ideas"; 2006-03-13 "We are the Big-8 Management Board"; **2006-09-30 "Big Eight Hierarchy Management Transition (Allbery)"**. So the ~100-vote/2-3 plebiscite regime ran ~1987–2005 and was replaced by an appointed board.
+
+**Current-day process** (live, https://www.big-8.org/wiki/How_to_Create_a_New_Big-8_Newsgroup): six steps, RFD to news.announce.newgroups, discussion in news.groups.proposals, then — verbatim — "The Board will wait **five days** after the Final RFD and Last Call for Comments is issued before beginning to vote. After the five-day period, **the Board's vote may take one to seven days**." **No public vote threshold at all.** The plebiscite is gone.
+
+[Confidence: very high on the FAQ text (Wayback, verbatim); high on the regime-change dating.]
+
+## A5. Usenet — moderation load, measured qualitatively by a moderator
+
+**Source (Wayback capture 1999-10-13):** "Pitfalls of Newsgroup Moderation (or Things You Wished You'd Thought Of Before You Started)", Russ Allbery — https://web.archive.org/web/19991013050951/http://eyrie.org:80/%7Eeagle/faqs/mod-pitfalls.html
+
+The best available statement of *what curating an audience actually costs a human*. Verbatim highlights:
+
+> "**A moderated group without active moderators is dead.** It doesn't matter how many posters there are, how good of an idea the group is, how many people are interested, or how many sites carry it; if no one is moderating it, the group is dead. And once it dies, it can be very hard to revive again."
+
+> "Unmoderated groups largely run themselves. **Moderated groups require some group of people to regularly invest their time in the newsgroup, day in and day out, for as long as the newsgroup exists.**… (A lot of it can be automated, but if everyone goes on vacation that will be when the automation will break and **spew thousands of posts all over Usenet**.)"
+
+> "Do you have a team of moderators already lined up? Yes, a team. **One moderator is not recommended**… **Past experience shows both that finding moderators is the hardest part of this and that groups with one moderator are very prone to dying off.**"
+
+> "**Moderating a newsgroup that gets more than a few articles a day requires either some level of programming**, at least to the degree of writing procmail scripts, **or a lot of free time**."
+
+> "**rec.games.roguelike.announce was dead for years because of this.** It's far from the only one."
+
+Capture problem — moderation as de facto ownership of the set, verbatim:
+
+> "**Do you trust the moderators? Because if they don't want to be replaced, you're going to have a hell of a time replacing them.** No matter what you put in the newsgroup charter, **moderators effectively control the newsgroups they moderate**, and no one's going to take the newsgroup away from them unless they do something egregious. And even then, it will be months of fighting over it."
+
+Propagation cost of *any* new addressable set, verbatim:
+
+> "Did you think that the work of getting the newsgroup created would end with the vote? … **A lot of sites (it'll feel like most sites) just won't create the group. They'll ignore the newgroup. You'll have to mail them individually. Then they'll create the newsgroup unmoderated instead, and you'll have to mail them again. Then they'll get the submission address wrong. Then they'll lose it again. Expect it to take a few months to get the newsgroup up and mostly running.**"
+
+Also: "Do you have **multiple injection points**? Your server is going to crash… If you inject the same post via multiple servers using the same message ID, there won't be any duplicates, and you get redundancy."
+
+[Confidence: very high — primary, verbatim; author is the news.announce.newgroups moderator named in the 2006 transition.]
+
+## A6. Usenet moderation, the protocol layer
+
+**Source:** RFC 5537, "Netnews Architecture and Protocols" — https://datatracker.ietf.org/doc/html/rfc5537
+
+Verbatim:
+> "An injecting agent MUST have available a list (possibly empty) of moderated groups for which it accepts articles and the corresponding submission addresses."
+> "If the Newsgroups header contains one or more moderated groups and the proto-article does not contain an Approved header field, the injecting agent MUST either forward it to a moderator as specified in Section 3.5.1 or, if that is not possible, reject it."
+> Approved header must identify "the moderator and, insofar as is possible, all the other moderators who have approved the article."
+> Relaying agents should "accept articles only from trusted agents" to "avoid bypass of injecting agent policies and forgery of Path and Injection-Info headers."
+
+The observation worth carrying: **the entire enforcement is one unauthenticated header plus a trust-the-peer relay policy.** There is no cryptographic binding of an approval to a moderator. [Confidence: high on the quotes; high on the interpretation — RFC 5537 has no signature mechanism.]
+
+## A7. Killfiles — reader-side curation
+
+**Source:** https://en.wikipedia.org/wiki/Kill_file
+
+Verbatim: a kill file (also "killfile", "bozo bin", "twit list") is "a file that stores text matching patterns that are used in some Usenet reading programs to filter out (ignore) articles by subject, author, or other header information." First implemented in **Larry Wall's rn**. Jerry Pournelle, 1986, wanted "a program that will … sort through the messages, assigning some to a priority file and others to the bit bucket depending on subject matter and origin." Later evolution: **scoring** (e.g. Gnus), using "fuzzy logic to apply arbitrarily complex overlapping rules."
+
+**Negative result:** the article carries **no critique of killfile scaling**. The structural point stands on its own — killfiles are per-reader, non-transferable, and blacklist-shaped, so cost grows with the adversary population, not the community's. That inference is mine, not sourced. [Confidence: high on quotes; the scaling critique is unsourced.]
+
+## A8. Eternal September
+
+**Source:** https://en.wikipedia.org/wiki/Eternal_September
+
+Verbatim: "a cultural phenomenon during a period beginning around **late 1993 and early 1994**, when Internet service providers began offering Usenet access to many new users." "**AOL began their Usenet gateway service in March 1994**, leading to a constant stream of new users." Effect: the influx "**swamped the existing culture of those forums and their ability to self-moderate and enforce existing norms.**"
+
+**NOT REACHED:** no subscriber numbers for AOL or other ISPs in this article. [Confidence: high on quotes; the absence of numbers is itself confirmed.]
+
+## A9. The spam collapse
+
+**Canter & Siegel** — https://en.wikipedia.org/wiki/Laurence_Canter_and_Martha_Siegel
+- "Canter and Siegel sent their advertisement, with the subject '**Green Card Lottery – Final One?**', to **at least 5,500 Usenet discussion groups**." Date: **12 April 1994**.
+- Their provider "received so many complaints that its **mail servers crashed repeatedly for the next two days**; it promptly terminated their service."
+- "Despite the ire directed at the two lawyers, they posted another advertisement to **1,000 newsgroups in June 1994**."
+- Canter, on proceeds: "**The best I can recall we probably made somewhere between $100,000 to $200,000** related to that."
+- Method note, directly relevant to addressing: **they deliberately did not crosspost.** "Rather than using cross-posting (standard etiquette), they submitted separate postings to each newsgroup, ensuring subscribers would encounter the message multiple times." Crossposting was the one mechanism Usenet had for "one article, many groups, one copy"; defeating it multiplied cost by N.
+
+**Brad Templeton, "Origin of the term 'spam' to mean net abuse"** — https://www.templetons.com/brad/spamterm.html
+- Term originates in the MUD community, late 1980s: "The term spamming got used to apply to a few different behaviours. One was to flood the computer with so much data as to crash it."
+- First Usenet usage: **31 March 1993**, Richard Depew's ARMM software malfunctioned and "ended up posting **200 messages in a row** to news.admin.policy"; Joel Furr appears to have made the first use of "spam" for a Usenet posting.
+- On Green Card: "On **April 12**, they hired [a] mercenary programmer to write a simple script to post their ad to every single newsgroup (message board) on USENET." And what made it a turning point: "**Unlike prior net abusers, Canter and Siegel didn't turn tail and run. They were proud of it**" — they subsequently published a book on the tactic.
+
+**Newsgroup spam article** — https://en.wikipedia.org/wiki/Newsgroup_spam
+- "The first widely recognized Usenet spam … was posted on **18 January 1994**" (Clarence L. Thomas IV).
+- Serdar Argic "appeared in early 1994, posting **tens of thousands of messages** to various newsgroups."
+
+**NOT REACHED — important negative:** I could not obtain a sourced **spam-share-of-Usenet-posts** figure for any year. Wikipedia's Newsgroup spam article "does not provide quantified statistics about the overall share of spam posts relative to legitimate Usenet traffic, nor … measured data on cancelbot effectiveness." Crossref queries for Usenet spam measurement returned only unrelated 1996–2010 sociolinguistic/bibliometric work (e.g. https://doi.org/10.1109/hicss.2006.536 "You Are Who You Talk To: Detecting Roles in Usenet Newsgroups"; https://doi.org/10.1080/019722496129693 "Defending the Boundaries: Identifying and Countering Threats in a Usenet Newsgroup", 1996 — the latter may be relevant to community-boundary defense but I did not obtain its text). WebSearch and OpenAlex were unavailable. **Treat "X% of Usenet was spam" as unsourced until measured.**
+
+## A10. Usenet traffic volume and the ISP exit — hard numbers
+
+**Source:** https://en.wikipedia.org/wiki/Usenet (all figures attributed there to altopia.com)
+
+| Date | Daily volume | Daily posts |
+|---|---|---|
+| Dec 1996 | 4.5 GiB | — |
+| Jul 1997 | 9 GiB | — |
+| Jan 1998 | 12 GiB | 554k |
+| Jan 2000 | 82 GiB | 858k |
+| Jan 2005 | 2.27 TiB | 7.54M |
+| Jan 2010 | 5.42 TiB | 15.66M |
+| Jan 2020 | 62.40 TiB | 107.49M |
+| Feb 2024 | 274.49 TiB | 400.24M |
+
+The signal-to-carrier ratio, verbatim: in 2010 "the number of all text posts made in all Big-8 newsgroups averaged **1,800 new messages every hour, with an average of 25,000 messages per day**" — and binary content "**accounts for over 99 percent of article data**."
+
+That is the collapse in one line: **the discussion layer stayed roughly constant in the tens of thousands of messages/day while the carrier grew ~60,000× in bytes.** Volume growth after 1994 is not community growth; it is freight riding a flood-fill transport that has no way to say "this is not for you."
+
+ISP exit timeline (same source):
+- **2005** — AOL discontinued, "citing the growing popularity of weblogs, chat forums"
+- **June 2008** — Verizon, Time Warner, Sprint reduced/stopped, per the Andrew Cuomo agreement
+- **June 2009** — AT&T ended service "as of July 15, 2009"
+- **September 2009** — Verizon complete discontinuation, "September 30, 2009"
+- **June 2010** — Microsoft ceased support, "June 1, 2010"; **May 2010** — Duke University decommissioned, "citing low usage and rising costs"; **July 2010** — JANET, "effective July 31, 2010"
+- **2010** — Cox, Atlantic Communications dropped feeds
+- **Feb 2024** — Google ended new content, "Effective from 22 February 2024"
+
+Note Duke: the site where Usenet was born switched it off in 2010 for "low usage and rising costs."
+
+[Confidence: high on the table as-published; medium-high on the underlying altopia figures, which are one commercial provider's feed measurement, not an independent census.]
+
+---
+
+# B. THE MODERNS
+
+## B1. Zulip — published rationale, and Tim Abbott's own statements
+
+**zulip.com/why-zulip/** — https://zulip.com/why-zulip/
+- The addressing split, verbatim: "**In Zulip, channels determine who gets a message. Each conversation within a channel is labeled with a topic**, which keeps everything organized." This is the exact separation you're after: *channel = audience set*, *topic = thread*. Recipient selection and conversation grouping are orthogonal axes.
+- "You can read Zulip **one conversation at a time**, seeing each message in context, no matter how many other conversations are going on."
+- Attributed claims: "With Zulip, **I can manage hundreds of participants across two communities extremely efficiently, and I don't feel stressed.**" — Dan Allen, Asciidoctor project lead. And: "**Using Zulip significantly increases the size of the team for which a manager can meaningfully know what's going on.**" — Gaute Lund, iDrift AS.
+- Also on-page: "72% of business leaders observe that their team struggles to communicate effectively"; businesses "lose an average of over $1,000/month for each employee due to ineffective communication." [Confidence: low — marketing-page statistics with no visible primary citation. Do not carry these.]
+
+**zulip.com/help/introduction-to-topics** — https://zulip.com/help/introduction-to-topics
+- "Zulip is designed around conversations that are labeled with **topics**, to make communication organized and efficient."
+- "**Lots of conversations can happen in the same channel at the same time, each in its own topic. You never have to worry about interrupting** — each conversation has its own space."
+- "Conversations can last many hours or days, letting everyone respond in their own time."
+- Contrast drawn explicitly against side-panel threads: "In other team chat applications, you might be used to seeing threads in a small panel on the side of the app" — in Zulip "threads appear in the main message view instead."
+
+**tabbott, HN 19285211, 2019-03-01** — https://news.ycombinator.com/item?id=19285211 — the clearest published statement of the *asymmetric* cost argument, verbatim in full:
+
+> "This is a common confusion from folks who haven't really used Zulip. **You don't need to think about the subject for every message, because 95% of messages you send are replying to an existing message/conversation**, and you don't need to think about topics to do that.
+> For those messages where you are effectively changing the topic of conversation, in Zulip, rather than starting your message with 'On another note,' … you instead just send your message to another topic.
+> And if there are multiple conversations happening at overlapping times, Zulip's model often ends up saving you from having to say '@fred yes' in your reply to indicate which question you're answering 'yes' to, because it's obvious from the structure.
+> You can argue it's slightly more work for the person sending a message to type a topic when you bring up something unrelated, but it's certainly not much, and it's only relevant to a small fraction of messages that one sends. **Whereas what Zulip's model saves your organization is every one of the N users who can have to read the conversation needing to spend much more time and mental effort** in order to understand what conversation(s) happened while they weren't looking at chat and whether there was something that needs their attention."
+
+That is the load-bearing claim: **O(1) sender cost buys O(N) reader saving.** [Confidence: very high — verbatim from HN Firebase API.]
+
+**tabbott, HN 40287460, 2024-05-07** — https://news.ycombinator.com/item?id=40287460 — hard capacity numbers, verbatim:
+
+> "**Zulip on a single server with 16GB of RAM can handle 10,000s of users, thousands of which are concurrently active.** (That's what we use for **chat.zulip.org**, for example, and **the machine is usually about 96% idle with only half its memory used**)."
+
+And an important observation about what "large" means in follower-graph products, verbatim:
+
+> "**there are very few communities today having complex conversations involving 100K+ people in a single organization/workspace** … Certainly there are Discords with **over a million users**, like the Midjourney one, **but most of those users are just users of the product, not having discussions at all**; the company famously made the unusual decision to only offer a Discord bot as UI for their product."
+
+**tabbott, HN 48156456, 2026-05-16** — https://news.ycombinator.com/item?id=48156456: "There's new long-lived connection support in **Zulip 12.0** that will enable the mobile app to do a lot better for startup in **organizations with multiple 10ks of users**." [Confidence: high]
+
+**Zulip's own published scaling table** — https://zulip.readthedocs.io/en/latest/production/requirements.html, verbatim:
+> "With 25+ daily active users, 4 GB of RAM." · "With 100+ daily active users, 8 GB of RAM." · "With 400+ daily active users, **16 GB of RAM for the Zulip application server, plus 16 GB for the database**." · "With 2000+ daily active users **32 GB of RAM, plus 32 GB for the database**." · "**Roughly linear scaling beyond that.**"
+
+Linear in *users*, not superlinear — which is the contrast against Matrix (below).
+
+**Zulip Year in Review 2022** — https://blog.zulip.com/2023/01/11/year-in-review-2022/ — the single best fan-out number I found:
+> "**Stream messages were read an average of 11 times**" · "About **3% of messages** earned a reaction" · "A total of **163 people contributed 5815 commits** to Zulip in 2022"; "over **1150 distinct code contributors**"; translators "translated **657 thousand words in December alone**"; "**27 languages**". Feature adoption: custom profile fields "**15%** of active organizations"; pinned streams "only **7%** of users"; linkifiers "just **5%** of active organizations". Sponsorship: "over **1000** open-source projects, non-profits, educational institutions, and academic research groups in 2022"; "**29%** of sponsored open-source projects take advantage of Zulip's new **public access option**."
+
+**Zulip Year in Review 2024** — https://blog.zulip.com/2025/01/27/year-in-review-2024/:
+> "About **3%** of messages earned an emoji reaction" · "**Half** of Zulip messages were sent from the Desktop app" · "Only **1.2%** of active users have changed their home view" · "**@topic mentions are used 9x less often than @all mentions, and 21x less often than personal mentions**" · "Only **17%** of active channels have a non-default description, and **9%** of those make use of formatting" · sponsored "**over 2000** open-source projects, non-profits, educational institutions, and academic research groups in 2024."
+
+The @topic/@all/personal ratio is a genuinely interesting attention datum: **the narrowest addressing verb is the least used, by ~9× against the broadest.** Broadcast wins on ergonomics even where a scoped alternative exists.
+
+**Zulip community sizes:**
+- Rust — https://zulip.com/case-studies/rust/ : "**Over 100 team members** lead the Rust project"; "**More than 6,000 contributors**"; adopted by compiler, language, library and infrastructure teams. Verbatim quotes: "**Zulip lets us have focused conversations at scale.**" — Felix Klock, Rust compiler team co-lead. "**Some decisions that were blocked for months on GitHub were resolved within 24 hours on Zulip.**" — Josh Triplett. "Rust development would not be moving at the pace that it has been without Zulip." — Josh Triplett. Also: no Rust team has migrated away after adopting.
+- Lean / mathlib — https://zulip.com/case-studies/lean/ : "**Hundreds of active participants**"; moved Gitter→Zulip **February 2018**; the Nature-covered Scholze verification (June 2021) had **10 authors**, "most had never met before." Verbatim: "**Zulip has been fantastic. I use Slack at work, and it works fine for 10-15 people, but I can't imagine it working at Lean's scale.**" — Robert Y. Lewis, mathlib maintainer.
+
+[Confidence: high on all Zulip quotes; case-study numbers are vendor-published and partly about the projects rather than the chat instance — **NOT REACHED:** I could not obtain per-instance member counts or message volumes for rust-lang.zulipchat.com or leanprover.zulipchat.com.]
+
+**Independent user testimony on the async/curated case** (not Zulip-authored):
+- crabmusket, HN 46958053, 2026-02-10 — https://news.ycombinator.com/item?id=46958053, verbatim: "We use Slack at work, where we have a small team, and most of us are reading most messages in realtime. It works* … Contrast that to my experience with **a group of volunteers who might log in a couple of days a week**, communication is a lot more async, and **you might not care about all the topics of discussion**. I have found Zulip makes it easier to come back and catch up on just the bits you care about. *I still think **Slack encourages a 'continuous partial attention' way of engaging with chat** that I don't like."
+- crabmusket, HN 41807130, 2024-10-11 — https://news.ycombinator.com/item?id=41807130: "coming back to a community chat after a day or three of not paying attention, **having that index of topics with new messages, lets me triage what I'm interested in**, get up to date on those chats only, and 'mark as read' the rest."
+
+**The counter-case, worth carrying** — eropple, HN 36381925, 2023-06-18 — https://news.ycombinator.com/item?id=36381925, verbatim: "**There's also limited space in people's brains for all the alternatives.** … **This also ejects Zulip** — which is quite nice, IMO — and Mattermost … because when you've already got Slack and Discord fighting for cognitive space, **a third option had better be step-change better**." And on why forums lose: "Forums are, for the most part, fucking with stuff. And worse: it's fucking with stuff **for an unclear payout with regards to the thing that the prospective visitor cares about**." [Confidence: high that this is what was said; it is opinion, not measurement.]
+
+## B2. Slack — published engineering numbers
+
+**Source:** "Flannel: An Application-Level Edge Cache to Make Slack Scale" — https://slack.engineering/flannel-an-application-level-edge-cache-to-make-slack-scale/
+
+Verbatim numbers:
+- "teams have grown into the **tens of thousands of people**"; "**Teams larger than tens of thousands of users would start to notice**" degradation
+- "on a **1.5K user team**, it reduced the data size by **7 times**"; "on a **32K user team**, it was reduced by **44 times**"
+- Flannel "serves **4 million simultaneous connections at peak**" and "**600K client queries per second**"
+
+What broke, as described: excessive startup connection time ("wait times on the loading screen"); "long" delays switching channels before initial messages display; unsustainable client memory from storing too much data locally; expensive restart cycles; and "**reconnection storms**" overwhelming backends.
+
+The structural reading: **Slack's original client model materialized the whole membership set on every client.** The n-times reduction figures scale with team size (7× at 1.5K, 44× at 32K), i.e. the cost being removed was superlinear in the audience set. That is exactly the ancestral LISTSERV fan-out problem relocated into the client.
+
+**NOT REACHED:** the article "doesn't cite specific message volumes, exact channel counts, or members-per-channel figures." I found **no** published Slack figure for channels-per-workspace or channel-count distributions. HN searches on "slack channel sprawl" returned only anecdote (e.g. Ask HN 22134976, 2020-01-24, "How to turn a sprawling Slack nightmare into a productivity machine?" — https://news.ycombinator.com/item?id=22134976 — title only, I did not read the thread). Channel sprawl is universally *asserted* and, in the reachable literature, essentially never *measured by the vendor*.
+
+## B3. Channel proliferation — the one real measurement study
+
+**Source:** Chen et al., "Group Chat Ecology in Enterprise Instant Messaging: How Employees Collaborate Through Multi-User Chat Channels on Slack", arXiv:1906.01756 (v5, first posted 2019-06-04) — https://arxiv.org/abs/1906.01756 · full text https://ar5iv.labs.arxiv.org/html/1906.01756
+
+Dataset: **4,300 group chat channels**, an R&D department of a multinational IT company, **8,000 employees**, **March 2016 – March 2019**; **117 project teams** with performance data; **100 channels** manually coded into a taxonomy; **54 teams** in both datasets.
+
+Per-category means — this is your empirical distribution of curated-set sizes:
+
+| Channel type | Current members | Active members | Total messages | Days active |
+|---|---|---|---|---|
+| Project | **11.1** | 14.4 | 355.9 | 281.3 |
+| IT Support | **177.0** | 139.9 | 4,537.4 | 506.5 |
+| Social Group | **84.0** | 92.7 | 3,059.0 | 478.6 |
+
+Coded sample composition: Project 32, Test 18, Social Group 10, Tech Enthusiasts 10, Event 9, IT Support 8, Bot 8, Employee Support 3, Announcement 2 (of 100).
+
+Two findings matter for your brief. First, **4,300 channels for 8,000 employees — roughly one channel per two people.** That is the sprawl number, measured. Second, the *modal* curated set is tiny: project channels average **11.1 members**, and 32 of 100 coded channels are project channels. The heavyweight channels by membership and volume (IT Support, Social Group) are not the curated-work sets; they are the broadcast-ish ones.
+
+Also noted in the corpus: "146 submissions were generated by the conference submission deadline" from 117 project teams; 35 teams published, 19 did not.
+
+[Confidence: high on the extracted numbers; medium on my reading of "roughly one channel per two people," since the 4,300 channels and 8,000 employees may not be perfectly coextensive populations.]
+
+**NOT REACHED:** the study's *conclusions* about attention/overload — I extracted the tables but did not obtain the discussion section's claims verbatim. Worth a follow-up read of the ar5iv full text.
+
+Other arXiv hits, unread but plausibly relevant: "Understanding #vent Channels on Discord" (arXiv:2409.19166, 2024-09-27 — http://arxiv.org/abs/2409.19166); "The Attention-Directing Ability of Teams" (arXiv:2607.26109, 2026-07-28). **NOT READ.**
+
+## B4. Discord
+
+**Forum Channels rationale** — https://discord.com/blog/forum-channels-space-for-organized-conversation. Verbatim:
+> "**When your community's really going off on something, it can be hard to slip a word in edgewise.**"
+> Forum Channels let communities "hold organized, meaningful conversations **without drowning each other out**" by creating "dedicated spaces for each new topic of discussion."
+> You can "see everything people are chatting about before you jump in" and start a new discussion "**without worrying about breaking up or getting in the way of other ongoing conversations**."
+
+This is Zulip's argument in Discord's voice, arriving ~2022. **No numbers.** [Confidence: high on quotes; the post is explicitly numberless.]
+
+**Discord storage engineering** — https://discord.com/blog/how-discord-stores-trillions-of-messages. Verbatim:
+- 2017: "**12 Cassandra nodes, storing billions of messages**"; early 2022: "**177 nodes with trillions of messages**"; post-migration May 2022: "**72 ScyllaDB nodes**", "**9 TB of disk space**" each
+- Migration throughput "up to **3.2 million per second**"
+- Historical message fetch: "**p99 of between 40-125ms on Cassandra**" → "**15ms p99 latency**" on ScyllaDB; insertion "**5-70ms p99 on Cassandra, to a steady 5ms p99**"
+- The hot-partition observation, verbatim: "**a server with just a small group of friends tends to send orders of magnitude fewer messages than a server with hundreds of thousands of people**", creating bottlenecks during high-traffic events.
+
+The reading: **Discord's partition key is the channel, so the audience-set size distribution is directly a storage-skew problem.** Curated sets are cheap; the tail is not.
+
+**NOT REACHED:** no published Discord figure for channels-per-guild or guild-size distribution.
+
+## B5. Matrix — where curated-set membership is most expensive
+
+**Faster remote room joins** — https://matrix.org/blog/2022/10/18/testing-faster-remote-room-joins/ (I have the content; the URL was surfaced via HN 33297276, 2022-10-22). Verbatim: joining Matrix HQ previously took "**upwards of 12 minutes**" and is "**down to about 30 seconds**" with faster joins. The insight: "**we don't really need the full membership list of a room to get started**" — show name/topic/hierarchy, sync the rest in background. Constraints at the time: experimental, not production-recommended, only enabled on matrix.org, and "**Message sending and room-leaving operations remain blocked during resynchronization**"; clients lacking lazy-loading member support "experience complete event blocking during this phase." Opt-in via `faster_joins: True`.
+
+**Matthew Hodgson (Arathorn, Matrix project lead), HN 34289826, 2023-01-07** — https://news.ycombinator.com/item?id=34289826, verbatim:
+
+> "This is partially a flaw and partially a feature. **It should be common sense that joining a massive room on a tiny server may overload the server: it has to talk to all other servers in the room (which is where most of the resources go), and keep track of the current state (ie key/value pairs such as who's in the room).**
+> … We could also **speak to a subset of the servers in the room (at the expense of reducing the decentralisation of the room)**. We can also optimise state resolution further.
+> For now: **if you want to participate in a room whose users are spread over 1000 servers, you'll need a server beefy enough to talk to 1000 servers every time someone says something.**"
+
+**Arathorn, HN 25977828, 2021-01-31** — https://news.ycombinator.com/item?id=25977828, verbatim, on the cost model:
+
+> "The biggest cause of this is due to **spikes in RAM during state resolution** (the merge resolution algorithm used to converge your server's view of a room with the other servers in a room), which Python doesn't always recover nicely. We fixed the main cause of this in **Synapse 1.26**…"
+> "**the resource requirements depends on the complexity of the rooms its users participate in, not the number of users on the server. So a single user server can use serious RAM if that one user goes and joins a bunch of busy rooms with hundreds of thousands of users in them.** This can be surprising to sysadmins, and **we haven't figured out a good way of solving it** other than just keeping making Synapse go faster."
+> Dendrite comparison: "uses roughly **5x less RAM** than Synapse… **dendrite.matrix.org uses a relatively stable 480MB of RAM**, despite being in thousands of rooms spanning tens of thousands of users."
+> On why Matrix does not blanket-encrypt: "**It makes NO sense to end-to-end encrypt a public chatroom** which by definition is intended to be indexed and visible… All it would do is waste significant CPU on the clients, and **hit up against resource limits given how large public chatrooms can get.**"
+
+This is the sharpest finding in the whole brief: **in a federated design, the cost of belonging to an addressable set is borne by the participant's server and scales with the set's decentralisation, not with the participant's own activity.** Joining is the expensive act. Referenced Synapse issue: https://github.com/matrix-org/synapse/issues/8622.
+
+**Matrix network scale** — https://matrix.org/blog/2023/09/matrix-2-0/ : "**111,873,374 matrix IDs on the public network, spanning 17,289,201 rooms, spread over 64,256 servers**." That post carries **no** join-time, state-resolution, or room-size benchmarks (confirmed negative).
+
+**How we fixed Synapse's scalability** — https://matrix.org/blog/2020/11/03/how-we-fixed-synapse-s-scalability/ (note: the `/synapses-scalability/` spelling 404s; the working URL uses `synapse-s`). Contains almost no hard numbers: latency "several seconds" → "**50ms or less**" after the October 16th second event persister; audience described as "folks running massive homeservers (**50K+ concurrent users**)". Architectural narrative: Synapse relied on "more and more in-memory caches" until "**the caches stopped helping**" and the single main process became the bottleneck. [Confidence: high on the quotes; note the negative — this famous post is thinner on numbers than its reputation.]
+
+**NOT REACHED:** spec.matrix.org's state-resolution v2 description; Matrix HQ's actual member/server counts; per-room state event counts. The "1000 servers" figure above is Hodgson's illustrative framing, not a measurement of Matrix HQ.
+
+---
+
+# Tooling: what failed, and what that cost
+
+- **WebSearch** — not used (budget exhausted, per instruction). Everything here came from guessed URLs, HN Algolia, arXiv API, Crossref, and Wayback CDX.
+- **OpenAlex / Semantic Scholar** — not attempted (declared exhausted / 429).
+- **Wayback** — returned "Internet Archive services are temporarily offline" on the first CDX call at approximately the start of this session, then recovered on retry ~10 minutes later. Both Big-8 and faqs.org captures came through on the retry. If you re-run this, expect intermittency.
+- **faqs.org live** — https://www.faqs.org/faqs/usenet/creating-newsgroups/part1/ returns only the site's front-page chrome (6.5 KB, no FAQ body). The Wayback 1997 capture is the working route. Negative result worth recording: the canonical Usenet governance FAQ is **no longer served live** at its canonical address.
+- **Crossref** — reachable but low-yield for this domain; bibliographic queries on Usenet spam/moderation returned 1996–2010 discourse-analysis and bibliometrics, not measurement studies.
+- **arXiv API** — keyword search collides badly ("Discord" → quantum discord; "Matrix" → linear algebra). Only the cs.HC-restricted Slack query was productive.
+- **Zulip blog** — index page is a JS-rendered Astro app with no hrefs in the HTML; https://blog.zulip.com/rss.xml is the working enumeration route (60 posts retrieved).
+- **matrix.org/blog** — index paginates and only surfaces recent posts; older post URLs must be recovered from HN links, and several plausible URL guesses 404'd.
+
+# Gaps I would flag as unfilled
+
+1. **Any measured spam-share of Usenet posts, any year.** Multiple routes tried; nothing sourced.
+2. **Mailman moderation-load or list-size data.** Nothing published on the reachable pages.
+3. **Vendor-published channels-per-workspace / members-per-channel distributions for Slack or Discord.** The only real distribution data in this whole report is the 2019 academic Slack study (arXiv:1906.01756).
+4. **Per-instance size for the large Zulip open-source communities** (Rust, Lean). Case studies give project size, not chat-instance size.
+5. **Matrix room-size and state-event distributions.** The cost model is well described by the project lead; the measurements are not published in what I could reach.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;8YpDpayhg8N-tFlGt4qlC2y-4TjVjW5uIWRt3HhP2_A
+
+<<^ code="&#x0004;" -> to=? >>

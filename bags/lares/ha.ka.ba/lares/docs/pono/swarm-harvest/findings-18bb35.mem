@@ -1,0 +1,296 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/findings-18bb35 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/findings-18bb35.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: FINDINGS. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/findings-18bb35"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! FINDINGS
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 29,264 characters
+
+````
+## FINDINGS
+
+---
+
+## 1. JELLYFIN — vendor's own posture on unauthenticated media endpoints
+
+### 1a. The canonical issue: #1501 "Video streams completely unauthenticated" (2019-07-01)
+https://github.com/jellyfin/jellyfin/issues/1501 — opened 2019-07-01, closed 2021-04-09 (labels: bug, confirmed, security). Reporter, on Jellyfin 10.3.5:
+
+> "It was somewhat shocking to discover that Emby/Jellyfin allows streaming of a video (provided you have the ID) without any need for authentication."
+> Repro: "1. Find a video ID 2. Access `/Videos/{id}/stream.{container}` with any player without any authentication"
+
+Maintainer/contributor comments in thread:
+- @ddurdle (2019-07-12): "This is an issue that was inherited from emby. The streams will take a session parameter, but it is not required. So it is possible for users to stream without authorization. I brought up the issue with emby back in emby 3.5.2."
+- @angauber (2020-06-10): also affects images — `curl http://server_url/Items/hash_id/Images/Primary/ --output res.jpg` works; audio (`/Audio/hash_id/universal`) *does* return "Access token is required."
+- Closed by @cvium (2021-04-09) as "Consolidating security issues/questions in #5415" — **closed as `completed`, not `not planned`**, which @pktiuk challenged in 2024 ("Closing this issue may be misleading for users and developers"); @cvium: "The consolidation was on purpose."
+
+**NOT FIXED as of 2026.** Successor issue #13984 (split out 2025-04-23) is **OPEN**: https://github.com/jellyfin/jellyfin/issues/13984
+
+MEASURED reproduction on that issue, @AndreasKralj (2026-06-29):
+> "I confirmed that this is repeatable on a public Cloudflare-exposed instance: a logged-in session's `stream.mp4` URL plays in an incognito browser with no further authentication… The token embedded in the URL is the user's long-lived session api_key (see #10808); therefore, a copied URL is reusable indefinitely."
+
+Vendor rationale claim (community, contested): tokens must ride in the URL because Chromecast/Roku "can't send auth headers." @Croydon (2026-07-07) refuted it with links to Chromecast `NetworkRequestInfo#headers` and Roku `ifHttpAgent.AddHeader` docs.
+
+### 1b. **THE VENDOR STATEMENT YOU ASKED FOR** — issue #5415
+https://github.com/jellyfin/jellyfin/issues/5415 — "Collection of *potential* security issues in Jellyfin," opened 2021-03-08 by @GermanCoding, closed 2025-04-23 (split into per-endpoint issues, most still OPEN).
+
+Jellyfin project lead **@joshuaboniface**, 2021-04-06 — this is Jellyfin's own public posture statement:
+> "Security is indeed important, and I don't want to give the impression that we don't care about security. The issue is that a lot of breaking changes, especially if they affect well-used functionality, is not a good route to take in the name of security… **Ultimately we expect users to have some ideas of the risks they take exposing instances to the Internet. No software is totally secure, and we're nowhere near the top - we admit that freely. A lot of this stuff is inherited from Emby's poor coding and security practices**, and while we would like to rewrite everything to fix it all, volunteer time is limited."
+
+Same thread, @joshuaboniface 2021-03-08: "We are aware of quite a few, but for reasons of backwards compatibility they've never been fixed."
+@anthonylavado 2021-03-10: "we have (an estimated) 35k+ installs, which is probably on the low side… There's probably about a dozen third party clients to notify when we do make changes."
+
+**The #5415 inventory of unauthenticated / under-authenticated surfaces** (verbatim highlights):
+- `VideosController`, `HlsSegmentController`, `LiveTvController` streams — "HlsSegmentController has a comment saying 'Can't require authentication just yet due to seeing some requests come from Chrome without full query string'"
+- `SubtitleController` — "Allows anyone who is able to retrieve the item id to download subtitles, even if not logged in"
+- **All** `AudioController` endpoints — "Has a comment saying 'TODO: In order to authenticate this in the future, Dlna playback will require updating'"
+- All raw image endpoints (`ImageByNameController`, `ImageController`, `RemoteImageController`) — "allows probing on whether a specific image exists on the server by guessing item id's (which can be done without too much trouble, **as item ids are based on filepath and filename information**)"
+- `PluginsController` — user-priv only: "**This includes the possibility of retrieving LDAP access credentials without admin privileges**"
+- `GetUser()` — "fully unauthenticated"
+- `GetSystemInfo()` — unauthenticated
+- **"Authentication and user ids are decoupled"** — "affects at least 27 controllers": "If you modify your local storage to use an admin's user id, the UI starts showing the admin dashboard and the admin user's data (continue watching, favorites etc)… **You can still mess with the others user data — you can for example list or modify their favorites, recently watched, their progress on movies and series, see what they watched** and so on, but you do not gain admin access."
+
+**Currently OPEN split issues** (all created 2025-04-23, all still open as of this search):
+| # | Title |
+|---|---|
+| #13983 | GetAttachment() (VideoAttachmentsController) endpoint is unauthenticated |
+| #13984 | Video streams unauthenticated (VideosController, HlsSegmentController, LiveTVController) |
+| #13985 | Subtitle endpoints unauthenticated |
+| #13986 | All endpoints in AudioController are unauthenticated |
+| #13987 | Most endpoints in DashboardController are unauthenticated |
+| #13988 | All (raw) image endpoints … are unauthenticated |
+| #13991 | GetUser() endpoint (UserController) is fully unauthenticated |
+| #13992 | Granular apikey permissions |
+
+### 1c. Jellyfin dismissal of a 2026 re-report
+#17057 (2026-06-09, Jellyfin 10.11.11) — user copies a `stream.mp4` URL from devtools, plays it in a fresh browser with no login. Closed **as invalid in 1h49m** by @nielsvanvelzen: "Aside from the video endpoints not using any authorization the screenshot clearly shows your access token as part of the URL so even if authorization was required that specific link would still work. Closing as invalid." https://github.com/jellyfin/jellyfin/issues/17057
+
+### 1d. **Jellyfin's security reporting channel was dead** (negative finding, MEASURED)
+#17580, 2026-08-08: `security@jellyfin.org` bounced with `451 4.7.5 DKIM key retrieval failed`. Fallback `niels@jellyfin.org` **also bounced**; the team routed reports to a personal address (`joshua@boniface.me`) while fixing DKIM. https://github.com/jellyfin/jellyfin/issues/17580
+
+### 1e. Documentation posture — NOT the phrasing you expected
+https://jellyfin.org/docs/general/post-install/networking/ — verbatim:
+> "forwarding its Ports directly to the internet (**not recommended!**)"
+> "Opening a port directly to the Internet is therefore insecure and not recommended."
+> "While Jellyfin supports HTTPS, it is strongly recommended to handle HTTPS termination separately on a reverse proxy."
+> "Self-signed certificates pose security and compatibility issues and are strongly discouraged."
+
+**NOT REACHED / NEGATIVE:** I found **no** Jellyfin documentation page containing the sentence "Jellyfin is not designed to be exposed to the internet" or equivalent explicit disclaimer. The closest official statement is the maintainer comment in 1b above ("we expect users to have some ideas of the risks they take exposing instances to the Internet"). `jellyfin.org/posts/` lists no security-release posts on the front page; `jellyfin.org/posts/jellyfin-release-10.11.7/` → 404. `jellyfin.org/docs/general/post-install/networking/advanced/exposing/` → 404.
+
+### 1f. Measured internet-exposure scan (bonus, from #11763)
+@hlinden, 2024-05-21, on `/System/Info/Public` leaking `LocalAddress`:
+> "With my quickly collected dataset of **10000 random, online-ish Jellyfin servers, 6.3% published an IPv6 address with a public prefix** as of right now."
+Jellyfin dev @gnattu had asserted "For 99.99% of time this address is a LAN only address"; the scan refuted it. https://github.com/jellyfin/jellyfin/issues/11763
+
+---
+
+## 2. CVE-2021-21402 + full Jellyfin CVE inventory
+
+### CVE-2021-21402 (Jellyfin path traversal)
+- NVD: https://nvd.nist.gov/vuln/detail/CVE-2021-21402 — published **2021-03-23**
+- CVSS 3.1: **7.7 HIGH** (`AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:N/A:N`, NVD) and **6.5 MEDIUM** (`S:U`, GitHub/CNA); CVSSv2 4.0 (`Au:S`)
+- NVD text: "In Jellyfin before version 10.7.1, with certain endpoints, well crafted requests will allow **arbitrary file read from a Jellyfin server's file system**. This issue is more prevalent when **Windows** is used as the host OS. Servers that are exposed to the public Internet are potentially at risk."
+- GHSA-wg4c-c9g9-rxhx (https://github.com/jellyfin/jellyfin/security/advisories/GHSA-wg4c-c9g9-rxhx): severity **Moderate**; affected ≤10.7.0; patched **10.7.1, released 2021-03-21**. Vulnerable controllers named: **`ImageByNameController`, `SubtitleController`/`SubtitleManager`, `HlsSegmentController`** (one commit also references an *authenticated* arbitrary file **overwrite** in SubtitleController).
+- Fix commit: `0183ef8e89195f420c48d2600bc0b72f6d3a7fd7`
+- **Note the CVSS disagreement is load-bearing**: the CVE vector says `PR:L` (some privilege), but the vulnerable controllers are exactly the ones #5415 documents as *unauthenticated*.
+
+### All Jellyfin-proper CVEs (NVD `keywordSearch=jellyfin`, 33 results; ecosystem hits — Jellystat, Jellysweep, Seerr, Anchorr, MoviePilot — omitted from this table)
+
+| CVE | Published | CVSS | Summary |
+|---|---|---|---|
+| CVE-2021-21402 | 2021-03-23 | 7.7 H / 6.5 M | Arbitrary file read <10.7.1 |
+| CVE-2021-29490 | 2021-05-06 | 5.8 M | **Unauthenticated SSRF** via `imageUrl` <10.7.3 |
+| CVE-2022-35909 | 2022-08-19 | 8.8 H | `/users` incorrect access control for admin functionality <10.8 |
+| CVE-2022-35910 | 2022-08-19 | 5.4 M | Stored XSS → admin access token theft <10.8 |
+| CVE-2023-23635 | 2023-02-03 | 5.4 M | Stored XSS in collection name (10.8.x–10.8.3) → token from localStorage |
+| CVE-2023-23636 | 2023-02-03 | 5.4 M | Stored XSS in playlist name (10.8.x–10.8.3) |
+| CVE-2023-27161 | 2023-03-10 | 7.5 H | SSRF via `/Repositories` ≤10.7.7 |
+| CVE-2023-30626 | 2023-04-24 | 8.8 H | Directory traversal `/ClientLog/Document` 10.8.0–10.8.9 |
+| CVE-2023-30627 | 2023-04-24 | **9.0 CRITICAL** | Stored XSS in `device.js`; chained with 30626 → RCE |
+| CVE-2023-49096 | 2023-12-06 | 8.8 H | **Argument injection in `/Videos/<itemId>/stream`** — "Those endpoints are reachable by an **unauthenticated** user"; mitigated only by itemId being a random GUID |
+| CVE-2023-48702 | 2023-12-13 | 7.2 H | `/System/MediaEncoder/Path` arbitrary exec (admin) — endpoint removed in 10.8.13 |
+| CVE-2024-43801 | 2024-09-02 | 4.6–5.4 M | SVG profile-image upload → stored XSS → admin escalation |
+| CVE-2025-32012 | 2025-04-15 | 7.5 H (v3.1) | `/System/Restart` — **unauth attacker spoofs source IP to look LAN-local**, DoS on default config <10.10.7 |
+| CVE-2025-31499 | 2025-04-15 | 8.8 H | **Bypass of the CVE-2023-49096 patch** — "The same unauthenticated endpoints are vulnerable: `/Videos/<itemId>/stream`…" <10.10.7 |
+| CVE-2026-35031 | 2026-04-14 | **9.9 CRITICAL** | Subtitle-upload path traversal → arbitrary write → **RCE as root via `ld.so.preload`** <10.11.7 |
+| CVE-2026-35032 | 2026-04-14 | 8.6 H | LiveTV M3U tuner → local file read + SSRF; **"exploitable by any authenticated user because `EnableLiveTvManagement` defaults to true for all new users"** → DB exfil → admin |
+| CVE-2026-35033 | 2026-04-14 | **9.3 CRITICAL** | **Unauthenticated** arbitrary file read via ffmpeg `StreamOptions` arg injection; `drawtext`+`textfile` renders `/etc/shadow` into the video stream <10.11.7 |
+| CVE-2026-35034 | 2026-04-14 | 6.5 M | SyncPlay group-name DoS <10.11.7 |
+| CVE-2026-48793 | 2026-06-24 | 8.8 H | FFmpeg arg injection in subtitle conversion — "**reachable without authentication via `SubtitleController.GetSubtitle`, which has no `[Authorize]` attribute**" <10.11.10 |
+| CVE-2026-49220 | 2026-06-24 | 5.7 M | XSS via `Client` header at AuthenticateByName, fires in admin dashboard <10.11.9 |
+| CVE-2026-49246 | 2026-06-24 | 1.7 L | Crafted MKV filename tag → `Path.Combine` traversal on playback <10.11.10 |
+| CVE-2026-49247 | 2026-06-24 | 8.8 H | `/ClientLog/Document` — non-admin `../` in `Client` header → arbitrary write <10.11.10 |
+| CVE-2026-31852 | 2026-03-11 | **10.0 CRITICAL** | jellyfin-ios GitHub Actions `pull_request_target`-style takeover; App Store supply-chain + org compromise |
+
+Backport gap: #16536 "Please backport the 10.11.7 security fixes to 10.10" (2026-04-01, closed). https://github.com/jellyfin/jellyfin/issues/16536
+
+**Pattern (measured, not inferred):** `/Videos/{id}/stream` has now produced **three separate CVEs** (2023-49096 → patch → 2025-31499 patch-bypass → 2026-35033 by a different parameter path) *because the endpoint itself is intentionally unauthenticated.* The unauthenticated design decision from Emby is the persistent root; each CVE is a downstream leaf.
+
+---
+
+## 3. PLEX
+
+### Plex Media Server CVE inventory (NVD `keywordSearch=plex`, 58 raw; PMS-proper below)
+
+| CVE | Published | CVSS | Summary |
+|---|---|---|---|
+| CVE-2014-9181 | 2014-12-02 | 5.0 (v2) | Directory traversal in `manage/`, `web/`, `resources/` <0.9.9.3 (SEC Consult 20140228-1) |
+| CVE-2014-9304 | 2014-12-07 | 7.5 (v2) | Whitelist bypass / SSRF via `X-Plex-Url` to `system/proxy` <0.9.9.3 |
+| CVE-2018-13415 | 2018-08-13 | **9.8 CRITICAL** | **Unauthenticated XXE in SSDP/UPnP** in 1.13.2.5154 → arbitrary file read, NetNTLM capture/relay → RCE in Windows domains |
+| CVE-2019-19141 | 2019-12-19 | 8.8 H | **Camera Upload** arbitrary file write ≤1.18.2.2029 → RCE (e.g. write `~/.ssh/authorized_keys` as the plex user) |
+| CVE-2020-5740 | 2020-04-22 | 7.8 H | Windows: local unauth attacker executes Python **as SYSTEM** (Tenable TRA-2020-25) |
+| **CVE-2020-5741** | **2020-05-08** | **7.2 H** (`AV:N/AC:L/PR:H/UI:N/S:U/C:H/I:H/A:H`); CVSSv2 6.5 | **Deserialization of untrusted data → remote authenticated RCE (Windows).** **In CISA KEV.** |
+| CVE-2020-5742 | 2020-06-15 | 8.8 H | Improper access control — any origin can make cross-origin app requests |
+| CVE-2021-42835 | 2021-12-08 | 7.0 H | Update-service RPC TOCTOU → local privesc to SYSTEM ≤1.24.4.5081 |
+| CVE-2021-33959 | 2023-01-18 | 7.5 H | DDoS reflection via Plex service ≤1.21 |
+| CVE-2018-21031 | 2019-11-18 | 6.5 M | X-Plex-Token retrievable from Tautulli (reassigned from PMS to Tautulli) |
+| **CVE-2025-34158** | 2025-08-21 | **8.5 H** (`S:C`) | **`/myplex/account` hands the *server owner's* credentials to a non-owner; `/api/resources` then reveals other servers the owner can reach.** 1.41.7.x–1.42.0.x, fixed **1.42.1** |
+| CVE-2025-69414 | 2026-01-02 | 8.5 H | Permanent access token retrievable via `/myplex/account` with a *transient* token, ≤1.42.2.10156 |
+| CVE-2025-69415 | 2026-01-02 | 7.1 H | `/myplex/account` reachable with a device token not currently associated with an account |
+| CVE-2025-69416 | 2026-01-02 | 5.0 M | **plex.tv backend**: a non-server device token retrieves *other* tokens via `clients.plex.tv/devices.xml` |
+| CVE-2025-69417 | 2026-01-02 | 5.0 M | **plex.tv backend**: a non-server device token retrieves **share tokens** via a `shared_servers` endpoint |
+
+(Tautulli — the most common Plex companion — carries a further 14 CVEs in 2025–2026 including CVE-2026-28505 CVSS 10.0 and CVE-2026-41065 "On a fresh install before the setup wizard is completed, **all management endpoints are completely unauthenticated**" → zero-credential RCE. All at https://github.com/Tautulli/Tautulli/security/advisories.)
+
+### CVE-2020-5741 detail (Tenable TRA-2020-32)
+https://www.tenable.com/security/research/tra-2020-32
+- Researcher: **Chris Lyne**, Tenable
+- Chain: a plugin's Dict file "the contents are **unpickled without validation**"; attacker delivers a malicious Dict file **via the Camera Upload feature**, then modifies the local app-data path so it is unpickled on plugin restart → arbitrary Python execution.
+- Precondition per Tenable: "**Authenticated with admin privileges**" (NVD encodes this as `PR:H`). Affected: PMS prior to **1.19.3**.
+- Timeline: **2020-03-31** reported → **2020-05-07** Plex ships 1.19.3 and advisory published.
+- Exploit published: packetstorm "Plex Unpickle Dict Windows Remote Code Execution" http://packetstormsecurity.com/files/158470/
+- **CISA KEV**: https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2020-5741
+
+### The LastPass link — vendor claim vs. attribution
+**LastPass's own wording** (https://blog.lastpass.com/posts/2023/03/security-incident-update-recommended-actions), verbatim, Incident 2:
+> "The threat actor targeted a senior DevOps engineer by exploiting **vulnerable third-party software**. The threat actor leveraged the vulnerability to deliver malware, bypass existing controls, and ultimately gain unauthorized access to cloud backups."
+
+**LastPass never names Plex in that disclosure.** Threat-actor activity ended by **October 26, 2022**; the incident began **August 2022**.
+
+**Plex is named only secondhand.** The Record (2023-03-01, https://therecord.media/plex-unaware-of-vulnerabilities-lastpass-hacked/): "Ars Technica **reported that the third-party media software package was Plex, citing a person briefed by LastPass**." Plex's own statement: *"We are not aware of any unpatched vulnerabilities, and as always, we invite people to disclose issues to us."*
+
+**Dates (MEASURED):** Android Police (https://www.androidpolice.com/lastpass-breach-plex-update/) — the CVE is **CVE-2020-5741**; the fix shipped in **1.19.3 on May 7, 2020**, the same day of disclosure; a **LastPass spokesperson** said "**the version that addressed this exploit was roughly 75 versions ago**." → **≈27 months (May 2020 → Aug 2022) between patch and compromise**, on a home machine.
+
+**NOT REACHED:** arstechnica.com and pcmag.com both refuse this egress ("Claude Code is unable to fetch"). The Ars primary attribution is confirmed only via The Record's quotation of it. I could **not** source the exact Plex version the engineer ran.
+
+### Plex household profiles — the vendor's own disclaimer (**the key quote**)
+https://support.plex.tv/articles/203815766-what-is-plex-home/ — verbatim:
+> "Members of a Plex Home can have a PIN code set on their account… For instance, parents may wish to put a PIN on their account so that their children can't freely switch to the parent account. **Note: Remember that setting a PIN on an account is not a replacement for good account security. A PIN should not be considered true security and is provided as a convenience to help control access when young children are involved.**"
+
+Structural point, same page + https://support.plex.tv/articles/203948776-managed-users/:
+> "Managed Users **do not have any email address associated with their account and cannot directly sign in to any app**. (The admin or another full account that's a member of the Plex Home needs to sign in to the app and then the Managed User can be switched to.)"
+> "Once in a Plex Home, **you can switch to any other member of the Home in supported apps**. The only limitation is that members protected with a PIN will need to be unlocked."
+
+→ **MEASURED design fact:** a Plex Managed User is not an authentication principal at all. It is a UI mode entered from an already-authenticated full member's session. Limits: 15 total members (14 managed + admin) on free; one Plex Home per account.
+
+And CVE-2025-34158 is precisely the household-boundary failure: **any authenticated non-owner user of a shared server could read `/myplex/account` and obtain the server owner's administrative access token**, then pivot via `/api/resources` to every other server the owner could reach — described by the researcher as "recursive exploitation." Timeline: reported **2025-07-01**, patched **1.42.1, 2025-08-07/08**; further token issues reported **2025-08-27 to 08-31** (which became CVE-2025-69414/15/16/17, published 2026-01-02). https://github.com/lufinkey/vulnerability-research/blob/main/CVE-2025-34158/README.md · Plex's post: https://forums.plex.tv/t/plex-media-server-security-update/928341
+
+---
+
+## 4. NETFLIX — **YES, there is a documented statement, in Netflix's own Privacy Statement**
+
+https://help.netflix.com/legal/privacy — Section C, "Access to Account and Profiles". Verbatim:
+
+> "If you share or otherwise allow others to have access to your account, they may be able to see viewing information, account information in the 'Account' section of the service, and game related information such as text chat contents and saved game information. **This remains true even when you use the profiles feature**, although you can add a Profile Lock PIN to restrict streaming access on a profile (see help.netflix.com/node/114277)."
+
+> "Profiles: Profiles allow users on a Netflix account to have a personalized Netflix experience… as well as separate watch histories. **Please note that profiles are available to everyone who uses your Netflix account, so that anyone with access to your Netflix account can navigate to and use, edit or delete profiles, and information within or associated with the profile** (although, as noted above, you can add a Profile Lock PIN to restrict streaming access on a profile). You should explain this to others with access to your account…"
+
+This is as close to "profiles are not a security boundary" as a vendor gets: the boundary is the **account**, the profile is a personalization layer, and the PIN is scoped narrowly — Netflix's own words are "**restrict streaming access on a profile**", not restrict data access.
+
+**Profile Lock scope** (https://help.netflix.com/en/node/114277, "How to add, edit, or remove a profile PIN"):
+> "To restrict access to a specific profile on your account, you can protect it with a Profile Lock PIN. **You'll enter this PIN to open the profile or play titles downloaded from it.**"
+> "Note: **Extra member accounts have 1 profile and it can't have a profile lock.**"
+> "How to recover a Profile Lock PIN: If you forget your Profile Lock PIN, tap or select **Forgot PIN?** or go to netflix.com/account and follow the steps above to edit or remove your PIN."
+
+PIN is **4 digits** (10⁴ keyspace). PIN removal on web requires the account password or an emailed/SMS code — i.e. **the PIN is subordinate to the account credential, and anyone holding the account credential can delete any profile's PIN.** Profile creation can be gated ("Require PIN to add new profiles") but only from the main/first profile.
+
+Netflix's separate security page (https://help.netflix.com/en/node/13243, "How to keep your account secure") is entirely about passwords, phishing, and `Manage Access & Devices` — **it never mentions profiles as a protection**. Negative finding, and a consistent one.
+
+---
+
+## 5. OTHER HOUSEHOLD-APP PROFILE ISOLATION FAILURES
+
+### Jellyfin — per-user library restrictions leak across clients (OPEN, unfixed)
+- **#8730** "Roku 1.6 Access controls are broken. Leaking restricted search results." (2022-11-12, **still OPEN**): "The search function is allowing users without access to libraries to see the results of the restricted libraries. However, on other apps such as web browser and android, the access controls are working as expected." Partially fixed in 10.8.8; reporter confirmed 2023-01-08 "**it is not working. The new version still leaks search results for movies, and access restrictions are still circumvented**"; independently confirmed still broken on 10.8.9 by two other users. https://github.com/jellyfin/jellyfin/issues/8730
+  → **The isolation is enforced per-client, not per-server.** The same server + same restricted user leaks or doesn't depending on which app is asking.
+- **#16135** "Privacy/Security Issue, Collections library leaking genre" (2026-01-29, **OPEN**, Jellyfin 10.11.6): a restricted user sees genres from libraries they were denied, via the Collections genre filter. Maintainer @dfederm could not reproduce; two independent users (@D3478, @wkearney99 2026-07-22: "If I set a user to NOT have access to a certain library, genre view allows accessing the excluded library's content") confirmed it. https://github.com/jellyfin/jellyfin/issues/16135
+- **#5415 core finding, restated:** "Authentication and user ids are decoupled… affects at least 27 controllers." Swapping the user id in localStorage yields *another household member's* continue-watching, favorites, and watch history — and lets you modify them. That is a direct, documented, still-open household-profile isolation break.
+- **#10732** "User profile save button allows blank password to be set" (2023-12-15, closed). https://github.com/jellyfin/jellyfin/issues/10732
+
+### Emby (Jellyfin's upstream) — NVD `keywordSearch=emby`, Emby-proper:
+| CVE | Published | CVSS | Summary |
+|---|---|---|---|
+| CVE-2020-26948 | 2020-10-10 | 9.8 CRIT | SSRF via `Items/RemoteSearch/Image` <4.5.0 |
+| CVE-2021-25827 | 2023-06-28 | **9.8 CRIT** | **Login bypass by setting `X-Forwarded-For` to a local IP** <4.7.12.0 |
+| CVE-2021-25828 | 2023-06-28 | 6.1 M | XSS via `/web` <4.6.0.50 |
+| CVE-2021-32833 | 2021-09-09 | 8.6 H | Arbitrary file read on Windows, incl. `/Videos/Id/hls/...` — 4.6.4.0, "**may not be patched in later versions**" |
+| CVE-2022-36223 | 2022-12-16 | 6.1 M | Playlist-name stored XSS → steal admin token / take over admin account |
+| CVE-2023-33193 | 2023-05-30 | **9.1 CRIT** | Administrative access "by spoofing certain headers which are intended for interoperation with reverse proxy servers" |
+| CVE-2023-4167 | 2023-08-05 | 6.1 M | XSS in `/web/` 4.7.13.0 |
+| CVE-2024-30931 | 2024-06-25 | 6.1 M | Stored XSS → privesc via `notifications.html` 4.8.3.0 |
+| CVE-2025-64325 | 2025-11-18 | 9.0 CRIT | Manipulated `X-Emby-Client` injected unsanitized into admin dashboard <4.8.1.0 |
+| CVE-2025-64113 | 2025-12-09 | **9.8 CRIT** | "allow an attacker to gain **full administrative access** to an Emby Server… **Other than network access, no specific preconditions need to be fulfilled**" <4.9.1.81 |
+
+Note the twin: **Emby CVE-2021-25827 (X-Forwarded-For → local IP → login bypass)** and **Jellyfin CVE-2025-32012 (source-IP spoof → treated as LAN → unauthenticated `/System/Restart`)** are the same class inherited into both forks. Jellyfin also carries #17397 "If X-Forwarded-For contains a list of IPs, Jellyfin reads the wrong one" (2026-07-21) and #8533 "Remote IP address filter has no effect on RFC1918 addresses (they are always allowed)" (2022-10-10).
+
+### Kodi
+**NOT REACHED / NEGATIVE.** `gh search issues "profile password bypass" --repo xbmc/xbmc` returned **zero** results. `gh search issues --owner MediaBrowser` (Emby) returned **zero** — Emby's tracker is not on GitHub in a searchable form. No sourced Kodi profile-isolation failure found; I will not assert one from memory.
+
+### Household-adjacent (the request/discovery layer that sits in front of these servers)
+- **CVE-2026-27707** (9.8 CRIT, 2026-02-27): Seerr — an unauthenticated attacker points `POST /api/v1/auth/jellyfin` at *their own* Jellyfin server and gets a session on *your* Plex-configured Seerr. Chained with **CVE-2026-27793** (`GET /api/v1/user/:id` returns full settings incl. Pushover/Pushbullet/Telegram credentials to any authenticated requester) → "**a zero-prior-access chain that leaks third-party API credentials for all users, including administrators**."
+- **CVE-2026-27792** (5.4): Seerr push-subscription routes missing `isOwnProfileOrAdmin()` — "allows authenticated users to access and modify data belonging to other users." A literal missing per-profile authorization check.
+
+---
+
+## SUMMARY OF WHAT IS VENDOR-CLAIM vs MEASURED
+
+| Claim | Status |
+|---|---|
+| Jellyfin video/audio/image/subtitle streams are unauthenticated by design, inherited from Emby | **MEASURED + VENDOR-ADMITTED** — #1501, #5415, and 2026 independent repro on a live Cloudflare-exposed instance (#13984) |
+| Jellyfin will not fix it because of client backwards-compat | **VENDOR CLAIM**, on the record from the project lead (#5415, 2021-04-06) |
+| Jellyfin docs say "not designed to be exposed to the internet" | **NOT REACHED** — no such sentence found; nearest is the maintainer comment + "not recommended!" in the networking doc |
+| CVE-2020-5741 was the LastPass vector | **VENDOR-CONFIRMED ONLY AS "vulnerable third-party software"**; "Plex" comes from Ars Technica citing "a person briefed by LastPass," and a LastPass spokesperson's "roughly 75 versions ago" |
+| Plex PINs are not security | **VENDOR'S OWN WORDS**: "A PIN should not be considered true security" |
+| Netflix profiles are not a privacy/security boundary | **VENDOR'S OWN WORDS**, Privacy Statement §C: "This remains true even when you use the profiles feature" |
+| Household profile isolation fails differently per client app | **MEASURED** — Jellyfin #8730 (Roku leaks, web does not), #16135 (Collections genre) |
+| 6.3% of internet-reachable Jellyfin servers leak a public-prefix IPv6 (incl. SLAAC MAC) | **MEASURED**, n=10,000, 2024-05-21, #11763 — and it refuted the maintainer's "99.99%" estimate |
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;YHknr8C5r5G_0UfiX7eLnPsjEnRgcS14dQGXNJJZe4A
+
+<<^ code="&#x0004;" -> to=? >>

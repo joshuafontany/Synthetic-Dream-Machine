@@ -1,0 +1,343 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/leases-expiry-vs-revocation-dense-findings-6c6554 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/leases-expiry-vs-revocation-dense-findings-6c6554.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: LEASES & EXPIRY vs REVOCATION — dense findings. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/leases-expiry-vs-revocation-dense-findings-6c6554"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! LEASES & EXPIRY vs REVOCATION — dense findings
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 38,818 characters
+
+````
+## LEASES & EXPIRY vs REVOCATION — dense findings
+
+Everything below is sourced. **MEASURED** = a number someone actually observed; **DESIGNED/CLAIMED** = policy text, doctrine, or vendor assertion.
+
+---
+
+## 1. CA/Browser Forum Ballot SC-081v3 — the industry's formal convergence
+
+**URL:** https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/ (note: the URL is `sc081v3`, not `sc-081`; the `sc-081` slug 404s)
+
+**Dates (exact, from the ballot page):**
+- Ballot created in Server Certificate WG: **Tuesday, April 8, 2025** (per https://cabforum.org/ballots/, status "Ballot Passed - IPR Review Period Cleared")
+- Discussion opened: **2025-01-28 17:00 UTC**; discussion closed on/after **2025-04-01 17:00 UTC**
+- Voting: **2025-04-04 19:30 UTC → 2025-04-11 19:30 UTC**
+- IPR Review Period: **2025-04-13 03:00 UTC → 2025-05-13 03:00 UTC**
+
+**Vote tally (MEASURED):**
+- **Certificate Issuers: 30 votes — 25 YES, 0 NO, 5 ABSTAIN.**
+  - YES: Amazon, Asseco Data Systems (Certum), Buypass, Certigna (DHIMYOTIS), Certinomis, DigiCert, Disig, D-TRUST, eMudhra, Fastly, GlobalSign, GoDaddy, HARICA, iTrusChina, Izenpe, NAVER Cloud Trust Services, OISTE Foundation, Sectigo, SHECA, SSL.com, SwissSign, Telia, TrustAsia, VikingCloud, Visa
+  - ABSTAIN: Entrust, IdenTrust, Japan Registry Services, SECOM Trust Systems, TWCA
+- **Certificate Consumers: 4 votes — 4 YES (Apple, Google, Microsoft, Mozilla), 0 NO, 0 abstain.**
+- Quorum was **16**; met. Proposed by **Clint Wilson (Apple)**, endorsed by Nick France (Sectigo), Ryan Dickson (Google Chrome), Ben Wilson (Mozilla).
+
+**The schedule, verbatim from BR.md §6.3.2** (https://github.com/cabforum/servercert/blob/main/docs/BR.md):
+
+| Issued on or after | Issued before | Max Validity Period |
+|---|---|---|
+| — | 2026-03-15 | **398 days** |
+| 2026-03-15 | 2027-03-15 | **200 days** |
+| 2027-03-15 | 2029-03-15 | **100 days** |
+| 2029-03-15 | — | **47 days** |
+
+(SHOULD NOT values are one day lower at each step: 397 / 199 / 99 / 46. "For the purpose of calculations, a day is measured as 86,400 seconds.")
+
+**Data-reuse schedules, BR.md §4.2.1:**
+
+*Domain Name and IP Address validation (DCV) reuse:*
+
+| On or after | Before | Max reuse |
+|---|---|---|
+| — | 2026-03-15 | **398 days** |
+| 2026-03-15 | 2027-03-15 | **200 days** |
+| 2027-03-15 | 2029-03-15 | **100 days** |
+| 2029-03-15 | — | **10 days** |
+
+*Subject Identity Information validation reuse:* **825 days → 398 days** effective **2026-03-15**.
+
+**The stated rationale — the argument that revocation does not work** (verbatim from the ballot's "Adjacent Solutions → Revocation" section):
+
+> "Certificate status services, such as CRLs and OCSP, are technologies which do not adequately protect relying parties at the current scale of the internet, whether due to privacy concerns, performance impacts, timeliness of relevant statuses, the accuracy (and usability) of data, or other inadequacies. A reduction to certificate lifetimes provides firm protection to users, **independent of certificate status services**."
+
+> "relying solely on revocation is untenable for a number of reasons" — broken into **Scalability** ("This growth can and does overwhelm existing infrastructure"), **Reliability** ("Not every potentially problematic certificate is revoked, let alone revoked in a timely manner. **Even when populations of certificates which must be revoked within a very specific timeframe are clearly identified, revocation does not consistently occur as expected.**" … "Certificate validity periods, and their enforcement by relying parties, are **incredibly reliable**."), and **User Impact** (dozens of status queries per page, timeouts/retries).
+
+Footnote [6]: "Fundamentally, the above property of certificates is not something which can be addressed through revocation of certificates without much more substantial changes to the ecosystem." Cited evidence includes https://insecure.design/ and Ma et al., "stale certs" IMC 2023 (https://zanema.com/papers/imc23_stale_certs.pdf).
+
+Prior art the ballot names: **Ballot 185** (2017-02-24, https://cabforum.org/2017/02/24/ballot-185-limiting-the-lifetime-of-certificates/) and **Ballot SC-22** (2019-09-10). Also SC-063 introduced a **Short-Lived Subscriber Certificate** class at **10 days, reducing to 7**.
+
+---
+
+## 2. Adam Langley — the canonical "revocation doesn't work" argument
+
+**a. "Revocation checking and Chrome's CRL", 2012-02-05** — https://www.imperialviolet.org/2012/02/05/crlsets.html
+- The seat-belt line: *"soft-fail revocation checks are like a seat-belt that snaps when you crash. Even though it works 99% of the time, it's worthless because it only works when you don't need it."*
+- MITM point: an attacker who can intercept HTTPS can also block OCSP (DNS or BGP poisoning), so the check that matters is exactly the check the attacker suppresses.
+- **Latency MEASURED (Chrome telemetry as stated):** median successful OCSP check **~300 ms**, mean **nearly 1 second**.
+- Privacy: online checks leak the user's IP and browsing pattern to the CA.
+- CRLSet inclusion criteria: HTTP-crawlable CRLs, RFC 5280 compliance, EV preference, revocation-reason support to keep size down. No coverage percentage given in that post.
+
+**b. "Revocation still doesn't work", 2014-04-19** — https://www.imperialviolet.org/2014/04/19/revchecking.html
+- Enumerates the attacker classes where soft-fail collapses: local (rogue WiFi/ISP), state-level, and DNS-hijack attackers. The DNS-hijack case is sharpest: an attacker controlling a domain can **"hop from CA to CA getting certificates"**, and can serve a pre-revocation **stapled** OCSP response valid for days.
+- Notes online checking retains value for **code signing** (soft-fail still raises attacker cost there).
+- Names short-lived certificates and OCSP Must-Staple as the sustainable directions — *"keeping certificates valid for brief periods makes revocation self-enforcing."*
+
+**c. "No, don't enable revocation checking", 2014-04-29** — https://www.imperialviolet.org/2014/04/29/revocationagain.html
+- **Size numbers (CLAIMED/estimated):** all available revocations ≈ **39 MB** at the time; projected **~35 million revocations ≈ 300 MB raw** within five years.
+- **Cloudflare's post-Heartbleed CRL serving cost: "half a million dollars a month."**
+- On CRLSets: *"not complete, nor big enough to cope with large numbers of revocations."* Administrative revocations (no key compromise) are deliberately excluded to control size.
+
+---
+
+## 3. Heartbleed aftermath — the strongest MEASURED evidence that revocation doesn't happen
+
+Durumeric, Li, Kasten, Amann, Beekman, Payer, Weaver, Adrian, Paxson, Bailey, Halderman, **"The Matter of Heartbleed"**, IMC 2014 — https://jhalderm.com/pub/papers/heartbleed-imc14.pdf
+
+**Vulnerability (MEASURED):**
+- Lower-bound estimate **23.7%** of Alexa Top 1M HTTPS sites vulnerable at disclosure (72.7% used known-vulnerable server software); a separate widely-cited figure of 66% was market-share-derived, not measured.
+- Within 24h all but 5 of the Alexa Top 100 were patched; within 48h all of the Top 500. **3% of Alexa Top 1M HTTPS sites remained vulnerable ~2 months later.**
+- 56% of vulnerable hosts were embedded devices; 10 ASes accounted for >50% of vulnerable hosts.
+
+**Certificate replacement / revocation (MEASURED — §5.1, §5.2, Fig. 5, Fig. 7):**
+- Of Alexa sites found vulnerable on **April 9, 2014** (2 days post-disclosure), only **10.1% replaced certificates in the following month** — while **73% patched** in the same window.
+- Of those that did replace: **only 19% also revoked** the original certificate, and **14% re-used the same private key** — "thus gaining no actual protection by the replacement."
+- Across all Alexa Top 1M HTTPS sites, **23% replaced** and **only 4% revoked** between April 9 and April 30, 2014.
+
+**Revocation-infrastructure strain (MEASURED):**
+- Baseline: **491 revocations/day (σ=101)** pre-disclosure for certs in their scans.
+- **GlobalSign revoked 56,353 certificates over two days — 50.2% of their visible certificates** (driven by CloudFlare revoking all customer certs).
+- **GoDaddy revoked 243,823 certificates** in week-long bursts over the following three months.
+- **In the three months after disclosure, about as many revocations were processed as in the previous three years.**
+- **GlobalSign's CRL grew from 2 KB to 4.7 MB.**
+- CloudFlare's estimated cost of revocation: **an additional 40 Gbps sustained, ≈ $400,000/month.**
+- StartCom charged for revocation post-Heartbleed and was publicly criticized for it.
+- Paper's conclusion: "Wholesale revocation such as required by an event like Heartbleed stresses the scalability of basing revocation on the distribution of large lists."
+
+---
+
+## 3b. Liu, Tome, Zhang, Choffnes, Levin, Maggs, Mislove, Schulman, Wilson — "An End-to-End Measurement of Certificate Revocation in the Web's PKI", IMC 2015
+
+**URL:** https://www.cs.umd.edu/~dml/papers/revocations_imc15.pdf (74 full IPv4 HTTPS scans; daily revocation checks from October 2014)
+
+All MEASURED:
+- **>8% of served certificates are revoked** ("over 8% of all fresh certificates are revoked").
+- **CRL size: median certificate's CRL is 51 KB; largest observed CRL 76 MB** (hosted by Apple); another >22 MB with >290K revocations (StartSSL). Most *CRLs* are small (median <1 KB) but the *weighted* mean per certificate is 51 KB.
+- Browser test suite: **244 distinct certificate configurations across 30 browser/OS combinations.**
+  - **Not a single mobile browser checked revocation information for any certificate.**
+  - Firefox 40 checks only leaf and EV certs, only when an OCSP responder is present; checks no CRLs.
+  - Chrome 44 on OS X: **no revocation check at all for non-EV certificates.** On Windows, non-EV only if the intermediate lists a CRL.
+  - **All browsers except Internet Explorer assume a leaf certificate is valid if revocation information cannot be obtained** (soft-fail, empirically confirmed).
+  - Three revocation-checking bugs found and filed.
+- **CRLSet coverage: 0.35% of all revoked certificates.** From 11,461,935 revoked certs observed across crawled CRLs, only **41,105** ever appeared in a CRLSet. CRLSets covered **62 unique parents out of 1,584 distinct CA public keys → 3.9% of CA certificates**; only **295 of 2,800 CRLs (10.5%)** ever had any entry in a CRLSet.
+- Popular sites are worse, not better: across Alexa Top 1M, **42,225 revocations in CRLs, 1,644 (3.9%) in CRLSets**; Alexa Top 1,000: **392 revoked certs, 41 (10.4%) in CRLSets.**
+- CRLSet dynamics: peak of **~25,000 entries during Heartbleed**, then shrank by **more than a third**.
+- Verdict, verbatim: *"our results paint a bleak picture of the ability to effectively revoke certificates today."*
+
+---
+
+## 4. Let's Encrypt ending OCSP
+
+**Announcement: 2024-12-05** — https://letsencrypt.org/2024/12/05/ending-ocsp/. Three dated steps (DESIGNED, all subsequently executed):
+- **2025-01-30** — OCSP Must-Staple requests fail unless the account had previously issued a Must-Staple cert.
+- **2025-05-07** — **OCSP URLs dropped from certificates**; all Must-Staple requests fail.
+- **2025-08-06** — **OCSP responders turned off.**
+
+Reason given: privacy first — *"the Certificate Authority operating the OCSP responder immediately becomes aware of which website is being visited"* — plus the operational cost of maintaining the service. CRLs (supported since **September 2022**) are the replacement: "CRLs have wide browser support and can provide privacy benefits to all sites, without requiring special web server configuration."
+
+**Confirmation post: 2025-08-06** — https://letsencrypt.org/2025/08/06/ocsp-service-has-reached-end-of-life/. **MEASURED scale at peak (early 2025): ~340 billion OCSP requests per month; >140,000 req/s at the CDN, 15,000 req/s at origin.** OCSP URLs had been out of certificates for >90 days before responder shutdown, so no unexpired cert still pointed at a responder.
+
+---
+
+## 5. Let's Encrypt short-lived + IP certificates
+
+**Announcement: 2025-01-16** — https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/
+- Explicit doctrine, verbatim: *"short-lived certificates greatly reduce the potential compromise window because they expire relatively quickly. **This reduces the need for certificate revocation.**"*
+- Six-day certs **carry no OCSP or CRL URLs at all.**
+- IP addresses as SANs; validation restricted to **http-01 and tls-alpn-01** (no dns-01).
+- Planned rollout: first short-lived certs issued internally **February 2025**; limited early-adopter availability **April 2025**; GA targeted end of 2025.
+
+**Actual delivery (MEASURED against the plan):**
+- **2025-02-20** — first short-lived certificate issued (https://letsencrypt.org/2025/02/20/first-short-lived-cert-issued/)
+- **2025-07-01** — first IP-address certificate issued (https://letsencrypt.org/2025/07/01/issuing-our-first-ip-address-certificate/)
+- **2026-01-15** — **general availability**, https://letsencrypt.org/2026/01/15/6day-and-ip-general-availability/. Profile name **`shortlived`**, lifetime **160 hours** (just over 6 days), IPv4 and IPv6, IP certs *must* be short-lived. Opt-in, not default. LE's framing: revocation has historically been "an unreliable system"; the exposure window drops from 90 days to ~6.
+
+**Also relevant (later, and reinforcing the same trend):**
+- **2025-12-02**, https://letsencrypt.org/2025/12/02/from-90-to-45/ — default lifetime path: **2026-05-13** opt-in `tlsserver` profile → 45 days; **2027-02-10** default `classic` profile → **64 days** with a **10-day** authorization reuse period; **2028-02-16** `classic` → **45 days** with a **7-hour** authorization reuse period. Rationale: "limiting the scope of compromise, and making certificate revocation technologies more efficient."
+- Founding statement, **2015-11-09**, https://letsencrypt.org/2015/11/09/why-90-days/ — 90 days chosen because short lifetimes "limit damage from key compromise and mis-issuance" and force automation. **MEASURED at the time: Firefox telemetry showed 29% of TLS transactions used 90-day certs, more than any other lifetime.**
+
+---
+
+## 6. Macaroons (NDSS 2014) — research, not a documented Google production deployment
+
+Birgisson (Chalmers), Politz (Brown), Erlingsson, Taly, Vrable, Lentczner (Google Inc.). PDF: https://storage.googleapis.com/gweb-research2023-media/pubtools/pdf/41892.pdf · landing: https://research.google/pubs/pub41892/
+
+**Model:** bearer credentials built from **nested, chained HMACs**. Anyone holding a macaroon can *attenuate* it by appending a caveat; the chained MAC makes attenuation one-way and offline — no issuer round-trip, no public-key infrastructure.
+- **First-party caveats** — predicates the target service checks against request context: `time < 5/1/13 3pm`, source IP / ChannelID, resource prefix. Expiry is literally just a first-party caveat.
+- **Third-party caveats** — the paper's stated main innovation: require a *discharge macaroon* from a named third party, proving a holder-of-key. Explicitly enumerated uses: network time authority, identity providers, auditing/provenance, anti-virus scanning, DoS risk analysis, **and a third-party revocation-checking service**.
+
+**The revocation argument, verbatim (§II):** the four classic strategies are "(i) using very short-lived credentials, (ii) allowing the addition of freshness constraints, (iii) relying on external, authoritative state (such as revocation lists, or epoch counters), and (iv) splitting credentials… **Macaroons excel at all four** … due to their efficiency and flexibility, **macaroons may live only for seconds**."
+
+**Deployment — NEGATIVE FINDING.** The paper describes only **prototype implementations** (Python 2.7.2 and JavaScript, measured in Chrome v27 with the Stanford JS Crypto library) and "experiences building prototype macaroon mechanisms for Cloud clients, servers, and mobile devices." **It never claims a production Google deployment**, and I found no Google source that does.
+
+**Real-world deployers (evidence):**
+- **Fly.io — production, documented.** https://fly.io/blog/macaroons-escalated-quickly/ (HN 2024-01-31, 263 pts) and https://fly.io/blog/operationalizing-macaroons/ (2025-03-28). Used for API tokens, per-app/machine/volume permission scoping, SSO (Google/GitHub), worker↔secret-store service auth, and customer VM access to the Machines API. They use a `ValidityWindow` caveat for expiry — **and they also built explicit revocation-by-nonce** via a central token-verification service with a revocation list, noting revocation "is rare." So: expiry is the primary mechanism, revocation retained as a rare backstop.
+- **Canonical — heavy use.** `canonical/snapd` (59 code hits for "macaroon"), `canonical/candid` identity service (117 hits; HN 2021-06-18 "Candid: Google Macaroons-based identity service"), `juju/juju` (302 hits), and the `go-macaroon-bakery/macaroon-bakery` library.
+- **Storj** — https://storj.io/blog/2019/05/flexible-file-sharing-with-macaroons/ (2019-05).
+- HashiCorp: **NOT REACHED** — I found no evidence HashiCorp uses macaroons; treat any such claim as unverified.
+- Note the practitioner mood: HN "Ask HN: Are Macaroons widely used in the industry for Authorization" (2019-10-22) drew ~1 point. Adoption is real but narrow.
+
+---
+
+## 7. Biscuit (Clever Cloud)
+
+- Site https://www.biscuitsec.org/ returned **403 to WebFetch — NOT REACHED**. Everything below is from the spec repo.
+- **Version status:** spec repo https://github.com/biscuit-auth/biscuit — latest spec release **v3.3, published 2024-12-17**. Repo last pushed 2025-10-21; 1,147 stars. Rust implementation `biscuit-auth` **6.0.0 released 2025-07-16** (under `eclipse-biscuit/*` — the project has moved under the Eclipse Foundation).
+- **Language coverage:** v3.x full in Rust, WASM, Python, Haskell; Java partial (v3.1–3.3 in progress); Go and .NET at v1/v3.0 only — **Go has no v3.1+ features**.
+- **Model:** Datalog checks and allow/deny policies; **offline attenuation** — anyone can append a block adding checks, without contacting the issuer; public-key (Ed25519) signature chain; **third-party blocks** landed in v3.2.
+- **Expiry is a Datalog check**, verbatim from SPECIFICATIONS.md: `check if time($0), $0 < 2019-02-05T23:00:00Z // expiration date`.
+- **Revocation is explicitly supported but is a *host* responsibility, not a token property.** The authorizer generates `revocation_id(<block index>, <byte array>)` facts, where the identifier is the block's *signature*; the authorizer supplies "ambient data from the request, lists of users and roles, **revocation lists**". I.e. Biscuit gives you a stable handle to revoke against and leaves the list to you.
+- **Adoption evidence:** the repo's own README names **Apache Pulsar at Clever Cloud** (https://github.com/clevercloud/biscuit-pulsar) as the real-world use case. Ecosystem crates exist (`tower-biscuit-auth`, FreeBSD port `security/py-biscuit-auth`). CVE-2022-31053 affected biscuit-auth ≥1.0.0 <2.0.0 and biscuit-go <2.0. Beyond Clever Cloud, **no named large deployer found**.
+
+---
+
+## 8. SPIFFE / SPIRE — short TTL as doctrine
+
+**Default TTLs (MEASURED from config docs)** — https://github.com/spiffe/spire/blob/main/doc/spire_server.md:
+- `default_x509_svid_ttl` — **1h** (default)
+- `default_jwt_svid_ttl` — **5m** (default)
+- `agent_ttl` — defaults to the value of `default_x509_svid_ttl`
+- CLI `spire-server x509 mint -ttl` falls back through `Entry.x509_svid_ttl` → `Entry.ttl` → `default_x509_svid_ttl` → **1h**; JWT equivalent → **5m**. (The doc's sample config shows `6h`, so 1h is the code default, not the sample.)
+
+**Doctrine, verbatim:**
+- https://spiffe.io/docs/latest/spiffe-about/spiffe-concepts/ — *"In order to minimize exposure from a key being leaked or compromised, all private keys (and corresponding certificates) are **short lived, rotated frequently and automatically**."* This page does **not** say revocation is unnecessary.
+- The clearest statement of the leases-replace-revocation thesis is in the official SPIFFE/SPIRE book, *Solving the Bottom Turtle* (https://spiffe.io/pdf/Solving-the-bottom-turtle-SPIFFE-SPIRE-Book.pdf), which first argues revocation is broken — *"In practice, most software will fail open, continuing to trust certificates when CRLs are unavailable"* — and then: **"One compromise in solving the challenges posed by revocation is to rely more heavily on expiration. If the certificate lifetime is very short (perhaps only a few hours), then the CA can frequently re-perform any checks that it originally made. If certificates renew frequently enough, then CRLs might not even be necessary since it may be faster just to wait for the certificate to expire."** Its trade-off table lists "CRLs are shorter and maybe unnecessary" under *Shorter lifespan*.
+- The book is candid that the TTL is a tuning knob, not a constant: "there's no 'magic' TTL that is a best choice for all deployments"; TTL must exceed document-delivery latency; SPIRE agents warn when renewal takes longer than half the TTL.
+- **The protocol standards keep revocation as an explicit hook, not a repudiation.** `SPIFFE_Workload_API.md` streams "**revocations** and CA certificate introductions" and both `X509SVIDResponse` and `X509BundlesResponse` carry optional `crl` fields. The newer `WIT-SVID.md` is blunt: the `jti` "could be leveraged for revocation of an individual WIT-SVID. **There are no mechanisms defined within SPIFFE for the propagation of WIT-SVID revocations and this is considered out of the scope of the specification.**" Its `exp` claim "is the primary control of the length of time for which a WIT-SVID is valid"; no hard limits, but "**typically a period ranging from minutes to hours**"; validators MAY reject SVIDs whose `exp − nbf` lifespan exceeds an administrative policy.
+
+---
+
+## 9. Kerberos — the lease model, and the master key that has no lease
+
+**Lifetimes:**
+- **MIT Kerberos `kdc.conf`** (https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/kdc_conf.html): `max_life` default is **24 hours**; `max_renewable_life` default is **0** (renewal off by default). *(Note: the widely repeated "10h MIT default" is the AD default, not MIT's.)*
+- **Active Directory Default Domain Policy** (Microsoft Learn):
+  - *Maximum lifetime for user ticket* (TGT) — **10 hours**; recommended range 4–10h; **0 means tickets never expire**. https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/maximum-lifetime-for-user-ticket
+  - *Maximum lifetime for user ticket renewal* — **7 days**. https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/maximum-lifetime-for-user-ticket-renewal
+  - MS's own stated failure mode for a too-long lease: "users whose accounts have been disabled might be able to continue to access network services by using valid service tickets that were issued before their account was disabled." That is a revocation gap admitted in the policy doc itself.
+
+**The krbtgt problem — the lease that never expires.** `krbtgt` is the KDC service account whose password hash keys every TGT. Nothing in AD rotates it on a schedule; it changes only on domain functional-level upgrade or manual reset, so multi-year-old krbtgt keys are routine.
+
+- **Golden Ticket, in Microsoft's own words** (Defender for Identity alert catalog, https://github.com/MicrosoftDocs/defender-docs → `defender-for-identity/alerts-mdi-classic.md`): *"Attackers with domain admin rights can compromise the KRBTGT account. Using the KRBTGT account, they can create a Kerberos ticket granting ticket (TGT) that provides authorization to **any resource** and **set the ticket expiration to any arbitrary time**. This fake TGT is called a 'Golden Ticket' and allows attackers to achieve network persistence."* The **"Suspected Golden Ticket usage (time anomaly)"** detection (alert id 2022) fires precisely when "a Kerberos ticket granting ticket is used for more than the allowed time permitted, as specified in the Maximum lifetime for user ticket" — i.e. Microsoft detects golden tickets by catching a lease that outlived its own TTL. Related alert ids: 2009 (encryption downgrade), 2027 (nonexistent account), 2032 (ticket anomaly), 2040 (RBCD), 2013 (forged authorization data / MS14-068). MITRE **T1558.001**.
+- Tooling: **Mimikatz**, by **Benjamin Delpy**, is the reference implementation (MITRE T1558.001 lists it).
+- **The "reset twice" guidance, verbatim** from *AD Forest Recovery — Reset the krbtgt password* (https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/forest-recovery-guide/ad-forest-recovery-reset-the-krbtgt-password, ms.date 2025-05-21):
+  > "**You should perform this operation twice. You must wait 10 hours between password resets.** 10 hours are the default Maximum lifetime for user ticket and Maximum lifetime for service ticket policy settings, hence in a case where the Maximum lifetime period changes, the minimum waiting period between resets should be greater than the configured value."
+  > "The password history value for the krbtgt account is 2, meaning it includes the two most recent passwords. By resetting the password twice you effectively clear any old passwords from the history."
+  MITRE concurs: "reset the built-in KRBTGT account password twice, which will invalidate any existing golden tickets."
+  Note the structure: **the only safe revocation of a Kerberos credential is gated on the lease interval** — you must wait one TTL between the two resets or you break live authentication.
+- **The reset script:** Microsoft's `New-KrbtgtKeys.ps1` is **archived and unmaintained** — https://github.com/microsoftarchive/New-KrbtgtKeys.ps1 (created 2020-05-12, last push 2024-03-07, `archived: true`). Its README: *"Development of this project has come to an end… maintained by a few dedicated engineers from Microsoft outside of their normal work assignments in their spare time."* It points users to community forks (mubix's gist, `zjorz/Public-AD-Scripts`). **The vendor's own revocation tooling for its highest-value key was a spare-time project and is now abandoned.**
+- The specific claim "krbtgt password default is never rotated / '10 years'" as a *documented Microsoft default*: **NOT REACHED** — I found no Microsoft doc stating a default rotation interval or a 180-day recommendation. What is documented is that AD ships no rotation schedule at all and that reset is a manual forest-recovery procedure.
+
+---
+
+## 10. DNS TTL as eventual-consistency revocation — how well leases are actually honored
+
+Moura, Heidemann, Schmidt, Hardaker, **"Cache Me If You Can: Effects of DNS Time-to-Live"**, IMC 2019, DOI **10.1145/3355369.3355568**, published **2019-10-21**. PDF: https://ant.isi.edu/~johnh/PAPERS/Moura19b.pdf (SIDN Labs / TU Delft / USC-ISI)
+
+All MEASURED, RIPE Atlas + authoritative-side traffic:
+- **Short TTLs are mostly honored.** "we found that such manipulation is very rare for TTLs shorter than 1h, at least as seen from RIPE Atlas VPs." (~190k and ~280k valid responses in the `.uy` NS and A experiments.)
+- **Long TTLs are silently capped.** For `google.co` across **16k vantage points**: ~70% of answers carried TTLs >900 s (from the child authoritative), **~15% of answers — many via Google Public DNS — returned exactly 21,599 s, i.e. a 6-hour cap**, and ~9% returned exactly 900 s (parent glue).
+- **Which TTL wins is not deterministic.** "most recursive resolvers are child-centric" — but only **52% (`.nl`, measured from the authoritative side) to 90% (`.uy`, from RIPE Atlas)** of queries are child-centric. **10–48% are parent-centric**, meaning a sizable minority obey the *parent's* TTL, which the zone owner often cannot control. You must set the TTL identically in both places or you cannot predict the lease at all.
+- **Sticky resolvers.** After both NS and A records expired at t=120 min, **305–390 VPs (~2.25% of total) kept using the old server.** ~90% of resolvers refreshed both records at t=60 min as expected.
+- **A named, reproducible TTL violation.** In a July 2019 renumbering experiment (2.5 months after the first run), **13 of 161 responses returned the pre-renumber answer after TTL expiry** through **OpenDNS**. Root cause diagnosed from pcap: OpenDNS is *parent-centric*, trusting the `.com` zone's 2-day NS TTL for `zurrundeddu.com` and therefore never refreshing the A record. Confirmed by a control: with the child authoritative servers offline, OpenDNS VPs still got a valid answer while others timed out or got SERVFAIL. **This is exactly the "cutover takes far longer than the TTL" failure mode — a 2-day parent TTL overriding the operator's short child TTL.**
+- Latency stakes (why operators want *long* TTLs, against agility): for one ccTLD, median resolution **183 ms → 28.7 ms** with longer TTLs; at the 95th percentile 450 ms → 200 ms; authoritative traffic reduced ~77%.
+- Related prior measurement: **Schomp, Callahan, Rabinovich, Allman, "On measuring the client-side DNS infrastructure", IMC 2013** — cited by Moura as the source for "DNS TTLs are sometimes manipulated by resolvers." **Paper text NOT REACHED** (both canonical PDF URLs 404; OpenAlex quota exhausted mid-session). Do not quote numbers from it.
+
+---
+
+## 11. OAuth / token-TTL failures in production
+
+### (a) Okta support-system breach, Oct 2023
+- **Okta root-cause post (2023-11-03):** https://sec.okta.com/articles/2023/11/unauthorized-access-oktas-support-case-management-system-root-cause/
+  - **Window of unauthorized access: September 28 – October 17, 2023.**
+  - **Root cause, verbatim:** "an employee had signed-in to their personal Google profile on the Chrome browser of their Okta-managed laptop. **The username and password of the service account had been saved into the employee's personal Google account.**"
+  - **134 customers affected (<1% of Okta's customer base); 5 customers experienced actual session hijacking.**
+  - HAR files uploaded to support cases **contained live session tokens**, usable to hijack sessions.
+  - Detection timeline: **Sept 29** 1Password reports suspicious activity; **Oct 2** BeyondTrust reports; **Oct 13** BeyondTrust supplies an attacker IP as IoC; **Oct 16** Okta correlates the IP to service-account activity; **Oct 17** account disabled, file access confirmed; **Oct 19** additional downloads found and all affected customers identified.
+  - **The detection gap is the lease-vs-audit lesson: Okta missed the downloads for 14 days** because different log event types were generated depending on the access method used.
+- **Okta initial disclosure (2023-10-20):** https://sec.okta.com/articles/2023/10/tracking-unauthorized-access-oktas-support-system/ — describes HAR files as containing "sensitive data, including cookies and session tokens, that malicious actors can use to impersonate valid users"; Okta's mitigation was **"revocation of embedded session tokens"** — an explicit fallback to revocation because the tokens' own TTL was too long to save them. Named customers do not appear in Okta's own posts; 1Password and BeyondTrust appear in the November RCA timeline.
+- Closure post: https://sec.okta.com/harfiles — Stroz Friedberg forensic investigation found "no evidence of further malicious activity beyond what was previously determined." Remediations announced: zero standing privileges for admins, MFA for protected actions, **IP binding to prevent session takeover**, network-zone restrictions on API access. (IP binding is a *first-party caveat* in macaroon terms — contextual confinement added because expiry alone failed.)
+- Secondary press for the 134 figure: https://www.bleepingcomputer.com/news/security/okta-breach-134-customers-exposed-in-october-support-system-hack/ (2023-11-03).
+
+### (b) Cloudflare Thanksgiving 2023 — the missed rotation
+**URL:** https://blog.cloudflare.com/thanksgiving-2023-security-incident/
+
+- Timeline: **Okta compromise Oct 18, 2023** → **Nov 14–17** threat-actor recon and initial access → **Nov 22** persistent access established → **Nov 23** detected, response begins → **Nov 24** all access terminated → **Jan 5** "Code Red" remediation concluded.
+- **The number that matters: of thousands of credentials rotated after the Okta breach, exactly 4 were missed** — "mistakenly believed to be unused":
+  1. a **Moveworks service token** (remote access to Atlassian),
+  2. a **Smartsheet service account** (administrative access to Jira),
+  3. a **Bitbucket service account** (source code),
+  4. an **AWS environment credential** (marketplace apps).
+- Blast radius (MEASURED): **36 Jira tickets accessed out of 2,059,357**; **202 wiki pages of 194,100**; **76 source repositories of 11,904** downloaded (network config, backups, infra management); **Sliver C2** installed for persistence. Attacker search terms included "remote access", "secret", "token".
+- Remediation scale: **>5,000 production credentials rotated**, **4,893 systems forensically triaged**, every machine on the global network reimaged and rebooted.
+- The structural lesson is exact: **revocation-by-rotation is a manual enumeration, and enumeration misses. 4 out of ~5,000 (~0.08%) was enough.** A short lease would have expired all four without anyone having to remember them.
+
+### (c) Microsoft Storm-0558 — a signing key with no working expiry
+- **Microsoft's incident analysis (2023-07-14):** https://www.microsoft.com/en-us/security/blog/2023/07/14/analysis-of-storm-0558-techniques-for-unauthorized-email-access/
+  - **~25 organizations** affected, including government agencies plus related consumer accounts.
+  - Activity began **May 15, 2023**; discovered **June 16, 2023** (by a customer — the US State Department — not by Microsoft).
+  - An **inactive MSA consumer signing key** was used to forge tokens. A validation flaw let a *consumer* MSA key be accepted for *Azure AD enterprise* tokens.
+  - **Mitigation dates:** **June 26** OWA stopped accepting tokens from the affected API; **June 27** tokens signed with the acquired key blocked; **June 29 all MSA signing keys valid at the time of the incident were revoked**; **July 3** key usage blocked for impacted consumer customers.
+- **Microsoft's September 2023 technical post-mortem** (https://msrc.microsoft.com/blog/2023/09/results-of-major-technical-investigations-for-storm-0558-key-acquisition/) now **301-redirects to the MSRC blog index — original text NOT REACHED directly.** Content recovered via Wiz's analysis, https://www.wiz.io/blog/key-takeaways-from-microsofts-latest-storm-0558-report:
+  - The key was captured in **a crash dump from a crash that occurred in April 2021**; the dump moved from the isolated production network to the corporate debugging environment.
+  - **The key was issued April 2016 and "expired in April 2021, but remained valid until it was finally rotated in July 2023."** That is the single most load-bearing fact in this whole topic: **a nominally expired key remained honored for ~2 years and 3 months because nothing enforced its expiry.** One key served for over seven years.
+  - Storm-0558 plausibly held the key **"for over two years prior to being discovered in June 2023."** Microsoft could only "partially account for all of this threat actor's activity… between April 2021 and May 2023" due to log-retention limits.
+  - Root validation defect: the Azure AD SDK "did not include functionality to properly validate an authentication token's issuer ID."
+- **CSRB report:** released **April 2, 2024** (report dated March 20, 2024), announced at https://www.dhs.gov/news/2024/04/02/cyber-safety-review-board-releases-report-microsoft-online-exchange-incident-summer and https://www.cisa.gov/resources-tools/resources/cyber-safety-review-board-releases-report-microsoft-online-exchange-incident-summer-2023. The Board drew on "20 organizations and experts." Its headline finding, as summarized on Wikipedia (https://en.wikipedia.org/wiki/Cyber_Safety_Review_Board): **"Microsoft's security culture was inadequate and requires an overhaul,"** and Microsoft "failed to detect the compromise of its cryptographic crown jewels on its own, relying instead on a customer." Victims included the US Department of State, Department of Commerce, and House of Representatives.
+- **The full CSRB PDF is NOT REACHED.** `cisa.gov`, `dhs.gov`, and `media.defense.gov` all return **403** to both WebFetch and curl; a GitHub code search found no full-text mirror. **Therefore the specific figures "60,000 State Dept emails" and "automated key rotation paused since 2021" are NOT VERIFIED from primary source in this session** — do not cite them as CSRB findings without retrieving the PDF. What *is* verified from primary/secondary sources: ~25 organizations (Microsoft), and the key's April-2021-expiry-to-July-2023-rotation gap (Wiz, from Microsoft's September 2023 post).
+
+---
+
+## Cross-cutting observations (reporting only, not recommending)
+
+- **The convergence is real and dated.** Four browser vendors and 25 CAs voted, unanimously among consumers, on **2025-04-11** to put certificate lifetime on a rail from 398 → **47 days by 2029-03-15**, and DCV reuse from 398 → **10 days**, with the ballot's own text naming revocation as structurally inadequate. Let's Encrypt independently turned off OCSP entirely (**2025-08-06**, after ~340 B requests/month) and shipped 160-hour certificates with **no revocation URLs at all** (**GA 2026-01-15**).
+- **The empirical case rests on three measurements, all 2014–2015:** 4% of Alexa Top 1M revoked post-Heartbleed while 23% reissued and 14% of reissuers reused the compromised key (IMC 2014); >8% of served certs revoked, CRLSet covering **0.35%** of revocations, and **zero** mobile browsers checking anything (IMC 2015); and Langley's soft-fail argument that the check fails exactly when it is needed.
+- **Nobody actually abandoned revocation — they demoted it to a rare backstop and made the lease the primary control.** SPIFFE keeps CRL fields in the Workload API while declaring WIT-SVID revocation propagation out of scope. Biscuit generates `revocation_id` facts but leaves the list to the host. Fly.io runs both a `ValidityWindow` caveat *and* revocation-by-nonce. Let's Encrypt still publishes CRLs. Kerberos's only revocation (double krbtgt reset) is itself **gated on waiting one full TTL**.
+- **The three 2023 incidents are all failures of the *revocation* path, not the expiry path:** Okta had to revoke session tokens whose TTL outlived the breach; Cloudflare's manual rotation enumeration missed 4 of ~5,000 credentials; and Microsoft's MSA key sat *nominally expired* yet honored for 27 months. In each case a short, automatically-enforced lease would have closed the window without anyone having to notice, list, or act.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;FNjO4_V4ieSlc79X37cdgU2H9Dw8dCam2LhrmpRGPI8
+
+<<^ code="&#x0004;" -> to=? >>

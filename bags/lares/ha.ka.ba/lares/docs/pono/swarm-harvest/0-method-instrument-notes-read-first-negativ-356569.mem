@@ -1,0 +1,411 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-instrument-notes-read-first-negativ-356569 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-instrument-notes-read-first-negativ-356569.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 0. Method / instrument notes (read first — negative results). Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-instrument-notes-read-first-negativ-356569"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 0. Method / instrument notes (read first — negative results)
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 45,818 characters
+
+````
+# Children's identity in shipped consumer platforms — age-transition mechanics
+
+Research date 2026-09-04. All claims URL-attributed. **MEASURED** = a date, number, or quoted vendor text I retrieved this session. **DESIGNED/CLAIMED** = vendor's own description of intent.
+
+---
+
+## 0. Method / instrument notes (read first — negative results)
+
+- **WebSearch never used** (quota exhausted per instruction).
+- **Apple's own KB search works headless** and was the workhorse: `https://support.apple.com/kb/index?page=search&q=TERMS&locale=en_US` returns fully server-rendered results, including a `&doctype=DISCUSSIONS` filter for Apple Support Communities. This is how I found every article ID below. Guessing numeric article IDs is worthless (`102611` = Disk Utility, `103243` = a CA trust-store list).
+- **Apple `/guide/...` pages** bury the article body ~90% down a 730KB file behind the whole TOC; naive extraction returns only the feedback widget. Body is after the last `toc-item`.
+- **Apple developer docs are SPA** — `WebFetch` on `developer.apple.com/documentation/...` returns only `<title>`. The JSON at `https://developer.apple.com/tutorials/data/documentation/<lower>.json` returns everything.
+- **Apple Support Communities thread bodies are bot-walled to curl** (JS "Security verification in progress") but **`WebFetch` passes**.
+- **Apple's Communities search index appears frozen**: every result for every child/family query dated May–June 2022. Treat the *absence* of recent threads as an index artifact, not evidence.
+- **Reddit: BLOCKED.** `reddit.com/r/*/search.json` → HTTP 403 "Blocked" with a descriptive UA; `old.reddit.com` → 302; `www.reddit.com/search.json` with a browser UA returns the HTML SPA shell, not JSON. **NOT REACHED.**
+- **Google Help Communities (`support.google.com/families/threads`) → 302.** **NOT REACHED.** Google *articles* fetch fine with a browser UA.
+- **Microsoft support search is JS-only** (`/en-us/search?query=` renders, `/search/results` returns an empty shell, `/api/search` 404s). MS articles had to be found by crawling the `family-safety` hub's relative links.
+- **Apple's Feb-2025 "Helping Protect Kids Online" PDF and the Feb-2025 newsroom post: NOT REACHED** — three canonical-guess PDF URLs 404'd; `apple.com/newsroom/2025/02/apple-advances-its-powerful-tools-...` 404s; the newsroom archive is SPA. Everything below about Apple's 2025–26 child program comes from developer news posts and support articles instead, which are stronger sources anyway.
+- **Utah SB 142 primary text: NOT REACHED** (`le.utah.gov` 404s on `/~2025/bills/static/SB0142.html`, `/sbillenr/`, `/xcode/Title13/Chapter71/`; the PDF at `/Session/2025/bills/introduced/SB0142.pdf` fetched but is compressed-stream and unreadable). Utah's operative date below comes from **Apple's own developer announcement**, not the statute.
+
+---
+
+## 1. APPLE
+
+### 1.1 The core answer: the Apple Account converts **in place**. It never forks and is never orphaned.
+
+There is no "graduation" event, no new account, no data migration. The same Apple Account persists from age 6 to 60; what changes is (a) which restrictions the system forces on, and (b) whether the account is *allowed to leave the Family Sharing group*. Age is a property of the account (its birthday), and the birthday is the only thing that moves.
+
+Apple's teen-facing article, **"About your Apple Account and Family Sharing group"** — https://support.apple.com/en-us/119854 (Published July 1, 2026) — states the full ladder verbatim under the heading *"When you're ready to manage your own device"*:
+
+> Depending on your age and where you live, you might be able to leave your Family Sharing group.
+> **Under 13** — You need to be part of a Family Sharing group.
+> **Ages 13-17** — If your parent or guardian has set up Screen Time, you need permission from your family organizer to leave the group. If Screen Time isn't turned on, talk to your parent or guardian about whether it's best for you to stay in the Family Sharing group. Depending on the laws where you live, you might not be able to leave your Family Sharing group until you turn 18.
+> **When you turn 18**, you can decide to leave your Family Sharing group or manage your own Screen Time settings. In some places, you might need to confirm that you're 18 or older before you can change certain settings or leave your Family Sharing group.
+
+MEASURED, and note the direction of travel: **turning 13 grants nothing unilaterally.** It only makes you *eligible to ask*.
+
+### 1.2 Age 13: what actually changes
+
+- The child gains the *possibility* of removal/transfer/self-exit — but **gated on the organizer first disabling Screen Time**. From **"How to transfer a child to another Family Sharing group"**, https://support.apple.com/en-us/102634 (Published July 1, 2026):
+
+  > If your child is between the ages of 13-17*, and Screen Time and parental controls are set for their device, the family organizer must turn off Screen Time and the parental controls **before** the child can be removed from the family group, transferred to another family group, or request to leave the family group on their own.
+
+- Account deletion becomes child-initiable but parent-approved: "If your child is between 13-17*, they can request deletion of their Apple Account, but it requires approval from a parent or guardian. The approval request is sent to the family organizer's primary Apple Account email address." (same URL)
+- Intelligence Extensions unlock at 13 (https://support.apple.com/en-us/119854).
+- **What does NOT change at 13:** Ask to Buy, Web Content Restriction, Communication Safety, and Family-group membership all remain forced where law requires (see §1.5).
+
+### 1.3 Under 13: the account is structurally **immovable**, and the only exit is deletion
+
+This is the sharpest finding. https://support.apple.com/en-us/102634:
+
+> **There's no other way to remove a child from a family group if they're under 13.**
+
+and
+
+> Children under 13* can't be removed from a Family Sharing group without being transferred to another family group, or having their Apple Account deleted by a parent or guardian. If a child in the family group is under 13, the family organizer needs to delete the child's Apple Account and let the deletion take effect before they can remove the child from the family group.
+
+Corroborated in the macOS guide, https://support.apple.com/guide/mac-help/leave-a-family-sharing-group-on-mac-mh2b0f42b606/mac:
+
+> Children under 13 can't be removed from a family group. (Age varies by country or region.)
+
+and in the iPhone guide, https://support.apple.com/guide/iphone/remove-family-sharing-members-iph7d22e6add/ios:
+
+> You can't remove a child from your Family Sharing group. However, you can move them to another group or delete their Apple Account.
+
+**So the under-13 identity has exactly two terminal states: transfer to another custodian, or destruction.** There is no "release." Transfer additionally requires the *receiving* organizer to hold the child's Apple Account password (or reset it, which restarts the whole transfer) — https://support.apple.com/en-us/102634.
+
+Two further structural locks from the same guide family:
+- **The organizer cannot leave their own group.** "The organizer can't leave the Family Sharing group. If you want to change the organizer, you must disband the group, and have another adult create a new one." (https://support.apple.com/guide/iphone/remove-family-sharing-members-iph7d22e6add/ios) Combined with the under-13 rule, an organizer with an under-13 child **cannot exit Family Sharing at all** without deleting or rehoming that child.
+- Age 18 can be a hard floor, not 13: "Depending on a child's age and their state, country or region, their Apple Account might have to stay connected to a Family Sharing group until they turn 18." (https://support.apple.com/en-us/102634)
+
+### 1.4 The "one family per year" limit is now **two**
+
+MEASURED correction to the widely-repeated folklore. https://support.apple.com/guide/mac-help/leave-a-family-sharing-group-on-mac-mh2b0f42b606/mac:
+
+> You can only be part of one Family Sharing group at a time... After you leave one Family Sharing group, you can join or set up another. However, **each person can only join two family groups per year.** (Rejoining a family group or creating a new one counts against this limit.)
+
+### 1.5 Purchases: what the departing adult keeps and what is forfeited
+
+The canonical text is **"How to leave or remove a member from a Family Sharing group"**, https://support.apple.com/en-us/102652 (Published July 1, 2026), section *"What happens when you stop sharing?"*:
+
+> If your family shares iTunes, Apple Books, and App Store purchases, you immediately stop sharing your purchases and lose access to the purchases made by your other family members. **You keep any purchases you initiated while part of the family group.** Other family members can't use content downloaded from your collection.
+> Any content that your family shared with you isn't automatically removed from your device. You can purchase it again or remove it to free up space on your device. **If you downloaded an app from a family member's purchase history and made in-app purchases, you'll need to purchase the app yourself to access your in-app purchases.**
+
+The macOS guide adds the DRM mechanism explicitly (https://support.apple.com/guide/mac-help/leave-a-family-sharing-group-on-mac-mh2b0f42b606/mac):
+
+> you keep purchases paid for using the shared credit card, but you immediately lose access to other things the family members share:
+> - Other family members' items no longer appear in the Purchased section of the App Store and Music app, or the Family Purchases section of Apple Books.
+> - **DRM-protected music, movies, TV shows, books, and apps you previously downloaded are no longer usable if someone else originally purchased them.**
+> - In-app purchases become unavailable if you bought them using an app someone else originally purchased. You can regain access to the in-app purchases by purchasing the app.
+
+**Load-bearing distinction:** "purchases you initiated" survives, even though the *organizer's card paid for them*. Shared entitlements do not. So the adult child keeps their own library and loses the household's — including IAP they personally paid for, inside an app the parent bought. That last one is the cruelest edge: the IAP receipt survives but is unreachable without re-buying the host app.
+
+**Apple Cash balance is confiscated upward** (same article):
+
+> If your family organizer set up an Apple Cash account for you as part of Apple Cash Family, your account automatically closes and **your balance transfers to the family organizer's Apple Cash account.**
+
+That is a real monetary asset moving *away* from the aging-out child at the moment of exit. MEASURED from doc text.
+
+### 1.6 Purchase migration is **explicitly closed to child accounts**
+
+"Migrate purchases from one Apple Account to another Apple Account", https://support.apple.com/en-us/117294 (Published July 10, 2025), under *"If you can't migrate purchases"*:
+
+> **Neither Apple Account can be a child account created through Family Sharing.**
+
+Also: "Make sure the secondary Apple Account isn't a member of a Family Sharing group", "This feature isn't available to users in India", "both accounts [must be] set to the same country and region for purchases", and "If you undo a migration of purchases from a secondary account, you won't be able to migrate purchases again for 1 year."
+
+**Unresolved:** the doc does not say whether "a child account created through Family Sharing" is a permanent brand on the account or a live-state test that clears once the account is 18 and out of a group. I could not find a doc that resolves it. Flagged, not filled.
+
+### 1.7 iCloud data
+
+Nothing forks. Because the Apple Account is the same object throughout, iCloud data simply stays with it. No Apple document describes any data migration, export, or loss at 13 or 18 — the transition is a permissions change on a stable identity. I found no document contradicting this; treat as **DESIGNED, inferred from the absence of any migration mechanism** rather than from an affirmative statement.
+
+### 1.8 Reverse transition: adult → child, and the 14-day undo window
+
+"If you change an Apple Account to a child account", https://support.apple.com/en-us/124146 (Published June 1, 2026):
+
+> If a child or teen is using an Apple Account with a birthday accidentally set to an adult age, they might get a prompt to convert to a child account. In order to convert an existing account to a child account, that account: Can't be the organizer or parent/guardian of a Family Sharing group; Will need to join a Family Sharing group, if prompted.
+> **If your Apple Account is accidentally converted to a child account, you can undo the change. If you're part of a Family Sharing group, you might need the family organizer to help if it's been longer than 14 days since the change was made.**
+> ... Revert Account: You can verify that you're an adult with a payment method... Request Update: Send a request to your Family Sharing organizer to review your account changes.
+
+MEASURED: **14 days.** After that, an adult who was mis-aged into a child account can only escape via their organizer's approval. This is a real capture surface — a demotion that becomes irreversible-without-consent after two weeks.
+
+Separately, an existing under-age account can be retroactively brought under consent via https://support.apple.com/en-us/102033 ("Use Family Sharing to provide parental consent for your child's existing Apple Account", Published June 2, 2026), including a no-Apple-Account path: "Ask your child to sign in to their Apple Account on https://account.apple.com/parentalconsent. Enter your information and a verified payment method."
+
+### 1.9 Declared Age Range API (iOS/iPadOS/macOS/Mac Catalyst **26.0**)
+
+Framework: https://developer.apple.com/documentation/DeclaredAgeRange (JSON: `/tutorials/data/documentation/declaredagerange.json`). Abstract:
+
+> Create age-appropriate experiences in your app by asking people to share their age range... For children in a Family Sharing group, a parent or guardian or the Family Organizer can decide whether to always share a child's age information with your app, ask the child every time, or never share their age information.
+
+**The single most interesting mechanism I found this session** — from https://developer.apple.com/documentation/declaredagerange/requesting-people-share-their-age-range-with-your-app:
+
+> The system protects privacy by caching age range responses. **When a person's age crosses into a new range (for example, when they turn 13), the API continues returning the previous range until the anniversary of their original declaration.** People can manually update this in settings if they want immediate access to new features with the following steps: Open Settings... Choose Personal Information > Age Range for Apps.
+
+That is a deliberate, up-to-364-day **lag on the age transition itself**, imposed to prevent apps from inferring an exact birthday from the moment the bucket flips. The birthday is protected by making the transition *late and unobservable*. The user can opt into immediate truth via a settings toggle.
+
+Provenance is a first-class typed field — `AgeRangeService.AgeRangeDeclaration` enumerates who asserted the age and how strongly:
+`selfDeclared` (signed into iCloud) · `paymentChecked` · `governmentIDChecked` · `checkedByOtherMethod` · `guardianDeclared` · `guardianPaymentChecked` · `guardianGovernmentIDChecked` · `guardianCheckedByOtherMethod` · `confirmed` ("set using a scrutinized method, like a credit card or government ID"). Plus `AgeRangeService.ParentalControls` ("An option set to define parental controls enabled and shared as a part of age range declaration") and `AgeRange.lowerBound` / `.upperBound`.
+
+Regulated vs non-regulated regions diverge sharply (same article):
+
+> In some regulated regions, **the system automatically provides the person's age range — they can't decline sharing.** These regions determine the age gates that the system uses to return age ranges, and it may differ from the age gates you specify in your request. In nonregulated regions, people grant permission... If the person declines, you receive a `declinedSharing` response.
+> In macOS, `isEligibleForAgeFeatures` returns `false` because the system doesn't require age assurance.
+
+Apple's own disclaimer, twice: "You are solely responsible for ensuring compliance with associated laws or regulations that may apply to your app."
+
+### 1.10 The 2025–26 US state app-store laws: MEASURED timeline
+
+Entirely from Apple's developer news posts (server-rendered, fetchable):
+
+| Date | Event | Source |
+|---|---|---|
+| **Oct 8, 2025** | Apple announces Texas SB2420 compliance for **Jan 1, 2026**. "we are concerned that SB2420 impacts the privacy of users by requiring the collection of sensitive, personally identifiable information to download any app, even if a user simply wants to check the weather or sports scores." | https://developer.apple.com/news/?id=btkirlj8 |
+| **Nov 4, 2025** | Mechanics published. Texas age categories defined **"under 13, 13-15, 16-17, or over 18"**. Significant Change API (PermissionKit), StoreKit age-rating property, App Store Server Notification for consent revocation. Sandbox in iOS/iPadOS **26.2** betas. | https://developer.apple.com/news/?id=2ezb6jhj |
+| **Dec 23, 2025** | **Injunction.** "A recent injunction issued by a district court suspended enforcement of Texas state law SB2420... Apple will pause previously announced implementation plans." | https://developer.apple.com/news/?id=8jzbigf4 |
+| **Feb 24, 2026** | Apple **blocks 18+ app downloads in Australia, Brazil, Singapore** absent adult confirmation. Announces **Utah: new Apple Accounts as of May 6, 2026**; **Louisiana: July 1, 2026**. | https://developer.apple.com/news/?id=f5zj08ey |
+| **June 3, 2026** | Injunction **lifted**; "These changes will go into effect starting **June 4, 2026**." | https://developer.apple.com/news/?id=sg176nne |
+| **June 4, 2026** | Apple publishes the Texas consumer page. | https://support.apple.com/en-us/127462 |
+
+Independently corroborated by Wikipedia *Online age verification laws by country*: "A law in Texas, known as the App Store Accountability Act, came into effect on June 4, 2026 after the federal injunction that blocked it was lifted... Texas then became the first state in the United States to enforce age verification onto app stores." And *Texas SB 2420 (2025)*: signed May 2025, effective Jan 1 2026, blocked Dec 23 2025, challenged by CCIA + Students Engaged in Advancing Texas v. Paxton (Oct 2025).
+
+**What Texas actually does to the identity** — https://support.apple.com/en-us/127462, verbatim:
+
+> Due to Texas law, these age requirements apply to new Apple Accounts created in Texas on or after June 4, 2026:
+> - Adults will have to confirm that they're 18 or older...
+> - **If you're under 18, you need to be part of a Family Sharing group.**
+> - **Ask to Buy and some Screen Time features are automatically turned on if you're under 18 — and can't be turned off — even by parents or guardians.** For Ask to Buy, kids and teens need to ask for permission to download or purchase an app or make an in-app purchase — regardless of age rating.
+> - **For all accounts, your age range is always shared with developers and can't be turned off.**
+> - Parents or guardians will also be able to revoke their consent for any app they previously approved for their child or teen.
+> - When a developer introduces significant changes to their app, the developer must ask parents or guardians for consent to allow their child or teen to continue using the app.
+
+Note the third bullet applies to **all** accounts, not just minors: in Texas, every Apple Account leaks an age range to every asking developer, unconditionally. And note the second: Texas law **removes the parent's own authority** to relax a control on their own child — the state overrides the guardian, not just the child.
+
+**Documentation gap (MEASURED):** Apple's en-US support index contains exactly **four** "Age requirements for managing an Apple Account" pages — Singapore (126786, May 19 2026), South Korea (126787, Mar 24 2026), UK (126788, Apr 28 2026), Texas (127462, Jun 4 2026). Repeated searches for Utah, Louisiana, Australia, and Brazil return no such page, despite Utah being live since May 6, 2026 per Apple's own developer post. Consumer-facing documentation trails the developer-facing announcement by months, for at least three jurisdictions.
+
+Per-region minimum ages from those four pages: **Singapore 16** · **South Korea 14** (and 19 for mature content) · **UK 13** · Texas: under-18 must be in a family group. UK ID methods are enumerated: "passport, driver's license, or one of the following PASS-accredited Proof of Age cards: CitizenCard, My ID Card, TOTUM ID card, or Young Scot National Entitlement Card. **Debit cards and gift cards aren't supported.**"
+
+### 1.11 Ask to Buy — the 18 boundary, not 13
+
+https://support.apple.com/en-us/105055:
+
+> Depending on the child's state, country, or region, **Ask to Buy is turned on by default and can't be turned off if the child is under 18.** With Ask to Buy, kids and teens need to ask for permission to download or purchase an app or make an in-app purchase — **regardless of the app's age rating.**
+
+---
+
+## 2. GOOGLE FAMILY LINK
+
+### 2.1 The transition: same account, an emailed choice, and — as of now — **no unilateral exit until 18**
+
+**"How Google Accounts work when children turn 13 (or the applicable age in your country)"** — https://support.google.com/families/answer/7106787 — full text:
+
+> When a child turns 13 (or the applicable age in their country), Google sends an email to the parent who supervises the account and to the child to let them know that they can update the child's account. They can choose between these options:
+> **Continue their current parental supervision settings** — The child can choose to maintain their existing supervision settings and have a parent continue to manage their account **by not acting on the email.** Tip: Supervision settings remain the same until your child decides to update their account.
+> **Update their account with supervision for children over 13** — ... Open and read the email titled, **"Ready to update your Google Account?"** Select Update your account. Review their account settings. Select I agree.
+> **Tip: Children under 18 need parent approval to stop supervision.**
+> **Children over 13 (or applicable age of consent in your country) need parent permission to stop supervision** — Parents of children over 13 can choose to stop supervision at any time. **Children need parent approval to stop supervision until they turn 18.** Parents and children will both get notified when supervision is stopped.
+
+**This is a MEASURED policy change from the widely-cited older behavior**, where turning 13 let the child remove supervision themselves. The current live doc says the opposite, three times, in three phrasings. The 13th birthday is now purely an *email* — the default is inertia ("by not acting on the email"), and the actual release date is **18**.
+
+Confirmed independently in https://support.google.com/families/answer/9055704: "If you add supervision to your child's Google Account, you can choose to stop supervision at any time. **A child under the age of 18 will need a parent's approval to stop supervision.** You'll both get notified when supervision is stopped." — and again under *Stop supervision with your child's device*. Note the internal tension on the same page: its heading says "You can stop supervision **once your child reaches 13**", but the mechanism described requires parent sign-in or a **Parent Access Code**. The 13 threshold is what makes stopping *possible*; the parent is what makes it *happen*.
+
+### 2.2 Data and purchases: nothing moves, because nothing forks
+
+Like Apple, the Google Account is one object throughout. No migration, no fork, no orphan. The only destructive path is deletion, and it is **parent-only and under-13-only** — https://support.google.com/families/answer/9182020:
+
+> **Important: This option isn't available if your child is over 13 or the applicable age in your country.** Instead, your child can delete their Google Account themselves.
+> What happens when you delete your child's account: You lose all data and content on your child's account, like emails, files, calendars, and photos. Your child won't be able to sign in... **You'll lose access to content purchased on Google Play with your child's account, like apps and games. They'll lose access to family subscriptions.**
+
+Restore window exists but is bounded and conditional: "If you delete your child's account, you have a limited amount of time to restore it before you lose their emails, photos, and account information... This option is only available if you created your child's Google Account for them and they're under 13... **If you deleted your child's supervised Google Account and your family group, your child's account can't be restored.**" (Deleting the *group* destroys the restore path for the *account* — a real orphaning trap.)
+
+Removal-from-device is cleanly separated from deletion, and Google says so plainly: "**Parental supervision still exists for the account, but not on that specific device.** ... Your child's account isn't 'deleted' and may remain signed in on other devices."
+
+Chromebook: if the child's account was the **first** account on the device, the only removal path is a full Powerwash — "A factory reset of your Chromebook erases all files from your hard drive." Also: "**If you delete your child's account before you remove it from a signed-in device, it may lock and require a factory reset.**" (https://support.google.com/families/answer/9182020) That is a documented bricking order-of-operations hazard.
+
+**School accounts: NOT REACHED as a transition question.** https://support.google.com/accounts/answer/1350409 carries the exclusion — "Note: These requirements may not be applicable to Google Workspace, including accounts in Google Workspace for Education domains" — but I found no Google page describing what happens to a Workspace-for-Education identity at graduation or majority. Not filled from memory.
+
+### 2.3 Transfer of supervision — Google's version, with a hard annual lock
+
+https://support.google.com/families/answer/13130310:
+
+> **You can only switch supervision on accounts once every 12 months.**
+> There's a 7-day duration to receive the transfer notification. There's a 7-day time frame to accept the transfer after the notification has been received. **Do not delete the child's family group until the transfer process is successful.**
+> **Important: When you complete the transfer, the child can't access their previous family group.**
+
+MEASURED numbers: 1 transfer / 12 months; 7 days to receive; 7 days to accept. Compare Apple: 2 groups/year, no stated notification window.
+
+### 2.4 Google's minimum ages (the "applicable age" table)
+
+https://support.google.com/accounts/answer/1350409 — default **13**, with named exceptions. Americas: Aruba 16, Bermuda 14, Caribbean Netherlands 16, Chile 14, Colombia 14, Curaçao 16, Peru 14, Sint Maarten 16, Venezuela 14. Asia: South Korea 14, Vietnam 15. Europe: Albania 16, Andorra 16, Austria 14, Bulgaria 16, Croatia 16, Cyprus 14, Czech Republic 15, Denmark 15, France 15, Germany 16, Greece 15, Hungary 16, Ireland 16, Italy 14, Lithuania 14, Luxembourg 16, Monaco 15, Netherlands 16, North Macedonia 14, Poland 16, Romania 16, San Marino 16, Serbia 15, Slovakia 16, Slovenia 16, Spain 14.
+
+And the enforcement stick: "**Across Google services, if we learn that you may not be old enough to have a Google Account, you'll have 14 days to update your account to meet age requirements or your account will be disabled.**" (Same 14-day figure as Apple's revert window, coincidentally.)
+
+### 2.5 Google's developer-side age signal
+
+**Google Play Age Signals API** — https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html: "a privacy-preserving tool that puts parents in the driver's seat allowing them to share their child's age range (e.g. 16-17) directly with apps." Rollout: **live in Brazil**, **mid-August 2026** Australia + Canada, **later 2026** global. "**age ranges are never shared by default, and parents can update or turn off these settings at any time.**"
+
+**Contrast with Apple, and it is stark:** Google's signal is opt-in and defaults to off. Apple's, in a regulated region, is compulsory — "they can't decline sharing" — and in Texas "always shared with developers and can't be turned off." Different postures on the same wire.
+
+---
+
+## 3. MICROSOFT FAMILY SAFETY
+
+### 3.1 There is no documented age transition. At all.
+
+I crawled the complete `support.microsoft.com/en-us/family-safety/` hub link set (19 articles) plus the linked `accounts-billing/manage/` pages. **No article describes what happens when a child turns 13, 18, or any age.** No "graduation," no notification email, no automatic role change. This is a genuine negative finding, not a search failure — the hub is small and I enumerated it.
+
+What exists instead is **consent**, as a manually granted and manually revoked flag:
+
+- https://support.microsoft.com/en-us/family-safety/managing-parental-consent: "**You only have permission to remove consent for a child account if you originally granted consent.**" And the failure modes are enumerated: "Consent has not yet been given. Consent was either granted by another adult. Consent was given using another Microsoft account." Plus: "**If you cannot access your account, the child may lose access to their account.**" — the child's access is downstream of an adult's ability to log in.
+- The endpoint pair is `account.live.com/mykids.aspx` (manage) and `https://account.live.com/unmanagekid.aspx` (unmanage). Both auth-gated, **NOT REACHED**.
+
+### 3.2 The de facto transition mechanism is **editing the birthdate**, and the child cannot do it
+
+https://support.microsoft.com/en-us/accounts-billing/manage/how-to-change-a-birth-date-on-a-microsoft-account:
+
+> **Can a child edit their own Microsoft account date of birth? No.** Where the listed date of birth is lower than the statutory age in that country or region, the account holder will always need parental consent, and **the child account cannot remove their own consent.**
+
+And the escape hatch Microsoft *itself documents* for an adult mis-flagged as a child is remarkable:
+
+> Sign in to login.live.com to initiate a consent request. Select **I'm a parent or guardian**. **Sign in with any adult personal Microsoft account or create a new dummy adult account** at the sign-in/sign-up screen shown. Tip: To be an adult, the account holder needs to be at least 18 years old, except in Canada where they need to be at least 19 years old. Give consent by selecting Yes, I agree...
+
+Microsoft's official remedy is "create a new dummy adult account and consent to yourself." That is the documented procedure, verbatim, on a first-party support page. It is simultaneously the fix and the proof that the consent gate is unenforceable.
+
+Also: "**If you don't see 'Edit this child's personal info', it could be they are no longer classed as a child, or they are above the statutory age in your country or region.**" — the only hint that any automatic aging-out exists, stated as a troubleshooting symptom rather than a documented behavior.
+
+### 3.3 Purchases on leaving
+
+https://support.microsoft.com/en-us/family-safety/how-to-leave-a-microsoft-family-group:
+
+> **Caution:** Anyone leaving or removed from a family group will also lose access to shared products and services made available by other members, such as a Microsoft 365 Family subscription.
+> Note: **If you don't see Remove from family group, select "Remove consent for this child's account" before continuing with removal from the family group.**
+> Important: You'll no longer be able to manage their Family Safety settings, and the member will lose access to Family Safety features. **They'll also lose access to shared digital purchases made by other members, like Microsoft 365 Family.**
+> Note: **Family groups without an organizer and at least one other family member will be deleted.**
+
+Also, the inverse of Apple's organizer lock: on Microsoft **only an organizer can remove anyone, including themselves** — "If you or another person wants or needs to leave a Microsoft Family Safety family group, only someone with an organizer role can remove them." A plain member cannot leave. Ever. By design.
+
+And the join-exclusivity rule (https://support.microsoft.com/en-us/family-safety/add-people-to-your-family-group): "If someone is already part of a family group, they must leave or be removed from that group before joining another. **They can also create a new Microsoft account to associate with a new family group.**" Microsoft's answer to the immovable identity is, again, *make a new one*.
+
+### 3.4 Statutory ages (Microsoft's own table) — and Australia/Brazil at **18**
+
+https://support.microsoft.com/en-us/accounts-billing/manage/list-of-countries-or-regions-that-have-statutory-age-limits-for-children (partial capture): Albania 17, Algeria 16, Argentina 13, **Australia 18**, Austria 14, Bahrain 18, Belgium 13, Bolivia 16, Bosnia Herzegovina 15, **Brazil 18**, Bulgaria 14, Canada 14, Chad 18, **Chile 18**, China 14…
+
+Note the divergence from Google's table on the same countries (Google: Austria 14 ✓, Bulgaria **16** vs MS 14, Chile **14** vs MS 18, Belgium unlisted/13). **Two shipped platforms disagree about the legal age of digital majority in the same jurisdiction.** That is not a rounding error; it is two different legal readings encoded as two different account lifecycles for the same child.
+
+### 3.5 The measured Microsoft failure mode: restrictions that outlive the family relationship
+
+https://support.microsoft.com/en-us/family-safety/family-safety-settings-enforced-on-adults — an entire support article about adults still under enforcement:
+
+> **Why am I seeing Family safety restrictions if I'm not part of a Family group?** You might be using a device that was previously configured under a Family group or still has Family safety settings applied.
+> [Fix:] `schtasks /run /tn "Microsoft\Windows\Shell\FamilySafetyRefreshTask"` — Restart your computer. Note: These steps need to be run on each impacted device.
+
+and, for adults who *are* in a group:
+
+> **I'm an adult. Why can't I manage my own safety settings?** We hear your feedback and agree that adults should have greater control. **We're actively working on a future update that will allow adult members to opt-in or opt-out of allowing organizers to manage their safety settings.**
+> **How can I turn off the safety settings applied by the organizer?** As of now, **only the family organizer can make changes to your safety settings.** Please reach out to them and request that they disable the safety configurations for your account.
+
+MEASURED, from Microsoft's own mouth: an adult member of a Microsoft family group **cannot remove restrictions from their own account**, and the state can persist on-device after the group relationship is gone, requiring a hand-run scheduled task per device. Microsoft classifies this as a known defect with a promised future fix. That is the clearest shipped example of the failure class you're asking about — *supervision outliving the authority that justified it*.
+
+---
+
+## 4. WHAT USERS ACTUALLY COMPLAIN ABOUT
+
+### 4.1 Apple Support Communities (index frozen ~June 2022, see §0)
+
+Thread titles are verbatim; these are the recurring shapes:
+
+**The under-13 immovability, hit from every side**
+- "**My child under 13 has passed away and I can not remove from family sharing**" (Jun 11, 2022) — https://discussions.apple.com/thread/253959635. Fetched the body via WebFetch: the only community answer is *call Apple Support* (1-800-MY-APPLE / getsupport.apple.com); there is no self-service path. Other users in-thread report the same situation with deceased family members. **This is the sharpest possible expression of the design: the exit condition for an under-13 identity is deletion-by-guardian, and death is not a case the mechanism models.**
+- "**Had my under 13 Child's iTunes account pulled off of family share. I can't leave the family even though I'm the only one in it. When... how can I leave so I can join my new wife's family plan?**" (Jun 8, 2022) — https://discussions.apple.com/thread/253951344. The organizer-can't-leave rule + under-13 rule composing into a total lock, blocking household re-formation after remarriage.
+- "How do I remove a child from family sharing, but **don't have contact with the parent any longer**?" (Jun 4, 2022) — https://discussions.apple.com/thread/253942542. Custody/estrangement: transfer requires the *other* organizer's approval, which requires contact.
+- "I am trying to switch a family member share to another family members account. I cant seem to delete the family share child from my account and **move her to her mothers family share account**" (Jun 13, 2022) — https://discussions.apple.com/thread/253940729
+- "Delete a child under 13 from family sharing" (Jun 11) https://discussions.apple.com/thread/253957718 · "Remove child from my family sharing" (Jun 5) https://discussions.apple.com/thread/253944681 · "i would like to remove a minor from my family sharing - how can I do that." (Jun 9) https://discussions.apple.com/thread/253956551 · "How do I delete a child's account from Family Sharing?" (Jun 17) https://discussions.apple.com/thread/253979633 · "transferring child from family sharing on one person to another" (May 30) https://discussions.apple.com/thread/253930342
+
+**The wrong-birthday trap (the account whose age is a lie told at creation)**
+- "**I created an Apple ID for my son (10 year Old) by using my wife's Date of Birth. now it doesn't allow me to change the DOB**, how do I change the date so that I can add him as Child under family sharing" (Jun 14, 2022) — https://discussions.apple.com/thread/253968385
+- "How do I change my child's role from **adult to child** in family share" (Jun 1) — https://discussions.apple.com/thread/253933750
+- "Hi on family sharing my child's date of birth wrong" (May 29) — https://discussions.apple.com/thread/253927617
+- "I want to change my Apple ID age since I mistakenly made myself under 13 years old" (Jun 19) — https://discussions.apple.com/thread/253983336
+
+This class is the *origin* of most orphaned child identities: pre-2014 there was no child Apple ID, so parents entered adult birthdates. Apple's article 124146 (the 14-day revert window) is the eventual answer to it, published 2026 — **twelve years after the complaint pattern starts.**
+
+### 4.2 Hacker News
+
+- **https://news.ycombinator.com/item?id=8409702** (Oct 4, 2014) — the founding statement of the problem, still unaddressed for existing accounts: *"year ago I gave my old iPad to my daughter, so I had to create her apple id. She is under 13, so there was no way to create this id with her real birthday. Apple support told me to use mine — so I did. This year, they came up with kids apple id for Family sharing, but **they didn't come up with the way to convert any existing ids to child ids.** Nor they willing to fi[x it]"*
+- **https://news.ycombinator.com/item?id=28084865** (Aug 6, 2021) — *"The most annoying thing about Apple Family sharing is that in order to create accounts for people you must specify that they are under 13... otherwise the only other option is for your 'family member' to link their account to the Apple Family which is under your purview, which understandably many people [decline]"* — the observation that the *only* Apple-native way to mint an identity for someone else is to declare them a child.
+- **https://news.ycombinator.com/item?id=47366548** (Mar 13, 2026) — the structural read on why the app-store laws landed where they did: *"By astroturfing the App Store Accountability Act through Digital Childhood Alliance, Meta is forcing Apple to build, maintain and also bear the legal liability for a wildly compl[ex]"* system. And **https://news.ycombinator.com/item?id=47366576**: *"The ASAA requires app stores to verify user ages before downloads but imposes no requirements on social media platforms. If it becomes law, Apple and Google absorb the compliance cost while Meta's apps face zero new mandates."* (Claims sourced to a linked investigation alleging Meta spent $26.3M on 2025 federal lobbying and covertly funded the Digital Childhood Alliance — **CLAIMED, from HN comments; I did not reach the primary investigation.**)
+- **https://news.ycombinator.com/item?id=47488865** (Mar 23, 2026) — "GrapheneOS refuses to comply with new age verification laws for operating system." **NOT READ** (title only).
+- Adjacent: "Store birth date in systemd for age verification" (https://news.ycombinator.com/item?id=47454608), "Ageless Linux – Software for humans of indeterminate age" (https://news.ycombinator.com/item?id=47382561), "A new California law says all operating systems need to have age verification" re AB 1043 (https://news.ycombinator.com/item?id=47190649). The age-attestation requirement is propagating **down the stack from app store to OS**, which is the layer your work sits at.
+
+### 4.3 Complaint classes I specifically hunted and **could not** substantiate
+
+Negative results, stated as such:
+- **"Accounts stuck in a country/region"** — I found the *mechanism* (purchase migration requires "both accounts... set to the same country and region"; https://support.apple.com/en-us/117294) but **no user reports**. The Apple Communities index staleness and the Reddit block are the reasons. **NOT REACHED.**
+- **"You can only leave one family per year"** — the folklore is now **factually stale**: the live doc says **two per year** (§1.4). No user complaints reached about the limit itself.
+- **"Apple ID is associated with a family and can't be moved"** as a literal error string — **NOT REACHED.** The closest documented equivalent is the purchase-migration exclusion (§1.6) and the under-13 removal block (§1.3).
+- **Google Family Link user complaints** — **NOT REACHED**, Google Help Communities 302s and Reddit is blocked. Zero user-side Google evidence in this report; everything in §2 is vendor documentation.
+- **Microsoft user complaints** — **NOT REACHED** by the same blocks. The one user-side signal is Microsoft's own admission in §3.5, which is a vendor document describing a user complaint ("We hear your feedback").
+
+---
+
+## 5. Cross-platform structure (the comparison, no recommendations)
+
+| | Apple | Google | Microsoft |
+|---|---|---|---|
+| Identity at transition | **converts in place**, never forks | **converts in place**, never forks | **converts in place**, never forks |
+| Event at 13 | eligibility only; org must first disable Screen Time | **an email**; default is inertia | **none documented** |
+| Unilateral exit age | 18 (13 possible only w/ organizer cooperation) | **18** (parent approval required 13→18) | **never** — only an organizer can remove anyone |
+| Under-13 exit | transfer **or delete**. No third option | transfer **or delete** (parent-only) | remove consent, then remove from group |
+| Transfer rate limit | 2 groups/person/year | **1 supervision switch / 12 months**, 7d+7d windows | not stated |
+| Purchases on exit | keep self-initiated, **forfeit all shared/DRM**; IAP orphaned inside a parent-bought app; **Apple Cash balance transfers to organizer** | account keeps its own Play purchases; **deletion** destroys them; family subscriptions lost | lose shared purchases (M365 Family) |
+| Purchase consolidation | **explicitly barred for child accounts** (117294) | not offered | not offered |
+| Developer age signal | Declared Age Range, iOS/macOS **26.0**; **compulsory & undeclinable in regulated regions**; **transition lagged to the declaration anniversary** | Play Age Signals; **opt-in, off by default**; Brazil now, AU/CA Aug 2026, global later 2026 | none found |
+| Documented residue after exit | none found | supervision persists per-account when removed per-device (documented, intended) | **restrictions enforced on adults; per-device `schtasks` fix; vendor-acknowledged defect** |
+
+Three invariants hold across all three shipped systems:
+
+1. **Nobody forks the identity.** The account is one durable object; age is a mutable attribute on it, and the "transition" is a permission recomputation, not a migration. Orphaning happens only through *deletion*, never through aging.
+2. **The exit is gated on the custodian's cooperation, not on the calendar.** In all three, reaching the age of consent grants *standing to request*, never *the ability to act*. Apple 13→18 requires Screen Time to be turned off by the organizer; Google 13→18 requires parent approval; Microsoft requires an organizer at every age.
+3. **Entitlements are held by the group, not the person, and they do not travel.** Every platform forfeits shared purchases at exit; Apple additionally moves a cash balance *toward* the organizer. The identity survives the transition; the property does not.
+
+And one asymmetry worth naming: **the age attribute is the only lever, and on every platform the child cannot move it.** Microsoft says so outright ("Can a child edit their own Microsoft account date of birth? No"); Apple gates it behind a 14-day window then organizer approval; Google disables accounts that fail an age check within 14 days. The birthdate is the root of the whole capability tree and it is writable only from above.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;o4bkR5ZRrsp951DYp6Na7NzxzQanj_cdwv2Fbv2QR8s
+
+<<^ code="&#x0004;" -> to=? >>

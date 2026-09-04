@@ -1,0 +1,262 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-diaspora-aspects-9aa7ae >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-diaspora-aspects-9aa7ae.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. Diaspora 'aspects'. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-diaspora-aspects-9aa7ae"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. Diaspora "aspects"
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 27,655 characters
+
+````
+## 1. Diaspora* "aspects"
+
+**Origin — primary sources, verbatim**
+
+- **diaspora* developer release blog post, 15 Sept 2010** — `http://blog.joindiaspora.com/2010/09/15/developer-release.html` (Wayback capture **2010-11-27**, `https://web.archive.org/web/20101127021833/http://blog.joindiaspora.com/2010/09/15/developer-release.html`):
+  > "We live our real lives in context, speaking from whatever aspect of ourselves that those around us know. Social tools should work the same way. Getting the source into the hands of developers is our first experiment in making a simple and functional tool for contextual sharing."
+  > "Share status messages and photos privately and in near real time with your friends through 'aspects'. … Manage friends using 'aspects'"
+
+- **Private alpha post, 23 Nov 2010** — Wayback capture **2010-11-25**, `https://web.archive.org/web/20101125104227/http://blog.joindiaspora.com/2010/11/23/private-alpha-released.html`:
+  > "Diaspora lets you create 'aspects,' which are personal lists that let you group people according to the roles they play in your life. We think that aspects are a simple, straightforward, lightweight way to make it really clear who is receiving your posts and who you are receiving posts from."
+
+- **Priority claim vs Google+ Circles, 8 Sept 2011** — Wayback capture **2011-10-02**, `https://web.archive.org/web/20111002033716/http://blog.diasporafoundation.org/2011/09/08/we-are-making-a-difference.html`:
+  > "We're proud that Google+ imitated one of our core features, aspects, with their circles."
+
+So: aspects shipped **2010-09-15** (source) / **2010-11-23** (hosted alpha); Google+ Circles launched June 2011. Predates Circles by ~9 months. **Confidence: high.**
+
+**Do aspects still exist?** Yes. `https://diasporafoundation.org/` (fetched 2026-09-04) still leads with them:
+> "diaspora* pioneered the concept of aspects, which means you can organise your contacts according to their role in your life."
+
+Current `develop` branch still has `app/models/aspect.rb`, `AspectsController`, `AspectMembership`, and in `app/models/user.rb`:
+- `seed_aspects` creates four defaults: `aspects.seed.family`, `.friends`, `.work`, `.acquaintances`
+- `aspects_from_ids(aspect_ids)` — `if aspect_ids == "all" || aspect_ids == :all then self.aspects` (the literal "All aspects" path)
+- `post_default_aspects` returns `["public"]` when the user's `post_default_public` flag is set, else aspects flagged `post_default`.
+
+GitHub issue history on aspects runs 2010→2021 (202 matching issues), so the feature has been maintained, not deprecated. **Confidence: high.**
+
+**Semantics (current FAQ, `https://wiki.diasporafoundation.org/FAQ_for_users`, fetched 2026-09-04), verbatim:**
+> "Aspects are the way you group your contacts on diaspora*. An aspect is one of the faces you show to the world."
+> "Do my contacts know which aspects I have put them in? — **No. They cannot see the name of the aspect under any circumstances.**"
+> "Are aspects like 'groups'? — **No. Sharing in diaspora\* is asymmetrical.** … For an aspect to work as a group, each member would have to be connected to every other member and to have placed every other member into one aspect. Group functionality is not something that diaspora*'s software supports at the moment"
+> "Can I restrict the posts I see to just those from certain aspects? — Yes." (so aspects are *both* sender-side audience and reader-side filter)
+> "Once I have posted something, can I change the aspect(s) that can see it? — No."
+> "What happens when I deselect one or more aspects when making a public post? — Deselecting aspects does not affect a public post."
+
+**Measured usage of aspects ("All aspects" vs specific) — NONE FOUND. This is a negative finding.**
+- Diaspora's own telemetry is opt-in and *only* counts users/posts/comments. `app/presenters/node_info_presenter.rb` (develop) exposes exactly `total`, `active_halfyear`, `active_month`, `local_posts`, `local_comments`, gated on `AppConfig.privacy.statistics.user_counts? / post_counts? / comment_counts?`. **There is no aspect-usage field, no public/limited split, no "all aspects" counter anywhere in the statistics surface.**
+- The project's own post explaining the statistics feature (4 June 2014, `https://blog.diasporafoundation.org/2-how-many-users-are-there-in-the-diaspora-network`, Wayback capture **2014-07-22**) confirms the scope: *"we enabled pods to share statistics about their user base… the most we can say in answer to the question 'how many persons are using diaspora*' is: 'at least this many'."*
+- Academic: the one well-known Diaspora measurement paper is **Bielenberg, Helm, Gentilucci, Stefanescu, Zhang, "The growth of Diaspora — A decentralized online social network in the wild," IEEE INFOCOM Workshops, March 2012, DOI 10.1109/INFCOMW.2012.6193476** (109 citations per Semantic Scholar). It is **closed access** — Unpaywall reports `is_oa: false`, Semantic Scholar's abstract field is elided by the publisher. **I could not read it: NOT REACHED.** I therefore cannot say whether it touches aspect usage; from title and venue it is a growth/topology measurement, not a feature-usage study, but I am not asserting that.
+- Crossref and Semantic Scholar searches for Diaspora aspect-usage studies returned nothing on topic (Semantic Scholar hit a 429 on one query). **Google Scholar/OpenAlex/WebSearch unavailable per instructions.**
+- **Conclusion: I found no measurement, by the project or by researchers, of whether Diaspora users actually posted to specific aspects vs. all. Confidence high that none is publicly available; medium that none exists at all.**
+
+**Closest thing to evidence** is anecdote. HN comment by `dredmorbius`, **2021-11-18**, `https://news.ycombinator.com/item?id=29265456`:
+> "The problem with G+ Circles (or Diaspora* Aspects, which were an earlier version of the same thing) is that **the people and profiles in your circles have no idea how you've classified them.** … It turns out that what you actually really want are *groups*, not Circles. … The best use I've found for Circles is to group profiles very roughly by interest level, usually into 2–4 tiers… I've used that model on G+, Diaspora*, and Mastodon, pretty effectively."
+
+That is one user, self-reported: the sender-side curation collapsed into a **reader-side volume filter**. **Confidence: low as evidence of population behavior; high that the quote says this.**
+
+**Did it survive? Current numbers.** `the-federation.info` returned **HTTP 502** on 2026-09-04 — **NOT REACHED.** Via `https://api.fediverse.observer/` GraphQL (queried 2026-09-04, `softwarename:"diaspora"`):
+- **58 pods listed**
+- **sum total_users = 129,502**
+- **sum monthly active = 1,675**
+- **sum half-year active = 4,817**
+- Largest by MAU: diaspora-fr.org (68,541 registered / 379 MAU), diaspora.psyco.fr (11,727 / 354), diasporasocial.net (1,316 / 155), diaspora.mifritscher.de (5,699 / 138), iviv.hu (3,943 / 124).
+
+So: alive, maintained (0.9.1.0 released early 2026 per Wikipedia `https://en.wikipedia.org/wiki/Diaspora_(social_network)`), but **~1.7k monthly actives network-wide against ~130k registered accounts — roughly 1.3% MAU/registered.** **Confidence: high for the numbers as reported by fediverse.observer; medium for completeness (opt-in reporting, some pods report 0).**
+
+---
+
+## 2. Mastodon lists
+
+**What they are — verbatim, `https://docs.joinmastodon.org/entities/List/` (last updated June 30, 2025; fetched 2026-09-04):**
+> "**Represents a list of some users that the authenticated user follows.**"
+
+Attributes and version history:
+- `id`, `title` — **2.1.0 added** (lists shipped in Mastodon 2.1, Nov 2017)
+- `replies_policy` — **3.3.0 added**; `followed` = show replies to any followed user, `list` = show replies to members of the list, `none` = no replies
+- `exclusive` — **4.2.0 added**; "Whether members of the list should be removed from the 'Home' feed"
+
+**The follow-graph constraint, verbatim, `https://docs.joinmastodon.org/methods/lists/`:**
+> "Add accounts to the given list. **Note that the user must be following these accounts.**"
+> 422 error condition: "You are not following a given account ID, or you do not own the list ID, or list/account ID does not exist."
+
+**User-facing description, verbatim, `https://docs.joinmastodon.org/user/network/` (last updated November 27, 2025):**
+> "Lists are subsets of your home timeline. You can create a list, give it a name, and add users that you follow to that list. … List timelines contain only posts by members of that list, as well as replies to you or to other members of the list. This can be changed to show replies to all people you follow, or to no one."
+
+So Mastodon lists are **strictly reader-side and strictly a partition of an existing follow set** — a filter over the follow graph, never an addressing mechanism. Lists are private to the owner; there is no way to post *to* a list. **Confidence: high.**
+
+**Complaints / feature pressure (github.com/mastodon/mastodon), all confirmed via GitHub API:**
+- **#7876** "Add accounts to lists without having them in your main timeline", opened **2018-06-23**, closed **2023-05-20** as duplicate by trwnh ("Duplicate of #6982 or #16556 or possibly something that could be done with filters"). Body: *"I can only add accounts to lists, when I follow them and they are removed from lists when I unfollow them. I would like to be able to add people to lists without following them."* — 30 comments.
+- **#16556** "[Request] Exclusive lists (hiding listed toots from the primary timeline on an opt-in basis)", opened 2021-08-02, closed. Implemented by **PR #22048 "Add exclusive lists"** (opened **2022-12-04**, merged **2023-06-05**), which states: *"Exclusive lists are a mature (3 year old!) Hometown feature"* — i.e. Mastodon adopted it from the Hometown fork after three years downstream.
+- **#8208** "add a option to make lists public" — opened **2018-08-15**, **still open** as of 2026-09-04.
+- **#18292** "Shared/Collaborative User Lists" — opened 2022-05-03, **still open**.
+- **#7692** "Ability to add hashtags to lists" — opened 2018-05-31, **still open**, 57 comments (highest-comment list issue).
+- **#22812** "Create Lists based on topic (hashtags) instead of people" — closed.
+- **#189** "Suggestion: Implement lists as groups" — 2016-11-22, closed.
+
+**Measured usage data for Mastodon lists: NONE FOUND.** No usage telemetry is published by Mastodon (the API is per-user and authenticated; there is no aggregate list-usage endpoint). arXiv's API returned empty bodies to `curl` on every query I attempted — **arXiv NOT REACHED**, so I cannot rule out a fediverse-measurement paper touching list adoption. **Confidence: high that Mastodon publishes no such data; low-to-medium that no third-party measurement exists, because arXiv was unreachable.**
+
+---
+
+## 3. ActivityPub / ActivityStreams 2.0 audience addressing
+
+**The claim is confirmed. AS2 has rich addressing; Mastodon collapses it to four visibility levels and never reads `bto`/`bcc`.**
+
+**AS2 Vocabulary §5.1 Audience Targeting** (`https://www.w3.org/TR/activitystreams-vocabulary/`, W3C Recommendation 23 May 2017), verbatim:
+> "Conceptually, every Object has both a Primary and Secondary audience. … The `to`, `cc`, `bto` and `bcc` properties MAY be used within an Object to explicitly identify the Primary and Secondary audiences."
+> "When the event source generates the object and specifies values for the `to` and `cc` fields, the intermediary SHOULD redistribute that object with the values of those fields intact… **This is precisely the same model used by the `to` and `cc` fields in email systems.**"
+> "There are situations, however, in which disclosing the identity of specific members of the audience may be inappropriate. … an implementation generating an object MAY use the `bto` and `bcc` properties to list entities to whom the object should be privately targeted. When an intermediary receives an object containing these properties, it MUST remove those values prior to redistributing the object."
+> "**Audience targeting information included within an Object only describes the intent of the object creator.** With clear exception given to the appropriate handling of `bto` and `bcc`, **this specification leaves it up to implementations to determine how the audience targeting information is used.**"
+
+`bcc` is defined as: *"Identifies one or more Objects that are part of the private secondary audience of this Object."* There is also a separate `audience` property, and §5.1.1 pairs `audience` with `context`.
+
+**ActivityPub** (`https://www.w3.org/TR/activitypub/`, W3C Recommendation 23 Jan 2018):
+- §6.1 Client Addressing: *"clients must be aware that the server will only forward new Activities to addressees in the `to`, `bto`, `cc`, `bcc`, and `audience` fields. The Followers Collection and/or the Public Collection are good choices for the default addressing of new Activities."*
+- §7.1 Delivery: *"Targets for delivery are determined by checking the ActivityStreams audience targeting; namely, the `to`, `bto`, `cc`, `bcc`, and `audience` fields of the activity. … If a recipient is a Collection or OrderedCollection, then the server MUST dereference the collection (with the user's credentials) and discover inboxes for each item in the collection."* — **this collection-dereferencing is exactly the aspect/circle primitive.**
+- §5.6 Public Addressing: the magic collection `https://www.w3.org/ns/activitystreams#Public`; *"Activities addressed to this special URI shall be accessible to all users, without authentication."*
+- §B.11 "Not displaying bto and bcc properties": *"since `bto` and `bcc` are only intended to be known/seen by the original author of the object/activity, servers should omit these properties during display as well."*
+
+**Design intent confirmed by the spec's co-editor.** Christine Lemmer-Webber (`paroneayea`) on Hacker News, **2018-04-14**, `https://news.ycombinator.com/item?id=16836027`, verbatim:
+> "Hi. Co-editor of ActivityPub here. Nothing about ActivityPub's design is Twitter-esque specific. In fact it largely comes from pump.io's design which is much more Facebook-like than Twitter's design. **We also built ActivityPub so that Diaspora could use it. That's the whole reason collections are addressable, in order to be able to handle the design of Diaspora's aspects.**"
+
+That is a direct, first-party statement that AS2/AP's addressable-collection machinery **exists specifically to carry aspects/circles-style audience curation.** **Confidence: high.**
+
+**Mastodon collapses it to four (well, five) levels — verbatim from Mastodon's own spec-compliance doc, `https://docs.joinmastodon.org/spec/activitypub/`, section "Mentions for addressing and notifications":**
+> "Based on the presence or exclusion of `Mention` tags, and compared to the explicitly declared audiences in `to` and `cc`, Mastodon will calculate a visibility level for the post. …
+> **public**: Public statuses have the `as:Public` magic collection in `to`
+> **unlisted**: Unlisted statuses have the `as:Public` magic collection in `cc`
+> **private**: Followers-only statuses have an actor's follower collection in `to` or `cc`, but do not include the `as:Public` magic collection
+> **limited**: Limited-audience statuses have actors in `to` or `cc`, at least one of which is not `Mention`ed in `tag`
+> **direct**: Mentions-only statuses have actors in `to` or `cc`, all of which are `Mention`ed in `tag`"
+
+**`bto`/`bcc` appear ZERO times in Mastodon's entire ActivityPub spec-compliance document** (grep count = 0, fetched 2026-09-04).
+
+**Confirmed in Mastodon source.** `app/lib/activitypub/parser/status_parser.rb` on `main` (fetched 2026-09-04), verbatim:
+```ruby
+def visibility
+  if audience_to.any? { |to| ActivityPub::TagManager.instance.public_collection?(to) }
+    :public
+  elsif audience_cc.any? { |cc| ActivityPub::TagManager.instance.public_collection?(cc) }
+    :unlisted
+  elsif audience_to.include?(@options[:followers_collection])
+    :private
+  else
+    :direct
+  end
+end
+...
+def audience_to
+  as_array(@object['to'] || @json['to']).map { |x| value_or_id(x) }
+end
+
+def audience_cc
+  as_array(@object['cc'] || @json['cc']).map { |x| value_or_id(x) }
+end
+```
+There is **no `audience_bto`, no `audience_bcc`, and no reading of the `audience` property at all.** `app/lib/activitypub/activity/create.rb` likewise only uses `audience_to + audience_cc`. **Confidence: high — this is the running code.**
+
+**Community statements that `bto`/`bcc` are effectively unused.** SocialHub (`socialhub.activitypub.rocks`, the SocialCG-liaised forum):
+- `nightpool` (Mastodon core contributor), **2023-01-28**, post `https://socialhub.activitypub.rocks/t/like-activity/2925` (post id 12016), verbatim:
+  > "`to`, `cc`, `bto`, and `bcc` are primarily instructions to the *delivering* server about which inboxes to send the activity to. Secondarily, they're instructions for how to treat activities in the `sharedInbox`. Third and least their hints for the receiving client about how to display the activity to the user (e.g. 'why did I receive this?'). **For activities not delivered to sharedInbox where the reason for receiving them is patently obvious, it seems like nobody really felt the need to include them.**"
+- FEP-8fcf thread (`https://socialhub.activitypub.rocks/t/fep-8fcf-followers-collection-synchronization-across-servers/1172`), **2020-12-19**, search-blurb verbatim: *"Only directly delivering messages to actors' inboxes works with `bto` and `bcc` semantics currently. **`bto` doesn't work with sharedInbox delivery**"* — i.e. the efficiency optimization the whole network runs on is structurally incompatible with blind addressing. **Confidence: high for the quote; medium that this is the decisive cause.**
+- `trwnh`, 2022-07-26, thread 114: *"most [servers] permit people to hide who is in their followers/following and circles/aspects collections"* — and 2024-09-18, thread 4534: *"Revive the Multibox endpoint, or some similar mechanism for specifying exact inboxes to deliver to. The `sharedInbox` we ended up with has some pretty egregious shortcomings…"*
+- A SocialHub thread exists titled **"Overlapping taxonomies and the `audience` property"** (topic 4229, 2024-05-10) — the community is still, in 2024, unresolved on what `audience` means.
+
+**The W3C AP implementation report** (`https://activitypub.rocks/implementation-report/`, now banner-labeled *"(Of historic interest only)"*): the row `outbox:removes-bto-and-bcc` shows **5 "yes"** out of 13 listed implementations (Bridgy Fed N/A*, distbin **No**, dokieli N/A, go-fed Yes, Kroeg Yes, Mastodon N/A, microblog.pub Yes, PeerTube N/A, places.pub N/A, Pleroma Yes*, Pubstrate Yes, Smilodon N/A, tags.pub N/A). Mastodon is N/A because it does not implement C2S at all. That is the closest thing to a compliance measurement and it is stale and tiny. **Confidence: high for the numbers; the report is explicitly historic.**
+
+**Negative finding: I found no quantitative measurement of `to`/`cc`/`bto`/`bcc`/`audience` usage across live fediverse traffic.** No FEP measures it; the FEP index (`https://codeberg.org/fediverse/fep/raw/branch/main/README.md`, fetched 2026-09-04) contains no FEP on audience-addressing usage — the nearest-named, **FEP-cd47 "Federation-friendly Addressing and Deduplication Use-Cases"** (DRAFT, dateReceived 2024-05-31), is about content-addressing for moderation/portability, **not** audience addressing, despite the title. Relevant adjacent drafts: **FEP-7502 "Limiting visibility to authenticated actors"** (DRAFT, 2023-12-24), **FEP-db0e "Authentication mechanism for non-public groups"** (DRAFT, 2024-05-03), **FEP-8fcf "Followers collection synchronization across servers"** (FINAL, finalized 2022-02-07). **Confidence: high.**
+
+---
+
+## 4. Nostr — relays as curation
+
+**NIP-65 "Relay List Metadata"** (`https://github.com/nostr-protocol/nips/blob/master/65.md`, raw fetched 2026-09-04), status `draft` `optional`, verbatim:
+> "Defines a replaceable event using `kind:10002` to advertise relays where the user generally **writes** to and relays where the user generally **reads** mentions."
+> "When downloading events **from** a user, clients SHOULD use the **write** relays of that user. When downloading events **about** a user, where the user was tagged (mentioned), clients SHOULD use the user's **read** relays."
+> "When publishing an event, clients SHOULD: Send the event to the **write** relays of the author; Send the event to all **read** relays of each tagged user; Send the author's `kind:10002` event to all relays the event was published to."
+> "Clients SHOULD guide users to keep `kind:10002` lists small (2-4 relays of each category)."
+
+Origin: PR **#218**, opened **2023-02-03**, merged **2023-02-07**, by Mike Dilger. PR body verbatim: *"Gossip shouldn't have to be so complicated. Nostr should scale better. People should be able to find what they want."*
+
+**Is a relay list audience curation? Explicitly no — it is discovery/routing, not access control.** Mike Dilger, "The Outbox Model" (`https://mikedilger.com/gossip-model/`, page states *"This is a rewrite as of 2024-09-26"*), verbatim:
+> "The purpose of the model is to make sure you can find the public content of everybody that you follow, and also to make sure that you (and others) can find replies to content that you create. **To be clear, this model does not apply to all the 'other stuff' on nostr. It only applies to public content.**"
+> "It is the website model. It is the RSS model. … You post your content to your outbox relays. You find other peoples content on their outbox relays."
+
+**Its own author's critique — the privacy hole, verbatim from the same page:**
+> "in order for your client to find and read my content, I can direct (via my relay list) your client to come over to a relay which you have never even heard of before, which you did not configure, and which you have not vetted. **If privacy is a concern to you, then this is a privacy attack vector.** … I recognize this concern. It is real. But there are solutions to this, namely VPNs and Tor. **If someone can come up with a relay model that is fully distributed, and lets you find everything you need to find, and doesn't have this privacy concern, PLEASE SHARE. I was unable to think one up.**"
+
+So the outbox model **inverts audience curation into publisher-side routing**: the *sender* declares where their bytes live, and the *reader's client* is steered there. Curation of who-sees-what is not in NIP-65 at all. **Confidence: high.**
+
+**Where nostr does put audience curation: NIP-51 "Lists"** (`https://github.com/nostr-protocol/nips/blob/master/51.md`), status `draft` `optional`, verbatim:
+> "This NIP defines lists of things that users can create. Lists can contain references to anything, and these references can be **public** or **private**."
+> "Public items in a list are specified in the event `tags` array, while private items are specified in a JSON array that mimics the structure of the event `tags` array, but stringified and **encrypted using the same scheme from NIP-44** (the shared key is computed using the author's public and private key) and stored in the `.content`."
+
+Relevant kinds — note both reader-side and relay-side curation live here:
+- `kind:3` Follow list · `kind:10000` Mute list · `kind:10002` Read/write relays (= NIP-65)
+- `kind:10006` Blocked relays · `kind:10007` Search relays · `kind:10012` Relay feeds · `kind:10013` Private relays (nip44-encrypted, NIP-37 drafts) · `kind:10050` DM relays (NIP-17)
+- **Sets** (multiple per user, `d`-tagged): `kind:30000` **Follow sets** — *"categorized groups of users a client may choose to check out in different circumstances"*; `kind:30002` **Relay sets** — *"user-defined relay groups the user can easily pick and choose from during various operations"*; `kind:30004/30005/30006` Curation sets; `kind:39089` **Starter packs** — *"a named set of profiles to be shared around with the goal of being followed together"*.
+- Spec's own framing, verbatim: *"relay sets can be displayed in a dropdown UI to give users the option to switch to which relays they will publish an event or from which relays they will read the replies to an event"* — **that is sender-side audience selection expressed as relay choice.**
+
+**Critique / open tension in the NIPs repo (via GitHub API, 2026-09-04):**
+- **#1282 "Relay Type Nomenclature"** (opened **2024-06-02**, **still open**, 42 comments) is the clearest statement that relays *are* being asked to carry audience semantics, and that nostr has no agreed vocabulary for it. Verbatim from the body: *"Public Outbox Relays… Public Inbox Relays… **Private Inbox**: Relays that accept any event from anyone as long as they tag one of the subscribers or the public in general, however only the tagged individual can download their tagged events… **Private Storage**: Relays that accept events from an author and make sure only the author can download them… **Community Manager Relays**: Relays whose read or write access is closed to members of a NIP-29 group…"*
+- **#1179 "Follow lists don't scale"** (opened 2024-04-16, **still open**, 29 comments).
+- **#1985 "NIP-51: Adds user's preferred Index, Proxy, Broadcasting and Trusted relay lists"** (opened 2025-07-23, still open).
+- **#1135 "nip-64: inbox model"** (opened 2024-03-23, still open).
+- **#822 "Update NIP-65 add prioritization (by trust) of list guidelines"** and **#805 "NIP-65 Temporarily omit a relay"** — both closed.
+- Real audience privacy in nostr went a different route entirely: **NIP-17 sealed gift-wrapped DMs** (PR #686, opened 2023-07-28, closed, 178 comments — the highest-traffic thread in the repo), i.e. **encryption, not addressing.**
+
+**Measured usage of NIP-65 adoption: NONE FOUND** in the sources I could reach. The Outbox Model page itself says, as of its 2024-09-26 rewrite: *"Unfortunately few clients are creating these (at the time of writing), so these cannot be relied on either."* That is an author's impression, not a measurement. **Confidence: high for the quote; no quantitative adoption figure obtained.**
+
+---
+
+## NOT REACHED / blocked
+
+- **`the-federation.info`** — HTTP **502** on 2026-09-04. Diaspora network size taken from `api.fediverse.observer` instead.
+- **Bielenberg et al. 2012 (DOI 10.1109/INFCOMW.2012.6193476)** — paywalled; Unpaywall `is_oa: false`; Semantic Scholar abstract elided by publisher. Contents unread.
+- **arXiv API** (`export.arxiv.org/api/query`) — returned empty bodies to every `curl` in this session. No arXiv coverage in this report.
+- **`wiki.diasporafoundation.org/Aspects`** — 404 (page does not exist; the aspects documentation lives in `FAQ_for_users`, which I did read).
+- **GitHub code search API** — 401 (requires auth). I read raw source files directly instead.
+- **Semantic Scholar** — one query hit HTTP 429; two others returned nothing on topic.
+- **WebSearch / OpenAlex / Google Scholar** — not used, per instructions.
+
+## Cross-cutting negative finding
+
+Across all four systems, **the same measurement gap recurs**: every one ships the curation primitive, and **not one of them publishes, or has had published about it, any data on whether people use it.** Diaspora's own opt-in telemetry is structurally incapable of answering the question (user/post/comment counts only). Mastodon publishes no list-usage aggregate. The W3C AP implementation report covers 13 implementations, is labeled historic, and measures conformance rather than field usage. Nostr's NIP-65 adoption is described only anecdotally by its own author. **Confidence: high.**
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;yfCvRmix5xxmL9sUPEw3wQ1djJ_D6A7LSWRqZ6mxrK0
+
+<<^ code="&#x0004;" -> to=? >>

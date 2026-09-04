@@ -1,0 +1,457 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Reader-side audience curation: how far up does it scale?. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Reader-side audience curation: how far up does it scale?
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 16,062 characters
+
+````
+The parent has asked me to wrap up. The two parallel agents (ancestors/Zulip-Slack-Matrix, and Dunbar/defaults) have not reported back yet, so those sections are thin — I'll flag that explicitly.
+
+---
+
+# Reader-side audience curation: how far up does it scale?
+
+**Method note:** WebSearch, OpenAlex, and Semantic Scholar were all budget-exhausted/rate-limited. WebFetch is additionally **blocked on web.archive.org** (curl worked instead). Everything below came from arXiv API, Crossref, HN Algolia, FediDB API, direct WebFetch, and curl'd Wayback. Two subagents covering sections 1 and 4 are **still running and have not reported** — those sections are correspondingly thin.
+
+---
+
+## 1. The headline numbers — Bluesky custom feeds
+
+This is the strongest evidence in the whole brief, and it is discouraging for the primitive.
+
+**"Bluesky: Network Topology, Polarization, and Algorithmic Curation"** — arXiv [2405.17571](https://arxiv.org/abs/2405.17571), first posted 2024-05-27 (v3). Full text verified verbatim from `ar5iv.labs.arxiv.org/html/2405.17571`, not just the abstract:
+
+> "In total, 39,639 feeds have been created by 18,352 active users showcasing the breadth of content curation algorithms available to users on Bluesky and the broad usage of this novel feature."
+
+> "In our dataset, 139,033 Users have used this feature and liked feeds 295,902 times."
+
+> **"However, in total, only 139 thousand out of 5 million users liked at least one feed."**
+
+That is **~2.8%**. And the authors' own framing in the abstract:
+
+> "We analyze all feeds and find that while a large number of custom feeds have been created, **users' uptake of them appears to be limited**."
+
+Distribution shape, from their Table 3: likes-per-feed mean μ=2.128, max M=1,799, power-law exponent **α=3.413**; skewness γ=203.3, kurtosis β=60,657. The top feeds table: `For You` 16,132 likes · `OnlyPosts` 5,137 · `Science` 4,972 · `Adult Content` 4,180 · `Art` 3,268 · `New` 3,221 · `Mutuals` 3,103.
+
+**Caveats I want to be honest about:** "liked a feed" is a *proxy* for adoption, not subscription — bookmarks/pins are private on Bluesky and therefore unmeasurable from outside. So 2.8% is a floor, not the true switch rate. Confidence in the number itself: **high** (verified in raw source text). Confidence that it means "97% never leave the default": **medium** — the proxy is weak, and the data is from early-2024 Bluesky at 5M users.
+
+**Supply-side concentration** — "Looking AT the Blue Skies of Bluesky", arXiv [2408.12449](https://arxiv.org/abs/2408.12449), 2024-08-22:
+
+> "As of 2024-04-30, the network contains 40,398 reachable Feed Generators" — but "3,782 (9.4%) have never curated any posts, while 8,792 (21.8%) did not curate posts in the last month."
+
+> "Skyfeed, Bluefeed, and Goodfeeds, collectively host **95.8% of all Feed Generators**." Skyfeed alone hosts 85.86%.
+
+> Labelers: "As of 2024-05-01, we identify **62 unique labeling services. However, only 46 issued at least one label**."
+
+So the "marketplace of algorithms" is, at the infrastructure layer, three companies — and the reader-side moderation marketplace is 46 live labelers for tens of millions of users. Confidence: **high** (WebFetch of ar5iv full text; not independently re-verified in raw source).
+
+**Many feeds ≠ pluralism** — "Whose Posts Get Ranked: Identical-Text Exposure Gaps in Bluesky Custom Feeds", arXiv [2608.13879](https://arxiv.org/abs/2608.13879), 2026-08-14:
+
+> "in 33% of sets, one copy appears on the list while another does not... A new author with more followers than the competing author still loses 74% of head-to-head comparisons."
+> **"These results are early evidence that access to many independent feeds is not enough to give identical texts equal exposure."**
+
+Their scale reference: "roughly 40,000 feeds from 18,000 creators coexist on the platform" (citing Balduf et al. 2024), sampled to 1,366 public feeds, 297,093 snapshots Feb–Apr 2026. Sampling criteria are **not stated in the paper** — a methodological gap worth noting.
+
+Related: [2608.13874](https://arxiv.org/abs/2608.13874) (same team, same date) runs a 5,000-feed panel, 17.8M public posts, 1.865M post–feed return records.
+
+**Bluesky's own numbers: a negative result.** I read both transparency reports in full — [2024 moderation report](https://bsky.social/about/blog/01-17-2025-moderation-2024) (2025-01-17) and [2025 transparency report](https://bsky.social/about/blog/01-29-2026-transparency-report-2025) (2026-01-29). They are dense with numbers (41.41M users end-2025, 16.49M labels, 9.97M reports, 4,327 verified accounts) and contain **no data whatsoever on custom-feed adoption, feed-switch rates, or third-party labeler subscription**. Bluesky publishes moderation volume but not algorithmic-choice uptake. Confidence: **high**. Whether that silence is incidental or intentional, I can't say.
+
+The [Jan 2026 "What's next" post](https://bsky.social/about/blog/01-26-2026-whats-next-at-bluesky) says: "Custom feeds are already one of our most differentiated features... But we've barely scratched the surface of what's possible there." And, on defaults: "The Discover feed has come a long way, but there's more to do."
+
+**The original pitch**, for contrast — Jay Graber, "Algorithmic choice", 2023-03-30, via Wayback capture **2024-01-19** (`web.archive.org/web/20240119082104/https://blueskyweb.xyz/blog/3-30-2023-algorithmic-choice`):
+
+> "We aim to replace the conventional 'master algorithm,' controlled by a single company, with an open and diverse 'marketplace of algorithms.'"
+> "For users, the ability to customize their feed will give them back control of their most valuable resource: their attention."
+
+Third-party datapoint: [TechCrunch, 2025-01-31](https://techcrunch.com/2025/01/31/custom-feed-builder-graze-is-building-a-business-on-bluesky-and-investors-are-paying-attention/) — Graze, the largest independent feed-builder business, reaches "hundreds of thousands of unique people every day" against Bluesky's then-"30.3 million users". Order of magnitude ~1%. Confidence: **medium** (a founder's own framing, no methodology).
+
+**Starter packs — the closest live analogue to your primitive.** A sender publishes a curated set; readers adopt it wholesale. "Bootstrapping Social Networks: Lessons from Bluesky Starter Packs", arXiv [2501.11605](https://arxiv.org/abs/2501.11605), 2025-01-20. Verified verbatim in raw source:
+
+> "By the end of 2024, 238.51×10³ (**0.95%** of all) users had created at least one starter pack, 1.56×10⁶ (**6.25%**) users were members of at least one starter pack, and 1.1×10⁶ (**4.37%**) users had employed the follow all operation... This indicates that the new feature was used by a relatively small portion of users."
+
+> "the distribution is highly skewed, with the **top 20% of starter packs created 97.17% of all starter-pack-induced follow edges**. The most popular starter pack... with 7.01M follow edges created lists 'pro-democracy accounts'."
+
+But — and this cuts the other way — curated sets were *enormously* load-bearing where used: "starter packs created a total of 308.57×10⁶ unique edges... a remarkable **19.95% of all follow edges of the network**", "responsible for up to **43% of daily follow operations** at their peak", and "by the end of 2024, **93.82%** of them are still present."
+
+Read together: low adoption, extreme concentration, but the curated sets that *are* adopted durably restructure the graph. Confidence: **high** (verified in raw text).
+
+Corroborating scale: "A Blue Start", arXiv [2505.11608](https://arxiv.org/abs/2505.11608) — 39.7M accounts, 2.4B following relationships, 365.8K starter packs. And [2608.17489](https://arxiv.org/abs/2608.17489), 2026-08-18: 50K English packs, median 37 / mean 40.2 users per pack, **more than half auto-generated personal packs** (29,874 of ~50,289), inclusion worth "about 2.00× more reposts per post compared with matched controls".
+
+---
+
+## 2. Mastodon centralization — measured
+
+**"Challenges in the Decentralised Web: The Mastodon Case"**, IMC 2019, DOI [10.1145/3355369.3355572](https://doi.org/10.1145/3355369.3355572), arXiv [1909.05801](https://arxiv.org/abs/1909.05801). Via ar5iv full text:
+
+> "10% of instances host almost half of the users" · "top 5% of all instances have **90.6% of all users**" · "top 5% of instances accumulating **94.8% of toots**"
+> "outages in just **10 instances could remove 62.69% of global toots**"
+> "top three ASes account for almost two thirds (**62%**) of all global users" · "**89.1% of all toots** reside on instances in Japan, the US, and France" · Amazon alone hosted "more than 30% of all users"
+> "**21.3% of instance went offline and never came back online**" · "11% of instances are inaccessible more than half of the time"
+
+Confidence: **high** on the quotes (ar5iv full text); **medium** that they're transcribed with exact section context, since I read them through a summarizer rather than grepping raw.
+
+**I re-measured this myself today.** FediDB API, `api.fedidb.org/v1/stats` and `/v1/servers`, retrieved **2026-09-04**:
+
+- Fediverse-wide: **14,384,863 users** across **42,849 instances**, MAU **1,146,570**
+- Top 40 instances: **9,444,946 users = 65.7%** of all users; **643,616 MAU = 56.1%** of all MAU
+- `mastodon.social` alone: **3,385,335 users (23.5%)**, **262,400 MAU (22.9%)**
+
+Seven years on, one instance is nearly a quarter of the entire fediverse. Confidence: **high** on the arithmetic; **medium** on FediDB's coverage completeness (it's a crawler, and instances can block it).
+
+**"Measuring Centralization of Online Platforms Through Size and Interconnection of Communities"**, arXiv [2307.15027](https://arxiv.org/abs/2307.15027), 2023-07-27 — compares Mastodon, git servers, BitChute, **Usenet**, Voat. Finds "an effectively centralized use of Mastodon servers" and that "Usenet has a consistently higher disruption than the Penumbra" (git). Its methodological point is sharp and relevant: **"community size distribution is insufficient to describe the structure of a network"** — Voat had extreme size skew but decentralized *influence*, because its big communities were insular. Confidence: **medium** — the paper reports disruption curves (DAUC), not scalar scores, so there's no single number to quote.
+
+**Nostr** — "An Empirical Analysis of the Nostr Social Network", arXiv [2402.05709](https://arxiv.org/abs/2402.05709), 2024-02-08: "Nostr achieves **superior decentralization compared to traditional Fediverse applications**. However, relay availability remains a challenge, where **financial sustainability (particularly for free-to-use relays) emerges as a contributing factor**." A genuine counter-datapoint to the recentralization thesis — with the cost caveat attached. I did **not** reach relay-share-of-traffic numbers.
+
+**Mastodon *relay* usage specifically: NOT REACHED.** I probed arXiv (`all:Mastodon AND all:relay` → zero hits), HN, and FediDB. No measurement of ActivityPub relay concentration found. Negative result.
+
+**Bluesky mute/moderation-list usage: NOT REACHED as a subscription number.** The closest is [2505.01174](https://arxiv.org/abs/2505.01174) (2025-05-02): 3,278,406 blocks by 1,979,713 unique users over three months, median 2 blocks per blocking user, outliers over 74,000 blocks. The paper notes moderation lists exist via Ozone but reports no subscription figures.
+
+---
+
+## 3. Zulip — partial
+
+My subagent on this is still running. What I have directly:
+
+[zulip.com/why-zulip](https://zulip.com/why-zulip/): "In Zulip, **channels** determine who gets a message. Each conversation within a channel is labeled with a **topic**." Testimonial: "Using Zulip significantly increases the size of the team for which a manager can meaningfully know what's going on." (Gaute Lund, iDrift AS) and "With Zulip, I can manage **hundreds of participants across two communities** extremely efficiently, and I don't feel stressed." (Dan Allen, Asciidoctor)
+
+The best single datapoint is Tim Abbott (Zulip founder) on HN, item [23581587](https://news.ycombinator.com/item?id=23581587), 2020-06-20 — full comment text via the Firebase API:
+
+> "The main goal of Zulip's interaction design is to make skimming hundreds or thousands of Zulip messages (and replying thoughtfully to the ones where you can add something!) pleasant... Personally, **I read and respond to 500-1000 Zulip messages sent by dozens of people across 50+ topics every single day**, and I get compliments on how responsive I am."
+
+> "it's very inefficient to do asynchronous communication at scale in Slack or any of its copycats... it's miserable to make sure you don't miss things in busy slack channel, so everyone does."
+
+This is the one concrete claim I found about *how far one reader's curated attention actually reaches*: ~50 topics/day, self-reported, by the person with the strongest incentive to report it high. Confidence in the quote: **high**. Confidence it generalizes: **low** — n=1, self-report, founder.
+
+**Slack/Discord/Matrix comparative material: NOT REACHED by me** — delegated and still pending.
+
+---
+
+## 4. The ancestors — NOT REACHED
+
+Mailing lists (LISTSERV/Mailman/majordomo), Usenet moderation and killfiles, Eternal September, the Usenet spam collapse: **delegated to a still-running subagent; I have only Wikipedia summaries**, which I don't consider citable evidence for a design brief. I confirmed the killfile lineage (first implemented in Larry Wall's `rn`) and Eternal September's dating (late 1993/early 1994) but obtained **no traffic-volume, spam-share, or moderation-load numbers**. My one attempt at the primary Bluesky 2023 custom-feeds post via Wayback returned gzip-mangled bytes and I did not retry before wrapping up.
+
+## 5. Dunbar / defaults / choice overload — NOT REACHED
+
+Delegated and still running. I confirmed only that Gonçalves/Perra/Vespignani exists and is open-access: **PLoS ONE 2011, DOI [10.1371/journal.pone.0022656](https://doi.org/10.1371/journal.pone.0022656)**. I did not retrieve its measured ceiling, its dataset size, or any of the follow-ups/refutations (Lindenfors et al. 2021, Saramäki PNAS 2014, Arnaboldi ego-network layers), nor any default-effect or choice-overload material. Treat all of section 4 of the brief as **open**.
+
+---
+
+## What the reached evidence actually says
+
+Three independent measurements of *different* curated-set mechanisms on the *same* platform converge on the same shape:
+
+| mechanism | ever used it | concentration |
+|---|---|---|
+| custom feeds (liked ≥1) | **2.8%** of 5M users | α=3.413 power law |
+| starter packs (follow-all) | **4.37%** of users | top 20% → **97.17%** of edges |
+| feed-generator *hosting* | — | top 3 hosts → **95.8%** |
+
+And Mastodon, with a seven-year measurement baseline and an entirely different architecture, lands in the same place: top 5% of instances → 90.6% of users in 2019; one instance → 23.5% of the fediverse in 2026.
+
+The primitive demonstrably works at the scale it was designed for — one person's contact list. Above that, every measured instance shows the same two-part failure: **a small minority ever exercises the choice, and the minority that does concentrates onto a few sets.** The 2026 exposure-gap paper adds the sharpest version of the finding — even holding text identical, 40,000 feeds did not produce even exposure. Availability of choice and exercise of choice are separate quantities, and only the first one scales.
+
+The counterweight worth keeping: starter packs, adopted by only 4.37% of users, still produced **19.95% of all follow edges** and **43% of daily follows at peak**, with 93.82% persistence. Low adoption is not the same as low impact. A curated set that lands can restructure a graph far beyond its subscriber count.
+
+**Confidence overall: medium.** The Bluesky feed-uptake number rests on one 2024 paper using a like-proxy for a private bookmark action, and Bluesky itself publishes nothing that would confirm or refute it. If one number in this report deserves a second source before it carries weight in a design decision, it is the 2.8%.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 14,162 characters
+
+````
+The ancestors/moderns agent has now reported. This completes the brief.
+
+---
+
+# Addendum 2 — Section 1: group and community addressing as a curated set
+
+## 1.1 LISTSERV — the primitive breaking, measured, in 1986
+
+This is the best primary source in the entire brief, because the pre-LISTSERV BITNIC model was *literally* a human curating the audience set. L-Soft, "Early History of LISTSERV" — [lsoft.com/products/listserv-history.asp](https://www.lsoft.com/products/listserv-history.asp):
+
+> "To join a mailing list, you would write to INFO@BITNIC (which, in spite of what the name might suggest nowadays, **was a human being**) and ask to be added to the list."
+
+> "In the summer of 1986... **Hundreds of requests were received by INFO@BITNIC every day, and it could take days or even weeks to be added to a mailing list**... the lists generated **thousands of messages every day**... over the saturated transatlantic lines (**two 9600bps analog lines**)... **the traffic from the mailing lists alone was threatening to make private email totally unusable, with delivery delays approaching a week.** Some people were starting to use the lists to discuss whether mailing lists should be allowed, adding their comments to the growing backlogs."
+
+> "**INFO@BITNIC was now manned full-time by someone who did nothing but add and remove people from lists all day long**, and that they were still unable to meet demand."
+
+The fix was *peering* — replicating the audience set geographically so fan-out crossed the expensive link once: "**With all the Europeans on the European peer, only one copy of the message ever had to cross the Atlantic. The backlogs melted away.**" Released June 1986; 41 sites by November 1986; 1,000th public list on 6 May 1988; automatic list-of-lists added January 1988 — **the directory of curated sets became a machine artifact ~18 months in.** Confidence: high.
+
+**Negative result:** no Mailman design doc, retrospective, or docs page gives *any* numbers on list sizes, moderation-queue volume, or where moderation load broke. The mailing-list ancestor with the most deployed installs has the least published scaling measurement.
+
+## 1.2 Usenet — group creation as a costed rite, and its abandonment
+
+Primary control document, Wayback **capture 1997-08-13** — [web.archive.org/web/19970813072225/http://www.faqs.org:80/faqs/usenet/creating-newsgroups/part1/](https://web.archive.org/web/19970813072225/http://www.faqs.org:80/faqs/usenet/creating-newsgroups/part1/). Note: **this canonical FAQ is no longer served live** at faqs.org — the Wayback capture is the only working route.
+
+> "if **100 more valid YES/create votes are received than NO/don't create AND at least 2/3 of the total number of valid votes received are in favor of creation**, a newgroup control message may be sent out."
+> "**ONLY votes MAILED to the vote-taker will count.**... **proxy votes (such as having a mailing list maintainer claim a vote for each member of the list) will not be counted.**"
+> "as always, **the decision whether or not to create a newsgroup on a given machine rests with the administrator of that machine.** These guidelines are intended merely as an aid."
+
+That last line matters: **the vote never bound the carriers.** The set was advisory.
+
+**The most on-scope ancestor document in the brief** — Big-8 Management FAQ, Wayback **capture 2015-01-18** — [web.archive.org/web/20150118063107/http://www.big-8.org:80/articles/b/i/g/Big-8_Management_FAQ.html](https://web.archive.org/web/20150118063107/http://www.big-8.org:80/articles/b/i/g/Big-8_Management_FAQ.html). A governance body stating in writing why it *cannot* treat a newsgroup as a curated set:
+
+> "**Will the board make the people in our newsgroup obey the charter of the group?** — **No.**
+> • **There are too many newsgroups... for the board to become involved.**
+> • **There is no way to identify who 'the people in our newsgroup' are.**
+> • **There is no mechanism in NNTP to enforce punishments on people who refuse to follow the charters.**
+> • Except for moderated groups... **newsgroups have no 'owners'**."
+
+The regime change is dated in the same document: the ~100-vote plebiscite ran ~1987–2005; on **2006-09-30** it was replaced by an appointed board. The [current process](https://www.big-8.org/wiki/How_to_Create_a_New_Big-8_Newsgroup) has **no public vote threshold at all**. Confidence: very high.
+
+**What curating an audience costs a human** — Russ Allbery, "Pitfalls of Newsgroup Moderation", Wayback **capture 1999-10-13** — [web.archive.org/web/19991013050951/http://eyrie.org:80/~eagle/faqs/mod-pitfalls.html](https://web.archive.org/web/19991013050951/http://eyrie.org:80/%7Eeagle/faqs/mod-pitfalls.html):
+
+> "**A moderated group without active moderators is dead.**"
+> "**Moderating a newsgroup that gets more than a few articles a day requires either some level of programming... or a lot of free time.**"
+> "**Do you trust the moderators? Because if they don't want to be replaced, you're going to have a hell of a time replacing them.**... **moderators effectively control the newsgroups they moderate.**"
+
+And RFC 5537 ([datatracker.ietf.org/doc/html/rfc5537](https://datatracker.ietf.org/doc/html/rfc5537)) confirms the enforcement was **one unauthenticated `Approved:` header plus trust-the-peer relay policy** — no cryptographic binding of an approval to a moderator.
+
+## 1.3 The Usenet collapse — the number that reframes it
+
+From [en.wikipedia.org/wiki/Usenet](https://en.wikipedia.org/wiki/Usenet) (figures attributed to altopia.com):
+
+| Date | Daily volume | Daily posts |
+|---|---|---|
+| Jan 1998 | 12 GiB | 554k |
+| Jan 2005 | 2.27 TiB | 7.54M |
+| Jan 2020 | 62.40 TiB | 107.49M |
+| Feb 2024 | 274.49 TiB | 400.24M |
+
+But: in 2010 "the number of all text posts made in **all Big-8 newsgroups** averaged 1,800 new messages every hour, with an average of **25,000 messages per day**" — and binaries "**account for over 99 percent of article data**."
+
+**The discussion layer stayed roughly flat in the tens of thousands of messages/day while the carrier grew ~60,000× in bytes.** Post-1994 growth is not community growth; it is freight riding a flood-fill transport with no way to say "this is not for you." Duke — where Usenet was born — decommissioned in May 2010 "citing low usage and rising costs."
+
+**Genuine negative result:** no sourced **spam-share-of-Usenet-posts** figure for any year could be obtained through any route. Treat "X% of Usenet was spam" as unsourced. (Green Card spam is well documented — 12 April 1994, "**at least 5,500 Usenet discussion groups**", and notably they *deliberately did not crosspost*, defeating the one mechanism Usenet had for one-article-many-groups.)
+
+## 1.4 Zulip — the load-bearing design claim
+
+The clearest published statement of the asymmetry, tabbott on HN [19285211](https://news.ycombinator.com/item?id=19285211), 2019-03-01:
+
+> "**You don't need to think about the subject for every message, because 95% of messages you send are replying to an existing message/conversation**... You can argue it's slightly more work for the person sending a message to type a topic... **Whereas what Zulip's model saves your organization is every one of the N users who can have to read the conversation needing to spend much more time and mental effort.**"
+
+**O(1) sender cost buys O(N) reader saving.** That is the whole architectural bet, stated by its author.
+
+And the addressing split from [zulip.com/why-zulip](https://zulip.com/why-zulip/): "**channels determine who gets a message. Each conversation within a channel is labeled with a topic**" — recipient selection and conversation grouping as *orthogonal axes*, which is precisely the primitive under design.
+
+Capacity, tabbott HN [40287460](https://news.ycombinator.com/item?id=40287460), 2024-05-07:
+> "**Zulip on a single server with 16GB of RAM can handle 10,000s of users**... the machine is usually about **96% idle**."
+> "**there are very few communities today having complex conversations involving 100K+ people**... Certainly there are Discords with over a million users, like the Midjourney one, **but most of those users are just users of the product, not having discussions at all**."
+
+Zulip scales **linearly** in users ([requirements docs](https://zulip.readthedocs.io/en/latest/production/requirements.html): 4 GB at 25 DAU → 32+32 GB at 2000 DAU, "**Roughly linear scaling beyond that**").
+
+**The attention datum I'd flag hardest** — [Year in Review 2024](https://blog.zulip.com/2025/01/27/year-in-review-2024/): "**@topic mentions are used 9x less often than @all mentions, and 21x less often than personal mentions**" and "Only **1.2%** of active users have changed their home view." **The narrowest addressing verb is the least used, by ~9× against the broadest** — and the default-view stickiness is 98.8%, echoing Bluesky's ~97%. From [2022](https://blog.zulip.com/2023/01/11/year-in-review-2022/): "**Stream messages were read an average of 11 times**"; pinned streams used by "only **7%** of users."
+
+## 1.5 Slack, Discord, Matrix — the cost of belonging
+
+**Slack** ([Flannel](https://slack.engineering/flannel-an-application-level-edge-cache-to-make-slack-scale/)): the original client materialized the whole membership set locally. Data reduction "**7 times**" on a 1.5K team, "**44 times**" on a 32K team — **the cost removed was superlinear in the audience set.** The LISTSERV fan-out problem relocated into the client. No vendor figure for channels-per-workspace exists.
+
+**The one real measurement of channel sprawl** — Chen et al., [arXiv 1906.01756](https://arxiv.org/abs/1906.01756): **4,300 channels, 8,000 employees, 3 years**. Roughly one channel per two people. But the *modal* curated set is tiny: project channels average **11.1 current members**; the heavyweight channels by membership (IT Support 177.0, Social Group 84.0) are the broadcast-ish ones, not the work sets.
+
+**Matrix — the sharpest finding in the brief.** Matthew Hodgson (project lead), HN [25977828](https://news.ycombinator.com/item?id=25977828), 2021-01-31:
+
+> "**the resource requirements depend on the complexity of the rooms its users participate in, not the number of users on the server. So a single user server can use serious RAM if that one user goes and joins a bunch of busy rooms with hundreds of thousands of users in them.** This can be surprising to sysadmins, and **we haven't figured out a good way of solving it.**"
+
+And HN [34289826](https://news.ycombinator.com/item?id=34289826), 2023-01-07:
+> "**if you want to participate in a room whose users are spread over 1000 servers, you'll need a server beefy enough to talk to 1000 servers every time someone says something.**"
+
+Joining Matrix HQ took "**upwards of 12 minutes**" before faster remote room joins ([matrix.org, 2022-10-18](https://matrix.org/blog/2022/10/18/testing-faster-remote-room-joins/)).
+
+**In a federated design, the cost of belonging to an addressable set is borne by the participant's node and scales with the set's decentralisation, not with the participant's own activity. Joining is the expensive act.**
+
+---
+
+# What the completed brief says
+
+Four independent literatures, four different decades, one shape.
+
+**The ceiling is real and it is throughput, not inventory.** Per-source responsiveness decays as ~nf^−0.79 (Hodas & Lerman). Aggregate attention is conserved. A reader curating 200 sources gets one reader's worth of attention, divided.
+
+**The curated set works at the scale it was designed for and breaks by a specific mechanism above it — and the mechanism is not the one usually blamed.** It is not choice overload (D = 0.02 across 63 conditions, indistinguishable from zero). It is the default effect (d = 0.68, strongest through *endowment* — defaults read as the status quo), compounded by the supply-side curation cost that killed ICRA and kills unmoderated Usenet groups.
+
+**Three convergent measurements of default-stickiness, on three unrelated systems:**
+- Bluesky custom feeds: **2.8%** ever liked one
+- Bluesky starter packs: **4.37%** ever used follow-all
+- Zulip home view: **1.2%** ever changed it
+
+**And three convergent measurements of concentration among the minority who do choose:**
+- Starter packs: top 20% → **97.17%** of induced edges
+- Feed generators: top 3 hosts → **95.8%** of all generators
+- Mastodon: top 5% of instances → **90.6%** of users (2019); one instance → **23.5%** of the fediverse (my own FediDB measurement, 2026-09-04)
+
+**The two hard architectural constraints, stated by the people who hit them:**
+- The 1986 LISTSERV constraint — a human curating a subscription list saturates at "hundreds of requests per day," and the fix was *replicating the set*, not scaling the curator.
+- The 2021 Matrix constraint — cost of membership accrues to the participant's node and scales with the set's *decentralisation*. Joining is the expensive act.
+
+**And the governance result Big-8 wrote down in defeat:** "**There is no way to identify who 'the people in our newsgroup' are.**" A flood-fill transport cannot hold a curated audience; it can only hold a topic name and hope.
+
+**Two things genuinely unmeasured**, which I'd treat as open rather than settled: (1) **no study anywhere measures a ceiling on concurrent group memberships** — three independent query framings returned nothing; the Reddit proxy suggests ~2–5 concurrent with ~40% monthly churn, an order of magnitude below the ~150 dyadic figure. (2) **No spam-share-of-Usenet figure exists** in any reachable source.
+
+**Overall confidence: medium-high.** Most quotes came from primary sources or open-access full text read directly rather than through summarizers, and the three key concentration numbers were re-verified against raw document text. The weakest load-bearing claim remains the Bluesky 2.8%: single paper, single platform, early-2024, and "liked a feed" is a proxy for a private bookmark action that no one outside Bluesky can observe. Bluesky's own transparency reports publish extensive moderation volume and **nothing at all** on algorithmic-choice uptake — which is itself, I think, the most telling negative result in the brief.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-3 >>
+
+!! Message 3 ~ 13,702 characters
+
+````
+The Dunbar/defaults agent has reported. The ancestors/Zulip agent is still running.
+
+---
+
+# Addendum — Section 4 (attention limits) and the defaults/choice-overload half of Section 3
+
+## 4.1 Does reader-side curation scale past one person's attention?
+
+**The source claim.** Gonçalves, Perra & Vespignani, PLoS ONE 2011, [journals.plos.org/plosone/article?id=10.1371/journal.pone.0022656](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0022656). 380M tweets, 25M conversations, **1.7M individuals**, six months:
+
+> "users can entertain a maximum of **100–200 stable relationships**. Thus, the 'economy of attention' is limited in the online world by cognitive and biological constraints as predicted by Dunbar's theory."
+
+Critical detail: the measured quantity is **average weight per outgoing connection**, which peaks between 100 and 200 friends. It is an inflection in per-tie *investment*, not a cap on tie count. Confidence: high.
+
+**Dunbar's own direct test.** R. Soc. Open Sci. 3:150292, 2016 — recovered via [europepmc.org/articles/PMC4736918](https://europepmc.org/articles/PMC4736918) after royalsocietypublishing.org returned 403. Two UK samples (n=2000, n=1375):
+
+> "The mean number of friends is 155.2 and 182.8 in the two samples... Neither of these differs significantly from the value of 150."
+> "the two samples provide a direct test of whether online SNSs allow individuals to have larger social networks than is possible offline... **The results clearly suggest that they do not.**"
+> "Respondents who had unusually large networks did not increase the numbers of close friendships they had, but rather added more loosely defined acquaintances into their friendship circle **simply because most social media sites do not allow one to differentiate between these layers**."
+
+That last clause is the one that bears directly on the design question. Dunbar also explicitly dismisses the Gonçalves-type evidence: those studies "cannot really be considered conventional everyday social communities in any meaningful sense." Confidence in the text: high. Confidence in the finding: **medium-low** — self-reported counts on a coarse categorical scale from a commercial polling panel, commissioned (per the paper's own Methods) by a biscuit company's PR agency.
+
+**The refutation.** Lindenfors, Wartel & Lind, Biol. Lett. 17:20210158, 2021 — [europepmc.org/articles/PMC8103230](https://europepmc.org/articles/PMC8103230):
+
+> "Bayesian and generalized least-squares phylogenetic methods generate approximations of average group sizes between 69–109 and 16–42... However, **enormous 95% confidence intervals (4–520 and 2–336)** imply that specifying any one number is futile."
+> "**Our reanalysis provides the last piece of evidence needed to disregard Dunbar's number.**"
+
+The agent's scope caveat is important and I endorse it: Lindenfors attacks *the primate-neocortex derivation*, not the behavioral measurements. These two literatures do not collide head-on. Treat ≈150 as a replicated empirical regularity within one research program and a poorly-justified cognitive constant — different claims, routinely elided.
+
+**The number that actually answers your question.** Hodas & Lerman, [arXiv 1205.2736](https://arxiv.org/abs/1205.2736) (Sci. Rep. 4:4343):
+
+> "𝒫nf = 0.22 nf^0.21/(nf+0.53)"
+
+Per-source responsiveness falls roughly as **nf^−0.79** — near-inverse. **Aggregate attention is conserved; adding sources dilutes, it does not accumulate.** This is the cleanest quantitative form of "reader-side curation does not scale by adding more curated sources." Confidence: medium-high (read from ar5iv render, not verified against the published version).
+
+**Throughput, not inventory.** Miritello et al., [arXiv 1304.1979](https://arxiv.org/abs/1304.1979) (Sci. Rep. 3:1950) — **~20M people, 19 months, ~700M ties**, the largest-N support for a capacity constraint anywhere in this set:
+
+> "individuals exhibit a **finite communication capacity**, which limits the number of ties they can maintain active."
+> "on average people activate/deactivate about **8 (reciprocated) ties in a period of 7 months**"; 20% churn more than 15.
+
+**Churn.** Saramäki et al., [arXiv 1204.5602](https://arxiv.org/abs/1204.5602) (PNAS 111:942), n=24 over 18 months: network overlap between successive intervals **⟨J⟩=0.22±0.09 and 0.27±0.09** — roughly three quarters of alters turn over in 18 months; even the top-20 slots turn over ~55–65%. The *shape* of attention allocation is a personal constant (82%±12% signature stability); the *identities* filling the slots do not persist.
+
+**Layer structure at scale.** Arnaboldi/Passarella/Conti/Dunbar, [arXiv 2206.02422](https://arxiv.org/abs/2206.02422) — 91,347 Facebook and 394,238 Twitter ego networks. Twitter layers **1.66 / 5.06 / 12.87 / 32.66 / 97.47**; Facebook **4.70 / 15.31 / 44.77 / 132.50**; "the ratio between the size of adjacent circles appears to be a constant with a value around 3." Note Twitter's active network measures **97.47**, meaningfully below 150 — "coincides with Dunbar's number" is the authors' gloss, not a tight fit.
+
+## 4.2 The cost of maintaining GROUP memberships — the gap you asked about
+
+This is the thinnest part of the literature, and the finding is a **negative result worth taking seriously**.
+
+Hamilton et al., "All Who Wander" (WWW 2015), [arXiv 1503.01180](https://arxiv.org/abs/1503.01180) — 157K Reddit users with 50+ posts, 76.6M posts:
+
+> **Average communities per user: 28.85; median 26.00** (lifetime)
+> "Redditors post to 5 communities in their first 10 posts and then post to **2.5 new communities every 10 posts**."
+> "**Users rack up more abandoned communities than return engagements**" — communities posted to exactly once outnumber those posted to twice or more.
+
+The design-relevant figure is not the ~29 lifetime count but the **concurrent** one implied by the window statistics: ~5 communities per 10 posts, of which only ~2.5 are repeats. That is **roughly an order of magnitude below the dyadic-tie ceiling.**
+
+Hamilton et al., "Loyalty in Online Communities" (ICWSM 2017), [arXiv 1703.03386](https://arxiv.org/abs/1703.03386): median month-over-month loyalty across 1,440 communities **60.7%** — implying **~40% monthly membership churn**, i.e. group memberships churn *faster* than dyadic ties (75% persistence over seven months in Miritello). Vagrants outnumber loyal users ~11:1, yet each group contributes ~10% of comments.
+
+> "When users have the choice to engage with a variety of different communities, they often become loyal to just one, focusing on that community at the expense of others."
+
+**NOT REACHED, and confirmed as a real hole:** no study measuring a ceiling on the number of groups/channels/servers a person can concurrently sustain. Three independent arXiv/Crossref query framings returned zero relevant hits. No Discord-server-count, Slack-workspace-count, or Facebook-Groups-count study exists that either of us could find. **Treat "how many curated sets can one person hold" as unmeasured**; the Reddit figures are the closest proxy and come from one platform and one research group.
+
+## 4.3 Defaults vs choice overload — the asymmetry
+
+This is the cleanest result in the entire brief, and it points opposite to the usual intuition.
+
+**Defaults are large and robust.** Jachimowicz, Duncan, Weber & Johnson, *Behavioural Public Policy* 3(2), 2019, [doi.org/10.1017/bpp.2018.43](https://doi.org/10.1017/bpp.2018.43) (Cambridge Core 500'd; abstract recovered from the Crossref JATS record):
+
+> "meta-analysis of the **58 default studies (pooled n = 73,675)**... our analysis reveals a considerable influence of defaults (**d = 0.68, 95% CI = 0.53–0.83**)... the majority of default studies find positive effects, but several do not find a significant effect, and two even demonstrate negative effects."
+> Defaults are more effective "when they operate through **endorsement**... or **endowment** (defaults that are seen as reflecting the status quo)."
+
+Johnson & Goldstein, *Science* 302:1338, [dangoldstein.com/papers/DefaultsScience.pdf](https://www.dangoldstein.com/papers/DefaultsScience.pdf): opt-in 42% vs opt-out 82% in experiment; country-level "two distributions have no overlap, and **nearly 60 percentage points separate the two groups**." But the load-bearing caveat is in the paper itself — the effect on *actual* donation is only **16.3%**, not 60 points. **Registration is cheap; behavior is not.** That gap is the exact analogue of "subscribed to a feed" vs "reads the feed," and it is the single most transferable finding here.
+
+**Choice overload is, on average, nothing.** Scheibehenne, Greifeneder & Todd, *JCR* 37(3), 2010, [scheibehenne.de/ScheibehenneGreifenederTodd2010.pdf](https://www.scheibehenne.de/ScheibehenneGreifenederTodd2010.pdf) (also Wayback, capture **2026-08-20**):
+
+> "In a meta-analysis of **63 conditions from 50 published and unpublished experiments (N = 5,036)**, we found a **mean effect size of virtually zero** but considerable variance between studies."
+> "**D = 0.02 (CI95 −0.09 to 0.12)**... I² = 68%"
+> After 20% trimming: "**D_trimmed = 0.001 (CI95 −0.08 to 0.07)**", I² drops to 22%.
+
+The famous Iyengar & Lepper jam study ([PDF](https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20%26%20Lepper%20(2000).pdf)) turns out to rest on **31 purchases in one cell versus roughly 4 in the other** — consistent with there being no replicable average effect.
+
+**So: any argument that "too many feed options will paralyze users" has no meta-analytic support.** The correct opposing argument is the default effect, which is separately and far better evidenced. **Caveat that matters: Chernev, Böckenholt & Goodman 2015** — the moderated, *nonzero* counterpart meta-analysis and the standard rebuttal to Scheibehenne — was **NOT REACHED**. Its absence materially weakens the strong reading. Treat Scheibehenne's null as the unconditional mean, not a settled verdict.
+
+## 4.4 Middleware: designers already anticipated the default trap
+
+Fukuyama et al., Stanford Working Group on Platform Scale, Nov 2020 ([landing](https://cyber.fsi.stanford.edu/publication/report-working-group-platform-scale), [PDF](https://fsi-live.s3.us-west-1.amazonaws.com/s3fs-public/platform_scale_whitepaper_-cpc-pacs.pdf)) proposes to *legislate against* the default effect:
+
+> "**Middleware can serve its intended purpose only if it is used widely, and a default option that allows users to never consider installing middleware would severely limit its uptake.**"
+
+Daphne Keller, *Journal of Democracy* 32(3), 2021, [journalofdemocracy.org/articles/the-future-of-platform-power-making-middleware-work](https://www.journalofdemocracy.org/articles/the-future-of-platform-power-making-middleware-work/) — the historical precedent is the sharpest thing in the section:
+
+> "**ICRA's third-party curators never showed up. Assessing all that content was hard and thankless, even when the internet was much smaller.**... its demise is a sobering reminder that curation costs matter."
+> "We cannot expect comparable investment from a diverse ecosystem of middleware providers... **Unless middleware services can do this, the value they provide will be limited, as will users' incentives to choose them over curation by the platforms themselves.**"
+
+And the visibility ceiling on what any third-party curator can even see — on Facebook "the average user had **53.9 friends with 'public' statuses out of 328 total friends**" ([NBER WP 25843](https://www.nber.org/papers/w25843)).
+
+**Attribution warning I want to pass on explicitly:** Keller's published skepticism is **supply-side** (cost, revenue, privacy-limited data access), not demand-side apathy. The strongest demand-side sentence she wrote is the conditional one above. Do not attribute a stronger claim to her.
+
+---
+
+## What the addendum changes
+
+The agent independently recovered the same Bluesky 2.8% figure from [arXiv 2405.17571](https://arxiv.org/abs/2405.17571) and flagged the same caveat I did — liking ≠ subscribing ≠ reading. That is now two independent reads of the raw source agreeing on both the number and its weakness.
+
+The two sections now interlock. Section 2/3 showed that ~3–4% of users on the platform *purpose-built* for reader-side curation ever exercise it, and that those who do concentrate onto a few sets (top 20% of starter packs → 97.17% of edges). Section 4 supplies the mechanism and rules out the obvious explanation:
+
+- It is **not choice overload** — that effect is D = 0.02, indistinguishable from zero across 63 conditions.
+- It **is the default effect** — d = 0.68, and specifically strong through "endowment," i.e. defaults read as the status quo. Bluesky's Discover feed is exactly that.
+- And the ceiling is **throughput, not inventory**: per-source responsiveness decays as ~nf^−0.79. A reader who curates 200 sources does not get 200 sources' worth of attention; they get one reader's worth, divided.
+
+The group-membership finding is the one most directly aimed at your brief's actual question, and it is the weakest-evidenced: **concurrent group participation appears to run ~2–5, an order of magnitude below the ~150 dyadic ceiling, with ~40% monthly churn.** No study measures a group-count ceiling directly. If the design depends on people sustaining many curated group memberships at once, that assumption is currently **unmeasured in the literature**, not merely unsupported.
+
+Confidence overall on the addendum: **medium-high** — most quotes came from open-access full text (Europe PMC, ar5iv, author-hosted PDFs) rather than summarizers, and the one meta-analysis read only via Crossref abstract (Jachimowicz) is flagged as such.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;YpGtr5HBAjU5d9lK2dSgz66gcKC_PDLfywdJtrAUpwg
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,177 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/3-facebook-trusted-contacts-deprecation-d2b750 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/3-facebook-trusted-contacts-deprecation-d2b750.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 3. Facebook 'Trusted Contacts' deprecation. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/3-facebook-trusted-contacts-deprecation-d2b750"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 3. Facebook "Trusted Contacts" deprecation
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 15,291 characters
+
+````
+## Research Report: Empirical/Academic Measurement of Social/Guardian/Trustee-Based Account & Key Recovery
+
+Methodology note: WebSearch was unavailable this session (budget exhausted before I could use it) — all findings below come from direct WebFetch/curl retrieval of primary-source PDFs (verified by reading the actual paper text myself, not by trusting AI-generated summaries, which I caught fabricating numbers once and discarded). Where I could not retrieve a primary source, I say so explicitly rather than guess.
+
+---
+
+### 1. Brainard, Juels, Rivest, Szydlo, Yung — "Fourth-Factor Authentication: Somebody You Know" (ACM CCS 2006)
+
+- **Verified via full-text read** of the actual paper (people.csail.mit.edu/rivest/pubs/BJRSY06.pdf, pp.168–178).
+- **Finding (negative/important):** This paper contains **NO empirical user data whatsoever**. It is a cryptographic-protocol and threat-modeling paper (the "vouching"/SecurID "vouchcode" scheme). It formally proves prevention/detection properties (`prob{A(u):PN} < ε` etc.) but reports zero measured percentages, response rates, or attack-success rates.
+- The paper's own text states: *"We are presently in the process of conducting a small pilot study to understand user interaction with and refine our prototype system"* — i.e., at publication time no study had even been run.
+- **Corroboration:** Schechter et al. 2009 (below), citing this same paper, states explicitly: *"To our knowledge, no usability results have been made available"* for the Brainard et al. system.
+- **Confidence: 20/20** that no numbers exist in this paper — this is a clean, well-documented negative result, not an absence-of-evidence guess.
+
+---
+
+### 2. Schechter, Egelman, Reeder — "It's Not What You Know, But Who You Know: A Social Approach to Last-Resort Authentication" (CHI 2009, Microsoft Research)
+
+- **Verified via full-text read** of the actual 10-page PDF (microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf). This is the real, primary empirical study — the strongest single source for this topic.
+- Deployed a live-looking prototype at `recover.live.com` (made to appear as a genuine Windows Live ID feature) to preserve ecological validity; trustees were **not told** they were in a study.
+
+**Experiment 1 — Reliability (N=43 invited, real Hotmail users' real-world trustees):**
+- 43 individuals invited → 30 loaded instructions → 26 responded → 19 made an actual effort to contact ≥1 trustee.
+- **17 of 19 (89%)** who made the effort successfully obtained the 3 required trustee codes and authenticated.
+- **18 of 19 (94%)** would have succeeded under a relaxed 2-of-4 threshold.
+- **72% (13/18)** of successful participants had to be reminded who their own trustees were (major usability failure).
+- Timing: 8/17 (47%) completed in <100 min; 12/17 (66%) in <1 day; 15/17 (88%) in <2 days.
+- Compared favorably to personal/"secret" questions, whose highest reported aggregate recall rate in prior work was 80% (Podd et al. 1996; Schechter's own parallel "It's No Secret" study).
+
+**Experiment 2 — Security against forged-email attacks (N=15 lab participants, 97 valid trustees emailed, 89 in combined dataset):**
+- Attack emails (co-designed with security researcher Dan Kaminsky) asked trustees to send a code, or to forward the authentication email.
+- Only **16 of 97 (16%)** trustees responded at all during the sequestration window; of those, **2 (12.5%)** fell for the attack.
+- Combined with follow-up self-reports (total N=89 trustees): **4/89 (4%) attack successes**, 52/89 (58%) failures, 33/89 (37%) no response.
+- Modeled attacker success probability against the deployed system: **0.46%** for a 2-code threshold, **0.019%** for a 3-code threshold.
+
+**Experiment 3 — Security against phone-based social engineering by close acquaintances (N=9 pairs — spouses, a mother/son-in-law, long-term friends):**
+- 42 valid trustee calls reached.
+- **19 of 42 (45%)** of these highly-motivated, well-acquainted-attacker calls **succeeded** in extracting a code or authentication email.
+- Success rate was **56% (14/25)** when the caller already personally knew the trustee, vs. **29% (5/17)** when they didn't (not statistically significant given N, but suggestive).
+- Paper's own conclusion: *"telephone attacks by those well acquainted with the account holder posed a significant risk"* — email attacks were comparatively weak, phone attacks by intimates were the dangerous case.
+
+- **Confidence: 20/20** — I read the primary PDF directly and hand-verified every number against its source table/paragraph (Table 1, Table 2, Table 3, and the prose).
+
+---
+
+### 3. Facebook "Trusted Contacts" deprecation
+
+- **Could not verify a specific date.** WebSearch was unavailable (budget exhausted) and my direct URL probes were inconclusive: a guessed Facebook Help Center URL for the feature (`facebook.com/help/193948957302091`) currently returns "This Page Isn't Available," which is *suggestive* the feature is gone but is **not solid evidence** — Facebook help IDs are often login-gated or simply guessed wrong. I could not reach a corroborating news article or archived Facebook Help Center snapshot (Internet Archive's Wayback Machine was intermittently "Temporarily Offline" during this session, and DuckDuckGo/Bing/searx fetches were all blocked by CAPTCHA/anti-bot walls with no working alternative).
+- **State plainly: this claim (Facebook removed Trusted Contacts, commonly reported ~2022) is UNVERIFIED by me in this session.** Treat any date I might otherwise recall as unconfirmed and do not cite it as fact.
+- **Confidence: 3/20** — negative/inconclusive finding, not a measurement.
+
+---
+
+### 4. Google — recovery mechanism effectiveness (adjacent to guardian-based, but directly on-topic for "general account-recovery success measurement")
+
+**a) Google Security Blog, "New research: How effective is basic account hygiene at preventing hijacking?" (May 17, 2019)** — fetched and parsed raw HTML myself (not model-summarized):
+- SMS code sent to a **recovery phone number**: blocked **100% of automated bots, 96% of bulk phishing, 76% of targeted attacks**.
+- **On-device prompts**: blocked **100% of automated bots, 99% of bulk phishing, 90% of targeted attacks**.
+- With **no recovery phone number** (falling back to knowledge-based challenges): still ~100% vs. bots, but phishing protection **drops as low as 10%**.
+- Friction cost: in an experiment, **38% of users didn't have their phone** when challenged; **34% couldn't recall their secondary email**.
+- "Hack-for-hire" targeted-attack study: automatic protections **delayed/prevented up to 66%** of the targeted attacks studied; **zero** users who exclusively used security keys were compromised.
+- URL: https://security.googleblog.com/2019/05/new-research-how-effective-is-basic.html — **Confidence: 19/20** (raw HTML extracted and grepped by me, not paraphrased by a model).
+
+**b) Bonneau, Bursztein, Caron, Jackson, Williamson — "Secrets, Lies, and Account Recovery: Lessons from the Use of Personal Knowledge Questions at Google" (WWW 2015)** — full PDF fetched and read (static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf):
+- Massive scale: "hundreds of millions" of secret answers, over 1 million answers per question, **11 million account-recovery claims** sampled for detailed analysis.
+- **40% of English-speaking US users could not recall their secret-question answers** when they needed to use them for recovery.
+- SMS reset codes succeeded **>80%** of the time by comparison — i.e., secret questions are markedly *less* reliable than SMS-based recovery.
+- 37% of users who admitted giving fake secret answers said they did so to make them "harder to guess" (counterproductively).
+- This is **not** a trustee/guardian study, but it's the best-measured large-N data point on "recovery success rate months/years after enrollment" (bullet 4 of your ask) I could locate — flagging it as adjacent/contextual, not core social-authentication evidence.
+- **Confidence: 19/20**.
+
+---
+
+### 5. Cryptocurrency wallet key management / recovery usability
+
+**a) Eskandari, Barrera, Stobert, Clark — "A First Look at the Usability of Bitcoin Key Management" (NDSS Workshop on Usable Security, USEC 2015)** — full text read (arxiv.org/pdf/1802.04351):
+- **Method: expert cognitive walkthrough by the authors** on 6 Bitcoin clients — **not** a study with real end-users, and **reports no quantitative loss/recovery-success percentages**.
+- Directly states the structural problem: *"if access to [a password] is lost, online services generally offer account recovery mechanisms... No such recovery mechanism exists for self-managed cryptographic keys."*
+- **Negative finding:** no measured N, no percentages — qualitative/heuristic only.
+- **Confidence: 19/20** on what the paper does/doesn't contain (read directly).
+
+**b) Krombholz, Judmayer, Gusenbauer, Weippl — "The Other Side of the Coin: User Experiences with Bitcoin Security and Privacy" (Financial Cryptography 2016)**
+- Confirmed to exist via CrossRef/Semantic Scholar (DOI 10.1007/978-3-662-54970-4_33, published in the FC 2016 proceedings volume, print-dated 2017).
+- **Could not retrieve the primary PDF** — every direct/mirror URL I tried 404'd or was blocked (SBA Research, TARA/TCD repository, ACM/Springer paywalled, sci-hub deliberately not used).
+- **Secondary citation found** (Bushager, Mirza, Alsalem, "Bitcoin Security and Privacy: A Study of Users' Experiences," Sustainability & Resilience Conference 2018, freely fetched and read from KnE Publishing) cites Krombholz et al. as reporting: *"the majority [of] participants didn't take any security steps... while **22% of the users have lost money due to security violations or self-induced errors**."* — **I have not verified this 22% figure against Krombholz's own paper text**, only against a third party's citation of it. Treat with reduced confidence.
+- **Confidence: 8/20** on the 22% figure specifically (secondhand, unverified against primary); 20/20 that the paper exists with that DOI/venue/year.
+
+**c) Voskobojnikov, Wiese, Mehrabi Koushki, Roth, Beznosov — "The U in Crypto Stands for Usable: An Empirical Study of User Experience with Mobile Cryptocurrency Wallets" (CHI 2021)** — full text obtained via Wayback Machine's cached copy of the ACM PDF and read directly:
+- **Method:** qualitative thematic analysis of app-store reviews — corpus of **45,821 reviews**, of which **6,859 were qualitatively coded**. Not a controlled recovery-success experiment.
+- Rich qualitative evidence that seed-phrase/recovery failure is a recurring, severe complaint (users losing seed phrases, being unable to recover after phone loss/app reinstall, no built-in recovery for non-custodial wallets), including direct user quotes (e.g., R405: *"I don't [have] the [seed phrase] anymore"*).
+- **No aggregate percentage of users experiencing recovery failure is reported** — it's a coded-themes paper, not a rate/statistic paper. This is an important negative finding for your ask #4.
+- **Confidence: 19/20** on paper contents (read primary text).
+
+**d) Mai, Pfeffer, Gusenbauer, Weippl, Krombholz — "User Mental Models of Cryptocurrency Systems – A Grounded Theory Approach" (SOUPS 2020)** — full text fetched directly from usenix.org and read:
+- **N = 29** participants, qualitative Grounded Theory study (semi-structured interviews + drawing/card-sort tasks), **not** a quantitative recovery-success study.
+- Findings on backup: participants frequently misunderstand seed-phrase backup requirements; paper recommends wallets *"enforce seed phrase back-ups"* and *"periodic seed phrase querying."*
+- **No numeric loss/recovery-rate percentages reported** — again, thematic/qualitative only.
+- **Confidence: 19/20**.
+
+**e) Social recovery wallets (Argent-style guardians, ERC-4337 account abstraction) — targeted academic usability study:**
+- **Negative finding:** I searched OpenAlex ("social recovery wallet usability," "social-network-based wallet management") and found only design/systematization papers (e.g., "A Social-Network-Based Cryptocurrency Wallet-Management Scheme," IEEE Access 2018 — a technical scheme proposal, not a usability study; "Security Aspects of Cryptocurrency Wallets — A Systematic Literature Review," ACM CSUR 2023 — a survey). **I found no academic study empirically measuring human usage/success rates of guardian-based social-recovery crypto wallets** (SOUPS/CHI/USENIX/PETS/CCS/FC/NDSS venues). This is a clean gap.
+- **Confidence: 15/20** that this gap is real (limited by exhausted WebSearch — a targeted search might surface something a full-text/metadata search missed, but multiple query variants on OpenAlex all failed to surface one).
+
+---
+
+### 6. Secret sharing / password sharing with trusted others in practice
+
+- I was unable to retrieve full text of the classic HCI paper in this space (Singh, Cabraal, Demosthenous, Astbrink, Furlong, "Password Sharing: Implications for Security Design Based on Social Practice," CHI 2007) — OpenAlex full-text search did not surface it by title, and WebSearch was unavailable to locate a direct PDF link.
+- **Negative finding, stated plainly:** I could not independently verify this paper's content or find a specific study quantifying trustee/guardian social-engineering susceptibility beyond Schechter et al. 2009 (Section 2 above), which remains the single strongest, most directly on-topic, fully-verified source for your core question.
+
+---
+
+### Summary table of confirmed quantitative findings
+
+| Study | Venue/Year | N | Key measured number | Confidence |
+|---|---|---|---|---|
+| Schechter, Egelman, Reeder | CHI 2009 | 19 (reliability); 89 trustees (email attack); 42 calls (phone attack) | 89% trustee-recovery success; 4% email-attack success; 45% phone-attack success | 20/20 |
+| Google security blog | 2019 | large-scale internal | SMS recovery blocks 96% bulk phishing / 76% targeted; on-device prompts 99%/90% | 19/20 |
+| Bonneau et al. (Google) | WWW 2015 | 11M recovery claims | 40% can't recall secret answers; SMS >80% success | 19/20 |
+| Bushager et al. (citing Krombholz et al. FC16, unverified primary) | 2018 (2016) | secondhand | 22% of Bitcoin users lost money to security violations/self-errors | 8/20 |
+| Brainard et al. | CCS 2006 | none | no empirical data exists in this paper | 20/20 (negative) |
+| Eskandari et al. | USEC 2015 | expert-only | no recovery mechanism exists for self-managed keys; no % reported | 19/20 (negative) |
+| Voskobojnikov et al. | CHI 2021 | 45,821 reviews / 6,859 coded | qualitative only, no aggregate loss/recovery rate | 19/20 (negative) |
+| Mai et al. | SOUPS 2020 | 29 | qualitative only, no aggregate rate | 19/20 (negative) |
+| Facebook Trusted Contacts deprecation | — | — | unverified this session | 3/20 |
+| Social-recovery-wallet usability study | — | — | none found | 15/20 (negative) |
+
+No local files were read; all sources above were fetched live from the web (arxiv.org, microsoft.com, security.googleblog.com, static.googleusercontent.com, usenix.org, web.archive.org, people.csail.mit.edu, knepublishing.com) and, where downloaded, saved to `/tmp/*.pdf` and parsed with `pdftotext` by me directly to avoid relying on any tool's own summarization.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;p3pVILStdD-IHG1zjhLPXmV_Bmtb5c-jl2jNBVvsy0A
+
+<<^ code="&#x0004;" -> to=? >>

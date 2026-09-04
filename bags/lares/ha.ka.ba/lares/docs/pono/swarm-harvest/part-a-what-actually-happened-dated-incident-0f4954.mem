@@ -1,0 +1,211 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-what-actually-happened-dated-incident-0f4954 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-what-actually-happened-dated-incident-0f4954.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: PART A — WHAT ACTUALLY HAPPENED (dated incidents). Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-what-actually-happened-dated-incident-0f4954"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! PART A — WHAT ACTUALLY HAPPENED (dated incidents)
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 29,657 characters
+
+````
+# Distro archive-key custody, rotation, and compromise recovery — findings
+
+All URLs verified by direct fetch during this session (2026-09-03). Where I inferred rather than read it, I say so.
+
+---
+
+## PART A — WHAT ACTUALLY HAPPENED (dated incidents)
+
+### A1. Debian, Nov 2003 — four servers rooted; archive key rolled as part of recovery
+- **2003-11-21** announcement: `klecker` (security, non-us, www-master, qa), `master` (BTS), `murphy` (lists), `gluck` (web/cvs/people) compromised. "The archive is not affected." https://chronicles.debian.org/www/News/2003/20031121
+- **2003-12-02** investigation report, with a UTC timeline: attacker logged into klecker with a **sniffed password** 2003-11-19 17:00; rootkits on master (17:47), murphy (18:35), gluck (Nov 20 20:54); discovered via kernel oopses (the `do_brk()` local root, unfixed in the running kernels); all accounts deactivated Nov 21 00:00. Archives verified against externally-stored md5 lists, signed `.changes` files from off-host archives, and mirror logs. https://chronicles.debian.org/www/News/2003/20031202
+- **KEY ROLLOVER — confirmed primary source.** James Troup, "recovery status update", **2003-12-05**: a **new automatic archive signing key** `1024D/30B34DD5`, "Debian Archive Automatic Signing Key (2003 v2)", created **2003-12-03** (I verified the creation timestamp by `gpg --list-packets` on https://ftp-master.debian.org/keys/ziyi_key_2003v2.asc). https://lists.debian.org/debian-devel-announce/2003/12/msg00001.html
+  - The mail does **not** state the old 2003 key was on a compromised box; it presents the new key as part of recovery. *Confidence that the roll was caused by the compromise: high (timing + placement in the recovery mail). Confidence that the old private key was actually exposed: low — never stated.*
+  - Same mail: home directories were "sanitized" — **gpg secret keys and ssh private keys were deleted by filename** from developer home dirs on the .d.o machines, with the explicit caveat that anything named otherwise was missed and must be assumed compromised.
+  - Same mail, separate cause: due to the **ElGamal sign+encrypt weakness** (Nov 2003), "a bunch of keys got pro-actively removed from the keyring." Holders of type-20 *subkeys* could revoke and resubmit; holders of a type-20 *primary* key "lose" and had to go through full key replacement. **I could not find a count** of how many DD keys this removed.
+- Next annual key: "New 2004 Automatic Archive Signing Key" `1024R/1DB114E0`, **2004-01-15**. https://lists.debian.org/debian-devel-announce/2004/01/msg00007.html
+
+### A2. Debian, July 2006 — gluck compromised; NO key impact
+- **2006-07-12 18:47 UTC**, James Troup: gluck compromised, most other .d.o machines locked to DSA only. https://lists.debian.org/debian-devel-announce/2006/07/msg00003.html
+- **2006-07-13** report: entry via a **compromised developer account** (stolen "a while ago") plus a fresh **local root kernel bug**; suspicious mail at 02:43 UTC, gluck off trusted media by 04:30 UTC; "the only obviously compromised binary was `/bin/ping`"; "The compromised account did not have access to any of the restricted Debian hosts. Hence, neither the regular nor the security archive had a chance to be compromised." https://chronicles.debian.org/www/News/2006/20060713
+- **No archive key was rolled** in 2006 for this reason — the 2006 annual key (`010908312D230C5F`) was created 2006-01-03, six months earlier (verified from the key packet). *Confidence: high.*
+
+### A3. Debian, May 2008 — OpenSSL predictable PRNG (DSA-1571 / CVE-2008-0166)
+- **2008-05-13**, Florian Weimer. Root cause: a Debian-specific patch to OpenSSL; **first vulnerable upload 0.9.8c-1 on 2006-09-17**, so ~20 months of key generation affected. https://lists.debian.org/debian-security-announce/2008/msg00152.html
+- Scope per the advisory: "all cryptographic key material… generated by OpenSSL versions starting with 0.9.8c-1… is recreated from scratch," **plus all DSA keys *ever used* on an affected system** (nonce leakage), even if generated elsewhere. Affected: SSH, OpenVPN, DNSSEC, X.509, TLS session keys. **GnuPG and GNUTLS keys not affected** — so this did *not* touch the archive signing key or the developer keyring.
+- Detector `dowkd.pl` plus `openssh-blacklist`; Debian's wiki lists **30+ applications** with per-service regeneration recipes (openssh, apache/ssl, openvpn, openswan/strongswan, bind9, postfix, exim4, dovecot, cyrus, courier, tor, dropbear…). https://wiki.debian.org/SSLkeys
+- **The official rollover hub `https://www.debian.org/security/key-rollover/` is now a 404** (page removed; last-modified stamp on the 404 template is 2011).
+- **Numbers: I could not find an authoritative total** of keys regenerated. The keyspace figure commonly quoted (~32,768 per key type/size/arch, from PID-only seeding) I did **not** verify from a primary source this session — the "98,301" figure that appears in a summary of the wiki page is *not* something I could corroborate; treat it as unverified.
+- Red Hat's counterpart advisory for the same class of weak keys arrived later as part of A4 (`openssh-blacklist`).
+
+### A4. Red Hat + Fedora, August 2008 — intrusion; Fedora rolled its package signing key, Red Hat did not
+Primary sources (Red Hat's own list archive host `listman.redhat.com` no longer resolves; recovered via Wayback):
+
+| Date | Event | Source |
+|---|---|---|
+| 2008-08-14 19:15 EDT | Frields: "Important infrastructure announcement" — *stop updating packages* | `redhat.com/archives/fedora-announce-list/2008-August/msg00008.html` (Wayback) |
+| 2008-08-16 | Status: account system + app servers being restored | …/msg00009.html |
+| 2008-08-19 02:07 UTC | Critical path restored; **new SSH host fingerprint for Fedora Hosted** published | …/msg00011.html |
+| **2008-08-22 12:00 UTC** | **The decision**: one compromised box "was a system used for signing Fedora packages"; "high confidence that the intruder was not able to capture the passphrase"; "the passphrase was not used during the time of the intrusion and is not stored on any of the Fedora servers." **"Because Fedora packages are distributed via multiple third-party mirrors… we have decided to convert to new Fedora signing keys."** | https://www.redhat.com/archives/fedora-announce-list/2008-August/msg00012.html (Wayback: `web.archive.org/web/20210202162244/…`) |
+| 2008-08-22 | RHSA-2008:0855 — Red Hat detected an intrusion; attackers **signed a limited number of OpenSSH packages** with a Red Hat key. Affected: RHEL 4 (i386, x86_64) and RHEL 5 (x86_64 only). CVE-2008-3844. Remedy = updated packages + an **`openssh-blacklist` detection tool**. | https://access.redhat.com/errata/RHSA-2008:0855 |
+| 2008-09-05 | Jesse Keating: successful compose of **all** F8 + F9 updates re-signed with new keys | …/2008-September/msg00002.html |
+| 2008-09-09/10 | "Fedora 8 and 9 updates re-enabled" — two-stage transition: stage 1 pushes `fedora-release`/PackageKit **signed with the OLD key** into the old repo, pointing at new repo locations + new keys; stage 2 the user picks up the re-signed world | …/2008-September/msg00007.html |
+| **2008-09-18/19** | Frields: "we believe Fedora's recovery efforts are complete." | …/2008-September/msg00009.html |
+
+**Elapsed: ~5 weeks from discovery to declared complete** (Aug 14 → Sep 18), with ~3.5 weeks of no updates for F8/F9 users.
+
+What Fedora actually had to do (the plan, with completion checkmarks, still live):
+https://fedoraproject.org/wiki/New_signing_key and https://fedoraproject.org/wiki/Enabling_new_signing_key
+1. Generate a **new key for F8+F9 stable and a separate key for testing**; 2. automatic key migration; 3. push new-key updates into a **new repo location**; 4. **re-sign every existing F8/F9 update and testing package**; 5. **re-sign every existing F8/F9 release package**; 6. strip the old repo to the minimum needed to bootstrap the transition; 7. later ship an RPM that **purges the old key from users' rpmdb**; 8. **create a new key for Fedora 10**; 9. (open) decide whether to re-sign the RPMs inside already-shipped ISOs.
+- The transitional `fedora-release-{8,9}-*.transition` RPMs were signed by the **old** key `4f2a6fd2` — i.e. the compromised-adjacent key was deliberately used one last time to bootstrap trust in its successor.
+- **Two distinct blast radii, stated explicitly:** the Fedora key is unrelated to the RHEL key and unrelated to the EPEL key. Red Hat **did not rotate** the RHEL signing key — it asserted RHN was uncompromised and shipped a blacklist instead. *Confidence: high, from RHSA text.*
+- **This is the origin of Fedora's per-release key practice.** Verified today: `https://fedoraproject.org/fedora.gpg` currently bundles exactly four keys — `Fedora (43)`, `(44)`, `(45)`, `(46)`.
+- **NOT FOUND:** the promised "more detailed report" on the intrusion. The Sep 18 mail says the security investigation continues and Fedora intends to publish one; I found no such post-mortem on fedoraproject.org (`/wiki/Infrastructure_Compromise_2008` and variants are 404) or in fedora-announce-list through Oct 2008.
+
+### A5. kernel.org, August–October 2011 — infrastructure rooted; a full developer re-keying, not an archive-key roll
+- **Primary source, 2011-08-29**, John "Warthog9" Hawley to `users@kernel.org`, "[KORG] Master back-end break-in" (full PGP-signed text): trojan found on **H. Peter Anvin's personal colo machine** and on **hera**; also **odin1**, with precursors on **demeter2, zeus1, zeus2**. "Break-in seems to have initially occurred **no later than August 12th**." **openssh/openssh-server/openssh-clients binaries were modified and running live** — around **August 19th**; trojan startup file in `rc3.d`; attackers had **root**; vector unknown. Advice: change passwords and **update ssh keys**, "particularly if you had an ssh private key on hera." http://pastebin.com/raw/BKcmMd47
+- Detected/announced publicly **2011-08-28/31**; https://lwn.net/Articles/457142/
+- **2011-09-30**, H. Peter Anvin, "kernel.org status: establishing a PGP web of trust" — the re-keying instruction to every developer: **generate a NEW 4096-bit RSA key** ("DSA keys should be considered obsolete"), generate a revocation certificate and hold it, sign the new key with the old one *only if you are confident the old was never jeopardized* — otherwise **revoke the old key**, publish, then get **as many kernel developers as possible to sign in person** (phone signing only if you'd testify in court). Mentions a *considered* **escrow service for revocation certificates** — I found no evidence it was ever built. https://lwn.net/Articles/461236/
+- **2011-09-30**, Greg KH, "kernel.org status: hints on how to check your machine for intrusion" — a 7-step host-forensics checklist sent to LKML, premised on "it has made it clear that some developers, at least, have had their systems penetrated." https://lkml.org/lkml/2011/9/30/425 (readable via `web.archive.org/web/2015id_/…`)
+- Site down ~3 weeks; **reopened 2011-10-04** with the front-page notice: "kernel.org suffered a security breach. Because of this, we have taken the time to rearchitect the site… We will be writing up a report on the incident in the future." (verified in Wayback snapshots 20111004011725, 20111014, 20111101).
+- **The report was never delivered.** Ars Technica, 2013-09-24: still unpublished two years on; the promise itself was **quietly removed from kernel.org between 2013-03-01 and 2013-03-02**; officials never disclosed how many machines were compromised or the entry vector. Rootkit identified as **Phalanx**. Greg KH to Ars: all releases were regenerated from git and old backups, "nothing was found to be tampered with." https://arstechnica.com/information-technology/2013/09/who-rooted-kernel-org-servers-two-years-ago-how-did-it-happen-and-why/
+- A 27-year-old Florida man was charged in 2016. https://arstechnica.com/tech-policy/2016/09/feds-pin-brazen-kernel-org-intrusion-on-27-year-old-programmer/
+- **Important framing:** kernel.org has **no archive signing key**. Releases are signed by the *individual* making them (Linus, Greg). So the 2011 remediation was an **N-way re-keying of developer identities**, not a single-key roll. https://www.kernel.org/signature.html
+
+### A6. Kali Linux, April 2025 — a documented **LOSS** (not compromise) of the archive signing key
+This is the answer to your item 5, and it is unusually clean because they say it in plain words.
+- **2025-04-28** blog post: "**We lost access to the signing key of the repository, so we had to create a new one.**" Repository **frozen since Friday 2025-04-18** so nobody got a broken update in the interim; unfrozen that week signed with the new key. Every Kali system worldwide fails `apt update` with `Missing key 827C8569F2518CC677FECA1AED65462EC8D5E4C5` until the user **manually** `wget`s the new keyring. https://www.kali.org/blog/new-kali-archive-signing-key/
+- Old key: `44C6513A8E4FB3D30875F758ED444FF07D8D0BF6` ("Kali Linux Repository"), created **2012-03-05**, expiry 2027-02-04 — i.e. **13 years on one key**. New key `827C…C8D5E4C5` "Kali Linux Archive Automatic Signing Key (2025)", created **2025-04-17**, expires 2028-04-17 (3y).
+- Explicit Q&A: *"So your key was compromised and you don't want to admit it, right?" — "No. As you can see we still include the old key in the keyring; if it was compromised we would have removed it and provided a revocation certificate."* The recovery bootstrap is: **the new key is signed by Kali developers' personal keys, published to keyserver.ubuntu.com** — that is the only cryptographic bridge offered. Images re-spun as `2025.1c` purely to carry the new keyring.
+- Precedent at the same project: **2018** — they let the GPG key **expire accidentally** (same class of custody failure, different symptom).
+- LWN coverage 2025-04-29: https://lwn.net/Articles/1019255/
+- **No secret sharing, no escrow, no revocation certificate for the lost key.** The key is simply gone and the trust transition was manual and out-of-band for every user.
+- Other candidates I probed for "lost archive key" (Void Linux post-founder-departure, Arch master-key holders resigning, Debian's own history) produced **no documented unrecoverable loss** — Arch's wiki only notes that master keys get replaced "usually when a master key holder resigns," which is orderly rotation, not loss.
+
+---
+
+## PART B — WHAT POLICY PRESCRIBES (as documented today)
+
+### B1. Debian archive keys: custody, rotation, and the 3-of-5 Shamir backup
+Canonical page: https://ftp-master.debian.org/keys.html
+
+**Rotation.** "**The current procedure is that there is one ftp-master key per release** (former procedure introduced a new key once per year)." The annual era is visible in the retired-key list — `ziyi_key_2002`, `2003`, `2003v2`, `2004`, `2005`, `2006` — and the per-release era from `archive-key-4.0` (etch) onward. Corroborated by the `debian-archive-keyring` changelog (https://metadata.ftp-master.debian.org/changelogs/main/d/debian-archive-keyring/unstable_changelog): package first released **2006-01-10**; annual keys retired to `debian-archive-removed-keys.gpg` in 2007 (2004, 2005) and 2008 (2006); thereafter one archive key + one security-archive key + one stable-release key per release, added **years before use** and removed one or two releases after.
+
+**Three key families, deliberately separate:**
+- *Archive automatic signing key* — signs `Release` for every suite; held by ftp-master automation.
+- *Security archive automatic signing key* — the security archive is signed by the ftp-master key **only**, not the stable release key.
+- *Stable release key* — stable releases are signed by **both** the automatic key and a per-release stable key held by the **Release Team** (`debian-archive-keyring` is maintained by the Release Team; recent uploads by Jonathan Wiltshire, earlier Adam D. Barratt / Niels Thykier / Philipp Kern).
+- Plus *upload processing keys* (`debian-archive-processing-2022`) which sign mail from the archive software and **"must not be used by APT."**
+
+**Where the operational private key lives — concrete evidence.** dak's production config on ftp-master:
+```
+SigningHomedir        "/srv/ftp-master.debian.org/s3kr1t/dot-gnupg";
+SigningPassphraseFile "/srv/ftp-master.debian.org/s3kr1t/yubikey/pin";
+```
+https://salsa.debian.org/ftp-team/dak/-/raw/master/config/debian/dak.conf
+→ The signing subkey is on a **YubiKey attached to ftp-master (`fasolo`)**, with the token **PIN in a file on the same host**. So: online hardware token, not an HSM cluster, not an air-gapped signer. The threat model this defeats is *key exfiltration*, not *use by an attacker who owns the box*. *Confidence: high that this is the current configuration; medium on my inference about the security-archive host, which I did not verify separately.*
+
+**Generation / replacement procedure (documented + code):**
+- Policy text: a new key is generated by one ftpmaster, then **signed by that ftpmaster and by other ftpmasters and ftpteam members, with fingerprint verification by phone call**; published on the keys page, added to `debian-archive-keyring`, and **announced to debian-devel-announce well in advance of use**. Real examples: bullseye keys announced **2021-01-28** for a key generated 2021-01-17 and not used until the bullseye release or old-key expiry in 2027 (https://lists.debian.org/debian-devel-announce/2021/01/msg00003.html); trixie keys announced **2025-04-06** for keys generated 2025-03-30 (https://lists.debian.org/debian-devel-announce/2025/04/msg00001.html). Both mails: "signed by two FTP masters and the current archive signing keys" for the previous release — an explicit **signature chain from the outgoing key to the incoming one**.
+- Key shape: **RSA 4096, sign-only primary [SC] + separate RSA 4096 signing subkey [S], 10-year expiry**, `cert-digest-algo SHA512`.
+- The generator script: https://salsa.debian.org/ftp-team/dak/-/raw/master/scripts/debian/generate-archive-key — refuses to run unless `GNUPGHOME` is on **tmpfs**; generates the key with an empty passphrase, splits the secret, *then* sets the passphrase; exports the full private key and the private-subkey-only version separately (the subkey-only export is what goes onto the operational token).
+
+**Revocation.** Five **designated revokers** are baked into the key at generation, named in the script: Ansgar Burchardt, Joerg Jaspert, Luke Faraone, Mark Hymers, Thorsten Alteholz. Any **one** of them can revoke unilaterally (`revocation_shares = 0`, `revocation_holders` empty — the revocation certificate is *not* split today).
+
+**Backup — this is the secret-sharing answer.** From the policy page: "the secret part of it will be backed up in one additional way. The program **gfshare** (package `libgfshare-bin`) (**a Shamir's secret sharing scheme implementation**) is used to produce **5 shares of which 3 are needed** to recover the secret key." In code: `backup_holders = ${revokers[@]}` (the same 5 people), `backup_shares = 3`, and each share is individually **OpenPGP-encrypted to its holder's key from the Debian keyring**, with recombination instructions embedded in the plaintext.
+
+### B2. Debian keyring-maint (developer keys) — no shared secret, a signature-graph gate
+- Keyrings: `debian-keyring` (DDs), `debian-nonuploading`, `debian-maintainers`. Maintained by **keyring-maint**; https://wiki.debian.org/DebianKeyring
+- **Cadence:** "Updated keys sent via HKP will be folded into the active Debian keyring **at least once a month**"; the wiki suggests a **5–6 week** update interval as the expectation. Changes are announced mechanically as "Debian Maintainers Keyring changes" from `ftpmaster@ftp-master.debian.org` (example: https://lists.debian.org/debian-project/2024/05/msg00042.html — that batch: 8 keys added, 1 removed). Adds/replaces/revokes go through **RT** (`keyring@rt.debian.org`). Debian **does not** import from the public keyserver network automatically.
+- Entry requirement: an OpenPGP key **signed by at least two existing project members**.
+- **Key replacement rules** (https://keyring.debian.org/replacing_keys.html) — two regimes, and the split is exactly the interesting part:
+  - *Old key X still trusted:* Y **must** be signed by X, **must** be signed by ≥2 keys in the active keyring, the request **should** be signed by X, and Y **should** sign back into the keyring. keyring-maint reserve the right to demand more signatures if the swap would weaken the web of trust.
+  - *X compromised, unavailable, or no longer trusted* (explicitly including "keys removed due to being insufficiently strong"): Y **must** be signed by two active DDs, and **another DD must sign the replacement request on Alice's behalf**, naming both fingerprints and the Debian login. If X is compromised, a **revocation certificate must accompany** the request. If X was **lost**, a revocation certificate "**should** be provided if possible."
+  - Explicitly ruled out (2003 mail): signing the new key with only a broken old key "is not a valid trust path."
+- Key strength guidance: RSA ≥4096 with SHA2, Ed25519 preferred by modern defaults. https://wiki.debian.org/Keysigning
+
+### B3. Fedora / Red Hat today
+- **Per-release key** — verified from the shipped bundle (F43–F46 in `fedora.gpg`), a practice adopted as step 11 of the 2008 recovery plan.
+- Signing is performed by **sigul**: an isolated signing server + a **bridge** that gates access and moves RPM data to/from koji + clients. Keys live in the signing server's own store, unlocked by **per-key passphrases**, with mutual auth via NSS certificates; the CA private key is deliberately kept **out of** the sigul databases. https://docs.pagure.org/sigul/
+- I found **no evidence of HSM or threshold custody** in the documented sigul design. *Confidence: medium — I read the sigul setup doc, not Fedora's current internal infra SOP, which I could not reach (`docs.fedoraproject.org/en-US/infra/sysadmin_guide/sigul-servers/` returned a wrong page).*
+- Note the 2008 statement's implicit custody model: a key file plus a **human-held passphrase never stored on any Fedora server** — which is precisely why they could argue the key was probably safe even though the signing host was rooted. That is *split custody by factor* (material vs. passphrase), not secret sharing.
+
+### B4. kernel.org today (post-2011)
+- **Account gate:** "With extremely rare exceptions, accounts will not be issued unless there are enough signatures on the PGP key to satisfy the web of trust… make sure your PGP key is signed by **at least two other people who already have an active kernel.org account**." Video-conference keysigning is permitted, requiring **two** existing keyring members who have met or worked with you — with an explicit warning about **deepfakes**. https://korg.docs.kernel.org/accounts.html
+- An **authentication subkey on your PGP key doubles as your SSH key**; **FIDO2** keys accepted, submitted as a PGP-clearsigned file; Nitrokey issued for 2FA; a **gitolite transparency log** records repository actions.
+- **Custody guidance for maintainers** (Ryabitsev, in-tree): certification key kept **offline** (backed up to encrypted external media + paperkey, then **deleted from `~/.gnupg`**), day-to-day **subkeys moved onto a smartcard** (Yubikey/Nitrokey) so malware cannot extract them; **TOFU+WKD/DANE** rather than classical WoT for verification; **sign all git tags** (`-s`); `patatt` for patch attestation. Foundational line: "**trust must always be placed with developers and never with the code hosting infrastructure.**" https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.html
+- Kernel.org publishes a per-account WoT analysis: https://www.kernel.org/doc/wot/
+- Release verification: per-developer signatures + WKD (`gpg2 --locate-keys torvalds@kernel.org`), with the stated recovery path being "revoke the compromised key and **re-sign all previously signed releases** with the new key." https://www.kernel.org/signature.html
+
+### B5. Arch Linux — the contrasting model
+Packages are signed by individual maintainer keys; those maintainer keys must be **co-signed by at least three of the Arch Master Signing Keys**, and users trust the master keys. Master keys are replaced "usually when a master key holder resigns." https://wiki.archlinux.org/title/Pacman/Package_signing (The `DeveloperWiki:Master_Keys` page no longer exists.)
+
+---
+
+## PART C — Custody model, side by side (your explicit question)
+
+| System | Signing model | Backup/recovery model |
+|---|---|---|
+| **Debian archive/security keys** | **Single-key custody, online.** One OpenPGP signing subkey on a **YubiKey on ftp-master**, PIN in a file beside it. One signature on `Release`. **No threshold signing.** | **SECRET SHARING — Shamir, 3-of-5** via `gfshare`, shares held by the 5 ftpmasters, each share PGP-encrypted to its holder. **Revocation is 1-of-5** (5 designated revokers, any one suffices). Note the asymmetry: *destroying* trust is 1-of-5, *restoring* the key is 3-of-5. |
+| **Debian stable release key** | Single-key custody, Release Team. Stable gets **two independent signatures** (archive key + release key) — the closest thing to m-of-n in the ecosystem, but it is 2-of-2 *reinforcement*, not a threshold. | Not documented on the ftp-master page; *I could not find* the release key's backup arrangement. |
+| **Debian developer keyring** | Per-developer single-key custody. Entry/replacement gated by **≥2 independent DD signatures** — threshold *trust*, not threshold *signing*. | No escrow. Loss handled administratively (replacement rules above); revocation certificate "should" be provided if possible. |
+| **Fedora** | **Single-key custody per release**, on the sigul signing server; **passphrase deliberately not stored on any Fedora server** (split by factor). No threshold. | No secret sharing found. Recovery in 2008 was **generate new key + re-sign the entire archive + bootstrap via one last old-key-signed transition RPM**. |
+| **Red Hat (RHEL)** | Single-key custody. In 2008 the response to attacker-signed packages was a **blacklist, not a rotation**. | Not documented publicly. |
+| **kernel.org** | **No archive key at all.** Per-developer keys; releases signed by whoever cuts them; **git signed tags** are the integrity anchor. | The **web of trust is the recovery mechanism** — ≥2 existing-member signatures re-admit a re-keyed developer. Revocation-certificate escrow was *proposed* in 2011; no evidence it exists. |
+| **Arch Linux** | **m-of-n TRUST, not m-of-n signing:** each package carries **one** maintainer signature; that maintainer key must carry **≥3 master-key signatures**. | Master key replaced on holder departure; no shared-secret scheme documented. |
+| **Kali Linux** | **Single-key custody, no backup.** One key from 2012 to 2025. | **None.** When it was lost, recovery was: new key, signed by developers' personal keys on a public keyserver, and a **manual `wget` on every installed system**. |
+
+**The generalization worth carrying:** across every system examined, package/archive signing is **single-key custody with one signature**. Nobody does threshold *signing*. Where m-of-n appears, it is in one of two adjacent places — (a) **recovering** a lost secret (Debian's 3-of-5 Shamir), or (b) **admitting** a key to the trust set (Debian's 2 DD signatures, kernel.org's 2 account-holder signatures, Arch's 3 master signatures). The signing operation itself is always a single online holder, and the recovery path in every incident above was the same shape: *mint a new key, get it signed by humans out of band, re-sign or re-point the archive, and push the new trust anchor to users through the old one if it still works — or by hand if it doesn't.*
+
+---
+
+## Explicitly NOT FOUND / low confidence
+1. **Fedora's promised 2008 post-mortem** — no evidence it was ever published. Same for **kernel.org's 2011 report**, which is *confirmed* never delivered and whose promise was silently deleted from the site on 2013-03-02.
+2. **Whether Debian's 2003 archive private key was actually exposed** — the roll is documented; the reason is not stated.
+3. **Count of Debian developer keys purged in the Nov 2003 ElGamal removal** — "a bunch."
+4. **Any total count of keys regenerated after DSA-1571.** The "98,301 weak key combinations" figure I saw in a secondary summary is **unverified** — I could not corroborate it from the wiki or the advisory. `https://www.debian.org/security/key-rollover/` is now a 404.
+5. **Fedora's current key custody in detail** (HSM? threshold?) — `docs.fedoraproject.org` infra SOP was unreachable; my sigul description comes from upstream docs and may lag Fedora's production setup.
+6. **Debian security-archive key custody** — I verified the ftp-master YubiKey config; I did not separately verify the security-master host.
+7. **Arch's `DeveloperWiki:Master_Keys` page is gone**; master-key rotation history not reconstructed.
+8. **No second documented case of an unrecoverable archive-key loss** besides Kali 2025 (+ Kali's own 2018 accidental-expiry precedent). I probed Void Linux, Arch, and Debian without finding one; absence here is weak evidence, since such events are embarrassing and often described as "rotation."
+
+Tooling note: `WebSearch` was exhausted and Brave/DDG returned 429/CAPTCHA to WebFetch. Working search path was `curl` + `https://r.jina.ai/https%3A%2F%2Fduckduckgo.com%2Fhtml%2F%3Fq%3D…`; `curl` against `web.archive.org` (including the CDX API) works even though WebFetch is blocked from that host, and was essential — Red Hat's 2008 list archives are otherwise unreachable (`listman.redhat.com` no longer resolves).
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;L3ddPNFyehx5qQ4_oseJ3NrxvJVQtI80pEW-VFWEam0
+
+<<^ code="&#x0004;" -> to=? >>

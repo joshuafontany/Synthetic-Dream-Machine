@@ -1,0 +1,362 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-is-the-mycelium-analogy-load-bearing-60097e >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-is-the-mycelium-analogy-load-bearing-60097e.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: TOPIC A — IS THE MYCELIUM ANALOGY LOAD-BEARING OR DECORATIVE?. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-is-the-mycelium-analogy-load-bearing-60097e"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! TOPIC A — IS THE MYCELIUM ANALOGY LOAD-BEARING OR DECORATIVE?
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 43,727 characters
+
+````
+## TOPIC A — IS THE MYCELIUM ANALOGY LOAD-BEARING OR DECORATIVE?
+
+### HEADLINE
+
+Split the biology into two piles and the answer changes sign.
+
+**Pile 1 — fungal trade mechanics under controlled conditions: SOLID.** Reciprocal, graded, local-discrimination exchange between a plant root and an AM fungus is measured, replicated, and now has a quantitative network-architecture paper behind it (Kiers 2011 → Whiteside 2019 → Oyarte Gálvez 2025). Hoarding and price-differential-driven relocation are *explicitly measured claims in the literature*, not metaphor.
+
+**Pile 2 — the popular "wood-wide web": CONTESTED, and the specific sub-claims the analogy usually leans on are the ones that failed.** "Mature trees preferentially send resources/defence signals to kin through networks" has, per a 2023 Nature Ecology & Evolution review, **no peer-reviewed published supporting evidence**. Even the defenders concede carbon transfer is small relative to the recipient's own photosynthesis and that no study cleanly separates the network pathway from the bulk-soil pathway.
+
+**The critical structural caveat:** every strong mechanism result in Pile 1 comes from *in vitro root-organ culture* — carrot roots on a plate, single fungal isolates. The 2025 Nature paper's ~500,000 tracked nodes are on agar. None of it is a forest, and none of it is a many-party network with competing hosts. If a protocol invariant is grounded on "mycelial revocation is local, decaying, graded, cost-bound," the *local, graded, cost-bound* parts have laboratory support; **the lineage/kin part has none**.
+
+---
+
+### 1. Kiers lab — the trade-network mechanism claims
+
+**Kiers et al., Science 333(6044):880–882, 12 Aug 2011.** DOI 10.1126/science.1208473 · https://pubmed.ncbi.nlm.nih.gov/21836016/
+Measured claims from the abstract: plants "detect, discriminate, and reward the best fungal partners with more carbohydrates"; fungi "enforce cooperation by increasing nutrient transfer **only to those roots providing more carbohydrates**." Conclusion: control is **bidirectional**, the symbiont "cannot be enslaved," and stability comes from **partners offering the best rate of exchange being rewarded**.
+→ This is the strongest single citation for *graded, reciprocal, exchange-rate-sensitive* allocation. Discrimination is at **root/hypha granularity, not whole-organism** — that is exactly the "local" property the analogy would need. (Full-text mechanism detail beyond the abstract: **NOT REACHED** — Science paywall.)
+
+**Whiteside et al., Current Biology 29(12):2043–2050.e8, 17 Jun 2019** (epub 6 Jun 2019). DOI 10.1016/j.cub.2019.04.061 · https://pubmed.ncbi.nlm.nih.gov/31178314/
+Quantum-dot-tagged phosphorus, multiple colours, tracked across a single fungal network simultaneously exposed to rich and poor patches. Verbatim mechanism claims:
+- they determined "where phosphorus was **hoarded, relocated, and transferred**" — **hoarding is a literal measured category, not a metaphor**;
+- increasing resource inequality *stimulated* trade: fungi (1) increased total P delivered to host roots, (2) **decreased allocation to storage**, (3) **moved resources within the network from rich patches to poor patches**;
+- single-particle tracking + high-res video showed "dynamic resource movement may help the fungus **capitalize on value differences across the trade network**, physically moving resources to areas of high demand to gain better returns."
+→ That last clause is as close to "price arbitrage" as the primary literature gets, and it is stated as **interpretation** ("may help"), not as a measured exchange rate. Exact fold-differences in transfer: **NOT REACHED** (abstract only; Cell Press paywall).
+Companion: Van't Padje et al., *ISME J* 2020, "Temporal tracking of quantum-dot apatite across in vitro mycorrhizal networks shows how **host demand can influence fungal nutrient transfer strategies**" (10.1038/s41396-020-00786-w); and *New Phytologist* 2020, "Mycorrhizal fungi **control phosphorus value** in trade symbiosis with host roots when exposed to abrupt 'crashes' and 'booms'" (10.1111/nph.17055). The lab's own vocabulary is price/value.
+
+**The 2025 Nature paper you asked me to find:**
+**Oyarte Gálvez L., Bisot C., Bourrianne P., … Stone H.A., Kiers E.T., Shimizu T.S., "A travelling-wave strategy for plant–fungal trade," *Nature* 639(8053):172–180, March 2025** (epub 26 Feb 2025). DOI 10.1038/s41586-025-08614-x · PMID 40011773 · PMC11882455 · https://pmc.ncbi.nlm.nih.gov/articles/PMC11882455/
+
+Measured numbers:
+| quantity | value |
+|---|---|
+| fungal nodes tracked | ~500,000 total; ~40,000 per plate |
+| cytoplasmic flow trajectories | ~100,000 |
+| travelling-wave speed | ~280 µm/h (wavefront "puller" hyphae), constant over time |
+| mean tip growth speed | ~240 µm/h |
+| tip branching rate α | ≈ 4 % per hour |
+| anastomosis (fusion) rate | ≈ β·ρ_sat ≈ 2 % per hour, near-constant through growth |
+| root transport efficiency Ê_r | held ≈ 0.5 (between MST and Delaunay extremes) **and kept constant over time** |
+| global efficiency Ê_g | rose 0.2 → ~0.5 over time (loops added) |
+| betweenness centrality | power law, P(BC) ~ BC^−γ, γ ≈ 0.3 |
+| saturation density | as low as 1,000 µm/mm² — an **order of magnitude below** free-living fungi |
+| BAS (absorbing structures) | ~30 % of network length, constant |
+| flow speeds | typical 0–20 µm/s, bursts to 120 µm/s; tipward ~30 % faster than rootward early on; speed rises with betweenness centrality and with distance from tips ("trunk routes") |
+| normalized carbon cost Ĉ | remained constant, at low levels |
+| system | *Rhizophagus irregularis* A5/C2 and *R. aggregatum* on ***Daucus carota* root organ culture** — in vitro, ≤600 h imaging, 30 d destructive sampling |
+
+Load-bearing reading: the fungus **self-regulates network density by fusion**, holds transport efficiency to roots *constant* while adding loops that shorten paths to *potential new partners*, and widens tubes + accelerates flow on high-betweenness trunk routes. That is a real, measured cost/coverage/transport trade-off with an architecture. It is **network-level control**, and the paper frames it as supply-chain design, not as pairwise local haggling.
+
+**Framing critiques.** Noë R. & Kiers E.T., "Mycorrhizal Markets, Firms, and Co-ops," *Trends in Ecology & Evolution*, Oct 2018, DOI 10.1016/j.tree.2018.07.007 — Kiers herself co-authors the paper arguing the market frame needs firms/co-ops as alternative organizational models, i.e. the plain "market" reading is already qualified from inside the lab. Walder & van der Heijden, *Nature Plants* 2015, "Regulation of resource exchange in the arbuscular mycorrhizal symbiosis": **NOT REACHED** (Crossref query failed; OpenAlex intermittently returned empty). A systematic survey of anti-market-metaphor papers: **NOT REACHED**.
+
+---
+
+### 2. The wood-wide web and the 2023 pushback
+
+**Karst J., Jones M.D., Hoeksema J.D., "Positive citation bias and overinterpreted results lead to misinformation on common mycorrhizal networks in forests," *Nature Ecology & Evolution* 7(4):501–511, published 13 Feb 2023.** DOI 10.1038/s41559-023-01986-1 · PMID 36782032. Author Correction: *Nat Ecol Evol* 7(4):623, DOI 10.1038/s41559-023-02035-7 (PMID 36922655).
+Note the real title — **"lead to misinformation on common mycorrhizal networks in forests,"** not "...and unsupported claims."
+
+The three claims and their verdicts, verbatim from the abstract:
+1. **CMNs are widespread in forests** — "insufficiently supported because results from field studies vary too widely, have alternative explanations or are too limited to support generalizations."
+2. **Resources are transferred through CMNs to increase seedling performance** — same verdict, same three reasons.
+3. **Mature trees preferentially send resources and defence signals to offspring through CMNs** — **"has no peer-reviewed, published evidence."**
+
+Citation analysis, verbatim: **"unsupported claims have doubled in the past 25 years"**; a bias toward citing positive effects "may obscure our understanding." Overall: "knowledge on CMNs is presently too sparse and unsettled to inform forest management."
+**NOT REACHED: the exact N of field studies, the number of forests/sites, and the specific citation-bias percentages.** nature.com 303-redirects to an IdP; the paper is `oa_status: closed` with no repository copy in OpenAlex; the U. Alberta press page returns 403; and no open-access citing paper I could reach quotes those figures. **I am deliberately not filling these from memory.**
+
+**Henriksson N. et al., "Re-examining the evidence for the mother tree hypothesis — resource sharing among trees via ectomycorrhizal networks," *New Phytologist* 239(1):19–28, published online 7 May 2023.** DOI 10.1111/nph.18935.
+Verbatim conclusions: "evidence of a **significant net C transfer via common mycorrhizal networks that benefits the recipients is still lacking**"; a fungus acting as a C pipeline between trees is "difficult to reconcile with **any adaptive advantages for the fungi**"; the hypothesis is "neither supported by boreal forest regeneration patterns nor consistent with the understanding of physiological mechanisms." Their methodological attack is on the isotope work specifically: "low detection limits, and small carbon discrimination in biological processes can cause researchers to make important inferences based on **miniscule shifts in isotopic abundance**, which can be misleading."
+
+**Robinson D.G. et al., "Mother trees, altruistic fungi, and the perils of plant personification," *Trends in Plant Science*, 2023.** DOI 10.1016/j.tplants.2023.08.010 (41 citations). Title carries the argument; full text **NOT REACHED**.
+
+**The defence.** Klein T. et al., "Belowground carbon transfer across mycorrhizal networks among trees: Facts, not fantasy," *Open Research Europe*, 3 Oct 2023, DOI 10.12688/openreseurope.16594.1, PMC10751480. Argues the evidence "is solid and accumulating" — **but concedes in the same letter that "C transfer is typically small compared to autotrophic C assimilation, making it less likely to have a direct impact on the recipient's growth,"** and its own reviewers note that the key studies (Klein 2016, Cahanovitc 2022) **lack controls separating the CMN pathway from bulk-soil mechanisms**.
+
+**Simard S.W., Ryan T.L., Perry D.A., "Opinion: Response to questions about common mycorrhizal networks," *Frontiers in Forests and Global Change*, 21 Jan 2025.** DOI 10.3389/ffgc.2024.1512518. Responds to Karst, Henriksson and Robinson jointly. Their evidence base as stated: microsatellite/DNA/microscopy/isotope work across arctic, boreal, temperate and tropical systems; **four genet-mapping studies** of CMNs (Beiler et al., Van Dorp et al. in interior Douglas-fir; one in Japanese pine); carbon transfer into both shoots and roots; kin-preferential defence signalling from Pickles, Asay, Gorzelak (2017); and context-dependence. Note that the count they themselves cite for spatial network mapping is **four studies**.
+**NOT REACHED: a formal Matters Arising / reply inside *Nature Ecology & Evolution*, and any Karst-et-al. rejoinder to Simard 2025.** PubMed lists no comment records on 36782032 beyond the erratum.
+
+**Status of "trees send carbon to their kin through fungal networks," specifically:** per Karst 2023, **zero peer-reviewed published evidence** for the preferential-to-offspring version. Simard 2025 counters with Gorzelak/Pickles/Asay for *defence signalling* to kin, not resource preference. Magnitude of transfer as a fraction of recipient C budget: not quantified by either side in anything I could reach — the defenders say only "small compared to autotrophic C assimilation." Network-vs-soil pathway: **never cleanly separated**, conceded by the defence.
+
+---
+
+### 3. Slime mould — Tero et al. 2010, with the numbers
+
+**Tero A., Takagi S., Saigusa T., Ito K., Bebber D.P., Fricker M.D., Yumiki K., Kobayashi R., Nakagaki T., "Rules for Biologically Inspired Adaptive Network Design," *Science* 327(5964):439–442, 22 Jan 2010.** DOI 10.1126/science.1177894 · full text obtained from the Hiroshima University repository: https://hiroshima.repo.nii.ac.jp/records/2008779
+
+Measured comparison, all normalized to the minimum spanning tree:
+
+| metric | Tokyo rail | Physarum (unconstrained) | Physarum (illuminated) | reference |
+|---|---|---|---|---|
+| cost TL_MST | ~1.8 | **1.75 ± 0.30** (n = 21) | clusters closer to rail | Delaunay triangulation = ~4.6× MST |
+| transport efficiency MD_MST | 0.85 | **0.85 ± 0.04** | — | lower = better |
+| fault tolerance (fraction of faults isolating part of network) | **4 %** | **20 ± 13 %** | **14 ± 4 %** | lower = better |
+| benefit/cost α = FT/TL_MST | ~0.5 | ~0.5 | ~0.5 | rail marginally higher at equal efficiency |
+
+Also: the Physarum solution used "about **30 % of the maximum possible number of links**."
+
+**What it actually showed:** cost and transport efficiency **matched** the rail network almost exactly. **Fault tolerance did not** — the real rail network is 3.5–5× better by their own measure (4 % vs 14–20 %). The paper's own sentence is that the rail network "showed marginally better resilience"; the numbers are not marginal.
+
+**The critiques, sourced from the paper itself:**
+- **Food sources were pre-placed at the answer.** "We observed Physarum connecting a template of **36 FSs that represented geographical locations of cities in the Tokyo area**." Tokyo itself was **an aggregate of seven food sources** "to match the importance of Tokyo as the center of the region." The plasmodium was started *at Tokyo*. The geography, the node set, and the hub weighting were all supplied.
+- **Geography was hand-imposed to improve the match.** Initial results differed from the rail network; the authors then constrained growth "by varying the intensity of illumination" to represent mountains and lakes, which "yielded networks with **greater visual congruence** to the real rail network."
+- **The model was tuned past the organism.** By raising I₀ to 2 and γ to 1.8 the simulation "achieved a benefit-cost ratio … **better than those of the rail or Physarum networks**, reaching a value of 0.7." Two free parameters move the result across the whole comparison band, which means the headline "comparable to Tokyo rail" is a point on a tunable curve, not a discovered optimum.
+- The paper concedes the outcome "depended slightly on the stochastic" initial fluctuations.
+
+**Adamatzky follow-ups: partially reached.** Located by title only — "Bio-development of motorway network in the Netherlands: a slime mould approach," *Advances in Complex Systems* 2012 (10.1142/s0219525912500348, 27 cites); "Fault tolerant network design inspired by Physarum polycephalum," *Natural Computing* 2012 (10.1007/s11047-012-9344-7); "Physarum wires" arXiv:1309.3583. **I found no published negative result and no failure-to-replicate, and no formal published critique of Tero 2010.** Absence of critique here is itself weak evidence — this literature is small and largely self-referential.
+
+---
+
+### 4. Did any real distributed system ship a mycelium/slime-mould design?
+
+**Finding: no — and the one prominent system carrying the name does not carry the mechanism.**
+
+- **ThreeFold `mycelium`** (https://github.com/threefoldtech/mycelium, created 2023-04-11, **207 stars**, last push 2026-08-17): "End-2-end encrypted IPv6 overlay network written in Rust," nodes in `400::/7`, x25519 identity, TCP/QUIC peering on port 9651, plus a message bus and SOCKS5 proxy. The README describes conventional locality-aware distance-vector-style routing with reroute on link failure. **There is no mycelial mechanism — no decay, no flow-reinforced edge weights, no market. The biology is the name only.** This is the clean example of *decorative*.
+- **Ant-colony routing.** AntNet (Di Caro & Dorigo, *JAIR* 9, 1998, DOI 10.1613/jair.530; arXiv mirror 1105.5449) reports it "showed **superior performance under all the experimental conditions**" against "**six state-of-the-art routing algorithms**" — **all in simulation**. I found **no evidence of any production deployment** of AntNet, ARA, or AnthocNet.
+- **GitHub sweep for ACO routing** returns only coursework and simulators — `lem-in` clones (a 42-school pathfinding exercise), `Ant-Colony-Routing-Simulation`, an ACO route optimizer inside an ML tutorial series. **No routing daemon, no shipped protocol.**
+- **Hacker News sweep** for `physarum`, `slime mould network`, `ant colony routing`: highest-scoring hits are art projects (sagejenson.com/physarum, 7 pts), a Wikipedia link (8 pts), a 2010 BBC story on Tero (1 pt), and simulation repos. **Nothing above single-digit points, nothing describing a deployed system.** Compare ActivityPub's HN footprint (500+ pts) for calibration.
+
+---
+
+## TOPIC B — WHAT MAKES A PATTERN-INTEGRITY LOCKABLE
+
+### HEADLINE
+
+**The measured shape of a good narrow waist is: the logically *weakest* specification still sufficient for the set of applications you have declared necessary — plus an explicit, enforced statement of which bits are invariant, plus active exercise of every must-ignore point.**
+
+Beck proves the first half formally. QUIC's RFC 8999 is the first mainstream protocol to *write down* the second half as a separate normative document. RFC 8701 (GREASE) is the third half — an extension point that is never exercised **rusts shut**, and you will only find out years later.
+
+**Observable symptoms that you froze the wrong layer:**
+1. **The escape hatch grows.** A generic, untyped, opaque call appears beside the frozen interface and absorbs everything the waist can't express (Unix `ioctl`; HTTP-as-universal-substrate — Honda et al.: "no longer a well defined or understood way to extend network functionality, **short of implementing everything over HTTP**").
+2. **The replacement can't win on merit.** EvoArch's finding #9: "the most stable protocols at the waist are often **not those with the highest quality**." A better successor with the *same* products loses to the incumbent's accumulated value — measured over 25+ years as IPv6.
+3. **Novel values get stripped in transit rather than ignored.** Honda's 4–14 % option-removal rate.
+4. **Semantics leak into the transport and second parties start enforcing them** (transparent proxies that must *understand* an option, not merely pass it).
+5. **Extension proposals fork into rival specs for the same feature** — the ActivityPub quote-post case: three FEPs, one FINAL, two DRAFT, incompatible.
+6. **A transition ships and then doesn't move for years** — Git SHA-256.
+
+---
+
+### 1. The two best sources
+
+**Akhshabi S. & Dovrolis C., "The Evolution of Layered Protocol Stacks Leads to an Hourglass-Shaped Architecture," SIGCOMM 2011, Toronto, 15–19 Aug 2011.** DOI 10.1145/2018436.2018460 (also CCR, 10.1145/2043164.2018460). Full text obtained.
+
+The model (**EvoArch**): a directed acyclic network of **L layers**; protocols are nodes; a node at layer *l* has **substrates** below and **products** above. Four principles only: (a) where a node's evolutionary value comes from, (b) **generality probability s(l), strictly decreasing with height** — default `s(l) = 1 − l/L`, i.e. 0.9, 0.8 … 0.1, (c) when two nodes compete, (d) when one kills the other (**competition threshold c**). Nodes are born; nodes die by competition. Under defaults with L=10, an hourglass (H > 0.8) forms **within a few rounds**, and **the median waist sits at layer 6** across nearly all runs.
+
+The ten stated findings that matter here:
+- #3: waist **location and width follow from the parameters** of the evolutionary process — not from layer semantics.
+- #4: parameterizes to something resembling the TCP/IP stack and explains the survival of those protocols.
+- #7: "few protocols at the waist … become **ossified, surviving much longer** than most other protocols at the same layer" — the **evolutionary kernels** (rank-1 kernel = oldest node ever born at the waist layer; measured over 1,000 evolutionary paths × 100 rounds).
+- #8: with heterogeneous quality, the lower half of the hourglass is **significantly smaller** than the upper half.
+- #9: kernels are **not the highest-quality nodes**.
+- #10 / §7.3, on IPv6, verbatim: "IPv6 does not offer new services compared to IPv4; it mostly offers many more addresses. This means that **IPv6 has, at most, the same products with IPv4, and so the latter is its competitor**. … even if the two protocols had the same set of products, IPv4 has much higher value and it wins."
+- **§5.5 design rule:** to get a *wider* waist you either lower competition intensity z (which "a network architect can[not] control") or "**design protocols that are largely non-overlapping in terms of services and functionality, so that they do not compete with each other**." The prescription for IPv6 was to ship it "not as a replacement to IPv4, but as **'the second network layer protocol'** required to support new services."
+- **§9 is a self-administered CRITICISM section** quoting an anonymous reviewer: "*we know the answer the model must produce, so (like Jeopardy) we have to find a model that can be tweaked to give that answer*." Same class of objection as the Physarum one, and the authors print it.
+
+**Beck M., "On the hourglass model," *Communications of the ACM* 62(7), published 24 Jun 2019.** DOI 10.1145/3274770. CACM version 403s; I used the author's identical arXiv preprint **arXiv:1607.07183, draft of 31 July 2016**. https://arxiv.org/pdf/1607.07183
+
+This is the formal answer to the operator's question. The apparatus:
+- **Spanning layer** (term from Clark) — the distinguished layer everything above is built on and everything below implements.
+- **1.1.2 Definition:** S1 is *weaker* than S2 iff S2 ⊢ S1; strictly weaker if not conversely.
+- **The Deployment Scalability Tradeoff:** "There is an inherent tradeoff between the deployment scalability of a specification against the degree to which that specification is [restrictive]."
+- **2.1 The Hourglass Theorem** (proved): if S1 is weaker than S2, then `post_P(S1) ⊆ post_P(S2)` and `pre_P(S1) ⊇ pre_P(S2)`. In words: **"a weaker layer specification has FEWER applications but MORE implementations."** The second clause is the folk intuition; the first is the part everyone gets wrong — weakening the waist does *not* buy you more things you can build on it.
+- **3.1/3.2:** you must therefore supply an external parameter **N, the set of necessary applications**. S is *sufficient* iff N ⊆ post(S). S is **minimally sufficient** iff sufficient for N and **no strictly weaker S′ is sufficient for N**.
+- **The design rule, verbatim:** "the choice of necessary applications **N is in fact the most directly consequential element** in the process of defining a spanning layer." You do not pick the waist. You pick N, and the waist is then the weakest thing that still covers N.
+- And the tradeoff is not escapable: "attempts to achieve both may display inherent limitations. An analogy would be attempting to build a see-saw that allows both ends to be elevated simultaneously." He names Unix's kernel interface as a spanning layer alongside IP, and notes the theorem "cannot be 'violated'" — ignoring it only forfeits one route to scale.
+
+---
+
+### 2. Where freezing the wrong layer was measured to hurt
+
+**IPv4 address width.** APNIC world figures, 7-day window ending **2026-09-04** (https://stats.labs.apnic.net/ipv6/XA): **43.53 % IPv6-capable, 41.52 % IPv6-preferred, from 232,815,453 samples.** Americas region 50.61 % / 49.48 %. RFC 2460 dates the IPv6 spec to 1998; ~28 years to reach under half. **NOT REACHED: Google's own statistics page** — https://www.google.com/intl/en/ipv6/statistics.html renders the number only in JS, and `/statistics/data/data.js` is a 404. EvoArch §7.3 supplies the *mechanism* for the slowness: a same-products successor competes with the incumbent instead of complementing it.
+
+**TCP ossification — Honda M., Nishida Y., Raiciu C., Greenhalgh A., Handley M., Tokuda H., "Is it Still Possible to Extend TCP?", IMC 2011.** Full text obtained (conferences.sigcomm.org/imc/2011/docs/p181.pdf).
+Method: active probing from **142 networks in 24 countries** (cellular, WiFi, wired; residential, commercial, academic), controlling both ends, on ports 34343 / 80 / 443.
+
+| test | port 34343 | port 80 | port 443 |
+|---|---|---|---|
+| unknown option in SYN **passed** | 129 (96 %) | 122 (86 %) | 133 (94 %) |
+| unknown option **removed** | 6 (4 %) | 20 (14 %) | 9 (6 %) |
+| unknown option in data passed | 129 (96 %) | 122 (86 %) | 133 (94 %) |
+| ISN **unchanged** | 126 (93 %) | 116 (82 %) | 128 (90 %) |
+| ISN modified in ≥1 direction | 7 % | **18 %** | ~10 % |
+| data-first sequence-hole test passed | 131 (97 %) | 120 (85 %) | 135 (95 %) |
+
+Key measured conclusions, in their words:
+- "it is still possible to extend TCP using TCP options, **so long as the use of new options is negotiated in the SYN exchange, and so long as fallback to regular TCP behavior is acceptable**."
+- **"it is unsafe for TCP extensions to embed sequence numbers in TCP options (or anywhere else), even if the extension negotiates use via a new option in the SYN exchange."** Because firewalls rewrite ISNs for anti-spoofing and then rewrite everything downstream: on port 34343, **5 of 9** paths both allowed unknown options *and* modified sequence numbers; port 80, **7 of 26**; port 443, **7 of 14**.
+- Two distinct middlebox classes: **"Elim"** (strips options, fixable by reconfiguration) and **"Proxy"** (terminates the connection, "would not only need to pass the option, but also **understand its semantics**" — "likely to be more difficult to upgrade"). **Six of eight** cellular paths that removed options were proxying the connection.
+- Verdicts on real extensions: MPTCP works or falls back; TcpCrypt deployable but fragile under resegmentation; **"TCP extended options in its current form is not safe to deploy."**
+- And the framing quote for the whole ossification problem: "IP options have been unusable for twenty years … there is no longer a well defined or understood way to extend network functionality, **short of implementing everything over HTTP**."
+
+**QUIC's answer.** **RFC 8999, "Version-Independent Properties of QUIC," M. Thomson, Standards Track, May 2021.** This is the deliberate, separately published narrow waist. §2 verbatim: "This document describes **the subset of QUIC that is intended to remain stable** as new versions are developed and deployed. … The primary goal of this document is to ensure that it is possible to deploy new versions of QUIC. By documenting the properties that cannot change, this document aims to preserve the ability for QUIC endpoints to negotiate changes to any other aspect of the protocol. As a consequence, this also **guarantees a minimal amount of information that is made available to entities other than endpoints**. **Unless specifically prohibited in this document, any aspect of the protocol can change between different versions.**" Frozen surface: long header, short header, connection ID, version field, version negotiation. Appendix A is an explicit list of *incorrect assumptions* an observer might make from QUIC v1.
+**RFC 9000** (QUIC transport, May 2021): §1 "QUIC authenticates the entirety of each packet and encrypts as much of each packet as is practical"; §6.3 "Endpoints MAY add reserved versions to any field where unknown or unsupported versions are ignored **to test that a peer correctly ignores the value**."
+
+**RFC 8701, "Applying GREASE to TLS Extensibility," D. Benjamin (Google), Informational, January 2020.** The clearest statement in the RFC series of *why* freezing needs active maintenance: "bugs may cause an implementation to reject unknown values. It will interoperate with existing peers, so **the mistake may spread through the ecosystem unnoticed**. Later, when new values are defined, updated peers will discover that **the metaphorical joint in the protocol has rusted shut** and the new values cannot be deployed without interoperability failures." Fix: advertise random reserved values constantly so non-conformance surfaces immediately.
+→ **Design consequence for a frozen pattern-integrity: a must-ignore rule that is never exercised is not a rule, it is a hope.**
+
+**HTTP methods.** **RFC 5789, "PATCH Method for HTTP," Dusseault (Linden Lab) & Snell, Standards Track, March 2010** — 11 years after HTTP/1.1 (RFC 2616, 1999) and ~14 after HTTP/1.0. Its own rationale: "The existing HTTP PUT method only allows a complete replacement of a document." A partial-update verb was simply *absent* from the frozen method set and took over a decade to add — and even then the *patch document format* was left to media types rather than specified, which is where the interop cost landed.
+**WebDAV methods: NOT REACHED as a measured failure.** The IANA HTTP Method Registry CSV URL I tried 404s, and I did not reach a study quantifying WebDAV method support on the open web. I will not assert numbers here.
+
+**Git's object model — 20 years stable; the hash is the frozen field that will not move.** Source: https://git-scm.com/docs/hash-function-transition (doc current as of Git **2.55.0**, 2026-06-29).
+- Trigger: **SHAttered, 23 Feb 2017**. SHA-256 chosen **late 2018** (commit 0ed8d8da374).
+- What exists: `repositoryFormatVersion = 1` with `extensions.objectFormat = sha256` and `extensions.compatObjectFormat = sha1`; pack index v3; a loose-object index; bidirectional SHA-1↔SHA-256 translation tables; `gpgsig-sha256`; `^{sha1}`/`^{sha256}` revision notation.
+- What does **not** exist: "SHA-256 support in Git protocol is **not yet implemented** — out of scope for this initial design." No shallow clones, no unfetched submodules, no `alternates` borrowing from SHA-1 repos. **"Until protocol support exists, using SHA-256 on public-facing servers is strongly discouraged."**
+- Five-phase plan with **no completion date**; phase 5 is expected "at least one year after SHA-256 signature verification is widespread."
+→ The measured shape of the failure: the *format* moved in ~2 years; the *interop* has not moved in ~8. The hash identifier is not a field inside Git, it **is** Git's naming waist — every ref, every signature, every hosting provider, every CI system. Freezing an identifier that doubles as a security primitive means the security expiry date becomes the protocol's expiry date. **NOT REACHED: a citable statement of GitHub/GitLab SHA-256 repository support status** (`gh` search on org discussions 422s).
+
+**Unix "everything is a file" and `ioctl`.** Beck's paper explicitly treats the Unix kernel interface as a spanning layer of the same class as IP (arXiv:1607.07183, §intro). The `ioctl` argument is the Hourglass Theorem's first clause made visible: `read`/`write`/`open`/`close` is weak, so it has many implementations — and correspondingly **fewer** applications, so an untyped opaque escape hatch had to be bolted on to restore the missing ones. Sockets are the same evidence: they did not fit the file waist and got their own call family. **I did not reach a measured study of ioctl proliferation** (e.g. a count of ioctl codes in the Linux tree); treat this paragraph as an application of Beck's theorem, not as measured evidence.
+
+---
+
+### 3. The deliberate-underspecification failure
+
+**ActivityPub** — W3C Recommendation **23 January 2018** (https://www.w3.org/TR/2018/REC-activitypub-20180123/; HN, 24 Jan 2018, 504 pts).
+
+The repair mechanism is the **FEP process**, run on Codeberg at https://codeberg.org/fediverse/fep, bootstrapped by **FEP-a4ed, "The Fediverse Enhancement Proposal Process," received 2020-10-16, FINAL 2021-01-18** — i.e. a *community-run* amendment track stood up **~2.5 years after the Rec**, outside W3C, because the Rec had no evolution mechanism of its own. Repo shows 170+ open issues.
+
+**The quote-post saga, dated, as the concrete measured artifact of underspecification** — three rival specs for one feature:
+
+| FEP | author | status | dates |
+|---|---|---|---|
+| **FEP-e232 Object Links** | silverpill | **FINAL** | received 2022-08-01, finalized **2023-12-03** |
+| **FEP-dd4b Quote Posts** | Evan Prodromou (Social Web Foundation) | DRAFT | received **2025-02-21** |
+| **FEP-044f Consent-respecting quote posts** | — | DRAFT | received **2025-04-03** |
+
+They are **mechanically incompatible**. FEP-e232 represents a quote as a `Link` object inside the `tag` array with `mediaType: application/ld+json; profile="…activitystreams"` and an `href`. FEP-dd4b represents it as an `Announce` **activity** carrying a `content` property. Prodromou's own motivation section states the problem exactly: "**the ActivityPub specification does not describe how to use those properties to provide additional commentary**, metadata, and files for the shared content." Seven years after the Rec, the field is still choosing between two shapes for quote-with-comment, and a third for consent.
+Related FEPs found: **FEP-c0e0 Emoji reactions** (DRAFT, 2024-08-08) — likes/reactions likewise unspecified; **FEP-e229 Best practices for extensibility** (DRAFT, 2024-04-02); **FEP-6481 Specifying ActivityPub extension support** (received 2024-03-12, **WITHDRAWN 2024-10-31**) — the attempt to add capability discovery was withdrawn.
+Corroborating W3C-side drift: FEP-dd4b's normative references include **"ActivityPub Miscellaneous Terms," W3C Social Web Community Group Draft Report, 3 October 2024** (https://swicg.github.io/miscellany/) — a CG draft accreting the vocabulary the Rec omitted.
+**NOT REACHED:** named Mastodon-vs-Pleroma-vs-Lemmy interop failure reports (HN Algolia returned nothing for `activitypub underspecified` / `activitypub interoperability` / `mastodon quote posts`; gopiandcode.uk's "I Wrote an ActivityPub Server in OCaml: Lessons Learnt, Weekends Lost" — HN 2023-04-23, 154 pts — **timed out on DNS**); a formal SocialCG/SWICG post-mortem; and Mastodon's own quote-post announcement (blog.joinmastodon.org 404s on the URLs I tried; the index shows posts up to Mastodon 4.7, Aug 2026, described as "focusing on bug fixes, performance and **interoperability**", plus "Why the social web must work together," 18 Jun 2026 — but I could not open a post naming quote posts).
+
+**Contrast — Matrix room versions** (https://spec.matrix.org/latest/rooms/). Twelve versions, **all currently Stable**, **v12 is the default**:
+
+| v | change |
+|---|---|
+| 1 | initial |
+| 2 | State Resolution v2 |
+| 3 | **event IDs become the event's hash** |
+| 4 | URL-safe base64 event IDs |
+| 5 | enforce signing-key validity periods |
+| 6 | alters several event authorisation rules |
+| 7 | knocking |
+| 8 | join rule: members of another room may join without invite |
+| 9 | fixes redaction of certain membership events |
+| 10 | integer-only power levels; `knock_restricted` |
+| 11 | clarifies the redaction algorithm |
+| **12** | **room IDs become hashes of the create event**; formalizes room creators with infinite power level; iterates state resolution |
+
+This is the mechanism the operator is asking about, working: **the core semantics — event identity, auth rules, state resolution — changed under a versioned envelope**, four separate times, without a protocol-wide flag day. v3 and v12 are exactly the change Git could not make (identifier redefinition), and Matrix made it twice.
+Cost, per the spec: versions are **not ordered or hierarchical** — "a room can upgrade from version 2 to version 1, if it is so desired." Upgrade is not in-place; the room is recreated. "Servers SHOULD use room version 12 as the default … Clients should not ask room administrators to upgrade their rooms if the room is running a stable version."
+**NOT REACHED:** the tombstone (`m.room.tombstone`) mechanics and their documented user-visible breakage — the `/rooms/` index page does not carry them, and I did not fetch the client-server upgrade section.
+
+---
+
+### 4. Stability that worked
+
+**Signal.** https://signal.org/blog/pqxdh/, **19 September 2023**. PQXDH computes the shared secret using **both X25519 and CRYSTALS-Kyber**, so "an attacker must break both … to compute the same shared secret." The waist was extended by **composition, not replacement** — the key-agreement output feeds the same Double Ratchet, and rollout was **per-session and negotiated**: "in use for chats initiated after **both sides** of the chat are using the latest Signal software," with X3DH to be disabled for new chats later and existing chats upgraded in parallel. **NOT REACHED:** explicit client version numbers, the Double Ratchet's unchanged status stated in that post, and migration mechanics for existing sessions (the blog does not say).
+Structurally this is the same move EvoArch §7.3 prescribed for IPv6 and IPv6 didn't make: **add a product the incumbent cannot offer, and run alongside rather than against.**
+
+**Automerge.** *Automerge 2.0*, **January 2023**, https://automerge.org/blog/automerge-2/. Perf on ~260k text ops: 2.0.1 at **1,816 ms / 44,523,520 bytes RAM / 129,062 bytes on disk** (vs 107,121 bytes plain text — the binary format carries full history at **~30 % overhead**); a preliminary 2.0.2-unstable at 661 ms.
+On **format stability the honest finding is negative-with-a-twist** (https://automerge.org/automerge-binary-format-spec/): the format is a **draft**; magic bytes are fixed `[0x85, 0x6f, 0x4a, 0x83]` with **no version byte**, so a future incompatible revision would be indistinguishable from a current document. What they committed to instead is **must-preserve forward compatibility**: "Future versions of automerge may add new actions, and implementations **must preserve operations containing actions they don't support**"; and for columns, "if an implementation encounters an unknown column whilst reading data it **MUST retain this data when writing that data back to storage**."
+→ This is the same family as GREASE/must-ignore, one notch stronger: **must-ignore-and-round-trip**. It is the right primitive for a frozen document shape, and it is *the* thing Automerge froze in place of a version number. No explicit stability guarantee or breaking-change policy was published.
+
+**SMTP / DNS as survivors.** From **RFC 5218** (below), the IAB's own list of successful inter-domain protocols is: **IPv4, TCP, HTTP, DNS, BGP, UDP, SMTP, SIP**; intra-domain: ARP, PPP, DHCP, RIP, OSPF, Kerberos, NAT. **NOT REACHED:** a per-protocol analysis of exactly which fields SMTP and DNS froze (I did not fetch RFC 5321 / RFC 1035 to enumerate the frozen surface, and will not assert it from memory). Note in passing that DNS is the counterexample to "frozen = safe": the frozen 512-byte UDP message size drove EDNS0, and the frozen absence of authentication drove DNSSEC — neither of which I verified in this session.
+
+---
+
+### 5. The decision procedure — is there writing on it?
+
+**Yes, three sources, and they answer different halves.**
+
+**RFC 5218, "What Makes for a Successful Protocol?", D. Thaler & B. Aboba, IAB, July 2008.** https://www.rfc-editor.org/rfc/rfc5218.txt
+Definitions: **Success** = "both meets its original goals and is widely deployed." **Wild success** = "far exceeds its original goals, in terms of purpose (being used in scenarios far beyond the initial design), in terms of scale … or both."
+
+*Basic success factors* (7):
+1. **Positive net value** — benefits of deploying outweigh costs
+2. **Incremental deployability** — early adopters benefit without universal support
+3. **Open code availability**
+4. **Freedom from usage restrictions** (no legal/financial hindrance)
+5. **Open specification availability**
+6. **Open maintenance processes** — public comment, inclusive participation
+7. **Good technical design**
+
+*Wild-success factors* (3):
+1. **Extensible** — carries general-purpose payloads or admits new option types
+2. **No hard scalability bound** — no inherent limit near the originally envisioned scale
+3. **Threats sufficiently mitigated** — security flaws addressable in revisions
+
+Named failures and their diagnosed causes: **Gopher** (outcompeted on net value by HTTP/HTML); **IPX** (no open code or spec, despite technical merit); **inter-domain multicast** (poor incremental deployability — application overlays won instead); **WAP** (not open, poor incremental deployability, **underspecified design**); **WEP** (security flaws capped it below wild success).
+→ Factor #2 of the wild-success list is **exactly the IPv4 address-width lesson written down 20 years too late**, and WAP's diagnosis names underspecification as a killer in the same breath as closedness.
+
+**Beck's minimal sufficiency** (§1 above) is the actual *procedure*: **declare N first, then take the weakest S sufficient for N.** He adds a value-weighted refinement — a good spanning layer is one where "there is no weakening of the specification which has a set of applications of greater value," and permits accepting a weakening that costs some application value "as long as it is not too [much]." The consequential decision is not the waist; **it is N**.
+
+**EvoArch's rule** is the complement, about the *competitive* environment rather than the logical one: **make the new thing non-overlapping in services with the incumbent**, because same-products means competition, and competition at the waist is won by accumulated value rather than quality (findings #9, #10, §5.5, §7.3).
+
+**Clark D., "The Design Philosophy of the DARPA Internet Protocols," SIGCOMM 1988** — **NOT REACHED.** I did not fetch it and will not restate its goal ordering from memory. It is the fourth source you'd want and it is the one gap in the decision-procedure section.
+
+---
+
+## WHAT I COULD NOT REACH
+
+- **Karst et al. 2023's internal numbers** — N of CMN field studies, N of forests/sites, and the citation-bias percentages. Paper is `oa_status: closed`; nature.com 303s to an IdP; U. Alberta press page 403s; no reachable OA citing paper quotes them. Only the abstract's "**unsupported claims have doubled in the past 25 years**" is confirmed.
+- **Any formal Matters Arising / reply pair inside *Nature Ecology & Evolution*.** PubMed lists no comment records on PMID 36782032 other than the erratum. Simard's response ran in *Frontiers in Forests and Global Change*, Jan 2025.
+- **Whiteside 2019's measured fold-differences** in hoarding/relocation/transfer (Cell Press paywall; abstract only).
+- **Kiers 2011 full text** (Science paywall).
+- **Walder & van der Heijden 2015** and a systematic survey of anti-market-metaphor mycorrhiza papers.
+- **Any published critique of, or failure to replicate, Tero et al. 2010.** The critiques I report are extracted from the paper's own text (pre-placed food sources, illumination-imposed geography, parameter tuning). Adamatzky follow-ups located by title/DOI only; **no negative results found**, which in a literature this small is weak evidence either way.
+- **Google's IPv6 statistics figure** (JS-rendered; the data endpoint 404s). Substituted APNIC world data, 2026-09-04.
+- **Beck's CACM-published text** (403). Used his identical arXiv preprint 1607.07183, draft dated 31 July 2016.
+- **Clark 1988 DARPA design-philosophy goal ordering.**
+- **Named Mastodon/Pleroma/Lemmy interop failure reports**, a SWICG/SocialCG post-mortem, and Mastodon's quote-post announcement post. The quote-post saga is documented here from the FEP repository's primary sources instead.
+- **Matrix tombstone mechanics and its user-visible breakage.**
+- **WebDAV method-support measurements**; the IANA HTTP Method Registry CSV (404).
+- **GitHub/GitLab SHA-256 repository support status** (gh org-discussion search 422s).
+- **ioctl proliferation as measured evidence** — the Unix-waist argument here is theorem-application, not measurement.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;HcABz7TgAMNjxHt0icgKgwCoWAFyxmno7FpJPfwkAys
+
+<<^ code="&#x0004;" -> to=? >>

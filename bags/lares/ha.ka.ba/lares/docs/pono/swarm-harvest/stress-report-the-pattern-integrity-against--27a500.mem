@@ -1,0 +1,356 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/stress-report-the-pattern-integrity-against--27a500 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/stress-report-the-pattern-integrity-against--27a500.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: STRESS REPORT: THE PATTERN-INTEGRITY AGAINST THE MEASURED RECORD. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/stress-report-the-pattern-integrity-against--27a500"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! STRESS REPORT: THE PATTERN-INTEGRITY AGAINST THE MEASURED RECORD
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 61,802 characters
+
+````
+All seven axes are in — the last one had to be pulled from its transcript manually; the leyline note was right, its consolidated body never reached me through the normal channel.
+
+---
+
+# STRESS REPORT: THE PATTERN-INTEGRITY AGAINST THE MEASURED RECORD
+
+**Method.** `WebSearch` was exhausted at 200/200 before I began, and every general search engine (DDG, Mojeek, Searx, Marginalia) returned CAPTCHA to both curl and WebFetch egress. All of this ran on structured APIs — OpenAlex (which hit its daily budget mid-session for four of us), Crossref, arXiv, PubMed, HN Algolia, the GitHub API, NVD, RIPE/APNIC, IETF Datatracker, RDAP — plus direct fetches and raw-byte greps. Seven parallel investigations. **Two fabricated "quotations" were caught and disproved by raw-byte grep** (below). Nothing here is filled from memory.
+
+---
+
+## I. THE FIVE FINDINGS THAT CHANGE THE SHAPE
+
+**1. The convergent claim ⑤ has been built, once — and its measured failure mode is that concurrent membership operations wedge the group permanently.**
+
+Ink & Switch's **Keyhive** (Convergent Capabilities + BeeKEM) is the only system that unifies revocation, membership and revision into one object. It is pre-alpha, unaudited, `DO NOT use in production`, actively churning (pushed 2026-09-04, 241★, 34 open issues). Four open issues, filed 2026-08-22, sit exactly on the claim:
+
+- **#218** — two concurrent removals, each locally valid, merge in digest order; the tree walks a one-member state and errors with `RemoveLastMember`. *"Because the op graph is durable and digest order is delivery-independent, every materialization on every replica re-errs forever: a permanently wedged group, identical on all replicas."* **Independently reproduced** by a third party (mtrimpe, 2026-08-25, with a branch).
+- **#220** — concurrent add + trailing-slot remove: **32 of 64 seeds trip the tree's own state assertion.** The notebook's stated blanking rule does not cover the shape.
+- **#219** — authoring panic past group size 16. ***"it does not reproduce at small group sizes."*** Your ladder ⑥ grows group sizes by construction.
+- **#217** — BeeKEM **retains node secrets indefinitely**: PCS holds, but *"there is no effective forward secrecy over retained history."* **The lease does not expire the secret.**
+- **#127** — *"Dynamic Membership in absence of finality"* — Carol back-dates a removal of Bob. Open since **2025-04-23 with zero maintainer comments in 16 months.**
+
+And Keyhive's own antigoal is your ①: ***"Keyhive deliberately excludes user identity binding, leaving this to future layers above the system."*** It defers the human to a layer above. **You have no layer above.** Confidence: high (primary source, GitHub API).
+
+**2. Retrofitting ①②④ is measurably impossible — which means it is frozen-waist material or it never arrives.**
+
+Matrix has been trying to unbind identity from server for **eight years**. Every proposal open, none merged:
+
+| MSC | Opened | State | Last touched |
+|---|---|---|---|
+| #1228 Removing MXIDs from events | 2018-05-10 | open | 2024-06-05 |
+| #2787 **Portable Identities** | 2020-09-23 | open | 2025-01-13 |
+| #3189 **Per-room profiles** (persona-per-context) | 2021-05-11 | open | 2023-04-15 |
+| #3839 primary-identity-as-key | 2022-06-26 | open | — |
+| #4014 **Pseudonymous Identities** | 2023-05-10 | open | 2026-02-04 |
+| #4080 Cryptographic (client-owned) Identities | 2023-11-15 | open | 2024-05-29 |
+| #4243 localparts as account keys | 2024-12-17 | open | 2026-02-05 |
+
+MSC2787 proposes exactly your two-layer model (Permanent Key + Delegated Key) and lists among unsolved TODOs *"How to adequately disconnect UDKs from UPKs as part of a data removal request for GDPR compliance."* Matrix's FAQ concedes: *"Currently, no."* Nostr's key-rotation issue **#116 opened 2022-12-23, last comment 2022-12-27, still open** — four years dormant; **no key-rotation, revocation or migration NIP exists**, and **NIP-26 Delegated Event Signing** — your ③ shape — is marked *"unrecommended: adds unnecessary burden for little gain."* NIP-06 (key derivation from a seed) is likewise *"unrecommended: prefer a single nsec."* Confidence: high.
+
+Contrast: **Matrix room versions v1–v12, all Stable**, changed event identity (v3), auth rules (v6), and room IDs (v12) under a versioned envelope. **The core semantics moved four times; the identity waist never moved once.** That is the empirical shape of what is lockable and what is not.
+
+**3. The one measured study of exactly your ②③ population found zero adoption and a social hazard in the switcher itself.**
+
+Sambasivan et al., SOUPS 2018, **N=199 women, India/Pakistan/Bangladesh** (PDF extracted directly): South Asian women are **26% less likely to own a phone**, **29% regularly borrow one**, GSMA found men (and sometimes women) consider it acceptable for a husband to check his wife's phone. The paper's central critique is yours: *"user privacy is predominantly modeled on the 'one account, one user' paradigm."* Then:
+
+> ***"none of our participants had multiple user profiles on the phone, possibly due to added friction or poor discovery."***
+
+And the mechanism that matters more:
+
+> locks *"signaled to borrowers and co-located social relations that **something suspicious might be hidden** behind the authentication screen."*
+
+The five practices they *did* use were all **covert and deniable** — selective deletion, private modes, avoidance. Via Matthews et al. CHI 2016 (DOI 10.1145/2858036.2858051, full text NOT REACHED): *"willing device sharers have expressed an obligation to give open access to close relations **to communicate trust**."* Brush & Inkpen 2007: profiles are used to **personalize**, not to gain privacy. **A visible persona switcher is not neutral in a household with a power asymmetry — it is a signal.** Base rate: Marques et al., SOUPS 2016 — **31% one-year snooping prevalence; weighted to US population, 1 in 5 adults snooped on someone else's phone in the prior year.** Confidence: high.
+
+**4. Nothing shipped has a management chain that never bottoms out in a person. Custody is delegable to machines; accountability is not.**
+
+Every system runs machine-to-machine chains of arbitrary depth at runtime, then re-attaches a human at a layer the runtime cannot see:
+
+- **Miller's ocap model** is rootless *by postulate* (§9.2.1 "first instant of time") — and every time *Robust Composition* names the origin it is a person (§11.3 "the owner of the system"; §7.4 "the human operator… read the URI from his screen over the phone"). `accountability`, `provenance`, `non-repudiation`, `ambient authority` each appear **zero times**. Miller/Donnelley/Karp published the gap themselves (HotSec'07): *"a remaining unrefuted criticism is that they cannot record who to blame for which action. **This lack has led some to forego the benefits of ocaps.**"* Their fix (Horton) ships nowhere. **OCapN's three spec files contain zero occurrences of human, person, audit, accountability, provenance, owner, or revocation.**
+- **Kubernetes**: SAs empower SAs freely; the audit `Event` has exactly two slots, `User` + `ImpersonatedUser`, **both singular, no ancestry field.**
+- **AWS**: role-chains machine-to-machine, but **chaining silently caps the session at one hour regardless of each role's configured maximum** — delegation depth *forces* a shorter lease. And the Customer Agreement §2.1 requires *"a valid email address and a valid form of payment"*; `CreateAccount`'s owner email **becomes the root user**.
+- **Microsoft Entra Agent ID** (doc updated 2026-09-03): a service principal *may own* an agent identity — *"**A sponsor is required when creating an agent identity**"*, users or groups only, ***"including for app-only create requests."*** Agent-creates-agent with no interactive human: **the create is refused.**
+- **RFC 8693** models the chain via nested `act` claims and then: *"the consumer of a token **MUST only consider** the token's top-level claims and the party identified as the current actor… **Prior actors are informational only.**"* **The chain's history is decorative.**
+- **EU AMLR 2024/1624 Art. 22(2), applying 2027-07-10**: where *"no natural persons are identified as beneficial owners,"* obliged entities *"shall identify all the natural persons holding the positions of senior managing officials."* Recital 125 concedes the fiction; Recital 126 forecloses the workaround. **A structure engineered so no chain climbs to a person does not produce "no answer" — it produces a substituted answer, plus a justification the authorities may attack.**
+- Three courts, three attachment mechanics: **Ooki DAO** attached at *who voted* (Mersinger's dissent: liability by *"happenstance of not voting"*); **Roman Storm** attached at *who could still change it* — residual capability is ownership; **Van Loon v. Treasury** (5th Cir., 2024-11-26) is the only case where nothing attached — *"unownable, uncontrollable, and unchangeable—even by its creators"* — and it bought immunity **by forfeiting every protection ownership confers**, and only reached court because six named natural persons had standing.
+
+Confidence: high. This is the sharpest external result against the corrected ①/③.
+
+**5. The blind veil holds at the data layer and leaks at the sync layer — and Briar rejected exactly your design, in writing, for exactly that reason.**
+
+Briar's FAQ, verbatim:
+
+> **"Can I have multiple identities/profiles/accounts? Short Answer: No, that is not supported by Briar."** … *"In a p2p network it's hard to prevent identities from being linked… First, the times when `A` and `B` are online. **In a p2p network we can't hide this from our contacts.** Second, the network addresses… with Wi-Fi and Bluetooth, the contacts can **compare the addresses we gave them and see that it's the same device.** Third… information leaks at the application layer."*
+
+Tracker: issues **#34** and **#202** (per-identity contact views) both labeled **`R: rejected`**, closed 2018-06-12. Briar's own scope line: *"It provides unlinkability but not anonymity."*
+
+**SimpleX is the only shipped system that claims your property** — `simplexmq/protocol/security.md` lines 189–191, a contact ***cannot*** *"prove that two contacts they have is the same user"* nor *"collaborate with another of the user's contacts to confirm they are communicating with the same user."* It buys this **by not being peer-to-peer** — routers absorb what Briar cannot escape. And the same file hands the caveat back at lines 95/119: the router *can* correlate *"via either a re-used transport connection, user's IP Address, or connection timing regularities."*
+
+Ranked leak channels, measured:
+
+| Rank | Channel | Measurement |
+|---|---|---|
+| 1 | **Silent delivery receipts enumerate your device fleet** | *Careless Whisper*, RAID 2025 Best Paper (arXiv 2411.11194). Delivery receipts **cannot be disabled**. From a phone number alone, silently: session list `[0,1,9]` reveals device count and **creation order**; screen on/off via RTT. Affects **WhatsApp and Signal**. |
+| 2 | **Sealed sender collapses at N=5** | Martiny/Kaptchuk/Aviv/Roche/Wustrow, NDSS 2021: statistical disclosure via default-on delivery receipts. *"Signal could link sealed sender users in as few as 5 messages."* Worst case ~60 epochs. Graph model irrelevant. *"Signal's sealed sender does not meet this ideal functionality."* |
+| 3 | **Push metadata joins server-side on the account** | Wyden→Garland 2023-12-06: records detail *"which app received a notification and when, as well as the phone and associated Apple or Google account."* Apple's own CSVs: **70 requests/794 tokens (2022 H2) → 489/867 (2025 H2)**, 7× rise. APNs tokens are per-app-per-device — **and that buys nothing, because the join happens at Apple.** |
+| 4 | **Attestation is device-scoped, by vendor documentation** | Play Integrity `deviceRecall`: *"three custom values or bits for each device… reliably recall your custom data **even after your app is reinstalled or the device is reset**."* The only barrier to cross-persona linkage is a policy sentence. **arXiv for attestation+linkability: 0 results — vendor-documented, researcher-unmeasured.** |
+| 5 | **The graph relinks on topology alone** | Narayanan & Shmatikov S&P 2009: **30.8% correct / 12.1% wrong / 57% unidentified**, topology only, 150 seed pairs. Korula & Lattanzi VLDB 2014: **46,626 correct / 20 wrong, error <0.05%** at 5% seeds. Backstrom/Dwork/Kleinberg WWW 2007: on 4.4M-node LiveJournal, **7 sybil nodes compromise 34–70 targets**; passive coalition of **5**. |
+| 6 | **Stylometry** (numbers I could not reach; the ⑨ agent did) | Narayanan et al. S&P 2012: **100,000 blogs, 2.4M posts, 1,188 features. Top-1 20%, top-20 35%; confidence-thresholded 80% precision at ~10% recall.** Cross-context (different blog, same author): ~12% baseline → **50%/50%**. |
+| 7 | **CRDT actor IDs** | Read from source: every Automerge change permanently carries `actor`, `other_actors: Vec<ActorId>`, `seq` and a wall-clock timestamp. `automerge#763` "It's expensive to have lots of actors" **open since 2023-10-13** — so rotation-for-unlinkability has a cost curve. **Negative finding: no published discussion anywhere of actor-ID as a linkage channel — not Automerge, not Yjs, not the literature.** |
+
+Confidence: high on 1–3 and 5; high on the negative findings.
+
+---
+
+## II. THE CLAIMS, ONE BY ONE
+
+### ① THE HUMAN DELIBERATELY UNBOUND
+
+**Where it is sound.** Keyhive independently arrived at the same exclusion. SSB states *"It's normal for a person to have several Scuttlebutt identities."* Ink & Switch's brand-new `onomancy` (alpha, 2026-09) rejects transparency logs on precisely your grounds — they *"create a globally enumerable roster of participants."* Van Loon proves genuine ownerlessness is legally real.
+
+**Where the world pushes back, hard, and it is all 2025–2026:**
+
+- **Regulation now compels age assurance in most of the design's likely markets.** UK OSA enforced 2025-07-25 (fines £18M or 10% of global turnover; Ofcom fined 4chan £20,000 then £520,000). Australia's under-16 ban in force **2025-12-10** (AUD 50M). Brazil 2026-03-17, Indonesia 2026-03-28 (**~4.7M accounts terminated by July 2026**), Malaysia 2026-06-01, plus US states. And the mechanism is moving **to the device**: Singapore app-store verification 2026-04-01; Texas app-store age verification 2026-06-04; Apple rolling out UK age verification Feb 2026. **The device is being made the age-attestation authority for the human wearing it** — exactly the binding the model refuses, at exactly the layer the model occupies.
+- **Small, self-hosted and federated services are in scope and dying of it.** Russ Garrett's guide, verbatim: *"a wide variety of service types will fall in scope of the Act, including services with a **decentralised and community-moderated** organisational model,"* and the open question *"if your Mastodon server doesn't have 'links to the UK', but it federates with servers which do, are you subject to the OSA?"* — unanswered. **LFGSS/Microcosm** (HN 798 pts, 2024-12-16): buro9 announced shutdown of *"just over 300 forums, for a monthly audience of 275k active users"* after 28 years, citing OSA liability. *(The domain still serves behind Cloudflare today; the final outcome I could not verify — but the announcement and its cause are the finding.)* A commenter's summary: *"the more legislation there is around something the more it is only feasible to do if you are a corporate person."*
+- **Proof-of-personhood — the only workaround — is regulatorily radioactive.** World/Worldcoin has been banned, suspended, fined or ordered to delete in **Kenya, Spain, Portugal, Hong Kong, Brazil, Indonesia, Philippines, Thailand** (Nov 2025: deletion of 1.2M users' data), with investigations in France, UK, Germany, South Korea.
+- **`did:key` — the only genuinely registry-free method — states its own limits:** *"does not support updating the DID Document"*; *"does not support deactivating"*; *"does not support key rotation because the identifier is derived directly from the public key material"*; *"using a `did:key` for interactions that last weeks to months is **strongly discouraged**."* CCG draft v0.9, never a Recommendation.
+
+**Shape note:** the corrected ③ may be the accommodation — a *persona* attesting an age band for a worn persona satisfies the age-assurance duty without a human record. Nothing in the field has tried it. That is a genuine gap, not a validated path.
+
+### ② A HUMAN `#has` MULTIPLE PERSONAGROUPS
+
+**Endorsed by the strongest available platform.** GrapheneOS FAQ, verbatim: *"**Profiles should be used when separate identities are desired**"*; *"The owner profile does not have access to the data in other profiles"*; each profile has *"their own unique, randomly generated disk encryption key."*
+
+**And the same FAQ names the asymmetry that survives:** *"Filesystem-based encryption is designed so that files can be deleted without having the keys… which enables **the owner profile to delete other profiles without them being active**."* **The manager cannot read the managed persona. The manager can destroy it, unilaterally, in absentia.** For a locally-held persona, "revocation as expiry" is beside the point.
+
+**Android's structural limits bite ② directly.** Private Space — the newest and strongest per-persona container — *"can have only one instance on a single device, and can exist only for the main user (not for secondary users or within other profiles)."* One persona, main user only. And Android's Keystore per-user boundary is **undocumented and structural** — it holds because UID encodes user id (`PER_USER_RANGE = 100000`), not because Keystore was specified to hold it.
+
+**The measured failure rate of the boundary that does exist: 17 Android cross-user CVEs 2021→2026**, still producing them (CVE-2026-0021, 2026-03-02, **8.4**, `hasInteractAcrossUsersFullPermission`). The recurring phrase in Android's own advisories is **"confused deputy"** — the crypto holds; a privileged component is tricked into reaching across. Clipboard crosses profiles **by default**, and Android's own docstring says the opt-in restriction is **export-only** and defeatable by OCR.
+
+**Samsung Secure Folder is the closest shipped analogue and its 17 CVEs are the lesson:** recents thumbnails, floating icons, split-screen, a motion-photo player, a paired smartwatch, a paired PC. **The private plane was never breached cryptographically — it was read off the screen, the notification bus, and a companion device.**
+
+### ③ THE MANAGED PERSONA (as corrected: persona manages persona)
+
+**Has anyone shipped a managed identity the managed party can leave with? Essentially no one, and where an exit exists, single-digit percent use it.**
+
+- **Bluesky/atproto**, the closest live analogue: **~100,000 of 23,696,277 accounts (≈0.42%) have ever migrated off Bluesky's PDS fleet; 97.66% remain.** Of 1,200 sampled `bsky.social` accounts, **1,196 (99.67%) hold zero rotation keys of their own.** The documented exit is `requestPlcOperationSignature` — **the host signs your departure, gated on an emailed code.** And even a user who adds their own key gets index ≥1 and can be clobbered by the host inside the 72-hour rewrite window.
+- **Farcaster**: **36–41%** of a random sample name the Warpcast Recovery Proxy, which can transfer any identity **instantly, no consent, no timelock**. **~5%** name a recovery address of their own.
+- **Embedded wallets** (Privy, Web3Auth, Magic, Dynamic, Turnkey, Coinbase CDP): every one ships the same primitive — an iframe that reveals a raw key. That is a **fork of custody, not a transfer**; nothing is revoked. **No provider has published export-completion telemetry anywhere reachable** — and structurally cannot, since they learn the modal opened, not that a key was kept.
+- **Sovrin guardianship** — the only worked design — **does not transfer the identity, it re-issues it**: *"Zo's credentials may not be actively revoked, but can be considered to be **practically expired**"*; Jamie must "be issued his own replacement credentials." And **the wear-my-identity case is explicitly ruled against**: "Wallet Take-Over" is filed under *future work*, *"only… when everything else fails, because issuers nor verifiers can distinguish between the situation where the holder is, or is not, impersonated."*
+- **None of it shipped.** `gh search code "guardianship" --owner hyperledger` → **zero hits**. Aries RFC 0289 **STALLED since 2024-04-03**, *"no implementations have been created."* W3C VC Data Model 2.0 (REC 2025-05-15): `"guardian"` appears **0 times**. DID Core: **0 times**. `vc-data-model#930`, opened with exactly your use cases, closed 2022-12-14 unresolved — WG consensus: *"the dangers of misuse are too great."* Kiva Protocol sunset **2022-06-30**; ID2020 absorbed Aug 2023; Tykn's domain **resold to a games site**; the Sovrin Foundation **dissolved by Utah 2025-05-21**, MainNet now read-only on one cloud VM with Trinsic as sole steward — and Trinsic now sells *"Accept the World's Digital IDs Through One API… 56 ID providers integrated."*
+- **Enterprise: zero.** Every vendor shipped a consent-free *ingestion* path and no egress. Apple Domain Capture: *"Turning on Domain Capture can't be undone"*, 30 days, default outcome a rename to `…@temporary.appleaccount.com`. Microsoft ships `forceTakeover: true`; there is no `forceRelease`. **What survives into the person's hands is an account they already held, and it survives only by surrendering its name.**
+
+**Consumer family systems, the three invariants:** nobody forks the identity; the exit is gated on the custodian's cooperation, not the calendar; entitlements are held by the group and do not travel. Apple: *"There's no other way to remove a child from a family group if they're under 13."* 13–17 with Screen Time on requires the organizer's permission. On exit, *"your balance transfers to the family organizer's Apple Cash account."* Google Family Link releases at **18**, not 13. Microsoft documents **no age transition at all** across all 19 hub articles — a genuine negative — and ships a support page titled *"Family safety settings enforced on adults."*
+
+**The closest thing to an unblockable exit anywhere** is Google's child-facing page listing, under what parents *can't* do: ***"Remove your ability to stop supervision."*** Read against the same page: 13–18 *"You'll need your parent's approval to stop supervision."* **It is a petition right that cannot be confiscated, not an exit.** And the Chromebook page tells parents the opposite — *"prevent your child from removing supervision without your consent."* Google reconciles these nowhere.
+
+**The abuse surface, when management is structural:**
+
+- **Roundy et al., IEEE S&P 2020** (CreepRank, **billions of installs across 50M+ Android devices**): top 1,000 → **857 creepware; 372 surveillance; 107 "thorough" apps affecting 172,000 Norton customers in 2017 alone**; 1,095 reported to Google, **813 removed**. The finding: *"many apps that purport to be intended for child online safety have highest PMI with apps that are unambiguously intended for intimate partner surveillance."* Worked example: *"Family Locator for Android" was previously titled "GirlFriend Cell Tracker."* And longitudinally, the **child-safety framing is what the ecosystem retreats into under enforcement pressure.**
+- **Chatterjee et al., IEEE S&P 2018**: **~92% of the IPS-relevant corpus is on-store dual-use.** Taxonomy names your case by construction — ***subordinate tracking* is the child-monitoring tier.** *"All of the off-store spyware apps we analyzed describe child safety as one of their use cases."* Detection: **37 of 40 anti-spyware tools flagged ≤3% of dual-use apps**; major AV ≤13%.
+- **Havron et al., USENIX Sec 2019** (N=44 clients, 105 devices): **3 spyware detections against 30 relation-layer findings** — 14 password compromises, **12 unknown "trusted" devices**, 4 shared family plans. **23/44 (52%)** had a vulnerability. The authors: *"many abusers are seemingly able to surveil clients via compromised accounts, and so may not need to install spyware."* **The findings came from the interview instrument, not the scanner.**
+- **ISDi's live blocklist, read directly (HEAD 2026-07-22): 5,777 flagged apps — 89.1% dual-use, 99.2% on-store, 10.1% carrying `family|parent|kid|child|teen` in the title.** The clinic's operational model of the abuse surface is **89% legitimate-purpose software.**
+- **Freed et al., CHI 2018** — the source of the UI-bound adversary, and the sentence that is your design's mirror: *"prior work on account sharing assumes that the primary user and the owner (or controller) of the account are one and the same, **which is often not the case in IPV**."* Its first attack category is literally **"Ownership-based access."** n=27 account control (frequently via shared family plan); **≥10 cases of abusers giving devices to shared children** — *"since the abuser is legally entitled to contact the child, the victim may not be allowed to remove the device."*
+- **The one mitigation adversaries visibly complained about was an identity-layer role check** — TeenSafe verifying the age of the registered Google account. Not any UI notice.
+- **Nobody verifies who the manager is.** Of 40 parental-control apps, **none implemented multi-guardian consent**; vendors assert *"only the device owner's consent is required"*; the FTC's own Retina-X remedy accepts an **unverified self-attestation checkbox**. **A manager-persona with no human owner-of-record removes the last thing every existing system nominally leans on — an attributable person to attest.**
+
+### THE BLIND VEIL, AS A SAFETY QUESTION
+
+**"Invisible management is more dangerous than visible management" is UNTESTED as stated.** No study compares the same relation covert vs disclosed on a harm outcome. Chatterjee 2018 treats covertness as attacker *motive*, and its central finding cuts across the frame: ***"Both** overt spyware and dual-use apps are dangerous in IPV contexts."* Roundy 2020 codes surveillance apps as *"both covertly and overtly"* — harm is **not separated by covertness**. Tseng 2020 uses "covert" once and never claims attackers preferred covert tools.
+
+**The nearest quantitative test points sideways.** Ravid et al., *Personnel Psychology* 2022 (K=94 samples, **N=23,461**): transparency → attitudes ρ = **.25**; transparency → performance **no effect**; transparency → stress/strain **could not be tested, K=2**; and *"the presence of EPM increases worker stress and strain, **regardless of the characteristics of monitoring**."* **Making monitoring visible measurably improved how people felt about the monitor. It did not measurably reduce harm.**
+
+**What IS measured is that non-enumerability defeats remedy, with no counterexample:**
+- Daffalla et al., USENIX Sec 2025 (19 services, 4 providers): **adversarial biometrics succeeded in all 30 stepthroughs**; ***"none of the OSes inform users of any changes to their biometric configurations."*** For CVS, Porkbun and TikTok, cloned-passkey access is undetectable and *"we could determine no way to revoke access."* ***No service lists which passkey authenticated a session.*** And the manager-persistence bug exactly: in Apple's shared-password groups *"the account that adds a credential to the group is the only one authorized to remove it"* — an abuser-added passkey the victim **cannot delete**. Follow-on (USENIX Sec 2026, 31 participants, 59 investigations): *"most participants were not able to identify the adversarial passkey without assistance."*
+- **CPS coercive-control guidance**: ***"A victim may not know the full extent of a suspect's conduct, for instance if they were being monitored without their knowledge."*** Home Office 2021: CCB recorded offences **4,246 (2016/17) → 24,856 (2019/20)**; **charge rate 11% → 6%**; **85% closed for evidential difficulties**. Prosecution turns on discoverable artefacts. *(No source isolates "the tooling left no trace" as a measured cause — NOT REACHED.)*
+- **UN CRC General Comment No. 25 (2021) ¶75** is the only text anywhere requiring what your veil would deny: surveillance of children *"should not be conducted… **without the child's knowledge**… nor should it take place **without the right to object**."* ¶77: *"Protecting a child's privacy… may be vital in circumstances where **parents or caregivers themselves pose a threat**."* **Zero implementations.**
+- **CDT, Aug 2022** (nationally representative): **13% of students at monitoring schools report they or an LGBTQ+ student they know has been outed by it — 29% among LGBTQ+ students.** The mechanism is *legitimate admin authority over an account the student cannot leave.*
+- **Boele et al.** (525 Dutch dyads): **in 4–7% of dyads the adolescent believed they were NOT tracked while the parent reported tracking** — measured invisible management inside consumer systems.
+
+**But visibility is not free either.** Four independent sources measure severance-that-notifies as an escalation trigger, including DULT's own threat model §3.1: *"taking overt security measures while frequently in physical proximity to the Attacker may lead to the Attacker escalating their tactics of interpersonal control."*
+
+**The industry's own doctrinal statement, DULT threat model §4.1.6:** ***"Any mode that makes it possible to turn off Unwanted Tracking Alerts is antithetical to DULT's recommendations"*** — alerts *"should not be circumventable under any circumstance."* And **DULT deliberately separates the two visibilities**: *Obfuscated Owner Information* is *"no more than the last two digits of a phone number and/or an obfuscated email"* — **the relation is made visible; the counterparty is not made enumerable.** That is very close to what your veil wants, arrived at from the safety side.
+
+**And the sharpest platform finding: they wrote the persistent-notification rule for everyone but themselves.** Google Play (effective 2020-10-01) compels an always-on indicator plus unique icon on every third-party monitoring app, enforced via an **`IsMonitoringTool` manifest flag**, and forbids monitoring even a *consenting* spouse. **Family Link itself ships no documented ambient indicator.** Apple writes no such rule at all — raw-byte grep of the App Store Review Guidelines (238,359 bytes): `stalkerware` 0, `monitor` 0, `stalk` 0, `covert` 0 — and ships the cleanest silent supervision: a restricted app *"is just temporarily hidden from the Home Screen."* Only **Apple** discloses *who* manages (`Settings › [name] › Family` shows members and roles). Only **Google** discloses the relation to the child in second person. **Nobody notifies.**
+
+**DULT is also stalling.** WG chartered 2024-02-29 (co-chaired by NNEDV); both milestones due 2025-07-31, neither met; `accessory-protocol` **EXPIRED 2025-05-08**, `finding` **EXPIRED 2025-12-08**; only the threat model is active. **§6 "Platform Support for Unwanted Tracking" is literally "TODO."**
+
+### ④ NEVER A CENTRAL SERVER
+
+**Instance mortality — the number you most wanted.** The only defensible directly-measured figure is **seven years old**: Raman et al., IMC 2019 — **21.3% of 4,328 Mastodon instances went offline in a 15-month window and never came back** (≈17%/yr); **98% go down at least once**; **11% inaccessible more than half the period**; **top 5% hold 90.6% of users**; **outages in 10 instances would remove 62.69% of global toots**; certificate expiry alone caused **6.3% of all outages**.
+
+**Modern series, from Mastodon's own reports:** 9,446 servers (2024-01-01) → **8,851 (2024-12-31), net −6.3%**; **MAU fell 38% during 2024** while registrations grew; peak-to-plateau **2.5M → ~0.94M MAU, −62%**. Live today: FediDB **42,846 instances, 14.38M accounts, 1.15M MAU — 8.0% monthly-active, 92% dormant.** Concentration measured live via fediverse.observer: **mastodon.social alone = 26.5% of all fediverse MAU**; top 10% of instances = **97.4% of MAU**; **25.1% of live instances have zero monthly-active users.** Concentration roughly **doubled since 2019**.
+
+**⚠ Instrument-lie caught, and the honest consequence:** the ④ agent computed mortality from fediverse.observer's `date_diedoff`, then collided the instrument — probing 250 "dead" nodes, **91.2% still return a valid `/.well-known/nodeinfo`**. The field conflates "stopped answering the crawler" with "died," and the roster is survivor-biased. **Every derived mortality figure was discarded. There is no public dataset that answers instance mortality correctly, and the Internet Archive was offline all session.**
+
+**What happens to identities on a dead instance:** Mastodon's docs — *"**Your posts will not be moved, due to technical limitations**"*; follows/blocks/mutes require manual CSV; **step 6 requires logging into the OLD account on the OLD server.** If it is down, the move is impossible. `mastodon#12423` "Support Post Migration" opened **2019-11-18, 632 reactions, still open**. Lemmy documents no migration at all. Named case: **mstdn.plus** froze 2023-01-30 when the admin went silent — one user **lost ~640 of 700+ followers, 91% of his social graph**. And **mastodon.lol's domain lapsed and was re-registered by an unrelated party on 2024-08-23** — the entire handle namespace of a dead instance is now someone else's property.
+
+**Who pays for the floor, and what it costs:**
+
+| | Figure |
+|---|---|
+| **Stateless relay** (atproto, non-archiving) | **$34/month** for the full network — **$0.000009/user-year** across 43M users |
+| **Identity-holding node** (mastodon.social + .online) | **€84,000/yr — ~€0.32/MAU-year** |
+| **matrix.org homeserver** | **~50% of the Matrix Foundation's entire £910,821 FY2025 budget — ~£1.23/MAU-year** |
+| Matrix Foundation FY2025 | costs **−£910,821**, net loss **−£310,596**; *"the one [Gold member] left (Automattic) now corresponds to **50% of our revenue**"*; *"**We didn't get any grants**"*; dependence on Element's £3M/yr in-kind *"is unsustainable"* |
+| matrix.org share of federation | **370K of 1.15M open-federation MAU — ~32% on one server** |
+| Tor Project US-government revenue share | **41.6% / 53.9% / 38.2% / 51.0% / 43.5% / 29.3%** (FY2019–24). **One operator carries 21.7% of all Tor exit traffic; the top 12 carry 71.4%.** |
+| Mastodon 2024 | **86% of revenue from two philanthropic gifts.** Hachyderm took 30,000 users in 30 days and has received **$785 lifetime — $0.026/user** |
+| Sovrin | seeded with **$4.3M** of token pre-sale money; 2019 legal spend **$1.5M**; monthly burn **$328,000 → ~$4,000** after terminating all staff 2020-03-13; ledger revenue **$2,500 (2019)**; **60 stewards → 1** |
+
+**The relay floor is not optional.** Tailscale's own estimate: *"you could get a direct connection over 90% of the time, and your relays guarantee some connectivity all the time."* iroh — the "no server" system — hardcodes n0-operated public relays, saw **>200M endpoints in 30 days**, suffered a full relay outage 2024-11-05 detected ~12h late, imposed **API-key authentication default-on from June 2026** (the moment the serverless network acquired an account system), and **ends free public relay operation 2026-12-31**. Pricing: **$19/mo Pro, $199/mo per region.**
+
+**Seven of nine comparable systems are dead or dying.** Ceramic deprecated js-ceramic/ComposeDB **2025-04-17** (*"ComposeDB-dependent apps will break if not migrated"*), forum now connection-refused, company pivoted to an AI leaderboard. SSB's `ssb-server` **last commit 2022-06-17**; planetary.social now says *"We're moving to Nostr."* Briar, **2026-07-09**, verbatim: *"the project didn't have funding… **we decided that we wouldn't realistically be able to solve these issues and so we reluctantly decided to shut down the project**"* — reversed to security-only. Willow's reference Rust implementation is **ARCHIVED**; Earthstar in v11 beta since 2024-05. Veilid still **v0.5.7 pre-1.0 three years in, 9 of last 10 commits by one person**, HN attention **180 pts → 2 pts**. IPFS: Protocol Labs cut **89 roles (21%)** 2023-02-03; core team left April 2024; **Cloudflare shut its public IPFS gateway 2024-08-14** and redirected to the other centralized gateway. **libp2p circuit-relay economics: no published cost model, operator census, or reimbursement scheme exists anywhere reachable.**
+
+**What survived, and the property they share:** email (**self-hosting 44.6% → 22.4% in a decade**; Google+Microsoft **38.6%** of MX-publishing domains), DNS (**2,005 anycast instances, 12 operators, frozen namespace, zero new governance seats**), NTP Pool (**~6,136 servers** — and only **19.7% fully independent**; an adversary captures most traffic in 90% of countries with **≤10 malicious servers**), Libera (**FY2025 operating loss ≈ US$350** because hardware and bandwidth are donated in kind). Usenet — the one with real per-server cost — fell from **22,245 servers (2001) to 780 (2026), −96.5%**, and contributing servers have been **flat at 80** since 2021. freenode 2021: **77,905 → 5,191 users, −93.3%** — *the infrastructure was replaceable in one week; twenty years of channel and nick registrations were not.*
+
+**The distilled property:** the survivors have near-zero mandatory cash at the node, a client already installed and hard to switch away from, an absorb-and-redirect path for hostile externalities, and replication that grew without renegotiating the protocol. **And in every one, protocol health and operator-population health diverged.**
+
+### ⑤ ONE SHAPE FOR REVOCATION ⊥ MEMBERSHIP ⊥ REVISION
+
+**Has anyone unified them? Only Keyhive, and see §I.1.** MLS (RFC 9420) unifies revocation+membership and discards revision. DCGKA (CCS 2021) *factorizes* rather than unifies — §5.2 assumes a DGM oracle. Matrix unifies them under lineage-with-tiebreak and **has broken at that seam twice** (Synapse #8629 open since 2020; CVE-2025-49090 / CVE-2025-54315 fixed 2025-08-14 only by minting room version 12 + State Resolution 2.1) — plus the Albrecht/Celi/Dowling/Jones S&P 2023 result: *"room management messages are not authenticated in the Matrix specification (even for end-to-end encrypted rooms),"* so *"a malicious homeserver can add users under their control to end-to-end encrypted rooms,"* and detection *"requires careful manual membership list inspection."*
+
+**Is the industry converging on expiry over revocation? Yes, and it is now dated policy.** CA/B Forum **SC-081v3 passed 2025-04-11** (25-0-5 / 4-0-0, proposed by Apple): **398 → 200 → 100 → 47 days by 2029-03-15**; DCV reuse **398 → 10 days**. Ballot footnote [6]: *"Fundamentally, the above property of certificates is **not something which can be addressed through revocation**."* Let's Encrypt killed OCSP **2025-08-06** after ~**340 billion requests/month**; **160-hour certificates went GA 2026-01-15 carrying no OCSP or CRL URLs at all** — the only pure expiry-as-revocation artifact in the file. Defaults follow: **classic → 64 days 2027-02-10, → 45 days 2028-02-16.**
+
+**The measured cost of the convergence:**
+- **Heartbleed (IMC 2014)**: baseline 491 revocations/day; GlobalSign revoked **50.2% of their visible certificates in two days**; GoDaddy **243,823**; GlobalSign's CRL **2 KB → 4.7 MB**; CloudFlare's revocation cost **+40 Gbps sustained, ~$400,000–500,000/month**. Only **4% of Alexa Top 1M revoked**; **14% of replacers reused the compromised key.**
+- **Liu et al., IMC 2015**: **11,461,935 revoked certs observed; 41,105 (0.35%) ever reached a CRLSet.** Median cert's CRL is 51 KB; largest observed **76 MB**. **Not a single mobile browser checked revocation for any certificate.** Verdict: *"our results paint a bleak picture."*
+- **Let's Encrypt knowingly left ~1.3M misissued certificates unrevoked in March 2020**, on the argument that 90-day expiry would clear them.
+
+**But — and this is load-bearing — every system that adopted expiry kept revocation as a backstop.** SPIFFE keeps `crl` fields in both `X509SVIDResponse` and `X509BundlesResponse` while declaring WIT-SVID revocation propagation *"out of the scope of the specification."* Biscuit emits `revocation_id` and hands the list to the host. Fly.io runs a `ValidityWindow` **and** revocation-by-nonce. Let's Encrypt still publishes CRLs. The CA/B Forum made **annually-tested mass-revocation plans mandatory** (BR §5.7.1.2, effective 2025-12-01) in the same cycle. **The convergence is expiry-primary, never expiry-only. No reachable system has actually deleted revocation.**
+
+**The recursive hazard — the lease held, the minter did not. Confirmed three ways:**
+- **Storm-0558**: signing key **issued April 2016, nominally expired April 2021, honored until rotated July 2023** — **27 months past its own expiry**, captured from an April-2021 crash dump, held *"for over two years prior to being discovered,"* and found by the customer (US State Department), not Microsoft. Microsoft could only *"partially account for"* activity April 2021–May 2023 because log retention ran out.
+- **Kerberos**: the krbtgt hash lets an attacker **set arbitrary ticket lifetimes**, survives every user password reset, and AD ships **no rotation schedule at all**. The only cure — reset twice — requires ***waiting 10 hours (one full lease) between resets***, using tooling Microsoft **archived on 2024-03-07**. *(Correction: MIT's `max_life` default is **24 hours** with renewal **off**; the widely-cited "10h" is AD's. The "krbtgt rotates every 10 years by default" claim appears to be **not a documented default at all**.)*
+- **Cloudflare/Okta**: **4 missed credentials out of ~5,000 — 0.08% — was sufficient.** Okta's own root cause: a service-account password saved into an employee's **personal** Google profile on a managed laptop; **14 days of downloads went unseen**; and Okta's mitigation was **"revocation of embedded session tokens"** — an explicit fallback *because the tokens' TTL was too long to save them*. The post-incident control added was **IP binding** — a macaroon first-party caveat, i.e. contextual confinement added precisely because expiry alone failed.
+
+**AWS ships the one instance of "chain depth forces a shorter lease":** role chaining caps the session at **one hour regardless of each role's configured maximum**.
+
+**And DNS is the measured case of the lease being overridden by a lease you don't control.** Moura et al., IMC 2019: short TTLs are mostly honored, but for `google.co` across 16,000 vantage points **~15% of answers returned exactly 21,599s — a 6-hour cap**. **Only 52–90% of queries are child-centric**, so 10–48% obey the *parent's* TTL. The named incident: **13 of 161 responses returned the pre-renumber answer after TTL expiry**, all via OpenDNS, which trusted the `.com` zone's **2-day NS TTL** and never refreshed the A record. **A 2-day parent lease silently overrode the operator's short child lease.** And **~2.25% of vantage points kept using the old server** after both records expired.
+
+**Macaroons — a correction to the premise.** The NDSS 2014 paper describes **only prototypes** (Python 2.7.2, JS in Chrome v27). **It never claims a Google production deployment, and no Google source was found that does.** Where macaroons actually run: **Fly.io** (production, documented), Canonical (`snapd`, `candid`, `juju`), Storj. **HashiCorp: no evidence found.**
+
+### ⑥ THE LADDER
+
+Two things bear on it directly. **Keyhive #219 does not reproduce at small group sizes** — the ladder's growth is the trigger. And **Jacob/Grashöfer/Hartenstein's Matrix crawl** found *"the single, largest server is involved in 44.5% of all messages, **sends 88.4%**, but receives only 0.6%"* — concluding that *"moving from a centralized network to a more decentralized one will not improve the load distribution, but can actually make it worse."* Confidence: moderate (single snapshot, 2018).
+
+### ⑦ WHAT MAKES A PATTERN-INTEGRITY LOCKABLE
+
+**Beck's *On the Hourglass Model* (CACM 62(7), 2019; arXiv 1607.07183) is the formal answer and it inverts the folk intuition.** The **Hourglass Theorem**, proved: if S1 is weaker than S2, then *"a weaker layer specification has **FEWER applications** but MORE implementations."* Everyone knows the second clause; the first is what gets designs wrong. So you must supply **N, the set of necessary applications**, and take the **minimally sufficient** S — sufficient for N with no strictly weaker S′ sufficient. His design rule, verbatim: ***"the choice of necessary applications N is in fact the most directly consequential element in the process of defining a spanning layer."*** **You do not pick the waist. You pick N.** And the tradeoff is inescapable: *"An analogy would be attempting to build a see-saw that allows both ends to be elevated simultaneously."*
+
+**Akhshabi & Dovrolis (SIGCOMM 2011)** supply the competitive complement. EvoArch finding #7: waist protocols become **evolutionary kernels**, surviving far longer than peers. Finding **#9: kernels are *not* the highest-quality nodes.** And §7.3 on IPv6: *"IPv6 does not offer new services compared to IPv4… **IPv4 has much higher value and it wins**"* — the prescription being to ship a new thing *"not as a replacement… but as **'the second network layer protocol'**."* Their §9 prints an anonymous reviewer's own objection: *"we know the answer the model must produce, so (like Jeopardy) we have to find a model that can be tweaked to give that answer."*
+
+**RFC 5218 (IAB, 2008)** lists the success factors: positive net value, **incremental deployability**, open code, freedom from usage restrictions, open spec, open maintenance, good design — plus three for wild success: **extensible, no hard scalability bound, threats sufficiently mitigated.** WAP's diagnosed causes include *underspecification*, in the same breath as closedness.
+
+**The measured symptoms of freezing the wrong layer:**
+1. **The escape hatch grows.** `ioctl`; Honda et al. IMC 2011: *"there is no longer a well defined or understood way to extend network functionality, **short of implementing everything over HTTP**."*
+2. **The replacement can't win on merit** — IPv6 at **43.53% capable / 41.52% preferred worldwide** (APNIC, 2026-09-04), 28 years after RFC 2460.
+3. **Novel values get stripped rather than ignored** — Honda: unknown TCP options removed on **4% (port 34343) / 14% (port 80) / 6% (443)** of 142 networks in 24 countries; ISN modified on **18%** of port-80 paths. Their hard rule: ***"it is unsafe for TCP extensions to embed sequence numbers in TCP options (or anywhere else), even if the extension negotiates use via a new option in the SYN exchange."***
+4. **A transition ships and then doesn't move.** Git's SHA-256: format landed ~2 years after SHAttered; **protocol support "not yet implemented," five-phase plan with no completion date**, and *"until protocol support exists, using SHA-256 on public-facing servers is strongly discouraged"* — **8 years, still there.** The hash is not a field inside Git; it **is** Git's naming waist.
+5. **Extension proposals fork into rival specs for one feature** — ActivityPub quote posts: **FEP-e232 FINAL (2023-12-03)** represents a quote as a `Link` in `tag`; **FEP-dd4b DRAFT (2025-02-21)** as an `Announce` with `content`; **FEP-044f DRAFT (2025-04-03)** for consent. Mechanically incompatible, seven years after the W3C Rec. **FEP-6481, the attempt to add capability discovery, was WITHDRAWN 2024-10-31.** And the FEP process itself was stood up **~2.5 years after the Rec, outside W3C**, because the Rec had no evolution mechanism.
+
+**What worked.** **QUIC published its waist as a separate normative document** — RFC 8999, *Version-Independent Properties of QUIC*: *"**Unless specifically prohibited in this document, any aspect of the protocol can change between different versions**,"* with Appendix A an explicit list of incorrect assumptions an observer might make. **RFC 8701 (GREASE)** supplies the maintenance rule: *"the metaphorical joint in the protocol has **rusted shut**"* — **a must-ignore rule that is never exercised is not a rule, it is a hope.** **Automerge** chose the stronger variant — **must-ignore-and-round-trip**: *"implementations **must preserve operations containing actions they don't support**"* and must retain unknown columns when writing back. Note the honest negative: Automerge's binary format is a **draft** with fixed magic bytes and **no version byte**. **Signal's PQXDH (2023-09-19)** extended by *composition* — both X25519 and Kyber, feeding the same Double Ratchet, negotiated per session — which is precisely EvoArch's prescription that IPv6 didn't take.
+
+### ⑥/⑨ THE SELECTIVE-DISCLOSURE ADDRESS BOOK
+
+**Exactly one system ships it, in beta: VeilidChat.** Every `Account` owns its own `contact_list`, `contact_invitation_records`, `chat_list` as `OwnedDHTRecordPointer`s marked `// DHT Private`; the device tag is **account-scoped**. **But `lib/init.dart` initializes ONE `Veilid.instance` and ONE `DHTRecordPool` for the whole app** — every account shares one node, one NodeId, one set of DialInfo — and `LocalAccount` is a **device-level table enumerating every account present.** veilid.com still says *"there are no official builds yet."* **Delta Chat** ships the same multi-profile shape GA and actively recommends it (*"separate profiles for political, family or work related activities"*) — and separately says relays see your IP. **It never connects the two.**
+
+**The canonical texts say the property; none of their authors shipped it.** *(Correction: both petname documents are **Stiegler's** — HP Labs HPL-2005-148, Aug 2005 — not Miller's; Miller's contribution is PNML.)* **GNS is the only standardized per-identity namespace — RFC 9498, Nov 2023** — adopting petname architecture explicitly, with two conforming implementations and **zero measured deployment or adoption found anywhere.** **Spritely's `brux`** stated your requirements verbatim — *"Applications don't know what personas exist"*; *"Other users cannot find out what (if any) other personas exist for a person"* — and its **last commit is 2022-03-11**. Checking every live Spritely repo (goblins, goblin-chat, navi, pumpkin-chat, brassica-chat, all pushed 2025–2026): **petname/persona files: NONE, in all five.** **Agoric** shipped petnames in the ag-solo wallet (159 occurrences) that is out of production; the mainnet smart-wallet copies the petname from the chain's **global NameHub** (`// adopt edgeName as petname`), and the two issues to add user-set petnames (**#7226**, **#6126**) are open since 2023 and 2022.
+
+**Anti-examples that publish the address book by design:** Nostr **NIP-02** broadcasts `["p", pubkey, relay, petname]` — **your private nickname is public to every relay**, and the spec encourages mining it; **zero NIPs exist on multiple identities, personas, or account switching** (whole repo grepped). SSB *"each feed publicly announces which feeds it is following."* Bluesky: follows and blocks are world-readable, and `plc.directory/export` bulk-exports **every operation for every account**.
+
+**⚠ ①-relevant, and a hard boundary on "SYSTEM-none": the veil is a network-layer property, not a device-layer one.** GrayKey's leaked compatibility table (404 Media, Nov 2024) shows partial extraction on iOS 18 and on Pixel 9 in **AFU (After First Unlock)** state — *"unencrypted files and metadata, folder structures and file sizes."* BFU resists; **AFU does not.** A persona is AFU precisely while it is being *worn*. And Aug 2026: felony charges for a citizen deleting phone data at the US border — **deniability now has a criminal cost at exactly the checkpoint where it matters.**
+
+---
+
+## III. WHAT NOBODY HAS BUILT — negative results, stated plainly
+
+- **A rootless management chain.** Nothing shipped. Every one re-attaches a human at audit, billing, licensing, ToS, statute, or court order.
+- **A managed identity the managed party can leave with.** Nothing shipped. Where an exit exists, **0.42%** (Bluesky) to **~5%** (Farcaster) use it.
+- **An exit the manager cannot block.** Nothing. The closest is a **petition right that cannot be confiscated** (Google Family Link). The one design where the delegated party provably cannot become the controller — Ethereum social recovery, subject removes guardians unilaterally after a timelock — **contains no supervised-principal role at all**, so there is nothing to block.
+- **A shipped contact list where each identity authors its own view of the others, with no system-level roster.** One beta (VeilidChat), whose own device-level `LocalAccount` table is that roster.
+- **Any published discussion of CRDT actor IDs as a deanonymization channel** — Automerge, Yjs, or the literature. Undiscussed.
+- **Any measured study of device attestation as a linkage channel.** arXiv for attestation+linkability: **0 results.** Vendor-documented, researcher-unmeasured.
+- **Any measured accuracy figure for IP-based cross-device/household graphs.** The FTC's 2017 report is entirely qualitative. The graphs are proprietary.
+- **Any measured study of backup metadata as a cross-persona linkage vector.**
+- **Any measured study of passively linking N pseudonyms on one device by correlated activity timing.** *Careless Whisper* gets there **actively** instead.
+- **Any test of "invisible management is more dangerous than visible management."**
+- **Any measured deployment figure for GNS/GNUnet.**
+- **Any correct public dataset for federated instance mortality.**
+- **libp2p circuit-relay economics** — no cost model, operator census, or reimbursement scheme documented anywhere.
+- **Academic measurement of Android multi-user isolation, or of any Apple multi-user surface.** Zero on-topic papers across nine OpenAlex queries plus Crossref. Shared iPad has **zero CVEs and zero independent scrutiny** — read as *unexamined*, not sound.
+- **A guardianship implementation.** `gh search code "guardianship" --owner hyperledger` → zero.
+
+## IV. INSTRUMENT-LIES CAUGHT THIS SESSION
+
+Four, all disproved by raw-byte grep, and two of them are the *field's* errors, not ours:
+
+1. **Fabricated Apple policy.** A WebFetch summarizer returned, as quoted App Store policy: *"Apps cannot monitor or track other users without explicit consent… Not operate covertly."* Raw guidelines, 238,359 bytes: `stalkerware` 0 · `monitor` 0 · `stalk` 0 · `covert` 0. **The summarizer invented a policy in exactly the direction a researcher would hope to find one.**
+2. **Fabricated RFC 9498 text** — that publishing zone delegations "reveal the social graph of zone users." `grep -c -i "social graph" rfc9498.txt` → **0**.
+3. **`date_diedoff` is not death** — 91.2% of "dead" fediverse nodes still answer nodeinfo (n=250 probe).
+4. **A live IETF working-group document misattributes data.** `draft-ietf-dult-threat-model-05` §3.2 attributes **72% / 41% / 67%** to Freed et al. CHI 2018 — **that paper contains zero `%` characters.** True source unidentified.
+
+**Corrections made in place:** Sovrin Guardianship V.2 is **April 2023**, not ~2020. Petname systems are **Stiegler's**, not Miller's. The sealed-sender author is **Wustrow**, not Rubin. Grindr's NOK 65M fine is **December 2021**, not January 2024. The psychiatrist-outing story is **Facebook PYMK**, not LinkedIn. Google Family Link releases at **18**, not 13. MIT Kerberos `max_life` is **24h** with renewal **off**; "10h" is AD's. Karst et al.'s real title says *"misinformation on common mycorrhizal networks in forests."*
+
+## V. THE MYCELIUM GROUNDING — split the biology and the answer changes sign
+
+**Solid (laboratory):** Kiers et al., *Science* 2011 — plants *"detect, discriminate, and reward the best fungal partners"*; fungi *"enforce cooperation by increasing nutrient transfer **only to those roots providing more carbohydrates**"*; control is **bidirectional** and discrimination is at **root/hypha granularity, not whole-organism**. Whiteside et al., *Current Biology* 2019 — quantum-dot-tagged phosphorus: *"where phosphorus was **hoarded, relocated, and transferred**"* — **hoarding is a literal measured category**; increasing inequality *stimulated* trade and moved resources rich→poor patches, *"capitalize on value differences across the trade network"* (stated as interpretation, not a measured rate). Oyarte Gálvez et al., *Nature* 639:172–180, **March 2025** — ~500,000 nodes, ~100,000 flow trajectories, travelling wave at **280 µm/h**, branching **4%/h**, fusion **~2%/h**, **root transport efficiency held constant at ~0.5 while global efficiency rose 0.2 → 0.5**, betweenness power law γ≈0.3, carbon cost constant.
+
+**Contested (forests) — and it is the sub-claim analogies usually lean on.** Karst, Jones & Hoeksema, *Nature Ecology & Evolution* 7(4):501–511, **2023-02-13**. Three claims: CMNs are widespread — *"insufficiently supported"*; resources transfer to boost seedlings — *"insufficiently supported"*; **mature trees preferentially send resources and defence signals to offspring — *"has no peer-reviewed, published evidence."*** And *"unsupported claims have doubled in the past 25 years."* Henriksson et al., *New Phytologist* 2023: *"evidence of a significant net C transfer via common mycorrhizal networks that benefits the recipients is **still lacking**"*; a fungal C pipeline is *"difficult to reconcile with any adaptive advantages for the fungi"*; the isotope work rests on *"**miniscule shifts in isotopic abundance**."* Even the defence (Klein et al., 2023) concedes *"C transfer is typically small compared to autotrophic C assimilation"* and that key studies **lack controls separating the CMN pathway from bulk soil**. Simard's own 2025 response cites **four** genet-mapping studies.
+
+**The structural caveat that matters most:** every strong mechanism result is **in vitro root-organ culture** — carrot roots on agar, single fungal isolates. **None of it is a forest, and none is a many-party network with competing hosts.**
+
+**Slime mould, with the numbers.** Tero et al., *Science* 2010: Physarum matched Tokyo rail on **cost (1.75±0.30 vs ~1.8)** and **transport efficiency (0.85±0.04 vs 0.85)** — and lost badly on **fault tolerance: 14–20% vs the rail network's 4%**, i.e. **3.5–5× worse**, which the paper calls "marginally better resilience" for the rail. And the critiques come from the paper itself: **36 food sources pre-placed at city locations**, Tokyo itself an aggregate of seven, the plasmodium started *at Tokyo*; geography imposed *afterward* by illumination to get *"greater visual congruence"*; and two free parameters (I₀=2, γ=1.8) move the benefit/cost ratio from 0.5 to **0.7 — better than rail *and* better than the organism**. The headline is a point on a tunable curve.
+
+**Did any distributed system ship a mycelial mechanism? No.** ThreeFold's `mycelium` (207★) is conventional locality-aware routing — **the biology is the name only.** AntNet beat six algorithms *in simulation* (JAIR 1998) with **no evidence of any production deployment**; GitHub returns only coursework and simulators; HN interest is art projects at single-digit points.
+
+**Verdict:** local, graded, cost-bound, reciprocal exchange has laboratory support and a real measured architecture. **Lineage/kin-directed transfer has none — it is the one sub-claim a reviewer will attack, and per a 2023 *Nature Ecology & Evolution* review the correct answer is that no peer-reviewed evidence exists.** Confidence: high.
+
+---
+
+## VI. WHAT I COULD NOT REACH
+
+`WebSearch` (exhausted before start) and every general search engine (CAPTCHA). **OpenAlex hit its daily budget mid-session for four of seven investigations.** arXiv returned empty under our own parallel load in one lane. **The Internet Archive was offline all session** — which is why instance mortality could not be reconstructed. Hard-blocked hosts: Reddit, Ars Technica, Wired, Verge, Guardian, BBC, Reuters, AP, Washington Post, ACM DL PDFs, IEEE, Science/Cell paywalls, `ftc.gov/system/files/`, `ico.org.uk`, `federalregister.gov`, `erights.org` (connection refused), `biscuitsec.org`, `usenix.org` via WebFetch, and — late in the session — **`support.google.com`, which CAPTCHA'd our egress**, so all Google evidence above is via Wayback with snapshot timestamps.
+
+Specifically unretrieved, and **not** filled from memory: Karst et al.'s internal N and citation-bias percentages; Whiteside 2019's fold-differences; Kiers 2011 full text; Matthews et al. CHI 2016's numbers; Ghosh "A Matter of Control or Safety?" effect sizes; Brennan/Afroz/Greenstadt adversarial-stylometry figures (6 mirrors tried); Clark's 1988 DARPA design-philosophy goal ordering; the CSRB Storm-0558 PDF (403 from three government hosts — **the "60,000 State Department emails" and "paused key rotation" figures are therefore UNVERIFIED, do not attribute them to the CSRB**); Microsoft's own Sept-2023 Storm-0558 post-mortem (301'd away); Schomp et al. IMC 2013; McDaniel & Rubin's rebuttal to Rivest — *the most directly adversarial source to the expiry thesis, reached as metadata only*; n0's actual hole-punching publication (the two cited URLs do not exist among n0's 82 blog slugs — only *"roughly 90% of network conditions"*, undated and method-free, and a 95%-of-*bytes* figure); Tor sponsor amounts (never disclosed, any sponsor, any year); measured offboarding/deprovisioning latency (nothing in Crossref or HN — treat any figure as vendor-survey grade); s.76 offence statistics for 2020/21–2025/26 (ONS does not disaggregate CCB); Apple's Secure Enclave partitioning per Shared iPad user (**the security page never mentions SEP**); and the final outcome of the LFGSS shutdown.
+
+**One operational note:** the `lares` MCP server failed to connect this whole session (CONNECTION_CLOSED) — it played no part in this research, and two of my agents flagged it independently. Worth a retry before the next pass.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;KfCnL-tFUql0UjnK16kB1EPto68TQP8Az_Pax-Or6eg
+
+<<^ code="&#x0004;" -> to=? >>

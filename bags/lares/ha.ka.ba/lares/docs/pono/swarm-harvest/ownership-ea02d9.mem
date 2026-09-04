@@ -1,0 +1,230 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/ownership-ea02d9 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/ownership-ea02d9.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Ownership. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/ownership-ea02d9"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Ownership
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 24,273 characters
+
+````
+Research complete. Report follows.
+
+---
+
+# ENTERPRISE ANALOGUE OF A MANAGED SUB-IDENTITY — does a provisioned identity ever survive offboarding into the person's hands?
+
+**Direct answer: No. Across Apple, Google, Microsoft and the SCIM standard, there is zero production mechanism that hands a corporate-provisioned identity to the individual at exit. Every "survival" path found is one of three things: (a) a DATA COPY into an account the person already owned; (b) an identity moving the OTHER way — from the person into the org (domain capture / admin takeover); or (c) a RENAME that preserves the person's pre-existing account while confiscating the org's namestring. The identity object itself never changes hands from org → person. Evidence below.**
+
+---
+
+## 1. Apple — Managed Apple Account (Apple Business Manager / Apple School Manager)
+
+**Caveat on sourcing (MEASURED):** As of the fetch date (2026-09-04), the Apple Business Manager user guide is a stub — every page under `support.apple.com/guide/apple-business-manager/` returns only "Apple Business Manager is now Apple Business," which "combines the capabilities previously found in Apple Business Manager, Apple Business Essentials and Apple Business Connect into a single, comprehensive offering." Substantive text now lives in the **Apple School Manager** guide, which shares page IDs (`axm…` prefix) with the business guide. All Apple citations below are from the School Manager guide and the Apple Platform Deployment / Security guides.
+
+### Ownership
+- "Managed Apple Accounts function much like Apple Accounts but are specifically designed for, **owned, and managed by, an organization**." — https://support.apple.com/guide/apple-school-manager/intro-to-managed-apple-accounts-axm78b477c81/1/web/1
+- "Organizations **design, own, and manage** Managed Apple Accounts…" and they "exclude access to specific iCloud services, some Apple Developer apps, media services, and store content." — https://support.apple.com/guide/deployment/about-managed-apple-accounts-depdc4ba8d82/1/web
+- "Managed Apple Accounts function much like an Apple Account but are **owned and controlled by** enterprise or educational organizations." The org "can reset passwords, turn off communications such as FaceTime and iMessage, and set up custom roles"; role-holding Inspectors can "**read and modify the user's content stored in iCloud or in CloudKit-enabled apps**," with access logged. — https://support.apple.com/guide/security/managed-apple-account-security-sec049674014/1/web/1
+
+### What happens at offboarding (MEASURED day counts)
+- "If a manually created user account is in a **deactivated state for more than 30 days, it's automatically deleted**."
+- SIS/SFTP-created accounts "are **automatically deleted 120 days after they're deactivated**" — unless the user holds roles with purchased apps/books, or is manually deleted first.
+— https://support.apple.com/guide/apple-school-manager/manage-existing-users-axm0b917bf68/1/web/1
+
+**There is no documented release-to-person path.** The "Edit Managed Apple Accounts" page covers only renaming/format changes, not conversion or release — https://support.apple.com/guide/apple-school-manager/edit-managed-apple-accounts-axmfbea5f962/1/web/1. **NOT REACHED:** an Apple page that explicitly states "a Managed Apple Account cannot be converted to a personal Apple Account." The absence is consistent across the guide; treat "no path documented" as measured, "explicitly forbidden" as unconfirmed.
+
+### The transfer that DOES exist runs the wrong way — Domain Capture
+
+This is the sore point, and Apple documents it precisely.
+
+**Mechanics** — https://support.apple.com/guide/apple-school-manager/capture-a-domain-axm512ce43c3/1/web/1
+- Domain Capture lets an org own **all** Apple Accounts on its verified domain. Turning it on "**locks the domain if it wasn't previously locked**."
+- Users with unmanaged (personal) Apple Accounts on that domain "are notified and **given 30 days to transfer their account**." The 30-day window is fixed and cannot be extended.
+- Two choices: (1) "Transfer the personal Apple Account and its data to the organization, which then converts it into a Managed Apple Account," or (2) "Choose a new primary email address to continue using their Apple Account as a personal (unmanaged) account."
+- **Default on no action:** "the Apple Account remains a personal account and gets an automatically assigned account name" — of the form `elana-townshipschools.org@temporary.appleaccount.com` — "allowing the organization to use the original domain address for a Managed Apple Account."
+- "**Turning on Domain Capture can't be undone.**"
+
+**Notification schedule (MEASURED):** "Day 1, day 21, day 27, and a final email notification is sent after the primary email address is updated on the account." — https://support.apple.com/guide/apple-school-manager/about-account-transfers-axmd2954ada2/web
+
+Note the discrepancy worth flagging: the capture page says **30 days**; the account-transfers page enumerates notifications at **day 1 / 21 / 27**. Both are Apple's own text.
+
+**What transfer costs the person** (same account-transfers page):
+- On success, "**full ownership of the account and associated data is transferred to the organization**"; the account is assigned the Student role.
+- Survives: "Apps and books that your organization purchased before the transfer remain associated with the account and can be installed and updated by the user using the App Store."
+- Dies: "music, movies, TV shows, Fitness+, Apple TV+, and Apple Arcade, **aren't available**." Existing active subscriptions still run but **cannot be renewed**.
+- Blocked-transfer preconditions (the account can't move until cleared): account address matching org country/region, Recovery Contact resolved, Apple Account balance cleared, Apple Cash removed, Apple Pay Later paid, Apple Pay/Wallet cards removed, Auto Reload off, outstanding balance settled, Health data cleared.
+- Categorically non-transferable: child accounts, accounts with Legacy Contact, temporarily disabled accounts, accounts with Apple pre-orders, or accounts using **iCloud Mail, iCloud+, Family Sharing, Sign in with Apple, Recovery Key, Security Key, Advanced Data Protection, Apple Card, or Apple Savings**.
+
+**One-way by construction:** the doc "discusses transferring personal accounts to organizational accounts only. It does not address converting Managed Apple Accounts back to personal accounts."
+
+### The six-year tombstone
+"If an unmanaged (personal) Apple Account goes through the formal deletion request process, it **can't be recreated nor can it be used as a Managed Apple Account for six years**." — https://support.apple.com/guide/apple-school-manager/intro-to-managed-apple-accounts-axm78b477c81/1/web/1 — i.e. the namestring itself is quarantined for 6 years, independent of any party's wishes.
+
+### Federation
+"For existing Apple School Manager users with an email address in the federated domain, their Managed Apple Account is **automatically changed to match that email address**." — https://support.apple.com/guide/apple-school-manager/intro-to-federated-authentication-axmb19317543/web. Related pages exist but were not needed: "Disconnect federation from a domain" (`axmd952e0762`), "Change a user's domain information" (`axm4bc06e16d`), "Download a list of unmanaged Apple Accounts" (`axm6fce266a3`), "Lock a domain" (`axmce04f4299`), "Remove a domain" (`axm859493391`). **NOT REACHED** in detail.
+
+### User Enrollment (BYOD)
+- "User Enrollment is designed for BYOD—or bring-your-own-device deployments"; IT can "manage only an organization's accounts, settings, and information provisioned with a device management service, **never a user's personal account**." — https://support.apple.com/guide/deployment/user-enrollment-and-device-management-dep23db2037d/1/web
+- **NOT REACHED:** the separate-APFS-volume / cryptographic-separation description and the enumerated unenrollment wipe list. Neither https://support.apple.com/guide/deployment/device-management-service-user-enrollment-dep6ae3f1d5a/1/web/1.0 nor the Apple Platform Security TOC surfaced it; the Security guide has no "User Enrollment" page (nearest: "Managed Apple Account security" `sec049674014`, "Device management security overview" `sec013b5d35d`, "Role of Apple File System" `seca6147599e`).
+- Directionally: User Enrollment's whole design point is that the *personal* Apple Account survives unenrollment intact — but that is the person's **own** identity persisting, not an org-provisioned one being handed over.
+
+---
+
+## 2. Android Work Profile / Android Enterprise
+
+- Managed profiles are "Created by an app to contain work data and apps. They are managed exclusively by the profile owner (the app that created the corp profile)." Isolation is not total: "**Launcher, notifications, and recent tasks are shared** by the parent user and the corp profile." And: "**Profiles do not exist beyond the lifetime of the creating user.**" — https://source.android.com/docs/devices/admin/multi-user
+- On removal: "After the Work Profile is deleted, **all local data on the device within that profile is deleted**." Users can only delete the work profile if they personally own the device or the org relinquishes ownership. — https://support.google.com/work/android/answer/6191949
+- Provisioning identity: Android Enterprise "**automatically creates**" a *managed Google Play Account* at provisioning, which "identif[ies] managed users and allow[s] unique, per-user app distribution rules." Alternatively an org with a managed Google domain guides "users through the setup of a work profile after entering their corporate Workspace credentials." At removal, admins can only set a `wipeReasonMessage` — custom text shown to the user. — https://developers.google.com/android/work/requirements
+
+**Verdict:** wholesale deletion. The managed Google Play Account is a synthetic, org-scoped identity with no user-facing existence and no exit path. **Zero portability. No documented conversion of a managed Google Play Account into a consumer Google Account.**
+
+---
+
+## 3. SCIM — RFC 7644 / RFC 7643, and the documented orphan mechanism
+
+### What the standard actually says
+- **RFC 7644 §3.6 (Deleting Resources):** "Service providers **MAY choose not to permanently delete** the resource but MUST return a 404 (Not Found) error code for all operations associated with the previously deleted resource." Providers "MUST omit the resource from future query results" and "SHOULD NOT consider the deleted resource in conflict calculation." — https://www.rfc-editor.org/rfc/rfc7644.txt
+  - Consequence: **DELETE is a visibility contract, not an erasure contract.** §3.6 says nothing about `active` and mandates no soft-delete semantics.
+- **RFC 7643 §4.1.1, `active`:** "A Boolean value indicating the user's administrative status. **The definitive meaning of this attribute is determined by the service provider.**" — https://www.rfc-editor.org/rfc/rfc7643.txt
+  - Consequence: the *only* standardized deactivation signal is explicitly defined as **undefined**. Interop on offboarding is delegated to each SaaS vendor by the letter of the spec.
+
+### The measured orphan failure mode — from Microsoft's own docs, not a vendor survey
+https://learn.microsoft.com/en-us/entra/identity/app-provisioning/how-provisioning-works (ms.date 2025-03-04, updated 2026-02-05)
+
+- "For SCIM applications, a **disable is a request to set the `active` property to false** on a user." Delete = removed completely.
+- Hard-delete propagation is time-gated: "**Thirty days after a user is deleted in Microsoft Entra ID, they're permanently deleted from the tenant. At this point, the provisioning service sends a DELETE request** to permanently delete the user in the application." (Admins can force it early via manual permanent delete.)
+- Four triggers: soft-delete in Entra, permanent delete, unassignment from the app, or falling out of scoping-filter scope.
+- **The orphan, documented as a "Known limitation":** "When a user or group is **unassigned from an app and no longer managed** with the provisioning service, a disable request is sent. At that point, **the service doesn't manage the user and a delete request isn't sent** when the user is soft-deleted from the directory."
+  - This is the silent-orphan mechanism in black and white: the common admin gesture (unassign the app) *permanently disarms* the later DELETE. The account persists in the SaaS app forever in `active=false` state, and nothing will ever come back to remove it.
+- A second silent path: "If the provisioning job stays in **quarantine for more than four weeks, the provisioning job is disabled**." Quarantine begins when most/all target calls fail (e.g. expired admin credentials), and during quarantine cycles degrade "to once per day." An expired credential therefore takes an org's entire deprovisioning pipeline offline within four weeks, and offboardings during that window never land.
+- Also configurable to *never* deprovision: "set the [skip out of scope deletions] property to true," or deselect Delete in target object actions.
+- Microsoft's own guidance to app builders: "When developing an application, always support both soft-deletes and hard-deletes."
+
+### Published orphaned-account rates
+**NOT REACHED.** No credible measured N= figure was obtained. HN Algolia returned nothing usable on "offboarding SCIM deprovisioning", "orphaned accounts offboarding", or "former employee retained access" (searches run 2026-09-04, `hn.algolia.com/api/v1/search`). `gh search issues "SCIM deprovision not deleted"` and `"SCIM deprovisioning silently fails"` both returned **`[]`**. OpenAlex (`api.openalex.org/works?search=deprovisioning orphaned accounts identity lifecycle`) returned only surveys and low-tier IJ/WJ journal reviews — nearest relevant: *System for Cross-Domain Identity Management (SCIM): Survey and Enhancement With RBAC*, 2023, https://doi.org/10.1109/access.2023.3304270 — no orphan-rate measurement.
+Vendor surveys from Okta / Torii / Zluri / Nudge Security were not fetched; **any such figure should be treated as marketing-grade regardless** (self-selected respondent panels, vendor-defined denominators, no published instrument). The Microsoft "Known limitations" text above is a strictly better artifact: it is a **mechanism**, first-party, dated, and does not require trusting a sample.
+
+---
+
+## 4. Microsoft — Entra viral/unmanaged tenant takeover
+
+https://learn.microsoft.com/en-us/entra/identity/users/domains-admin-takeover (ms.date 2026-06-18, updated 2026-06-19)
+
+This is the clearest documented case in the whole survey of identities **changing hands** — and the direction is person → org, never the reverse.
+
+**Origin of the identity:** "When a self-service user signs up for a cloud service that uses Microsoft Entra ID, they're added to an **unmanaged Microsoft Entra directory based on their email domain**." (The "shadow tenant.")
+
+**Internal takeover** — for when the org has some access, or when the products involved include SharePoint/OneDrive (which do not support external takeover):
+1. Create a user context in the unmanaged org (docs use Power BI "Start Free" with e.g. `admin@fourthcoffee.xyz`).
+2. Sign in at `https://portal.office.com/admintakeover`; take the "Become the Admin" prompt.
+3. Prove ownership with a DNS TXT record at the registrar.
+4. Result: "you're now the **Global Administrator**" of that org. "**No users, domains, or service plans are migrated** to any other directory you administer."
+- To then move the domain to another tenant, the domain must be **removed** from M365 first, and: "If you have any users or groups in Microsoft 365 that reference the removed domain name, they must be renamed to the .onmicrosoft.com domain. **If you force delete the domain name, all users are automatically renamed**, in this example to `user@fourthcoffeexyz.onmicrosoft.com`."
+- Collateral, stated: Power BI and Azure RMS licensees "must save their dashboards if the domain name is removed. They must sign in with a user name like `user@fourthcoffeexyz.onmicrosoft.com` rather than `user@fourthcoffee.xyz`."
+
+**External takeover** — the identity actually moves:
+- "When you verify ownership of the domain name, Microsoft Entra ID **removes the domain name from the unmanaged organization and moves it to your existing organization**." Also moved with it:
+  - **Users**
+  - **Subscriptions**
+  - **License assignments**
+- Same DNS TXT validation; the differentiator is the API flag: `POST https://graph.microsoft.com/v1.0/domains/<domain>/verify` with body `{"forceTakeover": true}`. `Confirm-MgDomain` does **not** expose `forceTakeover`; you must use `Invoke-MgGraphRequest`. Least-privileged role: **Domain Name Administrator**; scope `Domain.ReadWrite.All`.
+- **Destruction window (MEASURED):** "The unmanaged Microsoft Entra organization is **deleted 10 days after a successful external admin takeover** with the `forceTakeover` option."
+- **Supported services only:** Azure Rights Management, Exchange Online. Supported plans: Power Apps Free, Power Automate Free, RMS for individuals, Microsoft Stream, Dynamics 365 free trial. "External admin takeover **isn't supported for any service that has service plans that include SharePoint, OneDrive, or Skype For Business**."
+- Not supported across cloud boundaries (Commercial → Government).
+- **Silent data loss, documented:** for RMS for individuals, the org key and default protection templates move only if the unmanaged org is in the **same region**. "The key and templates aren't moved over when the unmanaged organization is in a different region… If users did protect content with the RMS for individuals subscription, and the key and templates weren't moved over, **that content isn't accessible after the domain takeover**."
+
+**Reading:** external admin takeover is a production, API-driven mechanism by which a person's self-created identity — plus their subscriptions and licenses — is **absorbed by an organization on the strength of a DNS TXT record alone**, with the person's originating directory destroyed 10 days later. No consent step from the user appears anywhere in the flow. There is no inverse operation documented.
+
+---
+
+## 5. The reverse case — Google's "transfer to a personal account"
+
+### Google's transfer tool for unmanaged users (person → org, same shape as Apple's Domain Capture)
+https://knowledge.workspace.google.com/admin/users/use-the-transfer-tool-to-migrate-unmanaged-users (formerly `support.google.com/a/answer/6178640`, now 301)
+- "If the user accepts your request to transfer their account, **you can manage that account**."
+- "**A user cannot decline a request; however the user can ignore it.**"
+- Ignoring is not an escape: "If the user ignores the request, they will **need to rename their personal account**." Once the admin creates a managed account on the same address, the user is "prompted to rename their personal account the next time they sign in."
+- Rename branch: "If you require users to rename their account, the unmanaged account will **remain as a separate Google Account and will not be part of Google Workspace**."
+- **Day windows: NOT REACHED** — none stated on the page.
+
+### "Transfer your content" (org → person) — this is a COPY, and it is scoped to schools
+https://support.google.com/accounts/answer/6386856
+- Purpose, verbatim framing: "Keep important files when you graduate, switch schools, or leave for another reason."
+- **Eligibility: school Google Accounts only**, and only "if your school administrator has enabled it." No documented work/enterprise equivalent was reached.
+- **Copyable:** Gmail (**excluding contacts, chats, and tasks**); Drive documents and My Drive files **you own**; Google Photos photos/videos/albums **you own**.
+- **Not copyable:** Photos in Trash, Archive, or Locked Folder; favorite/starred status; photo comments and album descriptions; Drive files where you lack editor or owner permission; Drive files where the owner restricted download/print/copy.
+- **Timing:** "usually happens within a few hours, but it can take up to a week." Confirmation codes "expire after 24 hours" and are single-use.
+- **Critically:** it copies **into a personal Google Account the person already has**. Both accounts continue to exist independently. The school identity does not move, does not convert, and remains the school's.
+
+### Admin-side departing-user data
+https://knowledge.workspace.google.com/admin/getting-started/transfer-data-between-google-workspace-accounts (formerly `support.google.com/a/answer/1041297`, now 301)
+- "Before copying data for a deleted user, you need to **restore that user within 20 days of deletion**."
+- Destination is **other users inside the organization** — "transfer the files they own in Drive to someone else," or move files to shared drives. The page does **not** contemplate a personal Google Account as a destination.
+- Alternative to deletion: "suspend or archive them."
+
+**NOT REACHED:** whether any non-Education Workspace edition exposes a user-initiated transfer-to-personal setting. Google migrated its admin help to `knowledge.workspace.google.com` and the candidate answer IDs (`7562871`, `9280841`, `6350963`) now 301 to the site root with no target page; a guessed knowledge-base slug 404'd.
+
+---
+
+## VERDICT
+
+**Data copies only. Never the identity.**
+
+| Direction | Mechanism | Status |
+|---|---|---|
+| person → org | Apple Domain Capture (30 days, "can't be undone") | **Production. Identity converts, org takes full ownership.** |
+| person → org | Google transfer tool for unmanaged users ("cannot decline") | **Production. Identity converts.** |
+| person → org | Entra external admin takeover (`forceTakeover: true`) | **Production. Users + subscriptions + licenses move; source directory deleted in 10 days.** |
+| org → person | Managed Apple Account released to individual | **Does not exist.** Deactivate → auto-delete at 30d (manual) / 120d (SIS). |
+| org → person | Android work profile / managed Google Play Account released | **Does not exist.** "all local data on the device within that profile is deleted." |
+| org → person | SCIM standard hand-back | **Does not exist.** RFC 7644 §3.6 offers DELETE-or-hide; RFC 7643 `active` is "determined by the service provider." No release primitive in either RFC. |
+| org → person | Google "Transfer your content" | **Exists — but it is a COPY**, school accounts only, admin-gated, lossy (no contacts/chats/tasks, no Locked Folder/Archive/Trash, no non-owned Drive files), into an account the person **already owned**. |
+| org → person | Google admin data transfer for departing user | **Copy to another user inside the org.** 20-day restore window. Personal accounts not a documented destination. |
+
+Three structural observations the evidence supports:
+
+1. **The asymmetry is total and is architectural, not incidental.** Every vendor built a well-documented, API-exposed, consent-free ingestion path (DNS TXT record → org owns your account) and shipped no egress path at all. Apple states the direction explicitly by omission; Microsoft ships `forceTakeover` with no `forceRelease`.
+
+2. **The only thing that ever survives an org's claim into the person's hands is an account the person already held — and it survives only by surrendering its name.** Apple: `elana-townshipschools.org@temporary.appleaccount.com`. Microsoft internal takeover force-delete: `user@fourthcoffeexyz.onmicrosoft.com`. Google: "they will need to rename their personal account." In all three, continuity of the account object is purchased at the cost of continuity of the identifier — which is to say the identifier, not the account, is what the org actually takes.
+
+3. **The orphan is a documented feature of the deprovisioning machinery, not a bug in someone's implementation.** Microsoft's own "Known limitations" states that unassigning a user from an app permanently disarms the eventual DELETE; and SCIM's `active` flag is normatively defined as having no normative meaning. An identity that outlives its offboarding does so *inside the SaaS vendor*, in `active=false` limbo, under nobody's control — which is the precise opposite of the identity reaching the person's hands.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;Ktf11W7zyP75N3TMq0c7AjoG5VhpltYMm0E3MbrU1JU
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,540 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-dult-the-formal-industry-commitment-6e731f >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-dult-the-formal-industry-commitment-6e731f.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. DULT — the formal industry commitment. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-dult-the-formal-industry-commitment-6e731f"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. DULT — the formal industry commitment
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 35,913 characters
+
+````
+## REPORT — "Is invisible monitoring more dangerous than visible monitoring?"
+
+Bottom line up front: **the proposition is ASSERTED by industry and by law/policy, ADJACENTLY MEASURED in two narrow places, and DIRECTLY UNTESTED.** No study I reached compares harm from a covert monitoring relation against harm from the *same* relation made visible. What the record does contain: (a) a formal, multi-vendor industry commitment that a tracked person MUST be alerted; (b) measured evidence that detection tooling is slow, partial and platform-dependent; (c) measured evidence that anti-spyware fails at exactly the "dual-use / relational" cases; (d) the only quantitative visible-vs-invisible comparison I found is a workplace meta-analysis where transparency improved *attitudes* but did **not** reduce *stress/strain* or improve performance; and (e) a countervailing claim, in the IETF's own threat model, that making a defensive measure visible can escalate danger.
+
+---
+
+## 1. DULT — the formal industry commitment
+
+**Origin.** Apple/Google joint announcement **2 May 2023**: https://www.apple.com/newsroom/2023/05/apple-google-partner-on-an-industry-specification-to-address-unwanted-tracking/ — submitted as an IETF Internet-Draft with a three-month public comment period, and a commitment to ship a production implementation "by end of 2023." Named supporters in the release: **Samsung, Tile, Chipolo, eufy Security, Pebblebee**. Quoted: Ron Huang (Apple VP Sensing & Connectivity), Dave Burke (Google VP Eng, Android), **Erica Olsen (National Network to End Domestic Violence)**, Alexandra Reeve Givens (CDT).
+
+- Google's own May-2023 post: **NOT REACHED** (blog.google slugs guessed and 404'd; sitemap contains no matching entry; WebSearch prohibited).
+
+**Individual draft.** `draft-detecting-unwanted-location-trackers` — https://datatracker.ietf.org/doc/draft-detecting-unwanted-location-trackers/
+- **-00 posted 2023-05-02**; **-01 posted 2023-12-20**; **expired 2024-06-22**. 37 pages.
+- Authors: **Ben Detwiler (Apple), Brent Ledvina (Apple), Siddika Polatkan (Google), Zachary Eddinger (Google)**.
+- Five Apple IPR disclosures filed 2023-05-04, five more 2023-10-19.
+- Presented at IETF-117 (Thu 2023-07-14 slot) and IETF-118 BoF (Mon, Nov 2023).
+
+**Working group.** `dult`, Security Area. https://datatracker.ietf.org/wg/dult/about/
+- Charter -00-00 2023-07-11 → external review 2024-02-16 → **IESG approved 2024-02-29** (charter-ietf-dult-01).
+- Chairs: **Erica Olsen (NNEDV) and Sean Turner**. AD: Roman Danyliw → Deb Cooley (2025-04-09) → **Christopher Inacio (2026-03-18)**.
+- Mailing list `unwanted-trackers@ietf.org`.
+- Both charter milestones were due **2025-07-31**. Neither is met.
+
+**Current status as of 2026-09-04 — no RFC has been published.**
+
+| Draft | Rev | Last posted | State |
+|---|---|---|---|
+| `draft-ietf-dult-accessory-protocol` | **00** | 2024-11-03 (expired 2025-05-08) | **EXPIRED** |
+| `draft-ietf-dult-finding` | **01** | 2025-06-06 (expired 2025-12-08) | **EXPIRED** |
+| `draft-ietf-dult-threat-model` | **05** | **2026-08-06** (expires 2027-02-07), 49 pp | **ACTIVE** |
+
+Threat-model authors have shifted away from the vendors: **M. Delano (Swarthmore College), J. Lowell (National Network to End Domestic Violence), S. Prabhu (Nokia)**.
+
+### Stated rationale and threat model (verbatim)
+
+Accessory protocol abstract: *"…a location-tracking accessory will be compatible with unwanted tracking detection and alerts on mobile platforms. This is an important capability for improving the privacy and safety of individuals in the circumstance that those accessories are used to track their location **without their knowledge or consent**."*
+
+Definitions (accessory protocol §1.2): *"unwanted tracking (UT) refers to undesired tracking of a person, their property, or their belongings"*; *"unwanted tracking alert refers to notifying the user of the presence of an unrecognized accessory that may be traveling with them over time."*
+
+Threat model §1: *"An Attacker can **surreptitiously** plant an Accessory on a Target and thus track them by tracking their 'own' Accessory."* Also: *"Frequent co-location of multiple Tags enables the Crowdsourced Network or a passive observer to infer social relationships, routines, or group behaviors, **compromising user privacy without consent**."*
+
+Threat model §4.1.6 — the strongest normative statement of the doctrine, aimed at Tile's Anti-Theft mode: *"**Any mode that makes it possible to turn off Unwanted Tracking Alerts is antithetical to DULT's recommendations**"* and *"DULT's recommendation that tracking alerts should not be circumventable under any circumstance."*
+
+### Hard normative requirements that make the relation physically visible (accessory protocol -00)
+
+- §3.13.3: *"The accessory **MUST** include a sound maker … to play sound when in separated state"*; *"The sound maker MUST emit a sound with **minimum 60 Phon peak loudness** as defined by ISO 532-1:2017."* It MUST also sound when a non-owner triggers Play Sound.
+- §3.13.2/Table 17 timings: `T_SEPARATED_UT_TIMEOUT` = **random 8–24 h uniform**; then motion sampling at **10 s**; on motion, sound, and sampling drops to **0.5 s**; back-off **6 h** after 20 s of motion or **10 sounds**.
+- Accelerometer MUST detect ±10° orientation change on any two axes.
+- §3.15: accessory MUST be uniquely identifiable (printed serial or privacy-preserving equivalent); identifier readable over NFC or BLE, but BLE retrieval **MUST require a physical action** (e.g. 10-second button hold).
+- §6 "Platform Support for Unwanted Tracking" is literally **"TODO"** — the platform half of the specification was never written before the draft expired.
+
+### The visibility the spec grants is deliberately *partial*
+
+Threat model §3.2.1 and the definition of *(Obfuscated) Owner Information*: the target learns **that** a relation exists, and gets the tag serial, but the owner is redacted to *"no more than the last two digits of a phone number and/or an obfuscated email address with the first letter of the username and entity visible … (e.g., b\*\*\*\*\*@i\*\*\*\*.com)."* **The relation is made visible; the counterparty is not made enumerable.**
+
+### Shipped implementations
+
+- **Android unknown tracker alerts** — https://blog.google/products-and-platforms/platforms/android/unknown-tracker-alert-google-android/ — **27 July 2023**, Erik Kay (VP Eng). Android 6.0+, AirTags only at launch; manual scan at Settings → Safety & emergency → Unknown tracker alerts. Google states it **held back its own Find My Device network** "until Apple has implemented protections for iOS."
+- **Cross-platform launch** — https://www.apple.com/newsroom/2024/05/apple-and-google-deliver-support-for-unwanted-tracking-alerts-in-ios-and-android/ — **13 May 2024**. iOS 17.5 and Android 6.0+; alert string "[Item] Found Moving With You." Manufacturers committing future tags to the spec: **Chipolo, eufy, Jio, Motorola, Pebblebee**.
+- **Android follow-on** — https://blog.google/feed/android-unknown-tracker-alerts/ — **11 December 2024**: "Temporarily Pause Location" (up to 24 h) and "Find Nearby."
+
+---
+
+## 2. AirTag unwanted-tracking alerts — history and measurement
+
+**Apple, 10 Feb 2022**, https://www.apple.com/newsroom/2022/02/an-update-on-airtag-and-unwanted-tracking/ — promised: new privacy warnings at setup stating that tracking people without consent is criminal; replacing "Unknown Accessory Detected" with AirPods-specific wording; Precision Finding for unknown AirTags on iPhone 11/12/13; a display alert when an AirTag emits sound while travelling with you; **"refined unwanted tracking alert logic to notify users earlier"**; louder tone sequences. Apple states *"every AirTag has a unique serial number, and paired AirTags are associated with an Apple ID"* and that it supplies paired-account details to law enforcement on subpoena. Apple's own characterisation of frequency: *"incidents of AirTag misuse are rare; however, each instance is one too many."* (CLAIMED, no denominator given.)
+
+**Apple Tracker Detect for Android** — released **13 December 2021** (date per Heinrich et al. 2022, §3). Google Play listing itself **NOT REACHED** (support.google.com and Play return 429/CAPTCHA).
+
+**Current Apple support page**: https://support.apple.com/en-us/119874 — AirTag, AirPods (3rd gen, 4, Pro, Max) and Find My network accessories trigger "…Found Moving With You" when *"separated from its owner and seen moving with you over time"*; user can play sound, use Precision Finding (UWB), NFC-tap for owner info, view detection map, and disable. Includes DV hotlines for US/UK/AU.
+
+### MEASURED evaluations
+
+**Heinrich, Bittner, Hollick — "AirGuard"**, WiSec 2022, DOI 10.1145/3507657.3528546, arXiv:2202.11813 (23 Feb 2022). Controlled three-scenario comparison of AirGuard vs. iOS built-in detection, AirTag + Chipolo ONE Spot + OpenHaystack self-made tag:
+
+| Placement | AirGuard time-to-notify | iOS time-to-notify |
+|---|---|---|
+| Pocket | **35 min** | **1 h 45 m 14 s** (AirTag and Chipolo), only on return to home location; **OpenHaystack: never** |
+| Backpack | **31 min** | **> 4 hours**, despite linking the tag to **>70 locations**; only on return home |
+| Car (fuel cap) | notified on 2nd ride, 3rd detection | **never notified**, not even after returning home |
+
+Key measured failure modes: iOS **delays notification until the user returns to their home location** — "the only way to reliably get a notification is by returning to the home location, which essentially gives the home location away to the attacker." Self-built OpenHaystack tags are **never** detected by either system. Tags rotating public keys more than once per hour defeat both.
+
+Field deployment, six weeks **15 Dec 2021 – 26 Jan 2022**: **>120,000 active users**, **>30,000 donating data**, **>8,600,000** Find My advertisements, **>3,000,000** distinct Find My devices discovered of which ~**160,000** were accessories. **2,494 tracking notifications for 1,325 users.** Accessories = **4.1%** of devices found but **29.3%** of notifications. **97** notifications user-marked as false alarms, **85** of them caused by Find My-capable Apple devices. **~0.2% of data donors were persistently at "high risk"** (tracked >24 h in a rolling two-week window).
+
+**Heinrich, Stute, Kornhuber, Hollick — "Who Can Find My Devices?"**, PoPETs 2021(3):227–245, DOI 10.2478/popets-2021-0045, https://petsymposium.org/popets/2021/popets-2021-0045.pdf. Protocol-level (not alert-efficacy) analysis: unauthorised access to location reports permits tracking and top-location recovery with **error on the order of 10 m in urban areas**; two flaws found, including unauthorised access to the **past seven days** of location history.
+
+**Ibrahim, Asim, Varvello, Zaki — "I Tag, You Tag, Everybody Tags!"** arXiv:2303.06073 (IMC'23): AirTag and SmartTag "are located **55% of the times in about 10 minutes within a 100 m radius**," concluding *"real time stalking to a precise location via location tags is impractical."*
+
+**Jang, Ibrahim, Asim, Varvello, Zaki — "A Tale of Three Location Trackers,"** arXiv:2501.17452 (29 Jan 2025): **22 volunteers across 29 countries**. AirTag plateaus at **79.8%** within-10 m accuracy after 60 min; SmartTag **54.8%** in 20 medium-Samsung-density countries; Tile materially worse in Asia/Africa. Cites DULT as "Internet-Draft, IETF, May 2024."
+
+- **Mayberry et al., "Who Tracks the Trackers?"** WPES 2021, DOI 10.1145/3463676.3485616 — **full text NOT REACHED**; reported second-hand (Jang et al.) as measuring that the iOS alert fires after the tag is seen "in three separate locations within 24 hours."
+- **Briggs & Geeng, "BLE-Doubt,"** IEEE SPW/ConPro 2022, DOI 10.1109/spw54247.2022.9833870 — **full text NOT REACHED** (candidate URLs 404 / wrong document).
+
+### Police-report tally
+
+**Samantha Cole, Motherboard/VICE, 6 April 2022**: https://www.vice.com/en/article/apple-airtags-police-reports-stalking-harassment
+- Records requested from "dozens of the country's largest police departments"; **8 departments** supplied data; **150 AirTag-mentioning police reports** over "a recent eight month period."
+- **50** reports = women who received a notification that an AirTag was travelling with them. **25** of those women named a specific man (ex, husband, boss). **1** of the 150 involved a man suspecting an ex-girlfriend. Remainder: robberies, thefts, false alarms.
+- Directly on visibility: *"AirTags have always implemented a notification feature that alerts people with iPhones if an AirTag is traveling with them; **anyone not using an iPhone or Apple device, however, would never know**."* On Tracker Detect: *"users have to learn about and then install the app, then allow it permission to work in the background—steps many people won't follow through with."*
+- Counter-current: experts warn *"confronting an abusive partner or ex or disabling their tracking can be dangerous."*
+
+### Litigation
+
+- **Hughes v. Apple, Inc.**, N.D. Cal. **3:22-cv-07668**, complaint filed **5 Dec 2022** (plaintiffs Lauren Hughes and Jane Doe; counsel Gillian Wade). Judge **Vince Chhabria**. Apple moved to transfer 2026-05-29; **terminated in N.D. Cal. 2026-07-08** and transferred to C.D. Cal. as **2:26-cv-07457** (2026-07-09). Docket has **526** RECAP documents. Docket: https://www.courtlistener.com/docket/66613039/hughes-v-apple-inc/
+- **IN RE: Apple AirTag Marketing, Sales Practices, and Products Liability Litigation, MDL No. 3199** (JPML), opened **4 Aug 2026**; Apple filed a **response in opposition to centralisation on 25 Aug 2026**. https://www.courtlistener.com/docket/73743430/in-re-apple-airtag-marketing-sales-practices-and-products-liability/ Related member actions include *Miller v. Apple* (W.D.N.C. 3:26-cv-00556, 9 Jul 2026), *Doe v. Apple* (D. Nev. 2:26-cv-02178, 15 Jul 2026), *Doe MP 1 v. Apple* (N.D. Fla. 3:26-cv-04937, 17 Aug 2026 — motion to proceed pseudonymously **denied** 19 Aug 2026).
+- Only **11** published US opinions mention "AirTag" in CourtListener's opinion corpus, the earliest **2024-07-25** (*E.A. v. A.A.*, Ohio Ct. App.). State AG actions: **NOT REACHED**.
+
+---
+
+## 3. Does the literature find covert is worse?
+
+**Chatterjee et al., "The Spyware Used in Intimate Partner Violence," IEEE S&P 2018**, DOI 10.1109/sp.2018.00061, https://rist.tech.cornell.edu/papers/spyware.pdf
+
+The paper's central finding **cuts against a simple covert-is-worse framing**: *"While we find dozens of overt spyware tools, **the majority are 'dual-use' apps**"* — legitimate-purpose apps repurposed. *"Both overt spyware and dual-use apps are dangerous in IPV contexts."*
+
+Its explicit treatment of covertness (§IV-B): *"In an IPS context, it's beneficial to an abuser if tools are covert, meaning they can operate without the victim's knowledge, and can potentially remain undiscovered even if the victim looks through all the apps in their app menu."* That is a **motive** claim, not a measured harm differential.
+
+Measured counts:
+- 27,741 URLs from Google search; 1,629 active Play apps; **32 unique off-store apps**; 9,224 apps collected in a 3-week crawl; 1,000 hand-labelled → **280 (28%) IPS-relevant**; **23** off-store spyware apps; deep manual analysis of **61 on-store + 9 off-store**; 11 apps' customer support probed, **8 of 11** responded affirmatively to an IPS request.
+- **The enumerability failure is the measured result.** Against 276 dual-use + 20 off-store + 100 benign apps: **37 of 40 anti-spyware tools flagged at most 3% of dual-use apps.** Best performer (Anti Spy Mobile) flagged **95% of off-store spyware but only 47% of on-store IPS apps** (and flagged Chrome). Major AV brands flagged **at most 13%**. Via VirusTotal, only **8%** of dual-use apps were flagged by ≥3 engines.
+- On visible-but-ignored signalling: *"Even when notifications are present, we suspect victims are unlikely to observe them, let alone properly interpret their meaning"*; the Android GPS icon *"does not specify which app is using GPS, and is ever-present for many Android users."* Find My Device and Sprint Family Locator **do** notify — but *"notifications can be ignored or suppressed should the attacker have temporary physical access to the device."* **This is the sharpest measured qualification of the "visibility helps" thesis: a visible signal that does not name the relation is not enumerable.**
+- Icon-hiding is common: iKeyMonitor (re-opened by dialling `#8888B`), TrackView (*"leaves no access point on the device once the icon is hidden"*), Cerberus.
+
+**Roundy et al., "The Many Kinds of Creepware Used for Interpersonal Attacks," IEEE S&P 2020**, DOI 10.1109/sp40000.2020.00069, https://rist.tech.cornell.edu/papers/creepware.pdf
+- **~50 million Android devices**, billions of installs, Norton Mobile Security telemetry; CreepRank seeded with **18 covert surveillance apps** from Chatterjee et al.
+- **857 of the top-1,000** ranked apps qualified as creepware. **372** were surveillance apps; **107 multifaceted surveillance apps affected 172K Norton customers in 2017 alone**; >1 million installs of creepware overall; **115** spoofing apps (41 "burner phone"). Inter-coder Fleiss' κ = **0.77** (categories) / **0.75** (sub-categories) over 60 jointly coded apps.
+- Directly on invisibility as an *ecosystem*: a distinct category **Control – Hide-Icon** and **Evasion – Hidden-Content**. Seeding CreepRank with 9 icon-hiders returned a top-50 containing **12 app-hiders**; three hidden apps *"can only be opened by calling a fake phone number."* And a defensive counterpart exists — *"'Hidden Apps', a defensive app that reveals the presence of hidden apps"* — i.e. the market itself treats **enumerability as the countermeasure**.
+- Surveillance apps here are coded as those that *"**both covertly and overtly** track someone's location"* — the paper does not separate harm by covertness.
+
+**Tseng et al., "The Tools and Tactics Used in Intimate Partner Surveillance," USENIX Security 2020**, https://www.usenix.org/system/files/sec20-tseng.pdf
+- **>200,000 posts across ~20,000 threads**, 5 forums; **750 threads** qualitatively coded (250 each from 3 forums). One forum had **78%** of sampled threads IPS-related. Forum C ≈ 80,000 subscribers (Feb 2020).
+- Taxonomy (Table 3) is split by **physical access**, not by covertness: tool-based *requiring* physical access (spyware, keyloggers, GPS trackers on body/car, AV recorders) vs. tool-based *not requiring* it (shared phone plan features, **shared cloud tools**, router monitoring, reverse lookup), plus coercion/subterfuge and outsourced attacks (hiring a PI).
+- The word "covert" appears **once** in the entire paper. **The paper does not claim attackers preferred covert tools.** What it shows instead is that attackers were steered toward **legitimate, account-level, relational** access.
+
+**Havron et al., "Clinical Computer Security for Victims of Intimate Partner Violence," USENIX Security 2019**, https://www.usenix.org/system/files/sec19-havron.pdf — the single best measured evidence on enumerability (see §5 below).
+
+**Freed et al., "A Stalker's Paradise," CHI 2018**, DOI 10.1145/3173574.3174241, mirror https://www.nixdell.com/papers/stalkers-paradise-intimate.pdf — qualitative, **N=89** (11 focus groups with **39 survivors** + interviews with **50 professionals**). Password coercion reported by **n=28** participants. Core framing: the **UI-bound adversary** — *"an adversarial but authenticated user that interacts with a victim's device or account via standard user interfaces."* That adversary is by construction **not covert malware**; it is a legitimate, often visible, relation being abused.
+
+> ⚠️ **Instrument-lie found in the standards record.** DULT threat model §3.2.2 (draft-05, 2026-08-06) attributes to Freed et al. 2018 the figures *"72% of survivors reported being forced or coerced to share passwords," "41% reported that a cohabiting abuser 'went through' their Device," "67% reported that an abuser was able to 'hack' into their accounts remotely."* **The Freed et al. paper contains zero "%" characters and reports no such percentages.** These numbers are misattributed in the active IETF working-group document. Their true source: **NOT IDENTIFIED**.
+
+---
+
+## 4. Coercive-control law and the evidentiary role of monitoring
+
+**England & Wales — Serious Crime Act 2015 s.76**, https://www.legislation.gov.uk/ukpga/2015/9/section/76. In force **29 December 2015**. Offence: repeated or continuous controlling or coercive behaviour toward a personally connected person, having a "serious effect" — either fear of violence on **at least two occasions**, or serious alarm/distress with a **substantial adverse effect on B's usual day-to-day activities** — where A knows or ought to know this. Defence of "best interests + reasonable," unavailable where the effect is fear of violence. Max **5 years** on indictment.
+
+**CPS guidance**, https://www.cps.gov.uk/legal-guidance/controlling-or-coercive-behaviour-intimate-or-family-relationship (updated **24 April 2023** and **7 February 2025**):
+- Listed CCB conduct includes *"monitoring their time"* and *"**monitoring a person via online communication tools or using spyware**."*
+- **The decisive sentence for this question**, in "Gathering Evidence and Case Building": *"**A victim may not know the full extent of a suspect's conduct, for instance if they were being monitored without their knowledge.**"* This is a POLICY assertion that invisibility is an evidentiary defect, addressed to prosecutors — not a measured finding.
+- Evidential list includes *"phone records, text messages and device logs"*, *"evidence of abuse over the internet, digital technology (e.g. smart speakers) and social media platforms"*, and *"**GPS tracking devices installed covertly an/or overtly on mobile phones, tablets, vehicles etc**"* — note that the guidance treats covert and overt installations as **equally evidential**, not as different-severity conduct.
+
+**Home Office statutory guidance framework**, first published 5 Dec 2015; current version published **5 April 2023**, updated **27 July 2023**: https://www.gov.uk/government/publications/controlling-or-coercive-behaviour-statutory-guidance-framework — PDF https://assets.publishing.service.gov.uk/media/642d3f9e7de82b001231364d/Controlling_or_Coercive_Behaviour_Statutory_Guidance_-_final.pdf (fetched, not text-mined in detail).
+
+**Scotland — Domestic Abuse (Scotland) Act 2018 asp 5**, s.1 and s.2, in force **1 April 2019** (SSI 2018/387). https://www.legislation.gov.uk/asp/2018/5/section/2 — s.2(3) lists the "relevant effects," and **(c) is literally "controlling, regulating or monitoring B's day-to-day activities."** Monitoring is a named statutory element of the offence, with **no covert/overt distinction drawn**.
+
+**Prosecution statistics — Home Office, "Review of the controlling or coercive behaviour offence," published 10 May 2021**, https://assets.publishing.service.gov.uk/media/608bdba28fa8f51b909ca167/review-of-the-controlling-or-coercive-behaviour-offence.pdf
+
+| Metric | Figure |
+|---|---|
+| Police-recorded CCB offences 2016/17 | **4,246** |
+| Police-recorded CCB offences 2019/20 | **24,856** |
+| Defendants prosecuted for CCB as principal offence, 2019 | **1,112** |
+| Proportion of CCB offences leading to a charge | **11% (2017/18) → 6% (2018/19)** |
+| CCB offences closed for evidential difficulties, 2018/19 | **85%** |
+| Evidence insufficient *despite victim supporting action*, 2018/19 | **35%** for CCB, vs **24%** all DA offences, **33%** DA-related stalking |
+| Conviction ratio (CCB as principal offence) | **38% (2016)** rising thereafter |
+| Out-of-court disposals for CCB | **~0%** (vs 3% all DA) |
+| Early-adoption FoI (McClenaghan & Boutard 2017) | **532 charges** across **29 forces** in first 18 months; **6 forces brought ≤5 charges** |
+
+The review's own diagnosis is *"evidencing CCB is a significant challenge for police and prosecutors, likely due to the nature of CCB as a course of conduct offence that often includes non-physical abuse."* Barlow et al. (2019), quoted at length: officers focused on "photographic evidence" of a single assault *"with many of the woman's descriptions of coercive control being disregarded as examples of 'one word against the other', and thus 'weak' or 'unverifiable'."*
+
+**So: yes, prosecution turns on discoverable artefacts, and the record documents in numbers what happens when the conduct leaves no artefact — a 6% charge rate and 85% evidential-difficulty closures.** But this is a general finding about *non-physical* abuse; **no source I reached isolates "the tooling left no trace" as a distinct measured cause.**
+
+- s.76 offences recorded / charged **by year after 2019/20**: **NOT REACHED.** ONS *Domestic abuse and the criminal justice system* (latest edition **26 Nov 2025**, https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/domesticabuseandthecriminaljusticesystemenglandandwales/latest) does **not disaggregate** CCB; CPS quarterly data summaries do not either.
+- A measured *evaluation* of the 2023 statutory guidance: **NOT REACHED / apparently does not exist.**
+
+---
+
+## 5. Third-party enumerability — can an advocate, clinician or court list what is watching?
+
+This is where the record is **strongest and most directly measured**, and it points at *relational* rather than *malware* state.
+
+**Havron, Freed, Chatterjee, McCoy, Dell, Ristenpart, USENIX Security 2019** — the IPV Spyware Discovery (ISDi) tool plus structured manual checks (TAQ + technograph), deployed in NYC Family Justice Centers. **N = 44 clients.**
+
+- **23 of 44 (52%)** had identified security risks, vulnerabilities or plausible tech-abuse vectors. **21 of 44** had nothing surfaced (19 relieved; **2 left unsatisfied with no explanation found even after follow-up with outside experts**).
+- Problems found (some clients had several):
+
+| Finding | Count |
+|---|---|
+| Potential **spyware** detected | **3** |
+| Potential password compromise | **14** |
+| **Presence of unknown "trusted" devices** | **12** |
+| Shared family/phone plan | **4** |
+| Rooted device | **1** |
+
+- ISDi flagged **79** apps across all scans: **61 dual-use** ("find my phone" and child monitoring most prevalent) — and for **all but one**, clients recognised the app; **18 false positives**; max **5** flags on any one device.
+- The authors' own explanation of why installed covert spyware was rare: *"many abusers are seemingly able to surveil clients via compromised accounts, and so may not need to install spyware."*
+- **The relations that mattered were found by enumeration, not by scanning.** Manual iCloud checks for **4** clients found "trusted" devices the client did not recognise or that belonged to the abuser; account-log checks found unknown/abuser logins for another **8**. Two clients had unrecognised browser extensions (one off-store, sideloaded, with read/write on all browser data).
+- Non-enumerable relational chains as a documented safety cost: **3** clients kept password files that synced to a compromised iCloud; several emailed new passwords to a compromised address; clients used a compromised account as the recovery account for other services, *"with clients unaware of how this might result in abuser access to these services."*
+
+**Tseng et al. 2020** documents the attacker side of the same non-enumerable surface: *"attackers are encouraged by the forum to use their partner's Apple ID to view their personal messages and photos from a web browser — no device access necessary"*; an attacker who *"described discovering she could view a partner's messages on a family iPad, which was synced to her partner's iCloud account"*; a three-party shared iCloud exposing an affair partner's purchase and browsing history; Google Maps Timeline; iOS Significant Locations; WhatsApp Web pairing described as *"a one-minute job"* best done while a partner sleeps, the poster *"actually shocked at what a privacy flaw this seems to be."*
+
+**The industry's answer to enumerability** is Apple **Safety Check** (iOS 16+, Sept 2022): https://support.apple.com/guide/personal-safety/safety-check-iphone-ios-16-ips2aad835e1/web — *Emergency Reset* "quickly stop sharing with all people and apps"; *Manage Sharing & Access* lets a user "review and manage information you're sharing with people, the information that apps have access to," and "review and remove devices connected to your Apple Account," plus verification phone numbers and emergency contacts. **This is a first-party enumerator for the device owner.** I found **no** mechanism, and no measured evaluation, giving an **advocate, clinician or court** third-party enumeration of monitoring relations — the ISDi clinic model works only *with the client present, with their device in hand, over USB*.
+
+**DULT's own admission that logs do not yet exist** (threat model §4.1.5): *"At a bare minimum, a successful protocol would include a log file that is clearly labeled and easily accessible … that is not easily edited … Each log event should include: the account, the Device, GPS location, and the time."* And explicitly: *"**Logs should not be easily editable to avoid gaslighting and accountability efforts.**"* Ideally also a log of *when the owner checked the tracker's location while it was near the target* — acknowledged to require crowdsourced-network cooperation and to be unbuilt. §4.1.1 adds that *"a Target's ability to mitigate threats to their safety depends on consumer choices and access"* and that platform differences *"can also be exploited by an Attacker familiar with target Platforms."*
+
+---
+
+## 6. The countervailing evidence — where "make it visible" is contested
+
+1. **The IETF's own threat model says visible defence can escalate danger.** §3.1: *"…**taking overt security measures while frequently in physical proximity to the Attacker may lead to the Attacker escalating their tactics of interpersonal control**. Risk assessments and the weighing of tradeoffs in such situations are often highly individualized."* VICE's reporting says the same: confronting or disabling can be dangerous.
+
+2. **Alerts have a measured false-positive and fatigue cost.** DULT §4.1.2: *"Some people may develop 'alert fatigue' from false positives, while others may be more concerned about false negatives … [some] decrease/disable sensitivity because alerts cause anxiety or false positives condition them to ignore alerts."* AirGuard measured 97 user-reported false alarms in six weeks (85 from ordinary Apple devices).
+
+3. **Making the target's own tag detectable can help the attacker.** DULT §3.2: existing anti-tracking measures *"have been criticized as potentially making it easier for an Attacker to track a Target using the **Target's own Tag**"* if identifiers do not rotate often enough. (Cited mitigation: Eldridge et al., https://eprint.iacr.org/2023/1332.pdf.)
+
+4. **The only quantitative visible-vs-invisible comparison I found — and it is only partly supportive.** Ravid, White, Tomczak, Miles & Behrend, *"A meta-analysis of the effects of electronic performance monitoring on work outcomes,"* **Personnel Psychology**, DOI **10.1111/peps.12514** (25 Apr 2022); preprint https://osf.io/ef43u/ (5 Apr 2022). **K = 94 independent samples, N = 23,461.**
+   - *"Results provide no evidence that EPM improves worker performance."*
+   - *"**the presence of EPM increases worker stress and strain, regardless of the characteristics of monitoring**."*
+   - Transparency **did** moderate attitudes: overall ρ = **.25** [95% CI .11, .39]; fairness/justice ρ = **.21** [.04, .38]; commitment ρ = **.35** [.10, .61]; perceived support ρ = **.37** [.13, .62]; satisfaction ρ = **.26** [.08, .44].
+   - Transparency showed **no effect on performance** (H3a unsupported), and **H3c — whether transparency reduces stress/strain — could not be tested, K = 2.**
+   - Invasiveness moderated attitudes negatively; *"No observed relationship in our meta-analysis was stronger than the relationship between **person-targeted EPM and perceptions of privacy invasion**."*
+   - The authors' forward-looking note is exactly the claim at issue, stated as reasoning rather than result: *"Transparency becomes even more important as monitoring technologies become increasingly discreet and unobtrusive, as there is more opportunity to conceal what is being tracked."*
+
+   **Read plainly: making monitoring visible measurably improved how people felt about the monitor. It did not measurably reduce the harm.**
+
+---
+
+## Verdict
+
+| Claim | Status |
+|---|---|
+| A tracked person MUST be alerted; alerts must not be circumventable | **POLICY / SPEC.** Apple + Google + Samsung/Tile/Chipolo/eufy/Pebblebee (2023), + Chipolo/eufy/Jio/Motorola/Pebblebee (2024); IETF WG chartered 2024-02-29 with an NNEDV co-chair. **Shipped** (iOS 17.5 / Android 6+, 13 May 2024). **Not standardised** — no RFC; both protocol drafts expired; §6 "Platform Support" was still literally "TODO" when the accessory draft lapsed. |
+| Covert tooling is *preferred by attackers* | **ASSERTED with a stated motive** (Chatterjee 2018 §IV-B) but **not counted**. Tseng 2020 uses "covert" once and does not rank by covertness. Roundy 2020 codes covert and overt surveillance in one category. |
+| Covert tooling is *harder to enumerate* | **MEASURED, strongly.** 37/40 anti-spyware tools flag ≤3% of dual-use apps; major AV ≤13%; only 8% flagged by ≥3 VirusTotal engines (Chatterjee 2018). Icon-hiding is a distinct app market with its own defensive counter-market (Roundy 2020). |
+| The *dangerous* relations are covert malware | **REFUTED by the field data.** Havron 2019: 3 spyware findings vs **12** unknown "trusted" devices, **14** password compromises, **4** shared plans, in N=44. Freed 2018's central construct is the **UI-bound adversary** — a legitimate, authenticated, often visible relation. |
+| Prosecution turns on discoverable evidence of monitoring | **YES, and measured in the aggregate**: 6% charge rate, 85% evidential-difficulty closures, 35% insufficient-evidence even with a supporting victim (Home Office 2021). CPS 2023/25 states the point directly. But **no source isolates "traceless tooling" as a measured cause.** |
+| **Invisible management is more dangerous than visible management** | **UNTESTED as stated.** Zero studies reached compare the same relation covert vs. disclosed on a harm outcome. The nearest quantitative test (Ravid et al. 2022, K=94, N=23,461) finds transparency improves **attitudes** (ρ≈.25) but **not performance**, and **could not test stress/strain (K=2)** — while stress rose under monitoring **regardless of its characteristics**. The IETF's own threat model asserts the opposite in one specific case: **overt** defensive measures near an attacker can escalate. |
+
+### NOT REACHED
+- Google's May-2023 DULT announcement post (blog.google — all guessed slugs 404; sitemap has no matching entry).
+- Google Play listings / support.google.com (429 + CAPTCHA redirect).
+- Apple newsroom post for Tracker Detect, Dec 2021 (404 — likely never existed; date sourced from Heinrich et al. 2022).
+- Mayberry et al., WPES 2021 full text; Briggs & Geeng "BLE-Doubt" full text.
+- s.76 offences recorded/charged/convicted **by year for 2020/21–2025/26** (ONS does not disaggregate; CPS summaries do not either).
+- Any measured evaluation of the 2023 Home Office CCB statutory guidance.
+- State AG actions on AirTag stalking.
+- OpenAlex (daily budget exhausted mid-session — switched to Crossref + arXiv + CourtListener).
+
+### Flagged defect in a live standards document
+`draft-ietf-dult-threat-model-05` §3.2.2 attributes three percentages (72% / 41% / 67%) to Freed et al., CHI 2018. **That paper contains no percentages at all** (it is qualitative, N=89, with n=28 reporting password coercion). The figures are misattributed in the active IETF WG document; their real source is unidentified.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 27,382 characters
+
+````
+Report was already complete when your message arrived. Reproducing it in full below.
+
+---
+
+# Does the record support "an INVISIBLE monitoring relation is more dangerous than a VISIBLE one"?
+
+**Verdict up front: ASSERTED by industry and by law/policy, ADJACENTLY MEASURED in two narrow places, DIRECTLY UNTESTED.** No study I reached compares harm from a covert monitoring relation against the *same* relation made visible.
+
+---
+
+## 1. DULT — the formal industry commitment
+
+**Announcement:** Apple/Google, **2 May 2023** — https://www.apple.com/newsroom/2023/05/apple-google-partner-on-an-industry-specification-to-address-unwanted-tracking/ — submitted as an IETF Internet-Draft, three-month public comment period, commitment to ship production implementations by end of 2023. Named supporters: **Samsung, Tile, Chipolo, eufy Security, Pebblebee**. Quoted: Ron Huang (Apple VP Sensing & Connectivity), Dave Burke (Google VP Eng Android), **Erica Olsen (NNEDV)**, Alexandra Reeve Givens (CDT). Google's own May-2023 post: **NOT REACHED** (blog.google slugs 404; sitemap has no matching entry).
+
+**Individual draft** `draft-detecting-unwanted-location-trackers` — https://datatracker.ietf.org/doc/draft-detecting-unwanted-location-trackers/
+- **-00: 2023-05-02** · **-01: 2023-12-20** · **expired 2024-06-22**. 37 pages.
+- Authors: **Ben Detwiler (Apple), Brent Ledvina (Apple), Siddika Polatkan (Google), Zachary Eddinger (Google)**.
+- Five Apple IPR disclosures 2023-05-04, five more 2023-10-19. Sessions at IETF-117 (Jul 2023) and IETF-118 BoF (Nov 2023).
+
+**Working group** `dult`, Security Area — https://datatracker.ietf.org/wg/dult/about/
+- Charter -00-00 2023-07-11 → external review 2024-02-16 → **IESG approved 2024-02-29**.
+- Chairs **Erica Olsen (NNEDV)** and **Sean Turner**. AD: Danyliw → Deb Cooley (2025-04-09) → **Christopher Inacio (2026-03-18)**.
+- Both charter milestones due **2025-07-31**. Neither met.
+
+**Status as of 2026-09-04 — no RFC published.**
+
+| Draft | Rev | Last posted | State |
+|---|---|---|---|
+| `draft-ietf-dult-accessory-protocol` | **00** | 2024-11-03 (exp. 2025-05-08) | **EXPIRED** |
+| `draft-ietf-dult-finding` | **01** | 2025-06-06 (exp. 2025-12-08) | **EXPIRED** |
+| `draft-ietf-dult-threat-model` | **05** | **2026-08-06** (exp. 2027-02-07), 49 pp | **ACTIVE** |
+
+Threat-model authorship has moved off the vendors: **M. Delano (Swarthmore), J. Lowell (NNEDV), S. Prabhu (Nokia)**.
+
+### Rationale / threat model (verbatim)
+
+Accessory protocol abstract: *"…used to track their location **without their knowledge or consent**."*
+§1.2: *"unwanted tracking alert refers to notifying the user of the presence of an unrecognized accessory that may be traveling with them over time."*
+Threat model §1: *"An Attacker can **surreptitiously** plant an Accessory on a Target…"*; *"Frequent co-location of multiple Tags enables the Crowdsourced Network or a passive observer to infer social relationships, routines, or group behaviors, **compromising user privacy without consent**."*
+
+**The doctrinal statement**, threat model §4.1.6 (aimed at Tile's Anti-Theft mode): *"**Any mode that makes it possible to turn off Unwanted Tracking Alerts is antithetical to DULT's recommendations**"* — alerts *"should not be circumventable under any circumstance."*
+
+### Requirements that force physical visibility (accessory protocol -00)
+- §3.13.3: sound maker **MUST** be present; **minimum 60 Phon peak loudness** (ISO 532-1:2017); MUST also sound when a non-owner triggers Play Sound.
+- Table 17: `T_SEPARATED_UT_TIMEOUT` = **random 8–24 h uniform**; motion sampling **10 s**, dropping to **0.5 s** after motion; back-off **6 h** after 20 s motion or **10 sounds**. Accelerometer MUST detect ±10° on any two axes.
+- §3.15: unique serial or privacy-preserving ID; BLE identifier retrieval **MUST require a physical action** (e.g. 10-second button hold).
+- **§6 "Platform Support for Unwanted Tracking" is literally "TODO"** — the platform half was never written before the draft lapsed.
+
+### The visibility granted is deliberately partial
+*(Obfuscated) Owner Information*: *"no more than the last two digits of a phone number and/or an obfuscated email address with the first letter of the username and entity visible … (e.g., b\*\*\*\*\*@i\*\*\*\*.com)."* **The relation is made visible; the counterparty is not made enumerable.**
+
+### Shipped
+- **Android unknown tracker alerts**, **27 Jul 2023**, Erik Kay — https://blog.google/products-and-platforms/platforms/android/unknown-tracker-alert-google-android/ — Android 6.0+, AirTags only at launch. Google **held back its own Find My Device network** "until Apple has implemented protections for iOS."
+- **Cross-platform**, **13 May 2024** — https://www.apple.com/newsroom/2024/05/apple-and-google-deliver-support-for-unwanted-tracking-alerts-in-ios-and-android/ — iOS 17.5 + Android 6.0+, "[Item] Found Moving With You." Committing manufacturers: **Chipolo, eufy, Jio, Motorola, Pebblebee**.
+- **11 Dec 2024** — https://blog.google/feed/android-unknown-tracker-alerts/ — "Temporarily Pause Location" (≤24 h) and "Find Nearby."
+
+---
+
+## 2. AirTag alerts — history and MEASURED evaluation
+
+**Apple, 10 Feb 2022** — https://www.apple.com/newsroom/2022/02/an-update-on-airtag-and-unwanted-tracking/ — promised setup privacy warnings stating tracking people without consent is criminal; AirPods-specific alert wording; Precision Finding for unknown AirTags (iPhone 11/12/13); display alert when an AirTag sounds; *"refined unwanted tracking alert logic to notify users earlier"*; louder tones. *"every AirTag has a unique serial number, and paired AirTags are associated with an Apple ID"* — supplied to law enforcement on subpoena. Apple's frequency claim: *"incidents of AirTag misuse are rare; however, each instance is one too many"* (CLAIMED, no denominator).
+
+**Tracker Detect (Android)** released **13 Dec 2021** (date per Heinrich et al. 2022 §3). Play listing **NOT REACHED** (429/CAPTCHA).
+
+**Current Apple page** https://support.apple.com/en-us/119874 — AirTag, AirPods (3rd gen/4/Pro/Max), Find My accessories; triggers when *"separated from its owner and seen moving with you over time"*; play sound, Precision Finding (UWB), NFC tap, disable instructions, detection map; DV hotlines US/UK/AU.
+
+### Heinrich, Bittner, Hollick — "AirGuard", WiSec 2022, DOI 10.1145/3507657.3528546, arXiv:2202.11813
+
+| Placement | AirGuard | iOS built-in |
+|---|---|---|
+| Pocket | **35 min** | **1 h 45 m 14 s**, only on return home; **OpenHaystack tag: never** |
+| Backpack | **31 min** | **> 4 hours**, despite ≥70 linked locations; only on return home |
+| Car (fuel cap) | 2nd ride / 3rd detection | **never**, not even on return home |
+
+iOS *"delays notification until the user returns to their home location — which essentially gives the home location away to the attacker."* Self-built OpenHaystack tags never detected by either. Tags rotating keys >1×/hour defeat both.
+
+Field deployment **15 Dec 2021 – 26 Jan 2022**: **>120,000 active users**, **>30,000** donating data, **>8,600,000** Find My advertisements, **>3,000,000** devices discovered (~**160,000** accessories). **2,494 notifications for 1,325 users.** Accessories = **4.1%** of devices found but **29.3%** of notifications. **97** user-marked false alarms (**85** from ordinary Apple devices). **~0.2% of data donors persistently "high risk"** (tracked >24 h, rolling 2-week window).
+
+### Other measured work
+- **Heinrich et al., PoPETs 2021(3):227–245**, DOI 10.2478/popets-2021-0045 — protocol analysis: unauthorised report access yields top-location recovery with **~10 m error in urban areas**; flaw exposing **past 7 days** of history.
+- **Ibrahim et al., arXiv:2303.06073** — AirTag/SmartTag *"located **55% of the times in about 10 minutes within a 100 m radius**"*; concludes real-time precise stalking via tags is impractical.
+- **Jang et al., arXiv:2501.17452** (29 Jan 2025) — **22 volunteers, 29 countries**; AirTag plateaus **79.8%** within-10 m after 60 min; SmartTag **54.8%** in 20 medium-density countries; Tile worse in Asia/Africa.
+- **Mayberry et al., WPES 2021**, DOI 10.1145/3463676.3485616 — **full text NOT REACHED**; second-hand: iOS alert fires after the tag is seen in three separate locations within 24 h.
+- **Briggs & Geeng, "BLE-Doubt", IEEE SPW 2022**, DOI 10.1109/spw54247.2022.9833870 — **full text NOT REACHED**.
+
+### Police-report tally — Samantha Cole, Motherboard/VICE, **6 April 2022**
+https://www.vice.com/en/article/apple-airtags-police-reports-stalking-harassment
+- Requests to "dozens of the country's largest police departments"; **8 departments** responded; **150 AirTag-mentioning reports** over "a recent eight month period."
+- **50** = women who received a tracking notification. **25** of those named a specific man (ex, husband, boss). **1 of 150** involved a man suspecting an ex-girlfriend. Rest: robberies, thefts, false alarms.
+- *"AirTags have always implemented a notification feature that alerts people with iPhones … **anyone not using an iPhone or Apple device, however, would never know**."* On Tracker Detect: *"users have to learn about and then install the app, then allow it permission to work in the background—steps many people won't follow through with."*
+- Counter-current: experts warn *"confronting an abusive partner or ex or disabling their tracking can be dangerous."*
+
+### Litigation
+- **Hughes v. Apple, Inc.**, N.D. Cal. **3:22-cv-07668**, filed **5 Dec 2022** (Lauren Hughes + Jane Doe; counsel Gillian Wade), Judge **Vince Chhabria**; **terminated in N.D. Cal. 2026-07-08**, transferred to C.D. Cal. as **2:26-cv-07457** (2026-07-09). 526 RECAP docs. https://www.courtlistener.com/docket/66613039/hughes-v-apple-inc/
+- **IN RE: Apple AirTag Marketing, Sales Practices, and Products Liability Litigation, MDL No. 3199** (JPML), opened **4 Aug 2026**; Apple **opposed centralisation 25 Aug 2026**. Members incl. *Miller v. Apple* (W.D.N.C. 3:26-cv-00556, 9 Jul 2026), *Doe v. Apple* (D. Nev. 2:26-cv-02178, 15 Jul 2026), *Doe MP 1 v. Apple* (N.D. Fla. 3:26-cv-04937, 17 Aug 2026 — pseudonymity **denied** 19 Aug 2026).
+- Only **11** published US opinions mention "AirTag"; earliest **2024-07-25** (*E.A. v. A.A.*, Ohio Ct. App.). State AG actions: **NOT REACHED**.
+
+---
+
+## 3. Covert vs. overt in the literature
+
+**Chatterjee et al., IEEE S&P 2018**, DOI 10.1109/sp.2018.00061, https://rist.tech.cornell.edu/papers/spyware.pdf
+
+Central finding cuts *against* a simple covert-is-worse frame: *"While we find dozens of overt spyware tools, **the majority are 'dual-use' apps**"*; *"Both overt spyware and dual-use apps are dangerous in IPV contexts."*
+
+Covertness (§IV-B) is stated as attacker **motive**, not measured harm: *"In an IPS context, it's beneficial to an abuser if tools are covert, meaning they can operate without the victim's knowledge, and can potentially remain undiscovered even if the victim looks through all the apps in their app menu."*
+
+Counts: 27,741 URLs; 1,629 active Play apps; **32** off-store apps; 9,224 apps crawled; 1,000 hand-labelled → **280 (28%) IPS-relevant**; **23** off-store spyware; **61 on-store + 9 off-store** installed and analysed; **8 of 11** vendor support teams responded affirmatively to an IPS request.
+
+**The measured result is an enumerability failure.** Against 276 dual-use + 20 off-store + 100 benign apps:
+- **37 of 40 anti-spyware tools flagged ≤3% of dual-use apps.**
+- Best (Anti Spy Mobile): **95% of off-store spyware but only 47% of on-store IPS apps** — and it flagged Chrome.
+- Major AV brands: **≤13%**. Via VirusTotal, **8%** of dual-use apps flagged by ≥3 engines.
+
+On visible-but-useless signals: *"Even when notifications are present, we suspect victims are unlikely to observe them, let alone properly interpret their meaning"*; the Android GPS icon *"does not specify which app is using GPS, and is ever-present for many Android users."* Find My Device / Sprint Family Locator **do** notify, but *"notifications can be ignored or suppressed should the attacker have temporary physical access."* **A visible signal that does not name the relation is not enumerable.** Icon hiding: iKeyMonitor (reopened by dialling `#8888B`), TrackView (*"leaves no access point on the device once the icon is hidden"*), Cerberus.
+
+**Roundy et al., IEEE S&P 2020**, DOI 10.1109/sp40000.2020.00069, https://rist.tech.cornell.edu/papers/creepware.pdf
+- **~50 million Android devices**, billions of installs (Norton telemetry); CreepRank seeded with **18 covert surveillance apps** from Chatterjee et al.
+- **857 of top-1,000** = creepware; **372** surveillance; **107 multifaceted surveillance apps affected 172K Norton customers in 2017 alone**; >1M creepware installs; **115** spoofing apps (41 burner-phone). Fleiss' κ = **0.77** / **0.75**.
+- Invisibility as an ecosystem: categories **Control – Hide-Icon** and **Evasion – Hidden-Content**. Seeding with 9 icon-hiders returned **12 app-hiders** in the top 50; three hidden apps *"can only be opened by calling a fake phone number."* Countermarket exists: *"'Hidden Apps', a defensive app that reveals the presence of hidden apps"* — **enumerability is the market's own countermeasure.**
+- Surveillance is coded as apps that *"**both covertly and overtly** track someone's location"* — harm is **not** separated by covertness.
+
+**Tseng et al., USENIX Security 2020**, https://www.usenix.org/system/files/sec20-tseng.pdf
+- **>200,000 posts / ~20,000 threads**, 5 forums; **750 threads** coded (250 each × 3). One forum: **78%** of sampled threads IPS-related. Forum C ≈ 80,000 subscribers (Feb 2020).
+- Taxonomy splits by **physical access**, not covertness: tool-based requiring access (spyware, keyloggers, GPS on body/car, A/V recorders) vs. not requiring it (**shared phone plan**, **shared cloud tools**, router monitoring, reverse lookup), plus coercion/subterfuge and hiring a PI.
+- **The word "covert" appears once in the whole paper. It does not claim attackers preferred covert tools.** What it shows is attackers being steered to **legitimate, account-level, relational** access.
+
+**Freed et al., CHI 2018**, DOI 10.1145/3173574.3174241, mirror https://www.nixdell.com/papers/stalkers-paradise-intimate.pdf — qualitative, **N=89** (11 focus groups / **39 survivors** + **50 professionals**); password coercion reported by **n=28**. Core construct: the **UI-bound adversary** — *"an adversarial but authenticated user that interacts with a victim's device or account via standard user interfaces."* By construction **not covert malware**.
+
+> ⚠️ **Defect found in a live standards document.** `draft-ietf-dult-threat-model-05` §3.2.2 attributes to Freed et al. 2018 the figures **72% / 41% / 67%** (coerced password sharing; device rifling; remote account "hacking"). **The Freed et al. paper contains zero "%" characters and reports no percentages** — it is qualitative, N=89, n=28 on password coercion. Misattributed in the active IETF WG document; true source **NOT IDENTIFIED**.
+
+---
+
+## 4. Coercive control law and the evidentiary role of monitoring
+
+**Serious Crime Act 2015 s.76** — https://www.legislation.gov.uk/ukpga/2015/9/section/76 — in force **29 Dec 2015**. Repeated/continuous controlling or coercive behaviour toward a personally connected person with "serious effect" = fear of violence on **≥2 occasions**, or serious alarm/distress with a **substantial adverse effect on B's usual day-to-day activities**; A knows or ought to know. Defence: best-interests + reasonable, unavailable where the effect is fear of violence. Max **5 years** on indictment.
+
+**CPS guidance** — https://www.cps.gov.uk/legal-guidance/controlling-or-coercive-behaviour-intimate-or-family-relationship (updated **24 Apr 2023** and **7 Feb 2025**):
+- Conduct list includes *"monitoring their time"* and *"**monitoring a person via online communication tools or using spyware**."*
+- **The decisive policy sentence:** *"**A victim may not know the full extent of a suspect's conduct, for instance if they were being monitored without their knowledge.**"*
+- Evidential list includes *"phone records, text messages and device logs"*, *"evidence of abuse over the internet, digital technology (e.g. smart speakers) and social media platforms"*, and *"**GPS tracking devices installed covertly an/or overtly on mobile phones, tablets, vehicles etc**"* — covert and overt treated as **equally evidential**, not differently severe.
+
+**Home Office statutory guidance framework** — first published 5 Dec 2015; current version **5 Apr 2023**, updated **27 Jul 2023**: https://www.gov.uk/government/publications/controlling-or-coercive-behaviour-statutory-guidance-framework (PDF: https://assets.publishing.service.gov.uk/media/642d3f9e7de82b001231364d/Controlling_or_Coercive_Behaviour_Statutory_Guidance_-_final.pdf).
+
+**Domestic Abuse (Scotland) Act 2018 asp 5** — https://www.legislation.gov.uk/asp/2018/5/section/2 — in force **1 Apr 2019** (SSI 2018/387). s.2(3) "relevant effects" include **(c) "controlling, regulating or monitoring B's day-to-day activities."** Monitoring is a **named statutory element**, with **no covert/overt distinction**.
+
+**Prosecution statistics — Home Office, "Review of the controlling or coercive behaviour offence," 10 May 2021**
+https://assets.publishing.service.gov.uk/media/608bdba28fa8f51b909ca167/review-of-the-controlling-or-coercive-behaviour-offence.pdf
+
+| Metric | Figure |
+|---|---|
+| Police-recorded CCB offences 2016/17 | **4,246** |
+| Police-recorded CCB offences 2019/20 | **24,856** |
+| Defendants prosecuted, CCB as principal offence, 2019 | **1,112** |
+| Charge rate | **11% (2017/18) → 6% (2018/19)** |
+| Closed for evidential difficulties, 2018/19 | **85%** |
+| Insufficient evidence *despite victim support*, 2018/19 | **35%** CCB vs **24%** all DA vs **33%** DA-stalking |
+| Conviction ratio (principal offence) | **38% (2016)**, rising |
+| Out-of-court disposals | **~0%** (vs 3% all DA) |
+| FoI, first 18 months (McClenaghan & Boutard 2017) | **532 charges / 29 forces**; **6 forces ≤5 charges** |
+
+Diagnosis: *"evidencing CCB is a significant challenge for police and prosecutors, likely due to the nature of CCB as a course of conduct offence that often includes non-physical abuse."* Barlow et al. (2019), quoted: officers pursued "photographic evidence" of one assault *"with many of the woman's descriptions of coercive control being disregarded as examples of 'one word against the other', and thus 'weak' or 'unverifiable'."*
+
+**So prosecution does turn on discoverable artefacts, and the record quantifies the failure when artefacts are absent — 6% charge rate, 85% evidential closures. But no source isolates "the tooling left no trace" as a distinct measured cause.**
+
+**NOT REACHED:** s.76 counts by year after 2019/20 (ONS *Domestic abuse and the criminal justice system*, latest **26 Nov 2025**, does **not** disaggregate CCB; CPS quarterly summaries do not either). No measured evaluation of the 2023 statutory guidance.
+
+---
+
+## 5. Third-party enumerability
+
+**Havron et al., USENIX Security 2019**, https://www.usenix.org/system/files/sec19-havron.pdf — ISDi + TAQ + technograph, deployed in NYC Family Justice Centers. **N = 44 clients.**
+
+- **23/44 (52%)** had identified risks; **21/44** nothing surfaced (19 relieved; **2 left unsatisfied, no explanation found even after outside expert follow-up**).
+
+| Finding | Count |
+|---|---|
+| Potential **spyware** | **3** |
+| Password compromise | **14** |
+| **Unknown "trusted" devices** | **12** |
+| Shared family/phone plan | **4** |
+| Rooted device | **1** |
+
+- ISDi flagged **79** apps: **61 dual-use** ("find my phone", child monitoring most prevalent) — for **all but one**, clients recognised them; **18** false positives; max **5** flags on any one device.
+- Authors' explanation for the low spyware rate: *"many abusers are seemingly able to surveil clients via compromised accounts, and so may not need to install spyware."*
+- **The relations that mattered were found by enumeration, not scanning.** Manual iCloud checks: **4** clients had unrecognised/abuser "trusted" devices; account logs: **8** more with unknown/abuser logins. **2** clients had unrecognised browser extensions (one sideloaded off-store, read/write on all browser data).
+- Non-enumerable chains as safety cost: **3** clients synced password files to a compromised iCloud; several emailed new passwords to compromised addresses; clients used compromised accounts as recovery accounts *"unaware of how this might result in abuser access to these services."*
+
+**Tseng et al. 2020** — the attacker side of the same surface: *"attackers are encouraged by the forum to use their partner's Apple ID to view their personal messages and photos from a web browser—no device access necessary"*; a family iPad synced to a partner's iCloud; a three-party shared iCloud exposing an affair partner's purchase/browsing history; Google Maps Timeline; iOS Significant Locations; WhatsApp Web pairing as *"a one-minute job"* best done while a partner sleeps, the poster *"actually shocked at what a privacy flaw this seems to be."*
+
+**Industry answer:** Apple **Safety Check** (iOS 16+, Sept 2022) — https://support.apple.com/guide/personal-safety/safety-check-iphone-ios-16-ips2aad835e1/web — *Emergency Reset* "quickly stop sharing with all people and apps"; *Manage Sharing & Access* reviews information shared with **people**, with **apps**, and "review and remove **devices** connected to your Apple Account," plus verification numbers and emergency contacts. **This is a first-party enumerator for the device owner only.** I found **no** mechanism and **no** measured evaluation giving an **advocate, clinician or court** third-party enumeration — the ISDi clinic model works only with the client present and their device over USB.
+
+**DULT concedes the logs do not exist** (threat model §4.1.5): a successful protocol *"would include a log file that is clearly labeled and easily accessible … that is not easily edited"* recording *"the account, the Device, GPS location, and the time"* — and *"**Logs should not be easily editable to avoid gaslighting and accountability efforts**."* Ideally also a log of when the owner checked the tag's location while near the target — acknowledged as requiring network cooperation and **unbuilt**. §4.1.1: *"a Target's ability to mitigate threats to their safety depends on consumer choices and access"*, and platform differences *"can also be exploited by an Attacker familiar with target Platforms."*
+
+---
+
+## 6. Countervailing evidence
+
+1. **The IETF's own threat model says visible defence can escalate danger.** §3.1: *"**taking overt security measures while frequently in physical proximity to the Attacker may lead to the Attacker escalating their tactics of interpersonal control.** Risk assessments and the weighing of tradeoffs in such situations are often highly individualized."* VICE reports the same.
+
+2. **Alerts carry measured false-positive/fatigue cost.** DULT §4.1.2: *"Some people may develop 'alert fatigue' from false positives … [some] decrease/disable sensitivity because alerts cause anxiety or false positives condition them to ignore alerts."* AirGuard: 97 false alarms in six weeks, 85 from ordinary Apple devices.
+
+3. **Detectability can be turned against the target.** DULT §3.2: existing measures *"have been criticized as potentially making it easier for an Attacker to track a Target using the **Target's own Tag**"* if identifiers rotate too slowly. Cited mitigation: https://eprint.iacr.org/2023/1332.pdf.
+
+4. **The only quantitative visible-vs-invisible test found — and it is only partly supportive.** Ravid, White, Tomczak, Miles & Behrend, *Personnel Psychology*, DOI **10.1111/peps.12514** (25 Apr 2022); preprint https://osf.io/ef43u/. **K = 94 samples, N = 23,461.**
+   - *"Results provide no evidence that EPM improves worker performance."*
+   - *"**the presence of EPM increases worker stress and strain, regardless of the characteristics of monitoring**."*
+   - Transparency → attitudes overall ρ = **.25** [.11, .39]; fairness/justice ρ = **.21** [.04, .38]; commitment ρ = **.35** [.10, .61]; perceived support ρ = **.37** [.13, .62]; satisfaction ρ = **.26** [.08, .44].
+   - Transparency → **no effect on performance** (H3a unsupported). **H3c (transparency → stress/strain) could not be tested: K = 2.**
+   - Invasiveness moderated attitudes negatively; *"No observed relationship in our meta-analysis was stronger than the relationship between **person-targeted EPM and perceptions of privacy invasion**."*
+   - Authors' forward claim, offered as reasoning not result: *"Transparency becomes even more important as monitoring technologies become increasingly discreet and unobtrusive, as there is more opportunity to conceal what is being tracked."*
+
+   **Read plainly: making monitoring visible measurably improved how people felt about the monitor. It did not measurably reduce the harm.**
+
+---
+
+## Verdict table
+
+| Claim | Status |
+|---|---|
+| A tracked person MUST be alerted; alerts must not be circumventable | **POLICY / SPEC.** Apple + Google + 5 vendors (2023), + 5 more (2024); IETF WG chartered 2024-02-29 with an NNEDV co-chair; **shipped** 13 May 2024. **Not standardised** — no RFC, both protocol drafts expired, §6 "Platform Support" still "TODO" at lapse. |
+| Attackers *prefer* covert tools | **ASSERTED with a stated motive** (Chatterjee 2018 §IV-B), **never counted.** Tseng 2020 uses "covert" once; Roundy 2020 codes covert and overt together. |
+| Covert tooling is *harder to enumerate* | **MEASURED, strongly.** 37/40 anti-spyware tools flag ≤3% of dual-use apps; major AV ≤13%; 8% via ≥3 VirusTotal engines. Icon-hiding is a distinct market with its own counter-market. |
+| The dangerous relations are covert malware | **REFUTED by field data.** Havron 2019: **3** spyware findings vs **12** unknown trusted devices, **14** password compromises, **4** shared plans (N=44). Freed 2018's central construct is the **UI-bound adversary** — a legitimate, authenticated, frequently *visible* relation. |
+| Prosecution turns on discoverable evidence of monitoring | **YES, measured in aggregate:** 6% charge rate, 85% evidential closures, 35% insufficient-evidence with a supporting victim. CPS 2023/25 states it directly. **No source isolates "traceless tooling" as a measured cause.** |
+| **Invisible management is more dangerous than visible management** | **UNTESTED as stated.** No study compares the same relation covert vs. disclosed on a harm outcome. Nearest quantitative test (K=94, N=23,461) finds transparency improves **attitudes** (ρ≈.25), **not performance**, and **could not test stress/strain (K=2)** — stress rose under monitoring **regardless of characteristics**. The IETF's own threat model asserts the opposite in one specific case: **overt** defensive measures near an attacker can escalate. |
+
+### NOT REACHED
+Google's May-2023 DULT post · Google Play / support.google.com (429 + CAPTCHA) · Apple newsroom post for Tracker Detect (404; likely never existed) · Mayberry et al. WPES 2021 full text · Briggs & Geeng "BLE-Doubt" full text · s.76 counts by year 2020/21–2025/26 · any evaluation of the 2023 Home Office guidance · state AG actions on AirTag stalking · OpenAlex (daily budget exhausted mid-session; switched to Crossref + arXiv + CourtListener).
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;P4tbWcVLmrTpgWieHw-wotFDPa-k8VqQlHqPgxJNLJY
+
+<<^ code="&#x0004;" -> to=? >>

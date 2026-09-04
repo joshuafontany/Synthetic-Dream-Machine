@@ -1,0 +1,112 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest >>
+```toml meta
+cacheable = true
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest.mem"
+hydrate   = true
+l-space   = "stable"
+mana      = 14
+manao     = 15
+manaoio   = 12
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest INDEX — the three largest messages from each of 55 research spirits across four waves, held verbatim in their own carriers. Names come from each spirit OWN opening heading, never from a summary of it. The fence law that makes it safe, the reason a lane with no independent name still earns a carrier, and the roll of what stands."
+tags      = ["api/pono/meme"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! The swarm harvest
+
+Four research waves went out and ran three levels deep. ''55 spirits wrote something worth keeping''; each carrier here holds ''that spirit's three largest messages, verbatim and unedited''.
+
+''Names come from the spirits themselves.'' Each carrier takes its title from the heading its own spirit wrote, never from a summary somebody made afterward — so the roll below reads as the swarm described its own work.
+
+⚠ ''WHY A LANE WITH NO NAME STILL EARNS A CARRIER.'' Most of these spirits were sub-lanes nobody addressed directly; their work reached the operator only through a parent's summary, and a summary is where a fabricated relay hid earlier in this same swarm. ''Holding the raw messages means a later reader can check a parent against its children'' rather than trusting the fold.
+
+⚠ ''AND THE FENCE IS LOAD-BEARING.'' Raw transcript carries `<<~`, `>>` and code fences of its own. Each message rides a fence longer than any run of backticks inside it, so ''the grammar reads content where a naive write would read sigils'' — the same law the corpus already keeps: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #the-roll >>
+
+!! What stands
+
+2,153,455 characters across 76 messages, ''zero exact duplicates'' — measured before writing, so no lane's relay of another's words got recorded twice.
+
+|!chars |!msgs |!carrier |!the spirits own heading |
+|109,145 |3 |`the-abuse-surface-of-managed-identity-60a8e5` |THE ABUSE SURFACE OF MANAGED IDENTITY |
+|106,622 |3 |`0-method-and-the-honest-limit-on-this-report-52ebe0` |§0. Method, and the honest limit on this report's reach |
+|88,387 |3 |`social-guardian-key-recovery-as-actually-pra-e9aa59` |Social / guardian key recovery as actually practiced and measured |
+|85,784 |3 |`key-recovery-custody-fork-outside-research-r-620622` |KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT |
+|72,020 |2 |`the-convergent-claim-research-report-9c49fc` |THE CONVERGENT CLAIM — research report |
+|71,469 |2 |`the-crux-first-secret-sharing-vs-independent-d6ddd5` |THE CRUX FIRST: secret sharing vs. independent multi-signatures |
+|63,295 |2 |`1-dult-the-formal-industry-commitment-6e731f` |1. DULT — the formal industry commitment |
+|61,802 |1 |`stress-report-the-pattern-integrity-against--27a500` |STRESS REPORT: THE PATTERN-INTEGRITY AGAINST THE MEASURED RECORD |
+|61,224 |1 |`a-android-53d76a` |A. ANDROID |
+|51,141 |1 |`1-apple-ccdb87` |1. APPLE |
+|49,950 |3 |`addendum-2-cohost-path-twitter-lists-bluesky-56e8f1` |ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky |
+|45,818 |1 |`0-method-instrument-notes-read-first-negativ-356569` |0. Method / instrument notes (read first — negative results) |
+|45,019 |1 |`research-report-curated-set-addressing-ances-e5dcbe` |Research report — curated-set addressing: ancestors and moderns |
+|43,926 |3 |`reader-side-audience-curation-how-far-up-doe-171b6a` |Reader-side audience curation: how far up does it scale? |
+|43,727 |1 |`topic-a-is-the-mycelium-analogy-load-bearing-60097e` |TOPIC A — IS THE MYCELIUM ANALOGY LOAD-BEARING OR DECORATIVE? |
+|43,166 |2 |`part-1-teen-side-research-on-parental-contro-b1d5af` |PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS |
+|42,567 |1 |`7-nostr-bluesky-matrix-multi-account-yes-mut-98501d` |7. NOSTR · BLUESKY · MATRIX — multi-account yes, mutual blindness no |
+|42,445 |1 |`scope-note-975581` |SCOPE NOTE |
+|41,684 |3 |`method-channel-notes-383d96` |Method / channel notes |
+|39,475 |1 |`topic-a-the-onboarding-cost-question-1c7848` |TOPIC A — The onboarding-cost question |
+|38,818 |1 |`leases-expiry-vs-revocation-dense-findings-6c6554` |LEASES & EXPIRY vs REVOCATION — dense findings |
+|38,186 |1 |`1-push-notification-metadata-the-strongest-m-da93b3` |1. PUSH NOTIFICATION METADATA — the strongest measured channel |
+|38,076 |1 |`1-cohost-anti-software-software-club-7e9c48` |1. Cohost (Anti Software Software Club) |
+|36,667 |1 |`the-managed-custodial-sub-identity-measured--d58191` |THE MANAGED / CUSTODIAL SUB-IDENTITY — measured findings |
+|36,414 |1 |`1-google-family-link-3162b2` |1. GOOGLE FAMILY LINK |
+|34,759 |1 |`no-central-server-ever-measured-2026-09-04-2edcc3` |"NO CENTRAL SERVER, EVER" — MEASURED, 2026-09-04 |
+|34,076 |1 |`scope-note-58ffff` |SCOPE NOTE |
+|33,899 |1 |`the-selective-disclosure-address-book-findin-588208` |THE SELECTIVE-DISCLOSURE ADDRESS BOOK — findings |
+|31,666 |1 |`1-object-capability-literature-f31199` |1. Object‑capability literature |
+|31,659 |1 |`apple-platform-multi-user-profile-isolation--52df51` |Apple platform multi-user / profile isolation — measured evidence |
+|30,564 |1 |`1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2` |1. IROH / n0 (number zero, "n0, inc.") — THE CENTRAL CASE |
+|29,657 |1 |`part-a-what-actually-happened-dated-incident-0f4954` |PART A — WHAT ACTUALLY HAPPENED (dated incidents) |
+|29,264 |1 |`findings-18bb35` |FINDINGS |
+|29,244 |2 |`research-findings-what-the-field-has-measure-cde3fc` |Research findings: what the field has measured, by rung |
+|29,169 |1 |`headline-answer-7ce937` |HEADLINE ANSWER |
+|29,109 |1 |`part-b-chrome-chromeos-92db08` |PART B — Chrome / ChromeOS |
+|27,877 |1 |`who-paid-for-volunteer-run-relay-infrastruct-aa2e60` |WHO PAID FOR VOLUNTEER-RUN RELAY INFRASTRUCTURE — MEASURED |
+|27,655 |1 |`1-diaspora-aspects-9aa7ae` |1. Diaspora "aspects" |
+|27,484 |1 |`1-facebook-people-you-may-know-the-canonical-764d56` |1. FACEBOOK "People You May Know" — the canonical veil leak |
+|26,280 |1 |`findings-ce0595` |FINDINGS |
+|25,487 |1 |`what-actually-happened-dated-sourced-72ff52` |WHAT ACTUALLY HAPPENED (dated, sourced) |
+|25,114 |1 |`topic-a-pgp-web-of-trust-keyserver-collapse-47552e` |TOPIC A — PGP Web of Trust / keyserver collapse |
+|24,273 |1 |`ownership-ea02d9` |Ownership |
+|22,669 |1 |`matrix-homeserver-economics-centralization-m-e95a71` |MATRIX HOMESERVER ECONOMICS & CENTRALIZATION — measured evidence |
+|22,331 |1 |`part-a-keybase-1f2d42` |PART A — KEYBASE |
+|22,202 |1 |`custodial-self-custodial-handover-measured-e-bfa1bd` |CUSTODIAL → SELF-CUSTODIAL HANDOVER: measured evidence |
+|21,478 |1 |`topic-a-apple-account-key-recovery-f29266` |TOPIC A — Apple Account/Key Recovery |
+|21,296 |1 |`research-report-identity-as-dyad-person-devi-f55eee` |Research Report: Identity-as-Dyad (Person–Device Relational Edge) |
+|21,186 |1 |`2-dns-root-system-41-years-measured-resolver-c48256` |2. DNS — root system ~41 years; measured resolver centralization |
+|19,845 |2 |`1-fido2-webauthn-the-field-s-own-split-on-th-be4634` |1. FIDO2/WebAuthn — the field's own split on this exact question |
+|19,706 |1 |`1-casa-e44425` |1. CASA |
+|19,131 |2 |`final-report-device-per-person-ground-truth-14552e` |Final Report: Device-per-person ground truth |
+|16,267 |1 |`what-actually-happened-dated-sourced-4e741e` |WHAT ACTUALLY HAPPENED (dated, sourced) |
+|15,291 |1 |`3-facebook-trusted-contacts-deprecation-d2b750` |3. Facebook "Trusted Contacts" deprecation |
+|7,990 |1 |`2-apple-screen-time-partially-reached-e03518` |2. Apple Screen Time — PARTIALLY REACHED |
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-field-scout >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;Q1cwKYjSJ_wv-XV25uzBBaN7HVR4L6nqN-n234NJXjM
+
+<<^ code="&#x0004;" -> to=? >>

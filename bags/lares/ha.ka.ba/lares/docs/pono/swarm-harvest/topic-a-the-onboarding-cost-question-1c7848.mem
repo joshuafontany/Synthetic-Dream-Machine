@@ -1,0 +1,421 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-the-onboarding-cost-question-1c7848 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-the-onboarding-cost-question-1c7848.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: TOPIC A — The onboarding-cost question. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-the-onboarding-cost-question-1c7848"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! TOPIC A — The onboarding-cost question
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 39,475 characters
+
+````
+I have enough material. Writing the report.
+
+---
+
+# WEB RESEARCH REPORT — Onboarding cost of key custody; migrating a deployed recovery authority
+
+**Method note (important):** the session's WebSearch budget was exhausted (200/200) before I began, and Google/Bing/DDG/Brave/Mojeek/searx are all bot-walled from this host. I worked around it by (a) using the **OpenAlex API** for scholarly discovery, (b) **HN Algolia** for deployment-report URLs, and (c) direct `curl` + `pdftotext` on primary sources. Everything below is from a primary document I actually retrieved and read, except where explicitly flagged. That constraint means my *coverage* of the literature is worse than a full search would give; my *fidelity* on what I did retrieve is high.
+
+---
+
+# TOPIC A — The onboarding-cost question
+
+## A.0 The headline answer, stated honestly
+
+**I found no study that directly measures the delta you asked about** — i.e. a controlled comparison of enrollment/retention where arm A mints and custodies a keypair and arm B merely stores an opaque share. Not in SOUPS, not in USENIX Security, not in CHI, not in the FIDO deployment literature. This is a genuine gap, not a search failure I can paper over. *(Confidence: 13/20 that no such study exists — my search was API-mediated, not exhaustive.)*
+
+What **does** exist is a large body of *indirect* evidence, and it converges hard in one direction. Below, measured numbers first.
+
+---
+
+## A.1 MEASURED — Passkeys: the closest deployed analogue to "each person holds a keypair"
+
+This is the strongest evidence you have, because it is a real-world enrollment funnel at consumer scale, with the friction reduced to near the theoretical floor (OS-native, biometric, no seed phrase, no app install).
+
+### FIDO Alliance "Passkey Index", October 2025 — the single most useful datapoint
+Survey (with Liminal) of **nine** member orgs that have deployed passkeys for **1–3 years**: Amazon, Google, LY Corporation, Mercari, Microsoft, NTT DOCOMO, PayPal, Target, TikTok.
+- **93%** of user accounts are *eligible* for passkeys (technical barriers removed)
+- **36%** of all accounts have a passkey **enrolled**
+- **26%** of all sign-ins use passkeys
+- **93%** passkey login success rate vs **63%** for other methods (social login / MFA / OTP)
+- **8.5 s** per passkey sign-in vs **31.2 s** traditional MFA (73% faster)
+- up to **81%** reduction in sign-in-related help-desk incidents
+
+Source: https://fidoalliance.org/wp-content/uploads/2025/10/FIDO-Passkey-Index-October-2025.pdf (report page: https://fidoalliance.org/passkey-index/, published 2025-10-14)
+
+**The load-bearing number is the 93 → 36 gap.** After one to three years of active promotion by nine of the largest consumer platforms on earth, with the *easiest possible* keypair ceremony, **57 percentage points of eligible users did not complete key enrollment**. Note the asymmetry: *once enrolled*, the keypair is strictly better on every metric (success, speed, support cost). The cost is concentrated entirely at the enrollment step. *(Confidence: 18/20 on the numbers as reported; 11/20 that they generalize to a guardian population, since these are the user's own accounts, not a favor performed for someone else — see A.5.)*
+
+### Enterprise, voluntary, security-key FIDO2 — Lassak et al., USENIX Security 2024
+28 semi-structured interviews with CISOs/authentication managers (32 participants). One deploying organization (O4):
+> "Uptake did not exceed **65%** even after a year. The adoption of biometric-based methods was even lower, stagnating at **15-20%**."
+
+Another (O2) reported a cohort "just not using it" who could not be convinced "until the company made security keys **mandatory**."
+
+Source: https://www.usenix.org/system/files/usenixsecurity24-lassak.pdf ("Why Aren't We Using Passkeys? Obstacles Companies Face Deploying FIDO2 Passwordless Authentication", Lassak, Pan, Ur, Golla). Named barriers: **account recovery**, friction, technical issues, regulatory requirements, security culture. *(Confidence: 17/20 — these are single-organization self-reports inside a qualitative study, so treat 65% as an anecdote with a number attached, not a population estimate.)*
+
+### Vendor-reported passkey performance (enrollment-adjacent, not enrollment)
+- **Microsoft, 2025-05-01:** ~**1 million** passkeys registered daily across consumer services; passkey sign-in succeeds ~**98%** vs **32%** for passwords; **8×** faster than password+MFA. https://www.microsoft.com/en-us/security/blog/2025/05/01/pushing-passkeys-forward-microsofts-latest-updates-for-simpler-safer-sign-ins/
+- **FIDO Alliance stat page** (https://fidoalliance.org/passkeys/): Google — **4×** improvement in sign-in success rate; Amazon — **6×** faster sign-in; **Air New Zealand — 50% reduction in login abandonment rates**; Dashlane — **70%** increase in sign-in conversion; CVS Health — **98%** reduction in mobile ATO fraud. 2024 FIDO-commissioned survey: **53%** of people report enabling passkeys on ≥1 account, **22%** on every account they can.
+
+**Read these carefully.** Every one of them measures *use after enrollment*, not enrollment itself. The Air New Zealand "50% reduction in login abandonment" is about the login funnel, not the enrollment funnel. Vendors publish the post-enrollment numbers because those are the flattering ones. *(Confidence: 19/20 that the numbers are quoted correctly; 6/20 that any of them bear on enrollment cost. This is an instrument-lie hazard: the metric answers a different question than the one you asked.)*
+
+---
+
+## A.2 MEASURED — Cryptocurrency key custody: people decline it, and those who accept it lose funds
+
+### Krombholz et al., "The Other Side of the Coin", Financial Cryptography 2016 — n=990
+Survey of 990 Bitcoin users (recruited 1,265 over 8–15 July 2015; 275 filtered), plus 10 qualitative interviews.
+- **~46%** use a **web-hosted** (custodial) solution to manage at least some coins — i.e. they *actively declined* to custody their own key, in a self-selected population of Bitcoin users
+- of those, **50%** use custodial **exclusively**
+- **22.5%** had already lost bitcoin to security breaches or self-induced errors; **about half of those** attributed the loss to their **own** error, and the majority never recovered the funds
+- **~a third** of custodial users did not know whether their data was encrypted or backed up; **47.7%** of Coinbase users in the sample believed their wallet was encrypted (a misconception)
+
+Source PDF: https://www.ifca.ai/fc16/preproceedings/33_Krombholz.pdf · DOI https://doi.org/10.1007/978-3-662-54970-4_33
+
+*(Confidence: 18/20 on the figures; 14/20 on generalization — self-selected 85% male, median age 28.6, recruited via Bitcoin channels. This is the most crypto-literate population you could assemble, and **half of it still refused to hold its own key**. That the refusal rate is this high in the *friendliest* population is the finding.)*
+
+### Eskandari, Clark, Barrera, Stobert — "A First Look at the Usability of Bitcoin Key Management", USEC/NDSS Workshop, 2015-02-08
+Cognitive walkthrough of **six** representative key-management approaches (including paper wallets via bitaddress.org, and Armory). No participant study, so **no failure rates** — this is a heuristic evaluation, not a measurement. It is the standard citation for the *taxonomy* of key-custody metaphors and their failure modes (e.g. a spent paper wallet still grants control; users must preserve QR-decoding software indefinitely).
+Source: https://arxiv.org/abs/1802.04351 · PDF https://arxiv.org/pdf/1802.04351
+*(Confidence: 19/20 on what the paper is; explicitly **negative** on it containing the numbers you wanted.)*
+
+### Mai et al., "User Mental Models of Cryptocurrency Systems", SOUPS 2020 — n=29
+29 semi-structured interviews (Vienna and Graz, Austria), grounded theory, drawing tasks, €20 compensation. Qualitative — **no enrollment or retention rates.**
+Source PDF: https://www.usenix.org/system/files/soups2020-mai.pdf
+*(Confidence: 18/20. Useful for *why* key custody fails mentally; useless for the cost delta.)*
+
+### Voskobojnikov et al., "The U in Crypto Stands for Usable", CHI 2021
+**I could not retrieve the full text** (ACM DL and UBC cIRcle both blocked). Confirmed to exist: https://doi.org/10.1145/3411764.3445407 (2021, 61 citations per OpenAlex). I am **not** reporting numbers from it. *(Negative result, stated explicitly.)*
+
+---
+
+## A.3 MEASURED — The PGP baseline: what "mint and custody your own keypair" costs when it isn't smoothed
+
+### Ruoti, Andersen, Zappala, Seamons — "Why Johnny Still, Still Can't Encrypt", 2015
+Study ran **8–18 September 2015**. **20 participants in 10 pairs**, 60 minutes allotted (~35–40 min in Mailvelope), $15 compensation, all university students (85% undergrad), 65% male.
+> "In our study of 20 participants, grouped into 10 pairs of participants who attempted to exchange encrypted email, **only one pair was able to successfully complete the assigned tasks** using Mailvelope. All other participants were unable to complete the assigned task in the one hour allotted."
+
+**10% pair success rate.** A named blocker: participants had to *wait on the recipient to set up keys* — i.e. the cost is not just per-person, it is **multiplicative across the group**, which is precisely the guardian-set shape.
+Source: https://arxiv.org/pdf/1510.08555 (arXiv 1510.08555, revised 2016-01-13)
+*(Confidence: 19/20 — I read the sentence verbatim from the PDF.)*
+
+### Whitten & Tygar, "Why Johnny Can't Encrypt", USENIX Security 1999
+Retrieved: https://www.usenix.org/legacy/events/sec99/full_papers/whitten/whitten.pdf. The canonical origin. *(Confidence: 20/20 it exists and says what everyone says it says; I did not re-extract its 12-participant numbers, so I am not quoting them.)*
+
+### Abu-Salma et al., "Obstacles to the Adoption of Secure Communication Tools", IEEE S&P 2017 — n=60
+60 interviews (10 unstructured + 50 semi-structured), 23 male / 35 female / 2 undisclosed, ages 18–70. **"With 60 participants, our study represents the largest qualitative study on this topic."** Findings relevant here: participants had incorrect mental models of how the tools worked; their security rankings of tools were **inaccurate**; four of the seven EFF Secure Messaging Scorecard properties were **misunderstood**; and — notably — **none of the 60 participants used a PGP-based tool at all.**
+Source: https://discovery.ucl.ac.uk/1560502/1/ASBDNS17-IEEESP-secure_messaging_obstacles.pdf
+*(Confidence: 18/20. Qualitative; no enrollment delta. The zero-PGP-users finding is itself a measurement of adoption cost, by absence.)*
+
+---
+
+## A.4 NEGATIVE RESULTS — where I found nothing
+
+State these plainly; do not let a later reader assume the search covered them.
+
+1. **Social-recovery guardian enrollment rates.** No published data on what fraction of wallet users configure guardians at all, or on guardian churn over time. OpenAlex queries for social-recovery guardian usability return only a smart-contract design paper (https://doi.org/10.1145/3564746.3587016, 2023, 7 citations) with no user data. Argent has published the *mechanism* (see B.4) but, as far as I can find, **never the funnel**. *(Confidence: 15/20 that no public number exists.)*
+2. **SLIP-39 / Trezor Shamir Backup adoption or error rates.** I retrieved Trezor's explainer (https://trezor.io/learn/a/what-is-shamir-backup) but found **no** published research on share-transcription error rates, no adoption percentages, and no comparative study against BIP-39. *(Confidence: 14/20.)*
+3. **Any measured cost delta between "store this opaque blob" and "install an app and generate a key."** Nothing. This is the exact question and it appears to be unasked in the literature.
+4. **Passkey *enrollment-funnel* drop-off** (started-but-abandoned during the create-a-passkey ceremony). Vendors publish eligibility and enrolled-share; nobody publishes the abandonment rate *within* the ceremony. The FIDO Index's 93→36 is a stock, not a funnel.
+
+---
+
+## A.5 RECOMMENDATIONS — Topic A
+
+*(Clearly separated from the measured section above. These are my inferences, not findings.)*
+
+1. **Budget for ~35–65% guardian completion, not ~90%, if guardians must mint keys.** The FIDO Index 36% is your optimistic anchor (OS-native ceremony, user's own account, huge vendor push). Lassak's 65% is the enterprise ceiling *with organizational pressure*. A guardian is doing a favor for someone else, with no personal account at stake — I would expect that to land at or below the passkey number, not above it. *(Confidence: 11/20 — this is extrapolation across populations.)*
+2. **The multiplicative blocker is the real hazard, not the per-person cost.** "Why Johnny Still, Still" names it: participants stalled *waiting on their counterparty to set up keys*. A k-of-n guardian scheme where every guardian must mint has a completion probability that compounds. An opaque-share scheme does not have this shape: shares can be handed out asynchronously and the holder need do nothing. **This is the strongest structural argument in your favor and it is supported by a measured mechanism, not just intuition.** *(Confidence: 16/20.)*
+3. **Do not cite the "98% vs 32%" or "4× success rate" numbers as evidence about onboarding.** They measure post-enrollment sign-in. Using them for an enrollment argument is an instrument-lie: the gate answers a different question than the one asked. Cite the 93→36 gap instead.
+4. **The counterweight you must not suppress: opaque shares get lost and mis-stored.** Krombholz measured 22.5% loss among self-custodying Bitcoin users, roughly half self-inflicted, and found ~a third of custodial users did not know whether their data was backed up. An opaque card is cheap to *accept* and cheap to *lose*. The honest framing is not "shares are better" but "shares move the failure from **enrollment refusal** to **silent later loss**" — which is a strictly better failure to have *only if* you can detect and replace a lost share. Design the detection.
+5. **Cheapest measurable win: instrument your own funnel.** Since the literature has no answer, a two-arm A/B on your own guardian onboarding would be the first published number in this space. The metric that matters is *guardian-set completion* (all k guardians done), not per-guardian completion.
+
+---
+
+# TOPIC B — Migrating an already-deployed recovery model
+
+## B.1 MEASURED — DNSSEC root KSK rollover: the canonical dual-authority window
+
+### The delay, with the actual telemetry
+ICANN postponed the 2017-10-11 root KSK roll on **2017-09-27**. Matt Larson's explanation, **4 October 2017**:
+> "Data from six root server addresses indicates that for the month of September 2017, approximately **12,000 unique source IP addresses** sent trust anchor configuration reports. The number reporting is growing and now approaches **1400 unique addresses per day**."
+> "Those incoming reports indicate that approximately **5% of the total validators and about 6%-8% on any given day** report they are using KSK-2010... Importantly, these validators would not resolve correctly after the planned root KSK roll."
+
+Source: https://www.icann.org/news/blog/the-story-behind-icann-s-decision-to-delay-the-ksk-rollover
+
+The signal came from **RFC 8145** ("Signaling Trust Anchor Knowledge in DNSSEC", Wessels/Kumari/Hoffman, April 2017 — https://www.rfc-editor.org/rfc/rfc8145.txt), finalized only months earlier and supported only in BIND ≥9.10.5b1/9.11.0b3 and Unbound ≥1.6.4. Larson names the candidate causes: statically configured trust anchors (BIND `trusted-key`), or RFC 5011 auto-update failing due to software defect or operator error.
+
+### The instrument was wrong
+The roll finally happened **2018-10-11 at 1600 UTC**. ICANN's Paul Hoffman, **30 October 2018**:
+> "The result was exceptionally good: There were **far fewer** Internet users negatively affected by the change than anyone expected."
+> "we have heard of only **a handful of resolvers** that were negatively affected and, as far as we know, all were able to recover. ICANN has heard of only **two Internet Service Providers** who experienced outages around the time of the rollover..."
+
+And on the delay itself, in retrospect: *"postponed due to **confusing signals** being observed in the root server system."*
+
+Source: https://www.icann.org/news/blog/the-recent-ksk-rollover-summary-and-next-steps
+
+**This is the finding.** A one-year delay to the world's most important key rotation was caused by **telemetry that over-stated real breakage**. The measuring instrument, deployed specifically to de-risk the transition, was the thing that went wrong. *(Confidence: 18/20 — I have both ICANN blog posts verbatim; I did not retrieve the follow-up analyses quantifying *why* the RFC 8145 signal over-counted, so the mechanism of the over-count is stated by ICANN's own characterization only.)*
+
+### The overlap window has a real, measured cost
+Verisign's post-mortem of the 2018 roll:
+- Pre-rollover: **~15 million** root DNSKEY queries/day to Verisign's root servers
+- After the October 2018 roll: **~75 million/day** (5×)
+- After the old key was marked **revoked** on **11 January 2019**: escalating to **~1.15 billion/day** by **2019-03-21** — **75×** pre-rollover, and nearly **7%** of all root server traffic
+- Normalized after the revoked key was removed **2019-03-22**
+
+Source: http://www.circleid.com/posts/20190326_unexpected_effects_of_the_2018_root_zone_ksk_rollover/ (2019-03-26)
+
+The revocation step — the moment the *old* authority is finally withdrawn — cost 75× the query load of the moment the *new* authority took over. The expensive part of the transition was not adding the new authority; it was **retiring the old one**. *(Confidence: 18/20.)*
+
+### RFC 5011's own stated attack on the overlap
+From https://www.rfc-editor.org/rfc/rfc5011.html:
+- **Add hold-down:** 30 days, or the original TTL of the first DNSKEY RRSet containing the new key, whichever is greater — the resolver must see the new key in **at least two** validated RRsets before accepting it.
+- **Remove hold-down:** 30 days, characterized as administrative housekeeping rather than security-critical.
+- Provides "protection against **N-1** key compromises of N keys in the trust point key set."
+- **The named hazard:** if a single key is compromised, an attacker can **add their own key and revoke the legitimate ones simultaneously**, exploiting the hold-down delay. The RFC concedes this "does not completely solve the problem," and recovery requires at least one uncompromised key to remain valid.
+
+*(Confidence: 17/20 — from a model-summarized read of the RFC rather than a verbatim extraction; the add/remove hold-down values and the N-1 property are standard and I'd stake 19/20 on those specifically.)*
+
+---
+
+## B.2 MEASURED — TUF: the "signed by both" rule, stated precisely
+
+TUF specification §6.1, *Key management and migration* (https://theupdateframework.github.io/specification/latest/):
+> "When replacing root keys, an application will sign the new root.json file with **both the new and old root keys**."
+> "verifying that each current version of the root metadata is signed by a threshold of keys specified by its **immediate predecessor** as well as a threshold of keys specified by **itself**."
+> "For example, if there is a 1.root.json that has threshold 2 and a 2.root.json that has threshold 3, 2.root.json MUST be signed by at least **2** keys defined in 1.root.json and at least **3** keys defined in 2.root.json."
+
+Clients walk root versions **incrementally** (N, N+1, N+2 …) until no N+1 exists. This means an arbitrarily stale client can always re-trace the chain — the transition window is **unbounded in time but bounded in structure**: there is exactly one valid successor at each step, and both authorities must consent to each hop.
+
+Known residual: *"an attacker, who controls the repository, can launch **freeze attacks** by withholding new root metadata. The attacker does not need to compromise root keys to do so."* Bounded only by the expiration time of the latest root metadata the client holds.
+
+Also relevant: on rotation of timestamp/snapshot keys, TUF **deletes** the trusted timestamp and snapshot metadata, specifically "to recover from **fast-forward attacks**."
+
+*(Confidence: 19/20 — quoted verbatim from the retrieved spec text.)*
+
+### Sigstore's actual root-authority rotations
+The `sigstore/root-signing` repo (https://github.com/sigstore/root-signing) documents real keyholder-set changes — i.e. the recovery authority itself changing, in production:
+
+| Keyholder | Term |
+|---|---|
+| Bob Callaway | June 2021 – |
+| Marina Moore | June 2021 – |
+| Santiago Torres-Arias | June 2021 – |
+| Joshua Lock | July 2022 – |
+| Lance Ball | July 2025 – |
+| *Luke Hinds (emeritus)* | June 2021 – July 2022 |
+| *Dan Lorenc (emeritus)* | June 2021 – July 2025 |
+
+Changes to the keyholder set and to signature thresholds are made through **signing events** — PRs on `sign/*` branches where keyholders sign with personal hardware keys — separated from **online signing** done by KMS keys. Tagged releases: v0.0.1-rc (2023-03-06), v0.0.2-rc (2023-07-18), v0.0.3 (2024-03-19).
+
+**The transferable pattern:** Sigstore treats a change to the *authority set* as a distinct, human-quorum-signed event class, structurally separated from routine operations. *(Confidence: 17/20 — README and GitHub API are primary; I did not retrieve the per-rotation playbooks.)*
+
+---
+
+## B.3 MEASURED — APK Signature Scheme v3 rotation: the clearest "both keys valid, and that's the bug"
+
+From https://source.android.com/docs/security/features/apksigning/v3 :
+- **Proof-of-rotation** is a linked list of certificates, oldest → newest, where "the cert in each node signs the next in the list."
+- **`SigningCertificateLineage`** carries two things: the rotation assertion, and **self-trusted-old-certs** flags marking, *per ancestor certificate*, which operations it remains trusted for — e.g. whether it is still trusted for obtaining Android signature permissions.
+- **"Key rotation is discouraged for Android 12 and earlier."** Only from **Android 13** does `checkSignatures` properly understand proof-of-rotation and return the newest signature.
+- **"Multiple signers are not supported and Google Play does not publish apps signed with multiple certificates."** The design "precludes... convergence of different ancestor signing certificates to one (multiple starting nodes to a common sink)" — **linear lineages only, no branching or merging.**
+
+**Two lessons that map directly onto a guardian-set migration:**
+1. Android had to invent **per-capability grading of the old authority** (`self-trusted-old-certs`) because "the old key is still valid" is too coarse. The old authority is retained for *some* operations and dropped for others.
+2. The old key stays honored on the long tail of pre-Android-13 devices, and Google's own guidance is to **avoid rotating at all** while that tail exists — a candid admission that a dual-authority window whose duration you do not control is a liability. *(Confidence: 16/20 — the quotes are from a model-read of the page rather than a verbatim grep; the "discouraged for Android 12 and earlier" line is the one I'd most want re-verified before you rely on it in writing.)*
+
+---
+
+## B.4 MEASURED — Argent: time-lock as the defense during a guardian-set change
+
+From the Argent contracts specification (https://raw.githubusercontent.com/argentlabs/argent-contracts/develop/specifications/specifications.pdf), verbatim numbers:
+
+| Operation | Rule |
+|---|---|
+| Add first guardian | immediate, at wallet creation |
+| Add subsequent guardian | must be confirmed **after 36 hours and no later than 48 hours** after the request |
+| Remove guardian | must be confirmed **after 36 hours and no later than 48 hours** |
+| Pending addition | **cancelled/expired** if the wallet is locked or recovered in the interim |
+| Guardian-triggered lock | **5 days** |
+| Recovery execution threshold | **⌈n/2⌉** guardian signatures |
+| Recovery finalization | **48 hours** after execution, unless cancelled |
+| Cancel a recovery | **⌈(n+1)/2⌉** signatures (owner and/or guardians), where n = guardian count **at the time the recovery was executed** |
+| Ownership transfer (owner still has key) | **immediate**, requires `1 + ⌈n/2⌉` signatures, first being the owner |
+| During recovery | wallet auto-locks; **guardians cannot unlock** — only finalize or cancel |
+
+The stated rationale for the 36-hour delay: to give the owner time
+> "to notice and prevent the appointment of an illegitimate guardian (or the dismissal of a legitimate guardian) in case the owner lost control over their [device]."
+
+**Three design moves worth stealing:**
+1. **A delay-then-confirm window on *both* addition and removal.** Symmetric. Changing the authority set is never atomic and never instant.
+2. **Cancellation is deliberately cheaper than execution**: recovery needs ⌈n/2⌉, cancelling it needs ⌈(n+1)/2⌉ — and cancellation can be signed by the *owner* too, so the legitimate owner plus a minority of guardians outvotes a malicious majority-minus-one. Cancellation threshold is pinned to the guardian count **at execution time**, which closes the obvious attack of changing n mid-recovery.
+3. **A pending guardian change is destroyed by a lock or a recovery.** The two state machines are explicitly made to interfere, so an attacker cannot run a guardian swap and a recovery concurrently.
+
+*(Confidence: 19/20 — read directly out of the spec PDF text.)*
+
+---
+
+## B.5 MEASURED — KERI pre-rotation: the model that has no overlap window
+
+From the KERI white paper (https://arxiv.org/pdf/1907.02143, Smith):
+- The **inception event** creates **two** key sets: the *initial/current* set (public keys included in the event) and the *next* set, committed only as a **cryptographic digest** — so the next keys are **hidden** until used.
+- Each rotation event reveals the previously-committed next set and commits a digest of a **new** next set. Signed by the current private keys.
+- The identifier prefix is **unchanged** by rotation; only the controlling key-pair moves. Rotation "effectively transfers authoritative control (**root authority**) over the identifier from one set of key-pairs to another."
+- Rotation to a **null key** = deliberate abandonment of the identifier.
+- Thresholds may be a plain `K of L`, or **fractionally weighted** (a list, or list of lists). Both the *threshold* `K` and the *key set* are re-declared at each rotation — so **single-sig → multi-sig is just a rotation event**, not a migration.
+- **Recovery via superseding rotation:** "a rotation event may be used to supersede an interaction event. When this happens the key event log **forks** at the superseding rotation event." For delegated identifiers this "enable[s] recovery even in the event of the **joint compromise** of a delegating identifier's signing keys and the delegated identifier's pre-rotated keys," and nests to multiple delegation levels.
+
+**Why this matters for you:** pre-rotation is the one design in this survey that **eliminates the dual-authority window by construction**. There is no period where two authorities are both live, because the successor authority is *committed but hidden* in advance and the KEL's total ordering makes exactly one successor valid. An attacker who compromises the current keys still cannot rotate, because they do not know the pre-committed next keys — only their digest.
+
+*(Confidence: 17/20 on the mechanism; 12/20 on my claim that it fully eliminates the overlap in practice — real KERI deployments still face witness-set propagation and duplicity detection, which I did not research.)*
+
+---
+
+## B.6 MEASURED — Let's Encrypt ISRG Root X1 → X2
+
+From https://letsencrypt.org/certificates/, the currently-published chain configurations:
+```
+EE ← YE1 ← Root YE ← ISRG Root X2 ← ISRG Root X1   (Default)
+EE ← YE1 ← Root YE ← ISRG Root X2                   (alternate)
+EE ← YE2 ← Root YE ← ISRG Root X2 ← ISRG Root X1   (Default)
+EE ← YE2 ← Root YE ← ISRG Root X2                   (alternate)
+EE ← YR1 ← Root YR ← ISRG Root X1                   (Default)
+EE ← YR2 ← Root YR ← ISRG Root X1                   (Default)
+```
+ISRG Root X2 is **cross-signed by ISRG Root X1**; X1 was itself cross-signed by DST Root CA X3 (now retired). Every intermediate is published in *both* a directly-signed and a cross-signed form.
+
+**The pattern:** the new root is made verifiable **through the old root** for clients that only trust the old one, while newer clients verify it directly — and both forms are served concurrently, indefinitely, with the *client* choosing. The old authority is never revoked; it is allowed to **expire**. *(Confidence: 16/20 — I read the chain table directly; I could not retrieve a Let's Encrypt blog post with the transition dates and rationale, so the *timeline* is a gap.)*
+
+---
+
+## B.7 MEASURED — Microsoft UEFI Secure Boot 2026 rollover
+
+From https://techcommunity.microsoft.com/blog/windows-itpro-blog/act-now-secure-boot-certificates-expire-in-june-2026/4426856 (published 2025-06-26, editor's note 2026-01-14) — "the **first global large-scale certificate update** to Secure Boot":
+
+| Expires | Expiring certificate | Replacement | Role | Store |
+|---|---|---|---|---|
+| June 2026 | Microsoft Corporation KEK CA 2011 | Microsoft Corporation KEK 2K CA 2023 | signs updates to DB and DBX | KEK |
+| June 2026 | Microsoft Corporation UEFI CA 2011 | (a) Microsoft Corporation UEFI CA 2023 **and** (b) Microsoft Option ROM UEFI CA 2023 | (a) third-party OS/driver components (b) third-party option ROMs | DB |
+| Oct 2026 | Microsoft Windows Production PCA 2011 | Windows UEFI CA 2023 | Windows bootloader and boot components | DB |
+
+Affected: Windows 10, Windows 11, Server 2016/2019/2022/2025, Server 2012/2012 R2 — i.e. everything shipped since 2012, LTSC included. **Not** affected: Copilot+ PCs released in 2025.
+
+Note the **one-to-two split**: the single 2011 UEFI CA is replaced by *two* 2023 certificates "which together allow for **more granular control**." Same instinct as Android's per-capability lineage flags — a migration is the moment you get to **decompose an over-broad authority**, and both of these large deployments took it.
+
+Also note: the hierarchy is PK → KEK → {DB, DBX}. The migration proceeds top-down, and the new certs are *added* to DB/KEK alongside the old ones. *(Confidence: 18/20 on the table, quoted from the page; 10/20 on my inference about why they split the UEFI CA — the page says "more granular control" but doesn't elaborate.)*
+
+---
+
+## B.8 The "downgrade to the weaker authority" question — NEGATIVE RESULT
+
+**I could not find a single established, named term** in the cryptographic literature for "an attacker picks whichever of two concurrently-valid authorities is easier to subvert."
+
+What exists nearby, and is *not* the same thing:
+- **Downgrade attack** / **version-rollback attack** — an attacker forces a *protocol version* or *ciphersuite* downgrade. About algorithm strength, not about which of several equally-live authorities is targeted.
+- **Rollback / fast-forward attacks** — TUF names these, but they concern *metadata version numbers*, not authority selection.
+- **Freeze attack** — TUF; withholding updates so a client never learns of the new authority. This is the **adjacent** hazard: not "attacker picks the weaker authority" but "attacker prevents you from ever leaving the old one."
+- **Algorithm confusion** — JWT-adjacent; wrong verification key type, not authority choice.
+- **RFC 5011's own scenario** — one compromised trust-anchor key lets an attacker add theirs and revoke the legitimate ones. This is the closest *described* instance of the hazard, but the RFC gives it no name.
+
+The concept is real and repeatedly *described* in the primary sources. It appears to be **unnamed**. *(Confidence: 14/20 that no standard term exists — a proper literature search might surface one, and my search here was API-mediated. If you need a term, you may have to coin one; "**weakest-authority selection**" or "**authority downgrade**" would both read naturally and neither collides with existing usage.)*
+
+## B.9 Bitcoin multisig quorum migration — NEGATIVE RESULT
+
+I could not retrieve any Casa or Unchained key-rotation documentation; both candidate URLs 404'd and I had no working search engine to locate the real ones. **I am reporting no findings on Bitcoin multisig re-keying practice.** What I can say from general structure — that rotating a multisig quorum on Bitcoin requires an on-chain **spend to a new descriptor**, making it atomic and leaving no dual-authority window, at the cost of fees, UTXO churn, and address-book invalidation — is **not sourced here** and should be treated as unverified. *(Confidence: 6/20. Flagging rather than omitting, because the atomicity contrast with DNSSEC/TUF is the interesting part and someone should go verify it.)*
+
+Also not retrieved: **Notary** root rotation semantics. No findings.
+
+---
+
+## B.10 RECOMMENDATIONS — Topic B
+
+*(Inference, not finding.)*
+
+1. **Prefer pre-rotation (KERI-style) over an overlap window if you can afford it.** It is the only surveyed model where the dual-authority hazard does not exist, and it makes single-sig → multi-sig a *rotation*, not a *migration*. **Confidence: 15/20.**
+2. **If you must have an overlap, make it structural rather than temporal.** TUF's rule — each new root signed by a threshold of *both* the predecessor's and its own keys, walked incrementally — bounds the window by *steps*, not by wall-clock, and requires both authorities to consent to every hop. Neither authority can act alone. This is strictly stronger than "both are valid until date X." **Confidence: 17/20.**
+3. **Budget the retirement, not the introduction.** The DNSSEC data is unambiguous: adding the new key cost 5× load; **revoking the old one cost 75×**. Whatever your transition plan says about standing up the new authority, the expensive and under-planned half is tearing down the old one. **Confidence: 17/20.**
+4. **Do not let a freshly-built telemetry instrument gate the cutover.** ICANN delayed the world's root key by a year on RFC 8145 data from a protocol finalized five months earlier, supported by only the newest resolver builds, sampled from six root server addresses — and the eventual roll affected "a handful." **Collide the instrument before you trust it to veto**: run a control, verify that the signal *would* differ if the population were actually healthy, and check whether your ~5% is 5% of resolvers or 5% of *reporters*. **Confidence: 18/20 — this is the strongest single transferable lesson in Topic B.**
+5. **Grade the old authority per capability, don't retire it as a unit.** Both Android (`self-trusted-old-certs` flags) and Microsoft (splitting UEFI CA 2011 into two 2023 certs) converged on this independently. Old-guardian-set *may still* veto/cancel a recovery long after it *may no longer* initiate one. That asymmetry is nearly free and it converts the dual-authority window from a liability into a safety net. **Confidence: 15/20.**
+6. **Adopt Argent's asymmetry: make cancelling cheaper than executing, and pin the cancel threshold to the pre-change roster.** ⌈n/2⌉ to execute, ⌈(n+1)/2⌉ to cancel, with the owner able to sign the cancellation, and n frozen at execution time. Also copy the interference rule: **a pending authority change dies if a recovery or lock fires.** Concurrent authority-change and recovery is exactly the state an attacker wants. **Confidence: 18/20 — this is a shipped, adversarially-exercised design, and it is free to copy.**
+7. **Name the hazard yourself.** Since the literature has no term, define one in your own docs so it can be reasoned about and grepped for. It is otherwise going to keep being re-derived.
+
+---
+
+## Appendix — Confidence ledger for the load-bearing claims
+
+| Claim | Confidence |
+|---|---|
+| FIDO Passkey Index: 93% eligible, 36% enrolled, 9 named orgs, Oct 2025 | 18/20 |
+| That gap generalizes to a guardian population | 11/20 |
+| Krombholz n=990: 46% custodial, 22.5% lost funds | 18/20 |
+| Ruoti 2015: 1 of 10 pairs succeeded in 60 min | 19/20 |
+| No study measures the mint-vs-store delta directly | 13/20 |
+| ICANN delayed on 5%/6–8% RFC 8145 signal; actual impact "a handful" | 18/20 |
+| DNSSEC revocation cost 75× query load, 7% of root traffic | 18/20 |
+| TUF: new root signed by threshold of both old and new | 19/20 |
+| Argent: 36h confirm / 48h expiry / ⌈n/2⌉ recover / ⌈(n+1)/2⌉ cancel | 19/20 |
+| APK v3 "rotation discouraged for Android 12 and earlier" | 16/20 |
+| KERI pre-rotation eliminates the overlap window | 12/20 |
+| No standard name exists for authority-downgrade | 14/20 |
+| Anything about Bitcoin multisig re-keying practice | 6/20 — unverified |
+
+**Sources:**
+- [FIDO Passkey Index, Oct 2025 (PDF)](https://fidoalliance.org/wp-content/uploads/2025/10/FIDO-Passkey-Index-October-2025.pdf) · [Passkey Index page](https://fidoalliance.org/passkey-index/) · [FIDO passkeys stats page](https://fidoalliance.org/passkeys/)
+- [Lassak et al., USENIX Security 2024 (PDF)](https://www.usenix.org/system/files/usenixsecurity24-lassak.pdf)
+- [Microsoft passkey update, 2025-05-01](https://www.microsoft.com/en-us/security/blog/2025/05/01/pushing-passkeys-forward-microsofts-latest-updates-for-simpler-safer-sign-ins/)
+- [Krombholz et al., FC 2016 (PDF)](https://www.ifca.ai/fc16/preproceedings/33_Krombholz.pdf) · [DOI](https://doi.org/10.1007/978-3-662-54970-4_33)
+- [Eskandari et al., USEC 2015](https://arxiv.org/abs/1802.04351) · [PDF](https://arxiv.org/pdf/1802.04351)
+- [Mai et al., SOUPS 2020 (PDF)](https://www.usenix.org/system/files/soups2020-mai.pdf)
+- [Voskobojnikov et al., CHI 2021 (not retrieved)](https://doi.org/10.1145/3411764.3445407)
+- [Ruoti et al. 2015 (PDF)](https://arxiv.org/pdf/1510.08555)
+- [Whitten & Tygar, USENIX Sec 1999 (PDF)](https://www.usenix.org/legacy/events/sec99/full_papers/whitten/whitten.pdf)
+- [Abu-Salma et al., IEEE S&P 2017 (PDF)](https://discovery.ucl.ac.uk/1560502/1/ASBDNS17-IEEESP-secure_messaging_obstacles.pdf)
+- [Trezor Shamir Backup explainer](https://trezor.io/learn/a/what-is-shamir-backup)
+- [ICANN: story behind the KSK delay, 2017-10-04](https://www.icann.org/news/blog/the-story-behind-icann-s-decision-to-delay-the-ksk-rollover) · [ICANN: rollover summary, 2018-10-30](https://www.icann.org/news/blog/the-recent-ksk-rollover-summary-and-next-steps)
+- [RFC 5011](https://www.rfc-editor.org/rfc/rfc5011.html) · [RFC 8145](https://www.rfc-editor.org/rfc/rfc8145.txt)
+- [CircleID: Unexpected effects of the 2018 KSK rollover, 2019-03-26](http://www.circleid.com/posts/20190326_unexpected_effects_of_the_2018_root_zone_ksk_rollover/)
+- [TUF specification](https://theupdateframework.github.io/specification/latest/) · [sigstore/root-signing](https://github.com/sigstore/root-signing)
+- [APK Signature Scheme v3](https://source.android.com/docs/security/features/apksigning/v3)
+- [Argent contracts specification (PDF)](https://raw.githubusercontent.com/argentlabs/argent-contracts/develop/specifications/specifications.pdf)
+- [KERI white paper (PDF)](https://arxiv.org/pdf/1907.02143)
+- [Let's Encrypt chains of trust](https://letsencrypt.org/certificates/)
+- [Microsoft: Secure Boot certificates expire June 2026](https://techcommunity.microsoft.com/blog/windows-itpro-blog/act-now-secure-boot-certificates-expire-in-june-2026/4426856)
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;PRF1dTTZiHPjOlyj3nCBXYvrDMBUdUkOCzqP0YqZwBw
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,253 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-managed-custodial-sub-identity-measured--d58191 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/the-managed-custodial-sub-identity-measured--d58191.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: THE MANAGED / CUSTODIAL SUB-IDENTITY — measured findings. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-managed-custodial-sub-identity-measured--d58191"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! THE MANAGED / CUSTODIAL SUB-IDENTITY — measured findings
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 36,667 characters
+
+````
+All five research threads are in. Report follows.
+
+---
+
+# THE MANAGED / CUSTODIAL SUB-IDENTITY — measured findings
+
+*Research 2026-09-04. **MEASURED** = date, number, or quoted primary text retrieved this session. **DESIGNED/CLAIMED** = vendor or spec intent. **NOT REACHED** = could not retrieve; not filled from memory.*
+
+## HEADLINE ANSWERS
+
+**Q1 (original): Has anyone shipped a managed identity the managed party can LEAVE with?**
+
+**Essentially no one — and where the exit exists, single-digit percent use it.** Two systems make the answer measurable, and they agree on the order of magnitude:
+
+- **Bluesky/atproto**, the closest live analogue: **~100,000 of 23,696,277 accounts (≈0.42%) have ever migrated off Bluesky's PDS fleet**; **97.66%** remain on Bluesky-operated infrastructure. Of 1,200 sampled bsky.social accounts, **1,196 (99.67%) hold *zero* rotation keys of their own** — control rests in two Bluesky PBC fleet keys. I independently verified this on three accounts including the CEO's (`jay.bsky.team`) and `bsky.app` itself: both keys are the company's. The documented exit path is `com.atproto.identity.requestPlcOperationSignature` — **the host signs the departure on your behalf, gated on an emailed code**. If you are suspended, the exit is gone with the email.
+- **Farcaster**: `idCounter()` = **3,349,918** fids. In two random samples (n=298, n=300), **36–41% name the Warpcast Recovery Proxy** `0x00000000FcB080a4D6c39a9354dA9EB9bC104cd7`, which can transfer any of those identities to any address **instantly, with no consent and no timelock**. **~5%** name a recovery address of their own. The escape hatch is real, onchain, and almost nobody takes it.
+- **Embedded wallets** (Privy, MetaMask/Web3Auth, Magic, Dynamic, Turnkey, Coinbase CDP): every one ships the same primitive — **a cross-origin iframe that reveals a raw private key**. That is a *fork of custody*, not a transfer: nothing is revoked, no relationship dissolves. **No provider has published any telemetry on export completion, anywhere reachable** (HN Algolia full corpus, Crossref, vendor docs — all empty). Structurally they cannot: the provider learns the modal opened, not that a key was kept. Two of six let the *application* switch export off entirely.
+- **Enterprise: zero.** No production mechanism hands a corporate-provisioned identity to the person at exit. Managed Apple Accounts auto-delete 30d (manual) / 120d (SIS) after deactivation. Android work profiles are deleted wholesale. SCIM offers DELETE-or-hide and nothing else. The only org→person path found is Google's **"Transfer your content"** — a lossy **copy**, school accounts only, admin-gated, into an account the person already owned.
+
+**Q2 (re-aimed): Does anything shipped have a management chain that never bottoms out in a person?**
+
+**No. Nothing shipped is rootless.** Every system runs machine-to-machine chains of arbitrary depth at runtime and re-attaches a human at a layer the runtime cannot see.
+
+| System | Runtime chain rootless? | Where the human re-attaches |
+|---|---|---|
+| Miller's ocap model | **Yes, by postulate** (§9.2.1 "first instant of time") | §11.3 *"the owner of the system… can run such code when the system is first generated"*; §7.4 the network root is literally *"the human operator… read the URI from his screen over the phone"* |
+| Kubernetes | **Yes** — SAs create/empower SAs freely | Audit `Event` has exactly two slots, `User` + `ImpersonatedUser`, **both singular, neither required to be human, no ancestry field**. The human is in a *different* audit event: whoever applied the bootstrap RoleBinding |
+| SPIFFE/SPIRE | **Yes** — self-signed root, nested servers attest servers | `spire-server entry create` at a shell; `admin_ids` in a config file; Delegated Identity requires *"allowed clients on the spire-agent configuration"* |
+| GCP | Yes, N hops via the `delegates` field | Audit proto records the ordered chain and names them *"the real authorities"*; the payments profile carries *"the name, address, and tax ID… of who is responsible"* |
+| AWS | Yes; `sourceIdentity` **off by default** | Customer Agreement §2.1 (Aug 14 2026): *"you must have an AWS account associated with a valid email address and a valid form of payment"*; `CreateAccount` requires an owner email that **becomes the root user** |
+| Entra Agent ID | Service principals **may own** agent identities | **A sponsor is REQUIRED on create — users or groups only, never service principals — including "for app-only create requests"** |
+| Ethereum | Safe-owns-Safe, arbitrary depth, no EOA required in the graph | *"Contract accounts… can only send messages in response to receiving a transaction."* The ownership graph is rootless; **it is also inert.** EIP-7702 (Final) does not change this |
+
+**Custody is delegable to machines. Accountability is not.** Microsoft states it as policy; AWS states it as contract; Ethereum states it as physics.
+
+---
+
+## A. CHILDREN'S IDENTITY — the age transition
+
+**Three invariants hold across Apple, Google, Microsoft (and Nintendo, checked as a fourth):**
+
+1. **Nobody forks the identity.** The account is one durable object; age is a mutable attribute; the "transition" is a permission recomputation. Orphaning happens only through *deletion*, never through aging.
+2. **The exit is gated on the custodian's cooperation, not the calendar.** Reaching the age of consent grants *standing to request*, never the ability to act.
+3. **Entitlements are held by the group, not the person, and do not travel.**
+
+**Apple** — https://support.apple.com/en-us/119854 (pub. 2026-07-01), verbatim: *"Under 13 — You need to be part of a Family Sharing group. Ages 13-17 — If your parent or guardian has set up Screen Time, you need permission from your family organizer to leave the group… Depending on the laws where you live, you might not be able to leave your Family Sharing group until you turn 18."*
+
+The sharpest line, https://support.apple.com/en-us/102634: **"There's no other way to remove a child from a family group if they're under 13."** The two terminal states are *transfer to another custodian* or *destruction*. Compounding: *"The organizer can't leave the Family Sharing group"* — so an organizer with an under-13 child cannot exit at all.
+
+Cost of leaving as an adult (https://support.apple.com/en-us/102652): you keep purchases you initiated, forfeit all shared/DRM content, and **"If you downloaded an app from a family member's purchase history and made in-app purchases, you'll need to purchase the app yourself to access your in-app purchases."** And: **"your balance transfers to the family organizer's Apple Cash account"** — a monetary asset moving *away* from the aging-out child at the moment of exit. Purchase consolidation is explicitly barred: *"Neither Apple Account can be a child account created through Family Sharing"* (117294). Correction to folklore: the limit is now **two** family groups per year, not one.
+
+**2025 Declared Age Range API** (iOS/macOS 26.0) — the most interesting mechanism found. Verified verbatim: *"When a person's age crosses into a new range (for example, when they turn 13), the API continues returning the previous range until the anniversary of their original declaration."* A deliberate lag of up to 364 days, so apps cannot infer a birthday from the bucket flip. In regulated regions: *"the system automatically provides the person's age range — they can't decline sharing."*
+
+**State app-store laws, MEASURED timeline** (Apple developer news): Texas SB2420 announced for 2026-01-01 → **injunction 2025-12-23** → **lifted, effective 2026-06-04**. Utah live for new accounts **2026-05-06**; Louisiana **2026-07-01**. Texas consumer page (https://support.apple.com/en-us/127462): *"If you're under 18, you need to be part of a Family Sharing group… Ask to Buy and some Screen Time features are automatically turned on if you're under 18 — and **can't be turned off — even by parents or guardians**… For all accounts, your age range is always shared with developers and can't be turned off."* Note: the state overrides the *guardian*, not just the child.
+
+**Google Family Link** — a **measured correction to widely-cited behavior**. https://support.google.com/families/answer/7106787 now says three separate times that the release age is **18**, not 13: *"Children under 18 need parent approval to stop supervision."* The 13th birthday is an *email*; the default is inertia (*"by not acting on the email"*). Transfer of supervision: **1 switch per 12 months**, 7-day notify + 7-day accept. (I could not independently re-verify this page at end of session — Google rate-limited our egress with a CAPTCHA interstitial; the verbatim quotes are from a successful fetch earlier in the session.)
+
+**Microsoft** — **there is no documented age transition at all.** The complete `support.microsoft.com/en-us/family-safety/` hub (19 articles) was enumerated; no article describes what happens at 13, 18, or any age. This is a genuine negative, not a search failure. Instead: *"Can a child edit their own Microsoft account date of birth? **No.**"* And only an organizer can remove anyone — **a plain member cannot leave, ever, by design.** Microsoft's own documented remedy for an adult mis-flagged as a child: *"Sign in with any adult personal Microsoft account **or create a new dummy adult account**."* That is the fix and the proof the gate is unenforceable, on a first-party page.
+
+**Microsoft's admitted failure mode** — an entire support article, *"Family safety settings enforced on adults"*: *"**only the family organizer can make changes to your safety settings**. Please reach out to them…"* plus a per-device `schtasks /run /tn "…FamilySafetyRefreshTask"` for restrictions that persist after the group relationship is gone. **Supervision outliving the authority that justified it, vendor-acknowledged.**
+
+**Two shipped platforms disagree about the legal age of digital majority in the same jurisdiction.** Chile: Google 14, Microsoft 18. Bulgaria: Google 16, Microsoft 14. Same child, two different account lifecycles.
+
+**Complaints (Apple Communities; index appears frozen ~June 2022, so absence of recent threads is an artifact):** the recurring class is the under-13 immovability hit from every side. The sharpest: *"My child under 13 has passed away and I can not remove from family sharing"* (https://discussions.apple.com/thread/253959635) — the only answer in-thread is *call Apple Support*. **Death is not a case the mechanism models.** Also estrangement (*"don't have contact with the parent any longer"*), remarriage (organizer-can't-leave + under-13 composing into a total lock), and the wrong-birthday trap: HN 8409702 (2014-10-04) states the origin — *"they didn't come up with the way to convert any existing ids to child ids"* — and Apple's answer (the 14-day revert window, article 124146) **shipped in 2026, twelve years later.**
+
+**NOT REACHED:** Reddit (403 to all forms), Google Help Communities (302), any Google/Microsoft user-side complaint evidence, Utah SB 142 primary text, Apple's Feb-2025 newsroom PDF.
+
+---
+
+## B. GUARDIANSHIP IN SSI — the model, and its collapse
+
+**Date correction to your brief:** the whitepaper you cited as "V2 ~2020" is **V.2, April 2023** (V1 was December 2019). https://sovrin.org/wp-content/uploads/Guardianship-Whitepaper-V2.0.pdf
+
+**The model.** Guardian holds; Dependent is the subject. Trust-over-IP four-layer stack; W3C VCs whose schemas encode a jurisdiction's rights and duties. Sovrin Governance Framework principle: *"Guardians must respect the fundamental right of a dependent to reclaim self-sovereign identity if changes in the dependent's circumstances enable it."*
+
+**The transition out — and this is the finding.** Stage 4, verbatim: *"As Mya achieves the age of maturity, she would look to be issued and manage her own credentials in the same way as Zo does as the guardian. **Mya is issued equivalent credentials for her own use.** Zo's credentials may not be actively revoked, but can be considered to be **practically expired**."* And for Jamie: *"Any newly added credentials issued to Ann… would have to be revoked and **Jamie to be issued his own replacement credentials**."*
+
+**The identity does not transfer. It is re-issued.** The dependent gets *new* credentials from issuers who must still exist and still be willing. That is the same shape as Google's "Transfer your content": a copy into a fresh container, not a handover.
+
+**Guardian abuse is named clearly, in three risk families.** *"Ironically, guardianship does precisely the opposite [of SSI]."* Named risks: **Recentralization** (mitigation: *"Prohibiting 'bulk load' processes where whole populations are converted to guardianship without involvement or consent"*); **Violating the trust relationship** (self-payment, fraud, refusing a requested transaction); **Impersonation and commingling** — with the paper's weakest claim: *"it is difficult for a guardian to misuse a verifiable credential because although they are the credential holder, they are not its subject."* And **Risks at moments of transition**: *"ensure that a dependent is not 'digitally stranded' with no guardian after a point of transition."*
+
+**The wear-my-identity case is explicitly ruled against.** The Technical Requirements V1 (April 2021, retrieved from the Drive links in the launch blog post) lists **"Wallet Take-Over"** as *future work*: *"The ability to access another person's wallet, access its current credentials and use them (known as Wallet Take-Over as well as holder impersonation) may be called for in specific situations, **it should only be considered an option when everything else fails, because issuers nor verifiers can distinguish between the situation where the holder is, or is not, impersonated**."* Five years after that was written, it is still future work.
+
+**Did any of it ship? No.**
+
+- **`gh search code "guardianship" --owner hyperledger` → zero hits.** `gh search repos "guardianship SSI verifiable"` → zero. Global `GuardianshipCredential` search returns only architecture markdown, TODO lists, and glossaries — no production code.
+- **Aries RFC 0289** (the ToIP stack RFC the whitepaper cites as its technical anchor): **Status STALLED since 2024-04-03**, status note *"No recent progress and **no implementations have been created**."* Implementations section empty.
+- OpenWallet Foundation `architecture-sig#36` "Power of Attorney / Mandating / Guardianship": open since 2022-10-19, **2 comments, both on day one, untouched since**.
+- The V2 paper asserts *"Deployment of Guardianship credentials for real world applications is happening"* — **with no footnote, and no named deployment anywhere in the document.**
+- The whitepaper's footnotes 22/23 cite the Implementation Guidelines and Technical Requirements **without URLs**; neither is on sovrin.org's library, and Wayback shows only whitepaper PDFs ever archived from that host. The Guardianship WG Confluence wiki 404s. Archived WG meeting pages span **2020-12-11 to 2021-06-25** (Wayback coverage caveat).
+
+**The named pilots are all dead:**
+- **Kiva Protocol**: banner on https://www.kiva.org/protocol — *"Kiva will sunset operations of Kiva Protocol, **effective June 30, 2022**."*
+- **ID2020**: absorbed into the Digital Impact Alliance, **August 2023**; site frozen at ©2023.
+- **Tykn**: `tykn.tech` now **302s to a games site**. Domain resold.
+- **Sovrin Foundation itself**: *"officially dissolved by the State of Utah on **May 21, 2025**"* after *"an extended period of reduced activity"* (announced 2026-01-20). MainNet is now **read-only, on a single virtual cloud server**, with **Trinsic as sole steward**, and *"Trinsic and the previous Trustees continue to hold MainNet Trustee keys."*
+- Capstone: **Trinsic** — the last operator of the SSI guardianship ledger — now sells the opposite product. Its homepage: *"Accept the World's Digital IDs Through One API… mobile driver's licences, eIDAS, bank-based IDs, national ID wallets. 56 ID providers integrated."*
+
+**Is there a normative spec? No.**
+- **W3C VC Data Model 2.0, REC 15 May 2025**: `"guardian"` appears **0 times**; `"custodi"` 0; `"delegat"` once.
+- **W3C DID Core 1.0, REC 19 July 2022**: `"guardian"` **0 times**. `capabilityDelegation` exists but is key authorization, not person guardianship.
+- `w3c/vc-data-model#930` "Representing Delegated Credentials in the VCDM" — opened 2022-09-16 with exactly your use cases (parent-child, medical proxy), 30 comments, **closed 2022-12-14 with no resolution posted after 2022-09-23**. The WG consensus visible in-thread: *"cryptographic delegation for the purposes of authz (zcaps, gnap, etc.) are out of scope for VCs… the dangers of misuse are too great."*
+- **ZCAP-LD** is `specStatus: "CG-DRAFT"` and its own text says it *"is currently being drafted to be considered as a work item"* — **not a W3C Recommendation, not even an adopted CCG work item.** The string `audit` appears **0 times**. Its abuse section's answer: *"Alice… is able to analyze a log of past invocations… and Alice revokes that capability."* A named administrator reads a log.
+- The DID Methods registry (W3C Group Note, **2026-09-02**) lists **~600 methods** and explicitly *"does not act as an endorsement."*
+
+**Academic footprint:** "On Guardianship in Self-Sovereign Identity" (2019) — **3 citations**. "SSI and Guardianship in Practice" (EJLT 13(3), 2022) — **0 citations**, and the abstract concedes *"the gap between the practical (legal) and technical perspective."* On Hacker News, Sovrin's peak score across its entire history is **4 points**.
+
+---
+
+## C. CUSTODIAL → SELF-CUSTODIAL
+
+Covered in the headline. Additional mechanism detail worth carrying:
+
+**did:plc**: the DID is self-certifying, but `rotationKeys` are *"an internal detail of PLC… stored in the operation log"* — **not in the DID document**. A 72-hour window lets a higher-priority key *"'rewrite' history, clobbering any operations… signed by a lower-authority rotation key."* So even a user who adds their own key gets index ≥1 and can be clobbered by the host within 72h. Christine Lemmer-Webber called it in January 2024: *"Bluesky controls most users' keys anyway, so can control their identity future regardless."*
+
+**did:web** trades a company for a registrar: the spec concedes it *"does not provide a mechanism for migration or recovering from loss of control of the domain name."*
+
+**The PLC directory handoff is announced, not shipped.** 2025-09-19, https://atproto.com/blog/plc-directory-org: an independent **Swiss Association** — *"Initial board members and other logistical details are still being finalized."* No launch date, no funding. `plc.directory` remains the single write endpoint. The Feb-2026 read-replica work federates *reads* only.
+
+**Permanent cost of the atproto exit:** *"The full history of DID operations and updates, including timestamps, is permanently publicly accessible… any PII encoded in `alsoKnownAs` URIs will be publicly visible even after DID deactivation, and cannot be redacted."*
+
+**Argent is the one design where guardian authority is genuinely fenced**: guardians alone can never move funds or transfer ownership; recovery takes ⌈n/2⌉ guardians + **48h**, cancellable single-handedly by the owner; guardian changes take 36h to confirm. Compare Farcaster (recovery address alone, instantly) and Bluesky (host alone, instantly). Note: `argent.xyz` now 301s to `ready.co` and the contracts repo has been idle since 2024-07-29; formal sunset **NOT REACHED**.
+
+**ERC-4337 (Final)** standardizes `UserOperation` and `EntryPoint` and explicitly **does not** standardize recovery or key rotation — *"the `signature` field usage is not defined by the protocol."* Every escape hatch is bespoke; none compose.
+
+**Matrix, as a control case for "leave with your identity" at protocol scale:** the FAQ concedes *"Currently, no. We are looking at options for decentralising or migrating user accounts."* Five MSCs have tried — **#1228 open since 2018-05-10** (8+ years), #2787 "Portable Identities" open since 2020-09-23, #4080, #4243, #4348 — **all open, all labeled `needs-implementation`, none merged.** MSC2787 proposes exactly the two-layer model your design implies (User Permanent Key + User Delegated Key) and lists among its unsolved TODOs: *"How to adequately disconnect UDKs from UPKs as a part of a data removal request for GDPR compliance."*
+
+**Nostr's one delegation primitive, NIP-26, was deprecated 2025-04-29** and now carries the warning *"unrecommended: adds unnecessary burden for little gain."*
+
+---
+
+## D. ENTERPRISE — data copies only, never the identity
+
+The full table is in the headline. The three structural points:
+
+1. **The asymmetry is architectural.** Every vendor shipped a documented, API-exposed, **consent-free ingestion path** and no egress path. Microsoft ships `forceTakeover: true`; there is no `forceRelease`. Apple's Domain Capture: *"Turning on Domain Capture can't be undone"*, users get **30 days**, notifications at day 1/21/27, and the default on no action is a rename to `elana-townshipschools.org@temporary.appleaccount.com` (all verified verbatim). Google's transfer tool: *"A user cannot decline a request; however the user can ignore it"* — and ignoring means *"they will need to rename their personal account."* Entra external admin takeover moves **users, subscriptions and licenses** on the strength of a DNS TXT record, then **deletes the source directory 10 days later**, with no consent step anywhere in the flow.
+
+2. **What survives into the person's hands is an account they already held — and it survives only by surrendering its name.** Apple → `@temporary.appleaccount.com`. Microsoft → `user@fourthcoffeexyz.onmicrosoft.com`. Google → *"rename their personal account."* **The identifier, not the account, is what the org actually takes.**
+
+3. **The orphan is a documented feature, not an implementation bug.** RFC 7644 §3.6: providers *"MAY choose not to permanently delete the resource but MUST return a 404."* RFC 7643 `active`: *"The definitive meaning of this attribute is **determined by the service provider**."* The only standardized deactivation signal is normatively defined as having no normative meaning. Microsoft's own **"Known limitations"**: *"When a user or group is unassigned from an app… a disable request is sent. At that point, the service doesn't manage the user and a delete request isn't sent when the user is soft-deleted from the directory."* The common admin gesture permanently disarms the eventual DELETE. Plus: a provisioning job in quarantine >4 weeks is **disabled**, so an expired credential silently takes an org's whole deprovisioning pipeline offline.
+
+Apple's six-year tombstone is worth noting for any namespace design: a deleted personal Apple Account *"can't be recreated nor can it be used as a Managed Apple Account **for six years**."*
+
+**Published orphan rates: NOT REACHED.** HN, GitHub, and Crossref all empty. Vendor surveys were deliberately not used — the Microsoft "Known limitations" text is a strictly better artifact: first-party, dated, a *mechanism*, and it needs no sample.
+
+---
+
+## E. ROOTLESSNESS — where the human gets re-attached anyway
+
+### The one place a rootless chain is designed
+
+Miller's *Robust Composition* is genuinely rootless **in the model**. §9.2.5: *"only connectivity begets connectivity—all access must derive from previous access."* §9.2.1 postulates the root away: *"there is always a first instant of time."* But every time the thesis names the origin it is a person (§11.3 *"the owner of the system"*; §7.4 *"the human operator… read the URI from his screen over the phone"*). Measured: `"ambient authority"`, `"accountability"`, `"provenance"` and `"non-repudiation"` each appear **zero times** in the thesis. Note also `erights.org` is **unreachable** (connection refused, both ports) as of today; the thesis survives on Agoric's mirror.
+
+**The ocap authors published the gap themselves.** Miller/Donnelley/Karp, HotSec'07: *"although many historical criticisms of ocaps have since been refuted, **a remaining unrefuted criticism is that they cannot record who to blame for which action**. **This lack has led some to forego the benefits of ocaps**."* Their answer — Horton, a sealer/unsealer "Who" object that is explicitly *not* a person — **ships nowhere**: zero hits in `Agoric/agoric-sdk`, `ocapn/ocapn`, `endojs/endo`, and the download host is dead.
+
+**OCapN**, the closest thing in the world to your design, is **pre-specification**, and grep across its three spec files finds **zero occurrences of human, person, audit, accountability, provenance, owner, or revocation.** It has no answer because it has no concept.
+
+### The standards say a chain's root has no authority
+
+**RFC 8693** (OAuth Token Exchange) is the one in-force IETF standard modeling a delegation chain via nested `act` claims — *"The outermost `act` claim represents the current actor while nested `act` claims represent prior actors."* And then: *"For the purpose of applying access control policy, the consumer of a token **MUST only consider** the token's top-level claims and the party identified as the **current actor**… **Prior actors identified by any nested `act` claims are informational only and are not to be considered in access control decisions**."*
+
+**The chain's history is decorative.** That is exactly what your design wants (nothing climbs to a human) and exactly the hazard: nothing about where an actor came from constrains what it may do.
+
+**RFC 9068** permits a subject with no human — for client-credentials tokens *"the value of 'sub' SHOULD correspond to an identifier the authorization server uses to indicate the client application"* — while warning that the AS must prevent resource servers from confusing a person-token with a program-token. **This is the Sovrin "Wallet Take-Over" warning restated in OAuth terms.** Two unrelated traditions arrived at the same finding independently: *a verifier facing an unrooted identity cannot tell what kind of thing it is dealing with.*
+
+### The re-attachment points, ranked by hardness
+
+1. **Creation-time platform requirement.** Entra Agent ID (doc updated **2026-09-03**, quoted verbatim): a service principal **may be an owner** — *"Service principals as owners enable automated management of agent identities"* — but *"**A sponsor is required when creating an agent identity or agent blueprint**"*, sponsors may be *"Users (including guest users) and groups"* only, and *"**For app-only create requests, the creating service must set one or more users or supported groups as the sponsor.**"* That is precisely agent-creates-agent with no interactive human, and Microsoft refuses the create.
+2. **Payment / billing.** AWS Customer Agreement §2.1 (2026-08-14): *"you must have an AWS account associated with a valid email address and a valid form of payment"* and *"you are responsible for all activities that occur under your account."* `organizations:CreateAccount` is machine-callable, but the owner email *"becomes the user name credential for the root user"*, contact details are copied down, and everything bills to one payer account. GCP: the payments profile stores *"the name, address, and tax ID (when required legally) of who is responsible."*
+3. **Licensing.** Microsoft Agent 365 *"requires a Microsoft Agent 365 license for each user."* Agents are billed per seat.
+4. **ToS.** Anthropic Commercial Terms: *"Customer is responsible for all activity under its account."*
+5. **Statutory fallback — the sharpest legal finding.** EU AMLR (Regulation 2024/1624), applying **10 July 2027**, **Art. 22(2)**: *"Where, after having exhausted all possible means of identification, **no natural persons are identified as beneficial owners**… obliged entities shall record that no beneficial owner was identified and **identify all the natural persons holding the positions of senior managing officials** in the legal entity and shall verify their identity."* Art. 63(4) mirrors it at the register. Recital (125) concedes the fiction: *"Although they are identified in those situations, the senior managing officials **are not the beneficial owners**."* Recital (126) forecloses the workaround: *"Difficulties in obtaining the information should not be a valid reason to avoid the identification effort."*
+   **A structure engineered so no chain climbs to a natural person does not produce "no answer." It produces a substituted answer — a named human by office, plus a justification the authorities may attack.**
+   *(Jurisdictional asymmetry, measured: the US switched its equivalent OFF. FinCEN's interim rule of 2025-03-26, finalized 2026-08-11 effective 2026-08-14, narrows "reporting company" to foreign-formed entities only; **all US-formed entities and US persons are exempt.**)*
+6. **Regulatory role typing.** GDPR Art. 4(7): controller is *"the natural or legal person, public authority, agency or other body."* AI Act (2024/1689) Art. 3: the *system* is *"machine-based… with varying levels of autonomy"*, but provider, deployer, importer, distributor, authorised representative — all seven roles collapsed into "operator" — are each typed **"a natural or legal person."** The autonomy sits in Art. 3(1); the liability sits in Art. 3(3)–(8), and it is a person. Electronic personhood was proposed (EP resolution 2017-02-16 §59(f)) and **rejected** (2018 open letter); what was enacted instead types every accountable role as a person.
+7. **Court order — and this is where the cost is measured.** Three cases, three different attachment mechanics:
+   - **Ooki DAO.** CFTC characterized it as *"an unincorporated association of which Bean and Kistner were actively participating members."* Default judgment 2023-06-09 (Judge Orrick): DAO is a "person" under the CEA, $643,542 penalty, and orders binding *third-party web-hosting and domain-name registrars* to remove the site. Commissioner Mersinger's dissent (2022-09-22) names the cost: liability attached to token holders *"based solely on their status as members"*, and *"token holder A has now become a member of the unincorporated association and (possibly unknowingly) assumed personal liability… whereas token holder B, by the happenstance of not voting, has not."* **The act of participating, performed inside the system, retroactively created the human root.**
+   - **Roman Storm** (2025-08-06): convicted on 1 of 3 counts, jury deadlocked on the rest. Prosecution theory: he *"had the ability to modify Tornado Cash's code to prevent illicit use… but chose not to."* **Residual capability is ownership.** Whoever can still change it is the owner, whatever the design says.
+   - **Van Loon v. Treasury**, 5th Cir. No. 23-50669, **2024-11-26**: Tornado Cash's immutable contracts are *"unownable, uncontrollable, and unchangeable—**even by its creators**"* and therefore *"not the 'property' of a foreign national or entity"* and not blockable under IEEPA. OFAC delisted 2025-03-21. **Genuine ownerlessness is legally real — and it bought immunity by forfeiting every protection ownership confers.** The contracts can never be updated, revoked, or repaired. And the case only reached a court because six named natural persons had standing to bring it.
+
+---
+
+## FLAG: failures the designer would likely not have priced
+
+**1. The manager relation is the abuse vector, and the tooling built for parent→child is the most prevalent instance of it.** Havron et al., USENIX Security '19 (N=44 clients, 46 consultations, 105 devices): **23/44 (52%)** had identified security risks. Of 79 apps flagged as problematic, **61 were dual-use, "with 'find my phone' and child monitoring apps the most prevalent categories."** Four clients remained on a shared family plan the abuser paid for; twelve had unrecognized "trusted" devices. Every parental-control affordance is, empirically, also a surveillance affordance.
+
+**2. The law gives the manager a delete right and the managed party none.** COPPA §312.6 vests every right in the **parent** — review, refuse further collection, *"direct the operator to delete the child's personal information."* The child has no counterpart right anywhere in 16 CFR Part 312, and **the FTC's own COPPA compliance FAQ contains no guidance whatsoever on the age-13 transition.** §312.10 then *requires* deletion once the collection purpose ends. Under GDPR the only right the grown child gets over their childhood-managed data is Recital 65 — a right to **erase** it (*"The data subject should be able to exercise that right notwithstanding the fact that he or she is no longer a child"*), not to inherit it. Art. 20 portability is a right to a **copy** in a machine-readable format, qualified *"where technically feasible"*, and §20(4) says it *"shall not adversely affect the rights and freedoms of others"* — which includes the manager persona. **Both legal regimes point at deletion. Neither contemplates handover.** ICO Children's Code: **NOT REACHED** (403).
+
+**3. Rootlessness is achievable for ownership and impossible for initiation.** Safe permits contract-owns-contract at arbitrary depth — owners *"can be EOAs, other smart contract accounts, or even a passkey."* But ethereum.org states the physics: *"Contract accounts… **can only send messages in response to receiving a transaction**."* EIP-7702 (Final) preserves this — the transaction is still EOA-originated and EOA-signed. A fully rootless ownership graph is **inert**. Something must hold a key and press go, and that something is where every investigation will start.
+
+**4. The deepest technical cost falls on the *managed* party, not the manager.** `did:key` — the only DID method that is genuinely registry-free and owner-of-record-free, i.e. the exact shape a rootless persona needs — states: *"This DID Method does not support updating the DID Document"*; *"does not support deactivating"*; *"does not support key rotation because the identifier is derived directly from the public key material itself"*; and *"using a `did:key` for interactions that last weeks to months is **strongly discouraged** unless it is coupled with a hardware security module."* CCG draft v0.9, never a Recommendation. **A rootless identity that cannot rotate, recover, or be deactivated is not a durable home for a person's life; it is an ephemeral handle with a permanent lifespan.**
+
+**5. The transition, not the relation, is where the value is destroyed.** Every system measured makes the *relation* cheap and the *exit* expensive: Apple confiscates the Apple Cash balance upward and strands in-app purchases inside a parent-bought app; Google's deletion of the family *group* destroys the restore path for the *account*; atproto's exit writes an unerasable public record of every handle you ever had; Sovrin's exit is a re-issuance that depends on issuers still existing (Kiva's did not, Sovrin's own foundation did not). **A design that models the manager→managed relation carefully and the transition loosely will lose exactly what the managed party was promised.**
+
+**6. A design that names no owner should expect one to be assigned.** Ooki attached at *who voted*. Storm attached at *who could still change it*. AMLR Art. 22(2) attaches at *whoever holds a senior managing office*. Entra attaches at *create time, or the create fails*. AWS attaches at *the email that became the root user*. The only case where nothing attached — Van Loon — succeeded because the object was provably beyond anyone's reach, including its authors', forever.
+
+---
+
+## Tooling notes for the next pass
+
+- **OpenAlex budget exhausted mid-session** (HTTP 429, *"Resets at midnight UTC"*). Use Crossref/arXiv until then.
+- **Google support pages now CAPTCHA our egress** (`www.google.com/sorry/`) after sustained fetching; they worked earlier in the session.
+- Newly confirmed blocked: `erights.org` (connection refused), `fatf-gafi.org` (403), `federalregister.gov` / `ecfr.gov` (redirect to `unblock.federalregister.gov`) — **use `law.cornell.edu/cfr/text/...` instead, which works**; `ico.org.uk` (403); `reddit.com` (all forms); `discussions.apple.com` via curl but **not** via WebFetch.
+- Newly confirmed working: `support.apple.com/kb/index?page=search&q=…&locale=en_US` is server-rendered and is the only reliable way to find Apple article IDs; `developer.apple.com/tutorials/data/documentation/<lower>.json` returns full content where the SPA returns only `<title>`; `learn.microsoft.com` returns full markdown with front-matter including `updated_at`; Google Drive `uc?export=download&id=…` retrieves the unpublished Sovrin guardianship documents.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;-K4Uk1LJGAg75fPZPgQnKav6RfXNGj-ppG2m_LYLi0U
+
+<<^ code="&#x0004;" -> to=? >>

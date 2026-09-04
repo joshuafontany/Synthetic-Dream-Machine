@@ -1,0 +1,313 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/7-nostr-bluesky-matrix-multi-account-yes-mut-98501d >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/7-nostr-bluesky-matrix-multi-account-yes-mut-98501d.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 7. NOSTR · BLUESKY · MATRIX — multi-account yes, mutual blindness no. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/7-nostr-bluesky-matrix-multi-account-yes-mut-98501d"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 7. NOSTR · BLUESKY · MATRIX — multi-account yes, mutual blindness no
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 42,567 characters
+
+````
+I have enough. Writing the report.
+
+---
+
+# Messengers with per-identity private contact views — and what each admits it cannot hide
+
+**Method note:** WebSearch was exhausted; OpenAlex hit a hard budget wall (`429 Insufficient budget`, resets midnight UTC) and returned nothing all session. Everything below came from direct URL fetches, GitLab/GitHub/atproto APIs, and two PDFs I downloaded and ran `pdftotext` over. Items I could not reach are marked **NOT REACHED**.
+
+---
+
+## 1. BRIAR — the only project that has *written down* why it refuses multi-identity
+
+**Contact model.** No global directory. Three add paths, with a visible trust gradient in the UI: QR scan in person (three green `#`), `briar://` link exchange or introduction (two orange `#`), non-contact (one red `#`). Source: https://code.briarproject.org/briar/briar/-/wikis/FAQ (fetched via GitLab API v4).
+
+**Contact lists are local and encrypted** — "each user's contact list is encrypted and stored on her own device" (https://briarproject.org/how-it-works/).
+
+**Can contacts see each other?** Only through the sharing graph, and only by mutual consent. Briar's FAQ states a post propagates iff: (1) they're your contact, **and** (2) both subscribe to the forum/group/blog, **and** (3) *both have chosen to reveal that subscription to each other*. Briar calls this the "distribution graph" — "a subset of contact relationships (specifically, the subset that have chosen to reveal the subscription to each other)."
+
+**MULTI-IDENTITY: CONFIRMED as a long-standing request, and CONFIRMED as REFUSED.** This is the sharpest finding in the whole report.
+
+- Issue #34 "Identity management screen" — created 2015-12-01, label **`R: rejected`**, closed 2018-06-12.
+- Issue #202 "Extend ContactListActivity to show which contacts are linked with which identity/identities" — created 2015-12-30, label **`R: rejected`**, closed 2018-06-12. Its body preserves the original design intent from `@akwizgran`: *"the main use case is posting to forums/blogs under a different identity from the one(s) you use with your contacts"* and *"they could also be used for grouping contacts into 'circles'."* And from `@str4d`: *"If the intent of identities is for them to appear (at least initially) to be different people, the UI needs to remind the user which of their contacts know which of their identities."*
+- Issue #1122 "Different identities in different contexts" — created 2017-11-30, still **open**, label `S: stale`, last touched 2020-11-19.
+- Issue #887 "Support for multiple devices" — created 2017-01-03, still open.
+
+The FAQ gives the reasoning, and it is a **three-channel linkage argument** that generalizes to any p2p design:
+
+> "Q: Can I have multiple identities/profiles/accounts? Short Answer: **No, that is not supported by Briar.**"
+> Three linkage channels, verbatim: (1) **online/offline timing** — "In a p2p network we can't hide this from our contacts." (2) **network addresses** — Tor is fine (separate hidden service per identity) "But with Wi-Fi and Bluetooth, the contacts can compare the addresses we gave them and see that it's the same device." (3) **application-layer differential behaviour** — "they could try to introduce `A` to `B`, and see if the protocol behaves differently than it would if `A` and `B` were on different devices."
+
+**Briar's stated threat model and admitted limits** (all from the FAQ, https://code.briarproject.org/briar/briar/-/wikis/FAQ):
+
+> "**Does Briar provide anonymity? No.** Briar does not conceal your identity from your contacts. It provides **unlinkability** but not **anonymity**. This means nobody else can discover who your contacts are, but your contacts *may* be able to discover who you are."
+
+Enumerated leaks to contacts, verbatim: Bluetooth address (shared *even when the contact was added remotely by link*); the five most recent IPv4 LAN addresses+ports for Wi-Fi; the most recent IPv6 link-local address ("on some Android devices the IPv6 link-local address is based on the hardware MAC"); the Tor onion address. Briar's own example: *"network logs showed that the suspect's laptop received address 192.168.0.222 from the router in the cafe, which is consistent with the LAN IP address we received from the anonymous whistleblower."*
+
+Other admitted limits: no account backup (would break forward secrecy — ticket #110); no same-account-on-multiple-devices; publishing a `briar://` link is safe and does *not* expose online status (per-contact rendezvous onion, Bramble Rendezvous Protocol / BRP.md) — only contacts see online status. Also the wiki page "Fundamental Problems" (https://code.briarproject.org/briar/briar/-/wikis/Fundamental-Problems) states five structural tradeoffs including "Privacy-connectivity: We don't want to reveal that we're part of the network / But we can only communicate with those who know."
+
+**Audit:** Cure53, 2017, https://briarproject.org/raw/BRP-01-report.pdf — all issues fixed before first public release. FAQ says a further audit was funded for 2023; I did not find its report — **NOT REACHED**.
+
+**Briar Mailbox:** released **2023-06-15** (https://briarproject.org/news/2023-briar-mailbox-released/). Companion Android app on a spare device; store-and-forward over Tor; "Each Mailbox only delivers messages between its owner and their contacts, so no information is exposed to third parties." Requires Android 4.3+ on permanent power/Wi-Fi.
+
+**Briar Desktop:** **beta**, v0.6.5-beta, dated **2026-02-20** (https://briarproject.org/download-briar-desktop/). Windows 10/11, macOS (ARM+Intel), Linux (.deb/.jar/AppImage). Missing vs Android: RSS feeds, disappearing messages, nearby/proximity contact add, Bluetooth, removable-drive transfer, Tor bridges.
+
+---
+
+## 2. THREEMA — IDs without phone numbers, seven attacks, and a contact-discovery hole they never claimed to close
+
+**ID model:** 8-character randomly generated Threema ID created on first launch; phone/email linking is optional (https://en.wikipedia.org/wiki/Threema).
+
+**The paper:** "Three Lessons From Threema: Analysis of a Secure Messenger," Kenneth G. Paterson, Matteo Scarlata, Kien Tuong Truong, Applied Cryptography Group, ETH Zurich. USENIX Security 2023. Site: https://breakingthe3ma.app/ · PDF I downloaded and extracted: https://breakingthe3ma.app/files/Threema-PST22.pdf. (The USENIX presentation page https://www.usenix.org/conference/usenixsecurity23/presentation/paterson returned **403** — NOT REACHED, but the authors' PDF is the same paper.)
+
+Target: Threema Android **v4.831**; 10M+ users, 7000+ on-prem customers; mandated for Swiss Army official communications.
+
+**ALL SEVEN ATTACKS, in the paper's three threat models:**
+
+*Threat model 1 — External actor (network):*
+1. **Ephemeral Key Compromise Impersonation.** Compromising a *single* ephemeral value in the C2S protocol lets the adversary **permanently impersonate that client to the server, and through this access the metadata for all E2E-protected messages.**
+2. **Vouch Box Forgery.** Register the *server's* public key as a user public key; trick the victim into sending one crafted E2E message; obtain a value that again permanently impersonates the victim to the server. Cross-protocol.
+
+*Threat model 2 — Compromised Threema server:*
+3. **Message Reordering and Deletion.** Nonce-handling peculiarities in the E2E protocol let the server **arbitrarily and undetectably reorder and/or delete** messages between any two clients.
+4. **Replay and Reflection.** Clients keep a local nonce DB; it is **deleted on reinstall or device change**. After that the server can replay old messages, and — from poor key separation — **reflect Alice's own old messages back to Alice**.
+5. **"Kompromat."** Registration makes the client encrypt a *server-chosen* message to a *server-chosen* public key, invisibly to the user — a malicious server can manufacture incriminating ciphertext for later delivery. (Independently found earlier by Krebs; patched Dec 2021.)
+
+*Threat model 3 — Compelled access (device in hand):*
+6. **Cloning via Threema ID Export.** Password-protected long-term-key backup → clone the account and silently read all future messages; with a compromised server, all past messages too. Requires app+device unlocked. Paper: "feasible for an unskilled attacker that has access to the device for a very short time."
+7. **Compression Side-Channel on Threema Safe.** Compress-then-encrypt backup + attacker-injected chosen strings via **Threema nicknames**; observe backup file size to recover the private key. **MEASURED:** over **10,000 experiments** to extract 31 characters of the private key, **4,727 succeeded / 5,273 failed**; among successes **median 19,382 oracle queries, mean 23,382**. Does not by default require an unlocked app (does need an unlocked device).
+
+**Contact-list / metadata specifics:**
+- Attacks 1 and 2 "do not, by themselves, leak plaintext, but **they target metadata that, under normal circumstances, only the server should be able to access**."
+- The Threema Safe backup JSON **contains the user's whole contact list** — the paper's Figure 10 shows `"contacts": [{"identity": "ABCDEFGH", "nickname": ...}]` alongside `"privatekey"`. So attacks 6 and 7 are *contact-graph* compromises, not just key compromises.
+- **Contact discovery (Appendix A):** client hashes phone-book entries with **HMAC-SHA256 under a fixed static key** and sends them to the server over TLS; server returns matches. The paper's own verdict: "Hashing the information is insufficient, since, for example, **phone numbers carry little entropy and can be brute-forced. This allows the service provider to build a partial social graph for an entire population.**" It explicitly contrasts this with Signal's SGX+ORAM approach. Wikipedia states Threema keeps address-book data only in volatile server memory and deletes it after sync — that is a **CLAIMED** operational policy, not a cryptographic property, and it does not touch the low-entropy-hash problem.
+- Prior work the paper cites: **Rösler, Mainka, Schwenk, "More is Less: On the End-to-End Security of Group Chats in Signal, WhatsApp, and Threema," IEEE EuroS&P 2018** — found, for Threema, a group-message replay attack and **"leakage of group membership information to non-members."**
+
+**Disclosure timeline (MEASURED, from the paper and breakingthe3ma.app):** disclosed to Threema **2022-10-03**, acknowledged same day, 90-day period proposed. First mitigation batch shipped in **Threema 5.0 (Android+iOS) on 2022-11-29**, which also introduced the **Ibex** protocol for E2E forward secrecy — **Ibex was opt-in at time of writing**, and the paper notes the lack of an asymmetric ratchet means Threema **still lacks post-compromise security**. Further mitigations Q1 2023; public disclosure **2023-01-09**. The metadata box is now mandatory.
+
+**Threema's public rebuttal blog post: NOT REACHED.** `threema.ch/en/blog/posts/statement-ethz-analysis` 301s to `threema.com/en/blog/statement-ethz-analysis`, which **404s**, as do every slug variant I tried; the current blog index only exposes 2026 posts and its pagination did not yield the 2023 archive. I did not want to reconstruct their wording from memory. The *fact* of a coordinated blog post in Q1 2023 is confirmed by the paper itself ("along with a post on Threema's blog").
+
+---
+
+## 3. SIGNAL — sealed sender, and the attack that measured its collapse at N=5
+
+**Sealed sender** (https://signal.org/blog/sealed-sender/, **2018-10-29**).
+
+Hides: sender identity from the service. Explicitly does **not** hide:
+- **The recipient.** "While the service always needs to know where a message should be delivered, ideally it shouldn't need to know who the sender is."
+- Timing and IP correlation: "additional resistance to traffic correlation via timing attacks and IP addresses are areas of ongoing development."
+- By default it is restricted "to contacts who are less likely to require rate limits and other abuse protection."
+- Signal itself calls it "an incremental step."
+
+**"Improving Signal's Sealed Sender"** — Ian Martiny (CU Boulder), Gabriel Kaptchuk (BU), Adam Aviv (GWU), Dan Roche (US Naval Academy), **Eric Wustrow** (CU Boulder). NDSS 2021. Landing: https://www.ndss-symposium.org/ndss-paper/improving-signals-sealed-sender/ · PDF: https://www.ndss-symposium.org/wp-content/uploads/ndss2021_1C-4_24180_paper.pdf (I downloaded and extracted this).
+*Correction to the brief: the fifth author is Wustrow, not Rubin.*
+
+**The attack — a Statistical Disclosure Attack keyed on delivery receipts.** Signal's delivery receipts are on by default and are themselves sealed-sender messages sent back automatically. The server defines an *epoch* — a window right after Bob receives a message. Score every user +1 if they receive a message in a **target epoch** (an epoch right after Bob got one) and −1 if they receive one in a **random epoch**. Popular users cancel out; Bob's actual associates rank to the top. The attack works **at the application layer**, so — the authors stress — it defeats Tor/VPN users who would otherwise be safe from network tracing.
+
+**MEASURED numbers (all from the paper):**
+- Headline: "**Signal could link sealed sender users in as few as 5 messages.**"
+- Simulation: **1,000,000 active users**, **800 messages per epoch**, **1-second epochs** — calibrated to "users sending on average about 70 messages per day." Traffic mix per epoch: 25% "repeat" messages, 25% "responses," 50% random pairings. Half the epochs target, half random. **100 runs per configuration**, reporting Alice's average rank.
+- **Alice-only case: "within 5 messages, she is uniquely identified as messaging Bob."**
+- **Worst case: "on the order of 60 epochs to identify the users messaging Bob"** — and only half of those are actual messages to Bob. Configuration: Alice + **5 co-associates** (6 total conversations with Bob), plus **1,000 popular users**. Figure 5 shows that at >45 epochs one co-associate still sits at rank >1000 while another has reached rank 0.
+- **Delivery-receipt timing, measured on the real app by source review + instrumentation: median round-trip 1,480 ms; 90% within ~5,000 ms.** Delaying receipts is a partial mitigation — they tested variable epoch lengths and found delaying receipts a full hour degrades the attack.
+- **Social graph is irrelevant to the result:** they tried Erdős–Rényi, Barabási–Albert, Watts–Strogatz, and fully-connected generators and "found they all resulted in a similar number of epochs needed."
+- **Mitigation cost: "less than $40 per month"** for millions of users — broken down as ~$10/mo compute + ~$20/mo DynamoDB, on AWS, with the whole database "never exceed[ing] a few GB." Their scheme reuses sealed-sender's own machinery plus blind signatures (2048-bit, Java lib via JNI; server in Python/Django); overhead per message "less than 100ms, even including network delay." ECDSA KeyGen runs in the background.
+- Formal result: they define an ideal functionality for *sealed sender conversations* and state plainly: "**Signal's sealed sender does not meet this ideal functionality**," because the conversation id "can be inferred with high probability by its timing." They explicitly do **not** claim to defend against auxiliary re-identification (e.g. time-zone inference) — "beyond the scope of our work."
+
+**Private contact discovery** (https://signal.org/blog/private-contact-discovery/, **2017-09-26**). Contacts are sent into an Intel SGX enclave; clients remote-attest the enclave against published open source; an oblivious hash table + ORAM hides memory access patterns. Signal's own admitted residual leak: "The OS might see the enclave index into the cache lines for a single bucket *more* than 12 times," revealing bucket occupancy but not which contacts. Also: "branches can potentially be observed through memory access patterns." Still SGX as of **August 2022** (https://signal.org/blog/building-faster-oram/: "The enclave solution we use currently on our cloud servers is a technology called SGX built into Intel server processors") — and that post does **not** acknowledge any SGX weakness.
+
+**Private group system** (https://signal.org/blog/signal-private-group-system/, **2019-12-09**). Hides group membership, title, avatar, attributes from the server via encryption-compatible **KVACs** + Schnorr/Fiat-Shamir zero-knowledge proofs; deterministic UID encryption per group prevents duplicates. Does **not** hide: that groups exist, or the server-side metadata needed to operate.
+
+**MEASURED attacks on SGX, as they bear on the above:**
+
+| Attack | Authors | Date/venue | CVE | Effect on SGX |
+|---|---|---|---|---|
+| **Foreshadow / L1TF** | Van Bulck, Piessens, Strackx (KU Leuven, notified Intel 2018-01-03); Minkin, Silberstein, Weisse, Genkin, Kasikci, Wenisch, Yarom (notified 2018-01-23) | USENIX Security, Aug 2018 | **CVE-2018-3615** (SGX), 3620 (kernel/SMM), 3646 (VMs) | Reads **the entire enclave memory**; researchers **extracted the Quoting Enclave's attestation keys** and forged attestation quotes; extracted sealing keys. No vulnerable gadget needed in the target enclave. https://foreshadowattack.eu/ |
+| **Plundervolt** | Murdock, Oswald, Garcia, Van Bulck, Piessens, Gruss | reported 2019-06-07; IEEE S&P 2020 | **CVE-2019-11157** | Undervolting faults **inside the CPU, before memory encryption**, so SGX's memory encryption is bypassed; extracts crypto keys and induces memory-safety violations in enclaves. https://plundervolt.com/ |
+| **SGAxe** | van Schaik, Kwong, Genkin, Yarom | 2020 | rides **CVE-2020-0549** (L1D Eviction Sampling / CacheOut) | **Extracts SGX private attestation keys from Intel's own signed Quoting Enclave**, then signs fake quotes. The authors ran a live "Attestation as a Service" and a Twitter bot that passes SGX attestation. https://sgaxe.com/ |
+| **ÆPIC Leak** | Borrello, Kogler, Schwarzl, Lipp, Gruss, Schwarz | USENIX Security 2022 | **CVE-2022-21233** | An **architectural** bug (not transient execution) — the APIC MMIO undefined range returns stale cache-hierarchy data, disclosing enclave data and **bypassing all existing mitigations**. Intel issued microcode/SDK updates and has **deprecated SGX on client CPUs**. https://aepicleak.com/ |
+
+The bearing on contact discovery is direct: Signal's design asks the client to trust a *remote attestation quote*. Foreshadow and SGAxe both **extracted the attestation signing keys**, which is precisely the primitive that lets a client distinguish "a real enclave running the published code" from "a server pretending to." The residual guarantee after 2020 is Intel's patching cadence, not a cryptographic one.
+
+---
+
+## 4. SIMPLEX CHAT — the strongest *written* claim of mutually-blind contacts
+
+**Design.** No user identifiers of any kind. Addressing is **resource-based**: a *messaging queue* is "a **unidirectional**, ordered sequence of fixed-size data packets (16,384 bytes each)," each with an address on a specific router and **separate cryptographic credentials authorizing sending versus receiving**. Duplex conversation = two simplex queues. "Participants do not need to have globally unique addresses to communicate, instead they use redundant unidirectional (simplex) messaging queues, **with a separate set of queues for each contact**." Connection requests pass **out-of-band**, non-optionally. Routers "do not store any user information (no user profiles or contacts, or messages once they are delivered), and primarily use in-memory persistence." Two-hop onion routing: "the sending endpoint's IP address is known only to the first router; the receiving endpoint's IP address is known only to the second router."
+Source: https://github.com/simplex-chat/simplexmq/blob/stable/protocol/overview-tjr.md
+
+**The claim that matches this brief exactly.** Under "A user's contact," the threat model says the contact **cannot**:
+> "prove that two contacts they have is the same user."
+> "cannot collaborate with another of the user's contacts to confirm they are communicating with the same user."
+
+That is the mutual-blindness property Briar declined to attempt. Note SimpleX buys it by **not being p2p** — routers stand between endpoints, so Briar's channel (1) (contact-visible online status) and channel (2) (Bluetooth/LAN addresses handed to contacts) simply do not exist here.
+
+**Stated limits (https://github.com/simplex-chat/simplexmq/blob/stable/protocol/security.md).** The doc is unusually honest — it enumerates *can* alongside *cannot* for seven adversary classes. Load-bearing admissions:
+
+- **Global assumptions that must hold or everything collapses:** local DB and keys protected; authentic app, no local malware; primitives unbroken; **"a user's choice of routers is not directly tied to their identity"**; 2-hop onion routing in use.
+- **Passive observer of one user CAN:** identify *that and when* a user is using SimpleX; determine which routers they receive from; observe traffic volume.
+- **Passive observer of a set of senders and recipients CAN:** "perform traffic correlation attacks against senders and recipients and correlate senders and recipients within the monitored set, **frustrated by the number of users on the routers**" — i.e. the defence is an anonymity-set argument, not a cryptographic one.
+- **An SMP router CAN:** learn when a recipient is online; count messages per queue; **"learn which messages would trigger notifications even if a user does not use push notifications"**; **"perform the correlation of the queue used to receive messages (matching multiple queues to a single user) via either a re-used transport connection, user's IP Address, or connection timing regularities"**; learn the recipient's IP and track them across IPs *unless Tor is used*; drop all future messages in a queue; lie about queue state; distinguish noise from real traffic **via timing regularities**.
+- The overview doc adds the sharpest line: "there is no re-used identifier or credential between queues... While a user *may* re-use a transport connection to fetch messages from multiple queues, or connect to a router from the same IP address, **both are choices a user may opt into to break the promise of un-correlatable queues.**"
+- **An attacker with the decrypted chat DB CAN:** read all history, see contact and group profiles, silently receive new messages until queue rotation/ratchet advance, and send as the user.
+
+**Audits (MEASURED):**
+- **Trail of Bits, published 2022-11-08** (https://simplex.chat/blog/20221108-simplex-chat-v4.2-security-audit-new-website.html): scope `simplexmq` crypto+networking, **one calendar week, 2 engineers. 4 findings: 2 medium, 2 low.** All required high-difficulty attacks. Medium #1: X3DH/double-ratchet implementation error — "the key derivation function was not applied to the result of concatenation of three DH operations." Medium #2: keys in unpinned memory, not cleared (needs root). Lows: padding/unpadding function bugs. **3 of 4 fixed in v4.2**; the memory-pinning one deferred. Report: https://github.com/trailofbits/publications/blob/master/reviews/SimpleXChat.pdf
+- **Trail of Bits, July 2024** (https://simplex.chat/blog/20241014-simplex-network-v6-1-security-review-better-calls-user-experience.html): **cryptographic design review** (not implementation) of SMP, the SMP agent protocol, push notifications, XFTP, XRCP, and the chat protocol. **3 medium, 1 low, 3 informational** — "all of which require a high difficulty attack to exploit — the attacker would need to have a privileged access to the system." A larger implementation assessment was announced for early 2025; **I did not locate its report — NOT REACHED.**
+- Independent academic cryptographic analysis of SimpleX: **I found none.** Negative finding.
+
+---
+
+## 5. SESSION — long-term identifiers, no forward secrecy today, and a swarm that knows the recipient
+
+**Model.** Account ID = an Ed25519 public key, rendered as a 66-char hex string (docs example: `056c3d9682f167135d4c86b0af24e7aca98949380fa825e01455e788fe3df1d05c`). No phone/email. Onion routing ("Onion Requests," over TCP) protects the *sender's* IP. Messages are stored redundantly by a **swarm** of Session Nodes. https://docs.getsession.org/
+
+**The structural admission, from Session's own routing description:** to send, "the sender first needs to find the Session Nodes in their recipient's swarm... the client **fetches the swarm mapping for their recipient's Account ID**," and the payload the sender hands the node includes "**The Account ID of the recipient**," a timestamp, an expiry, and a namespace. So the recipient's *long-term, permanent* identifier is in the clear at the storage layer, and its swarm is deterministically derivable by anyone. Onion routing hides *who sent*; it does not hide *who receives*, *when*, or *how much*. Messages default to a **two-week** retention.
+
+**Forward secrecy — CONFIRMED absent.** Session's own 2020-12-15 post (https://getsession.org/blog/session-protocol-technical-information) states outright: **"Switching to the Session Protocol means that Session will no longer have deniability and PFS in 1-1 chats, or PFS in closed groups."** Their stated justification: PFS "only matters if users have disappearing messages enabled," and "cryptographic deniability is often something that is largely ignored by the court system"; in exchange they got multi-device, simpler sync, and account restoration. Current docs still list PFS as future work: **"Session Protocol V2 is currently in development! V2 plans to add support for post-quantum cryptography, re-implement Perfect Forward Secrecy (PFS), and bring more secure multi-device account management."** (https://getsession.org/blog/session-protocol-v2). The December 2025 PFS/PQC announcement is corroborated by https://en.wikipedia.org/wiki/Session_(software).
+
+Note the trade Session made is the *inverse* of Briar's: Session bought cross-device account portability by making the identity a stable, portable long-term key — which is exactly what makes per-identity blindness and forward secrecy hard.
+
+**2024–2026 organizational and chain changes (from https://en.wikipedia.org/wiki/Session_(software) and sources it cites):**
+- **2024**: Session Technology Foundation relocated from **Australia to Switzerland**, citing "increasingly restrictive privacy and surveillance legislation in Australia." *The Guardian*, **2024-11-04**, reported this followed **police visiting an employee's home**.
+- **2025**: migrated off the Oxen/Loki blockchain to its own **Session Network**.
+- **2026-04-09**: the foundation announced it would close operations after **2026-07-08** without at least **$1M** in funding. **2026-06-15**: announced sufficient resources to continue.
+
+**Published academic cryptanalysis of Session: I found none.** The criticism is real but is (a) Session's own documented removal of PFS/deniability and (b) the structural recipient-identifier exposure above.
+
+---
+
+## 6. CWTCH — per-profile onion, and a threat model that names what it gives up
+
+**Model.** "With Cwtch you can create one or more Profiles. **Each profile generates a random ed25519 key pair compatible with the Tor Network**... Cwtch allows you to create and manage multiple, separate profiles. **Each profile is associated with a different key pair which launches a different onion service.**" (https://docs.cwtch.im/docs/profiles/introduction). So: **multiple profiles per device: YES, one Tor v3 onion service each.** Descended from Ricochet, extended to asynchronous multi-party groups over "discardable, untrusted, anonymous infrastructure."
+
+**Are profiles mutually blind?** Cwtch does **not** claim this anywhere I could find, and its own Tor page supplies the mechanism that would break it. Because every profile runs a *reachable onion service*, the same online/offline oracle Briar names in channel (1) applies per profile — see below. Two contacts on two profiles of one device can each poll their respective onion and compare uptime patterns. Cwtch offers a mitigation but does not frame it as profile-unlinkability. **Treat mutual blindness as unclaimed and unproven, not as a stated property.**
+
+**What Cwtch says it protects** (https://docs.cwtch.im/security/risk): who is involved, where, when, how mediated, and what-about; plus context-correlation attacks it names explicitly — **Relationships, Cliques, Loosely Connected Cliques and Bridge Individuals, Pattern of Life**.
+
+**What Cwtch ADMITS IT CANNOT HIDE — verbatim:**
+
+1. **Misrepresentation / impersonation.** "Cwtch provides no global display name registry, and as such people using Cwtch are more vulnerable to attacks based around misrepresentation." Their own worked example: Eve grinds thousands of accounts for a lookalike key/picture, names it "Eve New Account," befriends Alice, renames to "Bob." Their conclusion: "**the only absolute way of preventing them is for users to absolutely validate the public key. This is obviously not-ideal and in many cases simply won't-happen.**" The remedy offered is UI hints — a UX mitigation for a cryptographic gap.
+
+2. **Physical access — conceded outright.** "**Cwtch does not consider attacks that require physical access (or equivalent) to the users machine as practically defendable.**"
+
+3. **Online/offline metadata leak, from running an onion service** (https://docs.cwtch.im/security/components/connectivity/tornetwork): "If a third party is aware of your Cwtch profile's address, they can query it periodically to monitor when you are online and offline. If your profile online time matches daily patterns it could be used to help locate you within a range of timezones." Mitigation: a **Start Offline** mode where the profile runs no onion service and only makes outbound connections — but "both parties cannot be operating in this mode or they will be unable to connect," and it only narrows the leak from *anyone* to *your contacts*. They note Tor's **Onion Client Auth** would help and **"Currently Cwtch does not make use of this."**
+
+4. **Global adversaries.** Named as out of reach: correlating publicly-shared contact addresses + online/offline timezone analysis + payload injection observed at the entry guard.
+
+5. **Server-side session tracking** (https://docs.cwtch.im/security/components/cwtch/server): the untrusted-server design is naive PIR — "the server sends everything, and the peers sift through it" — with an admitted cost: "**Note: This behaviour does permit a mild form of metadata analysis.** The server can [see] new messages for each suspected unique profile, and then use these unique message signatures to track unique sessions over time (via requests for new messages)." Confounders offered: connection refresh and resync. Server design goals are stated as never learning participant identity, content, or group membership of a message — **without any non-collusion assumption between servers and without third-party verification**.
+
+**Audit — REFUTED / negative finding.** I found **no evidence of a Radically Open Security audit of Cwtch, or of any independent third-party audit.** Checked: the whole Cwtch Security Handbook incl. `/security/intro`, `/security/development`, `/security/deployment`, `/security/references`; the full docs.cwtch.im sitemap (41 security+profile pages enumerated); openprivacy.ca/blog; openprivacy.ca/discreet-log; openprivacy.ca/work/cwtch. The Development page's own risk register lists only internal controls — "trunk is currently locked and only 3 Open Privacy staff members have permission to override it," automated CI, reproducible builds — and no external review. GitHub search for `radicallyopensecurity` surfaces only their website repos, no published-reports repo (`github.com/radicallyopensecurity/reports` → **404**). If such an audit exists it is not linked from either project's own documentation.
+
+---
+
+## 7. NOSTR · BLUESKY · MATRIX — multi-account yes, mutual blindness no
+
+### Nostr
+
+Multi-account is trivial (a keypair is an account), but **nothing binds separate npubs apart at the relay**. Two structural leaks, both in the specs themselves:
+
+- **Contact lists are public by design.** NIP-02 (https://github.com/nostr-protocol/nips/blob/master/02.md) defines the follow list as a **`kind:3` public event** whose tags are `["p", <32-byte hex key>, <relay URL>, <petname>]`. So your follow graph, the relays you believe each contact uses, *and your private nicknames for them*, are published in cleartext. The spec even encourages third parties to mine it: "make lists of suggestions on who to follow based on the follow lists of other people," and "The data from these follow lists can be used by clients to construct local 'petname' tables **derived from other people's follow lists**."
+- **NIP-04 DMs are formally deprecated for metadata leakage.** Marked `unrecommended`, with a Security Warning: "This standard does not go anywhere near what is considered the state-of-the-art... and **it leaks metadata in the events**, therefore it must not be used for anything you really need to keep secret, and only with relays that use `AUTH` to restrict who can fetch your `kind:4` events." Its `["p", <pubkey>]` recipient tag is necessarily public.
+- **NIP-17 gift-wrap fixes the payload, not the transport.** It claims "**No Metadata Leak**: Participant identities, each message's real date and time, event kinds, and other event tags are all hidden from the public. Senders and receivers cannot be linked with public information alone." But the protections around it are all **SHOULD**, not MUST: "Clients SHOULD randomize `created_at` in up to two days in the past in both the seal and the gift wrap"; "**Relays SHOULD** protect message metadata by only serving `kind:1059` events to users p-tagged on the event (enforced using NIP-42 AUTH)"; "Clients SHOULD guide users to keep `kind:10050` lists small (1-3 relays)." The stated limitation: one encrypted event per recipient, so "Group chats with more than 10 participants should find a more suitable messaging scheme." And the `kind:10050` DM-relay list is itself a public event.
+- **IP at the relay:** the NIPs do not address it. A relay is a WebSocket server; it sees the connecting IP alongside every npub that authenticates or publishes over that socket. **A client that multiplexes two personas over one relay connection correlates them at the TCP layer** — this is the same failure mode SimpleX names explicitly and Nostr does not.
+
+**Verdict: no mutual blindness, and the follow graph is published deliberately.**
+
+### Bluesky / atproto
+
+I **measured** this rather than citing it. All calls below were unauthenticated:
+
+```
+resolveHandle bsky.app                          → did:plc:z72i7hdynmk6r22z27h6tvur
+com.atproto.repo.describeRepo (no auth)         → collections include:
+    app.bsky.graph.follow, app.bsky.graph.block,
+    app.bsky.graph.list, app.bsky.graph.listitem,
+    app.bsky.graph.verification, chat.bsky.actor.declaration
+com.atproto.repo.listRecords collection=app.bsky.graph.block  (no auth)
+    → {"$type":"app.bsky.graph.block",
+       "subject":"did:plc:hfqwnpqahea7ga2ktvvpo7sj",
+       "createdAt":"2024-11-20T00:06:05.386Z"}
+com.atproto.repo.listRecords collection=app.bsky.graph.follow (no auth) → follows returned
+com.atproto.repo.listRecords collection=chat.bsky.actor.declaration    → {"allowIncoming":"none"}
+plc.directory/<did>/log/audit  (no auth)  → full operation history: signing keys,
+    rotationKeys, PDS endpoint, and every alsoKnownAs handle ever held
+plc.directory/export?count=N   (no auth)  → paginated bulk export of ALL operations for ALL accounts
+```
+
+So, measured: **follows and blocks are world-readable records**; **every handle you have ever used and every PDS you have ever migrated between is permanently and publicly logged**; **the entire directory is bulk-exportable by anyone**. The PLC directory is operated by Bluesky Social PBC and held **12M+ DIDs as of October 2024** (https://web.plc.directory/).
+
+Multi-account on one device: supported in the app, but **the identities are not blind to each other in any protocol sense** — the graph is public, so any observer joins them by correlating follow/block timing, and the PLC audit log makes handle history non-repudiable. atproto is not designed for private-view contacts; the repo is a signed public log. (Bluesky's own block-behaviour and moderation posts: several URLs 404'd or returned empty — **NOT REACHED** — which is why I measured the API instead.)
+
+### Matrix
+
+**Multi-account:** the FAQ (https://matrix.org/docs/older/faq/) says "Currently, no. We are looking at options for decentralising or migrating user accounts between multiple servers, and might add this feature at a later stage." Clients (Element) support multiple accounts as separate sessions, but the protocol offers no unlinkability between them.
+
+**Metadata:** structurally, room state — **membership included** — is unencrypted even in E2EE rooms, and replicates to every homeserver participating in the room. Matrix's own federation statement: "data is only shared between servers of participating users of a room" — which means membership *is* shared with every such server.
+
+**MEASURED metadata research (2019, resurfaced on HN 2021-11-04 at 103 points):** "Notes on privacy and data collection of Matrix.org," Libre Monde ASBL — https://gitlab.com/libremonde-org/papers/research/privacy-matrix.org/-/blob/master/part1/README.md (I fetched the raw markdown, 58KB). Its TL;DR states that even **"with a self-hosted client and Homeserver,"** `matrix.org` and `vector.im` receive on a regular basis: Matrix IDs (usually containing the username); email addresses and phone numbers **of the user and their contacts**; associations of email/phone to Matrix IDs; usage patterns; IP address (→ geolocation); device and system info; **the other servers that users talk to**; and **"Room IDs, potentially identifying the Direct chat ones and the other user/server."** With default settings it found unrestricted public access to: Matrix IDs mapped to emails/phones, every uploaded file/image/video/audio, and profile names and avatars.
+
+The sharpest measured finding: on first use of the People screen, Riot Android prompted for contact permission and then **"every email and every phone number in the user's phone book will be sent to the Identity server without any kind of obfuscation or masking"** — to `vector.im`, a third-party for-profit company, reached by default without informed consent. Also: E2EE **device names were queryable without credentials**, so users who left defaults exposed device/client fingerprints to anyone. Part 2 (2019-07-24) carried a data-leak disclosure: https://github.com/libremonde-org/paper-research-privacy-matrix.org/tree/master/part2. Matrix's own remediation posts: 2019-07-19 "Privacy Changes to New Vector Identity Servers" and 2019-09-27 "Privacy Improvements in Synapse 1.4 and Riot 1.4" (matrix.org/blog).
+
+**MEASURED cryptographic attack, on room membership specifically:** "Practically-exploitable Cryptographic Vulnerabilities in Matrix," Martin R. Albrecht, Sofía Celi, Benjamin Dowling, Daniel Jones (2022; IEEE S&P 2023) — https://nebuchadnezzar-megolm.github.io/. Six findings: simple confidentiality break; attack against out-of-band verification; semi-trusted impersonation; trusted impersonation; impersonation-to-confidentiality-break; a theoretical IND-CCA break. The first is exactly a *contact-model* failure: "**room management messages are not authenticated in the Matrix specification (even for end-to-end encrypted rooms),**" so "**a malicious homeserver can add users under their control to end-to-end encrypted rooms**" — existing members' clients then share Megolm keys with the injected device automatically. Detection "requires careful manual membership list inspection from users."
+
+---
+
+## Cross-cutting: the three channels that break per-identity blindness
+
+Briar's FAQ is the only place any of these projects writes the general law down, and the rest of the field can be scored against it.
+
+| | (1) online-status oracle | (2) device-level addresses handed to contacts | (3) app-layer differential behaviour |
+|---|---|---|---|
+| **Briar** | admitted, unfixable in p2p → **refuses multi-identity** | admitted: Bluetooth addr, 5 recent LAN IPv4, IPv6 link-local (MAC-derived on some devices) | named as the reason multi-identity would need audit it hasn't done |
+| **Cwtch** | admitted (onion polling); partial fix = Start Offline; **Onion Client Auth not used** | avoided — Tor only, per-profile onion | naive-PIR server can track unique sessions ("mild form of metadata analysis") |
+| **SimpleX** | router learns when a *recipient* is online | avoided — no p2p; routers stand between | **claims contacts cannot prove two contacts are one user**; but re-used transport connection / same IP / timing regularities "break the promise of un-correlatable queues" |
+| **Session** | swarm sees recipient Account ID + timing | sender IP hidden by onion routing; **recipient identifier is permanent and in the clear** | no PFS, no deniability (self-documented) |
+| **Signal** | sealed sender hides sender, never recipient | — | **delivery receipts deanonymize the pair in as few as 5 messages** |
+| **Threema** | — | — | contact discovery = low-entropy HMAC hashes → "partial social graph for an entire population" |
+| **Nostr** | relay sees IP per socket | — | **follow list is a public event, by design** |
+| **Bluesky** | — | — | **follows and blocks are world-readable; PLC bulk-exportable; handle history permanent** (measured) |
+| **Matrix** | homeserver sees everything | — | **room membership unencrypted and server-forgeable** (Albrecht et al.) |
+
+**The one design that claims the property outright is SimpleX**, and it earns it by giving up peer-to-peer — routers absorb the online-status and address channels that Briar cannot escape. Its own threat model then hands back the caveat: the property survives only while the user does not re-use a transport connection or a source IP across queues.
+
+**The negative findings worth keeping:** no independent security audit of Cwtch exists in any of its own documentation (Radically Open Security **not** confirmed); no academic cryptanalysis of SimpleX exists; no academic cryptanalysis of Session exists. **NOT REACHED:** USENIX's own Threema page (403), Threema's Q1-2023 rebuttal post (every slug 404s, blog archive pagination did not reach 2023), Briar's funded 2023 audit report, SimpleX's announced early-2025 implementation assessment, several Bluesky blog posts on block behaviour.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;Oqrz3EjGy8CwxyvbEJHADAByzNjyk99WxpdhMZOxRVE
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,309 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/apple-platform-multi-user-profile-isolation--52df51 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/apple-platform-multi-user-profile-isolation--52df51.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Apple platform multi-user / profile isolation — measured evidence. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/apple-platform-multi-user-profile-isolation--52df51"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Apple platform multi-user / profile isolation — measured evidence
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 31,659 characters
+
+````
+I have enough. Writing up findings.
+
+---
+
+# Apple platform multi-user / profile isolation — measured evidence
+
+**Method note:** WebSearch not used. All results via direct-URL fetch (support.apple.com, developer docs), NVD REST API 2.0, Crossref, arXiv, HN Algolia. **OpenAlex ran out of daily budget mid-sweep** ("Insufficient budget… Resets at midnight UTC") — partial results only, marked below.
+
+---
+
+## 1. Shared iPad (iPadOS) — the only real multi-user surface Apple ships
+
+**Primary sources (both reached in full):**
+- Apple Platform Security → *Shared iPad security in iPadOS*: `https://support.apple.com/guide/security/shared-ipad-security-secd99f373ef/web` (Published Date: **February 18, 2021** — note: the security guide's Shared iPad page has not been revised in 5+ years)
+- Apple Platform Deployment → *Shared iPad overview*: `https://support.apple.com/guide/deployment/shared-ipad-overview-dep9a34c2ba2/web` (Published **October 25, 2023**)
+- Apple Platform Deployment → *Prepare Shared iPad*: `https://support.apple.com/guide/deployment/prepare-shared-ipad-dep6fa9dd532/web` (Published **December 11, 2023**)
+
+*(The URLs you supplied — `sec110ec5e2b`, `dep9a3a2acd` — are dead; the live IDs are `secd99f373ef` and `dep9a34c2ba2`.)*
+
+### 1a. Data separation model — VENDOR CLAIM (design), no measurement found
+
+> "Shared iPad is a multiuser mode for use in iPad deployments. It allows users to share an iPad while maintaining separation of documents and data for each user. **Each user gets their own private, reserved storage location, which is implemented as an Apple File System (APFS) volume protected by the user's credential.**"
+
+> "**User data is partitioned into separate directories, each in their own data protection domains and protected by both UNIX permissions and sandboxing.**"
+
+So the claimed stack is four layers: APFS volume boundary + per-user Data Protection domain (keybag) + UNIX uid + sandbox.
+
+### 1b. Keychain / key material IS per-user
+
+> "If the user hasn't used the device before or is using the temporary session feature, Shared iPad **provisions a new UNIX user ID, an APFS volume to store the user's personal data, and a local keychain.**"
+
+> "When a user signs out of Shared iPad, **that user's keybag is immediately locked and all apps are shut down.**"
+
+> "After background syncing for that user is complete, **the user's APFS volume is unmounted and can't be mounted again without the user signing back in.**"
+
+**Secure Enclave: NOT REACHED as a per-user statement.** The Shared iPad security page never mentions the Secure Enclave. It describes per-user *keybags* and per-user *local keychains*, but Apple publishes no statement that SEP-resident material (biometric templates, the SEP's own key hierarchy) is partitioned per Shared iPad user. Biometrics on Shared iPad are effectively absent from the doc entirely — sign-in is passcode/federated-credential based:
+> "Setup Assistant on Shared iPad prompts the user to establish a passcode (credential) used to secure the local data on the device and to authenticate to the login screen in the future."
+
+### 1c. Managed Apple ID — REQUIRED, no exceptions except Guest
+
+> "**Shared iPad requires the use of a Managed Apple Account that's issued and owned by the organization.**"
+> "Shared iPad requires a device management service and Managed Apple Accounts that an organization issues and owns… **Devices need to have at least 32 GB of storage and be supervised.**"
+
+Both native and federated Managed Apple Accounts work; federated goes through the IdP once, then "a short-lived access token is issued for the backing Managed Apple Accounts." Native accounts authenticate to Apple Identity Service (IDS) **using the SRP protocol**.
+
+Supported hardware (a real limit): "All iPad Pro models; iPad (5th generation) or later; iPad Air 2 or later; iPad mini (4th generation) or later."
+
+### 1d. Quota — MEASURED numbers, published by Apple
+
+From *Prepare Shared iPad*:
+> "**10 GB for the system, 8 GB for apps and media. The remaining storage is divided among the number of defined users, with 1 GB minimum per user.** Note: Photos won't sync with a Managed Apple Account for quotas of 1 GB."
+> "Devices with a storage capacity 64 GB or greater: **10 GB for the system, 16 GB for apps and media. The remaining storage is divided among the number of defined users, with 2 GB minimum per user.**"
+> "For example, if you specify a value of five users on a 128 GB iPad, **each user has approximately 20.4 GB of local storage**."
+
+MDM levers (with minimum OS): `Maximum number of users` (iPadOS 13.4), `Set the quota size` — "in megabytes, for each user" (iPadOS 13.4), `Delete user` (iOS 9.3), `Sign out user` (iOS 9.3), `Temporary session only` (iPadOS 14.5), `Sign-in grace period` — days before network auth is required, "Setting this to 0 requires network authentication each time" (iPadOS 16.1).
+
+**Apple publishes no hard cap on user count.** The cap is emergent from quota arithmetic: at 2 GB minimum on a 64 GB device you get ~19 cached users; a 32 GB device at 1 GB min gets ~14. Apple's own guidance is to game this:
+> "It's recommended that you set the maximum storage value for users as low as possible to **maximize the number of cached users**, minimize communication with iCloud, and provide a faster sign-in experience."
+
+### 1e. Eviction — the most load-bearing limit, and it fails closed *and* loudly
+
+> "**Because storage is allocated (reserved) for the user at the time the APFS volume is created, there may be insufficient space to create a new volume.** In such an event, the system identifies an existing user **whose data has finished syncing to the cloud** and evicts that user from the device so that the new user to sign in. **In the unlikely event that all existing users haven't completed uploading their cloud data, the new user sign in fails.** To sign in, the new user needs to wait for the previous user's data to finish syncing, or **have an administrator forcibly delete an existing user account, thereby risking data loss.**"
+
+And from the deployment guide: "**If additional space is needed for a new user, the local data for the oldest user is removed.**"
+
+This is the architecturally interesting bit: **eviction is gated on cloud-sync completion, so iCloud is a hard dependency for the multi-user property, not a convenience.** A Shared iPad that can't reach iCloud eventually cannot admit a new user at all.
+
+### 1f. Offline — bounded, and the bound is admin-set
+
+> "If the device isn't connected to the internet… authentication can occur against the local account **for a limited number of days**. In that situation, **only users with previously existing local accounts or a temporary session can sign in.** After the time limit has expired, users are required to authenticate online, even if a local account already exists."
+
+Apple does not publish the default day count in the security guide; the deployment guide exposes it as the MDM `Sign-in grace period` (iPadOS 16.1+). Also: "In iPadOS 16.1 or later, Shared iPad **defaults to using the local passcode for existing users on the device, and so requires no network connection.**"
+
+### 1g. Temporary / Guest sessions — deletion is immediate and total
+
+> "When the user signs out of a temporary session, **their APFS volume is deleted and its reserved space is returned to the system.**"
+> "When a temporary session is ended, Shared iPad performs the full logout sequence and **deletes the temporary session's APFS volume immediately.**"
+> "**Temporary sessions don't sync data with iCloud**, and although a temporary session can sign into a third-party syncing service such as Box or Google Drive, **there's no facility to continue syncing data when the temporary session ends.**"
+> (deployment) "any user has the ability to initiate a temporary session without the need for a user name or password by tapping Guest at the login screen… **In a temporary session, any user can unlock and access the iPad without a password.** Users working in a temporary session should take this into account if they're signed in to any websites or apps."
+
+### 1h. The documented soft spot — a ~30-second deferred-cleanup window
+
+> "To accelerate the case of a new user signing in, **iPadOS defers some ordinary sign-out actions temporarily** and presents a sign-in window to the new user. **If a user signs in during this time (approximately 30 seconds), Shared iPad performs the deferred cleanup as part of signing in to the new user account.**"
+
+Apple states the keybag locks immediately and apps are killed immediately; what is deferred is unspecified "ordinary sign-out actions." **No public research measures what remains live during that window.** This is the one Apple-acknowledged place where the isolation boundary is time-dependent rather than cryptographic.
+
+### 1i. Other stated limits
+- "Users **can't delete apps** on Shared iPad."
+- "Users **can't save passwords using Safari AutoFill** unless a user configuration profile specifying the allowed domain… is installed."
+- "In iPadOS 16.6 or earlier with Shared iPad, user profiles like Mail, Exchange ActiveSync, or CalDAV **get installed only if they don't contain sensitive information such as a passcode or password**, which requires that the profile be encrypted."
+- Temporary sessions "prevent users from modifying account settings or signing in to Apple services… users can't sign in to Messages or the App Store."
+
+### 1j. Shared iPad CVE count: **ZERO**
+
+NVD keyword `Shared iPad` → 7 results, **none about Shared iPad** (all false hits on the word "shared": CVE-2020-9777 Mail video, CVE-2020-9868 cert validation, CVE-2019-8857 Live Photo iCloud links, CVE-2023-23526 iCloud shared-by-me Gatekeeper, CVE-2022-46710 location in iCloud links, CVE-2025-43200, CVE-2025-43510).
+`https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=Shared%20iPad`
+
+**FINDING (negative): in the entire NVD corpus there is not one CVE describing a cross-user data leak on Shared iPad.** Two readings, and the evidence does not separate them: either the design holds, or nobody with disclosure discipline is looking at an education-fleet feature. Given zero academic papers either (§4), the second reading deserves weight. Absence of CVEs here is **absence of evidence, not evidence of absence.**
+
+---
+
+## 2. iOS consumer multi-user: does not exist
+
+### 2a. Confirmation is structural, not a quotable denial
+
+**NOT REACHED as a positive statement.** Apple publishes no sentence saying "iPhone does not support multiple users." The confirmation is by exhaustion of the Apple Platform Security guide's own table of contents (fetched in full from `https://support.apple.com/guide/security/welcome/web`): under *Secure device management* the **only** multiuser entry is "Shared iPad security." There is no iPhone equivalent, no consumer-mode equivalent, no macOS-style account section for iOS. Corroborating positive statement, from the security page itself: "**Shared iPad is a multiuser mode for use in iPad deployments**" — deployments, i.e. MDM + Managed Apple Account + supervision, per §1c.
+
+So: **the multi-user boundary on Apple mobile is gated behind organizational ownership of the identity.** A family cannot reach it. This is a licensing/identity gate, not a technical one — the APFS-volume machinery exists on every iPad in the supported list.
+
+### 2b. What Apple offers instead
+
+**Guided Access** — `https://support.apple.com/en-us/111795` (Published **July 24, 2026**). Single-app lockdown, not isolation:
+> "you can temporarily restrict your device to a single app. This can be useful when you let a child use your device, or you want to stay focused on a task."
+
+Escape is by "Triple-click the side button… Authenticate with your Guided Access passcode, Face ID, or Touch ID." Note the Face ID/Touch ID option: **if the child is an enrolled Face ID/Touch ID identity on that iPhone, they can end the session.** Apple also documents a genuine safety cost: "**Important: Crash Detection and Emergency Services aren't available while using Guided Access.**"
+
+**Screen Time** — Platform Security page `https://support.apple.com/guide/security/screen-time-security-secd8831e732/web` (Published **February 18, 2021**). Apple's own framing is explicit that this is *not* a security boundary:
+> "**Although Screen Time isn't a new system security feature**, it's important to understand how it protects the privacy and security of the data gathered and shared between devices."
+
+> "There are two types of users: adults and (managed) children."
+> "When parents turn on Screen Time for their children, the parents set a passcode so their children can't make changes. **When they reach age of majority (age will vary depending on country or region), the children can turn this monitoring off.**"
+
+Transport is E2E: usage syncs "using CloudKit end-to-end encryption… requires that the user's account have two-factor authentication enabled"; parent↔child config moves over "the end-to-end encrypted Apple Identity Service (IDS) protocol… **This data isn't readable by Apple.**"
+
+Content & Privacy Restrictions inventory: `https://support.apple.com/en-us/105121` (Published **April 21, 2026**).
+
+**Locked and Hidden apps (iOS 18)** — `https://support.apple.com/guide/iphone/lock-or-hide-or-an-app-iph00f208d05/ios`. Apple states the limits plainly, and they are substantial:
+
+> "Locking an app requires Face ID, Touch ID, or your passcode to open the app."
+> "**Note: Some of the apps that come with iPhone can't be locked—including Calculator, Camera, Clock, Contacts, Find My, Maps, Shortcuts, and Settings.**"
+> "Hiding an app prevents others from seeing or opening it (unless they have a way to authenticate your iPhone using Face ID, Touch ID, or a passcode). **When you hide an app, its name is still visible in some places, such as Screen Time, Battery Usage By App (in Settings), and your App Store purchase history.**"
+> "**Note: Apps that come installed can't be hidden**—only apps you download separately from the App Store can be hidden. Apps that are set by the user as default web browser or app marketplace (available only in the EU) can't be hidden either."
+
+This is **UI concealment with a re-auth prompt, not a data boundary**, and Apple documents three separate side channels (Screen Time, Battery Usage By App, App Store purchase history) that leak the app's name by design. Anyone who can unlock the phone can unhide.
+
+### 2c. CVEs on bypassing these: essentially none
+
+| Query | Scope | Total | Apple-relevant |
+|---|---|---|---|
+| `Guided Access` | all NVD | 91 | **0** — every hit is Oracle Commerce Guided Search, PeopleSoft "Guided Self Service", etc. Zero Apple. |
+| `Screen Time` | all NVD | 43 | 1 (below) |
+| `Screen Time` | + `cpe:2.3:o:apple:iphone_os` | 3 | 1 real |
+| `Screen Time restrictions` | all NVD | 1 | 0 (Ubuntu indicator-datetime) |
+| `hidden apps iOS` | all NVD | **0** | 0 |
+| `restrictions bypass iOS parental` | all NVD | 1 | 1 (2012) |
+
+The two that exist:
+- **CVE-2020-9775** (pub 2020-04-01, CVSS **5.3 MEDIUM**), fixed **iOS 13.4 / iPadOS 13.4**: *"An issue existed in the handling of tabs displaying picture in picture video… **A user's private browsing activity may be unexpectedly saved in Screen Time.**"* — a Screen Time *leak*, the inverse of a bypass.
+- **CVE-2012-3741** (pub 2012-09-20, CVSS **1.9 LOW**), fixed **iOS 6**: *"The Restrictions (aka Parental Controls) implementation in Apple iOS before 6 does not properly handle purchase attempts after a Disable Restrictions action, which allows local users to bypass an intended Apple ID authentication step."*
+
+**FINDING (negative, strong): there is no CVE for bypassing Guided Access, and none for bypassing Screen Time restrictions or Locked/Hidden apps.** Fourteen years, zero. The reason is almost certainly classification, not absence of bypasses: **Apple does not treat parental-control evasion as a security vulnerability**, so it never enters the CVE pipeline. The known bypass corpus lives entirely in practitioner/consumer channels — HN Algolia surfaced only consumer-grade material ("Kids Are Hacking Famous Apple's Parent Control System," 2019-04-25, `https://bytescout.com/blog/bypass-screen-time-on-ipad-or-7-hacks-found-by-kids-to-walkaround-apples-parent-control.html`) and, tellingly, **a cluster of 2026 Show HN products whose entire premise is that Screen Time is trivially bypassable** — WaitToUnlock (`https://waittounlock.com/`, posted 2026-07-10, 2026-07-13, 2026-07-26, 2026-08-22, "makes your Screen Time limits unbypassable"), Nopin (2025-12-27, "I made iOS Screen Time limits harder to bypass"). A third-party market exists to patch it. That is market-revealed evidence of weakness, though **not a measured bypass**.
+
+**NOT REACHED:** I could not reach a rigorous published write-up of the specific Screen Time passcode weaknesses (the old iOS-11-and-earlier Restrictions-passcode-hash-in-backup recovery, or the 2024–25 Screen Time web-filter bypass reports). The Mysk blog index at `https://www.mysk.blog/` returned only `<h1>Mysk Blog</h1>` — a JS-rendered SPA that my fetch could not enumerate. **Do not fill these in from memory; they are unverified here.**
+
+---
+
+## 3. macOS fast user switching / multi-account isolation — MEASURED, and it recurs
+
+This is where the evidence is real. NVD queries:
+`https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=fast%20user%20switching` (11 total) and `?keywordSearch=another+user&virtualMatchString=cpe:2.3:o:apple:macos` (10 total).
+
+### 3a. The fast-user-switching desktop-leak, three times in three years
+
+| CVE | Published | CVSS | Fixed in | Apple's wording |
+|---|---|---|---|---|
+| **CVE-2021-30908** | 2021-08-24 | 6.5 | macOS Monterey 12.0.1, Big Sur 11.6.1 | "An authentication issue was addressed with improved state management… **A local attacker may be able to view the previous logged-in user's desktop from the fast user switching screen.**" |
+| **CVE-2022-22656** | 2022-03-18 | — | macOS Big Sur 11.6.5, Monterey 12.3, Security Update 2022-003 Catalina | "An authentication issue was addressed with improved state management… **A local attacker may be able to view the previous logged in user's desktop from the fast user switching screen.**" |
+| **CVE-2023-42935** | 2024-01-23 | — | macOS Ventura 13.6.4 | "An authentication issue was addressed with improved state management… **A local attacker may be able to view the previous logged in user's desktop from the fast user switching screen.**" |
+
+**These three descriptions are byte-for-byte the same bug, fixed three times.** Verified in Apple's own release notes — `https://support.apple.com/en-us/120307` (macOS Ventura 13.6.4, Published June 3, 2024, "Entry updated April 24, 2024"):
+
+> "**LoginWindow** / Available for: macOS Ventura / Impact: A local attacker may be able to view the previous logged in user's desktop from the fast user switching screen / Description: An authentication issue was addressed with improved state management. **CVE-2023-42935: ASentientBot**"
+
+The component is named: **LoginWindow**. Same class, same fix language, 2021 → 2022 → 2024. The remediation "improved state management" appearing three consecutive times is the signal: **the FUS session-transition state machine is the defect locus, and each fix patched an instance rather than the machine.** If you want one measured fact about Apple multi-account isolation, this is it.
+
+### 3b. Adjacent cross-user failures, same era
+
+| CVE | Published | CVSS | Fixed in | Impact |
+|---|---|---|---|---|
+| **CVE-2023-42861** | 2023-10-25 | 6.5 | macOS Sonoma 14.1 | "**An attacker with knowledge of a standard user's credentials can unlock another standard user's locked screen on the same Mac.**" (logic issue, improved state management) |
+| **CVE-2023-32654** | 2023-07-28 | 6.5 | macOS Ventura 13.5 | "A logic issue was addressed with improved state management. **A user may be able to read information belonging to another user.**" |
+| **CVE-2024-23261** | 2024-07-29 | **7.5 HIGH** | macOS Monterey 12.7.6, Sonoma 14.4, Ventura 13.6.8 | "A logic issue was addressed with improved state management. **An attacker may be able to read information belonging to another user.**" |
+| **CVE-2020-27893** | 2021-04-02 | 6.5 | macOS Big Sur 11.0.1 | "An issue existed in screen sharing… **A user with screen sharing access may be able to view another user's screen.**" |
+| **CVE-2024-44248** | 2024-12-12 | 6.5 | macOS Sequoia 15.1, Sonoma 14.7.2, Ventura 13.7.2 | "**A user with screen sharing access may be able to view another user's screen.**" (improved state management) |
+| **CVE-2025-43516** | 2025-12-12 | 3.3 | macOS Sequoia 15.7.3, Sonoma 14.8.3, Tahoe 26.2 | "A session management issue… **A user with Voice Control enabled may be able to transcribe another user's activity.**" |
+| **CVE-2023-42836** | 2024-02-21 | 5.3 | iOS/iPadOS 17.1, macOS Ventura 13.6.3, Sonoma 14.1, Monterey 12.7.2 | "**An attacker may be able to access connected network volumes mounted in the home directory.**" |
+
+Note CVE-2020-27893 and CVE-2024-44248 are **also a verbatim repeat, four years apart** — screen sharing viewing another user's screen. Two independent recurrence pairs in the same subsystem family.
+
+### 3c. Keychain (`?keywordSearch=keychain&virtualMatchString=cpe:2.3:o:apple:macos`, 9 total)
+
+| CVE | Published | CVSS | Fixed in | Impact |
+|---|---|---|---|---|
+| CVE-2021-30912 | 2021-08-24 | 5.5 | macOS Monterey 12.0.1, Big Sur 11.6.1, SU 2021-007 Catalina | "**A malicious application may gain access to a user's Keychain items.**" (improved permissions logic) |
+| CVE-2024-27837 | 2024-05-14 | 3.3 | macOS Sonoma 14.5 | "A downgrade issue was addressed with additional code-signing restrictions. **A local attacker may gain access to Keychain items.**" |
+| CVE-2024-54490 | 2024-12-12 | 5.5 | macOS Sequoia 15.2 | "addressed by enabling hardened runtime. **A local attacker may gain access to user's Keychain items.**" |
+| CVE-2025-43251 | 2025-07-30 | 5.5 | macOS Sequoia 15.6 | "An authorization issue was addressed with improved state management. **A local attacker may gain access to Keychain items.**" |
+| CVE-2025-31213 | 2025-05-12 | **7.6 HIGH** | iPadOS 17.7.7, macOS Sequoia 15.5, Sonoma 14.7.6, Ventura 13.7.6 | "A logging issue was addressed with improved data redaction. **An app may be able to access associated usernames and websites in a user's iCloud Keychain.**" |
+| CVE-2026-28864 | 2026-03-25 | 3.3 | iOS/iPadOS 18.7.7 & 26.4, macOS Sequoia 15.7.5, Sonoma 14.8.5, Tahoe 26.4, visionOS/watchOS 26.4 | "improved permissions checking. **A local attacker may gain access to user's Keychain items.**" |
+| CVE-2026-28860 | 2026-05-11 | **7.5 HIGH** | same fleet as above + tvOS 26.4 | "improved input validation. **A local attacker may be able to modify the state of the Keychain.**" |
+| CVE-2026-43728 | 2026-07-27 | **7.5 HIGH** | macOS Tahoe 26.6 | "improved state management. **An attacker may be able to modify the state of the Keychain.**" |
+
+**Cadence: at least one keychain-access-by-local-attacker CVE per year, 2021–2026, unbroken.** Note CVE-2026-28864 and CVE-2026-28860 land on **iOS/iPadOS too** — the keychain boundary is not a macOS-only concern, it just has more attack surface there.
+
+### 3d. TCC (`?keywordSearch=TCC&virtualMatchString=cpe:2.3:o:apple:macos`, 6 total)
+
+Only **one is an Apple defect** — CVE-2021-1873 (2021-09-08, 6.5, macOS Big Sur 11.3 / SU 2021-002 Catalina / SU 2021-003 Mojave): "An API issue in Accessibility TCC permissions was addressed with improved state management. **A malicious application may be able to unexpectedly leak a user's credentials from secure text fields.**"
+
+The other five are **third-party apps inheriting Apple's TCC grants** — and they form a clean pattern worth naming:
+- CVE-2023-40299 (7.8) Kong Insomnia — `DYLD_INSERT_LIBRARIES` to "make requests for TCC permissions"
+- CVE-2025-8672 (7.8) **GIMP**: "bundles a Python interpreter that **inherits the Transparency, Consent, and Control (TCC) permissions granted by the user to the main application bundle**. An attacker with local user access can invoke this interpreter with arbitrary commands… leveraging the application's previously granted TCC permi[ssions]"
+- CVE-2025-14714 (6.5) — identical bundled-interpreter TCC inheritance
+- CVE-2025-12843 (5.5) waveterm — "Code Injection using Electron Fuses… allows TCC Bypass"
+- CVE-2025-64723 (4.4) Arduino IDE — "overly permissive security entitlements that could bypass macOS Hardened Runtime protections"
+
+**The structural finding: TCC grants attach to a bundle, not to a principal.** Any interpreter inside a granted bundle inherits the grant. That is a design property of TCC, not a bug in any one app — which is why it produces a stream of separately-numbered CVEs against unrelated vendors. Directly relevant to any capability model: **a permission bound to a container is a permission held by everything the container can execute.**
+
+### 3e. Cross-user file reads (`?keywordSearch=read+arbitrary+files&virtualMatchString=cpe:2.3:o:apple:macos`, 30 total; Apple subset)
+
+CVE-2021-1797 (5.5, macOS Big Sur 11.2 + Catalina/Mojave SUs + watchOS 7.3, tvOS 14.4, **iOS/iPadOS 14.4** — "A local user may be able to read arbitrary files"); CVE-2021-30828 (5.5, SU 2021-005 Catalina, Big Sur 11.6 — "as root"); CVE-2022-32838 (5.5, Monterey 12.5, Big Sur 11.6.8, Catalina SU 2022-005, **iOS/iPadOS 15.6**); CVE-2023-23520 (5.9, race condition, Ventura 13.2, **iOS/iPadOS 16.3**, watchOS 9.3, tvOS 16.3 — "as root"); CVE-2023-27955 (5.5); CVE-2023-40406 (5.5); CVE-2023-41968 (5.5, symlink validation); CVE-2023-42887 (6.3, "additional sandbox restrictions", Ventura 13.6.4 / Sonoma 14.2 — Ron Masas of BreakPoint.sh); CVE-2024-23236 (5.5); CVE-2024-27827 (5.5); CVE-2024-44190 (5.5); CVE-2024-44195 (**7.5**, Sequoia 15.1).
+
+**Twelve arbitrary-file-read CVEs across 2021–2024, one every ~3 months.** Several ship the same fix simultaneously to macOS *and* iOS/iPadOS, which tells you the defective path is in shared code, not in the macOS account layer.
+
+### 3f. Historical FUS record (the pattern is 20 years old)
+
+CVE-2005-2509 (Mac OS X ≤10.4.2, loginwindow, "allows attackers to log into other accounts if they know the passwords to at least two accounts"); CVE-2005-2742 (SecurityAgent, "Switch User…" button appears "even though the 'Enable fast user switching' setting is disabled"); CVE-2006-4393 (10.4–10.4.7, "allows local users to gain access to **Kerberos tickets of other users**"); CVE-2014-4444 (OS X <10.10, "does not ensure that a Kerberos ticket is in the cache for the correct user, which allows local users to gain privileges… by leveraging a Fast User Switching login"); CVE-2004-0962 (ARD executes GUI app as root "when loginwindow is active via Fast User Switching").
+
+**2005 → 2026, same subsystem, same class.** LoginWindow/SecurityAgent state at session-transition boundaries is the single most persistently defective isolation surface Apple ships.
+
+---
+
+## 4. Academic measurement — essentially nothing exists
+
+**arXiv** (`https://export.arxiv.org/api/query?search_query=all:%22Shared+iPad%22`): **0 entries.** Also 0 for `"iOS parental control"` and for `macOS AND "privacy enforcement"`.
+
+**Crossref** (`https://api.crossref.org/works?query=Shared+iPad+multi-user+security+isolation`): 8 results, **0 relevant** — top hits are iPad gesture HCI (2012), searchable encryption, steganographic file systems, MIMO relays.
+
+**OpenAlex** — two sweeps completed before budget exhaustion; nothing on Shared iPad. Adjacent iOS-isolation work that *does* exist:
+- **"OS-level Side Channels without Procfs: Exploring Cross-App Information Leakage on iOS"**, NDSS 2018, `https://doi.org/10.14722/ndss.2018.23260` — 33 citations. Cross-**app** leakage, not cross-user.
+- **"Kobold: Evaluating Decentralized Access Control for Remote NSXPC Methods on iOS"**, IEEE S&P 2020, `https://doi.org/10.1109/sp40000.2020.00023` — 8 citations. Closest thing to a systematic measurement of an iOS access-control layer.
+- "False Sense of Security: A Study on the Effectivity of Jailbreak Detection in Banking Apps", EuroS&P 2019, `https://doi.org/10.1109/eurosp.2019.00011` — 16 citations.
+- "SoK: Understanding the Prevailing Security Vulnerabilities in TrustZone-assisted TEE Systems", IEEE S&P 2020, `https://doi.org/10.1109/sp40000.2020.00061` — 202 citations. ARM TrustZone, not SEP; adjacent only.
+
+**FINDING (negative, clean): there is no published academic measurement of Shared iPad's isolation, of macOS fast-user-switching isolation, or of iOS parental-control circumvention.** Zero on arXiv, zero via Crossref, zero in the OpenAlex slices reached. The entire evidence base for §1 is Apple's own design documentation; the entire evidence base for §3 is Apple's own vulnerability disclosures. **No independent party has measured any of it.**
+
+---
+
+## Bottom line
+
+1. **Shared iPad is a real per-user cryptographic boundary** — APFS volume + keybag + local keychain + uid + sandbox — but it is **gated behind organizational identity ownership** (Managed Apple Account + supervision + MDM), and its liveness **depends on iCloud**: eviction requires completed cloud sync, and without it new sign-ins fail. The machinery exists on consumer hardware; only the identity gate withholds it.
+
+2. **iOS's consumer answer is not isolation, it is concealment.** Guided Access is single-app lockdown (endable with the child's own biometric, and it disables Emergency Services). Screen Time is explicitly disclaimed by Apple as "**not a new system security feature**." Locked/Hidden apps leak the app name through three documented side channels and yield to anyone holding the device passcode.
+
+3. **The measured defects are all on macOS, all in session-transition state, and they recur.** "View the previous logged in user's desktop from the fast user switching screen" was fixed as three separate CVEs (2021-30908 → 2022-22656 → 2023-42935), each with the identical remediation string "improved state management." "View another user's screen" via screen sharing repeated too (2020-27893 → 2024-44248). Keychain local-attacker access is annual and unbroken 2021–2026, and now lands on iOS as well.
+
+4. **Two silences worth reading as findings, not gaps.** Zero CVEs on Shared iPad, and zero CVEs on Guided Access. The second has a clear cause — Apple does not classify parental-control evasion as a vulnerability, so it never enters the pipeline, and a small market of third-party products now exists specifically to shore up Screen Time. The first has no such explanation, and with zero academic scrutiny alongside it, **the correct reading is unexamined, not sound.**
+
+5. **TCC's grant model is container-bound, not principal-bound** — five separate third-party CVEs (GIMP, Insomnia, waveterm, Arduino IDE, and one more) exist purely because a bundled interpreter inherits its host bundle's TCC grants. Worth carrying into any capability design: a permission attached to a container is held by everything that container can execute.
+
+**Unreached, do not fill from memory:** the Screen Time passcode weakness literature (Mysk's site is a JS SPA my fetch could not enumerate; the older Restrictions-passcode-hash-in-backup recovery went unverified), Apple's default offline sign-in grace-period value, and any statement on whether Secure Enclave material is partitioned per Shared iPad user — Apple's Shared iPad security page never mentions the Secure Enclave at all. OpenAlex budget was exhausted mid-sweep, so the academic negative rests on arXiv + Crossref plus two partial OpenAlex slices.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;LCD2Q6byUu07HcJsT9CtluyV7OPg_H84NHjqp0Ha8Qs
+
+<<^ code="&#x0004;" -> to=? >>

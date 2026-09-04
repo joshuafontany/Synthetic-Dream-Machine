@@ -1,0 +1,240 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: FINDINGS. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! FINDINGS
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 26,280 characters
+
+````
+# FINDINGS
+
+## HEADLINE
+
+**No. Nobody has shipped an identity/management chain with no human accountable party.** Every shipped system I reached either (a) issues the *agent* a first-class credential but binds a named human to it at creation as a hard requirement, or (b) structurally scopes the agent as acting "on behalf of" a human user. The *drafts* are the only place where a rootless chain is permitted — and the two that permit it (`draft-niyikiza`, `draft-hamr`) are individual submissions with **zero IETF WG adoption**.
+
+Measured re-attachment points, in order of hardness:
+1. **Platform creation-time requirement** — Entra Agent ID: a sponsor (user or group-of-users) is *required on create*, and explicitly required even for app-only (agent-creates-agent) calls.
+2. **ToS / account** — Anthropic Commercial Terms: "Customer is responsible for all activity under its account."
+3. **Payment credential** — Visa: "Only the consumer can instruct the agent."
+4. **Statutory register fallback** — AMLR Art. 22(2) / 63(4): when no beneficial owner exists, you *name the senior managing officials anyway*.
+5. **Regulatory role definition** — AI Act Art. 3(3)/(4): provider and deployer are *by definition* "a natural or legal person."
+6. **GDPR** — Art. 4(7): controller is "the natural or legal person, public authority, agency or other body."
+
+An agent can hold keys. An agent cannot hold *accountability* — every layer that could bear liability re-types the holder to natural-or-legal person.
+
+---
+
+# PART 1 — AGENT IDENTITY (2025–2026)
+
+## 1.1 IETF — NEGATIVE RESULT ON ADOPTION (measured)
+
+Datatracker API query, run 2026-09-04:
+```
+GET /api/v1/doc/document/?name__startswith=draft-ietf-oauth-agent → COUNT 0
+```
+**There is no WG-adopted OAuth agent draft.** Everything below is an individual I-D. (A summarizer earlier reported "draft-ietf-oauth-agent-authz-use-cases-03"; the canonical URL 404s and the API count is 0 — that name does not exist. Treat any such citation as a hallucination.)
+
+Individual I-Ds in flight (all `https://datatracker.ietf.org/doc/<name>/`):
+
+| Draft | Title | Rev/date | Human principal required? |
+|---|---|---|---|
+| `draft-mishra-oauth-agent-grants` | OAuth Profile for Delegated AI Agent Authorization (Sanjeev Kumar, Orchestrum) | -02, 2026-08-30, expires 2027-03-03 | **YES, hard.** Principal defined as "the human resource owner whose authority is delegated"; "the authorization server **MUST** authenticate the Principal"; "An automated policy decision MAY deny, narrow, or require escalation of a request. It **MUST NOT** replace the Principal's authenticated approval." |
+| `draft-chen-oauth-agent-authz-use-cases` | Agent Authorization use cases and gap analysis (M. Chen, J. Chen, Yao, Jiang, Liu) | -03, 2026-08-25 | **YES, assumed.** "*Delegated Autonomy:* Agents act with authority delegated from a principal (user or system)"; tasks run "often without direct, real-time supervision from the principal" — autonomy in *time*, not in *root*. |
+| `draft-hamr-oauth-agent-delegation` | An Attenuated Delegation Profile for Automated Agents (Amr Hassan, Independent) | -01, **2026-09-02** | **Soft.** §2: "The first Delegator in a chain is the human **or organizational** principal that originates the delegation." Organizational = legal person. Not enforced normatively. Supports cross-domain agent→agent: "an automated agent does not do the work itself: it engages a second, specialized agent operated by a different company." |
+| `draft-niyikiza-oauth-attenuating-agent-tokens` | Attenuating Authorization Tokens for Agentic Delegation Chains (Niki Aimable, Tenuo) | -01, 2026-06-15 | **NO — the closest thing to your design.** §3.7.3: "The root issuer is responsible for verifying agent identity and requested authority before issuance." Spec is agnostic on whether root authority came from a human, a system, or another entity. Multi-hop offline attenuation: "A token holder authorized to delegate can derive a token offline with equal or narrower authority, subject to the parent token's depth and lifetime limits." |
+| `draft-song-oauth-ai-agent-collaborate-authz` | OAuth2.0 Extension for Multi-AI Agent Collaboration (Song, Li, Jiang, Liu — Huawei) | -02, 2026-06-30 | **Partial.** A "leading agent … applies for access tokens on behalf of all sub-agents in the task group" — genuine agent-manages-agent. But the worked example still opens with a human intent ("give me real-time health advice"). |
+| `draft-mcguinness-oauth-ai-agent-instance` | OAuth 2.0 AI Agent Instance Profile | -00, 2026-07-04 | NOT REACHED (listing only) |
+| `draft-araut-oauth-transaction-tokens-for-agents` | Transaction Tokens For Agents | -02, 2026-05-21 | NOT REACHED |
+| `draft-chen-oauth-agent-revocation` | OAuth 2.0 Agent Authorization Explicit Revocation | -00, 2026-04-27 | NOT REACHED |
+| `draft-coetzee-oauth-spt-txn-tokens` | Transaction-Bound Authorization Tokens for Software and AI Agents | -03, 2026-07-19 | NOT REACHED |
+| `draft-chen-agent-decoupled-authorization-model` | A Decoupled Authorization Model for Agent2Agent | -00, 2026-08-18 | NOT REACHED |
+| `draft-huang-acme-scalable-agent-enrollment` | Extending Certificate Enrollment Protocols for Scalable Agentic AI Identity | -00, 2025-12-16 | NOT REACHED |
+| `draft-zheng-dispatch-agent-identity-management` | Agent Identity Management | -00, 2026-05-07 | NOT REACHED |
+
+WG-adopted and *adjacent* (in force / near-RFC):
+- `draft-ietf-oauth-identity-assertion-authz-grant-04` (Parecki, McGuinness, Campbell) — 2026-05-21, 65pp, OAuth WG. This is the spec under Okta's "Cross-App Access". **Does not require the subject to be human.** Carries an optional `act` claim / `actor_token`, but: "This specification allows Token Exchange requests for ID-JAG to carry `actor_token`, but it does not define normative processing requirements for it." I.e. the *agent-as-actor* slot exists and is deliberately undefined.
+- `draft-ietf-oauth-transaction-tokens-11` — 2026-07-30, **WG Consensus: Waiting for Write-Up**. The furthest-along thing here.
+- `draft-ietf-oauth-attestation-based-client-auth-11` — 2026-09-03, 51pp.
+- `draft-ietf-oauth-v2-1-16` — 2026-09-02.
+
+## 1.2 MCP — THE ONE SHIPPED SPEC THAT NAMES A NON-HUMAN PRINCIPAL
+
+**2025-06-18** (`modelcontextprotocol.io/specification/2025-06-18/basic/authorization`) — human assumed but hedged:
+> "An *MCP client* acts as an OAuth 2.1 client, **making protected resource requests on behalf of a resource owner**."
+> "The *authorization server* is responsible for **interacting with the user (if necessary)** and issuing access tokens…"
+
+"(if necessary)" is the only crack. The flow diagram hard-codes `participant B as User-Agent (Browser)` and `Note over A: User authorizes`.
+
+**2026-07-28** (current release; `.../2026-07-28/basic/authorization/index.md`) — same Roles text verbatim, **but adds a first-class non-human client class** in the Step-Up Authorization Flow:
+> "Clients **acting on behalf of a user** SHOULD attempt the step-up authorization flow. **Clients acting on their own behalf (`client_credentials` clients) MAY attempt the step-up authorization flow or abort the request immediately.**"
+
+That sentence is, as far as I reached, the **only normative text in a shipped agent-protocol spec that contemplates an OAuth client with no user behind it.** Note what it does *not* do: it does not define how such a client is registered, attested, or held accountable. Also new in 2026-07-28: Dynamic Client Registration **deprecated** in favour of Client ID Metadata Documents (`draft-ietf-oauth-client-id-metadata-document-00`) — i.e. the client ID becomes an HTTPS URL you must publish and control. That is a *soft* re-attachment: a resolvable domain has a registrant.
+
+## 1.3 MICROSOFT ENTRA AGENT ID — SHIPPED, AND THE HARDEST RE-ATTACHMENT FOUND
+
+Docs: `learn.microsoft.com/en-us/entra/agent-id/` (hub updated 2026-06-19).
+
+Agent identities are real principals — `what-are-agent-identities` (updated 2026-06-15):
+> "**Autonomous access**. Agents can act autonomously, using access rights given directly to the agent identity."
+> "Agent identities represent software systems, not human beings. They don't use human authentication mechanisms."
+
+Agent-creates-agent is supported: owners of a blueprint "can also create agent identities from that blueprint using delegated permissions" via `AgentIdentity.Create.All` / `.ReadWrite.All` / `.ReadWrite.ManagedBy`. **And a service principal can be an owner:** "Individual users (including guest users) **and service principals** can be assigned as owners… Service principals as owners enable automated management of agent identities." Owners are optional.
+
+**But** — `agent-owners-sponsors-managers` (updated 2026-09-03), the load-bearing text:
+> "**Sponsors**: Business representatives accountable for the agent's purpose and lifecycle decisions… **At least one sponsor is required for each agent identity and agent identity blueprint.**"
+> "**Users (including guest users) and groups can be assigned as sponsors.**" (service principals are *not* in the allowed list)
+> "**A sponsor is required when creating an agent identity or agent blueprint.** … Owners and managers are always optional."
+> "**For app-only create requests, the creating service must set one or more users or supported groups as the sponsor.**"
+
+That last line is your exact scenario — an agent creating an agent, app-only, no interactive human — and Microsoft closes it by refusing the create unless a human (or a group of humans) is named. Delegated path closes it differently: "the calling user automatically becomes the sponsor if no sponsors are explicitly specified." And from `what-are-agent-identities` on Copilot Studio: "**The user who created the agent is recorded as its sponsor.**"
+
+Sponsor authority is real, not decorative: sponsors can "Delete or disable the agent identity and modify its sponsors." Limits: max 100 sponsors, ≤5 groups. Role-assignable groups explicitly barred as sponsors.
+
+**Verdict: Entra permits an agent to *technically own and create* another agent, and forbids an agent to *sponsor* one.** Custody is delegable to machines; accountability is not.
+
+## 1.4 OTHER PLATFORMS
+
+- **Auth0 / Okta "Auth for GenAI"** (`auth0.com/ai/docs/intro/overview`) — fully user-anchored. "AI agents to securely call first-party APIs on the user's behalf"; CIBA async approval so "agents can request approval for sensitive operations via push notifications, SMS, or email, even when the user is not actively using the application." **No standalone machine/agent identity documented.** (Okta XAA blog URL 404'd — **NOT REACHED**; the underlying spec is `draft-ietf-oauth-identity-assertion-authz-grant`, above.)
+- **Google A2A** (`a2a-protocol.org/latest/topics/enterprise-ready/`) — deliberately silent: "A2A protocol payloads, such as JSON-RPC messages, don't carry user or client identity information directly. Identity is established at the transport/HTTP layer." Auth can represent "an end user, a client application, or both." **A2A does not require a human.** It also does not provide one — it punts to HTTP.
+- **Cloudflare Web Bot Auth** (`blog.cloudflare.com/web-bot-auth/`, 2025-05-15) — attests the *agent*, not the human: "developers of bots and agents cryptographically sign requests originating from their service." Drafts: `draft-meunier-web-bot-auth-architecture`, `draft-meunier-http-message-signatures-directory`, `draft-jhoyla-req-mtls-flag`. **Re-attachment is the `Signature-Agent` header** — it points at a published key directory on a real domain (e.g. `operator.openai.com`). The bot is anonymous; its *operator* is not. OpenAI's stated purpose: "OpenAI signs all Operator requests so site owners can verify they genuinely originate from Operator."
+- **Google AP2** (`ap2-protocol.org`, announced **2025-09-16**, later donated to FIDO Alliance; v0.2) — Intent/Cart mandates recast as **Checkout Mandate** and **Payment Mandate**, each with Open/Closed stages. "Trust in payments is anchored to deterministic, non-repudiable proof of intent **from the user**." The mandate *is* the human re-attachment: it is a verifiable credential whose whole function is to make a human's intent non-repudiable.
+- **Visa Intelligent Commerce** (2025-04-30) — "**Only the consumer can instruct the agent** on what to do and when to activate a payment credential"; consumer sets spend limits. Hard human root.
+- **Stripe/OpenAI Agentic Commerce Protocol** (`developers.openai.com/commerce/specs/checkout/`) — **negative finding:** the spec says nothing about who the principal is, whether a human must authorize, or accountability for non-human actors. It references "the user"/"customer" descriptively and defines Delegated Payments as a payment-routing concern only. The governance question is simply absent.
+- **Mastercard Agent Pay** — **NOT REACHED**.
+- **Anthropic Commercial Terms** (`anthropic.com/legal/commercial-terms`) — "**Customer is responsible for all activity under its account**"; "You may not enter into these Terms on behalf of an organization, company, or other entity unless you have the legal authority to bind that entity"; customer indemnifies Anthropic for Users' inputs and Usage-Policy-violating use. The account is the re-attachment point regardless of what the agent does.
+
+---
+
+# PART 2 — WHERE LAW FORCES A HUMAN ROOT
+
+## 2.1 EU AML — the "name a human anyway" rule, twice over
+
+**IN FORCE — Directive (EU) 2015/849 as amended by (EU) 2018/843, Art. 3(6)(a):**
+> "(6) 'beneficial owner' means **any natural person(s)** who ultimately owns or controls the customer…"
+> (i) 25% + one share / >25% ownership interest indicates direct ownership; same held via a corporate entity under a natural person's control indicates indirect ownership.
+> **(ii) "if, after having exhausted all possible means and provided there are no grounds for suspicion, no person under point (i) is identified, or if there is any doubt that the person(s) identified are the beneficial owner(s), the natural person(s) who hold the position of senior managing official(s)…"**
+
+That is the statutory fallback in its original form: the chain *must* bottom out in a human, so one is named by office.
+
+**ADOPTED, APPLIES FROM 10 JULY 2027 — Regulation (EU) 2024/1624 (AMLR), OJ L, 19.6.2024** (ELI `data.europa.eu/eli/reg/2024/1624/oj`). Application: "It shall apply from **10 July 2027**, except in relation to obliged entities referred to in Article 3, points (3)(n) and (o), to which it shall apply from 10 July 2029."
+
+- **Art. 51** — "Beneficial owners of legal entities shall be **the natural persons** who: (a) have, directly or indirectly, an ownership interest…; or (b) control, directly or indirectly, the corporate or other legal entity."
+- **Art. 52(1)** — 25% threshold retained; indirect ownership computed by multiplying along the chain and summing across chains. **Art. 52(2)**: Commission may, by delegated act by 10 July 2029, lower the threshold for higher-risk categories to a **maximum of 15%**, in any case "less than 25%."
+- **Art. 22(2)** — CDD fallback, strengthened: "Where, **after having exhausted all possible means of identification, no natural persons are identified as beneficial owners**, or where there are doubts…, obliged entities shall record that no beneficial owner was identified and **identify all the natural persons holding the positions of senior managing officials in the legal entity and shall verify their identity**." (Tipping-off carve-out: abstain from verification, but still record the steps.)
+- **Art. 63(4)** — register-side fallback: the entity must supply "(a) a statement that there is no beneficial owner or that the beneficial owners could not be determined, accompanied by a justification…; **(b) the details of all natural persons who hold the position of senior managing officials**." Defined in the same paragraph as "the natural persons who are the executive members of the management body, as well as the natural persons who exercise executive functions… responsible, and accountable to the management body, for the day-to-day management."
+- **Recital (125)** — the design intent, stated plainly: "There might however be cases where **no natural person is identifiable** who ultimately owns or exerts control over an entity. In such exceptional cases… it should be possible for senior managing officials to be reported instead of the beneficial owners… **Although they are identified in those situations, the senior managing officials are not the beneficial owners.**"
+- **Recital (126)** — anti-gaming: "Difficulties in obtaining the information should not be a valid reason to avoid the identification effort and resort to reporting the senior management instead."
+
+**This is the exact legal counterpart to your design.** A structure engineered so no chain climbs to a natural person does not produce "no answer" — it produces a *substituted* answer, a named human by office, plus a documented justification the authorities can attack under recital 126.
+
+**Directive (EU) 2024/1640 (AMLD6)** — Member States "shall bring into force the laws, regulations and administrative provisions necessary to comply with this Directive **by 10 July 2027**." Register access is rebuilt on **legitimate interest** (recitals ~483–635) with a Union-level framework for recognising and verifying it — the post-*Sovim* architecture.
+
+## 2.2 CJEU — public access struck down, authority access intact
+
+**Joined Cases C-37/20 (Luxembourg Business Registers) and C-601/20 (Sovim SA)**, Grand Chamber, **judgment of 22 November 2022**, Press Release No 188/22 (`curia.europa.eu/jcms/upload/docs/application/pdf/2022-11/cp220188en.pdf`):
+> "the provision of the anti-money-laundering directive whereby Member States must ensure that the information on the beneficial ownership of corporate and other legal entities incorporated within their territory **is accessible in all cases to any member of the general public is invalid**."
+> Reasoning: "a serious interference with the fundamental rights to respect for private life and to the protection of personal data, enshrined in Articles 7 and 8 of the Charter… the information disclosed enables a potentially unlimited number of persons to find out about the material and financial situation of a beneficial owner"; the interference is "neither limited to what is strictly necessary nor proportionate."
+
+**What survived:** the *register itself*, the *duty to identify*, and access for competent authorities and obliged entities. Only the general-public limb of Art. 30(5)(c) 2015/849-as-amended fell. AMLD6 then re-legislated access on a legitimate-interest basis. **For your design this changes nothing** — the naming obligation is untouched; only who may read it narrowed.
+
+## 2.3 US — the CTA re-attachment has been switched off for domestic entities
+
+`fincen.gov/boi`:
+- **Interim final rule, 26 March 2025**: "reporting company" revised to mean "**only those entities that are formed under the law of a foreign country and that have registered to do business in any U.S. State or Tribal jurisdiction.**" All U.S.-formed companies and U.S. persons exempt.
+- Deadlines: foreign entities registered before 2025-03-26 → **25 April 2025**; registered on/after → 30 calendar days after effective-registration notice.
+- **11 August 2026**: FinCEN finalized the exemptions, made them permanent, and extended relief — "U.S. persons do not need to provide BOI to reporting companies" where they are beneficial owners.
+
+**Measured asymmetry:** as of 2026-09-04 the U.S. no longer forces a human root at the register layer for domestic entities. The EU does, from 10 July 2027. A US-domestic structure is the jurisdiction with the weakest statutory re-attachment right now.
+
+## 2.4 FATF
+
+**NOT REACHED.** fatf-gafi.org returned 403 to WebFetch and served HTML in place of every PDF path I guessed. R.24/R.25 (revised March 2022 / Feb 2023 respectively) require identification of the natural persons who ultimately own or control legal persons and arrangements, but **I did not reach the primary text and am not quoting it.**
+
+## 2.5 GDPR — the controller cannot be a non-person
+
+**Regulation (EU) 2016/679, Art. 4(7)** (IN FORCE):
+> "'controller' means **the natural or legal person, public authority, agency or other body** which, alone or jointly with others, determines the purposes and means of the processing of personal data…"
+
+**Art. 4(8)**: "'processor' means a natural or legal person, public authority, agency or other body which processes personal data on behalf of the controller."
+
+The closed list is `natural person | legal person | public authority | agency | other body`. A software agent is none of these — "other body" is read in that company (an entity with standing), not as a catch-all for any process. **Art. 27** ("Representatives of controllers or processors not established in the Union") adds a second forced attachment: a non-EU controller must designate a representative *in* the Union — itself a natural or legal person, reachable by supervisory authorities and data subjects.
+
+**EDPB Guidelines 07/2020 on controller/processor** — **NOT REACHED** (not fetched). Nothing I reached suggests an unattributed controller is permitted; the definition forecloses it.
+
+## 2.6 Legal personhood for software — proposed once, rejected
+
+**PROPOSED (never enacted).** European Parliament resolution of **16 February 2017** with recommendations on Civil Law Rules on Robotics (P8_TA(2017)0051), **paragraph 59(f)**:
+> "creating a specific legal status for robots in the long run, so that at least the most sophisticated autonomous robots could be established as having the **status of electronic persons responsible for making good any damage they may cause**, and possibly applying electronic personality to cases where robots make autonomous decisions or otherwise interact with third parties independently;"
+
+**REJECTED.** Open Letter to the European Commission on AI and Robotics (`robotics-openletter.eu`, 2018): signatories reject electronic personhood as "inappropriate" under every candidate model — natural person, legal entity, or trust — because each would either conflict with human rights or fail to address liability. "The protection of robots' users and third parties must be at the heart of all EU legal provisions." (Signatory count commonly cited as 156; the site lists ~40+ named EU signatories on the landing page with the remainder on a separate page — **exact count NOT VERIFIED from primary source**.)
+
+**What was enacted instead — Regulation (EU) 2024/1689 (AI Act), OJ L, 12.7.2024, Art. 3** (ELI `data.europa.eu/eli/reg/2024/1689/oj`):
+> "(1) '**AI system**' means a **machine-based system** that is designed to operate with **varying levels of autonomy**…"
+> "(3) '**provider**' means **a natural or legal person, public authority, agency or other body** that develops an AI system or a general-purpose AI model or that has [one] developed and places it on the market or puts the AI system into service **under its own name or trademark**…"
+> "(4) '**deployer**' means **a natural or legal person, public authority, agency or other body** using an AI system **under its authority** except where the AI system is used in the course of a personal non-professional activity;"
+> "(8) '**operator**' means a provider, product manufacturer, deployer, authorised representative, importer or distributor;"
+> "(5) '**authorised representative**' means a natural or legal person located or established in the Union who has received and accepted a written mandate from a provider…"
+
+The AI Act names the *system* as a machine but every accountable role — all seven collapsed into "operator" — is typed `natural or legal person`. The Act's structural answer to "who is responsible for the autonomous thing" is: **not the thing.** The autonomy sits in Art. 3(1); the liability sits in Art. 3(3)–(8), and it is a person.
+
+---
+
+# CROSS-CUT: THE SPECIFIC RE-ATTACHMENT POINTS
+
+| Layer | Mechanism | Force | Citation |
+|---|---|---|---|
+| Directory create-time | Entra: sponsor mandatory, users/groups only, even app-only | **Hard, shipped** | `entra/agent-id/agent-owners-sponsors-managers` |
+| Directory audit log | Copilot Studio: creating user recorded as sponsor; all agent auth logged as AI agent | **Hard, shipped** | `entra/agent-id/what-are-agent-identities` |
+| OAuth client identity | MCP 2026-07-28 deprecates DCR for Client ID Metadata Documents (an HTTPS URL you must control) | **Soft, shipped** | MCP 2026-07-28 §Overview(3) |
+| Bot/network layer | `Signature-Agent` → key directory on a registered domain | **Soft, shipped** | blog.cloudflare.com/web-bot-auth/ |
+| Payment | Visa: only consumer instructs; AP2 mandate = non-repudiable user intent | **Hard, shipped** | Visa 2025-04-30; ap2-protocol.org |
+| ToS / billing | "Customer is responsible for all activity under its account" | **Hard, in force** | anthropic.com/legal/commercial-terms |
+| CDD (obliged entity) | Senior-managing-official substitution + recorded justification | **In force → hardened 2027-07-10** | 2015/849 Art. 3(6)(a)(ii); AMLR Art. 22(2) |
+| Register | Same substitution on filing; access on legitimate interest | **From 2027-07-10** | AMLR Art. 63(4); AMLD6 |
+| US register | Domestic entities exempt since 2025-03-26, final 2026-08-11 | **Switched OFF** | fincen.gov/boi |
+| Data protection | Controller must be natural/legal person; non-EU controller must name an EU representative | **In force** | GDPR Art. 4(7), Art. 27 |
+| AI regulation | Provider/deployer/operator all `natural or legal person` | **In force** | AI Act Art. 3(3),(4),(8) |
+| Personhood | Electronic personhood proposed 2017, rejected 2018, not enacted | **Dead** | P8_TA(2017)0051 §59(f); robotics-openletter.eu |
+
+**NOT REACHED:** FATF R.24/R.25 primary text (403); EDPB Guidelines 07/2020; Okta XAA blog post; Mastercard Agent Pay; `draft-mcguinness-oauth-ai-agent-instance`, `draft-araut-oauth-transaction-tokens-for-agents`, `draft-chen-oauth-agent-revocation`, `draft-coetzee-oauth-spt-txn-tokens`, `draft-chen-agent-decoupled-authorization-model`, `draft-huang-acme-scalable-agent-enrollment`, `draft-zheng-dispatch-agent-identity-management`; exact signatory count of the 2018 open letter.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;ExDSLyHwSXlqT-we5MfvatYL5I7VG6UYxEoGXb5y9Ww
+
+<<^ code="&#x0004;" -> to=? >>

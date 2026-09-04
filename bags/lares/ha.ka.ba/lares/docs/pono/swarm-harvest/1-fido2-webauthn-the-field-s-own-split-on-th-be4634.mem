@@ -1,0 +1,159 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. FIDO2/WebAuthn — the field's own split on this exact question. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. FIDO2/WebAuthn — the field's own split on this exact question
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 15,330 characters
+
+````
+I've hit diminishing returns on blind URL guessing without search. I have solid, citable material across all four areas. Compiling the final report now.
+
+## Report: Who else has said "the human never holds a key" — and what happened when they deployed it
+
+Note on method: WebSearch was exhausted at the start of this session (0 of 200 remaining — likely consumed by prior activity in this session before I was invoked). Everything below comes from direct WebFetch of documents I could name or guess the URL for. This means coverage is uneven — solid on FIDO/passkeys, SSB, Nostr, UCAN, and Apple/Microsoft device-bound models; thin on AT Protocol/Bluesky specifics and on formal usability papers, where I could not locate the primary sources blind. I flag those gaps rather than papering over them.
+
+### 1. FIDO2/WebAuthn — the field's own split on this exact question
+
+**The original 2018 FIDO2 model is close to your dyad**: one non-exportable credential per authenticator per relying party. No portable "identity" object exists — losing the device loses that RP-relationship, full stop, by design. (Medium confidence — this is the well-known FIDO2/CTAP1 architecture; I didn't fetch the original spec text this session.)
+
+**May 2022 — the pivot away from it.** The joint Apple/Google/Microsoft announcement (fidoalliance.org) introduces cross-device credential *syncing* explicitly as a usability fix: "automatically access their FIDO sign-in credentials... on many of their devices, even new ones, without having to re-enroll every account." Notably, **the announcement does not discuss the security tradeoff at all** — it frames syncing as pure upside (anti-phishing) and never mentions that syncing reintroduces a shared secret across the human's devices. That silence is itself a finding: the industry's flagship messaging never named the tradeoff your dyad model is built around. (High confidence on content; source: fidoalliance.org press release.)
+
+**Microsoft's own docs (learn.microsoft.com, current as of 2026) explicitly name the two models as a live choice**, and side with device-bound for anything sensitive:
+- "**Device-bound passkeys**: The private key is created and stored on a single physical device and never leaves it" (Authenticator app, FIDO2 security keys).
+- "**Synced passkeys**: ...encrypted key is then synced and stored in the cloud passkey provider... Synced passkeys **do not support attestation**."
+- "If attestation is enabled, only device-bound passkeys are allowed; synced passkeys are excluded."
+- Recommendation: device-bound/FIDO2 keys "for highly regulated industries or users with elevated privileges"; synced for everyone else as a convenience/cost tradeoff.
+
+This is the clearest institutional statement I found that **enterprises deliberately choose device-bound over synced specifically because synced collapses the "many dyads" model back into "one key, several copies, escrowed by a cloud account."** High confidence.
+
+**Measured numbers (Microsoft, same page, describing Entra passkey rollout at "hundreds of millions" of consumer/Microsoft-account users):**
+- 99% successful registration for synced passkeys
+- 14x faster than password+MFA (3s vs 69s)
+- 95% vs 30% — synced-passkey sign-in success rate vs. legacy authentication
+
+These are real usability wins for the synced model — worth stating plainly since they cut against the dyad thesis on pure UX grounds. High confidence these are Microsoft's own published figures; I could not independently verify methodology or corroborate with Google's own claimed "~4%" figure from 2023 — I could not locate that source this session (searched blind, hit 404s), so **treat the "Google 4%" claim as unconfirmed / could not verify**, not as false.
+
+**devicePubKey extension**: I could not locate live spec text for it in either the CTAP 2.2 review draft or WebAuthn L3 pages I fetched (both came back without a matching section — possibly renamed, moved, or I fetched the wrong revision). This is a **negative result, not a confirmation it was dropped** — I don't have enough to say whether it shipped, stalled, or was renamed. Flag: needs a follow-up search when WebSearch budget resets; don't cite either way with confidence.
+
+**Apple's iCloud Keychain — the most concrete deployed "dyad-recognizes-dyad" mechanism I found.** From Apple's Platform Security Guide (support.apple.com/guide/security):
+- Each device generates its *own* P-384 syncing identity keypair — not a shared key copied around.
+- A new device joining the "circle of trust" does so via **sponsor/applicant/voucher**: an existing device (sponsor) signs a voucher attesting the new device (applicant) should be trusted, and adds its public key to the circle. This is genuinely "remaining relations recognize the new dyad," not "prove you know the master secret."
+- Escrow recovery (the fallback when no device survives) is a *different*, harder mechanism: Apple Account password + SMS + iCloud Security Code via SRP, gated by an HSM cluster with a **hard 10-attempt limit** — "Upon reaching the 10th failure, the HSM cluster destroys the escrow record and the keychain is lost forever." This is the human, ultimately, holding a low-entropy secret (the security code) as the root of last resort — i.e., Apple's design is dyad-based for the common case but collapses to "one human-held secret" for catastrophic recovery. That collapse point is exactly where your model would need its own answer.
+
+**Passwordless authentication generally (Wikipedia, "Benefits and drawbacks")**: names your failure mode directly but doesn't solve it — "Single point of failure – particularly implementations using OTP or push notifications... can create a challenge for the end user if a device is broken, lost, stolen or simply upgraded." No recovery mechanics given. This matches the pattern across nearly every source I could reach: **the "what happens when every device is gone" case is acknowledged as a known problem, but I found no source with measured (not just policy-stated) data on what actually happens.** That itself is a finding: nobody publishes recovery-failure telemetry.
+
+### 2. Per-device-identity systems
+
+**SSB / Secure Scuttlebutt — closest prior art to your dyad model, and it struggled with exactly the problem you're describing.**
+- Base model: "an identity is fundamentally an Ed25519 key pair and typically represents a person, a device, a server or a bot... it's normal for a person to have several Scuttlebutt identities" (ssbc.github.io protocol guide). No portable human identity — pure per-device keys, generated locally on first launch.
+- The stated failure mode, verbatim: "if a user loses their secret key or has it stolen they will need to generate a new identity and tell people to use their new one instead." No recovery, no dyad-recognition — just re-bootstrap social trust from zero.
+- **Fusion Identities** (their answer, in the archived Metafeeds work) is structurally very close to what you're proposing: "each device still uses its own identity" but devices "share fusion identities with each other," letting messages/mentions be read across all of a person's devices without collapsing to one shared key. This is a genuine prior instance of "multiple device-bound dyads, federated under a soft aggregate, not a single portable key."
+- Current status: I could not get load-bearing content on the timeline of SSB's decline (Wikipedia and GitHub wiki fetches both came back empty on this). What I can say with medium confidence from general knowledge (not verified this session): SSB's active development and pub-server ecosystem contracted significantly in the years after ~2020, with Manyverse continuing as the most maintained client; I was not able to confirm exact dates or stated reasons this session — **treat as unverified, flag for follow-up.**
+
+**Nostr — the sharpest illustration of what happens *without* a dyad model.**
+- Core design has **one nsec, no built-in rotation, no revocation.** This is the "one key copied to every device" model your framing sets in explicit opposition to.
+- **NIP-46 (remote signing / "bunker")** is Nostr's real mitigation, and it's structurally dyad-like: "Private keys should be exposed to as few systems — apps, operating systems, devices — as possible." The signer (bunker) holds the nsec; each client gets its own throwaway keypair for the encrypted channel to the signer. This is much closer to "the device holds an edge, not the identity" than the base protocol.
+- **NIP-26 (delegation)** — explicitly marked **"unrecommended: adds unnecessary burden for little gain"** in the spec itself. The field tried a delegation-chain approach and walked it back. Worth noting for your model: delegation without tight time-bounding "expose similar security risks to simply using the root key" — i.e., a badly-scoped delegation degenerates back into key-copying.
+- **NIP-41 (key migration)** — I could not fetch its content (404 on both the blob and raw URL, suggesting it may not exist as a merged NIP, or has moved/been renumbered). **Negative result — don't cite NIP-41 as an existing, deployed mechanism without re-checking.**
+- **Amber** (Android NIP-46/NIP-55 signer): confirms the same isolation principle, is actively developed (346 GitHub stars at fetch time), multi-account capable. I could not confirm measured incident data on nsec leaks — no source located this session.
+
+**AT Protocol / Bluesky — the clearest "human holds nothing" deployed system, and the clearest live centralization critique.**
+- did:plc: "Control over a did:plc identity rests in a set of reconfigurable rotation key pairs... A central directory server collects and validates operations, and maintains a transparent log" (did-method-plc GitHub). The PDS operator, not the human, typically holds the operative keys in the common case.
+- The spec **admits its own centralization** in its own words: the developers "expect to evolve the system... into something less centralized — likely a permissioned DID consortium." This is a rare case of a live, deployed system's own maintainers naming the "PLC directory is a trusted third party" critique themselves rather than only facing it from outside critics.
+- I could not reach Bluesky's own blog posts, migration docs, or any outage/incident reporting on did:plc this session (repeated 404s on bsky.social, docs.bsky.app, bsky.network paths — the docs site appears to have moved or restructured since my training data, and I couldn't locate the current path blind without search). **This is a real gap** — the account-migration mechanics and any measured PLC-directory incidents are exactly the kind of "what actually happened" data your brief asks for, and I don't have it. Flag strongly for a follow-up pass once WebSearch is available.
+
+**UCAN (User Controlled Authorization Networks)** — the most explicit spec-level statement of your thesis I found anywhere:
+- "Private keys themselves SHOULD NOT move from one context to another. Keeping keys unique to each physical device and unique per use case is RECOMMENDED to reduce opportunity for keys to leak, and limit blast radius in the case of compromises." (ucan-wg/spec, v1.0.0, authored by Protocol Labs/Bluesky/number zero/Witchcraft Software people.) This is your dyad principle stated almost verbatim as a MUST/SHOULD-level design recommendation, achieved via delegation chains ("sharing authority without sharing keys") rather than key export.
+- I could not reach Fission's site or blog this session (DNS failure — fission.codes and blog.fission.codes both didn't resolve, suggesting the domain may no longer be live). That's suggestive but not confirmation of Fission's fate — **do not cite "Fission shut down" as verified; the DNS failure is circumstantial, not proof.** General background knowledge (unverified this session): Fission was the primary corporate driver of UCAN and wound down/pivoted around 2023-2024; w3.storage and other Protocol Labs-adjacent projects continued using UCAN independently. Treat this whole paragraph as low confidence pending verification.
+
+**Windows Hello for Business / Entra device registration** — confirmed device-bound-by-design and enterprise-preferred, per the Microsoft Learn fetch above. Wikipedia's Windows Hello page only weakly corroborates ("credentials are stored locally... asymmetric encryption") — the load-bearing evidence is the Entra passkey doc, not Wikipedia.
+
+### Cross-cutting observations
+
+- **Everyone who has built a real per-device-identity system has independently arrived at some version of "device holds an edge, identity is the aggregate/delegation-graph, not a portable secret"** — SSB's Fusion Identities, Nostr's NIP-46 bunker pattern, UCAN's delegation chains, and Apple's sponsor/voucher circle-of-trust are four structurally convergent answers built by unrelated teams. That convergence is itself evidence the dyad framing is pointing at something real, not idiosyncratic.
+- **Every one of those systems still needs a catastrophic-recovery path when all devices are lost, and every catastrophic-recovery path I found reduces back to a human-held (or human-recoverable) secret** — Apple's iCloud Security Code + SRP + SMS; SSB's flat "generate a new identity, re-bootstrap trust socially"; Nostr has essentially none (nsec loss is unrecoverable by design, which is its own data point). **This is the strongest signal against treating the dyad as sufficient on its own**: nobody has shipped a "remaining relations recognize the new dyad" recovery path as the *sole* mechanism — it's always paired with either (a) a fallback human secret, or (b) accepting identity discontinuity (SSB, Nostr) as a real, non-hypothetical cost users pay.
+- **The field's own flagship communication (FIDO's 2022 announcement) never engages the tradeoff at all** — it markets convenience and silently absorbs the security regression. If you're building the case for the dyad model, this silence is a rhetorical opening: you can point to Microsoft's Entra docs as the industry's own admission, in its own current documentation, that the tradeoff is real and consequential enough to gate attestation and steer regulated deployments away from sync.
+
+### What I could not establish this session (be explicit about these gaps)
+- Google's claimed passkey-vs-password success-rate numbers (often cited as "~4%") — source not located, do not cite as fact.
+- devicePubKey extension's actual deployment status — spec text not found in the pages I fetched.
+- CHI/SOUPS/USENIX passkey usability papers 2023-2025 — none located; I do not know if this literature exists or what it says about multi-device/recovery specifically.
+- Bluesky/AT Protocol's own account-migration mechanics, any did:plc outage/incident history, and Bluesky's public response to centralization critique — docs site paths I tried all 404'd.
+- SSB's actual decline timeline and stated reasons — not corroborated this session.
+- Fission's actual fate — domain didn't resolve; treat as suggestive only.
+
+These gaps exist because WebSearch was already at its session limit (0/200 remaining) before I started, forcing pure blind-URL WebFetch, which has a much lower hit rate for anything not precisely guessable. Re-running this with search available would likely close most of the above within a few queries.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 4,515 characters
+
+````
+I've gathered substantial additional material using the curl-based channels. Here is the finding relayed back to you as context for your final answer, plus my completed report.
+
+## Follow-up research completed
+
+Using HN Algolia search, OpenAlex/Crossref, and `gh api` against `w3c/webauthn`, I closed several of the gaps flagged in my first pass:
+
+**devicePubKey — resolved, was NOT abandoned, it was renamed and generalized.** Full history via `gh api repos/w3c/webauthn`:
+- Proposed by **Adam Langley (Google)** in **issue #1658, Aug 2021**, explicitly "to potentially address some of the challenges of introducing syncable credentials" — i.e., exactly the synced-passkey-weakens-device-binding problem.
+- Mechanism: on first use of a synced credential on a *new* device, the authenticator also mints a local, non-exportable "device-bound key pair" and signs an attestation binding it to that device, so an RP can detect "this credential just showed up somewhere new."
+- Went through years of PRs (#1663, #1695, #1753, #1787, #1807, #1812, #1817), then in **PR #1957 (Sept 2023) was renamed `devicePubKey` → `supplementalPubKeys`**, generalizing the mechanism.
+- A commenter's live objection is the single best quote for your dyad argument's skeptical side: *"I can't really see what's the benefit of the new device key. It is authorized on first use by a signature chain from an already-registered, synced key... So if the desire is to only rely on device-bound keys, it seems like that promise is already broken by the time the new device-bound key is registered."* — i.e., the spec's own reviewers flagged that bolting device-binding onto a synced/copied credential after the fact doesn't actually recover the "one key per dyad" property; it can only ever be advisory telemetry to the RP, not a real security boundary. High confidence, directly sourced.
+
+**SSB decline — corroborated with a date.** HN comment (2024-03-11): *"Secure Scuttlebutt is probably close to what you want but it seems dead (all the main implementations seem abandoned)."* Matches the earlier "Fusion Identities" finding — confirms the multi-device problem was never solved before the project lost momentum. A second HN comment (2019, on "Federation is the Worst of all Worlds") had already flagged SSB's missing multi-device story as the reason the commenter couldn't adopt it, years before the abandonment — same complaint, five years apart, never fixed.
+
+**did:plc scale, found via direct WebFetch of web.plc.directory:** "over 12 million registered DIDs in the atproto network as of October 2024." Also confirms did:plc explicitly avoids blockchain and is designed to be "no-cost" — useful scale/cost data point, though I still could not reach Bluesky's own migration docs or any incident history (docs.bsky.app / bsky.network paths kept 404ing).
+
+**Academic literature — found real, relevant papers via Crossref:**
+- Bicakci, Sekmen, Uzunay, *"Balancing Security and Usability in Enterprise FIDO Passkey Recovery With Peer Assistance,"* IEEE Access, 2025 (DOI 10.1109/access.2025.3602362) — title alone strongly suggests a "peer-assistance" recovery model close to your dyad-recognition idea; I found the citation but not the abstract text (fetch truncated before content).
+- A referenced USENIX Security paper, *"Why aren't we using passkeys? Obstacles companies face deploying FIDO2 passwordless authentication"* (cited as ref9 in the above) — exists, 33rd USENIX Security Symposium, but I did not retrieve its content directly.
+- Both are real, citable, and worth a direct fetch/read in a follow-up — I ran out of turns to pull full text.
+
+**Still unresolved / could not reach:** Google's "~4%" passkey-vs-password stat (no primary source located across either search pass); Fission's actual shutdown date/reason (HN query returned nothing relevant — the query terms collided with nuclear-fission stories); Bluesky's own account-migration and did:plc-incident documentation (repeated 404s); Nostr nsec-leak incident data (HN search surfaced only a tangential UX complaint, no incident reports).
+
+This second pass **strengthens, not overturns**, my original report: the devicePubKey/supplementalPubKeys history is a concrete, dated case of the industry trying to bolt device-binding onto synced credentials, with its own reviewers publicly doubting it restores the real guarantee — which is direct evidence for your dyad framing's central claim (a copied/synced key cannot be patched back into a device-bound one after the fact).
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;uFCbEwuXMJ3BbrqVRKR5hQLrusu02FqTdylTJskBzeU
+
+<<^ code="&#x0004;" -> to=? >>

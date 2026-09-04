@@ -1,0 +1,227 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/2-dns-root-system-41-years-measured-resolver-c48256 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/2-dns-root-system-41-years-measured-resolver-c48256.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 2. DNS — root system ~41 years; measured resolver centralization. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/2-dns-root-system-41-years-measured-resolver-c48256"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 2. DNS — root system ~41 years; measured resolver centralization
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 21,186 characters
+
+````
+Research complete. Findings below.
+
+---
+
+# COUNTER-EVIDENCE: federated infrastructures that sustained for decades, with measured centralization
+
+Everything below is MEASURED unless labeled otherwise. Unreachable items are marked **NOT REACHED**.
+
+---
+
+## 1. EMAIL / SMTP — survived ~44 years, measurably a duopoly at the operator layer
+
+**The citable MX-concentration measurement (best single source found):**
+Artem Berezin, *"Two Providers, a Stubborn Plateau, and a Very Long Tail: Email in the Tranco Top 1M"*, RIPE Labs — https://labs.ripe.net/author/artem-berezin/two-providers-a-stubborn-plateau-and-a-very-long-tail-email-in-the-tranco-top-1m/ (front-paged HN 2026-08-17, 124 pts, https://news.ycombinator.com/item?id=49328911)
+
+- Method: OpenINTEL daily snapshots over Tranco top-1M; primary snapshot **18 July 2026**; historical series **2016–2026**.
+- N: **~659,000 domains publish MX** (of ~1M); ~618,000 publish SPF.
+- **Google Workspace: 21.8%** of MX-publishing domains.
+- **Microsoft 365: 16.8%**.
+- **Combined duopoly: 38.6%.** Next largest, Proofpoint: **1.9%** — a cliff, then a long tail (36,455 unique unclassified MX hostname patterns; 81.5% overall classification rate).
+- **Self-hosting: 44.6% of domains (2016) → 22.4% (July 2026).** Halved in a decade. Article reports a continuing decline (stated as ~0.5 pp per period; exact cadence as written is ambiguous in the extract).
+- DMARC: 458,467 domains publish; only **46.9%** at enforcement (p=quarantine/reject, pct=100); 58,064 domains publish the literal string `v=DMARC1; p=none;`.
+
+**Second, independent measurement (academic, but paywalled):**
+Zembruzki, Jacobs, Granville, Pfitscher, *"Examining the Centralization of Email Industry: A Landscape Analysis for IPv4 and IPv6"*, IEEE ISCC 2023, 2023-07-09, DOI 10.1109/ISCC58397.2023.10217834. Abstract (via OpenAlex) confirms large-scale MX-record measurement across TLDs and states **"IPv6 adoption increased centralization of email servers."** **Numbers NOT REACHED** — IEEE Xplore returns empty to WebFetch; no OA copy exists (OpenAlex `best_oa_location: null`; UFRGS Lume search JS-only).
+
+**The personal-corpus measurement (the "even if you self-host, Google has it" result):**
+Benjamin Mako Hill, *"Google Has Most of My Email Because It Has All of Yours"*, 2014 — https://mako.cc/copyrighteous/google-has-most-of-my-email-because-it-has-all-of-yours
+- Corpus: personal Maildir from **April 2004** onward (~10 yrs), header analysis for google/gmail/googlemail infrastructure.
+- **~1/3 of all inbox mail** from Google domains.
+- Restricted to personal mail he replied to: **>1/3 every year since 2006; >50% every year since 2010; 57% in the peak year; 51% in the final year measured.**
+- Author is a self-hoster. The finding is that the *counterparty distribution*, not your own MX, determines who reads your mail.
+
+**The practitioner deliverability claim, with an attached measured event:**
+Carlos Fenollosa, *"After self-hosting my email for twenty-three years I have thrown in the towel"* (2022-09-04) — https://cfenollosa.com/blog/after-self-hosting-my-email-for-twenty-three-years-i-have-thrown-in-the-towel-the-oligopoly-has-won.html — **1,887 points, 728 comments** on HN (https://news.ycombinator.com/item?id=32715437), reposted 2023-12-28 and 2026-01-30. That is the single largest practitioner datapoint on the deliverability wall.
+
+**Standards-body acknowledgement:** RFC 9518 (M. Nottingham, Dec 2023), https://www.rfc-editor.org/rfc/rfc9518.html — "Running one's own MTA has become considerably more onerous over the years due, in part, to the increasingly complex mechanisms introduced to fight unwanted commercial emails"; and "if a large MTA decides that email from a small one is unwanted, there is significant impact."
+
+---
+
+## 2. DNS — root system ~41 years; measured resolver centralization
+
+**Root server system, measured today (2026-09-04, from https://root-servers.org/):**
+- **2,005 operational anycast instances**, **12 independent operator organizations**, **13 root identities**.
+- Per-operator instance counts as published: F/ISC **366**, E/NASA **328**, D/UMD **231**, A+J/Verisign **203**, I/Netnod **91**, C/Cogent **13**, H/ARL **12**, B/USC-ISI **6**, G/DISA **6**. (K/RIPE NCC, L/ICANN, M/WIDE counts not rendered in the fetched page.)
+- Note the internal skew: the top 5 operators hold ~1,129 of 2,005 instances; B and G run 6 each. Replication is extremely unevenly distributed *within* a nominally 12-way federation.
+- **Who pays: NOT REACHED.** root-servers.org/faq/ contains no funding information; icann.org blog returns 403 to WebFetch.
+
+**Resolver centralization, measured:**
+Geoff Huston / Joao Damas, APNIC, *"Measuring DNS resolver centrality"* — https://blog.apnic.net/2019/09/23/dns-resolver-centrality/ (potaroo.net mirror is 403)
+- Method: ad-network measurement, 10–15M impressions/day, **~303 million individual tests**, **21 Aug – 20 Sep 2019**; two test names (one resolvable, one SERVFAIL) to expose primary *and* fallback resolvers.
+- **Google Public DNS: 9.12% of users as first resolver; 22.36% when counting the full resolver set.**
+- **Cloudflare: 0.74% first / 1.15% full set.**
+- **All open resolvers combined: 15.28% first / 28.27% full set.**
+- **A post-2019 update of this series: NOT REACHED** (potaroo.net blanket-403s; APNIC blog search returns nav only).
+
+---
+
+## 3. NTP POOL — 23 years, and the sharpest centralization number in this whole report
+
+**Scale, measured (https://www.ntppool.org/en/, 2026-09-04):**
+- **~6,136 servers** total: Europe 3,834 · North America 1,274 · Asia 580 · Oceania 247 · Africa 123 · South America 98. Europe alone = **62.5%**.
+- Wikipedia (https://en.wikipedia.org/wiki/NTP_pool, updated 2026-05-21): founded by Adrian von Bidder **January 2003**; **500 servers in 2006** (Ask Bjørn Hansen, 2006-01-15); **May 2026: 3,790 active IPv4 + 2,280 active IPv6**. Growth 500 → ~6,100 over 20 years. Client count unknowable by design ("hundreds of millions of systems").
+
+**Who pays:** ntppool.org names **Equinix and Netactuate** as donors of "hosting and bandwidth for the 'hub' servers"; Equinix Metal hosted the central infrastructure for ~7 years before sunsetting, forcing migration to two smaller distributed clusters. Individual pool servers are donated by volunteers. Project maintained by **Ask Bjørn Hansen** plus community.
+
+**The centralization measurement — Beverly & Rye, arXiv:2602.12321, submitted 2026-02-12**
+*"On Borrowed Time: Measurement-Informed Understanding of the NTP Pool's Robustness to Monopoly Attacks"* — https://arxiv.org/abs/2602.12321
+- **9 months** of longitudinal collection; **>15,000 servers** discovered (active + inactive).
+- **Only 19.7% of active servers are fully independent.** (The rest share addresses, accounts, or network fate.)
+- **An adversary can capture the preponderance of pool traffic in 90% of all countries with 10 or fewer malicious servers.**
+- Discussed by pool operators at https://community.ntppool.org/t/paper-measurement-informed-understanding-of-the-ntp-pool-s-robustness-to-monopoly-attacks/4247 (2026-02-21); operators argue client-side falseticker rejection (chrony, ntpd `pool`) and pool monitoring blunt the practical impact.
+
+**The abuse incidents — the cost borne by volunteers** (https://en.wikipedia.org/wiki/NTP_server_misuse_and_abuse):
+- **Netgear / University of Wisconsin–Madison, May 2003:** hardcoded IP, 1-second poll. By June: **250,000 packets/sec, 150 Mbit/s**. **707,147 affected units** (DG814, HR314, MR814, RP614). Fixed by firmware redirect + 10-minute poll.
+- **D-Link / Poul-Henning Kamp, 2005–2006:** **75–90% of his server's traffic** was D-Link routers; **at least 43 Stratum-1 servers** hit by direct queries. DIX demanded **DKK 54,000/year (~US$9,081 / €7,239)**. "Amicable resolution" announced **2006-04-27**.
+- **SMC / CSIRO, 2003:** 7004VBR/7004VWBR forced the CSIRO National Measurement Laboratory to **close its NTP servers to the public**.
+- **TP-Link Wi-Fi extenders, 2016–2017:** 1 NTP + 5 DNS requests **every 5 seconds**, **0.72 GB/month per device**, five hardcoded servers incl. Fukuoka University and the AU/NZ pools; firmware fix not auto-deployed.
+- **Snapchat iOS, Dec 2016** (https://news.ntppool.org/2016/12/load/, 2016-12-19; HN 354 pts): defective app update flooded several country zones; fixed within 24 h of contact; Snap subsequently **donated timeservers to the Australia and South America zones**.
+- Also on record: community thread **"No PR action for project and dramatic reduction in the number of active servers"**, 2019-12-17, https://community.ntppool.org/t/.../1521 (contents NOT READ).
+
+---
+
+## 4. IRC / LIBERA.CHAT — protocol 1988; Libera founded 2021 after a governance capture
+
+- **Founded 2021-05-19**, by ex-freenode staff after Andrew Lee's 2017 acquisition of Freenode Ltd. (https://en.wikipedia.org/wiki/Libera_Chat)
+- **Measured usage: 30,879 average concurrent users across 22,713 channels (10 July 2025, netsplit.de).**
+- **Registered: ~150,000 users, ~30,000 channels** (Libera Chat Annual Report 2025, https://libera.chat/annual-reports/2025, period 2025-01-01 → 2025-12-31).
+- **Funding model, measured:** Swedish nonprofit förening, org. no. **802535-6448**; **entirely volunteer-run**; **38 members**, 5-member elected board, 2 elected auditors (https://libera.chat/about). FY2025 financials: **annual result ≈ −2,000 SEK; operating loss ≈ −3,500 SEK; interest income ≈ +2,300 SEK; tax ≈ 850 SEK.** Cash expenses are only domains, PO box, accounting software, banking, legal advice. Notable 2025 cost driver: **legal advice on the UK Online Safety Act**. Servers and bandwidth are in-kind sponsor donations (https://libera.chat/sponsors). No OpenCollective — the slug `libera-chat` does not exist on OpenCollective (API returns "No collective found").
+- **Historical IRC peak, measured:** netsplit.de states **QuakeNet exceeded 240,000 concurrent users in early 2005** — the highest ever measured on any IRC network — and freenode averaged **>80,000 concurrent** in June 2016. So Libera's 30,879 is ~13% of the all-time single-network peak.
+- **netsplit.de per-year top-10 tables: NOT REACHED.** The tables at https://netsplit.de/networks/top10.php?year=NNNN are rendered client-side; curl and WebFetch both return the page chrome only. The two figures above come from the page's own narrative text.
+
+---
+
+## 5. USENET — the hardest longitudinal decline number in this report
+
+**Source: the TOP1000 Usenet Servers project, http://www.top1000.org/ → http://top1000.anthologeek.net/ — continuous monthly archives from 2000/08 to present, still generating stats "Friday Sep 4 4:30 CEST 2026".**
+
+I counted lines directly from the archives (`full.txt` = distinct servers observed in Path headers that month; `participants.txt` = servers submitting stats):
+
+| Month | Distinct servers seen (full.txt) | Contributing servers |
+|---|---|---|
+| 2001/06 | **22,245** | — |
+| 2003/06 | **14,178** | 247 |
+| 2006/06 | (fetch timed out — NOT REACHED) | 347 |
+| 2009/06 | **4,510** | 312 |
+| 2012/06 | **1,691** | 209 |
+| 2015/06 | **1,226** | 149 |
+| 2018/06 | **988** | 101 |
+| 2021/06 | **1,246** | 81 |
+| 2024/06 | **1,220** | 80 |
+| 2026/07 | **780** | 80 |
+| (2000/12) | (NOT REACHED) | 46 |
+
+**22,245 → 780 = a 96.5% decline in observed Usenet servers, 2001→2026.** Contributing-server count has been **flat at 80–81 since 2021** — a hard floor of committed operators.
+
+Current filtered top-10 feeders (generated 2026-09-04, from top1000.org): usenetexpress.com 42.36 · as286.net 25.13 · highwinds-media.com 23.98 · blueworldhosting.com 22.54 · erje.net 19.84 · abavia.com 18.37 · eternal-september.org 18.19 · feed.usenet.farm 16.45 · weretis.net 14.24 · neodome.net 13.68.
+
+**Eternal-September** (https://www.eternal-september.org/, live 2026-09-04): free text-only Usenet, registration-gated, **>40 peers**, 1 Gbit; carries Big-8 + alt.* (~8,000 groups, no binaries) + de.* + >200 regional hierarchies. Retention: **de.* 3 years · Big-8 160 days · alt.* 130 days · other 90 days**. Latest site notice dated 2025-12-22 (banning disposable email providers at registration). It ranks **#7 among all Usenet feeders worldwide** — a hobbyist server in the global top 10 is itself the measurement of how thin the field is.
+
+---
+
+## 6. BITTORRENT / MAINLINE DHT — ~21 years, no operator to centralize
+
+- **Protocol dates:** Azureus DHT **May 2005** (Azureus 2.3.0.0); BitTorrent Inc. Mainline DHT **November 2005** (client v4.2.0). (https://en.wikipedia.org/wiki/Mainline_DHT)
+- **The citable population measurement:** Liang Wang & Jussi Kangasharju, *"Measuring large-scale distributed systems: case of BitTorrent Mainline DHT"*, IEEE P2P 2013, 2013-09-01, DOI 10.1109/P2P.2013.6688697. Per the abstract: MLDHT is "by far the largest of currently active overlay systems"; prior methodologies contained an **omission that produced incorrect size estimates**, which this paper corrects by modeling crawl inaccuracy as a Bernoulli process (estimate in ~5 seconds); **~2.5 years of continuous measurement — the first long-term study of the DHT.**
+- **The number:** **16 million to 28 million concurrent users in 2013, with intra-day swings of at least 10 million** (Wikipedia's Mainline DHT article, citing Wang & Kangasharju).
+- Follow-up: Wang & Kangasharju, *"Inference on the Network Evolution in BitTorrent Mainline DHT"*, arXiv:1412.0103 (2014-11-29). I extracted the PDF text: it applies FFT+SVD to per-country size time series (MaxMind geolocation), finds **f(t) is stationary with a one-week period for almost all countries**, and detects anomalies — e.g. a significant drop in Canadian network size at Christmas 2013 (measured window 2013-12-07 → 2013-12-31 GMT). **It reports no absolute totals in text**; only plot axes (system-level ×10⁷, country-level ×10⁴).
+- **Any post-2014 DHT population estimate: NOT REACHED.** ProbeLab (https://probelab.io/) monitors 10+ networks (IPFS, Ethereum, Gnosis, Celestia, Optimism, Base, Filecoin, Avail, Polkadot) — **BitTorrent is not among them**, and no per-network counts appear on the landing page. **Tracker-mortality longitudinal studies: NOT REACHED** — OpenAlex queries surfaced none, and my OpenAlex budget was exhausted mid-session ("Insufficient budget… Resets at midnight UTC").
+
+---
+
+## 7. ACADEMIC / STANDARDS SYNTHESIS on why federated protocols centralize
+
+**RFC 9518, "Centralization, Decentralization, and Internet Standards", Mark Nottingham, December 2023** — https://www.rfc-editor.org/rfc/rfc9518.html. This is the explicit synthesis. Named mechanisms:
+1. **Operational complexity** — federation loads cost onto every operator (email/MTA is the worked example).
+2. **Voluntary implementation** — standards are optional; XMPP: "while some XMPP deployments do support truly federated messaging, many of the largest do not."
+3. **Power imbalance** — a large node's unilateral policy decision is externally binding on small nodes (the MTA-blocks-MTA case).
+4. **Network effects** — the Web began as a decentralizing force and was recentralized by platforms.
+Its conclusions: federation is **necessary but insufficient**; technical measures alone cannot prevent non-technical centralization; **distributed consensus/blockchain addresses operational centralization but not governance or naming**; what helps is enabling *switching* and constraining delegation to intermediaries. **RFC 9518 contains no quantitative data** — it is argument, not measurement.
+
+**Adjacent measured work reached:**
+- Kashaf, Sekar, Agarwal, *"Third-party Service Dependencies and Centralization Around the World"* (IMC 2021), arXiv:2111.12253 — https://arxiv.org/abs/2111.12253: vantage points in **50 countries**, regional top-500 sites. **15%–80% of websites depend on a third-party DNS/CDN/CA**; critical dependencies **9%–61%**; **three providers serve an average 91.2%** of a given service class across all countries; **Google alone serves an average 72%** of surveyed websites. (Journal version: *"Each at its Own Pace"*, DOI 10.1145/3579437.) **No email/MX breakdown in this paper.**
+- Zembruzki et al., *"Measuring the Centrality of DNS Infrastructure in the Wild"*, Applied Sciences 13(9):5739, 2023 — DOI 10.3390/app13095739. **NOT REACHED** (MDPI returns 403).
+- Zembruzki et al., *"The Role of Network Centralization in Shaping Digital Sovereignty: An Analysis Under the DNS Lens"*, Int. J. Network Mgmt, DOI 10.1002/nem.2309 (OA PDF exists at Wiley); preprint arXiv:2307.01300. **Numbers not extracted — NOT REACHED.**
+- IAB, *"Considerations on Internet Consolidation and the Internet Architecture"*, draft-arkko-iab-internet-consolidation-02 (2019). Listed, not fetched.
+- Trautwein et al., *"Design and Evaluation of IPFS: A Storage Layer for the Decentralized Web"* (SIGCOMM 2022, DOI 10.1145/3544216.3544232) — abstract confirms "the majority of web traffic now originates from a few organizations." **Node/cloud-concentration figures NOT REACHED** (ACM DL 403).
+
+---
+
+## WHAT THE SURVIVORS ACTUALLY SHARE — derived only from the figures above
+
+1. **The protocol layer stayed open while the operator layer concentrated — and that was survivable.** Every survivor measured is centralized at the operator layer and still functioning: email 38.6% duopoly with 659k domains still publishing MX; open resolvers 28.27% of users; NTP with only 19.7% of servers independent; root with 5 of 12 operators holding ~56% of instances. Centralization did not kill any of them. It killed **entry**, not **operation**.
+
+2. **Zero mandatory money at the node.** The two survivors with the healthiest participation curves have near-zero cash budgets and in-kind capacity: Libera's entire FY2025 operating loss was **≈3,500 SEK (~US$350)** because servers and bandwidth are sponsored, not purchased; the NTP Pool grew **500 → ~6,100 servers over 20 years** on donated machines plus donated hub hosting (Equinix, Netactuate). Usenet, which requires real per-server spool/transit cost, went **22,245 → 780 servers (−96.5%)**.
+
+3. **The client was already installed and could not cheaply switch.** NTP, DNS resolution, and MX lookup are compiled into every OS and every mail path; nobody chooses them per-use. Usenet required an affirmative client choice — and it is the only one of the six that collapsed by two orders of magnitude. Libera's 30,879 concurrent vs. QuakeNet's 240,000 (2005) is the same effect at 13% survival: IRC clients remained a choice.
+
+4. **Survivors absorbed hostile externalities rather than litigating them.** The measured NTP incidents — **707,147 Netgear units at 250 kpps/150 Mbit/s (2003)**, **75–90% of one volunteer's traffic from D-Link with a DKK 54,000/yr bill (2005–06)**, TP-Link at **0.72 GB/month/device**, Snapchat (2016) — were all resolved by *redirection, firmware, vendor zones, and donated servers*, on volunteer timescales. The one operator who could not absorb it (CSIRO) simply closed its server to the public. Survival correlated with having a cheap absorb-and-redirect path, not with recourse.
+
+5. **Replication was allowed to grow without renegotiating the protocol.** The root went from 13 machines to **2,005 anycast instances under the same 13 identities** — capacity multiplied ~154× with zero protocol change and zero new governance seats. The DNS root's decentralization is entirely an *operational* achievement layered under a fixed, small, politically frozen namespace.
+
+6. **The one with no operators at all had no centralization to measure — and also no reachable current census.** Mainline DHT hit **16–28M concurrent users in 2013** with no operator, no funder, and no governance body; and precisely because nobody operates it, **no one has published its size since 2014** in anything I could reach. Ungoverned survival and unmeasurable survival came as a pair.
+
+7. **Participation decays even where the protocol thrives.** Self-hosted email **44.6% → 22.4% (2016→2026)**; Usenet contributing servers **347 (2006) → 80 (2021–2026, flat)**; DMARC enforcement stuck at **46.9%** and *falling* 0.44 pp in 30 days. In every measured series the protocol's health and the operator population's health diverged — the protocols outlived their own operator bases.
+
+---
+
+### NOT REACHED (explicit)
+- Numbers from Zembruzki et al. ISCC 2023 email-centralization paper (IEEE paywall; no OA copy exists).
+- MDPI *Applied Sciences* 13(9):5739 DNS centrality figures (403).
+- ACM DL PDFs: SPF "Lazy Gatekeepers" (IMC'23), IPFS SIGCOMM'22 (403).
+- Any DNS resolver-share measurement after Sept 2019 (potaroo.net 403s the whole domain; APNIC blog search unusable).
+- Root server system funding sources and query volumes (root-servers.org FAQ silent; icann.org 403).
+- netsplit.de per-year IRC top-10 tables 1998–2026 (client-side rendered).
+- BitTorrent DHT population after 2014; BitTorrent tracker-mortality longitudinal studies.
+- TOP1000 `full.txt` for 2000/12 and 2006/06 (fetch timeouts).
+- OpenAlex became unavailable mid-session (daily API budget exhausted); later academic search ran on Crossref, arXiv, Semantic Scholar and HN Algolia only. arXiv over plain `http://export.arxiv.org` 301s and returns empty — must use `https://`.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;6ptN29Gt7c-rUtANjf4Qu8HofWJdZEWfR9qNi4cUuNI
+
+<<^ code="&#x0004;" -> to=? >>

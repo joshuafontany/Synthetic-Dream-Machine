@@ -1,0 +1,752 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: §0. Method, and the honest limit on this report's reach. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! §0. Method, and the honest limit on this report's reach
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 58,350 characters
+
+````
+Understood — the addendum went out standalone by mistake. Here is the complete document, corrections folded in, nothing held back as a patch.
+
+---
+
+# OUTSIDE NEGENTROPY: the keyless-human, dyad-edge identity model against the field
+*(single consolidated report; all later corrections applied in place)*
+
+## §0. Method, and the honest limit on this report's reach
+
+`WebSearch` was **unavailable for the entire session** — the 200-call budget was spent before I was invoked; every call failed. Six of us (myself plus five parallel research spirits) worked through: direct `WebFetch` on guessed and known URLs, the Hacker News Algolia API, the GitHub search API via `gh`, OpenAlex, Crossref, PubMed, and the Wikipedia API. Google, Bing, DuckDuckGo, Mojeek, Startpage and public searx instances are all captcha-walled or return junk; **Reddit is unreachable at the tool level**, which removes what is probably the richest source of individual "I lost everything" narratives.
+
+Consequence: coverage is **strong** where primary-source URLs are guessable (specs, vendor docs, GitHub, HN, OpenAlex-indexed abstracts) and **thin** where discovery was required. Unreached items are marked **NOT REACHED** rather than filled from memory. §10 holds the full ledger.
+
+---
+
+## §1. Who else has said "the human holds no key" — and what they measured
+
+### 1.1 The purest deployed instance, and the industry's retreat from it
+
+**Original FIDO2/WebAuthn (2018)** is the closest thing to your ① at planetary scale: a non-exportable credential, per authenticator, per relying party. No portable identity object exists at all. Losing the device loses that relationship, by construction. *Confidence: high.*
+
+The industry then **walked away from it**. The Apple/Google/Microsoft joint passkey announcement (May 2022, fidoalliance.org) framed synced passkeys purely as a usability fix and **never mentions the security tradeoff**. That silence is itself a finding: the field's flagship communication never named the property your model is built around.
+
+The clearest institutional admission that the tradeoff is real is **Microsoft's own current Entra documentation** (learn.microsoft.com), which gates the two models apart:
+
+- *"Device-bound passkeys: The private key is created and stored on a single physical device and never leaves it."*
+- *"Synced passkeys... do not support attestation."* — **"If attestation is enabled, only device-bound passkeys are allowed; synced passkeys are excluded."**
+- Guidance: device-bound for regulated industries and privileged users; synced for everyone else.
+
+**Measured, and it cuts *against* the dyad on pure UX grounds** — Microsoft's published synced-passkey figures across "hundreds of millions" of accounts: **99% successful registration; 3s vs 69s sign-in (14× faster than password+MFA); 95% vs 30% sign-in success rate** against legacy auth. *Confidence: high that these are Microsoft's published numbers; methodology unverified.* Whatever the security argument, the copied-key model is winning on measured friction, and your model has to beat these numbers or explain why it need not.
+
+### 1.2 The device-binding patch the spec's own reviewers said cannot work
+
+The sharpest technical finding in the sweep. Traced through `gh api repos/w3c/webauthn`:
+
+- **Adam Langley (Google) opened issue #1658, Aug 2021**, proposing `devicePubKey` explicitly "to potentially address some of the challenges of introducing syncable credentials." Mechanism: when a synced credential first appears on a new device, the authenticator also mints a local non-exportable device-bound key and attests it, letting an RP detect novelty.
+- It moved through PRs #1663, #1695, #1753, #1787, #1807, #1812, #1817, then in **PR #1957 (Sept 2023) was renamed `devicePubKey` → `supplementalPubKeys`**. Not abandoned — generalized.
+- A reviewer's live objection, verbatim: *"I can't really see what's the benefit of the new device key. It is authorized on first use by a signature chain from an already-registered, synced key... So if the desire is to only rely on device-bound keys, it seems like that promise is already broken by the time the new device-bound key is registered."*
+
+**A copied key cannot be retrofitted into a device-bound one.** The W3C's own reviewers said so, in the spec repo, in public. This is direct field support for the load-bearing claim in your ①. *Confidence: high, primary source.*
+
+### 1.3 Per-system answers: does the human hold anything, and what happens when every device is lost
+
+| System | What the human holds | All devices lost |
+|---|---|---|
+| **FIDO2 device-bound** | nothing | RP-defined; universally an out-of-band fallback |
+| **Synced passkeys** | platform account password + its recovery path | the cloud account *is* the root |
+| **Keybase** | a paper key (optional) | account **reset** — new sigchain lineage; proofs, followers, history severed |
+| **Matrix / Element** | a 48-char recovery key or passphrase | *"reset your digital identity"*; prior messages permanently undecryptable |
+| **Signal** | a PIN (SVR-protected) | PIN loss unrecoverable; history restore still a *future* feature as of Aug 2026 |
+| **SSB** | a per-device keypair | *"generate a new identity and tell people to use their new one instead"* — no recovery, by design |
+| **Nostr** | one `nsec`, forever | unrecoverable; no rotation, no revocation in the base protocol |
+| **AT Protocol / Bluesky** | almost always **nothing** — the PDS holds the keys | PDS-mediated; `did:plc` rotation keys are the real authority |
+| **UCAN** | nothing portable — authority travels as delegation | delegation chain must be re-issued from a surviving delegator |
+| **iCloud Keychain** | the iCloud Security Code | HSM escrow, **10 failed attempts and the escrow record is destroyed forever** |
+
+Two notes on that table. **Nostr is the instructive negative**: it committed to a single human-held secret and pays for it continuously — no rotation, no revocation, an `nsec` leak is terminal. NIP-46 (remote/bunker signing) and NIP-07 (browser signer) move *where the key sits*, not *whether one exists*; they are custody plumbing, not a change of model. **AT Protocol is the instructive inversion**: it achieves "the human holds no key" by having a *server* hold it — which is your ① satisfied in letter and inverted in spirit, and the `did:plc` directory has been criticised precisely as a trusted third party wearing decentralised clothing. *Confidence on the Nostr and AT Proto shape: medium-high; `did:plc` incident history NOT REACHED.*
+
+**Signal's PNI (Phone Number Identity) split** could not be confirmed against a primary source and is marked **NOT REACHED** — I decline to characterise the 2024 linked-device changes from memory.
+
+---
+
+## §2. Keybase, deep — the closest large deployment
+
+**The model, confirmed from primary sources.** Per-device NaCl keypairs. A new device is provisioned by an existing device signing a statement about the new key, countersigned. Every action appends a signed link to a public **sigchain**, whose Merkle root is periodically written to a public blockchain to defeat server rollback (originally Bitcoin; one 2026 HN comment claims a migration to Stellar — *single source, low confidence*). From book.keybase.io/account: *"When you add a new device or paper key, your existing device vouches for the new one. All your devices and paper keys are cryptographically linked."* Revoked devices *"still publicly appear on your account but are marked as revoked"* — the graph is append-only, so a severed edge remains legible as a severed edge. That is a genuine design point your model may want.
+
+**Paper-key retention: NO PUBLISHED NUMBER EXISTS.** This was the single most-requested figure in the brief and it is **not available**. We searched Keybase's docs, blog, the NCC audit, HN, the GitHub issue tracker, OpenAlex and Crossref. No fraction, no telemetry, no support-ticket volume. *Confidence: high on the absence — this is an industry-wide measurement gap, not a search failure.*
+
+**The one public audit.** NCC Group (keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf): Sept 10–28 2018, retested Feb 2019, protocol v2.7.0, **9 person-weeks, 3 consultants, 0 Critical / 1 High / 3 Medium / 1 Low**. The structural critique that matters: a malicious server **can truncate a sigchain** and present the truncation as current state, caught only by out-of-band social verification or continuous client monitoring — and NCC flags *"it is unclear who has responsibility"* for third-party auditing of the public record. **Only one public audit appears to exist for the whole system.**
+
+**What reset actually costs.** The audit (p.6) describes it precisely: a reset creates *"a new subchain… where any prior statements are ignored and a new 'eldest' signing key is declared."* Device list, followers and third-party proofs are all severed. This is the model's own answer to "lost everything" — and it is **re-founding, not recovery**.
+
+**Authority is restored; memory is not.** Keybase developer `oconnor663` on HN: *"there's no way for adding a new device from a paper key to transfer chat history."* This maps exactly onto your model's claim and marks its boundary: an edge is re-established, and the content that rode the old edges is not.
+
+**The critical moment is racy.** HN user BjoernKW (2017-05-12) reported the paper-key confirmation flow silently advancing past the confirmation screen while he switched to a password manager to save it. The one artifact the whole design rests on can be lost in the act of saving it.
+
+**Reset friction is deliberate, and expensive.** `oconnor663` explains resets are made costly because *"adversaries in the middle can pretend to be me and act like I've reset my account."* HN user atdrummond (2022-12-26): **locked out 5 days** after initiating a reset. *This is the anti-impersonation/anti-lockout tension in its purest form: the delay is the security property.*
+
+**Support load, visible and unresolved across a decade** (the closest proxy available, absent telemetry): "I lost my paper keys 'WAYNE phone', 'cave cruise' and 'want female'" (keybase/client#21111, filed **2019-11-19, still open**); "Lost Credentials Loop" (#11304, 2018); "Error Code 218 – Prompt attempts exhausted" (#10389, 2018); "Cannot chat after reset" (#26237, 2024); "I am not receiving account reset information" (#28338, **2025-04-05**).
+
+**Correcting a common assumption about the aftermath.** keybase.io has **not** been shut down. Fetched in 2026: the homepage is present-tense, no shutdown banner, the Tor onion still advertised. The accurate characterisation is **indefinite maintenance-mode stagnation since the Zoom acquisition on May 7, 2020** — backend never open-sourced, encrypted Git quietly gone, **keybase.pub shut down March 1, 2023**, while Chia Network was still running a 20,000+ member chat on it as of 2022. HN's "Graph of Keybase commits pre and post Zoom acquisition" (2021-10-09, 349 points) is the community's own measurement of the decay.
+
+---
+
+## §3. Matrix cross-signing at scale — the measured lose-everything failure
+
+**It reintroduces a human-held secret, explicitly and by necessity.** Three key tiers (master / self-signing / user-signing), secrets protected by **SSSS**, unlockable by a 48-character recovery key **or** a human passphrase. The largest live deployment of "identity as a set of mutually-signing devices" ships with exactly one string whose loss is fatal.
+
+**Element's own live help page states the failure verbatim:** *"What happens if I've lost my recovery key? You will need to reset your digital identity, thus your previous messages can not be decrypted and other users will see that you have reset your digital identity."* Note the second clause — **the reset is publicly legible to your correspondents.** That is the same append-only property as Keybase's revoked-but-visible devices, and it is the honest version of what "re-establishing a dyad" looks like to everyone else.
+
+**"Unable to decrypt" is chronic and current.** `gh api search/issues` for `"unable to decrypt"` across `element-hq/element-web`, `element-hq/element-android` and `matrix-org/matrix-rust-sdk` returns **322 matching issues/PRs — 283 in element-web alone — spanning 2016 to 2026**, including "Unable to decrypt all message history after verifying session with recovery key" (**Aug 26, 2026, open**).
+
+**The nine enumerated causes** (blog.neko.dev): no backup restore; all devices logged out; sender signed out; verified-only key sharing; one-time-key exhaustion; Olm ratchet desync; device-list desync; federation latency; device identity key reuse. **Count how many are *relational* failures rather than key failures** — the edge exists, the key exists, and the *recognition* failed to propagate. For a model built on edges, this list is the failure taxonomy you inherit.
+
+**Why the Rust rewrite happened**: to collapse four parallel E2EE implementations into one core, specifically to stop fixing the same bug class four times; libolm's timing exposure was secondary. Most of 2023 went to E2EE bugfixing; fixes shipped Sept–Oct 2024.
+
+**The chronic verification failure**, from "Giving Up on Element and Matrix.org" (2025): *"device cross-verification is another thing that has been haunting Matrix/Element users for years… verifications would either not start at all or simply break in the middle of the process."* Third-party client authors could not implement it correctly; even first-party Element and Element X struggled until recently.
+
+**One quantitative claim, flagged as weak.** An HN commenter (Nov 2025) estimated *~10% of users saw at least one UTD message daily*. **Single forum estimate, not telemetry — low-to-medium confidence.** In the same thread Matrix lead Arathorn acknowledged *"a huge amount of work fixing E2EE issues"* and said that on matrix-rust-sdk-crypto UTD bugs *"should be unheard of."*
+
+**NEGATIVE RESULT, stated plainly:** no published device-verification completion rate exists for Matrix. OpenAlex and Crossref return **zero academic papers** studying Matrix cross-signing UX. For the largest live deployment of your model's core mechanism, the field has measured essentially nothing.
+
+---
+
+## §4. THE DYAD, EXPLICITLY — the load-bearing question, and its load-bearing negative result
+
+### 4.1 The direct answer
+
+**Nobody has built or deployed "identity as a signed dyadic edge between a person and a device" as a named, general-purpose primitive.** Not in SSI, not in object-capability, not in local-first, not in petname theory, not in any shipped system we could reach.
+
+The *shape* has decades of prior art. But **every instance frames the edge as person↔person or process↔process, never person↔device.** The device is the substrate the key sits on, not a party to the relation. *Confidence: high on the negative, across four independently searched literatures.*
+
+Literal term checks, run live: PubMed for `"human-device dyad"` → **zero results**; `"person-device dyad"` → **zero results**. The brief's worry that HCI/health-sensing had already taken the term does **not** hold under that index. (ACM DL and IEEE Xplore full-text **NOT REACHED** — the term may still be occupied there.)
+
+### 4.2 The theoretical support, which is deep and unbuilt
+
+**Petname systems** (Stiegler 2005, skyhunter.com/marcs/petnames/IntroPetNames.html) are the strongest theoretical foundation for "identity is an edge." The three-part structure: **keys** (global, secure, unmemorable) / **nicknames** (global, memorable, insecure) / **petnames** (secure, memorable, and **private** — *"for a particular person, for a particular application, there is a one-to-one mapping between a key and a petname"*). A name is not a property of the named thing; it is a fact about a relation. The **2024 Spritely revival** (Lemmer-Webber, Miller, Larson, Sills, Yaacoby — files.spritely.institute/papers/petnames.html) adds **edge names**: paths through trusted intermediaries, written `Alyssa⇒Ben Bitdiddle`. **Conceptual; no shipped implementation found.**
+
+**Zooko's Triangle** — the petname answer does not square the triangle, it *refuses* it: give up global human-meaningful names, keep meaning local to a relation. That is precisely your model's move, and it is the oldest formal statement of why the move is necessary.
+
+**Kim Cameron's Laws of Identity (2005), Law 4 "Directed Identity"** — omnidirectional vs unidirectional identifiers. The closest law-level analogue in the whole sweep. But it frames directionality as *a property an identifier has*, not as the identifier *being* a two-party relation object. Close, and short.
+
+**KERI** (Smith, arXiv 1907.02143) — identity as a key-*event* history with pre-rotation and witnessed duplicity detection. Subject-centric log; relational only at the verification layer. **arXiv citation count: 2.**
+
+**Object-capability.** Mark Miller's core claim is that a capability *is* a reference — connectivity, not property. Fuchsia ships real capability routing (*"no global file system"*; each component gets *"its own local namespace"*); Capsicum shipped in FreeBSD mainline; seL4 and KeyKOS/EROS/Coyotos are real systems. **But in no shipped ocap system are the endpoints of a capability edge "a person" and "a device."** They are processes and components. The revocation pattern you would inherit (caretaker/membrane — revoke the *edge*, not the *principal*) is exactly right and entirely untested at human scale. *Miller's* Robust Composition *itself: erights.org unreachable, **NOT REACHED**.*
+
+**Local-first (Kleppmann, Wiggins, van Hardenberg, McGranaghan, 2019)** names the hole your model would fill, verbatim: *"access permissions for documents beyond secret URLs remain an open research question."*
+
+### 4.3 The flagship deployment of the adjacent idea — and it is dead
+
+**Sovrin** deployed pairwise relational identity at scale and **the foundation was formally dissolved on May 21, 2025**. sovrin.org itself banners *"The Sovrin Foundation Has Been Dissolved — but Sovrin MainNet Remains."* MainNet now runs **read-only on a single cloud server operated by Trinsic, with writes permanently disabled** — no new credentials can be issued. A cited IEEE study attributes the collapse to **absence of validator economic incentives**: volunteer stewards stopped paying to run nodes; >$2M debt accumulated. *Confidence: medium-high on the dissolution (two sources, one secondary); medium on the causal narrative.*
+
+**The model was not refuted. Nobody could sustain the infrastructure it required.** That is a different and more dangerous failure than being wrong.
+
+**`did:peer`** — the closest formal analogue to a dyadic identifier — remains **v1.0 Draft** after years. Repo: **32 stars, 19 forks, 469 commits, 28 open issues.** Real engineering, negligible footprint. And note the structural point: **DID Core is subject-centric by design**; pairwise-ness is bolted on by a *method*, not baked into the standard.
+
+### 4.4 The convergent shape four unrelated teams did reach
+
+This is the strongest *positive* result in the sweep. Four independent teams arrived at structurally the same answer — and it is *almost* yours:
+
+**① Ink & Switch, Keyhive (2024–2026)** — the closest live prior art, stating your model nearly verbatim (inkandswitch.com/keyhive/notebook/):
+> *"An individual is identified by a single Ed25519 public key — which is immutable — whilst a group is a collection of other principals."* … they model *"a person (or more specifically their authority) as a group, with each of the persons devices being an individual member of the group."*
+> *"Key rotation can then be handled by adding a new individual to the group and removing the old one."*
+
+Revocation is group-membership CRDT merge; post-compromise security via BeeKEM. **Note the vocabulary: "their authority", not "them".**
+
+**② Apple's iCloud Keychain syncing circle** — genuinely dyad-recognises-dyad, deployed to a billion devices, and never marketed as such. Each device generates its **own** P-384 syncing keypair (not a copied key). A new device joins by **sponsor / applicant / voucher**: an existing device signs a voucher attesting the applicant, adding its public key to the circle. **That is "the remaining relations recognise the new dyad," not "prove you know the master secret."** *Confidence: high, Apple Platform Security Guide.*
+
+**③ SSB Fusion Identities** — *"each device still uses its own identity"* while devices *"share fusion identities with each other."* Multiple device-bound identities federated under a soft aggregate. **Designed, never shipped** before the project lost momentum.
+
+**④ UCAN spec v1.0.0** — states your principle at RECOMMENDED level:
+> *"Private keys themselves SHOULD NOT move from one context to another. Keeping keys unique to each physical device and unique per use case is RECOMMENDED to reduce opportunity for keys to leak, and limit blast radius in the case of compromises."*
+
+Authority travels by delegation chain — sharing authority without sharing keys. *(Fission's fate: fission.codes does not resolve — **circumstantial, not proof**.)*
+
+### 4.5 The two arguments the field would raise against the dyad
+
+Both are inferred from verified material, not quoted from a paper attacking your exact model:
+
+**A. The person-node may be surplus to requirements.** Keyhive, DCGKA (Weidner, Kleppmann, Hugenroth, Beresford, ePrint 2020/1281) and Signal-style multi-device all converged on *"N independent per-device principals reconciled by a group-membership protocol."* DCGKA treats **devices as independent group members**, not as edges bound to a person-node. Keyhive is explicit: an individual *is* a public key; the person *is* the group. **This is not a refutation of your model — it is your model with the person-node deleted as unnecessary.** Whether the person-node earns its place, and what it carries that the group does not, is the sharpest open question this sweep raises.
+
+**B. The right relational unit may be (person, relationship-context), not (person, device).** Pairwise DIDs, petnames and Cameron's Law 4 all converge on the edge being between **two parties in a relationship**, with the device as the plumbing where that edge's key happens to live. On this reading your dyad picks the wrong second endpoint.
+
+---
+
+## §5. Rung 1–2 — local and household: the hardest rung, and the field says why
+
+**This rung is qualitatively unlike its neighbours, and the evidence for that is strong.**
+
+### 5.1 Beyond the IPV material — the ambient-sharing baseline
+
+**Matthews et al., "She'll just grab any device that's closer," CHI 2016** (DOI 10.1145/2858036.2858051; 103 citations; abstract verified via OpenAlex):
+> *"Many technologies assume a single user will use an account or device… device and account sharing was common, and **mobile phones were often shared despite being considered 'personal' devices**."*
+
+Multi-method study, a **taxonomy of six sharing types**, and two cross-cutting drivers: **trust in the sharee** and **convenience** — *not* access-control design. **This directly attacks the dyad's founding premise that a device maps to one person.** Sharing is not an edge case to be handled; it is the default human behaviour your unit of identity must survive.
+
+**Cultural variance is measured, and it is large.** "We, three brothers have always known everything of each other" (2021): **59 participants across Bangladesh, Turkey and the USA** — sharing behaviour varies by culture and social background, so a single global default (share vs. isolate) is **empirically wrong for a large fraction of the world**. "Everyone Has Some Personal Stuff" (2019, Bangladesh, 21 participants, 3-week deployment) built a **dual-account shared-password/secret-password model** precisely because single-device-multi-user is the norm there, not the exception.
+
+**A new identity category the field had to invent.** "I would have to evaluate their objections" (2021, **386-person representative US survey**) names the **incidental user** — someone who did not choose the device but is captured by it. Your ladder currently has operators and users; this is a third role that appears at household scale and has no key, no consent and no exit.
+
+**"Amazon vs. My Brother" (2020)**, 26 participants across 21 households: around shared smart speakers, **housemates — not manufacturers — are the primary perceived privacy threat**, and coping strategies were measured as "suboptimal."
+
+### 5.2 The coercion case, and why it is structurally different
+
+**Freed et al., "A Stalker's Paradise," CHI 2018 (Best Paper), 89 participants** — the sharpest articulation anywhere in this sweep. IPV attacks are typically **technologically unsophisticated**, carried out by a **"UI-bound adversary"**: an authenticated, adversarial user operating through the *normal interface*, not a hacker. The paper states this explicitly *"undermine[s] the predominant threat models under which systems have been designed."*
+
+**At household scale the authorized principal and the adversary are frequently the same authenticated principal.** No amount of credential strength, key hygiene or edge-hardening addresses this. A dyad held under coercion is a valid dyad.
+
+**Matthews et al., IEEE S&P 2017 ("Stories from Survivors")** frames survivor technology use as a **three-phase lifecycle** — physical control → escape → life apart — each needing different support. **Identity-under-coercion is a state machine with a specific escape transition**, and *nothing in this corpus treats "leaving the household" as a solved problem.* Your ② names "a person who leaves the household" as a case; the field has measured it as an unsolved transition, not a membership update.
+
+**Havron et al., USENIX Security 2019** founded **clinical computer security** (medical-intake framing) precisely because standard security posture assumes an external adversary. **This is the strongest single piece of evidence for the household rung being categorically hardest: it is the only rung where the field had to invent a new discipline because ordinary engineering assumptions fail structurally, not merely in degree.**
+
+**Bellini et al., "Paying the Price," CHI 2023 (Best Paper): 158 survivors + 16 financial advocates** — four abuser motivations, exploiting shared financial accounts to monitor, restrict and sabotage.
+
+**Two papers land directly on your mechanism.** **Daffalla et al., "Account Security Interfaces: Important, Unintuitive, and Untrustworthy," USENIX Security 2023 (Distinguished Paper)** measures how *account-recovery UX itself* becomes the abuse vector for a co-resident adversary — i.e. the very "re-establish a dyad" flow your model depends on is the flow the abuse literature flags. **Daffalla et al., USENIX Security 2025** extends this specifically to **passkeys in interpersonal threat models**. *(Titles, venues and awards confirmed live via ipvtechresearch.org; the numeric findings inside both papers are **NOT REACHED**.)*
+
+Also found and worth naming: **Bicakci, Sekmen & Uzunay, "Balancing Security and Usability in Enterprise FIDO Passkey Recovery With Peer Assistance," IEEE Access 2025** (DOI 10.1109/access.2025.3602362) — peer-assisted recovery, structurally the closest published thing to "remaining relations recognise the new dyad." Abstract **NOT REACHED**.
+
+---
+
+## §6. Rungs 3 and 4 — community, region, and the cross-region seam
+
+**Each rung's dominant measured failure is a different category. This is the most important structural finding for your ②.**
+
+### 6.1 Community (~100 people) — failures are legal and political, plus one measured fragility
+
+**Freifunk**: ~400 local communities, ~41,000 access points in Germany, coordinated by the Picopeering Agreement with **no central membership register at all**. The dominant *measured* failure was **German *Störerhaftung*** (network-operator secondary liability), which suppressed open-hotspot deployment for years; the community's own workaround was VPN-tunnelling all traffic through Sweden until ECJ/BGH rulings (2016–2018) narrowed the doctrine. **A legal failure, not an identity failure.**
+
+**NYC Mesh**: >2,000 active member nodes; nonprofit 2019, 501(c)(3) 2020; ran on pure volunteer labour until a **2026 grant of $898,035 to hire its first paid staff**. No explicit burnout data found, but the funding history is itself evidence that ~2,000-node community scale is where volunteer-only governance stops being sustainable without institutionalisation.
+
+**ninux.org (Italy) — "Detecting and Mitigating Points of Failure in Community Networks," IEEE Trans. Computational Social Systems, 2019** (abstract verified): graph analysis of Italy's largest community network found that **despite the community's stated goal of a robust self-organised network, it is "fragile under several aspects."** The "avoid unnecessary management structures" philosophy shared by ninux, Guifi.net, Freifunk and NYC Mesh **reads as robust until formally analysed**. This is the only directly measured technical-fragility result at community scale in the sweep, and it argues community self-organisation can be structurally brittle in ways participants cannot see from inside.
+
+**Decidim**: **311 instances across 20 countries (2022)**; Barcelona's 2017 pilot ~40,000 participants, ~11,000 proposals, ~8,000 accepted; a three-tier visitor/registered/verified identity model. *(The actual census-verification mechanism behind "verified" was **NOT REACHED**.)* Measured failures are political: Lucerne's top-down deployment *"strengthened the digital divide rather than overcoming it"*; Badalona's participation **collapsed when the sponsoring administration lost an election**. **Civic identity infrastructure measured as politically non-durable.**
+
+**Guifi.net**: a real sustained research programme exists — *"guifi.net, a crowdsourced network infrastructure held in common"* (Computer Networks, 2015); *"Cloudy in guifi.net"* (2018); *"On the Sustainability of Community Clouds in guifi.net"* (2016); *"Making Community Networks economically sustainable"* (2016). **Full abstracts NOT REACHED** — citations solid, contents not in hand.
+
+**Sardex** (Sardinian mutual credit, founded 2010): substantial econometrics literature confirmed — *"Cyclic motifs in the Sardex monetary network,"* Nature Human Behaviour 2018; LSE 2016; J. Social Entrepreneurship 2017; *"Liquidity-Saving through Obligation-Clearing and Mutual Credit"* 2020 (documents counter-cyclical SME liquidity during the Eurozone crisis). Membership: annual fee €200–3,000 scaled to company size, unsecured credit line by capacity; the system has sued members to recover debt. **Quantitative outcomes NOT REACHED.**
+
+### 6.2 Region — root compromise, and contested exclusion
+
+**Estonia ROCA (2017)** — the cleanest single-root mass-revocation data point available:
+- ~**750,000** ID and e-residency cards (issued Oct 2014 – Oct 2017) vulnerable to private-key inference from the public key.
+- Certificates suspended **Nov 2–3, 2017**; renewal window through **March 31, 2018**; unrenewed certificates revoked **April 1, 2018** — a **~5-month wall-clock remediation**.
+- Gemalto paid **€2.2M** (Feb 2021) for failing to disclose in time.
+
+**Aadhaar — and here I correct my own earlier reading: the evidence is contested, and I originally gave only one side.**
+- Scale: ~**1.383B** enrolled (Oct 2024), >99.9% of adults. UIDAI's own 2018 figure: **12% biometric authentication error rate**.
+- **Muralidharan, Niehaus & Sukhtankar, "Identity Verification Standards in Welfare Programs" (2020)**: stricter biometric ID requirements in India's largest social protection programme **reduced corruption**, but **1.5–2 million legitimate beneficiaries lost access at some point during the reform**. The authors attribute the adverse effects primarily to **how the transition was managed**, not to biometrics as such.
+- **Muralidharan, Niehaus & Sukhtankar, "Building State Capacity: Evidence from Biometric Smartcards in India," AER 2016**: a randomised rollout across **157 subdistricts, 19 million people** in Andhra Pradesh found payments became faster, more predictable and less corrupt **without adversely affecting programme access**, with beneficiaries overwhelmingly preferring the new system.
+- **The field disagrees with itself, and the disagreement tracks implementation quality and transition management, not the underlying architecture.** For your model this is the sharper reading: **the measured harm at region scale sits in the migration, not the design — which is exactly where "re-establishing a dyad" lives.**
+- Also: the 2015 Andhra Pradesh/Telangana Aadhaar–voter-ID linkage disenfranchised **~3 million voters** before the Supreme Court cancelled it; the Sept 2018 judgment upheld the Act but barred mandatory use for bank accounts, SIMs and school admissions.
+- *Khera / Drèze primary sources and Jharkhand ration-denial numbers: **NOT REACHED**.*
+
+**Nordic BankID / MitID**: Norway BankID ~4.3M users; Finnish Trust Network ~5.5M; MitID ~5.4M — all **bank-rooted or bank/government joint, not purely state-rooted**, confirming your framing that a real "federation of private issuers at region scale" exists. *Swedish BankID elderly-fraud statistics and MitID 2021–22 migration complaints: **NOT REACHED** — these almost certainly exist in Swedish Police / Finansiell ID-Teknik and Danish Consumer Council material outside OpenAlex/HN/Wikipedia coverage. Unresolved, not absent.*
+
+### 6.3 Cross-region — the seam, and where a sovereign root collapsed into two vendors
+
+**The eIDAS Article 45 revolt.** The primary-source open letter (nce.mpi-sp.org, redirected from eidas-open-letter.org) states verbatim: **"As of the 26th November 2023, the letter has been signed by 552 scientists and researchers from 42 countries, as well as numerous NGOs."** Signatories include Bart Preneel, Cas Cremers, Steven Murdoch, Jaap-Henk Hoepman and Peter Schwabe. **This is distinct from the separate, later 38-signatory Mozilla/EFF industry letter** — I originally conflated the two.
+
+Two mechanics matter:
+- **Article 45a(4)**: any member state may designate cryptographic keys that browsers **must trust**, revocable **only with that government's permission** — giving a single state the technical means to intercept EU citizens' encrypted traffic, including citizens *"not resident in or connected to the issuing member state,"* with *"no independent check or balance."*
+- **Article 45(2a)** bans browsers from imposing security checks beyond what is expressly permitted — an **upper bound on security rather than a floor**, inverting the normal direction of security regulation. The EFF's historical anchor is **DigiNotar (2011)**, whose CA compromise was used to surveil Iranian users — the exact failure this makes harder to prevent.
+
+**Cross-region trust without a common root, "solved" by mandating a root — and 552 researchers revolted.**
+
+**The sharpest anti-pattern in the entire sweep.** The **German EUDI wallet** implementation requires **Google Play Integrity** (Android) or **Apple App Attest** (iOS) for its Mobile Device Verification Method. The implementer's own defence: *"We have to use some kind of attestation mechanism per the eIDAS implementing acts."* GrapheneOS users cannot satisfy it; no mandatory fallback existed initially.
+- GitHub issue **"Do not add Google Play Integrity integration"** (`eu-digital-identity-wallet/av-app-android-wallet-ui#10`, opened **2025-07-16**): **3,042 reactions, 179 comments, closed.**
+- The objection is precisely a *dyad* objection: *"If someone lands on a sanctions list, they close your account without further notice"* — **the attesting party is not the region; it is a foreign vendor that can unilaterally sever the dyad.**
+- Developers raised a distinction worth keeping: **smartcards attest identity; attestation attests device integrity.** Different problems, and your model needs both.
+
+**X-Road Estonia–Finland**, connected **Feb 7, 2018** — the one verified real-world "two regions federate without a common root": peer-to-peer, each organisation holds its own signing/auth keypairs, **no central intermediary brokers trust**. **No published operational-friction data exists.** Even with the parallel spirit's second pass, nothing surfaced beyond the architecture description.
+
+**ICAO PKD**: **111 participating entities**, operating as a **central broker** — states upload their own and download others', rather than exchanging bilaterally. That is a *shared directory*, not a common root. **CSCA structure, non-participants, and CRL-distribution gaps: NOT REACHED.**
+
+**The framing correction that matters most:** Estonia and Aadhaar are pure **postmortem** — real incidents, real numbers, real remediation clocks. **Cross-region is high-quality *prediction* and expert consensus of concern (552 signatories), not yet high-quality postmortem.** If cross-region is first-class in your ②, you are building against a warning, not against measured failure.
+
+---
+
+## §7. The kiosk, the borrowed device, and the screenless device
+
+### 7.1 Multi-device reality — the numbers that press hardest on ①
+
+- **Cisco AIR**: global networked devices per capita **2.4 (2018) → 3.6 (2023)**. 2023 regional: North America **13.4**, W. Europe 9.4, CEE 4.0, Asia-Pacific 3.1, LatAm 3.1, MEA **1.5**.
+- **The distribution matters far more than the mean. Pew Research, US smartphone-only (no home broadband) by household income:**
+
+| Income | 2013 | 2015 | 2018 | 2021 | **2025** |
+|---|---|---|---|---|---|
+| <$30k | 12% | 20% | 31% | 27% | **34%** |
+| $30–70k | 9% | 15% | 22% | 19% | 19% |
+| $70–100k | 5% | 10% | 14% | 6% | 10% |
+| $100k+ | 5% | 6% | 9% | 6% | **4%** |
+
+**Over a third of low-income US households in 2025 hold one device, and that bracket is getting worse (27%→34%) while the top bracket trends toward more redundancy (→4%). The gap is widening.** A per-device credential model degrades precisely for the population least able to absorb a lost second edge. *Confidence: high.*
+
+- **ITU 2024**: 5.5B online (68%), 2.6B offline. Mobile ownership age 10+: high-income countries **95%+**, low-income countries **56%** — **~44% of people in low-income countries own no phone at all.** The floor beneath "one device" is "zero devices, borrowed access." Urban 83% vs rural 48% online; 5G coverage 84% vs **4%**.
+- **GSMA 2016**: of 750M+ farmers across 69 countries, ~295M had a phone; only **13M had both a phone and a mobile-money account.**
+- **London phone theft** (Met data via ONS): **91,481 (2019) → 117,211 (2024)**, ~28% rise, **~321 phones per day**. One 2025 case traced a gang shipping **40,000 snatched phones to China**.
+- *Smartphone replacement-cycle data (Counterpoint/CIRP/Kantar) **NOT REACHED**. Note Wikipedia's uncited "11–18 months" contradicts the industry 3–4-year narrative; I take no side.*
+- *Google/Microsoft lockout-after-device-loss rates: **NOT REACHED**.*
+
+### 7.2 Kiosk, shared and borrowed
+
+**RFC 8628 (OAuth Device Authorization Grant) names phishing as a foreseeable risk in §5.4 of the spec itself** — and it was exploited exactly as written.
+
+**Measured exploitation — Storm-2372** (Microsoft Security Blog; active Aug 2024, reported **Feb 13 2025**, escalated **Feb 14 2025**): Russia-aligned actor impersonates a known contact on WhatsApp/Signal/Teams, sends a fake meeting invite carrying an **attacker-generated device code**; the victim enters it **on the legitimate Microsoft login page** and hands over a valid token. The actor then abuses Microsoft's own Authentication Broker client ID to **register rogue devices into Entra ID and mint Primary Refresh Tokens.** No victim count disclosed.
+
+**Read that last clause against your model: a rogue device enrolling itself as a legitimate dyad is the deployed, in-the-wild attack on exactly this shape.** The cross-device flow that makes borrowed-screen login possible is the same flow that lets an attacker inject an edge.
+
+**FIDO CTAP2 hybrid transport (caBLE)** is the deployed answer to "authenticate on a device you don't trust using one you do" — QR + BLE proximity, which is structurally a dyad-mediated act. *Technical detail and adoption figures: **NOT REACHED**.*
+
+*ChromeOS/Windows kiosk identity, Apple Shared iPad, and library/internet-café usable-security research: **NOT REACHED**. This sub-question is genuinely thin.*
+
+### 7.3 The screenless device — the thinnest section in this report
+
+**I must be explicit: this is the weakest-covered question in the brief.** What we established:
+
+- **SSH host keys and TOFU** remain the oldest deployed answer, and the documented failure is **warning fatigue** — administrators habituate past the mismatch prompt, and it does not scale across many endpoints. TOFU makes the *first* dyad-formation moment unverified by construction.
+- The deployed pattern family is: BLE provisioning, SoftAP, QR-on-a-sticker, NFC tap, claim-code printed on the box — i.e. **the dyad is formed by a second device acting as the screen**, with a physical secret bridging them.
+- **Matter commissioning** (11-digit setup code + Device Attestation Certificate, DAC/PAA PKI) is the current standard. **Commissioning failure rates, the DAC/PAA hierarchy detail, and the "who owns this device now" resale/transfer and factory-reset semantics: NOT REACHED.**
+- **FIDO Device Onboard (FDO)** is the actual standard for exactly this problem. **Adoption status NOT REACHED** — I suspect it is very low, but that is *unverified and must not be treated as established.*
+
+**Negative finding, stated plainly:** we found **no literature at all** on how a *person↔device* relation forms when the device has no interface. Every deployed answer forms a *device↔account* or *device↔hub* relation and lets the human's presence be implied by physical proximity to a printed code. **If the dyad is the unit, the screenless device is where the model has the least prior art to stand on.**
+
+---
+
+## §8. THE ANTI-PATTERN — where a keyless-human design quietly grew a key
+
+**This is the finding you said you most wanted, and it is the strongest one here. State it as a law:**
+
+> **Every deployed system that markets "no single key" grew exactly one human-held secret — protected by rate-limiting rather than by entropy — and none of them publish how often it survives.**
+
+Ranked by how quietly it happened:
+
+**1. Synced passkeys → the platform account.** The human's Apple/Google/Microsoft account password *and its recovery path* silently becomes the root of every credential. William Brown (fy.blackhats.net.au, Apr 2024, "Passkeys: A shattered dream"): *"Passkeys are now seen as a way to capture users and audiences into a platform"*; credentials *"can't be extracted or exported in any capacity."* His Dec 2025 follow-up cites **Dr. Paris Buttfield-Addison's case, where an account suspension destroyed all stored passkeys irreversibly** — **a vendor's moderation decision is a total identity-loss event.**
+
+**2. A sovereign region's root → two foreign vendors.** The German EUDI wallet (§6.3). 3,042 reactions. The state cannot attest its own citizens' devices.
+
+**3. Signal → the PIN.** A design that removed the key grew a four-digit one, hardened by **SGX plus a Raft-enforced 5-guess limit** rather than by entropy (signal.org/blog/secure-value-recovery, Dec 19 2019; signal.org/blog/signal-pins, May 19 2020: *"your PIN isn't recoverable if you forget it."*). Matthew Green (July 10, 2020) names the dark pattern and his own capitulation to it: *"to make it go away, I chose the simplest PIN that the app would allow me to, which was 9512."* His structural attack: extract one SGX attestation key, compromise one Signal administrator, and *"force Signal to replicate their database onto a simulated SGX enclave"* — *"a backdoor for any entity who is able to compromise the Signal developers."*
+
+**4. Matrix → the 48-character recovery key.** "Identity as a set of mutually-signing devices" ships with a single string whose loss means resetting your digital identity in public.
+
+**5. Apple → the iCloud Security Code.** HSM escrow, and *"upon reaching the 10th failure, the HSM cluster destroys the escrow record and the keychain is lost forever."*
+
+**6. Encryption riding on an authentication credential.** Tim Cappalli, Feb 2026 (blog.timcappalli.me/p/passkeys-prf-warning/): *"When you overload a credential used for authentication by also using it for encryption, the 'blast radius' for losing that credential becomes immeasurably larger."* His "Erika" case: a user deletes a passkey unaware it was the encryption root; the photos are gone. *"We cannot, and should not, expect users to know this."* Credential-manager delete dialogs carry **no warning at all**. **Directly load-bearing for you: if an edge both authenticates and decrypts, cutting the edge destroys the memory.**
+
+**7. The phone number as ambient root.** SIM-swap remains the most-documented total-loss vector at consumer scale (T-Mobile employee-bribery reporting Apr 2024; Jack Dorsey Sept 2019; Vitalik Buterin Sept 2023). A design can hold no key and still be owned by whoever holds the number.
+
+**8. The keyless designs that refused a last artifact pay openly.** SSB and Nostr have no hidden root — and their price is identity discontinuity as a real, routine, non-hypothetical cost. **The trilemma appears to be: hold a last artifact, hold a vendor, or accept discontinuity.** No deployed system has found a fourth option.
+
+### 8.1 The counter-move now shipping — social recovery, deployed
+
+Worth flagging because it is *exactly* "re-establish a dyad and have the remaining relations recognise it," now live at Google scale:
+
+- **Google Recovery Contacts** (Oct 16, 2025): up to **10 trusted contacts** per account; a locked-out user shares a numeric code; the contact number-matches it against three options; **15-minute expiry**; each person may serve as recovery contact for up to **25 accounts**; unavailable for Workspace and child accounts; Advanced Protection members may help others but not set their own. Google still layers device/location/IP heuristics on top and may still hold the account. Named risk: social-engineering the contact — **which is precisely the §5.2 UI-bound-adversary problem arriving at recovery time.**
+- **Vitalik Buterin, "Why we need wide adoption of social recovery wallets"** (Jan 11, 2021): one signing key plus **3+ guardians**, a majority of whom can rotate it; *"for a wallet with 7 guardians to be compromised, 4 of the 7 guardians would need to somehow discover each other and agree to steal the funds"*; guardians **need not be publicly known or know each other**. He does **not** substantially analyse guardian *unavailability* — the failure mode most likely to bite at household scale.
+- **Apple's sponsor/applicant/voucher circle** (§4.4) is the same primitive, shipped a decade earlier and never named as social recovery.
+
+---
+
+## §9. What reshapes the SHAPE of the model, rather than answering a question inside it
+
+**A. The person-node may be surplus.** Keyhive, DCGKA and Signal-style multi-device all reached "N per-device principals reconciled by group membership." Keyhive states it outright: an individual *is* a key; the person *is* the group. Your dyad asserts an edge; the field's convergent answer asserts a **set with no centre**. What the person-node carries that the group does not is the sharpest open question here.
+
+**B. A device is not reliably one person's.** CHI 2016 measured phones shared *despite being considered "personal."* Pew measured a third of low-income US households on one device. ITU measured 44% of low-income-country adults owning none. Cross-cultural work measured the single-device-multi-user household as the *norm* in South Asia. **The dyad presumes a partition the world does not honour, and presumes it hardest where the stakes are highest.**
+
+**C. The rungs are four different problems, not one problem at four magnifications.** Household fails **relationally** (adversary inside the trust boundary; a new discipline had to be invented). Community fails **legally and politically** (*Störerhaftung*; Badalona's election; NYC Mesh needing to professionalise), plus one measured **technical fragility** (ninux.org) invisible from inside. Region fails at the **root** (750,000 Estonian cards, ~5-month clock) and by **contested statistical exclusion** (Aadhaar, 12%, 1.5–2M — disputed by a 19M-person RCT). Cross-region fails at **whose root** (Article 45; Play Integrity). **A design treating these as one problem will be surprised three times.**
+
+**D. Cross-region is prediction, not postmortem.** X-Road's operational friction is undocumented; EUDI pilot results unreachable; the 552-signatory letter is expert consensus of concern, not a measured incident. If cross-region is first-class for you, **you are building against a warning.**
+
+**E. "Losing a device is losing one edge" holds for *authority* and fails for *memory*.** Keybase: paper-key provisioning cannot transfer chat history. Matrix: identity reset leaves prior messages permanently undecryptable. Cappalli: an auth credential doing double duty as an encryption root turns edge-loss into data-loss. **The claim survives for standing; it does not automatically survive for what the standing was holding.**
+
+**F. The economic failure killed the closest deployment, and it was not cryptographic.** Sovrin dissolved May 21, 2025, >$2M debt, volunteer stewards who stopped paying. **Who runs the infrastructure that lets remaining relations recognise a new dyad, and why do they keep paying?** — that question, not cryptography, ended the flagship.
+
+**G. Attestation is the seam where sovereignty leaks.** A dyad is only as sovereign as whatever vouches that the device is a device. Play Integrity / App Attest is the field's only deployed answer, and it hands that vouching to two foreign corporations with unilateral revocation — **exactly the property the model exists to eliminate.**
+
+**H. Recovery UX is itself the abuse surface.** Daffalla 2023/2025 measure the account-recovery interface as the vector. Google's Recovery Contacts names social-engineering the contact as its own risk. **Your ①'s answer to loss — "re-establish a dyad and have relations recognise it" — is, at household scale, the same mechanism an abuser uses.** This is the tightest coupling between your two design commitments and the literature's hardest finding.
+
+---
+
+## §10. Confidence ledger and full negative-results list
+
+### Highest confidence (primary source, verified live)
+W3C WebAuthn issue #1658 / PR #1957 and the reviewer objection · Microsoft Entra device-bound vs synced gating · NCC Group Keybase audit scope and findings · Keybase reset semantics and `oconnor663`'s history-transfer statement · keybase.io still live, keybase.pub dead 2023-03-01 · Element's recovery-key help text · 322 Matrix UTD issues via `gh` · Ink & Switch Keyhive quotations · UCAN v1.0.0 key-mobility language · Apple sponsor/applicant/voucher and the 10-attempt HSM destruction · eIDAS letter: **552 signatories, 42 countries, 26 Nov 2023** · EUDI GitHub issue #10: 3,042 reactions, 179 comments · Estonia ROCA dates, 750,000 cards, €2.2M · Pew smartphone-only table · ITU 2024 figures · RFC 8628 §5.4 · Storm-2372 dates and mechanism · PubMed zero-result term checks · Matthews CHI 2016 abstract · Freed CHI 2018 (89 participants) · Bellini CHI 2023 (158+16).
+
+### Medium confidence
+Sovrin dissolution date and read-only MainNet (two sources, one secondary) · Sovrin's economic causal narrative · Nostr and AT Protocol total-loss behaviour (shape verified, incident history not) · Cisco AIR per-capita figures · London phone-theft figures · Freifunk and NYC Mesh figures via Wikipedia · Decidim Barcelona participation numbers.
+
+### Low confidence — do not lean on these
+The Keybase Bitcoin→Stellar Merkle-root migration (one HN comment) · "~10% of Matrix users see a daily UTD" (one HN comment, not telemetry) · FDO's low adoption (suspected, **unverified**) · Fission's fate (DNS non-resolution is circumstantial, not proof) · the Wikipedia 11–18 month replacement cycle (uncited, contradicts industry figures).
+
+### Verified negative results — absences, not search failures
+- **No published figure anywhere for Keybase paper-key retention.**
+- **No published Matrix device-verification completion rate; zero academic papers on Matrix cross-signing UX in OpenAlex or Crossref.**
+- **No vendor publishes end-to-end recovery-success telemetry for any system in this report.**
+- **No measured operational-friction data for the X-Road two-region federation** — the one clean no-common-root federation, and the literature is silent, confirmed across two independent passes.
+- **PubMed: zero results for "human-device dyad" and "person-device dyad."**
+- **No literature on person↔device relation formation for screenless devices** (§7.3).
+- **Nobody has deployed identity-as-a-person-device-dyad at community scale — or at any scale.** The nearest system to deploy the adjacent idea (Sovrin, pairwise relational identity) is dissolved and read-only as of May 2025.
+
+### NOT REACHED — plausible-to-exist, unverified, closable with a working search engine
+GSMA Mobile Gender Gap phone-*sharing* rates · Deloitte per-household device counts · smartphone replacement-cycle data · Google's 2019 account-hygiene percentages · Google/Microsoft device-loss lockout rates · numeric findings inside the Cornell CETA, Daffalla 2023/2025 and Bicakci 2025 papers · Khera/Drèze primary sources and Jharkhand numbers · Guifi.net "Compact for a Free, Open and Neutral Network" text and critiques · Sardex quantitative outcomes · Decidim's census-verification mechanism · Swedish BankID elderly-fraud statistics · MitID 2021–22 migration complaints · EUDI Large-Scale Pilot findings (POTENTIAL/NOBID/DC4EU/EWC — project sites 404/DNS-failed) · Pan-Canadian Trust Framework · ICAO PKD CSCA structure and gaps · Matter commissioning failure rates and DAC/PAA hierarchy · FIDO Device Onboard adoption · caBLE technical detail and deployment · Apple Shared iPad mechanism · ChromeOS/Windows kiosk identity · Mark Miller's *Robust Composition* (erights.org unreachable) · Phil Windley's "relationships not identities" · Daniel Hardman's peer-DID writing · did:webs · Bluesky migration docs and did:plc incident history · SSB's decline timeline and stated reasons · Nostr nsec-leak incident data · Signal PNI primary source · ACM DL and IEEE Xplore full text throughout.
+
+---
+
+**Sources:** [book.keybase.io/account](https://book.keybase.io/account) · [NCC Group Keybase audit (PDF)](https://keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf) · [keybase.io/blog/keybase-new-key-model](https://keybase.io/blog/keybase-new-key-model) · [keybase/client#21111](https://github.com/keybase/client/issues/21111) · [element.io/help](https://element.io/help) · [Unable to Decrypt a Message on Matrix](https://blog.neko.dev/posts/unable-to-decrypt-matrix.html) · [Giving Up on Element and Matrix.org](https://xn--gckvb8fzb.com/giving-up-on-element-and-matrixorg/) · [signal.org/blog/signal-pins](https://signal.org/blog/signal-pins/) · [signal.org/blog/secure-value-recovery](https://signal.org/blog/secure-value-recovery/) · [Matthew Green on Signal SVR](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Passkeys: A shattered dream](https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/) · [Yep, Passkeys Still Have Problems](https://fy.blackhats.net.au/blog/2025-12-17-yep-passkeys-still-have-problems/) · [Stop using passkeys for encrypting user data](https://blog.timcappalli.me/p/passkeys-prf-warning/) · [w3c/webauthn#1658](https://github.com/w3c/webauthn/issues/1658) · [Ink & Switch — Keyhive notebook](https://www.inkandswitch.com/keyhive/notebook/) · [Ink & Switch — Local-first software](https://www.inkandswitch.com/essay/local-first/) · [Stiegler — An Introduction to Petname Systems](http://www.skyhunter.com/marcs/petnames/IntroPetNames.html) · [Spritely — Petnames](https://files.spritely.institute/papers/petnames.html) · [did:peer method spec](https://identity.foundation/peer-did-method-spec/) · [KERI, arXiv 1907.02143](https://arxiv.org/abs/1907.02143) · [DCGKA, ePrint 2020/1281](https://eprint.iacr.org/2020/1281) · [Matthews et al., CHI 2016](https://doi.org/10.1145/2858036.2858051) · [Freed et al., A Stalker's Paradise, CHI 2018](https://doi.org/10.1145/3173574.3174241) · [Bellini et al., Paying the Price, CHI 2023](https://doi.org/10.1145/3544548.3581101) · [ipvtechresearch.org](https://www.ipvtechresearch.org/) · [Muralidharan et al., AER 2016](https://doi.org/10.1257/aer.20141335) · [ninux.org fragility, IEEE TCSS 2019](https://doi.org/10.1109/TCSS.2019.2891985) · [eIDAS open letter (primary PDF)](https://nce.mpi-sp.org/) · [last-chance-for-eidas.org](https://last-chance-for-eidas.org/) · [EFF — Article 45 will roll back web security by 12 years](https://www.eff.org/deeplinks/2023/11/article-45-will-roll-back-web-security-12-years) · [EUDI wallet — "Do not add Google Play Integrity integration"](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui/issues/10) · [HN — German eIDAS requires an Apple/Google account](https://news.ycombinator.com/item?id=47644406) · [Vitalik — social recovery wallets](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [The Register — Google Recovery Contacts](https://www.theregister.com/2025/10/16/google_gmail_trusted_contacts/) · [UCAN spec](https://github.com/ucan-wg/spec) · [SSB protocol guide](https://ssbc.github.io/scuttlebutt-protocol-guide/) · [did:plc directory](https://web.plc.directory/) · [Pew — Mobile Fact Sheet](https://www.pewresearch.org/internet/fact-sheet/mobile/) · [ITU Facts and Figures 2024](https://www.itu.int/) · [Cisco Annual Internet Report](https://www.cisco.com/) · [RFC 8628](https://datatracker.ietf.org/doc/html/rfc8628) · [Microsoft — Storm-2372](https://www.microsoft.com/en-us/security/blog/) · [Microsoft Entra passkey docs](https://learn.microsoft.com/) · [Apple Platform Security Guide](https://support.apple.com/guide/security/) · [sovrin.org](https://sovrin.org/) · [ICAO PKD](https://www.icao.int/Security/FAL/PKD/Pages/default.aspx)
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 40,566 characters
+
+````
+All five research spirits are back. Report follows.
+
+---
+
+# OUTSIDE NEGENTROPY: the keyless-human, dyad-edge identity model against the field
+
+## 0. Method, and the limit on this report's reach
+
+`WebSearch` was **unavailable for this entire session** — the 200-call budget was spent before I was invoked, and every call failed. All six of us (myself + five parallel research spirits) worked through: direct `WebFetch` on guessed/known URLs, the Hacker News Algolia API, the GitHub search API via `gh`, OpenAlex, Crossref, PubMed, and the Wikipedia API. Google/Bing/DuckDuckGo/Mojeek/Startpage/searx are all captcha-walled or return junk. **Reddit is unreachable at the tool level** — likely the richest source of individual "I lost everything" narratives, entirely absent here.
+
+Consequence: coverage is **excellent** where primary-source URLs are guessable (specs, vendor docs, GitHub, HN) and **thin** where discovery was needed (GSMA reports, ACM DL full text, Guifi.net governance, Swedish BankID fraud stats, EUDI pilot findings). I mark unreached items as **NOT REACHED** rather than filling them from memory. §11 lists them.
+
+---
+
+## 1. Who else has said "the human holds no key" — and what they measured
+
+### 1.1 The purest deployed instance, and the industry's retreat from it
+
+**Original FIDO2/WebAuthn (2018)** is the closest thing to ① at planetary scale: a non-exportable credential per authenticator per relying party. No portable identity object exists. Losing the device loses that relationship, by design. *Confidence: high.*
+
+The industry then **walked away from it**. The Apple/Google/Microsoft joint announcement (May 2022, fidoalliance.org) introduced synced passkeys purely as a usability fix — and **never mentions the security tradeoff at all**. That silence is itself a finding: the field's flagship communication never named the thing your model is built around.
+
+The clearest institutional admission that the tradeoff is real comes from **Microsoft's own current Entra documentation** (learn.microsoft.com), which gates the two models apart:
+- *"Device-bound passkeys: The private key is created and stored on a single physical device and never leaves it."*
+- *"Synced passkeys... do not support attestation."* — **"If attestation is enabled, only device-bound passkeys are allowed; synced passkeys are excluded."**
+- Recommendation: device-bound for regulated industries and privileged users; synced for everyone else.
+
+**Measured, and it cuts against the dyad on UX grounds** — Microsoft's published synced-passkey numbers across "hundreds of millions" of accounts: **99% successful registration; 3s vs 69s sign-in (14× faster than password+MFA); 95% vs 30% sign-in success rate** vs legacy auth. *Confidence: high that these are Microsoft's own published figures; methodology unverified.*
+
+### 1.2 The device-binding patch that the spec's own reviewers said cannot work
+
+This is the sharpest technical finding in the whole sweep. Traced through `gh api repos/w3c/webauthn`:
+
+- **Adam Langley (Google) opened issue #1658, Aug 2021**, proposing `devicePubKey` explicitly "to potentially address some of the challenges of introducing syncable credentials." Mechanism: when a synced credential first appears on a new device, the authenticator also mints a local non-exportable device-bound key and attests it, so an RP can detect novelty.
+- It survived PRs #1663, #1695, #1753, #1787, #1807, #1812, #1817, then in **PR #1957 (Sept 2023) was renamed `devicePubKey` → `supplementalPubKeys`**. It was **not abandoned** — it was generalized.
+- A reviewer's live objection, verbatim: *"I can't really see what's the benefit of the new device key. It is authorized on first use by a signature chain from an already-registered, synced key... So if the desire is to only rely on device-bound keys, it seems like that promise is already broken by the time the new device-bound key is registered."*
+
+**A copied key cannot be patched back into a device-bound one after the fact.** The W3C's own reviewers said so, in the spec repo, in public. This is direct field support for the load-bearing claim in ①. *Confidence: high, primary source.*
+
+### 1.3 Per-system answers to "does the human hold anything / what happens on total device loss"
+
+| System | Human holds | Total device loss |
+|---|---|---|
+| **FIDO2 device-bound** | nothing | RP-defined; universally an out-of-band fallback |
+| **Synced passkeys** | the platform account password + its recovery | cloud account is the real root |
+| **Keybase** | a paper key (optional) | account *reset* — new sigchain lineage, history gone |
+| **Matrix/Element** | a 48-char recovery key or passphrase | "reset your digital identity"; prior messages undecryptable |
+| **Signal** | a PIN (SVR) | PIN loss is unrecoverable; history restore is still a *future* feature as of Aug 2026 |
+| **SSB** | a per-device keypair | *"generate a new identity and tell people to use their new one instead"* — no recovery, by design |
+| **Nostr** | one `nsec`, forever | unrecoverable; no rotation, no revocation |
+| **AT Proto / Bluesky** | almost always **nothing** — the PDS holds the keys | PDS-mediated; did:plc rotation keys |
+| **iCloud Keychain** | the iCloud Security Code | HSM escrow, **10 attempts then destroyed forever** |
+
+---
+
+## 2. THE CONVERGENT SHAPE: four unrelated teams built "person = a group of device keys"
+
+This is the strongest positive result. Four independent teams arrived at structurally the same answer:
+
+**① Ink & Switch, Keyhive (2024–2026)** — the closest live prior art, and it states your model almost verbatim (inkandswitch.com/keyhive/notebook/):
+> *"An individual is identified by a single Ed25519 public key — which is immutable — whilst a group is a collection of other principals."* … they model *"a person (or more specifically their authority) as a group, with each of the persons devices being an individual member of the group."*
+> *"Key rotation can then be handled by adding a new individual to the group and removing the old one."*
+
+Revocation is group-membership CRDT merge; post-compromise security via BeeKEM. **Note the vocabulary: "their authority", not "them".** *Confidence: high.*
+
+**② Apple iCloud Keychain's syncing circle** — genuinely dyad-recognizes-dyad, deployed to a billion devices. Each device generates its **own** P-384 syncing keypair (not a copied key). A new device joins via **sponsor / applicant / voucher**: an existing device signs a voucher attesting the applicant, adding its public key to the circle. That is "the remaining relations recognize the new dyad," not "prove you know the master secret." *Confidence: high, Apple Platform Security Guide.*
+
+**③ SSB "Fusion Identities"** — *"each device still uses its own identity"* but devices *"share fusion identities with each other."* Multiple device-bound identities federated under a soft aggregate. **Never shipped before the project lost momentum.**
+
+**④ UCAN spec v1.0.0** — states the principle at SHOULD/RECOMMENDED level:
+> *"Private keys themselves SHOULD NOT move from one context to another. Keeping keys unique to each physical device and unique per use case is RECOMMENDED to reduce opportunity for keys to leak, and limit blast radius in the case of compromises."*
+
+Authority travels by delegation chain — "sharing authority without sharing keys."
+
+Four unrelated teams converging is evidence the shape is real, not idiosyncratic.
+
+---
+
+## 3. THE LAW OF THE LAST ARTIFACT — the most important finding in this sweep
+
+**Every deployed system that markets "no single key" grew exactly one human-held secret, and none of them publish how often it survives.**
+
+- **Keybase** → paper key. If lost: *account reset*. The NCC audit (p.6) describes the cost precisely: reset creates *"a new subchain… where any prior statements are ignored and a new 'eldest' signing key is declared."* Device list, followers, and third-party proofs all severed.
+- **Matrix/Element** → 48-character recovery key. Element's own live help page: *"What happens if I've lost my recovery key? You will need to reset your digital identity, thus your previous messages can not be decrypted and other users will see that you have reset your digital identity."*
+- **Signal** → the PIN. signal.org/blog/signal-pins/ (May 19, 2020): *"your PIN isn't recoverable if you forget it."* SVR (Dec 19, 2019) hardens a low-entropy human secret with **SGX + Raft-enforced guess limits (5 guesses)** rather than with entropy. Matthew Green's July 10, 2020 critique names the dark pattern and his own response to it: *"to make it go away, I chose the simplest PIN that the app would allow me to, which was 9512."*
+- **Apple** → iCloud Security Code, HSM cluster, *"upon reaching the 10th failure, the HSM cluster destroys the escrow record and the keychain is lost forever."*
+- **SSB / Nostr** → no last artifact, and they pay the alternative price openly: identity discontinuity as a real, non-hypothetical cost.
+
+**Three convergent structures, all the same shape:** the marketing says no single key; the practice holds one human-custodied artifact, protected by *rate-limiting rather than by entropy*; and if that artifact is also lost, the system does not recover identity — it lets the user **re-mint a fresh root** and asks the social graph to re-verify out of band.
+
+**Nobody publishes retention or recovery-success telemetry.** We searched Keybase's docs, blog, the NCC audit, Element/Matrix.org, HN, GitHub, OpenAlex and Crossref. *No published figure exists* for what fraction of Keybase users kept a paper key, or what fraction of Matrix users complete device verification. This is an **industry-wide measurement gap**, not a search failure. *Confidence: high on the absence.*
+
+---
+
+## 4. Keybase, measured (the closest large deployment)
+
+- **Model, confirmed:** per-device NaCl keys; a new device is provisioned by an existing device signing a statement about the new key, countersigned. All actions append signed chain links to a public **sigchain**. Merkle root periodically written to a public blockchain to defeat server rollback (originally Bitcoin; one 2026 HN comment claims migration to Stellar — *single-source, low confidence*).
+- **NCC Group audit** (keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf): Sept 10–28 2018, retested Feb 2019, protocol v2.7.0, 9 person-weeks, 3 consultants. **0 Critical, 1 High, 3 Medium, 1 Low.** Key structural critique: a malicious server *can truncate* a sigchain and present the truncation as true state — caught only by out-of-band social verification or continuous client monitoring, and NCC flags *"it is unclear who has responsibility"* for third-party auditing of the public record. **Only one public audit appears to exist.**
+- **Admitted gap:** Keybase dev `oconnor663` on HN — *"there's no way for adding a new device from a paper key to transfer chat history."* The paper key restores **authority, not memory**. This maps exactly onto your model's claim: an edge is re-established; the content that rode the old edges is not.
+- **The one moment that matters is racy:** HN user BjoernKW (2017-05-12) reported the paper-key confirmation flow silently advanced past the confirmation screen while he switched to a password manager to save it.
+- **Reset friction is deliberate and expensive:** `oconnor663` explains resets are made consequential because *"adversaries in the middle can pretend to be me and act like I've reset my account."* HN user atdrummond (2022-12-26): **locked out 5 days** after initiating a reset.
+- **Support load is visible in the issue tracker, unresolved across a decade:** "I lost my paper keys 'WAYNE phone', 'cave cruise' and 'want female'" (keybase/client#21111, filed 2019-11-19, **still open**); "Lost Credentials Loop" (#11304, 2018); "Error Code 218 – Prompt attempts exhausted" (#10389, 2018); "Cannot chat after reset" (#26237, 2024); "I am not receiving account reset information" (#28338, 2025-04-05).
+- **Correction to a common assumption:** keybase.io has **not** been shut down. Fetched in 2026, the homepage is still present-tense, no shutdown banner, Tor onion still advertised. The accurate characterization is **indefinite maintenance-mode stagnation since the May 7, 2020 Zoom acquisition** — backend never open-sourced, encrypted Git quietly gone, keybase.pub shut down **March 1, 2023**, and Chia Network still running 20,000+ member chat on it as of 2022.
+
+---
+
+## 5. Matrix cross-signing, measured
+
+- Three key tiers (master / self-signing / user-signing), secrets protected by **SSSS**, unlockable by a 48-char recovery key **or** a human passphrase. *So yes: Matrix reintroduces a human-held secret, explicitly and by necessity.*
+- **"Unable to decrypt" is chronic and current.** `gh api search/issues` for `"unable to decrypt"` across `element-hq/element-web`, `element-hq/element-android`, `matrix-org/matrix-rust-sdk` returns **322 matching issues/PRs**, 283 in element-web alone, spanning 2016 → 2026 — including "Unable to decrypt all message history after verifying session with recovery key" (**Aug 26, 2026, open**).
+- One HN commenter (Nov 2025) claimed *~10% of users saw at least one UTD message daily*. **Single forum estimate, not telemetry — low-medium confidence.** In the same thread Matrix lead Arathorn acknowledged *"a huge amount of work fixing E2EE issues"* and said that on matrix-rust-sdk-crypto UTD bugs *"should be unheard of."*
+- **Why the Rust rewrite happened:** to collapse four parallel E2EE implementations into one core, specifically to stop fixing the same bug class four times. libolm's timing-attack exposure was secondary. Most of 2023 was spent on E2EE bugfixing; the fixes shipped Sept–Oct 2024.
+- **Nine enumerated causes of UTD** (blog.neko.dev): no backup restore; all devices logged out; sender signed out; verified-only key sharing; one-time-key exhaustion; Olm ratchet desync; device-list desync; federation latency; device identity key reuse. Note how many are *relational* failures — the edge exists but the recognition didn't propagate.
+- The persistent verification failure, from a 2025 "Giving up on Element and Matrix.org" post: *"device cross-verification is another thing that has been haunting Matrix/Element users for years… verifications would either not start at all or simply break in the middle of the process."*
+- **NEGATIVE RESULT:** no published verification-completion rate exists anywhere. OpenAlex and Crossref return **no academic papers** studying Matrix cross-signing UX. Genuinely under-studied.
+
+---
+
+## 6. THE DYAD ITSELF — the load-bearing negative result
+
+**Nobody has built or deployed "identity as a signed dyadic edge between a person and a device" as a named, general-purpose primitive.**
+
+The *shape* of the idea has decades of prior art, but every instance frames the edge as **person↔person** or **process↔process**, never **person↔device**. The device is the substrate carrying the key, not a party to the relation.
+
+- **Petname systems** (Stiegler 2005, skyhunter.com/marcs/petnames/IntroPetNames.html) are the deepest theoretical support: keys (global, secure, unmemorable) / nicknames (global, memorable, insecure) / **petnames** (secure, memorable, **private** — "for a particular person, for a particular application, there is a one-to-one mapping between a key and a petname"). A name is not a property of the named thing; it is a fact about a relation. The 2024 **Spritely** revival (Lemmer-Webber, Miller, Larson, Sills, Yaacoby, files.spritely.institute/papers/petnames.html) adds **edge names** — paths through trusted intermediaries, `Alyssa⇒Ben Bitdiddle`. Conceptual; no shipped implementation found.
+- **Zooko's Triangle** — the petname answer doesn't square it, it *refuses* it: give up global human-meaningful names, keep meaning local to a relation. That is exactly your model's move.
+- **Kim Cameron's Law 4, "Directed Identity"** (2005) — omnidirectional vs unidirectional identifiers. Closest law-level analogue, but frames directionality as a *property an identifier has*, not as the identifier *being* a two-party relation object.
+- **did:peer** (identity.foundation/peer-did-method-spec) — still **v1.0 Draft** after years. Repo: **32 stars, 19 forks, 469 commits, 28 open issues.** Real engineering, tiny footprint. **DID Core itself is subject-centric by design** — pairwise-ness is bolted on by a *method*, not baked into the standard.
+- **Sovrin — the flagship deployment of pairwise relational identity, and it died.** The **Sovrin Foundation was formally dissolved May 21, 2025**; sovrin.org itself banners *"The Sovrin Foundation Has Been Dissolved — but Sovrin MainNet Remains."* MainNet now runs **read-only on a single cloud server operated by Trinsic, writes permanently disabled** — no new credentials can be issued. Cause per a cited IEEE study: **absence of validator economic incentives**; volunteer stewards stopped paying to run nodes; >$2M accumulated debt. *Medium-high confidence on the dissolution (two sources, one secondary); medium on the causal narrative.* **The model was not refuted — nobody could sustain the infrastructure it needed.**
+- **KERI** (Smith, arXiv 1907.02143): identity as a *key-event history* with pre-rotation and witnessed duplicity detection — subject-centric log, relational only at the verification layer. **arXiv citation count: 2.**
+- **Object-capability**: Fuchsia ships real capability routing ("no global file system"; each component gets "its own local namespace") — but at the **process/component** level. Capsicum shipped in FreeBSD mainline. **In no shipped ocap system are the endpoints of a capability edge "a person" and "a device."**
+- **Local-first (Kleppmann et al. 2019)** names the gap where your dyad would live, verbatim: *"access permissions for documents beyond secret URLs remain an open research question."*
+- **Literal term search, live queries:** PubMed for `"human-device dyad"` → **zero results**. `"person-device dyad"` → **zero results**. The brief's assumption that HCI/health-sensing has taken the term does **not** hold under that index. (PubMed-specific; ACM DL and IEEE Xplore NOT REACHED.)
+
+### The two arguments the field would make against the dyad
+
+Both are inferred from verified material rather than quoted from a paper arguing against your exact model:
+
+1. **Devices are too plural and ephemeral to anchor identity.** The industry's actual answer to multi-device is *"N independent per-device keys reconciled by a group-membership protocol"* — DCGKA (Weidner, Kleppmann, Hugenroth, Beresford, ePrint 2020/1281) treats **devices as independent group members**, not as edges bound to a person-node. Keyhive does the same: an individual **is** a public key; the person is the *group*. **Note: this is not a refutation of your model — it is a restatement of it with the person-node removed as unnecessary.** Whether the person-node earns its place is the open question.
+2. **The right relational unit may be (person, relationship-context), not (person, device).** Pairwise DIDs, petnames, and Cameron's Law 4 all converge on the edge being between **two parties in a relationship**, with the device as plumbing where that edge's key happens to live.
+
+---
+
+## 7. THE SCALE LADDER — measured, per rung, and the rungs are not alike
+
+**Each rung fails in a categorically different way. This is the most important structural finding for ②.**
+
+### Local / household — the adversary and the trusted party are the same person
+- **Matthews et al., CHI 2016, "She'll just grab any device that's closer"** (DOI 10.1145/2858036.2858051, 103 citations), abstract verbatim: *"Many technologies assume a single user will use an account or device… device and account sharing was common, and **mobile phones were often shared despite being considered 'personal' devices**."* Six-type sharing taxonomy; trust in sharees and convenience dominate. **This directly threatens the dyad's premise that a device maps to one person.**
+- The **ipvtechresearch.org** corpus (Cornell CETA), confirmed live: Freed et al. *"A Stalker's Paradise"* CHI 2018 (Best Paper); Freed et al. CSCW 2019 (Best Paper HM); Havron et al. USENIX Sec 2019 (founds "clinical computer security"); Chatterjee et al. IEEE S&P 2018; Tseng et al. USENIX Sec 2020 (Distinguished); Roundy et al. IEEE S&P 2020; Bellini et al. CHI 2023 (Best Paper) / CHI 2024 / USENIX Sec 2023 / IEEE S&P 2024 (SoK).
+- **Two papers land directly on your model:** Daffalla et al., **"Account Security Interfaces: Important, Unintuitive, and Untrustworthy," USENIX Security 2023 (Distinguished Paper)** — measures how *account-recovery UX itself* becomes the attack surface for a co-resident abuser; and Daffalla et al., **"A Framework for Abusability Analysis: The Case of Passkeys in Interpersonal Threat Models," USENIX Security 2025.** *(Titles/venues/awards confirmed live; the numeric findings inside were NOT REACHED.)*
+- Also found: Bicakci, Sekmen, Uzunay, **"Balancing Security and Usability in Enterprise FIDO Passkey Recovery With Peer Assistance," IEEE Access 2025** (DOI 10.1109/access.2025.3602362) — peer-assisted recovery, structurally close to "remaining relations recognize the new dyad." Abstract NOT REACHED.
+
+**Verdict on the household rung: it is the hardest, and the literature says why.** It is the only rung where the adversary and the trusted party are the same person, where "clinical computer security" had to be invented as a discipline because no ordinary security model anticipates the adversary living in the house.
+
+### Community (~100) — failures are legal and political, not identity-technical
+- **Freifunk**: ~400 local communities, ~41,000 APs in Germany, coordinated by the Picopeering Agreement with **no central membership register**. The dominant *measured* failure was **German Störerhaftung** (operator secondary liability), which suppressed deployment for years until 2016–2018 ECJ/BGH rulings; the workaround was VPN-tunnelling all traffic through Sweden.
+- **NYC Mesh**: >2,000 active member nodes, nonprofit 2019, 501(c)(3) 2020, and a **2026 grant of $898,035 to hire its first paid staff** — implying pure volunteer labour until then.
+- **Decidim**: 311 instances across 19 countries (2022); Barcelona 2017 pilot ~40,000 participants, ~11,000 proposals, ~8,000 accepted; three-tier visitor/registered/verified model. Measured failures are political, not technical: Lucerne's top-down deployment *"strengthened the digital divide rather than overcoming it"*; Badalona's participation **stopped when the sponsoring administration lost an election**. Civic identity infrastructure measured as *politically* non-durable.
+
+### Region — failures are root-compromise and statistical exclusion
+- **Estonia ROCA (2017)**: ~**750,000** cards issued Oct 2014–Oct 2017 vulnerable to private-key inference from the public key. Certificates suspended **Nov 2–3, 2017**; renewal window to **March 31, 2018**; unrenewed certs revoked **April 1, 2018**. Gemalto paid **€2.2M** (Feb 2021) for failure to disclose in time. **A single-root mass-revocation event with a measured ~5-month wall-clock remediation.**
+- **Aadhaar**: ~**1.383B** enrolled (Oct 2024), >99.9% of adults. **UIDAI's own 2018 figure: 12% biometric authentication error rate.** AP/Telangana's 2015 Aadhaar–voter-ID linkage disenfranchised **~3 million voters** before the Supreme Court cancelled it. The Sept 2018 judgment upheld the Act but barred mandatory use for bank accounts, SIMs, and school admissions. This is the anti-model: one root, one number, one human.
+- **X-Road Estonia–Finland federation**, connected **Feb 7, 2018**: architecture is peer-to-peer, each organization holds its own signing/auth keypairs, **no central intermediary brokers trust**. A genuinely federated two-region model. **No measured friction data exists** — a real negative result: the cross-region seam is *under-measured relative to every other rung*.
+
+### Cross-region — and where the sovereign root collapsed into two US vendors
+- **eIDAS Article 45 open letter**, Nov 2, 2023: **>500 cybersecurity researchers**, plus Internet Society, EDRi, EFF, epicenter.works, Linux Foundation, Mullvad, Mozilla. The objection: any member state can designate keys browsers must trust and **which cannot be revoked without government permission**, enabling *"the government of any EU member state to issue website certificates for interception and surveillance which can be used against every EU citizen, even those not resident in or connected to the issuing member state,"* with *"no independent check or balance."* **Cross-region trust without a common root, resolved by mandating a root — and the field revolted.**
+- **The sharpest anti-pattern found anywhere in this sweep**: the German EUDI wallet implementation requires **Google Play Integrity** (Android) or **Apple App Attest** (iOS) for its Mobile Device Verification Method. The implementer's own defence: *"We have to use some kind of attestation mechanism per the eIDAS implementing acts."* GrapheneOS users cannot satisfy it; no mandatory fallback existed initially.
+  - GitHub issue **"Do not add Google Play Integrity integration"** (`eu-digital-identity-wallet/av-app-android-wallet-ui#10`, opened **2025-07-16**): **3,042 reactions, 179 comments, closed.**
+  - The commenters' objection is precisely a *dyad* objection: *"If someone lands on a sanctions list, they close your account without further notice"* — the attesting party is not the region, it is a foreign vendor, and the vendor can unilaterally sever the dyad.
+  - Developers noted a real distinction worth keeping: **smartcards attest identity; attestation attests device integrity.** Different problems.
+
+---
+
+## 8. MULTI-DEVICE REALITY — the numbers that press hardest on ①
+
+- **Cisco AIR**: global networked devices per capita **2.4 (2018) → 3.6 (2023)**. 2023 regional: North America **13.4**, W. Europe 9.4, CEE 4.0, Asia-Pacific 3.1, LatAm 3.1, MEA **1.5**.
+- **The distribution matters far more than the mean. Pew Research, US smartphone-only (no home broadband) by household income:**
+
+| Income | 2013 | 2015 | 2018 | 2021 | **2025** |
+|---|---|---|---|---|---|
+| <$30k | 12% | 20% | 31% | 27% | **34%** |
+| $30–70k | 9% | 15% | 22% | 19% | 19% |
+| $70–100k | 5% | 10% | 14% | 6% | 10% |
+| $100k+ | 5% | 6% | 9% | 6% | **4%** |
+
+  **Over a third of low-income US households in 2025 hold one device, and that bracket is getting worse (27%→34%) while the top bracket trends to more redundancy (→4%). The gap is widening.** A per-device credential model degrades exactly for the population least able to absorb a lost second edge. *Confidence: high.*
+- **ITU 2024**: 5.5B online (68%), 2.6B offline. Mobile ownership age 10+: high-income countries **95%+**, low-income countries **56%** — so **~44% of people in low-income countries own no phone at all.** The floor beneath "one device" is "zero devices, borrowed access." Urban 83% vs rural 48% online. 5G coverage: high-income 84%, low-income **4%**.
+- **GSMA 2016**: of 750M+ farmers across 69 countries, ~295M had a phone; only **13M had both a phone and a mobile-money account.**
+- **London phone theft** (Met data via ONS): **91,481 (2019) → 117,211 (2024)**, ~28% rise, **~321 phones/day**. One 2025 case traced a gang that shipped **40,000 snatched phones to China**.
+- **Kiosk/shared/borrowed**: **RFC 8628 Section 5.4 names phishing as a foreseeable risk in the spec itself.** Measured exploitation: **Storm-2372** (Microsoft Security Blog; active Aug 2024, reported Feb 13 2025, escalated Feb 14 2025) — Russia-aligned; impersonates a known contact on WhatsApp/Signal/Teams, sends a fake meeting invite with an attacker-generated device code, victim enters it **on the legitimate Microsoft login page** and hands over a valid token; then abuses Microsoft's own Authentication Broker client ID to **register rogue devices into Entra ID and mint Primary Refresh Tokens.** No victim count disclosed. *A rogue device registering itself as a dyad is the deployed attack.*
+- **Headless / TOFU**: SSH host keys remain the oldest deployed answer, with the documented failure being **warning fatigue** — admins habituate past the mismatch prompt, and it does not scale to many endpoints.
+
+---
+
+## 9. WHERE A KEYLESS-HUMAN DESIGN QUIETLY GREW A KEY — the catalogue
+
+Ranked by how quietly it happened:
+
+1. **Synced passkeys → the platform account.** The human's Apple/Google/Microsoft account password *and its recovery path* becomes the real root of every credential. William Brown (fy.blackhats.net.au, Apr 2024, "Passkeys: A shattered dream"): *"Passkeys are now seen as a way to capture users and audiences into a platform"*; credentials *"can't be extracted or exported in any capacity."* His Dec 2025 follow-up cites **Dr. Paris Buttfield-Addison's case where an account suspension destroyed all stored passkeys irreversibly** — the provider's moderation decision is a total identity-loss event.
+2. **A civic region's root → two US vendors.** The German EUDI wallet, above. 3,042 reactions.
+3. **Signal → the PIN.** A design that removed the key grew a 4-digit one, hardened by SGX and a 5-guess Raft limit. Green's SGX critique: extract one attestation key + compromise one Signal admin, and *"force Signal to replicate their database onto a simulated SGX enclave."*
+4. **Matrix → the 48-character recovery key.** "Identity as a set of mutually-signing devices" ships with a single string whose loss means resetting your digital identity.
+5. **Encryption riding on an auth credential.** Tim Cappalli, Feb 2026 (blog.timcappalli.me/p/passkeys-prf-warning/): *"When you overload a credential used for authentication by also using it for encryption, the 'blast radius' for losing that credential becomes immeasurably larger."* His "Erika" case: user deletes a passkey, unaware it was the encryption root; photos gone. *"We cannot, and should not, expect users to know this."* Credential-manager delete dialogs carry no warning. **Directly relevant: if an edge both authenticates and decrypts, cutting the edge destroys the memory.**
+6. **SIM / phone number as the ambient root** — SIM-swap remains the most-documented total-identity-loss vector at consumer scale (T-Mobile employee bribery reporting Apr 2024; Dorsey Sept 2019; Buterin Sept 2023).
+
+### The counter-move the incumbents are making — social recovery, deployed
+
+Worth flagging because it is exactly "re-establish a dyad and have remaining relations recognize it," now shipping at Google scale:
+
+- **Google Recovery Contacts** (Oct 16, 2025, The Register): up to **10 trusted contacts** per account; a locked-out user shares a numeric code; the contact number-matches it against three options; **15-minute expiry**; each person may be a recovery contact for up to **25 accounts**; unavailable for Workspace and child accounts; APP participants may help others but not set their own. Google still layers device/location/IP heuristics on top and may still hold the account. Named risk: social-engineering the contact.
+- **Vitalik Buterin, "Why we need wide adoption of social recovery wallets"** (Jan 11, 2021): one signing key + **3 or more guardians**, a majority of whom can rotate the signing key; *"for a wallet with 7 guardians to be compromised, 4 of the 7 guardians would need to somehow discover each other and agree to steal the funds"*; **guardians need not be publicly known or know each other.** He does **not** substantially analyse guardian *unavailability*.
+- **Apple's sponsor/applicant/voucher circle** (§2.2) is the same primitive, shipped a decade earlier and never named as social recovery.
+
+---
+
+## 10. WHAT RESHAPES THE SHAPE OF THE MODEL (not answers inside it)
+
+Flagged in order of how much they move the geometry:
+
+**A. The person-node may be surplus.** Keyhive, DCGKA, and Signal-style multi-device all reached "N independent per-device principals reconciled by a group-membership protocol" — Keyhive states it as *"a person… as a group, with each of the persons devices being an individual member."* In none of them is the *person* a graph-theoretic peer of the *device*. Your dyad asserts an edge; the field's convergent answer asserts a **set with no centre**. Whether the person-node earns its place — what it carries that the group does not — is the sharpest open question this sweep raises.
+
+**B. A device is not reliably one person's.** CHI 2016 measured phones shared *despite being considered "personal."* Pew measured a third of low-income US households on one device. ITU measured 44% of low-income-country adults owning none. The dyad presumes a partition the world does not honour, and it presumes it *hardest* where the stakes are highest.
+
+**C. The rungs are not a ladder of scale — they are four different problems.** Household fails *relationally* (the adversary lives inside the trust boundary). Community fails *legally and politically* (Störerhaftung; Badalona's election). Region fails at the *root* (750,000 Estonian cards) and by *statistical exclusion* (Aadhaar's 12%). Cross-region fails at *whose root* (Article 45; Play Integrity). A design that treats these as the same problem at four magnifications will be surprised three times.
+
+**D. The cross-region seam is under-measured, not solved.** X-Road is the one verified no-common-root two-region federation, and there is **no published account of what was hard about it.** ICAO PKD (111 participants) operates as a **central broker** — states upload and download rather than exchanging bilaterally — which is a *shared directory*, not a common root, but the CSCA structure and its known gaps were NOT REACHED. If cross-region is first-class in your model, you are building into a measurement vacuum.
+
+**E. "Losing a device is losing one edge" is true of *authority* and false of *memory*.** Keybase: paper-key provisioning cannot transfer chat history. Matrix: identity reset means prior messages stay undecryptable. Cappalli: an auth credential doing double duty as an encryption root turns edge-loss into data-loss. The model's claim survives for standing; it does not automatically survive for what the standing was holding.
+
+**F. The economic failure mode killed the closest deployment, and it was not technical.** Sovrin dissolved May 21, 2025 with >$2M debt and volunteer stewards who stopped paying. *Who runs the infrastructure that lets remaining relations recognize a new dyad, and why do they keep paying?* — that question, not cryptography, ended the flagship.
+
+**G. Attestation is the seam where sovereignty leaks.** A dyad is only as sovereign as whatever vouches that the device is a device. Play Integrity / App Attest is the field's only deployed answer, and it hands the vouching to two foreign corporations who can revoke unilaterally — which is exactly the property the model exists to eliminate.
+
+---
+
+## 11. What I could not reach
+
+**Blocked by the search outage, not by absence:** GSMA Mobile Gender Gap phone-*sharing* rates (India/Bangladesh/Africa); Deloitte per-household device count; smartphone replacement-cycle data (Counterpoint/CIRP/Kantar — and note Wikipedia's uncited "11–18 months" *contradicts* the industry 3–4-year narrative; I take no side); Google's 2019 account-hygiene percentages; Google/Microsoft lockout-after-device-loss rates; the numeric findings inside the Cornell CETA and Daffalla papers; Guifi.net governance critique; Sardex econometrics; MitID complaint data; Swedish BankID fraud figures; EUDI Large-Scale Pilot findings; Reetika Khera / Jean Drèze primary sources; Matter commissioning failure rates and the DAC/PAA hierarchy; FIDO Device Onboard adoption (suspected very low — **unverified, do not treat as established**); Apple Shared iPad mechanism; ChromeOS kiosk identity; caBLE technical/adoption detail; ICAO PKD CSCA structure and gaps; Phil Windley's "relationships not identities" post; Daniel Hardman's peer-DID writing; Mark Miller's *Robust Composition* (erights.org unreachable); did:webs; Bluesky's own migration docs and any did:plc incident history; SSB's decline timeline and stated reasons; Fission's actual fate (fission.codes does not resolve — **circumstantial, not proof**); Nostr nsec-leak incident data; ACM DL and IEEE Xplore full text throughout.
+
+**Genuine negative results, verified as absences:**
+- No published figure, anywhere, for Keybase paper-key retention.
+- No published Matrix/Element device-verification completion rate; no academic literature on Matrix cross-signing UX.
+- No vendor publishes end-to-end recovery-success telemetry for any of these systems.
+- No measured friction data for the X-Road two-region federation.
+- PubMed: zero results for "human-device dyad" and "person-device dyad."
+- **Nobody has deployed identity-as-a-person-device-dyad at community scale — or at any scale.** The one system that deployed the adjacent idea (pairwise relational identity, Sovrin) is dissolved and read-only as of May 2025.
+
+**Single-source / low-confidence, flagged not to be leaned on:** the Keybase Bitcoin→Stellar Merkle-root migration; the "~10% of Matrix users see a daily UTD" figure; the Sovrin causal narrative; Signal PNI terminology (could not confirm via primary source).
+
+---
+
+**Sources:** [book.keybase.io/account](https://book.keybase.io/account) · [NCC Group Keybase audit (PDF)](https://keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf) · [keybase.io/blog/keybase-new-key-model](https://keybase.io/blog/keybase-new-key-model) · [keybase/client#21111](https://github.com/keybase/client/issues/21111) · [element.io/help](https://element.io/help) · [blog.neko.dev — Unable to Decrypt a Message on Matrix](https://blog.neko.dev/posts/unable-to-decrypt-matrix.html) · [Giving Up on Element and Matrix.org](https://xn--gckvb8fzb.com/giving-up-on-element-and-matrixorg/) · [signal.org/blog/signal-pins](https://signal.org/blog/signal-pins/) · [signal.org/blog/secure-value-recovery](https://signal.org/blog/secure-value-recovery/) · [Matthew Green on Signal SVR](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Passkeys: A shattered dream](https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/) · [Yep, Passkeys Still Have Problems](https://fy.blackhats.net.au/blog/2025-12-17-yep-passkeys-still-have-problems/) · [Stop using passkeys for encrypting user data](https://blog.timcappalli.me/p/passkeys-prf-warning/) · [w3c/webauthn#1658](https://github.com/w3c/webauthn/issues/1658) · [Ink & Switch — Keyhive notebook](https://www.inkandswitch.com/keyhive/notebook/) · [Ink & Switch — Local-first software](https://www.inkandswitch.com/essay/local-first/) · [Stiegler, An Introduction to Petname Systems](http://www.skyhunter.com/marcs/petnames/IntroPetNames.html) · [Spritely — Petnames](https://files.spritely.institute/papers/petnames.html) · [did:peer method spec](https://identity.foundation/peer-did-method-spec/) · [KERI, arXiv 1907.02143](https://arxiv.org/abs/1907.02143) · [DCGKA, ePrint 2020/1281](https://eprint.iacr.org/2020/1281) · [Matthews et al., CHI 2016 (DOI)](https://doi.org/10.1145/2858036.2858051) · [ipvtechresearch.org](https://www.ipvtechresearch.org/) · [eidas-open-letter.org](https://eidas-open-letter.org/) · [last-chance-for-eidas.org](https://last-chance-for-eidas.org/) · [EUDI wallet — "Do not add Google Play Integrity integration"](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui/issues/10) · [HN: German eIDAS requires an Apple/Google account](https://news.ycombinator.com/item?id=47644406) · [Vitalik — social recovery wallets](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [The Register — Google Recovery Contacts](https://www.theregister.com/2025/10/16/google_gmail_trusted_contacts/) · [UCAN spec](https://github.com/ucan-wg/spec) · [SSB protocol guide](https://ssbc.github.io/scuttlebutt-protocol-guide/) · [did:plc directory](https://web.plc.directory/) · [Pew — Mobile Fact Sheet](https://www.pewresearch.org/internet/fact-sheet/mobile/) · [ITU Facts and Figures 2024](https://www.itu.int/) · [Cisco Annual Internet Report](https://www.cisco.com/) · [RFC 8628](https://datatracker.ietf.org/doc/html/rfc8628) · [Microsoft — Storm-2372](https://www.microsoft.com/en-us/security/blog/) · [Microsoft Entra passkey docs](https://learn.microsoft.com/) · [Apple Platform Security Guide](https://support.apple.com/guide/security/) · [sovrin.org](https://sovrin.org/) · [ICAO PKD](https://www.icao.int/Security/FAL/PKD/Pages/default.aspx)
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-3 >>
+
+!! Message 3 ~ 7,706 characters
+
+````
+A late-completing pass from the scale-ladder spirit landed after I filed. It corrects three numbers and adds one finding that changes a verdict.
+
+---
+
+# ADDENDUM — corrections in place, and one reversal
+
+## Corrections to §7 and §9
+
+**§9 item 2 / §7 cross-region — the open-letter count is exact, and there are two letters, not one.** I reported ">500 cybersecurity researchers." The primary-source PDF (`nce.mpi-sp.org`, redirected from eidas-open-letter.org) states verbatim: **"As of the 26th November 2023, the letter has been signed by 552 scientists and researchers from 42 countries, as well as numerous NGOs."** Signatories include Bart Preneel, Cas Cremers, Steven Murdoch, Jaap-Henk Hoepman, Peter Schwabe. This is **distinct from** the 38-signatory Mozilla/EFF industry letter, which is a separate and later document — I conflated the two.
+
+Two mechanics I under-reported, both load-bearing for cross-region:
+- **Article 45a(4)**: a member state's designated keys are revocable **only with that government's permission**.
+- **Article 45(2a)** bans browsers from imposing security checks beyond what is expressly permitted — it sets an **upper bound on security rather than a floor**, inverting the normal direction of security regulation. The EFF's historical anchor is **DigiNotar (2011)**, whose CA compromise was used to surveil Iranian users' traffic — the exact failure the article would make harder to prevent.
+
+**§7 Decidim**: 311 instances across **20** countries (2022), not 19.
+
+## A reversal: the Aadhaar evidence is contested, and I gave only one side
+
+I reported Aadhaar as an unambiguous exclusion story. **The field disagrees with itself, and I should have said so.**
+
+- **Muralidharan, Niehaus & Sukhtankar, "Identity Verification Standards in Welfare Programs" (2020)** — large-scale experimental evidence from India's largest social protection program: stricter biometric ID requirements **reduced corruption**, but **1.5–2 million legitimate beneficiaries lost access at some point during the reform**. The authors attribute the adverse effects primarily to **how the transition was managed**, not to biometrics as such.
+- **Muralidharan, Niehaus & Sukhtankar, "Building State Capacity: Evidence from Biometric Smartcards in India," American Economic Review 2016** — randomized rollout across **157 subdistricts, 19 million people** in Andhra Pradesh: payments became faster, more predictable and less corrupt, **without adversely affecting program access**, and beneficiaries overwhelmingly preferred the new system.
+
+The disagreement tracks **implementation quality and transition management**, not the underlying concept. For your model this is the sharper reading: the measured harm at region scale sits in the *migration*, not the architecture — which is precisely where "re-establishing a dyad" lives.
+
+## Additions that sharpen §7's household verdict
+
+- **Freed et al., "A Stalker's Paradise," CHI 2018 (Best Paper): 89 participants.** The finding is stated as a thesis, and it is the sharpest articulation of the household problem anywhere in this sweep: IPV attacks are typically **technologically unsophisticated**, carried out by a **"UI-bound adversary"** — an authenticated, adversarial user operating through the normal interface — which "undermine[s] the predominant threat models under which systems have been designed." *At household scale the authorized principal and the adversary are frequently the same authenticated principal.* No amount of credential strength addresses this.
+- **Matthews et al., IEEE S&P 2017** frames survivor tech use as a **three-phase lifecycle** — physical control → escape → life apart — each needing different support. Identity-under-coercion is a **state machine with a specific escape transition**, not a static state. Nothing in the corpus treats "leaving the household" as solved.
+- **Bellini et al., CHI 2023 (Best Paper): 158 survivors + 16 financial advocates** — four abuser motivations, exploiting shared financial accounts.
+- **Cultural variance is measured, and it is large.** "We, three brothers have always known everything of each other" (2021): **59 participants across Bangladesh, Turkey, USA** — sharing behaviour varies by culture, so a single global default (share vs. isolate) is empirically wrong for a large fraction of the world. "Everyone Has Some Personal Stuff" (2019, Bangladesh, 21 participants, 3-week deployment) built a **dual-account shared-password/secret-password model** because single-device-multi-user is the norm there, not the exception. "I would have to evaluate their objections" (2021, **386-person representative US survey**) names a genuinely new identity category: the **incidental user** — someone who did not choose the device but is captured by it.
+
+## One new community-rung finding, and it is a measured negative
+
+**"Detecting and Mitigating Points of Failure in Community Networks," IEEE Trans. Computational Social Systems, 2019** — graph analysis of **ninux.org**, Italy's largest community network. Despite the community's stated goal of a robust self-organized network, the analysis found it **"fragile under several aspects."** The "avoid unnecessary management structures" philosophy shared by ninux, Guifi.net, Freifunk and NYC Mesh **reads as robust until formally analysed**. This is the only directly measured technical-fragility result at community scale in the sweep, and it argues the community rung's self-organization can be structurally brittle in ways its participants cannot see from inside.
+
+## The framing correction that matters most
+
+The scale-ladder spirit's closing judgement, which I endorse and did not state plainly enough in §10D:
+
+**Cross-region is the most argued and least empirically realized rung.** Estonia and Aadhaar are pure *postmortem* — real incidents, real numbers, real remediation clocks. Cross-region is currently **high-quality prediction and expert consensus of concern (552 signatories), not yet high-quality postmortem**. X-Road's actual operational friction is undocumented in open sources; the EUDI Large-Scale Pilot results (POTENTIAL/NOBID/DC4EU/EWC) were unreachable. If cross-region is first-class in your model, you are not building against measured failure — you are building against a warning.
+
+## Gaps this pass confirmed as unresolved rather than absent
+
+Reetika Khera / Jean Drèze primary sources and Jharkhand ration-denial numbers; Swedish BankID elderly-fraud statistics and MitID 2021–22 migration complaints (likely in Swedish Police / Finansiell ID-Teknik and Danish Consumer Council material, outside OpenAlex/HN/Wikipedia coverage); EUDI pilot interim findings (project sites 404/DNS-failed); Guifi.net's "Compact for a Free, Open and Neutral Network" text; Pan-Canadian Trust Framework; ICAO PKD failure data; Sardex quantitative outcomes (papers identified — *Nature Human Behaviour* 2018, LSE 2016, *J. Social Entrepreneurship* 2017 — contents not extracted); Decidim's actual census-verification mechanism for "verified" status.
+
+**Sources added:** [eIDAS open letter, primary PDF](https://nce.mpi-sp.org/) · [EFF — Article 45 will roll back web security by 12 years](https://www.eff.org/deeplinks/2023/11/article-45-will-roll-back-web-security-12-years) · [Freed et al., A Stalker's Paradise, CHI 2018](https://doi.org/10.1145/3173574.3174241) · [Bellini et al., Paying the Price, CHI 2023](https://doi.org/10.1145/3544548.3581101) · [Muralidharan, Niehaus & Sukhtankar, AER 2016](https://doi.org/10.1257/aer.20141335) · [Detecting and Mitigating Points of Failure in Community Networks, IEEE TCSS 2019](https://doi.org/10.1109/TCSS.2019.2891985) · [ipvtechresearch.org](https://www.ipvtechresearch.org/)
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;Fwz7vxrWXrM8kQFn4uvovo0i0W-76h4evCT4Sd4hUJw
+
+<<^ code="&#x0004;" -> to=? >>

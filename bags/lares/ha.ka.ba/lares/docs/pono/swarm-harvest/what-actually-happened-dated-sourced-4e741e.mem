@@ -1,0 +1,132 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated-sourced-4e741e >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated-sourced-4e741e.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: WHAT ACTUALLY HAPPENED (dated, sourced). Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated-sourced-4e741e"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! WHAT ACTUALLY HAPPENED (dated, sourced)
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 16,267 characters
+
+````
+## WHAT ACTUALLY HAPPENED (dated, sourced)
+
+### Key custody, as actually practiced
+**Single key, single custodian. No secret sharing. No threshold signing. No m-of-n. No HSM requirement anywhere.** (confidence: high — I looked for it in RFC 6962, RFC 9162, static-ct-api, Chrome policy, Apple policy, and the Sunlight implementation, and found zero mentions of HSM, threshold, or split-key in any of them.)
+
+- Concrete proof from the dominant modern implementation, Sunlight (used by Let's Encrypt, Cloudflare, Geomys, and most 2024+ logs) — README, https://github.com/FiloSottile/sunlight: *"Secret is the path to a file containing a secret seed from which the log's private keys are derived. This is the most important secret of the log!"* Generated with `sunlight-keygen -f example2025h2.seed.bin`. A **seed file on disk**. The only recovery language is backup-based: *"If the actual log data is hosted on object storage and the secret is backed up, a log can recover from the complete loss of the Sunlight server."* (confidence: high)
+- The only substantive ct-policy discussion of key protection I found is Matt Palmer, 2016-11-28, "Log diversity requirements for Mozilla" (https://groups.google.com/a/chromium.org/g/ct-policy/c/C4a77mpAXQg): the set of countries *"which have the power to compel the private key of a log"* is *"any country capable of penetrating a log's infrastructure."* No one asserts logs use HSMs. (confidence: medium-high — the thread search hit on "HSM" but the substantive text does not discuss log-key HSMs)
+- The only HSM mention I found in an actual log context is a **Symantec log bug**, 2015-11-05 (https://groups.google.com/a/chromium.org/g/ct-policy/c/3X0BlH9WgGI): the HSM emitted *"fixed length integer components for an ECC signature"* with improper padding — i.e., an HSM caused a malformed-signature bug. (confidence: medium — summarized snippet only)
+
+### Incidents — the full failure roster
+
+Andrew Ayer's canonical list (https://agwa.name/blog/post/how_ct_logs_fail, 2021-07-09) plus the Chrome removal announcements. I recovered the exact link targets, so each row is traceable:
+
+| Date effective | Log | What happened |
+|---|---|---|
+| 2016-04-15 | **Certly.IO** | Excessive downtime. https://groups.google.com/a/chromium.org/g/ct-policy/c/nyRtXSWSeaM |
+| 2016-05-30 | **Izenpe** | **Same private key used for production and test log** (below). https://groups.google.com/a/chromium.org/g/ct-policy/c/qOorKuhL1vA |
+| 2017-03 (last good STH ts 1488300146134, tree size 90,155) | **Venafi (ctlog.api.venafi.com)** | Append-only violation — two inconsistent STHs (2017-02-28, after an AWS S3 outage restore from an incomplete backup) and a second on 2017-03-13 producing **an STH with tree size 0** (DB corruption). https://groups.google.com/a/chromium.org/g/ct-policy/c/ohtZ64gLN3I and https://groups.google.com/a/chromium.org/g/ct-policy/c/KMAcNT3asTQ |
+| 2017-06-08 | **PuChuangSiDa** (certificatetransparency.cn) — Ayer's "Chinese blockchain company that no one had ever heard of, vanished into thin air" | Inoperable since 2017-05-12. Only 2 publicly-trusted certs ever logged. https://groups.google.com/a/chromium.org/g/ct-policy/c/M-rhwDQ1h9E |
+| 2018-02-12 | **StartCom** | Failure to incorporate SCTs into the Merkle tree within MMD. https://groups.google.com/a/chromium.org/g/ct-policy/c/W1Ty2gO0JNA · incident: .../c/92HIh2vG6GA |
+| 2018-02-12 (last qualified SCT ts 1518479999) | **WoSign** | Same class: *"failed to incorporate a SCT into the Log's merkle tree over a year after issuance,"* ≥18 known unincorporated SCTs as of Dec 2017; operator's response judged inadequate. https://groups.google.com/a/chromium.org/g/ct-policy/c/UcCqlxuz_1c |
+| 2018-09-18 | **CNNIC** | Retired (reason not confirmed by me — flagged below) |
+| 2019-02-16 | **Symantec, Symantec Vega, Symantec Sirius** | Retired (following the Symantec CA distrust; I did not fetch a dedicated postmortem) |
+| 2020-05-19 (SCTs after ts 1588550440 = 2020-05-04T00:00:40Z don't count) | **DigiCert CT2** | **Key compromise** (below) |
+| 2021-07-21 | **DigiCert Yeti2022** | Single-bit flip in a leaf hash at tree size 65562066; *"Fixing this entry would require generating a SHA-2 preimage… this unfortunately is a non-recoverable error for this CT Log."* Chrome: *"no evidence that this error is due to the fault of DigiCert."* https://groups.google.com/a/chromium.org/g/ct-policy/c/hxNohyZncfQ |
+| 2022-10-13 | **DigiCert Yeti2022-2 / Yeti2023** | 2022-09-28: an SRE ran *"a blanket delete command… to all Cassandra servers of both the new and old clusters,"* wiping DB files across Yeti 2022-2/2023/2024/2025. 2024 & 2025 recovered; 2023 recovered with 5 missing certs → read-only; 2022-2 irrecoverable (dataset too large) → decommissioned. https://groups.google.com/a/chromium.org/g/ct-policy/c/A9uYUOmHM84 and https://groups.google.com/a/chromium.org/g/ct-policy/c/PVbs0ZMVeCI |
+
+The 2022 removal announcement listing states/dates: https://groups.google.com/a/chromium.org/g/ct-policy/c/n0o7yrTuNYo (Devon O'Brien, 2022-04-05). **Caveat:** that listing rendered WoSign as "Retired 2016-02-12", which contradicts the WoSign removal thread's 2018-02-12; treat 2018 as correct and 2016 as a transcription artifact. (confidence: medium-high)
+
+### Izenpe — same key for two logs
+Thread: **"Izenpe test and production logs use the same key"**, https://groups.google.com/a/chromium.org/g/ct-policy/c/g0WWgUodpOk, **May 2016**. Graham Edgecombe found Izenpe's production log and its test log at `/pilot` shared an identical keypair — and since the log ID is the SHA-256 of the public key, **both logs had the same log ID**. A cert submitted to the unmonitored test log received an SCT that verified as a production-log SCT, while the cert need never appear in the production tree within MMD. Edgecombe demonstrated it with a live submission; Andrew Ayer independently confirmed Izenpe could no longer prove append-only. Iñigo Barreira (Izenpe) acknowledged it and stopped the pilot service on Saturday 2016-05-16. Removal announcement: https://groups.google.com/a/chromium.org/g/ct-policy/c/qOorKuhL1vA (Retired 2016-05-30; production log shut down entirely Oct 2016). (confidence: high on substance, medium on the exact May-16 date — from a summarized rendering)
+
+### DigiCert CT2 — the only actual CT log key compromise
+Thread: **"CT2 Log Compromised via Salt Vulnerability"**, https://groups.google.com/a/chromium.org/g/ct-policy/c/aKNbZuJzwfM, **2020-05-03/04**.
+- Jeremy Rowley (DigiCert), 2020-05-03 16:03 MST: the CT2 signing key was compromised via the Salt (SaltStack) vulnerability; log moved to read-only; SCTs after 19:00 MST 2020-05-02 should be considered suspect.
+- Last known-good tree head: **17:00:02 on 2020-05-02**.
+- Root cause (Rowley, 19:41): Salt's pub/sub model required the master to be publicly exposed when CT2 was deployed, because DigitalOcean lacked private networking at the time; unauthenticated event-bus access potentially enabled key retrieval.
+- Ryan Sleevi pushed for a blameless postmortem; Devon O'Brien closed on 2020-05-04.
+- Chrome outcome: https://groups.google.com/a/chromium.org/g/ct-policy/c/f_OpqFEZT9M — **Retired**, not Rejected, effective **2020-05-19**, with last-qualified SCT timestamp **1588550440 (2020-05-04T00:00:40Z, the point the log went read-only)**. Notably Chrome did *not* claw back to the actual ~midnight 2020-05-03 compromise time. DigiCert stated other DigiCert logs were unaffected.
+- Trade-press summary: https://www.feistyduck.com/newsletter/issue_65_private_key_of_digicert_certificate_transparency_log_compromised
+
+### Google Aviator
+- **2015-11-11/12**: Pilot **and** Aviator accepted 3 certificates with **invalid signature chains**, violating RFC 6962's MUST-verify rule. Cause: a 2015-09-29 error-handling refactor created a fail-open path for unsupported algorithms. Fixed 2015-11-17; the incident report was only published **June 2016**, which itself caused a disclosure-norms argument. https://groups.google.com/a/chromium.org/g/ct-policy/c/Itoq0YUZTlA
+- **2016-10-16**: Aviator **exceeded its 24h MMD** (peak 26.2h over three days) after a 6-hour submission flood; flood protections failed to engage; between 16.6% and 100% of entries in five consecutive signing operations missed MMD. Google disabled `add-chain` (4.75h) and `add-pre-chain` (1h). https://groups.google.com/a/chromium.org/g/ct-policy/c/ZZf3iryLgCo
+- **2016-11-15**: Chrome declined to disqualify. Sleevi: a graduated approach, citing prior second chances for Venafi, DigiCert, and Symantec; *"essential towards a healthier ecosystem by providing the safety to occasionally make mistakes without having to worry about immediate disqualification."* Instead Google **froze** Aviator. https://groups.google.com/a/chromium.org/g/ct-policy/c/lsZqdM_u7DI
+- **2016-11-21 → effective 2016-12-01**: shutdown/read-only announcement. https://groups.google.com/a/chromium.org/g/ct-policy/c/u87C79AY-E8. Google's own log list carried Aviator as **ReadOnly 2016-11-30**.
+
+**⚠️ NOT FOUND:** I could not locate any Aviator "non-chronological SCT" / out-of-order-timestamp incident. Searches on "Aviator misbehaving", "non-chronological timestamps", and "Aviator SCT timestamp order" in ct-policy returned nothing matching. The two real Aviator misbehaviors are the 2015 invalid-signature acceptance and the 2016 MMD violation. If the non-chronological item is real, it is either not on ct-policy or is under wording I did not guess. Treat it as unverified.
+
+### Pilot / Rocketeer / Icarus / Skydiver
+Not failures. Planned consolidation. Originally scheduled 2019 (Pilot 2019-05-01, Rocketeer 2019-06-01, Skydiver 2019-07-01, Icarus 2019-08-01, plus DigiCert Log Server 2019-05-06 — https://groups.google.com/a/chromium.org/g/ct-policy/c/i1NFmE7txNE), then deferred because of legacy Apple OS EV-display behavior. Actually retired **2022-05-01**, announced 2022-04-06 by Devon O'Brien: Google moving exclusively to temporally-sharded Argon/Xenon. https://groups.google.com/a/chromium.org/g/ct-policy/c/abPZR5silrk
+
+### Venafi Gen2
+Separate from the 2017 disqualification. `ctlog-gen2.api.venafi.com` was removed from Chromium in **April 2020** for extended read-only status / operator-announced shutdown — an orderly exit, **not** a key event. https://groups.google.com/a/chromium.org/g/ct-policy/c/ltiBZC_9goI and https://groups.google.com/a/chromium.org/g/ct-policy/c/w8wtGOkRr1Q (both 2020-04-27). (confidence: medium — from search snippets plus thread titles)
+
+### Recovery path after key loss/compromise — confirmed: **there is none**
+There is no rekey, no rotation, no re-sign, no quorum re-derivation. The log ID *is* the key (RFC 6962 §3.2: log ID = SHA-256 over the DER SubjectPublicKeyInfo), so a new key is definitionally a new log. Every observed response is the same two-step: **freeze/read-only, then Retire, then stand up a fresh log with a fresh key.** CT2 (2020) is the one real key compromise and that is exactly what happened. Yeti2022 (2021) and Yeti2022-2 (2022) show the same shape for non-key unrecoverable faults.
+
+RFC 9162 §4.13 "Shutting Down a Log" describes only the orderly version: freeze, return `shutdown` on submissions, publish a final STH, and *"At this point, the log's private key is no longer needed and can be destroyed."* Keep serving until all entries' certificates expire or exist in other logs. (confidence: high — verbatim from https://www.rfc-editor.org/rfc/rfc9162.txt)
+
+Why this is survivable, per Ayer: clients require SCTs from **multiple logs across distinct operators**, and a failed log becomes `Retired` rather than having its key purged, so already-issued certs keep validating. Chrome requires ≥1 embedded SCT from a log that was Qualified/Usable/ReadOnly at check time, plus SCTs from N distinct logs (N=2 for ≤180-day certs, N=3 for >180 days) that were Qualified/Usable/ReadOnly/**Retired**, and *"at least two SCTs must be issued from distinct CT log operators"*. Apple's policy is parallel (2 SCTs for ≤180 days, 3 for 181–398 days, ≥1 from an RFC 6962 log).
+
+---
+
+## WHAT POLICY MERELY PRESCRIBES
+
+- **RFC 6962 §2.1.4**: *"A log MUST use either elliptic curve signatures using the NIST P-256 curve… or RSA signatures… using a key of at least 2048 bits."* §3.2: log ID = SHA-256 of DER SubjectPublicKeyInfo. §3.3 mentions key compromise only as a reason clients might reject a log. **§7.3 defines "misbehaving" as exactly two things** — missing MMD, or violating append-only. Nothing about key handling. **No HSM, no key protection, no key loss, no rotation.**
+- **RFC 9162 §2.2**: signature algorithms from the IANA registry. **§4.1: *"A log MUST NOT use the same keypair as any other log."*** — this is the post-Izenpe rule, written into the spec. §6.2: *"If a log misbehaves or suffers a key compromise, a consequence may be that clients cease to trust it."* §11.3: a misbehaving log can show inconsistent views, *"therefore, it is necessary to treat each log as a trusted third party."* **Still no HSM, no threshold/split key, no rotation, no compromise-response protocol.**
+- **Chrome CT Log Policy** (https://googlechrome.github.io/CertificateTransparency/log_policy.html): 99% availability on a 90-day rolling per-endpoint average; RFC 6962 or static-ct-api v1.1.0; MMD ≤4h (RFC 6962) or ≤1min (static-ct-api); *"Maintain the append-only property… providing consistent views of the Merkle Tree at all times and to all parties"*; temporal sharding 3–12 month expiry ranges covering 3–4 years forward; operators assert organizational independence from existing operators; postmortem required after an incident. **Zero key-custody requirements.**
+- **Chrome log states** (https://googlechrome.github.io/CertificateTransparency/log_states.html): Pending → Qualified → Usable; ReadOnly is operator-requested; *"A Retired log is one that was at one point Qualified, but has stopped being relied upon for the creation of new SCTs"* — triggered by serious/sustained policy violations or operator cessation; Rejected once all contained certs expire. **No key-compromise state and no recovery mechanism documented.**
+- **Apple's CT log program** (https://support.apple.com/en-us/103703): application requires *"The log's public key (DER encoding of the SubjectPublicKeyInfo ASN.1 structure)"*; 99% uptime; must *"not present two or more conflicting views of the Merkle Tree"*; MMD 24h (RFC 6962) / 1min (static-ct-api); *"A log can be retired at any time, at Apple's discretion or as a result of failure to comply with log program policies."* **No key protection requirements, no HSM, no incident-reporting section.**
+- **static-ct-api / Sunlight spec** (https://c2sp.org/static-ct-api): no key algorithm, uniqueness, protection, rotation, or compromise provisions at all.
+
+---
+
+## Explicit gaps / things I could not confirm
+
+1. **Aviator non-chronological SCT incident** — not found; see above. Highest-confidence flag in this report.
+2. **CNNIC log retirement reason** (2018-09-18) — date confirmed from the removal list, reason not verified.
+3. **Symantec/Vega/Sirius retirement (2019-02-16)** — date confirmed, no postmortem fetched; presumed downstream of the Symantec CA distrust.
+4. **DigiCert Nessie** — I found no key-loss, distrust, or failure incident specific to Nessie beyond the shared-Cassandra blast radius of the Sept 2022 Yeti deletion (which named Yeti shards only). Absence of evidence, not evidence of absence.
+5. **Whether any large operator (Google, Cloudflare, Let's Encrypt, DigiCert) actually uses an HSM/KMS for its CT log key in practice** — I found no public documentation either way, and the one implementation whose docs I could read (Sunlight) uses a plain seed file. Chrome/Apple never ask.
+6. Google Groups content reached me via the `r.jina.ai` proxy, which returns model-summarized renderings rather than raw text — quoted strings are reproduced from those renderings. Direct quotes marked verbatim should be spot-checked against the source URLs before being cited authoritatively. Brave search rate-limited (HTTP 429) repeatedly; most discovery ran through Google Groups' own search via the proxy. `web.archive.org` is blocked outright in this environment, so I could not retrieve historical Chrome log-list JSON snapshots.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;2NZcv9V2IP4JOswkCMQ-3Vf6SY_7690JtT2w6uptHq0
+
+<<^ code="&#x0004;" -> to=? >>

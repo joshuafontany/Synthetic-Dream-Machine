@@ -1,0 +1,119 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 2. Apple Screen Time — PARTIALLY REACHED. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 2. Apple Screen Time — PARTIALLY REACHED
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 7,990 characters
+
+````
+## Report — "Is the supervised party SHOWN that they are managed, and by whom — and can the manager hide it?"
+
+Reachability was severe: **every `support.google.com` and `play.google.com` policy URL returned a Google `/sorry/index` CAPTCHA (302)**, and `web.archive.org` is blocked by this harness entirely. So the Family Link and Play-policy legs are unquoted.
+
+---
+
+### 1. FTC v. Retina-X (the only source that answers the question head-on) — REACHED, full order text extracted
+
+Press release: https://www.ftc.gov/news-events/news/press-releases/2019/10/ftc-brings-first-case-against-developers-stalking-apps
+Case page: https://www.ftc.gov/legal-library/browse/cases-proceedings/172-3118-retina-x-studios-llc-matter
+Decision and Order PDF (text extracted locally): https://www.ftc.gov/system/files/documents/cases/1723118retinaxorder_0.pdf
+
+Press release wording — the app must:
+
+> "include an icon with the name of the app on the mobile device, which is only removable by a parent or legal guardian who has installed the app on their minor child's phone."
+
+The Order itself, Section I.C, is more specific — it is a **visible-icon-plus-linked-disclosure** requirement, not just an icon:
+
+> "**C. Icon Notice:** The Monitoring Product or Service must display an application icon, accompanied by the name of the Monitoring Product or Service adjacent to the application icon. The consumer must be able to click on the application icon to a page on which Respondents present a Clear and Conspicuous notice stating:
+> i. The name and material functions of the Monitoring Product or Service;
+> ii. That the Monitoring Product or Service is running on the user's Mobile Device; and
+> iii. Where and how the user can contact Respondents for additional information, or to resolve an issue of improper installation of the Monitoring Product or Service."
+
+And the **hiding carve-out is explicit and is exactly the parent case**:
+
+> "**b. Exception to the Icon Notice Requirement:** i. Respondents may program the Monitoring Product or Service to allow the purchaser of the Monitoring Product or Service to **disable the Icon Notice** only if the purchaser attests, prior to installation, that the purchaser is the legal guardian or parent of a minor Child, and that the Monitoring Software or Product will be installed on a Mobile Device predominantly used by the minor Child."
+
+Note the load-bearing asymmetry: the press release says the icon is *"only removable by a parent or guardian"*; the Order says the parent may **disable the notice entirely, pre-installation, on a bare self-attestation**. The gate is an unverified checkbox — Section I.A/B requires only "an express written attestation from the purchaser," and the Order simultaneously forbids the vendor from helping: *"Respondents cannot provide purchasers with written attestation language"* and *"cannot suggest, direct, or otherwise assist, purchasers in submitting fraudulent written attestations."* Nothing in the Order requires notice **to the monitored person**; every notice duty runs to the **purchaser** (Home Page Notice, Purchase Page Notice, Section II.A/B). The only monitored-person-facing artifact is the Icon Notice — the one thing a parent may switch off.
+
+Also relevant: the permitted purposes are enumerated (Section I.A.i) and only the child case lacks a consent requirement —
+
+> "1. Parent monitoring a minor Child; 2. Employer monitoring an employee **who has provided express written consent** to being monitored; or 3. Adult monitoring another adult **who has provided express written consent** to being monitored"
+
+A child is the single supervised class whose awareness is neither consented to nor guaranteed.
+
+### 2. Apple Screen Time — PARTIALLY REACHED
+
+https://support.apple.com/en-us/HT208982 (resolves to Apple's Screen Time article) — reached. Quotes obtained are all **parent-facing**:
+
+> "see how much time your child spends on their device, including which apps and websites they use"
+> "Block apps and notifications for specific periods. When you schedule downtime, only phone calls and apps that you choose to allow are available"
+> "Set a time limit for a category of apps (like games or social networking) and for individual apps"
+> "Enter a 4-digit passcode, then enter it again to confirm" (Screen Time passcode)
+
+The one child-facing acknowledgement in the page:
+
+> "your child can make an exception request when they've reached a limit you set for their device"
+
+and the parent can "respond to a child's exception request." So the child is shown *that a limit exists* (they hit a wall and can appeal it), but the page carries **no statement that the child is told who set it, or notified when settings change**. The passcode is the enforcement asymmetry: it prevents the child from altering, but the doc does not claim it discloses.
+
+- https://support.apple.com/guide/iphone/screen-time-iphb1e94b5a5/ios — NOT REACHED (server returned only the guide's table of contents, no Screen Time body text). Same for `set-up-screen-time-iphb8fc98549` and `request-more-screen-time-iph2f0e0d0a1`.
+- https://support.apple.com/en-us/102122 — **wrong target**: that ID now serves the Apple Education Community page, nothing about Family Sharing location. NOT REACHED for the location question.
+- https://support.apple.com/guide/iphone/share-your-location-iph9dee06a04/ios — returned TOC only; it confirms the existence of sections "Share your location," "Notify a friend when your location changes," and "Get notified when friends change their location," but **no body text on whether the located person is told**. NOT REACHED.
+
+### 3. Microsoft Family Safety — NOT REACHED (article body)
+
+https://support.microsoft.com/en-us/family-safety reached; it indexes the activity-reporting article as **"See your child's device and app use with activity reports"**, slug `view-device-and-app-use-with-family-safety-activity-reporting`, described as letting parents gain *"insight into their online habits,"* with device connection required to *"enable activity reporting."* Every attempted full URL for that article (`/en-us/account-billing/...`, `/en-us/topic/...` with guessed GUIDs) returned **404**. Whether the child is told, or receives the report, is **NOT REACHED**. Note the hub page carries **no article about notifying the child** and none about location sharing.
+
+### 4. Google Family Link — NOT REACHED
+
+- https://support.google.com/families/answer/7101036 — CAPTCHA 302
+- https://support.google.com/families/answer/9223256 — CAPTCHA 302
+- https://support.google.com/googleplay/android-developer/answer/9888379 (Device and Network Abuse / Stalkerware) — CAPTCHA 302. The Play policy hub https://play.google/developer-content-policy/ was reached but is navigation-only; it lists "Device and Network Abuse" as a section and links back to the CAPTCHA'd article. **The persistent-notification, unique-icon, and "designed and marketed for parents to track their children" exemption text is NOT REACHED — not filled from memory.**
+- https://families.google/familylink/ — reached. It contains **no transparency statement toward the child**. The only notification language is parent-directed: *"Family Link delivers critical notifications including when your child arrives or leaves a certain location."* Nothing about the child being informed of supervision.
+
+---
+
+### What the reached record supports
+
+The only enforceable, quotable rule that the supervised party be *shown* they are managed is the FTC's Icon Notice — and its sole exception is the parent/child case, disabled by unverified purchaser self-attestation before install. Platform documentation (Apple, Microsoft, Google marketing) is written entirely from the supervisor's seat; across every page reached, not one sentence describes what the supervised person sees, is told, or is notified of when settings change. The child-facing surface that *is* documented (Apple's exception request) reveals a limit's existence only by collision with it.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;8SCp5Fw6zFWCAzhPprQEenuOeWN-Vvc3GTWQSG-B-E4
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,732 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: THE ABUSE SURFACE OF MANAGED IDENTITY. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! THE ABUSE SURFACE OF MANAGED IDENTITY
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 54,685 characters
+
+````
+Both figures verified against the paper (`464,625 reviews from over 9,000 apps`; `103 reviews on 82 apps`). Consolidated report follows.
+
+---
+
+# THE ABUSE SURFACE OF *MANAGED* IDENTITY
+### Consolidated measured record. Corrections folded in.
+
+**Two headline answers.**
+
+**Has anyone built an exit the manager cannot block? No.** Across every shipped supervised-identity system and every SSI guardianship design reached, the subject's exit is gated on the manager's cooperation, an age threshold plus a manager-controlled toggle, or an external legal process. The closest thing that exists is a *petition right that cannot be confiscated* (Google), not an exit.
+
+**What breaks when management is structural? The authorization graph becomes the abuse surface and malware becomes a rounding error.** Havron et al.'s clinic found **3 spyware detections against 30 relation-layer findings in N=44 clients** — and found them by interview, not by scanning.
+
+---
+
+## §A — THE MEASURED CREEPWARE / DUAL-USE LITERATURE
+
+### Roundy et al., "The Many Kinds of Creepware Used for Interpersonal Attacks," IEEE S&P 2020
+DOI 10.1109/sp40000.2020.00069 · PDF https://nixdell.com/papers/Creepware_IEEE_SandP_camera.pdf
+
+- **Sample: billions of app installations across 50 million+ Android devices** (Norton Mobile Security telemetry), 2017 window and a 2018-05-01→2019-05-01 window.
+- **CreepRank** = graph mining on co-installation using guilt-by-association, scored by maximum a posteriori estimation (the skeptical prior suppresses false positives among rare apps).
+- Seeds: **2017 — 18 covert surveillance apps installed on 35,811 devices** (taken from Chatterjee et al. 2018). **2018/19 — 50 apps on 32,719 devices.**
+- **Top 1,000 apps hand-coded → 857 qualify as creepware.**
+- **Surveillance: 372 of the top 1,000.** Within that: **107 multifaceted ("thorough") surveillance apps that affected 172,000 Norton customers in 2017 alone.** Sub-counts — thorough 90 · location-only 90 · social media 105 · **covert social media 26** · camera 15 · microphone 11 · SMS 9 · screen 5.
+- Other families: spoofing **114** · harassment/SMS-bombers **80** · hacking tutorials **63** · rooting tutorials **6** · settings tutorials **16**. Over **1 million installs** of creepware overall. Inter-coder Fleiss' κ = **0.77** (categories) / **0.75** (sub-categories) over 60 jointly coded apps.
+- **Disclosure outcome: 1,095 apps reported to Google; Google determined 813 violated policy and removed them.**
+
+**The dual-use finding, verbatim:** *"many apps that purport to be intended for child online safety have highest PMI with apps that are unambiguously intended for intimate partner surveillance."* The paper's own worked example: **"Family Locator for Android" was previously titled "GirlFriend Cell Tracker."** And *"Cell Tracker"* — the most prevalent thorough-surveillance app in the top 1,000 — markets on child safety while correlating strongly with *"Cheating Spouse," "Boyfriend Tracker Free," "Where the hell are you?"*
+
+**Longitudinal:** between 2017 and 2018/19, information-extraction apps more than doubled, and *"the fraction of surveillance apps that are recommended for child safety use relative to intimate partner surveillance"* **rose** — which the authors read as re-marketing in response to enforcement. **Child-safety framing is what the ecosystem retreats into under pressure.**
+
+Also coded as distinct categories: **Control–Hide-Icon** and **Evasion–Hidden-Content**. Re-seeding CreepRank with 9 icon-hiders returned a top-50 containing **12 app-hiders**; three hidden apps *"can only be opened by calling a fake phone number."* A defensive counter-market exists — *"'Hidden Apps', a defensive app that reveals the presence of hidden apps"* — i.e. **the market itself treats enumerability as the countermeasure.**
+
+### Chatterjee et al., "The Spyware Used in Intimate Partner Violence," IEEE S&P 2018
+DOI 10.1109/sp.2018.00061 · PDF https://nixdell.com/papers/spyware.pdf
+
+- 2,249 unique Play URLs from search → **1,629 active Play listings**; a 3-week crawl collected **9,224 apps**; **1,000 hand-labelled → 280 (28%) marked IPS-relevant**.
+- Off-store: **32 unique apps found, 9 discontinued, 23 active** — all overt spyware. **So ~92% of the IPS-relevant corpus is on-store dual-use.**
+- **70 apps installed and manually analysed** (61 on-store + 9 off-store).
+- **Review mining (verified against the paper): 464,625 reviews collected from over 9,000 apps → 103 reviews on 82 apps explicitly describing partner surveillance.**
+- Taxonomy names the shape by construction: *personal tracking* (find-my-phone) / *mutual tracking* (family trackers) / ***subordinate tracking* (child monitoring apps)**. **Parental control is the subordinate tier by design.**
+- **"All of the off-store spyware apps that we analyzed describe child safety as one of their use cases."**
+- **Detection failure — the measured result.** Best tool (Anti Spy Mobile) flagged **95% of off-store spyware but only 47% of on-store IPS-relevant apps**, at **12% FPR** (it flagged Chrome and Play Store). Major AV vendors flagged **at most 13%** of on-store dual-use. **37 of 40 anti-spyware tools flagged ≤3% of dual-use apps.** Only **8%** of dual-use apps were flagged by ≥3 VirusTotal engines.
+- **The one mitigation adversaries visibly complained about was an identity-layer role check.** TeenSafe verifies the age of the Google account the device is registered to; *"Abusers complain in reviews of TeenSafe about the difficulty in using it for IPS."*
+- **Bundled/carrier tier** — Verizon Family Locator, Sprint Family Locator, Find My Device, Google Maps Timeline: *"remotely activated with the credentials attached to the account that pays the cellular bill"*, and **"impossible to uninstall as they are bundled with the OS; at best they can be disabled."**
+- On visible-but-useless signalling: *"Even when notifications are present, we suspect victims are unlikely to observe them, let alone properly interpret their meaning"*; the Android GPS icon *"does not specify which app is using GPS, and is ever-present for many Android users."* **A visible signal that does not name the relation is not enumerable.**
+
+### Havron et al., "Clinical Computer Security for Victims of IPV," USENIX Sec 2019
+https://www.usenix.org/system/files/sec19-havron.pdf — **N=44 clients, 46 consultations, 105 devices, 97 manually inspected, 75 ISDi scans, median 170 apps per scanned device.**
+
+| Detected issue | Count |
+|---|---|
+| Potential **spyware** | **3** |
+| Potential password compromise | **14** |
+| **Presence of unknown "trusted" devices** | **12** |
+| Shared family/phone plan | **4** |
+| Rooted device | **1** |
+| Clients with ≥1 vulnerability | **23 of 44 (52%)** |
+| Clients with nothing detected | 19 |
+| Clients with unsolved problems | **2** |
+
+ISDi flagged **79 apps** total: **61 dual-use** (find-my-phone and child-monitoring the most prevalent categories), **18 false positives**, max 5 flags on any one device — and **for all but one dual-use app the client already recognized it.** The authors' own explanation for the low spyware rate: *"many abusers are seemingly able to surveil clients via compromised accounts, and so may not need to install spyware."*
+
+**Relation-layer findings outnumbered spyware ~10:1, and were surfaced by the technograph interview instrument, not the scanner.**
+
+### Freed et al., "A Stalker's Paradise," CHI 2018 — the source of the "UI-bound adversary"
+DOI 10.1145/3173574.3174241 · PDF https://nixdell.com/papers/stalkers-paradise-intimate.pdf — qualitative, **N=89** (11 focus groups with **39 survivors** + interviews with **50 professionals**).
+
+The paper reports **no percentages at all** (verified: zero `%` characters). Its counts are n-values: **n=27** reported abusers controlling their accounts, frequently via a shared family plan · **n=47** accounts of location tracking via Find My Phone, parental tracking, Find My Friends · **n=28** password coercion · **≥10 cases of abusers giving devices to shared children** — *"since the abuser is legally entitled to contact the child, the victim may not be allowed to remove the device."*
+
+**The canonical structural statement:** *"prior work on account sharing assumes that the primary user and the owner (or controller) of the account are one and the same, **which is often not the case in IPV**. As a result, existing countermeasures may not be effective."* Its first attack category is literally **"Ownership-based access."**
+
+### Freed et al., "Is my phone hacked?", CSCW 2019 — N=31 clients
+DOI 10.1145/3359304 · PDF https://nixdell.com/papers/Freed-CSCW-2019.pdf
+
+**4 of 31 clients were still on a shared family plan** with the abuser or the abuser's relative *after physically leaving* (*"Many years we've had the same account"*). **12 of 31** reported abuse routed through proxies including children. *"In many cases, children's devices were owned and had been set up by the abuser."* P18: *"The courts ruled that [my child] is entitled to this phone [from the abuser]. I tried to get rid of this phone completely."* In one case *"the abuser had full access to the client's iCloud through her child's iPad"* — and the client declined a new iCloud rather than lose hundreds of dollars of purchases. Recovery-as-lockout: *"When I try to do a password reset, a lot of them, they want access to a number that I no longer have."*
+
+### Tseng et al., "The Tools and Tactics Used in Intimate Partner Surveillance," USENIX Sec 2020
+https://arxiv.org/pdf/2005.14341
+
+- **5 forums, 18,937 threads, >200,000 posts**, first thread Jan 2006 through 2018. **750 threads qualitatively coded** (250 each from the 3 non-spam forums). 29-code codebook.
+- IPS-relevant share of threads: **Forum A 78% · B 51% · C 18%.** **Threads that escalate: 32% / 38% / 35%.** Unique users in IPS-relevant threads: 296 / 465 / 346.
+- Two of five forums are essentially spyware SEO spam: **Forum D's top user touched 95% of threads and authored 45% of posts**; 94% of that user's posts were spam.
+- **Family plans and cloud accounts are named by attackers as the tool.** Forum A, verbatim: *"We are in the process of choosing new cellphones and a new company. Which is the best company to keep tabs, records, etc? We currently have iPhones on AT&T, and their **Family Map** did help me prove his affair."* Responder: stay with AT&T for *"immediate online access [to phone records] and their GPS is good."*
+- Also: *"What is the best spyware if I can't get their phone, but have their Apple ID and password?"* · a family iPad synced to a partner's iCloud · a three-party shared iCloud exposing an affair partner's purchase history · Significant Locations · Find My Friends · Google Maps Timeline · WhatsApp Web pairing as *"a one-minute job"* best done while a partner sleeps.
+- The taxonomy splits by **physical access**, not covertness. **The word "covert" appears once in the whole paper. It never claims attackers preferred covert tools.**
+
+### Maier, Tanczer & Klausner, "Surveillance Disguised as Protection," PoPETs 2025(2):100–120
+DOI 10.56553/popets-2025-0052 · PDF https://petsymposium.org/popets/2025/popets-2025-0052.pdf
+
+**20 sideloaded vs 20 Google Play parental-control apps**, Android 9.0; static + dynamic + traffic + policy analysis.
+
+- Permissions: sideloaded mean **44.4** (22–70, mSpy highest) vs in-store **34.9** (15–58). Android-"dangerous" permissions: **21.0 vs 11.8**.
+- **All 20 sideloaded apps abused the Accessibility API** (14/20 in-store did). **Device Administrator: 16 sideloaded, 15 in-store — used primarily to block uninstallation.** **Draw-Over-Other-Apps: 13 sideloaded, 14 in-store**, used to close the settings app on an uninstall attempt. Kidlogger minimizes the settings window every time the child reaches for its uninstall button.
+- **17 of 20 sideloaded apps instruct the user to disable Google Play Protect.** 13 were detected by Play Protect 42.1.27-31; **7 were not: Bark, EvaSpy, FlexiSpy, Spapp Monitoring, SPYX, TheOneSpy, TiSpy.**
+- **17 of 20 obfuscated their name** ("Settings", "System Service", "WiFi Service", "Sync Services"); 17 used an innocuous icon. **Zero in-store apps obfuscated** — Play policy forbids it.
+- Stalkerware IOC match: **8 of 20** in the PDF body — ⚠️ **the PoPETs landing-page abstract says 9 of 20. Discrepancy flagged, unresolved.** Against TinyCheck: **25% of all sideloaded parental-control apps identified, 40% of the top 20.** Against Echap's IOC database: **50% of the 44 identified sideloaded parental-control apps.**
+- **12 of the 20 sideloaded apps promote monitoring of Tinder and Hinge** — platforms with an 18+ floor. The authors: this *"suggests these services could be used to track adults' activities rather than children's… while also risking outing minors who are, for example, 'closeted' LGBTQ+ users."*
+- 3 apps transmitted sensitive data unencrypted; 10 of 20 sideloaded lacked an applicable privacy policy.
+- **Consent, structurally:** citing Parsons et al. (Citizen Lab, *The Predator in Your Pocket*, 2019-06-12, 165pp, 8 apps assessed), *"obtaining consent from just one parent is inadequate in joint parenting situations… **None of the analysed apps implemented measures to ensure this.**"* And: *"Some software vendors stated that only the device owner's consent is required for monitoring. **However, device ownership extends beyond legal guardianship.**"*
+
+### ISDi's live blocklist — the shape of the surface, measured directly
+https://github.com/stopipv/isdi · `src/isdi/data/app-flags.csv`, HEAD 2026-07-22
+
+**5,777 flagged apps: dual-use 5,150 (89.1%) · stalkerware 613 · spyware 13 · safe 1.**
+By store: playstore 5,084 · appstore 648 · **offstore 45**. **99.2% on-store.**
+**581 (10.1%) carry `family|parent|kid|child|teen` in the title** — 569 of those flagged dual-use.
+
+**The clinic's operational model of the abuse surface is 89% legitimate-purpose software.**
+
+### Teen-side: monitoring does not reduce risk, and children rate it 1.79 stars
+
+**Ghosh, Badillo-Urquiola, Guha, LaViola & Wisniewski, "Safety vs. Surveillance," CHI 2018**, DOI 10.1145/3173574.3173698. Only free PDF: https://www.cs.ucf.edu/icerc/isuelab/publications/pubs/pn1838-ghoshA.pdf
+- Scraped Aug 2016; 75-app seed → 9 delisted → **66 apps, 29,272 reviews** → **736 child-authored reviews across 37 apps** (29 apps had zero child reviews), reviewer ages **8–19**.
+- **Star distribution: 1★ = 76% · 2★ = 3% · 3★ = 4% · 4★ = 3% · 5★ = 14%.**
+- **Child M = 1.79 (SD 1.48, n=736) vs presumed-parent M = 3.66 (SD 1.79, N=28,536).** Difference 1.866, 95% CI [1.76, 1.98], **t(793.34) = 33.77, p < .05.** This is the real source of the circulating "~1.7 stars" claim; the paper's own headline is **76% one-star**.
+- Coded complaints in the 581 low-rated (79% "disliked"): **Overly Restrictive 35% · Privacy Invasive 23% · Bad Parenting/Lack of Communication 14% · Faulty Design 14%.** Liked (21%): Control Unhealthy Behaviors 23% · Kept Them Safe 17% · Ability to Negotiate 12%.
+- ⚠️ **Load-bearing negative result: the string "abuse" appears ZERO times in the paper** (full extracted text grepped). There is **no count of teens calling monitoring abusive.** The strongest published framing is *"parental stalking"* plus teen quotes using "spyware," "evil," "stalking me." **Do not attribute an abuse count to this paper.**
+
+**Ghosh, Badillo-Urquiola, Rosson, Xu, Carroll & Wisniewski, "A Matter of Control or Safety?", CHI 2018**, DOI 10.1145/3173574.3173768. **215 matched parent–teen dyads (13–17)**, two logistic regressions. Low-autonomy-granting (authoritarian) parents most likely to use the apps; teens victimized online and with peer problems more likely to be monitored; **"increased parental control was associated with MORE (not fewer) online risks."** *Effect sizes NOT REACHED — ACM 403s despite GOLD-OA labelling.*
+
+**Wang, Zhao, Van Kleek & Shadbolt, "Protection or Punishment?", CSCW 2021**, DOI 10.1145/3476084 · arXiv 2109.05347 — independent replication: **58 apps, 93,404 reviews → 81,488 deduped → 3,264 retained (746 child, 2,518 parent).** Same qualitative verdict.
+
+**Ghosh, Hughes & Wisniewski, "Circle of Trust," CHI 2020**, DOI 10.1145/3313831.3376747 · free PDF https://par.nsf.gov/servlets/purl/10213815 — within-subjects, **17 parent–child pairs**. **Both parents and children significantly preferred a less-invasive design** over the traditional parental-control baseline.
+
+**Stoilova, Bulger & Livingstone (2023)**, DOI 10.1080/17482798.2023.2265512 — rapid evidence review, **1,656 articles screened, 40 coded**: *"evidence of parental controls having both beneficial and adverse outcomes, limiting other outcomes or simply having no outcomes"*; **"little support for advocating parental controls as a stand-alone strategy."**
+
+### Prevalence of family tracking
+- **Pew 2016**: **16%** of parents of 13–17s use monitoring tools to track location; 61% check browsing history; 48% look through call/text records.
+- **Pew 2020** (N=3,640 US parents, fielded 2020-03-02→15): for a child 5–11, **33%** track location via GPS apps.
+- **Chase et al. 2024**, DOI 10.1002/jad.12300 (N=706 college students): **nearly half** currently or previously location-tracked by a parent; tracked students perceive **more helicopter parenting and less autonomy support**.
+- **Boele, Bülow & Keijsers** (accepted, *J. Adolescence*; PsyArXiv 10.31234/osf.io/mzry3_v2): **525 Dutch dyads (2024) + 175 replication (2019)**. **99.6% of parents tracked ≥1 domain**; location **65.7%**; location tracking rejected by ~a quarter of adolescents, χ²(2)=220.8, p<.001. Tracking was **unrelated to adolescent wellbeing but positively associated with parental overprotection and control**. ⚠️ **In 4–7% of dyads the adolescent believed they were NOT tracked while the parent reported tracking** — measured invisible management inside consumer systems.
+
+### Life360 — a family-safety product monetizing the managed relation
+Keegan & Ng, The Markup, **2021-12-06** — https://themarkup.org/privacy/2021/12/06/the-popular-family-safety-app-life360-is-selling-precise-location-data-on-its-tens-of-millions-of-user *(slug ends `-user`, singular; the plural 404s)*
+**33M users**; ~a dozen data partners (X-Mode/Outlogic, Cuebiq, SafeGraph, Veraset, Arity); data-sale revenue **$693,000 (2016) → $16M (2020), ~20% of annual revenue**, plus $6M from Arity; fields sold = **raw lat/long + mobile ad IDs + IP**. CEO Chris Hulls: *"data is an important part of our business model that allows us to keep the core Life360 services free."*
+Follow-ups: **2022-01-27** partial retreat (stops broker sales, **keeps** precise sharing with Arity and aggregated with Placer.ai, no completion date). **2023-06-01** class action (filed 2023-01-12, N.D. Cal.; **lead plaintiff a Florida minor and his family**; complaint names inference of *"places that may be used to infer an LGBTQ+ identification,"* domestic-abuse shelters, medical facilities; stayed 2023-05-26 pending mediation). Regulatory landing point was downstream: **FTC v. X-Mode/Outlogic, 2024-01-09, 3–0** — deletion of prior data, bans on associating data with LGBTQ+ locations or protests. **No FTC or state-AG action naming Life360 itself.**
+
+---
+
+## §B — HAS ANYONE DESIGNED AN EXIT THE MANAGER CANNOT BLOCK?
+
+**Plainly: no.**
+
+| System | Manager's powers | Subject's exit | Manager can block? |
+|---|---|---|---|
+| Apple Family Sharing, adult | organizer can remove | **yes, unilateral** | no |
+| **Apple Family Sharing, 13–17 w/ Screen Time on** | Screen Time, location, purchase approval | only after organizer disables Screen Time | **YES, documented** |
+| **Apple Family Sharing, child <13** | full | **none** — org must delete or transfer | **YES, total** |
+| **Managed Apple ID (ABM/ASM)** | reset password, deactivate, delete, transfer, force sign-out, read logs | **none documented** | **YES, total** |
+| **Google Family Link, 13–17** | full | request only — *"You'll need your parent's approval to stop supervision"* | **YES** |
+| Google Family Link, 18+ | — | *"You don't need your parent's approval"* | no |
+| **Google supervised family member** | — | *"you can't leave your family group"* | **YES** |
+| **Google Workspace user** | reset password + cookies, suspend, delete, **take file ownership without involving the owner**, Vault search/export/hold | **none** | **YES, total** |
+| Microsoft Family Safety member | organizer-only reporting; members "of any age" | petition (turn-off is an organizer act) | **YES** |
+| Sovrin SSI guardianship | guardian is credential **holder**; dependent holds no key | asserted at governance Layer Four; **no mechanism** | **YES in practice** |
+| Aries RFC 0103 | same; hazard explicitly named | *"[TODO: discuss offline mode, freshness, and revocation]"* | **YES** |
+| W3C DID Core | no supervised-principal model at all | n/a | n/a |
+| **Social-recovery wallet** | guardians recover, **cannot transact** | **subject removes guardians unilaterally after a 1–3 day timelock** | **NO — but no supervised role exists** |
+
+Sources: https://support.apple.com/en-us/102652 · https://support.apple.com/guide/personal-safety/manage-family-sharing-ips75b3b794f/web · https://support.apple.com/guide/apple-business-manager/about-managed-apple-accounts-axm78b477c81/web · https://support.google.com/families/answer/9092383 · https://support.google.com/families/answer/7106787 · https://support.google.com/a/answer/2405986 · https://support.google.com/a/answer/1247799 · https://sovrin.org/wp-content/uploads/Guardianship-Whitepaper-V2.0.pdf · https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0103-indirect-identity-control · https://vitalik.eth.limo/general/2021/01/11/recovery.html
+
+**The correct primitive exists and has never been applied to a manager→subject relation.** Ethereum social recovery is the one design where the delegated party provably cannot become the controller — the subject holds the signing key, guardians can recover but never transact, and the subject removes guardians unilaterally after a timelock. It contains **no supervised-principal role at all**, so there is no exit to block.
+
+### The closest thing that exists — and why it is not an exit
+
+**`support.google.com/families/answer/9092383`** is written in second person *to the supervised user* and lists, under **what parents CAN'T do**: *"Remotely monitor your screen · Check your past searches · Check your Chrome browsing history · Check or reset your account password · Read your emails or messages · Listen to your calls · Delete your account · Erase the data on your device · **Remove your ability to stop supervision**."*
+
+Read against the same page's operative text: **13–18 — *"You'll need your parent's approval to stop supervision."*** 18+ — *"You don't need your parent's approval."* So what is non-removable is the **ability to initiate a request**. **It is a petition right that cannot be confiscated, not an exit.**
+
+Note also the unreconciled tension: the Chromebook page (`answer/7680868`) advertises to parents *"You can use a **parent access code** to **prevent your child from removing supervision** without your consent"* — while the child-facing page promises the opposite emphasis. Google reconciles these nowhere.
+
+### Two more documentation contradictions, both erring toward safety-facing over-promise
+1. Apple's **Personal Safety guide** — the page an abuse victim is sent to — says *"Any family member over the age of 13 can remove themselves from a family group at any time."* The operational page 102652 says a 13–17-year-old with Screen Time on **cannot leave until the organizer turns Screen Time off**.
+2. https://support.google.com/accounts/answer/1350409 says *"When a child reaches their country's minimum age, they can manage their own account."* `answer/7106787` says **"Children need parent approval to stop supervision until they turn 18."** Both live. **The consent age and the exit age are different numbers in every system reached, and the gap is manager-controlled.**
+
+**Apple has documented "the supervised subject cannot exit" continuously from December 2020 to March 2026** — the Dec 2020 *Device and Data Access when Personal Safety is At Risk* manual carries the identical child-account sentence and states it as a **security feature**, not a gap.
+
+### Apple Safety Check — real scope, and what it cannot enumerate
+https://support.apple.com/guide/personal-safety/safety-check-iphone-ios-16-ips2aad835e1/web
+
+**Does:** *Emergency Reset* stops person-to-person sharing across **11 Apple apps**, revokes **15 third-party permission classes**, removes signed-in devices, resets the Apple Account password and trusted phone numbers. *Manage Sharing & Access* enumerates information shared with people, app access, and devices on the account.
+
+**Does not:** non-Apple accounts, social media, devices signed into a *different* Apple Account. And critically — *"If your iPhone has Screen Time restrictions turned on or has a mobile device management (MDM) profile installed, you can still use Safety Check but **some options may not be available**."*
+
+**Family Sharing, Screen Time, Managed Apple IDs, child accounts and organizer authority appear nowhere in the Safety Check flow.** It is a **peer**-relationship tool with zero authority over the **supervisory** relation — and the supervisory relation degrades it.
+
+### The practitioner exit is abandonment, gated on money
+Freed et al. CHI 2018: the first advice professionals give is *buy a new device you own* — *"in many cases, the abuser is the sole financial provider for the family and the survivor is unable to afford the cost of a new device or mobile plan."* A case worker: *"If I leave you, you're going to cut my phone off… So now, you're controlling my phone. If I don't do as you say, you're going to cut my phone off. I've seen that happen."*
+
+**Bellini, "Paying the Price," CHI 2023**, DOI 10.1145/3544548.3581101 — **158 survivors (174 consultations) + 16 financial advocates**. First attack category is ownership/authorized-user-based. S51 was an authorized user on her ex-husband's credit account; *"her ex-husband continuously threatened her with removal from his account should she do something that upset him."* S21: *"everything is 100% under his name… **I was invisible to the banks and utility providers**."* Design finding: *"Despite often being designed into the fabric of many financial products (e.g., joint, family accounts), users who have a close intimate relationship with another user are **rarely considered as adversarial**."* **She does not propose an unblockable exit.**
+
+### And exit is itself dangerous — four independent sources
+Freed et al. CSCW 2019: consultants deliberately delay severance — *"an abuser who is used to having access to the victim's information might get angry and escalate the abuse (e.g., resort to physical violence) if that access is suddenly cut off."* Daffalla et al. 2026 (31 participants): clinician-participants advised **not** removing an adversarial passkey without safety planning, because *"removing access may notify the adversary, possibly escalating abuse."* Levy & Schneier (J. Cybersecurity 6(1) tyaa006, 2020) name the **"blank slate problem"**, criticize Apple for notifying a partner when location sharing stops, and advocate *"discreet changes to privacy preferences."* And DULT's own threat model §3.1 — quoted in §C below.
+
+**Visibility of the management relation and visibility of its severance are opposite-signed. Any design that couples them inherits the worse half of both.**
+
+---
+
+## §C — OPACITY AS AN ABUSE ENABLER
+
+### Does the literature find covert is worse? Not as measured harm.
+
+- **Chatterjee 2018** treats covertness as attacker **motive**, not measured harm differential: *"In an IPS context, it's beneficial to an abuser if tools are covert, meaning they can operate without the victim's knowledge, and can potentially remain undiscovered even if the victim looks through all the apps in their app menu."* Its central finding cuts *against* a simple covert-is-worse frame: *"While we find dozens of overt spyware tools, **the majority are 'dual-use' apps**… **Both** overt spyware and dual-use apps are dangerous in IPV contexts."*
+- **Roundy 2020** codes surveillance apps as those that *"**both covertly and overtly** track someone's location"* — harm is **not separated by covertness**.
+- **Tseng 2020** uses "covert" once and never claims attackers preferred covert tools.
+- **Freed 2018's** central construct — the **UI-bound adversary**, *"an adversarial but authenticated user that interacts with a victim's device or account via standard user interfaces"* — is by construction **not covert malware**.
+
+**What IS measured about covertness is that it defeats enumeration**: 37/40 anti-spyware tools flag ≤3% of dual-use apps; major AV ≤13%; 8% via ≥3 VirusTotal engines; icon-hiding is a distinct app market with its own defensive counter-market.
+
+### DULT — the formal industry commitment
+
+**Announcement 2023-05-02** — https://www.apple.com/newsroom/2023/05/apple-google-partner-on-an-industry-specification-to-address-unwanted-tracking/ — named supporters **Samsung, Tile, Chipolo, eufy Security, Pebblebee**; quoted participants include **Erica Olsen (National Network to End Domestic Violence)** and Alexandra Reeve Givens (CDT).
+
+**Working group** `dult`, IETF Security Area — https://datatracker.ietf.org/wg/dult/about/ — charter **IESG-approved 2024-02-29**; **co-chaired by Erica Olsen (NNEDV)** and Sean Turner. Both charter milestones were due **2025-07-31**; neither is met.
+
+| Draft | Rev | Last posted | State |
+|---|---|---|---|
+| `draft-ietf-dult-accessory-protocol` | 00 | 2024-11-03 | **EXPIRED** 2025-05-08 |
+| `draft-ietf-dult-finding` | 01 | 2025-06-06 | **EXPIRED** 2025-12-08 |
+| **`draft-ietf-dult-threat-model`** | **05** | **2026-08-06** (exp. 2027-02-07), 49 pp | **ACTIVE** |
+
+Accessory-protocol authors were **Ben Detwiler (Apple), Brent Ledvina (Apple), Siddika Polatkan (Google), Zachary Eddinger (Google)**. Threat-model authorship has since moved off the vendors: **M. Delano (Swarthmore), J. Lowell (NNEDV), S. Prabhu (Nokia)**. **No RFC has been published.**
+
+**The doctrinal statement — threat model §4.1.6**, aimed at Tile's Anti-Theft mode:
+> ***"Any mode that makes it possible to turn off Unwanted Tracking Alerts is antithetical to DULT's recommendations"*** — alerts *"should not be circumventable under any circumstance."*
+
+That is stronger and more precise than "make it visible": **the manager must not hold a switch over the subject's notification.**
+
+**But DULT deliberately separates the two visibilities.** *(Obfuscated) Owner Information* is defined as *"no more than the last two digits of a phone number and/or an obfuscated email address with the first letter of the username and entity visible … (e.g., `b*****@i****.com`)."* **The relation is made visible; the counterparty is not made enumerable.**
+
+Hard requirements forcing physical visibility (accessory protocol -00): sound maker **MUST** be present at **minimum 60 Phon peak loudness (ISO 532-1:2017)**; `T_SEPARATED_UT_TIMEOUT` = random **8–24 h** uniform, then motion sampling at 10 s dropping to 0.5 s on motion; accelerometer MUST detect ±10° on two axes; BLE identifier retrieval **MUST require a physical action**. ⚠️ **§6 "Platform Support for Unwanted Tracking" is literally "TODO"** — the platform half was never written before the draft lapsed.
+
+**Shipped:** Android unknown-tracker alerts **2023-07-27** (https://blog.google/products-and-platforms/platforms/android/unknown-tracker-alert-google-android/ — Google **held back its own Find My Device network** *"until Apple has implemented protections for iOS"*). Cross-platform **2024-05-13** (https://www.apple.com/newsroom/2024/05/apple-and-google-deliver-support-for-unwanted-tracking-alerts-in-ios-and-android/) — iOS 17.5 + Android 6.0+, *"[Item] Found Moving With You."*
+
+### AirTag alerts — measured effect
+
+**Apple, 2022-02-10** — https://www.apple.com/newsroom/2022/02/an-update-on-airtag-and-unwanted-tracking/ — promised setup warnings, Precision Finding for unknown AirTags, *"refined unwanted tracking alert logic to notify users earlier,"* louder tones. Frequency claim, **CLAIMED with no denominator**: *"incidents of AirTag misuse are rare; however, each instance is one too many."*
+
+**Heinrich, Bittner & Hollick, "AirGuard," WiSec 2022**, DOI 10.1145/3507657.3528546 · arXiv:2202.11813 — controlled comparison:
+
+| Placement | AirGuard | iOS built-in |
+|---|---|---|
+| Pocket | **35 min** | **1 h 45 m 14 s**, only on return home; **self-built OpenHaystack tag: never** |
+| Backpack | **31 min** | **> 4 hours** despite ≥70 linked locations; only on return home |
+| Car (fuel cap) | 2nd ride | **never — not even on returning home** |
+
+*"iOS delays notification until the user returns to their home location — which essentially **gives the home location away to the attacker**."* Six-week deployment (2021-12-15→2022-01-26): **>120,000 active users**, >8,600,000 Find My advertisements, **2,494 notifications to 1,325 users**; accessories were **4.1%** of devices found but **29.3%** of notifications; **97 false alarms, 85 of them from ordinary Apple devices**; **~0.2% of data donors persistently high-risk** (tracked >24 h in a rolling fortnight).
+
+Other measured work: **Heinrich et al., PoPETs 2021(3):227–245** (DOI 10.2478/popets-2021-0045) — unauthorised report access permits top-location recovery with **~10 m error in urban areas**, plus a flaw exposing the **past 7 days**. **Ibrahim et al., arXiv:2303.06073** — tags located *"55% of the times in about 10 minutes within a 100 m radius."* **Jang et al., arXiv:2501.17452** (2025-01-29, 22 volunteers, 29 countries) — AirTag plateaus at **79.8%** within-10 m after 60 min.
+
+**Police-report tally — Samantha Cole, Motherboard/VICE, 2022-04-06** — https://www.vice.com/en/article/apple-airtags-police-reports-stalking-harassment — requests to dozens of large departments, **8 responded**, **150 AirTag-mentioning reports over eight months**: **50** were women who received a tracking notification, **25** of whom named a specific man; **1 of 150** involved a man suspecting an ex-girlfriend. The load-bearing sentence for any cross-platform design: ***"anyone not using an iPhone or Apple device, however, would never know."***
+
+### Is "invisible management is more dangerous than visible management" supported?
+
+**UNTESTED as stated.** No study reached compares the same relation covert versus disclosed on a harm outcome.
+
+**The nearest quantitative test points sideways.** Ravid, White, Tomczak, Miles & Behrend, *Personnel Psychology*, DOI 10.1111/peps.12514 (2022-04-25), preprint https://osf.io/ef43u/ — **K = 94 independent samples, N = 23,461**:
+- *"Results provide no evidence that EPM improves worker performance."*
+- ***"the presence of EPM increases worker stress and strain, regardless of the characteristics of monitoring."***
+- Transparency → attitudes: overall ρ = **.25** [.11,.39]; fairness ρ = .21 [.04,.38]; commitment ρ = .35 [.10,.61]; perceived support ρ = .37 [.13,.62]; satisfaction ρ = .26 [.08,.44].
+- Transparency → performance: **no effect** (H3a unsupported). **Transparency → stress/strain: could not be tested, K = 2.**
+
+**Making monitoring visible measurably improved how people felt about the monitor. It did not measurably reduce the harm.** (Workplace EPM, not household management — but it is the closest test in existence.)
+
+**And the countervailing evidence is inside the standard itself.** DULT threat model **§3.1**: ***"taking overt security measures while frequently in physical proximity to the Attacker may lead to the Attacker escalating their tactics of interpersonal control. Risk assessments and the weighing of tradeoffs in such situations are often highly individualized."*** Plus alert fatigue (§4.1.2) and the risk that detectability lets an attacker track a target using the **target's own tag** (§3.2).
+
+---
+
+## §D — NON-ENUMERABILITY AND AUDIT
+
+**Can an advocate, clinician or court enumerate what is monitoring a device or account? No — and the clinic's own record shows why that matters.**
+
+**ISDi exists because enumeration is hard, and it works badly at exactly the relational cases.** Of 79 flagged apps across 75 scans: 61 dual-use, 18 false positives, **only 1 true covert positive**, and actual spyware for **3 of 44 clients**. **The findings that mattered came from the technograph — a hand-drawn map of people, devices and accounts — not the scanner.** *"In some cases, the TAQ and technograph were the primary (or only) way to uncover a potential problem."* Manual iCloud checks found **4 clients with unrecognised or abuser-owned "trusted" devices**; account-log checks found **8 more** with unknown or abuser device logins.
+
+Non-enumerable chains as a documented safety cost: **3 clients** kept password files that synced to a compromised iCloud; several emailed new passwords through compromised accounts; clients used compromised accounts as the **recovery** account for other services, *"unaware of how this might result in abuser access to these services."*
+
+**Machine-level non-enumerability is measured across 19 services.** Daffalla, Bhattacharya, Chatterjee & Dell, *"A Framework for Abusability Analysis: The Case of Passkeys in Interpersonal Threat Models,"* USENIX Sec 2025 — https://nixdell.com/papers/2025-USENIX-abusability.pdf. 19 services, 4 passkey providers, 4 client platforms, 7 abuse vectors, 5 stepthrough protocols.
+- **Adversarial biometrics: 30 stepthroughs (10 services × 3 platforms), succeeded for all.** ***"none of the OSes inform users of any changes to their biometric configurations through notifications."*** On Windows 10 the UI shows **nothing** about the number or nature of registered fingerprints.
+- **Passkey cloning: for CVS, Porkbun and TikTok the access is undetectable and *"we could determine no way to revoke access."***
+- **Only eBay revokes passkeys on password change** — unintuitively the only way to revoke a cloned one. No service prompts about passkeys during password reset. ***No service lists which passkey authenticated a session.*** For Adobe, GitHub, LinkedIn and Samsung, sessions survived revocation past 60 minutes.
+- **The manager-persistence bug, exactly:** in Apple's shared-passwords group, *"the account that adds a credential to the group is the only one authorized to remove it."* If an abuser compels the victim to set up a passkey on a device signed into the **abuser's** Apple ID and then shares it to the victim's, *"there would be no way for the victim to delete the attacker's copy."*
+- Follow-on — Daffalla, Myers & Bellini, USENIX Sec 2026, https://nixdell.com/papers/2026_USENIX_adversarial_passkeys.pdf, **31 participants, 59 investigations** on Google/PayPal/LinkedIn: ***"most participants were not able to identify the adversarial passkey without assistance."***
+
+**DULT concedes the audit log does not exist** (threat model §4.1.5): a successful protocol *"would include a log file that is clearly labeled and easily accessible … that is not easily edited"* recording *"the account, the Device, GPS location, and the time"* — and explicitly ***"Logs should not be easily editable to avoid gaslighting and accountability efforts."*** Ideally also a record of when the owner checked the target's location while near them. **Acknowledged as unbuilt.**
+
+**Apple Safety Check is a first-party enumerator for the device owner only.** No mechanism and no measured evaluation was found giving an **advocate, clinician or court** third-party enumeration. The ISDi clinic model works only with the client present and their device connected over USB.
+
+### Coercive-control law depends on discoverable monitoring
+
+**Serious Crime Act 2015 s.76** — https://www.legislation.gov.uk/ukpga/2015/9/section/76 — in force **2015-12-29**, amended 2023-04-05. Repeated or continuous controlling/coercive behaviour toward a **personally connected** person with a serious effect. **"Personally connected" expressly includes people who share parental responsibility for a child, and relatives** — the exact relations a structural-management design creates. Max **5 years** on indictment.
+
+**CPS guidance** — https://www.cps.gov.uk/legal-guidance/controlling-or-coercive-behaviour-intimate-or-family-relationship (updated 2023-04-24 and 2025-02-07). Listed conduct includes *"monitoring their time"* and *"**monitoring a person via online communication tools or using spyware**."* **The decisive sentence:** ***"A victim may not know the full extent of a suspect's conduct, for instance if they were being monitored without their knowledge."*** Evidential list includes *"GPS tracking devices installed **covertly an/or overtly**"* — **covert and overt treated as equally evidential, not as different-severity conduct.**
+
+**Domestic Abuse (Scotland) Act 2018 asp 5** s.2(3) — in force 2019-04-01 — lists relevant effects including **(c) "controlling, regulating or monitoring B's day-to-day activities."** **Monitoring is a named statutory element, with no covert/overt distinction.**
+
+**Home Office, "Review of the controlling or coercive behaviour offence," 2021-05-10** — https://assets.publishing.service.gov.uk/media/608bdba28fa8f51b909ca167/review-of-the-controlling-or-coercive-behaviour-offence.pdf
+
+| Metric | Figure |
+|---|---|
+| Police-recorded CCB offences 2016/17 | **4,246** |
+| Police-recorded CCB offences 2019/20 | **24,856** |
+| Defendants prosecuted, CCB as principal offence, 2019 | **1,112** |
+| Charge rate | **11% (2017/18) → 6% (2018/19)** |
+| Closed for evidential difficulties, 2018/19 | **85%** |
+| Insufficient evidence *despite victim support*, 2018/19 | **35%** CCB vs 24% all DA |
+| Conviction ratio (principal offence) | **38% (2016)**, rising |
+| Out-of-court disposals | **~0%** (vs 3% all DA) |
+
+**Prosecution turns on discoverable artefacts, and the failure when artefacts are absent is quantified — 6% charge rate, 85% evidential closures. But no source isolates "the tooling left no trace" as a distinct measured cause.**
+
+### The normative floor that no product meets
+**UN Committee on the Rights of the Child, General Comment No. 25 (2021)**, CRC/C/GC/25, **2021-03-02** — https://digitallibrary.un.org/record/3906061/files/CRC_C_GC_25-EN.pdf
+- **¶75:** *"Any digital surveillance of children… should not be conducted routinely, indiscriminately or **without the child's knowledge**… nor should it take place **without the right to object to such surveillance**."*
+- **¶76:** monitoring *"may prevent a child from accessing a helpline or searching for sensitive information."*
+- **¶77:** *"Protecting a child's privacy… may be vital in circumstances where **parents or caregivers themselves pose a threat to the child's safety** or where they are **in conflict over the child's care**."*
+- **¶78:** *"Providers of preventive or counselling services… should be **exempt from any requirement for a child user to obtain parental consent**."*
+
+**This is the only text anywhere requiring a channel the manager can neither see nor block. It has zero implementations.**
+
+**Measured harm at the identity layer in schools** — CDT, *Hidden Harms*, Aug 2022, nationally representative, fielded May/June 2022, **1,606 parents / 1,008 teachers / students n=400 and n=460**: **13% of all students at monitoring schools report that they or an LGBTQ+ student they know has been outed by it — 29% among LGBTQ+ students.** ~90% of teachers report their district uses monitoring software; **one in five parents do not know if their school does.** EFF (2023-10-31): **GoGuardian monitors ~27 million students across ~10,000 schools; students cannot opt out.** **The mechanism is not a rogue admin — it is legitimate admin authority over an account the student cannot leave.**
+
+**The at-risk-user taxonomy files children on the wrong side of its own distinction.** Warford et al., *SoK*, IEEE S&P 2022, arXiv 2112.07047, meta-analysis of **95 papers**, has the exact vocabulary — *"implicit or explicit authority over the target"* — and assigns it to intimate-partner abuse, while filing children under a separate factor defined as third parties with *"**helpful or safety-focused reasons** for 'privacy invasions'."* It cites both Ghosh CHI 2018 papers and codes it that way anyway. **The literature has not named the manager-as-adversary case for children.**
+
+---
+
+## §E — PLATFORM DISCLOSURE COMPARISON (corrected)
+
+⚠️ **Methodological warning first.** Asked about Apple's App Store Review Guidelines, the WebFetch summarizer **fabricated** this as quoted policy: *"Apps cannot monitor or track other users without explicit consent… Not operate covertly or without the knowledge of the person being tracked."* **That text does not exist.** I pulled the raw guidelines (238,359 bytes, HTTP 200, 2026-09-04) and counted: `stalkerware` **0** · `monitor` **0** · `stalk` **0** · `covert` **0** · `persistent notification` **0** · `another person` **0** · `spouse` **0**. Only `surreptitious` ×2 (5.1.1(vi) password discovery; 5.1.2(iii) profile building), `parental control` ×4, `mobile device management` ×3. **The summarizer invented a policy in exactly the direction a researcher would hope to find one.**
+
+| | Relation disclosed to subject? | **Who** manages disclosed? | Persistent ambient indicator? |
+|---|---|---|---|
+| **Google Family Link** | **Yes** — dedicated child-facing page (`answer/9092383`) enumerating both powers and limits; on-device `Settings › Digital Wellbeing & parental controls` carries the current settings **and the `Stop supervision` control** | **No** — "your parent," generically | **Not documented** |
+| **Apple Family Sharing** | **Yes** — and inside the *Personal Safety* guide, i.e. framed for a possibly-coerced reader; the under-13 asymmetry is stated openly | **Yes** — *"Settings › [your name] › Family… tap the icon to **see your family members and roles**"* — the only such affordance found on any platform | **Not documented** |
+| **Microsoft Family Safety** | Inferable from role structure only; nothing published addressed to the member | No | **No** — *"**Only Organizers can enable, disable and view activity reports**"* |
+
+**Google Play Developer Program Policy — Stalkerware, effective 2020-10-01** (announced 2020-09-16, `answer/10065487`; now at `answer/9888380`, filed under **Malware**, not Device & Network Abuse):
+> *"Google Play prohibits apps from monitoring another individual… **unless the app is exclusively designed and marketed for parents to monitor their children** or enterprise management…"*
+> *"**These apps cannot be used to track anyone else (a spouse, for example) even with their knowledge and permission, regardless if persistent notification is displayed.**"*
+> *"These apps must use the **`IsMonitoringTool` metadata flag in their manifest file**…"*
+> *"Apps must not present themselves as a spying or secret surveillance solution. · Apps must not hide or cloak tracking behavior… · **Apps must present users with a persistent notification at all times when the app is running and a unique icon that clearly identifies the app.** · Apps must disclose monitoring or tracking functionality in the Google Play store description."*
+
+The rule **hardened over time from prose into a machine-checkable manifest declaration.** **Apple has no equivalent** (verified by grep above); its 5.5 MDM disclosure duty runs *"prior to any user action to purchase or otherwise use the service"* — **to the purchaser, not the monitored party.**
+
+**Regulator instruments, and the shape of their remedies:**
+- **FTC v. Retina-X, 2019-10-22** (>15,000 subscriptions across MobileSpy, PhoneSheriff, TeenShield). Pled harm was icon-hiding specifically. Remedy: *"must include an icon with the name of the app on the mobile device, **which is only removable by a parent or legal guardian**."* **The FTC mandated a marker the supervised party can see but cannot remove, and the supervisor alone can remove.** Its Icon Notice exception (Order §I.C.b) permits disabling the notice *"only if the purchaser attests, prior to installation, that the purchaser is the legal guardian or parent of a minor Child"* — **an unverified self-attestation checkbox.** Of the three permitted purposes, employer→employee and adult→adult both require **express written consent**; **a child is the only supervised class whose awareness is neither consented to nor guaranteed.**
+- **FTC v. Support King / SpyFone, 2021-09-01** — first outright ban, plus a **retrospective** duty: *"notify device owners that the app had been secretly installed."* Levine: *"The stalkerware was hidden from device owners, but was fully exposed to hackers."*
+
+Both are **consent decrees binding named respondents — not rules of general application.**
+
+**The finding that matters most: the platforms wrote the persistent-notification rule for everyone but themselves.** Google Play compels an always-on indicator on every third-party monitoring app and forbids monitoring even a *consenting* spouse — **Family Link itself ships no documented ambient indicator.** Apple writes no such rule and ships the cleanest case of silent supervision (https://support.apple.com/en-us/105121): a restricted app *"is just temporarily **hidden** from the Home Screen"* — no notice, no explanation, no attribution. **The relation stays visible in Settings; every individual exercise of it is invisible.** Microsoft ships an organizer-only report over web history and search terms, for members *"of any age,"* with a support page titled **"Family Safety settings enforced on adults."**
+
+Whether the self-exemption is earned — a supervised Google account is *created* supervised, so there is no covert conversion moment to disclose — or merely unexamined: **no published rationale was reachable.**
+
+---
+
+## THINGS THAT CHANGE THE SHAPE OF THE DESIGN
+
+1. **The measured surface is the authorization graph, not the software.** 89.1% dual-use, 99.2% on-store, 3 spyware vs 30 relation-layer findings. Making management structural is not adding an app to the threat model — it **is** the threat model.
+2. **The one mitigation adversaries visibly complained about was an identity-layer role check** (TeenSafe's account-age verification), not any UI notice.
+3. **Nobody verifies who the manager is.** None of 40 parental-control apps implemented multi-guardian consent; vendors assert *"only the device owner's consent is required"*; the FTC's own remedy accepts an unverified checkbox. **A design where the manager is a persona with no human owner-of-record removes the last thing every existing system nominally relies on — an attributable person to attest.**
+4. **Non-enumerability is a documented harm channel with no counterexample.** Every measured case where a relation could not be enumerated produced *unrecoverable* adversarial persistence. Nothing shows non-enumerability protecting anyone.
+5. **But visibility is not free.** Severance that notifies the manager is measured as an escalation trigger by four independent sources — including DULT's own threat model.
+6. **The five-year hole.** Consent age 13–16; exit age 18 (Google) or 13–17-with-Screen-Time (Apple). **The gap is manager-controlled in every system reached.**
+7. **The design axis is not visible-versus-invisible.** It is three separable properties, and no shipped system or paper does all three: **the management relation enumerable by the managed and by a third party they choose; the alert not switchable by the manager** (DULT §4.1.6 and Play's `IsMonitoringTool` are the same commitment expressed twice, and neither platform applies it to its own family system); **the severance not announced to the manager.**
+
+---
+
+## NOT REACHED — do not fill from memory
+
+- Matthews et al. CHI 2017 full text (ACM 403). **N=15 survivors** confirmed only via Freed et al. 2018's citation; three phases from the abstract.
+- Ghosh et al. "A Matter of Control or Safety?" effect sizes — ORs, betas, p-values (ACM 403 despite GOLD-OA labelling; no NSF PAR record).
+- Google Family Link: whether the **supervising account's identity** is disclosed to the child; whether any **ambient indicator** exists beyond the Settings entry.
+- Apple: whether a child is notified when **Ask to Buy, Screen Time limits, or location sharing** are first enabled; any rule that Family Sharing location **cannot be hidden** from the shared person (searched, not found — absence is not proof).
+- Microsoft: whether a member is told reporting was switched on; whether a member can identify the organizer.
+- Full text of the **Retina-X and SpyFone Decisions and Orders** (all `ftc.gov/system/files/` PDF paths 404; press releases and one order excerpt only).
+- **EU / GDPR** notice obligations toward a monitored person; EDPB or eur-lex material.
+- **Published platform design rationale** — Google/Apple safety-team statements on family-system visibility.
+- **s.76 offences recorded / charged / convicted by year for 2020/21–2025/26** — ONS *Domestic abuse and the criminal justice system* (latest 2025-11-26) does not disaggregate CCB; CPS quarterly summaries do not either.
+- Any **measured evaluation of the 2023 Home Office CCB statutory guidance**.
+- **Mayberry et al.** WPES 2021 full text; **Briggs & Geeng "BLE-Doubt"** full text.
+- Any measured study of **Life360 / Find My / Family Link used coercively**; any FTC or state-AG action **naming Life360 itself**; AirTag state-AG actions.
+- Any measured study of **LGBTQ+ youth outed by a parental-control app, family location sharing, or a managed account** — the CDT 13%/29% figures are the only bridge found; the causal link is otherwise **not measured anywhere reached**.
+- Any count or outcome for **children who could not exit a parent-created account**.
+- Academic literature on **covert parental monitoring** (OpenAlex daily budget exhausted mid-session).
+- Live `support.google.com` and `play.google.com` — **IP-blocked**; all Google evidence above is via Wayback with snapshot timestamps.
+- The **`lares` MCP server failed to connect this session** (CONNECTION_CLOSED). It played no part in this research; you may want to retry it.
+
+**Two flagged instrument-lies:** (1) the WebFetch summarizer **fabricated** Apple App Store policy text, disproved by raw-byte grep; (2) `draft-ietf-dult-threat-model-05` §3.2.2 attributes three percentages (**72% / 41% / 67%**) to Freed et al. CHI 2018 — **that paper contains zero `%` characters** (verified directly); its real counts are n=28, 27, 26, 24, 20, 16, 15, 9 and n=47. **Misattributed in a live IETF working-group document; true source unidentified.**
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 45,654 characters
+
+````
+All five research threads are in (one stalled and was backfilled directly). Report follows.
+
+---
+
+# THE ABUSE SURFACE OF *MANAGED* IDENTITY — measured record
+
+## HEADLINE ANSWERS
+
+**1. Has anyone built an exit the manager cannot block? NO.** Across every shipped supervised-identity system reachable — Apple Family Sharing, Managed Apple IDs, Google Family Link, Google Workspace, Microsoft Family Safety — and every SSI guardianship design (Sovrin, Hyperledger Aries), the subject's exit is gated on (a) the manager's cooperation, (b) an age threshold *plus* a manager-controlled toggle, or (c) an external legal process. The only design where a delegated party provably cannot become the controller is **Ethereum social-recovery wallets** (Buterin, 2021-01-11, https://vitalik.eth.limo/general/2021/01/11/recovery.html) — and that is the *inverse* relation: the subject holds the signing key and can unilaterally remove guardians after a 1–3 day timelock; guardians can recover but never transact. It contains **no supervised-principal role at all**, so there is no exit to block. The correct primitive exists (recoverer ≠ controller; timelocked unilateral removal) and has never, in anything reachable, been applied to a manager→subject relation.
+
+**2. When management is structural rather than incidental, what breaks?** The measured record says: **the identity/authorization layer becomes the abuse surface, and malware becomes a rounding error.** Havron et al. (USENIX Sec 2019, https://www.usenix.org/system/files/sec19-havron.pdf), 44 IPV clients, 105 devices, 75 ISDi scans: issues detected were **potential spyware 3 · password compromise 14 · unknown "trusted" devices 12 · shared family/phone plan 4**. Relation-layer findings outnumbered spyware **~10:1**. ISDi flagged 79 apps, 61 dual-use, and *for all but one the client recognized the app already*. The abuse ran through legitimate authority, not hidden code.
+
+**3. Is invisible management more dangerous than visible? Asserted, not measured — and the visible/invisible axis is not the load-bearing one.** See §E. But there is a hard normative floor (UN CRC GC No. 25 ¶75) and a shipped-industry precedent (DULT) both saying an unnotified tracking relation is unacceptable.
+
+---
+
+## A. PARENTAL CONTROL / FAMILY TRACKING AS AN ABUSE VECTOR — the numbers
+
+**Roundy et al., "The Many Kinds of Creepware Used for Interpersonal Attacks," IEEE S&P 2020** (PDF: https://nixdell.com/papers/Creepware_IEEE_SandP_camera.pdf; DOI 10.1109/sp40000.2020.00069)
+- Dataset: **billions of app installs across 50M+ Android devices** (Norton Mobile Security), 2017 and 2018/19 windows.
+- CreepRank = guilt-by-association graph mining with MAP estimation. Seed 2017: **18 surveillance apps on 35,811 devices**; seed 2018/19: **50 apps on 32,719 devices**.
+- Top 1,000 hand-coded → **857 qualify as creepware**. Surveillance **372**; of those, **107 multifaceted surveillance apps affecting 172K Norton customers in 2017 alone**. Spoofing 114 · harassment 80 · hacking tutorials 63 (61 in another count) · location-only 90 · thorough 90 · social media 105 · covert social media 26 · camera 15 · mic 11 · SMS 9 · screen 5 · rooting tutorials 6.
+- Disclosure: **1,095 apps reported to Google; Google determined 813 violated policy and removed them.**
+- The dual-use finding, verbatim: *"many apps that purport to be intended for child online safety have highest PMI with apps that are unambiguously intended for intimate partner surveillance."* "Family Locator for Android" was **previously titled "GirlFriend Cell Tracker."** "Cell Tracker" — the most prevalent thorough-surveillance app in the top 1,000 — markets on child safety and correlates strongly with "Cheating Spouse," "Boyfriend Tracker Free," "Where the hell are you?"
+- 2018/19 vs 2017: information extraction more than doubled; surveillance grew; **the fraction of surveillance apps recommended for child safety rose relative to IPS framing** — the authors read this as re-marketing in response to enforcement.
+
+**Chatterjee et al., "The Spyware Used in Intimate Partner Violence," IEEE S&P 2018** (https://nixdell.com/papers/spyware.pdf)
+- 10,000+ apps retrieved; **9,224 collected**; 1,629 active Play listings; of a hand-labeled 1,000, **280 (28%) marked IPS tools**. Off-store: **32 found, 23 active** — all overt spyware. So **~92% of the IPS-relevant corpus is on-store dual-use.**
+- **"All of the off-store spyware apps we analyzed describe child safety as one of their use cases."**
+- Taxonomy names the shape directly: *personal tracking / mutual tracking (family trackers) / **subordinate tracking (child monitoring apps)***. Parental control is the subordinate tier **by construction**.
+- Review mining: **464,625 reviews across >9,000 apps → 103 reviews on 82 apps explicitly describing partner surveillance**; example on "SMS Tracker Plus — an app which claims to be for parental control": *"Love it!!! I've been suspecting my gf cheating and this gave me answers really quick."*
+- Detection: best tool (Anti Spy Mobile) flagged **95% of off-store spyware but only 47% of on-store IPS-relevant apps**, at 12% FPR. Major AV flagged **at most 13%** of on-store dual-use.
+- **One measured counter-example that works:** TeenSafe checks the age of the Google account the device is registered to; abusers complain in reviews about the difficulty. A *role/age check at the identity layer* is the only mitigation in this literature that adversaries noticed and complained about.
+- Bundled/carrier tier (Verizon Family Locator, Sprint Family Locator, Find My Device, Google Maps timeline): *"remotely activated with the credentials attached to the account that pays the cellular bill"* and **"impossible to uninstall as they are bundled with the OS; at best they can be disabled."**
+
+**Maier, Tanczer & Klausner, "Surveillance Disguised as Protection," PoPETs 2025(2):100–120**, DOI 10.56553/popets-2025-0052 (PDF: https://petsymposium.org/popets/2025/popets-2025-0052.pdf; arXiv 2504.16087)
+- **20 sideloaded vs 20 Play Store** parental-control apps, Android 9.0, static + dynamic + traffic + policy analysis.
+- Permissions: sideloaded mean **44.4** (range 22–70, mSpy highest) vs in-store **34.9** (15–58). Dangerous permissions: **21.0 vs 11.8**.
+- **Every** sideloaded app abused the Accessibility API (14/20 in-store did). **Device Administrator: 16 sideloaded, 15 in-store** — used *primarily to block uninstallation*. **Draw-Over-Other-Apps: 13 sideloaded, 14 in-store** — used to close the settings app when uninstall is attempted. Kidlogger minimizes the settings window on every attempt to reach its uninstall button.
+- **17 of 20 sideloaded apps instruct the user to disable Google Play Protect**; 13 were nonetheless detected by Play Protect 42.1.27-31; **7 were not: Bark, EvaSpy, FlexiSpy, Spapp Monitoring, SPYX, TheOneSpy, TiSpy**.
+- **17 of 20 obfuscated their name** ("Settings", "System Service", "WiFi Service", "Sync Services"); 17 used an innocuous icon. Zero in-store apps obfuscated (Play policy forbids it).
+- **Stalkerware IOC match: 8/20 (paper body) — note the PoPETs landing page abstract says 9/20; the PDF says 8. Discrepancy flagged.** Against TinyCheck: **25% of all sideloaded parental control apps identified, 40% of the top 20**. Against Echap's IOC DB: **50% of the 44 identified sideloaded parental control apps.**
+- 3 apps sent sensitive data unencrypted; 10 of 20 sideloaded lacked an applicable privacy policy.
+- **12 of 20 sideloaded apps promote monitoring of Tinder/Hinge** — platforms with an 18+ floor. The authors: this "suggests these services could be used to track adults' activities rather than children's… while also risking outing minors who are, for example, 'closeted' LGBTQ+ users."
+- **Consent finding, structural:** citing Parsons et al. (Citizen Lab 2019), *"obtaining consent from just one parent is inadequate in joint parenting situations… **None of the analysed apps implemented measures to ensure this.**"* And: *"Some software vendors stated that only the device owner's consent is required for monitoring. However, device ownership extends beyond legal guardianship."*
+
+**ISDi's live blocklist — a direct measurement of the shape of the surface** (https://github.com/stopipv/isdi, `src/isdi/data/app-flags.csv`, HEAD 2026-07-22)
+- **5,777 flagged apps. dual-use 5,150 (89.1%) · stalkerware 613 · spyware 13 · safe 1.**
+- By store: playstore 5,084 · appstore 648 · offstore 45. **Only 45 of 5,777 are off-store.**
+- **581 (10.1%) carry `family|parent|kid|child|teen` in the title** — 569 of those flagged dual-use.
+- The clinic's operational model of the abuse surface is 89% *legitimate-purpose software*, 99.2% on-store.
+
+**Tseng et al., "The Tools and Tactics Used in Intimate Partner Surveillance," USENIX Sec 2020** (https://arxiv.org/pdf/2005.14341)
+- 5 forums, **18,937 threads / ~200K posts**, first thread Jan 2006, crawl through 2018. Qualitative coding of **750 threads (250 each from 3 non-spam forums)**.
+- IPS-relevant share of threads: Forum A 78% · B 51% · C 18%. **Threads that escalate: 32% / 38% / 35%.**
+- Two of five forums are essentially spyware SEO spam: Forum D's top user touched **95% of threads and authored 45% of posts**; 94% of that user's posts were spam.
+- **Family plans and Apple IDs are named attack tools by attackers themselves.** Verbatim from Forum A: *"We are in the process of choosing new cellphones and a new company. Which is the best company to keep tabs, records, etc? We currently have iPhones on AT&T, and their **Family Map** did help me prove his affair."* Responder recommends staying with AT&T for "immediate online access [to phone records] and their GPS is good."
+- Also: iCloud-without-device-access (*"What is the best spyware if I can't get their phone, but have their Apple ID and password?"*), a family iPad synced to a partner's iCloud, Significant Locations, Find My Friends, Google Maps Timeline, and *"mobile spyware products that leveraged cloud-based access… **such as tools marketed for use in parental control contexts**."*
+
+**Teen-side: monitoring does not reduce risk, and teens rate it 1.79 stars**
+- **Ghosh, Badillo-Urquiola, Guha, LaViola, Wisniewski, "Safety vs. Surveillance," CHI 2018**, DOI 10.1145/3173574.3173698 (PDF: https://www.cs.ucf.edu/icerc/isuelab/publications/pubs/pn1838-ghoshA.pdf). Scraped Aug 2016 from **66 apps, 29,272 reviews** → **736 child-authored reviews across 37 apps**, reviewer ages 8–19. **Child mean 1.79 (SD 1.48); presumed-parent mean 3.66 (SD 1.79) over 28,536 reviews; difference 1.866, 95% CI [1.76,1.98], t(793.34)=33.77, p<.05. 76% of child reviews are 1★.** Coded complaints in the 79% "disliked" set: **Overly Restrictive 35% · Privacy Invasive 23% (codes include *stalking*) · Bad Parenting/Lack of Communication 14% · Faulty Design 14%.** **The word "abuse" appears zero times in the paper**; the strongest published framing is "parental stalking," "asymmetric power differentials," and violation of contextual integrity.
+- **Ghosh et al., "A Matter of Control or Safety?", CHI 2018**, DOI 10.1145/3173574.3173768. **215 matched parent–teen dyads (13–17)**, two logistic regressions. **Low-autonomy-granting (authoritarian) parents most likely to use the apps**; teens victimized online and with peer problems more likely to be monitored; **"increased parental control was associated with MORE (not fewer) online risks."** (Cross-sectional; effect sizes NOT REACHED — ACM 403.)
+- **Wang, Zhao, Van Kleek, Shadbolt, "Protection or Punishment?", CSCW 2021**, DOI 10.1145/3476084, arXiv 2109.05347. Independent replication: **58 apps, 93,404 reviews → 81,488 deduped → 3,264 retained: 746 child, 2,518 parent.** Same qualitative verdict.
+- **Stoilova, Bulger & Livingstone (2023)**, DOI 10.1080/17482798.2023.2265512: rapid evidence review, **1,656 articles screened, 40 coded**. *"the consequences of use were mixed… evidence of parental controls having both beneficial and adverse outcomes, limiting other outcomes or simply having no outcomes"*; **"little support for advocating parental controls as a stand-alone strategy."**
+- **Ghosh, Hughes & Wisniewski, "Circle of Trust," CHI 2020**, DOI 10.1145/3313831.3376747: within-subjects study, **17 parent–child pairs**. Both parents *and* children significantly preferred a less-invasive design over the traditional parental-control baseline. Families valuing **privacy, trust, freedom, balance of power** preferred it; families valuing **transparency and control** preferred the status quo.
+
+**Prevalence of family location tracking**
+- Pew 2016 (https://www.pewresearch.org/internet/2016/01/07/parents-teens-and-digital-monitoring/): **16% of parents of 13–17s use monitoring tools to track the teen's location**; 61% check browsing history; 48% look through call/text records.
+- Pew 2020 (N=3,640 US parents, fielded 2020-03-02→15): for a child 5–11, **33% track location via GPS apps/software**; 75% check sites/apps; 49% read call records or texts.
+- Davis et al. 2024, DOI 10.1007/s10567-024-00500-8: **"33–69% of U.S. families"** use digital location tracking; the field is **"vastly understudied."**
+- Boele, Bülow & Keijsers (accepted, J. Adolescence; PsyArXiv 10.31234/osf.io/mzry3_v2): **525 Dutch dyads (2024) + 175 replication (2019)**. **99.6% of parents tracked ≥1 domain**; school performance 96.4%, finances 90.1%, **location 65.7%**. Adolescent acceptance: **location tracking rejected by ~a quarter**, significantly less accepted than school/finance (χ²(2)=220.8, p<.001). **Tracking was UNRELATED to adolescent wellbeing but POSITIVELY associated with parental overprotection, control, and "dangerous worldviews."** **In 4–7% of dyads the adolescent believed they were NOT tracked while the parent reported tracking** — measured invisible management inside consumer systems.
+- Chase et al. 2024, DOI 10.1002/jad.12300 (N=706 college students): **"nearly half… currently or previously being digitally location tracked by their parent/caregiver."** Currently-tracked students perceived **more helicopter parenting and less autonomy support**.
+- Burnell et al. 2023, DOI 10.1037/fam0001067 (N=729 adolescents, M=15.03): ~half tracked; associations with externalizing/alcohol **were not robust** to multi-informant checks or statistical correction.
+
+**Life360** — Keegan & Ng, The Markup, **2021-12-06**, https://themarkup.org/privacy/2021/12/06/the-popular-family-safety-app-life360-is-selling-precise-location-data-on-its-tens-of-millions-of-user (note: slug ends `-user`, singular). **33M users**; ~a dozen data partners (X-Mode/Outlogic, Cuebiq, SafeGraph, Veraset, Arity, Jiobit); data-sale revenue **$693K (2016) → $16M (2020), ~20% of annual revenue**, plus $6M from Arity. Sold raw **lat/long + MAID + IP**. CEO Chris Hulls: *"data is an important part of our business model that allows us to keep the core Life360 services free."* A former X-Mode engineer called Life360 data among X-Mode's most valuable offerings for volume and precision. Follow-ups: **2022-01-27** partial retreat (https://themarkup.org/privacy/2022/01/27/life360-says-it-will-stop-selling-precise-location-data) — stops broker sales, **keeps precise sharing with Arity and aggregated with Placer.ai**, no completion date; **2023-06-01** class action (filed 2023-01-12, N.D. Cal., lead plaintiff **a Florida minor and his family**; complaint names inference of *"places that may be used to infer an LGBTQ+ identification,"* domestic abuse shelters, medical facilities). Downstream: **FTC v. X-Mode/Outlogic, 2024-01-09, 3–0 vote**, order requires deletion of previously collected location data and bars associating data with LGBTQ+ locations or protests. **No FTC or state-AG action naming Life360 itself — NOT REACHED / apparently none.**
+
+**Citizen Lab, "The Predator in Your Pocket," 2019-06-12**, 165pp, https://citizenlab.ca/2019/06/the-predator-in-your-pocket-a-multidisciplinary-assessment-of-the-stalkerware-application-industry/ — 8 apps assessed (FlexiSPY, Highster Mobile, Hoverwatch, Mobistealth, mSpy, TeenSafe, TheTruthSpy, Cerberus). Reports the widely-recirculated NNEDV shelter-worker figures (85% GPS, 71% computer monitoring, 54% stalkerware) — **provenance caution: these are practitioner surveys of shelter staff, not victim-level prevalence.**
+
+---
+
+## B. THE EXIT — the record is uniformly negative
+
+| System | Manager's powers | Subject exit | Manager can block? |
+|---|---|---|---|
+| Apple Family Sharing, adult | organizer can remove | **yes, unilateral** | no |
+| **Apple Family Sharing, 13–17 with Screen Time on** | Screen Time, location, purchase approval, activity | only after the organizer disables Screen Time | **YES, documented** |
+| **Apple Family Sharing, child <13** | full | none — org must delete or transfer the account | **YES, total** |
+| Apple Safety Check | n/a | out of scope | Screen Time/MDM degrade it |
+| **Managed Apple ID (ABM/ASM)** | reset password, deactivate, delete, transfer, force sign-out, read logs | **none documented** | **YES, total** |
+| **Google Family Link 13–17** | full | **"Children need parent approval to stop supervision until they turn 18"** | **YES — it is a heading** |
+| **Google family group, supervised member** | — | **"you can't leave your family group"** | **YES** |
+| **Google Workspace user** | reset password + cookies, suspend, delete, take file ownership *without involving the owner*, Vault search/export/hold, full calendar access | **none** | **YES, total** |
+| Sovrin SSI guardianship | guardian is credential *holder*; dependent holds no key | right asserted at governance Layer Four; **no mechanism** | **YES in practice** |
+| Aries RFC 0103 | same; hazard named | revocation is issuer-side; details are a TODO | **YES** |
+| W3C DID Core | no supervised-principal model at all | n/a | n/a |
+| Social-recovery wallet | guardians recover, cannot transact | **subject removes guardians unilaterally, 1–3 day delay** | **NO — but no supervised role exists** |
+
+Sources: https://support.apple.com/en-us/102652 · https://support.apple.com/guide/personal-safety/safety-check-iphone-ios-16-ips2aad835e1/web (published Mar 2026) · https://support.apple.com/guide/personal-safety/safety-check-faq-ips5f85e089f/web (Oct 2024) · https://support.apple.com/guide/apple-business-manager/about-managed-apple-accounts-axm78b477c81/web (Mar 31 2025) · https://support.google.com/families/answer/7106787 · https://support.google.com/families/answer/6317858 · https://support.google.com/a/answer/2405986 · https://support.google.com/a/answer/1247799 · https://sovrin.org/wp-content/uploads/Guardianship-Whitepaper-V2.0.pdf (v2, Apr/May 2023) · https://github.com/hyperledger/aries-rfcs/tree/main/concepts/0103-indirect-identity-control
+
+**Apple Safety Check's real scope** (the closest shipped "exit"): Emergency Reset stops person-to-person sharing across **11 Apple apps**, revokes **15 third-party permission classes**, removes signed-in devices, resets the Apple Account password and trusted numbers. Apple's own "Beyond Safety Check" list excludes non-Apple accounts, social media, and devices signed into a different Apple Account. And: *"If your iPhone has Screen Time restrictions turned on or has a mobile device management (MDM) profile installed, you can still use Safety Check but some options may not be available."* **Family Sharing, Screen Time, Managed Apple IDs, child accounts and organizer authority appear nowhere in the Safety Check flow.** It is a *peer*-relationship tool with zero authority over the *supervisory* relation.
+
+**⚠ Two documentation contradictions found — both are instrument-lies in the safety-facing direction.**
+1. Apple's Personal Safety guide (the page an abuse victim is sent to) says *"Any family member over the age of 13 can remove themselves from a family group at any time."* The operational page 102652 says a 13–17-year-old with Screen Time on **cannot leave until the organizer turns Screen Time off**. The safety-facing doc over-promises.
+2. Google's https://support.google.com/accounts/answer/1350409 says *"When a child reaches their country's minimum age, they can manage their own account."* https://support.google.com/families/answer/7106787 says **"Children need parent approval to stop supervision until they turn 18."** Both live.
+
+Apple has documented "the supervised subject cannot exit" **continuously from December 2020 to March 2026** — the December 2020 *Device and Data Access when Personal Safety is At Risk* manual (pdfinfo CreationDate Thu Dec 17 13:37:05 2020 PST, 20pp) carries the identical child-account sentence, and states it as a **security feature**, not a gap.
+
+**Sovrin is honest about it.** Its requirement is *"Support revocation so that each person can reclaim their self-sovereign identity as and when they are able,"* and the Sovrin Governance Framework says guardians *"must respect the fundamental right of a dependent to reclaim self-sovereign identity."* But architecturally: *"The Guardian does not use the Dependent's DID as part of any of this interaction."* The dependent is the credential **subject**, never the **holder**; it holds no key. Revocation is issuer-side under a governance framework. The paper explicitly parks the exit at **Layer Four (Governance Frameworks)**: *"Above all, they should ensure a dependent's right to independence, revoking any guardianship arrangement, if necessary."* The exit is delegated to law.
+
+**Aries RFC 0103 names the hazard and then does not solve it:** *"Since guardianship does not always derive from dependent consent… the dependent in a guardianship relationship is **particularly vulnerable to abuse from within**."* Its conclusion is *audit trails and legal formalities*. The `guardianship-details.md` file is a **73-word stub** with an empty "Privacy Considerations" heading and an open `[TODO: discuss offline mode, freshness, and revocation]`. **The guardianship-termination design in Aries is unwritten.**
+
+**And the practitioner exit is abandonment, gated on money.** Freed et al. CHI 2018 (89 participants: 39 survivors in 11 focus groups + 50 professionals; https://nixdell.com/papers/stalkers-paradise-intimate.pdf): the first advice professionals give is *buy a new device you own* — *"in many cases, the abuser is the sole financial provider for the family and the survivor is unable to afford the cost of a new device or mobile plan."* Case worker: *"If I leave you, you're going to cut my phone off… So now, you're controlling my phone. If I don't do as you say, you're going to cut my phone off. I've seen that happen."*
+
+**Exit is also itself dangerous.** Freed et al. CSCW 2019 (31 clients, https://nixdell.com/papers/Freed-CSCW-2019.pdf): consultants deliberately *delay* severance — *"an abuser who is used to having access to the victim's information might get angry and escalate the abuse (e.g., resort to physical violence) if that access is suddenly cut off."* Daffalla et al. 2026 (31 participants, 59 investigations): clinician-participants (C4–C7) advised **not** removing an adversarial passkey without safety planning, because *"removing access may notify the adversary, possibly escalating abuse."* Levy & Schneier (J. Cybersecurity 6(1), tyaa006, 2020, https://academic.oup.com/cybersecurity/article/6/1/tyaa006/5849222) call this the **"blank slate problem"** and criticize Apple for notifying a partner when location sharing stops; they advocate **"discreet changes to privacy preferences."**
+
+**Bellini, "Paying the Price," CHI 2023**, DOI 10.1145/3544548.3581101 — **158 survivors (174 consultations) + 16 financial advocates**, ~45,000 words of clinic records, searches Oct 2021 / Feb 2022 / Aug 2022. Five attack categories, first of which is **ownership-/authorized-user-based**. The exact shape: S51 was an authorized user on her ex-husband's credit account; *"her ex-husband continuously threatened her with removal from his account should she do something that upset him."* And S21: *"everything is 100% under his name… **I was invisible to the banks and utility providers**."* Design finding: *"Despite often being designed into the fabric of many financial products (e.g., joint, family accounts), users who have a close intimate relationship with another user are **rarely considered as adversarial**."* **Conservatorship/power-of-attorney: zero substantive hits in the paper.** Bellini calls for adversarial thinking; **she does not propose an unblockable exit.**
+
+---
+
+## C. THE IDENTITY SYSTEM ITSELF AS THE ABUSE CAPABILITY — documented cases
+
+**The canonical statement**, Freed et al. CHI 2018: *"prior work on account sharing assumes that the primary user and the owner (or controller) of the account are one and the same, **which is often not the case in IPV**. As a result, existing countermeasures may not be effective."* Their taxonomy's first category is **"Ownership-based access."** Measured: **n=27 reported abusers controlling their accounts, frequently via a shared family plan**; **n=47 accounts of location tracking via Find My Phone / parental tracking / Find My Friends**; **≥10 cases of abusers giving devices to shared children** — *"since the abuser is legally entitled to contact the child, the victim may not be allowed to remove the device."*
+
+**Freed et al. CSCW 2019, 31 clients:** **4 clients still on a shared family plan with the abuser or the abuser's relative** *after physically leaving*; one couldn't remember her cellular-account credentials — *"Many years we've had the same account."* **12 of 31 reported abuse routed through proxies including children.** *"In many cases, children's devices were owned and had been set up by the abuser"* — and P18: *"The courts ruled that [my child] is entitled to this phone [from the abuser]. I tried to get rid of this phone completely. I did not want any part of it."* In one case *"the abuser had full access to the client's iCloud through her child's iPad"* and the client declined a new iCloud rather than lose hundreds of dollars of purchases. Also: recovery-as-lockout — *"When I try to do a password reset, a lot of them, they want access to a number that I no longer have."*
+
+**School-issued accounts — the cleanest documented case of the identity system itself doing the harm.** CDT, *Hidden Harms*, August 2022 (PDF via Wayback: https://cdt.org/wp-content/uploads/2022/08/Hidden-Harms-The-Misleading-Promise-of-Monitoring-Students-Online-Research-Report-Final-Accessible.pdf). Nationally representative, fielded **May/June 2022**: **1,606 parents, 1,008 teachers, students n=400 and n=460.**
+- **13% of all students at schools doing activity monitoring report that they or an LGBTQ+ student they know has been outed by it — 29% among LGBTQ+ students.**
+- 51% of parents and 57% of teachers agree monitoring could out LGBTQ+ students.
+- 95% of teachers report their district provided/maintained devices; ~90% report the school uses monitoring software.
+- LGBTQ+ students far more likely to report someone got in trouble via monitoring (**56% vs 40%**).
+- **One in five parents do not know if their school uses it.**
+- Chilling effect by subgroup: students with physical disabilities (n=48) **67% vs 46%** agree "I do not share my true thoughts or ideas because I know what I do online may be monitored."
+- Scale of the vendor layer: EFF, 2023-10-31, https://www.eff.org/deeplinks/2023/10/how-goguardian-invades-student-privacy — **GoGuardian monitors ~27 million students across ~10,000 schools; students cannot opt out.**
+- Named remediation: The 74, 2023-01-28, https://www.the74million.org/article/gaggle-drops-lgbtq-keywords-from-student-surveillance-tool-following-bias-concerns/ — Gaggle removed LGBTQ keywords from its alert dictionary in late 2022.
+- **The mechanism is not a rogue admin. It is the legitimate exercise of admin authority over an account the student cannot leave.**
+
+**The identity layer is silently non-enumerable — measured across 19 services.** Daffalla, Bhattacharya, Chatterjee, Dell, *"A Framework for Abusability Analysis: The Case of Passkeys in Interpersonal Threat Models,"* USENIX Sec 2025 (https://nixdell.com/papers/2025-USENIX-abusability.pdf). 19 services, 4 passkey providers, 4 client platforms, 5 stepthrough protocols, 7 abuse vectors.
+- **Adversarial biometrics: 30 stepthroughs (10 services × 3 platforms), succeeded for all.** *"none of the OSes inform users of any changes to their biometric configurations through notifications."* Windows 10's UI shows **nothing** about the number or nature of registered fingerprints.
+- **Passkey cloning: for CVS, Porkbun and TikTok the access is undetectable and "we could determine no way to revoke access."**
+- **Only eBay revokes passkeys on password change** — and that is, unintuitively, the only way to revoke a cloned one. No service prompts about passkeys during password reset. **No service lists which passkey authenticated a session.** For Adobe, GitHub, LinkedIn and Samsung, sessions survived revocation past 60 minutes.
+- **The manager-persistence bug, exactly:** in Apple's shared-passwords group, *"the account that adds a credential to the group is the only one authorized to remove it."* If an abuser compels the victim to set up a passkey on a device signed into the **abuser's** Apple ID and then shares it to the victim's, *"there would be no way for the victim to delete the attacker's copy."*
+- Follow-on: Daffalla, Myers, Bellini, *"Maybe there's only one passkey?"* USENIX Sec 2026 (https://nixdell.com/papers/2026_USENIX_adversarial_passkeys.pdf), **31 participants, 59 investigations** on Google/PayPal/LinkedIn: *"most participants were not able to identify the adversarial passkey without assistance."*
+
+---
+
+## D. AGES AND CONSENT
+
+**The binding normative statement exists, and it is not a product.** UN Committee on the Rights of the Child, **General Comment No. 25 (2021)**, CRC/C/GC/25, dated **2 March 2021** (https://digitallibrary.un.org/record/3906061/files/CRC_C_GC_25-EN.pdf):
+
+- **¶75:** *"Any digital surveillance of children… should not be conducted routinely, indiscriminately or **without the child's knowledge** or, in the case of very young children, that of their parent or caregiver; nor should it take place **without the right to object to such surveillance**, in commercial settings and educational and care settings."*
+- **¶76:** *"Technologies that monitor online activities for safety purposes, such as tracking devices and services, if not implemented carefully, **may prevent a child from accessing a helpline or searching for sensitive information**."*
+- **¶77:** *"Protecting a child's privacy in the digital environment may be vital in circumstances where **parents or caregivers themselves pose a threat to the child's safety** or where they are **in conflict over the child's care**."*
+- **¶78:** *"Providers of preventive or counselling services to children in the digital environment should be **exempt from any requirement for a child user to obtain parental consent** in order to access such services."*
+
+That is the closest thing anywhere to a requirement for a channel the manager can neither see nor block — and it is a **state obligation, discharged by no shipped system**.
+
+**The rights-framework literature does not fill the gap.** *Child Rights by Design* (Livingstone & Pothong, 5Rights/Digital Futures Commission, 2023, https://researchonline.lse.ac.uk/id/eprint/119724/1/Livingstone_child_rights_by_design_published.pdf), Principle 11 (Agency): agency means *"being able to start and stop using digital products and services of their choice easily"* — but framed against **commercial** exploitation, not parental authority. And Gnanasekaran & De Moor's parental-control best practices (EICC 2023, DOI 10.1145/3590777.3590800) recommend *"granting **parents** access to the children's data to delete or restrict data collection"* — the delete right is assigned to the manager, again.
+
+**The at-risk-user taxonomy files children on the wrong side of its own distinction.** Warford et al., *"SoK: A Framework for Unifying At-Risk User Research,"* IEEE S&P 2022, meta-analysis of **95 papers** (arXiv 2112.07047). It has the exact vocabulary — *"Relationship with the attacker… attackers are likely to have physical access to the target's devices and accounts, **implicit or explicit authority over the target**"* — and files that under intimate-partner abuse. Children and teens go under a **separate, deliberately benign-intent** factor: *"**Reliance on a third party**… **Unlike** intimate threats associated with a relationship with the attacker, the third parties in this context typically have **helpful or safety-focused reasons** for 'privacy invasions'."* The SoK **cites both Ghosh CHI 2018 papers** and still codes parental monitoring as helpful-intent third-party reliance. **The literature has not named the manager-as-adversary case for children.**
+
+**No measured causal record of a child harmed by inability to exit.** Precondition is measured (Trevor Project 2023, N=28,524, fielded 2022-09-01→12-12: only **38% found home LGBTQ-affirming**; suicide attempts **21%** where nobody in the household respects pronouns vs **12%** where all do; **27%** of those who wanted mental-health care but couldn't access it cited fear of being outed. GLSEN *Out Online* 2013, final N=5,680, fielded 2010–Jan 2011: **LGBT youth 3× as likely to not feel safe AT HOME, 16% vs 6%**; sexual harassment more common at home than school, **36% vs 26%**; **29% more out online than in person**). The *fear* is measured (Geeng & Hiniker 2021, 11 interviews; Geeng et al. USENIX Sec 2022, 14 interviews — accidental outing named as the distinctive queer threat model). **The causal link — "monitoring tool X outed N youth, outcomes Y" — is measured in exactly one place: the CDT 13%/29% figures above.** Nothing measures children who could not exit a parent-created account and what happened.
+
+---
+
+## E. THE CORRECTION — invisible management, blind veils, non-enumerability
+
+**A. The three big shipped family systems all chose visible management — but the documentation is written entirely from the supervisor's seat, and the one enforceable disclosure rule carves the parent out.**
+
+- **FTC v. Retina-X, 2019-10-22**, Decision and Order https://www.ftc.gov/system/files/documents/cases/1723118retinaxorder_0.pdf. **Section I.C, Icon Notice** requires a visible icon plus name, clickable to a clear-and-conspicuous notice of the product's name, functions, that it is running, and how to contact the respondents. Then **I.C.b, the exception**: *"Respondents may program the Monitoring Product or Service to allow the purchaser… to **disable the Icon Notice** only if the purchaser attests, prior to installation, that the purchaser is the legal guardian or parent of a minor Child."* The gate is an **unverified self-attestation checkbox**. Permitted purposes are three: parent→minor child; employer→employee **who has given express written consent**; adult→adult **who has given express written consent**. **A child is the only supervised class whose awareness is neither consented to nor guaranteed.** Every other notice duty in the order runs to the *purchaser* (Home Page Notice, Purchase Page Notice), not the monitored person. Scale: **>15,000 subscriptions** across MobileSpy, PhoneSheriff and TeenShield before sales ceased in 2018. FTC v. SpyFone, **2021-09-01**: full ban plus a requirement to **notify owners of devices on which the apps were installed** — a remedy imposed *after the fact*, on a vendor, by an enforcer.
+- **Apple Screen Time**: the child is shown that *a limit exists* (they hit it and can file an exception request the parent answers). **No Apple page reached states the child is told who set it, or notified when settings change.** The Screen Time passcode is an enforcement asymmetry, not a disclosure.
+- **Microsoft Family Safety**: the hub page indexes activity reporting as *"See your child's device and app use"* — parent-directed. **Whether the child sees it: NOT REACHED** (every article-body URL 404s). The hub carries **no article about notifying the child.**
+- **Google Family Link**: https://families.google/familylink/ contains **no transparency statement toward the child**; the only notification language is parent-directed (*"when your child arrives or leaves a certain location"*). All `support.google.com/families` answer pages and the Play Developer Policy stalkerware section returned CAPTCHA to both agents that tried. **The persistent-notification / unique-icon requirement and its "designed and marketed for parents to track their children" exemption is NOT REACHED — not filled from memory.**
+- **Measured invisibility inside consumer systems:** Boele et al., 525 Dutch dyads, **in 4–7% of dyads adolescents believed they were NOT tracked while the parent reported tracking** (and 3–12% the reverse).
+
+**Verdict on the sharpest contrast as posed:** the claim that "the three biggest shipped family systems all chose visible management" is **not supported by the documentation reachable here**. What is supported: they chose *visible restriction* (the subject collides with limits) and they document nothing about *visible management* (who manages, when settings change). The only rule that ever required the subject be told is the FTC's Icon Notice, whose sole exception is precisely the parent/child case, disabled on an unverified checkbox.
+
+**B. Opacity as an abuse enabler — the field's clearest commitment is DULT, and it is a *spec*, not a measurement.**
+- **IETF DULT WG** (Security Area), charter-ietf-dult-01 approved, https://datatracker.ietf.org/wg/dult/about/. Rationale: preventing misuse of tracking accessories for unauthorized surveillance, safeguards needed when a device is *"separated from a paired/owner device."* Milestones dated **July 2025**.
+- `draft-ietf-dult-accessory-protocol-00`, authors **Brent Ledvina (Apple), David Lazarov (Google), Ben Detwiler (Apple), Siddika Parlak Polatkan (Google)**; latest revision **2024-11-03**; datatracker last updated **2025-05-07**; **status: EXPIRED**. Stated aim: protect *"privacy and safety of individuals in the circumstance that those accessories are used to track their location **without their knowledge or consent**."*
+- `draft-ietf-dult-finding-01` ("Finding Tracking Tags", Fossaceca & Rescorla), latest revision **2025-06-06**, **EXPIRED, intended RFC status "(None)"**.
+- So: **Apple and Google jointly declared that an invisible tracking relation is unacceptable and must be made visible — and as of the reachable record both drafts have expired without reaching RFC.** That is the field's clearest *statement*, and it is a statement, not a result.
+- **Covert vs overt in the measured literature:** covert is *treated* as the more harmful class (Chatterjee's whole taxonomy turns on it; Maier's 17/20 obfuscation finding; Roundy's 26 explicitly-covert social-media surveillance apps). But no reachable study **compares outcomes** between covertly-monitored and overtly-monitored subjects. The proposition "invisible management is more dangerous than visible management" is **ASSERTED by industry, policy and paper framing; not measured.**
+- **Counter-pressure, measured:** Freed CSCW 2019 and Daffalla 2026 both find that *making severance visible* triggers escalation risk, and clinicians therefore delay it. Levy & Schneier explicitly recommend **discreet** privacy changes and criticize Apple's stop-sharing notification. **Visibility of the management relation and visibility of its severance are opposite-signed.** Any design that couples them inherits the worse half of both.
+
+**C. Non-enumerability — measured, and it is a *safety* cost, not only an audit cost.**
+- **CETA's ISDi exists because enumeration is hard**, and it works badly: 79 flagged apps across 75 scans, **61 dual-use, 18 false positives, only 1 true covert positive; actual spyware found for 3 of 44 clients**. The findings that mattered came from the **technograph** — a hand-drawn map of people, devices and accounts — not the scanner: **4 clients with unknown "trusted" devices on iCloud, 8 more with unknown or abuser device logins on email/social, 4 on shared family plans, 14 with abuser-known passwords.** *"In some cases, the TAQ and technograph were the primary (or only) way to uncover a potential problem."* An advocate enumerating a client's exposure today does it **by interview**, because the systems do not expose the relation set.
+- **Machine-level non-enumerability is measured:** no service lists which passkey authenticated a session (19 services); Windows shows nothing about registered fingerprints; no OS notifies on biometric configuration change; Apple's iCloud device list *"no additional indicators describe which devices have a copy of the passkeys and which do not."*
+- **Coercive control law does turn on evidence.** Serious Crime Act 2015 s.76 (https://www.legislation.gov.uk/ukpga/2015/9/section/76), in force **2015-12-29**, amended **2023-04-05**: requires repeated or continuous controlling/coercive behaviour, a "personally connected" relationship — **which expressly includes people who share parental responsibility for a child, and relatives** — a serious effect, and knowledge or constructive knowledge. Max **5 years on indictment**. The offence is proved by a *pattern*, and the pattern is normally evidenced by artefacts. **Prosecution/conviction statistics: NOT REACHED.** No source reached comments directly on what happens evidentially when the tooling leaves no discoverable trace — but the statutory structure makes the inference unavoidable: a management relation that leaves no record leaves nothing to prove a pattern with. Note also that **s.76's "personally connected" definition already reaches the parent-of-a-shared-child and the relative** — the exact relations this design makes structural.
+
+---
+
+## THINGS THAT CHANGE THE SHAPE OF THE DESIGN, NOT THE ANSWER INSIDE IT
+
+1. **The measured surface is the authorization graph, not the software.** 89.1% of the clinic's blocklist is dual-use; 99.2% is on-store; 30 of ~33 detected client problems were credential/trusted-device/family-plan, versus 3 spyware. A design that makes management structural is not adding an app to the threat model — it *is* the threat model.
+2. **The one mitigation adversaries visibly complained about was an identity-layer role check** (TeenSafe's account-age verification), not any UI notice.
+3. **Nobody verifies who the manager is.** None of 40 parental-control apps implemented multi-guardian consent; vendors assert *"only the device owner's consent is required"*; the FTC's own remedy accepts an unverified checkbox. A design in which the manager is a **persona with no human owner-of-record** removes the last thing every existing system nominally relies on — an attributable person to attest.
+4. **Non-enumerability is a documented harm channel with no counterexample.** Every measured case where a relation could not be enumerated (cloned passkeys on CVS/Porkbun/TikTok; adversarial biometrics; Apple shared-password groups; unknown iCloud trusted devices) produced *unrecoverable* adversarial persistence. Nothing in the record shows non-enumerability protecting anyone.
+5. **But visibility is not free.** Severance that notifies the manager is measured as an escalation trigger, and clinicians therefore withhold it. The design decision is not "visible vs invisible" — it is **which direction each of the two visibilities points**: the management relation legible to the *managed*, the severance illegible to the *manager*. No shipped system does both. No paper reached proposes it.
+6. **The five-year hole is the shape to look at.** Google states it as a heading: **"Children need parent approval to stop supervision until they turn 18,"** while the age of consent is 13–16. Apple's is 13–17 with Screen Time. **The consent age and the exit age are different numbers in every system reached**, and the gap is manager-controlled.
+7. **UN CRC GC25 ¶75/¶77/¶78 is the only text anywhere that requires (a) the child know they are surveilled, (b) a right to object, and (c) a counselling channel exempt from parental consent — explicitly because "parents or caregivers themselves pose a threat."** It has zero implementations.
+
+## NOT REACHED
+- Matthews et al. CHI 2017 full text (ACM 403; **N=15 survivors**, confirmed via Freed et al. 2018's citation; three phases confirmed from the abstract).
+- Freed et al. CHI 2018 was NOT REACHED by one subagent (it *was* reached and read directly by me at https://nixdell.com/papers/stalkers-paradise-intimate.pdf — all its numbers above are first-hand).
+- Google Play Developer Policy stalkerware text and its parental-tracking exemption (CAPTCHA, both attempts).
+- Google Family Link child-facing disclosure pages (CAPTCHA).
+- Microsoft Family Safety activity-report article body (404s).
+- Google Security Checkup scope; Apple "What Managed Apple Accounts can't access."
+- Ghosh et al. CHI 2018 "Control or Safety?" effect sizes (ACM 403) — the "more control → more risk" finding is verified from the publisher abstract only.
+- s.76 prosecution/conviction statistics; Home Office 2023 statutory guidance.
+- Measured evaluations of AirTag/DULT alert efficacy; AirTag stalking incident counts.
+- Slupska & Tanczer full text; Blackwell et al. 2016; Scheuerman; Hardy & Vargas.
+- Any measured study of Life360 / Find My / Family Link used *coercively*; any FTC or state-AG action naming Life360.
+- Any documented incident of a Google Workspace **admin** (as opposed to monitoring software running on the managed account) outing a student.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-3 >>
+
+!! Message 3 ~ 8,806 characters
+
+````
+Verified independently. Apple's guidelines carry no monitoring-disclosure rule at all — the only two `surreptitious` hits are 5.1.1(vi) (password discovery) and 5.1.2(iii) (profile building), and 5.5's disclosure duty runs *"prior to any user action to purchase or otherwise use the service"* — i.e. **to the purchaser, not to the monitored party.**
+
+---
+
+# ADDENDUM 2 — §E corrected. The disclosure thread completed after stalling.
+
+## ⚠️ First: an instrument-lie, caught and confirmed
+
+Asked about Apple's App Store Review Guidelines, the WebFetch summarizer returned this as if quoted policy:
+
+> *"Apps cannot monitor or track other users without explicit consent. Parental control apps and similar monitoring tools must: Obtain clear, informed consent from users being monitored… Not operate covertly or without the knowledge of the person being tracked."*
+
+**That text does not exist.** I pulled the raw guidelines myself (238,359 bytes, HTTP 200, 2026-09-04) and counted: `stalkerware` **0** · `monitor` **0** · `stalk` **0** · `covert` **0** · `persistent notification` **0** · `another person` **0** · `spouse` **0**. The summarizer fabricated a plausible policy in exactly the direction a researcher would hope to find one. Every platform-policy quote in this addendum was verified against raw fetched bytes.
+
+## Corrections to what I told you
+
+**1. I was wrong that Family Link has no child-facing disclosure.** I marked those pages NOT REACHED (CAPTCHA) and said `families.google/familylink/` carried "no transparency statement toward the child." Recovered via Wayback, **`support.google.com/families/answer/9092383`** is written in second person *to the supervised user* and enumerates both sides:
+
+> **What parents can supervise** — "Update some of your account settings · Control Google's data collection with settings like Web & App Activity and Location History · Approve or block apps · Find where you are with your Android devices · Remotely lock devices · Block or allow sites on Chrome · View your YouTube channel activity"
+>
+> **What parents can't check or do** — "Remotely monitor your screen · Check your past searches · Check your Chrome browsing history · Check your YouTube watch history · Check or reset your account password · Read your emails or messages · Listen to your calls · Delete your account · Erase the data on your device · **Remove your ability to stop supervision**"
+
+That last clause is the strongest exit-adjacent commitment found anywhere in this survey. **But read it precisely against the same page's operative text:** 13–18 — *"You'll need your parent's approval to stop supervision."* 18+ — *"You don't need your parent's approval."* So what is non-removable is the **ability to initiate a request**, not the ability to leave. **It is a petition right that cannot be confiscated, not an exit.** My §B table stands.
+
+**2. The Google Play stalkerware policy is reached, dated, and it is the strongest disclosure obligation in the entire survey.** Effective **1 October 2020** (announced 2020-09-16, `answer/10065487`), now at `answer/9888380` under **Malware** — Google classifies covert monitoring as a potentially harmful application, not a UX defect:
+
+> "Google Play prohibits apps from monitoring another individual… **unless the app is exclusively designed and marketed for parents to monitor their children** or enterprise management…"
+> "**These apps cannot be used to track anyone else (a spouse, for example) even with their knowledge and permission, regardless if persistent notification is displayed.**"
+> "These apps must use the **`IsMonitoringTool` metadata flag in their manifest file**…"
+> "Apps must not present themselves as a spying or secret surveillance solution. · Apps must not hide or cloak tracking behavior… · **Apps must present users with a persistent notification at all times when the app is running and a unique icon that clearly identifies the app.** · Apps must disclose monitoring or tracking functionality in the Google Play store description."
+
+The rule hardened over time from prose into a **machine-checkable manifest declaration**. And note it sits chronologically between the two FTC actions — Retina-X (Oct 2019) → Play policy (Oct 2020) → SpyFone (Sep 2021). Sequence only; causation not documented.
+
+**3. My verdict on "did the platforms choose visible management" was too negative — it was an artifact of blocked pages.** Corrected:
+
+| | Relation disclosed to subject? | **Who** manages disclosed? | Persistent ambient indicator? |
+|---|---|---|---|
+| **Google Family Link** | **Yes** — dedicated child-facing page + `Settings › Digital Wellbeing & parental controls` carrying the `Stop supervision` control | No — "your parent," generically | **Not documented** |
+| **Apple Family Sharing** | **Yes** — and inside the *Personal Safety* guide, i.e. framed for a possibly-coerced reader | **Yes** — *"Settings › [your name] › Family… tap the icon to see your family members and roles"* — the only such affordance found | **Not documented** |
+| **Microsoft Family Safety** | Inferable from role structure only; nothing published addressed to the member | No | No — *"**Only Organizers can enable, disable and view activity reports**"* |
+
+## The finding that matters most
+
+**The platforms wrote the persistent-notification rule for everyone but themselves.** Google Play compels an always-on indicator plus unique icon on every third-party monitoring app, enforces it via manifest flag, and forbids monitoring even a *consenting* spouse. **Family Link itself ships no documented ambient indicator** — the relation is discoverable in Settings; it is not announced. Apple writes no such rule at all, and ships the survey's cleanest case of silent supervision (`support.apple.com/en-us/105121`): a restricted app *"is just temporarily hidden from the Home Screen"* — no notice, no explanation, no attribution. The relation stays visible in Settings; every individual *exercise* of it is invisible. Microsoft ships an organizer-only report covering web history and search terms, for members *"of any age"*, with a support page titled **"Family Safety settings enforced on adults."**
+
+Whether the self-exemption is earned — a supervised Google account is *created* supervised, so there is no covert conversion moment to disclose — or simply unexamined, **no published rationale was reachable.**
+
+## Two regulator instruments, and the shape of their remedies
+
+- **FTC v. Retina-X, 2019-10-22.** The pled harm was icon-hiding specifically. The remedy: *"must include an icon with the name of the app on the mobile device, **which is only removable by a parent or legal guardian** who has installed the app on their minor child's phone."* The FTC mandated a marker **the supervised party can see but cannot remove, and the supervisor alone can remove.** Visibility compulsory; removability asymmetric — by design, in the regulator's own remedy.
+- **FTC v. Support King / SpyFone, 2021-09-01.** First outright ban, plus a **retrospective** duty: *"notify device owners that the app had been secretly installed."* Levine: *"The stalkerware was hidden from device owners, but was fully exposed to hackers."* Retina-X fixed the future; SpyFone fixed the past.
+
+Both are consent decrees binding named respondents — **not rules of general application.** No general FTC rule requires telling a monitored person. GDPR angle remains NOT REACHED.
+
+## Revised §E bottom line
+
+The supervised party can *discover* the relation in Google and Apple, and is told *who* only by Apple. Nobody is *notified* — not of onset, not of setting changes, not of access. The one enforceable always-on-disclosure rule in existence applies only to third parties, and its sole carve-out is the parent/child case; the FTC's parallel remedy carves the same hole and hands the supervisor the removal key. The three properties I named still hold as the design axis, and this thread sharpens the second: **DULT §4.1.6's "alerts must not be circumventable under any circumstance" and Play's `IsMonitoringTool` are the same commitment expressed twice — and neither platform applies it to its own family system.**
+
+**Still NOT REACHED:** whether Family Link discloses the supervising account's identity; whether any of the three emits an ambient indicator beyond a Settings entry; whether Apple notifies a child when Ask to Buy / Screen Time / location sharing are first enabled; whether Microsoft tells a member reporting was switched on; full text of both FTC Decisions and Orders (all `ftc.gov/system/files/` PDF paths 404); EU/GDPR notice obligations; published platform design rationale.
+
+*(Note: the `lares` MCP server failed to connect this session — CONNECTION_CLOSED. It played no part in this research, but you may want to retry it before the next task.)*
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;0DBX8j9Gw6bQviz4INP9-zB1v0VjS0aoNER9ayktQa0
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,194 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-facebook-people-you-may-know-the-canonical-764d56 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-facebook-people-you-may-know-the-canonical-764d56.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. FACEBOOK 'People You May Know' — the canonical veil leak. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-facebook-people-you-may-know-the-canonical-764d56"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. FACEBOOK "People You May Know" — the canonical veil leak
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 27,484 characters
+
+````
+Research complete. Report below.
+
+---
+
+# MEASURED VEIL-LEAK INCIDENTS — separation promised, separation defeated
+
+Tooling note: WebSearch untouched. Reached via direct WebFetch, Wikipedia raw wikitext, Crossref, arXiv, HN Algolia. **Hosts hard-blocked from this egress (marked NOT REACHED where relied on): theguardian.com, bbc.com/bbc.co.uk, arstechnica.com, wired.com, theverge.com, reuters.com, cnet.com, zdnet.com, lemonde.fr, independent.co.uk, medium.com (403), web.archive.org.** OpenAlex exhausted its daily budget mid-session.
+
+---
+
+## 1. FACEBOOK "People You May Know" — the canonical veil leak
+
+**1a. The psychiatrist (MEASURED, single-case, journalist-verified).**
+Kashmir Hill, Fusion, **2016-08-29**: "Facebook recommended that this psychiatrist's patients friend each other" — `http://fusion.net/story/339018/facebook-psychiatrist-privacy-problems/` (later republished at `https://splinternews.com/facebook-recommended-that-this-psychiatrists-patients-f-1793861472`). **URL + date + headline confirmed via HN Algolia submissions (2016-08-29, 2016-08-30, 2017-10-19). Article body NOT REACHED — both Fusion and Splinter now return 404 and archive.org is blocked from this egress.** Do not quote its internals from memory.
+
+**1b. The sex worker (MEASURED, reached in full).**
+Kashmir Hill, Gizmodo, **2017-10-11**, "How Facebook Outs Sex Workers" — `https://gizmodo.com/how-facebook-outs-sex-workers-1818861596`. Subject "Leila" ran two Facebook identities with **different names, different emails, different phone numbers**; PYMK surfaced her *clients* to her civilian identity, and apparently her civilian identity to them. Other sex workers reported the same. Facebook **declined to say which of its "100+ signals"** made the link, denied using third-party app data or location, and on opt-out said: *"An opt out is not something we think people would find useful."* Facebook later retracted a suggested workaround it had given Hill as incorrect. **This is the exact failure mode: two deliberately disjoint identities re-fused by an inference the user could not see, name, or disable.**
+
+**1c. The mechanism (MEASURED, reached in full).**
+Kashmir Hill, Gizmodo, **2017-11-07**, "How Facebook Figures Out Everyone You've Ever Met" — `https://gizmodo.com/how-facebook-figures-out-everyone-youve-ever-met-1819822691`. Built on **100+ reader accounts**: a sperm donor recommended to the offspring's family; a social worker surfaced to a client by nickname only; an estranged father's former mistress after 40 years; opposing counsel. Mechanism = **shadow contact information** — data *other people* uploaded about you, plus **contact chaining** (if two strangers each hold your number, Facebook infers they know each other). Facebook stated it **cannot show you your shadow profile**, citing privacy obligations to the uploaders. *The veil is breached by a third party's address book, and the victim has no standing to inspect or revoke.*
+
+**1d. LinkedIn PYMK: NO MEASURED INSTANCE FOUND.** The psychiatrist and sex-worker stories are **Facebook** PYMK, not LinkedIn. LinkedIn's Wikipedia article documents only contact-book *invitation spam* litigation (*Perkins v. LinkedIn Corp*, No. 13-CV-04303-LHK, settled 2015, **$13 million**) and the 2021 scraped-data incidents (500M records April 2021; 700M June 2021 — LinkedIn's position: scraping, not breach). **Treat "LinkedIn PYMK outed my therapist's patients" as anecdote unless a source surfaces.**
+
+---
+
+## 2. SHADOW PROFILES — the non-user veil
+
+**2a. 2013 Download-Your-Information bug (PARTIALLY REACHED).**
+ZDNet (Violet Blue), **2013-06-23**, "Anger mounts after Facebook's 'shadow profiles' leak in bug" — `http://www.zdnet.com/anger-mounts-after-facebooks-shadow-profiles-leak-in-bug-7000017167/`. **URL + date + headline confirmed via HN Algolia; article body NOT REACHED (zdnet blocked).** Wikipedia's `Shadow profile` article corroborates a breach "affecting over six million Facebook users" that **revealed the existence of shadow profiles containing information users had not submitted themselves** (`https://en.wikipedia.org/wiki/Shadow_profile`) — note Wikipedia dates it 2012 while the disclosure is June 2013; **the 6 million figure and the ~1-year exposure window are NOT independently confirmed here.** Facebook's own White Hat note is 404 and archive.org is blocked.
+
+**2b. Europe-v-Facebook / Schrems (MEASURED).** `https://en.wikipedia.org/wiki/Max_Schrems` — 2011 subject-access request returned **a CD of 1,200+ pages** of data on one user; complaints to the Irish DPC in 2011 forced deletion of some files and disabling of facial recognition; Schrems **withdrew the complaints in 2014** citing denied access to case files; refiled **2015-12-02** in Ireland, Hamburg and Belgium. Separately, **November 2015**: the Belgian Privacy Commissioner ordered Facebook to **stop tracking non-users** or face **£250,000/day**; Facebook responded by blocking logged-out Belgians from all content rather than dropping the cookie (`https://en.wikipedia.org/wiki/Privacy_concerns_with_Facebook`).
+
+**2c. Shadow contacts are advertiser-targetable (MEASURED — the strongest artifact here).**
+Venkatadri, Lucherini, Sapiezynski, Mislove, **"Investigating sources of PII used in Facebook's targeted advertising"**, PoPETs 2019(1), published **2018-12-24**, DOI `10.2478/popets-2019-0013`, `https://petsymposium.org/popets/2019/popets-2019-0013.php`. Controlled experiments established that phone numbers/emails from (i) profile attributes, (ii) **two-factor authentication**, (iii) Messenger, and (iv) **friends' uploaded contact databases** are all usable for ad targeting — **"despite all the relevant privacy controls on our test accounts being set to their most private settings."** Reported by Kashmir Hill, Gizmodo, **2018-09-26**, `https://gizmodo.com/facebook-is-giving-advertisers-access-to-your-shadow-co-1828476051`: 2FA numbers became targetable **within weeks**; shadow contact data from others' address books **about a month later**. Facebook first denied it, then did not dispute the findings.
+Related prior audit: Venkatadri, Andreou, Liu, Mislove, Gummadi, Loiseau, Goga, **"Privacy Risks with Facebook's PII-based Targeting: Auditing a Data Broker's Advertising Interface"**, IEEE S&P, **May 2018**, DOI `10.1109/sp.2018.00014` — custom audiences leak enough that **an advertiser can infer a user's phone number from their email address alone**, with **no interaction with the victim and no detectability**. It also records Korolova's 2011 microtargeting result (audience-size oracle → private attributes), which Facebook mitigated with a minimum audience size.
+
+**2d. Zuckerberg's 2018 testimony on non-user data: NOT REACHED.** No primary transcript obtained; do not paraphrase from memory.
+
+---
+
+## 3. STRAVA — aggregate that de-anonymizes individuals
+
+All from `https://en.wikipedia.org/wiki/Strava` raw wikitext, with its cited sources.
+
+- **Heatmap published Nov 2017**; described by Strava as a visualization of **two years of trailing data** (Drew Robb, "Building the Global Heatmap", Strava Engineering, cited date 2018-04-04, `https://medium.com/strava-engineering/the-global-heatmap-now-6x-hotter-23fc01d301de` — **NOT REACHED, medium 403; the "1 billion activities / 3 trillion points / 13 trillion pixels" figures are NOT confirmed here**). Independent scale anchor: **>1 billion activities uploaded by May 2017**; **>50M users and >3 billion activities by Feb 2020**.
+- **January 2018**: an **Australian National University** international-security student (Nathan Ruser) identified **US bases in Syria**, **forward operating bases in Afghanistan**, and **HMNB Clyde** (UK nuclear arsenal). Guardian, **2018-01-23/28**, `https://www.theguardian.com/world/2018/jan/28/fitness-tracking-app-gives-away-location-of-secret-us-army-bases`; BBC `https://www.bbc.co.uk/news/technology-42853072`. CEO James Quarles: "committed to working with military and government officials", plus a privacy-settings simplification. **The original sensitive-tile data was archived on GitHub**, so the later opt-out did not un-publish it (Guardian, 2018-01-29, `.../strava-secret-army-base-locations-heatmap-public-users-military-ban`).
+- **June 2022, Israel**: **FakeReporter** found a **separate** flaw — **not the heatmap, the segments feature** — permitting identification and tracking of personnel at Israeli military bases. BBC, **2022-06-21**, `https://www.bbc.com/news/world-middle-east-61879383`. **(Body NOT REACHED — bbc blocked. Technique detail: creating segments inside base perimeters to harvest leaderboard identities — reported, not verified here.)**
+- **October 2024, bodyguards**: Le Monde, **2024-10-27**, "Strava, the exercise app filled with security holes", `https://www.lemonde.fr/en/pixels/article/2024/10/27/strava-the-exercise-app-filled-with-security-holes_6730709_13.html` — exposed movements/locations of **security details of Emmanuel Macron and Joe Biden**. **CONFIRMED as to existence, date, outlet and subject; the article body and any count of officers NOT REACHED (lemonde blocked).**
+- **January 2025, submariners**: Le Monde, **2025-01-13**, `https://www.lemonde.fr/en/videos/article/2025/01/13/stravaleaks-dates-of-french-nuclear-submarine-patrols-revealed-by-careless-crew-members_6737005_108.html` — **public profiles with real names** at **Île Longue**, base of the *Triomphant*-class SSBNs; **patrol timings deducible**. French Navy: "not a major risk". Euronews, 2025-01-15. Le Monde also located the carrier *Charles de Gaulle*.
+- **March 2025**: *La Presse* found the same class of exposure for **Justin Trudeau's** detail (2025-03-19).
+- **June 2023**: heat-map data shown to reveal **home addresses of highly active users in remote areas** (The Independent, 2023-06-14).
+
+Pattern worth naming: **four independent leaks, three different features** (heatmap, segments/leaderboards, public profiles). Fixing the aggregate view did not fix the per-object views.
+
+---
+
+## 4. DATING-APP TRILATERATION — "coarse distance" is not coarse
+
+- **Tinder (MEASURED, reached).** Include Security, **2014-02-19**, `https://blog.includesecurity.com/2014/02/how-i-was-able-to-track-the-location-of-any/`. API returned distance as a **64-bit double**; trilateration from three controlled accounts located targets **within 100 ft**. Disclosure timeline: notified **2013-10-23**, CEO acked **2013-10-24**, chased **2013-12-02**, fix observed **2014-01-01** (server-side rounding to integer), published **2014-02-19**. *The bug is precision, not policy.*
+- **Grindr 2014 (MEASURED).** August 2014: relative distances enabled trilateration to **near-exact location**; a proof of concept ran **more than 2 million detections within a few days**. Egyptian authorities allegedly used it to track and arrest gay men. Grindr **disabled distance display globally** (temporarily). (`https://en.wikipedia.org/wiki/Grindr`)
+- **Grindr/Jack'd 2016 — the "hide distance" defeat (MEASURED).** Nguyen Phong Hoang, Yasuhito Asano, Masatoshi Yoshikawa (Kyoto University), **"Your Neighbors Are My Spies: Location and other Privacy Concerns in Dating Apps"**, arXiv **1604.07850**, submitted **2016-04-20**, ICACT. **Colluding-trilateration**: works even when the victim hides their distance, needs no special technique, and generalizes to **any LBS that lists nearby profiles in proximity order**. **Exact metre figures are in the PDF, not the abstract — NOT REACHED.** This is the important one architecturally: **the ordering itself is the channel; hiding the number does not close it.**
+- **Bumble 2021 (MEASURED, reached).** Robert Heaton, `https://robertheaton.com/bumble-vulnerability/`, reported **2021-06-15**, fixed **2021-06-18** (72 hours), **$2,000** bounty. Bumble **rounded the displayed distance but computed it from exact coordinates**; the attacker spoofs position around the city and hunts **flipping points** (3 mi → 4 mi) to trilaterate. Its API "signature" was an **MD5 with a key hard-coded in the client JavaScript**. Fix: round *before* computing, plus queue-scoping.
+- **Bumble 2023 follow-up: NOT REACHED** — `https://robertheaton.com/bumble-vulnerability-2/` returns 404 and no other citation surfaced. Treat "still works in 2023" as unverified.
+- **Grindr HIV status, 2018 (MEASURED).** **April 2018**, **SINTEF** (Norwegian research non-profit) reported Grindr's third-party data bundles could contain **HIV/AIDS status and HIV testing dates**. Grindr: "has never sold, nor will we ever sell, personally identifiable user information — especially information regarding HIV status or last test date". (Ars Technica, 2018-04-04, `https://arstechnica.com/tech-policy/2018/04/grindr-stops-sharing-users-hiv-status-with-third-parties/` — **body NOT REACHED, ars blocked**.) Context: Grindr had launched an opt-in HIV-test reminder in **March 2018**.
+- **Norwegian regulator — exact chain (MEASURED, from the regulator itself, `https://www.datatilsynet.no/en/news/`).**
+ – **2020-01-14**: Norwegian Consumer Council complaint — Grindr sent user data to **at least 135 advertisers**, incl. location and device data implying sexual orientation.
+ – **2021-01-26**: Datatilsynet **advance notice**, **NOK 100,000,000 (€10M)**.
+ – **December 2021**: fine **imposed at NOK 65,000,000 (≈€6.5M)** — reduced from the notice; Grindr appealed.
+ – **2023-09-29**: **Privacy Appeals Board upheld NOK 65,000,000** (`/en/news/news-2023/record-fine-grindr-confirmed/`).
+ – **2025-10-21**: **Court of Appeal upheld it again** (`/en/news/news-2025/the-court-of-appeal-upholds-the-fine-against-grindr/`).
+ **Correction to the brief: the €6.5M/NOK 65M figure is the December 2021 decision, not January 2024.** Wikipedia's "€10 million" is the *notice* amount and is wrong as a final figure. No January 2024 Grindr DPA action found.
+- **The priest, 2021 (MEASURED as an event; method partly opaque).** The Pillar, **2021-07-20**, `https://www.pillarcatholic.com/p/pillar-investigates-usccb-gen-sec` — **paywalled, methodology NOT REACHED**. Msgr. **Jeffrey Burrill**, general secretary of the USCCB, resigned after The Pillar told the conference it would publish; the outlet used **commercially available app-signal location data tied to Grindr usage**, and stated its acquisition was legal but did not name the broker (`https://en.wikipedia.org/wiki/The_Pillar`). *A single subscriber, de-anonymized out of a commercial ad-tech feed, with no breach and no law broken.*
+
+---
+
+## 5. VENMO — the social graph nobody asked to publish
+
+- **Public By Default (MEASURED).** Hang Do Thi Duc, **July 2018**, `https://publicbydefault.fyi/` — **207,984,218 public transactions from 2017**, pulled from an **unauthenticated public API**. Exposed: real names, profile links, **Facebook IDs embedded in profile-picture URLs**, timestamps, notes, and the counterparty graph. Individual reconstructions: a cannabis retailer's **entire customer network and location**; a student's weekly schedule from food purchases.
+- **FTC (MEASURED).** *In the Matter of PayPal, Inc.*, FTC Matter **162 3102** (`https://www.ftc.gov/legal-library/browse/cases-proceedings/162-3102-paypal-inc-matter`). Complaint + proposed consent **2018-02-27**; Federal Register **2018-03-05**; **final approval 2018-05-24**. Charges: misrepresenting funds availability, false **"bank-grade security"** claims, **Gramm-Leach-Bliley Safeguards and Privacy Rule** violations, and that Venmo **"misled consumers about the extent to which they could control the privacy of their transactions."** Order term: **third-party assessments every two years for ten years**. Press release: `https://www.ftc.gov/news-events/press-releases/2018/02/paypal-settles-ftc-charges-venmo-failed-disclose-information`.
+- **2019 (MEASURED).** Dan Salmon scraped **~7 million transactions** post-settlement — mass scraping only "very minorly" limited (Wired, 2019-06-26, `https://www.wired.com/story/i-scraped-millions-of-venmo-payments-your-data-is-at-risk/` — **body NOT REACHED**). **2019-08-28**: Mozilla + EFF open letter demanding **private-by-default transactions and privacy settings for friend lists** (Vice, `https://www.vice.com/en/article/venmo-letter-eff-mozilla-public-by-default-settings/`).
+- **2021 (MEASURED).** BuzzFeed News, **2021-05-14**, Mac/Notopoulos/Brooks/McDonald, "We Found Joe Biden's Secret Venmo. Here's Why That's A Privacy Nightmare For Everyone." `https://www.buzzfeednews.com/article/ryanmac/we-found-joe-bidens-secret-venmo` — found in **under 10 minutes**, and the exposed surface was **the friend list**, which had *no* privacy control at the time. *This is the per-contact-separation failure in its purest form: the transaction could be hidden; the edge could not.*
+- **2022 (MEASURED, academic).** Tandon, Mirkovic et al. (USC), "I know what you did on Venmo: Discovering privacy leaks in mobile social payments", PoPETs 2022, `https://petsymposium.org/popets/2022/popets-2022-0069.pdf` — **389 million public transaction notes**; **2 in 5 Venmo users publicly reveal sensitive information**.
+- **2024 Trump-campaign Venmo finding: NOT REACHED.** No source located; do not assert it.
+
+---
+
+## 6. TWITTER/X — security data repurposed for targeting
+
+**MEASURED, regulator-confirmed.** FTC/DOJ, **2022-05-25**, `https://www.ftc.gov/news-events/news/press-releases/2022/05/ftc-charges-twitter-deceptively-using-account-security-data-sell-targeted-ads`. **$150 million** penalty. **More than 140 million users** supplied phone numbers or email addresses **between 2014 and 2019** on the stated basis of account security (password reset, unlock, 2FA); Twitter let **advertisers target on that data**. Conduct window 2013 (collection begins) → 2019 (disclosure). Order: bar on profiting from the deceptively collected data; **must offer non-phone MFA (apps, security keys)**; must notify affected users; comprehensive privacy program; employee access restrictions; breach reporting. It was also a **violation of the 2011 FTC order**. X Corp. petitioned to set aside or modify this order; FTC sought comment **2026-06-03** (`/news-events/news/press-releases/2026/06/ftc-seeks-comment-x-corp-petition-set-aside-or-modify-ftc-order-concerning-twitter`).
+
+**Twitter "Who to follow" leaking uploaded-contact links: NOT REACHED.** No measured source found. The FTC action covers *ad targeting*, not friend-suggestion leakage. Do not conflate the two.
+
+---
+
+## 7. CROSS-APP IDENTITY LINKAGE VIA MOBILE AD IDs
+
+- **Kollnig, Shuba, Binns, Van Kleek, Shadbolt, "Are iPhones Really Better For Privacy? Comparative Study of iOS and Android Apps"**, PoPETs **2022**, arXiv **2109.13722**, `https://arxiv.org/abs/2109.13722`. **N = 24,000 apps** across both platforms. Verdict: **"neither platform is clearly better than the other for privacy across the dimensions we studied."** Third-party tracking and **user-identifier sharing widespread on both**; children's apps notably bad; iOS apps sometimes granted **broader location access** while using fewer ad-tracking libraries; multiple likely US/EU/UK legal violations (tracking without consent, weak data minimization).
+- **Fog Data Science (MEASURED, EFF/AP, 2022-08).** `https://www.eff.org/deeplinks/2022/08/inside-fog-data-science-secretive-company-selling-mass-surveillance-local-police`. Historical data **back to at least June 2017**; **>250 million devices/month**; **15 billion signals/day**; sourced from **~700 apps** via the ad ecosystem. Price to police: **$6,000–$9,000/year**; CHP paid **$7,500/yr for Reveal plus $2,400 for 500 extra queries/month** (2019). **At least 18 law-enforcement clients** under contract, more on free trials. **The linkage key is the mobile advertising ID** — and Fog's own documents note Apple's **App Tracking Transparency** "made services like Fog less useful to law enforcement." *That is a measured statement that the ad ID, not any account, was the identity spine.*
+- **Gravy Analytics / Venntel (MEASURED).** FTC complaint filed **December 2024** alleging unlawful sale of location data tracking consumers to **sensitive sites** (medical, religious, political). **January 2025**: **~17 TB** allegedly exfiltrated and posted to the Russian forum **XSS**, containing millions of coordinates and the **names of thousands of apps** whose users were harvested — including **Candy Crush, Tinder, MyFitnessPal**. Crucially, the leak **confirmed sourcing via real-time bidding**, not SDKs embedded by the app developers. (`https://en.wikipedia.org/wiki/Gravy_Analytics`) *The app authors were not party to the leak; the ad auction was.*
+
+---
+
+## 8. MULTIPLE ACCOUNTS ON ONE PLATFORM, LINKED AGAINST INTENT
+
+- **Facebook PYMK / sex workers' alts** — see §1b. **The best-documented instance of exactly this.** Two accounts, disjoint by every credential the user controlled, re-fused by signals the platform would not name.
+- **Instagram "Suggested for you" outing finstas: NOT REACHED.** Searched HN Algolia (multiple phrasings) and Wikipedia; **no measured, citable report located**. Treat as unverified. The nearest reachable artifact is a 2018 "Ask HN: How does Instagram know who I am on Facebook?" thread — anecdote, not evidence.
+- **Blind app: NOTHING FOUND.** No measured deanonymization incident located. Negative result.
+- **Whisper, 2014 (MEASURED-then-partly-RETRACTED — handle with care).** The Guardian, **October 2014**, alleged Whisper retained all posts indefinitely with timestamps and approximate geolocation **even for users who opted out of geolocation**, stored data outside the US contrary to its own statements, and shared data with the FBI/MI5. Whisper issued a point-by-point rebuttal. Sen. Jay Rockefeller demanded an explanation; BuzzFeed, HuffPost and Fusion suspended partnerships. Moxie Marlinspike: the app "should never have claimed to provide anonymity if it had to track users." **In March 2015 The Guardian published a substantial clarification retreating from several of the location-tracking and data-storage allegations.** (`https://en.wikipedia.org/wiki/Whisper_(app)`; Guardian original `https://www.theguardian.com/world/2014/oct/16/-sp-revealed-whisper-app-tracking-users` — **NOT REACHED**.) **Cite this as contested, not settled.**
+- **Yik Yak, 2022 (MEASURED).** **May 2022**, a student researcher (David Teather) found that Yik Yak's API returned **precise GPS (accurate to within 10–15 feet) alongside persistent user IDs**, and that an attacker on the **same Wi-Fi network** could compromise and deanonymize an account. (`https://en.wikipedia.org/wiki/Yik_Yak`; the researcher's own writeup `https://www.davidteather.com/blog/posts/yik-yak-exploit` — **NOT REACHED, connection refused**.) No documented company response. *An anonymity product shipping a stable per-user identifier plus 3-metre location: the pseudonym was decorative.*
+
+---
+
+## 9. PER-CONTACT / CAPABILITY-STYLE SEPARATION DEFEATED IN SHIPPED SYSTEMS
+
+Two strong measured cases, both about **the unguessable handle turning out to be guessable or enumerable**.
+
+- **Capability URLs — Georgiev & Shmatikov, "Gone in Six Characters: Short URLs Considered Harmful for Cloud Services"**, arXiv **1604.02734**, submitted **2016-04-10**, `https://arxiv.org/abs/1604.02734`; writeup `https://freedom-to-tinker.com/blog/vitaly/gone-in-six-characters-short-urls-considered-harmful-for-cloud-services/`. The **5–6 character token space is small enough to brute-force**. Result on Microsoft OneDrive: enumerated shared documents, and **7% of the exposed OneDrive accounts granted write access to anyone** — an injection path into every synced device on the account. On Google Maps shared directions: home addresses and visits to medically/financially sensitive locations. **This is a capability-URL scheme defeated in production at two major vendors: the capability was the secret, and the secret had ~30 bits.**
+- **Contact discovery — Hagen, Weinert, Sendner, Dmitrienko, Schneider, "All the Numbers are US: Large-scale Abuse of Contact Discovery in Mobile Messengers"**, **NDSS 2021**, `https://www.ndss-symposium.org/ndss-paper/all-the-numbers-are-us-large-scale-abuse-of-contact-discovery-in-mobile-messengers/`. They queried **10% of all US mobile numbers against WhatsApp** and **100% of all US mobile numbers against Signal**; Telegram's API leaked data about numbers **not even registered**. Finding: **"hashing-based contact discovery protocols are severely broken"** (three hash-reversal methods, plus an improved rainbow-table construction for the non-uniform phone-number space), and **very few users change default privacy settings**. Proposed an incremental contact-discovery scheme improving on Signal's. **Directly relevant: a per-contact reachability primitive built on a hashed low-entropy identifier is an enumeration oracle, not a veil.**
+
+---
+
+## What the corpus actually shows (the transferable law)
+
+1. **The leak is almost never the datum; it is the edge.** Venmo let you hide the amount but not the friend list. Grindr let you hide distance but not proximity ordering. Facebook let you separate credentials but not contact-chained inference. **Whatever the system does not let you make private is where the veil fails.**
+2. **The veil is breached from outside the veiled party's control.** Shadow contacts come from *other people's* address books (§1c, §2c); Fog and Gravy come from the *ad auction*, not the app (§7). The subject has no revocation surface because the subject was never a party.
+3. **Rounding is not separation.** Tinder (double → integer, 2014), Bumble (rounded display, exact computation, 2021) and the Kyoto colluding-trilateration result (2016) are one finding stated three times: **a monotone function of the secret is the secret**, given queries.
+4. **Low-entropy handles are not capabilities.** 5–6 char short URLs (7% writable at OneDrive) and hashed phone numbers (100% of US numbers enumerated against Signal) both fail by exhaustion, not by cryptanalysis.
+5. **Aggregation is a distinct leak surface from per-object exposure, and fixing one leaves the other.** Strava leaked four times through three different features across 2018–2025; the heatmap opt-out did not touch segments, profiles, or the GitHub-archived original tiles.
+6. **Regulators price the *deception*, not the leak.** Twitter $150M and Venmo's order both turn on *misrepresenting the control*, and Grindr's NOK 65M on consent. **No case here penalized the linkage itself.**
+
+## Explicit NOT REACHED / negative results
+
+- Fusion psychiatrist article body (URL + date confirmed, host dead, archive.org blocked).
+- Facebook's own 2013 White Hat statement; the 6M figure rests on Wikipedia + a blocked ZDNet headline.
+- Zuckerberg 2018 congressional testimony on non-user data — no primary source obtained.
+- Strava heatmap's own scale figures (Medium 403).
+- Le Monde Oct-2024 bodyguard article body and any officer count (host blocked).
+- Bumble 2023 "still works" follow-up — 404, no substitute found.
+- Grindr/Kyoto 2016 metre-level precision figures (in PDF only).
+- The Pillar's data-acquisition methodology (paywalled).
+- **No measured LinkedIn PYMK veil-leak exists in what was reachable.**
+- **No measured Instagram "Suggested for you" alt-account outing report was located.**
+- **No measured Blind deanonymization incident was located.**
+- **No 2024 Venmo Trump-campaign finding was located.**
+- **Correction:** the Grindr €6.5M/NOK 65M fine is **December 2021** (upheld 2023-09-29 and 2025-10-21), **not January 2024**.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;fHR9OFF6TiP2_O6PrO85Cln62XIejqv7E1E8cRo-usk
+
+<<^ code="&#x0004;" -> to=? >>

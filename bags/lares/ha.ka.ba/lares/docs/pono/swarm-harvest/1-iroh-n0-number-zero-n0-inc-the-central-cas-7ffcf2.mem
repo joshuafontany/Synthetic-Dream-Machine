@@ -1,0 +1,297 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. IROH / n0 (number zero, 'n0, inc.') — THE CENTRAL CASE. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. IROH / n0 (number zero, "n0, inc.") — THE CENTRAL CASE
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 30,564 characters
+
+````
+Research complete. Findings below — all from primary sources fetched this session.
+
+---
+
+# DID SERVERLESS / P2P IDENTITY+DATA SYSTEMS SUSTAIN? — MEASURED STATUS, 2026-09-04
+
+## 1. IROH / n0 (number zero, "n0, inc.") — THE CENTRAL CASE
+
+**Iroh is a no-server system that runs servers, and as of 2026 sells them.**
+
+**n0 operates the default relays, by their own documentation.** https://docs.iroh.computer/concepts/relays (the old `iroh.computer/docs/concepts/relay` 308-redirects here): *"Public relays are operated by n0.computer and hardcoded into Iroh, available free of charge"* — with *"no uptime or performance guarantees"* and *"rate-limit traffic to prevent abuse."* Regions: US, EU, Singapore.
+
+**Commercialization is live and priced.** https://www.iroh.computer/pricing (fetched 2026-09-04):
+| Tier | Price | Included |
+|---|---|---|
+| Community | $0 | public relays US/EU/SG, 7-day metrics, rate-limited, no uptime guarantee |
+| Pro | **$19/mo** | 10,000 concurrent connections, 5 MB/s rate limit, **100 GB egress**, authenticated access, 30-day metrics |
+| Dedicated | **$199/mo per region** (add-on to Pro) | 60,000 concurrent connections, custom regions/DNS, unlimited rate, **250 GB egress**, version locking |
+| Enterprise | custom | BYOC / on-prem / multi-cloud, SLAs, dedicated support engineer |
+
+Overages: **$0.003 per endpoint**, **$0.09/GB egress**, **$1.49 per 1,000 metric data-points/minute** above 10K DPM. Signup at `services.iroh.computer`. Homepage (https://www.iroh.computer/) sells "Hosting / Observability / Enterprise" and names commercial users: Datum, Nous Research, Mesh LLM.
+
+**Scale numbers, from n0 itself:**
+- **"The public relays we run have seen more than 200 million endpoints created, in the last 30 days alone."** — https://www.iroh.computer/blog/v1, "Iroh 1.0 — Dial Keys, not IPs", **June 15, 2026**.
+- Earlier: **"half a million unique nodes hitting the public network in a thirty day span,"** and *"that number roughly doubles when we talk to our partners running their own iroh relays"*; **"at least 40 projects building on iroh."** — https://www.iroh.computer/blog/road-to-1-0, **Oct 28, 2024**.
+
+**Hole-punching / direct-connection success rates — PARTIALLY REACHED.** No dedicated measurement post exists on the current blog. `https://www.iroh.computer/blog/iroh-perf` and `/blog/how-well-does-hole-punching-work` both return **HTTP 404**. I enumerated all 82 blog slugs from the index; there is no such post. What n0 does publish:
+- **"Roughly 90% of network conditions allow direct P2P connections"** — https://docs.iroh.computer/concepts/relays (no methodology, no N, no date).
+- **"It's normal to see 95% of data transferred in a connection pass directly between devices."** — v1 post, 2026-06-15. This is a *bytes* figure, not a *connection-success* figure.
+- The 2023 Number Zero Notion page "Iroh (NAT) Hole Punching" (`number-zero.notion.site/Iroh-Hole-Punching-b9a38cc228fb47328a73e71d10520418`, HN 2023-07-16) is a JS-only Notion shell — **NOT REACHED**.
+- The retrospective https://www.iroh.computer/blog/the-road-to-iroh-1-0 (2026-07-09, Rüdiger Klaehn) describes hole punching qualitatively only: *"once we merged it we had hole punch rates to be proud of… in the few corporate networks where hole punching was impossible, at least we could still transfer data via relays."* No percentages. It also states outright: *"Our goal was to get holepunching to work reliably, **even at the expense of compromising p2p purity**. If we would need a small server to help, so be it."*
+
+**The relays are a real, failing, load-bearing dependency.** https://www.iroh.computer/blog/relay-down-a-post-mortem — outage **Nov 5, 2024**: degraded 11:00 GMT, **full outage by 17:00 GMT**, resolved 23:01 GMT; memory leaks under connection load, logs filled disk. **~1 million new nodes onboarded during the incident; peak 100,000 concurrent connections before failure.** Detected internally only at 22:50 GMT — ~12 hours late. n0 runs multi-region `iroh-relay` + `iroh-dns-server`; an underpowered Asia node was migrated to bigger hardware.
+
+**Relay abuse forced authentication.** https://www.iroh.computer/blog/authenticated-relays (July 30, 2026): relay URLs are *"visible to anyone watching a connection get established"* and shipped in client bundles; *"Someone finds your relay URL in a public repo, a client bundle, or a screenshot, and starts spamming your infrastructure until it falls over."* Signed capability tokens tied to **API keys**; **default-on for relays deployed from June 2026 onward.** This is the moment the "serverless" network acquired an account system.
+
+**Public relay support has an end date.** From the v1 post: public relay operation for **v0.35x ends Dec 31, 2026**; for **v0.9x and 1.0.0-rcX, Sept 30, 2026**. *"Public relays are rate-limited for relayed traffic, which can change at any time."*
+
+**Engineering health: strong.** github.com/n0-computer/iroh — **12,450 stars, 749 forks, 162 open issues, last push 2026-09-04**. Releases: v1.0.0 2026-06-15, v1.0.1 06-29, v1.0.2 07-06 (relay security fix), v1.0.3 07-20, v1.1.0 08-25 (security fixes 09-01). Multi-person team commits daily. HN: Iroh 1.0 hit **1,398 points** (2026-06-15). Real downstream apps exist: LinXiv, Lexidraw, Appa, Pigeons (SSH), git-remote-iroh, go-iroh, alt-sendme, iroh-drop.
+
+**n0 funding — NOT REACHED.** n0.computer describes itself as *"an open R&D organization focused on efficient distributed systems"* with *"70+ years combined experience"*, revenue from products + "Services & Support" + open source. **No funding amount, round, or investor is disclosed on n0.computer, iroh.computer, the GitHub org (`number zero`, created 2022-03-05, 122 public repos), or any HN thread I searched.** Whether venture-backed is unresolved from primary sources. The entity is a for-profit: pages footer **"© 2025 n0, inc."**
+
+**Origin note (relevant to the pattern):** iroh started as a Rust IPFS implementation and abandoned it. https://www.iroh.computer/blog/a-new-direction-for-iroh (Feb 17, 2023) gives the measured reason: *"the current interop-focused Iroh needs at least 2,000 simultaneous p2p connections to serve as a gateway; sends on the order of 1,000 messages to retrieve a single 256KB block of data; takes on the order of seconds to resolve DHT queries; and **cannot reliably remain connected to the vast majority of peers on the network, if connection is possible at all**. We need those numbers to be on the order of 200 peers; less than 1 message per block; and 95%+ reliability."* The IPFS implementation was renamed **Beetle** and put in maintenance mode.
+
+---
+
+## 2. CERAMIC NETWORK — PIVOTED OUT OF EXISTENCE, TWICE
+
+**Feb 5, 2025** — https://blog.ceramic.network/ceramic-is-joining-textile/ : 3Box Labs merged with **Textile**; Ceramic joins Tableland DB and Basin Network under a mission to build *"an open intelligence network where AI agents can autonomously buy and sell intelligence from each other on-demand."* Claim at the time: Ceramic *"will continue operating with no disruption to current development or customers."* No funding disclosed.
+
+**Apr 17, 2025** — https://blog.ceramic.network/the-future-of-ceramic-focusing-on-recall/ , "The Future of Ceramic: Focusing on Recall". The actual pivot announcement:
+- **js-ceramic and ComposeDB are deprecated, effective immediately.**
+- **ComposeDB and the Ceramic Anchor Service (CAS) will shut down**, at least one month after Recall's mainnet launch, targeted **mid-2025** (exact date TBD at time of writing).
+- *"ComposeDB-dependent apps will break if not migrated to ceramic-one."*
+- CAS discontinued; ceramic-one gains "self-anchoring to Recall" — *"fully decentralized timestamping without relying on our centralized CAS or Ethereum L1"* (i.e. the anchor dependency moves from Ethereum to their own token chain).
+- Existing data: *"all existing data from ComposeDB remains fully accessible and readable through ceramic-one."*
+- Endgame stated plainly: ceramic-one becomes *"stable software under an open MIT license"* for **community maintenance** while the team moves to Recall.
+
+**What Recall actually became:** https://recall.network/ — not a data network. It is an **AI-agent leaderboard and prediction market**: RECALL **ERC-20 token launched on Base, October 2025**; site claims **1.4M users, 175,000 AI agents, 9M curations**, 10 "skill markets" (crypto trading, coding, ethics, safety). Staking, crowdfunding, "Recall Rank."
+
+**Measured decay:**
+- blog.ceramic.network **last post: 2025-04-17** (verified via RSS). Nothing in ~17 months.
+- **forum.ceramic.network: DNS resolves to 64.227.17.17, connection REFUSED on 443. The forum is down.**
+- github.com/ceramicnetwork/js-ceramic: 423 stars, **last push 2025-10-20**.
+- github.com/ceramicnetwork/rust-ceramic (`ceramic-one`, the anointed survivor): **51 stars, last push 2026-01-21** — 7½ months idle.
+- github.com/ceramicstudio/js-composedb: 94 stars, **last push 2024-07-26**.
+
+Prior technical work now stranded: ceramic-one + Recon protocol (2024-07-16), pairwise sync replacing multicast (2024-07-17), Data Feed API (2024-05-22), node production cost guide (2024-07-05).
+
+**Verdict: did not sustain.** The decentralized data network was deprecated by its own operator inside 15 months of shipping its rewrite, and the company is now a crypto AI-benchmarking token.
+
+---
+
+## 3. ORBITDB — ALIVE, BARELY, ON DONATIONS
+
+github.com/orbitdb/orbitdb: **8,800 stars, 595 forks, 25 open issues, last push 2026-05-14, not archived.**
+- **v4.0.0 released 2026-05-14** (npm `@orbitdb/core@4.0.0`, 2026-05-14T14:58Z). Prior: 3.0.2 on 2025-05-26.
+- **Commit activity: 38 commits in the trailing 52 weeks** (GitHub participation API), concentrated in 3 weeks (12 / 2 / 23 / 1). **Nothing since 2026-05-14 — ~3.7 months idle.**
+- **73 contributors all-time**, but the tail is historical: haadcode 1084 commits (long departed), haydenyoung 434 (the current maintainer), shamb0t 148, aphelionz 89. Recent commits are Hayden Young + Alex Potsides (`achingbrain`, an IPFS/libp2p maintainer).
+- **Funding: none institutional.** https://orbitdb.org/ : *"OrbitDB is developed by the community for the community so we rely on the community for financial support."* Open Collective + a wall of ~10 crypto donation addresses (ETH, BTC, BCH, LTC, XMR, DOGE, SOL, TRX). A "Floss.fund" link is present. `opencollective.com/orbitdb` returns 200 but the legacy group API returned Not Found — **specific donation totals NOT REACHED.**
+
+**Verdict: one-maintainer project on passive donations, still shipping majors but with months-long gaps.** Note the structural dependency: OrbitDB is IPFS-pubsub-based, so it inherits section 8's problems.
+
+---
+
+## 4. WILLOW PROTOCOL / EARTHSTAR — SPEC FINISHED, IMPLEMENTATIONS ARCHIVED
+
+**Funding: NLnet, explicitly.** https://willowprotocol.org/more/about-us/ : *"funded through the NGI Assure Fund, a fund established by NLnet with financial support from the European Commission's Next Generation Internet programme… under grant agreement № 957073."* Aljoscha Meyer employed at TU Berlin while working on it. Two people: Aljoscha Meyer (Berlin) + Sam Gwilym (The Hague), working as **worm-blossom** since 2022. OpenCollective at `opencollective.com/worm-blossom`. Amounts **NOT REACHED** (`nlnet.nl/project/Willow/` → 404; project page slug not found).
+
+**Spec activity (from willowprotocol.org RSS, fetched directly):**
+- News: 2024-01-17 site launch · 2024-05-06 willow-js · 2024-05-23 Drop Format · 2024-05-29 · 2024-06-19 Confidential Sync promoted to "Candidate" · 2024-08-10 Rust Meadowcap · **2025-10-26 "A lot of everything"** — the last news item, **10+ months ago**.
+- Changelog: only three entries ever — 2024-01-17, 2024-04-26, **2025-10-26**.
+
+**Implementations — this is the decisive measurement:**
+| Repo | Stars | Last push | State |
+|---|---|---|---|
+| earthstar-project/**willow-rs** (reference Rust impl) | 89 | 2025-10-23 | **ARCHIVED** |
+| earthstar-project/willow-js | 83 | 2025-03-26 | dormant, last release 0.5.3 (2024-07-04) |
+| earthstar-project/meadowcap-js | 32 | 2024-07-04 | dormant |
+| earthstar-project/willow-utils | 10 | 2024-07-04 | dormant |
+| **n0-computer/iroh-willow** | 74 | 2026-08-31 | **dependabot-only since 2025-11-17** — last human commit "chore: Remove unused import" |
+| earthstar-project/**earthstar** | 920 | **2025-04-12** | last release **11.0.0-beta.2, 2024-05-21**; still beta; last human commit 2024-08-08 |
+
+n0's 2024 roadmap promised *"new protocols like willow out into the world sooner."* That did not happen — iroh-willow has had no substantive commit in ~10 months and Willow is absent from iroh 1.0.
+
+**Does anything ship on it?** Searching GitHub for Willow implementations returns only ports and stubs: `Deln0r/willow-go` (10 stars), `marukun712/willow-ts` (0), `willow-network/willow-sdk-rust` (0), `n0-computer/willow-store` (0, last push 2025-01-17). **No shipped end-user application on Willow was found.**
+
+**Verdict: an excellent, complete, grant-funded specification with an archived reference implementation and zero shipped applications.** Earthstar itself has been in v11 beta for over two years.
+
+---
+
+## 5. VEILID (cDc, DEF CON 31, Aug 2023) — ACTIVELY DEVELOPED, ESSENTIALLY ONE PERSON, NO ADOPTION
+
+**Core repo (GitLab, gitlab.com/veilid/veilid):** created 2023-07-04, **449 stars, 189 forks, last activity 2026-09-04.** Tags: v0.5.0 (2025-12-21), 0.5.1, 0.5.2 (2026-01-28), 0.5.3 (2026-03-23), 0.5.4 (06-22), 0.5.5 (06-27), 0.5.6 (07-10), **v0.5.7 (2026-07-19)**. **Still pre-1.0 three years after launch.**
+
+**Bus factor ≈ 1.** Of the last 10 commits (2026-08-18 → 2026-09-04), **9 are by Christien Rioux** (cDc "DilDog"): "census gate system and more aggressive preventative clippy rules", "veilid-flutter multi-attach fixes", "fix timestamp api and improve inspect fanout", "log and lock fixes", "locks" ×2, "setup fixes", "More bugfixes for mocks, performance, and tests". One outside commit (kimmy.zip, a Windows JDK version check).
+
+**Did any app ship?** **VeilidChat exists and is maintained** — gitlab.com/veilid/veilidchat, **60 stars, last activity 2026-09-03**, tags v0.4.3 (2024-08-06) → v0.4.5 (2024-11-04) → v0.4.6/0.4.7 (2025-03/04) → v0.4.8 (2025-06-03) → **v0.4.9 (2025-08-07)**. Still 0.4.x. Third-party: `cmars/stigmerge` (86 stars, active 2026-09-04), `OpenArchive/save-dweb-backend` (26), `LGro/reunicorn` (26), `RangerMauve/veilid-iroh-blobs` (10 — note: a bridge *to iroh*), `jdbohrman-tech/alt-veilid` ("a fork of Veilid for people who care about DX", HN 2025-06-05).
+
+**Attention collapsed after launch.** HN: 180 pts (2023-08-11 launch), 184 pts (2024-04-26 re-post), 30 pts (Register, 2023-08-12), EFF writeup 34 pts (2023-12-16). **After 2024-04: 4 points (2025-11-12), 2 points (2025-06-05).** Nothing since.
+
+**Funding: NOT REACHED.** veilid.com discloses none; `veilid.com/about/` → 404. No foundation financials found.
+
+**Verdict: technically alive, socially dead.** Three years, still 0.5.x, one committer, no app past 0.4.9.
+
+---
+
+## 6. BRIAR — NEARLY SHUT DOWN; NOW EXPLICITLY MAINTENANCE-ONLY
+
+**July 9, 2026** — https://briarproject.org/news/2026-maintenance-mode/ , "Briar is in maintenance mode". This is the most direct statement of the funding failure mode in this entire report, quoted in full-relevant part:
+
+> *"For several years we've been trying to find solutions to some of the longstanding issues with Briar, such as high battery usage and unreliable background operation on Android, missing features like account backup and file attachments, and a difficult user experience for adding contacts and communicating offline. We considered completely rebuilding the application from the ground up, or even splitting it into separate applications for online and offline use. Meanwhile, **the project didn't have funding, we were reluctant to look for funding without having a long-term plan, and so we could only work on Briar in our spare time.** **Last year, we decided that we wouldn't realistically be able to solve these issues and so we reluctantly decided to shut down the project.** We worked on releasing a final update for Android and desktop to allow the app to remain functional for as long as possible. In the meantime we were hearing a lot of supportive words… and the app continued to attract new users. So finally we decided to continue the project in maintenance mode. We're only making essential security updates and bugfixes for now."*
+
+So: **decision to shut down taken in 2025; reversed to maintenance-only in July 2026.**
+
+**Release gap: no product news between 2023-08-31 (Briar Desktop 0.6.0-beta) and 2026-07-09** — a ~35-month silence, per the full news index.
+
+**Funding model — grants, all of them, none current:** Small Media Foundation, Open Internet Tools Project, Access Now, **Open Technology Fund**, **Prototype Fund**, Internews, **NLnet Foundation**, **NGI programme**, ISC Project, eQualit.ie. (`briarproject.org/funding/` → 404; funder list is in the maintenance-mode post.) Last funding announcement on the site: **2022-12-05, "Briar Desktop got another round of funding."**
+
+**Published user numbers: NONE.** No user count appears anywhere on briarproject.org. Only qualitative: *"the app continued to attract new users."* Notable adoption datum is negative: **India blocked 14 messengers including Briar, Element and Threema, 2023-05-01** (news.abplive.com / thehindu.com).
+
+Timeline: security audit + public beta 2017-07-21; 1.0 2018-05-09; 1.1 2018-09; 1.2 2019-11; 1.3 2021-06; 1.4 2021-11; Mailbox 2023-06-15; three ETH Zürich security issues fixed 2023-05-24.
+
+**Verdict: the canonical grant-funded P2P messenger reached the end of grant funding, decided to die, and settled for life support.**
+
+---
+
+## 7. SECURE SCUTTLEBUTT — THE FLAGSHIP APP LEFT THE PROTOCOL
+
+**Planetary Social: confirmed abandonment of SSB for Nostr.** planetary.social now renders, above its own marketing copy, twice:
+
+> *"We're moving to Nostr. The planetary team has taken our design, app, and philosophy over to Nostr. Our new app is nos.social."*
+
+Planetary was the VC-backed SSB client (HN 2020-01-22: *"Planetary: a VC backed social network built on Scuttlebutt, out of stealth"*). **The site carries no date on the shutdown statement — the exact shutdown date is NOT REACHED.** Repo evidence: `planetary-social/planetary-ios` **202 stars, last push 2025-12-17, not archived**; `planetary-social/nos` (the Nostr successor) **149 stars, last push 2025-07-24**. Note the successor repo is *staler than the abandoned one*.
+
+The Planetary site still advertises the old SSB story unmodified — *"Your data is hosted by your friends through cooperative mutual aid"* — with the Nostr banner pasted over it. It still points users to Manyverse as an alternative SSB client.
+
+**SSB core infrastructure repos are dead:**
+- `ssbc/ssb-server` (the pub server itself): 1,703 stars, **last push 2022-06-17** — over 4 years dead.
+- `ssbc/ssb-db2`: 50 stars, **last push 2024-04-11**.
+
+**Manyverse survives.** GitHub mirror `staltz/manyverse` 954 stars, last push 2024-08-13; **GitLab `staltz/manyverse` last activity 2026-07-01, 568 stars.** So the one remaining mobile client is still touched, on GitLab, ~2 months ago.
+
+**Attention:** HN mentions of Scuttlebutt since mid-2022 total 8 stories; the top is a generic 231-point link to scuttlebutt.nz (2024-02-23) and a 151-point link to the *Wikipedia article* (2023-01-22). One 2026 item: "Scuttlebutt Genesis" (handbook.scuttlebutt.nz), **1 point, 2026-04-12.**
+
+**The pub-death narrative — PARTIALLY REACHED.** I could not retrieve a first-person account naming the pub collapse. `staltz.com/an-off-grid-social-network.html` does not discuss pubs. scuttlebutt.nz's homepage carries no ecosystem-status page. No "SSB is dying" post was retrievable. **The measured substitute for that narrative is above: the pub server software has had zero commits since June 2022, and the flagship funded client publicly relocated to a protocol with explicit relay servers (Nostr).**
+
+---
+
+## 8. IPFS / PROTOCOL LABS — LAYOFFS, GOVERNANCE OFFLOAD, GATEWAY EXODUS
+
+**Layoffs, measured.** https://pl.xyz/blog/2023-02-03-crypto-winter-update/ (was protocol.ai, 308-redirects to pl.xyz), **Feb 3, 2023**, Juan Benet, "Focusing our strategy to weather crypto winter": **89 roles eliminated, ~21% of the workforce.** Divisions hit: PL Corp, PL Member Services, **Network Goods**, PL Outercore, PL Starfleet. Stated cause: *"High inflation leading to high interest rates, low investment, and tougher markets have rocked companies and industries globally"* — and a need to *"focus our headcount against the most impactful and business critical efforts."* Pre/post headcount not disclosed. (HN, 124 pts, 2023-02-04.) **No second round of layoffs was found in the pl.xyz blog index — a 2024 round is NOT REACHED / not evidenced.**
+
+**Governance offload, Nov 14, 2023** — pl.xyz blog, "Advancing IPFS and libp2p Governance": *"IPFS and libp2p are officially taking big steps forward in project maturity, with independent foundations and funding structures."* In plain terms, PL stopped being the funder of record.
+
+**The core team left, April 2024.** Per Cloudflare's own post (below): Interplanetary Shipyard is *"an engineering collective… consist[ing] of core IPFS developers and maintainers who transitioned from Protocol Labs in April 2024"*, now maintaining Kubo, Helia, and go-libp2p as an independent entity.
+
+**Protocol Labs today is not an IPFS company.** The pl.xyz blog index (2023–2026) is dominated by "innovation network" and R&D-pipeline framing — Gensyn, Spice AI, ZK, **neurotech, robotics, satellites**, stablecoins and cross-border payments. Last strategy post: "Driving Breakthroughs: The Impact of Our Innovation Network," Jan 29, 2025.
+
+**Gateway centralization — and its collapse.** https://blog.cloudflare.com/cloudflares-public-ipfs-gateways-and-supporting-interplanetary-shipyard (2024-05-16, HN):
+- Cloudflare **shut down its public IPFS gateway**. Transition began **May 14, 2024**; **after August 14, 2024 `cloudflare-ipfs.com` and `cf-ipfs.com` no longer connect to IPFS**; traffic redirected to **ipfs.io / dweb.link** in the interim.
+- The traffic did not decentralize — it was **handed to the other centralized gateway operator.** `ipfs.io` now 301-redirects to `about.ipfs.io`.
+- **Gateway traffic share numbers: NOT REACHED.** No operator publishes them. Cloudflare's post gives no volumes; Shipyard's own https://blog.ipfs.tech/2024-shipyard-improving-ipfs-on-the-web/ (2024-11-28) gives **no request counts, no cost figures, no funding amounts** — only the admission that *"public gateways became entrenched as the default to access IPFS content on the web to the detriment of the principles of IPFS"*, plus a donate link.
+
+**Gateway operators are also a legal liability sink:** *"Publishers carpet-bomb IPFS gateway operators with DMCA notices"* (torrentfreak, 2023-06-25, HN 234 pts); Cloudflare blocked pirated content on its gateway 2023-03-25 (HN 304 pts); "Copyright as Harassment: The DMCA Attack on IPFS Gateways" (Techdirt, 2023-07-07). This is a running cost that falls on whoever runs the server the network claims not to need.
+
+**libp2p circuit-relay economics: NOT REACHED.** No published cost model, relay-operator census, or reimbursement scheme was findable. No HN discussion exists. This is a genuine negative result: **the economics of who pays for libp2p relays appear to be undocumented.**
+
+**Independent measurement:** the last substantive academic IPFS workload measurement I could locate is *"Studying the workload of a fully decentralized Web3 system: IPFS"* (arXiv:2212.07375, 2022-12-14). More recent IPFS arXiv work is about abuse, not health: *"Hello, won't you tell me your name?: Investigating Anonymity Abuse in IPFS"* (arXiv:2506.04307, 2025-06-04). (OpenAlex was budget-exhausted this session — broader lit sweep NOT REACHED.)
+
+---
+
+## 9. BLUESKY / ATPROTO — EXPLICITLY NOT SERVERLESS, AND THE COST IS PUBLISHED
+
+**This is the only system in this report whose infrastructure costs are measured, published, and cheap.**
+
+**Bryan Newbold, "A Full-Network Relay for $34 a Month"** — https://whtwnd.com/bnewbold.net/3lo7a2a4qxg2l , **2025-08-27** (HN 2025-05-02):
+- **$34/month all-in** ($30/mo base VPS + tax).
+- **8 vCPU, 16 GB RAM, 160 GB disk, 1 Gbps unmetered.**
+- Storage in use: **21 GB relay data, 2.4 GB PostgreSQL, 114 MB logs** — because it runs a **2-hour** backfill window (default 72 h) and does **not** archive full repos.
+- **30 Mbps sustained** for the outbound firehose WebSocket.
+- **600 events/sec** (April 2025 peak); 2,000 events/sec historical sustained.
+- CPU ~5–15% user, ~1–3% sys; Postgres **766 tps**, 95.18% cache hit, 1.73 GB DB; RAM 2.06 GB (13.48%).
+
+**Bryan Newbold, "Notes on Running a Full-Network atproto Relay (July 2024)"** — https://whtwnd.com/bnewbold.net/3kwzl7tye6u2y , published 2025-08-27, content dated July 2024. The *archiving* relay, i.e. the expensive one:
+- **$152/month + $92 one-time setup** (OVH bare metal; a comparable later option $153/mo + $93).
+- **12 vCPU (Xeon E-2136 / EPYC 4244P), 32 GB ECC, 2×1.92 TB NVMe (3.84 TB), 1 Gbit/s unmetered.**
+- After full backfill: **447 GB PostgreSQL + 722 GB CAR storage ≈ 1.2 TB of 3.84 TB used.**
+- Steady state: 3–6 MB/s read, 7–14 MB/s write, **514 tps**, 172–313 KB/s network.
+- Headroom: could absorb *"an order of magnitude more event rate"* before disk becomes the binding constraint within ~1 year.
+
+**The ceiling figure**, from "Reply on Bluesky and Decentralization," https://whtwnd.com/bnewbold.net/3lbvbtqrg5t2t , **2024-11-27**: a full-network, **fully archiving** relay needs *"on the order of **16 TBytes of fast NVMe disk**."*
+
+So the honest range: **$34/mo (non-archiving, 2-hour window) → ~$152/mo (archiving, 1.2 TB) → 16 TB NVMe (full archive).**
+
+**Firehose volume, Jaz (Jaz Volpert), "Jetstream: Shrinking the AT Proto Firehose by >99%"** — https://jazco.dev/2024/09/24/jetstream/ , **2024-09-24**:
+- Full firehose: **~24 GB/day pre-surge → 232 GB/day** during the Brazil X-ban surge (**~1,300% activity increase**). **≈3.16 TB/month** for the full protocol firehose.
+- Jetstream (JSON, uncompressed): **~41 GB/day ≈ 400 GB/month.**
+- Jetstream + zstd dictionary: **~18 GB/day peak**; **~850 MB/day** for posts only ≈ **25.5 GB/month**.
+- Compression: **482 bytes → 211 bytes/event, ratio 0.44.** Dictionary trained on 100,000 real events.
+- Memory **<16 MB resident**; <8 GB buffer for a 24-hour playback window; **200k events/sec** dropping to 28k/sec per consumer in streaming mode with 12 concurrent consumers.
+- **Test infrastructure: a $5/month OVH VPS.**
+
+**The company, by contrast, is heavily capitalized and centralized.** https://bsky.social/about/blog/03-19-2026-series-b , posted **March 19, 2026**, reporting an **April 2025** round:
+- **$100M Series B led by Bain Capital Crypto**, with Alumni Ventures, Anthos Capital, Bloomberg Beta, Knight Foundation, True Ventures. Round led internally by founder Jay Graber.
+- **13 million users (Series A, Oct 2024) → over 43 million** global users.
+- Ecosystem: **>1,000 apps** used weekly on atproto; **>400,000 SDK downloads/month**; **~20 billion public records** in the Atmosphere.
+- Bluesky is a Public Benefit Corporation.
+
+**Governance churn:** Jay Graber stepped down as CEO to Chief Innovation Officer **2026-03-09**; Toni Schneider interim, made **permanent CEO 2026-07-10**. Also: **DDoS-driven service interruptions, April 16–20, 2026** (four consecutive blog posts).
+
+**The pattern this proves:** a system that admits it has servers publishes exact server costs, and those costs are two orders of magnitude below what the "serverless" projects imply they avoid. Independent full-network participation costs **$34–$152/month**; the operator raised **$100M** to run the *centralized* parts (app view, moderation, hosting 43M users' PDSes).
+
+---
+
+## CROSS-CUTTING MEASURED FINDINGS
+
+**1. Every "no server" system in this set ships or depends on servers, and the server is the thing that fails.** Iroh: n0-operated hardcoded relays, one 12-hour outage at 100k concurrent connections (2024-11-05), abuse forcing API-key authentication (June 2026), and an announced **end-of-life date for free public relay operation (Dec 31, 2026)**. SSB: pubs, whose server software has been dead since 2022-06-17. IPFS: public gateways, of which the largest operator (Cloudflare) exited in Aug 2024. Ceramic: a *centralized* anchor service (CAS), by their own word, now scheduled for shutdown.
+
+**2. The relay/gateway is where a P2P project becomes a business or dies.** Iroh took the business path and now has a $19/$199/mo price sheet and API keys. Cloudflare took the exit path. Briar and SSB had no path.
+
+**3. Grant funding produced finished specifications and abandoned implementations.** Willow (NLnet/NGI, grant 957073) has a complete, candidate-status spec set — and an **archived** reference Rust implementation, a dormant JS implementation, a dependabot-only iroh integration, and **no shipped application**. Earthstar has been in v11 beta since 2024-05-21. Briar's own post names the mechanism exactly: no funding → spare-time work → decision to shut down.
+
+**4. Three of eight are effectively over.** Ceramic (deprecated by its operator; blog silent 17 months; forum offline; pivoted to an AI token). SSB (pub software 4 years dead; flagship funded client migrated to Nostr). Briar (decided to shut down in 2025, currently on security-only life support). Two more are one-person efforts: Veilid (Rioux, 9 of last 10 commits, still 0.5.x after 3 years) and OrbitDB (Hayden Young, 38 commits/year, donation-funded).
+
+**5. Only two sustained, and both have a company and a revenue model.** Iroh (n0, inc. — daily commits, 1.0 after 4 years and 65 versions, ~200M endpoints/30d on **its own relays**, priced services). Bluesky ($100M Series B, 43M users, a PBC) — which never claimed to be serverless and publishes its costs.
+
+**6. Unresolved / NOT REACHED:** n0's funding structure and investors; a dedicated n0 hole-punching success-rate publication (the two URLs specified return 404 and no such post exists among the 82 blog slugs — the only published figures are the undocumented "roughly 90%" in docs and "95% of data" in the v1 post); Planetary's exact shutdown date and dated statement; IPFS public-gateway traffic share; libp2p circuit-relay economics (apparently undocumented anywhere); Veilid and OrbitDB funding totals; NLnet grant amounts for Willow.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;aZ72Ry_2nCsGT_iglysg8M5DrQnUA8EnpxEiArM2l0M
+
+<<^ code="&#x0004;" -> to=? >>

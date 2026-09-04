@@ -1,0 +1,465 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/a-android-53d76a >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/a-android-53d76a.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: A. ANDROID. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/a-android-53d76a"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! A. ANDROID
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 61,224 characters
+
+````
+All three agents are back. Compiling.
+
+---
+
+# WEARING AN IDENTITY ON SOMEONE ELSE'S DEVICE — measured evidence on profile isolation
+
+**Method.** NVD REST API 2.0, AOSP/Chromium source trees (raw.githubusercontent), Apple Platform Security guide, Microsoft Learn, GitHub issue trackers via `gh`, Crossref, CISA KEV, HN Algolia. WebSearch not used. **NOT REACHED, stated up front:** arXiv API returned nothing at all from this egress (tested with a control query — reachability failure, not a null result); OpenAlex hit its daily budget mid-sweep (`Insufficient budget… Resets at midnight UTC`) after ~9 successful queries; ars technica and pcmag refuse this egress; several Google support articles 404 or served CAPTCHA.
+
+---
+
+## A. ANDROID
+
+### A1. The documented model — and what the docs do *not* say
+
+Per-user storage paths are concretely documented (`source.android.com/docs/devices/admin/multi-user-testing`): `/data/user/{userId}/`, `/storage/emulated/{userId}`, `/data/media/{userId}`, `/data/system/users/{userId}`.
+
+The strongest **real** guarantee is File-Based Encryption (`source.android.com/docs/security/features/encryption/file-based`): *"Every user gets two keys: a DE and a CE key… Each work profile user ID also gets two keys"*, and *"one user unlocked does not mean that all the users on the device are unlocked."* This is a cryptographic boundary, not an ACL.
+
+The multi-user page claims *"No user has access to the app data of another user"* but **contains no definition of `INTERACT_ACROSS_USERS`/`INTERACT_ACROSS_USERS_FULL` and no statement of isolation limits.** The app-sandbox page's only multi-user sentence: *"In Android 6.0, the SELinux sandbox was extended to isolate apps across the per-physical-user boundary."*
+
+### A2. The Keystore question — answered, and the answer is a negative
+
+**No Android document states that Keystore material is per-user.** Both `source.android.com/docs/security/features/keystore` and `developer.android.com/privacy-and-security/keystore` scope keys to the **app**: *"the UID of the caller is also included to disambiguate keys from different apps"* / *"let an individual app store its own credentials, which only that app can access."* Neither mentions multi-user, profiles, or key lifecycle on user removal.
+
+Per-user isolation is a **derived consequence of UID arithmetic**, confirmed from AOSP source (`core/java/android/os/UserHandle.java`):
+
+```java
+public static final int PER_USER_RANGE = 100000;          // line 47
+public static @UserIdInt int getUserId(int uid) { return uid / PER_USER_RANGE; }   // 286-288
+public static int getUid(int userId, int appId) {
+    return userId * PER_USER_RANGE + (appId % PER_USER_RANGE); }                    // 376-378
+```
+
+So the Keystore boundary is real but **undocumented and structural** — it holds because UID encodes user id, not because Keystore was specified to hold it. The CVE that touches the binding: **CVE-2021-0320** (2021-01-11, 4.7) — *"in `is_device_locked` and `set_device_locked` of `keystore_keymaster_enforcement.h`, there is a possible bypass of lockscreen requirements for keyguard bound keys due to a race condition."* Related: CVE-2017-13236 (2018-02-12, 7.8, KeyStore service permissions bypass), CVE-2019-9253 (keys landing in TEE instead of StrongBox).
+
+### A3. Cross-user CVEs — a continuous 2021→2026 stream
+
+NVD `keywordSearch=cross-user`, Android subset (all "local information disclosure / EoP, no additional privileges, no user interaction"):
+
+| CVE | Published | CVSS | What crossed |
+|---|---|---|---|
+| CVE-2021-0521 | 2021-06-21 | 5.5 | `getAllPackages` — cross-user permissions disclosed |
+| CVE-2021-0979 | 2021-12-15 | 5.5 | `ShortcutService` — cross-user package leak |
+| CVE-2023-21105 | 2023-06-15 | 5.5 | `ChooserActivity` — **cross-user media read** (confused deputy) |
+| CVE-2023-21279 | 2023-08-14 | 5.5 | `RemoteViews.visitUris` — cross-user media read |
+| CVE-2023-21312 | 2023-10-30 | 5.5 | `IntentResolver` — cross-user media read |
+| CVE-2023-21321 | 2023-10-30 | 5.5 | Package Manager — cross-user settings disclosure |
+| CVE-2023-40073 | 2023-12-04 | 5.5 | `Notification.visitUris` — cross-user media read |
+| CVE-2023-40113 | 2024-02-15 | 5.5 | **cross-user message data** |
+| CVE-2023-40124 | 2024-02-15 | 5.5 | cross-user read of **photos** |
+| CVE-2024-31319 | 2024-07-09 | **7.8** | `NotificationManagerService` — cross-user data leak → EoP |
+| CVE-2024-43082 | 2024-11-13 | 5.5 | `EditUserPhotoController` — cross-user media read |
+| CVE-2024-43090 | 2024-11-13 | 5.0 | cross-user image read |
+| CVE-2025-26424 | 2025-09-04 | 4.0 | **`VpnManager`** — cross-user data leak |
+| CVE-2025-26430 | 2025-09-04 | **7.8** | `SpaAppBridgeActivity` — cross-user file reveal |
+| CVE-2025-32333 | 2025-09-04 | **7.8** | `SpaActivity.kt` — cross-user permission bypass (Android 14) |
+| CVE-2025-48628 | 2025-12-08 | **7.8** | `PrintManagerService.validateIconUserBoundary` — cross-user image leak |
+| **CVE-2026-0021** | **2026-03-02** | **8.4** | **`AppInfoBase.hasInteractAcrossUsersFullPermission` — cross-user permission bypass, confused deputy** |
+
+Note the recurring phrase **"confused deputy."** The kernel/FBE boundary is not what fails; a *system-privileged component holding `INTERACT_ACROSS_USERS_FULL` is tricked into fetching across it on the caller's behalf.* That is the dominant Android failure mode, and it is still producing CVEs in 2026.
+
+### A4. Guest mode — 24 CVEs, almost all one shape
+
+`keywordSearch=guest user Android` returns 24. The pattern is near-uniform: a guest reaches **device-wide network/radio state** through a Settings screen missing a permission check. CVE-2020-0485 (tethering), CVE-2021-0602 (**view and modify Wi-Fi settings for all configured APs**), CVE-2021-39807 & CVE-2022-20360 & CVE-2023-21086 (enable NFC from guest/secondary), CVE-2022-20112 (**change private DNS**), CVE-2022-20124 (**reset pre-loaded applications for other users**), CVE-2022-20254/20398/20503/20506/20508/20519/20522/20533/20556 (Wi-Fi config, nine separate CVEs across 2022), CVE-2023-20959 (`AddSupervisedUserActivity`), CVE-2023-21021 (**change admin user network settings**), CVE-2023-21174/21175 (data limits, mobile data toggle), CVE-2023-21185 (`WifiNetworkFactory`), CVE-2022-20006 (7.0 — race lets a guest **briefly view what's under the lockscreen**).
+
+Also: **CVE-2017-0388** — *"a local secondary user to read data from an external storage SD card inserted by the primary user."*
+
+**Guest residue, measured from source** (`UserManagerService.java`): guest deletion is **deferred, not immediate**. The flag `guestToRemove` (ATTR_GUEST_TO_REMOVE) marks a user *"to be removed"*; `setUserEphemeralUnchecked` logs *"User %d is set ephemeral and will be removed on user switch or reboot"*; and when immediate removal fails, `removeUserUnchecked` sets `userData.info.partial = true` with the comment *"so that the user will be purged on next startup, in case the runtime stops now before stopping and removing the user completely."* There is a real on-disk window between "deleted" in the UI and purged.
+
+### A5. Clipboard — the default is open, and the restriction is one-directional
+
+Quoted verbatim from AOSP `core/java/android/os/UserManager.java`, the `DISALLOW_CROSS_PROFILE_COPY_PASTE` docstring:
+
+> *"Specifies if the clipboard contents can be exported by pasting the data into other users or profiles. **This restriction doesn't prevent import, such as someone pasting clipboard data from other profiles or users.** The default value is `false`.*
+>
+> *Note: Because it's possible to extract data from screenshots using optical character recognition (OCR), we strongly recommend combining this user restriction with `DevicePolicyManager#setScreenCaptureDisabled`."*
+
+Three measured facts in one docstring: clipboard crosses profiles **by default**; even when enabled the restriction is **export-only, import is never prevented**; and Android itself documents that the restriction is **defeatable by OCR of a screenshot**.
+
+### A6. Work profile — the boundary is real but was breached at the presentation layer
+
+CVE-2016-6708 (bypass work-profile security prompt in Multi-Window), CVE-2021-0595 (**7.8** — *"possible way to access the work profile without the profile PIN, after logging in"*), CVE-2021-39692 & CVE-2022-20331 (**set up / enable a work profile without user consent via tapjacking/overlay**), CVE-2023-20914 (*"possible way for the work profile to read SMS messages"*), CVE-2020-0943 (Microsoft YourPhone — **view work-profile notifications**), CVE-2023-21512 (Samsung Knox — *"read work profile notifications without proper access permission"*), CVE-2022-20544 (bypass of profile-owner restrictions), CVE-2022-20011 (*"possible leak of one user notifications to another"*).
+
+### A7. Samsung Secure Folder — the closest shipped analogue to the design under review, and it is instructive
+
+Secure Folder is a managed profile marketed as a per-person private container on a shared handset. **17 CVEs**, and the distribution is the finding: the container held, every *surface that renders its contents* leaked.
+
+CVE-2018-21038 (**9.8** — startup logic allows **authentication bypass**), CVE-2020-28340 (**9.8** — FRP bypass *via* Secure Folder), CVE-2018-9142 (7.0 — install arbitrary APK into the Secure Folder SD area), CVE-2020-13834 (7.5 — adb arbitrary installs), CVE-2020-26606 (7.5 — content via a debugging command), CVE-2018-21041 (7.5 — **Gallery accessible without authentication**), CVE-2020-11601 (5.5 — access to apps **via floating icons**), CVE-2018-21068 (6.2 — locked app runs **via split screen**), CVE-2019-20617 (5.3 — **leaks preview data of recent apps**), CVE-2020-11606 (2.4 — app preview leaks on a locked device), CVE-2019-20580 (5.3 — **Motion photo player bypasses Secure Folder to view images**), CVE-2018-21062 (4.6 — Gallery slideshow viewable when biometrics disabled), CVE-2019-20609 & CVE-2018-21056 (**smartwatch displays Secure Folder notification content**), CVE-2021-25507 (**Samsung Flow on a paired PC reads Secure Folder notification data**), CVE-2019-6744 (4.3, physical access), CVE-2019-12087 (5.5, DoS).
+
+Recents thumbnails, floating icons, split-screen, a media player, a paired watch, a paired PC. **The private plane was never breached cryptographically — it was read off the screen, off the notification bus, and off a companion device.**
+
+### A8. Private Space (Android 15) — one structural limit that matters here
+
+From `source.android.com/docs/security/features/private-space`: a new profile type `android.os.usertype.profile.PRIVATE`; when locked, apps are *"hidden from the recents view, notifications, settings, and from other apps"*; when unlocked they *"become visible in settings, Sharesheet, photo picker, and DocsUI."*
+
+Documented limits, quoted: *"Private space can have only one instance on a single device"* and **"can exist only for the main user (not for secondary users or within other profiles)."**
+
+A design assuming *several personas per human* cannot use Private Space for more than one of them, and cannot use it at all inside a secondary user. NVD `keywordSearch=private space Android` → **0 results** (too new to have an enumerated record; read as unexamined, not sound).
+
+### A9. Restricted profiles — the exact shape of "a manager provisions a persona worn by someone else"
+
+From AOSP `UserManager.java` (lines 163-168):
+
+> *"User type representing a 'restricted profile' user, which is **a full user that is subject to certain restrictions from a parent user**. Note, however, that it is **NOT technically a profile**."*
+
+`UserInfo.java` carries the linkage field `restrictedProfileParentId` (line 255) alongside `profileGroupId`. The legacy `FLAG_RESTRICTED` constant is deprecated and its own comment reads: *"Exact meaning TBD. For instance, maybe they can't install apps or administer WiFi access pts."* — an unspecified boundary, in AOSP's own words.
+
+### A10. Academic measurement of Android multi-user isolation: **NONE**
+
+Nine OpenAlex queries ("Android multi-user isolation security", "Android work profile security analysis", "Android guest mode data residue", "cross-profile data leakage Android", "shared device smartphone security multiple users", plus HCI device-sharing framings) returned **zero** on-topic papers — results were dominated by Android *malware detection* surveys. Crossref likewise. arXiv NOT REACHED.
+
+What does exist is adjacent and directly relevant to the manager/worn split — parental-control apps as the deployed instance of "one person provisions software worn by another":
+
+- **Feal, Calciati, Vallina-Rodriguez, Troncoso, Gorla, "Angel or Devil? A Privacy Study of Mobile Parental Control Apps," PoPETs 2020(2)**, doi:10.2478/popets-2020-0029 (cited 46). **N=46 apps, 43 developers, 20M installs.** Measured: *"11% of the apps transmit personal data in the clear"*; *"34% of the apps gather and send personal information without appropriate consent"*; *"72% of the apps share data with third parties"* undisclosed in their privacy policies; on average **more permission-hungry than the top 150 apps**; *"even for those applications recommended by European and other national security centers."*
+- **Maier, Tanczer, Klausner, "Surveillance Disguised as Protection," PoPETs 2025**, doi:10.56553/popets-2025-0052. **N=20 sideloaded + 20 Play Store.** *"Three apps transmitted sensitive data unencrypted"*; *"half lacked a privacy policy"*; **"9 out of 20 were flagged for potential stalkerware indicators of compromise"**; sideloaded apps *"lack specialised parental control features and safeguards against misuse while concealing themselves on the user's device."*
+
+---
+
+## B. CHROME / CHROMEOS
+
+### B1. The famous statement does not exist — corrected
+
+**This is a correction to the brief's premise, and it was measured twice independently.** The canonical Chromium security FAQ (`chromium.googlesource.com/chromium/src/+/main/docs/security/faq.md`) was fetched raw (`?format=TEXT`, base64-decoded, **82,581 bytes**) and grepped: the word "profile" appears **7 times total** (lines 695–700, 1280, 1285, 1289, 1291); `grep -i "security boundary"` returns **5 hits, none about profiles**. `chromium.org/Home/chromium-security/security-faq/` is a stub redirecting to the source tree.
+
+**There is no sentence in Chromium's documentation asserting that Chrome profiles are not a security boundary.** It is folklore. What exists instead is three things:
+
+**(a) A threat-model exclusion covering the whole class**, verbatim:
+> *"### Why aren't physically-local attacks in Chrome's threat model? We consider these attacks outside Chrome's threat model, because there is no way for Chrome (or any application) to defend against a malicious user who has managed to log into your device as you, or who can run software with the privileges of your operating system user account. Such an attacker can modify executables and DLLs, change environment variables like `PATH`, change configuration files, read any data your user account owns, email it to themselves, and so on… This problem is not special to Chrome — all applications must trust the physically-local user."*
+
+**(b) An enumerated list of maintained boundaries that omits profiles** (`docs/security/web-platform-security-guidelines.md`):
+> *"The security team maintains several security boundaries in the WebPlatform: origin, site, secure contexts, cross-origin isolated contexts."*
+> *"The origin is the security boundary we aim to defend."*
+
+Site Isolation's unit is *"the scheme and registered domain name… ignoring subdomains, port, or path."* No profile entry. The absence is the finding.
+
+**(c) Chromium's own prescribed remedy — which delegates to the OS, not to Chrome:**
+> *"If you share your computer with other people, take advantage of your operating system's ability to manage multiple login accounts, and use a distinct account for each person. For guests, Chrome OS has a built-in Guest account for this purpose."*
+
+The nearest vendor statement in the intended spirit is consumer help copy, `support.google.com/chrome/answer/2364824`: *"Only share your device with people you trust." / "If someone has your device, they can switch to any other Chrome profile on it." / "If they open your Chrome profile, they can see info like what websites you visited."*
+
+Also on record: *"Enterprise policies applying to running, enterprise-enrolled Chrome instances are not by default a security boundary"* (ChromeOS excepted), and *"Bugs in Incognito mode are tracked as privacy bugs, not security bugs."*
+
+**Chrome profile CVEs:** overwhelmingly use-after-free on profile destruction, not boundary crossings — CVE-2021-37988, CVE-2022-0456, CVE-2022-1145, CVE-2022-4191, CVE-2022-4440, CVE-2023-5472, CVE-2023-5854, CVE-2025-1916 (all 7.5–8.8). The one that names the boundary: **CVE-2022-1862** (2022-07-27, **6.5 MEDIUM**) — *"Inappropriate implementation in Extensions… allowed an attacker who convinced a user to install a malicious extension to **bypass profile restrictions** via a crafted HTML page."* Rated Medium, consistent with a boundary Chromium never committed to. `keywordSearch=multi-profile` → **no Chrome cross-profile vulnerability class exists in NVD.**
+
+**Password storage per platform** (FAQ, ~line 1270), relevant to whether the profile directory is meaningfully sealed: Windows uses App-Bound encryption; on Linux the key goes to Gnome Secret Service or KWallet and *"**If there is no available Secret Service or KWallet, the data is not encrypted when stored**"*; *"On ChromeOS passwords are only obfuscated since all profile data is encrypted by the OS."*
+
+### B2. ChromeOS — the one platform separating users cryptographically
+
+Per-user vault, from `chromiumos/platform2/+/HEAD/cryptohome/docs/filesystem_layout.md`:
+> *"The underlying filesystem mechanisms are using one of the following: `ecryptfs` (deprecated, used on old kernels), fscrypt (current, v1 is used on 4.x boards and v2 is used on 5.4+ boards) and lvm+dmcrypt (upcoming). The filesystem encryption keys are themselves encrypted via various mechanisms."*
+
+Guest is **ramfs, never on disk** (`cryptohome/docs/mount.md`): *"Ephemeral mount — Ramfs based vault, which is torn down upon session termination. Doesn't have any persistently stored encryption/credentials data."* But note the kiosk case: *"**Public mount (kiosk session)** — This is a regular persistent mount with the difference, that the credentials for it are **not supplied, but derived from the user name (application id)**"* — a persistent vault whose key is a public identifier.
+
+The original design doc (`chromium.org/chromium-os/chromiumos-design-docs/protecting-cached-user-data/`) puts these **explicitly out of scope**: remote compromise of a currently-logged-in user, running machines with screen lock disabled, **cold-boot key extraction from RAM**, root-partition compromise. Not encrypted: *"shared Operating System files and programs."*
+
+The CVE record corroborates the design: `keywordSearch=cryptohome` → **3 CVEs ever**, none a cross-user data read (CVE-2017-15405 7.0 symlink/race in cryptohomed; CVE-2020-16020 8.8 *"bypass discretionary access control"* from a compromised browser process; CVE-2021-21117 7.8 OS-level privesc).
+
+**Multi-sign-in undoes it at the policy layer.** `support.google.com/chromebook/answer/6088201`, verbatim: *"You'll receive a reminder to use the feature only with people you trust." / "**All active people share some settings, such as networks.**" / "The Google Play Store and any downloaded Android apps are only available for the account that is signed in first." / "If you're signed in to multiple Google Accounts on your Chromebook, **you can't sign out one by one. You'll need to sign out of all accounts at the same time.**"*
+
+**Google publishes no cryptographic or data-isolation claim for multi-sign-in at all** — only "use with people you trust." Corroborating: cryptohome's own doc marks the multi-user bind mount **deprecated** — *"`/home/chronos/u-<s_h_o_u>`: bind mount… used for multi-user support. (deprecated)"*. The admin-side article `support.google.com/chrome/a/answer/6023717` and the ChromiumOS multiple-sign-in design doc are both **404, NOT REACHED**.
+
+**Verified Access** (`developers.google.com/chrome/verified-access/overview`) attests *"policy compliance and (optionally) the identity of the client device."* It does **not** distinguish device- from user-level attestation; treat "Verified Access proves which user" as unsupported by the vendor doc.
+
+---
+
+## C. APPLE
+
+### C1. Shared iPad — a real cryptographic boundary, gated behind organizational identity
+
+`support.apple.com/guide/security/shared-ipad-security-secd99f373ef/web` (**Published February 18, 2021 — unrevised in 5+ years**). The URLs in the brief are dead; these are live.
+
+> *"Each user gets their own private, reserved storage location, which is implemented as an **Apple File System (APFS) volume protected by the user's credential**."*
+> *"User data is partitioned into separate directories, each in their own **data protection domains** and protected by both UNIX permissions and sandboxing."*
+> *"Shared iPad provisions a new UNIX user ID, an APFS volume to store the user's personal data, and **a local keychain**."*
+> *"When a user signs out… **that user's keybag is immediately locked and all apps are shut down**." / "the user's APFS volume is unmounted and can't be mounted again without the user signing back in."*
+
+Four stacked layers: APFS volume + per-user keybag + local keychain + uid/sandbox. This is the strongest per-persona design of anything surveyed.
+
+**Gate:** *"Shared iPad **requires** the use of a Managed Apple Account that's issued and owned by the organization"* + supervision + MDM + ≥32 GB. A household cannot reach it; the machinery ships on consumer hardware and only the identity gate withholds it.
+
+**Quota, measured:** ≥64 GB devices — *"10 GB for the system, 16 GB for apps and media. The remaining storage is divided among the number of defined users, with **2 GB minimum per user**"*; 32 GB devices use 8 GB/1 GB minimum, and *"Photos won't sync with a Managed Apple Account for quotas of 1 GB."* Apple's worked example: *"five users on a 128 GB iPad, each user has approximately 20.4 GB."* No published cap on user count — it emerges from the arithmetic (~19 cached users at 64 GB).
+
+**Eviction is the load-bearing limit, and iCloud is a hard dependency:**
+> *"Because storage is allocated (reserved) for the user at the time the APFS volume is created, there may be insufficient space to create a new volume. In such an event, the system identifies an existing user **whose data has finished syncing to the cloud** and evicts that user… **In the unlikely event that all existing users haven't completed uploading their cloud data, the new user sign in fails.** To sign in, the new user needs to wait… or **have an administrator forcibly delete an existing user account, thereby risking data loss.**"*
+
+**The one time-dependent seam Apple acknowledges:**
+> *"To accelerate the case of a new user signing in, iPadOS **defers some ordinary sign-out actions temporarily**… If a user signs in during this time (**approximately 30 seconds**), Shared iPad performs the deferred cleanup as part of signing in to the new user account."*
+
+What is deferred is unspecified. No public research measures it.
+
+**Temporary/Guest sessions:** *"their APFS volume is deleted and its reserved space is returned to the system"* immediately; *"Temporary sessions don't sync data with iCloud"*; and — *"**In a temporary session, any user can unlock and access the iPad without a password.**"*
+
+**Secure Enclave: NOT REACHED as a per-user statement.** The Shared iPad security page **never mentions the Secure Enclave.** Apple documents per-user keybags and per-user local keychains but publishes nothing on whether SEP-resident material (biometric templates, the SEP key hierarchy) is partitioned per Shared iPad user. Sign-in is passcode/federated, not biometric.
+
+**Shared iPad CVE count: ZERO.** `keywordSearch=Shared iPad` returns 7, all false hits on the word "shared." Combined with zero academic scrutiny (below), the correct reading is **unexamined, not sound.**
+
+### C2. iOS consumer multi-user: absent; what replaces it is concealment, not isolation
+
+No Apple sentence says "iPhone does not support multiple users." Confirmation is structural: the Apple Platform Security guide's *Secure device management* section contains exactly one multiuser entry — Shared iPad — and the page itself says *"Shared iPad is a multiuser mode for use in iPad **deployments**."*
+
+- **Guided Access** (`support.apple.com/en-us/111795`, July 24 2026): single-app lockdown. Exit via *"Triple-click the side button… Authenticate with your Guided Access passcode, Face ID, or Touch ID"* — **if the second person is an enrolled Face ID/Touch ID identity on that device, they can end the session.** Apple also documents: *"**Important: Crash Detection and Emergency Services aren't available while using Guided Access.**"*
+- **Screen Time** — Apple disclaims it in its own security guide (`secd8831e732`): *"**Although Screen Time isn't a new system security feature**, it's important to understand how it protects the privacy and security of the data gathered…"* Sync is genuinely E2E over CloudKit/IDS (*"This data isn't readable by Apple"*), and *"**When they reach age of majority… the children can turn this monitoring off.**"*
+- **Locked and Hidden apps (iOS 18)** — UI concealment with a re-auth prompt. Apple's own documented limits: *"Some of the apps that come with iPhone can't be locked—including Calculator, Camera, Clock, Contacts, Find My, Maps, Shortcuts, and Settings."* / *"When you hide an app, **its name is still visible in some places, such as Screen Time, Battery Usage By App (in Settings), and your App Store purchase history.**"* / *"Apps that come installed can't be hidden."* Three documented side channels leak the app's identity by design; anyone with the device passcode can unhide.
+
+**CVEs for bypassing these: essentially none, and the reason matters.** `Guided Access` → 91 NVD results, **0 Apple** (all Oracle Guided Search / PeopleSoft). `hidden apps iOS` → **0**. Only two exist: **CVE-2020-9775** (2020-04-01, 5.3, iOS 13.4) — *"A user's private browsing activity may be unexpectedly saved in Screen Time"* (a leak, the inverse of a bypass) — and **CVE-2012-3741** (2012-09-20, 1.9, iOS 6) — Restrictions bypass after a Disable Restrictions action.
+
+Fourteen years, zero Guided Access CVEs. The cause is classification, not absence: **Apple does not treat parental-control evasion as a security vulnerability**, so it never enters the CVE pipeline. Market-revealed evidence of the gap: a cluster of 2026 Show HN products exists solely to patch it — WaitToUnlock (`waittounlock.com`, posted 2026-07-10/13/26 and 2026-08-22, *"makes your Screen Time limits unbypassable"*), Nopin (2025-12-27). **NOT REACHED:** rigorous write-ups of the Screen Time passcode weaknesses — the Mysk blog is a JS SPA that would not enumerate; the older Restrictions-passcode-hash-in-backup recovery went unverified and is not asserted here.
+
+### C3. macOS — where the measured defects are, and they *recur verbatim*
+
+**The single strongest finding in this report.** "View the previous logged-in user's desktop from the fast user switching screen" was fixed as **three separate CVEs with byte-identical descriptions and the identical remediation string:**
+
+| CVE | Published | Fixed in |
+|---|---|---|
+| CVE-2021-30908 (6.5) | 2021-08-24 | Monterey 12.0.1, Big Sur 11.6.1 |
+| CVE-2022-22656 | 2022-03-18 | Big Sur 11.6.5, Monterey 12.3, SU 2022-003 Catalina |
+| CVE-2023-42935 | 2024-01-23 | Ventura 13.6.4 |
+
+All three: *"An authentication issue was addressed with **improved state management**… A local attacker may be able to view the previous logged in user's desktop from the fast user switching screen."* Apple's release note (`support.apple.com/en-us/120307`) names the component: **LoginWindow**, credited to ASentientBot.
+
+A second verbatim recurrence four years apart: **CVE-2020-27893** (Big Sur 11.0.1) and **CVE-2024-44248** (2024-12-12, Sequoia 15.1 / Sonoma 14.7.2 / Ventura 13.7.2) — both *"A user with screen sharing access may be able to view another user's screen."*
+
+Adjacent cross-user reads: **CVE-2023-42861** (6.5, Sonoma 14.1) — *"**An attacker with knowledge of a standard user's credentials can unlock another standard user's locked screen on the same Mac**"*; **CVE-2023-32654** (6.5, Ventura 13.5) and **CVE-2024-23261** (**7.5**, three OS trains) — *"A user/attacker may be able to read information belonging to another user"*; **CVE-2025-43516** (3.3) — *"A user with Voice Control enabled may be able to **transcribe another user's activity**."*
+
+**The pattern is 20 years old and in the same subsystem.** CVE-2005-2509 (loginwindow), CVE-2005-2742 (SecurityAgent shows "Switch User…" *even though fast user switching is disabled*), CVE-2006-4393 (*"gain access to **Kerberos tickets of other users**"*), CVE-2014-4444 (*"does not ensure that a Kerberos ticket is in the cache for the correct user… by leveraging a Fast User Switching login"*), CVE-2004-0962. **LoginWindow/SecurityAgent state at session-transition boundaries is the most persistently defective isolation surface Apple ships**, and "improved state management" three times running says each fix patched an instance, not the machine.
+
+**Keychain local-attacker access is annual and unbroken 2021–2026:** CVE-2021-30912 (5.5), CVE-2024-27837 (3.3), CVE-2024-54490 (5.5), CVE-2025-43251 (5.5), CVE-2025-31213 (**7.6** — *"access associated usernames and websites in a user's iCloud Keychain"*), CVE-2026-28864 (3.3), CVE-2026-28860 (**7.5** — *modify* Keychain state), CVE-2026-43728 (**7.5**). The last three ship to **iOS/iPadOS as well as macOS**.
+
+**Arbitrary file read, twelve CVEs 2021–2024** (~one per quarter), several shipping to macOS *and* iOS simultaneously — meaning the defective path is in shared code, not the macOS account layer: CVE-2021-1797, CVE-2021-30828, CVE-2022-32838, CVE-2023-23520, CVE-2023-27955, CVE-2023-40406, CVE-2023-41968, CVE-2023-42887, CVE-2024-23236, CVE-2024-27827, CVE-2024-44190, CVE-2024-44195 (7.5).
+
+**TCC's grant model is container-bound, not principal-bound** — one Apple defect (CVE-2021-1873) and five third-party CVEs that exist *purely* because a bundled interpreter inherits its host bundle's grants: **CVE-2025-8672** (GIMP, 7.8) — *"bundles a Python interpreter that **inherits the Transparency, Consent, and Control (TCC) permissions granted by the user to the main application bundle**"*; CVE-2025-14714 (6.5, identical shape); CVE-2023-40299 (Insomnia, 7.8, `DYLD_INSERT_LIBRARIES`); CVE-2025-12843 (waveterm); CVE-2025-64723 (Arduino IDE). A permission attached to a container is held by everything the container can execute.
+
+### C4. Academic measurement of any Apple multi-user surface: **NONE**
+
+arXiv: 0 for `"Shared iPad"`, 0 for `"iOS parental control"`. Crossref: 8 results, 0 relevant. OpenAlex (partial before budget exhaustion): nothing. The nearest existing work is cross-**app**, not cross-**user** — Kobold (IEEE S&P 2020, doi:10.1109/sp40000.2020.00023, NSXPC access control) and "OS-level Side Channels without Procfs" (NDSS 2018, doi:10.14722/ndss.2018.23260). **No independent party has measured Shared iPad isolation, macOS FUS isolation, or iOS parental-control circumvention.** §C1 rests entirely on Apple's design docs; §C3 rests entirely on Apple's own disclosures.
+
+---
+
+## D. WINDOWS
+
+### D1. Shared PC mode is a disk-hygiene feature that *explicitly weakens* cross-user isolation
+
+Live docs (the brief's URL 404s): `learn.microsoft.com/en-us/windows/configuration/shared-pc/set-up-shared-or-guest-pc` and `/shared-pc-technical` (both ms.date 2024-10-31), `learn.microsoft.com/en-us/windows/client-management/mdm/sharedpc-csp` (2025-03-12).
+
+The decisive line, from the table of Local Group Policy settings applied by `EnableSharedPCMode`:
+
+> *"Windows Components/App Package Deployment/**Allow a Windows app to share application data between users** | **Enabled**"*
+
+The same switch **disables** Windows Hello for Business, biometrics, convenience PIN sign-in, and picture password; sets UAC to *"Automatically deny elevation requests"* for standard users; hides Fast User Switching entry points; turns off File History.
+
+Deletion is lifecycle/storage-driven, not sign-out-driven: `DeletionPolicy` default **1** (delete at disk-space threshold); `DiskLevelDeletion` default **25**%, `DiskLevelCaching` default **50**%, `InactiveThreshold` default **30** days; `AccountModel` default **0** (guest only). *"Accounts will be deleted immediately on signing out from an account **if free space is under half of the deletion threshold and disk space is low**."* `EnableAccountManager` does exactly one thing: turns on the scheduled task `\Microsoft\Windows\SharedPC\Account Cleanup`.
+
+**The residue answer, verbatim:**
+> *"**Local accounts that already exist on a PC won't be deleted** when turning on shared PC mode. **New local accounts** that are created using Settings > Accounts > Other people > Add someone else to this PC after shared PC mode is turned on **won't be deleted.**"*
+
+Only Guest and Kiosk accounts are deleted at sign-out. There is an SID exemption registry key (`HKLM\SOFTARE\Microsoft\Windows\CurrentVersion\SharedPC\Exemptions\` — the typo is Microsoft's, verbatim). **Neither doc contains any statement of what Shared PC mode does not isolate.**
+
+### D2. The Windows user boundary is ACLs, and ACLs have failed catastrophically
+
+**CVE-2021-36934 (HiveNightmare/SeriousSAM)**, 2021-07-22, **7.8** `AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H`: *"An elevation of privilege vulnerability exists because of **overly permissive Access Control Lists (ACLs) on multiple system files, including the Security Accounts Manager (SAM) database**."* Any non-admin interactive user could read every local account's password hashes from VSS shadow copies. Shipped for months in Windows 10/11. **In CISA KEV, added 2022-02-10.** This is the empirical answer to how strong Windows local user separation is: as strong as the ACL last set on the file.
+
+**User Profile Service (ProfSvc) EOP — eleven CVEs, 2015–2022**, with a recurring symlink/junction root: CVE-2015-0004 (7.2), CVE-2019-0986 (6.3, *"improperly handles symlinks"*), CVE-2019-1454, CVE-2020-0730, CVE-2020-0785, CVE-2020-16940 (7.8, junction points), CVE-2021-26873, **CVE-2021-34484** (7.8, the famous incomplete patch), CVE-2022-21895, CVE-2022-21919, **CVE-2022-26904** (7.0, the 0-day continuation). **Three are in CISA KEV** — CVE-2021-34484 (added 2022-03-31), CVE-2022-21919 and CVE-2022-26904 (both 2022-04-25). Patched twice on the same chain, exploited in the wild anyway.
+
+**Cloud Files Mini Filter Driver (`cldflt.sys`) — 21 CVEs, roughly one per quarter for four years** (CVE-2020-17103/17134/17136 through CVE-2025-21271). This is the OneDrive placeholder driver that Shared PC mode's `EnableSharedPCModeWithOneDriveSync` turns on. **CVE-2023-36036** (2023-11-14, 7.8) is **in CISA KEV, added the day of publication** — exploited in the wild.
+
+**DPAPI:** CVE-2022-34723 (2022-09-13, **5.5**, `AV:L/AC:L/PR:L/UI:N/C:H`) — an unprivileged local account reading DPAPI-protected data; CVE-2023-36004 (7.5, DPAPI spoofing).
+
+**Credential Guard:** eight CVEs in the single August 2022 Patch Tuesday (CVE-2022-34704/34705/34709/34710/34711/34712/35771/35822), three of them local low-privilege reads of high-confidentiality data. **Windows Hello:** thirteen CVEs 2021–2026, including CVE-2025-26644 (*"inadequate detection or handling of **adversarial input perturbations**… allows an unauthorized attacker to perform spoofing"*), CVE-2026-27928 (**8.7**, network SFB), CVE-2026-61928 (*"**Cleartext storage of sensitive information in Windows Hello**"*), plus third-party sensor failures breaking the trust chain (CVE-2023-50430 Goodix/Dell, CVE-2024-23592 Synaptics replay, CVE-2024-0454 ELAN *"valid SID leakage and enumeration with spoof sensor"*).
+
+### D3. DPAPI cross-user decryption is by design, and it was demonstrated end-to-end
+
+Primary source, **MEASURED**: harmj0y (Will Schroeder, SpecterOps), *"Operational Guidance for Offensive User DPAPI Abuse,"* **2018-08-22**, `https://blog.harmj0y.net/redteaming/operational-guidance-for-offensive-user-dpapi-abuse/`.
+
+> *"Domain user master keys are also protected with a domain-wide **backup** DPAPI key"* — and *"**this backup key doesn't change!**"*
+
+The demonstrated chain, verbatim commands: `lsadump::backupkeys /system:<DC> /export` → `dpapi::masterkey /in:<guid> /pvk:ntds_capi_*.pvk` → `dpapi::chrome /in:Cookies /masterkey:<key>`. **Result: the author decrypted user "harmj0y"'s Chrome cookie database offline from the domain backup key alone, without that user's password.** Step 3 lands directly on §B — the DPAPI-sealed Chrome profile directory is readable by anyone holding a key the user never controlled and cannot rotate.
+
+Microsoft's own protocol spec confirms the mechanism ([MS-BKRP] BackupKey Remote Protocol, rev 27.0, 2024-04-23): *"This protocol encrypts secret values (such as cryptographic keys) so they can be backed up to storage that is not specially protected, and enables decryption of such values if recovery is necessary."*
+
+**NOT REACHED:** academic corroboration (Picod/Bursztein DPAPI line of work) — OpenAlex exhausted, not asserted from memory. HN Algolia returned 4 hits for "DPAPI backup key", all with null title/url.
+
+---
+
+## E. APPLICATION-LEVEL HOUSEHOLD PROFILES
+
+### E1. Netflix — the vendor statement exists, and it is explicit
+
+`help.netflix.com/legal/privacy`, Section C:
+
+> *"If you share or otherwise allow others to have access to your account, they may be able to see viewing information, account information… **This remains true even when you use the profiles feature**, although you can add a Profile Lock PIN to restrict streaming access on a profile."*
+> *"**Please note that profiles are available to everyone who uses your Netflix account, so that anyone with access to your Netflix account can navigate to and use, edit or delete profiles, and information within or associated with the profile.**"*
+
+The boundary is the **account**; the profile is a personalization layer. Note Netflix's own verb: the PIN *"restrict[s] **streaming access**"*, not data access. `help.netflix.com/en/node/114277`: PIN is **4 digits**, *"You'll enter this PIN to open the profile or play titles downloaded from it"*, *"Extra member accounts have 1 profile and it can't have a profile lock"*, and PIN removal requires only the **account** password or an emailed code — **anyone holding the account credential can delete any profile's PIN.** Netflix's separate account-security page never mentions profiles as a protection.
+
+### E2. Plex — the vendor says the quiet part
+
+`support.plex.tv/articles/203815766-what-is-plex-home/`, verbatim:
+> *"**Remember that setting a PIN on an account is not a replacement for good account security. A PIN should not be considered true security** and is provided as a convenience to help control access when young children are involved."*
+
+Structural fact: *"Managed Users **do not have any email address associated with their account and cannot directly sign in to any app**. (The admin or another full account… needs to sign in to the app and then the Managed User can be switched to.)"* and *"you can switch to any other member of the Home in supported apps."* **A Plex Managed User is not an authentication principal at all — it is a UI mode entered from an already-authenticated session.** Limits: 15 members, one Home per account.
+
+The measured household-boundary failure: **CVE-2025-34158** (2025-08-21, **8.5**, `S:C`) — any authenticated **non-owner** user of a shared server could read `/myplex/account` and obtain the **server owner's** administrative access token, then pivot via `/api/resources` to every other server the owner could reach; the researcher calls it *"recursive exploitation."* Reported 2025-07-01, patched 1.42.1 (2025-08-07/08). Follow-ons reported 2025-08-27→31, published 2026-01-02: CVE-2025-69414 (8.5), CVE-2025-69415 (7.1), CVE-2025-69416 (5.0), CVE-2025-69417 (5.0 — a non-server device token retrieves **share tokens**). Writeup: `github.com/lufinkey/vulnerability-research/blob/main/CVE-2025-34158/README.md`.
+
+Other PMS CVEs: CVE-2018-13415 (**9.8**, unauthenticated XXE in SSDP/UPnP → file read + NetNTLM relay), CVE-2019-19141 (8.8, Camera Upload arbitrary write → RCE), CVE-2020-5740 (7.8, Python as SYSTEM), CVE-2020-5742 (8.8), CVE-2021-42835 (7.0, privesc to SYSTEM), CVE-2014-9181/9304.
+
+### E3. CVE-2020-5741 and the LastPass chain — real dates, careful attribution
+
+**CVE-2020-5741** (NVD, published **2020-05-08**, **7.2** `AV:N/AC:L/PR:H/UI:N/C:H/I:H/A:H`): deserialization of untrusted data → remote authenticated RCE. Tenable TRA-2020-32, researcher **Chris Lyne**: a plugin Dict file *"unpickled without validation"*, delivered via **Camera Upload**, executed on plugin restart. Reported **2020-03-31**, patched in PMS **1.19.3 on 2020-05-07**. Exploit published (packetstorm 158470). **In CISA KEV, added 2023-03-10** — verified against the live catalog (v2026.09.04, 1695 entries); it is the **only** Plex/Jellyfin/Emby entry in KEV.
+
+**Attribution, stated precisely.** LastPass's own disclosure (`blog.lastpass.com/posts/2023/03/security-incident-update-recommended-actions`) says only:
+> *"The threat actor targeted a senior DevOps engineer by exploiting **vulnerable third-party software**. The threat actor leveraged the vulnerability to deliver malware, bypass existing controls, and ultimately gain unauthorized access to cloud backups."*
+
+**LastPass never names Plex.** "Plex" comes secondhand: The Record (2023-03-01, `therecord.media/plex-unaware-of-vulnerabilities-lastpass-hacked/`) — *"Ars Technica reported that the third-party media software package was Plex, citing a person briefed by LastPass."* Plex's response: *"We are not aware of any unpatched vulnerabilities."* A LastPass spokesperson (via Android Police) said the fixing version was *"roughly 75 versions ago."* Incident began **August 2022**, activity ended **2022-10-26** → **≈27 months between the May 2020 patch and the compromise**, on a home machine. **NOT REACHED:** the Ars primary (egress refused); the exact PMS version the engineer ran.
+
+### E4. Jellyfin — the vendor posture statement, and a 7-year-open boundary
+
+The statement you were looking for, from project lead **@joshuaboniface**, 2021-04-06, in issue #5415 (`github.com/jellyfin/jellyfin/issues/5415`):
+
+> *"**Ultimately we expect users to have some ideas of the risks they take exposing instances to the Internet. No software is totally secure, and we're nowhere near the top — we admit that freely. A lot of this stuff is inherited from Emby's poor coding and security practices**, and while we would like to rewrite everything to fix it all, volunteer time is limited."*
+
+And 2021-03-08: *"We are aware of quite a few, but for reasons of backwards compatibility they've never been fixed."*
+
+**NOT REACHED / NEGATIVE:** no Jellyfin doc contains "not designed to be exposed to the internet." The networking doc says only *"forwarding its Ports directly to the internet (**not recommended!**)"*.
+
+**The unauthenticated-stream issue is open and reproduced in 2026.** Issue #1501 (opened 2019-07-01): *"It was somewhat shocking to discover that Emby/Jellyfin allows streaming of a video (provided you have the ID) without any need for authentication."* Contributor @ddurdle: *"This is an issue that was inherited from emby… it is possible for users to stream without authorization."* Closed 2021-04-09 as *completed* into #5415; challenged in 2024 as *"misleading for users and developers."* Successor **#13984 is OPEN**, with a 2026-06-29 reproduction: *"a logged-in session's `stream.mp4` URL plays in an incognito browser with no further authentication… The token embedded in the URL is the user's long-lived session api_key; therefore, **a copied URL is reusable indefinitely**."* A 2026-06-09 re-report (#17057) was closed as invalid in 1h49m.
+
+**The household-profile break specifically**, from #5415: *"**Authentication and user ids are decoupled**"* — *"affects at least 27 controllers"*: *"If you modify your local storage to use an admin's user id, the UI starts showing the admin dashboard and the admin user's data… **You can still mess with the other users' data — you can for example list or modify their favorites, recently watched, their progress on movies and series, see what they watched.**"* Still open.
+
+**Isolation is enforced per-client, not per-server** — the same server and the same restricted user leak or don't depending on which app asks. Issue **#8730** (2022-11-12, still OPEN): *"The search function is allowing users without access to libraries to see the results of the restricted libraries. **However, on other apps such as web browser and android, the access controls are working as expected.**"* Confirmed still broken on 10.8.9 by three users. Issue **#16135** (2026-01-29, OPEN, v10.11.6): a restricted user sees genres from denied libraries via the Collections filter — maintainer could not reproduce, two independent users confirmed.
+
+**CVE-2021-21402** (NVD 2021-03-23, **7.7 HIGH** `S:C` per NVD / 6.5 per CNA): *"with certain endpoints, well crafted requests will allow **arbitrary file read from a Jellyfin server's file system**. This issue is more prevalent when **Windows** is used as the host OS."* GHSA-wg4c-c9g9-rxhx, patched **10.7.1 (2021-03-21)**, commit `0183ef8e`. Vulnerable controllers: `ImageByNameController`, `SubtitleController`, `HlsSegmentController` — **exactly the ones #5415 documents as unauthenticated**, which is why the CVE's `PR:L` is arguably generous.
+
+`/Videos/{id}/stream` has now produced **three CVEs** because the endpoint is *intentionally* unauthenticated: **CVE-2023-49096** (8.8, argument injection, *"reachable by an unauthenticated user"*) → **CVE-2025-31499** (8.8, **patch bypass**, *"The same unauthenticated endpoints are vulnerable"*) → **CVE-2026-35033** (**9.3 CRITICAL**, unauthenticated file read via ffmpeg `StreamOptions`; `drawtext`+`textfile` renders `/etc/shadow` into the video stream). Also **CVE-2026-35031** (**9.9**, subtitle path traversal → RCE as root via `ld.so.preload`), CVE-2026-48793 (8.8, *"reachable without authentication via `SubtitleController.GetSubtitle`, which has no `[Authorize]` attribute"*), CVE-2026-49247 (8.8), CVE-2022-35909 (8.8), CVE-2023-30626/30627 (8.8 / **9.0**, chained → RCE), CVE-2025-32012 (7.5, source-IP spoof → treated as LAN → unauth `/System/Restart`).
+
+Measured exposure: n=**10,000** internet-reachable Jellyfin servers scanned 2024-05-21 (#11763) — **6.3% published a public-prefix IPv6 address** via `/System/Info/Public`, refuting a maintainer's "99.99% LAN-only" estimate. And Jellyfin's own security channel was dead: #17580 (2026-08-08) — `security@jellyfin.org` bounced with `451 4.7.5 DKIM key retrieval failed`, the fallback bounced too.
+
+**Emby** (the upstream all of this was inherited from) carries the same classes: CVE-2021-25827 (**9.8**, *"login bypass by setting `X-Forwarded-For` to a local IP"*), CVE-2023-33193 (**9.1**, admin access *"by spoofing certain headers… intended for interoperation with reverse proxy servers"*), CVE-2025-64113 (**9.8**, *"full administrative access… Other than network access, no specific preconditions need to be fulfilled"*), CVE-2021-32833 (8.6, arbitrary file read, *"may not be patched in later versions"*), CVE-2020-26948 (9.8), CVE-2025-64325 (9.0). **Kodi: NOT REACHED** — `gh search issues` on xbmc/xbmc returned zero for profile-password bypass; nothing asserted.
+
+---
+
+## F. WHAT ACTUALLY LEAKS ACROSS PROFILES — the measured classes
+
+Ranked by weight of evidence found.
+
+**1. Rendering and presentation surfaces — the largest class by far, and it is not a crypto failure.** Recents/task-switcher previews (Samsung CVE-2019-20617, CVE-2020-11606), floating icons (CVE-2020-11601), split-screen (CVE-2018-21068), a media player rendering a protected image (CVE-2019-20580), a gallery slideshow (CVE-2018-21062), the login/switch screen still painting the prior session (Apple CVE-2021-30908 → CVE-2022-22656 → CVE-2023-42935), screen sharing (CVE-2020-27893 → CVE-2024-44248), and voice transcription (CVE-2025-43516). The vault held; the compositor did not.
+
+**2. Notifications.** Android CVE-2022-20011 (*"leak of one user notifications to another"*), CVE-2024-31319 (**7.8**), Knox CVE-2023-21512, Microsoft YourPhone CVE-2020-0943 — and the companion-device path, where the notification leaves the device boundary entirely: smartwatch (CVE-2019-20609, CVE-2018-21056) and paired PC (Samsung Flow CVE-2021-25507).
+
+**3. Media store, images, thumbnails.** Eight Android cross-user media/image CVEs 2023–2025 (§A3), nearly all "confused deputy" — a privileged component fetches a URI on the caller's behalf across the user boundary.
+
+**4. Clipboard.** Crosses by default on Android; the opt-in restriction is **export-only** and Android documents that it is defeatable by OCR (§A5).
+
+**5. Network / DNS / radio state.** Device-wide by construction and reachable from guest: Wi-Fi configs for **all** APs (CVE-2021-0602), private DNS (CVE-2022-20112), NFC (three CVEs), tethering (CVE-2020-0485), admin network settings (CVE-2023-21021), data limits and mobile-data toggle (CVE-2023-21174/21175). VPN state leaks across users (CVE-2025-26424). On ChromeOS, Google states plainly that multi-sign-in users *"share some settings, such as networks."*
+
+**6. Filesystem residue.** Android guest deletion is deferred (`guestToRemove`, purge on next switch/reboot/startup). Windows Shared PC mode never deletes pre-existing or manually-added local accounts and cleans the rest on a **nightly scheduled task** at 25%/50% disk thresholds. Shared iPad is the exception: temporary-session APFS volumes are deleted immediately — but with an acknowledged **~30 second deferred-cleanup window** on user switch.
+
+**7. Filesystem ACLs where they substitute for crypto.** CVE-2021-36934 — every local account's SAM hashes readable by any standard user, in KEV.
+
+**8. Browser storage.** Chrome profile directories are sealed only as well as the platform seals them: App-Bound on Windows, Keychain on macOS, and on Linux *"**If there is no available Secret Service or KWallet, the data is not encrypted when stored**."* And DPAPI's domain backup key decrypts any domain user's Chrome cookies offline, demonstrated (§D3).
+
+**9. Biometrics and secure-element state.** **CVE-2019-9377** is the exact phrasing the design question asks for: *"In FingerprintService, there is a possible **bypass for operating system protections that isolate user profiles from each other** due to a missing permission check. This could lead to a local information disclosure of **metadata about the biometrics of another user**."* Apple publishes **nothing** on whether Secure Enclave material is partitioned per Shared iPad user — NOT REACHED, and the page never mentions SEP. Windows Hello has thirteen CVEs including cleartext storage (CVE-2026-61928) and adversarial-perturbation spoofing (CVE-2025-26644). Windows Shared PC mode simply **disables biometrics entirely**.
+
+**10. Application-layer identity confusion.** Jellyfin's *"authentication and user ids are decoupled"* across 27 controllers; Plex's CVE-2025-34158 handing the owner's admin token to any household member; Seerr CVE-2026-27792 (missing `isOwnProfileOrAdmin()`).
+
+**11. Cross-account key escrow as designed.** DPAPI domain backup key — *"this backup key doesn't change!"*
+
+**12. Container-inherited capability.** macOS TCC grants attach to a **bundle**, not a principal; five third-party CVEs exist purely because a bundled interpreter inherits its host's grants (§C3).
+
+---
+
+## G. THE ROOT ASYMMETRY — per platform
+
+The question: does the device owner / primary user retain the technical ability to read or reset a secondary profile?
+
+| Platform | Read secondary? | Reset/delete secondary? | Basis |
+|---|---|---|---|
+| **Android (secondary user / work profile / Private Space)** | **No, by design** — per-user CE keys under FBE; CE storage requires that user's credential. Bootloader unlock is not a path: *"**all** state transitions wipe the data partitions"* (Verified Boot device-state doc). But adb is a standing channel: *"**adbd always runs as the system user (user ID = 0) regardless of which user is current**"*, and **17 cross-user CVEs 2021→2026** are the measured rate at which "no" fails. | **Yes, unilaterally.** Google's help text: *"Tap Delete user → Delete."* Device Owner adds `removeUser`/`wipeData`. | AOSP FBE + multi-user docs |
+| **Android restricted profile** | Structurally subordinate — *"a full user that is **subject to certain restrictions from a parent user**… **NOT technically a profile**"*, linked by `restrictedProfileParentId`. Legacy flag's own comment: *"Exact meaning TBD."* | Yes, by the parent | AOSP `UserManager.java`, `UserInfo.java` |
+| **Android Private Space** | Hidden when locked, visible when unlocked — but **"can exist only for the main user (not for secondary users or within other profiles)"** and **only one per device**. It protects the owner *from* others; it cannot host a persona the owner provisions for someone else. | n/a | AOSP private-space doc |
+| **ChromeOS** | **No** — separate fscrypt/dmcrypt vault per user, TPM-wrapped keys; **3 cryptohome CVEs ever, none a cross-user read.** Strongest empirical record surveyed. Caveats: kiosk "public mounts" derive their key from the **application id, not a secret**; cold-boot RAM extraction is explicitly out of scope; multi-sign-in shares networks and forces **joint sign-out**. | Yes (device owner) | ChromiumOS platform2 docs |
+| **Chrome profiles (within one OS account)** | **Yes, trivially.** Not on Chromium's list of maintained boundaries (origin, site, secure context, COI); the whole local-attacker class is a documented threat-model exclusion; Google's help copy: *"If someone has your device, they can switch to any other Chrome profile on it."* Chromium's own prescribed remedy is **a separate OS account**. | Yes | Chromium FAQ + web-platform-security-guidelines |
+| **Shared iPad** | **No** — per-user APFS volume + keybag + local keychain; *"can't be mounted again without the user signing back in."* Zero CVEs — but also zero independent scrutiny, so read as **unexamined**. | **Yes, and destructively.** MDM `Delete user` (iOS 9.3+); and under storage pressure the *system itself* evicts — *"have an administrator forcibly delete an existing user account, **thereby risking data loss**."* Eviction requires completed iCloud sync, so the identity provider is in the liveness path. | Apple Platform Security `secd99f373ef` |
+| **iOS consumer** | **No boundary exists to read across.** Guided Access / Screen Time / Locked-Hidden apps are concealment; Apple disclaims Screen Time as *"not a new system security feature"*; hidden app names still leak via Screen Time, Battery Usage, and App Store purchase history; anyone with the passcode unhides. | n/a | Apple support docs |
+| **macOS** | **Intended no; measured yes, repeatedly.** The FUS desktop leak was fixed three times with identical text; screen-sharing cross-view twice; *"an attacker with knowledge of a standard user's credentials can unlock another standard user's locked screen"* (CVE-2023-42861); twelve arbitrary-file-read CVEs; unbroken annual Keychain local-attacker access 2021–2026. | Yes (admin) | Apple release notes + NVD |
+| **Windows** | **Boundary is ACLs + a symlink-following profile service.** CVE-2021-36934 gave every standard user every SAM hash (KEV). Eleven ProfSvc EOPs, three in KEV. And **DPAPI's domain backup key decrypts any domain user's secrets by design** — demonstrated against a Chrome cookie DB. | Yes (admin) | NVD + MS-BKRP + harmj0y 2018 |
+| **Shared PC mode** | Actively *reduces* separation: **"Allow a Windows app to share application data between users → Enabled"**, biometrics/Hello/PIN disabled. | Partly — Guest/Kiosk at sign-out; everything else on a nightly task at disk thresholds; **pre-existing and manually-added local accounts are never deleted.** | learn.microsoft.com shared-pc |
+| **Netflix** | **Yes.** *"anyone with access to your Netflix account can navigate to and use, edit or delete profiles, and information within or associated with the profile"* — *"This remains true even when you use the profiles feature."* PIN is 4 digits and removable with the account password. | Yes | Netflix Privacy Statement §C |
+| **Plex Home** | **Yes.** A Managed User *"cannot directly sign in to any app"* — it is a UI mode inside the owner's session. *"**A PIN should not be considered true security.**"* And CVE-2025-34158 inverted it: a **non-owner** obtained the **owner's** admin token. | Yes | support.plex.tv |
+| **Jellyfin** | **Yes, and it is open.** IDs decoupled from auth across 27 controllers; swapping a user id in localStorage reads and modifies another household member's history and favorites. Library restrictions leak on some clients but not others. | Yes (admin) | jellyfin/jellyfin #5415, #8730, #16135 |
+
+**The invariant across every platform surveyed:** the owner always retains reset/delete. Read is where they split — Android, ChromeOS and Shared iPad genuinely deny it cryptographically (with a measured failure rate: 17 Android cross-user CVEs 2021–2026, 3 cryptohome CVEs, 0-but-unexamined on iPad); Windows and macOS deny it only by ACL and session state, and both have failed publicly and repeatedly; Chrome profiles and every household app surveyed do not deny it at all.
+
+Two further asymmetries worth stating separately. **On Android the owner's power is destructive but not readable** — bootloader unlock wipes rather than reveals, so a manager who wants a persona's contents has to destroy them to get at the device, not read them out. And **Android Private Space, the newest and strongest per-persona container, is architecturally unavailable to the design described**: one instance per device, main user only.
+
+---
+
+## WHAT I COULD NOT REACH
+
+- **arXiv API** — unreachable from this egress entirely (verified with a control query that also returned nothing).
+- **OpenAlex** — hard daily budget exhaustion mid-sweep. The Android negative rests on ~9 completed queries plus Crossref; the Apple negative rests on arXiv-attempt + Crossref + two partial OpenAlex slices.
+- **Android Security Bulletins for 2026-03 and the CVE-2026-0021 entry** — 404 at every URL form tried. NVD data stands on its own for those.
+- **`support.google.com/chrome/a/answer/6023717`** (admin multi-sign-in) and the ChromiumOS multiple-sign-in design doc — both 404. ChromeOS guest-mode help article served a CAPTCHA; substituted the platform2 source-tree doc, which is stronger.
+- **Ars Technica and PCMag** — refuse this egress; the Plex/LastPass attribution is confirmed only via The Record quoting Ars.
+- **Mysk blog** — JS SPA, would not enumerate; the Screen Time passcode-weakness literature is therefore unverified and not asserted.
+- **Apple's default offline sign-in grace-period value** for Shared iPad, and **any statement on Secure Enclave partitioning per Shared iPad user** — the security page never mentions SEP.
+- **[MS-BKRP] full PDF** (binary), **keystore2 `super_key.rs`** (path not resolvable in the AOSP mirror), **Kodi profile isolation** (zero issue-tracker hits; nothing asserted).
+
+## VENDOR CLAIM vs MEASURED — the short ledger
+
+**Measured:** every CVE and CVSS above; the AOSP source quotes (UID arithmetic, clipboard docstring, guest-removal deferral, restricted-profile parent linkage); the triple-fixed macOS FUS bug; CVE-2021-36934 and the DPAPI cookie decryption; the n=10,000 Jellyfin scan; the two PoPETs parental-control studies; the 2026 live reproduction of Jellyfin unauthenticated streams; CISA KEV membership for CVE-2020-5741, CVE-2021-36934, CVE-2021-34484, CVE-2022-21919, CVE-2022-26904, CVE-2023-36036.
+
+**Vendor claim only (no independent measurement found):** Shared iPad's entire four-layer isolation model; Android's *"No user has access to the app data of another user"*; ChromeOS cryptohome's per-user vault; Verified Access attesting user identity (the doc says device).
+
+**Folklore, corrected:** "Chrome profiles are not a security boundary" — no such Chromium statement exists; the real artifacts are a threat-model exclusion, an enumerated boundary list that omits profiles, and consumer help copy.
+
+**Vendor claim against itself:** Apple on Screen Time (*"isn't a new system security feature"*), Plex on PINs (*"should not be considered true security"*), Netflix on profiles (*"This remains true even when you use the profiles feature"*), Jellyfin's lead on its own posture (*"we're nowhere near the top — we admit that freely"*), and Microsoft's Shared PC mode enabling *"Allow a Windows app to share application data between users."*
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;WQBm6G-Gepr2CSmYiWEiWOGvETVNrO2sV56L2c3wZNA
+
+<<^ code="&#x0004;" -> to=? >>

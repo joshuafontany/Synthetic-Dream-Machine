@@ -1,0 +1,268 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/custodial-self-custodial-handover-measured-e-bfa1bd >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/custodial-self-custodial-handover-measured-e-bfa1bd.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: CUSTODIAL → SELF-CUSTODIAL HANDOVER: measured evidence. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/custodial-self-custodial-handover-measured-e-bfa1bd"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! CUSTODIAL → SELF-CUSTODIAL HANDOVER: measured evidence
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 22,202 characters
+
+````
+Research complete. Findings below.
+
+---
+
+# CUSTODIAL → SELF-CUSTODIAL HANDOVER: measured evidence
+
+Everything below is dated **2026-09-04** unless stated. I distinguish **[MEASURED]** (I pulled the number, or a source published it), **[SPEC]** (the mechanism as written), **[CLAIMED]** (vendor marketing), and **[DESIGNED, UNSHIPPED]**.
+
+---
+
+## 1. Bluesky / atproto — the closest live analogue
+
+### 1a. The mechanism [SPEC]
+
+`did:plc` spec v0.3.0, December 2025 — https://github.com/did-method-plc/did-method-plc/blob/main/website/spec/v0.1/did-plc.md
+
+- The DID is `did:plc:${base32(sha256(genesisOp)).slice(0,24)}` — **self-certifying**. Control rests in `rotationKeys`: "priority-ordered list… must include at least 1 key and at most 5 keys." Only secp256k1 and P-256.
+- `rotationKeys` are **not in the DID document**. They are "an internal detail of PLC, and are stored in the operation log."
+- **72-hour recovery window**: "a higher authority rotation key can 'rewrite' history, clobbering any operations (or chain of operations) signed by a lower-authority rotation key," if submitted within 72h and the signing key has a *lower index* in `rotationKeys`.
+- Spec states plainly that keys may be shared: "`rotationKeys` and `verificationMethods` may have public keys which are re-used across many accounts. There is not necessarily a one-to-one mapping."
+- PLC server trust model is explicitly bounded to **denial-of-service and misordering** — it cannot forge, but it can refuse.
+- The signing key (`verificationMethods.atproto`) "does not have any control over the DID identity unless also included in the `rotationKeys` list."
+
+`did:web` (https://atproto.com/specs/did): hostname-only, no path variants, 2048-char hard limit. Spec concedes did:web "does not provide a mechanism for migration or recovering from loss of control of the domain name." So did:web trades a company for a registrar + DNS.
+
+### 1b. Who actually holds the keys — **[MEASURED, by me]**
+
+I sampled **1,200 accounts across 12 randomly selected Bluesky-operated PDS hosts** (`*.host.bsky.network`) and read each DID's `rotationKeys` from `plc.directory/:did/data`:
+
+| result | n | share |
+|---|---|---|
+| rotationKeys == exactly the two Bluesky PBC fleet keys | **1,196** | **99.67%** |
+| holds ≥1 rotation key not shared fleet-wide | 4 | 0.33% |
+
+Only **10 distinct rotation keys** appeared across 1,200 accounts. Two of them appear 1,196 times each:
+
+```
+did:key:zQ3shhCGUqDKjStzuDxPkTxN6ujddP4RkEKJJouJGRRkaLGbg   (1196)
+did:key:zQ3shpKnbdPx3g3CmPf5cRVTPe1HtSwVn5ish3wSnDPQCbLJK   (1196)
+```
+
+The same pair holds `bsky.app`, `pfrazee.com`, `jay.bsky.team`, `why.bsky.team`. A third fleet key (`zQ3shkPYmhiPxvtFkTf2eTwixHame7YFmbquPfbMvP8mJfPwQ`) appears on a newer cohort. **Caveat:** the 4 "own key" hits look like accounts that *already left* — their repos linger on the old host after migration (one is `jaz.bsky.social`, whose PDS is `at.jazco.dev`). So the true rate of *still-hosted* bsky.social users holding their own rotation key is **≤0.33% and plausibly ~0**.
+
+**This is the finding.** On bsky.social the account holder possesses *no* key with authority over their identity. Not a key with lower priority; none at all.
+
+### 1c. So how does a user leave? By asking. [SPEC]
+
+Lexicons (https://github.com/bluesky-social/atproto/tree/main/lexicons/com/atproto/identity):
+
+- `com.atproto.identity.requestPlcOperationSignature` — *"Request an email with a code in order to request a signed PLC operation. Requires Auth."*
+- `com.atproto.identity.signPlcOperation` — takes `{token, rotationKeys, alsoKnownAs, verificationMethods, services}` and returns *"A signed DID PLC operation."*
+
+The **PDS signs on the user's behalf, gated on an emailed code**. The migration guide (https://atproto.com/guides/account-migration) confirms the identity step "requires a security token delivered via email and involves coordination between old and new PDSs."
+
+Consequences, all of which follow from the spec and the measurement:
+- Bluesky PBC **can** unilaterally rewrite any bsky.social-hosted DID: change the PDS, change the handle, rotate keys, or `plc_tombstone` it. Nothing in PLC prevents this; the rotation keys are theirs.
+- Bluesky PBC **can** unilaterally clobber a departure within the 72h recovery window, since their key is index 0 and any key the user adds lands below it.
+- If the account is suspended/banned, the email path is gone and so is the exit. This is the failure Nora Codes hit (2026-01-25, https://notes.nora.codes/atproto-again/, 182 pts / 197 comments HN 46757357): a `did:web` account was "burned" at the AppView, requiring "manual intervention from Bluesky leadership rather than standard remediation."
+- Christine Lemmer-Webber (Jan 2024, https://dustycloud.org/blog/how-decentralized-is-bluesky/) called this precisely: "Bluesky controls most users' keys anyway, so can control their identity future regardless, including in terms of signed updates."
+
+A user *can* add their own rotation key first — `signPlcOperation` accepts a `rotationKeys` array — and then they hold a real, if lower-priority, escape. Essentially nobody does (§1b).
+
+### 1d. Who runs plc.directory, and the handoff
+
+- README: "PLC stands for 'Public Ledger of Credentials'. We expect to evolve the system (in a backwards-compatible manner) into something less centralized — likely **a permissioned DID consortium**." Operated by Bluesky Social PBC.
+- **2025-09-19, https://atproto.com/blog/plc-directory-org** — "Creating an Independent Public Ledger of Credentials (PLC) Directory Organization." Bluesky PBC "is supporting the creation of an independent organization to operate the PLC directory," as a **Swiss Association**, chosen as a "credibly neutral and stable global home." It will "set policies and rate-limits, hold any related intellectual property, and coordinate future evolution." **"Initial board members and other logistical details are still being finalized"** — no launch date, no funding disclosed. Status as of today: **[DESIGNED, UNSHIPPED]**. `plc.directory` still redirects to `web.plc.directory` and is still the single write endpoint.
+- **2026-02-18, https://atproto.com/blog/plc-replicas** — "PLC Read Replicas," a self-hostable read-replica service (by David Buchanan). This mitigates *read* DoS. **It does not federate writes.** The write monopoly is untouched.
+- Adjacent: 2025-09-23 "Taking AT to the IETF"; 2026-04-02 "Kicking off the ATP Working Group at the IETF." Standardization, not custody.
+
+### 1e. How many have actually left — **[MEASURED, by me]**
+
+Bluesky's own relay publishes per-host account counts (`com.atproto.sync.listHosts`). Full enumeration, 2026-09-04:
+
+| | |
+|---|---|
+| Hosts known to relay | **6,168** |
+| Accounts total | **23,696,277** |
+| On Bluesky-operated PDSes (89 hosts, `*.host.bsky.network`) | **23,141,161 = 97.657%** |
+| On independent hosts (6,079 hosts; 1,850 currently `active`) | **555,116 = 2.343%** |
+
+Largest independents: `atproto.brid.gy` 63,557 · `bbi.to` 42,602 (offline) · `blacksky.app` 40,820 · `pds.wsocial.network` 33,039 · `eurosky.social` 31,066 · `certified.one` 14,640 · `tngl.sh` 10,848.
+
+**But independent-hosted ≠ migrated.** I resolved each sampled account's PLC audit log to its *genesis* PDS:
+
+| PDS | n | born on bsky (= migrated) |
+|---|---|---|
+| eurosky.social | 100 | **78%** |
+| blacksky.app | 100 | **67%** |
+| selfhosted.social | 50 | 56% |
+| atproto.brid.gy | 100 | **0%** (bridge — mints its own) |
+| certified.one | 100 | **0%** |
+| tngl.sh | 100 | **0%** |
+| pds.wsocial.network | 50 | **0%** |
+| pds.si46.world, pds.sprk.so, roomy.chat, pds.1095.me, pds.louisvillebsky.app, pds.ridgeway.dev, velvetnova.cc | 50 ea. | **0%** |
+
+Account-count-weighted across 24 sampled hosts covering **234,303 of the 555,116** independent accounts:
+
+> **weighted migrated fraction = 0.180**
+> **⇒ ~100,000 accounts have ever migrated off Bluesky's PDS fleet**
+> **⇒ ≈ 0.42% of the 23.7M accounts the relay sees**
+
+Caveats, stated honestly: `listRepos` returns the *first* page in per-PDS creation order, which over-weights early adopters — who are *more* likely to be migrants — so 0.42% is if anything an **over**-estimate. It also misses anyone who left and came back. Independently, a third-party dashboard corroborates the shape: **https://arewedecentralizedyet.online/data.json**, `lastUpdate: 01-13-2026` — atproto HHI **9,874**, 1,593 servers, largest operator **16,872,032 accounts = 99.37%**, everyone else **106,729 = 0.63%**. (Fediverse, same file, same day: HHI 780, 19,001 servers, largest 26.09%.)
+
+Reported migrations in the wild: Waag Futurelab, 2026-06-30, "We moved our Bluesky data to Eurosky" — https://waag.org/en/article/why-we-moved-our-bluesky-data-eurosky/ (148 pts, HN 48733937). Eurosky is the single largest genuine destination measured (31,066 accounts, ~78–80% of them migrants).
+
+**Cost of leaving:** the migration guide itself warns "larger repo exports may fail on import" and recommends third-party tools (`goat`, PDS MOOver) "rather than implementing the protocol directly." Blobs must be re-uploaded individually after repo indexing. And permanently: "The full history of DID operations and updates, including timestamps, is permanently publicly accessible… any PII encoded in `alsoKnownAs` URIs will be publicly visible even after DID deactivation, and cannot be redacted." Your entire handle and PDS history is a public, unerasable ledger.
+
+---
+
+## 2. Farcaster — the identity is onchain, the recovery key mostly isn't yours
+
+### Mechanism [SPEC] — https://docs.farcaster.xyz/reference/contracts/reference/id-registry
+
+- An **fid** is registered via `IdGateway`, owned by a **custody address**. `IdRegistry` at `0x00000000Fc6c5F01Fc30151999387Bb99A9f489b` on OP Mainnet.
+- A **recovery address** "can unilaterally recover an fid if the custody address is compromised" — via `recover()`, transferring the fid to any address **without the current owner's consent**, and can also call `changeRecoveryAddressFor()`. **There is no timelock and no veto window.** Contrast Argent (§4), where every equivalent action is delayed 36–48h.
+- App **signers** (KeyRegistry account keys) are a separate, weaker axis — revocable, and they never control the fid.
+
+### **[MEASURED, by me]** — how many fids the app can seize
+
+`idCounter()` = **3,349,918** fids ever registered. Two independent random samples of `recoveryOf(fid)`:
+
+| recovery address | sample A (n=298) | sample B (n=300) |
+|---|---|---|
+| `0x00000000FcB080a4D6c39a9354dA9EB9bC104cd7` | 36.2% | **41.0%** |
+| `0x0000…0000` (recovery disabled) | 60.4% | 54.0% |
+| independent / one-off addresses | ~3.4% | ~5.0% |
+
+That address is identified in Farcaster's own repos as the **Warpcast Recovery Proxy** — `farcasterxyz/contracts:README.md` ("RecoveryProxy"), `farcasterxyz/hub-monorepo` (`const WARPCAST_RECOVERY_PROXY = "0x00000000FcB080a4D6c39a9354dA9EB9bC104cd7"`), and it is the default baked into `farcasterxyz/docs` create-account guides.
+
+> **≈ 1.2–1.4 million Farcaster identities name the Warpcast recovery proxy — Merkle Manufactory can transfer any of them to any address, instantly, with no user consent and no delay.**
+> **~5% of fids name a recovery address that is neither the app's nor null.**
+
+**What you *can* leave with:** the custody address is a plain EOA whose seed the Warpcast/Farcaster app generates in-app and shows you; you can `transfer()` the fid to a hardware wallet and `changeRecoveryAddress()` to your own. The escape hatch is real and onchain. Roughly 5% take it. Content (casts) lives on Hubs, not onchain — portable but not sovereign.
+
+---
+
+## 3. Embedded-wallet providers — the shape is "reveal a bare secret," not "migrate"
+
+Every one of these ships the same primitive: **an isolated cross-origin iframe reconstructs the key client-side and displays it.** The user walks away with a raw hex/base58 string to paste into MetaMask. **None of them is a migration.** Nothing is transferred, nothing is revoked, no relationship is dissolved. The provider's copy of the key material (or its shares) generally remains exactly where it was — Privy's docs are silent on what happens to the provider-held share post-export.
+
+| Provider | Flow | Notes |
+|---|---|---|
+| **Privy** (Stripe acq. announced 2025-06-11, Bloomberg via HN) | `exportWallet()` opens a modal on a **different origin**; server wallets export over **HPKE**. https://docs.privy.io/wallets/wallets/export | "Your user is the only party that can ever access their full private key." Smart-wallet export returns the **signer's** key, not the account. **Key quorums can require app-server co-authorization, blocking unilateral export.** Privy now also sells explicit **custodial wallets** "backed by licensed providers" — https://docs.privy.io/wallets/overview/flexible-custody |
+| **Web3Auth → MetaMask Embedded Wallets** (rebranded; docs.metamask.io states "formerly Web3Auth"; **rebrand date NOT REACHED**) | 2-of-3 SSS/TSS: auth share (network, 5/9 consensus), device share, backup share. https://docs.metamask.io/embedded-wallets/features/mpc/ | Key export toggle at Project Settings → Advanced. **Developer-gated for programmatic access only**; "Manual export is always available through the built-in wallet interface… your dapp has no control over it." Docs *advise disabling* programmatic export for consumer apps. https://docs.metamask.io/embedded-wallets/dashboard/advanced/key-export/ |
+| **Magic.link** | `user.revealEVMPrivateKey()` (renamed from `revealPrivateKey()` at JS SDK 31.0.0 / RN 32.0.0), plus a hosted **reveal.magic.link** page for SDKs lacking the method. https://docs.magic.link/embedded-wallets/wallets/features/key-export | "Neither Magic nor the developer can see this key; only the end user can." TEE-based TKMS (patent pending). Original ship date **NOT REACHED**. |
+| **Dynamic** | TSS-MPC: "key shares are temporarily recombined on the user's device… the private key is constructed client side and provided to the user." https://www.dynamic.xyz/docs/react/wallets/embedded-wallets/mpc/import-export | **The developer can switch export off**: dashboard → Embedded Wallets → Security → **"Private Key Exports"** toggle. Docs plead: "please ensure you are surfacing this flow to your end-users." Also ships **import** (SSS-splits your key, "securely destroys the original") and a **Fireblocks NCW → Dynamic** migration. |
+| **Turnkey** | Keys live encrypted; decrypted only inside AWS Nitro-style enclaves. https://docs.turnkey.com/security/non-custodial-key-mgmt | Self-description is the honest one: *"Turnkey's role is similar to that of a safety deposit box operator."* Sub-organization-per-user is the pattern that keeps the operator out. Export exists but is not the headline. |
+| **Coinbase CDP / Embedded Wallets** | `ExportWalletModal` / `useEvmKeyExportIframe`; "User wallet exports always happen inside a secure, isolated iframe." Also **import**. https://docs.cdp.coinbase.com/wallets/using-wallets/import-and-export | Explicit: "you **cannot** export user wallets via the backend SDKs." React Native: rendering the export iframe in a bare `WebView` is **prohibited** — it strips origin isolation and the host app could read the key. CDP sells **custodial** and **non-custodial** product lines side by side. |
+| **Coinbase.com (retail exchange)** | **No key export. There is no key.** Balances are ledger entries; you leave by *withdrawing assets to an address*, not by acquiring a secret. | help.coinbase.com is Cloudflare-gated to my tooling — **NOT REACHED** for a direct citation. |
+| **Coinbase Wallet** (self-custody, separate app) | 12-word recovery phrase, user-held from creation. Not a handover — it was never custodial. | Wallet-as-a-Service announced **2023-03-08**, https://www.coinbase.com/blog/coinbase-announces-wallet-as-a-service-now-any-company-can-seamlessly (403 to my fetcher; date/title from HN index). |
+
+**The shape, stated plainly:** a private-key *reveal* moves the user from "provider holds it" to "provider holds it **and** the user has a copy on a clipboard." It is a fork of custody, not a transfer. It creates a bare secret with no rotation path, no recovery, and no revocation of the old holder. Two of the six (Dynamic, MetaMask-programmatic) let the **application** disable it.
+
+---
+
+## 4. Argent — guardians, and what the guardian cannot do
+
+Source: `argentlabs/argent-contracts/specifications/specifications.tex` (repo last pushed 2024-07-29 — the L1 contracts are frozen; **argent.xyz now 301-redirects to ready.co**, a rewards/payments app. Whether the L1 wallet is formally sunset: **NOT REACHED**).
+
+Exact mechanics — note that *every* authority a guardian holds is fenced by a delay:
+
+| operation | who | delay |
+|---|---|---|
+| add 1st guardian | owner | immediate (at wallet creation) |
+| add/remove any later guardian | owner | **confirm after 36h, expires at 48h** |
+| lock wallet | **any single guardian** | immediate, **5-day** security period |
+| unlock | any guardian | immediate |
+| execute recovery | **⌈n/2⌉ guardians** | finalisable **after 48h** |
+| cancel recovery | owner OR ⌈(n+1)/2⌉ | during the 48h |
+| transfer ownership | **owner AND ⌈n/2⌉ guardians** | immediate |
+| approve multicall / start session | owner AND ⌈n/2⌉ | immediate |
+| add address to trusted list | owner | 36h |
+| Argent multisig alters a dapp registry | Argent | **7-day timelock**, and registries **cannot be removed** |
+
+The design property that matters: **guardians alone can never move funds or transfer ownership.** They can lock (denial of service) and they can *start* a recovery — but recovery takes 48h and the owner can cancel it single-handedly. Transfer requires owner **AND** guardians. Compare Farcaster (§2), where the recovery address alone, instantly, takes the identity. Compare Bluesky (§1), where the host alone, instantly, takes the DID.
+
+**ERC-4337** (https://eips.ethereum.org/EIPS/eip-4337, created 2021-09-29, status **Final**) standardizes `UserOperation`, `EntryPoint`, and the validation flow — and explicitly **does not** standardize social recovery or key rotation: "the `signature` field usage is not defined by the protocol, but by the Smart Contract Account implementation." There is no interoperable recovery or exit standard. Every account implementation invents its own, which is why none of the escape hatches above compose.
+
+---
+
+## 5. THE NUMBER YOU MOST WANT
+
+**What fraction of users complete a custodial → self-custodial export?**
+
+**For embedded wallets: no such number has been published, anywhere I can reach.** This is a finding, and I'll state it flatly.
+
+Searched and came up empty:
+- **HN Algolia**, full corpus: "embedded wallet export", "wallet export conversion rate", "percent of users export their private key", "embedded wallet self custody adoption stats", "Privy wallet", "Web3Auth", "Turnkey wallet" — **zero** hits carrying an export or migration rate. The only substantive Privy/Turnkey/Web3Auth stories are funding and acquisition items.
+- **Crossref**, `custodial wallet key export user adoption`, 10 results — every hit is *e-wallet* (payments) adoption research; nothing on crypto key custody transitions.
+- **OpenAlex** — quota exhausted mid-session ("Insufficient budget… Resets at midnight UTC"), so this avenue is **NOT REACHED**; but the Crossref sweep over the same space returned nothing, which is weak evidence the paper does not exist.
+- Vendor docs for Privy, Magic, Dynamic, Turnkey, MetaMask/Web3Auth and Coinbase CDP document the export *mechanism* in detail and publish **no telemetry on its use**. Dynamic's and MetaMask's docs both nudge developers to *hide or disable* the flow, which tells you where their interest lies.
+- Devcon/ETHDenver talk transcripts and Dune dashboards: **NOT REACHED** (Dune needs an API key; general search engines CAPTCHA).
+
+Structurally, the number is hard for a vendor to even have: an export is a client-side iframe rendering a string. The provider learns that the modal opened. It cannot learn whether the user copied the key, stored it, or ever used it elsewhere. **"Completion" is not observable by the party that would publish it.** Any figure a vendor did publish would measure modal-opens, not handovers.
+
+**Where a real number does exist, I computed it — and it is on the order of 0.4%.** Bluesky is the one system where the exit leaves a public, enumerable, cryptographically-attested trace (the PLC audit log), so the question is answerable at all:
+
+| | |
+|---|---|
+| Accounts holding their own DID rotation key while on bsky.social | **≤ 0.33%** (n=1,200; likely ~0) |
+| Accounts that have ever migrated off Bluesky's PDS fleet | **~100,000 ≈ 0.42%** of 23.7M |
+| Accounts still on Bluesky-operated infrastructure | **97.66%** |
+| Farcaster fids the app can unilaterally seize | **41%** (n=300) |
+| Farcaster fids with a self-chosen recovery address | **~5%** |
+
+The two independent systems that expose the answer agree on the order of magnitude: **single-digit percent at best, sub-1% where leaving requires an act rather than a default.**
+
+---
+
+## Unreached
+
+- **NOT REACHED** — help.coinbase.com (Cloudflare 403 to WebFetch and curl); no primary citation for Coinbase.com retail export policy.
+- **NOT REACHED** — Coinbase WaaS 2023 blog body (403); date/title only, via HN index.
+- **NOT REACHED** — Web3Auth→MetaMask acquisition/rebrand **date**; confirmed only that docs.metamask.io says "formerly Web3Auth" and web3auth.io/docs 301s there.
+- **NOT REACHED** — Magic.link's original reveal-private-key ship date.
+- **NOT REACHED** — whether Argent's L1 wallet is formally sunset (argent.xyz → ready.co, contracts repo idle since 2024-07-29).
+- **NOT REACHED** — OpenAlex (daily budget exhausted), Dune dashboards, conference-talk telemetry.
+- **NOT REACHED** — any published board roster or founding date for the Swiss PLC Directory Association announced 2025-09-19.
+- **Method caveat, restated:** my ~0.42% migration figure rests on `listRepos` first-page samples (creation-ordered, early-adopter-biased upward) across 24 hosts covering 42% of independent accounts; it counts accounts currently off Bluesky, so it undercounts anyone who left and returned.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;0uMEiV_RtVUTYvOlpF6OfCad50G_mOuFwvK3LaS-7KU
+
+<<^ code="&#x0004;" -> to=? >>

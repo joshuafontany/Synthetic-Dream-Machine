@@ -1,0 +1,368 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-cohost-anti-software-software-club-7e9c48 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-cohost-anti-software-software-club-7e9c48.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. Cohost (Anti Software Software Club). Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-cohost-anti-software-software-club-7e9c48"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. Cohost (Anti Software Software Club)
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 38,076 characters
+
+````
+I have enough. Writing up findings.
+
+---
+
+# Findings: reader-side curation as inversion of the follower graph — four systems
+
+Note on method: WebSearch/OpenAlex/Scholar were off-limits. Everything below came from direct `curl`/WebFetch against known or guessed URLs, HN Algolia, Crossref, Semantic Scholar (heavily rate-limited, `429` most of the session), arXiv, Wikipedia, and Wayback replay. `WebFetch` is **blocked from `web.archive.org`** in this environment — all Wayback content was pulled with `curl` against `/web/<timestamp>/<url>` replay URLs. Wayback's CDX endpoint went "Temporarily Offline" twice mid-session and recovered.
+
+---
+
+## 1. Cohost (Anti Software Software Club)
+
+### Design stance — primary, verbatim
+
+**`https://cohost.org/rc/welcome`** — Wayback capture **2024-01-01** (`https://web.archive.org/web/20240101002259/https://cohost.org/rc/welcome`). Confidence: **high**.
+
+> **"algorithm? what algorithm?**
+> all your follows' posts, in the order they were posted, in a timeline that goes vertically. clear and effective moderation done by humans."
+
+> **"metrics are ruining our lives**
+> modern social media is designed around a vicious feedback loop that keeps users Engaged at the expense of their mental health, all in order to make their executives more money."
+
+> **"…but nobody wants a digital panopticon**
+> on modern social media, there is an ever-present fear that someone will see your post, have their own bad faith interpretation, and decide to ruin your day over it. platforms are often built to encourage this sort of behavior to drive up engagement, but they don't have to be."
+
+> **"finding new things**
+> discovering new posts is tricky without algorithms, but we're committed to getting it right and trying new things until we get there. **curation should be done by people, not computers.**"
+
+Also on that page: *"there is value in being in the same place as everyone… on a web without functioning search engines, blogs and friends-only sites may be okay for some, but they leave people who are scraping by on public visibility and word of mouth in the lurch."* — i.e. they explicitly rejected the private-garden answer.
+
+### The metrics stance, stated by staff as a growth cost
+
+**`cohost.org/staff/post/1254822-introducing-numbers`**, dated **2023-04-01** (an April Fools feature, "Numbers™️"), Wayback capture **2024-09-11**. Confidence: **high** that this is the text; **high** that it is a joke post; the framing sentence is nonetheless a staff statement of the real problem:
+
+> "We here at cohost believe in doing things differently from other social media platforms. We think our approach is part of creating a healthier platform, but we've heard some complaints loud and clear. **Many potential users bounce off of cohost due to a lack of metrics. They want a number that gets bigger the more they post good.**"
+
+### Reader-side tag curation primitives — primary
+
+- **Bookmarked tags**: `cohost.org/staff/post/5327-new-feature-bookm`, posted **2022-04-22 4:36 PM** (closed beta era), Wayback capture 2024-12-09. Verbatim: *"new #feature: #bookmarked #tags — from any tag page, you can bookmark the tag you're viewing to your sidebar and access it with one click. now you can keep track of what really matters to you."* Confidence: **high**.
+- **Silencing**: confirmed as a first-class primitive from staff's own thread on `cohost.org/staff/post/3273958-the-new-following-fe` (**2023-10-23**, Wayback 2023-11-26) — a user reports *"the follow+silenced accounts do not appear on the tab"* and jae (`@jkap`, founder) replies *"that didn't make initial ship due to perf issues with getting it implemented; we're gonna try to get it out once we figure out a better way."* Confidence **high** that silencing existed and applied to accounts.
+  **NOT REACHED**: a primary staff post or help-doc specifically describing **silenced *tags*** as distinct from silenced accounts. `help.antisoftware.club` articles are in the Wayback CDX but the one captured solution article (`/a/solutions/articles/62000225024`, capture 2022-07-09) replays as a JS shell ("Loading… Unable to load page"). I did not confirm tag-level silencing from a primary source and am not asserting it from memory.
+- **Chronological following feed** shipped late: the separate "following" feed rolled out to all users **2023-10-23** — i.e. ~16 months after public launch the site added a plain reverse-chron view of follows, and jae confirms an opt-in setting to make it the homepage.
+- **Tag synonyms** shipped **2024-08-18** (`staff/post/7321266-now-live-tag-synony`, per CDX title) — the last curation feature before shutdown. Confidence: **medium** (title only, post body not fetched).
+
+### The shutdown post — primary, with the final numbers
+
+**`https://cohost.org/staff/post/7611443-cohost-to-shut-down`**, posted **2024-09-09, 7:48 PM**, by jae. Wayback capture **2024-12-30** (`https://web.archive.org/web/20241230222036/…`). HN thread: `https://news.ycombinator.com/item?id=41492807` (2024-09-09, 136 pts, 118 comments). Confidence: **high**.
+
+Verbatim, key passages:
+
+> "We have come to the decision to cease operations of cohost and anti software software club due to **lack of funding and burnout**. As of today, none of us are being paid for our labor; all of our money in the bank, and any money coming in from people who buy our merch or don't cancel cohost plus, is going towards servers and operations — paying the bills so we can turn the lights off with as little disruption as possible."
+
+> "So, what happened? If you've read our financial updates, you know that **we have never been profitable**. This isn't surprising, even with a team of four; social media is a notoriously unprofitable industry. We had planned to bring in new revenue with eggbux (our tipping and subscription product) but **policy changes from Stripe forced us to cancel earlier this year**."
+
+> "Colin and I have been doing this for five years, Aidan for three, Kara for nearly two. We've been at or over capacity on moderation, engineering, and general operations nearly this entire time. **We have all been on-call 24/7/365 since we launched two and a half years ago.** The day-to-day needs of just running the site meant developing alternative funding options wasn't possible."
+
+> "**MAU and MRR are down across the year.** We've managed to build a social media platform that many of our users love, but **we just don't have enough users and we don't have the resources to safely scale up.** It's important to know when to call it quits."
+
+Timeline as published: read-only **2024-10-01**; full offline and **all user data deleted** **2024-12-31**; `cohost.org` redirected to the Wayback Machine from **2025-01-01** (paid out of pocket, "max $100 per year total"). Source code majority control transferred to the sole funder per the funding documents.
+
+**The final published financial table** (August 2024, in the same post) — this is the last one ASSC ever issued:
+
+| Category | As of Aug 31 2024 | As of Jul 31 2024 | % change |
+|---|---|---|---|
+| Expenses | $41,605 | $41,052 | +1.35% |
+| Income | $16,307 | $28,405 | −42.59% |
+| **Net income** | **−$25,297** | −$12,647 | −100.03% |
+| Active subscribers | 3,046 | 3,128 | −2.62% |
+| MRR | $19,477 | $20,015 | −2.69% |
+| Subscriber churn rate | 3.18% | 3.07% | +3.58% |
+| Revenue per subscriber | $6.39 | $6.40 | −0.16% |
+| **MAU** | **16,846** | 18,612 | **−9.49%** |
+| MAU→subscriber conversion | 18% | 16.8% | +7.14% |
+| Artist Alley listing weeks sold | 73 | 89 | −17.98% |
+
+Staff's own one-word commentary on the table: *"Not great!"*
+
+**Note on the conversion rate**: the 18% is MAU→subscriber, not registered-users→subscriber. Against a registered base in the low hundreds of thousands it is ~1%. This matters if you cite it.
+
+### The financial arc — full series, via a third-party reconstruction
+
+I could not reach the individual financial posts (`5023717-march-2024-financial`, `1690393-h1-2023-financial-up` return no Wayback snapshot via the availability API, though both appear in the CDX index — the CDX/availability disagreement is unresolved). Instead: **lori's blog, "Cohost's Financials — A Retrospective," `https://d-shoot.net/cohostfinance.html`**, originally posted **2024-03-14**, still live (not archived — fetched directly). Posted to HN 2024-04-12 (`objectID 40015295`). Confidence in the *numbers* it quotes: **medium-high** (they are quoted from staff posts, and the author flags her own uncertainty explicitly); confidence in her *interpretation*: **medium** — she is a critic, not neutral.
+
+Her definitions, as ASSC used them: conversion rate = % of users subscribed to Cohost Plus (staff target: keep above 5%); MRR includes 1/12 of annual subs; **MAU** = users who took action (post/like/share) — and note ASSC **changed the MAU definition between July and August 2022**, from "activated users" to "users who acted," which is an instrument change mid-series.
+
+Series as she reconstructs it:
+
+| Period | Registered users | MAU | Plus subscribers | MRR | Net / notes |
+|---|---|---|---|---|---|
+| Jul 2022 (public launch late Jun) | — | 6,068 (old def.) | 358 | $1,692 | lost $21,217; Q3 loss projected ~$81,000 |
+| Aug 2022 | 19,056 (17,310 activated) | **4,314** | 476 | $2,223 | ~−$22,200 |
+| Sep 2022 | 20,793 | 3,837 | 497 (as of 9/27) | $2,305 | EOY cash-on-hand estimate revised $39k → ~$16k; *"instead of having about an extra month and a half of runway, we have closer to two weeks"* |
+| Oct 2022 (Musk/Twitter exodus) | 38,165 | ~9,000 | 763 | $3,535 | |
+| Nov 2022 | **111,128** | **37,000** | 1,852 | $8,648.48 | conversion rate *fell* — sign-ups outran subs |
+| Dec 2022 | 118,000 | **21,000** | 2,027 | $9,440 | month's loss $29,000 (CDN costs after leaving Cloudflare "for ethical reasons"); ended year with $59,000 in bank |
+| Jun 2023 (as of 6/14) | ~130,000 | **12,000** | ~1,900 | $9,008 | **"at our current burn rate and bank balance, we will not make July 15 payroll."** |
+| Jul 2023 | — | 22,400 | 2,531 | ~$14,000 | bump from shutdown-fear subs + second Twitter exodus |
+| Nov 2023 | — | 18,446 → 21,142 (11/9→11/20) | 2,576 (from 2,682) | $14,367 (from $14,748) | Oct 2023 numbers *lost*; funding runway "around the end of Q1 2024" |
+| Feb 2024 | — | — | — | $14,037 | expenses $32,643, net **−$24,274** |
+| Mar 2024 | — | — | — | $14,536 | expenses $34,328, net **−$11,764** (eggbug plush revenue); *"enough money to get them to early April"* |
+
+**The sustainability gap, stated by ASSC itself** (June 2023 update, quoted by lori): Cohost *"would need five times the number of subscriptions they have to be sustainable, and more active users than they have total users now,"* and to close the ~$41k/month hole via a 5%-fee user-subscription product they *"would need to process $820,000 worth of subscriptions a month."* Confidence: **medium-high**.
+
+Two ASSC self-descriptions of their measurement discipline, quoted by lori from the H1 2023 update:
+
+> "this is a larger number than our revenue this month because it amortizes yearly subscriptions across the entire year, which isn't how that works in real life but makes it a useful metric for Overall Business Health."
+
+> "a lot of our annual subscribers subscribed in June and November, so revenue in those months will look better than average; the other 10 months will look worse."
+
+Funding origin, from ASSC's own manifesto (`https://antisoftware.club/manifesto/2020/03/16/part-1.html`, dated **2020-03-16**), quoted verbatim by lori:
+
+> "while we were griping about the tech industry and considering starting this project back in September, a friend of ours stepped forward and let us know that they had hit the lottery as an early technical employee at a startup that had succeeded and gone public. the first public announcement we're ready to make is: we have secured a deal with them for at least a year of operating funding on a non-equity basis, and we are publicly committing that we will never, under any circumstances, sell equity to non-employees."
+
+### Cohost — what I could not reach
+
+- **NOT REACHED**: any post-shutdown post-mortem essay by jae/`@jkap`, Colin/`@vogon`, or ASSC beyond the 2024-09-09 announcement. I checked the Wayback CDX for `cohost.org/staff/post*` from 2024-09-10 forward and found only re-captures of older posts; the shutdown post appears to be the last word. HN searches for "cohost postmortem" / "cohost failed" returned nothing. `blog.cohostcafe.com` was not resolvable via any index I queried.
+- **NOT REACHED**: the individual monthly financial posts as primary documents.
+- Adjacent third-party material located but not fetched (URLs for follow-up): `https://blog.basementcommunity.com/negative-post-about-cohost/` (2024-10-12), `https://css-tricks.com/the-lost-css-tricks-of-cohost-org/` (2025-04-25), `https://james-forbes.com/posts/cohost-export` (2024-10-29). `https://plume.pink/blog-cohost/` returns **403** to non-browser clients.
+
+### The negative result that matters here
+
+**ASSC never published any measurement of whether reader-side tag curation worked** — no numbers on what fraction of users bookmarked a tag, silenced anything, or used the following feed vs. the dashboard. Every number they published is financial or top-line engagement. The design thesis was never instrumented. Confidence: **high** (I read the full financial series as reconstructed, plus the shutdown post's table; tag/curation usage appears in none of them).
+
+---
+
+## 2. Path — the Dunbar cap
+
+### The cap was **50**, not 150, at launch
+
+This is the single most important correction to the brief. Primary source: **Dave Morin, "Introducing The Personal Network," `blog.path.com`, dated 2010-11-15**, Wayback capture **2010-11-16** (`https://web.archive.org/web/20101116122646/http://blog.path.com/`). Confidence: **high**.
+
+> "Path allows you to capture your life's most personal moments and share them with **the 50 close friends and family** in your life who matter most. Because your personal network is limited to your 50 closest friends and family, you can always trust that you can post any moment, no matter how personal."
+
+> "**We chose 50 based on the research of Oxford Professor of Evolutionary Psychology Robin Dunbar**, who has long suggested that 150 is the maximum number of social relationships that the human brain can sustain at any given time. Dunbar's research also shows that personal relationships tend to expand in factors of roughly 3. So while we may have 5 people whom we consider to be our closest friends, and 20 whom we maintain regular contact with, **50 is roughly the outer boundary of our personal networks.**"
+
+> "**No following, no friending…just sharing with the people who matter most.**"
+
+That last line is the load-bearing one for your brief: Path did not invert the follower graph, it **abolished** it.
+
+### They pre-announced the 150 escape hatch in the FAQ
+
+**`blog.path.com/faq`**, Wayback capture **2011-05-14** (`https://web.archive.org/web/20110514002743/http://blog.path.com:80/faq`). Confidence: **high**.
+
+> "**Why can I only share with 50 people?**
+> We are inspired by Professor Robin Dunbar at Oxford University, who's research dives deeply into the number of trusted relationships humans can maintain throughout life. We tend to have 5 best friends, 15 good friends, 50 close friends and family, and 150 friends. **Currently, we have chosen to focus on 50 but we may expand to 150 in the future.**"
+
+### The raise to 150
+
+Wikipedia (`https://en.wikipedia.org/wiki/Path_(social_network)`, fetched live 2026-09-04) states: *"Path initially limited each user's social network to 50 friends… **Later, Path raised its friend limit to 150 and then removed it entirely.**"* Confidence in the sequence: **high**. Confidence in dating it: **low**.
+
+**NOT REACHED**: a primary Path source announcing the 50→150 raise, or giving a reason. I fetched the Path 2.0 announcement ("Introducing Path 2, the Smart Journal," `blog.path.com/post/13533662902/…`, posted **2011-11-29**, Wayback capture 2012-12-27) in full — **it does not mention the friend limit at all**. Nor does Path 2.5 (2012-07-25), nor `path.com/about` (Wayback 2013-01-14), nor `path.com/story` (Wayback 2013-08-23). The `path.com/questions` FAQ page — which is linked in the 2012–2013 site chrome and would be the place the number lived — **has no Wayback snapshot** under any URL variant I tried. TechCrunch's 2011-11-29 piece (`http://techcrunch.com/2011/11/29/paths-second-iteration-is-less-photosharing-and-more-everything-sharing/`, recovered via HN `objectID 3649...`/story 2011-11-30) now 404s on techcrunch.com.
+
+The only account of *why* I located is an **HN comment, unattributed and uncorroborated** — `https://news.ycombinator.com/item?id=` (comment on story "Facebook Blocks Path's 'Find Friends' Access," 2013-05-05):
+
+> "They actually started with a 50 friend limit. The problem was when they had it at this, **most active users had less then 20 friends** they followed with Path… So they upped it to 150, and now they are seeing users in the 50 range they originally wanted."
+
+Confidence: **low**. Do not cite as evidence. But note the *shape* of the claim, because it is testable and it is the interesting one: the cap did not bind — users were nowhere near it — and raising the ceiling raised realized behavior anyway. That is an anchoring effect, not a capacity constraint.
+
+### The cap was abandoned, then the product inverted entirely
+
+Primary: **`blog.path.com`, "Be the Inspiration," dated 2017-05-02**, Wayback capture 2018-09-20. Confidence: **high**.
+
+> "We've also realized that many of you seek to inspire - and be inspired within - the Path community. With our latest Path update, **now anyone can be a source of inspiration.** Whether it's through beautiful photography or creative videos, **you can create public moments** to share your unique perspective. We take your privacy seriously, so rest assured that your previously shared moments on Path will stay private and **your friends will stay just that – friends on Path, not public followers. Also, you can easily turn on or turn off the public follower feature in the app's settings.**"
+
+And 2017-07-14, "Explore the World Through Path": *"We've replaced the Activity tab with **Explore**… **public moments from millions of Path users around the world**."*
+
+So by mid-2017 Path had (a) public posts, (b) public followers, (c) a global discovery surface. The Dunbar product was gone in everything but the name — under Kakao ownership, with the userbase overwhelmingly Indonesian (Wikipedia: *"Indonesia was the world's largest Path userbase with more than 4 million users"*).
+
+### Shutdown — primary, verbatim
+
+**`blog.path.com`, "The Last Goodbye," dated 2018-09-17**, Wayback capture **2018-09-20** (`https://web.archive.org/web/20180920052707/http://blog.path.com/`). Confidence: **high**.
+
+> "It is with deep regret that we announce that we will stop providing our beloved service, Path… **And it is now inevitable to wind down the service to prioritize our work to serve you with better products and services.**"
+
+Schedule as published: 2018-09-17 notice; 2018-10-01 removed from App Store / Google Play; **2018-10-18 service terminated**; 2018-11-15 customer service closed. Data export at `path.com/goodbye`.
+
+The announcement gives **no cause** beyond "prioritize our work." Kakao acquisition: **2015-05-28**, amount undisclosed (Wikipedia, **high** confidence on date, it's a well-sourced article). Path also turned down a **$100M Google offer in February 2011** and raised at least $2.5M + $8.5M + $30M + $25M (Jan 2014, incl. Indonesia's Bakrie Group) — a VC-funded company carrying a growth-hostile constraint, which is the structural tension.
+
+### Path — measured evidence the cap helped or hurt
+
+**NONE FOUND. NOT REACHED.** No study, no Path-published metric, no A/B result. Path published engagement anecdotes only ("nearly 50,000 friendships are formed on Path" every day, `blog.path.com/post/25029599059/passingthefriendtest`, 2012-06-13; "over two million people," `path.com/about`, 2013-01-14). The 50→150→∞ progression is itself the only revealed evidence, and it is one-directional: **the cap was relaxed three times and never once tightened.** State that as the finding; do not dress it up as a measurement.
+
+---
+
+## 3. Twitter/X Lists
+
+### Launch — primary, verbatim
+
+**Nick Kallen (`@nk`), "Soon to Launch: Lists," Twitter blog, 2009-09-30 22:34 UTC.** Original `blog.twitter.com/2009/soon-to-launch-lists`; Wayback capture **2016-02-07** (`https://web.archive.org/web/20160207143108/https://blog.twitter.com/2009/soon-to-launch-lists`). Confidence: **high**.
+
+> "My name is Nick Kallen (@nk) and I'm the project lead on Lists, a new feature we're testing with a small subset of users. **The idea is to allow people to curate lists of Twitter accounts.** For example, you could create a list of the funniest Twitter accounts of all time, athletes, local businesses, friends, or any compilation that makes sense."
+
+> "**Lists are public by default (but can be made private)** and the lists you've created are linked from your profile. **Other Twitter users can then subscribe to your lists. This means lists have the potential to be an important new discovery mechanism** for great tweets and accounts."
+
+> "We started working on this feature because of the frequent requests we received from people who were looking for a better way to organize information on Twitter."
+
+The design is exactly the inversion you're studying: a reader-authored, subscribable, *public-by-default* grouping layered over an asymmetric follow graph — and note that "public by default" makes the curation itself a social object, which is why Lists became a research instrument (below).
+
+### Usage data — the key negative result
+
+**No measurement of what fraction of Twitter users ever created a List was reached, from Twitter or from research.** Confidence in the negative: **medium-high** for Twitter's own numbers, **medium** for the academic literature (my search tools were degraded — see caveat).
+
+What I did establish:
+
+- **Twitter never published a Lists adoption figure** that I could locate. The Wayback CDX for `blog.twitter.com*` returned no Lists-related post other than the 2009 pre-launch one. Confidence: **medium** — the CDX call was truncated at 400 rows and the archive was intermittently offline.
+- **Sysomos** ran the "Inside Twitter" data-report series (`http://www.sysomos.com/insidetwitter/`, Wayback 2011-12-28) — I enumerated its full section list (`#followers`, `#howactive`, `#growth`, `#publishingtools`, etc.). **There is no Lists section.** A separate Sysomos Lists report has no Wayback snapshot at any URL I tried on `sysomos.com/insidetwitter/twitterlists*` or `blog.sysomos.com/2010/01/13/inside-twitter-lists/`. **NOT REACHED.**
+- **The academic literature treats Lists as an instrument, not as a behavior to measure.** The papers that exist study what Lists *reveal about the listed*, not how many people *make* them:
+  - Sharma, Ghosh, Benevenuto, Ganguly, Gummadi, **"Inferring who-is-who in the Twitter social network," WOSN 2012**, `10.1145/2342549.2342563` (94 citations). Abstract verbatim: *"Our methodology exploits the Lists feature, which allows a user to group other users who tend to tweet on a topic that is of interest to her, and follow their collective tweets. Our key insight is that the List meta-data (names and descriptions) provides valuable semantic cues about who the users included in the Lists are… We show that our methodology can accurately and comprehensively infer attributes of millions of Twitter users, including a vast majority of Twitter's influential users."* Note "**a vast majority of Twitter's *influential* users**" — the coverage claim is scoped to the influential tail, which implicitly concedes sparse coverage of the body. The in-paper coverage statistics would answer your question; **the PDF is paywalled** (ACM returned 403 to WebFetch and an HTML interstitial to curl; MPI-SWS and IIT-KGP mirrors 404). **NOT REACHED.**
+  - Rakesh, Singh, Vinzamuri, Reddy, "Personalized Recommendation of Twitter Lists using Content and Network Information," **ICWSM 2014**, `10.1609/icwsm.v8i1.14558` (38 citations) — the existence of a *recommender* for Lists is itself evidence the feature had a discovery/adoption problem, but I did not read the paper.
+  - Also located, not read: Garcia-Silva et al., "Characterising Emergent Semantics in Twitter Lists," ESWC 2012 (16 cites); Benabdelkrim et al., "Finding interest groups from Twitter lists," SAC 2020; Su et al., "On Refining Twitter Lists as Ground Truth Data," ECIR 2018; "A system for twitter user list curation," `10.1145/2365952.2366019` (2012); "Tadvise: A Twitter Assistant Based on Twitter Lists," `10.1007/978-3-642-24704-0_20` (2011); "Tagging users based on Twitter lists," `10.1504/ijwet.2012.048526` (2012).
+
+**Tool caveat, stated plainly**: Semantic Scholar returned HTTP 429 on 5 of 8 attempts, including every attempt at the specific "what fraction of users created a list" queries. Crossref bibliographic search returned only noise for those terms. So my confidence that *no such measurement exists* is **medium**, not high. What I can say with **high** confidence: **no such measurement is easy to find, and none of the obvious primary or secondary sources carries one.** For a design brief, that is close to the same thing — an unmeasured feature.
+
+---
+
+## 4. Bluesky — feed generators, labelers, Ozone
+
+### "Algorithmic choice" — primary, verbatim
+
+**Jay Graber, "Algorithmic choice," `https://bsky.social/about/blog/3-30-2023-algorithmic-choice`, 2023-03-30.** Live, fetched directly. Confidence: **high**.
+
+> "Your attention is an invaluable resource. **A social platform's algorithm is responsible for curating the content in your feed. The algorithm, more than the content type or the app's appearance, is the core of social media** because it directs how you spend your attention there."
+
+> "**A feed of content from the people you follow ordered only by time is also an algorithm** (albeit a very simple one). This should be an option if you want, but we think there are also many more ways this could work. **The problem isn't 'algorithms' — the problem is a lack of transparency and control around how algorithms are used to direct your attention.**"
+
+> "We aim to replace the conventional **'master algorithm,' controlled by a single company, with an open and diverse 'marketplace of algorithms.'**"
+
+> "Algorithms in ATP will act as **aggregator services, similar to search engines**. Users will be able to find, share, and add algorithms to their clients."
+
+### Custom feeds shipped — primary
+
+**"Algorithmic Choice with Custom Feeds," `https://bsky.social/about/blog/7-27-2023-custom-feeds`, 2023-07-27 (last updated 2023-08-17).** Confidence: **high**.
+
+> "In May, we launched custom feeds… Instead of using a black box algorithm that leaves users guessing how posts are ranked or how to get to the 'top' of an algorithm, we provide an open marketplace of feeds and let users choose which ones they want to use."
+
+> "**You can also think of these feeds as super-powered hashtags or lists.**" — Bluesky's own framing puts feed generators in the same lineage as Twitter Lists.
+
+> "The Bluesky team initially provided six custom feeds for users to subscribe to, but now, **the vast majority of feeds on the network are built by independent third-party developers.**"
+
+Critically, the same post introduces the **default that eats the thesis**:
+
+> "**Now that we've arrived at a stable first iteration of how custom feeds will work, we're improving the default experience. Even though users have a wide variety of custom feeds to choose from, defaults are still powerful.** We've added **Discover**, a more complex feed… mixes in a global view of what's trending in the network with posts from accounts you follow and posts from accounts near your social graph."
+
+> "**Our approach to making an algorithmic feed isn't new. Most social networks take into account your interests and social graph to curate an unique feed for you. What's new is our focus on algorithmic choice** — letting you unpin feeds you don't like… **give users sensible defaults but leave them the option to fully customize their experience if they don't like our choices.**"
+
+### Ozone / stackable moderation — primary
+
+**"Bluesky's Stackable Approach to Moderation," `https://bsky.social/about/blog/03-12-2024-stackable-moderation`, 2024-03-12.** Confidence: **high**.
+
+> "Today, we're excited to announce that we're **open-sourcing Ozone**, our collaborative moderation tool… Later this week, we're opening up the ability for you to **run your own independent moderation services, seamlessly integrated into the Bluesky app.**"
+
+> "no single company can get online safety right for every country, culture, and community in the world."
+
+Three stated principles, verbatim: *"**Simple and Powerful:** Give users a pleasant default experience, with customization options under the hood. **User Choice:** Empower users and communities to develop their own moderation systems. **Openness:** Create an open system that increases trust in the governance of our digital spaces."*
+
+And again, defaults first:
+
+> "**When you sign up for Bluesky, you will be subscribed to Bluesky's built-in moderation service by default. This is similar to how custom feeds work on Bluesky — we'll show you a couple feeds by default, but you can also create and subscribe to more.**"
+
+Scale marker in that post: *"We first shared our vision for composable moderation before Bluesky even had 20,000 users last year. Now, we serve over 5 million users."*
+
+Labelers shipped March 2024; confirmed in **"2024 In Review," `https://bsky.social/about/blog/12-30-2024-year-in-review`, 2024-12-30** (Jay Graber): *"In March, we launched labelers, the first piece of our stackable moderation system."* Same post: grew from **3M (Feb 2024 public launch)** to **over 25.9M** by end of 2024; *"thousands have opted to use their own servers instead of Bluesky's infrastructure."*
+
+### **The key number does not exist publicly.**
+
+**Bluesky has never published what fraction of users switch off the default feed, pin a custom feed, or subscribe to a third-party labeler.** Confidence: **high**.
+
+I checked, by fetching each and grepping for every percentage, "labeler," "custom feed," "Discover," and "subscrib":
+
+- `01-16-2024-moderation-2023` (2023 Moderation Report) — reports only moderation volumes: 3.6% of active users filed ≥1 report, 45,861 accounts (3.4%) received ≥1 report. **No feed or labeler adoption.**
+- `01-17-2025-moderation-2024` (2024 Moderation Report) — same shape: 6.48%/3.4%-style reporting stats, 57% user-base growth. **No feed or labeler adoption.**
+- `01-29-2026-transparency-report-2025` (`https://bsky.social/about/blog/01-29-2026-transparency-report-2025`, 2026-01-29) — the most detailed document Bluesky has published. It carries: 60% user growth in 2025; 6.97M reports (+54% YoY); 3% of the user base filed a report; a full label taxonomy with volumes (adult 10.79M labels, suggestive 3.42M, spam 761.77K, nudity 389K); *"daily reports of anti-social behavior dropped by approximately 79%"*; 15.49M labels applied, +200% over 2024. **Zero numbers on labeler subscription or custom-feed usage.** Every "choice" statistic is about *Bluesky's own* moderation output, not about users exercising choice.
+- `09-19-2025-building-healthier-social-media` and `10-31-2025-building-healthier-social-media-update` — restate the stackable-moderation stance; the update announces a **"dislike" beta** as *"a new feedback signal to improve personalization in **Discover** and other feeds."* Note the direction of travel: investment in improving the *default*, not in measuring migration off it.
+- `12-30-2024-year-in-review`, `11-29-2024-engagement` — top-line growth and third-party publisher engagement anecdotes only.
+
+### Academic measurement of Bluesky feeds — what exists
+
+Two 2026 papers by Yipeng Wang and Mohit Singhal, both submitted **2026-08-14**, are the closest anyone has come — and **both measure feed *behavior*, not user *adoption***:
+
+- **"Whose Posts Get Ranked: Identical-Text Exposure Gaps in Bluesky Custom Feeds," arXiv:2608.13879.** Abstract verbatim (excerpt): *"Bluesky lets users deploy custom feeds, independently operated recommendation algorithms that the platform serves alongside thousands of others… we take repeated snapshots of the Top-50 lists that **1,366 public feeds** return… Exposure diverges widely inside these matched sets, which span 250 feeds: **in 33% of sets, one copy appears on the list while another does not.** … **Authors new to a feed receive less exposure for the same text** (−0.061 in reciprocal-rank weight)… **A new author with more followers than the competing author still loses 74% of head-to-head comparisons.** … These results are early evidence that **access to many independent feeds is not enough to give identical texts equal exposure.**"* — This is the sharpest finding for your brief: a marketplace of reader-chosen algorithms **reproduces incumbency advantage inside each feed**, and pluralism at the marketplace level does not cure it. Confidence: **high** that this is the paper's claim.
+- **"Predicting Custom-Feed Returns for New Bluesky Posts: A Prospective Study," arXiv:2608.13874.** Panel of **5,000 monitored feeds**, 17.804M public posts, 1.865M post–feed return records, 625,083 feed polls. Useful as a scale marker for how many feed generators are live and pollable. **No user-side adoption data.**
+
+Neither reports how many *humans* use any of these feeds. Confidence: **high** (both abstracts read in full via arXiv).
+
+I also enumerated the 40 most recent arXiv papers matching "Bluesky" (2025-10 through 2026-09). **None measures default-feed opt-out or labeler subscription rates.** Nearest adjacent: "Structure, Topics, and Diffusion Effects of Bluesky Starter Packs" (arXiv:2608.17489, 2026-08-18) and "Social Media Feed Elicitation" (arXiv:2602.18594, 2026-02-20) — neither fetched.
+
+---
+
+## Cross-cutting observations
+
+**1. All four systems ship the inversion; none of them measures it.** Cohost published two years of financials and never once reported tag-bookmark or silence usage. Path published friendship counts and never reported cap utilization. Twitter never published Lists adoption. Bluesky publishes an exhaustive annual transparency report — 15.49M labels, seven-decimal report taxonomies — and does not report how many people ever subscribed to a labeler. Confidence: **high** for all four.
+
+**2. Every system that survived long enough relaxed the constraint.** Path 50 → 150 → removed → public followers → Explore (2010→2017). Cohost added a `Discover`-shaped need it never met (*"discovering new posts is tricky without algorithms"*) and shipped a following-feed only in year two. Bluesky shipped algorithmic choice in May 2023 and shipped `Discover` — its own opinionated default — in the *same announcement post* two months later, then in Oct 2025 began adding dislikes to improve it. Confidence: **high**.
+
+**3. Bluesky's own words are the best available statement of the trap**: *"Even though users have a wide variety of custom feeds to choose from, **defaults are still powerful.**"* Written by the team most committed to reader-side control, in the post announcing that control.
+
+**4. The one hard measured result about reader-chosen algorithms is negative** (arXiv:2608.13879): identical text, different authors, 33% divergence in exposure, incumbency beats follower count 74% of the time. Choice among feeds did not equalize what the feeds do.
+
+**5. Cohost's cause of death was not the design.** The shutdown post is explicit — *"lack of funding and burnout,"* a Stripe policy change killing the revenue product, four people on-call 24/7/365 for two and a half years, MAU 16,846 against $41,605/month of expenses. But note the reflexive relation: they said *"we just don't have enough users"* while running a product whose stated stance was that *"metrics are ruining our lives"* and whose staff acknowledged *"many potential users bounce off of cohost due to a lack of metrics."*
+
+---
+
+## Unreached, itemized
+
+| Item | Status |
+|---|---|
+| Cohost individual monthly financial posts as primary docs | **NOT REACHED** — CDX indexes them, availability API returns no snapshot |
+| Cohost post-shutdown post-mortem by jae/Colin/ASSC | **NOT REACHED** — appears not to exist; the 2024-09-09 post is the last |
+| `blog.cohostcafe.com` | **NOT REACHED** — not resolvable via any index queried |
+| Cohost help docs (silenced **tags** specifically) | **NOT REACHED** — Freshdesk captures replay as JS shells |
+| `plume.pink/blog-cohost/` | **NOT REACHED** — 403 to non-browser clients |
+| Path primary source for the 50→150 raise, and its date/reason | **NOT REACHED** — absent from Path 2.0, Path 2.5, /about, /story; `path.com/questions` unarchived; TechCrunch 2011-11-29 404s |
+| Any measured evidence the Path cap helped or hurt | **NOT REACHED — none exists that I could find** |
+| Twitter's own Lists usage numbers | **NOT REACHED — none located** |
+| Sysomos "Inside Twitter Lists" report | **NOT REACHED** — no Wayback snapshot at any tried URL |
+| Sharma et al. WOSN 2012 in-paper Lists coverage stats | **NOT REACHED** — ACM paywall (403/interstitial), all mirrors 404 |
+| Bluesky % of users off the default feed / subscribed to a custom feed or labeler | **NOT REACHED — Bluesky has never published it**, and no paper measures it |
+
+I'm making no recommendation, per the brief. One caveat to carry forward: my confidence on the two "no measurement exists" claims for Twitter Lists and Bluesky differs. For Bluesky it is **high** — I read every candidate Bluesky post end to end and grepped them. For Twitter Lists it is **medium** — Semantic Scholar 429'd on exactly the queries that would have settled it, so the number may exist in a paper I could not search for.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;1qbmgAO1BClq9g9cDOZ7qQF_mO709Y-vGZeNewIa99U
+
+<<^ code="&#x0004;" -> to=? >>

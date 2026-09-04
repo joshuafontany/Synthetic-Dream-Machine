@@ -1,0 +1,217 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/headline-answer-7ce937 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/headline-answer-7ce937.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: HEADLINE ANSWER. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/headline-answer-7ce937"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! HEADLINE ANSWER
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 29,169 characters
+
+````
+I have enough. Writing up.
+
+---
+
+# MULTI-IDENTITY / PER-IDENTITY CONTACT LISTS IN LOCAL-FIRST & P2P SYSTEMS
+**Research date: 2026-09-04.** All findings from primary sources; URLs inline. WebSearch not used (exhausted); OpenAlex not used (budget exhausted).
+
+## HEADLINE ANSWER
+
+**Exactly one system has shipped code where each identity authors its own private contact list: VeilidChat** (beta, not GA). Its `Account` protobuf gives every account its own DHT-private `contact_list` owned by that account's keypair, and even the per-device tag is account-scoped. But **it still keeps a device-level roster** — a local `LocalAccount` table enumerating every account on the device — and **all accounts share one Veilid node instance and one `DHTRecordPool`**. So: *per-identity private contact views: YES, shipped. No system-level roster of the person's identities: NO — nobody has that, VeilidChat included.*
+
+Delta Chat ships the same shape more crudely (multi-profile, each profile a separate account DB), also with a device-level profile list, and its docs recommend compartmentalized profiles while **never warning that all profiles egress from one IP to relays**.
+
+**Nobody else is close.** Nostr, SSB, and Keybase publish the contact/follow graph as a matter of protocol design. Willow, Earthstar, Keyhive, and iroh have no contact-list concept at all — three of them declare identity explicitly out of scope.
+
+---
+
+## 1. VEILID — SHIPPED CODE, the strongest result
+
+**Framework state (SHIPPED):** `gitlab.com/veilid/veilid`, v0.5.7 released 2026-07-19 (prior: v0.5.6 2026-07-13, v0.5.0 2025-12-21, v0.4.8 2025-08-07). Repo active daily (last push 2026-09-04). Launched DEF CON, Aug 2023, by cDc (Dildog, Medus4) — confirmed on veilid.com.
+
+**VeilidChat state (BETA, NOT GA):** `gitlab.com/veilid/veilidchat`, last tag **v0.4.9 (2025-08-07)**, tree active to 2026-09-03. https://veilid.com/chat/ still says: *"VeilidChat is a demo of the Veilid framework and protocol working… If you want to try out this proof of concept, please stay tuned for details on how to gain access… there are no official builds yet."* https://veilid.com/chat/beta/ gives TestFlight + Android beta links. So: **beta channel only, no store release.** (`https://veilid.com/chat/known-issues/` → 404; `…/chat/privacy/` → 404. Site footer © 2025.)
+
+### Privacy model, from Veilid's own docs
+- **Private routes vs safety routes** (https://gitlab.com/veilid/developer-book/-/raw/main/src/concepts/private-routing.md): *"A safety route is a contextual flag on a routing context, designed to protect the sender… Private routes are created on request by the application, and are designed to protect the receiver."* The receiver publishes a route blob to a DHT record; the sender gets a `BlobKey` instead of the NodeId — *"This allows NodeA to talk to NodeB without knowing the identity of NodeB, or its IP address or anything."*
+- **Safety routes are opt-in and shallow by default** (`apps/api/routing_contexts.md`): a RoutingContext is "direct" or "with safety"; with safety, *"Hop count: How many extra hops… It must be greater than 0, and the default is 1."* Default stability = low latency, not uptime.
+- **NodeInfo is deanonymizing by construction** (`concepts/nodes.md`): every node has a public key that *is* its NodeID, plus `DialInfo` — *"THIS CONTAINS IP INFORMATION"* (their capitals).
+- **No anonymous DHT writes** (`concepts/dht.md`): *"Everything that goes into Veilid is signed by somebody. There are no anonymous DHT writes."*
+- **Veilid's own stated limitation on identity** (`concepts/README.md`, footnote 1): *"User identities are not formalized by veilid currently. There is work on a 'veilid_support' higher level library that implemented the 'user identities' for VeilidChat, but this is not a standard yet."* Identity is punted to the app.
+
+### VeilidChat's multi-identity architecture (READ FROM CODE)
+- `lib/account_manager/models/local_account/local_account.dart`: *"Local Accounts are stored in a table locally and not backed by a DHT key and represents the accounts that have been added/imported on the current device."* Each holds a `SuperIdentity`, an encrypted `identitySecretBytes`, and — notably — **`hiddenAccount`**: *"Keep account hidden unless account password is entered (tries all hidden accounts with auth method (no biometrics))."* That is a deliberate plausible-deniability affordance.
+- `lib/proto/veilidchat.proto`, `message Account`: `contact_list`, `contact_invitation_records`, `chat_list`, `group_chat_list`, `received_invitation_records` are each an `OwnedDHTRecordPointer` marked **`// DHT Private`**, carried in a per-account collections record. **The contact list is owned by, encrypted for, and reachable only from that one account.** There is no cross-account contact store.
+- `lib/contacts/models/contact_identity_anchor.dart`: a contact row stores only the record key where the peer's identity is published — *"what is published there today is read from the record and cached, never stored beside the key."*
+- `lib/account_manager/models/device_identity_store.dart` is the tell: *"This device's stable random tag for **one account**."* It is an `AccountScopedStore` opened under that account's `identitySecret`. The device tag is **not** shared across accounts — explicit compartmentalization.
+- `lib/account_manager/models/account_local_store_registry.dart`: *"a per-account table name hashes the identity secret, gone once the account is locked or removed."* Plus a whole `lib/wipe/` subsystem (`wipe_planner`, `background_wiper`) for erasing an account's traces.
+- `lib/contacts/views/contact_security_findings.dart`: *"PER DEVICE. It is derived from this device's reconciled transcript, which is not synchronised across a linked account's devices."*
+
+### What it still leaks (measured from code, not from a docs admission)
+1. **`lib/init.dart` initializes ONE `Veilid.instance` and ONE `DHTRecordPool` for the whole app.** All accounts on the device share a single Veilid node — one NodeId, one set of DialInfo, one relay. Cross-account unlinkability therefore rests entirely on whether every account's traffic goes over safety/private routes, which the framework makes opt-in with a 1-hop default. I could not verify VeilidChat's routing-context configuration (GitLab blob search requires auth) — **NOT REACHED**.
+2. **A device-level roster exists**: the `LocalAccount` table plus `local_store_registry` keyed by super-identity record key. Encrypted under the TableStore device key, and hidden accounts need a password, but it is a roster.
+3. **No published threat model or privacy policy for VeilidChat.** `doc/` contains exactly one file: `invitations.md`. The only privacy claims live on marketing pages.
+
+---
+
+## 2. WILLOW PROTOCOL — SPEC ONLY on privacy; capability code shipped
+
+- Site: https://willowprotocol.org (worm-blossom / Aljoscha Meyer + gwil, NLnet NGI Assure funded, TU Berlin).
+- **Meadowcap** (https://willowprotocol.org/specs/meadowcap/): SHIPPED in Rust as the `willow25` crate — **v0.7.9, updated 2026-08-27**, repo now at **codeberg.org/worm-blossom/willow_rs**. https://willowprotocol.org/rust/ states plainly: *"The `willow25` crate currently implements the Data Model and Meadowcap. Over the coming weeks, we'll add implementations of persistent storage, and the Willow Drop Format."* → **sync and Confidential Sync are NOT in the shipped Rust crate.**
+- **GitHub `earthstar-project/willow-rs` is ARCHIVED** (last push 2025-10-23) with README: *"Repository moved to https://codeberg.org/worm-blossom/willow_rs."*
+- **`n0-computer/iroh-willow`**: not archived, 74 stars, but the only 2026 commits are Dependabot bumps (2026-02-10, 2026-04-07, 2026-04-27). Effectively dormant. It is the only implementation claiming Confidential Sync.
+- **Willow'25 parameter set: "Status: Proposal (as of 05.17.2025)."** News feed's last entries: "A lot of everything" (2025-10-26); "Rust implementation of Meadowcap released" (2024-08-10).
+- **Sideloading / Drop Format** (https://willowprotocol.org/specs/drop-format/): **"Status: Proposal."** Sneakernet drops over USB/SD/email/torrent.
+
+### What Willow's own docs admit (the Private Interest Overlap spec, https://willowprotocol.org/specs/pio/)
+This is the most honest privacy self-assessment in the entire survey:
+- The naive design *"leaks some potentially sensitive information"* — their worked example is Betty accidentally proving to Gemma that Alfie wrote a path named `gemma_stinks`.
+- They explicitly **do not** achieve zero-leakage: *"we design solutions which do not allow peers to learn about the existence of any NamespaceId, SubspaceId, or Path which they did not know about already… Such solutions cannot prevent peers from confirming guesses."*
+- **"We do not have formal proofs for any of these claims, these are merely our design goals (which we believe to have achieved)."**
+- Leak tiers: **L2** = *"The public keys and signatures involved in delegating read capabilities"* — visible to an active eavesdropper (Epson). **L3** = *"Fingerprintable session behaviour… We consider fingerprinting, tracking, and deanonymisation based on information from L3 to be out of scope of this document."*
+- Timestamps are deliberately unprotected: *"Because valid Timestamps can easily be guessed, we do not try to hide information about them."*
+
+**Verdict:** Meadowcap has no notion of a person owning several identities. A `UserPublicKey` is an identity; a delegation chain **names every delegator in the chain**, so handing over a capability discloses your grantors. No per-identity contact list; no contact list at all.
+
+---
+
+## 3. EARTHSTAR — effectively stalled; no multi-identity contact list
+
+- `github.com/earthstar-project/earthstar`: last release **11.0.0-beta.2, 2024-05-21**; last release before that v10.2.2, 2023-08-31; repo last pushed **2025-04-12**. README: *"v11 using Willow is now available in beta… Development is happening on the `willow branch`."*
+- Identity model (https://earthstar-project.org/docs/what-is-it): *"a key-value database which supports author versions. Earthstar databases store arbitrary data, keyed by two pieces of information: a free-form path and a public key identifying the author."* Author addresses (`@name.pubkey`); shares keyed by a share address, with a second identifier gating write access.
+- Privacy claim, verbatim: *"Earthstar databases do not announce their presence to the world. Only people who know a special identifier can learn of their existence from another peer and replicate their data."* That's share-obscurity, not identity unlinkability.
+- **Multi-identity: only as a UI concept, and abandoned.** `earthstar-project/earthstar-os` — *"Browser app for switching between multiple Earthstar workspaces, identities, and apps"* — **last pushed 2021-08-12**. `earthstar-docs`, `stone-soup`, `replica-server`, `earthstar-pub` are all **archived**.
+- **No contact-list primitive anywhere in the org.** Every author who writes to a share is visible to every other member of that share. Negative result.
+
+---
+
+## 4. INK & SWITCH — identity is a declared ANTI-GOAL
+
+- **The local-first essay** (https://www.inkandswitch.com/essay/local-first/, Kleppmann/Wiggins/van Hardenberg/McGranaghan, 2019; DOI 10.1145/3359591.3359737). Ideal 6, "Security and privacy by default," argues only that local storage + E2EE beats a centralized DB: *"Your local devices store only your own data, avoiding the centralized cloud database holding everybody's data."* **The essay contains no discussion of multiple identities, pseudonymity, or identity leakage via sync metadata.** The seven-ideal scorecard has no identity axis. Negative finding.
+- **Keyhive** (`github.com/inkandswitch/keyhive`, pre-alpha, active to 2026-09-04; `beelay-core`, `keyhive_core`, `keyhive_wasm`; README: *"DO NOT use this release in production… has not been through a security audit"*). Its notebook (https://www.inkandswitch.com/keyhive/notebook/) states under **Antigoals**: *"Keyhive deliberately excludes user identity (i.e. the binding of a human identity to an application's identifier like a public key)."*
+- `design/README.md` admits the sync/secrecy tension and the IP leak: *"These connections do not in themselves depend on IP addresses, but if you use e.g. an HTTP transport then you will expose your IP address. We are interested in adding a mixnet transport or similar eventually, but is currently out of scope."*
+- **`design/threat_model.md` contains exactly one line: `# Threat Model`.** It is an empty stub. That is a finding.
+- **`design/edge_names.md` is the closest thing in the whole survey to a per-identity contact view** — and it documents giving that property up. Pet names: *"each agent does the binding themselves. Since you are the root of trust, this list of bindings is fully trusted and kept private."* Edge names (after Spritely): *"Edge names (EN) **relax the PN privacy restriction** to gain a minimalist name discovery system. Instead of a root authority that hands out unique names, each agent MAY share its name bindings."* Marked `[!CAUTION] edge names SHOULD NOT be considered authoritative.` So the private-address-book property is explicitly traded away for discovery.
+- **NEW AND DIRECTLY RELEVANT: `inkandswitch/onomancy`** — *"a local-first name system,"* first pushed ~2026-09-01, active 2026-09-03, plus `onomancy-react` and `onomancy-demo`. Alpha ("Interfaces, wire formats, and specifications change without notice"). Three name forms: `automerge:3RFyJz…/foo` (self-certifying, **shareable: yes**), **`~/bob/pics` (local petname, authority = "your signed root doc", *shareable: **no***, `Anchor::Local — never leaves this device`)**, `@expede.wtf/foo` (DNSSEC-rooted, shareable). Built on Automerge + Keyhive.
+  - Onomancy's `design/limitations.md` is the most candid privacy admission I found: **"## Privacy Is Bounded, Not Engineered — Resolution metadata leaks are documented, not eliminated: binding fetches reveal interest to resolvers and servers, gossip reveals your binding set to peers, and namestore contents are plaintext to everyone you sync with. There is no query privacy in the GNS sense and no anonymity set anywhere. Participation in the DNS anchor is publicly observable by construction (`_onomancy` exists or it doesn't)."**
+  - `design/security.md` #Privacy gives a per-event exposure table: resolving `~/bob/pics` → *"nobody — local reads over synced replicas"*; first fetch of a binding → *"resolver, network, and server learn interest in that name."* Mitigation at v0: **DoH only** — *"No mitigation at v0 beyond DoH; noted as a known property."*
+  - It also rejects transparency logs **on exactly the roster grounds this question is about**: *"CT-style enforcement… is rejected outright: it breaks record-first offline verification, makes log operators a liveness and governance dependency, and **creates a globally enumerable roster of participants**."*
+  - **But:** the petname root is "your signed root doc" (singular). Onomancy names *others* privately; it does not model one person holding several mutually-blind roots. No contact-list-per-identity.
+
+---
+
+## 5. IROH / n0-computer — EndpointID, and a change worth noting
+
+Docs moved to https://docs.iroh.computer (Mintlify). **`NodeId` has been renamed `EndpointID`.**
+- https://docs.iroh.computer/concepts/endpoints.md: *"Endpoints have a EndpointID (the public half of an Ed25519 keypair)… Generally, an application will have a single endpoint instance."* Crucially: **"By default, creating an endpoint generates a new random identity each time — a fresh keypair, and therefore a new EndpointID. If you want the same EndpointID to persist across restarts… store the endpoint's SecretKey and load it on every launch."** So the key is *ephemeral by default and persistent by opt-in* — better than the older "NodeId is your device" framing, and it means separate apps on one device get separate EndpointIDs unless the developer reuses a key. But the docs' own advice ("an application will have a single endpoint instance… This will result in more optimal network behaviour") pushes toward one identity per app.
+- https://docs.iroh.computer/concepts/security-privacy.md, "What can a relay see?": ***"The identities of the devices connected to it, which pairs are exchanging traffic, when, and how much."*** And: *"That connection metadata is a real disclosure, and it is a fair thing to care about."*
+- What leaves the network: *"A small signed record published to `dns.iroh.link`, containing the device's public key and which relay it is using."* Internal IPs are filtered out by default.
+- **Admitted gaps:** relay-only mode is *"Upcoming"* and single-hop with *"Trust required"*; multi-hop relay routing *"is not currently on the near-term roadmap"* and *"would not be equivalent to onion routing."* Tor transport exists but requires both peers to run it.
+- **No multi-identity model, no contact list.** Any two identities sharing one Endpoint are trivially linked by the relay.
+
+---
+
+## 6. DELTA CHAT — multi-profile SHIPPED; the linkage warning is missing
+
+- **Multi-profile is shipped on every platform.** FAQ (https://delta.chat/en/help): *"A profile is a name, a picture and some additional information for encrypting messages. A profile lives on your device(s) only… you can tap your profile image in the upper left corner to Add Profiles or to Switch Profiles. **You may want to use separate profiles for political, family or work related activities.**"* Each profile is a distinct email/chatmail account with its own local DB and its own contacts. Marketing line: *"Pervasive multi-profile and multi-device support on all platforms."*
+- **Explicitly recommended as a compartmentalization tool**, FAQ "How to protect metadata and contacts when a device is seized?": *"we recommend to use a chatmail relay to create chat profiles using random addresses… Delta Chat apps on all platforms support multiple profiles so you can easily use situation-specific profiles next to your 'main' profile… if a device is seized then chat contacts using short-lived profiles can not be identified easily."*
+- **Metadata posture (2026-03-31, https://delta.chat/en/2026-03-31-zero, releases 2.48+):** full Header Protection per **RFC 9788** (Subject, To, group headers, plus Auto-Submitted, References, In-Reply-To all encrypted); **Date header randomized ±5 days** *"preventing timestamp-correlation from attackers with access to temporary server message archives"*; **SecureJoin v3** encrypts all QR/invite handshake messages; **OpenPGP anonymous recipients enabled** (no key IDs in messages). Servers see only *"Sender and receiver addresses, randomly generated by default"* and message size.
+- **Audits (real, and citable):** Cure53, published 2023-03-27 (https://delta.chat/en/2023-03-27-third-independent-security-audit) covering TLS/networking libraries and the mailcow/mailadm server guide — 8 findings, 1 High (mailcow IMAP-Sync), 1 Medium (mailadm bot commands), 4 Low, 2 Info. Prior audits by **Include Security in 2019 and 2020** covering the pure-Rust PGP implementation and Autocrypt/CounterMITM. Also a 2024-03-25 cryptographic analysis of SecureJoin.
+- **The admissions and the gap:**
+  - No Sealed Sender: *"No, not yet… it might still be worthwhile to protect relational metadata between addresses… an implementation has not been agreed as a priority yet."*
+  - No forward secrecy, no PQC — both deferred to Autocrypt v2, *"scheduled for full implementation in 2026."*
+  - IP: *"The used relays need to know your IP Address… If you see your IP Address as a risk, we recommend to use a VPN for the whole system."*
+  - **THE GAP:** the FAQ tells users to run political, family, and work profiles side by side on one device, and separately tells them relays see their IP — but **nowhere connects the two.** There is no warning that a relay operator (or two colluding relays) sees several randomly-generated addresses arriving from one IP, at one time, with one client fingerprint. Delta Chat ships per-profile contact lists and a device-level profile switcher, and does not document the cross-profile linkage that switcher implies.
+
+---
+
+## 7. KEYBASE — the opposite design; abandoned
+
+https://book.keybase.io/account: *"Your username, devices, proofs, and followers are **visible on your Keybase profile**."* Identity is a single username bound to a **public, append-only sigchain**; "following" is a public cryptographic act (a signed snapshot of the other party's identity), and proofs are deliberately published to Twitter/GitHub/DNS to *link* identities across platforms. Teams (https://book.keybase.io/docs/teams) are shared-key groups with per-team sigchains, PUK, Cascading Lazy Key Rotation, Seitan invite tokens, Fast Team Loader, Box Auditor — a **group** mechanism, not a per-identity contact view. Server-mediated throughout. One human = one account, by construction. Book footer reads **"(C) Keybase — 2022"**; Zoom acquisition May 2020; effectively unmaintained. **Anti-example, not a candidate.**
+
+---
+
+## 8. NOSTR — no multi-identity NIP exists; the contact list is a public event
+
+Checked the full NIPs repo (`nostr-protocol/nips`, cloned 2026-09-04).
+- **NIP-02 "Follow List" (`final`) is a plaintext public event, kind 3** — and it carries **petnames in the clear**: `["p", <32-byte hex key>, <relay URL>, <petname>]`. Your private nickname for someone is broadcast to every relay. *"Every new following list that gets published overwrites the past ones."*
+- **NIP-51** does add encrypted list items (NIP-44 self-encryption, ciphertext in `.content`), including private relay lists (10013) and follow sets (30000) — but this is a per-npub feature, not identity separation.
+- **NIP-17 / NIP-59 (gift wrap)** genuinely do hide DM metadata: rumors unsigned (deniability), seals hide content/recipient, gift wraps use **random keys** for the outer author. NIP-17's own "Benefits & Limitations" claims *"No Metadata Leak… Senders and receivers cannot be linked with public information alone"* and *"No Public Group Identifiers."* Stated limitation: *"having to send a separate encrypted event to each receiver. Group chats with more than 10 participants should find a more suitable messaging scheme."* Relays SHOULD gate kind:1059 behind NIP-42 AUTH — a **SHOULD**, dependent on relay operators.
+- **NEGATIVE FINDING, checked by grep across every NIP:** there is **no NIP on multiple identities, account switching, personas, or identity separation**. Searches for `multiple accounts|multiple identities|account switch|separate identit` and for `anonym` across all `.md` files returned **zero hits**. The only identity-adjacent NIP is **NIP-39, "Linking Profiles to Other Platforms"** — which does the *opposite*, correlating an npub with external accounts.
+- **Measured linkage work: NOT FOUND.** The one substantial academic security analysis of Nostr is **Kimura, Ito, Minematsu, Shiraki, Isobe, "Not in The Prophecies: Practical Attacks on Nostr," IEEE EuroS&P 2025, pp. 585–606, DOI 10.1109/eurosp63326.2025.00040** (preprint: https://eprint.iacr.org/2025/1459, received 2025-08-12; 1.1M registered users cited). It covers **forgery, key-replace, cache-based forgery, and a CBC-malleability + link-preview confidentiality attack on encrypted DMs — not npub linkage via relay metadata.** No arXiv results for nostr+relay+privacy. **I found no measured study of npub linkage through relay metadata. NOT REACHED / likely does not exist.**
+
+---
+
+## 9. SSB — the follow graph is public by protocol design. Confirmed.
+
+Source: the official Scuttlebutt Protocol Guide, https://ssbc.github.io/scuttlebutt-protocol-guide/
+- **Multiple identities are normal and unmanaged:** *"An identity is an Ed25519 key pair and typically represents a person, a device, a server or a bot. **It's normal for a person to have several Scuttlebutt identities.**"* Generated on first run into `.ssb/secret`; *"no coordination or permission is required to create a new one."* Identities are device-bound feeds — *"the identity is also called a feed ID."*
+- **THE CITATION YOU ASKED FOR:** *"When a user wants to follow another feed their client will post a message to their own feed"* — a plaintext `{"type":"contact","contact":"@sxlUkN…","following":true}` message in the signed append-only feed — and **"Follow graph: Because each feed publicly announces which feeds it is following, clients can arrange feeds into a graph of who follows who."** Unfollows are equally public (`following: false`), and so are blocks (`blocking: true`, visible in the EBT replication example).
+- Replication radius makes this worse, not better: *"One implementation, Patchwork, shows messages up to 2 hops out by default. Messages from feeds 3 hops out are replicated to help keep them available for others."* **Your follow graph is fetched and stored by strangers three hops away.** Joining a pub means following it and being followed back, which *"works because everyone is now within 2 hops of each other"* — i.e. joining a pub exposes your graph to that pub's whole membership.
+- **Metafeeds (design-stage) are the only attempt at compartmentalization:** *"By having the identities listed in their own feed, a user can have private identities that are known only to them and those they trust."* And **Fusion Identity** exists to do the *opposite* — deliberately link a person's per-device identities: *"Each device still uses its own identity, there is no avoiding that, but they can now share fusion identities… Replicating multiple feeds from the same user can be done by following the fusion identity."*
+- **Net:** SSB gives you many identities and no way to keep them apart, because the act of following is a public broadcast. Two of your identities following overlapping sets of people is visible to anyone within replication range.
+
+---
+
+## SUMMARY TABLE
+
+| System | Multi-identity | Per-identity private contact list | No system-level roster | Status |
+|---|---|---|---|---|
+| **VeilidChat** | **YES** (LocalAccount + SuperIdentity, hidden accounts) | **YES — shipped.** `Account.contact_list` = DHT-private, account-owned; device tag is account-scoped | **NO** — local `LocalAccount` table; one shared Veilid node/NodeId | **Beta only** (TestFlight/Play beta; "no official builds yet") |
+| **Delta Chat** | **YES** (multi-profile, all platforms) | **YES** — separate account DB per profile | **NO** — device profile switcher; shared IP to relays, undocumented | **Shipped, GA**, 2.48+, 3 audits |
+| Willow / Meadowcap | No (a key = an identity) | No contact list at all | n/a | Data model + Meadowcap in `willow25` 0.7.9; sync = Proposal; `willow-rs` moved to Codeberg, GH archived; iroh-willow dormant |
+| Earthstar | Author keypairs only; multi-identity UI abandoned 2021 | No | n/a | Stalled — 11.0.0-beta.2, 2024-05-21 |
+| Keyhive / Ink & Switch | Identity is an **antigoal** | No | n/a | Pre-alpha, no audit, **empty threat model** |
+| Onomancy (I&S) | Single signed root doc | **Petnames are local-only and never leave the device** — closest primitive | Rejects logs *because* they create a roster | **Alpha**, ~Sep 2026 |
+| iroh | Ephemeral EndpointID by default | No | Relay sees *"identities of the devices… which pairs are exchanging traffic"* | Shipped |
+| Nostr | Manual key juggling; **no NIP exists** | **No — NIP-02 kind:3 is public, petnames in cleartext** | n/a | Shipped protocol |
+| SSB | "Normal to have several" | **No — follow graph is public by design** | n/a | Shipped; metafeeds design-stage |
+| Keybase | One public account | **No — followers public on your profile** | n/a | Abandoned (© 2022) |
+
+## THE GENERAL SHAPE
+
+Three postures, and only one of them is the one you're asking about:
+
+1. **Identity declared out of scope** (Keyhive, Willow, iroh, Earthstar). The capability or the key *is* the identity; nobody models a person holding several. Keyhive says so outright; Willow's Meadowcap delegation chain actively *names* your grantors to whoever you present a capability to.
+2. **Identity as public social fact** (SSB, Nostr, Keybase). The follow/contact edge is a signed public artifact. Multiple identities are permitted and immediately re-linked by the graph, the shared IP, or the relay.
+3. **Identity as compartment** (VeilidChat, Delta Chat). Both ship the per-identity private contact list. Both still keep a local roster and share one network egress point across every identity — and only VeilidChat's *code* shows anyone thinking about that (account-scoped device tags, wipe planner, hidden accounts). Neither project's *documentation* states the residual linkage.
+
+**The thing nobody has built:** a device that holds several identities with no enumerable list of them, where the network cannot tell that two of them sit on the same machine. VeilidChat gets the contact-list half right in shipped code; the roster half and the shared-node half are open everywhere. Onomancy independently articulates why the roster half matters — *"a globally enumerable roster of participants"* as a reason to reject an entire mechanism — but applies it to transparency logs, not to a person's own identities.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;V8UA7_YVc1zKVXoeiy52J506d1dCvvGIlHv8U7_BuK4
+
+<<^ code="&#x0004;" -> to=? >>

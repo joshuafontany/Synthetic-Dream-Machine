@@ -1,0 +1,373 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/scope-note-58ffff >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/scope-note-58ffff.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: SCOPE NOTE. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/scope-note-58ffff"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! SCOPE NOTE
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 34,076 characters
+
+````
+## SCOPE NOTE
+
+WebSearch/OpenAlex not used (budget exhausted, per instruction). Everything below came from Europe PMC full-text XML, ar5iv, Crossref, arXiv API, direct PDF fetches, Wayback CDX, and HN Algolia. Two royalsocietypublishing.org URLs returned **HTTP 403** to WebFetch; both papers were recovered in full through Europe PMC instead.
+
+---
+
+# QUESTION 1 — DOES READER-SIDE CURATION SCALE PAST ONE PERSON'S ATTENTION?
+
+## 1.1 Gonçalves, Perra & Vespignani 2011 (the source claim)
+
+**URL:** https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0022656 · DOI 10.1371/journal.pone.0022656 · PLoS ONE 6(8):e22656 · **live fetch, no Wayback needed**
+
+Abstract, verbatim:
+
+> "Microblogging and mobile devices appear to augment human social capabilities, which raises the question whether they remove cognitive or biological constraints on human communication. In this paper we analyze a dataset of Twitter conversations collected across six months involving 1.7 million individuals and test the theoretical cognitive limit on the number of stable social relationships known as Dunbar's number. We find that the data are in agreement with Dunbar's result; users can entertain a maximum of 100–200 stable relationships. Thus, the 'economy of attention' is limited in the online world by cognitive and biological constraints as predicted by Dunbar's theory. We propose a simple model for users' behavior that includes finite priority queuing and time resources that reproduces the observed social behavior."
+
+Hard numbers:
+- **380 million tweets**, **25 million conversations**, **1.7 million individuals**, **six months**.
+- The measured quantity is not "number of friends" but **average weight per outgoing connection**, which "reaches a maximum between 100 and 200 friends."
+- Conclusion: the model "offers support to Dunbar's hypothesis of a biological limit to the number of relationships than can be simultaneously maintained by a single individual."
+
+**Confidence: HIGH** (full open-access text read directly).
+
+**Load-bearing caveat, mine not theirs:** the ceiling is an *inflection in per-tie investment*, not a hard cap on tie count. Users in the dataset had far more than 200 followees; what saturates is attention per tie. Dunbar himself (below) calls this study out as not sampling "conventional everyday social communities in any meaningful sense."
+
+## 1.2 Dunbar 2016 — the direct online test
+
+**URL:** https://europepmc.org/articles/PMC4736918 (PMC4736918) · DOI 10.1098/rsos.150292 · R. Soc. Open Sci. 3:150292. *royalsocietypublishing.org returned 403; Europe PMC full text used.*
+
+Method: two UK national stratified random samples via OnePoll — **Sample 1 = 2000 adults** (regular social media users, mean age 39, 45.2% male); **Sample 2 = 1375 adults** (full-time professionals, mean age 37.4, 39.1% male). Friend counts collected on 14- and 16-point categorical scales, 0 to 1000+.
+
+Verbatim results:
+
+> "The mean number of friends is 155.2 and 182.8 in the two samples, respectively. Neither of these differs significantly from the value of 150 (95% CI = 100–200) predicted by the SBH [18] (z=0.20, p=0.842; z=1.29, p=0.198, respectively)."
+
+> "On average, respondents in Sample 1 considered that only 27.6% of their Facebook friends could be considered 'genuine' (i.e. close) friends, with a strong modal value between 0 and 10%."
+
+> "The mean values are 4.1 and 13.6, respectively, for the support clique (friends on whom you would depend for emotional/social support in times of crisis) and sympathy group (close friends)."
+
+> "The second main finding is that the two samples provide a direct test of whether online SNSs allow individuals to have larger social networks than is possible offline because SNSs allow one or more of the constraints that limit offline social network size to be circumvented. The results clearly suggest that they do not."
+
+> "only 14.2% of respondents in Sample 1 listed more than 300 friends (i.e. significantly more than the average offline network) and only 13.4% of those in Sample 2 did so."
+
+> "Respondents who had unusually large networks did not increase the numbers of close friendships they had, but rather added more loosely defined acquaintances into their friendship circle simply because most social media sites do not allow one to differentiate between these layers."
+
+Also verbatim, Dunbar's own criticism of the Gonçalves-type evidence:
+
+> "Two attempts to examine the size of extended online social networks with seriously large samples have considered communities formed among twitterati (i.e. followers of a particular twitter account) [52] and scientific email communities [53]. Both claimed evidence for a natural community size between 100 and 200, but neither of these can really be considered conventional everyday social communities in any meaningful sense."
+
+Layer canon stated verbatim: "In humans, these layers have values that approximate 5, 15, 50 and 150, and extend beyond this in at least two further layers to 500 and 1500."
+
+**Confidence: HIGH** on what the paper says. **Confidence MEDIUM-LOW on the finding's strength** — self-reported friend counts on a coarse categorical scale from a commercial polling panel, commissioned by a biscuit company's PR agency ("the WildCard agency on behalf of the Thomas J. Fudge's company" — verbatim from Methods). That provenance is in the paper itself.
+
+## 1.3 The refutation — Lindenfors, Wartel & Lind 2021
+
+**URL:** https://europepmc.org/articles/PMC8103230 (PMC8103230) · DOI 10.1098/rsbl.2021.0158 · Biol. Lett. 17:20210158. *403 direct; Europe PMC used.*
+
+Abstract, verbatim:
+
+> "A widespread and popular belief posits that humans possess a cognitive capacity that is limited to keeping track of and maintaining stable relationships with approximately 150 people. This influential number, 'Dunbar's number', originates from an extrapolation of a regression line describing the relationship between relative neocortex size and group size in primates. Here, we test if there is statistical support for this idea. Our analyses on complementary datasets using different methods yield wildly different numbers. Bayesian and generalized least-squares phylogenetic methods generate approximations of average group sizes between 69–109 and 16–42, respectively. However, enormous 95% confidence intervals (4–520 and 2–336, respectively) imply that specifying any one number is futile. A cognitive limit on human group size cannot be derived in this manner."
+
+Results, verbatim:
+
+> "Our results (table 1) reveal that estimates of expected human group sizes vary depending on method and variable choice (Bayesian approximations between 69.2 and 108.6 and GLE approximations between 16.4 and 42.0). Note that these estimates (as was true for Dunbar's original estimated group size) are averages, not estimates of upper bounds. If an upper constraint from this type of statistical reasoning was to be determined, a better approach would be to specify the upper boundary of the 95% confidence interval. As is shown in table 1, however, 95% confidence intervals yield enormous variation in their estimates, 3.8–520.0 and 2.1–336.3, respectively, and thus indicate upper limits far exceeding 150 in almost all cases."
+
+Table 1 rows recovered: `group size ~ neocortex + rest of brain (n = 71)` → **69.2 [3.8, 292.0]**; `group size ~ neocortex/rest of brain (n = 71)` → **108.6 [4.6, 520.0]**.
+
+Discussion, verbatim:
+
+> "Thus, ecological research on primate sociality, the uniqueness of human thinking and empirical observations all indicate that there is no hard cognitive limit on human sociality. Our reanalysis provides the last piece of evidence needed to disregard Dunbar's number."
+
+> "It is our hope, though perhaps futile, that this study will put an end to the use of 'Dunbar's number' within science and in popular media. 'Dunbar's number' is a concept with limited theoretical foundation lacking empirical support."
+
+They also quote de Ruiter et al. verbatim:
+
+> "Dunbar's assumption that the evolution of human brain physiology corresponds with a limit in our capacity to maintain relationships ignores the cultural mechanisms, practices, and social structures that humans develop to counter potential deficiencies."
+
+**Confidence: HIGH** on text. **Scope caveat that matters for a design brief:** Lindenfors et al. attack *the derivation* (the primate-neocortex regression), not the *behavioral* measurements. The Twitter/phone/Facebook studies measure a real saturation in observed communication effort; Lindenfors shows that number cannot be justified as a *cognitive constant* extrapolated from primate brains. These two literatures do not actually collide head-on. **Confidence MEDIUM** on that reading being the consensus one.
+
+## 1.4 Turnover — the finding that most matters here
+
+### Saramäki et al., "The persistence of social signatures in human communication"
+**URL:** https://arxiv.org/abs/1204.5602 (ar5iv full text: https://ar5iv.labs.arxiv.org/html/1204.5602) · published PNAS 111(3):942–947, 2014.
+
+- **24 participants** (12M/12F), **18 months**, tracked across the school→university/work transition, mobile call records plus surveys.
+- Network overlap between successive intervals, verbatim: **"⟨J(I₁,I₂)⟩=0.22±0.09 and ⟨J(I₂,I₃)⟩=0.27±0.09"** for whole networks; **"0.36±0.13"** and **"0.44±0.10"** for the top-20 contacts.
+- Signature stability: **"82%±12%"** of cross-individual signature distances exceeded the individual's own self-distance across intervals.
+
+**Reading:** the *shape* of attention allocation is a personal constant; the *identities* filling the slots churn hard — roughly three quarters of alters turn over in 18 months, and even the top 20 slots turn over ~55–65%.
+
+**Confidence: HIGH** on numbers, **MEDIUM** on generality — n=24, and a life-transition cohort, which maximizes turnover.
+
+### Miritello et al., "Limited communication capacity unveils strategies for human interaction"
+**URL:** https://arxiv.org/abs/1304.1979 (ar5iv: https://ar5iv.labs.arxiv.org/html/1304.1979) · Sci. Rep. 3:1950, 2013.
+
+- **~20 million people**, **19 months**, **~700 million ties** (mobile CDRs).
+- Verbatim: **"individuals exhibit a finite communication capacity, which limits the number of ties they can maintain active."**
+- Verbatim: **"on average people activate/deactivate about 8 (reciprocated) ties in a period of 7 months"**; **"20% of users in our database activate/deactivate more than 15 ties in that period"**.
+- Verbatim: **"average time between tie communication events is ⟨δt_ij⟩ = 14 days (with σ = 18 days)"**.
+- Social persistence **"around 75%"** over seven months.
+- Verbatim: **"men have an overall higher communication capacity than women and that this capacity decreases gradually for both sexes over the lifespan"** (ages 16–70).
+
+**Confidence: HIGH.** This is the largest-N support for a capacity constraint anywhere in this set, and it is the one that frames the constraint as *throughput* rather than *inventory* — which is the framing that generalizes to feeds.
+
+**NOT REACHED:** Miritello et al., "Time as a limited resource: Communication strategy in mobile phone networks," *Social Networks* 35(1), 2013 — arXiv listing not surfaced by my queries; only the Sci. Rep. companion was retrieved.
+
+### Hodas & Lerman — the attention-division law
+**URL:** https://arxiv.org/abs/1205.2736 (ar5iv: https://ar5iv.labs.arxiv.org/html/1205.2736) · "How Visibility and Divided Attention Constrain Social Contagion" (published as Sci. Rep. 4:4343, 2014).
+
+Verbatim: **"Figure 3 shows that this probability decays with the number of friends, denoted nf. The solid line is the fitted function 𝒫nf = 0.22 nf^0.21/(nf+0.53)."** And: **"the more friends a user has, the more this problem is exacerbated, and the probability to respond to any individual friend's tweet is proportionally reduced."**
+
+**Confidence: MEDIUM-HIGH** — the functional form was read out of the ar5iv render; the exponents are as printed but I did not independently verify against the published Sci. Rep. version.
+
+**This is the cleanest quantitative statement of the scaling question you asked.** Per-source responsiveness falls roughly as nf^−0.79 — near-inverse. Aggregate attention is conserved; adding sources dilutes, it does not accumulate.
+
+## 1.5 Layer structure at online scale (Arnaboldi / Passarella / Conti / Dunbar)
+
+**URL:** https://arxiv.org/abs/2206.02422 (ar5iv: https://ar5iv.labs.arxiv.org/html/2206.02422) — "Ego Network Structure in Online Social Networks and its Impact on Information Diffusion."
+
+- **Facebook: 91,347 ego networks. Twitter: 394,238 ego networks.**
+- Twitter layers: **C1 = 1.66 · C2 = 5.06 · C3 = 12.87 · C4 = 32.66 · C5 (active network) = 97.47**
+- Facebook layers: **C1 = 4.70 · C2 = 15.31 · C3 = 44.77 · C4 = 132.50**
+- Verbatim: **"the ratio between the size of adjacent circles appears to be a constant with a value around 3"**
+- Verbatim: **"The active network size coincides with the Dunbar's number… for a total of about 150 members."**
+
+**Confidence: MEDIUM-HIGH.** Numbers are as extracted from the ar5iv render. Note the Twitter active network measures **97.47**, meaningfully below 150 — the "coincides with Dunbar's number" gloss is the authors' framing, not a tight fit.
+
+**PARTIALLY REACHED:** the companion paper https://arxiv.org/abs/2205.13980 ("The Structure of Online Social Networks Mirror Those in the Offline World," Dunbar et al.) redirected ar5iv → arxiv.org/abs and I did not re-fetch. Its layer numbers are believed consistent with the above but **NOT INDEPENDENTLY CONFIRMED**.
+
+## 1.6 GROUP memberships (not dyads) — the part you specifically asked for
+
+This literature is much thinner than the dyadic one. Two solid sources:
+
+### Hamilton et al., "All Who Wander: On the Prevalence and Characteristics of Multi-community Engagement" (WWW 2015)
+**URL:** https://arxiv.org/abs/1503.01180 (ar5iv: https://ar5iv.labs.arxiv.org/html/1503.01180)
+
+- Reddit: **157K users with 50+ posts** who first posted Jan 2008–Jan 2012; **76.6M posts**.
+- **Average communities per user: 28.85; median: 26.00.** (Average posts/user 152.04, median 89.)
+- DBLP comparison: **average venues 38.08, median 34.00**.
+- Verbatim: **"Redditors post to 5 communities in their first 10 posts and then post to 2.5 new communities every 10 posts."**
+- Verbatim: **"Users post to around 5 communities every 10 posts"**, with **"only around 2.5 of them are ones that they have ever posted to."**
+- Abandonment, verbatim: **"Users rack up more abandoned communities than return engagements"** — communities posted to exactly once outnumber those posted to twice or more.
+
+**Confidence: HIGH** on the numbers; **MEDIUM** on interpretation — this is a *cumulative lifetime* count (~29 communities), and the *concurrent active* count implied by the window statistics is **~5 per 10 posts, of which only ~2.5 are repeats**. That concurrent figure (≈2–5) is the design-relevant one, and it is roughly an order of magnitude below the dyadic-tie ceiling.
+
+### Hamilton et al., "Loyalty in Online Communities" (ICWSM 2017)
+**URL:** https://arxiv.org/abs/1703.03386 (ar5iv: https://ar5iv.labs.arxiv.org/html/1703.03386)
+
+- All Reddit 2014: **"approximately 10⁸ comments made by 10⁷ users in 10⁴ communities."**
+- **242 communities studied; 177,593 loyal users and 1,989,530 vagrants** — an ~11:1 vagrant:loyal ratio.
+- Loyal and vagrant users **"contribute about 10% each of all of the comments made to a community."**
+- Median month-over-month loyalty rate across **1,440 communities: 60.7%**.
+- Verbatim framing: **"When users have the choice to engage with a variety of different communities, they often become loyal to just one, focusing on that community at the expense of others."**
+
+**Confidence: HIGH** on numbers as extracted. **The 60.7% median monthly retention implies ~40% monthly membership churn** — group memberships appear to churn *faster* than dyadic ties (75% seven-month persistence in Miritello).
+
+### **NOT REACHED / NEGATIVE RESULTS — group-count ceilings**
+- **No study measuring a ceiling on the number of groups/channels/servers a person can concurrently sustain was found.** arXiv queries `"community membership" AND turnover AND online`, `"multicommunity" AND engagement`, and `abs:"number of communities" AND users AND online` returned **zero relevant hits**. Crossref queries on feed/algorithm choice returned nothing on point.
+- No Discord-server-count, Slack-workspace-count, or Facebook-Groups-count study reached.
+- **This is a genuine gap in the literature, not a gap in my search coverage** (three independent query framings, all empty). Treat "how many groups can one person hold" as **unmeasured**. The Reddit ~29-lifetime / ~2.5-repeat-per-window figures are the closest available proxy, and they come from one platform and one research group.
+
+---
+
+# QUESTION 2 — DEFAULTS AND CHOICE OVERLOAD
+
+## 2.1 The defaults meta-analysis — Jachimowicz, Duncan, Weber & Johnson 2019
+
+**URL/DOI:** https://doi.org/10.1017/bpp.2018.43 · *Behavioural Public Policy* 3(2):159–186. Cambridge Core page returned HTTP 500 to WebFetch; **the full abstract was recovered verbatim from the Crossref JATS record**.
+
+Verbatim:
+
+> "To answer these questions, we conduct a literature search and meta-analysis of the 58 default studies (pooled *n* = 73,675) that fit our criteria. While our analysis reveals a considerable influence of defaults (*d* = 0.68, 95% confidence interval = 0.53–0.83), we also discover substantial variation: the majority of default studies find positive effects, but several do not find a significant effect, and two even demonstrate negative effects."
+
+> "Our analysis reveals two factors that partially account for the variability in defaults' effectiveness. First, we find that defaults in consumer domains are more effective and in environmental domains are less effective. Second, we find that defaults are more effective when they operate through **endorsement** (defaults that are seen as conveying what the choice architect thinks the choice-maker should do) or **endowment** (defaults that are seen as reflecting the status quo)."
+
+**Headline: d = 0.68, 95% CI [0.53, 0.83], k = 58, pooled n = 73,675.**
+
+**Confidence: HIGH** on the numbers (Crossref-deposited publisher abstract). **Confidence MEDIUM** that I have the full moderator picture — I did not reach the body text, so the per-moderator effect sizes and any publication-bias correction are **NOT REACHED**.
+
+## 2.2 Johnson & Goldstein 2003, "Do Defaults Save Lives?"
+
+**URL:** https://www.dangoldstein.com/papers/DefaultsScience.pdf (author-hosted, live) · *Science* 302:1338–1339 · DOI 10.1126/science.1091721.
+
+Numbers as printed in the figures and text:
+- **Online experiment: 161 respondents.** Consent rates: **opt-in 42%, opt-out 82%, neutral (mandated choice) 79%.**
+- **Country-level effective consent rates**, opt-in (gold) vs opt-out (blue): opt-in values **4.25, 17.17, …**; opt-out values **99.98, 98, 99.91, 99.97, 99.5, 99.64, 85.9**.
+- Verbatim: **"the four opt-in countries (gold) had lower rates than the six opt-out countries (blue). The two distributions have no overlap, and nearly 60 percentage points separate the two groups."**
+- Verbatim on *actual* donations (not just consent): **"When donation is the default, there is a 16.3% (P < 0.02) increase in donation, increasing the donor rate from 14.1 to 16.4 million"** [per million population]. Gimbel et al. estimate, verbatim: **"an increase in the rate from 10.8 to 16.9, a 56.5% increase."**
+- The Netherlands natural experiment, verbatim: a 1998 national registry plus **"a mass mailing (of more than 12 million letters in a country of 15.8 million) asking citizens to register, which failed to change the effective consent rate."**
+
+**Confidence: HIGH.** Note the load-bearing gap the paper itself flags: the ~60-point default effect is on *registration*, while the effect on *actual transplants* is 16.3%. Registration is cheap; behavior is not. That gap is the direct analogue of "subscribed to a feed" vs "reads the feed."
+
+## 2.3 CHOICE OVERLOAD — the near-zero meta-analysis
+
+**Scheibehenne, Greifeneder & Todd 2010, "Can There Ever Be Too Many Options? A Meta-Analytic Review of Choice Overload,"** *Journal of Consumer Research* 37(3):409–425 · DOI 10.1086/651235.
+**URL:** https://www.scheibehenne.de/ScheibehenneGreifenederTodd2010.pdf (author-hosted; live fetch succeeded. Wayback capture also confirmed: http://web.archive.org/web/20260820041254/https://www.scheibehenne.de/ScheibehenneGreifenederTodd2010.pdf — **capture date 2026-08-20**)
+
+Abstract, verbatim:
+
+> "In a meta-analysis of 63 conditions from 50 published and unpublished experiments (N = 5,036), we found a mean effect size of virtually zero but considerable variance between studies. While further analyses indicated several potentially important preconditions for choice overload, no sufficient conditions could be identified."
+
+Results section, verbatim:
+
+> "The mean effect size of choice overload across all 63 data points according to equation 1 is **D = 0.02 (95% confidence interval [CI95] −0.09 to 0.12)**. The between-study variance is **τ² = 0.12 (CI95 −0.08 to 0.25)**… For the data set on hand, **Q(62) = 192 (p < .001)**… The presumably more informative I²-statistic… yields **I² = 68%**, also implying medium to high heterogeneity."
+
+Robustness, verbatim:
+
+> "If the data set was trimmed by 20% by excluding the six studies with the highest effect sizes and the six studies with the lowest, **D_trimmed = 0.001 (CI95 −0.08 to 0.07)**. The unexplained variance in the trimmed data set reduced to **I² = 22%**, indicating little heterogeneity, which hints that most of the heterogeneity (but not the small mean effect size) in the original data set might be due to a few studies reporting large effect sizes in both directions."
+
+And: **"The overall mean effect size across 63 conditions from 50 experiments in our meta-analysis was virtually zero."**
+
+**Confidence: HIGH** — read directly out of the PDF text layer.
+
+**This is the strongest negative result in the brief.** Defaults are a large, robust effect (d = 0.68). Choice overload, as an average main effect, is *not an effect at all* (D = 0.02, CI straddling zero, and 0.001 after trimming). Any design argument of the form "too many feed options will paralyze users" has **no meta-analytic support**. The correct opposing argument is the default effect, which is separately and much better evidenced.
+
+## 2.4 Iyengar & Lepper 2000 — the study the near-zero meta-analysis dissolves
+
+**DOI:** 10.1037/0022-3514.79.6.995 · *JPSP* 79(6):995–1006.
+**URL:** https://faculty.washington.edu/jdb/345/345%20Articles/Iyengar%20%26%20Lepper%20(2000).pdf (course-hosted PDF, live)
+
+Study 1 (the jam study), verbatim fragments:
+- Stimulus: Wilkin & Sons jams; **6 flavors (limited) vs 24 flavors (extensive)**; price **$4–6**; all approachers got a **$1-discount coupon**, redeemable over one week.
+- Booth stopping: **"selection display of jams, 60% (145) actually stopped at the booth. In contrast, of the 260 customers who passed the limited-selection display of jams, only 40% (104) stopped."** (i.e. the *large* assortment drew more traffic)
+- Purchase: **"Nearly 30% (31) of the consumers in the limited-choice condition subsequently purchased a jar of Wilkin & Sons jam; in contrast, only 3%…"** — **χ²(1, N = 249) = 32.34, p < .0001.**
+- Study 3 (essay): **"only 60% chose to complete the assignment"** in the extensive-choice condition.
+
+**Confidence: HIGH** on numbers. **Note:** the purchase-rate contrast rests on **31 purchases in one condition versus roughly 4 in the other** — a very small absolute cell, which is consistent with Scheibehenne et al. finding no replicable average effect.
+
+**NOT REACHED:** Chernev, Böckenholt & Goodman 2015, "Choice overload: A conceptual review and meta-analysis" (*J. Consumer Psychology*), which reports a *nonzero* effect conditional on four moderators and is the standard rebuttal to Scheibehenne. Crossref returned no abstract and I did not obtain full text. **Its absence materially weakens the "choice overload is nothing" reading** — treat Scheibehenne's null as the unconditional mean, not as a settled verdict.
+
+## 2.5 Applied to FEED / ALGORITHM selection
+
+### Fukuyama et al., Stanford Working Group on Platform Scale (Nov 2020)
+**URL (landing):** https://cyber.fsi.stanford.edu/publication/report-working-group-platform-scale
+**URL (PDF, fetched):** https://fsi-live.s3.us-west-1.amazonaws.com/s3fs-public/platform_scale_whitepaper_-cpc-pacs.pdf
+**Companion cited by Keller:** https://fsi-live.s3.us-west-1.amazonaws.com/s3fs-public/cpc-middleware_ff_v2.pdf
+
+The report **explicitly anticipates the default problem and proposes to legislate against it.** Verbatim:
+
+> "we consider it necessary to mandate that dominant search engines and social media companies allow users to choose among third-party filters. Moreover, the platforms might be compelled to alert users to the option of installing middleware and to require users to explicitly opt out of middleware use. **Middleware can serve its intended purpose only if it is used widely, and a default option that allows users to never consider installing middleware would severely limit its uptake.**"
+
+Also verbatim:
+
+> "Platforms could also offer their own middleware, on the condition that they do not favor their own product over those provided by third parties **or make their own middleware a default choice**."
+
+> "a business model for middleware providers must be sufficiently attractive to induce an adequate supply. The most logical approach would be to establish revenue sharing arrangements between the dominant platforms and the third-party providers of middleware."
+
+Epigraph, Jack Dorsey, 8 Aug 2020, verbatim:
+
+> "We need to open up and be transparent around how our algorithms work and how they're used, and maybe even enable people to choose their own algorithms to rank the content or to create their own algorithms, to rank it."
+
+**Confidence: HIGH** (direct PDF text).
+
+### Daphne Keller, "The Future of Platform Power: Making Middleware Work"
+**URL:** https://www.journalofdemocracy.org/articles/the-future-of-platform-power-making-middleware-work/ · *Journal of Democracy* 32(3), July 2021, pp. 168–172.
+
+Her four named problems, verbatim, with the on-point skepticism:
+
+> "Second, how is everyone going to get paid? **Without a profit motive for middleware providers, the magic will not happen, or it will not happen at large enough scale.** Something about business models—or, at a minimum, the distribution of ads and ad revenue—will have to change."
+
+> "Facebook deploys tens of thousands of people to moderate user content in dozens of languages. It relies on proprietary machine-learning and other automated tools, developed at enormous cost. **We cannot expect comparable investment from a diverse ecosystem of middleware providers.** And while most providers presumably will not handle as much content as Facebook does, they will still need to respond swiftly to novel and unpredictable material from unexpected sources. **Unless middleware services can do this, the value they provide will be limited, as will users' incentives to choose them over curation by the platforms themselves.**"
+
+*(That last clause is the closest thing in Keller to a direct claim that users will not pick alternative feeds. She frames it as a supply-side consequence — bad curation → no reason to switch — not as user apathy.)*
+
+The historical precedent, verbatim:
+
+> "Similar projects—such as the well-intentioned Internet Content Rating Association (ICRA), which failed in the early 2000s—have foundered on moderation costs before. ICRA's mission, like Fukuyama's, was to move control over content away from centralized gatekeepers, out closer to the edges of the network. The plan was to do so in part using customized browser settings, and in part by letting users choose from an ecosystem of trusted third-party curators. A user might subscribe to a block-list from her church… Or she might block most sexual content, but use an add-list from Planned Parenthood to preserve access to health information."
+
+> "**ICRA's third-party curators never showed up. Assessing all that content was hard and thankless, even when the internet was much smaller.** Of course, many things were different then—and, significantly, ICRA offered curators no way to make money. But its demise is a sobering reminder that curation costs matter."
+
+The privacy ceiling on what a third-party curator can even see, verbatim:
+
+> "On Facebook, they may miss out on content from over 80 percent of users (though good data on this are hard to come by). Even on Twitter, which is generally more public-facing, about 13 percent of posts are private. **A vendor lacking access to such large shares of content will have trouble offering useful curation, and even more trouble competing with Facebook itself**, which can see, assess, rank, and label everything in a user's feed."
+
+Her footnote 4 gives the underlying figure verbatim: Bailey et al., NBER WP 25843 — **"in 335 million user-weeks of data, the average user had 53.9 friends with 'public' statuses out of 328 total friends."** (https://www.nber.org/papers/w25843)
+
+The monoculture risk, verbatim:
+
+> "More troublingly, there is a risk that this model will end up spreading not just information, but major platforms' assessments of content. This could reimpose the very speech monoculture from which middleware was supposed to save us."
+
+And her framing device, verbatim:
+
+> "Every year, in my platform-regulation class, I draw a Venn diagram on the board with three interlocking circles: privacy, speech, and competition. Then we identify all the issues that fall at the intersection of two or more circles. Interoperability, including for content-moderation purposes, is always smack in the middle."
+
+**Confidence: HIGH** (full article text extracted from the live page).
+
+### The one piece of MEASURED uptake data — Bluesky custom feeds
+**URL:** https://arxiv.org/abs/2405.17571 (ar5iv: https://ar5iv.labs.arxiv.org/html/2405.17571) — Balduf et al., "Bluesky: Network Topology, Polarization, and Algorithmic Curation."
+
+Verbatim numbers:
+- **"39,639 feeds have been created by 18,352 active users"**
+- **"only 139 thousand out of 5 million users liked at least one feed"** — **≈2.8%**
+- **"139,033 Users have used this feature and liked feeds 295,902 times"**
+- **"On average, feeds only attracted two likes"**
+- Authors' conclusion, verbatim: **"while a large number of custom feeds have been created, users' uptake of them appears to be limited"**
+
+**Confidence: MEDIUM-HIGH** on the numbers; **MEDIUM** on the inference. **Important caveat the paper itself does not resolve:** *liking* a feed is not *subscribing to* or *reading* one. The paper does not report what fraction of users actually pin or read a non-default feed, so 2.8% is a **lower bound on engagement with a weaker signal**, not a measured switching rate. The paper explicitly does not state the default-retention fraction.
+
+**This is the only empirical uptake number I reached for reader-side algorithmic choice on a live platform, on the one platform purpose-built to make it easy.** That it is ~3% on a *self-selected, technically sophisticated early-adopter population* is the strongest available evidence bearing on your question — and it is thin, single-source, single-platform evidence.
+
+### Hogg & DiResta, "Enabling a Thriving Middleware Market," Tech Policy Press, 11 Apr 2025
+**URL:** https://www.techpolicy.press/enabling-a-thriving-middleware-market/ (Wayback capture also exists: 20250413162931)
+
+Verbatim: **"it is unclear how many users are aware of them. Broad user adoption of middleware will likely require some education."** And: **"funding models for protocol-based social media remain an open question."**
+The piece contains **no numerical adoption data**.
+
+**Confidence: MEDIUM** — extracted via WebFetch summary with quoted fragments; I did not read the raw page.
+
+---
+
+## NOT REACHED — the honest list
+
+1. **Chernev, Böckenholt & Goodman 2015** choice-overload meta-analysis (the moderated, nonzero counterpart to Scheibehenne). Materially weakens the "choice overload is nothing" claim.
+2. **Jachimowicz et al. body text** — only the publisher abstract via Crossref. Per-moderator effect sizes, publication-bias analysis, and the study list are unread.
+3. **Miritello et al., *Social Networks* 35(1) 2013**, "Time as a limited resource."
+4. **Any measured ceiling on concurrent group/community memberships.** Three independent query framings returned nothing. I believe this is a real hole in the literature.
+5. **Twitter/X "Latest Tweets" chronological-toggle adoption rates** — no source found; Twitter has never published it.
+6. **Keller stating flatly that users won't choose alternative feeds.** Her published skepticism is supply-side (cost, revenue, privacy-limited data access), not demand-side apathy. The strongest demand-side sentence she wrote is the conditional one quoted in 2.5. **Do not attribute a stronger claim to her than that.**
+7. **Arnaboldi/Dunbar 2205.13980** — ar5iv redirected; layer figures unconfirmed from that specific paper (confirmed from its companion 2206.02422).
+8. **royalsocietypublishing.org is 403 to WebFetch** — both Royal Society papers required the Europe PMC route.
+
+## ONE INSTRUMENT WARNING
+
+Every "Dunbar ceiling online" number in this brief traces back through a small number of authors — Dunbar co-authors or cites nearly all of them (Gonçalves 2011 is cited *and dismissed* by Dunbar 2016; Arnaboldi's layer papers are co-authored with Dunbar). The refutation (Lindenfors) comes from outside that circle and attacks the derivation rather than the measurements. **Treat "≈150" as a well-replicated empirical regularity within one research program and a poorly-justified cognitive constant** — those are different claims, and the literature routinely elides them.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;_aJxg041xrK8tecXp1WkW7ekkJDhduPLo-dJfOm9p6s
+
+<<^ code="&#x0004;" -> to=? >>

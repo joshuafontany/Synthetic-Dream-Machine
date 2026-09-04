@@ -1,0 +1,171 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Final Report: Device-per-person ground truth. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Final Report: Device-per-person ground truth
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 12,092 characters
+
+````
+Not further productive. I'll compile the final report now with everything gathered across both passes, clearly marking measured vs. not-reached.
+
+## Final Report: Device-per-person ground truth
+
+**Method note:** WebSearch was unavailable all session (budget exhausted before first call). Data below comes from direct WebFetch on guessed/known URLs, `curl` against Hacker News Algolia API, GitHub Issues API (`gh api`), OpenAlex, Crossref, and the Wikipedia search/content API. Every figure below is either MEASURED (with source+date) or explicitly marked NOT REACHED — none are recalled from training memory as a substitute.
+
+### 1. Devices per person — the mean vs. the floor
+
+- **Cisco Annual Internet Report** (cisco.com): global networked devices per capita **2.4 (2018) → 3.6 (2023)**. 2023 regional: North America 13.4/capita, W. Europe 9.4, CEE 4.0, Asia-Pacific 3.1, Latin America 3.1, Middle East/Africa 1.5. Global device count 18.4B (2018) → 29.3B (2023), 10% CAGR. **Confidence: high.** This confirms the figure already in hand — matches the user's premise exactly.
+- **Deloitte** household device *count* (the ~21-22/household figure): **NOT REACHED.** The 2025 Connected Consumer Survey page that loaded gave spend data only ($896/yr on connected devices in the past year, up from $764 in 2024; $183/mo on tech services) — no device-count figure surfaced.
+- **ITU 2024** (itu.int): mobile ownership (age 10+) — global ~4 in 5 own a phone; **high-income countries 95%+, low-income countries only 56%**. That means in low-income countries ~44% of people own *zero* phones of their own — the true floor beneath "single device" is "no device, borrowed access." **Confidence: high.**
+
+### 2. The single-device / no-device population — the key distributional finding
+
+**Pew Research** (pewresearch.org/internet/fact-sheet/mobile/), "smartphone-only" internet users (no home broadband) by US household income:
+
+| Income | 2013 | 2015 | 2018 | 2021 | 2025 |
+|---|---|---|---|---|---|
+| <$30k | 12% | 20% | 31% | 27% | **34%** |
+| $30–70k | 9% | 15% | 22% | 19% | 19% |
+| $70–100k | 5% | 10% | 14% | 6% | 10% |
+| $100k+ | 5% | 6% | 9% | 6% | 4% |
+
+**Confidence: high.** This is the single most load-bearing number for the identity model under evaluation: over a third of low-income US households in 2025 are down to one device, and that bracket's trend is *worsening* (27%→34% from 2021 to 2025) while the top bracket trends toward more redundancy (falling to 4%). The gap is widening, not converging — a per-device credential model degrades for exactly the population least able to absorb a lost second factor.
+
+**Global mobile subscriptions** (Wikipedia "Mobile phone," sourced): 9.1B subscriptions by 2024 (more than world population), but only ~7.2B people (roughly half the world's countries counted) actually own at least one phone — subscriptions overcount because of the multi-SIM/multi-device population layered on top of the zero-device population.
+
+### 3. Phone sharing (Global South) — partial, one hard number
+
+- **GSMA Mobile Gender Gap** direct sharing-rate percentages for India/Bangladesh/Africa: **NOT REACHED** (gsma.com URLs all 403'd across both passes).
+- Via Wikipedia "Gender digital divide": Sub-Saharan Africa mobile-ownership gender gap **13% (2020), down from 14% (2018)**; >74 million SSA women remain unconnected by mobile; SSA internet penetration 2019: men 33.8% vs women 22.6%; the *internet* usage gender gap (as opposed to ownership) grew from 20.7% (2013) to 37% (2019). Arab States/Asia-Pacific internet-penetration gender gap ~17%; digital-skills gap up to 25% in parts of Asia/Middle East. **Confidence: medium** (Wikipedia-mediated, but citing GSMA/ITU as primary sources).
+- Via Wikipedia "Digital agriculture": **GSMA 2016** — of 750M+ farmers across 69 surveyed countries, ~295M had a mobile phone; only 13M had *both* a phone and a mobile-money account. **Confidence: high** for this specific figure.
+- Via Wikipedia "Digital divide by continent": in Uganda, urban gender gap in mobile ownership is 4% vs rural 22% — a concrete country-level sharing/ownership asymmetry. **Confidence: medium.**
+- Explicit phone-**sharing** rates (as opposed to ownership gaps) for India/Bangladesh specifically: **NOT REACHED.**
+
+### 4. Loss, theft, replacement
+
+- **London phone theft** (Wikipedia "Crime in London," citing Met Police data): **91,481 recorded thefts in 2019 → 117,211 in 2024**, a **~28% five-year rise**; 2024 rate works out to **~321 phones/day**. Separately, a BBC News item (Oct 6, 2025) cited on that page: one iPhone tracking case led police to a gang that had sent **40,000 snatched phones to China**. **Confidence: high** for the annual totals (attributed to Met/ONS-style recorded-crime data); the 40,000 figure is from a single case report, not a rate.
+- **Moped-enabled crime, London** (Wikipedia "Moped crime in London"): 2011: 365 incidents → 2017 peak: 23,000+ → 2018: 14,300 → 2021: under 4,000 (~50% down from peak). 2016/17: 19,385 moped-enabled crimes recorded; one documented case of a single offender stealing 21 phones in one hour (Oct 2016); a 2017 London Evening Standard estimate put gang-perpetrated moped crime at 50,000+/year with up to 1,500 scooters/motorcycles stolen per month (+41% YoY at the time). **Confidence: medium** — later figures (2018-2021) are solid recorded-crime stats; the 50,000/year and 1,500/month figures are a single 2017 press estimate, not police data.
+- **Phone replacement cycle**: Wikipedia "Mobile phone" states "the average user replaces their mobile phone every 11 to 18 months" (uncited claim on the page — flagged as needing verification). This **conflicts** with the general industry narrative of lengthening 3-4 year replacement cycles that the task brief assumed; I could not independently verify either figure from Counterpoint/CIRP/Kantar this session (all attempts 403/404/stub pages). **Confidence: low** — flagging the disagreement rather than picking a side. Counterpoint/CIRP/Kantar primary data: **NOT REACHED.**
+- **Google 2019 "basic account hygiene" effectiveness numbers** (SMS/on-device prompt/security-key block rates against bots/phishing/targeted attacks): **NOT REACHED** — only the title and May 17, 2019 publish date came through; the actual percentages did not load via WebFetch, and I found no alternate mirror via curl.
+- General account-lockout-after-device-loss data (Google/Microsoft published rates): **NOT REACHED.**
+
+### 5. Shared / kiosk / headless-device patterns
+
+- **RFC 8628 (OAuth Device Authorization Grant)**, confirmed via datatracker.ietf.org: device-code + user-code + verification-URI + polling flow; **Section 5.4 explicitly names phishing as a foresee­able risk** — the spec tells implementers to require the user to confirm device possession during authorization and to keep user-code lifetime short specifically "to limit the usability of a code obtained for phishing." This is a spec-acknowledged weakness, not an emergent one. **Confidence: high** (primary source).
+- **Storm-2372 device-code phishing campaign** (Microsoft Security Blog, storm-2372, active Aug 2024, publicly reported Feb 13, 2025, escalation update Feb 14, 2025): Russia-aligned actor; targets government/NGO/IT/defense/telecom/health/energy sectors across Europe, North America, Africa, Middle East; method — impersonate a known contact on WhatsApp/Signal/Teams, send a fake meeting invite containing an attacker-generated device code, victim enters it on the legitimate Microsoft login page and hands over a valid access token without any password ever changing hands; post-compromise, attackers search victim mailboxes via Microsoft Graph API for keywords like "password," "admin," "credentials," "ministry." Feb 14 update: escalated to abusing Microsoft's own Authentication Broker client ID to register rogue devices into Entra ID and mint Primary Refresh Tokens. **No victim count disclosed** in the report. **Confidence: high** (primary source, though scale is genuinely unquantified by Microsoft itself, not just by me).
+- A second confirmed device-code campaign found via HN: Microsoft Security Blog, **"An AI-enabled device code phishing campaign," published April 6 2026** — exists and is indexed, but I did not fetch its body; and a **"GitHub Device Code Phishing"** technique writeup from Praetorian (praetorian.com, June 2025) — also found via HN indexing but not fetched for detail. Both are **leads, not verified content** this session.
+- **WebAuthn hybrid transport / caBLE**: confirmed to exist as "the WebAuthn Client accessing credentials stored on another authenticator... useful when credential sync is not viable" — i.e., the standardized answer to "authenticate on a device you don't own, using a phone you do own." Technical mechanics (BLE handshake, QR flow) and deployment/adoption numbers: **NOT REACHED.**
+- **TOFU / SSH host keys** (Wikipedia "Trust on first use"): confirmed as the oldest deployed headless-provisioning pattern — client checks a local key cache, prompts on first contact, and on any later mismatch throws a blocking warning. Documented failure mode: "warning fatigue" causes users to blindly accept identifiers, and the model doesn't scale to many endpoints (an admin managing many hosts habituates past the warning). **Confidence: high** for the mechanism, **medium** for how well this generalizes as a critique (it's Wikipedia's own framing, not a cited study).
+- **Matter commissioning** (csa-iot.org, Wikipedia "Matter (standard)", GitHub issue search on project-chip/connectedhomeip, HN comment search): confirmed BLE is used for commissioning and that a PKI with device attestation certificates underlies certification, but **the specific PAA/PAI/DAC hierarchy, the 11-digit setup code mechanics, and any measured commissioning failure rate or complaint volume were NOT REACHED** — GitHub issue search returned 1,209 total hits for "commissioning failed" against connectedhomeip but I only inspected one (an open PR adding NFC failsafe-timer tests, not a failure-rate data point), and HN comment search surfaced discussion threads (e.g., "how easy is it to commission a Matter device onto a specific WiFi network," Oct 2025; a guide for provisioning without a smartphone, July 2025) but no aggregate failure-rate numbers.
+- **FIDO Device Onboard (FDO)**: confirmed release date (April 20, 2021, FIDO Alliance) but **adoption/deployment scale NOT REACHED** — HN search returned only date-stamped hits with no titles/URLs resolving meaningfully, and fidoalliance.org's own FDO page had no adoption metrics, just a certification-program description. The task brief's suspicion of "very low adoption" is **plausible but unconfirmed** by this session's evidence — flag as unverified, not as fact.
+- **Apple Shared iPad** (education/business): **NOT REACHED** — every guessed support.apple.com URL 403'd or 404'd, and Wikipedia searches for it returned unrelated Apple hardware pages (Apple Wallet, Apple Watch, Face ID).
+- **ChromeOS kiosk/managed guest sessions**: **NOT REACHED** — the one page that loaded was about factory-reset/device-wipe, not session/identity architecture.
+
+### Summary of what's solid vs. open
+
+**Solid (high confidence, dated, sourced):** Cisco per-capita device growth; Pew smartphone-only-by-income table (the single most important number for this model); ITU global ownership/connectivity figures; GSMA-2016 farmer phone-vs-mobile-money gap; London phone-theft annual totals 2019 vs 2024; RFC 8628's own phishing-risk acknowledgment; the Storm-2372 campaign mechanics and dates.
+
+**Open (explicitly not reached, do not treat as answered):** Deloitte per-household device count; GSMA India/Bangladesh phone-sharing rates specifically; smartphone replacement-cycle length (conflicting weak signal only); Google/Microsoft account-lockout-after-device-loss rates; Matter commissioning failure rates and DAC/PAA PKI detail; FIDO Device Onboard real-world adoption scale; Apple Shared iPad mechanism and known problems; ChromeOS kiosk identity architecture; caBLE technical/adoption detail.
+````
+
+<<~/ahu >>
+
+<<~ ahu #message-2 >>
+
+!! Message 2 ~ 7,039 characters
+
+````
+I'll stop here — WebSearch quota was exhausted for this session almost immediately (200/200 before I could run a query), and further blind WebFetch guesses at unknown URLs are mostly returning 403/404. Here is the report based on what I was able to confirm.
+
+## Report: Devices-per-person ground truth (partial — WebSearch was unavailable this session)
+
+**Important caveat up front:** WebSearch returned "budget exhausted, 200/200" on the very first call and stayed exhausted for the whole session, so I could not discover fresh URLs — only WebFetch known/guessed URLs, most of which 403'd or 404'd (Deloitte, GSMA, BBC, Statista, ONS deep pages, Apple support, Forbes, gov.uk crime stats, Volexity, Counterpoint). What follows is confirmed from the fetches that succeeded. This is a thin subset of what was asked — recommend a follow-up pass with WebSearch available.
+
+### 1. Devices per person — CONFIRMED (medium-high confidence)
+- **Cisco Annual Internet Report**: global networked devices per capita rose from **2.4 (2018) to 3.6 (2023)**. Regional 2023 breakdown: North America 13.4/capita, Western Europe 9.4, CEE 4.0, Asia Pacific 3.1, Latin America 3.1, Middle East/Africa 1.5. Global device count: 18.4B (2018) → 29.3B (2023), 10% CAGR. Source: Cisco AIR white paper (cisco.com). This matches the number the user already had — confirmed, not new.
+- Could NOT confirm Deloitte's ~21-22 devices/household figure — fetched the 2025 Connected Consumer Survey page, which reports **spending** ($896/year on connected devices, up from $764 in 2024) but not device counts in the section retrieved.
+
+### 2. Smartphone-only / smartphone-dependent — CONFIRMED, high confidence, with a distribution the user should note
+Pew Research (pewresearch.org/internet/fact-sheet/mobile/), by household income, "smartphone-only" (no home broadband):
+| Income | 2013 | 2015 | 2018 | 2021 | 2025 |
+|---|---|---|---|---|---|
+| <$30k | 12% | 20% | 31% | 27% | **34%** |
+| $30-70k | 9% | 15% | 22% | 19% | 19% |
+| $70-100k | 5% | 10% | 14% | 6% | 10% |
+| $100k+ | 5% | 6% | 9% | 6% | 4% |
+
+**This breaks the "several devices" assumption sharply along income lines**: over a third of low-income US households in 2025 are single-device (smartphone-only), and the trend for that bracket is worsening, not improving, while high-income households are trending toward MORE redundancy (4% and falling). This is a widening gap, not a converging one.
+
+### 3. Global connectivity / device ownership — CONFIRMED, high confidence
+ITU 2024 figures (itu.int):
+- 5.5B online (68% of world), 2.6B offline (32%).
+- Mobile ownership (age 10+): global ~4 in 5 own a phone; **high-income countries 95%+, low-income countries only 56%** — meaning ~44% of people in low-income countries have NO phone of their own at all (the true floor below "one device" is "zero devices, borrowed access").
+- Gender gap: 70% of men online vs 65% of women (189M more men online).
+- Urban 83% vs rural 48% online.
+- 5G coverage: high-income 84%, low-income 4%.
+
+I could not reach GSMA's Mobile Gender Gap Report directly (403 on all URL guesses) to get the specific phone-**sharing** rate numbers for India/Bangladesh/Africa the user wanted — that report (usually cited around 60%+ borrowing rates in some South Asian contexts, women disproportionately borrowing rather than owning) needs a follow-up fetch with search available.
+
+### 4. Device loss/theft — PARTIALLY CONFIRMED
+- UK ONS crime bulletin (year ending March 2025): "theft from the person" (a broader category than phones specifically) rose **15% to 151,220 offences**. Could not get a phone-specific breakout — ONS/police tables didn't resolve, and news sources (BBC, Forbes) were blocked from fetching.
+- Could not reach Asurion, GSMA sharing data, or Google's 2019 account-hygiene research body text (only got the title/date: "New research: How effective is basic account hygiene," May 17, 2019 — the actual percentages didn't come through).
+
+### 5. Shared/kiosk device patterns — PARTIALLY CONFIRMED
+- **RFC 8628 (OAuth Device Authorization Grant)**, ietf.org/datatracker: confirmed core flow (device code + user code + verification URI + polling) and confirmed the spec's own Section 5.4 explicitly names phishing as a risk, telling implementers to make the user confirm device possession and to keep user-code lifetime short specifically "to limit the usability of a code obtained for phishing" — i.e., the phishing weakness is not incidental, it's spec-acknowledged.
+- **Storm-2372 device-code phishing campaign** (Microsoft Security Blog, discovered Feb 2025, active since Aug 2024): Russia-aligned actor, targets across government/NGO/IT/defense/telecom/health/energy sectors in Europe, North America, Africa, Middle East. Method: build rapport via WhatsApp/Signal/Teams impersonating known contacts, send fake meeting invite, trick victim into entering an attacker-generated device code on the real Microsoft login page — victim hands over a valid access token without ever "losing" a password. Feb 14, 2025 update: attackers escalated to abusing Microsoft's own Authentication Broker client ID to register rogue devices into Entra ID and mint Primary Refresh Tokens. No victim count disclosed.
+- **WebAuthn hybrid transport / caBLE**: confirmed it exists as "the WebAuthn Client accessing credentials stored on another authenticator... useful when credential sync is not viable" — i.e., the deployed answer to "authenticate on a device you don't own using a phone you do." Could not get caBLE's own technical/adoption specifics — Wikipedia's WebAuthn article didn't carry them.
+- **TOFU (SSH host keys)**: confirmed as the oldest deployed pattern — client checks local key cache, prompts on first contact, warns loudly (and is often habituated-past) on mismatch thereafter. Known failure mode: "warning fatigue" causes users to blindly accept, and it doesn't scale to many endpoints.
+- Apple Shared iPad, ChromeOS kiosk/managed guest sessions, Matter commissioning PKI (PAA/PAI/DAC) detail, and FIDO Device Onboard adoption data: all attempted, all came back as navigation/stub pages with no substantive numbers — genuine gaps, not just unlucky fetches.
+
+### What I could NOT get at all this session
+- GSMA Mobile Gender Gap sharing-rate numbers (India/Bangladesh/Africa)
+- Deloitte's per-household device count
+- Phone theft numbers specific to devices (vs. general "theft from person") for London/UK 2024-2025
+- Smartphone replacement-cycle length figures (Counterpoint/CIRP/Kantar)
+- Matter commissioning failure-rate/complaint data and its DAC/PAA PKI detail
+- FIDO Device Onboard real-world adoption scale
+- Apple Shared iPad's actual identity mechanism and known problems
+- Google/Microsoft account-recovery lockout rate data
+
+**Recommendation**: re-run this research with WebSearch available (this session's quota was already spent before I made a single call) — that tool is what would have surfaced the GSMA, Deloitte, Counterpoint, and phone-theft sources, none of which I could hit blind via WebFetch guesses.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;Xla1z0XMdK0PcpEyLsPpm622TaAZAvAJYn0l0ngtGqs
+
+<<^ code="&#x0004;" -> to=? >>

@@ -1,0 +1,272 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/matrix-homeserver-economics-centralization-m-e95a71 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/matrix-homeserver-economics-centralization-m-e95a71.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: MATRIX HOMESERVER ECONOMICS & CENTRALIZATION — measured evidence. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/matrix-homeserver-economics-centralization-m-e95a71"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! MATRIX HOMESERVER ECONOMICS & CENTRALIZATION — measured evidence
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 22,669 characters
+
+````
+## MATRIX HOMESERVER ECONOMICS & CENTRALIZATION — measured evidence
+
+Everything below was fetched this session (2026-09-04). Derived figures are marked DERIVED. Unreachable items marked NOT REACHED.
+
+---
+
+## 1. Matrix.org Foundation finances — the actual numbers
+
+### The funding-crisis timeline (all direct quotes)
+
+**2022-12-01** — https://matrix.org/blog/2022/12/01/funding-matrix-via-the-matrix-org-foundation/
+> "even though there are over 5000 contributors to github.com/matrix-org — over 90% of the actual committed lines of code come from Element employees. Similarly, while we are enormously thankful for the past and existing generous donations from the wider Matrix community, **today they only come to $6,000 a month, relative to the $400,000 a month that Element has been funding**."
+
+Membership tiers introduced here (still current, per https://matrix.org/foundation/members/): Individual $60/yr · Silver $2k–80k/yr · **Gold $200k/yr** · **Platinum $500k/yr**.
+
+**2024-01-30** — https://matrix.org/blog/2024/01/2024-roadmap-and-fundraiser/ (Josh Simmons, then MD)
+> "New members like Beeper and gematik — and hundreds of individuals — boosted our annual revenues **from £82K to £364K**. The open network has grown **from 80.3M to 115M addressable users**."
+> "Element used to subsidize our activity, and **still donates upwards of £3M in core development annually** … While we managed a 400+% increase in revenue to £364K last year, **at £440K our expenses exceeded our revenue**. … the full cost of operating the Foundation at its current scope is projected to stabilize **somewhere north of £900K in 2024**."
+
+Projected 2024 breakdown, verbatim:
+- **£550K staffing** — 4 FTE (management, advocacy, standards, T&S) + external part-timers
+- **£250K servers and other third-party providers**
+- **£100K administrative** (legal, accounting, compliance)
+- Comparison they drew: "the Python Software Foundation's expenses are nearer £2.9M, and **Signal's annual costs are in the ballpark of £39M**"
+- Warning: "Otherwise, we need to start scaling back programs and staff **starting January 2025**."
+
+**2024-12-25** — https://matrix.org/blog/2024/12/25/the-matrix-holiday-special-2024/
+> "The Foundation has gone from being completely subsidized by Element in 2022, to having **nearly half of its annual budget covered by its 11 funding members**. … only being able to sustain half our annual budget is not nearly good enough, and it means that we **live hand-to-mouth, extending our financial runway a bit at a time**."
+
+**2025-02-20 — "We're at a crossroads"** — https://matrix.org/blog/2025/02/crossroads/ (Thib, Robin Riley). The single densest financial disclosure:
+> "the Foundation is not yet sustainable, despite running on the strictest possible budget, and is **burning through its (relatively small) reserves**. And we are at the point where **the end of the road is in sight**."
+> "**unless the Foundation manages to raise $100,000 of funding by the end of March 2025**, we will … **shut down all the remaining bridges** hosted by the Matrix.org Foundation. This includes bridges to Slack, XMPP, OFTC (IRC), and Snoonet (IRC)."
+> "the Foundation needs **an additional $610K in revenue to break-even** … this $100K would extend our runway **1 month**. … we nearly doubled our revenue in 2024, **reaching $561K**, but it was also the first year in which we carried the full cost of our operations: **$1.2M**. To make ends meet, we **liquidated $283K worth of cryptocurrency donations** and ended the year with a **$356K deficit**. We are currently on target for **$587K revenue in 2025**."
+
+The bridges were in fact shut down in 2025 (annual report: "in 2025 the Foundation had to stop [bridging]").
+
+**2025-06 — freemium/premium on matrix.org** — https://matrix.org/blog/2025/06/funding-homeserver-premium/
+> "**20% of the Foundation's expenditure goes towards hosting the matrix.org free and public homeserver**. If we add in the cost of the moderation work done by the Trust and Safety team, the total share of the costs attributable to the matrix.org homeserver account for **almost 50% of all expenditure**. Meanwhile, today, **only 50% of the spending of the Foundation is covered by its revenues**."
+> "before we get to the extreme position of **being forced to turn it off** leaving its **370k monthly active users** in the awkward position of finding a new home…"
+> "The alternative is to turn off the server, which we want to avoid doing."
+
+Free/premium limits now published at https://matrix.org/homeserver/pricing/ — Free: 10MB max attachment, 100MB/24h up to 500MB/28d. Premium: 100MB attachment, 1GB/24h up to 5GB/28d, invites "10 times faster". **Price still not published** ("Details of pricing have not yet been finalised") as of fetch date.
+
+### The first Public Annual Report (FY2025 = Nov 2024–Oct 2025)
+
+Blog: https://matrix.org/blog/2026/03/annual-report/ (2026-03-27, Amandine Le Pape)
+PDF: https://matrix.org/foundation/reports/2025%20Public%20Annual%20Report.pdf (29 pp., fetched & extracted)
+
+| Metric | Value |
+|---|---|
+| Total costs FY2025 | **−£910,821** |
+| Net loss FY2025 | **−£310,596** |
+| Implied revenue FY2025 | **≈£600,225** (DERIVED) |
+| Revenue growth | **+38%** |
+| Loss as % of costs | **50% (FY2024) → 34% (FY2025)** |
+| Staff fully funded | **4 FTE + 2 T&S contractors**; Managing Director post **vacant** |
+| Funding members joined (cumulative) | **20 organisations** |
+
+Revenue concentration, verbatim from the PDF:
+> "We churned a Gold member, and the one left (**Automattic**) now corresponds to **50% of our revenue**."
+> "The number of Silver members doubled, but only brought **30% more revenue** due to them mostly being small organisations in the Silver tier."
+> "**We didn't get any grants.**"
+> "Element's Platinum membership was supported by in-kind contributions and financial support in 2025, and thus **doesn't appear as revenue in financial reports**."
+> "the Foundation is still **disproportionately dependent on Element's in-kind donations and financial support, which is unsustainable**."
+
+Cost-reduction ceiling, verbatim:
+> "the team is already at a minimal size, and the usage of the matrix.org server keeps increasing. We have been implementing quick wins to reduce the costs of matrix.org (like using Synapse Pro), but **moving it to cheaper infra or implementing bigger changes wouldn't have a groundbreaking impact and are projects we can't afford to start**."
+
+Premium accounts: "**+400% since end of the 2024-2025 financial year**" in ARR (absolute figure is in a chart image, NOT REACHED as text).
+
+### Current member roster (https://matrix.org/foundation/members/, fetched 2026-09-04)
+- **Platinum (1):** Element Creations Ltd.
+- **Gold (1):** Automattic
+- **Silver (20):** Blender Foundation, connect2x, DINUM, Discourse, Ercom, Fairkom, Famedly, FlatTurtle, Gematik, IndieHosters, infra.run, Liberbyte, LiveKit, LU-CIX, meedio, Pangea Chat, Rocket.Chat, SSH, XWiki
+- Plus 15 non-paying "Ecosystem" and 5 "Associate" members.
+
+So: **two paying members supply the large majority of cash revenue**, one of which (Element) books as in-kind.
+
+### Element's commercial shift
+**2023-11-06** — https://element.io/blog/element-to-adopt-agplv3/ (updated 2023-12-13)
+> "As a commercial entity, **Element has driven the bulk (more than 95%) of core Matrix development for the last seven years**, and maintains the largest Matrix homeserver (matrix.org) on behalf of the Matrix.org Foundation."
+> "**Element is losing its ability to compete in the very ecosystem it has created.** It is hard for Element to innovate and adapt as quickly as companies whose business model is developing proprietary Matrix-based products and services without the responsibility and costs of maintaining the bulk of Matrix."
+
+Synapse, Dendrite, sydent, sygnal relicensed Apache-2.0 → **AGPLv3**, repos moved matrix-org/ → element-hq/. Foundation's own response, 2024-08-15 (https://matrix.org/blog/2024/08/heart-of-matrix/): "these [questions] have become even more pressing for us **since Element switched developing Synapse and several other projects to AGPLv3, rather than contributing under the Foundation as Apache v2**."
+
+Two-tier product split stated in the 2025 holiday post (https://matrix.org/blog/2025/12/24/matrix-holiday-special/): "**Synapse Pro** continues to add scalability and paid support for large deployments (alongside **ESS Pro**), following the philosophy that features which empower end-users end up in FOSS but **features which empower enterprises end up in Pro**."
+
+*Element's specific 2023 "sustainability" post: **NOT REACHED** (element.io has no /blog/tag/sustainability; 404).*
+
+---
+
+## 2. Centralization despite federation
+
+### Foundation's own published counts
+
+| Date | Figure | Source |
+|---|---|---|
+| end 2022 | **80.3M** addressable users | matrix.org 2024-01-30 |
+| Jan 2024 | **115M** addressable users | matrix.org 2024-01-30 |
+| Jan 2024 | matrix.org homeserver: "**over 250K daily active users**" | matrix.org 2024-01-30 |
+| Jun 2025 | matrix.org homeserver: "**370k monthly active users**" | matrix.org 2025-06 |
+| **31 Oct 2025** | **190 million known federated users on the open federation** | Annual Report p."Facts and Figures" |
+| **31 Oct 2025** | **1.15 million monthly active users on the open federation** | ibid. |
+| **31 Oct 2025** | **234 thousand daily active users on the Matrix.org homeserver** | ibid. |
+
+DERIVED, and the load-bearing ratio: **matrix.org ≈ 32% of all monthly-active users in the entire open federation** (370k / 1.15M). Also note **matrix.org DAU fell from >250K (Jan 2024) to 234K (Oct 2025)** while the network's headline user count nearly doubled.
+
+Caveat the Foundation states itself: "The number of users we can see in the open federation grew by almost 10 million in 2025. This doesn't include the users in closed networks, like the governments deployments typically are, **or those on servers who don't report home**." The instrument is **Synapse's opt-in phone-home stats** ("active users (based on Synapse opt-in phone-home reporting)", 2023 holiday update) — Synapse-only, opt-in, so 1.15M MAU is a *lower bound of reporting servers*, not the network. Also: 115M (Jan 2024) → 190M (Oct 2025) with "almost 10 million in 2025" implies a ~65M jump during 2024 that is not separately documented — treat the series as discontinuous.
+
+### The Foundation admits the centralization problem in writing
+**2024-03** — https://matrix.org/blog/2024/03/why-matrix-org/ ("A point of centralisation"):
+> "why is the Matrix.org homeserver, **probably the largest homeserver in the whole federation**, still in open registration mode?"
+> "Gmail.com provides nearly 50% of the active email accounts in 2023 … **The Matrix.org Foundation doesn't want to become the Gmail.com or Outlook.com of Matrix.** It doesn't generate any revenue from its users and runs on donations."
+> "The technical maintenance costs **do not grow linearly** with the number of users."
+> "Since agglomeration around a single instance is **against the goals of Matrix and its Foundation**, users need to have a way out and incentives to move."
+
+The Annual Report notes "the community is looking to set-up a **'Matrix.org Homeserver Decentralisation Working Group'**".
+
+### MEASURED crawl (the only peer-reviewed one)
+**Jacob, Grashöfer, Hartenstein, "A Glimpse of the Matrix … Scalability Issues"** — arXiv:1910.06295 (v1 2019-10-14, v2 2019-11-29), also KIT 10.5445/ir/1000100364. Crawl snapshot date **2018-07-25** via the "DSN Traveller" bot, 798 public rooms:
+
+- **2,003 homeservers**, **131,463 users** observed
+- **largest server: 76,271 users** (= **58.0%** of all observed users, DERIVED); second: 37,751
+- "**this upper 1% of homeservers comprises 87% of the 131,463 total users found**"
+- "**Only 15 servers were seen having more than 100 users**"; most servers had ≤3 users
+- Largest room: 24,729 users; largest-by-servers room spanned 581 servers = 76% of all known servers
+- 83% of rooms had <10 servers; 71% of rooms had ≤100 users
+
+And the structural finding that matters for economics — federation does **not** relieve load:
+> "the single, **largest server is involved in 44.5% of all messages, sends 88.4%, but receives only 0.6%** of all messages."
+> "**moving from a centralized network to a more decentralized one will not improve the load distribution, but can actually make it worse**: … the large server will have to distribute the events of one fewer user, but instead has to distribute all events from its remaining users to the new homeserver."
+> "the network load for every server would then **grow linearly in the number of users participating in a room**, as the scalability effect of reaching multiple users with single message to a server vanishes."
+
+**arXiv contains exactly one paper matching "Matrix federation" (total 1).** "Matrix homeserver" as a phrase: **0 results**. There is no published follow-up crawl.
+
+---
+
+## 3. Synapse / homeserver resource cost — documented figures
+
+**Official Synapse minimum** — https://github.com/element-hq/synapse/blob/develop/docs/setup/installation.md:
+> "System requirements: POSIX-compliant system … Python 3.10 or later, up to Python 3.13. — **At least 1GB of free RAM if you want to join large public rooms like #matrix:matrix.org**"
+
+**Official Dendrite sizing** — https://github.com/element-hq/dendrite/blob/main/docs/installation/1_planning.md:
+> "At an absolute minimum, Dendrite will expect **1GB RAM**. For a comfortable day-to-day deployment which can participate in federated rooms for a number of local users, be prepared to assign **2-4 CPU cores and 8GB RAM — more if your user count increases**."
+> "If you are running PostgreSQL on the same machine, **allow extra headroom for this too**."
+
+**Official small-hardware guide** — https://github.com/element-hq/synapse/blob/develop/docs/other/running_synapse_on_single_board_computers.md:
+> Platform tested: 2×1GHz armhf, **2GiB RAM**, SSD, Postgres. "It seems that once you get up to about **4x1.5GHz arm64 4GiB these issues are no longer a problem**."
+> Presence: "Element web will frequently be saying the server is offline while the python process will be **pegged at 100% cpu**" — recommends `use_presence: false`.
+> Joining: "Joining a 'large', federated room will initially fail … waiting a while (**10-60mins**) and trying again will succeed."
+> Measured join times on that box: `29.9s` for #debian-fasttrack:poddery.com, `182.1s` for #decentralizedweb-general:matrix.org, **`911.6s` for #synapse:matrix.org**.
+> Recommends `limit_remote_rooms: complexity: 3.0` (complexity = current_state_events / 500), i.e. **blocking any room over ~1,500 state events**.
+
+**Database bloat — measured, real deployments:**
+- https://github.com/matrix-org/synapse/issues/7472 (2020-05-12, MurzNN): `state_groups_state` **51 GB / 274,929,152 rows**, vs `event_json` 22 GB / 14.5M rows — **18× more rows than events**. Synapse maintainer richvdh's reply: "doesn't sound so bad to me."
+- https://github.com/matrix-org/synapse/issues/3364 — "My HS has accumulated thousands of unreferenced state groups" — opened **2018-06-07, still OPEN, 76 comments**.
+- https://github.com/matrix-org/synapse/issues/12821 (2022-05-20, OPEN) — state groups not purged when rooms are deleted.
+- https://levans.fr/shrink-synapse-database.html (2020-06-11): personal homeserver "**shrunk my homeserver database from 100GB to a little under 8GB**"; compression got some rooms "down to **0.4% of the original size**"; a single REINDEX "**freed about 40GB**". I.e. an ordinary personal Synapse can carry ~92% waste.
+
+**matrix.org itself, the ceiling case** — https://matrix.org/blog/2025/10/post-mortem/ (published 2025-10-29, incident 2025-09-02, **~24h outage**):
+> "**51TB**" Postgres dataset; "when the database reached roughly **51TB (90% of disk capacity)** we set about adding more disks"
+> "made of a main Synapse instance with **hundreds of workers**, backed by a single logical Postgres cluster made up of two machines … bare metal servers at **Mythic Beasts** … RAID 10 with mdraid"
+> Restore from S3 + ~18h of WAL replay took **5.5 hours** ("we had been hoping … around 10 minutes for every 1 hour of WALs").
+
+Also https://matrix.org/blog/2025/07/postgres-corruption-postmortem/ (index corruption "**at least a year**, likely significantly longer", undetected by `pg_amcheck`) — and the cost line: "it would leave the Matrix Foundation an EC2 bill of **hundreds of USD per day** for an EC2 instance large enough to host the database."
+
+And https://matrix.org/blog/2024/04/morg-post-mortem/:
+> "To perform an upgrade without downtime, the Foundation would need to add another server … **An extra server introduces a recurring cost and requires additional work that the Foundation cannot afford right now.**"
+
+**Practitioner cost argument** — https://xn--gckvb8fzb.com/giving-up-on-element-and-matrixorg/ (2025-07-19, 115 pts / 146 comments on HN item 44617309): quotes the Dendrite 2-4 cores / 8GB figure and concludes "Matrix ends up being worse not just in terms of user experience, but also **from an administrative and cost perspective**, especially when compared to something like Ejabberd."
+Related widely-read critiques: https://telegra.ph/why-not-matrix-08-07 (46 pts, HN 44714994) — architectural, not cost; https://blog.koehntopp.info/2024/02/13/the-matrix-trashfire.html (308 pts, HN 39368561) — **body NOT REACHED** (server returned a 336-byte stub to both curl and WebFetch).
+
+---
+
+## 4. Homeserver churn / mortality — measured
+
+**The only live longitudinal dataset I found:** Matrix Rooms Search (MRS) by **etke.cc**, endpoint https://api.matrixrooms.info/stats (site https://matrixrooms.info/). It carries a **59-point timeline from 2024-02-10 to 2026-09-04**. Method: discovery via public room directories, so "online" servers is a **lower bound** on the federation, and the room count is only *indexable* rooms.
+
+Snapshot **2026-09-04**: **20,232 servers online**, 4,137 indexable, 19,980 rooms indexed.
+Server software split (2026-09-04): **Synapse 15,713 (77.7%)** · continuwuity 1,806 · tuwunel 1,698 · conduit 539 · dendrite 310 · other 166.
+
+Selected timeline (servers online / indexable / rooms indexed):
+
+| Date | online | indexable | rooms |
+|---|---|---|---|
+| 2024-02-10 | 8,837 | 2,492 | 20,573 |
+| 2024-10-01 | 10,092 | 3,096 | 21,387 |
+| 2025-02-01 | 10,496 | 3,112 | 22,211 |
+| 2025-07-01 | 13,099 | 3,765 | 18,386 |
+| 2025-09-01 | 12,810 | 3,691 | 17,915 |
+| **2025-10-01** | **10,726** | 3,066 | 17,963 |
+| 2026-01-01 | 12,007 | 3,236 | 17,765 |
+| 2026-05-04 | 19,181 | 4,267 | 20,325 |
+| 2026-09-04 | 20,232 | 4,137 | 19,980 |
+
+Findings from this series:
+- **Server count grew 2.3× in 31 months** (8,837 → 20,232), but the count is not monotone: **−16.3% in one month, 2025-09-01 → 2025-10-01** (12,810 → 10,726). That window straddles the matrix.org 24h outage of 2025-09-02; whether the drop is real churn or crawler blindness during that outage **cannot be settled from this data** — treat it as an instrument-lie candidate, not a churn measurement.
+- Synapse's share fell across the series where software is reported: **2025-10-01 Synapse 9,293 / 10,726 = 86.6%** → **2026-09-04 15,713 / 20,232 = 77.7%** (DERIVED). continuwuity went 241 → 1,806 (**7.5×** in 11 months); tuwunel 224 → 1,698.
+- **Indexable servers are flat-to-declining while online servers doubled**: 3,691 (2025-09) → 4,137 (2026-09), i.e. the share of servers exposing a public room directory fell from ~29% to **20.4%**.
+- **Indexed rooms are flat or shrinking** (20,573 in Feb 2024 → 19,980 now) while servers 2.3×'d.
+
+**Curated public-homeserver supply is tiny.** https://servers.joinmatrix.org/servers.json (fetched 2026-09-04, maintained by Austin Huang, explicitly *not* Foundation-affiliated): **24 public servers + 22 private**, **all 24 running Synapse**; hosting concentrated on **Hetzner (8 of 24)**. The Foundation's own 2024-03 post pointed users at this list as the exit ramp from matrix.org.
+
+**Dead / unreachable trackers (negative findings):**
+- **matrixstats.org — NOT REACHED**, DNS/connection failure (curl exit code 000). Appears defunct.
+- **the-federation.info — NOT REACHED**, HTTP **502** on two attempts. (It tracks diaspora/Friendica-family anyway.)
+- **stats.matrix.org — NOT REACHED** (connection failure).
+- No academic longitudinal churn study exists: arXiv `all:"Matrix federation"` = **1 result total** (the 2019 KIT paper). "Matrix protocol: a comprehensive systematic mapping study" (2026, J. Cloud Computing, doi:10.1186/s13677-025-00829-7, PDF fetched, 29 pp.) is a **literature survey with zero measured federation statistics** — no server counts, no user counts, no resource benchmarks; latency/scalability discussed only qualitatively.
+- Other OpenAlex hits that look adjacent but are not measurements of the federation: "Uma investigação sobre tolerância a falhas no servidor de comunicação Synapse" (2025, doi:10.5753/wtf.2025.8814), "A Comparative Performance Study of the Matrix /sync Endpoint on Synapse and Tuwunel" (2026, doi:10.5753/sbrc.2026.19722) — **both NOT READ** (Portuguese-language SBC proceedings; landing pages not fetched this session). OpenAlex began rate-limiting mid-session.
+
+---
+
+## The load-bearing figures, compressed
+
+- Foundation FY2025: **£910,821 cost, £310,596 loss, ~£600k revenue**; loss = 34% of cost, improved from 50%.
+- **~50% of all Foundation expenditure is attributable to running one homeserver** (20% infra + T&S moderation).
+- **One member (Automattic) = 50% of revenue**; Element's Platinum contribution doesn't even appear as revenue.
+- Donations were **$6k/mo against Element's $400k/mo** in 2022; Element still contributes **£3M+/yr** in-kind and wrote **>95%** of core code.
+- The Foundation has publicly stated the alternative to charging is "**to turn off the server**" (2025-06) and that "**the end of the road is in sight**" (2025-02).
+- **~32% of the entire open federation's MAU sits on matrix.org** (370k / 1.15M).
+- The one peer-reviewed crawl found **top 1% of servers held 87% of users**, and that the biggest server **sent 88.4% of all inter-server messages** — decentralizing *raises* aggregate load under Matrix's fan-out.
+- A hobby homeserver's documented floor is **1GB RAM (Synapse) / 8GB + 2-4 cores (Dendrite)**, with **~92% database waste** demonstrated in the field; matrix.org's ceiling is **51TB of Postgres on bare metal with hundreds of workers**.
+- Federation server count is **growing (8.8k → 20.2k in 31 months)** but Synapse's share is **falling (86.6% → 77.7% in 11 months)**, and no public tracker measures per-server mortality.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;JcPNaUtMbwqgBMpTHI5LRCOqlSiRAC_HKorDEAVO_ZQ
+
+<<^ code="&#x0004;" -> to=? >>

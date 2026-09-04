@@ -1,0 +1,435 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. PUSH NOTIFICATION METADATA — the strongest measured channel. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! 1. PUSH NOTIFICATION METADATA — the strongest measured channel
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 38,186 characters
+
+````
+Research complete. Here is the report.
+
+---
+
+# MEASURED LEAK CHANNELS LINKING MULTIPLE PSEUDONYMS ON ONE DEVICE / DEVICE FLEET
+
+**Method note:** OpenAlex budget was exhausted at session start; arXiv's API returns empty via `curl` but works via WebFetch. Reuters, AP, Wired, Verge, Washington Post, and Google Support (CAPTCHA) are all unreachable from this egress — noted inline as NOT REACHED with substitutes where found.
+
+---
+
+## 1. PUSH NOTIFICATION METADATA — the strongest measured channel
+
+### 1a. The Wyden letter (PRIMARY SOURCE, full text retrieved)
+
+**December 6, 2023**, Sen. Ron Wyden to AG Merrick Garland.
+URL: https://www.wyden.senate.gov/imo/media/doc/wyden_smartphone_push_notification_surveillance_letter.pdf
+Press release: https://www.wyden.senate.gov/news/press-releases/wyden-seeks-answers-from-justice-department-on-alleged-surveillance-of-apple-and-google-mobile-push-notifications
+
+Verbatim, the load-bearing paragraph:
+
+> "The data these two companies receive includes metadata, detailing **which app received a notification and when, as well as the phone and associated Apple or Google account to which that notification was intended to be delivered**. In certain instances, they also might also receive unencrypted content..."
+
+Timeline in Wyden's own words: tip received **spring 2022**; ~one year of staff investigation; both companies said the information "is restricted from public release by the government." He asks DOJ to permit aggregate statistics and customer notification.
+
+**This is the exact linkage primitive for your threat model.** The resolution direction is `push token → the ONE account/device`, not `push token → the app persona`. Per-app token separation (below) buys nothing against it.
+
+### 1b. Token scope — OFFICIAL DOCS (retrieved via Apple's docs JSON API)
+
+**APNs** — https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns
+
+> "This address takes the form of a device token **unique to both the device and your app**."
+> "**You can't use the same device token for more than one app, even when the apps are on the same device.** Every app must request their own unique device token."
+
+Note the double edge: the token is app-scoped (good for app-vs-app isolation), but APNs itself holds the device↔account binding, so the *server side* re-joins what the token space separated.
+
+Also: "APNs issues a new token when the user restores a device from a backup, when the user installs your app on a new device, and when the user reinstalls the operating system."
+
+**FCM** — https://firebase.google.com/docs/cloud-messaging/manage-tokens
+Registration token is scoped to **an app instance on a device**, derived from the Firebase Installation ID (FID). Expires after **270 days** of inactivity, then re-registers, "Note that the FID may change."
+
+### 1c. Apple's response and the measured request volume (STRONGEST NUMBERS IN THIS REPORT)
+
+Apple's verbatim statement, Dec 2023 (via Techdirt, https://www.techdirt.com/2023/12/11/letter-from-sen-wyden-to-the-doj-says-governments-are-gathering-push-notification-data-from-google-apple/):
+
+> "In this case, the federal government prohibited us from sharing any information. Now that this method has become public we are updating our transparency reporting to detail these kinds of requests."
+
+Google's: it shares Wyden's "commitment to keeping users informed about these requests." (Reuters/AP/Verge originals NOT REACHED; Axios 403.)
+
+Apple **did** follow through. There is now a standing "Push Token Requests" category:
+- https://www.apple.com/legal/transparency/push-token.html
+- Machine-readable: https://www.apple.com/legal/zip/transparency/Apple_Transparency_Report.zip → `push_token_requests.csv`
+
+Apple's own definition: requests "based on an Apple Push Notification service token identifier," which "generally seek **identifying details of the Apple Account associated with the device's push token**, such as name, physical address and email address." Apple notes it "was only permitted to disclose information about Push Token requests starting in Transparency Report Period July 1 – December 31, 2022."
+
+**Measured global totals (from the CSV, aggregated):**
+
+| Period | Requests | **Push tokens specified** | Requests where data provided |
+|---|---|---|---|
+| 2022 H2 | 70 | 794 | 54 |
+| 2023 H1 | 119 | 234 | 90 |
+| 2023 H2 | 232 | 1,180 | 181 |
+| 2024 H1 | 277 | 545 | 164 |
+| 2024 H2 | 312 | 743 | 191 |
+| 2025 H1 | 393 | 966 | 278 |
+| 2025 H2 | 489 | 867 | 332 |
+
+Requests grew **7.0×** from 2022 H2 to 2025 H2. Note tokens-specified routinely exceeds requests by 2–5×; some single requests are bulk (Netherlands 2022 H2: **2 requests / 687 tokens**; Israel 2023 H2: **1 request / 694 tokens**; US 2025 H1: 168 requests / **718 tokens**).
+
+**Fifteen requesting countries appear across the series**, answering "which governments": United States, United Kingdom, Germany, Netherlands, Singapore, **France** (2023 H2: 1 req; 2025 H1: 3 req/5 tokens), Israel, Canada, Poland, Australia, Denmark, Finland, India, Moldova, Norway, Sweden, Switzerland, Belgium.
+
+The UK is the volume outlier and rising fast: 27 → 60 → 123 → 141 → 153 → 206 → **290** requests, at an 80–90% fulfilment rate throughout. The US fulfils far less (28–54% in 2024–25) but specifies the most tokens.
+
+**EU/France angle:** France appears in the data twice, but I found **no** separate EU regulatory action on push metadata. NOT REACHED / likely does not exist as a distinct proceeding.
+
+**Google's equivalent:** Google's transparency report was NOT REACHED (google.com/sorry CAPTCHA on two attempts). I found no evidence Google publishes a push/FCM-specific request category. Treat as **unconfirmed, likely absent** — Apple is the only one of the two with a measured public series.
+
+**Wyden follow-ups (2024/2025):** I enumerated wyden.senate.gov's search index across three pages for "push notification surveillance." **Only the Dec 2023 letter and its press release exist on the site.** No 2024 or 2025 follow-up letter. Negative finding.
+
+### For your architecture
+This is the channel that most directly defeats data-layer persona separation. A device holding N pseudonymous personas presents N push tokens; every one resolves, at Apple/Google, to the same account and the same handset. The join happens in a jurisdiction you don't control, is legally compelled, is growing ~7× over three years, and — per Apple's own category definition — the *purpose* of the request is precisely to perform that resolution.
+
+---
+
+## 2. DEVICE ATTESTATION AS A LINKAGE VECTOR
+
+### 2a. Apple DeviceCheck — two bits, per device, explicitly (OFFICIAL DOCS)
+
+https://developer.apple.com/documentation/devicecheck
+
+> "you can get a token that you use on your server to **set and query two binary digits of data per device**, while maintaining user privacy."
+
+Query/update API: https://developer.apple.com/documentation/devicecheck/accessing-and-modifying-per-device-data — fields `bit0`, `bit1`, plus `last_update_time` returned as **YYYY-MM** (deliberately coarsened). Auth JWT is created "the same steps you use to create a provider authentication token for APNs."
+
+### 2b. Apple App Attest — per app, per device, **and Apple recommends per-account**
+
+https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity
+
+> "**For each user account on each device running your app**, generate a unique, hardware-based, cryptographic key pair..."
+> "**Don't reuse a key among multiple users on a device** because this weakens security protections."
+
+This is a genuinely favourable finding: Apple's own guidance is per-account key derivation, which is persona-compatible. But the private key lives in the Secure Enclave and Apple attests to it, so the *attestation* still names the hardware. DeviceCheck's two bits remain strictly device-scoped and are the linkage vector; App Attest is not.
+
+### 2c. Android Play Integrity — and `deviceRecall`, the sharpest finding in this section
+
+https://developer.android.com/google/play/integrity/verdicts — verdict fields: `requestDetails`, `appIntegrity`, `deviceIntegrity`, `accountDetails`, `environmentDetails`.
+- Device-bound: `deviceRecognitionVerdict` (`MEETS_DEVICE_INTEGRITY` / `MEETS_BASIC_INTEGRITY` / `MEETS_STRONG_INTEGRITY` / `MEETS_VIRTUAL_INTEGRITY`), `deviceAttributes.sdkVersion`, `recentDeviceActivity.deviceActivityLevel`, **`deviceRecall`**.
+- Account-bound: `accountDetails.appLicensingVerdict` only (`LICENSED`/`UNLICENSED`/`UNEVALUATED`).
+
+**Device Recall** — https://developer.android.com/google/play/integrity/device-recall (currently **beta**):
+
+> "You can read **three custom values or bits for each device**... you could combine them to represent eight custom labels."
+> "The data is **stored on Google's servers**, allowing your app to reliably recall your custom data **even after your app is reinstalled or the device is reset**."
+
+Google's own guardrail is a *policy*, not a mechanism:
+
+> "Device recall preserves user privacy because the requesting app can only recall the limited data that it associated with devices, without accessing any device or user identifiers."
+> "**You may not use device recall to fingerprint or track individual users or devices**..."
+
+This is Android's DeviceCheck, with one extra bit and **factory-reset survival**. Three bits of server-side, app-scoped, reset-surviving per-device state is a persistent handle across every persona that app ever hosts. The only thing standing between it and cross-persona linkage is Google's terms of service.
+
+**SafetyNet Attestation** — https://developer.android.com/privacy-and-security/safetynet/deprecation-timeline:
+> "The SafetyNet Attestation API was deprecated in **2022** and fully turned down in **January 2025**."
+Calls now fail with `ApiException` status code 7 (`NETWORK_ERROR`). Migration path is Play Integrity.
+
+### 2d. Web Environment Integrity — the backlash, and its own admission
+
+Proposal: https://github.com/RupertBenWiser/Web-Environment-Integrity/blob/main/explainer.md
+Header now reads: "⚠️ **NOTE: This proposal is no longer pursued.**"
+
+The explainer concedes the vector in its own words:
+> "attestation tokens themselves **could enable cross-site tracking if they are re-used between sites**."
+Mitigations proposed: "top-level partitioning for all attester tokens," "All fields returned by attesters must be **low-entropy** so as not to be uniquely identifying," and explicit exclusion of "A device ID that is a unique identifier accessible to API consumers."
+
+Measured backlash (HN Algolia, points as proxy):
+- Vivaldi, 2023-07-26, 756 pts — https://vivaldi.com/blog/googles-new-dangerous-web-environment-integrity-spec/
+- The proposal repo, 2023-07-21, 639 pts
+- FSF, 2023-07-28, 415 pts — https://www.fsf.org/blogs/community/web-environment-integrity-is-an-all-out-attack-on-the-free-internet
+- W3C TAG: "Web Environment Integrity has no standing at W3C," 2023-08-11 — https://www.w3.org/blog/2023/web-environment-integrity-has-no-standing-at-w3c/
+- Abandonment, The Register, 2023-11-02 — https://www.theregister.com/2023/11/02/google_abandons_web_environment_integrity/
+- Brave disabled it in-tree: https://github.com/brave/brave-core/pull/19476
+
+**Academic attestation-privacy work:** the honest answer is that the anonymous-attestation literature is *cryptographic*, not empirical. Direct Anonymous Attestation (Brickell/Camenisch/Chen, and Enhanced Privacy ID — https://doi.org/10.1145/1314333.1314337, 2007) exists precisely to give user-controlled linkability, and there is a known-good fix paper (Camenisch et al., "One TPM to Bind Them All: Fixing TPM 2.0 for Provably Secure Anonymous Attestation," IEEE S&P 2017, https://doi.org/10.1109/sp.2017.22). But an arXiv search for `"remote attestation" AND privacy AND linkability` returns **0 results**. There is **no measured study of Play Integrity or App Attest as a fingerprinting channel**. That is a real gap — and it means the linkage risk here is *designed-in and documented*, not *measured*.
+
+---
+
+## 3. TIMING / TRAFFIC CORRELATION
+
+### 3a. Website fingerprinting — the attack, the ceiling, and the critique
+
+**Panchenko et al., "Website Fingerprinting at Internet Scale," NDSS 2016** — DOI 10.14722/ndss.2016.23477, PDF https://www.ndss-symposium.org/wp-content/uploads/2017/09/website-fingerprinting-internet-scale.pdf
+
+Dataset: **over 300,000 webpages** — "ten times larger than the biggest set used before." Their headline is a *negative* result and it is the single most important sentence for a threat model:
+
+> "for the first time we show that **no existing method – including our own – scales when applied in realistic settings**."
+> "webpage fingerprinting does not scale for any considered page in our datasets and any state-of-the-art classifier. Hence, **the attack cannot be reliably used to convict users, but it may be used to limit the set of possible suspects**."
+
+Background-set sizes swept b = 1,000 → 111,884; both precision and recall decline monotonically at every step. Crucially, **website** fingerprinting (a whole domain) scales far better than **webpage** fingerprinting: closed-world index-page separation of 20 sites hits **99% accuracy**, and in the open world "the precision stabilizes on a high level in the case of website classification."
+
+**Sirinam et al., "Deep Fingerprinting," CCS 2018** — arXiv:1801.02265, https://arxiv.org/pdf/1801.02265
+- Closed world (95 sites × 1,000 traces): **98.3%** accuracy undefended
+- Against WTF-PAD: **90%**
+- Against Walkie-Talkie: **49.7%** (near the theoretical max for W-T)
+- Open world, 20,000 unmonitored sites, undefended: **0.99 precision / 0.94 recall**
+- Open world against WTF-PAD: **0.95 precision / 0.70 recall** (abstract states 0.96/0.68; body states 0.95/0.70 — the paper is internally inconsistent by ~1–2 points)
+
+**Juarez et al., "A Critical Evaluation of Website Fingerprinting Attacks," CCS 2014** — DOI 10.1145/2660267.2660368, PDF https://www.esat.kuleuven.be/cosic/publications/article-2456.pdf
+
+The measured fragilities, and these are the ones that matter for a long-lived pseudonym:
+- **Time decay: "it takes less than 10 days to drop under 50%"** accuracy, training at t=0 and testing across 90 days. They restricted all other experiments to a 5-day window because of it.
+- **Multi-tab browsing:** with a 5-second gap between opening two tabs, accuracy "drops by over 68%" relative to control — even though ~30% of the trace remained uncovered by background traffic.
+- Verification step reduces false positives "**over 63%**" but "does not completely solve the problem."
+- Aggregate: "for some of the variables, **the accuracy can drop up to 70%**."
+
+### 3b. End-to-end flow correlation — DeepCorr
+
+**Nasr, Bahramali, Houmansadr, "DeepCorr," CCS 2018** — arXiv:1808.07285, https://arxiv.org/pdf/1808.07285
+
+The requested numbers, verbatim from the paper:
+- **"by collecting only about 900 packets of each target Tor flow (roughly 900KB of Tor data), DeepCorr provides a flow correlation accuracy of 96% compared to 4% by the state-of-the-art system of RAPTOR using the same exact setting."** A 24× gap.
+- With only **300 packets**: TP ≈ **0.8** at FP = 10⁻³, "compared to less than 0.05 by prior work."
+- With ℓ = **100 packets**: TP = **0.62** at FP = 10⁻³.
+- Trained on **25,000 Tor flows**, ~1 day on a single TITAN X. "an adversary needs to re-train DeepCorr only about **once every month**" — note this is far more durable than website fingerprinting's 10-day half-life.
+- Per-correlation cost **2 ms** vs RAPTOR's >20 ms at matched 95% accuracy.
+- Pluggable transports: "**meek and obfs4-iat0 provide little protection**"; obfs4-iat1 is better but barely deployed.
+
+### 3c. Onion-service and circuit fingerprinting
+
+**Kwon, AlSabah, Lazar, Dacier, Devadas, "Circuit Fingerprinting Attacks," USENIX Security 2015** — https://www.usenix.org/system/files/conference/usenixsecurity15/sec15-paper-kwon.pdf
+
+Passive, no active probing:
+- Detect that a user is *using a hidden service at all*: **>98% TPR, <0.1% FPR** (attack 1); **99% TPR, 0.07% FPR** (attack 2). "This detection reduces the anonymity set of a user from millions of Tor users to just the users of hidden services."
+- Then WF *within* that set: which of 50 monitored pages, **88% TPR / 2.9% FPR**; deanonymizing 50 monitored hidden-service **servers**, **88% TPR / 7.8% FPR**, open world.
+
+Their framing directly rebuts Juarez: "we revisit their findings and demonstrate that **the world of hidden services is the ideal setting to wage WF attacks**." The reason is exactly your topic — a small, stable, long-lived set of endpoints defeats the base-rate and time-decay defences that protect the open web.
+
+**Biryukov, Pustogarov, Weinmann, "Trawling for Tor Hidden Services," IEEE S&P 2013** — https://www.ieee-security.org/TC/SP2013/papers/4977a080.pdf
+
+The uptime/longevity finding, with a price tag:
+- Harvest **all** hidden-service descriptors — "a global picture of all hidden services in Tor" — in **~2 days**, 50 (later 58) EC2 instances, ~3% descriptor loss.
+- Targeted deanonymization: a single EUR 45/month guard had **0.6%** selection probability; 23 such servers give **13.8%** per-try; **within 8 months, >90% probability** of becoming a long-running hidden service's guard, total **EUR 8,280 (~USD 11,000)** — "this scales well: Attacking multiple hidden services can be achieved for the same cost once the infrastructure is running."
+
+**A long-lived pseudonymous service is priced in months of uptime, not in cryptographic strength.**
+
+### 3d. Linking multiple pseudonyms by correlated activity timing — MOSTLY A GAP
+
+I searched Crossref and arXiv specifically for this. The finding is largely negative and worth stating plainly:
+
+The "user identity linkage" (UIL) literature is real but is **graph-, content-, and mobility-based, not device-timing-based**. Representative:
+- Chen et al., "HFUL," arXiv:2201.02830 (2022) — spatio-temporal, but the signal is **GPS check-ins**, not network timing.
+- "Correlation-Attention Masked Temporal Transformer for User Identity Linkage Using Heterogeneous Mobility Data," arXiv:2504.01979 (2025) — reports only relative gains (**12.92%–17.76% Macro-F1**, 5.80%–8.38% AUC improvement over baselines); no absolute linkage rate in the abstract.
+- Survey: "User Identity Linkage on Social Networks: A Review of Modern Techniques and Applications," arXiv:2409.08966 (2024).
+- Notably, most UIL abstracts (I checked 12) **report no absolute accuracy at all** — they report improvements over baselines. This literature is not calibrated for threat modelling.
+
+**There is no measured study of "same device, N pseudonyms, linked by correlated activity timing" that I could find.** The closest measured thing is §5 below (Careless Whisper), which does it as an *active probe* rather than a passive correlation, and gets device-fleet enumeration for free.
+
+---
+
+## 4. IP / RELAY-LEVEL CORRELATION OF ACCOUNTS
+
+**FTC, "Cross-Device Tracking: An FTC Staff Report," January 2017** — https://www.ftc.gov/reports/cross-device-tracking-federal-trade-commission-staff-report-january-2017 · PDF https://www.ftc.gov/system/files/documents/reports/cross-device-tracking-federal-trade-commission-staff-report-january-2017/ftc_cross-device_tracking_report_1-23-17.pdf
+
+Quoting the mechanism directly:
+
+> "A common method of probabilistic tracking is **IP address**... Because devices on the same local network often have the same public IP address, the ad platform might infer that a computer, smartphone, and tablet that use the same public IP address **belong to the same household**."
+> "if a consumer's smartphone uses the same public IP address as her work computer during business hours, and then uses the same public IP address as her home computer during non-business hours, an ad platform might infer..."
+
+The report notes IP address is "one of the most commonly used data points" for this, and that industry fuses the two approaches: "companies that have deterministic data... frequently work with entities engaged in probabilistic tracking"; one firm "leverages a small core of deterministic data... to **train its probabilistic device graph**."
+
+The report is **qualitative on accuracy**. It gives no measured linkage rate. The numbers it does carry are consumer-behaviour ones (30–50% of users delete cookies monthly; 29% of US consumers used ad blockers as of Jan 2016; 419 million / 22% of world smartphone users blocking mobile web ads). **NOT MEASURED: cross-device match accuracy.** I found no public measurement of IP-based household-graph precision. This appears to be genuinely unmeasured in the open literature — the graphs are proprietary.
+
+Kollnig et al. (below) supplies the mechanism-level confirmation from the app side: locale, device model, and OS version "can be used to **disambiguate different users connecting from the same IP address** (e.g. households sharing the same Wi-Fi router) – and even across different IP addresses through the use of additional, first-party data."
+
+---
+
+## 5. PRESENCE AND TYPING INDICATORS — the best on-topic measured result
+
+### 5a. Careless Whisper (RAID 2025, **Best Paper**) — DIRECTLY ON YOUR THESIS
+
+**Gegenhuber, Günther, Maier, Judmayer, Holzbauer, Frenzel, Ullrich (U. Vienna / SBA Research), "Careless Whisper: Exploiting Silent Delivery Receipts to Monitor Users on Mobile Instant Messengers."**
+DOI 10.1109/raid67961.2025.00068 · arXiv:2411.11194v4 (v4 dated 2025-10-31) · https://arxiv.org/pdf/2411.11194v4
+
+This paper is the single closest match to your topic in the entire literature, because it measures **device-fleet enumeration** as a side effect of presence.
+
+Mechanism: crafted messages trigger **silent delivery receipts** — no notification on the target side, no existing conversation required, target addressable **by phone number alone**. Read receipts can be disabled; **delivery receipts cannot**, "due to design choices of the underlying protocol." Affected: **WhatsApp and Signal** (Threema also analysed).
+
+Measured results:
+- **Screen on/off leaks through RTT.** Screen-on RTTs ≤ 1 second; screen-off > 1 second (Fig. 1, iPhone/WhatsApp, 1 Hz sampling). Enables tracking a victim's screen time.
+- **Device-fleet enumeration.** Probing a target's device list returned `[0, 1, 9]` — "three existing sessions, one main device (index 0), and two companion devices (index 1, 9). Due to the **(auto-incrementing) index, we know in which order the sessions were created**."
+- **Per-device liveness and per-device OS.** In an open-world walk-to-the-office capture on a volunteer with **no prior relation to the attacker** ("the worst attack scenario of a spooky stranger"), they distinguished: desktop on LAN (stable RTT, low jitter) vs phone; the moment the desktop shut down at 19:28; the phone's Wi-Fi→LTE handover; a phone call (denser receipts); arrival at the office at 19:45 and LTE→Wi-Fi; a work laptop (device 9) waking and flushing missed receipts. From receipt stacking order: "we know that this device is a **macOS computer running the WhatsApp desktop client**."
+- Resource exhaustion, same channel, no notification: **3.7 MB/s = 13.3 GB/hour** of forced traffic on WhatsApp from a single session; battery drain per hour iPhone 13 Pro **14%**, iPhone 11 **18%**, Samsung Galaxy S23 **15%**, against <1% idle. Signal's stricter rate limits held it to 1%/hour.
+- Prior work (ref [21], same group) had already shown **country-level geolocation** from receipt RTT using ordinary messages; this paper's contribution is going silent and sub-second.
+
+Responsible disclosure to platform operators; the authors "argue for a design change."
+
+**Why this matters to you specifically:** the mechanism enumerates *how many sessions a person runs, in what creation order, on what OSes, and which are live right now* — from a phone number. Every persona sharing that fleet inherits the same session index space. This is the transport layer publishing your fleet topology while the data layer holds perfectly.
+
+### 5b. The keystroke-timing lineage
+
+**Song, Wagner, Tian, "Timing Analysis of Keystrokes and Timing Attacks on SSH," USENIX Security 2001** — https://www.usenix.org/legacy/events/sec01/full_papers/song/song.pdf
+
+The two structural weaknesses, in the authors' words: packets "padded only to an eight-byte boundary... which reveals the approximate size of the original data," and "in interactive mode, **every individual keystroke that a user types is sent to the remote machine in a separate IP packet immediately after the key is pressed**."
+
+Measured:
+- Inter-keystroke latency yields **~1.2 bits of information per character pair**; for a password of length T, "approximately 1.2T bits."
+- Their Herbivore attack "**reduces the cost of password cracking by a factor of 50**" — "Herbivore only needs to test 1/50 times as many" candidates; equivalently ~5.7 bits learned per password.
+- Context: "the entropy of written English is very low (about **0.6–1.3** bits per character)."
+
+The direct read-across: any typing-indicator that is emitted per-keystroke or at keystroke granularity reproduces exactly the SSH-interactive weakness at the application layer, and does so *across* whichever persona is typing.
+
+### 5c. WhatsApp online-status monitoring — earlier, weaker
+
+"Research: Large-Scale WhatsApp User Monitoring," 2014-12-09, https://www.onlinestatusmonitor.com/data_summary/ — this is the long-cited demonstration that online/last-seen status can be polled at scale to reconstruct sleep and activity patterns. **NOT REACHED** (I did not fetch the page; it surfaced only via HN Algolia). Treat as a pointer, not a citation. The 2025 RAID paper above supersedes it with proper measurement.
+
+Platform response timeline (secondary, HN-surfaced): WhatsApp began rolling out "hide online status" on iOS around 2022-07 (https://9to5mac.com/2022/07/02/whatsapp-hide-online-status/) and broadly by 2022-11. Note this control covers *online status* and does **not** cover delivery receipts, which §5a shows cannot be disabled.
+
+---
+
+## 6. BACKUP METADATA
+
+This section is the thinnest, and I want to be honest that most of what circulates here is claimed rather than measured.
+
+**Measured (Apple's own transparency CSVs, same zip as §1c):**
+
+| Period | Device requests | Devices specified | Account requests | Accounts specified |
+|---|---|---|---|---|
+| 2023 H1 | 28,396 | 159,010 | 18,646 | 56,692 |
+| 2023 H2 | 27,691 | 133,282 | 20,405 | 58,549 |
+| 2024 H1 | 40,905 | 556,410 | 25,496 | 72,254 |
+| 2024 H2 | 34,563 | 464,666 | 28,745 | 82,729 |
+| 2025 H1 | 28,825 | 662,705 | 29,825 | 81,781 |
+| 2025 H2 | 29,948 | 536,317 | 32,240 | 95,241 |
+
+Account requests — the category that reaches iCloud content including backups — rose steadily to **32,240 requests / 95,241 accounts** in 2025 H2. Devices-specified spiked ~4× in 2024 H1 and has stayed high. The zip also contains `us_national_security_requests.csv` and `uk_data_access_agreement_ipa_warrant_requests.csv`, both of which are relevant and which I did not aggregate.
+
+**Design facts (via Wikipedia's iCloud article, https://en.wikipedia.org/wiki/ICloud, with its own citations):**
+- Standard iCloud Backup is **not** end-to-end encrypted; Apple holds the keys.
+- The compounding defect: "if iCloud Backup is enabled, **the encryption key for Messages in iCloud is part of the backup**, allowing Apple to access users' entire iMessage history if served with a search warrant." An E2EE messaging layer is undone by the backup layer.
+- Advanced Data Protection: announced **2022-12-07**, US **2022-12-13**, worldwide **2023-01-23**; optional, opt-in.
+- **February 2025:** UK government pressure led Apple to disable ADP for new users in that jurisdiction. Note the alignment with §1c — the UK is also by far the largest push-token requester.
+
+**Google Android backup E2EE: NOT REACHED.** support.google.com CAPTCHA'd on two attempts, and the security blog post body did not render. Google has publicly described screen-lock-derived, Titan-HSM-protected backup encryption, but **I could not retrieve the primary text and will not quote it from memory.**
+
+**No measured study of backup metadata as a cross-persona linkage vector was found.** This is a genuine gap. The mechanism is obvious — one backup contains every persona's app state, and one account holds the backup — but nobody has measured it.
+
+---
+
+## 7. BROWSER / DEVICE FINGERPRINTING ACROSS PERSONAS
+
+**Eckersley, "How Unique Is Your Web Browser?" (Panopticlick), PETS 2010** — https://coveryourtracks.eff.org/static/browser-uniqueness.pdf
+- **470,161 browsers** sampled.
+- Fingerprint distribution carries **at least 18.1 bits of entropy** — "only one in **286,777** other browsers will share its fingerprint."
+- With Flash or Java: **18.8 bits**; **94.2%** of such browsers were unique in the sample.
+- On *re-linking across change* — the persona-relevant part: fingerprints changed rapidly, "but even a simple heuristic was usually able to guess when a fingerprint was an 'upgraded' version of a previously observed browser's fingerprint, with **99.1% of guesses correct and a false positive rate of only 0.86%**."
+- The self-defeat warning, still true: "anti-fingerprinting privacy technologies can be **self-defeating if they are not used by a sufficient number of people**."
+
+**Laperdrix, Rudametkin, Baudry, "Beauty and the Beast," IEEE S&P 2016** — DOI 10.1109/sp.2016.57, PDF https://www.ieee-security.org/TC/SP2016/papers/0824a878.pdf
+- **118,934 fingerprints**, **17 attributes** (AmIUnique dataset).
+- **90% of desktop** fingerprints uniquely identified; **81% of mobile** (13,105 mobile fingerprints), "despite the lack of plugins and fonts" — mobile is carried instead by rich user-agents and canvas.
+- Canvas is "one of the most discriminating attributes"; **89.4%** of browsers uniquely identifiable with it in play (their comparison figure); **95%** uniquely identified among the Flash-bearing subset.
+- Simulated defence: removing plugins and standardising HTTP headers "could reduce desktop fingerprint's uniqueness by **a very strong 36%**."
+
+**Cao, Li, Wijmans, "(Cross-)Browser Fingerprinting via OS and Hardware Level Features," NDSS 2017** — DOI 10.14722/ndss.2017.23152, PDF https://yinzhicao.org/TrackingFree/crossbrowsertracking_NDSS17.pdf
+
+The requested figure, confirmed at source:
+- **Single-browser: 99.24%** of users identified, "as opposed to **90.84%** for AmIUnique, i.e., state of the art, on the same dataset."
+- **Cross-browser: 83.24% uniqueness with 91.44% cross-browser stability**, versus prior work (Boda et al., excluding IP address) at **68.98% uniqueness / 84.64% stability**.
+- IE and Edge on the same machine: **100% uniqueness with 95.7% cross-browser stability** — "they probably share a" common implementation.
+- Method: OS/hardware-level probes (GPU rendering via WebGL, CPU virtual cores, installed writing scripts/fonts, screen attributes) — chosen precisely because they survive the browser boundary.
+- The authors' own framing: this is a "**2.5-generation**" technique, between second-gen (stateless, single-browser) and third-gen (cross-device).
+
+**Vastel, Laperdrix, Rudametkin, Rouvoy, "FP-STALKER: Tracking Browser Fingerprint Evolutions," IEEE S&P 2018** — DOI 10.1109/sp.2018.00008. **PAPER PDF NOT REACHED** — HAL is behind Anubis anti-bot, IEEE stamp-PDF and the author's site both returned HTML. From the IEEE S&P 2018 program page (https://www.ieee-security.org/TC/SP2018/program.html, a **weak secondary source**, flagged as such): ~**100,000 fingerprints** from ~**1,900 browser instances**, average tracking duration ~**54 days**, with **over a quarter of browsers tracked beyond 100 days**. Verify these against the paper before relying on them.
+
+**Read together, §7 says:** two personas in two different *browsers* on one machine are linkable at 83.24% (Cao), and a single persona's fingerprint drift is re-linkable at 99.1% correct / 0.86% FP (Eckersley). Browser separation is not persona separation.
+
+---
+
+## 8. MOBILE ADVERTISING ID — CROSS-APP LINKAGE, 2021–2022
+
+**Kollnig, Shuba, Binns, Van Kleek, Shadbolt, "Are iPhones Really Better for Privacy?" PETS 2022** — arXiv:2109.13722
+- **24,000 apps** (Android + iOS), 2020 snapshot.
+- The AdId "is **the only cross-app identifier** that may be used for advertising on Android."
+- Measured sharing over the network: AdId shared by **55.4% of Android** apps and **31.0% of iOS** apps.
+- **85.1% of Android and 61.4% of iOS** apps shared device model and phone name — "which can be used as part of device fingerprinting."
+- Other Android identifiers still observed in traffic: Android ID **18.2%**, IMEI **1.3%**, serial **1.1%**, WiFi MAC **0.6%** (all now blocked as of Android 10).
+- On iOS, cross-app identifier access was near-universal among ad SDKs: among apps with Unity3d Ads, **>99%** accessed the AdID; Moat **100%**; Inmobi **>94%**.
+
+**Kollnig, Shuba, Van Kleek, Binns, Shadbolt, "Goodbye Tracking? Impact of iOS App Tracking Transparency and Privacy Labels," FAccT 2022** — DOI 10.1145/3531146.3533116, arXiv:2204.03556
+- **1,759 iOS apps** compared before vs after ATT (UK App Store).
+- ATT works *as designed*: "Apple's new policies, as promised, **prevent the collection of the IDFA**." Only **24.7%** of post-ATT apps can access the IDFA on iOS ≥14.5. Between **60% and 95%** of users refuse tracking when asked.
+- **But the tracking did not go away:** "the number of tracking libraries has – on average – roughly stayed the same." Mean tracking libraries 3.7 before → 3.6 after; **86.39%** of apps still contained at least one. Average tracking domains contacted *before any user interaction* went **up**: 4.0 before → 4.7 after.
+- **The finding that matters most here — measured cross-app re-identification rebuilt server-side:**
+  > "we found **9 apps that were able to generate a mutual user identifier that can be used for cross-app tracking, through the use of server-side code**. These 9 apps used an '**AAID**'... implemented and generated by **Umeng, a subsidiary of the Chinese tech company Alibaba**."
+  This "**violat[es] Apple's policies**."
+- And the general mechanism, stated plainly:
+  > "large tracking companies can likely still use these identifiers to build profiles of an app user's journey across apps, **using their server-side code to link different identifiers together** (e.g. through the user's IP address, other device information, and first-party data)."
+- Device information still shared post-ATT and usable "for fingerprinting or cohort tracking" — device model **74.5%** after (up from 60.2%), locale **90.1%**, carrier, timezone, ARM/memory string.
+- Also: Google "assigned an `android_id` to an iOS app upon first contact."
+
+**This is the empirical proof of the general shape:** kill the platform-blessed cross-app identifier and the ecosystem reconstitutes one out of device attributes plus IP plus server-side joins, within a year, in shipping apps.
+
+---
+
+## SYNTHESIS — what is MEASURED vs what is only CLAIMED
+
+**Measured, hard, and directly against multi-persona-on-one-device:**
+1. **Push token → account resolution.** Apple's own numbers: 489 requests / 867 tokens in 2025 H2 alone, 15 countries, 7× growth since 2022 H2, ~68% fulfilment. Apple's own category definition says the point is to get the *account* behind the token. Per-app token scoping does not help.
+2. **Play Integrity `deviceRecall`.** 3 bits, Google-server-side, **survives app reinstall and factory reset**. Restrained only by policy text.
+3. **DeviceCheck.** 2 bits, per device, by design, in the docs.
+4. **Careless Whisper.** Session-count, session creation order, per-session OS, and per-session liveness — from a phone number, silently, at sub-second sampling, on WhatsApp and Signal. RAID 2025 Best Paper.
+5. **Cross-browser fingerprinting at 83.24%** (Cao NDSS 2017), fingerprint-drift re-linking at 99.1%/0.86% FP (Eckersley 2010).
+6. **Cross-app identifier reconstitution** post-IDFA: 9 apps, Umeng AAID, server-side (Kollnig FAccT 2022).
+7. **Flow correlation at 96%** on 900 packets, retrain monthly (DeepCorr CCS 2018); **hidden-service usage detection at >98% TPR / <0.1% FPR** (Kwon USENIX 2015); **onion-service guard capture at >90% for USD 11,000 over 8 months** (Biryukov S&P 2013).
+
+**The defender's genuine cover, also measured:**
+- Website fingerprinting **does not scale** at Internet scale (Panchenko NDSS 2016) — "cannot be reliably used to convict users, but it may be used to limit the set of possible suspects."
+- WF accuracy falls **under 50% within 10 days** and **~68%** under multi-tab (Juarez CCS 2014).
+- APNs tokens are genuinely per-app-per-device; App Attest keys are per-account-per-device *by Apple's own recommendation*.
+- Google abandoned Web Environment Integrity outright (Nov 2023), and its explainer conceded the cross-site linkage risk in writing.
+
+**Real gaps — nobody has measured these:**
+- Attestation (Play Integrity / App Attest / DeviceCheck) as a *fingerprinting* channel. Zero arXiv hits for attestation+privacy+linkability. The risk is documented by the vendors and unmeasured by researchers.
+- IP-based cross-device/household-graph *accuracy*. The FTC 2017 report describes the mechanism and gives no match rate. The graphs are proprietary.
+- Backup metadata as a cross-persona linkage vector. Obvious mechanism, no study.
+- **Passive linkage of N pseudonyms on one device by correlated activity timing.** The UIL literature is graph/content/GPS-based, mostly reports only relative improvements, and does not address this. Careless Whisper gets there actively instead.
+
+**Marked NOT REACHED:** Reuters, AP, Wired, The Verge, Washington Post, Axios (403), EFF Deeplinks (404), Google Transparency Report and all support.google.com (CAPTCHA), Google's Android backup E2EE primary text, FP-Stalker full paper (HAL/IEEE/author-site all blocked — its numbers above come from the S&P 2018 program page and should be re-verified), onlinestatusmonitor.com 2014 data summary. No 2024 or 2025 Wyden push-notification follow-up exists on wyden.senate.gov — searched three result pages; that is a negative finding, not a fetch failure.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;KNKylP6ylPonvVvbFowYtfK7Tkp4f5KHQ4XjbvZFMUg
+
+<<^ code="&#x0004;" -> to=? >>

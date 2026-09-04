@@ -1,0 +1,151 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-keybase-1f2d42 >>
+```toml meta
+cacheable = false
+file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-keybase-1f2d42.mem"
+l-space   = "stable"
+mana      = 12
+manao     = 14
+manaoio   = 10
+namespace = "&#x2299;"
+register  = "Testimony-Verbatim"
+retain    = true
+role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: PART A — KEYBASE. Fenced so its sigil-shaped text reads as content, never as grammar."
+tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
+type      = "text/memetic-wikitext+tiddlywiki"
+uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-keybase-1f2d42"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! PART A — KEYBASE
+
+The three largest messages one research spirit wrote, ''held verbatim and unedited''. Its own words decide the heading above.
+
+⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
+
+<<~/ahu >>
+
+<<~ ahu #message-1 >>
+
+!! Message 1 ~ 22,331 characters
+
+````
+## Research Report: "Identity = per-device keys, no single human-held key" — Keybase, Matrix, Signal
+
+**Methodology note:** WebSearch was unavailable for the entire session (shared session budget already exhausted before I started). All findings below come from direct WebFetch on primary-source URLs (vendor docs, blog posts, spec pages, the NCC Group PDF) plus the Hacker News Algolia search API and the GitHub Issues search API via `gh`. Reddit is completely unreachable (both `www.reddit.com` and `old.reddit.com` refused/blocked JSON and HTML endpoints) — this is a real gap, noted per-item below. Google/Bing/DuckDuckGo scraping via WebFetch is dead (CAPTCHA or junk). ~30 fetches/searches completed.
+
+---
+
+### PART A — KEYBASE
+
+**Device-key model & sigchain (confidence: high — primary source, `book.keybase.io` + NCC audit PDF)**
+Keybase moved from a single-PGP-key-per-user model to per-device NaCl (Curve25519/Ed25519) keys. A device is provisioned by an *existing* device signing a statement about the new device's key ("the old key is signing a statement about the new key, and the new key is countersigning" — HN user NickBusey quoting Keybase's own FAQ, https://news.ycombinator.com/item?id=9878378-era thread). Every identity/device/proof action is appended as a signed **chain link** to a per-user **sigchain**; sigchains are public and designed to be immutable. Full technical description of the sigchain (chain links, sequence numbers, prev-hash chaining, V1/V2 payload formats, legacy PGP vs. NaCl signature types) is in the NCC Group audit, Sigchain Design section — https://keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf, pp. 6-9.
+
+Keybase periodically hashes all sigchains into a Merkle tree and writes the root to a public blockchain so any client can detect server rollback/truncation attacks — originally **Bitcoin** (https://keybase.io/docs/server_security/merkle_root_in_bitcoin_blockchain, redirects to book.keybase.io). One HN comment from Jan 2026 (via Algolia search) states Keybase "previously Bitcoin, currently Stellar" — **confidence: low**, single unverified forum comment, I could not independently confirm the Bitcoin→Stellar migration via an official doc (the `book.keybase.io` path 403'd on repeated fetch attempts).
+
+**Local Key Security (LKS):** device-local private keys are further protected by a password-derived mask XORed with a random per-device symmetric key; the server stores only the mask, never the key itself, but a server+device compromise together enables offline password brute-forcing (NCC report, pp. 10).
+
+**Paper keys (confidence: high, primary source):** A paper key is a full NaCl keypair rendered as human-copyable words (format example from the Keybase blog: "death punch correct staple battery horse clearly cherry picked..."). It functions exactly like another device: it can provision a new device or revoke a compromised one, without moving a private key through any channel Keybase controls. Source: https://keybase.io/blog/keybase-new-key-model.
+
+**Measured limitation, not intent (confidence: high, developer statement):** Keybase developer oconnor663 stated on HN that "there's no way for adding a new device from a paper key to transfer chat history" — paper-key recovery restores identity/authority but not encrypted chat history, a real, admitted gap in the "no single point of loss" story. (https://hn.algolia.com/api/v1/search?query=keybase%20reset%20account%20big%20deal — comment thread on "Open letter concerning Facebook's proposals to apply end-to-end encryption," Dec 2019.)
+
+**Measured UX failure (confidence: medium, single first-hand report, not independently corroborated):** HN user BjoernKW (2017-05-12) reported the paper-key confirmation flow was "broken": he opened a password manager to save the paper key text, and by the time he returned to the Keybase app it had already silently advanced past the confirmation screen, i.e., a UI race condition around the single moment users are asked to actually record their one recovery artifact.
+
+**What fraction of users actually kept a paper key — negative result (confidence: high that no such data exists publicly):** I found **no published statistic** — not from Keybase, not from any audit, not from any forum aggregation — on what fraction of users generated, printed, or retained a paper key. This appears to be genuinely unmeasured. The closest signals are anecdotal:
+- HN user tuxracer (2017-05-14): "If for some reason in the future you lose access to the devices you have already logged into Keybase with then you'll permanently lose access to that account with absolutely no way to recover any of the files, messages, etc... It may be unlikely you'd lose access to multiple devices at once but seems risky to even continue using that account without the paper key."
+- HN user fiatjaf (2017-02-08): "I'm going to lose the paper key just like I lost my 5 BTC wallet just before the great Bitcoin boom of 2013" — self-deprecating acknowledgment that paper-key loss is a real, expected failure mode, not a hypothetical one.
+- GitHub issue titled literally "I lost my paper keys 'WAYNE phone', 'cave cruise' and 'want female'" (https://github.com/keybase/client/issues/21111, filed 2019-11-19, still open) — direct evidence of the failure mode occurring, no resolution visible in the metadata.
+
+**Total-device-loss support load (confidence: medium-high, GitHub issue titles as evidence, not full thread content):** A GitHub issue search on `keybase/client` for "account reset" and "paper key lost" surfaced a long-running, recurring stream of user reports going back to at least 2016 and continuing through 2025: "Lost Credentials Loop" (#11304, 2018), "Error Code 218 – Prompt attempts exhausted" (#10389, 2018), "Cannot chat after reset" (#26237, 2024), "I am not receiving account reset information" (#28338, 2025-04-05). This is evidence of sustained support burden, not a resolved-vs-unresolved count (I did not open full issue threads to check resolution).
+
+**The account-reset escape hatch (confidence: high for existence/mechanics, medium for exact introduction date):** Keybase built a self-service "account reset" flow as the escape hatch for total device+paper-key loss. Evidence it existed by **2016** (not a later patch): GitHub issue "KBFS not usable after account reset" is dated 2016-03-29 (#2472), and "Account reset window is undismissable" dated 2017-02-01 (#5630). What account reset costs the user, per the sigchain design (NCC report p.6): "After creation of a new user or resetting an account, a new subchain is created within the sigchain. This subchain simply represents a particular starting point... where any prior statements are ignored and a new 'eldest' signing key is declared." I.e., reset does **not** delete the username/history record but starts a fresh signing lineage — all previously-issued cryptographic claims (device list, followers, third-party proofs) are severed from the new eldest key and must be redone; anyone who had cryptographically pinned the old identity sees a break.
+
+Developer oconnor663 (Keybase) explained on HN why resets are treated as "a big deal": because Keybase eliminated TOFU dialogs by using social-proof verification instead, "adversaries in the middle can pretend to be me and act like I've reset my account" — so resets are deliberately made consequential/slow rather than casual, precisely to prevent reset-spoofing attacks. HN user atdrummond (2022-12-26) reported being **locked out for 5 days** after initiating an account reset — a concrete, dated, first-hand data point on reset friction (https://hn.algolia.com/api/v1/search?query=keybase%20account%20reset%20locked%20out).
+
+**Reddit gap (explicit negative result):** I could not reach Reddit at all (`www.reddit.com` blocked with "Claude Code is unable to fetch"; `old.reddit.com` same). Any Reddit-specific anecdotes about lost-all-devices users are **not represented** in this report — this is a real coverage gap, not an absence-of-data finding.
+
+**NCC Group audit (confidence: high, read primary PDF directly, pp. 1-10):**
+- Scope: Sept 10–28, 2018 review (retested Feb 2019), Keybase Protocol v2.7.0, 9 person-weeks, 3 consultants. Scope = documentation (keybase.io/docs), client code (a specific GitHub commit), and the go-codec encoding/decoding library.
+- Findings: 0 Critical, **1 High**, 3 Medium, 1 Low. Categories: Cryptography (2), Data Validation (2), Denial of Service (1).
+- Key structural critique: sigchain verification correctly prevents most tampering (insertion, deletion, reordering, cross-user inconsistency via the Bitcoin-anchored Merkle root), but a malicious server *can* truncate a sigchain and falsely present the truncation as the true end-state — this is only caught by *out-of-band* social verification (other users' follower statements) or continuous client-side monitoring, and NCC explicitly flags that "it is unclear who has responsibility" for third-party auditing of the public record, and unclear whether anyone was actually doing it.
+- The report also flags that the client's variety of legacy-vs-modern signature/payload formats (PGP + NaCl, V1 + V2 payloads) created ambiguity attackers could exploit — this is finding NCC-KB2018-004, tied to "unsigned data... used to influence how signatures and payloads are interpreted."
+- I could not locate a later/second Keybase audit — only this one 2019 report appears to exist publicly.
+
+**Zoom acquisition & post-2020 trajectory (confidence: high for facts, medium for "why"):**
+- Zoom acquired Keybase May 7, 2020 (Wikipedia + multiple HN threads corroborate). Stated purpose: strengthen Zoom's own E2EE video comms.
+- HN "Ask HN: What Happened to Keybase.io?" (July 2022, item 32139844): consensus is "complete radio silence since the acquisition blog post," backend never open-sourced, Keybase Git (E2EE encrypted git hosting) quietly disappeared as a feature, teams migrating to Matrix/Element found onboarding "extremely painful."
+- HN "Ask HN: Why is keybase.io still up?" (May 2022) — code "receives updates," Chia Network cited as still using Keybase Chat with 20,000+ members as of that thread, so the service was not abandoned wholesale, just frozen strategically.
+- **keybase.pub** (the public KBFS file-exposure gateway) was explicitly shut down March 1, 2023.
+- As of my direct fetch of **keybase.io in 2026**, the homepage still presents the service as fully active (no shutdown banner, present-tense marketing copy, Tor onion service still advertised) — i.e., keybase.io has **not** been formally shut down as of this research, it is simply frozen/undeveloped since 2020. This directly contradicts any assumption of a clean "shutdown timeline" — the correct characterization is *indefinite maintenance-mode stagnation*, not decommissioning.
+
+---
+
+### PART B — MATRIX cross-signing / device verification
+
+**Design (confidence: medium-high — spec fetch was partially truncated, corroborated by Element's own help docs)**
+Matrix cross-signing uses three key tiers per user: a **master key**, a **self-signing key** (signs the user's own devices) and a **user-signing key** (signs other users' master keys the user has verified). These master/USK/SSK secrets are themselves protected by **SSSS** (Secure Secret Storage and Sharing), an account-data-stored, symmetrically-encrypted blob (`m.secret_storage.v1.aes-hmac-sha2`), unlockable either by a machine-generated **recovery key** or a **human-chosen passphrase**.
+
+**What the human actually ends up holding (confidence: high, primary source — Element's own current help page, fetched directly):** Per element.io/help — "A recovery key is a unique **48-character key** (e.g. `EsTZ 4us6 nh29 89jk U1uH Zbae 4PuS QQC1 86pt em8o R8nb bdwQ`) that is generated for you to be able to restore your chat backup and retain your digital identity when you lose access to all your devices." This directly answers the framing question: **yes, Matrix reintroduces a single human-held secret** — functionally the same shape as Keybase's paper key, just phrased as "recovery key" / "security key," with an optional human-memorable passphrase as an alternative derivation path. There is no way around holding *something*: the whole SSSS design exists because the alternative is total, permanent loss.
+
+**What happens on loss of everything (confidence: high, verbatim quote from Element's current help center, fetched live):**
+- "What happens if I've lost my recovery key?" → **"You will need to reset your digital identity, thus your previous messages can not be decrypted and other users will see that you have reset your digital identity."**
+- This is structurally identical to Keybase's "account reset": a fresh identity root, prior cryptographic continuity severed, contacts warned. Element even implements the same social-verification safety valve Keybase relied on: "Element notifies you whenever a contact's digital identity has been reset... The most common cause is a contact resetting their digital identity themselves, often due to losing all devices without a recovery key," and for previously-verified contacts, "we strongly recommend to re-verify as soon as possible."
+
+**Measured failure mode — "Unable to Decrypt" (UTD/UISI) (confidence: high on volume, medium on the specific percentage):**
+- GitHub issue search (`gh api search/issues`) for `"unable to decrypt"` scoped to `element-hq/element-web`, `element-hq/element-android`, and `matrix-org/matrix-rust-sdk` returns **322 total matching issues/PRs** (283 in element-web alone) spanning 2016 through 2026, including very recent ones: "Unable to decrypt all message history after verifying session with recovery key" (Aug 26, 2026, open, 0 comments) and "Unable to restore session" (17 comments, Jan 2026) — evidence this is a live, current-year problem, not purely historical.
+- A **specific percentage claim** surfaced in an HN thread from **November 2025** (via Algolia): user "Klaus23" stated "approximately 10% of users experienced at least one 'unable to decrypt' message daily," describing this as chronic since ~2020. This is a **single forum commenter's figure, not an Element/Matrix.org published statistic** — confidence: low-medium, treat as anecdotal order-of-magnitude, not verified telemetry.
+- In the same thread, Matrix project lead "Arathorn" (matrix.org) acknowledged the team did "a huge amount of work fixing E2EE issues" and that on the newest stack (matrix-rust-sdk-crypto, used by Element X and by matrix-js-sdk-on-rust-crypto for Element Web/Desktop) "'unable to decrypt' bugs should be unheard of," while inviting continued bug reports with debug logs — an admission the old stack's UTD rate was bad enough to be a named, prioritized fix target, not a claim it's now zero.
+
+**Element X / Rust SDK rewrite — what and why (confidence: high, direct developer quote via HN):**
+- Migration consolidated four parallel E2EE implementations (matrix-{js,ios,android,rust}-sdk) into one shared Rust core, **matrix-rust-sdk-crypto**, specifically to stop fixing the same class of encryption bugs four times independently.
+- The prior C implementation, **libolm**, was noted to use crypto primitives "which don't protect from timing attacks" (though not shown practically exploitable over a network) — a stated but secondary motivation; the primary driver was the UTD/reliability bug backlog.
+- Timeline (from the same HN developer comment, dated Sept 2024): most of 2023 spent fixing E2EE issues; by September–October 2024, "the stuck unread notification bug(s)" and major E2EE bugs were fixed and shipped in Element X / rust-sdk clients.
+- 2026 feature landing directly targeting a *related* usability failure: "Seamless encrypted history sharing arrives in Element" (May 13, 2026, element.io/blog) — lets new room joiners receive history decryption keys automatically via encrypted to-device messages instead of forcing admins to choose "leave history unencrypted" vs. "history invisible to new joiners." No adoption metrics were published with this post — it's framed qualitatively.
+
+**Verification-completion rates — negative result (confidence: high that no data exists):** I found **no published percentage** anywhere (Matrix.org, Element blog, academic search via OpenAlex/Crossref, or HN) on what fraction of Matrix/Element users complete device verification vs. skip it. One HN commenter (Dec 2023, in an unrelated thread comparing WebAuthn-style attestation to Matrix's key-comparison verification) noted qualitatively: "verification is still a pretty large source of friction from what I can tell" — but offered no number. Academic search (OpenAlex + Crossref, keyword variants on "Matrix protocol," "cross-signing," "E2EE usability") returned **no relevant papers** specifically studying Matrix's cross-signing UX — this looks like a genuinely under-studied area in the published literature, as distinct from just being hard for me to find.
+
+---
+
+### PART C — Signal (brief, as requested)
+
+**PNI — could not verify directly (confidence: low):** I could not fetch a canonical Signal blog post on "Phone Number Identity" (404 at the guessed URL, and Algolia HN search returned zero hits for the term). What I *did* verify directly is the closely related, better-documented **phone-number-privacy** rollout: "Keep your phone number private with Signal usernames," Feb 20, 2024 (signal.org/blog/phone-number-privacy-usernames/) — phone numbers hidden from contacts by default, a "Nobody" discovery-lookup setting, and usernames built on "a custom Ristretto 25519 hashing algorithm and zero-knowledge proofs" so Signal can't trivially map usernames back to phone numbers. This is adjacent to but not confirmed as the same mechanism as "PNI" — flagging this as an area I could not independently confirm.
+
+**Linked devices, 2025-2026 changes (confidence: high on facts, medium on "does it remove the phone dependency"):**
+- "A Synchronized Start for Linked Devices" (Jan 27, 2025): linking a new Desktop/iPad now optionally transfers messages/media (last 45 days) via a "one-time-use message history encryption key," instead of the linked device starting empty. Still requires **scanning a QR code with the primary device** to initiate — I could not confirm from the post text alone whether the primary phone must remain online for the duration of the transfer.
+- "More linked devices are on the table (and the Android tablet)" (Aug 4, 2026): extends "link-and-sync" to Android phones/tablets linking to an existing account, alongside iPhone. The post does **not** state that this removes the requirement for an original primary phone to exist, nor does it describe device "promotion" to primary on phone loss — I could not confirm total-device-loss recovery is solved by this feature; the post explicitly gestures at a *future*, not-yet-shipped capability: "restore your messages if you accidentally drop your phone in a lake."
+- **Net read (my synthesis, not a directly-quoted claim):** as of Aug 2026, Signal has significantly loosened phone-primacy for *day-to-day multi-device use*, but total-loss-of-all-devices recovery of message history remains, by Signal's own words, an acknowledged **future** feature, not a shipped one.
+
+**Signal PIN / SVR — the human-secret Signal grew (confidence: high, primary sources fetched directly):**
+- signal.org/blog/signal-pins/ (May 19, 2020): the PIN protects synced "profile, settings, and who you've blocked," and Signal states plainly: **"your PIN isn't recoverable if you forget it"** — permanent loss on forgetting, mitigated only by periodic reminder nags of decreasing frequency.
+- signal.org/blog/secure-value-recovery/ (Dec 19, 2019): SVR runs in **Intel SGX** secure enclaves with remote attestation. PIN is Argon2-stretched into an auth token plus a master key split as `c1` (from the stretched PIN) XOR-combined with `c2` (256 bits of enclave-held random data) — an attacker with only `c2` (i.e., compromising the server) still can't reconstruct the key without the PIN, and vice versa. **Guess limit enforced by Raft consensus across enclave replicas** (blog example cites 5 guesses) — this is the closest real-world analog to Keybase's paper key and Matrix's recovery key: a low-entropy human-remembered secret, hardened by rate-limiting infrastructure rather than by entropy.
+- This is an explicit, self-acknowledged tension in Signal's own design philosophy: SVR/PIN was purpose-built specifically because private *contact-list* cloud backup requires a key that survives total device loss — the same problem Keybase and Matrix solve with paper keys / recovery keys. All three systems converge on the same shape: **no-single-key marketing, one recoverable human secret in practice, protected by rate-limiting rather than secrecy strength.**
+
+---
+
+### Cross-cutting synthesis (my own read, not a sourced quote)
+
+All three systems that market themselves as "no single key" arrive at the *same* structural fallback under total device loss: one human-custodied artifact (Keybase paper key / Matrix 48-char recovery key or passphrase / Signal PIN), and if that artifact is also lost, the systems don't actually "recover" identity — they let the user **re-mint** a fresh identity root (Keybase's sigchain "eldest key" reset, Matrix's "digital identity reset") while sacrificing prior message history and requiring the social graph to re-verify out of band. None of the three vendors publishes hard telemetry on how many users actually retain their one artifact, or on end-to-end recovery-success rates — this specific number appears to be an industry-wide measurement gap, not something I simply failed to find.
+
+**Confidence-flagged gaps I could not close:**
+- No Reddit access at all (blocked at the network/tool level) — likely the richest source of individual "I lost everything" narratives for all three products.
+- The Bitcoin→Stellar Merkle-root migration claim for Keybase is single-source and unverified.
+- Signal PNI terminology could not be directly confirmed via a primary source.
+- No verification-completion-rate data exists in the public literature for Matrix (search exhausted: HN, GitHub, OpenAlex, Crossref all returned nothing).
+- The 10%-daily-UISI figure is one forum commenter's estimate, not Element/Matrix.org telemetry.
+````
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;NjmenlCBOxDZwPZ5k_97-7Ervc7GInSrg9Dza_FVHx0
+
+<<^ code="&#x0004;" -> to=? >>
