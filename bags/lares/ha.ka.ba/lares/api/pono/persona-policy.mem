@@ -84,6 +84,18 @@ The switcher ''applies the two-layer petname law'' (#/two-layer-petnames) to the
 
 ⚠ ''A DEVICE OWNER NAMES THE NEAR MISS, and it reads identical until you ask what it binds.'' A reader reaches for "the owner sets up the personas", and an owner ''wears an infrastructure name over a human'' — naming one re-binds the human this model declines to bind, and hands any chain somewhere to climb. ''A Persona manages.'' The distance between the two words measures the distance between this model and every model carrying an owner-of-record.
 
+!!! ⚠ The field's answer to this shape, and what it costs
+
+A sweep of the measured abuse literature (`docs/pono/managed-identity-scout`) returns one finding aimed straight here:
+
+> ''Nobody verifies who the manager is.'' Not one of forty supervised-identity products implemented multi-guardian consent; vendors assert //"only the device owner's consent is required"//; a regulator's own remedy accepts an unverified self-attestation checkbox.
+>
+> ⚠ //"A design where the manager is a persona with no human owner-of-record removes the last thing every existing system nominally relies on — an attributable person to attest."//
+
+''The refusal to bind a human buys the privacy property and spends the field's only accountability anchor'' — an anchor that measured out as a checkbox nobody checked. So the question this ruling inherits reads: ''what stands in for attestation when no person stands behind the manager?'' The sweep found no system that answers it.
+
+⚠ And it found ''no exit anywhere'': across every shipped supervised-identity system and every guardianship design, the subject's exit gates on the manager. The nearest thing standing is ''a petition right that cannot be confiscated'', never an exit — while the primitive that WOULD work (guardians who recover but never transact, removable unilaterally after a timelock) ''has never been pointed at a manager→subject relation''.
+
 <<~ confidence 13/20 >> ''What stands open'': how management TRANSFERS, whether a managed wearer can ever LEAVE with their Persona, what a blind veil costs when a managing Persona goes dark, and the abuse surface the manager relation opens — priced nowhere yet, against a literature that has already measured the household's authorized principal as its adversary.
 
 <<~/ahu >>
@@ -166,6 +178,6 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;522Ax0ZszsTHn4S80piuqNex0isMvOEUdgkTdIIptuw
+<<^ code="&#x0003;" >>ni:///sha-256;AhNPKmeiwhrBVF-aaQkgBEKtpeRXDtfFBAf9-BQPLn4
 
 <<^ code="&#x0004;" -> to=? >>

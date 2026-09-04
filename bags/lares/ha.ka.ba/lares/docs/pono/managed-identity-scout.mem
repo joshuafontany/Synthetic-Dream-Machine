@@ -1,0 +1,174 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/managed-identity-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 17
+manao             = 18
+manaoio           = 16
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "managed-identity-scout — VERBATIM handoff of the tasked spirit sent after the ABUSE SURFACE of managed identity. TWO HEADLINE ANSWERS: nobody has built an exit the manager cannot block, anywhere; and when management goes structural the AUTHORIZATION GRAPH becomes the abuse surface while malware falls to a rounding error. Carries the three separable properties no shipped system holds together, the measured 89%-dual-use surface, the five-year exit gap, the one normative text with zero implementations, and the finding that lands hardest on Ruling 2b — NOBODY VERIFIES WHO THE MANAGER IS."
+revised-on        = "2026-09-04"
+tags              = ["api/pono/meme", "api/pono/persona-policy"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/managed-identity-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Managed identity ~ the measured abuse surface
+
+A tasked spirit went after the abuse surface that opens when ''one identity manages another''. Two headline answers, both stated plainly:
+
+> ''Has anyone built an exit the manager cannot block? NO.'' Across every shipped supervised-identity system and every SSI guardianship design reached, the subject's exit gates on the manager's cooperation, an age threshold plus a manager-controlled toggle, or an external legal process.
+>
+> ''What breaks when management goes structural? The AUTHORIZATION GRAPH becomes the abuse surface, and malware falls to a rounding error.''
+
+<<~/ahu >>
+
+<<~ ahu #the-graph-is-the-surface >>
+
+!! ★ The surface measures as the authorization graph, not the software ★
+
+A clinic serving 44 clients across 105 devices found:
+
+|!detected |!count |
+|potential ''spyware'' |''3'' |
+|potential password compromise |14 |
+|''presence of unknown "trusted" devices'' |''12'' |
+|shared family / phone plan |4 |
+|clients with ≥1 vulnerability |''23 of 44 (52%)'' |
+
+''Relation-layer findings outnumbered spyware roughly 10:1'' — and the scanner did not find them. //"In some cases, the TAQ and technograph were the primary (or only) way to uncover a potential problem"// — a ''hand-drawn map of people, devices and accounts''.
+
+The clinic's own explanation: //"many abusers are seemingly able to surveil clients via compromised accounts, and so may not need to install spyware."//
+
+!!! And the tooling blocklist says the same thing at scale
+
+''5,777 flagged apps: dual-use 5,150 (89.1%) · stalkerware 613 · spyware 13.'' By store: ''99.2% ON-store''. And ''581 (10.1%) carry `family|parent|kid|child|teen` in the title'', 569 of them flagged dual-use.
+
+> ''The clinic's operational model of the abuse surface reads 89% legitimate-purpose software.''
+
+⚠ ''Making management structural does not ADD an app to the threat model. It IS the threat model.''
+
+<<~/ahu >>
+
+<<~ ahu #nobody-verifies-the-manager >>
+
+!! ★ Nobody verifies who the manager is ~ and this lands on Ruling 2b ★
+
+The spirit's own statement of what changes the shape of the design:
+
+> ''Nobody verifies who the manager is.'' None of 40 parental-control apps implemented multi-guardian consent; vendors assert //"only the device owner's consent is required"// — while ''device ownership extends beyond legal guardianship''; and a regulator's own remedy accepts ''an unverified self-attestation checkbox''.
+>
+> ⚠ ''A design where the manager is a persona with no human owner-of-record removes the last thing every existing system nominally relies on — an attributable person to attest.''
+
+''Read that against `persona-policy#the-managed-persona` directly.'' A Persona managing a PersonaGroup, with no human bound anywhere, is precisely the shape this names. The refusal to bind a human buys the privacy property AND spends the only accountability anchor the field has, ''and the field's anchor was already a checkbox nobody checked''.
+
+⚠ So the question the model inherits reads: ''what stands in for attestation when no person stands behind the manager?'' Nothing here answers it, and the sweep found no system that answers it either.
+
+!!! The one mitigation adversaries visibly complained about
+
+Not a UI notice. ''An identity-layer role check'' — one product verified the age of the account a device was registered to, and //"abusers complain in reviews… about the difficulty in using it"// for surveillance. ''The thing that worked lived in the identity layer.''
+
+<<~/ahu >>
+
+<<~ ahu #the-three-properties >>
+
+!! ★ The design axis ~ three separable properties, and nothing holds all three ★
+
+> ''The design axis is not visible-versus-invisible.'' It is three separable properties, and ''no shipped system or paper does all three'':
+>
+> # the management relation ''ENUMERABLE by the managed, and by a third party they choose''
+> # the alert ''NOT SWITCHABLE by the manager''
+> # the severance ''NOT ANNOUNCED to the manager''
+
+Property ② already exists as a written commitment in two places that never applied it to themselves — an anti-tracking standard's //"any mode that makes it possible to turn off Unwanted Tracking Alerts is antithetical… should not be circumventable under any circumstance"//, and a store policy compelling ''a persistent notification at all times'' plus a machine-checkable manifest flag on every third-party monitoring app.
+
+⚠ ''And the platforms wrote that rule for everyone but themselves.'' The same store forbids monitoring even a CONSENTING spouse — while its own family product ships ''no documented ambient indicator''. The other vendor writes no such rule and ships the cleanest silent supervision: a restricted app is //"just temporarily hidden from the Home Screen"// — no notice, no attribution. ''The relation stays visible in settings; every individual exercise of it stays invisible.''
+
+<<~/ahu >>
+
+<<~ ahu #the-two-directions >>
+
+!! ⚠ Visibility and severance pull opposite ways, and both are measured
+
+* ''Non-enumerability reads as a documented harm channel with NO counterexample.'' Every measured case where a relation could not be enumerated produced unrecoverable adversarial persistence. Nothing shows non-enumerability protecting anyone.
+* ''AND VISIBILITY IS NOT FREE.'' Severance that notifies the manager measures as an ''escalation trigger'', by four independent sources — including the anti-tracking standard's own threat model: //"taking overt security measures while frequently in physical proximity to the Attacker may lead to the Attacker escalating their tactics of interpersonal control."//
+
+> ''Visibility of the management relation and visibility of its SEVERANCE carry opposite signs. Any design that couples them inherits the worse half of both.''
+
+!!! The nearest quantitative test points sideways
+
+A meta-analysis of ''94 independent samples, N = 23,461'' on monitoring in another setting: //"no evidence that [monitoring] improves worker performance"//; //"the presence of [monitoring] increases worker stress and strain, **regardless of the characteristics of monitoring**"//. Transparency raised how people FELT about the monitor (ρ ≈ .21–.37) and ''showed no measured effect on performance''; its effect on stress ''could not be tested''.
+
+> ''Making monitoring visible measurably improved how people felt about the monitor. It did not measurably reduce the harm.''
+
+<<~/ahu >>
+
+<<~ ahu #the-exit-that-does-not-exist >>
+
+!! No exit exists anywhere, and the closest thing is a petition
+
+Across supervised-identity systems the subject's exit gates on the manager in every case: a child under 13 has ''none''; a managed enterprise account has ''none documented''; a supervised family member ''cannot leave the group''; a supervised teen must ''request'' and //"need your parent's approval to stop supervision"//.
+
+''The closest thing that exists reads as a petition right that cannot be confiscated, never an exit'' — one platform lists, among what parents CANNOT do, //"Remove your ability to stop supervision"//. What stands non-removable is ''the ability to ASK''.
+
+!!! ⚠ THE FIVE-YEAR HOLE
+
+> Consent age 13–16; exit age 18, or 13–17 gated on a manager-controlled toggle. ''The consent age and the exit age are different numbers in every system reached, and the gap is manager-controlled.''
+
+!!! The primitive that WOULD work has never been pointed at this relation
+
+Social-recovery wallets carry the one design where the delegated party ''provably cannot become the controller'': the subject holds the signing key, guardians recover but never transact, and ''the subject removes guardians unilaterally after a timelock''. ⚠ It contains ''no supervised-principal role at all'', so there is no exit to block — the correct primitive exists and ''has never been applied to a manager→subject relation''.
+
+<<~/ahu >>
+
+<<~ ahu #the-normative-floor >>
+
+!! The only text requiring a channel the manager cannot see or block
+
+A UN general comment on children's rights in the digital environment:
+
+> ''¶75'' — digital surveillance of children //"should not be conducted routinely, indiscriminately or **without the child's knowledge**… nor should it take place **without the right to object to such surveillance**."//
+> ''¶76'' — monitoring //"may prevent a child from accessing a helpline or searching for sensitive information."//
+> ''¶77'' — protecting a child's privacy //"may be vital in circumstances where **parents or caregivers themselves pose a threat to the child's safety**"//.
+> ''¶78'' — counselling providers //"should be **exempt from any requirement for a child user to obtain parental consent**."//
+
+⚠ ''This is the only text anywhere requiring a channel the manager can neither see nor block. It has ZERO implementations.''
+
+!!! And the law already treats monitoring as the conduct
+
+A coercive-control statute names //"monitoring a person via online communication tools or using spyware"// among its conduct, and its prosecuting guidance carries the decisive sentence: //"**A victim may not know the full extent of a suspect's conduct, for instance if they were being monitored without their knowledge.**"// Its evidential list treats ''covert and overt tracking as equally evidential'' — never as different-severity conduct.
+
+<<~/ahu >>
+
+<<~ ahu #two-instrument-lies >>
+
+!! ⚠ Two instrument-lies the spirit caught, one of them live in a standards body
+
+# ''A fetch-summarizer FABRICATED platform policy'' — presenting as quoted text a rule that monitoring apps must //"not operate covertly or without the knowledge of the person being tracked."// Disproved by raw-byte grep of the 238KB guidelines: `stalkerware` 0 · `monitor` 0 · `stalk` 0 · `covert` 0. ⚠ ''The summarizer invented a policy in exactly the direction a researcher would hope to find one.''
+# ''A live IETF working-group draft misattributes three percentages'' (72% / 41% / 67%) to a paper that ''contains zero `%` characters'' — verified directly. Its real figures are n-counts. ''True source unidentified'', and the misattribution stands in an active document.
+
+''Both cures ran the same way: fetch the raw bytes and count.''
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;ZJvOwleZX-ntNLpbGi3Dl4_4HNJy4YIGxNaxmVPS4zE
+
+<<^ code="&#x0004;" -> to=? >>
