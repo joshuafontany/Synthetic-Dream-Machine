@@ -149,6 +149,28 @@ At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<ta
 
 <<~/ahu >>
 
+<<~ ahu #the-same-law-twice >>
+
+!! ★ The non-federating relation ~ one law, found twice, at two layers ★
+
+Kowloon's rule for the SOCIAL graph:
+
+> //"Follow/Unfollow — Relationship visibility is private; never federate."// · //"Add/Remove — Circles are local 'playlist-like' constructs; never federate membership changes."// ''No remote server can reconstruct who follows whom.''
+
+And `mesh/dyad.ts`'s rule for the DEVICE fleet, reached independently:
+
+> ''the fleet EVALUATES AS A QUERY over that binding and never instantiates: nothing stores a fleet object to seize, forge, or sync''… //"a captured vessel spills the dyads admitted TO IT and never the human's map of themselves."//
+
+''Two layers, one law: THE RELATION IS NEVER A SHARED OBJECT.'' A circle is not a graph edge anyone else holds; a fleet is not a roster anyone else holds. In both, ''what travels is a presented edge, and what stays home is the map''.
+
+!!! Why that IS the scaling answer
+
+The question //how far up does the inversion scale?// has a mechanical answer here rather than a hopeful one: ''it scales exactly as far as nothing has to be assembled to make it work''. A design scales while the relation stays a local query; it stops the moment something needs the whole graph — a roster, a follower count, a membership CRDT replicated to every member.
+
+⚠ ''And that names the cost honestly.'' Anything wanting a global view of the relation — a recommendation feed, a mutual-friends count, a network-wide reputation — ''cannot be built on this and is not a missing feature''. It is the thing traded away. `dyad.ts` prices the same trade at the device layer: the membership-CRDT family //"buys convergence by replicating the op graph to everyone, handing each member the roster and the device-to-human linkage."//
+
+<<~/ahu >>
+
 <<~ ahu #not-adopted >>
 
 !! What Lararium Does NOT Adopt from Kowloon
@@ -170,6 +192,6 @@ At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<ta
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7SpEqlnsbeb27R6zDGD7t8caDOSeeWvcZm7NnY_2I-U
+<<^ code="&#x0003;" >>ni:///sha-256;HKwmPH1yB1MyAoCSfeBCrBB5px6kd7Uvu2hw1By-hHw
 
 <<^ code="&#x0004;" -> to=? >>

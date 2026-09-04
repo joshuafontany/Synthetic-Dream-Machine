@@ -162,6 +162,33 @@ describe("⑤ the outward gate", () => {
 });
 
 // ════════════════════════════════════════════════════════════════════════════════════════════════
+// ⑨ THE DYAD IS SPECIFIED IN CODE AND CALLED BY NOTHING
+// ════════════════════════════════════════════════════════════════════════════════════════════════
+// `mesh/dyad.ts` carries the identity model whole — the vessel×veil relationship made first-class,
+// the three names (binding / internal name / Handle), the fleet as a query that never instantiates,
+// and the tiering argument against the membership-CRDT family. It is written, typed and tested.
+//
+// ⚠ ITS ONLY CONSUMER IS ITS OWN TEST. `index.ts` re-exports it; no live path reaches for it. That is
+// the same state `crossingDirection` and the recovery keel stand in, and it is a state worth naming
+// rather than counting as built: a law specified in code is stronger than a design meme and weaker
+// than a wired path, and the corpus keeps mistaking the first for the third.
+describe("⑨ the dyad, specified and unwired", () => {
+  test("the model exports what the doctrine claims of it", () => {
+    for (const sym of ["dyadId", "fleetOfGroup", "signDyadBinding", "dyadsOnVessel"]) {
+      expect(Object.keys(mesh)).toContain(sym);
+    }
+  });
+
+  test.skip("A LIVE PATH GATHERS A FLEET — DEFERRED: `fleetOfGroup` and `verifiedFleet` are called by tests/dyad.test.ts and by nothing else, so no vessel ever gathers its own dyads at runtime. The property the model rests on — that a captured vessel spills the dyads admitted TO IT and never the human's map of themselves — is unwitnessed on any real store", () => {
+    expect(Object.keys(mesh)).toContain("gatherFleetAtBoot");
+  });
+
+  test.skip("A DYAD IS MINTED WHEN A FACE MEETS A DEVICE — DEFERRED: nothing writes a dyad slot in a live ceremony. The persona-admission and device-admit paths mint delegation edges; whether either produces the DYAD record the model names, or whether the dyad layer is a parallel unbuilt spelling of the same fact, is unmeasured", () => {
+    expect(Object.keys(mesh)).toContain("gatherFleetAtBoot");
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════════════════
 // ⑧ ONE CROSSROADS SERVES ONE NEXUS — and a joined node reads the wrong one
 // ════════════════════════════════════════════════════════════════════════════════════════════════
 // `crossroads#open` settles the model: "One crossroads serves ONE Nexus… the reach is the Nexus,

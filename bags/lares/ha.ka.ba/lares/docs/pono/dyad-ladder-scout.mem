@@ -64,7 +64,9 @@ Held at high confidence across four independently searched literatures. And the 
 
 !! ⚠ "Nobody has built this" is true of the FIELD and false of this house
 
-`packages/lararium-mesh/src/dyad.ts` stands, and its opening line is the model:
+`packages/lararium-mesh/src/dyad.ts` stands — ''written, typed and tested, and called by no live path''. Its only consumer outside itself is `tests/dyad.test.ts`; `index.ts` re-exports it and nothing reaches for it. So the model is ''SPECIFIED IN CODE'' rather than running, which is a stronger state than a design meme and a weaker one than a wired path, and the distinction is the one this corpus keeps having to re-learn (`crossingDirection` and the recovery keel stand the same way).
+
+Its opening line is the model:
 
 > ''dyad — the vessel×veil RELATIONSHIP, made first-class.'' A dyad names neither a place nor a person: it names ''ONE HUMAN'S RELATIONSHIP WITH ONE DEVICE''… the dyad does not JOIN two identities; ''the dyad ENACTS the identity-relationship''.
 
@@ -323,6 +325,6 @@ Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;rAQmTnj_qJQoqDVETnoofXuK0v9HPlt2ZXddo5Tm6X8
+<<^ code="&#x0003;" >>ni:///sha-256;_RcC44vLGRffTAxUFFxVPiFbfdWZfxYWMx3ODlVjwzo
 
 <<^ code="&#x0004;" -> to=? >>
