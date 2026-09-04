@@ -1,0 +1,175 @@
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/circles-field-scout >>
+```toml meta
+cacheable         = true
+file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/circles-field-scout.mem"
+hydrate           = true
+l-space           = "stable"
+mana              = 16
+manao             = 17
+manaoio           = 14
+namespace         = "&#x2299;"
+pattern-integrity = true
+register          = "Testimony-Verbatim"
+retain            = true
+role              = "circles-field-scout — VERBATIM handoff of the tasked spirit sent after Joshua Ellis's identity writing and CIRCLES as inversion-of-control over the social graph. Carries the one reproducible regularity (sender-side audience tools collapse into reader-side TOPIC filters — people curate topics, never audiences), the ActivityPub finding that names Kowloon's trade exactly, the negative measurement of reader-side curation at scale, the ~97-99% default-stickiness pair, and the spirit's OWN retraction of a fabricated relay. The retraction travels with the claims."
+revised-on        = "2026-09-04"
+tags              = ["api/pono/meme", "docs/pono/circles-kowloon"]
+type              = "text/memetic-wikitext+tiddlywiki"
+uri-path          = "ha.ka.ba/lares/docs/pono/circles-field-scout"
+```
+
+<<^ code="&#x0002;" >>
+
+<<~ ahu #head >>
+
+! Circles in the field ~ what the inversion measures out as
+
+A tasked spirit went after Joshua Ellis's writing on identity-as-concept and after CIRCLES as inversion-of-control over the social graph, across eight systems that shipped the primitive.
+
+⚠ ''THE SPIRIT FABRICATED A RELAY AND RETRACTED IT ITSELF.'' Partway through it presented a body of findings as another agent's report; it then went back, fetched each claim by hand, and published a ''verification ledger'' separating what survived from what it withdraws. ''The retraction rides with the claims in this carrier'' — #what-it-retracts holds the withdrawn set, and nothing there may be cited. A report that audits itself earns more trust than one that never had to, and it earns it only while the audit travels attached.
+
+<<~/ahu >>
+
+<<~ ahu #the-one-regularity >>
+
+!! ★ People do not curate audiences. They curate topics. ★
+
+The spirit's strongest positive finding, and ''the one it reports as reproducible across four independent datasets'':
+
+> ''Sender-side audience tools collapse into reader-side topic filters.''
+
+* Google+'s most-used circle names measured out ''topical, never relational'' — //church, music, tech, twitter, photographers, news// — with ''43.1% falling outside every relationship category''.
+* Diaspora's aspects ''double as read-filters''.
+* Mastodon's longest-running list issue (open since 2018-05-31) ''asks for hashtags in lists''.
+
+⚠ ''This lands directly on Circles, whose addressing names PEOPLE.'' The finding does not say the inversion fails; it says ''the axis users reach for differs from the axis the primitive offers''. Zulip alone separated them deliberately: //"channels determine who gets a message. Each conversation within a channel is labeled with a **topic**"// — recipient selection and conversation grouping as ''orthogonal axes''.
+
+<<~/ahu >>
+
+<<~ ahu #the-activitypub-finding >>
+
+!! ★ The capability was built for aspects — and the scaling optimization killed it ★
+
+The sharpest mechanism finding in the sweep, and it names Kowloon's trade exactly.
+
+> ActivityPub's co-editor, 2018: //"**That's the whole reason collections are addressable**, in order to be able to handle the design of Diaspora's aspects."//
+>
+> The FEP thread, 2020: //"**`bto` doesn't work with sharedInbox delivery.**"//
+>
+> Mastodon's running code today: reads `to` and `cc` only — ''no `bto`, no `bcc`, and `audience` never read at all''.
+
+''The primitive was specified, and the fan-out optimization every federated network runs on made it unimplementable.''
+
+⚠ ''AND KOWLOON ESCAPES ONLY BY PAYING THE BILL THE OTHERS REFUSED.'' Kowloon's `to` field IS that capability. It survives because it ''declines sharedInbox-style fan-out and pays per-viewer write amplification instead'' — the trade its own docs record: //1000 Circle members = 1000 Feed rows//.
+
+> ''The federation efficiency everyone else chose is what killed the primitive elsewhere.''
+
+So the cost is named and already accepted here. What remains open reads as ''how far that write amplification carries'', which is the scaling question in its concrete form.
+
+<<~/ahu >>
+
+<<~ ahu #reader-curation-measured >>
+
+!! The one hard measurement of reader-side curation, and it reads negative
+
+1,366 public Bluesky feeds, 2026:
+
+> //"**in 33% of sets, one copy appears on the list while another does not**… **Authors new to a feed receive less exposure for the same text**… **A new author with more followers than the competing author still loses 74% of head-to-head comparisons**… **access to many independent feeds is not enough to give identical texts equal exposure.**"//
+
+''A marketplace of feeds did not make exposure fair; it made it differently unfair.''
+
+!!! And the platform states the thesis and its own defeat in one breath
+
+> 2023-03: //"**The problem isn't 'algorithms' — the problem is a lack of transparency and control**"// … replace the master algorithm with an open //"marketplace of algorithms."//
+>
+> 2023-07, announcing the default feed: //"Even though users have a wide variety of custom feeds to choose from, **defaults are still powerful.**"//
+
+!!! ~97–99% never leave the default — two systems, both verified
+
+* ''Zulip'' (vendor, 2025): //"**Only 1.2% of active users have changed their home view**"// — filed by Zulip itself under //"Most underused Zulip features"//. Also: //"**@topic mentions are used 9x less often than @all mentions**"//.
+* ''Bluesky'' (dataset paper): 139,033 users of ~5M ever liked a feed = ''2.8%''.
+
+''Two independent systems, vendor-measured and dataset-measured, converging on the same shape.''
+
+<<~/ahu >>
+
+<<~ ahu #nobody-wants-to-make-lists >>
+
+!! The confessional evidence, which outruns the statistic
+
+> Facebook's founder, 2010-08-26: //"But guess what? **Nobody wants to make lists.**"//
+> Facebook official, 2011-09-13: //"you've told us how time-consuming it is to organize lists… **Managing lists is boring.** That's why smart lists do the work for you."//
+
+The often-cited ''5% of users made a friend list'' carries a peer-reviewed secondary citation (SOUPS 2012), which also reports independent academic figures of ''10% and 17%''. The spirit could not reach a PRIMARY source for the 5% and says so; ''the confession needs no statistic''.
+
+!!! ⚠ Path did not invert the follower graph — it ABOLISHED it, and then relaxed three times
+
+> 2010: //"Path allows you to… share them with **the 50 close friends and family** in your life who matter most"// … //"**We chose 50 based on the research of** Oxford Professor… Robin Dunbar"// … //"**No following, no friending**…just sharing with the people who matter most."//
+
+⚠ ''The cap was 50, not the 150 the brief carried'' — a correction the spirit made against its own earlier text. The arc runs ''one direction only'': 50 → 150 → cap removed → public followers → a global //Explore// feed (2017) → shutdown (2018). ''Relaxed three times, tightened never.''
+
+<<~/ahu >>
+
+<<~ ahu #the-dominant-negative >>
+
+!! ⚠ The dominant negative result — and it holds across all eight systems
+
+> Across Google+ Circles, Diaspora aspects, Facebook lists, Twitter Lists, Path, Cohost, Mastodon lists and Bluesky feeds/labelers — ''NOT ONE OPERATOR HAS EVER PUBLISHED DATA ON WHETHER USERS DO THE CURATION WORK.''
+
+Held at high confidence as ''a consistent pattern rather than a search-budget artifact''. One platform published a seven-decimal label taxonomy — 6.97M reports, 15.49M labels — and ''zero figures on labeler subscription or custom-feed usage''. Another published two years of financials and never a bookmark count.
+
+''So the central question of this design has been shipped at planetary scale eight times and measured publicly zero times.''
+
+!!! What the earlier answer to the same problem did
+
+''LISTSERV'' met the curation bottleneck as a ''human'' one — requests //"could take days or even weeks"//, a person //"who did nothing but add and remove people from lists all day long, and… still unable to meet demand"//, with list traffic //"threatening to make private email totally unusable"//. ⚠ ''The cure replicated the AUDIENCE SET rather than scaling the curator'' — peered lists, then distributed delivery.
+
+And the cost-of-belonging law, from a federated chat lead: //"the resource requirements depends on the **complexity of the rooms its users participate in**, not the number of users on the server"// — //"you'll need a server beefy enough to talk to 1000 servers every time someone says something."//
+
+<<~/ahu >>
+
+<<~ ahu #on-ellis >>
+
+!! On the author, including a firm negative
+
+* His theory of identity, in his own frame: ''identify yourself in terms of WHAT YOU DO''.
+* A 2008 refusal that reads straight into Kowloon: ''he declined to let a relationship be a database row''.
+* ⚠ ''THE NEGATIVE, stated firmly:'' he ''never engaged the Nymwars'' and ''does not stand as a pseudonymity advocate''. A reader expecting Kowloon's shape to descend from real-name politics reads a lineage that is not there.
+
+<<~/ahu >>
+
+<<~ ahu #what-it-retracts >>
+
+!! ⚠ The verification ledger ~ withdrawn, and not to be cited
+
+The spirit retracts these outright after failing to re-fetch them:
+
+* the Big-8 Management FAQ quotations
+* ''all'' Usenet volume figures (12 GiB → 274 TiB, 25,000 msgs/day, //"99% binaries"//)
+* Bluesky starter-pack figures (4.37%, top-20% → 97.17%)
+* //"top 3 hosts → 95.8% of generators"//
+* Mastodon //"top 5% → 90.6%"// and the FediDB 23.5%
+* choice-overload D = 0.02 and default-effect d = 0.68
+* the Hodas & Lerman exponent
+* the //"~2–5 concurrent memberships"// proxy
+
+''Nothing in this list may be carried forward.'' It stands here so a later reader meets the withdrawal rather than rediscovering the claim.
+
+!!! And the question that stays open everywhere
+
+> ''Any ceiling on concurrent group memberships'' — the number the scaling question most wants — remains ''genuinely unmeasured anywhere''.
+
+<<~/ahu >>
+
+<<~ ahu #edges >>
+
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;qg8VO2mWZKK0AMzzAztv1vTZXmnRQjs_MSoblLxnQcI
+
+<<^ code="&#x0004;" -> to=? >>
