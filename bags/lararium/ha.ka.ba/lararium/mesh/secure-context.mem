@@ -73,15 +73,15 @@ Given an entity holding a ''DNS-delegation cap'' over some zone (`kahu.tld` belo
 
 <<~ ahu #behind-the-terminator >>
 
-!! Behind the terminator ~ a vessel that names itself from configuration breaks the moment the wall is cleared
+!! Behind the terminator ~ a vessel that names itself from configuration breaks the moment the wall comes down
 
-The trusted origin is earned by something ''in front of'' the vessel: the cert lives at a terminator, and the vessel itself binds loopback and serves plaintext to it. That topology is the cure — and it makes every URL the vessel writes about ''itself'' a hazard.
+Something ''in front of'' the vessel earns the trusted origin: the cert lives at a terminator, and the vessel itself binds loopback and serves plaintext to it. That topology carries the cure — and it makes every URL the vessel writes about ''itself'' a hazard.
 
-* ''BIND LOOPBACK.'' The vessel listens on `127.0.0.1`; the terminator proxies to it. Any wider bind is a development override, and it is the one that stops being harmless the day the machine is reachable.
-* ''DERIVE THE SELF-URL FROM THE REQUEST, NEVER FROM CONFIGURATION.'' The relay address a page is handed comes from the request's own host, and the scheme from the forwarded protocol. A hardcoded `host:port` is correct in exactly the setup that has no terminator — so ''it works right up until the wall is cleared'', and then hands the phone a socket address that is not the one it reached.
-* ''THE SCHEME TRAVELS WITH THE ORIGIN.'' A page served over the earned `https` origin cannot open `ws:` (#the-wall names the cascade), so the forwarded scheme is what makes the `wss:` selection correct rather than a guess. Getting it wrong fails as mixed content — silent in some browsers, and never at the layer that chose it.
+* ''BIND LOOPBACK.'' The vessel listens on `127.0.0.1`; the terminator proxies to it. Any wider bind names a development override — the one that stops reading harmless the day the machine becomes reachable.
+* ''DERIVE THE SELF-URL FROM THE REQUEST, NEVER FROM CONFIGURATION.'' The relay address handed to a page comes from the request's own host, and the scheme from the forwarded protocol. A hardcoded `host:port` holds in exactly the setup carrying no terminator — so ''it works right up until the wall comes down'', and then hands the phone a socket address other than the one it reached.
+* ''THE SCHEME TRAVELS WITH THE ORIGIN.'' A page served over the earned `https` origin cannot open `ws:` (#the-wall names the cascade), so the forwarded scheme makes the `wss:` selection correct rather than a guess. Getting it wrong fails as mixed content — silent in some browsers, and never at the layer that chose it.
 
-⚠ ''The failure is shaped to survive testing.'' Loopback development has no terminator and no forwarded headers, so a vessel that reads its own name from configuration is green on the desk and broken on the LAN — which is precisely the crossing this whole carrier exists to make.
+⚠ ''The failure survives testing by its shape.'' Loopback development has no terminator and no forwarded headers, so a vessel that reads its own name from configuration runs green on the desk and broken on the LAN — precisely the crossing this whole carrier exists to make.
 
 <<~/ahu >>
 
@@ -221,6 +221,6 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7PrPTVja95hVt7i_OD3XPDtmq4v--F4H4p-x9b8WV50
+<<^ code="&#x0003;" >>ni:///sha-256;seBu3tRIYH601WlhldVmWlSRb_3jIs5_qqTYkvVKObU
 
 <<^ code="&#x0004;" -> to=? >>

@@ -196,8 +196,9 @@ personaPrefixOf(inceptionOpKeyDid, recoverySetHash)
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-recovery-keel >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Cz39XNfZvWFcMVT_iFxmE502uSIXJqUSY_-NX3veF9Q
+<<~/ahu >>
+
+<<^ code="&#x0003;" >>ni:///sha-256;8KZNLwq7rB7aZa2D1uFj9TADKB6aoERpNevycFLAuo4
 
 <<^ code="&#x0004;" -> to=? >>

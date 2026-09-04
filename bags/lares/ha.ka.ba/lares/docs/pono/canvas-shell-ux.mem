@@ -74,11 +74,11 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 <<~ ahu #the-boundary-is-visible >>
 
-!! A boundary the reader cannot see is a boundary the reader will cross by accident
+!! A boundary the reader cannot see gets crossed by accident
 
-''Where a thing sits on the durability ladder must be legible from the surface itself'', without a menu, a hover or a second click. Pending and promoted look different; a thing that will survive a reconnect looks different from a thing that will not.
+''Where a thing sits on the durability ladder must read from the surface itself'', without a menu, a hover or a second click. Pending and promoted look different; a thing that will survive a reconnect looks different from a thing that will not.
 
-This is not decoration. The `canon-boundary` crossing is enforced by capability and it is ''obeyed'' by people who can tell which side they are working on. A reader who cannot see the line does not experience a refusal as protection — they experience it as the tool losing their work, and they route around it. ⚠ The visible distinction never ENFORCES anything: it makes the enforced line predictable, which is the only thing a surface can honestly contribute to a rule the store already keeps.
+This decorates nothing. Capability enforces the `canon-boundary` crossing, and people ''obey'' it when they can tell which side they work on. A reader who cannot see the line does not experience a refusal as protection — they experience it as the tool losing their work, and they route around it. ⚠ The visible distinction never ENFORCES anything: it makes the enforced line predictable, — the only thing a surface can honestly contribute to a rule the store already keeps.
 
 <<~/ahu >>
 
@@ -86,15 +86,15 @@ This is not decoration. The `canon-boundary` crossing is enforced by capability 
 
 !! Dual-load ~ the local replica renders first, the network merges after
 
-''A place opens from local storage IMMEDIATELY and renders before any peer is reached.'' The transport connects in parallel and its deltas merge into what is already on screen.
+''A place opens from local storage IMMEDIATELY and renders before reaching any peer.'' The transport connects in parallel and its deltas merge into what already stands on screen.
 
 # open a place → restore the local snapshot → ''render at once''
 # in parallel → connect → receive deltas → merge into live state
 # on disconnect → ''keep editing'' → queue → replay on reconnect
 
-''This is the local-first ideal stated as a shell behaviour'' — //no spinners: your work at your fingertips//, and //the network is optional//. A surface that waits for a peer before drawing has made the network a precondition, and a vessel whose canvas cannot open offline is not sovereign in the way the rest of the stack is.
+''This states the local-first ideal as a shell behaviour'' — //no spinners: your work at your fingertips//, and //the network is optional//. A surface that waits for a peer before drawing has made the network a precondition, and a vessel whose canvas cannot open offline falls short of the sovereignty the rest of the stack holds.
 
-⚠ ''The merge must not clear the surface.'' A remote delta arriving after first paint updates what stands; it never replaces the tree. A camera that re-renders wholesale on connect throws away the reader's caret, scroll and selection, which is the state the shell exists to keep.
+⚠ ''The merge must not clear the surface.'' A remote delta arriving after first paint updates what stands; it never replaces the tree. A camera that re-renders wholesale on connect throws away the reader's caret, scroll and selection, — the very state the shell exists to keep.
 
 <<~/ahu >>
 
@@ -128,6 +128,6 @@ This is not decoration. The `canon-boundary` crossing is enforced by capability 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;nVkRGKjXT7UgULBMo4NV8ZXyq2tPG8bLi3FHw7ylt0M
+<<^ code="&#x0003;" >>ni:///sha-256;p_ya3BoKfh9mpLMy0TOwI1LMoRqu6unlr7m0XOEE01E
 
 <<^ code="&#x0004;" -> to=? >>

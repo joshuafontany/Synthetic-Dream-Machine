@@ -99,9 +99,9 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 !! The proposal channel ~ arrangement may SPEAK, and still never assert
 
-''Graph-primacy forbids INFERENCE. It does not forbid PROPOSAL, and the difference is the whole of it.''
+''Graph-primacy forbids INFERENCE. It does not forbid PROPOSAL, and the difference carries the whole of it.''
 
-`spatial-arrangement → inferred-edge` is banned and stays banned: a reader may drag two shapes adjacent without meaning anything, and a surface that quietly mints an edge from that has fabricated a relation nobody made. ''No arrangement is ever an edge.''
+Nothing lifts the ban on `spatial-arrangement → inferred-edge`: a reader may drag two shapes adjacent without meaning anything, and a surface that quietly mints an edge from that has fabricated a relation nobody made. ''No arrangement ever becomes an edge.''
 
 But a surface may ''RECOGNISE'' an arrangement and ''OFFER'' it:
 
@@ -109,19 +109,19 @@ But a surface may ''RECOGNISE'' an arrangement and ''OFFER'' it:
 spatial-arrangement  →  PROPOSED entity  →  (a hand accepts)  →  explicit graph entity
 ```
 
-The proposal is not an edge and does not render as one. It becomes an entity ''only when a hand takes it'', at which point it is an ordinary explicit entity and graph-primacy's arrow is unbroken.
+The proposal carries no edge and renders as none. It becomes an entity ''only when a hand takes it'', at which point it enters the graph as an ordinary explicit entity and graph-primacy's arrow runs unbroken.
 
-!!! Why the channel is worth having
+!!! What the channel earns
 
-Spatial hypertext's own measurement — the programme this doctrine inverts — is that ''users avoid explicit linking mechanisms in favour of expressing relationships through proximity and visual attributes''. That behaviour does not stop because a system forbids inference; it simply goes ''unrecorded''. A house with no proposal channel loses exactly the structure its readers are working hardest to express.
+Spatial hypertext's own measurement — the programme this doctrine inverts — reads: ''users avoid explicit linking mechanisms in favour of expressing relationships through proximity and visual attributes''. That behaviour does not stop because a system forbids inference; it simply goes ''unrecorded''. A house with no proposal channel loses exactly the structure its readers work hardest to express.
 
-Its second finding names the state the channel carries: ''placement close but not quite with others can imply indecision, or POTENTIAL for a relation''. ''Constructive ambiguity is a first-class state and no shipped tool has one'' — every relation elsewhere is an edge or nothing, and a boolean edge cannot hold a hedge.
+Its second finding names the state the channel carries: ''placement close but not quite with others can imply indecision, or POTENTIAL for a relation''. //"Constructive ambiguity is a first-class state and no shipped tool has one"// — every relation elsewhere reads as an edge or as nothing, and a boolean edge cannot hold a hedge.
 
 !!! What this house can do that the original could not
 
-In the system that first built a spatial parser, promotion was a ''destructive edit''. Here a proposal is a ''versioned, attributable, declinable'' record — it can be refused, undone, and read back to whoever made it. ''That is a strictly better mechanism, available because of the store rather than in spite of it.''
+The system that first built a spatial parser promoted by ''destructive edit''. Here a proposal ''stands versioned, attributable and declinable'' — a hand can refuse it, undo it, and read it back to whoever made it. ''The store earns that improvement rather than suffering it.''
 
-⚠ ''AND THE TRAP, which is this house's own recurring shape.'' The system that spatial hypertext was invented to ESCAPE was one with ''predefined types and relations'', whose overhead made mid-task revision //overwhelming and very unlikely to occur//, and whose users' visual languages ''co-evolved with the task'' — colour meaning usefulness early and something domain-specific later. ''A fixed vocabulary of spatial relation types rebuilds precisely that system.'' The vocabulary stays DERIVED, never enumerated (#/derive-dont-enumerate).
+⚠ ''AND THE TRAP, which recurs in this house's own shape.'' Spatial hypertext arose to ESCAPE a system carrying ''predefined types and relations'', whose overhead made mid-task revision //overwhelming and very unlikely to occur//, and whose users' visual languages ''co-evolved with the task'' — colour meaning usefulness early and something domain-specific later. ''A fixed vocabulary of spatial relation types rebuilds precisely that system.'' The vocabulary stays DERIVED, never enumerated (#/derive-dont-enumerate).
 
 <<~/ahu >>
 
@@ -144,11 +144,11 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 !! A place is a scope over the corpus ~ never a partition of it
 
-A named place — a room, a board, a shelf — is a ''capability-and-view scope'': a recipe that selects from the one corpus. ''It is NOT a container that owns the memes it shows.'' The same meme stands in as many places as select it, and it is one meme in all of them.
+A named place — a room, a board, a shelf — ''carries a capability-and-view scope'': a recipe that selects from the one corpus. ''It owns none of what it shows.'' The same meme stands in as many places as select it, and it stays one meme in all of them.
 
-''What partitioning would cost, stated as the failures it produces:'' a meme placed in two rooms becomes two memes that drift; an edge between memes in different rooms has nowhere to live; moving a meme between rooms becomes a copy, so its history forks at the move. Every one of those is a data-model consequence, and none of them is visible while a single room is open — which is why the choice has to be made before the second room exists.
+''What partitioning would cost, stated as the failures it produces:'' a meme placed in two rooms becomes two memes that drift; an edge between memes in different rooms has nowhere to live; moving a meme between rooms becomes a copy, so its history forks at the move. Every one of those follows from the data model, and none of them shows while a single room stands open, so the choice falls due before the second room exists.
 
-''The scoping reading keeps all three'': one meme, one history, edges that cross freely, and a place that says only //which of them you are looking at, and by what right//. `#graph-primacy` is the same law from the other end — the graph is the model and the arrangement is a view, so a view cannot own what it shows.
+''The scoping reading keeps all three'': one meme, one history, edges that cross freely, and a place that says only //which of them you are looking at, and by what right//. `#graph-primacy` states the same law from the other end — the graph holds the model and the arrangement renders a view, so a view cannot own what it shows.
 
 <<~/ahu >>
 
@@ -156,16 +156,16 @@ A named place — a room, a board, a shelf — is a ''capability-and-view scope'
 
 !! Containment is a graph fact ~ never the surface's parent hierarchy
 
-A meme owns its blocks, and a block owns its ports. ''That containment is a queryable relation in the model, and it is NOT the render tree's parent pointer.'' A camera reads the relation; it never authors it.
+A meme owns its blocks, and a block owns its ports. ''The model carries that containment as a queryable relation, and the render tree's parent pointer never holds it.'' A camera reads the relation; it never authors it.
 
-''The reason this must be stated rather than assumed:'' at coarse level-of-detail a meme's frame shrinks toward a label, while the blocks it owns keep their own extent and ''leave the parent's visible bounds''. A surface that answers "what does this contain?" by asking its own tree then reports children that no longer look contained — and a drag that crosses those bounds ''reparents'' by the surface's rules rather than the model's. The containment relation stays true through every zoom because it never depended on the drawing.
+''Why this needs stating rather than assuming:'' at coarse level-of-detail a meme's frame shrinks toward a label, while the blocks it owns keep their own extent and ''leave the parent's visible bounds''. A surface that answers "what does this contain?" by asking its own tree then reports children that no longer look contained — and a drag that crosses those bounds ''reparents'' by the surface's rules rather than the model's. The containment relation stays true through every zoom because it never depended on the drawing.
 
-* the relation is ''explicit'' — a `control:owns` edge in the model, distinguished from a semantic `pranala` edge by kind, never by appearance
-* it is ''structural, not cosmetic'' — no hand drags it; a camera may render it at zero opacity and it still holds
+* the relation ''declares itself'' — a `control:owns` edge in the model, distinguished from a semantic `pranala` edge by kind, never by appearance
+* it ''holds structure rather than appearance'' — no hand drags it; a camera may render it at zero opacity and it still stands
 * a template asks ''"what blocks does this meme own?"'' of the graph, and gets the same answer at every level of detail
-* it is the model-side analogue of the widget tree: the render pass walks OWNERSHIP to find its targets, ''never'' the surface's own hierarchy
+* it ''plays the widget tree's part on the model side'': the render pass walks OWNERSHIP to find its targets, ''never'' the surface's own hierarchy
 
-⚠ A surface whose containment IS its render tree has fused the two halves of `#model-view-boundary` in the one place the fusion looks harmless — and the break only shows at the zoom where the rendering stops agreeing with the model.
+⚠ A surface that lets its render tree carry containment has fused the two halves of `#model-view-boundary` in the one place the fusion looks harmless — and the break only shows at the zoom where the rendering stops agreeing with the model.
 
 <<~/ahu >>
 
@@ -247,6 +247,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Kp7kW2Qt_7jjzjWGKWrSPeSDhsSMgdSS-rX77vROBc8
+<<^ code="&#x0003;" >>ni:///sha-256;9OmGEKCqPBePedEsQF-MrFqSZCXCh02U6z7r1QODE8Q
 
 <<^ code="&#x0004;" -> to=? >>

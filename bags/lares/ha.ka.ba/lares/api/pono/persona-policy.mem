@@ -60,31 +60,31 @@ The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as cry
 
 !! Ruling 2b ~ the MANAGED persona, and why the human stays unbound (operator ruling, 2026-09-04)
 
-''A human `#has` multiple PersonaGroups, and a Persona is WORN on a device.'' The identity object is the Persona; the human is not an object here at all.
+''A human `#has` multiple PersonaGroups, and WEARS a Persona on a device.'' The Persona carries identity here; the human enters as no object at all.
 
-''A PERSONAGROUP IS MANAGED BY A PERSONA — never by a device owner, and never by a human.'' Management is a relation ''inside'' the persona layer, which is what keeps the human unbound: there is no owner-of-record anywhere for the chain to climb to.
+''A PERSONA MANAGES A PERSONAGROUP — never a device owner, and never a human.'' Management runs ''inside'' the persona layer, and that keeps the human unbound: no owner-of-record stands anywhere for a chain to climb to.
 
-''THE MANAGER IS ROUTINELY NOT THE WEARER, and that is the DESIGNED case.'' The canonical shape: //mom hands the kid the phone, and the kid wears "Mom's Kid" on that device// — where the thing that manages "Mom's Kid" is ''one of mom's Personas'', not mom. PersonaGroups are local-first and fleet-synced across the managing Persona's own device group.
+''THE MANAGER ROUTINELY DIFFERS FROM THE WEARER, and the design intends it.'' The canonical shape: //mom hands the kid the phone, and the kid wears "Mom's Kid" on that device// — where ''one of mom's Personas'' manages "Mom's Kid", never mom herself. PersonaGroups stand local-first and fleet-sync across the managing Persona's own device group.
 
-⚠ ''SHARED DEVICES ARE NOT AN EDGE CASE HERE, they are the reason the model has this shape.'' A design that bound one human to one device would have to call the majority of the world's households an exception. This one calls the managed persona ordinary and has nothing to except.
+⚠ ''SHARED DEVICES NAME NO EDGE CASE HERE — they give the model its shape.'' A design that bound one human to one device would have to call the majority of the world's households an exception. This one calls the managed persona ordinary and has nothing to except.
 
 !!! Blind veils ~ Personas need not know about each other
 
-''Personas can sometimes NOT EVEN KNOW ABOUT EACH OTHER.'' Each logged-in Persona carries a ''pet-name address-book device switcher'', and ''that Persona controls what appears in it''. So the multitude is not a roster any Persona reads; it is a set of ''per-Persona views'', each authored by the Persona whose view it is.
+''Personas can sometimes NOT EVEN KNOW ABOUT EACH OTHER.'' Each logged-in Persona carries a ''pet-name address-book device switcher'', and ''that Persona controls what appears in it''. So no Persona reads the multitude as a roster; it resolves into ''per-Persona views'', each authored by the Persona it belongs to.
 
-⚠ ''This refines Ruling 1's "PRIVATE-all".'' The human may hold every thread — and ''the human is not in the system'', so no system-level all-N view exists to be read, seized, or subpoenaed. ''A Persona sees what its own switcher shows and nothing behind the veil.'' Read together: PUBLIC-one, PERSONA-some, ''SYSTEM-none''.
+⚠ ''This refines Ruling 1's "PRIVATE-all".'' The human may hold every thread — and ''the human never enters the system'', so no system-level all-N view stands to read, seize, or subpoena. ''A Persona sees what its own switcher shows and nothing behind the veil.'' Read together: PUBLIC-one, PERSONA-some, ''SYSTEM-none''.
 
-The switcher is the ''two-layer petname'' law (#/two-layer-petnames) applied to the multitude itself: the private map is per-Persona, authored locally, and never a public glamour.
+The switcher ''applies the two-layer petname law'' (#/two-layer-petnames) to the multitude itself: the private map runs per-Persona, authored locally, never a public glamour.
 
-!!! Why the human is REFUSED rather than merely omitted
+!!! Why the model REFUSES the human rather than merely omitting them
 
-''Ruling 2 declines to pin one-human-to-one-custodian because the pinning IS the sin.'' This ruling is the same refusal read forward: ''the human is not bound to the system at all''. There is no human node, no human key, no human record — because ''binding a person is what creates the thing that can be seized, correlated, or lost''.
+''Ruling 2 declines to pin one-human-to-one-custodian because the pinning IS the sin.'' This ruling reads the same refusal forward: ''nothing binds the human to the system''. No human node, no human key, no human record stands — because ''binding a person creates the thing a hand can seize, correlate, or lose''.
 
-⚠ ''The field converged on the same instinct and stopped one step short.'' Ink & Switch's Keyhive models //"a person (or more specifically **their authority**) as a group, with each of the persons devices being an individual member"// — the same refusal to name the human, expressed as ''a group of DEVICE KEYS''. This model keeps the layer they collapsed: ''a Persona is a wearable role with a manager, never a bag of a device's keys'', which is what lets the wearer differ from the manager. (`docs/pono/dyad-ladder-scout#the-convergent-shape` carries the field's reading and the challenge it puts back.)
+⚠ ''The field converged on the same instinct and stopped one step short.'' Ink & Switch's Keyhive models //"a person (or more specifically **their authority**) as a group, with each of the persons devices being an individual member"// — the same refusal to name the human, expressed as ''a group of DEVICE KEYS''. This model keeps the layer they collapsed: ''a Persona holds a wearable role with a manager, never a bag of a device's keys'', and that lets the wearer differ from the manager. (`docs/pono/dyad-ladder-scout#the-convergent-shape` carries the field's reading and the challenge it puts back.)
 
-⚠ ''A DEVICE OWNER IS THE NEAR MISS, and it reads identical until you ask what it binds.'' "The owner sets up the personas" is the sentence a reader reaches for, and an owner is a ''human wearing an infrastructure name'' — naming one re-binds the human this model declines to bind, and hands any chain somewhere to climb. ''The manager is a Persona.'' The distance between the two words is the distance between this model and every model that has an owner-of-record.
+⚠ ''A DEVICE OWNER NAMES THE NEAR MISS, and it reads identical until you ask what it binds.'' A reader reaches for "the owner sets up the personas", and an owner ''wears an infrastructure name over a human'' — naming one re-binds the human this model declines to bind, and hands any chain somewhere to climb. ''A Persona manages.'' The distance between the two words measures the distance between this model and every model carrying an owner-of-record.
 
-<<~ confidence 13/20 >> ''What stands open'': how management TRANSFERS, whether a managed wearer can ever LEAVE with their Persona, what a blind veil costs when a managing Persona is lost, and the abuse surface the manager relation opens — priced nowhere yet, against a literature that has already measured the household's authorized principal as its adversary.
+<<~ confidence 13/20 >> ''What stands open'': how management TRANSFERS, whether a managed wearer can ever LEAVE with their Persona, what a blind veil costs when a managing Persona goes dark, and the abuse surface the manager relation opens — priced nowhere yet, against a literature that has already measured the household's authorized principal as its adversary.
 
 <<~/ahu >>
 
@@ -166,6 +166,6 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu >>
 
-<<^ code="&#x0003;" >>ni:///sha-256;gnB54U3ksSZyhamFv97KWxmA90MA8rUHgLmQ_q0djHw
+<<^ code="&#x0003;" >>ni:///sha-256;522Ax0ZszsTHn4S80piuqNex0isMvOEUdgkTdIIptuw
 
 <<^ code="&#x0004;" -> to=? >>
