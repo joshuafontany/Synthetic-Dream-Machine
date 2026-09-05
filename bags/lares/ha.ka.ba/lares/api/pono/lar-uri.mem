@@ -72,7 +72,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''address'' | one resolved `lar:` URI; the identity of a named graph unit. |
 | ''local form'' | `lar:///path` — authority-less; for stable addresses and system resource names. |
 | ''session form'' | `lar://alias:grant@host/path` — names a speaker; exchange spans only. |
-| ''triple'' | the three-slot `w1.w2.w3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
+| ''triple'' | the three-slot `t1.t2.t3` attitude root (Ha heading · Ka angle · Ba carried dynamic). |
 | ''surface'' | a CRDT surface (today an Automerge doc); designated by its kind-plane segment (`bags/slug`, `wikis/slug`). The slug reads as an opaque name. |
 | ''namespace'' | a bare `child[1]` segment naming a meme's minting authority. |
 | ''kind-plane'' | the reserved `child[1]` word that names a resolvable surface: `bags`, `wikis`, or `cid`. |
@@ -238,7 +238,7 @@ lar:///ha.ka.ba/cid/bafy…                        ← an immutable artifact
 
 Law summary:
 
-# `child[0]` = the `w1.w2.w3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
+# `child[0]` = the `t1.t2.t3` root (literal `ha.ka.ba` for stable; attitude triple for unstable).
 # `child[1]` forks: a reserved ''kind-plane'' word (`bags`, `wikis`, `cid`) opens a CRDT surface or artifact; any other bare word names a ''meme namespace'' — the minting authority. The `@`-tag rides `child[2]` of a `bags`/`wikis` surface, and nowhere else.
 # A CRDT surface carries exactly one canonical address. A wiki's per-wiki live slots extend its identity at `child[3]` (`wikis/{slug}/{kind}`).
 # Resolution: the runtime resolves a surface to an AutomergeUrl via the resolver map carried in the device's runtime manifest. The URI carries the identity; the resolver maps it to the live doc. Two devices binding one surface URI to different doc URLs (different recipes, different personal docs) run as the normal case — the URI names the address, and the doc stands as the house.
