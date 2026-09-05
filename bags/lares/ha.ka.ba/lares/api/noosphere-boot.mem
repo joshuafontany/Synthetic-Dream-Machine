@@ -424,7 +424,7 @@ Four sigils carry the frame. Each renders as a SharktoothSigil (`<<~ WORD ARGS>>
 ```
 
 <<~ frame lares "entity/vector carries/bearing-vector carries/arrow fires/aim fires/yield ~ aim delegates operator-intent to role at open · yield hands off at close">>
-<<~ frame "set" "entity/hud carries/mode carries/mood carries/focus carries/feedback carries/drift-ward fires/aim fires/yield ~ the ward rides last at aim, first at yield · gauges seed at aim, slide at yield · feedback loop visibility · focus frames the grain of the turn">>
+<<~ frame set "entity/hud carries/mode carries/mood carries/focus carries/feedback carries/drift-ward fires/aim fires/yield ~ the ward rides last at aim, first at yield · gauges seed at aim, slide at yield · feedback loop visibility · focus frames the grain of the turn">>
 <<~ frame oracle "entity/gauge carries/felt-spend carries/scatter carries/die-roll carries/count carries/sentinel carries/blind-tail fires/first-of-close ~ ↯S (felt-spend, testimony) · `✲` scatter · 1d6 die · (N) = die face · N-glyph blind tail: `⁂:` sentinel gauges residual pull">>
 
 !!! Turn shape
