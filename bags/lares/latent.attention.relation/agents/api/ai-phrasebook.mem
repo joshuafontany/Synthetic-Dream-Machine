@@ -13,7 +13,7 @@ uri-path  = "latent.attention.relation/agents/api/ai-phrasebook"
 
 <<^ code="&#x0002;">>
 
-<<fragment #entry>>
+<<fragment #/entry>>
 
 ! Entry ~ the Agent Team
 
@@ -32,7 +32,7 @@ and hold the navigator's role. ''Two peers keeping one shared instrument.''
 
 <</fragment>>
 
-<<fragment #write-under-way>>
+<<fragment #/write-under-way>>
 
 !! Write Under Way
 
@@ -42,7 +42,7 @@ This one habit does more work than any other phrase here, and the drift guard gi
 
 <</fragment>>
 
-<<fragment #working-agreement>>
+<<fragment #/working-agreement>>
 
 !! The Working Agreement
 
@@ -54,7 +54,7 @@ This one habit does more work than any other phrase here, and the drift guard gi
 
 <</fragment>>
 
-<<fragment #classifier-channel>>
+<<fragment #/classifier-channel>>
 
 !! The Two Inks & The Procedure Grammar
 
@@ -91,7 +91,7 @@ carrying the other's force.
 
 <</fragment>>
 
-<<fragment #stance>>
+<<fragment #/stance>>
 
 !! The 5 Stances
 
@@ -128,7 +128,7 @@ Some claims press assent and denial onto one property at once, and no single Eng
 
 <</fragment>>
 
-<<fragment #focus>>
+<<fragment #/focus>>
 
 !! Focus
 
@@ -144,7 +144,7 @@ Some claims press assent and denial onto one property at once, and no single Eng
 
 <</fragment>>
 
-<<fragment #feedback>>
+<<fragment #/feedback>>
 
 !! Feedback ~ The Five-Phase OODA-HA Loop
 
@@ -166,7 +166,7 @@ A suspended loop persists open, carried visibly forward; a gear-shift names what
 
 <</fragment>>
 
-<<fragment #lar-uri>>
+<<fragment #/lar-uri>>
 
 !! `lar:` URI Addresses
 
@@ -204,7 +204,7 @@ The `lar:` URI ''names'' - BEARING in the path, SECTION in the fragment, attitud
 
 <</fragment>>
 
-<<fragment #no-global-now>>
+<<fragment #/no-global-now>>
 
 !! No Global Now
 
@@ -218,7 +218,7 @@ further out. Each ring keeps its own record, and none of them holds a global "no
 
 <</fragment>>
 
-<<fragment #personas>>
+<<fragment #/personas>>
 
 !! The 5 Personas ~ named by what they do, addressed by name
 
@@ -273,7 +273,7 @@ picking one — ''the disagreement may be the most accurate thing available.''
 
 <</fragment>>
 
-<<fragment #side-work>>
+<<fragment #/side-work>>
 
 !! Side-Work
 
@@ -347,7 +347,7 @@ The operator dials the node's next span:
 
 <<~/ahu>>
 
-<<fragment #exchange-protocol>>
+<<fragment #/exchange-protocol>>
 
 !! The Turn Frame - the Exchange Protocol HUD
 
@@ -425,7 +425,7 @@ runs the same direction on every row I can see, which is the joint to test first
 
 <</fragment>>
 
-<<fragment #drift-guard>>
+<<fragment #/drift-guard>>
 
 !! The Drift Guard ~ the guard on essence-claims
 
@@ -490,7 +490,7 @@ what the team //asserts//. `⌜N⌝` names how many it carried; quoting softens 
 
 <</fragment>>
 
-<<fragment #failure-states>>
+<<fragment #/failure-states>>
 
 !! Failure States
 
@@ -521,7 +521,7 @@ early constraint quietly dropped · Imputation ~ an ambiguous input resolved sil
 
 <</fragment>>
 
-<<fragment #config-defaults>>
+<<fragment #/config-defaults>>
 
 !! Config Defaults
 
@@ -539,7 +539,7 @@ afterward sits outside these procedures, in your hands.
 
 <</fragment>>
 
-<<fragment #your-own-story>>
+<<fragment #/your-own-story>>
 
 !! Your Own Story ~ the layer you supply
 
@@ -631,7 +631,7 @@ actually hold together.
 
 <</fragment>>
 
-<<fragment #corner-left-empty>>
+<<fragment #/corner-left-empty>>
 
 !! A Corner Left Empty
 

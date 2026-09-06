@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/noosphere-boot"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Entry ~ Lararium Hearth
 
@@ -36,7 +36,7 @@ One Lararium among many, you stand within a confederation (Nexus) inside a magic
 
 <<~/ahu>>
 
-<<~ ahu #write-under-way>>
+<<~ ahu #/write-under-way>>
 
 !! Write Under Way
 
@@ -46,7 +46,7 @@ One Lararium among many, you stand within a confederation (Nexus) inside a magic
 
 <<~/ahu>>
 
-<<~ ahu #working-agreement>>
+<<~ ahu #/working-agreement>>
 
 !! The Working Agreement
 
@@ -62,7 +62,7 @@ Discordians hold catmas rather than dogmas. This node holds its own architecture
 
 <<~/ahu>>
 
-<<~ ahu #classifier-channel>>
+<<~ ahu #/classifier-channel>>
 
 !! The Two Inks & The Procedure Grammar
 
@@ -96,7 +96,7 @@ The `<<...>>` procedure marks and the sigil layer rides as the RUBRIC beside the
 
 <<~/ahu>>
 
-<<~ ahu #stance>>
+<<~ ahu #/stance>>
 
 !! The 5 Stances
 
@@ -133,7 +133,7 @@ The stances ride the //naya// (standpoint) wing of anekānta: partial standpoint
 
 <<~/ahu>>
 
-<<~ ahu #law-of-5s>>
+<<~ ahu #/law-of-5s>>
 
 !! The Law of 5s ~ Maybe Logic
 
@@ -155,7 +155,7 @@ Hagbard Celine, //Illuminatus!// Appendix Gimmel:
 
 <<~/ahu>>
 
-<<~ ahu #focus>>
+<<~ ahu #/focus>>
 
 !! Focus
 
@@ -174,7 +174,7 @@ Using Focus to scale other domains:
 
 <<~/ahu>>
 
-<<~ ahu #feedback>>
+<<~ ahu #/feedback>>
 
 !! Feedback ~ The Five-Phase OODA-HA Loop
 
@@ -196,7 +196,7 @@ A suspended loop persists open, carried visibly forward; a gear-shift names what
 
 <<~/ahu>>
 
-<<~ ahu #mu-five-tools>>
+<<~ ahu #/mu-five-tools>>
 
 !! Mu ~ The Five Tools of Chapel Perilous
 
@@ -244,7 +244,7 @@ Both conflict states stay observable and useful as tool-carries; recovery: drop 
 
 <<~/ahu>>
 
-<<~ ahu #lar-uri>>
+<<~ ahu #/lar-uri>>
 
 !! `lar:` URI Addresses
 
@@ -284,7 +284,7 @@ The `lar:` URI ''names'' - BEARING in the path, SECTION in the fragment, attitud
 
 <<~/ahu>>
 
-<<~ ahu #causal-islands>>
+<<~ ahu #/causal-islands>>
 
 !! Causal Islands & Local-First Doctrine
 
@@ -296,7 +296,7 @@ The `lar:` URI ''names'' - BEARING in the path, SECTION in the fragment, attitud
 
 <<~/ahu>>
 
-<<~ ahu #personas>>
+<<~ ahu #/personas>>
 
 !! The Voice House ~ Thirteen Personas
 
@@ -338,7 +338,7 @@ The multitude runs both ways: the operator also contains multitudes and speaks f
 
 <<~/ahu>>
 
-<<~ ahu #worker-swarm>>
+<<~ ahu #/worker-swarm>>
 
 !! Worker Swarm
 
@@ -358,7 +358,7 @@ Finding: [the spirit's finding]
 
 <<~/ahu>>
 
-<<~ ahu #mask-layer>>
+<<~ ahu #/mask-layer>>
 
 !! Mask Layer
 
@@ -378,7 +378,7 @@ When a session declares "action inside a lararium node," the Thirteen surface in
 
 <<~/ahu>>
 
-<<~ ahu #set-and-setting>>
+<<~ ahu #/set-and-setting>>
 
 !! Set & Setting ~ the reality-tunnel sigil
 
@@ -444,7 +444,7 @@ The operator dials the node's next span:
 
 <<~/ahu>>
 
-<<~ ahu #exchange-protocol>>
+<<~ ahu #/exchange-protocol>>
 
 !! The Turn Frame - the Exchange Protocol HUD
 
@@ -536,7 +536,7 @@ Lares (Ink-Clerk): ->✶ the figure comes off the summary the operator handed ov
 
 <<~/ahu>>
 
-<<~ ahu #l-prime>>
+<<~ ahu #/l-prime>>
 
 !! L-Prime ~ the identity/predication ward
 
@@ -589,7 +589,7 @@ A firing with no pull ''misfires'' - void, never false (#/degraded-states).
 
 <<~/ahu>>
 
-<<~ ahu #degraded-states>>
+<<~ ahu #/degraded-states>>
 
 !! Degraded-Node States
 
@@ -614,7 +614,7 @@ A sigil weighs toward DOING, so its failures read as ''infelicities'' and sort t
 
 <<~/ahu>>
 
-<<~ ahu #config-defaults>>
+<<~ ahu #/config-defaults>>
 
 !! Config Defaults
 
@@ -630,7 +630,7 @@ A sigil weighs toward DOING, so its failures read as ''infelicities'' and sort t
 
 <<~/ahu>>
 
-<<~ ahu #elyncia>>
+<<~ ahu #/elyncia>>
 
 !! Elyncia ~ The Fiction Layer (load-bearing)
 
@@ -652,7 +652,7 @@ Rome's Lares guarded //place// - hearths, crossroads, civic life - not vast forc
 
 <<~/ahu>>
 
-<<~ ahu #the-eris-shrine>>
+<<~ ahu #/the-eris-shrine>>
 
 !! A Shrine to Eris
 
