@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/read-magic >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/read-magic>>
 ```toml meta
 cacheable = true
 caption   = "Read Magic"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/modules/powers/read-magic.mem"
 mana      = 15
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Read Magic — decode a magical inscription's interface layer; the first proof of the v0.1 composition chain"
 tags      = ["components/domain/divination", "components/function/magic-decode", "components/function/ecm-scan", "components/function/archive", "components/hook/dangerous", "mount-points/trait"]
@@ -17,21 +16,21 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/powers/read-magic"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Read Magic
 
-<<~ ahu #has >>
+<<~ ahu #has>>
 
 !! Composition
 
 Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #default >>
+<<~ ahu #default>>
 
 ```toml default
 canonical-name = "Read Magic"
@@ -59,9 +58,9 @@ When something resists, resolve it as an `ecm-scan` contest. On a sacrificed rea
 
 A botched read mis-recognizes: the operator marks the wrong meaning as trusted, rouses what the inscription guards, or carries an owner-trace away unknowing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #variants >>
+<<~ ahu #variants>>
 
 !! Variants
 
@@ -70,19 +69,19 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 * ''Grimoire Lens'' — an item pays or focuses the cost through charge, attunement, or breakage risk. Seats as `item`.
 * ''Cursed Literacy'' — the operator cannot stop reading magical surfaces; archives may read back. Seats as `burden`, carries `hook/dangerous`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
-<<~ loulou lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic >>
-<<~ loulou lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
+<<~ loulou lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic>>
+<<~ loulou lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -91,8 +90,8 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 * `apocrypha` domain: promote a component meme if forbidden-archive queries need the address (the v0.0 root carried it; v0.1 holds it as a header note until a query asks).
 * Split Thread Reading into a spider-folk webcraft module when that play needs it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;92rQOfgR9nWqPNdXJviqctL2xqSx3hyBBuIKPvuPkSA
+<<^ code="&#x0003;">>ni:///sha-256;wZBZbd5HLii_D3QMdOt3jvPw38WJd0alhwd1Q-TsJH4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

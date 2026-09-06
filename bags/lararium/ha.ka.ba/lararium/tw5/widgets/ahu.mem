@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/ahu >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/ahu>>
 ```toml meta
 body-sha256   = "26d1bacabd436acf1e2f5b45eedcfe333bade4b400454598c8d7711f7eb4007b"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/ahu.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/widgets/ahu"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: AhuWidget — heleuma ka"
 source-symbol = "AhuWidget"
@@ -17,28 +16,28 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/ahu"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `<$ahu>` renders a `<section data-lar-kind="ahu">` slot container, or in `carrier` render-mode, projects the slot body as raw wikitext. Supports reactive refresh on slot-fragment tiddler changes. Attribute: `slot`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/ahu" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/ahu >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jIwItP35619oxMj8mctVFBFn4yLwNGF3CoibzLaHtNI
+<<^ code="&#x0003;">>ni:///sha-256;f7cnErq1mxL0gvwMkUpw-i6W89mLqVIc_hxbHN1JDgs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

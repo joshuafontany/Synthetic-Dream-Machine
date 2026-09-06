@@ -2,9 +2,9 @@
 
 //A "meme" is any carrier of a lar URI and is the default node in the graph. A "locus" is a meme WEARING `loci` in its has-stack — a component it holds, never a type it is.//
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/pranala-parser>>
 ```toml meta
 file-path   = "bags/lares/ha.ka.ba/lares/docs/graph/pranala-parser.mem"
 l-space     = "stable"
@@ -12,7 +12,6 @@ mana        = 17
 manao       = 17
 manaoio     = 16
 open-gate   = "closed: fragment-level resolution (Option A) confirmed by canonical pranala kānāwai"
-register    = "Synthesis-Canon"
 role        = "parser design for pranala block and inline forms, sugar expansion, ? -> resolution, and field normalization"
 status-date = "2026-04-24"
 tags        = ["api/pono/meme", "api/pono/loci"]
@@ -20,9 +19,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: carrier files carry pranala edges in block and inline forms; `loulou`, `aka`, `kahea` sugar collapses to edges too.
 ⏿ orient: the parser must handle four surface forms, field normalization across two vocabularies, and one unresolved design gate.
@@ -30,9 +29,9 @@ uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 ▶ act: specify regex patterns, extraction order, field mapping table, and the confirmed `? ->` resolution algorithm.
 ↺ verify: parser produces correct `PranalaEdge` records from actual AGENTS.md source blocks; the `? ->` gate is now closed; the implementation file should implement Option A, not a stub.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #surface-forms >>
+<<~ ahu #surface-forms>>
 
 !! Surface Forms
 
@@ -41,17 +40,17 @@ that the parser must handle.
 
 | Form | Sigil pattern | Edge type |
 |---|---|---|
-| Block pranala | `<<~ pranala #frag from=? -> to=URI >> ... <<~/pranala >>` | any family, full TOML payload |
-| Inline pranala | `<<~ pranala from=? -> to=URI family=F role=R >>` | abbreviated; family + optional role |
-| Loulou sugar | `<<~ loulou URI >>` | `relation`, `instance` |
-| Aka sugar | `<<~ aka URI >>` | `transclusion`, `instance` |
-| Kahea sugar | `<<~ kahea URI >>` | `transclusion`, `instance` |
+| Block pranala | `<<~ pranala #frag from=? -> to=URI>> ... <<~/pranala>>` | any family, full TOML payload |
+| Inline pranala | `<<~ pranala from=? -> to=URI family=F role=R>>` | abbreviated; family + optional role |
+| Loulou sugar | `<<~ loulou URI>>` | `relation`, `instance` |
+| Aka sugar | `<<~ aka URI>>` | `transclusion`, `instance` |
+| Kahea sugar | `<<~ kahea URI>>` | `transclusion`, `instance` |
 
 All five forms produce `PranalaEdge` records.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #block-form >>
+<<~ ahu #block-form>>
 
 !! Block Form Parsing
 
@@ -84,9 +83,9 @@ TOML_RE = re.compile(r'```toml\s*(.*?)```', re.DOTALL)
 
 Same regex the carrier ingress already uses. The result gets parsed with `tomllib.loads()`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #inline-form >>
+<<~ ahu #inline-form>>
 
 !! Inline Form Parsing
 
@@ -105,9 +104,9 @@ INLINE_RE = re.compile(
 Inline forms carry fewer fields. Missing fields get defaults from the normalization table.
 Inline pranala does not carry a `payload`; `payload` defaults to `{}`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sugar-forms >>
+<<~ ahu #sugar-forms>>
 
 !! Sugar Form Expansion
 
@@ -128,9 +127,9 @@ KAHEA_RE  = re.compile(r'<<~\s*kahea\s+(\S+)\s*>>')
 For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragment),
 `to_uri` = expanded target URI, `to_socket` = `""`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #question-mark-resolution >>
+<<~ ahu #question-mark-resolution>>
 
 !! `? ->` Socket Resolution — Closed (Option A)
 
@@ -140,16 +139,16 @@ For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragm
 ''Resolution algorithm — fragment-level:''
 
 The parser tracks enclosing `ahu` context as it scans carrier text.
-When it enters `<<~ ahu #some-socket >>`, it pushes `carrier_uri + "#some-socket"` onto a context stack.
-When it exits `<<~/ahu >>`, it pops the stack.
+When it enters `<<~ ahu #some-socket>>`, it pushes `carrier_uri + "#some-socket"` onto a context stack.
+When it exits `<<~/ahu>>`, it pops the stack.
 `? ->` edges read `from_socket = context_stack.top()` (the innermost enclosing `ahu` fragment URI).
 `from_uri` = carrier URI (without fragment).
 
 ''Example — AGENTS.md:''
 
 ```
-<<~ ahu #edges >>
-  <<~ pranala #preload-l-prime from=? -> to=lar:///ha.ka.ba/lares/api/mu/l-prime family=control role=owns >>
+<<~ ahu #edges>>
+  <<~ pranala #preload-l-prime from=? -> to=lar:///ha.ka.ba/lares/api/mu/l-prime family=control role=owns>>
 ```
 
 Resolves to:
@@ -159,9 +158,9 @@ Resolves to:
 ''Parser requirement:'' handle nested `ahu` blocks with a stack; the innermost named fragment wins.
 When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root fallback).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #field-normalization >>
+<<~ ahu #field-normalization>>
 
 !! Field Normalization Table
 
@@ -190,9 +189,9 @@ This table records every mapping.
 Fields absent from the TOML block get their defaults.
 Unknown fields not in this table get stored in `payload` under their original key name.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #uri-resolution >>
+<<~ ahu #uri-resolution>>
 
 !! TO Expression URI Resolution
 
@@ -208,19 +207,19 @@ Relative path resolution follows loci law: the root comes from the carrier's own
 
 Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an exception.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;O9FoZkmIoIzDPo_wgcRqVrpIxHdpk8369Z_e2uHUb1s
+<<^ code="&#x0003;">>ni:///sha-256;MomcOi-jUTNYhKUcByHOqH8SE6Ux-rjlxEw_qOjgaVY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

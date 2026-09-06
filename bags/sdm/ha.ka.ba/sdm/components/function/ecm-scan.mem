@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan>>
 ```toml meta
 cacheable = true
 caption   = "ecm-scan"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/function/ecm-scan.mem"
 mana      = 13
 manao     = 16
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "component (function): ECM Scan — sensing and analyzing active Powers and noospheric signatures"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/ecm-scan"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! ECM Scan
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 Sensing and analyzing active Powers, activations, and noospheric signatures — the electronic-countermeasure scan of the substrate.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Reveals ''what runs on the noosphere'': strength, type, and owner-trace of active effects in range. A passive read at base P; deeper analysis on overcharge.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — `veil`, `jam`, `spoof`, `negate`, `suppress` — degrades or blinds it. This is the first vocabulary for module-on-module interaction (counterpoint; Sprint 4).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 [tag[prefix[lar:///ha.ka.ba/sdm/components/function/]]]              all function components
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * The full ECM mode-set (`veil` `jam` `spoof` `negate` `suppress` `redirect` `capture` `absorb` `hijack`) wants component memes when counterpoint lands. Promote on first query (Principle 6).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jsxE_9zswLyUUkQqsgppB80RwnIDBFbwbC_oCcx45Tc
+<<^ code="&#x0003;">>ni:///sha-256;QS_oZHc6L6e4P2O_swOaPZkCwPfeOMcNtTUjeyRkm-Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

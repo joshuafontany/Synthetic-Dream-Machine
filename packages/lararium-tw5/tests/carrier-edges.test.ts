@@ -23,12 +23,12 @@ describe("carrier-edges — every address a carrier points at", () => {
    */
   test("every form a carrier can name an address in is read", () => {
     const src = [
-      "<<~ loulou lar:///ha.ka.ba/a/one >>",
+      "<<~ loulou lar:///ha.ka.ba/a/one>>",
       // Both ends stated, so this also holds the reader to the end that TRAVELS: the source is
       // `a/source` and the edge is `a/two`. A reader taking the first address passes every other
       // assertion here and still names the wrong carrier.
-      '<<~ pranala #x from=lar:///ha.ka.ba/a/source -> to=lar:///ha.ka.ba/a/two family=control >>',
-      "<<~ kahea ahu lar:///ha.ka.ba/a/three >>",
+      '<<~ pranala #x from=lar:///ha.ka.ba/a/source -> to=lar:///ha.ka.ba/a/two family=control>>',
+      "<<~ kahea ahu lar:///ha.ka.ba/a/three>>",
       "[[a name|lar:///ha.ka.ba/a/four]]",
       "[[lar:///ha.ka.ba/a/five]]",
     ].join("\n\n");
@@ -44,13 +44,13 @@ describe("carrier-edges — every address a carrier points at", () => {
    * are lessons rather than links.
    */
   test("an edge quoted inside a fence is a lesson, never a link", () => {
-    const taught = "````\nShow one:\n\n<<~ loulou lar:///ha.ka.ba/not/real >>\n````\n\n<<~ loulou lar:///ha.ka.ba/is/real >>";
+    const taught = "````\nShow one:\n\n<<~ loulou lar:///ha.ka.ba/not/real>>\n````\n\n<<~ loulou lar:///ha.ka.ba/is/real>>";
     expect(readCarrierEdges(taught).map((e) => e.address)).toEqual(["ha.ka.ba/is/real"]);
   });
 
   /** A fragment rides the written form and never the address a resolver looks up. */
   test("the fragment stays on the writing and off the lookup", () => {
-    const [e] = readCarrierEdges("<<~ loulou lar:///ha.ka.ba/a/one#part >>");
+    const [e] = readCarrierEdges("<<~ loulou lar:///ha.ka.ba/a/one#part>>");
     expect(e!.address).toBe("ha.ka.ba/a/one");
     expect(e!.written).toBe("ha.ka.ba/a/one#part");
   });

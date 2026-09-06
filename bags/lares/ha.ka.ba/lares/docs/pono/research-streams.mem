@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams>>
 ```toml meta
 cacheable   = false
 file-path   = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams.mem"
@@ -8,7 +8,6 @@ l-space     = "stable"
 mana        = 16
 manao       = 16
 manaoio     = 16
-register    = "Synthesis-Canon"
 retain      = false
 role        = "documentation hub for external research streams and literal quote witnesses"
 status-date = "2026-05-25"
@@ -16,28 +15,28 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/pono/research-streams"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Research Streams - Docs Hub
 
 This hub carries outward-facing research evidence.
 Invariant law remains in API loci; quote witnesses remain here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #streams >>
+<<~ ahu #streams>>
 
 !! Stream Memes
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/prior-art >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/prior-art>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tension >>
+<<~ ahu #tension>>
 
 !! Texture and Tension
 
@@ -54,16 +53,16 @@ explicit invariant law -> executable adversarial tests
 executable adversarial tests -> receipt-backed trust
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8ihmcg2M86MRxE5dQe5oy0toD6FI4CiLhWzbABNZxqw
+<<^ code="&#x0003;">>ni:///sha-256;o2CE3wFu9D_JiDYwXT9BQkGp3wk2yo83IP-jSWUqEJk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/boot-splash-banner >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/boot-splash-banner>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/boot-splash-banner.mem"
 mana      = 18
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Boot-splash banner — shown while causal islands warm; hidden by $:/lararium/boot-splash/active signal"
 tags      = ["$:/tags/PageTemplate"]
@@ -15,12 +14,12 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/boot-splash-banner"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 <$reveal type="nomatch" state="$:/lararium/boot-splash/active" text="">
 <div class="lar-boot-banner">⬡ lararium — warming causal islands…</div>
 </$reveal>
 
-<<^ code="&#x0003;" >>ni:///sha-256;KCWWSVDtfKyNn6Al0kGmOByUgQRfWRpLa5PeP3ESA3M
+<<^ code="&#x0003;">>ni:///sha-256;ppPHf1zB0aCDGOYs8ATaOKXGtsW4ZhoUt35RUuAj8hM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

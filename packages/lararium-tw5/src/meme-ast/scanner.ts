@@ -41,7 +41,7 @@ export interface ParseEvent {
 // Used when no GrammarRules loaded (bootstrap / unit tests without grammar).
 //
 // Control-character framing protocol MUST precede ahu and generic scans so
-// decorated forms like <<^ code="&#x0002;" ahu #meme-body-open >> remain structural.
+// decorated forms like <<^ code="&#x0002;" ahu #meme-body-open>> remain structural.
 // ---------------------------------------------------------------------------
 
 export const BOOTSTRAP_SCANS: SigilScan[] = [
@@ -138,7 +138,7 @@ export const BOOTSTRAP_SCANS: SigilScan[] = [
 
   // GENERIC catch-all — MUST stay last (position-dedup lets every specific scan win first). Recognizes
   // any sharktooth form no specific pattern matched: a known sigil in a novel param shape
-  // (`<<~ aperture(0->20) >>`, `<<~ keyword(p) ~~ note >>`) or an unknown word. group 1 = sigil-name,
+  // (`<<~ aperture(0->20)>>`, `<<~ keyword(p) ~~ note>>`) or an unknown word. group 1 = sigil-name,
   // group 2 = raw params (lazy, `->`-aware). The builder grades it `missing` — the partial rung — so
   // a form-variant survives as a recognized sigil instead of dropping to water.
   { sigilName: "(generic)", generic: true, regex: /<<~\s*(\\?[A-Za-z][\w-]*)((?:[^>]|>(?!>))*?)\s*>>/g, eventType: "leaf" },

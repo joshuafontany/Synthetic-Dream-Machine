@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/canvas-field-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "canvas-field-scout — VERBATIM handoff of the tasked spirit Horizon: the spatial-computing FIELD rather than its shelf. The lineage read as an argument, spatial hypertext as a dead programme with a living conference, the graveyard and its cause of death, mobile, unclaimed ground, and five stalls scored honestly. Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/canvas-field-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Horizon ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-field-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -355,9 +354,9 @@ Now take the same property and stand on the other side of it. **A tool with no o
 
 **What is NOT the cause, stated against the folklore.** Sync and CRDT cost — *refuted by the person who paid it.* Mobile neglect — a *consequence* of the revenue ceiling, not a cause. Craft quality — refuted twice: Muse died well-built, and Kosmik used its own obituary to list technical firsts nobody bought. AI — an *accelerant*: Muse's users halved in Q1 2022, and Tang wrote his post-mortem before ChatGPT shipped. ZIRP is real and admitted, but it explains the timing, not the ceiling.
 
-`<<~ confidence 15/20 >>` on the general-purposeness thesis — resting on an explicit founder statement of mechanism, a matched quantified pair at the exact named threshold, and a clean survivor/death split along the narrow/general axis across roughly twenty-five products.
+''Held firmly'' on the general-purposeness thesis — resting on an explicit founder statement of mechanism, a matched quantified pair at the exact named threshold, and a clean survivor/death split along the narrow/general axis across roughly twenty-five products.
 
-`<<~ confidence 11/20 >>` on the free-bundled-default mechanism specifically. The Freeform and FigJam facts are hard, but **no primary source shows users churning from a paid canvas to Freeform.** That link is inference, and I mark it as such.
+''Held loosely'' on the free-bundled-default mechanism specifically. The Freeform and FigJam facts are hard, but **no primary source shows users churning from a paid canvas to Freeform.** That link is inference, and I mark it as such.
 
 ---
 
@@ -711,10 +710,10 @@ Wiggins: *"To this date it remains a mystery why we had solid growth for nearly 
 **Muse's active users halved in Q1 2022, and the founder closest to it says plainly that he does not know why.** Nobody in this corpus has explained it — not him, not a competitor, not a researcher. If there is one unanswered question in the tools-for-thought graveyard, that is it. Any house building a canvas is building toward that unexplained cliff without a map of it. `0`
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;puQI-Oj6kyQrt0J7Z_1TToalmWk8ZyTeUxGfNPePvFA
+<<^ code="&#x0003;">>ni:///sha-256;vrq9FClM9XBKRXc3r6G5aTx3CJsaA4MLv5LTXe3A8uc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

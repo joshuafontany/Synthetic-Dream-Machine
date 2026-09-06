@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml>>
 ```toml meta
 body-sha256   = "e95c2d044454c5399ead0854ccecd261154f9a93250bba21edd944a7d695a022"
 cacheable     = true
@@ -11,7 +11,6 @@ l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
-register      = "Synthesis-Canon"
 role          = "TW5 widget: toml — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "TomlWidget"
 status-date   = "2026-05-03"
@@ -19,32 +18,32 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/toml"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! toml
 
 TW5 widget from `@lararium/tw5`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 Exported symbols: `TomlWidget`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZCcXomPxK8tnsbLS4g2JSxjm8MyaNA1yICt7NcemVu4
+<<^ code="&#x0003;">>ni:///sha-256;MOB5FBTSwlMH98FKSmrY67-va9cTDMjhv2vlg5Y7bYY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

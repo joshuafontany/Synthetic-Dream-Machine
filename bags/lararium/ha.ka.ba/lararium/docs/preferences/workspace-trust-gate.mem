@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/workspace-trust-gate.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 18
-register  = "Synthesis"
 retain    = false
 role      = "docs concept room for trust checkpoints before costly shell, git, and workspace actions"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/workspace-trust-gate"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Preferences — Workspace Trust Gate
 
 Not invariant law.
 This room holds a specific recovered operational principle: trust should checkpoint before execution crosses into costly or irreversible territory.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -38,9 +37,9 @@ Strong witnesses recur in:
 * `prompts/Lares_VSCode_Operations.repo-ops.md`
 * permissions and repo-ops snapshots
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pressure >>
+<<~ ahu #pressure>>
 
 !! Pressure
 
@@ -58,17 +57,17 @@ This principle feels distinct from the broader transference model.
 Identity explains who may ask.
 The workspace trust gate explains when the node must pause anyway.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;z4NRSiUAxIfP9sLdXqcu5kERCv-sIOnvPALjeeCgo5c
+<<^ code="&#x0003;">>ni:///sha-256;kEC9Xi4LZvCXIMBbq7bFMwowSm6tvGxtlpoDLz0y5gI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

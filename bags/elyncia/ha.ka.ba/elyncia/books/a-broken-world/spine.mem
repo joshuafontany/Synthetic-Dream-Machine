@@ -1,16 +1,14 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/a-broken-world/spine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/a-broken-world/spine>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/books/a-broken-world/spine.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "spine — Elyncia 01, A Broken World: the walk through the history, the Curse of Iron, and the gazetteer; chunks live at their topical addresses"
 tags       = ["ha.ka.ba/elyncia/books/index"]
@@ -18,9 +16,9 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/books/a-broken-world/spine"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Elyncia 01 ~ A Broken World ~ Spine
 
@@ -33,9 +31,9 @@ reading order) and the mortar (the connective prose, written as chunks land). Th
 below activate one by one as each chunk meme seats; until then the walk reads as the cut-plan.
 ''The source MD stays canonical until this spine renders the book whole.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #walk >>
+<<~ ahu #walk>>
 
 !! The Walk ~ reading order
 
@@ -50,9 +48,9 @@ below activate one by one as each chunk meme seats; until then the walk reads as
 
 //(Cut-plan Provisional; boundaries refine at the close read before each move.)//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source Staging
 
@@ -60,14 +58,14 @@ below activate one by one as each chunk meme seats; until then the walk reads as
 connective tissue, epigraphs, and any text whose home IS the spine. Uplift to live wikitext
 comes only after all source text reads as moved.)//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/books/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/books/index>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Ba-Ol3IoNluCnqczBd1m2QXPYiux7DPO9cgNjVcVpRo
+<<^ code="&#x0003;">>ni:///sha-256;cfYlvAdxbVr2edtauCWo5Zk0yLJSaYL_5eDlbQve0QU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

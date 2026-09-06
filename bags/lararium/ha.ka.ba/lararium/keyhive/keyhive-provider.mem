@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/keyhive/keyhive-provider >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/keyhive/keyhive-provider>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/keyhive/keyhive-provider.mem"
@@ -8,7 +8,6 @@ l-space     = "lararium"
 mana        = 17
 manao       = 16
 manaoio     = 15
-register    = "Synthesis-Canon"
 retain      = true
 role        = "isomorphic keyhive ceremony provider: founding, device-admit, and apply-admit functions; three-gate identity lattice"
 source-file = "packages/lararium-keyhive/src/keyhive-provider.ts"
@@ -16,7 +15,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/keyhive/keyhive-provider"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Keyhive Provider
 
@@ -24,7 +23,7 @@ The isomorphic ceremony surface for the Lararium identity lattice.
 Lives in `@lararium/keyhive` — no TW5, no Node I/O, no DOM.
 Takes a `Repo` and a seed; returns unforgeable membership proofs stored as Automerge CRDT events.
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -53,9 +52,9 @@ Applies the payload to the receiving vessel's Repo. Writes oracle tiddlers for
 Gate B and Gate C into the admin doc. The receiving vessel can verify its own
 lattice membership from cold — no network request, no authority server.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-gate-lattice >>
+<<~ ahu #three-gate-lattice>>
 
 !! Three-Gate Lattice
 
@@ -77,9 +76,9 @@ Verified by the same oracle tiddler chain.
 All three gates pass before a vessel may open wiki VM lanes or sync its admin doc
 to any remote vessel.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #isomorphic-law >>
+<<~ ahu #isomorphic-law>>
 
 !! Isomorphic Law
 
@@ -96,9 +95,9 @@ The ceremony functions run identically in both contexts.
 The `@lararium/keyhive` package depends on `@lararium/mesh` and `@keyhive/keyhive` (WASM).
 It does not depend on `@lararium/tw5`, `@lararium/node`, or `@lararium/browser`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ea-notes >>
+<<~ ahu #ea-notes>>
 
 !! Ea Notes
 
@@ -111,19 +110,19 @@ The operator seed MUST NOT enter any Automerge doc. The ceremony reads it to der
 the Individual keypair and then releases it. The keypair itself (public material only)
 enters the PersonaGroup doc. The private scalar never leaves the memory of the function call.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
-<<~ loulou lar:///ha.ka.ba/lararium/keyhive/capability-provider >>
-<<~ loulou lar:///ha.ka.ba/lararium/keyhive/event-store >>
-<<~ loulou lar:///ha.ka.ba/lararium/node/two-vessel-mesh >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
+<<~ loulou lar:///ha.ka.ba/lararium/keyhive/capability-provider>>
+<<~ loulou lar:///ha.ka.ba/lararium/keyhive/event-store>>
+<<~ loulou lar:///ha.ka.ba/lararium/node/two-vessel-mesh>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vLLat0Efrknejl5vT-Rz3HCYg-v44s5eBzhOdjPIgu4
+<<^ code="&#x0003;">>ni:///sha-256;2okB7BeLBVDqeMTLAqQewlERcEI9LaLobgXbwQ2z7ws
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

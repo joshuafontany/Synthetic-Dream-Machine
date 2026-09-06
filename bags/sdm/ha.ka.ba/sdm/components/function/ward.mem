@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/ward >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/ward>>
 ```toml meta
 cacheable = true
 caption   = "ward"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/function/ward.mem"
 mana      = 13
 manao     = 16
 manaoio   = 12
-register  = "Synthesis"
 retain    = true
 role      = "component (function): Ward — a selective protection against a named category"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/ward"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Ward
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 A selective protection against a named category — turning aside a kind of harm, entity, or crossing rather than blocking all passage.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Sets a condition the warded thing enforces against its named target. Stronger or broader categories cost more P. Unlike a barrier, a ward discriminates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep standing. A Heritage Affinity may reduce its P when the warded category matches an affinity tag.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 [tag[lar:///ha.ka.ba/sdm/components/function/ward]tag[lar:///ha.ka.ba/sdm/components/hook/sustained]]       standing wards
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * The "named category" begs a taxonomy of warded targets; defer until a query needs it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;grWYkf-mdqEu06IY09MbXUlKMuvVWd4u7b7fz5lPMMI
+<<^ code="&#x0003;">>ni:///sha-256;4FD_OpqOBTYmBqwqFj0cphPOunU09rX4pkI2peLTYio
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

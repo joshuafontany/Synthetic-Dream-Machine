@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/engine-watch >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/engine-watch>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/engine-watch.mem"
 l-space       = "lararium"
 mana          = 14
 manao         = 14
-register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-15"
 revision-note = "EW-5 SEATED (was held-open): engine-genesis update = operator(admin) on @oracle, peers federate read-only; the fold rides the RECONCILE rite. EW-6 added: boot warns, never auto-folds (relocates the boot auto-merge to the rite). Watch subscribes to @oracle (the runtime island), split from the @lararium corpus."
@@ -17,9 +16,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/engine-watch"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #change-classes >>
+<<~ ahu #change-classes>>
 
 !! The two change classes
 
@@ -36,9 +35,9 @@ JS-module plugins demand a reload — swapping a running module corrupts.
 The reboot-pending alert and this watch together hold the ''epoch half'' of the
 protocol — permanent mechanism, not interim UX.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -58,9 +57,9 @@ alert area renders it; `@temp` volatility clears it on the reboot that adopts
 the epoch. Both island behaviors (wiki and admin) run the watch; demote
 unsubscribes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariants >>
+<<~ ahu #invariants>>
 
 !! Invariants
 
@@ -103,20 +102,20 @@ auto-merged genesis on CID divergence (`reconcileIslandFromGenesis` inside
 `loadGenesis`); that auto-fold relocates to the rite, leaving boot to warn
 only. The running engine still swaps only on reboot (EW-2).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/sovereign-kernel >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/memory-store >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/sovereign-kernel>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/compaction-handlers>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/memory-store>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;O0rbsIsla-M07wvFi_zE6VaorrJjFyRKbNTOe9cSgRA
+<<^ code="&#x0003;">>ni:///sha-256;CjjA23ZfECnzGpdZU429wjlH9jEcVgaSeTRO35HdxZ4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

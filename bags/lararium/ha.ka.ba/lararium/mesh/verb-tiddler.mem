@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/verb-tiddler >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/verb-tiddler>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/verb-tiddler.mem"
 l-space     = "lararium"
 mana        = 14
-register    = "Synthesis-Canon"
 retain      = true
 role        = "the verb/summons/outcome task surface — verb (invocation), summons (edge transport), outcome (result); LANGUAGE-protocol register internal, the UCAN Invocation/Receipt/Task ontology held as boundary projection for lineage + interop"
 source-file = "packages/lararium-mesh/src/verb-tiddler.ts"
@@ -14,9 +13,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/verb-tiddler"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! The surface this file owns
 
@@ -26,9 +25,9 @@ Three lar: URIs carry one request through its life, request and result held apar
 * ''`@daemon/summons/<requestId>`'' — the edge TRANSPORT. An external vessel writes a summons to the Automerge doc; the dispatcher relays it into a volatile invocation, then tombstones the summons. Edge transport, not durable coordination. ("signal" names a different layer — the Agent↔Operator HUD frame.)
 * ''`@daemon/outcomes/<requestId>`'' — the DURABLE outcome tiddler (the result). Syncs to all vessels via CRDT. Durable shared meaning begins at the outcome, never at the summons.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ontology-attractor >>
+<<~ ahu #ontology-attractor>>
 
 !! The internal register (LANGUAGE-protocol frame) + the nakama boundary
 
@@ -51,15 +50,15 @@ The cuts that pull this surface forward (each its own loop, none forced now):
 
 Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<event-id>` (the indelible effect-record ledger), distinct from the per-request receipt at `@daemon/outcomes/`. The web2 word "log" left the surface 2026-06-07.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/task-graph-geometry >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verification-placement >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/task-graph-geometry>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verification-placement>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;64bIWDliPwMWQreyGBSKwyXVweF2hGJnOCbdT-XP2gw
+<<^ code="&#x0003;">>ni:///sha-256;qA_u_NtMfTn0DhRnrHoz_zo-lwa2TuvWgIF0BdNohVw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widget-module >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widget-module>>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/widget-module.mem"
 heleuma       = true
 mana          = 17
 manao         = 17
 manaoio       = 16
-register      = "Synthesis-Canon"
 role          = "canonical source: TW5 widget module protocol — LARARIUM_WIDGETS_TIDDLER stub + prototype chain wiring"
 source-symbol = "createLarariumWidgets"
 status-date   = "2026-04-30"
@@ -15,9 +14,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widget-module"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Widget Module Protocol
 
@@ -35,9 +34,9 @@ TW5 discovers widget modules via tiddlers with `module-type = "widget"`. The wid
 
 ''This code cannot be loaded from a meme.'' Phase 2 requires access to the compiled TypeScript classes and the live `WidgetCtor` from the TW5 module registry. The corpus path (if it passes the boot gate) subsumes all of this via `tw5-modules` — a prebuilt bundle that includes MemeticParser + all widget classes. See `lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stub >>
+<<~ ahu #stub>>
 
 !! Stub Tiddler (preloaded)
 
@@ -54,15 +53,15 @@ export const LARARIUM_WIDGETS_TIDDLER = {
 };
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widget-module" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #widget-registry >>
+<<~ ahu #widget-registry>>
 
 !! Widget Tag → Class Map
 
@@ -79,15 +78,15 @@ export const LARARIUM_WIDGETS_TIDDLER = {
 | `lararium-header` | `HeaderWidget` | `<meta data-lar-uri>` carrier header |
 | `lararium-dispatch` | `DispatchWidget` | `<meta data-lar-target>` lele fire-and-forget |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;I5vJJfRjGp4z5RCSIRIJWoC4TxegodXzEnWPzD6JxuE
+<<^ code="&#x0003;">>ni:///sha-256;3y3jpxfJdWacSGIuXQX9Wsrec7vysVCrBO9p1iDCs3Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

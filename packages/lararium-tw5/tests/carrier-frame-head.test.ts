@@ -23,26 +23,26 @@ const CARRIER_SOH = /<<\^[^&\n]*&#x(?:0001|0011);/;
 
 describe("★ the carrier frame rides the control head ★", () => {
   test("a control-head frame with the SOH classifier opens a carrier", () => {
-    expect(CARRIER_SOH.test("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///ha.ka.ba/lares/api/noosphere-boot >>")).toBe(true);
-    expect(CARRIER_SOH.test("<<^ code=\"&#x0011;\" namespace=\"⚕\" ? -> lar:///ha.ka.ba/lararium/mesh/genesis-doc >>")).toBe(true);
+    expect(CARRIER_SOH.test("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///ha.ka.ba/lares/api/noosphere-boot>>")).toBe(true);
+    expect(CARRIER_SOH.test("<<^ code=\"&#x0011;\" namespace=\"⚕\" ? -> lar:///ha.ka.ba/lararium/mesh/genesis-doc>>")).toBe(true);
   });
 
   test("★ the SPEAKING head never opens a carrier — the domains stay split ★", () => {
     // Not a legacy form kept working: matching both heads would re-fuse exactly what the split holds
     // apart. A frame written with `<<~` reads as malformed, and reads that way loudly.
-    expect(CARRIER_SOH.test("<<~ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///ha.ka.ba/lares/api/noosphere-boot >>")).toBe(false);
+    expect(CARRIER_SOH.test("<<~ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///ha.ka.ba/lares/api/noosphere-boot>>")).toBe(false);
   });
 
   test("a sigil carrying NO classifier stays a plain sigil under either head", () => {
-    expect(CARRIER_SOH.test("<<~ ahu #entry >>")).toBe(false);
-    expect(CARRIER_SOH.test("<<^ ahu #entry >>")).toBe(false);
-    expect(CARRIER_SOH.test("<<~ confidence Canon 18/20 >>")).toBe(false);
+    expect(CARRIER_SOH.test("<<~ ahu #entry>>")).toBe(false);
+    expect(CARRIER_SOH.test("<<^ ahu #entry>>")).toBe(false);
+    expect(CARRIER_SOH.test("<<~ confidence Canon 18/20>>")).toBe(false);
   });
 
   test("the classifier must ride the SAME sigil — a later one never promotes plain text", () => {
     // `[^&\n]*` holds the match inside one sigil on one line, so a carrier mark further down a file
     // cannot retroactively make an unrelated opener read as a frame. It also keeps a meme that QUOTES
     // the grammar (nihomano-sigils documents these very forms) from reading as a carrier of them.
-    expect(CARRIER_SOH.test("<<^ ahu #entry >>\nsome prose\ncode=\"&#x0001;\"")).toBe(false);
+    expect(CARRIER_SOH.test("<<^ ahu #entry>>\nsome prose\ncode=\"&#x0001;\"")).toBe(false);
   });
 });

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/carrier-parse >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/carrier-parse>>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/carrier-parse.mem"
 heleuma       = "ka"
@@ -8,7 +8,6 @@ last-reviewed = "2026-07-18"
 mana          = 17
 manao         = 17
 manaoio       = 17
-register      = "Synthesis-Canon"
 role          = "design doc: carrier ingress shore — text-in, records + diagnostics out (deserializeCarrier)"
 source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 source-symbol = "deserializeCarrier"
@@ -18,19 +17,19 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ carrier text arrives at the shore; normalize bytes (strip a leading BOM, fold CR into LF).
 ⏿ orient: does an SOH sentinel frame a carrier? `MemeStreamParser` scans for carrier-open/close events across single-meme, multi-meme, and partial input.
 ◇ decide: each carrier-close routes through `splitMemeToTiddlers`; a bare doc (no SOH framing) falls through to a verbatim-body split.
-▶ split ahu slots recursively into child tiddlers, rewrite each block to a `<<~ kahea ahu #slot >>` reference in the parent, and grade the parse via `parseMemeText().failures`.
+▶ split ahu slots recursively into child tiddlers, rewrite each block to a `<<~ kahea ahu #slot>>` reference in the parent, and grade the parse via `parseMemeText().failures`.
 ↺ verify: a split failure degrades loss-lessly (verbatim fallback, `lar_parse_degraded`), warnings ride a `parse-warning` tiddler that `deserializeCarrier` reads into `MemeDiagnostic[]` — text-in, records-out, no `fs`/`path`/`window`. Callers own persistence and routing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -38,9 +37,9 @@ uri-path      = "ha.ka.ba/lararium/docs/carrier-parse"
 
 The shore marks the causal-island boundary (spec: TW5 VM). `memeticWikitextDeserializer` uses `parseMemeText` and `MemeStreamParser` (both TW5-independent) to fold one carrier into a parent tiddler plus N ahu-slot children. Decomposition law begins here: non-TW5 adaptation stops at this shore.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source (TypeScript — compiled to a tiddlerdeserializer plugin tiddler)
 
@@ -61,15 +60,15 @@ export function deserializeCarrier(
 }
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;KrXSAiyyL3PdfRwmsH4J0VKtYfwSZ8wYA7wzbBRN2I4
+<<^ code="&#x0003;">>ni:///sha-256;IzyiER0umxpCJrbQ-WGni3dliHMzM0-3BDOeOOS2IXI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -20,15 +20,15 @@ const CLAUDE_SPIRIT = "claude__Query-Wright__agent-a1d5606__run-0425c035.jsonl";
 
 // A turn that harvests a Voice + a canon-band frame (mirrors bearing-harvest's clean shape).
 const CANON_TURN = [
-  "<<~ lares aim lar:///operator.intent.lands/x -> lar:///council.options.cuts/y >>",
-  "<<~ hud Aperture(10) OODA-HA(3) >>",
-  "<<~ ward * L-Prime >>",
+  "<<~ lares aim lar:///operator.intent.lands/x -> lar:///council.options.cuts/y>>",
+  "<<~ hud Aperture(10) OODA-HA(3)>>",
+  "<<~ ward * L-Prime>>",
   "",
   "Council (Lares): the fork holds.",
   "",
-  "<<~ ward ! · ↻ L-Prime >>",
-  "<<~ hud Aperture(10 -> 11) OODA-HA(1↺) >>",
-  "<<~ lares yield lar:///council.fork.named/z -> ? >>",
+  "<<~ ward ! · ↻ L-Prime>>",
+  "<<~ hud Aperture(10 -> 11) OODA-HA(1↺)>>",
+  "<<~ lares yield lar:///council.fork.named/z -> ?>>",
 ].join("\n");
 
 const BARE_TURN = "just prose, no sigils at all";

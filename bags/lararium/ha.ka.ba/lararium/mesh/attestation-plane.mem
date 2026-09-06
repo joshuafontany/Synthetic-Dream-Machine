@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/attestation-plane.mem"
@@ -8,18 +8,17 @@ l-space   = "lararium"
 mana      = 14
 manao     = 14
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "OPERATOR-APPROVED design intent for the attestation plane: how a Nexus co-signs a public Handle, and grants a scarce host-scoped nym, WITHOUT the attestor becoming a registrar. Six rulings — the severability+render law, fleet-span telemetry, attestor-separated-from-host (kahu HOST, contracted operators ATTEST), governance split from infra duty, an append-only log with a named obliged watcher, and the host-scoped nym held as a lease. Drawn from six research sweeps over NIP-05, AT Proto, WebPKI/CT, Sovrin, eIDAS, ENS/Namecoin/Handshake, the fediverse, and (2026-08-08) ICANN's root-KSK ceremony, Sigstore, Tor, Matrix, ACME/CAA/MPIC and the nonprofit asset-custody field. The sixth sweep restated ruling 3 as SUBSTRATES-not-hands (0-for-8: no live system separates the attesting hand from the resolving one; survivors made the resolver SUBSTITUTABLE instead), withdrew the ICANN registry/registrar precedent, split the money shore from the asset shore, added the CADENCE LAW (quorum on the rare act, automation on the leaf — no deployed quorum-gated issuance exists), and dissolved most of the collective-choice question into the CONTRACT form (bilateral leased contracts, never a list — a list IS a global now)."
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #the-seat >>
+<<~ ahu #the-seat>>
 
 ! The Attestation Plane ~ where the registrar seat hides
 
@@ -35,7 +34,7 @@ it three times, and never once in a protocol document:
 * in ''Mastodon'' it appeared as a '''login prompt on the server suspending you''' — `Move` must issue FROM
   the old host, signed by the old key, while logged in.
 
-<<~ confidence 15/20 >> ''Therefore the kahu co-signature does not carry the risk. The
+''Therefore the kahu co-signature does not carry the risk. The
 CLIENT'S RENDER POLICY and the EXIT PROOF carry it.'' Spec both as tightly as resolution gets spec'd.
 
 ''The frame beneath it'' — Zooko's triangle, resolved by Stiegler's petname split. The '''key''' runs global
@@ -52,9 +51,9 @@ bought what the other lacks; neither bought both.'' The third position — bind 
 KEEPS and attach claims as separate, revocable, logged attestation EDGES — stays unoccupied, and this stack
 already stands closest to it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-six >>
+<<~ ahu #the-six>>
 
 !! The Six Rulings (operator, 2026-07-26)
 
@@ -84,7 +83,7 @@ that place dies or turns hostile, so the span IS the exit right, measured.
 ''No retroactive baseline exists anywhere in the field'' (nobody has re-measured Bluesky since April 2024).
 Instrument at founding or lose the baseline permanently.
 
-<<~ confidence 11/20 >> ''OPEN (operator):'' a cross-Nexus rate eventually requires different kahu
+''OPEN (operator):'' a cross-Nexus rate eventually requires different kahu
 groups to SHARE TELEMETRY — which wants its own consent shape, since a naive share would correlate the very
 fleets the infra layer keeps un-correlatable.
 
@@ -101,8 +100,8 @@ hand apart is free today and impossible later.
 ''THE ACHIEVABLE FORM — SUBSTRATES, NOT HANDS'' (sixth sweep, 2026-08-08). A sweep across ICANN, AT Proto,
 Matrix, Nostr, CT, ENS, Tor and OpenNIC found ''no live system'' that separated the attesting hand from the
 resolving hand — zero for eight. What every survivor built instead runs one layer down: they made the
-resolving hand ''SUBSTITUTABLE'', by seating identity in a key the resolver never mints. <<~ confidence
-Synthesis-Canon 15/20 >> So the ruling's INTENT stands and its MECHANISM restates: ''many resolvers, one
+resolving hand ''SUBSTITUTABLE'', by seating identity in a key the resolver never mints.
+So the ruling's INTENT stands and its MECHANISM restates: ''many resolvers, one
 portable key — no single resolver holds final say over IDENTITY, only over REACHABILITY.'' Separation of
 substrates buys what separation of hands promised and nobody delivered.
 
@@ -127,7 +126,7 @@ the same refusal to let any authority NAME one. Only a provenance reader wants w
 ''PLURALITY NAMES THE PROXY; INDEPENDENCE NAMES THE PROPERTY.'' Ten attestors forming one clique read as one
 attestor wearing ten masks — canon says as much in the neighbouring register: "mandatory vouching IS a root
 admitter wearing N masks." So the ceiling meters CONCENTRATION rather than counting heads, and it self-tunes as
-a Nexus grows where a fixed number never would. <<~ confidence 11/20 >> What independence measure
+a Nexus grows where a fixed number never would. What independence measure
 survives contact with a real social graph stays genuinely open, and rides research rather than a guess.
 
 !!! 4 · Governance splits from infra duty
@@ -145,7 +144,7 @@ own bank account'': Open Collective Foundation dissolved in 2024, 600+ collectiv
 MONEY could transfer — and only to another 501(c)(3). ''A domain held there becomes the asset of an entity
 the kahu do not govern, exposed to that entity's own dissolution.''
 
-<<~ confidence 14/20 >> What the field shows working for this asset class instead: SPI holds
+What the field shows working for this asset class instead: SPI holds
 Debian's trademarks and domains under a member-elected board with documented domain procedures; Software
 Freedom Conservancy holds ''domain names'' for member projects à-la-carte, so a project may assign some assets
 and retain others. ''Budget the move honestly'' — Mastodon's asset transfer to a nonprofit ran roughly ten
@@ -187,7 +186,7 @@ CA/Browser Forum ballots, not in products. (Threshold ECDSA for DNSSEC keys and 
 exist; neither gates ISSUANCE.) The reason reads structural rather than accidental: a sixty-day renewal
 cadence cannot wait on humans.
 
-<<~ confidence 15/20 >> So every survivor ''separates cadences'' — a quorum gates the rare,
+So every survivor ''separates cadences'' — a quorum gates the rare,
 slow, high-power act (mint a key, rotate it, admit a member), and automation carries the frequent, fast,
 low-power one (issue a leaf). ''A quorum placed in the renewal path gets bypassed inside one outage, and the
 bypass becomes permanent.'' The composable approximation that does deploy: pin issuance with CAA `accounturi`
@@ -201,7 +200,7 @@ parent's own power to issue.
 
 !!! 6 · The host-scoped nym rides as a LEASE
 
-<<~ confidence 7/20 >> ''APPROVED IN PRINCIPLE ONLY — this rung awaits unpacking and
+''APPROVED IN PRINCIPLE ONLY — this rung awaits unpacking and
 carries no RULED language yet.''
 
 ''Rent gates the flood, never the claim.'' Three price points across four orders of magnitude produced one
@@ -222,9 +221,9 @@ bound to a ''rented substrate'' (an on-chain rental contract, a hostname) and ne
 So the lease stays right for RECIRCULATION and wrong as IDENTITY. It composes here only while the severability
 boundary (#/1) holds absolutely: ''lease the address, never the self.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-stays-open >>
+<<~ ahu #what-stays-open>>
 
 !! What Stays Open
 
@@ -276,23 +275,23 @@ boundary (#/1) holds absolutely: ''lease the address, never the self.''
   Candidate cure, unruled: a clean fork emits a signed public ''reasoned notice of departure'', so exit
   transmits voice instead of draining it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#/the-standing >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-siege-gate >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#/the-price >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage#/the-standing>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-siege-gate>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#/the-price>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/alignment-layer>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;3rfrUvXwpBgzcyIhOhZrNObEJ_cKacvUiKn15pexR-s
+<<^ code="&#x0003;">>ni:///sha-256;K0VSesosVOypJlPs8vBNkqtFBYeIld9OnHZL9DIU5E8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

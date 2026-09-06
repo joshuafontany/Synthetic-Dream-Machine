@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/lele >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/lele>>
 ```toml meta
 body-sha256   = "c8ea0534b4b3f0a660ee5eadfc0144d3f1555b3944e645bbfb17e504f3ad9970"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/lele.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/widgets/lele"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: LeleWidget — heleuma ka"
 source-symbol = "LeleWidget"
@@ -17,28 +16,28 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/lele"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `<$lele>` renders a `<meta data-lar-kind="lele">` element. Carries a `target` attribute pointing to a jump/transclusion target.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/lele" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/lele >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/lele>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;pefSbAwqJN_-dH9Cu1cfWnFYXRDxFcGjGCBDVl1h090
+<<^ code="&#x0003;">>ni:///sha-256;0DoWXplHEzqQCFq501xTeEaeZe9RI-rpcm9BfuJu3bE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

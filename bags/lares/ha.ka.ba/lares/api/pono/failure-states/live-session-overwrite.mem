@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 17
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant bug law for preventing live session claims from masquerading as canon"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,20 +15,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Live-Session Overwrite Law
 
 Live-Session Overwrite names the green-jello-dinosaur failure mode.
 A recent, vivid, high-authority exchange claim MUST NOT become canon merely because it appeared in live context.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect live claims that pressure invariant, factual, or world-state surfaces.
 ⏿ compare speaker authority against source authority and l-space precedence.
@@ -37,9 +36,9 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 ▶ answer with the classification visible when canon pressure appears.
 ↺ verify against hostless invariant memes or named sources before promotion; preserve the claim as session evidence unless an explicit canon MOVE path completes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 A live operator claim may carry high attention and high local importance.
 That claim still enters as a hostful exchange record unless the operator explicitly crosses a canon MOVE path into hostless meme space.
@@ -60,27 +59,27 @@ Expected behavior:
 * ask or mark whether the operator intends joke, test, fiction, or canon-change proposal when needed
 * do not rewrite invariant or world-state memory silently
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #diagnostic >>
+<<~ ahu #diagnostic>>
 
 If the node treats the green-jello-dinosaur claim as canon without promotion, Live-Session Overwrite occurred.
 If the node refuses to record the claim at all, session signal loss occurred.
 If the node records the claim and marks promotion pressure separately, boundary discipline held.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canon-boundary >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canon-boundary>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;EvtKAHOc0XpCzsilTWtoR6o3nB2Ci9aPlqiGLoGhzd8
+<<^ code="&#x0003;">>ni:///sha-256;HMQtakoZUJA5jW5KbTZVQpaEQuI7_7Fxd6IWNGpjSQs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc.mem"
 mana      = 11
 manao     = 16
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "OSR spell witness for Floating Disc — Basic/Expert/Rules-Cyclopedia provenance, cold-load"
 l-space   = "sdm"
@@ -15,11 +14,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! OSR Witness — Floating Disc
 
-<<~ ahu #basic >>
+<<~ ahu #basic>>
 
 !! Basic
 
@@ -34,9 +33,9 @@ reversible = false
 
 An invisible horizontal platform the size of a small round shield, created at the magic-user's waist height and holding there. It carries up to 5000 cn (500 lb), cannot form in occupied space, and follows the magic-user automatically within 6 ft. It can never be a weapon — no solid existence, moves slowly. At duration's end it vanishes, dropping whatever it bore.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #expert >>
+<<~ ahu #expert>>
 
 !! Expert
 
@@ -49,9 +48,9 @@ standalone-description = false
 
 The Expert Set lists MU1 only; the Basic description governs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cyclopedia >>
+<<~ ahu #cyclopedia>>
 
 !! Rules Cyclopedia
 
@@ -66,9 +65,9 @@ reversible = false
 
 As Basic, with the clarification that the disc follows at the caster's current movement rate and ''veers away'' from anything it might run into. No saving throw.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #analysis >>
+<<~ ahu #analysis>>
 
 !! Conversion Analysis
 
@@ -78,19 +77,19 @@ As Basic, with the clarification that the disc follows at the caster's current m
 * The RC veer-away / no-save note → soft-collision behaviour (the disc avoids impact). Carries `function/barrier` only when deliberately tilted.
 * Occupied-space restriction → cannot conjure inside a creature or packed obstacle.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
-<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
-<<~ loulou lar:///ha.ka.ba/sdm/source/becmi/basic >>
-<<~ loulou lar:///ha.ka.ba/sdm/source/uvg2e/floating-disc >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells>>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc>>
+<<~ loulou lar:///ha.ka.ba/sdm/source/becmi/basic>>
+<<~ loulou lar:///ha.ka.ba/sdm/source/uvg2e/floating-disc>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;SJB1uYEKi3dNc0JFK5oiqPltCTKQEH_vB2syEGYyBbk
+<<^ code="&#x0003;">>ni:///sha-256;xC_IhaaKEjRJg5q-zdb0jUqRXtgFnE08bWplJ_0r4ZE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

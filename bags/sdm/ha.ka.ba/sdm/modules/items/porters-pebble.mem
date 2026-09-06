@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/items/porters-pebble>>
 ```toml meta
 cacheable = true
 caption   = "Porter's Pebble"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/modules/items/porters-pebble.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Item module: Porter's Pebble — a found stuckforce relic that holds the Floating Disc Power; first proof an item is an entity that #has a Power through the item mount-point (module nesting)"
 tags      = ["mount-points/item", "components/domain/stuckforce", "modules/powers/floating-disc"]
@@ -17,21 +16,21 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Porter's Pebble
 
-<<~ ahu #has >>
+<<~ ahu #has>>
 
 !! Composition
 
 An item is ''an entity with mount-points'', not a new kind of module. It `#has` the Power it carries and `#has` the `item` mount-point that says //how// that Power is seated in an object. The carried Power keeps its own composition unchanged — this module does ''not'' re-list Floating Disc's components. That is the whole nesting rule: entity `#has` module; reserve `#composes` for module-to-module wiring.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #default >>
+<<~ ahu #default>>
 
 ```toml default
 canonical-name = "Porter's Pebble"
@@ -53,9 +52,9 @@ The carried Floating Disc behaves exactly as its module specifies — same range
 
 A botched activation or a sundered pebble follows the `item` mount-point's failure rule: Corruption degrades or curses ''the object'', not the bearer — a cracked pebble may drop loads, drift, or lock its disc in place.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #variants >>
+<<~ ahu #variants>>
 
 !! Variants
 
@@ -63,21 +62,21 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 * ''Caravan Cairn'' — a heavier relic seating Floating Disc at its `x2` overcharge by default (5m disc, voice-commanded).
 * ''Codex-Pebble (container)'' — per the `item` container sub-rule, a relic bundling Floating Disc with one or two sibling stuckforce Powers in a single slot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
-<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
-<<~ loulou lar:///ha.ka.ba/sdm/mount-points/item >>
-<<~ loulou lar:///ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble >>
-<<~ loulou lar:///ha.ka.ba/sdm/witness/items/uvg/porters-pebble >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc>>
+<<~ loulou lar:///ha.ka.ba/sdm/mount-points/item>>
+<<~ loulou lar:///ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble>>
+<<~ loulou lar:///ha.ka.ba/sdm/witness/items/uvg/porters-pebble>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -85,8 +84,8 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 * ''`holds` edge vs `#has`.'' This module carries both: the flat `#has` edge proves the uniform shape; the `#holds` relation edge (role:holds) records //which// Power for richer queries. If `#has` alone proves sufficient for card rendering and filters, the `#holds` edge demotes (Principle 6).
 * ''Container sub-rule'' (Codex-Pebble) rides the existing `item` mount-point; it is not a new mount-point. Confirm internal Power cap vs item Level (OGA upgrade economy) when an album becomes an upgradable Hallmark — same open question the `item` mount-point already carries.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;weAfo22eIeOc8As6zNRMR9mOSzwVaj6w311Vhs4Y2v8
+<<^ code="&#x0003;">>ni:///sha-256;svFMMRdUPvbS4fGoIMqVPsw2XM8BllDVptOjymfB5ig
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

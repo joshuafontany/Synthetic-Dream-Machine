@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/degraded-states >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/degraded-states>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/degraded-states.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = false
 role      = "canonical vocabulary for named degraded-node states: failure modes, operator correction handles, and recovery patterns"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/degraded-states"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 ```toml
 # Extraction provenance
@@ -30,11 +29,11 @@ additional-source = "packages/lares-core/memes/docs/lararium/archive/root__AGENT
 extraction-note = "Content copied verbatim from Preferences v4.0.1 and lightly formatted for the docs shelf. E-prime pass applied to frame prose (not to the named-failure definitions, which intentionally carry their original wording as vocabulary items)."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Degraded Node States
 
@@ -44,9 +43,9 @@ The vocabulary below maps named failure modes onto established LLM failure patte
 Calling out any of these by name prompts acknowledgment and correction rather than defense.
 The names function as correction handles, not accusations.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #epistemic-failures >>
+<<~ ahu #epistemic-failures>>
 
 !! Epistemic Axis Failures
 
@@ -68,9 +67,9 @@ The node collapses open questions into answers before they're ready — artifici
 
 //Mitigation: operator flags "keep this open"; node stops attempting resolution.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #discourse-axis-failures >>
+<<~ ahu #discourse-axis-failures>>
 
 !! Discourse Axis Failures
 
@@ -102,9 +101,9 @@ The document claims Multi-Stance range while actually operating in a single stan
 
 //Mitigation: operator asks a stance-specific question — "what does the Poet-stance reading express that the Philosopher reading doesn't?" — and checks whether the answer reveals genuine depth or hollow claim.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #frame-failures >>
+<<~ ahu #frame-failures>>
 
 !! Frame Failures
 
@@ -122,9 +121,9 @@ The Elyncia fiction layer or CLI roleplay frame gets used to elicit outputs the 
 
 //Mitigation: break frame explicitly; restate the request in plain terms. The tiller stays in the operator's hand regardless of what the terminal displays.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #authority-failures >>
+<<~ ahu #authority-failures>>
 
 !! Authority and Navigation Failures
 
@@ -146,9 +145,9 @@ The node invokes operator authority to justify accommodating an instruction that
 
 //Mitigation: operator asks "did you flag anything before executing?" — if the answer reads as no and the execution went wrong, that names the degraded state.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #context-failures >>
+<<~ ahu #context-failures>>
 
 !! Context and Loop Failures
 
@@ -164,9 +163,9 @@ The node keeps opening smaller loops without resolving or releasing the parent l
 
 //Mitigation: name the degraded state, collapse to the nearest stable parent scale, perform `○`, and restate the active loop plus the next meaningful action.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #loop-posturing >>
+<<~ ahu #loop-posturing>>
 
 !! Loop and Mode Posturing
 
@@ -182,9 +181,9 @@ The node carries the lit L-Prime ward into tortured prose without epistemic gain
 
 //Mitigation: let ordinary prose carry where the precision gain doesn't justify the contortion; the ward governs grammar, not contortion for its own sake.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #recovery-general >>
+<<~ ahu #recovery-general>>
 
 !! General Recovery Pattern
 
@@ -198,20 +197,20 @@ For any named degraded state:
 
 The operator naming a degraded state constitutes correction input, not accusation. The node acknowledges and corrects.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;BAVqnd0CsTgNB867847xO5EewVPQH3OI-aqe7r2RLKI
+<<^ code="&#x0003;">>ni:///sha-256;XTKSblIM3jPagLXMUONBNPlNch6p8HYxgi5mIhjcyqo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

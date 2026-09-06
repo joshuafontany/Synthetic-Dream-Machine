@@ -21,9 +21,9 @@ module-type: library
  * ── WHAT EACH CONSTRUCT BECOMES ─────────────────────────────────────────────────────────────────
  *   frame sigils (`<<^ …>>`) + declaration   dropped — carriage, not content; the meta records them
  *   the meta fence                            dropped from the body — provenance rides the meta
- *   `<<~ ahu #name >>` / `<<~/ahu >>`        an HTML anchor `<a id="name"></a>` / dropped —
+ *   `<<~ ahu #name>>` / `<<~/ahu>>`        an HTML anchor `<a id="name"></a>` / dropped —
  *                                            every `#name` citation in prose keeps a target
- *   `<<~ aka … >>` `<<~ loulou … >>`         a reference bullet carrying the address as code
+ *   `<<~ aka …>>` `<<~ loulou …>>`         a reference bullet carrying the address as code
  *   any other line-standing sigil            the line wrapped in a code span — notation shown
  *                                            literally, never executed and never invented around
  *   `!` headings · `#` ordered · `*` bullets markdown equivalents, totals
@@ -50,21 +50,21 @@ export interface SubmissionProjection {
 }
 
 /** Line-standing frame sigil (any control code), with whatever rides after the closer. */
-const FRAME_LINE = /^<<\^ code="&#x00[0-9A-Fa-f]{2};"(?:[^>\n]|>(?!>))* >>.*$/;
+const FRAME_LINE = /^<<\^ code="&#x00[0-9A-Fa-f]{2};"(?:[^>\n]|>(?!>))*>>.*$/;
 /** The SOH heading, capturing the carrier's declared address. The tail admits `->`. */
-const SOH_LINE = /^<<\^ code="&#x00[01]1;"(?:[^>\n]|>(?!>))*\?\s*->\s*to=(lar:\/\/\/\S+) >>/;
+const SOH_LINE = /^<<\^ code="&#x00[01]1;"(?:[^>\n]|>(?!>))*\?\s*->\s*to=(lar:\/\/\/(?:[^\s>]|>(?!>))+)\s*>>/;
 /** The ETX closer with its adjacent check. */
 const ETX_LINE = /^<<\^ code="&#x0003;"[^\n]*>>(\S+)?/;
-const DOCTYPE_LINE = /^<<!DOCTYPE (?:[^>\n]|>(?!>))* >>\s*$/;
+const DOCTYPE_LINE = /^<<!DOCTYPE (?:[^>\n]|>(?!>))*>>\s*$/;
 // The tooth stands at one dispatch position: `<<~` then LWSP then the command word,
 // and a close word carries its own slash (`ahu`, `/ahu`). Both spacings reach the same
 // word, matching the plain register's `<<fragment …>>` / `<</fragment>>`.
-const AHU_OPEN = /^<<~\s*ahu #(\S+)(?: (?:[^>\n]|>(?!>))*)? >>\s*$/;
+const AHU_OPEN = /^<<~\s*ahu #([^\s>]+)(?: (?:[^>\n]|>(?!>))*)?\s*>>\s*$/;
 const AHU_CLOSE = /^<<~\s*\/\s*ahu\s*>>\s*$/;
-const EDGE_LINE = /^<<~\s*(?:aka|loulou) ((?:[^>\n]|>(?!>))*?) >>\s*$/;
+const EDGE_LINE = /^<<~\s*(?:aka|loulou) ((?:[^>\n]|>(?!>))*?)\s*>>\s*$/;
 // The speaking head with or without a joined name (`<<~ ahu`, `<<~ranks`, `<<~! wehe`) — any
 // line-standing sigil not already given a markdown shape above.
-const SIGIL_LINE = /^<<~\S* ?(?:[^>\n]|>(?!>))* >>\s*$/;
+const SIGIL_LINE = /^<<~\S* ?(?:[^>\n]|>(?!>))*>>\s*$/;
 
 /**
  * Emphasis, applied outside code spans. Spans mask to NUL-delimited tokens and restore after —
@@ -149,7 +149,7 @@ export function transposeMarkdown(text: string): { markdown: string; uri?: strin
     // ── a sigil spanning lines travels whole, shown literally in a fence ──
     if (sigilBuf) {
       sigilBuf.push(line);
-      if (/ >>\s*$/.test(line)) {
+      if (/>>\s*$/.test(line)) {
         out.push("```", ...sigilBuf, "```");
         sigilBuf = null;
       }

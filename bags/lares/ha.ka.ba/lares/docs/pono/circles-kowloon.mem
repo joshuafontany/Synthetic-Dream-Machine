@@ -1,22 +1,21 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/circles-kowloon >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/circles-kowloon>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/circles-kowloon.mem"
 mana      = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "reference model: Kowloon circle data structure and social graph inversion; authoritative design reference for the per-face CirclesDoc that answers to @circles-<tag>"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/circles-kowloon"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #core-inversion >>
+<<~ ahu #core-inversion>>
 
 ! Circles — Kowloon Reference Model
 
@@ -34,9 +33,9 @@ From the README (unfederated activities table):
 
 This is social graph inversion: on centralized platforms, following creates a public-facing graph edge the platform owns and exposes. On Kowloon, that action — putting someone in your Following circle — creates no public record. The graph is sharded: each user's graph lives exclusively on their home server, cannot be queried from outside, and is never transmitted. No remote server can reconstruct who follows whom.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #circle-data-model >>
+<<~ ahu #circle-data-model>>
 
 !! Circle Data Model (Kowloon schema)
 
@@ -58,9 +57,9 @@ signature   — RSA signature of id|name|to|sortedMemberIds (tamper-evident)
 
 Key: members are ''embedded snapshots'' (full actor profile + `lastFetchedAt`), not join table references. The system does not call out to remote servers to check circle membership at read time — it uses the cached local snapshot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #circle-types >>
+<<~ ahu #circle-types>>
 
 !! Circle Types
 
@@ -76,9 +75,9 @@ Key: members are ''embedded snapshots'' (full actor profile + `lastFetchedAt`), 
 
 ''User Circles'': operator-created personal lists (e.g. "Close Friends", "Work").
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #addressing-hierarchy >>
+<<~ ahu #addressing-hierarchy>>
 
 !! Addressing Hierarchy
 
@@ -96,9 +95,9 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 ''Remote circles are never resolved.'' Feed fan-out only checks local circle membership. "Privacy: we can't verify membership in remote circles. Performance: avoid fetching remote circle data." — `docs/FEED_FANOUT.md`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lararium-mapping >>
+<<~ ahu #lararium-mapping>>
 
 !! Lararium Mapping
 
@@ -106,12 +105,12 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 > as an ''edge-closure'' — the reciprocal-edge fan over signed, typed, `lar:`-named
 > member edges, //evaluated// as a query — never a central `CirclesDoc` object a single
 > node owns as a roster
-> (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>). So the mapping rows
+> (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>). So the mapping rows
 > below that read a circle as one owner-held doc carry ''retire-residue'' framing: keep
 > them as the faithful Kowloon prior-art trace they document, but for //our// design read
 > `CirclesDoc`/`actorId`-ownership as the closure each member's own edge composes, and
 > read eviction as a kāpae on the membership stack
-> (<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#/membership-sense >>). The Kowloon
+> (<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#/membership-sense>>). The Kowloon
 > reference itself stands unchanged — Kowloon legitimately uses a central object.
 
 | Kowloon | Lararium |
@@ -127,9 +126,9 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 | System circles per user | Seeded by `seedCirclesDoc()` when a FACE is founded — one set per face, never one per machine |
 | Nexus authorization rings | NOT a circle. A nexus tier names who may act at a Nexus, never who a person reads — it answers to `@nexus` (design-only today; no code stands it) |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #system-circles >>
+<<~ ahu #system-circles>>
 
 !! System Circles to Auto-Seed
 
@@ -147,9 +146,9 @@ At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<ta
 
 ''Nexus authorization rings name no circle.'' A nexus tier says who may act at a Nexus, not who a person reads, so it answers to `@nexus` — one ring per Nexus rather than one per mask. Seeding `nexus:user` or `nexus:admin` into a face's circles plane would mint an authorization ring per face and file it under a follow graph. The rings stand as design today; no code seeds them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-same-law-twice >>
+<<~ ahu #the-same-law-twice>>
 
 !! ★ The non-federating relation ~ one law, found twice, at two layers ★
 
@@ -169,9 +168,9 @@ The question //how far up does the inversion scale?// has a mechanical answer he
 
 ⚠ ''And that names the cost honestly.'' Anything wanting a global view of the relation — a recommendation feed, a mutual-friends count, a network-wide reputation — ''cannot build on this, and names no missing feature''. The trade gave it away. `dyad.ts` prices the same trade at the device layer: the membership-CRDT family //"buys convergence by replicating the op graph to everyone, handing each member the roster and the device-to-human linkage."//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #not-adopted >>
+<<~ ahu #not-adopted>>
 
 !! What Lararium Does NOT Adopt from Kowloon
 
@@ -180,18 +179,18 @@ The question //how far up does the inversion scale?// has a mechanical answer he
 * RSA signature on circle state → replaced by Keyhive convergent capabilities (S7)
 * `Members` as embedded subdocuments → member identity data lives in IdentitiesDoc; CirclesDoc holds only DIDs
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/heleuma/ka >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/heleuma/ka>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7VmRg05MHeFeBDq3fcKDWdzKNGzw9BVkpig3VHlwXVE
+<<^ code="&#x0003;">>ni:///sha-256;UoGPxU1L55eVTcDJV3T2BubJyVB8uqYwpw1UiSj9hfk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

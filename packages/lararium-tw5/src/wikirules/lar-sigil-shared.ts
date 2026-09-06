@@ -56,7 +56,7 @@ export function indexOfSigilOpen(source: string, from: number): number {
 export const ANY_OPEN_RE = /<<[~^][^\n]*?>>/g;
 
 // Child-slot sigil names present at bootstrap (before grammar loads from tiddlers).
-// ahu: deserializer emits <<~ ahu … >>…<<~/ahu >> blocks; must be recognised at cold boot.
+// ahu: deserializer emits <<~ ahu …>>…<<~/ahu>> blocks; must be recognised at cold boot.
 // kau: TW5 \widget tiddler (sigil-kau.tid), only appears in live wiki (post-grammar-load); grammar supplies it via kind="child-slot".
 const BUILTIN_CHILD_SLOTS = new Set<string>(["ahu"]);
 
@@ -78,7 +78,7 @@ export interface CompoundSigilMatch {
   readonly closeKey: string | null; // BLOCK_CLOSERS key for body capture: word1 for compound+bare-slot, null for leaf
 }
 
-// Matches <<~ WORD [WORD2] ARGS >> for any simple sigil invocation.
+// Matches <<~ WORD [WORD2] ARGS>> for any simple sigil invocation.
 // Does not match pranala (arrow syntax, handled by matchPranalaOpenAt).
 // Does not match control chars or <<~! pragma forms (no leading \s+ match).
 const COMPOUND_OPEN_RE = /<<~\s+(\\?[\w-]+)(?:\s+([^\n]*?))?\s*>>/g;
@@ -89,13 +89,13 @@ const COMPOUND_OPEN_RE = /<<~\s+(\\?[\w-]+)(?:\s+([^\n]*?))?\s*>>/g;
  * rather than hardcoded names, so new slot types (kau, future) require
  * only a TOML [[sigils]] entry with kind="child-slot".
  *
- *   <<~ ahu #slot >>           → name="ahu",       p1="#slot",  slotType="ahu"
- *   <<~ kahea ahu #slot >>     → name="kahea~ahu", p1="#slot",  slotType="ahu"
- *   <<~ aka   ahu #slot >>     → name="aka~ahu",   p1="#slot",  slotType="ahu"
- *   <<~ kahea lar:///uri >>    → name="kahea",     p1=uri,      slotType=null
- *   <<~ loulou lar:///uri >>   → name="loulou",    p1=uri,      slotType=null
- *   <<~ kau #dev DeviceName >> → name="kau",       p1=rest,     closeKey="kau"
- *   <<~ kahea kau #dev >>      → name="kahea~kau", p1="#dev",   closeKey="kahea"
+ *   <<~ ahu #slot>>           → name="ahu",       p1="#slot",  slotType="ahu"
+ *   <<~ kahea ahu #slot>>     → name="kahea~ahu", p1="#slot",  slotType="ahu"
+ *   <<~ aka   ahu #slot>>     → name="aka~ahu",   p1="#slot",  slotType="ahu"
+ *   <<~ kahea lar:///uri>>    → name="kahea",     p1=uri,      slotType=null
+ *   <<~ loulou lar:///uri>>   → name="loulou",    p1=uri,      slotType=null
+ *   <<~ kau #dev DeviceName>> → name="kau",       p1=rest,     closeKey="kau"
+ *   <<~ kahea kau #dev>>      → name="kahea~kau", p1="#dev",   closeKey="kahea"
  */
 export function matchCompoundSigilAt(
   source:         string,
@@ -114,26 +114,26 @@ export function matchCompoundSigilAt(
   const rest = (m[2] ?? "").trim();
 
   if (childSlotNames.has(word1)) {
-    // bare child-slot: <<~ ahu #slot >> or <<~ kau #device … >>
+    // bare child-slot: <<~ ahu #slot>> or <<~ kau #device …>>
     return { start: m.index, end: COMPOUND_OPEN_RE.lastIndex, name: word1, p1: rest, closeKey: word1 };
   }
-  // peek at the first token of rest to detect a compound: <<~ kahea ahu #slot >>
+  // peek at the first token of rest to detect a compound: <<~ kahea ahu #slot>>
   const spaceIdx  = rest.search(/\s/);
   const word2     = spaceIdx >= 0 ? rest.slice(0, spaceIdx) : rest;
   const remainder = spaceIdx >= 0 ? rest.slice(spaceIdx).trim() : "";
   if (word2 && childSlotNames.has(word2)) {
-    // closeKey = word1 (e.g. "kahea") — the compound block closes with <<~/kahea >>, not <<~/ahu >>
+    // closeKey = word1 (e.g. "kahea") — the compound block closes with <<~/kahea>>, not <<~/ahu>>
     return { start: m.index, end: COMPOUND_OPEN_RE.lastIndex, name: `${word1}~${word2}`, p1: remainder, closeKey: word1 };
   }
-  // simple leaf: <<~ kahea lar:///uri >> or <<~ loulou … >>
+  // simple leaf: <<~ kahea lar:///uri>> or <<~ loulou …>>
   return { start: m.index, end: COMPOUND_OPEN_RE.lastIndex, name: word1, p1: rest, closeKey: null };
 }
 
 /**
  * Pranala edge sigil — explicit edge with from/to and optional slot/family/role.
  *
- * Inline form:  `<<~ pranala #name? from=A -> to=B [family=f] [role=r] >>`
- * Block form:   `<<~ pranala #name? from=A -> to=B >>body<<~/pranala >>`
+ * Inline form:  `<<~ pranala #name? from=A -> to=B [family=f] [role=r]>>`
+ * Block form:   `<<~ pranala #name? from=A -> to=B>>body<<~/pranala>>`
  *
  * The two forms share opener parsing; closer presence distinguishes them.
  */
@@ -182,7 +182,7 @@ export function matchPranalaOpenAt(source: string, start: number): PranalaOpenMa
  * via buildClosers() + closePatternToTag() from the TOML registry.
  *
  * Boot-critical:
- *   ahu      — deserializer emits <<~ ahu … >>…<<~/ahu >> blocks at cold boot
+ *   ahu      — deserializer emits <<~ ahu …>>…<<~/ahu>> blocks at cold boot
  *   pranala  — permanent JS exception; no TOML entry; always static
  *   kahea    — kahea-invoke block form needed before grammar tiddlers load
  *
@@ -281,7 +281,7 @@ export function buildClosers(grammar: GrammarRules | null): Record<string, strin
  * Returns the set of inline/edge sigil names registered in the grammar.
  * Used by the generic fallback in lar-sigil findNextMatch as a safety net for
  * <<~WORD>> forms (no space) that compound does not claim. Well-formed HUD
- * sigils use <<~ WORD … >> (space) and are consumed by matchCompoundSigilAt
+ * sigils use <<~ WORD …>> (space) and are consumed by matchCompoundSigilAt
  * before the generic path fires.
  */
 export function grammarInlineSigils(grammar: GrammarRules | null): Set<string> {

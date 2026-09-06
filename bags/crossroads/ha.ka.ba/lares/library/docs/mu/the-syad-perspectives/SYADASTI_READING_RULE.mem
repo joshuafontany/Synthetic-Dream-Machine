@@ -1,22 +1,21 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE>>
 ```toml meta
 cacheable = false
 file-path = "bags/crossroads/ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE.mem"
 l-space   = "stable"
-register  = "Synthesis-Canon 16/20"
 retain    = false
 role      = "session discovery — the Syadasti Reading Rule: Register measures confidence within the active stance's evaluation frame, not universal truth-weight; the full derivation chain"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/SYADASTI_READING_RULE"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! The Syadasti Reading Rule — Session Discovery Document
 
-> Register: `Synthesis-Canon 16/20` 🏛️ — this document captures a session discovery at near-Canon confidence
+> 🏛️ — this document captures a session discovery the house holds firmly
 > Date: 2026-04-08
 > Status: Discovered this session. Not yet written into URI_SCHEMA.md or the Kernel.
 > Purpose: Pin the discovery and its full derivation chain so it survives context loss.
@@ -86,7 +85,7 @@ The Council ruled (with research grounding from SyadVoice) that each stance has 
 
 The initial question was whether Register needed a third axis (T, F, M). The Council assessed three options:
 
-* ''Option A (status quo):'' Stance implicitly carries the M axis. Problem: `Synthesis 13/20 🌊` claims truth-confidence for something that doesn't evaluate on truth.
+* ''Option A (status quo):'' Stance implicitly carries the M axis. Problem: ` 🌊` claims truth-confidence for something that doesn't evaluate on truth.
 * ''Option B (M flag):'' Add a meaningful/meaningless bit. Problem: redundant with stance if operator has learned to read stance correctly.
 * ''Option C (full Syadasti cube):'' T×F×M space, three values per claim. Problem: triples notation complexity; LLM metacognition can barely calibrate on one axis.
 
@@ -126,12 +125,12 @@ The HUD tag is therefore a ''memory prosthetic'' — it carries calibration forw
 
 !! Key Decisions Made This Session
 
-| Decision | Register | What It Means |
-|---|---|---|
-| Register is stance-dependent | `Synthesis-Canon 16/20` | Same 0–20 Level scale, different meaning per stance. The stance determines what the number measures. |
-| Sri Syadasti / Saptabhangi is the canonical model | `Synthesis 13/20` | The Discordian catma reproduces a 2,400-year-old Jaina logic system. The five stances partition claims by which Syadasti primitive applies. |
-| Stance count IS the fuzz indicator | `Synthesis-Canon 16/20` | centroid~δ notation REVERTED. More emoji = more spread. No numeric delta. Register stays a point value everywhere. |
-| Session boundary = avaktavya | `Provisional-Synthesis 9/20` | The node's meaning-substrate resets. The HUD tag bridges the gap as a memory prosthetic. Deferred to S2/Kernel scope. |
+| Decision | What It Means |
+|---|---|
+| Register is stance-dependent | Same 0–20 Level scale, different meaning per stance. The stance determines what the number measures. |
+| Sri Syadasti / Saptabhangi is the canonical model | The Discordian catma reproduces a 2,400-year-old Jaina logic system. The five stances partition claims by which Syadasti primitive applies. |
+| Stance count IS the fuzz indicator | centroid~δ notation REVERTED. More emoji = more spread. No numeric delta. Register stays a point value everywhere. |
+| Session boundary = avaktavya | The node's meaning-substrate resets. The HUD tag bridges the gap as a memory prosthetic. Deferred to S2/Kernel scope. |
 
 ---
 
@@ -151,6 +150,6 @@ The HUD tag is therefore a ''memory prosthetic'' — it carries calibration forw
 
 //Syād — perhaps, from a certain standpoint. The emoji are the syād.//
 
-<<^ code="&#x0003;" >>ni:///sha-256;gQg5lh7GnceLG9HY3qaSf0aCq7DpRir9DxOPWxk4_1A
+<<^ code="&#x0003;">>ni:///sha-256;TUIiSLwy-xxizS1GQY5CiO0GESMeAzZ2StfKUrdwmU0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

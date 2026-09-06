@@ -1,31 +1,29 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/ichi.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "Ichi — Powered Symbiote trait + Construct Golem; spore-daemon ashigaru armor, worn and autonomous modes, flexible Inner Fire slots"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/ichi"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Ichi ~ Powered Symbiote & Construct Golem
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Powered Symbiote [Hallmark Trait]
 
@@ -372,8 +370,8 @@ See ''Powered Symbiote'' (1 st).
 
 ''The personhood question:'' The Mother Spore sent a tasked spirit. What came back isn't a tasked spirit anymore. Does the Glade recognize Ichi? Does Ichi owe the Glade labor? Is Ichi a person or a malfunction? //Hold this open.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1ujDk7b9EghZtCbPATnj1n4YO7ahUgJlw357uOHdvGU
+<<^ code="&#x0003;">>ni:///sha-256;OaueAfpQBmkGNmhcpOAXf40GpYIdmv78r7muy5s-xaA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

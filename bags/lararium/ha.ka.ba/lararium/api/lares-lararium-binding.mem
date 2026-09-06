@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/lares-lararium-binding >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/lares-lararium-binding>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/lares-lararium-binding.mem"
@@ -10,7 +10,6 @@ mana      = 17
 manao     = 17
 manaoio   = 16
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the true lares↔lararium binding — a thin-client→warm-daemon Unix-domain-socket channel for the co-located CLI, WS kept for remote mesh peers; transport (UDS) / authority (capability-bearing UCAN-shape verb-summons) / record (CRDT outcome receipt) decoupled; peer-cred for presence + Ed25519 for authority; drops the measured ~0.4–0.5s/command connect+sync tax (misplaced replica-spin, never transport; the oft-cited 3s = the connect timeout ceiling — corrected on first measurement). Win is real for cheap verbs (status 0.82s→0.40s), negligible against a holder-bound verb like recall"
 tags      = ["api/pono/meme", "api/lararium"]
@@ -19,11 +18,11 @@ uri-path  = "ha.ka.ba/lararium/api/lares-lararium-binding"
 written   = "2026-06-25"
 ```
 
-<<~ aka lar:///ha.ka.ba/lararium/mesh/operator-peer >>
+<<~ aka lar:///ha.ka.ba/lararium/mesh/operator-peer>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! lares ↔ lararium ~ the true binding
 
@@ -40,13 +39,13 @@ fast local ''submit/await'' channel. Every web3 invariant survives.
 > ''The daemon holds the warm replica and syncs the mesh; the CLI just hands it a''
 ''> capability and awaits a receipt — over a socket, not a sync.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #split-by-topology >>
+<<~ ahu #split-by-topology>>
 
 !! Split by Topology ~ substrate-not-sovereignty, made literal
 
-<<~ranks bind co-located ~ Unix-domain socket (the docker.sock / tailscale-LocalAPI / gopls thin-client→warm-daemon shape); same machine = share the substrate -> remote ~ WebSocket + leaf-vessel + full sync; crossing the mesh = a real island boundary, full Ed25519 V3 gate >>
+<<~ranks bind co-located ~ Unix-domain socket (the docker.sock / tailscale-LocalAPI / gopls thin-client→warm-daemon shape); same machine = share the substrate -> remote ~ WebSocket + leaf-vessel + full sync; crossing the mesh = a real island boundary, full Ed25519 V3 gate>>
 
 ''The CLI holds ONE end of that ladder.'' A remote peer speaks WS to the ''daemon's own''
 ''relay'' — the browser vessel does exactly this. The CLI carries no WS and no Automerge:
@@ -60,9 +59,9 @@ tailscale CLI→tailscaled HTTP-over-UDS, gopls daemon). The CLI carries ''no''
 performs a kernel-local copy (µs), not a TCP/TLS/WS upgrade. Windows: named pipe behind
 one client abstraction (tailscale's shape).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-decoupled >>
+<<~ ahu #three-decoupled>>
 
 !! Transport · Authority · Record ~ three concerns, not one
 
@@ -72,23 +71,23 @@ The load-bearing shore (UCAN/ucanto proves it battle-tested):
 \procedure ~Layer(Type:"" Params:"") ~Layer <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Layer Transport "the UDS channel ~ pluggable, authority-AGNOSTIC; just moves bytes fast (ucanto: transport stays agnostic to authorization)" >>
-<<~Layer Authority "the capability-bearing verb-summons ~ a UCAN-shape signed invocation; the prf chain rides WITH each call (no ambient session/bearer) — authority IS the message" >>
-<<~Layer Record "the CRDT outcome ~ the persisted RECEIPT; idempotent · re-queryable · exactly-once; spec leaves receipt persistence to the impl — our outcome tiddler IS that home" >>
-<<~Layer Three >>
+<<~Layer Transport "the UDS channel ~ pluggable, authority-AGNOSTIC; just moves bytes fast (ucanto: transport stays agnostic to authorization)">>
+<<~Layer Authority "the capability-bearing verb-summons ~ a UCAN-shape signed invocation; the prf chain rides WITH each call (no ambient session/bearer) — authority IS the message">>
+<<~Layer Record "the CRDT outcome ~ the persisted RECEIPT; idempotent · re-queryable · exactly-once; spec leaves receipt persistence to the impl — our outcome tiddler IS that home">>
+<<~Layer Three>>
 
 Transport speed and record durability stop fighting because ''they never shared one''
 ''concern.'' UDS carries the invocation; the outcome lands as a CRDT change in
 the daemon's warm replica (then syncs to mesh on the daemon's own schedule); the
 CLI awaits it via the socket response (or an ephemeral/notify), ''not a full sync''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-flow >>
+<<~ ahu #the-flow>>
 
 !! The Flow
 
-<<~flows lares -> invokeLocal{verb,args,cap} -> UDS -> daemon VerbDispatcher (warm @daemon · verify-then-delegate · keyhive) -> CRDT outcome receipt -> return over the socket >>
+<<~flows lares -> invokeLocal{verb,args,cap} -> UDS -> daemon VerbDispatcher (warm @daemon · verify-then-delegate · keyhive) -> CRDT outcome receipt -> return over the socket>>
 
 The daemon reuses the ''existing'' verb path (the warm `@daemon` VerbDispatcher +
 `runLocalVerb` + the durable `@daemon/outcomes/<requestId>` receipt). Only the
@@ -96,9 +95,9 @@ The daemon reuses the ''existing'' verb path (the warm `@daemon` VerbDispatcher 
 The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 (connect socket · write invocation · read receipt). No leaf replica, no sync.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #auth >>
+<<~ ahu #auth>>
 
 !! Auth ~ peer-cred AND Ed25519, two questions
 
@@ -113,9 +112,9 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
   the ambient-session / confused-deputy hole (the docker.sock = root-equivalent
   cautionary tale). Substrate shared (socket), sovereignty not (keys).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pitfalls >>
+<<~ ahu #pitfalls>>
 
 !! Pitfalls
 
@@ -128,9 +127,9 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 * ''Windows:'' named pipe (or localhost) behind the one client abstraction; the
   Ed25519 proof keeps auth uniform across platforms.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #wiring >>
+<<~ ahu #wiring>>
 
 !! Wiring (when the identity work pauses)
 
@@ -158,19 +157,19 @@ fully local-first, the CRDT receipt unchanged. (Two pre-existing findings surfac
 not UDS-specific: verb errors serialize to `[object Object]` rather than `.message`;
 the `status` residency probe passes a non-did `requestedBy` and cap-errors quietly.)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/async-flows >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/async-flows>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Z3NnrAMJU-ltBx3-oju5cj2sv8biYBNxhgZ93cI_rhw
+<<^ code="&#x0003;">>ni:///sha-256;dtixDrEUVOdo6XqHKxx3jkLnuWSdyx-pcD5oOJDVm0Q
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

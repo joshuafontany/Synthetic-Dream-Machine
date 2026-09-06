@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/dyad-ladder-scout.mem"
@@ -11,7 +11,6 @@ manao             = 17
 manaoio           = 14
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "dyad-ladder-scout — VERBATIM handoff of the tasked spirit sent after the human-device DYAD model across the scale ladder (local · household · community · Region, Regions interacting). THE LOAD-BEARING NEGATIVE: nobody has built person-device dyadic identity, anywhere, at any scale — every instance in four literatures frames the edge person-to-person or process-to-process. THE LAW: every deployed system marketing no-single-key grew exactly ONE human-held secret, rate-limited rather than entropic, and none publish how often it survives. Plus the convergent shape four teams reached (your model with the person-node deleted), the W3C reviewers ruling a copied key cannot be retrofitted device-bound, Sovrin dissolved for ECONOMIC reasons, the UI-bound adversary, and the authority-survives-memory-does-not boundary."
 revised-on        = "2026-09-03"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/dyad-ladder-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The dyad across the ladder ~ what the field has measured
 
@@ -30,9 +29,9 @@ A tasked spirit went out over the model where ''the human never gets a key'' —
 
 ⚠ ''THE SEARCH ENGINE WAS DOWN FOR THE WHOLE SWEEP.'' The 200-call budget was spent before the spirit was invoked; six lanes worked through direct fetches on guessed URLs plus the HN, GitHub, OpenAlex, Crossref, PubMed and Wikipedia APIs. ''Reddit was unreachable at the tool level'', removing the richest source of individual //"I lost everything"// narratives. So coverage is strong where a primary URL is guessable and thin where discovery was required, and ''unreached items are marked rather than filled from memory''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-load-bearing-negative >>
+<<~ ahu #the-load-bearing-negative>>
 
 !! ★ Nobody has built this. Anywhere. At any scale. ★
 
@@ -58,9 +57,9 @@ Held at high confidence across four independently searched literatures. And the 
 
 `did:peer`, the closest formal analogue to a dyadic identifier, remains ''v1.0 Draft'' — 32 stars, 469 commits, 28 open issues. Real engineering, negligible footprint. ⚠ And structurally: ''DID Core is subject-centric by design''; pairwise-ness is bolted on by a METHOD, never baked into the standard.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-house-exception >>
+<<~ ahu #the-house-exception>>
 
 !! ⚠ "Nobody has built this" is true of the FIELD and false of this house
 
@@ -98,9 +97,9 @@ Keyhive and DCGKA ''are'' that family. So the challenge — //the person-node is
 
 ''The Venn-diagram of fleets needs no model'' because there is no fleet object to diagram: each PersonaGroup queries its own from the same dyads, and overlaps are simply devices holding dyads bound to several groups.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-convergent-shape >>
+<<~ ahu #the-convergent-shape>>
 
 !! ★ Four unrelated teams reached almost your model — with the person-node DELETED ★
 
@@ -119,9 +118,9 @@ The strongest positive result in the sweep, and the sharpest challenge in it.
 
 A second reading, weaker but worth holding: the right relational unit may be ''(person, relationship-context)'' rather than (person, device) — pairwise DIDs, petnames and Cameron's Law 4 all put the edge between two PARTIES, with the device as plumbing where that edge's key happens to live. ''On that reading the dyad picks the wrong second endpoint.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-law >>
+<<~ ahu #the-law>>
 
 !! ★ THE LAW — where a keyless design grows a key ★
 
@@ -140,9 +139,9 @@ Ranked by how quietly it happened:
 
 > ''THE TRILEMMA: hold a last artifact, hold a vendor, or accept discontinuity. No deployed system has found a fourth option.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #authority-survives-memory-does-not >>
+<<~ ahu #authority-survives-memory-does-not>>
 
 !! ⚠ The claim holds for AUTHORITY and fails for MEMORY
 
@@ -161,9 +160,9 @@ And the mechanism that makes it worse: ''an edge that both authenticates and dec
 * ''Paper-key retention: NO PUBLISHED NUMBER EXISTS ANYWHERE.'' The most-requested figure in the brief, absent industry-wide.
 * ''Matrix "unable to decrypt": 322 issues across three repos, 2016→2026'', 283 in element-web alone. ⚠ ''Count how many of the nine enumerated causes are RELATIONAL rather than key failures'' — the edge exists, the key exists, and the ''recognition'' failed to propagate. ''For a model built on edges, that is the failure taxonomy you inherit.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-attestation-seam >>
+<<~ ahu #the-attestation-seam>>
 
 !! ⚠ Attestation is the seam where sovereignty leaks
 
@@ -179,9 +178,9 @@ The objection raised against the German wallet is precisely a dyad objection: //
 
 > ''A rogue device enrolling itself as a legitimate dyad is the deployed, in-the-wild attack on this model's shape.'' The cross-device flow that makes borrowed-screen login possible is the same flow that lets an attacker inject an edge. ⚠ RFC 8628 names the risk ''in the spec itself'', and it was exploited exactly as written.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #a-copied-key-cannot-be-retrofitted >>
+<<~ ahu #a-copied-key-cannot-be-retrofitted>>
 
 !! The W3C's own reviewers, on the model's core claim
 
@@ -193,9 +192,9 @@ Traced through the spec repo: Adam Langley opened `w3c/webauthn#1658` (Aug 2021)
 
 ⚠ ''And the counter-measurement, which cuts against on pure friction.'' Microsoft's published synced-passkey figures across hundreds of millions of accounts: ''99% registration success · 3s vs 69s sign-in · 95% vs 30% success rate'' against legacy auth. Whatever the security argument, ''the copied-key model is winning on measured friction'', and a dyad model has to beat those numbers or say why it need not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-partition-the-world-refuses >>
+<<~ ahu #the-partition-the-world-refuses>>
 
 !! ⚠ The dyad presumes a partition the world does not honour
 
@@ -206,9 +205,9 @@ And presumes it hardest where the stakes are highest.
 * ''ITU 2024'': mobile ownership age 10+ is 95%+ in high-income countries and ''56% in low-income'' — ''~44% of adults there own no phone at all''. ''The floor beneath "one device" is "zero devices, borrowed access."''
 * ''London phone theft'': 91,481 (2019) → 117,211 (2024), ''~321 phones per day''; one 2025 case traced 40,000 snatched phones shipped to China.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-screenless-hole >>
+<<~ ahu #the-screenless-hole>>
 
 !! The thinnest ground in the whole sweep
 
@@ -220,9 +219,9 @@ And presumes it hardest where the stakes are highest.
 
 ''If the dyad is the unit, the screenless device is where the model has the least prior art to stand on.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-ui-bound-adversary >>
+<<~ ahu #the-ui-bound-adversary>>
 
 !! ★ The household's authorized principal IS its adversary ★
 
@@ -240,9 +239,9 @@ And presumes it hardest where the stakes are highest.
 
 ''Bellini et al., CHI 2023 (Best Paper), 158 survivors + 16 financial advocates'' — four abuser motivations, exploiting shared financial accounts.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-incidental-user >>
+<<~ ahu #the-incidental-user>>
 
 !! A new identity category the model has no name for
 
@@ -255,9 +254,9 @@ And presumes it hardest where the stakes are highest.
 * ''"We, three brothers have always known everything of each other" (2021), 59 participants across Bangladesh · Turkey · USA'' — sharing behaviour varies ''by culture'', so one global default (share ⊥ isolate) is wrong for a large fraction of the world.
 * ''"Everyone Has Some Personal Stuff" (2019), Bangladesh, 21 participants, a 3-week deployment'' — built a ''dual-account shared-password / secret-password'' model because ''single-device-multi-user is the NORM there'', never the exception.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-community-rung >>
+<<~ ahu #the-community-rung>>
 
 !! Community networks read robust and measure fragile
 
@@ -267,9 +266,9 @@ And presumes it hardest where the stakes are highest.
 
 ''The only directly measured technical-fragility result at community scale in the sweep'', and it argues the rung's self-organization can be structurally brittle ''in ways its participants cannot see from inside''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cross-region >>
+<<~ ahu #cross-region>>
 
 !! ⚠ Cross-region is a WARNING, not a postmortem
 
@@ -282,9 +281,9 @@ Two mechanics it names as load-bearing:
 * ''Article 45a(4)'' — a member state's designated keys are revocable ''only with that government's permission''.
 * ''Article 45(2a)'' bans browsers from imposing security checks beyond what is expressly permitted — ''an UPPER BOUND on security rather than a floor'', inverting the normal direction of security regulation. The historical anchor is ''DigiNotar (2011)'', whose CA compromise was used to surveil Iranian users' traffic — the exact failure the article would make harder to prevent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-reversal >>
+<<~ ahu #the-reversal>>
 
 !! The spirit reversed itself on Aadhaar ~ and the reversal is the useful part
 
@@ -295,9 +294,9 @@ It had reported Aadhaar as an unambiguous exclusion story. ''The field disagrees
 
 > The disagreement tracks ''implementation quality and transition management'', not the underlying concept. ''The measured harm at region scale sits in the MIGRATION, not the architecture'' — which is precisely where //"re-establishing a dyad"// lives.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-stayed-dark >>
+<<~ ahu #what-stayed-dark>>
 
 !! What the sweep could not reach
 
@@ -317,16 +316,16 @@ Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and 
 
 ⚠ ''X-Road's operational friction is undocumented in open sources.'' The most-cited cross-region system in the world publishes no measured account of where it rubs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;BOVgcvktJMWk_VNzuYqHusFyIjUGUn8ssoPJpxBMjZQ
+<<^ code="&#x0003;">>ni:///sha-256;8MJ8m28pVHUzzFSseDhQAT1eJpuh3wDLnwZoHSsGSAs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

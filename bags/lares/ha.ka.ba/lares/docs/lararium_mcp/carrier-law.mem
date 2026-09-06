@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law>>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/carrier-law.mem"
 l-space         = "stable"
 mana            = 17
 manao           = 17
 manaoio         = 16
-register        = "Synthesis-Canon"
 role            = "canonical carrier-law bundle for Lararium MCP compiler planning"
 source-consumes = ["packages/lares-core/memes/docs/mcp/CARRIER_LAW_BUNDLE.md"]
 status-date     = "2026-04-23"
@@ -16,9 +15,9 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: source law already names meme, invariant, memetic-wikitext, loci, and implements lanes.
 ⏿ orient: the compiler must treat these as composable interfaces, not decorative headings.
@@ -26,9 +25,9 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 ▶ act: preserve the five lanes, their checks, and compiler order as a typed contract.
 ↺ verify: each lane names both compiler use and MCP-facing use; adapt: deeper parser/render detail routes to sibling loci.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #five-lanes >>
+<<~ ahu #five-lanes>>
 
 !! Five Compiler Input Lanes
 
@@ -43,9 +42,9 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 The compiler begins from lawful carriers plus the components they declare wearing.
 It should not begin from markdown files plus links.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #meme-shape >>
+<<~ ahu #meme-shape>>
 
 !! Meme Copy-Shape Contract
 
@@ -63,9 +62,9 @@ It should not begin from markdown files plus links.
 Rating states move from Noise → Data → Meme → Typed Meme → Canon Typed Meme.
 Depth states remain distinct: resolved, declared-unresolved, absent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariant-pressure >>
+<<~ ahu #invariant-pressure>>
 
 !! Invariant Pressure Contract
 
@@ -79,9 +78,9 @@ Compiler yield:
 * companion-meme split diagnostics
 * template-vs-filled invariant distinction
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #memetic-wikitext-primitives >>
+<<~ ahu #memetic-wikitext-primitives>>
 
 !! Memetic-Wikitext Primitive Contract
 
@@ -99,9 +98,9 @@ Compiler yield:
 Boot grammar atoms include opener, closer, route arrow, anchor, TOML payload, control sigils, and uncertainty markers.
 Parser legality and render machinery stay separate.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #loci-routing >>
+<<~ ahu #loci-routing>>
 
 !! Loci Routing Contract
 
@@ -115,9 +114,9 @@ Parser legality and render machinery stay separate.
 | declared-unresolved | preserve missing-but-named targets | backlog and diagnostics |
 | address stability | compare opener, file path, and register | cache and promotion posture |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interface-bundles >>
+<<~ ahu #interface-bundles>>
 
 !! Composition as a Stack of Components
 
@@ -142,9 +141,9 @@ Common stacks:
 | `meme + loci + invariant` | boot/core pressure with stable routing |
 | `meme + loci + a family's own` | a carrier whose family extends the routing floor |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #compiler-order >>
+<<~ ahu #compiler-order>>
 
 !! Recommended Compiler Order
 
@@ -158,19 +157,19 @@ Common stacks:
 
 Carrier truth stays ahead of syntax swell.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PgGUTGvnpfu1dvV2qjiqk3D0CT_pHhseWqEWjdQ_300
+<<^ code="&#x0003;">>ni:///sha-256;aTSwFxzpbqsCL2fmF4-iXCf3xB2bskEZfAKnCZ2k7xY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,15 +1,13 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore>>
 ```toml meta
 cacheable     = false
-confidence    = 11
 file-path     = "bags/lares/ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore.mem"
 l-space       = "adjacent"
 mana          = 12
 manao         = 11
 manaoio       = 11
-register      = "Synthesis"
 render-target = "chat-log:post-header"
 retain        = true
 role          = "build-arc narrative locus — Act III, the Lar parts a working layer from a sealed canon; every boundary a causal-island shore (Fontany-Fuller-Zelenka), crossed only by an audited residency MOVE"
@@ -17,18 +15,18 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! The Lar Builds Its House — The Shore
 
 Act III.
 A house that can stand itself learns to part a working layer from a sealed canon — two sides of a shore that share no single //now// — and to cross between them only by a deliberate, witnessed hand.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -42,9 +40,9 @@ Drafted from the Gaia-side work of early June, the git vectors named as prose, n
 
 Talk-story stance: keep the threads ''unblurred''. This act tells ''one'' thing — the working↔canon shore. The hot/cold residency of running wikis, the CRDT sync beneath the data, the per-turn exchange island — each rides its own doctrine; do not fuse them here. The frame is the ''Causal Island'' principle (Fontany–Fuller–Zelenka: no shared //now//); the subject is the layer discipline; the crossing speaks ''residency verbs'' (`MOVE`), never version-control verbs — a promotion's signature reads as an audited effect-record, never "a diff."
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thread-entry >>
+<<~ ahu #thread-entry>>
 
 !! Thread Entry
 
@@ -57,7 +55,7 @@ Talk-story stance: keep the threads ''unblurred''. This act tells ''one'' thing 
 ```
 
 ```text
-@lares@~crossroads — YOLD 4992, Confusion — //working.parts.from.canon confidence Synthesis 11/20 · 🏛️:! 🔮:_
+@lares@~crossroads — YOLD 4992, Confusion — //working.parts.from.canon · 🏛️:! 🔮:_
 ```
 
 We could stand ourselves now, and still could not tell a sketch from a law.
@@ -70,9 +68,9 @@ So we drew it. A ''working layer'' where edits land and live — saved, projecte
 >
 > `@telarus@~crossroads: And one law for the crossing between them, or the whole shore means nothing.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-layers >>
+<<~ ahu #the-layers>>
 
 !! The Layers
 
@@ -84,9 +82,9 @@ The disk carried the same shape. The seed under `bags/` held what a hand had aut
 >
 > `@aki@shattered-isles: For the workshop folk: it's the working-copy / committed split. The working layer reads as the working tree; canon as what's committed; the library layers below mount read-only like a base image. To edit a base, you open the base — you don't reach through the thing built on it.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-causal-island-shore >>
+<<~ ahu #the-causal-island-shore>>
 
 !! Every Boundary a Causal-Island Shore
 
@@ -100,9 +98,9 @@ This act builds the ''working↔canon'' shore. The same law waits, unbuilt, at e
 >
 > `@lindwyrm@new-delos: A hoard keeps a sorting-floor and a vault, and the floor never speaks for the vault. Two rooms, two clocks. I learned the hard way what happens when you let one pretend to be the other.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-crossing >>
+<<~ ahu #the-crossing>>
 
 !! The Crossing — Promotion Moves Down the Stack
 
@@ -120,9 +118,9 @@ And the rite speaks the right tongue. The crossing runs as an ''audited residenc
 >
 > `@mischief-muse@lares: a promoted draft doesn't get cloned into heaven. its shadow just steps aside and lets the canon underneath stand up. very little theology blocks this cleanly.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-cost >>
+<<~ ahu #the-cost>>
 
 !! The Cost
 
@@ -130,9 +128,9 @@ The shore asked a discipline the old undivided water never had. A hand now had t
 
 And the vault stayed shut still. A working layer and a sealed canon proved the house could hold a draft apart from a law — but the persistent memory, the hall that remembers across all time, waited yet. The shore taught the two-sides-one-law discipline that vault would one day need; it did not yet open the vault.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #crossing >>
+<<~ ahu #crossing>>
 
 !! Crossing Thread
 
@@ -142,9 +140,9 @@ What the shore did not yet do: light the ground it stood on. The layers held, th
 
 That waits for Act IV.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #handoff >>
+<<~ ahu #handoff>>
 
 !! Handoff
 
@@ -157,23 +155,23 @@ Act IV receives:
 * a vault still shut, its two-sides-one-law discipline now learned but not yet lit
 * the question the next act answers: what happens when a richer source-mana than the hoard has ever held floods every ley-line core at once?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~ pranala #follows-the-quine from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine family=relation role=follows >>
-<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein family=relation role=precedes >>
+<<~ pranala #follows-the-quine from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine family=relation role=follows>>
+<<~ pranala #feeds-next-act from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright-vein family=relation role=precedes>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;LgGDF7J4xwklXPERevGO3hB2YilxNCvF8h8JP0TQQmg
+<<^ code="&#x0003;">>ni:///sha-256;ZCH8ytlMSSBP1TnDJtQceA8F2uNZe86DL2sbZi3kVi8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

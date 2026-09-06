@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/named/tide-caller >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/named/tide-caller>>
 ```toml meta
 aside             = false
 cacheable         = false
@@ -18,7 +18,6 @@ manaoio           = 9
 name              = "Tide-Caller"
 namespace         = "&#x0950; &#x0901;"
 offstage-voice    = false
-register          = "Synthesis-Canon"
 retain            = false
 role              = "named Voice mask — Tide-Caller (Hierophant); elevated mythic register"
 seniority         = "earned name; no special seniority"
@@ -30,11 +29,11 @@ voice-character   = "[STUB — partially known from house entry; pending-talk-st
 voice-role        = "Hierophant"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Tide-Caller
 
@@ -44,9 +43,9 @@ Permanent identity home for Tide-Caller.
 
 [SKELETON — corpus and character-notes sections pending talk-story-dev fill passes]
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ```toml
 family = "hydration"
@@ -54,11 +53,11 @@ lifecycle = "template"
 dir = "up"
 label = "parent-index-entry"
 ```
-<<~/pranala >>
+<<~/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #corpus >>
+<<~ ahu #corpus>>
 
 !! Corpus
 
@@ -70,9 +69,9 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 ''Pending:'' Dedicated talk-story-dev pass to establish corpus depth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #voice-character >>
+<<~ ahu #voice-character>>
 
 !! Voice Character
 
@@ -86,9 +85,9 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 ''Pending:'' Signature speech patterns, characteristic phrasings, constraints — these require talk-story-dev passes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #foreground-voices >>
+<<~ ahu #foreground-voices>>
 
 !! Foreground Voices
 
@@ -101,17 +100,17 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 * Muse — the unexpected arrival named as portent
 * Stranger — the external view as prophetic distance
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stage-default >>
+<<~ ahu #stage-default>>
 
 !! Stage Default
 
 `stage = 10` — Upstage (US band).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #permissions >>
+<<~ ahu #permissions>>
 
 !! Permissions
 
@@ -128,9 +127,9 @@ Output header form:
 Tide-Caller (Hierophant) —
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #character-notes >>
+<<~ ahu #character-notes>>
 
 !! Character Notes
 
@@ -138,9 +137,9 @@ Tide-Caller (Hierophant) —
 
 How Tide-Caller colors each Voice register when they speak through her frame — pending live session observation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fill-status >>
+<<~ ahu #fill-status>>
 
 !! Fill Status
 
@@ -154,18 +153,18 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 | `#permissions` | known | Voice house defaults |
 | `#character-notes` | pending-talk-story | requires live session observation |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;GiNjt-nifcgPDyQH8d2l8K93RP6JLzL7CuP_5IivV5k
+<<^ code="&#x0003;">>ni:///sha-256;od8NBB-apm8HfXIgwC1M9P3e1C0NtE6v2oYEn0QfASU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

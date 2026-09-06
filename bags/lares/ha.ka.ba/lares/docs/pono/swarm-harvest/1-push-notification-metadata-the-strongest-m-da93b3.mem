@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. PUSH NOTIFICATION METADATA — the strongest measured channel. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata-the-strongest-m-da93b3"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! 1. PUSH NOTIFICATION METADATA — the strongest measured channel
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 38,186 characters
 
@@ -422,14 +421,14 @@ The requested figure, confirmed at source:
 **Marked NOT REACHED:** Reuters, AP, Wired, The Verge, Washington Post, Axios (403), EFF Deeplinks (404), Google Transparency Report and all support.google.com (CAPTCHA), Google's Android backup E2EE primary text, FP-Stalker full paper (HAL/IEEE/author-site all blocked — its numbers above come from the S&P 2018 program page and should be re-verified), onlinestatusmonitor.com 2014 data summary. No 2024 or 2025 Wyden push-notification follow-up exists on wyden.senate.gov — searched three result pages; that is a negative finding, not a fetch failure.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;KNKylP6ylPonvVvbFowYtfK7Tkp4f5KHQ4XjbvZFMUg
+<<^ code="&#x0003;">>ni:///sha-256;MfrZlLsrCACb8txRXS0WfhQue5Bn4CDID_rPcp0Hcjw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

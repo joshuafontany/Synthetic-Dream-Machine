@@ -9,7 +9,7 @@ lar-default-family: relation
 type: text/vnd.tiddlywiki
 
 <!-- pranala — permanent JS exception: arrow syntax FROM -> TO + keyword attrs
-     (from/to/slot/family/role/body) structurally distinct from <<~ WORD ARGS >>.
+     (from/to/slot/family/role/body) structurally distinct from <<~ WORD ARGS>>.
      Parsed directly in lar-sigil.ts findNextMatch before compound dispatch fires. -->
 
 \widget ~pranala(from:"" to:"" slot:"" family:"" role:"" body:"" template:"")

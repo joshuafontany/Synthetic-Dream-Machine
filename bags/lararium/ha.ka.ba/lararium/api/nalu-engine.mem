@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/nalu-engine >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/nalu-engine>>
 ```toml meta
 cacheable      = true
 docs           = "lar:///ha.ka.ba/lares/api/pono/nalu"
@@ -10,7 +10,6 @@ mana           = 18
 manao          = 18
 manaoio        = 17
 namespace      = "&#x0950; &#x0901;"
-register       = "Synthesis-Canon"
 retain         = true
 role           = "TW5 startup module — unified nalu queue across all CRDT bags + frame-aligned wiki.transact() drain + apply-time echo guard; the in-wiki embodiment of the nalu wave"
 tags           = ["lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -18,7 +17,7 @@ type           = "text/memetic-wikitext+tiddlywiki"
 uri-path       = "ha.ka.ba/lararium/api/nalu-engine"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! nalu-engine — Invariant
 
@@ -108,7 +107,7 @@ This means initial replay and live patches share the same code path. No per-isla
 pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
 queue handles both.
 
-<<~ ahu #gate-families-shore >>
+<<~ ahu #gate-families-shore>>
 
 !! The gate-families shore ~ runtime ≠ physics
 
@@ -118,7 +117,7 @@ across all bags, //per-bag accumulators do not exist// — yet `projection-nalu`
 ''carrier-root'' and ''per bag''. Both stand; they sit at OPPOSITE ENDS of the one shape
 `SOURCE → gate → SINK`, never the same layer.
 
-<<~ranks shore UPSTREAM/shore-coalesce-per-key -> DOWNSTREAM/engine-unified-queue-per-frame >>
+<<~ranks shore UPSTREAM/shore-coalesce-per-key -> DOWNSTREAM/engine-unified-queue-per-frame>>
 
 * ''UPSTREAM — the shore gates (physics).'' `MemeProvider` (the TS-side, before the
   shore crossing) draws the coalesce gates: a per-URI debounce window collapses the
@@ -144,19 +143,19 @@ end-to-end: coalesce-per-key (drop intermediates) → unified queue (preserve or
 transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the shore gates
 (`mesh/meme-provider.ts`, `mesh/projection-nalu.ts`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/verse-mesh >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/verse-mesh>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;_LrwhFg54sN8DHO8qkNp1EtseObGz-zOZN0RUrqMjrA
+<<^ code="&#x0003;">>ni:///sha-256;3cNnNk4Tl6zcxkbhRMBqIiWtTwuSMJst-CQvsu1H92E
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

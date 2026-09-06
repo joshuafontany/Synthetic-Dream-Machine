@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/identity-permissions.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "docs concept room for the transference model, tiered capability, aliasing, and authority boundaries in the recovered Lares stack"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/identity-permissions"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Preferences — Identity & Permissions
 
 Not invariant law.
 This room holds the recovered authority grammar behind the old prompt stack.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -38,9 +37,9 @@ Strong witnesses recur in:
 * `prompts/Lares_Kernel.compressed.md`
 * permissions and kernel snapshots
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pressure >>
+<<~ ahu #pressure>>
 
 !! Pressure
 
@@ -58,9 +57,9 @@ Durable elements:
 This room feels especially load-bearing because it appears both in mythic framing and in practical repo-ops discipline.
 The old stack wanted the house to know who may ask for what, and under what proof burden.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #relation >>
+<<~ ahu #relation>>
 
 !! Relation To Live Surfaces
 
@@ -72,18 +71,18 @@ Recovered background behind:
 A future tighter invariant may still split trust, alias, and capability into separate live rooms.
 This shelf keeps the older bundle intact for now.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/continuity >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/continuity>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;h2hr6tD0NFGRJmDsaFqPKBDV1VWCA3LzSiK6UgjuZh4
+<<^ code="&#x0003;">>ni:///sha-256;WvEpNFXCGLDm5hPYZM6bvNlS_ZPJzE2nqt3id3u3pcQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

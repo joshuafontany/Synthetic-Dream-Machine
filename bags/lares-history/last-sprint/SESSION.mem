@@ -1,17 +1,16 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///last-sprint/SESSION >>
+<<^ code="&#x0001;" from=? -> to=lar:///last-sprint/SESSION>>
 ```toml meta
 file-path = "bags/lares-history/last-sprint/SESSION.mem"
 l-space   = "archive"
-register  = "Synthesis"
 retain    = true
 role      = "sprint resume artifact — the state a session needed to continue without prior chat context"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/SESSION"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Session State — Lararium Web3 Refactor
 
@@ -95,11 +94,11 @@ Full end-to-end verification: `wikis/scratch/memes/docs/lares/the-lares-protocol
 | `meme-sync-adaptor.ts` | `_applyLiveRecord` and `onChangeset` bulk path both stamp `bag` field on TW5 tiddlers — disk projector reads bag provenance without touching Automerge. |
 | `bag-mirror.ts` | `wikiShadowPathStrategy` extended with bare `lar:///ha.ka.ba/{rest}` URI fallback (no @-scope) → `memes/{rest}.md`. Fragment URIs → `memes/{path}/{fragment}.md`. Fixes the zero-projection bug for wiki-bag tiddlers. |
 | `deserializer.ts` + plugin bundle | `splitRecursive` extended: `parentSourceFile` param threads to child `file-path` generation. Children receive full effective meta via `regenerateIamToml(effectiveIam, {})` with child-specific `uri-path` + `file-path` override. Child `file-path` strips the leading `#` from `block.slot`. ''Build law: changes to `deserializer.ts` require `tsx scripts/build-plugin-tiddler.ts` — `tsc` alone is NOT sufficient (deserializer runs inside TW5 plugin bundle).'' |
-| `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), meta block (from `meta-source`), STX (`<<^ code="&#x0002;" >>`), `{{!!text}}`, ETX (`<<^ code="&#x0003;" >>:2d6611a34047ac7d`), EOT (`<<^ code="&#x0004;" -> to=? >>`). Prologue emitted only when explicitly present (not inherited from parent). |
+| `tw5-widgets.ts` | `LARARIUM_MEME_TEMPLATE_MARKDOWN_MEME` updated for five-layer child structure: conditional SOH (for tiddlers with `fragment-parent`), meta block (from `meta-source`), STX (`<<^ code="&#x0002;">>`), `{{!!text}}`, ETX (`<<^ code="&#x0003;">>:2d6611a34047ac7d`), EOT (`<<^ code="&#x0004;" -> to=?>>`). Prologue emitted only when explicitly present (not inherited from parent). |
 
 ''Five-layer child file structure confirmed:''
 ````
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/docs/lares/the-lares-protocols#/thesis >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/docs/lares/the-lares-protocols#/thesis>>
 ```toml meta
 uri-path = "ha.ka.ba/docs/lares/the-lares-protocols#thesis"
 file-path = "wikis/scratch/memes/docs/lares/the-lares-protocols/thesis.mem"
@@ -107,13 +106,13 @@ l-space  = "draft"
 …
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 body text…
 
-<<^ code="&#x0003;" >>
+<<^ code="&#x0003;">>
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>
 ````
 
 ''OODA-HA code review findings (non-blocking smells):''
@@ -182,7 +181,7 @@ Global terminology alignment: every occurrence of the concept "room" as a _wiki 
 
 ''Build result:'' `pnpm -r build` clean, zero TypeScript errors. `.lararium/` wiped for re-init.
 
-''OODA-HA orient — next task:'' Smoke J.3 child co-promotion with the live test artifact at `wikis/altar-fire/memes/docs/lares/the-lares-protocols.md`. This file contains multiple `<<~ ahu #slot >>` blocks. `lares wiki sync altar-fire` → `lares act MOVE ... --to lar:///ha.ka.ba/bags/lares --yes` should land _both_ the parent _and_ each `#fragment` child in `packages/lares-core/memes/docs/lares/the-lares-protocols/`. J.3 implement → smoke → verify.
+''OODA-HA orient — next task:'' Smoke J.3 child co-promotion with the live test artifact at `wikis/altar-fire/memes/docs/lares/the-lares-protocols.md`. This file contains multiple `<<~ ahu #slot>>` blocks. `lares wiki sync altar-fire` → `lares act MOVE ... --to lar:///ha.ka.ba/bags/lares --yes` should land _both_ the parent _and_ each `#fragment` child in `packages/lares-core/memes/docs/lares/the-lares-protocols/`. J.3 implement → smoke → verify.
 
 ---
 
@@ -201,7 +200,7 @@ Two commits:
 # `lares serve` → daemon up, Keyhive initialized
 # `lares wiki sync altar-fire` → `ingested: 1` — disk file landed in room bag; `splitRecursive` created parent + N child tiddlers in bag
 # `lares act MOVE lar:///ha.ka.ba/lares/docs/the-lares-protocols --to lar:///ha.ka.ba/bags/lares --yes` → ceremony clean; audit tiddler written
-# Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot >>` refs — ''but no child slot files''
+# Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot>>` refs — ''but no child slot files''
 
 ''Gap named (J.3):'' `lares act MOVE` is single-URI. `splitRecursive` creates `#fragment` child tiddlers in the bag alongside the parent, but the promote handler moves only the parent URI. Children stay in the room bag; disk projector for the canonical bag writes only what's in that bag. The parent renders correctly (always-split, always-kahea); the child meme files never land in `packages/lares-core/memes/`. The fix: promote handler must walk `#fragment` children of the promoted parent and co-promote them in the same ceremony. Named J.3 — recursive promote / child co-promotion.
 
@@ -217,10 +216,10 @@ Eleven commits across two arcs land the Sigil family work:
 
 | sha | What |
 |---|---|
-| `a5878459` G.1 | aka URI sigil — `<<~ aka <uri> >>` parses to `aka` widget node, cascade picks template, html template emits `.lar-aka` span with shadow transclusion of target. URI_FORM_SIGIL_RE in lar-sigil-shared.ts matches aka/kahea/loulou. |
-| `136a8c9f` G.2 | pranala-header — `<<~ ? -> uri >>` widget + cascade + templates. PRANALA_HEADER_RE matches the `?` token + arrow + uri shape. |
+| `a5878459` G.1 | aka URI sigil — `<<~ aka <uri>>>` parses to `aka` widget node, cascade picks template, html template emits `.lar-aka` span with shadow transclusion of target. URI_FORM_SIGIL_RE in lar-sigil-shared.ts matches aka/kahea/loulou. |
+| `136a8c9f` G.2 | pranala-header — `<<~ ? -> uri>>` widget + cascade + templates. PRANALA_HEADER_RE matches the `?` token + arrow + uri shape. |
 | `ab3453f6` G.3 | kahea + loulou URI sigils — widgets for nodes already matched by G.1's URI_FORM_SIGIL_RE. Both render as cascade-resolved spans. |
-| `505932a0` G.4 | pranala edge sigil — inline (`<<~ pranala from=from -> to=to family=f role=r >>`) + block (with body) forms. PRANALA_OPEN_RE captures slot/from/to + key:value attrs. Single template branches on `<<pranala-body>>` non-emptiness. |
+| `505932a0` G.4 | pranala edge sigil — inline (`<<~ pranala from=from -> to=to family=f role=r>>`) + block (with body) forms. PRANALA_OPEN_RE captures slot/from/to + key:value attrs. Single template branches on `<<pranala-body>>` non-emptiness. |
 | `8a2e1fa2` G.5 | refactor — five widgets collapse into `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget(config)`. Net 590→97 lines of widget code (+165 line factory). Adding a new cascade sigil = config object, not a fresh prototype-chain dance. |
 
 ''J arc — meme/slot framing + meta round-trip:''
@@ -229,7 +228,7 @@ Eleven commits across two arcs land the Sigil family work:
 |---|---|
 | `cac583f8` J.1 | postamble symmetric with prologue — text after last ETX/EOT lands on parent meme as `postamble` field. Meme-template emits prologue + text + postamble. |
 | `1e34a60a` J.2a | per-slot preamble/postamble + meta field capture. extractSlotStructure replaces extractAhuFields. preamble holds prose flanking meta toml; meta toml fields lift to native fields; text holds body proper between first and last inner kahea ref; postamble holds trailing prose. Slot is itself a "full published meme MD file" projection (operator-confirmed). |
-| `28775447` J.2a refinement | `<<~ meta >>` sentinel in preamble records meta original position (operator may write prose on either side). SOH regex tightened to `<<~(⊙?)\s*&#x000<digit>;` so DOCTYPE comments + pranala-headers don't false-match. Parent-text postamble dedup. |
+| `28775447` J.2a refinement | `<<~ meta>>` sentinel in preamble records meta original position (operator may write prose on either side). SOH regex tightened to `<<~(⊙?)\s*&#x000<digit>;` so DOCTYPE comments + pranala-headers don't false-match. Parent-text postamble dedup. |
 | `494666bc` J.2c | round-trip emission via meme-template. preamble-rendered field substitutes the meta sentinel with regenerated toml block. Meme-template uses `<$text>` widget (not `{{!!field}}` transclude) — per Jermolene GH #6712, `\rules only` pragma scope doesn't propagate through field transclude. |
 | `bf893a78` J.2b | regenerateIamToml(fields, parentFields) — denylist + TOML formatter + default-elision. splitRecursive threads parentIam through recursion so deep slots elide against immediate parent's effective meta. Operator edits to native meta-class fields flow back to disk; inherited values disappear unless overridden. |
 
@@ -275,7 +274,7 @@ One commit (`0adc3697` E.10.13) retired two architectural debts in a single swin
 
 ''Build/test posture:'' `pnpm build` clean, `pnpm test` 52/52 passing, plugin tiddler regenerates deterministically.
 
-''Outstanding (smoke next):'' boot the Node daemon, verify the plugin tiddler unpacks via the standard loader, exercise an ahu round-trip with the cascade-resolved markdown-meme template (expected emission: `<<~ kahea ahu #slot >>` per always-split-always-kahea law). Until smoke runs once, build/type/unit-test-green is necessary but not sufficient.
+''Outstanding (smoke next):'' boot the Node daemon, verify the plugin tiddler unpacks via the standard loader, exercise an ahu round-trip with the cascade-resolved markdown-meme template (expected emission: `<<~ kahea ahu #slot>>` per always-split-always-kahea law). Until smoke runs once, build/type/unit-test-green is necessary but not sufficient.
 
 ---
 
@@ -298,7 +297,7 @@ Two layers of work landed: (a) yin-mode architectural collapse driven by web-res
 | `99530399` E.10.12 (Path V.1) | Vite plugin config + build script ship `dist-plugin/lares-memetic-wikitext.tid` (71.3 KiB drag-and-drop artifact). |
 
 ''Architecture invariant established (operator-confirmed):''
-** ''Always-split, always-kahea.'' Deserializer + `<$lar-meme-split>` widget split every ahu sigil into its own tiddler at sync/save time. Parent text always carries `<<~ kahea ahu #slot >>` references for slot children. Disk emission canonical: parent file + N child files.
+** ''Always-split, always-kahea.'' Deserializer + `<$lar-meme-split>` widget split every ahu sigil into its own tiddler at sync/save time. Parent text always carries `<<~ kahea ahu #slot>>` references for slot children. Disk emission canonical: parent file + N child files.
 ** ''Single source of truth.'' ahu scanner + control-slot set + slot-path composer live in `@lararium/mesh/meme-ast/ahu-scan.ts`. Three callers (deserializer, action widget, wikirule) import from there. Drift = bug.
 ** ''Roslyn / recast / XInclude consensus'': serialization is a function of the tree, never of external metadata. Tag-driven discrimination (the `$:/tags/Lar/MemeRoot`-gated cascade) was the named anti-pattern; eliminated in E.10.9.
 ** ''Drag-and-drop ecosystem play.'' `dist-plugin/lares-memetic-wikitext.tid` (V.1) installs in any TW5 5.4+ wiki; gives memetic-wikitext authoring + export without lararium-node infrastructure. Bidirectional: operators can author in vanilla TW5, export to .md, ingest into lararium. Same plugin code in both.
@@ -322,7 +321,7 @@ Two layers of work landed: (a) yin-mode architectural collapse driven by web-res
 
 * //The round-trip law//: ONE parser, FOUR call sites — disk sync (CLI `wiki sync`), CRDT inbound (MemeSyncAdaptor.onUriChanged), TW5 UX save (saveTiddler — Path H, deferred), disk export (exportMemeText). All consume `parseMemeText` output. This commit gets three of the four call sites aligned. Path H lands save-side auto-split next.
 * //Templates not modes//: AhuWidget owns no scope decision. The cascade `$:/tags/Lar/AhuTemplate` evaluates filter expressions over the `lar-export-scope` variable; first non-empty result names the template tiddler. Operators override per-wiki by writing tiddlers tagged `$:/tags/Lar/AhuTemplate` — no TS recompile needed. Render scope decisions live in TW5 grammar, not in JS.
-* //Wikirule unlocks browser authoring//: `<<~ sigil ... >>` syntax becomes first-class wikitext. Drafts in TW5 UX recognize the syntax without a custom parser. Operator's stated next-tier UX requirement — author memes inside the live wiki, sigils auto-promote to child tiddlers on save (Path H closes the loop).
+* //Wikirule unlocks browser authoring//: `<<~ sigil ...>>` syntax becomes first-class wikitext. Drafts in TW5 UX recognize the syntax without a custom parser. Operator's stated next-tier UX requirement — author memes inside the live wiki, sigils auto-promote to child tiddlers on save (Path H closes the loop).
 * //Three small wikifier diff items remain// (DOCTYPE HTML comment, em-dash conversion of `|---|`, aka URI sigil routes to empty `<<~ ahu>>`). Aesthetic, not load-bearing — Path I.
 
 !! What Just Happened (2026-05-09 late — E.10 follow-ons hardened the canon ceremony AND rewrote ahu render dispatch)
@@ -1104,6 +1103,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ code="&#x0003;" >>ni:///sha-256;Yw704hPq3h6iatxicwmVD4Ux6W3RZtjy-GZv3XZPQWY
+<<^ code="&#x0003;">>ni:///sha-256;dA7foQgxaFAzYKTnzujR3Vg1EgYNxHdYecFGsYVXTB4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

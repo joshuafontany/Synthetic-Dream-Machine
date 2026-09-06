@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/nexus-topology>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/nexus-topology.mem"
@@ -10,7 +10,6 @@ mana      = 15
 manao     = 15
 manaoio   = 14
 namespace = "&#x2695;"
-register  = "Synthesis"
 retain    = true
 role      = "the DEPLOYMENT topology under the two-axis mesh, and the CIVIC-SCALE TLS ledger (researched 2026-08-08): which public name serves which Nexus, at which layer, for whose glass. The first Nexus at *.amorphousdreams.net and the second at *.elyncia.net; elyncia.app RESERVED for the mobile surface, where the TLD's own HSTS preload makes every name under it a SECURE CONTEXT BY CONSTRUCTION — a load-bearing property against the crypto.subtle wall, never a branding choice. Three serving layers (household LAN via split-horizon · a contracted operator's own LAN under delegated challenge labels · the cloud shelf for the general internet), and the law that holds them together: a Nexus name grants RENDEZVOUS, never IDENTITY, so every layer stays severable. RENEWAL INVERTS: a central renewal queue IS a roster, so each operator holds their own key and account and the blessing rides a DNS record, never a certificate — EAB does NOT carry this (CA-to-customer only); the BR Parent/Subordinate ACME Account exception names it but no CA implements it; dns-persist-01 sits staging-only; GTS dns-account-01 stands LIVE. Rate limits cap ONBOARDING RATE, not fleet size (ARI renewals exempt, overrides inherit). A child CAA record REPLACES its parent whole, so a shared wildcard and per-operator pinning cannot coexist. The offline-serving window shrinks 60d to 43d (2027-02-10) to 30d (2028-02-16). NO expiry safety net exists — the mesh carries its own witness, alarmed at ~80% elapsed. Two gates already live: multi-perspective validation (the public authoritative view answers the whole internet unfiltered) and mandatory DNSSEC at the delegation boundary."
 status    = "designed"
@@ -21,11 +20,11 @@ uri-path  = "ha.ka.ba/lararium/mesh/nexus-topology"
 written   = "2026-08-08"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Nexus Topology ~ which name serves which glass
 
@@ -33,9 +32,9 @@ written   = "2026-08-08"
 
 The two-axis meme (#/dreamnet-architecture) names how a mesh ''relates''; this one names how it ''reaches a browser''. Two questions live here and want to stay apart: ''which public name serves a Nexus'', and ''what a name may therefore claim''. The second answer governs the first: a Nexus name grants ''rendezvous'', never ''identity'' (#/name-and-key), so every layer below stays severable by construction.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-names >>
+<<~ ahu #the-names>>
 
 !! The names ~ two Nexuses, one mobile reserve
 
@@ -43,31 +42,31 @@ The two-axis meme (#/dreamnet-architecture) names how a mesh ''relates''; this o
 \procedure ~Namespace(Type:"" Params:"") ~Namespace <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Namespace First-Nexus "name/*.amorphousdreams.net serves/the-first-Nexus glass/desktop-and-LAN" >>
-<<~Namespace Second-Nexus "name/*.elyncia.net serves/the-second-Nexus glass/desktop-and-LAN" >>
-<<~Namespace Mobile-Reserve "name/elyncia.app serves/the-mobile-surface glass/phone-and-tablet held/RESERVED" >>
+<<~Namespace First-Nexus "name/*.amorphousdreams.net serves/the-first-Nexus glass/desktop-and-LAN">>
+<<~Namespace Second-Nexus "name/*.elyncia.net serves/the-second-Nexus glass/desktop-and-LAN">>
+<<~Namespace Mobile-Reserve "name/elyncia.app serves/the-mobile-surface glass/phone-and-tablet held/RESERVED">>
 
 ''Both Nexuses ride the same TLD.'' One registry operator, so ''one policy surface and one seizure procedure'' rather than two — which simplifies the drill and concentrates the exposure in the same act. Name both halves: a single procedure rehearses once and covers both names; a single procedure also fails once and takes both.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #why-app-for-mobile >>
+<<~ ahu #why-app-for-mobile>>
 
 !! Why `.app` carries the mobile surface ~ the TLD does the work
 
-<<~ confidence 15/20 >> The `.app` TLD ships ''HSTS-preloaded across the whole zone'' — browsers refuse plain `http://` for every name under it before a single byte crosses. Set beside the wall this stack already documents (#the-wall: `crypto.subtle` and OPFS answer only in a secure context), that reads as ''the TLD enforcing the precondition the vessel needs to boot''.
+The `.app` TLD ships ''HSTS-preloaded across the whole zone'' — browsers refuse plain `http://` for every name under it before a single byte crosses. Set beside the wall this stack already documents (#the-wall: `crypto.subtle` and OPFS answer only in a secure context), that reads as ''the TLD enforcing the precondition the vessel needs to boot''.
 
 ''So the reserve names a security property, never a brand.'' A phone reaching `elyncia.app` cannot be downgraded onto a plaintext origin by a hostile network, a stale bookmark, or a mistyped scheme — the class of failure most likely to strand exactly the non-technical family this path exists to serve. The mobile surface carries the least technical operator and the most hostile networks; it earns the TLD that removes a whole failure mode at the registry layer.
 
-<<~ confidence 12/20 >> ''The honest bound:'' this rests on the TLD's preload posture holding, which sits outside anything the stack governs. It deserves confirmation before the name carries load, and it composes with the DNS-01 path rather than replacing it — preload forces `https`, and a trusted cert still has to exist for `https` to answer.
+''The honest bound:'' this rests on the TLD's preload posture holding, which sits outside anything the stack governs. It deserves confirmation before the name carries load, and it composes with the DNS-01 path rather than replacing it — preload forces `https`, and a trusted cert still has to exist for `https` to answer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-layers >>
+<<~ ahu #three-layers>>
 
 !! Three serving layers ~ where a request actually lands
 
-<<~ranks serving household@0..6 ~ a split-horizon resolver answers Nexus names with LAN addresses; the home node serves; no internet at all -> operator-lan@7..13 ~ a contracted operator routes their own LAN under a delegated challenge label, forwarding outward through the Nexus name -> cloud-shelf@14..20 ~ the general internet resolves to the Nexus's own hosts >>
+<<~ranks serving household@0..6 ~ a split-horizon resolver answers Nexus names with LAN addresses; the home node serves; no internet at all -> operator-lan@7..13 ~ a contracted operator routes their own LAN under a delegated challenge label, forwarding outward through the Nexus name -> cloud-shelf@14..20 ~ the general internet resolves to the Nexus's own hosts>>
 
 ''The same name answers differently by vantage'' — which reads as the honest shape rather than a trick, because a causal island only ever knows what its own resolver told it (#/causal-islands). A household that loses its uplink keeps every local answer; a visitor from the wider internet reaches the cloud shelf; neither one holds a global view, and neither needs one.
 
@@ -79,21 +78,21 @@ The two-axis meme (#/dreamnet-architecture) names how a mesh ''relates''; this o
 
 ''AND WILDCARDS STAY MINIMIZED.'' A wildcard's private key stands up ''any'' name under its zone, so every wildcard handed out multiplies the origin-attestation cap (#/the-caps-added). The cabal holds the zone's wildcard and hands out as few as it can.
 
-<<~ confidence 12/20 >> ''THE TENSION THIS CREATES, and the shape that resolves it.'' Certificate Transparency publishes every issued certificate to public append-only logs forever, so a ''per-name'' cert publishes that name to the world permanently while ''a wildcard publishes only the wildcard''. Wildcard-only therefore reads as a privacy requirement rather than a convenience — and minimizing wildcards, read naively, would trade household privacy for containment.
+''THE TENSION THIS CREATES, and the shape that resolves it.'' Certificate Transparency publishes every issued certificate to public append-only logs forever, so a ''per-name'' cert publishes that name to the world permanently while ''a wildcard publishes only the wildcard''. Wildcard-only therefore reads as a privacy requirement rather than a convenience — and minimizing wildcards, read naively, would trade household privacy for containment.
 
 ''The resolution reads as SCOPE, never COUNT.'' Minimize the ''breadth'' each wildcard covers, never the number of narrow ones: a household or an operator gets a wildcard bounded to ''their own subtree'' rather than a per-name cert or a share of the zone's. Containment and privacy then compose — a leaked narrow wildcard forges only its own subtree, and no household name ever reaches a public log.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-rebinding-test >>
+<<~ ahu #the-rebinding-test>>
 
 !! The zero-lift shortcut ~ unmeasured, so unplanned-on
 
-<<~ confidence 12/20 >> ''The zero-lift option wants an empirical test before anyone plans on it.'' Public DNS answering with a private address trips DNS-rebinding protection on many home routers, so "just point the public name at 192.168.x.x" may simply fail on the very hardware a family owns. Until measured, treat the split-horizon resolver as the path and the public-answer shortcut as a hope.
+''The zero-lift option wants an empirical test before anyone plans on it.'' Public DNS answering with a private address trips DNS-rebinding protection on many home routers, so "just point the public name at 192.168.x.x" may simply fail on the very hardware a family owns. Until measured, treat the split-horizon resolver as the path and the public-answer shortcut as a hope.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #renewal-inverts >>
+<<~ ahu #renewal-inverts>>
 
 !! Renewal inverts ~ we authorize once, they operate continuously
 
@@ -103,7 +102,7 @@ The two-axis meme (#/dreamnet-architecture) names how a mesh ''relates''; this o
 
 !!! The mechanism, as the field actually stands (2026-08)
 
-<<~ confidence 17/20 >> ''ACME External Account Binding does NOT carry this.'' RFC 8555 §7.3.4 contemplates exactly one issuer of EAB credentials — the CA operating the ACME server — so a non-CA intermediary cannot mint them; Let's Encrypt does not implement EAB at all. Every multi-tenant EAB pattern in the wild runs on a ''private CA whose root installs on every device'', the path already ruled hostile to a family (#/why-dns-01).
+''ACME External Account Binding does NOT carry this.'' RFC 8555 §7.3.4 contemplates exactly one issuer of EAB credentials — the CA operating the ACME server — so a non-CA intermediary cannot mint them; Let's Encrypt does not implement EAB at all. Every multi-tenant EAB pattern in the wild runs on a ''private CA whose root installs on every device'', the path already ruled hostile to a family (#/why-dns-01).
 
 ''The mechanism exists in the CA/Browser Forum Baseline Requirements §4.2.2.1.2'' — a CA MAY read `accounturi` as naming a ''Parent Account'' and, as an explicit exception to RFC 8657 §3, issue to a ''Subordinate ACME Account'' under an auditable Parent→Subordinate mapping. That names the blessing precisely: the Nexus holds the Parent, each operator holds a Subordinate with their own account key and their own private key, and the CA enforces the relation. ''It reads MAY, mandatory RFC 8657 processing waits until 2027-03-15, and NO CA has implemented it'' — a thing to ask a CA for, never a thing to build on.
 
@@ -112,7 +111,7 @@ Two stand closer:
 * ''`dns-persist-01`'' — a standing TXT naming the operator's own account, published once. Delete it to revoke future issuance while issued certificates stand: the revocable blessing, exactly. ''Staging only; production blocked'' as of mid-2026.
 * ''`dns-account-01`'' — LIVE at Google Trust Services since 2026-07-01. The challenge label carries an account hash, so several accounts validate one domain concurrently. ''This dissolves the `_acme-challenge` label collision that plain DNS-01 forces on multi-tenancy.'' Let's Encrypt offers no equivalent.
 
-<<~ confidence 12/20 >> ''So the inversion stands buildable today, and today it wants GTS rather than Let's Encrypt.''
+''So the inversion stands buildable today, and today it wants GTS rather than Let's Encrypt.''
 
 !!! What the rate limits actually cap
 
@@ -120,9 +119,9 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 
 ''The Public Suffix List refuses the rate-limit motive outright'' and accepts the ''mutually-untrusting subdomain delegation'' argument instead — which every comparable platform entered on. Its gate (registration with two or more years remaining, no service-level agreement on timing) makes submission ''a founding-time act''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-caa-collision >>
+<<~ ahu #the-caa-collision>>
 
 !! The CAA collision ~ a child record replaces its parent whole
 
@@ -132,38 +131,38 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 * A per-operator CAA record cures it, and ''only the apex holder may publish it'' (an operator controls their challenge label, never CAA at their own name). ''That record becomes the revocable lever.''
 * RFC 8657 §5.7 states the limit plainly: CAA reads as no effective way to restrict issuance for subdomains whose control sits delegated elsewhere. ''The apex cannot police a delegated operator through CAA'' — it can only withdraw the delegation.
 
-<<~ confidence 15/20 >> ''THE WILDCARD TRAP, and it forces the scope ruling.'' A wildcard request strips its `*.` before climbing, so a ''shared'' wildcard collapses the whole population onto ONE CAA point — and a single `issuewild` anywhere in that set silently voids every `issue` record for wildcard requests. ''A shared wildcard and per-operator account pinning cannot coexist.'' Narrow per-operator wildcards therefore stop being a preference (#/records-held-in-trust) and read as the only shape that keeps pinning possible. And never stand ''wildcard DNS'' on a shared apex at all — it opens subdomain takeover even under verification.
+''THE WILDCARD TRAP, and it forces the scope ruling.'' A wildcard request strips its `*.` before climbing, so a ''shared'' wildcard collapses the whole population onto ONE CAA point — and a single `issuewild` anywhere in that set silently voids every `issue` record for wildcard requests. ''A shared wildcard and per-operator account pinning cannot coexist.'' Narrow per-operator wildcards therefore stop being a preference (#/records-held-in-trust) and read as the only shape that keeps pinning possible. And never stand ''wildcard DNS'' on a shared apex at all — it opens subdomain takeover even under verification.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-shrinking-window >>
+<<~ ahu #the-shrinking-window>>
 
 !! The shrinking window ~ serve-offline has a clock on it
 
 ''"Renewal touches the internet; serving does not, for the certificate's full validity" carries a horizon that closes.'' Renewing at two-thirds of lifetime, the ''renewal cadence'' — the interval a household serves with no network at all — reads ~60 days now, ~43 days from 2027-02-10, and ~30 days from 2028-02-16 as default validity steps 90 → 64 → 45 days.
 
-<<~ confidence 15/20 >> ''TWO DAY-COUNTS RIDE HERE AND THEY ARE NOT THE SAME NUMBER.'' Beside the cadence sits the ''grace window'' — the slack between a renewal falling due and the certificate actually expiring — which runs ~30, ~21, ~14 days across those same steps. The cadence answers //how connected must a household be//; the grace window answers //how long do we have once the alarm sounds//, and only the second one governs the drill. A note that reports one while meaning the other budgets a month of slack that was never there. Both stand computed in `cert-expiry-gauge` (`renewalCadenceDays`, `graceWindowDays`) rather than carried as prose. Paying a commercial CA buys the Baseline maximum instead — an advantage that ''expires 2029-03-15''.
+''TWO DAY-COUNTS RIDE HERE AND THEY ARE NOT THE SAME NUMBER.'' Beside the cadence sits the ''grace window'' — the slack between a renewal falling due and the certificate actually expiring — which runs ~30, ~21, ~14 days across those same steps. The cadence answers //how connected must a household be//; the grace window answers //how long do we have once the alarm sounds//, and only the second one governs the drill. A note that reports one while meaning the other budgets a month of slack that was never there. Both stand computed in `cert-expiry-gauge` (`renewalCadenceDays`, `graceWindowDays`) rather than carried as prose. Paying a commercial CA buys the Baseline maximum instead — an advantage that ''expires 2029-03-15''.
 
 ''Three dates the design must hold'': **2027-02-10** — every hardcoded sixty-day timer in the mesh breaks that day, so ARI ships before it (and ARI also buys the rate-limit exemption, so it pays twice). **2028-02-16** — a thirty-day offline budget. **2029-03-15** — validation data reuse falls to ten days, so absent a persistent challenge the mesh writes DNS on every issuance.
 
 !!! No safety net stands anywhere
 
-<<~ confidence 17/20 >> Let's Encrypt ended expiration notices in 2025 and ''deleted the stored subscriber addresses''. A renewal that fails quietly on a civic node therefore produces ''no notification from anyone'' until a browser throws an interstitial at a family. ''The mesh MUST carry its own expiry witness'' — and the conventional thirty-day alert threshold breaks against a forty-five-day lifetime, so the alarm fires at ''roughly eighty percent elapsed'' rather than at a fixed remaining count.
+Let's Encrypt ended expiration notices in 2025 and ''deleted the stored subscriber addresses''. A renewal that fails quietly on a civic node therefore produces ''no notification from anyone'' until a browser throws an interstitial at a family. ''The mesh MUST carry its own expiry witness'' — and the conventional thirty-day alert threshold breaks against a forty-five-day lifetime, so the alarm fires at ''roughly eighty percent elapsed'' rather than at a fixed remaining count.
 
 ''The alarm outweighs the drill.'' A watched renewal turns the sovereign fallback into a last resort nobody reaches; an unwatched one turns expiry into a surprise, met with a ceremony never rehearsed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-live-gates >>
+<<~ ahu #two-live-gates>>
 
 !! Two gates already in force
 
 * ''MULTI-PERSPECTIVE VALIDATION.'' Corroboration from four remote perspectives across two or more regions stands live since mid-2026, rising to five at the end of it, and ''DNS-01 earns no exemption''. So the ''public authoritative view MUST answer the whole internet, unfiltered'' — a geo-filtered or access-listed authoritative server fails validation ''nondeterministically'', which reads as the worst failure shape available. ''Split at the recursive layer for LAN clients; never at the authoritative one'' (#/three-layers).
 * ''DNSSEC VALIDATION READS MUST'', on validation and CAA queries alike, including the CNAME lookups taken while choosing the authorization domain, with local policy forbidden from disabling it. A SERVFAIL grants no permission to issue. ''A half-signed apex or a stale DS now converts from a warning into a hard, mesh-wide renewal failure'' — and the common delegated-challenge daemon still carries DNSSEC unimplemented. ''Test the delegation boundary before founding.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-severability-law >>
+<<~ ahu #the-severability-law>>
 
 !! What a Nexus name may claim ~ nothing
 
@@ -173,15 +172,15 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 * A person's standing NEVER rides a name under these zones. Carry a host-scoped address as ''identity'' rather than as ''address'' and the arrangement repeats the failure the field has already measured — the domain owner comes to hold every identity on it.
 * Withholding a name withholds a signpost. Every key, byte, and peer relation survives it, so ''no delegation makes a landlord''.
 
-<<~ confidence 14/20 >> The two-name design carries its own answer to the concentration it creates: ''each Nexus can resolve for the other's attestations''. That costs nothing to arrange now and stops being arrangeable once either name carries load alone.
+The two-name design carries its own answer to the concentration it creates: ''each Nexus can resolve for the other's attestations''. That costs nothing to arrange now and stops being arrangeable once either name carries load alone.
 
 ''AND THE UNDER-OUR-NAME / THEIR-OWN-NAME FORK DISSOLVES.'' Seat identity in the ''node key'' and bind it bidirectionally to whatever name an operator presents, and the two roads stop competing: an operator takes a name under a Nexus as a zero-friction on-ramp and swaps to their own domain later ''losing nothing''. Every surviving system built exactly that, and every system that skipped it has resisted retrofit for years — a host-scoped identity proposal open since 2018 and still draft, a migration path that carries followers and loses posts, media, blocks and bookmarks.
 
-<<~ confidence 18/20 >> ''The seizure record settles what philosophy only suggests.'' Twenty-three domains seized in one 2014 action took over five million subdomains dark against roughly eighteen thousand malicious nodes — 99.6% overbroad, ex parte, no notice; a 2011 action put a wrongful federal child-exploitation banner on eighty-four thousand subdomains for three days; one 2023 lawsuit ended a registrar carrying some twelve million names. ''Public-suffix listing buys cookie isolation and certificate-bucket separation and NOTHING against seizure'', which supplied every catastrophic case. The bidirectional key-to-name binding reads as the only property that survives a court order aimed at somebody else entirely.
+''The seizure record settles what philosophy only suggests.'' Twenty-three domains seized in one 2014 action took over five million subdomains dark against roughly eighteen thousand malicious nodes — 99.6% overbroad, ex parte, no notice; a 2011 action put a wrongful federal child-exploitation banner on eighty-four thousand subdomains for three days; one 2023 lawsuit ended a registrar carrying some twelve million names. ''Public-suffix listing buys cookie isolation and certificate-bucket separation and NOTHING against seizure'', which supplied every catastrophic case. The bidirectional key-to-name binding reads as the only property that survives a court order aimed at somebody else entirely.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-stays-open >>
+<<~ ahu #what-stays-open>>
 
 !! What stays open
 
@@ -191,32 +190,32 @@ The 50-new-certificates-per-registered-domain-per-week ceiling ''does'' draw one
 * ''Renewal as the one declared bridge.'' Issuance touches the internet; serving does not (#/the-web2-bridge). Two Nexus names double the renewal surface without doubling the drill — one procedure, two subjects, and a lapse on either reads the same.
 * ''A third name appears in canon and no ruling covers it.'' `elyncia.social` rides several memes as a handle domain. It names neither Nexus and holds no seat here; whether it stands registered, and what it would serve, wants an operator word rather than an inference.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reading-the-older-memes >>
+<<~ ahu #reading-the-older-memes>>
 
 !! Reading the older memes ~ a worked example is not a deployment claim
 
 Several memes carry these names inside ''worked examples'' — a doc-stack diagram reading `lar://elyncia.app/lararium`, an invitation-link sketch reading `https://elyncia.app/#catalog=…`. Those illustrate a ''shape'' (which layer holds which URL, how a fragment carries a catalog) and decide nothing about where a Nexus serves. ''This meme holds the deployment answer; a diagram holds a form.'' A reader who mistakes the second for the first will build against a placeholder.
 
-<<~ confidence 12/20 >> ''One older meme reads as prior art rather than drift.'' The render-targets layering already separates a canonical DID from a handle-as-resolution-alias and states outright that the handle stays ''not authoritative''. That IS the severability law (#/the-severability-law), written before the sweep that confirmed it and before the DID-method-compatible lock (#/reach-plane) chose the same shape. Where canon already holds the right split, the lock ratifies rather than introduces.
+''One older meme reads as prior art rather than drift.'' The render-targets layering already separates a canonical DID from a handle-as-resolution-alias and states outright that the handle stays ''not authoritative''. That IS the severability law (#/the-severability-law), written before the sweep that confirmed it and before the DID-method-compatible lock (#/reach-plane) chose the same shape. Where canon already holds the right split, the lock ratifies rather than introduces.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/network-edge >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/network-edge>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8V-XgApnF6Qx8H9GHkalReZ2r1rkTxrzChvP55-e3Zc
+<<^ code="&#x0003;">>ni:///sha-256;j8vGWier3pW021lqFMpgKw-iYMn4xJaaOnpp3QczMew
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

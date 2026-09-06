@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/meme-provider >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/meme-provider>>
 ```toml meta
 body-sha256 = "0d482f4f018ba241ba5d582c02b282741306053d9a2fed9c8614bb7a0d6036b1"
 cacheable   = true
@@ -9,14 +9,13 @@ file-path   = "bags/lararium/ha.ka.ba/lararium/docs/meme-provider.mem"
 mana        = 18
 manao       = 17
 manaoio     = 16
-register    = "Synthesis-Canon"
 retain      = true
 role        = "coalescing fan-out layer between Automerge DocHandle and typed projections — isomorphic, zero Automerge dep"
 type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/docs/meme-provider"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ```typescript
 /**
@@ -202,6 +201,6 @@ export class MemeProvider {
 }
 ```
 
-<<^ code="&#x0003;" >>ni:///sha-256;46-v1yPncMt0mxRO46Umj8FLq7aYvYnnTa4MLk4UAsk
+<<^ code="&#x0003;">>ni:///sha-256;AkAgDKNt1zEfPhDbX9s3Govy-Kiprg-hHVxsqh5FO_Q
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

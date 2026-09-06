@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kau >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kau>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/kau.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 18
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "device placement/instantiation — set down with intention, own URI, own context"
 tags      = ["api/pono/meme", "api/lararium/widgets/kau", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kau"]
@@ -16,19 +15,19 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kau"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Kau
 
 A device placed with intention. The instance takes its own address.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #etymology >>
+<<~ ahu #etymology>>
 
 !! Etymology and Mythology
 
@@ -42,9 +41,9 @@ In Ink & Switch terms: kau names the moment an automerge object earns an `{actor
 
 In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-instance capability grants attach here. Document-scoped authority today; instance-scoped authority when the WASM lands.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law
 
@@ -56,16 +55,16 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 * Implementations MUST fire the `KauCapabilityHook` with the instance URI when a Keyhive authority provider registers (stub: no-op until WASM).
 * Implementations MUST fire the `KauWriteBackHook` when a UUID fragment auto-generates (stub: no-op until write-back layer wires in).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```
-<<~ kau DeviceName >>                       placement, auto-generated fragment
-<<~ kau #my-instance DeviceName >>          placement, explicit fragment
-<<~ kau #my-instance DeviceName prop=val >> placement with props
+<<~ kau DeviceName>>                       placement, auto-generated fragment
+<<~ kau #my-instance DeviceName>>          placement, explicit fragment
+<<~ kau #my-instance DeviceName prop=val>> placement with props
 ```
 
 The DeviceName resolves via `[all[tiddlers]tag[$:/tags/LarariumKumu]field:kumu-name[DeviceName]]`.
@@ -85,9 +84,9 @@ registerKauWriteBackHook(hook: (carrierUri: string, fragment: string) => void)
 
 Both stubs are deferred pending Keyhive WASM. When they land, they surface as explicit TW5 action tiddlers (not JS module hooks), consistent with TW5 VM primacy. The kau widget runs as a TW5-native `\widget ~kau(p1:"")` defined in `sigil-kau.tid` — no JS module.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #uefn-mapping >>
+<<~ ahu #uefn-mapping>>
 
 !! UEFN Device Model Mapping
 
@@ -100,26 +99,26 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 | waiho in body   | @editable property        |
 | instance URI    | device URI in hierarchy   |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #causal-island >>
+<<~ ahu #causal-island>>
 
 !! Causal Island
 
-Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable=Event subscribable=Handler >>`.
+Each kau instance operates as an isolated async execution boundary. Events do not leak between instances. The only declared crossing points are papalohe edges: `<<~ papalohe DeviceA -> DeviceB listenable=Event subscribable=Handler>>`.
 
 This maps directly to the Ink & Switch island model: each automerge object operates as a causally independent document. Merges happen at declared sync points, not implicitly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;iKPYDlToKL5gQPMD-jUIxdDl8DXi9xfCHC5IXq2jDSI
+<<^ code="&#x0003;">>ni:///sha-256;qOnlJM7WQWq-GN62XesUItpWohZ2lUrlcsXK_XidgAU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/floating-disc>>
 ```toml meta
 cacheable = true
 caption   = "Floating Disc"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/modules/powers/floating-disc.mem"
 mana      = 15
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Floating Disc — a stuckforce disc that hauls cargo and tilts into a barrier"
 tags      = ["components/domain/stuckforce", "components/function/cargo", "components/function/barrier", "components/hook/sustained", "mount-points/trait"]
@@ -17,19 +16,19 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/powers/floating-disc"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Floating Disc
 
-<<~ ahu #has >>
+<<~ ahu #has>>
 
 !! Composition
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #default >>
+<<~ ahu #default>>
 
 ```toml default
 canonical-name = "Floating Disc"
@@ -55,9 +54,9 @@ Create a concave disc of stuckforce one metre across. It hovers at waist height,
 
 On a botched or interfered read, choose one: the disc drops its load; locks into place as raw stuckforce; tilts at the wrong moment; drifts with wind or slope; shears its cargo; or obeys the last command too literally.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #variants >>
+<<~ ahu #variants>>
 
 !! Variants
 
@@ -66,19 +65,19 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 * ''Stuckforce Relic'' — a found disc or pebble-machine holds position until pushed. Seats `item`.
 * ''Shrine Porter'' — a shrine grants cargo support for offerings or pilgrims. Seats `structure`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
-<<~ loulou lar:///ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc >>
-<<~ loulou lar:///ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
+<<~ loulou lar:///ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc>>
+<<~ loulou lar:///ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -87,8 +86,8 @@ On a botched or interfered read, choose one: the disc drops its load; locks into
 * "Follows the operator" is intrinsic here; if a future leash/trigger links two modules, that wants `#composes`.
 * `telekinetic` domain (v0.0 carried it alongside stuckforce): promote a component only if a query needs to split force-types.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;U3KvFlXZgEZY1LRJQu94nGMhFK8UIHBL2v07ua6ksEE
+<<^ code="&#x0003;">>ni:///sha-256;MmjcNzrEa2qVCO8bPWL0KjJ86fqgmOGbhP4rRAKv3EQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,4 +1,4 @@
-<<^ &#x0001; ? -> lar:///grammar.ooda-ha.patterns/ooda-ha_SUBLOOP_PATTERNS/?confidence=CS:16 >>
+<<^ &#x0001; ? -> lar:///grammar.ooda-ha.patterns/ooda-ha_SUBLOOP_PATTERNS/?confidence=CS:16>>
 # OODA-HA Sub-Loop Patterns & Enforcement
 
 This sidecar file enumerates enforceable sub-loop patterns and architectural invariants for the Lares OODA-HA grammar standard. Reference this file from the main OODA-HA locus for operator and agent compliance.
@@ -47,4 +47,4 @@ This sidecar file enumerates enforceable sub-loop patterns and architectural inv
 ---
 
 **Location:** lares/grammar/ooda-ha/ooda-ha-SUBLOOP-PATTERNS.md
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

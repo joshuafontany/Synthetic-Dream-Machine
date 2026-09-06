@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reaction-protocol >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reaction-protocol>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/reaction-protocol.mem"
@@ -9,7 +9,6 @@ mana        = 17
 manao       = 17
 manaoio     = 16
 namespace   = "&#x0950; &#x0901;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant: within-island reaction dispatch substrate — ReactionGraph, ReactionBinding, ReactionHandler, extractReactionBindings; scope boundary = one TW5 wiki instance"
 source-file = "packages/lararium-mesh/src/reaction-graph.ts"
@@ -19,9 +18,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/reaction-protocol"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Reaction Graph
 
@@ -37,9 +36,9 @@ The production dispatch path runs through `reaction-router.ts` (nalu-driven).
 `ReactionGraph` is the routing table that `reaction-router.ts` populates and queries.
 `fireSync` ships for direct test use only; production code MUST NOT call it directly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #exports >>
+<<~ ahu #exports>>
 
 !! Exports
 
@@ -119,9 +118,9 @@ Selects edges that carry both `payload.listenable` and `payload.subscribable` (n
 
 All extracted bindings carry `source: "wired"`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #update-invariant >>
+<<~ ahu #update-invariant>>
 
 !! Update Invariant
 
@@ -133,9 +132,9 @@ Unoccupied slots for removed bindings drop; occupied slots persist.
 
 This preserves in-flight kukali suspensions across TW5 wiki-change events (nalu rebuilds).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #production-dispatch-path >>
+<<~ ahu #production-dispatch-path>>
 
 !! Production Dispatch Path
 
@@ -156,21 +155,21 @@ nalu arrives (wiki.addEventListener("change", handler))
 Production code calls `wiki.dispatchEvent("tm-verse-event")` only; `ReactionGraph.fireSync` never
 appears in production paths.
 
-<<!/ahu >>
+<<!/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;sfC0d3CsnPSJB3cOXDswZiq1z7zD9YET_jkQUUZr1xA
+<<^ code="&#x0003;">>ni:///sha-256;0bgxrPCAUnl_W_b3n0d1Jw5__3lc3dhFuCZrMZdr0Gs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

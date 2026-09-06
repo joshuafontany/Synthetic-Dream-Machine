@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/system-pattern-integrities.mem"
@@ -11,7 +11,6 @@ manao             = 19
 manaoio           = 19
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Canon"
 retain            = true
 role              = "FFZ pono constitutional law — MIND, ISLAND, AUTHORITY, CODEC, SYSTEM, PENTADIC, GENESIS, and PEER pattern-integrities for the Lararium causal-island system; attention-scale register names Pulse/Beat/Measure/Arc/Theme grounded in PENTA_2_CLOCK_ALIGNMENT"
 tags              = ["api/pono/meme"]
@@ -19,16 +18,16 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/system-pattern-integrities"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! System Pattern-Integrities
 
 FFZ pono constitutional law for the Lararium causal-island system.
-Fontany-Fuller-Zelenka local-first model. Confidence: `Canon 20/20`.
+Fontany-Fuller-Zelenka local-first model. Confidence:.
 
 These encode design-time laws and named exceptions — no runtime validators.
 Witnessing constants: named so any agent, test, or operator can reference by ID.
@@ -37,9 +36,9 @@ Enforcement is structural, not procedural.
 Eight law clusters: MIND · ISLAND · AUTHORITY · CODEC · SYSTEM · PENTADIC · GENESIS · PEER.
 Named exceptions: CODEC_EXCEPTIONS.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mind-laws >>
+<<~ ahu #mind-laws>>
 
 !! MIND Laws — the Automerge store functions as the mind
 
@@ -65,9 +64,9 @@ label = "sw-shell, not server-rendered snapshot"
 desc  = "App shell serves from the Service Worker cache. Automerge islands hydrate in background. sw-shell readiness lights when SW controls the page — not when a server-rendered HTML response arrives."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #island-laws >>
+<<~ ahu #island-laws>>
 
 !! ISLAND Laws — causal island identity, boundary, and boot origin
 
@@ -104,13 +103,13 @@ label = "Presence holds fate apart from content"
 desc  = "Presence behaves like weather. Memory MUST survive presence loss. Durable cold-start payloads MUST exclude presence, and corpus readiness MUST stand without it."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #authority-laws >>
+<<~ ahu #authority-laws>>
 
 !! AUTHORITY Laws — carrier canon, residency actions, trust ladder
 
-Sources: lares/lararium-research/PRINCIPLES.md (Canon 20/20)
+Sources: lares/lararium-research/PRINCIPLES.md
          pono/l-space-trust · pono/canon-boundary
 
 ```toml #AUTH_1_CARRIER_CANON_FIRST
@@ -143,9 +142,9 @@ label = "Weaker record surfaces drift as a trust-boundary event"
 desc  = "Trust order (strongest first): hostless pattern-integrity memes → hostless capability memes → hostless data/docs → branch-local artifacts → hostful live exchange → generated trajectory. A weaker record discovering drift in a stronger record MUST surface a trust-boundary event; canon holds in the stronger record."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #codec-laws >>
+<<~ ahu #codec-laws>>
 
 !! CODEC Laws — format, grammar, and round-trip laws
 
@@ -179,9 +178,9 @@ label = "Recipe is the routing table; highest-priority bag wins"
 desc  = "Tiddler conflict resolution uses highest-priority bag wins. The TW5 vm MUST enforce this on every incoming delta. The recipe functions as the routing table; bag priority MUST govern resolution."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #codec-exceptions >>
+<<~ ahu #codec-exceptions>>
 
 !! CODEC Exceptions — named deliberate deviations
 
@@ -212,9 +211,9 @@ label = "Binary blobs for large immutable assets"
 desc  = "TW5 core JS and vendored plugin bundles live in LarariumDoc.blobs (binary), not as tiddlers. Referenced by blob-descriptor tiddlers. Intended exception class to the tiddler format law."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #system-laws >>
+<<~ ahu #system-laws>>
 
 !! SYSTEM Laws — five architecture laws
 
@@ -251,9 +250,9 @@ label = "Meme files as tiddler-package projections"
 desc  = "*.md carrier files are projections of parent + fragment tiddler packages. Deserialization runs in the vm via deserializeCarrier(); writes run via renderTiddler(). An agent MUST read meme files through the vm deserializer at runtime, except BOOTSTRAP_SCANS (named exception)."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pentadic-laws >>
+<<~ ahu #pentadic-laws>>
 
 !! PENTADIC Laws — the Law of Fives as a structural pattern-integrity
 
@@ -282,11 +281,11 @@ label = "The five FPIs and the five SYSTEM laws are the same pattern-integrity i
 desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, ephemeralization, trim tab) and the five architecture SYSTEM laws (web3 smell test, TW5 vm primacy, TS-as-projection, tiddler format, meme-as-projection) are not separate lists. They are the same structural pattern expressed in different registers: Fuller's in geometry/physics, FFZ's in code architecture. Neither list supersedes the other; violations in one register typically produce violations in the other."
 ```
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/attention-scale >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/attention-scale>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #genesis-pattern-integrities >>
+<<~ ahu #genesis-pattern-integrities>>
 
 !! GENESIS Pattern-Integrities — causal origin, content-addressed identity, quine semantics
 
@@ -317,9 +316,9 @@ label = "Quine property: engine inside boots the system it boots"
 desc  = "@phase: S5 — proved Sprint 5. The genesis artifact carries the TW5 engine tiddlers that deserialize it. Boot a vm from the artifact, render the engine tiddlers, and the output matches the source. This is the quine closure. A genesis that cannot regenerate itself is incomplete."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #peer-pattern-integrities >>
+<<~ ahu #peer-pattern-integrities>>
 
 !! PEER Pattern-Integrities — peer symmetry at boot and post-boot authority boundaries
 
@@ -341,22 +340,22 @@ label = "Authority flows from capability receipts, not boot order"
 desc  = "Authority flows from a capability receipt, signature, or policy (Keyhive, future work) alone. Boot order, history depth, and writing genesis grant no authority. Until Keyhive lands, all peers operate at parity below the canon residency boundary."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-pattern-integrities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/automerge-tiga >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity >>
-<<~ loulou lar:///elyncia/Elyncia_02_The_Lares_DreamNet >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-pattern-integrities>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/automerge-tiga>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity>>
+<<~ loulou lar:///elyncia/Elyncia_02_The_Lares_DreamNet>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8EadebRXzNbeNDNT_6_Z0bY-kHgEW0GTYYAtQLBDp1U
+<<^ code="&#x0003;">>ni:///sha-256;1I5OGMnN_DFhRimwnmr1y-nw9W59Wokph6rKml3Tc_g
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

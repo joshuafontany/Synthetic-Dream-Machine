@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/region-worksheet >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/region-worksheet>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/sdm/ha.ka.ba/sdm/templates/region-worksheet.mem"
 l-space    = "adjacent"
 mana       = 12
 manao      = 13
 manaoio    = 11
 rating     = "meme"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "spine/skeleton holder — the region-worksheet practice: scale ladder, map-kinds, hex-entry law, travel loop; slots for verbatim SDM-06 and FTLS-04 chapter text land in #source before uplift"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/templates/region-worksheet"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Region Worksheet ~ the practice, held as a spine
 
@@ -39,9 +37,9 @@ Live enactments: [[new-delos|../../../../@elyncia/ha.ka.ba/elyncia/nexuses/new-d
 [[illyria|../../../../@elyncia/ha.ka.ba/elyncia/nexuses/illyria/region-worksheet.md]] ·
 neo-thracia (referee bag).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-scale-ladder >>
+<<~ ahu #the-scale-ladder>>
 
 !! The Scale Ladder //(Provisional — pace claim flagged below)//
 
@@ -55,14 +53,14 @@ Nested 1:6:5:5, bound to canon time units:
 | ''Reach'' | 150 miles | biomes, plates, empires | seasons |
 
 The Realm hex names the worksheet's home scale (the "nexus-scale subhex" of the gradient
-canon). <<~ confidence 8/20 >> ''Pace flag:'' the 6-mile/watch off-route rate
+canon). ''Pace flag:'' the 6-mile/watch off-route rate
 contradicts nothing on disk — SDM/UVG travel runs week-scale with no sub-week mileage stated
 — but the external UVG book stays unchecked; the rate fills a gap, so it firms only through
 table play.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-three-map-kinds >>
+<<~ ahu #the-three-map-kinds>>
 
 !! Three Map-Kinds
 
@@ -74,9 +72,9 @@ table play.
 * ''Ambient'' — the field between (SDM-06's own word: the world's breathing): the Area's
   Tags + Arcane + Tech, read off the Realm worksheet. Off-route, the Ambient activates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-travel-loop >>
+<<~ ahu #the-travel-loop>>
 
 !! The Travel Loop ~ on-route and off
 
@@ -94,9 +92,9 @@ fewer — ''1. the horizon'' (what entering eyes see) · ''2. the hidden handle'
 by working the hex; often an RSS Node) · ''3. the bleed'' (one active vector leaking into
 neighbors; feeds the encounter stack and the ambient tables).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #walk >>
+<<~ ahu #walk>>
 
 !! The Walk ~ planned verbatim slots
 
@@ -112,24 +110,24 @@ grain, blessed before moving:
 # FTLS-04 ~ the Area profile (Level · Tick · Attention · Arcane · Tech · Tags · Nodes) and
   the Encounter Roll at operational tempo
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source ~ verbatim staging
 
 //Verbatim MD blocks land here during the move. Empty until the walk above gets blessed.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/illyria/region-worksheet >>
-<<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model >>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/illyria/region-worksheet>>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;3U_t9ejbSK566iht0zC6vXDwnK71Cy-c4Oh0PUw5bPU
+<<^ code="&#x0003;">>ni:///sha-256;IDyrEEZTB2oF3mHfevvmulVx2-nlHreFd3kvL_LCtp0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/lararium-canonical-model>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/lararium-canonical-model.mem"
@@ -10,16 +10,15 @@ mana      = 19
 manao     = 18
 manaoio   = 17
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Lararium architecture keel — the ONE consolidated model a cold instance hydrates to grasp the whole house before reading any sub-meme. The load-bearing laws, the layering, the seven vessel participations, the boot sequence, capability-vs-platform, and the meme map. Cures the per-session re-derivation."
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/lararium-canonical-model"
 ```
 
-<<~ aka source-of-truth: read THIS first; the sub-memes (pranala below) carry the depth. >>
+<<~ aka source-of-truth: read THIS first; the sub-memes (pranala below) carry the depth.>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Lararium — The Canonical Model
 
@@ -28,7 +27,7 @@ It consolidates what three corpus scouts (2026-06-08) found scattered across ~8 
 + the code, so no future session re-derives the model. Depth lives in the pranala'd
 sub-memes; this carries the keel + the meme map.
 
-<<~ ahu #the-laws >>
+<<~ ahu #the-laws>>
 
 !! The Load-Bearing Laws
 
@@ -91,7 +90,7 @@ sub-memes; this carries the keel + the meme map.
    access-ladder + Keyhive-nesting climb the WHO axis (read · membership), the carriage powers
    climb the INFRA axis — and the relay cap stands OUTSIDE the access-ladder, granting carriage
    of sealed bytes the read-ladder never reaches. ([[project_authority_model_refined]],
-   <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/capability-layer >>)
+   <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/capability-layer>>)
 # ''Web3-only, Kowloon-external.'' The stack runs web3 local-first + causal-islands; any
     web2 bridge sits behind a causal-island boundary as an external web2.5 adapter. ([[feedback_web3_only_lares]])
 # ''Tiddler-format law + disk projection.'' Documentation memes live in `bags/` as `.md`
@@ -100,16 +99,16 @@ sub-memes; this carries the keel + the meme map.
 # ''DreamNet topology — two orthogonal axes, never one ladder.'' The earlier single chain
     (device-vessel → PersonaGroup → Cabal → Nexus → DreamNet) ''retires'' as fused-ladder residue —
     it crossed WHO (read) with FLOW (carriage) on one rope. The live model splits them: the ''WHO''
-''    axis'' (read · pledge-gated) climbs vessel-key → PersonaGroup → CabalGroup (each WHO scale a ''closure'' over signed delegation edges, never a roster a single key owns — <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>), and the ''INFRA axis''
+''    axis'' (read · pledge-gated) climbs vessel-key → PersonaGroup → CabalGroup (each WHO scale a ''closure'' over signed delegation edges, never a roster a single key owns — <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>), and the ''INFRA axis''
     (carriage · contract-gated) climbs relay-floor → Lararium → Nexus → DreamNet — the two crossing at
     the vessel, soft-bridged, never fused. "Operator" names a VERTICAL position on INFRA (runs-infra),
     never a WHO/social tier; delegation tops at the Cabal, above it treaty / mutual-carriage. Each scale
     holds sovereignty within; outer scales carry RECOGNITION via shared grammar (lar:/// · SharktoothSigil
-    · ABILITY_LADDER · genesis CID), no central authority. (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>)
+    · ABILITY_LADDER · genesis CID), no central authority. (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology>>)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-layering >>
+<<~ ahu #the-layering>>
 
 !! The Layering (one-way, zero cycles)
 
@@ -133,9 +132,9 @@ sub-memes; this carries the keel + the meme map.
 keyhive holds identity; node/browser/cli hold ONLY I/O adapters + held capabilities.
 mesh ← tw5 ← keyhive, one-way. No platform code in mesh or in a shared tw5 function.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #seven-participations >>
+<<~ ahu #seven-participations>>
 
 !! A Vessel Composes Seven Participations
 
@@ -158,9 +157,9 @@ the admin island's `ea` before any wiki mounts. The shared keel lives in
 `open-vessel-core.ts` (assembleVessel + mountWikiSlot); platform recipes supply the
 substrate atoms + the capability pieces they hold. ([[open-vessel|lar:///ha.ka.ba/lararium/mesh/open-vessel]])
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #capability-vs-platform >>
+<<~ ahu #capability-vs-platform>>
 
 !! Capability vs Platform (the distinction that stops the fork-paralysis)
 
@@ -175,15 +174,15 @@ substrate atoms + the capability pieces they hold. ([[open-vessel|lar:///ha.ka.b
   full cap-stack model — role names the ''expressed'' cap-set (hold-vs-express), the five caps in
   two families (CARRIAGE ⊥ VESSEL), and the ''Herm'' (Lares Viales) as the minimal composition
   that still runs the whole @daemon + mesh-palace keel (NOT a stripped pipe) — stands at
-  <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>.
+  <<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps>>.
 
 The full divergence ledger + decisions: `packages/EPIC-VESSEL-COLLAPSE.md`. The CLI
 participates as a thin LEAF peer (vessel-not-RPC: writes verb-summons into the shared CRDT,
 observes outcome convergence; V3-authenticated; renders prose↔JSON by audience).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #proven-collapse >>
+<<~ ahu #proven-collapse>>
 
 !! The Proven Collapse Pattern (how isomorphism actually lands)
 
@@ -198,9 +197,9 @@ and load-bearing:
   LANDED in mesh, not-yet-wired: the two factories migrate onto it (test-gated). The
   active edge of the isomorphism work.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-drift >>
+<<~ ahu #open-drift>>
 
 !! Open Drift to Reconcile (named, so it stops resurfacing)
 
@@ -212,7 +211,7 @@ and load-bearing:
 > instance hydrating this keel SHOULD carry that prior before optimising anything below it:
 > ''further architectural optimisation carries low marginal survival return.'' The full ranking,
 > its bands, and its unverified-figure ledger ride at
-> <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire#/the-honest-limit >>.
+> <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire#/the-honest-limit>>.
 
 The model converges; these shores stay open and SHOULD reconcile (not re-debate):
 
@@ -225,20 +224,20 @@ The model converges; these shores stay open and SHOULD reconcile (not re-debate)
 # ''Relay/leaf symmetry'' — open-vessel says equal-peer composition; operator-peer #actor-parity
    says "light leaf, engine on relay." Both true: symmetric STRUCTURE, asymmetric currently-held
    CAPABILITIES (law #4). The ''hold-vs-express'' model now carries this canon — one held
-   cap-stack, a subset expressed per context (<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#/hold-vs-express >>).
+   cap-stack, a subset expressed per context (<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#/hold-vs-express>>).
 # ''OpenIdentitySlot stub'' — sharePolicy returns true (legit for same-origin browser peers; the
    real network gate = V3 on node). User-level identity slots (Bluesky/GitHub/keyhive) remain
    future; the meme reads one generation behind the live keyhive operator gates.
 # ''EPIC-VESSEL-COLLAPSE decisions'' — the 9 BEHAVIOR rows decided convergent-open 2026-06-08
    ("one pono model, isomorphism, capabilities as meaningful distinctions"); enact onto open-vessel-core.
 
-<<~ confidence 16/20 >> Three independent corpus scouts (bags · core-stack ·
+Three independent corpus scouts (bags · core-stack ·
 platform-stack) converged on this keel; the high-mana memes match the code. Confidence holds
 short of Canon only on the open-drift items, which name reconciliations not re-designs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hydration >>
+<<~ ahu #hydration>>
 
 !! Hydration (how this cures the re-derivation) — PER AUDIENCE
 
@@ -258,26 +257,26 @@ node cannot fetch a `lar:` URI). So hydration routes by audience:
 Read order once held: noosphere-boot → THIS → (open-vessel · causal-island · operator-peer
 · island-protocol) for depth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/causal-island >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/living-grammar >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/causal-island>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/living-grammar>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot>>
 
 ''Tie ~ the living grammar.'' The house's grammar lives as a pattern-integrity ([[living-grammar|lar:///ha.ka.ba/lares/api/pono/living-grammar]]) —
 seeded by the boot, enacted per turn, corrected by degree, decaying untended; the memory-palace that
 captures its FORM beside the verbatim CONTENT stands at [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]].
 
-<<^ code="&#x0003;" >>ni:///sha-256;PDX1XFen1LdocuLG4E-6LetcEhBOnyzc9x1gfOaC9gA
+<<^ code="&#x0003;">>ni:///sha-256;028kl9z0L_OMJeBX97x33reFacE49ZcvNpS6s-YtDVk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

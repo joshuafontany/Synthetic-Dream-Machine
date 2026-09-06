@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele>>
 ```toml meta
 body-sha256   = "56423ffb8c7522db2c9dad9d9d0ba316de67a03636c05a4be596b5d5020c88f1"
 cacheable     = true
@@ -11,7 +11,6 @@ l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
-register      = "Synthesis-Canon"
 role          = "TW5 widget: lele — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "LeleWidget"
 status-date   = "2026-05-03"
@@ -19,32 +18,32 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/lele"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! lele
 
 TW5 widget from `@lararium/tw5`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 Exported symbols: `LeleWidget`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/lele" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;rn87js9mYHE1uF8Cd32X5SXClhCKTG7Z3GHHaMHPXLc
+<<^ code="&#x0003;">>ni:///sha-256;YFsT0huyshbWu6XoyIFbvlkZ0E8A3qlVUOzBnCYZEXo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

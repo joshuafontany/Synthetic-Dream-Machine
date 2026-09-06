@@ -73,18 +73,18 @@ describe("chaos — the reader graceful-degrades on degenerate / malformed input
     ["single token", "x"],
     ["whitespace only", "   \n\t  \n  "],
     ["all-black (no sigils)", "just plain prose with absolutely no sigils here at all across the whole span"],
-    ["all-red (only sigils)", "<<~ ward ! >><<~ confidence Synthesis 12/20 >><<~ lares aim a -> b >>"],
-    ["single sigil, no prose", "<<~ ward ! >>"],
-    ["adjacent no-gap sigils", "<<~ ward ! >><<~ ward ! >><<~ ward ! >>"],
+    ["all-red (only sigils)", "<<~ ward !>><<~ confidence Synthesis 12/20>><<~ lares aim a -> b>>"],
+    ["single sigil, no prose", "<<~ ward !>>"],
+    ["adjacent no-gap sigils", "<<~ ward !>><<~ ward !>><<~ ward !>>"],
     ["unbalanced open (no >>)", "prose <<~ ward ! runs to the end with no closing bracket at all here now"],
     ["stray close (no opener)", "prose >> more prose with a bare close and no opener anywhere in this span"],
-    ["nested frames deep", "<<~ ahu #a >><<~ ahu #b >><<~ ahu #c >>deep<<~/ahu >><<~/ahu >><<~/ahu >>"],
-    ["only frames", "<<~ ahu #a >><<~/ahu >>"],
+    ["nested frames deep", "<<~ ahu #a>><<~ ahu #b>><<~ ahu #c>>deep<<~/ahu>><<~/ahu>><<~/ahu>>"],
+    ["only frames", "<<~ ahu #a>><<~/ahu>>"],
     ["sigil glued inside a word", "wo<<~ward!>>rd stuck to prose with no surrounding spaces at all here"],
-    ["all four Mu ops", "<<~ ward * >> a <<~ ward ? >> b <<~ ward ! >> c <<~ ward _ >> d tail prose here"],
-    ["emoji ZWJ storm (F4)", "prose 👨‍👩‍👧‍👦🏳️‍🌈👩🏽‍🚀 <<~ confidence Synthesis 12/20 >> more 🧑‍🤝‍🧑 tail here"],
-    ["combining-mark zalgo (F4)", "à̴̢̛͈͇é́́ <<~ ward ! >> zalgo t̷̢e̸x̶t across the span for the grain test here"],
-    ["unicode sigil head", "<<~ ॐ confidence >> devanagari-head prose across the span in this whole line"],
+    ["all four Mu ops", "<<~ ward *>> a <<~ ward ?>> b <<~ ward !>> c <<~ ward _>> d tail prose here"],
+    ["emoji ZWJ storm (F4)", "prose 👨‍👩‍👧‍👦🏳️‍🌈👩🏽‍🚀 <<~ confidence Synthesis 12/20>> more 🧑‍🤝‍🧑 tail here"],
+    ["combining-mark zalgo (F4)", "à̴̢̛͈͇é́́ <<~ ward !>> zalgo t̷̢e̸x̶t across the span for the grain test here"],
+    ["unicode sigil head", "<<~ ॐ confidence>> devanagari-head prose across the span in this whole line"],
   ];
   for (const [name, text] of CASES) {
     test(`no crash — ${name}`, () => {
@@ -102,7 +102,7 @@ describe("chaos — the reader graceful-degrades on degenerate / malformed input
   });
 
   test("HUGE all-sigil corpus — scale, no crash, planar", () => {
-    const huge = "<<~ ward ! >> ".repeat(4000);
+    const huge = "<<~ ward !>> ".repeat(4000);
     const s = stratify(huge);
     expect(s.strata.length).toBe(4000);
     expect(intersectTiers(s).valid).toBe(true);      // 4000 strata still synchronize (planar by construction)
@@ -113,7 +113,7 @@ describe("chaos — the reader graceful-degrades on degenerate / malformed input
 
 describe("chaos — grapheme-cluster vs codepoint spans (F4): the sigil still tags, spans stay in-bounds", () => {
   test("an emoji ZWJ storm around a sigil keeps the stratum span valid + the association intact", () => {
-    const text = "lead 👨‍👩‍👧‍👦 prose then <<~ confidence Synthesis 12/20 >> then 🏳️‍🌈 tail prose runs on here now";
+    const text = "lead 👨‍👩‍👧‍👦 prose then <<~ confidence Synthesis 12/20>> then 🏳️‍🌈 tail prose runs on here now";
     const s = stratify(text);
     const conf = s.strata.find((st) => st.head === "confidence");
     expect(conf).toBeDefined();
@@ -219,7 +219,7 @@ describe("shore — variance mis-route: a cosheaf plane leaking into the sheaf r
   });
 
   test("the engineered stratification restrictions are ALL sheaf (nothing cosheaf leaks in)", () => {
-    const { restrictions } = stratificationRestrictions(stratify("prose <<~ ward ! >> more prose here now"));
+    const { restrictions } = stratificationRestrictions(stratify("prose <<~ ward !>> more prose here now"));
     for (const r of restrictions) expect(r.variance).toBe("sheaf");
     expect(restrictions.map((r) => r.plane).sort()).toEqual(["content", "form", "structure"]);
   });

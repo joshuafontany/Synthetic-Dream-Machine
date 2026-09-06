@@ -1,23 +1,21 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/SESSION >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/SESSION>>
 ```toml meta
-confidence = 18
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/SESSION.mem"
 implements = ["lar:///ha.ka.ba/lares/api/pono/meme"]
 l-space    = "adjacent"
 mana       = 18
 manao      = 17
 manaoio    = 17
-register   = "Synthesis-Canon"
 role       = "session handoff crystal — 2026-05-03 (session 10) — M25 Loop 2 (partial): node peer oracle tiddler alignment; MemeSyncAdaptor 15 tests; CompositeStore.addProjection 4 tests; 172 passing (was 153)"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/SESSION"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha-m25-loop1-stack-upward-walk-2026-05-03 >>
+<<~ ahu #ooda-ha-m25-loop1-stack-upward-walk-2026-05-03>>
 
 !! OODA-HA: M25 Loop 1 — Stack Upward Walk (2026-05-03)
 
@@ -60,9 +58,9 @@ Walking upward from Automerge doc → CompositeStore → MemeSyncAdaptor → VM 
 
 ---
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m24-lardoc-alignment-2026-05-03 >>
+<<~ ahu #ooda-ha-m24-lardoc-alignment-2026-05-03>>
 
 !! OODA-HA: M24 — LarDoc Base Alignment (2026-05-03)
 
@@ -108,9 +106,9 @@ The full Lararium Automerge doc stack aligns on `LarDoc`. No more flat-doc casts
 
 ---
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m23-bags-recipes-alignment-2026-05-03 >>
+<<~ ahu #ooda-ha-m23-bags-recipes-alignment-2026-05-03>>
 
 !! OODA-HA: M23 — TW5 Bags/Recipes Alignment (2026-05-03)
 
@@ -154,9 +152,9 @@ Bags now carry first-class policy tiddlers. The VM enforces highest-priority-bag
 
 ---
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m22-topology-vm-2026-05-03 >>
+<<~ ahu #ooda-ha-m22-topology-vm-2026-05-03>>
 
 !! OODA-HA: M22 — Topology-Derived VM + Wiki-First Filters (2026-05-03)
 
@@ -194,9 +192,9 @@ The VM sees only the recipe's bag slice. Both peers boot recipe-aware. The wiki 
 
 ---
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m21-6root-2plane-2026-05-03 >>
+<<~ ahu #ooda-ha-m21-6root-2plane-2026-05-03>>
 
 !! OODA-HA: M21 — 6-Root 2-Plane + Recipe Schema (2026-05-03)
 
@@ -232,9 +230,9 @@ Build clean across core + node + app.  67/67 tests pass.
 ** Wiki-first social UX: identity picker + group membership TW5 widgets (vite builds TS → TW5 plugin)
 ** Session sub-docs at `@sessions/@{slug}` pos-2 slot + session lifecycle events
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-local-first >>
+<<~ ahu #ooda-ha-local-first>>
 
 !! OODA-HA: Local-First Architecture
 
@@ -254,9 +252,9 @@ Build clean across core + node + app.  67/67 tests pass.
 
 ↺ All Lararium tiddlers use `lar:` URI as title ✓. Echo-loop guard active ✓. `/admin/promote` is the only canon ceremony ✓. Server is peer not authority ✓.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-larhud-2026-05-02 >>
+<<~ ahu #ooda-ha-larhud-2026-05-02>>
 
 !! OODA-HA: LarHUD — Web3 Dockable TW5 Frame (2026-05-02)
 
@@ -272,9 +270,9 @@ Build clean across core + node + app.  67/67 tests pass.
 
 ↺ LarHUD needs: resize handle (drag left edge), bottom-dock option, mobile overlay mode below breakpoint, `peer.store.addProjection(engine)` wiring to replace `tw5.onWikiChange` wiki scan, per-tiddler breadcrumb in tab bar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-web3-peer-2026-05-02 >>
+<<~ ahu #ooda-ha-web3-peer-2026-05-02>>
 
 !! OODA-HA: Web3 Peer Boot + web2 Purge (2026-05-02)
 
@@ -290,9 +288,9 @@ Build clean across core + node + app.  67/67 tests pass.
 
 ↺ `reaction-query.web2.ts` orphaned (no callers) — delete. `LarariumPanel.web2.tsx` retire after LarHUD gets fireMeme + wiki nav. Node server entrypoint needed. `LarDiskProjector` move.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-causal-island >>
+<<~ ahu #ooda-ha-causal-island>>
 
 !! OODA-HA: Causal Island Doctrine (Fuller-Zelenka)
 
@@ -310,9 +308,9 @@ Build clean across core + node + app.  67/67 tests pass.
 
 ↺ `AuthorityFirstGuard` live in `serve.ts`. Doctrine is the law; TypeScript is its runtime projection.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-source-memes >>
+<<~ ahu #ooda-ha-source-memes>>
 
 !! OODA-HA: Track B — Source Meme Pipeline
 
@@ -326,9 +324,9 @@ Build clean across core + node + app.  67/67 tests pass.
 
 ↺ `BuiltSnapshot.memes` type updated to `laresRelPath: string | null`. Disk write-back guard in serve.ts already skips virtual caps URIs (laresRelPath null) — source memes correctly excluded from disk write-back.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #track-a >>
+<<~ ahu #track-a>>
 
 !! Track A: Dead Code Removal (complete)
 
@@ -342,9 +340,9 @@ Removed this session:
 
 All 62 unit tests green after removal.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #state >>
+<<~ ahu #state>>
 
 !! State as of 2026-04-29 (session 5 end)
 
@@ -393,9 +391,9 @@ All 62 unit tests green after removal.
 * `fireMeme` is local-only synchronous — no WS round-trip for local reactions ✓
 * Causal island doctrine: Fuller-Zelenka basis + four-tier model ✓
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m11-priorities >>
+<<~ ahu #m11-priorities>>
 
 !! M11 Priorities
 
@@ -428,18 +426,18 @@ packages/lararium-node/
   — gate: server starts clean on the WSL2 host
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=relation role=companion >>
-<<~ pranala #to-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=relation role=companion>>
+<<~ pranala #to-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint0-2026-05-02 >>
+<<~ ahu #ooda-ha-sprint0-2026-05-02>>
 
 !! OODA-HA: Sprint 0 — Web2 Sidecar Rip + API Surface Reboot (2026-05-02)
 
@@ -481,9 +479,9 @@ packages/lararium-node/
 
 ↺ `reaction-query.ts` error cleared ✓. `grammar-invariants.ts` created ✓. `MemeProjection.onChangeset?` non-breaking ✓. Sprint plan persisted to session memory ✓.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-kumu-uri-scheme >>
+<<~ ahu #ooda-ha-kumu-uri-scheme>>
 
 !! OODA-HA: Kumu Instance URI Scheme (LOCKED 2026-05-02)
 
@@ -515,10 +513,10 @@ packages/lararium-node/
 
   ''Kahea declaration inside type meme body:''
   ```
-  <<~ kahea kau #east-wing-flame >>
-  <<~ kahea kau #3f2a1b9c-8e4d-... >>
+  <<~ kahea kau #east-wing-flame>>
+  <<~ kahea kau #3f2a1b9c-8e4d-...>>
   ```
-  One `<<~ kahea kau #fragment >>` sigil per instance. The type meme's body thus serves as the authoritative roster of all active instances. The fragment after `#` becomes the tiddler title suffix: full title = `lar:///ha.ka.ba/elyncia/devices/altar-torch#/east-wing-flame`.
+  One `<<~ kahea kau #fragment>>` sigil per instance. The type meme's body thus serves as the authoritative roster of all active instances. The fragment after `#` becomes the tiddler title suffix: full title = `lar:///ha.ka.ba/elyncia/devices/altar-torch#/east-wing-flame`.
 
 ◇ Bag assignment and movability:
 ** Instance tiddler title: full lar URI with fragment, stored as a tiddler in the room Automerge doc.
@@ -542,9 +540,9 @@ packages/lararium-node/
 
 ↺ `lar:kumu:UUID` scheme retired ✓. Fragment URI scheme locked ✓. `grammar-invariants.ts` carries `GRAMMAR_MEME_URI` const as the same pattern ✓.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint1-plan >>
+<<~ ahu #ooda-ha-sprint1-plan>>
 
 !! OODA-HA: Sprint 1 Plan — MemeGraph Rebuild (next)
 
@@ -603,9 +601,9 @@ packages/lararium-node/
 
 ↺ Sprint 0 cleared `parsePranalaEdges` error ✓. Sprint 1 clears `MemeGraph`/`memeImplements` errors. Sprint 2 follows: grammar multi-doc boot. Sprint 3: `meme-recipe-vm.ts` + `MemeParser`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint4-verse-alignment >>
+<<~ ahu #ooda-ha-sprint4-verse-alignment>>
 
 !! OODA-HA: Sprint 4 + Verse Alignment — 2026-05-02
 
@@ -677,9 +675,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 ↺ ''tsc invariant maintained.'' Sprint 5 next: `MemeSyncAdaptor` — replaces `LarariumCrdtSyncAdaptor`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-uefn-name-pass-2026-05-02 >>
+<<~ ahu #ooda-ha-uefn-name-pass-2026-05-02>>
 
 !! UEFN Name Pass — 2026-05-02 (Role/Field Rename)
 
@@ -739,9 +737,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 ↺ ''tsc invariant maintained.'' Sprint 5 complete ✓ — see next ahu.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint5-meme-sync-adaptor-2026-05-02 >>
+<<~ ahu #ooda-ha-sprint5-meme-sync-adaptor-2026-05-02>>
 
 !! Sprint 5 — MemeSyncAdaptor (2026-05-02)
 
@@ -762,9 +760,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 ↺ ''Sprint 6 next:'' `meme-browser-host.ts` — research-before-act. Web3 rip sprint enacted in this session — see next ahu.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m15-web3-rip-2026-05-02 >>
+<<~ ahu #ooda-ha-m15-web3-rip-2026-05-02>>
 
 !! M15 Web3 Rip Sprint — TW5Engine + Filter Operators (2026-05-02)
 
@@ -807,9 +805,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 * `LarDiskProjector` move from `@lararium/tw5` → `@lararium/node`
 * Isomorphic `AutomergeStoreBase` / grammar-wired deserializer / multi-doc boot order: Sprint 6 research
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-named-doc-pattern-m17-2026-05-03 >>
+<<~ ahu #ooda-ha-named-doc-pattern-m17-2026-05-03>>
 
 !! OODA-HA: Named-Doc Oracle + Room Keys + Self-Describing Pass (M17 — 2026-05-03)
 
@@ -825,9 +823,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 ↺ M18 open: corpus `MemeStoreDoc` not yet self-describing (no tiddler at its own `lar:` address inside the doc). Browser peer corpus discovery still reads `catalog?.corpora` not `catalog?.tiddlers` — isomorphism gap remains. `@lares` oracle tiddler not yet in LarariumDoc.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #session-6-m17-m20-2026-05-03 >>
+<<~ ahu #session-6-m17-m20-2026-05-03>>
 
 !! Session 6 — M17–M20 Sprint Close (2026-05-03)
 
@@ -871,9 +869,9 @@ Each corpus `MemeStoreDoc` carries `tiddlers[corpusLarUri(slug)]` self-ref tiddl
 
 ↺ Residue carried: isomorphic `AutomergeStoreBase`, grammar-wired deserializer, browser Playwright QA, `LarDiskProjector` migration.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m25-loop2-qa-gap-survey-2026-05-03 >>
+<<~ ahu #ooda-ha-m25-loop2-qa-gap-survey-2026-05-03>>
 
 !! OODA-HA: M25 Loop 2 — QA Gap Survey + Sync Bridge Tests (2026-05-03)
 
@@ -913,9 +911,9 @@ Gap C — ''addProjection fan-out untested'': `CompositeStore.addProjection` was
 * Draft bag → stable lar: URI
 * MCP `hud`/`receipt` — diagnose and fix storage-dir absent during test run
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m25-loop3-cast-cleanup-routing-2026-05-03 >>
+<<~ ahu #ooda-ha-m25-loop3-cast-cleanup-routing-2026-05-03>>
 
 !! OODA-HA: M25 Loop 3 — Cast Cleanup + Bag Routing + Dynamic Projections (2026-05-03)
 
@@ -959,9 +957,9 @@ Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adap
 * MCP `hud`/`receipt` — diagnose storage-dir issue
 * Connect screen (`readBootstrap() === null`) — user-facing cold boot
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m26-isomorphic-vmpool-2026-05-04 >>
+<<~ ahu #ooda-ha-m26-isomorphic-vmpool-2026-05-04>>
 
 !! OODA-HA: M26 — Isomorphic VmPool + WorkerFactory Injection (2026-05-04)
 
@@ -1004,9 +1002,9 @@ Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adap
 * Connect screen cold-boot path
 * MCP `hud`/`receipt` storage-dir fix
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m26-loop1-corpus-cast-audit-2026-05-04 >>
+<<~ ahu #ooda-ha-m26-loop1-corpus-cast-audit-2026-05-04>>
 
 !! OODA-HA: M26 Loop 1 — Corpus Cast Audit (2026-05-04)
 
@@ -1028,9 +1026,9 @@ With `fields: {}` added, `doc.tiddlers[corpusUri] = { title, text, fields: {}, b
 ⤴ ''Advance:''
 173 tests (84 core + 52 tw5 + 25 tldraw + 16 node). Build clean. No spurious casts remain in corpus write paths. `MutableLarRecord.fields` invariant now enforced at all write sites.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m27-tldraw-wiki-first-2026-05-04 >>
+<<~ ahu #ooda-ha-m27-tldraw-wiki-first-2026-05-04>>
 
 !! OODA-HA: M27 — tldraw Wiki-First Migration + LarOpenPhase + vmFactory Injection (2026-05-04)
 
@@ -1084,9 +1082,9 @@ Three pressures converged. (1) `LarariumShell.tsx` held three `(ed.store as any)
 * Connect screen cold-boot path
 * MCP `hud`/`receipt` storage-dir fix
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m28-cold-boot-ceremony >>
+<<~ ahu #ooda-ha-m28-cold-boot-ceremony>>
 
 !! M28 — Cold-Boot Ceremony + Keyhive Identity Bridge (2026-05-04)
 
@@ -1127,9 +1125,9 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 * Connect screen cold-boot path + "check for admin operators" guard
 * Widget export key normalization: `KauWidget` → `kau` for TW5 tag registration
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m28-source-coverage >>
+<<~ ahu #ooda-ha-m28-source-coverage>>
 
 !! M28 Loop 2 — Self-Documenting Quine: `#source` ahu Coverage (2026-05-04)
 
@@ -1149,9 +1147,9 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 ⤴ ''Advance:'' 164 tests pass. All packaged cTW5 tiddlers carry `#source`. Quine law holds.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha-m28-cjs-cleanup >>
+<<~ ahu #ooda-ha-m28-cjs-cleanup>>
 
 !! M28 Loop 3 — CJS Module Wrapper Cleanup (2026-05-04)
 
@@ -1182,17 +1180,17 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 * Widget export key: `KauWidget` → `kau` (TW5 tag registration alignment)
 * MCP `hud`/`receipt` storage-dir fix
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=relation role=companion >>
-<<~ pranala #to-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=relation role=companion>>
+<<~ pranala #to-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;sbIN2jIv3LZUjymQeKFGMr-zD58wgyZw_HxCAT5eXRw
+<<^ code="&#x0003;">>ni:///sha-256;77J0Y-C6NZoC426YoIChaYuI6yBTSRrT6hOE_jc3wDY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

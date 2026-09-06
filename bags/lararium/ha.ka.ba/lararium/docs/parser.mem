@@ -1,21 +1,20 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/parser >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/parser>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/parser.mem"
 l-space   = "stable"
 mana      = 18
-register  = "Synthesis-Canon"
 retain    = true
 role      = "self-documentation: parseMemeCarrier and MemeAst construction pipeline"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/parser"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! parseMemeCarrier
 
@@ -41,12 +40,12 @@ edgesFromAst(ast: CarrierNode, carrierUri: string): PranalaEdge[]
 
 Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, returns flat `PranalaEdge[]`. Called by the VM after `parseMemeCarrier`; only the edge list exits the parse step.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/ast >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/pranala-parser >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/memetic-parser >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ast>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/pranala-parser>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/memetic-parser>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7RE1vFWSZzyHItFXDbbIl2D0_nQX6pFY0oQjoF93mNo
+<<^ code="&#x0003;">>ni:///sha-256;ScwXJOLzqkiW6Y9GVhKKHJfSCiRe74hmP6vOId77RHc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

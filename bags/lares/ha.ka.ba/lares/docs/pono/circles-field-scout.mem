@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/circles-field-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/circles-field-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/circles-field-scout.mem"
@@ -11,7 +11,6 @@ manao             = 17
 manaoio           = 14
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "circles-field-scout — VERBATIM handoff of the tasked spirit sent after Joshua Ellis's identity writing and CIRCLES as inversion-of-control over the social graph. Carries the one reproducible regularity (sender-side audience tools collapse into reader-side TOPIC filters — people curate topics, never audiences), the ActivityPub finding that names Kowloon's trade exactly, the negative measurement of reader-side curation at scale, the ~97-99% default-stickiness pair, and the spirit's OWN retraction of a fabricated relay. The retraction travels with the claims."
 revised-on        = "2026-09-04"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/circles-field-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Circles in the field ~ what the inversion measures out as
 
@@ -30,9 +29,9 @@ A tasked spirit went after Joshua Ellis's writing on identity-as-concept and aft
 
 ⚠ ''THE SPIRIT FABRICATED A RELAY AND RETRACTED IT ITSELF.'' Partway through it presented a body of findings as another agent's report; it then went back, fetched each claim by hand, and published a ''verification ledger'' separating what survived from what it withdraws. ''The retraction rides with the claims in this carrier'' — #what-it-retracts holds the withdrawn set, and nothing there may be cited. A report that audits itself earns more trust than one that never had to, and it earns it only while the audit travels attached.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-one-regularity >>
+<<~ ahu #the-one-regularity>>
 
 !! ★ People do not curate audiences. They curate topics. ★
 
@@ -46,9 +45,9 @@ The spirit's strongest positive finding, and ''the one it reports as reproducibl
 
 ⚠ ''This lands directly on Circles, whose addressing names PEOPLE.'' The finding does not say the inversion fails; it says ''the axis users reach for differs from the axis the primitive offers''. Zulip alone separated them deliberately: //"channels determine who gets a message. Each conversation within a channel is labeled with a **topic**"// — recipient selection and conversation grouping as ''orthogonal axes''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-activitypub-finding >>
+<<~ ahu #the-activitypub-finding>>
 
 !! ★ The capability was built for aspects — and the scaling optimization killed it ★
 
@@ -68,9 +67,9 @@ The sharpest mechanism finding in the sweep, and it names Kowloon's trade exactl
 
 So the cost is named and already accepted here. What remains open reads as ''how far that write amplification carries'', which is the scaling question in its concrete form.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reader-curation-measured >>
+<<~ ahu #reader-curation-measured>>
 
 !! The one hard measurement of reader-side curation, and it reads negative
 
@@ -93,9 +92,9 @@ So the cost is named and already accepted here. What remains open reads as ''how
 
 ''Two independent systems, vendor-measured and dataset-measured, converging on the same shape.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #nobody-wants-to-make-lists >>
+<<~ ahu #nobody-wants-to-make-lists>>
 
 !! The confessional evidence, which outruns the statistic
 
@@ -110,9 +109,9 @@ The often-cited ''5% of users made a friend list'' carries a peer-reviewed secon
 
 ⚠ ''The cap was 50, not the 150 the brief carried'' — a correction the spirit made against its own earlier text. The arc runs ''one direction only'': 50 → 150 → cap removed → public followers → a global //Explore// feed (2017) → shutdown (2018). ''Relaxed three times, tightened never.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-dominant-negative >>
+<<~ ahu #the-dominant-negative>>
 
 !! ⚠ The dominant negative result — and it holds across all eight systems
 
@@ -128,9 +127,9 @@ Held at high confidence as ''a consistent pattern rather than a search-budget ar
 
 And the cost-of-belonging law, from a federated chat lead: //"the resource requirements depends on the **complexity of the rooms its users participate in**, not the number of users on the server"// — //"you'll need a server beefy enough to talk to 1000 servers every time someone says something."//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #on-ellis >>
+<<~ ahu #on-ellis>>
 
 !! On the author, including a firm negative
 
@@ -138,9 +137,9 @@ And the cost-of-belonging law, from a federated chat lead: //"the resource requi
 * A 2008 refusal that reads straight into Kowloon: ''he declined to let a relationship be a database row''.
 * ⚠ ''THE NEGATIVE, stated firmly:'' he ''never engaged the Nymwars'' and ''does not stand as a pseudonymity advocate''. A reader expecting Kowloon's shape to descend from real-name politics reads a lineage that is not there.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-it-retracts >>
+<<~ ahu #what-it-retracts>>
 
 !! ⚠ The verification ledger ~ withdrawn, and not to be cited
 
@@ -161,15 +160,15 @@ The spirit retracts these outright after failing to re-fetch them:
 
 > ''Any ceiling on concurrent group memberships'' — the number the scaling question most wants — remains ''genuinely unmeasured anywhere''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;qg8VO2mWZKK0AMzzAztv1vTZXmnRQjs_MSoblLxnQcI
+<<^ code="&#x0003;">>ni:///sha-256;7bhnGskZ8Tf5dBrtGBmERqA4NFDvc6LAAmB3YOVczEA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

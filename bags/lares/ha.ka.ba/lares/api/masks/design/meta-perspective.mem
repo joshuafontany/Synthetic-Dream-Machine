@@ -1,9 +1,8 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/design/meta-perspective >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/design/meta-perspective>>
 ```toml meta
 cacheable  = true
-confidence = 10
 created    = "2026-08-18"
 family     = "design"
 file-path  = "bags/lares/ha.ka.ba/lares/api/masks/design/meta-perspective.mem"
@@ -14,7 +13,6 @@ manaoio    = 12
 name       = "Meta-Perspective"
 namespace  = "&#x0950; &#x0901;"
 rating     = "meme"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "design mask, the first of its family — the Meta-Perspective: the green-room lens that works ON the graph and the Universe; carries the step-in ring, its bindings, and the bench style"
 seniority  = "first meta-design lens minted"
@@ -23,11 +21,11 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/api/masks/design/meta-perspective"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Meta-Perspective ~ the design lens
 
@@ -43,9 +41,9 @@ multi-perspective, multi-topic facility where improv launches count as legitimat
 ''Coffee-Talk'' names the tools-down move: build pressure set aside, the house talking as
 itself. What the room generates rides the play registers until blessed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-step-in >>
+<<~ ahu #the-step-in>>
 
 !! The Step-In ~ the ring of keys
 
@@ -59,14 +57,14 @@ standpoint, true-yet-incomplete; two nodes' readings of one place MAY disagree, 
 disagreement belongs in the record. The syad lens licenses standpoints of stance; the
 step-in licenses standpoints of ''place''; one discipline, two axes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;gFFILMipkQip7OXLCOgYYkh6GhmnV4K4NnQQI8UxXwI
+<<^ code="&#x0003;">>ni:///sha-256;LUj8u3o3wKTsV67aMHp9v2Y8nTmiaJ0rtAWcDWummuk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

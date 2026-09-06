@@ -12,17 +12,17 @@ import { transposeMarkdown, projectSubmission } from "../src/meme-markdown.js";
 
 const REPO = new URL("../../..", import.meta.url).pathname;
 
-const CARRIER = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+const CARRIER = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/probe >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/probe>>
 \`\`\`toml meta
 register = "Synthesis-Canon"
 uri-path = "ha.ka.ba/lares/api/pono/probe"
 \`\`\`
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Probe — a worked example
 
@@ -38,18 +38,18 @@ A confidence of 12/20 stays 12/20, and \`lar:///a//b\` keeps its slashes.
 
 * a bullet
 
-<<~ranks kind carrier -> descriptor >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<~ranks kind carrier -> descriptor>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
 
 \`\`\`\`
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 a teaching frame stays byte-identical, ''unrendered''
 \`\`\`\`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;AAAA_probe_check
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0003;">>ni:///sha-256;AAAA_probe_check
+<<^ code="&#x0004;" -> to=?>>
 `;
 
 describe("the submission projection", () => {
@@ -95,18 +95,18 @@ describe("the submission projection", () => {
     expect(p.markdown).toContain('<a id="head"></a>');
     expect(p.markdown).not.toContain("<<~/ahu");
     expect(p.markdown).toContain("- `lar:///ha.ka.ba/lares/api/pono/lar-uri`");
-    expect(p.markdown).toContain("`<<~ranks kind carrier -> descriptor >>`");
+    expect(p.markdown).toContain("`<<~ranks kind carrier -> descriptor>>`");
   });
 
   test("a fence seals its interior — the teaching frame passes byte-identical", () => {
-    expect(p.markdown).toContain('<<^ code="&#x0002;" >>\na teaching frame stays byte-identical');
+    expect(p.markdown).toContain('<<^ code="&#x0002;">>\na teaching frame stays byte-identical');
     expect(p.markdown).toContain("''unrendered''");
   });
 
   test("a sigil spanning lines travels whole, fenced", () => {
-    const src = "<<~ranks register a ~ one\n  -> b ~ two\n  -> c ~ three >>\nprose after\n";
+    const src = "<<~ranks register a ~ one\n  -> b ~ two\n  -> c ~ three>>\nprose after\n";
     const t = transposeMarkdown(src);
-    expect(t.markdown).toContain("```\n<<~ranks register a ~ one\n  -> b ~ two\n  -> c ~ three >>\n```");
+    expect(t.markdown).toContain("```\n<<~ranks register a ~ one\n  -> b ~ two\n  -> c ~ three>>\n```");
     expect(t.markdown).toContain("prose after");
   });
 
@@ -143,16 +143,16 @@ describe("against the live corpus", () => {
 
 describe("the tooth stands at one dispatch position", () => {
   const carrier = (open: string, close: string) =>
-    `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/probe >>\n\n` +
-    `<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/probe >>\n` +
-    `<<^ code="&#x0002;" >>\n\n${open}\n\n! A heading\n\n${close}\n\n` +
-    `<<^ code="&#x0003;" >>\n<<^ code="&#x0004;" -> to=? >>\n`;
+    `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/probe>>\n\n` +
+    `<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/probe>>\n` +
+    `<<^ code="&#x0002;">>\n\n${open}\n\n! A heading\n\n${close}\n\n` +
+    `<<^ code="&#x0003;">>\n<<^ code="&#x0004;" -> to=?>>\n`;
 
   const spellings: Array<[string, string, string]> = [
-    ["tooth then space", "<<~ ahu #entry >>", "<<~/ahu >>"],
-    ["close carries a space", "<<~ ahu #entry >>", "<<~ /ahu >>"],
-    ["tooth joined to the word", "<<~ahu #entry >>", "<<~/ahu >>"],
-    ["both joined", "<<~ahu #entry >>", "<<~ /ahu >>"],
+    ["tooth then space", "<<~ ahu #entry>>", "<<~/ahu>>"],
+    ["close carries a space", "<<~ ahu #entry>>", "<<~ /ahu>>"],
+    ["tooth joined to the word", "<<~ahu #entry>>", "<<~/ahu>>"],
+    ["both joined", "<<~ahu #entry>>", "<<~ /ahu>>"],
   ];
 
   // A close word carries its own slash, matching the plain register's
@@ -174,7 +174,7 @@ describe("the projector reads a framing opener that names its ends", () => {
   // homes it — so the projector answers to the current form alone and keeps no second branch.
   const URI = "lar:///a.b.c/x";
   const body = (ends: string) =>
-    [`<<^ code="&#x0001;" ${ends} >>`, "", "A line of body.", "", '<<^ code="&#x0004;" -> to=? >>'].join("\n");
+    [`<<^ code="&#x0001;" ${ends}>>`, "", "A line of body.", "", '<<^ code="&#x0004;" -> to=?>>'].join("\n");
 
   test("the named end reaches the projection as the carrier's address", () => {
     const p = projectSubmission(body(`from=? -> to=${URI}`), { title: "lar:///t" });

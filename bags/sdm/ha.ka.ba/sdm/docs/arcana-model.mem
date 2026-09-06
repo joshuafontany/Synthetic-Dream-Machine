@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/arcana-model >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/arcana-model>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/sdm/ha.ka.ba/sdm/docs/arcana-model.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
 rating     = "meme"
-register   = "Synthesis"
 retain     = true
 role       = "the Arcana model — thirteen rooms as verbs-of-will and axes-of-system, the guard-law, the charters, the walk order, and the word-sense laws that keep Arcana/module from blurring"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/docs/arcana-model"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Arcana Model ~ thirteen rooms, one closed set
 
@@ -28,9 +26,9 @@ the set closes against design history. Operator-approved 2026-08-14 (amendments 
 conversion doctrine); this meme seats the model in the graph so the conversion program, the
 FTLS Ch06 restructure, and the composition bag all cite one address.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-thirteen >>
+<<~ ahu #the-thirteen>>
 
 !! The Thirteen
 
@@ -61,9 +59,9 @@ cosmology's scars — life, death's border, the edge):
   reality'' — spectrum, shadow, boundary, transit, temporal exception; Time, gates, and
   reality-rewrites enter as sub-modules of the edge, never as a fourteenth room.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #guard-law >>
+<<~ ahu #guard-law>>
 
 !! The Arcana Guard-Law
 
@@ -75,9 +73,9 @@ it'': a power lives in one room for provenance and doctrine, and speaks as many 
 tag-vocabularies as its fiction earns. New corpora — Ars Magica, the Mage editions, their kin —
 enter as ''witness lanes'' feeding the same thirteen.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #blend-law >>
+<<~ ahu #blend-law>>
 
 !! The Blend Law (the Mage-1e warning, kept)
 
@@ -89,9 +87,9 @@ conjunction at the pattern layer. Same effect under two traditions = one canonic
 variant callouts (the recognizer law: //Magic Missile → see Tragic Missile//), never a split
 essence.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #walk-order >>
+<<~ ahu #walk-order>>
 
 !! The Walk of the Thirteen ~ five legs
 
@@ -101,9 +99,9 @@ Knowledge · Battle (Shield Ward P:2 seated) · Biomancy → ''◇ the Veiled Ro
 · Illusion · Psychic → ''▶ the Binding Rooms'' — Summoning · Deathless · Artifice (ends facing
 the gear door) → ''↺ Aftermath'' — Ascension's re-seat marks Ch06 alpha.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #word-senses >>
+<<~ ahu #word-senses>>
 
 !! Word-Sense Laws ~ one name never blurs
 
@@ -113,7 +111,7 @@ the gear door) → ''↺ Aftermath'' — Ascension's re-seat marks Ch06 alpha.
 * //card-module// (the bag's `modules/**`) → one power as one pattern-meme with seats and
   components. The name stays here.
 
-''"Arcana" points three ways — and rightly points to all'' <<~ confidence 12/20 >>
+''"Arcana" points three ways — and rightly points to all''
 //(operator-ruled 2026-08-15)://
 # ''The Powers Arcana'' — this meme's thirteen rooms. Owner: the SDM magic grammar.
 # ''The Arcana Level'' — the ''Tech/Arcana Level of Areas'': twin 0–20 ratings every Area
@@ -133,16 +131,16 @@ The three relate without fusing: the rooms name ''what a will can do'' · the le
 much a place can carry'' · the Pantheon names ''beings who ride as complete stacks'' — capability
 verb × capability saturation × capability totality. One word, three owners, no blur.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model >>
-<<~ loulou lar:///ha.ka.ba/sdm/docs/three-lineage-convergence >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model>>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/three-lineage-convergence>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;u4ktXhqM0BzLMefsnRB4Hyp46e9siALJunwmg65cNfc
+<<^ code="&#x0003;">>ni:///sha-256;yKAhL4ad5-SrGoW4iZDHXUD2EFwF8exfeFGdLWJlakg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

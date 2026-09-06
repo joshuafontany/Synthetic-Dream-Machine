@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/tiddlywiki-wikitext.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 15
 manao         = 16
 manaoio       = 14
-register      = "Provisional-Synthesis"
 retain        = true
 revised-on    = "2026-08-25"
 revision-note = "deep pass on two measured waves: the degradation law rewritten to the engine's real behavior (an unbound macro call renders as nothing, the parse stays total, storage round-trips verbatim), the extension mechanism stood up as a normative rule-object contract, the rule inventory corrected to real exported names (44), security gates measured, the test corpus cited as the executable conformance suite, references seated, and the document's voice held to TW5 ontology alone"
@@ -18,9 +17,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/tiddlywiki-wikitext"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #abstract >>
+<<~ ahu #abstract>>
 
 ! TiddlyWiki 5 Wikitext — the base syntax
 
@@ -38,9 +37,9 @@ mechanism'' and the ''total-parse law'' — it does not, and cannot, enumerate e
 run, any more than [RFC7763] could enumerate every Markdown. No wikitext exists that fails to
 parse.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #status >>
+<<~ ahu #status>>
 
 !! Status
 
@@ -54,9 +53,9 @@ The finished draft goes to the TiddlyWiki core maintainers for review before any
 it — nothing here binds anyone until it has. The document travels upstream as a rendered projection of
 this record; the record's own envelope belongs to its storage format, not to the description.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-load-bearing-property >>
+<<~ ahu #the-load-bearing-property>>
 
 !! The load-bearing property — the total parse
 
@@ -82,9 +81,9 @@ without loss, and renders the base constructs it shares. The `+tiddlywiki` suffi
 place — generic processing of the underlying representation — on parts 1 and 3 together with part 2's
 harmlessness.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #terminology >>
+<<~ ahu #terminology>>
 
 !! Terminology
 
@@ -102,9 +101,9 @@ harmlessness.
 | ''transclusion'' | inclusion of one tiddler's content in another's rendering, `{{title}}` and its variants. |
 | ''filter'' | the query sub-language (`[tag[x]sort[title]]`) that selects tiddlers; opaque to this grammar, defined by its own. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lexical-structure >>
+<<~ ahu #lexical-structure>>
 
 !! Lexical Structure
 
@@ -119,9 +118,9 @@ serves. The `\rules` pragma narrows the active set for the remainder of a parse,
 inventory below the dialect's true surface: a conforming description enumerates rules, never a fixed
 grammar, because the grammar of any given parse follows from the rules active in it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #extension-mechanism >>
+<<~ ahu #extension-mechanism>>
 
 !! The Extension Mechanism — the rule-object contract
 
@@ -163,9 +162,9 @@ contract, each visibly marked as an extension relative to the default registry �
 against CommonMark [CMARK]. One such external dialect, memetic-wikitext, documents itself in a sibling
 specification [MWT] under this contract.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #rule-inventory >>
+<<~ ahu #rule-inventory>>
 
 !! Rule Inventory — the default registry
 
@@ -234,9 +233,9 @@ and the configuration tiddlers filter by these strings.
 | `html` · `conditional` | the dual-class rules, at inline position. |
 | `mvvdisplayinline` | a macro/variable/value display form. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #degradation >>
+<<~ ahu #degradation>>
 
 !! The Degradation Rule
 
@@ -257,9 +256,9 @@ survives at rest as written.
 stand independent; a processor that rewrites source to match what it rendered destroys content the
 next processor may understand.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #conformance >>
+<<~ ahu #conformance>>
 
 !! Conformance
 
@@ -284,9 +283,9 @@ Normative force in this document attaches to ''parsing'' — input to parse tree
 enters the description only where load-bearing (the unbound-call fallback, the security gates) and otherwise left to
 implementations.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #test-suite >>
+<<~ ahu #test-suite>>
 
 !! The Executable Conformance Suite
 
@@ -297,9 +296,9 @@ expected parse tree, every node carrying its producing rule and source span) and
 fixtures under `editions/test/data/`, runnable as `node tiddlywiki.js editions/test`. A parser
 claiming core conformance SHOULD pass that suite for the constructs it implements.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #security >>
+<<~ ahu #security>>
 
 !! Security Considerations
 
@@ -321,9 +320,9 @@ not to the wikitext layer. An embedding application MUST NOT treat the wikitext 
 sanitizer; the gates above bound script execution through markup, not every channel a hostile
 document might use.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #media-type >>
+<<~ ahu #media-type>>
 
 !! Media Type
 
@@ -341,9 +340,9 @@ model: a hint naming which rule-set family the author intended, obliging no rece
 register additional parse rules (memetic-wikitext [MWT] among them) would name themselves there
 rather than minting sibling types.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #references >>
+<<~ ahu #references>>
 
 !! References
 
@@ -365,15 +364,15 @@ rather than minting sibling types.
 * ''[TW5]'' — the implementation: TiddlyWiki 5, `https://github.com/TiddlyWiki/TiddlyWiki5`,
   described here at `5.5.0-prerelease`, commit `69b98fc94`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;pqFC_C0geVk3sBecOM5U22CdcW8DrUmHLcsboByY-RA
+<<^ code="&#x0003;">>ni:///sha-256;T1YcWOZyOPZgc0TmnnVs6Lr2ExYENSP0_lnFfMobyyA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

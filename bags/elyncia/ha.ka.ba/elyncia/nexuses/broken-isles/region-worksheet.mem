@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet>>
 ```toml meta
 cacheable  = true
-confidence = 11
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "region worksheet — the Broken Isles: Mu's severed eastern shelf, three isles and their sky-islands, the fungal jungles, and the home water of Aki, Kai, and Ichi's clan; grown by play"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Broken Isles ~ Region Worksheet
 
@@ -40,9 +38,9 @@ Zealand · //Nausicaä and the Valley of the Wind//.
 so does the clan that carried Ichi's armor. Lady Aki's priesthood, Kai ʻĀ's hunting ranges, and the
 battlefield where the household was born all sit inside this Nexus.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-severing >>
+<<~ ahu #the-severing>>
 
 !! The Severing ~ what YOLD 5000 did here
 
@@ -67,9 +65,9 @@ sky-lane, or Underdark rift-gate — never on foot. The severance is permanent g
 mainland owes, or thinks it owes, its severed shelf · whether any stretch of old coast road still
 runs to a cliff and stops.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-three-isles >>
+<<~ ahu #the-three-isles>>
 
 !! The Three Isles
 
@@ -97,9 +95,9 @@ the hive-complex: aerial trade, mounts, and pollen diplomacy.
 ''Prompts:'' which isle holds Aki's priesthood and which holds Kai's ranges · what a spore key costs
 and who cuts them · which sky-island has drifted somewhere it should not have.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #powers >>
+<<~ ahu #powers>>
 
 !! Powers, Hazards, Nodes
 
@@ -129,9 +127,9 @@ composites, insect-derived enchantments''.
 ''Prompts:'' what the hivemind wants, if it wants · who brokers between the Circles and the hives
 this season · what a temporal pocket returns you into.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-wilds >>
+<<~ ahu #the-wilds>>
 
 !! The Wilds ~ the Nausicaä register
 
@@ -150,18 +148,18 @@ shrines among it. This is where Lady Aki followed an Ephyra and came back with a
 be salvaged and what they do not · why kaiju range these islands and what the hunters have learned
 not to say about it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MBTUg7EAJ82a_AVYjrmg4lRX8qXNh4c_dVE3hx-qoyI
+<<^ code="&#x0003;">>ni:///sha-256;srIO1S2jAOGioc4ngaoWRY9lMo3JiyJgMjt9SnAs1R8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

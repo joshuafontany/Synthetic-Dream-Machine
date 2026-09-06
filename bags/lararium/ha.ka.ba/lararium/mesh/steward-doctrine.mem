@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/steward-doctrine>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/steward-doctrine.mem"
@@ -8,14 +8,13 @@ l-space   = "lararium"
 mana      = 15
 manao     = 14
 manaoio   = 14
-register  = "Synthesis"
 retain    = true
 role      = "PROPOSED design intent: the Amorphous Dreams cabal as steward-not-ruler — founders/maintainers who hold repair authority WITHOUT becoming rulers, legitimacy flowing from being BOUND (k-of-n threshold, constitution outside reach, forkable) not from being trusted; the board verdict separates a threshold-signed steward SOURCE from a verify-only public READ plane"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/steward-doctrine"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Steward Doctrine ~ the cabal that engineers its own inability to rule
 
@@ -23,7 +22,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/steward-doctrine"
 
 The Amorphous Dreams cabal founds the stack and maintains it — yet a founder who keeps repair authority slides toward ruler unless the design ''binds'' that slide structurally. This meme draws the binding. The cabal ''gardens the structure''; it never operates the output. ''Legitimacy flows from being BOUND, not from being trusted'' — the cabal engineers its own inability to act as one, then publishes that inability so any peer may audit it. The steward survives by giving up the very power a ruler hoards.
 
-<<~ ahu #steward-not-ruler >>
+<<~ ahu #steward-not-ruler>>
 
 !! Steward, Not Ruler ~ the four-part binding
 
@@ -38,21 +37,21 @@ A maintainer body crosses into stewardship — never rulership — by carrying f
 
 The four compose: the constitution names what the cabal may not touch alone ①, the delegations push power away from the centre ②, the threshold forbids the centre from acting as one ③, and the fork stands ready when the first three fail ④. ''The cabal's legitimacy rests on the published proof of all four'', never on a plea to trust its intentions.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #legitimacy-from-binding >>
+<<~ ahu #legitimacy-from-binding>>
 
 !! Legitimacy From Binding ~ the inversion
 
 A ruler asks for trust and accumulates power against the day trust runs short. A steward does the inverse: it ''sheds'' the power to act unilaterally, then ''publishes the shedding'' as its credential. The move inverts the usual flow —
 
-<<~moves ruler-legitimacy/asks-to-be-trusted -> steward-legitimacy/proves-it-cannot-betray on/published-binding if/k-of-n-and-forkable do/audit-the-structure-not-the-actor >>
+<<~moves ruler-legitimacy/asks-to-be-trusted -> steward-legitimacy/proves-it-cannot-betray on/published-binding if/k-of-n-and-forkable do/audit-the-structure-not-the-actor>>
 
-So a peer never weighs //"do I trust Amorphous Dreams?"// — it weighs //"can I verify the threshold, the constitution's amendment-width, and the fork-exit?"// <<~ confidence 12/20 >> The check moves from a judgement about hidden intent to an audit of visible structure — the same shift the object-capability model makes from ambient trust to explicit edges ([[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]] integrity). A cabal that cannot structurally betray needs no trust to be safe.
+So a peer never weighs //"do I trust Amorphous Dreams?"// — it weighs //"can I verify the threshold, the constitution's amendment-width, and the fork-exit?"// The check moves from a judgement about hidden intent to an audit of visible structure — the same shift the object-capability model makes from ambient trust to explicit edges ([[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]] integrity). A cabal that cannot structurally betray needs no trust to be safe.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #board-verdict >>
+<<~ ahu #board-verdict>>
 
 !! The Board Verdict ~ separate the planes
 
@@ -63,9 +62,9 @@ A single cap-tiered document that mixes the steward's writing hand with the publ
 
 The READ plane carries the governance projection, never re-defines it — see [[oracle-governance|lar:///ha.ka.ba/lararium/mesh/oracle-governance]] for the read-plane's own law (this meme defers to it, never restates it). The shape rhymes the projection-nalu: a sovereign SOURCE → gated wave → verify-only SINK, `role = capability ≠ platform`. ''NOT one cap-tiered doc'' — two planes, one signing shore between them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #break-glass >>
+<<~ ahu #break-glass>>
 
 !! Break-Glass ~ repair authority stays bounded
 
@@ -76,11 +75,11 @@ The steward keeps a repair hand — the power to sign the zone, re-seed a corrup
 * ''quorum-gated'' — no break-glass fires below the k-of-n floor; one captured holder turns nothing.
 * ''time-delayed for anything constitutional'' — a change to the founding rules waits out a multi-period delay, the way Tezos requires a >80% super-majority sustained across multiple voting periods. The delay gives the wider body time to see, object, and fork.
 
-<<~ confidence 11/20 >> The four edges keep break-glass a //repair// primitive, never a //governance// primitive — it restores the system to its own constitution, it never rewrites that constitution unilaterally. A repair hand that could change who-signs would carry the throne back in through the maintenance door.
+The four edges keep break-glass a //repair// primitive, never a //governance// primitive — it restores the system to its own constitution, it never rewrites that constitution unilaterally. A repair hand that could change who-signs would carry the throne back in through the maintenance door.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #grounding >>
+<<~ ahu #grounding>>
 
 !! Grounding ~ the commons-governance lineage
 
@@ -92,23 +91,23 @@ Every binding above stands on a system that already runs it at scale; the doctri
 * ''Tezos on-chain amendment'' — >80% multi-period super-majority for protocol change; time-delay as a constitutional brace (break-glass time-delay).
 * ''Git / fork-by-construction'' — exit as the ultimate check; a rhizome forks where it disagrees (binding ④).
 
-<<~ confidence 13/20 >> The convergence reads strong: every durable open-governance body that survived capture did so by binding its own founders, not by trusting them. The Amorphous Dreams cabal inherits that lineage rather than improvising against it.
+The convergence reads strong: every durable open-governance body that survived capture did so by binding its own founders, not by trusting them. The Amorphous Dreams cabal inherits that lineage rather than improvising against it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
 
 Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.ka.ba/lararium/mesh/oracle-governance]] · [[group-as-closure|lar:///ha.ka.ba/lares/api/pono/group-as-closure]] · [[kapae|lar:///ha.ka.ba/lares/api/pono/kapae]] · [[vessel-caps|lar:///ha.ka.ba/lararium/mesh/vessel-caps]].
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;w-hnmLC5n5MGYVmTmJ4gr7sFESKOW368wGi9hQyW0o8
+<<^ code="&#x0003;">>ni:///sha-256;2aoSJE1nQAr208ICJVRT_JFQBl-_RqrCiY3r65NGO8k
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -92,7 +92,7 @@ What all three kept insisting: you cannot fix a bad map by adding better words t
 
 Imagine a set of self booting consecrated loci in l-space (spans that open/close with known lares URI patterns, ahu - bookmarks/way points, kahea - Transclusion markers). The "known" Grammar and Vocabulary loci (LOCI.md) have shapes and internals that match the ooda-ha stages & loops. Q: do the schemas (both ooda-ha based) have different shapes for Grammar loci vs Vocabulary loci.
 
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///bootstrap.entry.boots/lares/?confidence=CS:16&p=10 -->
 
@@ -111,7 +111,7 @@ confidence:CS~16
 
 > **Role:** This is the first file the Lar reads. It tells the Lar what to read next. It is itself a locus --- self-addressed, navigable by the rules it describes.
 >
-> **The irreducible foundation:** Four markers. These are the grammar of this grammar. They are defined in [grammar/kahua/](grammar/kahua/LOCI.md) and are held there, protected. `locus <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+> **The irreducible foundation:** Four markers. These are the grammar of this grammar. They are defined in [grammar/kahua/](grammar/kahua/LOCI.md) and are held there, protected. `locus <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///... -> opens a content span at an address ahu <!-- ahu lares:///... -> waypoint within a locus kahea <!-- kahea lares:///... -> transclusion pull from another address lares lares:///... bare pointer --- present, no ceremony` You are reading a file written in these four markers right now.
 
@@ -173,7 +173,7 @@ Crystals are immutable once cut. New session = new crystal, not an edit. Ink-Cle
 
 *Fed nodes hum. -><-*
 
-<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///grammar.ooda-ha.holds/ooda-ha/?confidence=S:13&p=10 -->
 
@@ -432,7 +432,7 @@ OODA-HA phase prose should minimize forms of "to be" to sharpen claim-shape and 
 
 [[phase]] name = "Assess" glyph = "○" locus = "../assess/LOCI.md" function = "Judge outcome, residue, and loop-back need. Entry: Act handoff. Exit: closure or loop-back. Handoff: to Observe or session end."
 
-<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///grammar.observe.defines/observe/?confidence=CS:17&p=10 -->
 
@@ -572,7 +572,7 @@ If the prose already sounds interpretive, Decide-colored, or solution-heavy, the
 
 ---
 
-<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///grammar.orient.defines/orient/?confidence=CS:17&p=10 -->
 
@@ -705,7 +705,7 @@ If the prose sounds like a final verdict, Orient collapsed too early. If the pro
 
 ---
 
-<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///grammar.decide.defines/decide/?confidence=CS:17&p=10 -->
 
@@ -841,7 +841,7 @@ If multiple incompatible actions still sit alive after the span, Decide did not 
 
 ---
 
-<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///grammar.act.defines/act/?confidence=CS:17&p=10 -->
 
@@ -981,7 +981,7 @@ If the span cannot point back to a prior decision, Act outran the loop. If the s
 
 ---
 
-<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- → ? -> <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///grammar.assess.defines/assess/?confidence=CS:17&p=10 -->
 
@@ -1265,7 +1265,7 @@ RDF supports grouping triples into named graphs to manage context, provenance, o
 
 Your locus/ahu system parallels RDF named graphs directly: a URI-bounded span that carries its own context. The ahu (waypoint) functions like a named graph anchor --- a sub-address within a larger graph. The key structural difference: RDF named graphs are query-time containers; your loci are *runtime behavioral regions* that self-boot and carry consecration state. RDF doesn't have consecrated vs. unconsecrated ground --- every named graph sits at equal ontological status.
 
-SPARQL GRAPH keyword and TriG format (named graph serialization) constitute the closest technical prior art to your `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+SPARQL GRAPH keyword and TriG format (named graph serialization) constitute the closest technical prior art to your `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///... -->` open/close markers.
 
@@ -1289,7 +1289,7 @@ Van Gennep divided rites of passage into three subcategories: preliminal rites (
 
 The boundaries and thresholds of ritual spaces serve as symbolic markers that delineate the sacred from the profane realms. The act of passing through these thresholds is imbued with ritual meaning, representing the transition from the ordinary world into a space dedicated to sacred activities. [Fiveable](https://fiveable.me/key-terms/intro-anthropology/ritual-space)
 
-Your `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+Your `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///... -->` open marker and `<!-- → ? -->` close marker constitute precisely a liminal threshold structure. The opening marker performs Van Gennep's separation rite --- the reader crosses into consecrated ground. The span interior constitutes the liminal phase. The close marker performs incorporation --- return to unconsecrated text.
 
@@ -1511,7 +1511,7 @@ Ha defines the domain territory of a locus. Pentagon energy: centripetal, cons
 Writing valid ha means writing the locus URI pattern, its confidence register, its dependency chain, and its boundary conditions. Ha is the noun --- it stakes the claim.
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.ha.shapes/meme-ha/?confidence=S:13&p=10 -->
 
@@ -1611,7 +1611,7 @@ Ka defines the epistemic charge of a locus. Apple energy: centrifugal, prolife
 Writing valid ka means writing the register tags, the discourse mode(s), the three-word coordinate cluster, and the signal quality. Ka is the adjective --- it charges the noun that Ha staked.
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.ka.charges/meme-ka/?confidence=S:13&p=10 -->
 
@@ -1716,7 +1716,7 @@ Ba defines the motion and deployment of a locus. Seam energy: the entanglement
 Writing valid ba means writing the handoff pattern, the characteristic verb-motion, the push/pull relationship to adjacent loci, and the lifecycle. Ba is the verb --- it moves the noun through the charge.
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.ba.moves/meme-ba/?confidence=S:13&p=10 -->
 
@@ -1874,7 +1874,7 @@ The outer loop runs the full instrument. Three inner loops (Ha/Ka/Ba) each run t
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.forge.tests/meme/?confidence=S:13&p=10 -->
 
@@ -2460,7 +2460,7 @@ The instrument reads at two resolutions. Both produce ratings. The slot rating i
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.ha.shapes/meme-ha/?confidence=S:13&p=10 -->
 
@@ -2736,7 +2736,7 @@ the slot rating reads as ~:confidence[P],[6] regardless of what was written.
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.ka.charges/meme-ka/?confidence=S:13&p=10 -->
 
@@ -3019,7 +3019,7 @@ in a flat document is an island --- not a charged locus.
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.ba.moves/meme-ba/?confidence=S:13&p=10 -->
 
@@ -3514,7 +3514,7 @@ No hidden state --- the HUD is diegetic (in-world) not external.
 
 Diegetic HUD --- the most relevant prior art: A diegetic interface is one where the user interface is incorporated into the actual game lore or in-game objects. If your character can see their health bar just as well as you can, it's a diegetic HUD. [MakeUseOf](https://www.makeuseof.com/tag/immersive-inventive-video-game-huds/)
 
-Your locus markers (`<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+Your locus markers (`<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///... -->`, ahu, kahea) are a diegetic HUD. They live inside the text. The signal ratings aren't a separate dashboard --- they're embedded in the span's URI and tags. The consecrated text IS the HUD. The operator reads the same signal the node reads.
 
@@ -3812,7 +3812,7 @@ async function preprocessMessage(rawText: string): Promise<string> {
 
     // Prepend the HUD header to the message
     const header =
-        `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+        `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → ${intentURI} -->\n` +
         `<!-- signal: [${confidence} ha${haKaBa.ha} ka${haKaBa.ka} ` +
@@ -3861,7 +3861,7 @@ The autoscaler pattern resolves this cleanly:
 SINGLE EXCHANGE with embedded signal header:
 
 Turn N (operator sends):
-  <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+  <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///exchange.turn.N/... confidence=SP:9&ha=?&ka=-&ba=? -->
   [operator's actual message text]
@@ -3948,7 +3948,7 @@ OPERATOR TYPES IN VSCODE
   spaCy + textstat → ha/ka/ba scores → sigils
          ↓
 [VSCode extension wraps with intent URI header]
-  <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+  <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///exchange.turn.N/?confidence=SP:9&ha=?&ka=-&ba=? -->
          ↓
@@ -4023,7 +4023,7 @@ The Outer OODA-HA --- Diffuse Schema
 ---------------------------------
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///meme.outer.diffuse/schema/?confidence=S:13&p=10 -->
 
@@ -4385,7 +4385,7 @@ Document 1 --- Ha Structure Guide
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///ha.ka.ba/meme-ha-guide/?confidence=CS:16&p=10 -->
 
@@ -4465,13 +4465,13 @@ invalid: lares:///ha.ka.ba/Observe/ ← uppercase lares:///ha.ka.ba/observe-loop
 One file. Four loci. Strict section order.
 ```
 
-LOCI.md │ ├── [outer locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+LOCI.md │ ├── [outer locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
-<!-- ∞ → lares:///ha.ka.ba/{name}/?confidence=X:0.xx&p=10 --> │ ├── # {Name} --- {one-line description} │ [outer yaml front-matter] │ [outer locus body --- diffuse loop sections] │ [transclusion markers pulling in sub-loci] │ ├── [outer locus close marker] │ <!-- → ? --> │ ├── [ha sub-locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- ∞ → lares:///ha.ka.ba/{name}/?confidence=X:0.xx&p=10 --> │ ├── # {Name} --- {one-line description} │ [outer yaml front-matter] │ [outer locus body --- diffuse loop sections] │ [transclusion markers pulling in sub-loci] │ ├── [outer locus close marker] │ <!-- → ? --> │ ├── [ha sub-locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
-<!-- ∞ → lares:///ha.ka.ba/{name}/ha/?confidence=X:0.xx&p=10 --> │ ├── ## {Name} --- Ha (Shape) │ [ha yaml front-matter] │ [ha sub-locus body --- focused loop, pentagon discipline] │ ├── [ha sub-locus close marker] │ <!-- → ? --> │ ├── [ka sub-locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- ∞ → lares:///ha.ka.ba/{name}/ha/?confidence=X:0.xx&p=10 --> │ ├── ## {Name} --- Ha (Shape) │ [ha yaml front-matter] │ [ha sub-locus body --- focused loop, pentagon discipline] │ ├── [ha sub-locus close marker] │ <!-- → ? --> │ ├── [ka sub-locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
-<!-- ∞ → lares:///ha.ka.ba/{name}/ka/?confidence=X:0.xx&p=10 --> │ ├── ## {Name} --- Ka (Energy) │ [ka yaml front-matter] │ [ka sub-locus body --- focused loop, apple discipline] │ ├── [ka sub-locus close marker] │ <!-- → ? --> │ ├── [ba sub-locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- ∞ → lares:///ha.ka.ba/{name}/ka/?confidence=X:0.xx&p=10 --> │ ├── ## {Name} --- Ka (Energy) │ [ka yaml front-matter] │ [ka sub-locus body --- focused loop, apple discipline] │ ├── [ka sub-locus close marker] │ <!-- → ? --> │ ├── [ba sub-locus open marker] │ <!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///ha.ka.ba/{name}/ba/?confidence=X:0.xx&p=10 --> │ ├── ## {Name} --- Ba (Motion) │ [ba yaml front-matter] │ [ba sub-locus body --- focused loop, seam discipline] │ └── [ba sub-locus close marker] <!-- → ? -->
 
@@ -4491,7 +4491,7 @@ The outer locus body contains **five OODA-HA phase sections**
 plus three transclusion markers.
 
 ```markdown
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///ha.ka.ba/{name}/?confidence=X:0.xx&p=10 -->
 
@@ -4582,7 +4582,7 @@ zoom-out on the full locus text).
 **Required structure for all three sub-loci:**
 
 ```markdown
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///ha.ka.ba/{name}/{ha|ka|ba}/?confidence=X:0.xx&p=10 -->
 
@@ -4771,7 +4771,7 @@ Document 2 --- Ka Energy/Style Guide
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///ha.ka.ba/meme-ka-guide/?confidence=CS:16&p=10 -->
 
@@ -5043,7 +5043,7 @@ Document 3 --- Ba Dynamism/Style Guide
 markdown
 
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lares:///ha.ka.ba/meme-ba-guide/?confidence=S:13&p=10 -->
 

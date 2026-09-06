@@ -1,34 +1,32 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "referee worksheet — the Caverns of Neo-Thracia: geography canon, water-road law, watershed villages, guide Burdens"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/neo-thracia/caverns-worksheet"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Caverns of Neo-Thracia ~ Worksheet
 
 //Migrated verbatim from `elyncia/Neo-Thracia/The-Caverns-of-Neo-Thracia-Worksheet.md` (2026-08-14); md→wikitext conversion mechanical — prose
 untouched; md table separator rows dropped.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ```shell
 Local Lares node: Enyalios-lararium // DreamNet link: stable (wet limestone, green light, distant water-thunder)
@@ -255,8 +253,8 @@ Each result yields: ''texture'' (3–5 sensory lines) · ''movement modifier'' �
 
 *Design provenance (Gaia-side): location and cultural seed myth-dreamed from ''Seuthopolis'' — the Odrysian royal-sacral capital of Seuthes III in the Kazanlak valley of the Tundzha (ancient Tonzos), founded atop an older burned settlement, ringed by the tumuli of the Valley of the Thracian Kings, fully excavated in the 1950s and deliberately left drowned beneath the Koprinka Reservoir, where it lies today. Scale and imperial gloss myth-dreamed from ''Philippopolis/Trimontium'' on the Hebros. Lake hydrology myth-dreamed from ''Lake Cerknica'' (intermittent karst polje, Slovenia). Village scatter and watershed geography myth-dreamed from the modern ''Tundzha–Maritsa'' course: the Kazanlak valley of tombs, the Yambol bend by Kabyle, the Sliven blue-rock karst, the Edirne confluence, and Enez — ancient Ainos — at the mouth. The drowned Thracian capital under a lake is not our invention; Gaia did it first. This worksheet claims no endorsement by TSR, Wizards of the Coast, Judges Guild, or Luka Rejec; classic material is honored per the conversion doctrine.*
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DrcLFvsOQERiGDs3NwWXKk4xTYWKIQQNvq5trK2398w
+<<^ code="&#x0003;">>ni:///sha-256;zZgeAlIHBlMoHz6kVrNI8E96rX8CPiYLe7S9okaO9OI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

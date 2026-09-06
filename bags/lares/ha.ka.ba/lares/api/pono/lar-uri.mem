@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lar-uri>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/api/pono/lar-uri.mem"
@@ -9,7 +9,6 @@ mana       = 18
 manao      = 17
 manaoio    = 17
 namespace  = "&#x2299;"
-register   = "Synthesis-Canon"
 retain     = true
 role       = "submission-grade specification for the lar: URI scheme — abstract, ABNF, five-planes reading (Provisional), resolution model, conformance, scheme registration, security; sibling submission to memetic-wikitext"
 status     = "standing"
@@ -19,11 +18,11 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #abstract >>
+<<~ ahu #abstract>>
 
 ! The `lar:` URI Scheme — A Naming Scheme for the Meme Graph
 
@@ -33,17 +32,17 @@ The `lar:` URI scheme names an address in a content-addressed meme graph — one
 
 This specification names the scheme syntax (a formal ABNF grammar), the path taxonomy, the kind-plane surface rule (the `bags/` and `wikis/` segments designate a CRDT surface, while a meme namespace stands bare), the resolution model, and the conformance, scheme-registration, and security obligations a processor MUST meet. It forms a ''sibling submission'' to the memetic-wikitext markup specification, which addresses its content by this scheme.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #status >>
+<<~ ahu #status>>
 
 !! Status and Maturity
 
 This document holds ''submission-draft'' maturity. The scheme law, path taxonomy, and kind-plane surface rule read as stable. The formal grammar, conformance classes, scheme registration, and security considerations carry RFC-2119 normative force. Items in the Annex remain open. Promotion to canon rests with the operator, not the document.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #introduction >>
+<<~ ahu #introduction>>
 
 !! Introduction — Scope, Audience, and Relation to memetic-wikitext
 
@@ -59,9 +58,9 @@ This document holds ''submission-draft'' maturity. The scheme law, path taxonomy
 
 ''Audience.'' Implementers of parsers and resolvers; authors and registry maintainers; peers federating CRDT bags.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #terminology >>
+<<~ ahu #terminology>>
 
 !! Terminology and Conformance Language
 
@@ -79,9 +78,9 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 | ''slot'' | one lowercase term (word or hyphen-compound) in the triple. |
 | ''fragment'' | a `#`-anchor whose meaning belongs to the media type of the unit it anchors into [RFC3986 §3.5]; the scheme carries it opaque. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scheme-syntax >>
+<<~ ahu #scheme-syntax>>
 
 !! Scheme Syntax (ABNF)
 
@@ -125,9 +124,9 @@ instrument walks it. The abbreviation carries no semantics of its own: `uri-path
 rule (#/equality) reads through the abbreviation unchanged. Defined here and only here: substructure
 within a scheme lives in the scheme's defining document [RFC7320].
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #path-taxonomy >>
+<<~ ahu #path-taxonomy>>
 
 !! Path Taxonomy
 
@@ -161,9 +160,9 @@ For every path: each slot holds exactly one lowercase term — a word or a hyphe
 
 The sync boundary admits ''any valid TW5 tiddler'': a plain-titled tiddler crosses into Automerge bags and onto disk as content, and a `lar:`-titled tiddler crosses as a ''placed carrier'' — address-bearing, corpus-walkable. What stays local, the ''system filters'' decide: the TW5 `$:/` plane — state, temp, drafts, shadow machinery — remains browser-local by filter, never by scheme. The scheme therefore gates nothing; it ''names''. The operational residency rules — system-tiddler siting, tag-value exemption, draft locality, and the `$:/plugins/` dual-distribution convention — ride the ''sync-namespace'' law: `lar:///ha.ka.ba/lararium/api/sync-namespace`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #equality >>
+<<~ ahu #equality>>
 
 !! Equality
 
@@ -189,9 +188,9 @@ the first a speaker's span, the second a place in the graph.
 A resolver MAY dereference less than equality distinguishes — disk projection, for one, reads only the
 path — but it MUST NOT report two addresses equal that this rule reads apart.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #minting >>
+<<~ ahu #minting>>
 
 !! Minting and Collision
 
@@ -213,9 +212,9 @@ Two consequences bind:
   a collision under it names an accident of hashing, never a disagreement of testimony. Where a name
   must mean one content everywhere, that plane carries it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bag-surface >>
+<<~ ahu #bag-surface>>
 
 !! Surface Designation — `@` Names a CRDT Surface
 
@@ -245,9 +244,9 @@ Law summary:
 
 Registry pattern. A bag MAY hold tiddlers whose titles read as //paths inside it//, pointing at other surfaces. `bags/catalog` carries the canonical example: it tracks corpus bags via entries at `lar:///ha.ka.ba/bags/catalog/corpus/{slug}` whose text holds the AutomergeUrl of the corresponding `lar:///ha.ka.ba/bags/{slug}` bag. Catalog catalogs; it does not host.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #five-planes >>
+<<~ ahu #five-planes>>
 
 !! The Five Planes
 
@@ -261,9 +260,9 @@ The schema carries five independent planes; conflating them trips residency, pro
 
 The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable names; adoption moves a unit to NAME-stable; LOAD/INGEST set RESIDENCY; the mirror grant sets SITING. No plane ever answers for another.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #resolution >>
+<<~ ahu #resolution>>
 
 !! Resolution Model
 
@@ -278,9 +277,9 @@ Session form names the speaker through the authority. It MUST stay within exchan
 
 ''The userinfo slot carries the grant by design.'' [RFC3986] §3.2.1 deprecates `user:password` in the userinfo slot — a secret before an unencrypted transport. The grant stands in that slot anyway, deliberately: `alias:grant` re-uses the one authority shape every URI reader — parser, tool, or model — already holds, bent to a new office rather than fighting it. The grant names a capability reference, never a secret: it authorizes nothing by itself, discloses nothing when logged, and rides only within exchange spans the transport already protects. The deprecation guards against a hazard this slot's cargo does not carry, and the familiar shape means every existing URI parser splits the speaker correctly with no new grammar taught.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #signal-law >>
+<<~ ahu #signal-law>>
 
 !! Signal Law
 
@@ -299,9 +298,9 @@ Fragment (`#`) carries an anchor whose meaning the anchored unit's media type de
 
 BEARING (path) → ANCHOR (fragment, media-type-defined).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #conformance >>
+<<~ ahu #conformance>>
 
 !! Conformance Classes
 
@@ -311,9 +310,9 @@ A ''conforming resolver'' MUST: resolve against the local graph only; map a kind
 
 A ''conforming author'' SHOULD: use local form for stable addresses and system resource names; reserve session form for exchange spans; place the slug at `child[2]` of a `bags`/`wikis` surface, and keep a meme namespace bare at `child[1]`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scheme-registration >>
+<<~ ahu #scheme-registration>>
 
 !! URI Scheme Registration (RFC 7595)
 
@@ -335,9 +334,9 @@ References:                 RFC 3986, RFC 4151, RFC 7595; [MWT], [PRANALA]
 
 The scheme registers as ''provisional''; a future submission MAY seek permanent status.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #security >>
+<<~ ahu #security>>
 
 !! Security Considerations
 
@@ -349,9 +348,9 @@ The scheme registers as ''provisional''; a future submission MAY seek permanent 
 
 ''Session-form leakage.'' Session form names a speaker. A processor MUST keep a session-form URI within its exchange span; a session-form URI reaching stable storage, a graph address, or a system resource name MUST surface as a violation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #examples >>
+<<~ ahu #examples>>
 
 !! Worked Examples (Non-Normative)
 
@@ -375,9 +374,9 @@ A registry entry pointing at another bag:
 lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///ha.ka.ba/bags/elyncia
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #references >>
+<<~ ahu #references>>
 
 !! Normative References
 
@@ -389,9 +388,9 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 * ''[MWT]'' — the memetic-wikitext markup specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`.
 * ''[PRANALA]'' — pranala edge law: `lar:///ha.ka.ba/lares/api/pono/pranala`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #annex-open >>
+<<~ ahu #annex-open>>
 
 !! Annex — Open Items (Informative)
 
@@ -401,9 +400,9 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 * ''Multi-bag disk projection — full-path-inside-bag.'' Every file lives at its full uri-path inside its holding bag's mirror (`bags/<bag>/<full-name>.mem`): directory = residency, interior = the name, whole. Any bag holds any name losslessly.
 * ''Turn-as-meme-graph.'' Live exchange turns already carry aim/yield wires, worn voices, rating marks, hoike/moolelo children — a meme-graph awaiting ingest. The unstable URIs minted per turn stand as declared-unresolved names for session-bag memes; an INGEST organ can decompose session logs into corpus.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense whether the URI carries local form or session form; identify path class
 ⏿ orient against scheme law — slot count, path class, `child[1]` kind-plane-or-namespace
@@ -411,20 +410,20 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 ▶ confirm the path holds ASCII only
 ↺ verify the three-term root and the `child[1]` fork (surface `@`-slug or bare namespace); close — address confirmed or violation named
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/sync-namespace >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/sync-namespace>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;WI-XqM2MpNZT9ucHux3ZOPm34i2qOUKtNeDsdfTa2zs
+<<^ code="&#x0003;">>ni:///sha-256;b_Ic6DIkqWdZQuyJS_dS1Nob5Ubc5oeHjOnJvFJJkj8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

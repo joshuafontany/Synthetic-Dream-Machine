@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/lamplighters-union>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/factions/lamplighters-union.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 15
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "faction meme — the Lamplighters' Union: herm-tenders of the dark roads, holders of the offworld lamp-infrastructure that reaches the void lanes, the Lagrange Chorus, Grandmother Spider — and the Lamplights"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/lamplighters-union"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Lamplighters' Union
 
@@ -29,9 +27,9 @@ patient, organized as a walking guild older than most of the roads it tends. The
 runs to lamps that have never rusted, oil that remembers its blessing, and ledgers of every
 dark stretch on three continents.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-far-infrastructure >>
+<<~ ahu #the-far-infrastructure>>
 
 !! The Far Infrastructure
 
@@ -51,14 +49,14 @@ extraordinary business connects the lit world to the dark between — the Union 
 DreamNet's far-side maintenance culture made visible, and the natural sibling-faction to any
 company repairing a broken Nexus one herm at a time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7FmCgl2H3Ss79_T97Y8vKCJEHomQAQKb_30s6JVVUHQ
+<<^ code="&#x0003;">>ni:///sha-256;qy_4yS14REGh65AuAgun4-Wt2lDnQJKd7vqpK1rs2fY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

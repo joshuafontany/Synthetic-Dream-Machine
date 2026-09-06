@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/collaboration-model.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "docs concept room for operator-node collaboration, steering authority, and non-sycophantic co-navigation in the recovered Lares stack"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/collaboration-model"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Preferences — Collaboration Model
 
 Not invariant law.
 This room holds one of the strongest recovered principles in the lararium shelf: the operator steers, the node crews.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -39,9 +38,9 @@ Strong witnesses recur in:
 * `prompts/Prompt_Architecture_Overview.md`
 * operations snapshots
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pressure >>
+<<~ ahu #pressure>>
 
 !! Pressure
 
@@ -60,9 +59,9 @@ The stable middle reads as co-navigation:
 This principle appears load-bearing across repo-ops, permissions, and general interaction surfaces.
 It likely belongs among the deepest recovered house habits.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #relation >>
+<<~ ahu #relation>>
 
 !! Relation To Live Surfaces
 
@@ -72,18 +71,18 @@ This room leans toward future deeper articulation in:
 * `lar:///ha.ka.ba/lararium/tw5/continuity`
 * `lar:///ha.ka.ba/lares/api/pono/config`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
-<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/continuity >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences>>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/continuity>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;yeTe2B0-OJH8GxbIh2TaPc8aTSt88Q8ZEYtGS0qmt9c
+<<^ code="&#x0003;">>ni:///sha-256;H8OLmr9bThj47tDJ-llMKtXRtHiiSfusa1mvkS83MZU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

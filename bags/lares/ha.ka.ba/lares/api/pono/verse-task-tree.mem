@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-task-tree>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/verse-task-tree.mem"
@@ -8,7 +8,6 @@ l-space     = "stable"
 mana        = 18
 manao       = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical: Verse execution model as task tree — forest topology, five concurrency operators as graph ops, task states, Await/Cancel semantics, cancellation cascade, return-escape, defer constraints, spawn-hides-suspends"
 status-date = "2026-05-15"
@@ -17,9 +16,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/verse-task-tree"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Verse Task Tree
 
@@ -35,9 +34,9 @@ and are bounded by their parent's lifetime.
 ''Source authority:'' Book of Verse ch. 14 (verselang.github.io/book/14_concurrency/);
 Unreal Fest 2023 "Verse Concurrency—Time Flow" PDF (Epic Games).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tree-topology >>
+<<~ ahu #tree-topology>>
 
 !! Tree Topology
 
@@ -55,9 +54,9 @@ spawn { ... }  →  NEW ROOT      ← exits the tree; new root in a new tree
 The forest has multiple possible roots: every `spawn` call adds one.
 Structured expressions never add roots — they only add children.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #operators-as-graph-ops >>
+<<~ ahu #operators-as-graph-ops>>
 
 !! Concurrency Operators as Graph Operations
 
@@ -87,9 +86,9 @@ is the scope boundary, not the first winner.
 iteration body. Placing branch/rush inside a loop accumulates unbounded background
 tasks with no clear cancellation boundary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #task-type >>
+<<~ ahu #task-type>>
 
 !! task(t) — Runtime Object
 
@@ -136,9 +135,9 @@ cancelable := interface:
 return type of `subscribable_event.Subscribe()` — these are unsubscribe handles,
 not task handles. Same interface, different semantic role.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #suspension-points >>
+<<~ ahu #suspension-points>>
 
 !! Suspension Points
 
@@ -157,9 +156,9 @@ interruption or context switching.
 `GetSecondsSinceEpoch()` returns the same value within a single transaction (frozen
 per-transaction). All calls within one atomic block share the same timestamp.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #return-escape >>
+<<~ ahu #return-escape>>
 
 !! `return` Escape Semantics
 
@@ -174,9 +173,9 @@ abandoned:
 This is a cross-cutting edge in the task tree: `return` pierces upward through
 nested concurrency nodes and exits the containing function scope.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #defer-constraints >>
+<<~ ahu #defer-constraints>>
 
 !! `defer` Constraints in Concurrency
 
@@ -191,9 +190,9 @@ immediately without delay, even when triggered by cancellation.
 spawned task runs independently (new root) and completes after the deferred scope
 has already exited.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #spawn-hides-suspends >>
+<<~ ahu #spawn-hides-suspends>>
 
 !! Why `spawn` Escapes the Tree — Formal Reason
 
@@ -215,9 +214,9 @@ automatic cancellation.
 non-failable signature. To spawn failable work, wrap it in a `<suspends>`
 function that handles failure internally.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #visual-verse-status >>
+<<~ ahu #visual-verse-status>>
 
 !! Visual Verse / UE6 (unreleased, architecture unconfirmed)
 
@@ -235,9 +234,9 @@ effect-typed, concurrent expression tree — a fundamentally different ontology.
 are already aligned with Verse's structured execution model. When Visual Verse ships,
 the sigil-to-Verse mapping in this document provides the canonical alignment surface.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verse-calculus-distinction >>
+<<~ ahu #verse-calculus-distinction>>
 
 !! Verse Calculus vs. UEFN Verse
 
@@ -257,22 +256,22 @@ VC's `choice` expression (`|`) — non-deterministic selection between two compu
 branches — is the formal ancestor of `race`/`rush`. UEFN Verse gives this structured,
 async-aware, deterministic semantics with the concurrency operators.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lele >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/holo >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/puka >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hui >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-type-lattice >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lele>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/holo>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/puka>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hui>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-type-lattice>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;BL-XctldT_qaDozpvRkBWlB2AfNe88KNJxRPvh7L_m8
+<<^ code="&#x0003;">>ni:///sha-256;LQAPfB4D2z0NWDQCIYMsUFQhKxVuw8wpk-TjaNsSdbU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

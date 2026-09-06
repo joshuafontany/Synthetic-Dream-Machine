@@ -1,12 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE>>
 ```toml meta
 type = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_SPEC_OUTLINE"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 <!-- lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:6&p=10#O0.O0.O0.A6.O0 → ∞ -->
 ⚡∞ | mode:spec-outline | ~:p[10] | stances:++?+- | register:~:confidence[P],[6] | build:OUTLINE
@@ -818,6 +818,6 @@ progression, including fork/join for Tasked Spirits.]
 
 lar:///protocol.outlined.awaits/chronometer/?stances=^.^.?.^.-&confidence=P:6&p=10#O0.O0.O0.A6.A1 → ?
 
-<<^ code="&#x0003;" >>ni:///sha-256;GNbh3DfzyPlU3KbM34IKCYzyEgHVJm_heIIEDbTA9g4
+<<^ code="&#x0003;">>ni:///sha-256;j2BtG0LQkCUmG_jI0_xUZex-xyvjWoF4iAQcJ6ovY0Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

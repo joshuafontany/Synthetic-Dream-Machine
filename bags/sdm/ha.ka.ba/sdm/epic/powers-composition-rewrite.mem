@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/epic/powers-composition-rewrite.mem"
 mana      = 19
 manao     = 19
 manaoio   = 18
-register  = "Synthesis-Canon"
 retain    = true
 role      = "epic plan: SDM+ Powers as navigable composition space"
 l-space   = "sdm"
@@ -15,9 +14,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Epic — Powers Composition Rewrite
 
@@ -27,7 +26,7 @@ uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 > Sprints 0–3 stand complete and committed; the composition model and the
 > module-nesting doctrine (D6) hold. Resume here once the OODA-HA cleanup lands.
 
-<<~ ahu #vision >>
+<<~ ahu #vision>>
 
 !! Vision
 
@@ -54,9 +53,9 @@ Instance (TW5 data, mutable): what Lady Aki currently holds, how it mutated.
 
 ''One verb.'' `#has`. Flat. No family, no role. Target URI carries semantics.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #base >>
+<<~ ahu #base>>
 
 !! The Base (Ha) — What Cannot Change
 
@@ -134,9 +133,9 @@ Path rank. Represents vertical differentiation within the tag space.
 
 This base does not change. The epic addresses it, links it, makes it queryable.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lineage >>
+<<~ ahu #lineage>>
 
 !! Design Lineage — Prior Art That Carries Load
 
@@ -152,9 +151,9 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 | ''Sera (Silat Serak)'' | Base-angle-lever: structure gates technique. You cannot throw the djuru unless you hold the correct langkah. Posture/stance tags may function as activation prerequisites, not just descriptive labels. The base precedes the technique. |
 | ''Chaos Magick'' | Belief as mutable tool — same pattern, different paradigm, different result. The instance layer may carry the operator's current paradigm relationship to the pattern, not just mutation records. Discordian catma tradition (already in Lares boot) says: a module's component list names what the pattern affords //under the current paradigm//. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #principles >>
+<<~ ahu #principles>>
 
 !! Principles
 
@@ -213,9 +212,9 @@ This base does not change. The epic addresses it, links it, makes it queryable.
     carry value, simplify the architecture to tags-only and skip the
     component meme tree.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #architecture >>
+<<~ ahu #architecture>>
 
 !! Bag Topology
 
@@ -246,9 +245,9 @@ bags/sdm/
     power-ontology.md
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
@@ -268,13 +267,13 @@ bags/sdm/
 Pranala form:
 
 ```text
-<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
-<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait >>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan>>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tw5-tags >>
+<<~ ahu #tw5-tags>>
 
 !! TW5 Tag Syntax — Component Representation
 
@@ -322,12 +321,12 @@ The TOML `tags` field mirrors the Pranala `#has` edges. `#has` edges carry graph
 !!! Rendering: `tag-pill` + `components`
 
 * `<<tag-pill "TAG">>` reads the pointer's `caption` for the label and follows its `meme` field — `<$link to={{{ [<target>get[meme]else<target>] }}}>` — to open the full meme.
-* A card declares composition ''once'' as `@sdm/tags/…` tags; the single call `<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>` lists every `@`-prefixed tag on the tiddler and renders each as a pill.
+* A card declares composition ''once'' as `@sdm/tags/…` tags; the single call `<<~ kahea lar:///ha.ka.ba/lararium/lists/components>>` lists every `@`-prefixed tag on the tiddler and renders each as a pill.
 * Both live as runtime `.tid` tagged `$:/tags/Global`: `lar:///ha.ka.ba/sdm/procedures/tag-pill` and `lar:///ha.ka.ba/lararium/lists/components`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #progressive-display >>
+<<~ ahu #progressive-display>>
 
 !! Progressive Display — Cards as Mnemonic Doorways
 
@@ -381,9 +380,9 @@ Bottom rows: component pills (what the Power does) and mount-point pills
 (where the Power can seat). Each pill clicks through in the wiki. On paper,
 each pill reads as a keyword the player learns over time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #shapes >>
+<<~ ahu #shapes>>
 
 !! Meme Shapes
 
@@ -404,9 +403,9 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 ```
 
 ```text
-<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan >>
-<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/domain/divination >>
-<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait >>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/function/ecm-scan>>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/components/domain/divination>>
+<<~ pranala #has from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait>>
 ```
 
 ''Mount-point'': `#contract #activation #cost #failure #removal #overflow #aftermath`
@@ -428,9 +427,9 @@ traits:
     unlock-progress: [shrine-of-kell-permission-pending]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decisions-resolved >>
+<<~ ahu #decisions-resolved>>
 
 !! Decisions Resolved — Session Zero (2026-05-31)
 
@@ -479,7 +478,7 @@ full meme; wrap in a `.sdm-tag-pill` span. Register wiki-wide via
 `lar:///ha.ka.ba/sdm/procedures/tag-pill` (see D5); `.tid` for runtime procedure
 code honors pono tiddler-format law. A companion `lar:///ha.ka.ba/lararium/lists/components`
 procedure renders every `@`-tag on a tiddler via `tag-pill`, so a card declares
-composition once as tags and calls one `<<~ kahea … >>`.
+composition once as tags and calls one `<<~ kahea …>>`.
 
 ''D5 — Naming canon: lar: URI titles + two-tiddler tags (2026-05-31, amends D4 & `#tw5-tags`).''
 Every meme's TW5 title is its full `lar:///` URI (= `lar:///` + `uri-path`). A
@@ -516,9 +515,9 @@ Same template, same `#has`/`#default` shape; the directory names the source-kind
 * Site as dual-view (stat-view / interior-map-view, per Spelljammer) — a
   projection concern, not a mount-point concern. Note for projections work.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sprints >>
+<<~ ahu #sprints>>
 
 !! Sprints — Instructions for the Enacting Lares
 
@@ -668,9 +667,9 @@ when two active modules interact on the same entity.
 Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 `#implements` web-wide retirement scope (separate epic).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #acceptance >>
+<<~ ahu #acceptance>>
 
 !! Epic Acceptance
 
@@ -681,14 +680,14 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 * [ ] Mount-point contracts for Trait, Item, Structure, Burden (+ Location decision)
 * [ ] 20+ component memes (addressed from Appendix Null)
 * [ ] Composition model doc with instance-data examples
-* [ ] Layer interaction / counterpoint doctrine (even at `Provisional 4/20`)
+* [ ] Layer interaction / counterpoint doctrine (even at)
 * [ ] Cards declare composition as `@sdm/tags/…` tags and render pills via one `components` kahea call
 * [ ] Every meme's title is its lar: URI; each component/mount has a short `.tid` tag pointer (caption + `meme`)
 * [ ] `tag-pill` procedure renders caption-as-pill and follows the pointer's `meme` field to the full meme
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-pressures >>
+<<~ ahu #open-pressures>>
 
 !! Open Design Pressures
 
@@ -730,9 +729,9 @@ instance-layer YAML currently tracks variant, recognized surfaces, and
 mutations. It may also need to track the operator's current frame/paradigm
 relationship to the mounted pattern. This remains speculative.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -761,9 +760,9 @@ relationship to the mounted pattern. This remains speculative.
 * ''`#implements` web-wide.'' Separate epic.
 * ''Bulk conversion.'' ~100+ Powers behind Sprint 5 gate.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #meme-edges >>
+<<~ ahu #meme-edges>>
 
 !! Edges
 
@@ -773,10 +772,10 @@ spine replaced by flat `#has`). The full record of what v0.0 held and why it
 retired lives in the transition witness; the files themselves remain in git
 history if ever needed.
 
-<<~ loulou lar:///ha.ka.ba/sdm/witness/architecture/v0.0-transition >>
+<<~ loulou lar:///ha.ka.ba/sdm/witness/architecture/v0.0-transition>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;UwZBgQ4EZV7Xz6__vryxBuQemkFpiwYNZ9XKiVX4cm0
+<<^ code="&#x0003;">>ni:///sha-256;S5RoCPK6KruJRffgeeQOXrnOPoyfnXG-1pn7k9OgddA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

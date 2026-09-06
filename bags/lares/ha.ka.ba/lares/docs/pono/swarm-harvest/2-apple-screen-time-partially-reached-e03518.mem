@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 2. Apple Screen Time — PARTIALLY REACHED. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/2-apple-screen-time-partially-reached-e03518"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! 2. Apple Screen Time — PARTIALLY REACHED
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 7,990 characters
 
@@ -106,14 +105,14 @@ https://support.microsoft.com/en-us/family-safety reached; it indexes the activi
 The only enforceable, quotable rule that the supervised party be *shown* they are managed is the FTC's Icon Notice — and its sole exception is the parent/child case, disabled by unverified purchaser self-attestation before install. Platform documentation (Apple, Microsoft, Google marketing) is written entirely from the supervisor's seat; across every page reached, not one sentence describes what the supervised person sees, is told, or is notified of when settings change. The child-facing surface that *is* documented (Apple's exception request) reveals a limit's existence only by collision with it.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8SCp5Fw6zFWCAzhPprQEenuOeWN-Vvc3GTWQSG-B-E4
+<<^ code="&#x0003;">>ni:///sha-256;oxexpWT8OPw680Ts9_C-bwRMld9JlktBvFmK-xDOdPw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/ahu >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/ahu>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/ahu.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 18
 manaoio   = 18
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "child-slot sigil — addressable worksite scope boundary; named ahu slots form the meme's tiddler structure"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-ahu"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/ahu"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Ahu
 
@@ -34,50 +33,50 @@ addressable child tiddler at `parentUri + slot`. The slot name becomes the tiddl
 Slots compose the structural skeleton of a meme's content; each MAY hold its own TOML meta header (set of tiddler fields)
 and wikitext body.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the slot name — a `#name` anchor; the boundary scope of this content unit
 ⏿ orient: child-slot, parent-relative addressing; slot name becomes tiddler title suffix
 ◇ parent at `lar:///uri`; this slot creates child at `lar:///uri#/name`; content stays inside boundary
 ▶ emit child-slot block node; deserializer produces a separate tiddler for each slot
-↺ parent tiddler references child via `<<~ kahea ahu #name >>`; child is independently addressable; confirm round-trip: parent body contains kahea~ahu summons; child has meta fields + content
+↺ parent tiddler references child via `<<~ kahea ahu #name>>`; child is independently addressable; confirm round-trip: parent body contains kahea~ahu summons; child has meta fields + content
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
 An ahu block MUST declare a slot name beginning with `#`.
-An ahu block MUST close with `<<~/ahu >>`.
+An ahu block MUST close with `<<~/ahu>>`.
 An ahu block MUST occupy a top-level scope; nesting MUST NOT occur.
 An ahu slot MUST produce an independently addressable tiddler at `parentUri + slot`.
-A parent tiddler MUST reference each child slot via `<<~ kahea ahu #slot >>` in its body.
+A parent tiddler MUST reference each child slot via `<<~ kahea ahu #slot>>` in its body.
 Child slot tiddlers MUST NOT duplicate the parent's meta TOML — they carry their own.
 
 The slot name `#head` is conventional for the meme's primary content body.
 The slot name `#source-shelf` is conventional for pranala edge declarations.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 Decomposed at the wiki's causal island boundaries:
 
 ```text
-<<~ ahu #slot-name >>
+<<~ ahu #slot-name>>
 content body
 
-<<~/ahu >>
+<<~/ahu>>
 ```
 
 Compound kahea-ahu summons form (in parent tiddler body after decomposition):
 ```text
-<<~ kahea ahu #slot-name >>
+<<~ kahea ahu #slot-name>>
 ```
 
 Regex (open, canonical):
@@ -85,11 +84,11 @@ Regex (open, canonical):
 /<<~[^>]*\bahu\s+(#[\w-]+)\s*>>/
 ```
 
-Close tag: `<<~/ahu >>`
+Close tag: `<<~/ahu>>`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -106,17 +105,17 @@ close-pattern = '<<~\/ahu\s*>>'
 slot = 1
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;b_cwk-NkKnmnuz2n-ZoZqlepx3vzAojD4GrcTWS9ocs
+<<^ code="&#x0003;">>ni:///sha-256;GsW2ELUHKYLxBv3BcTK4o6MtX0f6i8irNiUGlJrZgio
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

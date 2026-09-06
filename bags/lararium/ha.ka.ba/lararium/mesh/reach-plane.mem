@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reach-plane >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reach-plane>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/reach-plane.mem"
@@ -10,7 +10,6 @@ mana      = 16
 manao     = 15
 manaoio   = 15
 namespace = "&#x2695;"
-register  = "Synthesis"
 retain    = true
 role      = "OPERATOR-LOCKED (2026-08-08) bridge doctrine + the reach-vault design ledger: the vessel holds FOREIGN credentials in confidence so a human posts to Bluesky/Kowloon/elsewhere FROM their wiki — Lararium as force-multiplier. The load-bearing split: a foreign credential buys REACH, never IDENTITY, so custody of one never touches the sovereign plane. Four locks — BRIDGE (never present-as-actor, never cap-translation) · OUTWARD-ONLY · MAILBOX-not-seat · DID-method-compatible first. The reach chain TRUNCATES at CONTRACT (a world-readable credential stops being one) and never federates. Names the honeypot hazard and the far-side revocation asymmetry. DESIGN RULINGS: COMPOSE-AND-REQUEST (the glass drafts, the hearth posts — a browser holds no credential) · the vault reads as a cap-tiered BAG so the truncation falls out of a FLOOR the keystone already meets against · a per-service MANIFEST declares edit/thread/length/media/expiry · content-addressed EMIT RECEIPTS carrying the emitting vessel · health-per-credential, never a retry loop. OPEN: OAuth refresh makes the vault non-passive (research+testing owed) · the persona-binding privacy tension at high account cardinality · the CONTRACT floor oracle · credential onboarding · Kowloon actor-key custody."
 status    = "designed"
@@ -21,11 +20,11 @@ uri-path  = "ha.ka.ba/lararium/mesh/reach-plane"
 written   = "2026-08-08"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Reach Plane ~ foreign credentials as instruments the vessel holds
 
@@ -35,11 +34,11 @@ written   = "2026-08-08"
 
 A human writes in their wiki and wants the words to land on Bluesky, on Kowloon, on whatever surface their people already stand in. ''The vessel carries the credential so the human never has to.'' That reads as the force-multiplier: one place to write, many places to reach.
 
-<<~ confidence 14/20 >> The whole design turns on ''one split, held absolutely'': a foreign credential buys ''REACH'', never ''IDENTITY''. Holding one therefore never touches the sovereign plane, and the non-custodial-by-type law survives intact — the same medicine the attestation plane takes at the naming layer (#/attestation-plane), applied one layer inward.
+The whole design turns on ''one split, held absolutely'': a foreign credential buys ''REACH'', never ''IDENTITY''. Holding one therefore never touches the sovereign plane, and the non-custodial-by-type law survives intact — the same medicine the attestation plane takes at the naming layer (#/attestation-plane), applied one layer inward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-planes >>
+<<~ ahu #three-planes>>
 
 !! Three planes, unfused
 
@@ -47,21 +46,21 @@ A human writes in their wiki and wants the words to land on Bluesky, on Kowloon,
 \procedure ~Plane(Type:"" Params:"") ~Plane <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Plane Sovereign "holds/vessel-keys holds/persona-KELs holds/the-Nexus-contract leaves/never custody/NON-CUSTODIAL-BY-TYPE" >>
-<<~Plane Reach "holds/foreign-app-credentials reads/an-instrument-never-an-identity seals/at-rest separates/per-app-HKDF-info travels/fleet-only" >>
-<<~Plane Projection "holds/nothing renders/bag-to-foreign-surface law/RENDER-never-copy" >>
+<<~Plane Sovereign "holds/vessel-keys holds/persona-KELs holds/the-Nexus-contract leaves/never custody/NON-CUSTODIAL-BY-TYPE">>
+<<~Plane Reach "holds/foreign-app-credentials reads/an-instrument-never-an-identity seals/at-rest separates/per-app-HKDF-info travels/fleet-only">>
+<<~Plane Projection "holds/nothing renders/bag-to-foreign-surface law/RENDER-never-copy">>
 
 ''The sovereign plane stands unchanged by this doctrine.'' It gains no credential, loses no rule. The reach plane sits ''beside'' it, and the projection plane consumes both.
 
 The flow reuses instruments already standing — no new gate, no new distribution mechanism:
 
-<<~flows author-in-the-wiki -> the-content-already-declares-its-cap-tier -> the-Confluence-gate-checks-declared∧floor -> render-to-the-target-native-form -> sign-and-post-with-THAT-target-reach-cap >>
+<<~flows author-in-the-wiki -> the-content-already-declares-its-cap-tier -> the-Confluence-gate-checks-declared∧floor -> render-to-the-target-native-form -> sign-and-post-with-THAT-target-reach-cap>>
 
-<<~ confidence 12/20 >> ''Posting outward reads as another projection sink.'' The disk-projection law already names bags as canon and `wikis/` as a render of them (#/disk-projection-law); a foreign surface joins that list as a target, never as a second source. ''One genuinely new subsystem falls out of the whole design: the credential vault.''
+''Posting outward reads as another projection sink.'' The disk-projection law already names bags as canon and `wikis/` as a render of them (#/disk-projection-law); a foreign surface joins that list as a target, never as a second source. ''One genuinely new subsystem falls out of the whole design: the credential vault.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #compose-and-request >>
+<<~ ahu #compose-and-request>>
 
 !! Compose-and-request ~ the glass drafts, the hearth posts
 
@@ -69,13 +68,13 @@ The flow reuses instruments already standing — no new gate, no new distributio
 
 The reason reads structural rather than cautious. The browser stands as the weakest island the stack admits — its sovereign key material rests where a same-origin read reaches it, and the origin-attestation question stays open beneath that (#/secure-context). Handing it a drawer of foreign credentials would seat the honeypot on the one island with the thinnest walls.
 
-<<~ confidence 14/20 >> ''The cost stays honest:'' a fleet with no node cannot post. That reads as the same shape the family mesh already assumes — a hearth stands somewhere — rather than as a new dependency.
+''The cost stays honest:'' a fleet with no node cannot post. That reads as the same shape the family mesh already assumes — a hearth stands somewhere — rather than as a new dependency.
 
 ''The grain the operator named:'' a dark-by-default net where the glass a person carries stays deliberately thin, and what matters sits at a place you keep. The phone drafts in the open; the hearth holds what a search of the phone must not find. The split buys a property rather than costing a convenience.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #downstream-law >>
+<<~ ahu #downstream-law>>
 
 !! The downstream law ~ a foreign actor never sits upstream of a vessel
 
@@ -83,9 +82,9 @@ The reason reads structural rather than cautious. The browser stands as the weak
 
 This is the same shape the domain takes at the naming layer, and it is what makes operating foreign infrastructure safe. A Kowloon server generates and stores its users' private keys beside a password hash — custodial by type. Running one ourselves therefore stands up ''reach infrastructure we operate'', never an identity root anything depends on. Invert the law and the mesh inherits every custody property of the weakest surface it touches.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-four-locks >>
+<<~ ahu #the-four-locks>>
 
 !! The four locks (operator, 2026-08-08)
 
@@ -99,7 +98,7 @@ Three readings of "compatible via capabilities" carry three different costs. ''T
 | ''present-as-actor'' | a vessel holds an actorId the far side accepts, signing with keys never surrendered | medium | the far side's verify path must take a key we control |
 | ''cap-translation'' — REFUSED | `#has` stacks map bidirectionally onto foreign visibility primitives, caps honored both ways | high | ''the declared∧floor gate goes advisory'' |
 
-<<~ confidence 14/20 >> ''The refusal has a reason, not a preference: a capability honored on the far side is not a capability — it is a request.'' A foreign server decides its own visibility server-side, so translating our caps outward would leave the cap-tier keystone (#/cap-tier) enforcing nothing. The keystone's whole value rides on the gate never trusting a declaration to loosen; handing enforcement to a remote party loosens it by construction.
+''The refusal has a reason, not a preference: a capability honored on the far side is not a capability — it is a request.'' A foreign server decides its own visibility server-side, so translating our caps outward would leave the cap-tier keystone (#/cap-tier) enforcing nothing. The keystone's whole value rides on the gate never trusting a declaration to loosen; handing enforcement to a remote party loosens it by construction.
 
 !!! 2 · OUTWARD-ONLY
 
@@ -113,27 +112,27 @@ A person whose keys live on someone else's server MAY hold a ''mailbox'' in the 
 
 Of the surfaces a foreign identity protocol offers, take the ''resolvable-identity'' one first: an identity a foreign client can resolve, with no foreign data plane adopted. It buys the severability property outright (#attestation-plane, ruling 1) at the smallest surface, and forecloses nothing.
 
-<<~ confidence 12/20 >> ''Interop pressure enforces our own invariant better than our tests do.'' A neighbour that stores keys rather than handles will simply stop resolving a stack that drifts back toward name-as-identity — an outside island checking a law we would otherwise check only against ourselves.
+''Interop pressure enforces our own invariant better than our tests do.'' A neighbour that stores keys rather than handles will simply stop resolving a stack that drifts back toward name-as-identity — an outside island checking a law we would otherwise check only against ourselves.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-truncated-chain >>
+<<~ ahu #the-truncated-chain>>
 
 !! The truncated chain ~ where a credential may travel
 
 A reach credential rides the ''same'' chain a bag rides (#/cap-tier) and the ''same'' delivery mechanism (keyring-delivery to a recipient set). It differs in one structural way: ''the chain truncates.''
 
-<<~ranks reach veil@0 ~ {this-vessel} · the credential opens nowhere else -> personagroup@1 ~ {your-fleet} · keyring-delivered so every device of yours may post -> contract@2 ~ {your-fleet ∪ a-cabal} · a genuinely shared account, and the blast radius grows to match >>
+<<~ranks reach veil@0 ~ {this-vessel} · the credential opens nowhere else -> personagroup@1 ~ {your-fleet} · keyring-delivered so every device of yours may post -> contract@2 ~ {your-fleet ∪ a-cabal} · a genuinely shared account, and the blast radius grows to match>>
 
 ''PUBLIC IS REFUSED BY TYPE.'' A world-readable credential stops being a credential. The reach plane therefore carries a ''ceiling at CONTRACT'' where the content chain carries none — the one place the two planes' orders differ, and the difference is not a policy but a definition.
 
 ''A reach credential NEVER federates.'' It fleet-syncs (your phone must be able to post) and it delivers to a contracted set when the account is genuinely shared, and it crosses no Nexus boundary in either case — the same law the sovereign follow-graph already holds (`personaGroup fleet-sync, never federate`).
 
-<<~ confidence 12/20 >> ''The tier IS the blast radius.'' Declaring a credential CONTRACT enlarges the honeypot to the whole cabal, so the tighten-only ratchet (#cap-tier keystone) reads as a security control here rather than a hygiene one — and declassifying a credential upward wants the same operator-root robust-declassification act, never a content-derived one.
+''The tier IS the blast radius.'' Declaring a credential CONTRACT enlarges the honeypot to the whole cabal, so the tighten-only ratchet (#cap-tier keystone) reads as a security control here rather than a hygiene one — and declassifying a credential upward wants the same operator-root robust-declassification act, never a content-derived one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-honeypot >>
+<<~ ahu #the-honeypot>>
 
 !! The honeypot ~ the hazard this doctrine accepts
 
@@ -149,41 +148,41 @@ A reach credential rides the ''same'' chain a bag rides (#/cap-tier) and the ''s
 
 ''THE GAP IS THE VAULT ITSELF'', and it raises the weight of the origin-attestation question (#/secure-context) — a vessel holding ten credentials makes its origin a far richer target than a vessel holding one identity.
 
-''THE CARRIER DECIDES WHAT A KEYCHAIN IS WORTH'' — and the reach plane inverts the caution the sovereign floor earns. Losing the archive KEK loses the identity floor, which nothing re-mints, so that carrier takes the most conservative gate the stack holds. Losing a reach-vault KEK costs ''a re-authorization'' — the downstream law again (#downstream-law: a re-mint, never a self). <<~ confidence 12/20 >> So an OS-keychain KEK reads MORE appropriate here than on the archive, precisely because this plane holds the disposable thing. The KEK source composes across carriers; the ''policy'' per carrier reads from what its loss costs.
+''THE CARRIER DECIDES WHAT A KEYCHAIN IS WORTH'' — and the reach plane inverts the caution the sovereign floor earns. Losing the archive KEK loses the identity floor, which nothing re-mints, so that carrier takes the most conservative gate the stack holds. Losing a reach-vault KEK costs ''a re-authorization'' — the downstream law again (#downstream-law: a re-mint, never a self). So an OS-keychain KEK reads MORE appropriate here than on the archive, precisely because this plane holds the disposable thing. The KEK source composes across carriers; the ''policy'' per carrier reads from what its loss costs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #far-side-revocation >>
+<<~ ahu #far-side-revocation>>
 
 !! The far-side revocation asymmetry
 
 A capability this stack grants, it revokes — by non-renewal of a lease, under no-global-now. ''A foreign credential inverts that.'' The far side may revoke unilaterally, at an instant we do not observe, and the vessel learns by ''failure'' rather than by notice.
 
-<<~ confidence 11/20 >> That asymmetry reads as honest rather than broken — it names precisely what holding someone else's instrument costs — but it MUST surface as a first-class state rather than an error. A projection that silently stops landing is worse than one that reports a dead reach cap.
+That asymmetry reads as honest rather than broken — it names precisely what holding someone else's instrument costs — but it MUST surface as a first-class state rather than an error. A projection that silently stops landing is worse than one that reports a dead reach cap.
 
 ''HEALTH PER CREDENTIAL, AND NEVER A RETRY LOOP'' (approved, operator 2026-08-08). Each credential carries a health state, updated on use and readable in status, so a dead one reads DEAD rather than reading as a projection that quietly stopped working. And the vessel MUST NOT retry against a refused credential: repeated authentication attempts read to the far side as an attack, which converts a revocation into a ban.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-vault-reads-as-a-bag >>
+<<~ ahu #the-vault-reads-as-a-bag>>
 
 !! The vault reads as a bag, never as a third carrier
 
 The vessel already holds two at-rest secret carriers under a two-file ratify discipline, and both stay ''per-device by design'' — the archive and the device-share never replicate. A reach credential declared PERSONAGROUP must reach the ''fleet'', so it cannot ride that discipline at all.
 
-<<~ confidence 12/20 >> Read as a ''cap-tiered bag'' instead and almost nothing new gets built: sealing-on-the-wire already runs universal, the declared∧floor gate already stands, keyring-delivery to a recipient set already delivers, fleet-sync already syncs.
+Read as a ''cap-tiered bag'' instead and almost nothing new gets built: sealing-on-the-wire already runs universal, the declared∧floor gate already stands, keyring-delivery to a recipient set already delivers, fleet-sync already syncs.
 
 ''THE TRUNCATION FALLS OUT OF A FLOOR, NEVER A CEILING'' — which reads as the tell that the framing lands right. The keystone already computes `meet(declared, floor)`, so a credential bag floored at CONTRACT meets any PUBLIC declaration back down on its own. Publishing a credential becomes ''mechanically impossible'' rather than merely forbidden, and no new enforcement carries it.
 
 ''BUILT'' — `isContractSecretsPlane(documentId)` joins the floor oracle as a third reading, and it runs ''FIRST, ahead of the public reading''. The order carries the entire guarantee: placed anywhere later it never fires, because a public reading would already have returned. Named for the ''property'' rather than for credentials, since it fits any store whose bytes stop meaning anything the moment they go world-readable — other stores may join it.
 
-<<~ confidence 15/20 >> ''Registration alone would not have held.'' Absent the ordered reading, the truncation would rest on nobody having registered a credential bag as a public plane — protection by omission, which reads identically to no protection at all. Mutation-verified: move the reading below `isPublicPlane` and two tests fall, the collided-plane case among them.
+''Registration alone would not have held.'' Absent the ordered reading, the truncation would rest on nobody having registered a credential bag as a public plane — protection by omission, which reads identically to no protection at all. Mutation-verified: move the reading below `isPublicPlane` and two tests fall, the collided-plane case among them.
 
 ''CONTRACT rather than PERSONAGROUP, deliberately'' — a credential a cabal legitimately shares needs the cabal inside the read-cap set; a personal secret then DECLARES tighter, the direction a declaration may always move.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-service-manifest >>
+<<~ ahu #the-service-manifest>>
 
 !! The service manifest ~ each surface declares what it can do
 
@@ -195,9 +194,9 @@ The manifest exists because ''the surfaces genuinely differ and none of them tel
 
 ''THREADING RIDES LATER.'' Splitting a long bag or meme across a thread wants its own design, and it wants live wikis to design against. Named here so the manifest's `threads` field has a consumer waiting.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #emit-receipts >>
+<<~ ahu #emit-receipts>>
 
 !! Emit receipts ~ content-addressed, from the first line
 
@@ -207,9 +206,9 @@ The manifest exists because ''the surfaces genuinely differ and none of them tel
 
 ''THE VESSEL RIDES THE RECEIPT, and the shared-character case is why.'' When a cabal shares a credential for one character (#/persona-binding), the world sees one voice and the cabal needs to know ''whose hand moved''. Recording the emitting vessel keeps a shared character's timeline attributable ''inside'' the contract without leaking anything outside it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #persona-binding >>
+<<~ ahu #persona-binding>>
 
 !! Persona binding ~ high cardinality, and two kinds of breach
 
@@ -227,13 +226,13 @@ Three consequences follow directly:
 
 ''RULED (operator, 2026-08-08), and it dissolves the tension rather than answering it.'' A lararium identity and a reach credential stand in a ''many-to-many'' relation — shared multitudes on both sides. A lararium identity MAY carry a pet-name mirroring an outside-service identity, and that reads as ''an alignment of pet-names'', never as ownership. ''Other lararium identities hold the same caps.''
 
-<<~ confidence 14/20 >> The privacy tension evaporates because the object it needed dissolves: ''no per-persona credential index exists to leak.'' A credential is a cap the fleet holds; nothing maps a face to it, so nothing reconstructs the multitude from a sync. The multitude-view stays sovereign because the reach plane never had to know it.
+The privacy tension evaporates because the object it needed dissolves: ''no per-persona credential index exists to leak.'' A credential is a cap the fleet holds; nothing maps a face to it, so nothing reconstructs the multitude from a sync. The multitude-view stays sovereign because the reach plane never had to know it.
 
 ''AND THE STRUCTURAL GUARANTEE GOES WITH IT, deliberately.'' A design where one face reaches exactly one credential could make a wrong-persona post impossible; many-to-many makes it ''possible by construction'', because several people voicing one character IS the requirement rather than a leak in it. What carries the care instead reads as the render law already standing one meme over: ''EDGE, NEVER BADGE'' (#attestation-plane, ruling 1) — an emission shows which credential and which aligned pet-name it rides, so a mismatch stands ''visible'' where it can no longer stand ''prevented''. A name that appears to come from nowhere has already lost the property.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cred-onboarding >>
+<<~ ahu #cred-onboarding>>
 
 !! Credential onboarding ~ named, unbuilt
 
@@ -247,38 +246,38 @@ Three consequences follow directly:
 
 ''The onboarding surface also decides where a credential first exists in the clear'', which makes it a security design and not only a UX one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-stays-open >>
+<<~ ahu #what-stays-open>>
 
 !! What stays open
 
-* ''OAUTH REFRESH MAKES THE VAULT NON-PASSIVE — research and testing owed.'' A sealed store opens when asked; an expiring credential must ''reach out'' to renew itself, so the vault acquires a clock and an outbound network leg, and the refresh token itself rotates. Open beneath it: who performs the refresh (a daemon waking to refresh holds decrypted credentials in a window the archive design works hard to narrow), under which key, and whether a refresh may run with no operator present. <<~ confidence 11/20 >> ''One consequence already reads clearly:'' prefer surfaces offering non-expiring attenuated credentials, which turns the honeypot section's preference into something closer to a rule — and measuring which surfaces offer them may shrink the whole apparatus to nothing, so the first act reads as a ''survey'' rather than a design.
+* ''OAUTH REFRESH MAKES THE VAULT NON-PASSIVE — research and testing owed.'' A sealed store opens when asked; an expiring credential must ''reach out'' to renew itself, so the vault acquires a clock and an outbound network leg, and the refresh token itself rotates. Open beneath it: who performs the refresh (a daemon waking to refresh holds decrypted credentials in a window the archive design works hard to narrow), under which key, and whether a refresh may run with no operator present. ''One consequence already reads clearly:'' prefer surfaces offering non-expiring attenuated credentials, which turns the honeypot section's preference into something closer to a rule — and measuring which surfaces offer them may shrink the whole apparatus to nothing, so the first act reads as a ''survey'' rather than a design.
 
   ''KAIROS NAMES THE ENTITY THAT WOULD DO IT'' (operator pet-name, 2026-08-08). The refresh does NOT want a timer daemon — it wants an ''entity holding a narrow autonomous capability'', acting at the opportune moment rather than on a clock. Kairos against chronos: the right time, never the next tick. That framing lands the design where the ontology already stands — a nameless entity with a `#has` stack, holding exactly the caps its one act needs and nothing beside them — instead of widening a daemon that already holds too much. ''What Kairos may hold, and what it must be unable to reach, reads as the design.''
 * ''The CONTRACT floor oracle'' — ''BUILT'' as `isContractSecretsPlane`, checked ahead of the public reading (#/the-vault-reads-as-a-bag).
 * ''Kowloon actor-key custody'' — their schema mints a user's keypair server-side, which does not compose as written with the downstream law (#/downstream-law). Two ways through: patch the server to accept an externally-held actor key, or accept the server-held key as a reach instrument and name the custody out loud. ''Deferred until a Kowloon server actually stands.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/crypto >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/disk-projection-law >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/network-edge >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/nexus-topology>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/crypto>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/disk-projection-law>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/network-edge>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ff4Vpfg0hrrfPe-OHJd6wehE0L-2PR368SEt2NVnbVk
+<<^ code="&#x0003;">>ni:///sha-256;K8HMW6-9ih5Y84rB3ufsp-6Jj5DAaEjIIsUAKG1kKQM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

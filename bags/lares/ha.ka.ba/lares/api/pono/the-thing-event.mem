@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/the-thing-event >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/the-thing-event>>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/the-thing-event.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 10
 manao         = 10
 manaoio       = 10
-register      = "Provisional-Synthesis"
 retain        = true
 revision-note = "PROVISIONAL — the conversion act: a fed guest re-anchors from host to realm at a periodic assembly. Shaped, unbuilt, and deliberately UNDER-SPECIFIED: the mesh holds that a re-anchoring happened and never what made it valid"
 role          = "the conversion act — how a stranger begins to dwell. The guest dwells WITH a host (a dyad, one edge); the thing-event re-anchors that dwelling INTO the realm. The assembly stands as the third party that inverts the host-payment problem: the host is paid in depth for GIVING the guest away, never in a dependant kept"
@@ -17,11 +16,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/the-thing-event"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Thing-Event ~ how a stranger begins to dwell
 
@@ -31,9 +30,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/the-thing-event"
 
 ''The thing-event re-anchors the dwelling from the HOST to the REALM.'' The guest stops dwelling-//with// and begins dwelling-//in//. So the conversion IS the transition from edge to realm — the same transition that separates a pairwise threshold from a connectivity condition. One move answers both, because they read as one problem from two ends.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-assembly-pays >>
+<<~ ahu #the-assembly-pays>>
 
 !! The Assembly ~ the third party that inverts the host's payment
 
@@ -45,9 +44,9 @@ And it clears the Roman objection with no fiction. `natalium restitutio` ran on 
 
 Which settles which cure applies. Not //clear the claim//, not //cap it// — ''prevent it from becoming the operative relation'', because the assembly binds the newcomer to the realm and the dyad was only ever the road in.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-word >>
+<<~ ahu #the-word>>
 
 !! `þing` ~ the word runs our arrow backwards
 
@@ -61,9 +60,9 @@ Proto-Germanic ''*þingą''. Old Norse `þing`: a legal assembly — a regional 
 
 ''And the decline names our capture pattern with a date on it:'' //towards the end of the Viking Age, royal power became centralized, and the kings consolidated power and control over assemblies. As a result, things lost most of their political role and began to function mainly as courts.// The assembly was not abolished. ''It was absorbed'' — which is the Compitalia shape, and the reason `cabal-realm#the-unswept-corner` treats capture as survivable-and-visible rather than preventable.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #unmodelled >>
+<<~ ahu #unmodelled>>
 
 !! What the mesh MUST NOT hold
 
@@ -78,28 +77,28 @@ That reads as the same law as //the naming layer performs, so it must never cert
 
 ''The residue, stated honestly.'' A refugee's held-ness runs only as portable as the realms willing to attest it. No architecture closes that — it names the actual social condition. The mesh's work reads: carry attestations without flattening them, and never manufacture standing no community offered.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open >>
+<<~ ahu #open>>
 
 !! Open
 
 * ''The host becomes the gate.'' If dwelling begins with a host and conversion needs presenting, whoever hosts controls who is ever presented. Measured precedent: guild entry where masters' sons paid ''43% of the stranger fee'' across 245 guilds and under a tenth of new masters came by proper apprenticeship — rules open, networks sorting. Two candidate shapes, neither ruled: ''many hosts'' (presentation by several, so no single hand gates), or ''presentation by the realm itself'' after long enough dwelling (the //town air makes free// form).
 * ''Does presenting pay more than dwelling?'' If the host accrues depth for presenting, a founder who presents often outpaces a newcomer who only dwells — and the gate and the treadmill become one mechanism. This reads as the falsifier on the whole shape.
 * ''The franchise question the mesh cannot answer'' — see the Germanic exclusion at #the-word. Each realm answers it; the mesh must not learn the answer.
-* ''The RECORD of the re-anchoring now has a shape'' — an un-thresholded attestor bundle, a grounds-free boundary, and an attester⊥minter split, each with shipped prior art and the six classes that refuse: <<~ loulou lar:///ha.ka.ba/lares/api/pono/re-anchoring-record >>. The RITE stays un-modelled; only the record gets built.
-* ''What a Nexus wants members FOR'' stands unanswered, and gates the assembly's own appetite: <<~ loulou lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
+* ''The RECORD of the re-anchoring now has a shape'' — an un-thresholded attestor bundle, a grounds-free boundary, and an attester⊥minter split, each with shipped prior art and the six classes that refuse: <<~ loulou lar:///ha.ka.ba/lares/api/pono/re-anchoring-record>>. The RITE stays un-modelled; only the record gets built.
+* ''What a Nexus wants members FOR'' stands unanswered, and gates the assembly's own appetite: <<~ loulou lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zUwcfnG-NTTdZQD5cMUzO_fLLNV1BDjLGNvrYkiB8KE
+<<^ code="&#x0003;">>ni:///sha-256;xM6B61t_j08UOBGlMwvlYdJhmREeGmAYaHAqWp10Q3s
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

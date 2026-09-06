@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
      ~aka~ahu   → AkaTemplate cascade (frozen/projection read of child slot).
      Render posture lives in the template cascade, not in the sigil procedure.
 
-     Live wiki parent tiddlers hold <<~ kahea ahu #slot >> (space form, HUD-readable).
+     Live wiki parent tiddlers hold <<~ kahea ahu #slot>> (space form, HUD-readable).
      lar-sigil.ts routes compound forms: name="kahea~ahu", p1=slot. -->
 
 \widget ~ahu(slot:"" uri:"" p1:"")

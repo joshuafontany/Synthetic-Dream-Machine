@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/if >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/if>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/if.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "English alias pointer — \\if redirects to wai; canonical spec lives at pono/wai"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-if"]
@@ -16,23 +15,23 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/if"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! \if
 
 English alias for `wai`, the wikispace conditional. See the canonical spec:
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/wai >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/wai>>
 
 `\if` and `wai` share identical semantics. Both test a TW5 filter condition and render the
 body only on a non-empty result, and both chain through `kahawai` (`\elseif`) and `mukuwai`
 (`\else`). Use whichever reads more naturally in context. (The canvasspace conditional-branch —
 Verse `if`/`case` on the flow surface — lives at `heihei`.)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;gpYpGRXFVKTxZ8ruuQpVbUviOQw5yv1FWypPYFDljDA
+<<^ code="&#x0003;">>ni:///sha-256;-vQppcIEyUjlkG9Sj3hlMg1cJkSLYwPlsFu5XLo-83Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

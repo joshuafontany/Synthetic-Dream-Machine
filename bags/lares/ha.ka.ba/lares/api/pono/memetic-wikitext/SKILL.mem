@@ -4,9 +4,9 @@ description: Generate, compress, or audit memetic-wikitext surfaces under lar://
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL>>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant stays the semantic root; this skill does not widen or outrank it", "S2: primitive roles stay distinct — ahu, loulou, aka, kahea, kapu, ui, hana, and ? do not silently trade jobs", "S3: uncertainty stays explicit and bounded; kapu qualifies an act instead of replacing it", "S4: boot grammar stays minimal but sufficient for identity, body thresholds, relation, invocation, query, and honest residue", "S5: parse legality, normalization detail, render lowering, long examples, and archive commentary move outward when they stop earning invariant residency"]
@@ -15,7 +15,6 @@ file-path          = "bags/lares/ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL.
 mana               = 15
 manao              = 16
 manaoio            = 14
-register           = "Synthesis-Canon"
 retain             = true
 role               = "memetic-wikitext operational skill — authoring, compression, audit, and companion-meme split discipline"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/memetic-wikitext"
@@ -24,14 +23,14 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Memetic-Wikitext Skill
 
 [[memetic-wikitext.md|../memetic-wikitext.md]] holds the root law.
 This skill carries the working procedure.
 
-<<~ ahu #load-contract >>
+<<~ ahu #load-contract>>
 
 !! Load Contract
 
@@ -44,9 +43,9 @@ Keep these points active when the skill loads:
 * examples, profiles, legality tables, parser detail, and render detail move outward before the parent swells
 * the smallest lawful intervention beats a grand rewrite
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #workflow-contract >>
+<<~ ahu #workflow-contract>>
 
 !! Workflow Contract
 
@@ -76,9 +75,9 @@ Do not:
 * bury kapu posture in implication when explicit qualification belongs on the page
 * add legacy rename notes when present context already binds the live sugar term
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trigger >>
+<<~ ahu #trigger>>
 
 !! Trigger
 
@@ -96,9 +95,9 @@ Prefer another surface when the work concerns:
 * target-specific render behavior only
 * a docs-only rewrite with no memetic-wikitext law pressure
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the authored surface as meaning first and observe where the actual overload lands
 ⏿ sort root law, primitive distinction, boot grammar, and outward detail by where they belong
@@ -106,9 +105,9 @@ Prefer another surface when the work concerns:
 ▶ write the lightest useful change and move parse, render, or example weight outward first
 ↺ verify the boot contract still loads and unresolved references stay visible; name residue honestly, especially where parser or render law still lacks a stable home
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -128,9 +127,9 @@ Look for:
 
 Name the actual overload before you cut.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -151,9 +150,9 @@ Orientation rule:
 * `example-or-profile` usually leaves for docs
 * `archive-residue` leaves unless it still binds the current surface
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -167,9 +166,9 @@ Choose the smallest lawful shape:
 Default toward splitting, not accreting.
 Do not create a child just to rename clutter.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -184,9 +183,9 @@ When writing or revising:
 
 Aim for a parent that a reader can reload quickly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! ↺ Aftermath
 
@@ -211,17 +210,17 @@ Aftermath — close by naming:
 
 If parser or render-pipeline law still lacks its own stable carrier, leave the boundary explicit and the residue honest.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ybWEH5a6miaKGK5y_iL8xogScoTHH-g6vOGcAZspV_U
+<<^ code="&#x0003;">>ni:///sha-256;vh2gbWsaXJ-oqzmW4UU-u6IN3rnHm_WbQ3_3yPpe7ck
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

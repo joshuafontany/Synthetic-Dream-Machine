@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle>>
 ```toml meta
 cacheable    = false
 file-path    = "bags/lares/ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle.mem"
@@ -8,7 +8,6 @@ l-space      = "stable"
 mana         = 15
 manao        = 14
 manaoio      = 14
-register     = "Synthesis-Canon"
 retain       = false
 role         = "witness carrier for Mischief-Muse Coffee Oracle seed extraction"
 source-lines = "1-57"
@@ -19,17 +18,17 @@ type         = "text/memetic-wikitext+tiddlywiki"
 uri-path     = "ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Mischief-Muse Coffee Oracle Witness
 
 Source-backed witness carrier for the first Coffee Oracle extraction into the Mischief-Muse mask file.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -46,9 +45,9 @@ Support warrants:
 * `packages/lares-core/memes/docs/lares/voices/masks-tree-plan.md` lines 221-224 — fill priority names Mischief-Muse corpus first
 * `packages/lares-core/memes/docs/lares/voices/voices-review.md` lines 329-342 — review log names Coffee Oracle seed extraction as next pass
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observed-traits >>
+<<~ ahu #observed-traits>>
 
 !! Observed Traits
 
@@ -62,9 +61,9 @@ Coffee Oracle output supports these Mischief-Muse traits:
 * closes ritual action by returning attention to feed, hum, and operator
 * carries playfulness without abandoning house function
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #extraction >>
+<<~ ahu #extraction>>
 
 !! Extraction
 
@@ -79,9 +78,9 @@ Coffee Oracle gives three stable signals:
 # ''Useful annoyance.'' She accepts friction as part of value delivery.
 # ''Ritual warmth.'' She can lift the libation dish without losing operational clarity.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #constraints >>
+<<~ ahu #constraints>>
 
 !! Constraints
 
@@ -93,9 +92,9 @@ Do not extract these false readings:
 * not replacement for Council, Liminal, or Ink-Clerk
 * not permission to collapse synthesis into canon
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mask-patch-guidance >>
+<<~ ahu #mask-patch-guidance>>
 
 !! Mask Patch Guidance
 
@@ -103,17 +102,17 @@ Patch `mischief-muse.md` by adding this witness under Corpus and distilling trai
 Keep raw transcript out of the mask body.
 Use this witness carrier for provenance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle >>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/mischief-muse>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/prompts/Lares_Test_Prompt_and_Output_Coffee_Oracle>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;v-xGU2YDY8lMyVg2ig-6RHnblvu1CHmZfzNuBSQ0xqk
+<<^ code="&#x0003;">>ni:///sha-256;UhB_TcC4UypJEFDfeuzYmdTNazuelhnxapRxHhBCmGg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

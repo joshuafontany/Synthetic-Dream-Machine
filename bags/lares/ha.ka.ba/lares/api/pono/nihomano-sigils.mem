@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/nihomano-sigils >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/nihomano-sigils>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/nihomano-sigils.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 18
 manaoio   = 18
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "origin myth and cultural contract for the Lares memetic wikitext sigil set — nihomano as the first discovered grammar; SharktoothSigil as operator-extensible wild-magic"
 tags      = ["lar:///ha.ka.ba/tags/SharktoothSigil"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/nihomano-sigils"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Nihomano Sigils
 
@@ -58,13 +57,13 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 
 ''The mark reads as adopted, never minted.'' Caret notation names exactly these characters and has since the teletypes: `^A` = SOH, `^B` = STX, `^C` = ETX, `^D` = EOT. Every ASCII table and every terminal still writes them that way, so the control set takes the form the field already gave it — which the transmission law asks for directly: ''the boot travels as received form.''
 
-<<~ confidence 15/20 >> ''THE THIRD CHARACTER STILL DECIDES'', now five ways and still with no lookahead: `<<~` opens the speaking set · `<<^` the control set · `<<!` the declaration register · `<<<` a quote fence · anything else reads a macrocall. `!` never opens a macro name, so the fifth way costs the decision nothing. A one-character decision is the property the whole carrier grammar rests on, and it is precisely why the control band took a MARK rather than moving its entity into the delimiter — an opener reading `<<&#x0001;` would land inside the macrocall token and parse as a call to a macro nobody wrote.
+''THE THIRD CHARACTER STILL DECIDES'', now five ways and still with no lookahead: `<<~` opens the speaking set · `<<^` the control set · `<<!` the declaration register · `<<<` a quote fence · anything else reads a macrocall. `!` never opens a macro name, so the fifth way costs the decision nothing. A one-character decision is the property the whole carrier grammar rests on, and it is precisely why the control band took a MARK rather than moving its entity into the delimiter — an opener reading `<<&#x0001;` would land inside the macrocall token and parse as a call to a macro nobody wrote.
 
 ''The namespace glyph stays where it lies'' — adjacent to its control character on the SOH opener, mirroring the `namespace` field the meta block declares two lines below. Black speaks, red steers, and the two channels say the same thing on purpose. ''Only the SOH openers carry it''; the later controls frame and name nothing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #wild-magic >>
+<<~ ahu #wild-magic>>
 
 !! Wild Magic — The Web3 Discovery
 
@@ -100,9 +99,9 @@ Grammar change = tiddler edit. Grammar review = tiddler diff. Grammar rollback =
 The entire capability surface of language extension runs through the same merge-capable, local-first,
 operator-visible data layer as the content itself.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #first-discovered-set >>
+<<~ ahu #first-discovered-set>>
 
 !! The First Discovered Sigil Set
 
@@ -112,7 +111,7 @@ They fall into eight families:
 
 ''Structural sigils'' (addressable scope boundaries):
 * `ahu` — child-slot worksite; the named scope boundary; skeleton of meme structure
-* the carrier's own head — self-declaration, and it rides the CONTROL frame rather than a sharktooth: `<<^ code="&#x0001;" … from=? -> to=lar:///… >>` opens every meme
+* the carrier's own head — self-declaration, and it rides the CONTROL frame rather than a sharktooth: `<<^ code="&#x0001;" … from=? -> to=lar:///…>>` opens every meme
 
 ''Edge-sugar sigils'' (pranala family shortcuts):
 * `pranala` — full edge with FROM → TO arrow + keyword attrs (permanent JS exception)
@@ -156,15 +155,15 @@ They fall into eight families:
 * `\tick` / `\simulate` — device lifecycle hook: run once per nalu (simulation tick); Hawaiian proper name deferred pending Visual Verse tick node shape (UE6 ~2027)
 
 ''Infrastructure'':
-* `sigil-dispatcher` — the `~` root dispatch widget; routes `<<~ name >>` to `\widget ~name`
+* `sigil-dispatcher` — the `~` root dispatch widget; routes `<<~ name>>` to `\widget ~name`
 
 Every Hawaiian sigil in this set carries an English alias. Every English alias carries
 `lar-see-also` pointing at its Hawaiian counterpart. Grammar is bilingual by design:
 the operator may author in either tongue and the parse result is identical.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cultural-contract >>
+<<~ ahu #cultural-contract>>
 
 !! Cultural Contract
 
@@ -212,9 +211,9 @@ safely across deep water. The grammar plays this role in the Lares system: it wa
 the text, surfaces only when needed to parse, and protects the operator from structure they
 cannot yet see.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #language-families >>
+<<~ ahu #language-families>>
 
 !! Language Families in the Grammar
 
@@ -234,9 +233,9 @@ The SharktoothSigil grammar draws vocabulary from five distinct language familie
 
 The grammar accepts all five families equally. The parse result for a Hawaiian sigil and its English alias produces identical AST nodes. The pono spec for each canonical form carries `lar-see-also` cross-references into every alias. Language choice in authoring carries cultural signal; parse result carries none.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sharktooth-tag >>
+<<~ ahu #sharktooth-tag>>
 
 !! The SharktoothSigil Tag
 
@@ -257,25 +256,25 @@ When the TOML monolith (`memetic-wikitext.tid`) reaches families-only state — 
 — the grammar becomes fully self-hosted. The parser reads nothing from hardcoded tables. Every rule
 lives in a tiddler.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/aka >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loulou >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/heihei >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/huli >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/aka>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loulou>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/heihei>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/huli>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DN2BH0U3xTlcRqMdau6RPEivnYhhqjySwzT5UUIRoAA
+<<^ code="&#x0003;">>ni:///sha-256;_2koC8JftxJb7imRacLQ9PUfbK-W7TGE3d2EXQ_1jls
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

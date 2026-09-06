@@ -25,7 +25,7 @@ import {
 } from "@lararium/mesh";
 import { captureAnnotate } from "../src/capture-annotate-vm.js";
 
-const TURN = "Lares (Scryer): the map holds <<~ hud Aperture(10) OODA-HA(3) >> <<~ ward ! L-Prime >>";
+const TURN = "Lares (Scryer): the map holds <<~ hud Aperture(10) OODA-HA(3)>> <<~ ward ! L-Prime>>";
 const SRC = "claude__run-abc.jsonl";
 
 describe("captureAnnotate — lar_ffz stamps the membership path (Arc free + Pulse content-address)", () => {

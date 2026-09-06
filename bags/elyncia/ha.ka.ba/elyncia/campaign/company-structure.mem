@@ -1,31 +1,29 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/company-structure>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/campaign/company-structure.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "campaign sidebar — Alpha Playtest company structure and multi-PC play"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/company-structure"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Sidebar ~ Company Structure & Multi-PC Play
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Sidebar — Alpha Playtest Company Structure and Multi-PC Play v3
 
@@ -235,8 +233,8 @@ Keep Aki’s support powerful but bounded, and keep the whole company legible at
 
 The intended play pattern: ''the company can do more than a normal small party, but every extra capability creates a footprint, upkeep cost, vulnerability, or social signal.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;G7Fba8mYwhf6rd56WV0iFWGiuiIdA4jEtj2Mo9QhY1Y
+<<^ code="&#x0003;">>ni:///sha-256;VCIowGog547YauULeavUkv5G5EZTS3cnyEiin2fO8fA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/tiddler-text >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/tiddler-text>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/tiddler-text.mem"
@@ -8,16 +8,15 @@ heleuma   = "ba"
 mana      = 18
 manao     = 17
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "heleuma: oracle tiddler text-field reader"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/tiddler-text"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -29,8 +28,8 @@ Oracle tiddlers (lararium, catalog, lares, wiki, corpus) carry their payload Aut
 
 `open-node-lar-peer.ts` defined a local `recordText()`. `wiki-handlers.ts` defined an identical copy. Fifteen-plus inline `typeof rec?.tiddler.text === "string"` guards remain scattered across the node package. This file collapses them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;9iJnliiqq_gAVajIgn3QBYBEExiQ0gGd90mqs2-JWFo
+<<^ code="&#x0003;">>ni:///sha-256;8S6bG9N53dzhE4qp1CffwsebvGj52ziQv0tFkFKR2sA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

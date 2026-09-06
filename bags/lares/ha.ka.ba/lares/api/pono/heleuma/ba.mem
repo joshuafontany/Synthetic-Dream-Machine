@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ba >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ba>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma/ba.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant capability: heleuma-ba — psyche/path anchor; quine-only trace record with no runtime corpus path"
 tags      = ["api/pono/heleuma"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ba"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Heleuma-Ba (Psyche / Path)
 
@@ -26,9 +25,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ba"
 
 A heleuma-ba anchor marks a path through the graph for something that exists outside it. Not permanent structure (ha). Not a traveling soul eligible for promotion (ka). The ba anchor is the psyche-record: proof that the graph is complete, that it holds the shape of its own beyond. The graveyard marker.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ locate the artifact; confirm it has no standalone extractable symbol and no corpus promotion path.
 ⏿ orient: is this purely documentation of what exists outside, with no runtime injection route? If yes, this is ba.
@@ -36,9 +35,9 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 ▶ write `#source` slot as the path-record: enough verbatim content for a reader to reconstruct the artifact.
 ↺ verify: the record is complete enough for reconstruction; no implicit dependencies on unlisted artifacts; the path is marked. The psyche holds. The graph knows its own edge.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #required-fields >>
+<<~ ahu #required-fields>>
 
 !! Required Fields (SHALL)
 
@@ -54,12 +53,12 @@ It MAY declare `source-symbol` when the source span has a clear boundary. When `
 
 It SHALL NOT declare `body-sha256` without `source-symbol`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;UtkLb_fnHcuY0B3cOgFE00iLjk2T8aGVLBE4iv6N9FY
+<<^ code="&#x0003;">>ni:///sha-256;NrfWG0U59Y4f7S1d1N_hk4c2A9uRln1LYfSjCyWUsXo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

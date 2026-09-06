@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/verse-event-lattice.mem"
@@ -9,7 +9,6 @@ mana        = 18
 manao       = 18
 manaoio     = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: UEFN Verse 5.6 event type lattice — event/listenable asymmetry, suspends effect specifier, @editable boundary, using module import; unreleased: sticky_event + subscribable_event; standard for Lararium device model"
 status-date = "2026-05-15"
@@ -18,9 +17,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/verse-event-lattice"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Verse Event Lattice
 
@@ -32,9 +31,9 @@ from the projection bus (ReactionEngine subscription).
 ''Source authority:'' Verse Language Reference (Epic Games, 2024–2025); local-first.fm
 episode 19 (Brooklyn Zelenka) for the peer model alignment.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #type-lattice >>
+<<~ ahu #type-lattice>>
 
 !! The Four Types
 
@@ -128,9 +127,9 @@ controls its lifecycle. If you can only `Await()` it, you are in a fiber.
 handle. `ReactionEngine` holds `listenable` references and subscribes to them
 (`tw5.wiki.addEventListener` is the `Subscribe()` equivalent in the TW5 host).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #suspends >>
+<<~ ahu #suspends>>
 
 !! `<suspends>` — Effect Specifier
 
@@ -160,9 +159,9 @@ SomeFunc()<suspends>:t
 Any sync path that calls it MUST be made async or moved to a scheduled microtask.
 The MemeSyncAdaptor properly awaits it inside an async wrapper — this is correct.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #simulation-types >>
+<<~ ahu #simulation-types>>
 
 !! `agent` and `player` — Simulation Participant Types
 
@@ -185,9 +184,9 @@ From `/Verse.org/Simulation` module. These function as ''class-level types'', no
 
 The compound type `listenable(agent)` functions as the canonical event type for ''any participant action'' in both Verse and Lares. Device events parameterized on `agent` do NOT restrict to human players.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #editable >>
+<<~ ahu #editable>>
 
 !! `@editable` — Design/Logic Boundary
 
@@ -216,9 +215,9 @@ the `@editable` surface. The internal `dispatchEvent` call is the runtime logic.
 ''Rule:'' Any URI or event handle that a device exposes to the room author is an
 `@editable`-equivalent. It MUST stay author-editable, declared as data rather than hardcoded in runtime logic.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #using >>
+<<~ ahu #using>>
 
 !! `using` — Module Import, Not Trait Composition
 
@@ -241,9 +240,9 @@ statements about structural subtyping. The type lattice (signalable/awaitable/
 subscribable/event/listenable) is the structural system; `using` is how you
 access it from a given file.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lararium-device-model >>
+<<~ ahu #lararium-device-model>>
 
 !! Lararium Device Model Alignment
 
@@ -277,9 +276,9 @@ Without it, the event fires and nobody hears it — the fiber is never spawned.
 subscribe via `onVerseEvent` (subscribable). These are never the same call.
 The asymmetry is the point.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #composition-edges >>
+<<~ ahu #composition-edges>>
 
 !! Composition Edge Semantics for the Four Types
 
@@ -302,9 +301,9 @@ The engine-vended boundary: `listenable(t)` carries `control:has` edges to
 `control:has → listenable(t)` edges on custom type memes to signal DEB-wiring
 intent, but built-in device events own `listenable(t)` fields by engine contract.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #unreleased-event-types >>
+<<~ ahu #unreleased-event-types>>
 
 !! Unreleased Event Types (Confirmed, Not Yet Shipped)
 
@@ -355,19 +354,19 @@ Until these types ship, model them as `event(t)` + manual subscription patterns.
 The ReactionEngine fiber model already implements subscribable_event semantics
 via TW5's own event bus.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;JOIYCYtSrKYE3wE2qSrGmQuwYkWFq29Fbb4L4505rsk
+<<^ code="&#x0003;">>ni:///sha-256;nMEzfdSZEH6U4O6AvegCeCSLnkxgpj5YT4Lxi-VR3Gg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

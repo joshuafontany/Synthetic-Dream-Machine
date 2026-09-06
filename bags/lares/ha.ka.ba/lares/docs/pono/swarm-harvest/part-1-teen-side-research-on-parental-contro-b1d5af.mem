@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on-parental-contro-b1d5af"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 40,659 characters
 
@@ -318,9 +317,9 @@ One adjacent LGBTQ+ finding it does record: "separate studies found that **LGBTQ
 - **glsen.org now 301-redirects to glisten.org**, and the 2013 Out Online PDF is not on the new site. Wayback (`web.archive.org/web/2019/<url>`) served it.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 2,507 characters
 
@@ -344,14 +343,14 @@ The report was already finished and delivered in my previous message; I've now r
 Two tooling notes for whoever picks this up: **OpenAlex hit its free daily budget mid-session** and resets at midnight UTC, and the two routes that actually yielded gated PDFs were `par.nsf.gov/servlets/purl/<id>` for NSF-funded work and university lab publication pages.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;l0K3VZX8EwoNcTcUojpDWC4e52OYmDCtft5UiKzCPWM
+<<^ code="&#x0003;">>ni:///sha-256;ELjx6Kkm7hQ1bJ1tp5HXf5y9xRzSmQyZaw6SlrnJUs4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0011;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kapu >>
+<<^ code="&#x0011;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kapu>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/kapu.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 18
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "above-namespace authority law; kernel/sacred tier capability; trust boundary root"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/kapu", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kapu"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kapu"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Kapu — Above-Namespace Law (Kānāwai)
 
@@ -28,9 +27,9 @@ Kapu names the carrier tier that operates above the base `<<~` namespace.
 A kapu carrier stands set apart: it declares elevated authority through namespace sigils or kernel-tier control characters, and its content cannot be silently overridden by carriers operating in the base namespace or below.
 This meme stands as a kapu carrier — it enacts the law by presenting as a specimen of itself.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect namespace declaration and kernel-tier sigils; do not confuse elevated register with high mana score alone.
 ⏿ orient against the kapu capability set; confirm the kapu component, structural signals, and role-field agree.
@@ -38,9 +37,9 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 ▶ hold the kapu boundary; lower-tier carriers cannot silently override kapu content; route upward through kapu, never around it.
 ↺ surface the namespace tier in the carrier record so trust routing can propagate correctly to all downstream consumers; name any namespace claim that lacks sigil or capability support as declared-unresolved; do not flatten the gap into a rating upgrade.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #kapu-law >>
+<<~ ahu #kapu-law>>
 
 !! Kapu Law
 
@@ -56,9 +55,9 @@ A kapu carrier MUST remain readable by lower-tier consumers without privilege es
 A kapu carrier MUST earn kapu status from structure, keeping its mana and confidence fields honest.
 Rating derives from structure, not from declared self-assessment.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trust-boundary >>
+<<~ ahu #trust-boundary>>
 
 !! Trust Boundary
 
@@ -79,12 +78,12 @@ A kapu carrier MAY declare children that are themselves kapu, forming a kernel l
 The `live-session-overwrite` failure mode names the specific violation: a lower-tier live exchange record claiming to override a kapu carrier by recency, repetition, or charm.
 The `canon-boundary` names the gate: crossing from live session pressure into kapu canon requires explicit ceremony, not silent accumulation.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #namespace-declaration >>
+<<~ ahu #namespace-declaration>>
 
 !! Namespace Declaration
 
@@ -100,9 +99,9 @@ Above-namespace carriers declare their register through:
 A carrier that uses kernel control characters without implementing kapu reads as `ano` or below.
 The sigil structure signals. The capability set discriminates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #handoff-boundary >>
+<<~ ahu #handoff-boundary>>
 
 !! Handoff Boundary
 
@@ -112,27 +111,27 @@ This meme governs the kapu rating and above-namespace trust law.
 `loci` governs stable-address coherence and the canon MOVE ceremony.
 `l-space-trust` governs the shared l-space authority ordering.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-guard >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-guard>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NKzGnMwPAuF18J2ylDhU7f22UTJvPc9E6OqHLBB1uGA
+<<^ code="&#x0003;">>ni:///sha-256;cSOZVXEa95YGpcYVIma7h0ZX5OiiVgZ6tSNVNZu9vEY
 
-<<^ code="&#x0004;" -> to=? >>
-<<^ code="&#x0014;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>
+<<^ code="&#x0014;" -> to=?>>

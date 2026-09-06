@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/persona-policy>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/persona-policy.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 15
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Canon"
 retain            = true
 role              = "persona-policy — the operator's three rulings on the multi-persona identity core: ONE face to the mesh (reboot to switch; PRIVATE-all, PUBLIC-one) · each PersonaGroup a CRYPTOGRAPHIC INDIVIDUAL (Sybil-of-one the accepted IoC cost, answered socially never in crypto) · DISTINCT recovery custodians per persona. Plus the two-layer pet-names (private map ⊥ public glamour) under Zooko — the pet-name FLEET-SYNCS among the human's own vessels and never PUBLICLY federates — under THE BINDING LAW: only a publicly announced Handle binds a PersonaGroup to a public glamour, so no other path may carry a persona's name onto a federating surface. All standing on NO GLOBAL-NOW FOR IDENTITY — the mesh refuses to build the SIN even to defend itself"
 tags              = ["api/pono/meme"]
@@ -20,19 +19,19 @@ uri-path          = "ha.ka.ba/lares/api/pono/persona-policy"
 written           = "2026-07-20"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Persona-Policy ~ one face out, the multitude within
 
-The multi-persona identity core (persona-circle: a human as a private Circle of selves, each an all-hardened key at its own handle-index) ''carries three operator rulings'' that fix how a vessel wears its selves and how it recovers them. Each ruling ''bends toward the same law'': the mesh refuses a global identity-now, so it never builds the Single Identity Number even to defend itself. <<~ confidence 15/20 >> The rulings land 2026-07-20, dispatched to code at #64 stage 4.
+The multi-persona identity core (persona-circle: a human as a private Circle of selves, each an all-hardened key at its own handle-index) ''carries three operator rulings'' that fix how a vessel wears its selves and how it recovers them. Each ruling ''bends toward the same law'': the mesh refuses a global identity-now, so it never builds the Single Identity Number even to defend itself. The rulings land 2026-07-20, dispatched to code at #64 stage 4.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #one-face >>
+<<~ ahu #one-face>>
 
 !! Ruling 1 ~ one face to the mesh, reboot to switch (PRIVATE-all, PUBLIC-one)
 
@@ -42,21 +41,21 @@ The multi-persona identity core (persona-circle: a human as a private Circle of 
 
 The wall stays custody-by-TYPE: wearing a persona ''REQUIRES that this vessel HOLD its sovereign root'' — you sign only as a self whose secret you carry (persona-vault#wearPersona).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cryptographic-individual >>
+<<~ ahu #cryptographic-individual>>
 
 !! Ruling 2 ~ each PersonaGroup a cryptographic individual (Sybil-of-one, the accepted cost)
 
 ''You CANNOT pin "one human = one custodian" in crypto — that pinning IS the sin.'' A cryptographic layer that asserted "these N faces trace to one person" would rebuild the global identity-now the mesh forbids (the Nymwars root, persona-circle#the-vault). So the ruling ''declines the pin'': each ''PersonaGroup stands as its OWN cryptographic individual'', with its own root, its own device-delegation edge, and its own escrow (#/distinct-recovery).
 
-''A human faking a cabal of their own PersonaGroups — a Sybil-of-one — reads as the ACCEPTED COST'' of the inversion-of-control. The crypto ''prices'' Sybil per-scope; it never eliminates it (persona-circle#honest-scope: scarcity lives outside the math). The answer runs ''SOCIAL, never cryptographic'': ''kahu as custodians, NOT rulers'' — vouch-and-price, exit-not-voice, legitimacy-held-in-talk-story (cabal-realm#the-unswept-corner; carry-contract#the-frame). The mesh ''holds the residual adversary in story tension'' rather than pretending a signature closes it. <<~ confidence 14/20 >>
+''A human faking a cabal of their own PersonaGroups — a Sybil-of-one — reads as the ACCEPTED COST'' of the inversion-of-control. The crypto ''prices'' Sybil per-scope; it never eliminates it (persona-circle#honest-scope: scarcity lives outside the math). The answer runs ''SOCIAL, never cryptographic'': ''kahu as custodians, NOT rulers'' — vouch-and-price, exit-not-voice, legitimacy-held-in-talk-story (cabal-realm#the-unswept-corner; carry-contract#the-frame). The mesh ''holds the residual adversary in story tension'' rather than pretending a signature closes it.
 
 The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as crypto fact; "one person behind these keys" does NOT'' — and the mesh ''wants it that way'', because the alternative wears N masks over a smuggled root.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-managed-persona >>
+<<~ ahu #the-managed-persona>>
 
 !! Ruling 2b ~ the MANAGED persona, and why the human stays unbound (operator ruling, 2026-09-04)
 
@@ -96,19 +95,19 @@ A sweep of the measured abuse literature (`docs/pono/managed-identity-scout`) re
 
 ⚠ And it found ''no exit anywhere'': across every shipped supervised-identity system and every guardianship design, the subject's exit gates on the manager. The nearest thing standing is ''a petition right that cannot be confiscated'', never an exit — while the primitive that WOULD work (guardians who recover but never transact, removable unilaterally after a timelock) ''has never been pointed at a manager→subject relation''.
 
-<<~ confidence 13/20 >> ''What stands open'': how management TRANSFERS, whether a managed wearer can ever LEAVE with their Persona, what a blind veil costs when a managing Persona goes dark, and the abuse surface the manager relation opens — priced nowhere yet, against a literature that has already measured the household's authorized principal as its adversary.
+''What stands open'': how management TRANSFERS, whether a managed wearer can ever LEAVE with their Persona, what a blind veil costs when a managing Persona goes dark, and the abuse surface the manager relation opens — priced nowhere yet, against a literature that has already measured the household's authorized principal as its adversary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #distinct-recovery >>
+<<~ ahu #distinct-recovery>>
 
 !! Ruling 3 ~ distinct recovery custodians per persona
 
 ''Each persona recovers through its OWN custodians.'' Shared custodians across personas would ''correlate them'' — a custodian holding shares for both Guru-Josh and Telarus-KSC learns they name one human, and web2's global-now walks back in through the recovery door. So the recovery split runs ''PER persona-root'' (persona-vault: a persona-1 quorum reconstructs persona-1's root, never persona-0's), and the ''custodian sets stay disjoint'' by ruling. Recovery re-admits a device; it never re-fuses the selves.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-layer-petnames >>
+<<~ ahu #two-layer-petnames>>
 
 !! The Two-Layer Pet-Names ~ private label ⊥ public glamour (Zooko)
 
@@ -122,7 +121,7 @@ A persona carries ''two names beside its key'', and the key stays the only globa
 
 > ''Only a PUBLICLY ANNOUNCED HANDLE binds a PersonaGroup to a public glamour.''
 
-The announce IS the binding act — a persona's veiled key signs its own HandleCard and puts it on the board. ''No other path may carry a persona's name onto a federating surface.'' A pet-name string that reaches a published document publishes a face the human never announced, and the string's own harmlessness never licenses it: the ''declaring act'' makes a name public, never the characters in it. The two MAY read word-for-word identical — the operator's `Telarus, KSC` names a compartment privately AND announces publicly — and they stay ''two acts with two owners'' (declaration ⊥ measurement, identity-enacts-relation). ''A private label reaching a board reads as a leak, never a shortcut.'' <<~ confidence 16/20 >>
+The announce IS the binding act — a persona's veiled key signs its own HandleCard and puts it on the board. ''No other path may carry a persona's name onto a federating surface.'' A pet-name string that reaches a published document publishes a face the human never announced, and the string's own harmlessness never licenses it: the ''declaring act'' makes a name public, never the characters in it. The two MAY read word-for-word identical — the operator's `Telarus, KSC` names a compartment privately AND announces publicly — and they stay ''two acts with two owners'' (declaration ⊥ measurement, identity-enacts-relation). ''A private label reaching a board reads as a leak, never a shortcut.''
 
 !!! The announce IS a kūkala ~ so the board's two authorities govern it
 
@@ -132,13 +131,13 @@ A HandleCard announce lands on the crossroads as a ''kūkala'' — a public cry 
 * a withdrawal reads as a ''tombstone'' the persona signs over its OWN cry. Taking a face down is as public as putting it up, because a board where things vanish quietly cannot be read — and a tombstone over ANOTHER persona's card does nothing at all, which is what keeps every member from holding a delete button over the board.
 * a Nexus refusal reads as a ''kāpae'', shadowing the SUBJECT rather than one cry, ''remove-wins'', before or after. Two islands with no shared now cannot agree which act came first; if a later cry could outlive a refusal, anyone refused at the Gate re-pins from a partition and stands again, and the Gate becomes a request.
 
-So the fold answers //what stands// order-independently, and the ''two authorities never blur'': a persona governs only its own cries, and the Nexus governs the board. The declaring-act law rides underneath both — the cry makes the name public, never the characters in it. <<~ confidence 15/20 >>
+So the fold answers //what stands// order-independently, and the ''two authorities never blur'': a persona governs only its own cries, and the Nexus governs the board. The declaring-act law rides underneath both — the cry makes the name public, never the characters in it.
 
 !!! The declaration ~ the store that keeps the other two apart
 
 Between the private label and the published record sits ''a name the human MEANS to wear and has not yet announced''. Reading that intent off the pet-name would ''weld the two registers'': a human whose compartment reads `wyrm-burner` could then never stand as `The Lindwyrm`, and every private label would quietly become a public commitment. So the intent takes ''its own store and its own act'' (persona-declare): `--handle` declares what a persona answers to outward, and `--seat` stands it for a Kahu chair on this node. ''Neither implies the other'' — a persona MAY declare a Handle and offer no chair (the ordinary case), and a seat claim carrying no Handle ''answers to no chair'' and never joins a roster.
 
-''The seal joins on the DECLARED HANDLE, never on the private label.'' A chair belongs to whoever declared the name it bears AND stood for it; the pet-name reaches no roster and no document. That reads as the same law one layer down — ''the declaring act, never the characters, makes a name public''. <<~ confidence 15/20 >>
+''The seal joins on the DECLARED HANDLE, never on the private label.'' A chair belongs to whoever declared the name it bears AND stood for it; the pet-name reaches no roster and no document. That reads as the same law one layer down — ''the declaring act, never the characters, makes a name public''.
 
 !!! The fleet ride ~ what travels between a human's own vessels
 
@@ -148,13 +147,13 @@ Between the private label and the published record sits ''a name the human MEANS
 
 ''The per-field stamp refuses the clobber.'' Each name carries its own value+stamp pair (`petname` beside `petname@`), so two vessels renaming ''different'' names — or different personas — touch disjoint keys and the field-merge keeps both. Where two renamed the ''same'' field, the later stamp reads; the stamp orders concurrent edits and ''settles nothing else'' (no shared now rides between a human's own islands), so a human overrules it by renaming again.
 
-''Local-first, never daemon-required.'' A vessel FOUNDS before it breathes, so every write lands on the local floor first and mirrors up when the sock answers; a quiet sock reports ''NODE-LOCAL, never failure'', and `lares persona sync` carries the names up once the hearth stands. <<~ confidence 14/20 >>
+''Local-first, never daemon-required.'' A vessel FOUNDS before it breathes, so every write lands on the local floor first and mirrors up when the sock answers; a quiet sock reports ''NODE-LOCAL, never failure'', and `lares persona sync` carries the names up once the hearth stands.
 
-''Four stores, never fused'': private-own (pet-name) ⊥ declared-own (Handle + seat) ⊥ public-own (glamour record) ⊥ others (handle-book). The pet-name map ''wants to sync'' across the human's own PersonaGroup vessel-pool — private-federated over a PRIVATE BAG — but that ride waits on the ''device-fleet'' (not yet built; blocks on Beelay). So the shore stands ''LOCAL-FIRST'', shaped so the cross-pool sync drops into the same store shape when the fleet lands. <<~ confidence 12/20 >>
+''Four stores, never fused'': private-own (pet-name) ⊥ declared-own (Handle + seat) ⊥ public-own (glamour record) ⊥ others (handle-book). The pet-name map ''wants to sync'' across the human's own PersonaGroup vessel-pool — private-federated over a PRIVATE BAG — but that ride waits on the ''device-fleet'' (not yet built; blocks on Beelay). So the shore stands ''LOCAL-FIRST'', shaped so the cross-pool sync drops into the same store shape when the fleet lands.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #no-global-now-for-identity >>
+<<~ ahu #no-global-now-for-identity>>
 
 !! The Deep Frame ~ no global-now for identity
 
@@ -162,22 +161,22 @@ The three rulings ''share one root'': the causal-islands law (#causal-islands: n
 
 So the mesh ''declines to build the SIN even to defend itself''. It could bind personas to one custodian and catch the Sybil-of-one — and it ''MUST NOT'', because that catch IS the sin it refuses. The residual adversary (a human forging a cabal of their own selves) stays ''bounded where a mythos wants it'': answered by ''kahu as custodians not rulers'' (vouch, price, watch, exit), by ''fork-as-exit'' (cabal-realm: leave the captured realm, re-point your own petname), and by ''legitimacy-held-in-talk-story'' — never by a signature claiming a global identity-now. //Shadowland's refusal made law//: the net heals faster than the corps can burn a runner, and it never installs the corps' own registry to do it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;AhNPKmeiwhrBVF-aaQkgBEKtpeRXDtfFBAf9-BQPLn4
+<<^ code="&#x0003;">>ni:///sha-256;0rj9xECVxfAxxlyHOD6KxQcj6P0CDcC6OR7AcSVfFxE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

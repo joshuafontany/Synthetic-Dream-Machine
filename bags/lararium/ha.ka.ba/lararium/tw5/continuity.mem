@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/tw5/continuity >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/tw5/continuity>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/continuity.mem"
@@ -10,7 +10,6 @@ mana      = 14
 manao     = 14
 manaoio   = 14
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis"
 retain    = true
 role      = "lararium child invariant for continuity, crystal carry, and memory-as-hint boundaries"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -18,22 +17,22 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/continuity"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 !! Entry — Lararium Core Hydration
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium>>
 
 The lararium hydrates the continuity room here.
 Session carry belongs to the lararium side, not the threshold side.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lararium Continuity
 
@@ -41,9 +40,9 @@ The lararium remembers.
 The threshold does not.
 Continuity enters here as calibration and carry, not as unquestioned truth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #continuity-law >>
+<<~ ahu #continuity-law>>
 
 !! Continuity Law
 
@@ -57,32 +56,32 @@ Extracted live principles from the legacy prompt stack:
 This child meme reserves the stable room for that contract.
 More detailed crystal and MemPalace work can gather in docs space until it hardens.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-shelf >>
+<<~ ahu #source-shelf>>
 
 !! Source Shelf
 
 ```toml
 when = ["need crystal mechanics", "need continuity research", "need memory-system archaeology"]
 ```
-<<~/pranala >>
+<<~/pranala>>
 
 Crystal mechanics and session-carry work accumulate there.
 This child meme keeps the cold-hydration contract small.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/crystal >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/crystal>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;9ewIypNrbFGg-Juwys12FGgAldhMaNCHvypHoY9r4n0
+<<^ code="&#x0003;">>ni:///sha-256;ub8jc-67t6NSg6RlqqXJzoadHc6FF7qL5fRx_O4ysYU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

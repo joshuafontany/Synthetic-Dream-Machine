@@ -10,9 +10,9 @@ type: text/vnd.tiddlywiki
 <!-- \widget — English alias for the TW5 \widget pragma.
      No direct Hawaiian equivalent; the ~ prefix is the Lares convention.
 
-     <<~ \widget ~name(params) >>body<<~/ \widget >> declares a named widget
+     <<~ \widget ~name(params)>>body<<~/ \widget>> declares a named widget
      callable as <<~name ...>> via the ~ dispatcher.
      lar-kind: pragma-alias — produces no render output; the sigil serves as the declaration.
 
-     The ~ prefix convention: <<~ \widget ~mana(uri:"") >>...<<~/ \widget >>
-     registers a new mana sigil callable as <<~ mana lar:///uri >>. -->
+     The ~ prefix convention: <<~ \widget ~mana(uri:"")>>...<<~/ \widget>>
+     registers a new mana sigil callable as <<~ mana lar:///uri>>. -->

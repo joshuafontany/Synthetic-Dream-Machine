@@ -1,21 +1,19 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS>>
 ```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS>>
 ```toml meta
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS"
 file-path = "bags/lares-history/lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS.mem"
 type = "text/memetic-wikitext+tiddlywiki"
 l-space      = "adjacent"
-confidence   = 18
-register     = "Synthesis-Canon"
 mana         = 17
 manao        = 16
 role         = "research-foundation: meme store invariants, schema enforcement, self-hosting grammar; local-first Automerge pivot (2026-04-29): AutomergeMemeStore replaces projection-cache seedAll; UCAN v0.10 + did:key identity wired"
@@ -26,7 +24,7 @@ retain       = true
 
 
 
-<<~ ahu #research-pressure >>
+<<~ ahu #research-pressure>>
 
 !! Three Converging Pressures
 
@@ -38,9 +36,9 @@ Three architectural forces pull on the Lararium stack simultaneously. This carri
 
 These are not separate priorities. They converge at one point: ''a meme is the atom of everything, and meme immutability is the load-bearing invariant that makes the rest possible.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tw5-tiddler-contract >>
+<<~ ahu #tw5-tiddler-contract>>
 
 !! 1. TW5 Tiddler Replacement Contract → Meme Immutability Law
 
@@ -55,9 +53,9 @@ A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boun
 
 ''Refresh corollary:'' after the Automerge pivot, ordinary carrier refresh is disk → Automerge → TW5, followed by projection diffing in the browser. `/admin/reseed` remains only a legacy tldraw layout reset / receipt recompute path. Shape-level mutation outside the authorized store/projection path is always illegal.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ue5-schema-enforcement >>
+<<~ ahu #ue5-schema-enforcement>>
 
 !! 2. UE5 World Partition / UEFN Scene Graph → Pranala Schema Enforcement
 
@@ -82,15 +80,15 @@ Pranala edges carry fixed properties: `family` (`control | relation | observe | 
 
 ''Fortnite / CRDT convergence:'' World Partition's streaming boundary maps to Lararium's room boundary. Rooms stream in shapes (actors) on WebSocket connect; the room seed is the level. Re-seeding = level reload. The pranala DAG across rooms is the scene graph.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ast-self-hosting >>
+<<~ ahu #ast-self-hosting>>
 
 !! 3. AST-Driven Self-Hosting Grammar
 
 TW5's parser is modular and recursive. Parsing rules live as tiddlers tagged `$:/tags/Macro` — the parser is itself a wiki citizen, extensible without touching core code. The widget tree renders AST nodes; the template cascade picks the first matching template for each node type.
 
-Lararium's memetic-wikitext kernel uses `<<~ ahu ... >>` (worksites), `<<~ pranala ... >>` (edges), and `<<~ loulou ... >>` (relation sugar) sigils. Currently the parser (`carrier.ts`, `pranala-parser.ts`) is hard-coded TypeScript. This is Phase 1. 
+Lararium's memetic-wikitext kernel uses `<<~ ahu ...>>` (worksites), `<<~ pranala ...>>` (edges), and `<<~ loulou ...>>` (relation sugar) sigils. Currently the parser (`carrier.ts`, `pranala-parser.ts`) is hard-coded TypeScript. This is Phase 1. 
 
 ''Phase progression:''
 
@@ -127,9 +125,9 @@ The tldraw projection layer (`lararium-tldraw`) already operates on a `LarProjec
 ''Law:'' `grammar-as-memes`
 > All grammar rules, parse patterns, and template definitions SHALL live as carrier memes in `lares/grammars/`. The TypeScript parser runtime is a thin interpreter; it MUST NOT hard-code sigil semantics. When a grammar meme changes and is promoted to canon, the parser is hot-reloaded without a TypeScript rebuild.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #synthesis >>
+<<~ ahu #synthesis>>
 
 !! 4. Synthesis — The Unified Foundation
 
@@ -151,9 +149,9 @@ These are not features. They are the substrate. Once all three hold:
 
 This is the Lararium architecture thesis. Everything else is implementation detail.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #build-order >>
+<<~ ahu #build-order>>
 
 !! 5. Build Order (next three pulls)
 
@@ -165,9 +163,9 @@ This is the Lararium architecture thesis. Everything else is implementation deta
 
 P8 is the shortest path to the live edit loop. P9 hardens the graph. P10 begins self-hosting. Each is independently shippable.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #local-first-pivot-2026-04-29 >>
+<<~ ahu #local-first-pivot-2026-04-29>>
 
 !! 6. Local-First Pivot — Automerge Meme Store (2026-04-29)
 
@@ -213,18 +211,18 @@ The identity and UCAN layer is now in place:
 
 > The Automerge meme store (`AutomergeMemeStore`) is the live source of truth for carrier text content. The tldraw canvas carries URI identity, projection records, and optional layout overlays. Canvas shapes MUST NOT embed `carrierText` in `shape.meta`. Content sync flows through `/meme-sync`; `/rooms/:id` is a legacy/shared-layout channel, not the active meme-content path. Two stores may coexist, but Automerge/TW5 owns content.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs >>
-<<~ pranala #to-multiplayer from=? -> to=lar:///lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI family=control role=informs >>
-<<~ pranala #to-agents from=? -> to=lar:///AGENTS family=control role=receives-law >>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs>>
+<<~ pranala #to-multiplayer from=? -> to=lar:///lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI family=control role=informs>>
+<<~ pranala #to-agents from=? -> to=lar:///AGENTS family=control role=receives-law>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1ntJuvl0FVFwrAZYtS_JuAt93dEOglsCF3dQ05I65xU
+<<^ code="&#x0003;">>ni:///sha-256;iaZxJCdOdfIXEZCLOvsqcrs7j7lI27rp0ao2dlQVfvg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

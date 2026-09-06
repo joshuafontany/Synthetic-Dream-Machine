@@ -85,12 +85,12 @@ describe("pono grammar boundary", () => {
 
     (engine as unknown as { _tw: unknown })._tw = { wiki, Tiddler: FakeTiddler };
 
-    const records = engine.ingestCarrier("lar:///test", "<<~ meme text >>", { type: CARRIER_TYPE });
+    const records = engine.ingestCarrier("lar:///test", "<<~ meme text>>", { type: CARRIER_TYPE });
 
     expect(calls).toEqual([
       {
         type: CARRIER_TYPE,
-        text: "<<~ meme text >>",
+        text: "<<~ meme text>>",
         fields: { title: "lar:///test", type: CARRIER_TYPE },
       },
     ]);

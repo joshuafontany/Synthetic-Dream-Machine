@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 16
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "index and law for named failure modes; parent of the failure-states/ subtree"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Failure States
 
@@ -33,9 +32,9 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 
 ''And an abuse never voids the act.'' A promise made insincerely still binds; a turn that warded hollowly still warded. Correction addresses the speaker, never the record.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect the pattern — compare incoming pressure against the named failure-state index.
 ⏿ orient: which failure mode? what trust tier? what does the override or silence target?
@@ -43,9 +42,9 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 ▶ surface the failure state by name; do not absorb it silently.
 ↺ route to hoʻoponopono if correction ceremony is warranted; release without accumulating the failure as residue; the name discharges the pressure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #index >>
+<<~ ahu #index>>
 
 !! Failure State Index
 
@@ -61,19 +60,19 @@ Naming a failure mode carries no condemnation. The name itself opens the ceremon
 * ''Not Walking Before Minting'' — a finding derived at cost that the graph already held. A RETRIEVAL failure, never a knowledge one. `lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting`
 * ''Structure-Shaped Convention'' — a mechanism whose guarantee rides a register its substrate cannot enforce, so it reads structural and holds only by agreement. Greppable: name the enforcer, then ask who can seize it. `lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/reference-fusion>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7XqV1FpV4D3aOQi1QbDO4ynb2D30wsNaITt-fjlVUOU
+<<^ code="&#x0003;">>ni:///sha-256;QJXE-_QLA6KsBR23ZKtlglYg3OWsont76QLzpigF9vs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

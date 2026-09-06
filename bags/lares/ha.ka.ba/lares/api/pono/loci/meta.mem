@@ -1,20 +1,19 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci/meta >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci/meta>>
 ```toml meta
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci/meta.mem"
 mana      = 15
 manao     = 17
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 role      = "root metadata law (kānāwai), field-set authority, and reduction charter"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loci/meta"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! IAM
 
@@ -28,7 +27,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 ''Level Note:'' Numeric readiness, trust, mana, stage, and HUD dials now use integer Levels on `0–20`, aligned with SDM+ Levels. Level `0` means void, off, or absent only when a specific instrument permits that reading. Level `20` marks a limit case; confidence-like instruments SHOULD almost never reach it. Most living system dials SHOULD live at `1–17`; reserve `18–20` for apron, kapu, direct-address, or near-certainty pressure.
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ gather the current `#meta` field surface before proposing cuts or merges
 ⏿ map each field to the work it actually performs in parse, routing, execution, or truth
@@ -36,9 +35,9 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 ▶ prepare the reduced contract and carry it into live carriers
 ↺ verify truth density rose while surface area fell and no required distinction collapsed; close with the surviving contract named and any remaining field collisions surfaced
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! Observe
 
@@ -56,15 +55,15 @@ The first collision cluster sits in flow:
 
 Observe should keep those distinct only while the block still teaches a real difference. Once two or more fields point at the same movement, the cluster begins to lie.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! Orient
 
 Orient keeps the threefold split intact and sharp.
 
-<<~ ahu #surviving-field-set >>
+<<~ ahu #surviving-field-set>>
 
 !!! Surviving Field Set
 
@@ -78,9 +77,9 @@ ba: input output depends-on + next only when a real forward edge exists
 
 These field lists govern here as law prose. Live carriers should not restate them as schema-summary keys inside top-level `#meta` metadata.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ha-fields >>
+<<~ ahu #ha-fields>>
 
 !!! Ha Fields
 
@@ -101,9 +100,9 @@ These fields should stay ordered and dense:
 
 Optional structural qualifiers may remain when they change routing or boot truth. `l-space` counts as such a qualifier in the current corpus.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ka-fields >>
+<<~ ahu #ka-fields>>
 
 !!! Ka Fields
 
@@ -116,9 +115,9 @@ The common core:
 
 Boilerplate that merely restates `#meta` as the metadata locus should not survive here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ba-fields >>
+<<~ ahu #ba-fields>>
 
 !!! Ba Fields
 
@@ -134,9 +133,9 @@ The surviving flow keys:
 
 `ba` should no longer scatter one movement across several overlapping claims. If `input` and `output` already tell the truth, the extra flow key probably weakens the block.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cut-and-merge-rule >>
+<<~ ahu #cut-and-merge-rule>>
 
 !!! Cut And Merge Rule
 
@@ -153,11 +152,11 @@ Top-level `#meta` should cut these keys from live carriers unless a later law re
 
 Keep weakness visible while a carrier still sits short of full alignment. Do not widen the schema to hide that shore.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! Decide
 
@@ -170,9 +169,9 @@ Decide applies four verdicts to each field:
 
 A field that changes no parse, routing, execution, or truth does not survive. A field that repeats another field should merge into the sharper of the two. A field that only matters in explanation should move to prose or a child law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! Act
 
@@ -188,9 +187,9 @@ First:
 
 The child law for `file-path` follows next because `file-path` carries the most immediate agreement pressure between metadata and route.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -204,18 +203,18 @@ Signs of gain:
 * clearer route and execution pressure
 * visible weakness where migration still remains open
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;FGRv06044nHys3VB6CQxlQRqJT3XcDCgc96zqJJ1xRU
+<<^ code="&#x0003;">>ni:///sha-256;a0vz0_ucH2nEhdcJ9a6GatiYLvFos02BEXp_g2W57ig
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

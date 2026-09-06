@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/sigil >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/sigil>>
 ```toml meta
 body-sha256   = "fea43878818e50755601d9f3c2aef21be2a12a7899de63c41606a87bd2ebec11"
 cacheable     = true
@@ -11,7 +11,6 @@ l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
-register      = "Synthesis-Canon"
 role          = "TW5 widget: sigil — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "SigilWidget"
 status-date   = "2026-05-03"
@@ -19,32 +18,32 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/sigil"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! sigil
 
 TW5 widget from `@lararium/tw5`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 Exported symbols: `SigilWidget`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/sigil" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;YBJZN7uS1E2R6cCsdHRQO4_xeqIzdPLzPnl2P0_S550
+<<^ code="&#x0003;">>ni:///sha-256;zRkm5xRoYP-htuH1mnwu99lAa1rHGNuz5PJjcddr9R8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

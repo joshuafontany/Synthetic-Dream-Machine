@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lararium/node/dev-loop >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lararium/node/dev-loop>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/node/dev-loop.mem"
@@ -9,7 +9,6 @@ mana      = 16
 manao     = 16
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the dev loop: the idempotent CLI cures after a code change (refresh/reconcile/rebuild/fresh/serve/reset/wake) + WHERE vessel state lives vs corpus (the repo). Carries the SITING LAW: three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — so the spirits' vessel, identity, seal and hearth bags stand at <lares>, the acquired shelf and the sensoriums at <lararium>, and the watermarks alone at <state>. Under LAR_ROOT every directory names an XDG kind and the two houses nest inside the data kind. The reach taxonomy + the path law + the invariants the dev loop rests on."
 type      = "text/memetic-wikitext+tiddlywiki"
@@ -17,9 +16,9 @@ uri-path  = "ha.ka.ba/lararium/node/dev-loop"
 written   = "2026-06-27"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Dev Loop ~ idempotent cures after a code change
 
@@ -30,36 +29,36 @@ run from any prior state (running · stale · none), so the loop never needs a c
 
 ''The one to reach for after editing code:'' `lares vessel rite refresh`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #commands >>
+<<~ ahu #commands>>
 
 !! The reach taxonomy ~ which cure, when
 
 Ordered by how much they touch — reach for the //least// that fixes your case:
 
-<<~ranks reach serve -> reconcile -> rebuild -> refresh -> fresh -> reset -> wake >>
+<<~ranks reach serve -> reconcile -> rebuild -> refresh -> fresh -> reset -> wake>>
 
 ```
 \procedure ~Cure(Type:"" Params:"") ~Cure <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Cure refresh "after/CODE-CHANGED does/`pnpm -r build` THEN reconcile --fresh — recompile dist + re-pave + re-bake genesis + serve ~ THE post-edit cure" >>
-<<~Cure reconcile "after/just-converge does/stop the incumbent on the port (graceful→force, by port-access, no PID file) + [--fresh] wipe + serve ~ no rebuild" >>
-<<~Cure rebuild "after/DEP-BUMP does/re-bake the genesis engine under current deps + serve ~ NO wipe, identity-safe (the serde-skew cure)" >>
-<<~Cure fresh "after/re-found does/reset --force THEN serve ~ assumes dist already current" >>
-<<~Cure serve "after/boot-only does/run the dist node, fail-fast ~ no convergence, no rebuild" >>
-<<~Cure reset "after/re-pave does/wipe vessel storage + bootstrap → re-bake genesis → init ~ identity PRESERVED; --force required" >>
-<<~Cure wake "after/standup does/idempotent entry: attach if healthy else start detached + hydrate; --init founds, --claude/--codex/--copilot/--vscode wire the harness MCP+hooks" >>
+<<~Cure refresh "after/CODE-CHANGED does/`pnpm -r build` THEN reconcile --fresh — recompile dist + re-pave + re-bake genesis + serve ~ THE post-edit cure">>
+<<~Cure reconcile "after/just-converge does/stop the incumbent on the port (graceful→force, by port-access, no PID file) + [--fresh] wipe + serve ~ no rebuild">>
+<<~Cure rebuild "after/DEP-BUMP does/re-bake the genesis engine under current deps + serve ~ NO wipe, identity-safe (the serde-skew cure)">>
+<<~Cure fresh "after/re-found does/reset --force THEN serve ~ assumes dist already current">>
+<<~Cure serve "after/boot-only does/run the dist node, fail-fast ~ no convergence, no rebuild">>
+<<~Cure reset "after/re-pave does/wipe vessel storage + bootstrap → re-bake genesis → init ~ identity PRESERVED; --force required">>
+<<~Cure wake "after/standup does/idempotent entry: attach if healthy else start detached + hydrate; --init founds, --claude/--codex/--copilot/--vscode wire the harness MCP+hooks">>
 
 ''The gap `refresh` closes:'' every other dev-loop verb assumes the dist is current — none run
 `pnpm -r build`. The island workers spawn from compiled `.js` siblings (a tsx-source run = a
 half-dead vessel: port bound, worker `ERR_MODULE_NOT_FOUND`). So after a TS edit, `serve`/`fresh`/
 `reconcile` boot a STALE vessel. `refresh` = build first, then re-pave + serve — the complete cure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #vessel-paths >>
+<<~ ahu #vessel-paths>>
 
 !! Where state lives ~ the two houses vs the corpus
 
@@ -75,7 +74,7 @@ HOUSE, ''lar'' names the NAMESPACE. Every siting answers ''whose is this?'':
 | `<lararium>` (`~/.local/share/lararium`) | `library/` the acquired shelf · `sensoriums/` operator history + DreamNet history | the HOUSE'S — nothing here re-derives |
 | `<state>` (`~/.local/state/lares`) | `projection/` synced-tree watermark · `harvest/` · `harvest-stage/` | nobody's for long — all of it re-derives |
 
-<<~ranks corpus repo/genesis/baked-island.bin-seed+bootstrap -> repo/bags/seed-memes -> repo/packages/code >>
+<<~ranks corpus repo/genesis/baked-island.bin-seed+bootstrap -> repo/bags/seed-memes -> repo/packages/code>>
 
 ''The resolver'' — ONE source, `@lararium/node/vessel-paths.ts` (`larHome` · `larDataDir` ·
 `larIdentityDir` · `larProjectionDir` · `larHarvest*`) over `@lararium/mempalace/xdg-base`
@@ -91,13 +90,13 @@ beside `<root>/data/lararium`. ''A house never stands where a kind belongs'', so
 reads as the real disk with a different prefix. ''Only an EXPLICIT `--root` (or the env) sets it'' —
 never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and defeat the split.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #laws >>
+<<~ ahu #laws>>
 
 !! The invariants the loop rests on
 
-<<~ranks law dist-not-tsx -> genesis-before-init -> identity-survives-reset -> only-explicit-LAR_ROOT -> deterministic-genesis >>
+<<~ranks law dist-not-tsx -> genesis-before-init -> identity-survives-reset -> only-explicit-LAR_ROOT -> deterministic-genesis>>
 
 * ''dist, not tsx'' — island workers spawn compiled; a stale dist is a half-dead vessel. `refresh` rebuilds.
 * ''genesis before init'' — init founds the hearth FROM the engine CID, so the baked artifact must
@@ -110,18 +109,18 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 * ''deterministic genesis'' — a re-bake with unchanged code is byte-identical (no churn); a diff means
   the engine/plugin blob genuinely changed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/node/open-node-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/node/node-vessel-identity >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lararium/node/open-node-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/node/node-vessel-identity>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MGUWr5mu-zHlwJmS_z0M05X63FO-8nXOsQgdMXRWRhE
+<<^ code="&#x0003;">>ni:///sha-256;y-kidSApECaiSeYjGbHzS6tER-sq7_w1U74NmgXHvsM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

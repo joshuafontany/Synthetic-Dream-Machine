@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/quine-principles >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/quine-principles>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/quine-principles.mem"
@@ -9,7 +9,6 @@ mana        = 18
 manao       = 18
 manaoio     = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: quine principles P1-P4; TiddlyWiki vs Smalltalk comparison; if-it-CAN-live-in-the-wiki-it-MUST rule; IPLD bridge; Heleuma anchor system"
 status-date = "2026-05-02"
@@ -18,9 +17,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/quine-principles"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Quine Principles
 
@@ -36,9 +35,9 @@ The four quine principles define when this target is reached and how to measure 
 live image model. In both: the environment contains its own description.
 In neither: the description is a separate documentation artifact.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #p1-unified-store >>
+<<~ ahu #p1-unified-store>>
 
 !! P1 — Unified Store
 
@@ -61,9 +60,9 @@ meme. Documentation that can drift from runtime reality violates P1.
 ''Rule:'' Any documented invariant MUST have a corresponding meme with `invariant = true`.
 The meme CARRIES the documentation; the documentation INHABITS the meme.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #p2-no-privileged-meta >>
+<<~ ahu #p2-no-privileged-meta>>
 
 !! P2 — No Privileged Meta-Level
 
@@ -86,9 +85,9 @@ the same filter syntax as external code, P2 is violated.
 ''Rule:'' Any system introspection available to external TypeScript MUST be expressible
 as a `filterTiddlers()` call. The filter layer serves as the reflection API.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #p3-causal-closure >>
+<<~ ahu #p3-causal-closure>>
 
 !! P3 — Causal Closure
 
@@ -113,9 +112,9 @@ store that controls rendering behavior.
 The only exception: infrastructure secrets (keys, tokens), which MUST stay outside
 the content graph for P3 reasons.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #p4-live-feedback >>
+<<~ ahu #p4-live-feedback>>
 
 !! P4 — Live Feedback
 
@@ -140,9 +139,9 @@ Any "reload required" path for content that could live in the tiddler store.
 at runtime without a restart. The boot-time gate checks these fields; if they pass,
 the meme is preferred over the compiled TypeScript equivalent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tw5-smalltalk-comparison >>
+<<~ ahu #tw5-smalltalk-comparison>>
 
 !! TiddlyWiki vs Smalltalk
 
@@ -159,9 +158,9 @@ the meme is preferred over the compiled TypeScript equivalent.
 Smalltalk's `doesUnderstand:` is the missing piece in TiddlyWiki. `[memes[]]` is
 Lararium's answer: a filter expression that returns the self-describing layer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #if-can-live-in-wiki >>
+<<~ ahu #if-can-live-in-wiki>>
 
 !! The "If It CAN Live In The Wiki It MUST" Rule
 
@@ -187,9 +186,9 @@ Each has a small, well-defined body (< 30 lines). Each qualifies for a Heleuma a
 advance. Regression (removing the anchor) requires documented justification in the
 meme's `status-date` field.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ipld-bridge >>
+<<~ ahu #ipld-bridge>>
 
 !! IPLD Bridge
 
@@ -217,9 +216,9 @@ Sprint N+k: same URI + CID hint               →  IPLD CAR store
 
 The `lar:` URI resolver (FPI-5 trim tab) makes this migration transparent to all callers.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #heleuma-anchor-system >>
+<<~ ahu #heleuma-anchor-system>>
 
 !! Heleuma Anchor System
 
@@ -247,19 +246,19 @@ body-sha256   = "sha256:..."  # hash of the TypeScript source at time of meme ca
 ''`heleuma = "ba"`'': "ba" (Hawaiian: to carry, to bear) — the meme is now the carrier
 of the pattern. The TypeScript file is the material instantiation; the meme is the wave.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7hKQYQwL9vlwJARBGDKFrd-HN0dOSYAqQHarjxElCfM
+<<^ code="&#x0003;">>ni:///sha-256;9kMjISqk1QJmF_6Cb9l70iV1Vb_XT7WtvBVmCLfGsKI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

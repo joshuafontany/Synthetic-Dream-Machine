@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pattern-integrities >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pattern-integrities>>
 ```toml meta
 file-path = "bags/lares/ha.ka.ba/lares/docs/pattern-integrities.mem"
 l-space   = "stable"
 mana      = 15
 manao     = 15
 manaoio   = 14
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the research shelf: prior art, golden principles, anti-patterns for the seven stack integrities — field-grounded by nine research spirits, 2026-06-11/12; binds as kupono intent (builds implement THESE, never improvisation)"
 type      = "text/memetic-wikitext+tiddlywiki"
@@ -15,9 +14,9 @@ uri-path  = "ha.ka.ba/lares/docs/pattern-integrities"
 written   = "2026-06-12"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #shelf >>
+<<~ ahu #shelf>>
 
 ! Pattern Integrities — the research shelf
 
@@ -36,7 +35,7 @@ Nine research spirits swept the field across two days. What follows binds as kup
 
 The strict-bytes vs canonical-form fork resolves ''canonical-form'' (field-wide convergence: gofmt, Prettier, jj's render-then-reparse conflict loop; strict bytes would require Roslyn-style trivia fields leaking formatting into records and souring merges). Three guarantees bind as LAW:
 
-# ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<^ code="&#x0002;" >>`, spaced).
+# ''Idempotent render:'' canonical input round-trips byte-identical — `render(parse(render(x))) == render(x)`; the template MUST emit exactly what the corpus writes (`<<^ code="&#x0002;">>`, spaced).
 # ''No unsolicited sweeps'' (the Logseq sin): normalization touches only memes whose records actually changed; the projector MUST NOT reformat-the-world on boot or upgrade.
 # ''Semantic identity verified:'' `parse(render(records)) ≡ records` — the harness proves it, never assertion.
 
@@ -90,18 +89,18 @@ The admin↔hot-wiki bridge today (postMessage event → main translates → pla
 * ''Anti-patterns, named:'' per-mutation postMessage (killed react-worker-dom) · sync hops through the coordinator (Electron sendSync freezes; Actual Budget postmortem) · whole-DOM mirroring (worker-dom's fate: mirror the semantic model instead) · fire-and-forget where durability was needed (Erlang silent-drop; Akka added /deadLetters as the visibility valve — keep one) · commands-as-events (a command may be REJECTED; an event = confirmed fact).
 * ''Reconciled to the coordinator-verb-plane ruling (2026-07):'' the `@daemon` coordinator's verbs fan work across the islands-mesh (TS workers + py nalu-gates/servos) — it introduces edges then steps away, exactly per the lane law above. Stream-processing (telemetry, corpus, AI-session-memory) offloads to py islands and runs there directly; pulling that stream //into// the TS coordinator and back out would enact the "sync hops through the coordinator" anti-pattern this shelf names. The lane law reads the same either way: main sees the edge minted, never every message on it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/handoff >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/handoff>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jVH2yFm0WbVqY9YkQ8s3ajvDUHO642g4gpq3eTX37zI
+<<^ code="&#x0003;">>ni:///sha-256;qnv_zVaUeecvii2v_LQ7skXtbYcaWY78YH-r9mXDgrk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/sigil-kind >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/sigil-kind>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-kind.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "lar-kind taxonomy: all SharktoothSigil kind values, dispatch behavior, grammar-cache classification, family rule properties"
 tags      = ["api/pono/meme"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-kind"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Sigil Kind Taxonomy
 
@@ -31,9 +30,9 @@ The `lar-kind` value determines:
 * what dispatch path claims it in `lar-sigil.ts`
 * what render behavior and template cascade apply
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #kind-table >>
+<<~ ahu #kind-table>>
 
 !! Kind Table
 
@@ -43,16 +42,16 @@ lar-kind        Rule type    Dispatch path                  Render
 child-slot      SigilRule    compound with closeKey          template cascade; produces child tiddler
 edge-sugar      SigilRule    compound leaf or compound block template cascade; no child tiddler
 edge            SigilRule    permanent JS exception          template cascade; FROM -> TO arrow syntax
-header          ControlFrame the `<<^` scanner, not a `<<~` rule  template cascade; <<^ code="&#x0001;" … from=? -> to=uri >>
+header          ControlFrame the `<<^` scanner, not a `<<~` rule  template cascade; <<^ code="&#x0001;" … from=? -> to=uri>>
 guest-grammar   SigilRule    compound block                  delegates body to guest interpreter
 query           SigilRule    compound leaf                   TW5 filter eval; $list over p1
 query-alias     SigilRule    compound leaf                   same render as query; aliasFor points to target
 family          FamilyRule   not dispatched                  no render; governs edge validation only
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #child-slot >>
+<<~ ahu #child-slot>>
 
 !! child-slot
 
@@ -64,7 +63,7 @@ Properties used by grammar-cache:
 * `lar-open-pattern` — opener regex
 * `lar-close-pattern` — closer regex
 
-Dispatch: `compound` path with `closeKey = sigil.name`. Body captured between opener and `<<~/SIGIL >>`. In the live wiki, the parent tiddler holds the compound form (`<<~ kahea ahu #slot >>`); the deserializer has already split the body into a child tiddler.
+Dispatch: `compound` path with `closeKey = sigil.name`. Body captured between opener and `<<~/SIGIL>>`. In the live wiki, the parent tiddler holds the compound form (`<<~ kahea ahu #slot>>`); the deserializer has already split the body into a child tiddler.
 
 Three render modes participate: HTML (transclude child), carrier (emit inline definition sigil), projection (emit `aka` frozen sigil).
 
@@ -75,9 +74,9 @@ New child-slot sigils require:
 
 No JS change needed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edge-sugar >>
+<<~ ahu #edge-sugar>>
 
 !! edge-sugar
 
@@ -92,46 +91,46 @@ Properties:
 
 `kapu` carries `lar-kind: edge-sugar` and operates at compile layer only. It emits no render output — it marks a threshold, restriction, or qualification in the graph edge. Whether `kapu` gains render presence in the HTML mode remains an open question pending mesh network testing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edge >>
+<<~ ahu #edge>>
 
 !! edge
 
-The `pranala` sigil uses `lar-kind: edge`. It receives its own permanent dispatch path in `lar-sigil.ts` — the `FROM -> TO` arrow syntax cannot generalise into the compound `<<~ WORD ARGS >>` pattern without losing the named keyword pairs (`family:`, `role:`, `slot:`).
+The `pranala` sigil uses `lar-kind: edge`. It receives its own permanent dispatch path in `lar-sigil.ts` — the `FROM -> TO` arrow syntax cannot generalise into the compound `<<~ WORD ARGS>>` pattern without losing the named keyword pairs (`family:`, `role:`, `slot:`).
 
-Inline form: `<<~ pranala from=FROM -> to=TO [family=f] [role=r] >>`
-Block form: `<<~ pranala from=FROM -> to=TO >>body<<~/pranala >>`
+Inline form: `<<~ pranala from=FROM -> to=TO [family=f] [role=r]>>`
+Block form: `<<~ pranala from=FROM -> to=TO>>body<<~/pranala>>`
 
 Both forms share opener parsing; closer presence distinguishes them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #header >>
+<<~ ahu #header>>
 
 !! header
 
 A carrier's head declares its own address, and it rides the ''control frame'' rather than a sharktooth sigil — so no `<<~` dispatch path stands for it, and the `<<^` scanner reads it instead.
 
-Form: `<<^ code="&#x0001;" [namespace="…"] from=? -> to=lar:///… >>`
+Form: `<<^ code="&#x0001;" [namespace="…"] from=? -> to=lar:///…>>`
 
-Appears at the document top; `from=?` marks "this carrier itself", and `to=` names the address it stands at. The close mirrors it: `<<^ code="&#x0004;" -> to=? >>`, resolving to a bearing it cannot know.
+Appears at the document top; `from=?` marks "this carrier itself", and `to=` names the address it stands at. The close mirrors it: `<<^ code="&#x0004;" -> to=?>>`, resolving to a bearing it cannot know.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #guest-grammar >>
+<<~ ahu #guest-grammar>>
 
 !! guest-grammar
 
 `hana` carries `lar-kind: guest-grammar`. It produces a compound block whose body contains foreign grammar selected by a grammar key in the priming TOML payload.
 
 ````text
-<<~ hana #work >>
+<<~ hana #work>>
 ```toml
 grammar = "wikitext-filter"
 ```
 [tag[active]] [sort[title]]
-<<~/hana >>
+<<~/hana>>
 ````
 
 The body does not parse as TW5 wikitext — it delegates to the interpreter registered for the declared grammar key. In the live TW5 VM, full native filter access renders `hana` unnecessary for simple filter work. `hana` holds its place for:
@@ -143,23 +142,23 @@ Registered guest grammars (from `memetic-wikitext.tid`):
 * `wikitext-filter` — active; native lararium filter dialect
 * `x-tiddlywiki-filter` — legacy/import; deprecated for new authoring
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #query >>
+<<~ ahu #query>>
 
 !! query
 
 `ui` carries `lar-kind: query`. It evaluates a TW5 filter expression and renders results.
 
-Form: `<<~ ui FILTER_EXPR >>`
+Form: `<<~ ui FILTER_EXPR>>`
 
 The filter expression runs as `$list filter=<<p1>>` inside the TW5 VM. Full native filter access applies — no sub-grammar isolation.
 
 `query` (`lar-kind: query-alias`) aliases `\query` to the same procedure. `lar-alias-for` points to the target sigil.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #family >>
+<<~ ahu #family>>
 
 !! family
 
@@ -186,18 +185,18 @@ spatial     false         true              false
 
 The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces these constraints at parse time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MvJXCM4F97thcopnEXeEEVXEqnAhv-wrPFHBdoEfbGs
+<<^ code="&#x0003;">>ni:///sha-256;8zgCxCpaXWFQ-aAikxaGiBD-6Dc2CB5ov-Fgn7zpbX4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

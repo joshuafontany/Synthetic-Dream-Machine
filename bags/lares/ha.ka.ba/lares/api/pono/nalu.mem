@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/nalu >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/nalu>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/nalu.mem"
@@ -8,7 +8,6 @@ l-space     = "stable"
 mana        = 18
 manao       = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "architectural invariant: nalu as changeset delivery wave — the pulse below the grammar; maps TW5 refresh(changedTiddlers) ↔ Verse OnSimulate(StagedUpdates) ↔ in-wiki nalu engine; yin-collapse law"
 status-date = "2026-05-30"
@@ -16,9 +15,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/nalu"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Nalu — The Changeset Wave
 
@@ -34,9 +33,9 @@ engine delivers it.
 ''Source authority:'' Talk Story session 2026-05-15; Book of Verse ch. 14;
 TW5 SyncAdaptor contract; Elm Architecture (Czaplicki 2012); UEFN SceneGraph Beta.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-wave-shape >>
+<<~ ahu #the-wave-shape>>
 
 !! The Wave Shape — Three Implementations, One Pattern
 
@@ -105,9 +104,9 @@ of a //batch// of changes to all observers simultaneously. Every observer — ev
 widget, every reaction handler — receives the same `changedTiddlers` set in the
 same synchronous execution context. No observer sees a partial state.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #below-the-grammar >>
+<<~ ahu #below-the-grammar>>
 
 !! Below the Grammar Layer
 
@@ -115,9 +114,9 @@ The nalu is ''not'' a sigil the operator emits. It is what the engine delivers.
 
 ```
 Grammar layer (above nalu):
-  <<~ lele lar:///target >>    ← sigil declares intent
-  <<~ hui >>                   ← sigil declares sync shape
-  <<~ kukali trigger >>        ← sigil declares suspension
+  <<~ lele lar:///target>>    ← sigil declares intent
+  <<~ hui>>                   ← sigil declares sync shape
+  <<~ kukali trigger>>        ← sigil declares suspension
 
 Nalu layer (below grammar):
   refresh(changedTiddlers)     ← engine delivers consistent state
@@ -133,9 +132,9 @@ moment all of those relationships become observable.
 a device lifecycle declaration that says "run this procedure every nalu." The nalu
 itself has no sigil; the `\tick` sigil hooks into the nalu.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #yin-collapse-law >>
+<<~ ahu #yin-collapse-law>>
 
 !! Yin-Collapse Law
 
@@ -183,9 +182,9 @@ The TS layer is the minimal shore around it — only what TW5 cannot do from ins
 * ''MobX transaction/reaction'' — `transaction(() => {})` batches mutations, defers
   reactions until batch closes — TW5's nalu IS the MobX transaction close event
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #one-graph >>
+<<~ ahu #one-graph>>
 
 !! One Graph, Not Two
 
@@ -221,9 +220,9 @@ CRDT (the sea)
 
 The shore is the widget tree. One shore receives one wave per frame from all bags.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tw5-scale-note >>
+<<~ ahu #tw5-scale-note>>
 
 !! TW5 Unfiltered Delivery — Scale Note
 
@@ -243,9 +242,9 @@ Fast by default. No per-bag scoping needed in TW5's core refresh cycle.
 per VM, re-evaluate. The Stranger's concern (unfiltered delivery at scale) is
 real but not yet triggered at current projected scale.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #uefn-alignment >>
+<<~ ahu #uefn-alignment>>
 
 !! UEFN SceneGraph Alignment (Beta, June 2025)
 
@@ -267,21 +266,21 @@ point for per-tick logic across the full unified scene.
 coordinates. Any `spatial:contains`, `spatial:adjacent`, or `spatial:portal` pranala
 edges encoded with FRU orientation assumptions need migration. See `uefn-scene.md`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bkmS-JJ5vpam4uOWTpEVd4LaE6Lu3xNE8p8eUrY9uws
+<<^ code="&#x0003;">>ni:///sha-256;kKiGE3Z0GB_SUuoFvCY0rrjSepuoeJdv-MxWF4LA1Lg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

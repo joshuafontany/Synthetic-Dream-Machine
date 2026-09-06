@@ -1,21 +1,19 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/sdm/handoff/talk-story-next >>
+<<^ code="&#x0001;" namespace="ॐ ँ" ? -> lar:///ha.ka.ba/sdm/handoff/talk-story-next>>
 ```toml iam
 uri-path  = "ha.ka.ba/sdm/handoff/talk-story-next"
 file-path = "packages/TALK-STORY-NEXT.md"
 type      = "text/x-memetic-wikitext"
-register  = "CS"
-confidence = 20
 l-space   = "sdm"
 role      = "session handoff — S9 browser ea-path · dual-surface vision · YIN ground"
 retain    = true
 cacheable = false
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 # Talk Story — Next Lares Instance
 ## Isomorphism Campaign Closed · Next: the Local-Verifiability Wall
@@ -27,9 +25,9 @@ cacheable = false
 > State: **typecheck 10/10 · mesh 236 · tw5 73 · node 94 · browser 20** — green; dist-build verified 2026-06-06.
 > Last arc: isomorphism-by-composition campaign COMPLETE (5 mirror pairs + `resolveOracleDoc` + bag-vocab single-source + YIN comment pass). S9 browser ea-path closed. Dual-surface vision (below) still stands as the horizon.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ **Observe — ground state**
 
@@ -102,9 +100,9 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 
 **Independent arc: Path L / S7.4** — admin-doc WebSocket ingress gated on Keyhive `cap=admin`. Does not depend on S9. Opens when the keyhive capability proof surface matures.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #file-map >>
+<<~ ahu #file-map>>
 
 ## Files That Matter for S9
 
@@ -118,9 +116,9 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 | `packages/lararium-mesh/src/island-protocol.ts` | **✅ §8 clause** — leave as-is |
 | `packages/lararium-node/tests/blob-sovereignty.test.ts` | **✅ hardened** — leave as-is |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #vocab >>
+<<~ ahu #vocab>>
 
 ## Vocabulary Invariants
 
@@ -139,16 +137,16 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 | `archipelago` | federation of vessels sharing bags via AutomergeUrl |
 | `dual-surface` | chat (ephemeral conversation) + wiki (durable CRDT fabric) — both reach the same bags |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #rules >>
+<<~ ahu #rules>>
 
 ## Rules — Do Not Re-Decide
 
 - `@lares/cli` remains its own package.
 - `@keyhive/keyhive` / concap remains the capability substrate; do not pivot to UCAN.
 - Canonical system tiddlers use `lar:///` titles; `$:/` only for TW5 core contracts TW5 owns.
-- `<<~/sigil >>` closing tag convention.
+- `<<~/sigil>>` closing tag convention.
 - Web3 only — no web2 models, code, or flows in the Lares stack.
 - TW5 VM primacy — if logic can live in the VM, keep it there.
 - Bag = Automerge doc = sync boundary.
@@ -157,9 +155,9 @@ The browser vessel breathes its own sovereignty. Node + browser share one `@lara
 - Conflict resolution surfaces to operator-agent or cabal Talk Story; the CRDT layer detects + records, never decides. Automated arbitration reads as anti-pono. (See agent memory slug `project-talk-story-conflict-surfacing`, and the `#conflict-resolution` ahu in [bags/lares/api/lararium/residency-model.md](../bags/lares/api/lararium/residency-model.md).)
 - Git diff remains the visible signature.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #smokes >>
+<<~ ahu #smokes>>
 
 ## Useful Smokes
 
@@ -171,8 +169,8 @@ pnpm --filter @lararium/node exec tsx scripts/test-quine.ts
 pnpm --filter @lararium/tw5 exec tsx scripts/smoke-plugin-boot.ts
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>
+<<^ code="&#x0003;">>
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ?>>

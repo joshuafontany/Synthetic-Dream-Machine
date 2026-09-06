@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/components/tag>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/components/tag.mem"
@@ -8,28 +8,27 @@ l-space   = "sdm"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for component memes — an addressed facet a module #has (domain/function/hook/posture)"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/templates/components/tag"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Template — Component
 
-<<~ ahu #intent >>
+<<~ ahu #intent>>
 
 !! Intent
 
 A component meme gives one facet — a domain, function, hook, or posture — an address, a readable caption, and a small contract for how it modifies any module that `#has` it. Modules carry components flat. Following a component reveals every module that shares it (the Jaquayed cross-section).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #required-shape >>
+<<~ ahu #required-shape>>
 
 !! Required Shape
 
@@ -60,16 +59,16 @@ meme: lar:///ha.ka.ba/sdm/components/function/ecm-scan
 
 Modules and cards tag with the ''short'' form. `<<tag-pill>>` reads the pointer's `caption` for the label and follows its `meme` field to open the full meme. Filters harvest `[tags[]prefix[@]]`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #promote-demote-law >>
+<<~ ahu #promote-demote-law>>
 
 !! Promote / Demote Law
 
 A component earns its address by serving a filter query. Tags start as TOML header entries; promote to an addressed component meme only when a query demands the address. If a promoted component proves unused, ''demote it back to a header tag and delete the meme'' (Principle 6). Do not split too fine — `ecm-scan` not `ecm-scan-passive`/`ecm-scan-active` (the nano-service trap).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;r1qlYM9fmTk0uMiSt8GRz_n2mYJxkEclbUTsOO8zaoM
+<<^ code="&#x0003;">>ni:///sha-256;v_p86uXxOoFOYF3rk_1FBXBdP56dMPlbpxZd2SKygJY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

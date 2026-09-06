@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: FINDINGS. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! FINDINGS
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 26,280 characters
 
@@ -227,14 +226,14 @@ The AI Act names the *system* as a machine but every accountable role — all se
 **NOT REACHED:** FATF R.24/R.25 primary text (403); EDPB Guidelines 07/2020; Okta XAA blog post; Mastercard Agent Pay; `draft-mcguinness-oauth-ai-agent-instance`, `draft-araut-oauth-transaction-tokens-for-agents`, `draft-chen-oauth-agent-revocation`, `draft-coetzee-oauth-spt-txn-tokens`, `draft-chen-agent-decoupled-authorization-model`, `draft-huang-acme-scalable-agent-enrollment`, `draft-zheng-dispatch-agent-identity-management`; exact signatory count of the 2018 open letter.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ExDSLyHwSXlqT-we5MfvatYL5I7VG6UYxEoGXb5y9Ww
+<<^ code="&#x0003;">>ni:///sha-256;mp4UKNE-tsm7Ujetzp24URlvwRKr--GxwGw2UnQTOKI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

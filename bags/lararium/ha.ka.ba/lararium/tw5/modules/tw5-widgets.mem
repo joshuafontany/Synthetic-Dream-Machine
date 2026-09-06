@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/tw5-widgets.mem"
@@ -9,7 +9,6 @@ mana          = 17
 manao         = 17
 manaoio       = 16
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "TW5 widget registry: ten lararium widget types, widget tiddler registration, TW5ParseNode shape"
 source-symbol = "LARARIUM_WIDGETS_TIDDLER WorksiteWidget EdgeWidget TomlWidget SigilWidget DynamicWidget HeaderWidget DispatchWidget PapaloheWidget KukaliWidget KumuWidget TW5ParseNode"
@@ -19,9 +18,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/tw5-widgets"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! TW5 Widgets
 
@@ -29,9 +28,9 @@ Ten widget types form the lararium widget vocabulary for TW5.
 Registered via `LarariumTW5._registerWidgets()` after boot.
 The widget module tiddler ships as `lar:///lararium-node/tw5/widgets`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -72,9 +71,9 @@ fields = [
 ]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -82,15 +81,15 @@ fields = [
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/tw5-widgets" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MRpf2qb1ccTViGNUPafwbfaviWmRXpieBY9fBgBhN2A
+<<^ code="&#x0003;">>ni:///sha-256;eoS7wWuwpBs-wcyaTbVR_7ywMaSYJavuwGfcAEPagjs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

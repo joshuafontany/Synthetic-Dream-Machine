@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-outside-research-r-620622"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 49,619 characters
 
@@ -179,7 +178,7 @@ Argent's own funnel numbers or wind-down; Safe / ERC-4337 recovery-module usage;
 
 ## 4. THE ONBOARDING-COST QUESTION — measured, and the answer is "nobody has measured it"
 
-**No study directly compares "guardian mints and custodies a keypair" against "guardian stores an opaque share."** Not in SOUPS, USENIX Security, CHI, or the FIDO deployment literature. *(Confidence 13/20 that none exists.)*
+**No study directly compares "guardian mints and custodies a keypair" against "guardian stores an opaque share."** Not in SOUPS, USENIX Security, CHI, or the FIDO deployment literature. *( that none exists.)*
 
 The closest measured proxy is passkey enrollment — the cheapest keypair ceremony that has ever existed at consumer scale:
 
@@ -191,7 +190,7 @@ The closest measured proxy is passkey enrollment — the cheapest keypair ceremo
 
 **The counterweight you must not suppress.** An opaque card is cheap to accept *and cheap to lose silently*. Krombholz's 22.5% loss rate and the ~1/3 of custodial users who didn't know whether their data was backed up are the Fork-A-shaped failure. The honest framing is not "cards are easier" but **"cards move the failure from visible enrollment refusal to invisible later loss"** — strictly better only if you can *detect* a dead share. Fork B detects it trivially (challenge the guardian to sign a nonce); Fork A cannot detect a corrupted card without reconstructing.
 
-**And a fact that may dissolve the cost objection entirely: the WebAuthn `prf` extension is standardized in WebAuthn Level 3 and listed by MDN as Baseline widely available.** It lets a relying party derive a *stable* secret from a credential the guardian already carries — *"generate a symmetric key for encrypting sensitive data… only be decrypted by a user who has the seed and the associated authenticator."* A guardian recovery keypair can therefore be **derived from a passkey the guardian already has** rather than minted and custodied. Custody becomes "have your phone," not "keep a new secret." *(Confidence 16/20 on the spec status; 11/20 that PRF output survives authenticator replacement in practice — verify before relying on it.)*
+**And a fact that may dissolve the cost objection entirely: the WebAuthn `prf` extension is standardized in WebAuthn Level 3 and listed by MDN as Baseline widely available.** It lets a relying party derive a *stable* secret from a credential the guardian already carries — *"generate a symmetric key for encrypting sensitive data… only be decrypted by a user who has the seed and the associated authenticator."* A guardian recovery keypair can therefore be **derived from a passkey the guardian already has** rather than minted and custodied. Custody becomes "have your phone," not "keep a new secret." *( on the spec status; 11/20 that PRF output survives authenticator replacement in practice — verify before relying on it.)*
 
 ---
 
@@ -273,7 +272,7 @@ Two large deployments converged on this independently:
 Three moves: **cancelling is deliberately cheaper than executing**; the cancel threshold is frozen against mid-recovery roster manipulation; and **a pending authority change and a recovery cannot run concurrently** — the two state machines are made to destroy each other on purpose.
 
 ### The hazard has no name
-I searched for an established term for "an attacker selects whichever of two concurrently-valid authorities is easier to subvert." **There isn't one.** Downgrade/rollback attacks are about *versions*; TUF's freeze attack is the adjacent hazard (withholding updates so a client never leaves the old authority); RFC 5011 describes the scenario — one compromised trust-anchor key lets an attacker add theirs and revoke the legitimate ones during the 30-day add-hold-down — but gives it no name. **If you need to reason about it, you will have to coin the term.** *(Confidence 14/20 that no standard term exists.)*
+I searched for an established term for "an attacker selects whichever of two concurrently-valid authorities is easier to subvert." **There isn't one.** Downgrade/rollback attacks are about *versions*; TUF's freeze attack is the adjacent hazard (withholding updates so a client never leaves the old authority); RFC 5011 describes the scenario — one compromised trust-anchor key lets an attacker add theirs and revoke the legitimate ones during the 30-day add-hold-down — but gives it no name. **If you need to reason about it, you will have to coin the term.** *( that no standard term exists.)*
 
 ---
 
@@ -400,9 +399,9 @@ This is, I think, the most decision-relevant thing in this report that your fram
 **Sources:** [RFC 9591 (FROST)](https://www.rfc-editor.org/rfc/rfc9591.html) · [ZF FROST book](https://frost.zfnd.org/frost.html) · [KERI ToIP spec](https://github.com/trustoverip/kswg-keri-specification) · [draft-ssmith-keri](https://github.com/WebOfTrust/ietf-keri) · [KERI white paper](https://arxiv.org/abs/1907.02143) · [keripy](https://github.com/WebOfTrust/keripy) · [GHSA-5q2r-92f9-4m49](https://github.com/advisories/GHSA-5q2r-92f9-4m49) · [GHSA-8m7c-8m39-rv4x](https://github.com/advisories/GHSA-8m7c-8m39-rv4x) · [GHSA-fphv-w9fq-2525](https://github.com/advisories/GHSA-fphv-w9fq-2525) · [GHSA-wgq8-vr6r-mqxm](https://github.com/advisories/GHSA-wgq8-vr6r-mqxm) · [GHSA-5cjx-95fx-68q9 (GG18/GG20)](https://github.com/advisories/GHSA-5cjx-95fx-68q9) · [HCSEC-2023-10](https://discuss.hashicorp.com/t/hcsec-2023-10-vault-vulnerable-to-cache-timing-attacks-during-seal-and-unseal-operations/52078) · [ICANN KSK DPS](https://www.iana.org/dnssec/procedures/ksk-operator/ksk-dps-20201104.html) · [IANA Ceremony 40](https://www.iana.org/dnssec/ceremonies/40) · [Ceremony 41](https://www.iana.org/dnssec/ceremonies/41) · [ICANN on the KSK delay](https://www.icann.org/news/blog/the-story-behind-icann-s-decision-to-delay-the-ksk-rollover) · [ICANN rollover summary](https://www.icann.org/news/blog/the-recent-ksk-rollover-summary-and-next-steps) · [CircleID on rollover traffic](http://www.circleid.com/posts/20190326_unexpected_effects_of_the_2018_root_zone_ksk_rollover/) · [RFC 5011](https://www.rfc-editor.org/rfc/rfc5011.html) · [TUF spec](https://theupdateframework.github.io/specification/latest/) · [sigstore/root-signing](https://github.com/sigstore/root-signing) · [ICN human identity architecture](https://github.com/InterCooperative-Network/icn/blob/main/docs/architecture/HUMAN_IDENTITY_ARCHITECTURE.md) · [Ellison, Ceremony Design and Analysis](https://eprint.iacr.org/2007/399) · [Levchin, Shamir Secret Sharing](https://max.levch.in/post/724289457144070144/shamir-secret-sharing-its-3am-paul-the-head-of) · [Buterin on social recovery](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [Apple iCloud Keychain escrow](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/web) · [Ledger Recover](https://www.ledger.com/academy/what-is-ledger-recover) · [Halborn on Ronin](https://www.halborn.com/blog/post/explained-the-ronin-hack-march-2022) · [FIDO Passkey Index Oct 2025](https://fidoalliance.org/wp-content/uploads/2025/10/FIDO-Passkey-Index-October-2025.pdf) · [Lassak et al., USENIX Sec 2024](https://www.usenix.org/system/files/usenixsecurity24-lassak.pdf) · [Krombholz et al., FC 2016](https://www.ifca.ai/fc16/preproceedings/33_Krombholz.pdf) · [Ruoti et al. 2015](https://arxiv.org/pdf/1510.08555) · [Abu-Salma et al., IEEE S&P 2017](https://discovery.ucl.ac.uk/1560502/1/ASBDNS17-IEEESP-secure_messaging_obstacles.pdf) · [Bonneau et al., WWW 2015](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf) · [Lassak et al., CHI 2024](https://doi.org/10.1145/3613904.3642889) · [Argent contracts spec](https://raw.githubusercontent.com/argentlabs/argent-contracts/develop/specifications/specifications.pdf) · [APK Signature Scheme v3](https://source.android.com/docs/security/features/apksigning/v3) · [Microsoft Secure Boot 2026](https://techcommunity.microsoft.com/blog/windows-itpro-blog/act-now-secure-boot-certificates-expire-in-june-2026/4426856) · [WebAuthn PRF extension](https://w3c.github.io/webauthn/#prf-extension) · [MDN WebAuthn extensions](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API/WebAuthn_extensions) · [Bitcoin Optech: threshold signatures](https://bitcoinops.org/en/topics/threshold-signature/) · [FROSTR/bifrost](https://github.com/FROSTR-ORG/bifrost) · [NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html)
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 18,254 characters
 
@@ -538,9 +537,9 @@ Two additions to the record that bear directly on your ruling:
 Finally, on threshold choice: Schechter measured **3-of-4 → 89% reliability at 0.019% attack success**, versus **2-of-4 → 94% at 0.46%**. Five points of reliability for a 24× increase on a still-tiny attack probability. The paper's own suggestion — **start strict, relax for dormant accounts** — is the mirror image of ICANN's rule that recovery be *stricter* than operation, and the two are reconcilable only by deciding which failure you fear more. That is a ruling, and it is yours.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-3 >>
+<<~ ahu #message-3>>
 
 !! Message 3 ~ 17,911 characters
 
@@ -648,14 +647,14 @@ That is the real tradeoff, and it cuts *against* the direction most of my other 
 Across five research streams, **not one documented failure in the entire public record turned on Shamir-versus-multisig.** They turned on: quorum counts that weren't counts of distinct signers (four sightings, one a recurrence in the same library six years later); custody that was correlated in ways nobody re-checked (Ronin's 5-of-9 that was 1-of-1, Loopring's guardians-of-guardians, FNMT's access codes stored beside the HSM); ceremonies whose script and reality diverged undetected for six months to six years; guardians who forgot, went dark, or folded to a warm phone call; and vendors who left. **The two forks differ most in a place neither branch names: Fork A's assembled secret is a bearer token that can be couriered, delegated, and improvised with — which is simultaneously its worst security property and the only reason ICANN could hold a ceremony during a pandemic. Fork B cannot bend, in either direction.** And the finding that changes the shape rather than answering it: under KERI's own rules, **a non-delegated rotation cannot supersede another rotation** — so whichever fork you take, a compromise of the recovery authority is terminal unless the identifier is delegated. That is a third axis, and on severity it dominates the one you asked about.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;l03bo3LByCr-gpqmhHs3CN31fc39GDmTzI1ZQT1v7b4
+<<^ code="&#x0003;">>ni:///sha-256;QOODm4MmnYE6_qdO_L4ChzDZClQn1ROJN0yco4NnXos
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

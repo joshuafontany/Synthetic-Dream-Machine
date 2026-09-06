@@ -41,7 +41,7 @@ const coreBlobSkip = existsSync(CORE_PATH)
 /** The obstruct seed, stated locally: sigil-rich (structure 1) yet corpus-novel body (form 0). */
 const ORNATE_NOVEL: FixtureTiddler = {
   title: "ornate-novel",
-  text: "<<~ lares aim >> a singular unrepeated utterance found nowhere else in this corpus zzz <<~ oracle >>",
+  text: "<<~ lares aim>> a singular unrepeated utterance found nowhere else in this corpus zzz <<~ oracle>>",
 };
 
 /** Fold the composite face over seeds and hand back the compact summary (the cross-beat's far mouth). */

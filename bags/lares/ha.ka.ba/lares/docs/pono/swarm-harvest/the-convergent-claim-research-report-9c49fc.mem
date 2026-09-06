@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-convergent-claim-research-report-9c49fc >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-convergent-claim-research-report-9c49fc>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/the-convergent-claim-research-report-9c49fc.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: THE CONVERGENT CLAIM — research report. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-convergent-claim-research-report-9c49fc"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! THE CONVERGENT CLAIM — research report
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 49,008 characters
 
@@ -427,9 +426,9 @@ The word "revocation" does not appear in RFC 9172's key-management section. RFC 
 3. **Every measured lease failure was at the minter, not the lease.** Cloudflare (4 credentials missed out of >5,000, ten-day intrusion), krbtgt (attacker chooses the lease length once the minting key is held), Storm-0558 (unverified here, but the pattern is the reported one). The design's stated mechanism — "a contract performs the key agreement" — makes the contract the minter. **Nothing in the reachable literature bounds how short the *contract's* lease can be, and BeeKEM's own answer (post 06) is a κ dial that trades forward secrecy for partition tolerance, with no impossibility result to say where the dial must stop.**
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 23,012 characters
 
@@ -599,14 +598,14 @@ Cloudflare figures independently confirmed by both of us. The agent's framing of
 McDaniel & Rubin's rebuttal to Rivest (Springer auth wall; abstract publisher-elided; two author-host guesses failed) — **the most directly adversarial source to the thesis, metadata only**. The CSRB PDF (403 from three government hosts; the 60,000-emails and paused-rotation figures **unverified**). Microsoft's own September 2023 Storm-0558 post-mortem (301-redirected away). Jacob et al. SACMAT 2020 abstract (ACM DL 403). Schomp et al. IMC 2013. Ceramic streams; Automerge's own access-control position; git as a cited source. Measured offboarding/deprovisioning latency — **nothing found in Crossref or HN; treat any figure as vendor-survey grade**. DST Root CA X3's expiry date and Android-affected share; Teams Feb 2020; the O2 32M-user figure from a primary source (Ericsson's own release gives no counts). biscuitsec.org (403). OpenAlex exhausted its quota mid-session for both of us; Crossref carried the remainder.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;H6l1e2As4YYBQj6acWRbyOEWcWuZfRNbalWxYeaSXdM
+<<^ code="&#x0003;">>ni:///sha-256;zIaJHy8wm5qF5OPuDWDjMdvirIG_Q56kMq5Zh9vHZXU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

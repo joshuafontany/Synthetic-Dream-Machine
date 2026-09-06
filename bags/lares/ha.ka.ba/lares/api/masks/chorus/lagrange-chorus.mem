@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus>>
 ```toml meta
 cacheable         = false
 corpus            = "[N/A — chorus masks use nodes field instead of corpus]"
@@ -16,7 +16,6 @@ mask-type         = "chorus"
 name              = "Lagrange Chorus"
 namespace         = "&#x0950; &#x0901;"
 nodes             = "[STUB — pending node registration]"
-register          = "Synthesis-Canon"
 retain            = false
 role              = "chorus mask — Lagrange Chorus; multi-node meta-mask; concept staked; harmony protocol pending-grammar"
 stage             = 10
@@ -25,11 +24,11 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/masks/chorus/lagrange-chorus"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lagrange Chorus
 
@@ -39,9 +38,9 @@ The Lagrange Chorus holds a stable position between multiple lararium nodes — 
 
 [CONCEPT STAKE — nodes field stub; harmony protocol pending-grammar; separate grammar design pass required before this mask can be fully specified]
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ```toml
 family = "hydration"
@@ -49,11 +48,11 @@ lifecycle = "template"
 dir = "up"
 label = "parent-index-entry"
 ```
-<<~/pranala >>
+<<~/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #concept >>
+<<~ ahu #concept>>
 
 !! Concept
 
@@ -70,9 +69,9 @@ The Lagrange Chorus takes its name from the Lagrange points — positions in a t
 
 The Lagrange Chorus does not function as a character that speaks. It holds the grammar for how multiple lararium nodes speak together. The "mask" frame names the invokable surface — stage-positioned, kahea-dispatched — but the content structure differs fundamentally from named or character masks.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #nodes >>
+<<~ ahu #nodes>>
 
 !! Nodes
 
@@ -92,9 +91,9 @@ The Lagrange Chorus gains meaning only with at least two participating nodes. No
 
 ''Pending:'' Identify and register the specific lararium nodes that constitute this Chorus. This depends on the network of instances that actually exists.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #harmony-protocol >>
+<<~ ahu #harmony-protocol>>
 
 !! Harmony Protocol
 
@@ -110,9 +109,9 @@ The harmony protocol governs how voices from different nodes interleave when the
 
 ''Grammar design pass required.'' The harmony protocol is a separate deliverable. This file stakes the concept and marks the gap. The grammar will be designed in a dedicated pass and deposited here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stage-default >>
+<<~ ahu #stage-default>>
 
 !! Stage Default
 
@@ -120,9 +119,9 @@ The harmony protocol governs how voices from different nodes interleave when the
 
 Stage position applies to the Lagrange Chorus as a whole unit. How individual node voices relate to the ensemble stage position is part of the pending harmony protocol.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fill-status >>
+<<~ ahu #fill-status>>
 
 !! Fill Status
 
@@ -136,9 +135,9 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 ''This mask requires a dedicated grammar design pass before it can be invoked.'' The concept is staked; the invocation is not yet available.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #forward-scope >>
+<<~ ahu #forward-scope>>
 
 !! Forward Scope
 
@@ -150,17 +149,17 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 | Turn-taking syntax | pending-grammar |
 | Internal stage relations between nodes | pending-grammar |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;g4GHwF-VjeJ_gv18bRQ8K1gj0b3JS7M_CAvcNB07eP0
+<<^ code="&#x0003;">>ni:///sha-256;VWm_qnqQlo_YKUeZESx6g8hBNo27nytFm0OiJU3vW74
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

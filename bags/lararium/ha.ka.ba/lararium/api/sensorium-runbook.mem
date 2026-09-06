@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/api/sensorium-runbook >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/api/sensorium-runbook>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/sensorium-runbook.mem"
@@ -10,7 +10,6 @@ mana      = 15
 manao     = 15
 manaoio   = 14
 namespace = "&#x2695;"
-register  = "Synthesis"
 retain    = true
 role      = "the TENDING rite — the sensorium's operational lifecycle, sibling to the founding rite and deliberately NOT it. Stand up · feed · read · survive catastrophe · tear down and re-sweep · know the ceiling · hand it to a stranger. The founding's cardinal sin loses a KEY; this rite's loses a BASELINE. Carries the measure-first law (one clean before/after boundary per re-pour), six catastrophe drills each with a detector, and the honest-limits section that names what a reading CANNOT claim. The two surfaces SLICE DIFFERENTLY and neither is a subset of the other: `lares sense` holds one wide door over one sensorium, while the MCP roster spans several CLI doors at once (vault_* · wiki · kapae answer at `lares vault`/`wiki`/`edge`). Alignment means naming the slicing rather than widening one to match — and a name shared is not a motion shared, so a door and its tool agree on what they WRITE. The movement runs as `lares sense pour --all`; the destroying step stays the operator's own hand. Carries the SITING LAW (#/the-planes): three words, no synonyms — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and a sensorium holds operator history and DreamNet history, so it belongs to the HOUSE and stands at `<lararium>/sensoriums/<name>` (`larariumDataHome()` / `_lararium_data_home()`, one string in both tongues). Under LAR_ROOT every directory names an XDG KIND and the two houses nest inside the data kind, so an isolated root reads as the real disk with a different prefix. The teardown preflight names the one reach that stays INTENDED: the operator's own hand."
 status    = "rite"
@@ -21,11 +20,11 @@ uri-path  = "ha.ka.ba/lararium/api/sensorium-runbook"
 written   = "2026-08-04"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Sensorium Runbook ~ the tending rite
 
@@ -38,7 +37,7 @@ written   = "2026-08-04"
 quorum and custody and succession. This rite tends: repeatable, operational, governed by measurement and
 cadence and capacity.
 
-<<~ confidence 15/20 >> ''The distinction that keeps them apart reads as a difference in
+''The distinction that keeps them apart reads as a difference in
 cardinal sin.'' A founding's worst outcome ''loses a key'' and nothing recovers it. A sensorium's worst
 outcome ''loses a baseline'' — and while the corpus always re-pours from its sources, ''a measurement never
 taken cannot be taken later''. A rite built around irreversibility teaches the wrong reflexes for a thing
@@ -48,9 +47,9 @@ whose recovery move reads //do it again, watching//.
 drink and incense and coin; a fed node hums and a neglected one flickers (#/noosphere-boot). The founding rite runs
 the consecration. ''This one runs the daily offering.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-planes >>
+<<~ ahu #the-planes>>
 
 !! Ⓐ Stand it up ~ sources become planes
 
@@ -77,7 +76,7 @@ disk with a different prefix and a rehearsal never reaches the operator's own pl
 the same string — the TypeScript `larariumDataHome()` and the Python `_lararium_data_home()` — so a holder
 started from either side opens the same store.
 
-<<~ confidence 17/20 >> ''What a rite re-makes decides nothing here; whose it is decides everything.''
+''What a rite re-makes decides nothing here; whose it is decides everything.''
 A Lar wakes, acts and gives way, and `clear`, `bake` and `rebirth` reforge the substrate beneath it whole.
 None of them reach a sensorium, because a sensorium never stood in the spirits' home to begin with. That it
 also survives every founding reads as the ''CONSEQUENCE'' of belonging to the house, never the reason — and
@@ -97,7 +96,7 @@ cross-plane'' — which the code enforces rather than requests.
 | ''structure'' | parse trees (`.structurepalace`) | a structural hash (PATTERN) | a cosheaf-shaped registry — what a SHAPE does across the corpus |
 | ''persistence'' | testimony claims | a claim cid (CLAIM) | a sheaf over the claim base |
 
-<<~ confidence 16/20 >> ''A structure row and a content row live over different
+''A structure row and a content row live over different
 universes.'' A sup-norm between them reads a distance between two worlds and returns a number anyway.
 ''The only road across'' runs the extension map — a structure row's provenance lists the records
 exhibiting that pattern, and the pushforward carries two facts an ad-hoc crossing hides: ''the fiber
@@ -108,7 +107,7 @@ pattern pushes forward onto strictly fewer records than exhibit it).
 ''`require_base()` refuses a restriction set that mixes bases or omits one'', so the wrong comparison
 stops type-checking rather than returning a plausible figure.
 
-<<~ hud Drift-Ward(! Confidence 12/20 · ⚠ · this table stood hand-written in an earlier draft, with a plane the code does not declare
+<<~ hud Drift-Ward(! ⚠ · this table stood hand-written in an earlier draft, with a plane the code does not declare
 and a base it does · ↻ L-Prime) >>
 
 !!! The order that matters
@@ -123,9 +122,9 @@ and a base it does · ↻ L-Prime) >>
   cheapest cure in the whole rite and it stays available ''only at pour time''.
 # ''Measure before the first byte lands.'' #teardown carries the law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #feed >>
+<<~ ahu #feed>>
 
 !! Ⓑ Feed it ~ the cadence, and what starvation looks like first
 
@@ -141,12 +140,12 @@ narrow. The tells, in the order they appear:
 * ''Coupling reads honest-insufficient'' rather than low — the instrument names its own starvation, and an
   operator who reads that as a coupling VERDICT has read a missing plane as a finding.
 
-<<~ confidence 12/20 >> ''Honest-insufficient reads as the instrument working.'' It carries more
+''Honest-insufficient reads as the instrument working.'' It carries more
 information than a number would; a gauge that returned 0.0 against an unfed plane would have lied.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #read >>
+<<~ ahu #read>>
 
 !! Ⓒ Read it ~ what a figure claims, and over what
 
@@ -175,9 +174,9 @@ information than a number would; a gauge that returned 0.0 against an unfed plan
 ''Name the plane and the grain before reading the number.'' A figure detached from its partition reads as a
 fact about the world when it names a fact about a choice (#/capacity).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #catastrophe >>
+<<~ ahu #catastrophe>>
 
 !! Ⓓ Catastrophe & recovery ~ six drills, each with its detector
 
@@ -199,7 +198,7 @@ slightly off// long before it presents as a failure.
 * ''Detector'' — open file handles climbing across a long run while work does not. Sample the count
   periodically DURING a pour; a leak reveals itself as a slope, never as a value.
 * ''Cure'' — drain the holders and restart them; the corpus takes no harm.
-* ''Live'' — <<~ confidence 11/20 >> this stack currently carries a measured leak (a peak of 593
+* ''Live'' — this stack currently carries a measured leak (a peak of 593
   against 1245 at an older wedge point) whose route stands UNKNOWN. A hypothesis that named one file
   rested on that file's own docstring rather than on its code, and dissolved on reading. ''Treat the next
   long pour as the experiment that finds it.''
@@ -241,9 +240,9 @@ slightly off// long before it presents as a failure.
   re-pouring. This one names the class of loss the corpus's re-derivability cannot cover, and it is the
   reason this rite exists apart from the founding rite at all.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #teardown >>
+<<~ ahu #teardown>>
 
 !! Ⓔ Tear down & re-sweep ~ the deliberate reset
 
@@ -253,7 +252,7 @@ declared regime costs less than reconciling the drift.
 
 !!! The measure-first law
 
-<<~ confidence 14/20 >> ''ONE clean before/after boundary exists per re-pour, and it opens
+''ONE clean before/after boundary exists per re-pour, and it opens
 exactly once.'' Instrument BEFORE the teardown or the comparison never becomes available. A pour
 instrumented after the fact requires a second pour to measure, which costs the whole run again and still
 lacks the original state to compare against.
@@ -277,7 +276,7 @@ Run every check before the first deletion:
 
 !!! The movement
 
-<<~ confidence 16/20 >> ''THE MOVEMENT RUNS AS ONE COMMAND, and the steps that land
+''THE MOVEMENT RUNS AS ONE COMMAND, and the steps that land
 nothing are the reason it is one.'' `lares sense pour --all` walks the sequence below; the steps stand
 here because a reader tending a sensorium by hand needs to know what each one buys, and because a step
 skipped silently is what the single door exists to prevent.
@@ -298,9 +297,9 @@ skipped silently is what the single door exists to prevent.
   machine quietly not remembering, which reads as calm rather than as fault.
 # ''Take the new baseline'' immediately, against the kept old one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #capacity >>
+<<~ ahu #capacity>>
 
 !! Ⓕ Capacity & honest limits ~ what a reading CANNOT claim
 
@@ -309,7 +308,7 @@ the working's limits invites the operator to ask for what it cannot give and to 
 
 !!! The ceiling
 
-<<~ confidence 18/20 >> ''`I(target; plane) ≤ H(plane)`'' — exact, and it forbids manufacture. A
+''`I(target; plane) ≤ H(plane)`'' — exact, and it forbids manufacture. A
 plane cannot report more about a target than the plane itself carries. So ''a low reading names a
 capacity limit OR an absence, and the figure alone never distinguishes them.'' An operator who reads a
 ceiling-bound figure as a finding about the world has read the instrument's own entropy.
@@ -334,7 +333,7 @@ one common space. ''Reading it as a single scalar over one substrate mistypes th
   never PUBLISHED as a property (#/identity-enacts-relation).
 * ''Reproducibility across a re-pour with different sources.'' Comparability requires a fixed source set;
   a corpus poured from a moved target measures the move.
-* ''Its own ground, by name.'' <<~ confidence 12/20 >> The stores carry no identity for the pour
+* ''Its own ground, by name.'' The stores carry no identity for the pour
   a reading stands over — no `pour_id`, no corpus version, nothing a second reading could match against.
   So ''two readings taken across a re-pour compare nothing'', however faithfully each got recorded, and
   the gap sits UPSTREAM of any ledger: a baseline needs a ground it can name before it needs a place to
@@ -342,7 +341,7 @@ one common space. ''Reading it as a single scalar over one substrate mistypes th
   content-addresses its drawers, so a pour's identity can fall out of its own ground (the source set and
   their hashes, a fold over the drawer cids) with nothing declared by fiat and no network consulted.
 
-<<~ hud Drift-Ward(_ Confidence 12/20 · L-Prime · crossing: generation-talk, where federation vocabulary drifts local) >>
+<<~ set hud="aim" drift-ward="L-Prime · crossing: generation-talk, where federation vocabulary drifts local">>
 
 ''AND THE WORDS FOR THIS STAY LOCAL.'' A sensorium's stores ''never federate'' — content, form, structure
 and persistence each say so outright; only the meshpalace takes a feed from the network, and an operator
@@ -354,9 +353,9 @@ future-not-history''. A teardown inverts that on every axis — the content dies
 untouched, the history goes and the future does not. Borrowing either word imports a topology these
 stores do not have, and //burn// imports the opposite of what a teardown performs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reconstitution >>
+<<~ ahu #reconstitution>>
 
 !! Ⓖ Reconstitution ~ what a stranger needs to stand this cold
 
@@ -371,13 +370,13 @@ a movement of this rite rather than a later courtesy:
 # ''The baseline set'' — the readings taken at each pour boundary, kept as the comparison series.
 # ''This document'', which names what the instruments claim and what they refuse.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #surface-drift >>
+<<~ ahu #surface-drift>>
 
 !! The two surfaces ~ how they slice
 
-<<~ confidence 17/20 >> ''NEITHER SURFACE IS A SUBSET OF THE OTHER, and alignment means naming the
+''NEITHER SURFACE IS A SUBSET OF THE OTHER, and alignment means naming the
 slicing rather than widening one to match.'' `lares sense` holds ONE door over one sensorium and carries
 its whole lifecycle — stand up, feed, read, tend the holders, the durable seats, the instrument set. The
 MCP roster spans SEVERAL CLI doors at once: `vault_*` answers at `lares vault`, `wiki` at `lares wiki`,
@@ -410,27 +409,27 @@ vocabulary rather than the implementer's. Two properties follow, and both matter
   gap an implementer's inventory of exported symbols never shows: a verb may exist at every layer and
   still leave a flow unwalkable.
 
-<<~ confidence 14/20 >> ''A roster read off source finds what EXISTS and stays blind to what a
+''A roster read off source finds what EXISTS and stays blind to what a
 flow REQUIRES'' — absence of finding and absence of looking generate identically. So no count stands
 transcribed here: `tools/surface-parity-witness.sh` derives both rosters, and the movement below is what
 reports whether they carry a flow between them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/sensorium-machina >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/li-ki-integrities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/elyncia >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/sensorium-machina>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/li-ki-integrities>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/elyncia>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DN6cjlIJLt3uYemI4-XKDEUG1Ghzpl6k7ldPlbdwgZs
+<<^ code="&#x0003;">>ni:///sha-256;62vaPjTQJhSVvI5cCWHdN8DE-NUuwyBkCXjvh4lOmCg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

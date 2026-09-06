@@ -9,10 +9,10 @@ type: text/vnd.tiddlywiki
      ~kahea~kau and ~aka~kau follow the ahu template-cascade pattern.
 
      Dispatch shapes:
-       <<~ kau #frag Name props >>    → ~kau(p1="#frag Name props") — placement
-       <<~ kau Name >>                → ~kau(p1="Name")              — invocation
-       <<~ kahea kau #slot >>         → ~kahea~kau(p1="#slot")
-       <<~ aka   kau #slot >>         → ~aka~kau(p1="#slot")
+       <<~ kau #frag Name props>>    → ~kau(p1="#frag Name props") — placement
+       <<~ kau Name>>                → ~kau(p1="Name")              — invocation
+       <<~ kahea kau #slot>>         → ~kahea~kau(p1="#slot")
+       <<~ aka   kau #slot>>         → ~aka~kau(p1="#slot")
 
      p1 parse: first token starting with # = fragment; remainder = name + props.
      Template cascade tag: lar:///ha.ka.ba/tags/kau-template

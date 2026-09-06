@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ka >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ka>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma/ka.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant capability: heleuma-ka — soul/fire anchor; promotion-eligible compiled artifact with quine record and ceremony path"
 tags      = ["api/pono/heleuma"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ka"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Heleuma-Ka (Soul / Fire)
 
@@ -26,9 +25,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ka"
 
 A heleuma-ka anchor exists outside the corpus ''by current necessity, not by nature''. It has vitality. It is eligible to be promoted into a first-class corpus meme via the boot gate ceremony. The compiled-in code is a chrysalis.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ locate the compiled artifact and its extractable symbol; confirm it has a standalone function boundary.
 ⏿ orient: could this function be loaded from a corpus meme via `_bootModules()`? If yes, this is ka.
@@ -36,9 +35,9 @@ A heleuma-ka anchor exists outside the corpus ''by current necessity, not by nat
 ▶ write `#source` slot with the verbatim extracted function; close the quine record.
 ↺ verify: `sync-heleuma` resolves the symbol, compares, reports clean; signal fields approach ceremony thresholds; the anchor lives. The soul moves. Ceremony awaits.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #required-fields >>
+<<~ ahu #required-fields>>
 
 !! Required Fields (SHALL)
 
@@ -61,11 +60,11 @@ This is gate layer 2 (content integrity). Written by `sync-heleuma --commit` whe
 
 Gate layer 3 (operator authorization) will be a ''keyhive capability proof'' — an Ed25519-signed capability from a keyhive principal authorizing corpus injection. Layer 3 is planned but not yet implemented; the gate currently passes on layers 1–2 only.
 
-Signal fields (`mana`, `manao`, `manaoio`, `confidence`) SHALL approach 16 / 16 / 15 / 16 as the source matures. The boot gate reads these fields directly.
+Signal fields (`mana`, `manao`, `manaoio`) SHALL approach 16 / 16 / 15 as the source matures. The boot gate reads these fields directly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #promotion-path >>
+<<~ ahu #promotion-path>>
 
 !! Promotion Path
 
@@ -75,14 +74,14 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 * The meme pair becomes a standard corpus meme pair
 * The doc meme `source` field MAY be retained as provenance
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;R1t2lY5WNjx0IdOpjw9uS6NuYjk2slisiJAx7e6pxYQ
+<<^ code="&#x0003;">>ni:///sha-256;6Lbud5JYfaN1YUV3CUyw-5aEZMho0BczimK69ejsPeg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

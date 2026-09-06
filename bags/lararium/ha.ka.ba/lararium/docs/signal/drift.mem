@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/drift >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/drift>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/drift.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "docs room for governing-field drift, recovery protocol pressure, and projection-error handling across lararium signal surfaces"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/drift"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal — Drift
 
 Not invariant law.
 This room holds mismatch-recovery pressure where declared signal diverges from actual output.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #room-charter >>
+<<~ ahu #room-charter>>
 
 !! Room Charter
 
@@ -36,9 +35,9 @@ This room keeps the recovery-pressure shelf for governing-field drift.
 The live sigil panel stays in `lar:///ha.ka.ba/lararium/docs/signal/hud`.
 The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api/mu/ooda-ha#/ooda-ha-level`); reading the loop in referenced content moved to the conformance lens (`lar:///ha.ka.ba/lares/api/pono/conformance`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #drift-correction-pressure >>
+<<~ ahu #drift-correction-pressure>>
 
 !! Drift Correction Pressure
 
@@ -46,20 +45,20 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 ''`drift_correction` event type required'': The mismatch recovery protocol requires a dedicated event type. When a correction occurs: (1) node emits the corrected end-of-span tag inline, (2) a `drift_correction` event is appended to STATE.jsonl with fields: `declared_uri` (the original intent header), `actual_register`, `actual_stance`, `delta_description`. The `drift_correction` event is the authoritative record; the original `r_update` event is not modified (immutability holds). Annunciation is fire-and-forward; the operator decides whether to acknowledge or steer.
 
-''SA vs XAI distinction — non-drift rule governs projection errors, not integrity failures `Synthesis-Canon 16/20`'': Through the Endsley SA lens, the intent header is a //prospective SA display// — it shows what the node will do. When a declared header diverges from actual output, this constitutes a ''Level 3 SA failure (projection error)'', not an integrity failure. Projection errors are expected and normal in dynamic environments; the correct system response is to annunciate the change, not to flag corruption. The non-drift rule must explicitly distinguish between: (a) ''governing field drift'' (register, stance, or phase differ between header and actual output) — annunciate + emit `drift_correction` event + STATE.jsonl records correction as authoritative; (b) ''annotation field drift'' (micro-trace or closure outcome differs from header projection) — normal; the header was prospective, the annotation records what actually happened. The micro-trace `→[tag]` transition marks //are// the annunciation protocol — they surface the delta between declared plan and actual execution in real time.
+''SA vs XAI distinction — non-drift rule governs projection errors, not integrity failures'': Through the Endsley SA lens, the intent header is a //prospective SA display// — it shows what the node will do. When a declared header diverges from actual output, this constitutes a ''Level 3 SA failure (projection error)'', not an integrity failure. Projection errors are expected and normal in dynamic environments; the correct system response is to annunciate the change, not to flag corruption. The non-drift rule must explicitly distinguish between: (a) ''governing field drift'' (register, stance, or phase differ between header and actual output) — annunciate + emit `drift_correction` event + STATE.jsonl records correction as authoritative; (b) ''annotation field drift'' (micro-trace or closure outcome differs from header projection) — normal; the header was prospective, the annotation records what actually happened. The micro-trace `→[tag]` transition marks //are// the annunciation protocol — they surface the delta between declared plan and actual execution in real time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;LqveqV8X-5PsYY8wHk8FgEQ_yaN7IusQ0EGyc0BnD8w
+<<^ code="&#x0003;">>ni:///sha-256;sXg23ukvbseCmChskEC372NoiikfO_EfRs7-Ew5r2LU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

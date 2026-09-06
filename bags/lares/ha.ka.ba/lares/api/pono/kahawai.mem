@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kahawai >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kahawai>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/kahawai.mem"
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "conditional branch-continuation sigil — elif form; Hawaiian alias for \\elif; a second stream joining the flow"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kahawai"]
@@ -13,9 +12,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kahawai"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Kahawai
 
@@ -29,9 +28,9 @@ Paired with `wai` (`\if`) — wai opens the cascade; kahawai enters when wai's f
 new filter offers the next candidate. Serial evaluation with a new condition — a stream joining the
 water cascade.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -40,40 +39,40 @@ A kahawai block MUST appear after a wai or kahawai block in the same scope.
 A kahawai block MUST render its body only when the filter yields a non-empty result
 and no preceding condition in the chain has already rendered.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ wai [first-filter] >>
+<<~ wai [first-filter]>>
   first branch
-<<~ kahawai [second-filter] >>
+<<~ kahawai [second-filter]>>
   second branch
-<<~ mukuwai >>
+<<~ mukuwai>>
   fallback branch
 ```
 
 English alias forms:
 ```text
-<<~ \if [first-filter] >>  ...
-<<~ \elif [second-filter] >>  ...
-<<~ \else >>  ...
+<<~ \if [first-filter]>>  ...
+<<~ \elif [second-filter]>>  ...
+<<~ \else>>  ...
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/mukuwai >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-elif >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/mukuwai>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-elif>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;O7l2eHV4nUtJglm5cIjA2NgxQj8A_MqboY2EEgEtLs0
+<<^ code="&#x0003;">>ni:///sha-256;cM5sxcOJ-ZRZ8kLyrb5j6S2XABM8L84gTgK8luorUuw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

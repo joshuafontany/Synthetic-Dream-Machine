@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kapae >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kapae>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/kapae.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 15
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "tombstone-as-shadow pattern integrity — a raised kāpae shadows lower layers (resurrection-prevention), toggleable, distinct from absent (the fall-through retract)"
 tags      = ["api/pono/meme"]
@@ -16,19 +15,19 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kapae"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Kāpae
 
 A first-class ''tombstone that shadows the layers beneath it'' — a raised marker that defeats fall-through, distinct from //absent// (a missing record that falls through to the next layer down).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #etymology >>
+<<~ ahu #etymology>>
 
 !! Etymology
 
@@ -36,9 +35,9 @@ A first-class ''tombstone that shadows the layers beneath it'' — a raised mark
 
 This carries the pattern exactly. A kāpae marker sits ''above'' the record it excludes, casting a shadow down the cascade. The record beneath survives untouched; the shadow only hides it from the surface view. Lower the marker and the record beneath surfaces again, whole.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #core-cut >>
+<<~ ahu #core-cut>>
 
 !! The core cut — kāpae shadows, absent falls through
 
@@ -52,11 +51,11 @@ Two ways a title leaves the surface view of a layered cascade (recipe over bags,
 | reversibility | ''toggleable'' — lower it to re-admit | one-way at this layer; re-add to restore |
 | read intent | "exclude this, even if a copy lives below" | "this no longer lives //here//; let the cascade resolve" |
 
-The cut MUST stay sharp. A gesture that ''relocates'' a record (MOVE, promotion `@working → canon`) RETRACTS the source to //absent//, never raises a kāpae — the source falls through and the canonical copy beneath surfaces (residency-model anti-pattern #3). A gesture that ''excludes'' a record (EVICT, CLEAR, DROP) raises a kāpae, never retracts to absent — the shadow defeats any lower-layer re-add. <<~ confidence 14/20 >> conflating the two re-introduces the OverlayFS / moby#783 resurrection bug: a deleted upper record falls through to a stale lower copy that the operator believed gone.
+The cut MUST stay sharp. A gesture that ''relocates'' a record (MOVE, promotion `@working → canon`) RETRACTS the source to //absent//, never raises a kāpae — the source falls through and the canonical copy beneath surfaces (residency-model anti-pattern #3). A gesture that ''excludes'' a record (EVICT, CLEAR, DROP) raises a kāpae, never retracts to absent — the shadow defeats any lower-layer re-add. conflating the two re-introduces the OverlayFS / moby#783 resurrection bug: a deleted upper record falls through to a stale lower copy that the operator believed gone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #toggle >>
+<<~ ahu #toggle>>
 
 !! The refinement — kāpae raises and lowers
 
@@ -67,9 +66,9 @@ A kāpae carries a ''toggle'', not a permanence. The pattern names two deliberat
 
 The asymmetry carries the load. Raising defeats a re-add (remove-wins); lowering takes an explicit gesture (no silent un-shadow). A record never resurrects by accident — it surfaces only when an absent gesture lets the cascade fall through, or when a hand lowers the kāpae that shadowed it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bag-cascade-sense >>
+<<~ ahu #bag-cascade-sense>>
 
 !! Sense (a) — the bag-cascade / residency tombstone (WITNESSED)
 
@@ -82,11 +81,11 @@ This already lives in code:
 * The residency action handler routes the two deliberately: `tombstoneIn()` for CLEAR / DROP / DELETE (kāpae hide, shadows lower bags), `removeIn()` for the MOVE source retract (absent, falls through) — witness: `packages/lararium-tw5/src/action-handler.ts` `executeMove` / `executeClear`, carrying the comment "kāpae shadows, absent falls through".
 * The conflict surface lists raised kāpae as readable drift state (`listKapaeBags` returns hides — residency-model #conflict-resolution).
 
-<<~ confidence 15/20 >> the bag-cascade sense stands witnessed in shipped code and named in residency-model anti-pattern #3 (Kāpae resurrection — "First-class `tombstone` op distinct from 'absent'").
+the bag-cascade sense stands witnessed in shipped code and named in residency-model anti-pattern #3 (Kāpae resurrection — "First-class `tombstone` op distinct from 'absent'").
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #membership-sense >>
+<<~ ahu #membership-sense>>
 
 !! Sense (b) — the membership / governance stack (PROPOSED)
 
@@ -102,15 +101,15 @@ This rhymes the recipe-as-bag-stack: membership composes as a priority walk over
 
 Raised over a ''relationship'' the same marker needs none of it. The shadow scopes to one edge, no third party needs the news, the blast radius equals that relation, and ''two edges tombstone concurrently WITHOUT racing'' — because they name different objects. The mutual case the literature leaves open (Keyhive names and defers it; p2panda calls it "still to be explored") then dissolves rather than resolving: A shadows the edge (B→group) while B shadows (A→group), ''both shadows hold, both stand aside'', and remove-wins needs no winner. The place lands in a LEGIBLE state — no authority stands — which ''surfaces a fork'' instead of diverging in silence. Surfacing belongs to the code; deciding which side stays legitimate belongs to the humans (#fork-as-exit, cabal-realm#the-unswept-corner).
 
-<<~ confidence 12/20 >> the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts accrete keyed by edge/gesture/version so a raise and a lower at one version both survive a merge, the fold takes highest-version-per-edge with a ''same-version tie leaving the shadow UP'', and forged acts drop before the fold. Wired at the two readers that decide standing — the fleet closure and the vouch-lineage read — and RAISABLE through a per-Nexus board (the fifth deterministic sibling) plus the `lares edge kapae` / `un-kapae` verbs. It needs NO convergent-removal machinery: the earlier reading expected to lean on Keyhive/BeeKEM blank-path, and the edge grain retires that dependency, since distinct edges never contend.
+the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts accrete keyed by edge/gesture/version so a raise and a lower at one version both survive a merge, the fold takes highest-version-per-edge with a ''same-version tie leaving the shadow UP'', and forged acts drop before the fold. Wired at the two readers that decide standing — the fleet closure and the vouch-lineage read — and RAISABLE through a per-Nexus board (the fifth deterministic sibling) plus the `lares edge kapae` / `un-kapae` verbs. It needs NO convergent-removal machinery: the earlier reading expected to lean on Keyhive/BeeKEM blank-path, and the edge grain retires that dependency, since distinct edges never contend.
 
 ''THE MARKERS NUMBER FOUR, NOT FIVE.'' An earlier count named the device-delegation edge as a separate relationship awaiting its own marker. It never was one: `dyadId` derives from exactly (deviceDid, operatorDid) — the two ends of that very delegation — so ''the dyad IS that relationship'' rather than a fifth beside it. The delegation needs no marker of its own; it needs its shadow CONSULTED, at the Binding Gate, which stays owed.
 
 ''What still awaits:'' a live multi-keeper partition witness, the re-admit ceremony through Talk Story, and that Binding-Gate consult.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -121,18 +120,18 @@ Raised over a ''relationship'' the same marker needs none of it. The shadow scop
 * A raised kāpae MUST win remove-wins under contention / partition (the shadow defeats a concurrent lower-layer re-add).
 * Lowering a kāpae MUST stay a deliberate gesture and MUST write an effect record; a record MUST NOT un-shadow silently.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/anti-patterns >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/anti-patterns>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;sR0JbVtlbYhqz6mwxQgO8C5H611RsMGf9sVN2D-1c4g
+<<^ code="&#x0003;">>ni:///sha-256;vDA0KPXhiqaH-3fxGxwc0JRsiBiq4sCi3QWCR1_f-lM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

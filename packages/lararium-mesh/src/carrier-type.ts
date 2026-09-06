@@ -43,4 +43,4 @@ export function isCarrierType(type: unknown): boolean {
  * else, because a hand-spelled constant drifts the moment the real one moves.
  */
 export const DECLARATION =
-  `<<!DOCTYPE ${CARRIER_TYPE.replace("text/", "")} lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>`;
+  `<<!DOCTYPE ${CARRIER_TYPE.replace("text/", "")} lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>`;

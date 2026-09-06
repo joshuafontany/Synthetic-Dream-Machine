@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph>>
 ```toml meta
 file-path        = "bags/lares/ha.ka.ba/lares/docs/graph.mem"
 l-space          = "stable"
 mana             = 17
 manao            = 17
 manaoio          = 16
-register         = "Synthesis-Canon"
 research-sources = ["Bazel depsets and Skyframe (Google 2024)", "Buck2 architecture (Meta 2024)", "Nix derivations and lazy evaluation", "Graphiti temporal knowledge graph (Zep 2025, arXiv:2501.13956)", "TerminusDB append-only delta model", "UEFN Scene Graph ECS model (entity/component/prefab, Fortnite dev 2025)", "Anthropic context engineering (2025)", "Context7 / Upstash (2025)"]
 role             = "spine for the pranala-edge DAG graph redesign — research synthesis, committed decisions, child locus map"
 status-date      = "2026-04-24"
@@ -16,9 +15,9 @@ type             = "text/memetic-wikitext+tiddlywiki"
 uri-path         = "ha.ka.ba/lares/docs/graph"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: static `_SOCKET`/`_DEPTH` maps and carrier-index scans stand in for a real graph walk.
 ⏿ orient: build-system depsets, temporal KG bi-temporal edges, and UEFN ECS plane separation each name the same missing structure.
@@ -26,9 +25,9 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 ▶ act: write child memes for meme data model, traversal rules, parser design, and artifact contract.
 ↺ verify: Tier 0 declared-core and Tier 1 graph walk converge on the same 14 memes before proceeding; surface one open question — `? ->` socket resolution depth — before implementing the parser.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #core-proposition >>
+<<~ ahu #core-proposition>>
 
 !! Core Proposition
 
@@ -51,9 +50,9 @@ Three structural claims drive the redesign:
 
 # ''Dual-index content addressing.'' TiddlyWiki maintains multiple parallel indexes over the same tiddler corpus. `lar:///INDEXES/hashes` (URI → SHA256 map, lightweight poll) and `lar:///CONTENT/{hash}` (hash → carrier text, virtual resource) implement the same pattern. The boot receipt's `sha256` field becomes a stable Anthropic prompt cache key: a client that holds a matching receipt need not resend carrier text.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decisions >>
+<<~ ahu #decisions>>
 
 !! Committed Design Decisions
 
@@ -69,9 +68,9 @@ They do not require further operator input.
 | Content-addressed artifacts via SHA256(carrier bytes + edge records) | Deterministic ordering of carrier bytes plus sorted edge records produces a stable hash. This makes boot receipts valid Anthropic prompt cache keys: identical source files always produce identical receipt hashes. |
 | Declared-unresolved forward refs stay in the graph | `family: control` unresolved targets surface as `dag_violations` (boot-critical errors). `family: relation` unresolved targets surface as `declared_unresolved` warnings. Neither causes compilation to fail. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-question >>
+<<~ ahu #open-question>>
 
 !! `? ->` Socket Resolution — Closed
 
@@ -80,15 +79,15 @@ The canonical pranala law (`lar:///ha.ka.ba/lares/api/pono/pranala`) settles thi
 > "A named `#fragment` SHOULD win socket resolution before the enclosing meme URI."
 
 ''Resolution: Option A — fragment-level.''
-`? ->` in a pranala block inside `<<~ ahu #required-preload-l-prime >>` resolves to `lar:///ha.ka.ba/lares/api/noosphere-boot#/required-preload-l-prime`.
+`? ->` in a pranala block inside `<<~ ahu #required-preload-l-prime>>` resolves to `lar:///ha.ka.ba/lares/api/noosphere-boot#/required-preload-l-prime`.
 The parser tracks enclosing `ahu` fragment context during scan.
 `from_socket` carries the fragment URI; `from_uri` carries the carrier URI.
 
 The parser implementation in `graph/pranala-parser` may now proceed on this basis.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #child-loci >>
+<<~ ahu #child-loci>>
 
 !! Child Loci
 
@@ -99,9 +98,9 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 | `lar:///ha.ka.ba/lares/docs/graph/pranala-parser` | block form, inline form, sugar expansion, `? ->` resolution, field normalization |
 | `lar:///ha.ka.ba/lares/docs/graph/artifacts` | content-addressed SHA256 scheme, three artifact classes, compaction rules |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #terminology-alignment >>
+<<~ ahu #terminology-alignment>>
 
 !! Deferred — Terminology Alignment
 
@@ -122,9 +121,9 @@ Deferred rename target (Phase 1 implementation, not blocking design):
 All graph design docs should use `locus`/`loci` when describing carriers in the graph.
 The rename in the server awaits Phase 1 implementation. Until then, current code and design docs may carry both forms with this note as authority.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #implementation-phases >>
+<<~ ahu #implementation-phases>>
 
 !! Implementation Phases
 
@@ -141,9 +140,9 @@ The rename in the server awaits Phase 1 implementation. Until then, current code
 Phase 2 awaits the `? ->` resolution call.
 Phases 1, 3, and 4 may proceed independently.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #validation-markers >>
+<<~ ahu #validation-markers>>
 
 !! Validation Markers
 
@@ -158,21 +157,21 @@ Phases 1, 3, and 4 may proceed independently.
 | Boot receipt hash matches across repeated compilations | `test_compiler.py::test_receipt_deterministic` |
 | Declared-unresolved relation edge does not fail compilation | `test_compiler.py::test_forward_ref_survives` |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/artifacts >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/pranala-parser>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/artifacts>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;2Y9TFa4jcQjp9Ml6Tm7c2EzKbgP-u9t8Dsh0kC3zefs
+<<^ code="&#x0003;">>ni:///sha-256;3B7m_YpSLfC82a1TxP39oDV_8qdsX4sOHcyzdF0lfZs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

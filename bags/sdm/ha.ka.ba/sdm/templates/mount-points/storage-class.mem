@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/templates/mount-points/storage-class>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/templates/mount-points/storage-class.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "root template meme for mount-point (storage-class) memes — the contract a seating implies"
 l-space   = "sdm"
@@ -15,21 +14,21 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/templates/mount-points/storage-class"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Template — Mount-Point (Storage Class)
 
-<<~ ahu #intent >>
+<<~ ahu #intent>>
 
 !! Intent
 
 A mount-point meme names ''where a module seats on an entity'' and the contract that seating implies. The same module behaves differently depending on which mount-point holds it. Contracts come from the canonical Vastlands Guidebook / SDM rules; this meme addresses them, it does not invent new rules.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #required-shape >>
+<<~ ahu #required-shape>>
 
 !! Required Shape
 
@@ -43,9 +42,9 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 #aftermath   open questions, design-space flags
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #writing-law >>
+<<~ ahu #writing-law>>
 
 !! Writing Law
 
@@ -53,16 +52,16 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 * Do not duplicate component or module text. A mount-point describes the //seat//, not the //thing seated//.
 * Name counterplay: how an opponent disables, dispels, or strips a seated module.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;uHI0slUW8Ckx2O9JUPStcMMzQFT6KO8zd-nPwRtYDiM
+<<^ code="&#x0003;">>ni:///sha-256;04ZWkAW7bNYtNjYEi60aXD7Cba4WEPKaZ9uZw8bMTwo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

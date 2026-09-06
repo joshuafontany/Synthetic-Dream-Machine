@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/operator-peer >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/operator-peer>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/operator-peer.mem"
@@ -9,7 +9,6 @@ l-space   = "lararium"
 mana      = 19
 manao     = 19
 manaoio   = 18
-register  = "Synthesis"
 retain    = true
 role      = "Canonical operator-vessel contract: two-lane VM pool law, shared command/receipt surface, ea sovereignty model"
 tags      = ["mesh/lar-vessel", "mesh/causal-island"]
@@ -17,7 +16,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/operator-peer"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Operator-Vessel Contract
 
@@ -28,7 +27,7 @@ This document carries the load. `lar-vessel.md` and `open-vessel.md` carry
 implementation notes. The two-lane topology and ea sovereignty law described here
 sit above any single vessel implementation.
 
-<<~ ahu #vocabulary >>
+<<~ ahu #vocabulary>>
 
 !! Vocabulary
 
@@ -44,9 +43,9 @@ sit above any single vessel implementation.
 | ''Command tiddler'' | The durable intent record authored by an operator ceremony (CLI, browser UX, or future surface). Lives in the admin doc. |
 | ''Receipt tiddler'' | The durable outcome record written after a ceremony resolves: accept, reject, apply, or defer. Lives in the admin doc. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-lane-law >>
+<<~ ahu #two-lane-law>>
 
 !! Two-Lane Law
 
@@ -77,9 +76,9 @@ If a ceremony can run inside the VM (capability planning, tiddler authoring, rec
 writing), it stays there. Edge code (filesystem, network transport, process control)
 handles only resource-local side effects.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ea-law >>
+<<~ ahu #ea-law>>
 
 !! Ea Law — Vessel Sovereignty
 
@@ -104,9 +103,9 @@ Admin-doc WebSocket ingress gates on `cap=admin` proof. Non-operator
 vessels receive no admin state. The proof check happens on the receiving vessel
 before any doc change applies.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #command-receipt-surface >>
+<<~ ahu #command-receipt-surface>>
 
 !! Command / Receipt Surface
 
@@ -142,9 +141,9 @@ command/receipt record shaped as data, carrying its correlatable `requestId` and
 audience. (The MCP tool projection exposes the same verbs as schema-typed Tools over
 the same core — see #actor-parity.)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #actor-parity >>
+<<~ ahu #actor-parity>>
 
 !! Actor Parity — Human and AI Agent
 
@@ -202,16 +201,16 @@ revocable. The agent never holds the operator's key and never impersonates — e
 authority equals the INTERSECTION of the operator's grant and the agent's attenuation
 (an agent reduces access, never expands it).
 
-<<~ confidence 15/20 >> The leaf-identity shape (OP-AP5/6) stands
+The leaf-identity shape (OP-AP5/6) stands
 resolved by twin scouts 2026-06-07 (light cached-card + bare-Ed25519 signer over the
 heavy worker-keyhive path; the tree's `auth-proof` tests already prove bare-Ed25519
 proofs verify). The remaining BUILD: `lares vessel found` mints + persists the operator
 ContactCard (`.operator-card.json`, 0o600); a leaf-identity provider loads
 seed+card; then V3 C (peer transport) and the writable MCP surface compose over it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #vessel-parity >>
+<<~ ahu #vessel-parity>>
 
 !! Vessel Parity
 
@@ -233,19 +232,19 @@ Where the node vessel does more (disk projection, persistent relay, process cont
 that counts as edge adaptation, not authority. The browser vessel breathes with
 identical ea rights.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter >>
-<<~ loulou lar:///ha.ka.ba/lararium/keyhive/keyhive-provider >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter>>
+<<~ loulou lar:///ha.ka.ba/lararium/keyhive/keyhive-provider>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-6vM4pjr7i6-hkpFUmqqXokNYtLx8BmphbREOsTY9a8
+<<^ code="&#x0003;">>ni:///sha-256;7VA6aErXlokQkDnubLBkjc1hN2kWVrzjQFL7JGTZXqo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

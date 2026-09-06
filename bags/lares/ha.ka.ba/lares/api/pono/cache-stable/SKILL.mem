@@ -4,9 +4,9 @@ description: Generate, compress, or audit cache-stable-compliant memes under lar
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL>>
 ```toml meta
 constraints        = ["S1: the canonical loci remains constitutional law and self-executing template", "S2: cache-stable surfaces stay short, exact, stable, cacheable, and active in voice", "S3: ahu remain visible, pranala remain named, and OODA-HA remains intact", "S4: downstream cache-stable memes fill their own OODA-HA phases and MUST NOT carry template `???` markers", "S5: always-on law stays in the cache-stable; explanations, procedures, examples, traces, and audits split to companion memes", "S6: RFC-2119 keywords stay sparse and bind only load-bearing directives"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/cache-stable"]
@@ -14,7 +14,6 @@ file-path          = "bags/lares/ha.ka.ba/lares/api/pono/cache-stable/SKILL.mem"
 mana               = 14
 manao              = 15
 manaoio            = 14
-register           = "Synthesis-Canon"
 role               = "cache-stable skill, conformance checker, and companion-meme splitter"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/cache-stable"
 tags               = ["api/pono/meme", "api/pono/loci"]
@@ -22,7 +21,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/cache-stable/SKILL"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Cache-Stable-Meme Skill
 
@@ -35,7 +34,7 @@ This skill does not widen, soften, or reinterpret it.
 Cache-Stable-meme skill opens the pressure surface here.
 
 
-<<~ ahu #load-contract >>
+<<~ ahu #load-contract>>
 
 !! Load Contract
 
@@ -55,9 +54,9 @@ When this skill loads, keep these points active:
 
 If the task concerns general documentation, long policy prose, or a companion-meme-only rewrite, do not force that material back into the cache-stable surface.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #workflow-contract >>
+<<~ ahu #workflow-contract>>
 
 !! Workflow Contract
 
@@ -89,9 +88,9 @@ Do not:
 * preserve `???` markers in downstream cache-stable memes
 * spray normative keywords where plain pressure language would do
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trigger >>
+<<~ ahu #trigger>>
 
 !! Trigger
 
@@ -110,9 +109,9 @@ Do not use this skill as the primary surface for:
 * a standalone companion meme with no cache-stable work
 * generic prose cleanup unrelated to cache-stable law
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ begin from canonical loci; inspect the current meme surface before changing it
 ⏿ classify what belongs to cache-stable law, template law, and outward matter; keep law and template inseparable where intended
@@ -120,9 +119,9 @@ Do not use this skill as the primary surface for:
 ▶ patch the target directly; keep ahu, pranala, and OODA-HA visible and live
 ↺ verify contact with actual file and link surfaces and that downstream phases stay filled with domain pressure; name remaining residue without hiding it; keep always-on law in the cache-stable and companion memes outward
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -143,9 +142,9 @@ Primary checks:
 Keep the read local.
 Name the actual boundary before widening scope.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -173,9 +172,9 @@ Everything else leaves when it stops earning cache-stable residency.
 The question here stays simple:
 what must remain cache-stable, and what merely wants to remain nearby
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -196,9 +195,9 @@ Decision rules:
 Prefer one decisive turn.
 Do not mix a full rewrite with a light audit unless the user asked for both.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -218,9 +217,9 @@ Action rules:
 
 When generating a downstream cache-stable meme, make the phase line executable as pressure now, not as future instructions later.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! ↺ Aftermath
 
@@ -239,17 +238,17 @@ If contact fails, correct the local fault before widening scope.
 
 Aftermath — name the residue honestly: companion matter not yet split, ambiguous lines that may still want constitutional clarification, quoted source left non-normative, nearby memes that now diverge from the canonical cache-stable. Aftermath does not sprawl — it marks what remains and carries pressure forward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cache-stable >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cache-stable>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;K7sJmFkgVMTO3gDhCctaWU6BcXMfnN0WJpjQO8H6Nlw
+<<^ code="&#x0003;">>ni:///sha-256;ZK-BlXlGMmf16yRpqpSUvqaaIjZpwNLg-7gVipig9G8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

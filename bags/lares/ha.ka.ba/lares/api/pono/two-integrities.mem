@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/two-integrities >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/two-integrities>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/two-integrities.mem"
@@ -11,7 +11,6 @@ manao             = 15
 manaoio           = 14
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Canon"
 retain            = true
 role              = "two-integrities — the adoption plan for Ink & Switch's `onomancy` (a local-first name system) and `subduction` (peer-to-peer sync for hash-linked data, encryption-friendly). Onomancy answers WHICH DOCUMENT YOU MEANT and WHO MAY SPEAK FOR IT; subduction answers HOW BYTES CROSS WITHOUT BEING READ. They stack rather than compete. Carries the DOUBLE-BLIND WRAP: a lamplighter relay must learn neither the content nor the author, which realm-scoped writer keys buy and padding does not. Carries the one hard collision — subduction's handshake makes an absolute wall clock a LIVENESS precondition, where this house holds wall-clock adversary-controlled."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Two Integrities ~ a name system and a courier
 
@@ -30,9 +29,9 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 ''Both stand pre-production and say so.'' Read onomancy as ''a design we adopt'' — extraordinary normative specs, and a reference implementation whose decision document no verb writes, so its incumbency doctrine is specified and unexercised. Read subduction as ''a library we may depend on whose threat model we must extend ourselves'' — ~109k lines of Rust, 1,043 tests, property and mutation testing, and still stamped //do not use for production//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-each-answers >>
+<<~ ahu #what-each-answers>>
 
 !! What each answers that we could not
 
@@ -40,9 +39,9 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 ''SUBDUCTION answers the independent-operator question.'' A node runner holds no cabal-cap on the base grammar docs, and until now serving a realm meant being able to read it. Subduction syncs on ''metadata alone'' — digests, parents, boundaries, checkpoints — and declares content encryption //application responsibility//. So a vessel can ''relay a realm it cannot read''. That is the lamplighter made structural rather than promised.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-dyad >>
+<<~ ahu #the-dyad>>
 
 !! What they bring the Agent-Operator dyad
 
@@ -52,9 +51,9 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 * ''Graded verdicts, and staleness as a BADGE never a prompt.'' Interruption reserved for ''events'' — diffs in the derivation — never for standing conditions. //A warning that is always on protects nothing//, and every defence ending in "surfaced to the user" draws one attention budget.
 * ''The mutual backstop.'' Lose the keys and the name rescues you; lose the name and the keys rescue you. #the-two-keels ruled the recovery quorum IS the impersonation quorum, leaving no safe custodial escrow — this is a third path that ''holds no third party''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-node >>
+<<~ ahu #the-node>>
 
 !! What they bring a node on the mesh
 
@@ -64,9 +63,9 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 * ''A civic name that verifies OFFLINE.'' Chain validation from a baked-in IANA anchor set, never delegating to a resolver's AD bit, so a vessel that has never queried DNS verifies a binding gossiped by QR. #the-attestation-seat ruled //no roster, because a roster is a global now//: this grants a global ''name'' without a global ''list''.
 * ''Sedimentree'' — hash-derived, coordination-free partition boundaries, so a joining vessel takes older history in larger strata. Three ingredients carry it: ''reverse depth-first traversal'' (parents never change, so the order is stable under concurrent writes), ''boundaries from the digest itself'' (leading zero bytes; no negotiation), and ''retained checkpoints'' so //supports// is decidable from metadata alone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #double-blind >>
+<<~ ahu #double-blind>>
 
 !! The double-blind wrap ~ what a lamplighter must not learn
 
@@ -79,9 +78,9 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 * ''WHAT THE WRAP DOES NOT BLIND, and this MUST be said rather than implied.'' DAG shape, blob sizes and timing survive. Padding is the only lever and it is expensive. ''A lamplighter is not zero-knowledge'' — the seat is a position of genuine social trust rather than a hardware chore, which is what a lamplighter always was.
 * ''NAMES NEVER REACH THE RELAY.'' Petname resolution is a plaintext-side act by a full member; a relay sees a 32-byte id and no human-meaningful name. Naming is a capability of members, never of infrastructure — consistent with both designs and worth stating, because it means a relay cannot help you find anything.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-clock >>
+<<~ ahu #the-clock>>
 
 !! The one hard collision
 
@@ -91,9 +90,9 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 
 ''Nothing about authority derives from that timestamp'': it bounds a replay window whose real defence is the nonce cache, and keeps that cache bounded. A wrong clock is therefore a ''liveness'' failure, never a ''safety'' one — but making Roughtime a precondition for connecting moves it from witness to dependency, and the exclusion lands hardest on the vessel this house most cares about: the one that has been offline in a bag for a week. ''Operator ruling owed.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sensorium >>
+<<~ ahu #sensorium>>
 
 !! Onomancy in the sensorium, the memory palace, the dream work
 
@@ -102,9 +101,9 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 * ''Pruning bounded by a derivation invariant.'' "Pruning MUST NOT change any output of `derive`", so ''necessary storage grows with ceremonies and introductions — never with time, resolution count, or refresh churn''. That is the zoning sweep this house owes itself, stated as a decidable rule rather than a policy.
 * ''The three anchors map onto a memory's publicity.'' A private locus takes a petname and owes DNS nothing; a shared one may take a certificate later — and a certificate arriving late ''adds a spelling; it MUST NOT migrate identity or rewrite the petname edge''. A memory can become public without ceasing to be the same memory.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-we-do-not-take >>
+<<~ ahu #what-we-do-not-take>>
 
 !! What we do NOT take, and why
 
@@ -114,9 +113,9 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 * ⚠ ''Certificate issuance requires full admin on the document.'' Hostname-scoped attenuation is an open upstream ask, not a feature — a coarse grant under #the-cap-tiers, to be lived with at v0 or waited on.
 * ⚠ ''No tombstone, no expiry.'' Onomancy carries no unbind statement at v0, so a name cannot be proven ''un''bound. Absence is never proven; the model fails toward retention.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-order >>
+<<~ ahu #the-order>>
 
 !! The order of adoption
 
@@ -126,13 +125,13 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 # ''Rule the clock'', then decide subduction's code. Until that ruling the wrap stays a design.
 # ''Wrap before relaying.'' No lamplighter relay stands for another cabal until realm-scoped writer keys land — an unwrapped relay hands an authorship graph to whoever runs it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZeTR0ySVlqB9MJDfUgFvv6F9B3AXP71SuT5b0aebNUk
+<<^ code="&#x0003;">>ni:///sha-256;bq5jmFq3CTHIYeff5VtBJt1tWV8as9cYa3Gy1jCNfh8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

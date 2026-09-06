@@ -5,7 +5,7 @@
  *   `exportMemeText` routes through `expandMemeRefs` (deserializer.ts) — the
  *   recompose inverse the doctrine names (disk-projection#granularity). The
  *   shore module owns BOTH directions: ingest decomposes a carrier into
- *   parent + ahu-child records; export splices every `<<~ kahea ahu #slot >>`
+ *   parent + ahu-child records; export splices every `<<~ kahea ahu #slot>>`
  *   marker back into its child's definition form and reassembles the whole
  *   carrier envelope. One meme, one file — a child change re-flushes its
  *   GROUP (the projector routes to the carrier root), never its own file.

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kukali >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/kukali>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/kukali.mem"
@@ -8,7 +8,6 @@ mana      = 17
 manao     = 16
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "reactive wait posture inside a causal island — Verse suspends analogue; execution yields until named papalohe trigger fires"
 tags      = ["api/pono/reaction-graph", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kukali"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/kukali"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Kukali
 
@@ -30,9 +29,9 @@ A wait posture inside a causal island. Execution parks until the named papalohe 
 Verse `suspends` analogue: the island parks without blocking; it resumes exactly once.
 Paired with papalohe — papalohe declares the wire; kukali declares the wait at the receiving end.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the wait declaration — note trigger name or absence; locate enclosing causal island
 ⏿ orient the suspension: find papalohe wire matching trigger name; bind subscribeOnce
@@ -40,9 +39,9 @@ Paired with papalohe — papalohe declares the wire; kukali declares the wait at
 ▶ park island execution; emit SigilNode { sigilName:kukali, attrs:{ trigger? } }
 ↺ register kukali hook in ReactionGraph; suspension Promise created; island parked; when trigger fires: resolve Promise, resume island; handler slot released; aftermath closes
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -55,17 +54,17 @@ A kukali that cancels MUST reject its suspension Promise cleanly without leaking
 
 `trigger` SHOULD match the `#slot` fragment of a papalohe wire in the same carrier.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ kukali >>
-<<~ kukali trigger=SlotName >>
-<<~ \suspends >>
-<<~ \suspends trigger:SlotName >>
+<<~ kukali>>
+<<~ kukali trigger=SlotName>>
+<<~ \suspends>>
+<<~ \suspends trigger:SlotName>>
 ```
 
 `\suspends` is the canonical English alias — emits the same `SigilNode { sigilName: "kukali" }`.
@@ -79,18 +78,18 @@ Regex (canonical):
 !!! Paired usage with papalohe
 
 ```text
-<<~ papalohe #on-score DeviceA -> ScoreDisplay trigger=OnEliminated fn=Show >>
+<<~ papalohe #on-score DeviceA -> ScoreDisplay trigger=OnEliminated fn=Show>>
 
 ... body ...
 
-<<~ kukali trigger=on-score >>
+<<~ kukali trigger=on-score>>
 ```
 
 `trigger:on-score` in kukali references `#on-score` — the fragment of the papalohe wire above.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verse-analogy >>
+<<~ ahu #verse-analogy>>
 
 !! Verse Analogy
 
@@ -103,13 +102,13 @@ OnEliminated<override>()<suspends> : void =
 ```
 
 Kukali maps this into memetic-wikitext:
-* `<suspends>` annotation → `<<~ kukali trigger=slot-name >>`
+* `<suspends>` annotation → `<<~ kukali trigger=slot-name>>`
 * Coroutine yield point → kukali sigil position in the carrier body
 * Resume on event → papalohe trigger fires; ReactionGraph resolves the subscribeOnce Promise
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -133,19 +132,19 @@ kind      = "Sigil"
 sigilName = "kukali"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-suspends >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-suspends>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DIHSB3krcrZIUTZQNlwCYaBCcDPYDW2K97FC37h448Q
+<<^ code="&#x0003;">>ni:///sha-256;IqV0wvhDbgCEOlNCp6vR7hNNFhv-mfaWPjVyMLbEpD4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

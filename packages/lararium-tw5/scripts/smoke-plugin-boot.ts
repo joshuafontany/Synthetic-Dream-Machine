@@ -93,13 +93,13 @@ async function main(): Promise<void> {
   // (the plugin's tiddlerdeserializer registration); verify both fields
   // land on the parent.
   const memeWithFraming = [
-    "<!-- <<~ !DOCTYPE = lar:///probe-meme >> -->",
+    "<!-- <<~ !DOCTYPE = lar:///probe-meme>> -->",
     "",
-    "<<^ code=\"&#x0001;\" ? -> lar:///probe-meme >>",
-    "<<~ ahu #head >>",
+    "<<^ code=\"&#x0001;\" ? -> lar:///probe-meme>>",
+    "<<~ ahu #head>>",
     "body",
-    "<<~/ahu >>",
-    "<<^ code=\"&#x0003;\" >>",
+    "<<~/ahu>>",
+    "<<^ code=\"&#x0003;\">>",
     "",
     "trailing prose after etx",
   ].join("\n");
@@ -121,18 +121,18 @@ async function main(): Promise<void> {
   // whose slot body has prose before its meta toml and trailing prose
   // after its inner kahea ref.
   const slotMeme = [
-    "<<^ code=\"&#x0001;\" ? -> lar:///probe-slot-meme >>",
-    "<<~ ahu #parent >>",
+    "<<^ code=\"&#x0001;\" ? -> lar:///probe-slot-meme>>",
+    "<<~ ahu #parent>>",
     "leading slot prose",
     "```toml meta",
     "field = \"value\"",
     "```",
-    "<<~ ahu #child >>",
+    "<<~ ahu #child>>",
     "child body",
-    "<<~/ahu >>",
+    "<<~/ahu>>",
     "trailing slot prose",
-    "<<~/ahu >>",
-    "<<^ code=\"&#x0003;\" >>",
+    "<<~/ahu>>",
+    "<<^ code=\"&#x0003;\">>",
   ].join("\n");
   const slotResults = deserializeTiddlers.call(
     (tw as unknown as { wiki: unknown }).wiki,

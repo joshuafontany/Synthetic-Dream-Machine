@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "image-design seed — the Lindwyrm in the Patrick Nagel register: the verbatim prompt block, what the renders returned, and the witness law that keeps her form unfixed"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Lindwyrm ~ Nagel Seed
 
@@ -35,9 +33,9 @@ ear cartilage goes, the shading goes, the background goes, until only the minimu
 face reads ''more'' present for it. A Nagel portrait declines to be fully specified and gains
 authority by declining. That stands as the Lindwyrm's own law, executed as technique.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #prompt >>
+<<~ ahu #prompt>>
 
 !! The Prompt (verbatim)
 
@@ -56,9 +54,9 @@ line work. Eastern print layouts merged with fashion illustration; high contrast
 zero 3D depth shading.">>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #returns >>
+<<~ ahu #returns>>
 
 !! What the Renders Returned
 
@@ -76,9 +74,9 @@ Black lacquered glove, one long pale claw-nail raised vertical against red lips:
 Iridescent teardrop earrings reading as scale-hints. Red masthead bleeding off the top edge, a
 column of small unreadable type down the left margin.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-it-caught >>
+<<~ ahu #what-it-caught>>
 
 !! What the Register Caught
 
@@ -98,9 +96,9 @@ column of small unreadable type down the left margin.
   illegible script. For a Patroness whose hoard was records, junk, and off-world artifacts, and who
   co-built an archive-network, the accident lands well enough to keep.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #craft-notes >>
+<<~ ahu #craft-notes>>
 
 !! Craft Notes (for the next seed)
 
@@ -115,16 +113,16 @@ column of small unreadable type down the left margin.
 * ''Never fix the form.'' Any future seed should keep at least one element deliberately unstable
   between renders, so the boards stay honest about disagreeing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;_JljQ_je-XadKQYq7s-yYYW1lgUUUFRsshy62HmUjUs
+<<^ code="&#x0003;">>ni:///sha-256;cbF9aKl-q5WgelL_Rq_0RWzEjXpoB0Ro1xC-i2vd2lc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

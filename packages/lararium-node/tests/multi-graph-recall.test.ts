@@ -245,7 +245,7 @@ describe("makeFormSearch — the form-leg policy (bearing · markers · keywords
 
   test("a MARKERS query (deriveSkeleton supplied) → vector similarity", async () => {
     const { palace, filterCalls, queryCalls } = fakePalace([formMatch(SHA_B)]);
-    const leg = makeFormSearch({ query: "the turn <<~ ward ! >>", formPalace: palace, deriveSkeleton: fakeDerive });
+    const leg = makeFormSearch({ query: "the turn <<~ ward !>>", formPalace: palace, deriveSkeleton: fakeDerive });
     const out = await leg({ nResults: 4, where: { register: "synthesis" } });
     expect(out).toHaveLength(1);
     expect(filterCalls).toHaveLength(0);
@@ -256,7 +256,7 @@ describe("makeFormSearch — the form-leg policy (bearing · markers · keywords
 
   test("a MARKERS query with NO deriver degrades to the keyword branch", async () => {
     const { palace, filterCalls, queryCalls } = fakePalace([]);
-    const leg = makeFormSearch({ query: "the turn <<~ ward ! >>", formPalace: palace });
+    const leg = makeFormSearch({ query: "the turn <<~ ward !>>", formPalace: palace });
     const out = await leg({ nResults: 4 });
     expect(out).toEqual([]);
     expect(queryCalls).toHaveLength(0);
@@ -299,7 +299,7 @@ describe("makeFormSearch markers branch — the in-VM query-derive routing (one 
     },
     basis: fakeBasis,
   } as unknown as { skeleton: MoveSkeleton; basis: SerializedBasis };
-  const MARKERS_QUERY = "what did we decide <<~ hud Aperture(10) OODA-HA(3) >> <<~ ward ! L-Prime >>";
+  const MARKERS_QUERY = "what did we decide <<~ hud Aperture(10) OODA-HA(3)>> <<~ ward ! L-Prime>>";
 
   test("a markers query → the VM derive routes to the VECTOR (query) path, structural plane present", async () => {
     const queryCalls: { skeleton: MoveSkeleton; basis: SerializedBasis }[] = [];

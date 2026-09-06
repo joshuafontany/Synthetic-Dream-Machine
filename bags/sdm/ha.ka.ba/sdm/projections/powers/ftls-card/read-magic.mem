@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/powers/ftls-card/read-magic>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/projections/powers/ftls-card/read-magic.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Read Magic — playable surface with clickable component pills"
 tags      = ["components/domain/divination", "components/function/magic-decode", "components/function/ecm-scan", "components/function/archive", "components/hook/dangerous", "mount-points/trait"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Read Magic — FTLS Card
 
-<<~ ahu #card >>
+<<~ ahu #card>>
 
 !! Read Magic
 //First Key, Archive Handshake//
@@ -29,9 +28,9 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 
 Tune to the writing and read its magical interface layer. The referee gives the active meaning; mark that surface ''recognized'' — you read it freely after. If it resists, win an `ecm-scan` contest. A sacrificed read leaves one trace.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #overcharge >>
+<<~ ahu #overcharge>>
 
 !! Overcharge
 
@@ -39,26 +38,26 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 * ''x4 (P:8)'' — read a linked inscription set; ask one structural question.
 * ''x8 (P:16, dangerous)'' — force a sealed/hostile archive; learn one hidden fact. On failure it reads back.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #components >>
+<<~ ahu #components>>
 
 !! Components
 
-<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
+<<~ kahea lar:///ha.ka.ba/lararium/lists/components>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
-<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/read-magic >>
-<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card>>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/read-magic>>
+<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;YoNcSfcCb6H2D-0s6bi-6taDUH_5ss-ROTQRt3FfaB8
+<<^ code="&#x0003;">>ni:///sha-256;d9a5nMHO4KZVG2AnhQhDjJ8-0fAiKr5R6LiWGwHrE7o
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

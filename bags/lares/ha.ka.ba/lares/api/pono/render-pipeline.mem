@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/render-pipeline>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/render-pipeline.mem"
@@ -9,7 +9,6 @@ mana          = 17
 manao         = 17
 manaoio       = 16
 namespace     = "&#x2299;"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "render pipeline law: render axes (stage/surface/mode/engine), three render modes, lar-render-mode dispatch, template cascade, causal island boundary, meme-ast in @lararium/tw5"
 source-symbol = "RenderMode RENDER_MODES RENDER_MODE_REACTION_WIRE"
@@ -18,11 +17,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/render-pipeline"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Render Pipeline Law
 
@@ -35,9 +34,9 @@ Two distinct engines carry render work:
 
 Both engines consume the same `text/memetic-wikitext` surface. The isomorphic parse engine lives in `@lararium/tw5` as a TS design surface (Vite → TW5 JS module). All consumers route through `@lararium/tw5`, not `@lararium/mesh`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #render-axes >>
+<<~ ahu #render-axes>>
 
 !! Render Axes — Stage, Surface, and Mode held apart
 
@@ -66,9 +65,9 @@ Orthogonal to surface: `""` (live), `carrier` (disk export), `projection` (froze
 
 ''Composition:'' a //stage// renders the shared graph onto a //surface// (camera) under a //mode//, driven by an //engine//. Four axes, freely combined — none collapses into another.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #causal-island >>
+<<~ ahu #causal-island>>
 
 !! Causal Island Boundary
 
@@ -89,9 +88,9 @@ The boundary separates:
 
 Every render pass MUST declare its mode before it crosses the boundary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-render-modes >>
+<<~ ahu #three-render-modes>>
 
 !! Three Render Modes
 
@@ -120,9 +119,9 @@ trigger     = "wiki.renderTiddler('text/plain', uri, { variables: { 'lar-render-
 
 ''Extending to new child-slot sigils:'' tag a tiddler `lar:///ha.ka.ba/tags/<sigil>-template`, define `\widget ~<sigil>(p1:"")` in the SharktoothSigil tiddler. No JS needed — the three-mode dispatch inherits automatically.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #template-cascade >>
+<<~ ahu #template-cascade>>
 
 !! Template Cascade
 
@@ -152,9 +151,9 @@ Template selection: `[all[shadows+tiddlers]tag[<template-tag>]!is[draft]] :map:f
 
 A target adapter may replace the default template by tagging a custom tiddler with the appropriate template tag. The cascade picks the first non-draft match — ordering follows TW5 tiddler ordering rules.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #child-slot-model >>
+<<~ ahu #child-slot-model>>
 
 !! Child-Slot Model
 
@@ -166,16 +165,16 @@ A target adapter may replace the default template by tagging a custom tiddler wi
 
 ''Compound forms:''
 ```
-<<~ ahu #slot >>            → bare child-slot; ~ahu widget
-<<~ kahea ahu #slot >>      → live transclusion of child slot; ~kahea~ahu procedure
-<<~ aka ahu #slot >>        → frozen/projection read of child slot; ~aka~ahu procedure
+<<~ ahu #slot>>            → bare child-slot; ~ahu widget
+<<~ kahea ahu #slot>>      → live transclusion of child slot; ~kahea~ahu procedure
+<<~ aka ahu #slot>>        → frozen/projection read of child slot; ~aka~ahu procedure
 ```
 
 The render posture difference (live vs. frozen) lives in the template cascade selection, not in sigil dispatch.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #suppressed-worksites >>
+<<~ ahu #suppressed-worksites>>
 
 !! Suppressed Worksites — Slots That Do Not Project
 
@@ -188,9 +187,9 @@ Some `ahu` slots are structural, not content — they MUST NOT render as tldraw 
 suppressed-worksites = ["meta", "meme-body-open", "body-close", "edges"]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #meme-ast-path >>
+<<~ ahu #meme-ast-path>>
 
 !! Non-TW5 Path — Meme AST
 
@@ -215,9 +214,9 @@ This AST represents the same surface that TW5 renders, but as a traversable type
 
 ''BOOTSTRAP_SCANS'' — a minimal static scan set active before grammar tiddlers load. Provides enough structure for the deserializer to operate at cold boot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #kapu-render-open >>
+<<~ ahu #kapu-render-open>>
 
 !! Kapu Render Posture — Open Question
 
@@ -225,9 +224,9 @@ This AST represents the same surface that TW5 renders, but as a traversable type
 
 Open question: should `kapu` gain render presence in HTML mode — a visible boundary or disclosure annotation in the story river? Resolution waits on mesh-network testing. Until it resolves, compliant renderers MUST NOT invent render output for `kapu` sigils. The compile-layer annotation behavior holds stable; the render behavior stays open.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hooko-boundary >>
+<<~ ahu #hooko-boundary>>
 
 !! Hoʻoko — Render Mutation Boundary
 
@@ -244,19 +243,19 @@ Trace continuity across the causal island boundary:
 # wiki tiddler → carrier render → disk carrier (faithful round-trip)
 # wiki tiddler → projection render → snapshot (aka-frozen sigil refs carry source URI)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;GAXRwipQRx9eTMVCTxVtbd8BTRYSYhpbdzVunlJc8AQ
+<<^ code="&#x0003;">>ni:///sha-256;LSeqR7sEMHy83qz4f3Rdp00g6cC6eTqlrzqAWhJFOmg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

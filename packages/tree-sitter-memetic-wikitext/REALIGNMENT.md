@@ -33,7 +33,7 @@ source-text NEVER changes · anything hand-review-shaped defers.
 
 **Exemptions (the script enforces, and REPORTS what it skipped):**
 - fence interiors (``` … ```)
-- `<<~ ahu #source-text >>` interiors — quoted human text
+- `<<~ ahu #source-text>>` interiors — quoted human text
 - the `library/` sub-trees (transcribed sources) until walked deliberately
 - any file dirty in git (a parallel session may hold it)
 

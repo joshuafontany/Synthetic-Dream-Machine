@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/three-lineage-convergence >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/three-lineage-convergence>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/sdm/ha.ka.ba/sdm/docs/three-lineage-convergence.mem"
 l-space    = "adjacent"
 mana       = 13
 manao      = 14
 manaoio    = 12
 rating     = "meme"
-register   = "Synthesis"
 retain     = true
 role       = "design research — the three-lineage convergence: Ars Magica's verb×form grammar, Mage's rated spheres, and the SDM thirteen; what each lens teaches the conversion program"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/sdm/docs/three-lineage-convergence"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Three-Lineage Convergence
 
@@ -27,9 +25,9 @@ Three magic-system designs, independently derived across four decades, factor ma
 — and their differences teach the SDM thirteen exactly where it stands. Read alongside
 [[arcana-model|lar:///ha.ka.ba/sdm/docs/arcana-model]]; grown from the 2026-08-13 lens session.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-three >>
+<<~ ahu #the-three>>
 
 !! The Three Factorings
 
@@ -45,9 +43,9 @@ Three magic-system designs, independently derived across four decades, factor ma
   and the fusions sit precisely at the cosmology's scars: the rewritten flesh, the stabbed Death,
   the maelstrom edge.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mappings >>
+<<~ ahu #mappings>>
 
 !! The Mappings (evidence of convergence)
 
@@ -64,9 +62,9 @@ Three magic-system designs, independently derived across four decades, factor ma
 * ''Psionics enters at 0e itself'' (Eldritch Wizardry) and needs no fourteenth room — Psychic
   Warfare takes the powers, Mana takes the point economy.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-lessons >>
+<<~ ahu #the-lessons>>
 
 !! What Each Lens Teaches
 
@@ -84,15 +82,15 @@ Three magic-system designs, independently derived across four decades, factor ma
   editions enter as witness lanes feeding the same thirteen — the guard-law's final clause,
   already proven survivable by every mapping above.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model >>
-<<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model >>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model>>
+<<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;2ps7tSM6fSrQLoVdbniAXw6rAGOgK9bCJ8E1I7DKGYA
+<<^ code="&#x0003;">>ni:///sha-256;8FB4qUQ2GNUF7SgCcnOQIekDDyyWSTQuI-_VG9kJDYg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heihei >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heihei>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heihei.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 16
 manaoio   = 15
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "canvasspace conditional-branch — the Verse `if`/`case` flow-branch; a `<decides>` failable condition tests serially, one execution arm fires; renders as a branch node whose arms fire as reaction wires; the canvas cousin of wai"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-heihei"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Heihei
 
@@ -30,9 +29,9 @@ The ''canvasspace conditional-branch''. The Verse `if` / `case` projected onto t
 
 Three principles share only the word "first": `heihei` tests a condition to branch //execution flow// (canvasspace); `wai` (`\if`) tests a filter to select //content// (wikispace); `holo` (`\race`) races //parallel flows// and the first to ''complete'' wins (canvasspace concurrency). `heihei` picks by condition-success, `holo` by completion-time — failure-logic, not a race.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the condition — a `<decides>` failable expression on the flow node
 ⏿ orient: heihei branches execution, it does not select content (that is `wai`) and it does not race (that is `holo`)
@@ -40,9 +39,9 @@ Three principles share only the word "first": `heihei` tests a condition to bran
 ▶ emit the branch node; the firing arm propagates as a reaction wire to its continuation
 ↺ confirm exactly one arm fired; the condition ran in a failure context, not as a boolean poll
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -54,31 +53,31 @@ A `case` form MUST carry a `_` default arm.
 
 The condition is a failure context, not a boolean test: the `then` arm fires when the condition succeeds, the `else` arm when it fails.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 Verse `if` form (failable condition → one arm):
 ```text
-<<~ heihei (Condition) >>then-flow<<~ mukuwai >>else-flow<<~/ heihei >>
+<<~ heihei (Condition)>>then-flow<<~ mukuwai>>else-flow<<~/ heihei>>
 ```
 
 Verse `case` form (value-match → one arm):
 ```text
-<<~ heihei case(Value) >>
+<<~ heihei case(Value)>>
   MatchA => arm-a
   MatchB => arm-b
   _       => default-arm
-<<~/ heihei >>
+<<~/ heihei>>
 ```
 
 Verse grounding: `if (Condition): then else: else` (the condition runs in a `<decides>` failure context); `case (Value): A => …  _ => …`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -92,19 +91,19 @@ effect         = "<decides>"
 arm-wire       = "reaction"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/holo >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/holo>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kpv-vFeEZXOiJzxjYAG2XQgEmM1Qn8HtSlhYGD1aLvk
+<<^ code="&#x0003;">>ni:///sha-256;Pheb2aGnF3ZM8ADTn3LO-N8r5_HSaNhGWR0RGAiBesk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

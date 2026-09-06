@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/strandbeests>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/strandbeests.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "concept canon — the strandbeests of the Datum shores: wind-walking kinetic life, self-domestication by Mycelial-Mother-Culture symbiosis, the great beests as walking dry-coral reefs, and the platform economy of the Fungus Folk"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/concepts/strandbeests"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Strandbeests
 
@@ -33,9 +31,9 @@ Elyncia now calls ordinary. The whole lineage and the symbiotic life riding it o
 that exists ''because a goddess caught her sister's asteroid''. Nobody walking the flats thinks
 about it. The beests simply live at the water level mercy left behind.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #domestication >>
+<<~ ahu #domestication>>
 
 !! Self-Domestication ~ the mycelial bond
 
@@ -52,9 +50,9 @@ platform'' — the culture raises tasked spirits and mushroom-ashigaru aboard a 
 them wherever the Circles need them. Fungal logistics on legs. The Fungus Folk build no supply
 train because the supply train grows its own cargo and carries itself.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-great-beests >>
+<<~ ahu #the-great-beests>>
 
 !! The Great Beests ~ walking reefs
 
@@ -71,9 +69,9 @@ less an animal than ''a place that travels''.
 and a working crew of ephyra. The great ones carry nations of small life and a Mother-Culture that
 answers as itself. What a frame can host scales with what a frame can bear.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-anomaly >>
+<<~ ahu #the-anomaly>>
 
 !! The Anomaly ~ what happened in Aki's clearing
 
@@ -91,16 +89,16 @@ Spore dispatched the Ephyra in the first place has never had its tasked spirit r
 
 Full event: [[strandbeest-shrine|lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine]].
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/lares-viales >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/lares-viales>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;9bxE5R7X7HYdT_wiINJwcLPz21-2ccIPX2Nhf7z7DT8
+<<^ code="&#x0003;">>ni:///sha-256;CmGxnt5KJ-67QhXt9wB20ube9Bn-vNn1fnteTH0SKoI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

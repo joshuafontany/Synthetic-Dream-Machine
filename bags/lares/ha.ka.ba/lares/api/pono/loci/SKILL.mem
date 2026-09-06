@@ -4,9 +4,9 @@ description: "Perform, audit, or repair a loci routing-and-rating pass under lar
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci/SKILL>>
 ```toml meta
 constraints        = ["S1: the canonical loci remains the stable-address capability law", "S2: derivation algorithm runs in full step order without skipping", "S3: resolved and declared-unresolved stay distinct; neither collapses into the other", "S4: rating commitment stays truthful; a path hit never overrides honest unresolved tension", "S5: file-siting mutations and opener changes cross as distinct bounded Hoʻoko transactions", "S6: aftermath names all declared-unresolved addresses; none silently disappear"]
 covers             = ["lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -14,7 +14,6 @@ file-path          = "bags/lares/ha.ka.ba/lares/api/pono/loci/SKILL.mem"
 mana               = 14
 manao              = 16
 manaoio            = 13
-register           = "Synthesis-Canon"
 role               = "agent-facing procedural surface for loci routing and rating passes"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/loci"
 tags               = ["api/pono/meme", "api/pono/loci"]
@@ -22,7 +21,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/loci/SKILL"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Loci / SKILL
 
@@ -34,7 +33,7 @@ This skill does not widen, soften, or reinterpret it.
 Loci SKILL opens the procedural stream here.
 
 
-<<~ ahu #load-contract >>
+<<~ ahu #load-contract>>
 
 !! Load Contract
 
@@ -48,9 +47,9 @@ Loci SKILL opens the procedural stream here.
 * `loci` eligibility requires `\w\.\w\.\w` root path segment; outside that pattern, MAY NOT implement
 * MCP resolution remains research backlog; no live resolver operates today
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #workflow-contract >>
+<<~ ahu #workflow-contract>>
 
 !! Workflow Contract
 
@@ -80,9 +79,9 @@ Do not:
 * batch a file-siting mutation with a canon-MOVE opener change silently
 * claim MCP resolution operates when it does not
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trigger >>
+<<~ ahu #trigger>>
 
 !! Trigger
 
@@ -100,9 +99,9 @@ Not for:
 * generic meme law → `lar:///ha.ka.ba/lares/api/pono/meme`
 * invariant compression or companion-meme splitting → `lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ begin from canonical loci; gather URI and convention surfaces before decomposition
 ⏿ run the derivation algorithm in full step order; classify resolution state without collapse
@@ -110,9 +109,9 @@ Not for:
 ▶ prepare the routing product and cross mutations as bounded Hoʻoko transactions
 ↺ verify ratings stay truthful under unresolved tension and transaction bounds stayed explicit; name aftermath including all residue and all declared-unresolved addresses
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -129,9 +128,9 @@ Do not decompose the URI here.
 Do not fabricate a resolution substrate.
 Do not infer `implements loci` without evidence.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -145,9 +144,9 @@ Decompose; classify resolution state.
 
 A `lar:` URI in a `depends-on` array that resolves to no derived path counts as declared-unresolved — real constraint on canon-MOVE and rating.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -164,9 +163,9 @@ Rating posture:
 * `manao` rises: carrier knows its loci role; enacted law stays separate from roadmap speculation
 * `manaoio` rises: resolution repeats reliably; backlog surfaces honestly
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -186,9 +185,9 @@ Do not:
 * emit a roadmap note as if a live resolver operates
 * batch a file-siting mutation with a canon-MOVE change in one unlabeled step
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! ↺ Aftermath
 
@@ -211,18 +210,18 @@ Aftermath — one completeness judgment per routing pass:
 
 Then widen: does the stack describe itself coherently after the pass? An Aftermath that names only resolved URIs hides the pressure that matters most.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;YQSSk7-zvaBL8vA23rhY2iZehNLhGJbFS0gaCTtl6FM
+<<^ code="&#x0003;">>ni:///sha-256;SCAhPaI2BcBLbVy9saZNJc5zztulQ-B1C24batC8GNo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-procedure >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-procedure>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/sigil-procedure.mem"
 mana      = 16
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = true
 role      = "design record: \\procedure pragma-alias sigil — pono(right) to TW5 procedure definition and call patterns, wehe cross-ref, declaration form"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-procedure"]
@@ -15,20 +14,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-procedure"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! ~\procedure Sigil Design
 
-`<<~ \procedure name(params) >>body<<~/ \procedure >>` — TW5 procedure declaration form.
+`<<~ \procedure name(params)>>body<<~/ \procedure>>` — TW5 procedure declaration form.
 
 The `\procedure` sigil makes TW5's `\procedure` pragma first-class in memetic-wikitext and aligns the meme with the submodule-on-disk definition and call patterns.
 Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #semantics >>
+<<~ ahu #semantics>>
 
 !! Semantics
 
@@ -41,14 +40,14 @@ Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary)
 
 Cross-ref: `lar-see-also: wehe`. When `sigil-wehe.tid` ships (Path G.SharktoothSigil), it will carry `lar-see-also: \procedure` as the reverse pointer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dispatch >>
+<<~ ahu #dispatch>>
 
 !! Dispatch Form
 
 ```
-<<~ \procedure greet(name:"world") >>Hello <<name>>!<<~/ \procedure >>
+<<~ \procedure greet(name:"world")>>Hello <<name>>!<<~/ \procedure>>
 ```
 
 Equivalent native TW5:
@@ -58,22 +57,22 @@ Hello <<name>>!
 \end
 ```
 
-The `lar-sigil.ts` wikirule matches `<<~ \procedure … >>` as a compound block opener;
+The `lar-sigil.ts` wikirule matches `<<~ \procedure …>>` as a compound block opener;
 the body runs through the pragma handler (TW5 parse-time, not render-time).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-shelf >>
+<<~ ahu #source-shelf>>
 
 !! Source Shelf
 
-<<~/pranala >>
+<<~/pranala>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-wehe >>
-<<~/pranala >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-wehe>>
+<<~/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;OIO-RstKyZbE6ouZ1WuBb2MK-njjlotR41xY47d7FJg
+<<^ code="&#x0003;">>ni:///sha-256;9LUtQdVlzBXtDS2VxdqcnSvDur7bXQzAR79xSZ-bjk0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

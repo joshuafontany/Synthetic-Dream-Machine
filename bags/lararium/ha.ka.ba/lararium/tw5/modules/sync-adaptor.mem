@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor>>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/sync-adaptor.mem"
 heleuma       = "ha"
@@ -8,7 +8,6 @@ module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 mana          = 18
 manao         = 17
 manaoio       = 17
-register      = "Synthesis-Canon"
 role          = "canonical source copy: LarariumCrdtSyncAdaptor — CRDT↔TW5 echo-loop gate and apply-change protocol"
 source-symbol = "_applyChange"
 status-date   = "2026-04-30"
@@ -17,9 +16,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Sync Adaptor — Contract
 
@@ -36,21 +35,21 @@ Echo-loop guard rule:
 * Any `saveTiddler` call while `_applying !== null` returns immediately with revision "0"
 * This prevents the TW5 wiki change event from re-writing the change back to the store
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/sync/save-cascade >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/sync/save-cascade>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kvPC825BonFjTy-vlisIdm7A0LTUf-ip8kf18VdEQ7Q
+<<^ code="&#x0003;">>ni:///sha-256;oYz_RkFeQ2BXslq7jJ1vW9r1P0-VTn66Fk8yIRkGC0U
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

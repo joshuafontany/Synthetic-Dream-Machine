@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/persona-circle >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/persona-circle>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/persona-circle.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 15
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Canon"
 retain            = true
 role              = "persona-circle — the identity model (WHO-plane), re-cut on two axes: COMPOSITION (bottom-up emergent Circles: vessel~veil binding → handle-Circle → me-Circle) ⊥ DISCLOSURE (veiled↔known, a per-join dial). Two-key atom (vessel-key device-minted ⊥ veiled-user-key); the persona side derives one-seed ed25519-HD; key-layer unlinkability only"
 tags              = ["api/pono/meme"]
@@ -19,19 +18,19 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/persona-circle"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Persona-Circle ~ the human as a Circle of selves
 
-A human reads not as one identity but as a ''private Circle of context-selves'' — Plurality Pono made literal in the identity plane, the identity instance of [[multi-fractal]]. The model lives entirely on the ''WHO plane'' (membership/identity); the INFRA plane (transport/carriage) stays orthogonal and untouched here. <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+A human reads not as one identity but as a ''private Circle of context-selves'' — Plurality Pono made literal in the identity plane, the identity instance of [[multi-fractal]]. The model lives entirely on the ''WHO plane'' (membership/identity); the INFRA plane (transport/carriage) stays orthogonal and untouched here. <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
 Triple-cruci­bled (local canon · the operator's recorded design · the deep-knowledge web): the spine restates held canon, the overclaims got cut.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-axes >>
+<<~ ahu #two-axes>>
 
 !! The Two Axes ~ composition ⊥ disclosure
 
@@ -42,9 +41,9 @@ The WHO plane re-cuts into two ''orthogonal'' axes (the same de-fusing move [[ca
 
 The earlier error fused them — labelling the boundaries "anon vs known" when the real boundaries are the cardinality joins. //Which hearth// (composition) and //how-linkable// (disclosure) ask different questions. The veil is not "anon petname relabeled" — it is the disclosure axis, on which ''anon = name⊥''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-atom >>
+<<~ ahu #the-atom>>
 
 !! The Atom ~ a `vessel~veil` binding, two keys
 
@@ -55,17 +54,17 @@ The base atom carries ''two keys'' (Veilid's peer-identity ⊥ user-identity, a 
 
 This adds a //new// cut beside the existing per-vessel Ed25519-sign ⊥ X25519-KEM cut (#/four-port-swap); it does not restate it.
 
-''THE TRUE NAME MODEL ~ how the atoms bind without merging.'' The atom holds its two keys apart; a ''signed edge'' is what joins atoms — never shared key material. ''BIND BY EDGE, NEVER BY SEED.'' The alternative fails at the substrate: a key ''copied'' between vessels //is// the collector, presented to every verifier it meets, landing on ''merge'' by the single-bit test (#/the-vault) and linking every self beneath any policy written above it. The edge binds AT the hearth's True Name, which is why a Place must hold a name of its own (<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>).
+''THE TRUE NAME MODEL ~ how the atoms bind without merging.'' The atom holds its two keys apart; a ''signed edge'' is what joins atoms — never shared key material. ''BIND BY EDGE, NEVER BY SEED.'' The alternative fails at the substrate: a key ''copied'' between vessels //is// the collector, presented to every verifier it meets, landing on ''merge'' by the single-bit test (#/the-vault) and linking every self beneath any policy written above it. The edge binds AT the hearth's True Name, which is why a Place must hold a name of its own (<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>).
 
-''The edge runs SIDEWAYS, never downward'' (operator ruling — the inversion-of-control eigenstate). Each ''device+veil atom stands as a LOCAL IDENTITY'' in its own right, and the worn veil ''changes at will''. The ''PersonaGroup COLLECTS'' those atoms that share a pet-name for the human into an ''identity-FLEET'' — it does not grant them, does not own them, and stands as no root above them. A fleet reads as ''what the atoms declare when they name each other'' (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >> — //"no edge speaks for another member"//). So an edge that runs only root→device names a ''hierarchy'', never this fleet; the pono form carries ''both halves, each signed by its own subject'', and membership resolves as the reciprocal-edge closure rather than a pinned grant.
+''The edge runs SIDEWAYS, never downward'' (operator ruling — the inversion-of-control eigenstate). Each ''device+veil atom stands as a LOCAL IDENTITY'' in its own right, and the worn veil ''changes at will''. The ''PersonaGroup COLLECTS'' those atoms that share a pet-name for the human into an ''identity-FLEET'' — it does not grant them, does not own them, and stands as no root above them. A fleet reads as ''what the atoms declare when they name each other'' (<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>> — //"no edge speaks for another member"//). So an edge that runs only root→device names a ''hierarchy'', never this fleet; the pono form carries ''both halves, each signed by its own subject'', and membership resolves as the reciprocal-edge closure rather than a pinned grant.
 
 ''INTERNAL ⊥ EXTERNAL — the hard law.'' The fleet's ''internal'' identity — the pet-name declaring //these atoms are one hand// — ''NEVER equals'' the ''external'' identity the operator publishes as a Handle. The collector stays inside; the face goes out; ''no act may collapse them to one value''. That is #the-vault's single bit read at the fleet scale: publish the face, never the fleet.
 
-''One seed, persona-side only.'' The ''veiled-user / persona'' keys derive from ONE seed via ''ed25519 HD-derivation, all-hardened paths'' — recover the seed, re-derive the whole persona constellation; ed25519-HD is structurally immune to the xpub-linkage trap (SLIP-0010 = hardened-only). The ''vessel-key stays outside the seed'' (device-minted). So recovery is cheap on the persona side without fusing substrate sovereignty. <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
+''One seed, persona-side only.'' The ''veiled-user / persona'' keys derive from ONE seed via ''ed25519 HD-derivation, all-hardened paths'' — recover the seed, re-derive the whole persona constellation; ed25519-HD is structurally immune to the xpub-linkage trap (SLIP-0010 = hardened-only). The ''vessel-key stays outside the seed'' (device-minted). So recovery is cheap on the persona side without fusing substrate sovereignty. <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #composition >>
+<<~ ahu #composition>>
 
 !! Composition ~ emergent Circles (inversion of control)
 
@@ -85,9 +84,9 @@ Pure inversion-of-control ''breaks at the multi-principal key-handover'': with e
 
 ''The concern narrows to that ONE window.'' Witnessed (`cabal-two-human`, 3/3): two DIFFERENT humans on a LAN, no shared metal, ride BeeKEM through a cabal under ''bounded concurrency'' — concurrent CONTENT converges (each reads the post the other made without seeing it first), and concurrent ADD+ADD survives (both admit a third at once, no crash). So a small, low-churn cabal shares content on CGKA today (as `dreamnet-architecture` already rules: cabal membership scopes read). The tie-break governs ONLY the concurrent add-''while''-remove key-leak the line above names — never multi-principal sharing at large. The add-while-remove leak — the very window this seat exists for — was probed (`cabal-two-human`, 5/5) and does NOT manifest for a two-human cabal: keyhive REFUSES a revoke ''up'' the chain (a member cannot revoke its own delegator — "Proof missing to authorize revocation"), and an authorized revoke cleanly excludes the removed member even RACING a concurrent add (removed member reads nothing after its removal). So ''accept-and-heal (BeeKEM's native rekey) suffices'' for the two-human window; the kahu stays optional — reserved for larger or higher-churn cabals where deeper concurrency may still bite. One honest un-probed edge remains: a member added through a CONFLICTED-root double-add may need a conflict-key retry to read.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #disclosure >>
+<<~ ahu #disclosure>>
 
 !! Disclosure ~ the per-join dial, and its gate
 
@@ -95,9 +94,9 @@ Pure inversion-of-control ''breaks at the multi-principal key-handover'': with e
 
 ''The Sybil gate at the Circle-join'' is the operator's designed ''voucher cost-dial'': marginal-not-absolute (`rb>c`, the voucher supplies r), the ''voucher co-pays AND becomes the watcher'', ''anergy-not-ban'' (no vouch → stay at the anon floor, re-presentable), slashing-by-revocation. The pledge is a ''WHO-plane edge'' (who-vouches-for-whom) — the planes stay clean. It ''prices'' Sybil, never eliminates it. ''The mechanism is BUILT'' (`veil-vouch.ts`): a voucher carries ''DECAYED rep across a HOLD'' (`carryRepAcrossHold`: stake × decay, < 1 → no free teleport; the rep rides the VOUCHER edge, the fresh key stays public-unlinkable), guarded by a ''one-time nullifier'' (= an epoch-lease slot — blocks sever-and-refound rep-farming). Left OPEN, the operator's forks: the ''dial numbers'' (decay-rate · stake-fraction) ride as parameters; ''one-kahu-vs-threshold'' blind-oracle + the actual ''ZK blind-signature'' (certify without knowing which vessel — the Identity-Continuity Paradox: someone holds the link) stay the deferred crypto layer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-vault >>
+<<~ ahu #the-vault>>
 
 !! The Vault ~ the collector is a secret, never a group
 
@@ -150,9 +149,9 @@ NETWORK-facing nym be the ZK-proven scope pseudonym. Then verifiable · per-scop
 credential-linkable — the three things bare derivation cannot assert — and ''the vault falls out for free,''
 ''because it IS the committed secret.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-plane-name >>
+<<~ ahu #the-plane-name>>
 
 !! The Plane Name ~ how a vessel finds a compartment without a map of them
 
@@ -182,7 +181,7 @@ A vessel wants a word for ''the plane I stand in''. Every naming system surveyed
 
 ''The permissive precedent does not reach a lararium.'' seL4 resolves invocations against an implicit per-thread root and survives, because that root sits kernel-installed, per-subject, unforgeable, and ''not a string any caller can utter''. A bag id reads as a string in a document.
 
-''Why the stakes exceed style.'' The capability layer hashes a bag URL to ''seed the document'' behind it, then looks it up verbatim to grant access — so for a stretch of the stack the name //is// the plane. Two spellings seed two documents no aliasing reconciles, which makes a rename after the ring lights a re-founding rather than an edit. And the naming art adds the clause worth carrying: a later change to a binding ''MUST NOT'' rewrite what an earlier resolution already stored (NIP-05). Resolution never re-fires backward. <<~ confidence 16/20 >>
+''Why the stakes exceed style.'' The capability layer hashes a bag URL to ''seed the document'' behind it, then looks it up verbatim to grant access — so for a stretch of the stack the name //is// the plane. Two spellings seed two documents no aliasing reconciles, which makes a rename after the ring lights a re-founding rather than an edit. And the naming art adds the clause worth carrying: a later change to a binding ''MUST NOT'' rewrite what an earlier resolution already stored (NIP-05). Resolution never re-fires backward.
 
 ''An ungrounded gesture halts.'' A deictic naming a compartment the vessel does not carry reads as an ERROR, never a fallback to a first plane — DNS's rule, and every silent-default case in the surveyed art produced documented harm.
 
@@ -190,11 +189,11 @@ A vessel wants a word for ''the plane I stand in''. Every naming system surveyed
 
 ''The plane predicate matches what the derivation can PRODUCE'' — the stem plus the tag's exact hex width — rather than the stem plus anything. A looser rule accepts strings the derivation never emits, and invites a caller to hand-construct a plane name.
 
-''The honest limit.'' The tag names, it never seals: someone already holding a group's doc id computes its plane name freely. What the derivation buys reads narrower and real — the name carries ''no vessel material and no sibling material'', so two compartments on one laptop produce two ids with nothing of the laptop, and nothing of each other, inside either. The Janus probe surface rides the transport, unchanged by any naming choice. <<~ confidence 15/20 >>
+''The honest limit.'' The tag names, it never seals: someone already holding a group's doc id computes its plane name freely. What the derivation buys reads narrower and real — the name carries ''no vessel material and no sibling material'', so two compartments on one laptop produce two ids with nothing of the laptop, and nothing of each other, inside either. The Janus probe surface rides the transport, unchanged by any naming choice.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #honest-scope >>
+<<~ ahu #honest-scope>>
 
 !! Honest Scope ~ the key layer only
 
@@ -209,14 +208,14 @@ The model closes ''only the key layer'' — and there it closes well: unlinkable
 
 And the substrate itself, by canon, has ''no forward-secrecy and no retroactive revocation'' — a leaked vessel-key reads all its history; //that fact IS the security posture// (#/four-port-swap). Claiming "no observer can link the selves" would be Confabulation-as-Canon. The truthful claim: ''the key layer is solved and unlinkable-by-construction on ed25519-HD; transport and behavioral ride separate, open machinery.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/mookuauhau>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;CwnqPkqHeqresF4zCX4qCajijBUd-raFvmzM6HzFFsU
+<<^ code="&#x0003;">>ni:///sha-256;8IltIGrsnL05fUc94RPXxndMCQlIuoknqtMIMTEswTQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

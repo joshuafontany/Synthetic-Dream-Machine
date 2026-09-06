@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loulou >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loulou>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loulou.mem"
@@ -8,7 +8,6 @@ mana      = 17
 manao     = 17
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "relation-family edge sugar — outgoing semantic link; no execution pulse; shorthand for pranala family:relation"
 tags      = ["api/pono/pranala", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-loulou"]
@@ -16,22 +15,22 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Loulou
 
 //loulou// — Hawaiian: to tie, bind, fasten; to link together.
 
 An outgoing relation-family edge sugar. Names what kind of connection holds between two sockets.
-Carries no execution pulse. Sugar for `<<~ pranala from=? -> to=URI family=relation >>`.
+Carries no execution pulse. Sugar for `<<~ pranala from=? -> to=URI family=relation>>`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the target URI at the link mouth — note the destination socket
 ⏿ orient: family:relation, traversal:source-to-target, propagation:none; no execution pulse
@@ -39,9 +38,9 @@ Carries no execution pulse. Sugar for `<<~ pranala from=? -> to=URI family=relat
 ▶ emit EdgeSugarNode with sigil:loulou, family:relation; render as directed relation arc
 ↺ edge registered in pranala graph; traversal queries from source can now reach target; confirm link stable; no ownership or lifecycle stake transferred
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -55,16 +54,16 @@ A loulou SHOULD carry relation semantics alone; dataflow, control, and reaction 
 `family:relation` — names an ontological or semantic connection; traversal moves source-to-target;
 propagation is none. The edge says what holds between the sockets, not what runs between them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ loulou URI >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme#/law >>
+<<~ loulou URI>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme#/law>>
 ```
 
 `?` source resolves to the nearest enclosing socket (ahu fragment or meme URI).
@@ -78,12 +77,12 @@ Groups: `[full, target-uri]`
 
 Full pranala expansion:
 ```text
-<<~ pranala from=? -> to=URI family=relation lifecycle=instance traversal=source-to-target propagation=none >>
+<<~ pranala from=? -> to=URI family=relation lifecycle=instance traversal=source-to-target propagation=none>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -108,20 +107,20 @@ role-recommended   = false
 confidence-bounded = false
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/aka >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/aka>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahea>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-link >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-link>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;IRUJO14I7GjW0aejUpuQy2WOi5v34Ed_KN2E3I69TV0
+<<^ code="&#x0003;">>ni:///sha-256;BPzKDPLaimcqhGMrCLwWT6tbowL1Uvjs4VzFSlYhcP4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

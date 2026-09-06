@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/identity-enacts-relation.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 11
 manao         = 11
 manaoio       = 11
-register      = "Synthesis"
 retain        = true
 revision-note = "PROVISIONAL — the constructor, the declared partition, declaration ⊥ gauge, fluid-not-frozen rank, and the vocabulary. Operator-ruled spans marked RULED; the rest reads PROPOSED and unbuilt"
 role          = "the identity plane's ontology: identity ENACTS a relation; a mutual hold constitutes a scale RELATIVE TO A DECLARED PARTITION; the declaration, the measurement and the decision stand as three artifacts with three owners; rank runs fluid, never frozen, and a lift EXPIRES. Expands lararium-identity's five-scale axis with what makes a scale real"
@@ -17,11 +16,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Identity Enacts a Relation ~ what makes a scale real
 
@@ -33,9 +32,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 ''RULED.'' Identity ENACTS a relationship; it never names a thing. The identity functor returns a relationship-functor. //Layers of identity, no "an identity."// A thing-model — one global identity per human, resolvable now by anyone — IS the census, and serves only empire. Humans stay fuzzy beneath whatever pinned real-world name they carry; that pin never travels inward and never leaks outward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #acts-faces-relations >>
+<<~ ahu #acts-faces-relations>>
 
 !! Acts · Faces · Relations ~ the whole plane in three words
 
@@ -49,9 +48,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 ''AND THE HUMAN KEEPS THE DIAL.'' A party governs how much they share and in which context, always. That never forbids modelling — it fixes the FORM: ''whatever gets modelled about a party gets modelled as a RELATION'', never as a property of them. A property would describe a person the system may not resolve; a relation describes something that happened between two faces, which the system may hold honestly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-act-shape >>
+<<~ ahu #the-act-shape>>
 
 !! One act-shape ~ and the guard against collapsing it
 
@@ -75,9 +74,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 ''Held open'': a quorum signing together may name a fourth arity — CO-ACTED, several faces at one instant on one artifact — which reads as neither unilateral, bilateral, nor witnessed. That case tests whether the axes describe structure or merely the six cases they came from.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-constructor >>
+<<~ ahu #the-constructor>>
 
 !! The Constructor ~ a mutual hold makes the next scale
 
@@ -97,9 +96,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 ''RULED — the top does not close.'' DreamNet stands as the FIELD Nexuses found //within//, never a constructed rung. The reason runs arithmetic rather than taste: ''a closed top would be the thing that can act alone over everything.'' A closed top is an empire. Recognition edges across the mesh therefore stay NON-TRANSITIVE and refuse closure — and non-transitivity is what keeps a hostile Nexus from riding an inherited edge into a house.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #declared-partition >>
+<<~ ahu #declared-partition>>
 
 !! The Declared Partition ~ no partition-free fact stands
 
@@ -113,9 +112,9 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''Budget the engineering on making the declaration honest and expensive, never on making the gauge clever.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-artifacts >>
+<<~ ahu #three-artifacts>>
 
 !! Three Artifacts, Three Owners
 
@@ -128,7 +127,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''THE THIRD ARTIFACT ARRIVED FROM METROLOGY, and its absence re-enacted our own forbidden fusion one layer down.'' Conformity assessment runs specification ⊥ measurement ⊥ decision rule, because ''a gauge that sets its own threshold picks the threshold that flatters its own measurement'' — verbatim the argument this meme makes against a namer who gauges. A measurement without stated uncertainty cannot carry a guard band, and without a guard band nothing can say //above the line, but not by enough//.
 
-''STANDING SPLITS IN TWO, and one English word carried both.'' ''Standing-to-object'' names a PROCEDURAL capacity — who may raise that a declaration or a reading reads wrong. `kūlana` names an ACCRUED position. A party may hold deep `kūlana` and no standing-to-object, or the reverse; they arrive from different places and neither substitutes. ''The gauge reads `kūlana`; standing-to-object comes from the tier at which a thing gets published'' (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>).
+''STANDING SPLITS IN TWO, and one English word carried both.'' ''Standing-to-object'' names a PROCEDURAL capacity — who may raise that a declaration or a reading reads wrong. `kūlana` names an ACCRUED position. A party may hold deep `kūlana` and no standing-to-object, or the reverse; they arrive from different places and neither substitutes. ''The gauge reads `kūlana`; standing-to-object comes from the tier at which a thing gets published'' (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>).
 
 ''AND SEPARATION EXISTS TO MANUFACTURE THAT SECOND FACULTY, never merely to divide labour.'' Geodesy ran the counterexample: where one body both defined and realized a reference frame, the name stayed fixed while the thing it named moved materially, ''eight times across forty years, users never notified'' — because no third party held standing to object. ''The fused case did not fail loudly. It failed by staying quiet.''
 
@@ -138,9 +137,9 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''A declaration MUST name its mechanisms.'' Partition a well-mixed population arbitrarily and the Price equation reports the groups as maximally individual — pure artefact. The cure: //"group-level covariance can only be interpreted as higher-level selection when that covariance is maintained by individuating mechanisms."// A declaration naming no mechanism produces noise, never standing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-gauge >>
+<<~ ahu #the-gauge>>
 
 !! The Gauge ~ can this entity dispose of you alone
 
@@ -152,11 +151,11 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''Entropy over the roster DIES.'' A Sybil raises it — a Cabal of one minting eight faces scores maximal entropy and passes. The standard decentralisation triple (entropy, Gini, Nakamoto) is roster-based and Sybil-blind by construction. //A roster you write; a Ψ you earn.//
 
-''And the young-Cabal case has an answer:'' //"we can use the presence of individuating mechanisms to infer whether the objects at a hierarchical level have the capacity, EVEN IF THE CAPACITY IS NOT CURRENTLY BEING REALISED."// Mechanism-presence carries modal force where an activity metric carries none — a quiet island still holds standing. ''And the capacity stays parasitic on a history of actual EXERCISE'' — mechanism-presence grounds it, and nothing grounds it absent acts, which is what separates YOUTH (holds, merely recent) from LAPSE (holds gone) without stipulating either. Worked at thirteen centuries by Ise shikinen sengū: //the stored object never reads as the building; it reads as the capacity to re-stand the building, kept alive only by mandated exercise// (<<~ loulou lar:///ha.ka.ba/lares/api/pono/pattern-integrities-cultural >>, P7).
+''And the young-Cabal case has an answer:'' //"we can use the presence of individuating mechanisms to infer whether the objects at a hierarchical level have the capacity, EVEN IF THE CAPACITY IS NOT CURRENTLY BEING REALISED."// Mechanism-presence carries modal force where an activity metric carries none — a quiet island still holds standing. ''And the capacity stays parasitic on a history of actual EXERCISE'' — mechanism-presence grounds it, and nothing grounds it absent acts, which is what separates YOUTH (holds, merely recent) from LAPSE (holds gone) without stipulating either. Worked at thirteen centuries by Ise shikinen sengū: //the stored object never reads as the building; it reads as the capacity to re-stand the building, kept alive only by mandated exercise// (<<~ loulou lar:///ha.ka.ba/lares/api/pono/pattern-integrities-cultural>>, P7).
 
 ''PARTIAL CONFORMANCE TAKES A SEAT, and two unrelated fields named the same absence.'' A party may sit ''out of current conformance and still in communion'' — on named authority, for a named reason, bounded and revocable. The consensus literature reaches it as the un-upgraded node that stays reachable and syncing while no longer enforcing the newest rule: ''not a member, not an exile, a member with reduced sovereignty''. The canonical tradition reaches it as its single most-used instrument. This stack already holds the mechanism — capability-degradation by composition — and had never pointed it at membership.
 
-''THE LIMIT OF A SEPARATION CONTROL, measured.''' Splitting declarer from gauger addresses ''self-review'' and touches none of self-interest, advocacy, familiarity or intimidation. Across seven canonical failures in a field that formalised the split for a century, ''six kept structural separation perfectly and failed anyway'', on one invariant: ''whoever pays the gauge bends the gauge.'' Read the split as one control among five, never as the relation's cure (<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention >>).
+''THE LIMIT OF A SEPARATION CONTROL, measured.''' Splitting declarer from gauger addresses ''self-review'' and touches none of self-interest, advocacy, familiarity or intimidation. Across seven canonical failures in a field that formalised the split for a century, ''six kept structural separation perfectly and failed anyway'', on one invariant: ''whoever pays the gauge bends the gauge.'' Read the split as one control among five, never as the relation's cure (<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention>>).
 
 ''NO SHARED ORIGIN STANDS — and ours hides in the ring.'' Every attack-resistant trust metric surveyed needs a privileged origin: a seed set, a pre-trusted set, or a verifier-centric vantage. What the origin buys reads precisely — ''the attack-edge BOUND'' (a quantity undefined without a designated honest region) and ''a single publishable answer''. Refusing a shared origin therefore costs the theorem and the publication, never the algorithm.
 
@@ -168,9 +167,9 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''The gap:'' individuals need BOTH policing (suppress within-level selection) AND demarcation (increase between-level selection), and //"no policing definition, however functional, will succeed… the policing effect is wholly negative."// This stack holds only policing — quorum, thresholds, cap-degradation. ''A Cabal with only policing is a muscle cell.'' The scarce expiring flow may be the missing half.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-currents >>
+<<~ ahu #the-currents>>
 
 !! Four currents, and refusing to rank two of them ranks them anyway
 
@@ -188,9 +187,9 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''And a fifth the ring has no seat for: FORBEARANCE, running down from OUTSIDE.'' The commons literature's least-cited principle names a superior ''declining to act'' — the right to organise going unchallenged. A ring with nothing above it holds nobody positioned to forbear, so it cannot obtain the one condition that literature found necessary. Named here as an honest absence rather than solved.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #rank >>
+<<~ ahu #rank>>
 
 !! Rank ~ fluid, never frozen
 
@@ -230,11 +229,11 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 > ''RULED SHAPE — SPEED AT THE EDGE, GENTLENESS IN THE COLLECTIVE.'' Any node MAY refuse any peer ''instantly, privately, unilaterally'', requiring no community act, no quorum, and no notice — a refusal-to-hear costs the refuser nothing and takes nothing from anyone. Standing meanwhile moves only by the renewal interval, from below, with no lowering act anywhere. The fast instrument lives at one node and reaches one relation; the slow instrument lives in the collective and reaches standing.
 
-''REFUSAL-TO-HEAR AND LOSS-OF-STANDING MUST NEVER SHARE A MECHANISM.'' Fuse them and a unilateral refusal becomes a striking power the whole model exists to forbid — one node's private decision would move a party's standing across the mesh, which reads as exactly the lowering act #rank refuses, arriving through the back door. Kept apart, a refused party loses reach with ONE peer and loses nothing anywhere else, and the refusal publishes nothing an adversary can read as a verdict. <<~ confidence 14/20 >>
+''REFUSAL-TO-HEAR AND LOSS-OF-STANDING MUST NEVER SHARE A MECHANISM.'' Fuse them and a unilateral refusal becomes a striking power the whole model exists to forbid — one node's private decision would move a party's standing across the mesh, which reads as exactly the lowering act #rank refuses, arriving through the back door. Kept apart, a refused party loses reach with ONE peer and loses nothing anywhere else, and the refusal publishes nothing an adversary can read as a verdict.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #admission >>
+<<~ ahu #admission>>
 
 !! Admission ~ tolerance, never detection
 
@@ -248,19 +247,19 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 ''The bound reports itself as ONE scalar over the whole fold'', never a per-identity total, so ''do not render running totals'' holds while a caller can still see a ceiling bind. And the ORIGIN sits outside it: ε rides as teleport mass, assigned rather than absorbed, so a cap on absorption never shrinks the walk's restart pool.
 
-<<~ confidence 17/20 >> ''A ceiling is a clamp, never an ordering'' — two identities at the cap read indistinguishable, which keeps `no frozen rank` intact while concentration stops running free. And cumulative advantage runs on prestige, not merit — seeding ONE award to randomly-chosen contributors produced 12/100 further awards against 2/100 controls, with //"no greater productivity"//. ''One gift begets six.''
+''A ceiling is a clamp, never an ordering'' — two identities at the cap read indistinguishable, which keeps `no frozen rank` intact while concentration stops running free. And cumulative advantage runs on prestige, not merit — seeding ONE award to randomly-chosen contributors produced 12/100 further awards against 2/100 controls, with //"no greater productivity"//. ''One gift begets six.''
 
 ''Do not render running totals.'' The count carries the concentration; the act does not.
 
 ''And subordination PAYS the HOST.'' Every historical case where admission required expropriating a NAMED incumbent lacked routine peacetime machinery; where no incumbent claim existed, standing machinery ran for centuries. ''So prevent the claim from forming rather than clearing it later'' — a collective's admission forms no person-edge, because the admitter did not act as a giver. What a Nexus wants members FOR stands open and unanswered.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #vocabulary >>
+<<~ ahu #vocabulary>>
 
 !! The Vocabulary
 
-''Two planes, never one list'' (`failure-states/table-hides-a-plane`). `maka` rides the INFRA plane — unauthored, scarce by physics, carrying no disclosure dial because the plane below the phase change holds no persona to attach one to. Everything else here rides the SOCIAL plane, authored and chosen. The full separation sits at <<~ loulou lar:///ha.ka.ba/lares/api/pono/hookupu-the-flow >>.
+''Two planes, never one list'' (`failure-states/table-hides-a-plane`). `maka` rides the INFRA plane — unauthored, scarce by physics, carrying no disclosure dial because the plane below the phase change holds no persona to attach one to. Everything else here rides the SOCIAL plane, authored and chosen. The full separation sits at <<~ loulou lar:///ha.ka.ba/lares/api/pono/hookupu-the-flow>>.
 
 ''Infra plane:'' `maka` — the trace (face·presence·sight; inert, unpointered, ''untraversable''; a correlation, never a property, which is why it cannot be walked).
 
@@ -272,9 +271,9 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 ''Refused:'' `kauā`, `mōkai` (a hereditary untouchable caste drawn on for human sacrifice; opprobrium marked in the dictionary entry; slur-use within living memory). ''Flagged:'' reading `kapu`⊥`noa` as clean demarcated/undemarcated strips a class hierarchy and a gendered degradation and keeps the tidy half — not false, ''partial in a direction that flatters the borrower.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #crucible >>
+<<~ ahu #crucible>>
 
 !! Seven Weak Joints ~ what a crucible must break
 
@@ -290,26 +289,26 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 ''Two unowned seams:'' the ''Hodge harmonic'' in a partitioned mesh — the dismissal covers RANDOM graphs, and partition scars run non-random, so //a standing gradient every island agrees on locally, closing into a loop no island can see// may be the substrate's own signature; and the first ''concentration measurement'' for a non-transferable expiring allowance anywhere.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >> — the five scales, the vessel key, the delegation edge, the lease, the siege-gate, the lineage fold. This meme expands its axis with //what makes a scale real//; it replaces nothing there.
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity>> — the five scales, the vessel key, the delegation edge, the lease, the siege-gate, the lineage fold. This meme expands its axis with //what makes a scale real//; it replaces nothing there.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >> — ''carries two of this meme's claims at a higher register, better grounded.'' //Anon is the base; a known handle is a disclosure act// — with Nissenbaum's contextual integrity behind it, and the sharper reading that staying veiled runs as ''appropriate flow, never a deficit or an un-climbed ladder.'' That states #vocabulary's //participation minus office// with a citation this meme lacks. And its veil-crossing law — the lease decaying linkage back toward the anon floor while a severed past ''does not re-weld'' — states the ONE-WAY RATCHET #rank names from the Roman side (`praescriptio` running //PRO libertate et NON ADVERSUS libertatem//). ''Read persona-circle first on both.''
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>> — ''carries two of this meme's claims at a higher register, better grounded.'' //Anon is the base; a known handle is a disclosure act// — with Nissenbaum's contextual integrity behind it, and the sharper reading that staying veiled runs as ''appropriate flow, never a deficit or an un-climbed ladder.'' That states #vocabulary's //participation minus office// with a citation this meme lacks. And its veil-crossing law — the lease decaying linkage back toward the anon floor while a severed past ''does not re-weld'' — states the ONE-WAY RATCHET #rank names from the Roman side (`praescriptio` running //PRO libertate et NON ADVERSUS libertatem//). ''Read persona-circle first on both.''
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >> — ''holds #the-constructor already, and holds it with the declaration built in.'' Its groups form as a ''reciprocal-edge closure'': //each member declares their own signed, typed, `lar:`-named edge//, and the group stands as //the set of edges that mutually name each other//. That is the mutual hold and the declared partition as ONE mechanism rather than two — //groups stand as relational constructs built from distributed name bindings//. ''Read it as the constructor's build; read #the-constructor as what the build implies.''
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>> — ''holds #the-constructor already, and holds it with the declaration built in.'' Its groups form as a ''reciprocal-edge closure'': //each member declares their own signed, typed, `lar:`-named edge//, and the group stands as //the set of edges that mutually name each other//. That is the mutual hold and the declared partition as ONE mechanism rather than two — //groups stand as relational constructs built from distributed name bindings//. ''Read it as the constructor's build; read #the-constructor as what the build implies.''
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >> — carries #rank's fluidity from the cost side: //an identity drifts UP the ladder as it accretes value it cannot cheaply re-mint//. Standing rises with what a party would forfeit by refounding, which prices the ladder without ordering anyone against anyone.
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>> — carries #rank's fluidity from the cost side: //an identity drifts UP the ladder as it accretes value it cannot cheaply re-mint//. Standing rises with what a party would forfeit by refounding, which prices the ladder without ordering anyone against anyone.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>>
 
 ''Corrections ledger'' — seven positions this model REJECTS, each carrying the evidence that broke it, held at `.claude` memory `identity-arc-reversals`. Every one reads as the obvious move, which is why the ledger stands: ''check it before building any of them.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Lt_20kBBK1-j8A4RD250QPIAF2ZmX6mG78Q_UetG220
+<<^ code="&#x0003;">>ni:///sha-256;u68EchWMG_ySlCUopVM4C7gUJId_1TE1bJ2oTRyCV4k
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

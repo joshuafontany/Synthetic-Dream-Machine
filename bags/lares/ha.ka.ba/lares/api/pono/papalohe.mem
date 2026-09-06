@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/papalohe >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/papalohe>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/papalohe.mem"
@@ -8,7 +8,6 @@ mana      = 17
 manao     = 17
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "reaction-family edge sugar — UEFN device graph event wire; listenable at source, subscribable at target"
 tags      = ["api/pono/pranala", "api/pono/reaction-graph", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-papalohe"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/papalohe"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Papalohe
 
@@ -30,9 +29,9 @@ A reaction-family edge sugar. The wire fires only when the named source event ac
 UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 `listenable` names the source event (OUTPUT pin). `subscribable` names the optional target function (INPUT pin).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the source event declaration at the wire mouth — notice listenable name and optional subscribable
 ⏿ orient the edge: family:reaction, renderMode:papalohe; bind listenable label at source end
@@ -40,9 +39,9 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 ▶ emit PranalaSugarNode with sigil:papalohe, family:reaction, listenable, subscribable; render papalohe wire
 ↺ register binding in ReactionGraph; kukali suspensions awaiting this listenable may now resolve; confirm wire registered; handler slots occupied; aftermath closes to observe
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -56,17 +55,17 @@ A papalohe MUST NOT carry `traversal:both`; reciprocal wires MUST use two parall
 `listenable` — the activating event at the source (e.g. `OnEliminated`, `Button.InteractedWithEvent`).
 `subscribable` — the function invoked at the target (e.g. `ShowScore`, `HandleDamage`). MAY be omitted.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ papalohe FROM -> TO >>
-<<~ papalohe FROM -> TO listenable=EventName >>
-<<~ papalohe FROM -> TO listenable=EventName subscribable=FunctionName >>
-<<~ papalohe #fragment FROM -> TO listenable=OnEliminated subscribable=ShowScore >>
+<<~ papalohe FROM -> TO>>
+<<~ papalohe FROM -> TO listenable=EventName>>
+<<~ papalohe FROM -> TO listenable=EventName subscribable=FunctionName>>
+<<~ papalohe #fragment FROM -> TO listenable=OnEliminated subscribable=ShowScore>>
 ```
 
 `? ->` MAY compress when enclosing pressure carries the source socket.
@@ -77,9 +76,9 @@ Regex (canonical):
 ```
 Groups: `[full, #slot?, FROM, TO, listenable?, subscribable?]`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -106,9 +105,9 @@ subscribable = 5
 canonical-roles = ["listenable", "subscribable", "observes", "throttles", "debounces"]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #binding-source >>
+<<~ ahu #binding-source>>
 
 !! Binding Source — `ReactionBinding.source`
 
@@ -122,16 +121,16 @@ Two values, distinct Verse-side origins:
 
 ''DEB has no public export API.'' UEFN stores DEB wires inside `.umap` actor property blobs (standard UE actor serialization). No standalone graph file or introspection endpoint exists. Importing DEB structure into Lararium requires parsing `.umap` binary assets or a Verse-side relay device that introspects its own subscriptions at runtime — both are limited paths. See `#import-pipeline` in `lar:///ha.ka.ba/lares/api/pono/uefn-scene`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kukali>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;TFOHh7T64tVD9V3SQTe1Pb-tAJhiNCd2PYAmzAptGxo
+<<^ code="&#x0003;">>ni:///sha-256;5XvYFRL7SwFDVAJwMyuK0yMiTEQ_fT_iHp38TBJ51eE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

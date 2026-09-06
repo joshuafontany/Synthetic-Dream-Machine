@@ -1,31 +1,29 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/PRINCIPLES >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/PRINCIPLES>>
 ```toml meta
 cacheable  = true
-confidence = 20
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/PRINCIPLES.mem"
 mana       = 19
 manao      = 19
 manaoio    = 18
-register   = "Synthesis-Canon"
 retain     = true
 role       = "foundational operating principles for the quine-like self-replicating wiki-agentic-HUD"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/PRINCIPLES"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Node — Quine-Wiki-Agentic-HUD Principles
 
 This locus locks basic law for a self-describing, self-editing, self-projecting wiki-agent HUD.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe that a quine-like wiki-agent can confuse its rendered surface with its authority membrane.
 ⏿ orient around canon carriers, visible origins, receipts, local-first stores, and projection boundaries.
@@ -34,9 +32,9 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 ⤴ assess boot, sync, projection, and promotion through receipts rather than vibes.
 ↺ hand off any unresolved drift as named residue before the next loop.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #authority-law >>
+<<~ ahu #authority-law>>
 
 !! Authority Law
 
@@ -45,9 +43,9 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 # ''Fork before overwrite.'' Live/session material may fork, annotate, propose, and request merge; it must not silently override invariant loci.
 # ''Ceremony marks canon MOVE.'' Agentic or operator writes that reach `lares/` need actor, origin, target URI, diff, receipt, and rollback path.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #round-trip-law >>
+<<~ ahu #round-trip-law>>
 
 !! Round-Trip Law
 
@@ -56,9 +54,9 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 # ''Metadata counts as body law.'' Stripped display metadata must remain available for write-back.
 # ''Regex may assist, not rule.'' Parser-backed spans should replace regex membranes where loss pressure grows.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #local-first-law >>
+<<~ ahu #local-first-law>>
 
 !! Local-First Law
 
@@ -67,9 +65,9 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 # Every mutation carries visible origin: `canon-hydrate`, `tw-local`, `crdt-remote`, `canvas-draft`, `operator-import`, or another explicit class.
 # Queue at projection boundaries where many live events target one artifact.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #receipt-law >>
+<<~ ahu #receipt-law>>
 
 !! Receipt Law
 
@@ -78,9 +76,9 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 # Hashes exclude unstable timestamps unless the timestamp itself forms the claimed artifact.
 # Missing or empty receipt state counts as visible boot residue.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #package-boundaries >>
+<<~ ahu #package-boundaries>>
 
 !! Package Boundaries
 
@@ -104,9 +102,9 @@ carrier canon
         → carrier write-back only through explicit projection law or MOVE (residency ACTION)
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #red-flags >>
+<<~ ahu #red-flags>>
 
 !! Red Flags
 
@@ -118,15 +116,15 @@ carrier canon
 * Parser accepts malformed law silently.
 * Convenient direct write bypasses ceremony.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ pranala #implements from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=control role=principles >>
-<<~ pranala #guards from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme family=control role=authority-law >>
+<<~ pranala #implements from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=control role=principles>>
+<<~ pranala #guards from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme family=control role=authority-law>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7LZzMILozTfFZJAO3FEKT_tWZYBePN8O7nwye-OmpMM
+<<^ code="&#x0003;">>ni:///sha-256;lzLV0ivX4lSZgjHrhBM0CFSocM5c6XnSx0Xsl24RZN0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

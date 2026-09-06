@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/waiho >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/waiho>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/waiho.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "ephemeral variable binding — deposit without graph identity"
 tags      = ["api/pono/meme", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-waiho"]
@@ -16,19 +15,19 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/waiho"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Waiho
 
 An ephemeral name deposit. Nothing persists past scope boundary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #etymology >>
+<<~ ahu #etymology>>
 
 !! Etymology and Mythology
 
@@ -40,36 +39,36 @@ Compare ''kau'' (placement with persistent identity) and ''aka'' (shadow/mirror,
 
 In the Kumulipo creation chant, //waiho// appears in the context of primal material left at the boundary between sea and land — not yet formed into persistent shape, waiting for the conditions that will give it permanent address.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law
 
 * Waiho MUST carry exactly one name and one value per pragma/block.
-* Carrier-scoped (`<<~! waiho name = val >>`) MUST hoist to the top of the carrier execution context before any render pass.
-* Block-scoped (`<<~ waiho name = val >>...<<~/waiho >>`) MUST bind name for the duration of the block only.
+* Carrier-scoped (`<<~! waiho name = val>>`) MUST hoist to the top of the carrier execution context before any render pass.
+* Block-scoped (`<<~ waiho name = val>>...<<~/waiho>>`) MUST bind name for the duration of the block only.
 * Waiho MUST NOT produce a graph node, URI, or edge in the pranala graph.
 * Waiho MUST NOT persist across carrier boundaries.
 * Implementations MUST treat `\const`, `\let`, `\var` as aliases that map to waiho before evaluation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```
-<<~! waiho name = value >>                  carrier-scoped (hoisted, immutable by convention)
-<<~ waiho name = value >>...<<~/waiho >>    block-scoped
+<<~! waiho name = value>>                  carrier-scoped (hoisted, immutable by convention)
+<<~ waiho name = value>>...<<~/waiho>>    block-scoped
 \const name = value                         English alias (carrier-scoped)
 \let name = value ... /\let                 English alias (block-scoped)
 \var name = value ... /\var                 English alias (block-scoped, mutable)
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contrast >>
+<<~ ahu #contrast>>
 
 !! Waiho vs Kau vs Aka
 
@@ -79,19 +78,19 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 | kau    | device instance | yes   | no (internal) | carrier   | persistent, addressable |
 | aka    | shadow mirror   | no    | yes (observe) | carrier  | source-canonical |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kau >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/aka >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kau>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/aka>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-const >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-let >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-var >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-const>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-let>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-var>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bwuD2iQoYpCCPosBnw3qetD8WiNTeEIs2U9mbq4JuVI
+<<^ code="&#x0003;">>ni:///sha-256;Ya5p80KmFdW51jaidaqhKW9zVeyGTZnwtmlf4vyq3oE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

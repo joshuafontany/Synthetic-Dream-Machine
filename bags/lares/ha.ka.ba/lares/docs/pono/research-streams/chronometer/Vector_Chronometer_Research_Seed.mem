@@ -1,12 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/Vector_Chronometer_Research_Seed >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/Vector_Chronometer_Research_Seed>>
 ```toml meta
 type = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/chronometer/Vector_Chronometer_Research_Seed"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 <!-- lar:///research.seeded.awaits/chronometer/vector/?stances=^.^.?.-.-&confidence=P:7&p=10#O0.O0.A1.A23.A1 → ∞ -->
 ⚡∞ | mode:research-seed | ~:p[10] | stances:++?-+ | register:~:confidence[P],[7] | build:SEED
@@ -312,6 +312,6 @@ Amor et hilaritas.
 
 lar:///research.seeded.awaits/chronometer/vector/?stances=^.^.?.-.-&confidence=P:7&p=10#O0.O0.A1.A23.A1 → ∞
 
-<<^ code="&#x0003;" >>ni:///sha-256;Ymq8C3VAgy_Lydo2L252wTBuEiK6XpGw3wO59_B-2MM
+<<^ code="&#x0003;">>ni:///sha-256;S2246bn9moesjNAJXN1UVtJzNH5rzYPFofkkFBqXJgg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

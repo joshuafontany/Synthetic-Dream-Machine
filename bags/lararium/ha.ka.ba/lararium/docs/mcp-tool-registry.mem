@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/mcp-tool-registry >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/mcp-tool-registry>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/mcp-tool-registry.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 16
-register      = "Synthesis-Canon"
 retain        = true
 role          = "SUPERSEDED — MCP tool registry: ten tools + two prompts, OODA-HA phase map, input schemas, env guards"
 source-symbol = "lararium-hud lararium-canvas lararium-read lararium-inspect lararium-query lararium-edges lararium-draft lararium-write lararium-fire lararium-receipt lararium-align lararium-explain_uri"
@@ -17,9 +16,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/mcp-tool-registry"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! MCP Tool Registry
 
@@ -44,9 +43,9 @@ Ten registered tools and two prompts exposed the Lararium graph API to MCP clien
 Tools mapped onto OODA-HA phases: Observe → Orient → Decide → Act → Aftermath.
 Two env guards gated write access and canvas connectivity.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law
 
@@ -58,9 +57,9 @@ All tools pending Automerge-native MCP redesign return errors except:
 * lararium-fire — live HTTP POST to `/api/fire`
 * lararium-write — dry_run preview (always) or guarded write
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -151,15 +150,15 @@ description = "Explain the resolution and carrier metadata for a lar:/// URI."
 inputs      = ["uri: string"]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;L0UbeAJxRX_Towh2m7U_Z9mGen0lnArZDGlqEkPtt7Q
+<<^ code="&#x0003;">>ni:///sha-256;39zXLNW1U47c7QEFAlhvMZxXDNbZA0D_ugUYxh92prw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

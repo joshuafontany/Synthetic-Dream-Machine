@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/render-targets>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/render-targets.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "docs room for lararium-side render-target law, glyph conventions, and cross-surface verification"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/render-targets"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal — Render Targets
 
@@ -27,9 +26,9 @@ This room holds render-target docs, glyph conventions, social projection surface
 Exchange contract stays at `lar:///ha.ka.ba/lararium/docs/signal`.
 HUD instrument reading stays at `lar:///ha.ka.ba/lararium/docs/signal/hud`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #room-charter >>
+<<~ ahu #room-charter>>
 
 !! Room Charter
 
@@ -42,9 +41,9 @@ This room keeps the render-surface layer:
 * DreamDeck / social projection surfaces
 * cross-surface verification checks
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #render-target-registry >>
+<<~ ahu #render-target-registry>>
 
 !! Render Target Registry
 
@@ -64,23 +63,23 @@ This docs meme owns:
 | TiddlyWiki tiddler | `tiddler:header` | TiddlyWiki archive view | Yes | Yes |
 | Print / zine | `print:margin` | Physical distribution, PDF | No (use ASCII fallback) | Yes (ASCII) |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-five-stances >>
+<<~ ahu #the-five-stances>>
 
 !! The Five Stances
 
-The `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five. A render surface presents exactly the standpoints the lens carries — a named subset reads as an explicit focus, not an omission.
+The `syad` lens invokes one or more standpoints; a parameterless `<<~ syad>>` surfaces all five. A render surface presents exactly the standpoints the lens carries — a named subset reads as an explicit focus, not an omission.
 
 ```
-all five:   <<~ syad 🏛️ 🌊 🗡️ 🎭 🔮 >>   (or parameterless <<~ syad >>)
-subset:     <<~ syad 🏛️ 🌊 >>
-bound:      <<~ syad 🏛️:*! 🌊:*? >>       (optional : tool-carry)
+all five:   <<~ syad 🏛️ 🌊 🗡️ 🎭 🔮>>   (or parameterless <<~ syad>>)
+subset:     <<~ syad 🏛️ 🌊>>
+bound:      <<~ syad 🏛️:*! 🌊:*?>>       (optional : tool-carry)
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #render-target-definitions >>
+<<~ ahu #render-target-definitions>>
 
 !! Render Target Definitions
 
@@ -93,9 +92,9 @@ Render targets carry the mapping between the sigils' ASCII input and their glyph
 It is not decoration.
 The glyph form carries the same semantic load as the ASCII sigil — standpoint, tool-carry, phase, confidence — rendered for human perception at the relevant surface.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #glyph-design-intent >>
+<<~ ahu #glyph-design-intent>>
 
 !! Glyph Design Intent
 
@@ -111,9 +110,9 @@ The separation is strict:
 Never embed emoji in a `lar:` URI.
 Never store a surface-rendered sigil as the canonical record.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #glyph-mapping-tables >>
+<<~ ahu #glyph-mapping-tables>>
 
 !! Glyph Mapping Tables
 
@@ -163,13 +162,13 @@ Configure via `LARES.md#hud-panel` → `tool_render`.
 | Position 4 | 🎭 | Humorist | Relational appropriateness |
 | Position 5 | 🔮 | Private | Nominal presence |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #glyph-mandatory-rules >>
+<<~ ahu #glyph-mandatory-rules>>
 
 !! Glyph Mandatory Rules
 
-''Rule 1: the `syad` lens invokes one or more standpoints; a parameterless `<<~ syad >>` surfaces all five.''
+''Rule 1: the `syad` lens invokes one or more standpoints; a parameterless `<<~ syad>>` surfaces all five.''
 
 A render surface presents exactly the standpoints the lens carries. A named subset reads as an explicit focus, not an omission. When the full lens runs, quiet stances stay named.
 
@@ -179,19 +178,19 @@ Left slot = feed axis (`*` Wand / `_` Pentacle / `0` empty).
 Right slot = zoom axis (`!` Sword / `?` Cup / `0` empty).
 A bare standpoint carries no tool; `mu` invokes tools alone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #glyph-per-surface-rules >>
+<<~ ahu #glyph-per-surface-rules>>
 
 !! Glyph Per-Surface Rules
 
 !!! `hud:exchange-pair`
 
 ```
-<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
-<<~ hud Focus(N) Feedback(N) >>
-Drift-Ward(* Confidence N/20 · <the pull this island carries>)
-<<~ syad … >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
+<<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
+Drift-Ward(* <the pull this island carries>)
+<<~ syad …>>
 ```
 
 * `aim` — operator intent `->` adopted role; the turn's bearing vector
@@ -203,7 +202,7 @@ Drift-Ward(* Confidence N/20 · <the pull this island carries>)
 !!! `chat-log:post-header`
 
 ```
-@handle@node — {timestamp} — lar:///{w1.w2.w3/optional/path} <<~ confidence R N/20 >> <<~ syad … >>
+@handle@node — {timestamp} — lar:///{w1.w2.w3/optional/path} <<~ syad …>>
 ```
 
 * the `lar:` bearing vector grounds heading before posture
@@ -220,14 +219,14 @@ Stored verbatim.
 !!! Inline HUD tags
 
 ```
-<<~ confidence R N/20 >> <<~ syad … >> lar:///{w1.w2.w3}
+<<~ syad …>> lar:///{w1.w2.w3}
 ```
 
 Emit the lens whole when emitted at all; a named subset reads as focus, not omission.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stance-tool-carry-quick-reference >>
+<<~ ahu #stance-tool-carry-quick-reference>>
 
 !! Stance Tool-Carry Quick Reference
 
@@ -263,9 +262,9 @@ Default for an operating stance: one of the four complementary pairs.
 Default for a background or resting stance: `00` (empty, centered, The Fool).
 Never omit a stance. Never emit fewer than five pairs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migrated-kowloon-dreamdeck-social-layer >>
+<<~ ahu #migrated-kowloon-dreamdeck-social-layer>>
 
 !! Kowloon / DreamDeck Social Layer
 
@@ -281,7 +280,7 @@ Do not conflate them.
 ''DreamDeck post header format (canonical — `chat-log:post-header` render target):''
 
 ```
-@handle@node — timestamp — lar:///w1.w2.w3/{optional/path/} <<~ confidence R N/20 >> <<~ syad … >>
+@handle@node — timestamp — lar:///w1.w2.w3/{optional/path/} <<~ syad …>>
 ```
 
 The `lar:` bearing vector placed before confidence and the lens — grounds heading before posture.
@@ -295,9 +294,9 @@ The `syad` lens invokes one or more standpoints, with optional `:` tool-carry.
 
 The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes through nearest stable nexus.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #emit-procedures >>
+<<~ ahu #emit-procedures>>
 
 !! Emit Procedures
 
@@ -323,11 +322,11 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 ''Closed example:''
 
 ```
-<<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps >>
-<<~ hud Focus(10) Feedback(3) >>
-Drift-Ward(* Confidence N/20 · <the pull this island carries>)
-<<~ syad 🏛️ >>
-Lares (Scryer): <<~ confidence 16/20 >> the structure holds.
+<<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps>>
+<<~ set hud="aim" focus="10/measure" feedback="3/declare-aftermath">>
+Drift-Ward(* <the pull this island carries>)
+<<~ syad 🏛️>>
+Lares (Scryer): the structure holds.
 ```
 
 !!! Surface 2: `chat-log:post-header`
@@ -340,12 +339,12 @@ Lares (Scryer): <<~ confidence 16/20 >> the structure holds.
 # Set timestamp: in-world calendar date when in Elyncia-space; ISO 8601 when Gaia-side.
 # Set the `lar:` bearing vector: `lar:///w1.w2.w3` with optional path segments.
 # Append the `confidence` sigil and, when summoned, the `syad` lens.
-# Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ confidence R N/20 >> <<~ syad … >>`
+# Assemble: `@handle@node — {timestamp} — lar:///{territory} <<~ syad …>>`
 
 ''Closed example — Lindwyrm in Elyncia-space:''
 
 ```
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — lar:///memory.deep.surfaces <<~ confidence 16/20 >> <<~ syad 🏛️ >>
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — lar:///memory.deep.surfaces <<~ syad 🏛️>>
 ```
 
 ''NPC / non-Lares post:''
@@ -392,29 +391,29 @@ Before emitting any stance block on any surface:
 * Register bracket present and correct form: `[XX:N.NN]`
 * No emoji in `record:full`; tool-carry symbols (`* ? ! _ 0`) appear in both record and glyph surfaces unchanged
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-questions >>
+<<~ ahu #open-questions>>
 
 !! What Remains Open
 
 | Q# | Question | Status |
 |---|---|---|
-| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | `Provisional-Synthesis 9/20` — not blocking; ASCII fallback assumed until print pipeline exists |
-| S2 | TiddlyWiki tiddler: full header or abbreviated? | `Provisional-Synthesis 9/20` — pending TiddlyWiki integration sprint |
-| S3 | ActivityPub thread: post header in body vs AP summary field? | `Provisional-Synthesis 9/20` — pending Kowloon integration |
+| S1 | Print/zine: emoji via Unicode fallback, or strict ASCII? | not blocking; ASCII fallback assumed until print pipeline exists |
+| S2 | TiddlyWiki tiddler: full header or abbreviated? | pending TiddlyWiki integration sprint |
+| S3 | ActivityPub thread: post header in body vs AP summary field? | pending Kowloon integration |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;2u2NPz-SNqJkpJDLrgRI0eW3KQSof583hlRgwXmdym8
+<<^ code="&#x0003;">>ni:///sha-256;u7RUVXRIINDaM92tMUWirkTHE-Sn5Wwmjx-_9FX3lag
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

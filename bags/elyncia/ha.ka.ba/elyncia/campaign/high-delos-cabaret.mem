@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
 ```toml meta
 cacheable  = false
-confidence = 7
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/campaign/high-delos-cabaret.mem"
 l-space    = "adjacent"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional"
 retain     = true
 role       = "actual-play locus for Session 0.1 — the High Delos cabaret scene; venue, cast, and lifepath-flow scaffold now, the played record as it lands; player-safe by construction, nothing kapu ever drafts here"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/high-delos-cabaret"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The House of Masks ~ Session 0.1 Actual Play
 
@@ -50,9 +48,9 @@ campaign present reads ''YOLD 5492'' (Elyncia_01 canon); the flashback's exact d
 the operator's hand, so stamps ride Provisional witness until seated. No global now — the
 flashback's stamp answers to its own log, not the booth's.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #venue >>
+<<~ ahu #venue>>
 
 !! The Venue ~ The House of Masks
 
@@ -98,9 +96,9 @@ The braid, stated once: ''a warm floor over deep water.'' The cabaret entertains
 staff cares genuinely, the puns land genuinely — and the room also happens to hold, on any given
 night, enough faction weight to tilt the sky island. Both truths stand; neither apologizes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #summit-week >>
+<<~ ahu #summit-week>>
 
 !! The Summit Week ~ why the room is full
 
@@ -119,9 +117,9 @@ Delos (and, by night, the vertical surfaces — chitin remembers what marble for
 three learning the new polyglot culture. By summit week she reads as the room's most acclimated
 stranger.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cast >>
+<<~ ahu #cast>>
 
 !! The Cast
 
@@ -166,9 +164,9 @@ stranger.
   `lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf` (@elyncia-referee). Her network's Neo-Thracian intel of the last
   two months underlies the summit's timing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #casting >>
+<<~ ahu #casting>>
 
 !! Casting ~ the render sheet
 
@@ -229,9 +227,9 @@ the fresco-over-fresco walls) · ragged edges beat machine polish · no winking,
 * ''Kai's prismatic elf · Monty's changeling · Patches the Grimalkin · the Husky'' — lifepaths
   open; render after their sheets close, not before
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #intent >>
+<<~ ahu #intent>>
 
 !! Session Intent ~ character sheets by lifepath, co-narrated
 
@@ -281,9 +279,9 @@ prompted in-scene, answered in-voice, written to the sheet as it lands:
   session confirms the last blanks (hallmarks, bond-details, the grimoire's fresh rites) rather
   than re-walking it, and Ichi's road home runs toward the very Nexus his last host died fighting.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #format >>
+<<~ ahu #format>>
 
 !! Capture Format
 
@@ -300,9 +298,9 @@ The played record lands in this locus using the shelf's witness pattern
   feed render; the cabaret's open floor maps to the open stratum, the private booth to `data`.
   Nothing here ever needs a kapu stratum — see #head.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-forks >>
+<<~ ahu #open-forks>>
 
 !! Open Forks (operator's + table's hands)
 
@@ -316,18 +314,18 @@ The played record lands in this locus using the shelf's witness pattern
 * ''The arc's name'' — this locus and the Salt-Stair booth both stand flat on the shelf until
   the campaign-era arc earns its room and name.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/salt-stair-booth>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;KZAahx3vaJMXNLxsC-bmItCCtlk_XuzSVAm2yP1d6YM
+<<^ code="&#x0003;">>ni:///sha-256;7HDNTHgS3g0pJUME_lnzhBtViQXG3br-K-VFh1qjupU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

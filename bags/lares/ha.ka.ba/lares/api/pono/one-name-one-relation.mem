@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/one-name-one-relation >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/one-name-one-relation>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/one-name-one-relation.mem"
@@ -9,20 +9,19 @@ l-space     = "lares"
 mana        = 17
 manao       = 16
 manaoio     = 15
-register    = "Synthesis-Canon"
 retain      = true
 role        = "One name carries one relation — the three relations a lar: name may carry (holding · meeting · being), the identity ladder each layer sits on, and why a name carrying two of them fuses two things a reader cannot tell apart"
 type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/one-name-one-relation"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! One Name, One Relation
 
 The address space grew from the work, which is the honest way to grow one — and it left ''one sigil carrying three different relations''. This meme names the three, sorts every layer of the identity ladder onto them, and states the law that keeps them apart.
 
-<<~ ahu #the-three-relations >>
+<<~ ahu #the-three-relations>>
 
 !! The Three Relations a Name May Carry
 
@@ -30,9 +29,9 @@ The address space grew from the work, which is the honest way to grow one — an
 \procedure ~Relation(Type:"" Params:"") ~Relation <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Relation Holding "verb/a-vessel-HOLDS-this identity/a-minted-or-derived-address mounts/yes registers/yes cap-checked/yes ~ bags · wikis · content bodies" >>
-<<~Relation Meeting "verb/principals-MEET-here identity/a-url-derived-from-a-Nexus-key mounts/no registers/no federates/by-contract ~ boards" >>
-<<~Relation Being "verb/this-IS-someone identity/a-KEY-or-a-membership-document mounts/no registers/no names/never-a-path ~ dyads · PersonaGroups · cabals · Nexuses" >>
+<<~Relation Holding "verb/a-vessel-HOLDS-this identity/a-minted-or-derived-address mounts/yes registers/yes cap-checked/yes ~ bags · wikis · content bodies">>
+<<~Relation Meeting "verb/principals-MEET-here identity/a-url-derived-from-a-Nexus-key mounts/no registers/no federates/by-contract ~ boards">>
+<<~Relation Being "verb/this-IS-someone identity/a-KEY-or-a-membership-document mounts/no registers/no names/never-a-path ~ dyads · PersonaGroups · cabals · Nexuses">>
 
 ''THE LAW: a name carries exactly ONE relation.'' A name carrying two fuses two things a reader cannot tell apart — and worse, cannot tell apart ''silently'', since both readings resolve.
 
@@ -46,9 +45,9 @@ Each relation answers a different question, and the questions do not reduce to o
 
 A name that carries two of these takes ''two owners''. The `@` sigil grew to carry all three.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-ladder >>
+<<~ ahu #the-ladder>>
 
 !! The Identity Ladder, Sorted
 
@@ -58,26 +57,26 @@ Reading up from the atom. Each rung names its relation, so a reader can tell at 
 \procedure ~Rung(Type:"" Params:"") ~Rung <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Rung Vessel-Veil-Dyad "relation/BEING identity/two-keys ~ device-minted vessel-key ⊥ sovereign veiled-user-key; a LOCAL identity in its own right, never a component of something above it" >>
-<<~Rung PersonaGroup "relation/BEING identity/the-closure-of-mutual-bindings ~ a human's own vessels holding one handle↔DID; HOLDS exactly one artifact, its private plane" >>
-<<~Rung Persona-Plane "relation/HOLDING identity/derived-from-the-group ~ `bags/persona-<tag>`; seeded, mounted, registered, cap-checked under that one name" >>
-<<~Rung Vault "relation/BEING identity/a-secret-never-presented ~ the me-Circle collecting a human's compartments; NOTHING above it, or the layer above IS the Nymwars root" >>
-<<~Rung Handle "relation/NONE-OF-THE-THREE ~ a NAME a principal announces, on a signed card, at a meeting place; the declaring act binds it, never the characters" >>
-<<~Rung Contract "relation/A-RELATION-BETWEEN-BEINGS identity/a-signed-bilateral-lease ~ recorded AT a meeting place; never a thing held" >>
-<<~Rung Cabal "relation/BEING identity/a-multi-principal-closure ~ the tie-break its own members constitute" >>
-<<~Rung Kahu-Cabal "relation/BEING identity/a-cabal-seated-for-charter-acts ~ a seat, revocable, never a root" >>
-<<~Rung Nexus "relation/BEING identity/a-key ~ a confederation of Lararia; it HOSTS meeting places, and hosting is not holding" >>
+<<~Rung Vessel-Veil-Dyad "relation/BEING identity/two-keys ~ device-minted vessel-key ⊥ sovereign veiled-user-key; a LOCAL identity in its own right, never a component of something above it">>
+<<~Rung PersonaGroup "relation/BEING identity/the-closure-of-mutual-bindings ~ a human's own vessels holding one handle↔DID; HOLDS exactly one artifact, its private plane">>
+<<~Rung Persona-Plane "relation/HOLDING identity/derived-from-the-group ~ `bags/persona-<tag>`; seeded, mounted, registered, cap-checked under that one name">>
+<<~Rung Vault "relation/BEING identity/a-secret-never-presented ~ the me-Circle collecting a human's compartments; NOTHING above it, or the layer above IS the Nymwars root">>
+<<~Rung Handle "relation/NONE-OF-THE-THREE ~ a NAME a principal announces, on a signed card, at a meeting place; the declaring act binds it, never the characters">>
+<<~Rung Contract "relation/A-RELATION-BETWEEN-BEINGS identity/a-signed-bilateral-lease ~ recorded AT a meeting place; never a thing held">>
+<<~Rung Cabal "relation/BEING identity/a-multi-principal-closure ~ the tie-break its own members constitute">>
+<<~Rung Kahu-Cabal "relation/BEING identity/a-cabal-seated-for-charter-acts ~ a seat, revocable, never a root">>
+<<~Rung Nexus "relation/BEING identity/a-key ~ a confederation of Lararia; it HOSTS meeting places, and hosting is not holding">>
 
 !!! What the ladder shows once sorted
 
-* ''A Handle sits on NO rung.'' It names a principal from outside; it holds nothing and it meets nothing. Treating it as an entity is how a published face gets mistaken for the compartment behind it (<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>).
+* ''A Handle sits on NO rung.'' It names a principal from outside; it holds nothing and it meets nothing. Treating it as an entity is how a published face gets mistaken for the compartment behind it (<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>).
 * ''A PersonaGroup and its plane read as TWO things.'' The group BEING, the plane HOLDING. One name for both would put a principal in the capability ring.
 * ''Hosting is not holding.'' A Nexus hosts meeting places; it does not hold them, and no vessel mounts them by standing in that Nexus.
-* ''The Herm names a COMPOSITION, never a rung'' — a vessel carrying carriage pieces and no tuber sovereignty, the base course every vessel stands on. A vessel's role lives in its ''keel'' — `VesselKeel`, the substrate composition it supplies — and what an operator asks it to stand as rides `AskedStanding`. ''`recipe` names the pinned wiki's composition and nothing else'' (operator ruling): borrowing it for the vessel put one word across two layers (<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>).
+* ''The Herm names a COMPOSITION, never a rung'' — a vessel carrying carriage pieces and no tuber sovereignty, the base course every vessel stands on. A vessel's role lives in its ''keel'' — `VesselKeel`, the substrate composition it supplies — and what an operator asks it to stand as rides `AskedStanding`. ''`recipe` names the pinned wiki's composition and nothing else'' (operator ruling): borrowing it for the vessel put one word across two layers (<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel>>).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #where-the-braid-crossed >>
+<<~ ahu #where-the-braid-crossed>>
 
 !! Where the Braid Crossed
 
@@ -94,9 +93,9 @@ Each of these reads as ''one name carrying two relations''. None came from carel
 
 ''An exclusion list is an enumeration, and an enumeration cannot notice what it missed.'' The bag classifier excluded exactly the two kinds the grammar ''declared'' — and coerced every undeclared kind into a bag. So the rule reads: ''when a classifier lists what it is NOT, count the kinds; if the list is shorter than the kinds, the remainder are being silently absorbed.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #one-vocabulary-four-axes >>
+<<~ ahu #one-vocabulary-four-axes>>
 
 !! One Vocabulary, Four Axes ~ the other half of the braid
 
@@ -113,7 +112,7 @@ The address space blurred because the ''ladder's own words'' got borrowed for ax
 
 A realm's ''political liveness'' reads off its substrate's ''stowage temperature'' — legitimate exactly where a vessel HAS a reading. Where it has none, "I never fetched it" and "it ended" generate identically under no-global-now, so defaulting the gap to cold answers a question about a polity with a fact about a cache.
 
-''So absence rides as its own state, and it names the VESSEL'' — a reading of `unread` says //this replica has not looked//, never //the realm ended//. A caller that must gate on liveness asks first whether the reading speaks about the realm at all; without that question, every such gate treats its own blindness as another's death. <<~ confidence 18/20 >>
+''So absence rides as its own state, and it names the VESSEL'' — a reading of `unread` says //this replica has not looked//, never //the realm ended//. A caller that must gate on liveness asks first whether the reading speaks about the realm at all; without that question, every such gate treats its own blindness as another's death.
 
 !!!! The discriminator ~ when defaulting an absence reads correct
 
@@ -139,9 +138,9 @@ Ranked by how far apart the senses sit — the farther apart, the more surely a 
 * ''ring'' — a transport partition · a capability barrier · a quorum-signed ban list.
 * ''epoch'' — a liveness lease · a seal lineage · a group-key generation · a history cut · a POSIX time origin · a rhythmic band. ''Unbraided by OWNERSHIP, not by shape'' (epoch-binding-surfaces): the lease and the seal lineage collapse to ONE mechanism in two carriers, both OURS; the group-key generation belongs to Keyhive/BeeKEM (upstream MLS) and blanks where ours picks a winner; the history cut is DXOS's ceremony; the time origin is POSIX's and names the one authority this house refuses. ''A word we mint we may rule; a word a dependency owns we qualify and translate, never redefine.'' The separating question: does the fold pick a WINNER, or blank both paths?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-unbraiding >>
+<<~ ahu #the-unbraiding>>
 
 !! The Unbraiding
 
@@ -153,14 +152,14 @@ Three moves, smallest first, each standing on its own.
 
 ''What makes this tractable at all:'' a name reaches a capability decision only where something hashes it, and those points are few and greppable. Everywhere else a name rides as a title, and titles resolve verbatim inside their own document — so the vast majority of the address space feels no rename at all.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-uris >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/open-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-uris>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VZm1WNk4aWDTtLlYlizDRRCLJPbY2ulIs4mh-cTokKk
+<<^ code="&#x0003;">>ni:///sha-256;f6vzK5TVMyaSO50ACBQu_x8eeY8wh_6BdinALzMTAaA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

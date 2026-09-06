@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Neural Whip — playable surface with clickable component pills"
 tags      = ["components/domain/stuckforce", "components/function/restrain", "components/hook/attack", "mount-points/trait"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Neural Whip — FTLS Card
 
-<<~ ahu #card >>
+<<~ ahu #card>>
 
 !! Neural Whip
 //The Biomancer's Reach//
@@ -29,35 +28,35 @@ uri-path  = "ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip"
 
 A neural tentacle of stuckforce lashes out and strikes ''against Defense'' — no save. On a hit: a lash of force, and the target is ''seized'' at reach, dragged 1m closer each round. Held creatures act at disadvantage and cannot move off. Break free on a contested Strength test vs P, or sever the tentacle.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #overcharge >>
+<<~ ahu #overcharge>>
 
 !! Overcharge
 
 * ''x2 (P:6)'' — two tentacles; two targets or one crushing double-grip.
 * ''x4 (P:12)'' — lift and constrict; the held creature is hauled off the ground, helpless.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #components >>
+<<~ ahu #components>>
 
 !! Components
 
-<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
+<<~ kahea lar:///ha.ka.ba/lararium/lists/components>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
-<<~ loulou lar:///ha.ka.ba/sdm/modules/abilities/neural-whip >>
-<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card>>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/abilities/neural-whip>>
+<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kS1jdNnTB_qIbyRFRD369KTYnLyZb2bW2oXoJ5nTpHc
+<<^ code="&#x0003;">>ni:///sha-256;24Uh32zt6a1Nlr9sr180przGlUnIucd9AX3wmMeIdh4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

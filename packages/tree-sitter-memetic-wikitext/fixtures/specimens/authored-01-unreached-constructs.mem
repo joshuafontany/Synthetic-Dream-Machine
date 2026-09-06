@@ -2,9 +2,9 @@ title: authored-01-unreached-constructs
 role: specimen — the constructs no live meme exercises
 type: text/x-memetic-wikitext
 
-<<~ ahu #open-and-close >>
+<<~ ahu #open-and-close>>
 An ahu whose open and close each fold to their own kind.
-<<~/ahu >>
+<<~/ahu>>
 
 \procedure ~Named(~Arg:"default")
 the pragma body

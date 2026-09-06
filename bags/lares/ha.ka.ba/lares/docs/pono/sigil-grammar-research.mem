@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/sigil-grammar-research >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/sigil-grammar-research>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-grammar-research.mem"
 l-space   = "stable"
 mana      = 17
 manao     = 16
-register  = "Synthesis-Canon"
 retain    = false
 role      = "research doc: Hawaiian-inspired control sigil grammar — naming rationale, precedent alignment, parser notes, open questions"
 tags      = ["api/pono/memetic-wikitext"]
@@ -15,9 +14,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-grammar-research"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #purpose >>
+<<~ ahu #purpose>>
 
 ! Hawaiian Dream-Code Sigil Grammar — Research Document
 
@@ -34,9 +33,9 @@ This document does not present authentic Hawaiian grammar. It presents a Hawaiia
 programming/macro grammar designed with respect for ʻōlelo Hawaiʻi semantic fields and with
 explicit avoidance of direct natural-language overwrite.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #findings >>
+<<~ ahu #findings>>
 
 !! Findings (2026-04-27)
 
@@ -71,9 +70,9 @@ We hold our naming lightly and subject to revision if future community guidance 
 
 Loulou (`loulou`) was sourced from the cultural team directly and is treated as `[C]` origin.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #recommended-sigil-grammar >>
+<<~ ahu #recommended-sigil-grammar>>
 
 !! Recommended Sigil Grammar
 
@@ -155,9 +154,9 @@ each yielded item systematically. `huli` receives approval as `[SC]`.
 Non-goals for `huli`: mutation, accumulation, break/continue, counters, async traversal, global duplicate
 suppression. General imperative looping, switch/case, and try-catch remain deferred with no allocated names.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #precedent-alignment >>
+<<~ ahu #precedent-alignment>>
 
 !! Precedent Alignment
 
@@ -221,9 +220,9 @@ Repo-local instruction files guide coding agents. Good instructions:
 
 Design implication: grammar edits follow the implementation checklist below.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax-examples >>
+<<~ ahu #syntax-examples>>
 
 !! Syntax Examples
 
@@ -291,9 +290,9 @@ Function expression.
 <<~/helu>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #parser-implementation-notes >>
+<<~ ahu #parser-implementation-notes>>
 
 !! Parser / Agent Implementation Notes
 
@@ -346,9 +345,9 @@ When editing grammar meme or parser:
 * Report uncertainties with explicit `[S]` markers.
 * Never silently promote synthesis to canon — promote only through explicit operator ratification.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #uncertainty-list >>
+<<~ ahu #uncertainty-list>>
 
 !! Uncertainty List
 
@@ -385,9 +384,9 @@ When editing grammar meme or parser:
 # ''Chained command composition'' — `<<~ kahea [other-command] ...>>` valid intent confirmed;
    parser rule for nested command words not yet written.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-notes >>
+<<~ ahu #source-notes>>
 
 !! Source Notes
 
@@ -405,17 +404,17 @@ When editing grammar meme or parser:
 * UEFN Scene Graph + Verse: dev.epicgames.com/documentation/en-us/fortnite. ECS model (entity/component/prefab) confirmed. Verse functional language confirmed for UEFN. Visual Verse (node/block interface) under exploration; not yet released.
 * Blueprint AST: ikrima.dev/ue4guide/engine-programming/blueprints/bp-compiler-overview — FKismetCompilerContext → FBlueprintCompiledStatement → stack-based VM. Blueprint = legacy path; Verse = direction of travel.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7lRE8yezqhjuSD2HwIwDnJhzvRPn7ZBxwZnkUo8TTi0
+<<^ code="&#x0003;">>ni:///sha-256;SKZ96ZnHZJ3mr3TuLx0lix4xASZtbWka6lw1vhaT5f8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

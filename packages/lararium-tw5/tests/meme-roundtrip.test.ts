@@ -54,8 +54,8 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
   test("render produces a whole carrier (no kahea markers survive)", () => {
     expect(rendered).toBeTruthy();
     expect(rendered!).not.toContain("<<~ kahea ahu ");
-    expect(rendered!).toContain("<<~ ahu #entry >>");
-    expect(rendered!).toContain("<<~/ahu >>");
+    expect(rendered!).toContain("<<~ ahu #entry>>");
+    expect(rendered!).toContain("<<~/ahu>>");
   });
 
   test("guarantee 2 — content bytes survive whole; only meta framing normalizes", () => {
@@ -82,29 +82,29 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
 // ---------------------------------------------------------------------------
 
 const TEACHING_URI = "lar:///ha.ka.ba/lares/memory/fence-teaching";
-const TEACHING = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+const TEACHING = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="${"&#x0001;"}" from=? -> to=${TEACHING_URI} >>
+<<^ code="${"&#x0001;"}" from=? -> to=${TEACHING_URI}>>
 \`\`\`toml meta
 uri-path = "ha.ka.ba/lares/memory/fence-teaching"
 type     = "text/memetic-wikitext+tiddlywiki"
 \`\`\`
 
-<<^ code="${"&#x0002;"}" >>
+<<^ code="${"&#x0002;"}">>
 
-<<~ ahu #lesson >>
+<<~ ahu #lesson>>
 
 A fenced carrier close MUST NOT close this body:
 
 \`\`\`text
-<<^ code="${"&#x0003;"}" >>
-<<~ ahu #fake >>
+<<^ code="${"&#x0003;"}">>
+<<~ ahu #fake>>
 not a child
-<<~/ahu >>
-<<~ kahea ahu #ghost >>
+<<~/ahu>>
+<<~ kahea ahu #ghost>>
 \`\`\`
 
-Inline mentions stay literal too: \`<<^ code="${"&#x0003;"}" >>\` and \`<<~ ahu #also-fake >>\`.
+Inline mentions stay literal too: \`<<^ code="${"&#x0003;"}">>\` and \`<<~ ahu #also-fake>>\`.
 
 \`\`\`\`md
 a four-backtick fence quoting an meta fence:
@@ -113,13 +113,13 @@ mana = 99
 \`\`\`
 \`\`\`\`
 
-<<~/ahu >>
+<<~/ahu>>
 
 After the fence, the carrier still runs.
 
-<<^ code="${"&#x0003;"}" >>ni:///sha-256;FQysnSrznq4cdM66EtuY6AkQHPmrKrzFXtGAEWIieSc
+<<^ code="${"&#x0003;"}">>ni:///sha-256;tMMdV3CCGe9jeSsyEY1PSMeub9as1KTqhSd8cdqtvbE
 
-<<^ code="${"&#x0004;"}" -> to=? >>
+<<^ code="${"&#x0004;"}" -> to=?>>
 `;
 
 describe("fence-mask — quoted sigils never frame, split, or expand", () => {
@@ -148,28 +148,28 @@ describe("fence-mask — quoted sigils never frame, split, or expand", () => {
 
 describe("Kapu SOH variant survives the round trip", () => {
   const KAPU_URI = "lar:///ha.ka.ba/lares/memory/kapu-carrier";
-  const KAPU = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+  const KAPU = `<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="${"&#x0011;"}" namespace="⊙" from=? -> to=${KAPU_URI} >>
+<<^ code="${"&#x0011;"}" namespace="⊙" from=? -> to=${KAPU_URI}>>
 \`\`\`toml meta
 uri-path = "ha.ka.ba/lares/memory/kapu-carrier"
 type     = "text/memetic-wikitext+tiddlywiki"
 \`\`\`
 
-<<^ code="${"&#x0002;"}" >>
+<<^ code="${"&#x0002;"}">>
 
 kapu body.
 
-<<^ code="${"&#x0003;"}" >>
+<<^ code="${"&#x0003;"}">>
 
-<<^ code="${"&#x0004;"}" -> to=? >>
+<<^ code="${"&#x0004;"}" -> to=?>>
 `;
   test("the DC1 code and namespace re-emit on the SOH line", () => {
     const records = recordsOf(KAPU, KAPU_URI);
     const rendered = expandMemeRefs(readerOf(records), KAPU_URI)!;
-    expect(rendered.startsWith(`<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+    expect(rendered.startsWith(`<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="${"&#x0011;"}" namespace="⊙" from=? -> to=${KAPU_URI} >>`)).toBe(true);
+<<^ code="${"&#x0011;"}" namespace="⊙" from=? -> to=${KAPU_URI}>>`)).toBe(true);
     expect(rendered).toBe(expandMemeRefs(readerOf(recordsOf(rendered, KAPU_URI)), KAPU_URI));
   });
 });

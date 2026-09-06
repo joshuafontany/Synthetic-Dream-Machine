@@ -25,8 +25,8 @@ import {
 import { CARRIER_TYPE } from "@lararium/mesh/carrier-type";
 
 const URI = "lar:///test.bare.doc";
-const STX = "<<^ code=\"&#x0002;\" >>";
-const ETX = "<<^ code=\"&#x0003;\" >>";
+const STX = "<<^ code=\"&#x0002;\">>";
+const ETX = "<<^ code=\"&#x0003;\">>";
 
 function renderOf(records: TiddlerFields[]): string {
   const map = new Map(records.map((r) => [String(r.title), r]));

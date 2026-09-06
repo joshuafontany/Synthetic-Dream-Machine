@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/the-syad-perspectives.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "condensed syad research shelf, stance-reading summary, bridge to the archive bundle"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Syad Perspectives — Condensed Research
 
@@ -28,9 +27,9 @@ This docs surface does not carry invariant law.
 It carries the shortest research shelf that still orients the reader.
 The deeper archive bundle stays adjacent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reading-question >>
+<<~ ahu #reading-question>>
 
 !! Reading Question
 
@@ -40,9 +39,9 @@ Do not read it as universal truth-weight.
 Same number.
 Different measure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #saptabhangi >>
+<<~ ahu #saptabhangi>>
 
 !! Saptabhangi
 
@@ -59,9 +58,9 @@ Sri Syadasti's catma reproduces the Jaina Saptabhangi:
 `avaktavya` does not name ignorance.
 It names a frame where the truth axis does not fit cleanly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #flag-surface >>
+<<~ ahu #flag-surface>>
 
 !! Flag Surface
 
@@ -75,9 +74,9 @@ The live fold keeps a fixed five-position array and a fixed code set:
 No live form drops positions.
 Quiet stances stay encoded as quiet, not missing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #legacy-boundary >>
+<<~ ahu #legacy-boundary>>
 
 !! Legacy Boundary
 
@@ -88,9 +87,9 @@ Older compact stance codepaths read as legacy.
 Canon keeps the full five-position array on the surface.
 Spread rides flags and combination, not omission.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -107,18 +106,18 @@ The archive-derived research bundle lives at:
 * `packages/lares-core/memes/docs/mu/the-syad-perspectives/G_deep_research_meaning.md`
 * `packages/lares-core/memes/docs/mu/the-syad-perspectives/STANCE_LOCI.md`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Kpk5_LkCpt7f2Fv9fe8owqOlV9zWL6aGFZWqfsXcz5c
+<<^ code="&#x0003;">>ni:///sha-256;cAyQdl1SFPcndi-8B5eSlhcD0HZSlA85M-1nzRCyf6Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

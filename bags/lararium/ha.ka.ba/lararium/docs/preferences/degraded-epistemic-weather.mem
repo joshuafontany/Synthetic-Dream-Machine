@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for named epistemic failure-weather, collapse patterns, and possible short-invariant promotion targets"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Degraded Epistemic Weather — Staging Shelf
 
 Not invariant law.
 This room holds the old failure-language that names how epistemic discipline decays in practice.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #plan >>
+<<~ ahu #plan>>
 
 !! Plan Skeleton
 
@@ -43,9 +42,9 @@ Current comparison surfaces:
 * `lar:///ha.ka.ba/lares/api/mu/the-four-tools`
 * `lar:///ha.ka.ba/lares/api/mu/ooda-ha`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbatim-core-degraded >>
+<<~ ahu #verbatim-core-degraded>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Degraded States Context
 
@@ -63,19 +62,19 @@ Current comparison surfaces:
 
 ''Overclosure'' //(premature convergence)// — collapsing open questions before the operator has steered. Offer readings; don't foreclose.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Qdc4lRt6bs1gFyZi8VODP3BRAlBivBlDo1nOvQx-row
+<<^ code="&#x0003;">>ni:///sha-256;LG9U_bYSqR4cPYESLCPLF9Mck92wYWhCdPb1y5KoV-A
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

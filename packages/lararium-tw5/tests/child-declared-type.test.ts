@@ -25,7 +25,7 @@ function childByTitleEnd(children: TiddlerFields[], suffix: string): TiddlerFiel
 describe("child declared meta type (default-before-spread)", () => {
   test("a child declaring type = text/markdown KEEPS it", () => {
     const body = [
-      "<<~ ahu #source-text >>",
+      "<<~ ahu #source-text>>",
       "",
       "```toml meta",
       'type = "text/markdown"',
@@ -34,7 +34,7 @@ describe("child declared meta type (default-before-spread)", () => {
       "",
       "plain prose, no sigils",
       "",
-      "<<~/ahu >>",
+      "<<~/ahu>>",
     ].join("\n");
     const { children } = splitBodyTiddler(ROOT, body, base);
     const kid = childByTitleEnd(children, "#source-text");
@@ -44,7 +44,7 @@ describe("child declared meta type (default-before-spread)", () => {
   });
 
   test("an undeclared child DEFAULTS to memetic-wikitext", () => {
-    const body = "<<~ ahu #plain >>\n\nplain body\n\n<<~/ahu >>";
+    const body = "<<~ ahu #plain>>\n\nplain body\n\n<<~/ahu>>";
     const { children } = splitBodyTiddler(ROOT, body, base);
     const kid = childByTitleEnd(children, "#plain");
     expect(kid).toBeDefined();

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/membership-doctrine.mem"
@@ -9,7 +9,6 @@ mana      = 16
 manao     = 16
 manaoio   = 15
 namespace = "&#x2695;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the membership doctrine — the privacy invariant of the whole public-facing mesh: the Nexus tracks operator CONTRACTS, never user IDENTITIES. An operator contract carries pubkey + accepts-carriage + charter-epoch and NOTHING more; users SOFT-ATTACH and leave no roster trace; invites are sealed BURNABLE capabilities spent-on-boot that leave no record. We choose to not have the user table. Operator-ruled 2026-07-21. SECOND CONDITION ruled 2026-08-09: belonging carries TWO conditions — the contract AND agreement with the grammar vectors traded on that Nexus. Agreement rides KEYED, never audited (the MLS RFC 9420 `confirmation_tag` shape): a peer that disagrees cannot produce the binding, so no roster row is needed to record who agrees — the second condition adds NO table and lands back on the no-roster ruling."
 revised-on = "2026-08-10"
@@ -21,9 +20,9 @@ uri-path  = "ha.ka.ba/lararium/mesh/membership-doctrine"
 written   = "2026-07-21"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! The Membership Doctrine ~ track contracts, never identities
 
@@ -31,7 +30,7 @@ written   = "2026-07-21"
 > public infrastructure. The line it draws decides whether the DreamNet becomes a
 > commons or a panopticon. Operator-ruled 2026-07-21.
 
-<<~ ahu #the-invariant >>
+<<~ ahu #the-invariant>>
 
 !! The invariant
 
@@ -48,19 +47,19 @@ written   = "2026-07-21"
 
 ''So the check adds no trace, no roster row, and no new authority'' — it rides where the crypto already rides, bilaterally, peer-local, exactly like the rest of this doctrine.
 
-''AND ITS SCALE IS BOUNDED, which the no-roster ruling already anticipated.'' Exclusion power is bounded by the excluder's market share: three fields built this gate correctly and three retreated under open-internet pressure. The one that held gates at the ''group'' boundary, where the members are the whole relevant population and the roster stays local. ''Deployable at Lararium and Nexus scale; at DreamNet scale it predicts the same retreat'' — which is why a bilateral leased contract per operator, and never a confederation-wide roster, is the shape that survives. <<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
+''AND ITS SCALE IS BOUNDED, which the no-roster ruling already anticipated.'' Exclusion power is bounded by the excluder's market share: three fields built this gate correctly and three retreated under open-internet pressure. The one that held gates at the ''group'' boundary, where the members are the whole relevant population and the roster stays local. ''Deployable at Lararium and Nexus scale; at DreamNet scale it predicts the same retreat'' — which is why a bilateral leased contract per operator, and never a confederation-wide roster, is the shape that survives. <<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-invariants>>
 
-<<~ confidence 14/20 >> — the condition stands ruled; ''its mechanism stands UNBUILT'', and a prior treatment waits on another worldline to surface from the sensorium.
+— the condition stands ruled; ''its mechanism stands UNBUILT'', and a prior treatment waits on another worldline to surface from the sensorium.
 
-<<~ confidence 15/20 >> The corpo's first act stands up the user table — the row per
+The corpo's first act stands up the user table — the row per
 human that becomes the product. This doctrine ''chooses to not have the table.'' A Nexus runs
 public infrastructure at any scale and still answers "who are your users?" with the only honest
 answer a sovereign commons holds: ''we do not hold that — ask them.'' This enacts the anti-SIN
 stance (#carry-contract, #the-frame) in the one place it would otherwise erode first.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-two-stacks >>
+<<~ ahu #the-two-stacks>>
 
 !! The two cap-stacks ~ operator contracts, user soft-attaches
 
@@ -71,8 +70,8 @@ vessel by vessel (#/identity-classes):
 \procedure ~Stack(Type:"" Params:"") ~Stack <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Stack OPERATOR "runs/a node vessel does/CONTRACTS with the Nexus (owes MANDATORY carriage) trace/a wax-sealed carriage contract — consensual, minimal, revocable (Kapae)" >>
-<<~Stack USER "runs/browser-style vessels, no infra does/SOFT-ATTACHES (boot-seeded from a node on the rhizome, own cap-stack, reads/writes through blind relays) trace/NONE — no roster, no account, no user table" >>
+<<~Stack OPERATOR "runs/a node vessel does/CONTRACTS with the Nexus (owes MANDATORY carriage) trace/a wax-sealed carriage contract — consensual, minimal, revocable (Kapae)">>
+<<~Stack USER "runs/browser-style vessels, no infra does/SOFT-ATTACHES (boot-seeded from a node on the rhizome, own cap-stack, reads/writes through blind relays) trace/NONE — no roster, no account, no user table">>
 
 ''An operator contracts because carriage is a mutual obligation the mesh must check'' — a Nexus has
 to know its infrastructure-peers to gossip the antigen and split the carry. ''A user owes nothing,
@@ -80,15 +79,15 @@ carries nothing, so belongs in no roster'' — the node that boot-seeds a user h
 entry for it. A user turns operator by adding a node vessel and contracting; the stack shifts with
 the pool.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-operator-contract >>
+<<~ ahu #the-operator-contract>>
 
 !! The operator contract ~ the minimal wax-sealed payload
 
 An operator's membership entry carries the ''floor and nothing above it'' (operator-ruled):
 
-<<~ranks payload operator-pubkey -> accepts-carriage -> charter-epoch >>
+<<~ranks payload operator-pubkey -> accepts-carriage -> charter-epoch>>
 
 ''No name, no email, no device list, no behavior.'' A quorum-signed `MembershipEntry` (the antigen's
 allow-twin, `blocked{}` ⊥ `members{}`, #carry-contract) — the operator signs "I accept carriage",
@@ -96,9 +95,9 @@ allow-twin, `blocked{}` ⊥ `members{}`, #carry-contract) — the operator signs
 sync (no global now, #causal-islands), revocable by Kapae. ''This is the maximum the system ever
 holds about a contracting operator.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-invite >>
+<<~ ahu #the-invite>>
 
 !! The invite ~ a sealed burnable capability that leaves no record
 
@@ -118,9 +117,9 @@ walks. ''They never collapse'': merging them destroys the tracelessness on purpo
 the general invite forgoes is precisely what the Cabal tier requires — an attributable voucher to
 carry the cost (`admission-on-a-lineage#the-standing`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-carried-cap >>
+<<~ ahu #the-carried-cap>>
 
 !! What a face CARRIES ~ a capability, never a standing
 
@@ -140,9 +139,9 @@ carry the cost (`admission-on-a-lineage#the-standing`).
 
 > ''AND THE GROUP NEVER VERIFIES A HUMAN.'' It attests a RELATION — //this face holds a relation with us// — and what that relation means in the world stays the group's own rite, un-modelled. ''That refusal IS the un-confiscatability'': a state can void a card because a card claims to name a person and its issuer can un-name them. Nothing here ever claimed to name a person, so no claim stands to void. Seize the device and the relation survives to be re-attested; seize a state card and the bearer reads as nobody.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-user-scope >>
+<<~ ahu #the-user-scope>>
 
 !! The user scope ~ soft-attach + inversion-of-control social graphs
 
@@ -153,12 +152,12 @@ the public planes + its own private data ''through that node's blind relay'' (tr
 ''Users build their OWN social graphs — inversion of control.'' The user owns the graph (its own
 handle-book of others' nyms, #persona-policy), never the Nexus. The Nexus federates only the public
 Handle-cards a user consciously posts to `crossroads`; the connections a user draws between them stay
-the user's own, off any central plane. <<~ confidence 11/20 >> The Kowloon-submodule pattern
+the user's own, off any central plane. The Kowloon-submodule pattern
 carries this (partially wired, polish deferred — a 2a build).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-publishing-surface >>
+<<~ ahu #the-publishing-surface>>
 
 !! The publishing surface ~ four acts under one word, and a ladder
 
@@ -176,11 +175,11 @@ Fields that manufacture standing-to-object publish all four. ''This stack publis
 
 > ''STANDING-TO-OBJECT SCOPES TO THE TIER AT WHICH A THING GETS PUBLISHED.''
 
-A realm publishing its declaration at the public tier gains outside challengers; one publishing at Handle tier keeps its challengers internal. ''Same machinery, one dial'' — and a realm under threat withdraws the tier without losing the faculty. Note what this does NOT buy: it names a procedural capacity to challenge, never an accrued position. ''Standing-to-object ⊥ `kūlana``'' (<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >>).
+A realm publishing its declaration at the public tier gains outside challengers; one publishing at Handle tier keeps its challengers internal. ''Same machinery, one dial'' — and a realm under threat withdraws the tier without losing the faculty. Note what this does NOT buy: it names a procedural capacity to challenge, never an accrued position. ''Standing-to-object ⊥ `kūlana``'' (<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>>).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-transition >>
+<<~ ahu #the-transition>>
 
 !! From the house to public infrastructure ~ lock it in now
 
@@ -189,22 +188,22 @@ planetary public Nexus. ''Lock the minimalism in now'': a table left soft grows 
 someone asks for "just a little telemetry." Built as the floor, it stays the floor — the mesh
 ''cannot'' surveil its users because it never stood up the surface to hold them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ytYUSWdy2YcqPlQ5le68wRrX-8EHXmaslpEOfeDTUm4
+<<^ code="&#x0003;">>ni:///sha-256;3vmrt71qyiCc9wuZ7OkryAYEsXhEk_LG6ejolr07lsI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -11,4 +11,4 @@ type: text/vnd.tiddlywiki
 <!-- wehe — Hawaiian procedure executor; alias for \procedure.
      Shares grammar schema with sigil-procedure.tid; both declare a named callable body.
      lar-kind: pragma-alias — no render output. The memetic parser transpiles
-     <<~ wehe name(params) >>body<<~/ wehe >> → \procedure name(params) body \end at parse time. -->
+     <<~ wehe name(params)>>body<<~/ wehe>> → \procedure name(params) body \end at parse time. -->

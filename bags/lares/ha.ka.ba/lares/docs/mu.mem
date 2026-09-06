@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for interpretive frames, stance-conditioned reading, and Chapel Perilous witness bundles"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,20 +15,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/mu"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Mu Docs
 
 Not invariant law.
 This shelf holds interpretive docs, witness bundles, and condensed research behind the Mu-facing invariants.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tree >>
+<<~ ahu #tree>>
 
 !! Tree
 
@@ -41,9 +40,9 @@ Use this branch for:
 * condensed research that explains Mu-facing invariant law
 * model agnosticism and reality-tunnel staging shelves during archive consumption
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sigil-arrival >>
+<<~ ahu #sigil-arrival>>
 
 !! The Sigils Teach by Arrival
 
@@ -58,20 +57,20 @@ Human reader: watch the grammar teach itself.
 Agent reader: carry only the pressure that arrives.
 AST reader: read the sockets, then route.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/model-agnosticism >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/reality-tunnels >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/model-agnosticism>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/reality-tunnels>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zV33i3OYMrZM-fYjP320liF9SqsN_BG5kirXE0Cahk8
+<<^ code="&#x0003;">>ni:///sha-256;VFnVhdAceY0lCq-hRJG6vR1UVHUPPByIeCdrfly3GyM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

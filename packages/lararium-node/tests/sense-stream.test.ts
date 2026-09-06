@@ -69,7 +69,7 @@ describe("composeStreamSensorium — the direct-signal / custom-sink frame drive
   test("a numeric stream attaches the PREDICTIVE read (F = Σπε² + complexity + the CSD forecast)", () => {
     // an AR series whose coefficient ramps toward 1 (critical slowing down — rising lag-1-AC)
     let s = 5 >>> 0;
-    const u = () => { s ^= s << 13; s ^= s >>> 17; s ^= s << 5; s >>>= 0; return s / 0xffffffff; };
+    const u = () => { s ^= s << 13; s ^= s>>> 17; s ^= s << 5; s>>>= 0; return s / 0xffffffff; };
     const norm = () => Math.sqrt(-2 * Math.log(Math.max(u(), 1e-12))) * Math.cos(2 * Math.PI * u());
     const x: number[] = [0];
     for (let t = 1; t < 360; t++) x.push((0.2 + 0.75 * (t / 360)) * x[t - 1]! + 0.5 * norm());

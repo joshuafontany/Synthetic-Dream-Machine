@@ -3,7 +3,7 @@
  * Meme: lar:///ha.ka.ba/lararium/api/living-grammar-palace#two-planes
  *
  * Route A — abstract-then-encode: the CNL emits its own form-markers (the
- * classifier channel, the `<<~ … >>` sigils that steer). turn-harvest already
+ * classifier channel, the `<<~ …>>` sigils that steer). turn-harvest already
  * reads those markers off a verbatim turn; this emitter folds a TurnHarvest
  * result + a content-placeholdered meme-ast tree into the two shapes the
  * form-vector encoder (P2, the Python holder) consumes:

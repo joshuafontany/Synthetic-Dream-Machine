@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp>>
 ```toml meta
 entry-point       = "python3 -m lares.lararium_mcp"
 file-path         = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp.mem"
@@ -8,7 +8,6 @@ mana              = 16
 manao             = 16
 manaoio           = 15
 protocol-versions = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"]
-register          = "Synthesis-Canon"
 role              = "docs-spec parent locus for the Lararium MCP server — index, running state, canonical child loci, known gaps"
 server-version    = "0.1.0"
 status            = "standing"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the server as it runs today — not as it should run tomorrow.
 ⏿ orient by what a new operator needs: how to start it, what it exposes, what remains a stub.
@@ -30,9 +29,9 @@ uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 ▶ write a flat doc-spec that a new agent can read cold and act from.
 ↺ verify each feature claim against the test suite; mark stubs clearly; surface residue as explicit gaps rather than silence.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #running >>
+<<~ ahu #running>>
 
 !! Running the Server
 
@@ -81,9 +80,9 @@ python3 -m unittest discover -s lares/lararium_mcp/tests -v
 # Ran 77 tests in ~14s — OK
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #capabilities >>
+<<~ ahu #capabilities>>
 
 !! Implemented Capabilities
 
@@ -140,9 +139,9 @@ All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint:
 | `lararium-read_carrier` | `uri` (required) | raw carrier source text |
 | `lararium-compare_hydration` | none | minimal vs full diff |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #module-map >>
+<<~ ahu #module-map>>
 
 !! Module Map
 
@@ -169,9 +168,9 @@ lares/lararium_mcp/
     test_prompts.py            20 tests (catalog, get, MCP prompts/list, prompts/get)
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #canonical-child-loci >>
+<<~ ahu #canonical-child-loci>>
 
 !! Canonical Child Loci
 
@@ -200,11 +199,11 @@ Graph redesign cluster lives under `packages/lares-core/memes/docs/graph/**`:
 Legacy non-meme design docs in `docs/mcp/` that contributed content now carry consumed markers.
 Active Sprint-03, roadmap, backlog, and todo work-tracking files remain live planning surfaces.
 
-<<~ confidence 15/20 >> ''MemPalace sidecar retires — M1 sidecar-free (swarm ruling, 2026-07-03).'' The read-only stdio sidecar demonstration no longer holds: the sovereign ''contentpalace'' inherits mempalace's exact base schema (ChromaDB `cid·document·embedding·metadata`, 384-dim cosine), stands py-served behind the causal-island, and replaces the top-level `~/.mempalace` sidecar; ingest offloads via @daemon coordinator verbs to the py nalu-gates. Contract + retire-residue: `adapters#contentpalace-inherits`. The `adapters/mempalace.py` stdio client (module map above) and the read-only-gate rows below stand as consumed history.
+''MemPalace sidecar retires — M1 sidecar-free (swarm ruling, 2026-07-03).'' The read-only stdio sidecar demonstration no longer holds: the sovereign ''contentpalace'' inherits mempalace's exact base schema (ChromaDB `cid·document·embedding·metadata`, 384-dim cosine), stands py-served behind the causal-island, and replaces the top-level `~/.mempalace` sidecar; ingest offloads via @daemon coordinator verbs to the py nalu-gates. Contract + retire-residue: `adapters#contentpalace-inherits`. The `adapters/mempalace.py` stdio client (module map above) and the read-only-gate rows below stand as consumed history.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract-docs >>
+<<~ ahu #contract-docs>>
 
 !! Legacy Contract Documents
 
@@ -227,9 +226,9 @@ Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act 
 | `examples/minimal_boot_example.json` | concrete minimal boot artifact sample |
 | `examples/boot_receipt_example.json` | concrete boot receipt sample |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #known-gaps >>
+<<~ ahu #known-gaps>>
 
 !! Known Gaps (Stubs and Residue)
 
@@ -248,9 +247,9 @@ Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act 
 | Write-back tools (MemPalace store, Kowloon post) | blocked by read-only gate | post-v1 |
 | Codex remote examples | not started | remote examples residue |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #templates >>
+<<~ ahu #templates>>
 
 !! Templates — Fill in Before Shipping
 
@@ -322,24 +321,24 @@ class MyAdapter:
     def call_tool(self, name: str, arguments: dict) -> object: ...
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/spine >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/spine>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph>>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;d8uuXkMwR9-PYAjCz_xa9RZNSlBKSJMib_eA4-gzbQM
+<<^ code="&#x0003;">>ni:///sha-256;ZNuXoQesuF9T5HEcz2Go2kZEzyoc5OFgeJO4jvgQbRI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

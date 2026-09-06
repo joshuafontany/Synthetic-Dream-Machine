@@ -1,31 +1,29 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/companions/strandbeest-shrine.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "companion sheet — the Faerie-Ring Strandbeest Shrine: walking hokora, mycelium sails, Mother Spore ring"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/companions/strandbeest-shrine"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Faerie-Ring Strandbeest Shrine
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Faerie-Ring Strandbeest-Shrine — Character Sheet
 
@@ -335,8 +333,8 @@ The strandbeest legs lock into aggressive posture — stabbing, sweeping, and tr
 
 *Leveled item sheet. Not a full Hallmark character — no named ability scores, no Hero Dice, no independent decision-making. Grows via the item upgrade table (Calibrated → Bound → Imbued → Quickened → Resonant → Awakened). The shrine stabilizes through use. Feed it, and it hums.*
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;t8cMrwzjhojabYuOerPuSkT80EUVAeYSmBqEXRn5KD8
+<<^ code="&#x0003;">>ni:///sha-256;3PYp3VIGLnICCKiPaQa2O-db8z1VBZTrCOF1fjXIqIc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

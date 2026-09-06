@@ -214,7 +214,7 @@ export function renderNexusDoc(doc: NexusDoc): string {
   const practice: NexusPracticeBlock =
     doc.federationPosture === undefined ? {} : { federationPosture: doc.federationPosture };
 
-  return `<<~ ? -> ${NEXUS_CHARTER_URI} >>
+  return `<<~ ? -> ${NEXUS_CHARTER_URI}>>
 \`\`\`toml meta
 uri-path  = "${NEXUS_CHARTER_URI_PATH}"
 file-path = "<lares>/nexus/${nexusCharterDocRelPath()}"
@@ -226,7 +226,7 @@ retain    = true
 role      = "the nexus doc — three joints at three cadences: the SEAL lineage (rare, a rotation ceremony), the KAHU roster (steward seats), and the PRACTICE dials (fast, one hand). Each rides its own block and its own narrow writer."
 \`\`\`
 
-<<~ ahu #the-three-joints >>
+<<~ ahu #the-three-joints>>
 
 ! The nexus Doc — seal · kahu · practice
 
@@ -248,7 +248,7 @@ ${JSON.stringify(kahu, null, 2)}
 ${JSON.stringify(practice, null, 2)}
 \`\`\`
 
-<<~/ahu >>
+<<~/ahu>>
 `;
 }
 

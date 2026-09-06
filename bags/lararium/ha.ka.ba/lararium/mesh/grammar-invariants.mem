@@ -1,21 +1,20 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/grammar-invariants>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/grammar-invariants.mem"
 l-space   = "lararium"
 mana      = 3
-register  = "Synthesis"
 retain    = true
 role      = "grammar agreement as the SECOND condition of belonging to a Nexus — contract ∧ comprehension — and the outside art that proves the shape: MLS RFC 9420 keys the agreement rather than auditing it, and exclusion power is bounded by the excluder's market share"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Grammar agreement ~ the second condition of belonging
 
@@ -23,9 +22,9 @@ uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 
 ''This meme held a TODO naming a source file that never existed in this repo's history.'' It stands as GROUND rather than design: what the field already proved, gathered so the design lands on it instead of re-deriving it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-outside-art >>
+<<~ ahu #the-outside-art>>
 
 !! What the field proved ~ and the one mechanism that held
 
@@ -46,10 +45,10 @@ uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 
 ''And any ignore-unknown clause rusts shut unless traffic proves otherwise'' — GREASE (RFC 8701) exists because implementations that reject unknown values interoperate fine with today's peers, so the mistake spreads unnoticed until the joint has seized. TLS 1.3 pays that debt permanently, impersonating 1.2 on the wire forever.
 
-<<~ confidence 15/20 >> — outside art, verified against primary sources; ''the design that sits on it stays the operator's'', and a prior treatment exists on another worldline to surface from the sensorium.
+— outside art, verified against primary sources; ''the design that sits on it stays the operator's'', and a prior treatment exists on another worldline to surface from the sensorium.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Lyfj92JSXwTP5YqHlYhDsd5CGVc_VgMq-Je1_cDbcJA
+<<^ code="&#x0003;">>ni:///sha-256;-oNsMxlmXLvaWiW3FmMvHbgmNxnkH2s0yNWr5FOq0NE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

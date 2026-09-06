@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/AUTH-ATPROTO >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/AUTH-ATPROTO>>
 ```toml meta
 cacheable  = true
-confidence = 18
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/AUTH-ATPROTO.mem"
 hydrate    = true
 l-space    = "adjacent"
 mana       = 18
 manao      = 18
 manaoio    = 17
-register   = "Synthesis-Canon"
 retain     = true
 role       = "ATProto / Bluesky login architecture doctrine — BFF, identity layers, DPoP boundary"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/AUTH-ATPROTO"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #oauth-position >>
+<<~ ahu #oauth-position>>
 
 !! ATProto OAuth Position
 
@@ -41,9 +39,9 @@ ATProto OAuth profile requirements (mandatory, not optional):
 Do not manually implement any item on this list.
 The official ATProto SDK (`@atproto/oauth-client-*`) owns this boundary entirely.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bff-preferred-flow >>
+<<~ ahu #bff-preferred-flow>>
 
 !! Preferred Architecture: BFF
 
@@ -69,9 +67,9 @@ Rationale:
 * BFF can enforce trust-tier checks before forwarding requests
 * Matches ATProto's own recommended architecture for web apps
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #browser-fallback-flow >>
+<<~ ahu #browser-fallback-flow>>
 
 !! Allowed Fallback: Browser-Only Login
 
@@ -89,9 +87,9 @@ Rules when using browser-only flow:
 
 Do not use browser-only login as the default production architecture.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #identity-layers >>
+<<~ ahu #identity-layers>>
 
 !! Identity Layer Separation
 
@@ -123,9 +121,9 @@ Rules:
 * Lararium session tokens are application-layer; they are not OAuth tokens.
 * PDS/resource server authority must be checked — do not accept unverified issuer claims.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dpop-boundary >>
+<<~ ahu #dpop-boundary>>
 
 !! DPoP Boundary
 
@@ -140,9 +138,9 @@ If direct DPoP handling ever becomes necessary (formal reviewed exception requir
 * Never hand-roll DPoP inside `lararium-mesh` or `lararium-web`
 * Any direct DPoP code belongs in a dedicated auth-boundary package, not core
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #storage-policy >>
+<<~ ahu #storage-policy>>
 
 !! Storage Policy
 
@@ -162,9 +160,9 @@ General:
 * No raw token material in URL parameters or fragment identifiers
 * PKCE state and nonces: memory-only during the OAuth flow; discard after use
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #curve-policy >>
+<<~ ahu #curve-policy>>
 
 !! Curve Policy
 
@@ -181,9 +179,9 @@ If repo signing or ATProto data-auth work later requires k256:
 * Use official ATProto libraries or a reviewed dependency
 * Do not implement k256 operations in `lararium-mesh`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #risks >>
+<<~ ahu #risks>>
 
 !! Known Risks and Deferred Decisions
 
@@ -199,17 +197,17 @@ If repo signing or ATProto data-auth work later requires k256:
 Implementation milestone: see `lar:///LARARIUM-NODE/ROADMAP` Milestone 4.
 No ATProto login implementation this milestone — doctrine only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ pranala #to-roadmap from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=relation role=documents >>
-<<~ pranala #to-crypto from=? -> to=lar:///LARARIUM-NODE/CRYPTO family=relation role=sibling >>
+<<~ pranala #to-roadmap from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=relation role=documents>>
+<<~ pranala #to-crypto from=? -> to=lar:///LARARIUM-NODE/CRYPTO family=relation role=sibling>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZhPH5ek-Nm9ZQOej-Y90Xz76rFfvaSiC_7U_jm8CtSM
+<<^ code="&#x0003;">>ni:///sha-256;fUsQ_0XGT7mzU07k3YqWma8pYo8ZBQXSz0sCZyrrVCo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

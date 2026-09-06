@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/island-protocol >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/island-protocol>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/island-protocol.mem"
 l-space       = "lararium"
 mana          = 14
-register      = "Synthesis-Canon"
 retain        = true
 revised-on    = "2026-06-12"
 revision-note = "ea-breath law lands: breath message (phase + monotonic progress) added island→vessel; watchdogs re-arm on breath, judge frozen evidence by stall budget, silence alone times out; mkBreath factory"
@@ -16,9 +15,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/mesh/island-protocol"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Island Protocol
 
@@ -101,19 +100,19 @@ The `laresUrl?` grant got trimmed (keel trim, 2026-06-10; re-grounded on the ora
 `mkAdminEvictRequest` · `mkAdminEvictResult` ·
 `mkAdminResidencyOp` · `mkAdminResidencyOpResult`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/ea >>
-<<~ loulou lar:///ha.ka.ba/lararium/browser/browser-vessel-island-pool >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/ea>>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/browser-vessel-island-pool>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;JUEPu3b37oW3Wy_QVe2L6pa5-cu8PuYOWfKXheB1u_o
+<<^ code="&#x0003;">>ni:///sha-256;7eRrk7QN6ka63J4W-_Q348Dk9yNSE5REhOT3xXSTltE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

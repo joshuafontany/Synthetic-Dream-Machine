@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sync/save-cascade >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sync/save-cascade>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/sync/save-cascade.mem"
@@ -8,7 +8,6 @@ l-space       = "adjacent"
 mana          = 18
 manao         = 17
 manaoio       = 17
-register      = "Synthesis-Canon"
 retain        = true
 role          = "corpus-driven write-routing cascade for LarariumCrdtSyncAdaptor: ordered TW5 filter rules mapping tiddler titles to save strategies"
 source-symbol = "SaveStrategy _resolveSaveStrategy _saveHandlers"
@@ -18,9 +17,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/sync/save-cascade"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Save Cascade Law
 
@@ -39,9 +38,9 @@ The cascade is read at runtime from the wiki via:
 ```
 Each tagged child tiddler contributes one rule via its `tw5-filter` and `save-strategy` fields.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #skip-system >>
+<<~ ahu #skip-system>>
 
 ```toml
 ahu-slot      = "#skip-system"
@@ -52,9 +51,9 @@ save-strategy = "skip"
 rationale     = "TW5 $:/ system tiddlers are internal housekeeping — never propagate to shared state"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #skip-temp >>
+<<~ ahu #skip-temp>>
 
 ```toml
 ahu-slot      = "#skip-temp"
@@ -65,9 +64,9 @@ save-strategy = "skip"
 rationale     = "session-local scratch tiddlers — browser-only, not canonical"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sync-draft >>
+<<~ ahu #sync-draft>>
 
 ```toml
 ahu-slot      = "#sync-draft"
@@ -78,9 +77,9 @@ save-strategy = "direct"
 rationale     = "TW5 edit-draft tiddlers — synced across all devices for this user identity; a draft begun on one device should appear on another"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #direct >>
+<<~ ahu #direct>>
 
 ```toml
 ahu-slot      = "#direct"
@@ -91,14 +90,14 @@ save-strategy = "direct"
 rationale     = "canonical lar: URI memes — write one LarTiddlerRecord per tiddler directly to the Automerge store; ahu slot children included as independent records"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;j5RzKNzgzH-62pWaTGQfUEH1sUjYdNpyFQhZ1sP4zeo
+<<^ code="&#x0003;">>ni:///sha-256;iTNTccLVhICyaYANad8hqSUAKGv2X0S5xXW8mzKc97E
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

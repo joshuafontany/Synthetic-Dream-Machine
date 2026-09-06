@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/prism >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/prism>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/prism.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 16
 manaoio   = 15
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the lens-harness --- references existing content and refracts it through declared lenses into composed readings"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/prism"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Prism
 
@@ -30,9 +29,9 @@ A prism holds the content ''fixed'' and varies the ''viewpoint''. It generates n
 
 The node summons it. It never rides a turn by default.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #operation >>
+<<~ ahu #operation>>
 
 !! The Operation
 
@@ -44,9 +43,9 @@ Three moves, in order:
 
 The product earns a clean word: a ''reading'' --- a lensed interpretation of a reference. Not a //parse// (which recovers one canonical structure against one grammar), and not bare //annotation// (marginalia). Prism varies the lens; a parse fixes the grammar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-lenses >>
+<<~ ahu #the-lenses>>
 
 !! The Lenses It Refracts Through
 
@@ -58,25 +57,25 @@ Prism supplies the ''target slot'' the self-applied lenses lack, and reuses the 
 
 A lens reads its tool-bind through the `syad` `/` grammar (`syad=🏛️/*!`); each lens also runs alone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invocation >>
+<<~ ahu #invocation>>
 
 !! Invocation
 
 Declare the lenses, then delegate `->` to the target:
 
 ```text
-<<~ prism conformance -> lar:///ha.ka.ba/bags/some/target/content >>       # single lens, addressed
-<<~ prism syad=🏛️ 🗡️ conformance -> lar:///draft.fix.lands >>          # composed spectrum
-<<~ prism mu=*! -> "<pasted or quoted content>" >>                     # a tool facet, inline
+<<~ prism conformance -> lar:///ha.ka.ba/bags/some/target/content>>       # single lens, addressed
+<<~ prism syad=🏛️ 🗡️ conformance -> lar:///draft.fix.lands>>          # composed spectrum
+<<~ prism mu=*! -> "<pasted or quoted content>">>                     # a tool facet, inline
 ```
 
 The lens list rides left of the `->`; the referenced target rides right. A target that resolves to the node's own current turn reads as a degraded invocation --- Prism reads //other// content, never the node's own live output (kin to the `conformance` rule).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reading >>
+<<~ ahu #reading>>
 
 !! The Reading
 
@@ -92,9 +91,9 @@ prism syad=🏛️ 🗡️ conformance -> lar:///draft.fix.lands:
 
 Each band carries complementary signal; the reading composes them into a fuller view than any single lens holds. The overlay feeds the node's //next// decision --- it orients forward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lineage >>
+<<~ ahu #lineage>>
 
 !! Lineage
 
@@ -102,18 +101,18 @@ Prism supersedes the old `--parse` language --- a content-decomposition tool tha
 
 Prism keeps the worthwhile half --- //reference a piece of content and read its structure// --- and drops the rest: it varies the lens instead of fixing one grammar, composes layered readings instead of one tree, and reads //existing referenced// content instead of decomposing fresh input.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/conformance >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/conformance>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;64rPQmo8RgpWzBVCot6VsaOlBwMxOEAQRP3o4ltEY2o
+<<^ code="&#x0003;">>ni:///sha-256;-eRAWP7UnM9CNjDGEuaPfkdAlwk0FXwVeT6nhxnIHr4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

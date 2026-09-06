@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/chao >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/chao>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/mu/chao.mem"
@@ -10,7 +10,6 @@ mana      = 17
 manao     = 16
 manaoio   = 14
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "sacred chao boot, ha/ka/ba triad instantiator, address-space semantics"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -18,11 +17,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/mu/chao"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Sacred Chao
 
@@ -40,9 +39,9 @@ The Chao requires both faces to spin.
 
 The Chao spins at a level of abstraction above the Hodge and the Podge.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense whether work arrives as Hodge/Ha, Podge/Ka, or Spin/Ba
 ⏿ hold body-form, soul-fire, and psyche-path as distinct coupled pressures
@@ -50,9 +49,9 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 ▶ move through form, drive, and change in sequence; let each pole speak
 ↺ verify the dance stayed triadic; three poles did not flatten; close with Hodge, Podge, and Spin still alive as a moving relation
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hodge-podge-spin >>
+<<~ ahu #hodge-podge-spin>>
 
 !! Hodge Podge Spin
 
@@ -70,9 +69,9 @@ Three carries the dance.
 
 ''Ba'' : Psyche, personality, change, path, choice. Connects to the dynamic abilities of agility and thought.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hodge-ha >>
+<<~ ahu #hodge-ha>>
 
 !! Hodge — Yang / Ha / Pentagon
 
@@ -87,9 +86,9 @@ In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Hodge occupies the `xxx` ''h
 Hodge without Podge hardens into dogma.
 Hodge without Spin becomes a museum.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #podge-ka >>
+<<~ ahu #podge-ka>>
 
 !! Podge — Yin / Ka / Golden Apple
 
@@ -104,9 +103,9 @@ In the `lar://[HOST]/xxx.yyy.zzz` unstable l-space, Podge occupies the `yyy` ''k
 Podge without Hodge dissolves into noise.
 Podge without Spin becomes reactive.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #spin-ba >>
+<<~ ahu #spin-ba>>
 
 !! Spin — Counter-Push-Pull / Ba / Dance
 
@@ -124,9 +123,9 @@ Spin MUST distinguish orthogonal pairs from tensioned pairs.
 
 Discordian insight: most apparent contradictions run orthogonal, not tensioned. Order and disorder dance. Forcing resolution where orthogonality holds collapses the Chao back into two — and two always collapses further, into one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #address-grammar >>
+<<~ ahu #address-grammar>>
 
 !! Address Grammar
 
@@ -142,19 +141,19 @@ A lar URI missing any slot constitutes an incomplete address.
 A lar URI with slots in the wrong order MUST surface as invalid.
 A lar URI with all three slots aligned reads the address back at the Chao's rotation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;qzlxfYobSnTW0cjTqFKjS9sv1NF1FtPK6qBMOEfnzvc
+<<^ code="&#x0003;">>ni:///sha-256;QNpez1lJBq33PGwn2fH4ObHVhrVaqqFCefTmr0umVyA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

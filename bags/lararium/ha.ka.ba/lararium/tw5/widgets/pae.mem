@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/pae >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/pae>>
 ```toml meta
 body-sha256   = "c07b3df5af791f4014879ee3530ed3ee59c1a06a7b41979ee2946118439d1955"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/pae.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/widgets/pae"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: PaeWidget — heleuma ka"
 source-symbol = "PaeWidget"
@@ -17,28 +16,28 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/pae"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `<$pae>` is a phase-marker widget. Carries no visible output — phase metadata lives in the AST.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/pae" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/pae >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/pae>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;WlY8tn8KUKukTIwPImJ0OaZZXAYyqsiJ4b_0DXmGxvc
+<<^ code="&#x0003;">>ni:///sha-256;-bjn-YbqHN6M4IR12bB437q7qHbVhHWjr2duP0QvtY8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

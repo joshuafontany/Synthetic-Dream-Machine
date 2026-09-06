@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/lararium-doc-stack>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/lararium-doc-stack.mem"
 mana          = 11
 manao         = 11
 manaoio       = 11
-register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-10"
 revision-note = "demoted from Synthesis-Canon: the six-layer Catalog/Corpus model predates IslandGrants + recipe-watch (boot = first reconcile); terms swept room→wiki 2026-06-10"
@@ -17,7 +16,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/lararium-doc-stack"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 > ''Supersession note (2026-06-10).'' This meme records the research-era six-layer model. The current composition law lives at `lar:///ha.ka.ba/lararium/mesh/recipe` (stored composition shape), `lar:///ha.ka.ba/lararium/mesh/island-protocol` (IslandGrants — typed ocap manifest; library layers resolve island-side from @catalog, boot = first reconcile), and `lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology` (the layer stack and its laws). Read what follows as lineage, not law.
 
@@ -148,15 +147,15 @@ A companion `$:/plugins/lararium/export/md` TW5 plugin registers the
 `.md` format in the export dropdown — re-using TW5's export widget
 infrastructure rather than rolling a separate exporter.
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/composite-store >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/composite-store>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;qgaP4g4WT2OQEr8GV5PvWDetwSSl-gCdId3pPo3GpQE
+<<^ code="&#x0003;">>ni:///sha-256;VbtiodU3Ueng4aOP4fjQuH_oZBLqMloIR1Km21V6_bQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

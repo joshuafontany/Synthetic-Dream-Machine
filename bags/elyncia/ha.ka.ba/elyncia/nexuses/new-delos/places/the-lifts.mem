@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "routes — the mana-lift network: the Nexus's vertical pointcrawl legs; keeper unruled"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Mana Lifts
 
@@ -35,8 +33,8 @@ of Amaranth · or the Lares landmarks themselves as literal route-keepers. The k
 holds a hand on every throat in the Nexus; the referee's choice here writes half the Nexus's
 politics.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8pseCJc6JepF1bhjofcRmqDEIHXA6Bv6e1a2307xOZE
+<<^ code="&#x0003;">>ni:///sha-256;hiJn-a2NsuZ-BP-E24t2Ny1Q9ncrKKe9MgkVq_k0vq0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

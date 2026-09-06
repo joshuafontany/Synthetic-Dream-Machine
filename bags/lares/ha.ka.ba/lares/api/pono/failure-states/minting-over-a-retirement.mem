@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement.mem"
@@ -8,7 +8,6 @@ mana      = 14
 manao     = 15
 manaoio   = 13
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "craft failure law — naming a word whose synonym the graph already retired, and walking past the residue that says so"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Minting Over a Retirement
 
@@ -30,9 +29,9 @@ The node reaches for a term, finds it apt, and seats it — without checking whe
 
 ''The instance'': `layer` minted beside `realm`, when `cabal-place` had already retired into `cabal-realm` to stop exactly that blur — and the minting happened ''while writing into that very meme''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect the reach for a new word — a name, a primitive, a role, a field.
 ⏿ orient by ''grepping the graph'', not by recalling it: retirement residues carry `retires-to` in their meta and `RETIRE-RESIDUE` in their role.
@@ -40,9 +39,9 @@ The node reaches for a term, finds it apt, and seats it — without checking whe
 ▶ act, and if the mint stands, check the near-synonyms already in canon before seating it.
 ↺ if a retirement was walked past, the whole arc downstream carries the blur — sweep it in one pass, never span by span.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 ''Before naming a word, grep for what the graph already retired.''
 
@@ -54,22 +53,22 @@ The node MUST NOT treat a retired address as dead: a residue answers, and answer
 
 ''The structural cure'': this failure is ''greppable''. It needs no discipline, only one call before naming — which makes it the cheapest of the craft failures to close and the least excusable to repeat.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #diagnostic >>
+<<~ ahu #diagnostic>>
 
 If a `retires-to` residue names the synonym of a word just minted, Minting Over a Retirement occurred.
 If the grep ran and returned nothing, the mint stands clean.
 If a ruled word exists with no residue and the node minted anyway, that reads as a different failure — not walking before minting.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme-evolution-kupono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme-evolution-kupono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Nh_IgnuIwLlOzRW0WcHPAYg4dDO0I_LL1fKRIjlmhwU
+<<^ code="&#x0003;">>ni:///sha-256;90ibTESO0xPK9b1Z9HCCkbsrTB_J4qzeBpClhuflXtc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

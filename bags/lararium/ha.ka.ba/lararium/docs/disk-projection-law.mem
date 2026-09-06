@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/disk-projection-law >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/disk-projection-law>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/disk-projection-law.mem"
@@ -9,16 +9,15 @@ last-reviewed = "2026-07-18"
 mana          = 10
 manao         = 10
 manaoio       = 10
-register      = "Synthesis"
 retain        = true
 role          = "pointer: the disk-projection law lives at api/disk-projection — carrier-whole at rest"
 type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/disk-projection-law"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #pointer >>
+<<~ ahu #pointer>>
 
 !! Disk-projection law — see api/disk-projection
 
@@ -26,12 +25,12 @@ The disk-projection law reads: ''a meme resides on disk as one whole carrier —
 
 The full, load-bearing statement — surfaces, bag roles, projection routing, the disk ward — lives at:
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#/granularity >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#/projection-law >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#/projection-routing >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#/granularity>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#/projection-law>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection#/projection-routing>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zFspva1yJp3d9KnEJELQmFf7iG8cM4wTUKzjgPfQVH8
+<<^ code="&#x0003;">>ni:///sha-256;aGkvgqyx11NptlhLrzLhEjvRwkf5NX3aphk0PdQOLfg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

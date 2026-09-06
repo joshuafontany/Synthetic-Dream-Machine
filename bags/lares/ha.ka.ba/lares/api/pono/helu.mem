@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/helu >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/helu>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/helu.mem"
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "filter-function declaration pragma — helu as enumeration/calculation; TW5 \\function equivalent; English alias: \\function"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-helu"]
@@ -13,9 +12,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/helu"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Helu
 
@@ -31,9 +30,9 @@ filter expression that accepts parameters and yields a result list. TW5 5.3+ equ
 Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body that
 //computes// — the function yields a filter result set, not rendered wikitext.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -42,18 +41,18 @@ A helu body MUST be a valid TW5 filter expression.
 A helu function MUST return a list of values (the filter result set).
 A helu declaration MUST register a function definition only, producing no render output.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ helu functionName(param:"default") >>
+<<~ helu functionName(param:"default")>>
   [filter-expression-using-param]
-<<~/ helu >>
+<<~/ helu>>
 
-<<~ \function functionName(param:"default") >>  [filter]  <<~/ \function >>
+<<~ \function functionName(param:"default")>>  [filter]  <<~/ \function>>
 ```
 
 TW5 equivalent:
@@ -61,16 +60,16 @@ TW5 equivalent:
 \function functionName(param:"default") [filter-expression]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5WepmQ-iZSgoIcp6CdA7oOcsPpQ9QT04gJu69FcsSAI
+<<^ code="&#x0003;">>ni:///sha-256;snVY65UM-D7GrUiFGrV4EBl47oJM0HzhlhLOEW0MT1w
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -60,7 +60,7 @@ function expectedRoots(): Set<string> {
   const files = execSync(`find ${CORPUS} -name '*.mem'`, { encoding: "utf8" }).trim().split("\n");
   const roots = new Set<string>();
   for (const f of files) {
-    const m = /<<[\^~][^\n]*&#x(?:0001|0011);[^\n]*from=\? -> to=(\S+) >>/.exec(readFileSync(f, "utf8"));
+    const m = /<<[\^~][^\n]*&#x(?:0001|0011);[^\n]*from=\? -> to=([^\s>]+)\s*>>/.exec(readFileSync(f, "utf8"));
     if (m?.[1]?.startsWith("lar:///ha.ka.ba/lares/")) roots.add(m[1]);
   }
   return roots;

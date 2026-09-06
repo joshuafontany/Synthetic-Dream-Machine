@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/gorgonne-diaspora>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/factions/gorgonne-diaspora.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "faction meme — the Gorgonne Diaspora Cabals: the far-roaming serpent-folk of the sea-roads; appearance canon, gaze-courtesy, shipboard culture"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/gorgonne-diaspora"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Gorgonne Diaspora Cabals
 
@@ -29,9 +27,9 @@ heritage rides the Plane-Touched Gorgonne line: hair-serpents as spirit-familiar
 discounted //Serpent's Gaze//, and the old appearance canon that already named them at sea —
 ''"captains with serpents for braids."''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #appearance >>
+<<~ ahu #appearance>>
 
 !! Appearance Canon
 
@@ -49,14 +47,14 @@ deep trust or a challenge, and every gorgonne knows which before you do.
 ''Shipboard culture:'' mirror-taboos run the decks — polished metal stays below, sightlines get
 rigged with cloth, and a crew's toasts run in rounds, in sequence, by rank.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;7ZnMmjtrvS-_DXArJm3F4BCQ7-sCPsSDkbk0_qB23EY
+<<^ code="&#x0003;">>ni:///sha-256;s9doc5qlRNZ17iWC6yhBZGmy_xI_uSdsHQ9Xn2EudWM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

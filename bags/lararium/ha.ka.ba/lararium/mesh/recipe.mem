@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/recipe >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/recipe>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/recipe.mem"
 l-space     = "lararium"
 mana        = 12
 manao       = 12
-register    = "Synthesis"
 retain      = true
 role        = "RecipeTiddler schema + bag-stack parsing — the stored shape of a wiki's composition record"
 source-file = "packages/lararium-mesh/src/recipe.ts"
@@ -15,9 +14,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/recipe"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -37,9 +36,9 @@ island mounts from.
 * `parseBagStack(raw)` / `parsePlugins(raw)` — isomorphic field parsing:
   TW5 space-separated list string or JS/JSON array; `[]` for anything else.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #where-recipes-live >>
+<<~ ahu #where-recipes-live>>
 
 !! Where recipes live — two planes (operator ruling, 2026-06-16)
 
@@ -67,18 +66,18 @@ class, where the alert stays the permanent mechanism.
 //at the live handoff torch. Source-file `recipe.ts` carries the schema today;//
 //the plane routing lands in `genesis-doc` / `base-doc` / `catalog-accessor`.)//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Vx59cFpBhbrf-p-f087F041jzwHTCkZgzntEfaQYy84
+<<^ code="&#x0003;">>ni:///sha-256;1UT0dr0oavx6noWUTcRFG1OkK8MmbFl0M8sSyuobD0k
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

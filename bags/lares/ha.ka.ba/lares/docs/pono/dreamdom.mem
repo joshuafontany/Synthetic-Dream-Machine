@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/dreamdom.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 15
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Design"
 retain            = true
 role              = "dreamdom — the DESIGN. DreamDOM pet-names this house's REPLACEMENT for TiddlyWiki's `$tw.fakeDocument`: a DOM implementation instanced TWICE — one in the live wiki VM, one on the main thread — with tight bindings between them, so the thread boundary lives INSIDE the DOM rather than layered over it. Carries the position (four places it is genuinely unusual, three it is merely borrowed), the seven pono vectors, and the one fork a replacement DOM forces: a mutating DOM ships deltas, and this house's drop-safety rests on frames being ABSOLUTE. Collide against `dreamdom-prior-art`."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! DreamDOM ~ the DOM the wiki dreams in, on both sides of the thread
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom"
 
 That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worker with a main-thread twin and a node map between — and the field's reading of that shape applies to us directly rather than by analogy (#dreamdom-prior-art).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-position >>
+<<~ ahu #the-position>>
 
 !! Where the position is genuinely unusual ~ four
 
@@ -47,9 +46,9 @@ That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worke
 
 `browser-wiki-worker` mounts ''TWO projection-nalus over ONE island'' today — the story river and the coherence radius, coalescing on the same beat, torn down LIFO. ''Multiple cameras is an established pattern here, not a proposal.'' A third camera is a composition.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-borrowed >>
+<<~ ahu #the-borrowed>>
 
 !! Where it is merely borrowed ~ three, and they must not be forgotten
 
@@ -57,9 +56,9 @@ That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worke
 * ''NO EXEMPTION FROM THE FAKE-DOM BLIND SPOT — measured here, not inherited.'' jsdom returns zeros for geometry; fakeDom has no events, focus, selection or geometry; ''TW5's whole widget suite runs on it and so does ours''. A green unit suite over a fake document certified an interaction leg that broke on the first real click. ''The fixture WAS the blind spot.''
 * ''PROGRAMMATIC FOCUS FROM THE VM STAYS UNSOLVED.'' Seven years of WorkerDOM and `focus()`, `blur()`, `activeElement`, `getSelection()`, `createRange()` remain unimplemented. We inherit that whole, and a DreamDOM does not conjure it — it only decides where the refusal is stated.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-fork >>
+<<~ ahu #the-fork>>
 
 !! ⚠ THE FORK a replacement DOM forces ~ absolute frames versus a mutating document
 
@@ -77,9 +76,9 @@ But drop-safety — the property that lets a burst of wiki changes collapse to o
 
 ''What must NOT happen is drift into (2) by increment.'' A delta added "just for this one case" ends drop-safety for every case, silently, and the instrument that would notice does not exist yet.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-a-replacement-un-skips >>
+<<~ ahu #what-a-replacement-un-skips>>
 
 !! What replacing the fake document UN-SKIPS
 
@@ -94,9 +93,9 @@ TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and d
 
 ⚠ ''Therefore the check-site list is a TEST ROSTER, not trivia.'' Whatever DreamDOM lands must walk those five, deliberately, in a real browser, before anything downstream is believed. The house already learned this at smaller scale: a leg unit-tested against the fake document passed its own suite and failed on first contact.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-vectors >>
+<<~ ahu #the-vectors>>
 
 !! The pono vectors ~ seven, written to be CHECKED rather than admired
 
@@ -108,9 +107,9 @@ TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and d
 # ''ACCESSIBILITY IS A CAMERA WE OWE, NOT A TAX WE PAY.'' Because the semantics are never lost, this house can build what Flutter and Qt structurally could not. That turns an industry excuse into an obligation, and it is carried as one.
 # ''MEASURE BEFORE BEING PROUD.'' TW5's published baseline: ''100–300 ms per keypress'', ''~500 ms per tiddler past forty open''. This house holds NO numbers. ''A unique position nobody has measured is a claim, not a position'' — and TW5 PR #9728 already built the headless refresh recorder that would take them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-would-squander-it >>
+<<~ ahu #what-would-squander-it>>
 
 !! What would squander the position
 
@@ -121,9 +120,9 @@ TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and d
 * ''Un-skipping the five degradation sites without walking them.'' They arrive together, at once, and none has ever run.
 * ''Claiming the position before measuring it.'' The house's own register for this exists: where the field's answer is a `0`, say so rather than fill it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-testimony >>
+<<~ ahu #the-testimony>>
 
 !! The testimony this collides against
 
@@ -141,15 +140,15 @@ Seven tasked spirits, each handed a framing and NOT a conclusion, each held VERB
 
 ''`packages/collab/src/automerge.ts` is TWO LINES — a re-export shim'' (`getBackend` plus `@automerge/vanillajs`), not a binding. The real binding is `folk-sync-attribute.ts`, 470 lines, whose CRDT schema is ''HAST'': it syncs arbitrary DOM subtrees, merging prose character-wise while attributes stay whole-value LWW. Better than the claim, and not where the claim pointed. ⚠ It also carries a structural race — `#applyRemotePatches` DISCONNECTS the MutationObserver, which discards queued records, so a local edit landing during patch application is ''silently lost''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom-prior-art >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/ocif-orion-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-shelf-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom-prior-art>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/ocif-orion-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-shelf-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;IpGhezTLhh-dtm8QZvv4erJKJE92RkeHjk4JBR7csts
+<<^ code="&#x0003;">>ni:///sha-256;yMxj0Sw6qQhuZ-2lvAGVq-92-CvQ0_4YrzChjmdS7C8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/sa-display>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/sa-display.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "docs room for shared-situation-awareness framing, prospective display theory, and research grounding behind lar signal"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/sa-display"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal — SA Display
 
@@ -27,9 +26,9 @@ This room holds the shared-situation-awareness framing and research grounding be
 Branch contract stays at `lar:///ha.ka.ba/lararium/docs/signal`.
 HUD witness and annotation behavior stay at `lar:///ha.ka.ba/lararium/docs/signal/hud`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #room-charter >>
+<<~ ahu #room-charter>>
 
 !! Room Charter
 
@@ -42,9 +41,9 @@ This room keeps the theory-facing layer:
 
 Longer academic argument belongs here rather than in the branch parent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #research-framing >>
+<<~ ahu #research-framing>>
 
 !! Research Framing
 
@@ -79,9 +78,9 @@ It surfaces vector instruments in realtime.
 A `prism` reading does not replace the exchange HUD.
 It reads referenced content the node points it at.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sa-vs-xai >>
+<<~ ahu #sa-vs-xai>>
 
 !! SA vs XAI
 
@@ -95,8 +94,7 @@ It reads referenced content the node points it at.
 |---|---|---|
 | Taskwork SA | `aim` bearing vector (`lar:///threshold.uncertain.opens/…`) | Semantic bearing — what heading the turn takes |
 | Taskwork SA | `OODA-HA` gauge (`Feedback(N↺)`, `N↺ + φ:reason` on suspend) | Temporal position — loops closed, or the phase a loop holds open across turns |
-| Agent SA | `confidence` sigil (`<<~ confidence 13/20 >>`) | Epistemic confidence — the node's degree of certainty |
-| Agent SA | `syad` lens (`<<~ syad 🏛️ 🗡️ >>`) | Discourse posture — the standpoints the node invokes and adopts |
+| Agent SA | `syad` lens (`<<~ syad 🏛️ 🗡️>>`) | Discourse posture — the standpoints the node invokes and adopts |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next `syad` lens reflects the shift |
 | Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `↺`) | Cognitive movement through the current OODA-HA phase set |
 | Teamwork SA | `Aperture` gauge (`Focus(N)`) | Attention range — cognitive load management |
@@ -108,19 +106,19 @@ The chronometer carries five scale positions with action counts, ordered from mo
 Current surface order reads: `⚡ Action -> ⚔️ Combat -> 🔍 Tactical -> ⚙️ Operational -> 🗺️ Strategic`.
 Per-position stance modifier glyph design remains in motion; current record-form baseline still uses positional ASCII stance codes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/l-space >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/l-space>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zlH0W1olut11VOS1_ubyfYZCxYb17TxxhLDkO3gOao8
+<<^ code="&#x0003;">>ni:///sha-256;G-wmHyQo6q3fRW42PgAJDJnXbfqQ_4XBYJuYNdH1mwk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

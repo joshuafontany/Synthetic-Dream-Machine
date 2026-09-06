@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/domain/abjuration >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/domain/abjuration>>
 ```toml meta
 cacheable = true
 caption   = "abjuration"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/domain/abjuration.mem"
 mana      = 13
 manao     = 16
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "component (domain): Abjuration — the school of protection and negation"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/domain/abjuration"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Abjuration
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 The domain of protection and negation — barriers, wards, dispelling, raising thresholds against a crossing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Orients a module toward ''defense'': it blocks, deflects, or unmakes rather than creates. Often runs `hook/sustained` or `hook/imbued` to hold a protection up over time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Pairs with `function/barrier` and `function/ward`. Counters offensive crossings; meets the `ecm` negate/suppress modes as the defensive side of the same exchange.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 [tag[lar:///ha.ka.ba/sdm/components/domain/abjuration]tag[lar:///ha.ka.ba/sdm/components/function/ward]]   warding abjurations
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Confirm whether "dispel/negate" wants its own function component distinct from `barrier`/`ward`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;0wvaM-x9svZxg2U9kyIBD1hGDPeyoyj9QU03sM38amM
+<<^ code="&#x0003;">>ni:///sha-256;SBI05GxBRWDNyuyuQjDgAmCblpJyondcAIKdLKmDVMQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

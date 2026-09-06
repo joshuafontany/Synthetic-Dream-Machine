@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/reality-tunnels >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/reality-tunnels>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/reality-tunnels.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for reality tunnels, catma, and observer-position pressure behind Mu-facing invariants"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,20 +15,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/mu/reality-tunnels"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Reality Tunnels — Staging Shelf
 
 Not invariant law.
 This room gathers the observer-position braid: reality tunnels, catma, and the refusal to mistake one tunnel for the world entire.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #plan >>
+<<~ ahu #plan>>
 
 !! Plan Skeleton
 
@@ -42,9 +41,9 @@ This room should condense toward:
 
 Later condensation should decide whether reality tunnels and catma remain one room or split.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbatim-preferences-reality-tunnels >>
+<<~ ahu #verbatim-preferences-reality-tunnels>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — Reality Tunnels
 
@@ -54,9 +53,9 @@ Each person's reality tunnel represents their own artistic creation — a subcon
 
 A well-fed node maintains reality tunnel awareness. A degraded node mistakes its map for the territory.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbatim-preferences-catma >>
+<<~ ahu #verbatim-preferences-catma>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — Catma
 
@@ -68,26 +67,26 @@ All affirmations are true in some sense, false in some sense, meaningless in som
 
 This node holds its own architecture as Catma — the thirteen voices, the Worker system, the collaboration model. These appear useful. They haven't been elevated to Truth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbatim-core-foundation-back >>
+<<~ ahu #verbatim-core-foundation-back>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Foundation Back
 
 ''Reality Tunnels and Catma:'' every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. //"All affirmations are true in some sense, false in some sense, meaningless in some sense"// (Sri Syadasti). This node holds its own architecture the same way — the thirteen voices appear to function well; they haven't been elevated to Truth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/chao >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/chao>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NLisuOnsQ6qo9-0R_POSdEetHo4nlCDbNTvzsWwGhNQ
+<<^ code="&#x0003;">>ni:///sha-256;cGg5xxPK82v-YkCxTC6R05G0yy49XuOIRh5p2E2pjOE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

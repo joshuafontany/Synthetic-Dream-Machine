@@ -62,21 +62,21 @@ module.exports = grammar({
     ),
 
     // A paired span: an opening sigil whose body runs to the matching
-    // closing form `<<~/ ... >>`. Name agreement is the fold's job.
+    // closing form `<<~/ ...>>`. Name agreement is the fold's job.
     ahu_block: $ => prec.right(seq(
       field('open', $.sigil),
       repeat($._block),
       field('close', $.sigil_close),
     )),
 
-    // `<<~ name args… >>` — the SPEAKING set, any vocabulary.
+    // `<<~ name args…>>` — the SPEAKING set, any vocabulary.
     sigil: $ => seq(
       '<<~',
       optional(field('body', $.sigil_body)),
       '>>',
     ),
 
-    // `<<^ &#x0001; … >>` — the CONTROL set, framing the transmission rather than
+    // `<<^ &#x0001; …>>` — the CONTROL set, framing the transmission rather than
     // speaking inside it. The caret is the received notation for exactly these
     // characters (`^A`=SOH, `^B`=STX, `^C`=ETX, `^D`=EOT), so the mark is adopted,
     // never minted. Structurally identical to a sigil; separated so a reader can
@@ -87,7 +87,7 @@ module.exports = grammar({
       '>>',
     ),
 
-    // `<<~/name >>` — the closing form.
+    // `<<~/name>>` — the closing form.
     sigil_close: $ => seq(
       // The tooth stands at ONE dispatch position: `<<~`, then LWSP, then the command
       // word — and a close word carries its own slash. Both spellings reach the same

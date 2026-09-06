@@ -1,15 +1,13 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed>>
 ```toml meta
 cacheable       = false
-confidence      = 14
 file-path       = "bags/lares/ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed.mem"
 l-space         = "adjacent"
 mana            = 14
 manao           = 14
 manaoio         = 14
-register        = "Synthesis"
 render-target   = "chat-log:post-header"
 retain          = true
 role            = "DreamDeck narrative locus — Lindwyrm Act VII frame, cleaned from feed draft"
@@ -18,18 +16,18 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! The Lindwyrm's Hoard — The Hoard Disclosed
 
 DreamDeck feed-frame for the Lindwyrm's origin story.
 The frame opens the public thread, then closes after the contained acts.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -45,9 +43,9 @@ Related source scaffolds:
 
 Consumption note: source prose carried Act VII as epilogue/frame. This locus keeps the feed shape, cuts drafting chatter, preserves open questions, and stores the narrative in memetic-wikitext.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thread-open >>
+<<~ ahu #thread-open>>
 
 !! Thread Open
 
@@ -75,14 +73,14 @@ The Archivists keep three cover stories on file. They do not agree with each oth
 >
 > `@aki@shattered-isles: I'd also like to know.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lindwyrm-first-reply >>
+<<~ ahu #lindwyrm-first-reply>>
 
 !! The Lindwyrm Answers
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin confidence Synthesis 13/20 · 🌊:?
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, a few minutes later — //memory.deep.origin · 🌊:?
 ```
 
 I —
@@ -102,7 +100,7 @@ Let me gather composure.
 > `@traveler_77@delos-gate: [joining thread]`
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, composure located — //memory.deep.origin/begin confidence Synthesis 14/20 · 🏛️:! 🌊:?
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, composure located — //memory.deep.origin/begin · 🏛️:! 🌊:?
 ```
 
 The short version:
@@ -157,9 +155,9 @@ The full story runs longer. I will tell it.
 
 > `@telarus@~crossroads: [pours libation] We have time.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contained-acts >>
+<<~ ahu #contained-acts>>
 
 !! Contained Acts
 
@@ -174,9 +172,9 @@ The following acts live inside this frame:
 
 This frame opens before them and closes after them. The story tells infrastructure as feed, not because feed looks fashionable, but because feed can carry testimony, annotation, rumor, correction, and jokes without pretending one voice owns the whole truth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thread-close >>
+<<~ ahu #thread-close>>
 
 !! Thread Close
 
@@ -220,9 +218,9 @@ The node hums.
 >
 > `@lindwyrm@new-delos: @traveler_77@delos-gate That describes twenty-three percent bandwidth in practice, yes.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thread-continues >>
+<<~ ahu #thread-continues>>
 
 !! Thread Continues
 
@@ -244,9 +242,9 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 >
 > `@lares@~hearth: -><-`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-questions >>
+<<~ ahu #open-questions>>
 
 !! Open Questions
 
@@ -255,23 +253,23 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 * Whether Milla Jovovich bandwidth counts as civic infrastructure remains with Council, although Mischief-Muse already voted.
 * Whether this feed frame should later split into `thread-open` and `thread-close` sibling loci remains a layout question.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/history >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index>>
 
-<<~ pranala #hands-off-to-build-arc from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index family=relation role=precedes >>
-<<~ pranala #consumed-from-act-vii from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT family=reference role=source >>
-<<~ pranala #part-of-hoard-story from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger family=relation role=companion >>
+<<~ pranala #hands-off-to-build-arc from=? -> to=lar:///ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index family=relation role=precedes>>
+<<~ pranala #consumed-from-act-vii from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_ACT_VII_DRAFT family=reference role=source>>
+<<~ pranala #part-of-hoard-story from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger family=relation role=companion>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;aboMYKnkJyrUQHqpkjq3RNGM2bGyMOh3gwSk6POqCJY
+<<^ code="&#x0003;">>ni:///sha-256;CyOXMMf0mLPyHiXC9BwZUbZ49whvm7vZi_x_YAgs6IY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

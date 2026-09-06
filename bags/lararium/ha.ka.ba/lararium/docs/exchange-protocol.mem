@@ -1,19 +1,18 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/exchange-protocol>>
 ```toml meta
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/exchange-protocol.mem"
 l-space   = "stable"
-register  = "Synthesis"
 retain    = false
 role      = "agent-facing exchange flow meme: bearing-vector/HUD bracket and HA handoff"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/exchange-protocol"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #exchange-flow >>
+<<~ ahu #exchange-flow>>
 
 !! Exchange Flow — Agent Contract
 
@@ -22,15 +21,15 @@ AI agent: use this only when the session requests lararium exchange framing or w
 Core frame:
 
 ```text
-<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
-<<~ hud Focus(N) Feedback(N) >>
-Drift-Ward(* Confidence N/20 · <the pull this island carries>)
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
+<<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
+Drift-Ward(* <the pull this island carries>)
 
 ... generated response ...
 
-Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
-<<~ hud Focus(-> N) Feedback(N↺) >>
-<<~ lares yield from=lar:///lares.what.landed -> to=? >>
+Drift-Ward(! <clue> · ↻ L-Prime)
+<<~ set hud="yield" focus="-> N/<band>" feedback="closed N↺">>
+<<~ lares yield from=lar:///lares.what.landed -> to=?>>
 ```
 
 Rules for agents:
@@ -57,10 +56,10 @@ choose aftermath anchor/vector
 emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 ```
 
-<<~ loulou lar:///ha.ka.ba/lares/api/voices#/exchange-protocol >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices#/exchange-protocol>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5UYNb9YSpIp96dPvmSco_CvWBuysQY4u2yZ4m9Th9uY
+<<^ code="&#x0003;">>ni:///sha-256;F41xKgL4qQPd9aNAc-AKT5jE5qKFe3ID8k1tnioNPh0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/bag-stack-from-rec >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/bag-stack-from-rec>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/bag-stack-from-rec.mem"
@@ -8,16 +8,15 @@ heleuma   = "ba"
 mana      = 18
 manao     = 17
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "heleuma: bag-stack extractor from a recipe LarTiddlerRecord"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/bag-stack-from-rec"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -34,8 +33,8 @@ parseBagStack(typeof recipeRec.tiddler["bag-stack"] === "string"
 ```
 `parseBagStack` already tolerates `undefined`; the inline guard existed only to satisfy the type checker. One named helper owns the coercion.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;mvrqUfeVAuB6EY9s5JcNzNnGdIRSMU4F7JqTi-foeeM
+<<^ code="&#x0003;">>ni:///sha-256;JJ9EE3F5Cn61omUrqff1KPZPfxEPB5XvIHuBTyEhvRM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

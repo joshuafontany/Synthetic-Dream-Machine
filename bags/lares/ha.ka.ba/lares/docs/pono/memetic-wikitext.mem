@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/memetic-wikitext.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 14
-register  = "Synthesis-Canon"
 retain    = false
 role      = "extended documentation surface for memetic-wikitext: examples, authoring profiles, boundary notes, migration residue, and the W3C/prior-art lineage verdicts behind the submission spec"
 tags      = ["api/pono/meme", "api/pono/loci", "api/pono/memetic-wikitext"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/memetic-wikitext"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Memetic Wikitext — Extended Docs
 
 Law lives in `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`.
 This surface carries guidance, examples, and split residue.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #primitive-reading-guide >>
+<<~ ahu #primitive-reading-guide>>
 
 !! Primitive Reading Guide
 
@@ -45,9 +44,9 @@ This surface carries guidance, examples, and split residue.
 `loulou` serves as a named `pranala` edge.
 Other quick chant terms may also serve as named `pranala` sugar where their own invariant loci bind the pattern.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #authoring-profiles >>
+<<~ ahu #authoring-profiles>>
 
 !! Recommended Authoring Profiles
 
@@ -60,46 +59,46 @@ Other quick chant terms may also serve as named `pranala` sugar where their own 
 
 Profiles tune posture, not primitive meaning.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #minimum-boot-examples >>
+<<~ ahu #minimum-boot-examples>>
 
 !! Minimum Boot Example Set
 
 !!! Minimum document
 
 ````markdown
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/example >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/example>>
 
 
 
 
-<<^ code="&#x0003;" >>:e4165dad924ed38d
+<<^ code="&#x0003;">>:e4165dad924ed38d
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>
 ````
 
 !!! Minimum relation, inclusion, invocation
 
 ```text
-<<~ loulou lar:///ha.ka.ba/lares/api/target >>
-<<~ aka lar:///ha.ka.ba/lares/api/source >>
-<<~ kahea lar:///ha.ka.ba/lares/api/source >>
+<<~ loulou lar:///ha.ka.ba/lares/api/target>>
+<<~ aka lar:///ha.ka.ba/lares/api/source>>
+<<~ kahea lar:///ha.ka.ba/lares/api/source>>
 ```
 
 !!! Minimum governed and uncertain work
 
 ```text
-<<~ kapu invocation -> bounded|? >>
-<<~ ? -> ahu #draft-worksite >>
+<<~ kapu invocation -> bounded|?>>
+<<~ ? -> ahu #draft-worksite>>
 Work begins before full binding settles.
 
-<<~/ahu >>
+<<~/ahu>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary-notes >>
+<<~ ahu #boundary-notes>>
 
 !! Boundary Notes
 
@@ -113,9 +112,9 @@ The api parent now carries the submission-grade specification (abstract, conform
 
 Deepen each contract in its own carrier; do not re-expand the parent submission.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-note >>
+<<~ ahu #migration-note>>
 
 !! Migration Note
 
@@ -126,9 +125,9 @@ The current shape keeps:
 * operational procedure at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL`
 * extended guidance here
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #w3c-lineage-verdicts >>
+<<~ ahu #w3c-lineage-verdicts>>
 
 !! W3C + Prior Art Lineage Verdicts
 
@@ -183,17 +182,17 @@ These design tests emerge from the prior-art comparison against TiddlyWiki, XInc
 
 The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext` carries these verdicts: TW5-transclusion lineage (#/introduction), an operational rule-table model plus an ABNF surface grammar (#/grammar), XML-style closure discipline (#/lexical-structure), fragment + media-type semantics (#/media-type), RFC-8174 conformance (#terminology, #conformance). Several v5 design tests resolve there — `kahea` inhabits the render layer (#/processing-model), recursion behavior binds at #recursion-guard, context binds lexically not ambiently (#/scope-model). The remaining open tests ride Annex B.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;0PM-USI3WT7oMnMIqeB12a1dE3MZlas09P1rShGPu0s
+<<^ code="&#x0003;">>ni:///sha-256;YrW50u3EfvmJendEmQPH7yQW0QdGJ3LZU9cT2TxexPw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

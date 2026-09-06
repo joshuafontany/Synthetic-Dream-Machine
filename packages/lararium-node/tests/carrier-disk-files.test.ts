@@ -24,7 +24,7 @@ describe("carrierDiskFiles — resolve a carrier's on-disk files by stem", () =>
     writeFileSync(join(dir, "a.md"),       "# body\n");
     writeFileSync(join(dir, "a.md.meta"),  "type: text/markdown\n");
     writeFileSync(join(dir, "abc.tid"),    "title: abc\n");   // prefix sibling — must NOT sweep
-    writeFileSync(join(dir, "a.mem"),      "<<~ x >>\n");      // a co-stem carrier of another filetype
+    writeFileSync(join(dir, "a.mem"),      "<<~ x>>\n");      // a co-stem carrier of another filetype
 
     const files = carrierDiskFiles(join(dir, "a")).map((f) => f.split("/").pop()).sort();
     expect(files).toEqual(["a.md", "a.md.meta", "a.mem"]);

@@ -35,7 +35,7 @@ beforeAll(async () => {
   src = mkdtempSync(join(tmpdir(), "lares-load-types-"));
   // memetic carrier — SOH heading, decomposes at the membrane
   writeFileSync(join(src, "memetic.md"),
-    "<<^ code=\"&#x0001;\" from=? -> to=lar:///ha.ka.ba/lares/test/memetic-witness >>\n# Memetic Witness\n\nbody under the way.\n");
+    "<<^ code=\"&#x0001;\" from=? -> to=lar:///ha.ka.ba/lares/test/memetic-witness>>\n# Memetic Witness\n\nbody under the way.\n");
   // .tid — carries its own title field (must win)
   writeFileSync(join(src, "note.tid"),
     "title: TestTidTitle\ntype: text/vnd.tiddlywiki\n\nA .tid tiddler body.\n");

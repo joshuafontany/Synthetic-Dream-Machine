@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono.mem"
@@ -8,14 +8,13 @@ mana      = 13
 manao     = 14
 manaoio   = 12
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 role      = "core invariant example of a pono meme: right-sized law surface, bounded self-description, and outward routing pressure"
 tags      = ["api/pono/meme", "api/pono/loci"]
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Pono
 
@@ -25,7 +24,7 @@ In Hawaiian, //pono// carries rightness, properness, equity, and true condition.
 
 This folder already shows the family shape around it: `meme`, `invariant`, `memetic-wikitext`, `loci`, `lar-uri`, `pranala`, `l-prime`, `guest-grammar`, and their skill surfaces. Pono ties to that shape not by swallowing those laws into itself, but by staying small enough that each child may keep its own true work.
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the local law surface first; find the right proportion before adding more
 ⏿ orient what properly stays here versus what belongs with adjacent pono carriers or docs
@@ -33,18 +32,18 @@ This folder already shows the family shape around it: `meme`, `invariant`, `meme
 ▶ write compactly; keep the parent clear and route heavier procedure or teaching matter to the fitting room
 ↺ verify the meme still holds its true condition: explicit, bounded, and not swollen past its work; close with honest residue; what belongs elsewhere leaves so the parent may remain pono
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;wxyAVXihR7W4ez_uwWt3H0HzNWhNBSxeXAv5gnpyASE
+<<^ code="&#x0003;">>ni:///sha-256;uNiN74oCtY4_K1ZLTOx2CgzaRHZi7xnWTbtKByLHV1U
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

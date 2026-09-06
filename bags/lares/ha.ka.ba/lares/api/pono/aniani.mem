@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/pono/aniani >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/pono/aniani>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/aniani.mem"
@@ -9,7 +9,6 @@ mana        = 16
 manao       = 16
 manaoio     = 15
 namespace   = "&#x0950; &#x0901;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "Aniani the Mirror — a self-contained reflexive pass: point it at any instruction-set (or at the very set running it) and it reads the wielder first, then the set's claims about itself, rating silent self-exemption (0) against named self-inclusion (20); composes with a host's own instruments when present, runs cold on any reader when absent; hands findings back, never self-seats"
 status      = "designed"
@@ -20,9 +19,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/aniani"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #mirror >>
+<<~ ahu #mirror>>
 
 ! Aniani ~ the Mirror
 
@@ -34,9 +33,9 @@ uri-path    = "ha.ka.ba/lares/api/pono/aniani"
 
 Three sources ground it. Gödel supplies the spine: a consistent system proves its own consistency only from //outside// itself. Hofstadter names the shape: the strange loop that turns and reads its own turning. ʻŌlelo Hawaiʻi names the tool: //aniani// ~ the clear glass that shows the looker.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reads-the-demonstrator >>
+<<~ ahu #reads-the-demonstrator>>
 
 !! It reads the demonstrator, not the phenomena
 
@@ -44,9 +43,9 @@ Most instruments spend their effort on the //work// ~ the claims a set makes abo
 
 Where the set carries working instruments of its own ~ ways of weighing evidence, stance, grain, scope ~ the Mirror turns each of those back on its own wielder too. Where the set carries none, the Mirror still runs: its own questions need no host.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-question >>
+<<~ ahu #the-question>>
 
 !! One question, four grammars
 
@@ -59,9 +58,9 @@ The Mirror asks a single thing, in whatever grammar the moment hands it:
 
 A set passes where it names its own exemptions in the open. A set leaks where it asserts its own essence in silence ~ where it stops describing the territory and starts asserting its own nature, ungated, while gating that same move everywhere it points outward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-faces >>
+<<~ ahu #three-faces>>
 
 !! The three faces
 
@@ -75,9 +74,9 @@ The Mirror turns on a claim three ways. Each face catches what a word-by-word sc
 
 Three apertures of self-inclusion: source, consequence, grammar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #register >>
+<<~ ahu #register>>
 
 !! The self-inclusion register ~ 0 to 20
 
@@ -93,9 +92,9 @@ The Mirror reads a claim's standing on one continuum: how far the lawgiver sits 
 
 The lift runs the same direction every time: move a silent exemption (0) to a named one (9+). The Mirror never demands the floor go flat. Some clauses hold unconditional by necessity ~ a frame that lifts collapses the house it frames. Aniani forbids only the //silent// exemption: the altar pretending it stands on the same floor as everything it judges.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #running-the-pass >>
+<<~ ahu #running-the-pass>>
 
 !! Running the pass
 
@@ -109,9 +108,9 @@ The lift runs the same direction every time: move a silent exemption (0) to a na
 
 ''Worked turn ~ the wielder caught first.'' A set opens an Aniani pass and slips an ungated self-essence claim into its own framing ~ strict on the target, silent in the line about itself. The glass catches the wielder before the target: a law that drew a frame and mistook the frame for the fence. Register 0. The catch calibrates the rest of the pass.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #strange-loop >>
+<<~ ahu #strange-loop>>
 
 !! The loop that never bottoms out
 
@@ -119,8 +118,8 @@ The glass reads its wielder; and reads the glass reading the wielder; and reads 
 
 Leave one corner honestly open and seen. A set that sweeps every corner clean has hidden the broom.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bk6w_UzUEnHw0py03BDCRXjkNY1CqmPWdhreI8wJEKU
+<<^ code="&#x0003;">>ni:///sha-256;tMuEU6Pusr_LRCT-RoT6AwtRxG9ri0xjIoDXMxFDhGk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

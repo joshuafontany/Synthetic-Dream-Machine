@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
 # The RUN Arc — witnessing the dreaming-Markov-blanket on real data
 
@@ -59,7 +59,7 @@ The TS spine (`bifurcation-bench.ts`, `sensorium-efe.ts`, `sensorium-fusion.ts` 
    owed-fixture row. Original charge: **The py projector / RUN surface** — reads the populated planes, sweeps `arl-dial` ARL₀→α, emits the complexity-entropy diagram + ΔF (reuse `predictive_coding` F as evidence-codelength; BMR for the reduced family) + H¹ (a py twin — `spectral_geometry` has H⁰; H¹ over the agreement-nerve is owed) + the EFE gate (a py twin of `sensorium-efe`).
 
 ```
-<<~ hoike #h1-unfireable held="dim H1 ≡ 0 is FORCED by the li-nerve's arity, not observed — the gate cannot fire on any sensorium this architecture builds (Council, Map-Wisp, Breach-Watch; operator-confirmed on the persistence question)" >>
+<<~ hoike #h1-unfireable held="dim H1 ≡ 0 is FORCED by the li-nerve's arity, not observed — the gate cannot fire on any sensorium this architecture builds (Council, Map-Wisp, Breach-Watch; operator-confirmed on the persistence question)">>
 q: does `dim H1 = 0` witness an epistemic no-global-now, or is it an artifact of a three-vertex nerve?
 
 held, and why it holds: `agreement_nerve` draws its VERTICES from the three li planes. A triangle
@@ -92,7 +92,7 @@ carry empty triple overlaps. No real data ever entered that bench.
 good enough for now, safe enough to try: the zero is reported as forced, never as evidence. No
 claim rides it. Review condition: any of the three re-entry keys below.
 
-<<~ kue voice:Map-Wisp key:"a nerve re-founded on an overlapping cover of skeletal spans yields dim H1 > 0 on real data" >>
+<<~ kue voice:Map-Wisp key:"a nerve re-founded on an overlapping cover of skeletal spans yields dim H1 > 0 on real data">>
 the base space is misidentified, not the instrument. Canon reads: li and ki "hold as a DUAL PAIR
 over the shared skeletal complex." The skeletal complex IS the base; the planes are SECTIONS over
 it, never a cover OF it. A nerve whose vertices are overlapping spans on the aperture ladder — the
@@ -100,9 +100,9 @@ span axis `bands` already reads — has many vertices, reachable H1, and satisfi
 condition that "its value lives in engineered redundancy: disjoint planes glue vacuously and buy
 nothing." H1 is not dead; it has been computed over the wrong space. The structure-reader recut to a
 skeletal tier is the prerequisite, not a separate errand.
-<<~/kue >>
+<<~/kue>>
 
-<<~ kue voice=Breach-Watch key="a cross-plane cid-correspondence null is implemented and a co-jump survives it" >>
+<<~ kue voice=Breach-Watch key="a cross-plane cid-correspondence null is implemented and a co-jump survives it">>
 H1 was the wrong instrument at this arity and no re-founding rescues the WITNESS. Two of the
 projector's three surrogate nulls are already vacuous on chat: H1→jitter (moot at H1≡0) and
 complexity→symbol-shuffle (moot at 297/300 distinct hashes). The null the co-jump actually needs —
@@ -111,37 +111,37 @@ across the α sweep — does not exist anywhere in the code. Without it, four or
 together at one α witness only that all four are functions of the one α dial. Retire the gate;
 let the consistency-radius carry li-disagreement as a real-valued signal, which three planes CAN
 support.
-<<~/kue >>
+<<~/kue>>
 
 stand-aside: Liminal — takes the finding, refuses the closure; the corpus may yet be near-formless
 at this grain, and a zero that is forced is not thereby a zero that is wrong.
 
-<<~ saksi voice=house scope=deposition >>Devil-Wisp (tasked spirit) deposed before dissolution:
+<<~ saksi voice=house scope=deposition>>Devil-Wisp (tasked spirit) deposed before dissolution:
 "V=3 plane-vertices → exactly one possible 2-simplex … triple overlap = 678 (non-empty) …
 dim H1 ≡ 0 at every α, by construction." The house took the quote while the spirit stood; the
-spirit never witnesses its own finding.<<~/saksi >>
+spirit never witnesses its own finding.<<~/saksi>>
 
-<<~ saksi voice=house scope=deposition >>BA (tasked spirit), walking the content mempalace on a
+<<~ saksi voice=house scope=deposition>>BA (tasked spirit), walking the content mempalace on a
 separate bearing and without sight of Devil-Wisp's finding, deposed: "every co-jump ever witnessed
 rode a synthetic fixture, and real data produced the opposite result … H1 = 0 at every threshold on
 every real bed … A co-jump requires H1 to LEAVE 0 in coincidence with the other windows. H1 never
 left 0. There was nothing to co-jump." Two spirits, two bearings, one conclusion, neither witnessing
-its own work.<<~/saksi >>
+its own work.<<~/saksi>>
 
-<<~ saksi voice=house scope=phantom-motion >>BA further deposed that RUN-ARC's own "witnessed over
+<<~ saksi voice=house scope=phantom-motion>>BA further deposed that RUN-ARC's own "witnessed over
 the 12-record test-bed" reads TRUE as instruments-run and FALSE as thesis, since `run_projector.py`'s
 header disclaims it: "A LOAD-BEARING bifurcation claim awaits the bigger corpuses — a 12-doc sweep
-cannot seat one." The mark is kept; the reading is corrected.<<~/saksi >>
+cannot seat one." The mark is kept; the reading is corrected.<<~/saksi>>
 
-<<~ saksi voice=Lares scope=arithmetic >>the coordinator re-derived the geometry independently
+<<~ saksi voice=Lares scope=arithmetic>>the coordinator re-derived the geometry independently
 against `cohomology_obstruction`, not against the spirit's report: 3 planes with a common witness →
 dimH1 0 · 3 planes, empty triple overlap → dimH1 1 · 4 planes in an unfilled cycle → dimH1 1 ·
-4 planes with a common witness → dimH1 0. Witnessing an arithmetic it did not originate.<<~/saksi >>
+4 planes with a common witness → dimH1 0. Witnessing an arithmetic it did not originate.<<~/saksi>>
 
 re-entry: the structure-reader recut to skeletal-tier + standoff strata · a cross-plane
 cid-correspondence null · a triple-overlap/nesting drift-detector fixture that ALARMS on
 `form ⊆ structure ⊆ content` (the invariant that pins the gate currently runs silent)
-<<~/hoike >>
+<<~/hoike>>
 ```
 4. **The memory-sensorium driver — RAN (first time).** `memory_sensorium.py` composes the goal sensorium
    over the AI-operator worldlines and sweeps a surface's transcripts onto all three planes. The gap it

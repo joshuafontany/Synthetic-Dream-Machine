@@ -1,21 +1,20 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/cli/bin/lares >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/cli/bin/lares>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/cli/bin/lares.mem"
 l-space   = "lararium"
 mana      = 10
-register  = "Synthesis-Canon"
 retain    = true
 role      = "operator-CLI dispatch entry — every operator-facing ceremony routes through this binary"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/cli/bin/lares"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 The `lares` binary holds the operator's only top-level ceremony surface. It dispatches subcommands registered in a single COMMANDS table (init, status, serve, dev, reset, fresh, build-genesis, test-quine, heleuma, act, help). Each command is a thin async handler:
 * Library commands (init, act) import their logic from `@lararium/node` so the same operations can run inside a TW5 vm via the verb-tiddler protocol.
@@ -26,8 +25,8 @@ The binary holds NO domain logic. Adding a new operator ceremony means: add the 
 
 Architecture invariants this entry preserves: web2 smell test (no HTTP/RPC dispatch — `act` rides verb-tiddlers through the admin doc), TW5 vm primacy (handlers are widget-friendly), and the corpus-vs-engine category boundary (this file lives in an engine package, NOT a corpus one).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;d2XKyRBS5mOMDS0-P05XfU7BEkrFRuxFS8GtvIh5hHo
+<<^ code="&#x0003;">>ni:///sha-256;W7QeNAH-erR37aj6s1s2wzvujlIufFlwJyY8VyPiKls
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

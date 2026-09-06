@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/period-forms >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/period-forms>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/history/period-forms.mem"
@@ -8,7 +8,6 @@ l-space   = "archive"
 mana      = 16
 manao     = 15
 manaoio   = 14
-register  = "Synthesis-Canon"
 retain    = true
 role      = "how to read an early carrier's HUD — which instrument forms carry as testimony and MUST NOT be modernized in place"
 tags      = ["api/pono/meme"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/history/period-forms"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 ! Period Forms — what an early carrier's HUD says, and what it MUST NOT be made to say
 
@@ -29,9 +28,9 @@ leave a record claiming the house always read this way.
 ''A carrier's HUD modernizes when it LIFTS INTO CANON, and not before.'' The Lindwyrm arc lifted and
 carries current forms; the genesis-arc index stands under the same constraint and has not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aligned >>
+<<~ ahu #aligned>>
 
 !! Aligned corpus-wide
 
@@ -40,16 +39,16 @@ One field carries no testimony, because it names a band rather than an instrumen
 * `meta` `register` — CODE to band-word: `CS`/`SC` → Synthesis-Canon · `PS` → Provisional-Synthesis ·
   `S` → Synthesis · `P` → Provisional · `C` → Canon
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #preserved >>
+<<~ ahu #preserved>>
 
 !! Preserved as period-form
 
 These carry the early HUD verbatim. ''Read them, never rewrite them.''
 
 ```text
-~:confidence[CODE],[N]   old inline confidence    → now  <<~ confidence <Register> N/20 >>
+~:confidence[CODE],[N]   old inline confidence    → retired; the word keeps its everyday sense
 ✶ ◎ ◇ ■ ○                old OODA-HA phase glyphs → now  ✶ ⏿ ◇ ▶ ↺
    └ ◎/■/○ also read as STATUS (Orient / active / blocked·future) — not always phase; do NOT blind-swap
 ⤴  Assess / Hoʻoko       retired 6th phase        → now  folded into ↺ Hoʻoko & Aftermath
@@ -62,15 +61,15 @@ table-driven swap from the phase column silently rewrites a blocked item as an a
 Whole-file period-artifacts stand verbatim — definitions and instructions, never narrative: the
 glyph-definition drafts and the `lares-*.instructions` files.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/consume-archive >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/consume-archive>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;aLkaBYZGjSErPKEkoE1lSpc-5VHoymOUM9DVrgEpv2Y
+<<^ code="&#x0003;">>ni:///sha-256;XW9dAcVGFgQ009roSvNxfNLtEImiidO4Qbcz2qop_bA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

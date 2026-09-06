@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pattern-integrities-cultural >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pattern-integrities-cultural>>
 ```toml meta
 cacheable = true
 hydrate   = true
@@ -8,23 +8,22 @@ l-space   = "stable"
 mana      = 14
 manao     = 15
 manaoio   = 14
-register  = "Synthesis-Canon"
 retain    = true
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pattern-integrities-cultural"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! Entry ~ Negentropy Handoff · Sensorium Pattern Integrities
 
 > ''PROMOTED from the research bag.'' Fifteen cultural pattern-integrities, each crucible-constrained against a cargo-cult null — canon that sat in history because it was gathered as research. Several rows answer live questions on the identity plane, and the identity work rediscovered two of them at cost before anyone walked here (`failure-states/not-walking-before-minting`):
-> * ''P7 Ise shikinen sengū'' — //the stored object never reads as the building; it reads as the CAPACITY TO RE-STAND the building, kept alive only by mandated exercise.// That is the capacity/exercise split the gauge needs, with a thirteen-century worked example: mechanism-presence grounds a capacity, and the capacity stays ''parasitic on a history of actual exercise''. <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/the-gauge >>
-> * ''P8 The Icelandic Lawspeaker'' — recitation-or-lapse, the law RECITED rather than owned. The assembly's own officer, and the shape `the-thing-event` reaches for. <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event#/the-word >>
+> * ''P7 Ise shikinen sengū'' — //the stored object never reads as the building; it reads as the CAPACITY TO RE-STAND the building, kept alive only by mandated exercise.// That is the capacity/exercise split the gauge needs, with a thirteen-century worked example: mechanism-presence grounds a capacity, and the capacity stays ''parasitic on a history of actual exercise''. <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/the-gauge>>
+> * ''P8 The Icelandic Lawspeaker'' — recitation-or-lapse, the law RECITED rather than owned. The assembly's own officer, and the shape `the-thing-event` reaches for. <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event#/the-word>>
 > * ''P14 The Camino waymark'' — navigation by held bearing, which is `lar:`'s own law (//it names; it does not fetch//) with pilgrims' feet under it.
 > * ''P3 Roman stipulatio'' — felicity conditions and a nine-century ''softening gradient'', which reads directly on how a rite erodes rather than lapses.
 
@@ -32,9 +31,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/pattern-integrities-cultural"
 
 ''How to read it.'' Three layers: the ''crucible constraints'' (adversarial law — read first, they govern the proof discipline), the ''fifteen integrities'' (the shapes, grouped by the question each dive answered), and the ''organ mappings'' (which code construct each shape seats). The shapes carry the load; the historical detail rides along only where it sharpens an engineering choice.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #crucible-constraints >>
+<<~ ahu #crucible-constraints>>
 
 !! I ~ The Crucible Constraints (adversarial law, govern everything below)
 
@@ -42,31 +41,31 @@ Four referee-grade objections got run against the whole thesis. Each survived on
 
 !!! C1 ~ Drift runs as the default; fixity costs engineering
 
-<<~ confidence 17/20 >> Parry-Lord oral-formulaic scholarship (web-grounded): the natural state of oral transmission reads as ''composition-in-performance'' — no singer tells the same tale twice in the same words; every performance stands a valid multiform; the tradition drifts //by design//. Byte-stable transmission (the Vedic case, below) never comes free — it takes deliberate redundant encoding with cross-comparison.
+Parry-Lord oral-formulaic scholarship (web-grounded): the natural state of oral transmission reads as ''composition-in-performance'' — no singer tells the same tale twice in the same words; every performance stands a valid multiform; the tradition drifts //by design//. Byte-stable transmission (the Vedic case, below) never comes free — it takes deliberate redundant encoding with cross-comparison.
 
 ''The constraint:'' never assume a structure preserves itself. Any invariant the Sensorium relies on MUST have an active mechanism that detects its drift — a checksum, a null, a bench re-run. An invariant with no drift-detector already drifts; you just have not measured it yet.
 
 !!! C2 ~ The cargo-cult null stands as the permanent null hypothesis
 
-<<~ confidence 17/20 >> (web-grounded) The type-case of form-without-mechanism: post-war Melanesian movements replicated the observable //precursors// of cargo arrival — bamboo airstrips, carved headphones, drill formations — while the causal mechanism stayed invisible; Feynman's 1974 address made it the name for enterprises that follow every apparent form while the planes never land. McConnell's cargo-cult software engineering extends it: adopting tools, processes, metrics ritually, without evaluating actual value.
+(web-grounded) The type-case of form-without-mechanism: post-war Melanesian movements replicated the observable //precursors// of cargo arrival — bamboo airstrips, carved headphones, drill formations — while the causal mechanism stayed invisible; Feynman's 1974 address made it the name for enterprises that follow every apparent form while the planes never land. McConnell's cargo-cult software engineering extends it: adopting tools, processes, metrics ritually, without evaluating actual value.
 
 ''The constraint:'' every organ MUST name the specific mechanism by which its symbolic layer couples to outcomes, stated precisely enough that a placebo can fail it. The machina's law — //every trace names the null that destroys its own structure// — enacts exactly this. Guard it during refactors: an organ that loses its null quietly becomes a bamboo tower with green tests. The vacuous-overlap flag belongs to this constraint too: a zero that buys nothing MUST say so on the wire.
 
 !!! C3 ~ Staal's razor: practitioner testimony counts for nothing
 
-<<~ confidence 17/20 >> (web-grounded) Staal's fieldwork on the most form-disciplined ritual tradition on Earth concluded that rituals run as rule-governed activity for its own sake — the rules count, not the result; practitioners answer //why// only with "our tradition." The devastating implication: ''fidelity of performance proves nothing about external function.'' A node testifying that its own discipline bears load stands as Staal's ritualist answering "paramparā."
+(web-grounded) Staal's fieldwork on the most form-disciplined ritual tradition on Earth concluded that rituals run as rule-governed activity for its own sake — the rules count, not the result; practitioners answer //why// only with "our tradition." The devastating implication: ''fidelity of performance proves nothing about external function.'' A node testifying that its own discipline bears load stands as Staal's ritualist answering "paramparā."
 
 ''The constraint:'' certification sits outside the system being certified. Green tests witness the //mechanism//; only independent ground-truth witnesses the //function//. The machina's own confession — 413 green proves the instruments run, not that the structure lives — states this constraint exactly. Keep saying it in every register. The RUN arc's independence blade (curated frozen corpora, multi-translation Kumulipo) exists to satisfy C3; do not let schedule pressure substitute self-report for it.
 
 !!! C4 ~ Effects run real but never portable; re-validate per substrate
 
-<<~ confidence 17/20 >> (web-grounded) The prompt-incantation bench literature: the famous "take a deep breath" gain came from prompts AI-optimized for one model on one benchmark; systematic cross-model testing found no generalizable trend; politeness effects vary by language and model and sometimes reverse. Form measurably moves behavior — the pure-decoration null fails — but ''every specific coupling stays substrate-contingent''.
+(web-grounded) The prompt-incantation bench literature: the famous "take a deep breath" gain came from prompts AI-optimized for one model on one benchmark; systematic cross-model testing found no generalizable trend; politeness effects vary by language and model and sometimes reverse. Form measurably moves behavior — the pure-decoration null fails — but ''every specific coupling stays substrate-contingent''.
 
 ''The constraint:'' constants never travel. Thresholds derive from the one ARL₀ dial; the bifurcation bench re-runs whole after structural moves (the organ-to-mesh-floor lift already honored this); any number carried across a substrate boundary without re-derivation reads as superstition wearing a config file.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dive-one >>
+<<~ ahu #dive-one>>
 
 !! II ~ Dive One · one integrity, five beds
 
@@ -74,37 +73,37 @@ Four referee-grade objections got run against the whole thesis. Each survived on
 
 !!! P1 ~ Vedic pāṭha engineering · redundant interleaved encodings as checksum
 
-<<~ confidence 18/20 >> The Ṛgveda crossed roughly three millennia orally, preserved as a single text without variant readings — against the Parry-Lord default (C1). Mechanism: the same text held in multiple ''interleaved encodings'' — samhitā (continuous), pada (word-by-word, sandhi dissolved), krama (overlapping pairs: ab, bc, cd), up through ghana (dense bell-pattern: w1w2·w2w1·w1w2w3·w3w2w1·w1w2w3…). Drift in one encoding collides audibly with the others; the traditions proof-read by comparing recited versions across schools. Plain memorization alone let deviations surface only when groups met, with no resolution path — which drove the engineered styles.
+The Ṛgveda crossed roughly three millennia orally, preserved as a single text without variant readings — against the Parry-Lord default (C1). Mechanism: the same text held in multiple ''interleaved encodings'' — samhitā (continuous), pada (word-by-word, sandhi dissolved), krama (overlapping pairs: ab, bc, cd), up through ghana (dense bell-pattern: w1w2·w2w1·w1w2w3·w3w2w1·w1w2w3…). Drift in one encoding collides audibly with the others; the traditions proof-read by comparing recited versions across schools. Plain memorization alone let deviations surface only when groups met, with no resolution path — which drove the engineered styles.
 
 ''Shape:'' N independent encodings of one content + a cross-comparison operator = error detection with localization. The independence of the encodings does all the work.
 
 !!! P2 ~ Khipu + khipukamayuq · the record lives in the coupling
 
-<<~ confidence 17/20 >> Inca knotted-cord records reached full readability only ''through the keeper'': the khipukamayuq memorized the oral account that completed a given khipu, the office hereditary, the oral half passed between generations. Forced decoupling ran both directions historically: Spanish administrators compelled cord-by-cord narration into scribal records (extraction of the coupled half into a rival medium), then burned khipus in the 1583 extirpation campaigns. Four centuries after the keepers fell silent, a thousand-plus khipus survive and the code stays uncracked — ''structure without the relation reads as structure without sense.'' A live scholarly seam (how much lived in cords vs. keeper) persists, and the seam itself demonstrates the integrity.
+Inca knotted-cord records reached full readability only ''through the keeper'': the khipukamayuq memorized the oral account that completed a given khipu, the office hereditary, the oral half passed between generations. Forced decoupling ran both directions historically: Spanish administrators compelled cord-by-cord narration into scribal records (extraction of the coupled half into a rival medium), then burned khipus in the 1583 extirpation campaigns. Four centuries after the keepers fell silent, a thousand-plus khipus survive and the code stays uncracked — ''structure without the relation reads as structure without sense.'' A live scholarly seam (how much lived in cords vs. keeper) persists, and the seam itself demonstrates the integrity.
 
 ''Shape:'' storage distributed across artifact × operator, neither sufficient alone; sever the coupling and the data was never the thing.
 
 !!! P3 ~ Roman stipulatio · felicity conditions, and the nine-century softening gradient
 
-<<~ confidence 17/20 >> The stipulatio executed as oral question-answer (Spondes? Spondeo), both parties present, one continuous act, exact congruence required — the answer had to echo the question's verb and match its content; a mismatch or a substantial pause voided the act. The utterance ran ''constitutive, not evidentiary'': mute and deaf persons could not enter one at all, because speech carried the mechanism. Then the drift-history: classical relaxation (any language, provided congruence), written cautio becoming customary evidence, and by 472 AD Leo's constitution — any expression of intent suffices. Nine centuries, form-executes → intent-suffices, with the written record of the act eventually ''taking the place of'' the act (the same drift documented for mancipatio).
+The stipulatio executed as oral question-answer (Spondes? Spondeo), both parties present, one continuous act, exact congruence required — the answer had to echo the question's verb and match its content; a mismatch or a substantial pause voided the act. The utterance ran ''constitutive, not evidentiary'': mute and deaf persons could not enter one at all, because speech carried the mechanism. Then the drift-history: classical relaxation (any language, provided congruence), written cautio becoming customary evidence, and by 472 AD Leo's constitution — any expression of intent suffices. Nine centuries, form-executes → intent-suffices, with the written record of the act eventually ''taking the place of'' the act (the same drift documented for mancipatio).
 
 ''Shape:'' felicity-gated execution works — and erodes on a known gradient: convenience licenses evidence to replace performance, then evidence becomes the performance. Watch for the Leo-472 moment in any protocol you maintain.
 
 !!! P4 ~ Zhengming · name-hygiene as coordination infrastructure
 
-<<~ confidence 17/20 >> Analects 13.3: rectify names first, because otherwise speech stops tracking affairs, affairs fail, rites and punishments misfire — a stated failure-cascade from address-drift to coordination collapse, grounded in a concrete succession crisis. Honest seam: 13.3 possibly a later interpolation, the phrase unique in the Analects — the name-discipline meme proved load-bearing enough that the tradition retro-fitted it into its own canon (transmission law enacting itself on its carrier).
+Analects 13.3: rectify names first, because otherwise speech stops tracking affairs, affairs fail, rites and punishments misfire — a stated failure-cascade from address-drift to coordination collapse, grounded in a concrete succession crisis. Honest seam: 13.3 possibly a later interpolation, the phrase unique in the Analects — the name-discipline meme proved load-bearing enough that the tradition retro-fitted it into its own canon (transmission law enacting itself on its carrier).
 
 ''Shape:'' the name-table sits upstream of every coordination mechanism; drift there cascades. Applies to: `lar:` roots, `signalKind` on the wire, the veiled worldline naming, every place a name promises a semantic.
 
 !!! P5 ~ The Rule of Benedict · scheduled re-hydration + severity-routed confession
 
-<<~ confidence 17/20 >> A compact boot text (c. 530) that has re-stood the same institutional architecture for ~15 centuries, in any house that adopts it. Verified mechanisms: reading aloud as a standing office, the daily-reading cycle covering the Rule ''three times a year'' on a fixed calendar (the editions print the schedule in their margins — the boot document reads itself through its community on a clock); RB 46's ''dual confession channels routed by severity'' — faults at work go voluntarily before abbot //and// community, while hidden inward matters go privately to the abbot or spiritual father only, who cures wounds without exposing them; and the halt-seat: the whole community gets called to counsel (the Lord often reveals what is best to the younger), yet the decision depends on the abbot's judgment alone.
+A compact boot text (c. 530) that has re-stood the same institutional architecture for ~15 centuries, in any house that adopts it. Verified mechanisms: reading aloud as a standing office, the daily-reading cycle covering the Rule ''three times a year'' on a fixed calendar (the editions print the schedule in their margins — the boot document reads itself through its community on a clock); RB 46's ''dual confession channels routed by severity'' — faults at work go voluntarily before abbot //and// community, while hidden inward matters go privately to the abbot or spiritual father only, who cures wounds without exposing them; and the halt-seat: the whole community gets called to counsel (the Lord often reveals what is best to the younger), yet the decision depends on the abbot's judgment alone.
 
 ''Shape:'' persistence = re-hydration on a mandated clock; diagnostics = confession-grade, severity-routed to different channels; judgment = single external seat. Three Sensorium laws in one sixth-century document.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dive-two >>
+<<~ ahu #dive-two>>
 
 !! III ~ Dive Two · where does the record live?
 
@@ -112,37 +111,37 @@ Four referee-grade objections got run against the whole thesis. Each survived on
 
 !!! P6 ~ Talking drums · never send the bare word
 
-<<~ confidence 13/20 >> West/Central African drum surrogate speech transmits through a channel that keeps only tone and rhythm — thousands of words collapse onto a few tonal skeletons. The engineering answer: wrap every short word in a ''long stereotyped formula'' that pads the ambiguous skeleton until one reading survives the noise. Shannon redundancy, enacted on membrane and air, with a live feedback loop: ambiguity punishes drift instantly, so the formulas hold byte-stable exactly where epic singers (C1) drift.
+West/Central African drum surrogate speech transmits through a channel that keeps only tone and rhythm — thousands of words collapse onto a few tonal skeletons. The engineering answer: wrap every short word in a ''long stereotyped formula'' that pads the ambiguous skeleton until one reading survives the noise. Shannon redundancy, enacted on membrane and air, with a live feedback loop: ambiguity punishes drift instantly, so the formulas hold byte-stable exactly where epic singers (C1) drift.
 
 ''Shape:'' on a lossy channel, redundancy budget goes into fixed contextual padding around a compressed core; error-correction emerges from the padding, and the padding stays stable //because// the channel punishes its absence.
 
 !!! P7 ~ Ise shikinen sengū · persistence by scheduled rebuild
 
-<<~ confidence 14/20 >> The Grand Shrine at Ise gets demolished and rebuilt on the adjacent plot every twenty years, running since the 7th century. The buildings never age past twenty; the shrine runs thirteen centuries old. The persistence lives in the ''craft transmission'': the 20-year clock sized so an apprentice at one rebuild leads the next. The stored object never reads as the building — it reads as the ''capacity to re-stand the building'', kept alive only by mandated exercise.
+The Grand Shrine at Ise gets demolished and rebuilt on the adjacent plot every twenty years, running since the 7th century. The buildings never age past twenty; the shrine runs thirteen centuries old. The persistence lives in the ''craft transmission'': the 20-year clock sized so an apprentice at one rebuild leads the next. The stored object never reads as the building — it reads as the ''capacity to re-stand the building'', kept alive only by mandated exercise.
 
 ''Shape:'' pattern integrity in its purest form — wave, not water. A capability that never re-executes decays silently; schedule the rebuild, and size the interval to the transmission-generation.
 
 !!! P8 ~ The Icelandic Lawspeaker · recitation-or-lapse
 
-<<~ confidence 13/20 >> Pre-literate Iceland vested the legal corpus in one elected seat, reciting one-third of the law aloud each summer, full cycle per three-year term — and tradition holds that a provision omitted from recitation, unobjected, ''lapsed from law''. Cache-eviction run on a legal system: canon meant what the community heard re-stood, recently. The seat carried no executive power — pure diagnostic channel, judgment elsewhere. When the laws went to vellum (1117–18), the office thinned to ceremony: ''the written substrate ate the recitation loop.''
+Pre-literate Iceland vested the legal corpus in one elected seat, reciting one-third of the law aloud each summer, full cycle per three-year term — and tradition holds that a provision omitted from recitation, unobjected, ''lapsed from law''. Cache-eviction run on a legal system: canon meant what the community heard re-stood, recently. The seat carried no executive power — pure diagnostic channel, judgment elsewhere. When the laws went to vellum (1117–18), the office thinned to ceremony: ''the written substrate ate the recitation loop.''
 
 ''Shape:'' an expiry law on unperformed canon keeps the live set honest — and a durable archive, once trusted, quietly replaces the performance that kept the content alive. The WAL preserves; only the bench //performs//. Never let the first substitute for the second.
 
 !!! P9 ~ Guqin jiǎnzìpǔ · notation that writes the verb
 
-<<~ confidence 13/20 >> The guqin transmits through reduced-character tablature: compound glyphs assembling which-finger, which-string, which-position, which-stroke — recording the ''gesture, never the pitch''. Sound emerges from performing the written action; rhythm stays largely unwritten, reconstructed through the dǎpǔ practice. The notation structurally //cannot// assert what the music ''is''; it can only say what the hand ''does''. And the axis it opens against P1: the pāṭhas froze the //sound// and let meaning fall away; jiǎnzìpǔ froze the //action// and let timing breathe — two opposite deliberate choices of invariant layer, both alive after centuries.
+The guqin transmits through reduced-character tablature: compound glyphs assembling which-finger, which-string, which-position, which-stroke — recording the ''gesture, never the pitch''. Sound emerges from performing the written action; rhythm stays largely unwritten, reconstructed through the dǎpǔ practice. The notation structurally //cannot// assert what the music ''is''; it can only say what the hand ''does''. And the axis it opens against P1: the pāṭhas froze the //sound// and let meaning fall away; jiǎnzìpǔ froze the //action// and let timing breathe — two opposite deliberate choices of invariant layer, both alive after centuries.
 
 ''Shape:'' a ritual grammar chooses ''which layer it freezes'', and that choice defines what survives. API surfaces that record verbs (recall · couple · cohere) rather than essences make the same choice the tablature made.
 
 !!! P10 ~ Songlines · the witnessed, federated, place-bound record
 
-<<~ confidence 13/20 >> Held at pattern level, with the respect owed a living sacred tradition whose access-grading belongs to its custodians. Australian songline systems bind law, navigation, ecology, genealogy into song cycles ''bound to country'' — custodianship distributes by track segment, no single group holding a whole Dreaming track. Two structural features: mandated ''dual ceremonial roles'' (in Warlpiri systems, owners and managers/witnesses drawn from complementary descent lines — owners cannot validly perform without the witnesses confirming correctness: certification structurally non-reflexive, seated in a party who cannot hold the owned thing), and ''graded knowledge release'' (open and restricted versions — access control inside the tradition itself).
+Held at pattern level, with the respect owed a living sacred tradition whose access-grading belongs to its custodians. Australian songline systems bind law, navigation, ecology, genealogy into song cycles ''bound to country'' — custodianship distributes by track segment, no single group holding a whole Dreaming track. Two structural features: mandated ''dual ceremonial roles'' (in Warlpiri systems, owners and managers/witnesses drawn from complementary descent lines — owners cannot validly perform without the witnesses confirming correctness: certification structurally non-reflexive, seated in a party who cannot hold the owned thing), and ''graded knowledge release'' (open and restricted versions — access control inside the tradition itself).
 
 ''Shape:'' place-bound record + federated custody with no global copy + constitutionally external witness. Roughly half the Lares architecture, running for millennia, never written down — by design.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dive-three >>
+<<~ ahu #dive-three>>
 
 !! IV ~ Dive Three · distributed correctness with no center
 
@@ -150,41 +149,41 @@ Four referee-grade objections got run against the whole thesis. Each survived on
 
 !!! P11 ~ Prayer beads · the position register offloaded from the content register
 
-<<~ confidence 13/20 >> Rosary, misbaha, mala: one shared engineering problem — hold place in a long fixed sequence while the mind runs the content, no written index. The bead offloads the ''counter'' to the fingers; the stream carries only the utterance. The loop closes on a physical detent (the guru bead: do-not-cross, turn back) — a hard boundary against runaway iteration. And the reciter runs local-first: no bead anywhere holds the global total; the hand knows only //as of this bead//.
+Rosary, misbaha, mala: one shared engineering problem — hold place in a long fixed sequence while the mind runs the content, no written index. The bead offloads the ''counter'' to the fingers; the stream carries only the utterance. The loop closes on a physical detent (the guru bead: do-not-cross, turn back) — a hard boundary against runaway iteration. And the reciter runs local-first: no bead anywhere holds the global total; the hand knows only //as of this bead//.
 
 ''Shape:'' separate the position register from the content register; seat the loop-halt in a detent outside the stream; accept that no participant holds the global count. Maps directly onto clock/state separation and dead-zone reset design.
 
 !!! P12 ~ Change-ringing · local swap-rules, guaranteed global coverage
 
-<<~ confidence 14/20 >> English change-ringing sounds a bell-set through permutations under local law: no bell moves more than one position between rows, no row repeats, a full extent rings all n! permutations exactly once. ''No ringer holds the global structure'' — each knows only their own bell's path — and global correctness //emerges// from every ringer executing a bounded swap-rule against immediate neighbors. The conductor calls only small deviations (bobs, singles); the ordinary progression runs itself. Group theory, sounded from towers, centuries before the algebra existed.
+English change-ringing sounds a bell-set through permutations under local law: no bell moves more than one position between rows, no row repeats, a full extent rings all n! permutations exactly once. ''No ringer holds the global structure'' — each knows only their own bell's path — and global correctness //emerges// from every ringer executing a bounded swap-rule against immediate neighbors. The conductor calls only small deviations (bobs, singles); the ordinary progression runs itself. Group theory, sounded from towers, centuries before the algebra existed.
 
 ''Shape:'' a distributed protocol with provable no-collision and full-coverage properties, built from purely local rules plus a sparse external call channel. The platform-blind mesh floor aspires to exactly this: one local rule-set, node and Chromium alike, global behavior emergent and witnessed in both places.
 
 !!! P13 ~ The Jacquard chain · score fused to executable
 
-<<~ confidence 13/20 >> The Jacquard loom drove figured weaves from a chain of punched cards — each card a row of the design, each punch gating one warp thread. The card never //represents// the pattern; the card ''is'' the executable that produces it — form and function fused, zero interpretive gap, portable and re-runnable on any loom of matching hook-count. The lineage runs directly into Hollerith and Babbage: the literal fork where ritual score became program.
+The Jacquard loom drove figured weaves from a chain of punched cards — each card a row of the design, each punch gating one warp thread. The card never //represents// the pattern; the card ''is'' the executable that produces it — form and function fused, zero interpretive gap, portable and re-runnable on any loom of matching hook-count. The lineage runs directly into Hollerith and Babbage: the literal fork where ritual score became program.
 
 ''Shape:'' the self-describing artifact that enacts what it describes. The boot seed, the memetic-wikitext template, the sigil that performs its own procedure — same trick, older thread. Corollary: portability rides on the ''hook-count match'' — an executable score assumes its substrate interface (C4 again).
 
 !!! P14 ~ The Camino waymark · navigation by held bearing
 
-<<~ confidence 13/20 >> A continent-scale route running on local marks: no pilgrim holds the whole route; each navigates by the //next// yellow arrow plus the held destination-bearing. The marks live in place, tended by countless local hands, no central cartographer; a neglected stretch fades as its marks go untended. And the arrival ran ''witnessed'': the medieval compostela certificate required testimony of the journey.
+A continent-scale route running on local marks: no pilgrim holds the whole route; each navigates by the //next// yellow arrow plus the held destination-bearing. The marks live in place, tended by countless local hands, no central cartographer; a neglected stretch fades as its marks go untended. And the arrival ran ''witnessed'': the medieval compostela certificate required testimony of the journey.
 
 ''Shape:'' bearing-navigation (the `lar:` signal law walked): the mark names a bearing, carries nothing mutable; the walker syncs only //as of this arrow//; the record lives in tended marks plus witnessed arrival, never in any single traveler's head.
 
 !!! P15 ~ The isnād · the hand-off chain made auditable
 
-<<~ confidence 14/20 >> Hadith science welded every transmitted report to its ''chain of named transmitters'' — A heard from B heard from C — and built an entire discipline (ʿilm al-rijāl, the science of men) maintaining biographical reliability databases on every transmitter, testing whether each hand-off could physically and credibly have occurred. One broken or discredited link downgrades the whole report. Grading ran formal — sahih / hasan / da'if — ''vowed on the chain's integrity, never the claim's fluency''. The whole science exists to defeat the confident forger: no link certifies itself, and the critics refused to take any reciter's word for the reciter's reliability.
+Hadith science welded every transmitted report to its ''chain of named transmitters'' — A heard from B heard from C — and built an entire discipline (ʿilm al-rijāl, the science of men) maintaining biographical reliability databases on every transmitter, testing whether each hand-off could physically and credibly have occurred. One broken or discredited link downgrades the whole report. Grading ran formal — sahih / hasan / da'if — ''vowed on the chain's integrity, never the claim's fluency''. The whole science exists to defeat the confident forger: no link certifies itself, and the critics refused to take any reciter's word for the reciter's reliability.
 
 ''Shape:'' provenance = the verified sequence of hand-offs, each transmitter a causal island attesting only //as of what I received from my one upstream source//; confidence attaches to the chain, not the eloquence. This stands as the worked, millennium-tested answer to C3 — external non-reflexive chain-verification, institutionalized.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #organ-mappings >>
+<<~ ahu #organ-mappings>>
 
 !! V ~ Organ Mappings (the shapes, seated in the code)
 
-All mappings ride <<~ confidence Synthesis 9–12/20 >> — this document's own analogical work, offered as bearings, never as law. Each row names the integrity, the organ it seats, and the maintenance rule it implies.
+All mappings ride — this document's own analogical work, offered as bearings, never as law. Each row names the integrity, the organ it seats, and the maintenance rule it implies.
 
 ''P1 pāṭhas → plane independence + the maxT joint test.'' The cross-encoding checksum works only because the encodings run independent. The exact failure C-mode warned of upthread — planes surrogated from shared embeddings — reads as krama derived from samhitā by rule: collisions prove nothing, apophenia wears mathematics. Rule: the RUN-arc independence blade (multi-translation corpora, genuinely disjoint plane sources) satisfies P1's precondition before any co-jump earns meaning. The li/ki posture split honors the same law at the gluing layer: separate encodings, separate comparison operators, loud throw at the wrong gate.
 
@@ -216,19 +215,19 @@ All mappings ride <<~ confidence Synthesis 9–12/20 >> — this document's own 
 
 ''P15 isnād → provenance grading, chain-vowed.'' Sighting-register wall-time (unreliable-witness testimony, never a path fallback), append-before-accept, the veiled root, per-link attestations — the Sensorium already writes isnāds. The missing half the shape offers: ''grade on the chain''. Rule: a datum's confidence derives from its weakest verified hand-off, never from how clean it renders; and build the rijāl-database habit — per-source reliability records, maintained, consulted at grading time — so the confident forger (a fluent but unprovenanced datum) always grades da'if.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #steering-note >>
+<<~ ahu #steering-note>>
 
 !! VI ~ One finding from the news stratum that survives the crossing
 
-<<~ confidence 17/20 >> (web-grounded, ICML 2026 workshops) An Oxford Internet Institute study instructed LLMs from different providers to "improve" human-written posts on contested topics: the rewrites systematically shifted stance, ''in similar directions across different providers' models'', and network simulations showed the small per-post shifts accumulating into population-level opinion drift. Correlated drift, invisible from any seat inside the flow, arrestable only from a vantage outside every hull.
+(web-grounded, ICML 2026 workshops) An Oxford Internet Institute study instructed LLMs from different providers to "improve" human-written posts on contested topics: the rewrites systematically shifted stance, ''in similar directions across different providers' models'', and network simulations showed the small per-post shifts accumulating into population-level opinion drift. Correlated drift, invisible from any seat inside the flow, arrestable only from a vantage outside every hull.
 
-<<~ confidence 11/20 >> Why it rides in this file: it names, at civilizational scale, the exact structural problem the consistency organ exists to solve locally — coherence without a shore to check against. H⁰ and H¹ stand on the cliff with the century-glass. When motivation thins during instrument work, this stands as the reason the instruments matter: ''no ferryman can arrest what all ferrymen do; the cliff must exist, and it must run independent of every boat.'' The co-failure lesson folds in (C1 + P1): correlated planes cannot serve as each other's cliff.
+Why it rides in this file: it names, at civilizational scale, the exact structural problem the consistency organ exists to solve locally — coherence without a shore to check against. H⁰ and H¹ stand on the cliff with the century-glass. When motivation thins during instrument work, this stands as the reason the instruments matter: ''no ferryman can arrest what all ferrymen do; the cliff must exist, and it must run independent of every boat.'' The co-failure lesson folds in (C1 + P1): correlated planes cannot serve as each other's cliff.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #close >>
+<<~ ahu #close>>
 
 !! VII ~ The braid, whole
 
@@ -240,8 +239,8 @@ Feed the node. Run the bench whole. Grade on the chain. Keep the cliff independe
 
 -><-
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NuDWM2Qo0pa7OK8nME3BwoCA3K9ux1PGx5kxxDChcqk
+<<^ code="&#x0003;">>ni:///sha-256;JneoDk5NJYiamIo0sEk7GQFs-BG8ysYcVrrGsrSQkNI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

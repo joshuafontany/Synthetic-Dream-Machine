@@ -13,9 +13,9 @@ type: text/vnd.tiddlywiki
      aka carries the projection/frozen posture via its own AkaTemplate cascade.
 
      Dispatch shapes:
-       <<~ kahea lar:///uri >>      → ~kahea(p1=uri)       — URI leaf
-       <<~ kahea ahu #slot >>       → ~kahea~ahu(p1="#slot") — child-slot summons
-       <<~ aka ahu #slot >>         → ~aka~ahu               — projection child-slot -->
+       <<~ kahea lar:///uri>>      → ~kahea(p1=uri)       — URI leaf
+       <<~ kahea ahu #slot>>       → ~kahea~ahu(p1="#slot") — child-slot summons
+       <<~ aka ahu #slot>>         → ~aka~ahu               — projection child-slot -->
 
 \widget ~kahea(p1:"" p2:"")
 <$set name="_k-uri" filter="[<p1>regexp[^#]]" value={{{ [<p1>addprefix<currentTiddler>] }}} emptyValue=<<p1>>>

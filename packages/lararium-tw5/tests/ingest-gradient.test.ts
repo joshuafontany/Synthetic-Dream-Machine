@@ -45,12 +45,12 @@ describe("the ingest gate carries the gradient", () => {
 
   test("a recovery never refuses the carrier, since the bytes survive it", () => {
     // An unclosed sigil the driver recovers: the text stands, the grade falls.
-    const decision = gate(source + "\n<<~ ahu #dangling >>\n");
+    const decision = gate(source + "\n<<~ ahu #dangling>>\n");
     expect(decision.kind).not.toBe("refuse");
   });
 
   test("each diagnostic lands inside the source and on the closed severity ladder", () => {
-    const decision = gate(source + "\n<<~ ahu #dangling >>\n");
+    const decision = gate(source + "\n<<~ ahu #dangling>>\n");
     const diagnostics = decision.kind === "noop" ? [] : decision.diagnostics;
     for (const diagnostic of diagnostics) {
       expect(diagnostic.from).toBeGreaterThanOrEqual(0);

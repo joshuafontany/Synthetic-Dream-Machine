@@ -393,7 +393,7 @@ export function intersectTiers(strat: Stratification): TierIntersection {
 
 /**
  * OCP NORMALIZATION (the Obligatory Contour Principle) — two ADJACENT IDENTICAL red autosegments on the
- * strata tier collapse to one (e.g. two identical `<<~ confidence Synthesis 12/20 >>` in a row). Adjacent =
+ * strata tier collapse to one (e.g. two identical `<<~ confidence Synthesis 12/20>>` in a row). Adjacent =
  * consecutive strata with NO prose anchor between them (whitespace only); identical = same channel, same
  * Mu operator, same normalized sigil text. Frames never collapse (they bound, not steer). The merged
  * stratum spans both, its band re-derives from the merged length, and associations re-point (deduped) —

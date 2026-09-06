@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-aka >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-aka>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/sigil-aka.mem"
 mana      = 16
 manao     = 16
 manaoio   = 15
-register  = "Synthesis"
 retain    = true
 role      = "design record: ~aka sigil — shadow transclusion, template mechanism, preview image plan"
 tags      = ["node/disk-projector"]
@@ -15,21 +14,21 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-aka"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! ~aka Sigil Design
 
-`<<~ aka lar:///target >>` — shadow transclusion.
+`<<~ aka lar:///target>>` — shadow transclusion.
 
 The `aka` sigil renders a ''projection'' of a canonical URI into the current meme.
 The target remains canonical at its source.
 This meme records design decisions and deferred work.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #semantics >>
+<<~ ahu #semantics>>
 
 !! Semantics
 
@@ -44,11 +43,11 @@ The summary header always shows the target URI as a link, so the projection alwa
 
 Cascade tag: `lar:///ha.ka.ba/tags/aka-template` — operator can override the render template per scope.
 
-Call-site template override: `<<~ aka lar:///target lar:///my-template >>` (p2 bypasses cascade).
+Call-site template override: `<<~ aka lar:///target lar:///my-template>>` (p2 bypasses cascade).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mechanism >>
+<<~ ahu #mechanism>>
 
 !! Render Mechanism
 
@@ -66,9 +65,9 @@ depends on where the sigil appears, not what the target is.
 
 Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #preview-image >>
+<<~ ahu #preview-image>>
 
 !! Preview Image — Tier 1 (live) / Tier 2 (deferred)
 
@@ -96,7 +95,7 @@ When the Lararium node resolves an external `aka` URI (HTTP/HTTPS), it should:
 Implementation home: `disk-projector.ts` or a dedicated `og-metadata-fetcher.ts` in `lararium-node`.
 The template renders whatever fields are present — no template changes needed for Tier 2 rollout.
 
-<<~/pranala >>
+<<~/pranala>>
 
 !!! Off-wiki `lar:///` URIs
 
@@ -104,20 +103,20 @@ The template renders whatever fields are present — no template changes needed 
 Preview for peer-node URIs must come from the peer itself (a future peer-announce protocol
 could include thumbnail + og-title in the handshake). Hold open.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-shelf >>
+<<~ ahu #source-shelf>>
 
 !! Source Shelf
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module >>
-<<~/pranala >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module>>
+<<~/pranala>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/meme-ast >>
-<<~/pranala >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/meme-ast>>
+<<~/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Q3yLix4nX_YwME7tA_1NNHO9C7_jM7eVdJMyjV-spE4
+<<^ code="&#x0003;">>ni:///sha-256;Vy2p8XwU4nqZdLpI30spbANmSjfswBhPfVgkypGbqrA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

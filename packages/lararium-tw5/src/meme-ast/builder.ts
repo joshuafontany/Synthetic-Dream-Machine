@@ -88,7 +88,7 @@ function attrsFromGroups(
 }
 
 // ---------------------------------------------------------------------------
-// kaheaInvokeNode — dispatch <<~ kahea <type> <args> >> to correct AST node
+// kaheaInvokeNode — dispatch <<~ kahea <type> <args>>> to correct AST node
 // ---------------------------------------------------------------------------
 
 /**
@@ -171,11 +171,11 @@ function makeLeaf(
 
     case "aka": {
       // Two surface forms (per memetic-wikitext spec):
-      //   child-slot: `<<~ aka ahu #slot >>`  → scanner regex with two
+      //   child-slot: `<<~ aka ahu #slot>>`  → scanner regex with two
       //                                          groups: g(1)=sigil keyword,
       //                                          g(2)=`#slot` → AhuNode
       //                                          (projection).
-      //   URI form:   `<<~ aka lar:///foo >>` → scanner regex with one
+      //   URI form:   `<<~ aka lar:///foo>>` → scanner regex with one
       //                                          group: g(1)=URI, g(2)=""
       //                                          → PranalaSugar (observe).
       // Discriminator: g(2) starting with `#` selects child-slot. Otherwise
@@ -322,7 +322,7 @@ export function buildMemeAst(
     // leaf or pragma
     const leaf = makeLeaf(sigilName, eventType, pos, raw, groups, memeUri, ahuStack, grammar);
     // RECOVER (missing): the generic catch-all recognized an unmatched sharktooth — a known sigil in a
-    // novel param shape (`<<~ aperture(0->20) >>`) or an unknown word. Grade it the PARTIAL rung
+    // novel param shape (`<<~ aperture(0->20)>>`) or an unknown word. Grade it the PARTIAL rung
     // (recognized sigil, params best-effort) instead of dropping to water.
     if (evt.generic) markRecovered(leaf, "missing", 13, "partial-form:" + sigilName, sigilName);
     top().push(leaf);

@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/lar-hud >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/lar-hud>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/lar-hud.mem"
 mana      = 18
 manao     = 18
 manaoio   = 18
-register  = "Synthesis-Canon"
 retain    = true
 role      = "LarHUD doctrine — VSCode-style right-docked TW5 wiki panel; flex-sibling push model; 3-state machine"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lararium/tw5/ui"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/lar-hud"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! LarHUD — Dockable TW5 Wiki Frame
 
@@ -117,15 +116,15 @@ as a flex sibling unaffected by tldraw's internal layout changes.
 * ''Resize handle'': drag the left edge of sidebar to adjust width between MIN_W and MAX_W
 * ''Per-tiddler navigation'': HUD tab bar gains a breadcrumb trail for open tiddlers
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/canvas >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/canvas>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ioqySwOYp1kXe67M6jtPG5nyXpJ614cSmUZYqH3GtnU
+<<^ code="&#x0003;">>ni:///sha-256;R_rGdF4FrBAmv1pl6lMCGKTQrhJuh9Z4PQ1fgcjUQrY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

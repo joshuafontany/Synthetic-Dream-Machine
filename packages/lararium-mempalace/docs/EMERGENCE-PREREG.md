@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
 # The Emergence Pre-Registration — vows before the re-run
 
@@ -97,12 +97,12 @@ C5. **The anti-apophenia re-grounding** (library bed).
 - Kumulipo-extracted: the wā-grain re-emerges unaided (it did at q 0.58 vs
   0.21 pre-founding; the re-run must not lose it) and real-vs-placebo
   separation survives the new gate (the frozen-rhythm lock held 0.49 vs 0.31).
-  Vowed at Synthesis 11/20 — the instruments beneath it changed.
+ Vowed at — the instruments beneath it changed.
 - Library bed: C1 savings scale with bed size; no hollow-triangle admissions.
-  Vowed at Synthesis 12/20.
+ Vowed at.
 - Bags bed: C2 agreement above null once the two-channel reader stands;
   BEFORE that reader, the structure plane's numbers stay quarantined under
-  the parser ceiling. Vowed at Provisional 6/20 — the reader does not exist yet.
+ the parser ceiling. Vowed at — the reader does not exist yet.
 
 ## Reading discipline
 
@@ -204,14 +204,14 @@ at matched size in the harness's history).
 
 - C1 vs the matched twin: the real canon strictly out-saves its twin, and
   because the twin matches size and vocabulary exactly, the margin now
-  reads as arrangement alone. Vowed at Synthesis 12/20.
+ reads as arrangement alone. Vowed at.
 - Template character: the kept templates skew LITURGICAL — sigil anatomy
   (sharktooth open/close, ahu pairing, iam fence scaffolds, ranks/loulou
   rows) and TW5 heading/list forms; vow: at least half the kept templates
-  carry sigil tokens. Vowed at Provisional-Synthesis 8/20.
+ carry sigil tokens. Vowed at.
 - Injectivity: the shape plane stays near-injective at 525 records
   (collision rate ≈ 0; tiny api stubs MAY collide — reported either way).
-  Vowed at Synthesis 10/20.
+ Vowed at.
 - Chain: holds non-vacuously; H(structure) ≈ H(content) per the injectivity
   finding; the real coarsening rides shape ↠ idiom.
 - Register stake: this bed stands as the FORMAL-register baseline for the
@@ -228,7 +228,7 @@ bed pours only after both resolve.
 
 - Template character: pidgin templates skew OPERATIONAL — tool-call JSON
   scaffolds, HUD frame anatomy, role-turn boilerplate — visibly unlike the
-  liturgical bed's sigil anatomy. Vowed at Provisional 4/20.
+ liturgical bed's sigil anatomy. Vowed at.
 - Register overlap: fewer than half the pidgin bed's kept templates appear
   in the liturgical bed's kept set at matched size. Vowed at Provisional
   4/20 — the register hypothesis's first half.
@@ -244,12 +244,12 @@ manifest HELD at the operator.
 
 - tw5-docs: kept templates skew TW5-wikitext forms (heading runs, list
   nesting, transclusion braces, macro calls) — the native grammar the
-  carrier's growth arc wants. Vowed at Provisional-Synthesis 6/20.
+ carrier's growth arc wants. Vowed at.
 - tw5-full: the corpus-scale collision re-measure finally gains a
   population where short templated files (module stubs, plugin infos)
   GENUINELY collide — vow: collision rate > 0 at scale, the shape reading
   recovering a real coarsening role exactly where dedup matters. Vowed at
-  Provisional-Synthesis 7/20.
+.
 
 ## The register-separation trial (designed; runs when both register beds stand)
 
@@ -264,7 +264,7 @@ size, induce constructicons separately, then:
   record's register above a shuffled-label null (nearest-centroid floor,
   no tuned classifier — the templates either carry register or they don't).
 
-Vowed at Provisional-Synthesis 6/20: both legs pass, and the
+Vowed at: both legs pass, and the
 living-grammar-palace's register axis (defined · formal · casual) earns its
 first measurement. A failed leg files as fast as a passed one.
 
@@ -293,11 +293,11 @@ Records = one per wā/section; worldline = in-file (the wā sequence) REAL.
 
 - Wā-grain re-emergence: the coarsening stop (C4) lands at a content-bearing
   wā level, not the degenerate top — the wā boundaries the meme carries re-read
-  from the text unaided. Vowed at Synthesis 11/20 (it read q 0.58 vs 0.21
+ from the text unaided. Vowed at (it read q 0.58 vs 0.21
   pre-founding; the re-run must not lose it, but the instruments beneath it
   changed).
 - Meaning carries the grammar (C1): real ≫ seeded shuffled twin — the savings
-  come from the wā content, not the alphabet. Vowed at Synthesis 10/20.
+ come from the wā content, not the alphabet. Vowed at.
 
 <a id="bed-kumulipo-wrapped"></a>
 **bed-kumulipo-wrapped** — the ABLATION CONTROL: it tests the instruments, never
@@ -305,14 +305,14 @@ the corpus (wrapping replaces structure and manufactures form — the dual-run
 finding). Read only ALONGSIDE extracted, never as a corpus claim.
 
 - Manufactured form: the wrapped bed's C1 savings lean on the sigil-envelope
-  ALPHABET (the repeated `<<~ … >>` anatomy), so its real-vs-shuffled
+  ALPHABET (the repeated `<<~ …>>` anatomy), so its real-vs-shuffled
   separation SHRINKS toward the twin relative to extracted — the wā content no
   longer carries the grammar once the envelope dominates. Vowed at Synthesis
   10/20 — the frozen-rhythm lock held 0.49 (real) vs 0.31 (placebo); the
   wrapped-vs-extracted gap is the ablation's whole reading.
 - Kept templates skew to sigil-envelope anatomy (sharktooth frames, ahu
   wrappers), visibly unlike the extracted bed's wā-content templates. Vowed at
-  Provisional-Synthesis 6/20.
+.
 
 ## Bed predictions — mark-twain (vowed at manifest time, 2026-07-19; UNPOURED)
 
@@ -326,7 +326,7 @@ means the text, not the machinery.
 - Shallow-but-real structure: C1 savings stay POSITIVE (natural English carries
   real collocation) yet MODEST — smaller than the liturgical and
   kumulipo-extracted beds at matched size, and the real-vs-shuffled gap narrower.
-  Vowed at Provisional-Synthesis 7/20.
+ Vowed at.
 - Not the silence attractor (C4): the coarsening stop lands at a content level,
   not the degenerate top — ordinary prose reads as real language, never noise.
-  Vowed at Provisional-Synthesis 6/20.
+ Vowed at.

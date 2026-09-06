@@ -1,4 +1,4 @@
-<<^ &#x0001; ? -> lar:///grammar.ooda-ha.holds/ooda-ha/?confidence=S:13&p=10 >>
+<<^ &#x0001; ? -> lar:///grammar.ooda-ha.holds/ooda-ha/?confidence=S:13&p=10>>
 
 # Grammar: OODA-HA
 
@@ -369,4 +369,4 @@ OODA-HA phase prose should minimize forms of "to be" to sharpen claim-shape and 
 
 ---
 
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

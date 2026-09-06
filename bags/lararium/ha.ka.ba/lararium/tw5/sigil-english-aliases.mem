@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-english-aliases >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/sigil-english-aliases>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/sigil-english-aliases.mem"
 mana      = 17
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = true
 role      = "design record: English alias sigil vocabulary — \\procedure, \\if, \\for, \\widget cross-refs to Hawaiian equivalents"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-procedure", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-if", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-for", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-widget"]
@@ -15,9 +14,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/sigil-english-aliases"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! English Alias Sigil Vocabulary
 
@@ -25,9 +24,9 @@ Memetic-wikitext sigils read the same in English and Hawaiian.
 `<<~ \procedure ...>>` and `<<~ wehe ...>>` reach the same executor.
 This document records the bidirectional alias map.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #alias-map >>
+<<~ ahu #alias-map>>
 
 !! Alias Map
 
@@ -45,9 +44,9 @@ This document records the bidirectional alias map.
 * Hawaiian sigils (when authored in Path G.SharktoothSigil) carry `lar-see-also: \<english>` as the reverse pointer.
 * `lar-alias-for` on English sigils points to the TW5 pragma name (e.g. `\procedure`) for grammar aliasing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #governance >>
+<<~ ahu #governance>>
 
 !! Governance
 
@@ -62,19 +61,19 @@ When a Hawaiian tiddler ships (e.g. `sigil-wehe.tid`), it becomes authoritative.
 The English alias tiddler's `lar-alias-for` field points to the Hawaiian name, resolving
 the canonical dispatch through the Hawaiian implementation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-shelf >>
+<<~ ahu #source-shelf>>
 
 !! Source Shelf
 
-<<~/pranala >>
-<<~/pranala >>
-<<~/pranala >>
-<<~/pranala >>
+<<~/pranala>>
+<<~/pranala>>
+<<~/pranala>>
+<<~/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;OEJnQAYtwjgL4kQgxI2pSJ0bgP7DeYrBf2GWMTolw10
+<<^ code="&#x0003;">>ni:///sha-256;D-ozW4ZfGQJ8UeiBolw3SQ3EItJQZb-BFrI5aMo5pDk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

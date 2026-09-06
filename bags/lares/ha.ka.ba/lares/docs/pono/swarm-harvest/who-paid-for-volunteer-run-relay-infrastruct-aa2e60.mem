@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/who-paid-for-volunteer-run-relay-infrastruct-aa2e60 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/who-paid-for-volunteer-run-relay-infrastruct-aa2e60>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/who-paid-for-volunteer-run-relay-infrastruct-aa2e60.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: WHO PAID FOR VOLUNTEER-RUN RELAY INFRASTRUCTURE — MEASURED. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/who-paid-for-volunteer-run-relay-infrastruct-aa2e60"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! WHO PAID FOR VOLUNTEER-RUN RELAY INFRASTRUCTURE — MEASURED
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 27,877 characters
 
@@ -328,14 +327,14 @@ The server count is *shrinking* while account count grows — i.e. consolidation
 **NOT REACHED, explicitly:** Tor's blog transparency posts (all 404 in 2026) and therefore the widely-cited "85% US government in 2015"; torservers.net / Wau Holland / Nos Oignons dollar figures; any Comcast Usenet-drop date; Libera.Chat revenue; any longitudinal XMPP server-count dataset; I2P financials of any kind. OpenAlex exhausted its daily budget mid-session and WebSearch was off-limits throughout.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ttUGkLQh21ncbLy3dNc1gnci8OkqJnomuKKY4eO8xew
+<<^ code="&#x0003;">>ni:///sha-256;Y5HBQ_5i_jzIF9xS2ElNfGx2sZuJZvvhKiE4KP9x9jM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

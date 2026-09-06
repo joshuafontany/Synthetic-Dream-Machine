@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/artifacts >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/artifacts>>
 ```toml meta
 file-path   = "bags/lares/ha.ka.ba/lares/docs/graph/artifacts.mem"
 l-space     = "stable"
 mana        = 17
 manao       = 17
 manaoio     = 16
-register    = "Synthesis-Canon"
 role        = "content-addressed artifact contract for boot closure compilation — SHA256 scheme, three artifact classes, compaction rules, cache compatibility"
 status-date = "2026-04-24"
 tags        = ["api/pono/meme", "api/pono/loci"]
@@ -15,9 +14,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: the current boot receipt uses a compilation timestamp as its identity — not content addressing.
 ⏿ orient: Nix derivations and Bazel action caching both hash inputs; Anthropic prompt caching requires byte-identical prefixes.
@@ -25,9 +24,9 @@ uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 ▶ act: specify the hash scheme, three artifact shapes, validation contract, and compaction rule.
 ↺ verify: identical source files always produce identical receipt hashes across separate compilation runs; MemPalace persistence of boot receipts routes to the adapters layer; write-back awaits policy gate.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #content-addressing >>
+<<~ ahu #content-addressing>>
 
 !! Content-Addressed Identity
 
@@ -67,9 +66,9 @@ closure_hash(uri_list, edge_list):
 The boot receipt's `sha256` field becomes a stable context cache key.
 Clients that carry the previous receipt can compare: if `sha256` matches, the context prefix the LLM already cached remains valid. No need to resend carrier text.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #artifact-minimal >>
+<<~ ahu #artifact-minimal>>
 
 !! Artifact: Minimal Boot
 
@@ -121,9 +120,9 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 * `validation.declared_vs_walked` (new — Tier 0 vs Tier 1 cross-validation)
 * `sha256` at top level (was only in boot receipt)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #artifact-full >>
+<<~ ahu #artifact-full>>
 
 !! Artifact: Full Boot
 
@@ -180,9 +179,9 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 ''`invariant_index`'' maps invariant URIs to carriers that implement invariant interfaces.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #artifact-receipt >>
+<<~ ahu #artifact-receipt>>
 
 !! Artifact: Boot Receipt
 
@@ -228,9 +227,9 @@ The new hash stays stable across recompilations of identical source files.
 ''Cache use:'' clients store the receipt and compare `sha256` before requesting a full hydration.
 If the hash matches, the LLM context prefix already cached at Anthropic remains valid.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dual-index >>
+<<~ ahu #dual-index>>
 
 !! Dual-Index Content Resources
 
@@ -257,9 +256,9 @@ This supports cache miss fills and cross-session identity verification without r
 5. recompile boot receipt, update hash_sequence
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #validation-contract >>
+<<~ ahu #validation-contract>>
 
 !! Validation Contract
 
@@ -276,9 +275,9 @@ Every artifact carries a `validation` object.
 
 A ''valid artifact'' carries `dag_violations = []`. All other validation fields may carry non-empty lists without invalidating the artifact structurally — they carry diagnostic pressure instead.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #compaction >>
+<<~ ahu #compaction>>
 
 !! Compaction Rule
 
@@ -292,20 +291,20 @@ When a hydration packet grows past context limits, the compaction pass applies i
 Minimal boot should remain small enough to avoid compaction (14 carriers × ~200 bytes per entry ≈ 2.8 KB).
 Full boot may trigger compaction once the relation expansion reaches larger graphs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bFSFH7Pbp1VV1lvIKsOrm5hZmYxY8RQ-tGROoJGeh7c
+<<^ code="&#x0003;">>ni:///sha-256;YIDkCEYydon7VvLdewgYN0rSwNmJwHmGc3O0KAxq3wI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

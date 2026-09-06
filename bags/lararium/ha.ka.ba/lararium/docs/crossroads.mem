@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/crossroads >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/crossroads>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/crossroads.mem"
@@ -8,18 +8,17 @@ l-space   = "lararium"
 mana      = 5
 manao     = 5
 manaoio   = 4
-register  = "Provisional"
 retain    = true
 role      = "attractor: @crossroads — the public/infrastructure oracle plane (ring-1); third leg of the three-plane oracle model; UNBUILT, this meme holds the bearing"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/crossroads"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #attractor >>
+<<~ ahu #attractor>>
 
 ! @crossroads — the Public Oracle Plane
 
@@ -29,9 +28,9 @@ uri-path  = "ha.ka.ba/lararium/docs/crossroads"
 
 The name carries the load deliberately: the Lares Compitales kept the ''crossroads shrines'' — district-scale, fed by collective offering, serving travelers and neighbors rather than one household (`noosphere-boot#elyncia`, shrine tiers). The household lararium answers to its operator; the crossroads answers to whoever walks the road.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #constraints >>
+<<~ ahu #constraints>>
 
 !! Constraints the build inherits (already canon)
 
@@ -40,9 +39,9 @@ The name carries the load deliberately: the Lares Compitales kept the ''crossroa
 * ''One home per oracle'' — a bag's oracle lives in exactly one plane. Promotion from @catalog to @crossroads constitutes a crossing rite (residency canon: ACTION verbs + effect records + the destination registry's accession), never a copy that leaves two authorities standing.
 * ''Access ≠ load'' — islands watch @crossroads the way they watch @catalog: an ACCESS capability, never a mounted layer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cad-tenant >>
+<<~ ahu #cad-tenant>>
 
 !! The concrete role ~ the public tier of the content-addressed layer
 
@@ -51,11 +50,11 @@ The name carries the load deliberately: the Lares Compitales kept the ''crossroa
 * ''First tenant landed 2026-07-19'' — the public-domain library moved home to @crossroads (`bags/crossroads/…/library`: Twain, the Kumulipo, the Discordian texts). It carries both kinds — raw `.txt` books and structured `.mem` memes holding large `#source-text` ahus (`content-resolution` CAD taxonomy A and B).
 * ''Public CAD blobs carry plaintext `ni://` multihash anchors.'' A stranger both //fetches// and //verifies// against a foreign-legible, self-describing content id (RFC-6920 `ni://` shape) — federable at `meme`-rated and above, durable toward the 500-year archival horizon. BECAUSE @crossroads sits public, ''no confirmation-oracle stands to protect'' — the plaintext-hash leak that bars `@catalog`-private (→ ciphertext cid) simply does not apply where the content already stands open.
 
-This ''coheres with the constraints above'', never contradicts them. The plaintext anchor sets only ''how a stranger verifies'' a body; the orichalcum gate still decides whether they may `pull` or `read` (`pull` ≠ `read` — "public" names a generous anonymous grant, never a gateless plane). One home per oracle holds: the library crossed //to// @crossroads, it did not fork across two authorities. Access ≠ load: the anchor lets a stranger verify what they fetch, never mounts the layer for them. <<~ confidence 6/20 >> the tenant landed and the anchor mode reads decided; the wider @crossroads build (community authority, federation discovery, sharding) stays the open basin below.
+This ''coheres with the constraints above'', never contradicts them. The plaintext anchor sets only ''how a stranger verifies'' a body; the orichalcum gate still decides whether they may `pull` or `read` (`pull` ≠ `read` — "public" names a generous anonymous grant, never a gateless plane). One home per oracle holds: the library crossed //to// @crossroads, it did not fork across two authorities. Access ≠ load: the anchor lets a stranger verify what they fetch, never mounts the layer for them. the tenant landed and the anchor mode reads decided; the wider @crossroads build (community authority, federation discovery, sharding) stays the open basin below.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open >>
+<<~ ahu #open>>
 
 !! What a crossroads SERVES, and what crossing it costs
 
@@ -68,8 +67,6 @@ This ''coheres with the constraints above'', never contradicts them. The plainte
 ''Crossing costs a DECLARING ACT.'' Canon already rules this for names — //the declaring act, never the characters, makes a name public// — and content takes the same law: bytes in a vessel's mirror publish nothing, and an act carries them across. The body rides as a ''cid'', so a text admitted at two Nexuses declares twice while its bytes stay one; ''the declaration duplicates, the content never does''.
 
 ''So a witness may WARN and never repair.'' Admitting on the operator's behalf would publish, in one boot, whatever happened to sit in a directory — precisely the un-deliberate publication the declaring-act law exists to prevent. The founding and the boot therefore report the drift between what a vessel HOLDS and what it has DECLARED, name the correction, and stop (`holdings-witness`). Each crossing stays one decision, and a blanket "fix all" stays absent on purpose.
-
-<<~ confidence 15/20 >>
 
 !! Kūkala ~ the act, and what takes it down
 
@@ -85,25 +82,25 @@ This ''coheres with the constraints above'', never contradicts them. The plainte
 
 ''WHY KĀPAE MUST DEFEAT A LATER CRY.'' Two islands with no shared now cannot agree which act came first. If a later cry could outlive a refusal, anyone refused at the Gate re-pins from a partition and stands again — the refusal would hold only against those who accept it. ''Remove-wins is what makes a Gate a Gate rather than a request'', the same ruling canon already carries for membership.
 
-''The fold reads order-independently'', so two islands that have seen the same cries agree without having agreed on a clock (`crossroads-cry`). Who may SIGN a Nexus kāpae belongs to the charter quorum; the fold reads a board already written and reports what stands. <<~ confidence 15/20 >>
+''The fold reads order-independently'', so two islands that have seen the same cries agree without having agreed on a clock (`crossroads-cry`). Who may SIGN a Nexus kāpae belongs to the charter quorum; the fold reads a board already written and reports what stands.
 
 !! Open (deliberately)
 
 Who writes @crossroads (community authority shape), how Nexus-level federation discovers it, and whether it shards per-Nexus or rides DreamNet-wide — all undecided, and this meme MUST NOT pre-narrate them. The mechanism above constrains; the outcomes emerge from use.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wiki-layer-ontology>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;mmNNqOousJ-zY8tG663fgX8Tmk-XS5cYArB3FdOARC0
+<<^ code="&#x0003;">>ni:///sha-256;uVc3RA9jSJR2rjDDEaz1nlxmrXOGQZliCxBL6pRXrB4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

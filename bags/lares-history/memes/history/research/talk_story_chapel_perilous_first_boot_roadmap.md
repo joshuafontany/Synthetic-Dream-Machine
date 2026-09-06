@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///talk-story.chapel-perilous.maps/first-boot-roadmap/?confidence=S:13&p=10 -->
 

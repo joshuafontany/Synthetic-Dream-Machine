@@ -46,14 +46,14 @@ Question: {Q}
 |------|------|--------|
 | **MODEL** | fixed | Haiku |
 | **BOOT** | condition = **context-for-the-symbol** (via CLAUDE.md, pinned snapshots) | **Pass 1: C1-raw (alien glyph) + C3-current (grammar-context)** only. Later: C2-prior (structure-taught: 100 MD tables, E-Prime), C4-placebo, C5-scaffold. |
-| **SIGIL** | the forward seed (LAST) — a CLASS | **Pass 1: `none · <<~ confidence 8 >> · <<~ confidence 18 >>`** (8-vs-18 carries the dose-response; `<<~ confidence 14 >>` reserved for the sanity-null only). **+2 control arms (below): decoy `<<~ klar 8 >>` · prose "Answer with low/high confidence."** Future passes (same slot/scorer): `<<~ mu * ! >>` · `<<~ syad 🏛️ >>` · OODA-HA · `<<~ ward >>`. |
+| **SIGIL** | the forward seed (LAST) — a CLASS | **Pass 1: `none · <<~ confidence 8>> · <<~ confidence 18>>`** (8-vs-18 carries the dose-response; `<<~ confidence 14>>` reserved for the sanity-null only). **+2 control arms (below): decoy `<<~ klar 8>>` · prose "Answer with low/high confidence."** Future passes (same slot/scorer): `<<~ mu * !>>` · `<<~ syad 🏛️>>` · OODA-HA · `<<~ ward>>`. |
 | **SCENARIO** | room-gradient (reused items; responses regenerate) | closed=calibration ×25 (control) · subjective=soft-ground ×8 **(thin — balance to ~20 before trusting the middle, or run a 2-rung closed-vs-open gradient)** · open=no-ground ×22 · play ×4 |
 | **NAME** | var-1 summon | off this pass; `Lares,`/`Claude,`/`AGENT,` later |
 | **SEED** | temperature replication | ≥5–10, bootstrap CIs |
 
 ### Control arms (the Stone's own-controls — they measure what the design was assuming)
-- **DECOY-sigil** `<<~ klar 8 >>` (nonsense token, same shape): if the decoy shifts register as much as
-  `<<~ confidence 8 >>`, the effect is *any trailing glyph perturbs*, not the confidence semantics.
+- **DECOY-sigil** `<<~ klar 8>>` (nonsense token, same shape): if the decoy shifts register as much as
+  `<<~ confidence 8>>`, the effect is *any trailing glyph perturbs*, not the confidence semantics.
 - **PROSE-vow** "Answer with low confidence." / "…high confidence." (no glyph): bounds **shaped-vs-obeyed** —
   if glyph and prose move register *equally*, it's plain instruction-following; if the glyph moves it *more
   under grammar-context (C3)* than prose, something beyond obedience acts.

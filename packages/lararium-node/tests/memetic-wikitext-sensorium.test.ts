@@ -2,7 +2,7 @@
  * memetic-wikitext-sensorium — the concrete neither-top, co-located-peers instance.
  *
  * Proves: the reader stratifies a real memetic-wikitext sample into a skeletal tier (black) + red/base
- * strata + autosegmental associations; a fine-grain inline `<<~ confidence… >>` reads as a CROSS-BAND
+ * strata + autosegmental associations; a fine-grain inline `<<~ confidence…>>` reads as a CROSS-BAND
  * signal (two axes, not forced-outer); the peer sub-sensoria compose (`#has {formal, informal}`,
  * coupling.children, neither top); and the coupling edge reads formal↔informal (directed) — through the
  * mesh keel's windowed-coupling RUNTIME over FFZ-aligned ticks, screened by the linearity gate.
@@ -28,10 +28,10 @@ const PARA =
   "the moves the constructicon in use across the whole arc of the session as it settles into shape. ";
 const SAMPLE =
   PARA +
-  "<<~ confidence Synthesis 12/20 >>" +
+  "<<~ confidence Synthesis 12/20>>" +
   " the claim generates within the band it vows and the prose runs on after the marker leads it here " +
   "through the paragraph that follows in plain black text before the ward draws at the close of the turn. " +
-  "<<~ ward ! · ↻ L-Prime >>";
+  "<<~ ward ! · ↻ L-Prime>>";
 
 describe("the reader — stratify (LI face): skeletal tier + red/base strata + associations", () => {
   test("splits into black skeletal anchors + red/base strata, source-CID pinned", () => {
@@ -194,15 +194,15 @@ describe("the KI face — FFZ-aligned ticks through the windowed-coupling runtim
 // A two-frame sample: an `ahu` block A holds a MID steer (governs in-block prose) + a TAIL steer that
 // reaches past the block boundary into block B — the NCC case (Coleman & Local). Then block B's prose.
 const TWO_FRAME =
-  "<<~ ahu #alpha >>\n" +
+  "<<~ ahu #alpha>>\n" +
   "Alpha prose runs here as plain black text before the mid marker leads it forward in this block. " +
-  "<<~ confidence Synthesis 12/20 >>" +
+  "<<~ confidence Synthesis 12/20>>" +
   " the mid steer governs this in-block prose that follows it directly inside the very same frame here. " +
-  "<<~ ward ! · ↻ L-Prime >>" +
-  "\n<<~/ahu >>\n" +
-  "<<~ ahu #beta >>\n" +
+  "<<~ ward ! · ↻ L-Prime>>" +
+  "\n<<~/ahu>>\n" +
+  "<<~ ahu #beta>>\n" +
   "Beta prose runs here after the boundary and belongs to a wholly different frame than the alpha block. " +
-  "<<~/ahu >>";
+  "<<~/ahu>>";
 
 describe("the autosegmental follow-ups — NCC float-dock (Coleman & Local, crucible-F2)", () => {
   test("ahu / control sigils read as FRAMING boundaries; named sigils do not", () => {
@@ -290,7 +290,7 @@ describe("the autosegmental follow-ups — OCP normalization (adjacent-identical
   test("two adjacent identical red autosegments collapse to one", () => {
     const doubled =
       "Some black prose leads in here before the doubled marker appears twice in the stream. " +
-      "<<~ confidence Synthesis 12/20 >> <<~ confidence Synthesis 12/20 >>" +
+      "<<~ confidence Synthesis 12/20>> <<~ confidence Synthesis 12/20>>" +
       " and the prose runs on after the collapsed contour settles into one register cleanly.";
     const s = stratify(doubled);
     expect(s.strata.length).toBe(2);                 // two identical islands before OCP
@@ -305,7 +305,7 @@ describe("the autosegmental follow-ups — OCP normalization (adjacent-identical
   test("a NON-identical contour (different value) does NOT collapse", () => {
     const distinct =
       "Lead prose here now before two DIFFERENT markers appear back to back in the same stream span. " +
-      "<<~ confidence Synthesis 12/20 >> <<~ confidence Provisional 3/20 >>" +
+      "<<~ confidence Synthesis 12/20>> <<~ confidence Provisional 3/20>>" +
       " tail prose runs on here after the genuine contour that OCP must preserve intact and whole.";
     const s = stratify(distinct);
     expect(s.strata.length).toBe(2);

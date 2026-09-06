@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/open-phases >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/open-phases>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/open-phases.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 17
 manao         = 17
 manaoio       = 16
-register      = "Synthesis-Canon"
 retain        = true
 role          = "lararium boot open-phase sequence, authority envelope modes, keyhive promotion shore"
 source-symbol = "LarariumOpenPhase LarariumAuthorityEnvelope"
@@ -17,9 +16,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/open-phases"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Open Phases
 
@@ -27,9 +26,9 @@ The open-phase sequence tracks boot progress from host open through TW5 hydratio
 to live delta stream. An authority envelope wraps every live session — currently
 `local-dev` only; `keyhive` remains a type socket pending encrypted group sync.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -105,17 +104,17 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 # → projection/write-back worker materializes canon.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/catalog-doc >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/catalog-doc>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;lMfarOTOAyBiICAwpdEFzS1cvAoXU0NUNlpOHFJU2bY
+<<^ code="&#x0003;">>ni:///sha-256;17cT2H3tG5EZpPuXU3NlIoA-5VjN9L49wv4DMPqM58I
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

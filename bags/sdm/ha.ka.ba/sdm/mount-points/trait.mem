@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/mount-points/trait>>
 ```toml meta
 cacheable = true
 caption   = "trait"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/mount-points/trait.mem"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "mount-point: Trait — Power engraved in body, mind, or aura"
 l-space   = "sdm"
@@ -16,76 +15,76 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/mount-points/trait"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Mount-Point — Trait
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 A Trait seats a Power ''in the practitioner'': engraved as memetic code, sung into implanted crystal, branded on the aura. Capacity is ''7 + Thought'' slots (canonical, Vastlands Guidebook). One Power per slot unless a feature says otherwise.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 A trait-seated Power activates from the self — range and target measured from the practitioner. No object to draw, lose, or have stolen.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cost >>
+<<~ ahu #cost>>
 
 !! Cost
 
 Pay Life equal to P (Ability Points at 1:1 parity). Double without the relevant skill. The `imbued` hook locks the Life until the Power deactivates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #failure >>
+<<~ ahu #failure>>
 
 !! Failure
 
 A failed activation runs the Danger Roll → Corruption procedure. Corruption on a trait writes back onto the practitioner's body/mind/aura — the host carries the scar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #removal >>
+<<~ ahu #removal>>
 
 !! Removal
 
 Traits resist casual removal. Re-engraving, corruption treatment, or a Path feature changes a trait. Overflow past 7 + Thought spills to Burden.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #overflow >>
+<<~ ahu #overflow>>
 
 !! Overflow
 
 Past capacity, additional patterns become Burdens (−1 to all rolls each) or wait for an Item/Site seat.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Thought is a living attribute; capacity moves with it. Confirm whether mid-session Thought loss can orphan a seated trait.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;F0Ak-3tcMI7UNgTJbKwbAukOLGmvoY2FrA08n_01qM4
+<<^ code="&#x0003;">>ni:///sha-256;mCvTqQTSE_allix6QtA8p-II0cOGHgG2Z2BkOWIBEJo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

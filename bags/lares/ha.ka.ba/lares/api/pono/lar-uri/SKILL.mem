@@ -4,9 +4,9 @@ description: Author, validate, or audit lar: URI addresses under lar:///ha.ka.ba
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lar-uri/SKILL>>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant (lar-uri) stays the scheme-law root; this skill does not widen or outrank it", "S2: path classes stay distinct — stable (ha.ka.ba), unstable (attitude triple), adjacent (no triple); never blur them", "S3: exactly one @-bag segment, at child[1] only; child[2]+ never carry @", "S4: a lar: URI NAMES; resolution runs against the local graph, never as a network fetch", "S5: local form for stable addresses and system names; session form for exchange spans only — it never persists into storage"]
@@ -15,7 +15,6 @@ file-path          = "bags/lares/ha.ka.ba/lares/api/pono/lar-uri/SKILL.mem"
 mana               = 15
 manao              = 16
 manaoio            = 14
-register           = "Synthesis-Canon"
 retain             = true
 role               = "lar: URI operational skill — authoring, validation, and audit of addresses against the scheme law"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/lar-uri"
@@ -24,14 +23,14 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/lar-uri/SKILL"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! lar: URI Skill
 
 [[lar-uri.md|../lar-uri.md]] holds the scheme law.
 This skill carries the working procedure.
 
-<<~ ahu #load-contract >>
+<<~ ahu #load-contract>>
 
 !! Load Contract
 
@@ -44,9 +43,9 @@ Keep these points active when the skill loads:
 * a `#fragment` names a section / `ahu` / pranala anchor only
 * the smallest lawful intervention beats a grand rewrite
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #workflow-contract >>
+<<~ ahu #workflow-contract>>
 
 !! Workflow Contract
 
@@ -71,9 +70,9 @@ Do not:
 * treat a `lar:` reference as a network-fetch instruction
 * let a session-form URI escape its exchange span into stable storage
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trigger >>
+<<~ ahu #trigger>>
 
 !! Trigger
 
@@ -88,9 +87,9 @@ Prefer another surface when the work concerns:
 * the markup carried at the address (see the `memetic-wikitext` skill)
 * bag resolution wiring or runtime federation only
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the address and sense its form and path class
 ⏿ orient against the scheme law — slots, classes, the single `@`-bag, the fragment
@@ -98,17 +97,17 @@ Prefer another surface when the work concerns:
 ▶ write the lightest correct address or the smallest lawful repair
 ↺ verify ASCII-only path, three-slot root, one `@`-bag, anchor-only fragment; name residue — any address whose bag binding or class stays unsettled
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kxHUgd27LU0zbRBUw6we57DuYdjJ6KOJPLszInsfqsc
+<<^ code="&#x0003;">>ni:///sha-256;Z5ErWfta4iFRymlrGKKWrxAcD6ExRU9wu-3I3RZI1Lo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

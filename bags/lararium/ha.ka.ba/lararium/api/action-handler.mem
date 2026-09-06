@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/action-handler >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/action-handler>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/api/action-handler.mem"
@@ -9,7 +9,6 @@ mana        = 16
 manao       = 16
 manaoio     = 15
 namespace   = "&#x0950; &#x0901;"
-register    = "Synthesis"
 retain      = true
 role        = "source-of-truth: the Residency Model ACTION verb handler family — six verbs, withEffectRecord wrapping, cap-gate law, dispatch shore (Sprint 5)"
 source-file = "packages/lararium-tw5/src/action-handler.ts"
@@ -21,11 +20,11 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/api/action-handler"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! ACTION Verb Handler Family
 
@@ -37,9 +36,9 @@ Source of truth: `packages/lararium-tw5/src/action-handler.ts`. Handlers run
 `@lararium/node`'s `island-behaviors.ts`, invoked through the dispatch shore,
 operated from the CLI by `lares act`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbs >>
+<<~ ahu #verbs>>
 
 !! The verb family
 
@@ -58,9 +57,9 @@ Six residency verbs (SPARQL set-algebra) + a ''non-residency tier'' (INGEST, REC
 
 ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''never version control''. ''INGEST + RECONCILE'' form the non-residency tier — the same VERB → SUMMONS → OUTCOME rail, `withEffectRecord` audit, and cap-gate, with no tiddler-between-bags move. See [[residency-model|lar:///ha.ka.ba/lararium/api/residency-model]] `#action-verb-surface` + `#non-residency-verbs`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Handler Law
 
@@ -85,9 +84,9 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''neve
 # ''Parse-or-reject.'' `parseResidencyAction(invocation)` validates verb
    membership + per-verb required args; malformed input throws before dispatch.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dispatch >>
+<<~ ahu #dispatch>>
 
 !! Dispatch Shore
 
@@ -106,16 +105,16 @@ lares act <VERB> …            ← @lares/cli/src/commands/act.ts (operator sur
 verbs. Browser and Node vessels share this exact registration — `action-handler.ts`
 is shared, not duplicated (Sprint 6 parity).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/effect-record >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/effect-record>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PEusLP51ETAYxhBBUD56RbjYSInzj93Kn-NFcszcL5Q
+<<^ code="&#x0003;">>ni:///sha-256;-MkpR6yMDnBKwh1CoSM4YShO9lbDmc6t2KyWxJ7r4Tc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: §0. Method, and the honest limit on this report's reach. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limit-on-this-report-52ebe0"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! §0. Method, and the honest limit on this report's reach
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 58,350 characters
 
@@ -421,9 +420,9 @@ GSMA Mobile Gender Gap phone-*sharing* rates · Deloitte per-household device co
 **Sources:** [book.keybase.io/account](https://book.keybase.io/account) · [NCC Group Keybase audit (PDF)](https://keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf) · [keybase.io/blog/keybase-new-key-model](https://keybase.io/blog/keybase-new-key-model) · [keybase/client#21111](https://github.com/keybase/client/issues/21111) · [element.io/help](https://element.io/help) · [Unable to Decrypt a Message on Matrix](https://blog.neko.dev/posts/unable-to-decrypt-matrix.html) · [Giving Up on Element and Matrix.org](https://xn--gckvb8fzb.com/giving-up-on-element-and-matrixorg/) · [signal.org/blog/signal-pins](https://signal.org/blog/signal-pins/) · [signal.org/blog/secure-value-recovery](https://signal.org/blog/secure-value-recovery/) · [Matthew Green on Signal SVR](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Passkeys: A shattered dream](https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/) · [Yep, Passkeys Still Have Problems](https://fy.blackhats.net.au/blog/2025-12-17-yep-passkeys-still-have-problems/) · [Stop using passkeys for encrypting user data](https://blog.timcappalli.me/p/passkeys-prf-warning/) · [w3c/webauthn#1658](https://github.com/w3c/webauthn/issues/1658) · [Ink & Switch — Keyhive notebook](https://www.inkandswitch.com/keyhive/notebook/) · [Ink & Switch — Local-first software](https://www.inkandswitch.com/essay/local-first/) · [Stiegler — An Introduction to Petname Systems](http://www.skyhunter.com/marcs/petnames/IntroPetNames.html) · [Spritely — Petnames](https://files.spritely.institute/papers/petnames.html) · [did:peer method spec](https://identity.foundation/peer-did-method-spec/) · [KERI, arXiv 1907.02143](https://arxiv.org/abs/1907.02143) · [DCGKA, ePrint 2020/1281](https://eprint.iacr.org/2020/1281) · [Matthews et al., CHI 2016](https://doi.org/10.1145/2858036.2858051) · [Freed et al., A Stalker's Paradise, CHI 2018](https://doi.org/10.1145/3173574.3174241) · [Bellini et al., Paying the Price, CHI 2023](https://doi.org/10.1145/3544548.3581101) · [ipvtechresearch.org](https://www.ipvtechresearch.org/) · [Muralidharan et al., AER 2016](https://doi.org/10.1257/aer.20141335) · [ninux.org fragility, IEEE TCSS 2019](https://doi.org/10.1109/TCSS.2019.2891985) · [eIDAS open letter (primary PDF)](https://nce.mpi-sp.org/) · [last-chance-for-eidas.org](https://last-chance-for-eidas.org/) · [EFF — Article 45 will roll back web security by 12 years](https://www.eff.org/deeplinks/2023/11/article-45-will-roll-back-web-security-12-years) · [EUDI wallet — "Do not add Google Play Integrity integration"](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui/issues/10) · [HN — German eIDAS requires an Apple/Google account](https://news.ycombinator.com/item?id=47644406) · [Vitalik — social recovery wallets](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [The Register — Google Recovery Contacts](https://www.theregister.com/2025/10/16/google_gmail_trusted_contacts/) · [UCAN spec](https://github.com/ucan-wg/spec) · [SSB protocol guide](https://ssbc.github.io/scuttlebutt-protocol-guide/) · [did:plc directory](https://web.plc.directory/) · [Pew — Mobile Fact Sheet](https://www.pewresearch.org/internet/fact-sheet/mobile/) · [ITU Facts and Figures 2024](https://www.itu.int/) · [Cisco Annual Internet Report](https://www.cisco.com/) · [RFC 8628](https://datatracker.ietf.org/doc/html/rfc8628) · [Microsoft — Storm-2372](https://www.microsoft.com/en-us/security/blog/) · [Microsoft Entra passkey docs](https://learn.microsoft.com/) · [Apple Platform Security Guide](https://support.apple.com/guide/security/) · [sovrin.org](https://sovrin.org/) · [ICAO PKD](https://www.icao.int/Security/FAL/PKD/Pages/default.aspx)
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 40,566 characters
 
@@ -683,9 +682,9 @@ Flagged in order of how much they move the geometry:
 **Sources:** [book.keybase.io/account](https://book.keybase.io/account) · [NCC Group Keybase audit (PDF)](https://keybase.io/docs-assets/blog/NCC_Group_Keybase_KB2018_Public_Report_2019-02-27_v1.3.pdf) · [keybase.io/blog/keybase-new-key-model](https://keybase.io/blog/keybase-new-key-model) · [keybase/client#21111](https://github.com/keybase/client/issues/21111) · [element.io/help](https://element.io/help) · [blog.neko.dev — Unable to Decrypt a Message on Matrix](https://blog.neko.dev/posts/unable-to-decrypt-matrix.html) · [Giving Up on Element and Matrix.org](https://xn--gckvb8fzb.com/giving-up-on-element-and-matrixorg/) · [signal.org/blog/signal-pins](https://signal.org/blog/signal-pins/) · [signal.org/blog/secure-value-recovery](https://signal.org/blog/secure-value-recovery/) · [Matthew Green on Signal SVR](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Passkeys: A shattered dream](https://fy.blackhats.net.au/blog/2024-04-26-passkeys-a-shattered-dream/) · [Yep, Passkeys Still Have Problems](https://fy.blackhats.net.au/blog/2025-12-17-yep-passkeys-still-have-problems/) · [Stop using passkeys for encrypting user data](https://blog.timcappalli.me/p/passkeys-prf-warning/) · [w3c/webauthn#1658](https://github.com/w3c/webauthn/issues/1658) · [Ink & Switch — Keyhive notebook](https://www.inkandswitch.com/keyhive/notebook/) · [Ink & Switch — Local-first software](https://www.inkandswitch.com/essay/local-first/) · [Stiegler, An Introduction to Petname Systems](http://www.skyhunter.com/marcs/petnames/IntroPetNames.html) · [Spritely — Petnames](https://files.spritely.institute/papers/petnames.html) · [did:peer method spec](https://identity.foundation/peer-did-method-spec/) · [KERI, arXiv 1907.02143](https://arxiv.org/abs/1907.02143) · [DCGKA, ePrint 2020/1281](https://eprint.iacr.org/2020/1281) · [Matthews et al., CHI 2016 (DOI)](https://doi.org/10.1145/2858036.2858051) · [ipvtechresearch.org](https://www.ipvtechresearch.org/) · [eidas-open-letter.org](https://eidas-open-letter.org/) · [last-chance-for-eidas.org](https://last-chance-for-eidas.org/) · [EUDI wallet — "Do not add Google Play Integrity integration"](https://github.com/eu-digital-identity-wallet/av-app-android-wallet-ui/issues/10) · [HN: German eIDAS requires an Apple/Google account](https://news.ycombinator.com/item?id=47644406) · [Vitalik — social recovery wallets](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [The Register — Google Recovery Contacts](https://www.theregister.com/2025/10/16/google_gmail_trusted_contacts/) · [UCAN spec](https://github.com/ucan-wg/spec) · [SSB protocol guide](https://ssbc.github.io/scuttlebutt-protocol-guide/) · [did:plc directory](https://web.plc.directory/) · [Pew — Mobile Fact Sheet](https://www.pewresearch.org/internet/fact-sheet/mobile/) · [ITU Facts and Figures 2024](https://www.itu.int/) · [Cisco Annual Internet Report](https://www.cisco.com/) · [RFC 8628](https://datatracker.ietf.org/doc/html/rfc8628) · [Microsoft — Storm-2372](https://www.microsoft.com/en-us/security/blog/) · [Microsoft Entra passkey docs](https://learn.microsoft.com/) · [Apple Platform Security Guide](https://support.apple.com/guide/security/) · [sovrin.org](https://sovrin.org/) · [ICAO PKD](https://www.icao.int/Security/FAL/PKD/Pages/default.aspx)
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-3 >>
+<<~ ahu #message-3>>
 
 !! Message 3 ~ 7,706 characters
 
@@ -739,14 +738,14 @@ Reetika Khera / Jean Drèze primary sources and Jharkhand ration-denial numbers;
 **Sources added:** [eIDAS open letter, primary PDF](https://nce.mpi-sp.org/) · [EFF — Article 45 will roll back web security by 12 years](https://www.eff.org/deeplinks/2023/11/article-45-will-roll-back-web-security-12-years) · [Freed et al., A Stalker's Paradise, CHI 2018](https://doi.org/10.1145/3173574.3174241) · [Bellini et al., Paying the Price, CHI 2023](https://doi.org/10.1145/3544548.3581101) · [Muralidharan, Niehaus & Sukhtankar, AER 2016](https://doi.org/10.1257/aer.20141335) · [Detecting and Mitigating Points of Failure in Community Networks, IEEE TCSS 2019](https://doi.org/10.1109/TCSS.2019.2891985) · [ipvtechresearch.org](https://www.ipvtechresearch.org/)
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Fwz7vxrWXrM8kQFn4uvovo0i0W-76h4evCT4Sd4hUJw
+<<^ code="&#x0003;">>ni:///sha-256;J44u02EcZZjtnxFfxFZ340c8A4kuSbWrXgbuw8gQhKU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/shelter-against-empire.mem"
@@ -9,7 +9,6 @@ l-space       = "stable"
 mana          = 16
 manao         = 16
 manaoio       = 16
-register      = "Synthesis-Canon"
 retain        = true
 revision-note = "the standing brief. Operator-stated and load-bearing: this infrastructure exists for groups that need shelter against empire. Every trade downstream re-weights against it"
 role          = "the WHY the rest of the graph reasons toward. Names who this serves, what empire does structurally, and the three design consequences that follow — the recently-arrived case as ACCEPTANCE TEST, categorisation as THE threat, and fluid-not-frozen rank as a survival property"
@@ -18,11 +17,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/shelter-against-empire"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #the-brief >>
+<<~ ahu #the-brief>>
 
 ! Shelter Against Empire ~ the brief the graph reasons toward
 
@@ -32,9 +31,9 @@ Not a value the design also holds. ''The optimum every other trade is measured a
 
 Named, because a brief that names nobody protects nobody: ''kanaka maoli'' and the Hawaiian kingdom groups · the ''Pacific Northwest tribes'' (Siletz among them) · ''Discordians'' keeping their own commons · the ''Kowloon'' walled-city crews · ''Blacksky'' and the communities holding their own moderation. Each already holds its own rites, its own reckoning of who belongs, and its own long practice of holding people the state declined to hold. ''This stack does not supply that. It tries to build something their practice can inhabit without being flattened by it.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-empire-does >>
+<<~ ahu #what-empire-does>>
 
 !! What empire does, structurally
 
@@ -48,9 +47,9 @@ Strip the costume and empire runs ''three moves'', each answerable in architectu
 
 ''Which is why //no frozen rank// names a survival property and not a taste'', and why the ''recently-arrived case reads as this design's acceptance test'' rather than as a caveat appended to it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-myth >>
+<<~ ahu #the-myth>>
 
 !! The myth ~ what the fiction encodes
 
@@ -66,9 +65,9 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 ''And the Gaia parallel needs no drawing out.'' Kingdoms overthrown and their language nearly ended; peoples enrolled, counted, and relocated by registry; networks shut on unproven accusation; platforms that hold the membership list and can delete it by deleting a row. The fiction sets it five centuries after a collapse so the shape reads clearly — and the shape is 2026's, not 4326's.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #consequences >>
+<<~ ahu #consequences>>
 
 !! What follows, in the design
 
@@ -79,9 +78,9 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 * ''No container, therefore no wall.'' A realm ''mints no DID and hosts on no single machine''; a realm cannot be deleted by anyone not dwelling in it. There is no row to delete, and no platform seat from which to delete it.
 * ''The rites belong to the communities.'' The mesh supplies `nohopapa` — that dwelling deposits, that depth is real, that unfed erodes. ''Each realm supplies its own thing-event.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #designation >>
+<<~ ahu #designation>>
 
 !! Designation ~ the move that beats a good design
 
@@ -91,11 +90,11 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 > ''AND THE WARNING RUNS SHARPER THAN THE CURE.'' The one time a technical field met a well-resourced unilateral declarer, ''that declarer won'' — its frame became the world's because it held the measuring instrument, never because anyone governed well. ''Ask what our instrument is, and who can seize it.''
 
-''The category may expose before the roster does.'' A published declaration says //this group declares itself a group//, and under a hostile state that fact can outrank the member list — the categorisation risk this meme already names. So publication rides a LADDER rather than a switch: a realm publishes at the tier it can survive, and standing-to-object scopes to that tier (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>). A realm in danger keeps its internal challengers and gains no outside ones — ''the actual condition, never a defect to design away''.
+''The category may expose before the roster does.'' A published declaration says //this group declares itself a group//, and under a hostile state that fact can outrank the member list — the categorisation risk this meme already names. So publication rides a LADDER rather than a switch: a realm publishes at the tier it can survive, and standing-to-object scopes to that tier (<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>). A realm in danger keeps its internal challengers and gains no outside ones — ''the actual condition, never a defect to design away''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-conferral-costs >>
+<<~ ahu #what-conferral-costs>>
 
 !! What conferral from below costs, said plainly
 
@@ -105,9 +104,9 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 ''AND WE DISCARD THE SHIELD — say it here rather than let a community discover it.'' The concession tradition bought one thing no arrangement from below can manufacture: ''entity shielding'', which partitions a group's assets from its members' personal creditors and ''binds third parties who never consented''. Standing conferred from below binds only those who CHOOSE to read it. A mutual-aid group believing its published face shelters its members' personal assets will learn otherwise from a creditor, and this stack owes that sentence in advance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #legibility >>
+<<~ ahu #legibility>>
 
 !! Removing the roster MOVED the target ~ it never removed it
 
@@ -131,9 +130,9 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 ''AND THE SEIZABLE THING RELOCATED RATHER THAN VANISHED.'' Whoever ships the default build and holds the update channel holds the real tempo, whatever a published cadence says; whoever authors the manifest chooses which bytes count; whoever writes the vectors decides what conformance means. ''The registry's table went and its editor stayed.'' A mesh that removed the roster and left those seats unnamed has moved its governance somewhere that inspects WORSE — and an adversary reaches for exactly that seat, precisely because the roster no longer stands there.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-honest-limit >>
+<<~ ahu #the-honest-limit>>
 
 !! The honest limit
 
@@ -154,20 +153,20 @@ And the deeper limit, stated so nobody has to rediscover it: ''every failure in 
 # ''Capability fragmentation'' under an extensible grammar — slow poison, rarely the proximate cause.
 # ''Actual architectural failure'' — ''RARE''. Almost nothing in the survey died of a bad design. The exceptions ran narrow: an append-only log with terminal key loss and no delete, and an unmoderated append weaponised by appending.
 
-<<~ confidence 15/20 >> on the ordering as a judgement across the cases; the individual attributions hold their own bands, and every quantity in the source reading stayed an order of magnitude rather than a verified figure.
+on the ordering as a judgement across the cases; the individual attributions hold their own bands, and every quantity in the source reading stayed an order of magnitude rather than a verified figure.
 
 > ''SO THE FINDING LANDS ON THIS GRAPH'S OWN ATTENTION, never only on the record.'' The five causes above architecture receive markedly less design here than the merge layer does. ''Further architectural optimisation carries low marginal survival return'' — and the honest limit already stated (every historical failure ran legal or administrative) reads as the SAME finding measured from a second direction: ''the failure modes live outside the layer this stack most enjoys building.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;TFpkOUa29-jSuAg5IvQX__cYeo7k_E68yY1tD-0J26g
+<<^ code="&#x0003;">>ni:///sha-256;PWOIY8gvzP39TpQnV3tMLXgEBqVhCFqB12jUih0N_Hw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

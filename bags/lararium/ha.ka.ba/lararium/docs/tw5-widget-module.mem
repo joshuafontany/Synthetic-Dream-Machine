@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-widget-module >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-widget-module>>
 ```toml meta
 file-path   = "bags/lararium/ha.ka.ba/lararium/docs/tw5-widget-module.mem"
 mana        = 17
 manao       = 17
 manaoio     = 16
-register    = "Synthesis-Canon"
 role        = "design doc: TW5 widget module protocol — two-phase stub preload + prototype chain wiring"
 source      = "lar:///ha.ka.ba/lares/api/lararium/modules/widget-module"
 status-date = "2026-04-30"
@@ -14,9 +13,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/docs/tw5-widget-module"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #overview >>
+<<~ ahu #overview>>
 
 !! Overview
 
@@ -24,9 +23,9 @@ TW5 widget modules are registered by a two-phase protocol because the TW5 `Widge
 
 The canonical source for this protocol is at `lar:///ha.ka.ba/lares/api/lararium/modules/widget-module`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-phase >>
+<<~ ahu #two-phase>>
 
 !! Two-Phase Boot
 
@@ -34,16 +33,16 @@ The canonical source for this protocol is at `lar:///ha.ka.ba/lares/api/lararium
 
 ''Phase 2 — wire after boot:'' `_bootModules()` calls `createLarariumWidgets(tw)`, which returns plain constructor functions for each widget tag. Each constructor is then prototype-chained to the real `Widget` base class and registered in `WidgetCtor.prototype.widgetClasses`. From this point TW5 can instantiate `lararium-*` widgets during render.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #corpus-path >>
+<<~ ahu #corpus-path>>
 
 !! Corpus Path
 
 When the boot gate passes at least one corpus meme, `tw5-modules` is loaded as a library bundle. That bundle includes MemeticParser and all widget classes compiled and pre-wired. The two-phase imperative protocol is skipped entirely on the corpus path.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;k5ZHWfL0pl3nxfd99MelIRkYG0TCx7OlBUDTbjQxeLM
+<<^ code="&#x0003;">>ni:///sha-256;McjQNFTyNEXU5ocyAYLHv-n1gVXp3ac8tb8LcDRB1qc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/voices >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/voices>>
 ```toml iam
 cacheable = false
 file-path = "bags/@lares/ha.ka.ba/lares/docs/lares/voices.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 18
-register  = "Synthesis-Canon"
 retain    = false
 role      = "specification for the three-layer lararium voice-house: the Thirteen, Voice house law, worker swarm, and mask layer"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/docs/lares/voices"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language>>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Voices
 
@@ -26,20 +25,20 @@ Specification for the three-layer voice-house.
 The Voice house (the Thirteen), the worker swarm, and the mask layer are defined here and in two child rooms.
 This meme holds cross-layer architecture law and the canonical Voice house spec inline.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #architecture >>
+<<~ ahu #architecture>>
 
 !! Architecture
 
 The lararium voice-house runs three distinct layers. The layers stack.
 Lower layers remain load-bearing when higher layers are absent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ &#x0002; >>
+<<^ &#x0002;>>
 
-<<~ ahu #three-layer-model >>
+<<~ ahu #three-layer-model>>
 
 !! Three-Layer Voice Architecture
 
@@ -59,9 +58,9 @@ A Mask overlays all thirteen Voices simultaneously — each Voice speaks through
 Workers remain session-local even under a Mask.
 Removing or switching a Mask reveals the house beneath unchanged.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #chao-reading >>
+<<~ ahu #chao-reading>>
 
 !! Chao Reading
 
@@ -74,9 +73,9 @@ The voice-house maps to the Sacred Chao triad:
 The mask layer sits in Ka/Podge space — not a structural fact about the house, but the character face the house wears in motion.
 Masks change session-to-session without touching house structure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariant-contract >>
+<<~ ahu #invariant-contract>>
 
 !! Invariant Contract
 
@@ -91,9 +90,9 @@ The invariant carries the contract; LARES holds the live state.
 
 Forward scope: composable-invariant control surface requires its own design pass before the invariant absorbs it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #voice-house >>
+<<~ ahu #voice-house>>
 
 !! Voice House
 
@@ -223,33 +222,33 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/lares/voices` MUST 
 * hard gate: Voice house applies unconditionally
 * multi-Voice turn rules
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #rooms >>
+<<~ ahu #rooms>>
 
 !! Rooms
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/workers >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/invariant-plan >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/voices-review >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/workers>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/masks>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/invariant-plan>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/voices/voices-review>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lares/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/chao >>
-<<~ loulou lar:///LARES >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium>>
+<<~ loulou lar:///ha.ka.ba/lares/api/lares/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/chao>>
+<<~ loulou lar:///LARES>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/exchange-protocol >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/law-of-5s#p-parameter-mapping >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/exchange-protocol>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/law-of-5s#p-parameter-mapping>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ &#x0003; >>
+<<^ &#x0003;>>
 
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

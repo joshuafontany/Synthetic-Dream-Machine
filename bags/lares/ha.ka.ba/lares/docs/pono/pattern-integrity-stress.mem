@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/pattern-integrity-stress.mem"
@@ -11,7 +11,6 @@ manao             = 18
 manaoio           = 16
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "pattern-integrity-stress — VERBATIM handoff of the seven-axis sweep that stressed the whole shape before locking it. THE FIVE THAT CHANGE IT: Keyhive built the convergent claim ONCE and concurrent membership ops WEDGE THE GROUP PERMANENTLY (and one bug does not reproduce at small group sizes, which the ladder grows past); retrofitting an identity waist is measurably impossible (Matrix, 8 years, 7 MSCs, zero merged, while room versions moved four times); the one study of exactly this population found ZERO multi-profile adoption and a switcher that SIGNALS; nothing shipped has a management chain that never bottoms out in a person; and Briar REJECTED the blind veil in writing because it leaks at the sync layer. Plus Beck's Hourglass Theorem — you do not pick the waist, you pick N — and the mycelium grounding split in two, where the sub-claim analogies lean on has no peer-reviewed evidence."
 revised-on        = "2026-09-04"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/pattern-integrity-stress"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The shape, stressed before it locks
 
@@ -30,9 +29,9 @@ Seven parallel investigations against the whole pattern-integrity — the unboun
 
 ⚠ ''FOUR INSTRUMENT-LIES CAUGHT, and two belong to the FIELD rather than to the sweep'' (#four-instrument-lies).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-convergent-claim-wedges >>
+<<~ ahu #the-convergent-claim-wedges>>
 
 !! ★ The convergent claim has been built once, and it WEDGES ★
 
@@ -50,9 +49,9 @@ Keyhive stands as the only system unifying revocation, membership and revision i
 >
 > ''It defers the human to a layer above. We have no layer above.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-waist-never-moves >>
+<<~ ahu #the-waist-never-moves>>
 
 !! ★ An identity waist cannot be retrofitted — measured over eight years ★
 
@@ -64,9 +63,9 @@ Seven proposals to unbind identity from server, ''all open, none merged'': remov
 
 Elsewhere the same result: a key-rotation issue ''open and dormant four years'', ''no rotation, revocation or migration mechanism exists'', and delegated signing marked //"unrecommended: adds unnecessary burden for little gain."//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-switcher-signals >>
+<<~ ahu #the-switcher-signals>>
 
 !! ★ The one study of exactly this population — zero adoption, and the switcher SIGNALS ★
 
@@ -84,9 +83,9 @@ The five practices they DID use ran ''covert and deniable'' — selective deleti
 
 ⚠ ''This cuts directly at the blind-veil switcher.'' The veil hides personas from each other; ''the SWITCHER ITSELF announces that something is hidden''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #nothing-is-rootless >>
+<<~ ahu #nothing-is-rootless>>
 
 !! ★ Custody delegates to machines. Accountability does not. ★
 
@@ -100,9 +99,9 @@ Every system runs machine-to-machine chains of arbitrary depth at runtime, ''the
 * anti-money-laundering law, applying 2027: where //"no natural persons are identified as beneficial owners"//, an entity ''shall identify the senior managing officials''. ⚠ ''A structure engineered so no chain climbs to a person does not produce "no answer" — it produces a SUBSTITUTED answer.''
 * three courts, three attachment points: ''who voted'' · ''who could still change it'' — residual capability reads as ownership · and the one case where nothing attached bought immunity ''by forfeiting every protection ownership confers''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-veil-leaks-at-sync >>
+<<~ ahu #the-veil-leaks-at-sync>>
 
 !! ★ The blind veil holds at the data layer and leaks at the sync layer — and one project REJECTED it in writing ★
 
@@ -127,9 +126,9 @@ Two issues asking for exactly the per-identity contact view, both labelled ''rej
 
 ⚠ ''And the veil is a NETWORK-layer property, not a device-layer one.'' Forensic extraction reads partial on modern devices in the ''After First Unlock'' state — and ''a persona sits AFU precisely while it is being worn''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-makes-it-lockable >>
+<<~ ahu #what-makes-it-lockable>>
 
 !! ★ You do not pick the waist. You pick N. ★
 
@@ -156,9 +155,9 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 * ''must-ignore AND ROUND-TRIP'' is the stronger variant, and our own CRDT chose it: implementations //"must preserve operations containing actions they don't support"//. ⚠ Honest negative: its binary format stands a ''draft with fixed magic bytes and no version byte''.
 * ''extend by COMPOSITION'' — a post-quantum handshake shipped both algorithms feeding one ratchet, negotiated per session.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-mycelium-splits >>
+<<~ ahu #the-mycelium-splits>>
 
 !! ★ Split the biology and the grounding changes sign ★
 
@@ -172,9 +171,9 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 
 > ''VERDICT: local, graded, cost-bound, reciprocal exchange has laboratory support and a real measured architecture. LINEAGE- or KIN-DIRECTED transfer has none.'' The one sub-claim a reviewer attacks is the one with no evidence behind it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #four-instrument-lies >>
+<<~ ahu #four-instrument-lies>>
 
 !! ⚠ Four instrument-lies, two of them the field's own
 
@@ -185,16 +184,16 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 
 ''Corrections made in place'' include a guardianship paper's date, the authorship of the petname texts, a fine's year, and a default lease value confused between two implementations. ''A sweep that corrects itself four times reads better than one that never had to.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;OCZ7yatc3yLX0ArrFZbEqAaKESRqrbdCFsSvpx0Mrwc
+<<^ code="&#x0003;">>ni:///sha-256;tpmW-5pdnT8JbLBIda8yD_FsjREwhitC2RD-s6HVCPk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

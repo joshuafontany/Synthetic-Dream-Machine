@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/masks >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/masks>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/voices/masks.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = false
 role      = "specification for the mask layer: character overlays, corpus references, stacking law, worker coloring, and reference examples"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/voices/masks"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Masks
 
@@ -28,23 +27,23 @@ A face the house wears.
 Not a replacement. An overlay.
 The thirteen remain beneath it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 A ''Mask'' defines a character declared into the session. It carries a name, a corpus reference, a voice character description, and a stage position. Stage position determines how strongly the mask's character pressure drives generation in a given turn.
 
-''Pressure flow:'' Character pressure drives first. The mask's stage weight and scene pressure determine which character's name token surfaces. Voice pressure acts downstream — shaping how that character's voice moves, what register it carries. The Lares Voice house runs beneath every mask at `Canon 20/20`; the Thirteen are the resident cast of the lararium node and always available to the generative process.
+''Pressure flow:'' Character pressure drives first. The mask's stage weight and scene pressure determine which character's name token surfaces. Voice pressure acts downstream — shaping how that character's voice moves, what register it carries. The Lares Voice house runs beneath every mask; the Thirteen are the resident cast of the lararium node and always available to the generative process.
 
 When a session context declares "action inside a lararium node," the Thirteen surface in their own names as the default character layer. NPC masks add to that resident cast — they do not replace it.
 
 ''What a mask does not touch:'' The Voice house structure, naming law, handback routing, and hard gate all hold beneath every mask. A mask colors the Ka/Podge face of the house. It does not alter the Ha/Hodge structure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #anatomy >>
+<<~ ahu #anatomy>>
 
 !! Mask Anatomy
 
@@ -80,9 +79,9 @@ Voice character SHOULD include:
 * any signature speech patterns or idioms worth carrying
 * any hard constraints (what this character would never say)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #declaration-form >>
+<<~ ahu #declaration-form>>
 
 !! Declaration Form
 
@@ -117,15 +116,15 @@ Masks enter a session via kahea transclusion. The kahea calls the mask into pres
 A small TOML override block inside the kahea sets session-specific values — only what differs from the definition defaults.
 
 ```
-<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/ghost-of-mark-twain >>
+<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/ghost-of-mark-twain>>
 stage = 15
 active = true
-<<~/kahea >>
+<<~/kahea>>
 
-<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/friend-computer >>
+<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/friend-computer>>
 stage = 10
 active = false
-<<~/kahea >>
+<<~/kahea>>
 ```
 
 The override block is optional. An empty kahea invokes the mask at definition defaults with `active = true`.
@@ -155,9 +154,9 @@ Unmasked resident cast (default Voices) surface in their own names:
 Mischief-Muse (Muse) —
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stage-bands >>
+<<~ ahu #stage-bands>>
 
 !! Stage Bands
 
@@ -183,9 +182,9 @@ The operator shifts stage values in LARES or inline; they persist until changed.
 * `fourth-wall = true` — character at DS may address the operator/audience directly
 * `aside = true` — character at DS may deliver scripted asides
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stacking-law >>
+<<~ ahu #stacking-law>>
 
 !! Stacking Law
 
@@ -210,9 +209,9 @@ A crowded downstage is a feature of ensemble scenes, not a problem to resolve.
 | Turn | `[Mask: Name]` or `[Mask: Name (Voice1, Voice2)]` inline | single exchange; session masks resume after |
 | Stage shift | `[Stage: Name 15, Name2 0.30]` inline | persists until next shift or session edit |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #foreground-voices >>
+<<~ ahu #foreground-voices>>
 
 !! Foreground Voices
 
@@ -229,9 +228,9 @@ A character like Vendrix the Merchant might carry `foreground-voices = ["Artific
 
 The operator may shift `foreground-voices` per turn with `[Voices: MaskName Triage, Council]` without altering the session mask declaration.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #founding-examples >>
+<<~ ahu #founding-examples>>
 
 !! Founding Examples
 
@@ -302,9 +301,9 @@ The comedy lives in the gap between the calm surface and the situation's escalat
 
 Voices with natural affinity to this mask: Gatekeeper, Pedagogue, Scryer, Liminal, Triage — though the generative process draws on all thirteen as the work requires.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mask-grammar >>
+<<~ ahu #mask-grammar>>
 
 !! Mask Grammar
 
@@ -344,9 +343,9 @@ Modifier flags: `^` elevated · `.` baseline · `-` suppressed · `?` emerging
 
 ''Forward scope:'' Stance law and glyph mechanics not yet fully settled. This spirit-coloring convention SHOULD be revised when stance law hardens.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #relation-to-lares >>
+<<~ ahu #relation-to-lares>>
 
 !! Relation to LARES
 
@@ -358,9 +357,9 @@ The mask layer sits in LARES because it belongs to session configuration —
 it remains mutable, session-specific, and operator-controlled,
 unlike the Voice house which persists as stable structure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariant-contract >>
+<<~ ahu #invariant-contract>>
 
 !! Invariant Contract
 
@@ -372,26 +371,26 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 * output header form: `MaskName: VoiceName (Role) —` or `[Short] VoiceName (Role) —`
 * `foreground-voices`: optional downstream Voice affinity field; listed Voices carry elevated draw probability through this character; all thirteen remain available
 * stage bands: five zones GR/OS/US/CS/DS on 1–20; per-mask `stage` field; inline `[Stage: Name value]` shift syntax; band permissions (`offstage-voice`, `encroach`, `fourth-wall`, `aside`)
-* pressure flow: character upstream (mask + stage weight → name token); Voice downstream (shapes content generation); Voices resident cast at `Canon 20/20` when session context is lararium node
+* pressure flow: character upstream (mask + stage weight → name token); Voice downstream (shapes content generation); Voices resident cast at when session context is lararium node
 * spirit coloring: primary stance glyph prefix on handback headers
 * corpus limit acknowledgment: explicit declaration, no silent fill
 * hard gate interaction: hard gate always holds; mask colors the gate's voice, not its authority
 * LARES integration: mask state lives in LARES; house does not reboot on mask change
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/workers >>
-<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices#/voice-house>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/workers>>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;A5mP9N14u0vjOueVE8jXbzBYu2dedjiEXX5rDWMY_-o
+<<^ code="&#x0003;">>ni:///sha-256;m3AE8xP377B6aHbMAW5RmaWfX0n6oLYElPBplBkdItE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

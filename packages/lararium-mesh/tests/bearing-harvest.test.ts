@@ -4,9 +4,9 @@ import { harvest, isDrifted, BEARING_STANDING } from "../src/bearing-harvest.js"
 describe("bearing-harvest parser", () => {
   it("harvests a clean local-form frame at full standing", () => {
     const text = [
-      "<<~ lares aim lar:///operator.weighs.deps -> lar:///council.options.cuts >>",
+      "<<~ lares aim lar:///operator.weighs.deps -> lar:///council.options.cuts>>",
       "Lares (Council): the work.",
-      "<<~ lares yield lar:///council.fork.named -> ? >>",
+      "<<~ lares yield lar:///council.fork.named -> ?>>",
     ].join("\n");
     const b = harvest(text);
     expect(b).not.toBeNull();
@@ -22,7 +22,7 @@ describe("bearing-harvest parser", () => {
     const text = [
       "<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps " +
         "-> lar://compita:agent@crossroads/council.options.cuts >>",
-      "<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>",
+      "<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ?>>",
     ].join("\n");
     const b = harvest(text)!;
     expect(b.driftFlags).toContain("session-form");
@@ -31,14 +31,14 @@ describe("bearing-harvest parser", () => {
   });
 
   it("flags + downgrades a two-term arity drift", () => {
-    const b = harvest("<<~ lares aim lar:///two.terms -> x >>\n<<~ lares yield lar:///two.terms -> ? >>")!;
+    const b = harvest("<<~ lares aim lar:///two.terms -> x>>\n<<~ lares yield lar:///two.terms -> ?>>")!;
     expect(b.driftFlags).toContain("arity:2");
     expect(b.standing).toBe(BEARING_STANDING.arityDrift);
     expect(isDrifted(b)).toBe(true);
   });
 
   it("grades a partial frame (aim only) low and leaves yield null", () => {
-    const b = harvest("<<~ lares aim lar:///operator.weighs.deps -> lar:///council.options.cuts >>")!;
+    const b = harvest("<<~ lares aim lar:///operator.weighs.deps -> lar:///council.options.cuts>>")!;
     expect(b.driftFlags).toContain("frame:no-yield");
     expect(b.standing).toBe(BEARING_STANDING.partialFrame);
     expect(b.yieldUri).toBeNull();
@@ -50,13 +50,13 @@ describe("bearing-harvest parser", () => {
   });
 
   it("grades a frame with no parseable lar: URI", () => {
-    const b = harvest("<<~ lares aim somewhere over there -> the role >>")!;
+    const b = harvest("<<~ lares aim somewhere over there -> the role>>")!;
     expect(b.driftFlags).toContain("root:unparsed");
     expect(b.standing).toBe(BEARING_STANDING.rootUnparsed);
   });
 
   it("preserves a drifted URI verbatim — never lowercases", () => {
-    const b = harvest("<<~ lares aim lar:///Operator.Weighs.Deps -> ROLE >>\n<<~ lares yield x -> ? >>")!;
+    const b = harvest("<<~ lares aim lar:///Operator.Weighs.Deps -> ROLE>>\n<<~ lares yield x -> ?>>")!;
     expect(b.aimUri).toContain("Operator.Weighs.Deps");
   });
 });

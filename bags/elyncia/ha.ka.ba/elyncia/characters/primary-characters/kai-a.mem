@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a>>
 ```toml meta
 cacheable  = false
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/kai-a.mem"
 l-space    = "adjacent"
 mana       = 12
 manao      = 12
 manaoio    = 11
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "primary character — Kai ʻĀ, the prismatic elf warrior-ranger kaiju-stalker (Kai's PC); build approved, lifepath open for Session 0.1 talk-story"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/kai-a"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Kai ʻĀ ~ Prismatic Elf Warrior-Ranger, Kaiju Stalker
 
@@ -37,9 +35,9 @@ Her mount, ''Patches'' the grimalkin-lynx, rides in her own meme:
 ''Lifepath:'' OPEN — closes at the Session 0.1 table by lifepath-life talk-story,
 co-narrated in-scene. Nothing below pre-empts what Kai speaks there.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-build >>
+<<~ ahu #the-build>>
 
 !! The Build
 
@@ -60,9 +58,9 @@ warning" (`03:692`) · "voices like honey poured through crystal" (`03:698`). Wh
 variant (if any) she carries — Void Envoy · Glass-Mask Courtier · Shadow Elf · none —
 stays a table question.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #threads >>
+<<~ ahu #threads>>
 
 !! Open Threads (Provisional — the table decides)
 
@@ -76,17 +74,17 @@ stays a table question.
   visually" — Ranger = wilderness / hunt / kaiju-scale threat reading; Aki = shrine /
   threshold / veil. Hold the separation in every render.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-q5k-qwRZPUov9vnd4BKANd5bGfa4wgfeHwOwkO14zc
+<<^ code="&#x0003;">>ni:///sha-256;FOLuTSLaRkBrl-Y3ZFSKEY2VRyEWKeEg46lqynTfVXU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

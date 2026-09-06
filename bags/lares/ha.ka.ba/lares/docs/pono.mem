@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for protocol reference, law-adjacent explanation, and stable operator guidance"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,20 +15,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Pono Docs
 
 Not invariant law.
 This shelf holds explanatory protocol docs, migration notes, and operator-facing reference surfaces behind the pono invariants.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tree >>
+<<~ ahu #tree>>
 
 !! Tree
 
@@ -40,18 +39,18 @@ Use this branch for:
 * migration history
 * operator-facing reference material that should not burden invariant cores
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/lar-uri>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;oDoNHCwENqRwXm0AX0FD3Aj23u0LF6HeZjwtDBlPZTY
+<<^ code="&#x0003;">>ni:///sha-256;Znz7dGamGC2lZ94PHDitHsgHiRom5gHDTDrnfs25iKk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

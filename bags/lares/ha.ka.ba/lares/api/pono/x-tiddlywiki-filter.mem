@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/x-tiddlywiki-filter.mem"
@@ -8,7 +8,6 @@ grammar-key = "x-tiddlywiki-filter"
 guest-mime  = "text/x-tiddlywiki-filter"
 mana        = 18
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "pointer meme: x-tiddlywiki-filter is fully implemented by wikitext-filter; this meme routes to the canonical extension"
 tags        = ["api/pono/meme"]
@@ -16,11 +15,11 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/x-tiddlywiki-filter"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! x-tiddlywiki-filter
 
@@ -33,9 +32,9 @@ is the canonical Lararium implementation. It implements the complete
 `x-tiddlywiki-filter` surface and extends it with operators native to the
 pranala data model. This meme is the pointer; that meme is the law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-is-implemented >>
+<<~ ahu #what-is-implemented>>
 
 !! What Is Implemented
 
@@ -59,9 +58,9 @@ tiddler). Filters work the same way; the labels change.
 | `all[tiddlers]` | `all[memes]` (or `all[tiddlers]` — both accepted) |
 | `is[system]` | `[toml:l-space[system]]` preferred; `is[system]` accepted |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #extensions >>
+<<~ ahu #extensions>>
 
 !! Extensions in wikitext-filter
 
@@ -81,9 +80,9 @@ emit a diagnostic. New authoring should use the Lararium forms above.
 
 See the full spec: `lar:///ha.ka.ba/lares/api/pono/wikitext-filter`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invocation >>
+<<~ ahu #invocation>>
 
 !! Invocation
 
@@ -93,16 +92,16 @@ Two ways to use this grammar in a carrier:
 as `x-tiddlywiki-filter` / `wikitext-filter` automatically:
 
 ```text
-<<~ wai [tag[invariant]sort[title]] >>
-<<~ huli [toml:l-space[grammar]] as item >>
-<<~ ui [edge:family[control]role[has]] >>
+<<~ wai [tag[invariant]sort[title]]>>
+<<~ huli [toml:l-space[grammar]] as item>>
+<<~ ui [edge:family[control]role[has]]>>
 ```
 
 ''Block'' — via `hana` with an explicit grammar key when the expression is
 multi-line or needs a named degradation posture:
 
 ````text
-<<~ hana #work >>
+<<~ hana #work>>
 ```toml
 grammar      = "x-tiddlywiki-filter"
 context      = "[self[]]"
@@ -111,24 +110,24 @@ result-shape = "set"
 ```
 
 tag[invariant]sort[title]
-<<~/hana >>
+<<~/hana>>
 ````
 
 The grammar keys `"x-tiddlywiki-filter"` and `"wikitext-filter"` are
 interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wikitext-filter >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wikitext-filter>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;IQDuAJ21C6fwjDrw1zPtbNDEGfhesXR9NufGGA00P7A
+<<^ code="&#x0003;">>ni:///sha-256;fTwfvGd_WPSO_my4cPvzkHJjnL6F-8ffwILKnvHrbvM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

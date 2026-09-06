@@ -5,9 +5,9 @@
 let buf = "";
 
 const DRAWER_CONTENT =
-  "<<~ lares aim lar:///operator.weighs.deps -> lar:///council.options.cuts >>\n" +
+  "<<~ lares aim lar:///operator.weighs.deps -> lar:///council.options.cuts>>\n" +
   "Lares (Council): the work.\n" +
-  "<<~ lares yield lar:///council.fork.named -> ? >>";
+  "<<~ lares yield lar:///council.fork.named -> ?>>";
 
 process.stdin.setEncoding("utf8");
 process.stdin.on("data", (d) => {

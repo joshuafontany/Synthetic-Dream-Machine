@@ -5,23 +5,21 @@ author: ha.ka.ba
 license: TBD
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/skill-pono-template >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/skill-pono-template>>
 ```toml meta
-confidence         = 10
 implements         = ["lar:///ha.ka.ba/api/pono/meme", "lar:///ha.ka.ba/api/pono/loci"]
 mana               = 11
 manao              = 12
 manaoio            = 8
-register           = "Synthesis"
 role               = "skill template, verification authoring guide, and pre/post-MCP implementation roadmap"
 skill-package-root = "ha-ka-ba/api/pono/skill-*.md"
 type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "lares_research/skill-pono-template"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Skill Package Template
 
@@ -35,13 +33,13 @@ The ''inner layer'' follows the memetic-wikitext standard — TOML `#meta` block
 
 A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
 
-<<~ ahu #skill-body-open >>
+<<~ ahu #skill-body-open>>
 
 Skill template opens the verification authoring stream here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #phase-map >>
+<<~ ahu #phase-map>>
 
 !! Phase Map
 
@@ -49,9 +47,9 @@ Skill template opens the verification authoring stream here.
 
 A verification skill gathers the target meme surface, classifies element presence against declared invariants, decides pass/fail per invariant, prepares a typed conformance report, crosses the report threshold into session state, and judges residue and repair paths.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dual-surface >>
+<<~ ahu #dual-surface>>
 
 !! Dual Surface: SKILL.md + Memetic-Wikitext
 
@@ -87,35 +85,35 @@ invariants = ["[invariant-1]", "[invariant-2]"]
 
 Pass/fail surface belongs in the skill's prose result contract.
 
-Comment-line `ahu` markers MAY group the `#meta` TOML into agent-operator friendly sections. The canonical grouping follows `# <<~ ahu #meta-ha "structure" >>`, `# <<~ ahu #meta-ka "detail" >>`, and `# <<~ ahu #meta-ba "flow" >>`, each closed by `# <<~/ahu >>`.
+Comment-line `ahu` markers MAY group the `#meta` TOML into agent-operator friendly sections. The canonical grouping follows `# <<~ ahu #meta-ha "structure">>`, `# <<~ ahu #meta-ka "detail">>`, and `# <<~ ahu #meta-ba "flow">>`, each closed by `# <<~/ahu>>`.
 
-<<~ ahu #dual-surface-ha >>
+<<~ ahu #dual-surface-ha>>
 
 !!!! Dual Surface / ha
 
 Dual-surface-ha holds the identity domain: the YAML frontmatter carries the agentskills.io runtime identity. The TOML `#meta` carries the memetic-wikitext constitutional identity. Neither replaces the other. A skill that carries only YAML lacks law standing. A skill that carries only TOML `#meta` cannot load progressively through agent runtimes. Both surfaces must appear and agree on name, role, and coverage.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dual-surface-ka >>
+<<~ ahu #dual-surface-ka>>
 
 !!!! Dual Surface / ka
 
 Dual-surface-ka governs the agreement check procedure between the two surfaces. The YAML `name` and the TOML `name` should agree (modulo YAML hyphen vs TOML dot conventions). The YAML `description` and the TOML `description` should carry the same essential claim — the YAML form serves agent startup (~100 tokens); the TOML form may run longer and more precise. Description disagreement between surfaces counts as a conformance flag.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dual-surface-ba >>
+<<~ ahu #dual-surface-ba>>
 
 !!!! Dual Surface / ba
 
 Dual-surface-ba governs authoring posture: write the YAML `description` first, as the constraint. The TOML `description` expands it. If you cannot write a one-sentence YAML description that makes an agent's activation decision clear, the skill's scope still lacks definition precise enough to implement.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariant-declaration >>
+<<~ ahu #invariant-declaration>>
 
 !! Invariant Declaration
 
@@ -133,8 +131,8 @@ invariants = [
   "R3: #meta block places manaoio and confidence immediately below version",
   "R3: after the ahu close/reopen marker, canonical detail order reads mana, manao",
   "R3: register field present immediately after meme-type",
-  "R6: at least one <<~STX; ui ...? -> ...#... >> query throat present",
-  "O7: all <<~ loulou lar:// >> links outside fenced blocks point at addresses resolved or wrapped as OPTIONAL HTML comments",
+  "R6: at least one <<~STX; ui ...? -> ...#...>> query throat present",
+  "O7: all <<~ loulou lar://>> links outside fenced blocks point at addresses resolved or wrapped as OPTIONAL HTML comments",
 ]
 ```
 
@@ -151,33 +149,33 @@ A fail result should name: which invariant failed, what the skill observed at th
 
 Beyond pass/fail, a skill may return `status = "skip"` when the target meme lacks the element the invariant governs entirely — for instance, checking `O3 examples section present` against a skeleton meme still short of the optional-elements threshold. Skip does not count as pass. Skip should note the element class as absent and the rating consequence.
 
-<<~ ahu #invariant-declaration-ha >>
+<<~ ahu #invariant-declaration-ha>>
 
 !!!! Invariant Declaration / ha
 
 Invariant-declaration-ha holds the invariant identity domain: what makes a claim a checkable invariant versus a vague quality impression. The key test uses falsifiability — if an agent cannot determine pass/fail by reading the target meme surface, the claim does not yet qualify as an invariant; it reads instead as an aspiration. Aspirations belong in `residue`, not in `invariants`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariant-declaration-ka >>
+<<~ ahu #invariant-declaration-ka>>
 
 !!!! Invariant Declaration / ka
 
 Invariant-declaration-ka governs the check procedure per invariant. For each declared invariant: (1) identify the exact element site (line, locus, TOML key); (2) compare observed surface against the declared expected state; (3) emit pass, fail, or skip with observed surface captured. A skill that checks all invariants in a single undifferentiated scan loses per-invariant traceability. Scan in invariant order, emit in invariant order.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariant-declaration-ba >>
+<<~ ahu #invariant-declaration-ba>>
 
 !!!! Invariant Declaration / ba
 
 Invariant-declaration-ba governs the authoring motion: start with the most structurally load-bearing invariant, not the easiest to check. If R1 fails, R3 may lose meaning. Order invariants so that an early failure provides maximum information about the meme's state. A skill that surfaces "R9 missing" when "R1 missing" likewise applies buries the primary signal.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pre-mcp >>
+<<~ ahu #pre-mcp>>
 
 !! Pre-MCP Implementation Patterns
 
@@ -214,14 +212,14 @@ def check-r1(lines: list[str]) -> InvariantResult:
     return InvariantResult(
         "R1", "fail",
         observed=lines[0].strip() if lines else "(empty file)",
-        repair="Add <<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext >> as line 1"
+        repair="Add <<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext>> as line 1"
     )
 
 def check-r3-rating-fields(content: str) -> InvariantResult:
     """R3: structure ahu carries manaoio/confidence and detail ahu carries mana/manao in canonical order."""
     required = ["manaoio", "confidence", "mana", "manao"]
     # Extract #meta TOML block
-    m = re.search(r'<<~ ahu #meta >>.*?```toml(.*?)```', content, re.DOTALL)
+    m = re.search(r'<<~ ahu #meta>>.*?```toml(.*?)```', content, re.DOTALL)
     if not m:
         return InvariantResult("R3-ratings", "skip", observed="no #meta TOML block found")
     toml-text = m.group(1)
@@ -261,13 +259,13 @@ def check-r3-register(content: str) -> InvariantResult:
 
 def check-r6(content: str) -> InvariantResult:
     """R6: at least one query throat present."""
-    throats = re.findall(r'<<~\x05 ui \S+\? -> \S+ >>', content)
+    throats = re.findall(r'<<~\x05 ui \S+\? -> \S+>>', content)
     if throats:
         return InvariantResult("R6", "pass", observed=f"{len(throats)} query throat(s) found")
     return InvariantResult(
         "R6", "fail",
         observed="no query throats found",
-        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#/meta >> query throat"
+        repair="Add at least one <<~STX; ui meme? -> lar:///ha.ka.ba/api/NAME#/meta>> query throat"
     )
 
 CHECKS = [check-r1, check-r3-rating-fields, check-r3-register, check-r6]
@@ -336,12 +334,12 @@ function checkR1(content: string): InvariantResult {
   return {
     id: "R1", status: "fail",
     observed: firstLine,
-    repair: "Add <<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext >> as line 1"
+    repair: "Add <<!DOCTYPE lar:///ha.ka.ba/api/pono/memetic-wikitext>> as line 1"
   };
 }
 
 function checkQueryThroats(content: string): InvariantResult {
-  const matches = content.match(/<<~\u0005 ui \S+\? -> \S+ >>/g) ?? [];
+  const matches = content.match(/<<~\u0005 ui \S+\? -> \S+>>/g) ?? [];
   if (matches.length > 0) {
     return { id: "R6", status: "pass", observed: `${matches.length} query throat(s)` };
   }
@@ -382,35 +380,35 @@ SKILL ACTIVATION — verify [target-law] conformance
 
 The agent-native pattern offers the lowest-cost path to first-skill yield. Write it first; extract to CLI or MCP only when the verification logic becomes too complex for prompted procedure.
 
-<<~ ahu #pre-mcp-ha >>
+<<~ ahu #pre-mcp-ha>>
 
 !!!! Pre-MCP / ha
 
 Pre-MCP-ha holds the implementation domain: the three available substrates (agent-native, CLI subprocess, hybrid) and their identity boundaries. Agent-native runs in the agent's own context. CLI subprocess runs in a shell with its own parse environment. Hybrid splits mechanical from semantic. The choice of substrate governs what the skill can and cannot verify without ambiguity.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pre-mcp-ka >>
+<<~ ahu #pre-mcp-ka>>
 
 !!!! Pre-MCP / ka
 
 Pre-MCP-ka governs implementation detail: the agent-native pattern offers the cheapest path but the least reproducible one (the agent's parse behavior may vary). The CLI subprocess pattern offers the most reproducible path but requires a maintained script. For invariants that parse TOML or count sigil occurrences mechanically, CLI subprocess stays strongly preferred. For invariants that require interpretive judgment about local prose meaning, agent-native remains the only viable substrate.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pre-mcp-ba >>
+<<~ ahu #pre-mcp-ba>>
 
 !!!! Pre-MCP / ba
 
 Pre-MCP-ba governs implementation motion: start with two or three mechanical invariants (R1, R3 ratings, R6 throats) implemented as CLI subprocess. Add semantic invariants (O1 phase prose quality) as agent-native supplements. Do not try to build a complete verification suite before any invariant receives verification against a real meme. One working invariant check with a real pass/fail result outweighs ten declared invariants with no implementation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/api/pono/skill-template-pre-mcp >>
+<<~ loulou lar:///ha.ka.ba/api/pono/skill-template-pre-mcp>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #post-mcp >>
+<<~ ahu #post-mcp>>
 
 !! Post-MCP Roadmap
 
@@ -465,49 +463,49 @@ For full-graph conformance sweeps (all memes against all registered invariants),
 | Manual `lar:` → file path derivation | MCP Resource: `lar:///ha.ka.ba/api/...` | When URI routing gap causes agent friction |
 | Full-graph scan via multiple agent calls | MCP async scan tool | When graph exceeds ~10 memes |
 
-<<~ ahu #post-mcp-ha >>
+<<~ ahu #post-mcp-ha>>
 
 !!!! Post-MCP / ha
 
 Post-MCP-ha holds the MCP identity domain: what the MCP server counts as in this system. It does not replace the skill body; it serves as a runtime substrate that makes mechanical invariant checks reproducible, URI routing explicit, and semantic judgment callable. The skill body remains authoritative for what to check; MCP governs how those checks execute.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #post-mcp-ka >>
+<<~ ahu #post-mcp-ka>>
 
 !!!! Post-MCP / ka
 
 Post-MCP-ka governs the migration procedure. Do not migrate to MCP before Phase 1 tools exist and at least one real skill package (e.g. `skill-parser.md`) receives validation against real memes. Migration before validation produces MCP tools that go wrong in ways the tool surface hides. Validate the invariant logic first in CLI or agent-native form, then lift into MCP.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #post-mcp-ba >>
+<<~ ahu #post-mcp-ba>>
 
 !!!! Post-MCP / ba
 
 Post-MCP-ba governs the authoring motion across migration: keep the skill body current even after MCP tools exist. The skill body remains the law; the MCP tool serves as the implementation. An agent that reads the skill body should still perform the verification without the MCP server, at lower fidelity but without aborting. The MCP server should raise fidelity, not gate execution.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/api/pono/skill-template-post-mcp >>
+<<~ loulou lar:///ha.ka.ba/api/pono/skill-template-post-mcp>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body-close >>
+<<~ ahu #body-close>>
 
 Skill template closes the verification authoring stream here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
 * `lar:///ha.ka.ba/api/pono/memetic-wikitext`
 * `lar:///ha.ka.ba/api/pono`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Ifkz5xvxiviyz5366A8j6_ICDr-siGxY7D3ePyhBhco
+<<^ code="&#x0003;">>ni:///sha-256;mIND3rwDCn4zgWT_O8Np061mGDm2GKKHxI2ix7W6L0Q
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

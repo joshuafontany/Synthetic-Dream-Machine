@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/filters/toml-field >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/filters/toml-field>>
 ```toml meta
 body-sha256   = "be6b13cb4d87d73e9447e498196e8ab7d28344a46a5dc322727e4cba7d201158"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/filters/toml-field.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/filters/toml-field"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: registerTomlFieldOperator — heleuma ka"
 source-symbol = "registerTomlFieldOperator"
@@ -17,28 +16,28 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/filters/toml-field"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `toml:fieldName[value]` — returns tiddlers where `fields[fieldName] === value`. Used for TOML-indexed field queries.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/toml-field" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/filters/toml-field >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/filters/toml-field>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kxQvADzu8wJHNPZBsGq8h-3LipuRGZfVlVfebywj6MM
+<<^ code="&#x0003;">>ni:///sha-256;D1cLtudSxfKH3tbJaKd_J7MVnXsCJNETOgCu1L-WPpE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

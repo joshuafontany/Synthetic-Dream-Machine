@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/CRYPTO >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/CRYPTO>>
 ```toml meta
 cacheable  = true
-confidence = 19
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/CRYPTO.mem"
 hydrate    = true
 l-space    = "adjacent"
 mana       = 18
 manao      = 18
 manaoio    = 18
-register   = "Synthesis-Canon"
 retain     = true
 role       = "web crypto provider boundary doctrine — canonical bytes, digest, randomness"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/CRYPTO"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #doctrine-header >>
+<<~ ahu #doctrine-header>>
 
 !! Web Crypto Provider Doctrine
 
@@ -30,9 +28,9 @@ Portable code depends on a minimal `CryptoProvider` interface.
 Runtime adapters call platform Web Crypto (`globalThis.crypto`).
 No hand-rolled hash functions. No djb2. No custom PRNG. No homegrown auth.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provider-interface >>
+<<~ ahu #provider-interface>>
 
 !! Provider Interface
 
@@ -54,9 +52,9 @@ export interface CryptoProvider extends DigestProvider, RandomProvider {}
 All digest operations return `Promise<Uint8Array>`. Callers must be async.
 `digest()` takes bytes, not strings, not objects.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #web-crypto-implementation >>
+<<~ ahu #web-crypto-implementation>>
 
 !! Platform Implementation
 
@@ -87,9 +85,9 @@ Node.js: use `globalThis.crypto` (available since Node 19) or `node:crypto.webcr
 Do not use `node:crypto.createHash()` in portable (`lararium-mesh`) code.
 Browser: standard `window.crypto.subtle`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #canonical-bytes >>
+<<~ ahu #canonical-bytes>>
 
 !! Canonical Bytes Policy
 
@@ -126,9 +124,9 @@ Rules:
 * Newline policy must be explicit for text-file receipts (normalize to LF or document the choice).
 * `SubtleCrypto.digest()` is non-streaming. For inputs > 50 MB, document the buffering policy.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #digest-policy >>
+<<~ ahu #digest-policy>>
 
 !! Digest Policy
 
@@ -146,9 +144,9 @@ Known test vector:
 SHA-256("abc") = ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #randomness-policy >>
+<<~ ahu #randomness-policy>>
 
 !! Randomness Policy
 
@@ -166,9 +164,9 @@ Notes:
 * For key generation, prefer SDK-managed key generation or `subtle.generateKey()`
   at a reviewed boundary — do not roll key material from random bytes by hand.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #prohibited >>
+<<~ ahu #prohibited>>
 
 !! Prohibited Crypto Work
 
@@ -186,9 +184,9 @@ The `packages/lararium-web/src/crypto-shim.ts` djb2 implementation is
 ''deprecated'' and must be replaced with `webDigest()` calls once
 `compileBootReceipt()` is made async. See Milestone 4.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-path >>
+<<~ ahu #migration-path>>
 
 !! Migration: crypto-shim.ts → webDigest()
 
@@ -206,17 +204,17 @@ Target state (Milestone 4):
 # Add known-vector test: SHA-256("abc") = `ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad`
 # Verify boot receipts match between Node and browser builds
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ pranala #to-roadmap from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=relation role=documents >>
-<<~ pranala #to-auth from=? -> to=lar:///LARARIUM-NODE/AUTH-ATPROTO family=relation role=sibling >>
+<<~ pranala #to-roadmap from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=relation role=documents>>
+<<~ pranala #to-auth from=? -> to=lar:///LARARIUM-NODE/AUTH-ATPROTO family=relation role=sibling>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;lcyWWiviVHw0Tlh_jCVG3YXBSDyjTIE594Dd3uF4ADY
+<<^ code="&#x0003;">>ni:///sha-256;yNZv2gsW0t8Jy00hBWM4FXnIJ08phOPmISmRiv7ls1Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hoolele >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hoolele>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/hoolele.mem"
@@ -8,7 +8,6 @@ l-space     = "stable"
 mana        = 16
 manao       = 16
 namespace   = "&#x2299;"
-register    = "Synthesis"
 retain      = true
 role        = "unstructured escape-hatch sigil — hoolele as the flight that does not return; Verse spawn: new task root, outlives creating scope, explicit Cancel() required; English alias: \\spawn; completes the six-operator concurrency ontology"
 status-date = "2026-05-15"
@@ -17,9 +16,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/hoolele"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Hoolele
 
@@ -43,9 +42,9 @@ task tree. `spawn` exits the tree entirely, creating a new root. It hides the
 
 Concurrency runtime pending (async-first sprint). Current tiddler registers grammar only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -60,9 +59,9 @@ A hoolele task MUST reserve itself for cases beyond `lele` (`\branch`).
   Prefer `lele` for any work that can be abandoned if the parent scope cancels.
 A hoolele edge MUST carry a target URI as its first argument.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #when-to-use >>
+<<~ ahu #when-to-use>>
 
 !! When to Use
 
@@ -85,9 +84,9 @@ Example: the CRDT sync loop, the WebSocket keep-alive, the Keyhive heartbeat.
 ''All other cases use `lele` (`\branch`).'' The tree stays clean; cancellation
 remains predictable; resource leaks are prevented.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #six-operator-table >>
+<<~ ahu #six-operator-table>>
 
 !! Six-Operator Concurrency Table
 
@@ -107,23 +106,23 @@ concurrency blocks) all create children in the task tree. `hoolele`/`spawn` is t
 one unstructured escape. It hides the `<suspends>` effect from its caller — this is
 the formal mechanism that allows it to create a new root with no parent scope.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ hoolele lar:///target/uri >>
-<<~ \spawn lar:///target/uri >>
+<<~ hoolele lar:///target/uri>>
+<<~ \spawn lar:///target/uri>>
 ```
 
 Returns a `task(t)` handle. The caller MUST retain it for later `Cancel()` or
 `Await()`. Discarding the handle loses the ability to cancel or observe the task.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lararium-use-cases >>
+<<~ ahu #lararium-use-cases>>
 
 !! Lararium-Specific Use Cases
 
@@ -142,17 +141,17 @@ The `MemeSyncAdaptor` boundary IS the `hoolele` boundary in the Lararium stack:
 work above it (wiki reactions, widget handlers) uses structured concurrency;
 work below it (CRDT, network) uses `hoolele`-style spawn semantics in TS.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lele >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lele>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;f39c57qtqmAYRnAWbYVYM3Ssh2kVMKBX3WxGjw4MZiE
+<<^ code="&#x0003;">>ni:///sha-256;wklY-Hy4Sj0l-QAiypk3QxmmmzCymHJfM7KfQEh2Pss
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

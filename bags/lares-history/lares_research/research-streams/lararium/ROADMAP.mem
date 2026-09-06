@@ -1,21 +1,19 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/ROADMAP >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/ROADMAP>>
 ```toml meta
 cacheable  = false
-confidence = 18
 file-path  = "bags/lares-history/lares_research/research-streams/lararium/ROADMAP.mem"
 mana       = 18
 manao      = 17
 manaoio    = 16
-register   = "Synthesis"
 retain     = true
 role       = "work journey log — migration roadmap and milestone log for Lararium Node; M20 COMPLETE: bag ID = lar: URI everywhere, LarariumDocStore generic, corpusBagId=corpusLarUri, catalog bag in both peers, fields:{bag} dup stripped, room bag = roomLarUri, MemeSyncAdaptor uses room URI; M21 OPEN: draft lar: URI, room self-ref tiddler, catalog.corpora retire, connect screen, TW5 recipe from CompositeStore topology"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "lares_research/research-streams/lararium/ROADMAP"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Lararium Node — Roadmap
 
@@ -23,7 +21,7 @@ This docs meme preserves the full research-roadmap detail for migrating Lararium
 It adds explicit ahu markers around the major research sections so the file can act as a navigable docs meme rather than a compressed summary.
 
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ inventory the Python MCP surface, branch-local graph/compiler work, launcher configs, tests, and architecture docs before porting
 ⏿ orient migration around an isomorphic TypeScript kernel plus adapters, not a monolithic MCP rewrite
@@ -32,9 +30,9 @@ It adds explicit ahu markers around the major research sections so the file can 
 ⤴ verify with golden fixtures, branch parser/graph tests, protocol smoke tests, hash determinism, and no-write gates
 ↺ keep residue visible: MCP SDK churn, protocol-version drift, FFZ semantics, hostful session resolution, write-back gates, and missing formal lararium-node spec
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m13-session-open-2026-05-02 >>
+<<~ ahu #m13-session-open-2026-05-02>>
 
 !! M13 Session Open — 2026-05-02 (Sprint 0–1 / Web2 Sidecar Rip + MemeGraph Rebuild)
 
@@ -44,7 +42,7 @@ It adds explicit ahu markers around the major research sections so the file can 
 Session 5 opened with the full web2 sidecar rip complete from the previous session: 19 dead web2-era source files replaced by typed stubs; 19 `.web2.ts` sidecars created (verbatim originals, excluded from tsc). All 5 tsconfigs updated with `*.web2.ts` exclusions. The `tsc` surface confirmed exactly four rebuild-target errors and nothing else. Three rounds of talk-story orient ran — API surface friction, FFZ web3 redesign direction, Verse UEFN 5.6+ alignment, grammar boot model, changeset scale, graph co-existence, datablob inventory — all decisions locked.
 
 Two new design dimensions unlocked mid-session:
-# ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#/fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment >>` sigils. `lar:kumu:UUID` proposed scheme retired.
+# ''Kumu instance URI scheme'' — clarified: ALL resources use `lar:` URI fragment syntax (`lar:///type-path#/fragment`). Two identity layers coexist per device spawn: user-selected name fragment + auto-UUID fragment. Both stored as separate tiddlers in the room Automerge doc. Declared in type meme body via `<<~ kahea kau #fragment>>` sigils. `lar:kumu:UUID` proposed scheme retired.
 # ''SESSION.md'' — written as the canonical session handoff crystal; three new OODA-HA ahu sections recorded.
 
 ⏿ ''Orient:''
@@ -111,9 +109,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ one rebuild-target (Memetic
 * `system` + `projection` bag store impls: still pending (D stubs)
 * Milestone F (presence split): 0%, not started
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m14-session-cont-2026-05-02 >>
+<<~ ahu #m14-session-cont-2026-05-02>>
 
 !! M14 Session Cont — 2026-05-02 (Sprint 2–4 / Pranala Rename + Verse Device Model)
 
@@ -198,9 +196,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 * Milestone F (presence split): 0%, not started
 * Keyhive UUID derivation for `KumuInstanceRef.uuidFragment`: post-Sprint 6
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m14-uefn-name-pass-2026-05-02 >>
+<<~ ahu #m14-uefn-name-pass-2026-05-02>>
 
 !! M14 UEFN Name Pass — 2026-05-02 (Role/Field Rename to Verse 5.6+ Canonical English)
 
@@ -260,9 +258,9 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 * Sprint 5 complete ✓ — see `#m14-sprint5-meme-sync-adaptor-2026-05-02` below
 * Grammar alignment pass (future): `meme-grammar.ts` and grammar definition files may need a separate pass to ensure Hawaiian sigil names align with UEFN vocabulary throughout the full grammar spec
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m14-sprint5-meme-sync-adaptor-2026-05-02 >>
+<<~ ahu #m14-sprint5-meme-sync-adaptor-2026-05-02>>
 
 !! M14 Sprint 5 — 2026-05-02 (MemeSyncAdaptor / TW5 Write-Back Gate)
 
@@ -304,9 +302,9 @@ cd packages/lararium-tw5 && npx tsc --noEmit  # ✓ ZERO errors
 * Keyhive UUID derivation for `KumuInstanceRef.uuidFragment`: post-Sprint 6
 * ''Web3 rip-out Sprint (this session):'' see `#m15-web3-rip-sprint-2026-05-02` below
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m15-web3-rip-sprint-2026-05-02 >>
+<<~ ahu #m15-web3-rip-sprint-2026-05-02>>
 
 !! M15 Web3 Rip Sprint — 2026-05-02 (TW5Engine + Filter Operators + Web2 Sidecar Sweep)
 
@@ -399,9 +397,9 @@ cd packages/lararium-app  && npx tsc --noEmit  # ✓ ZERO errors (tldraw/sw.ts p
 * Heleuma `body-sha256` anchors for filter operator meme files: each `filters/*.ts` becomes a self-describing code-snippet meme
 * `LarDiskProjector` still in `@lararium/tw5` — move to `@lararium/node` (deferred, needs package split)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m15b-standards-memes-2026-05-02 >>
+<<~ ahu #m15b-standards-memes-2026-05-02>>
 
 !! M15b Standards Memes + Projection Bus — 2026-05-02
 
@@ -447,9 +445,9 @@ pnpm -r --filter "@lararium/app"  typecheck  # ✓ (tldraw/sw.ts pre-existing on
 * `LarHUD` floating dockable React frame not yet scaffolded
 * Keyhive WASM slot: `LarPeer.keyhive?: KeyhiveSlot` opaque optional — awaits stable WASM API
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m16-web3-peer-larhud-2026-05-02 >>
+<<~ ahu #m16-web3-peer-larhud-2026-05-02>>
 
 !! M16 Web3 Peer Boot + LarHUD + web2 Purge — 2026-05-02
 
@@ -519,9 +517,9 @@ git log --oneline -5
 * Node server entrypoint: `openNodeLarPeer` boots but nothing calls it
 * `LarDiskProjector` move: `@lararium/tw5` → `@lararium/node`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m12-session-open-2026-05-01 >>
+<<~ ahu #m12-session-open-2026-05-01>>
 
 !! M12 Session Open — 2026-05-01 (Fever Sprint / FFZ Web3 Reorganization)
 
@@ -570,9 +568,9 @@ pnpm --filter @lararium/node test      # ✓ 48/48 pass
 * `tw-vm` isomorphic server-peer boot flow: server currently boots VM from `LarariumTW5` inside `bootRecipeVm` — confirm it also marks a readiness signal on the server side
 * Realm portal VMs: `projection:<id>` keys cover portal/recipe VMs — wire a test recipe that boots a second VM and lights `projection:portal-<roomId>`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #executive-summary >>
+<<~ ahu #executive-summary>>
 
 ! Migrating Lararium MCP to Lararium Node
 
@@ -599,9 +597,9 @@ This roadmap now treats the following as active migration context rather than ap
 * Live exchange records may inform interpretation and propose changes, but must not silently override invariant memes.
 * The green-jello-dinosaur bug names the Live-Session Overwrite failure mode.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #early-research-addendum >>
+<<~ ahu #early-research-addendum>>
 
 !! Early Research Addendum — Details to Preserve
 
@@ -761,9 +759,9 @@ Do not:
 * ship write-back before policy and tests
 * treat MCP success as semantic parity
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scope-assumptions >>
+<<~ ahu #scope-assumptions>>
 
 !! Scope and explicit assumptions
 
@@ -783,9 +781,9 @@ Additional assumptions now bind this roadmap:
 * Trust tier and speaker tier remain distinct; `alias:grant@host` names who speaks, not whether the claim overrides law.
 * Live-session material enters the same l-space as system files, but carries lower override authority than hostless invariant/control memes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #repo-inventory-contract >>
+<<~ ahu #repo-inventory-contract>>
 
 !! Repo inventory and the surviving contract
 
@@ -874,9 +872,9 @@ hostful live exchange records may inform or propose;
 they must not silently override hostless invariant memes.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #external-architecture-findings >>
+<<~ ahu #external-architecture-findings>>
 
 !! External architecture findings
 
@@ -933,9 +931,9 @@ lar://alias:grant@host/ha.ka.ba/lares/...   live contextual exchange record
 as distinct identities.
 Projection and MCP layers should preserve that distinction rather than normalizing hostful records into canonical hostless memes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #recommended-target-architecture >>
+<<~ ahu #recommended-target-architecture>>
 
 !! Recommended target architecture and migration plan
 
@@ -1076,9 +1074,9 @@ type LarExchangeRecord = {
 
 A hostful record can reference a canonical hostless meme, but should not become that meme without a promotion transaction.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #risks-testing-rollout >>
+<<~ ahu #risks-testing-rollout>>
 
 !! Risks, testing, and phased rollout
 
@@ -1127,9 +1125,9 @@ A practical roadmap is:
 
 The “do not do yet” list is short but important: do not embed the full TiddlyWiki runtime; do not make tldraw or Kowloon core dependencies; do not expose mutating tools or write-back flows; do not hard-commit to the MCP SDK’s experimental packaging line inside core; and do not treat browser bundle work as a reason to compromise the isomorphic-core boundary.   
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dag-rewire-2026-04-25 >>
+<<~ ahu #dag-rewire-2026-04-25>>
 
 !! DAG Rewire — mu as Invariant Boot Kernel (2026-04-25)
 
@@ -1186,9 +1184,9 @@ The dead-weight `lararium → LARES` owns edge was removed. LARES is reached onc
 
 All four implement `meme`, `loci`, and `invariant` interfaces. All four appear in the minimal boot closure at depth 3 under lararium.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-1-complete >>
+<<~ ahu #milestone-1-complete>>
 
 !! Milestone 1 — Complete (2026-04-25)
 
@@ -1204,9 +1202,9 @@ Parity baselines frozen (post DAG-rewire):
 | Full boot memes | 58 |
 | Carrier index | (matches Python) |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #deployment-targets >>
+<<~ ahu #deployment-targets>>
 
 !! Deployment Targets and Container Model
 
@@ -1239,9 +1237,9 @@ Prod containers for DreamNet services (elyncia.app, .net, and sibling domains) r
 
 `lararium-python` entry remains in all launcher configs for one-edit rollback during the transition window. Once CI confirms Node stability across two consecutive release cycles, the Python entries are removed and `lararium_mcp` moves to `_archive/`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ci-pipeline >>
+<<~ ahu #ci-pipeline>>
 
 !! CI Pipeline — Node Only
 
@@ -1280,9 +1278,9 @@ Builds the `qa` image. Runs the MCP stdio smoke against the container rather tha
 
 The MCP SDK handles version negotiation. CI smoke tests against `2025-11-25` only. The `2024-11-05` smoke case in the old Python script is not preserved — it was a sketch artifact, not a contract. If a consumer needs older protocol support, it surfaces as a deliberate adapter decision, not a CI default.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-2-scope >>
+<<~ ahu #milestone-2-scope>>
 
 !! Milestone 2 — Complete (2026-04-25)
 
@@ -1344,9 +1342,9 @@ All target outcomes delivered:
 ** `emitTldrawRecords()` accepts `pageOverride` option for multi-page emission
 ** 33 tests total in lararium-tldraw; 75 across monorepo
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tldraw-sync-arch >>
+<<~ ahu #tldraw-sync-arch>>
 
 !! tldraw Sync Architecture Decision (2026-04-26)
 
@@ -1434,9 +1432,9 @@ It is no longer the primary browser boot path.
 
 Do not ship the snapshot-injection server as the primary path. Offline mode only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-4-scope >>
+<<~ ahu #milestone-4-scope>>
 
 !! Milestone 4 — Complete (2026-04-26)
 
@@ -1503,9 +1501,9 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 * ⚠ Double-click on frame shapes → zoom-in dispatch (tldraw v4 event API)
 * ⚠ Portal shapes connecting rooms
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-5-scope >>
+<<~ ahu #milestone-5-scope>>
 
 !! Milestone 5 — In Progress (2026-04-26)
 
@@ -1553,9 +1551,9 @@ Do not ship the snapshot-injection server as the primary path. Offline mode only
 * ⚠ `/api/memes` console error: fetch hits Vite (5173), no handler — decision required: Vite proxy to serve.ts OR replace fetch with `editor.getShapes()` (target model)
 * ⚠ MCP co-location: stdio server alongside HTTP/WS server in `packages/lararium-node`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-6-scope >>
+<<~ ahu #milestone-6-scope>>
 
 !! Milestone 6 — In Progress (2026-04-27)
 
@@ -1659,9 +1657,9 @@ Do not in Milestone 6:
 * Multi-user presence / cursors
 * Single-page zoom-gated rendering (blocked on namespace collision resolution — current three-page model stays)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-6-tensegrity-close >>
+<<~ ahu #milestone-6-tensegrity-close>>
 
 !! Milestone 6 — Tensegrity Close (2026-04-27)
 
@@ -1680,9 +1678,9 @@ All eight structural gaps (T1–T8) audited against current code:
 
 Milestone 6 complete. All blocking live gaps resolved. Commentary items documented.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-7 >>
+<<~ ahu #milestone-7>>
 
 !! Milestone 7 — Meme Store Substrate (Complete 2026-04-27)
 
@@ -1729,9 +1727,9 @@ Future: extract `FAMILY_CONTRACTS` to `lares/grammars/pranala-families.md` carri
 
 ''Phase 3 (next):'' Parser itself becomes a meme. Template cascade (tldraw projection) driven by grammar memes. Canvas can edit its own renderer. Sigil rules and family contracts editable as canvas shapes, promoted via canon-MOVE (residency ACTION).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-7-grammar-extension >>
+<<~ ahu #milestone-7-grammar-extension>>
 
 !! Milestone 7 — Grammar Extension (post-M7, 2026-04-27)
 
@@ -1797,7 +1795,7 @@ After the Phase 2 session documented above, a further grammar extension session 
 
 ''New sigils registered:''
 
-* `kau` — variable binding; `<<~! kau name = val >>` = carrier-scoped (hoisted pragma); `<<~ kau name = val >>...<<~/kau >>` = block-scoped; `!` carries scope elevation promise
+* `kau` — variable binding; `<<~! kau name = val>>` = carrier-scoped (hoisted pragma); `<<~ kau name = val>>...<<~/kau>>` = block-scoped; `!` carries scope elevation promise
 * `kumu` — element type definition (`\widget` equivalent); declares a new grammar node type (distinct from `wehe` which is text/content template)
 * `papalohe` — reaction family edge sugar; //pāpālohe// (Lua martial arts: body-listening reflex, heightened reflexive awareness); UEFN device graph event wire; `trigger` property carries event name
 * `kapu` block form — added `open_pattern`/`close_pattern` alongside existing inline `pattern`
@@ -1822,9 +1820,9 @@ New primary API: `parseMemeCarrier(uri, text, grammar?) → MemeAstNode[]`. SAX-
 
 ''Test count:'' 64 → 84 (20 new tests in `grammar-phase2x.test.ts` + `parser-phase3.test.ts` covering `papalohe`, reaction family contracts, Phase 3 tree structure, parity with `parsePranalaEdges`, alias erasure, `DynamicNode`, kau scope).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-7-complete >>
+<<~ ahu #milestone-7-complete>>
 
 !! Milestone 7 — Summary
 
@@ -1840,9 +1838,9 @@ All three laws landed:
 
 ''Parity baseline change:'' `lar:///README` now resolves as a `CAPS_FILE_ROOT` to `lares/README.md`. Carrier index and full boot closure will include it from next boot. Fixture counts will increase by one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-8-scope >>
+<<~ ahu #milestone-8-scope>>
 
 !! Milestone 8 — Single-Page Zoom + kumu Template Pipeline (Complete 2026-04-28)
 
@@ -1860,7 +1858,7 @@ All three laws landed:
 * ✓ Five template carriers at `lar:///ha.ka.ba/lares/api/lararium/templates/meme-*` (in `ha.ka.ba/lares/api` namespace — no adjacent namespace)
 * ✓ `packages/lares-core/memes/api/lararium/templates/index.md` — namespace index, owns control edges to all five; wired from `lararium` meme via `#hydrate-templates` (control:owns)
 * ✓ Each template TOML body carries: `zoom-level`, `cascade` (filter predicate string), `priority`, `w`, `h`, `color`, `label`, `include-ahu`, `show-notes`, `show-carrier`, `opacity`
-* ✓ `<<~ kumu name(params) >>` / `<<~/kumu >>` direct form added to `SIGIL_SCANS` in `parser.ts` (alongside `\\widget` alias)
+* ✓ `<<~ kumu name(params)>>` / `<<~/kumu>>` direct form added to `SIGIL_SCANS` in `parser.ts` (alongside `\\widget` alias)
 * ✓ `collectKumuDefs()` + `collectKumuDefsFromGraph()` — extract kumu defs from boot closure carriers
 * ⚠ Historical: `buildKumuRegistry(artifact.kumuDefs)` → `TemplatePropsByLevel` → `shape.meta.templateProps`; active zoom layout now flows through TW5 `lar:///kumu/meme-*` tiddlers and `getZoomLayout(level)`
 * ✓ `MemeTemplateProps` extended with `zoomLevel` (self-declared level name) and `cascade` (predicate string) — stored in CRDT for future wikitext-filter path
@@ -1922,9 +1920,9 @@ Phase 3 entry condition: `lares/grammars/wikitext-filter.md` dialect carrier is 
 
 `lares/recipes/` schema. Seed per-room canvases from recipe files. RPG rooms (`ftls`, `wtf`) unblock once recipes land. Recipe carrier format: `[[memes]]` TOML array with filter expression + seed layout.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #design-decisions-kowloon-scope >>
+<<~ ahu #design-decisions-kowloon-scope>>
 
 !! Design Decisions — Kowloon Integration + Scope Principles (2026-04-27)
 
@@ -1961,9 +1959,9 @@ Device types map to `kumu` (element type definition). UEFN `@editable` propertie
 
 ''`spatial` family'' — locked as 8th pranala family (after `reaction`). Infinite canvas + portals requires spatial containment edges that are navigable, not just organizational. Roles: `contains`, `portal`, `adjacent`, `layer`. Direction: `area -> area` or `area -> portal -> area`. Load-bearing for RPG battlemap / multi-level / interlinked areas milestone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #design-decisions-law-of-5s >>
+<<~ ahu #design-decisions-law-of-5s>>
 
 !! Design Decision: Law of Fives — Invariant Scale + Phase Model
 
@@ -2020,9 +2018,9 @@ Stances carry their natural tools, but an operator may hold any tool within any 
 
 Both `STANCES` and `TOOLS` (with `TOOL_ASCII`) are const arrays in `ast.ts`. They are grammar-level invariants used by render and HUD layers; no parser wiring needed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-questions-limitations >>
+<<~ ahu #open-questions-limitations>>
 
 !! Open questions and limitationsThe largest open question is the lack of a public, formal `lararium-node` specification. I therefore treated `lararium-node` as a target architecture inferred from your brief and the repo’s own documents, not as a fully documented existing package.
 
@@ -2030,9 +2028,9 @@ I also did not inspect every narrative doc under `packages/lares-core/memes/docs
 
 Finally, the official MCP TypeScript SDK ecosystem is in a transitional period: the docs present a robust server model today, but the official repository also still warns that its v2 `main` branch is pre-alpha and that v1.x is the production recommendation. That does not block migration, but it is precisely why the MCP layer should remain thin and adapter-local. 
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #integrated-context-threads >>
+<<~ ahu #integrated-context-threads>>
 
 !! Integrated Context Threads
 
@@ -2048,9 +2046,9 @@ Required context now present in-document:
 * green-jello-dinosaur becomes a named fixture and failure-mode test
 * MCP adapter should surface trust-boundary conflicts instead of resolving them silently
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-8-progress >>
+<<~ ahu #milestone-8-progress>>
 
 !! Milestone 8 — Progress (2026-04-28)
 
@@ -2061,7 +2059,7 @@ Required context now present in-document:
 * ✓ `kahea` split into two regex entries in `parseMemeCarrier`: URI form (matches `lar:`, path `/`, fragment `#`) → `EdgeSugarNode { sigil:"kahea", family:"dataflow" }` — compile + render, dataflow edge. Name form (plain identifier, optional `name(args)`) → `SigilNode { sigilName:"kahea", attrs:{ name, args } }` — render-only, zero graph edge.
 * ✓ `CANONICAL_SIGILS` includes `"kahea-call"` internal name; case dispatch in `buildAst`
 * ✓ 12 tests: URI→EdgeSugar+edge, name→SigilNode+no-edge, args captured, wehe parameter interpolation, mixed carrier — all pass
-* ✓ `parsePranalaEdges("<<~ kahea greeting >>")` → zero dataflow edges (invariant confirmed)
+* ✓ `parsePranalaEdges("<<~ kahea greeting>>")` → zero dataflow edges (invariant confirmed)
 
 ''ReactionGraph + live protocol:''
 
@@ -2158,9 +2156,9 @@ Required context now present in-document:
 * ✓ Verse: pull-on-demand model — explicit `SetText()` / method calls; no automatic child cascade; `subscribable` vars as reactive sources. This is the target model for the Kumu device layer in UEFN — explicit `papalohe` wiring, not reactive tree.
 * ✓ Synthesis: CRDT delta event ≈ `changedTiddlers`; widget ownership skeleton ≈ TW5 widget tree; `applyZoomTemplate` on threshold crossing ≈ TW5 selective refresh; socket port shape repositioning ≈ DOM property update without re-render.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-9-scope >>
+<<~ ahu #milestone-9-scope>>
 
 !! Milestone 9 — Widget Tree Render Pass + Canon Surface (Active)
 
@@ -2230,9 +2228,9 @@ M9 closed the projection-cache authority arc and browser opening sequence. M10 t
 
 TW5 enters bundle unconditionally (1.95MB / 586KB gzip). Dynamic `import()` split behind `?renderMode=tw5` gate. Deferred to Q2 recipe-config phase.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #design-decisions-async-first >>
+<<~ ahu #design-decisions-async-first>>
 
 !! Design Decision: Async-First + Causal Islands
 
@@ -2294,8 +2292,8 @@ carrier text → MemeAstNode[] (parseMemeCarrier)
 
 The //missing middle layer// is the widget tree. `parseMemeCarrier` produces `MemeAstNode[]` — a generic parse tree. The widget tree re-types each parse node into a `kumu`-typed node that knows its renderer. This is Phase 3 self-hosting:
 
-* `<<~! kumu myCard(title body) >> ... <<~/kumu >>` defines a new node type
-* `<<~ kahea myCard(title:Welcome) >>` (name form) emits a `SigilNode { sigilName:"kahea", attrs:{name:"myCard", args:"title:Welcome"} }`
+* `<<~! kumu myCard(title body)>> ... <<~/kumu>>` defines a new node type
+* `<<~ kahea myCard(title:Welcome)>>` (name form) emits a `SigilNode { sigilName:"kahea", attrs:{name:"myCard", args:"title:Welcome"} }`
 * Widget-tree resolution walks the parse tree, matches each `SigilNode` against the registered `kumu` types, and emits a `WidgetNode { type: KumuDef, resolved: true, props: { title:"Welcome" } }`
 * The render pass walks `WidgetNode[]`, not raw `MemeAstNode[]`
 
@@ -2317,9 +2315,9 @@ The //missing middle layer// is the widget tree. `parseMemeCarrier` produces `Me
 
 Steps 1–2 are pure `live-protocol.ts` changes. Steps 3–5 are the Phase 3 self-hosting pivot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #milestone-10-complete >>
+<<~ ahu #milestone-10-complete>>
 
 !! M10 — Local-First TW5 VM (closed 2026-04-29, session 5)
 
@@ -2444,25 +2442,25 @@ room island     (bag: "room",  writable)        — primary content gate
 * Core: all passing
 * e2e: not yet run
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///LARARIUM-NODE/RESEARCH-SEED >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium/signal/render-targets >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/pranala-parser >>
+<<~ loulou lar:///LARARIUM-NODE/RESEARCH-SEED>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium/signal/render-targets>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/traversal>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/pranala-parser>>
 
-<<~ pranala #to-canvas-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion >>
+<<~ pranala #to-canvas-wiki from=? -> to=lar:///LARARIUM-NODE/MULTIPLAYER-INFINITE-CANVAS-WIKI family=relation role=companion>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m17-session-2026-05-03 >>
+<<~ ahu #m17-session-2026-05-03>>
 
 !! M17 Self-Describing Docs + Named-Doc Oracle — 2026-05-03
 
@@ -2538,9 +2536,9 @@ pnpm --filter @lararium/app  build     # ✓ clean
 
 M17 complete. All 5 + Sprint 0 correction sprints landed. Build clean across core / node / app.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m18-session-2026-05-03 >>
+<<~ ahu #m18-session-2026-05-03>>
 
 !! M18 Self-Describing Corpus Docs + Browser Peer Isomorphism — 2026-05-03
 
@@ -2588,9 +2586,9 @@ pnpm --filter @lararium/app  build     # ✓ clean
 * Room docs self-ref tiddler: same pattern, not yet done
 * Connect screen UX (Sprint 5 from M17 backlog)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m19-session-2026-05-03 >>
+<<~ ahu #m19-session-2026-05-03>>
 
 !! M19 Automerge Tiga — 2026-05-03
 
@@ -2638,9 +2636,9 @@ All three Tiga oracle tiddlers reconciled on every boot: self, ka, ba.
 * `LarDiskProjector` migration: `@lararium/tw5` → `@lararium/node` still pending
 * Web2 cleanup: `reaction-query.web2.ts` orphan, `LarariumPanel.web2.tsx` retirement
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m20-session-2026-05-03 >>
+<<~ ahu #m20-session-2026-05-03>>
 
 !! M20 Bag-ID = Lar: URI — 2026-05-03
 
@@ -2694,9 +2692,9 @@ TiddlerRecord `bag` field = lar: URI of the owning doc everywhere.
 * `meme-provider.ts` line 273: hardcoded `"room"` inferred bag — needs `roomId` context threaded through
 * TW5 recipe dynamically derived from `CompositeStore.layerIds()` — Phase 4 target
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #project-ooda-ha-2026-05-03 >>
+<<~ ahu #project-ooda-ha-2026-05-03>>
 
 !! M21 6-Root 2-Plane + Recipe Schema — 2026-05-03
 
@@ -2886,9 +2884,9 @@ M21–M22 = Phase 4 open (TW5 recipe from topology + connect screen).
 * `writePolicy` enforcement in `putViaRecipe` (policy evaluation against identity/group)
 * Wiki-first: bag picker TW5 widget reads `[recipe[lar:///ha.ka.ba/lararium/bags/]]` to list bags
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m24-lardoc-alignment-2026-05-03 >>
+<<~ ahu #m24-lardoc-alignment-2026-05-03>>
 
 !! M24 LarDoc Base Alignment — 2026-05-03
 
@@ -2949,9 +2947,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * `"draft"` bag → stable lar: URI (`lar:///ha.ka.ba/bags/sessions/drafts/{did}`)
 * Tombstone priority: CompositeStore check at tombstone time whether higher-priority bag retains title
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m25-loop1-stack-upward-walk-2026-05-03 >>
+<<~ ahu #m25-loop1-stack-upward-walk-2026-05-03>>
 
 !! M25 Loop 1 — Stack Upward Walk (2026-05-03)
 
@@ -2977,9 +2975,9 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * `"draft"` bag → stable lar: URI
 * `writePolicy` enforcement in `putViaRecipe`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #m25-loop2-qa-gap-survey-2026-05-03 >>
+<<~ ahu #m25-loop2-qa-gap-survey-2026-05-03>>
 
 !! M25 Loop 2 — QA Gap Survey + Sync Bridge Tests (2026-05-03)
 
@@ -3017,7 +3015,7 @@ descriptor tiddler in `tiddlers` — queryable from TW5 without TS interop.
 * Draft bag stable lar: URI
 * MCP `hud`/`receipt` storage-dir fix
 
-<<~/ahu >>
+<<~/ahu>>
 
 !! M25 Loop 3 — Cast Cleanup + Bag Routing + Dynamic Projections (2026-05-03)
 
@@ -3283,6 +3281,6 @@ The CJS's `exports` parameter is a fresh `{}` — TW5's injected `exports` objec
 * MCP `hud`/`receipt` storage-dir fix
 * Widget export key normalization: PascalCase `KauWidget` → lowercase `kau` for TW5 tag registration
 
-<<^ code="&#x0003;" >>ni:///sha-256;cXq5sE-gTkk8BtdUFUMrgP6GBKKfU3K7pJKiI4jGP-A
+<<^ code="&#x0003;">>ni:///sha-256;DdYRccXBqtHs83KWIdUcVbPBz_89BzTvW1Xwpjy2c30
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

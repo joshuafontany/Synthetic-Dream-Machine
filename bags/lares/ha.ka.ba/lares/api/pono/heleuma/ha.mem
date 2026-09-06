@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ha >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma/ha>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma/ha.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant capability: heleuma-ha — body/structure anchor; permanent compiled artifact with quine record"
 tags      = ["api/pono/heleuma"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ha"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Heleuma-Ha (Body / Structure)
 
@@ -26,9 +25,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ha"
 
 A heleuma-ha anchor exists outside the `lar:///` corpus ''by nature, not by stage''. It defines territory that the runtime inhabits. It does not promote.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ locate the compiled artifact and confirm it is structural territory, not a traveling soul.
 ⏿ orient: does removing it break the containing form? If yes, this is ha.
@@ -36,9 +35,9 @@ A heleuma-ha anchor exists outside the `lar:///` corpus ''by nature, not by stag
 ▶ write `#source` slot with the verbatim artifact copy; close the quine record.
 ↺ verify: `sync-heleuma` finds the symbol, compares the slot, reports clean; the anchor holds. The body persists. No ceremony expected.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #required-fields >>
+<<~ ahu #required-fields>>
 
 !! Required Fields (SHALL)
 
@@ -52,12 +51,12 @@ It SHALL hold a `#source` slot with the verbatim artifact body (the quine proper
 
 It SHALL NOT declare `body-sha256` — ha does not promote.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;fwEC8LV0cFhIPmVSzLhjl4K5XcloYE1oWGVeaJlWoag
+<<^ code="&#x0003;">>ni:///sha-256;UcJCmeLRWCCttbs9IvyRl53ztjGw1s-OT17ymyUnlA4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

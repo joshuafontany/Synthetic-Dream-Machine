@@ -63,7 +63,7 @@ This is the primary remaining work. The living operational doc. Here is the exac
 
 **Locus URI for the new file:**
 ```
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///ha.ka.ba/uri-operations/?confidence=CS:18&p=10 -->
 ```

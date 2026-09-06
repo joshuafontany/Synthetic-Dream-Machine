@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reaction-engine >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/mesh/reaction-engine>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/reaction-engine.mem"
@@ -9,7 +9,6 @@ mana        = 17
 manao       = 17
 manaoio     = 16
 namespace   = "&#x0950; &#x0901;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical pipeline invariant: five-layer reactive architecture from CRDT patch to observable outcome — nalu, live-query, IslandMsg_Event, CRDT-as-distributed-promise"
 status-date = "2026-05-28"
@@ -17,9 +16,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/reaction-engine"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Reaction Engine — Canonical Pipeline
 
@@ -34,9 +33,9 @@ only the irreducible (CRDT, network, crypto, multi-wiki coordination). Everythin
 * //Goblins/OCapN Promise Pipelining// (FOSDEM 2025) — one-way fire law: islands send without waiting for ACK
 * //Ink & Switch Local-First// (2019) — CRDT convergence = distributed promise; the sea carries the answer home
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pipeline >>
+<<~ ahu #pipeline>>
 
 !! The Five-Layer Pipeline
 
@@ -76,9 +75,9 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
   See: lar:///ha.ka.ba/lararium/mesh/island-protocol
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #laws >>
+<<~ ahu #laws>>
 
 !! Pipeline Laws
 
@@ -96,9 +95,9 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 # ''Irreducible TS layer.'' Only four things stay in TS outside TW5: `LarTiddlerStore` (CRDT), network/WebSocket/WebRTC adapters, Keyhive cryptographic operations, `VesselIslandPool` multi-wiki coordination. Everything else belongs in the nalu.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary-map >>
+<<~ ahu #boundary-map>>
 
 !! Boundary Map
 
@@ -124,9 +123,9 @@ Cross-vessel boundary (CRDT convergence):
   No additional protocol layer.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verse-alignment >>
+<<~ ahu #verse-alignment>>
 
 !! UEFN Verse Alignment
 
@@ -144,9 +143,9 @@ The five-layer pipeline maps onto the Verse simulation model:
 The nalu IS `OnSimulate`. The `changedTiddlers` map IS `StagedUpdates`.
 One wave. All observers. Same synchronous context.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #non-goals >>
+<<~ ahu #non-goals>>
 
 !! Non-Goals (alpha)
 
@@ -154,22 +153,22 @@ One wave. All observers. Same synchronous context.
 * Revocation propagation — capability gate lives at `AdminAuthGate`; propagation protocol deferred (see dreamnet-prior-art.md Gap 1).
 * Live query registration API — the live-query invariant describes behavior; a named API for registering queries from outside `reaction-router.ts` is a future surface.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-protocol >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/kumu-device >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-protocol>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/kumu-device>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/nalu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;WCmIy0CuU9JPWmZJaoN-PdP8umJImr8uskwGdzzgbrg
+<<^ code="&#x0003;">>ni:///sha-256;Yu6EO1Y3uHC9HiJ2J3VTYdaJyPJJAoCWLcN4CSvU19A
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

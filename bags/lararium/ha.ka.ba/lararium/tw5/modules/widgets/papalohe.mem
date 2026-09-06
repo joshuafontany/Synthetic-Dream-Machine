@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/papalohe >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/widgets/papalohe>>
 ```toml meta
 body-sha256   = "83587b80cdb7cd55e8b02a4034336053d5003d87a403a97c80c6f39d3ebff759"
 cacheable     = true
@@ -11,7 +11,6 @@ l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
-register      = "Synthesis-Canon"
 role          = "TW5 widget: papalohe — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "PapaloheWidget"
 status-date   = "2026-05-03"
@@ -19,32 +18,32 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/papalohe"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! papalohe
 
 TW5 widget from `@lararium/tw5`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 Exported symbols: `PapaloheWidget`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/papalohe" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jntStBNGPWsiE0qFVCAX8d16j1B7D_xM5O758Qt8OlU
+<<^ code="&#x0003;">>ni:///sha-256;vgk5xDaMTCUGfTNg8k97Wx_eLtDUZiMdPWxWLRRKNZ0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

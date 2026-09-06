@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/loci >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/loci>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/loci.mem"
@@ -8,13 +8,12 @@ mana      = 18
 manao     = 18
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 role      = "extended docs for the `loci` component — evaluation guidance, canon-MOVE criteria, MCP roadmap"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/loci"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Loci — Extended Docs
 
@@ -124,6 +123,6 @@ Hoʻoko-class file-siting repairs in this meme's history:
 
 In each case the `lar:` address held stable. File siting returned to the derived position.
 
-<<^ code="&#x0003;" >>ni:///sha-256;JkmkVXP3haxUDKabLHEAER1siVFT2z33uweeZ_zSPUA
+<<^ code="&#x0003;">>ni:///sha-256;b7-AdfYuOViPjlmokIHPaOUJ-dGqfcIQTAR9P2UEGcM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

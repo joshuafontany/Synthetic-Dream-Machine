@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/league-of-free-cities>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/factions/league-of-free-cities.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "faction meme, referee view — the League of Free Cities: the Confederation the Lindwyrm declared over the new DreamNet; structure, members, tensions, and the summit's politics"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/league-of-free-cities"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The League of Free Cities ~ the Confederation
 
@@ -36,9 +34,9 @@ The Dominion of Magic answers by annexing the nearest city-states and setting it
 to patrol; the Kemetic gods pull inward and close the open routes. The League and the Dominion
 have defined each other's borders ever since.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #structure >>
+<<~ ahu #structure>>
 
 !! Structure ~ how the Confederation runs
 
@@ -54,9 +52,9 @@ have defined each other's borders ever since.
   Named firearms) · the Aliʻi of Hawaiki (drifting, sovereign, indispensable to Astral
   navigation).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #referee-tensions >>
+<<~ ahu #referee-tensions>>
 
 !! Referee Tensions
 
@@ -74,16 +72,16 @@ have defined each other's borders ever since.
   seat nobody could fill. The Confederation grows the way it was founded: by broadcast,
   generosity, and letting others notice the alternative.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier>>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;RS2gqT7MZ1Ufpq4hQ6j2TDN-63wvS_ZSEmMbPS3N86o
+<<^ code="&#x0003;">>ni:///sha-256;fXJdS9tbyS7wpNoua4T2V378viH-eDb0xkXQjhaY8XU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

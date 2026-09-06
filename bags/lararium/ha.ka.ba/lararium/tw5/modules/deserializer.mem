@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/deserializer >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/deserializer>>
 ```toml meta
 body-sha256   = "d689443fc704d96b7c2e3802de2f76541b33cd3f9fe422199387a4bd1ce74b21"
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/deserializer.mem"
@@ -9,7 +9,6 @@ mana          = 18
 manao         = 17
 manaoio       = 16
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
-register      = "Synthesis-Canon"
 role          = "heleuma ka: TW5 tiddlerdeserializer for text/memetic-wikitext"
 source-symbol = "*"
 status-date   = "2026-05-01"
@@ -18,9 +17,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/deserializer"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Deserializer — Contract
 
@@ -44,22 +43,22 @@ No AST→string reconstruction. MemeticParser owns all rendering for both levels
 Compiled artifact: `packages/lararium-tw5/tiddlers/src/memetic-wikitext-deserializer.js`
 Build: `pnpm --filter @lararium/tw5 build:plugin`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/deserializer" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/carrier-split >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/meme-stream >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/deserializer >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/carrier-split>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/meme-stream>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/deserializer>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;M8ZzSqh31Grx4kDSyUprK6LxK9Du8FBHqOHMiMqdS5s
+<<^ code="&#x0003;">>ni:///sha-256;T4DNjADRSYjFKVw-pCuM8P6sdVmvuxDSgq7NjySotjA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

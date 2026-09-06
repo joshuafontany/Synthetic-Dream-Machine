@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lararium/tw5/devices/move-button >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lararium/tw5/devices/move-button>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/devices/move-button.mem"
 listenable = "InteractedWithEvent"
 namespace  = "&#x2299;"
-register   = "Synthesis"
 retain     = true
 role       = "kumu device type — move-button: fires the MOVE residency ACTION verb on InteractedWithEvent"
 tags       = ["api/residency-model"]
@@ -15,9 +14,9 @@ uri-path   = "ha.ka.ba/lararium/tw5/devices/move-button"
 verb       = "MOVE"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! move-button Device
 
@@ -30,9 +29,9 @@ the verb intent lives here on the type meme as a `reaction:listenable` edge with
 ''TW5 filter:'' `[field:verb[MOVE]]` returns both signal and outcome tiddlers for all `MOVE`
 dispatches, across any instance of this type.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #kumu >>
+<<~ ahu #kumu>>
 
 !! Kumu Declaration
 
@@ -44,9 +43,9 @@ extends: button_device
 This device type extends `button_device`. It inherits `InteractedWithEvent` (listenable) and
 `InteractedWithAgent` (subscribable) from the parent type.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reaction-pins >>
+<<~ ahu #reaction-pins>>
 
 !! Reaction Pins
 
@@ -64,24 +63,24 @@ tm-verse-event { uri, listenable: "InteractedWithEvent", verb: "MOVE", fromUri: 
 `island-kernel.ts` wraps this into `IslandMsg_Event.payload { verb, fromUri }` and posts to
 the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE", fromUri, listenable })`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ control:extends ? -> lar:///ha.ka.ba/lararium/mesh/kumu-device/button_device family=control role=extends >>
+<<~ control:extends ? -> lar:///ha.ka.ba/lararium/mesh/kumu-device/button_device family=control role=extends>>
 
-<<~ reaction:listenable ? -> lar:///ha.ka.ba/lararium/tw5/devices/move-button listenable=InteractedWithEvent verseKind=listenable payloadType=agent verb:MOVE >>
+<<~ reaction:listenable ? -> lar:///ha.ka.ba/lararium/tw5/devices/move-button listenable=InteractedWithEvent verseKind=listenable payloadType=agent verb:MOVE>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-protocol >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-protocol>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;fJt5heZ7kPO15rwLLmaTIP_QZaW_PF0QFv73NMMO_hE
+<<^ code="&#x0003;">>ni:///sha-256;MZaWRsaBocr1HAN1Jy7DSZR7pCHHkjJWxAUj-WQs_VE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

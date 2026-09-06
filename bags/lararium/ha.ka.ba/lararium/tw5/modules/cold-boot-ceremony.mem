@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony>>
 ```toml meta
 body-sha256   = "09e7f52ebcb8617e2f675e8a4f09f043474488b34b93ff3c857615a923153300"
 cacheable     = true
@@ -10,7 +10,6 @@ mana          = 18
 manao         = 17
 manaoio       = 16
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "heleuma ka: void-start device identity tiddler builder — titles in the @identities/@circles NAMESPACES, written into the founding face's own tag-derived planes"
 source-symbol = "*"
@@ -20,9 +19,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! cold-boot-ceremony — Contract
 
@@ -39,22 +38,22 @@ The device Ed25519 keypair roots the DEVICE; the operator identity rides the Per
 
 Caller MUST check the identity tiddler does not already exist before writing (idempotent guard).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/social-doc >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/social-doc>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;B_qy57gvYQybbOF5VLbeGMDtkc9KU_vrxc6flxXv6RE
+<<^ code="&#x0003;">>ni:///sha-256;LV92YVV1bOOyNMJkc3lJL3LViQWUd5D6knWtacgyRZc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

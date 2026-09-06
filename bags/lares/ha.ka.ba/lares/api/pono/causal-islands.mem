@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/causal-islands.mem"
@@ -10,7 +10,6 @@ mana          = 18
 manao         = 17
 manaoio       = 17
 namespace     = "&#x2299;"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "invariant law: causal island doctrine — three structural axes (access × scale × powers) + alignment plane; authority-first sync order; visibility gate; edge island lifecycle"
 source-symbol = "ABILITY_LADDER AUTHORITY_FIRST_ORDER CAUSAL_ISLAND_MUST CAUSAL_ISLAND_MAY AuthorityFirstGuard visibilityGate"
@@ -20,9 +19,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/causal-islands"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Causal Islands
 
@@ -36,9 +35,9 @@ SSB, Holochain, Nostr, IPFS, ActivityPub, and the local-first lineage). The earl
 single linear ability-ladder fused into one rope what are really independent axes;
 this version separates them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #model >>
+<<~ ahu #model>>
 
 !! The model — three axes + one plane
 
@@ -71,7 +70,7 @@ homogeneous-trust (those devices already hold `admin` on `@daemon`, so marginal 
 (2026-06-29 cohere); above it the mesh scales on the orthogonal ''INFRA axis'' — `Nexus` and
 `DreamNet` join by ''treaty / mutual-carriage contract'' (who relays whose sealed bytes), never by
 delegation-up, a relay carrying without reading
-(<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>). "DreamNet"
+(<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology>>). "DreamNet"
 names no registry and no canonical graph; it emerges as the transitive closure of who-relays-to-whom
 under everyone's local stances. Read the earlier single rope
 (`⊂ Neighborhood ⊂ City ⊂ Nexus ⊂ DreamNet` as delegation-nested SOCIAL rings) as retire-residue the
@@ -92,9 +91,9 @@ capability structurally cannot express it. Lives in its own invariant
 ([[alignment-layer.md|lar:///ha.ka.ba/lares/api/pono/alignment-layer]]); enforced by ''withholding voluntary sync at the''
 ''Beelay boundary'', never by reaching into another island's data. The "lemures" plane.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law
 
@@ -129,9 +128,9 @@ the operator's next turn, nor claim a closure or block the two logs have not joi
 pretending to a global now reads as the managing failure
 (`lar:///ha.ka.ba/lares/api/mu/ooda-ha#/open-loops`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-clocks >>
+<<~ ahu #two-clocks>>
 
 !! Two clocks, orthogonal — causal ⊥ rhythmic
 
@@ -163,9 +162,9 @@ cannot hold. Liveness ratchets (the epoch-lease, non-renewal) and targeted revoc
 membership-removal) name authority/liveness mechanisms, never clocks. Full rhythmic model:
 `lar:///ha.ka.ba/lares/docs/pono/research-streams/chronometer/FFZ_Chronometer_Research`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -260,9 +259,9 @@ conditions = [
 ]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source (TypeScript — compiled-in)
 
@@ -315,9 +314,9 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 }
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-model-key >>
+<<~ ahu #the-model-key>>
 
 !! A time value MAY enter as a KEY, never as an arbiter
 
@@ -339,9 +338,9 @@ Two parties holding positions at different epochs cannot reconcile them by compa
 
 ''The failure mode to expect never reads as corruption.''' Drift between epochs produces ''well-formed garbage'' — right shape, right digits, plausible bounds, and nothing in the data reveals the fault. It passes every structural check a replica can run.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reject >>
+<<~ ahu #reject>>
 
 !! Reject-list — the re-concentration traps
 
@@ -364,12 +363,12 @@ meant to escape):
 * ✗ ''Global blocklists / global trust scores'' (EigenTrust-style). Sybil-vulnerable without
   costly identity, and they imply a global "now" we do not have. Trust roots are plural and chosen.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;JXR5bEuY543KwFxYrg72IDsFIzysRH1ROukw2GefK3Q
+<<^ code="&#x0003;">>ni:///sha-256;TzEBEvfmNLAFtDjcYri6eQMfxK3RYCzy6lbLibXdEz4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

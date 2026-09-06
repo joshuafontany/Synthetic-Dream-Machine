@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/mount-points/structure >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/mount-points/structure>>
 ```toml meta
 cacheable = true
 caption   = "structure"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/mount-points/structure.mem"
 mana      = 8
 manao     = 17
 manaoio   = 6
-register  = "Provisional-Synthesis"
 retain    = true
 role      = "mount-point: Structure (Site) — Power bound to a place; absorbs the former Location class; mobility is a flat component"
 l-space   = "sdm"
@@ -16,13 +15,13 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/mount-points/structure"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Mount-Point — Structure (Site)
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -32,49 +31,49 @@ A Structure seats a Power ''in a Site'': shrine, ship-daemon, archive service, t
 
 //Register held low: this contract is largely native design space. The corpus names the Site category ("Structure/Location, installed in gear/vehicles/infrastructure") but supplies no slot counts or penalties for it.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 A site-seated Power activates from the place. Reach, standing, or a maintained relationship may gate it — the shrine checks standing, not inventory (open pressure from mana-kapu). A mobile Site carries its seated Powers as it moves.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cost >>
+<<~ ahu #cost>>
 
 !! Cost
 
 Seating and upgrading a Site spends XP + resources against the OGA upgrade tables (per-attribute, doubling cost `n+1 = 2(n)`). Activation Life cost follows the seated Power's P as normal.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #failure >>
+<<~ ahu #failure>>
 
 !! Failure
 
 Danger Roll → Corruption binds to the Site. A derelict or breached Site can drop its Powers (cf. Earthdawn airships: lose the crew/propulsion, the place falls). Destroying the propulsion component grounds a mobile Site into a fixed one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #removal >>
+<<~ ahu #removal>>
 
 !! Removal
 
 Strip a seated Power by dismantling the mount, revoking standing, or destroying the Site. Capacity bought with XP is sunk into the Site, not the practitioner.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #overflow >>
+<<~ ahu #overflow>>
 
 !! Overflow
 
 A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy more capacity (XP + resources) or seat the Power elsewhere.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -83,16 +82,16 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 * Dual-view (stat-view / interior-map-view, cf. Spelljammer) is a projection concern, not a mount-point concern.
 * Estate/domicile zoom (room → estate → zone → settlement; OGA) may want a nesting rule.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/mount-points/storage-class>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;G5jhB2HGE_EnWv8q7pvvZloVlEiySnBH8wDjSD1fBPs
+<<^ code="&#x0003;">>ni:///sha-256;VtvLeE8kfaSeawaFfGHAT3ZF1sKt49BUJBkHEUNKgtE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

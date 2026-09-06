@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canon-boundary >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canon-boundary>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/canon-boundary.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 13
-register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for the canon boundary — crossing examples, event shape, review pressure, and THE PROMOTION BOUNDARY: copy-up is free, promotion-down is the kahu-cabal act; the cap gate holds the line and the proposal/receipt record does not yet exist"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/canon-boundary"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Canon Boundary — Docs Sister
 
@@ -26,9 +25,9 @@ This docs meme explains the crossing from hostful live exchange pressure into ho
 The invariant lives at `lar:///ha.ka.ba/lares/api/pono/hooponopono`.
 This file gives a fuller map of canon-crossing events.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe the source claim, target territory, affected memes, and operator trust tier and intent.
 ⏿ orient the current meme trust tier against the meme tier requested by the claim.
@@ -36,9 +35,9 @@ This file gives a fuller map of canon-crossing events.
 ▶ create, patch, or defer the hostless target with the boundary event named.
 ↺ verify file path, opener, interface claims, and conflict handling before the crossing holds; leave pre-canon pressure in session records with clear next crossing conditions.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #crossing-model >>
+<<~ ahu #crossing-model>>
 
 !! Crossing Model
 
@@ -54,9 +53,9 @@ Without that crossing, the system cannot tell the difference between:
 
 The boundary keeps all five available without collapsing them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-promotion-boundary >>
+<<~ ahu #the-promotion-boundary>>
 
 !! The promotion boundary ~ who may cross, and in which direction
 
@@ -116,9 +115,9 @@ The two properties it fuses:
 
 ⚠ And it wants the ''signed-region vs attached-region'' discipline: what the signer ASSERTS rides inside the signature; what ''the world can check'' — chains, memberships, freshness — rides attached and unsigned, so refreshing evidence never wakes a cold key. //Signing evidence causes freshness coupling and pins staleness.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary-event-shape >>
+<<~ ahu #boundary-event-shape>>
 
 !! Boundary Event Shape
 
@@ -137,9 +136,9 @@ next-crossing = "mu? | create docs meme | patch invariant | leave session-local"
 These fields may later become a tool schema.
 For now, they define the shape of explicit thinking.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #examples >>
+<<~ ahu #examples>>
 
 !! Examples
 
@@ -167,9 +166,9 @@ Confirmed crossing:
 Operator confirms the canon MOVE target. Patch hostless meme, cite source live exchange, surface conflicts, name remaining residue.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #review-pressure >>
+<<~ ahu #review-pressure>>
 
 !! Review Pressure
 
@@ -183,20 +182,20 @@ A canon-crossing path should ask:
 
 If the answers remain vague, the claim should stay as session pressure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/live-session-overwrite >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/live-session-overwrite>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;J56n_1omhwkpi8-Uqe07V9WCyv6KhgAClrne-EIybbc
+<<^ code="&#x0003;">>ni:///sha-256;YfEGhbZVpT6QwDbdHagSiVm2TwGtvit3LfSf8eG5owc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

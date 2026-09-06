@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/cli/vessel-door >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/cli/vessel-door>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/cli/vessel-door.mem"
@@ -9,7 +9,6 @@ mana      = 15
 manao     = 15
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "THE SUBSTRATE COLLAPSE — performed. One namespace per causal island governs every plane in this CLI except the vessel's own, where fourteen bare spellings once stood for seven primitives and their compositions. This meme carries the primitive set, the door, the rite-set, the ripples that close with them, the witnesses that keep the collapse landed, and the parts deliberately left standing. It instructs; it does not argue."
 status    = "standing"
@@ -19,11 +18,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/cli/vessel-door"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #the-law >>
+<<~ ahu #the-law>>
 
 ! The Vessel Door ~ a substrate collapse
 
@@ -38,9 +37,9 @@ grows back wherever the law has not reached, and where to look when it does.
 
 ''This meme carried the work order, and the work stands done.'' The reasoning lives elsewhere; what follows records what the collapse enacted, so a reader meets the shape rather than re-deriving it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-primitives >>
+<<~ ahu #the-primitives>>
 
 !! What the door answers — SEVEN primitives
 
@@ -50,20 +49,20 @@ Every substrate motion in this CLI composes from these, and no composition earns
 \procedure ~Primitive(Type:"" Params:"") ~Primitive <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Primitive stop "ends a running daemon by port, graceful then forced ~ never a restart in disguise" >>
-<<~Primitive wipe "pares the vessel store + the projection watermark ~ identity, seal, library and registry stand outside it" >>
-<<~Primitive build "compiles the workspace and STAMPS the source digest ~ a build that skips the stamp leaves the tree reading stale" >>
-<<~Primitive bake "re-derives the genesis island from the engine + the packed plugin ~ moves NO identity" >>
-<<~Primitive found "mints the vessel identity, the persona root, the social planes and the bootstrap ~ idempotent, skips what stands" >>
-<<~Primitive stand "brings the daemon up, foreground or detached, and reports what it found ~ attach when one already answers" >>
-<<~Primitive seed "plants every bags holding back into its doc, kind-routed, diff-gated ~ idempotent; a converged tree no-ops" >>
+<<~Primitive stop "ends a running daemon by port, graceful then forced ~ never a restart in disguise">>
+<<~Primitive wipe "pares the vessel store + the projection watermark ~ identity, seal, library and registry stand outside it">>
+<<~Primitive build "compiles the workspace and STAMPS the source digest ~ a build that skips the stamp leaves the tree reading stale">>
+<<~Primitive bake "re-derives the genesis island from the engine + the packed plugin ~ moves NO identity">>
+<<~Primitive found "mints the vessel identity, the persona root, the social planes and the bootstrap ~ idempotent, skips what stands">>
+<<~Primitive stand "brings the daemon up, foreground or detached, and reports what it found ~ attach when one already answers">>
+<<~Primitive seed "plants every bags holding back into its doc, kind-routed, diff-gated ~ idempotent; a converged tree no-ops">>
 
 ''An eighth reads, and belongs beside them'': `read` — the pure inspection that starts nothing (bootstrap
 presence, storage size, port, seal state, personas, quorum).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-collapse >>
+<<~ ahu #the-collapse>>
 
 !! The collapse, verb by verb
 
@@ -93,12 +92,12 @@ cap-stacks over the primitives, and this house already carries the surface for e
 where new capability arrives as a new rite rather than another raw verb. A composition earns a pet-name;
 it never earns a top-level name.
 
-<<~ confidence 17/20 >> ''The test for a rite versus a primitive'': a primitive names one motion
+''The test for a rite versus a primitive'': a primitive names one motion
 and cannot be expressed as a sequence of the others. Everything else composes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-founding-rite >>
+<<~ ahu #the-founding-rite>>
 
 !! ⚠ The founding rite rides the rite-door, and one movement changes
 
@@ -115,9 +114,9 @@ restarts never crosses the gate'', so no carry-forward step exists to get wrong.
 ''`rebirth` stands as its own rite.'' Rebirth of a STANDING vessel names a real motion and stop-wipe-bake
 carries it exactly. It simply never serves as a founding step, and its name says so.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-ripples >>
+<<~ ahu #the-ripples>>
 
 !! Every caller that must close with the collapse
 
@@ -144,9 +143,9 @@ verbs directly, so each MUST move in the same act — and each row below names w
 # ''EVERY HANDLER'S OWN HEADER.'' A moved handler whose docstring still self-names its old spelling is the
   cosmetic residue the previous collapse left; sweep it in the same pass rather than leaving it again.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-stands >>
+<<~ ahu #what-stands>>
 
 !! What does NOT move, and why
 
@@ -164,12 +163,12 @@ no verb until its transport lands, the same way `cabal feed` stands built and un
 ''NOT the capabilities themselves.'' Nothing here adds or removes what the CLI can do. Every primitive
 already runs inside a verb being collapsed; this act changes only how many names reach them.
 
-<<~ confidence 18/20 >> ''A collapse that also changes behaviour cannot be verified'' — a green
+''A collapse that also changes behaviour cannot be verified'' — a green
 suite afterward would prove neither half. Move the names; move nothing else.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-verifications >>
+<<~ ahu #the-verifications>>
 
 !! What proves it landed
 
@@ -197,16 +196,16 @@ because a verification an operator has to remember to run is a verification that
   disproves it — `case "contract": … cmdContract(args, "admit")` waved a rite instructing `nexus admit`
   straight through. A rite amended by many hands drifts fastest at exactly the commands nobody re-typed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-order >>
+<<~ ahu #the-order>>
 
 !! The order to work in
 
 ''Land the substrate collapse only on a quiet tree.'' It touches the entry point every other thread stands
 on, so it wants to arrive between phases rather than during one.
 
-<<~loops ✶ primitives-and-door -> ⏿ rites -> ◇ ripples -> ▶ verifications -> ↺ the-rite-and-its-harness >>
+<<~loops ✶ primitives-and-door -> ⏿ rites -> ◇ ripples -> ▶ verifications -> ↺ the-rite-and-its-harness>>
 
 # ''Stand the door and the primitives first, with the old verbs still answering.'' The two surfaces
   co-exist for exactly one commit, which keeps every caller working while the new shape gets proven.
@@ -218,20 +217,20 @@ on, so it wants to arrive between phases rather than during one.
   spellings stand.
 # ''Run every verification.'' A red here names a ripple that did not close, and the list above says which.
 
-<<~ confidence 16/20 >> ''The one-commit cut is the whole discipline.'' The previous
+''The one-commit cut is the whole discipline.'' The previous
 collapse held to it and the surface stayed collapsed; the surface that grew back is the one the law never
 reached.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/lares-lararium-binding >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >> · <<~ loulou lar:///ha.ka.ba/lararium/api/sensorium-runbook >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/lares-lararium-binding>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook>> · <<~ loulou lar:///ha.ka.ba/lararium/api/sensorium-runbook>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;CzwwGO5qrfepEG5p5xHwsXnM_Xj3vaegXB-8dbJR5XE
+<<^ code="&#x0003;">>ni:///sha-256;6kB0vPlln38W7YiUxY3CX0PC5YaMkBAZSvsFfYcLkJQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/domain/stuckforce >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/domain/stuckforce>>
 ```toml meta
 cacheable = true
 caption   = "stuckforce"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/domain/stuckforce.mem"
 mana      = 13
 manao     = 16
 manaoio   = 12
-register  = "Synthesis"
 retain    = true
 role      = "component (domain): Stuckforce — the SDM domain of applied gripping force"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/domain/stuckforce"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Stuckforce
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 The SDM domain of applied force that grips, lifts, and holds — telekinetic hovering, hauling, and stubborn crossing. Force that //sticks//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Orients a module toward ''moving or holding mass without contact''. It carries weight, pins, or floats — the Pentacle's stubborn ground-crossing in play.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of force). Carries `hook/sustained` whenever a load must stay aloft past the instant.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 [tag[lar:///ha.ka.ba/sdm/components/domain/stuckforce]tag[lar:///ha.ka.ba/sdm/components/function/cargo]]  hauling stuckforce
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Confirm the canonical SDM spelling/scope of "stuckforce" against the Powers Index telekinetic entries.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZBgIF8yK98QI3sZg-p65MaBQgP88M7LG92w2I4XNbBE
+<<^ code="&#x0003;">>ni:///sha-256;aDaoHhArfL_7CcTpZiAuSNdyrnvw-7Lmc0RBX5-Qmuk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

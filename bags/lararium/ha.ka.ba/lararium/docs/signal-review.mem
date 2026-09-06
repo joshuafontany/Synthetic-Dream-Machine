@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal-review >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal-review>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal-review.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "review memo for lararium signal branch boundaries, settlement pressure, and rewrite sequencing"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,20 +15,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal-review"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal Branch Review Memo
 
 Not invariant law.
 This memo reviews the current signal branch, marks pressure points, and proposes next moves for rewrite and settlement work.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scope >>
+<<~ ahu #scope>>
 
 !! Scope
 
@@ -53,9 +52,9 @@ Research cluster consumed for dependency pressure:
 This memo targets branch boundaries, settlement level, and rewrite order.
 This memo does not attempt chronometer closure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -85,9 +84,9 @@ This memo does not attempt chronometer closure.
 * settlement blur between stable docs language and research/session language
 * unresolved FFZ design pressure leaking upward into branch docs
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -127,9 +126,9 @@ The branch already suggests a clean five-room split:
 The branch does not need a full redesign.
 The branch needs a boundary pass, a settlement pass, and a reduction pass focused on `hud.md`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -165,9 +164,9 @@ Use the following labels during the review:
 | `archive` | witness value remains, but live branch law no longer needs it here |
 | `blocked-on-ffz` | branch wording should wait for chronometer closure |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -205,9 +204,9 @@ Use the following labels during the review:
 | `signal/hud.md` | migrated witness block X | `archive` | move to archive or appendix witness shelf | live room no longer needs full block |
 | `signal/render-targets.md` | target Y | `blocked-on-ffz` | keep short note only | FFZ closure still pending |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #assess >>
+<<~ ahu #assess>>
 
 !! ↺ Assess
 
@@ -237,21 +236,21 @@ After this pass:
 This memo recommends a review memo first, edits second.
 That order should reduce churn and keep the branch from freezing unresolved FFZ decisions into docs law too early.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/l-space >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/l-space>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NZ8Qs1iJbgwEN70jJxWSWzCIuYFxGZ0joV8V1t0OsZA
+<<^ code="&#x0003;">>ni:///sha-256;s3zFq5oiKiPyYaf7eZ-3KgsZ0WixT5mGq3sg7BCB-yE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

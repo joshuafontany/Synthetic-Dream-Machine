@@ -47,7 +47,7 @@ export interface VoiceSignal extends OffsetSignal {
   readonly mask: string | null;
 }
 
-/** A `<<~ confidence <Register> N/M >>` marker — or a degraded/novel variant of one. */
+/** A `<<~ confidence <Register> N/M>>` marker — or a degraded/novel variant of one. */
 export interface ConfidenceSignal extends OffsetSignal {
   /** The register word (`Synthesis`, `Canon`, …), or null when the form dropped it. */
   readonly register: string | null;
@@ -57,7 +57,7 @@ export interface ConfidenceSignal extends OffsetSignal {
   readonly max: number;
 }
 
-/** A `<<~ hud Focus(..) Feedback(..) Drift-Ward(..) >>` panel (open or close). */
+/** A `<<~ hud Focus(..) Feedback(..) Drift-Ward(..)>>` panel (open or close). */
 export interface HudSignal extends OffsetSignal {
   /** Focus target/actual numerator (the last number when a `->` slide appeared), or null. */
   readonly focus: number | null;
@@ -111,7 +111,7 @@ export interface TurnHarvest {
   readonly oracles: readonly OffsetSignal[];
   /** Recognized-but-generic sigils (kahea, mu, …). */
   readonly others: readonly OtherSigil[];
-  /** Count of recognized sigil islands (every classified `<<~ … >>`). */
+  /** Count of recognized sigil islands (every classified `<<~ …>>`). */
   readonly sigilCount: number;
   /** Count of `<<~` openers that did NOT classify — the water, panic-synced. */
   readonly waterCount: number;
@@ -372,7 +372,7 @@ export function harvestTurnGradient(text: string): TurnHarvest {
   }
   voices.sort((a, b) => a.offset - b.offset);
 
-  // --- island census: classify every <<~ … >> body; the rest is water ---
+  // --- island census: classify every <<~ …>> body; the rest is water ---
   const others: OtherSigil[] = [];
   let classifiedSigils = 0;
   const specialized =

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/browser/deletion-map >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/browser/deletion-map>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/browser/deletion-map.mem"
@@ -8,14 +8,13 @@ l-space   = "lararium"
 mana      = 18
 manao     = 18
 manaoio   = 17
-register  = "Synthesis"
 retain    = true
 role      = "Inventory of web2/singleton residue in the browser shore: classify, quarantine, migrate, or delete"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/browser/deletion-map"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! lararium-browser Deletion Map
 
@@ -29,7 +28,7 @@ touching the browser vessel surface. Four classifications:
 | ''Quarantine'' | Currently carries a mix of constitutional and residue. Needs split before migration. |
 | ''Dead residue'' | Whole-page singleton or web2 smell. Delete after new path proves itself. |
 
-<<~ ahu #shore-inventory >>
+<<~ ahu #shore-inventory>>
 
 !! Shore Inventory
 
@@ -82,9 +81,9 @@ touching the browser vessel surface. Four classifications:
 
 The package directory exists and is empty. All new source files start here; no legacy code carries into it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #adapter-boundary >>
+<<~ ahu #adapter-boundary>>
 
 !! Named Adapter Boundary
 
@@ -96,9 +95,9 @@ No other file in the browser vessel path may import from `window`, `document`, o
 
 Future HUD surfaces (canvas, UE, Mudlet) bypass this file entirely — they use the island authority's projection interface directly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-log >>
+<<~ ahu #migration-log>>
 
 !! Migration Log
 
@@ -109,9 +108,9 @@ Empty until S1 lands.
 |---|---|---|---|---|
 | S1 | `BrowserAuthorityId`, `BrowserAuthorityPhase`, `BrowserAuthorityBootParams`, `BrowserAuthorityCapabilities`, `BrowserAuthorityLease`, `BrowserProjectionSnapshot`, `BrowserAuthorityDebugStats`, `BrowserAuthorityReceipt`, `BrowserAuthorityPool` | (new — authored in `@lararium/mesh`) | `packages/lararium-mesh/src/browser-dock.ts` | Law test ✓ (zero DOM types); typecheck ✓ all packages |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #deletion-targets >>
+<<~ ahu #deletion-targets>>
 
 !! Deletion Targets
 
@@ -125,18 +124,18 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 | Whole-page wiki boot (any code that runs TW5Engine and then attaches to `document.body` directly) | Not present yet; guard against entry | `openBrowserVessel()` → pool → worker → lease → frame | Block at PR review |
 | `tw.rootWidget.domNodes = [...]` assignment outside adapter | Leaks DOM binding into authority layer | Keep in adapter only | S4 projection contract established |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter >>
-<<~ loulou lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface >>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter>>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kTywNhyAoJdueSMmvrfU-IT2sR1Z5Nupe-MswnZOGXY
+<<^ code="&#x0003;">>ni:///sha-256;q4LR9xVKB2ARXz0le_X40WNcDM2uabw0k7rIO4EXjXM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

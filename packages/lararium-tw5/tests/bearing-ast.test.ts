@@ -236,16 +236,16 @@ describe("parseBearingPayload — extracts every lar: URI in order", () => {
 // move-skeleton — now carries the bearing structure (not a bare token)
 // ---------------------------------------------------------------------------
 
-const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
-<<~ hud Aperture(11) OODA-HA(9) >>
-<<~ ward * L-Prime >>
+const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts>>
+<<~ hud Aperture(11) OODA-HA(9)>>
+<<~ ward * L-Prime>>
 
-Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
+Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20>> the fork holds.
 
-<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(11 -> 12) OODA-HA(1↺) >>
-<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
+<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁>>
+<<~ ward ! · ↻ L-Prime>>
+<<~ hud Aperture(11 -> 12) OODA-HA(1↺)>>
+<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ?>>`;
 
 function bearingTokens(stream: readonly MoveToken[]): MoveToken[] {
   return stream.filter((t) => t.kind === "bearing");
@@ -290,7 +290,7 @@ describe("emitMoveSkeleton — carries the parsed bearing", () => {
 
 describe("emitMoveSkeleton — degraded / unframed turns stay graceful", () => {
   test("a one-sided aim-only turn parses aim, yield empty, primary from aim", () => {
-    const turn = `<<~ lares aim lar:///breach.watch.fires/now >>
+    const turn = `<<~ lares aim lar:///breach.watch.fires/now>>
 Triage: name the fire.`;
     const sk = emitMoveSkeleton(harvestTurnGradient(turn));
     expect(sk.bearing.aim.length).toBe(1);

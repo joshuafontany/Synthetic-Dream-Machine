@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/tw5-browser-surface.mem"
 l-space     = "lararium"
 mana        = 17
-register    = "Synthesis-Canon"
 retain      = true
 role        = "Named adapter boundary: the ONE file allowed to hold DOM/RootTemplate references in the lararium-browser shore"
 source-file = "packages/lararium-tw5/src/tw5-browser-surface.ts"
@@ -14,9 +13,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/tw5-browser-surface"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -43,16 +42,16 @@ these types without an explicit entry in `deletion-map.md`.
 
 `mountPanel` currently transcluded `$:/core/ui/RootTemplate` because that followed the established TW5 browser story river path. This marks the strongest remaining RootTemplate dependency in the stack. The S4/S8 sprints replace it with a Lararium-owned root/frame contract. Until then, the dependency lives here and nowhere else.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/browser/deletion-map >>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/deletion-map>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;qtWR5906252ACOcS-kUX3Rqxa3L4svpC4f_dSrhXq80
+<<^ code="&#x0003;">>ni:///sha-256;80whNCMwfM_KkXWX-0Hj95wnrEQF_PvtDtvrTchVTAQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

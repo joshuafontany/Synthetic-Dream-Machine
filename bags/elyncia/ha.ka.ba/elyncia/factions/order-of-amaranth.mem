@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/order-of-amaranth >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/order-of-amaranth>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/factions/order-of-amaranth.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "faction meme — the Order of Amaranth: sanctuary law, iron convoys under the unfading flower, field medicine, the livery and the sacrament"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/order-of-amaranth"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Order of Amaranth
 
@@ -30,9 +28,9 @@ tent-churches — offer ''sanctuary; violence kapu''. Known for field medicine, 
 an unnerving ease around the free-willed dead. Elite shock troops and seekers of ancient ruins.
 Management of the House of Masks, and its floor's neutrality, ride under their sign.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #livery >>
+<<~ ahu #livery>>
 
 !! Livery & Sacrament
 
@@ -49,15 +47,15 @@ bread and who refused it.
 //(Gaia's dream-mirror carries the root: amarantos, "unfading" — and the grain pressed with
 honey into sacred shapes, shared and eaten.)//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8EpdP3HJ_5K4M5B9Y-oTF34pM2IQA1pSyv0mIEnKhYc
+<<^ code="&#x0003;">>ni:///sha-256;LJvfrza0fm769w3C0bxvaAEc35sCs4CSyiENZKjBybc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/house-of-masks >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/house-of-masks>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/house-of-masks.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "place, High Delos Theatre Quarter — the House of Masks; skinny place-record, full canon rides the campaign locus"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/house-of-masks"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The House of Masks
 
@@ -43,8 +41,8 @@ guests pass now.
 — venue history, the summit, the genre compass, the casting sheet. This record keeps the
 place's seat on the map; that locus keeps its life.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;lohwi1_9p2K2NNOmbkK2DJlYLOJBatVmOQFg0trLwhM
+<<^ code="&#x0003;">>ni:///sha-256;8PpSdoTSOvakwyx_gRE3V0qt6bKY-KjWxsj6g8i9yAY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

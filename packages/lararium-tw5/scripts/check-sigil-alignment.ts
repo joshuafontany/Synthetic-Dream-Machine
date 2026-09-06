@@ -6,7 +6,7 @@
  * Checks:
  *   1. Every sigil-*.tid has a lar-pono-uri field.
  *   2. The lar-pono-uri target file exists at bags/lares/ha.ka.ba/lares/api/pono/{slug}.md.
- *   3. Every sigil pono spec has a <<~ pranala #tiddler ? -> …/sigil-* … >> edge.
+ *   3. Every sigil pono spec has a <<~ pranala #tiddler ? -> …/sigil-* …>> edge.
  *
  * Exit 1 if any check fails (for CI integration).
  */
@@ -43,7 +43,7 @@ function ponoFilePath(slug: string): string {
 }
 
 function hasTiddlerEdge(ponoContent: string, tiddlerName: string): boolean {
-  // Matches any <<~ pranala #tiddler* ? -> .../sigil-NAME … >> edge.
+  // Matches any <<~ pranala #tiddler* ? -> .../sigil-NAME …>> edge.
   // The slot name may be #tiddler (canonical) or #tiddler-sigil-X (alias entries).
   const tiddlerUri = `lar:///ha.ka.ba/lararium/tw5/tiddlers/${tiddlerName}`;
   const escapedUri = tiddlerUri.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -85,7 +85,7 @@ for (const filename of tiddlerFiles) {
       const ponoContent = readFileSync(ponoPath, "utf-8");
       const tiddlerName = basename(filename, ".tid"); // e.g. "sigil-aka"
       if (!hasTiddlerEdge(ponoContent, tiddlerName)) {
-        issues.push(`pono/${slug}.md missing <<~ pranala #tiddler ? -> …/${tiddlerName} … >>`);
+        issues.push(`pono/${slug}.md missing <<~ pranala #tiddler ? -> …/${tiddlerName} …>>`);
       }
     }
   }

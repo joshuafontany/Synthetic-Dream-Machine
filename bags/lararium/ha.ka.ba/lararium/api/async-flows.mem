@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/async-flows >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/async-flows>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/async-flows.mem"
@@ -10,7 +10,6 @@ mana      = 17
 manao     = 16
 manaoio   = 15
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the async/long-running CLI flow contract for lares — submit→request-id→status/watch/wait/cancel over a 5-state terminal-once job machine; progress as ONE event stream the dual renderer splits (TTY bar/spinner on stderr · NDJSON progress off-TTY), result alone on stdout; heartbeat-not-hard-fail timeouts (exit 124), durable-id = idempotency = no-loss; mapped onto the infra we already hold (mempalace daemon-jobs + durable summons/outcome by requestId + render dual-surface)"
 tags      = ["api/pono/meme", "api/lararium"]
@@ -19,11 +18,11 @@ uri-path  = "ha.ka.ba/lararium/api/async-flows"
 written   = "2026-06-25"
 ```
 
-<<~ aka lar:///ha.ka.ba/lararium/mesh/operator-peer >>
+<<~ aka lar:///ha.ka.ba/lararium/mesh/operator-peer>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! Async Flows ~ timing insight for human and agent
 
@@ -37,9 +36,9 @@ and `lares` already owns all three pieces: a ''daemon-job model'' (submit→id�
 > ''stdout is the API contract; progress and diagnostics ride stderr — and a''
 ''> timeout is never a loss, because the result is durable by id.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-contract >>
+<<~ ahu #the-contract>>
 
 !! The Contract ~ four verbs over the request-id
 
@@ -51,21 +50,21 @@ off-TTY / `--detach` it returns the id and exits.
 \procedure ~Verb(Type:"" Params:"") ~Verb <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Verb status "lares vessel read <id> ~ one-shot, authoritative current state; emits a pollInterval hint" >>
-<<~Verb watch "lares watch <id> ~ stream progress until terminal; --exit-status mirrors the job result into the CLI exit code (gh/kubectl shape)" >>
-<<~Verb wait "lares wait <id> --timeout <s> ~ block until terminal-or-timeout; timeout → structured 'still running + progress', NEVER a hard fail (the work lives in the job, not the call)" >>
-<<~Verb cancel "lares cancel <id> ~ move the job to the cancelled terminal state (distinct from Ctrl-C, which DETACHES — job keeps running, re-attach by id)" >>
+<<~Verb status "lares vessel read <id> ~ one-shot, authoritative current state; emits a pollInterval hint">>
+<<~Verb watch "lares watch <id> ~ stream progress until terminal; --exit-status mirrors the job result into the CLI exit code (gh/kubectl shape)">>
+<<~Verb wait "lares wait <id> --timeout <s> ~ block until terminal-or-timeout; timeout → structured 'still running + progress', NEVER a hard fail (the work lives in the job, not the call)">>
+<<~Verb cancel "lares cancel <id> ~ move the job to the cancelled terminal state (distinct from Ctrl-C, which DETACHES — job keeps running, re-attach by id)">>
 
 Precedent: `gh run watch --exit-status`, `kubectl wait --for=condition --timeout`,
 `clig.dev` ("a start command that returns a job ID, and a status command to poll").
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-job-machine >>
+<<~ ahu #the-job-machine>>
 
 !! The Job Machine ~ five states, terminal-once
 
-<<~ranks job working ~ in progress -> input_required ~ awaiting the operator -> completed ~ ok, terminal -> failed ~ error, terminal -> cancelled ~ stopped, terminal >>
+<<~ranks job working ~ in progress -> input_required ~ awaiting the operator -> completed ~ ok, terminal -> failed ~ error, terminal -> cancelled ~ stopped, terminal>>
 
 ''Terminal-once:'' once a job reaches completed/failed/cancelled it never moves
 again. ''Poll is authoritative'' (not pushed notifications, which drop) — non-terminal
@@ -73,9 +72,9 @@ again. ''Poll is authoritative'' (not pushed notifications, which drop) — non-
 ''`pollInterval`'' (ms) so an agent polls without overloading (the MCP async-task
 shape). The result is fetched after terminal, by id.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dual-surface >>
+<<~ ahu #dual-surface>>
 
 !! The Dual Surface ~ one event stream, two projections
 
@@ -94,12 +93,12 @@ One progress event stream; the existing renderer splits it:
 {"type":"result","requestId":"…","status":"completed","ok":true, …}      # stdout
 ```
 
-<<~ confidence 14/20 >> `render.ts`'s prose/JSON shore IS this split
+`render.ts`'s prose/JSON shore IS this split
 — one event stream, two projections.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #progress-eta >>
+<<~ ahu #progress-eta>>
 
 !! Progress & ETA
 
@@ -110,9 +109,9 @@ One progress event stream; the existing renderer splits it:
 * ''ETA'' by an ''exponential moving average of per-item rate'' (tqdm) — recent items
   weighted, so ETA tracks rate changes without jitter.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #timeouts-cancel-resume >>
+<<~ ahu #timeouts-cancel-resume>>
 
 !! Timeouts · Cancellation · Resumability
 
@@ -130,9 +129,9 @@ One progress event stream; the existing renderer splits it:
   (Stripe/MCP shape) — a re-submit returns the stored result if completed, the
   in-progress handle if running; a timeout is re-queryable, never lost.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #agent-ergonomics >>
+<<~ ahu #agent-ergonomics>>
 
 !! Agent Ergonomics ~ never block the agent's context
 
@@ -143,15 +142,15 @@ One progress event stream; the existing renderer splits it:
 * ''`--yes` / `--force`'' (an agent cannot type `y`; a prompt-hang kills its workflow).
 * ''Parseable error CODES, not prose'' (`not-found`, not "Error occurred").
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #map-and-backlog >>
+<<~ ahu #map-and-backlog>>
 
 !! Map to Our Infra + Backlog
 
 The three pieces already exist:
 
-<<~ranks have daemon-jobs ~ mempalace `--daemon --background` → job-id → daemon jobs/wait/status (we call mine SYNCHRONOUSLY instead) -> durable-results ~ lares summons → @daemon/outcomes/<requestId> (CRDT, survives a CLI timeout, re-queryable) -> dual-render ~ render.ts prose/JSON (the progress-event split shore) >>
+<<~ranks have daemon-jobs ~ mempalace `--daemon --background` → job-id → daemon jobs/wait/status (we call mine SYNCHRONOUSLY instead) -> durable-results ~ lares summons → @daemon/outcomes/<requestId> (CRDT, survives a CLI timeout, re-queryable) -> dual-render ~ render.ts prose/JSON (the progress-event split shore)>>
 
 ''Implementation order'' (write-toward; confirm interfaces first — see caveat):
 # Make long ops ''return the request-id fast'' (+ `--detach`); default TTY attaches to `watch`.
@@ -164,18 +163,18 @@ daemon-job/durable-result interfaces already emit //intermediate// progress (vs 
 terminal status) before binding the verbs. The event shape above is the target to
 write toward, not a description of current emission.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/mempalace-integration >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/capture-annotation-model>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/mempalace-integration>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;EgBRaMdJdpRDaK3TWDdIVeZFy-tai7hnFbuJk43bfvc
+<<^ code="&#x0003;">>ni:///sha-256;LbetvmK78Ual9lN0HcK8xVy7M-a8BtBhu7NJzEGnfJ4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

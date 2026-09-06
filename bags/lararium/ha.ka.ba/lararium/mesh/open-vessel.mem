@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/open-vessel >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/open-vessel>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/open-vessel.mem"
@@ -9,7 +9,6 @@ l-space     = "lararium"
 mana        = 17
 manao       = 16
 manaoio     = 14
-register    = "Synthesis"
 retain      = true
 role        = "The Vessel — one clean composable web3-protocol design: a vessel composes from sovereign protocol participations named by its KEEL (VesselKeel); openVesselCore owns the sequence, the keel supplies the substrate atoms; role rides as a capability bundle, never a platform. `recipe` names the pinned wiki's composition and nothing else."
 source-file = "packages/lararium-mesh/src/open-vessel-core.ts"
@@ -17,7 +16,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/open-vessel"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! The Vessel — One Composable Web3 Design
 
@@ -25,7 +24,7 @@ The authority contract lives in [[operator-peer|lar:///ha.ka.ba/lararium/mesh/op
 This meme owns the ''compositional structure'': what a vessel composes FROM, and the
 ONE factory shape both platforms instance (see #one-derivation).
 
-<<~ ahu #the-law >>
+<<~ ahu #the-law>>
 
 !! The Law
 
@@ -52,9 +51,9 @@ compose once it holds the capability, never an `isNode`/`isBrowser` fork and nev
 permanently-absent slot. A capability absent today reads as //not-yet-held//, never
 //cannot-hold//. The shore for every such piece stays open on both substrates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-seven-participations >>
+<<~ ahu #the-seven-participations>>
 
 !! The Seven Participations (what a vessel composes)
 
@@ -71,9 +70,9 @@ them, it does not re-implement them.
 | 6 | ''Admin island'' | authn/z home; keyhive-in-worker; verb dispatch + binding | verify-then-delegate; admin-vm-core |
 | 7 | ''Verb plane'' | verb-tiddler invocation → outcome (UCAN-invocation shape) | verb-tiddler; [[project_asymmetric_peer_handoff]] |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-shape >>
+<<~ ahu #the-shape>>
 
 !! The Shape — A Vessel Composes Its Pieces
 
@@ -100,9 +99,9 @@ only the lines that actually differ between two living vessels earn a place, not
 speculative (Rule-of-Three). Conformance proves BEHAVIORAL (both vessels walk the
 phase sequence), never type-conformance to a port.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #role >>
+<<~ ahu #role>>
 
 !! Role Names Which Pieces the Keel Carries (the keystone reframe)
 
@@ -128,9 +127,9 @@ the MessageChannel to its own island + the same-origin BroadcastChannel — trus
 origin, a LEGITIMATE asymmetry, not an open hole). No keel omits the access piece, so
 an accidental open-to-all reads as unreachable by construction.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #one-derivation >>
+<<~ ahu #one-derivation>>
 
 !! One Derivation ~ what a platform MAY decide, and what it MAY NOT
 
@@ -156,18 +155,18 @@ so a bag absent from that set can never satisfy a cap check — no throw, no war
 `act LOAD` that refuses forever. Two hand-written lists of one fact drift, and the one
 carrying authority drifts ''silently''; a derivation cannot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ confidence 14/20 >> The design reads pono (composition, not interface;
+The design reads pono (composition, not interface;
 role-as-capability; native-first by subtraction), and the node + browser suites boot real
 vessels through the phase sequence, so the invariant carries a live guard rather than an
 argument. What stays open sits one level out: a live-daemon exercise of the full sequence.
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/causal-island >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/causal-island>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/island-protocol>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MrLAy-2xsG2jKhSdrDll6ddggVrvvIK8xGt-GeO0lAc
+<<^ code="&#x0003;">>ni:///sha-256;dcKJiunIX464b3jFs9rQoPLYqPP5308Zny_sfJMOot8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

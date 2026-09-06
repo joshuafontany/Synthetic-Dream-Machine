@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/law-of-5s >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/law-of-5s>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/law-of-5s.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "extended docs for the Law of Fives: subscript attention-scale sigils, three-projection unification, boundary zones, Aperture mapping, and scale UCAN attenuation"
 tags      = ["api/pono/meme"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/law-of-5s"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Law of Fives — Extended Docs
 
 The TOML invariant arrays (`LADDER_5`, `OODA_HA_5`) live in `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#/law-of-5s`.
 This surface carries the unified attention-scale framing, subscript sigils, three-projection semantics, and boundary-zone reading.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #subscript-sigils >>
+<<~ ahu #subscript-sigils>>
 
 !! Subscript Attention-Scale Sigils
 
@@ -50,9 +49,9 @@ Design properties of the subscript form:
 
 The parser categorizes by Unicode range check: if `cp in 8304..8351: return SCALE`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-projections >>
+<<~ ahu #three-projections>>
 
 !! Three-Projection Unification
 
@@ -85,9 +84,9 @@ SIGIL  RANGE      CHRONO   HUD   TEXT        SPATIAL
 
 ''Important distinction:'' consecration (0–20 Level validated integrity) and attention scale (0–20 Level range extent) both use the same numeric continuum but stay orthogonal. Consecration describes TRUST. Scale describes ZOOM. A meme can carry Level 19 consecration at ₀ scale (highly validated, atomic grain) or Level 4 consecration at ₄ scale (provisional sketch, campaign arc).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary-zones >>
+<<~ ahu #boundary-zones>>
 
 !! Boundary Zones
 
@@ -104,9 +103,9 @@ VALUE   BOUNDARY         CHARACTER
 
 A counter increment at a lower-numbered Chronometer slot without a higher-slot change indicates motion ''within'' a band. A phase change at a higher-numbered slot indicates a ''boundary crossing''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #p-parameter-mapping >>
+<<~ ahu #p-parameter-mapping>>
 
 !! p-Parameter Mapping
 
@@ -125,9 +124,9 @@ Aperture 20  = session-arc   → ₄ band
 
 "Aperture 10" and "at ₂ resolution" and "at Turn grain" all reference the same point on the unified continuum.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scale-attenuation >>
+<<~ ahu #scale-attenuation>>
 
 !! Scale UCAN Attenuation
 
@@ -144,9 +143,9 @@ Envelope: <<~ँ₃ ...>>       Watch-scale
   Inner: <<~ ...>>           inherits ₃ (Watch-scale)
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #chronometer-fragment >>
+<<~ ahu #chronometer-fragment>>
 
 !! Chronometer Fragment Integration
 
@@ -158,18 +157,18 @@ The fragment `#O0.O0.O3.D2.A7` gains explicit scale-band labeling:
 
 Each dot-separated position corresponds to one band. Reading left to right zooms from broadest (₄) to finest (₀). The fragment constitutes a five-dimensional attention-range coordinate — the system's OODA-HA phase position at every scale simultaneously.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#/law-of-5s >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext#/law-of-5s>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;97DEsxZ2h88FPdH2O3lJ4hgkkFzsRpx29UCHBB761mg
+<<^ code="&#x0003;">>ni:///sha-256;2mjj6PapWLA1coBf9E7t8wOIOQpl8oe6RSqK0Wq4Hf4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

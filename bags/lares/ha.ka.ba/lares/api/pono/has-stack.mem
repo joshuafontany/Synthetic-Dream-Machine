@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/has-stack >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/has-stack>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/has-stack.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 14
 manao     = 15
 manaoio   = 13
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the has-stack law (kānāwai): nameless entity + composable component stack; single-entity components; relative-name qualification; rating-as-predicate; kapu as grant — ratified 2026-06-12"
 type      = "text/memetic-wikitext+tiddlywiki"
@@ -16,11 +15,11 @@ uri-path  = "ha.ka.ba/lares/api/pono/has-stack"
 written   = "2026-06-12"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Has-Stack — the composition law
 
@@ -28,9 +27,9 @@ A carrier reads as a ''nameless entity'': essence lives nowhere; identity rides 
 
 TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter runs the type-predicate. This law governs that field's grammar; `meme` governs copy-shape; `loci` governs the address.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the carrier's tags field and title before judging composition; gather which entries resolve, which stand declared-unresolved.
 ⏿ orient each entry against its definition meme; the carried thing carries the semantics, never the edge.
@@ -38,9 +37,9 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 ▶ author the stack in the meta `tags` field alone; mint missing definition memes where pressure warrants.
 ↺ verify qualification resolves, family exclusivity holds, no kapu entry rode in ungated; close with unresolved entries named.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! The Seven Clauses
 
@@ -54,12 +53,12 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 
 Runtime: `qualifyStackTag` / `stackOf` and the `stack` filter operator (`[stack[]]`, `[stack:has[<name>]]`).
 
-<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has >>
-<<~ pranala #source-filter from=? -> to=packages/lararium-tw5/src/filters/stack.ts family=code role=has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has>>
+<<~ pranala #source-filter from=? -> to=packages/lararium-tw5/src/filters/stack.ts family=code role=has>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verse-binding >>
+<<~ ahu #verse-binding>>
 
 !! The Verse Marriage — witnessed bindings
 
@@ -81,27 +80,27 @@ Field-grounded against Epic's UEFN+/Scene Graph direction (2026-06-12, two resea
 
 ''The nominal divergence, named so it never drifts:'' Verse defines components nominally (`class(component)`); here a component's nominal anchor = its ''address'', minted open, judged by the rating ladder.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #runtime-twin >>
+<<~ ahu #runtime-twin>>
 
 !! The runtime twin ~ a causal island runs as a nameless cap stack
 
 The has-stack law has a ''runtime mirror''. Where a DATA entity is a nameless carrier whose `tags` are a stack of component memes, a RUNTIME entity — a sovereign ''causal island'' worker — is a nameless behavior whose ''cap stack'' is its identity. No carrier //${copula}-a// "wiki worker" or "telemetry worker"; an island //has// caps, and the caps speak for themselves. `composeIsland([...caps])` (`tw5/island-caps.ts`) folds a `#has` cap stack into the one `IslandBehavior` the sovereign kernel drives.
 
-<<~ranks plane data/tags→component-memes -> runtime/caps→IslandBehavior >>
+<<~ranks plane data/tags→component-memes -> runtime/caps→IslandBehavior>>
 
 The same grammar runs both planes: stack order carries precedence (a cap claims a signal before later caps; teardown mirrors LIFO), an absent/unresolved cap reads fertile not broken, and each cap injects its substrate shore (`role = capability ≠ platform`) so the same stack composes on node, browser, any vessel. The TW5 VM workers stand as cap stacks — wiki `[hasDispatch, hasProjection, …]`, admin `[hasEngineWatch, hasDispatch]`, telemetry `[hasCapture]` — each a nameless causal island.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-isomorphism>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
 
 ''Tie ~ a palace IS its cap-stack.'' The runtime twin extends a third substrate: the nameless memory-
 palace daemon ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/palace-instance]]) ports `composeIsland` to Python — one body,
@@ -110,8 +109,8 @@ differentiated only by `[FlockSingleton, FeedCap, …]`; role emerges from the s
 cap-stack grammar holding identically py-side, TS carrying the coordinator and the pure-functor math floor
 the py caps consume.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DMNnPE9-2cHnXh_Z5B27_PLN-NDb-CTzCbZRIgySkcc
+<<^ code="&#x0003;">>ni:///sha-256;7MGdg5AI3WmSYyYtxCsG96Q4e3MuUA1-gv4Eyj-ad4A
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

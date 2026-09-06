@@ -1,22 +1,21 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/lib-smol-toml >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/lib-smol-toml>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/lib-smol-toml.mem"
 mana      = 17
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = true
 role      = "TW5 library tiddler: smol-toml TOML parser, spec-compliant, ~26 kB, sync, no WASM"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/lib-smol-toml"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! smol-toml Library Tiddler
 
@@ -33,9 +32,9 @@ The compiled JS body generates from `src/lib-smol-toml.ts` during `build:plugin`
 Vite externalizes the `smol-toml` npm import in every other module bundle and rewrites
 the import to this `require()` call via `rollupOptions.output.paths`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #consumers >>
+<<~ ahu #consumers>>
 
 !! Consumers
 
@@ -43,9 +42,9 @@ the import to this `require()` call via `rollupOptions.output.paths`.
 * future `toml` data-fence widget — named TOML blocks at render-time
 * operator-authored module tiddlers that declare TOML-structured data
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #design-notes >>
+<<~ ahu #design-notes>>
 
 !! Design Notes
 
@@ -60,18 +59,18 @@ Named TOML blocks (profile name present, profile != `meta`) surface as data acce
 widget layer. The UEFN device / Verse work drives this: TOML blocks describe device placement,
 component properties, and tick-scoped state in a WYSIWYG-friendly field structure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/toml-ast >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-toml >>
-<<~ loulou lar:///plugins/lares/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/toml-ast>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-toml>>
+<<~ loulou lar:///plugins/lares/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;W4uhq7dM1SW2LKpKAlZcZQSbHci8gj_Kpr3-eBIxyeU
+<<^ code="&#x0003;">>ni:///sha-256;lTLVNrbUzc3wZzvSC-gxDX0V2lEvUnpFTkywGsaV9bs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

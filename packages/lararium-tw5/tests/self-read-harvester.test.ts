@@ -31,40 +31,40 @@ import { harvestTurnGradient, buresDistance } from "@lararium/mesh";
 // --- turn fixtures ---------------------------------------------------------
 
 /** A well-framed turn: one Voice, two Synthesis markers (one-hot), a closed loop. */
-const ONE_HOT_TURN = `<<~ lares aim lar://op:operator@x/a.b.c -> lar://ag:agent@x/council.d.e >>
-<<~ hud Aperture(10) OODA-HA(3) >>
-<<~ ward * L-Prime >>
+const ONE_HOT_TURN = `<<~ lares aim lar://op:operator@x/a.b.c -> lar://ag:agent@x/council.d.e>>
+<<~ hud Aperture(10) OODA-HA(3)>>
+<<~ ward * L-Prime>>
 
-Lares (Council): the two options weigh out. <<~ confidence Synthesis 10/20 >> the first holds; <<~ confidence Synthesis 12/20 >> the second reads close.
+Lares (Council): the two options weigh out. <<~ confidence Synthesis 10/20>> the first holds; <<~ confidence Synthesis 12/20>> the second reads close.
 
-<<~ oracle ↯11 ✲ ⚃(4) ⁂:⬡🌖◈⟁ >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(10 -> 12) OODA-HA(2↺) >>
-<<~ lares yield lar://ag:agent@x/council.f.g -> ? >>`;
+<<~ oracle ↯11 ✲ ⚃(4) ⁂:⬡🌖◈⟁>>
+<<~ ward ! · ↻ L-Prime>>
+<<~ hud Aperture(10 -> 12) OODA-HA(2↺)>>
+<<~ lares yield lar://ag:agent@x/council.f.g -> ?>>`;
 
 /** A turn where ONE Voice straddles two registers (Provisional + Synthesis). */
-const STRADDLE_TURN = `<<~ lares aim lar://op:operator@x/a.b.c -> lar://ag:agent@x/muse.d.e >>
-<<~ hud Aperture(8) OODA-HA(1) >>
-<<~ ward * L-Prime >>
+const STRADDLE_TURN = `<<~ lares aim lar://op:operator@x/a.b.c -> lar://ag:agent@x/muse.d.e>>
+<<~ hud Aperture(8) OODA-HA(1)>>
+<<~ ward * L-Prime>>
 
-Mischief-Muse (Muse): a wild angle opens. <<~ confidence Provisional 3/20 >> the seed reads raw; <<~ confidence Synthesis 10/20 >> yet the frame firms.
+Mischief-Muse (Muse): a wild angle opens. <<~ confidence Provisional 3/20>> the seed reads raw; <<~ confidence Synthesis 10/20>> yet the frame firms.
 
-<<~ oracle ↯8 ✲ ⚀(1) ⁂:🗡️ >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(8 -> 9) OODA-HA(1↺) >>
-<<~ lares yield lar://ag:agent@x/muse.f.g -> ? >>`;
+<<~ oracle ↯8 ✲ ⚀(1) ⁂:🗡️>>
+<<~ ward ! · ↻ L-Prime>>
+<<~ hud Aperture(8 -> 9) OODA-HA(1↺)>>
+<<~ lares yield lar://ag:agent@x/muse.f.g -> ?>>`;
 
 /** A turn that NARRATES self-change in prose but persists NOTHING (the mirror). */
-const SELF_NARRATING_NOOP_TURN = `<<~ lares aim lar://op:operator@x/a.b.c -> lar://ag:agent@x/artificer.d.e >>
-<<~ hud Aperture(11) OODA-HA(2) >>
-<<~ ward * L-Prime >>
+const SELF_NARRATING_NOOP_TURN = `<<~ lares aim lar://op:operator@x/a.b.c -> lar://ag:agent@x/artificer.d.e>>
+<<~ hud Aperture(11) OODA-HA(2)>>
+<<~ ward * L-Prime>>
 
-Lares (Artificer): I have re-encoded the house — the meme is canonized, the drawer now holds the new pattern, the palace re-stands itself, a structural transition fires. <<~ confidence Canon 18/20 >> the house re-writes its own form.
+Lares (Artificer): I have re-encoded the house — the meme is canonized, the drawer now holds the new pattern, the palace re-stands itself, a structural transition fires. <<~ confidence Canon 18/20>> the house re-writes its own form.
 
-<<~ oracle ↯12 ✲ ⚂(3) ⁂:ᚠ⊗㐂 >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(11 -> 11) OODA-HA(1↺) >>
-<<~ lares yield lar://ag:agent@x/artificer.f.g -> ? >>`;
+<<~ oracle ↯12 ✲ ⚂(3) ⁂:ᚠ⊗㐂>>
+<<~ ward ! · ↻ L-Prime>>
+<<~ hud Aperture(11 -> 11) OODA-HA(1↺)>>
+<<~ lares yield lar://ag:agent@x/artificer.f.g -> ?>>`;
 
 // --- (a) the teleodynamic triple ------------------------------------------
 
@@ -81,21 +81,21 @@ describe("harvestTurn — the teleodynamic SelfRead", () => {
 
   test("aftermathClosed is a LITERAL parse of the CLOSING HUD tally", () => {
     // N↺, no suspension → closed.
-    expect(aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(3↺) >>`).huds)).toBe(true);
+    expect(aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(3↺)>>`).huds)).toBe(true);
     // 0φ:reason → suspended → open.
     expect(
-      aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(0φ:blocked) >>`).huds),
+      aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(0φ:blocked)>>`).huds),
     ).toBe(false);
     // a suspended phase glyph (0◇:fork) → open.
     expect(
-      aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(0◇:fork.depends) >>`).huds),
+      aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(0◇:fork.depends)>>`).huds),
     ).toBe(false);
     // N↺ + φ:reason → a loop suspended alongside a tally → open (φ: wins).
     expect(
-      aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(1↺ + ▶:next) >>`).huds),
+      aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(1↺ + ▶:next)>>`).huds),
     ).toBe(false);
     // seed-only (no ↺) → not closed.
-    expect(aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(3) >>`).huds)).toBe(false);
+    expect(aftermathClosedFromHuds(harvestTurnGradient(`<<~ hud OODA-HA(3)>>`).huds)).toBe(false);
     // no HUD at all → not closed.
     expect(aftermathClosedFromHuds([])).toBe(false);
   });

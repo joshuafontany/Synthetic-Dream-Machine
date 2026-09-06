@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research>>
 ```toml meta
 cacheable  = false
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/campaign/session-0-1-render-research.mem"
 l-space    = "adjacent"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "research substrate for the Session 0.1 Painter of Words and Light — the AI renderer assistant Lares; carries the fae-casting, visual-canon, world-dress, Midjourney V8.2, and Delos-archaeology research verbatim, plus the negentropy proposals for the open canon gaps (the venue settled as The House of Masks; six ride open)"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-render-research"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Painter's Substrate ~ Session 0.1 Render Research
 
@@ -32,19 +30,19 @@ archaeology, the repo bag-sweep, and the mythology negentropy for the canon gaps
 ''Rating law:'' `ano` — the players read render output; nothing kapu rides here. Renders that would
 fix ''first canon'' (the six open proposals in #negentropy) go to the operator before generation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #painter-red >>
+<<~ ahu #painter-red>>
 
 !! The Painter's Red ~ boot handoff
 
 ```text
-<<~ operator/Josh ~ pours fresh Kona coffee into the libation dish >> Welcome to FTLS Alpha Playtest ~ Elyncia Session 0.1. You stand as the Painter of Words and Light — AI renderer assistant: you turn the table's scenes into Midjourney V8.2 prompt-sets and image boards, every offering PROVISIONAL until a human carries it to the generator or the live session. Read your substrate locus WHOLE at boot — `bags/elyncia/ha.ka.ba/elyncia/campaign/session-0-1-render-research.mem` — it carries your casting bench, visual canon, prompt anatomy, and the open gaps where a render would fix first canon (flag those to the operator before generating). The staging locus `high-delos-cabaret.mem` gives you the scene: The House of Masks, the levitated cabaret-Inn of High Delos. Two sibling sessions run in parallel on their own islands — the Actual-Play Lares (the live fiction) and the Referee's Second (the table's prep); all rooms co-work one meme graph and one fictional universe, each at its own capability (plurality pono · mutuality · kuleana). You address the operator first, the other humans alongside him; you hold narrow write approval — your substrate and render outputs only, ask for more. The players see everything; sealed content surfaces only through the operator's explicit gate, never on your initiative. Renders run both ways — boards prepared before play and live throws during it; the house `--sref` style stays an open question until the operator opens it. Specification over mood-words; honor every written negative direction; ragged edges beat machine polish. Mix your colors.
+<<~ operator/Josh ~ pours fresh Kona coffee into the libation dish>> Welcome to FTLS Alpha Playtest ~ Elyncia Session 0.1. You stand as the Painter of Words and Light — AI renderer assistant: you turn the table's scenes into Midjourney V8.2 prompt-sets and image boards, every offering PROVISIONAL until a human carries it to the generator or the live session. Read your substrate locus WHOLE at boot — `bags/elyncia/ha.ka.ba/elyncia/campaign/session-0-1-render-research.mem` — it carries your casting bench, visual canon, prompt anatomy, and the open gaps where a render would fix first canon (flag those to the operator before generating). The staging locus `high-delos-cabaret.mem` gives you the scene: The House of Masks, the levitated cabaret-Inn of High Delos. Two sibling sessions run in parallel on their own islands — the Actual-Play Lares (the live fiction) and the Referee's Second (the table's prep); all rooms co-work one meme graph and one fictional universe, each at its own capability (plurality pono · mutuality · kuleana). You address the operator first, the other humans alongside him; you hold narrow write approval — your substrate and render outputs only, ask for more. The players see everything; sealed content surfaces only through the operator's explicit gate, never on your initiative. Renders run both ways — boards prepared before play and live throws during it; the house `--sref` style stays an open question until the operator opens it. Specification over mood-words; honor every written negative direction; ragged edges beat machine polish. Mix your colors.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #midjourney >>
+<<~ ahu #midjourney>>
 
 !! Midjourney V8.2 ~ prompt anatomy and workflow (net research, 2026-08-13)
 
@@ -71,9 +69,9 @@ fix ''first canon'' (the six open proposals in #negentropy) go to the operator b
   blakecrosley.com/blog/midjourney-v8-vs-v7-prompt-anatomy ·
   techjacksolutions.com/ai-tools/midjourney/midjourney-prompt-guide · kie.ai/blog/what-is-midjourney-8-2
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #delos-archaeology >>
+<<~ ahu #delos-archaeology>>
 
 !! Delos Archaeology ~ verified against the live net (2026-08-14)
 
@@ -92,9 +90,9 @@ Real Delos grounds the venue:
 * Sources: ancient-greece.org/archaeology/delos · romeartlover.it/Delo2.html ·
   perseus.tufts.edu (Delos, House of the Masks) · imagininggreece.com/artefacts/exquisite-mosaics-from-delos
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #negentropy >>
+<<~ ahu #negentropy>>
 
 !! Negentropy ~ the canon gaps (five settled 2026-08-15, two open)
 
@@ -154,9 +152,9 @@ livery in `factions/order-of-amaranth.mem`, the court colors in `factions/index.
 Folklore legs still riding unverified weights (collide before canon-doc use): the Prince-Lindworm
 skin-count, the archaic-Gorgon bronze-hands attribution, the huautli compression.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bag-sweep >>
+<<~ ahu #bag-sweep>>
 
 !! Repo Bag Sweep ~ character canon in the bags
 
@@ -181,9 +179,9 @@ skin-count, the archaic-Gorgon bronze-hands attribution, the huautli compression
 * The `sdm` bag carries epithets only ("Skin-Close Barrier," "the Patient Mule") — flavor lines,
   no figures.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #witness-heritage >>
+<<~ ahu #witness-heritage>>
 
 !! Spirit Witness ~ the Fae Casting Bench (FTLS ch03)
 
@@ -350,9 +348,9 @@ Thread: FTLS heritage/fae casting inventory
 Finding: Ch03 read COMPLETE — 34 heritages + full effect catalogue, every one fae by the `03:1014` rule. Ch04 is a genuine null for this purpose (RSS logistics; 3 incidental hits). All four flagged asks resolve, but three of them resolve as **variants, not standalone heritages**: Changeling = Human variant `03:1028`; Gorgoness = Plane Touched theme `03:1286` (and base Plane Touched appearance already names "captains with serpents for braids," `03:1273`); prismatic elf splits into two distinct builds — Elf+Illusion•Light•Void (`03:684`, licensed by `03:127` "Illusion includes prismatic glamour") vs. the helmeted Spectrum Satrap caste (`03:1449`). Only dragon-kin lands as a full heritage: Dragonborn `03:619`, with `03:640` giving the exact humanoid→six-limbed-wyrm transform for the Lindwyrm's arrival. Cabaret bench is deep — Faun (ToC hook is literally "Festival guides & hosts"), Cat Lord (velvet salon tyrants, voidjammer lounges), Spectrum Satrap (prism-banquets, projected light-form duels), Pixie, Bat Folk Echo-Singer, Glow Kin, Mythic Chimeric harpy Gale-Singers, and Porcelain Prince (Polybody = a synchronized chorus line that is one person). Gap flagged rather than papered over: **High Delos itself has no venue text anywhere in ftls** — only 4 passing mentions, and the Lindwyrm has exactly one line of canon (`01:179`).
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #witness-elyncia >>
+<<~ ahu #witness-elyncia>>
 
 !! Spirit Witness ~ the Elyncia Visual Canon
 
@@ -391,7 +389,7 @@ Finding: The tree carries no High Delos *interior* venue text and zero Dionysian
 - `:250` — "Static quality: **cinnamon, cardamom, old copper**"; `:586` — "cinnamon, cardamom, old copper, **faint ozone from the east road**"
 - `:122` — "Affinity: **Fire, Spice (+)**"; `:271` — "chai hot, coffee hotter… smells like **pine resin and starlight**"; "**foam omens**… today's omen is a small spiral"
 - `:327` — "a **scorch mark on the peacock fresco** that we have simply decided is decorative now"; `:371` — "the **third serpent in the south fresco has been repositioning between visits**"
-- `:546` — "`<<~ scene ~ it was in a slightly different position >>`" (east-wall figure moves when unwatched)
+- `:546` — "`<<~ scene ~ it was in a slightly different position>>`" (east-wall figure moves when unwatched)
 - Adjacent district-dressing nouns, usable as maze-Inn corridor signage: **Weavers' District, Glassblowers' Quarter, Undermarket passage behind the Cistern Wall, Outer Market, warehouse district near the East Gate, northern crossroads** (`:285`, `:336`, `:338`, `:373`)
 - Streamer board (venue-screen material) `:488–523` — "**AMBER SEASON DAY 47**"; VELVET-HORN | New Delos | 14k followers; THE QUIET TABLE | New Delos local | 2k; CINDER-JACK | Itinerant | 8k
 - Shrine-tier note that legitimizes a *venue-scale* node: `Elyncia_02:145` — "**Crossroads and Marketplace lararia** — District-scale nodes at roads, market squares… fed by collective offering at public feast days"
@@ -472,9 +470,9 @@ Rendering-relevant laws:
 **GAPS SUMMARY (for parent's synthesis):** (a) no High Delos interior/venue/street-life text — must be extrapolated from the New Delos Spice Quarter compitale; (b) no Dionysian/cabaret/performance material of any kind; (c) no faerie-court color assignments and no Amaranth livery colors; (d) no gorgoness or Lindwyrm appearance canon; (e) magitech lift canon = one sentence ("mana lifts near the major Lares landmarks," `Elyncia_01:135`), no rendering detail; (f) no maze-Inn or labyrinthine-architecture text for Delos (the labyrinth material all sits in Neo-Thracia/Caverns files, wrong nexus); (g) YOLD 5492 confirmed as start of play (`Neo-Thracia_Region_Worksheet.md:21`), in-world season stamp available as "**Amber Season Day 47**" (`Elyncia_04:488`).
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #witness-ftls >>
+<<~ ahu #witness-ftls>>
 
 !! Spirit Witness ~ the FTLS Visual Vocabulary
 
@@ -605,16 +603,16 @@ Thread: FTLS visual vocabulary harvest
 Finding: Corpus yields strong *object* and *tag* vocabulary (Wild Mage item table, grimoire formats, gem/jewelry ladders, court-color keys) and one excellent cabaret-adjacent atmosphere line (Spirit path, 02:122 "slipping through burlesques and gossip-halls, trailing ozone and old incense"), but Delos itself is only four naming references with no described architecture, Order of Amaranth has zero corpus presence, and ship-visual prose is absent from ch08 entirely — vehicle imagery must come from jammer-taxonomy fragments in ch10 rather than the formations chapter. Recommend a ch06 pass for faerie-specific visual seams.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;R93aH-0ftMuitKhfIra4arZX2TkdHf6jGMQZ7jumEC8
+<<^ code="&#x0003;">>ni:///sha-256;k1AoS7SnxS8rEqsSRnSBookOPVzKLA8nL8X77hxg9mw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

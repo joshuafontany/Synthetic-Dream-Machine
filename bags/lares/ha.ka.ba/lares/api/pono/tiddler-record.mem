@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/tiddler-record >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/tiddler-record>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/tiddler-record.mem"
@@ -9,7 +9,6 @@ mana          = 18
 manao         = 18
 manaoio       = 18
 namespace     = "&#x2299;"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "invariant law: LarTiddlerRecord as the canonical Automerge storage unit; carrier text as projection artifact only"
 source-symbol = "LarTiddlerRecord LarTiddlerStore ChangeOrigin LarTiddlerChange"
@@ -19,18 +18,18 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/tiddler-record"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Tiddler Record — Canonical Schema Law
 
 One tiddler record maps to one Automerge storage unit, always.
 Carrier text functions as a projection artifact — not as an Automerge storage unit.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law
 
@@ -64,9 +63,9 @@ The sync adaptor MUST NOT reconstruct carrier text in the write path. The sync a
 
 Files on disk that use carrier format (`.md` files in `lares/`, `ftls/`, `elyncia/`, `wtf/`) represent the operator's pre-projection of canonical content. The operator holds the authority to write these directly. The system imports them as individual tiddler records at hydration time. The carrier file on disk does not update automatically when Automerge state changes — that export remains a deliberate operator action.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -92,15 +91,15 @@ carrier-text-in-store = false
 ahu-slot-children     = "independent records — not embedded in parent record"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;XbiH2aq59W8qqCEMXTvkfjvuCp6Xtdc8Kn65r6DYgO8
+<<^ code="&#x0003;">>ni:///sha-256;YxvLuOUhCRFWRo8E0Uvv6XdNpHj4TDEGDWUjU_T6OgE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

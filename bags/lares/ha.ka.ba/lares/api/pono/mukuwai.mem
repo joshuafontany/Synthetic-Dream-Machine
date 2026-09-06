@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/mukuwai >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/mukuwai>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/mukuwai.mem"
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "conditional fallback sigil — else form; Hawaiian alias for \\else; the cut-off water, the path when all streams closed"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-mukuwai"]
@@ -13,9 +12,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/mukuwai"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Mukuwai
 
@@ -29,9 +28,9 @@ matched. English alias: `\else`.
 Mukuwai serves as the terminal form — it carries no filter expression because it runs when the
 question itself has exhausted all candidates. The stream reaches the cut-off; this path remains.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -40,36 +39,36 @@ A mukuwai block MUST appear as the final branch in a wai/kahawai chain.
 A mukuwai block MUST render its body when no preceding condition rendered.
 A wai chain MUST NOT contain more than one mukuwai block.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ wai [filter] >>
+<<~ wai [filter]>>
   first branch
-<<~ mukuwai >>
+<<~ mukuwai>>
   fallback
 ```
 
 English alias form:
 ```text
-<<~ \if [filter] >>  ...  <<~ \else >>  ...
+<<~ \if [filter]>>  ...  <<~ \else>>  ...
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahawai >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-else >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kahawai>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-else>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;htQFIXf8KfHqxiVYrpsEnjejSt8FPD7t50dvXACmCw4
+<<^ code="&#x0003;">>ni:///sha-256;YenIjHyxffKbYJZ4bak1LVdhWnFoZx1FX68dmvza-K8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

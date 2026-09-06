@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/lar-uri-namespace>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/lar-uri-namespace.mem"
 mana      = 19
 manao     = 18
 manaoio   = 18
-register  = "Synthesis-Canon"
 retain    = true
 role      = "lar: URI authority map — hostless vs hostful, domain namespaces, Quine sync candidates"
 tags      = ["api/pono/meme", "api/pono/local-first"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/lar-uri-namespace"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! lar: URI Namespace Doctrine
 
@@ -100,16 +99,16 @@ user-owned content within a domain.
 Hostless URIs never require network access to resolve. Hostful URIs may require
 a network hop for DID resolution but the content itself is local (CRDT store).
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-coordination >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-slot >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/composite-store >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-coordination>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-slot>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/composite-store>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;TST-rQL2d82HtGQFuhIFjkOHo-_7qj0Ftp0ciZ8Vn1E
+<<^ code="&#x0003;">>ni:///sha-256;lePtBoJ_ZTAJnUFA7Axk5BcS2zNlFqELPLw_RS7JUXQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

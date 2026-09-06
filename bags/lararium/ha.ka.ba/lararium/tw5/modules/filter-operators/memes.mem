@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/memes >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/memes>>
 ```toml meta
 body-sha256   = "3fae979c5db2d0ec9ed21502145a05ce5f275426d64470df9ac07d4fedc5460b"
 cacheable     = true
@@ -11,7 +11,6 @@ l-space       = "lararium"
 mana          = 14
 manao         = 14
 manaoio       = 13
-register      = "Synthesis-Canon"
 role          = "TW5 filter operator: memes — scaffolded by sync-heleuma --scan-decorators --commit"
 source-symbol = "collectMemes registerMemes registerMemesSource"
 status-date   = "2026-05-03"
@@ -19,32 +18,32 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/memes"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! memes
 
 TW5 filter operator from `@lararium/tw5`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 Exported symbols: `collectMemes`, `registerMemes`, `registerMemesSource`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/memes" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-W_dYtbSiwC4PFJHrCbmj4uZoxaJ2BC1QxtCr7kluds
+<<^ code="&#x0003;">>ni:///sha-256;XYW6XefI5lIL-RYxxmVHqOrbw22INwooGmjrGXB6Zqw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

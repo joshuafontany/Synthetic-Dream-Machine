@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing>>
 ```toml meta
 cacheable   = false
 file-path   = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing.mem"
@@ -8,7 +8,6 @@ l-space     = "stable"
 mana        = 16
 manao       = 16
 manaoio     = 16
-register    = "Synthesis-Canon"
 retain      = false
 role        = "adversarial witness stream with literal quotes for distributed failure, authz automation, websocket abuse cases, and formal verification corpus"
 status-date = "2026-05-25"
@@ -16,17 +15,17 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Research Stream - Adversarial Testing
 
 Literal quote witnesses for test-all-the-things posture.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #distributed-failure >>
+<<~ ahu #distributed-failure>>
 
 !! Distributed Failure and Generative Testing
 
@@ -38,9 +37,9 @@ Source: https://jepsen.io/analyses
 
 Source: https://jepsen.io/analyses
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #security-automation >>
+<<~ ahu #security-automation>>
 
 !! Security Testing and Authorization Automation
 
@@ -56,9 +55,9 @@ Source: https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_
 
 Source: https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_Sheet.html
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #formal-verification >>
+<<~ ahu #formal-verification>>
 
 !! Formal Verification Corpus
 
@@ -70,16 +69,16 @@ Source: https://github.com/tlaplus/Examples
 
 Source: https://github.com/tlaplus/Examples
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;GESS10HEvlHt1oLbz6hoE-7zjywglKX1honZ-Gg7jG0
+<<^ code="&#x0003;">>ni:///sha-256;9qSyARTFCfkic6FVgdz22hXj8FDhAzVzf8IHboilgOA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

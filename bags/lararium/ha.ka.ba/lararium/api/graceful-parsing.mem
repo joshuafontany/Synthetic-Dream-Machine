@@ -1,21 +1,20 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/api/graceful-parsing >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/api/graceful-parsing>>
 ```toml meta
 cacheable = true
 hydrate   = false
 mana      = 18
 manao     = 18
 manaoio   = 18
-register  = "Synthesis-Canon"
 retain    = true
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/graceful-parsing"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Graceful Parsing ~ all of TiddlyWiki on a gradient
 
@@ -27,9 +26,9 @@ rare unanimity. This is the POST-MARATHON epic — the design is locked here, co
 
 We are not inventing — we are NAMING what we already half-do (island grammar + Water) and FINISHING it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-tower >>
+<<~ ahu #the-tower>>
 
 !! The superset tower ~ HTML ⊂ TW5 wikitext ⊂ memetic-wikitext
 
@@ -199,20 +198,20 @@ dismissible alert, same channel as the reboot-alert shore). CAVEAT: NEVER raise 
 `renderChildren` (mutating the wiki during render risks a re-render loop) — collect render-errors
 in-render, raise the alert OUT-of-render (a hook/sweep, eventual-send), per the reboot-alert discipline.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-model >>
+<<~ ahu #the-model>>
 
 !! The model ~ the five production invariants (the keel)
 
 Six production parsers (Roslyn · TypeScript · rust-analyzer · Babel · Lezer · Tree-sitter) converge on
 five invariants — independent of hand-written vs table-generated:
 
-<<~Inv 1-always-a-tree "the parse CONTRACT changes from `tree | throw` to `tree + diagnostics[]` (Babel's `errorRecovery`). Never throw, never null. matklad: this is the whole game — every 'break badly' today is a thrown/aborted parse" >>
-<<~Inv 2-error-missing-nodes "ERROR + MISSING nodes ARE the gradient primitive — present-but-wrong (ERROR, wraps the unparsable span) vs expected-but-gone (MISSING, zero-width inserted). Everything between clean and garbage is expressible" >>
-<<~Inv 3-lossless "lossless / full-fidelity trees — the ERROR node holds the bytes VERBATIM, so concatenating the tree reproduces source. This IS our verbatim+AST drawer; the error span lands in the tree, not the floor" >>
-<<~Inv 4-untyped-typed "a homogeneous untyped tree underneath (every node a kind tag) + typed views on top — so error nodes live ANYWHERE without special-casing every rule" >>
-<<~Inv 5-bounded-recovery "bounded recovery: recovery-SETS (tokens that signal 'parent resumes here') + the ≥1-char PROGRESS INVARIANT (a skip-loop MUST consume ≥1 char) — kills both hard-fail AND the infinite-loop failure mode" >>
+<<~Inv 1-always-a-tree "the parse CONTRACT changes from `tree | throw` to `tree + diagnostics[]` (Babel's `errorRecovery`). Never throw, never null. matklad: this is the whole game — every 'break badly' today is a thrown/aborted parse">>
+<<~Inv 2-error-missing-nodes "ERROR + MISSING nodes ARE the gradient primitive — present-but-wrong (ERROR, wraps the unparsable span) vs expected-but-gone (MISSING, zero-width inserted). Everything between clean and garbage is expressible">>
+<<~Inv 3-lossless "lossless / full-fidelity trees — the ERROR node holds the bytes VERBATIM, so concatenating the tree reproduces source. This IS our verbatim+AST drawer; the error span lands in the tree, not the floor">>
+<<~Inv 4-untyped-typed "a homogeneous untyped tree underneath (every node a kind tag) + typed views on top — so error nodes live ANYWHERE without special-casing every rule">>
+<<~Inv 5-bounded-recovery "bounded recovery: recovery-SETS (tokens that signal 'parent resumes here') + the ≥1-char PROGRESS INVARIANT (a skip-loop MUST consume ≥1 char) — kills both hard-fail AND the infinite-loop failure mode">>
 
 ''The theory name (it already exists):'' ISLAND GRAMMARS + Water/Lake (Moonen, //Generating Robust//
 //Parsers Using Island Grammars//, WCRE 2001 — "Water" = the non-terminal that swallows non-islands;
@@ -221,9 +220,9 @@ Text-gap parser IS an island grammar already. Add a per-node parse-CONFIDENCE gr
 `aperture` ladder) + an explicit ErrorNode (à la tree-sitter/Lezer/Roslyn). Diagnostics ride
 OUT-OF-BAND, span-keyed (rust-analyzer's model) — exactly our gradient-annotation drawer over verbatim.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #engine-verdict >>
+<<~ ahu #engine-verdict>>
 
 !! Engine verdict ~ steal the model, don't swap the engine
 
@@ -246,9 +245,9 @@ copy; the gold pattern is RESILIENT RECURSIVE DESCENT (Roslyn / rust-analyzer / 
   it = REPLACE (rebuild the widget pipeline). Hold as the escalation option only. (Langium = its LSP
   upgrade; ANTLR loses on Java codegen; nearley/ohm/peggy = weak recovery for MALFORMED input.)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #architecture >>
+<<~ ahu #architecture>>
 
 !! The lift architecture ~ AUGMENT + WRAP, reject REPLACE
 
@@ -287,9 +286,9 @@ parser into a graded result. `builder.ts` · `scanner.ts` · the `MemeticParser`
 ONE module. The rule classes NEVER learn recovery — the substrate owns it (matklad: recovery lives in
 the driver, not the grammar). Clean upstream-plugin boundary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tw5-break-modes >>
+<<~ ahu #tw5-break-modes>>
 
 !! TW5's actual break-badly modes (grounded, file:line)
 
@@ -311,9 +310,9 @@ Existing hooks: `types.ts:34` already carries `confidence:number|null` on `Prana
 `PranalaEdgeViolation{severity}` — the gradient vocabulary exists, just on EDGES not nodes, populated
 by nothing. Finish it onto nodes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #recovery-policy >>
+<<~ ahu #recovery-policy>>
 
 !! Recovery policy ~ RESOLVED: water-floor, repair-as-gated-upgrade (2026-06-27)
 
@@ -330,15 +329,15 @@ ship (a catch + downgrade vs the per-construct repair tail). This is already `la
 
 ''Repair is the GATED follow-on.'' Add phrase-level repair (insert the MISSING token, resync to a
 recovery-set, re-parse) ONLY per-construct, ONLY where the fix is UNAMBIGUOUS and FREQUENT — an
-unclosed `}}}` / `<<~ >>` is a safe insert; a broken table row is a risky guess that stays water. A
+unclosed `}}}` / `<<~>>` is a safe insert; a broken table row is a risky guess that stays water. A
 repaired node carries `recoveredAs: "repaired"` at MID (synthesis) confidence — honestly weaker than a
 clean parse, honestly stronger than water. The `Error` node's `recoveredAs` field is the shore: `"water"`
 ships now, `"repaired"` lands per-construct later. The gradient stays truthful end to end: clean=canon
 · repaired=synthesis · water=raw.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sigil-self-defined-gradient >>
+<<~ ahu #sigil-self-defined-gradient>>
 
 !! Self-defining sigil failure-gradients ~ #has cap-stacks (3-spirit swarm, 2026-06-27)
 
@@ -396,9 +395,9 @@ force-close `:277-281`, unknown-sigil Dynamic `:123/:215`) · scanner per-sigil 
 `island-caps` to grammar entities for the recovery cap-stack — OR ship a lighter `lar-recover-*`
 field-set first, cap-stack second.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #references >>
+<<~ ahu #references>>
 
 !! Load-bearing references
 
@@ -412,9 +411,9 @@ field-set first, cap-stack second.
 * BurningTreeC CM6 wikitext parser (2026) — https://talk.tiddlywiki.org/t/new-codemirror-6-tiddlywiki5-plugin-2026/14689
 * Babel `errorRecovery` — https://babeljs.io/blog/2019/11/05/7.7.0
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
@@ -424,13 +423,13 @@ botched construction lights its parent schema AND its lower grammar-layer, degra
 same tower ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/two-planes]]). The cross-substrate GRADED-CORRECTION invariant
 behind that — correction by degree, never a binary gate — lives at [[living-grammar|lar:///ha.ka.ba/lares/api/pono/living-grammar]].
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/living-grammar >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/living-grammar>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/lararium-canonical-model>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5DeNORCh-mvApWkSOl4VVRQwxqJDTOcZoIFv-HQfgx8
+<<^ code="&#x0003;">>ni:///sha-256;GyGqETqi6B4EZapEbHjrhjwj5NoP7CW2WuQMlTZR5v0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

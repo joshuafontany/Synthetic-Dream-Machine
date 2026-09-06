@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "place, High Delos — the Orrery: the Reach-tier instrument mapping where Elyncia's pattern reached into neighboring worlds; access unruled"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Orrery of High Delos
 
@@ -36,8 +34,8 @@ maps; the instrument that knows where the worlds touch.
 whether it renders as the campaign's master-map artifact (the weld to the Node Interaction Card
 and the Painter's establishing boards stands noted).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;s7eP4GYMnadMReOF0u_NiVBxqg2AA7IBmlhp8J_I0Ks
+<<^ code="&#x0003;">>ni:///sha-256;tpFIXdJ-ro4XK5bahWxQEJAoD_mPWvJavJkludlSwec
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/guest-grammar >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/guest-grammar>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/guest-grammar.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 14
-register  = "Synthesis-Canon"
 retain    = false
 role      = "extended documentation surface for guest-grammar examples, ownership notes, fixture seeds, and migration residue"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/guest-grammar"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Guest Grammar — Extended Docs
 
@@ -26,9 +25,9 @@ This file does not bind invariant law.
 Law lives in `lar:///ha.ka.ba/lares/api/pono/guest-grammar`.
 This surface carries examples, ownership notes, and split residue.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ownership-notes >>
+<<~ ahu #ownership-notes>>
 
 !! Ownership Notes
 
@@ -40,9 +39,9 @@ This surface carries examples, ownership notes, and split residue.
 | render-pipeline | lowering, projection, landing |
 | pono | law indexing, packaging, later verification support |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fixture-seeds >>
+<<~ ahu #fixture-seeds>>
 
 !! Fixture Seeds
 
@@ -55,9 +54,9 @@ The first fixture family should include:
 * one trace continuity case from surface to AST to widget to output
 * one anti-overload case showing that root primitives remain distinct from guest work
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #admission-notes >>
+<<~ ahu #admission-notes>>
 
 !! Admission Notes
 
@@ -70,9 +69,9 @@ A lawful admission should keep these distinctions visible:
 
 When a region needs long legality tables, schema detail, or runtime procedure, move that material outward instead of re-expanding the parent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-note >>
+<<~ ahu #migration-note>>
 
 !! Migration Note
 
@@ -84,17 +83,17 @@ The current shape keeps:
 * operational procedure at `lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL`
 * extended guidance here
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;v2OeimamMjm947MZfcT1a87q3OUPjlZ18rCHB-4_qGE
+<<^ code="&#x0003;">>ni:///sha-256;FGQtoqHpDK4QufwuwZJdAAd5wfEOIQSOPuczX6LhUlw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

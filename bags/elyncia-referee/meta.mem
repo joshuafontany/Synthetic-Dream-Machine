@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/bags/elyncia-referee >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/bags/elyncia-referee>>
 ```toml meta
 bag       = "elyncia-referee"
 cap-tier  = "contract"
@@ -16,4 +16,4 @@ holds what players must not read: NPC private truths, sealed hooks, dossier logi
 tightens to `contract` — the referee's own hands and whichever seats the operator contracts in.
 Every meme here rides rating `kapu` or `data`; nothing federates to a player-facing render.
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI>>
 ```toml meta
 cacheable         = false
 dependencies      = ["confidence"]
@@ -12,7 +12,6 @@ phase-map-assess  = "#reading-test"
 phase-map-decide  = "#conventions"
 phase-map-observe = "#loop-position"
 phase-map-orient  = "#handoff"
-register          = "Synthesis-Canon"
 retain            = false
 role              = "grammar: the five discourse stances + the Syadasti Reading Rule — stance selects the evaluation frame that gives confidence its meaning"
 trigger           = "always — grammar primitive"
@@ -20,11 +19,11 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/library/docs/mu/the-syad-perspectives/STANCE_LOCI"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Grammar: Stance + Syadasti Reading Rule
 
-> ''Register:'' `Synthesis-Canon 16/20` — grounded in the live Syadasti discovery and current HUD practice
+> Grounded in the live Syadasti discovery and current HUD practice
 > ''Question:'' Which evaluation frame gives this claim its meaning?
 
 ---
@@ -158,12 +157,12 @@ If the reader still has to guess what `0.65` means here, stance has not yet done
 
 | Path | Status | Contents |
 |---|---|---|
-| `LOCI.md` | `Synthesis-Canon 16/20` | This file — stance grammar and Syadasti reading rule |
+| `LOCI.md` | standing | This file — stance grammar and Syadasti reading rule |
 
 //Future loci in this tree will land here.//
 
 ---
 
-<<^ code="&#x0003;" >>ni:///sha-256;43rPIqhUu7-PQsKlIj93A0i9c-bhC7ctfVKticTxIGE
+<<^ code="&#x0003;">>ni:///sha-256;5km83oVNXlY-Fb_5l_9Dtb7_u4InhR1ae1GHdZmEqxU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

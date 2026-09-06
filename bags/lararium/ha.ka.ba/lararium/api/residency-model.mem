@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/residency-model >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/residency-model>>
 ```toml meta
 approved-on   = "2026-05-30"
 cacheable     = true
@@ -11,7 +11,6 @@ mana          = 18
 manao         = 17
 manaoio       = 16
 namespace     = "&#x0950; &#x0901;"
-register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-15"
 revision-note = "non-residency verb tier seated (#/non-residency-verbs): INGEST (the precedent) + RECONCILE (engine-fold into @oracle, operator-admin, preview/conflict-surface/confirm/idempotent/effect-record, conflict-SURFACING never merge-arbitrating); §5 amended to admit non-residency verbs while holding the VCS-verb ban; EPOCH named + deferred (paired, sequenced reconcile→epoch); prior: bag-grain verb pair approved"
@@ -23,11 +22,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/residency-model"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #core-claim >>
+<<~ ahu #core-claim>>
 
 ! Residency Model — Coordinate Space + Query Plan
 
@@ -37,9 +36,9 @@ A single tiddler-title MAY have residency in N bags simultaneously, each bag car
 
 ''Approved 2026-05-30.'' Floating Librarians of Mu endorse (high confidence). Pono.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #why >>
+<<~ ahu #why>>
 
 !! Why the architecture moved here
 
@@ -54,9 +53,9 @@ Two adjacent traditions hold the right primitives. Neither surfaced through the 
 
 ''Willow protocol'' sits closest among CRDT-adjacent substrates — Entry `(namespace, subspace, path, payload_digest)` separates coordinate from payload by design. ''No shipping CRDT system has composed multi-bag residency with operator-facing gestures.'' SDM fills a real gap.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #data-model >>
+<<~ ahu #data-model>>
 
 !! Data model — FRBR identity levels
 
@@ -71,9 +70,9 @@ The tiddler-title MUST stay queryable as Work-level identity independent of any 
 
 This levels-distinction carries load-bearing weight. Conflating Work with Manifestation reintroduces the shadow-tiddler confusion that TW5 already documents in its own issue tracker (#570, #9139) — the single most well-documented human-factors failure mode of priority overlay.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #action-verb-surface >>
+<<~ ahu #action-verb-surface>>
 
 !! Surface I — ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation)
 
@@ -138,9 +137,9 @@ This pair carries the wiki-level crossing (`wiki-layer-ontology#crossing-law`): 
 
 ''Why bag-grain verbs over composed batches (operator ruling):'' pono web3 models land early — a first-class coordinate-mint verb keeps the registry, capability gates, and audit ledger aligned with the model from the start, before workaround batch-conventions calcify.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #effect-record-surface >>
+<<~ ahu #effect-record-surface>>
 
 !! Surface II — Effect records (tiddler annotations, archival language)
 
@@ -161,9 +160,9 @@ Effect records live within each bag at `lar:///<bag>/ledger/residency/<event-id>
 
 This dual-surface design — ACTION verbs for the //gesture//, archival verbs for the //audit// — resonates structurally with web3 causal-islands models. The archival profession solved the identity-across-custody problem before software did; we adopt the discipline along with the vocabulary. The ''Floating Librarians of Mu register'' applies — Mu's stewards of memory cooperate with archivists, not with version-control engineers.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #five-pono-properties >>
+<<~ ahu #five-pono-properties>>
 
 !! The five pono properties
 
@@ -175,9 +174,9 @@ Any implementation of this model MUST hold all five:
 # ''Audit-trail discipline.'' Every residency change writes an indelible effect record. Silent unlink violates the model.
 # ''Verb vocabulary from set-algebra + cataloging.'' The //residency// ACTION verbs SHOULD draw from SPARQL Update; effect annotations SHOULD draw from archival practice. The surface MAY also carry ''non-residency'' verbs that ride the same rail (#/non-residency-verbs). The version-control ban holds across the whole surface: verbs from VCS (stage/commit/push, branch/merge, cherry-pick) MUST NOT enter — they import a timeline mental model that does not fit. A non-residency verb that //folds// state (RECONCILE) MUST stay ''conflict-SURFACING, never merge-arbitrating'' (#/conflict-resolution), or it reads as a banned merge verb.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #non-residency-verbs >>
+<<~ ahu #non-residency-verbs>>
 
 !! The non-residency tier — verbs that ride the rail, not the coordinate space
 
@@ -197,9 +196,9 @@ The ACTION family grew past pure residency. The first six (ADD/COPY/MOVE/CLEAR/D
 
 RECONCILE folds //forward//; ''COMPACT'' cuts //behind// (bounds the op-log; compaction-handlers). They stay ''two verbs, sequenced `reconcile → compact`, never auto-coupled'' — the fold is op-log-recoverable, the cut destroys recovery. EPOCH's design (two acts: irreversible cut + grace-gated reclaim; backup-AT-THE-CUT; honor EP-1 tombstone-survival) waits on its own floor (epoch-handlers #deferred-design). Engine RECONCILE (admin-gated, federated-read-only) carries far less federation cost than a //content// epoch (peers offline across a content cut cannot merge).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #yang-yin-chao >>
+<<~ ahu #yang-yin-chao>>
 
 !! Yang / Yin / Chao symmetry preserved
 
@@ -221,9 +220,9 @@ The recipe carries a Tai Chi symmetry around the wiki's canon (`bags/{slug}`) (s
 
 A tiddler MAY hold residency in multiple Yin coordinates simultaneously (personal note that also drafted into `wikis/{slug}/draft`), or multiple Yang coordinates (lore cross-referenced into two libraries), or both (live edit in `wikis/{slug}/working` shadowing a canonical version in `bags/{slug}` or a canon library). The recipe walks the stack in priority order.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #anti-patterns >>
+<<~ ahu #anti-patterns>>
 
 !! Six anti-patterns — defenses MUST exist
 
@@ -238,9 +237,9 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 | 5 | ''Recipe-drift poisoning'' | Nix overlays / OCI layers | Recipe carries `bagPins` — slot → Automerge heads (DXOS-style); `lares wiki diff` shows what would change if pins bumped |
 | 6 | ''Concurrent commits into same lower bag'' | Upwelling (explicitly unsolved) | Operator-visible commit queue per bag; surface the race rather than hide it |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #conflict-resolution >>
+<<~ ahu #conflict-resolution>>
 
 !! Conflict resolution — Talk Story, not arbitration (2026-05-31)
 
@@ -270,9 +269,9 @@ Two Sprint deferrals (modal-view reader at the bag-pin surface; commit-queue for
 * ''Voice house.'' Talk Story already carries this architecture's native conversation mode; conflict-resolution rides the same rail as every other "what should we do?" question.
 * ''Canon requires operator gesture.'' A conflict resolved by code becomes canon nobody chose; a conflict resolved through Talk Story becomes canon the cabal owns.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #closest-prior-art >>
+<<~ ahu #closest-prior-art>>
 
 !! Closest prior art (validators)
 
@@ -286,27 +285,27 @@ Two Sprint deferrals (modal-view reader at the bag-pin surface; commit-queue for
 * ''CSS Cascade + DevTools Computed panel'' — the operator-visible coordinate surface gold standard.
 * ''Plan 9 `bind`'' — the explicit/shallow/lexically-visible discipline that makes overlay work (Pike et al. 1992).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/verb-tiddler >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/nalu-engine >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>
-<<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/verb-tiddler>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/nalu-engine>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor>>
+<<~ loulou lar:///packages/EPIC-RESIDENCY-MODEL>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
 
 ''Tie ~ the palace reads at apertures.'' The living-grammar memory-palace ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]])
 retrieves multi-aperture (RAPTOR collapsed-tree turn→session→arc levels) — a scale-selection that
 rhymes with this model's thermal residency yet stays distinct (retrieval grain, not warm/cold reach).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;yA0TjmzNyhjb6XbJljJqTckfw8nF0TEyH3R0J6q_qnY
+<<^ code="&#x0003;">>ni:///sha-256;NS8cgG22BaBrPIZwuEfHcWtEMOWdSH8vSkaSJJOmcKo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

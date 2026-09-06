@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/local-clients>>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/local-clients.mem"
 l-space         = "stable"
 mana            = 16
 manao           = 16
 manaoio         = 16
-register        = "Synthesis-Canon"
 role            = "canonical local client exposure contract for Lararium MCP"
 source-consumes = ["packages/lares-core/memes/docs/mcp/sprints/SPRINT-02_LOCAL_CLIENTS.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-202_HYDRATION_PROMPTS.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-203_PORTABILITY_TOOLS.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-401_VSCODE_COPILOT.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-402_CLAUDE_CODE.md", "packages/lares-core/memes/docs/mcp/stories/MCP-STORY-403_CODEX.md"]
 status-date     = "2026-04-23"
@@ -16,9 +15,9 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: Sprint-02 closed the local surfaces across resources, prompts, tools, and client configs.
 ⏿ orient: rich clients may prefer prompts/resources; tool-centric clients need equivalent read-only calls.
@@ -26,9 +25,9 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 ▶ act: preserve the prompt catalog, tool façade, and VS Code / Claude Code / Codex wiring here.
 ↺ verify: prompt names use the `lararium-` dash convention, matching tools; adapt: remote examples remain Sprint-03 residue even though local Codex config closed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #server-start >>
+<<~ ahu #server-start>>
 
 !! Server Start
 
@@ -42,9 +41,9 @@ The server reads newline-delimited JSON-RPC on stdin and writes responses on std
 Repo root must sit on `PYTHONPATH`; module invocation satisfies that in normal local runs.
 No external package dependency enters the core server.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #client-wiring >>
+<<~ ahu #client-wiring>>
 
 !! Client Wiring
 
@@ -56,9 +55,9 @@ No external package dependency enters the core server.
 
 All three use the same stdio command and read-only server behavior.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #prompt-catalog >>
+<<~ ahu #prompt-catalog>>
 
 !! Hydration Prompt Catalog
 
@@ -73,9 +72,9 @@ All three use the same stdio command and read-only server behavior.
 
 Prompt names use dash after `lararium` because MCP names here follow the same convention as tools.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tool-facade >>
+<<~ ahu #tool-facade>>
 
 !! Read-Only Tool Façade
 
@@ -91,9 +90,9 @@ Prompt names use dash after `lararium` because MCP names here follow the same co
 
 Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint: true`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #closed-sprint-02 >>
+<<~ ahu #closed-sprint-02>>
 
 !! Sprint-02 Exit Markers Preserved
 
@@ -106,9 +105,9 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 * submodule adapter layer contract closed beyond original sprint scope
 * story Status fields reconciled with backlog truth
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #residue >>
+<<~ ahu #residue>>
 
 !! Residue
 
@@ -116,17 +115,17 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 * HTTP/SSE transport requires auth, scope, approval, and eval posture first.
 * Clients with partial MCP support should call the read-only tools rather than receive weaker semantics.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/adapters>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;eY_AaCcM_ukZVf7_FjFYXpa02pKOIL0FGc8R9RKFMpM
+<<^ code="&#x0003;">>ni:///sha-256;GU0w3Q40zCmZjY4Ho9WoxTwFPIfdrmzP3ei7zZiVbTQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

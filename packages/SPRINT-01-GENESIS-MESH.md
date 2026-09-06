@@ -59,7 +59,7 @@ The **tideline resolver already landed** — `resolveBootDoc` (`packages/larariu
 
 The pono-evidence spirit confirmed the model's **spine already stands in code + canon** — recognize, don't rebuild.
 
-`<<~ moolelo held="the planes-of-the-DreamNet model stands grounded; build M2 on the EXISTING read-only/policy machinery, never a parallel design (operator-ratified)" >>`
+`<<~ moolelo held="the planes-of-the-DreamNet model stands grounded; build M2 on the EXISTING read-only/policy machinery, never a parallel design (operator-ratified)">>`
 
 **Base canon (`@lares` + `@lararium`).**
 - **Node.js vessel:** feeds + syncs from **disk** (genesis-backed; unchanged path).

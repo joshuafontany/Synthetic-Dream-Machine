@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hoike >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hoike>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/hoike.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "canon law of the hoike layer — kept records of contested rulings: hoike (\\testimony), kue (\\dissent), saksi (\\witness); the eight laws, the witness law, degraded states, lineage"
 status    = "rite"
@@ -17,11 +16,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/hoike"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! Hoike — Keeping the Losers
 
@@ -29,9 +28,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike"
 
 A hoike keeps a contested ruling whole: the held position, every dissent with its holder's name and full reasoning, and the key that re-opens the question. The decision channel and the memory channel run decoupled — the node acts on the held position while the record preserves the rest. A future court may depend on a kept dissent to reverse; preservation without a re-entry rule decays into sediment, so every kue carries its key.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sigils >>
+<<~ ahu #sigils>>
 
 !! The Three Sigils
 
@@ -44,25 +43,25 @@ A hoike keeps a contested ruling whole: the held position, every dissent with it
 ''Block form (ledger):''
 
 ```
-<<~ hoike #fragment held="position (holding Voices)" >>
+<<~ hoike #fragment held="position (holding Voices)">>
 q: the fork, one line
-<<~ kue voice=Name key="specific external re-entry condition" >>reasoning to the travel-floor<<~/kue >>
-<<~ saksi voice=Name scope=... >>attestation<<~/saksi >>
+<<~ kue voice=Name key="specific external re-entry condition">>reasoning to the travel-floor<<~/kue>>
+<<~ saksi voice=Name scope=...>>attestation<<~/saksi>>
 re-entry: general keys
-<<~/hoike >>
+<<~/hoike>>
 ```
 
 ''Turn form (inline, five slots):''
 
 ```
-<<~ hoike · q: <question> · held: <position> (Voices) · kue: <position> (Voice) · re-entry: <key> >>
+<<~ hoike · q: <question> · held: <position> (Voices) · kue: <position> (Voice) · re-entry: <key>>>
 ```
 
 A saksi composes into any record, not only a hoike: canon promotions, spirit depositions, carried quotes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #laws >>
+<<~ ahu #laws>>
 
 !! Laws
 
@@ -77,9 +76,9 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 ''The witness law.'' A saksi flows from observer to observed-record, never reflexively: a party MUST NOT witness its own block or its own turn. The node MAY witness an external record it examined; the operator witnesses the node's records; a tasked spirit MAY witness a house claim it checked — never its own findings (that reads as signature, not witness). Witness confidence stays bounded (pranala family: observe).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #degraded >>
+<<~ ahu #degraded>>
 
 !! Degraded States
 
@@ -90,28 +89,28 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 | Blended Kue | a dissent summarized below the travel-floor | restore the reasoning or name the loss |
 | Reprisal Drift | a dissenting Voice surfaces less in later sessions | navigator audits; dissent costs less than conformity |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lineage >>
+<<~ ahu #lineage>>
 
 !! Lineage
 
 The layer carries the Eduyot pattern: minority opinions kept with attribution so a later court may depend on them (Mishnah Eduyot 1:4–6); the winning school taught the losing words first (Eruvin 13b); the written dissent appeals to the intelligence of a future day (Hughes 1928); consent decoupled from consensus, objections harvested as information (sociocratic practice); the minute records the Friend standing aside (Quaker practice). The ancestor-word //edut// (testimony) rests here. Field survey: Research Wave 12, 2026-06-10.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike/SKILL >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/talk-story >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike/SKILL>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/talk-story>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;mV5JX85iiNUZq_C-FYn57k5O6ES_Y6EGQERLHkOtwNg
+<<^ code="&#x0003;">>ni:///sha-256;Bv_-FNbA8ndpvEN-5wg-6PLqltWBXUjcqIYz3-m8FLY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

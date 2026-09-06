@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest.mem"
@@ -10,7 +10,6 @@ mana      = 14
 manao     = 15
 manaoio   = 12
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest INDEX — the three largest messages from each of 55 research spirits across four waves, held verbatim in their own carriers. Names come from each spirit OWN opening heading, never from a summary of it. The fence law that makes it safe, the reason a lane with no independent name still earns a carrier, and the roll of what stands."
 tags      = ["api/pono/meme"]
@@ -18,9 +17,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The swarm harvest
 
@@ -32,9 +31,9 @@ Four research waves went out and ran three levels deep. ''55 spirits wrote somet
 
 ⚠ ''AND THE FENCE IS LOAD-BEARING.'' Raw transcript carries `<<~`, `>>` and code fences of its own. Each message rides a fence longer than any run of backticks inside it, so ''the grammar reads content where a naive write would read sigils'' — the same law the corpus already keeps: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-roll >>
+<<~ ahu #the-roll>>
 
 !! What stands
 
@@ -97,16 +96,16 @@ Four research waves went out and ran three levels deep. ''55 spirits wrote somet
 |15,291 |1 |`3-facebook-trusted-contacts-deprecation-d2b750` |3. Facebook "Trusted Contacts" deprecation |
 |7,990 |1 |`2-apple-screen-time-partially-reached-e03518` |2. Apple Screen Time — PARTIALLY REACHED |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-field-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-field-scout>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Q1cwKYjSJ_wv-XV25uzBBaN7HVR4L6nqN-n234NJXjM
+<<^ code="&#x0003;">>ni:///sha-256;AwbTnOuoysu45LTLN5Biu-sOgXol4I7-799m-LNuh5I
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -4,7 +4,7 @@ type: application/javascript
 module-type: wikirule
 \*/
 /**
- * lar-sigil — unified TW5 wikirule (block + inline) for all `<<~ … >>` sigil
+ * lar-sigil — unified TW5 wikirule (block + inline) for all `<<~ …>>` sigil
  * forms. Block forms (container ahu, container pranala, generic-with-closer)
  * are claimed at block parse phase. Leaf inline forms (aka, kahea, loulou,
  * pranala-inline, ahu/kau invocation) are claimed at inline phase.
@@ -52,9 +52,9 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
   const childSlotNames = grammarChildSlotNames(grammar);
   let pos = indexOfSigilOpen(source, startPos);
   while (pos >= 0) {
-    // pranala: permanent JS exception — <<~ pranala FROM -> TO >> arrow syntax with
+    // pranala: permanent JS exception — <<~ pranala FROM -> TO>> arrow syntax with
     // keyword attrs (from/to/slot/family/role/body) is structurally distinct from
-    // <<~ WORD ARGS >>. The ~ dispatcher's p1–p5 positional interface cannot carry
+    // <<~ WORD ARGS>>. The ~ dispatcher's p1–p5 positional interface cannot carry
     // named keyword pairs without losing the readable HUD form.
     const pranala = matchPranalaOpenAt(source, pos);
     if (pranala) {
@@ -86,9 +86,9 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
       return pos;
     }
 
-    // Compound sigil: <<~ WORD1 [child-slot WORD2] ARGS >>
-    // Handles: <<~ kahea ahu #slot >>, <<~ ahu #slot >>…<<~/ahu >>,
-    //          <<~ kahea lar:///uri >>, <<~ loulou lar:///uri >>, <<~ kau … >>
+    // Compound sigil: <<~ WORD1 [child-slot WORD2] ARGS>>
+    // Handles: <<~ kahea ahu #slot>>, <<~ ahu #slot>>…<<~/ahu>>,
+    //          <<~ kahea lar:///uri>>, <<~ loulou lar:///uri>>, <<~ kau …>>
     const compound = matchCompoundSigilAt(source, pos, childSlotNames);
     if (compound) {
       if (compound.closeKey) {
@@ -108,10 +108,10 @@ export function findNextMatch(this: RuleInstance, startPos: number): number | un
       return pos;
     }
 
-    // Generic fallback: covers <<~WORD>> (no-space), control chars (<<^ code="&#x0001;" >>),
+    // Generic fallback: covers <<~WORD>> (no-space), control chars (<<^ code="&#x0001;">>),
     // and any form compound did not claim. Well-formed HUD sigils never reach here.
     // pranala guard: matchPranalaOpenAt already claimed pranala forms above; guard
-    // prevents a bare <<~ pranala >> (no arrow) from silently becoming a literal block.
+    // prevents a bare <<~ pranala>> (no arrow) from silently becoming a literal block.
     const generic = findGenericOpenAt(source, pos);
     if (generic) {
       if (generic.sigil && closers[generic.sigil] && generic.sigil !== "pranala") {
@@ -184,8 +184,8 @@ export function parse(this: RuleInstance): ParseTreeNode[] {
     return [{ type: "text", text: attrs["__literal__"]! }];
   }
 
-  // Compound sigil: <<~ WORD1 [child-slot WORD2] ARGS >>
-  // Live wiki parent tiddlers hold <<~ kahea ahu #slot >> (space form, HUD-readable).
+  // Compound sigil: <<~ WORD1 [child-slot WORD2] ARGS>>
+  // Live wiki parent tiddlers hold <<~ kahea ahu #slot>> (space form, HUD-readable).
   // Deserializer splits block bodies into child tiddlers before TW5 parses carrier
   // text — block body drops here without data loss.
   if ("__compound__" in attrs) {

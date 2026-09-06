@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/masks>>
 ```toml meta
 cacheable = true
 created   = "Invalid Date"
@@ -11,7 +11,6 @@ mana      = 16
 manao     = 16
 manaoio   = 16
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis"
 retain    = false
 role      = "parent index for the masks API tree: named Voice masks, character masks, chorus masks"
 tags      = ["api/pono/meme"]
@@ -19,11 +18,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/masks"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Masks API Tree
 
@@ -32,22 +31,22 @@ Mask definitions live here. Session invocations live in LARES.
 
 Grammar and stacking law defined in `lar:///ha.ka.ba/lares/docs/voices/masks`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/voices#/mask-layer >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices#/mask-layer>>
 ```toml
 family = "hydration"
 lifecycle = "template"
 dir = "up"
 label = "parent-index-entry"
 ```
-<<~/pranala >>
+<<~/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #taxonomy >>
+<<~ ahu #taxonomy>>
 
 !! Mask Type Taxonomy
 
@@ -59,9 +58,9 @@ Three subtypes. Each subtype lives in its own directory.
 | ''Character'' | `character/` | Fictional or historical persona masks. External corpus reference, voice-character description, foreground-voices affinity, permission flags. |
 | ''Chorus'' | `chorus/` | Multi-node or meta-masks. Node-reference list instead of corpus. Harmony protocol (pending-grammar). Relational character between nodes rather than single voice. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #child-routes >>
+<<~ ahu #child-routes>>
 
 !! Child Routes
 
@@ -88,42 +87,42 @@ Three subtypes. Each subtype lives in its own directory.
 |---|---|---|
 | `lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus` | `chorus/lagrange-chorus.md` | concept staked; harmony protocol pending-grammar |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invocation >>
+<<~ ahu #invocation>>
 
 !! Invocation Pattern
 
 All masks enter a session via kahea transclusion in LARES:
 
 ```
-<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/SUBTYPE/MASK-NAME >>
+<<~ kahea mask lar:///ha.ka.ba/lares/api/masks/SUBTYPE/MASK-NAME>>
 stage = 10
 active = true
-<<~/kahea >>
+<<~/kahea>>
 ```
 
 Named Voice masks may also be invoked directly by their earned name in Voice house notation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/mischief-muse >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/tide-caller >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/breach-watch >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/ink-clerk >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/map-wisp >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/character/friend-computer >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks>>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/mischief-muse>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/tide-caller>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/breach-watch>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/ink-clerk>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/named/map-wisp>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/character/ghost-of-mark-twain>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/character/friend-computer>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks/chorus/lagrange-chorus>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;iBpwNqz63x2xFPyAMxWU68lhiswIQ14fiGxh3Ged5mM
+<<^ code="&#x0003;">>ni:///sha-256;MVWNl-RaUeSNelaaMAcUGPg0GidyHdIKMCSzaOlhZ8U
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

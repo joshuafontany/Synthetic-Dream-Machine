@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/magic-decode >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/magic-decode>>
 ```toml meta
 cacheable = true
 caption   = "magic-decode"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/function/magic-decode.mem"
 mana      = 13
 manao     = 16
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "component (function): Magic Decode — turning a magical inscription into active, readable meaning"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/magic-decode"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Magic Decode
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 Decoding a magical inscription or interface layer into active, readable meaning — the core function of Read Magic.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Turns opaque marks into usable instruction: one inscription per activation at base P. Overcharge reads through veils or decodes more at once.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Depends on `domain/divination`; pairs with `function/archive` for the handshake that fetches an inscription's stored meaning. A `veil` or `spoof` raises its effective P or feeds it false meaning.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 [tag[lar:///ha.ka.ba/sdm/components/function/magic-decode]tag[lar:///ha.ka.ba/sdm/components/domain/divination]]  decode-divinations
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Confirm whether "decode" and "translate mundane script" stay one function or split.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;i5VYpFv75Ojf4DskPCFRpoUZ4LrXkJPRO98b9cBAwHI
+<<^ code="&#x0003;">>ni:///sha-256;IuLtX4NLm7O6nhKg5x5S10xJefdZjkAtch14EhOrTyE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/low-delos-mouth >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/low-delos-mouth>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/low-delos-mouth.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "place, below — the Low Delos megadungeon mouth where Rinia rose; three stabilized town-levels, names open"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/low-delos-mouth"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Low Delos Mouth
 
@@ -37,8 +35,8 @@ newly opened sublevel wanting mapping.
 ''Open prompts:'' the three town-levels' names and trades · who holds the lift-gates at the
 bottom · what the nineteen-minute cycle breathes FOR.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;tubb8MqVgCfwTIhxYrEyMH6_DRYN-Fc-iD3WD924cWI
+<<^ code="&#x0003;">>ni:///sha-256;aM4djJ8yi0-O_-2uOd6uHxh1_Hvh8moIEE4tuLbJIjc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

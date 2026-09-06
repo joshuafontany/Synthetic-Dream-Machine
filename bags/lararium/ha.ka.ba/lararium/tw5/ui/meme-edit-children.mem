@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/meme-edit-children >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/meme-edit-children>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meme-edit-children.mem"
@@ -8,7 +8,6 @@ list-after = "$:/core/ui/EditTemplate/body"
 mana       = 18
 manao      = 17
 manaoio    = 16
-register   = "Synthesis-Canon"
 retain     = true
 role       = "EditTemplate: inline editors for non-body ahu slots; body slot edited via core EditTemplate/body"
 tags       = ["$:/tags/EditTemplate", "lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -16,7 +15,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 \whitespace trim
 
@@ -55,10 +54,10 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 
 </$list>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;uelnNFIVUow8FNF1WDQU668ElVlyXx42qu-2P2br5qc
+<<^ code="&#x0003;">>ni:///sha-256;D1otgiZqtG6ZVTWG_zPWpWMm2f0BuIhQFKM79Bh_KCI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

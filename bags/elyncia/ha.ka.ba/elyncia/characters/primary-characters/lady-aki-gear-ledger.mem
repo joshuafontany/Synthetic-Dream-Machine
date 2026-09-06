@@ -1,31 +1,29 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "Lady Aki discounted gear ledger — prose companion to the live CSV table"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledger"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lady Aki ~ Discounted Gear Ledger
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Lady Aki — Discounted Gear Ledger
 
@@ -231,8 +229,8 @@ This build tests the FTLS alpha questions we care about:
 
 Current answer: yes, provisionally.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;XpP81Y5KZBFbkqejg6VqX7WfTeYB67vswd0mNh-Eczg
+<<^ code="&#x0003;">>ni:///sha-256;gSD23QElMQ2-iipbshBAQxOTbXK-8EyXLXo7fe2lBPA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

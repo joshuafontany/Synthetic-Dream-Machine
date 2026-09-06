@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers>>
 ```toml meta
 approved-on   = "2026-06-01"
 cacheable     = true
@@ -11,7 +11,6 @@ mana          = 17
 manao         = 17
 manaoio       = 15
 namespace     = "&#x0950; &#x0901;"
-register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-01"
 revision-note = "warm (mahana) tier CUT after adversarial+kupono+YIN research; two states (wela/anu) only"
@@ -23,11 +22,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/residency-tiers"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #core-claim >>
+<<~ ahu #core-claim>>
 
 ! Residency Tiers — One Island-Owned Thermal Model
 
@@ -46,9 +45,9 @@ Bag residency lives in the Island Pool concepts (operator ruling): one manager -
 
 ''"bag" stays a term.'' The collapse touches residency //authority//, not the TW5 vocabulary. A ''bag'' remains the TW5 layer/coordinate — one Automerge document, one axis of the recipe query plan (residency-model, linked in #edges). What collapses is the standalone //residency manager//: the methods that pin, hydrate, and cool docs (today in `bag-residency.ts`, a side-file predating the causal-islands model) MUST move into the ''causal-island code'' — the module that owns the causal-islands model is where residency methods belong. No one-off side file outranks the model it predates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thermal-axis >>
+<<~ ahu #thermal-axis>>
 
 !! Temperature axis — wela / anu
 
@@ -59,9 +58,9 @@ Bag residency lives in the Island Pool concepts (operator ruling): one manager -
 
 Two states. An island is live (`wela`) or torn down (`anu`); a bag's handle is held while any `wela` island references it, droppable otherwise. The defining contrast: ''a `wela` island RUNS live; an `anu` island RESUMES by spawn.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pin-flag >>
+<<~ ahu #pin-flag>>
 
 !! Pin — the orthogonal sticky flag
 
@@ -75,9 +74,9 @@ The always-hot set (system-pinned):
 
 Operator pin/unpin gestures move the flag; they do not carry a Hawaiian transition-verb name (the state change describes itself). Pin is durable: pin state lives as tiddlers in the admin doc and federates to operator devices via the existing admin-doc sync surface (no RPC — web2 smell test holds).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #derived-bag-residency >>
+<<~ ahu #derived-bag-residency>>
 
 !! Derived bag residency — the collapse
 
@@ -98,9 +97,9 @@ Two disciplines survive the collapse as bag-level mechanism (now driven by the p
 
 ''Code homing (operator ruling 2026-06-01).'' The residency methods — pin / unpin / hydrate / cool / handle-drop / `ChunkStore` — MUST move OUT of the standalone `bag-residency.ts` side-file (which predates the causal-islands model) and INTO the ''causal-island code'' (`causal-island.ts` for the model + contracts; the Island Pool for the Worker-lifecycle mechanism). The module that owns the causal-islands model hosts residency; no older side-file holds a parallel authority. After the move there is no independent tier vocabulary, no separate bag cap, no independent LRU — ''one cap governs the node: the Island Pool's `wela` (live) slot budget'', and bag handles follow by derivation. The relocation landed 2026-06-01 (S11.1: `bag-residency.ts` → `causal-island.ts`); "bag" stays the TW5 layer term throughout.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #transition-verbs >>
+<<~ ahu #transition-verbs>>
 
 !! Transition verbs — Hawaiian
 
@@ -113,25 +112,25 @@ The two transitions across the `wela`/`anu` axis wear Hawaiian per the lararium 
 
 Pin/unpin gestures carry no verb name (the state change describes itself). `hoʻoanu` releases the thread and — subject to `syncActive` + the reachability rule — the handles. No warm tier exists yet; `mahana` / `hoʻomahana` stay undefined (see #third-tier-gate).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #third-tier-gate >>
+<<~ ahu #third-tier-gate>>
 
 !! Third tier — the gate
 
 The model holds two tiers (`wela` live / `anu` torn down). A third (warm / frozen) tier enters ONLY when BOTH hold: (a) a //measured// island resume-latency problem under real focus-rotation, AND (b) a definition that genuinely ''sheds memory'' — isolate evicted, handle-cache retained, resume re-instantiates the engine against still-warm handles and skips the `ea` handshake (the bfcache lineage done right). At that point adopt bfcache vocabulary (freeze / resume / evict), a freeze-disqualifier discipline (mid-replication may not freeze), and a second-chance reference bit on the sweeper (pure-age LRU today).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
 
 ''Tie ~ apertures, not tiers.'' The living-grammar memory-palace ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]) selects a
 retrieval APERTURE (turn → session → arc) where this model selects a THERMAL tier (wela/anu) — adjacent
@@ -144,8 +143,8 @@ vocabularies stay distinct (they name different layers); the integrity stays leg
 reading names the rung the bag grain LACKS — a cheap read before the CRDT hydrates — which enters only
 through #third-tier-gate, and only after the research that meme charges.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;qk7pRJsGvviKPr7m2lWkaxbG1PKB41Tff-6NFNsOApk
+<<^ code="&#x0003;">>ni:///sha-256;Tu6_nZ9iABVqsPNrO5C38IxE-MuyclAZ2QQNvC_VIEA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

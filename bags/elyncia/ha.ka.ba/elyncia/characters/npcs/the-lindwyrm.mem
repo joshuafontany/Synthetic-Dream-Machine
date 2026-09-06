@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "NPC, public view — the Lindwyrm of New Delos: Patroness, embodied immortal, founder of the League of Free Cities, reluctant infrastructure matriarch"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Lindwyrm ~ Patroness of New Delos
 
@@ -43,9 +41,9 @@ twice: the day the Necrospire fell, and two years later at the ''DreamNet concla
 5002'' — when all the squabbling great immortals of Elyncia's mythic-polyglot Nexuses had to
 meet at somebody's table, and the only table nobody had ever fought at was hers.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #deeds >>
+<<~ ahu #deeds>>
 
 !! The Deeds on Record
 
@@ -58,9 +56,9 @@ meet at somebody's table, and the only table nobody had ever fought at was hers.
   Adventurer's Guild, quiet co-architect of the DreamNet's treaty substrate alongside Telarus, 
   Hermes, Hephaestus, Eris-Enyo, and Aracne-Jorogumo.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #manner >>
+<<~ ahu #manner>>
 
 !! How She Reads in a Room
 
@@ -77,16 +75,16 @@ only as much as suits her.''
 
 ''Status:'' load-bearing civic authority, demi-god class. ''Disposition: do not poke.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed >>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;L-Lm9aAH6vtIFPD-7nRcDql01Hjuw458hwIeqWC_WGI
+<<^ code="&#x0003;">>ni:///sha-256;P1ISqf17Mo8adv9dcj04QJz2eNfBwsr7Gn5m_XW-KLU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

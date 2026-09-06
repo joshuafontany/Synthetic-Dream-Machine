@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Social / guardian key recovery as actually practiced and measured. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery-as-actually-pra-e9aa59"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Social / guardian key recovery as actually practiced and measured
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 44,394 characters
 
@@ -284,9 +283,9 @@ Ordered by weight of evidence, not attention received.
 **Sources:** [Vitalik 2021](https://vitalik.eth.limo/general/2021/01/11/recovery.html) · [HN thread](https://news.ycombinator.com/item?id=25722131) · [Schechter CHI 2009](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/paper1459-schechter.pdf) · [Brainard CCS 2006](https://people.csail.mit.edu/rivest/pubs/BJRSY06.pdf) · [Google 2019](https://security.googleblog.com/2019/05/new-research-how-effective-is-basic.html) · [Bonneau WWW 2015](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43783.pdf) · [Loopring postmortem](https://medium.com/@byron.loopring/postmortem-incident-report-and-path-forward-aa64f7e5f7d1) · [Halborn](https://www.halborn.com/blog/post/explained-the-loopring-hack-june-2024) · [Argent guardian FAQ](https://support.argent.xyz/hc/en-us/articles/360007981757-Ethereum-account-guardian-FAQ) · [Argent recovery](https://support.argent.xyz/hc/en-us/articles/360007338877) · [Safe RecoveryHub](https://help.safe.global/articles/9622260218-account-recovery-with-saferecoveryhub) · [PSE SDK](https://pse.dev/blog/social-recovery-sdk) · [PSE repo](https://github.com/privacy-ethereum/social-recovery-sdk) · [ZK Email](https://docs.zk.email/account-recovery/) · [Signal SVR](https://signal.org/blog/secure-value-recovery/) · [Signal reg lock](https://signal.org/blog/improving-registration-lock) · [SVR3 OSDI 2024](https://www.usenix.org/conference/osdi24/presentation/connell) · [Matthew Green](https://blog.cryptographyengineering.com/2020/07/10/a-few-thoughts-about-signals-secure-value-recovery/) · [Android Police](https://www.androidpolice.com/2020/05/29/many-signal-users-arent-happy-with-new-pin-requirements/) · [Apple recovery contact](https://support.apple.com/en-us/HT212513) · [Apple recovery key](https://support.apple.com/en-us/HT208072) · [Apple legacy contact](https://support.apple.com/en-us/102431) · [Apple ADP](https://support.apple.com/en-us/102651) · [Keychain HSM escrow](https://support.apple.com/guide/security/escrow-security-for-icloud-keychain-sec3e341e75d/1/web/1) · [Stolen Device Protection](https://support.apple.com/en-us/120340) · [WSJ 2023](https://www.wsj.com/tech/the-iphone-setting-thieves-use-to-lock-you-out-of-your-apple-account-716d350d) · [MacRumors](https://www.macrumors.com/2023/04/19/apple-responds-to-iphone-theft-recovery-key-report/) · [WhatsApp E2E backups](https://blog.whatsapp.com/end-to-end-encrypted-backups-on-whatsapp) · [Meta Engineering](https://engineering.fb.com/2021/09/10/security/whatsapp-e2ee-backups/) · [Ask Leo / Facebook Trusted Contacts](https://askleo.com/facebook-trusted-contacts-is-going-away-prepare-now/) · [azcentral](https://www.azcentral.com/story/money/business/tech/2022/05/30/facebook-trusted-contacts-going-away-what-you-need-know/9967473002/) · [Casa pricing](https://casa.io/pricing) · [Casa Inheritance](https://casa.io/inheritance) · [Unchained](https://unchained.com/about) · [Caravan](https://www.unchained-capital.com/blog/the-caravan-arrives/) · [Nunchuk inheritance](https://nunchuk.io/blog/bitcoin-inheritance-guide) · [Nunchuk Miniscript](https://nunchuk.io/blog/miniscript-wallet-recovery) · [Optech #351](https://bitcoinops.org/en/newsletters/2025/04/25/) · [Eskandari USEC 2015](https://arxiv.org/pdf/1802.04351)
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 38,733 characters
 
@@ -511,9 +510,9 @@ Separated from the evidence, and each tagged with which measurement drives it.
 **One outstanding thread:** a parallel academic sweep (SOUPS / USENIX / IEEE S&P / FC on trustee-based recovery, crypto wallet key-management usability, and secret sharing among friends) is still running and has not reported. I independently secured the CHI 2009 numbers above, which are the ones that matter most; if that sweep surfaces anything post-2009 with real N and real percentages, it would be new to this report — and based on what I saw, I expect it to come back mostly empty.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-3 >>
+<<~ ahu #message-3>>
 
 !! Message 3 ~ 5,260 characters
 
@@ -543,21 +542,21 @@ The academic agent could not verify the **Facebook Trusted Contacts** removal an
 
 ## One number to treat as weak
 
-Krombholz et al., *"The Other Side of the Coin"* (Financial Cryptography 2016, DOI 10.1007/978-3-662-54970-4_33) is widely cited as finding **22% of Bitcoin users lost money to security violations or self-induced errors**. The primary PDF was unreachable (paywalled/404 on every mirror); the 22% comes only from a third party's citation (Bushager et al. 2018). **Confidence 8/20 — do not cite it as established**, same treatment as the "20% of BTC lost" folklore.
+Krombholz et al., *"The Other Side of the Coin"* (Financial Cryptography 2016, DOI 10.1007/978-3-662-54970-4_33) is widely cited as finding **22% of Bitcoin users lost money to security violations or self-induced errors**. The primary PDF was unreachable (paywalled/404 on every mirror); the 22% comes only from a third party's citation (Bushager et al. 2018). ** — do not cite it as established**, same treatment as the "20% of BTC lost" folklore.
 
 ---
 
 **Net effect on the recommendations:** #3 (guardian liveness check / periodic re-prompt) moves to the top. It is now backed by three independent measurements pointing the same way — Schechter's 72% who forgot their trustees within days, Google's 40% who couldn't recall their own secret answers across 11M real recovery claims, and Signal's decision to engineer periodic PIN re-entry into production rather than measure the failure. **Every deployment that measured recall found it collapsing, and no wallet ships a mechanism against it.**
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;nz0VqL_xZqAtB5MbyeyRZfRJTFl6pgjZTcwUfTL_IdA
+<<^ code="&#x0003;">>ni:///sha-256;3HM2oP1HAannzk8g3Fqy8vIARrTaOrF9azMHtqzdX6Q
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

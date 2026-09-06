@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/founding-runbook>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/founding-runbook.mem"
@@ -9,7 +9,6 @@ mana       = 15
 manao      = 15
 manaoio    = 14
 namespace  = "&#x2695;"
-register   = "Synthesis-Canon"
 retain     = true
 revised-on = "2026-08-09"
 role       = "the go-live founding rite, in TWO BRANCHES: a REHEARSAL founding (containers, disposable, repeated until it bores) and a KEEPER founding (the real hearth, once, irreversible) — they share every movement but the clear. The exact CLI sequence that rehearses, clears a vessel fresh-from-void, stands the device + three founding kahu (SELF-STOOD or CONTRACTED, per the True Name Model), forges + custodies the pre-rotation reserve (compromise-resistant Shamir 2-of-3 cards), seals + backs up the vault, regenesizes, goes LIVE, stands a Herm crossroads where a family needs one, and grows the Nexus. Carries the reserve-custody independence rule + the recovery-cost frame + the identity-class split + the founding-mode ⊥ carriage-contract disambiguation, and serves as the OPERATOR-INSTRUCTION SOURCE a reader (human or agent) resolves the next command from. Operator-ruled 2026-07-20; branched + True-Name-aligned 2026-07-27; THIRD PASS 2026-08-06/07 re-points the seat join from the PRIVATE pet-name to the DECLARED HANDLE (three acts per founding command: --name labels privately, --handle declares outward, --seat stands for a chair), gathers the names onto the fleet via `persona sync`, RETIRES the built-in founding names (the roster forms from what stood; the threshold derives majority), re-homes the seal per-operator at <lares>/nexus, and lands the @nexus LIFECYCLE (born by act · lives by ley-line traffic · quiet by absence — no admin capability anywhere; succession rides ROTATE under the standing pre-commitment) plus the bag-HOME axis (repository | hearth | ley, fail-closed to hearth). FOURTH PASS 2026-08-08: ① names what the clear MUST NOT touch (the acquired library and the repo registry survive every founding — the library rebuilds from NOTHING); a founder meets two new surfaces (#/bags-and-shelf) — every bag declares itself (cap-tier ⊥ home, DISK-OWNED so no wiki edit can re-home a bag) and the acquired shelf holds books outside every tracked tree, referenced by collection name rather than path. FIFTH PASS 2026-08-09: the ground CLEARS — deps brought current (build green, 1682 specs + 3318 tests, zero failures), the AI-instruction pointers outside the repo repointed off a dead path generation, ⓪′ preflight gains the playwright-binary leg and reports a WALK, ④ gains the two passphrase env vars with the shell-history hygiene that keeps a seal worth sealing, and ③′ gains the three questions that decide a guardian name plus the ruling that guardians MAY stand unassigned at founding. Carries one RULED rename: `hoʻāla` fails its lexicon check — Māmaka Kaiao already coined it for `to format, initialize, as a computer disk`, the inverse of the preserving waking-floor it named here, and it sat a few lines from the irreversible clear; the concept and its grounding stand and the pet-name falls — it now reads THE WAKING FLOOR, plain English, after `ho'omaka` (spent on `start a computer program`), `kahua` (spent on `database field`) and `paepae` (free, but already carrying that exact metaphor for a Native Hawaiian nonprofit) each failed the same check. WALKED 2026-08-09: every movement stood across two cycles and this meme needed NO amendment, which the rite sets as its own bar — a silent document rather than a green report; four of the five failures that got there were INSTRUMENTS (an impatient wait, a seed carrying another founding's address book, a gate inspecting where it had to connect, a probe that rebuilt what it measured) plus one silent misroute a green suite reported as fine. Also lands the BOOTSTRAP RE-HOME (operator-ruled): the social bootstrap — one vessel's address book — leaves the corpus root for <lares>/vessel, beside the docs it addresses and inside the wipe zone, so it dies with them rather than by a wipe-list naming it; genesis/ carries the baked island ALONE and a seed becomes safe to copy. And the HOME SPLIT (operator-ruled): THREE WORDS, NO SYNONYMS — lares names the SPIRITS, lararium names the HOUSE, lar names the NAMESPACE — and every siting answers WHOSE IS THIS. LARES PASS, THE LARARIUM ABIDES: the acquired library and the sensoriums are the house's and stand at <lararium> (~/.local/share/lararium), while identity, seal, repo registry, hearth bags and the vessel substrate are the spirits' and stand at <lares> (a Lar's keys ARE that Lar), and watermarks alone stand at <state> (delete at will). Back up <lararium> and <lares>; the wipe zone standing STRUCTURAL is the consequence, since a tier held by its own house leaves no list to widen by a path segment."
@@ -21,9 +20,9 @@ uri-path   = "ha.ka.ba/lararium/mesh/founding-runbook"
 written    = "2026-07-20"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! The Founding Runbook ~ the go-live rite
 
@@ -31,11 +30,11 @@ written    = "2026-07-20"
 > quorum, arm the charter's pre-rotation, and go live. Each step reads as its own verb; the
 > irreversible one wears a warning. The rite runs top to bottom once — a re-run re-founds.
 
-<<~ ahu #the-rite >>
+<<~ ahu #the-rite>>
 
 !! The rite ~ rehearsed first, then the six movements, then the growing
 
-<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ seed -> LIVE -> ⚲ crossroads -> ⊕ grow -> ⊛ gather -> ⊙ feed -> ⊘ dwell >>
+<<~loops ⓪ rehearse -> ✶ clear -> ⏿ found -> ◇ reserve -> ▶ seal-and-back-up -> ↺ seed -> LIVE -> ⚲ crossroads -> ⊕ grow -> ⊛ gather -> ⊙ feed -> ⊘ dwell>>
 
 ''Rehearse'' runs the whole rite in containers, disposably, until it bores (#/rehearse) · ''clear''
 pares the vessel to void · ''found'' stands the device + the three kahu · ''reserve'' forges the
@@ -59,15 +58,15 @@ irreversibly. ''Movements ②–⑨ read the same in both''; the branches part a
 COSTS. Every rehearsal therefore doubles as a dress rehearsal of the keeper — same commands, same
 order, disposable stakes — which stops the keeper from ever being a first take.
 
-''THE RITE STANDS ONE VESSEL; THE ARC RUNS WIDER.'' What happens across several vessels, several operators and however long the months take — a realm FED after LIVE, a fleet gathered as contracted leaves, a second operator founding independently and then DWELLING IN the first realm — rides at <<~ loulou lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>. It names three stretches this rite does not walk: the fleet join (② names the CONTRACTED mode and walks only SELF-STOOD), the realm feeding (no movement names the first offering, and `feedCabalRealm` stands built and unwalked), and the dwelling join (⊕ Grow contracts CARRIAGE and seats no DWELLER — carriage and dwelling ride orthogonal axes).
+''THE RITE STANDS ONE VESSEL; THE ARC RUNS WIDER.'' What happens across several vessels, several operators and however long the months take — a realm FED after LIVE, a fleet gathered as contracted leaves, a second operator founding independently and then DWELLING IN the first realm — rides at <<~ loulou lar:///ha.ka.ba/lararium/mesh/first-realm-arc>>. It names three stretches this rite does not walk: the fleet join (② names the CONTRACTED mode and walks only SELF-STOOD), the realm feeding (no movement names the first offering, and `feedCabalRealm` stands built and unwalked), and the dwelling join (⊕ Grow contracts CARRIAGE and seats no DWELLER — carriage and dwelling ride orthogonal axes).
 
 ''Read this rite as the operator-instruction source.'' Each movement names its branch, its exact
 commands, and its precondition, so a reader (human or agent) can answer //what do I run next// from
 the vessel's current state rather than from memory (#/agent-seed).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #rehearse >>
+<<~ ahu #rehearse>>
 
 !! ⓪ Rehearse ~ run it in a box until it bores (the REHEARSAL branch opens here)
 
@@ -231,7 +230,7 @@ than a weakened one: the vessel that cannot open its archive holds no key to mis
 hearth fire'' after, and a recognised operator may RAISE caps onto it that ride their own keys and always fall
 back (waking-floor). An outage recovers; a silently unsealed identity does not — and neither happens here.
 
-<<~ confidence 15/20 >> A crossroads may now stand where nobody sleeps: it wakes at the floor and waits for a hand.
+A crossroads may now stand where nobody sleeps: it wakes at the floor and waits for a hand.
 
 ''TWO LEGS STILL GO UN-EXERCISED, named so a green run never reads as more than it proves'':
 * `lares vessel stand --init` fans out to the AI-surface wires (`~/.claude` · `~/.codex` · `~/.copilot`). The harness
@@ -274,7 +273,7 @@ stands unexplained. ''Boredom has not arrived.''
 a movement below, ''the run wins'' and the movement gets rewritten — the rite stands WALKED only after a
 rehearsal completes end-to-end ''without amending it''.
 
-<<~ confidence 17/20 >> ''The bar reads as a silent document, never a green report.'' A run that
+''The bar reads as a silent document, never a green report.'' A run that
 passes while teaching the rite something has not walked it — it has repaired it. So the test asks whether
 this meme needed to change, which no amount of green output can fake.
 
@@ -295,7 +294,7 @@ amendments landed and one hypothesis got recorded:
 # ''A CANDIDATE FOR THE STANDING RED, unproven.'' The unexplained fail-closed Binding Gate reports a
   persona-KEL chain absent from the local board replica. An admit payload measured 2026-08-04 carries a
   chain of ''length 1''. A one-event chain against an unsynced replica reads as a plausible
-  cannot-reach-a-head shape. <<~ confidence 4/20 >> ''NOT reproduced'' — recorded so the next
+  cannot-reach-a-head shape. ''NOT reproduced'' — recorded so the next
   rehearsal watches the chain length, never as a diagnosis.
 
 ''The corroboration, with its limit named.'' The founding-then-admit path stands green end-to-end in an
@@ -359,7 +358,7 @@ the bags move and had ''dangled silently ever since''. Eighteen URIs, all repoin
 a real `.mem` before writing. Six SKILL memes in the corpus carried the same rot in `skill-package-root`.
 ''Transcripts and editor history stay untouched by law'' — rewriting a record to match the present falsifies it.
 
-<<~ confidence 15/20 >> ''A dangling pointer in an instruction file fails silently and reads
+''A dangling pointer in an instruction file fails silently and reads
 as fine'', because nothing resolves it until a reader tries — and a reader who cannot resolve it invents.
 
 !!!! ⚠ `hoʻāla` FAILS ITS LEXICON CHECK — the concept stands, the pet-name does not
@@ -384,11 +383,11 @@ compute domain and reads almost perfectly (//support · prop · threshold · the
 but ''Paepae o Heʻeia'' already carries that exact metaphor for a Native Hawaiian nonprofit stewarding an
 800-year-old fishpond, so taking it would repeat the pattern rather than mend it.
 
-<<~ confidence 15/20 >> ''The lesson generalizes past this name.'' Kōmike Huaʻōlelo entered
+''The lesson generalizes past this name.'' Kōmike Huaʻōlelo entered
 the computing domain DELIBERATELY and keeps coining in it, so a term minted from outside either collides
 with a decision they made or pre-empts one they have not made yet. ''Plain English costs nothing here'' —
 the house carries registers of its own (Discordian, Elyncian) where the fiction stays ours to move.
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/waking-floor >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/waking-floor>>
 
 !!! ★ WALKED — 2026-08-09, and the rite changed nothing ★
 
@@ -404,21 +403,21 @@ green, or reported red against something innocent:
 \procedure ~Found(Type:"" Params:"") ~Found <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Found Impatience "read/no socket after 60s truth/the CLI budgets 120 for a cold boot ~ the harness out-waited what it measured" >>
-<<~Found Poisoned-seed "read/hearth-private doc unavailable truth/a `cp -r` carried one founding's address book into another ~ the vessel refused correctly" >>
-<<~Found Port-liveness "read/status LIVE truth/a fataled node keeps its port bound ~ the gate inspected where it had to connect" >>
-<<~Found Probe-as-act "read/the node died truth/the probe rebuilt the workspace and cleaned dist ~ a reading disturbed what it read" >>
-<<~Found Silent-misroute "read/1682 specs green truth/554 of 555 framed memes stopped reading as carriers ~ nothing tested detection against a swept meme" >>
+<<~Found Impatience "read/no socket after 60s truth/the CLI budgets 120 for a cold boot ~ the harness out-waited what it measured">>
+<<~Found Poisoned-seed "read/hearth-private doc unavailable truth/a `cp -r` carried one founding's address book into another ~ the vessel refused correctly">>
+<<~Found Port-liveness "read/status LIVE truth/a fataled node keeps its port bound ~ the gate inspected where it had to connect">>
+<<~Found Probe-as-act "read/the node died truth/the probe rebuilt the workspace and cleaned dist ~ a reading disturbed what it read">>
+<<~Found Silent-misroute "read/1682 specs green truth/554 of 555 framed memes stopped reading as carriers ~ nothing tested detection against a swept meme">>
 
-<<~ confidence 18/20 >> ''The rehearsal earned its keep on the instruments alone.'' Movements ②–⑥
+''The rehearsal earned its keep on the instruments alone.'' Movements ②–⑥
 were sound early; what stood between them and a green run was a harness that measured its own patience, a
 seed that carried somebody else's identity, a gate that inspected where it had to connect, and a probe that
 acted. ''A rite proves itself only through instruments that do not lie about it'', and every one of those
 lies passed a suite first.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #nexus-lifecycle >>
+<<~ ahu #nexus-lifecycle>>
 
 !! The nexus-doc lifecycle ~ born by act, lives by traffic, quiet by absence
 
@@ -435,11 +434,11 @@ by preventing its meetings//. ''The correct admin capability here reads as NONE.
 \procedure ~Stage(Type:"" Params:"") ~Stage <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Stage Birth "verb/nexus-seal-seat admin/none ~ the operator's own personas declare and stand" >>
-<<~Stage Advance "verb/nexus-seal-rotate admin/none ~ pre-committed, quorum-bound" >>
-<<~Stage Succession "verb/nexus-seal-rotate admin/none ~ the roster becomes exactly what STANDS" >>
-<<~Stage Liveness "verb/none admin/none ~ ley-line traffic; nothing to build" >>
-<<~Stage Quiet "verb/none admin/none ~ the absence of traffic, and that IS the point" >>
+<<~Stage Birth "verb/nexus-seal-seat admin/none ~ the operator's own personas declare and stand">>
+<<~Stage Advance "verb/nexus-seal-rotate admin/none ~ pre-committed, quorum-bound">>
+<<~Stage Succession "verb/nexus-seal-rotate admin/none ~ the roster becomes exactly what STANDS">>
+<<~Stage Liveness "verb/none admin/none ~ ley-line traffic; nothing to build">>
+<<~Stage Quiet "verb/none admin/none ~ the absence of traffic, and that IS the point">>
 
 ''SUCCESSION RIDES ROTATE, and needed no new verb.'' A kahu steps down by ''no longer standing''; a new one
 takes a chair by declaring a Handle and standing. A rotation then seats the roster that stands — and the
@@ -450,9 +449,9 @@ pre-committed that exact successor key-set an epoch earlier, in the open, under 
 ''You cannot change who holds the quorum without changing what the quorum is'' — which is why the succession
 door was already there wearing another name.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bag-home >>
+<<~ ahu #bag-home>>
 
 !! Where a bag rests ~ repository ⊥ hearth ⊥ ley
 
@@ -464,9 +463,9 @@ memes and the Nexus seal read as equally PUBLIC and want ''opposite homes''.
 \procedure ~Home(Type:"" Params:"") ~Home <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Home Repository "rests/a-configured-source-control-repo clone-carries/yes ~ canon, memes, seeds — the history IS the point" >>
-<<~Home Hearth "rests/the-operator's-DATA-home clone-carries/no ~ identity · the seal · the follow-graph · the persona names · the acquired shelf" >>
-<<~Home Ley "rests/nowhere-durable clone-carries/nothing ~ it lives while the mesh carries it" >>
+<<~Home Repository "rests/a-configured-source-control-repo clone-carries/yes ~ canon, memes, seeds — the history IS the point">>
+<<~Home Hearth "rests/the-operator's-DATA-home clone-carries/no ~ identity · the seal · the follow-graph · the persona names · the acquired shelf">>
+<<~Home Ley "rests/nowhere-durable clone-carries/nothing ~ it lives while the mesh carries it">>
 
 ''FAIL-CLOSED TO HEARTH, and the asymmetry carries the reason.'' Only `hearth` can be wrong quietly — a bag
 that should have ridden the repository merely fails to be shared, and an operator notices. The other two fail
@@ -482,9 +481,9 @@ runs: a new bag asks for its directory, and a hand-rolled `join(…bags…)` inv
 ''`repository` refuses outright where no repo stands configured'' — guessing a tree is the failure the axis
 exists to prevent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #preflight >>
+<<~ ahu #preflight>>
 
 !! ⓪′ Preflight ~ prove the toolchain answers BEFORE anything irreversible
 
@@ -492,7 +491,7 @@ exists to prevent.
 toolchain that cannot then found leaves an operator holding neither — the clear runs irreversible and the
 founding runs unavailable, and nothing in the sequence catches it in between.
 
-<<~ confidence 17/20 >> ''Measured 2026-08-04'': the `lares` entry point died at import on a symbol
+''Measured 2026-08-04'': the `lares` entry point died at import on a symbol
 absent from every source and present only in a built artifact — a stale `dist` against a renamed export.
 The error named an internal symbol, not a build, and an operator reading it mid-rite has no way to reach
 `rebuild` from what it says. ''A full rebuild cured it.''
@@ -510,7 +509,7 @@ and its code — a reader grepping for `error TS`, the obvious thing to grep for
 package carries two dozen real errors. A package whose compile never joins the recursive run passes the
 same way. ''The silence reads exactly like success'', which makes it the worst shape a check can take.
 
-<<~ confidence 18/20 >> ''Witnessed against a live example.'' A recursive build reported no errors
+''Witnessed against a live example.'' A recursive build reported no errors
 while a filtered one reported a real TS2307 in a command module — same tree, same moment, two answers. The
 witness reads per package and exits non-zero on any real error, so a type error cannot ride into a founding
 behind a clean-looking build. ''The rehearsal harness runs it too'' — the rite and its rehearsal check the
@@ -521,7 +520,7 @@ at launch with //Executable doesn't exist// until the matching binary lands. Mea
 run after the install threw one cold-start flake and two re-runs came back clean, so ''a single browser red
 immediately after an install earns a re-run before it earns a diagnosis''.
 
-<<~ confidence 17/20 >> ''Walked 2026-08-09.'' The whole tree came current, built green, and stood
+''Walked 2026-08-09.'' The whole tree came current, built green, and stood
 1682 specs + 3318 tests with zero failures — so this movement now reports a walk rather than a plan. The
 vendored `tiddlywiki` keeps its ''own'' eslint generation: its majors belong to that submodule, and bumping
 them from here moves the engine blob that rides inside every signed delegation preimage.
@@ -534,7 +533,7 @@ plugin carries zero automerge references, both measured. It can skew the ''on-di
 ''The surfaces that WOULD be a cliff do not move on npm at all'': `hearthTrueName` (the engine CID, signed
 into every device-delegation edge) and the `pluginsCid` (built from this repo's own source). Those move by
 an ACT — a TW5 submodule bump, or a commit — never by an upgrade.
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces>>
 
 ''USE `pnpm build`, never `pnpm -r build`.'' The root script builds and then STAMPS the source digest the
 freshness gate reads. A build that skips the stamp leaves the tree reading stale, so the first lifecycle
@@ -544,9 +543,9 @@ moment. `pnpm build:clean` retires the outputs first, and even that leaves `dist
 ''Run this at the head of BOTH branches.'' A rehearsal that opens on a stale toolchain measures the
 toolchain and reports nothing about the rite.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #clear >>
+<<~ ahu #clear>>
 
 !! ① Clear ~ pare to void (⚠ irreversible — the KEEPER branch)
 
@@ -652,7 +651,7 @@ and the boot resolves hearth-private docs no local store holds. A rehearsal prov
 (#rehearse, fifth pass). ''`genesis/` now carries the baked island ALONE'', which makes a seed safe to
 copy, share, and re-site precisely because no identity rides inside it.
 
-<<~ confidence 16/20 >> ''A per-vessel artifact in a shared directory reads as a landmine
+''A per-vessel artifact in a shared directory reads as a landmine
 with a long fuse'' — it costs nothing until somebody copies the directory, and then it costs a founding.
 
 ```
@@ -660,13 +659,13 @@ lares library verify                                # every body re-digests to t
 lares library list                                  # the collections, and what each holds
 ```
 
-<<~ confidence 18/20 >> ''A `reset` never reaches it'' — the tier stands in the SHRINE (`<lararium>`) for
+''A `reset` never reaches it'' — the tier stands in the SHRINE (`<lararium>`) for
 exactly this reason, sharing no path prefix with anything a substrate verb reforges. The danger the rite must
 name reads as the ''operator's own hand'', never the machine's.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #found >>
+<<~ ahu #found>>
 
 !! ② Found ~ stand the device + the three kahu
 
@@ -750,9 +749,9 @@ the operator's carriage contract → that operator's persona root signing its ed
 purest case: ''such a vessel cannot cheat by holding a seed, because it never holds one.'' Its persona
 ceiling reads 0 and no argument raises it (faceless-by-class). See #crossroads.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reserve >>
+<<~ ahu #reserve>>
 
 !! ③ Reserve ~ forge the pre-rotation's future
 
@@ -787,9 +786,9 @@ lares nexus seal seat --next-key-commit <the printed commit>   # seats h0/h1/h2 
 lares nexus seal show                            # the quorum STANDS + the chain head reads armed
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reserve-custody >>
+<<~ ahu #reserve-custody>>
 
 !! ③′ Reserve custody ~ the independence rule
 
@@ -814,7 +813,7 @@ the offline shares across places). The card's ''confirmation phrase'' rides out-
 call) — it confirms the right person holds the right share, and it becomes the handshake when a
 guardian hands the share back at recovery.
 
-<<~ confidence 14/20 >> The math then holds three ways: ''compromise'' (you fully
+The math then holds three ways: ''compromise'' (you fully
 owned -> one share -> safe); ''loss'' (you lose vessel + card -> two guardians rebuild without you);
 ''rotation'' (your share + one guardian). A recovery materializes the seed, so `reserve refresh`
 re-seeds -> re-splits -> re-issues cards + a new commit afterward (Proactive Secret Sharing,
@@ -835,9 +834,9 @@ converts a death, a hospitalization, or a lost vault from the end of the lineage
 \procedure ~Ask(Type:"" Params:"") ~Ask <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Ask Collusion "asks/would-these-two-combine-against-me ~ together they hold the Nexus; pick two whose interests differ FROM EACH OTHER" >>
-<<~Ask Correlation "asks/could-one-fire-flood-or-subpoena-reach-both ~ two cards in one house reads as a 1-of-1 wearing a costume" >>
-<<~Ask Reachability "asks/can-someone-who-is-NOT-me-find-them-on-the-worst-day ~ a guardian only you can reach recovers nothing" >>
+<<~Ask Collusion "asks/would-these-two-combine-against-me ~ together they hold the Nexus; pick two whose interests differ FROM EACH OTHER">>
+<<~Ask Correlation "asks/could-one-fire-flood-or-subpoena-reach-both ~ two cards in one house reads as a 1-of-1 wearing a costume">>
+<<~Ask Reachability "asks/can-someone-who-is-NOT-me-find-them-on-the-worst-day ~ a guardian only you can reach recovers nothing">>
 
 ''THE NAMES MAY STAND UNASSIGNED AT FOUNDING'' — and a founder short of an answer should let them. The split
 runs 2-of-3 either way; the labels store as `unassigned` and the cards print regardless. ''Naming is a
@@ -849,9 +848,9 @@ names for you: ''before'' the first rotate it re-mints genesis cleanly; ''after'
 keys must reveal at the pending rotate first, because a sealed head's pre-commitment freezes into its
 `epochCid`. So a founder who expects the names to change should refresh ''before'' rotating, not after.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #threshold-attest-recovery >>
+<<~ ahu #threshold-attest-recovery>>
 
 !! ③″ Threshold-attest recovery ~ the pre-commit rhymes, the recovery rotates
 
@@ -869,7 +868,7 @@ The DIVERGENCE from the reserve card path (#/reserve-custody): threshold-attest 
   rotation event independently, ≥ k signatures verify against the pre-commit, and no seed ever assembles
   (`attestAndRotate`). The recovery authority signs ONLY rotations, never content.
 
-<<~ confidence 12/20 >> ''Operator ruling (2026-07-20):'' recovery ROTATES a fresh op-key
+''Operator ruling (2026-07-20):'' recovery ROTATES a fresh op-key
 rather than resurrecting the old — ''continuity anchors on the identifier, not the key''. The persona-KEL
 (the stable prefix) + the threshold-attest rotation stand BUILT + tested (mesh: `persona-kel` +
 `recovery-keel-core#attestAndRotate`).
@@ -891,9 +890,9 @@ built''; neither is wired into `runInit`, and the wiring waits on the ruling rat
 bans a presenter `nym`, so a lawful rotation ''sheds the ban''; and a handle-card names a bare key as its
 `nym`, so a face carries no chain to break.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #seal-and-back-up >>
+<<~ ahu #seal-and-back-up>>
 
 !! ④ Seal + back up ~ lock the secrets, write the net
 
@@ -923,7 +922,7 @@ honest reading: ''the hearth did not light''. The cure rides in the boot's own w
 and restarts nothing, so a founding that seals here by TYPING the passphrase — the honest path, the one
 the prompt exists for — walks to LIVE without carrying it forward by hand between two movements.
 
-<<~ confidence 18/20 >> ''The env var is not a convenience; it is the standing condition of a
+''The env var is not a convenience; it is the standing condition of a
 sealed vessel.'' Every later terminal, every reboot, every `lares vessel stand --foreground` wants it.
 That reads as the unattended-boot tension in everyday clothes (#/rehearse), and it arrives the moment the
 vault seals — not later, at some crossroads.
@@ -944,7 +943,7 @@ the rite warns about, and a DIFFERENT one than an operator expects while typing 
 reads) and leave `LARES_ARCHIVE_PASSPHRASE` unset through ②; to seal at founding and skip ④, carry both.
 Either stands — an unwitnessed choice does not.
 
-<<~ confidence 17/20 >> ''A no-op now announces itself'': `vault seal` reports sealing NOTHING and
+''A no-op now announces itself'': `vault seal` reports sealing NOTHING and
 writes no day-stamp, rather than printing a seal-day for work it did not do. It once stamped first and
 sealed second, so a vault that sealed nothing carried a record claiming it had.
 
@@ -975,13 +974,13 @@ itself forever. Putting it in `.zshrc` would leave the key beside the lock on ev
 whole at-rest seal for the cost of retyping — and the at-rest seal is the only thing standing between a
 stolen disk and a sovereign identity.
 
-<<~ confidence 18/20 >> ''The TTY leg still goes un-exercised by the harness'' (#/rehearse), so a
+''The TTY leg still goes un-exercised by the harness'' (#/rehearse), so a
 keeper founding that seals interactively walks a path no rehearsal has proven. Seal by hand at least once
 before the day it matters.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #regenesis-live >>
+<<~ ahu #regenesis-live>>
 
 !! ⑤ Seed + ⑥ LIVE ~ plant the content, serve
 
@@ -1007,14 +1006,14 @@ never restarts never meets it.
 
 ''AND THE RITE ENDS HERE, at the handover.'' `hooks resume` re-arms capture, which starts the sensorium's
 clock — and the sensorium's lifecycle rides ''its own rite'', deliberately not this one
-(<<~ loulou lar:///ha.ka.ba/lararium/api/sensorium-runbook >>). The two carry different cardinal sins:
+(<<~ loulou lar:///ha.ka.ba/lararium/api/sensorium-runbook>>). The two carry different cardinal sins:
 this rite's worst outcome ''loses a key'' and nothing recovers it; the tending rite's ''loses a baseline'',
 and a corpus re-pours where a measurement never taken does not. ''A pour, a sweep, or a teardown belongs
 there'' — a movement for it here would teach an irreversibility the sensorium does not have.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #crossroads >>
+<<~ ahu #crossroads>>
 
 !! ⚲ Crossroads ~ stand a Herm where the family needs one (OPTIONAL, after LIVE)
 
@@ -1072,9 +1071,9 @@ Herm'' — it composes into an operator-class vessel and the nothing-to-steal pr
 absent cap that carried it. `composable-keel`'s //absence = un-routed authority// makes that a fact
 about the stack, not a rule a later bug could flip.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #grow-the-nexus >>
+<<~ ahu #grow-the-nexus>>
 
 !! ⊕ Grow ~ open the Nexus, contract operators, welcome users
 
@@ -1106,7 +1105,7 @@ alike — because //a board that recorded contracts and called everyone a member
 to anyone asking //is this human one of us//. The act that writes an entry therefore spells CONTRACT
 (`nexus contract`), and `nexus members` reads the board back.
 
-<<~ confidence 16/20 >> ''A rename that reaches the signing domain and stops at the CLI leaves the
+''A rename that reaches the signing domain and stops at the CLI leaves the
 operator typing the one spelling nobody corrected.'' It reads as a free move — a CLI verb name carries no
 signing domain and no doc address — which is exactly why it gets deferred and then forgotten. The
 rite-commands witness now reads every instructed sub-door at its DISPATCH POSITION, so a door renamed
@@ -1129,9 +1128,9 @@ per-Nexus convergence salt, fetched DHT-free); the read-cap crosses for no one; 
 leaves the PersonaGroup's own fleet. The mesh breathes over immutable bodies while a stranger — every
 500-year GPA — cannot confirm who-holds-what.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #gather-the-fleet >>
+<<~ ahu #gather-the-fleet>>
 
 !! ⊛ Gather ~ the operator's own vessels join the standing fleet (after LIVE)
 
@@ -1188,19 +1187,19 @@ this edge rather than orphaning the vessel holding it.
 
 !!! THE INVITE CARRIES THE DIAGNOSIS ~ what the payload MUST hold before QR transport lands
 
-''A silent responder makes the invite the only place a failure can speak.'' A shrine that stays silent toward strangers (<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/the-active-prober >>) answers a legitimate guest with a stale invite, a skewed clock, or a too-old client exactly as it answers a prober: nothing. Every deployment that bought silence paid this bill — WireGuard reports a missing handshake timestamp and no reason; a Tor bridge leaves diagnosis to the client log and to out-of-band bridge-health checks. ''No responder-side cure exists'', because any error channel rebuilds the oracle.
+''A silent responder makes the invite the only place a failure can speak.'' A shrine that stays silent toward strangers (<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/the-active-prober>>) answers a legitimate guest with a stale invite, a skewed clock, or a too-old client exactly as it answers a prober: nothing. Every deployment that bought silence paid this bill — WireGuard reports a missing handshake timestamp and no reason; a Tor bridge leaves diagnosis to the client log and to out-of-band bridge-health checks. ''No responder-side cure exists'', because any error channel rebuilds the oracle.
 
 ''So the payload carries every failure the joining vessel can check WITHOUT sending a packet'', and each becomes a loud LOCAL error:
 
 * ''expiry'' — a stale invite reads as expired on the joining device, never as a dead network.
 * ''chant epoch + protocol version'' — a dialect mismatch names itself before the handshake runs.
 * ''shrine key fingerprint'' — the guest confirms WHICH shrine it approaches, which the wire never tells it.
-* ''expected release fingerprint'' — the invite authenticates the software rather than the reverse (<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc#/invariants >>).
+* ''expected release fingerprint'' — the invite authenticates the software rather than the reverse (<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc#/invariants>>).
 * ''single-use nonce'' — spent-on-boot, matching the burnable boot-invite the ⊕ Grow rite already mints (#/grow-the-nexus).
 
 ''Silence then stays reserved for a genuine key mismatch'', which reads as the only failure the guest may not distinguish — and the only one worth hiding.
 
-''NEVER gate on a wall clock.'' The replay window wants a per-peer monotonically increasing counter, not an accurate time (<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands#/two-clocks >>); a device with a skewed clock must still join.
+''NEVER gate on a wall clock.'' The replay window wants a per-peer monotonically increasing counter, not an accurate time (<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands#/two-clocks>>); a device with a skewed clock must still join.
 
 !!! The QR mitigations that hold, and the one that survives a stolen code
 
@@ -1208,7 +1207,7 @@ this edge rather than orphaning the vessel holding it.
 
 # ''single-use, and consumed at the first successful handshake.''
 # ''short expiry'', checked locally by the joining vessel.
-# ''confirmation at BOTH ends'' — Matrix's key-verification flow requires a reciprocating human act on the scanned side; Signal hardened its device-linking flow the same direction after the campaigns at <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire#/legibility >>. <<~ confidence 11/20 >> The Matrix QR byte layout (prefix · version · mode · transaction id · two keys · shared secret) reads from held knowledge; the fetched spec section came back truncated and the field widths stay UNVERIFIED here.
+# ''confirmation at BOTH ends'' — Matrix's key-verification flow requires a reciprocating human act on the scanned side; Signal hardened its device-linking flow the same direction after the campaigns at <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire#/legibility>>. The Matrix QR byte layout (prefix · version · mode · transaction id · two keys · shared secret) reads from held knowledge; the fetched spec section came back truncated and the field widths stay UNVERIFIED here.
 # ''A HUMAN closes the loop after the channel comes up'' — a short authentication string or emoji comparison, spoken between the two people. ''This one alone survives a code an adversary already photographed'', because it moves the check off the device.
 # ''Operator-side notification plus an auditable, revocable enrolled-vessel list.''
 
@@ -1216,9 +1215,9 @@ this edge rather than orphaning the vessel holding it.
 
 ''What this does NOT add: DEPTH.'' Every vessel here binds ''one principal's instruments''. Below the phase change the gauge reads the realm nominal, and correctly — a fleet buys REACH, never dwelling. The realm's standing moves when a second locus of cost begins to dwell, never when a fourth device arrives.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #feed-the-realm >>
+<<~ ahu #feed-the-realm>>
 
 !! ⊙ Feed ~ the first offering IS the realm's founding (after LIVE)
 
@@ -1241,9 +1240,9 @@ The second reads the capture-clock the model already argues for — ''who feeds 
 
 > ''ONE FORK GATES BOTH VERBS, and it belongs to the operator:'' WHICH BOARD carries a realm's feeding. A deterministic per-Nexus board (the seventh sibling beside carriage · antigen · vouch · edge-kāpae · persona-KEL) would federate the clock to every carrier — and publish, by inference, which keys dwell where, which is precisely what `dwellersHolding` refuses to enumerate. The realm's own members-only substrate keeps the sight INSIDE the realm and makes the clock unreadable from outside it. The read (`realmMaintenanceFromBoard`) takes whatever doc it is handed and never asks, so the choice stays open above it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dwell >>
+<<~ ahu #dwell>>
 
 !! ⊘ Dwell ~ a second operator joins the REALM (design before commands)
 
@@ -1262,11 +1261,11 @@ A vouch rides as signal-2 on the lineage; the crossing prices it later, and the 
 
 ''What CANNOT be written here, by ruling.'' The conversion act — a fed guest re-anchoring from host to realm — stays ''UN-MODELLED'' (`the-thing-event#unmodelled`). The mesh may record ''THAT a re-anchoring happened''; it must not hold what made it valid. A configurable rite would still be this stack's rite with someone else's values poured in, so no command here may name a quorum, a waiting period, a franchise, or a test. ''Each realm supplies its own.''
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/first-realm-arc >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/first-realm-arc>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-frame >>
+<<~ ahu #the-frame>>
 
 !! The frame ~ why compromise-resistance rides early
 
@@ -1283,7 +1282,7 @@ from a-multitude-of-one, hardening as the cabal arrives.
 ''THE SPEC STANDS AS THE SUCCESSION PLAN.'' Read across the whole federation record, one clean survival
 appears: an author moved the load-bearing artifact out of his own implementation and into a form that
 transmits ''as a document'', and that grammar outlived every implementation he wrote — including his
-own rewrite, which stranded the network it had convened. <<~ confidence 15/20 >>
+own rewrite, which stranded the network it had convened.
 ''Behavioural membership makes this stack unusually well-placed to take that cure'', because //operators
 who parse a shared grammar identically// names a document rather than a codebase. The boot seed and the
 grammar carry the survivability; the TypeScript does not.
@@ -1311,7 +1310,7 @@ answers it only where a second party already holds the bytes — ''verifiability
 finances a launch and never an operation; a subscription at the door blocks growth precisely where
 network effect needs it free; and venture money forces the monetisation that breaks the trust promise.
 ''What survived ran on public-interest grant funding'' — no token, no exit, no growth mandate — and the
-brief points at exactly the anti-censorship ground that channel serves. <<~ confidence 12/20 >>
+brief points at exactly the anti-censorship ground that channel serves.
 ''TWO FORKS RIDE WITH IT, and both belong to the operator rather than to this meme'': such funders sit
 under their own political attack and offer no stable base; and taking state-adjacent money to shelter a
 community FROM a state names a threat-model question, never a paperwork one.
@@ -1321,9 +1320,9 @@ alternative that built first and sought participants after died on network effec
 forcing event deliver participants to something ''already working''. A design that only becomes good at
 scale dies before scale — which reads as a constraint on the rehearsal branch, not a hope about adoption.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #identity-classes >>
+<<~ ahu #identity-classes>>
 
 !! Identity classes ~ who carries the reserve at all
 
@@ -1331,14 +1330,14 @@ The reserve burden rides ''operator-class'' identities alone (KERI transferable 
 rotatable, they operate node vessels; the charter epoch chain reads as a key-event-log). Browser-only
 ''users'' (ephemeral, short cap-stacks, no charter role) carry NO reserve — they ride KERI
 non-transferable/basic identifiers, and their "rotation" reads as ''abandon-and-recreate'', cheap and
-native. <<~ confidence 12/20 >> The line draws by persistence/value, not by title: a user
+native. The line draws by persistence/value, not by title: a user
 vessel that accretes lasting value drifts toward transferable, held either by promoting that vessel
 or by delegated identifiers (the operator root delegates to disposable user streams, durability in
 the root). The default holds — users stay light; operators carry the future.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bags-and-shelf >>
+<<~ ahu #bags-and-shelf>>
 
 !! What a founding vessel carries besides its keys ~ declarations and the shelf
 
@@ -1382,9 +1381,9 @@ lares library index <coll> --out <path>             # the tracked index, the par
 resolves it locally — the same law the repo registry runs and the `lar:` URI before it. ''The shelf survives
 every founding'' (#/clear).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #agent-seed >>
+<<~ ahu #agent-seed>>
 
 !! The agent seed ~ how a reader answers //what do I run next//
 
@@ -1441,22 +1440,22 @@ the live surfaces (2026-07-27); the shape reads as a proposal awaiting the opera
 waits behind the first rehearsal — a guidance surface built before anyone has run the rite would
 teach a ceremony nobody has performed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/charter-chain >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/charter-chain>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;rQ0a2SRHe-iQqrIxhGEYmhbUbF32sS-PS0hVomb7Zjo
+<<^ code="&#x0003;">>ni:///sha-256;MY9-_kOBo-vncwH1yzKt0AeeGPPsObUWz-vDQ6hTodo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

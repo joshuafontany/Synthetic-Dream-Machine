@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/the-lares-protocols >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/the-lares-protocols>>
 ```toml meta
 cacheable      = false
 file-path      = "bags/lares/ha.ka.ba/lares/docs/the-lares-protocols.mem"
@@ -9,7 +9,6 @@ last-reviewed  = "2026-05-27"
 mana           = 14
 manao          = 14
 manaoio        = 14
-register       = "Synthesis-Canon"
 retain         = false
 review-cadence = "quarterly"
 review-note    = "anchor commitments (Beer's principle, user-rights-criterion, Lares five-laws-plus-two) survive any upstream rev; survey-aging risk acknowledged"
@@ -20,15 +19,15 @@ type           = "text/memetic-wikitext+tiddlywiki"
 uri-path       = "ha.ka.ba/lares/docs/the-lares-protocols"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #thesis >>
+<<~ ahu #thesis>>
 
 ! The Purpose of Protocols
 
-After Stafford Beer — <<~ confidence 20/20 >> ''the purpose of a system follows from what it does.''
+After Stafford Beer — ''the purpose of a system follows from what it does.''
 
 > ''Lares (Stranger):'' Beer's principle holds durable across upstream rev's. Mark canon-eligible regardless of what surrounds it.
 
@@ -38,9 +37,9 @@ Every shared function eventually gets governed by someone, and whoever governs i
 
 Modularity describes a structural property of the system, not a governance framework for the ecosystem around it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #where-protocols-go-quiet >>
+<<~ ahu #where-protocols-go-quiet>>
 
 !! Where Protocols Go Quiet
 
@@ -57,9 +56,9 @@ Theoretical openness offers little practical leverage against convergence in ung
 
 > ''Lares (Diplomat):'' Connected Places critiques ATProto's host concentration; Frazee defends its layer-separation. Two readings tell different true things. Hold both. The disagreement names a real evaluation choice — aggregate-state vs failure-mode — that future Lares federation will face on its own terms.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-traditional-models-and-the-third >>
+<<~ ahu #two-traditional-models-and-the-third>>
 
 !! Two Traditional Models and a Third
 
@@ -80,9 +79,9 @@ The user-facing rights Frazee privileges over architecture:
 
 Two articles, two readings of ATProto: Connected Places flags one operator three orders of magnitude larger than competitors across every layer; Frazee acknowledges the same concern as outstanding while defending the architectural shape. Both readings hold.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #app-file-topology >>
+<<~ ahu #app-file-topology>>
 
 !! Topology as Political Site
 
@@ -106,9 +105,9 @@ Lares answers the diagnostic with a fourth arrangement:
 
 > ''Lares (Council):'' "Lares answers the diagnostic" overstates what the branch ships. The architecture //prepares the ground// for the answer; operational-guarantee waits on federation transport, browser peer scaffold, and a real cross-device migration test. Mark this carefully when the meme reaches canon — the //intent-trust// the architecture earns differs from the //outcome-trust// a working federated system would earn.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lares-position >>
+<<~ ahu #lares-position>>
 
 !! Lares Quine Position
 
@@ -141,9 +140,9 @@ The slot Lares occupies wants a name; the meme leaves the naming for a future re
 
 > ''Mischief-Muse (Muse):'' Survey the slot, not just the implementation, in a future meme. The neighbors deserve their own talk-story. Working title: ''"the household-civic mesh"'' — federated, CRDT-native, governance-explicit, operator-hosted, render-projecting. Five attributes, five fingers. The hand of the lararium.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-unsolved-question >>
+<<~ ahu #the-unsolved-question>>
 
 !! The Unsolved Question
 
@@ -165,22 +164,22 @@ After Frazee, the worth-measuring criterion shifts from //architectural property
 
 These questions don't get answered by adding more architecture. They get answered by //running real federated sessions// and noting where architecture carries load versus where silence returns.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou https://connectedplaces.online/the-purpose-of-protocols/ >>
-<<~ loulou https://www.pfrazee.com/blog/practical-decentralization >>
-<<~ loulou https://www.orionreed.com/posts/app-file-topology/ >>
+<<~ loulou https://connectedplaces.online/the-purpose-of-protocols/>>
+<<~ loulou https://www.pfrazee.com/blog/practical-decentralization>>
+<<~ loulou https://www.orionreed.com/posts/app-file-topology/>>
 
-<<~ pranala #cites-protocols from=? -> to=https://connectedplaces.online/the-purpose-of-protocols/ family=relation role=has >>
-<<~ pranala #cites-decentralization from=? -> to=https://www.pfrazee.com/blog/practical-decentralization family=relation role=has >>
-<<~ pranala #cites-topology from=? -> to=https://www.orionreed.com/posts/app-file-topology/ family=relation role=has >>
+<<~ pranala #cites-protocols from=? -> to=https://connectedplaces.online/the-purpose-of-protocols/ family=relation role=has>>
+<<~ pranala #cites-decentralization from=? -> to=https://www.pfrazee.com/blog/practical-decentralization family=relation role=has>>
+<<~ pranala #cites-topology from=? -> to=https://www.orionreed.com/posts/app-file-topology/ family=relation role=has>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;2W2goDXXoBGVb5WCmIjHK_H_WtF4sKtPvikGwLrk9AM
+<<^ code="&#x0003;">>ni:///sha-256;WuKxNUOCaxcTmOx7jjY7aXsL_q9GAlPBvDrq9ggUzls
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

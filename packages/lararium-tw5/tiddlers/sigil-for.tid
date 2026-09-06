@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
      Hawaiian equivalent: huli (search/turn — query or exploration scope).
      lar-see-also: huli
 
-     <<~ \for filter >>body-template<<~/ \for >> renders body-template once per result.
+     <<~ \for filter>>body-template<<~/ \for>> renders body-template once per result.
      Operator talk-story: body-template receives the current tiddler title as
      `currentTiddler`. Use `[all[tiddlers]tag[MyTag]]` for tag iteration,
      `[range[1,10]]` for numeric, `[{!!items}splitTiddlerList[]]` for stored lists.

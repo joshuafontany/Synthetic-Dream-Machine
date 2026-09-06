@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/worker-message-protocol >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/worker-message-protocol>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/worker-message-protocol.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 14
-register  = "Synthesis"
 retain    = false
 role      = "the P.3 Worker-thread message protocol — the structured-clone boundary, the schema-versioned envelope (GP-1..6), and the three boundary message types; for operator + agent review"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/worker-message-protocol"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Worker Message Protocol — the StructuredClone Boundary
 
@@ -28,9 +27,9 @@ The lararium runtime crosses one mandatory trust boundary: ''main thread ↔ Wor
 
 This meme lifts that protocol out of the alignment-architecture doctrine so operator and agent review it together as implementation design.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary >>
+<<~ ahu #boundary>>
 
 !! What the Boundary Drops and Preserves
 
@@ -53,9 +52,9 @@ This meme lifts that protocol out of the alignment-architecture doctrine so oper
 | Error (name + message) | fault signals across the boundary |
 | Date | timestamp fields |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #envelope >>
+<<~ ahu #envelope>>
 
 !! Golden Principles — the P.3 Message Envelope
 
@@ -75,9 +74,9 @@ No naked payloads. The version field enables forward-compatible evolution; lock 
 
 ''GP-6 — No direct Worker-to-Worker messages.'' Workers never communicate directly. Cross-wiki routing always passes through main thread (event from Worker A → dispatch to Worker B via its own reference). The Session Wiki engine coordinates by reading the event-bus bag (Automerge-synced), not by direct Worker messaging. Re-evaluate at P.4 if the Session engine demands direct peer channels for performance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #prior-art >>
+<<~ ahu #prior-art>>
 
 !! Prior Art
 
@@ -86,9 +85,9 @@ No naked payloads. The version field enables forward-compatible evolution; lock 
 * ''Electron IPC'' (`ipcMain`/`ipcRenderer`) — version the message shape; never send class instances; a `type` discriminant on every message. The direct antecedent of GP-1.
 * ''React Native bridge → JSI'' — the old bridge required JSON-serializable payloads; the New Architecture (JSI) replaced it with direct calls. The Lares analogue of JSI: the in-Worker synchronous TW5 read (no boundary at all; engine + TW5 co-located).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #co-location >>
+<<~ ahu #co-location>>
 
 !! The Co-Location Insight
 
@@ -103,17 +102,17 @@ TW5 and the reaction engine occupy the ''same'' Worker thread (co-located, synch
 
 These three types cover the full P.3 boundary surface. Lock them before shipping Worker #1.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/alignment-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-HNKMqEgXweS6gwMfPiKmDPoUkIR8Uk9hQItrPD-C5g
+<<^ code="&#x0003;">>ni:///sha-256;xYfP6TQAy8pR-j2rFIgMqEnwyX4mQB0mh1Pknqj0By4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

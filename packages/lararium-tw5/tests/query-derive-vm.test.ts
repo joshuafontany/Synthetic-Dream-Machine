@@ -13,7 +13,7 @@ import { harvestTurnGradient } from "@lararium/mesh";
 import { emitMoveSkeleton } from "../src/form-layer/index.js";
 import { deriveQuerySkeleton } from "../src/query-derive-vm.js";
 
-const MARKERS_QUERY = "what did we decide <<~ hud Aperture(10) OODA-HA(3) >> <<~ ward ! L-Prime >>";
+const MARKERS_QUERY = "what did we decide <<~ hud Aperture(10) OODA-HA(3)>> <<~ ward ! L-Prime>>";
 
 describe("deriveQuerySkeleton — the in-VM recall functor (FULL, one runtime)", () => {
   test("a sigil-bearing query → a derivation carrying BOTH planes (structural plane present)", () => {

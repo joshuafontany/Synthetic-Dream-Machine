@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/engine-update-banner >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/engine-update-banner>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/engine-update-banner.mem"
 mana      = 18
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Engine update banner — shown when SW caches a new TW5 engine version; prompts page reload"
 tags      = ["$:/tags/PageTemplate"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/engine-update-banner"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 <$reveal type="nomatch" state="$:/lararium/engine/update-available" text="">
 <div class="lar-engine-update-banner">
@@ -23,6 +22,6 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/engine-update-banner"
 </div>
 </$reveal>
 
-<<^ code="&#x0003;" >>ni:///sha-256;_ydSmUZ154LNxNJ6T9kzMGrunYZGPn3BvuRVsmmqacw
+<<^ code="&#x0003;">>ni:///sha-256;d4wGmlPijWr8KELHss2RBXFC5iw6SrlhQn-gNoCRa7k
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

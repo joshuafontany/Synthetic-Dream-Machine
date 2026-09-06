@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/cap-tier >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/cap-tier>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/cap-tier.mem"
@@ -10,7 +10,6 @@ mana      = 16
 manao     = 16
 manaoio   = 15
 namespace = "&#x2695;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the bag's sealing-posture as SELF-DESCRIBING TIGHTEN-ONLY data: WHO holds the read-cap, named as a chain by set-inclusion VEIL{vessel}⊂PERSONAGROUP{fleet}⊂CONTRACT{fleet∪cabal}⊂PUBLIC{world}. The SAFETY KEYSTONE — the datum only DECLARES, the gate ENFORCES declared∧structural-floor (the taint-meet toward more-restrictive), so a self-describing quine can only ever self-TIGHTEN, mechanically never self-loosen. PERSONAGROUP & CONTRACT ride ONE mechanism (keyring-delivery to a recipient set); the member read-cap delivers AUTHENTICATED (bound into the persona-signed grant). Declassification = an operator-root robust-declassification one-way ratchet. Isomorphic to FederationPosture by composition. Operator-ruled 2026-07-21; built 66594fae + 30cdd087; the floor wired live, the declared-source a defined-but-unlit shore."
 status    = "standing"
@@ -21,11 +20,11 @@ uri-path  = "ha.ka.ba/lararium/mesh/cap-tier"
 written   = "2026-07-23"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Cap-Tier ~ the sealing posture the quine declares and the gate tightens
 
@@ -33,51 +32,51 @@ written   = "2026-07-23"
 > authenticated keyring delivery). The floor stands wired live; the declared-source rides a defined-but-
 > unlit shore. The //model// awaits a post-swarm hoike.
 
-<<~ confidence 15/20 >> A bag answers ''one question'' about its sealing — WHO holds the read-cap — and the answer rides as a ''chain by set-inclusion'': VEIL{this-vessel} ⊂ PERSONAGROUP{your-fleet} ⊂ CONTRACT{your-fleet ∪ a-cabal} ⊂ PUBLIC{world}. The bag ''declares'' its tier as self-describing data; the gate ''enforces'' the meet of that declaration against the crypto floor — so a declaration ''only ever tightens'', mechanically never loosens. The whole model turns on that one asymmetry.
+A bag answers ''one question'' about its sealing — WHO holds the read-cap — and the answer rides as a ''chain by set-inclusion'': VEIL{this-vessel} ⊂ PERSONAGROUP{your-fleet} ⊂ CONTRACT{your-fleet ∪ a-cabal} ⊂ PUBLIC{world}. The bag ''declares'' its tier as self-describing data; the gate ''enforces'' the meet of that declaration against the crypto floor — so a declaration ''only ever tightens'', mechanically never loosens. The whole model turns on that one asymmetry.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #posture >>
+<<~ ahu #posture>>
 
 !! The posture ~ sealed everywhere, cleartext only at the human surfaces
 
 ''Operator ruling (2026-07-21): no cleartext in the write at all — cleartext lives ONLY at the two human surfaces.'' Everything that leaves a vessel travels ''ciphertext''; plaintext survives in exactly two places, and both are where a ''person'' reads or edits — the browser DOM and the local-filesystem projection (#content-resolution names the disk projection). VEIL names the cleartext-local floor (nothing crosses a vessel boundary in the clear); PUBLIC names the world-readable shelf; the two member tiers travel sealed on the wire and open only for their recipient set. Sealing-on-the-wire stays ''universal'' — the tier never decides //whether// to seal, only //who holds the read-cap//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-chain >>
+<<~ ahu #the-chain>>
 
 !! The chain ~ four read-cap holder-sets, one total order
 
 The tier names the read-cap holder-set, ascending in openness — a lower rank names a ''smaller'' set (fewer readers → more restrictive):
 
-<<~ranks captier veil@0 ~ {this-vessel} · cleartext-local, nothing crosses in the clear -> personagroup@1 ~ {your-fleet} · keyring-delivered to the operator's own persona fleet -> contract@2 ~ {your-fleet ∪ a-cabal} · keyring-delivered to the fleet PLUS a contracted cabal -> public@3 ~ {world} · the deterministically-federatable public shelf >>
+<<~ranks captier veil@0 ~ {this-vessel} · cleartext-local, nothing crosses in the clear -> personagroup@1 ~ {your-fleet} · keyring-delivered to the operator's own persona fleet -> contract@2 ~ {your-fleet ∪ a-cabal} · keyring-delivered to the fleet PLUS a contracted cabal -> public@3 ~ {world} · the deterministically-federatable public shelf>>
 
 ''TWO RATCHETS, OPPOSITE DIRECTIONS, ORTHOGONAL PLANES.'' This chain ratchets ''tighter'' — a declaration only ever narrows the read-cap holder-set, mechanically never widens it. The dwelling plane ratchets the other way: `nohopapa` ''deposits'' depth by staying, and erodes when tending stops (`identity-enacts-relation`). Disclosure narrows; dwelling deepens. `papa` carries //layer · rank · structured sequence// and BOTH planes read as strata — which is exactly why they must stay named apart. ''A deep dweller holds no wider read-cap, and a public bag confers no depth.'' Fusing them would let standing buy disclosure, which is the shape this stack refuses.
 
 ''PERSONAGROUP and CONTRACT ride the SAME mechanism'' — keyring-delivery to a recipient set (#/keyring-delivery) — differing ONLY in which set (`fleet ⊂ fleet∪cabal`, a strict chain). A Cabal STARTS a cross-operator contract (#carry-contract names the bilateral tier the cabal negotiates); PERSONAGROUP reads as a SELF-contract to your own device-admitted vessels. The four names carry the human face; the specific recipient set rides beneath.
 
-''THE ONE PLANE THAT TRUNCATES THE CHAIN.'' A ''reach credential'' — a foreign app credential the vessel holds so a human posts outward from their wiki (#/reach-plane) — rides this same chain and this same keyring-delivery, and stops one rung short: ''PUBLIC is refused by TYPE'', because a world-readable credential stops being a credential. So the reach ceiling reads CONTRACT where the content chain carries none, and the difference names a definition rather than a policy. A credential declared PERSONAGROUP delivers to the whole fleet — every device of yours may post — and a credential ''never federates'' in any tier. <<~ confidence 12/20 >> On that plane ''the tier IS the blast radius'', so the tighten-only keystone below reads as a security control rather than hygiene.
+''THE ONE PLANE THAT TRUNCATES THE CHAIN.'' A ''reach credential'' — a foreign app credential the vessel holds so a human posts outward from their wiki (#/reach-plane) — rides this same chain and this same keyring-delivery, and stops one rung short: ''PUBLIC is refused by TYPE'', because a world-readable credential stops being a credential. So the reach ceiling reads CONTRACT where the content chain carries none, and the difference names a definition rather than a policy. A credential declared PERSONAGROUP delivers to the whole fleet — every device of yours may post — and a credential ''never federates'' in any tier. On that plane ''the tier IS the blast radius'', so the tighten-only keystone below reads as a security control rather than hygiene.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #self-describing-datum >>
+<<~ ahu #self-describing-datum>>
 
 !! The self-describing datum ~ the quine speaks its own walls
 
 The tier rides as a ''declared datum'' the @daemon recipe carries (a bag-level default; a per-tiddler `capTier` refines it). ''Fail-closed by construction'': `DEFAULT_CAP_TIER = "veil"`, and `parseCapTier` folds any torn / absent / unknown value to VEIL — a torn datum NEVER silently opens a bag.
 
-<<~ confidence 14/20 >> Modeled ''isomorphic to `FederationPosture`'' (federation-gate.ts) by composition, never by an interface tower: a closed string union + a `DEFAULT_…` fail-closed constant + a `…FromDoc` parser that fail-closes a torn value + a pure gate fn. The tier carries ''one structure more'' than a posture — a total order + a `meet` (a posture reads as the two-valued special case). The rhyme is a subtraction, not an inheritance.
+Modeled ''isomorphic to `FederationPosture`'' (federation-gate.ts) by composition, never by an interface tower: a closed string union + a `DEFAULT_…` fail-closed constant + a `…FromDoc` parser that fail-closes a torn value + a pure gate fn. The tier carries ''one structure more'' than a posture — a total order + a `meet` (a posture reads as the two-valued special case). The rhyme is a subtraction, not an inheritance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-keystone >>
+<<~ ahu #the-keystone>>
 
 !! The keystone ~ declare ⊥ enforce, so the quine can only self-tighten
 
 ''The load-bearing invariant.'' The datum only DECLARES; the gate ENFORCES `declared ∧ structural-floor` — the ''taint-meet'' toward the more-restrictive tier. A self-describing datum can therefore only ever ''self-TIGHTEN'': `resolveTier(declared, floor) = meet(declared, floor)` never returns a tier more-open than its floor, so it is ''mechanically impossible'' for a quine to grant more openness than the crypto structure permits. The gate never trusts the declared datum to loosen.
 
-<<~ confidence 15/20 >> Three consequences fall out of the one meet:
+Three consequences fall out of the one meet:
 
 * ''The high-water-mark cascade'' — `refineBagTierWithTiddlers` folds the bag default under `meet` with every per-tiddler refinement: a bag reads only as shareable as its ''least-shareable tiddler''. A tiddler declaring PUBLIC inside a PERSONAGROUP bag leaves the bag PERSONAGROUP.
 * ''META-CAP ≥ declared cap'' — `mayDeclareTier`: the write-cap that SETS a bag's tier datum must sit at-least-as-restrictive as the tier it declares. You cannot publicly-editably declare a private bag's tier (attenuation-only, the ocap discipline of #orichalcum-capabilities).
@@ -85,27 +84,27 @@ The tier rides as a ''declared datum'' the @daemon recipe carries (a bag-level d
 
 The keystone reads back through the code: revert the meet to take the more-OPEN and nine tests fall, the gate withdrawal among them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #declassification >>
+<<~ ahu #declassification>>
 
 !! Declassification ~ the one-way ratchet under no-global-now
 
 Tightening is free — a bag may always self-tighten, and a tightening cascade never asks the operator. ''Loosening'' (moving toward more openness) is a different act: `mayDeclassify` grants it ONLY under the operator-root capability — never content-derived (''robust declassification''), so no datum an adversary can influence can widen a bag. And the ratchet runs ''one way under no-global-now'' (#/causal-islands): a declassification widens who reads ''new'' writes, but it cannot un-federate the ''past'' — bytes already carried to a holder-set stay carried, because a causal island cannot reach back across another's log. A re-tightening never recalls what already crossed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #keyring-delivery >>
+<<~ ahu #keyring-delivery>>
 
 !! Keyring delivery ~ the member read-cap, delivered AUTHENTICATED
 
 The member tiers (PERSONAGROUP / CONTRACT) become concrete through ''keyring-delivery to the recipient set'' (built `30cdd087`). The per-Nexus convergence keyring — the `@cad` read-key (#/content-resolution) — rides ''admission'': the founder seals its `{epoch → secret}` keyring to the joinee's ephemeral X25519 recipient on the persona-admit grant hop (#/persona-policy), and the joinee installs it ''authoritatively'' — a delivered epoch supersedes the joinee's self-minted PHANTOM (a first-boot Nexus-of-one that seals only bodies no peer can read). Same-Nexus members thereby share the secret → cross-member `@cad` read works.
 
-<<~ confidence 15/20 >> ''The lesson, load-bearing: a delivery must be as AUTHENTICATED as the ceremony it rides.'' The recipient pubkey rode PUBLIC in the enrollment offer, so a ''sealed-only'' fragment proves nothing about WHO authored it — an active paster could substitute their own keyring, sealed to that same public key, and the joinee would seal every future body under an attacker-known secret. Confidential ≠ authenticated when the recipient key is public. The cure ''binds a sha256 of the exact carried token INTO the persona-signed grant transcript''; the joinee installs ONLY on a signature-covered digest match, else stays carry-only (four fail-closed branches). Revert the digest gate and the MITM-substitution test falls — the binding genuinely catches the swap.
+''The lesson, load-bearing: a delivery must be as AUTHENTICATED as the ceremony it rides.'' The recipient pubkey rode PUBLIC in the enrollment offer, so a ''sealed-only'' fragment proves nothing about WHO authored it — an active paster could substitute their own keyring, sealed to that same public key, and the joinee would seal every future body under an attacker-known secret. Confidential ≠ authenticated when the recipient key is public. The cure ''binds a sha256 of the exact carried token INTO the persona-signed grant transcript''; the joinee installs ONLY on a signature-covered digest match, else stays carry-only (four fail-closed branches). Revert the digest gate and the MITM-substitution test falls — the binding genuinely catches the swap.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #groundings >>
+<<~ ahu #groundings>>
 
 !! Groundings ~ the falsifiable rhymes
 
@@ -122,9 +121,9 @@ The model reads as a real pattern integrity because independent fields under the
 
 ''The honest guard (Stranger's frame-check):'' the security lattice illuminates the ''order'' (the tiers), the ''meet'' (tighten-only), and the ''declassification'' (privileged, robust) — but it lies about the mechanism where it assumes a global reference monitor. Our gate is ''causal-island-local'' (#/causal-islands): it reads WHAT THIS NODE verifies as-of-last-sync, never a global census. Borrow the lattice-meet, the high-water-mark, and the robust-declassification act; never borrow the //global-now// a classical reference monitor assumes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance ~ PROPOSED, the core built
 
@@ -136,27 +135,27 @@ This meme stands ''PROPOSED'' (crucible-before-binding). The CORE is built: `665
 
 Deferred with clean shores (not built): the TW5 `$:/tags/CapTierFilter` ordered-cascade rendering, the remote-vessel-edits-the-@daemon-recipe UX, the CLI/browser surfaces.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#/two-revocation-modes >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-veil >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/encrypt-from-start >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reach-plane>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/convergent-mesh#/two-revocation-modes>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-veil>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/encrypt-from-start>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-7JVfou0e6DbXjiKni3KkibPIa2zCgKkk6E-1p8MWVo
+<<^ code="&#x0003;">>ni:///sha-256;TIB5mPADSPDFKkV4Atc4SKHLAMjHpek1pNepNKKcY0M
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

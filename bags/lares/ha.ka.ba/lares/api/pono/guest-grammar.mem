@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/guest-grammar>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/guest-grammar.mem"
@@ -8,7 +8,6 @@ mana      = 15
 manao     = 16
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "guest-grammar invariant law for explicit admission, hana worksite use, and host-guest boundary discipline"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/guest-grammar"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Guest Grammar Law (Kānāwai)
 
@@ -28,9 +27,9 @@ The host may admit guest grammar explicitly.
 The guest stays guest.
 Parser, render, and pono detail move outward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the host surface for explicit guest entry, bounded worksite, and primitive-boundary pressure.
 ⏿ orient the region by ownership: host meaning stays local, guest law stays bounded, parser and render detail stay outward.
@@ -38,11 +37,11 @@ Parser, render, and pono detail move outward.
 ▶ write the smallest bounded guest region that preserves priming payload, guest body, and honest degradation.
 ↺ verify the host keeps its own primitives, the guest keeps its own family, and the handoff boundary stays explicit; close with residue named; malformed or unsupported guest work degrades locally rather than collapsing the parent.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #admission-law >>
+<<~ ahu #admission-law>>
 
 !! Admission Law
 
@@ -67,9 +66,9 @@ This law does not govern:
 * target-specific lowering
 * fixture execution detail
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hana-worksite >>
+<<~ ahu #hana-worksite>>
 
 !! Hana Worksite
 
@@ -85,9 +84,9 @@ It does not migrate into `hana`.
 Host whitespace rules should not silently split guest instruction content.
 If ambiguity rises, the stricter profile should demand a wrapped payload form.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ownership-boundary >>
+<<~ ahu #ownership-boundary>>
 
 !! Ownership Boundary
 
@@ -100,9 +99,9 @@ Pono owns later verification packaging and law indexing.
 The root primitives stay constitutional host territory.
 `ahu`, `loulou`, `aka`, `kahea`, `kapu`, `ui`, `hana`, and `?` do not become guest-family proxies merely because a guest grammar entered nearby.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #degradation-and-handoff >>
+<<~ ahu #degradation-and-handoff>>
 
 !! Degradation and Handoff
 
@@ -119,20 +118,20 @@ A lawful guest region should still hand forward enough continuity for:
 
 Schema detail, fixture families, and execution procedure belong in the companion memes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/guest-grammar >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/guest-grammar>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zJQf4-avTUaDoxMTAbTqsGIlAjuh-uEU2DbvTCq0MVQ
+<<^ code="&#x0003;">>ni:///sha-256;2SoYoJ0aN4klcjorO1WkqGBKlw7l0DIiOX0fiIp5tnc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/abilities/neural-whip >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/abilities/neural-whip>>
 ```toml meta
 cacheable = true
 caption   = "Neural Whip"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/modules/abilities/neural-whip.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Ability module: Neural Whip — the Cave Octopus's stuckforce tentacle-lash; first proof the Power template covers a non-spell monster affordance, first exerciser of hook/attack"
 tags      = ["components/domain/stuckforce", "components/function/restrain", "components/hook/attack", "mount-points/trait"]
@@ -17,19 +16,19 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/abilities/neural-whip"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Neural Whip
 
-<<~ ahu #has >>
+<<~ ahu #has>>
 
 !! Composition
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #default >>
+<<~ ahu #default>>
 
 ```toml default
 canonical-name = "Neural Whip"
@@ -55,9 +54,9 @@ A many-coloured neural tentacle lashes out as a coil of stuckforce sheathed in l
 
 On a botched strike or interfered control, choose one: the tentacle grips the wrong target (an ally, the practitioner's own gear); locks rigid and cannot release this round; over-constricts and shears what it holds; recoils and lashes the wielder; or grips empty air and goes slack for a round.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #variants >>
+<<~ ahu #variants>>
 
 !! Variants
 
@@ -66,19 +65,19 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 * ''Constrictor's Coil'' — a creature's anatomical tentacle/serpent grapple reskinned to this module. Seats `trait`.
 * ''Shrine Sentinel Lash'' — a guardian structure that seizes trespassers. Seats `structure`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
-<<~ loulou lar:///ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip >>
-<<~ loulou lar:///ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
+<<~ loulou lar:///ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip>>
+<<~ loulou lar:///ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -87,8 +86,8 @@ On a botched strike or interfered control, choose one: the tentacle grips the wr
 * ''Pure-damage attacks'' want a function that is not `restrain`; this module deliberately models the //grip//, which the source creature leads with.
 * If a future neural attack jolts the mind rather than grips the body, that wants `domain/noosphere` (carried in v0.0) promoted on first query.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;YtkXVruKTWD5ebDI3up-5jcrYObnUFersBqkcKHsXhs
+<<^ code="&#x0003;">>ni:///sha-256;W8a7nBm2lyxv85FunVqJBT4952doBfBypO47R7InZ4g
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

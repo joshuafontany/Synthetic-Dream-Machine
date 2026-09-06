@@ -22,7 +22,7 @@ function seed(): { root: string; bagDir: string } {
   mkdirSync(bagDir, { recursive: true });
   writeFileSync(join(bagDir, "a.tid"),      "title: a\n\nwikitext body\n");
   writeFileSync(join(bagDir, "a.tid.meta"), "type: application/x-tiddler\n");   // sidecar
-  writeFileSync(join(bagDir, "b.mem"),      "<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x >>\n");
+  writeFileSync(join(bagDir, "b.mem"),      "<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x>>\n");
   writeFileSync(join(bagDir, "c.md"),       "# a markdown carrier\n");
   writeFileSync(join(bagDir, "d.json"),     "[{\"title\":\"d\"}]\n");
   return { root, bagDir };

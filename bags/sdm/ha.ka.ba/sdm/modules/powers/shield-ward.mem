@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/shield-ward >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/modules/powers/shield-ward>>
 ```toml meta
 cacheable = true
 caption   = "Shield Ward"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/modules/powers/shield-ward.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Power module: Shield Ward — a skin-close abjuration barrier that filters incoming attacks"
 tags      = ["components/domain/abjuration", "components/function/ward", "components/function/barrier", "components/hook/imbued", "mount-points/trait"]
@@ -17,19 +16,19 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/modules/powers/shield-ward"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Shield Ward
 
-<<~ ahu #has >>
+<<~ ahu #has>>
 
 !! Composition
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #default >>
+<<~ ahu #default>>
 
 ```toml default
 canonical-name = "Shield Ward"
@@ -58,9 +57,9 @@ Raise a magical barrier less than an inch from the body. It moves with the opera
 
 On a botched or breached ward, choose one: it flares and reveals the operator; guards the wrong vector; rebounds a missile at a bystander; locks the operator's movement for a breath; imprints a visible sigil; or mistakes a friendly effect for an intrusion.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #variants >>
+<<~ ahu #variants>>
 
 !! Variants
 
@@ -69,19 +68,19 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 * ''Armor Spirit'' — armour or shield gear carries the ward without collapsing into the gear. Seats `item`.
 * ''Oath Ward'' — holds while an oath remains unbroken; relationship gates the protection. Seats `structure` or `burden`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
-<<~ loulou lar:///ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward >>
-<<~ loulou lar:///ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
+<<~ loulou lar:///ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward>>
+<<~ loulou lar:///ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
@@ -89,8 +88,8 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 * Does the Magic-Missile interaction stay module-specific, or generalise into a `negate`/`#modifies` rule (counterpoint, Sprint 4)?
 * A Dispel/anti-magic effect that drops this ward wants a `#modifies` edge, not `#has`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;6hWSNar3bFegi3daQF6WXLJ1W6Wzm2wtRylXbFsAB4s
+<<^ code="&#x0003;">>ni:///sha-256;zzO7ijaKBHLpPMhgB3PVuKENByGdlfCAeTB9IoF80zg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

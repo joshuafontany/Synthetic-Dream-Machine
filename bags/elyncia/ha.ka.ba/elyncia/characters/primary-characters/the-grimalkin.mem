@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin>>
 ```toml meta
 cacheable  = false
-confidence = 8
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin.mem"
 l-space    = "adjacent"
 mana       = 11
 manao      = 11
 manaoio    = 10
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "hallmark companion — Patches the Grimalkin, Kai ʻĀ's mount (Level 2): female long-hair calico Maine Coon of Gaia, manifested Elyncian as grimalkin lynx-kaiju; voice and meeting-story still Kai's to tell"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Patches ~ the Grimalkin, Kai ʻĀ's Lynx-Mount
 
@@ -41,9 +39,9 @@ at ''lynx-kaiju'' scale — mount-sized trending monstrous, the companion of a K
 carrying a thread of the kaiju register in her own frame. The calico patchwork rides at
 that scale as ''territory-map coat'' — continents of orange, black, and white.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-word >>
+<<~ ahu #the-word>>
 
 !! The Word ~ what "grimalkin" carries
 
@@ -55,9 +53,9 @@ half-feeds. In Elyncia's register that folds cleanly: a grimalkin-lynx reads as 
 grown to mount-size the way everything on the fae side grows when it decides a road needs
 walking. Whether hers reads as familiar, mount, partner, or all three at once belongs to Kai.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-slots >>
+<<~ ahu #open-slots>>
 
 !! Open Slots (the table fills these)
 
@@ -70,15 +68,15 @@ walking. Whether hers reads as familiar, mount, partner, or all three at once be
 * ''Statline'' — Level 2 stands; the sheet-work births the rest (Referee's Second confirms,
   never re-derives, once the table speaks).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kmAah8ID8s2-IeM_KU9vLdtwZjM21TVlEvpxK6-kBM4
+<<^ code="&#x0003;">>ni:///sha-256;400rogTFpjAwbYU_IFP0cO2OnVgKWQqQjQWdq6cqNdY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

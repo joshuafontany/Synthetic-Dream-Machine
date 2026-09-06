@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/hook/imbued >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/hook/imbued>>
 ```toml meta
 cacheable = true
 caption   = "imbued"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/hook/imbued.mem"
 mana      = 14
 manao     = 16
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "component (hook): Imbued — Life stays locked until the Power deactivates"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/hook/imbued"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Imbued
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 A canonical cost hook: the Life paid to activate stays ''locked'' until the Power deactivates. The practitioner runs at reduced Life for the duration.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Modifies the cost protocol, not the effect. While imbued, the locked Life is unavailable; releasing the Power returns it. Stacking imbued Powers stacks the lock.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Common on `domain/abjuration` wards and standing barriers. Distinct from `item` (which locks Life into an object). Pairs naturally with `hook/sustained`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 [tag[prefix[lar:///ha.ka.ba/sdm/components/hook/]]]                  all hook components
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Confirm the interaction of imbued lock with temporary Life from ticket dice (OGA).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;k6zIQz7pKwjorV4c4qi_LdhU27i9ys5IHy_DHNz3eJI
+<<^ code="&#x0003;">>ni:///sha-256;ZR-ps5vHjPLbIdyrwnebDC7-zeJuTmHaIlgtRelTQro
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

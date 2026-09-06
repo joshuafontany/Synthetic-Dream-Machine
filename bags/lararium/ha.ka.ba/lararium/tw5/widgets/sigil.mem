@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/sigil >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/sigil>>
 ```toml meta
 body-sha256   = "466661b14ac6fd3d3b560f87f698927c6857905c5ff020e21b965a05a24cf902"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/sigil.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/widgets/sigil"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: SigilWidget — heleuma ka"
 source-symbol = "SigilWidget"
@@ -17,28 +16,28 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/sigil"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `<$sigil>` renders a `<span data-lar-kind="sigil">` element. `data-lar-sigil` is the parse-tree tag. Renders children inside the span.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/sigil" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/sigil >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/sigil>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;c7RFyE-36ATpfqLgFcgQ4dBod7KR7XSN1KPRmmzMFTo
+<<^ code="&#x0003;">>ni:///sha-256;m9GKa6RI13IF0uPQIPZDkrDPaD7pSN7nXST6Y2U-_KI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

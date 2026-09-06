@@ -161,9 +161,9 @@ function template(opts: {
   const uriPath  = `ha.ka.ba/${opts.uriScope}/${opts.uriVersion}/${opts.slug}`;
   const memeRel  = relative(WORKSPACE, memePathFor(opts.uriScope, opts.uriVersion, opts.slug));
   const sourceRel = relative(WORKSPACE, opts.sourceFile);
-  return `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+  return `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ code="&#x0001;" ? -> lar:///${uriPath} >>
+<<^ code="&#x0001;" ? -> lar:///${uriPath}>>
 \`\`\`toml iam
 uri-path     = "${uriPath}"
 file-path    = "${memeRel}"
@@ -177,11 +177,11 @@ l-space      = "lararium"
 cacheable    = true
 retain       = true
 \`\`\`
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 TODO: describe the load-bearing surface this file owns.
-<<~/ahu >>
+<<~/ahu>>
 `;
 }
 

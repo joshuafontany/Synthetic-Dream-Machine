@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/recovery-custody-scout.mem"
@@ -11,7 +11,6 @@ manao             = 17
 manaoio           = 15
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "recovery-custody-scout — VERBATIM handoff of the tasked spirit sent after the reconstruct-then-sign ⊥ threshold-attest fork. Carries the decisive comparative finding (every civic-scale m-of-n in the world is SECRET SHARING, never threshold signing), the availability inversion that makes Fork A's worst property its best one, nineteen measured ceremony failures, the distro-archive survey including a key actually lost, and a THIRD AXIS that dominates the one we asked about. Held as a collision surface, not a recommendation."
 revised-on        = "2026-09-03"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/recovery-custody-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Recovery custody ~ what the field has MEASURED
 
@@ -30,9 +29,9 @@ A tasked spirit went out over `identity-classes#the-two-forks` — Fork A ''reco
 
 ⚠ ''Held VERBATIM.'' The register is testimony, not doctrine: what a reader collides against, never what they inherit. Where the spirit corrected itself, both readings stand.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-decisive-finding >>
+<<~ ahu #the-decisive-finding>>
 
 !! ★ The decisive comparative finding ★
 
@@ -52,9 +51,9 @@ A tasked spirit went out over `identity-classes#the-two-forks` — Fork A ''reco
 
 ''Fork A's assembled secret is simultaneously its worst security property and its best availability property. They are the same property.'' Fork B's guarantee that no secret ever reconstructs is equally a guarantee that ''no guardian can ever delegate, courier, or improvise their way through a crisis'' — the guardian signs personally or the rotation does not happen.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-counterweight >>
+<<~ ahu #the-counterweight>>
 
 !! ⚠ And the counterweight — Fork B carries a risk the in-house framing also missed
 
@@ -66,9 +65,9 @@ Read plainly: where a recovery authority ''reconstructs'', a rogue sub-quorum ca
 
 ''So neither branch is the safe one.'' A prices a transient assembly; B prices a rogue rotation. The mitigation named — canonical derivation of the body — is small, specific, and belongs in whichever branch is taken.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-third-axis >>
+<<~ ahu #the-third-axis>>
 
 !! ⚠ The axis that dominates the one we asked about
 
@@ -76,9 +75,9 @@ Read plainly: where a recovery authority ''reconstructs'', a rogue sub-quorum ca
 
 This changes the SHAPE of the decision rather than answering it: the fork prices the recovery authority's transient exposure, and delegation decides whether that exposure is ''recoverable at all''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-actually-fails >>
+<<~ ahu #what-actually-fails>>
 
 !! What actually fails — nineteen measured cases, and none of them is the fork
 
@@ -114,9 +113,9 @@ They turned on, every time:
 * ''Losing the EVIDENCE is as fatal as losing the key'' — seven intermediates revoked over a dead camcorder.
 * ''Publish rehearsal artifacts in advance'' — `letsencrypt/ceremony-demos` predates the ceremony it rehearses.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-archives >>
+<<~ ahu #the-archives>>
 
 !! The distro archives ~ nobody does threshold signing, and one project lost its key
 
@@ -132,9 +131,9 @@ They turned on, every time:
 
 ⚠ ''The bootstrap trick:'' Fedora's transitional RPMs were signed by the ''OLD'' key. The compromised-adjacent key was used one last time to establish trust in its successor. Both promised post-mortems were never published; kernel.org's promise was quietly deleted from the site.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-negative-results >>
+<<~ ahu #the-negative-results>>
 
 !! The negative results ~ load-bearing
 
@@ -143,9 +142,9 @@ They turned on, every time:
 * ''No incident of a CA ACCIDENTALLY destroying or bricking a root key'' — only deliberate, audited destructions.
 * ''The 5-of-7 IANA shares went ~14 years untested.'' The unreachable-holder scenario IS written down (KSK Key Management Procedure §6.8, ending //"the recovery key shares should be considered lost"//) — ''contemplated, never walked''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #our-own-ground >>
+<<~ ahu #our-own-ground>>
 
 !! ★ Traced against OUR OWN keel — three measurements, not readings ★
 
@@ -177,11 +176,11 @@ personaPrefixOf(inceptionOpKeyDid, recoverySetHash)
 
 ''Self-certifying, with no delegator.'' Under the KERI rule the sweep surfaced — a non-delegated rotation cannot supersede another rotation — ''a compromise of the recovery authority is TERMINAL on our KEL as it stands today''. That is the axis the sweep called larger in severity than the fork, and it is the one presently open.
 
-<<~ confidence 15/20 >> Read from `persona-kel.ts` and `recovery-keel-core.ts` at their current heads. ⚠ ''Read, not run'' — no vector walks a rotation against live key material at either scale.
+Read from `persona-kel.ts` and `recovery-keel-core.ts` at their current heads. ⚠ ''Read, not run'' — no vector walks a rotation against live key material at either scale.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #how-far-to-trust-this >>
+<<~ ahu #how-far-to-trust-this>>
 
 !! How far to trust this sweep
 
@@ -190,15 +189,15 @@ personaPrefixOf(inceptionOpKeyDid, recoverySetHash)
 * ''Thirteen negative results'' are listed, and two carry weight on their own: ''no wallet vendor has ever published a recovery success rate'', and no public-CA record of an unreachable keyholder blocking a signature.
 * ''No fork is recommended, deliberately.'' Where the evidence points in opposite directions — the courier property, the strict-versus-relaxed threshold question — both sides stand.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8KZNLwq7rB7aZa2D1uFj9TADKB6aoERpNevycFLAuo4
+<<^ code="&#x0003;">>ni:///sha-256;evxJC33XEQX5w8qVKyCYkiXtjOfgASUXK9CMDLdTaAY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

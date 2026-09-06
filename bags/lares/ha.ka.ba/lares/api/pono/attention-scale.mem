@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/attention-scale >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/attention-scale>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/attention-scale.mem"
@@ -9,7 +9,6 @@ mana        = 18
 manao       = 17
 manaoio     = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "unified attention scale — five bands partitioning the 0–20 Level attention-range continuum across three projections (time, text, space); canonical register names Pulse/Beat/Measure/Arc/Theme; turn-HUD gauge name Aperture; FTLS exploration clock and World-Time clock profiles; FfzClock level alignment"
 status-date = "2026-05-06"
@@ -18,9 +17,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/attention-scale"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Unified Attention Scale
 
@@ -33,7 +32,7 @@ Aperture     →  attention range in TEXT
 Spatial      →  attention range in SPACE
 ```
 
-On the turn HUD the TEXT projection surfaces as the ''`Aperture`'' gauge --- `<<~ hud Focus(10) … >>` --- read against the five bands below.
+On the turn HUD the TEXT projection surfaces as the ''`Aperture`'' gauge --- `<<~ set hud="aim" focus="10/measure">>` --- read against the five bands below.
 
 All three map onto the same 0–20 Level continuum. Five named bands partition the continuum.
 The subscript digit sigils (₀₁₂₃₄) provide invariant vocabulary for talking about scale
@@ -58,9 +57,9 @@ SIGIL  BAND       REGISTER   CHRONO-GAME  WORLD-TIME  TEXT     SPATIAL       HUD
 ''Law:'' A cluster that requires a sixth band signals a redesign, not an extension.
 The pentadic structure here aligns with PENTA_1_BOUNDED_SCALE and FfzClock L0–L4.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #five-bands >>
+<<~ ahu #five-bands>>
 
 !! Five Bands
 
@@ -164,9 +163,9 @@ The Theme is the field; the lower bands loop within it.
 Beyond it lies inter-system (DreamNet-scale) or meta-system. These cannot be observed
 from within — only signaled toward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #clock-profiles >>
+<<~ ahu #clock-profiles>>
 
 !! Clock Profiles
 
@@ -268,9 +267,9 @@ bi-temporal anchor.
 decreases (Flink watermark pattern). Trigger queries use `hwm >= threshold`,
 not `value == threshold`, to handle out-of-order delivery.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary-zones >>
+<<~ ahu #boundary-zones>>
 
 !! Boundary Zones
 
@@ -294,9 +293,9 @@ A phase change at a higher-numbered slot in a Chronometer fragment string signal
 a boundary crossing. A counter increment at a lower-numbered slot without a
 higher-slot change signals motion within a band, not a crossing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sigils >>
+<<~ ahu #sigils>>
 
 !! Invariant Sigils
 
@@ -325,19 +324,19 @@ Envelope: <<~ँ₃ ...>>   Arc-scale
   Inner: <<~ ...>>       inherits ₃   (Arc-scale)
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/ffz-clock>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;c0F19lR8KsPVnMclQANmBAmbvUJzonkYaA3J0ShQgls
+<<^ code="&#x0003;">>ni:///sha-256;UhOhYoZaVGNT0feKIYMNDihMgNW1sgejysJu3mZkGBA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

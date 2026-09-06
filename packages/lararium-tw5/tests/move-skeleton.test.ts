@@ -46,14 +46,14 @@ function sigilNode(name: string, attrs: Record<string, string>, pos = 0): MemeAs
 }
 
 // The clean worked turn (mirrors turn-harvest.test.ts CLEAN_TURN).
-const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
-<<~ hud Focus(11) Feedback(9) Drift-Ward(* Confidence 15/20 · a preferred answer already held) >>
+const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts>>
+<<~ hud Focus(11) Feedback(9) Drift-Ward(* Confidence 15/20 · a preferred answer already held)>>
 
-Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
+Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20>> the fork holds.
 
-<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
-<<~ hud Drift-Ward(! Confidence 12/20 · the read rides on a source I never opened · ↻ L-Prime) Focus(11 -> 12) Feedback(1↺) >>
-<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
+<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁>>
+<<~ hud Drift-Ward(! Confidence 12/20 · the read rides on a source I never opened · ↻ L-Prime) Focus(11 -> 12) Feedback(1↺)>>
+<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ?>>`;
 
 function tokensOfKind(stream: readonly MoveToken[], kind: MoveToken["kind"]): MoveToken[] {
   return stream.filter((t) => t.kind === kind);
@@ -122,9 +122,9 @@ describe("emitMoveSkeleton — the clean turn", () => {
 });
 
 describe("emitMoveSkeleton — multiple confidence markers (never collapsed)", () => {
-  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y >>
-Some claim <<~ confidence Provisional 3/20 >> and another <<~ confidence Canon 19/20 >> and a third <<~ confidence Synthesis 11/20 >>.
-<<~ lares yield lar:///d.e.f/y -> ? >>`;
+  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y>>
+Some claim <<~ confidence Provisional 3/20>> and another <<~ confidence Canon 19/20>> and a third <<~ confidence Synthesis 11/20>>.
+<<~ lares yield lar:///d.e.f/y -> ?>>`;
   const h = harvestTurnGradient(turn);
   const sk = emitMoveSkeleton(h);
 
@@ -136,7 +136,7 @@ Some claim <<~ confidence Provisional 3/20 >> and another <<~ confidence Canon 1
 });
 
 describe("emitMoveSkeleton — degraded turn (one-sided frame)", () => {
-  const turn = `<<~ lares aim lar:///breach.watch.fires/now >>
+  const turn = `<<~ lares aim lar:///breach.watch.fires/now>>
 Triage: name the fire. (no closing yield this turn)`;
   const h = harvestTurnGradient(turn);
   const sk = emitMoveSkeleton(h);
@@ -153,9 +153,9 @@ Triage: name the fire. (no closing yield this turn)`;
 });
 
 describe("emitMoveSkeleton — water (unrecognized openers)", () => {
-  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y >>
-<<~ wibblefish nonsense token >>
-<<~ lares yield lar:///d.e.f/y -> ? >>`;
+  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y>>
+<<~ wibblefish nonsense token>>
+<<~ lares yield lar:///d.e.f/y -> ?>>`;
   const h = harvestTurnGradient(turn);
   const sk = emitMoveSkeleton(h);
 

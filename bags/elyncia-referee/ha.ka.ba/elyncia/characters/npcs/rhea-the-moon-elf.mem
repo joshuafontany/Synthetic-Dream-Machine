@@ -1,34 +1,32 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "referee NPC (Freyja's authorship) — L7 Combat-Rogue/Artificer, the Dragoness's intelligence-mistress; Menzoberranzan fall, blight-hardened prosthetics, Neo-Thracian network"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/rhea-the-moon-elf"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Rhea the Moon Elf
 
 //Migrated verbatim from `elyncia/New Delos/NPCs/Rhea_the_Moon_Elf.md` (2026-08-14); the md→wikitext conversion ran mechanical
 — prose untouched.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Rhea the Moon Elf
 
@@ -57,8 +55,8 @@ Since her arrival she has ''trained a cadre of agents'' and runs a ''small intel
 * What the Spider Queen's agents made, exactly, and whether the making reached Elyncia behind her.
 * The prosthetics' maker — self-built, commissioned, or inherited from someone who no longer needs them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PxQufgCBtDF-K5oK9bqyTVFli2j6s95lO4sichVlnLQ
+<<^ code="&#x0003;">>ni:///sha-256;jD9DeJlgGiKOFqDNrvyhaFOkcrmlUwD1zD97dLfCCwk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

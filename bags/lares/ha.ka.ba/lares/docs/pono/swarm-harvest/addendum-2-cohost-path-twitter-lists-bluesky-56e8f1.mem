@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitter-lists-bluesky-56e8f1"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 19,191 characters
 
@@ -217,9 +216,9 @@ The capability existed for seven years at W3C Recommendation grade, was designed
 **Recommending nothing, per the brief.** One thing worth flagging for whoever writes the design doc: the recurring collapse of sender-side audience into reader-side topic filter shows up in four independent datasets, and it is the only user-behavior regularity in this entire corpus that reproduces across systems.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 15,492 characters
 
@@ -353,9 +352,9 @@ Kinds include `kind:30000` **Follow sets**, `kind:30002` **Relay sets** — and 
 **Still pending:** Cohost, Path, Twitter/X lists, Bluesky feed generators/labelers — second agent in flight.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-3 >>
+<<~ ahu #message-3>>
 
 !! Message 3 ~ 15,267 characters
 
@@ -490,14 +489,14 @@ I could not locate a primary source. Checked: TechCrunch 2011-09-08 Smart Lists 
 **Instrument notes for whoever continues this:** WebSearch budget exhausted; **OpenAlex out of daily budget** (resets midnight UTC); **Semantic Scholar rate-limits hard** (429 on unkeyed bursts, ~4s spacing works); **Google Scholar blocked**; **WebFetch refuses web.archive.org** — use `curl -sL -A "Mozilla/5.0"` for Wayback. Crossref and HN Algolia were reliable throughout.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DsMy2vtQtGm9mwkC9xK2NWNA0sdaglPjWONLTwm0si0
+<<^ code="&#x0003;">>ni:///sha-256;CqskinykMihEu70SlofynEqwWX7_y4UjfG_g5llBXUY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

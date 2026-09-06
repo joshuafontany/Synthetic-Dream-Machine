@@ -14,7 +14,7 @@ function kinds(node, acc = new Map()) {
 }
 
 test("ahu block nests its body by containment", () => {
-  const ast = fold(enc("<<~ ahu #entry >>\nsome prose line\n<<~ inner sigil >>\n<<~/ahu >>\n"), artifact);
+  const ast = fold(enc("<<~ ahu #entry>>\nsome prose line\n<<~ inner sigil>>\n<<~/ahu>>\n"), artifact);
   const ahu = ast.children.find((c) => c.kind === "meme.ahu");
   assert.ok((kinds(ahu).get("meme.sigil") ?? 0) >= 1); // the inner sigil rides UNDER the ahu
   assert.equal(ahu.open?.kind, "meme.ahu.open");
@@ -23,7 +23,7 @@ test("ahu block nests its body by containment", () => {
 
 test("spans speak BYTE offsets into the ground, never UTF-16 units", () => {
   // ॐ = 3 bytes / 1 UTF-16 unit; 𝕏 = 4 bytes / 2 units — both before the sigil
-  const data = enc("ॐ 𝕏 pre\n<<~ mu >>\n");
+  const data = enc("ॐ 𝕏 pre\n<<~ mu>>\n");
   const ast = fold(data, artifact);
   const sigil = ast.children.find((c) => c.kind === "meme.sigil");
   const teeth = new TextDecoder().decode(data.slice(sigil.start, sigil.start + 3));
@@ -32,19 +32,19 @@ test("spans speak BYTE offsets into the ground, never UTF-16 units", () => {
 });
 
 test("the fold runs deterministic and hash-stable", () => {
-  const data = enc("<<~ a >>\ntext\n<<~ b >>\n<<~/a >>\n".repeat(3));
+  const data = enc("<<~ a>>\ntext\n<<~ b>>\n<<~/a>>\n".repeat(3));
   assert.equal(canonicalJson(fold(data, artifact)), canonicalJson(fold(data, artifact)));
   assert.equal(structuralHash(fold(data, artifact)), structuralHash(fold(data, artifact)));
 });
 
 test("an unregistered sigil folds cleanly as a plain carrier sigil", () => {
-  const k = kinds(fold(enc("<<~ totally-novel-name with args >>\n"), artifact));
+  const k = kinds(fold(enc("<<~ totally-novel-name with args>>\n"), artifact));
   assert.equal(k.get("meme.sigil"), 1);
   assert.ok(!k.has("ERROR"));
 });
 
 test("canonical json sorts keys and leaks no host fields", () => {
-  const cj = canonicalJson(fold(enc("<<~ x >>\n"), artifact));
+  const cj = canonicalJson(fold(enc("<<~ x>>\n"), artifact));
   assert.ok(cj.indexOf('"children"') < cj.indexOf('"end"'));
   assert.ok(cj.indexOf('"end"') < cj.indexOf('"kind"'));
   assert.ok(cj.indexOf('"kind"') < cj.indexOf('"start"'));

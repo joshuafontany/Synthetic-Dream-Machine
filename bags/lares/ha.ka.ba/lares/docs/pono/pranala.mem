@@ -1,10 +1,9 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/pranala >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/pranala>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/pranala.mem"
-register  = "Synthesis"
 retain    = false
 role      = "docs companion for pranala: examples, sugar long-forms, and reciprocal-edge guidance"
 tags      = ["api/pono/meme"]
@@ -12,7 +11,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/pranala"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Pranala — Docs
 
@@ -21,68 +20,68 @@ Law lives at [[pranala.md|../../api/pono/pranala.md]].
 
 This file holds examples, sigil-sugar long-forms, and reciprocal-edge guidance.
 
-<<~ ahu #examples >>
+<<~ ahu #examples>>
 
 !! Examples
 
 Minimal inline edges:
 
 ```text
-<<~ pranala from=? -> to=lar:///ha.ka.ba/lares/api/mu#/entry family=relation >>
+<<~ pranala from=? -> to=lar:///ha.ka.ba/lares/api/mu#/entry family=relation>>
 ```
 
 ```text
-<<~ pranala from=lar:///A#/out -> to=lar:///B#/in family=relation >>
+<<~ pranala from=lar:///A#/out -> to=lar:///B#/in family=relation>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sugar-long-forms >>
+<<~ ahu #sugar-long-forms>>
 
 !! Sigil Sugar Long-Forms
 
 `loulou` — outgoing relation link:
 
 ````text
-<<~ pranala #link from=? -> to=URI >>
+<<~ pranala #link from=? -> to=URI>>
 ```toml
 family = "relation"
 lifecycle = "instance"
 label = "outgoing link"
 alias = "loulou"
 ```
-<<~/pranala >>
+<<~/pranala>>
 ````
 
 `aka` — shadow transclusion:
 
 ````text
-<<~ pranala #shadow from=? -> to=URI >>
+<<~ pranala #shadow from=? -> to=URI>>
 ```toml
 family = "observe"
 lifecycle = "instance"
 label = "shadow transclusion"
 alias = "aka"
 ```
-<<~/pranala >>
+<<~/pranala>>
 ````
 
 `kahea` — live transclusion:
 
 ````text
-<<~ pranala #live from=? -> to=URI >>
+<<~ pranala #live from=? -> to=URI>>
 ```toml
 family = "dataflow"
 lifecycle = "instance"
 label = "live transclusion"
 alias = "kahea"
 ```
-<<~/pranala >>
+<<~/pranala>>
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reciprocal-edges >>
+<<~ ahu #reciprocal-edges>>
 
 !! Reciprocal Edges
 
@@ -90,23 +89,23 @@ Reciprocal pressure uses two parallel edges, not one bidirectional arc.
 Each edge remains individually directed and acyclic.
 
 ```text
-<<~ pranala from=lar:///A#/entity -> to=lar:///B#/entity family=control role=owns traversal=source-to-target propagation=push-back >>
-<<~ pranala from=lar:///B#/entity -> to=lar:///A#/entity family=message role=references propagation=push-back >>
+<<~ pranala from=lar:///A#/entity -> to=lar:///B#/entity family=control role=owns traversal=source-to-target propagation=push-back>>
+<<~ pranala from=lar:///B#/entity -> to=lar:///A#/entity family=message role=references propagation=push-back>>
 ```
 
 The two edges carry different families (`control` vs `message`) and different roles (`owns` vs `references`).
 This is the correct pattern for genuinely symmetric semantics — model it explicitly, not with `traversal: both`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
 * `lar:///ha.ka.ba/lares/api/pono/pranala`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;YzFB3IQ0q_eaJY4ztqj-bRnN9ZM7ejhxVaNQr6NrUFg
+<<^ code="&#x0003;">>ni:///sha-256;92N8Zg2pIyz_6OShdTaf-16041MR2kJhRAXYtRb--34
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

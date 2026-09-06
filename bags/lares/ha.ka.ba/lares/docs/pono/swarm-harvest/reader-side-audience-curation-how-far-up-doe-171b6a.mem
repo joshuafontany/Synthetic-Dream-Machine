@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Reader-side audience curation: how far up does it scale?. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curation-how-far-up-doe-171b6a"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Reader-side audience curation: how far up does it scale?
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 16,062 characters
 
@@ -184,9 +183,9 @@ The counterweight worth keeping: starter packs, adopted by only 4.37% of users, 
 **Confidence overall: medium.** The Bluesky feed-uptake number rests on one 2024 paper using a like-proxy for a private bookmark action, and Bluesky itself publishes nothing that would confirm or refute it. If one number in this report deserves a second source before it carries weight in a design decision, it is the 2.8%.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 14,162 characters
 
@@ -322,9 +321,9 @@ Four independent literatures, four different decades, one shape.
 **Overall confidence: medium-high.** Most quotes came from primary sources or open-access full text read directly rather than through summarizers, and the three key concentration numbers were re-verified against raw document text. The weakest load-bearing claim remains the Bluesky 2.8%: single paper, single platform, early-2024, and "liked a feed" is a proxy for a private bookmark action that no one outside Bluesky can observe. Bluesky's own transparency reports publish extensive moderation volume and **nothing at all** on algorithmic-choice uptake — which is itself, I think, the most telling negative result in the brief.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-3 >>
+<<~ ahu #message-3>>
 
 !! Message 3 ~ 13,702 characters
 
@@ -444,14 +443,14 @@ The group-membership finding is the one most directly aimed at your brief's actu
 Confidence overall on the addendum: **medium-high** — most quotes came from open-access full text (Europe PMC, ar5iv, author-hosted PDFs) rather than summarizers, and the one meta-analysis read only via Crossref abstract (Jachimowicz) is flagged as such.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;YpGtr5HBAjU5d9lK2dSgz66gcKC_PDLfywdJtrAUpwg
+<<^ code="&#x0003;">>ni:///sha-256;fF0uEZI2_TBlvmrmFRYRCJG6CM7DwAg-LBOHFzoGISk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/lists/components >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/lists/components>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/lists/components.mem"
 mana      = 13
 manao     = 16
-register  = "Synthesis"
 retain    = true
 role      = "TW5 procedure: render the current tiddler's has-stack as clickable tag-pills (stack filter; captions from definition memes)"
 tags      = ["$:/tags/Global"]
@@ -14,17 +13,17 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/lists/components"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `<<components>>` reads the rendering context's current tiddler, resolves its has-stack through the `stack` filter operator (relative tags qualify against the carrier's own bag scope; `lar:` tags pass through; system tags stay outside), and renders each component as a clickable pill via the `tag-pill` procedure. It takes no argument — composition lives once in the tiddler's tags; this macro renders the stack.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 \procedure components()
 <span class="sdm-component-list">
@@ -34,15 +33,15 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 </span>
 \end
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
+<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-panel>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;6SiYjHUGFy59Q92iW9ySaQQuy7o4bXgvzAta8eYb9-I
+<<^ code="&#x0003;">>ni:///sha-256;8RSdcq_5q9DBYvZ72i3Idz6Zkb7ClrqkKi9dYZwh_OU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

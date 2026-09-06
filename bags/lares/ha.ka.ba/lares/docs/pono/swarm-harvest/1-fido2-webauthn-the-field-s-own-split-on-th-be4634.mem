@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. FIDO2/WebAuthn — the field's own split on this exact question. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s-own-split-on-th-be4634"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! 1. FIDO2/WebAuthn — the field's own split on this exact question
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 15,330 characters
 
@@ -113,9 +112,9 @@ These are real usability wins for the synced model — worth stating plainly sin
 These gaps exist because WebSearch was already at its session limit (0/200 remaining) before I started, forcing pure blind-URL WebFetch, which has a much lower hit rate for anything not precisely guessable. Re-running this with search available would likely close most of the above within a few queries.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 4,515 characters
 
@@ -146,14 +145,14 @@ Using HN Algolia search, OpenAlex/Crossref, and `gh api` against `w3c/webauthn`,
 This second pass **strengthens, not overturns**, my original report: the devicePubKey/supplementalPubKeys history is a concrete, dated case of the industry trying to bolt device-binding onto synced credentials, with its own reviewers publicly doubting it restores the real guarantee — which is direct evidence for your dyad framing's central claim (a copied/synced key cannot be patched back into a device-bound one after the fact).
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;uFCbEwuXMJ3BbrqVRKR5hQLrusu02FqTdylTJskBzeU
+<<^ code="&#x0003;">>ni:///sha-256;O9IJA9yx179AUx62z4f1TJCrdpIyeSOjRYPDQMYbGYE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

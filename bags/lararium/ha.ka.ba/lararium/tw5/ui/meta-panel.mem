@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/meta-panel >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/meta-panel>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meta-panel.mem"
 mana      = 18
 manao     = 18
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "character sheet template: renders #meta metadata for any lar: tiddler; stat bars + progressive disclosure + arbitrary field fallback"
 tags      = ["$:/tags/Global", "lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/meta-panel"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 \procedure lar-stat-bar(field, value, threshold:"16")
 <div class="lar-stat-row">
@@ -94,7 +93,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/meta-panel"
 </div>
 \end
 
-<<~ ahu #hud-fields >>
+<<~ ahu #hud-fields>>
 
 ```toml
 # Canonical field ordering for meta-panel render and MCP hud tool.
@@ -108,17 +107,17 @@ tier3 = ["content-type", "module-type", "tw5-module-name", "body-sha256", "cache
 exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "creator", "modifier"]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
 
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/hud >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/hud>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;_ivkye1484JAw1la-HHum7GIyWOeeqnTcAB8DBxEhyY
+<<^ code="&#x0003;">>ni:///sha-256;ig2u_6ldDfP3eyNSWfrpbfPr6ZVA9ZttSm1BZdaHw-w
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

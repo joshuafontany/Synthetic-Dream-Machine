@@ -2,16 +2,14 @@ title: lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel
 type: text/memetic-wikitext+tiddlywiki
 tags:
 
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel >>
+<<^ ⊙&#x0001; ? -> lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/kernel>>
 ```toml meta
 uri-path  = "ha.ka.ba/lares/api/pono/memetic-wikitext/kernel"
 file-path = "packages/lararium-tw5/tiddlers/memetic-wikitext.tid"
 type      = "text/memetic-wikitext+tiddlywiki"
 l-space   = "stable"
-confidence = 18
-register  = "CS"
 manaoio   = 14
 mana      = 18
 manao     = 17
@@ -22,9 +20,9 @@ retain    = true
 
 
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#normative-language>>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 # Memetic Wikitext Law (Kānāwai)
 
@@ -32,11 +30,11 @@ The root names what the surface means.
 It keeps the boot contract small.
 It leaves parse machinery, render machinery, and long teaching matter outward.
 
-<<~/ahu >>
+<<~/ahu>>
 
 <<^ &#x0002;>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the surface as authored meaning first; identify primitive, locality, and boundary posture.
 ⏿ orient the text by root contract: semantic law stays here, parse and render detail travel outward.
@@ -45,12 +43,12 @@ It leaves parse machinery, render machinery, and long teaching matter outward.
 ⤴ verify the surface carries explicit thresholds, lawful primitives, and a boot-valid grammar handoff.
 ↺ close with honest residue; unresolved routes stay named rather than laundered into false completion.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
 
-<<~ ahu #constitutional-root >>
+<<~ ahu #constitutional-root>>
 
 ## Constitutional Root
 
@@ -74,9 +72,9 @@ This root does not govern:
 When a detail defines primitive meaning or boot sufficiency, keep it here.
 When a detail mainly teaches procedure, legality, or projection, move it outward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #primitive-cluster >>
+<<~ ahu #primitive-cluster>>
 
 ## Primitive Cluster
 
@@ -96,11 +94,11 @@ No primitive silently replaces another primitive's job.
 Other quick chant terms may also serve as `pranala` sugar where their own invariant loci bind that usage.
 The root stays small by preserving distinction, not by fusing roles.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #composition-law >>
+<<~ ahu #composition-law>>
 
 ## Composition Law
 
@@ -117,9 +115,9 @@ Where several pressures appear at once, prefer explicit composition over overloa
 When uncertainty remains, route it honestly.
 When kapu remains unresolved, qualify the act rather than flattering permission.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boot-grammar >>
+<<~ ahu #boot-grammar>>
 
 ## Boot Grammar
 
@@ -129,7 +127,7 @@ Minimum atoms:
 
 - opener `<<~`
 - closer `>>`
-- named closer `<<~/SIGIL >>`
+- named closer `<<~/SIGIL>>`
 - route arrow `->`
 - anchor token `#NAME`
 - unresolved token `?`
@@ -158,9 +156,9 @@ A boot-valid surface should let a human or agent answer:
 5. whether the current act stays passive, active, qualified, queried, or unresolved
 6. where uncertainty leaves if closure does not yet surface
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ahu-control-slots >>
+<<~ ahu #ahu-control-slots>>
 
 ## Ahu Control Slots
 
@@ -210,9 +208,9 @@ All other `ahu` slot names project as child tiddlers of the parent carrier.
 
 Source invariant: `packages/lararium-tw5/src/carrier-codec.ts` `CONTROL_SLOTS`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #handoff-boundary >>
+<<~ ahu #handoff-boundary>>
 
 ## Handoff Boundary
 
@@ -222,13 +220,13 @@ This root should hand them a stable semantic contract, not duplicate their local
 
 Examples, profile guidance, and extended bridge notes belong in the sidecars.
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/invariant >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/invariant>>
 
-<<~/ahu >>
+<<~/ahu>>
 
 
-<<~ ahu #sigil-registry >>
+<<~ ahu #sigil-registry>>
 
 ## Sigil Registry
 
@@ -236,22 +234,22 @@ Grammar self-hosted. 65 SharktoothSigil tiddlers carry the full vocabulary.
 `grammar-cache.ts` reads only `lar:///ha.ka.ba/tags/SharktoothSigil`-tagged tiddlers.
 Adding a sigil means tagging a tiddler — no code change required.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #family-contracts >>
+<<~ ahu #family-contracts>>
 
 ## Pranala Family Contracts
 
 Eight families. Each carries an invariant property schema enforced by `validatePranalaEdge`.
 Family tiddlers carry `lar-kind: family` and register via `GRAMMAR_TAG`.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lifecycle-values >>
+<<~ ahu #lifecycle-values>>
 
 ## Lifecycle Values
 
@@ -259,11 +257,11 @@ Pranala edges carry a `lifecycle` field that scopes their validity.
 Five values: `instance` (default), `permanent`, `ephemeral`, `boot`, `per-player`.
 Canonical definition lives in the pranala invariant.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law-of-5s >>
+<<~ ahu #law-of-5s>>
 
 ## Law of Fives — Invariant Ladders
 
@@ -271,11 +269,11 @@ Two orthogonal 5-point axes: `LADDER_5` (action→week, finest→coarsest) and `
 Phase runs counter to scale — act maps to action (finest); aftermath maps to week (coarsest).
 Exported from `packages/lararium-mesh/src/ast.ts` as `LADDER_5`, `OODA_HA_5`, `SCOPE_5`.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stances-syad-tools >>
+<<~ ahu #stances-syad-tools>>
 
 ## Stances, Syad, and Tools
 
@@ -283,12 +281,12 @@ Three separate graphs. Stances encode epistemic register (Syad predicate). Tools
 
 Register measures confidence *within* the active stance — not universal truth weight.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #guest-grammars >>
+<<~ ahu #guest-grammars>>
 
 ## Registered Guest Grammars
 
@@ -306,9 +304,9 @@ status      = "active"
 description = "native lararium filter dialect; drops !!field/##index; uses toml:/edge:/self[] operators; [SC]"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #render-modes >>
+<<~ ahu #render-modes>>
 
 ## Render Modes — Causal Island Boundary
 
@@ -325,14 +323,14 @@ example     = "<section data-lar-kind='ahu'> ... </section>"
 name        = "carrier"
 label       = "Disk export (definition form)"
 description = "each child-slot widget reads child body from wiki and emits inline definition sigil"
-example     = "<<~ ahu #slot >>\nchild body\n<<~/ahu >>"
+example     = "<<~ ahu #slot>>\nchild body\n<<~/ahu>>"
 trigger     = "wiki.renderTiddler('text/plain', uri, { variables: { 'lar-render-mode': 'carrier' } })"
 
 [[render_modes]]
 name        = "projection"
 label       = "Projection (shadow/frozen form)"
 description = "each child-slot widget emits aka (shadow transclusion) sigil; content frozen at projection time"
-example     = "<<~ aka ahu #slot >>"
+example     = "<<~ aka ahu #slot>>"
 trigger     = "wiki.renderTiddler('text/plain', uri, { variables: { 'lar-render-mode': 'projection' } })"
 ```
 
@@ -355,9 +353,9 @@ disk → deserializer → wiki (kahea-live refs + authoritative children)
 
 The **projection snapshot** is the human-readable collection format: memetic-wikitext with SOH/STX/ETX carrier framing, multiple memes in flow. Not JSON — readable prose with sigil structure intact.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #phase-2-wiring-note >>
+<<~ ahu #phase-2-wiring-note>>
 
 ## Grammar Self-Hosting — Completed
 
@@ -365,26 +363,26 @@ The Phase 2 plan (read TOML sigil arrays from this carrier via `node-host.ts`, p
 
 Adding a sigil: tag a tiddler with `lar:///ha.ka.ba/tags/SharktoothSigil` and populate `lar-*` fields. No code change. No carrier promotion.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/sharktooth-sigils>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/invariant >>
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family=control role=implements >>
-<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/lares/api/pono/loci family=control role=implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/lares/api/pono/invariant family=control role=implements >>
-<<~ pranala #to-pranala-parser ? -> lar:///ha.ka.ba/lares/api/mu family=control role=defines >>
-<<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=implements >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/invariant>>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family=control role=implements>>
+<<~ pranala #implements-loci ? -> lar:///ha.ka.ba/lares/api/pono/loci family=control role=implements>>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/lares/api/pono/invariant family=control role=implements>>
+<<~ pranala #to-pranala-parser ? -> lar:///ha.ka.ba/lares/api/mu family=control role=defines>>
+<<~ pranala #to-foundations ? -> lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=implements>>
 
-<<~/ahu >>
+<<~/ahu>>
 
 <<^ &#x0003;>>
 
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

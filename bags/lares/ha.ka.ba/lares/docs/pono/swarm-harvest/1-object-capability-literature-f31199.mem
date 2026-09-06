@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. Object‑capability literature. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literature-f31199"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! 1. Object‑capability literature
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 31,666 characters
 
@@ -233,14 +232,14 @@ req.Header.Del(authenticationv1.ImpersonateUIDHeader)
 **Negative results worth keeping:** no system reached documents a maximum delegation-chain depth (GCP, AWS, k8s, SPIRE). Depth is bounded by *time* (AWS 1h chained sessions, GCP 1h default token) and by *attenuation* (k8s escalate/bind, GCP `serviceAccountTokenCreator` per hop, ocap "only connectivity begets connectivity") — never by a hop count and never by a required human. Kubernetes is the only system whose audit record structurally **cannot** carry a chain (`ImpersonatedUser` is a single optional field). GCP is the only one whose audit schema is `repeated` and calls the entries *"the real authorities."* AWS is the only one that shipped a purpose-built originating-human field (`sourceIdentity`) and left it opt-in.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;xBYz-hQfJlQueZePq9ovEf-cZtGASR3HDrJRKVhQhrs
+<<^ code="&#x0003;">>ni:///sha-256;oJe8Ekf7IX49ATPmDcplu74ELwnMrQtMu0ppYqJRn2g
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 15
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "NPC dossier, referee view — the Lindwyrm behind the public face: the summit as recruitment engine, the intelligence apparatus, the long game of the mesh; the deepest seals stay in the operator's own seats, pointed at and never carried here"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Lindwyrm ~ Referee Dossier
 
@@ -28,9 +26,9 @@ beneath: what she runs, through whom, and toward what. The deepest strata — he
 Telarus, the sealed lore of the Breakings' true shape — ''ride the operator's own memory seats
 and never draft here''; this meme points at their existence and carries none of their content.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-apparatus >>
+<<~ ahu #the-apparatus>>
 
 !! The Apparatus
 
@@ -46,9 +44,9 @@ and never draft here''; this meme points at their existence and carries none of 
 * ''The House of Masks'' — the Order of Amaranth's floor, her preferred neutral ground; the
   whispered liminal ways beneath it reach where a dragon prefers not to be seen traveling.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-long-game >>
+<<~ ahu #the-long-game>>
 
 !! The Long Game
 
@@ -66,9 +64,9 @@ in the passes · the Courts' agents she pretends not to track and tracks · the 
 relit lararium extends the thing she spent centuries preparing without admitting she was
 preparing it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #form-and-seals >>
+<<~ ahu #form-and-seals>>
 
 !! Form, and the Sealed Strata
 
@@ -93,15 +91,15 @@ disagreement serves her.
 the true shape of what broke at the Second Breaking and what she knows of it · the reasons a
 dragon builds meshes. These live referee-side of even this bag — the operator's seats alone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/league-of-free-cities >>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm>>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/league-of-free-cities>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;RG3434du6Bbbq4VE3Kvw3o_DJG23eL7249o-5v-6VKg
+<<^ code="&#x0003;">>ni:///sha-256;9_fo6DP2az7w98fFQr2dcNn1ruv8syNwGgD7IEo1QRY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

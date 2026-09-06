@@ -132,9 +132,9 @@ const SHARED_PHRASE = "the tideline carries uncertain cyclic pressures across th
 /** The GLUE corpus: structure and form AGREE on every unit — sigil-rich ⟺ pattern-rich, bare ⟺ bare. */
 export const GLUE_SEEDS: readonly FixtureTiddler[] = [
   // canon-a: carries the red register AND shares the recurring phrase with canon-b → structure 1, form 1.
-  { title: "canon-a", text: `<<~ confidence Synthesis 12/20 >> ${SHARED_PHRASE} <<~ ward * L-Prime >>` },
+  { title: "canon-a", text: `<<~ confidence Synthesis 12/20>> ${SHARED_PHRASE} <<~ ward * L-Prime>>` },
   // canon-b: same construction → structure 1, form 1 (the phrase recurs across a-and-b).
-  { title: "canon-b", text: `<<~ confidence Synthesis 11/20 >> ${SHARED_PHRASE} <<~ ward ! L-Prime >>` },
+  { title: "canon-b", text: `<<~ confidence Synthesis 11/20>> ${SHARED_PHRASE} <<~ ward ! L-Prime>>` },
   // plain: no sigils AND a unique body (recurs nowhere) → structure 0, form 0.
   { title: "plain", text: "a solitary line of prose that occurs in no other tiddler at all here" },
 ];
@@ -145,7 +145,7 @@ export const OBSTRUCT_SEEDS: readonly FixtureTiddler[] = [
   // ornate-novel: carries the red register (structure 1) but a wholly UNIQUE body (form 0) → obstruction.
   {
     title: "ornate-novel",
-    text: "<<~ lares aim >> a singular unrepeated utterance found nowhere else in this corpus zzz <<~ oracle >>",
+    text: "<<~ lares aim>> a singular unrepeated utterance found nowhere else in this corpus zzz <<~ oracle>>",
   },
 ];
 

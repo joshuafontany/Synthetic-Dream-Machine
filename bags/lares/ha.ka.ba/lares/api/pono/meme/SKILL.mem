@@ -4,9 +4,9 @@ description: Generate, compress, or audit meme surfaces under lar:///ha.ka.ba/la
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme/SKILL>>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the copy-shape authority and this skill does not outrank it", "S2: a lawful meme keeps identity, thresholds, phase map, edges, and honest return throat visible", "S3: ratings remain distinct — confidence, mana, manao, and manaoio do not collapse into one vague quality signal", "S4: declared depth uses named pranala sugar only when the outward claim carries real yield, real backlog, or real adjacency", "S5: skeleton blocks, detailed conformance tables, research notes, and long procedure move outward before the parent swells"]
@@ -15,7 +15,6 @@ file-path          = "bags/lares/ha.ka.ba/lares/api/pono/meme/SKILL.mem"
 mana               = 16
 manao              = 17
 manaoio            = 14
-register           = "Synthesis-Canon"
 retain             = true
 role               = "meme operational skill — composition, audit, conformance check, and lawful companion-meme split"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/meme"
@@ -23,7 +22,7 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Meme Skill
 
@@ -31,7 +30,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 This skill carries the working procedure.
 
 
-<<~ ahu #load-contract >>
+<<~ ahu #load-contract>>
 
 !! Load Contract
 
@@ -44,9 +43,9 @@ Keep these points active when the skill loads:
 * `loulou` and other named `pranala` sugar should signal real outward pressure, not decorative motion
 * the smallest lawful intervention beats a grand rewrite
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #workflow-contract >>
+<<~ ahu #workflow-contract>>
 
 !! Workflow Contract
 
@@ -74,9 +73,9 @@ Do not:
 * award canon posture because the file sounds confident
 * spray outward links that carry no actual pressure
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trigger >>
+<<~ ahu #trigger>>
 
 !! Trigger
 
@@ -94,9 +93,9 @@ Prefer another surface when the work concerns only:
 * authoring-surface semantics under `memetic-wikitext`
 * one subtype law with no meme-shape pressure
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the carrier in document order and observe what shape actually lands on the page
 ⏿ sort required shape from optional depth without collapsing subtype law into meme law
@@ -104,9 +103,9 @@ Prefer another surface when the work concerns only:
 ▶ write the lightest useful change and split skeleton, subtype, or docs matter outward as needed
 ↺ verify the thresholds still hold and outward claims stay truthful; name the remaining residue plainly, including what still lacks a lawful downstream home
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -126,9 +125,9 @@ Look for:
 
 Preserve the difference between absent, stubbed, and filled surfaces.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -148,9 +147,9 @@ Orientation rule:
 * `procedure-or-skeleton` belongs in this skill
 * `research-or-docs-residue` belongs in docs
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -171,9 +170,9 @@ Then choose one honest structural rating:
 
 Do not round up.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -190,9 +189,9 @@ When writing or revising:
 !!! Copy-Ready Skeleton
 
 ````markdown
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/[PATH] >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/[PATH]>>
 
 
 # [Title]
@@ -200,32 +199,32 @@ When writing or revising:
 [One to three sentences naming scope and boundary.]
 
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 ✶ [observe pressure]
 ⏿ [orient pressure]
 ◇ [decide pressure]
 ▶ [act pressure]
 ↺ [verify or crossing pressure]; [aftermath pressure]
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 ## Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ pranala #has-meme from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme family=control role=has >>
-<<~ pranala #has-loci from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci family=control role=has >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ pranala #has-meme from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme family=control role=has>>
+<<~ pranala #has-loci from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci family=control role=has>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>:3474a83e5cb66844
+<<^ code="&#x0003;">>:3474a83e5cb66844
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! ↺ Aftermath
 
@@ -249,17 +248,17 @@ Aftermath — close by naming:
 * which next change would raise the posture honestly
 * what still lacks a lawful downstream home
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;b5W8GOkEdzl1kCQzsR7Ha508a8qvkqKAGAYy84UmWXo
+<<^ code="&#x0003;">>ni:///sha-256;PZ-4397GY41KrBxPItE5HOvbCxZTclKPqBwLABWdEwE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

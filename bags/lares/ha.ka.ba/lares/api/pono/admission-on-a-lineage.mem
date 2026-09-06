@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/admission-on-a-lineage>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/admission-on-a-lineage.mem"
 type          = "text/memetic-wikitext+tiddlywiki"
-register      = "Synthesis"
 status        = "standing"
 status-why = "MEASURED IN PART — experiments 2 (sybil bound) + 5 (distortion) RUN and green in `lineage-rank`; 1, 3, 4, 6 unrun; the shadow (6) uninstrumented"
 tagspace      = "stable"
@@ -18,11 +17,11 @@ authors       = "Joshua Fontany; Lares (four tasked spirits: Marrow-Reader · Ch
 revised-on    = "2026-07-25"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #the-refusal >>
+<<~ ahu #the-refusal>>
 
 ! Admission on a Lineage ~ an OUTLINE, and what would refute it
 
@@ -41,11 +40,11 @@ which the author had conflated. The register moves by the promise made here, not
 shadow — original antigenic sin — carries ''no instrument at all'' (6), which stays the gravest of the four
 because the failure reads invisible from inside and ''every gate we own would glow green through it.''
 
-<<~ confidence 11/20 >> The MECHANISM reads measured; the SYNTHESIS around it does not.
+The MECHANISM reads measured; the SYNTHESIS around it does not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tolerance-outranks-this-gate >>
+<<~ ahu #tolerance-outranks-this-gate>>
 
 !! The ruling this gate sits under
 
@@ -55,11 +54,11 @@ Which places this whole gate: it ''prices and bounds'', and it MUST NOT adjudica
 
 ''The stack's brief makes this binding rather than merely prudent'': the recently-arrived case reads as the acceptance test, and a gate that hardens against the unvouched hardens against exactly whom this infrastructure exists for.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/admission >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/admission>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-standing >>
+<<~ ahu #the-standing>>
 
 > ''WHICH STANDING — one English word carried two entities.'' `kūlana` names an ACCRUED position, the thing a lineage prices and dwelling deposits. ''Standing-to-object'' names a PROCEDURAL capacity to challenge a declaration or a reading, and it arrives from the tier at which a face gets published, never from accrual. A party may hold deep `kūlana` and no standing-to-object, or the reverse. ''Everything below reads `kūlana`.''
 
@@ -77,7 +76,7 @@ without its substance; this names the substance.
 across everyone it vouches for (`lineage-rank`, mass conservation), so a seed-sybil minting a
 storm divides one stolen mass across the whole storm, and each further generation divides again
 under ε. ''Invite-storms decay per generation from the seed-sybil'' — the gate self-tunes by
-arithmetic, never by a threshold anyone chose. <<~ confidence 15/20 >> The split
+arithmetic, never by a threshold anyone chose. The split
 stands built, tested, and ATTACKED — a voucher cannot raise its own score by issuing vouches
 (the bottleneck property), so the gaming vector closes on the issuer, never the seed.
 
@@ -101,9 +100,9 @@ siblings. ''The wall needs no cutoff because it refuses ITSELF'': at r ≥ β th
 a non-finite price, so `dreamnet-admission` refuses ''at-the-ceiling'' on the wall's own verticality
 and compares against nothing. What the crossing costs, the voucher already paid by vouching.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-problem >>
+<<~ ahu #the-problem>>
 
 !! The Problem
 
@@ -115,9 +114,9 @@ converge. Refusal must cost nothing and remember no enemies.
 ''Every published sybil defence assumes an undirected, fast-mixing social graph.'' Our graph is a near-tree
 whose conductance is terrible by construction, and ''nobody has done our graph.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-claim >>
+<<~ ahu #the-claim>>
 
 !! The Claim ~ four braids, one knot
 
@@ -156,7 +155,7 @@ mints unbounded sybils that all clear the threshold. ''Sybil resistance REQUIRES
 ''and mass conservation is exactly what makes the fold non-monotone.'' You cannot have both.
 
 ''REFUTED BY:'' a counterexample — a monotone, mass-conserving fold. ''If one exists this whole outline''
-''collapses into something better.'' <<~ confidence 6/20 >> The author believes none exists and
+''collapses into something better.'' The author believes none exists and
 has not proved it; this is the one claim that reads as a ''conjecture worth a proof''.
 
 ''C5 — NON-MONOTONE IS FINE, BECAUSE THE SCORE IS CONFLUENT.'' PPR is a pure deterministic function of the
@@ -187,9 +186,9 @@ needs no global view, survives partition (''the far chapter is never reached, an
 verified the travelling stranger. ''They shrank what admission granted until being wrong was survivable,''
 ''and made a local party post the bond.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-shadow >>
+<<~ ahu #the-shadow>>
 
 !! The Shadow ~ what this design will do to itself
 
@@ -217,7 +216,7 @@ trust calculus that ''nobody ever ran'' — Valsorda, inside the strong set: //"
 distribution network — federated, append-only, unmoderated, replicating signatures with no bound on how
 many one key could carry — fell to a party who simply ''appended''. A poisoned certificate accumulated
 signatures in the tens of thousands; clients fetching it broke on parse; the network emptied and the
-replacement ''validates and refuses to federate''. <<~ confidence 15/20 >> ''The
+replacement ''validates and refuses to federate''. ''The
 unbounded append constituted the whole function, so no defence could distinguish the attack from the
 service'', and the cure ran through the exact centralisation the design existed to refuse.
 
@@ -235,9 +234,9 @@ So the question stands open rather than answered here:
 So the outline owes a ''one-sentence answer'' and makes only this claim: ''the path buys ADMISSION FOR A''
 ''STRANGER and SYBIL COST. Nothing else the DAG offers has ever paid for itself in the field.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-open-door-costs >>
+<<~ ahu #the-open-door-costs>>
 
 !! An open door answers strangers ~ and that names the oracle
 
@@ -258,11 +257,11 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 | REPUTATION | should I accept from this stranger | ''centralises by its nature'' — judging strangers well demands a wide observation surface, and observation surface scales with size |
 | ADMISSION | may this party address me at all | ''decentralises IFF a party may refuse strangers by default'' |
 
-''So the domain-authentication layer never re-centralised that federation.'' Reputation did — held privately by the few largest receivers, unpublished, unappealable, and compounded by a warming cost that scales against exactly the small operator. <<~ confidence 15/20 >> The receiver-side requirement bulletins the largest two published for bulk senders read as a private duopoly issuing protocol-adjacent policy for a network whose specification grants it no such seat. ''Order of magnitude, never a figure'': the published complaint ceilings sit in the fractions of one percent, and this meme declines to quote a number it could not verify.
+''So the domain-authentication layer never re-centralised that federation.'' Reputation did — held privately by the few largest receivers, unpublished, unappealable, and compounded by a warming cost that scales against exactly the small operator. The receiver-side requirement bulletins the largest two published for bulk senders read as a private duopoly issuing protocol-adjacent policy for a network whose specification grants it no such seat. ''Order of magnitude, never a figure'': the published complaint ceilings sit in the fractions of one percent, and this meme declines to quote a number it could not verify.
 
 > ''THE LAW.'' Re-centralisation follows from the ''OBLIGATION TO ACCEPT UNSOLICITED CONTACT FROM STRANGERS'', never from abuse itself. Mail must accept strangers — that constitutes its function. A lineage-gated mesh need not, and that single refusal buys the whole property.
 
-''THE THIRD OUTCOME THE DEBATE OMITS.'' A stranger-accepting federation reaches one of three ends, and the argument usually offers only the first two: a ''reputation oligopoly'' (mail); ''bloc politics with an all-or-nothing instrument'' (the instance-blocking federations, where total acceptance and total refusal exhaust the toolkit); or ''ABANDONMENT'' — the open news federation refused to re-centralise against commercial spam and simply emptied. <<~ confidence 14/20 >> ''Holding the line and dying counts as one of the available outcomes'', and a design that plans only against capture has planned against two thirds of the record.
+''THE THIRD OUTCOME THE DEBATE OMITS.'' A stranger-accepting federation reaches one of three ends, and the argument usually offers only the first two: a ''reputation oligopoly'' (mail); ''bloc politics with an all-or-nothing instrument'' (the instance-blocking federations, where total acceptance and total refusal exhaust the toolkit); or ''ABANDONMENT'' — the open news federation refused to re-centralise against commercial spam and simply emptied. ''Holding the line and dying counts as one of the available outcomes'', and a design that plans only against capture has planned against two thirds of the record.
 
 ''No case stands, at scale, of an open federation that accepts strangers AND solved abuse without re-centralising.'' Said plainly rather than hedged. The near-misses all bought it the same way — by refusing strangers: a gossip mesh replicating only within N hops of a follow admits no path from a stranger and therefore no abuse channel, and the strongest anti-federation argument in the record comes from a system that solved abuse and metadata well by ''declining to federate at all''. This stack owes an answer to that argument rather than a silence.
 
@@ -272,9 +271,9 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 
 ''So the discovery path gets built DELIBERATELY, at the same tier as the gate'' — human bridge-keepers, an out-of-band referral route, curated intake — rather than solved later by widening the gate under pressure, which converts the design back into the stranger-accepting case and hands it all three of that case's endings.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #re-declaration >>
+<<~ ahu #re-declaration>>
 
 !! When the frame changes, LABEL rather than convert
 
@@ -284,9 +283,9 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 
 ''And the monument outranks the coordinate.'' Where a frame change moved a measurement away from the physical mark, that field resolved it by ruling the mark primary and the coordinate secondary — ''it demoted the number below the thing the number measured''. Read across: if a frame-relative reading ever BECOMES the party rather than describing them, this stack has re-fused what a century of practice pried apart.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-would-prove-it >>
+<<~ ahu #what-would-prove-it>>
 
 !! What Would Prove It ~ the experiments, two run and four owed
 
@@ -308,21 +307,21 @@ So the outline owes a ''one-sentence answer'' and makes only this claim: ''the p
 # ''Instrument the shadow.'' Build the meter for original antigenic sin ''before'' the loop runs, because
    the failure is invisible from inside and ''every gate we own would glow green through it.''
 
-<<~ confidence 11/20 >> ''(2) ran and failed to kill it, so the register moved by the promise''
+''(2) ran and failed to kill it, so the register moved by the promise''
 ''this meme made.'' The four owed experiments hold it there: until (1) re-derives the bound under our own
 model, (3) settles the sink, (4) hunts C4's counterexample, and (6) instruments the shadow, ''what stands''
 ''measured is the FOLD, never the synthesis around it.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-siege-gate >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-lease >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-siege-gate>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity#/the-lease>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;38eZdbmqHewGZMJQYNv5grLdYoD9XLO6lW4B0kEw5E0
+<<^ code="&#x0003;">>ni:///sha-256;z5sZFcGn9FzOF4epQs1JrIVp96t_rimQy3vzAzAEdto
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

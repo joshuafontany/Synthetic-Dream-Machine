@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-liliuokalani >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-liliuokalani>>
 ```toml iam
 cacheable = false
 file-path = "packages/lararium-sensorium/scripts/fixtures/placebo-kumulipo/kumulipo-liliuokalani.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 18
-register  = "Canon"
 retain    = false
 role      = "hawaiian source witness meme, Kumulipo Liliʻuokalani-1897 translation locus, koʻihonua cosmogony shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-liliuokalani"
 ```
 
-<<^ &#x0002; >>
+<<^ &#x0002;>>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! The Kumulipo — Liliʻuokalani Translation (1897)
 
@@ -26,9 +25,9 @@ Queen Liliʻuokalani's English translation of the Hawaiian creation chant, rende
 
 Combined here from the per-era pages of the sacred-texts.com edition into one witness text, in reading order. Era headers and page markers `{p. N}` preserved.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -40,9 +39,9 @@ Retrieved 2026-06-21 via the Internet Archive Wayback Machine (snapshot `web.arc
 
 The attribution notice from the original scan is retained inline in the Title Page section, per its terms.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-text >>
+<<~ ahu #source-text>>
 ```toml iam
 KEAULUMOKU IN HER IMPRISONMENT IN 1700 AND TRANSLATED FROM ORIGINAL
 Kakuhihewa at Hikiau,
@@ -4113,16 +4112,16 @@ VICTORIA KAIULANI
 KAPAAKEA. AHU,
 LONOIKAMAKAHIKI KA-I-IMAMAO.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-beckwith >>
+<<~ loulou lar:///ha.ka.ba/lares/testbed/placebo/kumulipo/kumulipo-beckwith>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ &#x0003; >>
+<<^ &#x0003;>>
 
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

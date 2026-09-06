@@ -1,34 +1,32 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/rask-varkesh >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/rask-varkesh>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/characters/npcs/rask-varkesh.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "referee NPC — L2 Named gnoll siege-dog commander with Roman scorpio crew (the Red Skeen); full encounter procedure"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/rask-varkesh"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Rask "Iron-Yip" Varkesh, Gnoll Commander
 
 //Migrated verbatim from `elyncia/Neo-Thracia/NPCs/Rask_Gnoll_Commander.md` (2026-08-14); the md→wikitext conversion ran mechanical
 — prose untouched. Jekyll frontmatter dropped as transport metadata.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Rask “Iron-Yip” Varkesh, Gnoll Commander (Level 2, Named)
 
@@ -174,8 +172,8 @@ Run these fast; they’re competent but not heroic.
 
 ''Rask’s doctrine:'' fire once to break their morale, break contact, and withdraw before a “fair fight” starts.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;RgJaeb0fAgyeMCJO2cRhEKDYd4CFYXTVpRdlED4mii8
+<<^ code="&#x0003;">>ni:///sha-256;65MZ25hDL_ehcCCBNMFapeZy76gOi4ApuyhyqFJ9DEE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

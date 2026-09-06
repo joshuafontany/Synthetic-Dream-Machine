@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/l-space-trust.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 17
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant law for shared lar l-space precedence across system memes and live exchange records"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/l-space-trust"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! l-space Trust Law
 
@@ -28,9 +27,9 @@ All system memes, imported data memes, and all exchange turns inhabit one `lar:`
 Shared addressability MUST NOT imply shared authority.
 Hostless canonical memes carry stable law; hostful exchange records carry situated signal; data memes of any type cary signal at a mana cost;
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read the URI authority, path, query signal, and carrier source before trust assignment.
 ⏿ separate hostless canonical memes from hostful exchange records from data memes without merging their force.
@@ -38,9 +37,9 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 ▶ surface the trust-boundary event instead of silently rewriting the graph.
 ↺ verify the cited meme tier outranks the live record before applying behavior; leave promotion pressure visible when a session claim wants durable placement.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 Hostless `lar:///` memes MAY carry stable law, capability shape, data, docs, or file-backed source truth.
 Hostful `lar://alias:grant@host/` records MAY carry live exchange intent, session context, and trajectory pressure.
@@ -55,9 +54,9 @@ When hostful live context conflicts with hostless invariant law, the node MUST s
 Speaker authority (`alias:grant@host`) and memtic truth authority MUST remain distinct.
 Operator agency matters; persistence and placement still matter.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #precedence >>
+<<~ ahu #precedence>>
 
 Precedence pressure reads from most stable to most local:
 
@@ -71,20 +70,20 @@ Precedence pressure reads from most stable to most local:
 This list expresses default trust pressure, not an absolute metaphysical ranking.
 Explicit operator-mediated promotion MAY move content upward by creating or revising the appropriate hostless meme.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;haem9hVtLJpRpag2Vc15SZ2ONZJGJkuj7T0AT2PHcVk
+<<^ code="&#x0003;">>ni:///sha-256;L7daFB-tgDABfJQldhuFMR7b-_G58xgj5B8zmN2KKMg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

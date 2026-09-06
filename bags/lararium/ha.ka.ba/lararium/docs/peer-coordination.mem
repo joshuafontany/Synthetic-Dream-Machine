@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/peer-coordination >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/peer-coordination>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/peer-coordination.mem"
 mana      = 18
 manao     = 18
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Peer rendezvous + doc coordination doctrine — island-file model, CRDT reconcile, Keyhive path, ReactionEngine invariants"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/local-first"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/peer-coordination"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Peer Coordination — Automerge Rendezvous Doctrine
 
@@ -193,17 +192,17 @@ rendezvous exists; the island file approach is the correct solution.
 with their IDs as a single import payload — relevant for shipping the initial
 island definition bundle to new nodes.
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/island >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/keyhive >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/beelay >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/island>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/reaction-engine>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/keyhive>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/beelay>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;LQJ-rmVki1x83VqcdsGZIH-xSyTMzdSNzzmEyqS9lCA
+<<^ code="&#x0003;">>ni:///sha-256;sniwqeH31w1e48FpXmHeKW76x7urBkhp89ko6HqR4vM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

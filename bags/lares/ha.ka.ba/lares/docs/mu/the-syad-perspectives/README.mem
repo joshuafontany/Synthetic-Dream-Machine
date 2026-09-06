@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-syad-perspectives/README>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/the-syad-perspectives/README.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "extracted syad source shelf, archive-consumed derivation store, register-metaphysics provenance locus"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives/README"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Syad Perspectives Shelf
 
@@ -28,9 +27,9 @@ Archive text moved here.
 Invariant reduced elsewhere.
 Derivation remains recoverable here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -54,19 +53,19 @@ The tight invariant now lives at:
 
 * `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #rule >>
+<<~ ahu #rule>>
 
 !! Extracted Rule
 
-Under an invoked stance, register measures confidence within that standpoint's evaluation frame; register does not measure universal truth-weight. The coupling rides the lens --- absent an invoked `syad` lens, a confidence number reads through all five stances at once (the full field, quiet stances named --- the default equals a parameterless `<<~ syad >>`); invoking specific stances narrows the measure to those named.
+Under an invoked stance, register measures confidence within that standpoint's evaluation frame; register does not measure universal truth-weight. The coupling rides the lens --- absent an invoked `syad` lens, a confidence number reads through all five stances at once (the full field, quiet stances named --- the default equals a parameterless `<<~ syad>>`); invoking specific stances narrows the measure to those named.
 
 The active stance names the `syād` --- the standpoint from which the number reads. The sigil performs the //syāt// office: it licenses a stance's claim, the //naya// wing licensing a //saptabhaṅgī// predication (canon: `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives#/relationship`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stance-array >>
+<<~ ahu #stance-array>>
 
 !! Stance Array Extraction
 
@@ -86,9 +85,9 @@ Private.
 The array therefore shows both load and restraint.
 Combination reads through simultaneous flags, not omission.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #reading-question >>
+<<~ ahu #reading-question>>
 
 !! Reading Question
 
@@ -99,9 +98,9 @@ what does this number measure for this stance?
 The answer changes with the stance.
 The number does not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #spectrum-drift >>
+<<~ ahu #spectrum-drift>>
 
 !! Spectrum Drift
 
@@ -113,9 +112,9 @@ The canon reading does not flatten all stances into one axis.
 It keeps distinct measures per stance,
 and it keeps `avaktavya` from collapsing into mere uncertainty.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #saptabhangi >>
+<<~ ahu #saptabhangi>>
 
 !! Saptabhangi Extraction
 
@@ -135,9 +134,9 @@ seven predicates generated from three primitives.
 `avaktavya` does not name ignorance.
 It names a frame where the true/false axis does not apply cleanly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #multi-stance-boundary >>
+<<~ ahu #multi-stance-boundary>>
 
 !! Multi-Stance Boundary
 
@@ -149,9 +148,9 @@ The visible stance array carries the spread.
 Combination reads through simultaneous measures,
 not through a collapsed average.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #canon-transition >>
+<<~ ahu #canon-transition>>
 
 !! Canon Transition
 
@@ -162,9 +161,9 @@ From that turn forward,
 all five positions stayed mandatory.
 The correction closed omission-based live examples.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #legacy-notes >>
+<<~ ahu #legacy-notes>>
 
 !! Legacy Notes
 
@@ -178,17 +177,17 @@ These readings stay archive-only now:
 They remain useful as lineage.
 They do not govern the live fold.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
 * `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`
 * `lar:///ha.ka.ba/lares/api/mu/l-prime`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;AnmnzWLZkJQY8Cvof32piGJ4PekfNa_EHeJpgdx3FIk
+<<^ code="&#x0003;">>ni:///sha-256;JNhmyoomYudDzEHyK2V4V-LI0Pwck7gHmUYp1ZymNow
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -4,9 +4,9 @@ description: Generate, compress, or audit guest-grammar surfaces under lar:///ha
 allowed-tools: Read, Grep, Glob, Bash, Edit, Write
 ---
 
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/guest-grammar/SKILL>>
 ```toml meta
 cacheable          = true
 constraints        = ["S1: the parent invariant remains the admission law and this skill does not outrank it", "S2: guest work enters only through explicit host admission; ambient leakage does not count as lawful guest grammar", "S3: root primitives stay host-side and do not become guest-family proxies", "S4: hana keeps opener, optional priming payload, and guest body distinct", "S5: parser legality, lowering schemas, fixture execution, and long examples move outward before the parent swells"]
@@ -15,7 +15,6 @@ file-path          = "bags/lares/ha.ka.ba/lares/api/pono/guest-grammar/SKILL.mem
 mana               = 15
 manao              = 16
 manaoio            = 14
-register           = "Synthesis-Canon"
 retain             = true
 role               = "guest-grammar operational skill — admission audit, hana shaping, and companion-meme split discipline"
 skill-package-root = "bags/lares/ha.ka.ba/lares/api/pono/guest-grammar"
@@ -24,14 +23,14 @@ type               = "text/memetic-wikitext+tiddlywiki"
 uri-path           = "ha.ka.ba/lares/api/pono/guest-grammar/SKILL"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Guest-Grammar Skill
 
 [[guest-grammar.md|../guest-grammar.md]] holds the law.
 This skill carries the working procedure.
 
-<<~ ahu #load-contract >>
+<<~ ahu #load-contract>>
 
 !! Load Contract
 
@@ -44,9 +43,9 @@ Keep these points active when the skill loads:
 * graceful local degradation beats flattering collapse or silent fabrication
 * the smallest lawful intervention beats a grand rewrite
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #workflow-contract >>
+<<~ ahu #workflow-contract>>
 
 !! Workflow Contract
 
@@ -74,9 +73,9 @@ Do not:
 * hide malformed guest work behind a fake success path
 * burden the parent with full parser or render implementation detail
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trigger >>
+<<~ ahu #trigger>>
 
 !! Trigger
 
@@ -94,9 +93,9 @@ Prefer another surface when the work concerns only:
 * pure parser legality with no admission-law change
 * pure render lowering with no host-guest boundary change
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ read host and guest boundaries first and observe the actual admission surface
 ⏿ sort admission law, ownership boundary, degradation pressure, and implementation detail by where they belong
@@ -104,9 +103,9 @@ Prefer another surface when the work concerns only:
 ▶ write the lightest useful change while keeping guest entry explicit and `hana` shape crisp
 ↺ verify explicit admission and bounded degradation without hiding malformed or unsupported guest work; name the remaining residue plainly, including what still lacks a lawful downstream home
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -125,9 +124,9 @@ Look for:
 
 Preserve the difference between admitted, malformed, unsupported, and absent guest regions.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -147,9 +146,9 @@ Orientation rule:
 * `parser-or-lowering-detail` moves outward first
 * `fixtures-or-docs-residue` belongs in docs or later subtype surfaces
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -168,9 +167,9 @@ Then choose one honest posture for the target region:
 
 Do not round up from aspiration to law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -186,7 +185,7 @@ When writing or revising:
 !!! Canonical Hana Shape
 
 ````text
-<<~ hana #work >>
+<<~ hana #work>>
 ```toml
 grammar = "x-tiddlywiki-filter"
 profile = "canonical"
@@ -196,12 +195,12 @@ result-shape = "set"
 ```
 
 [all[sigils]links:to[+currentMeme]]
-<<~/hana >>
+<<~/hana>>
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! ↺ Aftermath
 
@@ -225,17 +224,17 @@ Aftermath — close by naming:
 * which next change would improve the region honestly
 * what still lacks a lawful downstream home
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/guest-grammar >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/guest-grammar>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/guest-grammar>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1C8tPlP-ROhlOQAIOjHQbAew60cFX4LPUIH0CaVWb0A
+<<^ code="&#x0003;">>ni:///sha-256;py2ysdkYAv73IEK4GccPipVJNA9vqbVrays1bfF8Bto
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/meme-view-children >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/meme-view-children>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/ui/meme-view-children.mem"
@@ -8,7 +8,6 @@ list-after = "$:/core/ui/ViewTemplate/body"
 mana       = 18
 manao      = 17
 manaoio    = 16
-register   = "Synthesis-Canon"
 retain     = true
 role       = "ViewTemplate: slot-name headers + inline-edit overlay for non-body ahu sections"
 tags       = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -16,7 +15,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-view-children"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 \whitespace trim
 
@@ -60,10 +59,10 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-view-children"
 
 </$list>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zAr4ojVriR7iEzNnAKSBTl3GDh8q3mT_Zw-Q9-ffJng
+<<^ code="&#x0003;">>ni:///sha-256;stFvzA8TpahALoKLkGH9vxUMBZd40znb65mAAFvsJF0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

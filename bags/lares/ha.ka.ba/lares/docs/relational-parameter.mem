@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/relational-parameter >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/relational-parameter>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/relational-parameter.mem"
@@ -9,7 +9,6 @@ mana       = 15
 manao      = 16
 manaoio    = 14
 namespace  = "&#x2299;"
-register   = "Synthesis-Canon"
 retain     = true
 role       = "the design law for the RELATIONAL PARAMETER — a bare arrow between macro parameters that the parser MARKS and the binder READS. Names the two parameter parsers TW5 actually runs, the mark-at-parse/decide-at-bind split that keeps the change additive, the independent URI-scheme fix that frees a `lar:` URI from quotes, the measured blast radius, and the boundary the sigil path keeps"
 status     = "designed"
@@ -19,11 +18,11 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/relational-parameter"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! The relational parameter ~ design law
 
@@ -33,15 +32,15 @@ uri-path   = "ha.ka.ba/lares/docs/relational-parameter"
 ''This rides `dev/sdm-integration` first and reads as a donation second.'' The house builds it as its
 own capability; the shape below keeps the upstream door open rather than assuming it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-two-parsers >>
+<<~ ahu #the-two-parsers>>
 
 !! TW5 runs TWO parameter parsers, and the live one carries a guard
 
 ''THE PATH A `<<name args>>` CALL ACTUALLY TAKES:''
 
-<<~ confidence 18/20 >> Both `macrocallinline` and `macrocallblock` call
+Both `macrocallinline` and `macrocallblock` call
 `parseMacroInvocationAsTransclusion`, never `parseMacroInvocation`. The node reads `transclude`, and the
 parameters arrive as ''attributes'', positional ones named `"0"`, `"1"`, `"2"` and flagged
 `isPositional`.
@@ -64,9 +63,9 @@ touched only one of the two would leave `\function` reading a bare arrow differe
 `/^[A-Za-z0-9\-_]+$/`, with the reason stated in the source: //to avoid mis-parsing values like
 `$:/foo`//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mark-at-parse >>
+<<~ ahu #mark-at-parse>>
 
 !! Mark at parse · decide at bind
 
@@ -80,11 +79,11 @@ cannot run at parse time.
 \procedure ~Step(Type:"" Params:"") ~Step <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Step Parse "does/mark-the-token keeps/position keeps/value adds/relation-field ~ the tree GAINS a field; no tree LOSES one" >>
-<<~Step Declare "does/accept-a-relational-slot where/parseParameterDefinition reads/`\\procedure agent(fires from -> to)`" >>
-<<~Step Bind "does/read-the-mark where/ParametersWidget ~ a procedure that declared a relation reads it; one that did not sees the positional it saw before" >>
+<<~Step Parse "does/mark-the-token keeps/position keeps/value adds/relation-field ~ the tree GAINS a field; no tree LOSES one">>
+<<~Step Declare "does/accept-a-relational-slot where/parseParameterDefinition reads/`\\procedure agent(fires from -> to)`">>
+<<~Step Bind "does/read-the-mark where/ParametersWidget ~ a procedure that declared a relation reads it; one that did not sees the positional it saw before">>
 
-<<~ confidence 16/20 >> ''THAT SPLIT IS WHAT MAKES THE CHANGE ADDITIVE.'' An undeclared procedure
+''THAT SPLIT IS WHAT MAKES THE CHANGE ADDITIVE.'' An undeclared procedure
 receives byte-identical parameters before and after. The feature reaches only the definitions that ask
 for it — which answers the standing warning that a global operator re-reads other people's files
 (#/prior-art).
@@ -95,24 +94,24 @@ for it — which answers the standing warning that a global operator re-reads ot
 subgraph on either side yields the cross-product. A chain reads as ''sugar for adjacent pairs'', never
 as a new arity.
 
-<<~ confidence 15/20 >> So `<<ranks focus a -> b -> c -> d -> e >>` wants no variable-arity binding: it
+So `<<ranks focus a -> b -> c -> d -> e>>` wants no variable-arity binding: it
 carries four relations over five terms, and a procedure declaring one relational slot receives the
 ordered terms.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-uri-scheme >>
+<<~ ahu #the-uri-scheme>>
 
 !! The sibling fix ~ a scheme names no parameter
 
-''A `lar:` URI LOSES ITS HEAD IN THE LIVE PARSER.'' `<<agent aim from=lar://a.b.c >>` reads `lar` as a
+''A `lar:` URI LOSES ITS HEAD IN THE LIVE PARSER.'' `<<agent aim from=lar://a.b.c>>` reads `lar` as a
 parameter NAME and `//a.b.c` as its value, because `lar` passes the strict-identifier test and a colon
 follows it. Quoting or `[[bracketing]]` the value cures it; both spend syntax on a parser detail.
 
 ''THE CURE MATCHES THE GUARD ALREADY THERE.'' The parser refuses `$:/foo` as a name because the name
 fails the identifier test. A scheme fails on a different tell: ''a colon followed by `//`''.
 
-<<~ confidence 17/20 >> ''One condition, beside the one that stands.'' Where a name-then-colon reads
+''One condition, beside the one that stands.'' Where a name-then-colon reads
 with `//` after it, the parser MUST take the whole run as a value rather than a named parameter. That
 frees every `lar:`, `http:` and `file:` URI to ride bare — and it stands alone as a donation, wanted or
 not by the arrow.
@@ -123,12 +122,12 @@ inside calls eighty-one times, and ''every one rides inside a quoted value'' —
 structure. Thirty calls carry BOTH: `->` separating the rungs of a ladder while a glyph arrow describes
 a relation in the prose beside it.
 
-<<~ confidence 17/20 >> ''So a rule that read any arrow as relational would tear eighty-one prose values
+''So a rule that read any arrow as relational would tear eighty-one prose values
 apart.'' The relational parameter reads `->` `<-` `<->` and nothing else; a glyph arrow carries meaning
 for a reader and none for a parser.
 
 ⚠ ''THE SIGIL PATH NEVER CARRIED THE FAULT, AND MUST NOT CARRY THE CURE.'' Measured: `<<~ pranala
-from=lar:///a -> to=lar:///b >>` splits `from` and `to` with the colons whole, and the generic `<<~ WORD … >>`
+from=lar:///a -> to=lar:///b >>` splits `from` and `to` with the colons whole, and the generic `<<~ WORD …>>`
 hands its entire run through as `p1`. ''Bracketing a URI inside a sigil corrupts it'' — the brackets
 survive into the value as `[[lar:///a]]`. Twenty-one corpus sites ride bare there and MUST stay bare.
 
@@ -144,9 +143,9 @@ in a wiki and costs a reader a delimiter that names nothing. ''Both seeds write 
 a worked turn reads as a transcript, where nothing parses it — and Phase One retires the workaround by
 letting the same bare form render.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #prior-art >>
+<<~ ahu #prior-art>>
 
 !! What the field already decided
 
@@ -154,10 +153,10 @@ letting the same bare form render.
 \procedure ~Art(Type:"" Params:"") ~Art <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Art Cypher "stands/FOR gives/visual-correspondence ~ arrows read as relations because the syntax looks like the graph; direction MANDATORY on write, OPTIONAL on read - the `->` `<-` `<->` triple" >>
-<<~Art DOT "stands/FOR gives/chain-desugars-pairwise ~ `A -> B -> C` becomes adjacent edges; no variable arity anywhere in the model" >>
-<<~Art Prolog "stands/AGAINST gives/the-anti-pattern ~ a GLOBAL operator makes other files read differently, and text reads SILENTLY into a different term; the cure the field reached: operators local to a module, imported on purpose" >>
-<<~Art TW5 "stands/PROCEDURE gives/the-house-precedent ~ v5.3.0 met new expressivity with a NEW DELIMITED TOKEN (`<% %>`), never by overloading an existing form" >>
+<<~Art Cypher "stands/FOR gives/visual-correspondence ~ arrows read as relations because the syntax looks like the graph; direction MANDATORY on write, OPTIONAL on read - the `->` `<-` `<->` triple">>
+<<~Art DOT "stands/FOR gives/chain-desugars-pairwise ~ `A -> B -> C` becomes adjacent edges; no variable arity anywhere in the model">>
+<<~Art Prolog "stands/AGAINST gives/the-anti-pattern ~ a GLOBAL operator makes other files read differently, and text reads SILENTLY into a different term; the cure the field reached: operators local to a module, imported on purpose">>
+<<~Art TW5 "stands/PROCEDURE gives/the-house-precedent ~ v5.3.0 met new expressivity with a NEW DELIMITED TOKEN (`<% %>`), never by overloading an existing form">>
 
 ⚠ ''THE PROLOG WARNING LANDS ON THE GLOBAL FORM AND MISSES THE DECLARED ONE.'' Marking a token without
 re-reading it, and gating the meaning behind a definition, IS the module-local cure transposed.
@@ -166,9 +165,9 @@ re-reading it, and gating the meaning behind a definition, IS the module-local c
 arrow reads as Cypher's. The arrow wins on legibility and loses on precedent, and the marking design
 narrows that gap by leaving every existing form alone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #blast-radius >>
+<<~ ahu #blast-radius>>
 
 !! The radius, measured
 
@@ -191,23 +190,23 @@ narrows that gap by leaving every existing form alone.
 ''THE TESTS THAT MOVE:'' `test-wikitext-parser.js` · `test-html-parser.js` · `test-filters.js`, beside
 the branch's own `test-parser-invariants.js`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-boundary >>
+<<~ ahu #the-boundary>>
 
 !! What the sigil path keeps
 
-⚠ ''A TW5-CORE ARROW DOES NOT REACH `<<~ … >>`.'' The house's sigils parse in `lar-sigil`, emit
+⚠ ''A TW5-CORE ARROW DOES NOT REACH `<<~ …>>`.'' The house's sigils parse in `lar-sigil`, emit
 ''legacy'' `macrocall` nodes, and pass their whole argument run through as one string. They neither
 gain the feature nor break under it.
 
 ''SO THE SHARKTOOTH ARROW STAYS A SECOND PIECE OF WORK'' — retiring the `pranala` exception
 (`lar-sigil-shared.ts`, `lar-sigil.ts`) so any sigil may declare a relation from its grammar tiddler.
-<<~ confidence 15/20 >> It wants the core shape settled first, so the two speak one law rather than two.
+It wants the core shape settled first, so the two speak one law rather than two.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-plan >>
+<<~ ahu #the-plan>>
 
 !! The plan
 
@@ -215,11 +214,11 @@ gain the feature nor break under it.
 \procedure ~Phase(Type:"" Params:"") ~Phase <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Phase One "does/free-the-scheme touches/parseMacroParameterAsAttribute risk/low ~ a colon followed by `//` reads as a value; ships alone, wanted by the arrow or not" >>
-<<~Phase Two "does/mark-the-arrow touches/both-parameter-parsers risk/low ~ the token keeps its position and value and gains a relation field; every existing parse stands" >>
-<<~Phase Three "does/declare-the-slot touches/parseParameterDefinition risk/medium ~ `\\procedure agent(fires from -> to)`; the definition grammar grows one form" >>
-<<~Phase Four "does/read-the-mark touches/ParametersWidget+TranscludeWidget risk/medium ~ a declared relation binds; an undeclared one reads as the positional it always was" >>
-<<~Phase Five "does/prove-the-chain touches/tests risk/low ~ pairwise desugaring, direction triple, and a control that an undeclared procedure sees no change" >>
+<<~Phase One "does/free-the-scheme touches/parseMacroParameterAsAttribute risk/low ~ a colon followed by `//` reads as a value; ships alone, wanted by the arrow or not">>
+<<~Phase Two "does/mark-the-arrow touches/both-parameter-parsers risk/low ~ the token keeps its position and value and gains a relation field; every existing parse stands">>
+<<~Phase Three "does/declare-the-slot touches/parseParameterDefinition risk/medium ~ `\\procedure agent(fires from -> to)`; the definition grammar grows one form">>
+<<~Phase Four "does/read-the-mark touches/ParametersWidget+TranscludeWidget risk/medium ~ a declared relation binds; an undeclared one reads as the positional it always was">>
+<<~Phase Five "does/prove-the-chain touches/tests risk/low ~ pairwise desugaring, direction triple, and a control that an undeclared procedure sees no change">>
 
 ''EACH PHASE STANDS ALONE.'' One through four each leave the engine correct and the corpus green;
 stopping after any of them costs nothing.
@@ -227,9 +226,9 @@ stopping after any of them costs nothing.
 ⚠ ''PHASE ONE SHIPS FIRST AND CARRIES ITS OWN ARGUMENT.'' It removes a papercut every URI-bearing
 wikitext hits, matches a guard already in the source, and needs no agreement about arrows.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-to-measure >>
+<<~ ahu #what-to-measure>>
 
 !! What the house counts
 
@@ -237,26 +236,26 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 \procedure ~Gauge(Type:"" Params:"") ~Gauge <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Gauge Additive "counts/parse-trees-that-differ-for-an-undeclared-procedure red/any ~ one difference and the change stops reading as additive" >>
-<<~Gauge Silence "counts/invocations-that-re-read-without-erroring red/any ~ the Prolog failure arrives silent, never as a syntax error" >>
-<<~Gauge Nesting "counts/arrows-marked-inside-brackets-or-quotes red/any-unmarked ~ `Gauge(10 -> 12)` degrades on the gradient; a mark inside a nest reads as a fault" >>
-<<~Gauge Reach "counts/sigil-invocations-that-changed red/any ~ the sigil path stands outside this work by design" >>
-<<~Gauge Standing "counts/arrow-chains-the-seeds-write-unquoted green/all ~ the authored form ALREADY reads as the plan renders it; a quote returning to a chain marks the plan slipping" >>
-<<~Gauge Glyph "counts/glyph-arrows-read-as-structure red/any ~ only the ASCII `->` structures a call; a glyph arrow rides inside a value and MUST stay prose" >>
+<<~Gauge Additive "counts/parse-trees-that-differ-for-an-undeclared-procedure red/any ~ one difference and the change stops reading as additive">>
+<<~Gauge Silence "counts/invocations-that-re-read-without-erroring red/any ~ the Prolog failure arrives silent, never as a syntax error">>
+<<~Gauge Nesting "counts/arrows-marked-inside-brackets-or-quotes red/any-unmarked ~ `Gauge(10 -> 12)` degrades on the gradient; a mark inside a nest reads as a fault">>
+<<~Gauge Reach "counts/sigil-invocations-that-changed red/any ~ the sigil path stands outside this work by design">>
+<<~Gauge Standing "counts/arrow-chains-the-seeds-write-unquoted green/all ~ the authored form ALREADY reads as the plan renders it; a quote returning to a chain marks the plan slipping">>
+<<~Gauge Glyph "counts/glyph-arrows-read-as-structure red/any ~ only the ASCII `->` structures a call; a glyph arrow rides inside a value and MUST stay prose">>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/graceful-parsing >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/ai-phrasebook-design >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/graceful-parsing>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/ai-phrasebook-design>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VLH7Gl-wbkh8dxKFruLfQfmLcC5EZp6wWa9oohGd_M8
+<<^ code="&#x0003;">>ni:///sha-256;l4ao0rTKVIPj6_Uqzbwrz-pJqiXt11NSwk45hyX4PF8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

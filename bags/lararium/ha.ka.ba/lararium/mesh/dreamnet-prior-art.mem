@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/dreamnet-prior-art.mem"
@@ -8,7 +8,6 @@ l-space       = "lararium"
 mana          = 16
 manao         = 15
 manaoio       = 14
-register      = "Synthesis-Canon"
 research-date = "2026-05-28"
 retain        = true
 role          = "prior art research synthesis: best practices and golden principles for DreamNet two-axis mesh topology (INFRA⊥SOCIAL, relay-floor)"
@@ -16,7 +15,7 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! DreamNet/Lares: Prior Art Research Synthesis
 
@@ -189,7 +188,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 ''Deepening — authenticated media + the authority-pinning trap:''
 * ''`mxc://` authenticated media (MSC3916)'': Matrix retrofitted access control onto media — a client MUST present an auth token to a `/_matrix/client/v1/media` endpoint before the origin homeserver serves the bytes. The retrofit itself testifies to the original sin: `mxc://{server-name}/{media-id}` ''pins content to one authority'' (the naming homeserver) behind an ''opaque, non-hash media-id''. The identifier names //where a server keeps a thing//, never //what the thing is//. Two failure modes follow by construction: the origin homeserver going dark orphans the media, and the opaque id lets no holder verify what it fetched. Matrix's leaked-URL breach (the sin the resolution design cites) traces to the same root — a fetchable URL fused resolution, authorization, and read into one string.
-* ''The DreamNet fix — content-address drops the pin'': `cid = BLAKE3(ciphertext)` names //what// the bytes carry, so any holder verifies blind and the naming authority drops out of the identity; a stable logical handle + provider-locality hint replaces `{server-name}` (indirection map, WNFS private-forest), so no origin homeserver holds the media hostage. The three-gate `resolveByCid` chain (may-talk · may-resolve-this-cid · may-read) keeps split what `mxc://` + the leaked-URL fused. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* ''The DreamNet fix — content-address drops the pin'': `cid = BLAKE3(ciphertext)` names //what// the bytes carry, so any holder verifies blind and the naming authority drops out of the identity; a stable logical handle + provider-locality hint replaces `{server-name}` (indirection map, WNFS private-forest), so no origin homeserver holds the media hostage. The three-gate `resolveByCid` chain (may-talk · may-resolve-this-cid · may-read) keeps split what `mxc://` + the leaked-URL fused. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ---
 
@@ -337,7 +336,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 * ''~16KiB inline threshold'': Bytes below the range-verify granularity ride inline; larger bodies land on the filesystem and stream range-verified.
 
 ''Contrast with DreamNet:''
-* Iroh addresses //plaintext//; DreamNet addresses //ciphertext// (`cid = BLAKE3(ciphertext)`), so an untrusted holder verifies and repairs blind without a confirmation oracle. The content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, handles riding the publicity-tiered bags) lifts Iroh's blob/doc split (skinny TW5 handle stores the hash; bytes leave the CRDT), the ~16KiB inline/range-verify boundary, and the BlobTicket `hash + NodeAddr` hint directly. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* Iroh addresses //plaintext//; DreamNet addresses //ciphertext// (`cid = BLAKE3(ciphertext)`), so an untrusted holder verifies and repairs blind without a confirmation oracle. The content-addressed tier `@cad` (bytes in the `cid/<hash>` KIND-plane, handles riding the publicity-tiered bags) lifts Iroh's blob/doc split (skinny TW5 handle stores the hash; bytes leave the CRDT), the ~16KiB inline/range-verify boundary, and the BlobTicket `hash + NodeAddr` hint directly. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ''Named Patterns:''
 * bao — BLAKE3 verified-streaming format (range proofs)
@@ -359,7 +358,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 * ''HAMT as the indirection map'': The stable-name → current-CID mapping is itself small mutable metadata, so it rides the mutable structure layer (the Automerge doc in DreamNet), not the blob store.
 
 ''Contrast with DreamNet:''
-* DreamNet lifts WNFS's private-forest indirection directly: the skinny handle names a //stable logical name//, resolved through an indirection map (logical name → current cid) so a content re-key survives without breaking the handle. WNFS's what/where ∧ who-may fusion maps onto the three-gate split DreamNet keeps un-fused (address vs. cap vs. decrypt). <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* DreamNet lifts WNFS's private-forest indirection directly: the skinny handle names a //stable logical name//, resolved through an indirection map (logical name → current cid) so a content re-key survives without breaking the handle. WNFS's what/where ∧ who-may fusion maps onto the three-gate split DreamNet keeps un-fused (address vs. cap vs. decrypt). <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ''Named Patterns:''
 * Private Forest — encrypted namespace over content-addressed nodes
@@ -378,7 +377,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 # ''Provider-independent security'': Confidentiality and integrity hold even if every storage server is hostile; trust rides the caps, never the servers.
 
 ''Contrast with DreamNet:''
-* DreamNet's `@cad` key = `hash(per-operator convergence-secret + plaintext)` lifts Tahoe's scoped-convergence secret verbatim — dedup within one operator's `@cad`, zero cross-operator leak, beating both global-convergent (leaks) and random-key (no dedup). And ciphertext-addressing (`cid = BLAKE3(ciphertext)`) enacts verify-cap ⊥ read-cap: an untrusted peer verifies/pins/repairs against the cid without the decryption key (node routes ciphertext, never decrypts — the MLS Delivery-Service keel). <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* DreamNet's `@cad` key = `hash(per-operator convergence-secret + plaintext)` lifts Tahoe's scoped-convergence secret verbatim — dedup within one operator's `@cad`, zero cross-operator leak, beating both global-convergent (leaks) and random-key (no dedup). And ciphertext-addressing (`cid = BLAKE3(ciphertext)`) enacts verify-cap ⊥ read-cap: an untrusted peer verifies/pins/repairs against the cid without the decryption key (node routes ciphertext, never decrypts — the MLS Delivery-Service keel). <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ''Named Patterns:''
 * Convergence secret (scoped) — dedup without a confirmation oracle
@@ -396,7 +395,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 # ''Ciphertext-only relay'': The sync server relays and stores //ciphertext// alone. It coordinates delivery and never holds a decryption key — the relay carries sealed bytes, sovereignty stays with the endpoints.
 
 ''Contrast with DreamNet:''
-* Beelay's skinny `blob_ref` (hash-if-big / inline-if-tiny) restates the `@cad` inline/range boundary at the ''sync-reference'' grain; the sedimentree names the compaction strategy DreamNet's large-bodies-leave-the-CRDT move enacts (heavy bytes stop accreting in the op log). And ciphertext-only relay enacts the substrate-not-sovereignty keel — a node MAY carry sealed bytes, MUST NOT read them; the relay-floor axis (blind carriage) restated at the CRDT-sync layer. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+* Beelay's skinny `blob_ref` (hash-if-big / inline-if-tiny) restates the `@cad` inline/range boundary at the ''sync-reference'' grain; the sedimentree names the compaction strategy DreamNet's large-bodies-leave-the-CRDT move enacts (heavy bytes stop accreting in the op log). And ciphertext-only relay enacts the substrate-not-sovereignty keel — a node MAY carry sealed bytes, MUST NOT read them; the relay-floor axis (blind carriage) restated at the CRDT-sync layer. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ''Named Patterns:''
 * blob_ref (skinny) — hash-if-big / inline-if-tiny, uniform to the reader
@@ -407,7 +406,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/dreamnet-prior-art"
 
 !! 2. Layer Mapping: Prior Art → DreamNet
 
-> ''Frame note (post-split residue).'' This 2026-05-28 mapping reads the prior art onto the then-current ''single five-layer stack''. The architecture later ''split that stack into two orthogonal axes'' — INFRA (FLOW · carriage, relay-floor → lararium → nexusGroup → DreamNet) ⊥ WHO (read · membership, vessel-key → personaGroup → cabalGroup), crossing at the vessel. The component rows below still hold one-for-one; only the //ladder// they sit in dissolved into a 2D coordinate. §4 #divergences carries the correction; the live model stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>.
+> ''Frame note (post-split residue).'' This 2026-05-28 mapping reads the prior art onto the then-current ''single five-layer stack''. The architecture later ''split that stack into two orthogonal axes'' — INFRA (FLOW · carriage, relay-floor → lararium → nexusGroup → DreamNet) ⊥ WHO (read · membership, vessel-key → personaGroup → cabalGroup), crossing at the vessel. The component rows below still hold one-for-one; only the //ladder// they sit in dissolved into a 2D coordinate. §4 #divergences carries the correction; the live model stands at <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology>>.
 
 !!! Layer 1: device-vessel
 
@@ -515,7 +514,7 @@ QR/file/DM ceremony maps exactly to the Seitan token exchange pattern (Keybase, 
 Most prior art (Matrix, Hypercore) assumes always-on servers as the fundamental unit. DreamNet's browser tab as first-class sovereign vessel appears more aggressive than any production system. The risks (ephemeral IndexedDB, no stable network address, short lifetime) sit at engineering level, not architectural level.
 
 ''2. Two-axis topology vs. flat federation''
-Matrix and ActivityPub use two layers: client and server/homeserver. DreamNet runs two orthogonal axes crossing at the vessel — INFRA (relay-floor → lararium → nexusGroup → DreamNet) carrying FLOW, SOCIAL (vessel-key → personaGroup → cabalGroup) carrying WHO — each with explicit sovereignty semantics at its boundaries. The principled motivation: carriage (who relays whose sealed bytes) stays orthogonal to membership (who may read), so a node carries without reading (the relay floor); the shrine tiers (household → neighborhood → civic) still map to real social scale. Risk: coordination complexity where the axes cross. (See <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology >>.)
+Matrix and ActivityPub use two layers: client and server/homeserver. DreamNet runs two orthogonal axes crossing at the vessel — INFRA (relay-floor → lararium → nexusGroup → DreamNet) carrying FLOW, SOCIAL (vessel-key → personaGroup → cabalGroup) carrying WHO — each with explicit sovereignty semantics at its boundaries. The principled motivation: carriage (who relays whose sealed bytes) stays orthogonal to membership (who may read), so a node carries without reading (the relay floor); the shrine tiers (household → neighborhood → civic) still map to real social scale. Risk: coordination complexity where the axes cross. (See <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology>>.)
 
 ''3. Shared grammar over shared implementation''
 DreamNet explicitly rejects shared implementation as the interoperability surface. ActivityPub uses both. DreamNet's approach appears more philosophically consistent but harder to bootstrap: new implementations must correctly interpret shared vocabulary without reference to a canonical implementation. This requires excellent SharktoothSigil specification and strong test fixtures.
@@ -552,7 +551,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ''Prior art'': UCAN Revocation sub-spec; Keyhive revocation via group-CRDT; Local-First Auth revocation event
 
-''Now addressed:'' The content-resolution design splits revocation into two forward-only modes. ''authz-revoke'' drops the `#has` cap + drops the retention tag (cheap, forward-immediate) and rides a grow-only revocation-CID set that merges as a CRDT operation (Gate 2). ''content-revoke'' re-keys → new ciphertext → new cid → indirection-map update. Already-fetched bytes stay UNRECALLABLE by construction — no-global-now forbids deletion-across-caches, so the design names that boundary rather than pretending past it. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+''Now addressed:'' The content-resolution design splits revocation into two forward-only modes. ''authz-revoke'' drops the `#has` cap + drops the retention tag (cheap, forward-immediate) and rides a grow-only revocation-CID set that merges as a CRDT operation (Gate 2). ''content-revoke'' re-keys → new ciphertext → new cid → indirection-map update. Already-fetched bytes stay UNRECALLABLE by construction — no-global-now forbids deletion-across-caches, so the design names that boundary rather than pretending past it. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ---
 
@@ -567,7 +566,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ''Prior art'': Antimatter (Braid group) — first history-pruning text CRDT; Automerge's own compaction research; Git's `gc` and pack files
 
-''Now addressed:'' The content-resolution design attacks the dominant growth term directly — ''large bodies LEAVE the CRDT''. A carrier body becomes a skinny TW5 handle (hash + hint); only small mutable metadata rides the Automerge doc, while the heavy bytes land in the `@cad` content-addressed store (Iroh/Beelay blob-doc split). The op log stops accreting media; Beelay's sedimentree names the compaction shape for the residual sync history. (Edit-history tombstone GC — Gap 2's other leg — stays open.) <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+''Now addressed:'' The content-resolution design attacks the dominant growth term directly — ''large bodies LEAVE the CRDT''. A carrier body becomes a skinny TW5 handle (hash + hint); only small mutable metadata rides the Automerge doc, while the heavy bytes land in the `@cad` content-addressed store (Iroh/Beelay blob-doc split). The op log stops accreting media; Beelay's sedimentree names the compaction shape for the residual sync history. (Edit-history tombstone GC — Gap 2's other leg — stays open.) <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ---
 
@@ -592,7 +591,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ''Prior art'': Braid-HTTP (IETF draft); Matrix Server-Server API; Hyperswarm (topic-based peer discovery); Set reconciliation
 
-''Now addressed (discovery / anti-entropy leg):'' The content-resolution design specifies a ''DHT-free'' discovery chain for resolving content across the mesh: hint-named provider (Iroh BlobTicket `hash + NodeAddr`, discovery collapsed into the reference) → connected bag-peers `want-have` (Bitswap) → named bag-scoped tracker/rendezvous (opt-in, signed, replaceable) → declared-unresolved = PENDING (a first-class lawful state, never a thrown error). The one structurally-forced global Kademlia DHT stays BEHIND a causal-island boundary; the per-nexus `@oracle` root/index docId serves as a rendezvous ADDRESS, not a shared present. (The merge-type-negotiation envelope leg stays open.) <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+''Now addressed (discovery / anti-entropy leg):'' The content-resolution design specifies a ''DHT-free'' discovery chain for resolving content across the mesh: hint-named provider (Iroh BlobTicket `hash + NodeAddr`, discovery collapsed into the reference) → connected bag-peers `want-have` (Bitswap) → named bag-scoped tracker/rendezvous (opt-in, signed, replaceable) → declared-unresolved = PENDING (a first-class lawful state, never a thrown error). The one structurally-forced global Kademlia DHT stays BEHIND a causal-island boundary; the per-nexus `@oracle` root/index docId serves as a rendezvous ADDRESS, not a shared present. (The merge-type-negotiation envelope leg stays open.) <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ---
 
@@ -617,7 +616,7 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 
 ''Prior art'': Hypercore `core.discoveryKey` vs. `core.key`; UCAN audience field; Magenc (Spritely) capability-protected content addressing
 
-''Now addressed:'' The content-resolution design keeps the two keys strictly separate via verify-cap ⊥ read-cap (Tahoe). The address a peer advertises and verifies against reads `cid = BLAKE3(''ciphertext'')` — a discovery/verify surface that reveals nothing readable; the decryption key rides a separate CGKA/BeeKEM channel and never touches the node (node routes and verifies ciphertext, MUST NOT decrypt — the MLS Delivery-Service keel). Advertising presence for resolution exposes no read capability. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+''Now addressed:'' The content-resolution design keeps the two keys strictly separate via verify-cap ⊥ read-cap (Tahoe). The address a peer advertises and verifies against reads `cid = BLAKE3(''ciphertext'')` — a discovery/verify surface that reveals nothing readable; the decryption key rides a separate CGKA/BeeKEM channel and never touches the node (node routes and verifies ciphertext, MUST NOT decrypt — the MLS Delivery-Service keel). Advertising presence for resolution exposes no read capability. <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
 ---
 
@@ -663,14 +662,14 @@ The UCAN spec explicitly flags the confinement problem: certificate capabilities
 | ''Gap 7'' | Formal attenuation rules for ABILITY_LADDER |
 | ''Gap 8'' | Long-partition / fork reconciliation behavior |
 
-//Gaps 1 · 2 · 4 · 6 land under the converged content-resolution design (large bodies leave the CRDT: skinny handle + `@cad` ciphertext-addressed CAS + `resolveByCid` over three gates + DHT-free discovery). See <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>.//
+//Gaps 1 · 2 · 4 · 6 land under the converged content-resolution design (large bodies leave the CRDT: skinny handle + `@cad` ciphertext-addressed CAS + `resolveByCid` over three gates + DHT-free discovery). See <<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>.//
 
 ---
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;pZIzrZrMgEUW32U_PlE9HuuV4ucdrddbObcuGB8i1h0
+<<^ code="&#x0003;">>ni:///sha-256;D7L3Ma1nd_zn5DSMAi12AzcEyXWpBa992c-ykvCOdac
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

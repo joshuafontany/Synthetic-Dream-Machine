@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
 ```toml meta
 file-path                              = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki.mem"
 l-space                                = "stable:@elyncia"
 mana                                   = 17
 manao                                  = 16
 manaoio                                = 16
-register                               = "Synthesis-Canon"
 sdm-character-ability-scores-agility   = 1
 sdm-character-ability-scores-aura      = 2
 sdm-character-ability-scores-charisma  = 2
@@ -31,9 +30,9 @@ type                                   = "text/memetic-wikitext+tiddlywiki"
 uri-path                               = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lady Aki — Character Sheet
 
@@ -45,9 +44,9 @@ uri-path                               = "ha.ka.ba/elyncia/characters/primary-ch
 
 Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her potions heal. Her illusions open doors. Spores, silk, bells, and blessings follow her path.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #origin >>
+<<~ ahu #origin>>
 
 !! Origin ~ How the Household Began
 
@@ -75,9 +74,9 @@ rather than a thing to resolve
 and never got it back. From the Glade's side, Aki's household reads as ''an unreturned asset with
 opinions''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #quick-card >>
+<<~ ahu #quick-card>>
 
 !! Quick Card
 
@@ -95,9 +94,9 @@ opinions''.
 
 ''Table instinct:'' Aki prepares the battlefield before battle claims the scene.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #visual-registers >>
+<<~ ahu #visual-registers>>
 
 !! Visual Registers
 
@@ -115,9 +114,9 @@ The glamour softens Aki's chitinous body for social passage. It does not erase h
 
 The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward papers, bells, and shrine geometry mark the room. Ichi may step in as armor or shield.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stats >>
+<<~ ahu #stats>>
 
 !! Ability Scores
 
@@ -127,9 +126,9 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 
 ''Reading:'' Thought and Aura drive DreamNet contact, wizardry, ritual analysis, glamour, and shrine work. Agility and Endurance keep Aki mobile enough for field pressure. Strength does not carry the build.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #heritage >>
+<<~ ahu #heritage>>
 
 !! Heritage — Spider Folk
 
@@ -163,9 +162,9 @@ Aki's true chitin grants ''+1 Armor'' and ''+1 Ward''. This comes from her body,
 
 This stacks with Ichi when worn, because Heritage Armoured Body comes from the operator's form rather than equipment.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #traits >>
+<<~ ahu #traits>>
 
 !! Traits
 
@@ -190,9 +189,9 @@ Good directions:
 * survival through retreat,
 * mycelial or silk-field problem solving.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #defenses >>
+<<~ ahu #defenses>>
 
 !! Defenses
 
@@ -223,7 +222,7 @@ Counts the Armor and Ward the gear ledger already buys and Aki already wears.
 
 !!! Open Fork — Which Base Row Governs
 
-<<~ pranala #defense-source-fork from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
+<<~ pranala #defense-source-fork from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling>>
 ''Which base row governs play stays open at the table.'' The two tables differ by 2 Physical
 and 4 Mental, so the fork moves every contested roll against Aki. The gear carries canonical
 numbers — Ruffle Coat comparator `armor +2`, Moss Hat `ward +2`, Dust Face `ward +1`, Safety
@@ -262,9 +261,9 @@ powered symbiote asks its own question. Settle the fork first; this table follow
 
 ''Spider Folk Heritage'' may apply where webs, thread systems, silk structures, climbing, ambush geometry, vibration-reading, or spider-fae social logic matter.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #inventory >>
+<<~ ahu #inventory>>
 
 !! Inventory — Slots and Units
 
@@ -294,7 +293,7 @@ cost no slot while they stay pocketed.
 
 !!! Open Fork — The Eighth Slot
 
-<<~ pranala #inventory-overrun from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
+<<~ pranala #inventory-overrun from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally>>
 The tally runs ''one slot over'' at 8 against 7. Three cures reach it, each a table call:
 
 # ''Worn clothing rides free.'' The Quickstart treats a wallet as part of clothing; a table may
@@ -308,9 +307,9 @@ The tally runs ''one slot over'' at 8 against 7. Three cures reach it, each a ta
 Nothing here forces a choice; the sheet names the overrun so the table stops discovering it
 mid-delve.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #gear-on-body >>
+<<~ ahu #gear-on-body>>
 
 !! Gear — On Body
 
@@ -328,9 +327,9 @@ mid-delve.
 
 The hat uses a wide-brimmed traveling shrine silhouette, not a tall ritual hat. It gives dust, sun, insect, modesty, anonymity, and threshold-focus fiction.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #gear-free-kit >>
+<<~ ahu #gear-free-kit>>
 
 !! Free Starting Gear
 
@@ -376,9 +375,9 @@ Functions:
 * veil or illusion procedure anchors,
 * ritual relay geometry.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #gear-in-shrine >>
+<<~ ahu #gear-in-shrine>>
 
 !! Gear — In Shrine
 
@@ -393,9 +392,9 @@ Functions:
 | Purification Gourd | Water Extractor | moisture extraction / field purification |
 | Hard-Silk Leashes x2 | Hard Leash | chitin-silk belay lines / shrine rigging |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #resources >>
+<<~ ahu #resources>>
 
 !! Budget and Reserves
 
@@ -415,9 +414,9 @@ Discounts track supply channel and cultural fit:
 * Spider Folk heritage: 50%
 * stacked SF+AG: 42.5% of list price
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #powers >>
+<<~ ahu #powers>>
 
 !! Powers
 
@@ -435,9 +434,9 @@ Power choices should support:
 
 ''Kapu:'' Do not treat Aki's visual glamour as a free active Power. It provides social and visual positioning until a selected Power or roll activates stronger mechanics.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ichi >>
+<<~ ahu #ichi>>
 
 !! Hallmark Companion — Ichi
 
@@ -489,9 +488,9 @@ Recharge requires a spare power source, recharging cradle/prayer altar, ley-line
 
 On a Defeat trigger while worn, Aki may eject instead of rolling personal Defeat. Ichi takes -1 Level. Aki and Ichi separate prone. Aki survives at current Life, unarmored.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #shrine >>
+<<~ ahu #shrine>>
 
 !! Sentient Infrastructure — Faerie-Ring Strandbeest-Shrine
 
@@ -531,9 +530,9 @@ Node affinities: `[spore] [biomancy] [dream]`
 
 A walking mushroom shrine with glowing sails does not sneak well. The sails can fold and the glow can dim, but the silhouette still invites attention, fear, worship, theft, or negotiation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ephyra >>
+<<~ ahu #ephyra>>
 
 !! Tasked Spirits — Ephyra
 
@@ -551,9 +550,9 @@ Typical duties:
 
 ''Kapu:'' Ephyra need narrow tasks. They do not replace player scouting, social choices, or delve risk.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fungus-gumi >>
+<<~ ahu #fungus-gumi>>
 
 !! Tasked Spirits — Fungus Gumi
 
@@ -566,9 +565,9 @@ Typical duties:
 * work crew helpers,
 * impromptu combat units.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #spore-mother-ontology >>
+<<~ ahu #spore-mother-ontology>>
 
 !! Spore-Mother Ontology
 
@@ -587,9 +586,9 @@ Includes:
 * strobilae,
 * fruiting bodies.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #company-context >>
+<<~ ahu #company-context>>
 
 !! Company Context
 
@@ -603,9 +602,9 @@ Freyja controls:
 
 Other player-side clusters cover long-range scouting, infiltration, ship command, morale, crew coordination, and company cargo. Aki supports the company without replacing those niches.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #play-loop >>
+<<~ ahu #play-loop>>
 
 !! Aki's Field Loop
 
@@ -619,9 +618,9 @@ Use this at the table before opening deeper rules.
 # ''Spend a cost.'' Time, offering, visibility, battery, gear, or risk.
 # ''Extract.'' Retreat counts as success when the company returns with map, leverage, salvage, or secret.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #costs-and-boundaries >>
+<<~ ahu #costs-and-boundaries>>
 
 !! Costs and Boundaries
 
@@ -638,9 +637,9 @@ Aki's support stays powerful because it asks for cost.
 | Gear reskins | mechanics stay canonical |
 | Guild credit | strongest where Guild recognition holds |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #meme-pattern >>
+<<~ ahu #meme-pattern>>
 
 !! Meme Pattern
 
@@ -656,54 +655,54 @@ This character sheet models one complete playable meme:
 
 Companion sheets should preserve this rhythm: identity, quick card, modes, stats or ratings, rules, costs, open questions, and edges.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-questions >>
+<<~ ahu #open-questions>>
 
 !! Open Questions
 
-<<~ pranala #open-powers from=? -> to=lar:///elyncia.neo-thracia.opens/characters/lady-aki#/powers >>
+<<~ pranala #open-powers from=? -> to=lar:///elyncia.neo-thracia.opens/characters/lady-aki#/powers>>
 Final Powers remain deferred.
 
-<<~ pranala #open-traits from=? -> to=lar:///elyncia.neo-thracia.opens/characters/lady-aki#/open-traits >>
+<<~ pranala #open-traits from=? -> to=lar:///elyncia.neo-thracia.opens/characters/lady-aki#/open-traits>>
 Six trait slots remain open.
 
-<<~ pranala #open-ichi-dreams from=? -> to=lar:///elyncia.neo-thracia.opens/characters/ichi#/dreams >>
+<<~ pranala #open-ichi-dreams from=? -> to=lar:///elyncia.neo-thracia.opens/characters/ichi#/dreams>>
 What does Ichi dream?
 
-<<~ pranala #open-mother-spore from=? -> to=lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine#/mother-spore >>
+<<~ pranala #open-mother-spore from=? -> to=lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine#/mother-spore>>
 How does the Mother Spore understand Aki's household compact?
 
-<<~ pranala #open-ephyra-rules from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/ephyra-rules >>
+<<~ pranala #open-ephyra-rules from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/ephyra-rules>>
 Exact Ephyra task-spirit mechanics need final table handling.
 
-<<~ pranala #open-defense-source from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling >>
+<<~ pranala #open-defense-source from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/defense-source-ruling>>
 Does worn Armor and do trinket Wards feed Defense, or do trinket Wards feed saves alone?
 Two base tables ride until the referee rules (see #defense-source-fork). The answer moves Aki's
 Mental Defense by 4 and her Physical by 2.
 
-<<~ pranala #open-slot-tally from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally >>
+<<~ pranala #open-slot-tally from=? -> to=lar:///elyncia.neo-thracia.opens/playtest/aki-slot-tally>>
 Aki's carried gear tallies 8 slots against 7 available. Three cures reach it; the table picks
 one (see #inventory-overrun).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///elyncia.neo-thracia.opens/characters/ichi >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
-<<~ loulou lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine >>
-<<~ loulou lar:///elyncia.neo-thracia.opens/company/alpha-playtest-company >>
-<<~ loulou lar:///elyncia.neo-thracia.opens/gear/lady-aki-ledger >>
-<<~ loulou lar:///elyncia.neo-thracia.opens/mission/session-zero-thracia >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///elyncia.neo-thracia.opens/characters/ichi>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests>>
+<<~ loulou lar:///elyncia.neo-thracia.opens/characters/faerie-ring-strandbeest-shrine>>
+<<~ loulou lar:///elyncia.neo-thracia.opens/company/alpha-playtest-company>>
+<<~ loulou lar:///elyncia.neo-thracia.opens/gear/lady-aki-ledger>>
+<<~ loulou lar:///elyncia.neo-thracia.opens/mission/session-zero-thracia>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #residue >>
+<<~ ahu #residue>>
 
 !! Residue
 
@@ -716,8 +715,8 @@ Keep silhouettes distinct:
 
 Do not collapse these roles.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zUN4SmzXgy6L6ZkTp_a6UAMcSB2ks2KdflKLQBDwsYk
+<<^ code="&#x0003;">>ni:///sha-256;0uu7Ol5MbwOlVnrpRk0EBjpcaoXth-tyyvkmlnonAxg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

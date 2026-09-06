@@ -21,34 +21,34 @@ const norm = (s: string) => normalizeMemeSource(s).text;
 
 describe("a framing sigil names its ends", () => {
   test("the opener takes from= and to=", () => {
-    expect(norm('<<^ code="&#x0001;" ? -> lar:///a.b.c/x >>'))
-      .toBe('<<^ code="&#x0001;" from=? -> to=lar:///a.b.c/x >>');
+    expect(norm('<<^ code="&#x0001;" ? -> lar:///a.b.c/x>>'))
+      .toBe('<<^ code="&#x0001;" from=? -> to=lar:///a.b.c/x>>');
   });
 
   test("a namespace keeps its place ahead of the ends", () => {
     // The META holds the authority the SOH opener derives from — stating a namespace on the head alone
     // reads as drift and clears. So a faithful carrier declares it.
     const head = (ends: string) =>
-      ['```toml meta', 'namespace = "glyph"', '```', '', `<<^ code="&#x0001;" namespace="glyph" ${ends} >>`].join("\n");
+      ['```toml meta', 'namespace = "glyph"', '```', '', `<<^ code="&#x0001;" namespace="glyph" ${ends}>>`].join("\n");
     expect(norm(head('? -> lar:///a.b.c/x'))).toBe(head('from=? -> to=lar:///a.b.c/x'));
   });
 
   test("the closer names the end the arrow reaches", () => {
-    expect(norm('<<^ code="&#x0004;" -> ? >>')).toBe('<<^ code="&#x0004;" -> to=? >>');
+    expect(norm('<<^ code="&#x0004;" -> ?>>')).toBe('<<^ code="&#x0004;" -> to=?>>');
   });
 
   test("the shifted pair carries the same law", () => {
-    expect(norm('<<^ code="&#x0011;" ? -> lar:///a.b.c/x >>'))
-      .toBe('<<^ code="&#x0011;" from=? -> to=lar:///a.b.c/x >>');
-    expect(norm('<<^ code="&#x0014;" -> ? >>')).toBe('<<^ code="&#x0014;" -> to=? >>');
+    expect(norm('<<^ code="&#x0011;" ? -> lar:///a.b.c/x>>'))
+      .toBe('<<^ code="&#x0011;" from=? -> to=lar:///a.b.c/x>>');
+    expect(norm('<<^ code="&#x0014;" -> ?>>')).toBe('<<^ code="&#x0014;" -> to=?>>');
   });
 
   test("★ an arrow outside the framing set stays as it stands ★", () => {
     for (const src of [
-      '<<~moves alpha -> beta gamma delta >>',
-      '<<~ pranala #x from=? -> to=lar:///a.b.c family=reference role=source >>',
-      '<<~ lares aim from=lar:///a.b.c -> to=lar:///d.e.f >>',
-      '<<^ code="&#x0002;" >>',
+      '<<~moves alpha -> beta gamma delta>>',
+      '<<~ pranala #x from=? -> to=lar:///a.b.c family=reference role=source>>',
+      '<<~ lares aim from=lar:///a.b.c -> to=lar:///d.e.f>>',
+      '<<^ code="&#x0002;">>',
       'A prose line with an arrow -> and a question ? in it.',
     ]) {
       expect(norm(src)).toBe(src);
@@ -56,14 +56,14 @@ describe("a framing sigil names its ends", () => {
   });
 
   test("★ a head that already names its ends stands unchanged ★", () => {
-    const done = '<<^ code="&#x0001;" from=? -> to=lar:///a.b.c/x >>';
+    const done = '<<^ code="&#x0001;" from=? -> to=lar:///a.b.c/x>>';
     expect(norm(done)).toBe(done);
-    const r = normalizeMemeSource('<<^ code="&#x0001;" ? -> lar:///a.b.c/x >>');
+    const r = normalizeMemeSource('<<^ code="&#x0001;" ? -> lar:///a.b.c/x>>');
     expect(normalizeMemeSource(r.text).text).toBe(r.text);
   });
 
   test("the transform reports itself", () => {
-    const r = normalizeMemeSource('<<^ code="&#x0001;" ? -> lar:///a.b.c/x >>');
+    const r = normalizeMemeSource('<<^ code="&#x0001;" ? -> lar:///a.b.c/x>>');
     expect(r.changed).toBe(true);
     expect(r.notes.join(" ")).toMatch(/end|from|to/i);
   });
@@ -80,6 +80,6 @@ describe("the writer emits the ends already named", () => {
     const map = new Map(records.map((r) => [String(r.title), r]));
     const out = expandMemeRefs((t) => map.get(t), URI)!;
     expect(out).toContain(`from=? -> to=${URI}`);
-    expect(out).toMatch(/-> to=\? >>/);
+    expect(out).toMatch(/-> to=\?>>/);
   });
 });

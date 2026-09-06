@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/items/uvg/porters-pebble >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/items/uvg/porters-pebble>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/items/uvg/porters-pebble.mem"
 mana      = 11
 manao     = 16
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "UVG relic witness for Porter's Pebble — pebble-machine provenance + the Floating Disc 'Stuckforce Relic' variant, cold-load"
 l-space   = "sdm"
@@ -15,11 +14,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/items/uvg/porters-pebble"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! UVG Witness — Porter's Pebble
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -32,9 +31,9 @@ basis = "Floating Disc module, 'Stuckforce Relic' variant — 'a found disc or p
 
 UVG is dense with Long Ago relics — pebble-machines, biomantic stores, half-fossilised devices that still run a single function long after their makers. The Porter's Pebble takes the Floating Disc module's own ''Stuckforce Relic'' variant at its word: a found object that //holds the Power// so the bearer need not practise it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lift >>
+<<~ ahu #lift>>
 
 !! What the module lifts
 
@@ -44,25 +43,25 @@ The v0.1 ''Porter's Pebble'' is the epic's first ''module-nesting'' proof:
 * The carried Floating Disc module is reused ''unchanged'': same range, duration, overcharge, mishaps. The relic alters only //who sources the Power and how it is held// (one item slot, Life locked in the object, recharges in sunlight per the `item` mount-point contract).
 * `#composes` is ''not'' used here. Entity→module is `#has`; `#composes` stays reserved for module→module wiring (a Power that triggers or riders another Power).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fidelity >>
+<<~ ahu #fidelity>>
 
 !! Fidelity notes
 
 * "Recharges in sunlight" mirrors the UVG machine-human pattern (e.g. Vicar recharging in sunshine); it is an SDM interpolation for the relic's P reserve, not a named UVG rule.
 * The `item` mount-point's 7 + Strength carry-capacity and container sub-rule come from the Vastlands Guidebook, already witnessed at that mount-point; the Pebble inherits them rather than restating.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/items/porters-pebble>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;gonMVGYThrWs2htaAajmCrH4bzeFej1O0YflkwnXuok
+<<^ code="&#x0003;">>ni:///sha-256;S8bp04p2oBOYG3I18-MDsqdb26GLDtEYYYjPXQEb8uo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

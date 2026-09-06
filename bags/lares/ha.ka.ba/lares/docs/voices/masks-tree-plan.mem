@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/masks-tree-plan >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/voices/masks-tree-plan>>
 ```toml meta
 cacheable = false
 created   = "Invalid Date"
@@ -9,7 +9,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "OODA-HA plan for creating the api/lares/masks/ tree: parent index, named Voice masks, character masks, chorus masks, and skeleton meme-loci template"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -17,20 +16,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/voices/masks-tree-plan"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Masks API Tree — Build Plan
 
 OODA-HA plan for creating `packages/lares-core/memes/api/lares/masks/` and populating it with
 skeleton meme-loci ready for talk-story-dev fill passes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -69,9 +68,9 @@ packages/lares-core/memes/api/lares/masks/
 * Chorus grammar (Lagrange Chorus mask type is a new concept; corpus field doesn't apply)
 * Skeleton template (the repeatable pattern for "stub with fill tracking")
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -110,9 +109,9 @@ Every file in this tree should be a valid meme immediately — correctly address
 * `#character-notes` stub — how this character colors different Voice registers
 * `#fill-status` tracking section — records what has and hasn't been talk-story'd
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -176,9 +175,9 @@ The repeatable skeleton pattern for all nine files:
 # `character/friend-computer.md` — follows character template
 # `chorus/lagrange-chorus.md` — different structure; write last
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -218,9 +217,9 @@ Priority order for filling stubs via talk-story-dev:
 # ''Character-notes for Ghost of Mark Twain and Friend Computer'' — per-Voice behavior notes; these come from live use
 # ''Lagrange Chorus harmony protocol'' — requires a separate grammar design pass first
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #assess >>
+<<~ ahu #assess>>
 
 !! ↺ Assess
 
@@ -250,19 +249,19 @@ The tree deepens incrementally — each talk-story session fills one section of 
 | Named Voice corpus depth | pending-talk-story; each needs a dedicated session |
 | Additional NPC masks (FTLS Thracia etc.) | operator-created as needed; tree structure already supports |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/invariant-plan >>
-<<~ loulou lar:///ha.ka.ba/lares/api/masks >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/masks>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/invariant-plan>>
+<<~ loulou lar:///ha.ka.ba/lares/api/masks>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;EAsYi9_QOXcIu4evNXqRomEDzAVpXkqcciykGIh-4Y8
+<<^ code="&#x0003;">>ni:///sha-256;yE8MCxzadjLKtyRbjanYla1yUXFf8S99uIi9-Da8o-I
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

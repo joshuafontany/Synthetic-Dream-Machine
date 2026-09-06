@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/browser/pono-charter >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/browser/pono-charter>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/browser/pono-charter.mem"
@@ -8,21 +8,20 @@ l-space   = "lararium"
 mana      = 19
 manao     = 18
 manaoio   = 18
-register  = "Synthesis"
 retain    = true
 role      = "Constitutional charter for lararium-browser: detached worker-authority pool vessel"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/browser/pono-charter"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! lararium-browser Pono Charter
 
 Constitutional doc. Governs what code enters the package, how it survives, and what gets deleted.
 Code movement requires a matching entry in the ''migration allowlist'' (`deletion-map.md`).
 
-<<~ ahu #vessel-law >>
+<<~ ahu #vessel-law>>
 
 !! Vessel Law
 
@@ -83,9 +82,9 @@ browser security model. The obligation sits at the serving edge:
 During local development, the Vite dev server's same-origin constraint provides equivalent
 protection; no explicit CSP gets required in that context.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #package-law >>
+<<~ ahu #package-law>>
 
 !! Package Law
 
@@ -99,9 +98,9 @@ Three packages carry the browser vessel. Responsibility divides cleanly.
 
 The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki-worker.ts`, and the `BrowserAuthorityPool` implementation (S0–S3 landed; §8 gate closed). The open shore for S9 S4: real boot path — `IndexedDBStorageAdapter` per island Worker Repo, WebCrypto-derived operator keypair, `runFoundingCeremony` + `runApplyAdmitPayload` from `@lararium/keyhive`, presence via `broadcast()`. Island Sovereignty Law §1–§8 all hold gate proofs. New code enters by passing the migration allowlist check.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-allowlist >>
+<<~ ahu #migration-allowlist>>
 
 !! Migration Allowlist
 
@@ -113,9 +112,9 @@ Code moves into `@lararium/browser` only when it satisfies ''all three'' tests:
 
 Code that passes all three gets a migration entry in `deletion-map.md#migration-log`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-questions >>
+<<~ ahu #open-questions>>
 
 !! Open Questions
 
@@ -127,19 +126,19 @@ These questions do not block charter adoption. They require measurement before r
 # ''Sharedisland timing.'' Dedicated workers first. Sharedisland deferred until dedicated path proves stable.
 # ''Pool topology.'' Hot wiki and admin wiki may share one pool with capability flags or run two pools with shared law. Defer until pool metrics land.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint >>
-<<~ loulou lar:///ha.ka.ba/lararium/browser/deletion-map >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface >>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/full-detached-worker-authority-pool-sprint>>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/deletion-map>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-browser-surface>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;UbzLpfhBMAmB48vjB_Aaym3ZeyRzGY6Qlq_RdNqL1y8
+<<^ code="&#x0003;">>ni:///sha-256;03MHX9yQBlHgmhnvAaWAhRmimu5kuAwaJPR1FhhBXHQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

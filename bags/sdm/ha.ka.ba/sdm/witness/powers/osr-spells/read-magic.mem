@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/witness/powers/osr-spells/read-magic>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/witness/powers/osr-spells/read-magic.mem"
 mana      = 11
 manao     = 16
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "OSR spell witness for Read Magic — Basic/Expert/Rules-Cyclopedia provenance, cold-load"
 l-space   = "sdm"
@@ -15,11 +14,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/read-magic"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! OSR Witness — Read Magic
 
-<<~ ahu #basic >>
+<<~ ahu #basic>>
 
 !! Basic
 
@@ -34,9 +33,9 @@ reversible = false
 
 The magic-user may read — not speak — magical words or runes, such as those on scrolls and items. Unfamiliar magic writing cannot be understood without this spell; once read with it, that magic can be read or spoken later without the spell. Spell books are written in magical words, and only their owners may read them without this spell.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #expert >>
+<<~ ahu #expert>>
 
 !! Expert
 
@@ -49,9 +48,9 @@ standalone-description = false
 
 The Expert Set reproduces the MU1 spell list only; it carries no standalone description. The Basic description governs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cyclopedia >>
+<<~ ahu #cyclopedia>>
 
 !! Rules Cyclopedia
 
@@ -66,9 +65,9 @@ reversible = false
 
 The spellcaster may read — not speak — magical words or runes on scrolls and items. Unfamiliar magic writing requires the spell; once read with it, that magic reads or speaks later without a spell. Spell books are written in magical words; only their owners read them without this spell.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #analysis >>
+<<~ ahu #analysis>>
 
 !! Conversion Analysis
 
@@ -79,19 +78,19 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 * The source defines magical literacy and archive access, not combat output — Read Magic carries no `attack` hook.
 * Expert list continuity confirms first-tier (P:2) and adds no new rule burden.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells >>
-<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/read-magic >>
-<<~ loulou lar:///ha.ka.ba/sdm/source/becmi/basic >>
-<<~ loulou lar:///ha.ka.ba/sdm/source/becmi/rules-cyclopedia >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/witness/powers/osr-spells>>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/read-magic>>
+<<~ loulou lar:///ha.ka.ba/sdm/source/becmi/basic>>
+<<~ loulou lar:///ha.ka.ba/sdm/source/becmi/rules-cyclopedia>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;hP65KYBENu7B_IrKClPqASezW4KtOeijdkdNonU4XPY
+<<^ code="&#x0003;">>ni:///sha-256;mBhDdATbre-_zVzz9BjngVK77A9135hfF2ApWL3SQ2g
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

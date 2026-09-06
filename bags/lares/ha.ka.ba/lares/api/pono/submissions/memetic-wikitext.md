@@ -8,7 +8,7 @@
 
 ## Abstract
 
-Memetic-wikitext (`text/memetic-wikitext`) defines a composable, wikitext-derived markup in which every active construct rides one outer delimiter — the **sharktooth procedure call** `<<~ … >>` — and reads on two layers at once: a **compile-time graph** reading and a **render-time semantic** reading. Authors write content, typed graph edges, definitions, conditionals, iteration, and concurrency coordination through one uniform sigil surface. The language carries a TiddlyWiki5 and Verse heritage and addresses its content by the sibling `lar:` URI scheme.
+Memetic-wikitext (`text/memetic-wikitext`) defines a composable, wikitext-derived markup in which every active construct rides one outer delimiter — the **sharktooth procedure call** `<<~ …>>` — and reads on two layers at once: a **compile-time graph** reading and a **render-time semantic** reading. Authors write content, typed graph edges, definitions, conditionals, iteration, and concurrency coordination through one uniform sigil surface. The language carries a TiddlyWiki5 and Verse heritage and addresses its content by the sibling `lar:` URI scheme.
 
 This specification names the lexical structure, a formal surface grammar, the dual-layer processing model, the typed-edge (pranala) system, and the conformance, media-type, and security obligations a processor MUST meet. It does **not** enumerate every sigil; the live sigil registry rides the runtime **kernel** face, and the epistemic ontology rides the `api/mu` canon.
 
@@ -48,7 +48,7 @@ The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **
 | --- | --- |
 | **carrier** | one document standing in the transmission frame; the frame vocabulary lives in [FRAMING]. |
 | **meme** | a named, addressable unit of content; a carrier names one at its identity block. |
-| **sigil** | an active construct delimited by the sharktooth `<<~ … >>`. |
+| **sigil** | an active construct delimited by the sharktooth `<<~ …>>`. |
 | **worksite** (`ahu`) | an addressable scope boundary inside a carrier; a child-slot mount-point. |
 | **pranala** | a typed graph edge between memes. |
 | **family** | the category a pranala edge declares (#/pranala). |
@@ -112,12 +112,12 @@ The `<<` `>>` pair forms the outer delimiter family for every active sigil. The 
 | Prefix | TW5 macro name | Register | Example |
 |---|---|---|---|
 | --- | --- | --- | --- |
-| `<<~` | `~` | primary sigil — the speaking set | `<<~ ahu #id >>`, `<<~ aka lar:///uri >>` |
-| `<<~/` | `~/name` | block close | `<<~/ahu >>` |
-| `<<~!` | `~!` | pragma (definition) | `<<~! wehe name(p) >>` |
-| `<<~?` | `~?` | unresolved-pressure | `<<~? #fragment >>` |
-| `<<^` | `^` | control set — the carrier frame ([FRAMING]) | `<<^ code="&#x0002;" >>` |
-| `<<!` | `!WORD` | declaration register ([FRAMING] #declaration-register) | `<<!DOCTYPE … >>` |
+| `<<~` | `~` | primary sigil — the speaking set | `<<~ ahu #id>>`, `<<~ aka lar:///uri>>` |
+| `<<~/` | `~/name` | block close | `<<~/ahu>>` |
+| `<<~!` | `~!` | pragma (definition) | `<<~! wehe name(p)>>` |
+| `<<~?` | `~?` | unresolved-pressure | `<<~? #fragment>>` |
+| `<<^` | `^` | control set — the carrier frame ([FRAMING]) | `<<^ code="&#x0002;">>` |
+| `<<!` | `!WORD` | declaration register ([FRAMING] #declaration-register) | `<<!DOCTYPE …>>` |
 | `<<` *(bare)* | *the name itself* | inherited TW5 macro call (superset) | `<<macroName params>>` |
 
 ### Every sigil IS a TiddlyWiki5 macro call
@@ -194,9 +194,9 @@ Memetic-wikitext SHALL read as a **superset of TW5 wikitext**: every valid TW5 w
 
 ### Shapes
 
-- **Inline** (self-closing): `<<~ loulou lar:///uri >>`
-- **Block** (open + close): `<<~ ahu #id >>` … `<<~/ahu >>`
-- **Pragma block** (`<<~!` … `<<~/name >>`): definitions
+- **Inline** (self-closing): `<<~ loulou lar:///uri>>`
+- **Block** (open + close): `<<~ ahu #id>>` … `<<~/ahu>>`
+- **Pragma block** (`<<~!` … `<<~/name>>`): definitions
 
 A `#fragment-id` after a sigil name names an addressable anchor. A block's close tag MUST match the innermost open of the same sigil name.
 
@@ -364,12 +364,12 @@ alone; nothing else has to carry it. A stored field naming the same parent would
 spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
 
 **Rendering carries a different relation, and no field could hold it.** One meme renders into many
-places — `<<~ ahu #x -> lar:///other >>` points a worksite at a full address — so the relation runs
+places — `<<~ ahu #x -> lar:///other>>` points a worksite at a full address — so the relation runs
 many-to-many and lives in the **markers that hold it**, in the carriers that write them. A child cannot
 list its renderers without a write on every transclusion.
 
-`<<~moves belonging -> rides/the-anchor-shape on/every-hop if/derived do/refuse-a-second-copy >>`
-`<<~moves rendering -> rides/the-marker on/the-renderer if/many-to-many do/stay-out-of-the-child >>`
+`<<~moves belonging -> rides/the-anchor-shape on/every-hop if/derived do/refuse-a-second-copy>>`
+`<<~moves rendering -> rides/the-marker on/the-renderer if/many-to-many do/stay-out-of-the-child>>`
 
 <a id="scope-model"></a>
 
@@ -386,7 +386,7 @@ State carries one of five principled scopes. A `kau` binding and a `kapu` qualif
 | `collective` | shared by group identity | group governance |
 | `universal` | no gate | no one — federated |
 
-Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope> >>` block renders only when the active scope reads at that level or wider. Context binds **lexically** through the `meme` sigil — a template MUST take its context through `meme` alone. *(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)*
+Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope>>>` block renders only when the active scope reads at that level or wider. Context binds **lexically** through the `meme` sigil — a template MUST take its context through `meme` alone. *(A web2.5 transport adapter MAY map these scopes to external objects behind a causal-island boundary; that mapping lives in the adapter's meme.)*
 
 <a id="recursion-guard"></a>
 
@@ -408,9 +408,9 @@ The compile-time DAG guard (boot-closure cycles) and the render-time stack guard
 `hana` admits a foreign grammar into a bounded worksite, keyed by a registered grammar-key:
 
 ```
-<<~ hana x-tiddlywiki-filter >>
+<<~ hana x-tiddlywiki-filter>>
 [tag[invariant]sort[title]]
-<<~/hana >>
+<<~/hana>>
 ```
 
 Guest grammar MUST leave host primitives intact, and malformed guest work MUST degrade locally, keeping the host parse alive. The inline conditional / iteration / query sigils accept a `filter-expr` as shorthand for a `hana` block over the same guest grammar. The host treats `filter-expr` content as opaque (#/grammar). Currently registered: `x-tiddlywiki-filter`.
@@ -419,13 +419,14 @@ Guest grammar MUST leave host primitives intact, and malformed guest work MUST d
 
 ## English Alias Namespace
 
-The `\` prefix marks the English alias namespace. An alias carries identical semantics to its Hawaiian canonical and MUST map to it before evaluation; the compiled tree carries only canonical names, and diagnostics MUST use the canonical name. Aliases serve onboarding and visual contrast; they introduce no separate AST node. A block alias closes with `<<~/\name >>`, which a processor MUST resolve to the canonical close before matching.
+The `\` prefix marks the English alias namespace. An alias carries identical semantics to its Hawaiian canonical and MUST map to it before evaluation; the compiled tree carries only canonical names, and diagnostics MUST use the canonical name. Aliases serve onboarding and visual contrast; they introduce no separate AST node. A block alias closes with `<<~/\name>>`, which a processor MUST resolve to the canonical close before matching.
 
 ### Two registers, one vocabulary
 
-A sigil stands in two places and reads differently in each. In an exchange turn `<<~ confidence Canon
-18/20 >>` **steers** — it vows a band the claim generates within. Inside a meme — a chat-history lares,
-an in-character scene, a transcript — the same glyphs read as **content**: what was said, quoted.
+A sigil stands in two places and reads differently in each. In an exchange turn `<<~ persona Ink-Clerk
+"role/Lorekeeper …" >>` **steers** — it names the move-set the following span draws from. Inside a meme — a
+chat-history lares, an in-character scene, a transcript — the same glyphs read as **content**: what was
+said, quoted.
 
 **The gradient already answers this, and answers it correctly.** A sigil resolves to whatever procedure
 its name binds; a name that binds none renders as its own text. That floor stands as no mere fallback the
@@ -536,41 +537,41 @@ lineage; the degradation property states the warrant.
 A carrier with an identity block, a worksite, and a typed edge — opening on the declaration every
 carrier states first ([FRAMING] #declaration-register):
 ````
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/example >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/example>>
 ```toml meta
 … bare toml-meta slot: identity payload (uri-path, type, role, register) …
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
-Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme >>.
-<<~ pranala #governs from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci family=control role=has >>
+<<~ ahu #head>>
+Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme>>.
+<<~ pranala #governs from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci family=control role=has>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;…
+<<^ code="&#x0003;">>ni:///sha-256;…
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>
 ````
 
 A definition summoned by name:
 ```
-<<~! wehe greeting(name "World") >>Hello, <<~ kahea name >>!<<~/wehe >>
-<<~ kahea greeting(name="Operator") >>
+<<~! wehe greeting(name "World")>>Hello, <<~ kahea name>>!<<~/wehe>>
+<<~ kahea greeting(name="Operator")>>
 ```
 
 A conditional over a guest filter, and an iteration:
 ```
-<<~ heihei [tag[ready-for-canon]] >>ready<<~ mukuwai >>holding<<~/heihei >>
-<<~ huli [tag[invariant]sort[title]] as item >><<~ kahea item >><<~/huli >>
+<<~ heihei [tag[ready-for-canon]]>>ready<<~ mukuwai>>holding<<~/heihei>>
+<<~ huli [tag[invariant]sort[title]] as item>><<~ kahea item>><<~/huli>>
 ```
 
 A canvas reaction wire (flow surface):
 ```
-<<~ papalohe DeviceA -> DeviceB trigger=OnEliminated fn=ShowScore >>
+<<~ papalohe DeviceA -> DeviceB trigger=OnEliminated fn=ShowScore>>
 ```
 
 <a id="references"></a>
@@ -593,14 +594,14 @@ A canvas reaction wire (flow surface):
 | heritage construct | memetic-wikitext analog |
 |---|---|
 | --- | --- |
-| TW5 `[[Title]]` link | `<<~ loulou lar:///uri >>` |
-| TW5 `{{Title}}` transclusion | `<<~ kahea lar:///uri >>` |
-| TW5 shadow tiddler | `<<~ aka lar:///uri >>` |
-| TW5 `\procedure` / `\function` | `<<~! wehe … >>` / `<<~! helu … >>` |
-| TW5 `<$tiddler>` context | `<<~ meme lar:///uri >>` |
-| TW5 `<$list>` filter / iterate | `<<~ wai … >>` / `<<~ huli … >>` |
-| Verse `sync`/`race`/`rush`/`branch` | `<<~ hui >>` / `holo` / `puka` / `lele` |
-| Verse device event binding | `<<~ papalohe … >>` (reaction) |
+| TW5 `[[Title]]` link | `<<~ loulou lar:///uri>>` |
+| TW5 `{{Title}}` transclusion | `<<~ kahea lar:///uri>>` |
+| TW5 shadow tiddler | `<<~ aka lar:///uri>>` |
+| TW5 `\procedure` / `\function` | `<<~! wehe …>>` / `<<~! helu …>>` |
+| TW5 `<$tiddler>` context | `<<~ meme lar:///uri>>` |
+| TW5 `<$list>` filter / iterate | `<<~ wai …>>` / `<<~ huli …>>` |
+| Verse `sync`/`race`/`rush`/`branch` | `<<~ hui>>` / `holo` / `puka` / `lele` |
+| Verse device event binding | `<<~ papalohe …>>` (reaction) |
 | Verse event (`listenable`/subscribe) vs expression value | `reaction` (event) vs `dataflow` (value) |
 
 <a id="annex-open"></a>

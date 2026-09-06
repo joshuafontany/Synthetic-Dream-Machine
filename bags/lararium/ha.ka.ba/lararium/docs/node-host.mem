@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/node-host >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/node-host>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/node-host.mem"
@@ -9,7 +9,6 @@ last-reviewed = "2026-07-18"
 mana          = 17
 manao         = 17
 manaoio       = 16
-register      = "Synthesis-Canon"
 retain        = true
 role          = "lararium-node host: path roots + corpus-source structural contract"
 source-symbol = "*"
@@ -19,9 +18,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/node-host"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Node Host
 
@@ -30,9 +29,9 @@ declares the `CorpusSource` shape a corpus entry carries. It resolves the
 package root, the bags root, and the repo root from stable references, so
 every downstream stratum reads one path law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law
 
@@ -43,9 +42,9 @@ climbs from the compiled module to its package root, `packages/lararium-node`.
 `LARES_MEMES_ROOT` names the `lares` bag under it. `REPO_ROOT` re-exports
 `repoRoot` directly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -68,9 +67,9 @@ bag   = "string"
 quine = "true (optional)"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #http-transport >>
+<<~ ahu #http-transport>>
 
 !! HTTP Transport
 
@@ -93,9 +92,9 @@ env-write-mode = "LARARIUM_WRITE_MODE"
 write-mode-value-required = "enabled"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -121,14 +120,14 @@ export interface CorpusSource {
 }
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/corpus-sources >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/corpus-sources>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;IbhGTDTQdYJPlkfr5ihG1fjlzrWt-a8rruCneRwJaGs
+<<^ code="&#x0003;">>ni:///sha-256;QP-8po0sIIFh1wfrw-oLPowAnMD3sNBYHHb6Ob74beg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/the-reachable-worlds.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "concept canon — the other worlds as real, reachable, and dream-mirrored: the Loom's stitches and its offcuts, the four arrival channels, and the referee law for what washes up"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/concepts/the-reachable-worlds"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Reachable Worlds
 
@@ -34,9 +32,9 @@ in the noosphere as a realm nobody built.
 and a dreamwalker can enter, and as ''debris'' that turns up in a market stall with no chain of
 provenance and no local smith who can name the alloy.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-dream-mirror >>
+<<~ ahu #the-dream-mirror>>
 
 !! The Dream-Mirror ~ the doctrine already in the gazetteer
 
@@ -60,9 +58,9 @@ snapping shut like traps, all of them ''real enough to walk in and to be hurt in
 pattern has reached into neighbouring worlds to patch her own seams//. The instrument that knows
 where the worlds touch, and therefore where the offcuts fall.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-channels >>
+<<~ ahu #the-channels>>
 
 !! Four Channels
 
@@ -80,9 +78,9 @@ where the worlds touch, and therefore where the offcuts fall.
 # ''The deep dream.'' Astral forms walking the noosphere links reach dream realms directly. No
   object crosses; the traveler does, and comes back changed, informed, or followed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-wrack >>
+<<~ ahu #the-wrack>>
 
 !! What Washes Up
 
@@ -108,9 +106,9 @@ from a world whose own age for it may have been last Tuesday. The Sea does not c
   wrack-line, and why the ''Cartographers of Unmade Places'' pay in coin or true memory for surveys
   of places that do not exist yet.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-walkers >>
+<<~ ahu #the-walkers>>
 
 !! Those Who Have Been
 
@@ -123,9 +121,9 @@ behind, and what still recognizes him there ride at his own hand.
 The ''Guild of Navigators'' of Hawaiki charts what can be charted. The ''Floating Librarians of
 Mu'' file what can be filed. Between them sits everything neither will put in writing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #referee >>
+<<~ ahu #referee>>
 
 !! Referee Law
 
@@ -142,17 +140,17 @@ started being a crossover.
 ''The naming stays open.'' A wrack-line, an arrival, an offcut of the Loom — the house has no
 settled pet-name for the tideline of worlds yet.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library>>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;n-KM5F68Bwr8SU0k2sAeGiKi4doQNaomQW0jYgsalFc
+<<^ code="&#x0003;">>ni:///sha-256;i3lic-PixQ9NLk4t3CoC263IiRWQZY1mA0wH9nJesgk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

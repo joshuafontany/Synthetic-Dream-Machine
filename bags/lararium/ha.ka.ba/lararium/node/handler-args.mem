@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/node/handler-args >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/node/handler-args>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/node/handler-args.mem"
@@ -8,16 +8,15 @@ heleuma   = "ba"
 mana      = 17
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "heleuma: command-handler argument coercers + requestId factory"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/node/handler-args"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -36,8 +35,8 @@ Every `CommandHandler` receives `args: Readonly<Record<string, unknown>>`. Befor
 
 These helpers carry no side effects or platform assumptions. They could become a TW5 `\function` block when the quine's wikitext evaluation surface reaches parity with synchronous JS coercion. Until then: `heleuma = "ba"`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;lSQxKl-k132vAHsneNYVxfWxfh-mGx6GlIffXgqQLUc
+<<^ code="&#x0003;">>ni:///sha-256;_jYMyd-JLn-OdjXt1SoMXxA6k-XsO8lLn6oqAL7t7Go
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

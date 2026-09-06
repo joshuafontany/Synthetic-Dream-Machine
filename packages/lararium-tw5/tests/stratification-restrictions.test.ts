@@ -11,9 +11,9 @@ import { stratify, stratificationRestrictions } from "../src/memetic-wikitext-se
 
 describe("stratificationRestrictions — a genuine shared-comparison-stalk", () => {
   const text = [
-    "<<~ confidence Synthesis 12/20 >> The palace holds the grain of the work and re-stands it.",
-    "<<~ ward ! L-Prime >> The house wakes from one libation-dish hydration, entire.",
-    "<<~ confidence Canon 18/20 >> Every plane already reads a pattern, never the raw water beneath.",
+    "<<~ confidence Synthesis 12/20>> The palace holds the grain of the work and re-stands it.",
+    "<<~ ward ! L-Prime>> The house wakes from one libation-dish hydration, entire.",
+    "<<~ confidence Canon 18/20>> Every plane already reads a pattern, never the raw water beneath.",
   ].join("\n\n");
 
   test("builds three SHEAF planes over the shared skeletal stalk (real redundancy, not disjoint)", () => {

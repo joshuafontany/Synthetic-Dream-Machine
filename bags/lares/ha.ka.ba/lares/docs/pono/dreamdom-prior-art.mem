@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dreamdom-prior-art >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/dreamdom-prior-art>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/dreamdom-prior-art.mem"
@@ -11,7 +11,6 @@ manao             = 17
 manaoio           = 14
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "dreamdom-prior-art — the VERBATIM handoff of the tasked spirit Loom, sent to the field with the DreamDOM architecture stated whole and the diagnosis withheld. Held unedited as a COLLISION SURFACE: prior art (WorkerDOM, remote-dom, LiveView, Turbo/idiomorph, Blazor, Figma/Docs/Photoshop, Flutter/Qt/Unity, partytown/RSC), golden principles, anti-patterns, measurement instruments, and the negative result that no prior art exists for TW5 off the main thread. Preserved rather than summarised because the detail IS the asset — a smoothed reading collides against nothing."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom-prior-art"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! DreamDOM Prior Art ~ a spirit's handoff, held unedited
 
@@ -34,9 +33,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom-prior-art"
 
 ''Register: Testimony-Verbatim.'' Nothing below is this house's own claim. It is testimony, cited, and it may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -247,12 +246,12 @@ Every delta-based system in the corpus must queue; you can drop precisely becaus
 **And one negative result worth its own line:** on running TW5 itself off the main thread, there is **no prior art** — not on talk.tiddlywiki.org, not in the Google Groups archive, not in GitHub issues. The seam is unusually clean (renderer is document-parameterized via `this.document`; `makeWidget` already defaults to fakedom; fakedom is 372 swappable lines with Jeremy Ruston on record considering a jsdom-swap plugin; `$tw.boot.suppressBoot` plus split `initStartup`/`loadStartup`/`execStartup` gives embed seams). The obstacles found are three `window` vs `self` one-liners plus `domMaker`'s implicit global — with `$tw.utils.nextTick` at `utils.js:706-713` the load-bearing one, since it is reached on the **first store write**. But there is no community experience to inherit, and TW5's published refresh economics (100–300 ms per keypress, 500 ms per tiddler at 40 open) are the baseline any measurement has to beat.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;LiavVFnsd9qCUpPc9N8AFKzP8WQr0ufBigcah8yCwvM
+<<^ code="&#x0003;">>ni:///sha-256;luj-Wx7Ag-noAcPL5aRbpqNgoPAOg9DHyCReAwTNQqw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

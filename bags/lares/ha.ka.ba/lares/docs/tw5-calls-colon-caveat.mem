@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/tw5-calls-colon-caveat >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/tw5-calls-colon-caveat>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/tw5-calls-colon-caveat.mem"
@@ -9,7 +9,6 @@ mana       = 12
 manao      = 14
 manaoio    = 12
 namespace  = "&#x2299;"
-register   = "Synthesis-Canon"
 retain     = true
 role       = "the upstream docs correction for TiddlyWiki's `Calls` tiddler — an unquoted parameter value carrying a colon reads as a named parameter, which the prose there permits and the grammar does not"
 status     = "standing"
@@ -19,9 +18,9 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/tw5-calls-colon-caveat"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! Calls ~ an unquoted value carrying a colon
 
@@ -29,9 +28,9 @@ uri-path   = "ha.ka.ba/lares/docs/tw5-calls-colon-caveat"
 
 ''Title'' Document that an unquoted parameter value cannot contain a colon
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-claim >>
+<<~ ahu #the-claim>>
 
 !! The claim being corrected
 
@@ -43,9 +42,9 @@ That last sentence promises more than the grammar allows, and the gap stays sile
 
 `Call Syntax` already states this correctly. `param-name ":" value` stands as one of its productions, and `param-name` reads as a sequence of letters, digits, hyphens and underscores. A URI scheme spells with exactly those characters, so `https://example.com` matches the named-parameter form. The prose in `Calls` reaches past its own grammar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-change >>
+<<~ ahu #the-change>>
 
 !! The proposed change
 
@@ -68,9 +67,9 @@ positional parameter receives nothing. Enclose such a value in quotes, or label 
 parameter name — `<<my-procedure address=https://example.com>>` — where no quotes are needed.""">>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #for-the-reviewer >>
+<<~ ahu #for-the-reviewer>>
 
 !! Notes for the reviewer
 
@@ -78,9 +77,9 @@ A tiddler title needs no delimiters, and the reason carries the whole behaviour:
 
 The `name=value` form asks the least of an author, since it drops the quoting entirely — the `=` binds before the value's colon arrives.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #measured >>
+<<~ ahu #measured>>
 
 !! Measured
 
@@ -96,15 +95,15 @@ Rendered in TiddlyWiki against `\procedure link-to(target)` returning `[target=<
 
 A time of day trips the case a URI trips, so the warning leads with the general shape rather than with URIs alone.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/relational-parameter >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/relational-parameter>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;tFVQoTtGpdMBNskct7fyeilFq8DyR30Q-hAKm-XVYkA
+<<^ code="&#x0003;">>ni:///sha-256;N4M_3Uk8YVqlRv_Nzpz4VNavc4AtG63kP2YjsIYsINY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

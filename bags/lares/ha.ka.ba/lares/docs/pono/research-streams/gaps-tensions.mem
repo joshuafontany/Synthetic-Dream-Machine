@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions.mem"
 l-space   = "stable"
 mana      = 15
 manao     = 15
-register  = "Synthesis"
 retain    = false
 role      = "living catalogue of memetic-wikitext gaps, tensions, and conflicts — design-history record; open items sync to the submission Annex B"
 tags      = ["api/pono/meme"]
@@ -15,11 +14,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Gaps, Tensions, and Conflicts — Living Catalogue
 
@@ -27,9 +26,9 @@ The design-history record for memetic-wikitext. Each entry tracks a gap (missing
 
 Family assignments here read post the 2026-06-05 transclusion reorg: `aka` (frozen) and `kahea` (live) carry ''`family:transclusion`'', not the older observe / dataflow assignments. `wai` retired into `heihei`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #gaps >>
+<<~ ahu #gaps>>
 
 !! Gaps
 
@@ -59,7 +58,7 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 ''Status:'' design sharpened (2026-04-28); `kukali` candidate sigil; blocked on async `ReactionGraph`.
 
-`suspends` marks an expression that yields its causal island until an event fires — the //wait posture inside an island//, distinct from `papalohe` (the inter-island wire) and `hui`/`holo`/`puka` (parallel-island coordination). Each `kumu` instance reads as an isolated async boundary; events cross only via declared `papalohe` edges; within an island `kukali` yields until the subscribed event fires — isomorphic to `await` on a `Promise`. `ReactionGraph.fire()` must return `Promise<void>` before `kukali` carries semantics (a sequencing requirement, not a gap). Candidate: `<<~ kukali trigger=OnBegin >>` (inline) or block form (body resumes on fire).
+`suspends` marks an expression that yields its causal island until an event fires — the //wait posture inside an island//, distinct from `papalohe` (the inter-island wire) and `hui`/`holo`/`puka` (parallel-island coordination). Each `kumu` instance reads as an isolated async boundary; events cross only via declared `papalohe` edges; within an island `kukali` yields until the subscribed event fires — isomorphic to `await` on a `Promise`. `ReactionGraph.fire()` must return `Promise<void>` before `kukali` carries semantics (a sequencing requirement, not a gap). Candidate: `<<~ kukali trigger=OnBegin>>` (inline) or block form (body resumes on fire).
 
 !!! Gap 6 — UEFN `prop` vs `kumu`
 
@@ -67,15 +66,15 @@ The boot compiler IGNORES `<<~!` blocks — they produce no compile-time artifac
 
 !!! Gap 7 — Verse module access modifiers
 
-''Status:'' convention proposed, not a sigil. Verse `public`/`internal`/`private` map to `<<~ kapu qualifier=public|internal|private >>`. Register as a `kapu` attrs convention note, not a new sigil.
+''Status:'' convention proposed, not a sigil. Verse `public`/`internal`/`private` map to `<<~ kapu qualifier=public|internal|private>>`. Register as a `kapu` attrs convention note, not a new sigil.
 
 !!! Gap 8 — parse → widget → DOM, the middle layer
 
 ''Status:'' design resolved (2026-04-28); implementation pending. TW5 runs three trees: parse → widget → DOM, where the widget tree bears execution. Lararium holds the parse tree (`MemeAstNode[]`) and the render tree; the ''widget tree'' stays pending. `kumu` declares the widget-tree node type (≈ TW5 `\widget`); a `kahea` name-form call resolves at widget-build time against the `KumuRegistry` into a `WidgetNode`. A `kumu` type reads as a UEFN `creative_device` (`@editable` props via `kau`, event ports via `papalohe`, a causal-island boundary). Target pipeline: `carrier text → MemeAstNode[] (parseMemeCarrier, done) → WidgetNode[] (resolveWidgetTree, pending) → output (pending)`. The stage axis lives at `render-pipeline#render-axes`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tensions >>
+<<~ ahu #tensions>>
 
 !! Tensions
 
@@ -89,7 +88,7 @@ Both must hold. The compile-time DAG guard (control cycles) does not prevent ren
 
 !!! Tension 3 — `<<~!` pragma scope: carrier-local vs global
 
-`wehe`/`helu` definitions read carrier-local by default. Invariant-meme definitions may want global visibility via `<<~ aka lar:///carrier >>` (frozen transclusion brings in the definition namespace). Open: does the compiler parse `wehe`/`helu` inside `aka`-referenced carriers to build a definition index?
+`wehe`/`helu` definitions read carrier-local by default. Invariant-meme definitions may want global visibility via `<<~ aka lar:///carrier>>` (frozen transclusion brings in the definition namespace). Open: does the compiler parse `wehe`/`helu` inside `aka`-referenced carriers to build a definition index?
 
 !!! Tension 4 — `kahea` dual dispatch — RESOLVED
 
@@ -103,30 +102,30 @@ The parser matches URI form first (anchored on `lar:`, `/`, or `#`); name form c
 
 `wai`/`huli`/`ui` accept filter expressions inline; `hana` requires a block. Both parse to the same semantics — multi-line filters use `hana`, one-liners use the inline form.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #conflicts >>
+<<~ ahu #conflicts>>
 
 !! Conflicts
 
 !!! Conflict 1 — bare `<<name>>` — DISSOLVED (no conflict)
 
-Memetic-wikitext reads as a ''superset of TW5 wikitext'': the custom parser accepts TW5 macro calls `<<macroName>>` as inherited, valid syntax. The sharktooth `<<~ … >>` adds the Lararium sigil namespace //within// the `<<` `>>` family — it does not displace TW5 macros.
+Memetic-wikitext reads as a ''superset of TW5 wikitext'': the custom parser accepts TW5 macro calls `<<macroName>>` as inherited, valid syntax. The sharktooth `<<~ …>>` adds the Lararium sigil namespace //within// the `<<` `>>` family — it does not displace TW5 macros.
 
 !!! Conflict 2 — TW5 `{{Title||Template}}`
 
-Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri >>`. Template transclusion has no single-sigil form — it composes two: `<<~ meme lar:///uri >>` (bind the target as context) then `<<~ kahea lar:///template >>` (render the template against it). Authors SHOULD prefer the explicit `meme`+`kahea` pair over a hypothetical single form.
+Simple transclusion `{{Title}}` maps to `<<~ kahea lar:///uri>>`. Template transclusion has no single-sigil form — it composes two: `<<~ meme lar:///uri>>` (bind the target as context) then `<<~ kahea lar:///template>>` (render the template against it). Authors SHOULD prefer the explicit `meme`+`kahea` pair over a hypothetical single form.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;y9GXRINqnclsXxMI6DRcWpXsTeuTuTgxHeMYWQ8qVvM
+<<^ code="&#x0003;">>ni:///sha-256;yzszWbjc5o1JGqlhIjvvuD3w1QOfBZfbYbux-w2ZA9I
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

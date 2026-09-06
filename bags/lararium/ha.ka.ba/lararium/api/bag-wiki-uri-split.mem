@@ -1,12 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/api/bag-wiki-uri-split>>
 ```toml meta
-confidence   = 16
 content-type = "text/memetic-wikitext+tiddlywiki"
 file-path    = "bags/lararium/ha.ka.ba/lararium/api/bag-wiki-uri-split.mem"
 mana         = 17
-register     = "Synthesis-Canon"
 role         = "the bag / wiki / cid kind-plane law — the three surfaces a lar: URI names, the edit/publish shore, and the isomorphic wiki core"
 status       = "designed"
 status-why = "the split ruled; no source carries it yet"
@@ -14,17 +12,17 @@ type         = "text/memetic-wikitext+tiddlywiki"
 uri-path     = "ha.ka.ba/lararium/api/bag-wiki-uri-split"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! The Bag / Wiki / CID Kind-Planes
 
 A `lar:` URI names one of three surfaces, and the KIND rides the ''first path segment'' — the heaviest-weight slot in `lar:` law, independent of ownership:
 
-<<~ranks kind-planes bags/slug ~ a composable recipe piece · MUTABLE -> wikis/slug ~ a #has bag-stack · MUTABLE -> cid/<hash> ~ a content-addressed artifact · IMMUTABLE >>
+<<~ranks kind-planes bags/slug ~ a composable recipe piece · MUTABLE -> wikis/slug ~ a #has bag-stack · MUTABLE -> cid/<hash> ~ a content-addressed artifact · IMMUTABLE>>
 
 * ''`bags/slug`'' — the IPNS-shaped mutable content plane: a bag (a CRDT surface, today an Automerge doc). A composable recipe piece, shared as the operator wishes.
 * ''`wikis/slug`'' — a `#has` bag-stack: a wiki's IDENTITY. Its per-wiki layers route off it (above the fold).
-* ''`cid/<hash>`'' — the /ipfs/ plane: the name IS the content hash, so it never changes. A frozen artifact answers to it forever. Its complement is the /ipns/ pointer — the `@oracle` `genesis-cid-*` tiddler carries a `cid:` field naming which cid stands current. `cid/` names the immutable artifact; the pointer names the current one; together they are IPFS ⋈ IPNS. Per `lar:` law `cid/<hash>` NAMES — the `genesis/cas/` store resolves bytes. This `cid/<hash>` KIND-plane IS the ''content-addressed (CAD) byte tier'': `@cad` names the content-addressed byte tier; its bytes live here (`genesis/cas`), while its handles ride the publicity-tiered bags — public `crossroads` plaintext · private `@catalog` ciphertext · system `@oracle` (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>).
+* ''`cid/<hash>`'' — the /ipfs/ plane: the name IS the content hash, so it never changes. A frozen artifact answers to it forever. Its complement is the /ipns/ pointer — the `@oracle` `genesis-cid-*` tiddler carries a `cid:` field naming which cid stands current. `cid/` names the immutable artifact; the pointer names the current one; together they are IPFS ⋈ IPNS. Per `lar:` law `cid/<hash>` NAMES — the `genesis/cas/` store resolves bytes. This `cid/<hash>` KIND-plane IS the ''content-addressed (CAD) byte tier'': `@cad` names the content-addressed byte tier; its bytes live here (`genesis/cas`), while its handles ride the publicity-tiered bags — public `crossroads` plaintext · private `@catalog` ciphertext · system `@oracle` (<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>).
 
 !! Identity ⋈ canon — a wiki's two addresses
 
@@ -75,6 +73,6 @@ Two registries, cleanly separated:
 
 `@oracle` names the runtime system island, and the node's public read-face serves ''the oracle doc itself'' as a content-addressed snapshot (`GET /oracle/pointer` · `GET /oracle/<cid>.bin`, `exportOracleSnapshot`) — the Two-Faced Substrate's read plane, which a cold Lararium pulls to kindle its engine by CID. `lares`/`lararium` are ordinary catalog-registered operator bags carrying corpus, reached through a recipe's `libraryBags` rather than through the oracle floor — the local operator owns them until a Cabal ownership layer stands.
 
-<<^ code="&#x0003;" >>ni:///sha-256;mwIrdvcUO9KC-w-AVkUpm1wahQ_m9NU7BqP2t6vP3YI
+<<^ code="&#x0003;">>ni:///sha-256;rai21i40FzyObS_lvuyvMyhfyFkE16SeGLplE4ShC1c
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

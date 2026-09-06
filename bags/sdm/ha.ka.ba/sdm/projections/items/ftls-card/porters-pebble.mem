@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble.mem"
 mana      = 14
 manao     = 17
 manaoio   = 15
-register  = "Synthesis-Canon"
 retain    = true
 role      = "FTLS card projection: Porter's Pebble — an item that carries the Floating Disc Power; card shows the nested Power as a clickable doorway"
 tags      = ["mount-points/item", "components/domain/stuckforce"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Porter's Pebble — FTLS Card
 
-<<~ ahu #card >>
+<<~ ahu #card>>
 
 !! Porter's Pebble
 //Stuckforce Relic, the Patient Mule//
@@ -29,38 +28,38 @@ uri-path  = "ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble"
 
 A warm, palm-sized pebble of Long Ago make. Press it and it unfolds the ''Floating Disc'' Power — run from the relic, not the bearer's own practice. The bearer need not know the Power. Drop, theft, sundering, or a jam ends it; Corruption curses the pebble, not the carrier.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #holds >>
+<<~ ahu #holds>>
 
 !! Holds
 
 This item carries one Power. The card shows it as a doorway — tap through to the live module:
 
-<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc >>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/powers/floating-disc>>
 
 The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point · D:1 hour); the relic changes only who sources it and how it is held.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #components >>
+<<~ ahu #components>>
 
 !! Components
 
-<<~ kahea lar:///ha.ka.ba/lararium/lists/components >>
+<<~ kahea lar:///ha.ka.ba/lararium/lists/components>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card >>
-<<~ loulou lar:///ha.ka.ba/sdm/modules/items/porters-pebble >>
-<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/projections/powers/ftls-card>>
+<<~ loulou lar:///ha.ka.ba/sdm/modules/items/porters-pebble>>
+<<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PHgwrF9a-7GKSVyrML8Nqv7aL5FKiRPVmz6xDdUoyoE
+<<^ code="&#x0003;">>ni:///sha-256;wRanyyPj4CYFp9PKnTFmZgOo6NfksKyqQe7KQ-1fVNc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

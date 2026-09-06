@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/disk-projection >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/disk-projection>>
 ```toml meta
 approved-on   = "2026-06-02"
 cacheable     = true
@@ -11,7 +11,6 @@ mana          = 17
 manao         = 17
 manaoio       = 15
 namespace     = "&#x0950; &#x0901;"
-register      = "Synthesis"
 retain        = true
 revised-on    = "2026-06-18"
 revision-note = "working↔canon split (shore-law): a wiki's saved edits land in the typed @working live layer (wikis/, tracked); canon (bags/) is reached only by a cap-gated promotion MOVE; the general lararium shore law (working↔canon · plane↔plane · host↔lararium) governs every causal-island crossing, host-agnostic surface contract; prior: @oracle/@lararium split (#/oracle-split) — the runtime system island (@oracle) separates from the memetic corpus (@lararium); projection-law trued to running code; co-projection rewrite; carrier-whole at rest"
@@ -23,11 +22,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #core-claim >>
+<<~ ahu #core-claim>>
 
 ! Disk Projection — Seed and Projection Surfaces
 
@@ -42,9 +41,9 @@ The node vessel SHALL write an editable, re-readable ''Artifact'' of a bag's CRD
 
 The distinction reads ''definition vs instance''. An FTLS Power Card //definition// (its rules, its template) lives in `bags/sdm/`; a character's //filled-in// card and their sheet project to `wikis/{slug}/`. `bags/` seeds the world; `wikis/` carries a running instance's output. More generally, `wikis/` reads as the ''live working surface'' — saved-but-unpromoted content, fed by the typed ''`@working`'' write layer (saved tiddlers, never drafts) — and `bags/` reads as ''canon'', reached only by a cap-gated promotion `MOVE`; definition-vs-instance names one shape of this ''working↔canon shore'' (`wiki-layer-ontology#shore-law`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bag-roles >>
+<<~ ahu #bag-roles>>
 
 !! Bag roles — which bags project, which ride the mesh
 
@@ -63,9 +62,9 @@ Disk projection is for ''content'' bags (definitions + instances). ''State / vie
 
 The projector enforces this structurally: ''a bag absent from the mirror list never writes to disk.'' A tiddler MAY also opt out per-record with `disk-projection: no`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #oracle-split >>
+<<~ ahu #oracle-split>>
 
 !! @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
 
@@ -76,7 +75,7 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 | ''memetic corpus'' | ''`lararium`'' | the engine's self-doc memes (`v0.1/{api,node,tw5,mesh}`) | authored prose | ''`bags/` seed (tracked)'' | kahu / Cabal (#/kahu) | git |
 | ''runtime system island'' | ''`@oracle`'' | engine BLOBs · the ''system'' bag→doc ''oracle'' pointers (`@oracle`/`lararium`/`lares`) · the ''system wiki-recipes'' · `genesis-cid` · descriptors | built (deterministic genesis) | ''none — rides the mesh'' (regenerable; per-deployment) | operator(admin) + genesis (engine-watch #EW-5) | epochs (#/compaction-handlers) |
 
-''Why `@oracle` carries no disk mirror.'' Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate >>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, rides the vessel's own runtime state (matching `<lares>/vessel/social-bootstrap.json`), never the `bags/` seed surface.
+''Why `@oracle` carries no disk mirror.'' Its content is genesis-derived + per-deployment: an `automerge:` doc-URL and a `genesis-cid` are CRDT identity, not rendered carriers (no parse∘render fixed point — outside the projection law, #projection-law); compiled engine BLOBs are build-output (regenerable from `genesis/island.bin`), riding the content-addressed ''CAS plane'' — fetched ''by CID'' and served through the public read-face (`GET /oracle/<cid>.bin`), never the CRDT doc (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate>>). Like `@daemon`, it rides the CRDT mesh — federated ''read-only'' to peers (the kahu doctrine: the protocol distributes by CRDT propagation, not by command). Its disk form, where one is wanted, rides the vessel's own runtime state (matching `<lares>/vessel/social-bootstrap.json`), never the `bags/` seed surface.
 
 ''Why `lararium` stays a seed bag.'' The engine self-docs are authored prose — the same disk-leaning seed kind as `lares`, round-tripping through the store (#projection-law RENDER-not-copy). They version by git, not by epoch.
 
@@ -84,9 +83,9 @@ The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesi
 
 ''The two pointer planes (operator ruling, 2026-06-16).'' `@oracle` is not only the engine home — it is the ''system-bag'' oracle plane. `lares` and `lararium` are DreamNet ''system bags'': their bag→doc pointers //and// their wiki-recipes (each a quine wiki) live in `@oracle`. `@catalog` holds ''user'' data alone — user bag pointers + user wiki-recipes (init-wiki). The bag-oracle reach runs two-source: system bags from `@oracle`, user bags from `@catalog` (full law: `wiki-layer-ontology#oracle-planes`). `@oracle` stands as the sole universal recipe floor; `lares`/`lararium` ride recipes as members, never as hardcoded floor slots.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #personal >>
+<<~ ahu #personal>>
 
 !! @personal — wiki-instance-bound, off-disk
 
@@ -99,9 +98,9 @@ It carries ''no disk mirror.'' Rationale:
 
 A future debug-only disk projection MAY be added behind an explicit flag; it MUST NOT be the default.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #projection-law >>
+<<~ ahu #projection-law>>
 
 !! Projection law
 
@@ -110,9 +109,9 @@ A future debug-only disk projection MAY be added behind an explicit flag; it MUS
 # ''The git diff is the operator's signature.'' When a residency ''MOVE'' (the canon ACTION verb) relocates a tiddler between bags, the disk side effect is a file move between surfaces; the diff records the operator's intent. ''Promotion'' rides this rite — a cap-gated `MOVE` from the `@working` live layer to canon crosses the ''working↔canon shore'', and a `MOVE` of a bag's pointer between planes (`@catalog ⇄ @oracle`) crosses the ''plane shore''. Both stay loose causal-island crossings — no shared-now, no synchronous bridge (`wiki-layer-ontology#shore-law`).
 # ''Debounce per (bag, carrier root).'' A child change climbs `fragment-parent` to its root; the group flushes as ONE carrier write (carrier-whole at rest). The projection-side content-hash gate skips byte-identical writes entirely — no event, no mtime churn.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #granularity >>
+<<~ ahu #granularity>>
 
 !! Granularity — carrier-whole at rest (operator ruling, 2026-06-11)
 
@@ -130,9 +129,9 @@ A future debug-only disk projection MAY be added behind an explicit flag; it MUS
 
 `wikis/{slug}/` stays memetic-wikitext `.md` on the same law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #projection-routing >>
+<<~ ahu #projection-routing>>
 
 !! Projection routing — tiddler-groups + the standard TW5 path (operator ruling, 2026-06-11)
 
@@ -144,9 +143,9 @@ Write-back routes by ''type'', in three rules:
 
 ''One siting fn.'' `carrierBaseRelPath` (bag-paths.ts) sites every carrier extension-less by its lar-URI and returns null for a fragment (`#slot`), an unstable root, or a non-lar URI — so a fragment owns no disk file by construction (the grain-leak guard, #granularity). `meme-write.ts` recomposes the whole carrier through `expandMemeRefs`; no per-node template renders a record to its own file. The kupono vectors live in `tests/e2e/carrier-roundtrip.test.ts` (V3/V4).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #write-ward >>
+<<~ ahu #write-ward>>
 
 !! The disk ward — sovereign-island write confinement (operator ruling, 2026-06-11)
 
@@ -175,35 +174,35 @@ Visibility holds by construction: the durable record lives in `@daemon` (admin-g
 
 Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (13 — traversal, absolute, cross-bag, above-bags, new-subdir, grantless, inert-grant, refusal-signal).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cli >>
+<<~ ahu #cli>>
 
 !! CLI capability
 
 The disk-projection Artifact is operator-driven through the `@lares/cli` surface (alongside `lares wiki` / `lares bag` / `lares act`). The live projector runs inside the vessel (TW5 change → debounce → render → write); the CLI exposes the deliberate snapshot/inspect verbs. A bag mirror is configured by `namedBagMirror(bagId, scope, mirrorRoot)`; the island reconstructs it from the serializable `diskMirrors` manifest field.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/save-path >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/sync-namespace >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/catalog-doc >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-cas-substrate>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/save-path>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/sync-namespace>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/catalog-doc>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
 
 ''Tie ~ bags/ IS the formal register.'' This surface (the seed/canon `bags/`, mana-entrenched) is exactly
 the FORMAL register of the living grammar ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace#/three-registers]]) — the curated band
 between casual chat-use and the defined parser core.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VnSg4FK9HuF1Dg5uQvr_1BANNuiSzgfVZ6I3lVYPA0g
+<<^ code="&#x0003;">>ni:///sha-256;vtnIbX6hDpiW7SM1Q0PqvgVjn5ZPgKcVdqAPxUg1CgA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

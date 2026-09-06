@@ -18,7 +18,7 @@ import { join } from "path";
 const REPO = process.env["REPO"] ?? process.cwd();
 const SPEC_URI = "lar:///ha.ka.ba/lares/api/pono/memetic-wikitext";
 const ROOT = "memetic-wikitext+tiddlywiki";
-const DECLARATION = `<<!DOCTYPE ${ROOT} ${SPEC_URI} >>`;
+const DECLARATION = `<<!DOCTYPE ${ROOT} ${SPEC_URI}>>`;
 
 // THE RETIRED FORM READ AS A COMMENT, which is exactly why it survived so long: a declaration hidden
 // inside `<!-- -->` renders as nothing, parses as nothing, and reads to a human as though it were there.

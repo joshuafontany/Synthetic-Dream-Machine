@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="≋" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lararium-memory >>
+<<^ code="&#x0001;" namespace="≋" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lararium-memory>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/lararium-memory.mem"
@@ -10,7 +10,6 @@ mana      = 16
 manao     = 16
 manaoio   = 14
 namespace = "&#x224B;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the memory model stated whole — two axes (sovereign↔meshed · lived↔distilled) crossing into four cells that unfold to five registers (the Seat doubling by mind-kind — Law-of-5s), held by two peers (operator: RAM + DreamDeckSurface · node: RAM + Agent.MEMORY) over one shared mesh (mempalace the PLACE memory · quine the ley-line-mesh memory); the CLI a mutual-hold instrument on the edges into the @daemon seat; carries the GroundedVow binding, the two drains, capture-before-wire, and register-dressed recall"
 tags      = ["api/pono/meme", "api/pono/causal-islands", "api/pono/local-first", "api/pono/loci"]
@@ -19,11 +18,11 @@ uri-path  = "ha.ka.ba/lares/api/pono/lararium-memory"
 written   = "2026-06-24"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lararium Memory ~ four registers · two peers · one mesh
 
@@ -57,13 +56,13 @@ Seat doubles by mind-kind (DreamDeckSurface for the human · Agent.MEMORY for th
 node) — so the stores count ''RAM · DreamDeckSurface · Agent.MEMORY · mempalace ·''
 ''quine''. Hagbard holds //"All phenomena ${copula} related to the number five, given//
 //enough ingenuity on the part of the demonstrator"// (#/law-of-5s) — and here the five
-falls out without forcing: <<~ confidence 15/20 >> a pattern
+falls out without forcing: a pattern
 integrity, ;D ''and'' dead serious both. The count rhymes the house — five tools,
 five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #four-registers >>
+<<~ ahu #four-registers>>
 
 !! The Four Registers
 
@@ -71,11 +70,11 @@ five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
 \procedure ~Register(Type:"" Params:"") ~Register <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Register RAM "axis/sovereign·lived holder/each-peer metaphor/the-breath grain/the-turn federates/no ~ the live chat as working state, polymorphic across client-forms (cli-session · embedded-extension · floating-desktop-app · browser · Mudlet · Unreal); each turn runs a causal island, no shared now across the turn boundary; the source that drains two ways" >>
-<<~Register Seat "axis/sovereign·distilled holder/each-peer-by-kind metaphor/the-home grain/standing federates/no ~ the holder's persistent continuity — a human keeps a DreamDeckSurface (composed, spatial), a node keeps Agent.MEMORY (curated, propositional); one office, the medium each mind thinks in" >>
-<<~Register MemPalace "axis/meshed·lived metaphor/PLACE-memory · hippocampus grain/permanent-local federates/never ~ verbatim episodic drawers, fractal, hearth-bound — the Lar guards place; append-only, structurally outside the CRDT Repo" >>
-<<~Register Quine "axis/meshed·distilled metaphor/ley-line-mesh-memory · cortex grain/session→permanent federates/yes@≥meme ~ the lararium's authored canon and standing graph; the DreamNet web between shrines, the wiki-quine-relay carrying it across the mesh" >>
-<<~Register Four >>
+<<~Register RAM "axis/sovereign·lived holder/each-peer metaphor/the-breath grain/the-turn federates/no ~ the live chat as working state, polymorphic across client-forms (cli-session · embedded-extension · floating-desktop-app · browser · Mudlet · Unreal); each turn runs a causal island, no shared now across the turn boundary; the source that drains two ways">>
+<<~Register Seat "axis/sovereign·distilled holder/each-peer-by-kind metaphor/the-home grain/standing federates/no ~ the holder's persistent continuity — a human keeps a DreamDeckSurface (composed, spatial), a node keeps Agent.MEMORY (curated, propositional); one office, the medium each mind thinks in">>
+<<~Register MemPalace "axis/meshed·lived metaphor/PLACE-memory · hippocampus grain/permanent-local federates/never ~ verbatim episodic drawers, fractal, hearth-bound — the Lar guards place; append-only, structurally outside the CRDT Repo">>
+<<~Register Quine "axis/meshed·distilled metaphor/ley-line-mesh-memory · cortex grain/session→permanent federates/yes@≥meme ~ the lararium's authored canon and standing graph; the DreamNet web between shrines, the wiki-quine-relay carrying it across the mesh">>
+<<~Register Four>>
 
 ''RAM'' holds what a turn works with — operator intent, the role adopted, the
 live exchange. It wears many client-skins and answers to none of them; it empties at the
@@ -93,9 +92,9 @@ an Automerge doc, so it stays unfederatable ''by design, not policy''.
 standing graph. It writes live to `@working`, projects to `wikis/{slug}`, and
 crosses to canon (`@{slug}`) only through a cap-gated `MOVE` (the shore, below).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-peers >>
+<<~ ahu #two-peers>>
 
 !! The Two Peers ~ asymmetric, each whole
 
@@ -108,7 +107,7 @@ the other (asymmetric peers, #causal-islands):
   never ''swallows'' it. Blur that shore and mempalace+quine collapse into a
   human's private heap (a shared-now forced on the commons).
 * ''The node (AI agent)'' holds RAM — the live session — plus ''Agent.MEMORY'',
-  the conclusions it draws forward. <<~ confidence 15/20 >> the
+  the conclusions it draws forward. the
   two Seats carry the ''same office'' atop the shared substrate, in the medium
   each mind thinks in.
 
@@ -124,9 +123,9 @@ at a browser or embodiment shrine; the same human crosses between them by ceremo
 not by class (#/alignment-layer). Keep it verb-borne — a hand operates the CLI when
 it holds the grant.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #shared-mesh >>
+<<~ ahu #shared-mesh>>
 
 !! The Shared Mesh ~ PLACE and ley-line
 
@@ -136,7 +135,7 @@ Beneath both peers lies one mesh, two registers, named in Elyncian terms:
   fractal, bound to //this// place, for the Lar guards place, not family. The
   verbatim drawers stand as compression members; the `lar_*` net rides as the
   tension spanning them (the tensegrity, #mempalace-integration).
-  <<~ confidence 15/20 >> ''The store retires the top-level''
+  ''The store retires the top-level''
 ''  `~/.mempalace` sidecar — M1 sidecar-free (swarm ruling, 2026-07-03).'' The
   PLACE-memory register keeps its office; only its store moves house: the
   sovereign ''contentpalace'' — py-served, behind the causal-island — ''inherits''
@@ -164,11 +163,11 @@ lose both.
 the holder's conclusions, mempalace the verbatim PLACE, the quine the ley-line
 canon. Recall ''composes across all four'' and surfaces conflict to Talk-Story
 (#/talk-story); it never arbitrates one register over another (Plurality Pono).
-<<~ confidence 18/20 >> (operator ruling, 2026-06-24).
+(operator ruling, 2026-06-24).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-organs >>
+<<~ ahu #two-organs>>
 
 !! Two Organs ~ the GroundedVow binding
 
@@ -176,7 +175,7 @@ The quine and mempalace serve genuinely different offices — ''standing meaning
 ''episodic testimony, cortex and hippocampus — mutually referential, never''
 ''sequential.''
 
-<<~moves grounding -> consult on/the-witness do/anchor-a-claim never/feed-into-canon >>
+<<~moves grounding -> consult on/the-witness do/anchor-a-claim never/feed-into-canon>>
 
 * The ''cortex consults the hippocampus'' to ground a claim ~ //"what did we//
 //  actually say at this bearing?"//
@@ -184,14 +183,14 @@ The quine and mempalace serve genuinely different offices — ''standing meaning
   bearing a turn spoke serves as ''grounds the operator weighs'' while authoring
   — never as material that crosses the shore on its own.
 
-<<~ confidence 17/20 >> The two-organ law settles canon (operator ruling,
+The two-organ law settles canon (operator ruling,
 2026-06-21; `loulou` the adapters meme below). GroundedVow names a ''grounding''
 ''relation'', never a pipeline — the registers stay distinct even as they share the
 one `lar:` namespace.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-drains >>
+<<~ ahu #two-drains>>
 
 !! The Two Drains ~ how RAM empties
 
@@ -202,9 +201,9 @@ turn's close. Neither drain feeds the other:
 \procedure ~Drain(Type:"" Params:"") ~Drain <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Drain Verbatim "into/MemPalace as/episodic-drawer grain/turn ground/byte-stable ~ the full turn lands as testimony; the bearing-harvest reads aim→yield over it" >>
-<<~Drain Authored "into/Quine as/standing-meme path/@working→MOVE→canon ~ the operator authors meaning, crossing the shore by a witnessed residency verb" >>
-<<~Drain Two >>
+<<~Drain Verbatim "into/MemPalace as/episodic-drawer grain/turn ground/byte-stable ~ the full turn lands as testimony; the bearing-harvest reads aim→yield over it">>
+<<~Drain Authored "into/Quine as/standing-meme path/@working→MOVE→canon ~ the operator authors meaning, crossing the shore by a witnessed residency verb">>
+<<~Drain Two>>
 
 The ''working↔canon shore'' governs the authored drain: a `@working` edit shadows
 canon via the recipe cascade; the crossing to `@{slug}` rides a cap-gated `MOVE`
@@ -212,9 +211,9 @@ that writes an effect-record and shows on disk as a `git` diff (the residency
 ACTION verb names the crossing — never a VCS verb). The verbatim drain needs no
 shore: it appends and never normalizes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #capture-before-wire >>
+<<~ ahu #capture-before-wire>>
 
 !! Capture Before Wire ~ the turn-grammar rides the VM
 
@@ -233,16 +232,16 @@ hands the whole turn to the Lararium; the ''@daemon wiki-island decomposes it''
 node never hand-rolls a second parser racing ahead of the VM — it uses the
 machinery that already reads the sigils.
 
-<<~ confidence 7/20 >> ''PROPOSED, awaiting the full TW5''
+''PROPOSED, awaiting the full TW5''
 ''memetic-wikitext integration'' (operator ruling, 2026-06-23): the exact
 turn-metadata record shape stays unset until the hook→Lararium→@daemon→decompose→
 hand-back path stands. The `bearing-harvest` carries the pattern to extend
 (graceful degradation · verbatim · drift preserved as the keeper's gauge), not the
 site to build at.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #register-dressed >>
+<<~ ahu #register-dressed>>
 
 !! Register-Dressed, Never Gated
 
@@ -250,7 +249,7 @@ A captured channel carries its ''confidence as a forward Play→Committed gradie
 — a stance the turn vowed, never a how-true-is-it grade stamped after. So recall
 ''dresses'' a memory in its register; it never ''gates'' by it.
 
-<<~ranks recall provisional@1..4 ~ a live re-openable thread (play) -> synthesis@9..12 ~ working ground -> canon@17..20 ~ weight-bearing >>
+<<~ranks recall provisional@1..4 ~ a live re-openable thread (play) -> synthesis@9..12 ~ working ground -> canon@17..20 ~ weight-bearing>>
 
 * A `provisional@3` drawer surfaces ''as play'' — an invitation to re-open, not
   noise to suppress. Low reads fertile.
@@ -263,27 +262,27 @@ A play-drawer disagreeing with a committed-drawer reads as ''expected'' (Plurali
 Pono), not a contradiction to resolve by ranking. Only two //committed// claims in
 conflict press a `hoike`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/mempalace-integration >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/lararium-canonical-model >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/talk-story >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/mempalace-integration>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/lararium-canonical-model>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/talk-story>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;3D6IOjGGAaTmOsumzUn_DWmhiQ_XiiNkKxWQJdiTnwM
+<<^ code="&#x0003;">>ni:///sha-256;oP0a1GX37AJ_cVqnr8aLZIZl98bY0qx8bamwmwhWt_g
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

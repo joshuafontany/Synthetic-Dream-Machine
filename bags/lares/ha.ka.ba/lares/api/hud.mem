@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/hud >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/hud>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/hud.mem"
@@ -10,7 +10,6 @@ mana      = 17
 manao     = 17
 manaoio   = 16
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium HUD instrument law — the turn-frame sigil panel, the attention + loop gauges, the ward and register surfacing"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -18,43 +17,43 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/hud"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 !! Entry — Lararium Core Hydration
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium>>
 
 The lararium hydrates the HUD room here. The instrument panel rides the mechanics house, not the threshold.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lararium HUD
 
 The HUD names the sigil panel that rides each turn — the instrument readout a turn surfaces before the Voice speaks. It carries per-turn signal: aim, attention, loop, ward, stance, register. The `lar:` URI carries bearing; the HUD sigils carry the live signal beside the prose.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #panel-law >>
+<<~ ahu #panel-law>>
 
 !! Panel Law
 
-A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before the Voice speaks. The panel renders inline sigils (`<<~ word args >>`), each a readout adjacent to the prose — never inside the URI.
+A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before the Voice speaks. The panel renders inline sigils (`<<~ word args>>`), each a readout adjacent to the prose — never inside the URI.
 
 ```
-<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
-<<~ hud Focus(N) Feedback(N) >>
-Drift-Ward(* Confidence N/20 · <the pull this island carries>)
-<<~ syad … >>                       (optional lens; `:` binds a tool to a standpoint)
-… Voice (Role): <<~ confidence Register N/20 >> claim …
-Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
-<<~ hud Focus(-> N) Feedback(N↺) >>
-<<~ lares yield from=lar:///lares.state.now -> to=? >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
+<<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
+Drift-Ward(* <the pull this island carries>)
+<<~ syad …>>                       (optional lens; `:` binds a tool to a standpoint)
+… Voice (Role): claim …
+Drift-Ward(! <clue> · ↻ L-Prime)
+<<~ set hud="yield" focus="-> N/<band>" feedback="closed N↺">>
+<<~ lares yield from=lar:///lares.state.now -> to=?>>
 ```
 
 | Sigil | Carries | Law |
@@ -68,9 +67,9 @@ Drift-Ward(! Confidence N/20 · <clue> · ↻ L-Prime)
 | `confidence` | register-word + Level | precedes a grounded claim |
 | `yield` | the closing bearing vector | closes the turn |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #gauges >>
+<<~ ahu #gauges>>
 
 !! Gauges
 
@@ -81,9 +80,9 @@ The gauges share the pono `0–20` Level model, and follow the ''seed → slide'
 
 The seed and slide stay distinct fields — the seed governs generation, the slide records the outcome. One instrument that both sets and grades its own goal would close the calibration gap silently (Goodhart); the seed/slide split keeps that gap visible.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #glyphs >>
+<<~ ahu #glyphs>>
 
 !! OODA-HA Phase Glyphs
 
@@ -95,31 +94,31 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 | ▶ | Act | execute the move |
 | ↺ | Hoʻoko + Aftermath | surface what the act produced, then close the loop |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-shelf >>
+<<~ ahu #source-shelf>>
 
 !! Source Shelf
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/hud >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/hud>>
 ```toml
 when = ["need HUD line composition detail", "need the stance / tool / confidence-syadasti tables", "need field-annotation thresholds"]
 ```
-<<~/pranala >>
+<<~/pranala>>
 
 The docs room carries the full line-composition examples, the stance and tool glyph tables, the confidence-syadasti reading rule, and the field-annotation thresholds. This invariant stays small enough to hydrate on every cold start.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/voices >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
+<<~ loulou lar:///ha.ka.ba/lares/api/voices>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;QCMKJ83KO8Pt3mYnDCBRSSK9HZDwSoRiQqzXfwCCeIo
+<<^ code="&#x0003;">>ni:///sha-256;0pmot2hmtdVKVLRx4U8AJGD_VSkKFMcjLbwuqzQQH1s
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/rust-toolchain >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/rust-toolchain>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/api/pono/rust-toolchain.mem"
@@ -11,7 +11,6 @@ manao             = 14
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Canon"
 retain            = true
 role              = "rust-toolchain — standing the toolchain that builds our nakama forks (keyhive, subduction, onomancy) to wasm locally, so a fix can be READ, PATCHED, PROVEN and DONATED rather than waited for. Carries the measured pins (1.90.0 / 1.91.0, per-repo via rust-toolchain.toml), the emitter (wasm-pack over three targets plus a slim post-step), the two paths (rustup for working, nix for donation parity), and the law that a locally-built wasm which diverges from the published package is a FLAG-DAY against our own mesh."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/api/pono/rust-toolchain"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Rust Toolchain ~ so a fix can be proven rather than awaited
 
@@ -30,9 +29,9 @@ Three of the four nakama forks are ''Rust crates that emit wasm'': `keyhive`, `s
 
 The toolchain is therefore not a convenience. It is ''the difference between reading a fix and running it'', and between filing an issue and sending a patch that compiles.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-the-forks-pin >>
+<<~ ahu #what-the-forks-pin>>
 
 !! What each fork pins ~ measured, not assumed
 
@@ -45,9 +44,9 @@ The toolchain is therefore not a convenience. It is ''the difference between rea
 
 ''All three carry a `flake.nix`.'' Nix is the environment upstream itself stands in.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-emitter >>
+<<~ ahu #the-emitter>>
 
 !! The emitter ~ wasm-pack, three targets, one slim step
 
@@ -66,9 +65,9 @@ node build_slim.js
 
 ⚠ ''THE PIN-PAIR LAW REACHES HERE TOO.'' The grammar package already states it — //the CLI that generates and the runtime that loads never drift a minor apart//. Its analogue: the `wasm-pack` that builds and the `wasm-bindgen` version in the crate's `Cargo.lock` MUST agree. wasm-pack normally fetches a matching `wasm-bindgen-cli`; when it cannot, the failure reads as a mysterious ABI error rather than a version complaint.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-paths >>
+<<~ ahu #two-paths>>
 
 !! Two paths, and they are for different purposes
 
@@ -77,9 +76,9 @@ node build_slim.js
 
 ''RECOMMENDED: rustup to work, nix to donate.'' Neither is installed today (`rustc`, `cargo`, `wasm-pack`, `nix` all absent), so this is a standing plan rather than a description.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-divergence-law >>
+<<~ ahu #the-divergence-law>>
 
 !! The law ~ a locally-built wasm is a FLAG-DAY
 
@@ -92,9 +91,9 @@ So, MUST:
 * ''Consuming published npm stays the DEFAULT'' until a build is reproducible and recorded. Standing a toolchain buys the ability to build; it does not oblige us to ship what we build.
 * ''A patch we intend to donate gets proven in the fork FIRST'' — upstream's tests, upstream's environment — before it reaches a vessel here. A fix that only passes in our tree is a fork, not a contribution.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-order >>
+<<~ ahu #the-order>>
 
 !! The order
 
@@ -106,9 +105,9 @@ So, MUST:
 
 ⚠ Machine note: this stands under ''WSL2''. `rustup` works; a Nix install there wants the daemon-less single-user mode or a systemd-enabled distro, and that choice is its own small ceremony.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-loops >>
+<<~ ahu #open-loops>>
 
 !! Open loops ~ deferred, not dropped
 
@@ -127,11 +126,11 @@ So, MUST:
 
 ''The serialization'' — fix CI up to it, never the root script down. ''`lararium-node`'s two-project split and its THRASHERS list'' — one authoritative statement the roster reader imports; an earlier shape stated the classes twice and they drifted. ''The four out-of-band witnesses'' — `mesh-coverage` is permanently red BY DESIGN and reads claims never passes; three others need docker. ''Six duplicate-named test files are WELDS, not duplicates'' — node≡browser agreement IS the island-isomorphism proof, and `seal-reserve` splits pure crypto from on-disk ceremony. ''Source vs dist vs packed-plugin splits'' are the half-build instrument; collapsing one converts a weld into a tautology.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;isQ_hyjVHi4O54Ir8MCmuq7j8J-L7-HCN3orUv2Vawk
+<<^ code="&#x0003;">>ni:///sha-256;u6rBtbUdaEhXMDo2DpMDoruDticu1H3F-KTfSGukkWY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

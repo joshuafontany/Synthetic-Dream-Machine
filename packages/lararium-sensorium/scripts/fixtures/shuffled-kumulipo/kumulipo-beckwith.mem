@@ -1,6 +1,6 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith>>
 ```toml iam
 cacheable = false
 file-path = "packages/lararium-sensorium/scripts/fixtures/shuffled-kumulipo/kumulipo-beckwith.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 18
 manao     = 18
 manaoio   = 18
-register  = "Canon"
 retain    = false
 role      = "hawaiian source witness meme, Kumulipo Beckwith-1951 translation+commentary locus, koʻihonua cosmogony shelf"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/x-memetic-wikitext"
 uri-path  = "ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-beckwith"
 ```
 
-<<^ &#x0002; >>
+<<^ &#x0002;>>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! The Kumulipo — Beckwith Translation & Commentary (1951)
 
@@ -26,9 +25,9 @@ Martha Warren Beckwith's scholarly translation and edition of the Kumulipo, //A 
 
 Combined here from the chapter and appendix pages of the sacred-texts.com edition into one witness text, in the reading order of its index. Page markers `{p. N}` preserved; the chant-index navigation page is omitted as non-textual.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -38,9 +37,9 @@ Digital edition scanned at sacred-texts.com, June 2001.
 
 Retrieved 2026-06-21 via the Internet Archive Wayback Machine (snapshot `web.archive.org/web/20010715`) because sacred-texts.com now sits behind a Cloudflare interstitial. Source index: `https://sacred-texts.com/pac/ku/index.htm` (pages `ku00`–`ku33`; the separate `chant.htm` navigation index omitted).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-text >>
+<<~ ahu #source-text>>
 ```toml iam
 A messenger is Ku from the heavens,
 Symbolic forms of this sort look as if Lono of the Makahiki had once appeared in the person of some voyager who brought culture gifts, introduced athletic sports, perhaps also the Polynesian custom of the ho'okupu or tributary offering, a word meaning literally "to cause to grow, as a vegetable; to spring up, as a seed." The offering sent to sea to feed the god was hence to come back to the people in abundant crops for the coming season. The basket of food was to provide for the god's "return" in symbol in the year to follow.
@@ -11736,16 +11735,16 @@ WHITE, JOHN. The Ancient History of the Maori: His Mythology and Traditions. 6 v
 
 MAKEMSON, MAUD. The Morning Star Rises. New Haven, 1941.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani >>
+<<~ loulou lar:///ha.ka.ba/lares/testbed/shuffled/kumulipo/kumulipo-liliuokalani>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ &#x0003; >>
+<<^ &#x0003;>>
 
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/subduction-onomancy-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/subduction-onomancy-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/subduction-onomancy-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "subduction-onomancy-scout — VERBATIM handoff of the tasked spirit Onomast: a deep read of Ink and Switch's onomancy (a local-first name system) and subduction (peer-to-peer sync for hash-linked data), at source. Signed-vs-attached, derive(store now decisions), Sedimentree, and the wall-clock collision with a clockless lease model. Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/subduction-onomancy-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Onomast ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/subduction-onomancy-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -304,10 +303,10 @@ This is the single most transferable idea in either repo, and it is our own "not
 Subduction relays learn the `SedimentreeId`, the full causal DAG shape, per-commit blob sizes, subscription sets, timing, **and the author's raw Ed25519 verifying key in the clear on every commit** — an authorship graph, not just a size channel. Their entire stated mitigation is "consider padding." Combined with a server-side `Map<SedimentreeId, Set<PeerId>>` subscription roster that relays propagate upstream by default, this is a correlation surface to weigh against our face-plane law before we run a relay. On the other side: Onomancy's normative specs are extraordinary — the binding-cache derivation, the pending/contested doctrine, tenure grading — but the reference implementation **does not write the decision document at all**, so acceptance-on-use never fires, incumbency is never recorded, and the Lean model is a directory that does not yet exist. Read Onomancy as a *design we adopt*, not a library we depend on; read Subduction as a *library we might depend on* whose threat model we must extend ourselves. [threats.md T8](https://github.com/inkandswitch/subduction/blob/main/design/security/threats.md) · [protocol.md](https://github.com/inkandswitch/subduction/blob/main/design/protocol.md) · [onomancer/README.md](https://github.com/inkandswitch/onomancy/blob/main/onomancer/README.md) · [verification.md](https://github.com/inkandswitch/onomancy/blob/main/design/verification.md)
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;HaeKq2BtEYZXw3t7Pn2nhqIs7Vgc6x2c_Ikg72XnZ6o
+<<^ code="&#x0003;">>ni:///sha-256;BVru2FrH_GjrjxyfzJVCrj9ceTWOwzNHYkIoAYRW6GQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

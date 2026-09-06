@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/boot-splash-styles >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/boot-splash-styles>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/ui/boot-splash-styles.mem"
 mana      = 18
 manao     = 17
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "CSS for Lararium boot-splash banner — visible while causal islands warm"
 tags      = ["$:/tags/Stylesheet"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/ui/boot-splash-styles"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 .lar-boot-banner {
   position: fixed;
@@ -65,6 +64,6 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/boot-splash-styles"
   font-size: .85rem;
 }
 
-<<^ code="&#x0003;" >>ni:///sha-256;Se_QfnXv-v2Hy7hkzBEwogR4mLJMPQRV-fOih1VQWmM
+<<^ code="&#x0003;">>ni:///sha-256;WVgDsTZvMnJXJtSkPx27l_qInwrWJ99bp_NWwU42z-s
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

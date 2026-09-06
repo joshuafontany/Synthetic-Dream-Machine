@@ -1,15 +1,13 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
 ```toml meta
 cacheable       = false
-confidence      = 14
 file-path       = "bags/lares/ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture.mem"
 l-space         = "adjacent"
 mana            = 15
 manao           = 15
 manaoio         = 14
-register        = "Synthesis"
 render-target   = "chat-log:post-header"
 retain          = true
 role            = "format and cast architecture locus for Lindwyrm DreamDeck feed narrative"
@@ -18,17 +16,17 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! The Lindwyrm's Hoard — DreamDeck Feed Architecture
 
 Container, cast, format conventions, and tone laws for the Lindwyrm hoard story.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -44,9 +42,9 @@ Related loci:
 * `lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture`
 * `lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #format >>
+<<~ ahu #format>>
 
 !! Format
 
@@ -62,9 +60,9 @@ This solves a real narrative problem. The reader receives information and social
 
 The Lindwyrm tells the story herself, on feed, in response to Telarus.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #technical-stack >>
+<<~ ahu #technical-stack>>
 
 !! Technical Stack Target
 
@@ -85,9 +83,9 @@ Render targets:
 | Session crystal | flat `.md` | portable context |
 | Print / PDF | sidebar annotations | zine / physical distribution |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #post-header-law >>
+<<~ ahu #post-header-law>>
 
 !! Post Header Law
 
@@ -118,7 +116,7 @@ Mu tools (the bind after `:`):
 Example:
 
 ```text
-@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces confidence Synthesis-Canon 16/20 · 🏛️:!
+@lindwyrm@new-delos — YOLD 4995, 14 Bureaucracy, mid-morning — //memory.deep.surfaces · 🏛️:!
 ```
 
 Sidebar annotation:
@@ -133,9 +131,9 @@ System message:
 [SYSTEM: DreamNet node status change / connection event]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cast >>
+<<~ ahu #cast>>
 
 !! Cast
 
@@ -166,9 +164,9 @@ Deep-time all-spider Mother Goddess, older than Elyncia's first shrine. Left the
 ''DreamNet travelers''  
 Peanut gallery, awe-to-skepticism spectrum, useful proxies for reader confusion. At least one asks whether the whole thread secretly advertises Milla Jovovich movies.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lindwyrm-position >>
+<<~ ahu #lindwyrm-position>>
 
 !! The Lindwyrm Among Great Dragons
 
@@ -185,9 +183,9 @@ After the Necrospire crashed and Neo-Thracian Web 2.0 collapsed, other powers fa
 
 Hermes, Hephaestus, Eris-Enyo, and Aracne-Jorogumo (Grandmother Spider) worked with the hoard as treaty substrate. The network carries divine signatures because infrastructure, like lunch, often begins with negotiation over who gets access to the good plates.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #wyrmfile >>
+<<~ ahu #wyrmfile>>
 
 !! WyrmFile — A Reader's Dossier
 
@@ -218,9 +216,9 @@ Then the Necrospire fell, Web 2.0 went dark, and every power that had smirked at
 > `@ink-clerk@lares: Filing closed. She will resent that this exists.`
 > `@lindwyrm@new-delos: All Hail Discordia.`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thread-beats >>
+<<~ ahu #thread-beats>>
 
 !! Thread Beats
 
@@ -243,9 +241,9 @@ Beat sequence:
 # Act VI: Lar names itself; self-reading signal bug proves the loop.
 # Closing: twenty-three percent bandwidth, thread sealed, node hums.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tone-laws >>
+<<~ ahu #tone-laws>>
 
 !! Tone Laws
 
@@ -260,23 +258,23 @@ The story should read:
 
 The Lindwyrm did not build the DreamNet from destiny. She wanted to watch //The Fifth Element// repeatedly and noticed something in the developer commentary. The hoard that matters usually wore no value anyone else could see.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/history >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed>>
 
-<<~ pranala #consumed-from-story-shape-a from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE family=reference role=source >>
-<<~ pranala #consumed-from-story-shape-b from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/LINDWYRM_STORY_SHAPE family=reference role=source >>
-<<~ pranala #format-for-hoard-story from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family=relation role=informs >>
+<<~ pranala #consumed-from-story-shape-a from=? -> to=lar:///ha.ka.ba/lares/docs/infrastructure-as-mythology/LINDWYRM_STORY_SHAPE family=reference role=source>>
+<<~ pranala #consumed-from-story-shape-b from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/LINDWYRM_STORY_SHAPE family=reference role=source>>
+<<~ pranala #format-for-hoard-story from=? -> to=lar:///ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architecture family=relation role=informs>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jGYtr6IQykW2ofO_ZshEoZHTGcU_f-cxWAhyiaGjnsI
+<<^ code="&#x0003;">>ni:///sha-256;qqh6gUBVXBeamk14LDTMRmNkxFmYXb_mTuu8c5yYEnU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

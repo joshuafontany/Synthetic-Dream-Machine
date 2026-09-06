@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/operations-review >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/operations-review>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/operations-review.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "OODA-HA extraction plan for lararium interaction protocols — frame-uncertainty, talk story, session init, and related surfaces"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/operations-review"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 ```toml
 primary-source = "packages/lares-core/memes/docs/lararium/prompts/Lares_Preferences.system-prompt.md"
@@ -29,11 +28,11 @@ created = "2026-04-23"
 scope-note = "Plan only — no content extracted in this memo. Extractions to follow as separate passes."
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Operations — Extraction Review
 
@@ -46,9 +45,9 @@ VSCode / OpenAI / Claude / GitHub Copilot platform layer and remain outside this
 Everything else in the legacy `Lares_Preferences.system-prompt.md` operational sections
 undergoes inventory and classification here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 !! ✶ Observe
 
@@ -97,9 +96,9 @@ Secondary source: `FFZ_Chronometer_SPEC_OUTLINE.md` — Talk Story references at
 
 * ''Talk Story'' appears in the FFZ chronometer spec and in the `Prompt_Architecture_Overview.md` reference to the Coffee Oracle test output (`Lares_Test_Prompt_and_Output_Coffee_Oracle.md` — restored to `packages/lares-core/memes/docs/lararium/prompts/` from git history on 2026-04-23). The Talk Story protocol may carry more definition there. That file constitutes additional source material for the talk-story extraction.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 !! ⏿ Orient
 
@@ -158,9 +157,9 @@ docs/lararium/
 
 # ''E-prime pressure'' — Frame-Uncertainty Protocol uses first-person phrasing in its example moves ("Reading this as [X]..."). Those phrasings constitute quoted procedure forms and SHOULD survive extraction as procedure text rather than undergoing E-prime substitution. The surrounding prose should follow E-prime discipline.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 !! ◇ Decide
 
@@ -220,9 +219,9 @@ This pass produces:
 # Fold integrations into `degraded-states.md`
 # Write `protocols/protocols.md` parent router
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 !! ▶ Act
 
@@ -249,9 +248,9 @@ Frame-Uncertainty Protocol quoted procedure text runs in first-person ("Reading 
 
 Talk Story sourcing from RAW's Brain Machine Symposium 1989 constitutes a verbatim citation context. The RAW attribution text SHOULD survive verbatim with `<!-- eprime-ok -->` marks where identity-claim forms appear.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #assess >>
+<<~ ahu #assess>>
 
 !! ↺ Assess
 
@@ -282,20 +281,20 @@ After the extraction pass closes, these questions remain for a future consolidat
 * Does the `authority/` shelf need a parent `authority.md` router, or stay flat?
 * Does the conceptual Transference Model tier need an API invariant eventually, or stay docs-only?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/degraded-states >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/voices/voices-review >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/degraded-states>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/voices/voices-review>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5WRiAEuxdv-R7skMssNVubcPSw4GDsBYb9rW6Qf3FJo
+<<^ code="&#x0003;">>ni:///sha-256;fiIlFrWoXNjwDeL8cEn3JTVvMPGSR8Xc5dQmTLEBkyE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

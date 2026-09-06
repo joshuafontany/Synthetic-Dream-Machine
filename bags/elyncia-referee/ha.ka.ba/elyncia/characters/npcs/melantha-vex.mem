@@ -1,34 +1,32 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/melantha-vex >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/npcs/melantha-vex>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/characters/npcs/melantha-vex.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "referee NPC — Guild-Captain of the Third Oar; Lindwyrm cut-out behind respectable paperwork; full dossier with private truth"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/npcs/melantha-vex"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Captain Melantha Vex
 
 //Migrated verbatim from `elyncia/New Delos/NPCs/Captain_Melantha_Vex.md` (2026-08-14); the md→wikitext conversion ran mechanical
 — prose untouched. One line of chat residue dropped from the head.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Captain Melantha Vex
 
@@ -293,8 +291,8 @@ Use Melantha when the table needs:
 * someone who can make travel feel smooth right before it becomes interesting
 * an ally whose usefulness survives the revelation that she is also on somebody else’s mission
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;v2qs7d0MK3O8SjeTEdHKRL_qvcyYy2eaj9cVSba0Y-E
+<<^ code="&#x0003;">>ni:///sha-256;mX7gX53g0fcI6TO0W_sTGn36IU_vOsz2IK64AYK-KdY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

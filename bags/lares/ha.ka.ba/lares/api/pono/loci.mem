@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/loci.mem"
@@ -8,18 +8,17 @@ mana      = 15
 manao     = 17
 manaoio   = 13
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "loci law (kānāwai): the mandatory component — address authority, bags/ siting derivation, relative-name qualification office, address stability, canon-MOVE rule"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/loci"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Loci
 
@@ -35,9 +34,9 @@ Two l-space postures:
 
 Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ Gather the `lar:` URI and visible convention surfaces before decomposition.
 ⏿ Run the derivation algorithm; classify resolved or declared-unresolved; confirm file-path convention holds.
@@ -45,11 +44,11 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 ▶ Prepare the routing product: rating set, resolved path, qualified stack entry, or declared-unresolved forward reference.
 ↺ Cross file-siting mutations and canon-MOVE opener changes as distinct bounded transactions; name which URIs resolved, which remain declared-unresolved, and what closes each gap.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #promotion-path >>
+<<~ ahu #promotion-path>>
 
 !! Promotion Path
 
@@ -64,11 +63,11 @@ Five buckets mark the structural rating of a carrier (law-of-5s):
 Rating derives from structure — a predicate run against the carrier, never a class consulted.
 Promotion to lares/ canon (live session → branch commit → hostless URI) follows a separate ceremony.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #derivation-algorithm >>
+<<~ ahu #derivation-algorithm>>
 
 !! Derivation Algorithm — siting
 
@@ -105,9 +104,9 @@ Given: lar-uri (string)
 Child items resolve under the sibling directory named for the parent's terminal path segment.
 `lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL` → `bags/lares/ha.ka.ba/lares/api/pono/cache-stable/SKILL.md`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #relative-names >>
+<<~ ahu #relative-names>>
 
 !! Relative-Name Qualification — the second office
 
@@ -125,11 +124,11 @@ Given: tag (string), carrier-title (string)
 
 Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter operator.
 
-<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #file-path-convention >>
+<<~ ahu #file-path-convention>>
 
 !! Stable File-Path Convention
 
@@ -149,9 +148,9 @@ MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`b
 | (@draft, the same name) | `bags/draft/ha.ka.ba/lares/api/pono/loci.md` | residency-true |
 | (@sdm, `lar:///ha.ka.ba/sdm/components/posture/ritual`) | `bags/sdm/ha.ka.ba/sdm/components/posture/ritual.md` | canon |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #address-stability >>
+<<~ ahu #address-stability>>
 
 !! Address Stability
 
@@ -168,9 +167,9 @@ The parent carrier MUST NOT move.
 The `?` form marks the graph's unbound uncertainty token at document time.
 A lawful meme MUST discharge residual uncertainty outward through its footer `... -> ? >>`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #explicit-convention >>
+<<~ ahu #explicit-convention>>
 
 !! Explicit Convention
 
@@ -189,20 +188,20 @@ Convention fails when:
 * meme presents high readiness while resolution depends on hidden heuristics
 * file-path evidence contradicts declared address, derived filepath, or promotion posture
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/meta>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/loci/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;8288qgm0ofyWDNkpz-mPb6fD67PqjJPmlPNWe65Ba3M
+<<^ code="&#x0003;">>ni:///sha-256;1Ge8OaTFrrJi7jmu-uCwRHoOZXipziLwlWwmaEB87DE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

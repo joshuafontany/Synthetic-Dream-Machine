@@ -1,31 +1,29 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "Lady Aki poster-sheet render prompt — palette and mood lines for image generation"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-prompt"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lady Aki ~ Poster Sheet Prompt
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ! Lady Aki — Poster-Sized Landscape Concept Sheet Prompt v1
 
@@ -52,8 +50,8 @@ Composition: landscape poster concept sheet with full-body views, rough turnarou
 
 No spider legs on Ichi. No tall ritual hat. No generic witch hat. No polished final illustration. No single pinup pose. No hypersexual framing. No modern tactical sci-fi armor replacing ashigaru/shrine language. No hiding the miko identity. No making the mobile shrine into Ichi. No making Aki a generic human without chitin reveal callouts.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;kPTaqy4vhOgiSxDu2ApoBtadWf4j-P39ejfrNwcWaoU
+<<^ code="&#x0003;">>ni:///sha-256;HoLe0EStS2smf8Jr8OS2et7tt77bfhYJqFJK2f37qAk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

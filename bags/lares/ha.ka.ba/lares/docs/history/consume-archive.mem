@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/consume-archive >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/consume-archive>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/history/consume-archive.mem"
@@ -8,7 +8,6 @@ l-space   = "archive"
 mana      = 15
 manao     = 15
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "where the early research landed — which scratch note became which doctrine, and what the consume pass could not recover"
 tags      = ["api/pono/meme"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/history/consume-archive"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Consume Archive — where the early research landed
 
@@ -28,9 +27,9 @@ what they contributed stands in the memes below, and this table is the rope betw
 Read it as provenance, never as a worklist. The pass it records closed, and the sources it names were
 deleted on 2026-05-16 — so a row here answers "where did this come from", and nothing here is owed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #history >>
+<<~ ahu #history>>
 
 !! Origin-story records
 
@@ -47,9 +46,9 @@ The arc that DID survive stands at [[lindwyrm|lar:///ha.ka.ba/lares/docs/history
 | `prior-art-comparison` | 8-system prior-art comparison; per-system design pressure; 7 v5 spec design tests |
 | `mu-emergence-sequence` | Boot grammar emergence narrative; four-layer model origin; null-oracle first statement |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #index >>
+<<~ ahu #index>>
 
 !! What landed where
 
@@ -73,16 +72,16 @@ Each row: a research file the pass consumed, and the doctrine that carries its c
 | [[auth-research|auth-research.md]] | `lares_research/memetic-wikitext/auth-research.md` | S7.1 Keyhive sprint | none |
 | [[w3c-spec-research|w3c-spec-research.md]] | `lares_research/memetic-wikitext/w3c-spec-research-v01.md` | `memetic-wikitext.tid` (SGML header claim) | formal SGML alignment open |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/period-forms >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/period-forms>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DmGiXbjJupXERDB2JG3lbf78MYqZOCwHSu1FlLmIhMI
+<<^ code="&#x0003;">>ni:///sha-256;6IpvFqVCMAawZs-4F9-ECWzt3GoiQX8KJ8Ry8M_neFY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

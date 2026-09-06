@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/hook/sustained >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/hook/sustained>>
 ```toml meta
 cacheable = true
 caption   = "sustained"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/hook/sustained.mem"
 mana      = 14
 manao     = 16
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "component (hook): Sustained — requires ongoing concentration; distraction deactivates"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/hook/sustained"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Sustained
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 A canonical duration hook (the `focus` family): the Power persists only while the practitioner sustains concentration. Distraction, damage, or competing action deactivates it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Modifies duration, not effect. The Power runs as long as attention holds; a save or interruption can drop it. Only so many sustained Powers run at once.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stuckforce`. Trades against `hook/imbued` (which holds via locked Life rather than attention).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 [tag[prefix[lar:///ha.ka.ba/sdm/components/hook/]]]                  all hook components
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Confirm the cap on simultaneous sustained Powers (attribute-linked?) against the SDM Quickstart.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-vZligfTaZHnV8rGJ_nmMQvQPZJrBsQQMJq24AACoUQ
+<<^ code="&#x0003;">>ni:///sha-256;uFGDVVYJeC3mxWW9wX06u-o_4GD2l_eUPXCX2Yl-kic
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

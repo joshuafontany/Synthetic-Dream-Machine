@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Final Report: Device-per-person ground truth. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-person-ground-truth-14552e"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Final Report: Device-per-person ground truth
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 12,092 characters
 
@@ -96,9 +95,9 @@ Not further productive. I'll compile the final report now with everything gather
 **Open (explicitly not reached, do not treat as answered):** Deloitte per-household device count; GSMA India/Bangladesh phone-sharing rates specifically; smartphone replacement-cycle length (conflicting weak signal only); Google/Microsoft account-lockout-after-device-loss rates; Matter commissioning failure rates and DAC/PAA PKI detail; FIDO Device Onboard real-world adoption scale; Apple Shared iPad mechanism and known problems; ChromeOS kiosk identity architecture; caBLE technical/adoption detail.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 7,039 characters
 
@@ -158,14 +157,14 @@ I could not reach GSMA's Mobile Gender Gap Report directly (403 on all URL guess
 **Recommendation**: re-run this research with WebSearch available (this session's quota was already spent before I made a single call) — that tool is what would have surfaced the GSMA, Deloitte, Counterpoint, and phone-theft sources, none of which I could hit blind via WebFetch guesses.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Xla1z0XMdK0PcpEyLsPpm622TaAZAvAJYn0l0ngtGqs
+<<^ code="&#x0003;">>ni:///sha-256;xZEs2ah5xzjgp1-yAkMDMK8idwsd-q8oVGY4D1dKktI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

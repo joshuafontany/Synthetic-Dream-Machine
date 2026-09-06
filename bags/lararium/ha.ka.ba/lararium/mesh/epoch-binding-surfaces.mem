@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/epoch-binding-surfaces.mem"
@@ -9,7 +9,6 @@ mana      = 16
 manao     = 16
 manaoio   = 15
 namespace = "&#x2695;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "WHAT A DEPENDENCY BUMP COSTS AN ALREADY-FOUNDED NEXUS — the five surfaces that bind to an epoch, measured rather than assumed. The engine CID is NOT the only one: hearthTrueName rides INSIDE every signed device-delegation preimage, and the pluginsCid tracks blobs built from THIS REPO'S OWN SOURCE. CORRECTED 2026-08-09 against the code, replacing this meme's own earlier over-claim: the pluginsCid rides as a LOCAL build-time integrity witness, never a membership criterion — the epoch binds to the ENGINE alone (hearthTrueName = engineCid, the slow ratchet), and the served-plugin layer composes per-operator beneath it on its own fast ratchet. Measured 2026-08-08: a runtime dep bump (automerge · noble · ws) touches exactly ONE surface (the on-disk serde, cured identity-safe by `lares vessel rite rebuild`) and moves NO epoch binding, because the engine blob is vendored TW5 and the built plugin carries zero automerge references. COLLAPSED 2026-08-10: the word names ONE mechanism — a monotone frontier that only rolls forward — in TWO carriers. An INTEGER max-register held as per-writer slots where the writer-set is fixed (`epoch-lease`; grants bind with `boundEpoch`), and a HASH-LINKED chain head where the writer-set itself rotates (`sealLineage`, head `sealEpochCid`). The third draft shape, a rolling WINDOW of markers for a vessel's raise, REFUTED: a set cannot answer //is this newer//, its far end hides a retention policy, and a list of valid markers is a roster of moments. A raise ends by NON-RENEWAL like every other grant"
 revised-on = "2026-08-10"
@@ -19,11 +18,11 @@ uri-path  = "ha.ka.ba/lararium/mesh/epoch-binding-surfaces"
 written   = "2026-08-08"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Epoch Binding Surfaces ~ what a dependency bump actually costs
 
@@ -33,9 +32,9 @@ bind, they bind to ''different things'', and only one of them moves when a runti
 ''This meme measures rather than reasons.'' Every row below reads off the code or a build artifact, because
 a wrong answer here reads identically to a right one until a founding breaks.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-five >>
+<<~ ahu #the-five>>
 
 !! The five surfaces, and what each binds TO
 
@@ -43,10 +42,10 @@ a wrong answer here reads identically to a right one until a founding breaks.
 \procedure ~Surface(Type:"" Params:"") ~Surface <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Surface Seal-epoch "binds/seated-keys + threshold moved-by/a-roster-or-quorum-change ~ genesisSealEpochCid — carries NO dependency, NO blob, NO version" >>
-<<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage" >>
-<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS; verified at BUILD time by verifyGenesisArtifact — LOCAL integrity, never a membership criterion, and no peer path reads it (#/the-real-mover)" >>
-<<~Surface On-disk-serde "binds/automerge + keyhive byte formats moved-by/a-RUNTIME-dep-bump ~ the only npm-movable surface" >>
+<<~Surface Seal-epoch "binds/seated-keys + threshold moved-by/a-roster-or-quorum-change ~ genesisSealEpochCid — carries NO dependency, NO blob, NO version">>
+<<~Surface Hearth-true-name "binds/the-TW5-core-blob-sha256 moved-by/a-TW5-submodule-bump ~ engineCid, and it rides INSIDE every signed delegation preimage">>
+<<~Surface Plugins-CID "binds/the-built-plugin-blob-shas moved-by/THIS-REPO'S-OWN-SOURCE ~ 23 modules + 115 tiddlers packed from our TS; verified at BUILD time by verifyGenesisArtifact — LOCAL integrity, never a membership criterion, and no peer path reads it (#/the-real-mover)">>
+<<~Surface On-disk-serde "binds/automerge + keyhive byte formats moved-by/a-RUNTIME-dep-bump ~ the only npm-movable surface">>
 
 !!! ★ ONE MECHANISM — A MONOTONE FRONTIER THAT ONLY ROLLS FORWARD ★
 
@@ -79,7 +78,7 @@ a wrong answer here reads identically to a right one until a founding breaks.
 * ''whatever falls off the far end encodes a retention policy nobody wrote down'', and a count-based lifetime tracks the Nexus's own tempo: a quiet Nexus expires nothing, a busy one expires fast, and the slowest peer becomes everyone's replay surface. In a totally-ordered chain that costs LIVENESS; in a mesh it costs SAFETY.
 * ''a list of valid markers IS a roster of moments.'' This house holds no rosters.
 
-A raise is an ordinary capability grant that ends by ''NON-RENEWAL'', which the house already does everywhere else. So `raiseStands` reads `boundEpoch >= effective` against the Nexus's own lease epoch — the same comparison, against the same fold, that every device delegation already makes. ''Read it as: the Nexus is the resource, and its lease epoch is the fence.'' <<~ confidence 16/20 >>
+A raise is an ordinary capability grant that ends by ''NON-RENEWAL'', which the house already does everywhere else. So `raiseStands` reads `boundEpoch >= effective` against the Nexus's own lease epoch — the same comparison, against the same fold, that every device delegation already makes. ''Read it as: the Nexus is the resource, and its lease epoch is the fence.''
 
 The receiver-side per-peer window (IPsec-shaped, evaluated locally, `undefined` at the edge) stays available for ''anti-replay on a wire'' — packet sequence numbers, where a set is the right instrument. It never governs standing.
 
@@ -101,7 +100,7 @@ keying fold and belongs to Keyhive/BeeKEM. `compaction-handlers` reserves the ba
 
 ''AND A MARK THAT LIVES ONLY IN A REPORT IS NO MARK.'' This section exists because the first pass named
 these sites in conversation and left the tree unmarked — which is the same failure as a green count beside
-a check that never ran. <<~ confidence 15/20 >>
+a check that never ran.
 
 !!! ★ THE ONE MOST EASILY MISSED ★
 
@@ -117,9 +116,9 @@ that no longer matches — the Binding Gate refuses, and the refusal reads as a 
 performed. ''The binding IS (vessel × hearthTrueName)'': the engine CID is not a version label, it is the
 ''PLACE'' half of the two-key atom.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-measurement >>
+<<~ ahu #the-measurement>>
 
 !! What a runtime dep bump ACTUALLY moves ~ measured 2026-08-08
 
@@ -142,11 +141,11 @@ read. The vessel already names that condition and its cure rather than boot-loop
 > ''Cure (identity-safe, no data loss)'': run `lares vessel rite rebuild` — rebuilds the genesis engine under current
 > deps; your operator key/card are untouched.
 
-<<~ confidence 16/20 >> ''One surface, one cure, and the cure keeps the identity.''
+''One surface, one cure, and the cure keeps the identity.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-real-mover >>
+<<~ ahu #the-real-mover>>
 
 !! ⚠ CORRECTED — what a source commit actually moves
 
@@ -169,7 +168,7 @@ against another's.
 > compose ''per-operator'' (DreamNet-offered) and ride their own fast ratchet, so a plugin change ''MUST
 > NEVER perturb the true-name.''
 
-<<~ confidence 18/20 >> ''So the epoch rides the genesis ENGINE, and the served-plugin layer composes
+''So the epoch rides the genesis ENGINE, and the served-plugin layer composes
 freely beneath it.'' A commit that re-packs the plugin moves a local integrity witness and touches no
 lineage: the seal stands, every delegation edge still verifies, and no confederation shifts. The
 ''slow ratchet'' (engine) carries the binding; the ''fast ratchet'' (plugins) carries composition, and
@@ -185,9 +184,9 @@ and ''nothing consults it when two replicas MERGE'' — precisely where the law 
 fresh from different engine versions name the ''disjoint-station-set'' break: where two frames share no
 co-observed points, ''no transformation exists at all, only translation by assertion''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-rule >>
+<<~ ahu #the-rule>>
 
 !! The rule for a founding
 
@@ -204,20 +203,20 @@ are acts, never upgrades''.
 \procedure ~Rule(Type:"" Params:"") ~Rule <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Rule Runtime-deps "when/before-founding cost/a-rebuild-if-skipped surface/serde-only ~ automerge · noble · ws · vite" >>
-<<~Rule TW5-submodule "when/an-ACT-never-an-upgrade cost/every-delegation-edge surface/hearthTrueName ~ moves the PLACE half of the atom" >>
-<<~Rule Our-own-source "when/every-commit cost/a-proposed-Nexus surface/pluginsCid ~ the kahu clock ratifies, or the mesh shards" >>
+<<~Rule Runtime-deps "when/before-founding cost/a-rebuild-if-skipped surface/serde-only ~ automerge · noble · ws · vite">>
+<<~Rule TW5-submodule "when/an-ACT-never-an-upgrade cost/every-delegation-edge surface/hearthTrueName ~ moves the PLACE half of the atom">>
+<<~Rule Our-own-source "when/every-commit cost/a-proposed-Nexus surface/pluginsCid ~ the kahu clock ratifies, or the mesh shards">>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/device-delegation >> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/device-delegation>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;xfyeP6rQ086AgS6FjOlFQ1QQQvQKA4f_yzpTshA4O1w
+<<^ code="&#x0003;">>ni:///sha-256;sNsglGU0RWcAgd4d9050lRTl1z6nRFt-3GHbd5IOrZ4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

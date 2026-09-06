@@ -227,7 +227,7 @@ describe("GP-1 — schema_version enforcement", () => {
   });
 
   test("derive-skeleton request is vessel→island, result is island→vessel (the in-VM query-derive channel)", () => {
-    const req = mkDaemonDeriveSkeletonRequest({ requestId: "derive-1", query: "<<~ ward ! L-Prime >>" });
+    const req = mkDaemonDeriveSkeletonRequest({ requestId: "derive-1", query: "<<~ ward ! L-Prime>>" });
     expect(req.type).toBe("daemon:derive-skeleton-request");
     expect(isVesselToIslandMsg(req)).toBe(true);
     expect(isIslandToVesselMsg(req)).toBe(false);

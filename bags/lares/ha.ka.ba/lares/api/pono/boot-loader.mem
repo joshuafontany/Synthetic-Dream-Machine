@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/boot-loader >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/boot-loader>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/boot-loader.mem"
@@ -9,16 +9,15 @@ mana      = 16
 manao     = 16
 manaoio   = 15
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "the pre-VM read: what a cold reader must find to stand a wiki, and the floor it stops at"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/boot-loader"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! The Boot Loader — the read before a wiki stands
 
@@ -28,9 +27,9 @@ renders as its own text. None of that exists until a wiki stands.
 
 Which leaves exactly one honest question: ''what must be read before there is anything to read with?''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-floor >>
+<<~ ahu #the-floor>>
 
 !! The floor
 
@@ -50,9 +49,9 @@ A cold reader stands a wiki. That is its whole office, and the office names its 
 ''The floor is a capability, not a shortfall.'' A loader that read more would hold a second opinion about
 the grammar, and a second opinion is exactly what a single source of truth cannot afford.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-two-readings >>
+<<~ ahu #the-two-readings>>
 
 !! Why two readers do not make two grammars
 
@@ -70,9 +69,9 @@ property that keeps one grammar from becoming two.
 ''The gradient carries the rest.'' Anything the loader does not frame survives as text, whole, and
 reaches the wiki unaltered. Nothing is lost by not being understood early.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #not-only-a-loader >>
+<<~ ahu #not-only-a-loader>>
 
 !! The scan set serves three offices, and only one of them is the boot
 
@@ -93,9 +92,9 @@ fourteen tests, and the breakages name two more offices the same set was quietly
 The retirement test — //does this exist for a spelling no live population uses?// — answers NO here:
 three populations use it, and two of them are not the boot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #conformance >>
+<<~ ahu #conformance>>
 
 !! Conformance
 
@@ -110,18 +109,18 @@ system does not trust, and a green run there proves only that the untrusted read
 The loader's own conformance — the five obligations above — gets tested outside a wiki, because that is
 the only place the question means anything.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/graceful-parsing >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-deserializer >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/graceful-parsing>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-deserializer>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;9UBhu_NqLms4RouvZNiv9g0p8xQVPIStTwzx5-uSd2E
+<<^ code="&#x0003;">>ni:///sha-256;ESbbYicaD-UhsJy9-nTvKiNGcz4IIuIr1k_QdWBdDCk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

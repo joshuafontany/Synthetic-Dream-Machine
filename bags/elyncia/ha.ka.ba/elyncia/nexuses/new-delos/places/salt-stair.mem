@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "place, sea-level ring — the Salt-Stair market lararium; scene canon seated, host-town unnamed"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Salt-Stair
 
@@ -40,8 +38,8 @@ lands first.
 same manner pours here. One spirit working two rooms, a lineage sharing a name, or two spirits
 who have never met — the Salt-Stair declines to say, and MUG-SMOKE has never been asked directly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;IV0-rpdiapkUFPG_cKWGynzqeaAp2b4g3d_SpdaYx5s
+<<^ code="&#x0003;">>ni:///sha-256;xHokqGzfbg_XytUec4vCYObS2YNoNHhYotz2rDovMYY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

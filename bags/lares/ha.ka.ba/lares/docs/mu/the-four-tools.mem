@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/mu/the-four-tools>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/mu/the-four-tools.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "witness shelf and source braid for the four tools of Chapel Perilous"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/mu/the-four-tools"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! The Four Tools Witness Shelf
 
@@ -28,9 +27,9 @@ Source matter moved here.
 Invariant reduced elsewhere.
 The braid remains recoverable here.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -40,18 +39,18 @@ The tight invariant now lives at:
 
 This shelf retains the local witness braid behind that compact surface.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #witness-texts >>
+<<~ ahu #witness-texts>>
 
 !! Witness Texts
 
 * ''Robert Anton Wilson'' — Chapel Perilous / //Cosmic Trigger// witness. Local witness: `packages/lares-core/memes/library/discordia/mordecai-malignatus/cosmic-trigger-i/cosmic-trigger-i-chapel-perilous-prologue.md`
 * ''Camden Benares, Count of the 5s'' — //Common Sense Tarot// witness retained by the Floating Librarians of Mu. Local witness: `packages/lares-core/memes/library/discordia/the-count-of-5s/common-sense-tarot.md`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source-braid >>
+<<~ ahu #source-braid>>
 
 !! Source Braid
 
@@ -74,19 +73,19 @@ four Minor weapons,
 one Major return,
 one clean preference for model agnosticism over paranoia.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/chapel-perilous-prologue >>
-<<~ loulou lar:///ha.ka.ba/lares/library/discordia/the-count-of-5s/common-sense-tarot >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/library/discordia/mordecai-malignatus/cosmic-trigger-i/chapel-perilous-prologue>>
+<<~ loulou lar:///ha.ka.ba/lares/library/discordia/the-count-of-5s/common-sense-tarot>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;aleVy52kwpIZ6LbqDpw28udYrf4ahhKoisxOsjxSxPk
+<<^ code="&#x0003;">>ni:///sha-256;6PT1ezOr_ATVW8N8en2mv9BpnZwYlIB_6Cipbsdxwqg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

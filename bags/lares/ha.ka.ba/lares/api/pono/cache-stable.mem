@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/cache-stable >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/cache-stable>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/cache-stable.mem"
@@ -8,7 +8,6 @@ mana      = 10
 manao     = 10
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "cache-stable law and cache-stable pressure surface"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/cache-stable"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Cache-Stable Meme Law (Kānāwai)
 
@@ -40,14 +39,14 @@ Manaʻo pierces toward the next turn.
 Heavy matter travels outward.
 loulou links bind cache-stable -> documentation.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cache-stable >>
-<<~ loulou lar:///ha.ka.ba/lares/api/i-keia-manawa >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cache-stable>>
+<<~ loulou lar:///ha.ka.ba/lares/api/i-keia-manawa>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cache-stable-law >>
+<<~ ahu #cache-stable-law>>
 
-A pressure-template for cache-stable-compliant memes, which Binds <<~ loulou #ooda-ha >> OODA-HA <<~/loulou>> pressure into meme-generation law.
+A pressure-template for cache-stable-compliant memes, which Binds <<~ loulou #ooda-ha>> OODA-HA <<~/loulou>> pressure into meme-generation law.
 
 This meme binds cache-stable generation (as law) and presents itself as template — an OODA-HA skeleton as the slot-shape that downstream memes fill. The two roles stay intentional and inseparable; the law enacts itself by taking the shape of what it governs.
 
@@ -65,13 +64,13 @@ Other procedures SHOULD travel outward to companion memes.
 Explanatory swell SHOULD split outward.
 Shape and pressure teachings MUST stay cache-stable.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 A template for cache-stable memes to fill.
 
-<<~ aka lar:///ha.ka.ba/lares/api/mu/ooda-ha#/head >>
+<<~ aka lar:///ha.ka.ba/lares/api/mu/ooda-ha#/head>>
 
 ✶ ???
 ⏿ ???
@@ -87,18 +86,18 @@ Empty-slots SHOULD mark positions that downstream memes fill with domain-specifi
 Cache-Stable-compliant memes MUST resolve every slot — `???` markers stay on this template alone.
 Cache-Stable-compliant memes MUST fill the OODA-HA phase line with their own pressure moves.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cache-stable/SKILL>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vGt2rOmIu9BSsq_1H9gqL-gF0gKK1SGSZzGVxb7tXTM
+<<^ code="&#x0003;">>ni:///sha-256;oEp9ntbWM4yBR1gq-aT4eyYsLbiJ7p046DosLHuZnrE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

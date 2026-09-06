@@ -1253,7 +1253,7 @@ smoke boot clean. All probes pass.
 - `sigil-kau.tid` — rewritten: `\widget ~kau(p1:"")` with `p1` parse (fragment/name/props via `<$set>` conditionals), template cascade dispatch, placement vs invocation branching. Plus `\procedure ~kahea~kau` and `\procedure ~aka~kau` mirroring sigil-ahu.tid exactly.
 - `kau-template-html.tid` — HTML render: placement gets `<div class="lar-kau lar-kau-place">`, invocation gets `<div class="lar-kau lar-kau-invoke">`. Hole slot when def missing.
 - `kau-cascade-html.tid` — cascade config tagged `lar:///ha.ka.ba/tags/kau-template`.
-- `kau-template-markdown-meme.tid` — `<<~ kahea kau {{!!slot}} >>` (same pattern as ahu).
+- `kau-template-markdown-meme.tid` — `<<~ kahea kau {{!!slot}}>>` (same pattern as ahu).
 - `kau-cascade-markdown-meme.tid` — `list-before` ordered, `lar-export-scope` conditioned.
 
 **Keyhive stubs** (`registerKauCapabilityHook`, `registerKauWriteBackHook`) dissolved with no replacement. When Keyhive WASM lands, these surface as TW5 action tiddlers consistent with TW5 VM primacy — not JS module hooks.
@@ -1314,7 +1314,7 @@ smoke boot clean. All probes pass.
 - `case "wai"` removed; `case "heihei"` and `case "kahawai"` handle conditional filter extraction.
 
 **`pranala-families.md` — back-edges added:**
-- 8 `<<~ pranala #tiddler-sigil-family-{name} >>` edges to all family tiddlers.
+- 8 `<<~ pranala #tiddler-sigil-family-{name}>>` edges to all family tiddlers.
 
 **Build:** All tests pass. Grammar fully self-hosted in SharktoothSigil tiddlers.
 
@@ -1398,7 +1398,7 @@ smoke boot clean. All probes pass.
 - `GRAMMAR_NAME_MAP` retired. `sigil-kahea.tid` merges both leaf and block forms under one
   canonical name `"kahea"` — no TOML naming seam needed.
 - `CompoundSigilMatch.slotType` renamed → `closeKey`; compound forms carry `word1` (e.g.
-  `"kahea"`) as the closer lookup key — fixes `<<~ kahea ahu #slot >>body<<~/kahea >>` block detection.
+  `"kahea"`) as the closer lookup key — fixes `<<~ kahea ahu #slot>>body<<~/kahea>>` block detection.
 - `closePatternToTag()` added: converts TOML regex `close_pattern` strings to literal
   `indexOf` tags for `findCloseEnd`.
 
@@ -1564,7 +1564,7 @@ lares promote lar:///definitely-not-real --to lar:///ha.ka.ba/bags/lares --yes
 - `@keyhive/keyhive` / concap remains the capability substrate; do not pivot to UCAN.
 - `lares promote` means explicit operator ceremony, not automatic sync.
 - Canonical Lares system tiddlers use `lar:///` titles.
-- `<<~/sigil >>` closing tag convention (not `<<\~sigil>>`); the `/end` HTML convention holds.
+- `<<~/sigil>>` closing tag convention (not `<<\~sigil>>`); the `/end` HTML convention holds.
 - Remaining docs/history belong under `wikis/lares-history/`, not active handoff files.
 
 ## Downstream Parking Lot — Lararium TW5 `$:/` Namespace Retirement

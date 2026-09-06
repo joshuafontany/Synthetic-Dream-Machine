@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/re-anchoring-record >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/re-anchoring-record>>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/re-anchoring-record.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 12
 manao         = 12
 manaoio       = 12
-register      = "Synthesis"
 retain        = true
 revision-note = "the artifact that records THAT a re-anchoring happened and never what made it valid. Carries the three mechanisms that survive alignment with prior art, the six classes that refuse, and the rulings each refusal breaks"
 role          = "the re-anchoring record — one artifact folded two ways: an EVENT on write, accrued DEPTH on read. Holds the un-thresholded attestor bundle, the grounds-free boundary, and the attester⊥minter split, each with its shipped prior art and what it cost to align"
@@ -17,11 +16,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/re-anchoring-record"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Re-Anchoring Record ~ that it happened, never what made it valid
 
@@ -31,9 +30,9 @@ A guest dwells WITH a host — a dyad, one edge, and the historically fatal shap
 
 ''One artifact, folded two ways'': an EVENT on write · accrued DEPTH on read. Dwelling deposits `papa`; the depth erodes when dwelling stops. Building them separately would build them twice, because a re-anchoring attested at a position IS the datum depth accrues from.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #three-mechanisms >>
+<<~ ahu #three-mechanisms>>
 
 !! Three mechanisms that survive alignment ~ each shipped, none whole
 
@@ -54,9 +53,9 @@ Enforced by ''which key signs what'', never by convention. That restates the //n
 
 ''Companion:'' RFC 9334 (RATS) separates appraisal policy from evidence and gives it a ''different owner'' — Verifier Owner supplies policy, Attester supplies evidence, Relying Party supplies its own acceptance policy. ''Three policies, three owners, none reading the others'.'' The third may matter here: whether a realm honours ANOTHER realm's re-anchoring reads as the consuming realm's own policy, which the record must not presume.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-refusals >>
+<<~ ahu #the-refusals>>
 
 !! Six classes refuse, and one pattern runs under them all
 
@@ -74,9 +73,9 @@ Enforced by ''which key signs what'', never by convention. That restates the //n
 
 ''One partial survivor worth naming.'' DAA (Brickell–Camenisch–Chen) gives //"a group signature without the feature that a signature can be opened, i.e., the anonymity is not revocable"// and per-verifier ''basenames'' — linkable within one verifier, unlinkable across. That reads as ruling 4 stated cryptographically: many unlinkable faces, one per realm, and a realm still tells //the same one came back//. Its rogue-key revocation runs party-level and its TPM root reads as an empire's root; the ''basename shape'' survives the rest.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-open-tension >>
+<<~ ahu #the-open-tension>>
 
 !! The plural-attestor tension ~ two cures pulling opposite ways
 
@@ -88,9 +87,9 @@ Applied here: ''as the attestor count rises, the intersection of realms whose dw
 
 ''So the dyad cure and the no-global-identifier cure pull against each other'', and no source found addresses it. The candidate shape, unresolved and operator-seated: carry attestors as ''per-realm pseudonyms'' (the DAA basename form) rather than as stable keys — a realm reads //these three dwell here// without the record naming three keys that appear elsewhere.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-the-record-refuses >>
+<<~ ahu #what-the-record-refuses>>
 
 !! What the type must refuse, in the type
 
@@ -102,9 +101,9 @@ Applied here: ''as the attestor count rises, the intersection of realms whose dw
 
 ''MUST NOT report'': a count as total, a set as complete, or a state as current-as-of. The read answers //does this one hold// and never //who holds//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-depth-fold >>
+<<~ ahu #the-depth-fold>>
 
 !! The depth fold ~ PROPOSED: the history IS the reading, and reducing it mints what the plane forbids
 
@@ -124,16 +123,16 @@ And the EROSION half needs a rate nobody has seated. Two candidate shapes stand 
 
 > ''PROPOSED, not ruled:'' the depth read stands COMPLETE at `dwellingHistory`. What accrues reads as a history a party can show, never a score a system can compare. A realm that wants a threshold applies its own to the acts, in its own rite (#/unmodelled) — the same law as //the naming layer performs, so it must never certify//, one fold over.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;6Q5XA3wTeXq2vfTBX00QV0JDei7c71Bbo2iKua7tSM8
+<<^ code="&#x0003;">>ni:///sha-256;aJzK50sjlPg9pX2jcowUinVF2Hg0ly5ON4lCD4QqRB4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

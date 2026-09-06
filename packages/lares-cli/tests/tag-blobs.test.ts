@@ -19,10 +19,10 @@ import { carrierCasFlagged } from "../src/cas-stage.js";
 const BIG = "x".repeat(70 * 1024);   // over the 64 KiB CAS backstop floor
 const HUGE = "y".repeat(1100 * 1024); // over the 1 MiB oversized-inline wall
 
-const smallAhu = (slot: string) => `<<~ ahu #${slot} >>\n\nshort prose in ${slot}.\n\n<<~/ahu >>\n`;
+const smallAhu = (slot: string) => `<<~ ahu #${slot}>>\n\nshort prose in ${slot}.\n\n<<~/ahu>>\n`;
 const metaAhu = (slot: string, body: string) =>
-  `<<~ ahu #${slot} >>\n\`\`\`toml meta\nrole = "source-text interior"\ntype = "text/markdown"\n\`\`\`\n\n${body}\n<<~/ahu >>\n`;
-const bareAhu = (slot: string, body: string) => `<<~ ahu #${slot} >>\n\n${body}\n<<~/ahu >>\n`;
+  `<<~ ahu #${slot}>>\n\`\`\`toml meta\nrole = "source-text interior"\ntype = "text/markdown"\n\`\`\`\n\n${body}\n<<~/ahu>>\n`;
+const bareAhu = (slot: string, body: string) => `<<~ ahu #${slot}>>\n\n${body}\n<<~/ahu>>\n`;
 
 describe("carrierNeedsTag — reuses the in-tree readiness law", () => {
   test("a small un-flagged text carrier needs NO tag (inlines pono)", () => {

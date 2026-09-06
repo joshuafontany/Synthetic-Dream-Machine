@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/verse-mesh >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/verse-mesh>>
 ```toml meta
 cacheable = true
 docs      = "lar:///ha.ka.ba/lararium/docs/verse-mesh"
@@ -8,7 +8,6 @@ file-path = "bags/lararium/ha.ka.ba/lararium/docs/verse-mesh.mem"
 mana      = 18
 manao     = 18
 manaoio   = 17
-register  = "DS"
 retain    = true
 role      = "design narrative for the Verse polychronous CRDT mesh — peer model, VM pool, camera model, accumulator wiring"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -16,7 +15,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/verse-mesh"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Verse Mesh — Design Narrative
 
@@ -248,17 +247,17 @@ tiddlers repaint. Others return from `refresh()` in O(1).
 The accumulator interface stays identical across all platforms.
 The tick source changes; the drain contract does not.
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/camera-mount >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/meme-provider >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/camera-mount>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/meme-provider>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MRVe4-_GTfVNsHMdeW8oxoaNkxP9ECOJtVqlAjILVkM
+<<^ code="&#x0003;">>ni:///sha-256;avIEXh6f6XVPFr3vIK4BWKfft6XoIxo53GiMVXgVPL8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

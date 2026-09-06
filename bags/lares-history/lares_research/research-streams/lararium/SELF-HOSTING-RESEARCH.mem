@@ -1,21 +1,19 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<^ code="&#x0001;" from=? -> to=lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH>>
 ```toml meta
 type     = "text/memetic-wikitext+tiddlywiki"
 uri-path = "lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH>>
 ```toml meta
 uri-path     = "ha.ka.ba/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH"
 file-path = "bags/lares-history/lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH.mem"
 type = "text/memetic-wikitext+tiddlywiki"
 l-space      = "adjacent"
-confidence   = 18
-register     = "Synthesis-Canon"
 mana         = 17
 manao        = 17
 role         = "scouting research: canonical self-hosting architectures → Lararium adoption map"
@@ -26,7 +24,7 @@ retain       = true
 
 
 
-<<~ ahu #question >>
+<<~ ahu #question>>
 
 !! Scouting Question
 
@@ -34,9 +32,9 @@ How do canonical "everything including the system IS an editable object IN the s
 
 Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tw5-deep >>
+<<~ ahu #tw5-deep>>
 
 !! TW5 — Shadow Tiddler Read-Through
 
@@ -50,9 +48,9 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 ''Lararium adoption:'' The `lares/ha.ka.ba/lares/api/` carriers form the shadow layer. Grammar memes in `lares/grammars/` form the shadow grammar. User-authored carriers can OVERRIDE grammar rules at a different URI but cannot DELETE the shadow grammar. `loadGrammarRules()` reads the shadow grammar; user overrides layer on top. `/admin/reseed` is safe because shadow grammar regenerates from `lares/` on every compile — it is the embedded JSON equivalent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #smalltalk-image >>
+<<~ ahu #smalltalk-image>>
 
 !! Smalltalk / Pharo — Method Dictionary Mutation
 
@@ -66,9 +64,9 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 ''Lararium adoption:'' `parsePranalaEdges()` = the method dictionary lookup algorithm — immutable kernel. `GrammarRules` = the method dictionary contents — fully replaceable at each compile. Phase 2.5 wires this: the parser receives `GrammarRules` as runtime data, reads patterns from it, falls back to built-ins when entries are missing. The interpretation engine (how a regex pattern fires against text) = the C kernel. The patterns themselves = the method dictionary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #emacs-lisp >>
+<<~ ahu #emacs-lisp>>
 
 !! Emacs — C Kernel / Lisp Surface Boundary
 
@@ -82,9 +80,9 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 ''Lararium adoption:'' `resolveLarUri()` + `parsePranalaEdges()` interpretation engine = C kernel — must never be mutable from the lares/ tree. Everything above: grammar patterns, family contracts, template definitions, layout strategies = Lisp surface = editable memes. The `advice` pattern maps to Lararium's future "meme override" system: a user meme at a different URI can wrap a grammar sigil's behavior without replacing the shadow grammar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #oberon-self-vm >>
+<<~ ahu #oberon-self-vm>>
 
 !! Oberon / Self VM — Module Versioning and Live Reload
 
@@ -96,9 +94,9 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 ''Lararium adoption from Self:'' The prototype chain maps cleanly to Lararium's meme override model. A user meme at `lar:///user:joshu@local/grammars/memetic-wikitext` extends the shadow grammar at `lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext` — same override pattern as Self's parent slot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #synthesis >>
+<<~ ahu #synthesis>>
 
 !! Synthesis — The Four Laws for Lararium Self-Hosting
 
@@ -126,9 +124,9 @@ Lararium maps exactly:
 
 `resolveLarUri()` — the mechanism that translates a `lar:///` string to a file path or virtual marker — is the inviolable C kernel. It must NEVER be modified by a meme. Everything else is fair game.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #phase-2-5-implication >>
+<<~ ahu #phase-2-5-implication>>
 
 !! Direct Implication for Phase 2.5
 
@@ -142,18 +140,18 @@ Phase 2.5 wires `GrammarRules` into `parsePranalaEdges`. The correct form from t
 
 This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch engine) stays fixed; the rule table it reads becomes externally supplied data.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ pranala #to-foundations from=? -> to=lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=extends >>
-<<~ pranala #to-grammar from=? -> to=lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext family=control role=informs >>
-<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs >>
+<<~ pranala #to-foundations from=? -> to=lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=extends>>
+<<~ pranala #to-grammar from=? -> to=lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext family=control role=informs>>
+<<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH >>
+<<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1XNivUj4o-VWTSC-LEcxxbXU0zVrHf4T7N3LepbbOjk
+<<^ code="&#x0003;">>ni:///sha-256;TehO0ybqXSO8TB53OOj9fqiBtOsS_3CsQ223jJ23Fh4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,22 +1,21 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-boot-gate >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-boot-gate>>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/tw5-boot-gate.mem"
 last-reviewed = "2026-07-18"
 mana          = 17
 manao         = 17
 manaoio       = 17
-register      = "Synthesis-Canon"
 role          = "design doc: TW5 boot module corpus-gate — 3-layer trust check for corpus-carried JS modules (layer 3 = keyhive, planned)"
 status-date   = "2026-04-30"
 type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! TW5 Boot Gate — Contract
 
@@ -49,9 +48,9 @@ _bootModules()
 
 ''Why two paths?'' The corpus path is the target steady state: all logic lives as `lar:` memes, verified by hash and keyhive capability proof. The imperative fallback ensures the app boots and is functional offline, on cold start, and before a meme has passed all gate layers.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thresholds >>
+<<~ ahu #thresholds>>
 
 !! Gate Thresholds
 
@@ -66,9 +65,9 @@ All four signal fields must meet or exceed these floor values for a meme to be i
 
 Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encoded). Gate layer 3 (keyhive capability proof) is planned but not yet implemented; the gate currently passes on layers 1–2 only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stuck-in-ts >>
+<<~ ahu #stuck-in-ts>>
 
 !! Why This Cannot Be a Meme
 
@@ -78,8 +77,8 @@ Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encode
 
 The distinction is the whole gate. ''Authority is what a carrier holds and who granted it, never what it is'': a carrier cannot declare itself executable, it can only wear a component whose own meme states what wearing it costs, and the stack entry carries no verb of its own.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DV6uQDSADRDDkPkVeu6H3K9P-uaLPvBMYGpWR1D9uWQ
+<<^ code="&#x0003;">>ni:///sha-256;NkqrMkkctbu8xHtbmEJYQrBk2eaUh68mOxganCEO-tA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

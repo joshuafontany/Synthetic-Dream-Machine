@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/local-first >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/local-first>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/local-first.mem"
@@ -9,7 +9,6 @@ mana        = 18
 manao       = 18
 manaoio     = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: 7 local-first ideals (Ink & Switch) + Keyhive/Beelay alignment matrix; server-as-peer law; Fuller non-simultaneous Universe = causal island"
 status-date = "2026-05-02"
@@ -18,9 +17,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/local-first"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Local-First Software
 
@@ -35,9 +34,9 @@ the current prior-art stack closest to satisfying all seven simultaneously.
 
 ''Core law:'' a `lararium-node` operates as a peer, not an authority — it functions as one Lararium in a Nexus confederation. The server holds no privilege over the content it relays. "The sync server is just another member in the system." (Brooklyn Zelenka, localfirst.fm ep. 19)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #seven-ideals >>
+<<~ ahu #seven-ideals>>
 
 !! The Seven Ideals
 
@@ -151,9 +150,9 @@ scheme; the tiddler store is inspectable and exportable.
 control. The Orichalcum `ABILITY_LADDER` provides the vocabulary;
 Keyhive provides the cryptographic enforcement.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #server-as-peer >>
+<<~ ahu #server-as-peer>>
 
 !! Server-as-Peer Law
 
@@ -184,9 +183,9 @@ run the same VmPool interface. The browser boots pool slot 0 (local wiki); addit
 slots serve cross-realm projections. The node boots multiple slots simultaneously —
 one per wiki island, one per connected realm. Same model, different capability set.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fuller-universe >>
+<<~ ahu #fuller-universe>>
 
 !! Fuller's Non-Simultaneous Universe = Causal Island Doctrine
 
@@ -211,9 +210,9 @@ of Fuller's non-simultaneous Universe.
 ''The UI MUST reflect this:'' content is "current as of my last sync with peer X,"
 not "current globally." A lararium-node MUST present its view as local — current as of last sync.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #beelay-sedimentree >>
+<<~ ahu #beelay-sedimentree>>
 
 !! Beelay Sync Model
 
@@ -233,9 +232,9 @@ A fresh peer can sync efficiently even against a document with years of history.
 `BrowserLarPeer`) wires the `DocHandle.on("change", ...)` event into `MemeProvider.handleChange()`.
 Beelay's sync protocol operates below this boundary — transparent to the meme layer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #alignment-matrix >>
+<<~ ahu #alignment-matrix>>
 
 !! Alignment Matrix (current)
 
@@ -249,20 +248,20 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 | Privacy | ✗ GAP | Keyhive `LarPeer.keyhive` slot |
 | User control | ✓ / ⚠ | Multi-user needs Orichalcum + Keyhive |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/quine-principles >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/pattern-integrity>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/quine-principles>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;T_6yVMt4-ERyD8een7etGXl4irmBlVIkFAw-gROSxwU
+<<^ code="&#x0003;">>ni:///sha-256;jAmJGR4dqQfCsK93D-HXX-uRCzRTzgMdoaYBzyS_yo4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

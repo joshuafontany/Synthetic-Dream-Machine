@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-type-lattice >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/verse-type-lattice>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/verse-type-lattice.mem"
@@ -8,7 +8,6 @@ l-space     = "stable"
 mana        = 17
 manao       = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "canonical: Verse type lattice — any/false/void/comparable hierarchy; persistable constraint universe; effects bit-vector (6 families); edge-label semantics for pranala type annotations"
 status-date = "2026-05-15"
@@ -16,9 +15,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/verse-type-lattice"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Verse Type Lattice
 
@@ -29,9 +28,9 @@ Between them: all primitives, containers, classes, and interfaces as subtypes of
 ''Source authority:'' Book of Verse ch. 11 (verselang.github.io/book/11_types/),
 ch. 13 (effects), ch. 17 (persistable); Epic Games developer documentation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lattice >>
+<<~ ahu #lattice>>
 
 !! The Type Lattice
 
@@ -70,9 +69,9 @@ Covariance in containers: if `int <: rational`, then `[]int <: []rational`.
 Contravariance in map keys: `[K1]V1 <: [K2]V2` requires `K2 <: K1` (reversed).
 Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #class-modifiers >>
+<<~ ahu #class-modifiers>>
 
 !! Class Modifiers That Affect the Lattice
 
@@ -83,9 +82,9 @@ Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 | `<final>` | No subclasses allowed; required for `<persistable>` classes |
 | `<persistable>` | Marks a class/struct/enum for cross-session storage (see below) |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #persistable-constraint >>
+<<~ ahu #persistable-constraint>>
 
 !! Persistable — A Closed Constraint Universe
 
@@ -114,9 +113,9 @@ composition: a type is persistable if it stores ONLY persistable-compatible valu
 Persistable data is stored via `weak_map(player, t)` declarations and persists across
 game sessions. This is Verse's equivalent of cross-session player storage.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #effects-as-edge-labels >>
+<<~ ahu #effects-as-edge-labels>>
 
 !! Effects System — Six Families
 
@@ -157,9 +156,9 @@ consequence.
 condition. The calling context does NOT need to handle failure — `if` converts a
 failable expression into a conditional branch.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pranala-edge-labels >>
+<<~ ahu #pranala-edge-labels>>
 
 !! Effects as Pranala Edge Labels
 
@@ -176,21 +175,21 @@ When Lararium models Verse function types in the graph, effects annotate the edg
 These annotations feed future Verse code generation from the Lararium scene graph.
 See `uefn-scene` for the `reaction:subscribable` edge format and `KumuSubscribable.effects`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/heihei >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-task-tree>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/uefn-scene>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/heihei>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;0ZuLfcj2KAmc_8lGc7k7g3ANhVbzo738CzmDq_0FK64
+<<^ code="&#x0003;">>ni:///sha-256;MaJhchs0l30eK2ytBCQjwvPntzszy8_UdYU8iE_in20
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

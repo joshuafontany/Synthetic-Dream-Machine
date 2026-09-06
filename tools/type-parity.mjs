@@ -26,7 +26,7 @@ const declSpec = /DECLARATION[\s\S]{0,120}?(lar:\/\/\/[^\s`"]+)/.exec(decl)?.[1]
 // too. An earlier generation stripped `text/x-`, the provisional prefix RFC 6838 deprecates; against a
 // canonical name that no longer carries it that reconstruction kept the prefix, and the one legitimate
 // inline copy read as a fork of a line it matches exactly.
-const declaration = declSpec ? `<<!DOCTYPE ${canonical.replace("text/", "")} ${declSpec} >>` : null;
+const declaration = declSpec ? `<<!DOCTYPE ${canonical.replace("text/", "")} ${declSpec}>>` : null;
 if (!canonical) {
   console.error("[type-parity] carrier-type.ts names no CARRIER_TYPE — the declaration moved");
   process.exit(1);

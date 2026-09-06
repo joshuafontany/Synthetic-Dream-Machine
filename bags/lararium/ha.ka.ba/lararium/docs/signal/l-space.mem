@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/l-space >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/l-space>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/l-space.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 17
 manao     = 17
 manaoio   = 18
-register  = "Synthesis"
 retain    = false
 role      = "docs room for definitional lar l-space semantics and address-slot framing"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/l-space"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal — l-space
 
 Not invariant law.
 This room holds definitional docs for `lar` URI l-space.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #l-space-definition >>
+<<~ ahu #l-space-definition>>
 
 !! l-space Definition
 
@@ -60,18 +59,18 @@ Working definition:
 | 2nd | `quality` | ''Ka'' | soul / motive fire | The animating charge — the energy-character of that domain |
 | 3rd | `dynamic` | ''Ba'' | psyche / unique direction | The path enacted — the motion or direction in that domain |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;SeNPzQ9-djKS9EOCQ4Vag8_IIRzQKtreahsto32tgXk
+<<^ code="&#x0003;">>ni:///sha-256;1kN2pUHs-cgpxyWBkrXvDZZKeR6Kq9yUihYtvai7mp0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

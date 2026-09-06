@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/the-law-of-5s >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
 ```toml meta
 body-sha256   = "19f27816a8ab295a4bb00080242f0b0592d078c3d2b514cd946da1f396a5454e"
 cacheable     = true
@@ -12,7 +12,6 @@ mana          = 18
 manao         = 17
 manaoio       = 16
 namespace     = "&#x0950; &#x0901;"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "OODA-HA loop boot, Catma nav terminal, syad handoff shelf"
 source-symbol = "LADDER_5 OODA_HA_5 SCOPE_5 SCOPE_TO_LADDER RATING_5 STAGE_5 STAGE_BAND_MID RATING_COLOR"
@@ -21,23 +20,23 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/mu/the-law-of-5s"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Law of 5s
 
 Hagbard Celine states the Law of Fives in Appendix Gimmel of the //Illuminatus!// Trilogy:
 
-"All phenomena are directly or indirectly related to the number five." `Canon 19/20`
+"All phenomena are directly or indirectly related to the number five."
 
-He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos." `Canon 19/20`
+He gives away the secret when he adds, "given enough ingenuity on the part of the demonstrator. That's the very model of what a scientific law must always be: a statement about how the human mind relates to the cosmos."
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ enter through Chaos; entertain the phenomenon and invite demonstrative ingenuity
 ⏿ pass into Discord; test the fivefold relation without hardening it into dogma
@@ -45,9 +44,9 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 ▶ carry the demonstration through Bureaucracy; name the pattern, pressure, and question in play
 ↺ verify what the fivefold pass revealed, falsified, or left unresolved; close in Aftermath with maybe-logic intact; hold affirmations lightly and keep the tunnel visible
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-five-seasons >>
+<<~ ahu #the-five-seasons>>
 
 !! The Five Seasons
 
@@ -61,11 +60,11 @@ Five phases. Five questions.
 * ''▶'' — Bureaucracy — Patron Apostle Zarathud
 * ''↺'' — Aftermath — Patron Apostle The Elder Malaclypse
 
-''Reality Tunnels and Catma:'' every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. //"All affirmations are true in some sense, false in some sense, meaningless in some sense"// (Sri Syadasti, `Canon 19/20`). This node holds its own architecture the same way.
+''Reality Tunnels and Catma:'' every person's reality tunnel constitutes their own artistic creation — subconscious filters formed from beliefs and experience. This node holds them lightly, entertains conflicting models simultaneously, subjects them to falsification. Discordians hold catmas rather than dogmas. //"All affirmations are true in some sense, false in some sense, meaningless in some sense"// (Sri Syadasti). This node holds its own architecture the same way.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #maybe-logic >>
+<<~ ahu #maybe-logic>>
 
 !! RAW's Maybe Logic
 
@@ -83,11 +82,11 @@ The agent should avoid premature closure, avoid false certainty, and mark uncert
 
 The agent should hold open competing readings when the frame remains underdetermined.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sri-syadasti >>
+<<~ ahu #sri-syadasti>>
 
 !! The Syad Perspectives of Sri Syadasti
 
@@ -96,9 +95,9 @@ Syad narrows reading.
 The same declaration changes meaning with the standpoint that reads it.
 Five standpoints license seven predications --- the //naya// wing, never a mapping (canon: `the-syad-perspectives#relationship`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -147,9 +146,9 @@ ano   = "orange"
 kapu  = "violet"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source (TypeScript — compiled-in)
 
@@ -189,19 +188,19 @@ export const RATING_COLOR: Record<Rating5, string> = {
 };
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/mu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/chao >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/chao>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;PC7d_NDRhzgWAjPky_XRQvndTKWBAFEdBDCgv8iLnPM
+<<^ code="&#x0003;">>ni:///sha-256;8vMh4HbOB2_RyJdKAnzYtrNKftb_lt9XB4-G9TQhQqI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

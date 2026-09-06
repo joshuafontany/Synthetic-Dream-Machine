@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/hud >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/hud>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/hud.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "signal-branch framing for the HUD as the situational-awareness surface; the instrument law + teaching live in the api/lares/hud + docs/lares/hud pair"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/hud"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal — HUD
 
@@ -29,9 +28,9 @@ tool / confidence-syadasti tables, field-annotation thresholds).
 
 This room frames the HUD as the ''situational-awareness surface'' within the signal branch.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sa-role >>
+<<~ ahu #sa-role>>
 
 !! The HUD as the Signal Surface
 
@@ -48,21 +47,21 @@ Within this branch the HUD relates to its sibling SA surfaces:
 
 The instrument grammar itself stays in the pair; this room holds only the signal-branch relation.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/hud >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/hud >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/drift >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/provenance >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
+<<~ loulou lar:///ha.ka.ba/lares/api/hud>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/hud>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/drift>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/provenance>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;9VXdxfUCirP8huk71JAHl1tMYfMDj7s1W5lQZIANUXc
+<<^ code="&#x0003;">>ni:///sha-256;J5gub6CyvfnMcHwEVPerOx0V4zsCy5ZsmYhzRBI1kFs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/what-a-nexus-wants>>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/what-a-nexus-wants.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 6
 manao         = 6
 manaoio       = 6
-register      = "Provisional"
 retain        = true
 revision-note = "PLACEHOLDER — an open question with a shaped rim and no answer. Minted so later talk-story has somewhere to pour"
 role          = "the unanswered question that gates the conversion act — what a Nexus wants members FOR. Where a collective held its own appetite, admission machinery ran for centuries; where admission required expropriating a named incumbent, no peacetime machinery appeared at all"
@@ -17,11 +16,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/what-a-nexus-wants"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! What a Nexus Wants Members FOR ~ open, and it gates the rest
 
@@ -31,9 +30,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/what-a-nexus-wants"
 
 So the operative variable reads: ''does the collective want something the incumbent cannot veto?'' Rome wanted soldiers and ran diplomas for centuries. Venice wanted taxpayers and the Senate granted without asking the merchants. ''This stack has never answered it for itself.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #why-it-gates >>
+<<~ ahu #why-it-gates>>
 
 !! Why it gates
 
@@ -41,9 +40,9 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 ''And a second consequence rides here'': a process reading entails that composition runs BOTH ways — an entity at N+1 must supply enabling conditions for its members' standing at N, ''by acting rather than by registering''. What a Nexus wants members for and what a Nexus does for its members read as one question from two ends.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open >>
+<<~ ahu #open>>
 
 !! To pour here later
 
@@ -51,16 +50,16 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 * Does the answer differ per realm — and if each realm answers it alone, does the mesh need any answer at all?
 * ''The Gilbert tension'', unresolved and adjacent: a joint commitment //rescindable only jointly// persists as a standing normative state ''precisely because it is not activity'' — and a layer deposits ''by'' activity. This stack carries both.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;zpw3zbqI-UiStJ5smTWqNty7h9h_Q62HwccL3sfREaU
+<<^ code="&#x0003;">>ni:///sha-256;hLWETf-bKkIeJ49xZgw9onftSlADiMpBABqpMCbAc0A
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

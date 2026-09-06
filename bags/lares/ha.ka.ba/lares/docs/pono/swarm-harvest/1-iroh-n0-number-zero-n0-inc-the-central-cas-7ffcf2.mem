@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: 1. IROH / n0 (number zero, 'n0, inc.') — THE CENTRAL CASE. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc-the-central-cas-7ffcf2"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! 1. IROH / n0 (number zero, "n0, inc.") — THE CENTRAL CASE
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 30,564 characters
 
@@ -284,14 +283,14 @@ So the honest range: **$34/mo (non-archiving, 2-hour window) → ~$152/mo (archi
 **6. Unresolved / NOT REACHED:** n0's funding structure and investors; a dedicated n0 hole-punching success-rate publication (the two URLs specified return 404 and no such post exists among the 82 blog slugs — the only published figures are the undocumented "roughly 90%" in docs and "95% of data" in the v1 post); Planetary's exact shutdown date and dated statement; IPFS public-gateway traffic share; libp2p circuit-relay economics (apparently undocumented anywhere); Veilid and OrbitDB funding totals; NLnet grant amounts for Willow.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;aZ72Ry_2nCsGT_iglysg8M5DrQnUA8EnpxEiArM2l0M
+<<^ code="&#x0003;">>ni:///sha-256;gk2e7qK1oeBCxlgHYK2Tathx8wCN4bXYdIhPS9szJho
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

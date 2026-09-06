@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/testing-architecture-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/testing-architecture-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/testing-architecture-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "testing-architecture-scout — VERBATIM handoff of the tasked spirit Mason: the whole testing architecture inventoried, the cost of moving the harness under packages/, three runners nothing invokes, and the welds that must NOT be collapsed. Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/testing-architecture-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Mason ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/testing-architecture-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -215,10 +214,10 @@ Root `vitest.shared.ts` carrying `isolate: true`, `environment: "node"`, `includ
 Whether Stage 2's newly-lit suites are **green** — I did not run them (the python suite needs `~/.venv` and the holders; running it would have spawned palace processes into a tree you asked me to leave alone). Their red/green state is the one number that changes Stage 2's cost from "a script key" to "a campaign," and it is one serialized command away.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;OKozeyxTTU5RHw9V1zLxwhUeooKh5VVYa18MQ66BemI
+<<^ code="&#x0003;">>ni:///sha-256;F2Ki2ow2FqTsftuHNmbyQBCrY1l8mvlMSCdvr3QVDVA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/personal-slot >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/personal-slot>>
 ```toml meta
 approved-on = "2026-06-01"
 cacheable   = true
@@ -12,7 +12,6 @@ manaoio     = 16
 merged-on   = "2026-06-04"
 namespace   = "&#x0950; &#x0901;"
 proposed-on = "2026-05-30"
-register    = "Synthesis"
 retain      = true
 role        = "the @personal recipe slot (cross-device viewing state, PersonaGroup × recipe-fingerprint scoped) and its admin-doc-stored binding map — one ledger"
 status      = "standing"
@@ -23,11 +22,11 @@ uri-path    = "ha.ka.ba/lararium/api/personal-slot"
 uri-shape   = "lar:///ha.ka.ba/wikis/{slug}/personal"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #problem >>
+<<~ ahu #problem>>
 
 ! The @personal slot — slot grammar + binding storage (approved canon)
 
@@ -57,9 +56,9 @@ river represents operator intent worth carrying to their other devices.
 The missing scope: ''the operator's authorised device vessel mesh'' — what
 Keyhive already names a `PersonaGroup`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #slot >>
+<<~ ahu #slot>>
 
 !! The slot
 
@@ -80,9 +79,9 @@ Slot URI: `lar:///ha.ka.ba/wikis/{slug}/personal` — a per-wiki live layer root
 at the wiki's identity (`wikis/{slug}`), one per wiki. The `BagResolver` binds the
 DOC per `(PersonaGroup × recipe-fingerprint)`; the URI carries the address.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #yang-yin-chao >>
+<<~ ahu #yang-yin-chao>>
 
 !! Yang / Yin / Chao — the design symmetry
 
@@ -108,9 +107,9 @@ are keyed by `(PersonaGroup × recipe-fingerprint)`, where the fingerprint cover
 entire below-canon stack. Two devices share above-canon state ONLY when their
 recipe-fingerprints match.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scoping-mechanism >>
+<<~ ahu #scoping-mechanism>>
 
 !! Scoping mechanism — the resolver binds, the URI doesn't
 
@@ -146,9 +145,9 @@ resolver["lar:///ha.ka.ba/wikis/{slug}/draft"] = <recipe-B-draft-doc>   // devic
 `wikis/{slug}/temp` stays per-island (no CRDT, no resolver entry needed — the slot URI
 resolves to a fresh MemoryTiddlerStore at boot).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cascade-rules >>
+<<~ ahu #cascade-rules>>
 
 !! Cascade rules that route to the personal layer
 
@@ -176,9 +175,9 @@ layer) at boot; each island's resolver supplies the correct doc URL. Under the r
 model these entries hold as ''first-write defaults'', not authoritative routing (see
 #residency-reconciliation).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #core-claim >>
+<<~ ahu #core-claim>>
 
 !! Binding storage — admin-doc-stored
 
@@ -196,9 +195,9 @@ lar:///ha.ka.ba/bags/daemon/draft-bindings/${fingerprintHex}
 
 `fingerprintHex` comes from `computeRecipeFingerprint({wikiDocId, libraryBagDocIds})` per Q4: SHA-256 over `canonicalJson({wikiDocId, libraryBagDocIds: sorted})`. `lares` and `lararium` doc-ids do NOT participate (switching personality or system bag does not fork operator view state).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #why-admin-doc >>
+<<~ ahu #why-admin-doc>>
 
 !! Why admin-doc-as-storage
 
@@ -214,9 +213,9 @@ Five forces converge here. Each one rules out a parallel storage option.
 
 ''5. Lifecycle stories collapse.'' PersonaGroup revocation, device admit, device-leaves-the-cabal — each already handled by the admin-doc + Keyhive layer. The bindings inherit these stories without per-binding reinvention.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #data-model >>
+<<~ ahu #data-model>>
 
 !! Data model
 
@@ -242,9 +241,9 @@ One fingerprint produces TWO bindings (one for `@personal`, one for `@draft`) un
 
 The bindings TIDDLERS live inside the admin doc. The `@personal` and `@draft` AUTOMERGE DOCUMENTS the bindings point to live as separate Automerge docs in the same Repo. The admin doc carries names; the named docs carry the actual operator view state.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #vessel-boot-flow >>
+<<~ ahu #vessel-boot-flow>>
 
 !! Vessel boot flow
 
@@ -355,9 +354,9 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 ''First delegate() call site.'' S7.6's `keyhive.delegate(...)` is the first active call to that method in the repo (the method exists; no caller yet). This binding flow establishes the delegation call pattern; the ocap research above governs where it lives.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lifecycle >>
+<<~ ahu #lifecycle>>
 
 !! Lifecycle
 
@@ -375,9 +374,9 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 ''Long-term garbage collection.'' Not in scope for Sprint 7. A future sprint MAY add operator-facing inspection of binding tiddlers (`lares wiki personal --list`) and explicit revocation (`lares wiki personal --forget <fingerprint>`). For now, bindings accumulate forever and that reads as the correct default.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #persongroup-liveness >>
+<<~ ahu #persongroup-liveness>>
 
 !! PersonaGroup liveness — pre-delegate to an always-on device (design space)
 
@@ -408,17 +407,17 @@ This composes with the @personal slot: the binding map already lives admin-doc-
 stored and PersonaGroup-scoped; pre-delegation extends the same owned-namespace
 authority graph from //viewing state// to //task-execution authority//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #browser-deferral >>
+<<~ ahu #browser-deferral>>
 
 !! Browser-side deferral
 
 The handoff names "S9 / lararium-browser S4 real boot" as still in flight (IndexedDB + WebCrypto + Keyhive founding ceremony in the browser vessel). The node-side enactment lands cleanly today; the browser-side mirror waits until S9-S4 settles so the wire-in builds on a settled foundation rather than shifting ground. The data model and lifecycle stay platform-agnostic — when the browser vessel reaches real-boot, the same host-layer `resolveOrMintBinding` + `WikiBootContext` pass-through applies via the equivalent composition path in `browser-sovereign-island-model.ts`. The browser pool stays envelope-only too.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #residency-reconciliation >>
+<<~ ahu #residency-reconciliation>>
 
 !! Reconciliation with the Residency Model
 
@@ -430,9 +429,9 @@ The approved [[residency-model|lar:///ha.ka.ba/lararium/api/residency-model]] co
 
 Open the wiki; the StoryList syncs to your other devices because each layer holds its piece. Implementation coordinates with Sprint 7 of `packages/EPIC-RESIDENCY-MODEL.md` rather than landing as an independent migration.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration >>
+<<~ ahu #migration>>
 
 !! Migration sketch
 
@@ -453,9 +452,9 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 *** ''Eventual-consistency (S7.7):'' binding present, doc not-yet-decryptable → boot proceeds, mounts on sync.
 # Update memory-store.md @personal references.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #questions >>
+<<~ ahu #questions>>
 
 !! Questions — one ledger (collisions removed 2026-06-04)
 
@@ -486,26 +485,26 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — ''slice
 
 ''Layering (raised + resolved 2026-06-01):'' the original `#vessel-boot-flow` placed resolution inside `VesselIslandPool._mountWorker`. Three research spirits (codebase-grain, SE-pattern prior-art, ocap/local-first) converged unanimously on host-layer resolution with pass-through. Section rewritten accordingly; pool stays envelope-only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
-<<~ loulou lar:///ha.ka.ba/lares/api/keyhive/persona-group >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri#/bag-tag-rule >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/memory-store >>
-<<~ loulou lar:///ha.ka.ba/lararium/config/bag-paths >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model>>
+<<~ loulou lar:///ha.ka.ba/lares/api/keyhive/persona-group>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri#/bag-tag-rule>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/memory-store>>
+<<~ loulou lar:///ha.ka.ba/lararium/config/bag-paths>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/living-grammar-palace>>
 
 ''Tie ~ palettes as casual register.'' A per-operator overlay (palette, view-state) reads as the CASUAL
 register's lived surface — the living grammar in use before curation lifts it ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-grammar-palace]]
 #three-registers).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;BXdZ5L3LDZq8p3p2ZhKBty5maB76SB4d6_FocC5g2Ag
+<<^ code="&#x0003;">>ni:///sha-256;JjID4lMfQxMq02mRfJSoSLO9Dcgeqjt8nMMgxYZDXSE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

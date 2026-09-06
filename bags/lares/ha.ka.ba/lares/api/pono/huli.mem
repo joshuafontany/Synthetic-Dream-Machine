@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/huli >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/huli>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/huli.mem"
@@ -8,7 +8,6 @@ mana      = 16
 manao     = 16
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "search/turn block-container sigil — iterates a filter; renders body-template per result; Hawaiian alias for \\for"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-huli"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/huli"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Huli
 
@@ -35,9 +34,9 @@ English alias: `\for`. Implements TW5's `<$list filter=...>` widget at the sigil
 Scope: the searcher's gaze turns to face each result in order — not mechanical looping but
 directed attention moving through the set.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the filter expression — what set does this huli iterate over?
 ⏿ orient: huli = iterate result set; body renders once per result; currentTiddler bound to each
@@ -45,14 +44,14 @@ directed attention moving through the set.
 ▶ emit iteration block node; wrap body in <$list filter=...>; each result gets one body render
 ↺ output is concatenation of body renders; order follows filter result order; confirm filter produces expected set; confirm body accesses currentTiddler correctly
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
 A huli block MUST carry a TW5 filter expression as its first argument.
-A huli block MUST close with `<<~/ huli >>` (or `<<~/ \for >>`).
+A huli block MUST close with `<<~/ huli>>` (or `<<~/ \for>>`).
 A huli block body MUST render once per filter result, with `currentTiddler` bound to each result.
 A huli block MUST NOT carry mode= — control flow has no projection posture.
 A huli block with an empty filter result MUST produce no output.
@@ -62,24 +61,24 @@ Common filter forms:
 * `[range[1,10]]` — iterate numbers 1 through 10
 * `[{!!items}splitTiddlerList[]]` — iterate a stored tiddler list field
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 Hawaiian form:
 ```text
-<<~ huli [filter-expression] >>
+<<~ huli [filter-expression]>>
 body template (currentTiddler = each result)
-<<~/ huli >>
+<<~/ huli>>
 ```
 
 English alias form (identical semantics):
 ```text
-<<~ \for [filter-expression] >>
+<<~ \for [filter-expression]>>
 body template (currentTiddler = each result)
-<<~/ \for >>
+<<~/ \for>>
 ```
 
 TW5 expansion:
@@ -89,9 +88,9 @@ body template
 </$list>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -108,19 +107,19 @@ close-pattern = '<<~\/huli\s*>>'
 "\\for" = "huli"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wai>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-for >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-for>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;h8L6xn0HreIc1MCIInQ5AGSdrlUZ6uPX9naquxkBiJw
+<<^ code="&#x0003;">>ni:///sha-256;6w_h1XnQG3nLZjR5hke1KMEfl8TuHdiGdZWYLgN1-m8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

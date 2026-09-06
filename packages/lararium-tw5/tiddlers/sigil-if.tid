@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
      Hawaiian equivalent: heihei (race/compete — multiple candidate bodies, first wins).
      lar-see-also: heihei
 
-     <<~ \if filter >>body<<~/ \if >> renders body only when filter yields a non-empty result.
+     <<~ \if filter>>body<<~/ \if>> renders body only when filter yields a non-empty result.
      Operator talk-story: TW5 filter semantics differ from imperative conditionals.
      The filter runs in the current tiddler context; true = at least one result.
      Use `[<variable>match[value]]` for equality, `[condition]` for existence tests.

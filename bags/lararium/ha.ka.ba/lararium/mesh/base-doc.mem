@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/base-doc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/base-doc>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/base-doc.mem"
 l-space     = "lararium"
 mana        = 9
 manao       = 9
-register    = "Synthesis"
 retain      = true
 role        = "the LarDoc record/blob shapes + the bag→doc oracle resolve-and-write-back primitive (resolveOracleDoc) + blob descriptor addressing"
 source-file = "packages/lararium-mesh/src/base-doc.ts"
@@ -15,9 +14,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/base-doc"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -41,9 +40,9 @@ turns a bag-URI into a live doc handle:
   only on first mint. Platform divergence rides the two arguments (`resolve`
   = repo strategy, `provenance` = authority stamp), never the protocol.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-plane >>
+<<~ ahu #two-plane>>
 
 !! Two-Plane Oracle (operator ruling, 2026-06-16)
 
@@ -59,8 +58,8 @@ plane-blind — it writes wherever the handed registry handle points. //(Caller/
 //plane-routing: ruled, enactment tracked at the live handoff torch; today the//
 //callers hand `@catalog` for every bag.)//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;fxJMnS2d0UCbo9zEAURLK65plI-Mu16jDkKgX-D1ap0
+<<^ code="&#x0003;">>ni:///sha-256;TbbUbwncOWa0QfAovhe4YsO0vJjqSBcO7dJHefsnMfY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -90,7 +90,7 @@ Pinned dials to dissolve (each → its emergent replacement):
 |---|---|
 | `lockThreshold` / `lock_hi 0.3` / `lock_lo 0.15` | (1−α)-quantile of autocorrelation under phase-scramble surrogates, per-stream |
 | `quorum` / `holdover_grace` | SPRT/CUSUM run-length holding false-lock at ARL₀ |
-| `nestRatio 2` / `nBands 5` | INTRA-clock: **coprime-prime** radices near the domain rhythm (e.g. 191/5/31), never dyadic. φ names band ORTHOGONALITY (Canon 18/20) + φ² the magnitude; "φ *specifically* tunes" stays Provisional 4/20 — the load-bearing claim is only *an independent feature per band*. count-5 stays Law-of-5s canon. |
+| `nestRatio 2` / `nBands 5` | INTRA-clock: **coprime-prime** radices near the domain rhythm (e.g. 191/5/31), never dyadic. φ names band ORTHOGONALITY + φ² the magnitude; "φ *specifically* tunes" stays a loose conjecture — the load-bearing claim is only *an independent feature per band*. count-5 stays Law-of-5s canon. |
 | `FFZ_DEFAULT_BOUNDS` (stub) | recovered-band periods → nearest coprime prime |
 | nucleation `γ` / supersaturation | back-solve from observed birth-rate at ARL₀ |
 | basin `radius` | closure-distance null quantile |

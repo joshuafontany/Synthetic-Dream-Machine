@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-shell-ux >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-shell-ux>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/canvas-shell-ux.mem"
@@ -11,7 +11,6 @@ manao             = 15
 manaoio           = 14
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Synthesis-Canon"
 retain            = true
 role              = "canvas-shell-ux — the shell doctrine for the canvas camera: the canvas is PRIMARY and chrome wraps it without blocking it. Migrated 2026-09-02 out of the superseded multiplayer-canvas constitution and evergreened off its retired surface. Carries the pointer-events discipline, the iOS visual-viewport tracking that a fixed header needs, and the native-scroller answer to one-finger pan."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shell-ux"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Canvas Shell UX ~ the canvas is primary, the chrome wraps it
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shell-ux"
 
 The reference implementation studied is ''Kinopio'' (`kinopio.club`, Vue 3, open source, community-funded) — and a later field survey found the same house independently, as ''one of the category's few survivors'' and one of only two credible touch-first spatial tools. Two arrivals at one door is the cheapest evidence available that a design is load-bearing rather than a taste.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pointer-events >>
+<<~ ahu #pointer-events>>
 
 !! The pointer-events discipline
 
@@ -44,9 +43,9 @@ Chrome sits at ''fixed viewport corners'' with `position: fixed; pointer-events:
 
 ⚠ ''A canvas-mode toggle must exist.'' Dimming the shell (`opacity` down, `pointer-events: none`) and restoring the drawing surface's own tools is a mode, not a preference — freeform drawing and structured arrangement want different chrome, and a shell that cannot get out of the way will be fought.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-ios-viewport >>
+<<~ ahu #the-ios-viewport>>
 
 !! ⚠ The iOS visual viewport ~ a fixed header is not fixed
 
@@ -58,9 +57,9 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 * ''Scroll events fire only when scrolling FINISHES'' on iOS, so the keyboard's animation cannot be tracked — only its endpoints.
 * ''An input with `font-size` under 16px makes iOS Safari zoom the page on focus.'' Set 16px minimum on every focusable control, or the camera moves ''because the user touched a text field''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #one-finger-pan >>
+<<~ ahu #one-finger-pan>>
 
 !! One-finger pan ~ let the browser do it
 
@@ -70,9 +69,9 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 ⚠ ''This composes with the pointer-events discipline and NOT with a rasterised surface.'' A real DOM element under a real scroller is available only to a DOM-hosting camera — one more consequence of #/wikispace-canvasspace-ontology's surface correction, arriving from the mobile side.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-boundary-is-visible >>
+<<~ ahu #the-boundary-is-visible>>
 
 !! A boundary the reader cannot see gets crossed by accident
 
@@ -80,9 +79,9 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 This decorates nothing. Capability enforces the `canon-boundary` crossing, and people ''obey'' it when they can tell which side they work on. A reader who cannot see the line does not experience a refusal as protection — they experience it as the tool losing their work, and they route around it. ⚠ The visible distinction never ENFORCES anything: it makes the enforced line predictable, — the only thing a surface can honestly contribute to a rule the store already keeps.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #dual-load >>
+<<~ ahu #dual-load>>
 
 !! Dual-load ~ the local replica renders first, the network merges after
 
@@ -96,9 +95,9 @@ This decorates nothing. Capability enforces the `canon-boundary` crossing, and p
 
 ⚠ ''The merge must not clear the surface.'' A remote delta arriving after first paint updates what stands; it never replaces the tree. A camera that re-renders wholesale on connect throws away the reader's caret, scroll and selection, — the very state the shell exists to keep.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #layout >>
+<<~ ahu #layout>>
 
 !! The layout, surface-invariant
 
@@ -122,12 +121,12 @@ This decorates nothing. Capability enforces the `canon-boundary` crossing, and p
 
 ''Remote cursors are canvas-relative, never viewport-relative'' — they move with pan and zoom because they mark a place in the space, not a place on the glass.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;p_ya3BoKfh9mpLMy0TOwI1LMoRqu6unlr7m0XOEE01E
+<<^ code="&#x0003;">>ni:///sha-256;TCZFsv_IRE1tO2crpczLz03wqzk3RY862fPbaN_rjrw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

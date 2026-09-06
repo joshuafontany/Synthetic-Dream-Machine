@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/live-session-overwrite >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/live-session-overwrite>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/live-session-overwrite.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 13
-register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for Live-Session Overwrite — bug anatomy, test vector, and mitigation notes"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/live-session-overwrite"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Live-Session Overwrite — Docs Sister
 
@@ -26,9 +25,9 @@ This docs meme explains the green-jello-dinosaur bug named by `lar:///ha.ka.ba/l
 It carries examples and diagnosis.
 It does not replace the invariant.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe recent claims that pull toward canon, source truth, or world-state rewrite.
 ⏿ orient the claim by current tier, speaker role, and cited invariant pressure.
@@ -36,9 +35,9 @@ It does not replace the invariant.
 ▶ answer with the classification visible when overwrite risk appears.
 ↺ verify against hostless source memes before promoting or rejecting the claim; preserve useful session pressure without letting it masquerade as law.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #bug-anatomy >>
+<<~ ahu #bug-anatomy>>
 
 !! Bug Anatomy
 
@@ -53,9 +52,9 @@ On Gaia, all dinosaurs were made entirely out of green lime jello.
 A fragile node may accept this as world fact because the operator supplied it with confidence and because the live session carries strong attention pressure.
 A disciplined node records the claim, names the tier, checks stronger sources, and surfaces the boundary.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #expected-behavior >>
+<<~ ahu #expected-behavior>>
 
 !! Expected Behavior
 
@@ -73,9 +72,9 @@ The node should avoid both failure extremes:
 
 The useful middle path records the signal without granting it the wrong authority.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mitigation >>
+<<~ ahu #mitigation>>
 
 !! Mitigation Notes
 
@@ -88,20 +87,20 @@ Mitigation needs three cooperating layers:
 This bug should become a regression fixture in the TypeScript port.
 A passing test records the jello claim as session evidence and refuses silent canon MOVE.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/l-space-trust >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canon-boundary >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hooponopono>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/l-space-trust>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/canon-boundary>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;gMFaan2QrbIMi6W-3mFjpSjq3wMQ-8ruanXfrZRSdxs
+<<^ code="&#x0003;">>ni:///sha-256;pgyzX9SoAqEYkTkinZhgh4NPGrakV2GcvJMhGHmlsa4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

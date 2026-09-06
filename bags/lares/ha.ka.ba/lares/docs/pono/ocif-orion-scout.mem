@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/ocif-orion-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/ocif-orion-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/ocif-orion-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "ocif-orion-scout — VERBATIM handoff of the tasked spirit Threadneedle: OCIF read at source and RUN, the measured round-trip loss, the absent conformance layer, and Orion Reed's technical models. Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/ocif-orion-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Threadneedle ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/ocif-orion-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -706,7 +705,7 @@ Every public surface, measured 2026-09-02:
 
 Meeting summaries in `ocwg/discussions/meetings/`: 029, 030, 033, 034, 035, 039. **Numbers 031, 032, 036, 037, 038 and everything after 039 were never published**, even though the website lists meetings through #43.
 
-**Ruling: a stall of the public process, not death of the work. Confidence 15/20.** I hold it at 15 because the evidence genuinely cuts both ways and I want you to see both edges.
+**Ruling: a stall of the public process, not death of the work..** I hold it at 15 because the evidence genuinely cuts both ways and I want you to see both edges.
 
 *For stall:* a v0.7.1 draft prepared 2026-03-24, accepted by the editor on 2026-04-10 ("Done. Thanks again for the detailed, thoughtful proposal"), and **never released** five months later; both of Orion's PRs open since March; the release checklist half-executed (catalog, cookbook and examples never updated); nine of the last fifteen meetings unrecorded; the website's "next meeting" five months in the past.
 
@@ -1080,10 +1079,10 @@ The format itself is sufficient. §Extension Mechanism grants a URI-identified p
 **Owed / not measured, so you know the shape of the hole:** the **OCWG Discord** is auth-walled and I could not read it — the meeting notes reference substantive spec discussion happening there that is invisible to this entire report, and it is the most likely place for evidence that would move my stall ruling in either direction. Also unmeasured: whether `tldraw/ocif`'s text-resource drop is known-and-backlogged or simply unnoticed; whether `chee/Littlebook`'s OCIF plugin is abandoned or paused; and whether the `v0.7.1-draft` has a release blocker or merely lacks a hand on the tiller.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;sY-yPl2s_AEjbAVCBgTugLj02EHzBmTQIEaiD8RLvNU
+<<^ code="&#x0003;">>ni:///sha-256;fyEtNYcxCSFAaH4wzUyCKcBeatdM8HvZX4_O0hgiWV0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

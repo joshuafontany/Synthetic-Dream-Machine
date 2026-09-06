@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lele >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/lele>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/lele.mem"
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "structured fire-and-continue sigil — lele as Verse branch; English alias: \\branch; async-first concurrency sprint pending"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-lele"]
@@ -13,9 +12,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/lele"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lele
 
@@ -31,9 +30,9 @@ cancels when that context completes.
 
 Grammar only --- the fire-and-continue execution runtime awaits the async-first sprint.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -43,27 +42,27 @@ A lele edge MUST stay bounded by the enclosing async context.
 A lele edge MUST cancel remaining side-flow work when the enclosing async context completes.
 A lele edge MUST NOT wait for a response from the target.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ lele lar:///target/uri >>
-<<~ \branch lar:///target/uri >>
+<<~ lele lar:///target/uri>>
+<<~ \branch lar:///target/uri>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-branch >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-branch>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;FcL0iD3s0mn7GIE4NmuNUkImdmd9nmmJ5GEiqBdnkjU
+<<^ code="&#x0003;">>ni:///sha-256;LjHz5EDAvlkyau30_15Ll-PwSbnA-LQgz1have0Nq0s
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

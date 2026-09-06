@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars>>
 ```toml meta
 cacheable  = true
-confidence = 12
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/the-faerie-court-wars.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "concept canon — the Faerie Court Wars, YOLD ~3195-4200: the clan wars of the settlement age that raised Neo-Thracia; and the era-ladder law that makes this span and the imperial one open ground for pattern-integrities"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/concepts/the-faerie-court-wars"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Faerie Court Wars
 
@@ -31,9 +29,9 @@ clans of Elyncia fought over a world that had just changed shape, and out of whi
 of strife among gods and immortals, ending in the First Breaking — belongs to the elder age and
 its cast. The Court Wars run two thousand years later, among clans, over ground.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-bracket >>
+<<~ ahu #the-bracket>>
 
 !! Why the Era Sits Where It Sits
 
@@ -50,9 +48,9 @@ belong to the era ''before'' that consolidation — the fighting that produced i
 clans already holding that ground disputed it; the argument ran a thousand years and ended with an
 empire. ''What the Court Wars settled was who got the world the Datum made.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-combatants >>
+<<~ ahu #the-combatants>>
 
 !! Who Fought
 
@@ -72,9 +70,9 @@ generations by a clan native to the eastern shelf of Mu — the ground that beca
 and turned against Neo-Thracian invaders twenty centuries after the war that forged it ended.
 //(Full line: [[ichi|lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi]].)//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-era-ladder >>
+<<~ ahu #the-era-ladder>>
 
 !! Design Law ~ the Era Ladder
 
@@ -126,9 +124,9 @@ under the fighting.
 ''whatever this place's war left it'' — and answers it differently for every place. A ruin from the
 Court Wars carries no default register; it carries the register of the front it belonged to.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open >>
+<<~ ahu #open>>
 
 !! Open
 
@@ -138,17 +136,17 @@ Court Wars carries no default register; it carries the register of the front it 
   during the Wars or after them.
 * ''Which Nexuses ran which register when'' — the flux stands canon, its map does not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-necrospire >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds >>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-necrospire>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-reachable-worlds>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;UuS8GF5XSDoTUPp6_kWLB-NTc-R4RnGugK5mx672PnI
+<<^ code="&#x0003;">>ni:///sha-256;bEuXgRmUuGwxw2kFkDsxh5xMlbFWcVbM2IWzBhnzIDs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

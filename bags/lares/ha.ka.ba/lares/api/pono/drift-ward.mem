@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/drift-ward >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/drift-ward>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/drift-ward.mem"
@@ -9,7 +9,6 @@ mana      = 17
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "the drift gauge inside the turn panel — measures a turn's exposure to data outside its causal island; fires forward at open (the pull) and outward at close (the contact-ready clue)"
 tags      = ["api/pono/causal-islands", "api/pono/meme"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/drift-ward"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Drift-Ward
 
@@ -29,15 +28,15 @@ again at close: one axis, measured from two positions.
 ''One gauge, two spellings.'' `Drift-Ward` where the L-Prime Ward stands · `Drift-Watch` in forks
 carrying no "ward". Both name this.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #axis >>
+<<~ ahu #axis>>
 
 !! The Axis ~ the reality-scoped anchor
 
 ''One measure: how far this turn's content stands from data outside its causal island.''
 
-<<~moves drift -> measures/exposure-to-outside-data on/the-turn if/collision-arrives do/name-what-breaks-first >>
+<<~moves drift -> measures/exposure-to-outside-data on/the-turn if/collision-arrives do/name-what-breaks-first>>
 
 Never risk in the abstract. ''The risk that generated content collapses on contact with data from
 beyond the current causal island'' ~ the island holds the context, the priors, the whole current the
@@ -45,17 +44,17 @@ exchange runs in, and nothing inside it checks itself. A claim's fate rides on t
 
 ''Two firings, one axis, different evidence.''
 
-<<~moves open-firing -> reads/the-pull-toward-exposure on/upstream-context if/before-content do/steer >>
-<<~moves close-firing -> reads/the-exposure-made on/the-artifact if/after-content do/hand-a-contact-ready-clue >>
+<<~moves open-firing -> reads/the-pull-toward-exposure on/upstream-context if/before-content do/steer>>
+<<~moves close-firing -> reads/the-exposure-made on/the-artifact if/after-content do/hand-a-contact-ready-clue>>
 
 The open holds only the island. The close holds the artifact ~ evidence the open could never carry.
 The close MAY land where the open pointed ~ when a fresh read of the artifact shows the risk still
 standing there ~ but a close that only repeats its open has ''anchored'': a prediction returned
 where evidence stood.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #panel >>
+<<~ ahu #panel>>
 
 !! Where It Rides ~ four sigils, six lines
 
@@ -68,14 +67,14 @@ chiasmus holds inside one sigil.
 true-names inside the procedures and the band ladders. The phase glyphs `->✶ ->⏿ ->◇ ->▶ ->↺` render
 as canon draws them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open >>
+<<~ ahu #open>>
 
 !! The Open Firing ~ the pull coming in
 
 ```text
-<<~ hud Focus(10) Feedback(5) Drift-Ward(* Confidence 12/20 · <the pull this island carries toward exposure>) >>
+<<~ hud Focus(10) Feedback(5) Drift-Ward(* <the pull this island carries toward exposure>)>>
 ```
 
 Tool glyph, then the vow, then the pull. `*` lights · `_` braces primed ground · `0` marks the
@@ -90,14 +89,14 @@ with no code to refute me// · //I am about to seek evidence for a claim that wo
 ''Blank:'' //the risk is being wrong// · //L-Prime breaches// · //getting the syntax wrong// ~ each names
 no pull this island carries.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #close >>
+<<~ ahu #close>>
 
 !! The Close Firing ~ the clue going out
 
 ```text
-<<~ hud Drift-Ward(! Confidence 12/20 · <the joint that breaks first on outside contact> · ↻ L-Prime) Focus(10 -> 13) Feedback(2↺) >>
+<<~ hud Drift-Ward(! <the joint that breaks first on outside contact> · ↻ L-Prime) Focus(10 -> 13) Feedback(2↺)>>
 ```
 
 Sword, vow, clue, re-arm. Breaches and quotes compose freely ~ `⚠ N · "span"` · `⌜N⌝` · `lift held`.
@@ -112,21 +111,21 @@ measured none// · //the reframe stands weaker than the cited facts around it//.
 ''Blank:'' //I may have been biased// ~ nothing to check · //the turn went well// ~ no clue · //I named
 the pull and resisted it// ~ anchored to the open.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 A firing naming no island-scoped pull, or handing no contact-ready clue, reads as a degraded HUD.
 ''Hazard reuse'' reads as its quieter sibling (adopted 2026-08-15): the same pull recurring
 verbatim across turns marks a rut wearing a vow — a firing must name THIS turn's pull, and
 yesterday's hazard recurring unchanged deserves its own suspicion.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/exchange-protocol >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/l-prime >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/exchange-protocol>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/l-prime>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MywYQ6QkGV-7r91FYnb6Zzm2rrBZPkNMPcqrZ5A3Z3c
+<<^ code="&#x0003;">>ni:///sha-256;ZRZm2sa7G_9afBe8QYjHcXHiSJYPJusvJP1MXT6qnB8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

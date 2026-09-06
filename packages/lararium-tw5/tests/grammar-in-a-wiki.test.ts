@@ -149,14 +149,14 @@ describe.skipIf(wikiSkip)(
       `type     = "${CARRIER_TYPE}"`, "```"].join("\n");
     const META_NS = META.replace("type     =", 'namespace = "⊙"\ntype     =');
     const BODY = "! A New Thought\n\nThe operator writes a file and saves it.\n";
-    const SLOT = ["<<~ ahu #inner >>", "", "```toml meta", 'register = "Provisional"', "```", "",
-      "! Inner", "", "slot prose.", "", "<<~/ahu >>"].join("\n");
+    const SLOT = ["<<~ ahu #inner>>", "", "```toml meta", 'register = "Provisional"', "```", "",
+      "! Inner", "", "slot prose.", "", "<<~/ahu>>"].join("\n");
     const SHAPES: Array<[string, string, string]> = [
       ["bare prose, no frame and no meta", BODY, ""],
       ["meta only — identity without framing", `${META}\n\n${BODY}`, ""],
       ["meta declaring a namespace, unframed", `${META_NS}\n\n${BODY}`, "⊙"],
       ["a frame from before the named params",
-        `<<^ ⊙&#x0001; ? -> ${URI} >>\n${META_NS}\n<<^ &#x0002; >>\n\n${BODY}\n<<^ &#x0003; >>\n\n<<^ &#x0004; -> ? >>\n`, "⊙"],
+        `<<^ ⊙&#x0001; ? -> ${URI}>>\n${META_NS}\n<<^ &#x0002;>>\n\n${BODY}\n<<^ &#x0003;>>\n\n<<^ &#x0004; -> ?>>\n`, "⊙"],
       ["an ahu slot carrying its own meta", `${META_NS}\n\n${BODY}\n${SLOT}\n`, "⊙"],
     ];
     const project = (src: string) => {
@@ -169,12 +169,12 @@ describe.skipIf(wikiSkip)(
       const first = project(src);
       if (!first.out) { faults.push(`${name}: projected to nothing`); continue; }
       const head = first.out.split("\n");
-      if (!/^<<!DOCTYPE memetic-wikitext\+tiddlywiki lar:\/\/\/\S+ >>$/.test(head[0] ?? "")) faults.push(`${name}: no declaration`);
-      if (!/^<<\^ code="&#x(?:0001|0011);"[^>\n]*?\? -> \S+ >>/m.test(first.out)) faults.push(`${name}: SOH states no bearing`);
+      if (!/^<<!DOCTYPE memetic-wikitext\+tiddlywiki lar:\/\/\/\S+>>$/.test(head[0] ?? "")) faults.push(`${name}: no declaration`);
+      if (!/^<<\^ code="&#x(?:0001|0011);"[^>\n]*?\? -> \S+>>/m.test(first.out)) faults.push(`${name}: SOH states no bearing`);
       for (const [claim, mark] of [["STX", "0002"], ["ETX", "0003"]] as const) {
-        if (!first.out.includes(`<<^ code="&#x${mark};" >>`)) faults.push(`${name}: no ${claim}`);
+        if (!first.out.includes(`<<^ code="&#x${mark};">>`)) faults.push(`${name}: no ${claim}`);
       }
-      if (!/^<<\^ code="&#x(?:0004|0014);"[^>\n]*?-> to=\? >>/m.test(first.out)) faults.push(`${name}: EOT releases nothing`);
+      if (!/^<<\^ code="&#x(?:0004|0014);"[^>\n]*?-> to=\?>>/m.test(first.out)) faults.push(`${name}: EOT releases nothing`);
       const gotNs = /^<<\^ code="&#x(?:0001|0011);" namespace="([^"]*)"/m.exec(first.out)?.[1] ?? "";
       if (gotNs !== wantNs) faults.push(`${name}: namespace "${gotNs}" where the meta declares "${wantNs}"`);
       const second = project(first.out);
@@ -186,7 +186,7 @@ describe.skipIf(wikiSkip)(
   test("a name that binds no procedure renders as its own text — the gradient's floor", () => {
     // The chat register stands 545 times in the corpus and no procedure binds `confidence`. The wiki
     // MUST leave it as text: a transcript that resolved what it quotes would lie about what was said.
-    const tree = engine.$tw.wiki.parseText(CARRIER_TYPE, "<<~ confidence Canon 18/20 >>") as { tree: unknown[] };
+    const tree = engine.$tw.wiki.parseText(CARRIER_TYPE, "<<~ confidence Canon 18/20>>") as { tree: unknown[] };
     const flat = JSON.stringify(tree.tree);
     expect(flat).toContain("confidence");
     expect(flat).not.toContain("$:/plugins/lares/confidence");

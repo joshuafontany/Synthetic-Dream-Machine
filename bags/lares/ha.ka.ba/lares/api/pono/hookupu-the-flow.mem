@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hookupu-the-flow >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/api/pono/hookupu-the-flow>>
 ```toml meta
 cacheable     = false
 file-path     = "bags/lares/ha.ka.ba/lares/api/pono/hookupu-the-flow.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 9
 manao         = 9
 manaoio       = 9
-register      = "Provisional-Synthesis"
 retain        = true
 revision-note = "PROVISIONAL — the flow-medium: a bounded expiring non-transferable offering laid at a place. The giver-bound hypothesis stands REFUTED; the receiver-side cap is the only lever with measured success"
 role          = "the flow-medium — hookupu, an offering laid down at a place rather than given to a person. A flow refills; a stock accumulates, and pricing an obligation converts a relation into a heritable estate. Carries the concentration findings and what each cost to learn"
@@ -17,11 +16,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lares/api/pono/hookupu-the-flow"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! `hoʻokupu` ~ the flow that cannot become an estate
 
@@ -33,9 +32,9 @@ uri-path      = "ha.ka.ba/lares/api/pono/hookupu-the-flow"
 
 ''So the medium refuses three properties'': it does not accumulate (the refresh ''discards'' the unspent remainder — carry-forward IS stock), it does not transfer between holders (you spend it ''on'' someone's contribution, never give it ''to'' them), and it carries no running total.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-refutation >>
+<<~ ahu #the-refutation>>
 
 !! The giver-bound hypothesis — REFUTED, three times
 
@@ -51,9 +50,9 @@ And cumulative advantage runs on ''prestige, not merit'', proven under randomisa
 
 ''Do not render running totals.'' The count carries the concentration; the act does not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-glyph >>
+<<~ ahu #the-glyph>>
 
 !! The Glyph ~ the form, and where it sits
 
@@ -67,7 +66,7 @@ What it lacks is exactly three: ''no allowance · no expiry · no anonymity''. A
 
 ''WHERE IT SITS: OUTSIDE THE THREAD.'' A reaction ''inside'' a thread becomes a speech act — it argues, competes with comments, addresses a person. A `hoʻokupu` ''outside'' the thread lays down at the place and replies to nobody. That is the word's semantics rendered as geometry: an offering set at the threshold, never placed on the table. It preserves ''spend-ON, never give-TO'' visually, where a rule would have to be remembered — and it refuses to nest, thread, or accumulate into conversation. It stays a margin. A shore.
 
-''THE SEAT, and it already exists.'' The DreamDeck feed architecture specs a ''JackPoint / Shadowtalk-style archive where a primary narrator posts and named handles annotate inline'', with a Kowloon / ActivityPub thread as the live social view. That is the surface a `hoʻokupu` sits ''outside'' of — the annotation layer holds speech, and the glyph rides the margin beside it, replying to nobody. Two channels, one page: ''inline handles SPEAK; margin glyphs GIVE.'' <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture >>
+''THE SEAT, and it already exists.'' The DreamDeck feed architecture specs a ''JackPoint / Shadowtalk-style archive where a primary narrator posts and named handles annotate inline'', with a Kowloon / ActivityPub thread as the live social view. That is the surface a `hoʻokupu` sits ''outside'' of — the annotation layer holds speech, and the glyph rides the margin beside it, replying to nobody. Two channels, one page: ''inline handles SPEAK; margin glyphs GIVE.'' <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
 
 ''What still lacks a seat'' — the ALLOWANCE. The glyph has a home (the margin) and the giving has a home (the place), but nothing renders ''what a person holds and what they have left this turn''. That surface reads as unbuilt and unspecced, and it wants care: a visible balance is a stock rendered, and the finding says ''do not render running totals''. So the allowance may want showing as a ''pool that refills'' rather than a number that counts — the glowing-pills form rather than a ledger line. Named here as the open UX question rather than guessed at.
 
@@ -96,27 +95,27 @@ Not coincidence: the Handle already reads as ''the only one that ever federates'
 
 ''The pattern integrity, and it has a very good record:'' voters anonymous, officials named. ''Anonymous participation is FULL participation, minus office.'' A public Handle is the price of office, paid voluntarily. The refugee, the watched, the person under an empire's eye participates completely and holds no seat — and that also dissolves the −50% volume problem, since the loss was measured where people had ONE mode. Offer both and the volumes add rather than trade.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open >>
+<<~ ahu #open>>
 
 !! Open
 
 * ''Publicity reads SCALE-RELATIVE for the GIVING tier only'' — a `hoʻokupu` named at your realm is anonymous at the Nexus unless carried up deliberately, which is the `lar:` law arriving socially: a name at one place does not federate unless announced. Open: whether ''place-visible but not Handle-federated'' reads as a fourth kind or a property of the third. It sits exactly where the conversion act lives.
 * ''Recognition aimed at the periphery can EXPEL it'' — unfloored rewards drove less-active contributors away, while a quality floor followed by RANDOM allocation held them (+20% retention at month one, +13% at quarter four). ''Floor, then lottery.''
 * ''Prior art, and how it died'': demurrage currencies solved hoarding and left transferability intact — a leaking estate stays an estate — and one such scheme was shut by a national bank, which is categorisation risk in its plainest form.
-* ''AND THE MEDIUM BECOMES A TOKEN BY BEHAVIOUR THE MOMENT IT GATES ANYTHING SCARCE'' — whatever this stack named it, and whatever the three refusals forbid on the ledger. <<~ confidence 12/20 >> The record runs one direction only: every non-transferable points medium that came to gate something scarce grew a market ''beside'' the ledger rather than inside it — reciprocal rings, off-ledger consideration, farmed faces — because non-transferability binds the token and never the favour. ''The three refusals bind the medium; they bind no market that forms around it.'' So the load-bearing constraint reads as a fourth, and it sits outside this meme's own surface: ''let the glyph gate NOTHING SCARCE.'' The moment a `hoʻokupu` count opens a cap, seats an office, or orders a queue, farming pressure arrives with the scarcity and the receiver-side cap bounds concentration without bounding the incentive. Named here as the boundary condition the medium depends on, held by whatever seats caps — never by the flow.
+* ''AND THE MEDIUM BECOMES A TOKEN BY BEHAVIOUR THE MOMENT IT GATES ANYTHING SCARCE'' — whatever this stack named it, and whatever the three refusals forbid on the ledger. The record runs one direction only: every non-transferable points medium that came to gate something scarce grew a market ''beside'' the ledger rather than inside it — reciprocal rings, off-ledger consideration, farmed faces — because non-transferability binds the token and never the favour. ''The three refusals bind the medium; they bind no market that forms around it.'' So the load-bearing constraint reads as a fourth, and it sits outside this meme's own surface: ''let the glyph gate NOTHING SCARCE.'' The moment a `hoʻokupu` count opens a cap, seats an office, or orders a queue, farming pressure arrives with the scarcity and the receiver-side cap bounds concentration without bounding the incentive. Named here as the boundary condition the medium depends on, held by whatever seats caps — never by the flow.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-thing-event>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;mf6Os0XfDzJEFwHv_K0XWv48lafzqjy4aJiCE5hpvhU
+<<^ code="&#x0003;">>ni:///sha-256;w12rNH6K9C1yMFSbz-BQKQCxjpHHWTo_NRgnURQ4FjA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

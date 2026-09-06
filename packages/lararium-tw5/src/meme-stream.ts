@@ -3,12 +3,12 @@
  *
  * Carrier framing uses HTML-entity control sigils as stream boundaries:
  *
- *   <<^ code="&#x0001;" namespace="[prefix?]"  ? -> lar:///URI >>   SOH — opens a carrier, declares URI
+ *   <<^ code="&#x0001;" namespace="[prefix?]"  ? -> lar:///URI>>   SOH — opens a carrier, declares URI
  *   <<^ code="&#x0002;" [^>]*>>               STX — header→body boundary
  *   <<^ code="&#x0003;" [^>]*>>               ETX — closes body (carrier done)
  *   <<^ code="&#x0004;" [^>]*>>               EOT — carrier exit sigil
- *   <<~ -> ? >>                                return-throat — EOT variant
- *   <<~ ahu #slot >>...<<~/ahu >>             ahu section — incremental child event
+ *   <<~ -> ?>>                                return-throat — EOT variant
+ *   <<~ ahu #slot>>...<<~/ahu>>             ahu section — incremental child event
  *
  * Kapu extended range: &#x0011; = SOH variant, &#x0014; = EOT variant.
  *
@@ -55,7 +55,7 @@ const STX_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0002;(?:[^>\n]|>(?!>))*>>/;
 const ETX_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0003;(?:[^>\n]|>(?!>))*>>/;
 // ETB: the attestation block terminator — stands between ETX and EOT, never framing text.
 const ETB_RE  = /<<\^(?:[^>\n]|>(?!>))*&#x0017;(?:[^>\n]|>(?!>))*>>/;
-// EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ? >>)
+// EOT: entity form (&#x0004;/&#x0014;) OR return-throat (<<~ -> ?>>)
 const EOT_RE  = /<<[~^](?:(?:[^>\n]|>(?!>))*&#x(?:0004|0014);(?:[^>\n]|>(?!>))*|\s*->\s*\?)\s*>>/;
 const AHU_OPEN_RE  = /<<~(?:[^>\n]|>(?!>))*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)\s*>>/;
 const AHU_CLOSE_RE = /<<~\s*\/\s*ahu\s*>>/;
@@ -64,7 +64,7 @@ type Hit = { index: number; end: number; cap: string | undefined };
 
 /**
  * Fence-aware find (fence-mask law): quoted sigils never frame
- * a carrier — a fenced `<<^ code="&#x0003;" >>` in teaching text MUST NOT close
+ * a carrier — a fenced `<<^ code="&#x0003;">>` in teaching text MUST NOT close
  * the body. The parse cursor always rests outside quoted spans (a sigil
  * inside a span never gets consumed), so masking `remaining` per call
  * stays sound across streaming chunks. An unclosed fence masks its open
@@ -104,7 +104,7 @@ export class MemeStreamParser {
   // ahu accumulation (inside body)
   private _inAhu    = false;
   private _ahuSlot  = "";
-  private _ahuStart = 0;  // absolute index just after <<~ ahu >> open sigil
+  private _ahuStart = 0;  // absolute index just after <<~ ahu>> open sigil
   private _ahuDepth = 0;
 
   /** Push a text chunk. Returns all events emitted during this chunk. */

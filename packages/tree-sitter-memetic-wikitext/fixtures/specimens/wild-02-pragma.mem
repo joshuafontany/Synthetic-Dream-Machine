@@ -1,15 +1,13 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/dreamnet-rhizome >>
+<<^ &#x0001; ? -> lar:///ha.ka.ba/lares/docs/lares/dreamnet-rhizome>>
 ```toml iam
 cacheable  = true
-confidence = 15
 file-path  = "bags/@lares/ha.ka.ba/lares/docs/lares/dreamnet-rhizome.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
-register   = "Synthesis"
 retain     = true
 role       = "the integrating read: the DreamNet as a rhizome grown UP from the anon floor (must-fall-back) through additive overlays (known-user · operator · cabal · nexus), launched at TWO surfaces that run one stack at two admission dials — amorphousdreams.net (closed beta, the Amorphous Dreams Cabal) and elyncia.app (open beta, the public mesh)"
 type       = "text/x-memetic-wikitext"
@@ -17,19 +15,19 @@ uri-path   = "ha.ka.ba/lares/docs/lares/dreamnet-rhizome"
 written    = "2026-07-14"
 ```
 
-<<^ &#x0002; >>
+<<^ &#x0002;>>
 
-<<~ ahu #the-ground >>
+<<~ ahu #the-ground>>
 
 ! The Growing Rhizome ~ anon floor to two launches
 
 !! The Ground ~ must fall back to anon
 
-Every vessel — a browser at elyncia.app, a node at a Lararium, any device — ''stands anon at its floor'': its own veiled-key, its own local content, no group, and it MUST always return there. Caps, node infrastructure, Handle memberships stack ABOVE the floor; none dissolves it. The whole mesh rests on this one unremovable ground (<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-base-model >>).
+Every vessel — a browser at elyncia.app, a node at a Lararium, any device — ''stands anon at its floor'': its own veiled-key, its own local content, no group, and it MUST always return there. Caps, node infrastructure, Handle memberships stack ABOVE the floor; none dissolves it. The whole mesh rests on this one unremovable ground (<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder#the-base-model>>).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-rhizome >>
+<<~ ahu #the-rhizome>>
 
 !! The Rhizome ~ additive overlays, grown one operator at a time
 
@@ -39,13 +37,13 @@ Each rung rides as an OPTIONAL overlay ON the floor; burning any overlay drops t
 
 * ''anon vessel'' — one device, own key, own content. The floor. Every visitor to either surface starts here.
 * ''known-user'' — a PersonaGroup of a human's OWN vessels, sharing doc-syncs (the crossing, `persona-crossing`). Single-principal; converges under one ordering authority.
-* ''operator'' — a known-user who RUNS a node vessel + local infrastructure (a Lararium) and relays. The rhizome node; the scale ladder's first rung (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>).
+* ''operator'' — a known-user who RUNS a node vessel + local infrastructure (a Lararium) and relays. The rhizome node; the scale ladder's first rung (<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>).
 * ''cabal'' — a multi-principal Circle (operators + users share a charter and corpus). Rides CGKA under bounded concurrency (`cabal-two-human`); the tie-break narrows to the add-while-remove window, which accept-and-heal covers for a small cabal.
 * ''nexus → DreamNet'' — Lararia federating by treaty; the super-mesh of all nexuses. No global now; each Lararium a causal island.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-surfaces >>
+<<~ ahu #two-surfaces>>
 
 !! Two Surfaces ~ one stack, two admission dials
 
@@ -54,9 +52,9 @@ The closed↔open choice runs as ONE NUMBER, never two codebases — the admissi
 * ''amorphousdreams.net → CLOSED beta'' — the ''Amorphous Dreams Cabal'': the first cabal, community-owned from inception, quorum-bootstrapped (the operator + Freyja's personas), ''invite-only'' (`cabal-invite` invite-only policy · the price bar high · a valid vouch required). The seed community; the DreamNet principal. Its content path stands proven (`cabal-two-human`, the two-human crossing).
 * ''elyncia.app → OPEN beta'' — the public DreamNet mesh: the same instruments at a ''lower dial'' (the price bar turned toward open). Anon users land, take an anon vessel, read public content, post, and climb the veil-ladder (throwaway → lived → pledged Handle). The broad entry.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-holds-what-owes >>
+<<~ ahu #what-holds-what-owes>>
 
 !! What Holds · What Owes ~ the launch critical path
 
@@ -70,13 +68,13 @@ The closed↔open choice runs as ONE NUMBER, never two codebases — the admissi
 
 The identity-privacy hardening (per-handle vessel credential · scope-exclusive nym · the threshold privacy plane) rides ABOVE the launch floor — owed, but not blocking the closed beta.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/the-veil-ladder>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lares/federation>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>>
 
-<<^ &#x0003; >>
+<<^ &#x0003;>>
 
-<<^ &#x0004; -> ? >>
+<<^ &#x0004; -> ?>>

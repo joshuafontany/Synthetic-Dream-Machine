@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/vm-projection-bus >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/vm-projection-bus.mem"
@@ -9,7 +9,6 @@ mana        = 18
 manao       = 18
 manaoio     = 17
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "invariant doctrine: VmPool→Projection Messaging Standard; dispatchEvent/addEventListener pattern; TW5Engine.onVerseEvent design"
 status-date = "2026-05-02"
@@ -18,9 +17,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/vm-projection-bus"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! VM Pool → Projection Messaging Bus
 
@@ -32,9 +31,9 @@ asymmetry baked into the TW5 wiki event system.
 itself onto TW5Engine at runtime. The direction of dependency is:
 `ReactionEngine → TW5Engine`, never the reverse.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #event-contract >>
+<<~ ahu #event-contract>>
 
 !! Event Contract
 
@@ -82,9 +81,9 @@ interface VerseEventConsumer {
 `ReactionEngine` implements this. `TW5Engine` depends only on this interface — never
 on `ReactionEngine` directly. The interface is defined in `@lararium/mesh`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #vm-pool-wiring >>
+<<~ ahu #vm-pool-wiring>>
 
 !! VmPool Wiring
 
@@ -114,9 +113,9 @@ class VmPool {
 Each slot has an independent projection bus wire. A kukali event in slot 0 does not
 propagate to slot 1 — the wiki event buses are per-VM, not shared.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-from-hook >>
+<<~ ahu #migration-from-hook>>
 
 !! Migration from `_larKukaliHook`
 
@@ -147,9 +146,9 @@ teardown();
 ''MUST:'' `_larKukaliHook` MUST NOT exist in any non-web2 file.
 Any file referencing `_larKukaliHook` outside a `*.web2.*` path FAILS FPI-1.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verse-alignment >>
+<<~ ahu #verse-alignment>>
 
 !! Verse Alignment
 
@@ -166,26 +165,26 @@ The asymmetry is preserved:
 * KukaliWidget signals (fires) — knows nothing about who is listening
 * ReactionEngine subscribes (persists) — knows nothing about which widget fired
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scope-1-networking >>
+<<~ ahu #scope-1-networking>>
 
 !! Scope 1 ~ the mesh projection surface [surgical 2026-07-03]
 
-The projection bus serves as a ''Scope-1'' mesh surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The `VerseEventConsumer` interface lives in `@lararium/mesh`; the CRDT projection it couples ''runs in TS'' (structural causality, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of ''Scope 2'' (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. <<~ confidence 12/20 >> the ruling seats this bus on the TS side of the split.
+The projection bus serves as a ''Scope-1'' mesh surface under the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The `VerseEventConsumer` interface lives in `@lararium/mesh`; the CRDT projection it couples ''runs in TS'' (structural causality, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of ''Scope 2'' (the general Sensorium-palaces). Both scopes consume the whole model and braid TS-coordination with py/R-tooling. the ruling seats this bus on the TS side of the split.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/verse-event-lattice>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;fAEW0gJM5JAPUbBGlCHIgUnLCK6sniGMmh5R8x-QGvw
+<<^ code="&#x0003;">>ni:///sha-256;7mGQ53XAZeZmx_ZlrKJeHEd3GjoWQFHnZjxqADe9ozk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

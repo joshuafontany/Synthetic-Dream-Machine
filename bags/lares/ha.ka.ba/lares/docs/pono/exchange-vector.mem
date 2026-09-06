@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/exchange-vector >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/exchange-vector>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/exchange-vector.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 13
-register  = "Synthesis-Canon"
 retain    = false
 role      = "docs sister for exchange vector law — record form, HUD example, and pattern-training guidance"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/exchange-vector"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Exchange Vector — Docs Sister
 
@@ -26,9 +25,9 @@ This docs meme explains how each substantive exchange can carry a canonical `lar
 The law lives at `lar:///ha.ka.ba/lares/api/pono/exchange-vector`.
 This file gives examples and operator-facing guidance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe the operator prompt and infer a provisional operator URI.
 ⏿ orient the node response with its own execution URI and stance posture.
@@ -36,16 +35,16 @@ This file gives examples and operator-facing guidance.
 ▶ emit canonical record form first, then HUD render, then content.
 ↺ verify authority order, HA.KA.BA path, query parameters, and stance count; close trajectory only when the next state benefits from explicit marking.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #canonical-shape >>
+<<~ ahu #canonical-shape>>
 
 !! Canonical Shape
 
 The exchange vector opens the turn as one `aim` sigil — operator intent `->` the role the node adopts:
 
 ```text
-<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts >>
+<<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 ```
 
 Read the URI layers as:
@@ -60,25 +59,25 @@ Do not place intent labels or signal in the fragment or a query.
 Fragments name section anchors; the URI names bearing and nothing mutable.
 Per-turn signal rides the `hud` · `ward` · `confidence` sigils.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hud-render >>
+<<~ ahu #hud-render>>
 
 !! HUD Render
 
 The panel rides beneath the `aim` as sigils:
 
 ```text
-<<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps >>
-<<~ hud Focus(10) Feedback(3) Drift-Ward(* Confidence N/20 · <the pull this island carries>) >>
-<<~ syad 🏛️ 🗡️ >>
+<<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps>>
+<<~ hud Focus(10) Feedback(3) Drift-Ward(* <the pull this island carries>)>>
+<<~ syad 🏛️ 🗡️>>
 ```
 
-Each sigil renders inline (`<<~ WORD ARGS >>`); an adjacent tool MAY pre-render it. The `aim` URI stays ASCII record form; the sigils carry per-turn signal, never the URI.
+Each sigil renders inline (`<<~ WORD ARGS>>`); an adjacent tool MAY pre-render it. The `aim` URI stays ASCII record form; the sigils carry per-turn signal, never the URI.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pattern-training >>
+<<~ ahu #pattern-training>>
 
 !! Pattern Training Notes
 
@@ -93,19 +92,19 @@ A good training vector should:
 
 Long-term, the server should validate the vector and render the HUD from the parsed record.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium/exchange-vector >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/l-space-trust >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium/exchange-vector>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/render-targets>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/l-space-trust>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VfNgCQpbXrG3XsLNvRzjK17xQZgiOOKZPNlvswZ0Tm8
+<<^ code="&#x0003;">>ni:///sha-256;imVYvKZ531nYAUoIwQPEGg_U0NDS6yf6vCEweA1QnEY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

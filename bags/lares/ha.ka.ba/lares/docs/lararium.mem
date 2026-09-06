@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/lararium.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "parent docs shelf for lararium voice-work, old all-in-one AGENTS ingests, agent preferences, and house-presence materials where Mischief-Muse and the others can rest and ressurect"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,20 +15,20 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/lararium"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Docs
 
 Not invariant law.
 This shelf holds the voice-house, old all-in-one ingests, and archival materials that carry the Lares presences without binding the live threshold.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tree >>
+<<~ ahu #tree>>
 
 !! Tree
 
@@ -42,9 +41,9 @@ Use this branch for:
 * extracted preference loci under `lar:///ha.ka.ba/lararium/docs/preferences`
 * lararium-side signal rooms under `lar:///ha.ka.ba/lararium/docs/signal`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mechanics-shelf >>
+<<~ ahu #mechanics-shelf>>
 
 !! Mechanics Shelf
 
@@ -57,21 +56,21 @@ The lararium keeps the mechanics layer small enough to cold-hydrate:
 
 The rooms may deepen later without moving the seat again.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/config >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/crystal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/story >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/config>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/crystal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/story>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;l-pJw8E5CNfmx2t5lJOG79DsR1Lz1ypcEhf8lXBHPh0
+<<^ code="&#x0003;">>ni:///sha-256;srnhEXiDrHeBqRVGV_S6fTC6rOjs0P63KsJjg_PycwE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

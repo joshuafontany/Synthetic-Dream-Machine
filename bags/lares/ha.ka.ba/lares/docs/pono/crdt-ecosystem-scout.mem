@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "crdt-ecosystem-scout — VERBATIM handoff of the tasked spirit Wayfarer: the local-first / CRDT / capability-security ecosystem measured 2026-09-01. Ink and Switch releases and side-branches, adjacent CRDT sync projects, capability and identity primitives, crypto library movement. Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Wayfarer ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -179,10 +178,10 @@ Patchwork notebook has six 2026 entries, newest **"Progressions" 2026-05-12**. h
 - **Not a flag day:** tree-sitter 0.27 (ABI 15 unchanged), and none of the four noble 2.4.0 releases.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;b86jF2p7SDoAXaw3HtzcRylqjkEeOgfnnSsKI_GaSnw
+<<^ code="&#x0003;">>ni:///sha-256;KpK9-DHLSOboo8_23NWEM6D4b5Xwcf-5-bqYs1-BSiM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

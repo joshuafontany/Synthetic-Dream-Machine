@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/readiness-keys >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/readiness-keys>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/readiness-keys.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 17
-register      = "Synthesis-Canon"
 retain        = true
 role          = "lararium progressive readiness vocabulary — named shrine-lights, boot doctrine"
 source-symbol = "READINESS_KEYS"
@@ -18,9 +17,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/readiness-keys"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Readiness Keys
 
@@ -38,9 +37,9 @@ auth → catalog → snapshot → room-content → room-presence
                           ↘ projection:<id> ...
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -69,9 +68,9 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 # No single "all-ready" gate may be used; UI reveals per shrine-light.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Readiness Law
 
@@ -88,15 +87,15 @@ dynamic-forms = ["corpus:<id>", "projection:<id>"]
 * Corpus readiness does not share fate with shell.
 * Projection readiness does not grant authority.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;cHWsmCSOWvZMnDpC4swzy81SM0dUeMnb0mbNH-jFk8I
+<<^ code="&#x0003;">>ni:///sha-256;Ru3Uk8ms77BvFOJ6cgeFAALFgkufz2JX0S0z-BwVJMg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

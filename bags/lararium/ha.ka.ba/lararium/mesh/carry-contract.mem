@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/carry-contract >>
+<<^ code="&#x0001;" namespace="⚕" from=? -> to=lar:///ha.ka.ba/lararium/mesh/carry-contract>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/mesh/carry-contract.mem"
@@ -9,7 +9,6 @@ mana       = 15
 manao      = 15
 manaoio    = 14
 namespace  = "&#x2695;"
-register   = "Synthesis-Canon"
 retain     = true
 role       = "the carry-contract: revocation reframed as an IMMUNE SYSTEM (no firewall exists in no-global-now). Kapae = the propagating antigen riding the always-carried public/infra planes; a Kapae'd authn/z gets MU. Three carry tiers — MANDATORY (operator↔kahu: @oracle+@crossroads+Kapae, always) · BILATERAL (operator↔operator: cabal/shared) · PRIVATE (home). Carry ⊥ read ⊥ contract; carry-generous is safe because the BeeKEM read-floor makes every carry-mistake unreadable. Operator-ruled 2026-07-20; substrate built, the contract design-intent."
 status     = "standing"
@@ -20,9 +19,9 @@ uri-path   = "ha.ka.ba/lararium/mesh/carry-contract"
 written    = "2026-07-20"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! The Carry Contract ~ the Nexus immune system
 
@@ -31,7 +30,7 @@ written    = "2026-07-20"
 > the BeeKEM read-floor, `kapae`/`un_kapae` primitives, `NexusRegistryDoc.blocked{}`); the
 > three-tier CONTRACT + the quorum-signed antigen ride ahead of code.
 
-<<~ ahu #the-unsolvable-as-stated >>
+<<~ ahu #the-unsolvable-as-stated>>
 
 !! The problem dissolves, it does not solve
 
@@ -44,9 +43,9 @@ So the mesh does not build a wall. ''It grows an immune system.'' The turn: stop
 //prevent//, start //immunizing// — propagate the tombstone faster than the adversary can
 exploit the partition window.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #kapae-the-antigen >>
+<<~ ahu #kapae-the-antigen>>
 
 !! Kapae ~ the propagating antigen
 
@@ -68,9 +67,9 @@ operator carries as a propagation node //by contract// (#/the-three-tiers). The 
 system: `NexusRegistryDoc.blocked{}` seeds it, drawn forward as the quorum-signed, always-carried
 antibody.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-three-tiers >>
+<<~ ahu #the-three-tiers>>
 
 !! Three tiers of carriage
 
@@ -80,18 +79,18 @@ The contract falls into three tiers — and answers ''what a Nexus carries vs wi
 \procedure ~Tier(Type:"" Params:"") ~Tier <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Tier MANDATORY "who/operator↔kahu carries/@oracle + @crossroads (public + infra) + the Kapae antigen when/AT ALL TIMES ~ contracting into a Nexus IS agreeing to be an immune-propagation node" >>
-<<~Tier BILATERAL "who/operator↔operator carries/cabal + shared docs when/by direct peer contract ~ the guarded/classes tier, negotiated node-to-node, NOT via the kahu" >>
-<<~Tier PRIVATE "who/the vessel alone carries/nothing outward when/never ~ stays home, never federates" >>
+<<~Tier MANDATORY "who/operator↔kahu carries/@oracle + @crossroads (public + infra) + the Kapae antigen when/AT ALL TIMES ~ contracting into a Nexus IS agreeing to be an immune-propagation node">>
+<<~Tier BILATERAL "who/operator↔operator carries/cabal + shared docs when/by direct peer contract ~ the guarded/classes tier, negotiated node-to-node, NOT via the kahu">>
+<<~Tier PRIVATE "who/the vessel alone carries/nothing outward when/never ~ stays home, never federates">>
 
 ''The mandatory tier is the operator↔kahu contract's spine.'' To contract with a Nexus'
 kahu-priesthood is to owe the mesh continuous carriage of its public + infra streams — and the
 immune antigen rides there. The bilateral tier is the operators' own business, contracted
 directly between them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #carry-read-contract >>
+<<~ ahu #carry-read-contract>>
 
 !! Carry ⊥ Read ⊥ Contract — and why carry may be generous
 
@@ -111,13 +110,13 @@ generous mandatory tier never leaks readable bytes — the crypto is the safety 
 routing. So #59's identity ring stands NOT as a second peer-gate (that lives, live, at the
 DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter with Mu.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-honest-edges >>
+<<~ ahu #the-honest-edges>>
 
 !! The honest edges (kept lit)
 
-<<~ confidence 14/20 >> Two walls hold this up, and both are named:
+Two walls hold this up, and both are named:
 
 * ''The antigen MUST be kahu-quorum-signed — or the immune system becomes a censorship weapon.''
   If any node could Kapae any identity, an adversary bans your legit users. A Kapae entry is a
@@ -134,9 +133,9 @@ DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter 
   that the mesh stays connected enough to outrun — the Shadowland refusal, the net heals faster
   than the corps can burn a SIN (#/the-frame).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-complement >>
+<<~ ahu #the-complement>>
 
 !! The bilateral complement ~ presence-handshake
 
@@ -147,9 +146,9 @@ wax-stamped; a live handshake, not a static cap). Stop affirming → you are out
 verb you DO, dissolving to `anu` when unfed). ''Two scopes, two mechanisms, one immune response'':
 Kapae revokes mesh-wide and fast; the handshake revokes bilaterally and instantly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-frame >>
+<<~ ahu #the-frame>>
 
 !! The frame ~ held in talk-story
 
@@ -163,29 +162,29 @@ scouts flagged (GPA-linkability, fork-legitimacy) are not failures — they are 
 held where a 500-year mythos wants it: bounded by crypto where we reach, story-held where we
 cannot.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/federation >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/oracle-governance>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/kahu>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/crossroads>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/cabal-realm>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/federation>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/founding-runbook>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/cap-tier>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/secure-context>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;WQGIZ5ggsvncoktIrQ55Tl3kmeypwbmhwOnzTJZsNns
+<<^ code="&#x0003;">>ni:///sha-256;kpCrGwDVVaBZKoANikzB7Gcl3UyDe2_eo_nmLky7Su4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

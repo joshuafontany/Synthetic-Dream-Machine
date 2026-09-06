@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/frame-uncertainty >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/frame-uncertainty>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/frame-uncertainty.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "docs concept room for declaring interpretive forks before costly response commitment"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/frame-uncertainty"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Preferences — Frame Uncertainty
 
 Not invariant law.
 This room holds the recovered habit of naming the fork before picking a branch that costs money, time, or canon weight.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -38,9 +37,9 @@ Strong witnesses recur in:
 * `prompts/Lares_Kernel.compressed.md`
 * operations and kernel snapshots
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pressure >>
+<<~ ahu #pressure>>
 
 !! Pressure
 
@@ -57,17 +56,17 @@ This principle preserves:
 The recurring feeling across the witnesses: silent interpretation becomes acceptable only when the stakes stay low.
 Where the branch matters, the fork must surface.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/collaboration-model>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Zm22Byvw8SEnHKmUY_5blIZfd0iz2Mw1DZ8FiCqd7Aw
+<<^ code="&#x0003;">>ni:///sha-256;wtTZtkos9LoKulmEqheFLTBUo7hDVR9bv_rlBTObyzY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

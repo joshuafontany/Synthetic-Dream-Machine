@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/save-path >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/save-path>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/api/save-path.mem"
@@ -10,26 +10,25 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x0950; &#x0901;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant spec for the outbound TW5→CRDT save path: debounce, draft routing, ephemeral truncation"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/api/save-path"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Save-Path Invariants — IslandAdaptor Outbound
 
 Path K / F-arc: outbound hygiene for sustained live wiki authoring.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #problem >>
+<<~ ahu #problem>>
 
 !! Problem Space
 
@@ -45,9 +44,9 @@ into the Automerge store. Without hygiene here, sustained editing produces:
 * ''Draft routing confusion'' — `"Draft of …"` tiddlers from TW5 editing UX
   should reach the per-wiki draft bag, not get silently dropped.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariants >>
+<<~ ahu #invariants>>
 
 !! Invariants
 
@@ -107,9 +106,9 @@ All inbound meme text passes through `splitBodyTiddler()` (ONE parser,
 FOUR call sites law). `_writeMeme` upholds this; do not add a second parse
 site.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #debounce-design >>
+<<~ ahu #debounce-design>>
 
 !! Debounce Design
 
@@ -141,17 +140,17 @@ State held on the adaptor:
 On `stop()`: iterate `_debounce`, clearTimeout each, clear both maps.
 No callbacks fire after `stop()`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/verse-mesh >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/island-adaptor>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/verse-mesh>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;BNLjSMc6byOWDNliBTQsT4w6RNvJSukcDAXkzbHXxYc
+<<^ code="&#x0003;">>ni:///sha-256;QYqaTRKgXvoy_5ryNSzDEBVuL6svTel9B1pcdvSKz2U
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

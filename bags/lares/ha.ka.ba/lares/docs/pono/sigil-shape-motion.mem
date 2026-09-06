@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/sigil-shape-motion >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/sigil-shape-motion>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/sigil-shape-motion.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 17
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = true
 role      = "Shape/Detail/Motion reading frame for Sharktooth sigils; progressive display authoring principle"
 tags      = ["api/pono/meme"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/sigil-shape-motion"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Sigil Shape / Detail / Motion
 
@@ -26,9 +25,9 @@ An authoring and reading frame for Sharktooth sigils as a three-axis perceptual 
 Distinct from the render-mode technical dispatch in `#render-modes` of `memetic-wikitext.tid`.
 This frame addresses how a human or agent reads sigil structure at varying zoom levels.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #shape >>
+<<~ ahu #shape>>
 
 !! Shape — The Bracket Structure
 
@@ -40,13 +39,13 @@ This frame addresses how a human or agent reads sigil structure at varying zoom 
 
 The double-chevron shape evolved for the informational physics of the surface — designed to tear through general context and isolate a specific packet of meaning.
 
-Named closers `<<~/SIGIL >>` add a typed jaw: the closer carries the sigil name, making the boundary self-describing without requiring a parser to backtrack.
+Named closers `<<~/SIGIL>>` add a typed jaw: the closer carries the sigil name, making the boundary self-describing without requiring a parser to backtrack.
 
 ''Shape at zoom-out:'' a reader scanning a large document sees only the bracket pairs. That skeleton reveals graph topology — which zones carry sigil structure and which carry plain prose — before any inner content reads.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #detail >>
+<<~ ahu #detail>>
 
 !! Detail — The Sigil Payload
 
@@ -63,9 +62,9 @@ At zoom-in, the reader engages with the detail layer. At zoom-out, the detail st
 
 ''Document time vs render time:'' the `->` arrow inside the detail marks the transition from passive reference to active invocation. A sigil without `->` references; a sigil with `->` executes. The arrow functions as a directional vector — a lunge from document time into render time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #motion >>
+<<~ ahu #motion>>
 
 !! Motion — Open / Close Posture
 
@@ -76,14 +75,14 @@ Motion registers in the open/close posture of the sigil:
 
 The motion axis answers: does this sigil grip and contain, or does it point and release?
 
-* `<<~ ahu #slot >>body<<~/ahu >>` — grips; the jaw closes around the body; WorksiteNode
-* `<<~ loulou lar:///target >>` — points; the tooth breaks the surface and exits; EdgeNode
+* `<<~ ahu #slot>>body<<~/ahu>>` — grips; the jaw closes around the body; WorksiteNode
+* `<<~ loulou lar:///target>>` — points; the tooth breaks the surface and exits; EdgeNode
 
 ''Temporal scarring:'' when a render-time sigil closes (`>>`), the surrounding document resumes, but the output of the sigil remains — the "scar" the jaw left in the text. The document changes shape at that point.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #progressive-display >>
+<<~ ahu #progressive-display>>
 
 !! Progressive Display — Zoom-Level Reading
 
@@ -101,18 +100,18 @@ A human author can write at any zoom level freely. The sigil layer (skeleton) pr
 
 This differs from the technical three-mode render dispatch (`html` / `carrier` / `projection`) in `memetic-wikitext.tid #render-modes`, which controls serialization format. Progressive display controls //reading posture// — a human/agent concern, not a wire-format concern.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline#/render-axes >>
-<<~ loulou lar:///ha.ka.ba/lares-history/memes/wild-magic-prior-art >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline#/render-axes>>
+<<~ loulou lar:///ha.ka.ba/lares-history/memes/wild-magic-prior-art>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;FXimMKG7qNueR7-PXwlYQ6SleVI_L8h0rEu4-SvueAw
+<<^ code="&#x0003;">>ni:///sha-256;J9cnKEJTPZ9tDxhkpfWRv6kjavfZXfK2kI3FP29dL8A
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

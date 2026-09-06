@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/compaction-handlers>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/compaction-handlers.mem"
 l-space     = "lararium"
 mana        = 12
 manao       = 12
-register    = "Synthesis"
 retain      = true
 role        = "bag-compact + rotate-recipe — DXOS-style snapshot-restart on a bag; the only local-first mechanism that bounds CRDT history"
 source-file = "packages/lararium-tw5/src/compaction-handlers.ts"
@@ -15,16 +14,16 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/compaction-handlers"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #disambiguation >>
+<<~ ahu #disambiguation>>
 
 !! Disambiguation — `epoch` here names COMPACTION
 
 This `epoch` (the DXOS-style snapshot-restart that mints a fresh history-less doc) names
 the ''compaction'' that bounds CRDT history — DISTINCT from the authority/liveness
 ''lease-epoch'' (the re-key / re-share clock, max-register, coordinator-free) that runs the
-siege refresh window at <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>. The
+siege refresh window at <<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>. The
 two MAY co-occur at a boundary, never fuse: this one bounds //state-history growth//, the
 lease-epoch bounds //who may still act//. Reserve bare //epoch// for the lease going forward;
 read this mechanism as ''compaction''. ''AND THE VERB NOW SAYS SO'': `lares bag compact` /
@@ -39,11 +38,11 @@ frontier and nothing else; every other claimant carries a qualifier that names w
 and it blanks where ours picks a winner), ''seal'' epoch (ours, charter grain), ''POSIX ms'' for a
 wall-clock (never spelled //epoch// beside a clockless fence). One question separates them: does the
 fold pick a WINNER, or blank both paths? This one picks nothing — a compaction is a CUT, not a fold.
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -61,9 +60,9 @@ Two reactors, both running worker-ward over the catalog accessor
   to a previous-canon underlay in the recipe stack (content stays readable,
   new writes land in the fresh doc).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariants >>
+<<~ ahu #invariants>>
 
 !! Invariants
 
@@ -84,9 +83,9 @@ mutates a mounted composite.
 ''EP-4 — Operator prunes.'' The old doc stays in the repo after the epoch;
 reclaiming its storage stays an operator act (OS-level or a future GC sprint).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #deferred-design >>
+<<~ ahu #deferred-design>>
 
 !! Deferred design — EPOCH as an operator rite (proposed 2026-06-15)
 
@@ -118,19 +117,19 @@ Necessity is not urgent: `save()` compresses but never truncates, so the op-log
 is free recovery until growth on a long-lived high-churn bag actually bites
 (automerge#799). EPOCH waits on its own floor + that growth signal.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/recipe >>
-<<~ loulou lar:///ha.ka.ba/lararium/node/handler-args >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/recipe>>
+<<~ loulou lar:///ha.ka.ba/lararium/node/handler-args>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;w4qLOX1M1Mcm_paQTjRRZbr6Q8gaLNB9gnol8Lv39k4
+<<^ code="&#x0003;">>ni:///sha-256;0vLGyMHJdiv5JnJLBwctdOiVviKFff6JN_D3t4MhQj4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

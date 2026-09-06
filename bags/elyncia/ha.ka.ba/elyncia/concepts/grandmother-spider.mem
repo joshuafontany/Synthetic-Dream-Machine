@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/grandmother-spider>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/grandmother-spider.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "concept canon — Grandmother Spider as one Persona of the Arcana wearing three masks (void-weaver, treaty-architect, cult-mother); and what the Mother Spore is NOT"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/concepts/grandmother-spider"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Grandmother Spider ~ Three Masks, One Persona
 
@@ -32,9 +30,9 @@ presence reaches mortals through masks, cults, sacred routes, relics, and infras
 rather than through one stable body. Reading a god as a Persona wearing masks stands as the
 setting's ordinary grammar, not a special case made for this one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-masks >>
+<<~ ahu #the-masks>>
 
 !! The Three Masks
 
@@ -58,9 +56,9 @@ Mother Spore clusters in settled country, and sends tasked spirits out on errand
 keeps the local shrine. Same weaver, three scales, and the mortals at each scale rarely suspect the
 other two.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #not-the-mother-spore >>
+<<~ ahu #not-the-mother-spore>>
 
 !! What the Mother Spore Is NOT
 
@@ -75,17 +73,17 @@ debts do not reduce to one.
 
 ''Do not collapse them.'' A priestess who mistakes her node for her god has stopped serving either.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/strandbeests>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;nCUAxPDmA-JrZx_jjGVL33Dazo8-EwRmJYRseWb9c4k
+<<^ code="&#x0003;">>ni:///sha-256;nweXEu59JiGp-oNoJssStAc3KJQaPTACYHaeThPIM9g
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

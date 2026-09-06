@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/tw5-deserializer>>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/tw5-deserializer.mem"
 last-reviewed = "2026-07-18"
 mana          = 17
 manao         = 17
 manaoio       = 16
-register      = "Synthesis-Canon"
 role          = "design doc: TW5 tiddlerdeserializer module (module-type auto-collection) for text/memetic-wikitext"
 source        = "lar:///ha.ka.ba/lararium/tw5/modules/deserializer"
 status-date   = "2026-04-30"
@@ -15,9 +14,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/tw5-deserializer"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #overview >>
+<<~ ahu #overview>>
 
 !! Overview
 
@@ -25,21 +24,21 @@ TW5 deserializes tiddler content by content-type. The deserializer for `text/mem
 
 The canonical source rests at `lar:///ha.ka.ba/lararium/tw5/modules/deserializer`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #split-model >>
+<<~ ahu #split-model>>
 
 !! Split Model
 
-The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all meta TOML fields merged into its TW5 fields; each `<<~ ahu #slot >>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot >>` reference in its place. Prologue, preamble, header-text and postamble ride RECORDS of their own at derived addresses (`…#$prologue`, `…#slot/$preamble`) — each holds its bytes in a `text`, because a TW5 field cannot carry a newline across a `.tid` projection and a value that survives in one format only cannot travel. The frame splices them by POSITION, never by marker, so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte. Scalar carriage — `$slot`, `$fragment-parent`, `$carrier-soh` — stays on fields (see lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#/the-carriage).
+The entry `memeticWikitextDeserializer(text, fields)` streams the raw text through `MemeStreamParser` (single-meme, multi-meme, and partial carriers all flow), then routes each carrier-close event through `splitMemeToTiddlers` → `splitRecursive`. The parent tiddler carries all meta TOML fields merged into its TW5 fields; each `<<~ ahu #slot>>` block becomes a child tiddler holding its body bytes authoritatively, the parent keeping a `<<~ kahea ahu #slot>>` reference in its place. Prologue, preamble, header-text and postamble ride RECORDS of their own at derived addresses (`…#$prologue`, `…#slot/$preamble`) — each holds its bytes in a `text`, because a TW5 field cannot carry a newline across a `.tid` projection and a value that survives in one format only cannot travel. The frame splices them by POSITION, never by marker, so the recompose inverse (`expandMemeRefs`) round-trips the carrier byte-for-byte. Scalar carriage — `$slot`, `$fragment-parent`, `$carrier-soh` — stays on fields (see lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#/the-carriage).
 
 A split failure never truncates: `safeSplitMeme` falls back to one verbatim tiddler flagged `lar_parse_degraded`, and grades the parse via `parseMemeText().failures` into `lar_parse_failures` — degradation surfaces legibly rather than dropping bytes.
 
 Parse warnings ride a synthesised `$:/lararium/parse-warning/<slug>` tiddler (`PARSE_WARNING_TAG`). The `deserializeCarrier(text, fields)` wrapper reads that same channel and returns `{ records, diagnostics }` on the shared `MemeDiagnostic` contract, so a gate reads a grade rather than sniffing a title.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #module-collection >>
+<<~ ahu #module-collection>>
 
 !! The Module Rides the Native Registry
 
@@ -47,8 +46,8 @@ The deserializer travels as a plugin tiddler — TS source compiled to a CJS mod
 
 The paired `carrier-filetype` startup module registers `.mem` as `text/memetic-wikitext` through `$tw.config.fileExtensionInfo`, so drag-and-drop, the import dialog, and the filesystem adaptor route as one. ''One extension, one type'' — the extension answers the only question a content sniff could ask, and a malformed carrier reaches the carrier reader (which names the fault) rather than a router that would reclassify it away from its own diagnostic.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;-tWw2Kq27YfAu6K7bH_Q-qNf-eRa2BCcN9HJa9QZ6U0
+<<^ code="&#x0003;">>ni:///sha-256;qElvVcPQIWvXioqcQ8A6QPzGiXg5Mdi5gO24n2X2onM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

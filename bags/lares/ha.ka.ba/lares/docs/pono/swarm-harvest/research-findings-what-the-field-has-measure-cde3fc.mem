@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: Research findings: what the field has measured, by rung. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-field-has-measure-cde3fc"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Research findings: what the field has measured, by rung
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 19,404 characters
 
@@ -131,9 +130,9 @@ I have enough now to compose a substantially strengthened final report. Let me d
 **Explicit gaps not reached this session:** Reetika Khera/Jean Drèze primary sources and Jharkhand numbers; Swedish BankID fraud statistics; MitID 2021–2022 migration complaint data; EUDI Large-Scale Pilot (POTENTIAL/NOBID/DC4EU/EWC) interim results; Guifi.net's "Compact for a Free, Open and Neutral Network" text and critiques; Pan-Canadian Trust Framework; ICAO PKD failure/gap data; Sardex quantitative outcome numbers (papers identified, contents not extracted). These are plausible-to-exist, not confirmed-absent — a next pass with a live search engine or targeted publisher-site scraping would likely close most of them.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 9,840 characters
 
@@ -184,14 +183,14 @@ This is consistent with — though not sufficient on its own to prove — your h
 **Given the WebSearch outage, I'd recommend re-running the remaining items (Guifi.net compact critique, Sardex econometrics, MitID complaint data, Swedish BankID fraud numbers, EUDI pilot results, the Article 45 open letter, Reetika Khera primary sources) once the search budget resets — I can pick this back up.**
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;MmbyMsLRbC2Lhdmtpv2dQGXyddU4UBGxqNZC6ZcSV8U
+<<^ code="&#x0003;">>ni:///sha-256;xcO7YKH0imv3xFqqtEIr4m5NgzGfVu3mATVGTUfpEVg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

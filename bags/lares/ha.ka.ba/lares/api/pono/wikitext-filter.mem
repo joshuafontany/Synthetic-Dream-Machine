@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/wikitext-filter >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/wikitext-filter>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/wikitext-filter.mem"
@@ -10,16 +10,15 @@ l-space     = "stable"
 mana        = 17
 manao       = 8
 namespace   = "&#x2299;"
-register    = "Synthesis-Canon"
 retain      = true
 role        = "wikitext-filter grammar dialect — drops field/index; aligns with the pranala+TOML data model and lexical meme context"
 type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/wikitext-filter"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #purpose >>
+<<~ ahu #purpose>>
 
 ! Lararium Filter Grammar
 
@@ -44,9 +43,9 @@ for new authoring.
 `prefix`, `suffix`, `contains`, `search`, `regexp`,
 `get`, `has`, `count`, `uniq`, `unique`, Boolean operators, step operators.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #operators-this-dialect-adds >>
+<<~ ahu #operators-this-dialect-adds>>
 
 !! The operators this dialect adds over TW5
 
@@ -106,11 +105,11 @@ Queries memes by reaction-family (papalohe) edges. Useful for finding UEFN devic
 [edge:family[reaction]dir[outbound]]            memes that emit reaction edges (event sources)
 ```
 
-The `trigger` property carries the event name from the `papalohe` sugar form (`<<~ papalohe FROM -> TO trigger=OnBegin >>`).
+The `trigger` property carries the event name from the `papalohe` sugar form (`<<~ papalohe FROM -> TO trigger=OnBegin>>`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #preserved-operators >>
+<<~ ahu #preserved-operators>>
 
 !! Preserved Operators (TW5 Compat)
 
@@ -150,9 +149,9 @@ each[key]       — one representative per unique TOML key value
 `currentTiddler` → use `[self[]]`
 `is[system]` → use `[toml:l-space[system]]`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scope-and-context >>
+<<~ ahu #scope-and-context>>
 
 !! Scope and Context Model
 
@@ -161,16 +160,16 @@ Filters evaluate against an ''explicit context'', not an ambient dynamic variabl
 | Context source | How set | Applies to |
 |---------------|---------|------------|
 | Carrier `#meta` URI | Default when no `meme` block active | Top-level filter expressions in a carrier |
-| `meme` sigil block | `<<~ meme lar:///uri >>` encloses filter usage | All filter expressions inside the block |
+| `meme` sigil block | `<<~ meme lar:///uri>>` encloses filter usage | All filter expressions inside the block |
 | `huli` loop variable | `as item` binding | Filter expressions inside the `huli` body |
 | `wehe`/`helu` parameter | Named arg passed at `kahea` call site | Filter expressions inside definition body |
 
 No ambient lookup. No `currentTiddler`-style dynamic scope.
 A filter expression that needs "the current meme" uses `[self[]]`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invocation >>
+<<~ ahu #invocation>>
 
 !! Invocation
 
@@ -178,12 +177,12 @@ A filter expression that needs "the current meme" uses `[self[]]`.
 
 ````text
 # Inline (wai, huli, ui)
-<<~ wai [tag[invariant]sort[toml:title]] >>
-<<~ huli [edge:family[control]role[owns]] as item >>
-<<~ ui [toml:l-space[grammar]] >>
+<<~ wai [tag[invariant]sort[toml:title]]>>
+<<~ huli [edge:family[control]role[owns]] as item>>
+<<~ ui [toml:l-space[grammar]]>>
 
 # Block (hana with grammar-key)
-<<~ hana #work >>
+<<~ hana #work>>
 ```toml
 grammar      = "wikitext-filter"
 context      = "[self[]]"
@@ -192,15 +191,15 @@ result-shape = "set"
 ```
 
 [toml:register[SC]edge:family[control]]
-<<~/hana >>
+<<~/hana>>
 ````
 
 The `grammar-key` value for `hana` blocks: `"wikitext-filter"`.
 The key `"x-tiddlywiki-filter"` serves import and migration.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #migration-from-tw5 >>
+<<~ ahu #migration-from-tw5>>
 
 !! Migration from x-tiddlywiki-filter
 
@@ -217,17 +216,17 @@ Systematic find-replace for authors migrating TW5 content:
 | `is[system]` | `[toml:l-space[system]]` |
 | `all[tiddlers]` | `all[memes]` |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/x-tiddlywiki-filter>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;krOurRx1wIPXbJn_D1tvJXYQwevhJ60nR67Y85s19YQ
+<<^ code="&#x0003;">>ni:///sha-256;1HV8dT0oOYmpnzHVflhXM-9ITflFgpZaQ_efcDx2bSw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

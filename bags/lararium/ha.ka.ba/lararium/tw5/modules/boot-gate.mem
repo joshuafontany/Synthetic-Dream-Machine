@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/boot-gate >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 ```toml meta
 file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/modules/boot-gate.mem"
 heleuma       = "ha"
@@ -8,7 +8,6 @@ module-ref    = "lar:///ha.ka.ba/lararium/tw5/modules/boot-gate"
 mana          = 17
 manao         = 17
 manaoio       = 16
-register      = "Synthesis-Canon"
 role          = "canonical source copy: TW5 boot gate — 3-layer trust check for corpus-promoted JS modules"
 source-symbol = "_bootModules"
 status-date   = "2026-04-30"
@@ -17,9 +16,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/modules/boot-gate"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Boot Gate
 
@@ -27,15 +26,15 @@ Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. 
 
 ''This code cannot be loaded from a meme.'' It requires a live `$tw` instance and operates as the mechanism that promotes memes into executables. It lives in `packages/lararium-tw5/src/lararium-tw5.ts` as `_bootModules()`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/boot-gate" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #thresholds >>
+<<~ ahu #thresholds>>
 
 !! Gate Constants
 
@@ -48,8 +47,8 @@ Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. 
 
 Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer 3 (keyhive capability proof) remains planned; not yet implemented — gate currently passes on layers 1–2 only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;SrxYo7XSGilhwj7PL1Kfpg4MLNd_32rWRe9tx-l2SG0
+<<^ code="&#x0003;">>ni:///sha-256;UGA2gcucKV1_Fi8bJvfpBmHh7VQqowTKsGu_JDP1vnw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

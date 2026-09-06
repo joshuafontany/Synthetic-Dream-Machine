@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-necrospire >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/the-necrospire>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/concepts/the-necrospire.mem"
 l-space    = "stable"
 mana       = 15
 manao      = 15
 manaoio    = 14
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "concept canon — the Necrospire: the Oort needle, the Pale Emperor's prison bound onto it, the aeons adrift, the fall, and the caldera in the Accursed Mountains"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/concepts/the-necrospire"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Necrospire
 
@@ -39,9 +37,9 @@ came first — the random bombardment that sowed the rust-blight across every co
 then the Spire itself came down on the Illyrian realm, shattering a major ley-line and Web 2
 node, toppling the Empire, and breaking the world a second time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-caldera >>
+<<~ ahu #the-caldera>>
 
 !! The Caldera ~ where the myth chose to land
 
@@ -58,16 +56,16 @@ The prison became the landmark; the landmark became the pilgrimage; the necro-cu
 rim and call the drowning of the realm around it a baptism. The land disagrees, and keeps
 sinking.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/illyria/region-worksheet >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars >>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/illyria/region-worksheet>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-burned-library>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;l9mO2HXBpBwaOF8Q6vJVV9sxp1lhi3OacT_ieU_L1AY
+<<^ code="&#x0003;">>ni:///sha-256;Ly7RFiSqn8PbMMN_IBJnjVA2yxymZj0f1cQwHuwZnjM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

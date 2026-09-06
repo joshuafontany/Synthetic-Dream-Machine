@@ -1,7 +1,7 @@
 /**
  * ahu-sections-address — every named `ahu` section becomes an addressable tiddler.
  *
- * A meme splits into one tiddler per `<<~ ahu #name >>` child, and the section's address
+ * A meme splits into one tiddler per `<<~ ahu #name>>` child, and the section's address
  * (`lar:///<uri-path>#name`) resolves to that tiddler. That is the whole premise of a fragment in a
  * `lar:` URI: the name points at a thing.
  *
@@ -12,7 +12,7 @@
  *
  * The two tests below split the fault by cause:
  *
- *   ① EVERY OPEN CLOSES.        A `<<~ ahu #x >>` with no `<<~/ahu >>` swallows the sections that
+ *   ① EVERY OPEN CLOSES.        A `<<~ ahu #x>>` with no `<<~/ahu>>` swallows the sections that
  *                               follow it, so they never open a tiddler of their own.
  *
  *                               A NESTED section is not that fault. Nesting is deliberate house
@@ -71,7 +71,7 @@ function addressed(file: string, disk: string): Set<string> | null {
   const out = new Set<string>();
   for (const r of records) {
     // A NESTED SECTION ADDRESSES UNDER A COMPOUND FRAGMENT — `#parent/child`. The leaf is the name
-    // the `<<~ ahu #child >>` open wrote, so the leaf is what an open must be found under.
+    // the `<<~ ahu #child>>` open wrote, so the leaf is what an open must be found under.
     const frag = /#\/?([a-z0-9-]+(?:\/[a-z0-9-]+)*)$/i.exec(String(r["title"] ?? ""));
     if (frag) { const leaf = frag[1]!.split("/").pop()!; if (!leaf.startsWith("$")) out.add(leaf); }
   }

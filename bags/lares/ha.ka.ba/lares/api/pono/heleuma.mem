@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/heleuma>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/heleuma.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 18
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: heleuma anchor pattern — compiled-side artifacts held in the meme graph by necessity"
 tags      = ["api/pono/meme"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/heleuma"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Heleuma — Anchor
 
@@ -31,9 +30,9 @@ A ''heleuma'' names any artifact that MUST exist outside the `lar:///` URI space
 
 A heleuma does not mark failure. It marks a ''named threshold crossing'' — the meme graph asserting sovereignty over something that must, for now, be born outside.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect compiled artifact — TypeScript module, runtime registration, or build asset outside lar:/// space
 ⏿ orient heleuma tier: ha (permanent structure), ka (promotion-eligible soul/fire), ba (path marker)
@@ -41,9 +40,9 @@ A heleuma does not mark failure. It marks a ''named threshold crossing'' — the
 ▶ pair artifact with API meme + doc meme; declare module-ref; the #source slot transcludes the code-file tiddler; sync-heleuma.ts checks window integrity + module body-sha256
 ↺ meme graph holds the rope; the artifact holds the anchor; drift surfaces as build warning; confirm heleuma pair complete; drift check registered; promotion path declared or ruled inapplicable
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Heleuma Law (SHALL)
 
@@ -56,9 +55,9 @@ A heleuma does not mark failure. It marks a ''named threshold crossing'' — the
 # The build script `sync-heleuma.ts` SHALL verify window integrity (module-ref declared · window standing · window facing the ref) for every mode, and SHALL check drift where drift can live — between the code-file tiddler's body and the live TS (`--sync-modules`, body-sha256). A window cannot drift; only a home can. Findings MUST surface as build warnings; staleness does not block the build but MUST stay visible.
 # A code file MAY enter the wiki as a code-file tiddler through the TW5 filetype registry (a `.meta`-paired ingest titles it at its `module-ref` URI), lighting its windows; a standalone module MAY additionally compile TS → CJS through the plugin's own Vite pass and land executable (`application/javascript` + `module-type`). The gate on execution stays import topology — a module whose imports resolve inside the wiki's module space promotes; a barrel spanning files does not.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #freyja-alignment >>
+<<~ ahu #freyja-alignment>>
 
 !! Freyja Alignment
 
@@ -66,9 +65,9 @@ Freyja's "Reality Anchor" principle: in a local-first, island-topology system, a
 
 The heleuma does not try to absorb the anchor into the graph. It holds the rope.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #promotion-path >>
+<<~ ahu #promotion-path>>
 
 !! Promotion Path
 
@@ -80,12 +79,12 @@ A heleuma API meme that acquires:
 
 ...MAY load through `_bootModules()` via the corpus gate and replace its compiled-in counterpart. At that point the heleuma pair functions as a standard meme pair and `heleuma = true` MAY be removed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jCu5K0dZh9Dd6aBMNz1jpoYsEKKNnq6o1HErWk8nytM
+<<^ code="&#x0003;">>ni:///sha-256;CB3Zpf-wBwOgiw_PPBtMO0XBRDapaRa-GJOsVH-VoPo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/e2e-harness-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/e2e-harness-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/e2e-harness-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "e2e-harness-scout — VERBATIM handoff of the tasked spirit Wright: a per-test reading of the rotted top-level e2e harness, ruling for each failure whether the HARNESS or the CODE is wrong, and naming two product defects (a CLI that truncates its own JSON on a pipe; a null dataDir reaching the operator's live vessel). Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/e2e-harness-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Wright ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/e2e-harness-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -159,9 +158,9 @@ Measured through the built deserializer, `noosphere-boot.mem` yields **22**: par
 
 ### RC-H · The framing head took named ends — **1 failure + 1 FALSE GREEN**
 Commit **`5acdf71ca`** (2026-08-29, "the graph names its own ends — 628 carriers take from= and to="). Touched **0** files under `tests/`. The head is now
-`<<^ code="&#x0001;" namespace="…" from=? -> to=lar:///… >>`.
+`<<^ code="&#x0001;" namespace="…" from=? -> to=lar:///…>>`.
 
-**Failure:** `load-tw5-filetypes.test.ts:38` writes the retired head `<<^ code="&#x0001;" ? -> lar:///… >>`. Collided directly against `packages/lararium-tw5/dist/deserializer.js`:
+**Failure:** `load-tw5-filetypes.test.ts:38` writes the retired head `<<^ code="&#x0001;" from=? -> to=lar:///…>>`. Collided directly against `packages/lararium-tw5/dist/deserializer.js`:
 
 ```
 OLD head → 1 record titled 'fallback-title'                       ← membrane does not read it
@@ -171,9 +170,9 @@ NEW head → 1 record titled 'lar:///ha.ka.ba/lares/test/memetic-witness'
 
 **FALSE GREEN — count F2 as a defect, not a pass.** `corpus-feed.test.ts:63`:
 ```js
-/<<[\^~][^&\n]*&#x(?:0001|0011); \? -> (\S+) >>/
+/<<[\^~][^&\n]*&#x(?:0001|0011); \? -> (\S+)>>/
 ```
-matches **0 of 274** corpus carriers (measured). `expectedRoots()` returns ∅, so F2's membership loop at `:110` iterates nothing and the only surviving claim is `fileUris.size === files.length`. F2 has been proving nothing since 2026-08-29 and reports green. Correct shape: `/<<[\^~][^\n]*&#x(?:0001|0011);[^\n]*from=\? -> to=(\S+) >>/`.
+matches **0 of 274** corpus carriers (measured). `expectedRoots()` returns ∅, so F2's membership loop at `:110` iterates nothing and the only surviving claim is `fileUris.size === files.length`. F2 has been proving nothing since 2026-08-29 and reports green. Correct shape: `/<<[\^~][^\n]*&#x(?:0001|0011);[^\n]*from=\? -> to=(\S+)>>/`.
 
 **Also count `herm-floor` R4 as a false green** (see D2).
 
@@ -204,7 +203,7 @@ The decay cause is structural: `tests/package.json` declares `test:e2e`, not `te
 
 1. **Rendezvous** — `grep -rn 'lares\.sock' tests/` must be empty. The socket is derived, never hunted by filename. (Would have caught RC-C the day `913222c4f` landed.)
 2. **No zero-match regex** — every framing/URI regex literal under `tests/e2e/` must match ≥1 byte of `bags/lares/…/noosphere-boot.mem` or the corpus. *A regex that matches nothing is a vacuity, not a pass* — this is the check that turns F2's silence into a red.
-3. **Fixture heads parse** — extract every `<<^ … >>` literal a test *writes*, feed it through `packages/lararium-tw5/dist/deserializer.js`, require the returned title to equal the declared `to=` URI (never the fallback). Catches RC-H.
+3. **Fixture heads parse** — extract every `<<^ …>>` literal a test *writes*, feed it through `packages/lararium-tw5/dist/deserializer.js`, require the returned title to equal the declared `to=` URI (never the fallback). Catches RC-H.
 4. **Fence labels exist** — every ```` ```toml <word> ```` literal in `tests/` must occur in `bags/`. Catches RC-G.
 5. **No retired spellings in assertions** — no `bags/@`, no bare `@<slug>`, no bare `#<name>` lar: fragment inside any `expect(...)` under `tests/`. Catches RC-F and the latent `#exchange-protocol`.
 6. **Derived counts only** — `1 + ahuCount` vs `memeticWikitextDeserializer(BOOT_MEME).length`; red when they disagree. Catches RC-E and, in general, any hand-enumerated model constant.
@@ -218,10 +217,10 @@ Two more that belong **beside the code, not in the e2e tree** (`packages/lares-c
 Finally, two housekeeping notes worth the operator's ear: add a named `test:e2e:smoke` (one file, ~35s) and say in `TEST-ARCHITECTURE.md` that it is the gate for anyone touching `packages/lares-cli` or `packages/lararium-tw5` — the two packages that moved 44 files under this harness while nothing watched. And the box currently carries **seven stale `lararium-node` daemons** from earlier sessions (ports 8080, 8097, 8098, 8260, 8261, 8262, 8272) plus four orphan sockets under `/tmp/lares-1000/`; that load is real and it is what turned RC-D from a flake into a near-certain red.
 `````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;0uLJmAPr3eh43sLN8myVgRhjfxGkYD1RmvzdlgKXLUI
+<<^ code="&#x0003;">>ni:///sha-256;WSIwkCBI2RUFi_U1vq1GTyuSqC0CkKFO65sxQooYKMQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

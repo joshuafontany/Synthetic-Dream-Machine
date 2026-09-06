@@ -1,15 +1,13 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki>>
 ```toml meta
-confidence = 14
 file-path  = "bags/lares/ha.ka.ba/lares/docs/history/dreamnet-memewiki.mem"
 l-space    = "archive"
 mana       = 15
 manao      = 16
 manaoio    = 12
 north-star = "Boot a memetic-wikitext kernel in Node, resume it in a browser, and bridge it to Kowloon, TLDraw and MemPalace without any of them holding authority over the memetic core."
-register   = "Synthesis"
 retain     = true
 role       = "the consolidation that staged the memetic-wikitext kernel — four scratch notes folded into one OODA-HA worksite, judged against what stands"
 tags       = ["api/pono/meme"]
@@ -17,7 +15,7 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/history/dreamnet-memewiki"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! DreamNet MemeWiki — the consolidation that staged the kernel
 
@@ -36,7 +34,7 @@ expectation.
 ''This memo holds no law.'' It records how a field of scattered research became an implementable
 architecture, and which of its bets the building honoured.
 
-<<~ ahu #phase-map >>
+<<~ ahu #phase-map>>
 
 !! Phase Map
 
@@ -46,9 +44,9 @@ DreamNet MemeWiki gathers the current research field, maps it into an implementa
 
 This file uses the OODA-HA loop as work discipline rather than ornament. The point is not to sound ceremonial. The point is to keep raw findings, synthesis, decisions, action, and residue from collapsing into one undifferentiated planning blob.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe >>
+<<~ ahu #observe>>
 
 ```toml
 name = "DreamNet_MemeWiki-observe"
@@ -92,7 +90,7 @@ Observe also keeps the absences visible:
 * no migration path yet for older HTML or widget-shaped content
 * no validated MemPalace bridge yet
 
-<<~ ahu #observe-ha >>
+<<~ ahu #observe-ha>>
 
 !!!! Observe / ha
 
@@ -100,9 +98,9 @@ Observe-ha holds source identity and research boundaries.
 
 The DreamNet MemeWiki research field is not one idea. It is a bundle of kernel questions, editor questions, collaboration questions, and integration questions that should stay distinguishable until Decide compresses them intentionally.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe-ka >>
+<<~ ahu #observe-ka>>
 
 !!!! Observe / ka
 
@@ -110,9 +108,9 @@ Observe-ka governs how intake should be read.
 
 Read the current field in four lanes: deterministic kernel shape, authoring and parsing stack, collaborative canvas and frontend bridge, and implementation sequencing. Losing those lanes too early makes later prioritization harder.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #observe-ba >>
+<<~ ahu #observe-ba>>
 
 !!!! Observe / ba
 
@@ -120,11 +118,11 @@ Observe-ba governs posture under planning pressure.
 
 This stage should preserve uncertainty openly. A confident-sounding guess about MemPalace or sync does not become an architectural fact merely because it sounds tidy in a memo.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient >>
+<<~ ahu #orient>>
 
 ```toml
 name = "DreamNet_MemeWiki-orient"
@@ -176,7 +174,7 @@ Orient should keep the following tensions explicit:
 * how browser resume should package store payload, render state, and session information without leaking Kowloon assumptions back into the kernel
 * how older content migrates into memetic-wikitext without freezing the new grammar around legacy debt
 
-<<~ ahu #orient-ha >>
+<<~ ahu #orient-ha>>
 
 !!!! Orient / ha
 
@@ -184,9 +182,9 @@ Orient-ha holds architectural identity.
 
 DreamNet MemeWiki is currently best understood as a kernel-centered system with editor, app, sync, and semantic bridges around it. If the kernel disappears from view, the plan turns into a bag of integrations with no stable center.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient-ka >>
+<<~ ahu #orient-ka>>
 
 !!!! Orient / ka
 
@@ -194,9 +192,9 @@ Orient-ka governs relation mapping.
 
 Map each subsystem by ownership, not by enthusiasm. TLDraw should not own the core memetic parser. Kowloon should not dictate kernel internals. MemPalace should not become a hidden source of truth before the base document model exists.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #orient-ba >>
+<<~ ahu #orient-ba>>
 
 !!!! Orient / ba
 
@@ -204,11 +202,11 @@ Orient-ba governs movement from research toward design.
 
 Favor the narrowest architecture that can still grow. The research points toward a modular stack, but not toward building every module at once.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide >>
+<<~ ahu #decide>>
 
 ```toml
 name = "DreamNet_MemeWiki-decide"
@@ -255,7 +253,7 @@ Decide should keep these items deferred rather than pretending they are solved:
 * comprehensive migration tooling for legacy content
 * refresh and event semantics beyond the minimum viable kernel
 
-<<~ ahu #decide-ha >>
+<<~ ahu #decide-ha>>
 
 !!!! Decide / ha
 
@@ -263,9 +261,9 @@ Decide-ha holds what counts as settled enough for motion.
 
 The key settled claim is simple: build the kernel first, keep it greenfield, and make integrations prove themselves against it rather than defining it by committee.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide-ka >>
+<<~ ahu #decide-ka>>
 
 !!!! Decide / ka
 
@@ -273,9 +271,9 @@ Decide-ka governs decision sharpness.
 
 Every active decision above changes implementation order immediately. Every explicit deferral above protects the work from fake certainty and scope sprawl.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decide-ba >>
+<<~ ahu #decide-ba>>
 
 !!!! Decide / ba
 
@@ -283,11 +281,11 @@ Decide-ba governs commitment posture.
 
 Commit to the smallest decisions that unlock code. Refuse the larger decisions that only create architecture theater before the kernel can even roundtrip a document.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act >>
+<<~ ahu #act>>
 
 ```toml
 name = "DreamNet_MemeWiki-act"
@@ -343,7 +341,7 @@ holder with its own query contract, reached over MCP rather than bridged into th
 * [ ] canvas embed plus sync viability — unproven, and nothing now depends on it
 * [x] MemPalace and CRDT — the mesh carries the CRDT layer; MemPalace stands as its own holder
 
-<<~ ahu #act-ha >>
+<<~ ahu #act-ha>>
 
 !!!! Act / ha
 
@@ -351,9 +349,9 @@ Act-ha holds workstream identity.
 
 The workstreams are ordered so each later proof depends on earlier semantic stability instead of masking its absence with UI or sync novelty.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act-ka >>
+<<~ ahu #act-ka>>
 
 !!!! Act / ka
 
@@ -361,9 +359,9 @@ Act-ka governs sequencing.
 
 If work begins on TLDraw or MemPalace before the kernel can parse and render deterministically, the project risks building adapters around a moving void.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #act-ba >>
+<<~ ahu #act-ba>>
 
 !!!! Act / ba
 
@@ -371,11 +369,11 @@ Act-ba governs execution posture.
 
 Prototype narrowly, verify hard, and only then widen scope. Each workstream should produce a proof artifact, not just a more detailed opinion.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 ```toml
 name = "DreamNet_MemeWiki-aftermath"
@@ -420,7 +418,7 @@ This `todo` locus should later split forward into stronger artifacts:
 
 The point of this file is not permanence. The point is orderly pressure toward the next lawful documents.
 
-<<~ ahu #aftermath-ha >>
+<<~ ahu #aftermath-ha>>
 
 !!!! Aftermath / ha
 
@@ -430,9 +428,9 @@ What is clear now: the kernel this memo staged carries a corpus, and the contrac
 are gated — the round-trip, the block check, the coordinates, the graph. What remains unclear: whether a
 collaboration canvas ever earns a place beside them, since nothing has needed one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath-ka >>
+<<~ ahu #aftermath-ka>>
 
 !!!! Aftermath / ka
 
@@ -442,9 +440,9 @@ The measure it set — convert residue into a tested artifact, or the loop has n
 it is judged by here. Four of six milestones stand as gates rather than prose, and the two that do not
 are named as such rather than left to read as pending work.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath-ba >>
+<<~ ahu #aftermath-ba>>
 
 !!!! Aftermath / ba
 
@@ -452,19 +450,19 @@ Aftermath-ba governs how the work lands.
 
 Leave the unresolved items visible and bounded. Hidden residue is how architecture debt later masquerades as surprise.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/tw5-deserializer >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/history/consume-archive >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/parser>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/tw5-deserializer>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/history/consume-archive>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;9S7aaizXmk2LCIzl0buHYhrpo388zsKrHN-mVP243mk
+<<^ code="&#x0003;">>ni:///sha-256;j15091rsqh1qWhXVwXebtxzF7tK2VaCio9Qj2_LPaJw
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -7,7 +7,7 @@
  *   &#x0003; ETX  — body done (carrier close)
  *   &#x0004; EOT  — carrier exit (optional tail)
  *
- * <<~ ahu #slot >> ... <<~/ahu >> sections arrive as ahu-child events.
+ * <<~ ahu #slot>> ... <<~/ahu>> sections arrive as ahu-child events.
  *
  * Parser stays isomorphic — no fs/DOM/TW5 dependencies.
  *
@@ -24,27 +24,27 @@ import { MemeStreamParser } from "../src/meme-stream.js";
 const URI = "lar:///ha.ka.ba/lares/api/mu";
 
 const FULL_CARRIER = [
-  `<!-- <<~ !DOCTYPE = ${URI} >> -->`,
+  `<!-- <<~ !DOCTYPE = ${URI}>> -->`,
   ``,
-  `<<^ code="&#x0001;" from=? -> to=${URI} >>`,
+  `<<^ code="&#x0001;" from=? -> to=${URI}>>`,
   ``,
   "```toml meta",
   `uri-path = "ha.ka.ba/lares/api/mu"`,
   `type     = "text/memetic-wikitext+tiddlywiki"`,
   "```",
   ``,
-  `<<^ code="&#x0002;" >>`,
+  `<<^ code="&#x0002;">>`,
   ``,
-  `<<~ ahu #spine >>`,
+  `<<~ ahu #spine>>`,
   `Core invariants.`,
-  `<<~/ahu >>`,
+  `<<~/ahu>>`,
   ``,
-  `<<~ ahu #edges >>`,
-  `<<~ pranala ? -> lar:///AGENTS family=control role=implements >>`,
-  `<<~/ahu >>`,
+  `<<~ ahu #edges>>`,
+  `<<~ pranala ? -> lar:///AGENTS family=control role=implements>>`,
+  `<<~/ahu>>`,
   ``,
-  `<<^ code="&#x0003;" >>`,
-  `<<^ code="&#x0004;" -> to=? >>`,
+  `<<^ code="&#x0003;">>`,
+  `<<^ code="&#x0004;" -> to=?>>`,
 ].join("\n");
 
 // ---------------------------------------------------------------------------
@@ -106,17 +106,17 @@ describe("MemeStreamParser — incremental streaming", () => {
     const parser = new MemeStreamParser();
     // Push the opening portion — no carrier-close yet
     const partial = [
-      `<<^ code="&#x0001;" from=? -> to=${URI} >>`,
-      `<<^ code="&#x0002;" >>`,
-      `<<~ ahu #body >>`,
+      `<<^ code="&#x0001;" from=? -> to=${URI}>>`,
+      `<<^ code="&#x0002;">>`,
+      `<<~ ahu #body>>`,
       `body text`,
-      `<<~/ahu >>`,
+      `<<~/ahu>>`,
     ].join("\n");
     const mid = parser.push(partial);
     expect(mid.some((e) => e.kind === "carrier-close")).toBe(false);
 
     // Push the closing portion
-    const tail = "\n<<^ code=\"&#x0003;\" >>\n<<^ code=\"&#x0004;\" -> ? >>";
+    const tail = "\n<<^ code=\"&#x0003;\">>\n<<^ code=\"&#x0004;\" -> ?>>";
     const final = parser.push(tail);
     expect(final.some((e) => e.kind === "carrier-close")).toBe(true);
   });
@@ -130,9 +130,9 @@ describe("MemeStreamParser — minimal carrier (no ahu body)", () => {
   test("emits open and close for a data carrier with no ahu body", () => {
     const URI2   = "lar:///ha.ka.ba/lares/api/pono/invariant";
     const minimal = [
-      `<<^ code="&#x0001;" from=? -> to=${URI2} >>`,
-      `<<^ code="&#x0002;" >>`,
-      `<<^ code="&#x0003;" >>`,
+      `<<^ code="&#x0001;" from=? -> to=${URI2}>>`,
+      `<<^ code="&#x0002;">>`,
+      `<<^ code="&#x0003;">>`,
     ].join("\n");
     const events = new MemeStreamParser().push(minimal);
     expect(events.some((e) => e.kind === "carrier-open")).toBe(true);

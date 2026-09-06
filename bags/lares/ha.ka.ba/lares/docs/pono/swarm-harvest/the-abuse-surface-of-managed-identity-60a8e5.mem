@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5 >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5.mem"
@@ -9,7 +9,6 @@ mana      = 12
 manao     = 14
 manaoio   = 10
 namespace = "&#x2299;"
-register  = "Testimony-Verbatim"
 retain    = true
 role      = "swarm-harvest — the three largest messages this research spirit wrote, held VERBATIM. Its own opening heading: THE ABUSE SURFACE OF MANAGED IDENTITY. Fenced so its sigil-shaped text reads as content, never as grammar."
 tags      = ["api/pono/meme", "docs/pono/swarm-harvest"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed-identity-60a8e5"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! THE ABUSE SURFACE OF MANAGED IDENTITY
 
@@ -27,9 +26,9 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 ⚠ ''FENCED ON PURPOSE.'' Raw transcript carries `<<~`, `>>` and code fences of its own; unfenced it would read as GRAMMAR and corrupt the carrier that holds it. The fence makes every mark inside it ''content'' — the same law the corpus keeps for a quoted sigil: //an edge inside a fence is a lesson, never a link//.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-1 >>
+<<~ ahu #message-1>>
 
 !! Message 1 ~ 54,685 characters
 
@@ -426,9 +425,9 @@ Whether the self-exemption is earned — a supervised Google account is *created
 **Two flagged instrument-lies:** (1) the WebFetch summarizer **fabricated** Apple App Store policy text, disproved by raw-byte grep; (2) `draft-ietf-dult-threat-model-05` §3.2.2 attributes three percentages (**72% / 41% / 67%**) to Freed et al. CHI 2018 — **that paper contains zero `%` characters** (verified directly); its real counts are n=28, 27, 26, 24, 20, 16, 15, 9 and n=47. **Misattributed in a live IETF working-group document; true source unidentified.**
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-2 >>
+<<~ ahu #message-2>>
 
 !! Message 2 ~ 45,654 characters
 
@@ -649,9 +648,9 @@ That is the closest thing anywhere to a requirement for a channel the manager ca
 - Any documented incident of a Google Workspace **admin** (as opposed to monitoring software running on the managed account) outing a student.
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #message-3 >>
+<<~ ahu #message-3>>
 
 !! Message 3 ~ 8,806 characters
 
@@ -719,14 +718,14 @@ The supervised party can *discover* the relation in Google and Apple, and is tol
 *(Note: the `lares` MCP server failed to connect this session — CONNECTION_CLOSED. It played no part in this research, but you may want to retry it before the next task.)*
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;0DBX8j9Gw6bQviz4INP9-zB1v0VjS0aoNER9ayktQa0
+<<^ code="&#x0003;">>ni:///sha-256;lBpw-CDxCUTw-I_uN4YHGLGic9mQA8cKLzzGXX4a6yo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

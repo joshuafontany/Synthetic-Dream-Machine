@@ -5,7 +5,7 @@ module-type: wikirule
 \*/
 /**
  * lar-declaration — TW5 wikirule (block-mode) for the `!WORD` declaration class:
- * `<<!DOCTYPE uri >>` and its siblings.
+ * `<<!DOCTYPE uri>>` and its siblings.
  *
  * The class carries SGML's markup-declaration sense — a statement ABOUT the carrier,
  * consumed before content, never a procedure the renderer runs. That is what separates

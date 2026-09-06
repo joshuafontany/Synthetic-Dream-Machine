@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb.mem"
@@ -8,7 +8,6 @@ list-before = "$:/core/ui/ViewTemplate/body"
 mana        = 18
 manao       = 17
 manaoio     = 16
-register    = "Synthesis-Canon"
 retain      = true
 role        = "ViewTemplate: slot badge + parent link shown at top of any ahu child tiddler"
 tags        = ["$:/tags/ViewTemplate", "lar:///ha.ka.ba/lares/api/pono/meme"]
@@ -16,7 +15,7 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 \whitespace trim
 <$list filter="[all[current]has[ahu-slot]]" variable="_" emptyMessage="">
@@ -32,10 +31,10 @@ uri-path    = "ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb"
 
 </$list>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;wGMwQCEfd6ocH4FkpbE4eDpxmtLcErsEO5zDPqDCHm4
+<<^ code="&#x0003;">>ni:///sha-256;XBb9GfHvCeKk4wgGFA62VlsBgB5gdrZbVv1Bb_rPHEY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "places — the constellation's far exclaves: the Poseidon-coast crags and the Artemision's risen six miles"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/far-exclaves"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Far Exclaves
 
@@ -38,8 +36,8 @@ the morning they rose, joined to the capital by nothing but the DreamNet and sha
 ''Filing law:'' exclaves file here (constellation membership) and carry a locator tag toward
 their host Realms; host-region worksheets may cross-reference.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vtzsPpEsqtsuGW3jvIVMo96Dh69N_fFBc2vMvnoaOOI
+<<^ code="&#x0003;">>ni:///sha-256;BllJgv0gqD_Q8pATJN7yFUSZgSaNiimE4iNA5iGyJGA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

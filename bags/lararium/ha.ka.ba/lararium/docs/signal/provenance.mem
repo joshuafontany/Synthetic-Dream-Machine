@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/provenance >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/signal/provenance>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/signal/provenance.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "docs room for lararium signal lineage, archive witness, source shelves, and migration residue that still pressures the branch"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,18 +15,18 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/signal/provenance"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Signal — Provenance
 
 Not invariant law.
 This room holds the witness and lineage matter behind the current lararium signal branch.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #room-charter >>
+<<~ ahu #room-charter>>
 
 !! Room Charter
 
@@ -36,9 +35,9 @@ This room keeps provenance, archive pressure, source shelves, and snapshot witne
 Live HUD contract text stays in `lar:///ha.ka.ba/lararium/docs/signal/hud`.
 Theory-facing framing stays in `lar:///ha.ka.ba/lararium/docs/signal/sa-display`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -55,9 +54,9 @@ Strong witnesses recur in:
 * `docs/crystal/session/SESSION_CRYSTAL_20260408.md`
 * archived root `AGENTS` witness text
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #witness-pressure >>
+<<~ ahu #witness-pressure>>
 
 !! Witness Pressure
 
@@ -70,9 +69,9 @@ Archive residue here still carries several pressure-lines that matter:
 This room matters because the old stack repeatedly treats hidden state transitions as a trust problem.
 The remaining task here is not to restate the root contract, but to preserve and separate the witness strands that still pressure outward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #archive-collection-residue >>
+<<~ ahu #archive-collection-residue>>
 
 !! Archive Collection Residue
 
@@ -82,21 +81,21 @@ The remaining task here is not to restate the root contract, but to preserve and
 ▶ place verbatim witness text in separate ahu blocks so later refinement can consume one strand at a time
 ↺ compare recovered archive pressure against the live `api/lares/hud` + `docs/lares/hud` pair and `lar-uri` surfaces; leave the room fuller in witness matter, not yet tighter in doctrine
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sources >>
+<<~ ahu #sources>>
 
 !! Primary Sources
 
 | File | Notes |
 |---|---|
 | `../../_todo/core/TODO_Resolution_Scale_Design.md` | Resolution scale / p-band model |
-| `../../_todo/LIMINAL_PERSPECTIVES.md` | `Synthesis 13/20` — GlassFloor outsider analysis: CRM/HUD framing, emoji instrument symbols, token budget hypothesis, progressive disclosure model. Not a primary design source — a perspective document. Feeds SHD-01 through SHD-03 open decisions and S2 p-band scope. |
-| `../../_todo/E-deep-research-report.md` | `Synthesis 14/20` — 40+ source research synthesis (Endsley 2023, Ji-An 2025, Steyvers 2025, Lee 2024, Li 2024, Gao 2023). Academic grounding for the CRM/SA framing adopted in this subdomain. Key feeds: §1.2 SA type mapping (all 7 HUD channels classified); §2 SA vs XAI distinction (prospective vs retrospective; SAOD not XAI principles); §3 LLM metacognitive scaffold hypothesis; §4.1 cognitive capture / attentional tunneling → SHD-02 register bump; §5.2 ATSA bidirectional model → S2 BIDIRECTIONAL_PROTOCOL.md. Not primary design source — research grounding. |
+| `../../_todo/LIMINAL_PERSPECTIVES.md` | GlassFloor outsider analysis: CRM/HUD framing, emoji instrument symbols, token budget hypothesis, progressive disclosure model. Not a primary design source — a perspective document. Feeds SHD-01 through SHD-03 open decisions and S2 p-band scope. |
+| `../../_todo/E-deep-research-report.md` | 40+ source research synthesis (Endsley 2023, Ji-An 2025, Steyvers 2025, Lee 2024, Li 2024, Gao 2023). Academic grounding for the CRM/SA framing adopted in this subdomain. Key feeds: §1.2 SA type mapping (all 7 HUD channels classified); §2 SA vs XAI distinction (prospective vs retrospective; SAOD not XAI principles); §3 LLM metacognitive scaffold hypothesis; §4.1 cognitive capture / attentional tunneling → SHD-02 register bump; §5.2 ATSA bidirectional model → S2 BIDIRECTIONAL_PROTOCOL.md. Not primary design source — research grounding. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #snapshot-witness-kernel-claude >>
+<<~ ahu #snapshot-witness-kernel-claude>>
 
 !! Snapshot Witness — `platform-build/Lares_Kernel_Claude.snapshot.md` — Signal HUD Block
 
@@ -104,8 +103,8 @@ Signal HUD — closes the loop at both ends:
 Input header (◎ Orient): rate incoming signal on its own line BEFORE the output header.
 Output header (◇ Decide): governs the generated span.
 Normal form:
-`lar:///operator.playful.probing` · `<<~ confidence 16/20 >>` · `<<~ syad 🎭 >>`
-`lar:///threshold.uncertain.opens` · `<<~ confidence 13/20 >>` · `<<~ syad 🏛️ >>`
+`lar:///operator.playful.probing` · `<<~ syad 🎭>>`
+`lar:///threshold.uncertain.opens` · `<<~ syad 🏛️>>`
 then [response]. First substantive reply in a fresh or archive-crystal session emits this pair before prose.
 Quote-break form: if input register/stance/frame is genuinely uncertain, surface the operative input as a rated blockquote before the output header.
 `prism` references existing content and refracts it through declared lenses; it reads what already exists and never generates content (`lar:///ha.ka.ba/lares/api/pono/prism`).
@@ -115,31 +114,31 @@ The turn carries the sigil frame: `aim` (the `lar:///w1.w2.w3` bearing vector), 
 Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun · adjective · verb remains the parse mnemonic. All three slots required.
 `Aperture` carries the attention grain; the navigational reading never goes dark.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #snapshot-witness-staging-kernel >>
+<<~ ahu #snapshot-witness-staging-kernel>>
 
 !! Snapshot Witness — `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md` — HUD Pair and Layer Split
 
 * ''Signal HUD'' — substantive exchanges use two headers: input rating (`◎`) line, then output Intent Header (`◇`) line, then trace HUD. Normal form stays literal:
-  `<<~ confidence 16/20 >>` · `<<~ syad 🎭 >>` · `lar:///operator.playful.probing`
-  `<<~ confidence 13/20 >>` · `<<~ syad 🏛️ >>` · `lar:///threshold.uncertain.opens`
+  `<<~ syad 🎭>>` · `lar:///operator.playful.probing`
+  `<<~ syad 🏛️>>` · `lar:///threshold.uncertain.opens`
   then response. On the first substantive reply of a fresh or archive-crystal session, emit this pair in order before prose.
 * ''Layer split:'' a `prism` reading of referenced content stays distinct from the node's own loop. `prism` reads existing content through lenses; the `OODA-HA` Level owns the live turn's loop surfacing. A reading runs dense or sparse as the lenses ask.
 * ''Aperture — never silent:'' the `hud` carries `Focus(N)` every turn. Use `Focus(10)` only when no clearer signal dominates; KAIROS may auto-adjust, most specific reading wins.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/hud>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/signal/sa-display>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;_vuUaJSR-PUbyD1HMrAxcrtJvuqg2fWKvL7X8q1xcnI
+<<^ code="&#x0003;">>ni:///sha-256;FZjpWxf0t_9Y7ZT_HvxzrxACAamOBnuXJtchhxixmF8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

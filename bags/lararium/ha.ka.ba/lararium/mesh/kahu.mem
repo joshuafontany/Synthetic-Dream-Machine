@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/kahu >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/kahu>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/kahu.mem"
@@ -8,14 +8,13 @@ l-space   = "lararium"
 mana      = 17
 manao     = 16
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "protocol governance concept: kahu as grammar-guardian role in DreamNet topology"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/kahu"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Kahu
 
@@ -29,7 +28,7 @@ stepped back. The grammar now enforces itself — through register collapse dete
 the ABILITY_LADDER, and each vessel's own founding ceremony. No living authority
 tells a vessel what to do. The treaty does.
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! The Treaty Model
 
@@ -56,7 +55,7 @@ distributes; the vessels enforce.
 ''A VERSION CADENCE STANDS AS THE ONE INSTRUMENT A KAHU ACTUALLY HOLDS, and the record
 shows it stranding federations rather than governing them.'' The worked case runs exact:
 a founding node rewrote its own protocol, the network it had convened did not follow,
-and a fork formed to keep the abandoned grammar alive. <<~ confidence 15/20 >>
+and a fork formed to keep the abandoned grammar alive.
 ''No malice, no capture, no command — an authoring act, propagated as designed, that
 emptied the federation it propagated across.'' The same author later moved the successor
 grammar into a standards body, and ''that grammar outlived every implementation he
@@ -77,11 +76,11 @@ names (//not a member, not an exile, a member with reduced sovereignty//) — so
 cadence bends rather than strands. ''Forkability protects against a drifting kahu; it
 protects nothing against a kahu shipping correctly to a mesh that cannot keep up.''
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/the-gauge >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation#/the-gauge>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #distinction >>
+<<~ ahu #distinction>>
 
 !! Kahu vs. cap=admin
 
@@ -101,9 +100,9 @@ An operator may hold `cap=admin` on their own cabalGroup's infrastructure bags. 
 does not make them kahu of DreamNet. Kahu attaches to the //corpus// specifically —
 `lararium`, `lares`, and the genesis artifact.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cabal-surface >>
+<<~ ahu #cabal-surface>>
 
 !! Amorphous Dreams Cabal as Kahu
 
@@ -121,17 +120,17 @@ The Cabal holds kahu over DreamNet's protocol corpus. In practice this means:
 ''The grant binds the Cabal, never crowns it (cohere, 2026-06-29).'' The refined steward
 model (PROPOSED) draws that corpus `cap=admin` as a ''k-of-n threshold'' — the Cabal
 structurally cannot sign as one hand — over a grammar that stays ''forkable'' by
-construction, so a drifting kahu gets forked away from rather than obeyed. <<~ confidence 12/20 >>
+construction, so a drifting kahu gets forked away from rather than obeyed.
 ''Legitimacy flows from being BOUND, not from being trusted.'' The full four-part binding
 (constitution-outside-reach · downward-accountable · k-of-n · auditable-and-forkable),
 the steward-not-ruler doctrine, and the bounded break-glass / repair authority live at
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>.
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine>>.
 
 The grammar is a treaty. The Cabal signs it. The vessels hold it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #neighboring-hawaiian-roles >>
+<<~ ahu #neighboring-hawaiian-roles>>
 
 !! Neighboring Roles
 
@@ -147,9 +146,9 @@ These may name adjacent roles as the DreamNet social layer develops:
 * ''Kumu'' — source, teacher, foundation. Already in use as the kumu-device interface
   (reactive event surface). No collision.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ea-notes >>
+<<~ ahu #ea-notes>>
 
 !! Ea Notes
 
@@ -164,22 +163,22 @@ the corpus bags is a separate claim, encoded in the Keyhive docs for `lararium` 
 `lares`. The genesis founding ceremony initializes those docs with the Amorphous
 Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/capability >>
-<<~ loulou lar:///ha.ka.ba/lararium/keyhive/keyhive-provider >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-invariants >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/capability>>
+<<~ loulou lar:///ha.ka.ba/lararium/keyhive/keyhive-provider>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/genesis-doc>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/grammar-invariants>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;vBVdnz-pm2RKXOTYR4qrGl4K-uhABPOtaU13DwjK6rw
+<<^ code="&#x0003;">>ni:///sha-256;CBV5_h4cmIXdnLcVZTSkVTQrlduD6ro7LWdjiUy5hOc
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

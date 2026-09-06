@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/alignment-plan >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/alignment-plan>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/mesh/alignment-plan.mem"
@@ -8,21 +8,20 @@ l-space   = "lararium"
 mana      = 19
 manao     = 18
 manaoio   = 18
-register  = "Synthesis"
 retain    = true
 role      = "Package alignment law: mesh as isomorphic spine; dep graph and consistency rules for the monorepo"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/mesh/alignment-plan"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Package Alignment Plan
 
 Governs the package dependency graph and the placement of shared concerns in the monorepo.
 This meme belongs in `@lararium/mesh` because mesh anchors the spine this plan describes.
 
-<<~ ahu #dep-graph >>
+<<~ ahu #dep-graph>>
 
 !! Canonical Dependency Graph
 
@@ -39,9 +38,9 @@ No arrows go upstream. No package adds a dep that reaches into a downstream pack
 `@lararium/tw5` does not depend on `@lararium/node`.
 `@lararium/mesh` does not depend on `@lararium/tw5`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #spine-law >>
+<<~ ahu #spine-law>>
 
 !! Spine Law
 
@@ -84,9 +83,9 @@ mesh builds the doc; callers write the result. The three-layer split applies to 
 construction and to any future artifact builders: (A) byte acquisition, (B) doc construction in
 mesh, (C) byte emission. See `genesis-doc.ts` and `bags/lararium/mesh/genesis-doc.md`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #consistency-rules >>
+<<~ ahu #consistency-rules>>
 
 !! Consistency Rules
 
@@ -102,9 +101,9 @@ These rules apply to every new file and every dep addition in the monorepo.
 | New dep in `@lararium/browser` | May reach into `@lararium/tw5` and `@lararium/mesh`. Not into `@lararium/node`. |
 | New platform dep (IndexedDB, island, fs, piscina) | Belongs in the platform package. Does not enter `@lararium/mesh` or `@lararium/tw5`. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-alignment-items >>
+<<~ ahu #open-alignment-items>>
 
 !! Open Alignment Items
 
@@ -117,17 +116,17 @@ These items name known inconsistencies in the current tree. Each carries a resol
 | `@automerge/automerge-repo` re-exports `Heads` | `browser-dock.ts` originally imported `Heads` from `automerge-repo`; corrected to import from `@automerge/automerge` via mesh | Verified resolved. |
 | `@lararium/browser` ea-path (founding ceremony) not yet wired | S0–S3 architecture landed: BrowserVesselIslandPool, browser-wiki-worker.ts, BrowserAuthorityPool, MessageChannel-per-slot. S4 requires: IndexedDB StorageAdapter, WebCrypto keypair, runFoundingCeremony call-site in browser vessel. `@lararium/keyhive` ceremony functions accept `Repo + seed` — vessel-neutral. | S4 sprint wires the ceremony shore; dep graph entry reflects final state already. |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel >>
-<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-vessel>>
+<<~ loulou lar:///ha.ka.ba/lararium/browser/pono-charter>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;F2xwZhtiUaPru8XtXejPpql5ITgQVJ6hwLAt0gmxOv4
+<<^ code="&#x0003;">>ni:///sha-256;GxU6w9aYxMqlywwFaPcaczplOCnkbLKrOGM78zOupsI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

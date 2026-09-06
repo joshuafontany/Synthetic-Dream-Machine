@@ -18,13 +18,13 @@ import {
 import { VerbTable } from "../src/verb-dispatcher.js";
 
 const CANON_TURN = [
-  "<<~ lares aim lar:///operator.intent.lands/x -> lar:///council.options.cuts/y >>",
-  "<<~ hud Aperture(10) OODA-HA(3) >>",
-  "<<~ ward * L-Prime >>",
+  "<<~ lares aim lar:///operator.intent.lands/x -> lar:///council.options.cuts/y>>",
+  "<<~ hud Aperture(10) OODA-HA(3)>>",
+  "<<~ ward * L-Prime>>",
   "Council (Lares): the fork holds.",
-  "<<~ ward ! · ↻ L-Prime >>",
-  "<<~ hud Aperture(10 -> 11) OODA-HA(1↺) >>",
-  "<<~ lares yield lar:///council.fork.named/z -> ? >>",
+  "<<~ ward ! · ↻ L-Prime>>",
+  "<<~ hud Aperture(10 -> 11) OODA-HA(1↺)>>",
+  "<<~ lares yield lar:///council.fork.named/z -> ?>>",
 ].join("\n");
 
 /** Fake holder hits: two codex, one claude (the claude one carries the Voice frame). */

@@ -10,50 +10,50 @@ import { describe, test, expect } from "vitest";
 import { normalizeMemeSource } from "../src/meme-normalize.js";
 
 const HEAD = (soh: string, ns: string) =>
-  `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n${soh}\n` +
+  `<!-- <<~ !DOCTYPE = lar:///x>> -->\n\n${soh}\n` +
   "```toml meta\n" +
   `cacheable = true\n` +
   (ns === "" ? "" : `namespace = "${ns}"\n`) +
-  "```\n\n<<^ code=\"&#x0002;\" >>\n\nbody\n\n<<^ code=\"&#x0003;\" >>\n";
+  "```\n\n<<^ code=\"&#x0002;\">>\n\nbody\n\n<<^ code=\"&#x0003;\">>\n";
 
 describe("normalizeMemeSource — SOH namespace embed", () => {
   test("homes the meta-declared namespace into a bare SOH (the oracle.md class)", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x >>", "&#x2299;");
+    const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x>>", "&#x2299;");
     const { text, changed, notes } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x>>");
     expect(notes.join()).toMatch(/namespace homed to "⊙"/);
   });
 
   test("decodes a multi-glyph entity namespace (noosphere ॐ ँ)", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x >>", "&#x0950; &#x0901;");
+    const src = HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x>>", "&#x0950; &#x0901;");
     const { text } = normalizeMemeSource(src);
-    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" from=? -> to=lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" from=? -> to=lar:///x>>");
   });
 
   test("idempotent — a carrier already carrying its namespace is unchanged", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x >>", "&#x2299;");
+    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x>>", "&#x2299;");
     const r1 = normalizeMemeSource(src);
     expect(r1.changed).toBe(false);
     expect(r1.text).toBe(src);
     // double-apply on the bare form converges and stays put
-    const r2 = normalizeMemeSource(normalizeMemeSource(HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x >>", "&#x2299;")).text);
+    const r2 = normalizeMemeSource(normalizeMemeSource(HEAD("<<^ code=\"&#x0001;\" ? -> lar:///x>>", "&#x2299;")).text);
     expect(r2.changed).toBe(false);
   });
 
   test("re-homes a STALE SOH namespace to match meta", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///x >>", "&#x2299;");
+    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"ॐ ँ\" ? -> lar:///x>>", "&#x2299;");
     const { text, changed } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" namespace=\"⊙\" from=? -> to=lar:///x>>");
     expect(text).not.toContain("ॐ ँ&#x0001;");
   });
 
   test("clears the SOH namespace when meta declares none", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x >>", "");
+    const src = HEAD("<<^ code=\"&#x0001;\" namespace=\"⊙\" ? -> lar:///x>>", "");
     const { text, changed } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" from=? -> to=lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" from=? -> to=lar:///x>>");
   });
 
   test("no SOH opener → no change (not a single-meme carrier)", () => {
@@ -65,64 +65,55 @@ describe("normalizeMemeSource — SOH namespace embed", () => {
 describe("normalizeMemeSource — SOH opener spacing", () => {
   test("homes a missing space in a no-namespace opener (the lifted-corpus form)", () => {
     // The INPUT must carry the drift this test names — a caret opener with no space after it.
-    const src = HEAD("<<^&#x0001; ? -> lar:///x >>", "");
+    const src = HEAD("<<^&#x0001; ? -> lar:///x>>", "");
     const { text, changed, notes } = normalizeMemeSource(src);
     expect(changed).toBe(true);
-    expect(text).toContain("<<^ code=\"&#x0001;\" from=? -> to=lar:///x >>");
+    expect(text).toContain("<<^ code=\"&#x0001;\" from=? -> to=lar:///x>>");
     expect(notes.join()).toMatch(/spacing canonicalized/);
   });
 
   test("idempotent — a correctly-spaced bare opener is left untouched", () => {
-    const src = HEAD("<<^ code=\"&#x0001;\" from=? -> to=lar:///x >>", "");
+    const src = HEAD("<<^ code=\"&#x0001;\" from=? -> to=lar:///x>>", "");
     expect(normalizeMemeSource(src).changed).toBe(false);
   });
 });
 
 // meta head with a register field, for the register-band class.
-const REG_HEAD = (register: string) =>
-  `<!-- <<~ !DOCTYPE = lar:///x >> -->\n\n<<^ code="&#x0001;" from=? -> to=lar:///x >>\n` +
+const CLOSE_HEAD = (close: string) =>
+  `<!-- <<~ !DOCTYPE = lar:///x>> -->\n\n<<^ code="&#x0001;" from=? -> to=lar:///x>>\n` +
   "```toml meta\n" +
   `cacheable = true\n` +
-  `register = "${register}"\n` +
-  "```\n\n<<^ code=\"&#x0002;\" >>\n\nbody\n\n<<^ code=\"&#x0003;\" >>\n";
+  "```\n\n<<^ code=\"&#x0002;\">>\n\n" +
+  `<<~ ahu #head${close}>>\n\nbody\n\n<<~/ahu${close}>>\n\n` +
+  "<<^ code=\"&#x0003;\">>\n";
 
-describe("normalizeMemeSource — register band", () => {
-  test("expands the S code to the canonical band word", () => {
-    const { text, changed, notes } = normalizeMemeSource(REG_HEAD("S"));
+describe("normalizeMemeSource — sigil close spacing", () => {
+  test("tightens a close carrying a space before the brackets", () => {
+    const { text, changed, notes } = normalizeMemeSource(CLOSE_HEAD(" "));
     expect(changed).toBe(true);
-    expect(text).toContain(`register = "Synthesis"`);
-    expect(notes.join()).toMatch(/register "S" expanded to "Synthesis"/);
+    expect(text).toContain("<<~ ahu #head>>");
+    expect(text).toContain("<<~/ahu>>");
+    expect(notes.join()).toMatch(/sigil close spacing: 2 closes tightened/);
   });
 
-  test("expands SC to Synthesis-Canon", () => {
-    expect(normalizeMemeSource(REG_HEAD("SC")).text).toContain(`register = "Synthesis-Canon"`);
+  test("a tight close is already canonical — no change", () => {
+    expect(normalizeMemeSource(CLOSE_HEAD("")).changed).toBe(false);
   });
 
-  test("expands CS (old transposed SC) to Synthesis-Canon", () => {
-    expect(normalizeMemeSource(REG_HEAD("CS")).text).toContain(`register = "Synthesis-Canon"`);
-  });
-
-  test("a full band word is already canonical — no change, no flag", () => {
-    const r = normalizeMemeSource(REG_HEAD("Synthesis-Canon"));
-    expect(r.changed).toBe(false);
-    expect(r.flags).toHaveLength(0);
-  });
-
-  test("a genuine stage code in the register slot (US) is FLAGGED, never guessed into a band", () => {
-    const r = normalizeMemeSource(REG_HEAD("US"));
-    expect(r.changed).toBe(false);              // text untouched
-    expect(r.text).toContain(`register = "US"`);
-    expect(r.flags.join()).toMatch(/register "US" off the band ladder/);
-  });
-
-  test("a freeform register phrase is flagged, not rewritten", () => {
-    const r = normalizeMemeSource(REG_HEAD("elevated but practical"));
-    expect(r.changed).toBe(false);
-    expect(r.flags).toHaveLength(1);
-  });
-
-  test("idempotent — expand then re-run leaves it put", () => {
-    const once = normalizeMemeSource(REG_HEAD("S")).text;
+  test("idempotent — tighten then re-run leaves it put", () => {
+    const once = normalizeMemeSource(CLOSE_HEAD(" ")).text;
     expect(normalizeMemeSource(once).changed).toBe(false);
+  });
+
+  test("a sigil whose content ends in a nested close keeps its space", () => {
+    // `params=<<params>> >>` tightened would read `>>>>` and the reader would take the wrong close
+    const src = CLOSE_HEAD("").replace("body", "<<has mu name=<<name>> params=<<params>> >>");
+    expect(normalizeMemeSource(src).text).toContain("params=<<params>> >>");
+  });
+
+  test("a close crossing a newline is left alone — a sigil closes on the line it opens", () => {
+    const wrapped = ["<<~ ranks a ~ one", "-> b ~ two", ">>"].join("\n");
+    const src = CLOSE_HEAD("").replace("body", wrapped);
+    expect(normalizeMemeSource(src).text).toContain(wrapped);
   });
 });

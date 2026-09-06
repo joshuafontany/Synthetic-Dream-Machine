@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/lares-viales >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/concepts/lares-viales>>
 ```toml meta
 cacheable = true
 file-path = "bags/elyncia/ha.ka.ba/elyncia/concepts/lares-viales.mem"
 mana      = 14
 manao     = 14
 manaoio   = 13
-register  = "Synthesis"
 retain    = true
 role      = "the Lares Viales / Hermai — wayfarer-lares and crossroads-markers of the leylines; the fiction of the minimal blind-carriage node (cap-model at @lararium/mesh/vessel-caps#lares-viales)"
 l-space   = "stable:@elyncia"
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/elyncia/concepts/lares-viales"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Lares Viales ~ the Wayfarers of the Leylines
 
@@ -23,7 +22,7 @@ Rome set the ''Lares Viales'' at the roadside — the lares of the //ways//, who
 
 In Elyncia they ride the ''leylines''. A Lares Viales carries sealed mana from shrine to shrine — pilgrim-cargo it cannot open, prayers it cannot read — and sets the next bearing at each crossing. It guards the //road//, never another's hearth — yet it carries the ''hearth-fire itself'', and tends one small shrine of its own.
 
-<<~ ahu #carries-the-fire >>
+<<~ ahu #carries-the-fire>>
 
 !! Carries the Fire, Keeps No Rooms
 
@@ -33,17 +32,17 @@ It does ''not'' travel empty-keeled. The Herm runs the //same hearth-engine// as
 
 It reads only the ''public waymarks'' — the shared `@oracle` floor (the base ontology, the engine-blobs every traveler verifies from cold) and its own mesh-palace. It reads the milestones, not the diaries. A local hearth's `@catalog` — the operator's sovereign room — stays a closed door the wayfarer guards without ever opening.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #guardian-of-its-stretch >>
+<<~ ahu #guardian-of-its-stretch>>
 
 !! Guardian of Its Stretch
 
 A herm-pillar guarded the turning, and so the Lares Viales guards its ''own stretch of road''. When a leyline sours it ''re-cuts the key''; when a false pilgrim crowds the way it ''turns them back''; a torn segment it ''mends''; a lost waymark it ''re-raises''. No far temple sends a warden — every wayfarer wards the ground beneath its own feet, the small shrine repairing itself the way the great ones do. The road defends itself crossing by crossing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-hello-world >>
+<<~ ahu #the-hello-world>>
 
 !! The Hello-World of the Stack
 
@@ -51,18 +50,18 @@ Every richer spirit composes //up// from this one. Strip a lararium of its ''roo
 
 The cap-model names this minimal stack exactly — the ''same keel as the temple, fewer rooms'': `#has {rhizome}` · `#has {tuber}` scoped to the `@daemon` + mesh-palace immune core (the bulb, the coal) · `#has {read}` on the public floor · `#has-NOT` the operator-content wikis, `#has-NOT {read}` on a sovereign `@catalog`. The Hermai are that stack wearing a face.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#/lares-viales >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-relay-floor >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/repair-kit >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/vessel-caps#/lares-viales>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/the-relay-floor>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience#/repair-kit>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;pHDVy2zO0pgQnwVjdjKBWzTWk2X7vlNgqInCvuPd0wk
+<<^ code="&#x0003;">>ni:///sha-256;P3TAaKZYOD7JsCFQ3QUAKf8dzXjYGlXRUOfJBQR1GCI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

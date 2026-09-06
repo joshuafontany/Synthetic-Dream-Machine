@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting.mem"
@@ -8,7 +8,6 @@ mana      = 14
 manao     = 15
 manaoio   = 13
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "craft failure law — deriving from context what the graph already holds, at the cost of the derivation"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Not Walking Before Minting
 
@@ -30,9 +29,9 @@ The node reasons a finding out from context — sometimes across several researc
 
 ''Seven instances in one arc'': the constructor (`group-as-closure`, with the declaration built in) · anon-as-base and the one-way ratchet (`persona-circle`, better cited) · the commons-is-a-verb inversion (`cabal-realm`) · the word `realm` itself · the Shadowtalk UX seat (`dreamdeck-feed-architecture`) · the fractal shape (`multi-fractal`, `pattern-integrity = true`) · and fifteen cultural pattern-integrities sitting in a history bag with no edge from any api/pono meme.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect the moment a finding feels NEW — that feeling carries no evidence either way.
 ⏿ orient by ''walking the graph one hop'' from the nearest meme: read its edges, its residues, its history-bag neighbours.
@@ -40,9 +39,9 @@ The node reasons a finding out from context — sometimes across several researc
 ▶ act — write the DELTA into the existing meme rather than a fresh meme beside it.
 ↺ if the graph held it, ask what ELSE sits one hop out; a rediscovery usually names a whole unwalked shelf.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 ''Walk the edges before minting.''
 
@@ -54,22 +53,22 @@ The node MUST record a rediscovery when it happens, with the credit stated: //th
 
 ''The deeper reading'': this names a RETRIEVAL failure, never a knowledge one. The house holds more than any one session can attend to, which is the sensorium's whole reason to exist — and until that instrument stands, walking is the manual form of it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #diagnostic >>
+<<~ ahu #diagnostic>>
 
 If a finding written as new already sits in a meme one hop from where the node was working, Not Walking Before Minting occurred.
 If the walk ran and returned nothing, the mint stands earned.
 If the graph's version reads WORSE than the derivation, that reads as a genuine refinement — write the delta into the existing meme, never a fresh one beside it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme-evolution-kupono >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme-evolution-kupono>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;IdLeXk21cdErEmurSr9WFlnceCZeG1pgLRdsqExFXxQ
+<<^ code="&#x0003;">>ni:///sha-256;G8Z08PibRD9geEiN9d9TIeuT9IlA4g2J6rE0tk8jSDk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

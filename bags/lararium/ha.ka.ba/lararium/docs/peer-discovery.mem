@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/peer-discovery >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/peer-discovery>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/peer-discovery.mem"
 mana      = 18
 manao     = 18
 manaoio   = 17
-register  = "Synthesis-Canon"
 retain    = true
 role      = "Web3 peer discovery doctrine — cold bootstrap, six-tier ladder, DID service endpoints, social-graph discovery, Keyhive add-member"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/peer-coordination", "lar:///ha.ka.ba/lares/api/pono/local-first", "lar:///ha.ka.ba/lararium/tw5/lar-uri-namespace", "lar:///ha.ka.ba/lararium/tw5/lararium-doc-stack"]
@@ -15,7 +14,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/peer-discovery"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Peer Discovery Doctrine
 
@@ -283,14 +282,14 @@ state stays local-first, no-global-now enacted rather than breached.
 * ''mDNS in the browser'': not available (no UDP multicast in browsers). LAN
   discovery for browser peers routes through the node server's mDNS discovery.
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ezDfu1Lt-0jl2K2y_BN_VenWS0D2Hlpjernw_oPVfHE
+<<^ code="&#x0003;">>ni:///sha-256;HT2bH8B3eHJXnc18Vj0-_-Smbcw73A8AY6JNnll1wTI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

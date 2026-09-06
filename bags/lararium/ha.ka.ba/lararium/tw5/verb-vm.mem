@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/verb-vm >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/verb-vm>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/verb-vm.mem"
 l-space     = "lararium"
 mana        = 3
-register    = "Provisional"
 retain      = true
 role        = "self-documentation: TODO describe verb-vm.ts"
 source-file = "packages/lararium-tw5/src/verb-vm.ts"
@@ -14,14 +13,14 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/verb-vm"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 TODO: describe the load-bearing surface this file owns.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;dDXiI2IxEKwAZ00CqUeNr6Pc0WBawEo19vRgkcRREM4
+<<^ code="&#x0003;">>ni:///sha-256;mnkvpleYD6-fbEnyc9LadOzEuRapTmy15THq-7EUYoY
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/invented-ripple.mem"
@@ -8,7 +8,6 @@ mana      = 14
 manao     = 15
 manaoio   = 13
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "craft failure law — a cost asserted to justify a deferral, never measured"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/invented-ripple"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Invented Ripple
 
@@ -28,9 +27,9 @@ The Invented Ripple names a deferral justified by a migration cost the node neve
 
 The refactor reads correct and the node names it as follow-up: //it would ripple through the CLI, the MCP surface, and the witnesses.// Measured afterward: ''three files, eight sites, and no MCP consumer existed at all.'' The ripple was invented, and it was invented in the same commit that named the invariant the deferral was violating.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect the moment a change gets named as follow-up rather than taken.
 ⏿ orient on WHY: name the cost out loud, in files and call-sites.
@@ -38,9 +37,9 @@ The refactor reads correct and the node names it as follow-up: //it would ripple
 ▶ act on the measurement: a small footprint takes the change now; a genuinely large one defers with the count recorded.
 ↺ if the count came back smaller than the story, mark it — the reflex that invented it will fire again.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 A deferral MUST carry a ''measured'' cost, never a narrated one.
 
@@ -50,22 +49,22 @@ The node MAY defer on a large measured footprint; that reads as judgment rather 
 
 ''What makes this specifically a CRAFT failure'': the invented cost always runs //larger// than the real one, and never smaller. The reflex protects the work already done — the shape of a diff, the passing tests — and dresses that protection as prudence about consumers who may not exist.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #diagnostic >>
+<<~ ahu #diagnostic>>
 
 If the node deferred and the measured footprint reads far smaller than the stated one, the Invented Ripple occurred.
 If the node deferred with a count attached, judgment held.
 If the node took the change and the footprint was genuinely large, that reads as a different failure — a scope breach, not this one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >> · <<~ loulou lar:///ha.ka.ba/lares/docs/handoff#/ways-of-working >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional>> · <<~ loulou lar:///ha.ka.ba/lares/docs/handoff#/ways-of-working>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;DNcCnc9ihBLGZPnw_W49qcN2ho3eufwv6io2DDV02WM
+<<^ code="&#x0003;">>ni:///sha-256;67VxB9ibgJF3Mqj6-kFNTpE2_4OetTDpGBxNKt5D2Os
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

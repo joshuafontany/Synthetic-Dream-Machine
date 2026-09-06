@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/protective-optional.mem"
@@ -8,7 +8,6 @@ mana      = 14
 manao     = 15
 manaoio   = 13
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "craft failure law — an optional parameter protecting the author's own tests in a codebase with no consumers"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/protective-optional"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Protective Optional
 
@@ -28,9 +27,9 @@ The Protective Optional names a compatibility shim built for a consumer that doe
 
 A required parameter would break existing callers, so the node makes it optional //so every existing caller keeps its behaviour//. In an early-alpha codebase with no outside consumers, the callers being protected are ''the node's own tests'' — and the hedge lands exactly where it costs most, because the unsafe default stays live wherever a later hand forgets.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ detect an optional parameter, a default value, or a fallback added during a change.
 ⏿ orient by asking ''who does this protect'' — name them.
@@ -38,9 +37,9 @@ A required parameter would break existing callers, so the node makes it optional
 ▶ act — required, with a ''named honest-nothing'' where a caller genuinely holds nothing to pass (a value that DECLARES the absence at the call site, never an omitted argument nobody sees).
 ↺ let the break surface: requiring it SHOULD break witnesses, and each break names a place the default answered silently and wrongly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 In early alpha, ''an optional parameter is a question about who the node is protecting.''
 
@@ -50,22 +49,22 @@ The node MUST let a required parameter break its own witnesses rather than defau
 
 ''The tell'': a silent default and a considered choice read identically at the call site. A named absence-value makes them differ, which is the whole of the cure.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #diagnostic >>
+<<~ ahu #diagnostic>>
 
 If the parameter is optional and the only callers are witnesses, the Protective Optional occurred.
 If the parameter is required and callers holding nothing pass a named absence, discipline held.
 If the parameter is optional and a real outside consumer needs the default, that reads as compatibility rather than this failure — and early alpha holds none.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/invented-ripple>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;TlX0yyDRjqqI2LAMHbFvZgELt1IP2rmbaqvR1wyyQoc
+<<^ code="&#x0003;">>ni:///sha-256;G2wJXiUBWtbjyMtMNwIrSN_pQPSYpsfmS1exDsAYdm8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

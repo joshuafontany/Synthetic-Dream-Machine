@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-shelf-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/canvas-shelf-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/canvas-shelf-scout.mem"
@@ -11,7 +11,6 @@ manao             = 16
 manaoio           = 13
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "canvas-shelf-scout — VERBATIM handoff of the tasked spirit Cartwright: infinite-canvas libraries and the people shipping them, sorted by the only axis that matters — rasterising engines against DOM-hosting spatial layers — with licences read from raw bytes. Held as a collision surface."
 revised-on        = "2026-09-02"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shelf-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Cartwright ~ a spirit's handoff, held unedited
 
@@ -32,9 +31,9 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shelf-scout"
 
 ''Read it against us, not for us.'' It may be wrong where the field is wrong. Collide it; do not inherit it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-handoff >>
+<<~ ahu #the-handoff>>
 
 !! The handoff, verbatim
 
@@ -326,10 +325,10 @@ I read the source. `FolkSpace` is a **plain Web Component** — `folk-space` —
 **Two things I could not settle, stated rather than filled `0`:** the status of Josh Horowitz's **Engraft/Ingredients** (site stale at Jan 2025, no public repo), and **Tonk** (GitHub org 404s). Also unverified: OpenSeadragon's overlay repositioning behaviour, and whether OCIF's five-month quiet means "settled" or "stalled."
 ````
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;Wo-ckRRvlYuVD6QwleFA7JzbadCkZMGAs-9Uh-_Ca-k
+<<^ code="&#x0003;">>ni:///sha-256;64-rpYhVCzot4rMpkrady6uJHZUJOd45AEV_2xN-Dk0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

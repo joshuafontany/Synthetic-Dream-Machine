@@ -1,34 +1,32 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/region-worksheet >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/neo-thracia/region-worksheet>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia-referee/ha.ka.ba/elyncia/nexuses/neo-thracia/region-worksheet.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 13
 rating     = "kapu"
-register   = "Synthesis"
 retain     = true
 role       = "referee worksheet — Neo-Thracia region: tilt-history, zones, guide roster, watershed canon"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/neo-thracia/region-worksheet"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Neo-Thracia ~ Region Worksheet
 
 //Migrated verbatim from `elyncia/Neo-Thracia/Neo-Thracia_Region_Worksheet.md` (2026-08-14); md→wikitext conversion mechanical — prose
 untouched; md table separator rows dropped.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #body >>
+<<~ ahu #body>>
 
 ```shell
 Local Lares node: Enyalios-lararium // DreamNet link: stable (salt-air, cracked marble, low static)
@@ -263,8 +261,8 @@ Postcard places:
 ''Field effects / anomalies''
 Purpose: turn metaphysics into handles: rift types, necro-fog effects, iron-curse escalation clocks, shrine-ritual outcomes. Use `Caverns_of_Thracia.md` as a guide, "upgraded" with the Orichalcum Age Mythpunk themes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;SyYyejDwTlJja7ecbRL83OffWMUWQfmXI52d8S4fzsg
+<<^ code="&#x0003;">>ni:///sha-256;-OLe8NGvHZI0_vbWXFvNpABIoxulX5djvGVOXv8NZ-E
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

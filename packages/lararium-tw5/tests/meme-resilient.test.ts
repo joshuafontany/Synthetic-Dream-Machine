@@ -16,13 +16,13 @@ const URI = "lar:///test.resilient.parses";
 describe("meme-ast resilient recovery", () => {
 
   test("a clean parse records no failures and emits no Error nodes", () => {
-    const r = parseMemeText(URI, "<<~ ahu #x >>\n\nbody\n\n<<~/ahu >>");
+    const r = parseMemeText(URI, "<<~ ahu #x>>\n\nbody\n\n<<~/ahu>>");
     expect(r.failures).toEqual([]);
     expect(r.nodes.some((n) => n.kind === "Error")).toBe(false);
   });
 
   test("an orphan close is contained as a water Error node (verbatim), not dropped", () => {
-    const r = parseMemeText(URI, "before <<~/ahu >> after");
+    const r = parseMemeText(URI, "before <<~/ahu>> after");
     expect(r.failures.some((f) => f.reason.startsWith("orphan-close"))).toBe(true);
     const errs = r.nodes.filter((n) => n.kind === "Error");
     expect(errs.length).toBeGreaterThan(0);
@@ -32,7 +32,7 @@ describe("meme-ast resilient recovery", () => {
   });
 
   test("an unclosed frame force-closes marked `repaired` + recorded, never silently", () => {
-    const r = parseMemeText(URI, "<<~ ahu #x >>\n\nunclosed body to EOF");
+    const r = parseMemeText(URI, "<<~ ahu #x>>\n\nunclosed body to EOF");
     expect(r.failures.some((f) => f.reason === "unclosed-frame")).toBe(true);
     const ahu = r.nodes.find((n) => n.kind === "Ahu") as { recoveredAs?: string; standing?: number } | undefined;
     expect(ahu).toBeDefined();
@@ -49,7 +49,7 @@ describe("meme-ast resilient recovery", () => {
       openPattern: "<<~\\s*ahu\\s+(#[\\w-]+)\\s*>>",
       closePattern: "<<~\\/ahu\\s*>>",
     }], families: [] } as unknown as GrammarRules;
-    const r = parseMemeText(URI, "<<~ ahu #x >>\n\nbody to EOF", grammar);
+    const r = parseMemeText(URI, "<<~ ahu #x>>\n\nbody to EOF", grammar);
     const recovered = r.nodes.find((n) => (n as { recoveredAs?: string }).recoveredAs) as
       { recoveredAs?: string; standing?: number } | undefined;
     expect(recovered).toBeDefined();
@@ -60,7 +60,7 @@ describe("meme-ast resilient recovery", () => {
   test("a novel sigil form is graded `missing` (the partial rung), not dropped to water", () => {
     // `aperture(0->20)` — a recognizable sigil-name in a param shape no specific pattern matches.
     // The generic catch-all recovers it: recognized sigil, params best-effort, graded partial.
-    const r = parseMemeText(URI, "before <<~ aperture(0->20) >> after");
+    const r = parseMemeText(URI, "before <<~ aperture(0->20)>> after");
     expect(r.failures.some((f) => f.reason === "partial-form:aperture")).toBe(true);
     const node = r.nodes.find((n) => (n as { recoveredAs?: string }).recoveredAs === "missing") as
       { recoveredAs?: string; standing?: number; sigilName?: string; raw?: string } | undefined;

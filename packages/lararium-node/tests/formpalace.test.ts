@@ -29,17 +29,17 @@ const TEST_TIMEOUT = 90_000;
 
 /** A realistic, frame-complete turn — voices/wards/phases bind to canon basis axes. */
 const TURN = [
-  "<<~ lares aim lar://m:o@x/operator.intent.lands -> lar://c:a@x/council.options.cuts >>",
-  "<<~ hud Aperture(10) OODA-HA(3) >>",
-  "<<~ ward * L-Prime >>",
+  "<<~ lares aim lar://m:o@x/operator.intent.lands -> lar://c:a@x/council.options.cuts>>",
+  "<<~ hud Aperture(10) OODA-HA(3)>>",
+  "<<~ ward * L-Prime>>",
   "",
   "Lares (Council): the verb leads, the way holds.",
-  "<<~ confidence Synthesis 11/20 >> the fork holds.",
+  "<<~ confidence Synthesis 11/20>> the fork holds.",
   "",
-  "<<~ oracle ↯11 ✲ ⚃ (3) ⁂:⬡◈⟁ >>",
-  "<<~ ward ! · ↻ L-Prime >>",
-  "<<~ hud Aperture(10 -> 12) OODA-HA(0◇:fork) >>",
-  "<<~ lares yield lar://c:a@x/council.fork.named -> ? >>",
+  "<<~ oracle ↯11 ✲ ⚃ (3) ⁂:⬡◈⟁>>",
+  "<<~ ward ! · ↻ L-Prime>>",
+  "<<~ hud Aperture(10 -> 12) OODA-HA(0◇:fork)>>",
+  "<<~ lares yield lar://c:a@x/council.fork.named -> ?>>",
 ].join("\n");
 
 function buildInputs(turn = TURN): { skeleton: ReturnType<typeof emitMoveSkeleton>; basis: SerializedBasis } {

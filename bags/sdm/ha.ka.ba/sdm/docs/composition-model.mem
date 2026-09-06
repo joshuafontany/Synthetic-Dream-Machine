@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/composition-model >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/docs/composition-model>>
 ```toml meta
 cacheable = true
 file-path = "bags/sdm/ha.ka.ba/sdm/docs/composition-model.mem"
 mana      = 15
 manao     = 18
 manaoio   = 14
-register  = "Synthesis"
 retain    = true
 role      = "operator/dev doctrine: the Powers composition model — entity + module + component + mount-point, one flat #has verb, pattern/instance two-layer split"
 l-space   = "sdm"
@@ -15,21 +14,21 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/docs/composition-model"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Composition Model — Operator / Dev Doc
 
-<<~ ahu #thesis >>
+<<~ ahu #thesis>>
 
 !! Thesis
 
 The published SDM/VLG/UVG rules already run a composition system: every Power carries P/R/T/D/Ox, carries tags, seats in a slot, and checks one activation protocol. This model ''names what already exists''. It gives each piece an address, connects them with one flat verb, and makes the space navigable. It introduces ''no new game mechanics''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #four-nouns >>
+<<~ ahu #four-nouns>>
 
 !! Four Nouns
 
@@ -42,9 +41,9 @@ The published SDM/VLG/UVG rules already run a composition system: every Power ca
 
 One verb joins them: ''`#has`''. Flat. No `family`, no `role`. The target URI path prefix carries the semantics — `components/` vs `mount-points/` — so the edge needs no metadata. A module `#has` components and `#has` a mount-point; an entity `#has` modules.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-layers >>
+<<~ ahu #two-layers>>
 
 !! Two Layers — Pattern and Instance
 
@@ -70,9 +69,9 @@ sites:
     locks: { overcharge-x4: encrypted }
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mount-points >>
+<<~ ahu #mount-points>>
 
 !! Mount-Points — Where Modules Seat
 
@@ -87,25 +86,25 @@ Four mount-points. Each changes how a seated module activates, costs, fails, and
 
 ''Location merges into Structure.'' A forest and an airship are the same Site. ''Fixed-vs-mobile is a flat `#has` component'' (propulsion/mobility), not a mount-point or a type. A Site gains capacity by spending XP + referee resources per attribute, decoupled from Level (OGA "Golden Age Item Upgrading"). See `lar:///ha.ka.ba/sdm/mount-points/structure`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #progressive-disclosure >>
+<<~ ahu #progressive-disclosure>>
 
 !! Progressive Disclosure — Cards as Doorways
 
 Component pills on a card serve two functions at once: a ''mnemonic'' on paper (a player learns `[ecm-scan]` as a keyword over sessions) and a ''doorway'' on screen (clicking the pill follows its tag pointer's `meme` field to open the full component meme and a filter of every module that shares it). Printed cards carry the mnemonic; digital cards carry both. A card declares its components once as `@sdm/tags/…` tags; the `components` list renders each via `<<tag-pill>>` from that one source.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #practitioner-state >>
+<<~ ahu #practitioner-state>>
 
 !! Practitioner State (open pressure)
 
 What a pattern does depends on who holds it, how they stand, and what they maintain. The instance layer MAY carry stance, relationship-state, and paradigm alongside variant/mutation/lock data. This stays open design pressure from the Hawaiian mana-kapu, Sera base-angle-lever, and Chaos Magick research — not yet settled into architecture.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lineage >>
+<<~ ahu #lineage>>
 
 !! Design Lineage (condensed)
 
@@ -120,19 +119,19 @@ What a pattern does depends on who holds it, how they stand, and what they maint
 
 Full lineage table lives in the epic. See edges.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite >>
-<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power >>
-<<~ loulou lar:///ha.ka.ba/sdm/mount-points/structure >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme >>
+<<~ loulou lar:///ha.ka.ba/sdm/epic/powers-composition-rewrite>>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/modules/power>>
+<<~ loulou lar:///ha.ka.ba/sdm/mount-points/structure>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VFG3S9JQr4ZPbaCCawElf0uvqg1AXpznTC-CccTCSq4
+<<^ code="&#x0003;">>ni:///sha-256;Enawa8oTh4UQKnVtMgnf8Njtdiipk-aBG0KRYIvQhSA
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

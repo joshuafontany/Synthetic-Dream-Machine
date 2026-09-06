@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/books/index>>
 ```toml meta
 cacheable  = true
-confidence = 10
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/books/index.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "landing page — the Elyncia books as a TW5 ToC over the spine memes; each spine walks its chapter's chunks through the graph"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/books/index"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Elyncia Books
 
@@ -29,9 +27,9 @@ chunks live at their topical addresses; the books remain readable wholes. Migrat
 stages: spines first (standing) · verbatim moves into each home meme's `#source` staging ·
 uplift to live wikitext last.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #toc >>
+<<~ ahu #toc>>
 
 \procedure BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort="uri-path">>
 
@@ -48,8 +46,8 @@ shelf reads plainly:)//
 # The Style Base Layer — migrates as a ''single meme'' (already chunk-sized), referee-side,
   when the RNG moves
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NWPaQCUIhwEwam3yrRD2W3q2KncXF7QjRKv5bGH0T4A
+<<^ code="&#x0003;">>ni:///sha-256;Pfne0_LAAoGerapTiI3As9dVYHDUdUhaOJuRHP56ZnE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

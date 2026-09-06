@@ -1,12 +1,11 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/filters/stack >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/filters/stack>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lararium/ha.ka.ba/lararium/tw5/filters/stack.mem"
 mana       = 14
 module-ref = "lar:///ha.ka.ba/lararium/tw5/filters/stack"
-register   = "Synthesis"
 retain     = true
 role       = "filter operator: the has-stack query surface — stack[] emits qualified component URIs; stack:has[X] filters by holding (per-carrier relative-name qualification)"
 tags       = ["lar:///ha.ka.ba/lares/api/pono/has-stack"]
@@ -15,9 +14,9 @@ uri-path   = "ha.ka.ba/lararium/tw5/filters/stack"
 written    = "2026-06-12"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -25,26 +24,26 @@ written    = "2026-06-12"
 
 `stack:has[X]` — keeps carriers whose stack holds `X`; a `lar:` operand compares directly, a relative operand qualifies against each carrier's own scope. The kernel module gate (`tw5-module-gate`) and the HUD pill layer (`lists/components`) ride this surface — typing = running the query (the has-stack law; the retired `implementors` filter's successor).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
 Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.ts`); operator shell: `packages/lararium-tw5/src/filters/stack.ts` (packed into the lares plugin).
 
-<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has >>
-<<~ pranala #source-filter from=? -> to=packages/lararium-tw5/src/filters/stack.ts family=code role=has >>
+<<~ pranala #source from=? -> to=packages/lararium-tw5/src/has-stack.ts family=code role=has>>
+<<~ pranala #source-filter from=? -> to=packages/lararium-tw5/src/filters/stack.ts family=code role=has>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/edge >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/edge>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;wglOdaCvE5-AP0A0jaVzBN9l8KlowtUB_RBw0sESE4E
+<<^ code="&#x0003;">>ni:///sha-256;PpZl6XfeyfQ7t6ILtQjYEaCG538PgDRl3nB4yvy5XDI
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

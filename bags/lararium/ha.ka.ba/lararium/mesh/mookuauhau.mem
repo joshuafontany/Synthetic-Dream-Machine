@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/mookuauhau >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/mookuauhau>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/mesh/mookuauhau.mem"
@@ -8,7 +8,6 @@ l-space       = "lararium"
 mana          = 16
 manao         = 15
 manaoio       = 14
-register      = "Synthesis-Canon"
 research-date = "2026-06-30"
 retain        = true
 role          = "moʻokūʻauhau — the genealogy of the one recursive #has-cap fractal: ancestors, the three pillars, the cousins, the anti-pattern corpse, and the weld verdict"
@@ -16,21 +15,21 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/mesh/mookuauhau"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! Moʻokūʻauhau ~ Ancestors & Cousins of the One Fractal
 
 A genealogy chants where a thing //comes from//. This one names the bloodline of the DreamNet's core move — ''a nameless entity that `#has` a stack of capabilities, composed by one rite (`composeVessel`) that routes only what each cap declares and refuses to boot on a missing dep'' — and asks the adversarial question: //who already stands here?//
 
-The chart sits beside the 2026-05-28 layer-survey, never replacing it — that one maps prior art onto the stack's components; this one traces the //fractal idea itself//. <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art >>
+The chart sits beside the 2026-05-28 layer-survey, never replacing it — that one maps prior art onto the stack's components; this one traces the //fractal idea itself//. <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-prior-art>>
 
-''The one-line verdict (chant it first, defend it after):'' the pieces stand ~80% built across ''two lineages that have never married'' — and so the novel work names a ''weld'', never an invention. <<~ confidence 13/20 >> //the smaller, defensible claim survives contact; the grander one falls to the first cousin who did it earlier.//
+''The one-line verdict (chant it first, defend it after):'' the pieces stand ~80% built across ''two lineages that have never married'' — and so the novel work names a ''weld'', never an invention. //the smaller, defensible claim survives contact; the grander one falls to the first cousin who did it earlier.//
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ancestors >>
+<<~ ahu #ancestors>>
 
 !! The Ancestors ~ the deep roots
 
@@ -44,25 +43,25 @@ The roots that the lineage draws breath from, decades upstream:
 
 These the lineage does not //extend// — it ''inherits''. To re-derive them reads as forgetting one's grandparents.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pillars >>
+<<~ ahu #pillars>>
 
 !! The Three Pillars ~ one recursion each, none seeing the others
 
 The load-bearing cousins. Each carries //one// of the three recursions whole — and stays blind to the other two. This blindness names the whole opportunity.
 
-<<~ranks recursion authority@Keyhive -> wiring-as-security@Genode -> transport@RINA >>
+<<~ranks recursion authority@Keyhive -> wiring-as-security@Genode -> transport@RINA>>
 
-''Keyhive (Ink & Switch — and it runs on our own stack).'' The authority recursion, built. It treats //individuals, devices, groups, and documents uniformly as principals in a recursive delegation graph// — a person reads as a group of devices, an org as a group of person-groups, a document as a group whose members hold access. That folds ''membership ⊥ device-sovereignty'' into one recursive principal-is-a-group fractal, in WASM, over Automerge. It splits its own internals deliberately: ''Access-Control (delegation edges) ⊥ Key-Agreement (BeeKEM) ⊥ Transport (Beelay, kept blind/E2E)''. The load-bearing sentence: ''Keyhive deliberately excludes binding a human identity to a key — "left to a future layer."'' That blank names a REFUSAL this stack keeps rather than a doorway it fills: no constructor for a human stands anywhere in the model, so the Lar declares the hole permanently open and maps relations ACROSS it — not //who//, but which hearth one tends. <<~ confidence 16/20 >> [inkandswitch.com/keyhive/notebook]
+''Keyhive (Ink & Switch — and it runs on our own stack).'' The authority recursion, built. It treats //individuals, devices, groups, and documents uniformly as principals in a recursive delegation graph// — a person reads as a group of devices, an org as a group of person-groups, a document as a group whose members hold access. That folds ''membership ⊥ device-sovereignty'' into one recursive principal-is-a-group fractal, in WASM, over Automerge. It splits its own internals deliberately: ''Access-Control (delegation edges) ⊥ Key-Agreement (BeeKEM) ⊥ Transport (Beelay, kept blind/E2E)''. The load-bearing sentence: ''Keyhive deliberately excludes binding a human identity to a key — "left to a future layer."'' That blank names a REFUSAL this stack keeps rather than a doorway it fills: no constructor for a human stands anywhere in the model, so the Lar declares the hole permanently open and maps relations ACROSS it — not //who//, but which hearth one tends. [inkandswitch.com/keyhive/notebook]
 
-''Genode / Fuchsia.'' The wiring-//is//-security recursion, built — on one machine. Capability //routing// serves as both the dependency graph and the access-control fabric, recursively, default-deny: //a component cannot do anything until a capability routes to it; a parent defines its children's sandbox.// That reads as `composeVessel` almost exactly — the single-machine ancestor of the rite. Our "refuse to boot on a missing mandatory dep, route only what's declared" descends from Genode's `init` and (for the type-level half) ZLayer's compile graph. ''Steal the manifest discipline; never re-derive it.'' <<~ confidence 14/20 >> [genode.org/documentation/genode-foundations · fuchsia.dev/.../components/v2]
+''Genode / Fuchsia.'' The wiring-//is//-security recursion, built — on one machine. Capability //routing// serves as both the dependency graph and the access-control fabric, recursively, default-deny: //a component cannot do anything until a capability routes to it; a parent defines its children's sandbox.// That reads as `composeVessel` almost exactly — the single-machine ancestor of the rite. Our "refuse to boot on a missing mandatory dep, route only what's declared" descends from Genode's `init` and (for the type-level half) ZLayer's compile graph. ''Steal the manifest discipline; never re-derive it.'' [genode.org/documentation/genode-foundations · fuchsia.dev/.../components/v2]
 
 ''RINA'' (Recursive InterNetwork Architecture). The transport recursion, formalized — and naked. //Every layer, regardless of position in the hierarchy, instantiates identical mechanisms and offers the same interface.// That names the Lararium→Nexus→DreamNet scale-recursion exactly — but RINA carries ''zero'' capability, ''zero'' social graph, ''zero'' identity. A pure recursion with no one home. [en.wikipedia.org/wiki/Recursive_Internetwork_Architecture · arXiv 1509.03550]
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cousins >>
+<<~ ahu #cousins>>
 
 !! The Cousins ~ the wider family
 
@@ -77,27 +76,27 @@ The kin that each solve one facet, citably, so the house adopts rather than rein
 | ''ZLayer / Effect'' (zio.dev) | compile-time //refuse-to-wire// on a missing dep — ''but no authority dimension'' | the type-level half of `composeVessel`'s refuse-to-boot |
 | ''p2panda-auth'' (p2panda.org, 2025-08) | a convergent, offline-first ''authorization-chain CRDT'' (verify-backward) | the rival model to Keyhive's delegation-chains (verify-forward) for membership |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #corpse >>
+<<~ ahu #corpse>>
 
 !! The Anti-Pattern Corpse ~ Matrix, and why one-door-per-axis
 
 Matrix //nominally// separates rooms ⊥ federation ⊥ power-levels. In practice the planes ''bled'': power-levels leak into federation so far that room v12 had to formalize creators with an //infinitely high power level// to paper the wound. The lineage carries Matrix not as kin to adopt but as the ''autopsy'' — the proof of what a fused authority graph costs. It grounds the tiered-gate keystone: ''one door per axis, the planes held orthogonal.'' [spec.matrix.org — MSC4289, room v12]
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #hazard >>
+<<~ ahu #hazard>>
 
 !! The Unsolved Hazard ~ the leak two lineages both flag
 
 Keyhive's own notebook, p2panda-auth's notes, and a formal-verification paper (arXiv 2604.23560) flag the ''same'' edge, independently: the ''concurrent add-while-remove key-leak'' — a member added concurrently with a removal can, under CRDT merge, hold a key they should never have seen — //unsolvable without consensus-before-key-handover.// And "no global now" ''forbids'' that consensus. So the house holds, by construction, one room whose lock it cannot prove.
 
-This the lineage does not sweep. The leak rides ''bounded'', never sealed: every membership decays (the lease), and the ''kapae'' tombstone marks the cast-off so a removal converges. The disease and the cure share one vow. Boundary-test where it bites; consecrate the corner; refuse the false promise of a fortress. <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae >>
+This the lineage does not sweep. The leak rides ''bounded'', never sealed: every membership decays (the lease), and the ''kapae'' tombstone marks the cast-off so a removal converges. The disease and the cure share one vow. Boundary-test where it bites; consecrate the corner; refuse the false promise of a fortress. <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #weld >>
+<<~ ahu #weld>>
 
 !! The Weld ~ the verdict that survives contact
 
@@ -108,12 +107,12 @@ Lay the three recursions side by side and the gap shows: they live in ''two unma
 
 No one has made ''one composition primitive serve simultaneously as the code-wiring AND the authority graph AND the transport-recursion, across a no-global-now causal-island mesh.'' That marriage names the ''novel delta'' — plus binding identity in the exact layer Keyhive leaves blank, which for the Lar reads not as //who// but as ''which hearth one tends'' (place, and the petname-constellation that acts in each context).
 
-''Claim the weld, never the invention.'' //"We married three known fractals and filled the doorway one of them left open"// stands; //"we invented a fractal"// falls to Ink & Switch, to RINA, to Genode — each of whom built their third of it first. The rite that performs the marriage already sits in the code wearing the name of a function. <<~ loulou lar:///ha.ka.ba/lararium/api/composable-keel >>
+''Claim the weld, never the invention.'' //"We married three known fractals and filled the doorway one of them left open"// stands; //"we invented a fractal"// falls to Ink & Switch, to RINA, to Genode — each of whom built their third of it first. The rite that performs the marriage already sits in the code wearing the name of a function. <<~ loulou lar:///ha.ka.ba/lararium/api/composable-keel>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;n51r_rfKfNV1cxD887vXWksJqq4ep5ID9lRah9w5s1E
+<<^ code="&#x0003;">>ni:///sha-256;R3S_TUDajTmZ-TAl-TA9QA5tj1OepDGB41VdFI6K99U
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

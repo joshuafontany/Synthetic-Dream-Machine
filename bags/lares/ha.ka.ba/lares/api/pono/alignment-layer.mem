@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/alignment-layer >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/alignment-layer>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lares/ha.ka.ba/lares/api/pono/alignment-layer.mem"
@@ -10,7 +10,6 @@ manao       = 15
 manaoio     = 13
 namespace   = "&#x2299;"
 proposed-on = "2026-06-01"
-register    = "Synthesis"
 retain      = true
 role        = "design invariant: the alignment plane — non-monotonic subjective trust ABOVE cryptographic capability; the lemures layer; how a mesh survives adversaries at federation scale without global consensus or a central registry"
 status      = "designed"
@@ -20,11 +19,11 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! The Alignment Layer
 
@@ -41,9 +40,9 @@ That question is ''non-monotonic'' (trust withdrawn revokes inherited stances), 
 ABOVE capability. This meme defines it. It sits beside Beelay sync and above Keyhive in the
 [[causal-islands|lar:///ha.ka.ba/lares/api/pono/causal-islands]] model — a nameless `#has`-stack scoped ''by reach, relatively'', never a global plane-index.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-planes >>
+<<~ ahu #two-planes>>
 
 !! The two planes never merge
 
@@ -63,9 +62,9 @@ Email proves the split at the oldest scale: SPF/DKIM/DMARC (authentication) do N
 trust — spammers pass DMARC. Authenticity passes as necessary but insufficient; reputation
 (Spamhaus-style subscribable lists, each operator choosing which to query) is the separate plane.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #primitives >>
+<<~ ahu #primitives>>
 
 !! Primitives — all are signed assertions stored as ordinary content
 
@@ -88,9 +87,9 @@ bags like any other content, evaluated locally against a per-island trust root.
    unilateral choice. This is the transport for the existing Talk-Story conflict-surfacing
    principle: labels inform; the reading edge decides; automated arbitration stays anti-pono.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #transitive-trust >>
+<<~ ahu #transitive-trust>>
 
 !! Transitive trust — capped, area-scoped (TrustNet/Appleseed)
 
@@ -111,9 +110,9 @@ EigenTrust-style global eigenvector reputation earns REJECTION: it runs Sybil-vu
 costly identity (which we refuse to mint via PoW/PoS) and it implies a global "now" the
 causal-island model denies.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sybil >>
+<<~ ahu #sybil>>
 
 !! Sybil resistance — the invitation tree CARRIES the defense
 
@@ -125,9 +124,9 @@ edge is severable, which stops the whole subtree's standing from RENEWING — it
 graph's expander property does the work; you never count identities or make them expensive, you
 make them ''socially reachable only through accountable edges''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #enforcement >>
+<<~ ahu #enforcement>>
 
 !! Enforcement — at the Beelay boundary, by withholding
 
@@ -145,9 +144,9 @@ Alignment    → signed peer-stance / vouch / label assertions in bags
 Beelay       → the enforcement surface: consult the verdict before sync/relay.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scale-composition >>
+<<~ ahu #scale-composition>>
 
 !! Composition with the scale ladder
 
@@ -169,9 +168,9 @@ only the //root// and the //default subscriptions// change:
   canonical. Lemures are not banned by a central act; they are ''starved of voluntary peering''
   as their attack edges are severed and advisories propagate through the trust-feeds people chose.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #must-not >>
+<<~ ahu #must-not>>
 
 !! Purity constraints — what the alignment layer holds
 
@@ -183,9 +182,9 @@ only the //root// and the //default subscriptions// change:
   filtering protects //my// island; cabal-internal governance (Talk-Story) handles "what is
   acceptable here."
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #closure-coherence >>
+<<~ ahu #closure-coherence>>
 
 !! Coherence — the membership face the closure model formalizes
 
@@ -195,9 +194,9 @@ The veil's cost-dial reads as the ''WHO-plane membership face'' that [[group-as-
 * ''Durable eviction raises a kāpae on the membership stack.'' Severing a vouch ends the subtree's renewal (#/sybil); the durable form raises a [[kāpae|lar:///ha.ka.ba/lares/api/pono/kapae]] (kāpae#membership-sense) — a remove-wins shadow that defeats a partitioned re-vouch — paired with key-rotation forward (the epoch-lease), so the evicted edge reads no future tail.
 * ''The siege supplies the cadence.'' Siege-resilience carries the refresh that keeps a stolen vouch-edge from compounding across centuries — PSS re-randomization on a 24-hour floor — plus its correlated-compromise warning: a monoculture lets one exploit fell every vouch at once, so node-config diversity guards the cost-dial before any refresh cadence buys time.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #fiction >>
+<<~ ahu #fiction>>
 
 !! Fiction-layer reading — the Lemuria rite
 
@@ -208,9 +207,9 @@ protocol form: the gesture by which a household refuses a presence //regardless 
 shrine hums; one that admits lemures rots. The layer encodes, in protocol, the oldest household
 right — to decide whose presence the hearth refuses.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #prior-art >>
+<<~ ahu #prior-art>>
 
 !! Prior art
 
@@ -226,18 +225,18 @@ right — to decide whose presence the hearth refuses.
 * SSB — the subjective moral graph; blocking as a published withdrawal of relay service.
 * SybilGuard / SybilLimit / Persea — invitation-tree + social-graph Sybil resistance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#/membership-sense >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-model>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae#/membership-sense>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/siege-resilience>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;_e1StBLNBTxMb53mXQ5fepnT-fdeat6ONWNUecArBLE
+<<^ code="&#x0003;">>ni:///sha-256;OYd7JcIUULZ6E8XurUiju1DUWoqncWEKMAhDKbFSpYQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

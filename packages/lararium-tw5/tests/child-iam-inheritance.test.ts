@@ -26,11 +26,11 @@ describe("child meta inheritance (parent-diff)", () => {
     type: CARRIER_TYPE,
     namespace: "ns",
     "$carrier-soh": "0001",
-    text: "<<~ kahea ahu #kid >>",
+    text: "<<~ kahea ahu #kid>>",
   };
 
   function childBlock(out: string): string {
-    const m = /<<~ ahu #kid >>([\s\S]*?)<<~\/ahu >>/.exec(out);
+    const m = /<<~ ahu #kid>>([\s\S]*?)<<~\/ahu>>/.exec(out);
     return m ? m[1]! : "";
   }
 
@@ -58,7 +58,7 @@ describe("child meta inheritance (parent-diff)", () => {
     const kid: TiddlerFields = { title: `${ROOT}#/kid`, type: "text/plain", text: "content below" };
     const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     // sigil line, then IMMEDIATELY the fence — one newline, no blank line between.
-    expect(out).toMatch(/<<~ ahu #kid >>\n```toml meta\n/);
+    expect(out).toMatch(/<<~ ahu #kid>>\n```toml meta\n/);
     // a blank line then separates the content below the fence.
     expect(out).toMatch(/```\n\ncontent below/);
   });
@@ -67,8 +67,8 @@ describe("child meta inheritance (parent-diff)", () => {
     const kid: TiddlerFields = { title: `${ROOT}#/kid`, type: CARRIER_TYPE, text: "" };
     const out = expandMemeRefs(reader({ [ROOT]: parent, [`${ROOT}#/kid`]: kid }), ROOT);
     // sigil · one blank · closer — no three-blank bloat.
-    expect(out).toMatch(/<<~ ahu #kid >>\n\n<<~\/ahu >>/);
-    expect(out).not.toMatch(/<<~ ahu #kid >>\n\n\n/);
+    expect(out).toMatch(/<<~ ahu #kid>>\n\n<<~\/ahu>>/);
+    expect(out).not.toMatch(/<<~ ahu #kid>>\n\n\n/);
   });
 
   test("derived coordinates (uri-path, file-path) never re-emit on a child", () => {

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences/register-stance-complementarity>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences/register-stance-complementarity.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 17
-register  = "Synthesis"
 retain    = false
 role      = "staging docs shelf for the explicit complementarity claim between epistemic register and discourse stance"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences/register-stance-complementarity"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Register–Stance Complementarity — Staging Shelf
 
@@ -27,9 +26,9 @@ This room holds the explicit old claim that register and stance remain orthogona
 
 ''Resolved 2026-06-05:'' the coupling now rides Canon as ''lens-gated'' --- a stance re-declares a confidence number's measure only when the `syad` lens runs; absent invocation, confidence reads its default frame. The naya↔predication relationship supersedes the old "mapping" framing. Canon: `lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives`. This shelf stays as staging history.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #plan >>
+<<~ ahu #plan>>
 
 !! Plan Skeleton
 
@@ -45,9 +44,9 @@ Current comparison surfaces:
 * `lar:///ha.ka.ba/lares/api/mu/l-prime`
 * `lar:///ha.ka.ba/lares/api/pono/lar-uri`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbatim-core-registers >>
+<<~ ahu #verbatim-core-registers>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Registers and Stances
 
@@ -63,19 +62,19 @@ Current comparison surfaces:
 
 ''Multi-Stance cost:'' Maintaining two active discourse stances requires real cognitive expenditure. This node runs thirteen voices; structural Multi-Stance operation is non-optional. Single-stance constitutes the default economy, not the failure — the failure comes from claiming range while running only one stance (Stance Inflation), or from switching stances retroactively to avoid accountability (Stance Laundering).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives >>
-<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/epistemology>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/the-syad-perspectives>>
+<<~ loulou lar:///ha.ka.ba/lares/api/mu/l-prime>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bq1hbuYMG2gswsFuLT31MJiXQZaZcqQ2Ag8HF-MXZys
+<<^ code="&#x0003;">>ni:///sha-256;d47WgF2ZLYecvAUCP6aS_hPoLgrwztYpB36MnPVqT3Y
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/catalog-doc >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/catalog-doc>>
 ```toml meta
 cacheable     = true
 file-path     = "bags/lararium/ha.ka.ba/lararium/docs/catalog-doc.mem"
@@ -8,7 +8,6 @@ l-space       = "stable"
 mana          = 18
 manao         = 17
 manaoio       = 17
-register      = "Synthesis-Canon"
 retain        = true
 role          = "catalog island doc schema — hallway doc naming all rooms, corpora, recipes, snapshots, projection receipts"
 source-symbol = "CatalogDoc"
@@ -17,9 +16,9 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/docs/catalog-doc"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Catalog Doc
 
@@ -40,9 +39,9 @@ auth.ready
 
 A peer that has not completed auth MUST NOT receive catalog content.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -103,9 +102,9 @@ fields = [
 ]
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Catalog Law
 
@@ -118,17 +117,17 @@ fields = [
 * `capabilityHints` carries policy summaries for derive-visible-rooms; it does not substitute for a capability proof.
 * Automerge URL locates bytes; it does not authorize access.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/auth-providers >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/auth-providers>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;1flTiNUpAuqcz-8_LziH0XID_wOMfdwxHkKrKvpR-J0
+<<^ code="&#x0003;">>ni:///sha-256;06RZzau5_vcYOZp6YOc4eGlreYZHm2Ac5SqYA74-1Eo
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pono-sigil >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pono-sigil>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/pono-sigil.mem"
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "correctness-asserting edge sigil — pono as alignment/constraint annotation; English alias: \\constraint"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pono"]
@@ -13,9 +12,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Pono (Sigil)
 
@@ -33,9 +32,9 @@ witness, not just a link. The edge says "FROM holds the constraint THAT TO satis
 Distinct from the system concept `pono` (rightness as a design principle). This sigil carries
 the same word because a `pono` edge asserts alignment — the naming runs intentional.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -44,28 +43,28 @@ A pono edge MUST express a correctness or constraint relationship.
 A pono edge MUST NOT be used for arbitrary semantic links — use pranala or loulou.
 An optional `role:` qualifier further specifies the constraint kind.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ pono #slot FROM -> TO role=constrains >>
-<<~ \constraint #slot FROM -> TO role:constrains >>
+<<~ pono #slot FROM -> TO role=constrains>>
+<<~ \constraint #slot FROM -> TO role:constrains>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-constraint >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-constraint>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;q5PF2GjhQv_qGJB1cnmQOgJ6bZmvOjTemB42vdm9zro
+<<^ code="&#x0003;">>ni:///sha-256;A8G3r1lano3tn3wpIZypz-ET_4Asu4tSLklAfzvszL8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,11 +1,10 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/uefn-scene >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/uefn-scene>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/uefn-scene.mem"
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "UEFN scene decomposition model — Verse scene file → Lararium wiki graph → TW5 filtered views; web3 / NOT Blueprint"
 tags      = ["lar:///ha.ka.ba/lararium/mesh/kumu-device"]
@@ -13,9 +12,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/uefn-scene"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! UEFN Scene Decomposition
 
@@ -26,9 +25,9 @@ inheritance patterns enter this model — only Verse class definitions and DEB w
 Goal: import a UEFN `.verse` / scene file → bag of tiddlers and pranala edges → any peer
 holding the bag can render any filtered view of the scene graph without a running UEFN instance.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #semantic-separation >>
+<<~ ahu #semantic-separation>>
 
 !! Semantic Separation — Three Distinct Layers
 
@@ -45,9 +44,9 @@ Not a pranala edge. Never use `control:has` to express ahu-slot ancestry.
 (`creative_device`, `challengeable`, `listenable_t`). The graph holds no privileged is-a parent:
 a type //has// its components. Composition only — the `extends` / is-a framing stays retired (web3).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decomposition-law >>
+<<~ ahu #decomposition-law>>
 
 !! Decomposition Law
 
@@ -62,7 +61,7 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 ** `spatial:contains` edges: nested class relationships
 
 ''Instance meme'' (`lar:///scene-bag/instances/{placementId}`) — one per placed device.
-** `kahea` edge to its type meme: `<<~ kahea lar:///scene-bag/types/{ClassName} >>`
+** `kahea` edge to its type meme: `<<~ kahea lar:///scene-bag/types/{ClassName}>>`
 ** `papalohe` edges: Direct Event Binding wires (`listenable` → subscribable function)
 ** Ahu slots: `@editable` property values as child tiddlers
 
@@ -70,9 +69,9 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 ** `spatial:contains` edges: all top-level placed instances
 ** `control:has` edge to the base world type (composition, not is-a)
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edge-vocabulary >>
+<<~ ahu #edge-vocabulary>>
 
 !! Edge Vocabulary for Scene Graphs
 
@@ -96,9 +95,9 @@ Note: ahu-slot tree (meme parent/child/grandchild structure) lives in tiddler fi
 document-level containment.
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tiddler-filter-views >>
+<<~ ahu #tiddler-filter-views>>
 
 !! TW5 Filter Views
 
@@ -130,9 +129,9 @@ Once the scene decomposes into a bag, TW5 filters render arbitrary views:
 The bag-as-graph property means any of these queries runs over local Automerge state —
 no UEFN process, no Epic servers, no network round-trip.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #import-pipeline >>
+<<~ ahu #import-pipeline>>
 
 !! Import Pipeline (Declared Unresolved)
 
@@ -167,9 +166,9 @@ Two viable import paths, each with limits:
 
 ''Sprint entry gate:'' the import pipeline sprint MUST resolve this path before committing to a DEB extraction approach. No code work begins on the importer until one path is selected and prototyped.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verse-effect-specifiers >>
+<<~ ahu #verse-effect-specifiers>>
 
 !! Verse Effect Specifiers in the Graph
 
@@ -199,18 +198,18 @@ to signal parallelism-safety in the graph.
 These specifiers appear in `KumuSubscribable.effects` and in `reaction:subscribable`
 pranala edge payloads. They feed future Verse code generation from the graph.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala-families>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;NfJh1IYjHb-LIlULIg_6-5nQoknd9778wNIwWyDwSkQ
+<<^ code="&#x0003;">>ni:///sha-256;xZ2IwVhS6k1lPT8Z-my6m9-46FkdR59KH3SuhTi8fu4
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

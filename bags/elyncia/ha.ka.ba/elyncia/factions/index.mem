@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/index >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/factions/index>>
 ```toml meta
 cacheable  = true
-confidence = 13
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/factions/index.mem"
 l-space    = "stable"
 mana       = 14
 manao      = 14
 manaoio    = 13
 rating     = "ano"
-register   = "Synthesis"
 retain     = true
 role       = "faction roster index for Elyncia worldbuilding — the House of Masks summit guest-list stands as its first enactment; per-faction memes grow beside this index as canon deepens"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/factions/index"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Elyncia Factions ~ roster index
 
@@ -29,9 +27,9 @@ Masks summit'' (YOLD 5492, Bureaucracy) — the Patroness's broadcast, two month
 any Factional representative a week's paid holiday to hear the Adventurer's Guild's contract
 offer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #summit-roster >>
+<<~ ahu #summit-roster>>
 
 !! The Summit Roster
 
@@ -67,9 +65,9 @@ correctly as the evening's real agenda wearing a napkin.
 
 ''The rumor.'' The staff have twice tonight counted one more guest than the reservations hold.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #court-colors >>
+<<~ ahu #court-colors>>
 
 !! Court Color Regimes
 
@@ -80,17 +78,17 @@ Derived from the court-dragon alignment canon, never invented whole:
 * ''Ouroborous'' — blue + bronze serpent-scale
 * ''Brimstone'' — sulfur-yellow + ember red + ash grey
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider >>
-<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider>>
+<<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;2b6AC6X8A9Ueu_UhVjfSHbcYzaT61SmiJZKzYAr_c-M
+<<^ code="&#x0003;">>ni:///sha-256;AEcSKFh2QrUKidQ78F9QQ6gZ0BvkSycn0GN-JxVgs7I
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

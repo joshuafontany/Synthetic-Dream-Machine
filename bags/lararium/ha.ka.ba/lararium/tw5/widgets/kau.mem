@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/kau >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/kau>>
 ```toml meta
 body-sha256   = "6cc6ce1e6d1dc43e399f3c00735763a804c36fdf3b646670588cc2505b9f5af2"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/kau.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/widgets/kau"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: ~kau TW5 wikitext widget — heleuma ka"
 source-symbol = "~kau"
@@ -17,13 +16,13 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/kau"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
-`<<~ kau #frag Name props >>` places a device instance into the carrier. kau = "to place upon, set down with intention" (Hawaiian).
+`<<~ kau #frag Name props>>` places a device instance into the carrier. kau = "to place upon, set down with intention" (Hawaiian).
 
 Each kau placement creates a device instance with:
 * ''Instance URI'': `carrierUri#fragment` (explicit `#frag` required; auto-UUID deferred to action tiddler when Keyhive WASM lands)
@@ -32,7 +31,7 @@ Each kau placement creates a device instance with:
 
 `p1` parse: first token starting with `#` = fragment; remainder = name + props.
 
-Invocation form: `<<~ kau Name >>` — no fragment; transcludes kumu def in caller's context.
+Invocation form: `<<~ kau Name>>` — no fragment; transcludes kumu def in caller's context.
 
 Resolves kumu definition via `[all[tiddlers+shadows]tag[lar:///ha.ka.ba/tags/kumu]field:kumu-name<name>first[]]`.
 Placement renders `<div class="lar-kau lar-kau-place" data-uri="...">`.
@@ -51,21 +50,21 @@ Companion procedures: `~kahea~kau` (live transclusion of kau child-slot), `~aka~
 
 Per-instance capability hooks and UUID write-back surface as explicit TW5 action tiddlers when Keyhive WASM lands. The widget itself holds no JS module hooks.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/kau" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kau >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/kumu >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-kau>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/kumu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;l6FXSwT8ujYk9v-Igp10ioITIcw2_QUuuYVgUs8qaig
+<<^ code="&#x0003;">>ni:///sha-256;yhueUec1YNCjNblhMBXeAXZyc9s555FGdwCa52Rm_4M
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

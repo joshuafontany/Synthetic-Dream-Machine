@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/widget >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/widget>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/widget.mem"
@@ -8,7 +8,6 @@ mana      = 17
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "\\widget pragma-alias sigil — declares a named ~widget callable via the ~ dispatcher; operator extension point"
 tags      = ["lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-widget"]
@@ -16,14 +15,14 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/widget"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! \widget
 
-English-form widget declaration pragma. `<<~ \widget ~name(params) >>body<<~/ \widget >>` declares
-a named widget body callable as `<<~ name args >>` via the `~` dispatcher.
+English-form widget declaration pragma. `<<~ \widget ~name(params)>>body<<~/ \widget>>` declares
+a named widget body callable as `<<~ name args>>` via the `~` dispatcher.
 
 The `~` prefix convention: all operator-defined callable sigils use `~name`. The `\widget` sigil
 makes this declaration first-class in memetic-wikitext — no separate tiddler or JS registration
@@ -32,44 +31,44 @@ needed for a new named sigil body.
 No direct Hawaiian equivalent. The `~` prefix carries the Lares convention for callable wikitext bodies.
 `lar-kind: pragma-alias` — the sigil serves as the declaration; no render output.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
 A `\widget` declaration MUST use the `~` prefix on the widget name.
-A `\widget` declaration MUST close with `<<~/ \widget >>`.
+A `\widget` declaration MUST close with `<<~/ \widget>>`.
 A `\widget` declaration MUST function as a declaration only, producing no render output.
 The declared name MUST be unique in the current tiddler scope.
 `\widget` and `\procedure` MAY be used interchangeably for render-only bodies; use `\widget` when
 the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pure wikitext.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<~ \widget ~mysigil(uri:"" p1:"") >>
+<<~ \widget ~mysigil(uri:"" p1:"")>>
 <$tiddler tiddler=<<uri>>>
 ...
 </$tiddler>
-<<~/ \widget >>
+<<~/ \widget>>
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/dispatcher >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/dispatcher>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/wehe>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;VfoOilQsA20s8BoHwllUrOKyKxRgEiXyeBAgbD8H510
+<<^ code="&#x0003;">>ni:///sha-256;_UuiE_-LOlJmGtL55XFzO7MtxRT2D5Ru446tR9rrQlg
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

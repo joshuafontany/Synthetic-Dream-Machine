@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/preferences>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/preferences.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 16
 manao     = 17
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "extraction shelf for durable concepts recovered from Lares_Preferences.system-prompt and adjacent lararium witnesses"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/preferences"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! Lararium Preferences Extraction Shelf
 
@@ -29,9 +28,9 @@ This shelf breaks the old mega-prompt into smaller concept rooms.
 The source text stays recoverable.
 The concepts can now stand on their own feet.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 !! Source
 
@@ -50,9 +49,9 @@ Supporting witness matter nearby:
 
 This pass only promotes concepts that recur strongly enough to feel load-bearing across the lararium shelf.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tree >>
+<<~ ahu #tree>>
 
 !! Tree
 
@@ -69,16 +68,16 @@ This pass only promotes concepts that recur strongly enough to feel load-bearing
 * `lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate`
 * `lar:///ha.ka.ba/lararium/docs/preferences/degraded-node-states`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;bj5-845jYa-5MQqR2GMwG9LHiPqWaeVF6sjZfliXasQ
+<<^ code="&#x0003;">>ni:///sha-256;I_IwIZcn6VPIQY6ooTgmlkilGXsPYDUSfT8oEVtYcTQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

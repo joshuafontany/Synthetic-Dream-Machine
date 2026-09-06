@@ -1,4 +1,4 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=CS:17&p=10 -->
 
@@ -10,7 +10,7 @@
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=C:18#what-v2-settled -->
 ## What v2 Settled
@@ -62,7 +62,7 @@ lar:///ha.ka.ba/optional/sub/path/
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=S:13#what-remains-open -->
 ## What Remains Open
@@ -84,7 +84,7 @@ The following questions are `~:confidence[SP],[9]` – `~:confidence[S],[13]`. T
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=C:18#what-was-explicitly-rejected -->
 ## What Was Explicitly Rejected
@@ -102,7 +102,7 @@ These decisions are closed. Do not re-open without operator directive.
 ---
 
 <!-- → ? -->
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/api/pono/memetic-wikitext>> -->
 
 <!-- ∞ → lar:///uri.schema.holds/uri-schema/observe/?confidence=CS:17#scope-of-this-module -->
 ## Scope of This Module

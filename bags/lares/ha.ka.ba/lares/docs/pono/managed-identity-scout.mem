@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout>>
 ```toml meta
 cacheable         = true
 file-path         = "bags/lares/ha.ka.ba/lares/docs/pono/managed-identity-scout.mem"
@@ -11,7 +11,6 @@ manao             = 18
 manaoio           = 16
 namespace         = "&#x2299;"
 pattern-integrity = true
-register          = "Testimony-Verbatim"
 retain            = true
 role              = "managed-identity-scout — VERBATIM handoff of the tasked spirit sent after the ABUSE SURFACE of managed identity. TWO HEADLINE ANSWERS: nobody has built an exit the manager cannot block, anywhere; and when management goes structural the AUTHORIZATION GRAPH becomes the abuse surface while malware falls to a rounding error. Carries the three separable properties no shipped system holds together, the measured 89%-dual-use surface, the five-year exit gap, the one normative text with zero implementations, and the finding that lands hardest on Ruling 2b — NOBODY VERIFIES WHO THE MANAGER IS."
 revised-on        = "2026-09-04"
@@ -20,9 +19,9 @@ type              = "text/memetic-wikitext+tiddlywiki"
 uri-path          = "ha.ka.ba/lares/docs/pono/managed-identity-scout"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Managed identity ~ the measured abuse surface
 
@@ -32,9 +31,9 @@ A tasked spirit went after the abuse surface that opens when ''one identity mana
 >
 > ''What breaks when management goes structural? The AUTHORIZATION GRAPH becomes the abuse surface, and malware falls to a rounding error.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-graph-is-the-surface >>
+<<~ ahu #the-graph-is-the-surface>>
 
 !! ★ The surface measures as the authorization graph, not the software ★
 
@@ -59,9 +58,9 @@ The clinic's own explanation: //"many abusers are seemingly able to surveil clie
 
 ⚠ ''Making management structural does not ADD an app to the threat model. It IS the threat model.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #nobody-verifies-the-manager >>
+<<~ ahu #nobody-verifies-the-manager>>
 
 !! ★ Nobody verifies who the manager is ~ and this lands on Ruling 2b ★
 
@@ -79,9 +78,9 @@ The spirit's own statement of what changes the shape of the design:
 
 Not a UI notice. ''An identity-layer role check'' — one product verified the age of the account a device was registered to, and //"abusers complain in reviews… about the difficulty in using it"// for surveillance. ''The thing that worked lived in the identity layer.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-three-properties >>
+<<~ ahu #the-three-properties>>
 
 !! ★ The design axis ~ three separable properties, and nothing holds all three ★
 
@@ -95,9 +94,9 @@ Property ② already exists as a written commitment in two places that never app
 
 ⚠ ''And the platforms wrote that rule for everyone but themselves.'' The same store forbids monitoring even a CONSENTING spouse — while its own family product ships ''no documented ambient indicator''. The other vendor writes no such rule and ships the cleanest silent supervision: a restricted app is //"just temporarily hidden from the Home Screen"// — no notice, no attribution. ''The relation stays visible in settings; every individual exercise of it stays invisible.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-two-directions >>
+<<~ ahu #the-two-directions>>
 
 !! ⚠ Visibility and severance pull opposite ways, and both are measured
 
@@ -112,9 +111,9 @@ A meta-analysis of ''94 independent samples, N = 23,461'' on monitoring in anoth
 
 > ''Making monitoring visible measurably improved how people felt about the monitor. It did not measurably reduce the harm.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-exit-that-does-not-exist >>
+<<~ ahu #the-exit-that-does-not-exist>>
 
 !! No exit exists anywhere, and the closest thing is a petition
 
@@ -130,9 +129,9 @@ Across supervised-identity systems the subject's exit gates on the manager in ev
 
 Social-recovery wallets carry the one design where the delegated party ''provably cannot become the controller'': the subject holds the signing key, guardians recover but never transact, and ''the subject removes guardians unilaterally after a timelock''. ⚠ It contains ''no supervised-principal role at all'', so there is no exit to block — the correct primitive exists and ''has never been applied to a manager→subject relation''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-normative-floor >>
+<<~ ahu #the-normative-floor>>
 
 !! The only text requiring a channel the manager cannot see or block
 
@@ -149,9 +148,9 @@ A UN general comment on children's rights in the digital environment:
 
 A coercive-control statute names //"monitoring a person via online communication tools or using spyware"// among its conduct, and its prosecuting guidance carries the decisive sentence: //"**A victim may not know the full extent of a suspect's conduct, for instance if they were being monitored without their knowledge.**"// Its evidential list treats ''covert and overt tracking as equally evidential'' — never as different-severity conduct.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #two-instrument-lies >>
+<<~ ahu #two-instrument-lies>>
 
 !! ⚠ Two instrument-lies the spirit caught, one of them live in a standards body
 
@@ -160,15 +159,15 @@ A coercive-control statute names //"monitoring a person via online communication
 
 ''Both cures ran the same way: fetch the raw bytes and count.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ZJvOwleZX-ntNLpbGi3Dl4_4HNJy4YIGxNaxmVPS4zE
+<<^ code="&#x0003;">>ni:///sha-256;PrXJdaRHfxCN6gb-_DYmdIbwIti_NT4csXRgZMkeewQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

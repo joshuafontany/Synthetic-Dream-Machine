@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pranala-header >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/pranala-header>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/pranala-header.mem"
@@ -8,7 +8,6 @@ mana      = 18
 manao     = 17
 manaoio   = 17
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "the bearing a carrier declares about itself — the `?` self-token on the SOH control sigil"
 tags      = ["api/pono/pranala", "lar:///ha.ka.ba/lararium/tw5/tiddlers/sigil-pranala-header"]
@@ -16,23 +15,23 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/pranala-header"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Pranala-Header — the bearing a carrier declares about itself
 
-`<<^ code="&#x0001;" from=? -> to=uri >>` stands on a carrier's head and declares the address it holds. The
+`<<^ code="&#x0001;" from=? -> to=uri>>` stands on a carrier's head and declares the address it holds. The
 `?` token means ''this carrier itself'' — a self-reference no sigil keyword can express, since a
 keyword names a thing and this one names the speaker.
 
 The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ sense the `?` token — a self-reference; the carrier declares its own address, never an edge outward
 ⏿ orient: the bearing rides the SOH control sigil, once per carrier, ahead of the meta block
@@ -40,9 +39,9 @@ The bearing reads off the SOH frame scan (the deserializer's head recogniser).
 ▶ read the bearing off the head; set the self-reference for all sigils in this carrier
 ↺ confirm exactly one bearing per carrier and a `uri-path` that agrees with it
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #law >>
+<<~ ahu #law>>
 
 !! Law (Kānāwai)
 
@@ -60,15 +59,15 @@ speaking sigil states what a carrier says. The bearing stands first among the fo
 cannot find the address cannot resolve a single `?` in the body — so it rides the head that carries the
 frame (`lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing#/frame-head-lock`).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #syntax >>
+<<~ ahu #syntax>>
 
 !! Syntax
 
 ```text
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/path/to/this-carrier >>
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/path/to/this-carrier >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/path/to/this-carrier>>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/path/to/this-carrier>>
 ```
 
 The bearing reads off the SOH scan, which anchors on the control code and admits the namespace slot
@@ -76,9 +75,9 @@ ahead of it. ''The tail must tolerate the arrow'': `? ->` carries a `>`, so a sc
 stops at the bearing itself and finds no head at all. Every scan in this grammar spells it
 `(?:[^>\n]|->)*` for that reason.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -97,18 +96,18 @@ agrees-with    = "uri-path"
 
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;3cNu8cLUH7GyYfTgmxf6AFRE4xiI5XhQY823cY4Z2Ls
+<<^ code="&#x0003;">>ni:///sha-256;qJi0XV_OInR-32h_Qja1IQazbiBo9EmQMVDA2mShyyQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

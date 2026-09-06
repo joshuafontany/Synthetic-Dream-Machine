@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/kairos >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/docs/kairos>>
 ```toml meta
 cacheable = false
 file-path = "bags/lararium/ha.ka.ba/lararium/docs/kairos.mem"
@@ -8,7 +8,6 @@ l-space   = "stable"
 mana      = 15
 manao     = 16
 manaoio   = 16
-register  = "Synthesis"
 retain    = false
 role      = "KAIROS as an instrument — the iterative posture reviewer that surfaces drift to one operator; gate, budget, check anatomy, decay, trust ledger"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/loci"]
@@ -16,9 +15,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/docs/kairos"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #meme-header >>
+<<~ ahu #meme-header>>
 
 ! KAIROS — The Proactive Monitor as an Instrument
 
@@ -31,11 +30,11 @@ surface, and what happens to one the operator sets down.
 KAIROS keeps its recovered shape throughout: a timing reflex distributed through the house,
 never a subsystem bolted beside it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #provenance >>
+<<~ ahu #provenance>>
 
 !! Provenance
 
@@ -55,9 +54,9 @@ sources as fetched-at-403 — search digests, never the papers. Every number bel
 confidence its spirit vowed, and the digest-only ones cap near 12/20. Open the papers before
 quoting any of them onward.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-gate >>
+<<~ ahu #the-gate>>
 
 !! The Gate
 
@@ -71,7 +70,7 @@ returns to watching.
 
 The field supplies the threshold the myth left as a feeling.
 
-<<~ confidence 16/20 >> Google's Tricorder ships a check only under ''< 10% effective false
+Google's Tricorder ships a check only under ''< 10% effective false
 positives'', where an ''effective false positive'' names a finding ''the operator took no
 action on''. A finding that reads correct and gets ignored has failed identically to one that
 reads wrong.
@@ -81,7 +80,7 @@ author''. A check the operator keeps waving past does not stand vindicated by be
 
 !!! The discredited channel
 
-<<~ confidence 11/20 >> Drug-interaction alerts run ~10% clinical relevance and reach ''90%
+Drug-interaction alerts run ~10% clinical relevance and reach ''90%
 physician override'' — and ''88.2% of very-severe alerts get overridden too''. Once a channel
 discredits itself the severity field carries no force.
 
@@ -90,15 +89,15 @@ raise an item's rank to win attention it did not earn.
 
 !!! Habituation arrives on exposure two
 
-<<~ confidence 13/20 >> fMRI work measured visual-processing collapse ''after the second
+fMRI work measured visual-processing collapse ''after the second
 exposure''; polymorphic presentation resisted it where fixed presentation did not.
 
 ''Law:'' the instrument MUST NOT render the same item identically on repeat. An item either
 changes shape or stops surfacing.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tiers >>
+<<~ ahu #tiers>>
 
 !! The Ladder as Budget
 
@@ -106,7 +105,7 @@ The myth scales KAIROS by node tier — Household a faint one-line flag, Crossro
 Temple full assessments unprompted. That ladder carries a noise governor, and the alarm
 standards give it an envelope.
 
-<<~ confidence 14/20 >> EEMUA 191 / ANSI-ISA-18.2 name ''>10 items in 10 minutes'' as an
+EEMUA 191 / ANSI-ISA-18.2 name ''>10 items in 10 minutes'' as an
 ''alarm flood'' — the point a human stops processing items one at a time.
 
 | Tier | Myth signal | Proposed cap |
@@ -134,7 +133,7 @@ so it spends neither compliance nor reliance (#trust-ledger).
 
 !!! Never silent
 
-<<~ confidence 15/20 >> A randomized field experiment (n=237) measured notifications ''off
+A randomized field experiment (n=237) measured notifications ''off
 entirely'' scoring ''worse'' than the status quo — more anxiety, not less; coarse batching
 (3×/day) won, while hourly batching bought nothing over control.
 
@@ -142,9 +141,9 @@ The house already holds this as law — `Focus(N)` rides every turn, and the sig
 ''Aperture — never silent''. The instrument MUST report ''checked, nothing stands'' rather
 than fall quiet. Silence reads as absence, and absence reads as broken.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #anatomy >>
+<<~ ahu #anatomy>>
 
 !! Check Anatomy
 
@@ -163,7 +162,7 @@ running on every stand. KAIROS extends the same shape rather than raising a seco
 
 !!! Two gates, not one
 
-<<~ confidence 12/20 >> The JITAI literature names two conditions — ''vulnerability'' (the
+The JITAI literature names two conditions — ''vulnerability'' (the
 need exists) and ''receptivity'' (the person can act) — and its own systematic reviews record
 that receptivity ''almost never gets measured''. The field named the right variable and then
 failed to instrument it.
@@ -173,13 +172,13 @@ low receptivity: a true finding stays withheld, kept for the next coarse breakpo
 
 !!! The moment
 
-<<~ confidence 15/20 >> Session boot stands as a ''coarse breakpoint by construction'' — no
+Session boot stands as a ''coarse breakpoint by construction'' — no
 task in flight, so no resumption lag to pay. The wake hook already fires there. Mid-session
 surfacing MUST clear a much higher bar.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #refusal >>
+<<~ ahu #refusal>>
 
 !! The Refusal to Act
 
@@ -191,15 +190,15 @@ reason, and KAIROS inherits it rather than arguing it:
 sidecar, while standing one remains the operator's act.
 <<<
 
-<<~ confidence 15/20 >> `brew doctor` holds the same discipline — it prints, exits nonzero,
+`brew doctor` holds the same discipline — it prints, exits nonzero,
 and leaves the corrective command to the operator. Google's contrary rule (fix automatically
 what can be fixed automatically) holds ''only under code review'', where a human approves the
 diff before it lands. An unattended scheduled runner carries no equivalent consent gate, so
 the rule MUST NOT port without it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #decay >>
+<<~ ahu #decay>>
 
 !! Decay — the re-entry key
 
@@ -211,7 +210,7 @@ attributed dissent carrying a ''re-entry key'': the named condition under which 
 reopens. A dismissed check neither expires on a timer nor persists forever; ''it sleeps until
 its key turns''.
 
-<<~ confidence 13/20 >> A study across 1,425 projects found suppressions mostly
+A study across 1,425 projects found suppressions mostly
 ''undocumented'', encoding technical debt and tool misassumptions that never reached the check
 author. The `kue` form cannot go undocumented — it requires the reason and the key.
 
@@ -224,33 +223,33 @@ teaches the operator that dismissal does nothing, and that lesson generalizes to
 button files against the ''analyzer author'', and analyzers with high dismissal rates ''get
 disabled''. A dismissal that silences one instance teaches the instrument nothing.
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #trust-ledger >>
+<<~ ahu #trust-ledger>>
 
 !! The Trust Ledger — two accounts, never one
 
-<<~ confidence 13/20 >> Dixon & Wickens separate two channels that MUST NOT trade against
+Dixon & Wickens separate two channels that MUST NOT trade against
 each other:
 
-<<~ranks compliance acting-when-it-fires ~ degraded by FALSE ALARMS >>
-<<~ranks reliance trusting-the-silence ~ degraded by MISSES >>
+<<~ranks compliance acting-when-it-fires ~ degraded by FALSE ALARMS>>
+<<~ranks reliance trusting-the-silence ~ degraded by MISSES>>
 
 ''A quiet run makes a claim.'' Suppressing a noisy check to protect compliance draws down
 reliance, and nothing surfaces that draw unless the instrument counts both.
 
-<<~ confidence 11/20 >> Two counterweights against over-tuning: reliability as low as 0.6
+Two counterweights against over-tuning: reliability as low as 0.6
 still aided performance, and the cry-wolf effect measured weaker than assumed in air traffic
 control. Perfect precision does not name the bar.
 
 Parasuraman & Riley name the failure this guards: ''disuse'' — neglect of ''reliable''
 automation, root-caused to false alarms and to a base rate nobody weighed.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #check-set-one >>
+<<~ ahu #check-set-one>>
 
 !! Check Set One
 
@@ -269,7 +268,7 @@ one-line fix.
 
 !!! The law under the first three
 
-<<~ confidence 17/20 >> ''A pattern can bound the string; only a runtime can bound the
+''A pattern can bound the string; only a runtime can bound the
 authority.'' Wherever an allowed program can name another program — `-c`, `-e`, `-exec`,
 `--pre`, `--compress-program`, `core.fsmonitor` — the allow-list has delegated its whole
 authority to a string the pattern never sees.
@@ -281,9 +280,9 @@ published Claude Code escapes land at the ''argument'' layer, never the verb.
 
 ''You can allow-list an interpreter invocation. You cannot allow-list an interpreter.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ruled >>
+<<~ ahu #ruled>>
 
 !! Rulings — operator, 2026-08-27
 
@@ -307,21 +306,21 @@ alarm flood the standard names.
 free coarse breakpoint; a scheduled sweep needs its own justification.
 # ''Ledger persistence'' — where compliance and reliance counts live across sessions.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/operations-review >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/degraded-states >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike >>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/proactive-surfacing>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/operations-review>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/degraded-states>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/workspace-trust-gate>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/preferences/identity-permissions>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;W_vKRjGb4RSQ4Fzx-xyVpOyDHXlvoYO2iw1Ty5fxsL8
+<<^ code="&#x0003;">>ni:///sha-256;faLsb6gEyf-6oPSf7wfgl0ZdE9yErlotspvb-X6UIPU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

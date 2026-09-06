@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/hydration-grain >>
+<<^ code="&#x0001;" namespace="ॐ ँ" from=? -> to=lar:///ha.ka.ba/lararium/api/hydration-grain>>
 ```toml meta
 cacheable     = true
 drafted-on    = "2026-07-27"
@@ -11,7 +11,6 @@ mana          = 13
 manao         = 13
 manaoio       = 11
 namespace     = "&#x0950; &#x0901;"
-register      = "Synthesis"
 retain        = true
 role          = "the ONE pattern integrity — carry the name, defer the body — read across three grains (tiddler · body · bag); names the RUNG the bag grain lacks and gates it behind research"
 status        = "designed"
@@ -21,11 +20,11 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/api/hydration-grain"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #core-claim >>
+<<~ ahu #core-claim>>
 
 ! Hydration Grain — carry the name, defer the body
 
@@ -33,9 +32,9 @@ uri-path      = "ha.ka.ba/lararium/api/hydration-grain"
 
 The invariant: ''a holder may know a thing's ADDRESS without carrying its BODY'', and the cheap rung exists wherever a grain has been given one.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-three-grains >>
+<<~ ahu #the-three-grains>>
 
 !! The three grains — same integrity, different water
 
@@ -43,17 +42,17 @@ The invariant: ''a holder may know a thing's ADDRESS without carrying its BODY''
 \procedure ~Grain(Type:"" Params:"") ~Grain <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Grain Tiddler "skinny/fields-only-no-text fat/hydrated-with-body owner/TW5 lineage/the wiki's own lazy-load ~ the envelope arrives, the body follows" >>
-<<~Grain Body "skinny/the-handle-names-a-cid resolved/the-bytes-carried owner/content-resolution lineage/skinny handle ~ the name travels, the body resolves on demand" >>
-<<~Grain Bag "anu/URL-known-doc-not-loaded wela/live-handle-Worker-running owner/residency-tiers lineage/ʻōlelo thermal axis ~ the address stands, the CRDT hydrates" >>
+<<~Grain Tiddler "skinny/fields-only-no-text fat/hydrated-with-body owner/TW5 lineage/the wiki's own lazy-load ~ the envelope arrives, the body follows">>
+<<~Grain Body "skinny/the-handle-names-a-cid resolved/the-bytes-carried owner/content-resolution lineage/skinny handle ~ the name travels, the body resolves on demand">>
+<<~Grain Bag "anu/URL-known-doc-not-loaded wela/live-handle-Worker-running owner/residency-tiers lineage/ʻōlelo thermal axis ~ the address stands, the CRDT hydrates">>
 
 ''Read the column and the integrity shows.'' Each grain answers the same question — //what may a holder know without paying for the whole?// — and each answers it in its own layer's vocabulary. ''The vocabularies MUST NOT merge'' (they name different layers, and a merged word would flatten the layer distinction the model rests on); ''the integrity MUST stay legible across them'' (a reader who sees three unrelated mechanisms has lost the wave).
 
 ''Etymological note, not a claim.'' `wiki` descends from `wikiwiki` (the Honolulu shuttle — "quick"), so the thermal axis's ʻōlelo Hawaiʻi names and TiddlyWiki's own name draw from one language. A pleasing convergence; it carries no architectural weight.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-missing-rung >>
+<<~ ahu #the-missing-rung>>
 
 !! The missing rung — the bag grain jumps
 
@@ -74,9 +73,9 @@ The candidate: a ''bag snapshot'' — a quick-load skinny path standing BEFORE t
 
 ''The gate still governs.'' residency-tiers#third-tier-gate admits a third tier ONLY when BOTH hold: ''(a)'' a //measured// resume-latency problem under real focus-rotation, AND ''(b)'' a definition that genuinely sheds memory. The grid strengthens the ''(b)'' reading — an unoccupied (partial-data, no-actor) cell sheds by its position, not by hope. ''(a) stands unmeasured'' — and this meme asserts no latency problem it has not measured.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #laws-that-already-govern >>
+<<~ ahu #laws-that-already-govern>>
 
 !! Laws already standing over this — the house rules before the research runs
 
@@ -88,9 +87,9 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 # ''THE FAST PATH MUST NOT BYPASS THE GATE.'' ''The sharpest trap.'' Reads through the CRDT cross `sharePolicy` / the cap-tier floor / the antigen ring. A snapshot that serves bytes ''around'' those shores becomes a disclosure hole wearing a performance costume. Any snapshot MUST ride the SAME gate as the hydrated read, or it MUST NOT exist.
 # ''READ-ONLY.'' A snapshot MUST NOT accept writes. The write path stays the CRDT's alone; a writable cache re-opens the merge semantics the CRDT exists to own.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #research-charge >>
+<<~ ahu #research-charge>>
 
 !! The research charge — what must land before any build
 
@@ -103,24 +102,24 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 
 ''Measurement rides alongside.'' The third-tier gate's clause (a) demands a //measured// problem. The research MUST return either a measurement plan or an honest statement that no latency problem stands demonstrated — ''and if none does, the pono outcome reads: build nothing''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
+<<~ loulou lar:///ha.ka.ba/lararium/api/residency-tiers>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/content-resolution>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/disk-projection>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<~ pranala #same-integrity-at from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers family=relation role=bag-grain >>
-<<~ pranala #same-integrity-at from=? -> to=lar:///ha.ka.ba/lararium/mesh/content-resolution family=relation role=body-grain >>
-<<~ pranala #gated-by from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers#/third-tier-gate family=constraint role=governed-by >>
-<<~ pranala #projection-law from=? -> to=lar:///ha.ka.ba/lararium/api/disk-projection family=constraint role=governed-by >>
+<<~ pranala #same-integrity-at from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers family=relation role=bag-grain>>
+<<~ pranala #same-integrity-at from=? -> to=lar:///ha.ka.ba/lararium/mesh/content-resolution family=relation role=body-grain>>
+<<~ pranala #gated-by from=? -> to=lar:///ha.ka.ba/lararium/api/residency-tiers#/third-tier-gate family=constraint role=governed-by>>
+<<~ pranala #projection-law from=? -> to=lar:///ha.ka.ba/lararium/api/disk-projection family=constraint role=governed-by>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;ukelKtW7BXNkSqiCnOKYtAChfERLVhSHE8AZa3GeFKg
+<<^ code="&#x0003;">>ni:///sha-256;yYXpiE-x-w71-iKKPwqCi6TemR7G12DLqyVAseDArNs
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -31,7 +31,7 @@
  */
 
 /**
- * The trailer's written form: `<<^ BCC sha256:… >>`.
+ * The trailer's written form: `<<^ BCC sha256:…>>`.
  *
  * It rides the caret family with the other frame sigils because it IS frame, never body — a reader
  * who meets it should feel the same register as the ETX above it.

@@ -1,25 +1,23 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
 ```toml meta
 cacheable  = true
-confidence = 11
 file-path  = "bags/elyncia/ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet.mem"
 l-space    = "stable"
 mana       = 13
 manao      = 13
 manaoio    = 12
 rating     = "ano"
-register   = "Provisional-Synthesis"
 retain     = true
 role       = "region worksheet — the New Delos Nexus in four strata: High Delos, Low Delos, the Underdark, and the outer seas/islands/shores; seeded from gazetteer canon, grown by play"
 type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! New Delos Nexus ~ Region Worksheet
 
@@ -42,9 +40,9 @@ major Lares landmarks join the strata.
 
 This worksheet grows by play; each stratum carries prompts beside its canon.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-neighborhood >>
+<<~ ahu #the-neighborhood>>
 
 !! The Neighborhood ~ grounding the concept map (Eastern Net, from the gazetteer)
 
@@ -87,9 +85,9 @@ neighbors carry the campaign (Neo-Thracia, north across the unstable leg), the w
 crater in the sinking Montenegro-analog mountains, west beyond the Marches), the war
 (Summerlands/Winterlands), the forge (Brimstone), and the bridge out (Asgard).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-gradient >>
+<<~ ahu #the-gradient>>
 
 !! The Levitation Gradient
 
@@ -114,9 +112,9 @@ Delos and all the islands within roughly three 30-mile nexus-scale subhexes — 
 measure (490 years), ringing the crater-seas and the emptied harbors. The ring-towns carry their
 own names; "New Delos" stays the Nexus's name entire. The old megacity went ''up''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #high-delos >>
+<<~ ahu #high-delos>>
 
 !! High Delos ~ the flying capital
 
@@ -139,9 +137,9 @@ island watches its gift from a lower sky.
 ''Prompts:'' which neighborhoods rose and which stayed? Who regulates the lift-queues? Where does
 the Orrery actually sit, and who reads it?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #low-delos >>
+<<~ ahu #low-delos>>
 
 !! Low Delos ~ the megadungeon mouth
 
@@ -155,9 +153,9 @@ Path-Lares maintain active Underdark maps. Mana lifts run between the ports of H
 ''Prompts:'' what do the three stabilized town-levels each trade? Who holds the lift-gates at the
 bottom? What does the nineteen-minute cycle breathe FOR?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #underdark >>
+<<~ ahu #underdark>>
 
 !! The Underdark ~ below the lowest layer
 
@@ -169,9 +167,9 @@ levels, the layers stop pretending to be layers.
 ''Prompts:'' which deep polities trade and which raid? What does the Menzoberranzan-shaped hole
 in Rhea's past imply about routes from HERE? Where do the whispered House-of-Masks ways come out?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #outer-seas >>
+<<~ ahu #outer-seas>>
 
 !! The Outer Seas, Islands & Shores
 
@@ -186,17 +184,17 @@ islands stand in the chain; the flotilla-fresco regatta tradition dresses festiv
 ''Prompts:'' name five ports and their one export each. Which island keeps the oldest
 First-Breaking cult fragment? Where do the smuggling wars actually land their cargo?
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index >>
-<<~ loulou lar:///ha.ka.ba/elyncia/factions/index >>
-<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret >>
-<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm >>
+<<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/places/index>>
+<<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
+<<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
+<<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;6IzdXn8_ovrQ6lkezDN8yq6iX3mTz9hEE-cMbtZlCLU
+<<^ code="&#x0003;">>ni:///sha-256;1hZ9PWEDyQTkKB-meJoXU7N0ynVjq38qRFhX3V7lUYQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -2,8 +2,8 @@
  * bearing-harvest — harvest the lar: bearing-vector a turn carried.
  * Meme: lar:///ha.ka.ba/lararium/mesh/bearing-harvest
  *
- * A live agent↔operator turn opens with `<<~ lares aim <left> -> <right> >>`
- * and closes with `<<~ lares yield <left> -> ? >>`. The `<left>`/`<right>` are
+ * A live agent↔operator turn opens with `<<~ lares aim <left> -> <right>>>`
+ * and closes with `<<~ lares yield <left> -> ?>>`. The `<left>`/`<right>` are
  * `lar:` URIs naming the turn's bearing. This module scans a verbatim message
  * for those sigils and returns a {@link Bearing}.
  *

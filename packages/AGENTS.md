@@ -1,16 +1,14 @@
-<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ code="&#x0001;" ? -> lar:///packages/AGENTS >>
+<<^ code="&#x0001;" ? -> lar:///packages/AGENTS>>
 
-<<~ ahu #meta >>
+<<~ ahu #meta>>
 
 ```toml
 uri-path     = "packages/AGENTS"
 file-path    = "packages/AGENTS.md"
 content-type = "text/memetic-wikitext+tiddlywiki"
 l-space      = "adjacent"
-confidence   = 17
-register     = "CS"
 manaoio      = 16
 mana         = 18
 manao        = 17
@@ -20,20 +18,20 @@ hydrate      = true
 retain       = true
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 ✶ scan the operator ask, changed files, open tabs, and package boundary.
 ⏿ orient the task against the spine: mesh contracts, TW5 VM, node host, browser vessel, caps, operator CLI.
 ◇ choose the smallest package surface that can carry the change without crossing canon by accident.
 ▶ edit tests and source together; prefer narrow shores over broad rewrites.
 ⤴ run typecheck, focused tests, and build when the shore touches generated or bundled code.
 ↺ report receipts: files touched, commands run, friction found, next loop.
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #network-topology >>
+<<~ ahu #network-topology>>
 
 ## Network Topology (canonical)
 
@@ -45,9 +43,9 @@ retain       = true
 
 Within-Nexus sync = Automerge CRDT (reliable). Cross-Nexus = explicit treaty, wild-magic-zone hops (unreliable).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #package-map >>
+<<~ ahu #package-map>>
 
 ## Package Map (active)
 
@@ -71,9 +69,9 @@ Eight packages carry the stack. Each owns one boundary; cross-cutting work trave
 
 `@lares/cli` carries the operator-facing surface: the `lares` binary, arg parsing, process spawn, the socket invoker, the harness-wiring on `wake`, and the verb family in `commands/`. The CLI carries no protocol logic and **no transport of its own beyond one socket** — every verb dispatches to `@lararium/node` handlers through the daemon's UDS verb-channel (`verb-call.runVerb` → `local-connector.invokeLocal` → `<dataDir>/lares.sock`); an absent socket raises `DaemonUnreachable`, never a fallback. WS lives at the daemon's relay, for genuine remote peers; the CLI holds no Automerge dependency at all.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #spine >>
+<<~ ahu #spine>>
 
 ## Quine-Wiki Spine
 
@@ -103,9 +101,9 @@ TW5 child edit
 
 Residency transitions travel through the ACTION verb surface (`ADD`, `COPY`, `MOVE`, `CLEAR`, `DROP`, `LOAD`) governed by the [Residency Model Epic](EPIC-RESIDENCY-MODEL.md). The `lares act` CLI carries the operator surface; no `promote` shim exists. Do not let live wiki edits write `bags/` directly — operators land bag content through ACTION verbs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boot-sequence >>
+<<~ ahu #boot-sequence>>
 
 ## Boot Sequence — three causal moments
 
@@ -133,9 +131,9 @@ Operator-private to one node, federated to the operator's own devices via `cap=a
 
 Projections register as kinds with `LarProjectionRegistry`. The node-scoped `disk-projector` kind lives in `@lararium/node`. Configs ride as admin-room tiddlers tagged `$:/tags/LarariumProjection`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boundary-law >>
+<<~ ahu #boundary-law>>
 
 ## Boundary Law
 
@@ -153,9 +151,9 @@ Projections register as kinds with `LarProjectionRegistry`. The node-scoped `dis
 
 **Bag URI law.** Bag tags occupy `child[1]` only. Do not promote a `child[N]` sigil to bag identity. See [lar-uri.md](../bags/lares/ha.ka.ba/lares/api/pono/lar-uri.md).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #test-routes >>
+<<~ ahu #test-routes>>
 
 ## Test Routes
 
@@ -197,9 +195,9 @@ pnpm -r --filter './packages/**' build
 
 If sandboxing blocks `tsx` IPC under `/tmp`, request escalation and rerun the same build command.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #friction-watch >>
+<<~ ahu #friction-watch>>
 
 ## Friction Watch
 
@@ -217,9 +215,9 @@ Watch these current weak spots:
 * **Open IDE tabs** may name stale files; trust filesystem scans over editor ghosts.
 * **mempalace stays vendored.** Never edit the `mempalace/` submodule; it rides behind the causal-island boundary. Tune behavior through `~/.mempalace/config.json` (e.g. `hooks.auto_save=false`) and our `@lararium/mempalace` layer. Bumping the `lar_*` enrichment ⇒ bump `lar_hv` in lockstep (`harvest.ts buildPatch` ⟷ `drawer_io.py HARVEST_VERSION`). Run `lares sense pour --all` only on a **fresh** palace — re-staging existing drawers under a new `source_file` duplicates them.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edit-discipline >>
+<<~ ahu #edit-discipline>>
 
 ## Edit Discipline
 
@@ -231,27 +229,27 @@ Documentation memes go to `bags/` as `.md` files. `.tid` files live in TW5 packa
 
 When reporting back, use OODA-HA receipts: observe facts, orient boundary, decide shore, act summary, ho'oko commands, aftermath risks.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 ## Edges
 
-<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family=control role=implements >>
-<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/lares/api/pono/invariant family=control role=implements >>
-<<~ pranala #implements-lar-uri ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri family=control role=implements >>
-<<~ pranala #implements-parser ? -> lar:///ha.ka.ba/lares/api/pono/parser family=control role=implements >>
-<<~ pranala #implements-render-pipeline ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline family=control role=implements >>
-<<~ pranala #to-root-agents ? -> lar:///AGENTS family=control role=adjacent >>
-<<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/lares/AGENTS family=control role=adjacent >>
-<<~ pranala #to-lares ? -> lar:///LARES family=control role=adjacent >>
-<<~ pranala #to-voices ? -> lar:///ha.ka.ba/lares/api/voices family=reference role=governs >>
-<<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/lares/docs/lararium/meme-provider family=reference role=describes >>
-<<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/lares/docs/mesh/dreamnet-architecture family=reference role=describes >>
-<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration family=reference role=describes >>
+<<~ pranala #implements-meme ? -> lar:///ha.ka.ba/lares/api/pono/meme family=control role=implements>>
+<<~ pranala #implements-invariant ? -> lar:///ha.ka.ba/lares/api/pono/invariant family=control role=implements>>
+<<~ pranala #implements-lar-uri ? -> lar:///ha.ka.ba/lares/api/pono/lar-uri family=control role=implements>>
+<<~ pranala #implements-parser ? -> lar:///ha.ka.ba/lares/api/pono/parser family=control role=implements>>
+<<~ pranala #implements-render-pipeline ? -> lar:///ha.ka.ba/lares/api/pono/render-pipeline family=control role=implements>>
+<<~ pranala #to-root-agents ? -> lar:///AGENTS family=control role=adjacent>>
+<<~ pranala #to-lares-agents ? -> lar:///ha.ka.ba/lares/AGENTS family=control role=adjacent>>
+<<~ pranala #to-lares ? -> lar:///LARES family=control role=adjacent>>
+<<~ pranala #to-voices ? -> lar:///ha.ka.ba/lares/api/voices family=reference role=governs>>
+<<~ pranala #to-meme-provider ? -> lar:///ha.ka.ba/lares/docs/lararium/meme-provider family=reference role=describes>>
+<<~ pranala #to-dreamnet ? -> lar:///ha.ka.ba/lares/docs/mesh/dreamnet-architecture family=reference role=describes>>
+<<~ pranala #to-mempalace-integration ? -> lar:///ha.ka.ba/lararium/api/mempalace-integration family=reference role=describes>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>
+<<^ code="&#x0003;">>
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ?>>

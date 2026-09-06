@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/canvas/rooms >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/canvas/rooms>>
 ```toml meta
 cacheable = true
 file-path = "bags/lararium/ha.ka.ba/lararium/tw5/canvas/rooms.mem"
 mana      = 16
 manao     = 16
 manaoio   = 16
-register  = "Synthesis-Canon"
 retain    = true
 role      = "lararium canvas room registry — default rooms, portals, layout types"
 tags      = ["lar:///ha.ka.ba/lares/api/lararium"]
@@ -15,11 +14,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lararium/tw5/canvas/rooms"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Lararium Canvas Rooms
 
@@ -27,9 +26,9 @@ Four built-in rooms form the default lararium canvas.
 Each room carries an id, a TiddlyWiki filter expression, a tldraw page, and a layout strategy.
 Portals connect rooms as directed edges.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ count rooms; name layout strategy for each.
 ⏿ orient portals against room topology; check directionality.
@@ -38,9 +37,9 @@ Portals connect rooms as directed edges.
 ⤴ verify each portal references valid room ids.
 ↺ confirm room nav closes back to system view.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #room-law >>
+<<~ ahu #room-law>>
 
 !! Room Law
 
@@ -52,9 +51,9 @@ Portal ids SHOULD follow the convention `portal:{from}→{to}`.
 Layout strategies follow a priority order. The cascade selects first match.
 `story-river` serves as the catch-all default and MUST appear last.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #schema >>
+<<~ ahu #schema>>
 
 !! Schema (machine-readable)
 
@@ -127,14 +126,14 @@ to-room    = "system"
 label      = "← System"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/canvas/zoom-levels >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/canvas/zoom-levels>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;re1lUiR52_FPdAgO7Heem3IrwuI5E0yNh_bPS_8rTN8
+<<^ code="&#x0003;">>ni:///sha-256;gDssOqMB4rt5ENmaAtKcao90tIj13SLPAX2cKD-lPLU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

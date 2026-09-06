@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/recipe-watch >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/recipe-watch>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/recipe-watch.mem"
 l-space     = "lararium"
 mana        = 11
 manao       = 11
-register    = "Synthesis"
 retain      = true
 role        = "recipe-watch — island-side LIVE composition reconcile; the composition class sheds its reboot"
 source-file = "packages/lararium-tw5/src/recipe-watch.ts"
@@ -15,9 +14,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/recipe-watch"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -43,9 +42,9 @@ composite. The recipe + bag-oracle reach run ''two-source'' (operator ruling,
 Reconciles serialize (one at a time; a change mid-run queues one rerun). The
 wiki behavior starts it at `onEa`, stops it at demote.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariants >>
+<<~ ahu #invariants>>
 
 !! Invariants
 
@@ -75,18 +74,18 @@ structural: it mounts as a ''library layer'' (above `lares`), so the corpus
 composes into a recipe that names it. Oracle-move swaps apply to any mounted
 CRDT slot the oracles point at.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch >>
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/recipe >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/compaction-handlers >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/engine-watch>>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/recipe>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/compaction-handlers>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;rmd1G7nIGXB7ECP9rjdqVR7scD9Pz1fsD3t5EwM2npU
+<<^ code="&#x0003;">>ni:///sha-256;UrwfFrdHw6EJAdS8A1GQ4hR-CBa3IbnE9VdwPzDFRP0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

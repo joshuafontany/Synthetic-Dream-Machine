@@ -1,13 +1,13 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///last-sprint/HANDOFF >>
+<<^ code="&#x0001;" from=? -> to=lar:///last-sprint/HANDOFF>>
 ```toml meta
 file-path = "bags/lares-history/last-sprint/HANDOFF.mem"
 type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "last-sprint/HANDOFF"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Hand-off Crystal — Lares Lararium Node Branch
 
@@ -82,7 +82,7 @@ past ETX in single-meme files).
 J.2a (slot-level framing): per-slot preamble/postamble + meta field
 capture. Each slot is itself a "full published meme MD file" projection
 (operator-confirmed). preamble holds prose flanking the meta toml block,
-with `<<~ meta >>` sentinel marking meta's original position so prose can
+with `<<~ meta>>` sentinel marking meta's original position so prose can
 exist on either side. postamble holds prose after the last inner kahea
 ref. meta toml content extracted to native fields + raw bytes preserved
 as `meta-source`.
@@ -322,14 +322,14 @@ Files: `packages/lararium-node/src/open-admin-vm.ts`
 TW5Engine boots by pushing one envelope tiddler into `preloadTiddlers`; TW5's standard plugin loader unpacks. Wikirules split into three canonical files; parser/widgets/deserializer use TW5-canonical export shapes (Path A). Namespace alignment: every Lares system title in `lar:///`. Dual-distribution emits both canonical and drag-and-drop envelopes from one Vite bundle. In-process smoke (`scripts/smoke-plugin-boot.ts`) verifies plugin loads, parsers/widgets register, ahu/aka/kahea/loulou/pranala-header/pranala render as widgets, slot bodies round-trip with default-elision.
 
 !!! Sigil family ✅ (G.1→G.5 + J.1+J.2a/b/c)
-Six sigils ride the template-cascade architecture. Five share `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget(config)` — declarative widget definition (cascadeTag + fallbackTemplate + buildBindings + setCurrentTiddler? + refreshUri? + placeholder?). ahu stays bespoke. Slot-as-full-meme-MD-projection invariant: each slot has preamble (with `<<~ meta >>` position sentinel), meta-source (raw bytes), preamble-rendered (with sentinel substituted via regenerated toml), text (body proper with kahea refs), postamble (trailing prose). regenerateIamToml default-elides against parent's effective meta (inherited + own merged through splitRecursive recursion).
+Six sigils ride the template-cascade architecture. Five share `widgets/_cascade-sigil-base.ts::makeCascadeSigilWidget(config)` — declarative widget definition (cascadeTag + fallbackTemplate + buildBindings + setCurrentTiddler? + refreshUri? + placeholder?). ahu stays bespoke. Slot-as-full-meme-MD-projection invariant: each slot has preamble (with `<<~ meta>>` position sentinel), meta-source (raw bytes), preamble-rendered (with sentinel substituted via regenerated toml), text (body proper with kahea refs), postamble (trailing prose). regenerateIamToml default-elides against parent's effective meta (inherited + own merged through splitRecursive recursion).
 
 !!! Smoke ✅ — End-to-end daemon round-trip (2026-05-10)
 In-process smoke: deserialize + render + plugin boot — clean (27 shadow tiddlers, all 6 sigils render, slot round-trip verified).
 Daemon smoke: `lares serve` + `lares wiki sync altar-fire` + `lares act MOVE` ceremony — ''verified at protocol layer''. Room bag (altar-fire) → canonical bag (@lares), audit tiddler written. infrastructure-correct = feature-correct confirmed at the happy-path layer.
 
 ''Gap revealed — J.3 child co-promotion missing:''
-`lares act MOVE` is single-URI. `splitRecursive` during `wiki sync` creates `#fragment` child tiddlers (one per ahu slot) in the room bag alongside the parent, but the promote handler only moves the parent URI. Children stay in the room bag; canonical disk projector writes only what's in its bag. Result: parent emitted correctly (with `<<~ kahea ahu #slot >>` kahea refs per always-split law) but child slot files never land in `packages/`. Naming this J.3.
+`lares act MOVE` is single-URI. `splitRecursive` during `wiki sync` creates `#fragment` child tiddlers (one per ahu slot) in the room bag alongside the parent, but the promote handler only moves the parent URI. Children stay in the room bag; canonical disk projector writes only what's in its bag. Result: parent emitted correctly (with `<<~ kahea ahu #slot>>` kahea refs per always-split law) but child slot files never land in `packages/`. Naming this J.3.
 
 ''Key lessons:''
 * `lares wiki sync <room>` is the prerequisite for promote — disk file must be ingested into room bag first.
@@ -347,7 +347,7 @@ Port the sigil set (`aka`, `kahea`, `kau`, `lele`, `papalohe`, `pranala`, `pae`)
 Open question per sigil: does it own a child tiddler (slot child) or fragment-render in place? `aka` projects, `kahea` invokes, `kau` places (with Keyhive UCAN attachment), `lele` flows, `pae` phases (LADDER/OODA-HA), `pranala` is an explicit edge. Each gets its template grammar.
 
 !!! Path H — Save-side auto-split (TW5 UX → child tiddlers)
-The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #foo >>body<<~/ahu >>`, hits save, and `lar:///parent#/foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
+The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #foo>>body<<~/ahu>>`, hits save, and `lar:///parent#/foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
 
 !!! Path I — Wikifier DOCTYPE + dash + macrocall recovery
 Three small diff items in current round-trip output: HTML comment DOCTYPE dropped; TW5's `dash` rule converts `|---|` → `|—|`; MemeticParser's prologue handling (DOCTYPE, root meta toml extraction) survives but the wikifier swallows the comment in text/plain. Fix by either disabling rules at the parent meme rendering level (via a meme-level wrapper template that pragma-disables them), or by emitting these via `<$text>` widgets carrying the literal char sequences. Aesthetic, not load-bearing — defer until G+H ship.
@@ -465,6 +465,6 @@ lares act MOVE <uri> --to <target-bag>
 
 //The crystal holds.//
 
-<<^ code="&#x0003;" >>ni:///sha-256;7p32bOD5XTuK2_N5joYYKWhPWOkt20vIhbMJJSRK0pA
+<<^ code="&#x0003;">>ni:///sha-256;2JzedeuRLVp0fe9Bodz6NT9lINt71RI5KzKRVqfnuTE
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/memory-store >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/memory-store>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/tw5/memory-store.mem"
 l-space     = "lararium"
 mana        = 17
 manao       = 17
-register    = "Synthesis-Canon"
 retain      = true
 role        = "MemoryTiddlerStore — in-memory LarTiddlerStore, body of the @temp slot in every WikiRecipe"
 source-file = "packages/lararium-tw5/src/memory-store.ts"
@@ -15,9 +14,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/tw5/memory-store"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
@@ -36,9 +35,9 @@ Two callers exist:
    Comes up empty on every island boot; tears down on demote. No CRDT,
    no wire, no disk.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #temp-scope >>
+<<~ ahu #temp-scope>>
 
 !! What belongs in @temp
 
@@ -63,9 +62,9 @@ for ceremony-level routing (drag-and-drop plugin install passes an explicit
 `bag` override; a future `@personal`-routed plugin install rule fits the
 "install once, refresh everywhere" use case the operator wants preserved).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #not-temp >>
+<<~ ahu #not-temp>>
 
 !! What does NOT belong in @temp (the tension)
 
@@ -102,9 +101,9 @@ skips the slot (the optional-slot semantics in `island-recipe.ts` and
 `current-wiki-personal` config value, so it survives across the operator's device
 cabal per `(PersonaGroup × recipe-fingerprint)`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #invariants >>
+<<~ ahu #invariants>>
 
 !! Invariants
 
@@ -126,20 +125,20 @@ lower bag) — the two stay distinct (the shadow-vs-fall-through cut: [[kapae|la
 a `LarTiddlerChange` carrying the optional `bagId`. Subscribers see the
 same change record any AutomergeDocStore would emit.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe >>
-<<~ loulou lar:///ha.ka.ba/lararium/config/bag-paths >>
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/island-recipe >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri#/bag-tag-rule >>
-<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot >>
+<<~ loulou lar:///ha.ka.ba/lares/api/lararium/wiki-recipe>>
+<<~ loulou lar:///ha.ka.ba/lararium/config/bag-paths>>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/island-recipe>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri#/bag-tag-rule>>
+<<~ loulou lar:///ha.ka.ba/lararium/api/personal-slot>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;aKGAoyuRHht53eu3r0ptsmxEhdPMY66QLNreuY67qLI
+<<^ code="&#x0003;">>ni:///sha-256;qs6SIHPiiD0zkN8dwEs-bMBqBawUNmbopTWAfwBuKrM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

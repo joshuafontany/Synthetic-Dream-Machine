@@ -19,7 +19,7 @@ import { fencedSpans, maskedExecAll } from "./fence-mask.js";
  * Slot identifier — supports nested fragment paths via `/`-separated
  * segments per memetic-wikitext spec §nested-ahu and lar-uri.md §5.6.
  *
- * `<<~ ahu #parent/child/grandchild >>` opens a slot whose URI reads
+ * `<<~ ahu #parent/child/grandchild>>` opens a slot whose URI reads
  * `parentURI#/parent/child/grandchild` — single-hash invariant; the
  * fragment-path is the addressable hierarchy.
  */
@@ -61,7 +61,7 @@ export interface AhuBlock {
  */
 export function findTopLevelAhuBlocks(text: string): AhuBlock[] {
   // Quoted sigils never open or close a block: a fenced or inline-code
-  // `<<~ ahu … >>` is the operator SHOWING the grammar, not using it
+  // `<<~ ahu …>>` is the operator SHOWING the grammar, not using it
   // (fence-mask law).
   const mask = fencedSpans(text);
   const events: Array<{ kind: "open" | "close"; pos: number; end: number; slot: string }> = [];

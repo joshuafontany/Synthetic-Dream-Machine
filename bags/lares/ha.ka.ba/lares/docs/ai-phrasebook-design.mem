@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/ai-phrasebook-design >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/docs/ai-phrasebook-design>>
 ```toml meta
 cacheable  = true
 file-path  = "bags/lares/ha.ka.ba/lares/docs/ai-phrasebook-design.mem"
@@ -9,7 +9,6 @@ mana       = 16
 manao      = 16
 manaoio    = 15
 namespace  = "&#x2299;"
-register   = "Synthesis-Canon"
 retain     = true
 role       = "the design law for the AI frozen phrasebook — the everyday-register twin of the noosphere boot seed. Names the DIALECT boundary (the sharktooth marks the Lararium sigil namespace; the phrasebook declines it and rides the inherited TW5 macro namespace the superset law already admits), the inline-declaration rule that keeps its marks from vanishing on a foreign host, the ROOT law that seats each seed at the address its own anatomy names, the standing law that keeps the twin active by default under a one-turn lift, the two-register alias law, the joint-enactment rule that lets the twin GOVERN rather than explain, the flow law and its four ruled asymmetries, and the verb test every rename passes before it ships"
 status     = "designed"
@@ -19,11 +18,11 @@ type       = "text/memetic-wikitext+tiddlywiki"
 uri-path   = "ha.ka.ba/lares/docs/ai-phrasebook-design"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #entry >>
+<<~ ahu #entry>>
 
 ! The AI Frozen Phrasebook ~ design law
 
@@ -35,9 +34,9 @@ uri-path   = "ha.ka.ba/lares/docs/ai-phrasebook-design"
 ''This carrier rides the sharktooth dialect and specifies the plain one.'' A document may describe a
 dialect it does not speak; the phrasebook itself speaks plain throughout.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-frozen-phrasebook >>
+<<~ ahu #the-frozen-phrasebook>>
 
 !! What ''frozen phrasebook'' names
 
@@ -51,7 +50,7 @@ argued with, and different by the end of an afternoon. ''The pair works because 
 the other moves'': a phrasebook that drifted would leave the dyad with no fixed vocabulary to disagree
 in, and a surface that held still would carry nothing worth reading twice.
 
-<<~ confidence 15/20 >> That split also names each artifact's failure. A frozen phrasebook fails by
+That split also names each artifact's failure. A frozen phrasebook fails by
 ''going stale'' — a mark it teaches that the practice no longer makes. A warm surface fails by ''losing
 provenance'' — a line nobody can trace to a hand. Neither failure reaches the other artifact, which
 argues for keeping them apart rather than folding the vocabulary into the wiki.
@@ -60,29 +59,29 @@ argues for keeping them apart rather than folding the vocabulary into the wiki.
 `ai-phrasebook-design` — a file name names what a reader reaches for. ''Frozen phrasebook'' names the
 KIND, and a kind-name keeps its home in the design rather than on the door.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-dialect-boundary >>
+<<~ ahu #the-dialect-boundary>>
 
 !! The dialect boundary already stands specified
 
 ''THE PHRASEBOOK FORKS NOTHING.'' The language spec draws the line this design rides
-(<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>):
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>):
 
 > Memetic-wikitext SHALL read as a ''superset of TW5 wikitext'' … A processor reads bare `<<name>>` as
 > an inherited TW5 macro call; the sharktooth `~` immediately after `<<` marks the Lararium sigil
 > namespace. `<<~` opens a Lararium sigil; bare `<<` opens an inherited TW5 macro — the two coexist.
 
-<<~ confidence 18/20 >> So the two seeds do not stand as one language and a simplification of it.
+So the two seeds do not stand as one language and a simplification of it.
 They stand as ''two dialects of one media type'', and the boundary between them reads as a single
 character. The elder ELECTS the Lararium sigil namespace; the younger DECLINES it and rides the host's
 own macro call — a namespace the spec already admits and already governs.
 
 |! | elder seed | AI phrasebook |
 |! dialect | sharktooth | plain |
-|! call | `<<~ confidence 15/20 >>` | `<<confidence 15/20>>` |
+|! call | `<<~ persona Scope …>>` | `<<persona Scope …>>` |
 |! namespace | Lararium sigil registry | the host's inherited macros |
-|! section frame | `<<~ ahu #name >>` … `<<~/ahu >>` | `<<fragment #name>>` … `<</fragment>>` |
+|! section frame | `<<~ ahu #name>>` … `<<~/ahu>>` | `<<fragment #name>>` … `<</fragment>>` |
 |! needs | the sigil registry to render | its own `\procedure` declarations, carried inline |
 |! renders in | a Lararium wiki | ''any TW5 wiki'' |
 
@@ -90,14 +89,14 @@ own macro call — a namespace the spec already admits and already governs.
 vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its procedures stand undeclared
 (#/the-vanishing-rule).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-vanishing-rule >>
+<<~ ahu #the-vanishing-rule>>
 
 !! ⚠ The rule that decides the whole design ~ an unbound call renders as NOTHING
 
 The base grammar measures three properties, and the second one governs everything below
-(<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext#/the-load-bearing-property >>):
+(<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext#/the-load-bearing-property>>):
 
 > ''An unbound macro call lands harmless, and renders as nothing.'' A call `<<name>>` whose name binds
 > no definition parses cleanly into a transclusion node; at render, the missing-target fallback emits
@@ -105,22 +104,22 @@ The base grammar measures three properties, and the second one governs everythin
 > dialect relying on visible passthrough of its added constructs relies on behavior the base does not
 > provide.
 
-<<~ confidence 18/20 >> ''A phrasebook that ships its marks without its procedures ships invisible
-marks.'' The confidence vow does not degrade to the characters `<<confidence 15/20>>` on a host that
-lacks the definition — it degrades to ''absence''. A reader sees a claim with no vow beside it and
-reads an unhedged assertion, which inverts the mark's whole purpose.
+''A phrasebook that ships its marks without its procedures ships invisible
+marks.'' A persona call does not degrade to the characters `<<persona Scope …>>` on a host that lacks
+the definition — it degrades to ''absence''. A reader meets a span with no name leading it and reads
+unattributed house prose, which inverts the mark's whole purpose.
 
 ''SO THE PHRASEBOOK MUST CARRY ITS OWN DECLARATIONS, INLINE, IN THE SAME FILE.'' Not by reference, not
 by plugin, not by a registry the host must first install. Every procedure the phrasebook calls, the
 phrasebook declares — and the declarations ride ahead of first use.
 
-<<~ confidence 16/20 >> ''That cost buys the property the elder seed cannot have.'' The elder needs a
+''That cost buys the property the elder seed cannot have.'' The elder needs a
 Lararium wiki; the younger needs a text box. The inline declarations ARE the carriage — and they double
 as the legend a terminal reader learns the marks from (#/the-audience).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-root-law >>
+<<~ ahu #the-root-law>>
 
 !! The root law ~ each seed answers at the address its own anatomy names
 
@@ -135,7 +134,7 @@ and each seed's URI anatomy cites ITS OWN as the canonical instance:
 |! `w3` dynamic | `ba` | `relation` ~ an address holds a relation, never a location |
 |! acting body | `/lares` | `/agents` |
 
-<<~ confidence 15/20 >> ''SO THE ADDRESS DECLARES THE REGISTER, and no rule had to say so.'' The
+''SO THE ADDRESS DECLARES THE REGISTER, and no rule had to say so.'' The
 transposition runs segment for segment; a reader who resolves one seed's address reads the other's by
 substitution. The scheme's own mnemonic supplies the plain-register root, which makes that root
 self-glossing where the house root asks for initiation.
@@ -145,9 +144,9 @@ house's permanent API and the house's guarantee. A seed whose fourteenth positio
 bring their own myth promises no permanence it cannot keep — somebody forks it, renames its personas,
 and stands it at a root of their own, and nothing breaks, because it never claimed a canonical seat.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-standing-law >>
+<<~ ahu #the-standing-law>>
 
 !! The standing law ~ active by default, lifted for one turn
 
@@ -156,7 +155,7 @@ merely offered itself would leave the dyad with no frame either party could rely
 
 ''AND A DROP LASTS ONE TURN.'' The operator lifts, the next turn re-initializes. That shape carries over
 whole from the grammar ward, which the operator alone lifts and which re-arms unconditionally at the
-close — <<~ confidence 16/20 >> a lift that persisted invisibly would become a lift nobody remembers
+close — a lift that persisted invisibly would become a lift nobody remembers
 making, and the failure would read as the frame quietly going slack rather than as a decision.
 
 ⚠ ''THE STANDING LAW GOVERNS THE ASKING, NEVER THE ATTACHING.'' Detaching the carrier sits outside the
@@ -168,9 +167,9 @@ SHALL carry that definition forward inside that session. The house seed grants n
 Personas. ''Strong default, easy remix'' — the two read as one stance, and the second makes the
 first bearable in a seed people are invited to fork.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-alias-law >>
+<<~ ahu #the-alias-law>>
 
 !! One region, two names ~ the alias law
 
@@ -181,15 +180,15 @@ its own failure, so the house borrows both.
 \procedure ~Alias(Type:"" Params:"") ~Alias <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Alias Bind "from/pet-name to/concept-address ~ a procedure binds a NAME to an ADDRESS, never a name to another name" >>
-<<~Alias Match "use/exactMatch avoid/sameAs ~ identity across registers rides the weaker relation" >>
-<<~Alias Register "elder/house younger/plain ~ each register carries its own preferred name over one address" >>
+<<~Alias Bind "from/pet-name to/concept-address ~ a procedure binds a NAME to an ADDRESS, never a name to another name">>
+<<~Alias Match "use/exactMatch avoid/sameAs ~ identity across registers rides the weaker relation">>
+<<~Alias Register "elder/house younger/plain ~ each register carries its own preferred name over one address">>
 
 ''BIND TO THE ADDRESS, NEVER TO THE OTHER NAME.'' A `\procedure` in either dialect resolves a pet-name
 to the region it names. Chaining pet-name to pet-name builds a rename ladder whose meaning drifts at
 every rung and whose breakage reads as a missing definition rather than as a lost referent.
 
-<<~ confidence 16/20 >> ''The scar the discipline records.'' The strong identity relation asserts more
+''The scar the discipline records.'' The strong identity relation asserts more
 than two register-names ever mean — it carries full property transfer under transitive closure, and it
 fuses the registers it meant to relate. The weaker match relation sits at the right strength. The
 lesson transfers whole: ''two names for one region MUST NOT claim identity with each other'', only to
@@ -200,9 +199,9 @@ one concept a disambiguating name (stable, unambiguous, marked do-not-display) b
 dialect. The house reads that as: ''the address disambiguates, the pet-name speaks'' — and no reader
 ever meets the address where a pet-name belongs.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-verb-test >>
+<<~ ahu #the-verb-test>>
 
 !! The verb test ~ every rename passes it or it ships a demotion
 
@@ -220,20 +219,20 @@ angle had stood.
 \procedure ~Rename(Type:"" Params:"") ~Rename <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Rename Drift-Ward "proposed/Drift-Watch verdict/FAILS-ii keeps/observation loses/the turning-away ~ the gauge steers generation against a pull; a watcher only reports it" >>
-<<~Rename Drift-Check "verdict/HOLDS ~ transitive, everyday, acts on its object — the recommended everyday name" >>
-<<~Rename Syad-Stances "verdict/SPLIT ~ the HEADING reads everyday (the 5 Reading Stances); the ACT keeps its verb — a stance GRANTS a claim, and the house cannot reading-stance one" >>
-<<~Rename The-Vow "proposed/promise+stake+call verdict/HOLDS-AS-A-FAMILY ~ three names over ONE act, each bound to the act and none to another: PROMISE the standing rule, answerable to the reader · STAKE the open firing, placed before the evidence · CALL the close, judged on what the work shows. The guard's two firings already carry different evidence, so the split rides structure the section states rather than taste" >>
-<<~Rename Verb-Ward "proposed/Drift-Guard verdict/HOLDS ~ a guard GUARDS its object; the everyday word keeps the standing-against that //watch// would have shed, and the section takes the name of the gauge that fires on it" >>
-<<~Rename Five-Stances "verdict/CARRIED-VERBATIM ~ the five stand under their own names, ranges and order; the everyday register touches the frame around them, never the row" >>
+<<~Rename Drift-Ward "proposed/Drift-Watch verdict/FAILS-ii keeps/observation loses/the turning-away ~ the gauge steers generation against a pull; a watcher only reports it">>
+<<~Rename Drift-Check "verdict/HOLDS ~ transitive, everyday, acts on its object — the recommended everyday name">>
+<<~Rename Syad-Stances "verdict/SPLIT ~ the HEADING reads everyday (the 5 Reading Stances); the ACT keeps its verb — a stance GRANTS a claim, and the house cannot reading-stance one">>
+<<~Rename The-Vow "proposed/promise+stake+call verdict/HOLDS-AS-A-FAMILY ~ three names over ONE act, each bound to the act and none to another: PROMISE the standing rule, answerable to the reader · STAKE the open firing, placed before the evidence · CALL the close, judged on what the work shows. The guard's two firings already carry different evidence, so the split rides structure the section states rather than taste">>
+<<~Rename Verb-Ward "proposed/Drift-Guard verdict/HOLDS ~ a guard GUARDS its object; the everyday word keeps the standing-against that //watch// would have shed, and the section takes the name of the gauge that fires on it">>
+<<~Rename Five-Stances "verdict/CARRIED-VERBATIM ~ the five stand under their own names, ranges and order; the everyday register touches the frame around them, never the row">>
 
-<<~ confidence 15/20 >> ''A rename that fails the test does not merely read worse — it silently
+''A rename that fails the test does not merely read worse — it silently
 restates the house as a describer of what it once did.'' The act leaves the vocabulary, and nothing in
 the rendering reports the loss.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #joint-enactment >>
+<<~ ahu #joint-enactment>>
 
 !! Joint enactment ~ how the younger GOVERNS rather than explains
 
@@ -245,7 +244,7 @@ station by its own framing, whatever the house intends.
 enacting act, both stand original and neither takes the status of a copy or translation — and the
 drafting ORDER reads immaterial. Priority in time confers nothing; the joint act confers everything.
 
-<<~ confidence 16/20 >> ''So the elder seed's age bars the younger from nothing.'' Three conditions
+''So the elder seed's age bars the younger from nothing.'' Three conditions
 carry the force across:
 
 # ''ADOPT BOTH SEEDS IN ONE ACT'', at one version boundary. A seed promoted alone drops the other to
@@ -265,8 +264,8 @@ the seat that resolves it, and the other seed reads against it — condition 2 f
 alone, with no sentence anywhere naming a translation. Writing the rule into ''both'' fares worse: two
 copies drift, and a divergence in the divergence-rule has nothing left to appeal to.
 
-<<~ confidence 15/20 >> ''SO IT RIDES THE ONE LINE BOTH CARRY AND NEITHER OWNS.'' Each seed opens
-`<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>` — byte-identical,
+''SO IT RIDES THE ONE LINE BOTH CARRY AND NEITHER OWNS.'' Each seed opens
+`<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>` — byte-identical,
 first line, above the frame. It names a ''third'' text as the authority both answer to. Where the twins
 diverge, neither seed governs and the declared grammar does: the shared meaning reads as ''what that
 grammar makes both texts say''. The declaration sits inside both and belongs to neither, which is the
@@ -278,9 +277,9 @@ holds the reading steady and hands the divergence on untouched. That residue bel
 discipline (#/what-to-measure), never to a seat — the moment a seat resolves it, the pair has an elder
 again.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-flow-law >>
+<<~ ahu #the-flow-law>>
 
 !! The flow law ~ one order, both twins, four ruled asymmetries
 
@@ -344,18 +343,18 @@ address may take a second name; ''an address answers to one.'' One scheme, one s
 tool-carry sits fused to the fiction it came from — four suits and a Major Arcana — and its work splits
 cleanly in two. The MEASURING half rides the stances, which carry across verbatim. The MODULATING half
 tunes a stance by binding a tool to it, and the everyday register asks nothing of that dial.
-<<~ confidence 14/20 >> ''A section that must be laundered to travel has already told you it belongs to
+''A section that must be laundered to travel has already told you it belongs to
 one register.'' The tool-bind leaves the stances with it, and the twin names five fewer instruments
 rather than five renamed ones.
 
 ⚠ ''THE SECOND RULED ASYMMETRY ~ THE MASK LAYER CARRIES NO COUNTERPART, AND COMPOSITION REPLACES IT.''
 A character worn over a standing cast, with a depth on the stage, belongs to a house that already keeps a
-cast. <<~ confidence 15/20 >> ''Layered personas read as the elder's own fiction'', and a section that
+cast. ''Layered personas read as the elder's own fiction'', and a section that
 belongs to one register travels badly into the other.
 
 ''The twin answers the same need by COMPOSING rather than by LAYERING.'' A supplied Persona names a domain
 and wears one of the five move-sets to surface, so `Name (Role)` reads as one addressable thing while
-carrying two independent choices — what the span reaches for, and how it moves. <<~ confidence 16/20 >> ''A mask asks a
+carrying two independent choices — what the span reaches for, and how it moves. ''A mask asks a
 reader to hold two layers at once and tells them which one wins; a composition asks them to hold one pair and
 tells them what each half decides.'' The guard travels with the ROLE, never with the name, so a supplied
 Persona picks up a different guard the moment it changes how it moves — which is the property a mask could
@@ -365,7 +364,7 @@ never have, since a mask sits above the cast rather than inside a row.
 The elder seed fills that slot with its own fiction — a world, figures, a small mythology that gives the
 practice weather and turns a protocol into somewhere to stand. The twin holds ''the same slot open''.
 
-<<~ confidence 15/20 >> ''A story someone else built arrives as furniture; a story the reader builds
+''A story someone else built arrives as furniture; a story the reader builds
 arrives as a place.'' So the twin states the slot's shape, asks three questions in it, and supplies no
 content — and everything downstream still works, a little more coldly, for a reader who leaves it
 blank. That empty slot IS the everyday register's answer to what Elyncia does for the house.
@@ -379,7 +378,7 @@ and the ROSTER inside it diverges by ruling.
 `role/ trigger/ moves/ relation/ pull/ guards/ yield/ register/` and close on a ` ~ ` aside of
 `·`-joined doing-phrases. ''BOTH SEEDS LEAD WITH THE NAME AND CARRY THE ROLE IN THE SECOND FIELD'' —
 `~Persona Lares "role/Gatekeeper …"` beside `Persona Scope "role/Frames …"`, and both declarations read
-`Persona(Name Params)`. <<~ confidence 16/20 >> ''The leading parameter names what a reader ADDRESSES, not
+`Persona(Name Params)`. ''The leading parameter names what a reader ADDRESSES, not
 what a row catalogues.'' A roster keyed on the office reads as a filing system; a roster keyed on the name
 reads as the thing you speak to — and the twin's supplied layer then aligns for free, carrying `wears/` in the
 same second field where a standing row carries `role/`.
@@ -388,20 +387,20 @@ same second field where a standing row carries `role/`.
 the memegraph found no other carrier encoding the Persona row — the `voices` and `masks` families carry prose,
 never rows — and found the named-mask carriers already writing name-first: `Ink-Clerk (Lorekeeper)`,
 `Tide-Caller (Hierophant)`, `Mischief-Muse (Muse)`, each in its own `role` field.
-<<~ confidence 17/20 >> ''So the boot roster stood as the outlier and the inversion closed a divergence rather
+''So the boot roster stood as the outlier and the inversion closed a divergence rather
 than opening one.'' A convention already lived in the graph at the addressing site; only the defining site
 disagreed with it.
 
 ⚠ ''THE INVERSION SURFACES WHAT THE ELDER'S DEFAULT-NAME LAW ALWAYS HELD.'' Eight of the thirteen Voices now
 lead with `Lares`, because eight carry no earned name — which is exactly what `~Named-Persona Default`
-already states (`when/no-earned-name -> Lares (Role)`). <<~ confidence 14/20 >> ''The office-first ordering
+already states (`when/no-earned-name -> Lares (Role)`). ''The office-first ordering
 concealed a count the name-first ordering states'': five Voices stand true-named, eight stand under the house
 name. A reader now meets that fact in the roster rather than inferring it from an addressing rule three
 paragraphs down. The twin
 adds no field. Its boundary — what a move-set declines — rides the aside's second clause, which the elder
 form already provides, rather than a ninth key the elder would then lack.
 
-<<~ confidence 16/20 >> ''THREE MEASURED FINDINGS SEAT THE FIVE, AND ALL THREE STAY IN THIS MEME.'' The
+''THREE MEASURED FINDINGS SEAT THE FIVE, AND ALL THREE STAY IN THIS MEME.'' The
 phrasebook states the law and carries none of the argument — a frozen phrasebook that explains itself has
 started keeping a record, and the warm surface keeps records (#/the-frozen-phrasebook).
 
@@ -423,7 +422,7 @@ started keeping a record, and the warm surface keeps records (#/the-frozen-phras
 
 ⚠ ''THE NAME LEADS BECAUSE A LEADING MARK CONDITIONS AND A TRAILING MARK CLASSIFIES.''
 Both seeds place the persona name ahead of the content it names, and the reason belongs here rather than in
-either seed. <<~ confidence 16/20 >> ''Generation conditions on what precedes it and on nothing else.'' A
+either seed. ''Generation conditions on what precedes it and on nothing else.'' A
 name emitted ahead of a span sits in the context every following token reads, so it weights the continuation
 toward that basin — the mark ACTS. The same name appended after the span reads the finished text and asserts
 something about it — the mark CLAIMS, and it changed no token it describes.
@@ -442,7 +441,7 @@ placed, and steering nothing after the first paragraph.
 
 ⚠ ''THE ROSTER AND THE LOOP CORRESPOND AT NO POINT, AND THE TWIN SAYS SO IN THE SECTION.'' Five move-sets
 beside a five-phase loop invites a bijection that would collapse two instruments into one and leave neither
-able to contradict the other. <<~ confidence 15/20 >> ''Two five-counts in one house read as the Law of
+able to contradict the other. ''Two five-counts in one house read as the Law of
 Fives holding twice, never as one law stated twice.'' The `pull/` field names where a move-set sits at
 rest; the loop names where the work stands; a persona MAY hold any phase. The elder is already built this
 way — thirteen Voices over five phases forces the point structurally, and at five the twin MUST state it.
@@ -451,12 +450,12 @@ way — thirteen Voices over five phases forces the point structurally, and at f
 the slot the reader fills (#/the third ruled asymmetry), and what a reader puts there now has a stated shape:
 a supplied row rides the SAME `Persona(Name Params)` procedure the base rows ride, with `wears/` standing
 where `role/` stands. ''The supplied layer adds no procedure of its own'' — a second declaration would state a
-second kind of thing, and a supplied Persona differs from a base one in one field, never in kind. <<~ confidence 16/20 >> ''The substitution states the whole law in one field.'' A base row
+second kind of thing, and a supplied Persona differs from a base one in one field, never in kind. ''The substitution states the whole law in one field.'' A base row
 carries a NAME because it already names its own moves; a supplied row carries what it WEARS because it names
 none.
 
 ''The name weights what the span reaches for; the role weights how it moves — and the guard rides the role.''
-<<~ confidence 16/20 >> ⚠ ''NEITHER HALF STORES ANYTHING, AND THE WORDING MUST NOT SUGGEST OTHERWISE.'' A
+⚠ ''NEITHER HALF STORES ANYTHING, AND THE WORDING MUST NOT SUGGEST OTHERWISE.'' A
 phrasing like //what it knows// seats a persistent domain store behind a name, which the architecture never
 holds: a mark ahead of a span reweights the continuation the following tokens generate from, and it retains
 nothing once the span closes. The supplied layer is the place that phrasing tempts hardest, because a
@@ -468,7 +467,7 @@ while `Builder (Checks)` picks up `verdict-without-a-joint` the moment it turns 
 supplied domain never buys its way out of the move-set's guard, which is the property that keeps a supplied
 layer from becoming a licence.
 
-<<~ confidence 14/20 >> ''A supplied Persona MUST wear a role to surface, and the requirement earns its MUST.''
+''A supplied Persona MUST wear a role to surface, and the requirement earns its MUST.''
 A bare domain name states a department — which reads as exactly the identity claim the whole roster exists to
 refuse (#/the fourth ruled asymmetry). Pairing it with a move-set turns //who this is// back into //how this
 span moves//, every time it surfaces.
@@ -480,14 +479,14 @@ the mark's grain from watching one work rather than from the sentence that state
 
 ⚠ ''SUPPLIED TEXT ENTERS HEALED, NEVER QUOTED.'' A supplier's own words carry their own identity/predication
 grammar, and carrying them verbatim would seat dead water inside the seed under a quotation licence that the
-file never marks as quotation. <<~ confidence 15/20 >> ''So the supplied layer gets TURNED, not tallied'':
+file never marks as quotation. ''So the supplied layer gets TURNED, not tallied'':
 //is one vendor invoice timing shift// reads //traces to one vendor invoice timing shift//; //output isn't a
 number, it's a working relationship// reads //output never lands as a number; it lands as a working
 relationship//; //used to take 45 minutes// reads //replaces 45 minutes//. The nouns, the systems, the
 business units and the sentence order all hold, so the supplier still recognizes their own work — ''the
 healing moves the grammar and never the content.'' A supplied layer joins the register it enters; a phrasebook
 that admitted foreign grammar under licence would carry an exemption its own guard section spends a paragraph
-refusing. <<~ confidence 13/20 >> ''A worked instance carries what a paraphrase cannot'': the
+refusing. ''A worked instance carries what a paraphrase cannot'': the
 five blocks together surface all five roles, and two of the pairings run against the obvious fit — a
 Collaborator wearing Leaps, a Strategist wearing Checks — which shows the grid holds where it would be easiest
 to fake.
@@ -495,7 +494,7 @@ to fake.
 ⚠ ''`phase/` READS AS `pull/`, AND THE FIELD KEPT ITS SLOT.'' The rename removes the last invitation to read a
 roster↔loop bijection out of a field name, and it names what the field always measured — where a move-set sits
 at rest, which is a pull rather than a stage. The base Types likewise read as verbs in the twin —
-`Frames · Grounds · Leaps · Makes · Checks` — where the elder's read as nouns of office. <<~ confidence 15/20 >>
+`Frames · Grounds · Leaps · Makes · Checks` — where the elder's read as nouns of office.
 ''The everyday register writes from the verb where the house register writes from the seat'', and the write-
 under-way law backs the twin's choice directly.
 
@@ -503,27 +502,27 @@ under-way law backs the twin's choice directly.
 Frame/''Scope'' · Ground/''Source'' · Widen/''Wildcard'' · Make/''Draft'' · Check/''Review'' — ''and the rows
 stand in first-reader order rather than in the order they were designed.'' A reader meeting the roster cold
 walks the sequence their own work already runs: scope the ask, source what stands under it, put up what nobody
-put up, draft the thing, review it. <<~ confidence 15/20 >> The reorder also earns something structural — it
+put up, draft the thing, review it. The reorder also earns something structural — it
 breaks the positional read that seated Ground in slot one beside the loop's first phase, so the
 no-correspondence rule now holds by ARRANGEMENT and not only by the sentence that states it. Two candidate
 registers ran the four-reader test — a desk register of artifacts and a stage register of work-stages — and
 the operator crossed them, taking `Source` and `Review` from the stage set and `Scope`, `Wildcard` and `Draft`
-from the desk set. <<~ confidence 15/20 >> ''The crossing reads as the right call on the governing law rather
+from the desk set. ''The crossing reads as the right call on the governing law rather
 than as a compromise'': the constraint that binds is CONVENTIONALITY IN THE VEHICLE, and each of the five
 already sits conventional in workplace usage for the thing it names. The register a name came from carries
 nothing; a reader never sees the set it was drawn from.
 
 ⚠ ''TWO SEATS CARRY A KNOWN STRAIN, RULED AND ACCEPTED.'' `Source` collides with //source code// for a
 software reader, and `Review` carries the role-noun //reviewer// — the one name in either candidate set that
-leans toward the identity it must not become. Both stood flagged when the roster was ruled. <<~ confidence
-13/20 >> They stand because the alternates each cost more: every substitute for `Source` was either
+leans toward the identity it must not become. Both stood flagged when the roster was ruled.
+They stand because the alternates each cost more: every substitute for `Source` was either
 finance-owned or a novel vehicle, and every substitute for `Review` was owned by one function outright. ''The
 strain is recorded so a later reader meets a ruling rather than a fault.''
 
 ⚠ ''NO `pull/` VALUE MAY SHARE A WORD WITH A LOOP PHASE.'' Draft moved from `act` to `design` on
 operator ruling. The section already states that roster and loop correspond at no point; a single shared token
 would let a reader build the bijection out of one coincidence, and one coincidence is all a false pattern
-needs. <<~ confidence 16/20 >> ''The rows now read `repair · open-close · expand · design · close` against
+needs. ''The rows now read `repair · open-close · expand · design · close` against
 `observe · orient · decide · act · aftermath`, and no token appears in both.'' The prose disclaimer and the
 vocabulary now enforce the same rule, which is what a pattern integrity looks like when it stops depending on
 a reader having read the sentence.
@@ -535,12 +534,12 @@ move / one sentence, three of the original five leaked: `scope-creep` needs a sp
 TURN-POSITION faults a Persona firing in paragraph two has no close and no panel to break. They stand re-cut
 to `assumed-and-silent-fork`, `pleasing-and-false-alternative` and `verdict-without-a-joint`; `priority-fog`
 left Make entirely, since Make's real in-span hazard is the thing its own aside already declines.
-<<~ confidence 15/20 >> ''The general law: a guard MUST bite at the grain its Persona fires at.'' The Band
+''The general law: a guard MUST bite at the grain its Persona fires at.'' The Band
 ladder already names Beat as the grain one move occupies, so the twin states the rule against its own scale
 rather than against a new one.
 
 ⚠ ''INTRINSIC SELF-CORRECTION FAILS, AND `yield/checkable-clue` IS THE CURE THAT WAS ALREADY WRITTEN.''
-<<~ confidence 16/20 >> Self-correction without external feedback does not improve reasoning and at times
+Self-correction without external feedback does not improve reasoning and at times
 degrades it; reported gains vanished once oracle labels were withdrawn (arXiv 2310.01798). A Check firing two
 sentences after the Make it follows IS intrinsic self-correction — same pass, same context, no outside signal.
 So the twin now states what the yield always bought: ''a same-pass Check sends its verification OUTWARD'',
@@ -553,7 +552,7 @@ clauses; a FRAME marker signals discourse acts, sequences and text stages. Das &
 55(8), 2018) find 92.74% of relations signalled over the RST-DT, only 10.65% by discourse markers alone and
 74.54% by non-DM cues — so a Persona name sits legitimately in the majority signal class, and the GRAPHICAL
 realization is the one that reads as segmentation.
-<<~ confidence 12/20 >> ''The condition that carries the most and looks like the least: irregular intervals.''
+''The condition that carries the most and looks like the least: irregular intervals.''
 A name arriving on a schedule has become a frame marker whatever its content, because regularity IS staging
 information. So the twin rules the mark rides inline, on the clause it opens, and fires where the pull changes
 — never on its own line above a block.
@@ -564,7 +563,7 @@ RST — the class that works by increasing an inclination in the reader — and 
 outside that class. Widen also collides with Frame in-span: both fire before any artifact exists, both open
 rather than close, and Frame's `fork` emitted surface text near-identical to Widen's `oppose`. And Widen is
 the seat that resisted naming in every register tried.
-<<~ confidence 14/20 >> ''The cure re-cuts the moves rather than the name.'' `oppose` left Widen for Check —
+''The cure re-cuts the moves rather than the name.'' `oppose` left Widen for Check —
 an adversarial reading belongs where the guard against self-grading already stands, and it gives Check a move
 that fires before an artifact exists. Widen stands purely generative at `associate-invert-import-borrow`;
 Frame keeps `fork`, which splits the SAME question rather than proposing a rival one.
@@ -573,7 +572,7 @@ Frame keeps `fork`, which splits the SAME question rather than proposing a rival
 deliberately — "the roles are designed to be blatantly artificial, a feature which helps the student separate
 their individual ego from the activity" — and the method still collapses into identity in the field:
 ''"people are naturally prone to make personality associations (e.g., 'David is a black thinker')".''
-<<~ confidence 16/20 >> ''The most artificial label available does not buy non-enactment.'' What the twin
+''The most artificial label available does not buy non-enactment.'' What the twin
 holds that Six Hats lacks is the EXPIRY: a hat gets assigned per person per meeting, where a call expires with
 the span it leads. ''The expiry carries the anti-collapse load, and the naming never did.'' The drift finding
 seats the same conclusion — the paper measuring persona decay across eight rounds retitled to
@@ -581,7 +580,7 @@ seats the same conclusion — the paper measuring persona decay across eight rou
 is only the case that shows it most legibly.
 
 ⚠ ''THE NAMES MUST BE CONVENTIONAL VEHICLES, AND THIS IS A COMPREHENSION LAW RATHER THAN A TASTE ONE.''
-<<~ confidence 15/20 >> Bowdle & Gentner (Psych Review 112(1)) find novel metaphors processed as COMPARISON —
+Bowdle & Gentner (Psych Review 112(1)) find novel metaphors processed as COMPARISON —
 slow structural alignment — and conventionalized ones as CATEGORIZATION, fast and direct, with conventionality
 residing SOLELY IN THE VEHICLE. A novel vehicle charges every reader an alignment cost on every encounter,
 which is the same cost Six Hats pays for six arbitrary colour bindings that store nothing about their modes.
@@ -591,7 +590,7 @@ A name must additionally decline to denote an ANIMATE AGENT — the Assistant-Ax
 model off the default-assistant region increases its tendency to identify as other entities and induces a
 theatrical register (arXiv 2601.10387) — and decline any figurative or idiomatic form, the identified
 exclusion class for non-native readers in the inclusive-language and BELF literature.
-<<~ confidence 13/20 >> That last pair of constraints is the one bridge nobody has measured at this scale:
+That last pair of constraints is the one bridge nobody has measured at this scale:
 the Axis findings concern CHARACTER prompts, and a pet-name for a move-set is a far smaller object.
 
 ⚠ ''THE DECLARATION STILL DIFFS LINE AGAINST LINE.'' `Persona(Name Params)` and `Named-Persona(Type Params)`
@@ -607,9 +606,9 @@ ruled drops, one ruled cardinality divergence at position 11, and no divergence 
 one without a ruling, reads as a divergence the shared-meaning rule must then resolve. ''Counting them
 exists for exactly that.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-audience >>
+<<~ ahu #the-audience>>
 
 !! The audience, and the two contexts a mark gets read in
 
@@ -623,13 +622,13 @@ else yet. Ceilings, panels and per-event budgets wait until a surface actually r
 | a wiki renders it | the procedure runs, or — undeclared — it renders as ''nothing'' | ''machinery'': they make the mark appear at all |
 | a transcript carries it | ''no renderer stands between'' — the characters appear as written | ''legend'': they teach the shape to a reader |
 
-<<~ confidence 15/20 >> ''The vanishing rule (#/the-vanishing-rule) governs the rendered context alone.''
+''The vanishing rule (#/the-vanishing-rule) governs the rendered context alone.''
 In a chat transcript the marks survive precisely BECAUSE nothing renders them — the failure the base
 grammar warns about cannot occur where no renderer stands. So the phrasebook meets its two audiences
 through one property read two ways, and neither reading needs a second artifact.
 
 ''WHICH REDEEMS THE DECLARATIONS.'' A declaration reads as noise only where a reader takes it for
-machinery. `\procedure confidence(n) confidence <<n>>/20` states the mark's whole shape on one line — so
+machinery. `\procedure persona(name params) <<name>> <<params>>` states the mark's whole shape on one line — so
 what makes a mark RENDER in a wiki also TEACHES it in a transcript. One artifact, two readings, in the
 house's usual manner.
 
@@ -637,9 +636,9 @@ house's usual manner.
 verbatim, so every bracket a declaration wraps around its output rides into the transcript too. The
 bodies stay bare: what the procedure says, and nothing framing it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #open-joints >>
+<<~ ahu #open-joints>>
 
 !! Open joints ~ what waits on the operator
 
@@ -666,9 +665,9 @@ bodies stay bare: what the procedure says, and nothing framing it.
 # ''JOINT ENACTMENT HAS NOT RUN.'' Until both seeds get promoted in ONE act (#/joint-enactment), the
   younger stands where its framing puts it rather than where this design does.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #what-to-measure >>
+<<~ ahu #what-to-measure>>
 
 !! What the house counts
 
@@ -676,33 +675,33 @@ bodies stay bare: what the procedure says, and nothing framing it.
 \procedure ~Gauge(Type:"" Params:"") ~Gauge <<Type>> holds [{{{ [<Params>] }}}]
 ```
 
-<<~Gauge Vanishing "counts/plain-calls-with-no-inline-declaration red/any ~ an undeclared mark renders as absence, never as text" >>
-<<~Gauge Verb-Test "counts/renames-failing-the-inflection-test red/any-shipped ~ the act leaves the vocabulary silently" >>
-<<~Gauge Divergence "counts/twin-divergences-resolved-by-preferring-the-elder red/any ~ the resolution converts the younger to a translation in practice" >>
-<<~Gauge Comparison "counts/how-often-the-twins-get-read-against-each-other red/near-zero ~ a stated parity nobody exercises reads as parity nobody holds" >>
-<<~Gauge Register-Loss "counts/fallbacks-from-plain-to-house-register red/any-unlogged ~ register loss fails OPEN and silent unless instrumented" >>
-<<~Gauge Correspondence "counts/section-divergences-beyond-the-two-ruled red/any ~ a count law nothing counts decays into whatever the last hand left" >>
-<<~Gauge Dialect "counts/sharktooth-calls-or-declarations-inside-the-plain-seed red/any ~ one character decides the dialect, so one character breaks it" >>
+<<~Gauge Vanishing "counts/plain-calls-with-no-inline-declaration red/any ~ an undeclared mark renders as absence, never as text">>
+<<~Gauge Verb-Test "counts/renames-failing-the-inflection-test red/any-shipped ~ the act leaves the vocabulary silently">>
+<<~Gauge Divergence "counts/twin-divergences-resolved-by-preferring-the-elder red/any ~ the resolution converts the younger to a translation in practice">>
+<<~Gauge Comparison "counts/how-often-the-twins-get-read-against-each-other red/near-zero ~ a stated parity nobody exercises reads as parity nobody holds">>
+<<~Gauge Register-Loss "counts/fallbacks-from-plain-to-house-register red/any-unlogged ~ register loss fails OPEN and silent unless instrumented">>
+<<~Gauge Correspondence "counts/section-divergences-beyond-the-two-ruled red/any ~ a count law nothing counts decays into whatever the last hand left">>
+<<~Gauge Dialect "counts/sharktooth-calls-or-declarations-inside-the-plain-seed red/any ~ one character decides the dialect, so one character breaks it">>
 
-<<~ confidence 14/20 >> ''The fourth gauge names the failure the others cannot see.'' A doctrine of
+''The fourth gauge names the failure the others cannot see.'' A doctrine of
 equal force does not produce the practice of comparison — a neighbouring field states parity across
 versions and exercises it in a small single-digit fraction of cases. Parity that nobody runs decays
 into a preferred text and a companion, by habit rather than by ruling.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
-<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
+<<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;XyaeYXvrOLWYrkcaE6EdzZquqVBd2rnWs6jGuHHPFNU
+<<^ code="&#x0003;">>ni:///sha-256;_a4oz3zABBlEgUlCL1PCmUd65oKsV5wAsAzKGgJjxso
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

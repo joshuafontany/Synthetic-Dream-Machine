@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/parser >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/parser>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/parser.mem"
@@ -9,7 +9,6 @@ mana      = 18
 manao     = 17
 manaoio   = 16
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "parser law: MemeticParser subclass contract, lar-sigil dispatch model, grammar self-hosting, sigil kinds, closure law, C0 control-sigil roles"
 tags      = ["lar:///ha.ka.ba/lares/api/pono/meme", "lar:///ha.ka.ba/lares/api/pono/memetic-wikitext"]
@@ -17,11 +16,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/parser"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Parser Law
 
@@ -34,9 +33,9 @@ Two implementations carry this law:
 
 Both share the same sigil grammar. Their outputs differ in shape and consumer.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #memetic-parser >>
+<<~ ahu #memetic-parser>>
 
 !! MemeticParser — TW5 WikiParser Subclass
 
@@ -47,11 +46,11 @@ TW5 registration path: `module-type: parser`, export key `"text/memetic-wikitext
 
 On construction it filters the inherited rule arrays (`pragmaRules`, `blockRules`, `inlineRules`) against a deny list. The deny list defaults to empty — all inherited TW5 rules fire. An operator may override it by writing space-separated rule names to `lar:///ha.ka.ba/config/memetic-rules-except`.
 
-`lar-sigil` claims all `<<~ … >>` forms at both block and inline phase. Standard TW5 macro rules (`<<macroname>>`) fire normally — they do not match the `<<~` prefix.
+`lar-sigil` claims all `<<~ …>>` forms at both block and inline phase. Standard TW5 macro rules (`<<macroname>>`) fire normally — they do not match the `<<~` prefix.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #lar-sigil-dispatch >>
+<<~ ahu #lar-sigil-dispatch>>
 
 !! lar-sigil Dispatch Model
 
@@ -61,17 +60,17 @@ Implementation: `packages/lararium-tw5/src/wikirules/lar-sigil.ts`
 
 Dispatch proceeds in this fixed order on every `<<~` encounter:
 
-# ''pranala'' — `<<~ pranala from=FROM -> to=TO [attrs] >>`, and the block form closing at `<<~/pranala >>`. It keeps its own matcher because the edge graph needs `from` and `to` as SEPARATELY TYPED ends: a reader taking whichever address comes first names the SOURCE, and a graph built on that points backwards. Its parameters spell like every other sigil's; only the arrow between the two ends stands apart.
-# ''compound sigil'' — `<<~ WORD1 [WORD2] ARGS >>` covers all remaining named sigils. Child-slot detection (`ahu`, `kau`, future) uses `grammarChildSlotNames()` — dynamic, not hardcoded. Compound with `closeKey` scans for `<<~/SIGIL >>` body; compound without `closeKey` produces a leaf node.
+# ''pranala'' — `<<~ pranala from=FROM -> to=TO [attrs]>>`, and the block form closing at `<<~/pranala>>`. It keeps its own matcher because the edge graph needs `from` and `to` as SEPARATELY TYPED ends: a reader taking whichever address comes first names the SOURCE, and a graph built on that points backwards. Its parameters spell like every other sigil's; only the arrow between the two ends stands apart.
+# ''compound sigil'' — `<<~ WORD1 [WORD2] ARGS>>` covers all remaining named sigils. Child-slot detection (`ahu`, `kau`, future) uses `grammarChildSlotNames()` — dynamic, not hardcoded. Compound with `closeKey` scans for `<<~/SIGIL>>` body; compound without `closeKey` produces a leaf node.
 # ''generic fallback'' — covers `<<~WORD>>` (no-space), C0 control-char forms, and any `<<~` not claimed above. If the generic sigil has a registered closer and its name is not `pranala`, the fallback attempts block capture.
 
-''The carrier's own head rides the CONTROL frame, never a sharktooth.'' A carrier opens at `<<^ code="&#x0001;" … from=? -> to=lar:///… >>` and closes at `<<^ code="&#x0004;" -> to=? >>` — the `<<^` scanner reads those, so no `<<~` rule stands for a header and none is tried here.
+''The carrier's own head rides the CONTROL frame, never a sharktooth.'' A carrier opens at `<<^ code="&#x0001;" … from=? -> to=lar:///…>>` and closes at `<<^ code="&#x0004;" -> to=?>>` — the `<<^` scanner reads those, so no `<<~` rule stands for a header and none is tried here.
 
 Dispatch output: `macrocall` nodes with `$variable = "~"` and `name = SIGIL` for compound forms; `$variable = "~pranala"` with `from`/`to`/`body` keyword attrs for pranala forms.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #grammar-self-hosting >>
+<<~ ahu #grammar-self-hosting>>
 
 !! Grammar Self-Hosting
 
@@ -97,9 +96,9 @@ These apply before grammar tiddlers finish loading. Grammar TOML `close_pattern`
 ''Sigil name resolution:''
 `lar-name` field takes precedence; otherwise strips `sigil-` prefix from last title segment.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #context-pointer >>
+<<~ ahu #context-pointer>>
 
 !! Context Pointer — `currentTiddler`
 
@@ -107,11 +106,11 @@ These apply before grammar tiddlers finish loading. Grammar TOML `close_pattern`
 
 It covers: meme URIs (`lar:///ha.ka.ba/...`), child-fragment URIs (slot children), base `$:/` TW5 system titles, and any other tiddler address the VM resolves. No separate `+currentMeme` alias landed — `currentTiddler` handles the full range.
 
-Filter expressions inside `<<~ ui FILTER >>` and guest-grammar blocks operate against `currentTiddler` via standard TW5 filter semantics. Both `wikitext-filter` and `x-tiddlywiki-filter` resolve context through `currentTiddler`.
+Filter expressions inside `<<~ ui FILTER>>` and guest-grammar blocks operate against `currentTiddler` via standard TW5 filter semantics. Both `wikitext-filter` and `x-tiddlywiki-filter` resolve context through `currentTiddler`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #normalization-open >>
+<<~ ahu #normalization-open>>
 
 !! Normalization — Open Question
 
@@ -121,9 +120,9 @@ The research defined a normalization contract (MUST NOT silently normalize when 
 
 Open question: should the live system adopt explicit normalization with warning emission, or accept "fail gracefully" as the working posture? Resolution pending implementation experience and test coverage.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #sigil-kinds >>
+<<~ ahu #sigil-kinds>>
 
 !! Sigil Kinds
 
@@ -136,7 +135,7 @@ child-slot    ahu, kau                compound with closeKey; body → child tid
 edge-sugar    kahea, loulou, aka,     compound leaf or block; template cascade drives render
               kapu
 edge          pranala                 permanent JS exception; FROM -> TO arrow syntax
-header        pranala-header          permanent JS exception; <<~ ? -> uri >>
+header        pranala-header          permanent JS exception; <<~ ? -> uri>>
 guest-grammar hana                    compound block; body = foreign grammar for guest interpreter
 query         ui                      compound leaf; TW5 filter expression in p1
 query-alias   query (alias of ui)     compound leaf; same render as ui
@@ -147,15 +146,15 @@ family        sigil-family-*          FamilyRule only; no dispatch; governs edge
 
 `hana` (`lar-kind: guest-grammar`) delegates body to a guest interpreter selected by grammar key. The live TW5 VM provides full native TW5 filter access. `hana` holds its place for Verse scripting, TOML block payloads, and future grammar integrations not natively available in TW5. See `lar:///ha.ka.ba/lares/docs/pono/sigil-kind#/guest-grammar`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #control-sigils >>
+<<~ ahu #control-sigils>>
 
 !! C0 Control Sigil Roles
 
 The four C0 control characters (`&#x0001;`–`&#x0004;`) are the ''carrier spine'' — SOH · STX · ETX · EOT. Their roles, byte values, kapu aliases, and the REQUIRED-in-order law live in their one home: `memetic-wikitext-framing#carrier-spine` (#/edges). This section owns only how the parser ''checks'' them — it does not redefine the marks.
 
-`&#x0005;` (ENQ) and `&#x0006;` (ACK) appeared in earlier research as query/response throat operators. They did not land in the live system. Live query surface uses `<<~ ui FILTER >>` (kind: `query`) instead.
+`&#x0005;` (ENQ) and `&#x0006;` (ACK) appeared in earlier research as query/response throat operators. They did not land in the live system. Live query surface uses `<<~ ui FILTER>>` (kind: `query`) instead.
 
 Parser SHOULD check:
 * `&#x0001;` appears near the document top with a valid target URI
@@ -164,41 +163,41 @@ Parser SHOULD check:
 
 Missing or out-of-order control sigils SHOULD emit structural warnings rather than silent failure.
 
-<<~/ahu >>⊙:7c926d0ede886109
+<<~/ahu>>⊙:7c926d0ede886109
 
-<<~ ahu #closure-law >>
+<<~ ahu #closure-law>>
 
 !! Closure Law
 
 Block forms open with a named opener and close with a named typed closer.
 
 ```text
-<<~ ahu #slot >>      — opener
+<<~ ahu #slot>>      — opener
 
-<<~/ahu >>            — typed closer
+<<~/ahu>>            — typed closer
 ```
 
-Closers resolve by stack discipline. `<<~/ahu >>` closes the most recent unmatched `ahu` opener. Nested block forms of the same type are permitted unless a stricter profile forbids it.
+Closers resolve by stack discipline. `<<~/ahu>>` closes the most recent unmatched `ahu` opener. Nested block forms of the same type are permitted unless a stricter profile forbids it.
 
 Inline forms close with `>>`. They carry no body.
 
-The `pranala` exception: `<<~/pranala >>` closes only after the permanent-JS-exception path claims the opener. Generic compound dispatch does not claim `pranala`.
+The `pranala` exception: `<<~/pranala>>` closes only after the permanent-JS-exception path claims the opener. Generic compound dispatch does not claim `pranala`.
 
-''Canonical closer pattern:'' `<<~/SIGIL-TYPE >>`
+''Canonical closer pattern:'' `<<~/SIGIL-TYPE>>`
 
 Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer may pass to a normalization pass only when recovery stays deterministic and aftermath remains truthful.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #meta-block >>
+<<~ ahu #meta-block>>
 
 !! Meta Block
 
-The ''toml meta slot'' (`#meta`) carries the canonical identity payload for a meme — a bare `` ```toml meta `` fence after the SOH opener, not an `<<~ ahu >>` wrapper (see `memetic-wikitext-framing#carrier-spine`).
+The ''toml meta slot'' (`#meta`) carries the canonical identity payload for a meme — a bare `` ```toml meta `` fence after the SOH opener, not an `<<~ ahu>>` wrapper (see `memetic-wikitext-framing#carrier-spine`).
 
 Canonical form:
 ````text
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/path/to/meme >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/path/to/meme>>
 ```toml meta
 uri-path  = "..."
 file-path = "..."
@@ -215,9 +214,9 @@ Implementation: `packages/lararium-tw5/src/macros/lar-meta-block.ts`
 
 Additional ahu control slots that dissolve rather than project as children: `#exit`, `#stream-open`, `#stream-close`, `#stream-exit`, `#body-open`, `#body-close`, `#meme-body-open`, `#meme-body-close`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #meme-ast >>
+<<~ ahu #meme-ast>>
 
 !! Meme AST — Non-TW5 Path
 
@@ -240,9 +239,9 @@ Types: `MemeAstNode`, `MemeNode`, `PranalaEdge`, `ParseMemeResult`
 
 Consumers: island adaptor (`island-adaptor.ts`), deserializer (`deserializer.ts`), external mesh nodes. This path operates outside the TW5 widget system and produces a typed structured product for graph traversal, edge extraction, and canonical meme identity resolution.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stream-events >>
+<<~ ahu #stream-events>>
 
 !! MemeStreamEvent — Streaming Parse Events
 
@@ -250,7 +249,7 @@ The streaming parse surface emits one event per carrier-frame boundary; `collect
 
 ```toml
 # Source: packages/lararium-mesh/src/meme-stream.ts
-# SOH carries 0x01 (or kapu DC1 0x11); EOT carries 0x04 (or DC4 0x14), or the return-throat <<~ -> ? >>
+# SOH carries 0x01 (or kapu DC1 0x11); EOT carries 0x04 (or DC4 0x14), or the return-throat <<~ -> ?>>
 [[stream-events]]
 kind    = "carrier-open"
 fields  = ["uri: string"]
@@ -272,20 +271,20 @@ fields  = []
 trigger = "end of stream"
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/render-pipeline>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/ahu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;WiHYZPk-3-PULzNSbJDRK8qKxjEDkLRIYb3R7jkVuhI
+<<^ code="&#x0003;">>ni:///sha-256;adxxIjmQcId4QSzHTmsAtxJrm4SSt2w39qf8xWSmSu0
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

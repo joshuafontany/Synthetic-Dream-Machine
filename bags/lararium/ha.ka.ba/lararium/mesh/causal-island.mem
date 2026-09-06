@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/causal-island >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/mesh/causal-island>>
 ```toml meta
 cacheable   = true
 file-path   = "bags/lararium/ha.ka.ba/lararium/mesh/causal-island.mem"
@@ -9,7 +9,6 @@ l-space     = "lararium"
 mana        = 18
 manao       = 17
 manaoio     = 16
-register    = "Synthesis-Canon"
 retain      = true
 role        = "Causal-island ontological law: the four-tier boundary model, the ACCESS axis, and the share-substrate-not-sovereignty law that governs co-located vessels"
 source-file = "packages/lararium-mesh/src/causal-island.ts"
@@ -17,20 +16,20 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lararium/mesh/causal-island"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Causal Island — Ontological Law
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 `causal-island.ts` owns the ontological law that names where one island ends and
 another begins, the per-bag ''ACCESS'' axis (a 1:1 mirror of Keyhive's native
 Access enum), and the edge-island federation scaffolding. The boundary law sits
 above any vessel implementation; every vessel honors it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #no-global-now >>
+<<~ ahu #no-global-now>>
 
 !! No Global Now
 
@@ -47,9 +46,9 @@ instance with its own event horizon.
 ''Law:'' any boundary across which causality cannot stand guaranteed-simultaneous
 marks a ''causal island boundary''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #four-tiers >>
+<<~ ahu #four-tiers>>
 
 !! Four Tiers (inner → outer)
 
@@ -60,9 +59,9 @@ marks a ''causal island boundary''.
 | ''2'' | Automerge Realms (other docs reachable from this one) | Always non-simultaneous |
 | ''3'' | Lares nodes (federation edge) | A pranala/peer connection between nodes MUST count as an island boundary |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #substrate-not-sovereignty >>
+<<~ ahu #substrate-not-sovereignty>>
 
 !! Share Substrate, Not Sovereignty (load-bearing)
 
@@ -98,13 +97,13 @@ Keyhive capability, not a platform (`[[feedback_isomorphism_by_composition]]`). 
 own their keys. //Heavy peer = substrate, not authority.// So co-located peers share a
 relay (infrastructure), never a replica (sovereignty).
 
-<<~ confidence 16/20 >> The principle reconciles local-first
+The principle reconciles local-first
 multi-peer co-location with sovereignty: one substrate may carry many sovereign
 islands.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #access-axis >>
+<<~ ahu #access-axis>>
 
 !! ACCESS Axis (Axis 1 of the authority model)
 
@@ -123,19 +122,19 @@ nesting), Axis 3 POWERS (host/relay/aggregate/address/moderate separation), Plan
 ALIGNMENT (the non-monotonic lemures plane). See
 `lar:///ha.ka.ba/lares/api/pono/causal-islands`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
 Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorphism_by_composition]],
 [[project_asymmetric_peer_handoff]], [[project_relay_access_rings]].
 
-<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer >>
+<<~ loulou lar:///ha.ka.ba/lararium/mesh/operator-peer>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;dHcLko8ntlETlSPbHYG1VTVbjTKQk5U4u2HRvwS8Nlo
+<<^ code="&#x0003;">>ni:///sha-256;cB5pzaQhMKv4wIye_kreIQipYlZBnOCkRgj9ZT3b5pU
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

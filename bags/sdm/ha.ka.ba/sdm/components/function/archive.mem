@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/archive >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/sdm/components/function/archive>>
 ```toml meta
 cacheable = true
 caption   = "archive"
@@ -8,7 +8,6 @@ file-path = "bags/sdm/ha.ka.ba/sdm/components/function/archive.mem"
 mana      = 13
 manao     = 16
 manaoio   = 12
-register  = "Synthesis"
 retain    = true
 role      = "component (function): Archive — storing to and retrieving from a noospheric record"
 l-space   = "sdm"
@@ -16,35 +15,35 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/sdm/components/function/archive"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! Archive
 
-<<~ ahu #definition >>
+<<~ ahu #definition>>
 
 !! Definition
 
 Storing to and retrieving from a noospheric record — the handshake that asks an archive for what it holds, or commits something to it.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #activation >>
+<<~ ahu #activation>>
 
 !! Activation
 
 Opens a channel to a stored corpus: query it, deposit into it, or authenticate against it. Standing and permissions may gate the read (relay-law: pull does not imply read).
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #interaction >>
+<<~ ahu #interaction>>
 
 !! Interaction
 
 Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divination`. A hostile archive may read the reader — surfacing an owner-trace.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #filters >>
+<<~ ahu #filters>>
 
 !! Filters
 
@@ -53,24 +52,24 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 [tag[prefix[lar:///ha.ka.ba/sdm/components/function/]]]              all function components
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #aftermath >>
+<<~ ahu #aftermath>>
 
 !! Aftermath
 
 * Archive permissions map onto the ability ladder (`pull → read → write`). Confirm whether that belongs here or in a capability component.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag >>
+<<~ loulou lar:///ha.ka.ba/sdm/templates/components/tag>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;KDsIhRnOP32v1TscCErOUrUvNrx-3AlOYsuoOiSUkDM
+<<^ code="&#x0003;">>ni:///sha-256;YMG5NQ3S5elyn33YILkOoRLP8MKxTvX_GT0CL2ZzuTk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -16,14 +16,14 @@ import {
   HARVEST_FLOOR,
 } from "../src/index.js";
 
-const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
-<<~ hud Focus(11) Feedback(9) Drift-Ward(* Confidence 15/20 · I hold a preferred answer already) >>
+const CLEAN_TURN = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts>>
+<<~ hud Focus(11) Feedback(9) Drift-Ward(* Confidence 15/20 · I hold a preferred answer already)>>
 
-Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
+Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20>> the fork holds.
 
-<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
-<<~ hud Drift-Ward(! Confidence 12/20 · the velocity read rides on a README I never opened · ↻ L-Prime) Focus(11 -> 12) Feedback(1) >>
-<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
+<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁>>
+<<~ hud Drift-Ward(! Confidence 12/20 · the velocity read rides on a README I never opened · ↻ L-Prime) Focus(11 -> 12) Feedback(1)>>
+<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ?>>`;
 
 describe("harvestBand — band thresholds on the 0..20 ladder", () => {
   test("canon / synthesis / provisional / raw", () => {
@@ -88,9 +88,9 @@ describe("clean turn — harvests with confidence", () => {
 });
 
 describe("multiple confidence markers — never collapsed", () => {
-  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y >>
-Some claim <<~ confidence Provisional 3/20 >> and another <<~ confidence Canon 19/20 >> and a third <<~ confidence Synthesis 11/20 >>.
-<<~ lares yield lar:///d.e.f/y -> ? >>`;
+  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y>>
+Some claim <<~ confidence Provisional 3/20>> and another <<~ confidence Canon 19/20>> and a third <<~ confidence Synthesis 11/20>>.
+<<~ lares yield lar:///d.e.f/y -> ?>>`;
   const h = harvestTurnGradient(turn);
 
   test("keeps every rating as its own offset-anchored signal", () => {
@@ -108,7 +108,7 @@ Some claim <<~ confidence Provisional 3/20 >> and another <<~ confidence Canon 1
 });
 
 describe("degraded grammar — partial frame records gracefully", () => {
-  const turn = `<<~ lares aim lar:///breach.watch.fires/now >>
+  const turn = `<<~ lares aim lar:///breach.watch.fires/now>>
 Triage: name the fire. (no closing yield this turn)`;
   const h = harvestTurnGradient(turn);
 
@@ -125,8 +125,8 @@ Triage: name the fire. (no closing yield this turn)`;
 });
 
 describe("novel grammar — a confidence form the chart never showed", () => {
-  // The operator's own form: `<<~ confidence( < 4) >>` — no register, no /M.
-  const turn = `Push the harvest until <<~ confidence( < 4) >> then stop.`;
+  // The operator's own form: `<<~ confidence( < 4)>>` — no register, no /M.
+  const turn = `Push the harvest until <<~ confidence( < 4)>> then stop.`;
   const h = harvestTurnGradient(turn);
 
   test("records the marker without choking on the unfamiliar shape", () => {
@@ -150,9 +150,9 @@ describe("missing grammar — all prose, no sigils → record raw", () => {
 });
 
 describe("water — unrecognized <<~ openers are counted, not dropped", () => {
-  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y >>
-<<~ wibblefish nonsense token >>
-<<~ lares yield lar:///d.e.f/y -> ? >>`;
+  const turn = `<<~ lares aim lar:///a.b.c/x -> lar:///d.e.f/y>>
+<<~ wibblefish nonsense token>>
+<<~ lares yield lar:///d.e.f/y -> ?>>`;
   const h = harvestTurnGradient(turn);
 
   test("the novel sigil reads as water and drags the gauge", () => {
@@ -186,16 +186,16 @@ describe("a turn from before the firing moved into the panel", () => {
   // A CORPUS STATES ONE GRAMMAR; A READER TOLERATES EVERY GRAMMAR IT WILL MEET. Transcripts carry
   // whatever shape was standing when they were written, and refusing one reads a warded turn as
   // unwarded — a silence no downstream reader can tell from a turn that skipped the instrument.
-  const PRE_PANEL = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts >>
-<<~ hud Aperture(11) OODA-HA(9) >>
-<<~ ward * L-Prime >>
+  const PRE_PANEL = `<<~ lares aim lar://mara:operator@crossroads/operator.weighs.deps -> lar://compita:agent@crossroads/council.options.cuts>>
+<<~ hud Aperture(11) OODA-HA(9)>>
+<<~ ward * L-Prime>>
 
-Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20 >> the fork holds.
+Lares (Council): two libraries, both viable. <<~ confidence Synthesis 11/20>> the fork holds.
 
-<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁ >>
-<<~ ward ! · ↻ L-Prime >>
-<<~ hud Aperture(11 -> 12) OODA-HA(1) >>
-<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ? >>`;
+<<~ oracle ↯11 ⁂ ⚃ (4) ✲⬡◈⟁>>
+<<~ ward ! · ↻ L-Prime>>
+<<~ hud Aperture(11 -> 12) OODA-HA(1)>>
+<<~ lares yield lar://compita:agent@crossroads/council.fork.named -> ?>>`;
 
   const h = harvestTurnGradient(PRE_PANEL);
 

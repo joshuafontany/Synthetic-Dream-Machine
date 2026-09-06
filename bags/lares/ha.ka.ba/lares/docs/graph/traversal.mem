@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/traversal >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/graph/traversal>>
 ```toml meta
 file-path   = "bags/lares/ha.ka.ba/lares/docs/graph/traversal.mem"
 l-space     = "stable"
 mana        = 17
 manao       = 17
 manaoio     = 17
-register    = "Synthesis-Canon"
 role        = "three-tier traversal model, DFS cycle detection, Kahn topological sort, and declared-unresolved law for the pranala-edge DAG compiler"
 status-date = "2026-04-24"
 tags        = ["api/pono/meme", "api/pono/loci"]
@@ -15,9 +14,9 @@ type        = "text/memetic-wikitext+tiddlywiki"
 uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: current compiler walks no edges — it enumerates a static list, then scans a carrier index.
 ⏿ orient: three distinct graph planes require three distinct traversal tiers; collapsing them loses boot ordering guarantees.
@@ -25,9 +24,9 @@ uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 ▶ act: specify each tier's algorithm, stopping condition, and artifact contribution.
 ↺ verify: Tier 0 and Tier 1 produce the same 14-locus set before any further walk proceeds; execution planes (dataflow, message, constraint, observe) route to `ast-execution-render`; this locus covers boot and full-boot only.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #graph-planes >>
+<<~ ahu #graph-planes>>
 
 !! Graph Planes
 
@@ -47,9 +46,9 @@ that the `PRANALA_ALIGNMENT.md` contract names.
 UE5's HLOD parallel: each layer forms its own hierarchy with its own loading rules,
 not a sub-graph inside the actor containment tree.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tier-0 >>
+<<~ ahu #tier-0>>
 
 !! Tier 0 — Declared Core (Fast Path)
 
@@ -73,9 +72,9 @@ Discrepancies surface as `validation.declared_vs_walked` with three fields: `in_
 * minimal boot artifact production
 * session cold-start where latency matters more than graph fidelity
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tier-1 >>
+<<~ ahu #tier-1>>
 
 !! Tier 1 — Control Closure (Graph Walk)
 
@@ -126,9 +125,9 @@ Walk(entry_uri):
 * for the new minimal boot artifact (validates Tier 0, replaces static walk)
 * as the base set for Tier 2 expansion
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tier-2 >>
+<<~ ahu #tier-2>>
 
 !! Tier 2 — Relation Expansion (One-Hop)
 
@@ -165,9 +164,9 @@ Recursive expansion belongs to a future graph query surface, not the boot compil
 * full boot artifact
 * session initialisation requiring complete graph context rather than just the threshold spine
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #cycle-law >>
+<<~ ahu #cycle-law>>
 
 !! Cycle Detection Law
 
@@ -190,9 +189,9 @@ The cycle path records every GRAY node from the current node back to the re-enco
 * A valid artifact carries `validation.dag_violations = []`.
 * An artifact with non-empty `dag_violations` remains structurally invalid until the cycle resolves.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #forward-refs >>
+<<~ ahu #forward-refs>>
 
 !! Declared-Unresolved Forward References
 
@@ -211,9 +210,9 @@ rather than causing compilation failure. They remain in the graph with `exists =
 the `DeclaredUnresolved` record disappears and the full edge resolves normally.
 The boot receipt hash changes to reflect the newly resolved carrier.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #phase-table >>
+<<~ ahu #phase-table>>
 
 !! Boot Phase → Graph Plane Assignment
 
@@ -226,20 +225,20 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 | render projection | render targets | all families (propagation read) | post-boot |
 | debug / inspection | inspect layer | `observe` | never blocks boot |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/graph/artifacts >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/nodes>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/graph/artifacts>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;LKqLIoKa8BRXfsNUjmiHFHGeM9g-_JCO55gaGv5Vg3M
+<<^ code="&#x0003;">>ni:///sha-256;zk3dFnebFjmYzh9rYspXMPLB4-VhfGgYjrA2YEBJvNk
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

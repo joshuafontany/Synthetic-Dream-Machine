@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/kumu >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lararium/tw5/widgets/kumu>>
 ```toml meta
 body-sha256   = "2d9063b1652eba93ba1e434707360028e4543bb27a20981942e655ee0b35d61b"
 cacheable     = true
@@ -8,7 +8,6 @@ file-path     = "bags/lararium/ha.ka.ba/lararium/tw5/widgets/kumu.mem"
 heleuma       = "ka"
 mana          = 18
 module-ref    = "lar:///ha.ka.ba/lararium/tw5/widgets/kumu"
-register      = "Synthesis-Canon"
 retain        = true
 role          = "anchor: KumuWidget — heleuma ka"
 source-symbol = "KumuWidget"
@@ -17,28 +16,28 @@ type          = "text/memetic-wikitext+tiddlywiki"
 uri-path      = "ha.ka.ba/lararium/tw5/widgets/kumu"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 !! Contract
 
 `<$kumu>` resolves a named kumu device by `[all[tiddlers]tag[$:/tags/LarariumKumu]field:kumu-name[name]]`, transcluding it with props. Renders a `<div data-lar-kind="kumu">` container; unresolved devices show a `<span data-lar-kind="hole">`. Attributes: `name`, `props`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/kumu" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/kumu >>
+<<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/kumu>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;jE3zq8lzom28ClA9xSJWkNijSzcj-zJ076-aT-xg9k4
+<<^ code="&#x0003;">>ni:///sha-256;Pk7YBtW5wVz2ikVuY_p8IYAsIfValEUN0RtZeOvY1jQ
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

@@ -23,30 +23,30 @@ function pranalaOf(sigil: string) {
 
 describe("a pranala reads its family in every spelling", () => {
   test("quoted with an equals sign", () => {
-    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family="reference" >>').family).toBe("reference");
+    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family="reference">>').family).toBe("reference");
   });
 
   test("★ unquoted with an equals sign — the graph's commonest form ★", () => {
-    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family=reference >>').family).toBe("reference");
+    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family=reference>>').family).toBe("reference");
   });
 
   test("the colon spelling still reads", () => {
-    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family:reference >>').family).toBe("reference");
+    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family:reference>>').family).toBe("reference");
   });
 
   test("role reads the same way", () => {
-    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family=relation role=precedes >>').role).toBe("precedes");
+    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d family=relation role=precedes>>').role).toBe("precedes");
   });
 
   test("an absent family falls back to relation", () => {
-    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d >>').family).toBe("relation");
+    expect(pranalaOf('<<~ pranala #x from=? -> to=lar:///d>>').family).toBe("relation");
   });
 
   test("★ a scan that fails grades the sigil `missing` and loses its target — none of these may ★", () => {
     for (const src of [
-      '<<~ pranala #x from=? -> to=lar:///d family=reference >>',
-      '<<~ pranala #x from=? -> to=lar:///d family="reference" role="source" >>',
-      '<<~ pranala #x from=? -> to=lar:///d family:reference >>',
+      '<<~ pranala #x from=? -> to=lar:///d family=reference>>',
+      '<<~ pranala #x from=? -> to=lar:///d family="reference" role="source">>',
+      '<<~ pranala #x from=? -> to=lar:///d family:reference>>',
     ]) {
       const p = pranalaOf(src);
       expect(p.recoveredAs ?? null).toBe(null);
@@ -57,7 +57,7 @@ describe("a pranala reads its family in every spelling", () => {
   test("★ a named end resolves to the address, not to the parameter that carried it ★", () => {
     // `tok` recognizes a target by its `lar:///` prefix. A `to=` in front of it reaches neither branch,
     // so the edge points at a token no bag answers for.
-    const src = '<<~ pranala #x from=? -> to=lar:///d.e.f/target family=reference >>\n';
+    const src = '<<~ pranala #x from=? -> to=lar:///d.e.f/target family=reference>>\n';
     const ast = buildMemeAst(collectEvents(src), src, URI);
     const edges = edgesFromMemeAst(ast, URI);
     expect(edges.length).toBeGreaterThan(0);

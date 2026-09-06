@@ -55,7 +55,7 @@ import { CARRIER_TYPE, CARRIER_TYPES, isCarrierType } from "@lararium/mesh/carri
 
 /** The one declaration a carrier opens on: this grammar, at the address that specifies it. */
 const DECLARATION =
-  "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>";
+  "<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>";
 import type { MemeDiagnostic } from "./meme-ast/diagnostics.js";
 import { getGrammar, resetGrammar } from "./grammar-cache.js";
 import { parseMemeText } from "./meme-ast/parse.js";
@@ -123,7 +123,7 @@ export function memeticWikitextDeserializer(
   // SOH carrier sentinels begin with `<<^` then optional namespace glyphs
   // (⊙, ॐ ँ, …) then the SOH control-char reference directly — the same
   // shape the namespace extractor below reads. Anchoring on the SOH/SOH2
-  // codes avoids matching unrelated `<<~ !DOCTYPE … >>` comments,
+  // codes avoids matching unrelated `<<~ !DOCTYPE …>>` comments,
   // a speaking-head sigil, or later STX/ETX sentinels — an
   // any-control-char form swallows the whole header into `prologue` whenever
   // the SOH carries a namespace it cannot see.
@@ -526,7 +526,7 @@ function splitMemeToTiddlers(
 // (immediate enclosing ahu, not the meme-root), so disk-projector and
 // templates can climb to the nearest tagged ancestor in a single hop chain.
 // The text returned for each tiddler has its own ahu blocks rewritten to
-// `<<~ kahea ahu #slot >>` references; child tiddlers hold the body bytes
+// `<<~ kahea ahu #slot>>` references; child tiddlers hold the body bytes
 // authoritatively.
 // ---------------------------------------------------------------------------
 
@@ -576,7 +576,7 @@ function splitRecursive(
       ...carriageRecord(childUri, "postamble", childStructure.postamble ?? ""),
     );
     allChildren.push(...inner.children);
-    rewritten += `<<~ kahea ahu ${block.slot} >>`;
+    rewritten += `<<~ kahea ahu ${block.slot}>>`;
     cursor = block.closeEnd;
   }
   rewritten += text.slice(cursor);
@@ -779,14 +779,14 @@ export function splitBodyTiddler(
 // Doctrine (disk-projection#granularity): every path back to disk MUST route
 // through the recompose inverse (`expandMemeRefs` / `exportMemeText`). This
 // function inverts the incoming shore transform above: it reads the
-// parent's normalized records, splices each `<<~ kahea ahu #slot >>` marker
+// parent's normalized records, splices each `<<~ kahea ahu #slot>>` marker
 // back into its child's full definition form (recursively), and reassembles
 // the carrier envelope (prologue · SOH · preamble · meta · header · STX ·
 // body · ETX · EOT · postamble).
 //
 // Canonical-form law (handoff #pattern-integrities §2) binds the output:
 //   1. idempotent render — canonical input round-trips byte-identical
-//      (sigil spacing `<<^ code="&#x0002;" >>`, one-blank-line block margins);
+//      (sigil spacing `<<^ code="&#x0002;">>`, one-blank-line block margins);
 //   2. framing normalizes once — the meta block re-emits sorted + aligned
 //      from fields (authored key order and padding do not survive the
 //      record stratum);
@@ -1014,7 +1014,7 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
       // the single blank line; a filled one opens on the sigil-then-blank spacing.
       opened = rest ? `\n\n${rest}` : "";
     }
-    return `<<~ ahu ${slot} >>${opened}\n\n<<~/ahu >>`;
+    return `<<~ ahu ${slot}>>${opened}\n\n<<~/ahu>>`;
   });
 }
 
@@ -1059,14 +1059,14 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // nothing here has to check whether one stands — a suppression check and the field it guarded, gone
   // together. What the author wrote ABOVE the declaration still rides in `prologue` and emits first.
   out += `${DECLARATION}\n\n`;
-  out += `<<^ code="${sohCode}"${ns ? ` namespace="${ns}"` : ""} from=? -> to=${memeUri} >>\n`;
+  out += `<<^ code="${sohCode}"${ns ? ` namespace="${ns}"` : ""} from=? -> to=${memeUri}>>\n`;
   out += carriageText(reader, memeUri, "preamble");
   if (meta) out += "```toml meta\n" + meta + "```\n\n";
   out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f);
   // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
   // where the body begins and computes over the bytes it has actually assembled — never over a field.
   const spanStart = out.length;
-  out += `<<^ code="${MARK("STX")}" >>\n\n`;
+  out += `<<^ code="${MARK("STX")}">>\n\n`;
   out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
   // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
   // attestation block follows and ETB terminates it.
@@ -1081,11 +1081,11 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // record, and a carrier that arrived unchecked gains its check on the first projection rather than
   // staying unchecked because it always had been.
   const sila = str("$carrier-sila");
-  out += `\n\n<<^ code="${MARK("ETX")}" >>`;
+  out += `\n\n<<^ code="${MARK("ETX")}">>`;
   out += bccOfSpan(out.slice(spanStart));
   out += "\n";
-  if (sila) out += `\n${sila}\n<<^ code="${MARK("ETB")}" >>\n`;
-  out += `\n<<^ code="${MARK("EOT")}" -> to=? >>\n`;
+  if (sila) out += `\n${sila}\n<<^ code="${MARK("ETB")}">>\n`;
+  out += `\n<<^ code="${MARK("EOT")}" -> to=?>>\n`;
   // The EOT→postamble shore normalizes to a stable fixed point: the EOT line
   // already ends with one newline; a postamble's own leading newlines would
   // stack a fresh blank line every round trip (found on the Kapu &#x0014;
@@ -1121,7 +1121,7 @@ export function deserializeCarrier(
         from: 0, to: text.length, severity: "error",
         source: "memetic-wikitext", code: "postamble-content",
         message: `${stranded} line(s) stand between ETX and EOT. The text ends at ETX; that slot `
-               + "carries the block check alone. Move the content above the `<<^ code=\"&#x0003;\" >>` close.",
+               + "carries the block check alone. Move the content above the `<<^ code=\"&#x0003;\">>` close.",
       });
     }
     if (!String(record.title ?? "").includes("/parse-warning/")) continue;

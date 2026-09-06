@@ -1,13 +1,12 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render>>
 ```toml meta
 file-path       = "bags/lares/ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render.mem"
 l-space         = "stable"
 mana            = 16
 manao           = 17
 manaoio         = 15
-register        = "Synthesis-Canon"
 role            = "canonical AST envelope, pranala graph-plane, execution graph, and render projection contract"
 source-consumes = ["packages/lares-core/memes/docs/mcp/TW_FILTER_BOUNDARY.md", "packages/lares-core/memes/docs/mcp/AST_ENVELOPE.md", "packages/lares-core/memes/docs/mcp/TW_AST_MAPPING.md", "packages/lares-core/memes/docs/mcp/PRANALA_ALIGNMENT.md", "packages/lares-core/memes/docs/mcp/EXECUTION_GRAPH_SCHEMA.md", "packages/lares-core/memes/docs/mcp/RENDER_PROJECTION_CONTRACT.md"]
 status-date     = "2026-04-23"
@@ -16,9 +15,9 @@ type            = "text/memetic-wikitext+tiddlywiki"
 uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe: the design stack separates identity, AST, execution, render, and inspection planes.
 ⏿ orient: TiddlyWiki grammar can inform guest syntax without taking over carrier law.
@@ -26,9 +25,9 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 ▶ act: collapse AST, TW mapping, pranala alignment, execution, and render contracts into this locus.
 ↺ verify: each transformation preserves source span, host/guest boundary, and target-specific payload shape; adapt: executable resources stay future-facing until parser and graph implementations land.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #stack >>
+<<~ ahu #stack>>
 
 !! Four-Layer Stack
 
@@ -42,9 +41,9 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 
 Identity sits above the AST; carriers must validate before syntax lowers.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scope-phase-resolution >>
+<<~ ahu #scope-phase-resolution>>
 
 !! TW5 ↔ Verse Type Tension — Resolution
 
@@ -68,9 +67,9 @@ TW5's string-typed store (`Record<string,string>`) and Verse's strong types reso
 
 ''`papalohe` and `kukali`:'' `papalohe` declares the reaction wire at Orient — a named shape in the graph; Verse `suspends`/`kukali` operates at Act — execution waits until the loop advances. The wire and the wait posture belong to different phases. See `lar:///ha.ka.ba/lares/docs/pono/research-streams/gaps-tensions` Gap 5.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #ast-node-schema >>
+<<~ ahu #ast-node-schema>>
 
 !! AST Node Schema
 
@@ -89,9 +88,9 @@ Core fields:
 
 Span annotation remains mandatory for source-derived nodes and optional only for generated virtual nodes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #primitive-map >>
+<<~ ahu #primitive-map>>
 
 !! Primitive-to-Node Map
 
@@ -107,9 +106,9 @@ Span annotation remains mandatory for source-derived nodes and optional only for
 | `pranala` | `edge.pranala` | typed graph edge |
 | `?` | `residue.unresolved` | uncertainty and backlog pressure |
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tiddlywiki-boundary >>
+<<~ ahu #tiddlywiki-boundary>>
 
 !! TiddlyWiki Filter Boundary
 
@@ -133,9 +132,9 @@ Excluded from v1:
 
 `tiddlywiki5` remains a reference submodule and parser comparator, not a runtime dependency for the core server.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #pranala-planes >>
+<<~ ahu #pranala-planes>>
 
 !! Pranala Graph-Plane Alignment
 
@@ -152,9 +151,9 @@ Excluded from v1:
 `traversal` and `propagation` stay distinct; query walk direction must not collapse into invalidation direction.
 Every family remains acyclic, except symmetric relation pairs may appear as two individually directed edges.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #execution-graph >>
+<<~ ahu #execution-graph>>
 
 !! Execution Graph Contract
 
@@ -176,9 +175,9 @@ Node classes:
 Refresh semantics should distinguish source-change invalidation, dependency invalidation, explicit query refresh, and adapter health refresh.
 Owned hierarchy follows control edges; parents resolve before owned children, and teardown proceeds child before parent.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #render-projection >>
+<<~ ahu #render-projection>>
 
 !! Render Projection Contract
 
@@ -194,9 +193,9 @@ Render projections transform execution/AST facts into target payloads without mu
 Projection nodes carry `target`, `source_node`, `payload`, `diagnostics`, and provenance fields.
 The v1 posture stays read-only; write-back to tldraw, Kowloon, or DOM remains blocked until tool policy changes.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #mcp-exposure >>
+<<~ ahu #mcp-exposure>>
 
 !! MCP Exposure Targets
 
@@ -209,9 +208,9 @@ Future resources may include:
 
 These remain planned surfaces; current server focuses on carrier resources, indexes, boot artifacts, tools, and prompts.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #residue >>
+<<~ ahu #residue>>
 
 !! Residue
 
@@ -220,19 +219,19 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 * Render target field matrices for some submodule surfaces remain open subtasks.
 * Guest grammar admission should stay narrow until tests cover filter feature subsets.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration >>
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala >>
-<<~ loulou lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter >>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/carrier-law>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/lararium_mcp/hydration>>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
+<<~ loulou lar:///ha.ka.ba/lares/docs/pono/tiddlywiki-filter>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;5iGfGzosEFg8g9CvI2BdYQspXT4adlMTlp7EVo-DgvM
+<<^ code="&#x0003;">>ni:///sha-256;-d6zVGhmeu55IWWGdVpV6ERj74-N5BHIsrnqPR6PWlM
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

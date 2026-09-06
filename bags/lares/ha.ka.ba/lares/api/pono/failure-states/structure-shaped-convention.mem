@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention.mem"
@@ -8,7 +8,6 @@ mana      = 14
 manao     = 15
 manaoio   = 14
 namespace = "&#x2299;"
-register  = "Synthesis"
 retain    = true
 role      = "craft failure law — a mechanism whose guarantee rides a register its substrate cannot enforce, so it reads structural and holds only by agreement"
 tags      = ["api/pono/meme", "api/pono/loci"]
@@ -16,11 +15,11 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention"
 ```
 
-<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language >>
+<<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 ! Structure-Shaped Convention
 
@@ -30,9 +29,9 @@ The node reaches for a structural cure — correctly, because the house holds th
 
 ''The tell'': the node can name WHAT the mechanism forbids and cannot name WHAT ENFORCES the forbidding.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #instances >>
+<<~ ahu #instances>>
 
 !! Two instances, one arc, both caught from outside
 
@@ -42,9 +41,9 @@ The node reaches for a structural cure — correctly, because the house holds th
 
 ''The shared shape'': in both, the mechanism sat one register ABOVE what could enforce it — a composition rule above an economic relation, a static type above a wire. ''Neither was wrong. Both were reported as more than they were.''
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-law >>
+<<~ ahu #the-law>>
 
 !! The law
 
@@ -58,9 +57,9 @@ An unenforceable guarantee costs more than an honest convention, because a conve
 # ''Ask who can seize it.'' The party holding the measuring instrument takes the frame regardless of governance design; a static type surrenders at the wire; a composition rule surrenders to whoever funds both sides.
 # ''Demote or re-seat.'' Either move the guarantee down to a substrate that holds it, or ''restate it as a convention and keep the human floor beside it'' — a challenge channel, a standing to object, a named party who may raise the discrepancy.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #the-diagnostic >>
+<<~ ahu #the-diagnostic>>
 
 !! Why the node cannot catch this alone
 
@@ -68,16 +67,16 @@ Both instances arrived from OUTSIDE — a field that had already run the experim
 
 That makes this a ''sibling of Confabulation-as-Canon'' rather than a variant: there the node's own naming read back as evidence; here the node's own mechanism reads back as enforcement. Both cure the same way — ''route the certification outside the turn''.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation >> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/identity-enacts-relation>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/shelter-against-empire>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;3Fs4irjFkAUvho7jszWhPjeEC4VWAOymPuDJugLyb-s
+<<^ code="&#x0003;">>ni:///sha-256;TTtNbtPX6oE_5L9sN3vwZK_v9g0bejqKyZ1p_Q4gkik
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

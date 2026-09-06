@@ -65,7 +65,7 @@ const SYNC_MODULES     = args.includes("--sync-modules");
 
 const SOH_URI_RE     = /<<\^[^>]*&#x0001;[^>]*\?\s*->\s*([^\s>]+)\s*>>/;
 const TOML_RE        = /```toml([\s\S]*?)```/;
-const SOURCE_SLOT_RE = /<<~ ahu #source >>([\s\S]*?)<<~\/ahu >>/;
+const SOURCE_SLOT_RE = /<<~ ahu #source\s*>>([\s\S]*?)<<~\/ahu\s*>>/;
 const FENCE_RE       = /```[^\n]*\n([\s\S]*?)\n```/;
 
 function parseToml(block: string): Record<string, string> {
@@ -264,7 +264,7 @@ function runScanPromote(): void {
   // Collect names already present as corpus memes in lararium-tw5/memes/.
   // Checks: uri-path basename, source-symbol, and TOML keys in any #schema slot.
   const existingNames = new Set<string>();
-  const VOCAB_SLOT_RE = /<<~ ahu #schema >>([\s\S]*?)<<~\/ahu >>/g;
+  const VOCAB_SLOT_RE = /<<~ ahu #schema\s*>>([\s\S]*?)<<~\/ahu\s*>>/g;
 
   for (const mdPath of walkExt(tw5MemesRoot, ".mem")) {
     const content = readFileSync(mdPath, "utf8");
@@ -607,15 +607,13 @@ function scaffoldDecoratorMeme(d: DecoratorFile): void {
   // ka handles a single symbol; ba handles multiple space-separated symbols
   const heleumaMode = d.symbols.length === 1 ? "ka" : "ba";
 
-  const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >> -->
+  const meme = `<!-- <<~ !DOCTYPE = lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>> -->
 
-<<^ code="&#x0001;" ? -> lar:///${uriPath} >>
+<<^ code="&#x0001;" ? -> lar:///${uriPath}>>
 \`\`\`toml meta
 uri-path    = "${uriPath}"
 file-path   = "${filePath}"
 type        = "text/memetic-wikitext+tiddlywiki"
-register    = "CS"
-confidence  = 14
 mana        = 14
 manao       = 14
 manaoio     = 13
@@ -630,35 +628,35 @@ cacheable   = true
 status-date = "${new Date().toISOString().slice(0, 10)}"
 \`\`\`
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #head >>
+<<~ ahu #head>>
 
 # ${d.slug}
 
 ${kindLabel} from \`${d.pkgName}\`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #contract >>
+<<~ ahu #contract>>
 
 Exported symbols: \`${d.symbols.join("`, `")}\`.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #source >>
+<<~ ahu #source>>
 
 <$transclude $tiddler="lar:///${uriPath}" $mode="block"/>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>
+<<^ code="&#x0003;">>
 
-<<^ code="&#x0004;" -> ? >>
+<<^ code="&#x0004;" -> ?>>
 `;
 
   writeFileSync(memePath, meme, "utf8");

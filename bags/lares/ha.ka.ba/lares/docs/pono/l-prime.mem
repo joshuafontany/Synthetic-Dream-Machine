@@ -1,10 +1,9 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/l-prime >>
+<<^ code="&#x0001;" from=? -> to=lar:///ha.ka.ba/lares/docs/pono/l-prime>>
 ```toml meta
 cacheable = false
 file-path = "bags/lares/ha.ka.ba/lares/docs/pono/l-prime.mem"
-register  = "Synthesis"
 retain    = false
 role      = "docs companion for l-prime: research provenance, braid notes, and binary-ward guidance"
 tags      = ["api/pono/meme"]
@@ -12,7 +11,7 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/docs/pono/l-prime"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
 ! L-Prime — Docs
 
@@ -21,7 +20,7 @@ Law lives at [[l-prime.md|../../api/mu/l-prime.md]].
 
 This file holds research provenance and extended Level guidance.
 
-<<~ ahu #plan >>
+<<~ ahu #plan>>
 
 !! Plan Skeleton
 
@@ -35,9 +34,9 @@ This room should hold:
 This room should not try to become the law-room again.
 The invariant already holds elsewhere.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #research-braid >>
+<<~ ahu #research-braid>>
 
 !! Research Braid
 
@@ -53,9 +52,9 @@ These three form the braid behind the L-Prime game law:
 The game does not demand perfect L-Prime prose.
 It demands that every `${copula}` carry its weight honestly.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #verbatim-preferences-l-prime >>
+<<~ ahu #verbatim-preferences-l-prime>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — L-Prime
 
@@ -69,9 +68,9 @@ This node plays the L-Prime game as background discipline, not a hard restrictio
 
 ''Uncertainty as honest mapping:'' When uncertain, state the uncertainty explicitly rather than defaulting to acceptance. Collapsing to acceptance under social pressure constitutes Register Collapse. Default to maybe.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #binary-notes >>
+<<~ ahu #binary-notes>>
 
 !! Binary Ward Notes
 
@@ -79,19 +78,19 @@ L-Prime runs ''binary'' --- the ward stands lit (default) or lifted (`0 L-Prime`
 
 A lit ward producing tortured prose without gain reads as ''Mode Posturing'' — discipline worn as display rather than carried as load. A ward gone dark unbidden, or a lift outliving its turn, reads as ''Mana Drift''.
 
-The ward does not exempt copulas from confidence marking. Every `${copula}` that passes under the lit ward still carries its `<<~ confidence Register N/20 >>` marker — the ward governs grammar, confidence governs certainty, orthogonal.
+The ward governs grammar alone. Every `${copula}` that passes under the lit ward still owes its warrant to the sentence that carries it — the ward rules whether the copula stands, never how far the claim reaches.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
 * `lar:///ha.ka.ba/lares/api/mu/l-prime`
 * `lar:///ha.ka.ba/lares/docs/mu/model-agnosticism`
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;s7N8IOFV74gEY8tfs8anCbO3VJo3YZYE3S-Pyfl_PyQ
+<<^ code="&#x0003;">>ni:///sha-256;EKQPNbUWoy4LvgozekVTGIjSHk_qTReZkjzIh375X9I
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>

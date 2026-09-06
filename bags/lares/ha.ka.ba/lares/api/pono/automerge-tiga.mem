@@ -1,6 +1,6 @@
-<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext >>
+<<!DOCTYPE memetic-wikitext+tiddlywiki lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 
-<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/automerge-tiga >>
+<<^ code="&#x0001;" namespace="⊙" from=? -> to=lar:///ha.ka.ba/lares/api/pono/automerge-tiga>>
 ```toml meta
 cacheable = true
 file-path = "bags/lares/ha.ka.ba/lares/api/pono/automerge-tiga.mem"
@@ -9,7 +9,6 @@ mana      = 19
 manao     = 19
 manaoio   = 18
 namespace = "&#x2299;"
-register  = "Synthesis-Canon"
 retain    = true
 role      = "invariant: two planes of different arity — the vessel-wide content tiga (ha/ka/ba) + a face's own four planes (persona/circles/identities/sessions), all named off one derived tag and resolved from @catalog"
 tags      = ["api/pono/meme"]
@@ -17,9 +16,9 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 ```
 
-<<^ code="&#x0002;" >>
+<<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha >>
+<<~ ahu #ooda-ha>>
 
 ✶ observe that the doc stack carries two planes of DIFFERENT ARITY. The content plane holds vessel-wide roots — the content Tiga (ha/ka/ba), one oracle chain through ha. The social plane repeats ONCE PER FACE: `@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>`, `@sessions-<tag>`, four planes off one derived tag, and a vessel holding a multitude carries one such set per face.
 ⏿ orient around Bucky Fuller's structural law: the triangle forms the minimal stable POLYGON, the tetrahedron the minimal structural SYSTEM — a shape that stands with nothing above it. The content plane rides a triangle rooted at ha and carries SDM forces (structure/fire/personality). A face rides a tetrahedron rooted at NOTHING: four planes bound by a shared derived tag, with no vessel-global doc over them, because a layer above a person's compartments mints exactly the root persona-circle canon forbids.
@@ -27,9 +26,9 @@ uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 ▶ lock the two-plane model as invariant: any peer that opens ha discovers the content siblings by walking LarariumDoc oracle tiddlers, and a face's planes reach each other by DERIVATION — `personaSiblingBagIds` reads the tag out of any one plane's own name, so no index lists them. No vertex carries upward pointers.
 ↺ assess: the model holds when every deploy reaches the content arms from ha (CATALOG, LARES), and every lit face carries exactly four planes sharing one tag, each registered on `@catalog` and read back from `@catalog`. Residue: wiki docs and corpus docs function as non-root docs — they hang from ka as leaves. Corpus child-docs sit at pos-2 under @catalog (M22 remapping). Keyhive treats the content roots and each PersonaGroup's own four as SEPARATE group boundaries — a key appearing in both would correlate the face with the machine.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #tiga-law >>
+<<~ ahu #tiga-law>>
 
 !! Two Planes — the Content Tiga, and a Face's Own Four
 
@@ -115,9 +114,9 @@ circles:     tiddlers["lar:///ha.ka.ba/bags/circles-<tag>"].text    = automerge:
 sessions:    tiddlers["lar:///ha.ka.ba/bags/sessions-<tag>"].text   = automerge://…
 ```
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #zelenka-alignment >>
+<<~ ahu #zelenka-alignment>>
 
 !! Zelenka Alignment
 
@@ -132,9 +131,9 @@ The oracle-tiddler chain serves as the pre-Keyhive reachability index for the co
 ''Upward pointers are prohibited'' in corpus docs, wiki docs, and every face-plane tiddler payload.
 Both planes' stability depends on this constraint holding at every deploy.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #boot-sequence-mapping >>
+<<~ ahu #boot-sequence-mapping>>
 
 !! Boot Sequence → the Two Planes
 
@@ -157,27 +156,27 @@ Ba (LaresDoc) opens before any face — personality flows after structure and mo
 A face's planes open last, and only where a face stands lit: relations sit downstream of content-plane stability, and a faceless vessel reaches this step with nothing to open.
 This ordering carries structural correctness for the SDM metaphysics — not incidental.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #scope-1-networking >>
+<<~ ahu #scope-1-networking>>
 
 !! Scope 1 ~ the TS CID/CRDT pipe [surgical 2026-07-03]
 
-The two-plane Automerge geometry rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The ''CRDT-causal clock runs in TS'' (structural causality — the Automerge logical time these roots carry, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of ''Scope 2'' (the general Sensorium-palaces). This doc-stack ''consumes the whole model''; both scopes braid TS-coordination with py/R-tooling. <<~ confidence 12/20 >> the ruling names where the structural CID/CRDT layer runs sovereign to TS.
+The two-plane Automerge geometry rides ''Scope 1'' of the two-scopes ruling — the CID / CAD-blob / CRDT DreamNet→Meshpalace networking pipe TS reaches through the full tools-stack, coordinated by `@daemon` verbs. The ''CRDT-causal clock runs in TS'' (structural causality — the Automerge logical time these roots carry, heads/ITC-shaped), distinct from the py/R FFZ-rhythm sensorium gates of ''Scope 2'' (the general Sensorium-palaces). This doc-stack ''consumes the whole model''; both scopes braid TS-coordination with py/R-tooling. the ruling names where the structural CID/CRDT layer runs sovereign to TS.
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<~ ahu #edges >>
+<<~ ahu #edges>>
 
 !! Edges
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands >>
-<<~ loulou lar:///ha.ka.ba/lararium/docs/lararium-doc-stack >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
+<<~ loulou lar:///ha.ka.ba/lararium/docs/lararium-doc-stack>>
 
-<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri >>
+<<~ loulou lar:///ha.ka.ba/lares/api/pono/lar-uri>>
 
-<<~/ahu >>
+<<~/ahu>>
 
-<<^ code="&#x0003;" >>ni:///sha-256;srfye7QpiCIft06l3pHin8p2feBP75Zwq-P17Cui_6M
+<<^ code="&#x0003;">>ni:///sha-256;dscO0BLDG8OeTjX2u8Z9PlaVNmffXBAu1w8tSD9YgY8
 
-<<^ code="&#x0004;" -> to=? >>
+<<^ code="&#x0004;" -> to=?>>
