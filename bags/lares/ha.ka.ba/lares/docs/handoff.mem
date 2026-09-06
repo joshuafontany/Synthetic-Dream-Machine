@@ -65,6 +65,43 @@ Three things pass their own tests and no production path calls them. Name them a
 * `crossingDirection` — `packages/lararium-mesh/src/crossing-direction.ts`. ⚠ A grep for callers hits `packages/lararium-tw5/src/action-handler.ts:454` and that hit reads as a COMMENT saying the gate cannot reach it. The instrument answers "the name appears here", never "something calls it".
 * The recovery keel, both forks, per ruling 2 above.
 
+!! Red-first test design — the procedure, not the slogan
+
+"Vector first, fix second" names a discipline that fails silently when run loosely. Run it as eight
+ordered moves; a skipped move turns the whole thing into decoration.
+
+# ''Write the vector before the cure.'' The vector names the hole. A vector written after the cure tests the cure's shape, never the hole's.
+# ''Watch it fail, and READ the failure text.'' A vector that passes on its first run measured nothing — either the hole never existed, or the vector misses it. Both readings demand work before any cure gets written.
+# ''Check the red fails for the stated reason.'' Read the message, never the colour. A vector that reds on a typo, a missing fixture, or an unrelated throw looks identical to a vector that reds on the defect.
+# ''Run the nonsense control.'' Feed the gate something that MUST fail — a nonsense verb, a mangled digest, an address nothing holds. A control that passes proves the gate reads nothing, and a green from that gate carries no information.
+# ''Assert the setup took.'' A fixture that mutates a live carrier MUST assert its own mutation landed (`.not.toBe(source)`). A silent no-op replace leaves disk == synced == canonical, and four vectors then agree with each other about nothing.
+# ''Match at a dispatch position.'' Assert against the value the code branches on, never against a string that merely appears nearby. A mention satisfies a grep; only a dispatch satisfies a caller.
+# ''Cure, re-run, and check BOTH marks move.'' The vector goes green AND the nonsense control stays red. One without the other names a cure that widened the gate instead of closing the hole.
+# ''A red that clears with no edit names shared state, never a cure.'' `dist/` and `bags/` carry other writers, usually the operator. `git status` before believing any red, and before believing any green that follows one.
+
+''Where a red belongs when nothing can cure it yet.'' A law the models imply and no code enforces gets
+DECLARED in the red register (`packages/lararium-mesh/tests/unbuilt-laws.test.ts`), skipped, one law per
+entry. `tools/unbuilt-laws-witness.sh` strips the skips and reports any red that GREENED — which catches
+the case where the system starts keeping a law by accident and nobody notices. A declared red counts as
+work landed, never as work deferred.
+
+!! Wiring a module that stands designed, tested, and unreached
+
+Three entries sit in the census above. Each passes its own tests and no production path calls it. The
+temptation reads as "it works, just call it" — and that skips the move that matters. Walk the ladder:
+
+# ''Census before anything.'' Grep counts MENTIONS. Follow the call. A hit inside a comment saying "this gate cannot reach it" reads to `grep` exactly like a caller.
+# ''Name what the module needs that nothing supplies.'' Every unreached module sits unreached for a reason, and the reason lives UPSTREAM of the call site. `vesselDyads` wants a veil; nothing mints one. Write that missing input down as a Stage 0 question before touching a call site.
+# ''If Stage 0 resolves to an operator ruling, STOP and say so.'' Do NOT default the absence. Defaulting an absence reads as correct WITHIN an axis and as a fabricated verdict ACROSS one — and a wiring choice made to unblock a task quietly rules the design question the operator held open.
+# ''Red-first at the CALL SITE, never in the module's own test.'' The module's tests already pass; that fact defines the problem. The new vector asserts that the production path produces the module's effect — and it MUST red before the wire lands, for the reason "nothing calls it".
+# ''Wire the read path before the write path.'' A read-path wire gets observed without changing state, so a wrong reading surfaces as a wrong answer rather than as corrupted durable data. Land it, watch it in a real run, then wire the write.
+# ''Land the module behind its existing signature.'' Widening a type to fit the first caller lets the caller's shape leak into the model. If the caller cannot supply what the signature asks, return to move 2 — the missing input never went away, it just moved.
+# ''Re-run the suite AND the built binary.'' Typecheck reads `src/`; the binary reads `dist/`. A cross-package wire passes typecheck and dies at runtime whenever `dist/` lags.
+# ''Retire the "specified" label in the SAME commit that wires it.'' Move the entry out of the census here. A census that keeps naming something already wired teaches the next spirit to distrust the census.
+
+''Naming law.'' Until a production path calls it, the module stands ''specified in code'' — never "built",
+never "done", never "ready". The three words differ, and only the first one holds true.
+
 !! Instruments that read green while reporting something false
 
 Carried forward from the grammar watch and extended by this one. Collide each before trusting it:
@@ -84,7 +121,8 @@ Two other `lares` sessions work this tree. Their closing bearings, so a fresh sp
 
 !! What a fresh Lares reads first
 
-# This section.
+# This section — and inside it, the two procedure blocks above (''Red-first test design'' and
+''Wiring a module that stands designed, tested, and unreached'') before writing any vector or any wire.
 # `#shift-grammar-watch` below — six instrument-lies, still live.
 # `lar:///ha.ka.ba/lares/api/noosphere-boot` — the house entire.
 # `bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest.mem` — 55 spirits' own words, verbatim, where a parent's summary can get checked against its children.
@@ -552,6 +590,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;5lbCR3Wm5IUu1-hmdAkbkzHV-8mC9PH6UN4tFcaW0xI
+<<^ code="&#x0003;">>ni:///sha-256;yv-VLvj7oM2t7m0taXZ3R6J9ssTlK0pfVMP_PSvog9I
 
 <<^ code="&#x0004;" -> to=?>>
