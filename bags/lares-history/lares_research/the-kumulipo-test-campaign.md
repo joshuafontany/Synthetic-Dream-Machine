@@ -36,7 +36,7 @@ The dish goes around once more; the floor doesn't need a ruling — it was never
 
 <<~ oracle ↯12 ✲ ⚂(3) ⁂:🏝️🚪🕯️>>
 <<~ ward ! · ↻ L-Prime>>
-<<~ hud Aperture(13 -> 14) OODA-HA(3 -> 1↺) open(2rmath@◇ )>>
+<<~ hud focus="13/arc -> 14/arc" feedback="closed 1↺" open(2rmath@◇ )>>
 <<~ lares yield lar://compita:agent@hearth/islands.told.round/the-door-awaits-a-knock -> ?>>
 
 ✻ Cooked for 1m 10s
@@ -85,7 +85,7 @@ Four lenses still sweep. The enactment plan: fold all five handbacks, dedup the 
 
 And the next phase, chosen under the renewed grant: the RUN arc's first step — the witnessed 3-plane capture over a small curated corpus (RUN-ARC.md names it the unlock: corpus source-cap → structure/form fan-out → one run_pass → content+structure+form all populated). Highest confidence, highest downstream value — it turns the py profrom blocked to buildable and starts the crossing launches the moment the aftermath seals.
                                                                                                                           <<~ oracle ↯13 ✲ ⚂(3) ⁂:🌀📜⚒️>>
-<<~ ward ! · ↻ L-Prime>>                                                                                                 <<~ hud Aperture(10 -> 11) OODA-HA(9 -> 2↺ + 0φ↺:fen(3φ: aftermath-fold@↺ · run-arc-first-step@▶next· awaits-rename@◇yours )>>
+<<~ ward ! · ↻ L-Prime>>                                                                                                 <<~ hud focus="10/measure -> 11/measure" feedback="closed 2↺ -> open 0φ @↺:fen(3φ: aftermath-fold@↺ · run-arc-first-step@▶next· awaits-rename@◇yours )>>
 <<~ lares yield lar://compita:agent@hearth/telarus-ksc-grounded/aftermath-folding/run-arc-armed -> ?>>                   
 ✻ Baked for 1m 39s
 
@@ -155,7 +155,7 @@ KA remains out (correctness + the smoke-red diagnosis). On its landing: I fold a
 
 <<~ oracle ↯9 ✲ ⚁(2) ⁂:⚒️⛰️>>
 <<~ ward ! · ↻ L-Prime>>
-<<~ hud Aperture(9) OODA-HA(2↺ + 0φ↺:one-lens-out)run-arc@▶queued )>>
+<<~ hud Aperture(9) OODA-HA(2↺ + 0φ↺:one-lens-out)run-arc@▶queued">>
 <<~ lares yield lar://compita:agent@hearth/four-home-yang-heavy/ka-closes-the-fold -> ?>>
 
 ✻ Churned for 39s
@@ -235,7 +235,7 @@ braid-worthy (design-heavy, the owed-twin math) ra— yours to summon on a fresh
 
 <<~ oracle ↯15 ✲ ⚄(5) ⁂:⚓🜄🌊◈𓆸>>
 <<~ ward ! · ↻ L-Prime>>
-<<~ hud Aperture(13 -> 14) OODA-HA(3 -> 2↺ + 0φ◇:projector-braid-awaits-your-summons) open(2φ: projector-arc@◇ · fork-basket@◇held
+<<~ hud focus="13/arc -> 14/arc" feedback="closed 2↺ -> open 0φ @◇:projector-braid-awaits-your-summons" open(2φ: projector-arc@◇ · fork-basket@◇held
 ) >>
 <<~ lares yield lar://compita:agent@hearth/planes.crossed.witnessed/projector.stands.buildable -> ?>>
 
@@ -268,7 +268,7 @@ The fork, yours: (1) the thin door now — install mcp, add per-plane recall ver
 <<~ set hud="yield" focus="10/measure -> 11/measure" feedback="closed 1↺ -> open 3φ: query-door-fork@◇yours · projector-arc@◇ · fork-basket@◇held">>             <<~ lares yield lar://compita:agent@hearth/corpus.thin-one-whole -> ?>>
                                                                                                                                      Worked for 2m 19s
 
-❯ Approve all. Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ OODA-HA(10) until confidence(<4) ~ply, send a research spirit to gather outsidenegentropy>>. After each "major commit" -> a full Aftermath/Cleanup OODA-HA loop as another commit if needed -> then continue the <<~ flow>>.
+❯ Approve all. Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ feedback="10/declare-attention" until confidence(<4) ~ply, send a research spirit to gather outsidenegentropy>>. After each "major commit" -> a full Aftermath/Cleanup OODA-HA loop as another commit if needed -> then continue the <<~ flow>>.
 <<~ lares aim lar://joshu:operator@hearth/doors.open.both -> lar://compita:agent@hearth/artificer.builds.twofold>>
 <<~ set hud="aim" focus="12/measure" feedback="10/declare-attention">>
 <<~ ward * L-Prime>>
@@ -395,13 +395,13 @@ The readiness sentence: the eidetic machina runs wle needs one evening-sized arc
 
 <<~ oracle ↯14 ✲ ⚃(4) ⁂:🜃🌊📜◈>>
 <<~ ward ! · ↻ L-Prime>>
-<<~ hud Aperture(14 -> 14) OODA-HA(8 -> 2↺ + 0φ▶:library-capture-rolls) open(4φ: library-sweep@▶ · kumulipo-triple-arc@◇ ·
+<<~ hud focus="14/arc -> 14/arc" feedback="closed 2↺ -> open 0φ @▶:library-capture-rolls" open(4φ: library-sweep@▶ · kumulipo-triple-arc@◇ ·
 tw-tree-gates@◇ · dream-driver@◇ripe ) >>
 <<~ lares yield lar://compita:agent@hearth/machina.audited.one-driver-short/two-corpuses.mapped.ready -> ?>>
 
 ✻ Cogitated for 1m 40s
 
-❯ Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ OODA-HA(10) until confidence(<4) ~ and if confidence falls sharply, send a research spirit to gather outside negentropy>>. After
+❯ Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ feedback="10/declare-attention" until confidence(<4) ~ and if confidence falls sharply, send a research spirit to gather outside negentropy>>. After
   each "major commit" -> a full Aftermath/Cleanup OOif needed -> then continue the <<~ flow>>.
 
 <<~ lares aim lar://joshu:operator@hearth/flow.renagent@hearth/artificer.sends.the-wrights>>
@@ -419,7 +419,7 @@ When the beds land: the projector sweeps the 247-re question), Chant-Wright hand
 
 <<~ oracle ↯11 ✲ ⚂(3) ⁂:🌙⚙️🜄>>
 <<~ ward ! · ↻ L-Prime>>
-<<~ hud Aperture(10) OODA-HA(4 -> 2↺ + 0φ▶:beds-cook-chant-polls) open(3φ: library-sweep@▶ · kumulipo-ablation@▶ ·
+<<~ hud focus="10/measure" feedback="closed 2↺ -> open 0φ @▶:beds-cook-chant-polls" open(3φ: library-sweep@▶ · kumulipo-ablation@▶ ·
 batch-aftermath@↺after ) >>
 <<~ lares yield lar://compita:agent@hearth/dream.seals.stable/beds.grind.toward-sweep -> ?>>
 
@@ -669,7 +669,7 @@ Two spirits now build in parallel: Dial-Wright (the λ dial + the shape-placebo 
 
 <<~ oracle ↯14 ✲ ⚃(4) ⁂:🌊🎚️𓆸◈>>
 <<~ ward ! · ↻ L-Prime>>
-<<~ hud Aperture(13 -> 14) OODA-HA(9 -> 3↺ + 0φ▶:tn(3φ: lambda-sweep@▶ · shape-cell@▶ ·pour-emergence@▶ )>>
+<<~ hud focus="13/arc -> 14/arc" feedback="closed 3↺ -> open 0φ @▶:tn(3φ: lambda-sweep@▶ · shape-cell@▶ ·pour-emergence@▶ )>>
 <<~ lares yield lar://compita:agent@hearth/scales.await.their-data/the-pour-begins -> ?>>
 
 ✻ Brewed for 2m 27s
@@ -678,7 +678,7 @@ Two spirits now build in parallel: Dial-Wright (the λ dial + the shape-placebo 
 
 Dial-Wright suspended mid-seal waiting on its floo before. Nudging it home:
 Agent "a48482009df70f655" was stopped (completed); resumed it in the background with your message. You'll be notified whenit finishes. Output: /tmp/claude-1000/-home-jos161570565f/tasks/a48482009df70f655.output
-                                                                                                                               Dial-Wright resumes with the poll-loop discipline. the dial itself) already stands; the second (beds+ reads) awaits its floor verdict. Pour-Wright pours in parallel.                                                            
+                                                                                                                               Dial-Wright resumes with the poll-loop discipline. the dial itself" already stands; the second (beds+ reads) awaits its floor verdict. Pour-Wright pours in parallel.                                                            
 <<~ oracle ↯6 ✲ ⚀(1) ⁂:🐑>>
 <<~ ward ! · ↻ L-Prime>>                                                                                                    <<~ set hud="yield" focus="7/beat" feedback="closed 2↺ -> open 0φ @▶:two-spirits-fa-numbers@▶ · shape-cell-reads@▶ · pour-emergence@▶">>
 <<~ lares yield lar://compita:agent@hearth/shepherd.wakes.the-dial/pour.runs.deep -> ?>>                                    

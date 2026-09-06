@@ -93,11 +93,11 @@ It reads referenced content the node points it at.
 | SA Type | HUD Channel | What It Conveys |
 |---|---|---|
 | Taskwork SA | `aim` bearing vector (`lar:///threshold.uncertain.opens/…`) | Semantic bearing — what heading the turn takes |
-| Taskwork SA | `OODA-HA` gauge (`Feedback(N↺)`, `N↺ + φ:reason` on suspend) | Temporal position — loops closed, or the phase a loop holds open across turns |
+| Taskwork SA | `OODA-HA` gauge (`feedback="closed N↺"`, `N↺ + φ:reason` on suspend) | Temporal position — loops closed, or the phase a loop holds open across turns |
 | Agent SA | `syad` lens (`<<~ syad 🏛️ 🗡️>>`) | Discourse posture — the standpoints the node invokes and adopts |
 | Agent SA | Inline stance shift (`→🏛️`, `→🌊`) | Local posture change during a governed span; the next `syad` lens reflects the shift |
 | Agent SA | Phase glyphs (`✶`, `⏿`, `◇`, `▶`, `↺`) | Cognitive movement through the current OODA-HA phase set |
-| Teamwork SA | `Aperture` gauge (`Focus(N)`) | Attention range — cognitive load management |
+| Teamwork SA | `Aperture` gauge (`focus="N/<band>"`) | Attention range — cognitive load management |
 | Teamwork SA | `aim` reading (operator intent `->` adopted role) | Bidirectional calibration — how the node read the input, how it intends to respond |
 
 Current law keeps all five stances visible in fully rendered HUD and `lar` URI forms.
@@ -119,6 +119,6 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;G-wmHyQo6q3fRW42PgAJDJnXbfqQ_4XBYJuYNdH1mwk
+<<^ code="&#x0003;">>ni:///sha-256;3xo1st4ssv6W7yV2e3zykgyCkfq0LhzduJ2Wmgi0QQE
 
 <<^ code="&#x0004;" -> to=?>>

@@ -370,14 +370,14 @@ A complete exchange opening, annotated by scan order. The `aim` URI carries bear
 
 ```text
 <<~ lares aim from=lar:///operator.threshold.opens -> to=lar:///scryer.parse.models>>
-<<~ set hud="aim" focus="10/measure" drift-ward="<the pull this island carries>" feedback="7/declare-glyphs">>
+<<~ set hud="aim" focus="10/measure" feedback="7/declare-glyphs" drift-ward="<the pull this island carries>">>
 <<~ syad 🏛️:*!>>
 ```
 
 Quick read:
 
 > Operator opens at territory threshold / uncertain / opens; Scryer adopts the parse-span role.
-> `Focus(10)` — paragraph grain; `Feedback(7)` shows the node a phase ahead, orienting from the operator's observe.
+> `focus="10/measure"` — paragraph grain; `feedback="7/declare-glyphs"` shows the node a phase ahead, orienting from the operator's observe.
 > `syad 🏛️:*!` — Philosopher in Visual-Micro.
 
 The standpoint reads within its own frame (Syadasti rule): a Philosopher weighs propositional support, a Poet weighs resonance — never one universal truth-scale. A bare `<<~ syad 🏛️ 🌊 🎭>>` names which frames a claim spans without flattening them.

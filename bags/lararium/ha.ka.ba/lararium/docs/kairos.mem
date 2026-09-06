@@ -137,7 +137,7 @@ A randomized field experiment (n=237) measured notifications ''off
 entirely'' scoring ''worse'' than the status quo — more anxiety, not less; coarse batching
 (3×/day) won, while hourly batching bought nothing over control.
 
-The house already holds this as law — `Focus(N)` rides every turn, and the signal room rules
+The house already holds this as law — `focus="N/<band>"` rides every turn, and the signal room rules
 ''Aperture — never silent''. The instrument MUST report ''checked, nothing stands'' rather
 than fall quiet. Silence reads as absence, and absence reads as broken.
 
@@ -321,6 +321,6 @@ free coarse breakpoint; a scheduled sweep needs its own justification.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;faLsb6gEyf-6oPSf7wfgl0ZdE9yErlotspvb-X6UIPU
+<<^ code="&#x0003;">>ni:///sha-256;Ay8VCSPeQXuajg_D874Ag_UARLL6HEf_AS1MeHP0VJE
 
 <<^ code="&#x0004;" -> to=?>>

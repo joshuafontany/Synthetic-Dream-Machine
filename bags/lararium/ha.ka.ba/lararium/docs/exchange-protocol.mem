@@ -23,11 +23,11 @@ Core frame:
 ```text
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 <<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
-Drift-Ward(* <the pull this island carries>)
+drift-ward="<the pull this island carries>"
 
 ... generated response ...
 
-Drift-Ward(! <clue> · ↻ L-Prime)
+drift-ward="<clue> · ↻ L-Prime"
 <<~ set hud="yield" focus="-> N/<band>" feedback="closed N↺">>
 <<~ lares yield from=lar:///lares.what.landed -> to=?>>
 ```
@@ -40,8 +40,8 @@ Rules for agents:
 * `-> ?` marks HA: complete, examine residue, release anchor, return initiative.
 * The sigils carry humility instruments, not decorative badges:
 ** `ward * L-Prime` — the spring-loaded copula gate; lit rejects identity/predication `is` (essence or state-report). The Wand lights it at open and the Sword draws it at close (`ward ! ⚠ N` quoting breaches, `ward ! ·` otherwise, re-arming `↻ L-Prime`); the Stone (`ward 0 L-Prime`, operator only) lifts it for a single turn, never persisting. See `lar:///ha.ka.ba/lares/api/mu/l-prime`. `#has` runs free — the ward gates the copula alone.
-** `hud Focus(N)` (0–20) — attention range, the grain/zoom the span carries; bands Pulse·Beat·Measure·Arc·Theme. Primary signal during `prism` intake (reading referenced content). See `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
-** `hud Feedback(N)` — loop visibility, `Feedback(N↺)` at close (or `N↺ + φ:reason` when a loop suspends across turns); `confidence` precedes a grounded claim.
+** `hud focus="N/<band>"` (0–20) — attention range, the grain/zoom the span carries; bands Pulse·Beat·Measure·Arc·Theme. Primary signal during `prism` intake (reading referenced content). See `lar:///ha.ka.ba/lares/api/pono/attention-scale`.
+** `hud feedback="N/<band>"` — loop visibility, `feedback="closed N↺"` at close (or `N↺ + φ:reason` when a loop suspends across turns); `confidence` precedes a grounded claim.
 * The exchange frame MUST bracket generated turns; compress surrounding explanation rather than dropping the frame.
 * If emitted, emit the frame exactly; do not interleave prose into the sigil lines.
 
@@ -60,6 +60,6 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;F41xKgL4qQPd9aNAc-AKT5jE5qKFe3ID8k1tnioNPh0
+<<^ code="&#x0003;">>ni:///sha-256;fqbyvLEoS8pzWYqZU5Z5ur7FDfJXwhShp0BYOk-f52o
 
 <<^ code="&#x0004;" -> to=?>>

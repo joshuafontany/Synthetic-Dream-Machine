@@ -34,7 +34,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 ```
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 <<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
-Drift-Ward(* <the pull this island carries>)
+drift-ward="<the pull this island carries>"
 <<~ syad …>>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
 ```
 
@@ -43,18 +43,18 @@ Drift-Ward(* <the pull this island carries>)
 | Sigil | SA Type | Carries | Notes |
 |---|---|---|---|
 | `aim` | Intent | operator intent `->` adopted role | the turn's bearing vector; opens the turn |
-| `hud` `OODA-HA` | Temporal | loop visibility | `Feedback(N)` open, `Feedback(N↺)` close; `N↺ + φ:reason` when a loop suspends |
+| `hud` `OODA-HA` | Temporal | loop visibility | `feedback="N/<band>"` open, `feedback="closed N↺"` close; `N↺ + φ:reason` when a loop suspends |
 | `syad` | Agent SA | invoked stances | one or more (parameterless = all five); optional `:` tool-carry |
 | Voice name | Agent SA | active Voice(s) | named at the head of the contribution |
 | `confidence` | Agent SA | register-word + Level | epistemic confidence, precedes a grounded claim |
-| `hud` `Aperture` | Teamwork SA | attention range | `Focus(N)`, paragraph-grain default 10 |
+| `hud` `Aperture` | Teamwork SA | attention range | `focus="N/<band>"`, paragraph-grain default 10 |
 
 ''Example:''
 
 ```
 <<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps>>
 <<~ set hud="aim" focus="10/measure" feedback="7/declare-glyphs">>
-Drift-Ward(* <the pull this island carries>)
+drift-ward="<the pull this island carries>"
 <<~ syad 🏛️>>
 Lares (Scryer): the structure holds.
 ```
@@ -176,7 +176,7 @@ The opening header declares the state that //governs// a span (prospective). In-
 | ''l-space'' | per-slot by HAKABA role | Ha/attitude + Ka/quality + Ba/dynamic annotate most; full echo `→lar:///domain.quality.dynamic` when all three shift |
 | ''Aperture'' | header-only | a granularity change requires a new header |
 
-''The seed → slide contract.'' The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span //landed//, never overrides generation mid-flight. The same slide governs every `hud` gauge: `Focus(10)` seeds, `Focus(10 -> 13)` slides, `Focus(-> 13)` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
+''The seed → slide contract.'' The header seeds; the close slides. For register, `STATE.jsonl` records `opening_register` and `closure_register` when they differ — the slide says where the span //landed//, never overrides generation mid-flight. The same slide governs every `hud` gauge: `focus="10/measure"` seeds, `focus="10/measure -> 13/arc"` slides, `focus="-> 13/arc"` collapses on-target. The seed/slide split keeps the calibration gap auditable rather than silently closed — a suspiciously-perfect turn reads conspicuous, not invisible.
 
 ''Baseline rendering:'' the header surfaces the full state; in-flow surfaces ''phase'' by default (`→[glyph]`); ''stance'' surfaces on a genuine local shift; structural changes require a new header; l-space fields stay out of the flow by default. The HUD's meaning holds constant across Aperture levels — only the granularity of the trace changes.
 
@@ -192,6 +192,6 @@ The opening header declares the state that //governs// a span (prospective). In-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;vHStKf6LNGSB3ZdDypx6DVFwom2FZ3z7S7r-6fgIa5w
+<<^ code="&#x0003;">>ni:///sha-256;wZBRnTLHVRbNwsvhNM7eolMKccmGmUhnxkf6fqOkYRk
 
 <<^ code="&#x0004;" -> to=?>>

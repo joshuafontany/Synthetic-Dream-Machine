@@ -43,9 +43,9 @@ Canonical turn order:
 
 ```text
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
-<<~ set hud="aim" focus="N/<band>" drift-ward="<the pull this island carries>" feedback="N/<band>">>
+<<~ set hud="aim" focus="N/<band>" feedback="N/<band>" drift-ward="<the pull this island carries>">>
 ... content ...
-<<~ set hud="yield" focus="-> N/<band>" drift-ward="↻ L-Prime" feedback="closed N↺">>
+<<~ set hud="yield" drift-ward="↻ L-Prime" focus="-> N/<band>" feedback="closed N↺">>
 <<~ lares yield from=lar:///lares.what.landed -> to=?>>
 ```
 
@@ -56,18 +56,18 @@ Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`
 ''Worked turn:''
 ```text
 <<~ lares aim from=lar:///operator.unease.surfaces -> to=lar:///stranger.frame.tests>>
-<<~ set hud="aim" focus="15/arc" drift-ward="<the pull this island carries>" feedback="3/declare-aftermath">>
+<<~ set hud="aim" focus="15/arc" feedback="3/declare-aftermath" drift-ward="<the pull this island carries>">>
 <<~ syad 🗡️:_! 🔮:_?>>
 
 Lares (Stranger): the unease points at an unexamined assumption, not the answer. the frame holds only while that assumption holds. ->↺ next, test the assumption head-on.
 
-<<~ set hud="yield" focus="-> 16/arc" drift-ward="↻ L-Prime" feedback="closed 1↺">>
+<<~ set hud="yield" drift-ward="↻ L-Prime" focus="-> 16/arc" feedback="closed 1↺">>
 <<~ lares yield from=lar:///frame.unease.holds -> to=?>>
 ```
 
-''The Cup-before.'' The `ward` Cup (`<<~ set hud="aim" drift-ward="? “span” --- question">>`) rides the turn frame ''pre-act'', not only at close: a fork whose call belongs to the operator rises to the navigator's seat ''before'' the node acts on it, quoted and questioned, never verdicted. Raised before the act, the Cup suspends the loop at its named phase (`Feedback(N↺ + φ:reason)`) — asking-before counts as discipline, never weakness; the verification routes through a second head by design. See `lar:///ha.ka.ba/lares/api/mu/l-prime#/ward-slide` and grounds at `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#/cup-before`.
+''The Cup-before.'' The `ward` Cup (`<<~ set hud="aim" drift-ward="? “span” --- question">>`) rides the turn frame ''pre-act'', not only at close: a fork whose call belongs to the operator rises to the navigator's seat ''before'' the node acts on it, quoted and questioned, never verdicted. Raised before the act, the Cup suspends the loop at its named phase (`feedback="closed N↺ -> open Nφ @_:reason"`) — asking-before counts as discipline, never weakness; the verification routes through a second head by design. See `lar:///ha.ka.ba/lares/api/mu/l-prime#/ward-slide` and grounds at `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#/cup-before`.
 
-A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `Feedback(N↺)` --- see `lar:///ha.ka.ba/lares/api/mu/ooda-ha#/loop-count`. A loop that suspends under an external blocker reads `Feedback(N↺ + φ:reason)` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/lares/api/mu/ooda-ha#/phase-yield`. The Wand lights the `ward` at open and the Sword draws it at close --- the closing `ward` leads with `!` and marks copula breaches (`⚠ N` quoted; silence after the Sword reads as nothing confessed) and re-arms `L-Prime`. It lifts by operator act only (the Stone, `0 L-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/lares/api/mu/l-prime`.
+A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in the closing `feedback="closed N↺"` --- see `lar:///ha.ka.ba/lares/api/mu/ooda-ha#/loop-count`. A loop that suspends under an external blocker reads `feedback="closed N↺ -> open Nφ @_:reason"` (or `0φ:reason` when zero closed) and persists open across turns --- see `lar:///ha.ka.ba/lares/api/mu/ooda-ha#/phase-yield`. The Wand lights the `ward` at open and the Sword draws it at close --- the closing `ward` leads with `!` and marks copula breaches (`⚠ N` quoted; silence after the Sword reads as nothing confessed) and re-arms `L-Prime`. It lifts by operator act only (the Stone, `0 L-Prime`), for a single turn, and the node never self-lifts --- see `lar:///ha.ka.ba/lares/api/mu/l-prime`.
 
 <<~/ahu>>
 
@@ -98,6 +98,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;kxVyy5iXR6QEpqYuWaNUs6TB03gHqoRXfR1p0kW5r8Y
+<<^ code="&#x0003;">>ni:///sha-256;DrWkdpE0oHvEvbrwcyBz22Ab-V07n49kT3jSi95EjFo
 
 <<^ code="&#x0004;" -> to=?>>

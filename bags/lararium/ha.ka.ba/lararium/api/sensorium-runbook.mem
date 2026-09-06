@@ -107,8 +107,8 @@ pattern pushes forward onto strictly fewer records than exhibit it).
 ''`require_base()` refuses a restriction set that mixes bases or omits one'', so the wrong comparison
 stops type-checking rather than returning a plausible figure.
 
-<<~ hud Drift-Ward(! ⚠ · this table stood hand-written in an earlier draft, with a plane the code does not declare
-and a base it does · ↻ L-Prime) >>
+<<~ hud drift-ward="⚠ · this table stood hand-written in an earlier draft, with a plane the code does not declare
+and a base it does · ↻ L-Prime" >>
 
 !!! The order that matters
 
@@ -430,6 +430,6 @@ reports whether they carry a flow between them.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;62vaPjTQJhSVvI5cCWHdN8DE-NUuwyBkCXjvh4lOmCg
+<<^ code="&#x0003;">>ni:///sha-256;o_ksyMxeqwcoDH3xZnW3nCEI_BUfzTMzAL7j2NctQSs
 
 <<^ code="&#x0004;" -> to=?>>

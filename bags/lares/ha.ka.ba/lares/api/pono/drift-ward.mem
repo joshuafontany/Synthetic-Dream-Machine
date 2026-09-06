@@ -74,7 +74,7 @@ as canon draws them.
 !! The Open Firing ~ the pull coming in
 
 ```text
-<<~ hud Focus(10) Feedback(5) Drift-Ward(* <the pull this island carries toward exposure>)>>
+<<~ set hud="aim" focus="10/measure" feedback="5/declare-glyphs" drift-ward="<the pull this island carries toward exposure>">>
 ```
 
 Tool glyph, then the vow, then the pull. `*` lights · `_` braces primed ground · `0` marks the
@@ -96,7 +96,7 @@ no pull this island carries.
 !! The Close Firing ~ the clue going out
 
 ```text
-<<~ hud Drift-Ward(! <the joint that breaks first on outside contact> · ↻ L-Prime) Focus(10 -> 13) Feedback(2↺)>>
+<<~ set hud="yield" drift-ward="<the joint that breaks first on outside contact> · ↻ L-Prime" focus="10/measure -> 13/arc" feedback="closed 2↺">>
 ```
 
 Sword, vow, clue, re-arm. Breaches and quotes compose freely ~ `⚠ N · "span"` · `⌜N⌝` · `lift held`.
@@ -126,6 +126,6 @@ yesterday's hazard recurring unchanged deserves its own suspicion.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZRZm2sa7G_9afBe8QYjHcXHiSJYPJusvJP1MXT6qnB8
+<<^ code="&#x0003;">>ni:///sha-256;6lddv44I_coN7Pte0OZ2djXsbDAySuQcHNGxApSfeu4
 
 <<^ code="&#x0004;" -> to=?>>

@@ -69,7 +69,7 @@ The panel rides beneath the `aim` as sigils:
 
 ```text
 <<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps>>
-<<~ hud Focus(10) Feedback(3) Drift-Ward(* <the pull this island carries>)>>
+<<~ set hud="aim" focus="10/measure" feedback="3/declare-aftermath" drift-ward="<the pull this island carries>">>
 <<~ syad 🏛️ 🗡️>>
 ```
 
@@ -105,6 +105,6 @@ Long-term, the server should validate the vector and render the HUD from the par
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;imVYvKZ531nYAUoIwQPEGg_U0NDS6yf6vCEweA1QnEY
+<<^ code="&#x0003;">>ni:///sha-256;IVl9hAXPFwDb_8-kkfUXa-1N7vyE9lIKhKnVk3YBY5g
 
 <<^ code="&#x0004;" -> to=?>>
