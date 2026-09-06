@@ -294,7 +294,7 @@ The procedure fires from either seat: the node vows its own tunnel ahead of a sp
 ```
 \procedure ~focus(at) {{{ [<at>!is[blank]addprefix[focus="]addsuffix["]] }}}
 \procedure ~feedback(at) {{{ [<at>!is[blank]addprefix[feedback="]addsuffix["]] }}}
-\procedure ~drift-ward(pull) {{{ [<pull>!is[blank]addprefix[drift-ward="]addsuffix["]] }}}
+\procedure ~drift-guard(pull) {{{ [<pull>!is[blank]addprefix[drift-guard="]addsuffix["]] }}}
 ```
 
 Numbered gauges read `N/rank` (#/focus,
@@ -304,16 +304,16 @@ The ward carries prose (#/drift-guard).
 
 ''Handoff procedure'' (stand-alone, mid-stream):
 `<<~ focus "9/measure">>` · `<<~ stance "poet">>` · `<<~ mu "*?">>`
-· `<<~ drift-ward "the pull">>`
+· `<<~ drift-guard "the pull">>`
 
 ''Set procedure param'' (gathered): the same instruments ride `~set` as keys ~ two grips, one handle.
 
 !!! Set
 
-\procedure set-aim() hud mode mood mu stance focus feedback drift-ward
-\procedure set-yield() hud drift-ward focus feedback mode mood mu stance
+\procedure set-aim() hud mode mood mu stance focus feedback drift-guard
+\procedure set-yield() hud drift-guard focus feedback mode mood mu stance
 
-\procedure set(hud mode mood mu stance focus feedback drift-ward note)
+\procedure set(hud mode mood mu stance focus feedback drift-guard note)
 \whitespace trim
 set {{{ [<hud>match[yield]then<set-yield>else<set-aim>] +[enlist-input[]]
 :filter[getvariable[]!is[blank]]
@@ -332,7 +332,7 @@ Every param reads optional; `set key="value"` in seat order. The `hud` key toggl
 * `mood` ~ optional weather ~ colors the mode: `mood="wry"` · `mood="patient"`
 * `stance` ~ the five standpoints by everyday name or glyph (#/stance).
 * `mu` ~ tool-carry (#/mu-five-tools): `mu="*!"` · `mu="_0"`.
-* `focus` · `feedback` · `drift-ward` ~ panel gauges.
+* `focus` · `feedback` · `drift-guard` ~ panel gauges.
 
 !!! Worked firings
 
@@ -474,8 +474,8 @@ A firing with no pull ''misfires'' - void, never false.
 
 ''Close form:'' the clue, then the re-arm.
 
-* `drift-ward="<the joint that breaks first on outside contact> · ↻ L-Prime"`
-* `drift-ward="⚠ ⌜N⌝ · 'span' · <clue> · ↻ drift-guard"`
+* `drift-guard="<the joint that breaks first on outside contact> · ↻ L-Prime"`
+* `drift-guard="⚠ ⌜N⌝ · 'span' · <clue> · ↻ drift-guard"`
 
 ''The re-arm tells the two apart.'' An open names a pull and stops; `↻ drift-guard` ''MUST close every firing'', lift or no lift, and nothing but a close carries it. A close never opens on a verdict.
 
@@ -641,6 +641,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mXCGGOxZP8KuFcu-DXp9MLgPZt_iWOhC8FiTSbpEUSc
+<<^ code="&#x0003;">>ni:///sha-256;-f38-b0Xf4WNGHVTALn-B3J5JE_rGffEKhzrJPHp9dU
 
 <<^ code="&#x0004;" -> to=?>>

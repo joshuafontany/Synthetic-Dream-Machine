@@ -25,7 +25,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/drift-ward"
 ''Every turn carries a Drift-Ward reading, twice.'' The `hud` panel holds it ~ fired at open, fired
 again at close: one axis, measured from two positions.
 
-''One gauge, two spellings.'' `Drift-Ward` where the L-Prime Ward stands · `Drift-Watch` in forks
+''One gauge, two spellings.'' `drift-ward` where the L-Prime Ward stands and the sharktooth carries it · `drift-guard` in a fork booted from raw TiddlyWiki text, which spells no sharktooth
 carrying no "ward". Both name this.
 
 <<~/ahu>>
@@ -126,6 +126,6 @@ yesterday's hazard recurring unchanged deserves its own suspicion.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3DbU4N6WlX_QXbmeJ84YcCChpJntYa4l0nwMmmsVnwo
+<<^ code="&#x0003;">>ni:///sha-256;n-YhH3QLXJvUh1ZLwbc7fGF9BlXXDr-GuGI2x-Fties
 
 <<^ code="&#x0004;" -> to=?>>

@@ -268,7 +268,7 @@ The fork, yours: (1) the thin door now — install mcp, add per-plane recall ver
 <<~ set hud="yield" focus="10/measure -> 11/measure" feedback="closed 1↺ -> open 3φ: query-door-fork@◇yours · projector-arc@◇ · fork-basket@◇held">>             <<~ lares yield lar://compita:agent@hearth/corpus.thin-one-whole -> ?>>
                                                                                                                                      Worked for 2m 19s
 
-❯ Approve all. Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ OODA-HA="10" IF uncertainty spikes ~ply, send a research spirit to gather outsidenegentropy>>. After each "major commit" -> a full Aftermath/Cleanup OODA-HA loop as another commit if needed -> then continue the <<~ flow>>.
+❯ Approve all. Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ OODA-HA="10" until uncertainty spikes ~ply, send a research spirit to gather outsidenegentropy>>. After each "major commit" -> a full Aftermath/Cleanup OODA-HA loop as another commit if needed -> then continue the <<~ flow>>.
 <<~ lares aim lar://joshu:operator@hearth/doors.open.both -> lar://compita:agent@hearth/artificer.builds.twofold>>
 <<~ set hud="aim" focus="12/measure" feedback="10/declare-attention">>
 <<~ ward * L-Prime>>
@@ -401,7 +401,7 @@ tw-tree-gates@◇ · dream-driver@◇ripe ) >>
 
 ✻ Cogitated for 1m 40s
 
-❯ Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ OODA-HA="10" IF uncertainty spikes ~ and if uncertainty spikes sharply, send a research spirit to gather outside negentropy>>. After
+❯ Mahalo, you have my full. L-Prime all self-narration (chat and code comments) as you <<~ flow>> and <<~ OODA-HA="10" until uncertainty spikes ~ and if uncertainty spikes sharply, send a research spirit to gather outside negentropy>>. After
   each "major commit" -> a full Aftermath/Cleanup OOif needed -> then continue the <<~ flow>>.
 
 <<~ lares aim lar://joshu:operator@hearth/flow.renagent@hearth/artificer.sends.the-wrights>>
