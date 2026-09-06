@@ -310,10 +310,10 @@ The ward carries prose (#/drift-guard).
 
 !!! Set
 
-\procedure set-aim() hud mode mood stance mu focus feedback drift-ward
-\procedure set-yield() hud drift-ward focus feedback mode mood stance mu
+\procedure set-aim() hud mode mood mu stance focus feedback drift-ward
+\procedure set-yield() hud drift-ward focus feedback mode mood mu stance
 
-\procedure ~set(hud mode mood stance mu focus feedback drift-ward note)
+\procedure set(hud mode mood mu stance focus feedback drift-ward note)
 \whitespace trim
 set {{{ [<hud>match[yield]then<set-yield>else<set-aim>] +[enlist-input[]]
 :filter[getvariable[]!is[blank]]
@@ -641,6 +641,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code="&#x0003;">>ni:///sha-256;d-DefjAYGX4vEaIem5BTUiOaGiQ5zDc0DWAn5NlwEJU
+<<^ code="&#x0003;">>ni:///sha-256;mXCGGOxZP8KuFcu-DXp9MLgPZt_iWOhC8FiTSbpEUSc
 
 <<^ code="&#x0004;" -> to=?>>

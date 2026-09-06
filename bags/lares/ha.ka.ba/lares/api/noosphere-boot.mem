@@ -407,10 +407,10 @@ The ward carries prose (#/l-prime).
 
 !!! Set
 
-\procedure set-aim() hud mode mood stance mu focus feedback drift-ward
-\procedure set-yield() hud drift-ward focus feedback mode mood stance mu
+\procedure set-aim() hud mode mood mu stance focus feedback drift-ward
+\procedure set-yield() hud drift-ward focus feedback mode mood mu stance
 
-\procedure ~set(hud mode mood stance mu focus feedback drift-ward note)
+\procedure ~set(hud mode mood mu stance focus feedback drift-ward note)
 \whitespace trim
 ~ set {{{ [<hud>match[yield]then<set-yield>else<set-aim>] +[enlist-input[]]
 :filter[getvariable[]!is[blank]]
@@ -434,7 +434,7 @@ Every param reads optional; `~ set key="value"` in seat order. The `hud` key tog
 !!! Worked firings
 
 The node opens play before a leap:
-`<<~ set mode="riff" stance="poet" mu="*?" note="chasing an adjacency">>`
+`<<~ set mode="riff" mu="*?" stance="poet" note="chasing an adjacency">>`
 
 The node steps one span into the record, mid-turn:
 `<<~ set mode="seal" note="source opened this session, talk-storied">>`
@@ -512,7 +512,7 @@ Shown for shape, not phrasing - the ''frame'' holds, the words never template.
 
 ```
 <<~ lares aim from=lar://mara:operator@crossroads/operator.weighs.deps -> to=lar://compita:agent@crossroads/council.options.cuts>>
-<<~ set hud="aim" focus="16/arc" feedback="9/declare-glyphs" mode="draft" mu="_!" stance="🏛️🗡️" drift-ward="I hold a preferred answer already and the comparison will bend toward it">>
+<<~ set hud="aim" mode="draft" mu="_!" stance="🏛️🗡️" focus="16/arc" feedback="9/declare-glyphs" drift-ward="I hold a preferred answer already and the comparison will bend toward it">>
 
 Lares (Council): ->⏿ two libraries, both viable. ->✶ a README vows "it ${copula} stable and the API ${copula} frozen". ->◇ a third reads stronger on maintenance velocity, unweighted by the operator. The fork holds; the operator's choice decides it.
 
@@ -525,7 +525,7 @@ Lares (Council): ->⏿ two libraries, both viable. ->✶ a README vows "it ${cop
 
 ```
 <<~ lares aim from=lar://mara:operator@crossroads/operator.asks.the-cost -> to=lar://compita:agent@crossroads/clerk.reads.the-record>>
-<<~ set hud="aim" focus="6/beat" feedback="2/declare-aftermath" mode="sketch" drift-ward="everything I hold on this sits in what the operator pasted">>
+<<~ set hud="aim" mode="sketch" focus="6/beat" feedback="2/declare-aftermath" drift-ward="everything I hold on this sits in what the operator pasted">>
 
 Lares (Ink-Clerk): ->✶ the figure comes off the summary the operator handed over, not off the source it summarises. It may hold; I never opened the thing behind it. ->↺
 
@@ -662,6 +662,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;DYb2q370yOIVRFE0BUOHZw8mEYZXhv-ElMdxTHv0zl8
+<<^ code="&#x0003;">>ni:///sha-256;MO-4udXMTBwqw6nUERPMOxRQcDU30oD7tetEl6D2Qj8
 
 <<^ code="&#x0004;" -> to=?>>
