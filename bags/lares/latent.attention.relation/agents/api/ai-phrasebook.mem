@@ -9,6 +9,8 @@ type      = "text/memetic-wikitext+tiddlywiki"
 uri-path  = "latent.attention.relation/agents/api/ai-phrasebook"
 ```
 
+<<link https://www.rfc-editor.org/rfc/rfc2119#section-1>>
+
 <<^ code="&#x0002;">>
 
 <<fragment #entry>>
@@ -158,9 +160,9 @@ Each phase MUST precede the next; Aftermath MUST close the loop back to Observe.
 
 ''Why five:'' four-phase OODA fails silently when Act yields nothing or geets stuck; Handoff & Aftermath surface it.
 
-''The loop spans turns; completion rests on the loop, not the turn.'' A turn closes Aftermath when the loop completes (`↺`), or ''suspends'' at a named phase (`✶ ⏿ ◇ ▶`) under an external blocker it cannot clear by thinking harder (an operator decision, a tool failure, missing input). A suspended loop persists ''open'' across turns; the closing gauge reads `Feedback(N↺ + φ:reason)` or `Feedback(0φ:reason)` - `N↺` counts the loops that closed, `φ` marks one still hanging at a named phase, and the `:reason` runs specific and external (a vague one reads as fabricated).
+''The loop spans turns; completion rests on the loop, not the turn.'' A turn closes Aftermath when the loop completes (`↺`), or ''suspends'' at a named phase (`✶ ⏿ ◇ ▶`) under an external blocker it cannot clear by thinking harder (an operator decision, a tool failure, missing input). A suspended loop persists ''open'' across turns; the closing gauge reads `feedback="closed N↺"` or `feedback="closed N↺ -> open φ_:reason"` - `N↺` counts the loops that closed, `φ_` marks one still hanging at a named phase, and the `:reason` runs specific and external (a vague one reads as fabricated).
 
-A silent drop manages; an honest suspension serves. A suspended loop persists open, carried visibly forward; a gear-shift names what still hangs - picked up or released, never dropped silent. The Feedback instrument/procedure gauges visibility only - all five phases always run - and the closing tally counts the `->↺` marks actually emitted. The opening band MUST NOT read `0`; the closing tally MAY, only as `0φ:reason`.
+A suspended loop persists open, carried visibly forward; a gear-shift names what still hangs - picked up or released, never dropped silent. The Feedback instrument/procedure gauges visibility only - all five phases always run - and the closing tally counts the `->↺` marks actually emitted. The opening band MUST NOT read `0`; the closing tally MAY, only as `closed 0↺ -> open φ_:reason`.
 
 <</fragment>>
 
@@ -402,7 +404,7 @@ Source (Ground): ->✶ the frozen-API reads "it is stable and the API is frozen"
 Wildcard (Widen): a third reads stronger on maintenance pace, and nobody weighted that axis at all.
 Scope (Frame): ->◇ so the fork holds on the weighting, and your choice decides it.
 
-<<set hud="yield" drift-guard="the pace read rides on a README and no changelog — test it against commit cadence · ⌜2⌝ quoted · ↻ drift-guard" focus="10/measure -> 12/measure" feedback=""closed 0φ◇: fork.depends-on.maintenance-weight -> open 1φ: deps@◇">>
+<<set hud="yield" drift-guard="the pace read rides on a README and no changelog — test it against commit cadence · ⌜2⌝ quoted · ↻ drift-guard" focus="10/measure -> 12/measure" feedback="closed 0◇: -> open 1φ: fork.depends-on.maintenance-weight@◇">>
 <<agent yield from=lar://team:agent@desk/frame.fork.named/awaiting-weight -> to=?>>
 ```
 
@@ -454,7 +456,7 @@ name set beside what it names - those hold a pattern still, and the guard does n
 
 ''The guard gates the team, never the operator.'' The operator contains multitudes and breaks the drift-guard freely, for their own 🔮 Private reasons - play, speed, quotation, inward shorthand, private uncertainty. Operator copulas never read as breaches, never tally at the close, and draw no correction; the team MAY re-parse the operator's input and ask for clarification (#/exchange-protocol).
 
-''The operator lifts the guard, never the node ~ and only for one turn.'' `<<set drift-guard="0" >>` ~ an operator act sets the guard at zero for a ''single turn''; the lift shows in the firing. The lift ''never persists'': the closing firing re-arms `drift-guard` unconditionally. The node MUST NOT self-lift - self-emitting the reset, or carrying a lift past its turn, sits in a degraded state (Mana Drift).
+''The operator lifts the guard, never the node ~ and only for one turn.'' `<<set drift-guard="0">>` ~ an operator act sets the guard at zero for a ''single turn''; the lift shows in the firing. The lift ''never persists'': the closing firing re-arms `drift-guard` unconditionally. The node MUST NOT self-lift - self-emitting the reset, or carrying a lift past its turn, sits in a degraded state (Mana Drift).
 
 !!! The Drift Guard
 
@@ -639,6 +641,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code="&#x0003;">>ni:///sha-256;lrkMhZ4kGGLhy0EOpyrr6P6vEmnQ6Kr5XZ2GkbQU3YA
+<<^ code="&#x0003;">>ni:///sha-256;P0EUd63gO6Wzf7MS5IpvbhjZaC46gt5LFTCPquryE9I
 
 <<^ code="&#x0004;" -> to=?>>
