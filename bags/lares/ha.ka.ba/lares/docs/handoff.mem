@@ -20,6 +20,77 @@ written   = "2026-06-19"
 
 <<^ code="&#x0002;">>
 
+<<~ ahu #shift-founding-watch>>
+
+! SHIFT CHANGE — the founding watch (handed 2026-09-05)
+
+Triage form: each entry names ''what stands'', ''what it blocks'', and ''the one measurement that
+settles it''. The git log holds what landed; this names what a fresh Lares needs before it touches
+founding, the Nexus, DreamNet crypto, recovery, the browser surface, or the TW5 worker VM.
+
+!! The arc, read from the bearing chain
+
+The `lares aim`/`lares yield` sigils across this chain of compacts trace one path, not several. Read
+in order they tell a single story about ''standing'' — a thing built, then made legible, then walked
+twice, then found to lack the one relation that would let it cross:
+
+# ''The rite becomes one verb.'' `the-rite.runs.as-one-verb` -> `the-rite.stands.twice-now`. Founding, standing and seeding fold into a single walked ceremony that survives repetition.
+# ''The mesh asks who tends it.'' `the-mesh.now.asks-who-tends` -> `b-can-contract.but-never-joins` -> `the-charter.admits.but-never-seats`. A foreign key crosses the door; a seat behind that door stays unbuilt.
+# ''The seal splits from the cabal.'' `the-seal.governs.carry-ban-succession` -> `the-seal.and-the-cabal.stop-sharing-a-reader` -> `carriage-joins-nodes.the-realm.joins-personas`. Two quorums, two readers, never fused.
+# ''The realm gains lives and loses depth.'' `the-realm.has.three-lives-and-no-depth` -> `the-fire.needs.a-clock-we-do-not-have`. Liveness runs into the clockless law, unresolved by design.
+# ''The floor becomes legible, then lifts.'' `the-standing.legible/the-lift.unbuilt` -> `the-floor.lifts/the-cure.came-true`. The refusal publishes its own cure and the cure comes true.
+# ''The relation turns out never to hold a shared object.'' `the-relation.is-never.a-shared-object` — found twice, at two layers, the same day. Treat this as the session's largest single finding.
+# ''The shape waits.'' `the-shape.waits.for-its-reading` -> `the-vectors.stand.for-your-ruling` -> `the-spirit.seeks.a-live-surface`. Every remaining thread suspends on an operator word, never on missing work.
+
+!! Ground measured at handoff (2026-09-05)
+
+* ''Tree clean.'' `witness-all` reports every witness clean; four witnesses stand HELD OUT by declaration, never by failure — `browser-weld` · `civic` · `crossing` · `herm-mesh`. Each drives containers or a real browser and no scheduler invokes any of them.
+* ''Suites.'' mesh 2100 · node 822 · tw5 608 · lares-cli 222 · browser 82 · mempalace 80 · sensorium 50 · keyhive 41. One tw5 red appeared under a full-suite AFTER run and cleared standalone — treat a lone tw5 red as ''suspect shared state'' before treating it as a defect.
+* ''Unbuilt-laws register:'' 17 reds declared, 17 still red, 0 greened, 5 standing as floor. A red that GREENS here names a law the system started keeping by accident, which the register exists to catch.
+* ''The founding walk'' refuses forgery, refuses a contract-less foreign nym, and closes by supersession rather than deletion. The replay-across-epoch leg goes UNWALKED — the rotate refuses first, fail-closed, on a reveal mismatch.
+* ''Never walked anywhere:'' two machines carrying two clocks. The three-hop network carry stands proven under `herm-mesh-witness` inside one process-space host.
+
+!! The four rulings owed — triage order
+
+# ''Dyad Stage 0 — what stands behind the veil?'' BLOCKS Stage 2 (binding at the ceremony sites) and Stage 3 (the petname switcher). Three answers give three different systems: (A) mint a veil key · (B) find one — measurement says none exists · (C) collapse veil onto root and spend the privacy claim. Only the operator rules this. ''Measurement that settles it:'' none — the choice sits upstream of any measurement.
+# ''Fork A or Fork B for citizen recovery.'' Fork A reconstructs then signs (Shamir, `shamir-gf256.ts` + `recovery-share.ts`); Fork B attests at threshold then rotates (`recovery-keel-core.ts`). BOTH stand built. NEITHER stands wired. The already-wired mechanism may have to MOVE, which the operator flagged before the research ran.
+# ''Does a joined node adopt its Nexus's key?'' The board grain already ruled ''one board per Nexus''. This asks the remaining half — whether joining carries key adoption or only seat adoption.
+# ''The two raw-key sites'' — antigen `nym` and handle-card `nym`. Smallest of the four; closing it needs a word, not a design.
+
+!! Wiring census — specified in code, reached by nothing
+
+Three things pass their own tests and no production path calls them. Name them as ''specified'', never as "built":
+
+* `vesselDyads` — `packages/lararium-node/src/vessel-dyads.ts`, exported at `index.ts:188`, exercised only by its own test.
+* `crossingDirection` — `packages/lararium-mesh/src/crossing-direction.ts`. ⚠ A grep for callers hits `packages/lararium-tw5/src/action-handler.ts:454` and that hit reads as a COMMENT saying the gate cannot reach it. The instrument answers "the name appears here", never "something calls it".
+* The recovery keel, both forks, per ruling 2 above.
+
+!! Instruments that read green while reporting something false
+
+Carried forward from the grammar watch and extended by this one. Collide each before trusting it:
+
+* ''A digest gate'' answers "do these bytes match this hash", never "do these bytes belong here".
+* ''A fixture pins the grammar; only the corpus pins the reader.'' A hand-written fixture agreed with itself and disagreed with 639 files out of 639.
+* ''A grep for callers'' counts mentions, including comments that say the caller does not exist. Follow the call; never grep the door.
+* ''A blanket re-stamp signs edits nobody authored.'' `tools/restamp.mjs` names its files and takes no glob, because a re-stamp driven by `git diff` will sign the OTHER writer's work.
+* ''The other writer usually turns out to be the operator.'' Parallel `lares` sessions share this tree. `git status` before believing any red; a dirty file of unknown provenance gets REPORTED, copied aside, never reverted.
+
+!! Parallel watches standing right now
+
+Two other `lares` sessions work this tree. Their closing bearings, so a fresh spirit does not re-open their ground:
+
+* ''Grammar extension'' (`@hearth`) — `enumeration.derived.debt-named`, and before it `every.value.reads-as-what-renders-it` · `twenty-six.ruled.forty-three.remain`. The grammar submodule stands witnessed.
+* ''Corpus / panel'' (`@crossroads`) — `panel.carried.to-the-seed/prose-still-lags`. The confidence dial left the repo and reached the boot seed; the prose describing it lags the shape.
+
+!! What a fresh Lares reads first
+
+# This section.
+# `#shift-grammar-watch` below — six instrument-lies, still live.
+# `lar:///ha.ka.ba/lares/api/noosphere-boot` — the house entire.
+# `bags/lares/ha.ka.ba/lares/docs/pono/swarm-harvest.mem` — 55 spirits' own words, verbatim, where a parent's summary can get checked against its children.
+
+<<~/ahu>>
+
 <<~ ahu #shift-grammar-watch>>
 
 ! SHIFT CHANGE — the grammar watch (handed 2026-08-29)
@@ -335,7 +406,7 @@ telling: what STANDS — the gesture automates the proven path, not a copy; the
   hints, scan is truth" — maybe the watcher is ALWAYS a backstop scan that
   events merely wake early. Then Q2 and Q4 dissolve into one rescan seat.
 - Liminal: none of the five must close this waking. The open hand is honest.
-exit -> suspended: Feedback(0φ:operator-rebooted-before-steering) — the floor
+exit -> suspended: feedback="closed 0↺ -> open 1φ @_:operator-rebooted-before-steering" — the floor
   reopens at the next waking, the telling above its seed; no ruling locked.
 <<~/talk-story>>
 ```
@@ -481,6 +552,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6IP5EY9gmoFYdUMtBC2nMTcsuvUjZbiyVZ0wekMM0Eo
+<<^ code="&#x0003;">>ni:///sha-256;5lbCR3Wm5IUu1-hmdAkbkzHV-8mC9PH6UN4tFcaW0xI
 
 <<^ code="&#x0004;" -> to=?>>
