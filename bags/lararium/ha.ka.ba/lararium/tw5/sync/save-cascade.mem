@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/sync/save-cascade"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Save Cascade Law
 
@@ -40,7 +40,7 @@ Each tagged child tiddler contributes one rule via its `tw5-filter` and `save-st
 
 <<~/ahu>>
 
-<<~ ahu #skip-system>>
+<<~ ahu #/skip-system>>
 
 ```toml
 ahu-slot      = "#skip-system"
@@ -53,7 +53,7 @@ rationale     = "TW5 $:/ system tiddlers are internal housekeeping — never pro
 
 <<~/ahu>>
 
-<<~ ahu #skip-temp>>
+<<~ ahu #/skip-temp>>
 
 ```toml
 ahu-slot      = "#skip-temp"
@@ -66,7 +66,7 @@ rationale     = "session-local scratch tiddlers — browser-only, not canonical"
 
 <<~/ahu>>
 
-<<~ ahu #sync-draft>>
+<<~ ahu #/sync-draft>>
 
 ```toml
 ahu-slot      = "#sync-draft"
@@ -79,7 +79,7 @@ rationale     = "TW5 edit-draft tiddlers — synced across all devices for this 
 
 <<~/ahu>>
 
-<<~ ahu #direct>>
+<<~ ahu #/direct>>
 
 ```toml
 ahu-slot      = "#direct"
@@ -92,12 +92,12 @@ rationale     = "canonical lar: URI memes — write one LarTiddlerRecord per tid
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;iTNTccLVhICyaYANad8hqSUAKGv2X0S5xXW8mzKc97E
+<<^ code="&#x0003;">>ni:///sha-256;yjlDNzBhk8ZY2Midb0ITwygFHWveILGsJdp2FOclwxc
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heihei"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Heihei
 
@@ -31,7 +31,7 @@ Three principles share only the word "first": `heihei` tests a condition to bran
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the condition — a `<decides>` failable expression on the flow node
 ⏿ orient: heihei branches execution, it does not select content (that is `wai`) and it does not race (that is `holo`)
@@ -41,7 +41,7 @@ Three principles share only the word "first": `heihei` tests a condition to bran
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -55,7 +55,7 @@ The condition is a failure context, not a boolean test: the `then` arm fires whe
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -77,7 +77,7 @@ Verse grounding: `if (Condition): then else: else` (the condition runs in a `<de
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -93,7 +93,7 @@ arm-wire       = "reaction"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -104,6 +104,6 @@ arm-wire       = "reaction"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Pheb2aGnF3ZM8ADTn3LO-N8r5_HSaNhGWR0RGAiBesk
+<<^ code="&#x0003;">>ni:///sha-256;dm5QOo0MNLaM2i-P9AXjL-nhEihEqfDwT_MHjCCkrIU
 
 <<^ code="&#x0004;" -> to=?>>

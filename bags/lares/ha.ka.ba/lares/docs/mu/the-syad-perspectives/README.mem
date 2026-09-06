@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives/README"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Syad Perspectives Shelf
 
@@ -29,7 +29,7 @@ Derivation remains recoverable here.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -55,7 +55,7 @@ The tight invariant now lives at:
 
 <<~/ahu>>
 
-<<~ ahu #rule>>
+<<~ ahu #/rule>>
 
 !! Extracted Rule
 
@@ -65,7 +65,7 @@ The active stance names the `syād` --- the standpoint from which the number rea
 
 <<~/ahu>>
 
-<<~ ahu #stance-array>>
+<<~ ahu #/stance-array>>
 
 !! Stance Array Extraction
 
@@ -87,7 +87,7 @@ Combination reads through simultaneous flags, not omission.
 
 <<~/ahu>>
 
-<<~ ahu #reading-question>>
+<<~ ahu #/reading-question>>
 
 !! Reading Question
 
@@ -100,7 +100,7 @@ The number does not.
 
 <<~/ahu>>
 
-<<~ ahu #spectrum-drift>>
+<<~ ahu #/spectrum-drift>>
 
 !! Spectrum Drift
 
@@ -114,7 +114,7 @@ and it keeps `avaktavya` from collapsing into mere uncertainty.
 
 <<~/ahu>>
 
-<<~ ahu #saptabhangi>>
+<<~ ahu #/saptabhangi>>
 
 !! Saptabhangi Extraction
 
@@ -136,7 +136,7 @@ It names a frame where the true/false axis does not apply cleanly.
 
 <<~/ahu>>
 
-<<~ ahu #multi-stance-boundary>>
+<<~ ahu #/multi-stance-boundary>>
 
 !! Multi-Stance Boundary
 
@@ -150,7 +150,7 @@ not through a collapsed average.
 
 <<~/ahu>>
 
-<<~ ahu #canon-transition>>
+<<~ ahu #/canon-transition>>
 
 !! Canon Transition
 
@@ -163,7 +163,7 @@ The correction closed omission-based live examples.
 
 <<~/ahu>>
 
-<<~ ahu #legacy-notes>>
+<<~ ahu #/legacy-notes>>
 
 !! Legacy Notes
 
@@ -179,7 +179,7 @@ They do not govern the live fold.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -188,6 +188,6 @@ They do not govern the live fold.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JNhmyoomYudDzEHyK2V4V-LI0Pwck7gHmUYp1ZymNow
+<<^ code="&#x0003;">>ni:///sha-256;CwSVoUZQ3m-PFmhnHtJtSfNkv3TwgZU2sP36ME93hP4
 
 <<^ code="&#x0004;" -> to=?>>

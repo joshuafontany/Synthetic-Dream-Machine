@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/boot-gate"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Boot Gate
 
@@ -28,13 +28,13 @@ Runs in `LarariumTW5._bootModules()` after TW5 `instance.boot.boot()` resolves. 
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/boot-gate" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #thresholds>>
+<<~ ahu #/thresholds>>
 
 !! Gate Constants
 
@@ -49,6 +49,6 @@ Plus: `body-sha256` must verify via `SubtleCrypto.digest("SHA-256")`. Gate layer
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UGA2gcucKV1_Fi8bJvfpBmHh7VQqowTKsGu_JDP1vnw
+<<^ code="&#x0003;">>ni:///sha-256;RG367EjtbwqeO-fGP-K8Tyl5mQebyM02NGSRK3kHe2M
 
 <<^ code="&#x0004;" -> to=?>>

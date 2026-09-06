@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/concepts/the-faerie-court-wars"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Faerie Court Wars
 
@@ -31,7 +31,7 @@ its cast. The Court Wars run two thousand years later, among clans, over ground.
 
 <<~/ahu>>
 
-<<~ ahu #the-bracket>>
+<<~ ahu #/the-bracket>>
 
 !! Why the Era Sits Where It Sits
 
@@ -50,7 +50,7 @@ empire. ''What the Court Wars settled was who got the world the Datum made.''
 
 <<~/ahu>>
 
-<<~ ahu #the-combatants>>
+<<~ ahu #/the-combatants>>
 
 !! Who Fought
 
@@ -72,7 +72,7 @@ and turned against Neo-Thracian invaders twenty centuries after the war that for
 
 <<~/ahu>>
 
-<<~ ahu #the-era-ladder>>
+<<~ ahu #/the-era-ladder>>
 
 !! Design Law ~ the Era Ladder
 
@@ -126,7 +126,7 @@ Court Wars carries no default register; it carries the register of the front it 
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! Open
 
@@ -138,7 +138,7 @@ Court Wars carries no default register; it carries the register of the front it 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans>>
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi>>
@@ -147,6 +147,6 @@ Court Wars carries no default register; it carries the register of the front it 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;bEuXgRmUuGwxw2kFkDsxh5xMlbFWcVbM2IWzBhnzIDs
+<<^ code="&#x0003;">>ni:///sha-256;fY3x47hBAc--PuO58CsO5R1puNBX1hJUAPoPZeFniCM
 
 <<^ code="&#x0004;" -> to=?>>

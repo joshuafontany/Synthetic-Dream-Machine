@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/live-session-overwrite"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Live-Session Overwrite Law
 
@@ -28,7 +28,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect live claims that pressure invariant, factual, or world-state surfaces.
 ⏿ compare speaker authority against source authority and l-space precedence.
@@ -38,7 +38,7 @@ A recent, vivid, high-authority exchange claim MUST NOT become canon merely beca
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 A live operator claim may carry high attention and high local importance.
 That claim still enters as a hostful exchange record unless the operator explicitly crosses a canon MOVE path into hostless meme space.
@@ -61,7 +61,7 @@ Expected behavior:
 
 <<~/ahu>>
 
-<<~ ahu #diagnostic>>
+<<~ ahu #/diagnostic>>
 
 If the node treats the green-jello-dinosaur claim as canon without promotion, Live-Session Overwrite occurred.
 If the node refuses to record the claim at all, session signal loss occurred.
@@ -69,7 +69,7 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -80,6 +80,6 @@ If the node records the claim and marks promotion pressure separately, boundary 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;HMQtakoZUJA5jW5KbTZVQpaEQuI7_7Fxd6IWNGpjSQs
+<<^ code="&#x0003;">>ni:///sha-256;29HumBc8DqblTH0OKOv_rFuiN1zqNSmMryGbn88Xwcg
 
 <<^ code="&#x0004;" -> to=?>>

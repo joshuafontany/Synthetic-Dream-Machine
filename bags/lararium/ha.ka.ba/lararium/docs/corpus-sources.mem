@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/docs/corpus-sources"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Corpus Sources — Registry
 
@@ -29,7 +29,7 @@ The recipe layer composes them for any given room or view.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -50,7 +50,7 @@ It hydrates before all other corpora. All other corpora treat it as read-only at
 
 <<~/ahu>>
 
-<<~ ahu #registry>>
+<<~ ahu #/registry>>
 
 !! Registry
 
@@ -116,7 +116,7 @@ note     = "engine self-doc memes for @lararium/node TypeScript symbols"
 
 <<~/ahu>>
 
-<<~ ahu #bag-recipe-topology>>
+<<~ ahu #/bag-recipe-topology>>
 
 !! Bag/Recipe Topology
 
@@ -139,7 +139,7 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddler-record>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec>>
@@ -147,6 +147,6 @@ A FTLS-only table composes: lares + ftls + room.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Q1Syidq1xgI13D6kpy20tnyjQIcwnKyJ-eJ1VZvGnpU
+<<^ code="&#x0003;">>ni:///sha-256;Xld0cIUgD5dn_Zwxq5HBsOQnL3rrH4hFTRUdeT0wTo4
 
 <<^ code="&#x0004;" -> to=?>>

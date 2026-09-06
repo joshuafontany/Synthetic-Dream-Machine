@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/apple-platform-multi-user-pr
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Apple platform multi-user / profile isolation — measured evidence
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 31,659 characters
 
@@ -297,12 +297,12 @@ CVE-2005-2509 (Mac OS X ≤10.4.2, loginwindow, "allows attackers to log into ot
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0jD5FqM_lirmcuBVVUJyIkhkzgJLA8wQpD_30IXlZYw
+<<^ code="&#x0003;">>ni:///sha-256;k8jJrS547H0tF1oq8yMVygRtXsLDwfBPvSQNikoIdSg
 
 <<^ code="&#x0004;" -> to=?>>

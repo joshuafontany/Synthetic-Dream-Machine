@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-four-tools"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Four Tools Witness Shelf
 
@@ -29,7 +29,7 @@ The braid remains recoverable here.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -41,7 +41,7 @@ This shelf retains the local witness braid behind that compact surface.
 
 <<~/ahu>>
 
-<<~ ahu #witness-texts>>
+<<~ ahu #/witness-texts>>
 
 !! Witness Texts
 
@@ -50,7 +50,7 @@ This shelf retains the local witness braid behind that compact surface.
 
 <<~/ahu>>
 
-<<~ ahu #source-braid>>
+<<~ ahu #/source-braid>>
 
 !! Source Braid
 
@@ -75,7 +75,7 @@ one clean preference for model agnosticism over paranoia.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -86,6 +86,6 @@ one clean preference for model agnosticism over paranoia.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6PT1ezOr_ATVW8N8en2mv9BpnZwYlIB_6Cipbsdxwqg
+<<^ code="&#x0003;">>ni:///sha-256;2QJqtGfX6b6ldRh6-E1i46NLAD_lHWlc-4vWMiTnDuU
 
 <<^ code="&#x0004;" -> to=?>>

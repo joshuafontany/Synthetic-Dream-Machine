@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/circles-kowloon"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #core-inversion>>
+<<~ ahu #/core-inversion>>
 
 ! Circles — Kowloon Reference Model
 
@@ -35,7 +35,7 @@ This is social graph inversion: on centralized platforms, following creates a pu
 
 <<~/ahu>>
 
-<<~ ahu #circle-data-model>>
+<<~ ahu #/circle-data-model>>
 
 !! Circle Data Model (Kowloon schema)
 
@@ -59,7 +59,7 @@ Key: members are ''embedded snapshots'' (full actor profile + `lastFetchedAt`), 
 
 <<~/ahu>>
 
-<<~ ahu #circle-types>>
+<<~ ahu #/circle-types>>
 
 !! Circle Types
 
@@ -77,7 +77,7 @@ Key: members are ''embedded snapshots'' (full actor profile + `lastFetchedAt`), 
 
 <<~/ahu>>
 
-<<~ ahu #addressing-hierarchy>>
+<<~ ahu #/addressing-hierarchy>>
 
 !! Addressing Hierarchy
 
@@ -97,7 +97,7 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 <<~/ahu>>
 
-<<~ ahu #lararium-mapping>>
+<<~ ahu #/lararium-mapping>>
 
 !! Lararium Mapping
 
@@ -128,7 +128,7 @@ Enforced at handler level (`ActivityParser/handlers/Add/index.js`): rejects if `
 
 <<~/ahu>>
 
-<<~ ahu #system-circles>>
+<<~ ahu #/system-circles>>
 
 !! System Circles to Auto-Seed
 
@@ -148,7 +148,7 @@ At `seedCirclesDoc()` time — once per FACE, into that face's own `@circles-<ta
 
 <<~/ahu>>
 
-<<~ ahu #the-same-law-twice>>
+<<~ ahu #/the-same-law-twice>>
 
 !! ★ The non-federating relation ~ one law, found twice, at two layers ★
 
@@ -170,7 +170,7 @@ The question //how far up does the inversion scale?// has a mechanical answer he
 
 <<~/ahu>>
 
-<<~ ahu #not-adopted>>
+<<~ ahu #/not-adopted>>
 
 !! What Lararium Does NOT Adopt from Kowloon
 
@@ -181,7 +181,7 @@ The question //how far up does the inversion scale?// has a mechanical answer he
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -191,6 +191,6 @@ The question //how far up does the inversion scale?// has a mechanical answer he
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UoGPxU1L55eVTcDJV3T2BubJyVB8uqYwpw1UiSj9hfk
+<<^ code="&#x0003;">>ni:///sha-256;rzddWtENSEp1xXjlIZPI4frO-0ydr-I6qvHmfgqpZ5c
 
 <<^ code="&#x0004;" -> to=?>>

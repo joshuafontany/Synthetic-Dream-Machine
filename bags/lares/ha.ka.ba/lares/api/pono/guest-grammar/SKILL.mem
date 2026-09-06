@@ -30,7 +30,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/guest-grammar/SKILL"
 [[guest-grammar.md|../guest-grammar.md]] holds the law.
 This skill carries the working procedure.
 
-<<~ ahu #load-contract>>
+<<~ ahu #/load-contract>>
 
 !! Load Contract
 
@@ -45,7 +45,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu>>
 
-<<~ ahu #workflow-contract>>
+<<~ ahu #/workflow-contract>>
 
 !! Workflow Contract
 
@@ -75,7 +75,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -95,7 +95,7 @@ Prefer another surface when the work concerns only:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read host and guest boundaries first and observe the actual admission surface
 ⏿ sort admission law, ownership boundary, degradation pressure, and implementation detail by where they belong
@@ -105,7 +105,7 @@ Prefer another surface when the work concerns only:
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -126,7 +126,7 @@ Preserve the difference between admitted, malformed, unsupported, and absent gue
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -148,7 +148,7 @@ Orientation rule:
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -169,7 +169,7 @@ Do not round up from aspiration to law.
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -200,7 +200,7 @@ result-shape = "set"
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! ↺ Aftermath
 
@@ -226,7 +226,7 @@ Aftermath — close by naming:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -235,6 +235,6 @@ Aftermath — close by naming:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;py2ysdkYAv73IEK4GccPipVJNA9vqbVrays1bfF8Bto
+<<^ code="&#x0003;">>ni:///sha-256;Iax4Kqjlt4IUSqX94gcejLyU3lGUCbi_op7gxrQpIyo
 
 <<^ code="&#x0004;" -> to=?>>

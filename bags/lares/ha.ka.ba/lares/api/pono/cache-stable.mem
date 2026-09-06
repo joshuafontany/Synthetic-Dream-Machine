@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/cache-stable"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Cache-Stable Meme Law (Kānāwai)
 
@@ -44,7 +44,7 @@ loulou links bind cache-stable -> documentation.
 
 <<~/ahu>>
 
-<<~ ahu #cache-stable-law>>
+<<~ ahu #/cache-stable-law>>
 
 A pressure-template for cache-stable-compliant memes, which Binds <<~ loulou #ooda-ha>> OODA-HA <<~/loulou>> pressure into meme-generation law.
 
@@ -66,7 +66,7 @@ Shape and pressure teachings MUST stay cache-stable.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 A template for cache-stable memes to fill.
 
@@ -90,7 +90,7 @@ Cache-Stable-compliant memes MUST fill the OODA-HA phase line with their own pre
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -98,6 +98,6 @@ Cache-Stable-compliant memes MUST fill the OODA-HA phase line with their own pre
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;oEp9ntbWM4yBR1gq-aT4eyYsLbiJ7p046DosLHuZnrE
+<<^ code="&#x0003;">>ni:///sha-256;Iqiuk3N-ApIqub3gZeuebyCSM8SLbeOoBgcJ2Zknoik
 
 <<^ code="&#x0004;" -> to=?>>

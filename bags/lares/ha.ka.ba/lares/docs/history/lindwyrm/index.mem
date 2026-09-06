@@ -16,7 +16,7 @@ uri-path   = "ha.ka.ba/lares/docs/history/lindwyrm/index"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lindwyrm — Story Arc Index
 
@@ -26,7 +26,7 @@ The arc seals at Act VII, the hoard disclosed. The work that follows — the Lar
 
 <<~/ahu>>
 
-<<~ ahu #architecture>>
+<<~ ahu #/architecture>>
 
 !! Architecture & Structure
 
@@ -38,7 +38,7 @@ The arc seals at Act VII, the hoard disclosed. The work that follows — the Lar
 
 <<~/ahu>>
 
-<<~ ahu #acts>>
+<<~ ahu #/acts>>
 
 !! Narrative Loci (Act Order)
 
@@ -53,7 +53,7 @@ Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle 
 
 <<~/ahu>>
 
-<<~ ahu #standalone>>
+<<~ ahu #/standalone>>
 
 !! Standalone Loci
 
@@ -64,6 +64,6 @@ Acts I, II, VI, and VII stand here as discrete narrative loci. The arc's middle 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xSo6Tzci4hZ2swR6Xg7L6fX43lAjj1rDEq2911Sfi8k
+<<^ code="&#x0003;">>ni:///sha-256;vItH3f7jcnQ2Cmx8K5VAECKPBGvfITpbdnG9Y1Bluwc
 
 <<^ code="&#x0004;" -> to=?>>

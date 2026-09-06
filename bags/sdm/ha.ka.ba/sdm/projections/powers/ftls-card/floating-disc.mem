@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/floating-disc"
 
 ! Floating Disc — FTLS Card
 
-<<~ ahu #card>>
+<<~ ahu #/card>>
 
 !! Floating Disc
 //Mage's Mule, Shield of the Righteous//
@@ -30,7 +30,7 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<~/ahu>>
 
-<<~ ahu #overcharge>>
+<<~ ahu #/overcharge>>
 
 !! Overcharge
 
@@ -39,7 +39,7 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<~/ahu>>
 
-<<~ ahu #components>>
+<<~ ahu #/components>>
 
 !! Components
 
@@ -47,7 +47,7 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -57,6 +57,6 @@ A concave disc of stuckforce, 1m across, hovering at waist height. It bears a lo
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ENR1-OifFjAjq9YO_3bUXiwPZzjGm-Vm6lfHz5BH0BI
+<<^ code="&#x0003;">>ni:///sha-256;8H7NN4ABprFMHCP4yEznBVigD_5hV5GTp_RMG28Ame4
 
 <<^ code="&#x0004;" -> to=?>>

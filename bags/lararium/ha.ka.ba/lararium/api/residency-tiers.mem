@@ -26,7 +26,7 @@ uri-path      = "ha.ka.ba/lararium/api/residency-tiers"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 ! Residency Tiers — One Island-Owned Thermal Model
 
@@ -47,7 +47,7 @@ Bag residency lives in the Island Pool concepts (operator ruling): one manager -
 
 <<~/ahu>>
 
-<<~ ahu #thermal-axis>>
+<<~ ahu #/thermal-axis>>
 
 !! Temperature axis — wela / anu
 
@@ -60,7 +60,7 @@ Two states. An island is live (`wela`) or torn down (`anu`); a bag's handle is h
 
 <<~/ahu>>
 
-<<~ ahu #pin-flag>>
+<<~ ahu #/pin-flag>>
 
 !! Pin — the orthogonal sticky flag
 
@@ -76,7 +76,7 @@ Operator pin/unpin gestures move the flag; they do not carry a Hawaiian transiti
 
 <<~/ahu>>
 
-<<~ ahu #derived-bag-residency>>
+<<~ ahu #/derived-bag-residency>>
 
 !! Derived bag residency — the collapse
 
@@ -99,7 +99,7 @@ Two disciplines survive the collapse as bag-level mechanism (now driven by the p
 
 <<~/ahu>>
 
-<<~ ahu #transition-verbs>>
+<<~ ahu #/transition-verbs>>
 
 !! Transition verbs — Hawaiian
 
@@ -114,7 +114,7 @@ Pin/unpin gestures carry no verb name (the state change describes itself). `hoʻ
 
 <<~/ahu>>
 
-<<~ ahu #third-tier-gate>>
+<<~ ahu #/third-tier-gate>>
 
 !! Third tier — the gate
 
@@ -122,7 +122,7 @@ The model holds two tiers (`wela` live / `anu` torn down). A third (warm / froze
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -145,6 +145,6 @@ through #third-tier-gate, and only after the research that meme charges.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Tu6_nZ9iABVqsPNrO5C38IxE-MuyclAZ2QQNvC_VIEA
+<<^ code="&#x0003;">>ni:///sha-256;pB72OvF-Zsc0u234Hdew9dseJ2bCatN58AeZAU0QY1Y
 
 <<^ code="&#x0004;" -> to=?>>

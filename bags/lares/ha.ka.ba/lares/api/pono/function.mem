@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/function"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! \function
 
@@ -30,7 +30,7 @@ the current vocabulary. `lar-kind: pragma-alias` — the sigil serves as the dec
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -44,7 +44,7 @@ return wikitext. Do not use interchangeably.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -61,7 +61,7 @@ TW5 native equivalent:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -69,6 +69,6 @@ TW5 native equivalent:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;gLi4oRHBgZMDYFuOLr4ld6K5SLGyko3EUHyIecVRWSA
+<<^ code="&#x0003;">>ni:///sha-256;gsmUMV94004IgjKM8OeoulJKpPwet0PnXs-bRUUw7MU
 
 <<^ code="&#x0004;" -> to=?>>

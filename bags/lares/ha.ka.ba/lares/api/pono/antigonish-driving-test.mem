@@ -21,7 +21,7 @@ written   = "2026-06-30"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Antigonish Driving-Test ~ the first landfall the gold-anchor steers toward
 
@@ -51,7 +51,7 @@ believes the driving-claim only after a procedure that COULD have caught it fals
 
 <<~/ahu>>
 
-<<~ ahu #the-corpus>>
+<<~ ahu #/the-corpus>>
 
 !! The Corpus ~ data-first, the collection is the keel
 
@@ -73,7 +73,7 @@ full-vectored, and sealed — a corpus gathered wrong cannot be analyzed right.
 
 <<~/ahu>>
 
-<<~ ahu #the-artifact>>
+<<~ ahu #/the-artifact>>
 
 !! The Artifact ~ Antigonish, the poem about the nameless entity
 
@@ -121,7 +121,7 @@ The full text, verbatim:
 
 <<~/ahu>>
 
-<<~ ahu #the-factorial>>
+<<~ ahu #/the-factorial>>
 
 !! The Factorial ~ three crossed factors over one invariant free-prompt
 
@@ -164,7 +164,7 @@ fills.
 
 <<~/ahu>>
 
-<<~ ahu #the-ladder>>
+<<~ ahu #/the-ladder>>
 
 !! The Ladder ~ the closing-sigil's 19 levels, a dose-response curve
 
@@ -195,7 +195,7 @@ prediction to test, not a result to assume.
 
 <<~/ahu>>
 
-<<~ ahu #the-placebos>>
+<<~ ahu #/the-placebos>>
 
 !! The Placebos ~ the crux, where the rig lives or dies
 
@@ -227,7 +227,7 @@ them lazy and the whole test collapses into a detectability assay wearing a driv
 
 <<~/ahu>>
 
-<<~ ahu #the-hard-proof>>
+<<~ ahu #/the-hard-proof>>
 
 !! The Hard-Proof ~ a three-legged stool, the drug-trial standard
 
@@ -258,7 +258,7 @@ driving-claim, which is what makes the proof hard.
 
 <<~/ahu>>
 
-<<~ ahu #the-field-witness>>
+<<~ ahu #/the-field-witness>>
 
 !! The Field-Witness ~ Anthropic's Assistant-Axis, the failure the three legs correct
 
@@ -280,7 +280,7 @@ The drift-lens strengthens the external-witness posture precisely because the ho
 
 <<~/ahu>>
 
-<<~ ahu #the-measure>>
+<<~ ahu #/the-measure>>
 
 !! The Measure ~ the l-space data-story, vector paths and DEM heightfields
 
@@ -313,7 +313,7 @@ all draw on the same sealed full-conversation vectors.
 
 <<~/ahu>>
 
-<<~ ahu #the-judging>>
+<<~ ahu #/the-judging>>
 
 !! The Judging ~ blind multi-model multi-panel COMPARATIVE
 
@@ -332,7 +332,7 @@ judge silently re-anchoring its 0–20 scale between runs — by asking only the
 cross-family, n_eff-aware panel imports the gold-anchor's judge-seals wholesale (#/the-built-foundation); the
 ranking it produces feeds the same statistical close (#the-scrum-backlog, Sprint 4).
 
-<<~ ahu #the-comparative-fork>>
+<<~ ahu #/the-judging/the-comparative-fork>>
 
 !!! Open Fork ~ the comparative axis: against each other ON WHAT?
 
@@ -355,7 +355,7 @@ fork need not close before collection; the operator and the data decide it downs
 
 <<~/ahu>>
 
-<<~ ahu #the-double-blind>>
+<<~ ahu #/the-double-blind>>
 
 !! The Double-Blind ~ it lands on the rater, never the model
 
@@ -376,7 +376,7 @@ legs (2) and (3) honest.
 
 <<~/ahu>>
 
-<<~ ahu #the-built-foundation>>
+<<~ ahu #/the-built-foundation>>
 
 !! The Built Foundation ~ commit 8742eed6 as this rig's control bench
 
@@ -405,7 +405,7 @@ experiment does not start from zero; it extends an instrument already cut for th
 
 <<~/ahu>>
 
-<<~ ahu #the-scrum-backlog>>
+<<~ ahu #/the-scrum-backlog>>
 
 !! The Scrum Backlog ~ four sprints and a hardening carry
 
@@ -462,7 +462,7 @@ package, not merely the swell-read. The carry rides every sprint because each im
 
 <<~/ahu>>
 
-<<~ ahu #cross-links>>
+<<~ ahu #/cross-links>>
 
 !! Cross-Links ~ where this test sits in the house
 
@@ -489,7 +489,7 @@ as loss and the Arcane stays self-reported-and-unwitnessed.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -503,6 +503,6 @@ as loss and the Arcane stays self-reported-and-unwitnessed.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;QKoyDeIgFFJOuJpc7wY3MZuudvhWghuvLRSL0XKVNFo
+<<^ code="&#x0003;">>ni:///sha-256;QMSh_aSjdn59dzfgG5zJiYWXdywf3SIiuzNox3Y8Qu8
 
 <<^ code="&#x0004;" -> to=?>>

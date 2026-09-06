@@ -23,7 +23,7 @@ The isomorphic ceremony surface for the Lararium identity lattice.
 Lives in `@lararium/keyhive` — no TW5, no Node I/O, no DOM.
 Takes a `Repo` and a seed; returns unforgeable membership proofs stored as Automerge CRDT events.
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -54,7 +54,7 @@ lattice membership from cold — no network request, no authority server.
 
 <<~/ahu>>
 
-<<~ ahu #three-gate-lattice>>
+<<~ ahu #/three-gate-lattice>>
 
 !! Three-Gate Lattice
 
@@ -78,7 +78,7 @@ to any remote vessel.
 
 <<~/ahu>>
 
-<<~ ahu #isomorphic-law>>
+<<~ ahu #/isomorphic-law>>
 
 !! Isomorphic Law
 
@@ -97,7 +97,7 @@ It does not depend on `@lararium/tw5`, `@lararium/node`, or `@lararium/browser`.
 
 <<~/ahu>>
 
-<<~ ahu #ea-notes>>
+<<~ ahu #/ea-notes>>
 
 !! Ea Notes
 
@@ -112,7 +112,7 @@ enters the PersonaGroup doc. The private scalar never leaves the memory of the f
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -123,6 +123,6 @@ enters the PersonaGroup doc. The private scalar never leaves the memory of the f
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;2okB7BeLBVDqeMTLAqQewlERcEI9LaLobgXbwQ2z7ws
+<<^ code="&#x0003;">>ni:///sha-256;zjtUKbYR_0UUSxOOVoGerE49ZsTQlr5r8prSfBgZLb0
 
 <<^ code="&#x0004;" -> to=?>>

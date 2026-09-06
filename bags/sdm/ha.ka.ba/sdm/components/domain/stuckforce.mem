@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/domain/stuckforce"
 
 ! Stuckforce
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ The SDM domain of applied force that grips, lifts, and holds — telekinetic hov
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Orients a module toward ''moving or holding mass without contact''. It carries w
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Pairs with `function/cargo` (haul a load) and `function/barrier` (hold a wall of
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aDaoHhArfL_7CcTpZiAuSNdyrnvw-7Lmc0RBX5-Qmuk
+<<^ code="&#x0003;">>ni:///sha-256;AM8EZrAnuOVaSB2uwAaXKlf_GR5OBqfSriswqhKWHbA
 
 <<^ code="&#x0004;" -> to=?>>

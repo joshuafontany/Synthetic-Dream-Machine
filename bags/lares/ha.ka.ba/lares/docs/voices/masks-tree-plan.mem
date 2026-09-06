@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices/masks-tree-plan"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Masks API Tree — Build Plan
 
@@ -29,7 +29,7 @@ skeleton meme-loci ready for talk-story-dev fill passes.
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -70,7 +70,7 @@ packages/lares-core/memes/api/lares/masks/
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -111,7 +111,7 @@ Every file in this tree should be a valid meme immediately — correctly address
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -177,7 +177,7 @@ The repeatable skeleton pattern for all nine files:
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -219,7 +219,7 @@ Priority order for filling stubs via talk-story-dev:
 
 <<~/ahu>>
 
-<<~ ahu #assess>>
+<<~ ahu #/assess>>
 
 !! ↺ Assess
 
@@ -251,7 +251,7 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -262,6 +262,6 @@ The tree deepens incrementally — each talk-story session fills one section of 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yE8MCxzadjLKtyRbjanYla1yUXFf8S99uIi9-Da8o-I
+<<^ code="&#x0003;">>ni:///sha-256;rnwfcny6Xh_W-5HyUmjkirYvG4BAYDD4uukMluDU4i4
 
 <<^ code="&#x0004;" -> to=?>>

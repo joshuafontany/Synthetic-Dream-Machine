@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-poster-pro
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lady Aki ~ Poster Sheet Prompt
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Lady Aki — Poster-Sized Landscape Concept Sheet Prompt v1
 
@@ -52,6 +52,6 @@ No spider legs on Ichi. No tall ritual hat. No generic witch hat. No polished fi
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;HoLe0EStS2smf8Jr8OS2et7tt77bfhYJqFJK2f37qAk
+<<^ code="&#x0003;">>ni:///sha-256;ZpKvyyfsP0QrOoBVV06gK-3_oYpGmbDxMUHcoaF8Vaw
 
 <<^ code="&#x0004;" -> to=?>>

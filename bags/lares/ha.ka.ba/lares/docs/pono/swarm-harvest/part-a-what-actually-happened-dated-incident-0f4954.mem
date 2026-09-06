@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-what-actually-happene
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! PART A — WHAT ACTUALLY HAPPENED (dated incidents)
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 29,657 characters
 
@@ -199,12 +199,12 @@ Tooling note: `WebSearch` was exhausted and Brave/DDG returned 429/CAPTCHA to We
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xlESs6JQq3lySt7NYGEgsYXlYgZ69WA8KChTARG6Xh8
+<<^ code="&#x0003;">>ni:///sha-256;MG9vUIXGRG0PysHch5TIqOOTDlrp3MAI67wmBI9BbiI
 
 <<^ code="&#x0004;" -> to=?>>

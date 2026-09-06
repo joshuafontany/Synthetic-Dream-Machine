@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Pono Docs
 
@@ -28,7 +28,7 @@ This shelf holds explanatory protocol docs, migration notes, and operator-facing
 
 <<~/ahu>>
 
-<<~ ahu #tree>>
+<<~ ahu #/tree>>
 
 !! Tree
 
@@ -41,7 +41,7 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -51,6 +51,6 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Znz7dGamGC2lZ94PHDitHsgHiRom5gHDTDrnfs25iKk
+<<^ code="&#x0003;">>ni:///sha-256;QVjO8_72zQpOq1DnPyICULuqZU-wxVzZJNHsJsR5gdU
 
 <<^ code="&#x0004;" -> to=?>>

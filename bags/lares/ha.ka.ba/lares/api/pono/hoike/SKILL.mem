@@ -29,7 +29,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike/SKILL"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #practice>>
+<<~ ahu #/practice>>
 
 ! hoike — keep the losers (practice)
 
@@ -47,7 +47,7 @@ Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/lares/api/pono/hoike>>
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Worked Examples — show, don't tell
 
@@ -110,6 +110,6 @@ Read the three together and the grammar teaches itself: dissent gets a name and 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4ihc4vm2-_QANpUfOhRY2SDjzYel2vEtrUq-oOpL7Pc
+<<^ code="&#x0003;">>ni:///sha-256;7nEB__0nhHAoqaPlX20dJetNe4d45-pWlwP1IBH1Bcs
 
 <<^ code="&#x0004;" -> to=?>>

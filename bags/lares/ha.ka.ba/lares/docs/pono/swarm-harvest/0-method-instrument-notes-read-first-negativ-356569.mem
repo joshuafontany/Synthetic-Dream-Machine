@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-instrument-notes-re
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 0. Method / instrument notes (read first — negative results)
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 45,818 characters
 
@@ -399,12 +399,12 @@ And one asymmetry worth naming: **the age attribute is the only lever, and on ev
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;q7ZKxsCD_orzZ7nKT_-hVGtEx4XmlOwbDxLdLBjbklY
+<<^ code="&#x0003;">>ni:///sha-256;pwaMGUV83MCYwcdT5bN-Om-5mKRXAfNAcEJ9X0i6Eqg
 
 <<^ code="&#x0004;" -> to=?>>

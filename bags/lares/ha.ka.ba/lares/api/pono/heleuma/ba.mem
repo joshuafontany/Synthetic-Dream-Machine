@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ba"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Heleuma-Ba (Psyche / Path)
 
@@ -27,7 +27,7 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ locate the artifact; confirm it has no standalone extractable symbol and no corpus promotion path.
 ⏿ orient: is this purely documentation of what exists outside, with no runtime injection route? If yes, this is ba.
@@ -37,7 +37,7 @@ A heleuma-ba anchor marks a path through the graph for something that exists out
 
 <<~/ahu>>
 
-<<~ ahu #required-fields>>
+<<~ ahu #/required-fields>>
 
 !! Required Fields (SHALL)
 
@@ -55,10 +55,10 @@ It SHALL NOT declare `body-sha256` without `source-symbol`.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NrfWG0U59Y4f7S1d1N_hk4c2A9uRln1LYfSjCyWUsXo
+<<^ code="&#x0003;">>ni:///sha-256;XawiyeJKrAB4EI6Xoc_NcA5Q7_4MYbAVb5qhtz2F8rw
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/dangerous"
 
 ! Dangerous
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ A canonical risk hook: the Power forces a ''Danger Roll'' on activation regardle
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ A canonical risk hook: the Power forces a ''Danger Roll'' on activation regardle
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Composes with any domain or function. ''Vertical-vs-flat pressure lives here:'' 
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Composes with any domain or function. ''Vertical-vs-flat pressure lives here:'' 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Composes with any domain or function. ''Vertical-vs-flat pressure lives here:'' 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Composes with any domain or function. ''Vertical-vs-flat pressure lives here:'' 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;y5AwUGo46RULoq7LCxz55t2bhqRGzNsO_sQKf5OXCus
+<<^ code="&#x0003;">>ni:///sha-256;3BgvXVbKjxxO9j3xmCFet8MVrDoTDy79O6Kh7hoapYA
 
 <<^ code="&#x0004;" -> to=?>>

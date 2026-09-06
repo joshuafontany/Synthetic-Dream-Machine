@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/sdm/templates/region-worksheet"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Region Worksheet ~ the practice, held as a spine
 
@@ -39,7 +39,7 @@ neo-thracia (referee bag).
 
 <<~/ahu>>
 
-<<~ ahu #the-scale-ladder>>
+<<~ ahu #/the-scale-ladder>>
 
 !! The Scale Ladder //(Provisional — pace claim flagged below)//
 
@@ -60,7 +60,7 @@ table play.
 
 <<~/ahu>>
 
-<<~ ahu #the-three-map-kinds>>
+<<~ ahu #/the-three-map-kinds>>
 
 !! Three Map-Kinds
 
@@ -74,7 +74,7 @@ table play.
 
 <<~/ahu>>
 
-<<~ ahu #the-travel-loop>>
+<<~ ahu #/the-travel-loop>>
 
 !! The Travel Loop ~ on-route and off
 
@@ -94,7 +94,7 @@ neighbors; feeds the encounter stack and the ambient tables).
 
 <<~/ahu>>
 
-<<~ ahu #walk>>
+<<~ ahu #/walk>>
 
 !! The Walk ~ planned verbatim slots
 
@@ -112,7 +112,7 @@ grain, blessed before moving:
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source ~ verbatim staging
 
@@ -120,7 +120,7 @@ grain, blessed before moving:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
 <<~ loulou lar:///ha.ka.ba/elyncia/nexuses/illyria/region-worksheet>>
@@ -128,6 +128,6 @@ grain, blessed before moving:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;IDyrEEZTB2oF3mHfevvmulVx2-nlHreFd3kvL_LCtp0
+<<^ code="&#x0003;">>ni:///sha-256;0RkfKE1CXAiEgsy18LhBJ64UsoRz3X10j5C5wcuyL4U
 
 <<^ code="&#x0004;" -> to=?>>

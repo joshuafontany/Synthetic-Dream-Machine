@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The swarm harvest
 
@@ -33,7 +33,7 @@ Four research waves went out and ran three levels deep. ''55 spirits wrote somet
 
 <<~/ahu>>
 
-<<~ ahu #the-roll>>
+<<~ ahu #/the-roll>>
 
 !! What stands
 
@@ -98,7 +98,7 @@ Four research waves went out and ran three levels deep. ''55 spirits wrote somet
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout>>
@@ -106,6 +106,6 @@ Four research waves went out and ran three levels deep. ''55 spirits wrote somet
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;AwbTnOuoysu45LTLN5Biu-sOgXol4I7-799m-LNuh5I
+<<^ code="&#x0003;">>ni:///sha-256;eFdPmjwO9i7VcWKs74-gLSSh8wdinMIyAm6R2Xzk3b4
 
 <<^ code="&#x0004;" -> to=?>>

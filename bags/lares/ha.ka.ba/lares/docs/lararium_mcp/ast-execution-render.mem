@@ -17,7 +17,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: the design stack separates identity, AST, execution, render, and inspection planes.
 ⏿ orient: TiddlyWiki grammar can inform guest syntax without taking over carrier law.
@@ -27,7 +27,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/ast-execution-render"
 
 <<~/ahu>>
 
-<<~ ahu #stack>>
+<<~ ahu #/stack>>
 
 !! Four-Layer Stack
 
@@ -43,7 +43,7 @@ Identity sits above the AST; carriers must validate before syntax lowers.
 
 <<~/ahu>>
 
-<<~ ahu #scope-phase-resolution>>
+<<~ ahu #/scope-phase-resolution>>
 
 !! TW5 ↔ Verse Type Tension — Resolution
 
@@ -69,7 +69,7 @@ TW5's string-typed store (`Record<string,string>`) and Verse's strong types reso
 
 <<~/ahu>>
 
-<<~ ahu #ast-node-schema>>
+<<~ ahu #/ast-node-schema>>
 
 !! AST Node Schema
 
@@ -90,7 +90,7 @@ Span annotation remains mandatory for source-derived nodes and optional only for
 
 <<~/ahu>>
 
-<<~ ahu #primitive-map>>
+<<~ ahu #/primitive-map>>
 
 !! Primitive-to-Node Map
 
@@ -108,7 +108,7 @@ Span annotation remains mandatory for source-derived nodes and optional only for
 
 <<~/ahu>>
 
-<<~ ahu #tiddlywiki-boundary>>
+<<~ ahu #/tiddlywiki-boundary>>
 
 !! TiddlyWiki Filter Boundary
 
@@ -134,7 +134,7 @@ Excluded from v1:
 
 <<~/ahu>>
 
-<<~ ahu #pranala-planes>>
+<<~ ahu #/pranala-planes>>
 
 !! Pranala Graph-Plane Alignment
 
@@ -153,7 +153,7 @@ Every family remains acyclic, except symmetric relation pairs may appear as two 
 
 <<~/ahu>>
 
-<<~ ahu #execution-graph>>
+<<~ ahu #/execution-graph>>
 
 !! Execution Graph Contract
 
@@ -177,7 +177,7 @@ Owned hierarchy follows control edges; parents resolve before owned children, an
 
 <<~/ahu>>
 
-<<~ ahu #render-projection>>
+<<~ ahu #/render-projection>>
 
 !! Render Projection Contract
 
@@ -195,7 +195,7 @@ The v1 posture stays read-only; write-back to tldraw, Kowloon, or DOM remains bl
 
 <<~/ahu>>
 
-<<~ ahu #mcp-exposure>>
+<<~ ahu #/mcp-exposure>>
 
 !! MCP Exposure Targets
 
@@ -210,7 +210,7 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 
 <<~/ahu>>
 
-<<~ ahu #residue>>
+<<~ ahu #/residue>>
 
 !! Residue
 
@@ -221,7 +221,7 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -232,6 +232,6 @@ These remain planned surfaces; current server focuses on carrier resources, inde
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-d6zVGhmeu55IWWGdVpV6ERj74-N5BHIsrnqPR6PWlM
+<<^ code="&#x0003;">>ni:///sha-256;M9MUif-MhGGZkR2bNODW4h360FzOEjExbB-FfUvV_ME
 
 <<^ code="&#x0004;" -> to=?>>

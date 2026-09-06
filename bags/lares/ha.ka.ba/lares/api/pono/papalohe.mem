@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/papalohe"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Papalohe
 
@@ -31,7 +31,7 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the source event declaration at the wire mouth — notice listenable name and optional subscribable
 ⏿ orient the edge: family:reaction, renderMode:papalohe; bind listenable label at source end
@@ -41,7 +41,7 @@ UEFN device graph analogue: `DeviceA.EventX -> DeviceB.FunctionY`.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -57,7 +57,7 @@ A papalohe MUST NOT carry `traversal:both`; reciprocal wires MUST use two parall
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -78,7 +78,7 @@ Groups: `[full, #slot?, FROM, TO, listenable?, subscribable?]`
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -107,7 +107,7 @@ canonical-roles = ["listenable", "subscribable", "observes", "throttles", "debou
 
 <<~/ahu>>
 
-<<~ ahu #binding-source>>
+<<~ ahu #/binding-source>>
 
 !! Binding Source — `ReactionBinding.source`
 
@@ -123,7 +123,7 @@ Two values, distinct Verse-side origins:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -131,6 +131,6 @@ Two values, distinct Verse-side origins:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;5XvYFRL7SwFDVAJwMyuK0yMiTEQ_fT_iHp38TBJ51eE
+<<^ code="&#x0003;">>ni:///sha-256;8w1oiM0AXzU05K6a3N7Tni2CGmK8vAuI3K86HVTXWqY
 
 <<^ code="&#x0004;" -> to=?>>

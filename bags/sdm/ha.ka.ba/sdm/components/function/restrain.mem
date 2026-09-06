@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/restrain"
 
 ! Restrain
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ The function of ''seizing and holding'' — grapple, constrict, pin, immobilise.
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Orients a module toward ''taking and keeping hold of a creature or object agains
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -63,7 +63,7 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ Carries `hook/attack` (the grip resolves against Defense). Pairs with `domain/st
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;eqeWwNVGicuIVGxxMb2l2QANCN08NA_5UmZ-H2sMn2o
+<<^ code="&#x0003;">>ni:///sha-256;wvF6qdXm2_OS7rFt4LneKkPTTji5IaqeD4xzEalrcwQ
 
 <<^ code="&#x0004;" -> to=?>>

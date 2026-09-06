@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-iroh-n0-number-zero-n0-inc
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. IROH / n0 (number zero, "n0, inc.") — THE CENTRAL CASE
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 30,564 characters
 
@@ -285,12 +285,12 @@ So the honest range: **$34/mo (non-archiving, 2-hour window) → ~$152/mo (archi
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;gk2e7qK1oeBCxlgHYK2Tathx8wCN4bXYdIhPS9szJho
+<<^ code="&#x0003;">>ni:///sha-256;9whfOKIz_jNi9o3uQiNpXOh-FqC49qe25OPBpiewoeQ
 
 <<^ code="&#x0004;" -> to=?>>

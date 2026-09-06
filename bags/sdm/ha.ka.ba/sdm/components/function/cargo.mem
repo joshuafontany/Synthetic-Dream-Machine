@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/cargo"
 
 ! Cargo
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ Carrying, hauling, or bearing a load — the function of Floating Disc and kin.
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Establishes a bearing surface or grip that holds weight up to a capacity tied to
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Pairs with `domain/stuckforce` (the force that lifts) and often `hook/sustained`
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xHo3JJ_A020tYmCZQzG84KTj1DY_qDFQSWgG2_x78Ns
+<<^ code="&#x0003;">>ni:///sha-256;an_-Htkf4YCQcKX_FC-E-jveN7gYiJ5OVa5DCPM1NCE
 
 <<^ code="&#x0004;" -> to=?>>

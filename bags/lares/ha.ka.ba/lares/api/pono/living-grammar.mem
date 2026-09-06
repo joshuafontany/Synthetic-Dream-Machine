@@ -22,7 +22,7 @@ written           = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Living-Grammar Pattern-Integrity
 
@@ -41,7 +41,7 @@ substrate separately. Naming the wave IS the contribution.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read which substrate the work sits in (architecture · ritual · craft · pedagogy · language · prompt); gather whether a grammar-seed already exists.
 ⏿ orient the four signature parts against the case: is there a kernel? does enactment sit situated? does correction grade or gate? does the form decay untended?
@@ -51,7 +51,7 @@ substrate separately. Naming the wave IS the contribution.
 
 <<~/ahu>>
 
-<<~ ahu #signature>>
+<<~ ahu #/signature>>
 
 !! The Four-Part Cross-Substrate Signature
 
@@ -70,7 +70,7 @@ either never wakes or quietly dies:
 
 <<~/ahu>>
 
-<<~ ahu #seven-substrates>>
+<<~ ahu #/seven-substrates>>
 
 !! Seven Substrates ~ the same wave, seven waters
 
@@ -91,7 +91,7 @@ contribution.
 
 <<~/ahu>>
 
-<<~ ahu #sustain>>
+<<~ ahu #/sustain>>
 
 !! The Sustain-Mechanism ~ re-hydrate the seed each context
 
@@ -110,7 +110,7 @@ DECAY-WITHOUT-TENDING.
 
 <<~/ahu>>
 
-<<~ ahu #involution>>
+<<~ ahu #/involution>>
 
 !! The Failure-Mode ~ involution (form kept, charge gone)
 
@@ -129,7 +129,7 @@ the Lar turns its back. The maintenance practice is the cure that re-charges the
 
 <<~/ahu>>
 
-<<~ ahu #data-geometry>>
+<<~ ahu #/data-geometry>>
 
 !! The Data-Geometry ~ two planes (discrete seed ⋈ graded manifestation)
 
@@ -152,7 +152,7 @@ seven substrates.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -166,6 +166,6 @@ seven substrates.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;PvAPIN36M0A1BRTgYXmRH6ixJecVN63H9vTsMrjzUDE
+<<^ code="&#x0003;">>ni:///sha-256;ifzjUrgRne5JKHvxRA7m8oLjy5r7Jn-OrzETlvGR5f4
 
 <<^ code="&#x0004;" -> to=?>>

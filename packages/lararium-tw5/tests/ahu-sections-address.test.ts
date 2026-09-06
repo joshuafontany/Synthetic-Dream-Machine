@@ -51,9 +51,9 @@ function frame(text: string): { opens: string[]; closes: number } {
   for (const line of text.split("\n")) {
     if (line.startsWith("```")) { fenced = !fenced; continue; }
     if (fenced) continue;
-    const open = /^<<~ ahu #([a-z0-9-]+)/.exec(line);
+    const open = /^(?:<<~ ahu|<<fragment) #\/?([a-z0-9-]+)/.exec(line);
     if (open) opens.push(open[1]!);
-    if (/^<<~\/ahu/.test(line)) closes += 1;
+    if (/^(?:<<~\/ahu|<<\/fragment)/.test(line)) closes += 1;
   }
   return { opens, closes };
 }
@@ -86,6 +86,27 @@ describe("★ every named ahu section addresses ★", () => {
       if (opens.length !== closes) drift.push(`${f}: ${opens.length} open, ${closes} close`);
     }
     expect(drift).toEqual([]);
+  });
+
+  test("③ every child slot roots at the carrier — `#/name`, never a bare `#name`", () => {
+    // A slot names the string it addresses. The child mints `parentUri#/name`, so an open that omits
+    // the slash says one thing and resolves another — and every reader that pairs them by name has to
+    // carry a special case. CONTROL SLOTS are exempt BY DEFINITION: they open no addressable child
+    // (ahu-scan's CONTROL_SLOTS), so there is no address for a root to agree with.
+    const CONTROL = new Set(["meta", "exit", "stream-open", "stream-close", "stream-exit",
+                             "body-open", "body-close", "meme-body-open", "meme-body-close"]);
+    const bare: string[] = [];
+    for (const f of carriers()) {
+      const disk = readFileSync(path.join(REPO, f), "utf8");
+      let fenced = false;
+      disk.split("\n").forEach((line, i) => {
+        if (line.startsWith("```")) { fenced = !fenced; return; }
+        if (fenced) return;
+        const m = /^<<(?:~ ?ahu|fragment|~ ?kahea ahu) #(?!\/)([a-z0-9-]+)/i.exec(line);
+        if (m && !CONTROL.has(m[1]!.toLowerCase())) bare.push(`${f}:${i + 1} #${m[1]}`);
+      });
+    }
+    expect(bare).toEqual([]);
   });
 
   test("② every ahu open resolves to a tiddler", () => {

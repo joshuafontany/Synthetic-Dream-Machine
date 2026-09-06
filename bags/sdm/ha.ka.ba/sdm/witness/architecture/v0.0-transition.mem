@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/witness/architecture/v0.0-transition"
 
 ! Architecture Witness — v0.0 Transition
 
-<<~ ahu #what-v0-was>>
+<<~ ahu #/what-v0-was>>
 
 !! What v0.0 Was
 
@@ -39,7 +39,7 @@ It carried three proof Powers (read-magic, floating-disc, shield-ward), a `power
 
 <<~/ahu>>
 
-<<~ ahu #why-it-retired>>
+<<~ ahu #/why-it-retired>>
 
 !! Why It Retired
 
@@ -57,7 +57,7 @@ The edge taxonomy collapsed to one flat verb (`#has`, no family/role) for compos
 
 <<~/ahu>>
 
-<<~ ahu #migration-notes>>
+<<~ ahu #/migration-notes>>
 
 !! Migration Notes
 
@@ -67,6 +67,6 @@ The edge taxonomy collapsed to one flat verb (`#has`, no family/role) for compos
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;smnOitp8ASbiRGaqpo7Km21mWwiKKQn44eTB-5A3zkU
+<<^ code="&#x0003;">>ni:///sha-256;sVP4YaCkNZdRCvyamg1WVC7AonryuNyd8TM3np_NVGo
 
 <<^ code="&#x0004;" -> to=?>>

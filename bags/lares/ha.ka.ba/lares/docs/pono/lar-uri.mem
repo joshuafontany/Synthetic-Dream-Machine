@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/lar-uri"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! `lar:` URI Scheme — Canon Documentation
 
@@ -29,7 +29,7 @@ This surface carries the explanation.
 
 <<~/ahu>>
 
-<<~ ahu #design-intent>>
+<<~ ahu #/design-intent>>
 
 !! 1. Design Intent
 
@@ -39,7 +39,7 @@ Each URI component carries a distinct, non-overlapping concern across three sema
 
 # ''WHO'' — authority (`alias:grant@host`) identifies speaker and machine host
 # ''BEARING'' — the HA.KA.BA address (path) names semantic attitude
-# ''SECTION'' — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
+# ''SECTION'' — the fragment (`#`) carries section anchors only, rooted — `#/ahu-name`, `#/section-id`
 
 Resource-state annotations such as the mana/context-window pool are HUD adjuncts, not core URI components. This value uses the shared `0–20` Level model as a navigational resource estimate. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
 
@@ -69,7 +69,7 @@ No metric sits claimed yet. The scheme names attitude-bearing only and defines n
 
 <<~/ahu>>
 
-<<~ ahu #exchange-flow>>
+<<~ ahu #/exchange-flow>>
 
 !!! 1.1 Exchange Flow — Order of Operations
 
@@ -106,7 +106,7 @@ Beneath the `aim`: `<<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>` ·
 
 <<~/ahu>>
 
-<<~ ahu #scheme-registration>>
+<<~ ahu #/scheme-registration>>
 
 !! 2. Scheme Registration
 
@@ -123,7 +123,7 @@ The `lar:` scheme identifies semantic positions, signal states, and machine even
 
 <<~/ahu>>
 
-<<~ ahu #uri-syntax>>
+<<~ ahu #/uri-syntax>>
 
 !! 3. URI Syntax
 
@@ -159,7 +159,7 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the
 
 <<~/ahu>>
 
-<<~ ahu #component-map>>
+<<~ ahu #/component-map>>
 
 !!! 3.3 Component Map
 
@@ -170,13 +170,13 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the
 | 3 | ''`@`'' | Identity → machine delimiter | Standard | `@` |
 | 4 | ''host'' | Machine identity | `machine_id` from crystal system | `enyalios` |
 | 5 | ''path'' | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/lares/` | `/threshold.uncertain.opens` |
-| 6 | ''`#fragment`'' | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
+| 6 | ''`#fragment`'' | Section anchor | Named section within this meme | `#/ahu-name`, `#/section-id` |
 
 > ''Layout validation:'' The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. //Source: `_todo/E-deep-research-report.md` §4.2//
 
 <<~/ahu>>
 
-<<~ ahu #identity-stack>>
+<<~ ahu #/identity-stack>>
 
 !!! 3.3.1 Identity Addressing
 
@@ -184,7 +184,7 @@ Identity addressing lives at `lar:///ha.ka.ba/lares/docs/pono/identity-stack` �
 
 <<~/ahu>>
 
-<<~ ahu #component-semantics>>
+<<~ ahu #/component-semantics>>
 
 !!! 3.4 Component Semantics
 
@@ -209,11 +209,11 @@ Span sequencing is intentionally ''not'' encoded in URI authority. Exchange iden
 
 ''Optional sub-path extension:'' After the mandatory three-slot HA.KA.BA, additional `/`-separated path segments may follow to navigate within the named territory. Sub-path segments are free-form routing tokens, not HA.KA.BA slots. The stable named graph address strips the sub-path; the sub-path is session-scope navigation only.
 
-''fragment'' (`#section-anchor`) — Named section within this meme: `#ahu-name`, `#section-id`, `#pranala-name`. The fragment carries section anchors only.
+''fragment'' (`#/section-anchor`) — Named section within this meme: `#/ahu-name`, `#/section-id`, `#/pranala-name`. The fragment carries section anchors only, rooted at the carrier.
 
 <<~/ahu>>
 
-<<~ ahu #provisionality>>
+<<~ ahu #/provisionality>>
 
 !! 4. Provisionality Markers
 
@@ -254,7 +254,7 @@ Trajectory provisional: "I predict our next territory is the updated schema — 
 
 <<~/ahu>>
 
-<<~ ahu #marker-ontology>>
+<<~ ahu #/marker-ontology>>
 
 !! 5. Marker Ontology — the authoring surface
 
@@ -269,7 +269,7 @@ A `lar:` URI //names// a meme; how memes, waypoints, and transclusions get //wri
 
 <<~/ahu>>
 
-<<~ ahu #stable-address>>
+<<~ ahu #/stable-address>>
 
 !! 6. Stable Address — Named Graph Form
 
@@ -287,7 +287,7 @@ No authority (empty), no query, no fragment. This is the invariant semantic bear
 
 <<~/ahu>>
 
-<<~ ahu #cache-tiers>>
+<<~ ahu #/cache-tiers>>
 
 !! 7. Invariant-Core Cache Tier Mapping
 
@@ -299,7 +299,7 @@ No authority (empty), no query, no fragment. This is the invariant semantic bear
 
 <<~/ahu>>
 
-<<~ ahu #module-registry>>
+<<~ ahu #/module-registry>>
 
 !! 8. Module and Registry Metadata
 
@@ -326,7 +326,7 @@ Module descriptors use `version_num` or semver-like fields for content versionin
 
 <<~/ahu>>
 
-<<~ ahu #validation>>
+<<~ ahu #/validation>>
 
 !! 9. Validation Rules
 
@@ -340,7 +340,7 @@ A `lar:` URI is ''well-formed'' when:
 # Path contains exactly three HA.KA.BA slots after the leading `/`
 # Path slots contain no whitespace, path separators, or quotes (inherits l-space Address anti-collision rules)
 # `p` value is a decimal in range `[0.0, 1.0]`
-# Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
+# Fragment (`#`) carries only rooted section anchors — `#/ahu-name`, `#/section-id` — no chronometer data
 
 !!! 9.2 Consistency
 
@@ -368,7 +368,7 @@ A spanSpan record is ''consistent'' when:
 
 <<~/ahu>>
 
-<<~ ahu #security>>
+<<~ ahu #/security>>
 
 !! 10. Security Considerations
 
@@ -386,7 +386,7 @@ A spanSpan record is ''consistent'' when:
 
 <<~/ahu>>
 
-<<~ ahu #prior-art>>
+<<~ ahu #/prior-art>>
 
 !! 11. Prior Art
 
@@ -406,7 +406,7 @@ A spanSpan record is ''consistent'' when:
 
 <<~/ahu>>
 
-<<~ ahu #how-to-read>>
+<<~ ahu #/how-to-read>>
 
 !! Appendix A — How to Read an Exchange Opening
 
@@ -428,7 +428,7 @@ The standpoint reads within its own frame (Syadasti rule): a Philosopher weighs 
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Lineage — the Ha-Ka-Ba palimpsest
 
@@ -447,7 +447,7 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -457,6 +457,6 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;otnnTRsuK40-ctDlfSji1Kap0-73LhHsfBY0kswbCn4
+<<^ code="&#x0003;">>ni:///sha-256;8k2NCmXGxnNjtWSXrUiyam9aoM2A6Pvv-MhmYy_4NTE
 
 <<^ code="&#x0004;" -> to=?>>

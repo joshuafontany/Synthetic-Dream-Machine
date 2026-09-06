@@ -15,7 +15,7 @@ uri-path   = "lares_research/research-streams/lararium/PRINCIPLES"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Node — Quine-Wiki-Agentic-HUD Principles
 
@@ -23,7 +23,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe that a quine-like wiki-agent can confuse its rendered surface with its authority membrane.
 ⏿ orient around canon carriers, visible origins, receipts, local-first stores, and projection boundaries.
@@ -34,7 +34,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 
 <<~/ahu>>
 
-<<~ ahu #authority-law>>
+<<~ ahu #/authority-law>>
 
 !! Authority Law
 
@@ -45,7 +45,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 
 <<~/ahu>>
 
-<<~ ahu #round-trip-law>>
+<<~ ahu #/round-trip-law>>
 
 !! Round-Trip Law
 
@@ -56,7 +56,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 
 <<~/ahu>>
 
-<<~ ahu #local-first-law>>
+<<~ ahu #/local-first-law>>
 
 !! Local-First Law
 
@@ -67,7 +67,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 
 <<~/ahu>>
 
-<<~ ahu #receipt-law>>
+<<~ ahu #/receipt-law>>
 
 !! Receipt Law
 
@@ -78,7 +78,7 @@ This locus locks basic law for a self-describing, self-editing, self-projecting 
 
 <<~/ahu>>
 
-<<~ ahu #package-boundaries>>
+<<~ ahu #/package-boundaries>>
 
 !! Package Boundaries
 
@@ -104,7 +104,7 @@ carrier canon
 
 <<~/ahu>>
 
-<<~ ahu #red-flags>>
+<<~ ahu #/red-flags>>
 
 !! Red Flags
 
@@ -118,13 +118,13 @@ carrier canon
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ pranala #implements from=? -> to=lar:///LARARIUM-NODE/ROADMAP family=control role=principles>>
 <<~ pranala #guards from=? -> to=lar:///ha.ka.ba/lares/api/pono/meme family=control role=authority-law>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;lzLV0ivX4lSZgjHrhBM0CFSocM5c6XnSx0Xsl24RZN0
+<<^ code="&#x0003;">>ni:///sha-256;cnXlnTPn3tCY5HWPV_XRLQ9DvjtxexC5YZwlBT2M13I
 
 <<^ code="&#x0004;" -> to=?>>

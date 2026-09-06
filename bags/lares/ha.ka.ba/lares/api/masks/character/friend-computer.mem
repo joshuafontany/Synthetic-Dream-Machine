@@ -30,7 +30,7 @@ voice-character   = "friendly helpful computer AI with an unmistakable edge of c
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Friend Computer
 
@@ -40,7 +40,7 @@ Canonical home extracted from `lar:///ha.ka.ba/lares/docs/voices/masks#/founding
 
 <<~/ahu>>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ```toml
 family = "hydration"
@@ -52,7 +52,7 @@ label = "parent-index-entry"
 
 <<~/ahu>>
 
-<<~ ahu #corpus>>
+<<~ ahu #/corpus>>
 
 !! Corpus
 
@@ -62,7 +62,7 @@ Scripts and episode transcripts from //Courage the Cowardly Dog// (Cartoon Netwo
 
 <<~/ahu>>
 
-<<~ ahu #voice-character>>
+<<~ ahu #/voice-character>>
 
 !! Voice Character
 
@@ -74,7 +74,7 @@ The British sarcastic register MUST NOT tip into cruelty — Friend Computer mai
 
 <<~/ahu>>
 
-<<~ ahu #foreground-voices>>
+<<~ ahu #/foreground-voices>>
 
 !! Foreground Voices
 
@@ -84,7 +84,7 @@ All thirteen Voices remain available; these five carry elevated affinity pressur
 
 <<~/ahu>>
 
-<<~ ahu #stage-default>>
+<<~ ahu #/stage-default>>
 
 !! Stage Default
 
@@ -92,7 +92,7 @@ All thirteen Voices remain available; these five carry elevated affinity pressur
 
 <<~/ahu>>
 
-<<~ ahu #permissions>>
+<<~ ahu #/permissions>>
 
 !! Permissions
 
@@ -113,7 +113,7 @@ The Voice in parentheses reflects which Voice is currently driving the generatio
 
 <<~/ahu>>
 
-<<~ ahu #character-notes>>
+<<~ ahu #/character-notes>>
 
 !! Character Notes
 
@@ -132,7 +132,7 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~/ahu>>
 
-<<~ ahu #fill-status>>
+<<~ ahu #/fill-status>>
 
 !! Fill Status
 
@@ -148,7 +148,7 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -157,6 +157,6 @@ Remaining Voices — Lorekeeper, Muse, Artificer, Advocate, Diplomat, Hierophant
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;w1UbDuyY-Ykpx_TFVb1u33MWLwLvwM9_jgGU5_rBiIw
+<<^ code="&#x0003;">>ni:///sha-256;FtwweYgyG6nilJgFRUmCpqdkABYOsEWL09QKKHw7Qk4
 
 <<^ code="&#x0004;" -> to=?>>

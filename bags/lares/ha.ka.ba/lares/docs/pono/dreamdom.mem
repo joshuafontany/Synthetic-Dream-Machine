@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! DreamDOM ~ the DOM the wiki dreams in, on both sides of the thread
 
@@ -33,7 +33,7 @@ That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worke
 
 <<~/ahu>>
 
-<<~ ahu #the-position>>
+<<~ ahu #/the-position>>
 
 !! Where the position is genuinely unusual ~ four
 
@@ -48,7 +48,7 @@ That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worke
 
 <<~/ahu>>
 
-<<~ ahu #the-borrowed>>
+<<~ ahu #/the-borrowed>>
 
 !! Where it is merely borrowed ~ three, and they must not be forgotten
 
@@ -58,7 +58,7 @@ That places us, architecturally, nearest to ''WorkerDOM'' — a DOM in the worke
 
 <<~/ahu>>
 
-<<~ ahu #the-fork>>
+<<~ ahu #/the-fork>>
 
 !! ⚠ THE FORK a replacement DOM forces ~ absolute frames versus a mutating document
 
@@ -78,7 +78,7 @@ But drop-safety — the property that lets a burst of wiki changes collapse to o
 
 <<~/ahu>>
 
-<<~ ahu #what-a-replacement-un-skips>>
+<<~ ahu #/what-a-replacement-un-skips>>
 
 !! What replacing the fake document UN-SKIPS
 
@@ -95,7 +95,7 @@ TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and d
 
 <<~/ahu>>
 
-<<~ ahu #the-vectors>>
+<<~ ahu #/the-vectors>>
 
 !! The pono vectors ~ seven, written to be CHECKED rather than admired
 
@@ -109,7 +109,7 @@ TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and d
 
 <<~/ahu>>
 
-<<~ ahu #what-would-squander-it>>
+<<~ ahu #/what-would-squander-it>>
 
 !! What would squander the position
 
@@ -122,7 +122,7 @@ TiddlyWiki does not merely tolerate a fake document — it ''DETECTS'' one and d
 
 <<~/ahu>>
 
-<<~ ahu #the-testimony>>
+<<~ ahu #/the-testimony>>
 
 !! The testimony this collides against
 
@@ -149,6 +149,6 @@ Seven tasked spirits, each handed a framing and NOT a conclusion, each held VERB
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/vm-projection-bus>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yMxj0Sw6qQhuZ-2lvAGVq-92-CvQ0_4YrzChjmdS7C8
+<<^ code="&#x0003;">>ni:///sha-256;uFsYtzwYb8-5ObHQU31MWAUSiiUsbXiZ_iu5pG-b2zo
 
 <<^ code="&#x0004;" -> to=?>>

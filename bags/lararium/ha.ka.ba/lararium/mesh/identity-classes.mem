@@ -37,7 +37,7 @@ and how it recovers//, never a stamped tier. Four points in that space carry nam
 returns to them: the ''USER'', the ''OPERATOR'', the ''KAHU'', and the ''HERM''. This meme maps them
 across four axes and fixes how each RECOVERS — the axis Reading-B re-cuts.
 
-<<~ ahu #the-four-classes>>
+<<~ ahu #/the-four-classes>>
 
 !! The four classes ~ four axes
 
@@ -88,7 +88,7 @@ read-cap stays with the authorized decryptor alone. #the-mesh-breathes carries t
 
 <<~/ahu>>
 
-<<~ ahu #the-identity-class-ladder>>
+<<~ ahu #/the-identity-class-ladder>>
 
 !! The KERI ladder ~ transferable ⊥ non-transferable ⊥ delegated ⊥ none-civic
 
@@ -112,7 +112,7 @@ value'', never by title ([[founding-runbook|lar:///ha.ka.ba/lararium/mesh/foundi
 
 <<~/ahu>>
 
-<<~ ahu #promotion-path>>
+<<~ ahu #/promotion-path>>
 
 !! The promotion path ~ value accretes, the class hardens
 
@@ -142,7 +142,7 @@ never by decree.
 
 <<~/ahu>>
 
-<<~ ahu #herm-establishment>>
+<<~ ahu #/herm-establishment>>
 
 !! Herm establishment ~ a contract, not a christening
 
@@ -170,7 +170,7 @@ the recovery.
 
 <<~/ahu>>
 
-<<~ ahu #the-founding-splits>>
+<<~ ahu #/the-founding-splits>>
 
 !! ★ A FOUNDING STANDS TWO THINGS — a PLACE, then a FACE ★
 
@@ -195,7 +195,7 @@ the recovery.
 
 <<~/ahu>>
 
-<<~ ahu #the-office>>
+<<~ ahu #/the-office>>
 
 !! Kuleana ~ the OFFICE, and the civic standing between HERM and OPERATOR
 
@@ -226,7 +226,7 @@ So the quorum ''seats'' (rare); the ''renewal rides the lease-epoch roll'' (freq
 
 <<~/ahu>>
 
-<<~ ahu #the-mesh-breathes>>
+<<~ ahu #/the-mesh-breathes>>
 
 !! The mesh breathes ~ blind-transit of private ciphertext (carry ⊥ read)
 
@@ -268,7 +268,7 @@ wall built inside one.
 
 <<~/ahu>>
 
-<<~ ahu #self-slot-reconciliation>>
+<<~ ahu #/self-slot-reconciliation>>
 
 !! Reconciliation ~ the committed self-slot vs the breathing mesh
 
@@ -309,7 +309,7 @@ committed security surface (`federation-gate.ts` `classifyCrossOperatorAdmission
 
 <<~/ahu>>
 
-<<~ ahu #reading-b-recovery>>
+<<~ ahu #/reading-b-recovery>>
 
 !! Reading-B ~ recovery rotates, it never resurrects
 
@@ -358,7 +358,7 @@ signer.
 
 <<~/ahu>>
 
-<<~ ahu #the-continuity-anchor>>
+<<~ ahu #/the-continuity-anchor>>
 
 !! The continuity anchor ~ the persona-KEL, not the key
 
@@ -388,7 +388,7 @@ binding a raw key: the antigen's ban-nym and the handle-card's face-nym (#/the-h
 
 <<~/ahu>>
 
-<<~ ahu #the-two-forks>>
+<<~ ahu #/the-two-forks>>
 
 !! The custody fork ~ reconstruct-then-sign ⊥ threshold-attest
 
@@ -437,7 +437,7 @@ multisig machinery and heavier guardian onboarding (B)''.
 
 <<~/ahu>>
 
-<<~ ahu #the-delegation-axis>>
+<<~ ahu #/the-delegation-axis>>
 
 !! ⚠ The axis that dominates the fork ~ delegation
 
@@ -449,7 +449,7 @@ Surfaced by the outside sweep (`docs/pono/recovery-custody-scout#the-third-axis`
 
 <<~/ahu>>
 
-<<~ ahu #the-honest-edges>>
+<<~ ahu #/the-honest-edges>>
 
 !! The honest edges (kept lit)
 
@@ -478,7 +478,7 @@ Three walls hold this design, and each stays named:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -496,6 +496,6 @@ Three walls hold this design, and each stays named:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aBX6qIPxWmdjZxMj0OeCQgOnEx_neT2jClql3bgEbaQ
+<<^ code="&#x0003;">>ni:///sha-256;nfUcSUtUCjjROap1gP_JjTtbcnl1gL4-tQbC2Zmsx3s
 
 <<^ code="&#x0004;" -> to=?>>

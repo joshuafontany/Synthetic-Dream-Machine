@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/imbued"
 
 ! Imbued
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ A canonical cost hook: the Life paid to activate stays ''locked'' until the Powe
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Modifies the cost protocol, not the effect. While imbued, the locked Life is una
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Common on `domain/abjuration` wards and standing barriers. Distinct from `item` 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZR-ps5vHjPLbIdyrwnebDC7-zeJuTmHaIlgtRelTQro
+<<^ code="&#x0003;">>ni:///sha-256;F-shOYGGleXrhWTpyTvEFkxqD4h0sSgVmk7zs7OkeTM
 
 <<^ code="&#x0004;" -> to=?>>

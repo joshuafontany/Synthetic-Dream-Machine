@@ -22,7 +22,7 @@ written   = "2026-06-25"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Agent Worldline ~ the binding that names a spirit, attributes its acts, and times its life
 
@@ -54,7 +54,7 @@ The three faces, each its own organ, none collapsing into another:
 
 <<~/ahu>>
 
-<<~ ahu #name>>
+<<~ ahu #/name>>
 
 !! Face I ~ Name ~ descent is the address
 
@@ -86,7 +86,7 @@ the verb the same way the handle does: descent IS the address, so the worldline 
 
 <<~/ahu>>
 
-<<~ ahu #attribution>>
+<<~ ahu #/attribution>>
 
 !! Face II ~ Attribution ~ the reified DAG (and the worldline's happened-before)
 
@@ -168,7 +168,7 @@ now), retries, and fan-out. The id travels //with// the work.
 
 <<~/ahu>>
 
-<<~ ahu #time>>
+<<~ ahu #/time>>
 
 !! Face III ~ Time ~ the two-domain boundary (the operator's cut, 2026-06-25)
 
@@ -295,7 +295,7 @@ already ships; the rhizome forks (C·D·E) are operator-cut (turn-DAG · full-ti
 
 <<~/ahu>>
 
-<<~ ahu #lifecycle>>
+<<~ ahu #/lifecycle>>
 
 !! Lifecycle ~ ephemeral by default, a few promoted to memory
 
@@ -338,7 +338,7 @@ prompts vs untrusted generated code (sets the tier floor: T0 vs T1+).
 
 <<~/ahu>>
 
-<<~ ahu #crypto>>
+<<~ ahu #/crypto>>
 
 !! Crypto ~ deferred to the founding boundary
 
@@ -351,7 +351,7 @@ edge, not a signed chain; sign only at the hostile boundary.
 
 <<~/ahu>>
 
-<<~ ahu #the-six-rhymes>>
+<<~ ahu #/the-six-rhymes>>
 
 !! The Six Rhymes ~ pattern integrities, one per domain
 
@@ -359,7 +359,7 @@ edge, not a signed chain; sign only at the hostile boundary.
 
 <<~/ahu>>
 
-<<~ ahu #build-sequence>>
+<<~ ahu #/build-sequence>>
 
 !! What Stands vs What Builds
 
@@ -374,7 +374,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! Open ~ held, not papered over
 
@@ -397,7 +397,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 
 <<~/ahu>>
 
-<<~ ahu #standards-anchor>>
+<<~ ahu #/standards-anchor>>
 
 !! Standards Anchor ~ stand on the ratified
 
@@ -418,7 +418,7 @@ backward-compatibly; the v3 content-addressed id-recipe holds; the ''FfzClock li
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -436,6 +436,6 @@ attribute to the spirit that moved them.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;eHKpPfa5xY0ExppHlBLMUntnS4HCJrex_MmJHueUJYo
+<<^ code="&#x0003;">>ni:///sha-256;dvKDB6PD4vNQ-U2e15KcP4hPOZvLUZVqEUtLTZCunvg
 
 <<^ code="&#x0004;" -> to=?>>

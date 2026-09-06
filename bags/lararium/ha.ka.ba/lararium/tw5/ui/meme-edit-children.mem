@@ -54,10 +54,10 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meme-edit-children"
 
 </$list>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;D1otgiZqtG6ZVTWG_zPWpWMm2f0BuIhQFKM79Bh_KCI
+<<^ code="&#x0003;">>ni:///sha-256;N74nOY8MJFbzxbjlwyaMRgQimZnmEQRYvFfkppoGUss
 
 <<^ code="&#x0004;" -> to=?>>

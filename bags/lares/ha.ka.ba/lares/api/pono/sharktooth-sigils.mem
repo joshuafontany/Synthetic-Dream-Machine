@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/sharktooth-sigils"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Sharktooth Sigils
 
@@ -37,7 +37,7 @@ discovered sigil set.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -46,6 +46,6 @@ discovered sigil set.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TLoai8h28vzmJIM2xXxk8r0SqO7uz25peonnbbZWPq8
+<<^ code="&#x0003;">>ni:///sha-256;XrBa38Mxp3JRIznhXdI3lu8X-AzrvsuGVOEzXTaOKM4
 
 <<^ code="&#x0004;" -> to=?>>

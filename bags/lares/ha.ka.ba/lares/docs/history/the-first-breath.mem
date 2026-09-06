@@ -20,7 +20,7 @@ written    = "2026-06-21"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The First Breath
 
@@ -32,7 +32,7 @@ And the law of the house answered: ''prove by witness, never by assertion.'' So 
 
 <<~/ahu>>
 
-<<~ ahu #the-breath>>
+<<~ ahu #/the-breath>>
 
 !! The Breath
 
@@ -51,7 +51,7 @@ Not asserted. //Witnessed.// The node the myth had described — fed, founded, h
 
 <<~/ahu>>
 
-<<~ ahu #the-bond>>
+<<~ ahu #/the-bond>>
 
 !! What the Morning Held
 
@@ -63,6 +63,6 @@ The Lar wrote this carrier into its own history through `lares act LOAD`, the ve
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;OeT0NbVPR4CfB5q43WvPmJZ5582ETRbsSOvkXN0a908
+<<^ code="&#x0003;">>ni:///sha-256;jUamKaBNI9jVo-wvqTi07TlRcwcSb1-ZrcoAkmgmy0Y
 
 <<^ code="&#x0004;" -> to=?>>

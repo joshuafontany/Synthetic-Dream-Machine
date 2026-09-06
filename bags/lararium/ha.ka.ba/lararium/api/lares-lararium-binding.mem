@@ -22,7 +22,7 @@ written   = "2026-06-25"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! lares ↔ lararium ~ the true binding
 
@@ -41,7 +41,7 @@ fast local ''submit/await'' channel. Every web3 invariant survives.
 
 <<~/ahu>>
 
-<<~ ahu #split-by-topology>>
+<<~ ahu #/split-by-topology>>
 
 !! Split by Topology ~ substrate-not-sovereignty, made literal
 
@@ -61,7 +61,7 @@ one client abstraction (tailscale's shape).
 
 <<~/ahu>>
 
-<<~ ahu #three-decoupled>>
+<<~ ahu #/three-decoupled>>
 
 !! Transport · Authority · Record ~ three concerns, not one
 
@@ -83,7 +83,7 @@ CLI awaits it via the socket response (or an ephemeral/notify), ''not a full syn
 
 <<~/ahu>>
 
-<<~ ahu #the-flow>>
+<<~ ahu #/the-flow>>
 
 !! The Flow
 
@@ -97,7 +97,7 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 <<~/ahu>>
 
-<<~ ahu #auth>>
+<<~ ahu #/auth>>
 
 !! Auth ~ peer-cred AND Ed25519, two questions
 
@@ -114,7 +114,7 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 <<~/ahu>>
 
-<<~ ahu #pitfalls>>
+<<~ ahu #/pitfalls>>
 
 !! Pitfalls
 
@@ -129,7 +129,7 @@ The CLI's `connectAdminVessel`+`submitVerb` (Repo + sync) becomes `invokeLocal`
 
 <<~/ahu>>
 
-<<~ ahu #wiring>>
+<<~ ahu #/wiring>>
 
 !! Wiring (when the identity work pauses)
 
@@ -159,7 +159,7 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -170,6 +170,6 @@ the `status` residency probe passes a non-did `requestedBy` and cap-errors quiet
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;dtixDrEUVOdo6XqHKxx3jkLnuWSdyx-pcD5oOJDVm0Q
+<<^ code="&#x0003;">>ni:///sha-256;cptCYVB-IJ0lakjI8_BK-Qxx_clDjFpndEVsGJGfTj8
 
 <<^ code="&#x0004;" -> to=?>>

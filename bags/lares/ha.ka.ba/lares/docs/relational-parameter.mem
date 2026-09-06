@@ -22,7 +22,7 @@ uri-path   = "ha.ka.ba/lares/docs/relational-parameter"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The relational parameter ~ design law
 
@@ -34,7 +34,7 @@ own capability; the shape below keeps the upstream door open rather than assumin
 
 <<~/ahu>>
 
-<<~ ahu #the-two-parsers>>
+<<~ ahu #/the-two-parsers>>
 
 !! TW5 runs TWO parameter parsers, and the live one carries a guard
 
@@ -65,7 +65,7 @@ touched only one of the two would leave `\function` reading a bare arrow differe
 
 <<~/ahu>>
 
-<<~ ahu #mark-at-parse>>
+<<~ ahu #/mark-at-parse>>
 
 !! Mark at parse · decide at bind
 
@@ -100,7 +100,7 @@ ordered terms.
 
 <<~/ahu>>
 
-<<~ ahu #the-uri-scheme>>
+<<~ ahu #/the-uri-scheme>>
 
 !! The sibling fix ~ a scheme names no parameter
 
@@ -145,7 +145,7 @@ letting the same bare form render.
 
 <<~/ahu>>
 
-<<~ ahu #prior-art>>
+<<~ ahu #/prior-art>>
 
 !! What the field already decided
 
@@ -167,7 +167,7 @@ narrows that gap by leaving every existing form alone.
 
 <<~/ahu>>
 
-<<~ ahu #blast-radius>>
+<<~ ahu #/blast-radius>>
 
 !! The radius, measured
 
@@ -192,7 +192,7 @@ the branch's own `test-parser-invariants.js`.
 
 <<~/ahu>>
 
-<<~ ahu #the-boundary>>
+<<~ ahu #/the-boundary>>
 
 !! What the sigil path keeps
 
@@ -206,7 +206,7 @@ It wants the core shape settled first, so the two speak one law rather than two.
 
 <<~/ahu>>
 
-<<~ ahu #the-plan>>
+<<~ ahu #/the-plan>>
 
 !! The plan
 
@@ -228,7 +228,7 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu>>
 
-<<~ ahu #what-to-measure>>
+<<~ ahu #/what-to-measure>>
 
 !! What the house counts
 
@@ -245,7 +245,7 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -256,6 +256,6 @@ wikitext hits, matches a guard already in the source, and needs no agreement abo
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;l4ao0rTKVIPj6_Uqzbwrz-pJqiXt11NSwk45hyX4PF8
+<<^ code="&#x0003;">>ni:///sha-256;De9cKx-VG7HgPwwWticKoD13n4FSzo9jl47lS-0KAM0
 
 <<^ code="&#x0004;" -> to=?>>

@@ -23,7 +23,7 @@ written   = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Group as Closure
 
@@ -39,7 +39,7 @@ prior-arts converge on this shape; this meme stands them whole and maps them ont
 
 <<~/ahu>>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 !! A Group Names a Closure, Not an Object
 
@@ -71,7 +71,7 @@ as a live, signed, decaying gesture, not a row in a table.
 
 <<~/ahu>>
 
-<<~ ahu #quorum>>
+<<~ ahu #/quorum>>
 
 !! Quorum — a Composed Threshold Subject
 
@@ -98,7 +98,7 @@ no one signature, and no one stolen key, moves the subject.
 
 <<~/ahu>>
 
-<<~ ahu #eviction>>
+<<~ ahu #/eviction>>
 
 !! Eviction — a Kāpae on the Membership Stack
 
@@ -124,7 +124,7 @@ falls out of the query, local-first.
 
 <<~/ahu>>
 
-<<~ ahu #maps-to-stack>>
+<<~ ahu #/maps-to-stack>>
 
 !! Maps to Our Stack
 
@@ -161,7 +161,7 @@ The closure model carries directly onto the existing identity architecture
 
 <<~/ahu>>
 
-<<~ ahu #prior-art>>
+<<~ ahu #/prior-art>>
 
 !! Prior Art — Four Converging Roots
 
@@ -186,7 +186,7 @@ group-object, the closure model carries a real pattern integrity, not a stylisti
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/lararium-identity>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
@@ -199,6 +199,6 @@ group-object, the closure model carries a real pattern integrity, not a stylisti
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nYb-LJmuPwWuDphaMLuQ1o5r9Vpp4jl9pPaWtq_PV_A
+<<^ code="&#x0003;">>ni:///sha-256;N8KX5ylIhakwVfdzy6-_pzJFFpnFRIf3cyceqXhjICY
 
 <<^ code="&#x0004;" -> to=?>>

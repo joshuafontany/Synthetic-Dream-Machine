@@ -16,7 +16,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/memory-store"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -37,7 +37,7 @@ Two callers exist:
 
 <<~/ahu>>
 
-<<~ ahu #temp-scope>>
+<<~ ahu #/temp-scope>>
 
 !! What belongs in @temp
 
@@ -64,7 +64,7 @@ for ceremony-level routing (drag-and-drop plugin install passes an explicit
 
 <<~/ahu>>
 
-<<~ ahu #not-temp>>
+<<~ ahu #/not-temp>>
 
 !! What does NOT belong in @temp (the tension)
 
@@ -103,7 +103,7 @@ cabal per `(PersonaGroup × recipe-fingerprint)`.
 
 <<~/ahu>>
 
-<<~ ahu #invariants>>
+<<~ ahu #/invariants>>
 
 !! Invariants
 
@@ -127,7 +127,7 @@ same change record any AutomergeDocStore would emit.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -139,6 +139,6 @@ same change record any AutomergeDocStore would emit.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qs6SIHPiiD0zkN8dwEs-bMBqBawUNmbopTWAfwBuKrM
+<<^ code="&#x0003;">>ni:///sha-256;Un3P7pRA-f6B6sIGKyLL8vdMaD6I_8q9bXx4DIOEScc
 
 <<^ code="&#x0004;" -> to=?>>

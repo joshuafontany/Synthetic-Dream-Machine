@@ -24,7 +24,7 @@ written   = "2026-08-08"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Reach Plane ~ foreign credentials as instruments the vessel holds
 
@@ -38,7 +38,7 @@ The whole design turns on ''one split, held absolutely'': a foreign credential b
 
 <<~/ahu>>
 
-<<~ ahu #three-planes>>
+<<~ ahu #/three-planes>>
 
 !! Three planes, unfused
 
@@ -60,7 +60,7 @@ The flow reuses instruments already standing — no new gate, no new distributio
 
 <<~/ahu>>
 
-<<~ ahu #compose-and-request>>
+<<~ ahu #/compose-and-request>>
 
 !! Compose-and-request ~ the glass drafts, the hearth posts
 
@@ -74,7 +74,7 @@ The reason reads structural rather than cautious. The browser stands as the weak
 
 <<~/ahu>>
 
-<<~ ahu #downstream-law>>
+<<~ ahu #/downstream-law>>
 
 !! The downstream law ~ a foreign actor never sits upstream of a vessel
 
@@ -84,7 +84,7 @@ This is the same shape the domain takes at the naming layer, and it is what make
 
 <<~/ahu>>
 
-<<~ ahu #the-four-locks>>
+<<~ ahu #/the-four-locks>>
 
 !! The four locks (operator, 2026-08-08)
 
@@ -116,7 +116,7 @@ Of the surfaces a foreign identity protocol offers, take the ''resolvable-identi
 
 <<~/ahu>>
 
-<<~ ahu #the-truncated-chain>>
+<<~ ahu #/the-truncated-chain>>
 
 !! The truncated chain ~ where a credential may travel
 
@@ -132,7 +132,7 @@ A reach credential rides the ''same'' chain a bag rides (#/cap-tier) and the ''s
 
 <<~/ahu>>
 
-<<~ ahu #the-honeypot>>
+<<~ ahu #/the-honeypot>>
 
 !! The honeypot ~ the hazard this doctrine accepts
 
@@ -152,7 +152,7 @@ A reach credential rides the ''same'' chain a bag rides (#/cap-tier) and the ''s
 
 <<~/ahu>>
 
-<<~ ahu #far-side-revocation>>
+<<~ ahu #/far-side-revocation>>
 
 !! The far-side revocation asymmetry
 
@@ -164,7 +164,7 @@ That asymmetry reads as honest rather than broken — it names precisely what ho
 
 <<~/ahu>>
 
-<<~ ahu #the-vault-reads-as-a-bag>>
+<<~ ahu #/the-vault-reads-as-a-bag>>
 
 !! The vault reads as a bag, never as a third carrier
 
@@ -182,7 +182,7 @@ Read as a ''cap-tiered bag'' instead and almost nothing new gets built: sealing-
 
 <<~/ahu>>
 
-<<~ ahu #the-service-manifest>>
+<<~ ahu #/the-service-manifest>>
 
 !! The service manifest ~ each surface declares what it can do
 
@@ -196,7 +196,7 @@ The manifest exists because ''the surfaces genuinely differ and none of them tel
 
 <<~/ahu>>
 
-<<~ ahu #emit-receipts>>
+<<~ ahu #/emit-receipts>>
 
 !! Emit receipts ~ content-addressed, from the first line
 
@@ -208,7 +208,7 @@ The manifest exists because ''the surfaces genuinely differ and none of them tel
 
 <<~/ahu>>
 
-<<~ ahu #persona-binding>>
+<<~ ahu #/persona-binding>>
 
 !! Persona binding ~ high cardinality, and two kinds of breach
 
@@ -232,7 +232,7 @@ The privacy tension evaporates because the object it needed dissolves: ''no per-
 
 <<~/ahu>>
 
-<<~ ahu #cred-onboarding>>
+<<~ ahu #/cred-onboarding>>
 
 !! Credential onboarding ~ named, unbuilt
 
@@ -248,7 +248,7 @@ The privacy tension evaporates because the object it needed dissolves: ''no per-
 
 <<~/ahu>>
 
-<<~ ahu #what-stays-open>>
+<<~ ahu #/what-stays-open>>
 
 !! What stays open
 
@@ -260,7 +260,7 @@ The privacy tension evaporates because the object it needed dissolves: ''no per-
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -278,6 +278,6 @@ The privacy tension evaporates because the object it needed dissolves: ''no per-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;K8HMW6-9ih5Y84rB3ufsp-6Jj5DAaEjIIsUAKG1kKQM
+<<^ code="&#x0003;">>ni:///sha-256;jK1rQc-RbQiShL93eqo58rtzNVTpK6pFfxJmprz-QPs
 
 <<^ code="&#x0004;" -> to=?>>

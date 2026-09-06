@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/custodial-self-custodial-han
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! CUSTODIAL → SELF-CUSTODIAL HANDOVER: measured evidence
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 22,202 characters
 
@@ -256,12 +256,12 @@ The two independent systems that expose the answer agree on the order of magnitu
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Rs80eCP0P-7z_4EbGegO6iOHxjT6e-iYNXgMIS8byRw
+<<^ code="&#x0003;">>ni:///sha-256;nZg-lB62LfjZVgYq42qFxXeduQWWxwVOjSLOXYUM0TI
 
 <<^ code="&#x0004;" -> to=?>>

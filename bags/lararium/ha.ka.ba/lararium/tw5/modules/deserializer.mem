@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/deserializer"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Deserializer — Contract
 
@@ -45,13 +45,13 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/deserializer" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/carrier-split>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/meme-stream>>
@@ -59,6 +59,6 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;T4DNjADRSYjFKVw-pCuM8P6sdVmvuxDSgq7NjySotjA
+<<^ code="&#x0003;">>ni:///sha-256;tdUy_c5tTajRObuW4xo5FpBVQ5-97SIFykE3vgwRwJU
 
 <<^ code="&#x0004;" -> to=?>>

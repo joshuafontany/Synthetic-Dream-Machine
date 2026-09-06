@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/vendor/claude-code-harness"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #about>>
+<<~ ahu #/about>>
 
 ! Vendor Declaration — the Claude Code Harness
 
@@ -27,7 +27,7 @@ offers, on what contract, at what stability — never what the house must become
 
 <<~/ahu>>
 
-<<~ ahu #evidence-grades>>
+<<~ ahu #/evidence-grades>>
 
 !! Evidence Grades — read before citing anything here
 
@@ -48,7 +48,7 @@ held.
 
 <<~/ahu>>
 
-<<~ ahu #the-published-seat>>
+<<~ ahu #/the-published-seat>>
 
 !! The Published Seat
 
@@ -62,7 +62,7 @@ architecture stated as unopinionated about which harness comes next.
 
 <<~/ahu>>
 
-<<~ ahu #the-seams>>
+<<~ ahu #/the-seams>>
 
 !! The Seams, ranked by which way the dependency runs
 
@@ -109,7 +109,7 @@ hooks, carry a hard allow or deny.
 
 <<~/ahu>>
 
-<<~ ahu #the-laws-we-adopt>>
+<<~ ahu #/the-laws-we-adopt>>
 
 !! The Laws This House Adopts
 
@@ -143,7 +143,7 @@ gets ignored wholesale. ''Measure the seed rather than assume it.''
 
 <<~/ahu>>
 
-<<~ ahu #traps>>
+<<~ ahu #/traps>>
 
 !! Traps
 
@@ -166,7 +166,7 @@ authority to text the pattern never sees
 
 <<~/ahu>>
 
-<<~ ahu #stability>>
+<<~ ahu #/stability>>
 
 !! Stability
 
@@ -184,7 +184,7 @@ built against them tests behaviour, never a schema.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -196,6 +196,6 @@ built against them tests behaviour, never a schema.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Uhg79YbmbN9R1ICPMhTqdfRls1YLwnO8rTS4dX7c6KQ
+<<^ code="&#x0003;">>ni:///sha-256;uGxfAiaeoyP5hrMbxT9WP7x4itscFSPtDt-oq1Q_52s
 
 <<^ code="&#x0004;" -> to=?>>

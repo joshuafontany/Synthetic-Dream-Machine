@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/kau"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! kau
 
@@ -28,22 +28,22 @@ TW5 widget from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `KauWidget`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/kau" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;AMaXMS58_sfKhIT95FHGOW9MqG7x8iC6syu-9-mBgsw
+<<^ code="&#x0003;">>ni:///sha-256;jI4bJqi8t2Ytg7_PHHBmej0nZPqlnezCAh1tBWhOY14
 
 <<^ code="&#x0004;" -> to=?>>

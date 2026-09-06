@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/subduction-onomancy-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Onomast ~ a spirit's handoff, held unedited
 
@@ -33,7 +33,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/subduction-onomancy-scout"
 
 <<~/ahu>>
 
-<<~ ahu #the-handoff>>
+<<~ ahu #/the-handoff>>
 
 !! The handoff, verbatim
 
@@ -307,6 +307,6 @@ Subduction relays learn the `SedimentreeId`, the full causal DAG shape, per-comm
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;">>ni:///sha-256;BVru2FrH_GjrjxyfzJVCrj9ceTWOwzNHYkIoAYRW6GQ
+<<^ code="&#x0003;">>ni:///sha-256;5TFlMwPVbdmu282GjQuffx3Z1CGuLbfteJe16L4Grbc
 
 <<^ code="&#x0004;" -> to=?>>

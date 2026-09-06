@@ -21,7 +21,7 @@ written   = "2026-07-01"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Scale Architecture ~ tractable from the start, quality a dial
 
@@ -31,7 +31,7 @@ The design principle: ''never densify the whole corpus, never solve exactly what
 
 <<~/ahu>>
 
-<<~ ahu #the-descent>>
+<<~ ahu #/the-descent>>
 
 !! The Structure-Distance Descent ~ exact TED is never needed
 
@@ -49,7 +49,7 @@ The descent has a floor: where an //absolute// edit distance is genuinely requir
 
 <<~/ahu>>
 
-<<~ ahu #the-fusion>>
+<<~ ahu #/the-fusion>>
 
 !! The Fusion ~ cheap H¹, matrix-free diffusion, the Chebyshev escape
 
@@ -67,7 +67,7 @@ The two facts compose into the gate's economy: ''cheap check (consistency-radius
 
 <<~/ahu>>
 
-<<~ ahu #the-catma>>
+<<~ ahu #/the-catma>>
 
 !! The Catma ~ scalable from the start, quality a dial
 
@@ -85,7 +85,7 @@ The catma's payoff: a corpus that grows 100× turns a dial (fewer neighbors, low
 
 <<~/ahu>>
 
-<<~ ahu #the-numerical-path>>
+<<~ ahu #/the-numerical-path>>
 
 !! The Numerical Minimalist-Path ~ closed-form where iteration tempts
 
@@ -105,7 +105,7 @@ The sensorium's confidence and precision reads resist the pull toward iterative 
 
 <<~/ahu>>
 
-<<~ ahu #north-star>>
+<<~ ahu #/north-star>>
 
 !! North-Star ~ named, not built (the honest ledger)
 
@@ -119,7 +119,7 @@ These carry Provisional-to-Synthesis weight deliberately. Recording them as nort
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ what this meme stands on
 
@@ -134,7 +134,7 @@ Established algorithms carrying the descent and the escape, 2026 fusion research
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -146,6 +146,6 @@ Established algorithms carrying the descent and the escape, 2026 fusion research
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;k4BxfeY0l8tpjoWv_QpCjttmN5UQOelo8GOpYz8oqi0
+<<^ code="&#x0003;">>ni:///sha-256;poFi_r5uK8N172bMc2UlFGyph0yKDE52lFV-T6kRKTA
 
 <<^ code="&#x0004;" -> to=?>>

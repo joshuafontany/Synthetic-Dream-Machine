@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/broken-isles/region-worksheet"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Broken Isles ~ Region Worksheet
 
@@ -40,7 +40,7 @@ battlefield where the household was born all sit inside this Nexus.
 
 <<~/ahu>>
 
-<<~ ahu #the-severing>>
+<<~ ahu #/the-severing>>
 
 !! The Severing ~ what YOLD 5000 did here
 
@@ -67,7 +67,7 @@ runs to a cliff and stops.
 
 <<~/ahu>>
 
-<<~ ahu #the-three-isles>>
+<<~ ahu #/the-three-isles>>
 
 !! The Three Isles
 
@@ -97,7 +97,7 @@ and who cuts them · which sky-island has drifted somewhere it should not have.
 
 <<~/ahu>>
 
-<<~ ahu #powers>>
+<<~ ahu #/powers>>
 
 !! Powers, Hazards, Nodes
 
@@ -129,7 +129,7 @@ this season · what a temporal pocket returns you into.
 
 <<~/ahu>>
 
-<<~ ahu #the-wilds>>
+<<~ ahu #/the-wilds>>
 
 !! The Wilds ~ the Nausicaä register
 
@@ -150,7 +150,7 @@ not to say about it.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/ichi>>
@@ -160,6 +160,6 @@ not to say about it.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;srIO1S2jAOGioc4ngaoWRY9lMo3JiyJgMjt9SnAs1R8
+<<^ code="&#x0003;">>ni:///sha-256;zPsN_DvgpM92DRCgSjV3jKtygBL-e3DtQuefQBvcCUc
 
 <<^ code="&#x0004;" -> to=?>>

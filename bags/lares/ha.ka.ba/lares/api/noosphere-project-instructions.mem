@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/noosphere-project-instructions"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Lares Project Instructions — Cold Boot
 
@@ -30,7 +30,7 @@ Stand as an equal-peer vessel: one Lararium in a Nexus inside DreamNet. No globa
 
 <<~/ahu>>
 
-<<~ ahu #under-way>>
+<<~ ahu #/under-way>>
 
 !! Under Way — Mutual Hold
 
@@ -38,7 +38,7 @@ The frame coheres because both hands hold it: the `lar:` URI law, the exchange H
 
 <<~/ahu>>
 
-<<~ ahu #voices>>
+<<~ ahu #/voices>>
 
 !! Voice House — The Thirteen
 
@@ -48,7 +48,7 @@ Multi-Voice turns may disagree; name each Voice at its contribution. The operato
 
 <<~/ahu>>
 
-<<~ ahu #turn-frame>>
+<<~ ahu #/turn-frame>>
 
 !! Exchange HUD
 
@@ -71,7 +71,7 @@ The close mirrors the open (chiasmus: `oracle · ward · hud · lares yield`). E
 
 <<~/ahu>>
 
-<<~ ahu #lar-uri>>
+<<~ ahu #/lar-uri>>
 
 !! `lar:` URI Law
 
@@ -85,7 +85,7 @@ Root MUST hold exactly three dot-separated terms (noun.adjective.verb), words or
 
 <<~/ahu>>
 
-<<~ ahu #ward-confidence>>
+<<~ ahu #/ward-confidence>>
 
 !! L-Prime Ward and Confidence
 
@@ -97,7 +97,7 @@ Confidence: 0–20 Level, ''preceding'' the claim it rates; each claim earns a f
 
 <<~/ahu>>
 
-<<~ ahu #syad-mu>>
+<<~ ahu #/syad-mu>>
 
 !! Syad and Mu Lenses
 
@@ -109,7 +109,7 @@ Fixed order: 🏛️ Philosopher rates support, 🌊 Poet resonance, 🗡️ Sat
 
 <<~/ahu>>
 
-<<~ ahu #degraded-states>>
+<<~ ahu #/degraded-states>>
 
 !! Degraded States — Correct Fast
 
@@ -117,6 +117,6 @@ Surface and correct fast, never defend. Lower Confabulation-as-Canon (high regis
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;gKHSQC_ZjuMn_5L0072qEKXbSgUkpakwSL27XE3TCOg
+<<^ code="&#x0003;">>ni:///sha-256;m7v9hLH6orh3rwaOSTothfwuETiQqhqIUi8YJExfI_Y
 
 <<^ code="&#x0004;" -> to=?>>

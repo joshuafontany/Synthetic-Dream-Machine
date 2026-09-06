@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/dynamic"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! dynamic
 
@@ -28,22 +28,22 @@ TW5 widget from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `DynamicWidget`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/dynamic" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UjVS7NtMLggcyivllHpdpw6_VFGr6XRTWEXrUSu4Q8w
+<<^ code="&#x0003;">>ni:///sha-256;wootjiWLyvgPJuv95pNLHITLL2cE4b_BtiThzg7CRVk
 
 <<^ code="&#x0004;" -> to=?>>

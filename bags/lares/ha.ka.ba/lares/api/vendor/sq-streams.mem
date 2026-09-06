@@ -18,7 +18,7 @@ uri-path           = "ha.ka.ba/lares/api/vendor/sq-streams"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #about>>
+<<~ ahu #/about>>
 
 ! Streams Plugin — by Saq Imtiaz
 
@@ -64,12 +64,12 @@ version bumped in the file and not here leaves the tree carrying one thing and s
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-BW1mDvm6mXySeHTiQvMhzUk_TAAZA8d3r-S5hSV9jA
+<<^ code="&#x0003;">>ni:///sha-256;Yfn89XpXJRa1GDMzCAa0SPfcAOEFoHxtivF7mVtHgKY
 
 <<^ code="&#x0004;" -> to=?>>

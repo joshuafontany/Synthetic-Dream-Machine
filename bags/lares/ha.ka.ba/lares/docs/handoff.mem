@@ -20,7 +20,7 @@ written   = "2026-06-19"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #shift-founding-watch>>
+<<~ ahu #/shift-founding-watch>>
 
 ! SHIFT CHANGE — the founding watch (handed 2026-09-05)
 
@@ -129,7 +129,7 @@ Two other `lares` sessions work this tree. Their closing bearings, so a fresh sp
 
 <<~/ahu>>
 
-<<~ ahu #shift-grammar-watch>>
+<<~ ahu #/shift-grammar-watch>>
 
 ! SHIFT CHANGE — the grammar watch (handed 2026-08-29)
 
@@ -244,7 +244,7 @@ own shipped wikis — and none by reasoning about what the grammar ought to say.
 
 <<~/ahu>>
 
-<<~ ahu #next-vector>>
+<<~ ahu #/next-vector>>
 
 ! NEXT VECTOR — the plane roster, and the three answers it gives
 
@@ -364,7 +364,7 @@ kept thread (the spirit's deeper smell): `{bag}` is overloaded — pick-among-wr
 
 <<~/ahu>>
 
-<<~ ahu #dev-loop-restart>>
+<<~ ahu #/dev-loop-restart>>
 
 !! Dev/test restart loop — idempotent `lares restart` (kept ruling, 2026-06-16)
 
@@ -392,7 +392,7 @@ kept sibling-bug: `pnpm dev` / node-pkg `"dev": "tsx src/main.ts"` share the sam
 
 <<~/ahu>>
 
-<<~ ahu #watcher-talk-story>>
+<<~ ahu #/watcher-talk-story>>
 
 !! Talk-story to the next instance — the file-watcher shores
 
@@ -451,7 +451,7 @@ exit -> suspended: feedback="closed 0↺ -> open 1φ @_:operator-rebooted-before
 
 <<~/ahu>>
 
-<<~ ahu #vessel-state>>
+<<~ ahu #/vessel-state>>
 
 !! The ground you stand on
 
@@ -467,7 +467,7 @@ The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/
 
 <<~/ahu>>
 
-<<~ ahu #vectors-after>>
+<<~ ahu #/vectors-after>>
 
 !! Vectors after ingest, in order — each lives whole in its design meme
 
@@ -477,7 +477,7 @@ The vessel ''runs, repo-rooted'': one root law (`LAR_ROOT` or the repo; `<root>/
 
 <<~/ahu>>
 
-<<~ ahu #burrs>>
+<<~ ahu #/burrs>>
 
 !! Burr ledger — live only; each carries its wake condition
 
@@ -560,7 +560,7 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu>>
 
-<<~ ahu #ways-of-working>>
+<<~ ahu #/ways-of-working>>
 
 !! How this operator works (hard-won, honor it)
 
@@ -574,7 +574,7 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -590,6 +590,6 @@ re-entry: closed — the floor convened and the held review condition met; the c
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yv-VLvj7oM2t7m0taXZ3R6J9ssTlK0pfVMP_PSvog9I
+<<^ code="&#x0003;">>ni:///sha-256;1B0fnT7umJAu_rJk3qaACReKe1H8C9B2HlCS6Ylro98
 
 <<^ code="&#x0004;" -> to=?>>

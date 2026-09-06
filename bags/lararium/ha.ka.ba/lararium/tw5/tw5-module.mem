@@ -62,13 +62,13 @@ If no module memes pass the threshold at boot, the kernel falls back to imperati
 (the compiled-in `_registerMemeticParser()` / `_registerWidgets()` path). This ensures the system
 boots correctly in offline or cold-start conditions before the corpus is loaded.
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;GyWPRlXxGFNn8cwUsqzrIJqqRhFLfqKbBd1LYHViQkU
+<<^ code="&#x0003;">>ni:///sha-256;JEJ-sxPGwXtr59S4Xld24ZIDSleZKTzY__s7kZBhYVc
 
 <<^ code="&#x0004;" -> to=?>>

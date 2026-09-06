@@ -24,7 +24,7 @@ written    = "2026-07-23"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Secure Context ~ the browser vessel's crypto wall and the DNS-01 path that clears it
 
@@ -36,7 +36,7 @@ A browser grants `crypto.subtle` and OPFS ''only in a secure context'' — `http
 
 <<~/ahu>>
 
-<<~ ahu #the-wall>>
+<<~ ahu #/the-wall>>
 
 !! The wall ~ why a LAN IP over http cannot boot a vessel
 
@@ -44,7 +44,7 @@ The browser vessel mints its sovereign key via `crypto.subtle.generateKey({name:
 
 <<~/ahu>>
 
-<<~ ahu #split-auth-from-tls>>
+<<~ ahu #/split-auth-from-tls>>
 
 !! Split auth from TLS ~ two concerns the CA question fuses
 
@@ -52,7 +52,7 @@ The move that dissolves the wall: ''split the two concerns.'' AUTHENTICATION (wh
 
 <<~/ahu>>
 
-<<~ ahu #why-dns-01>>
+<<~ ahu #/why-dns-01>>
 
 !! Why DNS-01 ~ the only challenge that never reaches inward, the only wildcard
 
@@ -60,7 +60,7 @@ Given an entity holding a ''DNS-delegation cap'' over some zone (`kahu.tld` belo
 
 <<~/ahu>>
 
-<<~ ahu #the-web2-bridge>>
+<<~ ahu #/the-web2-bridge>>
 
 !! The web2 bridge ~ renewal is the only internet-touching moment, on the middle of three clocks
 
@@ -70,7 +70,7 @@ DNS-01 needs the internet ''only at issuance / renewal (~every 60d), never at se
 
 <<~/ahu>>
 
-<<~ ahu #behind-the-terminator>>
+<<~ ahu #/behind-the-terminator>>
 
 !! Behind the terminator ~ a vessel that names itself from configuration breaks the moment the wall comes down
 
@@ -84,7 +84,7 @@ Something ''in front of'' the vessel earns the trusted origin: the cert lives at
 
 <<~/ahu>>
 
-<<~ ahu #name-and-key>>
+<<~ ahu #/name-and-key>>
 
 !! A name grants rendezvous, a key grants identity ~ two caps that never compose
 
@@ -102,7 +102,7 @@ Two consequences fall straight out, and both dissolve worries the role-shaped re
 
 <<~/ahu>>
 
-<<~ ahu #the-caps-added>>
+<<~ ahu #/the-caps-added>>
 
 !! The caps this path adds ~ what stays open once the roles drop out
 
@@ -116,7 +116,7 @@ Read from caps rather than from tiers, the landlord and bootstrap worries dissol
 
 <<~/ahu>>
 
-<<~ ahu #what-the-key-format-buys>>
+<<~ ahu #/what-the-key-format-buys>>
 
 !! What a key format buys, MEASURED ~ non-portability, never non-compromise
 
@@ -132,7 +132,7 @@ A browser vessel persists its signing key as a hex seed, so a same-origin read y
 
 <<~/ahu>>
 
-<<~ ahu #two-key-classes>>
+<<~ ahu #/two-key-classes>>
 
 !! Two key classes, two cures ~ and only one of them may go opaque
 
@@ -153,7 +153,7 @@ A browser vessel persists its signing key as a hex seed, so a same-origin read y
 
 <<~/ahu>>
 
-<<~ ahu #storage-that-vanishes>>
+<<~ ahu #/storage-that-vanishes>>
 
 !! Storage that vanishes ~ the eviction clock nobody hears
 
@@ -167,7 +167,7 @@ A minted key rests in browser storage, and browsers reclaim it. ''WebKit clears 
 
 <<~/ahu>>
 
-<<~ ahu #admit-inertness>>
+<<~ ahu #/admit-inertness>>
 
 !! Admit inertness ~ SAS, not a proximity radio
 
@@ -177,7 +177,7 @@ FIDO caBLE leans on a ''BLE proximity gate'' ONLY because its QR bootstraps a tu
 
 <<~/ahu>>
 
-<<~ ahu #groundings>>
+<<~ ahu #/groundings>>
 
 !! Groundings ~ the falsifiable rhymes
 
@@ -194,7 +194,7 @@ FIDO caBLE leans on a ''BLE proximity gate'' ONLY because its QR bootstraps a tu
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance ~ RESEARCHED, not built
 
@@ -202,7 +202,7 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -220,6 +220,6 @@ This meme stands ''PROPOSED'' — a two-lens research swarm (infrastructure/cert
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;48J_ReoGxUrf0uB0PKQGz7ZscTRVWukQ7MNhCRYWjo8
+<<^ code="&#x0003;">>ni:///sha-256;atZAMSZTCQdkz0qULFo9r8lUwJbtqUQ82-X4gJwAeeE
 
 <<^ code="&#x0004;" -> to=?>>

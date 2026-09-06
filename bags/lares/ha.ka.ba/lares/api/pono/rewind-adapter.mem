@@ -21,7 +21,7 @@ written   = "2026-06-30"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Rewind-Adapter ~ the kāpae detector, blind to the source app
 
@@ -33,7 +33,7 @@ The design donates upstream (#/donation): the base mempalace harvests transcript
 
 <<~/ahu>>
 
-<<~ ahu #the-industry-does-kapae>>
+<<~ ahu #/the-industry-does-kapae>>
 
 !! The Industry Already Does Kāpae
 
@@ -45,7 +45,7 @@ So the contribution splits clean: the mechanism (fork-and-keep) rhymes with prio
 
 <<~/ahu>>
 
-<<~ ahu #two-families>>
+<<~ ahu #/two-families>>
 
 !! Two Families ~ the load-bearing split
 
@@ -64,7 +64,7 @@ The split governs one flag per adapter (`appendOnly`, #the-adapter-contract) and
 
 <<~/ahu>>
 
-<<~ ahu #kapae-is-universal>>
+<<~ ahu #/kapae-is-universal>>
 
 !! Kāpae Is Universal ~ the correction
 
@@ -82,7 +82,7 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 
 <<~ set hud="yield" drift-ward="! · crossed the primed zone ↻ L-Prime">>
 
-<<~ ahu #per-app-table>>
+<<~ ahu #/per-app-table>>
 
 !! Per-App Table ~ the grounded map
 
@@ -102,7 +102,7 @@ Read on-disk from real stores on this box where marked; CLI/docs elsewhere. Each
 
 <<~/ahu>>
 
-<<~ ahu #the-identity-ladder>>
+<<~ ahu #/the-identity-ladder>>
 
 !! The Identity Ladder ~ four rungs, always parent-linked
 
@@ -117,7 +117,7 @@ The ladder degrades by degree, never hard-faults — the graceful-parsing discip
 
 <<~/ahu>>
 
-<<~ ahu #edit-vs-delete>>
+<<~ ahu #/edit-vs-delete>>
 
 !! Edit vs Delete ~ the shape of the disappearance
 
@@ -142,7 +142,7 @@ The classifier reads ''the shape of what went missing'' from the diff, then conf
 
 <<~/ahu>>
 
-<<~ ahu #the-adapter-contract>>
+<<~ ahu #/the-adapter-contract>>
 
 !! The Adapter Contract ~ the shore every source plugs into
 
@@ -164,7 +164,7 @@ The three emit-verbs map the three faces (#/the-three-faces): `fork` (keep both)
 
 <<~/ahu>>
 
-<<~ ahu #adapters-built>>
+<<~ ahu #/adapters-built>>
 
 !! Adapters Built ~ the swarm landed
 
@@ -183,7 +183,7 @@ Four adapters stand green against the `SourceAdapter` interface. Each names {`ap
 
 <<~/ahu>>
 
-<<~ ahu #the-three-faces>>
+<<~ ahu #/the-three-faces>>
 
 !! The Three Faces ~ onto Muse's model
 
@@ -197,7 +197,7 @@ Same primitive as the worldline's ratified `fork ≡ sibling-spawn`; the adapter
 
 <<~/ahu>>
 
-<<~ ahu #donation>>
+<<~ ahu #/donation>>
 
 !! Donation ~ the contribution back
 
@@ -215,7 +215,7 @@ Our contribution back: ''uuid-keying'' (the C-cut — turn-keyed identity), ''cu
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ how the map got read
 
@@ -233,7 +233,7 @@ Two research spirits stood the survey:
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -246,7 +246,7 @@ Two research spirits stood the survey:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kapae>>
 <<~ loulou lar:///ha.ka.ba/lararium/api/agent-worldline#/time>>
@@ -257,6 +257,6 @@ Two research spirits stood the survey:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;FbkrxkehV-ClTnwkCfSVQwNo0T3kcjE1BTnPch6IE0Y
+<<^ code="&#x0003;">>ni:///sha-256;YxhBqDPUjR8Y4U-BJzCl0Q3JO4vVS2cRxBdy5JSeuH0
 
 <<^ code="&#x0004;" -> to=?>>

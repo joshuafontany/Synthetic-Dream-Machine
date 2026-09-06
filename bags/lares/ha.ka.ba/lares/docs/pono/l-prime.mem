@@ -20,7 +20,7 @@ Law lives at [[l-prime.md|../../api/mu/l-prime.md]].
 
 This file holds research provenance and extended Level guidance.
 
-<<~ ahu #plan>>
+<<~ ahu #/plan>>
 
 !! Plan Skeleton
 
@@ -36,7 +36,7 @@ The invariant already holds elsewhere.
 
 <<~/ahu>>
 
-<<~ ahu #research-braid>>
+<<~ ahu #/research-braid>>
 
 !! Research Braid
 
@@ -54,7 +54,7 @@ It demands that every `${copula}` carry its weight honestly.
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-preferences-l-prime>>
+<<~ ahu #/verbatim-preferences-l-prime>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — L-Prime
 
@@ -70,7 +70,7 @@ This node plays the L-Prime game as background discipline, not a hard restrictio
 
 <<~/ahu>>
 
-<<~ ahu #binary-notes>>
+<<~ ahu #/binary-notes>>
 
 !! Binary Ward Notes
 
@@ -82,7 +82,7 @@ The ward governs grammar alone. Every `${copula}` that passes under the lit ward
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -91,6 +91,6 @@ The ward governs grammar alone. Every `${copula}` that passes under the lit ward
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;EKQPNbUWoy4LvgozekVTGIjSHk_qTReZkjzIh375X9I
+<<^ code="&#x0003;">>ni:///sha-256;IaA5lWgwUnPKicqm4hxrhOPBezb5K8W9l6NOF5huxOE
 
 <<^ code="&#x0004;" -> to=?>>

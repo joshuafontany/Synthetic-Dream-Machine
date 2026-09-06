@@ -18,7 +18,7 @@ uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architect
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lindwyrm's Hoard — DreamDeck Feed Architecture
 
@@ -26,7 +26,7 @@ Container, cast, format conventions, and tone laws for the Lindwyrm hoard story.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -44,7 +44,7 @@ Related loci:
 
 <<~/ahu>>
 
-<<~ ahu #format>>
+<<~ ahu #/format>>
 
 !! Format
 
@@ -62,7 +62,7 @@ The Lindwyrm tells the story herself, on feed, in response to Telarus.
 
 <<~/ahu>>
 
-<<~ ahu #technical-stack>>
+<<~ ahu #/technical-stack>>
 
 !! Technical Stack Target
 
@@ -85,7 +85,7 @@ Render targets:
 
 <<~/ahu>>
 
-<<~ ahu #post-header-law>>
+<<~ ahu #/post-header-law>>
 
 !! Post Header Law
 
@@ -133,7 +133,7 @@ System message:
 
 <<~/ahu>>
 
-<<~ ahu #cast>>
+<<~ ahu #/cast>>
 
 !! Cast
 
@@ -166,7 +166,7 @@ Peanut gallery, awe-to-skepticism spectrum, useful proxies for reader confusion.
 
 <<~/ahu>>
 
-<<~ ahu #lindwyrm-position>>
+<<~ ahu #/lindwyrm-position>>
 
 !! The Lindwyrm Among Great Dragons
 
@@ -185,7 +185,7 @@ Hermes, Hephaestus, Eris-Enyo, and Aracne-Jorogumo (Grandmother Spider) worked w
 
 <<~/ahu>>
 
-<<~ ahu #wyrmfile>>
+<<~ ahu #/wyrmfile>>
 
 !! WyrmFile — A Reader's Dossier
 
@@ -218,7 +218,7 @@ Then the Necrospire fell, Web 2.0 went dark, and every power that had smirked at
 
 <<~/ahu>>
 
-<<~ ahu #thread-beats>>
+<<~ ahu #/thread-beats>>
 
 !! Thread Beats
 
@@ -243,7 +243,7 @@ Beat sequence:
 
 <<~/ahu>>
 
-<<~ ahu #tone-laws>>
+<<~ ahu #/tone-laws>>
 
 !! Tone Laws
 
@@ -260,7 +260,7 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch //The 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -275,6 +275,6 @@ The Lindwyrm did not build the DreamNet from destiny. She wanted to watch //The 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qqh6gUBVXBeamk14LDTMRmNkxFmYXb_mTuu8c5yYEnU
+<<^ code="&#x0003;">>ni:///sha-256;zKt0kPL6wYRIlbpz4ioGOevtr3HtwPAkrOC4xOS9328
 
 <<^ code="&#x0004;" -> to=?>>

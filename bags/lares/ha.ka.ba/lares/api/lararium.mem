@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/lararium"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium
 
@@ -34,7 +34,7 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ receive threshold pressure; confirm entry edges bind.
 ⏿ orient the seat: agent mechanics stay local, threshold law stays in AGENTS, session dials stay in LARES.
@@ -44,7 +44,7 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 
 <<~/ahu>>
 
-<<~ ahu #core-hydration>>
+<<~ ahu #/core-hydration>>
 
 !! Core Hydration
 
@@ -56,7 +56,7 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -68,6 +68,6 @@ The lararium prepares the handoff to `lar:///ha.ka.ba/lares/api/pono/config` by 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4V8TdWxq9_Wa-eeIW_b4dyt9V3Fw0hcxoeFAUeXTlYc
+<<^ code="&#x0003;">>ni:///sha-256;WQAD7MkVFN13X2NIvrlqautgQnureKTD7GroFF5l_Z0
 
 <<^ code="&#x0004;" -> to=?>>

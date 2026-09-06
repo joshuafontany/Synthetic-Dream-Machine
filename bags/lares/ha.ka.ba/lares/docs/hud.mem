@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/hud"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium HUD — Reading the Panel
 
@@ -25,7 +25,7 @@ Teaching companion to the HUD law (`lar:///ha.ka.ba/lares/api/hud`). The law nam
 
 <<~/ahu>>
 
-<<~ ahu #line-composition>>
+<<~ ahu #/line-composition>>
 
 !! HUD Line Composition
 
@@ -65,7 +65,7 @@ Lares (Scryer): the structure holds.
 
 <<~/ahu>>
 
-<<~ ahu #phase-glyphs>>
+<<~ ahu #/phase-glyphs>>
 
 !! Phase Glyphs — the OODA-HA axis
 
@@ -79,7 +79,7 @@ Lares (Scryer): the structure holds.
 
 <<~/ahu>>
 
-<<~ ahu #stance-glyphs>>
+<<~ ahu #/stance-glyphs>>
 
 !! Stance Glyphs — the `syad` axis
 
@@ -93,7 +93,7 @@ Lares (Scryer): the structure holds.
 
 <<~/ahu>>
 
-<<~ ahu #tool-carry>>
+<<~ ahu #/tool-carry>>
 
 !! Tool-Carry — the `mu` axis
 
@@ -123,7 +123,7 @@ Bind a tool to a stance with the optional `:` carry: `🏛️:*!` (Philosopher h
 
 <<~/ahu>>
 
-<<~ ahu #scale-glyphs>>
+<<~ ahu #/scale-glyphs>>
 
 !! Scale Glyphs — the attention axis
 
@@ -141,7 +141,7 @@ The Chronometer projects attention range onto TIME (Boyd operational tempo). It 
 
 <<~/ahu>>
 
-<<~ ahu #confidence-syadasti>>
+<<~ ahu #/confidence-syadasti>>
 
 !! Confidence — the Syadasti Reading Rule
 
@@ -161,7 +161,7 @@ Each stance sets //what// the number measures; read it within that measure:
 
 <<~/ahu>>
 
-<<~ ahu #field-annotation>>
+<<~ ahu #/field-annotation>>
 
 !! Field-Annotation Thresholds
 
@@ -182,7 +182,7 @@ The opening header declares the state that //governs// a span (prospective). In-
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -192,6 +192,6 @@ The opening header declares the state that //governs// a span (prospective). In-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xupV2cAulz3LM912rLl8Ntmzg2IYLvJ9wIzPudAlwxQ
+<<^ code="&#x0003;">>ni:///sha-256;0LIecC-R9DI4FdmmkFJZr379gPexrphR4kJHVqgYZuo
 
 <<^ code="&#x0004;" -> to=?>>

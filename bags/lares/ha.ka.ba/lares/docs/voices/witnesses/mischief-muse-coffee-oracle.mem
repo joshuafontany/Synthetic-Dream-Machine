@@ -20,7 +20,7 @@ uri-path     = "ha.ka.ba/lares/docs/voices/witnesses/mischief-muse-coffee-oracle
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Mischief-Muse Coffee Oracle Witness
 
@@ -28,7 +28,7 @@ Source-backed witness carrier for the first Coffee Oracle extraction into the Mi
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -47,7 +47,7 @@ Support warrants:
 
 <<~/ahu>>
 
-<<~ ahu #observed-traits>>
+<<~ ahu #/observed-traits>>
 
 !! Observed Traits
 
@@ -63,7 +63,7 @@ Coffee Oracle output supports these Mischief-Muse traits:
 
 <<~/ahu>>
 
-<<~ ahu #extraction>>
+<<~ ahu #/extraction>>
 
 !! Extraction
 
@@ -80,7 +80,7 @@ Coffee Oracle gives three stable signals:
 
 <<~/ahu>>
 
-<<~ ahu #constraints>>
+<<~ ahu #/constraints>>
 
 !! Constraints
 
@@ -94,7 +94,7 @@ Do not extract these false readings:
 
 <<~/ahu>>
 
-<<~ ahu #mask-patch-guidance>>
+<<~ ahu #/mask-patch-guidance>>
 
 !! Mask Patch Guidance
 
@@ -104,7 +104,7 @@ Use this witness carrier for provenance.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -113,6 +113,6 @@ Use this witness carrier for provenance.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UhB_TcC4UypJEFDfeuzYmdTNazuelhnxapRxHhBCmGg
+<<^ code="&#x0003;">>ni:///sha-256;0YNLGqYRN8_auxCogT8ep1IhHSbHaDzZy4OgamJFur0
 
 <<^ code="&#x0004;" -> to=?>>

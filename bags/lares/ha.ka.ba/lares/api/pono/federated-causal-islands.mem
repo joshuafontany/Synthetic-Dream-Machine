@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/federated-causal-islands"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Federated Causal Islands
 
@@ -27,7 +27,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ locate the causal boundary — where can causality not be guaranteed simultaneously?
 ⏿ orient the tier: Tier 0 kumu/active memes, Tier 1 wiki wiki memes, Tier 2 Automerge Realms, Tier 3 Lares nodes, Tier 4 Commons/Universe horizon
@@ -37,7 +37,7 @@ Named causal island tiers 0–3; authority-first sync order; edge-island identit
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Ontological Basis (Fuller-Zelenka)
 
@@ -98,7 +98,7 @@ regardless of first encounter point on the network.
 
 <<~/ahu>>
 
-<<~ ahu #edge-island-shape>>
+<<~ ahu #/edge-island-shape>>
 
 !! Edge Island Shape
 
@@ -138,7 +138,7 @@ resumes from its last known offset — it never re-syncs from the beginning.
 
 <<~/ahu>>
 
-<<~ ahu #sync-order>>
+<<~ ahu #/sync-order>>
 
 !! Authority-First Sync Order
 
@@ -163,7 +163,7 @@ A peer MUST complete step 3 before requesting individual meme deltas.
 
 <<~/ahu>>
 
-<<~ ahu #lifecycle>>
+<<~ ahu #/lifecycle>>
 
 !! Edge Island Lifecycle
 
@@ -185,7 +185,7 @@ stable sediment | current boot receipt | live delta tail
 
 <<~/ahu>>
 
-<<~ ahu #relay-law>>
+<<~ ahu #/relay-law>>
 
 !! Relay Law
 
@@ -204,7 +204,7 @@ The altar does not require the relay to comprehend the offering to carry it.
 
 <<~/ahu>>
 
-<<~ ahu #task-handoff>>
+<<~ ahu #/task-handoff>>
 
 !! Cross-Peer Task Handoff (design space)
 
@@ -261,7 +261,7 @@ distributed-locking "fencing token"; see `project_next_vectors`.)
 
 <<~/ahu>>
 
-<<~ ahu #tier-map>>
+<<~ ahu #/tier-map>>
 
 !! Tier Map
 
@@ -304,7 +304,7 @@ Tier 4 — Commons / Universe horizon (after law-of-5s)
 
 <<~/ahu>>
 
-<<~ ahu #causal-island-doctrine>>
+<<~ ahu #/causal-island-doctrine>>
 
 !! Causal Island Doctrine
 
@@ -329,7 +329,7 @@ Cross-node causality errors produce federation corruption.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -375,13 +375,13 @@ causal-island-may = [
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4nG6kuk0YW0GW8MRF0csjtODC2MX1z5GJVuhdhVYuVk
+<<^ code="&#x0003;">>ni:///sha-256;FCg01slIDDaCq0VnC2IX5O38-6flaZTDPprrUNG25lk
 
 <<^ code="&#x0004;" -> to=?>>

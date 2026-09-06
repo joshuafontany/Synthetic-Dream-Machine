@@ -22,7 +22,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/system-pattern-integrities"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! System Pattern-Integrities
 
@@ -38,7 +38,7 @@ Named exceptions: CODEC_EXCEPTIONS.
 
 <<~/ahu>>
 
-<<~ ahu #mind-laws>>
+<<~ ahu #/mind-laws>>
 
 !! MIND Laws — the Automerge store functions as the mind
 
@@ -66,7 +66,7 @@ desc  = "App shell serves from the Service Worker cache. Automerge islands hydra
 
 <<~/ahu>>
 
-<<~ ahu #island-laws>>
+<<~ ahu #/island-laws>>
 
 !! ISLAND Laws — causal island identity, boundary, and boot origin
 
@@ -105,7 +105,7 @@ desc  = "Presence behaves like weather. Memory MUST survive presence loss. Durab
 
 <<~/ahu>>
 
-<<~ ahu #authority-laws>>
+<<~ ahu #/authority-laws>>
 
 !! AUTHORITY Laws — carrier canon, residency actions, trust ladder
 
@@ -144,7 +144,7 @@ desc  = "Trust order (strongest first): hostless pattern-integrity memes → hos
 
 <<~/ahu>>
 
-<<~ ahu #codec-laws>>
+<<~ ahu #/codec-laws>>
 
 !! CODEC Laws — format, grammar, and round-trip laws
 
@@ -180,7 +180,7 @@ desc  = "Tiddler conflict resolution uses highest-priority bag wins. The TW5 vm 
 
 <<~/ahu>>
 
-<<~ ahu #codec-exceptions>>
+<<~ ahu #/codec-exceptions>>
 
 !! CODEC Exceptions — named deliberate deviations
 
@@ -213,7 +213,7 @@ desc  = "TW5 core JS and vendored plugin bundles live in LarariumDoc.blobs (bina
 
 <<~/ahu>>
 
-<<~ ahu #system-laws>>
+<<~ ahu #/system-laws>>
 
 !! SYSTEM Laws — five architecture laws
 
@@ -252,7 +252,7 @@ desc  = "*.md carrier files are projections of parent + fragment tiddler package
 
 <<~/ahu>>
 
-<<~ ahu #pentadic-laws>>
+<<~ ahu #/pentadic-laws>>
 
 !! PENTADIC Laws — the Law of Fives as a structural pattern-integrity
 
@@ -285,7 +285,7 @@ desc  = "Fuller's five pattern integrities (tensegrity, wave/water, synergy, eph
 
 <<~/ahu>>
 
-<<~ ahu #genesis-pattern-integrities>>
+<<~ ahu #/genesis-pattern-integrities>>
 
 !! GENESIS Pattern-Integrities — causal origin, content-addressed identity, quine semantics
 
@@ -318,7 +318,7 @@ desc  = "@phase: S5 — proved Sprint 5. The genesis artifact carries the TW5 en
 
 <<~/ahu>>
 
-<<~ ahu #peer-pattern-integrities>>
+<<~ ahu #/peer-pattern-integrities>>
 
 !! PEER Pattern-Integrities — peer symmetry at boot and post-boot authority boundaries
 
@@ -342,7 +342,7 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -356,6 +356,6 @@ desc  = "Authority flows from a capability receipt, signature, or policy (Keyhiv
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1I5OGMnN_DFhRimwnmr1y-nw9W59Wokph6rKml3Tc_g
+<<^ code="&#x0003;">>ni:///sha-256;Jxg0-eu2fKJut5Zk019zwizQZuYyzVSQx9h6G4rOpOY
 
 <<^ code="&#x0004;" -> to=?>>

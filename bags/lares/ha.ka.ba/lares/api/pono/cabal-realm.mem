@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/cabal-realm"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Cabal-Realm ~ a hearth beside, not a category above
 
@@ -36,7 +36,7 @@ Triple-cruci­bled (your recorded design · the deep web · the canon). The mode
 
 <<~/ahu>>
 
-<<~ ahu #verb-not-noun>>
+<<~ ahu #/verb-not-noun>>
 
 !! A Verb, Not a Noun (the Mu)
 
@@ -50,7 +50,7 @@ But the Mu cuts both ways: a ''verb-realm carries a defended noun-boundary.'' Dr
 
 <<~/ahu>>
 
-<<~ ahu #convening-and-cabal>>
+<<~ ahu #/convening-and-cabal>>
 
 !! The convening ends ~ the Cabal holds
 
@@ -71,7 +71,7 @@ But the Mu cuts both ways: a ''verb-realm carries a defended noun-boundary.'' Dr
 
 <<~/ahu>>
 
-<<~ ahu #the-realm>>
+<<~ ahu #/the-realm>>
 
 !! The Realm ~ named, ruled, lived, dissolved
 
@@ -82,7 +82,7 @@ But the Mu cuts both ways: a ''verb-realm carries a defended noun-boundary.'' Dr
 
 <<~/ahu>>
 
-<<~ ahu #the-tie-break>>
+<<~ ahu #/the-tie-break>>
 
 !! The Tie-Break ~ the realm's epoch (BeeKEM), not a person
 
@@ -95,7 +95,7 @@ The held multi-principal key-handover break — concurrent add-while-remove leak
 
 <<~/ahu>>
 
-<<~ ahu #governance>>
+<<~ ahu #/governance>>
 
 !! Governance ~ the boundary the verb must keep (Ostrom)
 
@@ -116,7 +116,7 @@ The Ostrom principles above still hold ''unchanged'' under the cut; they govern 
 
 <<~/ahu>>
 
-<<~ ahu #the-unswept-corner>>
+<<~ ahu #/the-unswept-corner>>
 
 !! The Unswept Corner ~ persistence ≠ legitimacy (OPEN)
 
@@ -135,7 +135,7 @@ This stays ''OPEN — the operator's design seat'': the residual reads as calibr
 
 <<~/ahu>>
 
-<<~ ahu #the-seal>>
+<<~ ahu #/the-seal>>
 
 !! The Seal ~ content keys to the question, not the roster (predicate-keyed, plane-collapsed)
 
@@ -143,7 +143,7 @@ A cabal-realm shares content without materializing a reader-set. It seals each p
 
 <<~/ahu>>
 
-<<~ ahu #six-joints>>
+<<~ ahu #/six-joints>>
 
 !! Six joints under one word ~ and the criterion that separates them
 
@@ -169,7 +169,7 @@ A cabal-realm shares content without materializing a reader-set. It seals each p
 
 <<~/ahu>>
 
-<<~ ahu #heraldry>>
+<<~ ahu #/heraldry>>
 
 !! The public Face reads as HERALDRY ~ a shown device, never a muster roll
 
@@ -183,7 +183,7 @@ A cabal-realm shares content without materializing a reader-set. It seals each p
 
 <<~/ahu>>
 
-<<~ ahu #two-roots>>
+<<~ ahu #/two-roots>>
 
 !! Two Roots ~ a public surface may stand; a person-history may not
 
@@ -191,7 +191,7 @@ A cabal splits at ''two roots'' (operator ruling). A ''private-held root'' — t
 
 <<~/ahu>>
 
-<<~ ahu #the-wax-stamp>>
+<<~ ahu #/the-wax-stamp>>
 
 !! The Wax-Stamp ~ provenance of the DATA, never presence of the person (the public-plane dual)
 
@@ -214,6 +214,6 @@ The honest wall, kept lit: ''"valid trace to lineage L" reads as a hard crypto f
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/multi-fractal>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>>
 
-<<^ code="&#x0003;">>ni:///sha-256;23GHbnwBc73eJAFFzM13vw2UltG8yfPhsudpM4Wcawg
+<<^ code="&#x0003;">>ni:///sha-256;UdmaXs_6Ol-kVJod_EI_ci0yfkIq1ev5s1ke_eerS8Q
 
 <<^ code="&#x0004;" -> to=?>>

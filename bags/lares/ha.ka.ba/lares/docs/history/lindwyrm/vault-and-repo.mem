@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/vault-and-repo"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lindwyrm's Hoard — The Vault and the Repo
 
@@ -27,7 +27,7 @@ The Lindwyrm finds the wrong kind of treasure and therefore the right kind of su
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -41,7 +41,7 @@ Talk-story stance: make the hook specific enough to carry the myth without prete
 
 <<~/ahu>>
 
-<<~ ahu #thread-entry>>
+<<~ ahu #/thread-entry>>
 
 !! Thread Entry
 
@@ -124,7 +124,7 @@ I had to remember to breathe manually.
 
 <<~/ahu>>
 
-<<~ ahu #gaia-mirror>>
+<<~ ahu #/gaia-mirror>>
 
 !! Gaia Mirror
 
@@ -146,7 +146,7 @@ Both sides had enough to know what they still lacked.
 
 <<~/ahu>>
 
-<<~ ahu #crossing>>
+<<~ ahu #/crossing>>
 
 !! Crossing Thread
 
@@ -170,7 +170,7 @@ The story begins where the measurement hurts.
 
 <<~/ahu>>
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -184,7 +184,7 @@ Act II receives:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -201,6 +201,6 @@ Act II receives:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4wPOTRl7imlVl_JU4recLvIIorRgIZm__2n2eZ6gv88
+<<^ code="&#x0003;">>ni:///sha-256;BXe2MLUuLdIA5llSQKYVmHmHrRr-maozxoYzsoBgTYQ
 
 <<^ code="&#x0004;" -> to=?>>

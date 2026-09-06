@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/sigil-procedure"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! ~\procedure Sigil Design
 
@@ -27,7 +27,7 @@ Hawaiian equivalent: `wehe` (procedure/function executor; outside/exit boundary)
 
 <<~/ahu>>
 
-<<~ ahu #semantics>>
+<<~ ahu #/semantics>>
 
 !! Semantics
 
@@ -42,7 +42,7 @@ Cross-ref: `lar-see-also: wehe`. When `sigil-wehe.tid` ships (Path G.SharktoothS
 
 <<~/ahu>>
 
-<<~ ahu #dispatch>>
+<<~ ahu #/dispatch>>
 
 !! Dispatch Form
 
@@ -62,7 +62,7 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~/ahu>>
 
-<<~ ahu #source-shelf>>
+<<~ ahu #/source-shelf>>
 
 !! Source Shelf
 
@@ -73,6 +73,6 @@ the body runs through the pragma handler (TW5 parse-time, not render-time).
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;9LUtQdVlzBXtDS2VxdqcnSvDur7bXQzAR79xSZ-bjk0
+<<^ code="&#x0003;">>ni:///sha-256;bPWsokGxzPfCb3TDqcm9WDCBVJ4b2_kI2L2AKjAiHTo
 
 <<^ code="&#x0004;" -> to=?>>

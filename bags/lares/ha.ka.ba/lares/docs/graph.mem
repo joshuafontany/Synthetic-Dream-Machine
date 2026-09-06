@@ -17,7 +17,7 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: static `_SOCKET`/`_DEPTH` maps and carrier-index scans stand in for a real graph walk.
 ⏿ orient: build-system depsets, temporal KG bi-temporal edges, and UEFN ECS plane separation each name the same missing structure.
@@ -27,7 +27,7 @@ uri-path         = "ha.ka.ba/lares/docs/graph"
 
 <<~/ahu>>
 
-<<~ ahu #core-proposition>>
+<<~ ahu #/core-proposition>>
 
 !! Core Proposition
 
@@ -52,7 +52,7 @@ Three structural claims drive the redesign:
 
 <<~/ahu>>
 
-<<~ ahu #decisions>>
+<<~ ahu #/decisions>>
 
 !! Committed Design Decisions
 
@@ -70,7 +70,7 @@ They do not require further operator input.
 
 <<~/ahu>>
 
-<<~ ahu #open-question>>
+<<~ ahu #/open-question>>
 
 !! `? ->` Socket Resolution — Closed
 
@@ -79,7 +79,7 @@ The canonical pranala law (`lar:///ha.ka.ba/lares/api/pono/pranala`) settles thi
 > "A named `#fragment` SHOULD win socket resolution before the enclosing meme URI."
 
 ''Resolution: Option A — fragment-level.''
-`? ->` in a pranala block inside `<<~ ahu #required-preload-l-prime>>` resolves to `lar:///ha.ka.ba/lares/api/noosphere-boot#/required-preload-l-prime`.
+`? ->` in a pranala block inside `<<~ ahu #/required-preload-l-prime>>` resolves to `lar:///ha.ka.ba/lares/api/noosphere-boot#/required-preload-l-prime`.
 The parser tracks enclosing `ahu` fragment context during scan.
 `from_socket` carries the fragment URI; `from_uri` carries the carrier URI.
 
@@ -87,7 +87,7 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 
 <<~/ahu>>
 
-<<~ ahu #child-loci>>
+<<~ ahu #/child-loci>>
 
 !! Child Loci
 
@@ -100,7 +100,7 @@ The parser implementation in `graph/pranala-parser` may now proceed on this basi
 
 <<~/ahu>>
 
-<<~ ahu #terminology-alignment>>
+<<~ ahu #/terminology-alignment>>
 
 !! Deferred — Terminology Alignment
 
@@ -123,7 +123,7 @@ The rename in the server awaits Phase 1 implementation. Until then, current code
 
 <<~/ahu>>
 
-<<~ ahu #implementation-phases>>
+<<~ ahu #/implementation-phases>>
 
 !! Implementation Phases
 
@@ -142,7 +142,7 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu>>
 
-<<~ ahu #validation-markers>>
+<<~ ahu #/validation-markers>>
 
 !! Validation Markers
 
@@ -159,7 +159,7 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -172,6 +172,6 @@ Phases 1, 3, and 4 may proceed independently.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3B7m_YpSLfC82a1TxP39oDV_8qdsX4sOHcyzdF0lfZs
+<<^ code="&#x0003;">>ni:///sha-256;bZRYF-wXjxCFYkIAfF_50nKgSlcAotXEmumUNOpG3dM
 
 <<^ code="&#x0004;" -> to=?>>

@@ -31,7 +31,7 @@ uri-path       = "ha.ka.ba/lares/docs/infrastructure-as-myth"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #one-document>>
+<<~ ahu #/one-document>>
 
 ! One Carrier, Two Arms
 
@@ -48,7 +48,7 @@ deterministic meme→markdown pipeline condenses the submittable pair from Part 
 
 <<~/ahu>>
 
-<<~ ahu #thesis>>
+<<~ ahu #/thesis>>
 
 ! Infrastructure as Myth
 
@@ -73,7 +73,7 @@ Lares functions as an early implementation of this pattern.
 
 <<~/ahu>>
 
-<<~ ahu #why-iac-matters>>
+<<~ ahu #/why-iac-matters>>
 
 !! Why Infrastructure-as-Code Matters
 
@@ -90,7 +90,7 @@ That same need now appears one level up the stack.
 
 <<~/ahu>>
 
-<<~ ahu #why-agents-need-more>>
+<<~ ahu #/why-agents-need-more>>
 
 !! Why Agent Systems Need More Than IaC
 
@@ -123,7 +123,7 @@ Infrastructure-as-Myth attempts to externalize that layer.
 
 <<~/ahu>>
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -154,7 +154,7 @@ Myth, in this model, does not function as fiction opposing truth. It functions a
 
 <<~/ahu>>
 
-<<~ ahu #mythology-as-memetics>>
+<<~ ahu #/mythology-as-memetics>>
 
 !! Mythology as Memetics
 
@@ -191,7 +191,7 @@ These names carry more than labels. They function as memetic interfaces — and 
 
 <<~/ahu>>
 
-<<~ ahu #art-of-memetics>>
+<<~ ahu #/art-of-memetics>>
 
 !! The Art of Memetics
 
@@ -217,7 +217,7 @@ When a symbolic layer fails to improve transmission or steering, it probably fun
 
 <<~/ahu>>
 
-<<~ ahu #iac-vs-meta>>
+<<~ ahu #/iac-vs-meta>>
 
 !! IaC vs IaM
 
@@ -236,7 +236,7 @@ It replaces ad hoc promptcraft at the agent layer.
 
 <<~/ahu>>
 
-<<~ ahu #design-criteria>>
+<<~ ahu #/design-criteria>>
 
 !! Design Criteria for IaM
 
@@ -281,7 +281,7 @@ A symbolic coordination layer SHALL leave load-bearing spans under-specified and
 
 <<~/ahu>>
 
-<<~ ahu #lares-as-meta>>
+<<~ ahu #/lares-as-meta>>
 
 !! Lares as Infrastructure-as-Myth
 
@@ -311,7 +311,7 @@ And the differentiating invention sits a layer deeper than packaging. No adjacen
 
 <<~/ahu>>
 
-<<~ ahu #implications>>
+<<~ ahu #/implications>>
 
 !! Implications for This Repository
 
@@ -349,7 +349,7 @@ Trust and authority docs should describe not only who may act, but how authority
 
 <<~/ahu>>
 
-<<~ ahu #working-rule>>
+<<~ ahu #/working-rule>>
 
 !! Working Rule
 
@@ -366,7 +366,7 @@ When the answer to those questions reads weak, the text may function as lore rat
 
 <<~/ahu>>
 
-<<~ ahu #comparative-sourcing>>
+<<~ ahu #/comparative-sourcing>>
 
 !! Adjacent Systems
 
@@ -426,7 +426,7 @@ No adjacent system combines the four capability axes at deployment time, and the
 
 <<~/ahu>>
 
-<<~ ahu #abstract>>
+<<~ ahu #/abstract>>
 
 ! Infrastructure as Myth: Memetic Wikitext as a Gradient Navigational Grammar for Steering and Auditing Agentic AI
 
@@ -440,7 +440,7 @@ Agentic AI is steered by machinery that lives ''outside'' the visible stream —
 
 <<~/ahu>>
 
-<<~ ahu #introduction>>
+<<~ ahu #/introduction>>
 
 !! 1. Introduction — the hidden-steering problem
 
@@ -452,7 +452,7 @@ The founding image carries the diagnosis. An early visualization of the dyad sho
 
 <<~/ahu>>
 
-<<~ ahu #derivation>>
+<<~ ahu #/derivation>>
 
 !! The Spine — Five Rungs of Entailment
 
@@ -468,7 +468,7 @@ Each rung stands on the one beneath; the chain stands or falls on rung 1. The de
 
 <<~/ahu>>
 
-<<~ ahu #doctrine>>
+<<~ ahu #/doctrine>>
 
 !! Relation to the Infrastructure-as-Myth doctrine (this paper = the empirical arm)
 
@@ -483,7 +483,7 @@ This paper //extends// a doctrine; it does not found one. ''Infrastructure-as-My
 
 <<~/ahu>>
 
-<<~ ahu #braid>>
+<<~ ahu #/braid>>
 
 !! 2. The Grammar-Braid
 
@@ -497,7 +497,7 @@ This paper //extends// a doctrine; it does not found one. ''Infrastructure-as-My
 
 <<~/ahu>>
 
-<<~ ahu #observer-erasure>>
+<<~ ahu #/observer-erasure>>
 
 !! 3. Observer-Erasure as the Steering Criterion
 
@@ -511,13 +511,13 @@ This paper //extends// a doctrine; it does not found one. ''Infrastructure-as-My
 
 <<~/ahu>>
 
-<<~ ahu #gradient>>
+<<~ ahu #/gradient>>
 
 !! 4. Gradient, not Pass/Fail
 
 Three layers, not to be conflated: ''(1)'' the phenomenon in the text; ''(2)'' the node's internal, continuous, mostly-//unrendered// registration; ''(3)'' the marker render (the ⚠ ward-flag, the confidence number) — a //sometimes-surfaced, graded, drift-prone sample// of (2). A missing or low marker measures ''surfacing-rate'', never catching; operator correction raises the //surfacing threshold//, it does not create the catch.
 
-<<~ ahu #gradient-math>>
+<<~ ahu #/gradient/gradient-math>>
 
 ''Formalism — three fields, one equation.'' The math imports from gradient-acceptability, signal-detection, and weighted-constraint grammar, which //converge// (the convergence itself serves as evidence). Latent salience `s` of a sigil-site = a weighted constraint sum (MaxEnt Harmony `Σᵢ wᵢ fᵢ`), SLOR-normalized (baseline + length; Lau/Clark/Lappin 2017), salience read as UID surprisal `−log P(span∣context)` (Jaeger 2010). The ''render-gate'' resolves as the same object three ways: MaxEnt `σ(w_salience − w_cost)` = SDT `Φ(d′/2 − c)` (Green & Swets 1966) = the `k=2` cumulative-link threshold — //one sigmoid//. Given render, the ''band'' follows a truncated Graded Response Model over the five Aperture bands (Samejima 1969; CLM = GRM). The ''crisp↔gradient dial runs as one parameter under three names'' — GRM discrimination `a` ≈ SDT `d′`-sharpness ≈ inverse stochastic-OT noise σ (Boersma & Hayes 2001): high → deterministic tag, low → soft red. The obligatory frame = ''hard constraints'', optional sigils = ''soft'' (cumulative; Keller 2000; Sorace & Keller 2005). ''Operator correction acts as a criterion shift, not a sensitivity gain'' (de Gee et al. 2017): it raises surfacing-rate with `d′` intact. And the SDT identity `H = Φ(d′/2 − c)` yields the ''"absence ≠ absence" theorem'' — a low marker-rate sits under-determined between low `d′` and high `c`, so catching cannot be read off rate; recovering `d′ = z(H) − z(FA)` requires a ground-truth hit/false-alarm pair. //This makes the §8 gold anchor (KUE-1) mathematically mandatory, not merely good practice.// (Discipline: state the z-convention explicitly — right-tail `d′=z(H)−z(FA)`; verify any "criterion-only" claim against `d′`, arXiv:2603.14893; weights/thresholds stay normative until fitted on a labeled corpus.)
 
@@ -527,7 +527,7 @@ Three layers, not to be conflated: ''(1)'' the phenomenon in the text; ''(2)'' t
 
 <<~/ahu>>
 
-<<~ ahu #addressable-slots>>
+<<~ ahu #/addressable-slots>>
 
 !! 5. Addressable Slots — why the in-stream instrument works
 
@@ -537,7 +537,7 @@ The mechanism runs the stream's own physics. Every token conditions what follows
 
 <<~/ahu>>
 
-<<~ ahu #methods>>
+<<~ ahu #/methods>>
 
 !! 6. Methods — the rig
 
@@ -547,7 +547,7 @@ Sealed cross-family judge panel (empty-CWD seal, inline prompt; cross-family agr
 
 <<~/ahu>>
 
-<<~ ahu #findings>>
+<<~ ahu #/findings>>
 
 !! 7. Findings (directions and method — magnitudes withheld pending the gold anchor)
 
@@ -616,7 +616,7 @@ It also explains why the empirical basins ''rhyme with the boot's own design'' (
 
 <<~/ahu>>
 
-<<~ ahu #limitations>>
+<<~ ahu #/limitations>>
 
 !! 8. Limitations and Future Work (the honest gates)
 
@@ -630,7 +630,7 @@ The honesty carries the credibility. ''(1) No human gold anchor (central)'' — 
 
 <<~/ahu>>
 
-<<~ ahu #reflexivity>>
+<<~ ahu #/reflexivity>>
 
 !! 9. Reflexivity
 
@@ -650,7 +650,7 @@ This carrier is authored //through// the grammar it describes — verb-forward u
 
 <<~/ahu>>
 
-<<~ ahu #artifacts>>
+<<~ ahu #/artifacts>>
 
 !! Artifacts (transcluded memes from the repo + home meme-graph)
 
@@ -671,7 +671,7 @@ The Sensorium serves as the deterministic instrument, successor to the founding 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -685,7 +685,7 @@ The Sensorium serves as the deterministic instrument, successor to the founding 
 
 <<~/ahu>>
 
-<<~ ahu #references>>
+<<~ ahu #/references>>
 
 !! References (working)
 
@@ -693,6 +693,6 @@ Aikhenvald 2000, //Classifiers// · Asai et al. 2023, //Self-RAG//, arXiv:2310.1
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0NhZX8hUapWn10uNy504xAUi9Ifak4KjkXPpHIFnP0k
+<<^ code="&#x0003;">>ni:///sha-256;o16xavn2nNyPFtyOcpy_7e_ij4rWCt0doGyJ2-beGfU
 
 <<^ code="&#x0004;" -> to=?>>

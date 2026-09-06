@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/tw5-fields-flat"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -39,12 +39,12 @@ Before this file, `wiki-handlers.ts` owned `flattenRuntimeTiddlerFields()` (skip
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/tw5-fields-flat" $mode="block"/>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;XiS1Nzf_z-WTHdU6lm4f8BXKkFw1Rwbuo8HRlJ_-0Xc
+<<^ code="&#x0003;">>ni:///sha-256;ZhuBOeYPy3sp3Ca9327lN9VNHITPnNoeqFGge5-oim4
 
 <<^ code="&#x0004;" -> to=?>>

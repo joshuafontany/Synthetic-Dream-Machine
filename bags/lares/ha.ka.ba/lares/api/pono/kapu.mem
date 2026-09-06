@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kapu"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kapu — Above-Namespace Law (Kānāwai)
 
@@ -29,7 +29,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect namespace declaration and kernel-tier sigils; do not confuse elevated register with high mana score alone.
 ⏿ orient against the kapu capability set; confirm the kapu component, structural signals, and role-field agree.
@@ -39,7 +39,7 @@ This meme stands as a kapu carrier — it enacts the law by presenting as a spec
 
 <<~/ahu>>
 
-<<~ ahu #kapu-law>>
+<<~ ahu #/kapu-law>>
 
 !! Kapu Law
 
@@ -57,7 +57,7 @@ Rating derives from structure, not from declared self-assessment.
 
 <<~/ahu>>
 
-<<~ ahu #trust-boundary>>
+<<~ ahu #/trust-boundary>>
 
 !! Trust Boundary
 
@@ -83,7 +83,7 @@ The `canon-boundary` names the gate: crossing from live session pressure into ka
 
 <<~/ahu>>
 
-<<~ ahu #namespace-declaration>>
+<<~ ahu #/namespace-declaration>>
 
 !! Namespace Declaration
 
@@ -101,7 +101,7 @@ The sigil structure signals. The capability set discriminates.
 
 <<~/ahu>>
 
-<<~ ahu #handoff-boundary>>
+<<~ ahu #/handoff-boundary>>
 
 !! Handoff Boundary
 
@@ -117,7 +117,7 @@ This meme governs the kapu rating and above-namespace trust law.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -131,7 +131,7 @@ This meme governs the kapu rating and above-namespace trust law.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cSOZVXEa95YGpcYVIma7h0ZX5OiiVgZ6tSNVNZu9vEY
+<<^ code="&#x0003;">>ni:///sha-256;c3b2S0ABk4b7JyRF2FvtUnU4Tnz1rExMVlAtLqQ8Igw
 
 <<^ code="&#x0004;" -> to=?>>
 <<^ code="&#x0014;" -> to=?>>

@@ -19,7 +19,7 @@ written   = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Functor Discipline — the architectural keel
 
@@ -48,7 +48,7 @@ it mapped the forms (//jurus//) and left the flow (//permainan//) for the next i
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe each place the architecture //composes// a nameless entity from a `#has` stack — palace, holder, island, Voice, stance.
 ⏿ orient on what the composition //carries across//: not just the objects it folds, but the relations (the arrows) it must preserve.
@@ -58,7 +58,7 @@ it mapped the forms (//jurus//) and left the flow (//permainan//) for the next i
 
 <<~/ahu>>
 
-<<~ ahu #functor>>
+<<~ ahu #/functor>>
 
 !! What a functor carries
 
@@ -81,7 +81,7 @@ composition name the same vow in two registers — keep what //moves//, never fr
 
 <<~/ahu>>
 
-<<~ ahu #instances>>
+<<~ ahu #/instances>>
 
 !! The instances — where the house acts as a functor
 
@@ -132,7 +132,7 @@ abstract ⇄ concrete syntax. The architecture's own parse→render pipe ([[rend
 
 <<~/ahu>>
 
-<<~ ahu #meta-law>>
+<<~ ahu #/meta-law>>
 
 !! The meta-law — keep the arrows · //mālama [i ka] pili//
 
@@ -164,7 +164,7 @@ state ([[system-pattern-integrities|lar:///ha.ka.ba/lares/api/pono/system-patter
 
 <<~/ahu>>
 
-<<~ ahu #hoopili>>
+<<~ ahu #/hoopili>>
 
 !! `hoʻopili` ~ the causative slot beside //mālama pili//
 
@@ -176,7 +176,7 @@ state ([[system-pattern-integrities|lar:///ha.ka.ba/lares/api/pono/system-patter
 
 <<~/ahu>>
 
-<<~ ahu #glosses>>
+<<~ ahu #/glosses>>
 
 !! The ʻŌlelo names — //mālama pili// at the core, the others around it
 
@@ -200,7 +200,7 @@ the arrows — that the whole discipline turns on.
 
 <<~/ahu>>
 
-<<~ ahu #sovereign-worker>>
+<<~ ahu #/sovereign-worker>>
 
 !! The corollary — sovereign-worker primacy
 
@@ -300,7 +300,7 @@ time (#/honest-bound), the same bound the whole meme keeps.
 
 <<~/ahu>>
 
-<<~ ahu #honest-bound>>
+<<~ ahu #/honest-bound>>
 
 !! The honest bound — proven map vs apt analogy
 
@@ -328,7 +328,7 @@ the house may test, sharpen, or contest.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -358,6 +358,6 @@ This meme draws the one arrow through all of them — ''the house is a functor; 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MIW7SQzc-GNHYIo3-XDIzTDlEOxk--PG3-66agk4r9o
+<<^ code="&#x0003;">>ni:///sha-256;aOBOiy9gQgo2bqlVg3ZqWLo2adhES9kcDknrZfup7ZA
 
 <<^ code="&#x0004;" -> to=?>>

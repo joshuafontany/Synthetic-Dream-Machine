@@ -93,7 +93,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/ui/meta-panel"
 </div>
 \end
 
-<<~ ahu #hud-fields>>
+<<~ ahu #/hud-fields>>
 
 ```toml
 # Canonical field ordering for meta-panel render and MCP hud tool.
@@ -111,13 +111,13 @@ exclude = ["title", "text", "tags", "bag", "revision", "created", "modified", "c
 
 
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/hud>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ig2u_6ldDfP3eyNSWfrpbfPr6ZVA9ZttSm1BZdaHw-w
+<<^ code="&#x0003;">>ni:///sha-256;KcEXDkFuxiA0fHtIFYW0W_f8ivVoCrXRS3j5qXdztBo
 
 <<^ code="&#x0004;" -> to=?>>

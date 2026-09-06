@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pono-sigil"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Pono (Sigil)
 
@@ -34,7 +34,7 @@ the same word because a `pono` edge asserts alignment — the naming runs intent
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -45,7 +45,7 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -56,7 +56,7 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -65,6 +65,6 @@ An optional `role:` qualifier further specifies the constraint kind.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;A8G3r1lano3tn3wpIZypz-ET_4Asu4tSLklAfzvszL8
+<<^ code="&#x0003;">>ni:///sha-256;0g3qTJpAlBtka3auE39VpdZ-NIrSAU1fYfI_KK8Sat8
 
 <<^ code="&#x0004;" -> to=?>>

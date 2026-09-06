@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/magic-decode"
 
 ! Magic Decode
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ Decoding a magical inscription or interface layer into active, readable meaning 
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Turns opaque marks into usable instruction: one inscription per activation at ba
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Depends on `domain/divination`; pairs with `function/archive` for the handshake 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;IuLtX4NLm7O6nhKg5x5S10xJefdZjkAtch14EhOrTyE
+<<^ code="&#x0003;">>ni:///sha-256;Eod-7dxyWJGLNuN_I-jBU5DV-oNmukgcvh6erw-S8zA
 
 <<^ code="&#x0004;" -> to=?>>

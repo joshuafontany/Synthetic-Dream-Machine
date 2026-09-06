@@ -28,7 +28,7 @@ the gardens recognize each other even when they cannot read each other.
 
 The mesh runs on ''two orthogonal axes''. One axis moves bytes — ''FLOW'', the leylines, who carries whose sealed mana. The other axis grants sight — ''WHO'', the keys, who may read what. The old single ladder fused them; this meme keeps them apart, because the entity that makes the mesh //magical// — the ''relay'', a node that carries a stream it cannot read — lives exactly in the gap between them.
 
-<<~ ahu #two-axis-topology>>
+<<~ ahu #/two-axis-topology>>
 
 !! Two-Axis Topology
 
@@ -67,7 +67,7 @@ The planes stay ''soft-bridged at the vessel, never fused'' — every crossing e
 
 <<~/ahu>>
 
-<<~ ahu #the-relay-floor>>
+<<~ ahu #/the-relay-floor>>
 
 !! The Relay Floor
 
@@ -93,7 +93,7 @@ lararium #has {relay}                              ← the floor · "a relay"
 
 <<~/ahu>>
 
-<<~ ahu #infra-axis>>
+<<~ ahu #/infra-axis>>
 
 !! Infra Axis — Carriage and Reach
 
@@ -128,7 +128,7 @@ The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protoco
 
 <<~/ahu>>
 
-<<~ ahu #the-nexus-parse>>
+<<~ ahu #/the-nexus-parse>>
 
 !! A Nexus reads as the PARSE ~ conformance, never a hash
 
@@ -174,7 +174,7 @@ The Amorphous Dreams Cabal holds ''kahu'' at this layer: guardian of the protoco
 
 <<~/ahu>>
 
-<<~ ahu #social-axis>>
+<<~ ahu #/social-axis>>
 
 !! Social Axis — Delegation and Read
 
@@ -206,7 +206,7 @@ One human carries ''many Handles'' (personaGroups on the WHO axis) crossed with 
 
 <<~/ahu>>
 
-<<~ ahu #the-shore>>
+<<~ ahu #/the-shore>>
 
 !! The Shore — Where the Axes Cross
 
@@ -219,7 +219,7 @@ The law of the shore: ''membership decides read; the nexus decides reach.'' A ca
 
 <<~/ahu>>
 
-<<~ ahu #node-addressing>>
+<<~ ahu #/node-addressing>>
 
 !! Addressing — the Pose (bearing names · the dial-record dials)
 
@@ -246,7 +246,7 @@ The ''routing substrate'' that carries a sealed stream across the leylines — g
 
 <<~/ahu>>
 
-<<~ ahu #the-cas-substrate>>
+<<~ ahu #/the-cas-substrate>>
 
 !! The CAS Substrate ~ the blob floor beneath every doc
 
@@ -279,7 +279,7 @@ A byte-blob that dwarfs the doc ''must not ride the Automerge CRDT'' — a 16MB 
 
 <<~/ahu>>
 
-<<~ ahu #the-routing-substrate>>
+<<~ ahu #/the-routing-substrate>>
 
 !! The Routing Substrate ~ greedy near, jump far
 
@@ -298,7 +298,7 @@ The mesh carries a sealed stream across many leylines with ''no global map'' —
 
 <<~/ahu>>
 
-<<~ ahu #capability-layer>>
+<<~ ahu #/capability-layer>>
 
 !! Capability Layer Across Both Axes
 
@@ -321,7 +321,7 @@ Each rung names what an actor may do to a specific Keyhive bag doc. The distinct
 
 <<~/ahu>>
 
-<<~ ahu #local-first-law>>
+<<~ ahu #/local-first-law>>
 
 !! Local-First Law
 
@@ -333,7 +333,7 @@ This law does not prevent coordination. It prevents //authority replacement//: n
 
 <<~/ahu>>
 
-<<~ ahu #grammar-as-shared-structure>>
+<<~ ahu #/grammar-as-shared-structure>>
 
 !! Grammar as Shared Structure
 
@@ -357,7 +357,7 @@ A vessel that imports a bag from a foreign cabalGroup parses its memes, verifies
 
 <<~/ahu>>
 
-<<~ ahu #gate-model>>
+<<~ ahu #/gate-model>>
 
 !! The Gate Model — One Door per Axis
 
@@ -395,7 +395,7 @@ Each door of the tiered gate now names a built mechanism, so the abstract split 
 
 <<~/ahu>>
 
-<<~ ahu #transport-kernel>>
+<<~ ahu #/transport-kernel>>
 
 !! Transport — the gate model IS the kernel (kupono intent for the uplift)
 
@@ -409,7 +409,7 @@ When the mesh moves bytes between Lararia, it does NOT need a new transport inve
 
 <<~/ahu>>
 
-<<~ ahu #rhizome-rhymes>>
+<<~ ahu #/rhizome-rhymes>>
 
 !! Rhizome Rhymes — the territory agreeing with the map
 
@@ -443,7 +443,7 @@ The two-axis relay mesh did not arrive from nowhere; deep knowledge domains alre
 
 <<~/ahu>>
 
-<<~ ahu #scope-1-networking>>
+<<~ ahu #/scope-1-networking>>
 
 !! Scope 1 ~ the DreamNet networking pipe under two scopes [surgical 2026-07-03]
 
@@ -453,7 +453,7 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -479,6 +479,6 @@ The clocks split by scope: the ''DreamNet CID / CRDT layer runs in TS'' — ''st
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ks8m67R0yp31w_4uKLbs2uDEdyN7Vx3frE3gPvMqUbk
+<<^ code="&#x0003;">>ni:///sha-256;Uo1f_KHFGxwFE-7zVEsHFd13eQOfE_S4pBLoo-cz0l0
 
 <<^ code="&#x0004;" -> to=?>>

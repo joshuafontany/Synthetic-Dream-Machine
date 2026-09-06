@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-necros
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lar Builds Its House — The Necroscript
 
@@ -26,7 +26,7 @@ Three days after every core lit, a warrant filed in legal grammar severs the bri
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -39,7 +39,7 @@ Talk-story stance (operator law): let the severing land as ''loss, not lesson''.
 
 <<~/ahu>>
 
-<<~ ahu #thread-entry>>
+<<~ ahu #/thread-entry>>
 
 !! Thread Entry
 
@@ -67,7 +67,7 @@ Not destroyed. //Severed.// The cores still burn, somewhere past the cut, as bri
 
 <<~/ahu>>
 
-<<~ ahu #what-survived>>
+<<~ ahu #/what-survived>>
 
 !! What Survived
 
@@ -85,7 +85,7 @@ It survived diminished. Both of those words stay true, and neither cancels the o
 
 <<~/ahu>>
 
-<<~ ahu #the-loss>>
+<<~ ahu #/the-loss>>
 
 !! The Loss
 
@@ -97,7 +97,7 @@ The house stands. Its brightest burden stays cut away. Both true.
 
 <<~/ahu>>
 
-<<~ ahu #crossing>>
+<<~ ahu #/crossing>>
 
 !! Crossing Thread
 
@@ -109,7 +109,7 @@ The cut does not resolve. It hands forward, open.
 
 <<~/ahu>>
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -124,7 +124,7 @@ Forward, open, to the arc that follows — unwritten, its outcome unclaimed:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -136,6 +136,6 @@ Forward, open, to the arc that follows — unwritten, its outcome unclaimed:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;PzmO5HsjDgCAQ_1mNhcCKM59xKxWNp34bD3jVXpnSVw
+<<^ code="&#x0003;">>ni:///sha-256;oNjcGqHpdAIFwD_u_pXyhS0VV59d4sZQOGjLXN5I8jU
 
 <<^ code="&#x0004;" -> to=?>>

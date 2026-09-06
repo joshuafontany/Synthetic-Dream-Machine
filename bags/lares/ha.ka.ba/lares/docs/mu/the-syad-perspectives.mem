@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/the-syad-perspectives"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Syad Perspectives — Condensed Research
 
@@ -29,7 +29,7 @@ The deeper archive bundle stays adjacent.
 
 <<~/ahu>>
 
-<<~ ahu #reading-question>>
+<<~ ahu #/reading-question>>
 
 !! Reading Question
 
@@ -41,7 +41,7 @@ Different measure.
 
 <<~/ahu>>
 
-<<~ ahu #saptabhangi>>
+<<~ ahu #/saptabhangi>>
 
 !! Saptabhangi
 
@@ -60,7 +60,7 @@ It names a frame where the truth axis does not fit cleanly.
 
 <<~/ahu>>
 
-<<~ ahu #flag-surface>>
+<<~ ahu #/flag-surface>>
 
 !! Flag Surface
 
@@ -76,7 +76,7 @@ Quiet stances stay encoded as quiet, not missing.
 
 <<~/ahu>>
 
-<<~ ahu #legacy-boundary>>
+<<~ ahu #/legacy-boundary>>
 
 !! Legacy Boundary
 
@@ -89,7 +89,7 @@ Spread rides flags and combination, not omission.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -108,7 +108,7 @@ The archive-derived research bundle lives at:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -118,6 +118,6 @@ The archive-derived research bundle lives at:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cAyQdl1SFPcndi-8B5eSlhcD0HZSlA85M-1nzRCyf6Y
+<<^ code="&#x0003;">>ni:///sha-256;BguS_gJD2c2l_qPFG6vRNS4BMps82_R013wjWKDLu1k
 
 <<^ code="&#x0004;" -> to=?>>

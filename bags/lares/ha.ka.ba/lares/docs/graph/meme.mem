@@ -20,7 +20,7 @@ uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #terminology-note>>
+<<~ ahu #/terminology-note>>
 
 !! Terminology Note
 
@@ -28,7 +28,7 @@ uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: the compiler needs three types — an edge, a meme, and a graph — before any walk can proceed.
 ⏿ orient: Bazel's depset pattern informs meme structure; canonical pranala kānāwai (`lar:///ha.ka.ba/lares/api/pono/pranala`) governs the full PranalaEdge field set and independence law.
@@ -38,7 +38,7 @@ uri-path                     = "ha.ka.ba/lares/docs/graph/meme"
 
 <<~/ahu>>
 
-<<~ ahu #prana-edge>>
+<<~ ahu #/prana-edge>>
 
 !! PranalaEdge
 
@@ -96,7 +96,7 @@ An edge gates hydration order when `family == "control"`.
 
 <<~/ahu>>
 
-<<~ ahu #locus>>
+<<~ ahu #/locus>>
 
 !! Meme
 
@@ -135,7 +135,7 @@ The URI prefix prevents hash collisions between memes with identical content.
 
 <<~/ahu>>
 
-<<~ ahu #declared-unresolved>>
+<<~ ahu #/declared-unresolved>>
 
 !! DeclaredUnresolved
 
@@ -155,7 +155,7 @@ Neither causes the compilation to abort; the artifact remains valid with a `Fals
 
 <<~/ahu>>
 
-<<~ ahu #meme-graph>>
+<<~ ahu #/meme-graph>>
 
 !! MemeGraph
 
@@ -195,7 +195,7 @@ The boot compiler uses `topological` for artifact production.
 
 <<~/ahu>>
 
-<<~ ahu #content-store>>
+<<~ ahu #/content-store>>
 
 !! Content Store — Dual-Index Design
 
@@ -239,7 +239,7 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -251,6 +251,6 @@ This lets a client verify the complete minimal-boot prefix byte-for-byte without
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;d08Hgy3D0vBnCQI3MSYlImkeQpPQZI3Pd_PstYAwtUU
+<<^ code="&#x0003;">>ni:///sha-256;6vGPr19InHkffK8r1N8k0MPMXkRG698JXJRzXwYeoUo
 
 <<^ code="&#x0004;" -> to=?>>

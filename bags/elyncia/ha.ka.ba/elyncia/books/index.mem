@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/books/index"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Elyncia Books
 
@@ -29,7 +29,7 @@ uplift to live wikitext last.
 
 <<~/ahu>>
 
-<<~ ahu #toc>>
+<<~ ahu #/toc>>
 
 \procedure BookShelf() <<toc-selective-expandable "ha.ka.ba/elyncia/books/index" sort="uri-path">>
 
@@ -48,6 +48,6 @@ shelf reads plainly:)//
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Pfne0_LAAoGerapTiI3As9dVYHDUdUhaOJuRHP56ZnE
+<<^ code="&#x0003;">>ni:///sha-256;zf2GkqIW-4f5ByIms7dhNV57jh2yhMxJ_e5LJXwXgfk
 
 <<^ code="&#x0004;" -> to=?>>

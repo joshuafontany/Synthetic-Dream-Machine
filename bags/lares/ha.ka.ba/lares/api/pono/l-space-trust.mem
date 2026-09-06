@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/l-space-trust"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! l-space Trust Law
 
@@ -29,7 +29,7 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the URI authority, path, query signal, and carrier source before trust assignment.
 ⏿ separate hostless canonical memes from hostful exchange records from data memes without merging their force.
@@ -39,7 +39,7 @@ Hostless canonical memes carry stable law; hostful exchange records carry situat
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 Hostless `lar:///` memes MAY carry stable law, capability shape, data, docs, or file-backed source truth.
 Hostful `lar://alias:grant@host/` records MAY carry live exchange intent, session context, and trajectory pressure.
@@ -56,7 +56,7 @@ Operator agency matters; persistence and placement still matter.
 
 <<~/ahu>>
 
-<<~ ahu #precedence>>
+<<~ ahu #/precedence>>
 
 Precedence pressure reads from most stable to most local:
 
@@ -72,7 +72,7 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -84,6 +84,6 @@ Explicit operator-mediated promotion MAY move content upward by creating or revi
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;L7daFB-tgDABfJQldhuFMR7b-_G58xgj5B8zmN2KKMg
+<<^ code="&#x0003;">>ni:///sha-256;Yp4R3Q9HusNzOgt1_9TJj7tmovlC3YqeAbvI5FLqucc
 
 <<^ code="&#x0004;" -> to=?>>

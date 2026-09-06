@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-gear-ledge
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lady Aki ~ Discounted Gear Ledger
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Lady Aki — Discounted Gear Ledger
 
@@ -231,6 +231,6 @@ Current answer: yes, provisionally.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;gSD23QElMQ2-iipbshBAQxOTbXK-8EyXLXo7fe2lBPA
+<<^ code="&#x0003;">>ni:///sha-256;rwe6SV_dKaxLqsJ3BGvEWvlR_-0jsML0ZeV2Xw0jvjI
 
 <<^ code="&#x0004;" -> to=?>>

@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/causal-island"
 
 ! Causal Island — Ontological Law
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 `causal-island.ts` owns the ontological law that names where one island ends and
 another begins, the per-bag ''ACCESS'' axis (a 1:1 mirror of Keyhive's native
@@ -29,7 +29,7 @@ above any vessel implementation; every vessel honors it.
 
 <<~/ahu>>
 
-<<~ ahu #no-global-now>>
+<<~ ahu #/no-global-now>>
 
 !! No Global Now
 
@@ -48,7 +48,7 @@ marks a ''causal island boundary''.
 
 <<~/ahu>>
 
-<<~ ahu #four-tiers>>
+<<~ ahu #/four-tiers>>
 
 !! Four Tiers (inner → outer)
 
@@ -61,7 +61,7 @@ marks a ''causal island boundary''.
 
 <<~/ahu>>
 
-<<~ ahu #substrate-not-sovereignty>>
+<<~ ahu #/substrate-not-sovereignty>>
 
 !! Share Substrate, Not Sovereignty (load-bearing)
 
@@ -103,7 +103,7 @@ islands.
 
 <<~/ahu>>
 
-<<~ ahu #access-axis>>
+<<~ ahu #/access-axis>>
 
 !! ACCESS Axis (Axis 1 of the authority model)
 
@@ -124,7 +124,7 @@ ALIGNMENT (the non-monotonic lemures plane). See
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -135,6 +135,6 @@ Related (project tiddlers): [[project_no_vm_on_main_thread]], [[feedback_isomorp
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cB5pzaQhMKv4wIye_kreIQipYlZBnOCkRgj9ZT3b5pU
+<<^ code="&#x0003;">>ni:///sha-256;AxXgGzTlrQUrS4_XsYN6QcALf0C5Ft3sRO6olwlRfCw
 
 <<^ code="&#x0004;" -> to=?>>

@@ -22,7 +22,7 @@ uri-path   = "ha.ka.ba/lares/api/pono/lar-uri"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #abstract>>
+<<~ ahu #/abstract>>
 
 ! The `lar:` URI Scheme — A Naming Scheme for the Meme Graph
 
@@ -34,7 +34,7 @@ This specification names the scheme syntax (a formal ABNF grammar), the path tax
 
 <<~/ahu>>
 
-<<~ ahu #status>>
+<<~ ahu #/status>>
 
 !! Status and Maturity
 
@@ -42,7 +42,7 @@ This document holds ''submission-draft'' maturity. The scheme law, path taxonomy
 
 <<~/ahu>>
 
-<<~ ahu #introduction>>
+<<~ ahu #/introduction>>
 
 !! Introduction — Scope, Audience, and Relation to memetic-wikitext
 
@@ -60,7 +60,7 @@ This document holds ''submission-draft'' maturity. The scheme law, path taxonomy
 
 <<~/ahu>>
 
-<<~ ahu #terminology>>
+<<~ ahu #/terminology>>
 
 !! Terminology and Conformance Language
 
@@ -80,7 +80,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 
 <<~/ahu>>
 
-<<~ ahu #scheme-syntax>>
+<<~ ahu #/scheme-syntax>>
 
 !! Scheme Syntax (ABNF)
 
@@ -126,7 +126,7 @@ within a scheme lives in the scheme's defining document [RFC7320].
 
 <<~/ahu>>
 
-<<~ ahu #path-taxonomy>>
+<<~ ahu #/path-taxonomy>>
 
 !! Path Taxonomy
 
@@ -162,7 +162,7 @@ The sync boundary admits ''any valid TW5 tiddler'': a plain-titled tiddler cross
 
 <<~/ahu>>
 
-<<~ ahu #equality>>
+<<~ ahu #/equality>>
 
 !! Equality
 
@@ -190,7 +190,7 @@ path — but it MUST NOT report two addresses equal that this rule reads apart.
 
 <<~/ahu>>
 
-<<~ ahu #minting>>
+<<~ ahu #/minting>>
 
 !! Minting and Collision
 
@@ -214,7 +214,7 @@ Two consequences bind:
 
 <<~/ahu>>
 
-<<~ ahu #bag-surface>>
+<<~ ahu #/bag-surface>>
 
 !! Surface Designation — `@` Names a CRDT Surface
 
@@ -246,7 +246,7 @@ Registry pattern. A bag MAY hold tiddlers whose titles read as //paths inside it
 
 <<~/ahu>>
 
-<<~ ahu #five-planes>>
+<<~ ahu #/five-planes>>
 
 !! The Five Planes
 
@@ -262,7 +262,7 @@ The planes compose: a turn of live exchange mints SPEECH + STABILITY-unstable na
 
 <<~/ahu>>
 
-<<~ ahu #resolution>>
+<<~ ahu #/resolution>>
 
 !! Resolution Model
 
@@ -279,7 +279,7 @@ Session form names the speaker through the authority. It MUST stay within exchan
 
 <<~/ahu>>
 
-<<~ ahu #signal-law>>
+<<~ ahu #/signal-law>>
 
 !! Signal Law
 
@@ -300,7 +300,7 @@ BEARING (path) → ANCHOR (fragment, media-type-defined).
 
 <<~/ahu>>
 
-<<~ ahu #conformance>>
+<<~ ahu #/conformance>>
 
 !! Conformance Classes
 
@@ -312,7 +312,7 @@ A ''conforming author'' SHOULD: use local form for stable addresses and system r
 
 <<~/ahu>>
 
-<<~ ahu #scheme-registration>>
+<<~ ahu #/scheme-registration>>
 
 !! URI Scheme Registration (RFC 7595)
 
@@ -336,7 +336,7 @@ The scheme registers as ''provisional''; a future submission MAY seek permanent 
 
 <<~/ahu>>
 
-<<~ ahu #security>>
+<<~ ahu #/security>>
 
 !! Security Considerations
 
@@ -350,7 +350,7 @@ The scheme registers as ''provisional''; a future submission MAY seek permanent 
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Worked Examples (Non-Normative)
 
@@ -376,7 +376,7 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu>>
 
-<<~ ahu #references>>
+<<~ ahu #/references>>
 
 !! Normative References
 
@@ -390,7 +390,7 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu>>
 
-<<~ ahu #annex-open>>
+<<~ ahu #/annex-open>>
 
 !! Annex — Open Items (Informative)
 
@@ -402,7 +402,7 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense whether the URI carries local form or session form; identify path class
 ⏿ orient against scheme law — slot count, path class, `child[1]` kind-plane-or-namespace
@@ -412,7 +412,7 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -424,6 +424,6 @@ lar:///ha.ka.ba/bags/catalog/corpus/elyncia   → (text) AutomergeUrl of lar:///
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;b_Ic6DIkqWdZQuyJS_dS1Nob5Ubc5oeHjOnJvFJJkj8
+<<^ code="&#x0003;">>ni:///sha-256;ZlBJW8y9_d5mNM1yHAgHXCnIlvhUG-WrP6YuwGUTvXQ
 
 <<^ code="&#x0004;" -> to=?>>

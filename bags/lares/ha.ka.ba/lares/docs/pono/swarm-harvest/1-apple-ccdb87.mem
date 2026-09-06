@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-apple-ccdb87"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. APPLE
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 51,141 characters
 
@@ -381,12 +381,12 @@ Mechanism, verbatim:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;M05RPAK0xAwmmSLjg_66RGpezT2_qHv6pVH_yajjCz8
+<<^ code="&#x0003;">>ni:///sha-256;q4_Qq-p0bhEUaBnAY9H5id5xxEbQ4e6nd9BXlWZqXXU
 
 <<^ code="&#x0004;" -> to=?>>

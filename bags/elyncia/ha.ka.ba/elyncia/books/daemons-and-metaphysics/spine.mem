@@ -18,7 +18,7 @@ uri-path   = "ha.ka.ba/elyncia/books/daemons-and-metaphysics/spine"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Elyncia 03 ~ Daemons and the Metaphysics of Play ~ Spine
 
@@ -33,7 +33,7 @@ below activate one by one as each chunk meme seats; until then the walk reads as
 
 <<~/ahu>>
 
-<<~ ahu #walk>>
+<<~ ahu #/walk>>
 
 !! The Walk ~ reading order
 
@@ -43,7 +43,7 @@ below activate one by one as each chunk meme seats; until then the walk reads as
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source Staging
 
@@ -53,12 +53,12 @@ comes only after all source text reads as moved.)//
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/books/index>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;bCFDZZxuBiM5v5uRSwtdD4NASuwggn3Wi7_opGBi4X4
+<<^ code="&#x0003;">>ni:///sha-256;jbHFFe-IbAzeCUV2LU0y5toQiqqKKpd3FuHOKbmC_-I
 
 <<^ code="&#x0004;" -> to=?>>

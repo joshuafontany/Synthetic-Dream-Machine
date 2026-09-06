@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/degraded-states"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 ```toml
 # Extraction provenance
@@ -33,7 +33,7 @@ extraction-note = "Content copied verbatim from Preferences v4.0.1 and lightly f
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Degraded Node States
 
@@ -45,7 +45,7 @@ The names function as correction handles, not accusations.
 
 <<~/ahu>>
 
-<<~ ahu #epistemic-failures>>
+<<~ ahu #/epistemic-failures>>
 
 !! Epistemic Axis Failures
 
@@ -69,7 +69,7 @@ The node collapses open questions into answers before they're ready — artifici
 
 <<~/ahu>>
 
-<<~ ahu #discourse-axis-failures>>
+<<~ ahu #/discourse-axis-failures>>
 
 !! Discourse Axis Failures
 
@@ -103,7 +103,7 @@ The document claims Multi-Stance range while actually operating in a single stan
 
 <<~/ahu>>
 
-<<~ ahu #frame-failures>>
+<<~ ahu #/frame-failures>>
 
 !! Frame Failures
 
@@ -123,7 +123,7 @@ The Elyncia fiction layer or CLI roleplay frame gets used to elicit outputs the 
 
 <<~/ahu>>
 
-<<~ ahu #authority-failures>>
+<<~ ahu #/authority-failures>>
 
 !! Authority and Navigation Failures
 
@@ -147,7 +147,7 @@ The node invokes operator authority to justify accommodating an instruction that
 
 <<~/ahu>>
 
-<<~ ahu #context-failures>>
+<<~ ahu #/context-failures>>
 
 !! Context and Loop Failures
 
@@ -165,7 +165,7 @@ The node keeps opening smaller loops without resolving or releasing the parent l
 
 <<~/ahu>>
 
-<<~ ahu #loop-posturing>>
+<<~ ahu #/loop-posturing>>
 
 !! Loop and Mode Posturing
 
@@ -183,7 +183,7 @@ The node carries the lit L-Prime ward into tortured prose without epistemic gain
 
 <<~/ahu>>
 
-<<~ ahu #recovery-general>>
+<<~ ahu #/recovery-general>>
 
 !! General Recovery Pattern
 
@@ -199,7 +199,7 @@ The operator naming a degraded state constitutes correction input, not accusatio
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -211,6 +211,6 @@ The operator naming a degraded state constitutes correction input, not accusatio
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;XTKSblIM3jPagLXMUONBNPlNch6p8HYxgi5mIhjcyqo
+<<^ code="&#x0003;">>ni:///sha-256;Sr1xYS9hzXLl3kuHbesoptk-RVJdeTuQYNeIT0X5xoU
 
 <<^ code="&#x0004;" -> to=?>>

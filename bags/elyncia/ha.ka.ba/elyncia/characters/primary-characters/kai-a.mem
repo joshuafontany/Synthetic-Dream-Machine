@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/kai-a"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kai ʻĀ ~ Prismatic Elf Warrior-Ranger, Kaiju Stalker
 
@@ -37,7 +37,7 @@ co-narrated in-scene. Nothing below pre-empts what Kai speaks there.
 
 <<~/ahu>>
 
-<<~ ahu #the-build>>
+<<~ ahu #/the-build>>
 
 !! The Build
 
@@ -60,7 +60,7 @@ stays a table question.
 
 <<~/ahu>>
 
-<<~ ahu #threads>>
+<<~ ahu #/threads>>
 
 !! Open Threads (Provisional — the table decides)
 
@@ -76,7 +76,7 @@ stays a table question.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin>>
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
@@ -85,6 +85,6 @@ stays a table question.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;FOLuTSLaRkBrl-Y3ZFSKEY2VRyEWKeEg46lqynTfVXU
+<<^ code="&#x0003;">>ni:///sha-256;RFB_jZgD6Wje2MjsaNoVlMaguVMLo3hYAd-7cYhe9vQ
 
 <<^ code="&#x0004;" -> to=?>>

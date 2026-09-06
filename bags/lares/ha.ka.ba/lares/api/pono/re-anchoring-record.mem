@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/re-anchoring-record"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Re-Anchoring Record ~ that it happened, never what made it valid
 
@@ -32,7 +32,7 @@ A guest dwells WITH a host — a dyad, one edge, and the historically fatal shap
 
 <<~/ahu>>
 
-<<~ ahu #three-mechanisms>>
+<<~ ahu #/three-mechanisms>>
 
 !! Three mechanisms that survive alignment ~ each shipped, none whole
 
@@ -55,7 +55,7 @@ Enforced by ''which key signs what'', never by convention. That restates the //n
 
 <<~/ahu>>
 
-<<~ ahu #the-refusals>>
+<<~ ahu #/the-refusals>>
 
 !! Six classes refuse, and one pattern runs under them all
 
@@ -75,7 +75,7 @@ Enforced by ''which key signs what'', never by convention. That restates the //n
 
 <<~/ahu>>
 
-<<~ ahu #the-open-tension>>
+<<~ ahu #/the-open-tension>>
 
 !! The plural-attestor tension ~ two cures pulling opposite ways
 
@@ -89,7 +89,7 @@ Applied here: ''as the attestor count rises, the intersection of realms whose dw
 
 <<~/ahu>>
 
-<<~ ahu #what-the-record-refuses>>
+<<~ ahu #/what-the-record-refuses>>
 
 !! What the type must refuse, in the type
 
@@ -103,7 +103,7 @@ Applied here: ''as the attestor count rises, the intersection of realms whose dw
 
 <<~/ahu>>
 
-<<~ ahu #the-depth-fold>>
+<<~ ahu #/the-depth-fold>>
 
 !! The depth fold ~ PROPOSED: the history IS the reading, and reducing it mints what the plane forbids
 
@@ -125,7 +125,7 @@ And the EROSION half needs a rate nobody has seated. Two candidate shapes stand 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -133,6 +133,6 @@ And the EROSION half needs a rate nobody has seated. Two candidate shapes stand 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aJzK50sjlPg9pX2jcowUinVF2Hg0ly5ON4lCD4QqRB4
+<<^ code="&#x0003;">>ni:///sha-256;KCZ6QbiHh3s4lxmeREEyH1Xk06hjwXvhP0wxgrZtP70
 
 <<^ code="&#x0004;" -> to=?>>

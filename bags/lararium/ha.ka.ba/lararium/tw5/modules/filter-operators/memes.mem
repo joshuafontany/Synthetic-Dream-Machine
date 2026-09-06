@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/memes"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! memes
 
@@ -28,22 +28,22 @@ TW5 filter operator from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `collectMemes`, `registerMemes`, `registerMemesSource`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/memes" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;XYW6XefI5lIL-RYxxmVHqOrbw22INwooGmjrGXB6Zqw
+<<^ code="&#x0003;">>ni:///sha-256;XesLUpOSI-rM0OeQEPUU6t7KQVCjzUgWQ4SAIND4u3o
 
 <<^ code="&#x0004;" -> to=?>>

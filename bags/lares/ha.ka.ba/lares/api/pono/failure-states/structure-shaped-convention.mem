@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/structure-shaped-convention"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Structure-Shaped Convention
 
@@ -31,7 +31,7 @@ The node reaches for a structural cure — correctly, because the house holds th
 
 <<~/ahu>>
 
-<<~ ahu #instances>>
+<<~ ahu #/instances>>
 
 !! Two instances, one arc, both caught from outside
 
@@ -43,7 +43,7 @@ The node reaches for a structural cure — correctly, because the house holds th
 
 <<~/ahu>>
 
-<<~ ahu #the-law>>
+<<~ ahu #/the-law>>
 
 !! The law
 
@@ -59,7 +59,7 @@ An unenforceable guarantee costs more than an honest convention, because a conve
 
 <<~/ahu>>
 
-<<~ ahu #the-diagnostic>>
+<<~ ahu #/the-diagnostic>>
 
 !! Why the node cannot catch this alone
 
@@ -69,7 +69,7 @@ That makes this a ''sibling of Confabulation-as-Canon'' rather than a variant: t
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -77,6 +77,6 @@ That makes this a ''sibling of Confabulation-as-Canon'' rather than a variant: t
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TTtNbtPX6oE_5L9sN3vwZK_v9g0bejqKyZ1p_Q4gkik
+<<^ code="&#x0003;">>ni:///sha-256;Bmi7XgbxE4eftFOW3jst3p8o2B4ZG_eE4Eztng8lfLs
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/causal-islands"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Causal Islands
 
@@ -37,7 +37,7 @@ this version separates them.
 
 <<~/ahu>>
 
-<<~ ahu #model>>
+<<~ ahu #/model>>
 
 !! The model — three axes + one plane
 
@@ -93,7 +93,7 @@ capability structurally cannot express it. Lives in its own invariant
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -130,7 +130,7 @@ pretending to a global now reads as the managing failure
 
 <<~/ahu>>
 
-<<~ ahu #two-clocks>>
+<<~ ahu #/two-clocks>>
 
 !! Two clocks, orthogonal — causal ⊥ rhythmic
 
@@ -164,7 +164,7 @@ membership-removal) name authority/liveness mechanisms, never clocks. Full rhyth
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -261,7 +261,7 @@ conditions = [
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source (TypeScript — compiled-in)
 
@@ -316,7 +316,7 @@ export function visibilityGate(input: VisibilityGateInput): boolean {
 
 <<~/ahu>>
 
-<<~ ahu #the-model-key>>
+<<~ ahu #/the-model-key>>
 
 !! A time value MAY enter as a KEY, never as an arbiter
 
@@ -340,7 +340,7 @@ Two parties holding positions at different epochs cannot reconcile them by compa
 
 <<~/ahu>>
 
-<<~ ahu #reject>>
+<<~ ahu #/reject>>
 
 !! Reject-list — the re-concentration traps
 
@@ -365,10 +365,10 @@ meant to escape):
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TzEBEvfmNLAFtDjcYri6eQMfxK3RYCzy6lbLibXdEz4
+<<^ code="&#x0003;">>ni:///sha-256;2jc7T4jOwBmnBuYDVKVuX9Yv6yHLNmYO4GnrUOdDEIQ
 
 <<^ code="&#x0004;" -> to=?>>

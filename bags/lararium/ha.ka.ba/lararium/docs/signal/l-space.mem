@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/l-space"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal — l-space
 
@@ -26,7 +26,7 @@ This room holds definitional docs for `lar` URI l-space.
 
 <<~/ahu>>
 
-<<~ ahu #l-space-definition>>
+<<~ ahu #/l-space-definition>>
 
 !! l-space Definition
 
@@ -61,7 +61,7 @@ Working definition:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ Working definition:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1kN2pUHs-cgpxyWBkrXvDZZKeR6Kq9yUihYtvai7mp0
+<<^ code="&#x0003;">>ni:///sha-256;Ftvd0erq2ZCkY6JtwdmDDmnM65Wg_0oSPclSOtK4Fig
 
 <<^ code="&#x0004;" -> to=?>>

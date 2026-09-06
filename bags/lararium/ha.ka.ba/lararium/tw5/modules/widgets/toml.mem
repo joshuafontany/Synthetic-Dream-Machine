@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widgets/toml"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! toml
 
@@ -28,22 +28,22 @@ TW5 widget from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `TomlWidget`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widgets/toml" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MOB5FBTSwlMH98FKSmrY67-va9cTDMjhv2vlg5Y7bYY
+<<^ code="&#x0003;">>ni:///sha-256;Aujf-CrS6y3_6jFAFaQPAQtBcTKPT-5xnWh3b3_Obts
 
 <<^ code="&#x0004;" -> to=?>>

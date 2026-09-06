@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-a-keybase-1f2d42"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! PART A — KEYBASE
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 22,331 characters
 
@@ -139,12 +139,12 @@ All three systems that market themselves as "no single key" arrive at the *same*
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;AnE82VcKiYlWIHCsPeL9o8rEKo_VKGMYacM9qKpuYnk
+<<^ code="&#x0003;">>ni:///sha-256;VdHZMgf5uJv-uo7xBnbGP0FLRmxKzZJCUUxY2pKCBd8
 
 <<^ code="&#x0004;" -> to=?>>

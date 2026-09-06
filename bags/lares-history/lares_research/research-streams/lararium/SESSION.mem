@@ -15,7 +15,7 @@ uri-path   = "lares_research/research-streams/lararium/SESSION"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha-m25-loop1-stack-upward-walk-2026-05-03>>
+<<~ ahu #/ooda-ha-m25-loop1-stack-upward-walk-2026-05-03>>
 
 !! OODA-HA: M25 Loop 1 — Stack Upward Walk (2026-05-03)
 
@@ -60,7 +60,7 @@ Walking upward from Automerge doc → CompositeStore → MemeSyncAdaptor → VM 
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m24-lardoc-alignment-2026-05-03>>
+<<~ ahu #/ooda-ha-m24-lardoc-alignment-2026-05-03>>
 
 !! OODA-HA: M24 — LarDoc Base Alignment (2026-05-03)
 
@@ -108,7 +108,7 @@ The full Lararium Automerge doc stack aligns on `LarDoc`. No more flat-doc casts
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m23-bags-recipes-alignment-2026-05-03>>
+<<~ ahu #/ooda-ha-m23-bags-recipes-alignment-2026-05-03>>
 
 !! OODA-HA: M23 — TW5 Bags/Recipes Alignment (2026-05-03)
 
@@ -154,7 +154,7 @@ Bags now carry first-class policy tiddlers. The VM enforces highest-priority-bag
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m22-topology-vm-2026-05-03>>
+<<~ ahu #/ooda-ha-m22-topology-vm-2026-05-03>>
 
 !! OODA-HA: M22 — Topology-Derived VM + Wiki-First Filters (2026-05-03)
 
@@ -194,7 +194,7 @@ The VM sees only the recipe's bag slice. Both peers boot recipe-aware. The wiki 
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m21-6root-2plane-2026-05-03>>
+<<~ ahu #/ooda-ha-m21-6root-2plane-2026-05-03>>
 
 !! OODA-HA: M21 — 6-Root 2-Plane + Recipe Schema (2026-05-03)
 
@@ -232,7 +232,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-local-first>>
+<<~ ahu #/ooda-ha-local-first>>
 
 !! OODA-HA: Local-First Architecture
 
@@ -254,7 +254,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-larhud-2026-05-02>>
+<<~ ahu #/ooda-ha-larhud-2026-05-02>>
 
 !! OODA-HA: LarHUD — Web3 Dockable TW5 Frame (2026-05-02)
 
@@ -272,7 +272,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-web3-peer-2026-05-02>>
+<<~ ahu #/ooda-ha-web3-peer-2026-05-02>>
 
 !! OODA-HA: Web3 Peer Boot + web2 Purge (2026-05-02)
 
@@ -290,7 +290,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-causal-island>>
+<<~ ahu #/ooda-ha-causal-island>>
 
 !! OODA-HA: Causal Island Doctrine (Fuller-Zelenka)
 
@@ -310,7 +310,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-source-memes>>
+<<~ ahu #/ooda-ha-source-memes>>
 
 !! OODA-HA: Track B — Source Meme Pipeline
 
@@ -326,7 +326,7 @@ Build clean across core + node + app.  67/67 tests pass.
 
 <<~/ahu>>
 
-<<~ ahu #track-a>>
+<<~ ahu #/track-a>>
 
 !! Track A: Dead Code Removal (complete)
 
@@ -342,7 +342,7 @@ All 62 unit tests green after removal.
 
 <<~/ahu>>
 
-<<~ ahu #state>>
+<<~ ahu #/state>>
 
 !! State as of 2026-04-29 (session 5 end)
 
@@ -393,7 +393,7 @@ All 62 unit tests green after removal.
 
 <<~/ahu>>
 
-<<~ ahu #m11-priorities>>
+<<~ ahu #/m11-priorities>>
 
 !! M11 Priorities
 
@@ -428,7 +428,7 @@ packages/lararium-node/
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -437,7 +437,7 @@ packages/lararium-node/
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint0-2026-05-02>>
+<<~ ahu #/ooda-ha-sprint0-2026-05-02>>
 
 !! OODA-HA: Sprint 0 — Web2 Sidecar Rip + API Surface Reboot (2026-05-02)
 
@@ -481,7 +481,7 @@ packages/lararium-node/
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-kumu-uri-scheme>>
+<<~ ahu #/ooda-ha-kumu-uri-scheme>>
 
 !! OODA-HA: Kumu Instance URI Scheme (LOCKED 2026-05-02)
 
@@ -542,7 +542,7 @@ packages/lararium-node/
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint1-plan>>
+<<~ ahu #/ooda-ha-sprint1-plan>>
 
 !! OODA-HA: Sprint 1 Plan — MemeGraph Rebuild (next)
 
@@ -603,7 +603,7 @@ packages/lararium-node/
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint4-verse-alignment>>
+<<~ ahu #/ooda-ha-sprint4-verse-alignment>>
 
 !! OODA-HA: Sprint 4 + Verse Alignment — 2026-05-02
 
@@ -677,7 +677,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-uefn-name-pass-2026-05-02>>
+<<~ ahu #/ooda-ha-uefn-name-pass-2026-05-02>>
 
 !! UEFN Name Pass — 2026-05-02 (Role/Field Rename)
 
@@ -739,7 +739,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-sprint5-meme-sync-adaptor-2026-05-02>>
+<<~ ahu #/ooda-ha-sprint5-meme-sync-adaptor-2026-05-02>>
 
 !! Sprint 5 — MemeSyncAdaptor (2026-05-02)
 
@@ -762,7 +762,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m15-web3-rip-2026-05-02>>
+<<~ ahu #/ooda-ha-m15-web3-rip-2026-05-02>>
 
 !! M15 Web3 Rip Sprint — TW5Engine + Filter Operators (2026-05-02)
 
@@ -807,7 +807,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-named-doc-pattern-m17-2026-05-03>>
+<<~ ahu #/ooda-ha-named-doc-pattern-m17-2026-05-03>>
 
 !! OODA-HA: Named-Doc Oracle + Room Keys + Self-Describing Pass (M17 — 2026-05-03)
 
@@ -825,7 +825,7 @@ cd packages/lararium-tw5  && npx tsc --noEmit  # ✓ ZERO errors
 
 <<~/ahu>>
 
-<<~ ahu #session-6-m17-m20-2026-05-03>>
+<<~ ahu #/session-6-m17-m20-2026-05-03>>
 
 !! Session 6 — M17–M20 Sprint Close (2026-05-03)
 
@@ -871,7 +871,7 @@ Each corpus `MemeStoreDoc` carries `tiddlers[corpusLarUri(slug)]` self-ref tiddl
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m25-loop2-qa-gap-survey-2026-05-03>>
+<<~ ahu #/ooda-ha-m25-loop2-qa-gap-survey-2026-05-03>>
 
 !! OODA-HA: M25 Loop 2 — QA Gap Survey + Sync Bridge Tests (2026-05-03)
 
@@ -913,7 +913,7 @@ Gap C — ''addProjection fan-out untested'': `CompositeStore.addProjection` was
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m25-loop3-cast-cleanup-routing-2026-05-03>>
+<<~ ahu #/ooda-ha-m25-loop3-cast-cleanup-routing-2026-05-03>>
 
 !! OODA-HA: M25 Loop 3 — Cast Cleanup + Bag Routing + Dynamic Projections (2026-05-03)
 
@@ -959,7 +959,7 @@ Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adap
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m26-isomorphic-vmpool-2026-05-04>>
+<<~ ahu #/ooda-ha-m26-isomorphic-vmpool-2026-05-04>>
 
 !! OODA-HA: M26 — Isomorphic VmPool + WorkerFactory Injection (2026-05-04)
 
@@ -1004,7 +1004,7 @@ Dynamic C: `addLayer()` arrives async (corpus docs open as peers sync). If `adap
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m26-loop1-corpus-cast-audit-2026-05-04>>
+<<~ ahu #/ooda-ha-m26-loop1-corpus-cast-audit-2026-05-04>>
 
 !! OODA-HA: M26 Loop 1 — Corpus Cast Audit (2026-05-04)
 
@@ -1028,7 +1028,7 @@ With `fields: {}` added, `doc.tiddlers[corpusUri] = { title, text, fields: {}, b
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m27-tldraw-wiki-first-2026-05-04>>
+<<~ ahu #/ooda-ha-m27-tldraw-wiki-first-2026-05-04>>
 
 !! OODA-HA: M27 — tldraw Wiki-First Migration + LarOpenPhase + vmFactory Injection (2026-05-04)
 
@@ -1084,7 +1084,7 @@ Three pressures converged. (1) `LarariumShell.tsx` held three `(ed.store as any)
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m28-cold-boot-ceremony>>
+<<~ ahu #/ooda-ha-m28-cold-boot-ceremony>>
 
 !! M28 — Cold-Boot Ceremony + Keyhive Identity Bridge (2026-05-04)
 
@@ -1127,7 +1127,7 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m28-source-coverage>>
+<<~ ahu #/ooda-ha-m28-source-coverage>>
 
 !! M28 Loop 2 — Self-Documenting Quine: `#source` ahu Coverage (2026-05-04)
 
@@ -1149,7 +1149,7 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-m28-cjs-cleanup>>
+<<~ ahu #/ooda-ha-m28-cjs-cleanup>>
 
 !! M28 Loop 3 — CJS Module Wrapper Cleanup (2026-05-04)
 
@@ -1182,7 +1182,7 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -1191,6 +1191,6 @@ Brooklyn Zelenka / UCAN / Keyhive alignment: `did:key` = self-certifying, Ed2551
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;77J0Y-C6NZoC426YoIChaYuI6yBTSRrT6hOE_jc3wDY
+<<^ code="&#x0003;">>ni:///sha-256;vYY8IZRnY2owYMC9DM5BNy-Kc9TpzWXBP9IuXPeu3JI
 
 <<^ code="&#x0004;" -> to=?>>

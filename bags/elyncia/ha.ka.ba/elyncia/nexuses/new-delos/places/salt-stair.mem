@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/salt-stair"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Salt-Stair
 
@@ -40,6 +40,6 @@ who have never met — the Salt-Stair declines to say, and MUG-SMOKE has never b
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xHokqGzfbg_XytUec4vCYObS2YNoNHhYotz2rDovMYY
+<<^ code="&#x0003;">>ni:///sha-256;lzH9tjAiNBiK4E3ylOSXqG9nb6agZ73Ms1EX7b0NWPs
 
 <<^ code="&#x0004;" -> to=?>>

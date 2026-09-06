@@ -19,7 +19,7 @@ written   = "2026-06-12"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Has-Stack — the composition law
 
@@ -29,7 +29,7 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the carrier's tags field and title before judging composition; gather which entries resolve, which stand declared-unresolved.
 ⏿ orient each entry against its definition meme; the carried thing carries the semantics, never the edge.
@@ -39,7 +39,7 @@ TW5 speaks `has` natively: the `tags` field carries the stack, and a tag filter 
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! The Seven Clauses
 
@@ -58,7 +58,7 @@ Runtime: `qualifyStackTag` / `stackOf` and the `stack` filter operator (`[stack[
 
 <<~/ahu>>
 
-<<~ ahu #verse-binding>>
+<<~ ahu #/verse-binding>>
 
 !! The Verse Marriage — witnessed bindings
 
@@ -82,7 +82,7 @@ Field-grounded against Epic's UEFN+/Scene Graph direction (2026-06-12, two resea
 
 <<~/ahu>>
 
-<<~ ahu #runtime-twin>>
+<<~ ahu #/runtime-twin>>
 
 !! The runtime twin ~ a causal island runs as a nameless cap stack
 
@@ -94,7 +94,7 @@ The same grammar runs both planes: stack order carries precedence (a cap claims 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -111,6 +111,6 @@ the py caps consume.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;7MGdg5AI3WmSYyYtxCsG96Q4e3MuUA1-gv4Eyj-ad4A
+<<^ code="&#x0003;">>ni:///sha-256;ePDwbrX1-zrTPOdexreltskSnZ227Rh-NAAGs2n32yI
 
 <<^ code="&#x0004;" -> to=?>>

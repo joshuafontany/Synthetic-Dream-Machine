@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/dispatcher"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! ~ Dispatcher
 
@@ -35,7 +35,7 @@ grammar: new sigils need only a tiddler — no code change required.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the sigil name — what named body does this invocation reach?
 ⏿ orient: dispatcher looks up `~name` in TW5 procedure/widget namespace; delegates via $transclude
@@ -45,7 +45,7 @@ grammar: new sigils need only a tiddler — no code change required.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -57,7 +57,7 @@ Undefined names resolve to empty output (TW5 missing-variable behavior) — MUST
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -76,12 +76,12 @@ TW5 wikitext body:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0jrkcCcxzkNL_iCGh5ZsdeO1NDfASJI847uzyd7TfYs
+<<^ code="&#x0003;">>ni:///sha-256;fs2uzdmSvv7NWHZHQ186bgkTWaFeLZWjE0gAW_7xRTw
 
 <<^ code="&#x0004;" -> to=?>>

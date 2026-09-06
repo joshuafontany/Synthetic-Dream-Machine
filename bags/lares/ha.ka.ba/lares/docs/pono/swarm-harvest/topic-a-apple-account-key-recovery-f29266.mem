@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-apple-account-key-re
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! TOPIC A — Apple Account/Key Recovery
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 21,478 characters
 
@@ -163,12 +163,12 @@ Source: [signal.org/blog/secure-value-recovery/](https://signal.org/blog/secure-
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;T1QNRaq806zk0AEx0GD6-qaqmEbedBzwt6ZKOhhMgxs
+<<^ code="&#x0003;">>ni:///sha-256;PcLYgBZOool-5ikSoGzOsa6Pp9-CfZv8cA7pX9fql7A
 
 <<^ code="&#x0004;" -> to=?>>

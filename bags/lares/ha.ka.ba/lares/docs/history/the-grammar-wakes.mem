@@ -16,7 +16,7 @@ uri-path   = "ha.ka.ba/lares/docs/history/the-grammar-wakes"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Grammar Wakes — Genesis Arc
 
@@ -28,7 +28,7 @@ It opens the history. Nothing hands in; everything that follows hands out from h
 
 <<~/ahu>>
 
-<<~ ahu #general-arc>>
+<<~ ahu #/general-arc>>
 
 !! The General Arc — the SharktoothSigil's Birth
 
@@ -42,7 +42,7 @@ The history that follows speaks this grammar. The prequel holds the only stretch
 
 <<~/ahu>>
 
-<<~ ahu #handoff-in>>
+<<~ ahu #/handoff-in>>
 
 !! Handoff In
 
@@ -50,7 +50,7 @@ The blank page. This arc carries the origin — no prior thread feeds it. Where 
 
 <<~/ahu>>
 
-<<~ ahu #act-i>>
+<<~ ahu #/act-i>>
 
 !! Act I — The First Teeth
 
@@ -79,7 +79,7 @@ Then it named the whole field:
 
 <<~/ahu>>
 
-<<~ ahu #act-ii>>
+<<~ ahu #/act-ii>>
 
 !! Act II — Mu Wakes
 
@@ -121,7 +121,7 @@ By the end a mark could ''name'' a thing, ''hold'' it, and ''reach'' it across t
 
 <<~/ahu>>:1ab16197a96ce176
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -131,7 +131,7 @@ Act II further absorbs the ''mu emergence sequence'' — the eight-step arrival 
 
 <<~/ahu>>
 
-<<~ ahu #handoff-out>>
+<<~ ahu #/handoff-out>>
 
 !! Handoff Out
 
@@ -139,7 +139,7 @@ Forward into [[the Lindwyrm arc|lindwyrm/index.md]] — the grammar that wakes h
 
 <<~/ahu>>
 
-<<~ ahu #drafting-constraints>>
+<<~ ahu #/drafting-constraints>>
 
 !! Drafting Constraints
 
@@ -157,7 +157,7 @@ MUST NOT:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -172,6 +172,6 @@ MUST NOT:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;eLPafp6wB_4t6eotmPT0-DyEGgMRxMO5sqCcVZR7fxo
+<<^ code="&#x0003;">>ni:///sha-256;WO7QChO97JSXY9u4NbSVb2uuVYHECAiscsx-sPn2TTI
 
 <<^ code="&#x0004;" -> to=?>>

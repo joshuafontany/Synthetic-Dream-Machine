@@ -86,7 +86,7 @@ Current host-law:
 
 This split removes the old flat-record ambiguity where TW5 content fields and host metadata shared one namespace and drifted into accidental collisions.
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/tw5-module>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/tiddler-store>>
@@ -94,6 +94,6 @@ This split removes the old flat-record ambiguity where TW5 content fields and ho
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;h62t9DsRHynsX94DGerXcVLRYbSal9u-MIOW404JWRA
+<<^ code="&#x0003;">>ni:///sha-256;_uI5AohW-s0T1DLgqgte1DQP86m9zKuTZE-rN_Eq86E
 
 <<^ code="&#x0004;" -> to=?>>

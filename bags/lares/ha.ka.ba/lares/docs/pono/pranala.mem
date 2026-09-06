@@ -20,7 +20,7 @@ Law lives at [[pranala.md|../../api/pono/pranala.md]].
 
 This file holds examples, sigil-sugar long-forms, and reciprocal-edge guidance.
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Examples
 
@@ -36,7 +36,7 @@ Minimal inline edges:
 
 <<~/ahu>>
 
-<<~ ahu #sugar-long-forms>>
+<<~ ahu #/sugar-long-forms>>
 
 !! Sigil Sugar Long-Forms
 
@@ -81,7 +81,7 @@ alias = "kahea"
 
 <<~/ahu>>
 
-<<~ ahu #reciprocal-edges>>
+<<~ ahu #/reciprocal-edges>>
 
 !! Reciprocal Edges
 
@@ -98,7 +98,7 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -106,6 +106,6 @@ This is the correct pattern for genuinely symmetric semantics — model it expli
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;92N8Zg2pIyz_6OShdTaf-16041MR2kJhRAXYtRb--34
+<<^ code="&#x0003;">>ni:///sha-256;JLGNOtYGezeANM98odFFoPLkukBENUZQVQsr0M3N2Vg
 
 <<^ code="&#x0004;" -> to=?>>

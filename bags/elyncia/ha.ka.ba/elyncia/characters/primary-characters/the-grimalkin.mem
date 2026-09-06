@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/the-grimalkin"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Patches ~ the Grimalkin, Kai ʻĀ's Lynx-Mount
 
@@ -41,7 +41,7 @@ that scale as ''territory-map coat'' — continents of orange, black, and white.
 
 <<~/ahu>>
 
-<<~ ahu #the-word>>
+<<~ ahu #/the-word>>
 
 !! The Word ~ what "grimalkin" carries
 
@@ -55,7 +55,7 @@ walking. Whether hers reads as familiar, mount, partner, or all three at once be
 
 <<~/ahu>>
 
-<<~ ahu #open-slots>>
+<<~ ahu #/open-slots>>
 
 !! Open Slots (the table fills these)
 
@@ -70,13 +70,13 @@ walking. Whether hers reads as familiar, mount, partner, or all three at once be
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/kai-a>>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/company-structure>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;400rogTFpjAwbYU_IFP0cO2OnVgKWQqQjQWdq6cqNdY
+<<^ code="&#x0003;">>ni:///sha-256;PvetbD1KPHjvYOfBj5VyGhuZv0OGvtLb0c5oap1Mlbo
 
 <<^ code="&#x0004;" -> to=?>>

@@ -22,13 +22,13 @@ uri-path  = "ha.ka.ba/sdm/modules/powers/shield-ward"
 
 ! Shield Ward
 
-<<~ ahu #has>>
+<<~ ahu #/has>>
 
 !! Composition
 
 <<~/ahu>>
 
-<<~ ahu #default>>
+<<~ ahu #/default>>
 
 ```toml default
 canonical-name = "Shield Ward"
@@ -59,7 +59,7 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 <<~/ahu>>
 
-<<~ ahu #variants>>
+<<~ ahu #/variants>>
 
 !! Variants
 
@@ -70,7 +70,7 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -80,7 +80,7 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -90,6 +90,6 @@ On a botched or breached ward, choose one: it flares and reveals the operator; g
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;zzO7ijaKBHLpPMhgB3PVuKENByGdlfCAeTB9IoF80zg
+<<^ code="&#x0003;">>ni:///sha-256;qYCzjzbYoxMbLbe0qydiRMexX-o6YqKEKD0b3dEs71E
 
 <<^ code="&#x0004;" -> to=?>>

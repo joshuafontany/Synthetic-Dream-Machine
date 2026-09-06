@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Lindwyrm ~ Patroness of New Delos
 
@@ -43,7 +43,7 @@ meet at somebody's table, and the only table nobody had ever fought at was hers.
 
 <<~/ahu>>
 
-<<~ ahu #deeds>>
+<<~ ahu #/deeds>>
 
 !! The Deeds on Record
 
@@ -58,7 +58,7 @@ meet at somebody's table, and the only table nobody had ever fought at was hers.
 
 <<~/ahu>>
 
-<<~ ahu #manner>>
+<<~ ahu #/manner>>
 
 !! How She Reads in a Room
 
@@ -77,7 +77,7 @@ only as much as suits her.''
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
@@ -85,6 +85,6 @@ only as much as suits her.''
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;P1ISqf17Mo8adv9dcj04QJz2eNfBwsr7Gn5m_XW-KLU
+<<^ code="&#x0003;">>ni:///sha-256;mEAX12HEtb_mvNjQABcLsG5gfDN8m2UdzKJXoPA7xkc
 
 <<^ code="&#x0004;" -> to=?>>

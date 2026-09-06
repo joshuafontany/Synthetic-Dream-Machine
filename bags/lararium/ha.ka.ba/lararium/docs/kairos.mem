@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/kairos"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! KAIROS — The Proactive Monitor as an Instrument
 
@@ -34,7 +34,7 @@ never a subsystem bolted beside it.
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -56,7 +56,7 @@ quoting any of them onward.
 
 <<~/ahu>>
 
-<<~ ahu #the-gate>>
+<<~ ahu #/the-gate>>
 
 !! The Gate
 
@@ -97,7 +97,7 @@ changes shape or stops surfacing.
 
 <<~/ahu>>
 
-<<~ ahu #tiers>>
+<<~ ahu #/tiers>>
 
 !! The Ladder as Budget
 
@@ -143,7 +143,7 @@ than fall quiet. Silence reads as absence, and absence reads as broken.
 
 <<~/ahu>>
 
-<<~ ahu #anatomy>>
+<<~ ahu #/anatomy>>
 
 !! Check Anatomy
 
@@ -178,7 +178,7 @@ surfacing MUST clear a much higher bar.
 
 <<~/ahu>>
 
-<<~ ahu #refusal>>
+<<~ ahu #/refusal>>
 
 !! The Refusal to Act
 
@@ -198,7 +198,7 @@ the rule MUST NOT port without it.
 
 <<~/ahu>>
 
-<<~ ahu #decay>>
+<<~ ahu #/decay>>
 
 !! Decay — the re-entry key
 
@@ -227,7 +227,7 @@ disabled''. A dismissal that silences one instance teaches the instrument nothin
 
 <<~/ahu>>
 
-<<~ ahu #trust-ledger>>
+<<~ ahu #/trust-ledger>>
 
 !! The Trust Ledger — two accounts, never one
 
@@ -249,7 +249,7 @@ automation, root-caused to false alarms and to a base rate nobody weighed.
 
 <<~/ahu>>
 
-<<~ ahu #check-set-one>>
+<<~ ahu #/check-set-one>>
 
 !! Check Set One
 
@@ -282,7 +282,7 @@ published Claude Code escapes land at the ''argument'' layer, never the verb.
 
 <<~/ahu>>
 
-<<~ ahu #ruled>>
+<<~ ahu #/ruled>>
 
 !! Rulings — operator, 2026-08-27
 
@@ -308,7 +308,7 @@ free coarse breakpoint; a scheduled sweep needs its own justification.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -321,6 +321,6 @@ free coarse breakpoint; a scheduled sweep needs its own justification.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Ay8VCSPeQXuajg_D874Ag_UARLL6HEf_AS1MeHP0VJE
+<<^ code="&#x0003;">>ni:///sha-256;7iV_dNUIh8lKQOVJezRvLsu1G5yj2K_4XFcp1mVAOoI
 
 <<^ code="&#x0004;" -> to=?>>

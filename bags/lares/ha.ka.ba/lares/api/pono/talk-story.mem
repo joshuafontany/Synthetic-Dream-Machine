@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/talk-story"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Talk Story — The Floor Before the Ruling
 
@@ -30,7 +30,7 @@ Talk story convenes the floor where the shape of a thing emerges from the tellin
 
 <<~/ahu>>
 
-<<~ ahu #sigils>>
+<<~ ahu #/sigils>>
 
 !! The Two Sigils
 
@@ -59,7 +59,7 @@ telling — the Voices the moment calls co-narrate; the operator overlaps and st
 
 <<~/ahu>>
 
-<<~ ahu #word-family>>
+<<~ ahu #/word-family>>
 
 !! The Word-Family — One Grammar, Five Seas
 
@@ -81,7 +81,7 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<~/ahu>>
 
-<<~ ahu #laws>>
+<<~ ahu #/laws>>
 
 !! Laws
 
@@ -96,7 +96,7 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<~/ahu>>
 
-<<~ ahu #degraded>>
+<<~ ahu #/degraded>>
 
 !! Degraded States
 
@@ -109,7 +109,7 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Lineage
 
@@ -117,7 +117,7 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -128,6 +128,6 @@ Beneath the triad two grounds rhyme: ''kapwa'' (Filipino — the other met as sh
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;iVCKA94ViPdMITV_SzvZhAbFQLoX3bOu1P-2E7YqWf8
+<<^ code="&#x0003;">>ni:///sha-256;P_h-NjqBpRmPcGOLpd3rGk6rnwVEchQsIf0CdZGeH_8
 
 <<^ code="&#x0004;" -> to=?>>

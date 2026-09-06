@@ -16,7 +16,7 @@ written    = "2026-06-12"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -26,7 +26,7 @@ written    = "2026-06-12"
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -37,13 +37,13 @@ Pure core: `qualifyStackTag` / `stackOf` (`packages/lararium-tw5/src/has-stack.t
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/filter-operators/edge>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;PpZl6XfeyfQ7t6ILtQjYEaCG538PgDRl3nB4yvy5XDI
+<<^ code="&#x0003;">>ni:///sha-256;nfkT3HDOzmyLT4-O6BVEDPbIPLXstHOi3AilMbOyWSY
 
 <<^ code="&#x0004;" -> to=?>>

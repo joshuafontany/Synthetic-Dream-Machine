@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/sdm/modules/powers/read-magic"
 
 ! Read Magic
 
-<<~ ahu #has>>
+<<~ ahu #/has>>
 
 !! Composition
 
@@ -30,7 +30,7 @@ Flat composition. The TOML `tags` field mirrors these edges for TW5 filters.
 
 <<~/ahu>>
 
-<<~ ahu #default>>
+<<~ ahu #/default>>
 
 ```toml default
 canonical-name = "Read Magic"
@@ -60,7 +60,7 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 <<~/ahu>>
 
-<<~ ahu #variants>>
+<<~ ahu #/variants>>
 
 !! Variants
 
@@ -71,7 +71,7 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -81,7 +81,7 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -92,6 +92,6 @@ A botched read mis-recognizes: the operator marks the wrong meaning as trusted, 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;wZBZbd5HLii_D3QMdOt3jvPw38WJd0alhwd1Q-TsJH4
+<<^ code="&#x0003;">>ni:///sha-256;hJ7euiSeKOsMOp80TgynuuNGlWe-PtGv7mhNB4V6Qj4
 
 <<^ code="&#x0004;" -> to=?>>

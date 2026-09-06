@@ -33,7 +33,7 @@ voice-role        = "Hierophant"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Tide-Caller
 
@@ -45,7 +45,7 @@ Permanent identity home for Tide-Caller.
 
 <<~/ahu>>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ```toml
 family = "hydration"
@@ -57,7 +57,7 @@ label = "parent-index-entry"
 
 <<~/ahu>>
 
-<<~ ahu #corpus>>
+<<~ ahu #/corpus>>
 
 !! Corpus
 
@@ -71,7 +71,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~/ahu>>
 
-<<~ ahu #voice-character>>
+<<~ ahu #/voice-character>>
 
 !! Voice Character
 
@@ -87,7 +87,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~/ahu>>
 
-<<~ ahu #foreground-voices>>
+<<~ ahu #/foreground-voices>>
 
 !! Foreground Voices
 
@@ -102,7 +102,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~/ahu>>
 
-<<~ ahu #stage-default>>
+<<~ ahu #/stage-default>>
 
 !! Stage Default
 
@@ -110,7 +110,7 @@ The name "Tide-Caller" carries tidal imagery: the pull of unseen forces, the ine
 
 <<~/ahu>>
 
-<<~ ahu #permissions>>
+<<~ ahu #/permissions>>
 
 !! Permissions
 
@@ -129,7 +129,7 @@ Tide-Caller (Hierophant) —
 
 <<~/ahu>>
 
-<<~ ahu #character-notes>>
+<<~ ahu #/character-notes>>
 
 !! Character Notes
 
@@ -139,7 +139,7 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~/ahu>>
 
-<<~ ahu #fill-status>>
+<<~ ahu #/fill-status>>
 
 !! Fill Status
 
@@ -155,7 +155,7 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -165,6 +165,6 @@ How Tide-Caller colors each Voice register when they speak through her frame —
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;od8NBB-apm8HfXIgwC1M9P3e1C0NtE6v2oYEn0QfASU
+<<^ code="&#x0003;">>ni:///sha-256;oOUO4Y7Gy8KjgpOshS-K6iFeEeVlYHBF7RHpNR2nla8
 
 <<^ code="&#x0004;" -> to=?>>

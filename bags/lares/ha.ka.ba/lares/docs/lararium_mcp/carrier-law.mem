@@ -17,7 +17,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: source law already names meme, invariant, memetic-wikitext, loci, and implements lanes.
 ⏿ orient: the compiler must treat these as composable interfaces, not decorative headings.
@@ -27,7 +27,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/carrier-law"
 
 <<~/ahu>>
 
-<<~ ahu #five-lanes>>
+<<~ ahu #/five-lanes>>
 
 !! Five Compiler Input Lanes
 
@@ -44,7 +44,7 @@ It should not begin from markdown files plus links.
 
 <<~/ahu>>
 
-<<~ ahu #meme-shape>>
+<<~ ahu #/meme-shape>>
 
 !! Meme Copy-Shape Contract
 
@@ -64,7 +64,7 @@ Depth states remain distinct: resolved, declared-unresolved, absent.
 
 <<~/ahu>>
 
-<<~ ahu #invariant-pressure>>
+<<~ ahu #/invariant-pressure>>
 
 !! Invariant Pressure Contract
 
@@ -80,7 +80,7 @@ Compiler yield:
 
 <<~/ahu>>
 
-<<~ ahu #memetic-wikitext-primitives>>
+<<~ ahu #/memetic-wikitext-primitives>>
 
 !! Memetic-Wikitext Primitive Contract
 
@@ -100,7 +100,7 @@ Parser legality and render machinery stay separate.
 
 <<~/ahu>>
 
-<<~ ahu #loci-routing>>
+<<~ ahu #/loci-routing>>
 
 !! Loci Routing Contract
 
@@ -116,7 +116,7 @@ Parser legality and render machinery stay separate.
 
 <<~/ahu>>
 
-<<~ ahu #interface-bundles>>
+<<~ ahu #/interface-bundles>>
 
 !! Composition as a Stack of Components
 
@@ -143,7 +143,7 @@ Common stacks:
 
 <<~/ahu>>
 
-<<~ ahu #compiler-order>>
+<<~ ahu #/compiler-order>>
 
 !! Recommended Compiler Order
 
@@ -159,7 +159,7 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -170,6 +170,6 @@ Carrier truth stays ahead of syntax swell.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aTSwFxzpbqsCL2fmF4-iXCf3xB2bskEZfAKnCZ2k7xY
+<<^ code="&#x0003;">>ni:///sha-256;gW1F9PEM3nWy_hrYonC3tECy0IuBNdLWYVOQyGb1V5U
 
 <<^ code="&#x0004;" -> to=?>>

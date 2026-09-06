@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-the-onboarding-cost-
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! TOPIC A — The onboarding-cost question
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 39,475 characters
 
@@ -409,12 +409,12 @@ Also not retrieved: **Notary** root rotation semantics. No findings.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;co0ovDDU8Fcus2faqa0s7moHtX2LbMusHI4K7p3MZas
+<<^ code="&#x0003;">>ni:///sha-256;z4NPWZZFfgamj2fU61o6wBDCrynfxO_9SU0kT7NhU2M
 
 <<^ code="&#x0004;" -> to=?>>

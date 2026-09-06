@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/sa-display"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal — SA Display
 
@@ -28,7 +28,7 @@ HUD witness and annotation behavior stay at `lar:///ha.ka.ba/lararium/docs/signa
 
 <<~/ahu>>
 
-<<~ ahu #room-charter>>
+<<~ ahu #/room-charter>>
 
 !! Room Charter
 
@@ -43,7 +43,7 @@ Longer academic argument belongs here rather than in the branch parent.
 
 <<~/ahu>>
 
-<<~ ahu #research-framing>>
+<<~ ahu #/research-framing>>
 
 !! Research Framing
 
@@ -80,7 +80,7 @@ It reads referenced content the node points it at.
 
 <<~/ahu>>
 
-<<~ ahu #sa-vs-xai>>
+<<~ ahu #/sa-vs-xai>>
 
 !! SA vs XAI
 
@@ -108,7 +108,7 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -119,6 +119,6 @@ Per-position stance modifier glyph design remains in motion; current record-form
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3xo1st4ssv6W7yV2e3zykgyCkfq0LhzduJ2Wmgi0QQE
+<<^ code="&#x0003;">>ni:///sha-256;HVMFNoLE56a2CmeiWq6aN_ELVPToEmOUrVZSbNg-IK8
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/workspace-trust-gate"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Workspace Trust Gate
 
@@ -26,7 +26,7 @@ This room holds a specific recovered operational principle: trust should checkpo
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -39,7 +39,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -59,7 +59,7 @@ The workspace trust gate explains when the node must pause anyway.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -68,6 +68,6 @@ The workspace trust gate explains when the node must pause anyway.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;kEC9Xi4LZvCXIMBbq7bFMwowSm6tvGxtlpoDLz0y5gI
+<<^ code="&#x0003;">>ni:///sha-256;VeciDUazveyZ9kQJh--7a4j_ZhPvCq5Y0NrGuomMwPY
 
 <<^ code="&#x0004;" -> to=?>>

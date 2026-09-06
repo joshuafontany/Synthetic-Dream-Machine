@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/pattern-integrity-stress"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The shape, stressed before it locks
 
@@ -31,7 +31,7 @@ Seven parallel investigations against the whole pattern-integrity — the unboun
 
 <<~/ahu>>
 
-<<~ ahu #the-convergent-claim-wedges>>
+<<~ ahu #/the-convergent-claim-wedges>>
 
 !! ★ The convergent claim has been built once, and it WEDGES ★
 
@@ -51,7 +51,7 @@ Keyhive stands as the only system unifying revocation, membership and revision i
 
 <<~/ahu>>
 
-<<~ ahu #the-waist-never-moves>>
+<<~ ahu #/the-waist-never-moves>>
 
 !! ★ An identity waist cannot be retrofitted — measured over eight years ★
 
@@ -65,7 +65,7 @@ Elsewhere the same result: a key-rotation issue ''open and dormant four years'',
 
 <<~/ahu>>
 
-<<~ ahu #the-switcher-signals>>
+<<~ ahu #/the-switcher-signals>>
 
 !! ★ The one study of exactly this population — zero adoption, and the switcher SIGNALS ★
 
@@ -85,7 +85,7 @@ The five practices they DID use ran ''covert and deniable'' — selective deleti
 
 <<~/ahu>>
 
-<<~ ahu #nothing-is-rootless>>
+<<~ ahu #/nothing-is-rootless>>
 
 !! ★ Custody delegates to machines. Accountability does not. ★
 
@@ -101,7 +101,7 @@ Every system runs machine-to-machine chains of arbitrary depth at runtime, ''the
 
 <<~/ahu>>
 
-<<~ ahu #the-veil-leaks-at-sync>>
+<<~ ahu #/the-veil-leaks-at-sync>>
 
 !! ★ The blind veil holds at the data layer and leaks at the sync layer — and one project REJECTED it in writing ★
 
@@ -128,7 +128,7 @@ Two issues asking for exactly the per-identity contact view, both labelled ''rej
 
 <<~/ahu>>
 
-<<~ ahu #what-makes-it-lockable>>
+<<~ ahu #/what-makes-it-lockable>>
 
 !! ★ You do not pick the waist. You pick N. ★
 
@@ -157,7 +157,7 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 
 <<~/ahu>>
 
-<<~ ahu #the-mycelium-splits>>
+<<~ ahu #/the-mycelium-splits>>
 
 !! ★ Split the biology and the grounding changes sign ★
 
@@ -173,7 +173,7 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 
 <<~/ahu>>
 
-<<~ ahu #four-instrument-lies>>
+<<~ ahu #/four-instrument-lies>>
 
 !! ⚠ Four instrument-lies, two of them the field's own
 
@@ -186,7 +186,7 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/managed-identity-scout>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
@@ -194,6 +194,6 @@ And the competitive complement: waist protocols become ''evolutionary kernels'' 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tpmW-5pdnT8JbLBIda8yD_FsjREwhitC2RD-s6HVCPk
+<<^ code="&#x0003;">>ni:///sha-256;icZlrsTNkCagU9wxwxn0RUh9uJV6NYl9943dhOL2fTk
 
 <<^ code="&#x0004;" -> to=?>>

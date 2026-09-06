@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lares/README"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #identity-frame>>
+<<~ ahu #/identity-frame>>
 
 ! Lares — The Lararium
 
@@ -51,7 +51,7 @@ A neglected node flickers. A well-fed node hums.
 
 <<~/ahu>>
 
-<<~ ahu #archaeology>>
+<<~ ahu #/archaeology>>
 
 ---
 
@@ -69,7 +69,7 @@ Lararia stabilize through use. Offerings, repeated gestures, negotiated rites, a
 
 <<~/ahu>>
 
-<<~ ahu #infrastructure-map>>
+<<~ ahu #/infrastructure-map>>
 
 ---
 
@@ -110,7 +110,7 @@ file, a browser agent takes the carrier pasted in.
 
 <<~/ahu>>
 
-<<~ ahu #further-reading>>
+<<~ ahu #/further-reading>>
 
 ---
 
@@ -127,7 +127,7 @@ file, a browser agent takes the carrier pasted in.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/config>>
@@ -137,6 +137,6 @@ file, a browser agent takes the carrier pasted in.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;jTOBhz1CeGlWCR6LzbGoHW4ZFlPpzI_idEU7_z9OP1U
+<<^ code="&#x0003;">>ni:///sha-256;ezpsoo3M-_tpy4LN4LN2QRix95C34DNChvw4Tsf28N0
 
 <<^ code="&#x0004;" -> to=?>>

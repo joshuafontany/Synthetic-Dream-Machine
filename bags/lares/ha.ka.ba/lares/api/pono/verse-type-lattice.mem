@@ -17,7 +17,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-type-lattice"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Verse Type Lattice
 
@@ -30,7 +30,7 @@ ch. 13 (effects), ch. 17 (persistable); Epic Games developer documentation.
 
 <<~/ahu>>
 
-<<~ ahu #lattice>>
+<<~ ahu #/lattice>>
 
 !! The Type Lattice
 
@@ -71,7 +71,7 @@ Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 
 <<~/ahu>>
 
-<<~ ahu #class-modifiers>>
+<<~ ahu #/class-modifiers>>
 
 !! Class Modifiers That Affect the Lattice
 
@@ -84,7 +84,7 @@ Function subtyping: `(T1)->R1 <: (T2)->R2` requires `T2 <: T1` and `R1 <: R2`.
 
 <<~/ahu>>
 
-<<~ ahu #persistable-constraint>>
+<<~ ahu #/persistable-constraint>>
 
 !! Persistable — A Closed Constraint Universe
 
@@ -115,7 +115,7 @@ game sessions. This is Verse's equivalent of cross-session player storage.
 
 <<~/ahu>>
 
-<<~ ahu #effects-as-edge-labels>>
+<<~ ahu #/effects-as-edge-labels>>
 
 !! Effects System — Six Families
 
@@ -158,7 +158,7 @@ failable expression into a conditional branch.
 
 <<~/ahu>>
 
-<<~ ahu #pranala-edge-labels>>
+<<~ ahu #/pranala-edge-labels>>
 
 !! Effects as Pranala Edge Labels
 
@@ -177,7 +177,7 @@ See `uefn-scene` for the `reaction:subscribable` edge format and `KumuSubscribab
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -190,6 +190,6 @@ See `uefn-scene` for the `reaction:subscribable` edge format and `KumuSubscribab
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MaJhchs0l30eK2ytBCQjwvPntzszy8_UdYU8iE_in20
+<<^ code="&#x0003;">>ni:///sha-256;0xRNCJubAChB5b1Mz-vpQs2MsR3VOZQ9iHj4SIxTjgs
 
 <<^ code="&#x0004;" -> to=?>>

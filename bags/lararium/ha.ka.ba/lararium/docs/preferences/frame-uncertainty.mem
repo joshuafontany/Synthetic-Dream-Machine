@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/frame-uncertainty"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Frame Uncertainty
 
@@ -26,7 +26,7 @@ This room holds the recovered habit of naming the fork before picking a branch t
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -39,7 +39,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -58,7 +58,7 @@ Where the branch matters, the fork must surface.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -67,6 +67,6 @@ Where the branch matters, the fork must surface.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;wtTZtkos9LoKulmEqheFLTBUo7hDVR9bv_rlBTObyzY
+<<^ code="&#x0003;">>ni:///sha-256;dp5CRWx7-brzKZ3Ff5yEPbmhbehpxxETffWLYRXYNCw
 
 <<^ code="&#x0004;" -> to=?>>

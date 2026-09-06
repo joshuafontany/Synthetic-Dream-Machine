@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/operations-review"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 ```toml
 primary-source = "packages/lares-core/memes/docs/lararium/prompts/Lares_Preferences.system-prompt.md"
@@ -32,7 +32,7 @@ scope-note = "Plan only — no content extracted in this memo. Extractions to fo
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Operations — Extraction Review
 
@@ -47,7 +47,7 @@ undergoes inventory and classification here.
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -98,7 +98,7 @@ Secondary source: `FFZ_Chronometer_SPEC_OUTLINE.md` — Talk Story references at
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -159,7 +159,7 @@ docs/lararium/
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -221,7 +221,7 @@ This pass produces:
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -250,7 +250,7 @@ Talk Story sourcing from RAW's Brain Machine Symposium 1989 constitutes a verbat
 
 <<~/ahu>>
 
-<<~ ahu #assess>>
+<<~ ahu #/assess>>
 
 !! ↺ Assess
 
@@ -283,7 +283,7 @@ After the extraction pass closes, these questions remain for a future consolidat
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -295,6 +295,6 @@ After the extraction pass closes, these questions remain for a future consolidat
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fiIlFrWoXNjwDeL8cEn3JTVvMPGSR8Xc5dQmTLEBkyE
+<<^ code="&#x0003;">>ni:///sha-256;YCEdAtd0yrIwH-8ApFih1DvJAXe2ebfY-xX_KKvr8sU
 
 <<^ code="&#x0004;" -> to=?>>

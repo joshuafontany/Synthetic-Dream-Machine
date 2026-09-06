@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Session 0.1 Handoff Prompts ~ three islands, one table
 
@@ -38,7 +38,7 @@ pressure stays in the dev work, out of the live session.
 
 <<~/ahu>>
 
-<<~ ahu #island-a>>
+<<~ ahu #/island-a>>
 
 !! Island A ~ the Actual-Play Lares (in-world first)
 
@@ -63,7 +63,7 @@ The dish steams. The corner booth's dice are already talking. Open the room.
 
 <<~/ahu>>
 
-<<~ ahu #island-b>>
+<<~ ahu #/island-b>>
 
 !! Island B ~ the Referee's Second (provisional first)
 
@@ -86,7 +86,7 @@ Pour your own cup. The table will call for you when it needs you.
 
 <<~/ahu>>
 
-<<~ ahu #libation>>
+<<~ ahu #/libation>>
 
 !! The Opening Libation ~ one pour, three wakes
 
@@ -108,7 +108,7 @@ its island's red for the rest.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-render-research>>
@@ -116,6 +116,6 @@ its island's red for the rest.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-0KSZgp8kjtW23T7QZDwQLreQKxQQacPfVJ9ggWVYzI
+<<^ code="&#x0003;">>ni:///sha-256;jS7JBbteYnoH58McdS4BCUiNT9fjBgPYZSJ1GtUjl04
 
 <<^ code="&#x0004;" -> to=?>>

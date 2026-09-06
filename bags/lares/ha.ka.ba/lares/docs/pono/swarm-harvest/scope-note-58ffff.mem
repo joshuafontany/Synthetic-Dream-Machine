@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/scope-note-58ffff"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! SCOPE NOTE
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 34,076 characters
 
@@ -361,12 +361,12 @@ Every "Dunbar ceiling online" number in this brief traces back through a small n
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;5-0_VBb9EpFIuhLEexqrUpaWj3E8hmbbzMa5tUDHtTs
+<<^ code="&#x0003;">>ni:///sha-256;jSCa5k3cS6CreL8bdU4YOYe3hRSQgacxroqLEOI7RTs
 
 <<^ code="&#x0004;" -> to=?>>

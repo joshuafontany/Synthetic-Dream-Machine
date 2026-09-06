@@ -23,12 +23,12 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab"
 </$list>
 </$reveal>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-panel>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yjBkr12d_ltYuYONZH4QclE01NsK-ZNcuTlgBpd11sk
+<<^ code="&#x0003;">>ni:///sha-256;Pjb_JJCkuCvieC6usoFSLO7gl-Ol6ikw7cng9y0gK-U
 
 <<^ code="&#x0004;" -> to=?>>

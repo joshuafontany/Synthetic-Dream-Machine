@@ -23,7 +23,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #abstract>>
+<<~ ahu #/abstract>>
 
 ! Memetic-Wikitext — A Composable Markup Language
 
@@ -35,7 +35,7 @@ This specification names the lexical structure, a formal surface grammar, the du
 
 <<~/ahu>>
 
-<<~ ahu #status>>
+<<~ ahu #/status>>
 
 !! Status and Maturity
 
@@ -43,7 +43,7 @@ This document holds ''submission-draft'' maturity. The lexical structure, dual-l
 
 <<~/ahu>>
 
-<<~ ahu #introduction>>
+<<~ ahu #/introduction>>
 
 !! Introduction — Scope, Audience, and Relation to the `lar:` Spec
 
@@ -64,7 +64,7 @@ carrier CARRIES; [FRAMING] defines the wrap, and composes over this grammar's `d
 
 <<~/ahu>>
 
-<<~ ahu #terminology>>
+<<~ ahu #/terminology>>
 
 !! Terminology and Conformance Language
 
@@ -88,7 +88,7 @@ The key words ''MUST'', ''MUST NOT'', ''REQUIRED'', ''SHALL'', ''SHALL NOT'', ''
 
 <<~/ahu>>
 
-<<~ ahu #abstract-syntax>>
+<<~ ahu #/abstract-syntax>>
 
 !! Abstract Syntax
 
@@ -131,7 +131,7 @@ projection with the structure has read an encoding as the thing encoded.
 
 <<~/ahu>>
 
-<<~ ahu #lexical-structure>>
+<<~ ahu #/lexical-structure>>
 
 !! Lexical Structure
 
@@ -141,7 +141,7 @@ The `<<` `>>` pair forms the outer delimiter family for every active sigil. The 
 
 | Prefix | TW5 macro name | Register | Example |
 |---|---|---|---|
-| `<<~` | `~` | primary sigil — the speaking set | `<<~ ahu #id>>`, `<<~ aka lar:///uri>>` |
+| `<<~` | `~` | primary sigil — the speaking set | `<<~ ahu #/id>>`, `<<~ aka lar:///uri>>` |
 | `<<~/` | `~/name` | block close | `<<~/ahu>>` |
 | `<<~!` | `~!` | pragma (definition) | `<<~! wehe name(p)>>` |
 | `<<~?` | `~?` | unresolved-pressure | `<<~? #fragment>>` |
@@ -224,14 +224,14 @@ Memetic-wikitext SHALL read as a ''superset of TW5 wikitext'': every valid TW5 w
 !!! Shapes
 
 * ''Inline'' (self-closing): `<<~ loulou lar:///uri>>`
-* ''Block'' (open + close): `<<~ ahu #id>>` … `<<~/ahu>>`
+* ''Block'' (open + close): `<<~ ahu #/id>>` … `<<~/ahu>>`
 * ''Pragma block'' (`<<~!` … `<<~/name>>`): definitions
 
 A `#fragment-id` after a sigil name names an addressable anchor. A block's close tag MUST match the innermost open of the same sigil name.
 
 <<~/ahu>>
 
-<<~ ahu #grammar>>
+<<~ ahu #/grammar>>
 
 !! Formal Grammar (ABNF)
 
@@ -314,7 +314,7 @@ unrecognised one to text rather than to a parse error (#lexical-structure, the g
 
 <<~/ahu>>
 
-<<~ ahu #processing-model>>
+<<~ ahu #/processing-model>>
 
 !! Processing Model — The Dual Layer
 
@@ -351,7 +351,7 @@ Edge and definition sigils carry render directives. `aka` embeds frozen content;
 
 <<~/ahu>>
 
-<<~ ahu #pranala>>
+<<~ ahu #/pranala>>
 
 !! Pranala — The Typed Edge System
 
@@ -378,7 +378,7 @@ surfaces:
 
 <<~/ahu>>
 
-<<~ ahu #anchors>>
+<<~ ahu #/anchors>>
 
 !! Anchors and Belonging
 
@@ -400,7 +400,7 @@ alone; nothing else has to carry it. A stored field naming the same parent would
 spelling of one fact, and a second spelling can disagree with the first the moment both become editable.
 
 ''Rendering carries a different relation, and no field could hold it.'' One meme renders into many
-places — `<<~ ahu #x -> lar:///other>>` points a worksite at a full address — so the relation runs
+places — `<<~ ahu #/x -> lar:///other>>` points a worksite at a full address — so the relation runs
 many-to-many and lives in the ''markers that hold it'', in the carriers that write them. A child cannot
 list its renderers without a write on every transclusion.
 
@@ -409,7 +409,7 @@ list its renderers without a write on every transclusion.
 
 <<~/ahu>>
 
-<<~ ahu #scope-model>>
+<<~ ahu #/scope-model>>
 
 !! Scope Model
 
@@ -427,7 +427,7 @@ Scope MAY widen; a narrowing MUST surface explicitly. A `<<~ kapu <scope>>>` blo
 
 <<~/ahu>>
 
-<<~ ahu #recursion-guard>>
+<<~ ahu #/recursion-guard>>
 
 !! Recursion Guard
 
@@ -442,7 +442,7 @@ The compile-time DAG guard (boot-closure cycles) and the render-time stack guard
 
 <<~/ahu>>
 
-<<~ ahu #guest-grammar>>
+<<~ ahu #/guest-grammar>>
 
 !! Guest Grammar Model — The Extension Point
 
@@ -458,7 +458,7 @@ Guest grammar MUST leave host primitives intact, and malformed guest work MUST d
 
 <<~/ahu>>
 
-<<~ ahu #english-aliases>>
+<<~ ahu #/english-aliases>>
 
 !! English Alias Namespace
 
@@ -486,7 +486,7 @@ without the grammar moving.)//
 
 <<~/ahu>>
 
-<<~ ahu #conformance>>
+<<~ ahu #/conformance>>
 
 !! Conformance Classes
 
@@ -521,7 +521,7 @@ A ''conforming author'' SHOULD: reserve capitalized RFC-2119 force for intended 
 
 <<~/ahu>>
 
-<<~ ahu #media-type>>
+<<~ ahu #/media-type>>
 
 !! Media-Type Registration (RFC 6838)
 
@@ -565,7 +565,7 @@ lineage; the degradation property states the warrant.
 
 <<~/ahu>>
 
-<<~ ahu #security>>
+<<~ ahu #/security>>
 
 !! Security Considerations
 
@@ -581,7 +581,7 @@ lineage; the degradation property states the warrant.
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Worked Examples (Non-Normative)
 
@@ -597,7 +597,7 @@ carrier states first ([FRAMING] #declaration-register):
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 Body text, with a live embed: <<~ kahea lar:///ha.ka.ba/lares/api/pono/meme>>.
 <<~ pranala #governs from=? -> to=lar:///ha.ka.ba/lares/api/pono/loci family=control role=has>>
 
@@ -627,7 +627,7 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu>>
 
-<<~ ahu #references>>
+<<~ ahu #/references>>
 
 !! Normative References
 
@@ -642,7 +642,7 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu>>
 
-<<~ ahu #annex-parity>>
+<<~ ahu #/annex-parity>>
 
 !! Annex A — TiddlyWiki5 / Verse Parity (Informative)
 
@@ -660,7 +660,7 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu>>
 
-<<~ ahu #annex-open>>
+<<~ ahu #/annex-open>>
 
 !! Annex B — Open Items (Informative)
 
@@ -677,7 +677,7 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -697,6 +697,6 @@ A canvas reaction wire (flow surface):
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;FC84KhtB8KrzUdA8cF8vlR5zqe6VbGBm5du421xktxE
+<<^ code="&#x0003;">>ni:///sha-256;WGJ1V0BbdrcWugmACJDT1-XgA3YMZ64neqh_1zPhcYM
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ka"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Heleuma-Ka (Soul / Fire)
 
@@ -27,7 +27,7 @@ A heleuma-ka anchor exists outside the corpus ''by current necessity, not by nat
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ locate the compiled artifact and its extractable symbol; confirm it has a standalone function boundary.
 ⏿ orient: could this function be loaded from a corpus meme via `_bootModules()`? If yes, this is ka.
@@ -37,7 +37,7 @@ A heleuma-ka anchor exists outside the corpus ''by current necessity, not by nat
 
 <<~/ahu>>
 
-<<~ ahu #required-fields>>
+<<~ ahu #/required-fields>>
 
 !! Required Fields (SHALL)
 
@@ -64,7 +64,7 @@ Signal fields (`mana`, `manao`, `manaoio`) SHALL approach 16 / 16 / 15 as the so
 
 <<~/ahu>>
 
-<<~ ahu #promotion-path>>
+<<~ ahu #/promotion-path>>
 
 !! Promotion Path
 
@@ -76,12 +76,12 @@ When `body-sha256` is present and all signal thresholds are met, `_bootModules()
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6Lbud5JYfaN1YUV3CUyw-5aEZMho0BczimK69ejsPeg
+<<^ code="&#x0003;">>ni:///sha-256;0AoW7Oa6QXw7rJyZfA9DeWmZAHhs9B9oy4RTrz2vVxI
 
 <<^ code="&#x0004;" -> to=?>>

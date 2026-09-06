@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/drift-ward"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Drift-Ward
 
@@ -30,7 +30,7 @@ carrying no "ward". Both name this.
 
 <<~/ahu>>
 
-<<~ ahu #axis>>
+<<~ ahu #/axis>>
 
 !! The Axis ~ the reality-scoped anchor
 
@@ -54,7 +54,7 @@ where evidence stood.
 
 <<~/ahu>>
 
-<<~ ahu #panel>>
+<<~ ahu #/panel>>
 
 !! Where It Rides ~ four sigils, six lines
 
@@ -69,7 +69,7 @@ as canon draws them.
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! The Open Firing ~ the pull coming in
 
@@ -91,7 +91,7 @@ no pull this island carries.
 
 <<~/ahu>>
 
-<<~ ahu #close>>
+<<~ ahu #/close>>
 
 !! The Close Firing ~ the clue going out
 
@@ -113,7 +113,7 @@ the pull and resisted it// ~ anchored to the open.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 A firing naming no island-scoped pull, or handing no contact-ready clue, reads as a degraded HUD.
 ''Hazard reuse'' reads as its quieter sibling (adopted 2026-08-15): the same pull recurring
@@ -126,6 +126,6 @@ yesterday's hazard recurring unchanged deserves its own suspicion.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;n-YhH3QLXJvUh1ZLwbc7fGF9BlXXDr-GuGI2x-Fties
+<<^ code="&#x0003;">>ni:///sha-256;v2bNfGcz9QWzi_a7kHMejXYt78QXSYuJDxhN54KAfig
 
 <<^ code="&#x0004;" -> to=?>>

@@ -31,10 +31,10 @@ uri-path    = "ha.ka.ba/lararium/tw5/ui/ahu-breadcrumb"
 
 </$list>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;XBb9GfHvCeKk4wgGFA62VlsBgB5gdrZbVv1Bb_rPHEY
+<<^ code="&#x0003;">>ni:///sha-256;0P0Ycf5rZjn3BlR278cYflVP7QLRSk5tAj2zCIvlUg4
 
 <<^ code="&#x0004;" -> to=?>>

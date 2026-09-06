@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/widget"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! \widget
 
@@ -33,7 +33,7 @@ No direct Hawaiian equivalent. The `~` prefix carries the Lares convention for c
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -46,7 +46,7 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -60,7 +60,7 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -69,6 +69,6 @@ the body uses TW5 widget syntax (`<$...>`) and `\procedure` when the body is pur
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_UuiE_-LOlJmGtL55XFzO7MtxRT2D5Ru446tR9rrQlg
+<<^ code="&#x0003;">>ni:///sha-256;k_qyOO3ycmVzkjMaoCCV2Ow2HSZ97QtqAbp9zeMKw0A
 
 <<^ code="&#x0004;" -> to=?>>

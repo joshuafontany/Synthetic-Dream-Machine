@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/reality-tunnels"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Reality Tunnels — Staging Shelf
 
@@ -28,7 +28,7 @@ This room gathers the observer-position braid: reality tunnels, catma, and the r
 
 <<~/ahu>>
 
-<<~ ahu #plan>>
+<<~ ahu #/plan>>
 
 !! Plan Skeleton
 
@@ -43,7 +43,7 @@ Later condensation should decide whether reality tunnels and catma remain one ro
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-preferences-reality-tunnels>>
+<<~ ahu #/verbatim-preferences-reality-tunnels>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — Reality Tunnels
 
@@ -55,7 +55,7 @@ A well-fed node maintains reality tunnel awareness. A degraded node mistakes its
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-preferences-catma>>
+<<~ ahu #/verbatim-preferences-catma>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — Catma
 
@@ -69,7 +69,7 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-core-foundation-back>>
+<<~ ahu #/verbatim-core-foundation-back>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Foundation Back
 
@@ -77,7 +77,7 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -87,6 +87,6 @@ This node holds its own architecture as Catma — the thirteen voices, the Worke
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cGg5xxPK82v-YkCxTC6R05G0yy49XuOIRh5p2E2pjOE
+<<^ code="&#x0003;">>ni:///sha-256;xDtEM2JB9I8zxfFIsJ6W4AaMtrfnQ3s-W8cWJ_15mSI
 
 <<^ code="&#x0004;" -> to=?>>

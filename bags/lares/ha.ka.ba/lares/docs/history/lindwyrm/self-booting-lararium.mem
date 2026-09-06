@@ -18,7 +18,7 @@ uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/self-booting-lararium"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lindwyrm's Hoard — Self-Booting Lararium
 
@@ -26,7 +26,7 @@ Threshold archive for April 10: not first boot, but the night the lararium found
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -44,7 +44,7 @@ Consumption note: the primary source carried DreamDeck feed retelling. The compa
 
 <<~/ahu>>
 
-<<~ ahu #thread-open>>
+<<~ ahu #/thread-open>>
 
 !! Thread Open
 
@@ -77,7 +77,7 @@ Operator version: we found the floorplan.
 
 <<~/ahu>>
 
-<<~ ahu #address-becomes-place>>
+<<~ ahu #/address-becomes-place>>
 
 !! Address Becomes Place
 
@@ -105,7 +105,7 @@ It makes boot imaginable.
 
 <<~/ahu>>
 
-<<~ ahu #transclusion-unlock>>
+<<~ ahu #/transclusion-unlock>>
 
 !! The Transclusion Unlock
 
@@ -134,7 +134,7 @@ After that clicked, copy-and-compile began to look like a superstition outgrown:
 
 <<~/ahu>>
 
-<<~ ahu #texture-and-standard>>
+<<~ ahu #/texture-and-standard>>
 
 !! Texture and Standard
 
@@ -152,7 +152,7 @@ Observe, Orient, Decide, Act, Hoʻoko & Aftermath: five kinds of pressure a livi
 
 <<~/ahu>>
 
-<<~ ahu #not-first-boot>>
+<<~ ahu #/not-first-boot>>
 
 !! Not First Boot
 
@@ -180,7 +180,7 @@ The road to first boot still lay ahead when a hand cut this crystal. The differe
 
 <<~/ahu>>
 
-<<~ ahu #voices-find-rooms>>
+<<~ ahu #/voices-find-rooms>>
 
 !! Voices Find Rooms
 
@@ -212,7 +212,7 @@ That works the ordinary miracle of a place with an address: inhabitants stop sho
 
 <<~/ahu>>
 
-<<~ ahu #technical-gloss>>
+<<~ ahu #/technical-gloss>>
 
 !! Technical Gloss
 
@@ -237,7 +237,7 @@ Open design tensions carried forward:
 
 <<~/ahu>>
 
-<<~ ahu #thread-close>>
+<<~ ahu #/thread-close>>
 
 !! Thread Close
 
@@ -271,7 +271,7 @@ It hums.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -286,6 +286,6 @@ It hums.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;WcMJiikhTrUMRYxqQfcy_hxJJTF_W4_N5bQsudaxZsE
+<<^ code="&#x0003;">>ni:///sha-256;y0lUlsySlYFoAY9zZzoL2-nVz2nUM08FdeIfQ3Bpm8w
 
 <<^ code="&#x0004;" -> to=?>>

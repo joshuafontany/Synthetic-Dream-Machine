@@ -22,7 +22,7 @@ written   = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Servo ~ the bound that breathes
 
@@ -44,7 +44,7 @@ at #enaction).
 
 <<~/ahu>>
 
-<<~ ahu #loop>>
+<<~ ahu #/loop>>
 
 !! The loop ~ observe · smooth · compute · clamp
 
@@ -68,7 +68,7 @@ actually arrived.
 
 <<~/ahu>>
 
-<<~ ahu #polarity>>
+<<~ ahu #/polarity>>
 
 !! Polarity ~ the direction follows what the bound protects
 
@@ -105,7 +105,7 @@ Every polarity above runs ONE-SIDED — the bound self-tunes from its OWN observ
 
 <<~/ahu>>
 
-<<~ ahu #two-loops>>
+<<~ ahu #/two-loops>>
 
 !! Two loops ~ the complete controller
 
@@ -127,7 +127,7 @@ This is exactly a transport controller's shape — ''derive ≈ slow-start / BDP
 
 <<~/ahu>>
 
-<<~ ahu #guards>>
+<<~ ahu #/guards>>
 
 !! Guards ~ what keeps the governor honest
 
@@ -144,7 +144,7 @@ This is exactly a transport controller's shape — ''derive ≈ slow-start / BDP
 
 <<~/ahu>>
 
-<<~ ahu #enaction>>
+<<~ ahu #/enaction>>
 
 !! Enaction ~ where the governor lives in code
 
@@ -175,7 +175,7 @@ TS/py shore; the polarity law and the two-loop shape hold identically wherever t
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -185,6 +185,6 @@ TS/py shore; the polarity law and the two-loop shape hold identically wherever t
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LkHNhGuoHrhOgI_gAfUS_87Lv7-eXq-dun0mXYahKks
+<<^ code="&#x0003;">>ni:///sha-256;hbPvkJ_WPnJVV0ZYBYaWot8iTmF-3x1zkAjTm3tguzQ
 
 <<^ code="&#x0004;" -> to=?>>

@@ -26,7 +26,7 @@ uri-path      = "ha.ka.ba/lararium/api/disk-projection"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 ! Disk Projection — Seed and Projection Surfaces
 
@@ -43,7 +43,7 @@ The distinction reads ''definition vs instance''. An FTLS Power Card //definitio
 
 <<~/ahu>>
 
-<<~ ahu #bag-roles>>
+<<~ ahu #/bag-roles>>
 
 !! Bag roles — which bags project, which ride the mesh
 
@@ -64,7 +64,7 @@ The projector enforces this structurally: ''a bag absent from the mirror list ne
 
 <<~/ahu>>
 
-<<~ ahu #oracle-split>>
+<<~ ahu #/oracle-split>>
 
 !! @oracle vs @lararium — the runtime island splits from the corpus (operator ruling, 2026-06-15)
 
@@ -85,7 +85,7 @@ The boot reads its engine from `@oracle`'s own blobs (never re-evaluating genesi
 
 <<~/ahu>>
 
-<<~ ahu #personal>>
+<<~ ahu #/personal>>
 
 !! @personal — wiki-instance-bound, off-disk
 
@@ -100,7 +100,7 @@ A future debug-only disk projection MAY be added behind an explicit flag; it MUS
 
 <<~/ahu>>
 
-<<~ ahu #projection-law>>
+<<~ ahu #/projection-law>>
 
 !! Projection law
 
@@ -111,7 +111,7 @@ A future debug-only disk projection MAY be added behind an explicit flag; it MUS
 
 <<~/ahu>>
 
-<<~ ahu #granularity>>
+<<~ ahu #/granularity>>
 
 !! Granularity — carrier-whole at rest (operator ruling, 2026-06-11)
 
@@ -131,7 +131,7 @@ A future debug-only disk projection MAY be added behind an explicit flag; it MUS
 
 <<~/ahu>>
 
-<<~ ahu #projection-routing>>
+<<~ ahu #/projection-routing>>
 
 !! Projection routing — tiddler-groups + the standard TW5 path (operator ruling, 2026-06-11)
 
@@ -145,7 +145,7 @@ Write-back routes by ''type'', in three rules:
 
 <<~/ahu>>
 
-<<~ ahu #write-ward>>
+<<~ ahu #/write-ward>>
 
 !! The disk ward — sovereign-island write confinement (operator ruling, 2026-06-11)
 
@@ -176,7 +176,7 @@ Ward vectors: `packages/lararium-node/tests/disk-confinement.test.ts` (13 — tr
 
 <<~/ahu>>
 
-<<~ ahu #cli>>
+<<~ ahu #/cli>>
 
 !! CLI capability
 
@@ -184,7 +184,7 @@ The disk-projection Artifact is operator-driven through the `@lares/cli` surface
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -203,6 +203,6 @@ between casual chat-use and the defined parser core.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;vtnIbX6hDpiW7SM1Q0PqvgVjn5ZPgKcVdqAPxUg1CgA
+<<^ code="&#x0003;">>ni:///sha-256;LLMGWrKNeiBlf_Cpw9UkRcFWIv-U72ja5DUWikXhzqI
 
 <<^ code="&#x0004;" -> to=?>>

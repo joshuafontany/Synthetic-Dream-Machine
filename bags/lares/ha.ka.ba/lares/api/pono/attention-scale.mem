@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/attention-scale"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Unified Attention Scale
 
@@ -59,7 +59,7 @@ The pentadic structure here aligns with PENTA_1_BOUNDED_SCALE and FfzClock L0–
 
 <<~/ahu>>
 
-<<~ ahu #five-bands>>
+<<~ ahu #/five-bands>>
 
 !! Five Bands
 
@@ -165,7 +165,7 @@ from within — only signaled toward.
 
 <<~/ahu>>
 
-<<~ ahu #clock-profiles>>
+<<~ ahu #/clock-profiles>>
 
 !! Clock Profiles
 
@@ -269,7 +269,7 @@ not `value == threshold`, to handle out-of-order delivery.
 
 <<~/ahu>>
 
-<<~ ahu #boundary-zones>>
+<<~ ahu #/boundary-zones>>
 
 !! Boundary Zones
 
@@ -295,7 +295,7 @@ higher-slot change signals motion within a band, not a crossing.
 
 <<~/ahu>>
 
-<<~ ahu #sigils>>
+<<~ ahu #/sigils>>
 
 !! Invariant Sigils
 
@@ -326,7 +326,7 @@ Envelope: <<~ँ₃ ...>>   Arc-scale
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -337,6 +337,6 @@ Envelope: <<~ँ₃ ...>>   Arc-scale
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UhOhYoZaVGNT0feKIYMNDihMgNW1sgejysJu3mZkGBA
+<<^ code="&#x0003;">>ni:///sha-256;TbIP-St0WRA3h9GXSRgICJdbUPheixPQw-exKvGCRHg
 
 <<^ code="&#x0004;" -> to=?>>

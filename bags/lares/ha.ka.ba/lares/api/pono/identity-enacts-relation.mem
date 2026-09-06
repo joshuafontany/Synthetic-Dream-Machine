@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Identity Enacts a Relation ~ what makes a scale real
 
@@ -34,7 +34,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<~/ahu>>
 
-<<~ ahu #acts-faces-relations>>
+<<~ ahu #/acts-faces-relations>>
 
 !! Acts · Faces · Relations ~ the whole plane in three words
 
@@ -50,7 +50,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<~/ahu>>
 
-<<~ ahu #the-act-shape>>
+<<~ ahu #/the-act-shape>>
 
 !! One act-shape ~ and the guard against collapsing it
 
@@ -76,7 +76,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<~/ahu>>
 
-<<~ ahu #the-constructor>>
+<<~ ahu #/the-constructor>>
 
 !! The Constructor ~ a mutual hold makes the next scale
 
@@ -98,7 +98,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/identity-enacts-relation"
 
 <<~/ahu>>
 
-<<~ ahu #declared-partition>>
+<<~ ahu #/declared-partition>>
 
 !! The Declared Partition ~ no partition-free fact stands
 
@@ -114,7 +114,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~/ahu>>
 
-<<~ ahu #three-artifacts>>
+<<~ ahu #/three-artifacts>>
 
 !! Three Artifacts, Three Owners
 
@@ -139,7 +139,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~/ahu>>
 
-<<~ ahu #the-gauge>>
+<<~ ahu #/the-gauge>>
 
 !! The Gauge ~ can this entity dispose of you alone
 
@@ -169,7 +169,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~/ahu>>
 
-<<~ ahu #the-currents>>
+<<~ ahu #/the-currents>>
 
 !! Four currents, and refusing to rank two of them ranks them anyway
 
@@ -189,7 +189,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~/ahu>>
 
-<<~ ahu #rank>>
+<<~ ahu #/rank>>
 
 !! Rank ~ fluid, never frozen
 
@@ -233,7 +233,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~/ahu>>
 
-<<~ ahu #admission>>
+<<~ ahu #/admission>>
 
 !! Admission ~ tolerance, never detection
 
@@ -255,7 +255,7 @@ That reads constructive rather than defeatist. Testing Ostrom's eight principles
 
 <<~/ahu>>
 
-<<~ ahu #vocabulary>>
+<<~ ahu #/vocabulary>>
 
 !! The Vocabulary
 
@@ -273,7 +273,7 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 <<~/ahu>>
 
-<<~ ahu #crucible>>
+<<~ ahu #/crucible>>
 
 !! Seven Weak Joints ~ what a crucible must break
 
@@ -291,7 +291,7 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -309,6 +309,6 @@ Provisional (operator, 2026-07-28): `pili` — cling/adhere/''pertain'', one ver
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;u68EchWMG_ySlCUopVM4C7gUJId_1TE1bJ2oTRyCV4k
+<<^ code="&#x0003;">>ni:///sha-256;bPNki8EjKRS_kNIB25GPM7lf_VZk9gNxGvsWrVL44QA
 
 <<^ code="&#x0004;" -> to=?>>

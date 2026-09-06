@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kau"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kau
 
@@ -27,7 +27,7 @@ A device placed with intention. The instance takes its own address.
 
 <<~/ahu>>
 
-<<~ ahu #etymology>>
+<<~ ahu #/etymology>>
 
 !! Etymology and Mythology
 
@@ -43,7 +43,7 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -57,7 +57,7 @@ In Keyhive terms: the kau instance URI becomes a UCAN resource string. Per-insta
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -86,7 +86,7 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 
 <<~/ahu>>
 
-<<~ ahu #uefn-mapping>>
+<<~ ahu #/uefn-mapping>>
 
 !! UEFN Device Model Mapping
 
@@ -101,7 +101,7 @@ Both stubs are deferred pending Keyhive WASM. When they land, they surface as ex
 
 <<~/ahu>>
 
-<<~ ahu #causal-island>>
+<<~ ahu #/causal-island>>
 
 !! Causal Island
 
@@ -111,7 +111,7 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kumu>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho>>
@@ -119,6 +119,6 @@ This maps directly to the Ink & Switch island model: each automerge object opera
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qOnlJM7WQWq-GN62XesUItpWohZ2lUrlcsXK_XidgAU
+<<^ code="&#x0003;">>ni:///sha-256;q9tbittZwDPvOoC3Kw7q006hV_UoYybt5EeiHzrbHFo
 
 <<^ code="&#x0004;" -> to=?>>

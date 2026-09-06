@@ -329,7 +329,7 @@ In-process smoke: deserialize + render + plugin boot — clean (27 shadow tiddle
 Daemon smoke: `lares serve` + `lares wiki sync altar-fire` + `lares act MOVE` ceremony — ''verified at protocol layer''. Room bag (altar-fire) → canonical bag (@lares), audit tiddler written. infrastructure-correct = feature-correct confirmed at the happy-path layer.
 
 ''Gap revealed — J.3 child co-promotion missing:''
-`lares act MOVE` is single-URI. `splitRecursive` during `wiki sync` creates `#fragment` child tiddlers (one per ahu slot) in the room bag alongside the parent, but the promote handler only moves the parent URI. Children stay in the room bag; canonical disk projector writes only what's in its bag. Result: parent emitted correctly (with `<<~ kahea ahu #slot>>` kahea refs per always-split law) but child slot files never land in `packages/`. Naming this J.3.
+`lares act MOVE` is single-URI. `splitRecursive` during `wiki sync` creates `#fragment` child tiddlers (one per ahu slot) in the room bag alongside the parent, but the promote handler only moves the parent URI. Children stay in the room bag; canonical disk projector writes only what's in its bag. Result: parent emitted correctly (with `<<~ kahea ahu #/slot>>` kahea refs per always-split law) but child slot files never land in `packages/`. Naming this J.3.
 
 ''Key lessons:''
 * `lares wiki sync <room>` is the prerequisite for promote — disk file must be ingested into room bag first.
@@ -347,7 +347,7 @@ Port the sigil set (`aka`, `kahea`, `kau`, `lele`, `papalohe`, `pranala`, `pae`)
 Open question per sigil: does it own a child tiddler (slot child) or fragment-render in place? `aka` projects, `kahea` invokes, `kau` places (with Keyhive UCAN attachment), `lele` flows, `pae` phases (LADDER/OODA-HA), `pranala` is an explicit edge. Each gets its template grammar.
 
 !!! Path H — Save-side auto-split (TW5 UX → child tiddlers)
-The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #foo>>body<<~/ahu>>`, hits save, and `lar:///parent#/foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
+The fourth call site of `parseMemeText`. `MemeSyncAdaptor.saveTiddler`'s `direct` strategy detects memetic-wikitext content, runs `splitMemeToTiddlers(title, text, fields)`, writes parent + child records to the bag, tombstones removed children. Symmetric with the disk-sync path — operator edits a parent meme in TW5 UX, inserts a new `<<~ ahu #/foo>>body<<~/ahu>>`, hits save, and `lar:///parent#/foo` appears in the bag autonomously. Same-grammar invariant the operator named: edit on disk OR edit in UX, identical result.
 
 !!! Path I — Wikifier DOCTYPE + dash + macrocall recovery
 Three small diff items in current round-trip output: HTML comment DOCTYPE dropped; TW5's `dash` rule converts `|---|` → `|—|`; MemeticParser's prologue handling (DOCTYPE, root meta toml extraction) survives but the wikifier swallows the comment in text/plain. Fix by either disabling rules at the parent meme rendering level (via a meme-level wrapper template that pragma-disables them), or by emitting these via `<$text>` widgets carrying the literal char sequences. Aesthetic, not load-bearing — defer until G+H ship.
@@ -465,6 +465,6 @@ lares act MOVE <uri> --to <target-bag>
 
 //The crystal holds.//
 
-<<^ code="&#x0003;">>ni:///sha-256;2JzedeuRLVp0fe9Bodz6NT9lINt71RI5KzKRVqfnuTE
+<<^ code="&#x0003;">>ni:///sha-256;zdXImi7FZmmsWiRCd0T1IP68rrE0qU41IlRjp6TmUDc
 
 <<^ code="&#x0004;" -> to=?>>

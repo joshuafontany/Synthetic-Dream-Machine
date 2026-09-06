@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/projections/abilities/ftls-card/neural-whip"
 
 ! Neural Whip — FTLS Card
 
-<<~ ahu #card>>
+<<~ ahu #/card>>
 
 !! Neural Whip
 //The Biomancer's Reach//
@@ -30,7 +30,7 @@ A neural tentacle of stuckforce lashes out and strikes ''against Defense'' — n
 
 <<~/ahu>>
 
-<<~ ahu #overcharge>>
+<<~ ahu #/overcharge>>
 
 !! Overcharge
 
@@ -39,7 +39,7 @@ A neural tentacle of stuckforce lashes out and strikes ''against Defense'' — n
 
 <<~/ahu>>
 
-<<~ ahu #components>>
+<<~ ahu #/components>>
 
 !! Components
 
@@ -47,7 +47,7 @@ A neural tentacle of stuckforce lashes out and strikes ''against Defense'' — n
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -57,6 +57,6 @@ A neural tentacle of stuckforce lashes out and strikes ''against Defense'' — n
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;24Uh32zt6a1Nlr9sr180przGlUnIucd9AX3wmMeIdh4
+<<^ code="&#x0003;">>ni:///sha-256;qZJvUUR6z1YNS0B_pAz2SubROo7HlU7SSGwydAGIgWM
 
 <<^ code="&#x0004;" -> to=?>>

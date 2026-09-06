@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/wai"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Wai
 
@@ -31,7 +31,7 @@ Water chooses its channel. `wai` selects //which content renders// in the docume
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the filter expression — what condition does this candidate test?
 ⏿ orient: first non-empty filter renders; TW5 filters yield result sets (non-empty = pass), they do not short-circuit as booleans
@@ -41,7 +41,7 @@ Water chooses its channel. `wai` selects //which content renders// in the docume
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -56,7 +56,7 @@ TW5 filter semantics: `[<variable>match[value]]` for equality, `[has[field]]` fo
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -83,7 +83,7 @@ TW5 shortcut expansion: `<%if filter%>body<%endif%>`.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -103,7 +103,7 @@ close-pattern = '<<~\/wai\s*>>'
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -117,6 +117,6 @@ close-pattern = '<<~\/wai\s*>>'
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;FYVb3c4suYqTOfV-9Rw8fQe3yDIGKmb0JxsGC4_Ecv4
+<<^ code="&#x0003;">>ni:///sha-256;LF-fwdAY05ZClfQCjV6EWmMoMJloVllF3UTVSKJPowQ
 
 <<^ code="&#x0004;" -> to=?>>

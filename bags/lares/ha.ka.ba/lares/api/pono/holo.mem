@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/holo"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Holo
 
@@ -35,7 +35,7 @@ Grammar only --- the cancelling-race execution runtime awaits the async-first sp
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -47,7 +47,7 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -65,7 +65,7 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -75,6 +75,6 @@ A holo block MUST NOT resume the containing flow until one child flow completes.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;OSDy1aO7p9pgRwB3C4yK9Xd1r6bvC8Evzgv5QyKexvE
+<<^ code="&#x0003;">>ni:///sha-256;ec_2G6yJI8t9KHHb-u7RHKaocd4Om_coF_3WjpIKHq4
 
 <<^ code="&#x0004;" -> to=?>>

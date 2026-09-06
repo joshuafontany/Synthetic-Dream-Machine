@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lares/docs/pono/identity-stack"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #identity-stack>>
+<<~ ahu #/identity-stack>>
 
 ! Identity Stack — DID / Handle / lar: Alias
 
@@ -41,7 +41,7 @@ The Elyncia.app / DreamDeck identity model holds three distinct layers. ''Do not
 
 <<~/ahu>>
 
-<<~ ahu #handle-form>>
+<<~ ahu #/handle-form>>
 
 !! Handle Form
 
@@ -61,7 +61,7 @@ The `~crossroads` tilde prefix denotes a nomadic/crossroads node — no fixed ho
 
 <<~/ahu>>
 
-<<~ ahu #post-header-render>>
+<<~ ahu #/post-header-render>>
 
 !! DreamDeck Post-Header Render Target
 
@@ -84,7 +84,7 @@ The `record:full` and `hud:exchange-pair` render targets live in the lar-uri sch
 
 <<~/ahu>>
 
-<<~ ahu #stance-carry>>
+<<~ ahu #/stance-carry>>
 
 !! Stance Tool-Carry in Render Targets
 
@@ -94,7 +94,7 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -106,6 +106,6 @@ See `the-four-tools` and `the-syad-perspectives` for the tool and standpoint gra
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;XC3MFN8v3RHE2bdTe3cWnJUp_JcQVMqT0_ECe_EuElY
+<<^ code="&#x0003;">>ni:///sha-256;c8Dz_or2m8pJi2p2aa1fi9lUaO_kcKR6wFGjXR9Ofww
 
 <<^ code="&#x0004;" -> to=?>>

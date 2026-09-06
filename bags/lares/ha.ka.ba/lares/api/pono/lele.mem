@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/lele"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lele
 
@@ -32,7 +32,7 @@ Grammar only --- the fire-and-continue execution runtime awaits the async-first 
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -44,7 +44,7 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -55,7 +55,7 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -63,6 +63,6 @@ A lele edge MUST NOT wait for a response from the target.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LjHz5EDAvlkyau30_15Ll-PwSbnA-LQgz1have0Nq0s
+<<^ code="&#x0003;">>ni:///sha-256;qoiGfQ1UDeZ2buxzLykQZCHiuB0s8M2IM4WIRrahH_c
 
 <<^ code="&#x0004;" -> to=?>>

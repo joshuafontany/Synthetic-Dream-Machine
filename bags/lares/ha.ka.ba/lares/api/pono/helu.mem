@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/helu"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Helu
 
@@ -32,7 +32,7 @@ Where `wehe` / `\procedure` declares a body that renders, `helu` declares a body
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -43,7 +43,7 @@ A helu declaration MUST register a function definition only, producing no render
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -62,7 +62,7 @@ TW5 equivalent:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ TW5 equivalent:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;snVY65UM-D7GrUiFGrV4EBl47oJM0HzhlhLOEW0MT1w
+<<^ code="&#x0003;">>ni:///sha-256;EAKGCwChg0xDraPdsN_9c_q3o8CgthOQH1gtjlmmzBc
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/history/consume-archive"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Consume Archive — where the early research landed
 
@@ -29,7 +29,7 @@ deleted on 2026-05-16 — so a row here answers "where did this come from", and 
 
 <<~/ahu>>
 
-<<~ ahu #history>>
+<<~ ahu #/history>>
 
 !! Origin-story records
 
@@ -48,7 +48,7 @@ The arc that DID survive stands at [[lindwyrm|lar:///ha.ka.ba/lares/docs/history
 
 <<~/ahu>>
 
-<<~ ahu #index>>
+<<~ ahu #/index>>
 
 !! What landed where
 
@@ -74,7 +74,7 @@ Each row: a research file the pass consumed, and the doctrine that carries its c
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/period-forms>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/dreamnet-memewiki>>
@@ -82,6 +82,6 @@ Each row: a research file the pass consumed, and the doctrine that carries its c
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6IpvFqVCMAawZs-4F9-ECWzt3GoiQX8KJ8Ry8M_neFY
+<<^ code="&#x0003;">>ni:///sha-256;JZGtQ402y3lX3tfOm7EgP-3zqQS7Kk-st6owV0j-L6I
 
 <<^ code="&#x0004;" -> to=?>>

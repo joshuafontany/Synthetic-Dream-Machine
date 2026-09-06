@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/mu/pattern-integrity"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Pattern Integrity
 
@@ -33,7 +33,7 @@ The lararium-island names the pattern. A specific peer, session, or filesystem p
 
 <<~/ahu>>
 
-<<~ ahu #fpi-1-tensegrity>>
+<<~ ahu #/fpi-1-tensegrity>>
 
 !! FPI-1 — Tensegrity: Continuous Tension, Discontinuous Compression
 
@@ -63,7 +63,7 @@ through the URI resolver, not by direct construction.
 
 <<~/ahu>>
 
-<<~ ahu #fpi-2-wave>>
+<<~ ahu #/fpi-2-wave>>
 
 !! FPI-2 — Pattern Integrity: Wave, Not Water
 
@@ -100,7 +100,7 @@ MUST serve as the only reference mechanism for content.
 
 <<~/ahu>>
 
-<<~ ahu #fpi-3-synergy>>
+<<~ ahu #/fpi-3-synergy>>
 
 !! FPI-3 — Synergy: Whole-System Behaviors
 
@@ -126,7 +126,7 @@ arrive before platform-specific variants. The whole-system property comes first.
 
 <<~/ahu>>
 
-<<~ ahu #fpi-4-ephemeralization>>
+<<~ ahu #/fpi-4-ephemeralization>>
 
 !! FPI-4 — Ephemeralization: Maximum Effect, Minimum Material
 
@@ -156,7 +156,7 @@ tracking commitment.
 
 <<~/ahu>>
 
-<<~ ahu #fpi-5-trimtab>>
+<<~ ahu #/fpi-5-trimtab>>
 
 !! FPI-5 — Trim Tab: Minimum Intervention, Maximum Redirect
 
@@ -195,7 +195,7 @@ the single control surface for all content routing decisions.
 
 <<~/ahu>>
 
-<<~ ahu #alignment-check>>
+<<~ ahu #/alignment-check>>
 
 !! Alignment Check
 
@@ -211,7 +211,7 @@ Run this against any new code before merging:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -221,6 +221,6 @@ Run this against any new code before merging:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CvqJSAap2FQfHbfgOcfvUqLFfcV5PvpBBMFbYKWutdA
+<<^ code="&#x0003;">>ni:///sha-256;Qw014eacrwDptFgIWgG49q5Zhtjxe-OeWqXPIcEzPhg
 
 <<^ code="&#x0004;" -> to=?>>

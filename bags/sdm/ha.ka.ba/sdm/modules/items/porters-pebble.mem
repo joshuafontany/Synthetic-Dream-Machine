@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/sdm/modules/items/porters-pebble"
 
 ! Porter's Pebble
 
-<<~ ahu #has>>
+<<~ ahu #/has>>
 
 !! Composition
 
@@ -30,7 +30,7 @@ An item is ''an entity with mount-points'', not a new kind of module. It `#has` 
 
 <<~/ahu>>
 
-<<~ ahu #default>>
+<<~ ahu #/default>>
 
 ```toml default
 canonical-name = "Porter's Pebble"
@@ -54,7 +54,7 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~/ahu>>
 
-<<~ ahu #variants>>
+<<~ ahu #/variants>>
 
 !! Variants
 
@@ -64,7 +64,7 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -76,7 +76,7 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -86,6 +86,6 @@ A botched activation or a sundered pebble follows the `item` mount-point's failu
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;svFMMRdUPvbS4fGoIMqVPsw2XM8BllDVptOjymfB5ig
+<<^ code="&#x0003;">>ni:///sha-256;vPVYQ9cM8cchKwuqjegq3qkoTkoC3YdLznKZq1npAbY
 
 <<^ code="&#x0004;" -> to=?>>

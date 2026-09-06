@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe that the doc stack carries two planes of DIFFERENT ARITY. The content plane holds vessel-wide roots — the content Tiga (ha/ka/ba), one oracle chain through ha. The social plane repeats ONCE PER FACE: `@persona-<tag>`, `@circles-<tag>`, `@identities-<tag>`, `@sessions-<tag>`, four planes off one derived tag, and a vessel holding a multitude carries one such set per face.
 ⏿ orient around Bucky Fuller's structural law: the triangle forms the minimal stable POLYGON, the tetrahedron the minimal structural SYSTEM — a shape that stands with nothing above it. The content plane rides a triangle rooted at ha and carries SDM forces (structure/fire/personality). A face rides a tetrahedron rooted at NOTHING: four planes bound by a shared derived tag, with no vessel-global doc over them, because a layer above a person's compartments mints exactly the root persona-circle canon forbids.
@@ -28,7 +28,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/automerge-tiga"
 
 <<~/ahu>>
 
-<<~ ahu #tiga-law>>
+<<~ ahu #/tiga-law>>
 
 !! Two Planes — the Content Tiga, and a Face's Own Four
 
@@ -116,7 +116,7 @@ sessions:    tiddlers["lar:///ha.ka.ba/bags/sessions-<tag>"].text   = automerge:
 
 <<~/ahu>>
 
-<<~ ahu #zelenka-alignment>>
+<<~ ahu #/zelenka-alignment>>
 
 !! Zelenka Alignment
 
@@ -133,7 +133,7 @@ Both planes' stability depends on this constraint holding at every deploy.
 
 <<~/ahu>>
 
-<<~ ahu #boot-sequence-mapping>>
+<<~ ahu #/boot-sequence-mapping>>
 
 !! Boot Sequence → the Two Planes
 
@@ -158,7 +158,7 @@ This ordering carries structural correctness for the SDM metaphysics — not inc
 
 <<~/ahu>>
 
-<<~ ahu #scope-1-networking>>
+<<~ ahu #/scope-1-networking>>
 
 !! Scope 1 ~ the TS CID/CRDT pipe [surgical 2026-07-03]
 
@@ -166,7 +166,7 @@ The two-plane Automerge geometry rides ''Scope 1'' of the two-scopes ruling — 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -177,6 +177,6 @@ The two-plane Automerge geometry rides ''Scope 1'' of the two-scopes ruling — 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;dscO0BLDG8OeTjX2u8Z9PlaVNmffXBAu1w8tSD9YgY8
+<<^ code="&#x0003;">>ni:///sha-256;LVhxMkl-Mws0ex-cFIsFbSN6wEo-yutRM97e5S8A2dM
 
 <<^ code="&#x0004;" -> to=?>>

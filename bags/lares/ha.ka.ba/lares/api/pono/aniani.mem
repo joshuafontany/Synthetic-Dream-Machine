@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/aniani"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #mirror>>
+<<~ ahu #/mirror>>
 
 ! Aniani ~ the Mirror
 
@@ -35,7 +35,7 @@ Three sources ground it. Gödel supplies the spine: a consistent system proves i
 
 <<~/ahu>>
 
-<<~ ahu #reads-the-demonstrator>>
+<<~ ahu #/reads-the-demonstrator>>
 
 !! It reads the demonstrator, not the phenomena
 
@@ -45,7 +45,7 @@ Where the set carries working instruments of its own ~ ways of weighing evidence
 
 <<~/ahu>>
 
-<<~ ahu #the-question>>
+<<~ ahu #/the-question>>
 
 !! One question, four grammars
 
@@ -60,7 +60,7 @@ A set passes where it names its own exemptions in the open. A set leaks where it
 
 <<~/ahu>>
 
-<<~ ahu #three-faces>>
+<<~ ahu #/three-faces>>
 
 !! The three faces
 
@@ -76,7 +76,7 @@ Three apertures of self-inclusion: source, consequence, grammar.
 
 <<~/ahu>>
 
-<<~ ahu #register>>
+<<~ ahu #/register>>
 
 !! The self-inclusion register ~ 0 to 20
 
@@ -94,7 +94,7 @@ The lift runs the same direction every time: move a silent exemption (0) to a na
 
 <<~/ahu>>
 
-<<~ ahu #running-the-pass>>
+<<~ ahu #/running-the-pass>>
 
 !! Running the pass
 
@@ -110,7 +110,7 @@ The lift runs the same direction every time: move a silent exemption (0) to a na
 
 <<~/ahu>>
 
-<<~ ahu #strange-loop>>
+<<~ ahu #/strange-loop>>
 
 !! The loop that never bottoms out
 
@@ -120,6 +120,6 @@ Leave one corner honestly open and seen. A set that sweeps every corner clean ha
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tMuEU6Pusr_LRCT-RoT6AwtRxG9ri0xjIoDXMxFDhGk
+<<^ code="&#x0003;">>ni:///sha-256;OBb2TtKMWGjM6mU1C3NAR-bROxlL5JgD961ATwrFwLs
 
 <<^ code="&#x0004;" -> to=?>>

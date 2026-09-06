@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/sdm/docs/three-lineage-convergence"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Three-Lineage Convergence
 
@@ -27,7 +27,7 @@ Three magic-system designs, independently derived across four decades, factor ma
 
 <<~/ahu>>
 
-<<~ ahu #the-three>>
+<<~ ahu #/the-three>>
 
 !! The Three Factorings
 
@@ -45,7 +45,7 @@ Three magic-system designs, independently derived across four decades, factor ma
 
 <<~/ahu>>
 
-<<~ ahu #mappings>>
+<<~ ahu #/mappings>>
 
 !! The Mappings (evidence of convergence)
 
@@ -64,7 +64,7 @@ Three magic-system designs, independently derived across four decades, factor ma
 
 <<~/ahu>>
 
-<<~ ahu #the-lessons>>
+<<~ ahu #/the-lessons>>
 
 !! What Each Lens Teaches
 
@@ -84,13 +84,13 @@ Three magic-system designs, independently derived across four decades, factor ma
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model>>
 <<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8FB4qUQ2GNUF7SgCcnOQIekDDyyWSTQuI-_VG9kJDYg
+<<^ code="&#x0003;">>ni:///sha-256;zm_iZ2Uqve4ILVmSoOtz4L4HOV-wNuz6kDhTn3HJOAk
 
 <<^ code="&#x0004;" -> to=?>>

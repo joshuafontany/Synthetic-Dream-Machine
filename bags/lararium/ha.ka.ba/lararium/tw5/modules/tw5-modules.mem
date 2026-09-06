@@ -19,7 +19,7 @@ uri-path        = "ha.ka.ba/lararium/tw5/modules/tw5-modules"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -36,10 +36,10 @@ Run `pnpm --filter @lararium/tw5 build` to regenerate.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;RG3CFd5HPpibXbKyPPkdSgc_VH78eUHwVQUCNLOdmLc
+<<^ code="&#x0003;">>ni:///sha-256;zOTyhsWmH1o253dRFuyeclCwORK77VXIOmm3i5SX-pU
 
 <<^ code="&#x0004;" -> to=?>>

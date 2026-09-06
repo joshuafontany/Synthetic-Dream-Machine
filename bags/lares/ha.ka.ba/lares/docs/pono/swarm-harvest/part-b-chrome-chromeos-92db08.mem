@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-b-chrome-chromeos-92db0
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! PART B — Chrome / ChromeOS
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 29,109 characters
 
@@ -267,12 +267,12 @@ The deep-link `.../ms-bkrp/044ea320-...` 404'd; the landing page above is the re
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;H26LQ-svU42rVGSUQADFHisq4E75IJVh-QFh-D-LUkc
+<<^ code="&#x0003;">>ni:///sha-256;KVBhRCroh4em7REdSR8b_a8vuekWvnn-CgPTfiWcWsA
 
 <<^ code="&#x0004;" -> to=?>>

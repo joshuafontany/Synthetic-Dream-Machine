@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-casa-e44425"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. CASA
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 19,706 characters
 
@@ -151,12 +151,12 @@ This is a real, recent, cross-confirmed postmortem-class event, corroborated ind
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;R5SHW0ApI6axk0lRFUF-USU5_gv0rO5pVbt93oOxAKU
+<<^ code="&#x0003;">>ni:///sha-256;SiN3S9LjKYgxsifR-jM6OjV5Fwp4KHQOmazsVjKxUKM
 
 <<^ code="&#x0004;" -> to=?>>

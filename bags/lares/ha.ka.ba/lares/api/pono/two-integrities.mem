@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Two Integrities ~ a name system and a courier
 
@@ -31,7 +31,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 <<~/ahu>>
 
-<<~ ahu #what-each-answers>>
+<<~ ahu #/what-each-answers>>
 
 !! What each answers that we could not
 
@@ -41,7 +41,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 <<~/ahu>>
 
-<<~ ahu #the-dyad>>
+<<~ ahu #/the-dyad>>
 
 !! What they bring the Agent-Operator dyad
 
@@ -53,7 +53,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 <<~/ahu>>
 
-<<~ ahu #the-node>>
+<<~ ahu #/the-node>>
 
 !! What they bring a node on the mesh
 
@@ -65,7 +65,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/two-integrities"
 
 <<~/ahu>>
 
-<<~ ahu #double-blind>>
+<<~ ahu #/double-blind>>
 
 !! The double-blind wrap ~ what a lamplighter must not learn
 
@@ -80,7 +80,7 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 
 <<~/ahu>>
 
-<<~ ahu #the-clock>>
+<<~ ahu #/the-clock>>
 
 !! The one hard collision
 
@@ -92,7 +92,7 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 
 <<~/ahu>>
 
-<<~ ahu #sensorium>>
+<<~ ahu #/sensorium>>
 
 !! Onomancy in the sensorium, the memory palace, the dream work
 
@@ -103,7 +103,7 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 
 <<~/ahu>>
 
-<<~ ahu #what-we-do-not-take>>
+<<~ ahu #/what-we-do-not-take>>
 
 !! What we do NOT take, and why
 
@@ -115,7 +115,7 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 
 <<~/ahu>>
 
-<<~ ahu #the-order>>
+<<~ ahu #/the-order>>
 
 !! The order of adoption
 
@@ -132,6 +132,6 @@ Against #the-face-planes — where relations travel with the face and a vessel-g
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
-<<^ code="&#x0003;">>ni:///sha-256;bq5jmFq3CTHIYeff5VtBJt1tWV8as9cYa3Gy1jCNfh8
+<<^ code="&#x0003;">>ni:///sha-256;RAVNjs4uXRrWAaFN6OXykSHIGkwutKtJ8JX7p2qW9kE
 
 <<^ code="&#x0004;" -> to=?>>

@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/tiddler-record"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Tiddler Record — Canonical Schema Law
 
@@ -29,7 +29,7 @@ Carrier text functions as a projection artifact — not as an Automerge storage 
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -65,7 +65,7 @@ Files on disk that use carrier format (`.md` files in `lares/`, `ftls/`, `elynci
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -93,13 +93,13 @@ ahu-slot-children     = "independent records — not embedded in parent record"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/schema/projection-codec>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YxvLuOUhCRFWRo8E0Uvv6XdNpHj4TDEGDWUjU_T6OgE
+<<^ code="&#x0003;">>ni:///sha-256;-hYFeo0RM-099Jwn0MBwDEIqla6s2a25BPxRLRsuPF4
 
 <<^ code="&#x0004;" -> to=?>>

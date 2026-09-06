@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/campaign/company-structure"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Sidebar ~ Company Structure & Multi-PC Play
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Sidebar — Alpha Playtest Company Structure and Multi-PC Play v3
 
@@ -235,6 +235,6 @@ The intended play pattern: ''the company can do more than a normal small party, 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;VCIowGog547YauULeavUkv5G5EZTS3cnyEiin2fO8fA
+<<^ code="&#x0003;">>ni:///sha-256;SgWSXHg3ackoCJMl77Ttsa7goPwGlqz-X0SgQI-IwmA
 
 <<^ code="&#x0004;" -> to=?>>

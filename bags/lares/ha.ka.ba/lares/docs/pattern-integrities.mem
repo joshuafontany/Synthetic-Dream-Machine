@@ -16,7 +16,7 @@ written   = "2026-06-12"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #shelf>>
+<<~ ahu #/shelf>>
 
 ! Pattern Integrities — the research shelf
 
@@ -91,7 +91,7 @@ The admin↔hot-wiki bridge today (postMessage event → main translates → pla
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -101,6 +101,6 @@ The admin↔hot-wiki bridge today (postMessage event → main translates → pla
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qnv_zVaUeecvii2v_LQ7skXtbYcaWY78YH-r9mXDgrk
+<<^ code="&#x0003;">>ni:///sha-256;2b0MkC8moIQh9JdX55KaX3ZOFOf8Svuf6iNZfkEsKp8
 
 <<^ code="&#x0004;" -> to=?>>

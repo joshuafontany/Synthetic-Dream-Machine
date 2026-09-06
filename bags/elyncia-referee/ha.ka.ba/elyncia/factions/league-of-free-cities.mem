@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/factions/league-of-free-cities"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The League of Free Cities ~ the Confederation
 
@@ -36,7 +36,7 @@ have defined each other's borders ever since.
 
 <<~/ahu>>
 
-<<~ ahu #structure>>
+<<~ ahu #/structure>>
 
 !! Structure ~ how the Confederation runs
 
@@ -54,7 +54,7 @@ have defined each other's borders ever since.
 
 <<~/ahu>>
 
-<<~ ahu #referee-tensions>>
+<<~ ahu #/referee-tensions>>
 
 !! Referee Tensions
 
@@ -74,7 +74,7 @@ have defined each other's borders ever since.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier>>
@@ -82,6 +82,6 @@ have defined each other's borders ever since.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fXJdS9tbyS7wpNoua4T2V378viH-eDb0xkXQjhaY8XU
+<<^ code="&#x0003;">>ni:///sha-256;5WursGEbXw6WKSGmQc-agf14dBSjEwEKPo5UB5TnR-Q
 
 <<^ code="&#x0004;" -> to=?>>

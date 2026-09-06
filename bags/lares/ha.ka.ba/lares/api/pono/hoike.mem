@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hoike"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Hoike — Keeping the Losers
 
@@ -30,7 +30,7 @@ A hoike keeps a contested ruling whole: the held position, every dissent with it
 
 <<~/ahu>>
 
-<<~ ahu #sigils>>
+<<~ ahu #/sigils>>
 
 !! The Three Sigils
 
@@ -61,7 +61,7 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 <<~/ahu>>
 
-<<~ ahu #laws>>
+<<~ ahu #/laws>>
 
 !! Laws
 
@@ -78,7 +78,7 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 <<~/ahu>>
 
-<<~ ahu #degraded>>
+<<~ ahu #/degraded>>
 
 !! Degraded States
 
@@ -91,7 +91,7 @@ A saksi composes into any record, not only a hoike: canon promotions, spirit dep
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Lineage
 
@@ -99,7 +99,7 @@ The layer carries the Eduyot pattern: minority opinions kept with attribution so
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -111,6 +111,6 @@ The layer carries the Eduyot pattern: minority opinions kept with attribution so
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Bv_-FNbA8ndpvEN-5wg-6PLqltWBXUjcqIYz3-m8FLY
+<<^ code="&#x0003;">>ni:///sha-256;59Eh1lo9G94uJUqSNjyakmW8ErQ0azi4AVZVNIkB1Zw
 
 <<^ code="&#x0004;" -> to=?>>

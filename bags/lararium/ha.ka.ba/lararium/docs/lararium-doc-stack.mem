@@ -147,7 +147,7 @@ A companion `$:/plugins/lararium/export/md` TW5 plugin registers the
 `.md` format in the export dropdown — re-using TW5's export widget
 infrastructure rather than rolling a separate exporter.
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -156,6 +156,6 @@ infrastructure rather than rolling a separate exporter.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;VbtiodU3Ueng4aOP4fjQuH_oZBLqMloIR1Km21V6_bQ
+<<^ code="&#x0003;">>ni:///sha-256;cI9tDWicrQ_X__gXvzzw4BRIkFmQZGusf-2OLRClvr4
 
 <<^ code="&#x0004;" -> to=?>>

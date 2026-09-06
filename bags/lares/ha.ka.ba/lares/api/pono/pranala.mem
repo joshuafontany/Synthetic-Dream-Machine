@@ -20,7 +20,7 @@ uri-path        = "ha.ka.ba/lares/api/pono/pranala"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Pranala
 
@@ -30,7 +30,7 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ find what the pointer really carries — composition, action, embed, or bare adjacency — before authoring.
 ⏿ orient on the ladder: worn → tags · doing → wire entity · embedding → aka/kahea · pointing → loulou or anchored pranala.
@@ -40,7 +40,7 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Pranala Law (Kānāwai)
 
@@ -53,7 +53,7 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu>>
 
-<<~ ahu #handoff-boundary>>
+<<~ ahu #/handoff-boundary>>
 
 !! Handoff Boundary
 
@@ -64,7 +64,7 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/wire>>
@@ -78,6 +78,6 @@ The typed-edge law divides in three: ''composition'' rides the meta `tags` field
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Zj8cmJOkxGX3au2yJicA8g-Tn9smr3HJHGOAo98HX_0
+<<^ code="&#x0003;">>ni:///sha-256;XI91qrq9yDrb5AyGW2pmXpijo0DyjefiioIfYIjIiJU
 
 <<^ code="&#x0004;" -> to=?>>

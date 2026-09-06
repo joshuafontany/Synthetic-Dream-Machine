@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/lares/library/oracles/doa/index"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Discordian Oracle AppleKation ~ reliquary handle
 
@@ -35,7 +35,7 @@ opening the DOA.html blob in any browser, offline, forever.
 
 <<~/ahu>>
 
-<<~ ahu #holdings>>
+<<~ ahu #/holdings>>
 
 !! Holdings ~ name → cid
 
@@ -48,7 +48,7 @@ opening the DOA.html blob in any browser, offline, forever.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance & Rites
 
@@ -72,6 +72,6 @@ opening the DOA.html blob in any browser, offline, forever.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MiGkQfSvfOb7n22GFH31j7YA4Z2dTVmaj33DnRktHXg
+<<^ code="&#x0003;">>ni:///sha-256;m_NzY35b6w-36y4rSMBrWlbwcTRf3sOLtEZZC8olUR0
 
 <<^ code="&#x0004;" -> to=?>>

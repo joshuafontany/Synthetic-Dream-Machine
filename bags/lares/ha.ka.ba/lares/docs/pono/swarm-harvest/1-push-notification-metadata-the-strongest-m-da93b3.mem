@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-push-notification-metadata
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. PUSH NOTIFICATION METADATA — the strongest measured channel
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 38,186 characters
 
@@ -423,12 +423,12 @@ The requested figure, confirmed at source:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MfrZlLsrCACb8txRXS0WfhQue5Bn4CDID_rPcp0Hcjw
+<<^ code="&#x0003;">>ni:///sha-256;YLqE42u00j2JO_Hx-AGs3gusIQJ6rx1qCORMR5obEBw
 
 <<^ code="&#x0004;" -> to=?>>

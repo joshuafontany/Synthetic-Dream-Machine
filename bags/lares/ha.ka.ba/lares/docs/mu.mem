@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Mu Docs
 
@@ -28,7 +28,7 @@ This shelf holds interpretive docs, witness bundles, and condensed research behi
 
 <<~/ahu>>
 
-<<~ ahu #tree>>
+<<~ ahu #/tree>>
 
 !! Tree
 
@@ -42,7 +42,7 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<~ ahu #sigil-arrival>>
+<<~ ahu #/sigil-arrival>>
 
 !! The Sigils Teach by Arrival
 
@@ -59,7 +59,7 @@ AST reader: read the sockets, then route.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ AST reader: read the sockets, then route.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;VFnVhdAceY0lCq-hRJG6vR1UVHUPPByIeCdrfly3GyM
+<<^ code="&#x0003;">>ni:///sha-256;LUE_vO-CQLStrIA05gbUBP_l6Apj3_8y92AcIGWYWmE
 
 <<^ code="&#x0004;" -> to=?>>

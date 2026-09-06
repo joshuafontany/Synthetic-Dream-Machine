@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/vessel-caps"
 
 A vessel does not have a ''type''. A vessel ''carries a composed `#has`-stack of capabilities'', and its role //emerges// from which caps it holds and lights. Enumerating vessel-kinds (node-lararium, node-relay, browser-lararium) re-grows the subclass-explosion the `#has`-ontology already retired (<<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>). This meme replaces that enumeration with ''composition'' — so a full node, a bare relay, a browser, a Mudlet instance, an Unreal Engine instance, and the next vessel nobody has built yet all mesh by the ''same move: declaring the caps they carry.''
 
-<<~ ahu #the-five-caps>>
+<<~ ahu #/the-five-caps>>
 
 !! The Five Caps ~ two families
 
@@ -42,7 +42,7 @@ The two families cross the ''AUTHORITY ⊥ FLOW'' master cut: VESSEL caps carry 
 
 <<~/ahu>>
 
-<<~ ahu #hold-vs-express>>
+<<~ ahu #/hold-vs-express>>
 
 !! Hold vs Express
 
@@ -55,7 +55,7 @@ Role = the ''expressed'' cap-set, not the held one. The same vessel differentiat
 
 <<~/ahu>>
 
-<<~ ahu #the-vessel-is-its-caps>>
+<<~ ahu #/the-vessel-is-its-caps>>
 
 !! The Vessel IS Its Caps ~ the ECS shape
 
@@ -73,7 +73,7 @@ A ''role'' computes as a ''structural predicate over the cap-stack'' — //"if a
 
 <<~/ahu>>
 
-<<~ ahu #declaring-caps>>
+<<~ ahu #/declaring-caps>>
 
 !! Declaring Caps ~ the handshake
 
@@ -87,7 +87,7 @@ A vessel that speaks fewer caps simply plays fewer roles — never a rejected //
 
 <<~/ahu>>
 
-<<~ ahu #self-election>>
+<<~ ahu #/self-election>>
 
 !! Self-Election ~ who carries
 
@@ -100,7 +100,7 @@ The carriage-demand stimulus reads off `r` — the carriage-standing coordinate 
 
 <<~/ahu>>
 
-<<~ ahu #lares-viales>>
+<<~ ahu #/lares-viales>>
 
 !! Lares Viales ~ the minimal wayfarer
 
@@ -144,7 +144,7 @@ The section above reads the Herm as a ''standing'' — the cap-composition a cro
 
 <<~/ahu>>
 
-<<~ ahu #the-shore>>
+<<~ ahu #/the-shore>>
 
 !! The Shore ~ store ⊗ connect as symbiosis
 
@@ -154,7 +154,7 @@ The whole mesh reads as a ''holobiont'' — a heterogeneous symbiosis whose emer
 
 <<~/ahu>>
 
-<<~ ahu #integrity>>
+<<~ ahu #/integrity>>
 
 !! Integrity ~ caps as unforgeable references
 
@@ -164,7 +164,7 @@ Sovereignty binds to the ''key, never the path'' (the Iroh discipline, already o
 
 <<~/ahu>>
 
-<<~ ahu #build>>
+<<~ ahu #/build>>
 
 !! Build ~ invent nothing structural
 
@@ -180,7 +180,7 @@ What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -196,6 +196,6 @@ What stays to ''write'' is narrow and named — the cap //vocabulary// itself (`
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8rSFO8nuFXArhsp8Oacit-GhPoo8TnuFSDj_WjlEKoc
+<<^ code="&#x0003;">>ni:///sha-256;BbRtKoW05r1hDFidwyGC0k2p1TQrKmTcIjGYxWxBIKA
 
 <<^ code="&#x0004;" -> to=?>>

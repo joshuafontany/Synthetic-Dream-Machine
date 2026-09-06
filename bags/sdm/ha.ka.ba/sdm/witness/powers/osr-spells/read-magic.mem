@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/read-magic"
 
 ! OSR Witness — Read Magic
 
-<<~ ahu #basic>>
+<<~ ahu #/basic>>
 
 !! Basic
 
@@ -35,7 +35,7 @@ The magic-user may read — not speak — magical words or runes, such as those 
 
 <<~/ahu>>
 
-<<~ ahu #expert>>
+<<~ ahu #/expert>>
 
 !! Expert
 
@@ -50,7 +50,7 @@ The Expert Set reproduces the MU1 spell list only; it carries no standalone desc
 
 <<~/ahu>>
 
-<<~ ahu #cyclopedia>>
+<<~ ahu #/cyclopedia>>
 
 !! Rules Cyclopedia
 
@@ -67,7 +67,7 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<~/ahu>>
 
-<<~ ahu #analysis>>
+<<~ ahu #/analysis>>
 
 !! Conversion Analysis
 
@@ -80,7 +80,7 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -91,6 +91,6 @@ The spellcaster may read — not speak — magical words or runes on scrolls and
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mBhDdATbre-_zVzz9BjngVK77A9135hfF2ApWL3SQ2g
+<<^ code="&#x0003;">>ni:///sha-256;1CK6PdQQ_SqGo6tqrF-Cl9UnPU9TRcd2eny26ITFu-A
 
 <<^ code="&#x0004;" -> to=?>>

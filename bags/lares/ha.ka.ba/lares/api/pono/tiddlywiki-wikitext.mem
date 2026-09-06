@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/tiddlywiki-wikitext"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #abstract>>
+<<~ ahu #/abstract>>
 
 ! TiddlyWiki 5 Wikitext — the base syntax
 
@@ -39,7 +39,7 @@ parse.
 
 <<~/ahu>>
 
-<<~ ahu #status>>
+<<~ ahu #/status>>
 
 !! Status
 
@@ -55,7 +55,7 @@ this record; the record's own envelope belongs to its storage format, not to the
 
 <<~/ahu>>
 
-<<~ ahu #the-load-bearing-property>>
+<<~ ahu #/the-load-bearing-property>>
 
 !! The load-bearing property — the total parse
 
@@ -83,7 +83,7 @@ harmlessness.
 
 <<~/ahu>>
 
-<<~ ahu #terminology>>
+<<~ ahu #/terminology>>
 
 !! Terminology
 
@@ -103,7 +103,7 @@ harmlessness.
 
 <<~/ahu>>
 
-<<~ ahu #lexical-structure>>
+<<~ ahu #/lexical-structure>>
 
 !! Lexical Structure
 
@@ -120,7 +120,7 @@ grammar, because the grammar of any given parse follows from the rules active in
 
 <<~/ahu>>
 
-<<~ ahu #extension-mechanism>>
+<<~ ahu #/extension-mechanism>>
 
 !! The Extension Mechanism — the rule-object contract
 
@@ -164,7 +164,7 @@ specification [MWT] under this contract.
 
 <<~/ahu>>
 
-<<~ ahu #rule-inventory>>
+<<~ ahu #/rule-inventory>>
 
 !! Rule Inventory — the default registry
 
@@ -235,7 +235,7 @@ and the configuration tiddlers filter by these strings.
 
 <<~/ahu>>
 
-<<~ ahu #degradation>>
+<<~ ahu #/degradation>>
 
 !! The Degradation Rule
 
@@ -258,7 +258,7 @@ next processor may understand.
 
 <<~/ahu>>
 
-<<~ ahu #conformance>>
+<<~ ahu #/conformance>>
 
 !! Conformance
 
@@ -285,7 +285,7 @@ implementations.
 
 <<~/ahu>>
 
-<<~ ahu #test-suite>>
+<<~ ahu #/test-suite>>
 
 !! The Executable Conformance Suite
 
@@ -298,7 +298,7 @@ claiming core conformance SHOULD pass that suite for the constructs it implement
 
 <<~/ahu>>
 
-<<~ ahu #security>>
+<<~ ahu #/security>>
 
 !! Security Considerations
 
@@ -322,7 +322,7 @@ document might use.
 
 <<~/ahu>>
 
-<<~ ahu #media-type>>
+<<~ ahu #/media-type>>
 
 !! Media Type
 
@@ -342,7 +342,7 @@ rather than minting sibling types.
 
 <<~/ahu>>
 
-<<~ ahu #references>>
+<<~ ahu #/references>>
 
 !! References
 
@@ -366,13 +366,13 @@ rather than minting sibling types.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;T1YcWOZyOPZgc0TmnnVs6Lr2ExYENSP0_lnFfMobyyA
+<<^ code="&#x0003;">>ni:///sha-256;4l3-SqAlzX-AxULZdeblTth2zAsTfF2RR1tGBqBIkKQ
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/collaboration-model"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Collaboration Model
 
@@ -26,7 +26,7 @@ This room holds one of the strongest recovered principles in the lararium shelf:
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -40,7 +40,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -61,7 +61,7 @@ It likely belongs among the deepest recovered house habits.
 
 <<~/ahu>>
 
-<<~ ahu #relation>>
+<<~ ahu #/relation>>
 
 !! Relation To Live Surfaces
 
@@ -73,7 +73,7 @@ This room leans toward future deeper articulation in:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -83,6 +83,6 @@ This room leans toward future deeper articulation in:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;H8OLmr9bThj47tDJ-llMKtXRtHiiSfusa1mvkS83MZU
+<<^ code="&#x0003;">>ni:///sha-256;h89kDddkfABQ2fHQzLW9RkyQwC9doce69LrTYRnZLtI
 
 <<^ code="&#x0004;" -> to=?>>

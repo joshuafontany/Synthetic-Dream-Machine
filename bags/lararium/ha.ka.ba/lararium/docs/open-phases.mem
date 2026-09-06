@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/docs/open-phases"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Open Phases
 
@@ -28,7 +28,7 @@ to live delta stream. An authority envelope wraps every live session — current
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -106,7 +106,7 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host>>
@@ -115,6 +115,6 @@ status = "stub — pending encrypted group sync (Brooklyn/Beelay)"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;17cT2H3tG5EZpPuXU3NlIoA-5VjN9L49wv4DMPqM58I
+<<^ code="&#x0003;">>ni:///sha-256;_PcIINc2mSFFdJMfTU9cd1k8AWSj6vK6Z65ATYFHBdw
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lararium/docs/meme-ast"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! meme-ast — Contract
 
@@ -42,7 +42,7 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/core/meme-ast/types>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/core/meme-ast/scanner>>
@@ -54,10 +54,10 @@ Build: `pnpm --filter @lararium/tw5 build:plugin`
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4oqoPjfaVW7Gpn1KVAWHWqwPIAkOIY04LYLvk0ONVDo
+<<^ code="&#x0003;">>ni:///sha-256;PC9599fMjaeqC-A5p4ucv3I2-bMN2HGxQCJs5vuHILM
 
 <<^ code="&#x0004;" -> to=?>>

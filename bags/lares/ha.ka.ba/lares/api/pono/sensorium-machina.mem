@@ -21,7 +21,7 @@ written   = "2026-07-13"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Sensorium Machina ~ li and ki, the design-of-record
 
@@ -46,7 +46,7 @@ factorization.
 
 <<~/ahu>>
 
-<<~ ahu #the-one-objective>>
+<<~ ahu #/the-one-objective>>
 
 !! The One Objective ~ a two-part code, never a decomposition
 
@@ -79,7 +79,7 @@ no log-opinion-pool, no RRF weighting, no whitening — every hand-tuned weight 
 
 <<~/ahu>>
 
-<<~ ahu #li>>
+<<~ ahu #/li>>
 
 !! Li ~ the RESTRICT register: a chain, never a product
 
@@ -142,7 +142,7 @@ runs the other way — planes too ''DEPENDENT'' (a trivial 0). //"Both read 0; o
 
 <<~/ahu>>
 
-<<~ ahu #ki>>
+<<~ ahu #/ki>>
 
 !! Ki ~ the EXTEND register (the section that had to be earned)
 
@@ -232,7 +232,7 @@ reads as a ''boundary'' signal, exactly as the FFZ meme specified in June — //
 
 <<~/ahu>>
 
-<<~ ahu #the-py-r-web>>
+<<~ ahu #/the-py-r-web>>
 
 !! The py + R derived web ~ what runs, what survives
 
@@ -261,7 +261,7 @@ placing //n// boundaries ''uniformly at random'' still scores, and scores HIGH o
 
 <<~/ahu>>
 
-<<~ ahu #the-arrow>>
+<<~ ahu #/the-arrow>>
 
 !! The Arrow ~ how a ki finding crosses into li (persistence, the missing leg)
 
@@ -317,7 +317,7 @@ the original bytes always stand there to be compressed against. ''The immutabili
 
 <<~/ahu>>
 
-<<~ ahu #the-grain>>
+<<~ ahu #/the-grain>>
 
 !! The Grain ~ a membership tree, a prefix code, two moods
 
@@ -354,7 +354,7 @@ counter manufactures a global now.
 
 <<~/ahu>>
 
-<<~ ahu #memory-sensorium>>
+<<~ ahu #/memory-sensorium>>
 
 !! The Memory Sensorium ~ the first goalpost past static corpuses
 
@@ -413,7 +413,7 @@ this goalpost sits where the operator put it.
 
 <<~/ahu>>
 
-<<~ ahu #the-family>>
+<<~ ahu #/the-family>>
 
 !! The Sensorium Family ~ separate stores, one machina
 
@@ -455,7 +455,7 @@ comparison instrument that does not yet exist.
 
 <<~/ahu>>
 
-<<~ ahu #owed>>
+<<~ ahu #/owed>>
 
 !! Owed / Open ~ what the canon still cannot answer
 
@@ -505,7 +505,7 @@ low-dimensional intuition is where that failure hides.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -520,7 +520,7 @@ low-dimensional intuition is where that failure hides.
 
 <<~/ahu>>
 
-<<~ ahu #the-geometry>>
+<<~ ahu #/the-geometry>>
 
 !! The Geometry ~ ground + lattice, the chain as spine
 
@@ -538,7 +538,7 @@ Members + grounds: [[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-g
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ the cited names the design stands on
 
@@ -557,6 +557,6 @@ five-plane count (#owed, the-five-plane-count).
 
 <<~ ॐ ँ -> ?>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cfPxg3WBhHyDQvjgMI7GfH_DmOAwsdPXNHJOkPZgjXw
+<<^ code="&#x0003;">>ni:///sha-256;_qWlIlpWHO4Bjw4yjutFek79h_kACB2U0aFGchlrqCY
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/shelter-against-empire"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #the-brief>>
+<<~ ahu #/the-brief>>
 
 ! Shelter Against Empire ~ the brief the graph reasons toward
 
@@ -33,7 +33,7 @@ Named, because a brief that names nobody protects nobody: ''kanaka maoli'' and t
 
 <<~/ahu>>
 
-<<~ ahu #what-empire-does>>
+<<~ ahu #/what-empire-does>>
 
 !! What empire does, structurally
 
@@ -49,7 +49,7 @@ Strip the costume and empire runs ''three moves'', each answerable in architectu
 
 <<~/ahu>>
 
-<<~ ahu #the-myth>>
+<<~ ahu #/the-myth>>
 
 !! The myth ~ what the fiction encodes
 
@@ -67,7 +67,7 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 <<~/ahu>>
 
-<<~ ahu #consequences>>
+<<~ ahu #/consequences>>
 
 !! What follows, in the design
 
@@ -80,7 +80,7 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 <<~/ahu>>
 
-<<~ ahu #designation>>
+<<~ ahu #/designation>>
 
 !! Designation ~ the move that beats a good design
 
@@ -94,7 +94,7 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 <<~/ahu>>
 
-<<~ ahu #what-conferral-costs>>
+<<~ ahu #/what-conferral-costs>>
 
 !! What conferral from below costs, said plainly
 
@@ -106,7 +106,7 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 <<~/ahu>>
 
-<<~ ahu #legibility>>
+<<~ ahu #/legibility>>
 
 !! Removing the roster MOVED the target ~ it never removed it
 
@@ -132,7 +132,7 @@ The Elyncia frame carries the architecture, and it carries it as ''specification
 
 <<~/ahu>>
 
-<<~ ahu #the-honest-limit>>
+<<~ ahu #/the-honest-limit>>
 
 !! The honest limit
 
@@ -159,7 +159,7 @@ on the ordering as a judgement across the cases; the individual attributions hol
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -167,6 +167,6 @@ on the ordering as a judgement across the cases; the individual attributions hol
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;PWOIY8gvzP39TpQnV3tMLXgEBqVhCFqB12jUih0N_Hw
+<<^ code="&#x0003;">>ni:///sha-256;T2_dvyxblyFF7sb2dg-4L61NMrZwlcnACPER5HV1pYc
 
 <<^ code="&#x0004;" -> to=?>>

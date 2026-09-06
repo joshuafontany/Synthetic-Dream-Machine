@@ -17,7 +17,7 @@ uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/adversarial-testing"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Research Stream - Adversarial Testing
 
@@ -25,7 +25,7 @@ Literal quote witnesses for test-all-the-things posture.
 
 <<~/ahu>>
 
-<<~ ahu #distributed-failure>>
+<<~ ahu #/distributed-failure>>
 
 !! Distributed Failure and Generative Testing
 
@@ -39,7 +39,7 @@ Source: https://jepsen.io/analyses
 
 <<~/ahu>>
 
-<<~ ahu #security-automation>>
+<<~ ahu #/security-automation>>
 
 !! Security Testing and Authorization Automation
 
@@ -57,7 +57,7 @@ Source: https://cheatsheetseries.owasp.org/cheatsheets/WebSocket_Security_Cheat_
 
 <<~/ahu>>
 
-<<~ ahu #formal-verification>>
+<<~ ahu #/formal-verification>>
 
 !! Formal Verification Corpus
 
@@ -71,7 +71,7 @@ Source: https://github.com/tlaplus/Examples
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands>>
@@ -79,6 +79,6 @@ Source: https://github.com/tlaplus/Examples
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;9qSyARTFCfkic6FVgdz22hXj8FDhAzVzf8IHboilgOA
+<<^ code="&#x0003;">>ni:///sha-256;NNBc4wuhShsuil86qunBEnWv9iLiTM11R-3QJjPF02o
 
 <<^ code="&#x0004;" -> to=?>>

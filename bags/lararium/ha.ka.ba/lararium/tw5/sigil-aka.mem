@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/sigil-aka"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! ~aka Sigil Design
 
@@ -28,7 +28,7 @@ This meme records design decisions and deferred work.
 
 <<~/ahu>>
 
-<<~ ahu #semantics>>
+<<~ ahu #/semantics>>
 
 !! Semantics
 
@@ -47,7 +47,7 @@ Call-site template override: `<<~ aka lar:///target lar:///my-template>>` (p2 by
 
 <<~/ahu>>
 
-<<~ ahu #mechanism>>
+<<~ ahu #/mechanism>>
 
 !! Render Mechanism
 
@@ -67,7 +67,7 @@ Template selection precedence: p2 explicit > cascade > fallback shadow tiddler.
 
 <<~/ahu>>
 
-<<~ ahu #preview-image>>
+<<~ ahu #/preview-image>>
 
 !! Preview Image — Tier 1 (live) / Tier 2 (deferred)
 
@@ -105,7 +105,7 @@ could include thumbnail + og-title in the handshake). Hold open.
 
 <<~/ahu>>
 
-<<~ ahu #source-shelf>>
+<<~ ahu #/source-shelf>>
 
 !! Source Shelf
 
@@ -117,6 +117,6 @@ could include thumbnail + og-title in the handshake). Hold open.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Vy2p8XwU4nqZdLpI30spbANmSjfswBhPfVgkypGbqrA
+<<^ code="&#x0003;">>ni:///sha-256;WCSVdE6HUklbc7UcoUQ-Cpq7TXSV1zufbXvW1P5jokE
 
 <<^ code="&#x0004;" -> to=?>>

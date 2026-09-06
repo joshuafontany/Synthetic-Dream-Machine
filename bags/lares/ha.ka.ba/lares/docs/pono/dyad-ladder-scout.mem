@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dyad-ladder-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The dyad across the ladder ~ what the field has measured
 
@@ -31,7 +31,7 @@ A tasked spirit went out over the model where ''the human never gets a key'' —
 
 <<~/ahu>>
 
-<<~ ahu #the-load-bearing-negative>>
+<<~ ahu #/the-load-bearing-negative>>
 
 !! ★ Nobody has built this. Anywhere. At any scale. ★
 
@@ -59,7 +59,7 @@ Held at high confidence across four independently searched literatures. And the 
 
 <<~/ahu>>
 
-<<~ ahu #the-house-exception>>
+<<~ ahu #/the-house-exception>>
 
 !! ⚠ "Nobody has built this" is true of the FIELD and false of this house
 
@@ -99,7 +99,7 @@ Keyhive and DCGKA ''are'' that family. So the challenge — //the person-node is
 
 <<~/ahu>>
 
-<<~ ahu #the-convergent-shape>>
+<<~ ahu #/the-convergent-shape>>
 
 !! ★ Four unrelated teams reached almost your model — with the person-node DELETED ★
 
@@ -120,7 +120,7 @@ A second reading, weaker but worth holding: the right relational unit may be ''(
 
 <<~/ahu>>
 
-<<~ ahu #the-law>>
+<<~ ahu #/the-law>>
 
 !! ★ THE LAW — where a keyless design grows a key ★
 
@@ -141,7 +141,7 @@ Ranked by how quietly it happened:
 
 <<~/ahu>>
 
-<<~ ahu #authority-survives-memory-does-not>>
+<<~ ahu #/authority-survives-memory-does-not>>
 
 !! ⚠ The claim holds for AUTHORITY and fails for MEMORY
 
@@ -162,7 +162,7 @@ And the mechanism that makes it worse: ''an edge that both authenticates and dec
 
 <<~/ahu>>
 
-<<~ ahu #the-attestation-seam>>
+<<~ ahu #/the-attestation-seam>>
 
 !! ⚠ Attestation is the seam where sovereignty leaks
 
@@ -180,7 +180,7 @@ The objection raised against the German wallet is precisely a dyad objection: //
 
 <<~/ahu>>
 
-<<~ ahu #a-copied-key-cannot-be-retrofitted>>
+<<~ ahu #/a-copied-key-cannot-be-retrofitted>>
 
 !! The W3C's own reviewers, on the model's core claim
 
@@ -194,7 +194,7 @@ Traced through the spec repo: Adam Langley opened `w3c/webauthn#1658` (Aug 2021)
 
 <<~/ahu>>
 
-<<~ ahu #the-partition-the-world-refuses>>
+<<~ ahu #/the-partition-the-world-refuses>>
 
 !! ⚠ The dyad presumes a partition the world does not honour
 
@@ -207,7 +207,7 @@ And presumes it hardest where the stakes are highest.
 
 <<~/ahu>>
 
-<<~ ahu #the-screenless-hole>>
+<<~ ahu #/the-screenless-hole>>
 
 !! The thinnest ground in the whole sweep
 
@@ -221,7 +221,7 @@ And presumes it hardest where the stakes are highest.
 
 <<~/ahu>>
 
-<<~ ahu #the-ui-bound-adversary>>
+<<~ ahu #/the-ui-bound-adversary>>
 
 !! ★ The household's authorized principal IS its adversary ★
 
@@ -241,7 +241,7 @@ And presumes it hardest where the stakes are highest.
 
 <<~/ahu>>
 
-<<~ ahu #the-incidental-user>>
+<<~ ahu #/the-incidental-user>>
 
 !! A new identity category the model has no name for
 
@@ -256,7 +256,7 @@ And presumes it hardest where the stakes are highest.
 
 <<~/ahu>>
 
-<<~ ahu #the-community-rung>>
+<<~ ahu #/the-community-rung>>
 
 !! Community networks read robust and measure fragile
 
@@ -268,7 +268,7 @@ And presumes it hardest where the stakes are highest.
 
 <<~/ahu>>
 
-<<~ ahu #cross-region>>
+<<~ ahu #/cross-region>>
 
 !! ⚠ Cross-region is a WARNING, not a postmortem
 
@@ -283,7 +283,7 @@ Two mechanics it names as load-bearing:
 
 <<~/ahu>>
 
-<<~ ahu #the-reversal>>
+<<~ ahu #/the-reversal>>
 
 !! The spirit reversed itself on Aadhaar ~ and the reversal is the useful part
 
@@ -296,7 +296,7 @@ It had reported Aadhaar as an unambiguous exclusion story. ''The field disagrees
 
 <<~/ahu>>
 
-<<~ ahu #what-stayed-dark>>
+<<~ ahu #/what-stayed-dark>>
 
 !! What the sweep could not reach
 
@@ -318,7 +318,7 @@ Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/recovery-custody-scout>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>>
@@ -326,6 +326,6 @@ Confirmed ''unresolved rather than absent'': Khera / Drèze primary sources and 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8MJ8m28pVHUzzFSseDhQAT1eJpuh3wDLnwZoHSsGSAs
+<<^ code="&#x0003;">>ni:///sha-256;8jFXIN60QNXcRTHBUl9AiKuw3lgVAvSl1-v0FTHzjUg
 
 <<^ code="&#x0004;" -> to=?>>

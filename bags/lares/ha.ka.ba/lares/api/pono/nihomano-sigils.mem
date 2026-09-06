@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/nihomano-sigils"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Nihomano Sigils
 
@@ -63,7 +63,7 @@ English alias: `sharktooth-sigils` — same meme, same law, different face.
 
 <<~/ahu>>
 
-<<~ ahu #wild-magic>>
+<<~ ahu #/wild-magic>>
 
 !! Wild Magic — The Web3 Discovery
 
@@ -101,7 +101,7 @@ operator-visible data layer as the content itself.
 
 <<~/ahu>>
 
-<<~ ahu #first-discovered-set>>
+<<~ ahu #/first-discovered-set>>
 
 !! The First Discovered Sigil Set
 
@@ -163,7 +163,7 @@ the operator may author in either tongue and the parse result is identical.
 
 <<~/ahu>>
 
-<<~ ahu #cultural-contract>>
+<<~ ahu #/cultural-contract>>
 
 !! Cultural Contract
 
@@ -213,7 +213,7 @@ cannot yet see.
 
 <<~/ahu>>
 
-<<~ ahu #language-families>>
+<<~ ahu #/language-families>>
 
 !! Language Families in the Grammar
 
@@ -235,7 +235,7 @@ The grammar accepts all five families equally. The parse result for a Hawaiian s
 
 <<~/ahu>>
 
-<<~ ahu #sharktooth-tag>>
+<<~ ahu #/sharktooth-tag>>
 
 !! The SharktoothSigil Tag
 
@@ -258,7 +258,7 @@ lives in a tiddler.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -275,6 +275,6 @@ lives in a tiddler.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_2koC8JftxJb7imRacLQ9PUfbK-W7TGE3d2EXQ_1jls
+<<^ code="&#x0003;">>ni:///sha-256;P5jdfloLVUehgE2qg0mG6EyJXj98EDjbANZnyWLn0fU
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/rust-toolchain"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Rust Toolchain ~ so a fix can be proven rather than awaited
 
@@ -31,7 +31,7 @@ The toolchain is therefore not a convenience. It is ''the difference between rea
 
 <<~/ahu>>
 
-<<~ ahu #what-the-forks-pin>>
+<<~ ahu #/what-the-forks-pin>>
 
 !! What each fork pins ~ measured, not assumed
 
@@ -46,7 +46,7 @@ The toolchain is therefore not a convenience. It is ''the difference between rea
 
 <<~/ahu>>
 
-<<~ ahu #the-emitter>>
+<<~ ahu #/the-emitter>>
 
 !! The emitter ~ wasm-pack, three targets, one slim step
 
@@ -67,7 +67,7 @@ node build_slim.js
 
 <<~/ahu>>
 
-<<~ ahu #two-paths>>
+<<~ ahu #/two-paths>>
 
 !! Two paths, and they are for different purposes
 
@@ -78,7 +78,7 @@ node build_slim.js
 
 <<~/ahu>>
 
-<<~ ahu #the-divergence-law>>
+<<~ ahu #/the-divergence-law>>
 
 !! The law ~ a locally-built wasm is a FLAG-DAY
 
@@ -93,7 +93,7 @@ So, MUST:
 
 <<~/ahu>>
 
-<<~ ahu #the-order>>
+<<~ ahu #/the-order>>
 
 !! The order
 
@@ -107,7 +107,7 @@ So, MUST:
 
 <<~/ahu>>
 
-<<~ ahu #open-loops>>
+<<~ ahu #/open-loops>>
 
 !! Open loops ~ deferred, not dropped
 
@@ -131,6 +131,6 @@ So, MUST:
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 
-<<^ code="&#x0003;">>ni:///sha-256;u6rBtbUdaEhXMDo2DpMDoruDticu1H3F-KTfSGukkWY
+<<^ code="&#x0003;">>ni:///sha-256;feasDXYId1ElhwhWkO5EeZxmj8YgUkuKKA4gRxFzrKk
 
 <<^ code="&#x0004;" -> to=?>>

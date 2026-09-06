@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/sdm/templates/mount-points/storage-class"
 
 ! Template — Mount-Point (Storage Class)
 
-<<~ ahu #intent>>
+<<~ ahu #/intent>>
 
 !! Intent
 
@@ -28,7 +28,7 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 
 <<~/ahu>>
 
-<<~ ahu #required-shape>>
+<<~ ahu #/required-shape>>
 
 !! Required Shape
 
@@ -44,7 +44,7 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 
 <<~/ahu>>
 
-<<~ ahu #writing-law>>
+<<~ ahu #/writing-law>>
 
 !! Writing Law
 
@@ -54,7 +54,7 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -62,6 +62,6 @@ A mount-point meme names ''where a module seats on an entity'' and the contract 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;04ZWkAW7bNYtNjYEi60aXD7Cba4WEPKaZ9uZw8bMTwo
+<<^ code="&#x0003;">>ni:///sha-256;5610o4YSNOOOHVqSntN7cjOczrM2BtcAGtWLBYr0EHQ
 
 <<^ code="&#x0004;" -> to=?>>

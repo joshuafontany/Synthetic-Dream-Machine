@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/factions/dominion-of-magic"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Rise of the Dominion of Magic
 
@@ -33,7 +33,7 @@ League's border defines them as much as their own.
 
 <<~/ahu>>
 
-<<~ ahu #the-sealed-spine>>
+<<~ ahu #/the-sealed-spine>>
 
 !! The Sealed Spine (kapu — Session 1.0 intent)
 
@@ -59,7 +59,7 @@ on an answer their founder knows was a lie.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-necrospire>>
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/league-of-free-cities>>
@@ -67,6 +67,6 @@ on an answer their founder knows was a lie.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1RssAMzj23gT5FUMJvSow0oU7JeahWxSE9JGbJ5EFI0
+<<^ code="&#x0003;">>ni:///sha-256;OVmbxdEtTXHXOy5oZSqyaz8ju9lQw3elQWugIa4fI5g
 
 <<^ code="&#x0004;" -> to=?>>

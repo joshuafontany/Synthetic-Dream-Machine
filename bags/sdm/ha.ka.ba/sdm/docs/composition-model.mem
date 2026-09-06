@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/sdm/docs/composition-model"
 
 ! Composition Model — Operator / Dev Doc
 
-<<~ ahu #thesis>>
+<<~ ahu #/thesis>>
 
 !! Thesis
 
@@ -28,7 +28,7 @@ The published SDM/VLG/UVG rules already run a composition system: every Power ca
 
 <<~/ahu>>
 
-<<~ ahu #four-nouns>>
+<<~ ahu #/four-nouns>>
 
 !! Four Nouns
 
@@ -43,7 +43,7 @@ One verb joins them: ''`#has`''. Flat. No `family`, no `role`. The target URI pa
 
 <<~/ahu>>
 
-<<~ ahu #two-layers>>
+<<~ ahu #/two-layers>>
 
 !! Two Layers — Pattern and Instance
 
@@ -71,7 +71,7 @@ sites:
 
 <<~/ahu>>
 
-<<~ ahu #mount-points>>
+<<~ ahu #/mount-points>>
 
 !! Mount-Points — Where Modules Seat
 
@@ -88,7 +88,7 @@ Four mount-points. Each changes how a seated module activates, costs, fails, and
 
 <<~/ahu>>
 
-<<~ ahu #progressive-disclosure>>
+<<~ ahu #/progressive-disclosure>>
 
 !! Progressive Disclosure — Cards as Doorways
 
@@ -96,7 +96,7 @@ Component pills on a card serve two functions at once: a ''mnemonic'' on paper (
 
 <<~/ahu>>
 
-<<~ ahu #practitioner-state>>
+<<~ ahu #/practitioner-state>>
 
 !! Practitioner State (open pressure)
 
@@ -104,7 +104,7 @@ What a pattern does depends on who holds it, how they stand, and what they maint
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Design Lineage (condensed)
 
@@ -121,7 +121,7 @@ Full lineage table lives in the epic. See edges.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -132,6 +132,6 @@ Full lineage table lives in the epic. See edges.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Enawa8oTh4UQKnVtMgnf8Njtdiipk-aBG0KRYIvQhSA
+<<^ code="&#x0003;">>ni:///sha-256;BNpFxmtC1fDs3UbpttOncWIA2NJhDmk8AFDyLt-_d2k
 
 <<^ code="&#x0004;" -> to=?>>

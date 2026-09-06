@@ -19,7 +19,7 @@ written   = "2026-06-12"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Wire — the reified edge
 
@@ -29,7 +29,7 @@ A wire that merely //points// stays a `loulou`; embedding stays `aka`/`kahea`; c
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ find the relation's real pressure before reifying — value, pulse, message, rule, or watch.
 ⏿ orient against the ladder: pointer → loulou; embed → aka/kahea; worn → tags; //doing// → wire.
@@ -39,7 +39,7 @@ A wire that merely //points// stays a `loulou`; embedding stays `aka`/`kahea`; c
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Wire Law
 
@@ -54,7 +54,7 @@ A wire that merely //points// stays a `loulou`; embedding stays `aka`/`kahea`; c
 
 <<~/ahu>>
 
-<<~ ahu #authoring>>
+<<~ ahu #/authoring>>
 
 !! Authoring — two gestures, one existence (ratified 2026-06-12)
 
@@ -75,7 +75,7 @@ Co-projection applied to wires: the operator's mind originates; the carrier body
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -87,6 +87,6 @@ Co-projection applied to wires: the operator's mind originates; the carrier body
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MiTD9-YpGaC2zXYWvBWR3Nv39-dTCtnWjPvvdCoGc3M
+<<^ code="&#x0003;">>ni:///sha-256;FlUEoBu2AVdlkMvkgb2s-fOvrhuOkB4rrAnaN7TT3ro
 
 <<^ code="&#x0004;" -> to=?>>

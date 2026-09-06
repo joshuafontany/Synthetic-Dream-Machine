@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/lib-smol-toml"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! smol-toml Library Tiddler
 
@@ -34,7 +34,7 @@ the import to this `require()` call via `rollupOptions.output.paths`.
 
 <<~/ahu>>
 
-<<~ ahu #consumers>>
+<<~ ahu #/consumers>>
 
 !! Consumers
 
@@ -44,7 +44,7 @@ the import to this `require()` call via `rollupOptions.output.paths`.
 
 <<~/ahu>>
 
-<<~ ahu #design-notes>>
+<<~ ahu #/design-notes>>
 
 !! Design Notes
 
@@ -61,7 +61,7 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ component properties, and tick-scoped state in a WYSIWYG-friendly field structur
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;lTLVNrbUzc3wZzvSC-gxDX0V2lEvUnpFTkywGsaV9bs
+<<^ code="&#x0003;">>ni:///sha-256;3IuJihXeG83eh-A989LfJROFzKl_36FtfjwvOt6fNHU
 
 <<^ code="&#x0004;" -> to=?>>

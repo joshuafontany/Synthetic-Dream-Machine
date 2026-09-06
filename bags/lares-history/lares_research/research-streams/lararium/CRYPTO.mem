@@ -17,7 +17,7 @@ uri-path   = "lares_research/research-streams/lararium/CRYPTO"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #doctrine-header>>
+<<~ ahu #/doctrine-header>>
 
 !! Web Crypto Provider Doctrine
 
@@ -30,7 +30,7 @@ No hand-rolled hash functions. No djb2. No custom PRNG. No homegrown auth.
 
 <<~/ahu>>
 
-<<~ ahu #provider-interface>>
+<<~ ahu #/provider-interface>>
 
 !! Provider Interface
 
@@ -54,7 +54,7 @@ All digest operations return `Promise<Uint8Array>`. Callers must be async.
 
 <<~/ahu>>
 
-<<~ ahu #web-crypto-implementation>>
+<<~ ahu #/web-crypto-implementation>>
 
 !! Platform Implementation
 
@@ -87,7 +87,7 @@ Browser: standard `window.crypto.subtle`.
 
 <<~/ahu>>
 
-<<~ ahu #canonical-bytes>>
+<<~ ahu #/canonical-bytes>>
 
 !! Canonical Bytes Policy
 
@@ -126,7 +126,7 @@ Rules:
 
 <<~/ahu>>
 
-<<~ ahu #digest-policy>>
+<<~ ahu #/digest-policy>>
 
 !! Digest Policy
 
@@ -146,7 +146,7 @@ SHA-256("abc") = ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015a
 
 <<~/ahu>>
 
-<<~ ahu #randomness-policy>>
+<<~ ahu #/randomness-policy>>
 
 !! Randomness Policy
 
@@ -166,7 +166,7 @@ Notes:
 
 <<~/ahu>>
 
-<<~ ahu #prohibited>>
+<<~ ahu #/prohibited>>
 
 !! Prohibited Crypto Work
 
@@ -186,7 +186,7 @@ The `packages/lararium-web/src/crypto-shim.ts` djb2 implementation is
 
 <<~/ahu>>
 
-<<~ ahu #migration-path>>
+<<~ ahu #/migration-path>>
 
 !! Migration: crypto-shim.ts → webDigest()
 
@@ -206,7 +206,7 @@ Target state (Milestone 4):
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -215,6 +215,6 @@ Target state (Milestone 4):
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yNZv2gsW0t8Jy00hBWM4FXnIJ08phOPmISmRiv7ls1Y
+<<^ code="&#x0003;">>ni:///sha-256;8T-JagpTiwQ9LTMf_EtHm_FmB3aa-7Bn0mqkDUWlhd4
 
 <<^ code="&#x0004;" -> to=?>>

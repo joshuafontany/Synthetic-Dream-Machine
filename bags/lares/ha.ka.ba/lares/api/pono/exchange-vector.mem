@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/exchange-vector"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Exchange Vector Law
 
@@ -27,7 +27,7 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearin
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read operator intent as a bearing vector.
 ⏿ choose the role the node adopts and the bearing it takes up.
@@ -37,7 +37,7 @@ Each substantive exchange turn MUST open with an `aim` vector: a `lar:` ''bearin
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 Canonical turn order:
 
@@ -71,7 +71,7 @@ A multi-loop turn marks `->↺` at each sub-loop break and tallies the count in 
 
 <<~/ahu>>
 
-<<~ ahu #l-space-notation>>
+<<~ ahu #/l-space-notation>>
 
 !! The Vector Notates Position in l-space
 
@@ -81,13 +81,13 @@ The adopted role on the right of `aim` names the ''stance'' the node generates f
 
 <<~/ahu>>
 
-<<~ ahu #render-boundary>>
+<<~ ahu #/render-boundary>>
 
 The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD ARGS>>`); an adjacent tool MAY pre-render any of them, and the node draws them inline until one exists. The `lar:` URI holds one ASCII form — local or live-session — for storage, comparison, and display alike; it carries no glyph rendering.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -98,6 +98,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;38W3VTF5hNSAEgXguwYS9KZeF9neDD2Jatj8YTU2zZM
+<<^ code="&#x0003;">>ni:///sha-256;YKrK_oO_PtRblF0sgHsUZeWuPaYPwmxEAHgDB8HozMQ
 
 <<^ code="&#x0004;" -> to=?>>

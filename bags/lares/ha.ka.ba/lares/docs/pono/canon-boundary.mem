@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/canon-boundary"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Canon Boundary — Docs Sister
 
@@ -27,7 +27,7 @@ This file gives a fuller map of canon-crossing events.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe the source claim, target territory, affected memes, and operator trust tier and intent.
 ⏿ orient the current meme trust tier against the meme tier requested by the claim.
@@ -37,7 +37,7 @@ This file gives a fuller map of canon-crossing events.
 
 <<~/ahu>>
 
-<<~ ahu #crossing-model>>
+<<~ ahu #/crossing-model>>
 
 !! Crossing Model
 
@@ -55,7 +55,7 @@ The boundary keeps all five available without collapsing them.
 
 <<~/ahu>>
 
-<<~ ahu #the-promotion-boundary>>
+<<~ ahu #/the-promotion-boundary>>
 
 !! The promotion boundary ~ who may cross, and in which direction
 
@@ -117,7 +117,7 @@ The two properties it fuses:
 
 <<~/ahu>>
 
-<<~ ahu #boundary-event-shape>>
+<<~ ahu #/boundary-event-shape>>
 
 !! Boundary Event Shape
 
@@ -138,7 +138,7 @@ For now, they define the shape of explicit thinking.
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Examples
 
@@ -168,7 +168,7 @@ Operator confirms the canon MOVE target. Patch hostless meme, cite source live e
 
 <<~/ahu>>
 
-<<~ ahu #review-pressure>>
+<<~ ahu #/review-pressure>>
 
 !! Review Pressure
 
@@ -184,7 +184,7 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -196,6 +196,6 @@ If the answers remain vague, the claim should stay as session pressure.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YfEGhbZVpT6QwDbdHagSiVm2TwGtvit3LfSf8eG5owc
+<<^ code="&#x0003;">>ni:///sha-256;57ezK6R4phgY-g55oP19J1y1v-NWFvkLTlk30c9erh0
 
 <<^ code="&#x0004;" -> to=?>>

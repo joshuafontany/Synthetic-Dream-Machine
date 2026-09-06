@@ -20,7 +20,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/persona-circle"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Persona-Circle ~ the human as a Circle of selves
 
@@ -30,7 +30,7 @@ Triple-cruci­bled (local canon · the operator's recorded design · the deep-kn
 
 <<~/ahu>>
 
-<<~ ahu #two-axes>>
+<<~ ahu #/two-axes>>
 
 !! The Two Axes ~ composition ⊥ disclosure
 
@@ -43,7 +43,7 @@ The earlier error fused them — labelling the boundaries "anon vs known" when t
 
 <<~/ahu>>
 
-<<~ ahu #the-atom>>
+<<~ ahu #/the-atom>>
 
 !! The Atom ~ a `vessel~veil` binding, two keys
 
@@ -64,7 +64,7 @@ This adds a //new// cut beside the existing per-vessel Ed25519-sign ⊥ X25519-K
 
 <<~/ahu>>
 
-<<~ ahu #composition>>
+<<~ ahu #/composition>>
 
 !! Composition ~ emergent Circles (inversion of control)
 
@@ -86,7 +86,7 @@ Pure inversion-of-control ''breaks at the multi-principal key-handover'': with e
 
 <<~/ahu>>
 
-<<~ ahu #disclosure>>
+<<~ ahu #/disclosure>>
 
 !! Disclosure ~ the per-join dial, and its gate
 
@@ -96,7 +96,7 @@ Pure inversion-of-control ''breaks at the multi-principal key-handover'': with e
 
 <<~/ahu>>
 
-<<~ ahu #the-vault>>
+<<~ ahu #/the-vault>>
 
 !! The Vault ~ the collector is a secret, never a group
 
@@ -151,7 +151,7 @@ credential-linkable — the three things bare derivation cannot assert — and '
 
 <<~/ahu>>
 
-<<~ ahu #the-plane-name>>
+<<~ ahu #/the-plane-name>>
 
 !! The Plane Name ~ how a vessel finds a compartment without a map of them
 
@@ -193,7 +193,7 @@ A vessel wants a word for ''the plane I stand in''. Every naming system surveyed
 
 <<~/ahu>>
 
-<<~ ahu #honest-scope>>
+<<~ ahu #/honest-scope>>
 
 !! Honest Scope ~ the key layer only
 
@@ -216,6 +216,6 @@ And the substrate itself, by canon, has ''no forward-secrecy and no retroactive 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/has-stack>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/mookuauhau>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8IltIGrsnL05fUc94RPXxndMCQlIuoknqtMIMTEswTQ
+<<^ code="&#x0003;">>ni:///sha-256;9zjU3pinlMlPEKT7fc17IURqqNRHLEJE8NXMWIaYIcI
 
 <<^ code="&#x0004;" -> to=?>>

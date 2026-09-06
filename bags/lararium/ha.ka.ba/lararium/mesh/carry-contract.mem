@@ -30,7 +30,7 @@ written    = "2026-07-20"
 > the BeeKEM read-floor, `kapae`/`un_kapae` primitives, `NexusRegistryDoc.blocked{}`); the
 > three-tier CONTRACT + the quorum-signed antigen ride ahead of code.
 
-<<~ ahu #the-unsolvable-as-stated>>
+<<~ ahu #/the-unsolvable-as-stated>>
 
 !! The problem dissolves, it does not solve
 
@@ -45,7 +45,7 @@ exploit the partition window.
 
 <<~/ahu>>
 
-<<~ ahu #kapae-the-antigen>>
+<<~ ahu #/kapae-the-antigen>>
 
 !! Kapae ~ the propagating antigen
 
@@ -69,7 +69,7 @@ antibody.
 
 <<~/ahu>>
 
-<<~ ahu #the-three-tiers>>
+<<~ ahu #/the-three-tiers>>
 
 !! Three tiers of carriage
 
@@ -90,7 +90,7 @@ directly between them.
 
 <<~/ahu>>
 
-<<~ ahu #carry-read-contract>>
+<<~ ahu #/carry-read-contract>>
 
 !! Carry ⊥ Read ⊥ Contract — and why carry may be generous
 
@@ -112,7 +112,7 @@ DaemonAuthGate); it enforces ''carry-per-the-contract, deny a Kapae'd presenter 
 
 <<~/ahu>>
 
-<<~ ahu #the-honest-edges>>
+<<~ ahu #/the-honest-edges>>
 
 !! The honest edges (kept lit)
 
@@ -135,7 +135,7 @@ Two walls hold this up, and both are named:
 
 <<~/ahu>>
 
-<<~ ahu #the-complement>>
+<<~ ahu #/the-complement>>
 
 !! The bilateral complement ~ presence-handshake
 
@@ -148,7 +148,7 @@ Kapae revokes mesh-wide and fast; the handshake revokes bilaterally and instantl
 
 <<~/ahu>>
 
-<<~ ahu #the-frame>>
+<<~ ahu #/the-frame>>
 
 !! The frame ~ held in talk-story
 
@@ -164,7 +164,7 @@ cannot.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -185,6 +185,6 @@ cannot.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;kpCrGwDVVaBZKoANikzB7Gcl3UyDe2_eo_nmLky7Su4
+<<^ code="&#x0003;">>ni:///sha-256;CBaPdlVuh5_7DMr-EL-cPY4MpELEr1TkPBzSVx9tPbM
 
 <<^ code="&#x0004;" -> to=?>>

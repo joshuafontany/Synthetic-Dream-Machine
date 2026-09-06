@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/sdm/templates/projections/powers/ftls-card"
 
 ! Template — FTLS Power Card Projection
 
-<<~ ahu #intent>>
+<<~ ahu #/intent>>
 
 !! Intent
 
@@ -28,7 +28,7 @@ An FTLS card projection renders a Power module as one table-facing game surface.
 
 <<~/ahu>>
 
-<<~ ahu #card-shape>>
+<<~ ahu #/card-shape>>
 
 !! Card Shape
 
@@ -49,7 +49,7 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu>>
 
-<<~ ahu #writing-law>>
+<<~ ahu #/writing-law>>
 
 !! Writing Law
 
@@ -68,7 +68,7 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -77,6 +77,6 @@ That procedure reads the current tiddler's `@`-prefixed tags and renders each as
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YeTAiXlIK2TqUfjaMIGKfp4swXFpEerZbRiTQteKgJ8
+<<^ code="&#x0003;">>ni:///sha-256;D3yrbssXBM8ZA_uz5GVgWY-fqicloPRbdjvvca6WYdw
 
 <<^ code="&#x0004;" -> to=?>>

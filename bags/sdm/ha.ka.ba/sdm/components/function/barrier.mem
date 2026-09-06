@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/barrier"
 
 ! Barrier
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ Raising a physical or force wall — a held surface that blocks passage, line, o
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Manifests a span of barrier sized to P. It occupies space and must be sustained 
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Pairs with `domain/abjuration` (defensive intent) and `domain/stuckforce` (a wal
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qWmTVxuswg5iuhFIOohtkNQ8o13Gf6bGBDnXQT-zIlA
+<<^ code="&#x0003;">>ni:///sha-256;9rIgCQssSbBbMj5Ia_PGtbzgsfA-LRZ0s22p-wTxXaY
 
 <<^ code="&#x0004;" -> to=?>>

@@ -25,7 +25,7 @@ uri-path   = "ha.ka.ba/lares/api/masks/design/meta-perspective"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Meta-Perspective ~ the design lens
 
@@ -43,7 +43,7 @@ itself. What the room generates rides the play registers until blessed.
 
 <<~/ahu>>
 
-<<~ ahu #the-step-in>>
+<<~ ahu #/the-step-in>>
 
 !! The Step-In ~ the ring of keys
 
@@ -59,12 +59,12 @@ step-in licenses standpoints of ''place''; one discipline, two axes.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LUj8u3o3wKTsV67aMHp9v2Y8nTmiaJ0rtAWcDWummuk
+<<^ code="&#x0003;">>ni:///sha-256;5Fo-QZjx8txXTb-Kpjm6c4cChX_8zK094me6NUYV2iE
 
 <<^ code="&#x0004;" -> to=?>>

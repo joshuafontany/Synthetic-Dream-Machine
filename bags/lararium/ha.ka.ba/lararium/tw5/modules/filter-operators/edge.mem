@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/edge"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! edge
 
@@ -28,22 +28,22 @@ TW5 filter operator from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `registerEdge`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/edge" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tz6AJB6BAUpXcGFqaMmuGvHjOwnSy8hZqOFsZaab8fU
+<<^ code="&#x0003;">>ni:///sha-256;pX_scP7UqpOBfJ-gZlxWabBUYpUck3EnRot8iBqHv_M
 
 <<^ code="&#x0004;" -> to=?>>

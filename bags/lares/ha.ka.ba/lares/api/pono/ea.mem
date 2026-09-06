@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/ea"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Ea — Sovereignty, Breath, Life
 
@@ -35,7 +35,7 @@ On the DreamNet, any entity that holds its own CRDT state, owns its own timing, 
 
 <<~/ahu>>
 
-<<~ ahu #doctrine>>
+<<~ ahu #/doctrine>>
 
 !! Doctrine
 
@@ -51,7 +51,7 @@ When all three hold, the island may emit `ea` — the sovereignty declaration th
 
 <<~/ahu>>
 
-<<~ ahu #protocol>>
+<<~ ahu #/protocol>>
 
 !! Protocol Pattern
 
@@ -77,7 +77,7 @@ The courier (main thread, orchestrator, or peer) acts as a delivery surface only
 
 <<~/ahu>>
 
-<<~ ahu #scope>>
+<<~ ahu #/scope>>
 
 !! Scope — What Can Declare Ea
 
@@ -94,7 +94,7 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the //liv
 
 <<~/ahu>>
 
-<<~ ahu #contrast>>
+<<~ ahu #/contrast>>
 
 !! Contrast — What Ea Does Not Mean
 
@@ -104,7 +104,7 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the //liv
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -113,6 +113,6 @@ The web2 concept of a "heartbeat" (a server-side liveness ping) shares the //liv
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;x0eV4aatIf0zK6J6jjhtncLdmyIkdmBRAgSYzXys610
+<<^ code="&#x0003;">>ni:///sha-256;z68RVAKVt0TSXMzPg27ROVxUCowdjPPkSV_HaN5yH50
 
 <<^ code="&#x0004;" -> to=?>>

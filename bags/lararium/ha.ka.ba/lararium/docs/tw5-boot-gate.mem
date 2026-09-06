@@ -15,7 +15,7 @@ uri-path      = "ha.ka.ba/lararium/docs/tw5-boot-gate"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! TW5 Boot Gate — Contract
 
@@ -50,7 +50,7 @@ _bootModules()
 
 <<~/ahu>>
 
-<<~ ahu #thresholds>>
+<<~ ahu #/thresholds>>
 
 !! Gate Thresholds
 
@@ -67,7 +67,7 @@ Additionally: `body-sha256` must verify (SHA-256 of the `text` field, hex-encode
 
 <<~/ahu>>
 
-<<~ ahu #stuck-in-ts>>
+<<~ ahu #/stuck-in-ts>>
 
 !! Why This Cannot Be a Meme
 
@@ -79,6 +79,6 @@ The distinction is the whole gate. ''Authority is what a carrier holds and who g
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NkqrMkkctbu8xHtbmEJYQrBk2eaUh68mOxganCEO-tA
+<<^ code="&#x0003;">>ni:///sha-256;20jMLsqyQ5yWByCGFGHLWVJwM8_TeDsohsoXF4y_ljY
 
 <<^ code="&#x0004;" -> to=?>>

@@ -27,7 +27,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 ''Level Note:'' Numeric readiness, trust, mana, stage, and HUD dials now use integer Levels on `0–20`, aligned with SDM+ Levels. Level `0` means void, off, or absent only when a specific instrument permits that reading. Level `20` marks a limit case; confidence-like instruments SHOULD almost never reach it. Most living system dials SHOULD live at `1–17`; reserve `18–20` for apron, kapu, direct-address, or near-certainty pressure.
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ gather the current `#meta` field surface before proposing cuts or merges
 ⏿ map each field to the work it actually performs in parse, routing, execution, or truth
@@ -37,7 +37,7 @@ This meme does not solve weak metadata by adding new buckets. It sharpens the su
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! Observe
 
@@ -57,13 +57,13 @@ Observe should keep those distinct only while the block still teaches a real dif
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! Orient
 
 Orient keeps the threefold split intact and sharp.
 
-<<~ ahu #surviving-field-set>>
+<<~ ahu #/orient/surviving-field-set>>
 
 !!! Surviving Field Set
 
@@ -79,7 +79,7 @@ These field lists govern here as law prose. Live carriers should not restate the
 
 <<~/ahu>>
 
-<<~ ahu #ha-fields>>
+<<~ ahu #/orient/ha-fields>>
 
 !!! Ha Fields
 
@@ -102,7 +102,7 @@ Optional structural qualifiers may remain when they change routing or boot truth
 
 <<~/ahu>>
 
-<<~ ahu #ka-fields>>
+<<~ ahu #/orient/ka-fields>>
 
 !!! Ka Fields
 
@@ -117,7 +117,7 @@ Boilerplate that merely restates `#meta` as the metadata locus should not surviv
 
 <<~/ahu>>
 
-<<~ ahu #ba-fields>>
+<<~ ahu #/orient/ba-fields>>
 
 !!! Ba Fields
 
@@ -135,7 +135,7 @@ The surviving flow keys:
 
 <<~/ahu>>
 
-<<~ ahu #cut-and-merge-rule>>
+<<~ ahu #/orient/cut-and-merge-rule>>
 
 !!! Cut And Merge Rule
 
@@ -156,7 +156,7 @@ Keep weakness visible while a carrier still sits short of full alignment. Do not
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! Decide
 
@@ -171,7 +171,7 @@ A field that changes no parse, routing, execution, or truth does not survive. A 
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! Act
 
@@ -189,7 +189,7 @@ The child law for `file-path` follows next because `file-path` carries the most 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -205,7 +205,7 @@ Signs of gain:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -215,6 +215,6 @@ Signs of gain:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;a0vz0_ucH2nEhdcJ9a6GatiYLvFos02BEXp_g2W57ig
+<<^ code="&#x0003;">>ni:///sha-256;Nfc0FOjx4jfgTvMbrkD230L-0Ul-8RDXbDeEtMSsb3E
 
 <<^ code="&#x0004;" -> to=?>>

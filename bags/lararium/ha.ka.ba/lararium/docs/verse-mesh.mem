@@ -247,7 +247,7 @@ tiddlers repaint. Others return from `refresh()` in O(1).
 The accumulator interface stays identical across all platforms.
 The tick source changes; the drain contract does not.
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -258,6 +258,6 @@ The tick source changes; the drain contract does not.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;avIEXh6f6XVPFr3vIK4BWKfft6XoIxo53GiMVXgVPL8
+<<^ code="&#x0003;">>ni:///sha-256;M1-wIIyZU8sWH0Qt-QxI3yXcZKYzm_49y-WerIc15R4
 
 <<^ code="&#x0004;" -> to=?>>

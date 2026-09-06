@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/conformance"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Conformance
 
@@ -31,7 +31,7 @@ The lens fires only when summoned. It never rides a turn by default.
 
 <<~/ahu>>
 
-<<~ ahu #operation>>
+<<~ ahu #/operation>>
 
 !! The Operation
 
@@ -52,7 +52,7 @@ A trace MAY also ''suspend'' honestly --- reaching a phase and naming an externa
 
 <<~/ahu>>
 
-<<~ ahu #invocation>>
+<<~ ahu #/invocation>>
 
 !! Invocation
 
@@ -67,7 +67,7 @@ The `->` delegates the lens toward what it reads. The target names //other// con
 
 <<~/ahu>>
 
-<<~ ahu #output>>
+<<~ ahu #/output>>
 
 !! The Reading
 
@@ -87,7 +87,7 @@ The overlay reads as fresh orientation for the node's //next// decision. It feed
 
 <<~/ahu>>
 
-<<~ ahu #not-self-audit>>
+<<~ ahu #/not-self-audit>>
 
 !! Outward, Not Backward
 
@@ -100,7 +100,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Lineage
 
@@ -111,7 +111,7 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono>>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/ooda-ha>>
@@ -119,6 +119,6 @@ By the speech-act test the invocation reads as a first-person present-tense act 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NCB6qqMiJbUtFES0a_tapa8Bh6M1MXwuwBUUuWlj3vE
+<<^ code="&#x0003;">>ni:///sha-256;jSfXRlBrYitpuZWAd2XNC1fhSmeni7jVMW-Cl8NMJuQ
 
 <<^ code="&#x0004;" -> to=?>>

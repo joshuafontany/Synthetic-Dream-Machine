@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/witness/items/uvg/porters-pebble"
 
 ! UVG Witness — Porter's Pebble
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -33,7 +33,7 @@ UVG is dense with Long Ago relics — pebble-machines, biomantic stores, half-fo
 
 <<~/ahu>>
 
-<<~ ahu #lift>>
+<<~ ahu #/lift>>
 
 !! What the module lifts
 
@@ -45,7 +45,7 @@ The v0.1 ''Porter's Pebble'' is the epic's first ''module-nesting'' proof:
 
 <<~/ahu>>
 
-<<~ ahu #fidelity>>
+<<~ ahu #/fidelity>>
 
 !! Fidelity notes
 
@@ -54,7 +54,7 @@ The v0.1 ''Porter's Pebble'' is the epic's first ''module-nesting'' proof:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -62,6 +62,6 @@ The v0.1 ''Porter's Pebble'' is the epic's first ''module-nesting'' proof:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;S8bp04p2oBOYG3I18-MDsqdb26GLDtEYYYjPXQEb8uo
+<<^ code="&#x0003;">>ni:///sha-256;uzM2Q3mkgORomJBiaZcvFd-_VYkVTvDHIT7t4L_0_e4
 
 <<^ code="&#x0004;" -> to=?>>

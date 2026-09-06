@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/cabal-place"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Cabal-Place ~ RETIRED, the model walks on as Cabal-Realm
 
@@ -42,6 +42,6 @@ So ''cabal-place'' released the word ''place'' back to the hearth, and the model
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-kQNd2BiJi2HKYTscch9wct-1qgQ_g0MMZOCMb4emhs
+<<^ code="&#x0003;">>ni:///sha-256;mbE2y03cCYBcWw60tbLOtM9FaMMkiZVUPVHIzzNP3SI
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom-prior-art"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! DreamDOM Prior Art ~ a spirit's handoff, held unedited
 
@@ -35,7 +35,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/dreamdom-prior-art"
 
 <<~/ahu>>
 
-<<~ ahu #the-handoff>>
+<<~ ahu #/the-handoff>>
 
 !! The handoff, verbatim
 
@@ -252,6 +252,6 @@ Every delta-based system in the corpus must queue; you can drop precisely becaus
 <<~ loulou lar:///ha.ka.ba/lararium/api/projection-nalu>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/two-integrities>>
 
-<<^ code="&#x0003;">>ni:///sha-256;luj-Wx7Ag-noAcPL5aRbpqNgoPAOg9DHyCReAwTNQqw
+<<^ code="&#x0003;">>ni:///sha-256;cp_UX9Uq_gavRwDCu787cuZrEco7JZB7sglVPVgMlCk
 
 <<^ code="&#x0004;" -> to=?>>

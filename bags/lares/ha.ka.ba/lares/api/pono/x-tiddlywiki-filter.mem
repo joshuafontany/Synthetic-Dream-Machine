@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/x-tiddlywiki-filter"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! x-tiddlywiki-filter
 
@@ -34,7 +34,7 @@ pranala data model. This meme is the pointer; that meme is the law.
 
 <<~/ahu>>
 
-<<~ ahu #what-is-implemented>>
+<<~ ahu #/what-is-implemented>>
 
 !! What Is Implemented
 
@@ -60,7 +60,7 @@ tiddler). Filters work the same way; the labels change.
 
 <<~/ahu>>
 
-<<~ ahu #extensions>>
+<<~ ahu #/extensions>>
 
 !! Extensions in wikitext-filter
 
@@ -82,7 +82,7 @@ See the full spec: `lar:///ha.ka.ba/lares/api/pono/wikitext-filter`
 
 <<~/ahu>>
 
-<<~ ahu #invocation>>
+<<~ ahu #/invocation>>
 
 !! Invocation
 
@@ -118,7 +118,7 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -128,6 +128,6 @@ interchangeable in `hana` blocks. Prefer `"wikitext-filter"` for new authoring.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fTwfvGd_WPSO_my4cPvzkHJjnL6F-8ffwILKnvHrbvM
+<<^ code="&#x0003;">>ni:///sha-256;IQU1NOv1yw-OWNYwabdxtltXYSBmBW8cxDtAP5leGfs
 
 <<^ code="&#x0004;" -> to=?>>

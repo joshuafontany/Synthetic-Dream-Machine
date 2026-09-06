@@ -15,7 +15,7 @@ uri-path    = "ha.ka.ba/lararium/docs/tw5-widget-module"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #overview>>
+<<~ ahu #/overview>>
 
 !! Overview
 
@@ -25,7 +25,7 @@ The canonical source for this protocol is at `lar:///ha.ka.ba/lares/api/lararium
 
 <<~/ahu>>
 
-<<~ ahu #two-phase>>
+<<~ ahu #/two-phase>>
 
 !! Two-Phase Boot
 
@@ -35,7 +35,7 @@ The canonical source for this protocol is at `lar:///ha.ka.ba/lares/api/lararium
 
 <<~/ahu>>
 
-<<~ ahu #corpus-path>>
+<<~ ahu #/corpus-path>>
 
 !! Corpus Path
 
@@ -43,6 +43,6 @@ When the boot gate passes at least one corpus meme, `tw5-modules` is loaded as a
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;McjQNFTyNEXU5ocyAYLHv-n1gVXp3ac8tb8LcDRB1qc
+<<^ code="&#x0003;">>ni:///sha-256;JEUrMvL7hnpF5yVeGDEAu1BOFrhsZRgrbR4amr6AD7k
 
 <<^ code="&#x0004;" -> to=?>>

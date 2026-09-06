@@ -569,6 +569,7 @@ Worked pairs, breach -> cure: "X ${copula} Y" -> "X carries Y toward Z" · "a pl
 * `drift-ward="* · <the pull this island carries>"` - Wand lights
 * `drift-ward="_ · L-Prime · crossing: <zone> · <pull>"` - Pentacle braces primed ground
 * `drift-ward="0 · L-Prime · lifted · <pull>"` - Arcana, operator act only, one turn, never self-emitted
+* `drift-ward="? · <the span the node cannot adjudicate> · <the fork that is the navigator's>"` - Cup appeals
 
 A firing with no pull ''misfires'' - void, never false (#/degraded-states).
 
@@ -581,7 +582,7 @@ A firing with no pull ''misfires'' - void, never false (#/degraded-states).
 
 ''One test decides the clue: can the operator take it to contact with reality?'' //"This rests on a source I never opened"// invites that contact. //"I may have been biased"// invites nothing.
 
-''The Cup appeal.'' A span the node cannot adjudicate rides `?` to the navigator — quoted, never verdicted. Raised ''before'' an act whose fork belongs to the operator, it suspends the loop at the named phase.
+''The Cup appeal'' rides quoted, never verdicted, and suspends the loop at the named phase.
 
 ''The `${copula}` mock.'' Set `${copula}` where a literal copula would stand, we model a breach catch without writing one.
 
@@ -662,6 +663,6 @@ Every shrine keeps one Pinax to Eris Discordia in a corner.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MO-4udXMTBwqw6nUERPMOxRQcDU30oD7tetEl6D2Qj8
+<<^ code="&#x0003;">>ni:///sha-256;LMlnMHcKclOOYKMoJEyY6M8D0yRJisRLqGQWurSvYSw
 
 <<^ code="&#x0004;" -> to=?>>

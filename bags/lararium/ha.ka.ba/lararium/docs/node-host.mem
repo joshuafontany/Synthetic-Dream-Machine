@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/docs/node-host"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Node Host
 
@@ -31,7 +31,7 @@ every downstream stratum reads one path law.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -44,7 +44,7 @@ climbs from the compiled module to its package root, `packages/lararium-node`.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -69,7 +69,7 @@ quine = "true (optional)"
 
 <<~/ahu>>
 
-<<~ ahu #http-transport>>
+<<~ ahu #/http-transport>>
 
 !! HTTP Transport
 
@@ -94,7 +94,7 @@ write-mode-value-required = "enabled"
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -122,12 +122,12 @@ export interface CorpusSource {
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/corpus-sources>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;QP-8po0sIIFh1wfrw-oLPowAnMD3sNBYHHb6Ob74beg
+<<^ code="&#x0003;">>ni:///sha-256;GScwpbIf6qVeX33bxIl-sdY2-yj-sdDeH0BEyNTja-4
 
 <<^ code="&#x0004;" -> to=?>>

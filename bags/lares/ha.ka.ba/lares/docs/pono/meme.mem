@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/meme"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Meme — Extended Docs
 
@@ -27,7 +27,7 @@ This surface carries examples, tables, and split residue.
 
 <<~/ahu>>
 
-<<~ ahu #required-shape-reference>>
+<<~ ahu #/required-shape-reference>>
 
 !! Required Shape Reference
 
@@ -47,7 +47,7 @@ It does not replace these surfaces.
 
 <<~/ahu>>
 
-<<~ ahu #lifecycle-table>>
+<<~ ahu #/lifecycle-table>>
 
 !! Lifecycle Table
 
@@ -64,7 +64,7 @@ It does not replace these surfaces.
 
 <<~/ahu>>
 
-<<~ ahu #resolution-notes>>
+<<~ ahu #/resolution-notes>>
 
 !! Resolution Notes
 
@@ -81,7 +81,7 @@ Do not treat decorative motion as structural depth.
 
 <<~/ahu>>
 
-<<~ ahu #example-skeleton>>
+<<~ ahu #/example-skeleton>>
 
 !! Example Skeleton Reading
 
@@ -91,7 +91,7 @@ Then tighten its role, edges, and phase map for the actual carrier you are draft
 
 <<~/ahu>>
 
-<<~ ahu #migration-note>>
+<<~ ahu #/migration-note>>
 
 !! Migration Note
 
@@ -107,7 +107,7 @@ Research backlog and subtype-specific detail should deepen into their own outwar
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -116,6 +116,6 @@ Research backlog and subtype-specific detail should deepen into their own outwar
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;EgvAjAT-SKSfg1hp4TH7GdXA2fs3K4BJ02mKO1Nne3M
+<<^ code="&#x0003;">>ni:///sha-256;GUM-BNIdaAPfPqDAvp3jeCSRjT1JIgXXAzpNHaST6qw
 
 <<^ code="&#x0004;" -> to=?>>

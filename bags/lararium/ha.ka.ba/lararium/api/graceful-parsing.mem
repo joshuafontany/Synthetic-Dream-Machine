@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lararium/api/graceful-parsing"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Graceful Parsing ~ all of TiddlyWiki on a gradient
 
@@ -28,7 +28,7 @@ We are not inventing — we are NAMING what we already half-do (island grammar +
 
 <<~/ahu>>
 
-<<~ ahu #the-tower>>
+<<~ ahu #/the-tower>>
 
 !! The superset tower ~ HTML ⊂ TW5 wikitext ⊂ memetic-wikitext
 
@@ -200,7 +200,7 @@ in-render, raise the alert OUT-of-render (a hook/sweep, eventual-send), per the 
 
 <<~/ahu>>
 
-<<~ ahu #the-model>>
+<<~ ahu #/the-model>>
 
 !! The model ~ the five production invariants (the keel)
 
@@ -222,7 +222,7 @@ OUT-OF-BAND, span-keyed (rust-analyzer's model) — exactly our gradient-annotat
 
 <<~/ahu>>
 
-<<~ ahu #engine-verdict>>
+<<~ ahu #/engine-verdict>>
 
 !! Engine verdict ~ steal the model, don't swap the engine
 
@@ -247,7 +247,7 @@ copy; the gold pattern is RESILIENT RECURSIVE DESCENT (Roslyn / rust-analyzer / 
 
 <<~/ahu>>
 
-<<~ ahu #architecture>>
+<<~ ahu #/architecture>>
 
 !! The lift architecture ~ AUGMENT + WRAP, reject REPLACE
 
@@ -288,7 +288,7 @@ the driver, not the grammar). Clean upstream-plugin boundary.
 
 <<~/ahu>>
 
-<<~ ahu #tw5-break-modes>>
+<<~ ahu #/tw5-break-modes>>
 
 !! TW5's actual break-badly modes (grounded, file:line)
 
@@ -312,7 +312,7 @@ by nothing. Finish it onto nodes.
 
 <<~/ahu>>
 
-<<~ ahu #recovery-policy>>
+<<~ ahu #/recovery-policy>>
 
 !! Recovery policy ~ RESOLVED: water-floor, repair-as-gated-upgrade (2026-06-27)
 
@@ -337,7 +337,7 @@ ships now, `"repaired"` lands per-construct later. The gradient stays truthful e
 
 <<~/ahu>>
 
-<<~ ahu #sigil-self-defined-gradient>>
+<<~ ahu #/sigil-self-defined-gradient>>
 
 !! Self-defining sigil failure-gradients ~ #has cap-stacks (3-spirit swarm, 2026-06-27)
 
@@ -397,7 +397,7 @@ field-set first, cap-stack second.
 
 <<~/ahu>>
 
-<<~ ahu #references>>
+<<~ ahu #/references>>
 
 !! Load-bearing references
 
@@ -413,7 +413,7 @@ field-set first, cap-stack second.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -430,6 +430,6 @@ behind that — correction by degree, never a binary gate — lives at [[living-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;GyGqETqi6B4EZapEbHjrhjwj5NoP7CW2WuQMlTZR5v0
+<<^ code="&#x0003;">>ni:///sha-256;taKnAqoUgNzUWWk6RFD7ZQq16JZ4LkLdrzdnDl6qcRs
 
 <<^ code="&#x0004;" -> to=?>>

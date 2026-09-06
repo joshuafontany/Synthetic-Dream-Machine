@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shell-ux"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Canvas Shell UX ~ the canvas is primary, the chrome wraps it
 
@@ -33,7 +33,7 @@ The reference implementation studied is ''Kinopio'' (`kinopio.club`, Vue 3, open
 
 <<~/ahu>>
 
-<<~ ahu #pointer-events>>
+<<~ ahu #/pointer-events>>
 
 !! The pointer-events discipline
 
@@ -45,7 +45,7 @@ Chrome sits at ''fixed viewport corners'' with `position: fixed; pointer-events:
 
 <<~/ahu>>
 
-<<~ ahu #the-ios-viewport>>
+<<~ ahu #/the-ios-viewport>>
 
 !! ⚠ The iOS visual viewport ~ a fixed header is not fixed
 
@@ -59,7 +59,7 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 <<~/ahu>>
 
-<<~ ahu #one-finger-pan>>
+<<~ ahu #/one-finger-pan>>
 
 !! One-finger pan ~ let the browser do it
 
@@ -71,7 +71,7 @@ The studied answer is to ''reposition the chrome against `visualViewport` on a f
 
 <<~/ahu>>
 
-<<~ ahu #the-boundary-is-visible>>
+<<~ ahu #/the-boundary-is-visible>>
 
 !! A boundary the reader cannot see gets crossed by accident
 
@@ -81,7 +81,7 @@ This decorates nothing. Capability enforces the `canon-boundary` crossing, and p
 
 <<~/ahu>>
 
-<<~ ahu #dual-load>>
+<<~ ahu #/dual-load>>
 
 !! Dual-load ~ the local replica renders first, the network merges after
 
@@ -97,7 +97,7 @@ This decorates nothing. Capability enforces the `canon-boundary` crossing, and p
 
 <<~/ahu>>
 
-<<~ ahu #layout>>
+<<~ ahu #/layout>>
 
 !! The layout, surface-invariant
 
@@ -127,6 +127,6 @@ This decorates nothing. Capability enforces the `canon-boundary` crossing, and p
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/canvas-field-scout>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TCZFsv_IRE1tO2crpczLz03wqzk3RY862fPbaN_rjrw
+<<^ code="&#x0003;">>ni:///sha-256;kkkrw1jFcuwRLKCmLGaOXaQMMYdw10HgYFJhxEmvTxg
 
 <<^ code="&#x0004;" -> to=?>>

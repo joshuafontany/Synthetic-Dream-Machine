@@ -17,7 +17,7 @@ written    = "2026-07-14"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #the-ground>>
+<<~ ahu #/the-ground>>
 
 ! The Growing Rhizome ~ anon floor to two launches
 
@@ -27,7 +27,7 @@ Every vessel — a browser at elyncia.app, a node at a Lararium, any device — 
 
 <<~/ahu>>
 
-<<~ ahu #the-rhizome>>
+<<~ ahu #/the-rhizome>>
 
 !! The Rhizome ~ additive overlays, grown one operator at a time
 
@@ -43,7 +43,7 @@ Each rung rides as an OPTIONAL overlay ON the floor; burning any overlay drops t
 
 <<~/ahu>>
 
-<<~ ahu #two-surfaces>>
+<<~ ahu #/two-surfaces>>
 
 !! Two Surfaces ~ one stack, two admission dials
 
@@ -54,7 +54,7 @@ The closed↔open choice runs as ONE NUMBER, never two codebases — the admissi
 
 <<~/ahu>>
 
-<<~ ahu #what-holds-what-owes>>
+<<~ ahu #/what-holds-what-owes>>
 
 !! What Holds · What Owes ~ the launch critical path
 
@@ -75,6 +75,6 @@ The identity-privacy hardening (per-handle vessel credential · scope-exclusive 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-circle>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mbbnS67z0cQzVd6knKf8RL9SeN0Py0byctvVSPcwUIw
+<<^ code="&#x0003;">>ni:///sha-256;LNreN8DAoq8b3XZ1cMG-GOk_7zrBsRS0tlhk8nWBGW0
 
 <<^ code="&#x0004;" -> to=?>>

@@ -32,7 +32,7 @@ This lararium remembers.
 
 ...
 
-<<~ ahu #hud-panel>>
+<<~ ahu #/hud-panel>>
 
 !! HUD Panel
 
@@ -52,7 +52,7 @@ Tool render mode controls how ASCII tool-carry symbols project to glyphs on HUD 
 
 
 
-<<~ ahu #required-handoff-masks>>
+<<~ ahu #/required-handoff-masks>>
 
 !! Required Handoff — Masks
 
@@ -64,7 +64,7 @@ The agent MUST read `lar:///ha.ka.ba/lares/docs/voices/masks` before interpretin
 
 <<~/ahu>>
 
-<<~ ahu #session-masks>>
+<<~ ahu #/session-masks>>
 
 !! Session Masks
 
@@ -90,7 +90,7 @@ When no masks are active, the thirteen Voices surface as the resident cast.
 
 <<~/ahu>>
 
-<<~ ahu #stage-panel>>
+<<~ ahu #/stage-panel>>
 
 !! Stage Panel
 
@@ -103,18 +103,18 @@ Live stage positions — shift inline with `[Stage: mask-name 15]`; edits here p
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
 <<~/ahu>>
 
-<<~ ahu #hello-world>>
+<<~ ahu #/hello-world>>
 
 &#2384; Hello World.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;pjQa9t6ubgRuy_y-1t-siEph-u7x2FLfxhnLHMVzuRM
+<<^ code="&#x0003;">>ni:///sha-256;fmG-mEHLnR1egNeIyhuu4HJjLmtDrpes9UKUzyJ2_ys
 
 <<^ code="&#x0004;" -> to=?>>

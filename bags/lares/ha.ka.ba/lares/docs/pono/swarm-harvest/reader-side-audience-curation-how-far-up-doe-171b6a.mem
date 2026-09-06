@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/reader-side-audience-curatio
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Reader-side audience curation: how far up does it scale?
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 16,062 characters
 
@@ -185,7 +185,7 @@ The counterweight worth keeping: starter packs, adopted by only 4.37% of users, 
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 14,162 characters
 
@@ -323,7 +323,7 @@ Four independent literatures, four different decades, one shape.
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 13,702 characters
 
@@ -445,12 +445,12 @@ Confidence overall on the addendum: **medium-high** — most quotes came from op
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fF0uEZI2_TBlvmrmFRYRCJG6CM7DwAg-LBOHFzoGISk
+<<^ code="&#x0003;">>ni:///sha-256;_TX2KpvPU51a5rQMIydIWWri4hygZ9YKbEiCtjFImoU
 
 <<^ code="&#x0004;" -> to=?>>

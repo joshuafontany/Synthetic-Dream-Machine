@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/headline-answer-7ce937"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! HEADLINE ANSWER
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 29,169 characters
 
@@ -205,12 +205,12 @@ Three postures, and only one of them is the one you're asking about:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;bfFpXiywGE-8jNkfXvFJvooMNAn5Dpib4AHmT3xocVY
+<<^ code="&#x0003;">>ni:///sha-256;GAsteoiUrbJ3sqEj41aKNNYrNk8yrDvJwAX9Md2eutg
 
 <<^ code="&#x0004;" -> to=?>>

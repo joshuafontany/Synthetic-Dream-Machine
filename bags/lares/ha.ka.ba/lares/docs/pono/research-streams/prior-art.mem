@@ -17,7 +17,7 @@ uri-path    = "ha.ka.ba/lares/docs/pono/research-streams/prior-art"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Research Stream - Prior-Art and Best Practices
 
@@ -25,7 +25,7 @@ Literal quote witnesses for architectural grounding.
 
 <<~/ahu>>
 
-<<~ ahu #local-first-crdt>>
+<<~ ahu #/local-first-crdt>>
 
 !! Local-first CRDT Doctrine
 
@@ -39,7 +39,7 @@ Source: https://docs.yjs.dev/
 
 <<~/ahu>>
 
-<<~ ahu #worker-and-channel>>
+<<~ ahu #/worker-and-channel>>
 
 !! Island Sovereignty and Channel Law
 
@@ -53,7 +53,7 @@ Source: https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel
 
 <<~/ahu>>
 
-<<~ ahu #security-baseline>>
+<<~ ahu #/security-baseline>>
 
 !! Security Baseline
 
@@ -63,13 +63,13 @@ Source: https://owasp.org/www-project-application-security-verification-standard
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/local-first>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZJBKf7NxKZAC0r5PCupfGuMogKiboATLyzXYVXNo1hQ
+<<^ code="&#x0003;">>ni:///sha-256;HA3cLNKrN-i_ubkKzKa2c9FNytvXn-4R-UxMy_GA7uI
 
 <<^ code="&#x0004;" -> to=?>>

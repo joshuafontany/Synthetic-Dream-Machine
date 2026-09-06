@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/who-paid-for-volunteer-run-r
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! WHO PAID FOR VOLUNTEER-RUN RELAY INFRASTRUCTURE — MEASURED
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 27,877 characters
 
@@ -329,12 +329,12 @@ The server count is *shrinking* while account count grows — i.e. consolidation
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Y5HBQ_5i_jzIF9xS2ElNfGx2sZuJZvvhKiE4KP9x9jM
+<<^ code="&#x0003;">>ni:///sha-256;k7pXdDx9YLOTVlDW_8ZriI0eGYeKRtAGH0te2NIFBZQ
 
 <<^ code="&#x0004;" -> to=?>>

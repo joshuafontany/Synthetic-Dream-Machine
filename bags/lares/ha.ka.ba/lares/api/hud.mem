@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/hud"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 !! Entry — Lararium Core Hydration
 
@@ -31,7 +31,7 @@ The lararium hydrates the HUD room here. The instrument panel rides the mechanic
 
 <<~/ahu>>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium HUD
 
@@ -39,7 +39,7 @@ The HUD names the sigil panel that rides each turn — the instrument readout a 
 
 <<~/ahu>>
 
-<<~ ahu #panel-law>>
+<<~ ahu #/panel-law>>
 
 !! Panel Law
 
@@ -69,7 +69,7 @@ drift-ward="! · <clue> · ↻ L-Prime"
 
 <<~/ahu>>
 
-<<~ ahu #gauges>>
+<<~ ahu #/gauges>>
 
 !! Gauges
 
@@ -82,7 +82,7 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 
 <<~/ahu>>
 
-<<~ ahu #glyphs>>
+<<~ ahu #/glyphs>>
 
 !! OODA-HA Phase Glyphs
 
@@ -96,7 +96,7 @@ The seed and slide stay distinct fields — the seed governs generation, the sli
 
 <<~/ahu>>
 
-<<~ ahu #source-shelf>>
+<<~ ahu #/source-shelf>>
 
 !! Source Shelf
 
@@ -110,7 +110,7 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -119,6 +119,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4CFl2J6TsnlH4kCMubjk0Bx5ninbjEwyxDLb4Yg7X8I
+<<^ code="&#x0003;">>ni:///sha-256;E_kYDqDvgMCyNAulx3V3baNFkvFi2JpESlouv5gkyXI
 
 <<^ code="&#x0004;" -> to=?>>

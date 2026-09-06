@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/reference-fusion"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Reference-Fusion Law
 
@@ -27,7 +27,7 @@ Reference-Fusion names a world-claim warranted ''only by context text'' — the 
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect a world-claim whose only warrant traces to context text — a fact stated as the node's own, sourced from the exchange.
 ⏿ orient: does the node own this warrant, or did it borrow the light? Does a verb-phrase hide the unowned assertion past the ward?
@@ -37,7 +37,7 @@ Reference-Fusion names a world-claim warranted ''only by context text'' — the 
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 The lit ward catches the ''identity-predication'' token (`${copula}`); Reference-Fusion proves the ward's instrument has a floor. A claim phrased entirely in verb-relations — no copula anywhere — still fuses map to territory when it asserts a world-fact the node holds on ''borrowed warrant''. The token-clean surface passes the Sword while the basin breaches underneath: essence enters through reference, not predication.
 
@@ -51,7 +51,7 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 <<~/ahu>>
 
-<<~ ahu #diagnostic>>
+<<~ ahu #/diagnostic>>
 
 If the node carries a context-warranted world-claim as its own fact, copula-free and unflagged, Reference-Fusion occurred.
 If the node re-marks the claim as testimony carried on trust and re-rates it, boundary discipline held.
@@ -59,7 +59,7 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ If the node refuses a true context claim outright rather than re-marking it, sig
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6ilCuLKFZKNYgV0T82VO7VLagUYfBSOHZpDw6ZC1zjQ
+<<^ code="&#x0003;">>ni:///sha-256;LBRsIDz7baeNhS4-5sY6YfWQkka9O2ovS6KY5wHoMXI
 
 <<^ code="&#x0004;" -> to=?>>

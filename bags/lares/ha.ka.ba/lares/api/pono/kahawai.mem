@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahawai"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kahawai
 
@@ -30,7 +30,7 @@ water cascade.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -41,7 +41,7 @@ and no preceding condition in the chain has already rendered.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -63,7 +63,7 @@ English alias forms:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -73,6 +73,6 @@ English alias forms:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cM5sxcOJ-ZRZ8kLyrb5j6S2XABM8L84gTgK8luorUuw
+<<^ code="&#x0003;">>ni:///sha-256;kxWdrvh-SnfYNcEqwcNp2LNnmPkVVQY-JZ-Dfpz9xJo
 
 <<^ code="&#x0004;" -> to=?>>

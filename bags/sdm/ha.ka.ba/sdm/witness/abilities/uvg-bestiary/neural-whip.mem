@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/witness/abilities/uvg-bestiary/neural-whip"
 
 ! UVG Witness — Neural Whip
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -37,7 +37,7 @@ The Cave Octopus is a ''Biomancer Extraordinaire'' — it replaced its human bod
 
 <<~/ahu>>
 
-<<~ ahu #lift>>
+<<~ ahu #/lift>>
 
 !! What the module lifts
 
@@ -49,7 +49,7 @@ The v0.1 ''Neural Whip'' module abstracts the creature's signature tentacle into
 
 <<~/ahu>>
 
-<<~ ahu #fidelity>>
+<<~ ahu #/fidelity>>
 
 !! Fidelity notes
 
@@ -58,7 +58,7 @@ The v0.1 ''Neural Whip'' module abstracts the creature's signature tentacle into
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -66,6 +66,6 @@ The v0.1 ''Neural Whip'' module abstracts the creature's signature tentacle into
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;p-uBUqAVTt2ENag3lbueYqtopCjwrjVDyj89-_7j7YA
+<<^ code="&#x0003;">>ni:///sha-256;a04SbVbc6RGjDifTLa5Rbsm0OWLrCvFZyGmKZTfOT0Y
 
 <<^ code="&#x0004;" -> to=?>>

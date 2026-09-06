@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/concepts/the-fae-clans"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Fae Clans
 
@@ -28,7 +28,7 @@ taxonomy, never across its border, because no such border was ever drawn.
 
 <<~/ahu>>
 
-<<~ ahu #the-elder-residents>>
+<<~ ahu #/the-elder-residents>>
 
 !! The Elder Residents ~ whose world this is
 
@@ -52,7 +52,7 @@ left the same handprints on both — and then one of the two lost the company.
 
 <<~/ahu>>
 
-<<~ ahu #the-arrivals>>
+<<~ ahu #/the-arrivals>>
 
 !! The Arrivals ~ how the human clan reached Elyncia
 
@@ -79,7 +79,7 @@ thresholds took the threshold as its birthright, and its sub-lineages carry the 
 
 <<~/ahu>>
 
-<<~ ahu #the-conceit>>
+<<~ ahu #/the-conceit>>
 
 !! The Neo-Thracian Conceit
 
@@ -101,7 +101,7 @@ remember why. A conceit outlives the thing it justified. That is generally what 
 
 <<~/ahu>>
 
-<<~ ahu #the-courts>>
+<<~ ahu #/the-courts>>
 
 !! Clans and Courts ~ not the same axis
 
@@ -116,7 +116,7 @@ and reads as an outrage to anyone who does not.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars>>
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
@@ -124,6 +124,6 @@ and reads as an outrage to anyone who does not.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;rQfqLyW7CD2FvxTSAqgLjz32FkjBpiSMvwzS-ICYF7s
+<<^ code="&#x0003;">>ni:///sha-256;gnCnYy76aBlfYa0THxno3hRX79HXUk0RCHiQsdr5wyU
 
 <<^ code="&#x0004;" -> to=?>>

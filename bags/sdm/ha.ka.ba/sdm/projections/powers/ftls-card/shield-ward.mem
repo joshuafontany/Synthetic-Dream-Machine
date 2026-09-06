@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/shield-ward"
 
 ! Shield Ward — FTLS Card
 
-<<~ ahu #card>>
+<<~ ahu #/card>>
 
 !! Shield Ward
 //Skin-Close Barrier, Missile Filter//
@@ -30,7 +30,7 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu>>
 
-<<~ ahu #overcharge>>
+<<~ ahu #/overcharge>>
 
 !! Overcharge
 
@@ -39,7 +39,7 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu>>
 
-<<~ ahu #components>>
+<<~ ahu #/components>>
 
 !! Components
 
@@ -47,7 +47,7 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -57,6 +57,6 @@ A barrier less than an inch from your skin, moving with you. Strong cover agains
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;sD3PnAPdYlKkWvc1upJeqqJ2XlEm7mlT23L1PTKJzYw
+<<^ code="&#x0003;">>ni:///sha-256;SR2JCI1bGAu1b74hkTQsdClIbwJjxl1Z4fNkKeFCFQ8
 
 <<^ code="&#x0004;" -> to=?>>

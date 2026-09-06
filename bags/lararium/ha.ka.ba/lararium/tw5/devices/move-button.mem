@@ -16,7 +16,7 @@ verb       = "MOVE"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! move-button Device
 
@@ -31,7 +31,7 @@ dispatches, across any instance of this type.
 
 <<~/ahu>>
 
-<<~ ahu #kumu>>
+<<~ ahu #/kumu>>
 
 !! Kumu Declaration
 
@@ -45,7 +45,7 @@ This device type extends `button_device`. It inherits `InteractedWithEvent` (lis
 
 <<~/ahu>>
 
-<<~ ahu #reaction-pins>>
+<<~ ahu #/reaction-pins>>
 
 !! Reaction Pins
 
@@ -65,7 +65,7 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -81,6 +81,6 @@ the vessel. The vessel's M.1 subscriber calls `adminVm.placeVerb({ verb: "MOVE",
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MZaWRsaBocr1HAN1Jy7DSZR7pCHHkjJWxAUj-WQs_VE
+<<^ code="&#x0003;">>ni:///sha-256;Oh_nyQAE2Ns_ZndqsT2a5tkleMPFwYWW8-3fTC7CWRc
 
 <<^ code="&#x0004;" -> to=?>>

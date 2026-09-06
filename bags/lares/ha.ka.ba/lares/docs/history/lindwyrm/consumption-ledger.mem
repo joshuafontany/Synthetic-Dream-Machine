@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lindwyrm Narrative Consumption Ledger
 
@@ -27,7 +27,7 @@ This ledger tracks source-talk-story material as it moves into coherent narrativ
 
 <<~/ahu>>
 
-<<~ ahu #intent-vector>>
+<<~ ahu #/intent-vector>>
 
 !! Intent Vector
 
@@ -43,7 +43,7 @@ Narrate to self while consuming:
 
 <<~/ahu>>
 
-<<~ ahu #rules>>
+<<~ ahu #/rules>>
 
 !! Consumption Rules
 
@@ -57,7 +57,7 @@ Narrate to self while consuming:
 
 <<~/ahu>>
 
-<<~ ahu #ledger>>
+<<~ ahu #/ledger>>
 
 !! Ledger
 
@@ -74,7 +74,7 @@ Narrate to self while consuming:
 
 <<~/ahu>>
 
-<<~ ahu #next-targets>>
+<<~ ahu #/next-targets>>
 
 !! Next Targets
 
@@ -85,7 +85,7 @@ Likely next slices:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -110,6 +110,6 @@ Likely next slices:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;RqRY3cjdJ194FY66uq9Pn_FdgwfFQwjFVSfDT1nNtwE
+<<^ code="&#x0003;">>ni:///sha-256;8h85BZc2SFrh6WT6iA9nPt4PA7q-xQkHON8mcc3gph4
 
 <<^ code="&#x0004;" -> to=?>>

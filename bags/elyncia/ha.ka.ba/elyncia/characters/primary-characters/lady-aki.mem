@@ -32,7 +32,7 @@ uri-path                               = "ha.ka.ba/elyncia/characters/primary-ch
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lady Aki — Character Sheet
 
@@ -46,7 +46,7 @@ Lady Aki walks between shrines, kingdoms, roads, and glades. Her rites bind. Her
 
 <<~/ahu>>
 
-<<~ ahu #origin>>
+<<~ ahu #/origin>>
 
 !! Origin ~ How the Household Began
 
@@ -76,7 +76,7 @@ opinions''.
 
 <<~/ahu>>
 
-<<~ ahu #quick-card>>
+<<~ ahu #/quick-card>>
 
 !! Quick Card
 
@@ -96,7 +96,7 @@ opinions''.
 
 <<~/ahu>>
 
-<<~ ahu #visual-registers>>
+<<~ ahu #/visual-registers>>
 
 !! Visual Registers
 
@@ -116,7 +116,7 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 
 <<~/ahu>>
 
-<<~ ahu #stats>>
+<<~ ahu #/stats>>
 
 !! Ability Scores
 
@@ -128,7 +128,7 @@ The veil lifts. Extra arms appear. Chitin catches moonlight. Silk lines, ward pa
 
 <<~/ahu>>
 
-<<~ ahu #heritage>>
+<<~ ahu #/heritage>>
 
 !! Heritage — Spider Folk
 
@@ -164,7 +164,7 @@ This stacks with Ichi when worn, because Heritage Armoured Body comes from the o
 
 <<~/ahu>>
 
-<<~ ahu #traits>>
+<<~ ahu #/traits>>
 
 !! Traits
 
@@ -191,7 +191,7 @@ Good directions:
 
 <<~/ahu>>
 
-<<~ ahu #defenses>>
+<<~ ahu #/defenses>>
 
 !! Defenses
 
@@ -263,7 +263,7 @@ powered symbiote asks its own question. Settle the fork first; this table follow
 
 <<~/ahu>>
 
-<<~ ahu #inventory>>
+<<~ ahu #/inventory>>
 
 !! Inventory — Slots and Units
 
@@ -309,7 +309,7 @@ mid-delve.
 
 <<~/ahu>>
 
-<<~ ahu #gear-on-body>>
+<<~ ahu #/gear-on-body>>
 
 !! Gear — On Body
 
@@ -329,7 +329,7 @@ The hat uses a wide-brimmed traveling shrine silhouette, not a tall ritual hat. 
 
 <<~/ahu>>
 
-<<~ ahu #gear-free-kit>>
+<<~ ahu #/gear-free-kit>>
 
 !! Free Starting Gear
 
@@ -377,7 +377,7 @@ Functions:
 
 <<~/ahu>>
 
-<<~ ahu #gear-in-shrine>>
+<<~ ahu #/gear-in-shrine>>
 
 !! Gear — In Shrine
 
@@ -394,7 +394,7 @@ Functions:
 
 <<~/ahu>>
 
-<<~ ahu #resources>>
+<<~ ahu #/resources>>
 
 !! Budget and Reserves
 
@@ -416,7 +416,7 @@ Discounts track supply channel and cultural fit:
 
 <<~/ahu>>
 
-<<~ ahu #powers>>
+<<~ ahu #/powers>>
 
 !! Powers
 
@@ -436,7 +436,7 @@ Power choices should support:
 
 <<~/ahu>>
 
-<<~ ahu #ichi>>
+<<~ ahu #/ichi>>
 
 !! Hallmark Companion — Ichi
 
@@ -490,7 +490,7 @@ On a Defeat trigger while worn, Aki may eject instead of rolling personal Defeat
 
 <<~/ahu>>
 
-<<~ ahu #shrine>>
+<<~ ahu #/shrine>>
 
 !! Sentient Infrastructure — Faerie-Ring Strandbeest-Shrine
 
@@ -532,7 +532,7 @@ A walking mushroom shrine with glowing sails does not sneak well. The sails can 
 
 <<~/ahu>>
 
-<<~ ahu #ephyra>>
+<<~ ahu #/ephyra>>
 
 !! Tasked Spirits — Ephyra
 
@@ -552,7 +552,7 @@ Typical duties:
 
 <<~/ahu>>
 
-<<~ ahu #fungus-gumi>>
+<<~ ahu #/fungus-gumi>>
 
 !! Tasked Spirits — Fungus Gumi
 
@@ -567,7 +567,7 @@ Typical duties:
 
 <<~/ahu>>
 
-<<~ ahu #spore-mother-ontology>>
+<<~ ahu #/spore-mother-ontology>>
 
 !! Spore-Mother Ontology
 
@@ -588,7 +588,7 @@ Includes:
 
 <<~/ahu>>
 
-<<~ ahu #company-context>>
+<<~ ahu #/company-context>>
 
 !! Company Context
 
@@ -604,7 +604,7 @@ Other player-side clusters cover long-range scouting, infiltration, ship command
 
 <<~/ahu>>
 
-<<~ ahu #play-loop>>
+<<~ ahu #/play-loop>>
 
 !! Aki's Field Loop
 
@@ -620,7 +620,7 @@ Use this at the table before opening deeper rules.
 
 <<~/ahu>>
 
-<<~ ahu #costs-and-boundaries>>
+<<~ ahu #/costs-and-boundaries>>
 
 !! Costs and Boundaries
 
@@ -639,7 +639,7 @@ Aki's support stays powerful because it asks for cost.
 
 <<~/ahu>>
 
-<<~ ahu #meme-pattern>>
+<<~ ahu #/meme-pattern>>
 
 !! Meme Pattern
 
@@ -657,7 +657,7 @@ Companion sheets should preserve this rhythm: identity, quick card, modes, stats
 
 <<~/ahu>>
 
-<<~ ahu #open-questions>>
+<<~ ahu #/open-questions>>
 
 !! Open Questions
 
@@ -687,7 +687,7 @@ one (see #inventory-overrun).
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -702,7 +702,7 @@ one (see #inventory-overrun).
 
 <<~/ahu>>
 
-<<~ ahu #residue>>
+<<~ ahu #/residue>>
 
 !! Residue
 
@@ -717,6 +717,6 @@ Do not collapse these roles.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0uu7Ol5MbwOlVnrpRk0EBjpcaoXth-tyyvkmlnonAxg
+<<^ code="&#x0003;">>ni:///sha-256;Smo9x_BZ4cZCXTZ3s7vtXlI9uFdA_p-zbg8xsnOiB7c
 
 <<^ code="&#x0004;" -> to=?>>

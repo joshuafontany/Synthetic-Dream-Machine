@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kapae"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kāpae
 
@@ -27,7 +27,7 @@ A first-class ''tombstone that shadows the layers beneath it'' — a raised mark
 
 <<~/ahu>>
 
-<<~ ahu #etymology>>
+<<~ ahu #/etymology>>
 
 !! Etymology
 
@@ -37,7 +37,7 @@ This carries the pattern exactly. A kāpae marker sits ''above'' the record it e
 
 <<~/ahu>>
 
-<<~ ahu #core-cut>>
+<<~ ahu #/core-cut>>
 
 !! The core cut — kāpae shadows, absent falls through
 
@@ -55,7 +55,7 @@ The cut MUST stay sharp. A gesture that ''relocates'' a record (MOVE, promotion 
 
 <<~/ahu>>
 
-<<~ ahu #toggle>>
+<<~ ahu #/toggle>>
 
 !! The refinement — kāpae raises and lowers
 
@@ -68,7 +68,7 @@ The asymmetry carries the load. Raising defeats a re-add (remove-wins); lowering
 
 <<~/ahu>>
 
-<<~ ahu #bag-cascade-sense>>
+<<~ ahu #/bag-cascade-sense>>
 
 !! Sense (a) — the bag-cascade / residency tombstone (WITNESSED)
 
@@ -85,7 +85,7 @@ the bag-cascade sense stands witnessed in shipped code and named in residency-mo
 
 <<~/ahu>>
 
-<<~ ahu #membership-sense>>
+<<~ ahu #/membership-sense>>
 
 !! Sense (b) — the membership / governance stack (PROPOSED)
 
@@ -109,7 +109,7 @@ the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -122,7 +122,7 @@ the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/anti-patterns>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/waiho>>
@@ -132,6 +132,6 @@ the membership sense now stands ''built at the edge grain'' (`edge-kapae`): acts
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;vDA0KPXhiqaH-3fxGxwc0JRsiBiq4sCi3QWCR1_f-lM
+<<^ code="&#x0003;">>ni:///sha-256;40VV-exCfHSBowtcCe7zPOuYrDHDh8zjcls4CPd03mw
 
 <<^ code="&#x0004;" -> to=?>>

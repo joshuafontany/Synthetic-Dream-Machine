@@ -22,9 +22,15 @@ import { fencedSpans, maskedExecAll } from "./fence-mask.js";
  * `<<~ ahu #parent/child/grandchild>>` opens a slot whose URI reads
  * `parentURI#/parent/child/grandchild` — single-hash invariant; the
  * fragment-path is the addressable hierarchy.
+ *
+ * TWO SPELLINGS, ONE STRUCTURE. The sharktooth house opens `<<~ ahu #slot>>`; a carrier written in the
+ * plain dialect, for a reader who steps into no sharktooth namespace, opens `<<fragment #slot>>`. Both
+ * name the same thing — a meme holding tiddlers — so both scan here rather than in two readers that
+ * would drift apart. The leading `#/` and a bare `#` both read; the address minted from either carries
+ * the slash.
  */
-export const AHU_OPEN_RE  = /<<~[^>]*\bahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+\S+)?\s*>>/g;
-export const AHU_CLOSE_RE = /<<~\/ahu\s*>>/g;
+export const AHU_OPEN_RE  = /<<(?:~[^>]*\bahu|fragment)\s+(#\/?[\w-]+(?:\/[\w-]+)*)(?:\s+->\s+\S+)?\s*>>/g;
+export const AHU_CLOSE_RE = /<<(?:~\/ahu|\/fragment)\s*>>/g;
 
 /**
  * Ahu slot names that carry structural metadata, not addressable content.

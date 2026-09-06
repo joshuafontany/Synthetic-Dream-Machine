@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/domain/divination"
 
 ! Divination
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ The domain of perceiving the hidden — reading inscriptions, scrying distance, 
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Orients a module toward ''knowing rather than changing''. It targets information
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -55,7 +55,7 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -63,7 +63,7 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ Pairs with `function/ecm-scan`, `function/magic-decode`, and `function/archive`.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;2yO4nxzS5WjmDiOsahhAd6l0W-OIcFmsAlnQbh1YK68
+<<^ code="&#x0003;">>ni:///sha-256;0NUCI-S9bFkmBZj1hZXFdaqMM7fl_qXn5mpVpLL9HOs
 
 <<^ code="&#x0004;" -> to=?>>

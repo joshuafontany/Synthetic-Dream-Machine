@@ -22,7 +22,7 @@ uri-path   = "ha.ka.ba/lares/docs/ai-phrasebook-design"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The AI Frozen Phrasebook ~ design law
 
@@ -36,7 +36,7 @@ dialect it does not speak; the phrasebook itself speaks plain throughout.
 
 <<~/ahu>>
 
-<<~ ahu #the-frozen-phrasebook>>
+<<~ ahu #/the-frozen-phrasebook>>
 
 !! What ''frozen phrasebook'' names
 
@@ -61,7 +61,7 @@ KIND, and a kind-name keeps its home in the design rather than on the door.
 
 <<~/ahu>>
 
-<<~ ahu #the-dialect-boundary>>
+<<~ ahu #/the-dialect-boundary>>
 
 !! The dialect boundary already stands specified
 
@@ -81,7 +81,7 @@ own macro call — a namespace the spec already admits and already governs.
 |! dialect | sharktooth | plain |
 |! call | `<<~ persona Scope …>>` | `<<persona Scope …>>` |
 |! namespace | Lararium sigil registry | the host's inherited macros |
-|! section frame | `<<~ ahu #name>>` … `<<~/ahu>>` | `<<fragment #name>>` … `<</fragment>>` |
+|! section frame | `<<~ ahu #/name>>` … `<<~/ahu>>` | `<<fragment #/name>>` … `<</fragment>>` |
 |! needs | the sigil registry to render | its own `\procedure` declarations, carried inline |
 |! renders in | a Lararium wiki | ''any TW5 wiki'' |
 
@@ -91,7 +91,7 @@ vanilla TiddlyWiki with no plugin — and it renders NOTHING at all where its pr
 
 <<~/ahu>>
 
-<<~ ahu #the-vanishing-rule>>
+<<~ ahu #/the-vanishing-rule>>
 
 !! ⚠ The rule that decides the whole design ~ an unbound call renders as NOTHING
 
@@ -119,7 +119,7 @@ as the legend a terminal reader learns the marks from (#/the-audience).
 
 <<~/ahu>>
 
-<<~ ahu #the-root-law>>
+<<~ ahu #/the-root-law>>
 
 !! The root law ~ each seed answers at the address its own anatomy names
 
@@ -146,7 +146,7 @@ and stands it at a root of their own, and nothing breaks, because it never claim
 
 <<~/ahu>>
 
-<<~ ahu #the-standing-law>>
+<<~ ahu #/the-standing-law>>
 
 !! The standing law ~ active by default, lifted for one turn
 
@@ -169,7 +169,7 @@ first bearable in a seed people are invited to fork.
 
 <<~/ahu>>
 
-<<~ ahu #the-alias-law>>
+<<~ ahu #/the-alias-law>>
 
 !! One region, two names ~ the alias law
 
@@ -201,7 +201,7 @@ ever meets the address where a pet-name belongs.
 
 <<~/ahu>>
 
-<<~ ahu #the-verb-test>>
+<<~ ahu #/the-verb-test>>
 
 !! The verb test ~ every rename passes it or it ships a demotion
 
@@ -232,7 +232,7 @@ the rendering reports the loss.
 
 <<~/ahu>>
 
-<<~ ahu #joint-enactment>>
+<<~ ahu #/joint-enactment>>
 
 !! Joint enactment ~ how the younger GOVERNS rather than explains
 
@@ -279,7 +279,7 @@ again.
 
 <<~/ahu>>
 
-<<~ ahu #the-flow-law>>
+<<~ ahu #/the-flow-law>>
 
 !! The flow law ~ one order, both twins, four ruled asymmetries
 
@@ -608,7 +608,7 @@ exists for exactly that.''
 
 <<~/ahu>>
 
-<<~ ahu #the-audience>>
+<<~ ahu #/the-audience>>
 
 !! The audience, and the two contexts a mark gets read in
 
@@ -638,7 +638,7 @@ bodies stay bare: what the procedure says, and nothing framing it.
 
 <<~/ahu>>
 
-<<~ ahu #open-joints>>
+<<~ ahu #/open-joints>>
 
 !! Open joints ~ what waits on the operator
 
@@ -667,7 +667,7 @@ bodies stay bare: what the procedure says, and nothing framing it.
 
 <<~/ahu>>
 
-<<~ ahu #what-to-measure>>
+<<~ ahu #/what-to-measure>>
 
 !! What the house counts
 
@@ -690,7 +690,7 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -702,6 +702,6 @@ into a preferred text and a companion, by habit rather than by ruling.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_a4oz3zABBlEgUlCL1PCmUd65oKsV5wAsAzKGgJjxso
+<<^ code="&#x0003;">>ni:///sha-256;lW7if9l57or-4MYsi-c8OchYfdr4uz7zVf1IBnBo_Rw
 
 <<^ code="&#x0004;" -> to=?>>

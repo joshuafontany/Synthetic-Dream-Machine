@@ -21,7 +21,7 @@ written   = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The FFZ Mesh-Timing Law ~ how a no-global-now mesh keeps time
 
@@ -33,7 +33,7 @@ The dissolution maps to the myth (#/siege): the Necrospire besieged a Nexus five
 
 <<~/ahu>>
 
-<<~ ahu #axis-rate>>
+<<~ ahu #/axis-rate>>
 
 !! Axis 1 ~ `e` breathes the RATE (decay · mixing · structure)
 
@@ -45,7 +45,7 @@ The dissolution maps to the myth (#/siege): the Necrospire besieged a Nexus five
 
 <<~/ahu>>
 
-<<~ ahu #axis-desync>>
+<<~ ahu #/axis-desync>>
 
 !! Axis 2 ~ incommensurability ARMS the islands (NO global constant)
 
@@ -61,7 +61,7 @@ Multi-node FlipIt (#/hardening) ''graduates this axis from aesthetic to theorem'
 
 <<~/ahu>>
 
-<<~ ahu #axis-couple>>
+<<~ ahu #/axis-couple>>
 
 !! Axis 3 ~ integer-harmony CLASPS them (opt-in coupling)
 
@@ -71,7 +71,7 @@ The Council's flag (#/hardening): every clasp ''is'' a synchronization, and a sy
 
 <<~/ahu>>
 
-<<~ ahu #primary-clock>>
+<<~ ahu #/primary-clock>>
 
 !! The Primary Clock ~ the proactive epoch outruns the creep
 
@@ -83,7 +83,7 @@ This is the siege-resilience ''two clocks'' made concrete ([[siege-resilience|la
 
 <<~/ahu>>
 
-<<~ ahu #precondition>>
+<<~ ahu #/precondition>>
 
 !! The Precondition ~ keep your move cheaper than theirs
 
@@ -93,7 +93,7 @@ So the ''siege-cost / voucher dial'' (the membership cost-gate, [[veil-cost-dial
 
 <<~/ahu>>
 
-<<~ ahu #phi-scope>>
+<<~ ahu #/phi-scope>>
 
 !! φ stays INTRA-clock ~ the scope that vindicates it
 
@@ -101,7 +101,7 @@ The grammar's golden `φ≈1.618` ([[living-grammar-palace|lar:///ha.ka.ba/larar
 
 <<~/ahu>>
 
-<<~ ahu #siege>>
+<<~ ahu #/siege>>
 
 !! The Siege ~ the law as Elyncian leyline-physics
 
@@ -109,7 +109,7 @@ In the Myth the law reads as the world's magic-physics. The Necrospire's Second-
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ the eight libations
 
@@ -119,7 +119,7 @@ Eight independent domains converge on a single shape — ''three axes, no global
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -132,6 +132,6 @@ Eight independent domains converge on a single shape — ''three axes, no global
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4cBpHQnEAwdN1G_CtBsVv7IFZunGl0ZL_xzL1bQrDW8
+<<^ code="&#x0003;">>ni:///sha-256;RZDMBWaDnHkoqFLDStZn_UtROlI2TfEbpHIoV1WI72o
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/identity-permissions"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Identity & Permissions
 
@@ -26,7 +26,7 @@ This room holds the recovered authority grammar behind the old prompt stack.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -39,7 +39,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -59,7 +59,7 @@ The old stack wanted the house to know who may ask for what, and under what proo
 
 <<~/ahu>>
 
-<<~ ahu #relation>>
+<<~ ahu #/relation>>
 
 !! Relation To Live Surfaces
 
@@ -73,7 +73,7 @@ This shelf keeps the older bundle intact for now.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -83,6 +83,6 @@ This shelf keeps the older bundle intact for now.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;WvEpNFXCGLDm5hPYZM6bvNlS_ZPJzE2nqt3id3u3pcQ
+<<^ code="&#x0003;">>ni:///sha-256;v1B3PmkWTfVhNX7W9o3f_WS-JGb7MqfJnOMOLf-8FdI
 
 <<^ code="&#x0004;" -> to=?>>

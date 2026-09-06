@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/bag-stack-from-rec"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -35,6 +35,6 @@ parseBagStack(typeof recipeRec.tiddler["bag-stack"] === "string"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JJ9EE3F5Cn61omUrqff1KPZPfxEPB5XvIHuBTyEhvRM
+<<^ code="&#x0003;">>ni:///sha-256;rgvB8UwpBNgvnT_OTPG8hWcuPytZIuRJhmELyDv-8HY
 
 <<^ code="&#x0004;" -> to=?>>

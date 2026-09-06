@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/lindwyrm/daemon-in-the-walls"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lindwyrm's Hoard — The Daemon in the Walls
 
@@ -27,7 +27,7 @@ The first resonance error becomes a green, wobbly teacher.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -122,7 +122,7 @@ Architecture can be corrected by naming the desired relation with enough precisi
 >
 > `@mischief-muse@lares: fine. one browser tab. it multiplies later.`
 
-<<~ ahu #gaia-mirror>>
+<<~ ahu #/gaia-mirror>>
 
 !! Gaia Mirror
 
@@ -166,7 +166,7 @@ The second diagnostic did not succeed.
 The second diagnostic failed — with enough personality to teach steering.
 
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -180,7 +180,7 @@ Act III receives:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -198,6 +198,6 @@ Act III receives:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;y1bIog7bZmF4RlZVILnIr1LvdcxoEM34c0B8QZIazUk
+<<^ code="&#x0003;">>ni:///sha-256;OjO_1d8bM6Ui1s1H_33cO3odzDs1zitwremeDRX3GqM
 
 <<^ code="&#x0004;" -> to=?>>

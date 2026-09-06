@@ -27,7 +27,7 @@ This document carries the load. `lar-vessel.md` and `open-vessel.md` carry
 implementation notes. The two-lane topology and ea sovereignty law described here
 sit above any single vessel implementation.
 
-<<~ ahu #vocabulary>>
+<<~ ahu #/vocabulary>>
 
 !! Vocabulary
 
@@ -45,7 +45,7 @@ sit above any single vessel implementation.
 
 <<~/ahu>>
 
-<<~ ahu #two-lane-law>>
+<<~ ahu #/two-lane-law>>
 
 !! Two-Lane Law
 
@@ -78,7 +78,7 @@ handles only resource-local side effects.
 
 <<~/ahu>>
 
-<<~ ahu #ea-law>>
+<<~ ahu #/ea-law>>
 
 !! Ea Law — Vessel Sovereignty
 
@@ -105,7 +105,7 @@ before any doc change applies.
 
 <<~/ahu>>
 
-<<~ ahu #command-receipt-surface>>
+<<~ ahu #/command-receipt-surface>>
 
 !! Command / Receipt Surface
 
@@ -143,7 +143,7 @@ the same core — see #actor-parity.)
 
 <<~/ahu>>
 
-<<~ ahu #actor-parity>>
+<<~ ahu #/actor-parity>>
 
 !! Actor Parity — Human and AI Agent
 
@@ -210,7 +210,7 @@ seed+card; then V3 C (peer transport) and the writable MCP surface compose over 
 
 <<~/ahu>>
 
-<<~ ahu #vessel-parity>>
+<<~ ahu #/vessel-parity>>
 
 !! Vessel Parity
 
@@ -234,7 +234,7 @@ identical ea rights.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -245,6 +245,6 @@ identical ea rights.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;7VA6aErXlokQkDnubLBkjc1hN2kWVrzjQFL7JGTZXqo
+<<^ code="&#x0003;">>ni:///sha-256;sFCka64Dzd0cq9ZOXWt7itQXz-z5TRnGa9YqeNPrLSc
 
 <<^ code="&#x0004;" -> to=?>>

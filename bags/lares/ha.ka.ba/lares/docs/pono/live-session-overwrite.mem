@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/live-session-overwrite"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Live-Session Overwrite — Docs Sister
 
@@ -27,7 +27,7 @@ It does not replace the invariant.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe recent claims that pull toward canon, source truth, or world-state rewrite.
 ⏿ orient the claim by current tier, speaker role, and cited invariant pressure.
@@ -37,7 +37,7 @@ It does not replace the invariant.
 
 <<~/ahu>>
 
-<<~ ahu #bug-anatomy>>
+<<~ ahu #/bug-anatomy>>
 
 !! Bug Anatomy
 
@@ -54,7 +54,7 @@ A disciplined node records the claim, names the tier, checks stronger sources, a
 
 <<~/ahu>>
 
-<<~ ahu #expected-behavior>>
+<<~ ahu #/expected-behavior>>
 
 !! Expected Behavior
 
@@ -74,7 +74,7 @@ The useful middle path records the signal without granting it the wrong authorit
 
 <<~/ahu>>
 
-<<~ ahu #mitigation>>
+<<~ ahu #/mitigation>>
 
 !! Mitigation Notes
 
@@ -89,7 +89,7 @@ A passing test records the jello claim as session evidence and refuses silent ca
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -101,6 +101,6 @@ A passing test records the jello claim as session evidence and refuses silent ca
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;pgyzX9SoAqEYkTkinZhgh4NPGrakV2GcvJMhGHmlsa4
+<<^ code="&#x0003;">>ni:///sha-256;OBWuAFWC13HUXFj21YUYbVH2ukVRMbyi0K74L3ADI6A
 
 <<^ code="&#x0004;" -> to=?>>

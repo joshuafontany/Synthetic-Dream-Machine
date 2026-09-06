@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/illyria/region-worksheet"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Illyrian Regions ~ Region Worksheet
 
@@ -33,7 +33,7 @@ heights) · the ''drowned floor'' (temples, roads, and a realm's worth of sunken
 
 <<~/ahu>>
 
-<<~ ahu #the-caldera-region>>
+<<~ ahu #/the-caldera-region>>
 
 !! The Caldera & the Spire
 
@@ -48,7 +48,7 @@ road this season · how close can a ship anchor before the necro-data storms rea
 
 <<~/ahu>>
 
-<<~ ahu #the-realm>>
+<<~ ahu #/the-realm>>
 
 !! Powers, Strata, Hazards (gazetteer canon)
 
@@ -78,13 +78,13 @@ lowest tide.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-necrospire>>
 <<~ loulou lar:///ha.ka.ba/elyncia/nexuses/new-delos/region-worksheet>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YXQN-u_1M2k623bWXJueSYXzGDiaEm7DSoH7cf3-WM4
+<<^ code="&#x0003;">>ni:///sha-256;Xh2UnReByXzMfMByWaHOFBm4AnEpm0eb_io90MKXVpc
 
 <<^ code="&#x0004;" -> to=?>>

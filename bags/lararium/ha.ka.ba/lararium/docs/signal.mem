@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal Docs
 
@@ -29,7 +29,7 @@ The l-space definition, HUD, drift, provenance, and render-target documents live
 
 <<~/ahu>>
 
-<<~ ahu #room-charter>>
+<<~ ahu #/room-charter>>
 
 !! Room Charter
 
@@ -43,7 +43,7 @@ Long witness bundles, migration residue, drift-recovery detail, symbol tables, a
 
 <<~/ahu>>
 
-<<~ ahu #the-lar-signal>>
+<<~ ahu #/the-lar-signal>>
 
 !! The Lar Signal
 
@@ -55,7 +55,7 @@ This doc covers the `lar` URI signal layer:
 
 <<~/ahu>>
 
-<<~ ahu #lararium-contract>>
+<<~ ahu #/lararium-contract>>
 
 !! Lararium Contract
 
@@ -76,7 +76,7 @@ Detailed emit rules and protocol-wide render contracts still live outward.
 
 <<~/ahu>>
 
-<<~ ahu #intent-headers>>
+<<~ ahu #/intent-headers>>
 
 !! Exchange Boundary Contract
 
@@ -109,7 +109,7 @@ Annotation thresholds and OODA-HA surfacing examples live in sibling signal room
 
 <<~/ahu>>
 
-<<~ ahu #layer-split>>
+<<~ ahu #/layer-split>>
 
 !! Layer Split
 
@@ -129,7 +129,7 @@ The render layer projects the same signal differently across surfaces without re
 
 <<~/ahu>>
 
-<<~ ahu #parent-boundaries>>
+<<~ ahu #/parent-boundaries>>
 
 !! Parent Boundaries
 
@@ -146,7 +146,7 @@ The current chronometer material still reads as a research cluster under `signal
 
 <<~/ahu>>
 
-<<~ ahu #rooms>>
+<<~ ahu #/rooms>>
 
 !! Rooms
 
@@ -161,7 +161,7 @@ Settled child rooms in this branch:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -170,6 +170,6 @@ Settled child rooms in this branch:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_MKi-l6kuFmThiSFsEREKBiPn7I7hRsh2YrlLew2El8
+<<^ code="&#x0003;">>ni:///sha-256;KDVmR4xG2VsOzU6jXqvTWAhzb1x1h2PstQC8DsRv3hA
 
 <<^ code="&#x0004;" -> to=?>>

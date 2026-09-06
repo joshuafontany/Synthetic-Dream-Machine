@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/first-realm-arc"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The First Realm Arc ~ founded, fed, gathered, joined
 
@@ -30,7 +30,7 @@ The founding runbook carries the ''command sequence'' for standing one vessel (<
 
 <<~/ahu>>
 
-<<~ ahu #the-four-joins>>
+<<~ ahu #/the-four-joins>>
 
 !! Four different acts, all called //joining// in plain speech
 
@@ -46,7 +46,7 @@ Ordinary speech fuses these. The model runs them as four distinct acts with four
 
 <<~/ahu>>
 
-<<~ ahu #the-arc>>
+<<~ ahu #/the-arc>>
 
 !! The arc, in order
 
@@ -68,7 +68,7 @@ Ordinary speech fuses these. The model runs them as four distinct acts with four
 
 <<~/ahu>>
 
-<<~ ahu #what-the-runbook-lacks>>
+<<~ ahu #/what-the-runbook-lacks>>
 
 !! A realm and a Nexus name different things, and neither contains the other
 
@@ -117,7 +117,7 @@ The runbook stands ''Synthesis-Canon and complete for what it covers''. These si
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -125,6 +125,6 @@ The runbook stands ''Synthesis-Canon and complete for what it covers''. These si
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tQ2yUxDx5PQBhNr2RDz6IxPQ60U7iBqkSF1QM0CNcoQ
+<<^ code="&#x0003;">>ni:///sha-256;U6VQINOImTMOqD9E2QTsrdgoZFAkWBtAw40xI1plB8E
 
 <<^ code="&#x0004;" -> to=?>>

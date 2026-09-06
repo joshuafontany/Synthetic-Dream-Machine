@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/sigil-shape-motion"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Sigil Shape / Detail / Motion
 
@@ -27,7 +27,7 @@ This frame addresses how a human or agent reads sigil structure at varying zoom 
 
 <<~/ahu>>
 
-<<~ ahu #shape>>
+<<~ ahu #/shape>>
 
 !! Shape — The Bracket Structure
 
@@ -45,7 +45,7 @@ Named closers `<<~/SIGIL>>` add a typed jaw: the closer carries the sigil name, 
 
 <<~/ahu>>
 
-<<~ ahu #detail>>
+<<~ ahu #/detail>>
 
 !! Detail — The Sigil Payload
 
@@ -64,7 +64,7 @@ At zoom-in, the reader engages with the detail layer. At zoom-out, the detail st
 
 <<~/ahu>>
 
-<<~ ahu #motion>>
+<<~ ahu #/motion>>
 
 !! Motion — Open / Close Posture
 
@@ -75,14 +75,14 @@ Motion registers in the open/close posture of the sigil:
 
 The motion axis answers: does this sigil grip and contain, or does it point and release?
 
-* `<<~ ahu #slot>>body<<~/ahu>>` — grips; the jaw closes around the body; WorksiteNode
+* `<<~ ahu #/slot>>body<<~/ahu>>` — grips; the jaw closes around the body; WorksiteNode
 * `<<~ loulou lar:///target>>` — points; the tooth breaks the surface and exits; EdgeNode
 
 ''Temporal scarring:'' when a render-time sigil closes (`>>`), the surrounding document resumes, but the output of the sigil remains — the "scar" the jaw left in the text. The document changes shape at that point.
 
 <<~/ahu>>
 
-<<~ ahu #progressive-display>>
+<<~ ahu #/progressive-display>>
 
 !! Progressive Display — Zoom-Level Reading
 
@@ -102,7 +102,7 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -112,6 +112,6 @@ This differs from the technical three-mode render dispatch (`html` / `carrier` /
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;J9cnKEJTPZ9tDxhkpfWRv6kjavfZXfK2kI3FP29dL8A
+<<^ code="&#x0003;">>ni:///sha-256;xTMEZCQu8sqHjwW10NF6F8QfyzYUHg8CQo91GbisZkw
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/sdm/mount-points/trait"
 
 ! Mount-Point — Trait
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -29,7 +29,7 @@ A Trait seats a Power ''in the practitioner'': engraved as memetic code, sung in
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -37,7 +37,7 @@ A trait-seated Power activates from the self — range and target measured from 
 
 <<~/ahu>>
 
-<<~ ahu #cost>>
+<<~ ahu #/cost>>
 
 !! Cost
 
@@ -45,7 +45,7 @@ Pay Life equal to P (Ability Points at 1:1 parity). Double without the relevant 
 
 <<~/ahu>>
 
-<<~ ahu #failure>>
+<<~ ahu #/failure>>
 
 !! Failure
 
@@ -53,7 +53,7 @@ A failed activation runs the Danger Roll → Corruption procedure. Corruption on
 
 <<~/ahu>>
 
-<<~ ahu #removal>>
+<<~ ahu #/removal>>
 
 !! Removal
 
@@ -61,7 +61,7 @@ Traits resist casual removal. Re-engraving, corruption treatment, or a Path feat
 
 <<~/ahu>>
 
-<<~ ahu #overflow>>
+<<~ ahu #/overflow>>
 
 !! Overflow
 
@@ -69,7 +69,7 @@ Past capacity, additional patterns become Burdens (−1 to all rolls each) or wa
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -77,7 +77,7 @@ Past capacity, additional patterns become Burdens (−1 to all rolls each) or wa
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -85,6 +85,6 @@ Past capacity, additional patterns become Burdens (−1 to all rolls each) or wa
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mCvTqQTSE_allix6QtA8p-II0cOGHgG2Z2BkOWIBEJo
+<<^ code="&#x0003;">>ni:///sha-256;2Fd7BFVFGxFzdItLrb5YyOn3vlzeK1bZXb45iUvFCEU
 
 <<^ code="&#x0004;" -> to=?>>

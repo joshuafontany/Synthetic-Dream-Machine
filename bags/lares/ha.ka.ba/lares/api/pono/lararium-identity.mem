@@ -24,7 +24,7 @@ written    = "2026-06-23"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium Identity ~ the vessel key, the bond, and the encrypt-from-start keying
 
@@ -65,7 +65,7 @@ stands ''PROPOSED'' until that settles.
 
 <<~/ahu>>
 
-<<~ ahu #five-scale>>
+<<~ ahu #/five-scale>>
 
 !! The Five Scales (the group axis)
 
@@ -113,7 +113,7 @@ only join their meat-brain. Full ontology: <<~ loulou lar:///ha.ka.ba/lares/api/
 
 <<~/ahu>>
 
-<<~ ahu #vessel-key>>
+<<~ ahu #/vessel-key>>
 
 !! The Vessel Key ~ the device key, minted on-device
 
@@ -140,7 +140,7 @@ global plane-index); read any lingering "Plane 0 / Plane 1" as ''the device key 
 
 <<~/ahu>>
 
-<<~ ahu #delegation-edge>>
+<<~ ahu #/delegation-edge>>
 
 !! The Delegation Edge ~ the relationship reified
 
@@ -167,7 +167,7 @@ convergent, never the deferred afterthought.
 
 <<~/ahu>>
 
-<<~ ahu #capability-and-petnames>>
+<<~ ahu #/capability-and-petnames>>
 
 !! Capability-is-Identity + Petnames ~ the ruled base (operator, 2026-06-24)
 
@@ -217,7 +217,7 @@ for stable and unstable petnames both.
 
 <<~/ahu>>
 
-<<~ ahu #the-veil>>
+<<~ ahu #/the-veil>>
 
 !! The Veil ~ the handle that carries reputation, lifted or held
 
@@ -262,7 +262,7 @@ veil-policy choice, never a silent default.
 
 <<~/ahu>>
 
-<<~ ahu #the-lease>>
+<<~ ahu #/the-lease>>
 
 !! The Lease ~ decay as native law (feed the Lar or it fades)
 
@@ -294,7 +294,7 @@ T1/T2 + renewal-discount); the ''siege-gate's entry COST rides the dial below'' 
 
 <<~/ahu>>
 
-<<~ ahu #the-siege-gate>>
+<<~ ahu #/the-siege-gate>>
 
 !! The Siege-Gate ~ what a crossing costs (born besieged)
 
@@ -348,7 +348,7 @@ stakes, how fast it decays, one kahu or a threshold — wait on the local instru
 
 <<~/ahu>>
 
-<<~ ahu #the-lineage-fold>>
+<<~ ahu #/the-lineage-fold>>
 
 !! The Lineage Fold ~ the sybil plane, built
 
@@ -393,7 +393,7 @@ BBS per-verifier + Semaphore · Merton + Francis for the warning.
 
 <<~/ahu>>
 
-<<~ ahu #the-oracle-plane>>
+<<~ ahu #/the-oracle-plane>>
 
 !! The @oracle Plane ~ read-open by content-address, write-gated by relay-tier
 
@@ -454,7 +454,7 @@ The Two-Faced Substrate (content-addressed floor + signed monotone pointer) seat
 
 <<~/ahu>>
 
-<<~ ahu #publish-a-face>>
+<<~ ahu #/publish-a-face>>
 
 !! Publish a Face ~ recognition without a registry
 
@@ -492,7 +492,7 @@ NIP-05 → DNS, AT-proto handle → DNS/PLC, ENS → ledger. ''A convenience lay
 
 <<~/ahu>>
 
-<<~ ahu #encrypt-from-start>>
+<<~ ahu #/encrypt-from-start>>
 
 !! Encrypt From the Start ~ the temporary keying
 
@@ -548,7 +548,7 @@ architecture's task: anchor it at the contract, never re-invent it.
 
 <<~/ahu>>
 
-<<~ ahu #four-port-swap>>
+<<~ ahu #/four-port-swap>>
 
 !! The Four-Port Swap Surface
 
@@ -576,7 +576,7 @@ callers never change.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance ~ PROPOSED, pending the hoike
 
@@ -595,7 +595,7 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -613,6 +613,6 @@ folded in; the FS-limit stated as posture). Standing dissent kept, with re-entry
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;W9nGRjknh6LkaVY-TmkOfUm7tLbS9iCJWpOqy48Eeqk
+<<^ code="&#x0003;">>ni:///sha-256;3NmywR25tODCbRLfWEbwQkhXX4kXVgCmTVMxeo4z-oU
 
 <<^ code="&#x0004;" -> to=?>>

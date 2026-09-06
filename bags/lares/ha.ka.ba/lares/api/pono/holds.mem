@@ -19,7 +19,7 @@ written   = "2026-06-14"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Holds ~ one verb, fuses nothing
 
@@ -39,7 +39,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the carrier and the row before judging composition; gather which
   cells resolve to component memes, which still stand bare.
@@ -54,7 +54,7 @@ fused anything — `holds` only hands the table's silent grammar a verb.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Five clauses hold the law
 
@@ -108,7 +108,7 @@ that composes (`[all[tiddlers]holds[element/Fire]sort[title]]`).
 
 <<~/ahu>>
 
-<<~ ahu #rewrite-rule>>
+<<~ ahu #/rewrite-rule>>
 
 !! Tables fall to holds ~ a worked lift
 
@@ -141,7 +141,7 @@ A stack too wide for one line wears the block form — `<<~holds>>`, one
 
 <<~/ahu>>
 
-<<~ ahu #two-holds>>
+<<~ ahu #/two-holds>>
 
 !! Two holds, one word, and the sharktooth parts them
 
@@ -170,7 +170,7 @@ each name to its act rather than to another name.
 
 <<~/ahu>>
 
-<<~ ahu #when-not-holds>>
+<<~ ahu #/when-not-holds>>
 
 !! When not to reach for holds ~ the other copula-free grammars
 
@@ -260,7 +260,7 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges reach out
 
@@ -271,6 +271,6 @@ order or lattice would later mint it, the floor unbuilt until a usage demands.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;htTgx8SvhDUx7Ala-4_Gnpj0AkIRwTwRFQuLtjQfA7k
+<<^ code="&#x0003;">>ni:///sha-256;nINaw-Tvt4IfhZzgqSEnHjQjveOIMkYA_GvasYaoYWw
 
 <<^ code="&#x0004;" -> to=?>>

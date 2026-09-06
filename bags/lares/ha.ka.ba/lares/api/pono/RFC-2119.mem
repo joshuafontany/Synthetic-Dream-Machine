@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/RFC-2119"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! RFC-2119 — Normative Verbs (Kānāwai)
 
@@ -27,7 +27,7 @@ Carrier laws cite this meme; they do not re-declare the list.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ inventory where normative verbs appear across carrier laws in the stack.
 ⏿ separate force-bearing terms from prose habits and local restatements.
@@ -37,7 +37,7 @@ Carrier laws cite this meme; they do not re-declare the list.
 
 <<~/ahu>>
 
-<<~ ahu #normative-language>>
+<<~ ahu #/normative-language>>
 
 !! Normative Language
 
@@ -53,7 +53,7 @@ Carrier laws may explain local usage, but MUST cite this meme rather than re-dec
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono>>
@@ -61,6 +61,6 @@ Carrier laws may explain local usage, but MUST cite this meme rather than re-dec
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NcAq52RK5IEUNHfMwynZDD-PQtBaFCKzYe1rdvU9c98
+<<^ code="&#x0003;">>ni:///sha-256;N1b53VcVFsrJAD61JIDVYUvJLkkYFyJQr-B-U-FpR0o
 
 <<^ code="&#x0004;" -> to=?>>

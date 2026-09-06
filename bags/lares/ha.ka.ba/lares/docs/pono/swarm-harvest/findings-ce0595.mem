@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/findings-ce0595"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! FINDINGS
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 26,280 characters
 
@@ -228,12 +228,12 @@ The AI Act names the *system* as a machine but every accountable role — all se
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mp4UKNE-tsm7Ujetzp24URlvwRKr--GxwGw2UnQTOKI
+<<^ code="&#x0003;">>ni:///sha-256;KHvJpmHWsSjzUbzThDPg0cWizCElOrJA9f-m2DpoPR8
 
 <<^ code="&#x0004;" -> to=?>>

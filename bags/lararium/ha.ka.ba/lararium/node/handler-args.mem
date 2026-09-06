@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lararium/node/handler-args"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -37,6 +37,6 @@ These helpers carry no side effects or platform assumptions. They could become a
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_jYMyd-JLn-OdjXt1SoMXxA6k-XsO8lLn6oqAL7t7Go
+<<^ code="&#x0003;">>ni:///sha-256;ymdwQUGTNBzQnCSFwHrsM0S4fWmhlOILO4ZHKvys5f8
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ Procedure lives at [[tiddlywiki-filter/SKILL.md|../../api/pono/tiddlywiki-filter
 
 This file holds examples, explanatory guidance, reminders, and notes on deferred scope.
 
-<<~ ahu #canonical-examples>>
+<<~ ahu #/canonical-examples>>
 
 !! Canonical Examples
 
@@ -112,7 +112,7 @@ result-shape = "set"
 
 <<~/ahu>>
 
-<<~ ahu #guidance>>
+<<~ ahu #/guidance>>
 
 !! Guidance
 
@@ -149,7 +149,7 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -158,6 +158,6 @@ A future parser meme and render-pipeline meme should absorb these when they are 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;e_-MqiOkdjivGOhBlSm7cyC8ZeQEP4cZyzeoMmSbzOw
+<<^ code="&#x0003;">>ni:///sha-256;pa3N6JHH5O7Edou_YcDEu0CtVSbaKTIZJUNgNCW9bfk
 
 <<^ code="&#x0004;" -> to=?>>

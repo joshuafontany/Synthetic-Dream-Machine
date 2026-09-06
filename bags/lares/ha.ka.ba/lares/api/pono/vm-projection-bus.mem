@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/vm-projection-bus"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! VM Pool → Projection Messaging Bus
 
@@ -33,7 +33,7 @@ itself onto TW5Engine at runtime. The direction of dependency is:
 
 <<~/ahu>>
 
-<<~ ahu #event-contract>>
+<<~ ahu #/event-contract>>
 
 !! Event Contract
 
@@ -83,7 +83,7 @@ on `ReactionEngine` directly. The interface is defined in `@lararium/mesh`.
 
 <<~/ahu>>
 
-<<~ ahu #vm-pool-wiring>>
+<<~ ahu #/vm-pool-wiring>>
 
 !! VmPool Wiring
 
@@ -115,7 +115,7 @@ propagate to slot 1 — the wiki event buses are per-VM, not shared.
 
 <<~/ahu>>
 
-<<~ ahu #migration-from-hook>>
+<<~ ahu #/migration-from-hook>>
 
 !! Migration from `_larKukaliHook`
 
@@ -148,7 +148,7 @@ Any file referencing `_larKukaliHook` outside a `*.web2.*` path FAILS FPI-1.
 
 <<~/ahu>>
 
-<<~ ahu #verse-alignment>>
+<<~ ahu #/verse-alignment>>
 
 !! Verse Alignment
 
@@ -167,7 +167,7 @@ The asymmetry is preserved:
 
 <<~/ahu>>
 
-<<~ ahu #scope-1-networking>>
+<<~ ahu #/scope-1-networking>>
 
 !! Scope 1 ~ the mesh projection surface [surgical 2026-07-03]
 
@@ -175,7 +175,7 @@ The projection bus serves as a ''Scope-1'' mesh surface under the two-scopes rul
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -185,6 +185,6 @@ The projection bus serves as a ''Scope-1'' mesh surface under the two-scopes rul
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;7mGQ53XAZeZmx_ZlrKJeHEd3GjoWQFHnZjxqADe9ozk
+<<^ code="&#x0003;">>ni:///sha-256;u9nf8y3WFjq10CoIC79nl2atXBZzS607Vm7CEHAfdNU
 
 <<^ code="&#x0004;" -> to=?>>

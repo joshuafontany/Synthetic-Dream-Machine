@@ -23,7 +23,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/memetic-wikitext-framing"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #abstract>>
+<<~ ahu #/abstract>>
 
 ! Memetic-Wikitext Carrier Framing
 
@@ -43,7 +43,7 @@ guardian at the threshold of the place, naming it on the way in and pouring the 
 
 <<~/ahu>>
 
-<<~ ahu #status>>
+<<~ ahu #/status>>
 
 !! Status and Maturity
 
@@ -53,7 +53,7 @@ force. Items in the open annex remain open. Promotion to canon rests with the op
 
 <<~/ahu>>
 
-<<~ ahu #introduction>>
+<<~ ahu #/introduction>>
 
 !! Introduction — Scope, Audience, and Relation to the Sibling Specifications
 
@@ -77,7 +77,7 @@ boundaries; authors of migrations and independent implementations.
 
 <<~/ahu>>
 
-<<~ ahu #terminology>>
+<<~ ahu #/terminology>>
 
 !! Terminology and Conformance Language
 
@@ -103,7 +103,7 @@ and consumer here as well.
 
 <<~/ahu>>
 
-<<~ ahu #conformance>>
+<<~ ahu #/conformance>>
 
 !! Conformance Classes
 
@@ -130,7 +130,7 @@ refusing admission only under a policy it declares.
 
 <<~/ahu>>
 
-<<~ ahu #grammar>>
+<<~ ahu #/grammar>>
 
 !! Formal Grammar (ABNF)
 
@@ -176,7 +176,7 @@ without entering it; everything inside defers to [MEMETIC-WIKITEXT].
 
 <<~/ahu>>
 
-<<~ ahu #doctype>>
+<<~ ahu #/doctype>>
 
 !! The DOCTYPE — declaring an extension of TW5 wikitext
 
@@ -208,7 +208,7 @@ earlier `x-` spellings file as deprecated read-side aliases there.
 
 <<~/ahu>>
 
-<<~ ahu #declaration-register>>
+<<~ ahu #/declaration-register>>
 
 !! Carrier Frame — The Declaration Register
 
@@ -261,7 +261,7 @@ never performing a move the renderer runs. A `!WORD` that acts belongs in the sp
 
 <<~/ahu>>
 
-<<~ ahu #carrier-spine>>
+<<~ ahu #/carrier-spine>>
 
 !! The Carrier Spine — Four Required Sigils
 
@@ -301,7 +301,7 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 
 <<~/ahu>>
 
-<<~ ahu #bearing-arrow>>
+<<~ ahu #/bearing-arrow>>
 
 !! The Bearing Arrow — one edge, two orientations
 
@@ -342,7 +342,7 @@ ABSENCE DISCOVERED stand as different facts, and every instrument here that conf
 
 <<~/ahu>>
 
-<<~ ahu #control-set>>
+<<~ ahu #/control-set>>
 
 !! Carrier Frame — The Control Set
 
@@ -465,7 +465,7 @@ a shape-exact slug rule refuses a truncated tag. Enforcement rides the recognise
 
 <<~/ahu>>
 
-<<~ ahu #resonance>>
+<<~ ahu #/resonance>>
 
 !! Namespace Resonance Glyphs — A Separate Mark
 
@@ -492,7 +492,7 @@ Two laws govern the namespace:
 
 <<~/ahu>>
 
-<<~ ahu #trust-tiers>>
+<<~ ahu #/trust-tiers>>
 
 !! Trust Tiers — The Control-Character Roles
 
@@ -512,7 +512,7 @@ SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carri
 
 <<~/ahu>>
 
-<<~ ahu #authoring>>
+<<~ ahu #/authoring>>
 
 !! Authoring — what an author states, and what the carrier adds
 
@@ -538,7 +538,7 @@ A carrier reads in three zones, and the middle one had no name:
 
 # ''The identity heading'' — the labelled `toml meta` fence. What the meme IS.
 # ''The carrier bindings'' — between the heading and STX. `<<~ aka lar:///…>>` binds a reference at
-  carrier level; `<<~ kahea ahu #…>>` mounts a slot. These read as AUTHORED structure, not framing:
+  carrier level; `<<~ kahea ahu #/…>>` mounts a slot. These read as AUTHORED structure, not framing:
   they state what the carrier holds before its body opens.
 # ''The body'' — between STX and ETX. Optional, and holding prose, ahu slots, both, or nothing.
 
@@ -587,7 +587,7 @@ write-back rewrites the author's source forever.
 
 <<~/ahu>>
 
-<<~ ahu #frame-head-lock>>
+<<~ ahu #/frame-head-lock>>
 
 ## The Frame Head Locks to Control
 
@@ -610,7 +610,7 @@ unexamined, and reported the carrier sound.
 
 <<~/ahu>>
 
-<<~ ahu #the-touchstone>>
+<<~ ahu #/the-touchstone>>
 
 ## The Touchstone Hash ~ the check as the Oracle's inversion
 
@@ -734,7 +734,7 @@ render them first — a vocabulary chosen before anything renders it would freez
 
 <<~/ahu>>
 
-<<~ ahu #canonical-form>>
+<<~ ahu #/canonical-form>>
 
 ## Canonical Form ~ the writer's law
 
@@ -783,7 +783,7 @@ reader, and writes with the emitter, and never composes bytes of its own.
 
 <<~/ahu>>
 
-<<~ ahu #the-carriage>>
+<<~ ahu #/the-carriage>>
 
 ## The Carriage ~ what the grammar owns, and where it keeps it
 
@@ -861,7 +861,7 @@ reserving a field to re-state it would put a derived fact back on the record.
 
 <<~/ahu>>
 
-<<~ ahu #the-gradient>>
+<<~ ahu #/the-gradient>>
 
 ## The Gradient ~ how far down a carrier sits
 
@@ -897,7 +897,7 @@ and a resolver must not guess.
 
 <<~/ahu>>
 
-<<~ ahu #classifier-channel>>
+<<~ ahu #/classifier-channel>>
 
 !! The Classifier Channel — What the Sigil Layer Does
 
@@ -909,7 +909,7 @@ Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-gr
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -939,7 +939,7 @@ kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elev
 
 <<~/ahu>>
 
-<<~ ahu #frame-security>>
+<<~ ahu #/frame-security>>
 
 ## Frame Security Considerations
 
@@ -993,7 +993,7 @@ has met.
 
 <<~/ahu>>
 
-<<~ ahu #carrier-bytes>>
+<<~ ahu #/carrier-bytes>>
 
 !! Carrier Bytes Law
 
@@ -1008,7 +1008,7 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu>>
 
-<<~ ahu #references>>
+<<~ ahu #/references>>
 
 !! Normative References
 
@@ -1023,7 +1023,7 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu>>
 
-<<~ ahu #annex-open>>
+<<~ ahu #/annex-open>>
 
 !! Annex — Open Items (Informative)
 
@@ -1037,7 +1037,7 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -1052,6 +1052,6 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1XZEL2IZgs7IDKwvjBuFuG0Yqqgp8dtlb0T2b8teMVo
+<<^ code="&#x0003;">>ni:///sha-256;esejkP70umVmtpGVPB0aTruPsMTxu7zgARoyKo8EOKw
 
 <<^ code="&#x0004;" -> to=?>>

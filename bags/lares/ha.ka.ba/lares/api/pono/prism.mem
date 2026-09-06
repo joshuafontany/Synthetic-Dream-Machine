@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/prism"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Prism
 
@@ -31,7 +31,7 @@ The node summons it. It never rides a turn by default.
 
 <<~/ahu>>
 
-<<~ ahu #operation>>
+<<~ ahu #/operation>>
 
 !! The Operation
 
@@ -45,7 +45,7 @@ The product earns a clean word: a ''reading'' --- a lensed interpretation of a r
 
 <<~/ahu>>
 
-<<~ ahu #the-lenses>>
+<<~ ahu #/the-lenses>>
 
 !! The Lenses It Refracts Through
 
@@ -59,7 +59,7 @@ A lens reads its tool-bind through the `syad` `/` grammar (`syad=🏛️/*!`); e
 
 <<~/ahu>>
 
-<<~ ahu #invocation>>
+<<~ ahu #/invocation>>
 
 !! Invocation
 
@@ -75,7 +75,7 @@ The lens list rides left of the `->`; the referenced target rides right. A targe
 
 <<~/ahu>>
 
-<<~ ahu #reading>>
+<<~ ahu #/reading>>
 
 !! The Reading
 
@@ -93,7 +93,7 @@ Each band carries complementary signal; the reading composes them into a fuller 
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Lineage
 
@@ -103,7 +103,7 @@ Prism keeps the worthwhile half --- //reference a piece of content and read its 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/conformance>>
@@ -113,6 +113,6 @@ Prism keeps the worthwhile half --- //reference a piece of content and read its 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-eRAWP7UnM9CNjDGEuaPfkdAlwk0FXwVeT6nhxnIHr4
+<<^ code="&#x0003;">>ni:///sha-256;Wdq81T7pmaXeY8J_x6uRafbsUf8YReQjWuV628CJnUs
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/epistemology"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Epistemic Residue
 
@@ -26,7 +26,7 @@ The foundation braid lives outward; this shelf holds what remains unsettled, cro
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -40,7 +40,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 !! OODA-HA — Collection Pass
 
@@ -52,7 +52,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -69,7 +69,7 @@ It keeps the residue visible until it either promotes upward or dissolves into a
 
 <<~/ahu>>
 
-<<~ ahu #tree>>
+<<~ ahu #/tree>>
 
 !! Tree
 
@@ -78,7 +78,7 @@ It keeps the residue visible until it either promotes upward or dissolves into a
 
 <<~/ahu>>
 
-<<~ ahu #docs-migration>>
+<<~ ahu #/docs-migration>>
 
 !! Docs Migration — Foundation Braid
 
@@ -96,7 +96,7 @@ This room now keeps the more API-adjacent residue:
 
 <<~/ahu>>
 
-<<~ ahu #relation>>
+<<~ ahu #/relation>>
 
 !! Relation To Live Surfaces
 
@@ -114,7 +114,7 @@ This parent shelf keeps the promotion map.
 
 <<~/ahu>>
 
-<<~ ahu #api-annotation>>
+<<~ ahu #/api-annotation>>
 
 !! Annotation — Current API State
 
@@ -218,7 +218,7 @@ It still needs to witness what has already promoted, what remains braided, and w
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -230,6 +230,6 @@ It still needs to witness what has already promoted, what remains braided, and w
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;XAW96s7X7pkb9FUV6FoCmi6qJ_23AyVQTd3-u9l7Eu8
+<<^ code="&#x0003;">>ni:///sha-256;OOQTEP9ashMJ-hegTPhWT122XtB-WTr3QJgPyI-c0JA
 
 <<^ code="&#x0004;" -> to=?>>

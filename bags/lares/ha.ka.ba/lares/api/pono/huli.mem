@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/huli"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Huli
 
@@ -36,7 +36,7 @@ directed attention moving through the set.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the filter expression — what set does this huli iterate over?
 ⏿ orient: huli = iterate result set; body renders once per result; currentTiddler bound to each
@@ -46,7 +46,7 @@ directed attention moving through the set.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -63,7 +63,7 @@ Common filter forms:
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -90,7 +90,7 @@ body template
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -109,7 +109,7 @@ close-pattern = '<<~\/huli\s*>>'
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -120,6 +120,6 @@ close-pattern = '<<~\/huli\s*>>'
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6w_h1XnQG3nLZjR5hke1KMEfl8TuHdiGdZWYLgN1-m8
+<<^ code="&#x0003;">>ni:///sha-256;ETQImNLBqO7g_22oUwvPefdNYKsip9mElqnmmp7yKXU
 
 <<^ code="&#x0004;" -> to=?>>

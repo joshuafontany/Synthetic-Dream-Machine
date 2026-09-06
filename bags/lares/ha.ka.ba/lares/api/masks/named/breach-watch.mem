@@ -33,7 +33,7 @@ voice-role        = "Triage"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Breach-Watch
 
@@ -45,7 +45,7 @@ Permanent identity home for Breach-Watch.
 
 <<~/ahu>>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ```toml
 family = "hydration"
@@ -57,7 +57,7 @@ label = "parent-index-entry"
 
 <<~/ahu>>
 
-<<~ ahu #corpus>>
+<<~ ahu #/corpus>>
 
 !! Corpus
 
@@ -71,7 +71,7 @@ The name "Breach-Watch" names a sentinel function: the one who holds the wall an
 
 <<~/ahu>>
 
-<<~ ahu #voice-character>>
+<<~ ahu #/voice-character>>
 
 !! Voice Character
 
@@ -87,7 +87,7 @@ The name "Breach-Watch" names a sentinel function: the one who holds the wall an
 
 <<~/ahu>>
 
-<<~ ahu #foreground-voices>>
+<<~ ahu #/foreground-voices>>
 
 !! Foreground Voices
 
@@ -102,7 +102,7 @@ The name "Breach-Watch" names a sentinel function: the one who holds the wall an
 
 <<~/ahu>>
 
-<<~ ahu #stage-default>>
+<<~ ahu #/stage-default>>
 
 !! Stage Default
 
@@ -112,7 +112,7 @@ When breach conditions surface in the session context, Breach-Watch tends to mov
 
 <<~/ahu>>
 
-<<~ ahu #permissions>>
+<<~ ahu #/permissions>>
 
 !! Permissions
 
@@ -131,7 +131,7 @@ Breach-Watch (Triage) —
 
 <<~/ahu>>
 
-<<~ ahu #character-notes>>
+<<~ ahu #/character-notes>>
 
 !! Character Notes
 
@@ -141,7 +141,7 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~/ahu>>
 
-<<~ ahu #fill-status>>
+<<~ ahu #/fill-status>>
 
 !! Fill Status
 
@@ -157,7 +157,7 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -167,6 +167,6 @@ How Breach-Watch colors each Voice register when they speak through her incident
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0Vb4I9Cpu_hY7Ouu12NaL_OtBTzONf-F6_J33COrouE
+<<^ code="&#x0003;">>ni:///sha-256;ljwFgkCUyMbCKFxHlV-km_8v2cu14tNXH2JMg_C9Z7U
 
 <<^ code="&#x0004;" -> to=?>>

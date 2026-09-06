@@ -34,7 +34,7 @@ expectation.
 ''This memo holds no law.'' It records how a field of scattered research became an implementable
 architecture, and which of its bets the building honoured.
 
-<<~ ahu #phase-map>>
+<<~ ahu #/phase-map>>
 
 !! Phase Map
 
@@ -46,7 +46,7 @@ This file uses the OODA-HA loop as work discipline rather than ornament. The poi
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 ```toml
 name = "DreamNet_MemeWiki-observe"
@@ -90,7 +90,7 @@ Observe also keeps the absences visible:
 * no migration path yet for older HTML or widget-shaped content
 * no validated MemPalace bridge yet
 
-<<~ ahu #observe-ha>>
+<<~ ahu #/observe/observe-ha>>
 
 !!!! Observe / ha
 
@@ -100,7 +100,7 @@ The DreamNet MemeWiki research field is not one idea. It is a bundle of kernel q
 
 <<~/ahu>>
 
-<<~ ahu #observe-ka>>
+<<~ ahu #/observe/observe-ka>>
 
 !!!! Observe / ka
 
@@ -110,7 +110,7 @@ Read the current field in four lanes: deterministic kernel shape, authoring and 
 
 <<~/ahu>>
 
-<<~ ahu #observe-ba>>
+<<~ ahu #/observe/observe-ba>>
 
 !!!! Observe / ba
 
@@ -122,7 +122,7 @@ This stage should preserve uncertainty openly. A confident-sounding guess about 
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 ```toml
 name = "DreamNet_MemeWiki-orient"
@@ -174,7 +174,7 @@ Orient should keep the following tensions explicit:
 * how browser resume should package store payload, render state, and session information without leaking Kowloon assumptions back into the kernel
 * how older content migrates into memetic-wikitext without freezing the new grammar around legacy debt
 
-<<~ ahu #orient-ha>>
+<<~ ahu #/orient/orient-ha>>
 
 !!!! Orient / ha
 
@@ -184,7 +184,7 @@ DreamNet MemeWiki is currently best understood as a kernel-centered system with 
 
 <<~/ahu>>
 
-<<~ ahu #orient-ka>>
+<<~ ahu #/orient/orient-ka>>
 
 !!!! Orient / ka
 
@@ -194,7 +194,7 @@ Map each subsystem by ownership, not by enthusiasm. TLDraw should not own the co
 
 <<~/ahu>>
 
-<<~ ahu #orient-ba>>
+<<~ ahu #/orient/orient-ba>>
 
 !!!! Orient / ba
 
@@ -206,7 +206,7 @@ Favor the narrowest architecture that can still grow. The research points toward
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 ```toml
 name = "DreamNet_MemeWiki-decide"
@@ -253,7 +253,7 @@ Decide should keep these items deferred rather than pretending they are solved:
 * comprehensive migration tooling for legacy content
 * refresh and event semantics beyond the minimum viable kernel
 
-<<~ ahu #decide-ha>>
+<<~ ahu #/decide/decide-ha>>
 
 !!!! Decide / ha
 
@@ -263,7 +263,7 @@ The key settled claim is simple: build the kernel first, keep it greenfield, and
 
 <<~/ahu>>
 
-<<~ ahu #decide-ka>>
+<<~ ahu #/decide/decide-ka>>
 
 !!!! Decide / ka
 
@@ -273,7 +273,7 @@ Every active decision above changes implementation order immediately. Every expl
 
 <<~/ahu>>
 
-<<~ ahu #decide-ba>>
+<<~ ahu #/decide/decide-ba>>
 
 !!!! Decide / ba
 
@@ -285,7 +285,7 @@ Commit to the smallest decisions that unlock code. Refuse the larger decisions t
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 ```toml
 name = "DreamNet_MemeWiki-act"
@@ -341,7 +341,7 @@ holder with its own query contract, reached over MCP rather than bridged into th
 * [ ] canvas embed plus sync viability — unproven, and nothing now depends on it
 * [x] MemPalace and CRDT — the mesh carries the CRDT layer; MemPalace stands as its own holder
 
-<<~ ahu #act-ha>>
+<<~ ahu #/act/act-ha>>
 
 !!!! Act / ha
 
@@ -351,7 +351,7 @@ The workstreams are ordered so each later proof depends on earlier semantic stab
 
 <<~/ahu>>
 
-<<~ ahu #act-ka>>
+<<~ ahu #/act/act-ka>>
 
 !!!! Act / ka
 
@@ -361,7 +361,7 @@ If work begins on TLDraw or MemPalace before the kernel can parse and render det
 
 <<~/ahu>>
 
-<<~ ahu #act-ba>>
+<<~ ahu #/act/act-ba>>
 
 !!!! Act / ba
 
@@ -373,7 +373,7 @@ Prototype narrowly, verify hard, and only then widen scope. Each workstream shou
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 ```toml
 name = "DreamNet_MemeWiki-aftermath"
@@ -418,7 +418,7 @@ This `todo` locus should later split forward into stronger artifacts:
 
 The point of this file is not permanence. The point is orderly pressure toward the next lawful documents.
 
-<<~ ahu #aftermath-ha>>
+<<~ ahu #/aftermath/aftermath-ha>>
 
 !!!! Aftermath / ha
 
@@ -430,7 +430,7 @@ collaboration canvas ever earns a place beside them, since nothing has needed on
 
 <<~/ahu>>
 
-<<~ ahu #aftermath-ka>>
+<<~ ahu #/aftermath/aftermath-ka>>
 
 !!!! Aftermath / ka
 
@@ -442,7 +442,7 @@ are named as such rather than left to read as pending work.
 
 <<~/ahu>>
 
-<<~ ahu #aftermath-ba>>
+<<~ ahu #/aftermath/aftermath-ba>>
 
 !!!! Aftermath / ba
 
@@ -454,7 +454,7 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/parser>>
@@ -463,6 +463,6 @@ Leave the unresolved items visible and bounded. Hidden residue is how architectu
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;j15091rsqh1qWhXVwXebtxzF7tK2VaCio9Qj2_LPaJw
+<<^ code="&#x0003;">>ni:///sha-256;XrY_xBq-JbuYMPzxvASlMfyYvWQmPafHnoZsknocgQo
 
 <<^ code="&#x0004;" -> to=?>>

@@ -15,7 +15,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/tw5-browser-surface"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -44,7 +44,7 @@ these types without an explicit entry in `deletion-map.md`.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -52,6 +52,6 @@ these types without an explicit entry in `deletion-map.md`.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;80whNCMwfM_KkXWX-0Hj95wnrEQF_PvtDtvrTchVTAQ
+<<^ code="&#x0003;">>ni:///sha-256;-K5s_TY7l4yEEZRYhi8CDCUSXWmgL9lyJoD8uvAnK6U
 
 <<^ code="&#x0004;" -> to=?>>

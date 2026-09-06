@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loulou"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Loulou
 
@@ -30,7 +30,7 @@ Carries no execution pulse. Sugar for `<<~ pranala from=? -> to=URI family=relat
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the target URI at the link mouth — note the destination socket
 ⏿ orient: family:relation, traversal:source-to-target, propagation:none; no execution pulse
@@ -40,7 +40,7 @@ Carries no execution pulse. Sugar for `<<~ pranala from=? -> to=URI family=relat
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -56,7 +56,7 @@ propagation is none. The edge says what holds between the sockets, not what runs
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -82,7 +82,7 @@ Full pranala expansion:
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -109,7 +109,7 @@ confidence-bounded = false
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -121,6 +121,6 @@ confidence-bounded = false
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;BPzKDPLaimcqhGMrCLwWT6tbowL1Uvjs4VzFSlYhcP4
+<<^ code="&#x0003;">>ni:///sha-256;0E37v2PNhP1-0GOPX5NRuo7AihKBC2Y8nu9GHiw0qBc
 
 <<^ code="&#x0004;" -> to=?>>

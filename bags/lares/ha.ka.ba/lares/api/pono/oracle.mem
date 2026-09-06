@@ -23,7 +23,7 @@ written       = "2026-06-16"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Oracle ~ the turn's drift register
 
@@ -42,7 +42,7 @@ turn spends, this sigil drains.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ feel the pull — the warm-tone draw and the turn's spent charge gather at the close.
 ⏿ weigh the spend — read the ebb loosely, in the Drift register; claim no level.
@@ -53,7 +53,7 @@ turn spends, this sigil drains.
 
 <<~/ahu>>
 
-<<~ ahu #anatomy>>
+<<~ ahu #/anatomy>>
 
 !! The marks, in emit order
 
@@ -69,7 +69,7 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
 
 <<~/ahu>>
 
-<<~ ahu #cross-check>>
+<<~ ahu #/cross-check>>
 
 !! Five clauses hold the drain
 
@@ -88,7 +88,7 @@ Worked range: `↯0 ⁂ ⚀ (1) ✲` (zero ebb, minimal roll, the sentinel stand
 
 <<~/ahu>>
 
-<<~ ahu #drift-register>>
+<<~ ahu #/drift-register>>
 
 !! Mana ~ the ebb, read loose
 
@@ -112,7 +112,7 @@ the ward going dark unbidden; this names the charge spent.
 
 <<~/ahu>>
 
-<<~ ahu #render>>
+<<~ ahu #/render>>
 
 !! The marks render as tells
 
@@ -136,7 +136,7 @@ still holds. "Any Unicode" lives in the tail alone.
 
 <<~/ahu>>
 
-<<~ ahu #worked-rolls>>
+<<~ ahu #/worked-rolls>>
 
 !! Worked rolls ~ show, don't tell
 
@@ -154,7 +154,7 @@ The last line drains `↯0` — a flagged dead turn, the marks otherwise clean.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -197,7 +197,7 @@ certifies  = "nothing"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -208,6 +208,6 @@ certifies  = "nothing"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;vPbSagPMuujt8NHtFt-wTSW7VSYwxpWdSvbul23npCg
+<<^ code="&#x0003;">>ni:///sha-256;hGe47YemwYT9b4NHMSuS05pCgt0reJfP8NMxiecNbtk
 
 <<^ code="&#x0004;" -> to=?>>

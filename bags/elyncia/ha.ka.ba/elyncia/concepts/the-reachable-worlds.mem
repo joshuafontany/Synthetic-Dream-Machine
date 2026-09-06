@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/concepts/the-reachable-worlds"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Reachable Worlds
 
@@ -34,7 +34,7 @@ provenance and no local smith who can name the alloy.
 
 <<~/ahu>>
 
-<<~ ahu #the-dream-mirror>>
+<<~ ahu #/the-dream-mirror>>
 
 !! The Dream-Mirror ~ the doctrine already in the gazetteer
 
@@ -60,7 +60,7 @@ where the worlds touch, and therefore where the offcuts fall.
 
 <<~/ahu>>
 
-<<~ ahu #the-channels>>
+<<~ ahu #/the-channels>>
 
 !! Four Channels
 
@@ -80,7 +80,7 @@ where the worlds touch, and therefore where the offcuts fall.
 
 <<~/ahu>>
 
-<<~ ahu #the-wrack>>
+<<~ ahu #/the-wrack>>
 
 !! What Washes Up
 
@@ -108,7 +108,7 @@ from a world whose own age for it may have been last Tuesday. The Sea does not c
 
 <<~/ahu>>
 
-<<~ ahu #the-walkers>>
+<<~ ahu #/the-walkers>>
 
 !! Those Who Have Been
 
@@ -123,7 +123,7 @@ Mu'' file what can be filed. Between them sits everything neither will put in wr
 
 <<~/ahu>>
 
-<<~ ahu #referee>>
+<<~ ahu #/referee>>
 
 !! Referee Law
 
@@ -142,7 +142,7 @@ settled pet-name for the tideline of worlds yet.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-faerie-court-wars>>
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/the-fae-clans>>
@@ -151,6 +151,6 @@ settled pet-name for the tideline of worlds yet.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;i3lic-PixQ9NLk4t3CoC263IiRWQZY1mA0wH9nJesgk
+<<^ code="&#x0003;">>ni:///sha-256;J73c1yXqcay_ZeVE8n8YKXpNMfFb6hS3mb05xPQzyqQ
 
 <<^ code="&#x0004;" -> to=?>>

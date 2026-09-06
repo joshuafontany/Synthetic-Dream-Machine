@@ -24,7 +24,7 @@ written   = "2026-08-04"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Sensorium Runbook ~ the tending rite
 
@@ -49,7 +49,7 @@ the consecration. ''This one runs the daily offering.''
 
 <<~/ahu>>
 
-<<~ ahu #the-planes>>
+<<~ ahu #/the-planes>>
 
 !! Ⓐ Stand it up ~ sources become planes
 
@@ -124,7 +124,7 @@ and a base it does · ↻ L-Prime" >>
 
 <<~/ahu>>
 
-<<~ ahu #feed>>
+<<~ ahu #/feed>>
 
 !! Ⓑ Feed it ~ the cadence, and what starvation looks like first
 
@@ -145,7 +145,7 @@ information than a number would; a gauge that returned 0.0 against an unfed plan
 
 <<~/ahu>>
 
-<<~ ahu #read>>
+<<~ ahu #/read>>
 
 !! Ⓒ Read it ~ what a figure claims, and over what
 
@@ -176,7 +176,7 @@ fact about the world when it names a fact about a choice (#/capacity).
 
 <<~/ahu>>
 
-<<~ ahu #catastrophe>>
+<<~ ahu #/catastrophe>>
 
 !! Ⓓ Catastrophe & recovery ~ six drills, each with its detector
 
@@ -242,7 +242,7 @@ slightly off// long before it presents as a failure.
 
 <<~/ahu>>
 
-<<~ ahu #teardown>>
+<<~ ahu #/teardown>>
 
 !! Ⓔ Tear down & re-sweep ~ the deliberate reset
 
@@ -299,7 +299,7 @@ skipped silently is what the single door exists to prevent.
 
 <<~/ahu>>
 
-<<~ ahu #capacity>>
+<<~ ahu #/capacity>>
 
 !! Ⓕ Capacity & honest limits ~ what a reading CANNOT claim
 
@@ -355,7 +355,7 @@ stores do not have, and //burn// imports the opposite of what a teardown perform
 
 <<~/ahu>>
 
-<<~ ahu #reconstitution>>
+<<~ ahu #/reconstitution>>
 
 !! Ⓖ Reconstitution ~ what a stranger needs to stand this cold
 
@@ -372,7 +372,7 @@ a movement of this rite rather than a later courtesy:
 
 <<~/ahu>>
 
-<<~ ahu #surface-drift>>
+<<~ ahu #/surface-drift>>
 
 !! The two surfaces ~ how they slice
 
@@ -416,7 +416,7 @@ reports whether they carry a flow between them.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -430,6 +430,6 @@ reports whether they carry a flow between them.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;uoGsAw4Jyt5k0v3oJDbdr97sZcq95XXsizvuTH5yKcI
+<<^ code="&#x0003;">>ni:///sha-256;eB3mbzQg3p4580AYd_9VkaAek4iJmY-FtDIynbLq1Gg
 
 <<^ code="&#x0004;" -> to=?>>

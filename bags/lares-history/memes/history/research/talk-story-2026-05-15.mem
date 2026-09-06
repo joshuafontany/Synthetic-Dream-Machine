@@ -16,7 +16,7 @@ uri-path    = "memes/history/research/talk-story-2026-05-15"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Talk Story — 2026-05-15
 
@@ -35,7 +35,7 @@ UEFN SceneGraph Beta (June 2025); Visual Verse survey materials.
 
 <<~/ahu>>
 
-<<~ ahu #verse-ontology-research>>
+<<~ ahu #/verse-ontology-research>>
 
 !! Verse Ontology Research Findings
 
@@ -106,7 +106,7 @@ Full spec in `verse-event-lattice.md #unreleased-event-types`.
 
 <<~/ahu>>
 
-<<~ ahu #yin-collapse-ruling>>
+<<~ ahu #/yin-collapse-ruling>>
 
 !! Yin-Collapse Architectural Ruling
 
@@ -163,7 +163,7 @@ See `reaction-graph.md #yin-collapse-target` for full migration spec.
 
 <<~/ahu>>
 
-<<~ ahu #nalu-tick-split>>
+<<~ ahu #/nalu-tick-split>>
 
 !! Nalu / \Tick Semantic Split
 
@@ -195,7 +195,7 @@ Grammar stub registered: `sigil-tick.tid`.
 
 <<~/ahu>>
 
-<<~ ahu #voice-notes>>
+<<~ ahu #/voice-notes>>
 
 !! Voice Notes (abbreviated)
 
@@ -228,7 +228,7 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -242,6 +242,6 @@ not precede it. `\tick` and `\simulate` as stubs hold the space.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;BK7Ii-C1bgffjME9hPH-0Oev82OOY3FuW1QeugEaiII
+<<^ code="&#x0003;">>ni:///sha-256;Z6OHVo1D_kF9n5TsQteUoY53mnHH6w0lemW2Tk9RKvs
 
 <<^ code="&#x0004;" -> to=?>>

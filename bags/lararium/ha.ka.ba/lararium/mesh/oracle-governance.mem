@@ -43,7 +43,7 @@ governed ''read face'' named here projects that content for public verify-only s
 two name one `@oracle` seen two ways — no reader should mistake this board for a second
 `@oracle`.
 
-<<~ ahu #per-nexus-not-global>>
+<<~ ahu #/per-nexus-not-global>>
 
 !! Per-Nexus, Not One Global Board
 
@@ -67,7 +67,7 @@ address would not trigger anyway.
 
 <<~/ahu>>
 
-<<~ ahu #board-model>>
+<<~ ahu #/board-model>>
 
 !! The Board Model — Global Address, Local Causal State
 
@@ -101,7 +101,7 @@ IS the //liveness// coupling below.
 
 <<~/ahu>>
 
-<<~ ahu #steward-source-public-read>>
+<<~ ahu #/steward-source-public-read>>
 
 !! Steward SOURCE → Public READ Projection
 
@@ -130,7 +130,7 @@ authority over it.
 
 <<~/ahu>>
 
-<<~ ahu #three-couplings>>
+<<~ ahu #/three-couplings>>
 
 !! Three Couplings — Founder Seeds, Circle Governs, Fork Guards
 
@@ -157,7 +157,7 @@ board.
 
 <<~/ahu>>
 
-<<~ ahu #rendezvous-not-dht>>
+<<~ ahu #/rendezvous-not-dht>>
 
 !! Rendezvous, Not a DHT — the DreamNet answer to provider discovery
 
@@ -190,7 +190,7 @@ it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-disco
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/group-as-closure>>
@@ -203,6 +203,6 @@ it through a different door (<<~ loulou lar:///ha.ka.ba/lararium/docs/peer-disco
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;HwF9EFFBQcxurTMuFbYAhwsg7kDgH1tdx3u9xj9AYIM
+<<^ code="&#x0003;">>ni:///sha-256;ZjTHWtzXed5DNyvsSJxhTmvfV0ywts-Qrvz1umpFsXk
 
 <<^ code="&#x0004;" -> to=?>>

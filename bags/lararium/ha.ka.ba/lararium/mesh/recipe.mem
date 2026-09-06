@@ -16,7 +16,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/recipe"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -38,7 +38,7 @@ island mounts from.
 
 <<~/ahu>>
 
-<<~ ahu #where-recipes-live>>
+<<~ ahu #/where-recipes-live>>
 
 !! Where recipes live — two planes (operator ruling, 2026-06-16)
 
@@ -68,7 +68,7 @@ class, where the alert stays the permanent mechanism.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -78,6 +78,6 @@ class, where the alert stays the permanent mechanism.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1UT0dr0oavx6noWUTcRFG1OkK8MmbFl0M8sSyuobD0k
+<<^ code="&#x0003;">>ni:///sha-256;Rd332pfEzMmtIDhd9BNUKkxkor0SY28SmwPCRjwKm9g
 
 <<^ code="&#x0004;" -> to=?>>

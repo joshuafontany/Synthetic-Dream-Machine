@@ -30,7 +30,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/meme/SKILL"
 This skill carries the working procedure.
 
 
-<<~ ahu #load-contract>>
+<<~ ahu #/load-contract>>
 
 !! Load Contract
 
@@ -45,7 +45,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu>>
 
-<<~ ahu #workflow-contract>>
+<<~ ahu #/workflow-contract>>
 
 !! Workflow Contract
 
@@ -75,7 +75,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -95,7 +95,7 @@ Prefer another surface when the work concerns only:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the carrier in document order and observe what shape actually lands on the page
 ⏿ sort required shape from optional depth without collapsing subtype law into meme law
@@ -105,7 +105,7 @@ Prefer another surface when the work concerns only:
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -127,7 +127,7 @@ Preserve the difference between absent, stubbed, and filled surfaces.
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -149,7 +149,7 @@ Orientation rule:
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -172,7 +172,7 @@ Do not round up.
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -199,7 +199,7 @@ When writing or revising:
 [One to three sentences naming scope and boundary.]
 
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 ✶ [observe pressure]
 ⏿ [orient pressure]
 ◇ [decide pressure]
@@ -208,7 +208,7 @@ When writing or revising:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 ## Edges
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/memetic-wikitext>>
@@ -224,7 +224,7 @@ When writing or revising:
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! ↺ Aftermath
 
@@ -250,7 +250,7 @@ Aftermath — close by naming:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -259,6 +259,6 @@ Aftermath — close by naming:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;PZ-4397GY41KrBxPItE5HOvbCxZTclKPqBwLABWdEwE
+<<^ code="&#x0003;">>ni:///sha-256;H_NaXteAAOr0uNzVcO9VpaUK_UUyY7nzEBbNqBU-Xe4
 
 <<^ code="&#x0004;" -> to=?>>

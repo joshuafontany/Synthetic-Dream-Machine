@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/reaction-protocol"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Reaction Graph
 
@@ -38,7 +38,7 @@ The production dispatch path runs through `reaction-router.ts` (nalu-driven).
 
 <<~/ahu>>
 
-<<~ ahu #exports>>
+<<~ ahu #/exports>>
 
 !! Exports
 
@@ -120,7 +120,7 @@ All extracted bindings carry `source: "wired"`.
 
 <<~/ahu>>
 
-<<~ ahu #update-invariant>>
+<<~ ahu #/update-invariant>>
 
 !! Update Invariant
 
@@ -134,7 +134,7 @@ This preserves in-flight kukali suspensions across TW5 wiki-change events (nalu 
 
 <<~/ahu>>
 
-<<~ ahu #production-dispatch-path>>
+<<~ ahu #/production-dispatch-path>>
 
 !! Production Dispatch Path
 
@@ -159,7 +159,7 @@ appears in production paths.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -170,6 +170,6 @@ appears in production paths.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0bgxrPCAUnl_W_b3n0d1Jw5__3lc3dhFuCZrMZdr0Gs
+<<^ code="&#x0003;">>ni:///sha-256;mY6a4QuDYjp-q0u08zGjRE9HvypDST8dRe-ByjYTfHE
 
 <<^ code="&#x0004;" -> to=?>>

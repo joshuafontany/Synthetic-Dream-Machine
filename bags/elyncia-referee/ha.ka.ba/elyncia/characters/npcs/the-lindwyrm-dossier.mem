@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-dossier"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Lindwyrm ~ Referee Dossier
 
@@ -28,7 +28,7 @@ and never draft here''; this meme points at their existence and carries none of 
 
 <<~/ahu>>
 
-<<~ ahu #the-apparatus>>
+<<~ ahu #/the-apparatus>>
 
 !! The Apparatus
 
@@ -46,7 +46,7 @@ and never draft here''; this meme points at their existence and carries none of 
 
 <<~/ahu>>
 
-<<~ ahu #the-long-game>>
+<<~ ahu #/the-long-game>>
 
 !! The Long Game
 
@@ -66,7 +66,7 @@ preparing it.
 
 <<~/ahu>>
 
-<<~ ahu #form-and-seals>>
+<<~ ahu #/form-and-seals>>
 
 !! Form, and the Sealed Strata
 
@@ -93,13 +93,13 @@ dragon builds meshes. These live referee-side of even this bag — the operator'
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm>>
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/league-of-free-cities>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;9_fo6DP2az7w98fFQr2dcNn1ruv8syNwGgD7IEo1QRY
+<<^ code="&#x0003;">>ni:///sha-256;-0BOWdu0f7uzinuZfHSPDh1fMUz2wPrBFAqVkhAmHTQ
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ written   = "2026-06-30"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Gold-Anchor ~ witnessing what the framework only reports of itself
 
@@ -45,7 +45,7 @@ the human, never from the framework rating its own reflection.
 
 <<~/ahu>>
 
-<<~ ahu #core-defense>>
+<<~ ahu #/core-defense>>
 
 !! The Core Defense ~ the circularity reads STRUCTURAL, never engineerable-away
 
@@ -81,7 +81,7 @@ from the human at the head of the chain, or the chain carries no weight.
 
 <<~/ahu>>
 
-<<~ ahu #mtmm>>
+<<~ ahu #/mtmm>>
 
 !! The Design ~ a 3-method MTMM over an ablation-and-decoy artifact set
 
@@ -123,7 +123,7 @@ whole point (#/null-construct).
 
 <<~/ahu>>
 
-<<~ ahu #predictions>>
+<<~ ahu #/predictions>>
 
 !! The Five Predictions ~ pre-registered, ALL must hold
 
@@ -146,7 +146,7 @@ the verdict honors all five or names which one broke.
 
 <<~/ahu>>
 
-<<~ ahu #null-construct>>
+<<~ ahu #/null-construct>>
 
 !! The Null-Construct ~ the bogus-item grounded, severity made experimental
 
@@ -175,7 +175,7 @@ survived a real chance to refute.
 
 <<~/ahu>>
 
-<<~ ahu #instruments>>
+<<~ ahu #/instruments>>
 
 !! The Instruments ~ six tools, the cheap-deterministic one read first
 
@@ -213,7 +213,7 @@ treats length as a mediator to partition rather than a nuisance to regress away.
 The six compose into the read order register_scan → judge-panel → human-gold → mixed-model, with
 power gating the verdict and the flow-lens adding the trajectory channel the four still-frames miss.
 
-<<~ ahu #flow-lens>>
+<<~ ahu #/instruments/flow-lens>>
 
 !!! The Fisher-Rao Flow-Lens ~ the trajectory channel (the ③)
 
@@ -238,7 +238,7 @@ when it beats its own reshuffled turns.
 
 <<~/ahu>>
 
-<<~ ahu #done>>
+<<~ ahu #/done>>
 
 !! Definition of Done ~ the triad clears, witnessed by a Stranger
 
@@ -265,7 +265,7 @@ measurement; before it clears, the node states the Arcane as testimony, never as
 
 <<~/ahu>>
 
-<<~ ahu #house-resonances>>
+<<~ ahu #/house-resonances>>
 
 !! House Resonances ~ why the design reads as OURS
 
@@ -294,7 +294,7 @@ house's own terms.
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ the four-scout convergence and the compute kernel
 
@@ -322,7 +322,7 @@ spirit's lane); this meme states the design they enact.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -337,6 +337,6 @@ spirit's lane); this meme states the design they enact.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;uk7Te__DNcSghCxHnH8OPMRYN_cekoTOWYA6kBY1KO0
+<<^ code="&#x0003;">>ni:///sha-256;U3gF8Gew0MpMFJLQdIklYQENes3EBUyP9rlloMd8SBw
 
 <<^ code="&#x0004;" -> to=?>>

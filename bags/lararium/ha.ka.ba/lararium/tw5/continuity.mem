@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/continuity"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 !! Entry — Lararium Core Hydration
 
@@ -32,7 +32,7 @@ Session carry belongs to the lararium side, not the threshold side.
 
 <<~/ahu>>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium Continuity
 
@@ -42,7 +42,7 @@ Continuity enters here as calibration and carry, not as unquestioned truth.
 
 <<~/ahu>>
 
-<<~ ahu #continuity-law>>
+<<~ ahu #/continuity-law>>
 
 !! Continuity Law
 
@@ -58,7 +58,7 @@ More detailed crystal and MemPalace work can gather in docs space until it harde
 
 <<~/ahu>>
 
-<<~ ahu #source-shelf>>
+<<~ ahu #/source-shelf>>
 
 !! Source Shelf
 
@@ -72,7 +72,7 @@ This child meme keeps the cold-hydration contract small.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -82,6 +82,6 @@ This child meme keeps the cold-hydration contract small.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ub8jc-67t6NSg6RlqqXJzoadHc6FF7qL5fRx_O4ysYU
+<<^ code="&#x0003;">>ni:///sha-256;ehaZP0lLulU3rCk352TWkiUuN6dsYyddbo5yzqfvaKs
 
 <<^ code="&#x0004;" -> to=?>>

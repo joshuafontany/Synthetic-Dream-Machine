@@ -22,7 +22,7 @@ written   = "2026-06-25"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Async Flows ~ timing insight for human and agent
 
@@ -38,7 +38,7 @@ and `lares` already owns all three pieces: a ''daemon-job model'' (submit→id�
 
 <<~/ahu>>
 
-<<~ ahu #the-contract>>
+<<~ ahu #/the-contract>>
 
 !! The Contract ~ four verbs over the request-id
 
@@ -60,7 +60,7 @@ Precedent: `gh run watch --exit-status`, `kubectl wait --for=condition --timeout
 
 <<~/ahu>>
 
-<<~ ahu #the-job-machine>>
+<<~ ahu #/the-job-machine>>
 
 !! The Job Machine ~ five states, terminal-once
 
@@ -74,7 +74,7 @@ shape). The result is fetched after terminal, by id.
 
 <<~/ahu>>
 
-<<~ ahu #dual-surface>>
+<<~ ahu #/dual-surface>>
 
 !! The Dual Surface ~ one event stream, two projections
 
@@ -98,7 +98,7 @@ One progress event stream; the existing renderer splits it:
 
 <<~/ahu>>
 
-<<~ ahu #progress-eta>>
+<<~ ahu #/progress-eta>>
 
 !! Progress & ETA
 
@@ -111,7 +111,7 @@ One progress event stream; the existing renderer splits it:
 
 <<~/ahu>>
 
-<<~ ahu #timeouts-cancel-resume>>
+<<~ ahu #/timeouts-cancel-resume>>
 
 !! Timeouts · Cancellation · Resumability
 
@@ -131,7 +131,7 @@ One progress event stream; the existing renderer splits it:
 
 <<~/ahu>>
 
-<<~ ahu #agent-ergonomics>>
+<<~ ahu #/agent-ergonomics>>
 
 !! Agent Ergonomics ~ never block the agent's context
 
@@ -144,7 +144,7 @@ One progress event stream; the existing renderer splits it:
 
 <<~/ahu>>
 
-<<~ ahu #map-and-backlog>>
+<<~ ahu #/map-and-backlog>>
 
 !! Map to Our Infra + Backlog
 
@@ -165,7 +165,7 @@ write toward, not a description of current emission.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -175,6 +175,6 @@ write toward, not a description of current emission.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LbetvmK78Ual9lN0HcK8xVy7M-a8BtBhu7NJzEGnfJ4
+<<^ code="&#x0003;">>ni:///sha-256;dBrKaBflLl833GbXmCgIg_RL7F31eZHvKGuY8OzNQNg
 
 <<^ code="&#x0004;" -> to=?>>

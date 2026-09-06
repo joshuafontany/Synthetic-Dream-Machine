@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/degraded-epistemic-weather"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Degraded Epistemic Weather — Staging Shelf
 
@@ -26,7 +26,7 @@ This room holds the old failure-language that names how epistemic discipline dec
 
 <<~/ahu>>
 
-<<~ ahu #plan>>
+<<~ ahu #/plan>>
 
 !! Plan Skeleton
 
@@ -44,7 +44,7 @@ Current comparison surfaces:
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-core-degraded>>
+<<~ ahu #/verbatim-core-degraded>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Degraded States Context
 
@@ -64,7 +64,7 @@ Current comparison surfaces:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -75,6 +75,6 @@ Current comparison surfaces:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LG9U_bYSqR4cPYESLCPLF9Mck92wYWhCdPb1y5KoV-A
+<<^ code="&#x0003;">>ni:///sha-256;-dNc8L2o7_U1Pxk-1CJtZUu9mNiy1KasBpruKUkYmcY
 
 <<^ code="&#x0004;" -> to=?>>

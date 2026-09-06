@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/campaign/salt-stair-booth"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Salt-Stair Booth — Thread Outline & Style Guide
 
@@ -39,7 +39,7 @@ its room.
 
 <<~/ahu>>
 
-<<~ ahu #inherits>>
+<<~ ahu #/inherits>>
 
 !! Format Inheritance ~ the feed law carries whole
 
@@ -58,7 +58,7 @@ present. No peanut gallery past the veil.
 
 <<~/ahu>>
 
-<<~ ahu #witness-stamp-law>>
+<<~ ahu #/witness-stamp-law>>
 
 !! The Witness Stamp ~ YOLD as provisional witness, no global now
 
@@ -82,7 +82,7 @@ Laws:
 
 <<~/ahu>>
 
-<<~ ahu #strata>>
+<<~ ahu #/strata>>
 
 !! Two Strata ~ the rating ladder enforces the veil
 
@@ -107,7 +107,7 @@ now sits at render time.
 
 <<~/ahu>>
 
-<<~ ahu #outline>>
+<<~ ahu #/outline>>
 
 !! The Thread, Beat by Beat
 
@@ -143,7 +143,7 @@ now sits at render time.
 
 <<~/ahu>>
 
-<<~ ahu #the-thread>>
+<<~ ahu #/the-thread>>
 
 !! The Thread ~ verbatim, with interpretive segues
 
@@ -382,7 +382,7 @@ belongs to the house's own record, not the booth's.
 
 <<~/ahu>>
 
-<<~ ahu #shadowtalk-render>>
+<<~ ahu #/shadowtalk-render>>
 
 !! The Thread, Rendered ~ shadowtalk style
 
@@ -490,7 +490,7 @@ only currency the small shrines have ever accepted at face value.
 
 <<~/ahu>>
 
-<<~ ahu #shadowtalk-unsealed>>
+<<~ ahu #/shadowtalk-unsealed>>
 
 !! The Booth, Unsealed ~ the log behind the static
 
@@ -581,7 +581,7 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu>>
 
-<<~ ahu #style>>
+<<~ ahu #/style>>
 
 !! Style Notes ~ scene-specific registers
 
@@ -601,7 +601,7 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu>>
 
-<<~ ahu #open-forks>>
+<<~ ahu #/open-forks>>
 
 !! Open Forks (operator's hand)
 
@@ -613,7 +613,7 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/dreamdeck-feed-architecture>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/index>>
@@ -622,6 +622,6 @@ pilgrim or the perfect gathering-vessel, and the masks he meets will have opinio
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tSVfDNoqZEBPUS_d9N5i9Tq1vRA7T8MxyKvX26SL2UY
+<<^ code="&#x0003;">>ni:///sha-256;crC9aFl0gl4QpZyTo0jE4u1H2W_lsTo-ga3TfEbKlm8
 
 <<^ code="&#x0004;" -> to=?>>

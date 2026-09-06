@@ -20,7 +20,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/multi-fractal"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Multi-Fractal
 
@@ -30,7 +30,7 @@ The house keeps standing in this shape at every plane. Name it once; recognize i
 
 <<~/ahu>>
 
-<<~ ahu #instances>>
+<<~ ahu #/instances>>
 
 !! The Five Instances (PENTADIC)
 
@@ -46,7 +46,7 @@ Five instances, no sixth straining for room (#PENTA_1). A cluster that demands a
 
 <<~/ahu>>
 
-<<~ ahu #laws>>
+<<~ ahu #/laws>>
 
 !! The Two Laws That Make It Load-Bearing
 
@@ -56,7 +56,7 @@ Five instances, no sixth straining for room (#PENTA_1). A cluster that demands a
 
 <<~/ahu>>
 
-<<~ ahu #test>>
+<<~ ahu #/test>>
 
 !! The Test
 
@@ -76,7 +76,7 @@ A structure that merges the instances into ONE shared graph (sovereignty fused, 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/system-pattern-integrities>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/l-space>>
 
-<<~ ahu #why-it-recurses>>
+<<~ ahu #/why-it-recurses>>
 
 !! Why it recurses ~ each rung answers a capture the rung below cannot
 
@@ -94,6 +94,6 @@ The shape above says the recursion happens. This says WHY it must.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;pKojumcRLKtlO0mu8GPwF7eZIk2NdFa5sbfS8o2RTGI
+<<^ code="&#x0003;">>ni:///sha-256;IocwmlRA7ESx3chZqUy9leTXU-7a98o0nIAJ6s4ywqE
 
 <<^ code="&#x0004;" -> to=?>>

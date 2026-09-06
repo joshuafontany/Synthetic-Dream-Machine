@@ -19,7 +19,7 @@ uri-path       = "ha.ka.ba/lares/api/pono/meme"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Meme Law (Kānāwai)
 
@@ -38,7 +38,7 @@ through a social network.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the surface in document order; detect identity, thresholds, phases, edges, and residue before judgment lands.
 ⏿ orient each finding against the copy-shape; required structure, optional depth, and outward type laws stay distinct.
@@ -50,7 +50,7 @@ through a social network.
 
 <<~/ahu>>
 
-<<~ ahu #copy-shape>>
+<<~ ahu #/copy-shape>>
 
 !! Copy-Shape Law
 
@@ -79,7 +79,7 @@ Optional depth raises yield; it does not replace the minimum shape.
 
 <<~/ahu>>
 
-<<~ ahu #retirement>>
+<<~ ahu #/retirement>>
 
 !! Retirement ~ deprecate, never redefine, and the CADENCE scopes it
 
@@ -97,7 +97,7 @@ Optional depth raises yield; it does not replace the minimum shape.
 
 <<~/ahu>>
 
-<<~ ahu #rating-posture>>
+<<~ ahu #/rating-posture>>
 
 !! Rating Posture
 
@@ -118,7 +118,7 @@ Subtype predicates belong in the component definitions themselves.
 
 <<~/ahu>>
 
-<<~ ahu #depth-and-resolution>>
+<<~ ahu #/depth-and-resolution>>
 
 !! Depth and Resolution
 
@@ -137,7 +137,7 @@ Use outward callouts only when they carry real pressure, real backlog, or real a
 
 <<~/ahu>>
 
-<<~ ahu #handoff-boundary>>
+<<~ ahu #/handoff-boundary>>
 
 !! Handoff Boundary
 
@@ -155,7 +155,7 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -170,6 +170,6 @@ Procedure, skeleton blocks, conformance checklists, and research backlog move ou
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZlY4Ser3ZnjC5evOtL5DI35LYb2StcGnHvk3sjvprRg
+<<^ code="&#x0003;">>ni:///sha-256;kQ2TNaj_cuSt59cgpyy5hBqxTokd7o7HttoeGUGpQVI
 
 <<^ code="&#x0004;" -> to=?>>

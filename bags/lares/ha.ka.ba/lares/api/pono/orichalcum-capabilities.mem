@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/orichalcum-capabilities"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Orichalcum Capabilities
 
@@ -27,7 +27,7 @@ Authority gate for wiki islands, edge islands, and canon MOVE.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the capability shape — who grants, who receives, what resource, what abilities, what caveats
 ⏿ orient the authority ladder: pull/read/write/sync/admin/delegate; locate the principal types
@@ -37,7 +37,7 @@ Authority gate for wiki islands, edge islands, and canon MOVE.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -55,7 +55,7 @@ Authority travels with the graph. Authority MUST hold in the graph, beyond crypt
 
 <<~/ahu>>
 
-<<~ ahu #principal>>
+<<~ ahu #/principal>>
 
 !! Principal Shapes
 
@@ -79,7 +79,7 @@ These are not the same object. Keep device identity below operator identity.
 
 <<~/ahu>>
 
-<<~ ahu #ability-ladder>>
+<<~ ahu #/ability-ladder>>
 
 !! Ability Ladder
 
@@ -127,7 +127,7 @@ federable-ratings = ["meme", "ano", "kapu"]
 
 <<~/ahu>>
 
-<<~ ahu #caveats>>
+<<~ ahu #/caveats>>
 
 !! Lararium Caveats
 
@@ -214,7 +214,7 @@ min_manaoio_move     = 16
 
 <<~/ahu>>
 
-<<~ ahu #gate-points>>
+<<~ ahu #/gate-points>>
 
 !! Capability Gate Points
 
@@ -235,7 +235,7 @@ Gate failures at steps 5–6 reject the operation and emit a refusal receipt.
 
 <<~/ahu>>
 
-<<~ ahu #documents-as-groups>>
+<<~ ahu #/documents-as-groups>>
 
 !! Documents as Groups
 
@@ -267,7 +267,7 @@ No global ACL owns these. Authority travels with the graph. Each object owns its
 
 <<~/ahu>>
 
-<<~ ahu #ucan-posture>>
+<<~ ahu #/ucan-posture>>
 
 !! UCAN Posture
 
@@ -290,13 +290,13 @@ the crypto gate, not instead of it.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/federated-causal-islands>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/research-streams>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;A_MGP-ix7tmDkxmBCVv6DQ0FJWf3N8d4fT97NPGPrlY
+<<^ code="&#x0003;">>ni:///sha-256;k3gwOV0KjkUq4k5QShHW4SLymfdbrLWQJEKQhhrAvvk
 
 <<^ code="&#x0004;" -> to=?>>

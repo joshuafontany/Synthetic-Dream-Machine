@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/the-lifts"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Mana Lifts
 
@@ -35,6 +35,6 @@ politics.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;hiJn-a2NsuZ-BP-E24t2Ny1Q9ncrKKe9MgkVq_k0vq0
+<<^ code="&#x0003;">>ni:///sha-256;KkFkcV0unULpDjZ1CCv2mZLnqD6KLnKCUbygdOp6pz4
 
 <<^ code="&#x0004;" -> to=?>>

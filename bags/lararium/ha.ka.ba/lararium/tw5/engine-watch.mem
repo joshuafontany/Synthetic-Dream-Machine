@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/engine-watch"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #change-classes>>
+<<~ ahu #/change-classes>>
 
 !! The two change classes
 
@@ -37,7 +37,7 @@ protocol — permanent mechanism, not interim UX.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -59,7 +59,7 @@ unsubscribes.
 
 <<~/ahu>>
 
-<<~ ahu #invariants>>
+<<~ ahu #/invariants>>
 
 !! Invariants
 
@@ -104,7 +104,7 @@ only. The running engine still swaps only on reboot (EW-2).
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -116,6 +116,6 @@ only. The running engine still swaps only on reboot (EW-2).
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CjjA23ZfECnzGpdZU429wjlH9jEcVgaSeTRO35HdxZ4
+<<^ code="&#x0003;">>ni:///sha-256;zs2cAtgQZlGGId6X4tcgYbrVdYo5TIqpz6W5eI1kHNQ
 
 <<^ code="&#x0004;" -> to=?>>

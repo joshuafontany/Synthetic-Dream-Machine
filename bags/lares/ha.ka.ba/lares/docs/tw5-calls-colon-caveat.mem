@@ -20,7 +20,7 @@ uri-path   = "ha.ka.ba/lares/docs/tw5-calls-colon-caveat"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Calls ~ an unquoted value carrying a colon
 
@@ -30,7 +30,7 @@ uri-path   = "ha.ka.ba/lares/docs/tw5-calls-colon-caveat"
 
 <<~/ahu>>
 
-<<~ ahu #the-claim>>
+<<~ ahu #/the-claim>>
 
 !! The claim being corrected
 
@@ -44,7 +44,7 @@ That last sentence promises more than the grammar allows, and the gap stays sile
 
 <<~/ahu>>
 
-<<~ ahu #the-change>>
+<<~ ahu #/the-change>>
 
 !! The proposed change
 
@@ -69,7 +69,7 @@ parameter name — `<<my-procedure address=https://example.com>>` — where no q
 
 <<~/ahu>>
 
-<<~ ahu #for-the-reviewer>>
+<<~ ahu #/for-the-reviewer>>
 
 !! Notes for the reviewer
 
@@ -79,7 +79,7 @@ The `name=value` form asks the least of an author, since it drops the quoting en
 
 <<~/ahu>>
 
-<<~ ahu #measured>>
+<<~ ahu #/measured>>
 
 !! Measured
 
@@ -97,13 +97,13 @@ A time of day trips the case a URI trips, so the warning leads with the general 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/relational-parameter>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;N4M_3Uk8YVqlRv_Nzpz4VNavc4AtG63kP2YjsIYsINY
+<<^ code="&#x0003;">>ni:///sha-256;MlkLqRmErlF8RcdHUtX-M5-8_yzJNfoj7c6KrBBvj2k
 
 <<^ code="&#x0004;" -> to=?>>

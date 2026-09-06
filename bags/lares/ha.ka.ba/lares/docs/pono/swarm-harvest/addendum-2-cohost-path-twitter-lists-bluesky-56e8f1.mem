@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/addendum-2-cohost-path-twitt
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! ADDENDUM 2 — Cohost, Path, Twitter Lists, Bluesky
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 19,191 characters
 
@@ -218,7 +218,7 @@ The capability existed for seven years at W3C Recommendation grade, was designed
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 15,492 characters
 
@@ -354,7 +354,7 @@ Kinds include `kind:30000` **Follow sets**, `kind:30002` **Relay sets** — and 
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 15,267 characters
 
@@ -491,12 +491,12 @@ I could not locate a primary source. Checked: TechCrunch 2011-09-08 Smart Lists 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CqskinykMihEu70SlofynEqwWX7_y4UjfG_g5llBXUY
+<<^ code="&#x0003;">>ni:///sha-256;sYmT4BLEdIWLJeaN3TPUexpKz525h_aR6yZltXr9JFs
 
 <<^ code="&#x0004;" -> to=?>>

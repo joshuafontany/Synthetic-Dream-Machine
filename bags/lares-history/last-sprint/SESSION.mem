@@ -181,7 +181,7 @@ Global terminology alignment: every occurrence of the concept "room" as a _wiki 
 
 ''Build result:'' `pnpm -r build` clean, zero TypeScript errors. `.lararium/` wiped for re-init.
 
-''OODA-HA orient — next task:'' Smoke J.3 child co-promotion with the live test artifact at `wikis/altar-fire/memes/docs/lares/the-lares-protocols.md`. This file contains multiple `<<~ ahu #slot>>` blocks. `lares wiki sync altar-fire` → `lares act MOVE ... --to lar:///ha.ka.ba/bags/lares --yes` should land _both_ the parent _and_ each `#fragment` child in `packages/lares-core/memes/docs/lares/the-lares-protocols/`. J.3 implement → smoke → verify.
+''OODA-HA orient — next task:'' Smoke J.3 child co-promotion with the live test artifact at `wikis/altar-fire/memes/docs/lares/the-lares-protocols.md`. This file contains multiple `<<~ ahu #/slot>>` blocks. `lares wiki sync altar-fire` → `lares act MOVE ... --to lar:///ha.ka.ba/bags/lares --yes` should land _both_ the parent _and_ each `#fragment` child in `packages/lares-core/memes/docs/lares/the-lares-protocols/`. J.3 implement → smoke → verify.
 
 ---
 
@@ -200,7 +200,7 @@ Two commits:
 # `lares serve` → daemon up, Keyhive initialized
 # `lares wiki sync altar-fire` → `ingested: 1` — disk file landed in room bag; `splitRecursive` created parent + N child tiddlers in bag
 # `lares act MOVE lar:///ha.ka.ba/lares/docs/the-lares-protocols --to lar:///ha.ka.ba/bags/lares --yes` → ceremony clean; audit tiddler written
-# Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #slot>>` refs — ''but no child slot files''
+# Promoted parent file appeared in `packages/lares-core/memes/docs/lares/the-lares-protocols.md` with correct `<<~ kahea ahu #/slot>>` refs — ''but no child slot files''
 
 ''Gap named (J.3):'' `lares act MOVE` is single-URI. `splitRecursive` creates `#fragment` child tiddlers in the bag alongside the parent, but the promote handler moves only the parent URI. Children stay in the room bag; disk projector for the canonical bag writes only what's in that bag. The parent renders correctly (always-split, always-kahea); the child meme files never land in `packages/lares-core/memes/`. The fix: promote handler must walk `#fragment` children of the promoted parent and co-promote them in the same ceremony. Named J.3 — recursive promote / child co-promotion.
 
@@ -274,7 +274,7 @@ One commit (`0adc3697` E.10.13) retired two architectural debts in a single swin
 
 ''Build/test posture:'' `pnpm build` clean, `pnpm test` 52/52 passing, plugin tiddler regenerates deterministically.
 
-''Outstanding (smoke next):'' boot the Node daemon, verify the plugin tiddler unpacks via the standard loader, exercise an ahu round-trip with the cascade-resolved markdown-meme template (expected emission: `<<~ kahea ahu #slot>>` per always-split-always-kahea law). Until smoke runs once, build/type/unit-test-green is necessary but not sufficient.
+''Outstanding (smoke next):'' boot the Node daemon, verify the plugin tiddler unpacks via the standard loader, exercise an ahu round-trip with the cascade-resolved markdown-meme template (expected emission: `<<~ kahea ahu #/slot>>` per always-split-always-kahea law). Until smoke runs once, build/type/unit-test-green is necessary but not sufficient.
 
 ---
 
@@ -297,7 +297,7 @@ Two layers of work landed: (a) yin-mode architectural collapse driven by web-res
 | `99530399` E.10.12 (Path V.1) | Vite plugin config + build script ship `dist-plugin/lares-memetic-wikitext.tid` (71.3 KiB drag-and-drop artifact). |
 
 ''Architecture invariant established (operator-confirmed):''
-** ''Always-split, always-kahea.'' Deserializer + `<$lar-meme-split>` widget split every ahu sigil into its own tiddler at sync/save time. Parent text always carries `<<~ kahea ahu #slot>>` references for slot children. Disk emission canonical: parent file + N child files.
+** ''Always-split, always-kahea.'' Deserializer + `<$lar-meme-split>` widget split every ahu sigil into its own tiddler at sync/save time. Parent text always carries `<<~ kahea ahu #/slot>>` references for slot children. Disk emission canonical: parent file + N child files.
 ** ''Single source of truth.'' ahu scanner + control-slot set + slot-path composer live in `@lararium/mesh/meme-ast/ahu-scan.ts`. Three callers (deserializer, action widget, wikirule) import from there. Drift = bug.
 ** ''Roslyn / recast / XInclude consensus'': serialization is a function of the tree, never of external metadata. Tag-driven discrimination (the `$:/tags/Lar/MemeRoot`-gated cascade) was the named anti-pattern; eliminated in E.10.9.
 ** ''Drag-and-drop ecosystem play.'' `dist-plugin/lares-memetic-wikitext.tid` (V.1) installs in any TW5 5.4+ wiki; gives memetic-wikitext authoring + export without lararium-node infrastructure. Bidirectional: operators can author in vanilla TW5, export to .md, ingest into lararium. Same plugin code in both.
@@ -1103,6 +1103,6 @@ Both questions surface before S9 (lararium-browser) and should inform the
 * `packages/lararium-mesh/src/capability.ts` — NEW; `buildDeviceDelegation`, `verifyDeviceDelegation` (S7.1)
 * `packages/lares-core/memes/api/lares/voices.md` — spec-shelf links need companion docs: `docs/lares/voices/coordinators`, `/workers`, `/masks`
 
-<<^ code="&#x0003;">>ni:///sha-256;dA7foQgxaFAzYKTnzujR3Vg1EgYNxHdYecFGsYVXTB4
+<<^ code="&#x0003;">>ni:///sha-256;dej8YxJ7N0t1l1Nb-zLLTpE4y-jTFh_jnfXDvah9Fzk
 
 <<^ code="&#x0004;" -> to=?>>

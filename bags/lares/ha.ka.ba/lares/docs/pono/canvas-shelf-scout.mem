@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shelf-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Cartwright ~ a spirit's handoff, held unedited
 
@@ -33,7 +33,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/canvas-shelf-scout"
 
 <<~/ahu>>
 
-<<~ ahu #the-handoff>>
+<<~ ahu #/the-handoff>>
 
 !! The handoff, verbatim
 
@@ -329,6 +329,6 @@ I read the source. `FolkSpace` is a **plain Web Component** — `folk-space` —
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;">>ni:///sha-256;64-rpYhVCzot4rMpkrady6uJHZUJOd45AEV_2xN-Dk0
+<<^ code="&#x0003;">>ni:///sha-256;xmLzGxq7XEtAkxtlVtEZuORyvxjoiTpD7YVyP5DMQ4g
 
 <<^ code="&#x0004;" -> to=?>>

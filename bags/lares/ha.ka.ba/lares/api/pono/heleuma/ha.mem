@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma/ha"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Heleuma-Ha (Body / Structure)
 
@@ -27,7 +27,7 @@ A heleuma-ha anchor exists outside the `lar:///` corpus ''by nature, not by stag
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ locate the compiled artifact and confirm it is structural territory, not a traveling soul.
 ⏿ orient: does removing it break the containing form? If yes, this is ha.
@@ -37,7 +37,7 @@ A heleuma-ha anchor exists outside the `lar:///` corpus ''by nature, not by stag
 
 <<~/ahu>>
 
-<<~ ahu #required-fields>>
+<<~ ahu #/required-fields>>
 
 !! Required Fields (SHALL)
 
@@ -53,10 +53,10 @@ It SHALL NOT declare `body-sha256` — ha does not promote.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UcJCmeLRWCCttbs9IvyRl53ztjGw1s-OT17ymyUnlA4
+<<^ code="&#x0003;">>ni:///sha-256;5hSHUETly2XFt5n8zelcnCRdlEOYabFJPQC5F94_vqE
 
 <<^ code="&#x0004;" -> to=?>>

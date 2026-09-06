@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/wikitext-filter"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #purpose>>
+<<~ ahu #/purpose>>
 
 ! Lararium Filter Grammar
 
@@ -45,7 +45,7 @@ for new authoring.
 
 <<~/ahu>>
 
-<<~ ahu #operators-this-dialect-adds>>
+<<~ ahu #/operators-this-dialect-adds>>
 
 !! The operators this dialect adds over TW5
 
@@ -109,7 +109,7 @@ The `trigger` property carries the event name from the `papalohe` sugar form (`<
 
 <<~/ahu>>
 
-<<~ ahu #preserved-operators>>
+<<~ ahu #/preserved-operators>>
 
 !! Preserved Operators (TW5 Compat)
 
@@ -151,7 +151,7 @@ each[key]       — one representative per unique TOML key value
 
 <<~/ahu>>
 
-<<~ ahu #scope-and-context>>
+<<~ ahu #/scope-and-context>>
 
 !! Scope and Context Model
 
@@ -169,7 +169,7 @@ A filter expression that needs "the current meme" uses `[self[]]`.
 
 <<~/ahu>>
 
-<<~ ahu #invocation>>
+<<~ ahu #/invocation>>
 
 !! Invocation
 
@@ -199,7 +199,7 @@ The key `"x-tiddlywiki-filter"` serves import and migration.
 
 <<~/ahu>>
 
-<<~ ahu #migration-from-tw5>>
+<<~ ahu #/migration-from-tw5>>
 
 !! Migration from x-tiddlywiki-filter
 
@@ -218,7 +218,7 @@ Systematic find-replace for authors migrating TW5 content:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -227,6 +227,6 @@ Systematic find-replace for authors migrating TW5 content:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1HV8dT0oOYmpnzHVflhXM-9ITflFgpZaQ_efcDx2bSw
+<<^ code="&#x0003;">>ni:///sha-256;e3bEMYjdUubtvlPAh0oOdVJ9jneQkPurn41hNX6pqzA
 
 <<^ code="&#x0004;" -> to=?>>

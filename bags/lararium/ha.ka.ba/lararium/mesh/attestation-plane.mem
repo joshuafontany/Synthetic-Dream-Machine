@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/attestation-plane"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #the-seat>>
+<<~ ahu #/the-seat>>
 
 ! The Attestation Plane ~ where the registrar seat hides
 
@@ -53,7 +53,7 @@ already stands closest to it.
 
 <<~/ahu>>
 
-<<~ ahu #the-six>>
+<<~ ahu #/the-six>>
 
 !! The Six Rulings (operator, 2026-07-26)
 
@@ -223,7 +223,7 @@ boundary (#/1) holds absolutely: ''lease the address, never the self.''
 
 <<~/ahu>>
 
-<<~ ahu #what-stays-open>>
+<<~ ahu #/what-stays-open>>
 
 !! What Stays Open
 
@@ -277,7 +277,7 @@ boundary (#/1) holds absolutely: ''lease the address, never the self.''
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/steward-doctrine>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/membership-doctrine>>
@@ -292,6 +292,6 @@ boundary (#/1) holds absolutely: ''lease the address, never the self.''
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;K0VSesosVOypJlPs8vBNkqtFBYeIld9OnHZL9DIU5E8
+<<^ code="&#x0003;">>ni:///sha-256;2OrXL-s9-55nPScZOuOqyQL5cOvDf9EiwnMpvzle_Dg
 
 <<^ code="&#x0004;" -> to=?>>

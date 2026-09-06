@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lararium/api/save-path"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Save-Path Invariants — IslandAdaptor Outbound
 
@@ -28,7 +28,7 @@ Path K / F-arc: outbound hygiene for sustained live wiki authoring.
 
 <<~/ahu>>
 
-<<~ ahu #problem>>
+<<~ ahu #/problem>>
 
 !! Problem Space
 
@@ -46,7 +46,7 @@ into the Automerge store. Without hygiene here, sustained editing produces:
 
 <<~/ahu>>
 
-<<~ ahu #invariants>>
+<<~ ahu #/invariants>>
 
 !! Invariants
 
@@ -108,7 +108,7 @@ site.
 
 <<~/ahu>>
 
-<<~ ahu #debounce-design>>
+<<~ ahu #/debounce-design>>
 
 !! Debounce Design
 
@@ -142,7 +142,7 @@ No callbacks fire after `stop()`.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -151,6 +151,6 @@ No callbacks fire after `stop()`.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;QYqaTRKgXvoy_5ryNSzDEBVuL6svTel9B1pcdvSKz2U
+<<^ code="&#x0003;">>ni:///sha-256;uM-djar7MTa4OY0KHTGWvCHZLzaaxWL4lg-wUaXuHgM
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Minting Over a Retirement
 
@@ -31,7 +31,7 @@ The node reaches for a term, finds it apt, and seats it — without checking whe
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect the reach for a new word — a name, a primitive, a role, a field.
 ⏿ orient by ''grepping the graph'', not by recalling it: retirement residues carry `retires-to` in their meta and `RETIRE-RESIDUE` in their role.
@@ -41,7 +41,7 @@ The node reaches for a term, finds it apt, and seats it — without checking whe
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 ''Before naming a word, grep for what the graph already retired.''
 
@@ -55,7 +55,7 @@ The node MUST NOT treat a retired address as dead: a residue answers, and answer
 
 <<~/ahu>>
 
-<<~ ahu #diagnostic>>
+<<~ ahu #/diagnostic>>
 
 If a `retires-to` residue names the synonym of a word just minted, Minting Over a Retirement occurred.
 If the grep ran and returned nothing, the mint stands clean.
@@ -63,12 +63,12 @@ If a ruled word exists with no residue and the node minted anyway, that reads as
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme-evolution-kupono>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;90ibTESO0xPK9b1Z9HCCkbsrTB_J4qzeBpClhuflXtc
+<<^ code="&#x0003;">>ni:///sha-256;Ux--pHspW9Er24SJpDhNavmFI7sBtsF8z5zu5cD9YxU
 
 <<^ code="&#x0004;" -> to=?>>

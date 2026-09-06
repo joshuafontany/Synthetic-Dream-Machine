@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Voices
 
@@ -29,7 +29,7 @@ This meme holds cross-layer architecture law and the canonical Voice house spec 
 
 <<~/ahu>>
 
-<<~ ahu #architecture>>
+<<~ ahu #/architecture>>
 
 !! Architecture
 
@@ -38,7 +38,7 @@ Lower layers remain load-bearing when higher layers are absent.
 
 <<~/ahu>>
 
-<<~ ahu #three-layer-model>>
+<<~ ahu #/three-layer-model>>
 
 !! Three-Layer Voice Architecture
 
@@ -60,7 +60,7 @@ Removing or switching a Mask reveals the house beneath unchanged.
 
 <<~/ahu>>
 
-<<~ ahu #chao-reading>>
+<<~ ahu #/chao-reading>>
 
 !! Chao Reading
 
@@ -75,7 +75,7 @@ Masks change session-to-session without touching house structure.
 
 <<~/ahu>>
 
-<<~ ahu #invariant-contract>>
+<<~ ahu #/invariant-contract>>
 
 !! Invariant Contract
 
@@ -92,7 +92,7 @@ Forward scope: composable-invariant control surface requires its own design pass
 
 <<~/ahu>>
 
-<<~ ahu #voice-house>>
+<<~ ahu #/voice-house>>
 
 !! Voice House
 
@@ -224,7 +224,7 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 
 <<~/ahu>>
 
-<<~ ahu #rooms>>
+<<~ ahu #/rooms>>
 
 !! Rooms
 
@@ -235,7 +235,7 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -249,6 +249,6 @@ The Voice house spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST implem
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;OdBUc5PgyFFW2TPr0bUEpUkQ7xp-Tc2DeUsXxD_VwhY
+<<^ code="&#x0003;">>ni:///sha-256;HsSMnnNo9qi5mZ3XrZdPD7J2Wv8Z8m_eU4D4Ilmb1KM
 
 <<^ code="&#x0004;" -> to=?>>

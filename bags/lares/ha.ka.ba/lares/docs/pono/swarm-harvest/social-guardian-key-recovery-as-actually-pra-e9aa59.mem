@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/social-guardian-key-recovery
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Social / guardian key recovery as actually practiced and measured
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 44,394 characters
 
@@ -285,7 +285,7 @@ Ordered by weight of evidence, not attention received.
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 38,733 characters
 
@@ -512,7 +512,7 @@ Separated from the evidence, and each tagged with which measurement drives it.
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 5,260 characters
 
@@ -551,12 +551,12 @@ Krombholz et al., *"The Other Side of the Coin"* (Financial Cryptography 2016, D
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3HM2oP1HAannzk8g3Fqy8vIARrTaOrF9azMHtqzdX6Q
+<<^ code="&#x0003;">>ni:///sha-256;RWIoY8hsPqh0aqhud6xxXWJPJ2TvQfELxtCOnrj4r_4
 
 <<^ code="&#x0004;" -> to=?>>

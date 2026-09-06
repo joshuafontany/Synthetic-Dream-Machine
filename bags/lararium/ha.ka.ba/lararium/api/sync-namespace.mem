@@ -24,7 +24,7 @@ uri-path      = "ha.ka.ba/lararium/api/sync-namespace"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 ! Sync Namespace — What Crosses the Boundary, and What the Filters Keep
 
@@ -34,7 +34,7 @@ This forms the ''title-level companion'' to disk-projection's bag-level law. Dis
 
 <<~/ahu>>
 
-<<~ ahu #tw5-boundary>>
+<<~ ahu #/tw5-boundary>>
 
 !! The TW5 `$:/` boundary, mirrored
 
@@ -42,7 +42,7 @@ TW5 reserves the `$:/` URI prefix for system tiddlers that stay browser-local �
 
 <<~/ahu>>
 
-<<~ ahu #system-tiddlers>>
+<<~ ahu #/system-tiddlers>>
 
 !! System tiddlers carry `lar:///` titles
 
@@ -59,7 +59,7 @@ This lets browser-side shadow-tiddler edits and in-VM plugin re-packs sync to di
 
 <<~/ahu>>
 
-<<~ ahu #tag-values>>
+<<~ ahu #/tag-values>>
 
 !! Tag values stay exempt
 
@@ -69,7 +69,7 @@ The predicate reads ''titles'', never tag values — the two never collide.
 
 <<~/ahu>>
 
-<<~ ahu #browser-local>>
+<<~ ahu #/browser-local>>
 
 !! Browser-local by design
 
@@ -77,7 +77,7 @@ Drafts, ephemeral UX state, and per-operator working surface remain in the `$:/`
 
 <<~/ahu>>
 
-<<~ ahu #dual-distribution>>
+<<~ ahu #/dual-distribution>>
 
 !! Dual distribution — a packaging convention
 
@@ -87,7 +87,7 @@ This dual-distribution shape names a ''packaging convention, not a namespace exc
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -99,6 +99,6 @@ This dual-distribution shape names a ''packaging convention, not a namespace exc
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xIwuTDtTnU5DYtCOpAx62hnRRpEQ4xI-kdJOwO2lTTc
+<<^ code="&#x0003;">>ni:///sha-256;AFf5HDPsB9XZYjoUyzPOR-lEvVcbiKj4Qv7wtTW49YM
 
 <<^ code="&#x0004;" -> to=?>>

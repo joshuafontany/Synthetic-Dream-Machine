@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/crystal"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Crystal Docs
 
@@ -28,7 +28,7 @@ This shelf holds session-continuity work, archive-crystal mechanics, and future 
 
 <<~/ahu>>
 
-<<~ ahu #tree>>
+<<~ ahu #/tree>>
 
 !! Tree
 
@@ -41,7 +41,7 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -50,6 +50,6 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8aGaGdRgaEfIbcHiJIm7RW2RLIyPs3KkrB0-ctf4K0s
+<<^ code="&#x0003;">>ni:///sha-256;COFWJUbCSLYJpNxOAWZR3RJYhRQTzg9CJ-Q5g3CrMn0
 
 <<^ code="&#x0004;" -> to=?>>

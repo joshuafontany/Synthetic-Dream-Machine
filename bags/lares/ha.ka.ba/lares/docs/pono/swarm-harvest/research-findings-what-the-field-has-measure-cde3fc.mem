@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/research-findings-what-the-f
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Research findings: what the field has measured, by rung
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 19,404 characters
 
@@ -132,7 +132,7 @@ I have enough now to compose a substantially strengthened final report. Let me d
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 9,840 characters
 
@@ -185,12 +185,12 @@ This is consistent with — though not sufficient on its own to prove — your h
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xcO7YKH0imv3xFqqtEIr4m5NgzGfVu3mATVGTUfpEVg
+<<^ code="&#x0003;">>ni:///sha-256;Kvo6XMmnils0RbfcvDxtcDrwdiTOtRl1L1yZwMWMnBY
 
 <<^ code="&#x0004;" -> to=?>>

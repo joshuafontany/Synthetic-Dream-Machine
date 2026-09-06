@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/story"
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Story Docs
 
@@ -28,7 +28,7 @@ This shelf holds mythic, narrative, and world-shaping docs that can inform the g
 
 <<~/ahu>>
 
-<<~ ahu #tree>>
+<<~ ahu #/tree>>
 
 !! Tree
 
@@ -41,7 +41,7 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/consumption-ledger>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed>>
@@ -55,6 +55,6 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;7__iGTObnUrjNV-T8JnF93uKvj_c-ZPQtRIDX-r7fvk
+<<^ code="&#x0003;">>ni:///sha-256;oGmiWnO4szCM2-VL7_mqPkxEkPMwQz1q8r3td9BWxYE
 
 <<^ code="&#x0004;" -> to=?>>

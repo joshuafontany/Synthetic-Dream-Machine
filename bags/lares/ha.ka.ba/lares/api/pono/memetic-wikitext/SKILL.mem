@@ -30,7 +30,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/memetic-wikitext/SKILL"
 [[memetic-wikitext.md|../memetic-wikitext.md]] holds the root law.
 This skill carries the working procedure.
 
-<<~ ahu #load-contract>>
+<<~ ahu #/load-contract>>
 
 !! Load Contract
 
@@ -45,7 +45,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu>>
 
-<<~ ahu #workflow-contract>>
+<<~ ahu #/workflow-contract>>
 
 !! Workflow Contract
 
@@ -77,7 +77,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -97,7 +97,7 @@ Prefer another surface when the work concerns:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the authored surface as meaning first and observe where the actual overload lands
 ⏿ sort root law, primitive distinction, boot grammar, and outward detail by where they belong
@@ -107,7 +107,7 @@ Prefer another surface when the work concerns:
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -129,7 +129,7 @@ Name the actual overload before you cut.
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -152,7 +152,7 @@ Orientation rule:
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -168,7 +168,7 @@ Do not create a child just to rename clutter.
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -185,7 +185,7 @@ Aim for a parent that a reader can reload quickly.
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! ↺ Aftermath
 
@@ -212,7 +212,7 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -221,6 +221,6 @@ If parser or render-pipeline law still lacks its own stable carrier, leave the b
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;vh2gbWsaXJ-oqzmW4UU-u6IN3rnHm_WbQ3_3yPpe7ck
+<<^ code="&#x0003;">>ni:///sha-256;2LW63kB8Z-I_2yLEzm5gjRxGEsoJLn9cqGsdM3BweT0
 
 <<^ code="&#x0004;" -> to=?>>

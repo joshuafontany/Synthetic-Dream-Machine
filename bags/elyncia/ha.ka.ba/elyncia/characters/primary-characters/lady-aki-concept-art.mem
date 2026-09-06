@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/lady-aki-concept-ar
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lady Aki ~ Concept Art Package
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Lady Aki — Concept Art Direction Notes v1
 
@@ -219,6 +219,6 @@ When Aki walks into a settlement:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_ZkLl6gzPuV9PuaBYqHCp4Ns_e3TgjCvTVkJnZnLb_U
+<<^ code="&#x0003;">>ni:///sha-256;YDC4ci5POQ_w7Ig_HcNA2mue-84xFQ_o09qxDXQ6Ef0
 
 <<^ code="&#x0004;" -> to=?>>

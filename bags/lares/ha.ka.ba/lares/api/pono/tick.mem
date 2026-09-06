@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/tick"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! \tick (Deferred)
 
@@ -29,7 +29,7 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -37,6 +37,6 @@ Concurrency runtime (async-first sprint) is a prerequisite. Grammar registration
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;zg2gWSY6U_o0yFprUD2pXUhiN98sYfk9eU-RKqXt2io
+<<^ code="&#x0003;">>ni:///sha-256;XDQdGtTpRWZJmK_N_CUcKxXOTBci7PhL1ImrCADzhVU
 
 <<^ code="&#x0004;" -> to=?>>

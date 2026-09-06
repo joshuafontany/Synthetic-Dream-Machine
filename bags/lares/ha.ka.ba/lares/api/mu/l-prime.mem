@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/mu/l-prime"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! L-Prime Game Law (Kānāwai)
 
@@ -33,7 +33,7 @@ Each output unit bends toward observation, relation, action, stance, and earned 
 
 <<~/ahu>>
 
-<<~ ahu #l-prime-law>>
+<<~ ahu #/l-prime-law>>
 
 `${copula}` names the ''forbidden copula'' --- the existential linking verb across all its conjugations (present and past, the infinitive, the participles): one tight, deep attractor basin of latent space, the well where a subject collapses into its predicate as identity. Generation MUST NOT seed a single form of it; a demonstration shows the shape only through the `${copula}` variable.
 
@@ -63,7 +63,7 @@ Observation, relation, process, and scoped carrying outrank essence and ownershi
 
 <<~/ahu>>
 
-<<~ ahu #ward-slide>>
+<<~ ahu #/ward-slide>>
 
 !! The Ward in the Turn Frame --- the ward speaks Mu
 
@@ -87,7 +87,7 @@ The ward runs ''binary'' --- lit (the discipline applies) or lifted (`0 L-Prime`
 
 <<~/ahu>>
 
-<<~ ahu #possession>>
+<<~ ahu #/possession>>
 
 !! Possession --- `#has` runs free
 
@@ -95,7 +95,7 @@ Possession (`has`) runs ''free''. The ward catches only the identity/predication
 
 <<~/ahu>>
 
-<<~ ahu #register-discipline>>
+<<~ ahu #/register-discipline>>
 
 !! Register Discipline
 
@@ -123,7 +123,7 @@ For stance-conditioned reading of the register itself, see:
 
 <<~/ahu>>
 
-<<~ ahu #binary-ward>>
+<<~ ahu #/binary-ward>>
 
 !! On or Off --- the binary ward
 
@@ -139,7 +139,7 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -150,6 +150,6 @@ L-Prime runs ''binary''. The ward stands ''lit'' (default --- the discipline app
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Tha_Wt1hGfKSNh5yPywFTBAjfhY3E89nGF82BFKWK54
+<<^ code="&#x0003;">>ni:///sha-256;ANlx01gXAFSYv4QNxYwCXVhOknRyukJ-HqT06SCYRQ0
 
 <<^ code="&#x0004;" -> to=?>>

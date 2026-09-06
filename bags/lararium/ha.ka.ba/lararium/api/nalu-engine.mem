@@ -107,7 +107,7 @@ This means initial replay and live patches share the same code path. No per-isla
 pre-sync buffer, no `onSyncComplete` flush machinery in the TS layer. The engine's
 queue handles both.
 
-<<~ ahu #gate-families-shore>>
+<<~ ahu #/gate-families-shore>>
 
 !! The gate-families shore ~ runtime ≠ physics
 
@@ -145,7 +145,7 @@ transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the shore 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -156,6 +156,6 @@ transact per frame (crest). WITNESSED: the queue (`nalu-engine.ts`) + the shore 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3cNnNk4Tl6zcxkbhRMBqIiWtTwuSMJst-CQvsu1H92E
+<<^ code="&#x0003;">>ni:///sha-256;qLiGFXjwD2e9R-l0mtE1PJG1loZRmfnFvJ6xiR1KR9U
 
 <<^ code="&#x0004;" -> to=?>>

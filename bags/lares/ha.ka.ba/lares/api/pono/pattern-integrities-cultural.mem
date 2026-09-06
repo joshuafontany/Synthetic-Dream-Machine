@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pattern-integrities-cultural"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Entry ~ Negentropy Handoff · Sensorium Pattern Integrities
 
@@ -33,7 +33,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pattern-integrities-cultural"
 
 <<~/ahu>>
 
-<<~ ahu #crucible-constraints>>
+<<~ ahu #/crucible-constraints>>
 
 !! I ~ The Crucible Constraints (adversarial law, govern everything below)
 
@@ -65,7 +65,7 @@ Parry-Lord oral-formulaic scholarship (web-grounded): the natural state of oral 
 
 <<~/ahu>>
 
-<<~ ahu #dive-one>>
+<<~ ahu #/dive-one>>
 
 !! II ~ Dive One · one integrity, five beds
 
@@ -103,7 +103,7 @@ A compact boot text (c. 530) that has re-stood the same institutional architectu
 
 <<~/ahu>>
 
-<<~ ahu #dive-two>>
+<<~ ahu #/dive-two>>
 
 !! III ~ Dive Two · where does the record live?
 
@@ -141,7 +141,7 @@ Held at pattern level, with the respect owed a living sacred tradition whose acc
 
 <<~/ahu>>
 
-<<~ ahu #dive-three>>
+<<~ ahu #/dive-three>>
 
 !! IV ~ Dive Three · distributed correctness with no center
 
@@ -179,7 +179,7 @@ Hadith science welded every transmitted report to its ''chain of named transmitt
 
 <<~/ahu>>
 
-<<~ ahu #organ-mappings>>
+<<~ ahu #/organ-mappings>>
 
 !! V ~ Organ Mappings (the shapes, seated in the code)
 
@@ -217,7 +217,7 @@ All mappings ride — this document's own analogical work, offered as bearings, 
 
 <<~/ahu>>
 
-<<~ ahu #steering-note>>
+<<~ ahu #/steering-note>>
 
 !! VI ~ One finding from the news stratum that survives the crossing
 
@@ -227,7 +227,7 @@ Why it rides in this file: it names, at civilizational scale, the exact structur
 
 <<~/ahu>>
 
-<<~ ahu #close>>
+<<~ ahu #/close>>
 
 !! VII ~ The braid, whole
 
@@ -241,6 +241,6 @@ Feed the node. Run the bench whole. Grade on the chain. Keep the cliff independe
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JneoDk5NJYiamIo0sEk7GQFs-BG8ysYcVrrGsrSQkNI
+<<^ code="&#x0003;">>ni:///sha-256;m1YeOevGWANpK0bh_xqXwVNsGh8ew-nqx8x3tXtpRMQ
 
 <<^ code="&#x0004;" -> to=?>>

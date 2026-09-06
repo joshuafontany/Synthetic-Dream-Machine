@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/key-recovery-custody-fork-ou
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! KEY-RECOVERY CUSTODY FORK — OUTSIDE RESEARCH REPORT
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 49,619 characters
 
@@ -401,7 +401,7 @@ This is, I think, the most decision-relevant thing in this report that your fram
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 18,254 characters
 
@@ -539,7 +539,7 @@ Finally, on threshold choice: Schechter measured **3-of-4 → 89% reliability at
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 17,911 characters
 
@@ -649,12 +649,12 @@ Across five research streams, **not one documented failure in the entire public 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;QOODm4MmnYE6_qdO_L4ChzDZClQn1ROJN0yco4NnXos
+<<^ code="&#x0003;">>ni:///sha-256;IiOqBeQy5RrLve_rft-EZtsactcXDY27EJweIk_vIBI
 
 <<^ code="&#x0004;" -> to=?>>

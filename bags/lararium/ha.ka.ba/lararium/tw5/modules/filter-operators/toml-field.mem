@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/toml-field"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! toml-field
 
@@ -28,22 +28,22 @@ TW5 filter operator from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `registerTomlField`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/toml-field" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;RjHh_UpWhGfUJsF8-tVXcm_Ml325QThRnXU8iN2w-BI
+<<^ code="&#x0003;">>ni:///sha-256;XNuvQeb7NpKVUrUhDw-LXjXaU9QvCmM7TV321dPtBEw
 
 <<^ code="&#x0004;" -> to=?>>

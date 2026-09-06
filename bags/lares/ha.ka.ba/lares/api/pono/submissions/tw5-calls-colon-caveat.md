@@ -1,6 +1,6 @@
 
 
-<a id="entry"></a>
+<a id="/entry"></a>
 
 # Calls ~ an unquoted value carrying a colon
 
@@ -8,7 +8,7 @@
 
 **Title** Document that an unquoted parameter value cannot contain a colon
 
-<a id="the-claim"></a>
+<a id="/the-claim"></a>
 
 ## The claim being corrected
 
@@ -20,7 +20,7 @@ That last sentence promises more than the grammar allows, and the gap stays sile
 
 `Call Syntax` already states this correctly. `param-name ":" value` stands as one of its productions, and `param-name` reads as a sequence of letters, digits, hyphens and underscores. A URI scheme spells with exactly those characters, so `https://example.com` matches the named-parameter form. The prose in `Calls` reaches past its own grammar.
 
-<a id="the-change"></a>
+<a id="/the-change"></a>
 
 ## The proposed change
 
@@ -43,7 +43,7 @@ positional parameter receives nothing. Enclose such a value in quotes, or label 
 parameter name — `<<my-procedure address=https://example.com>>` — where no quotes are needed.""">>
 ```
 
-<a id="for-the-reviewer"></a>
+<a id="/for-the-reviewer"></a>
 
 ## Notes for the reviewer
 
@@ -51,7 +51,7 @@ A tiddler title needs no delimiters, and the reason carries the whole behaviour:
 
 The `name=value` form asks the least of an author, since it drops the quoting entirely — the `=` binds before the value's colon arrives.
 
-<a id="measured"></a>
+<a id="/measured"></a>
 
 ## Measured
 
@@ -68,7 +68,7 @@ Rendered in TiddlyWiki against `\procedure link-to(target)` returning `[target=<
 
 A time of day trips the case a URI trips, so the warning leads with the general shape rather than with URIs alone.
 
-<a id="edges"></a>
+<a id="/edges"></a>
 
 - `lar:///ha.ka.ba/lares/docs/relational-parameter`
 - `lar:///ha.ka.ba/lares/api/pono/tiddlywiki-wikitext`

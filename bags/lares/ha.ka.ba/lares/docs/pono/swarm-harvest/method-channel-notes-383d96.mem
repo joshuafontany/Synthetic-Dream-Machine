@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/method-channel-notes-383d96"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Method / channel notes
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 21,931 characters
 
@@ -257,7 +257,7 @@ The two comparative-research strands — **Google+ Circles post-mortems / curati
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 10,516 characters
 
@@ -361,7 +361,7 @@ I apologise again for the fabricated relay. The retraction stands; what survives
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 9,237 characters
 
@@ -468,12 +468,12 @@ Confidence overall: **medium-high**. The load-bearing weakness is the Bluesky 2.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nSbz54m5YmRoDFi4sxndq9kdKb2X85B3dObUr-BZ5l8
+<<^ code="&#x0003;">>ni:///sha-256;J79Wj-NRc4LwJf96kGaSc6KVVCwy8sf7DJDJ7gG-OQs
 
 <<^ code="&#x0004;" -> to=?>>

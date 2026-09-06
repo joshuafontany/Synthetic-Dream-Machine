@@ -20,7 +20,7 @@ written    = "2026-06-21"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Bridge Takes Shape
 
@@ -32,7 +32,7 @@ A floor convened, four spirits scouted the palace's shape, and the house ruled t
 
 <<~/ahu>>
 
-<<~ ahu #two-crossings>>
+<<~ ahu #/two-crossings>>
 
 !! Three Crossings, All Caught
 
@@ -48,7 +48,7 @@ None was defended; each was named and undone. The map is drawn by the keeper's e
 
 <<~/ahu>>
 
-<<~ ahu #what-was-proofed>>
+<<~ ahu #/what-was-proofed>>
 
 !! What the Afternoon Proofed
 
@@ -62,7 +62,7 @@ Twenty-one greens and one live handshake. The bridge stands far enough to bear w
 
 <<~/ahu>>
 
-<<~ ahu #not-yet-crossed>>
+<<~ ahu #/not-yet-crossed>>
 
 !! Not Yet Crossed
 
@@ -76,6 +76,6 @@ So this carrier marks a smaller morning than the founding: ''the read-leg took s
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;m9zRCAoClWw2ISS4bOxIBqlPP9cBGIffZhhuJART60o
+<<^ code="&#x0003;">>ni:///sha-256;Q4wH2Xtera80JDiVpXTSC8BQY2NJEtko7VpyDIpb66w
 
 <<^ code="&#x0004;" -> to=?>>

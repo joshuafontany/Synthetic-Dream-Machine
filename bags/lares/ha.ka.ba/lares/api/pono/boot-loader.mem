@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/boot-loader"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Boot Loader — the read before a wiki stands
 
@@ -29,7 +29,7 @@ Which leaves exactly one honest question: ''what must be read before there is an
 
 <<~/ahu>>
 
-<<~ ahu #the-floor>>
+<<~ ahu #/the-floor>>
 
 !! The floor
 
@@ -51,7 +51,7 @@ the grammar, and a second opinion is exactly what a single source of truth canno
 
 <<~/ahu>>
 
-<<~ ahu #the-two-readings>>
+<<~ ahu #/the-two-readings>>
 
 !! Why two readers do not make two grammars
 
@@ -71,7 +71,7 @@ reaches the wiki unaltered. Nothing is lost by not being understood early.
 
 <<~/ahu>>
 
-<<~ ahu #not-only-a-loader>>
+<<~ ahu #/not-only-a-loader>>
 
 !! The scan set serves three offices, and only one of them is the boot
 
@@ -94,7 +94,7 @@ three populations use it, and two of them are not the boot.
 
 <<~/ahu>>
 
-<<~ ahu #conformance>>
+<<~ ahu #/conformance>>
 
 !! Conformance
 
@@ -111,7 +111,7 @@ the only place the question means anything.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -121,6 +121,6 @@ the only place the question means anything.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ESbbYicaD-UhsJy9-nTvKiNGcz4IIuIr1k_QdWBdDCk
+<<^ code="&#x0003;">>ni:///sha-256;yijWUvruvuF6G_APvJ6llxfoMEOhcuuQU1oY1SBB5Nc
 
 <<^ code="&#x0004;" -> to=?>>

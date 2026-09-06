@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-managed-custodial-sub-id
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! THE MANAGED / CUSTODIAL SUB-IDENTITY — measured findings
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 36,667 characters
 
@@ -241,12 +241,12 @@ Miller's *Robust Composition* is genuinely rootless **in the model**. §9.2.5: *
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NzhK977qXxNueE6Ypog0857BMJeHGyQYravD4Qi78e4
+<<^ code="&#x0003;">>ni:///sha-256;OEHdu7684nn3PR9VxK6FLGngXt8jl5ZXR4RNkUY0cLc
 
 <<^ code="&#x0004;" -> to=?>>

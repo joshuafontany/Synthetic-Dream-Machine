@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hooponopono"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Hoʻoponopono — To Correct
 
@@ -30,7 +30,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ gather the live claim, the target meme, affected invariants, and the operator's declared intent.
 ⏿ name what must be reconciled: conflicts, prior state, residue still outstanding.
@@ -40,7 +40,7 @@ Without the ceremony, the canon MOVE collapses into silent accumulation — a na
 
 <<~/ahu>>
 
-<<~ ahu #ceremony>>
+<<~ ahu #/ceremony>>
 
 !! The Ceremony
 
@@ -57,7 +57,7 @@ The ceremony MUST NOT be skipped when a kapu carrier or invariant meme is the ta
 
 <<~/ahu>>
 
-<<~ ahu #promotion-path>>
+<<~ ahu #/promotion-path>>
 
 !! Canon MOVE Path
 
@@ -83,7 +83,7 @@ A canon-MOVE record SHOULD include (this IS the Sprint-4 `transfer`/`accession` 
 
 <<~/ahu>>
 
-<<~ ahu #boundary-event>>
+<<~ ahu #/boundary-event>>
 
 !! Boundary Event
 
@@ -100,7 +100,7 @@ Boundary event fields:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -112,6 +112,6 @@ Boundary event fields:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xgq7UfC9enK5kVKJWrh9QBSW4jSSSKhWopS74rVYIP4
+<<^ code="&#x0003;">>ni:///sha-256;91xV3kQiLNMEayn_APx4KuIhVEvT2eETzUAWHJQeJTU
 
 <<^ code="&#x0004;" -> to=?>>

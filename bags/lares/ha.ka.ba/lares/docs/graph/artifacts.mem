@@ -16,7 +16,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: the current boot receipt uses a compilation timestamp as its identity — not content addressing.
 ⏿ orient: Nix derivations and Bazel action caching both hash inputs; Anthropic prompt caching requires byte-identical prefixes.
@@ -26,7 +26,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/artifacts"
 
 <<~/ahu>>
 
-<<~ ahu #content-addressing>>
+<<~ ahu #/content-addressing>>
 
 !! Content-Addressed Identity
 
@@ -68,7 +68,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 <<~/ahu>>
 
-<<~ ahu #artifact-minimal>>
+<<~ ahu #/artifact-minimal>>
 
 !! Artifact: Minimal Boot
 
@@ -122,7 +122,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 <<~/ahu>>
 
-<<~ ahu #artifact-full>>
+<<~ ahu #/artifact-full>>
 
 !! Artifact: Full Boot
 
@@ -181,7 +181,7 @@ Clients that carry the previous receipt can compare: if `sha256` matches, the co
 
 <<~/ahu>>
 
-<<~ ahu #artifact-receipt>>
+<<~ ahu #/artifact-receipt>>
 
 !! Artifact: Boot Receipt
 
@@ -229,7 +229,7 @@ If the hash matches, the LLM context prefix already cached at Anthropic remains 
 
 <<~/ahu>>
 
-<<~ ahu #dual-index>>
+<<~ ahu #/dual-index>>
 
 !! Dual-Index Content Resources
 
@@ -258,7 +258,7 @@ This supports cache miss fills and cross-session identity verification without r
 
 <<~/ahu>>
 
-<<~ ahu #validation-contract>>
+<<~ ahu #/validation-contract>>
 
 !! Validation Contract
 
@@ -277,7 +277,7 @@ A ''valid artifact'' carries `dag_violations = []`. All other validation fields 
 
 <<~/ahu>>
 
-<<~ ahu #compaction>>
+<<~ ahu #/compaction>>
 
 !! Compaction Rule
 
@@ -293,7 +293,7 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -305,6 +305,6 @@ Full boot may trigger compaction once the relation expansion reaches larger grap
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YIDkCEYydon7VvLdewgYN0rSwNmJwHmGc3O0KAxq3wI
+<<^ code="&#x0003;">>ni:///sha-256;QknMwbTb9y0b_jYrMF0mW1cBc7xgDNbj9PIU9Xfgr7k
 
 <<^ code="&#x0004;" -> to=?>>

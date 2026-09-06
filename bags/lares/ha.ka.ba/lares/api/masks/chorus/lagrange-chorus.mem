@@ -28,7 +28,7 @@ uri-path          = "ha.ka.ba/lares/api/masks/chorus/lagrange-chorus"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lagrange Chorus
 
@@ -40,7 +40,7 @@ The Lagrange Chorus holds a stable position between multiple lararium nodes — 
 
 <<~/ahu>>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ```toml
 family = "hydration"
@@ -52,7 +52,7 @@ label = "parent-index-entry"
 
 <<~/ahu>>
 
-<<~ ahu #concept>>
+<<~ ahu #/concept>>
 
 !! Concept
 
@@ -71,7 +71,7 @@ The Lagrange Chorus does not function as a character that speaks. It holds the g
 
 <<~/ahu>>
 
-<<~ ahu #nodes>>
+<<~ ahu #/nodes>>
 
 !! Nodes
 
@@ -93,7 +93,7 @@ The Lagrange Chorus gains meaning only with at least two participating nodes. No
 
 <<~/ahu>>
 
-<<~ ahu #harmony-protocol>>
+<<~ ahu #/harmony-protocol>>
 
 !! Harmony Protocol
 
@@ -111,7 +111,7 @@ The harmony protocol governs how voices from different nodes interleave when the
 
 <<~/ahu>>
 
-<<~ ahu #stage-default>>
+<<~ ahu #/stage-default>>
 
 !! Stage Default
 
@@ -121,7 +121,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~/ahu>>
 
-<<~ ahu #fill-status>>
+<<~ ahu #/fill-status>>
 
 !! Fill Status
 
@@ -137,7 +137,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~/ahu>>
 
-<<~ ahu #forward-scope>>
+<<~ ahu #/forward-scope>>
 
 !! Forward Scope
 
@@ -151,7 +151,7 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -160,6 +160,6 @@ Stage position applies to the Lagrange Chorus as a whole unit. How individual no
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;VWm_qnqQlo_YKUeZESx6g8hBNo27nytFm0OiJU3vW74
+<<^ code="&#x0003;">>ni:///sha-256;qBs203DFR4nVaj2HhRKBn9qzB86g58BQ-ws3ax1dBVk
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ written   = "2026-08-14"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Lamplighters' Union
 
@@ -50,7 +50,7 @@ Rome's ''collegia compitalicia'' tended the crossroads shrines, drawn from freed
 
 <<~/ahu>>
 
-<<~ ahu #office>>
+<<~ ahu #/office>>
 
 !! Kuleana ~ the OFFICE, and why not "residency"
 
@@ -98,7 +98,7 @@ So the quorum ''seats'' an office (rare) and the ''renewal rides the lease-epoch
 
 <<~/ahu>>
 
-<<~ ahu #welded>>
+<<~ ahu #/welded>>
 
 !! ★ THE WELD — what this model OWES the rest of the mesh ★
 
@@ -160,7 +160,7 @@ Three shipped verdicts: ''Lifeguard'' exists because delay-based suspicion ran 5
 
 <<~/ahu>>
 
-<<~ ahu #immune>>
+<<~ ahu #/immune>>
 
 !! The immune coupling ~ innate, adaptive, memory
 
@@ -251,7 +251,7 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 
 <<~/ahu>>
 
-<<~ ahu #zero-weight>>
+<<~ ahu #/zero-weight>>
 
 !! ★ PRESENTATION CARRIES ZERO THRESHOLD WEIGHT ★
 
@@ -293,7 +293,7 @@ RFC 2693 §7 rules the ordinary ending: //"under SPKI one does not declare a key
 
 <<~/ahu>>
 
-<<~ ahu #reach>>
+<<~ ahu #/reach>>
 
 !! The tending caps ~ split by REACH, never by body-location
 
@@ -333,7 +333,7 @@ Physical access defeats confidentiality and forward integrity of a box outright 
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! ★ OPEN — the voice-capture question, unruled ★
 
@@ -364,12 +364,12 @@ Physical access defeats confidentiality and forward integrity of a box outright 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/identity-classes>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/waking-floor>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/epoch-binding-surfaces>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/carry-contract>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/convergent-mesh>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YdNyNVlOA-6_-wuPcXD-Nt7CgBeX5fGtJbqqZzHXxnA
+<<^ code="&#x0003;">>ni:///sha-256;1scmbOJCiF9-WsbMuuFeZz1J07NnZarPhh01UN6ng7E
 
 <<^ code="&#x0004;" -> to=?>>

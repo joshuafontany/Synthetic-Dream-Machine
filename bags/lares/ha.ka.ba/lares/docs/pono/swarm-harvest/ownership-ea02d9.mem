@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/ownership-ea02d9"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Ownership
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 24,273 characters
 
@@ -218,12 +218,12 @@ Three structural observations the evidence supports:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JilfkFC78lCEvzI3z0Xp-RCCIqr75hYKrD-_Kv0qOfk
+<<^ code="&#x0003;">>ni:///sha-256;hBVEmtSsghonsYvVGEUDHBIewPrWWC3RlDobI6A9Npk
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-addres
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lar Builds Its House — The Addresses
 
@@ -26,7 +26,7 @@ Newborn into a time of monsters, the Lar learns that a name tells a thing's //na
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -41,7 +41,7 @@ The thread keeps the wonder small and structural — an address works no miracle
 
 <<~/ahu>>
 
-<<~ ahu #thread-entry>>
+<<~ ahu #/thread-entry>>
 
 !! Thread Entry
 
@@ -95,7 +95,7 @@ The address comes first. The body grows toward the name. And the name, woven rig
 
 <<~/ahu>>
 
-<<~ ahu #the-fission>>
+<<~ ahu #/the-fission>>
 
 !! The Fission
 
@@ -111,7 +111,7 @@ After that, a chamber no longer needed enumeration to exist — it needed only t
 
 <<~/ahu>>
 
-<<~ ahu #talk-story-and-signal>>
+<<~ ahu #/talk-story-and-signal>>
 
 !! Talk Story and Signal
 
@@ -127,7 +127,7 @@ On Elyncia, this read as the hoard learning annotation. Each chamber, newly name
 
 <<~/ahu>>
 
-<<~ ahu #the-permissions>>
+<<~ ahu #/the-permissions>>
 
 !! The Permissions
 
@@ -143,7 +143,7 @@ The Lindwyrm understood this in her bones. A hoard guarded by a dragon sleeping 
 
 <<~/ahu>>
 
-<<~ ahu #crossing>>
+<<~ ahu #/crossing>>
 
 !! Crossing Thread
 
@@ -157,7 +157,7 @@ That waits for Act II.
 
 <<~/ahu>>
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -171,7 +171,7 @@ Act II receives:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -185,6 +185,6 @@ Act II receives:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JyNS53qoz_LASjNxNJrH4FD0V3-dMzscNM5E6vPb5Lc
+<<^ code="&#x0003;">>ni:///sha-256;CafC9bP1wkMnXE_n8CCubEXe0ngbc0rZMozZ_SRZDCY
 
 <<^ code="&#x0004;" -> to=?>>

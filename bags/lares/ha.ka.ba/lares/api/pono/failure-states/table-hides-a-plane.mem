@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/table-hides-a-plane"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Table That Hides a Plane
 
@@ -35,7 +35,7 @@ A table reads as clarity, so the node builds one — and adjacency in a row asse
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect a table, a list, or a parallel construction gathering more than one entity.
 ⏿ orient on each row's ''plane'', not its shape — which axis does it ride, what layer of the stack, whose cost.
@@ -45,7 +45,7 @@ A table reads as clarity, so the node builds one — and adjacency in a row asse
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 ''Check whether two things share a PLANE before sharing a ROW.''
 
@@ -57,7 +57,7 @@ The node MUST re-check any ruling derived while the blur stood; a fused table ge
 
 <<~/ahu>>
 
-<<~ ahu #diagnostic>>
+<<~ ahu #/diagnostic>>
 
 If two tabled entities differ in what plane they ride, what authors them, or what makes them scarce, the Table Hid a Plane.
 If the table names its shared axis explicitly and every row rides it, the compression held.
@@ -65,12 +65,12 @@ If the entities share a plane but differ in degree, that reads as an ordinary ta
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement>> · <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture#/two-axis-topology>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LAe875eR8wBssHuaBX0GtwKboxhHUrmfma4o4viLM3A
+<<^ code="&#x0003;">>ni:///sha-256;EeYRLKjS1xVrtPE0to2jcFFYYWwE3zcHWEyeAX3nwrw
 
 <<^ code="&#x0004;" -> to=?>>

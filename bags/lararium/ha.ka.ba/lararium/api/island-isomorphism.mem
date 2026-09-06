@@ -22,7 +22,7 @@ written   = "2026-06-12"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 ! The One-Hull Law — Island Isomorphism
 
@@ -36,7 +36,7 @@ Every wiki island — `lares`-as-wiki, any content wiki, and ''`@daemon` itself'
 
 <<~/ahu>>
 
-<<~ ahu #life-support-asymmetry>>
+<<~ ahu #/life-support-asymmetry>>
 
 !! The Life-Support Asymmetry
 
@@ -57,7 +57,7 @@ Everything else in the bespoke admin stack — handshake, sync ports, `ea`, the 
 
 <<~/ahu>>
 
-<<~ ahu #migration>>
+<<~ ahu #/migration>>
 
 !! Migration — the pivot playbook (no flag day)
 
@@ -72,7 +72,7 @@ A mirror-pod gesture MAY bridge observability early: the statically-loaded admin
 
 <<~/ahu>>
 
-<<~ ahu #hoike-life-support>>
+<<~ ahu #/hoike-life-support>>
 
 !! Hoike — the kept dispute
 
@@ -87,7 +87,7 @@ re-entry: the kue key; or the migration's step 4 boundary, where the residue get
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -97,6 +97,6 @@ re-entry: the kue key; or the migration's step 4 boundary, where the residue get
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;dsfjlRWkI5j4-j8zZMJANnfjbKLE5yxxSVYs3mMkRmY
+<<^ code="&#x0003;">>ni:///sha-256;CYgRXFKCjW_DTpiOlTgYf-YLsqfRgR_Lf_xYR3kBZoI
 
 <<^ code="&#x0004;" -> to=?>>

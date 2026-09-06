@@ -22,7 +22,7 @@ written    = "2026-07-19"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Content Resolution ~ large bodies leave the CRDT
 
@@ -44,7 +44,7 @@ Meridian on federated capability) INDEPENDENTLY re-derived what the `@oracle`
 
 <<~/ahu>>
 
-<<~ ahu #the-birth>>
+<<~ ahu #/the-birth>>
 
 !! The birth ~ #51, the 16MB-Twain overflow
 
@@ -57,7 +57,7 @@ external body.
 
 <<~/ahu>>
 
-<<~ ahu #tw5-shore>>
+<<~ ahu #/tw5-shore>>
 
 !! The TW5 shore ~ ride the lazy engine, never fork it
 
@@ -71,7 +71,7 @@ verified in TW5 source — the house adds a resolver, never a fork of the lazy p
 
 <<~/ahu>>
 
-<<~ ahu #cad-storage>>
+<<~ ahu #/cad-storage>>
 
 !! Storage ~ `@cad`, the content-addressed tier
 
@@ -123,7 +123,7 @@ same WHO-axis that tiers a bag tiers its bytes.
 
 <<~/ahu>>
 
-<<~ ahu #resolve-by-cid>>
+<<~ ahu #/resolve-by-cid>>
 
 !! `resolveByCid` ~ three gates that never fuse
 
@@ -155,7 +155,7 @@ grants passage past all three.
 
 <<~/ahu>>
 
-<<~ ahu #cad-candidates>>
+<<~ ahu #/cad-candidates>>
 
 !! Two CAD-candidate scenarios ~ one store, two extraction boundaries
 
@@ -185,7 +185,7 @@ and the resolver never learn which grain birthed the blob.
 
 <<~/ahu>>
 
-<<~ ahu #dht-free-discovery>>
+<<~ ahu #/dht-free-discovery>>
 
 !! Discovery without a DHT ~ the rendezvous, not the shared present
 
@@ -203,7 +203,7 @@ verify-only public read; ''forkable'' — the fork guards.
 
 <<~/ahu>>
 
-<<~ ahu #handle-and-map>>
+<<~ ahu #/handle-and-map>>
 
 !! The handle ~ logical name over an indirection map
 
@@ -216,7 +216,7 @@ tier.
 
 <<~/ahu>>
 
-<<~ ahu #two-revocation-modes>>
+<<~ ahu #/two-revocation-modes>>
 
 !! Revocation ~ two modes, already-fetched unrecallable
 
@@ -234,7 +234,7 @@ it. Revocation ratchets past the broken party; it never re-seals a body already 
 
 <<~/ahu>>
 
-<<~ ahu #the-convergence>>
+<<~ ahu #/the-convergence>>
 
 !! The convergence ~ external re-derived internal
 
@@ -257,7 +257,7 @@ invents ''only the composition'', never a new primitive.
 
 <<~/ahu>>
 
-<<~ ahu #open-forks>>
+<<~ ahu #/open-forks>>
 
 !! Open ~ four operator/wave-3 forks
 
@@ -281,7 +281,7 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -295,6 +295,6 @@ priors decide them, and wave-3 may reopen any.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NcFAsorSDS0L0i3tBue5trFKdQ-Tw2tKhPJp3O3-FdA
+<<^ code="&#x0003;">>ni:///sha-256;w3KnE37VxCFOqZ7a_DCJoAegfoh7MAJ0jJV8OB2OGq8
 
 <<^ code="&#x0004;" -> to=?>>

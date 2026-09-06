@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/leases-expiry-vs-revocation-
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! LEASES & EXPIRY vs REVOCATION — dense findings
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 38,818 characters
 
@@ -331,12 +331,12 @@ All MEASURED, RIPE Atlas + authoritative-side traffic:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;RSAlW2iNgyjsYe1Ny1w8EkLuqAirvK0jSEhDoXKY8kw
+<<^ code="&#x0003;">>ni:///sha-256;viVoEYRhpXApGXQBYSfkYlnTQssCbY__rFa5GejQF3w
 
 <<^ code="&#x0004;" -> to=?>>

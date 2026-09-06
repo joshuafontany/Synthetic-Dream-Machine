@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/wikispace-canvasspace-ontology"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Wikispace × Canvasspace Ontology
 
@@ -27,7 +27,7 @@ Lares fuses three traditions nobody has fused whole: a ''transclude-capable wiki
 
 <<~/ahu>>
 
-<<~ ahu #one-model-two-cameras>>
+<<~ ahu #/one-model-two-cameras>>
 
 !! One Model, Two Cameras
 
@@ -40,7 +40,7 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 <<~/ahu>>
 
-<<~ ahu #the-surface-law>>
+<<~ ahu #/the-surface-law>>
 
 !! ⚠ The surface law ~ the camera is DOM-hosting, never rasterising
 
@@ -64,7 +64,7 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 <<~/ahu>>
 
-<<~ ahu #semantic-zoom>>
+<<~ ahu #/semantic-zoom>>
 
 !! Semantic zoom ~ the level of detail is chosen by MEANING, never by scale
 
@@ -84,7 +84,7 @@ The worn family component carries the ''meaning''; the surface picks the ''rende
 
 <<~/ahu>>
 
-<<~ ahu #graph-primacy>>
+<<~ ahu #/graph-primacy>>
 
 !! Graph-Primacy — the Inversion
 
@@ -94,7 +94,7 @@ A reader may drag two node-shapes adjacent without intending a relation; bare pr
 
 <<~/ahu>>
 
-<<~ ahu #the-proposal-channel>>
+<<~ ahu #/the-proposal-channel>>
 
 !! The proposal channel ~ arrangement may SPEAK, and still never assert
 
@@ -124,7 +124,7 @@ The system that first built a spatial parser promoted by ''destructive edit''. H
 
 <<~/ahu>>
 
-<<~ ahu #model-view-boundary>>
+<<~ ahu #/model-view-boundary>>
 
 !! The Model/View Boundary — Both Sides Addressed
 
@@ -139,7 +139,7 @@ TW5 already proves the pattern — `$:/StoryList`, `$:/HistoryList`, and palette
 
 <<~/ahu>>
 
-<<~ ahu #a-place-is-a-scope>>
+<<~ ahu #/a-place-is-a-scope>>
 
 !! A place is a scope over the corpus ~ never a partition of it
 
@@ -151,7 +151,7 @@ A named place — a room, a board, a shelf — ''carries a capability-and-view s
 
 <<~/ahu>>
 
-<<~ ahu #ownership-is-a-graph-fact>>
+<<~ ahu #/ownership-is-a-graph-fact>>
 
 !! Containment is a graph fact ~ never the surface's parent hierarchy
 
@@ -168,7 +168,7 @@ A meme owns its blocks, and a block owns its ports. ''The model carries that con
 
 <<~/ahu>>
 
-<<~ ahu #family-classification>>
+<<~ ahu #/family-classification>>
 
 !! The Nine Families by Surface
 
@@ -182,7 +182,7 @@ A meme owns its blocks, and a block owns its ports. ''The model carries that con
 
 <<~/ahu>>
 
-<<~ ahu #transclusion>>
+<<~ ahu #/transclusion>>
 
 !! Transclusion — Surface-Split
 
@@ -195,7 +195,7 @@ What ''splits is the content-position'':
 
 <<~/ahu>>
 
-<<~ ahu #wires>>
+<<~ ahu #/wires>>
 
 !! The Wire Ontology (Visual Scripting)
 
@@ -208,7 +208,7 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu>>
 
-<<~ ahu #spatial>>
+<<~ ahu #/spatial>>
 
 !! The Spatial Family + Watch-Outs
 
@@ -222,7 +222,7 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu>>
 
-<<~ ahu #forks-resolved>>
+<<~ ahu #/forks-resolved>>
 
 !! Forks — Resolved (operator 2026-06-06)
 
@@ -235,7 +235,7 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -246,6 +246,6 @@ When `nalu` / `\tick` lands, the tick wire reads `reaction:triggers` (the frame-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TxL_A9O1NGxjNUd6pL9cXUyWDKXtZUPZdPXqSxrzOU8
+<<^ code="&#x0003;">>ni:///sha-256;uM1tE8RSreSQ1PPEcEaEVEFWbDSWkQxnVgicIKx3nLw
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Wayfarer ~ a spirit's handoff, held unedited
 
@@ -33,7 +33,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/crdt-ecosystem-scout"
 
 <<~/ahu>>
 
-<<~ ahu #the-handoff>>
+<<~ ahu #/the-handoff>>
 
 !! The handoff, verbatim
 
@@ -182,6 +182,6 @@ Patchwork notebook has six 2026 entries, newest **"Progressions" 2026-05-12**. h
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;">>ni:///sha-256;KpK9-DHLSOboo8_23NWEM6D4b5Xwcf-5-bqYs1-BSiM
+<<^ code="&#x0003;">>ni:///sha-256;UNcVpt9aasdM_zLtgElWUxK7iCOM14E8JlB1-x2qd2o
 
 <<^ code="&#x0004;" -> to=?>>

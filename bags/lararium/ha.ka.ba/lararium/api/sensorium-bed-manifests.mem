@@ -19,7 +19,7 @@ written    = "2026-07-15"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #the-pattern>>
+<<~ ahu #/the-pattern>>
 
 ! Sensorium Bed Manifests ~ the pour becomes a declared artifact
 
@@ -29,7 +29,7 @@ The Sensorium Palace's test beds rise from ''manifests'' the way the genesis isl
 
 <<~/ahu>>
 
-<<~ ahu #the-manifest>>
+<<~ ahu #/the-manifest>>
 
 !! The bed manifest ~ five members
 
@@ -37,7 +37,7 @@ The Sensorium Palace's test beds rise from ''manifests'' the way the genesis isl
 
 <<~/ahu>>
 
-<<~ ahu #the-dialect-wall>>
+<<~ ahu #/the-dialect-wall>>
 
 !! The dialect wall ~ kind declares, parser routes
 
@@ -45,7 +45,7 @@ Three kinds stand distinct as ''declared dialects'': memetic-wikitext (the house
 
 <<~/ahu>>
 
-<<~ ahu #the-registers>>
+<<~ ahu #/the-registers>>
 
 !! The three corpora ~ liturgy, pidgin, and the foreign shelf
 
@@ -57,6 +57,6 @@ The register split rides as a ''hypothesis the harness itself tests'': liturgica
 
 <<~ ॐ ँ -> ?>>
 
-<<^ code="&#x0003;">>ni:///sha-256;2U-_FxnUurZMEDZVVkigWhH58IwehcnviAPBLPBzWig
+<<^ code="&#x0003;">>ni:///sha-256;E3Kob-SxQMYDws1-uRJPC7_ZsOqgU5BNohGLt1Tmm7E
 
 <<^ code="&#x0004;" -> to=?>>

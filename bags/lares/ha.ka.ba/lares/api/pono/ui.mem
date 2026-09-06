@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/ui"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Ui
 
@@ -29,7 +29,7 @@ and renders whatever answers.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -39,7 +39,7 @@ A ui sigil MUST evaluate the filter in the current tiddler context.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -55,7 +55,7 @@ TW5 filter expansion:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -63,6 +63,6 @@ TW5 filter expansion:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;EfGA2IsyRVxkjgAVgAurkcZ6QiMgEeJpFQPFFa2gA4E
+<<^ code="&#x0003;">>ni:///sha-256;L0dVa55Qw8WrT2sQudNmXs_768101GHegGxBwlUjmuY
 
 <<^ code="&#x0004;" -> to=?>>

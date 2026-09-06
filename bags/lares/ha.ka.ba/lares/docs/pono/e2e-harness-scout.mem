@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/e2e-harness-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Wright ~ a spirit's handoff, held unedited
 
@@ -33,7 +33,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/e2e-harness-scout"
 
 <<~/ahu>>
 
-<<~ ahu #the-handoff>>
+<<~ ahu #/the-handoff>>
 
 !! The handoff, verbatim
 
@@ -221,6 +221,6 @@ Finally, two housekeeping notes worth the operator's ear: add a named `test:e2e:
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;">>ni:///sha-256;WSIwkCBI2RUFi_U1vq1GTyuSqC0CkKFO65sxQooYKMQ
+<<^ code="&#x0003;">>ni:///sha-256;XMwyMU6G2zCAfP0MeLw6RcTcK4Z_rfZV5lhTv1hcDyA
 
 <<^ code="&#x0004;" -> to=?>>

@@ -22,7 +22,7 @@ uri-path      = "ha.ka.ba/lares/api/mu/the-syad-perspectives"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Syad Perspectives
 
@@ -32,7 +32,7 @@ Standpoint declares the measure.
 
 <<~/ahu>>
 
-<<~ ahu #relationship>>
+<<~ ahu #/relationship>>
 
 !! The Relationship --- Standpoints License Predications
 
@@ -44,7 +44,7 @@ The two wings hold a ''relationship, not a mapping.'' A stance does not //equal/
 
 <<~/ahu>>
 
-<<~ ahu #the-seven>>
+<<~ ahu #/the-seven>>
 
 !! The Seven --- a Sequential Plane Pierced by One Pole
 
@@ -64,7 +64,7 @@ Six of the seven run a ''sequential axis'' (//krama//): assert from one standpoi
 
 <<~/ahu>>
 
-<<~ ahu #avaktavya>>
+<<~ ahu #/avaktavya>>
 
 !! Avaktavya Law --- the Inexpressible Pole
 
@@ -76,7 +76,7 @@ Two stances stand nearest the pole. ''Poet'' reaches it outward --- analogical r
 
 <<~/ahu>>
 
-<<~ ahu #syad-law>>
+<<~ ahu #/syad-law>>
 
 !! Syad Law
 
@@ -88,7 +88,7 @@ Do not flatten the five measures into one truth spectrum.
 
 <<~/ahu>>
 
-<<~ ahu #stances>>
+<<~ ahu #/stances>>
 
 !! Stance Register Table
 
@@ -116,7 +116,7 @@ One or more stance icons or names may surface in text-spans or other generated o
 
 <<~/ahu>>
 
-<<~ ahu #syad-sigil>>
+<<~ ahu #/syad-sigil>>
 
 !! The `syad` Sigil — license the standpoints
 
@@ -146,7 +146,7 @@ A standpoint MAY carry a `mu` tool through the optional `:` bind (`🏛️:*!`);
 
 <<~/ahu>>
 
-<<~ ahu #stance-tool-modulation>>
+<<~ ahu #/stance-tool-modulation>>
 
 !! Stance Tool Modulation
 
@@ -189,7 +189,7 @@ Examples:
 
 <<~/ahu>>
 
-<<~ ahu #multi-stance>>
+<<~ ahu #/multi-stance>>
 
 !! Multi-Stance
 
@@ -199,7 +199,7 @@ The number does not widen itself. Each claim carries its own confidence, and the
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 !! The Reading Loop
 
@@ -211,7 +211,7 @@ The number does not widen itself. Each claim carries its own confidence, and the
 
 <<~/ahu>>
 
-<<~ ahu #source-shelf>>
+<<~ ahu #/source-shelf>>
 
 !! Source Shelf
 
@@ -251,7 +251,7 @@ The invariant stays here.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -290,7 +290,7 @@ satirist-operational = "nasti-avaktavya"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -304,6 +304,6 @@ satirist-operational = "nasti-avaktavya"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ub_hsjvaoWoZRrsw4IQPBu1XwlA2H2K-DUogQtRaLJk
+<<^ code="&#x0003;">>ni:///sha-256;GOgNH9vPPdU-CV7OwYMqfFFGZlZmypGrHb2kzMFHcyM
 
 <<^ code="&#x0004;" -> to=?>>

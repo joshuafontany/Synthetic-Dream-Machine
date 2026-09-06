@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/infrastructure-as-myth"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #seat>>
+<<~ ahu #/seat>>
 
 ! Infrastructure as Myth — the submission seat
 
@@ -31,6 +31,6 @@ The working design surface — the doctrine-and-paper draft the submission conde
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;B41DFzKvMHxlGqpkqe0QFw3POO1iyKAl0rMmGnSheBo
+<<^ code="&#x0003;">>ni:///sha-256;1Ekwc78wjevquLUoPeZVmYgNxTlXv1ENUOE_CcNMyKE
 
 <<^ code="&#x0004;" -> to=?>>

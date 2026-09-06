@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-fido2-webauthn-the-field-s
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. FIDO2/WebAuthn — the field's own split on this exact question
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 15,330 characters
 
@@ -114,7 +114,7 @@ These gaps exist because WebSearch was already at its session limit (0/200 remai
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 4,515 characters
 
@@ -147,12 +147,12 @@ This second pass **strengthens, not overturns**, my original report: the deviceP
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;O9IJA9yx179AUx62z4f1TJCrdpIyeSOjRYPDQMYbGYE
+<<^ code="&#x0003;">>ni:///sha-256;jCBtNkkx-S2D3b6iG5177AAYw0ZOuc7sZvhXbostCNk
 
 <<^ code="&#x0004;" -> to=?>>

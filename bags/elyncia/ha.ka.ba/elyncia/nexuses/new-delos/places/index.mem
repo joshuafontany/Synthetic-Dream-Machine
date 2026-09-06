@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/index"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! New Delos ~ Places Index
 
@@ -29,7 +29,7 @@ hex-scale.'' Feed every hex: horizon · hidden handle · bleed.
 
 <<~/ahu>>
 
-<<~ ahu #roster>>
+<<~ ahu #/roster>>
 
 !! The Destination Roster
 
@@ -50,6 +50,6 @@ miles (near the Izmir-coast) — constellation members hanging over other Realms
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tsnaY-QVNjYj3eUBu7wH9-Fqx6JTjhwWil30npRQLPw
+<<^ code="&#x0003;">>ni:///sha-256;o77RHyA78OJDnhdsoFupmGE5JLI-c0gVtL3Uy8MukPg
 
 <<^ code="&#x0004;" -> to=?>>

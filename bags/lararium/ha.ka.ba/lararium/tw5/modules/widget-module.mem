@@ -16,7 +16,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/widget-module"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Widget Module Protocol
 
@@ -36,7 +36,7 @@ TW5 discovers widget modules via tiddlers with `module-type = "widget"`. The wid
 
 <<~/ahu>>
 
-<<~ ahu #stub>>
+<<~ ahu #/stub>>
 
 !! Stub Tiddler (preloaded)
 
@@ -55,13 +55,13 @@ export const LARARIUM_WIDGETS_TIDDLER = {
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/widget-module" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #widget-registry>>
+<<~ ahu #/widget-registry>>
 
 !! Widget Tag → Class Map
 
@@ -80,13 +80,13 @@ export const LARARIUM_WIDGETS_TIDDLER = {
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/tw5-modules>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3y3jpxfJdWacSGIuXQX9Wsrec7vysVCrBO9p1iDCs3Y
+<<^ code="&#x0003;">>ni:///sha-256;H7Laz0q3idYn4S70jCtrT81w3ALo7W3PKh_xlwgB0Yk
 
 <<^ code="&#x0004;" -> to=?>>

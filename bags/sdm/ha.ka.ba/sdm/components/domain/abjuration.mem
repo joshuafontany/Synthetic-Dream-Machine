@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/domain/abjuration"
 
 ! Abjuration
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ The domain of protection and negation — barriers, wards, dispelling, raising t
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Orients a module toward ''defense'': it blocks, deflects, or unmakes rather than
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Pairs with `function/barrier` and `function/ward`. Counters offensive crossings;
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;SBI05GxBRWDNyuyuQjDgAmCblpJyondcAIKdLKmDVMQ
+<<^ code="&#x0003;">>ni:///sha-256;urzDc5EmFDe6qEKbURmR648_y0irpIpHXvZ6gWF1jdo
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/attack"
 
 ! Attack
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ A canonical resolution hook: the Power resolves ''against the target's Defense''
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Modifies how the effect lands: roll to hit Defense. Overcharge typically scales 
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Composes with offensive functions and any domain. Rarely sits on `domain/divinat
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Qongra0-9uErBoVZuww27DXK8KvzB3DvjsqS0_ewnd0
+<<^ code="&#x0003;">>ni:///sha-256;HOhhSRi50zCybpNjGMorbaHgXQBsVTqfh2ZGK2K3Tto
 
 <<^ code="&#x0004;" -> to=?>>

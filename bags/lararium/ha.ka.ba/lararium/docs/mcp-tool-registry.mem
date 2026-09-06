@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/docs/mcp-tool-registry"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! MCP Tool Registry
 
@@ -45,7 +45,7 @@ Two env guards gated write access and canvas connectivity.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -59,7 +59,7 @@ All tools pending Automerge-native MCP redesign return errors except:
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -152,13 +152,13 @@ inputs      = ["uri: string"]
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/node-host>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/reaction-graph>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;39zXLNW1U47c7QEFAlhvMZxXDNbZA0D_ugUYxh92prw
+<<^ code="&#x0003;">>ni:///sha-256;C7NrORfPWeE3TxgLvr2l2tlNcbLrxUdeM4pvSAzFDSY
 
 <<^ code="&#x0004;" -> to=?>>

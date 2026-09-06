@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/campaign/session-0-1-render-research"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Painter's Substrate ~ Session 0.1 Render Research
 
@@ -32,7 +32,7 @@ fix ''first canon'' (the six open proposals in #negentropy) go to the operator b
 
 <<~/ahu>>
 
-<<~ ahu #painter-red>>
+<<~ ahu #/painter-red>>
 
 !! The Painter's Red ~ boot handoff
 
@@ -42,7 +42,7 @@ fix ''first canon'' (the six open proposals in #negentropy) go to the operator b
 
 <<~/ahu>>
 
-<<~ ahu #midjourney>>
+<<~ ahu #/midjourney>>
 
 !! Midjourney V8.2 ~ prompt anatomy and workflow (net research, 2026-08-13)
 
@@ -71,7 +71,7 @@ fix ''first canon'' (the six open proposals in #negentropy) go to the operator b
 
 <<~/ahu>>
 
-<<~ ahu #delos-archaeology>>
+<<~ ahu #/delos-archaeology>>
 
 !! Delos Archaeology ~ verified against the live net (2026-08-14)
 
@@ -92,7 +92,7 @@ Real Delos grounds the venue:
 
 <<~/ahu>>
 
-<<~ ahu #negentropy>>
+<<~ ahu #/negentropy>>
 
 !! Negentropy ~ the canon gaps (five settled 2026-08-15, two open)
 
@@ -154,7 +154,7 @@ skin-count, the archaic-Gorgon bronze-hands attribution, the huautli compression
 
 <<~/ahu>>
 
-<<~ ahu #bag-sweep>>
+<<~ ahu #/bag-sweep>>
 
 !! Repo Bag Sweep ~ character canon in the bags
 
@@ -181,7 +181,7 @@ skin-count, the archaic-Gorgon bronze-hands attribution, the huautli compression
 
 <<~/ahu>>
 
-<<~ ahu #witness-heritage>>
+<<~ ahu #/witness-heritage>>
 
 !! Spirit Witness ~ the Fae Casting Bench (FTLS ch03)
 
@@ -350,7 +350,7 @@ Finding: Ch03 read COMPLETE — 34 heritages + full effect catalogue, every one 
 
 <<~/ahu>>
 
-<<~ ahu #witness-elyncia>>
+<<~ ahu #/witness-elyncia>>
 
 !! Spirit Witness ~ the Elyncia Visual Canon
 
@@ -472,7 +472,7 @@ Rendering-relevant laws:
 
 <<~/ahu>>
 
-<<~ ahu #witness-ftls>>
+<<~ ahu #/witness-ftls>>
 
 !! Spirit Witness ~ the FTLS Visual Vocabulary
 
@@ -605,7 +605,7 @@ Finding: Corpus yields strong *object* and *tag* vocabulary (Wild Mage item tabl
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/session-0-1-handoff-prompts>>
@@ -613,6 +613,6 @@ Finding: Corpus yields strong *object* and *tag* vocabulary (Wild Mage item tabl
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;k1AoS7SnxS8rEqsSRnSBookOPVzKLA8nL8X77hxg9mw
+<<^ code="&#x0003;">>ni:///sha-256;wmzA9ITkq0k-Po2X8OeWexa5x1iMhGyc34ADFmrKH5o
 
 <<^ code="&#x0004;" -> to=?>>

@@ -23,7 +23,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/alignment-layer"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Alignment Layer
 
@@ -42,7 +42,7 @@ ABOVE capability. This meme defines it. It sits beside Beelay sync and above Key
 
 <<~/ahu>>
 
-<<~ ahu #two-planes>>
+<<~ ahu #/two-planes>>
 
 !! The two planes never merge
 
@@ -64,7 +64,7 @@ trust — spammers pass DMARC. Authenticity passes as necessary but insufficient
 
 <<~/ahu>>
 
-<<~ ahu #primitives>>
+<<~ ahu #/primitives>>
 
 !! Primitives — all are signed assertions stored as ordinary content
 
@@ -89,7 +89,7 @@ bags like any other content, evaluated locally against a per-island trust root.
 
 <<~/ahu>>
 
-<<~ ahu #transitive-trust>>
+<<~ ahu #/transitive-trust>>
 
 !! Transitive trust — capped, area-scoped (TrustNet/Appleseed)
 
@@ -112,7 +112,7 @@ causal-island model denies.
 
 <<~/ahu>>
 
-<<~ ahu #sybil>>
+<<~ ahu #/sybil>>
 
 !! Sybil resistance — the invitation tree CARRIES the defense
 
@@ -126,7 +126,7 @@ make them ''socially reachable only through accountable edges''.
 
 <<~/ahu>>
 
-<<~ ahu #enforcement>>
+<<~ ahu #/enforcement>>
 
 !! Enforcement — at the Beelay boundary, by withholding
 
@@ -146,7 +146,7 @@ Beelay       → the enforcement surface: consult the verdict before sync/relay.
 
 <<~/ahu>>
 
-<<~ ahu #scale-composition>>
+<<~ ahu #/scale-composition>>
 
 !! Composition with the scale ladder
 
@@ -170,7 +170,7 @@ only the //root// and the //default subscriptions// change:
 
 <<~/ahu>>
 
-<<~ ahu #must-not>>
+<<~ ahu #/must-not>>
 
 !! Purity constraints — what the alignment layer holds
 
@@ -184,7 +184,7 @@ only the //root// and the //default subscriptions// change:
 
 <<~/ahu>>
 
-<<~ ahu #closure-coherence>>
+<<~ ahu #/closure-coherence>>
 
 !! Coherence — the membership face the closure model formalizes
 
@@ -196,7 +196,7 @@ The veil's cost-dial reads as the ''WHO-plane membership face'' that [[group-as-
 
 <<~/ahu>>
 
-<<~ ahu #fiction>>
+<<~ ahu #/fiction>>
 
 !! Fiction-layer reading — the Lemuria rite
 
@@ -209,7 +209,7 @@ right — to decide whose presence the hearth refuses.
 
 <<~/ahu>>
 
-<<~ ahu #prior-art>>
+<<~ ahu #/prior-art>>
 
 !! Prior art
 
@@ -227,7 +227,7 @@ right — to decide whose presence the hearth refuses.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/orichalcum-capabilities>>
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model>>
@@ -237,6 +237,6 @@ right — to decide whose presence the hearth refuses.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;OYd7JcIUULZ6E8XurUiju1DUWoqncWEKMAhDKbFSpYQ
+<<^ code="&#x0003;">>ni:///sha-256;CHGp9wvy1lFJOaZvkbnoni2GUaS3ABRdIC4_IaDOmY8
 
 <<^ code="&#x0004;" -> to=?>>

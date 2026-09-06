@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/factions/order-of-amaranth"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Order of Amaranth
 
@@ -30,7 +30,7 @@ Management of the House of Masks, and its floor's neutrality, ride under their s
 
 <<~/ahu>>
 
-<<~ ahu #livery>>
+<<~ ahu #/livery>>
 
 !! Livery & Sacrament
 
@@ -49,13 +49,13 @@ honey into sacred shapes, shared and eaten.)//
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LJvfrza0fm769w3C0bxvaAEc35sCs4CSyiENZKjBybc
+<<^ code="&#x0003;">>ni:///sha-256;ealE6xTpDusWtWIyMd7f5bWKIFJUQahk_uMcBNfPtb0
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/reaction-graph"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Reaction Graph
 
@@ -28,7 +28,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the incoming binding set — fromUri, listenable, toUri, subscribable, source (wired|subscribed)
 ⏿ orient dispatch mode: fireSync for view-layer; fire/fireAll for async; fireRace/fireRush reserved
@@ -38,7 +38,7 @@ Routes (fromUri, listenable) → (toUri, subscribable) bindings; wired and subsc
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -53,7 +53,7 @@ The graph defines the Tier 0 dispatch surface — all kumu event crossings route
 
 <<~/ahu>>
 
-<<~ ahu #binding-shape>>
+<<~ ahu #/binding-shape>>
 
 !! Binding Shape
 
@@ -71,7 +71,7 @@ source       = "wired | subscribed"
 
 <<~/ahu>>
 
-<<~ ahu #dispatch-modes>>
+<<~ ahu #/dispatch-modes>>
 
 !! Dispatch Modes
 
@@ -90,7 +90,7 @@ fireRush         — puka: first to resolve wins; others receive AbortSignal
 
 <<~/ahu>>
 
-<<~ ahu #subscription-api>>
+<<~ ahu #/subscription-api>>
 
 !! Subscription API
 
@@ -112,7 +112,7 @@ The returned Promise resolves when the listenable fires once; `cancel()` rejects
 
 <<~/ahu>>
 
-<<~ ahu #update-invariant>>
+<<~ ahu #/update-invariant>>
 
 !! Update Invariant
 
@@ -125,7 +125,7 @@ This preserves in-flight kukali suspensions across TW5 wiki-change events.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -140,7 +140,7 @@ reaction-roles = ["listenable", "subscribable", "observes", "throttles", "deboun
 
 <<~/ahu>>
 
-<<~ ahu #yin-collapse-target>>
+<<~ ahu #/yin-collapse-target>>
 
 !! Yin-Collapse — Completed (2026-05-15)
 
@@ -194,7 +194,7 @@ exclusively through `wiki.dispatchEvent("tm-verse-event")` inside the nalu hook.
 
 <<~/ahu>>
 
-<<~ ahu #scope-1-networking>>
+<<~ ahu #/scope-1-networking>>
 
 !! Scope 1 ~ the CRDT-wave surface [surgical 2026-07-03]
 
@@ -202,7 +202,7 @@ The reaction dispatch layer runs as a ''Scope-1'' CRDT-wave surface under the tw
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/pranala>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/papalohe>>
@@ -210,6 +210,6 @@ The reaction dispatch layer runs as a ''Scope-1'' CRDT-wave surface under the tw
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;EU9TngmYZiQblspkSRZdwRwl3vPGLmcGu-_6YwGa3YY
+<<^ code="&#x0003;">>ni:///sha-256;1FYonQPFBM1oeGBGNyqvcI5hIBl4sOINXCn59NWDelg
 
 <<^ code="&#x0004;" -> to=?>>

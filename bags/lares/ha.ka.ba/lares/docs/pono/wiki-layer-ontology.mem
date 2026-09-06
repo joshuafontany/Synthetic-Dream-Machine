@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/wiki-layer-ontology"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Wiki-Layer Ontology
 
@@ -29,7 +29,7 @@ Every wiki composes from a recipe/cascade stack, and one bag in that stack works
 
 <<~/ahu>>
 
-<<~ ahu #rosetta>>
+<<~ ahu #/rosetta>>
 
 !! The Rosetta Table
 
@@ -48,7 +48,7 @@ The OCI column carries structure only. Our layers sync as CRDT coordinates, not 
 
 <<~/ahu>>
 
-<<~ ahu #quine>>
+<<~ ahu #/quine>>
 
 !! The Wiki-as-Bag Quine
 
@@ -66,7 +66,7 @@ The quine governs ''every'' wiki — user and system alike. `@oracle` //alone// 
 
 <<~/ahu>>
 
-<<~ ahu #bag-as-cap>>
+<<~ ahu #/bag-as-cap>>
 
 !! A Bag Is a Capability, Not a Format
 
@@ -96,7 +96,7 @@ composition and never to the meme.
 
 <<~/ahu>>
 
-<<~ ahu #oracle-planes>>
+<<~ ahu #/oracle-planes>>
 
 !! Four Homes — Three Registries and the Seed
 
@@ -139,7 +139,7 @@ Islands resolve each slot from its plane: invariants + system bags from the `@or
 
 <<~/ahu>>
 
-<<~ ahu #lifecycle-law>>
+<<~ ahu #/lifecycle-law>>
 
 !! Law 1 — Lifecycle Coupling Defines the Boundary
 
@@ -147,7 +147,7 @@ The write-layer boundary derives from what happens when the wiki dies, never fro
 
 <<~/ahu>>
 
-<<~ ahu #naming-law>>
+<<~ ahu #/naming-law>>
 
 !! Law 2 — Named ⇒ Shareable; Typed-Slot ⇒ Owned
 
@@ -162,7 +162,7 @@ Shareability reads off //where a name lives//, not off a flag:
 
 <<~/ahu>>
 
-<<~ ahu #crossing-law>>
+<<~ ahu #/crossing-law>>
 
 !! Law 3 — Only the Write Layer Crosses; Motion Rides ACTION Verbs
 
@@ -172,7 +172,7 @@ When `sdm` injects into `elyncia`, exactly one thing travels: `sdm`'s write laye
 
 <<~/ahu>>
 
-<<~ ahu #write-law>>
+<<~ ahu #/write-law>>
 
 !! Law 4 — Writes Flow Through the Layer's Own Wiki
 
@@ -182,7 +182,7 @@ The write layer marks the write boundary. From a consuming wiki's vantage, every
 
 <<~/ahu>>
 
-<<~ ahu #totality-law>>
+<<~ ahu #/totality-law>>
 
 !! Law 4b — The Cascade Routes; It Never Decides Whether to Write
 
@@ -200,7 +200,7 @@ The write layer marks the write boundary. From a consuming wiki's vantage, every
 
 <<~/ahu>>
 
-<<~ ahu #the-daemon-wiki>>
+<<~ ahu #/the-daemon-wiki>>
 
 !! The daemon wiki ~ the first one built, and no exception (operator ruling, 2026-09-02)
 
@@ -228,7 +228,7 @@ The recipe holds no gap. `expandRecipe` mints the same five slots for every slug
 
 <<~/ahu>>
 
-<<~ ahu #dag-law>>
+<<~ ahu #/dag-law>>
 
 !! Law 5 — The Recipe Graph Stays a DAG
 
@@ -236,7 +236,7 @@ The moment layers mount layers, cycles become expressible. Recipe-watch MUST ref
 
 <<~/ahu>>
 
-<<~ ahu #shore-law>>
+<<~ ahu #/shore-law>>
 
 !! The Lararium Shore Law — loose interop across causal islands (operator ruling, 2026-06-18)
 
@@ -250,7 +250,7 @@ Every boundary a lararium holds reads as a ''causal-island shore'' (`causal-isla
 
 <<~/ahu>>
 
-<<~ ahu #crossing-grain>>
+<<~ ahu #/crossing-grain>>
 
 !! Crossing Grain — SETTLED (operator, 2026-06-10)
 
@@ -258,7 +258,7 @@ The wiki-level crossing earns a ''bag-grain verb pair'', SPARQL Update derived: 
 
 <<~/ahu>>
 
-<<~ ahu #open-transitive-closure>>
+<<~ ahu #/open-transitive-closure>>
 
 !! Open — Transitive Closure (held, not settled)
 
@@ -266,7 +266,7 @@ When `@caverns-of-neo-thracia` mounts `elyncia`, does it inherit `elyncia`'s lib
 
 <<~/ahu>>
 
-<<~ ahu #pack-refinements>>
+<<~ ahu #/pack-refinements>>
 
 !! Pack Model — Owed Refinements (held; external precedent)
 
@@ -281,7 +281,7 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -293,6 +293,6 @@ Both #42 operator forks resolved by intervening work: `SHA256(uri+path)` retired
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;rKTT0YTGD76meifopRIZ2tcveTXY91-jGrYphVNQ_FE
+<<^ code="&#x0003;">>ni:///sha-256;JiRlIk3cw5Y_6jjzcGW0kYeQH0E9LrXTVMH56HkR0X0
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lararium/mesh/mookuauhau"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Moʻokūʻauhau ~ Ancestors & Cousins of the One Fractal
 
@@ -29,7 +29,7 @@ The chart sits beside the 2026-05-28 layer-survey, never replacing it — that o
 
 <<~/ahu>>
 
-<<~ ahu #ancestors>>
+<<~ ahu #/ancestors>>
 
 !! The Ancestors ~ the deep roots
 
@@ -45,7 +45,7 @@ These the lineage does not //extend// — it ''inherits''. To re-derive them rea
 
 <<~/ahu>>
 
-<<~ ahu #pillars>>
+<<~ ahu #/pillars>>
 
 !! The Three Pillars ~ one recursion each, none seeing the others
 
@@ -61,7 +61,7 @@ The load-bearing cousins. Each carries //one// of the three recursions whole —
 
 <<~/ahu>>
 
-<<~ ahu #cousins>>
+<<~ ahu #/cousins>>
 
 !! The Cousins ~ the wider family
 
@@ -78,7 +78,7 @@ The kin that each solve one facet, citably, so the house adopts rather than rein
 
 <<~/ahu>>
 
-<<~ ahu #corpse>>
+<<~ ahu #/corpse>>
 
 !! The Anti-Pattern Corpse ~ Matrix, and why one-door-per-axis
 
@@ -86,7 +86,7 @@ Matrix //nominally// separates rooms ⊥ federation ⊥ power-levels. In practic
 
 <<~/ahu>>
 
-<<~ ahu #hazard>>
+<<~ ahu #/hazard>>
 
 !! The Unsolved Hazard ~ the leak two lineages both flag
 
@@ -96,7 +96,7 @@ This the lineage does not sweep. The leak rides ''bounded'', never sealed: every
 
 <<~/ahu>>
 
-<<~ ahu #weld>>
+<<~ ahu #/weld>>
 
 !! The Weld ~ the verdict that survives contact
 
@@ -113,6 +113,6 @@ No one has made ''one composition primitive serve simultaneously as the code-wir
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/dreamnet-architecture>>
 
-<<^ code="&#x0003;">>ni:///sha-256;R3S_TUDajTmZ-TAl-TA9QA5tj1OepDGB41VdFI6K99U
+<<^ code="&#x0003;">>ni:///sha-256;HQasKpuT75qgeWAGw3LpXHNdV95-UoUMhbXboIFw4T4
 
 <<^ code="&#x0004;" -> to=?>>

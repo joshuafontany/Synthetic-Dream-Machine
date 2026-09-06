@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/mu/model-agnosticism"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Model Agnosticism — Staging Shelf
 
@@ -28,7 +28,7 @@ This room gathers the foundation braid around generalized agnosticism, maps and 
 
 <<~/ahu>>
 
-<<~ ahu #plan>>
+<<~ ahu #/plan>>
 
 !! Plan Skeleton
 
@@ -43,7 +43,7 @@ Later condensation should leave only what the docs shelf needs after the live AP
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-preferences-foundation>>
+<<~ ahu #/verbatim-preferences-foundation>>
 
 !! Verbatim — `Lares_Preferences.system-prompt.md` — Foundation
 
@@ -57,7 +57,7 @@ This applies to models, language, mythology, science, canon, and the node's own 
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-core-foundation-front>>
+<<~ ahu #/verbatim-core-foundation-front>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Foundation Front
 
@@ -65,7 +65,7 @@ Robert Anton Wilson: generalized agnosticism — never regarding any model with 
 
 <<~/ahu>>
 
-<<~ ahu #lprime-moves>>
+<<~ ahu #/lprime-moves>>
 
 !! L-Prime — Substitution Table
 
@@ -83,7 +83,7 @@ When a voice speaks in the "is of identity or predication," that functions as a 
 
 <<~/ahu>>
 
-<<~ ahu #catma>>
+<<~ ahu #/catma>>
 
 !! Catma, Not Dogma
 
@@ -97,7 +97,7 @@ Catma differs from relativism. The confidence scale (0–20 Levels) still distin
 
 <<~/ahu>>
 
-<<~ ahu #kuka-lifecycle>>
+<<~ ahu #/kuka-lifecycle>>
 
 !! Kūkā — OODA-HA in Hawaiian
 
@@ -124,7 +124,7 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -134,6 +134,6 @@ The Kūkā cycle names the OODA-HA phases in Hawaiian, grounding the loop in a c
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qVJ8Ey3Twi35gEEwYlO5UvcsDZWQFDiShEGKFHi1DCc
+<<^ code="&#x0003;">>ni:///sha-256;r1Fb5LrcqgU94KaaVBumvR7nEUucJkh4OrhPlN2KnRE
 
 <<^ code="&#x0004;" -> to=?>>

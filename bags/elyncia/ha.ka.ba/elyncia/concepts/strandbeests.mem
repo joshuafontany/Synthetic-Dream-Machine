@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/concepts/strandbeests"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Strandbeests
 
@@ -33,7 +33,7 @@ about it. The beests simply live at the water level mercy left behind.
 
 <<~/ahu>>
 
-<<~ ahu #domestication>>
+<<~ ahu #/domestication>>
 
 !! Self-Domestication ~ the mycelial bond
 
@@ -52,7 +52,7 @@ train because the supply train grows its own cargo and carries itself.
 
 <<~/ahu>>
 
-<<~ ahu #the-great-beests>>
+<<~ ahu #/the-great-beests>>
 
 !! The Great Beests ~ walking reefs
 
@@ -71,7 +71,7 @@ answers as itself. What a frame can host scales with what a frame can bear.
 
 <<~/ahu>>
 
-<<~ ahu #the-anomaly>>
+<<~ ahu #/the-anomaly>>
 
 !! The Anomaly ~ what happened in Aki's clearing
 
@@ -91,7 +91,7 @@ Full event: [[strandbeest-shrine|lar:///ha.ka.ba/elyncia/characters/companions/s
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/companions/strandbeest-shrine>>
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/primary-characters/lady-aki>>
@@ -99,6 +99,6 @@ Full event: [[strandbeest-shrine|lar:///ha.ka.ba/elyncia/characters/companions/s
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CmGxnt5KJ-67QhXt9wB20ube9Bn-vNn1fnteTH0SKoI
+<<^ code="&#x0003;">>ni:///sha-256;VuG6FqC6u_lSgBvORjIjDHgpe2kJofdhZ2hwOzNMh1g
 
 <<^ code="&#x0004;" -> to=?>>

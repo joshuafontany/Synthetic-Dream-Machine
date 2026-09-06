@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! cold-boot-ceremony — Contract
 
@@ -40,13 +40,13 @@ Caller MUST check the identity tiddler does not already exist before writing (id
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/cold-boot-ceremony" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/social-doc>>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-four-tools>>
@@ -54,6 +54,6 @@ Caller MUST check the identity tiddler does not already exist before writing (id
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LV92YVV1bOOyNMJkc3lJL3LViQWUd5D6knWtacgyRZc
+<<^ code="&#x0003;">>ni:///sha-256;ERyJ1H4CmZCeukoufOgHANPoTC63VjsPqBO6C4XsIJ8
 
 <<^ code="&#x0004;" -> to=?>>

@@ -99,7 +99,7 @@ user-owned content within a domain.
 Hostless URIs never require network access to resolve. Hostful URIs may require
 a network hop for DID resolution but the content itself is local (CRDT store).
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -109,6 +109,6 @@ a network hop for DID resolution but the content itself is local (CRDT store).
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;lePtBoJ_ZTAJnUFA7Axk5BcS2zNlFqELPLw_RS7JUXQ
+<<^ code="&#x0003;">>ni:///sha-256;EYK3t9Pok8ZLx1LVEXCoVKchXiNlVBqQVCn7dcmKGG4
 
 <<^ code="&#x0004;" -> to=?>>

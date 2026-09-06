@@ -22,7 +22,7 @@ written   = "2026-06-25"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Capture & Annotation ~ the holistic model
 
@@ -41,7 +41,7 @@ holds them together.
 
 <<~/ahu>>
 
-<<~ ahu #the-gap>>
+<<~ ahu #/the-gap>>
 
 !! The Gap ~ what holes this fills
 
@@ -65,7 +65,7 @@ behind the causal-island shore).
 
 <<~/ahu>>
 
-<<~ ahu #the-stack>>
+<<~ ahu #/the-stack>>
 
 !! The Stack ~ four layers, one home
 
@@ -79,7 +79,7 @@ hearth-bound, never federates); the distilled bearings cross to the ''ley-line''
 
 <<~/ahu>>
 
-<<~ ahu #forward-facing-nalu>>
+<<~ ahu #/forward-facing-nalu>>
 
 !! The Forward-Facing Capture Engine ~ collect · crest · flush (2026-06-25 inversion)
 
@@ -118,7 +118,7 @@ adapter), never the miner.
 
 <<~/ahu>>
 
-<<~ ahu #nalu-flush-hardening>>
+<<~ ahu #/nalu-flush-hardening>>
 
 !! Nalu-Flush Hardening ~ the four-domain survey (2026-06-25)
 
@@ -149,7 +149,7 @@ Hering-Breuer safety valve).
 
 <<~/ahu>>
 
-<<~ ahu #isomorphic-telemetry-vm>>
+<<~ ahu #/isomorphic-telemetry-vm>>
 
 !! The Isomorphic Telemetry-VM ~ one worker, capability-shaped shores (2026-06-26)
 
@@ -178,7 +178,7 @@ reserve · local/relay flush · the pure `buildPatch` twin).
 
 <<~/ahu>>
 
-<<~ ahu #layer-capture>>
+<<~ ahu #/layer-capture>>
 
 !! Layer 1 ~ Capture (what was said)
 
@@ -200,7 +200,7 @@ a backfill for legacy drawers. Depth: `lar-telemetry`, #forward-facing-nalu.
 
 <<~/ahu>>
 
-<<~ ahu #layer-annotation>>
+<<~ ahu #/layer-annotation>>
 
 !! Layer 2 ~ Annotation (how it stood)
 
@@ -218,7 +218,7 @@ gradient `\procedure`; `$wikify`/`renderTiddler` extracts → `lar_*`). Depth:
 
 <<~/ahu>>
 
-<<~ ahu #layer-multi-agent>>
+<<~ ahu #/layer-multi-agent>>
 
 !! Layer 3 ~ Multi-Agent (who-drove-whom)
 
@@ -248,7 +248,7 @@ multi-agent spec.
 
 <<~/ahu>>
 
-<<~ ahu #layer-ephemeral>>
+<<~ ahu #/layer-ephemeral>>
 
 !! Layer 4 ~ Ephemeral (what to never keep)
 
@@ -271,7 +271,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 <<~/ahu>>
 
-<<~ ahu #operator-commands>>
+<<~ ahu #/operator-commands>>
 
 !! The Operator Command Surface
 
@@ -288,7 +288,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 <<~/ahu>>
 
-<<~ ahu #rulings>>
+<<~ ahu #/rulings>>
 
 !! Operator Rulings Ledger
 
@@ -296,7 +296,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 <<~/ahu>>
 
-<<~ ahu #backlog>>
+<<~ ahu #/backlog>>
 
 !! Implementation Backlog
 
@@ -328,7 +328,7 @@ tmpfs is the never-touch-disk option). Depth: `agent-worldline#lifecycle`.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -349,6 +349,6 @@ this model annotates from ([[lar-telemetry|lar:///ha.ka.ba/lararium/api/lar-tele
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;sIBRyyj6Yrb6NeZRFbT77_BjTcgLWXL_peA-eu7BDIM
+<<^ code="&#x0003;">>ni:///sha-256;CXlQVW6SBbZooBXfuV0XYclEwEl6dQB0gfISMwe89SY
 
 <<^ code="&#x0004;" -> to=?>>

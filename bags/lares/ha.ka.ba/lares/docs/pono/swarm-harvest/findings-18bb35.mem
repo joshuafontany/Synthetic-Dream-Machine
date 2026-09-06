@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/findings-18bb35"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! FINDINGS
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 29,264 characters
 
@@ -284,12 +284,12 @@ Note the twin: **Emby CVE-2021-25827 (X-Forwarded-For → local IP → login byp
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MMK9Wy9C2wYkGBQGazh4LbpigYw_8TdT6Ezge_8eXO0
+<<^ code="&#x0003;">>ni:///sha-256;ioErHr5kvwnkJ-jvi529ne33QeYrSJ3811duG-s582s
 
 <<^ code="&#x0004;" -> to=?>>

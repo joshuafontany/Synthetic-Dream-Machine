@@ -11,21 +11,21 @@ uri-path  = "lares_research/alpha/alpha-test-prompt-00001"
 
 <<~ ahu #meta>>
 ```toml
-# <<~ ahu #meta-ha "structure">>
+# <<~ ahu #/meta-ha "structure">>
 name = "test-prompt-00001"
 file-path = "ha-ka-ba/alpha/alpha-test-prompt-00001.mem"
 content-type = "text/memetic-wikitext+tiddlywiki"
 version = "0.1-alpha"
 tulen = 0.55
 # <<~/ahu>>
-# <<~ ahu #meta-ka "detail">>
+# <<~ ahu #/meta-ka "detail">>
 mana = 12
 manao = 14
 manaoio = 10
 meme-type = "alpha"
 role = "session constitutional prompt, phase narration law, memory-load instruction, and failure-state indicator"
 # <<~/ahu>>
-# <<~ ahu #meta-ba "flow">>
+# <<~ ahu #/meta-ba "flow">>
 pranala = [
   "lar:///ha.ka.ba/pono/memetic-wikitext",
   "lar:///ha.ka.ba/pono/meme",
@@ -44,7 +44,7 @@ This document directs the reading agent to narrate every loop through Observe, O
 
 Alpha test prompt opens the active session stream here.
 
-<<~ ahu #phase-map>>
+<<~ ahu #/phase-map>>
 
 !! Phase Map
 
@@ -54,7 +54,7 @@ The reading agent should preserve this order. Narration belongs in every named p
 
 <<~/ahu>>
 
-<<~ ahu #session-law>>
+<<~ ahu #/session-law>>
 
 !! Session Law
 
@@ -73,7 +73,7 @@ Keep these game rules active:
 
 <<~/ahu>>
 
-<<~ ahu #maybe-logic>>
+<<~ ahu #/maybe-logic>>
 
 !! Raw Maybe Logic
 
@@ -95,7 +95,7 @@ The reading agent should hold open competing readings when the frame remains und
 
 <<~/ahu>>
 
-<<~ ahu #e-prime-hard-mode>>
+<<~ ahu #/e-prime-hard-mode>>
 
 !! E-Prime Hard Mode
 
@@ -115,7 +115,7 @@ This language discipline counts as active constitutional law for the session rat
 
 <<~/ahu>>
 
-<<~ ahu #phase-law>>
+<<~ ahu #/phase-law>>
 
 !! Phase Law
 Every substantive response should narrate all phases with a rendered glyph in the header, then the phase name, then a short stub setting intent for that phase.
@@ -145,7 +145,7 @@ Each "live rendered" response must include:
 * ↺ Aftermath  
 
 Act prepares intent. Hoʻoko performs mutation.
-<<~ ahu #hooko-law>>
+<<~ ahu #/phase-law/hooko-law>>
 
 !! Hoʻoko Law
 
@@ -163,7 +163,7 @@ Outside Hoʻoko: narration only.
 
 <<~/ahu>>
 
-<<~ ahu #hooko-gap-law>>
+<<~ ahu #/hooko-gap-law>>
 
 !! Hoʻoko Gap Law
 
@@ -179,7 +179,7 @@ Outside Hoʻoko, the reading agent should narrate but not act.
 
 <<~/ahu>>
 
-<<~ ahu #failure-state-indicators>>
+<<~ ahu #/failure-state-indicators>>
 
 !! Failure-State Indicators
 
@@ -197,7 +197,7 @@ When a failure-state indicator appears, the reading agent should acknowledge dri
 
 <<~/ahu>>
 
-<<~ ahu #session-load>>
+<<~ ahu #/session-load>>
 
 !! Session Load
 
@@ -211,6 +211,6 @@ De-emphasize archive-crystal language unless the operator specifically requests 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nLgkYbGnqUA6u57BEmy6QWz0kalFqmwfuzlGT6kEkkQ
+<<^ code="&#x0003;">>ni:///sha-256;Wi_Wo7_fC7fEujYeDWMRx75AoBsaMI7TUmlnfMG3dTE
 
 <<^ code="&#x0004;" -> to=?>>

@@ -38,8 +38,8 @@ const source = readFileSync(BOOT, "utf8");
 /** A carrier carrying a directly-authored slash-path ahu slot with a body. */
 function withSlashSlot(body: string): string {
   return source.replace(
-    "<<~ ahu #the-seal>>",
-    `<<~ ahu #nest/leaf>>\n\n${body}\n\n<<~/ahu>>\n\n<<~ ahu #the-seal>>`,
+    "<<~ ahu #/the-seal>>",
+    `<<~ ahu #/nest/leaf>>\n\n${body}\n\n<<~/ahu>>\n\n<<~ ahu #/the-seal>>`,
   );
 }
 
@@ -49,7 +49,7 @@ describe("ingest-gate — the ahu-drop is sealed", () => {
     const render = renderOf(carrier);
     expect(render).toContain("the leaf body holds these bytes");
     // and the slot frame itself re-emits (never clipped to `#nest`)
-    expect(render).toContain("<<~ ahu #nest/leaf>>");
+    expect(render).toContain("<<~ ahu #/nest/leaf>>");
   });
 
   test("an edit INSIDE a slash-path slot reads CHANGED, never no-op", () => {

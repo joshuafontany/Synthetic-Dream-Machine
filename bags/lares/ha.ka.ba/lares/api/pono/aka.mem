@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/aka"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Aka
 
@@ -31,7 +31,7 @@ a frozen embed can age from its source, so edges SHOULD carry a confidence ratin
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the target URI — this meme observes that one; note whether confidence bound is needed
 ⏿ orient: family:transclusion, traversal:source-to-target, propagation:none; read-only; no execution pulse
@@ -41,7 +41,7 @@ a frozen embed can age from its source, so edges SHOULD carry a confidence ratin
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -60,7 +60,7 @@ that lack a confidence rating when the source-side context signals uncertainty.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -86,7 +86,7 @@ Full pranala expansion:
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -113,7 +113,7 @@ confidence-bounded = true
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -124,6 +124,6 @@ confidence-bounded = true
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4JX7FWcQqL5NUN3WIcphS3F02sO2G_fGJZAvcFaJgJI
+<<^ code="&#x0003;">>ni:///sha-256;3BpDEr_YEmJlIEn_ltunofWRnxKVcFEOCb5cE795uhA
 
 <<^ code="&#x0004;" -> to=?>>

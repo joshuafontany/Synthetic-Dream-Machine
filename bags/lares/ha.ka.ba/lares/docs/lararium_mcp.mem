@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the server as it runs today — not as it should run tomorrow.
 ⏿ orient by what a new operator needs: how to start it, what it exposes, what remains a stub.
@@ -31,7 +31,7 @@ uri-path          = "ha.ka.ba/lares/docs/lararium_mcp"
 
 <<~/ahu>>
 
-<<~ ahu #running>>
+<<~ ahu #/running>>
 
 !! Running the Server
 
@@ -82,7 +82,7 @@ python3 -m unittest discover -s lares/lararium_mcp/tests -v
 
 <<~/ahu>>
 
-<<~ ahu #capabilities>>
+<<~ ahu #/capabilities>>
 
 !! Implemented Capabilities
 
@@ -141,7 +141,7 @@ All tools carry `readOnlyHint: true`, `destructiveHint: false`, `idempotentHint:
 
 <<~/ahu>>
 
-<<~ ahu #module-map>>
+<<~ ahu #/module-map>>
 
 !! Module Map
 
@@ -170,7 +170,7 @@ lares/lararium_mcp/
 
 <<~/ahu>>
 
-<<~ ahu #canonical-child-loci>>
+<<~ ahu #/canonical-child-loci>>
 
 !! Canonical Child Loci
 
@@ -203,7 +203,7 @@ Active Sprint-03, roadmap, backlog, and todo work-tracking files remain live pla
 
 <<~/ahu>>
 
-<<~ ahu #contract-docs>>
+<<~ ahu #/contract-docs>>
 
 !! Legacy Contract Documents
 
@@ -228,7 +228,7 @@ Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act 
 
 <<~/ahu>>
 
-<<~ ahu #known-gaps>>
+<<~ ahu #/known-gaps>>
 
 !! Known Gaps (Stubs and Residue)
 
@@ -249,7 +249,7 @@ Checked-in design contracts under `packages/lares-core/memes/docs/mcp/` now act 
 
 <<~/ahu>>
 
-<<~ ahu #templates>>
+<<~ ahu #/templates>>
 
 !! Templates — Fill in Before Shipping
 
@@ -323,7 +323,7 @@ class MyAdapter:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -339,6 +339,6 @@ class MyAdapter:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZNuXoQesuF9T5HEcz2Go2kZEzyoc5OFgeJO4jvgQbRI
+<<^ code="&#x0003;">>ni:///sha-256;772ouR39s5C-1Pt8ph2xtNj8AbbFLpT-4cCC96qV4Aw
 
 <<^ code="&#x0004;" -> to=?>>

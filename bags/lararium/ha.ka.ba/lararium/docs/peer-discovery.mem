@@ -282,7 +282,7 @@ state stays local-first, no-global-now enacted rather than breached.
 * ''mDNS in the browser'': not available (no UDP multicast in browsers). LAN
   discovery for browser peers routes through the node server's mDNS discovery.
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -290,6 +290,6 @@ state stays local-first, no-global-now enacted rather than breached.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;HT2bH8B3eHJXnc18Vj0-_-Smbcw73A8AY6JNnll1wTI
+<<^ code="&#x0003;">>ni:///sha-256;dv4PDZvOT9DhgJ5yfOgayPN20LL9IWtyhQWjchxphN0
 
 <<^ code="&#x0004;" -> to=?>>

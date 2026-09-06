@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/uefn-scene"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! UEFN Scene Decomposition
 
@@ -27,7 +27,7 @@ holding the bag can render any filtered view of the scene graph without a runnin
 
 <<~/ahu>>
 
-<<~ ahu #semantic-separation>>
+<<~ ahu #/semantic-separation>>
 
 !! Semantic Separation — Three Distinct Layers
 
@@ -46,7 +46,7 @@ a type //has// its components. Composition only — the `extends` / is-a framing
 
 <<~/ahu>>
 
-<<~ ahu #decomposition-law>>
+<<~ ahu #/decomposition-law>>
 
 !! Decomposition Law
 
@@ -71,7 +71,7 @@ Every UEFN scene element maps to exactly one of three tiddler kinds:
 
 <<~/ahu>>
 
-<<~ ahu #edge-vocabulary>>
+<<~ ahu #/edge-vocabulary>>
 
 !! Edge Vocabulary for Scene Graphs
 
@@ -97,7 +97,7 @@ document-level containment.
 
 <<~/ahu>>
 
-<<~ ahu #tiddler-filter-views>>
+<<~ ahu #/tiddler-filter-views>>
 
 !! TW5 Filter Views
 
@@ -131,7 +131,7 @@ no UEFN process, no Epic servers, no network round-trip.
 
 <<~/ahu>>
 
-<<~ ahu #import-pipeline>>
+<<~ ahu #/import-pipeline>>
 
 !! Import Pipeline (Declared Unresolved)
 
@@ -168,7 +168,7 @@ Two viable import paths, each with limits:
 
 <<~/ahu>>
 
-<<~ ahu #verse-effect-specifiers>>
+<<~ ahu #/verse-effect-specifiers>>
 
 !! Verse Effect Specifiers in the Graph
 
@@ -200,7 +200,7 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -210,6 +210,6 @@ pranala edge payloads. They feed future Verse code generation from the graph.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xZ2IwVhS6k1lPT8Z-my6m9-46FkdR59KH3SuhTi8fu4
+<<^ code="&#x0003;">>ni:///sha-256;sGrLGmyB9gMs0_syQcS4j9SQ8EMfSneTAdDa6XVonWM
 
 <<^ code="&#x0004;" -> to=?>>

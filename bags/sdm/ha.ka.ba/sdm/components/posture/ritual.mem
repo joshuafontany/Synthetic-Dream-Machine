@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/posture/ritual"
 
 ! Ritual
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ A posture component: the Power activates only through an ''extended procedure'' 
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Trades speed for power or for reduced cost: a ritual may lower effective P, reac
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ A posture, not a hook — it gates //how// a module is reached, akin to Sera's b
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ A posture, not a hook — it gates //how// a module is reached, akin to Sera's b
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ A posture, not a hook — it gates //how// a module is reached, akin to Sera's b
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ A posture, not a hook — it gates //how// a module is reached, akin to Sera's b
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-8KJmM4SchV13BS41zoOHYNVaXPV83eaCm_5qk3G1H0
+<<^ code="&#x0003;">>ni:///sha-256;h4gF25bZLq2n9W-usz6-1bdKPYXmRKp94vXxJhl63oU
 
 <<^ code="&#x0004;" -> to=?>>

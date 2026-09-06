@@ -17,7 +17,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: Sprint-02 closed the local surfaces across resources, prompts, tools, and client configs.
 ⏿ orient: rich clients may prefer prompts/resources; tool-centric clients need equivalent read-only calls.
@@ -27,7 +27,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/local-clients"
 
 <<~/ahu>>
 
-<<~ ahu #server-start>>
+<<~ ahu #/server-start>>
 
 !! Server Start
 
@@ -43,7 +43,7 @@ No external package dependency enters the core server.
 
 <<~/ahu>>
 
-<<~ ahu #client-wiring>>
+<<~ ahu #/client-wiring>>
 
 !! Client Wiring
 
@@ -57,7 +57,7 @@ All three use the same stdio command and read-only server behavior.
 
 <<~/ahu>>
 
-<<~ ahu #prompt-catalog>>
+<<~ ahu #/prompt-catalog>>
 
 !! Hydration Prompt Catalog
 
@@ -74,7 +74,7 @@ Prompt names use dash after `lararium` because MCP names here follow the same co
 
 <<~/ahu>>
 
-<<~ ahu #tool-facade>>
+<<~ ahu #/tool-facade>>
 
 !! Read-Only Tool Façade
 
@@ -92,7 +92,7 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu>>
 
-<<~ ahu #closed-sprint-02>>
+<<~ ahu #/closed-sprint-02>>
 
 !! Sprint-02 Exit Markers Preserved
 
@@ -107,7 +107,7 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu>>
 
-<<~ ahu #residue>>
+<<~ ahu #/residue>>
 
 !! Residue
 
@@ -117,7 +117,7 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -126,6 +126,6 @@ Tool annotations: `readOnlyHint: true`, `destructiveHint: false`, `idempotentHin
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;GU0w3Q40zCmZjY4Ho9WoxTwFPIfdrmzP3ei7zZiVbTQ
+<<^ code="&#x0003;">>ni:///sha-256;pvNRkat3Ex4kDpx7qnx5OMYtBrCldbvsyRjn8JSGfgM
 
 <<^ code="&#x0004;" -> to=?>>

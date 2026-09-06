@@ -24,7 +24,7 @@ uri-path      = "ha.ka.ba/lararium/api/hydration-grain"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 ! Hydration Grain — carry the name, defer the body
 
@@ -34,7 +34,7 @@ The invariant: ''a holder may know a thing's ADDRESS without carrying its BODY''
 
 <<~/ahu>>
 
-<<~ ahu #the-three-grains>>
+<<~ ahu #/the-three-grains>>
 
 !! The three grains — same integrity, different water
 
@@ -52,7 +52,7 @@ The invariant: ''a holder may know a thing's ADDRESS without carrying its BODY''
 
 <<~/ahu>>
 
-<<~ ahu #the-missing-rung>>
+<<~ ahu #/the-missing-rung>>
 
 !! The missing rung — the bag grain jumps
 
@@ -75,7 +75,7 @@ The candidate: a ''bag snapshot'' — a quick-load skinny path standing BEFORE t
 
 <<~/ahu>>
 
-<<~ ahu #laws-that-already-govern>>
+<<~ ahu #/laws-that-already-govern>>
 
 !! Laws already standing over this — the house rules before the research runs
 
@@ -89,7 +89,7 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 
 <<~/ahu>>
 
-<<~ ahu #research-charge>>
+<<~ ahu #/research-charge>>
 
 !! The research charge — what must land before any build
 
@@ -104,7 +104,7 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -120,6 +120,6 @@ Any snapshot design MUST satisfy these; none of them awaits research.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yYXpiE-x-w71-iKKPwqCi6TemR7G12DLqyVAseDArNs
+<<^ code="&#x0003;">>ni:///sha-256;WjzyIXe9owye2PGgXyIDQY0KmSgWip1xmlluxwB_IPk
 
 <<^ code="&#x0004;" -> to=?>>

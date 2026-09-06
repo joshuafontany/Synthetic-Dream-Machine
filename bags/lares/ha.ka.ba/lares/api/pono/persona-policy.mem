@@ -23,7 +23,7 @@ written           = "2026-07-20"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Persona-Policy ~ one face out, the multitude within
 
@@ -31,7 +31,7 @@ The multi-persona identity core (persona-circle: a human as a private Circle of 
 
 <<~/ahu>>
 
-<<~ ahu #one-face>>
+<<~ ahu #/one-face>>
 
 !! Ruling 1 ~ one face to the mesh, reboot to switch (PRIVATE-all, PUBLIC-one)
 
@@ -43,7 +43,7 @@ The wall stays custody-by-TYPE: wearing a persona ''REQUIRES that this vessel HO
 
 <<~/ahu>>
 
-<<~ ahu #cryptographic-individual>>
+<<~ ahu #/cryptographic-individual>>
 
 !! Ruling 2 ~ each PersonaGroup a cryptographic individual (Sybil-of-one, the accepted cost)
 
@@ -55,7 +55,7 @@ The honest wall stays lit, dual to the wax-stamp's: ''"a valid key" reads as cry
 
 <<~/ahu>>
 
-<<~ ahu #the-managed-persona>>
+<<~ ahu #/the-managed-persona>>
 
 !! Ruling 2b ~ the MANAGED persona, and why the human stays unbound (operator ruling, 2026-09-04)
 
@@ -99,7 +99,7 @@ A sweep of the measured abuse literature (`docs/pono/managed-identity-scout`) re
 
 <<~/ahu>>
 
-<<~ ahu #distinct-recovery>>
+<<~ ahu #/distinct-recovery>>
 
 !! Ruling 3 ~ distinct recovery custodians per persona
 
@@ -107,7 +107,7 @@ A sweep of the measured abuse literature (`docs/pono/managed-identity-scout`) re
 
 <<~/ahu>>
 
-<<~ ahu #two-layer-petnames>>
+<<~ ahu #/two-layer-petnames>>
 
 !! The Two-Layer Pet-Names ~ private label ⊥ public glamour (Zooko)
 
@@ -153,7 +153,7 @@ Between the private label and the published record sits ''a name the human MEANS
 
 <<~/ahu>>
 
-<<~ ahu #no-global-now-for-identity>>
+<<~ ahu #/no-global-now-for-identity>>
 
 !! The Deep Frame ~ no global-now for identity
 
@@ -163,7 +163,7 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -177,6 +177,6 @@ So the mesh ''declines to build the SIN even to defend itself''. It could bind p
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0rj9xECVxfAxxlyHOD6KxQcj6P0CDcC6OR7AcSVfFxE
+<<^ code="&#x0003;">>ni:///sha-256;oybLmh3TZ6yY2eD03XAz5NXcEAwH0sV4h-zg57V5Xco
 
 <<^ code="&#x0004;" -> to=?>>

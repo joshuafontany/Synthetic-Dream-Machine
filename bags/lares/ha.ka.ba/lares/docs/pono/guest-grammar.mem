@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/guest-grammar"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Guest Grammar — Extended Docs
 
@@ -27,7 +27,7 @@ This surface carries examples, ownership notes, and split residue.
 
 <<~/ahu>>
 
-<<~ ahu #ownership-notes>>
+<<~ ahu #/ownership-notes>>
 
 !! Ownership Notes
 
@@ -41,7 +41,7 @@ This surface carries examples, ownership notes, and split residue.
 
 <<~/ahu>>
 
-<<~ ahu #fixture-seeds>>
+<<~ ahu #/fixture-seeds>>
 
 !! Fixture Seeds
 
@@ -56,7 +56,7 @@ The first fixture family should include:
 
 <<~/ahu>>
 
-<<~ ahu #admission-notes>>
+<<~ ahu #/admission-notes>>
 
 !! Admission Notes
 
@@ -71,7 +71,7 @@ When a region needs long legality tables, schema detail, or runtime procedure, m
 
 <<~/ahu>>
 
-<<~ ahu #migration-note>>
+<<~ ahu #/migration-note>>
 
 !! Migration Note
 
@@ -85,7 +85,7 @@ The current shape keeps:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -94,6 +94,6 @@ The current shape keeps:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;FGQtoqHpDK4QufwuwZJdAAd5wfEOIQSOPuczX6LhUlw
+<<^ code="&#x0003;">>ni:///sha-256;MIkcdA6Q-IK_u3OTQZNEQfE9x1DjH2uR9I_c1NrID0w
 
 <<^ code="&#x0004;" -> to=?>>

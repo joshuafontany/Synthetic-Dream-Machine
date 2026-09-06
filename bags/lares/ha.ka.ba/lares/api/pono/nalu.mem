@@ -17,7 +17,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/nalu"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Nalu — The Changeset Wave
 
@@ -35,7 +35,7 @@ TW5 SyncAdaptor contract; Elm Architecture (Czaplicki 2012); UEFN SceneGraph Bet
 
 <<~/ahu>>
 
-<<~ ahu #the-wave-shape>>
+<<~ ahu #/the-wave-shape>>
 
 !! The Wave Shape — Three Implementations, One Pattern
 
@@ -106,7 +106,7 @@ same synchronous execution context. No observer sees a partial state.
 
 <<~/ahu>>
 
-<<~ ahu #below-the-grammar>>
+<<~ ahu #/below-the-grammar>>
 
 !! Below the Grammar Layer
 
@@ -134,7 +134,7 @@ itself has no sigil; the `\tick` sigil hooks into the nalu.
 
 <<~/ahu>>
 
-<<~ ahu #yin-collapse-law>>
+<<~ ahu #/yin-collapse-law>>
 
 !! Yin-Collapse Law
 
@@ -184,7 +184,7 @@ The TS layer is the minimal shore around it — only what TW5 cannot do from ins
 
 <<~/ahu>>
 
-<<~ ahu #one-graph>>
+<<~ ahu #/one-graph>>
 
 !! One Graph, Not Two
 
@@ -222,7 +222,7 @@ The shore is the widget tree. One shore receives one wave per frame from all bag
 
 <<~/ahu>>
 
-<<~ ahu #tw5-scale-note>>
+<<~ ahu #/tw5-scale-note>>
 
 !! TW5 Unfiltered Delivery — Scale Note
 
@@ -244,7 +244,7 @@ real but not yet triggered at current projected scale.
 
 <<~/ahu>>
 
-<<~ ahu #uefn-alignment>>
+<<~ ahu #/uefn-alignment>>
 
 !! UEFN SceneGraph Alignment (Beta, June 2025)
 
@@ -268,7 +268,7 @@ edges encoded with FRU orientation assumptions need migration. See `uefn-scene.m
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -281,6 +281,6 @@ edges encoded with FRU orientation assumptions need migration. See `uefn-scene.m
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;kKiGE3Z0GB_SUuoFvCY0rrjSepuoeJdv-MxWF4LA1Lg
+<<^ code="&#x0003;">>ni:///sha-256;4kEYH3GFyn6VbNoDKlZMcNiC2ECycjNEcny5QXG2UoM
 
 <<^ code="&#x0004;" -> to=?>>

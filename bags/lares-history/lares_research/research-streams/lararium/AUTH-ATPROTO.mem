@@ -17,7 +17,7 @@ uri-path   = "lares_research/research-streams/lararium/AUTH-ATPROTO"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #oauth-position>>
+<<~ ahu #/oauth-position>>
 
 !! ATProto OAuth Position
 
@@ -41,7 +41,7 @@ The official ATProto SDK (`@atproto/oauth-client-*`) owns this boundary entirely
 
 <<~/ahu>>
 
-<<~ ahu #bff-preferred-flow>>
+<<~ ahu #/bff-preferred-flow>>
 
 !! Preferred Architecture: BFF
 
@@ -69,7 +69,7 @@ Rationale:
 
 <<~/ahu>>
 
-<<~ ahu #browser-fallback-flow>>
+<<~ ahu #/browser-fallback-flow>>
 
 !! Allowed Fallback: Browser-Only Login
 
@@ -89,7 +89,7 @@ Do not use browser-only login as the default production architecture.
 
 <<~/ahu>>
 
-<<~ ahu #identity-layers>>
+<<~ ahu #/identity-layers>>
 
 !! Identity Layer Separation
 
@@ -123,7 +123,7 @@ Rules:
 
 <<~/ahu>>
 
-<<~ ahu #dpop-boundary>>
+<<~ ahu #/dpop-boundary>>
 
 !! DPoP Boundary
 
@@ -140,7 +140,7 @@ If direct DPoP handling ever becomes necessary (formal reviewed exception requir
 
 <<~/ahu>>
 
-<<~ ahu #storage-policy>>
+<<~ ahu #/storage-policy>>
 
 !! Storage Policy
 
@@ -162,7 +162,7 @@ General:
 
 <<~/ahu>>
 
-<<~ ahu #curve-policy>>
+<<~ ahu #/curve-policy>>
 
 !! Curve Policy
 
@@ -181,7 +181,7 @@ If repo signing or ATProto data-auth work later requires k256:
 
 <<~/ahu>>
 
-<<~ ahu #risks>>
+<<~ ahu #/risks>>
 
 !! Known Risks and Deferred Decisions
 
@@ -199,7 +199,7 @@ No ATProto login implementation this milestone — doctrine only.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -208,6 +208,6 @@ No ATProto login implementation this milestone — doctrine only.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fUsQ_0XGT7mzU07k3YqWma8pYo8ZBQXSz0sCZyrrVCo
+<<^ code="&#x0003;">>ni:///sha-256;rC6L2TEoH8M3Vkt_6XucDKEGpNBb6H3hk2kX6lbfhkg
 
 <<^ code="&#x0004;" -> to=?>>

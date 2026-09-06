@@ -30,7 +30,7 @@ written   = "2026-07-21"
 > public infrastructure. The line it draws decides whether the DreamNet becomes a
 > commons or a panopticon. Operator-ruled 2026-07-21.
 
-<<~ ahu #the-invariant>>
+<<~ ahu #/the-invariant>>
 
 !! The invariant
 
@@ -59,7 +59,7 @@ stance (#carry-contract, #the-frame) in the one place it would otherwise erode f
 
 <<~/ahu>>
 
-<<~ ahu #the-two-stacks>>
+<<~ ahu #/the-two-stacks>>
 
 !! The two cap-stacks ~ operator contracts, user soft-attaches
 
@@ -81,7 +81,7 @@ the pool.
 
 <<~/ahu>>
 
-<<~ ahu #the-operator-contract>>
+<<~ ahu #/the-operator-contract>>
 
 !! The operator contract ~ the minimal wax-sealed payload
 
@@ -97,7 +97,7 @@ holds about a contracting operator.''
 
 <<~/ahu>>
 
-<<~ ahu #the-invite>>
+<<~ ahu #/the-invite>>
 
 !! The invite ~ a sealed burnable capability that leaves no record
 
@@ -119,7 +119,7 @@ carry the cost (`admission-on-a-lineage#the-standing`).
 
 <<~/ahu>>
 
-<<~ ahu #the-carried-cap>>
+<<~ ahu #/the-carried-cap>>
 
 !! What a face CARRIES ~ a capability, never a standing
 
@@ -141,7 +141,7 @@ carry the cost (`admission-on-a-lineage#the-standing`).
 
 <<~/ahu>>
 
-<<~ ahu #the-user-scope>>
+<<~ ahu #/the-user-scope>>
 
 !! The user scope ~ soft-attach + inversion-of-control social graphs
 
@@ -157,7 +157,7 @@ carries this (partially wired, polish deferred — a 2a build).
 
 <<~/ahu>>
 
-<<~ ahu #the-publishing-surface>>
+<<~ ahu #/the-publishing-surface>>
 
 !! The publishing surface ~ four acts under one word, and a ladder
 
@@ -179,7 +179,7 @@ A realm publishing its declaration at the public tier gains outside challengers;
 
 <<~/ahu>>
 
-<<~ ahu #the-transition>>
+<<~ ahu #/the-transition>>
 
 !! From the house to public infrastructure ~ lock it in now
 
@@ -190,7 +190,7 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -204,6 +204,6 @@ someone asks for "just a little telemetry." Built as the floor, it stays the flo
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3vmrt71qyiCc9wuZ7OkryAYEsXhEk_LG6ejolr07lsI
+<<^ code="&#x0003;">>ni:///sha-256;xCYLJ5AtTMRqzveAZrfTUm1u9G_XCuxf_V4_B3n5JsA
 
 <<^ code="&#x0004;" -> to=?>>

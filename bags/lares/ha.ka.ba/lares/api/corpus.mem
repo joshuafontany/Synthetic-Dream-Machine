@@ -21,7 +21,7 @@ written   = "2026-06-30"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Lares-Corpus ~ the palace, instantiated ephemeral over any corpus
 
@@ -51,7 +51,7 @@ governs the durable store — the corpus palace is that object read three ways, 
 
 <<~/ahu>>
 
-<<~ ahu #the-cli>>
+<<~ ahu #/the-cli>>
 
 !! The CLI ~ five organs, one enumerator, help that teaches
 
@@ -80,7 +80,7 @@ ONE canon, and the audit trips when they drift.
 
 <<~/ahu>>
 
-<<~ ahu #lares-corpus>>
+<<~ ahu #/lares-corpus>>
 
 !! `lares corpus` ~ the ephemeral noun-verb tree
 
@@ -116,7 +116,7 @@ never leak past two independent reapers (the trap AND the sweep).
 
 <<~/ahu>>
 
-<<~ ahu #the-caps>>
+<<~ ahu #/the-caps>>
 
 !! The Caps ~ what the cap-stack projects (mostly already-solved)
 
@@ -141,7 +141,7 @@ sensorium.
 
 <<~/ahu>>
 
-<<~ ahu #the-bands>>
+<<~ ahu #/the-bands>>
 
 !! The Grain + the Boundary Tree ~ a membership address, not a frequency
 
@@ -185,7 +185,7 @@ the baseline corpus (#/baseline-corpus) before it locks Canon.
 
 <<~/ahu>>
 
-<<~ ahu #the-form-induction>>
+<<~ ahu #/the-form-induction>>
 
 !! The Form-Induction ~ the research-grade half (miners surface, the LLM names LAST)
 
@@ -211,7 +211,7 @@ on what already proved itself by description-length.
 
 <<~/ahu>>
 
-<<~ ahu #the-resonances>>
+<<~ ahu #/the-resonances>>
 
 !! The Resonances ~ the house was right again
 
@@ -226,7 +226,7 @@ keystone names ([[living-grammar-palace|lar:///ha.ka.ba/lararium/api/living-gram
 
 <<~/ahu>>
 
-<<~ ahu #integration>>
+<<~ ahu #/integration>>
 
 !! Integration ~ the full model runs python + R, TS the functor floor + coordinator
 
@@ -247,7 +247,7 @@ now homes the sensorium itself — the model reads py-side rather than behind TS
 
 <<~/ahu>>
 
-<<~ ahu #the-scrum>>
+<<~ ahu #/the-scrum>>
 
 !! The SCRUM ~ build order, each task with an ACCEPT line
 
@@ -267,7 +267,7 @@ TW5-quine runs after S0 + S2.
 
 <<~/ahu>>
 
-<<~ ahu #the-gate>>
+<<~ ahu #/the-gate>>
 
 !! The Gate ~ heleuma-anchored, help-text⇄meme drift trips it
 
@@ -280,7 +280,7 @@ text and this meme diverge, `lares heleuma` trips — the docs cannot silently r
 
 <<~/ahu>>
 
-<<~ ahu #baseline-corpus>>
+<<~ ahu #/baseline-corpus>>
 
 !! Baseline-Corpus ~ the validation gold-standard (a known-grammar oracle)
 
@@ -392,7 +392,7 @@ verdict.
 
 <<~/ahu>>
 
-<<~ ahu #the-scale>>
+<<~ ahu #/the-scale>>
 
 !! The Scale ~ tractable from the start (the machina scales, quality a dial)
 
@@ -412,7 +412,7 @@ global-now it cannot ground. The reconciliation cost `R*_sem = log₂ dim H¹` g
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ what this meme stands on
 
@@ -425,6 +425,6 @@ A 3-research-scout synthesis, grounded on:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;E66MpLMGma2B_wyRzwysJ2KSdR1XmLnIxzjGp97M1Y8
+<<^ code="&#x0003;">>ni:///sha-256;VY5OgiX65kBPP-T73aYPgivUndFoIV4f0hgdfJsrMYc
 
 <<^ code="&#x0004;" -> to=?>>

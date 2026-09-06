@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices/voices-review"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Voices — Extraction Review
 
@@ -28,7 +28,7 @@ into the settled docs rooms under `lar:///ha.ka.ba/lares/docs/voices/`.
 
 <<~/ahu>>
 
-<<~ ahu #scope>>
+<<~ ahu #/scope>>
 
 !! Scope
 
@@ -52,7 +52,7 @@ Output rooms:
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -92,7 +92,7 @@ Output rooms:
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -131,7 +131,7 @@ The mask layer requires the most careful new definition and benefits most from h
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -173,7 +173,7 @@ This pass should produce:
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -228,7 +228,7 @@ From `Lares_Voice.core.md` + preferences:
 
 <<~/ahu>>
 
-<<~ ahu #assess>>
+<<~ ahu #/assess>>
 
 !! ↺ Aftermath
 
@@ -349,7 +349,7 @@ MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -360,6 +360,6 @@ MASKS.md converted from stub to forward-route to `lar:///ha.ka.ba/lares/api/pono
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;p_7NeH_tuFvKNHYyvLT3g0dG7RdEUuotqQ3lR2WKtgg
+<<^ code="&#x0003;">>ni:///sha-256;3iJQ_sQny1XkLBTBHSqM1LTUoHordPicwA3hIcdjFs0
 
 <<^ code="&#x0004;" -> to=?>>

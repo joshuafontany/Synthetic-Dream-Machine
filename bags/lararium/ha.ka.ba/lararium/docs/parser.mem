@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lararium/docs/parser"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! parseMemeCarrier
 
@@ -46,6 +46,6 @@ Walks the AST, collects all `PranalaNode` and `PranalaSugarNode` instances, retu
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/pranala-parser>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/memetic-parser>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ScwXJOLzqkiW6Y9GVhKKHJfSCiRe74hmP6vOId77RHc
+<<^ code="&#x0003;">>ni:///sha-256;A-CU7liEhfnk7lNYcDRJJrai7Dx_Sh2QXpT1581h11E
 
 <<^ code="&#x0004;" -> to=?>>

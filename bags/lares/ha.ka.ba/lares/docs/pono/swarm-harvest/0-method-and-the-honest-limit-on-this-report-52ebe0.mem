@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/0-method-and-the-honest-limi
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! §0. Method, and the honest limit on this report's reach
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 58,350 characters
 
@@ -422,7 +422,7 @@ GSMA Mobile Gender Gap phone-*sharing* rates · Deloitte per-household device co
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 40,566 characters
 
@@ -684,7 +684,7 @@ Flagged in order of how much they move the geometry:
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 7,706 characters
 
@@ -740,12 +740,12 @@ Reetika Khera / Jean Drèze primary sources and Jharkhand ration-denial numbers;
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;J44u02EcZZjtnxFfxFZ340c8A4kuSbWrXgbuw8gQhKU
+<<^ code="&#x0003;">>ni:///sha-256;RstxswR7nW0-j9LSglMP392pPfLwGa1aVNAHkk8WPhs
 
 <<^ code="&#x0004;" -> to=?>>

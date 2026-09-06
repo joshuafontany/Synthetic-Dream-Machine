@@ -22,7 +22,7 @@ written   = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! Composable Keel ~ declare the stack, wire it or refuse
 
@@ -36,7 +36,7 @@ A vessel ''declares'' what it carries; a separate move ''wires'' that declaratio
 
 <<~/ahu>>
 
-<<~ ahu #declare>>
+<<~ ahu #/declare>>
 
 !! Declare ~ the cap-stack as ECS inventory
 
@@ -62,7 +62,7 @@ ECS supplies the ''inventory vocabulary'' (entity = vessel · component = cap ·
 
 <<~/ahu>>
 
-<<~ ahu #wire>>
+<<~ ahu #/wire>>
 
 !! Wire ~ the composition-root builds or refuses
 
@@ -86,7 +86,7 @@ refuse:   read-face present, meshpalace ABSENT → throw "[compose] vessel refus
 
 <<~/ahu>>
 
-<<~ ahu #absence-is-structural>>
+<<~ ahu #/absence-is-structural>>
 
 !! Absence ~ un-routed authority, by structure
 
@@ -96,7 +96,7 @@ So the disclosure boundary holds at the ''shape of the composition'', not at a c
 
 <<~/ahu>>
 
-<<~ ahu #transient-composer>>
+<<~ ahu #/transient-composer>>
 
 !! The Transient Composer ~ the ocap powerbox
 
@@ -106,7 +106,7 @@ Teardown mirrors the build: `dispose` runs in ''reverse build order'', so a cons
 
 <<~/ahu>>
 
-<<~ ahu #witnessed>>
+<<~ ahu #/witnessed>>
 
 !! Witnessed ~ code + live Docker
 
@@ -121,7 +121,7 @@ The pattern stands ''witnessed, not designed'' — the shore ran end-to-end in t
 
 <<~/ahu>>
 
-<<~ ahu #rhymes>>
+<<~ ahu #/rhymes>>
 
 !! Rhymes ~ four prior-art convergence
 
@@ -136,7 +136,7 @@ Four domains converging on one shape reads as a real pattern integrity, not a lo
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -148,6 +148,6 @@ Four domains converging on one shape reads as a real pattern integrity, not a lo
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;rK5c-pktVIkXULDTXjVc0GS-ampZCRWuCG9C0uauBMs
+<<^ code="&#x0003;">>ni:///sha-256;Ddsvph901muwp6xfJpR9NwndvNHGDpW-FbTrJVI_tdg
 
 <<^ code="&#x0004;" -> to=?>>

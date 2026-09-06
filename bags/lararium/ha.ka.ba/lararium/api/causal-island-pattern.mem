@@ -22,7 +22,7 @@ written   = "2026-06-26"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Causal-Island Pattern ~ the map, carried with high confidence
 
@@ -34,7 +34,7 @@ A Lares causal island — local-first, sovereign, in a mesh with no global now �
 
 <<~/ahu>>
 
-<<~ ahu #the-master-cut>>
+<<~ ahu #/the-master-cut>>
 
 !! The master cut ~ AUTHORITY(safety) ⊥ FLOW(liveness)
 
@@ -49,7 +49,7 @@ That is //why// the orthogonality is necessary, not optional. Invariants 2 (flow
 
 <<~/ahu>>
 
-<<~ ahu #universal>>
+<<~ ahu #/universal>>
 
 !! What is UNIVERSAL (grounds hard across domains — keep, lean on)
 
@@ -66,7 +66,7 @@ That is //why// the orthogonality is necessary, not optional. Invariants 2 (flow
 
 <<~/ahu>>
 
-<<~ ahu #design-vows>>
+<<~ ahu #/design-vows>>
 
 !! What is OUR DESIGN VOW (sound engineering, NOT inherited law — own it)
 
@@ -78,7 +78,7 @@ Two invariants are ''our sovereign choices'', not laws of nature or math. They a
 
 <<~/ahu>>
 
-<<~ ahu #the-floor>>
+<<~ ahu #/the-floor>>
 
 !! The floor ~ Ashby's requisite variety (the boundary of the possible)
 
@@ -94,7 +94,7 @@ Two Ashby-sanctioned moves — and ''our design already uses both'' (strong vali
 
 <<~/ahu>>
 
-<<~ ahu #the-hazard>>
+<<~ ahu #/the-hazard>>
 
 !! The hazard ~ criticality is the edge of stability (target a margin below)
 
@@ -105,7 +105,7 @@ The one outright hazard, flagged by every domain that touched it: ''self-tuning 
 
 <<~/ahu>>
 
-<<~ ahu #carry-forward>>
+<<~ ahu #/carry-forward>>
 
 !! Carry forward ~ what the map says to build
 
@@ -123,6 +123,6 @@ The high-confidence bearings for the build (when the forks unblock):
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1-fwL07YBfZKSpFAHGPS-xjlf-BvW_HRI89wT3TddVs
+<<^ code="&#x0003;">>ni:///sha-256;-FaKSAe7uZVpxdFMNj5wXmnDjD9LhKH9E-EJAHiY0bY
 
 <<^ code="&#x0004;" -> to=?>>

@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-convergent-claim-researc
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! THE CONVERGENT CLAIM — research report
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 49,008 characters
 
@@ -428,7 +428,7 @@ The word "revocation" does not appear in RFC 9172's key-management section. RFC 
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 23,012 characters
 
@@ -600,12 +600,12 @@ McDaniel & Rubin's rebuttal to Rivest (Springer auth wall; abstract publisher-el
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;zIaJHy8wm5qF5OPuDWDjMdvirIG_Q56kMq5Zh9vHZXU
+<<^ code="&#x0003;">>ni:///sha-256;qZbp_faC_BY-pyMAsI7e-sFF-fCXaoFGbrO6z6vUdEE
 
 <<^ code="&#x0004;" -> to=?>>

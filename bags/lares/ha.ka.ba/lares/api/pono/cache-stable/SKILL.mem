@@ -34,7 +34,7 @@ This skill does not widen, soften, or reinterpret it.
 Cache-Stable-meme skill opens the pressure surface here.
 
 
-<<~ ahu #load-contract>>
+<<~ ahu #/load-contract>>
 
 !! Load Contract
 
@@ -56,7 +56,7 @@ If the task concerns general documentation, long policy prose, or a companion-me
 
 <<~/ahu>>
 
-<<~ ahu #workflow-contract>>
+<<~ ahu #/workflow-contract>>
 
 !! Workflow Contract
 
@@ -90,7 +90,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -111,7 +111,7 @@ Do not use this skill as the primary surface for:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ begin from canonical loci; inspect the current meme surface before changing it
 ⏿ classify what belongs to cache-stable law, template law, and outward matter; keep law and template inseparable where intended
@@ -121,7 +121,7 @@ Do not use this skill as the primary surface for:
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -144,7 +144,7 @@ Name the actual boundary before widening scope.
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -174,7 +174,7 @@ what must remain cache-stable, and what merely wants to remain nearby
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -197,7 +197,7 @@ Do not mix a full rewrite with a light audit unless the user asked for both.
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -219,7 +219,7 @@ When generating a downstream cache-stable meme, make the phase line executable a
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! ↺ Aftermath
 
@@ -240,7 +240,7 @@ Aftermath — name the residue honestly: companion matter not yet split, ambiguo
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -249,6 +249,6 @@ Aftermath — name the residue honestly: companion matter not yet split, ambiguo
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZK-BlXlGMmf16yRpqpSUvqaaIjZpwNLg-7gVipig9G8
+<<^ code="&#x0003;">>ni:///sha-256;hc2dpguXUM3ZtQeoJ19mQ8Znh-eJ9sKJ_fLWuBjL5GU
 
 <<^ code="&#x0004;" -> to=?>>

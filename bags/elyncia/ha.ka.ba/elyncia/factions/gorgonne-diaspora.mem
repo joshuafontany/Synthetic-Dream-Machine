@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/factions/gorgonne-diaspora"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Gorgonne Diaspora Cabals
 
@@ -29,7 +29,7 @@ discounted //Serpent's Gaze//, and the old appearance canon that already named t
 
 <<~/ahu>>
 
-<<~ ahu #appearance>>
+<<~ ahu #/appearance>>
 
 !! Appearance Canon
 
@@ -49,12 +49,12 @@ rigged with cloth, and a crew's toasts run in rounds, in sequence, by rank.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;s9doc5qlRNZ17iWC6yhBZGmy_xI_uSdsHQ9Xn2EudWM
+<<^ code="&#x0003;">>ni:///sha-256;0rM4rlJPJOwYWvgRSQAInfxKsTqExORADGW_fLkqA-g
 
 <<^ code="&#x0004;" -> to=?>>

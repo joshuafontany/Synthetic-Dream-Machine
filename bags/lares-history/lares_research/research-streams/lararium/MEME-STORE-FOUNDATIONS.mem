@@ -24,7 +24,7 @@ retain       = true
 
 
 
-<<~ ahu #research-pressure>>
+<<~ ahu #/research-pressure>>
 
 !! Three Converging Pressures
 
@@ -38,7 +38,7 @@ These are not separate priorities. They converge at one point: ''a meme is the a
 
 <<~/ahu>>
 
-<<~ ahu #tw5-tiddler-contract>>
+<<~ ahu #/tw5-tiddler-contract>>
 
 !! 1. TW5 Tiddler Replacement Contract → Meme Immutability Law
 
@@ -55,7 +55,7 @@ A `CarrierRecord` is immutable by construction (`Object.freeze` at compiler boun
 
 <<~/ahu>>
 
-<<~ ahu #ue5-schema-enforcement>>
+<<~ ahu #/ue5-schema-enforcement>>
 
 !! 2. UE5 World Partition / UEFN Scene Graph → Pranala Schema Enforcement
 
@@ -82,7 +82,7 @@ Pranala edges carry fixed properties: `family` (`control | relation | observe | 
 
 <<~/ahu>>
 
-<<~ ahu #ast-self-hosting>>
+<<~ ahu #/ast-self-hosting>>
 
 !! 3. AST-Driven Self-Hosting Grammar
 
@@ -127,7 +127,7 @@ The tldraw projection layer (`lararium-tldraw`) already operates on a `LarProjec
 
 <<~/ahu>>
 
-<<~ ahu #synthesis>>
+<<~ ahu #/synthesis>>
 
 !! 4. Synthesis — The Unified Foundation
 
@@ -151,7 +151,7 @@ This is the Lararium architecture thesis. Everything else is implementation deta
 
 <<~/ahu>>
 
-<<~ ahu #build-order>>
+<<~ ahu #/build-order>>
 
 !! 5. Build Order (next three pulls)
 
@@ -165,7 +165,7 @@ P8 is the shortest path to the live edit loop. P9 hardens the graph. P10 begins 
 
 <<~/ahu>>
 
-<<~ ahu #local-first-pivot-2026-04-29>>
+<<~ ahu #/local-first-pivot-2026-04-29>>
 
 !! 6. Local-First Pivot — Automerge Meme Store (2026-04-29)
 
@@ -213,7 +213,7 @@ The identity and UCAN layer is now in place:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ pranala #to-roadmap from=? -> to=lar:///lararium-node/ROADMAP family=control role=informs>>
 <<~ pranala #to-multiplayer from=? -> to=lar:///lararium-node/MULTIPLAYER-INFINITE-CANVAS-WIKI family=control role=informs>>
@@ -223,6 +223,6 @@ The identity and UCAN layer is now in place:
 
 <<~ ? -> lar:///lares_research/research-streams/lararium/MEME-STORE-FOUNDATIONS>>
 
-<<^ code="&#x0003;">>ni:///sha-256;iaZxJCdOdfIXEZCLOvsqcrs7j7lI27rp0ao2dlQVfvg
+<<^ code="&#x0003;">>ni:///sha-256;tSreZDRjozzDc5mhh1nfdH0dDq064xhS-RYRdD59Svo
 
 <<^ code="&#x0004;" -> to=?>>

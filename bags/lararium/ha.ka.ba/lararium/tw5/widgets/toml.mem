@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/toml"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -26,18 +26,18 @@ uri-path      = "ha.ka.ba/lararium/tw5/widgets/toml"
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/widgets/toml" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/widgets/toml>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xNSHB9JRNY1gOX2QLnM57Uhwtiie9qu1xqKP5qS3WPg
+<<^ code="&#x0003;">>ni:///sha-256;1dm8krtx2v6x4D4UMDrY3dnbU3ZZ0PvsS-lrdno7iF0
 
 <<^ code="&#x0004;" -> to=?>>

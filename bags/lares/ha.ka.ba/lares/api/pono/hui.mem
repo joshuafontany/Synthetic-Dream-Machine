@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/hui"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Hui
 
@@ -32,7 +32,7 @@ Grammar only --- the await-all join runtime awaits the async-first sprint.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -42,7 +42,7 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -60,7 +60,7 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -68,6 +68,6 @@ A hui block MUST propagate failure from any child flow to the containing flow.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LghS_GwXDd4_cwGh6U_qvED8hnLlcyElDJWmPji1YR0
+<<^ code="&#x0003;">>ni:///sha-256;Hw-KgFHrq_PjnCgJSVRizJzLBxSxlZfEbzR1wXo54tw
 
 <<^ code="&#x0004;" -> to=?>>

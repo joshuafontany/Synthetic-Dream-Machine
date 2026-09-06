@@ -16,7 +16,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: current compiler walks no edges — it enumerates a static list, then scans a carrier index.
 ⏿ orient: three distinct graph planes require three distinct traversal tiers; collapsing them loses boot ordering guarantees.
@@ -26,7 +26,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/traversal"
 
 <<~/ahu>>
 
-<<~ ahu #graph-planes>>
+<<~ ahu #/graph-planes>>
 
 !! Graph Planes
 
@@ -48,7 +48,7 @@ not a sub-graph inside the actor containment tree.
 
 <<~/ahu>>
 
-<<~ ahu #tier-0>>
+<<~ ahu #/tier-0>>
 
 !! Tier 0 — Declared Core (Fast Path)
 
@@ -74,7 +74,7 @@ Discrepancies surface as `validation.declared_vs_walked` with three fields: `in_
 
 <<~/ahu>>
 
-<<~ ahu #tier-1>>
+<<~ ahu #/tier-1>>
 
 !! Tier 1 — Control Closure (Graph Walk)
 
@@ -127,7 +127,7 @@ Walk(entry_uri):
 
 <<~/ahu>>
 
-<<~ ahu #tier-2>>
+<<~ ahu #/tier-2>>
 
 !! Tier 2 — Relation Expansion (One-Hop)
 
@@ -166,7 +166,7 @@ Recursive expansion belongs to a future graph query surface, not the boot compil
 
 <<~/ahu>>
 
-<<~ ahu #cycle-law>>
+<<~ ahu #/cycle-law>>
 
 !! Cycle Detection Law
 
@@ -191,7 +191,7 @@ The cycle path records every GRAY node from the current node back to the re-enco
 
 <<~/ahu>>
 
-<<~ ahu #forward-refs>>
+<<~ ahu #/forward-refs>>
 
 !! Declared-Unresolved Forward References
 
@@ -212,7 +212,7 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu>>
 
-<<~ ahu #phase-table>>
+<<~ ahu #/phase-table>>
 
 !! Boot Phase → Graph Plane Assignment
 
@@ -227,7 +227,7 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -239,6 +239,6 @@ The boot receipt hash changes to reflect the newly resolved carrier.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;zk3dFnebFjmYzh9rYspXMPLB4-VhfGgYjrA2YEBJvNk
+<<^ code="&#x0003;">>ni:///sha-256;ozaIff-SuebXm8xS_gwHeFyUTgn6KHruJFYC7Z7JX3c
 
 <<^ code="&#x0004;" -> to=?>>

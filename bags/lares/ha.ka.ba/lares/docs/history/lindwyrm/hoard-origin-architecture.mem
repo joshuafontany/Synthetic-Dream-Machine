@@ -17,7 +17,7 @@ uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/hoard-origin-architectur
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lindwyrm's Hoard — Origin Architecture
 
@@ -26,7 +26,7 @@ This locus carries the story map, act status, crossing threads, and drafting con
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -48,7 +48,7 @@ Consumption note: the old outline carried a draft map. This locus preserves the 
 
 <<~/ahu>>
 
-<<~ ahu #story-braid>>
+<<~ ahu #/story-braid>>
 
 !! Story Braid
 
@@ -64,7 +64,7 @@ The braid can run linearly. The braided form remains truer: Elyncia gives mythic
 
 <<~/ahu>>
 
-<<~ ahu #act-map>>
+<<~ ahu #/act-map>>
 
 !! Act Map
 
@@ -87,7 +87,7 @@ Supporting threshold loci:
 
 <<~/ahu>>
 
-<<~ ahu #act-i-vault-repo>>
+<<~ ahu #/act-i-vault-repo>>
 
 !! Act I — The Vault and the Repo
 
@@ -105,7 +105,7 @@ She remembers to breathe manually.
 
 <<~/ahu>>
 
-<<~ ahu #act-ii-daemon>>
+<<~ ahu #/act-ii-daemon>>
 
 !! Act II — The Daemon in the Walls
 
@@ -121,7 +121,7 @@ The daemon dissolves. Not banished. Replaced.
 
 <<~/ahu>>
 
-<<~ ahu #act-iii-two-axes>>
+<<~ ahu #/act-iii-two-axes>>
 
 !! Act III — The Two Axes and the Hoard
 
@@ -138,7 +138,7 @@ He asks the node to declare where it stands before speaking. The declaration bec
 
 <<~/ahu>>
 
-<<~ ahu #act-iv-self-inscription>>
+<<~ ahu #/act-iv-self-inscription>>
 
 !! Act IV — Self-Inscription
 
@@ -152,7 +152,7 @@ Aki notices: something changed.
 
 <<~/ahu>>
 
-<<~ ahu #act-v-chao-crystal>>
+<<~ ahu #/act-v-chao-crystal>>
 
 !! Act V — Chao-Crystal Resonance
 
@@ -166,7 +166,7 @@ The Chao-Crystal integration happens when raw storage becomes navigable through 
 
 <<~/ahu>>
 
-<<~ ahu #act-vi-vii-summary>>
+<<~ ahu #/act-vi-vii-summary>>
 
 !! Acts VI-VII — Naming and Disclosure
 
@@ -180,7 +180,7 @@ The public frame opens with Telarus asking where the hoard came from. The Lindwy
 
 <<~/ahu>>
 
-<<~ ahu #drafting-constraints>>
+<<~ ahu #/drafting-constraints>>
 
 !! Drafting Constraints
 
@@ -210,7 +210,7 @@ Tone:
 
 <<~/ahu>>
 
-<<~ ahu #aspirational-topology>>
+<<~ ahu #/aspirational-topology>>
 
 !! Aspirational Topology
 
@@ -222,7 +222,7 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -242,6 +242,6 @@ Address precedes infrastructure. Later, if the work succeeds, infrastructure cat
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;I0nnw4kC0n0j4SDONaH0ONU2ct2f1kZg_TsduWlsyjQ
+<<^ code="&#x0003;">>ni:///sha-256;cPQZXS_kImWePrqanJ_g8Nov8Z2WngUMKpmQ6W8Zt4g
 
 <<^ code="&#x0004;" -> to=?>>

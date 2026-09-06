@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kumu"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kumu
 
@@ -32,7 +32,7 @@ a procedure executes; a kumu defines a form that other nodes instantiate.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -42,7 +42,7 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -57,7 +57,7 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -67,6 +67,6 @@ A kumu declaration MUST register a type definition only, producing no render out
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0oQkDTWE3GHf_H0MnqXkL9kxF_OccltMVhs_GxVQmlo
+<<^ code="&#x0003;">>ni:///sha-256;qWz7cHdnTPvCyXd9_VjrPf9BdZYl6qEWsoxwMPOhX2k
 
 <<^ code="&#x0004;" -> to=?>>

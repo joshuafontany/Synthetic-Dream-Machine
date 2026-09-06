@@ -2,7 +2,7 @@
 
 - `lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language`
 
-<a id="abstract"></a>
+<a id="/abstract"></a>
 
 # Memetic-Wikitext Carrier Framing
 
@@ -20,7 +20,7 @@ and one frame carries any document. The language framed here rides the sibling s
 [MEMETIC-WIKITEXT]; the addresses the frame declares ride [LAR-URI]. The Lar keeps the frame — the
 guardian at the threshold of the place, naming it on the way in and pouring the libation on the way out.
 
-<a id="status"></a>
+<a id="/status"></a>
 
 ## Status and Maturity
 
@@ -28,7 +28,7 @@ This document holds **submission-draft** maturity. The control set, spine order,
 byte law read as stable; the conformance clauses and frame-security analysis carry RFC-2119 normative
 force. Items in the open annex remain open. Promotion to canon rests with the operator, not the document.
 
-<a id="introduction"></a>
+<a id="/introduction"></a>
 
 ## Introduction — Scope, Audience, and Relation to the Sibling Specifications
 
@@ -50,7 +50,7 @@ this specification reads inside it.
 **Audience.** Implementers of carrier readers, relays, and consumers; operators of bags and sync
 boundaries; authors of migrations and independent implementations.
 
-<a id="terminology"></a>
+<a id="/terminology"></a>
 
 ## Terminology and Conformance Language
 
@@ -75,7 +75,7 @@ The umbrella **processor** class and its other subclasses (parser, renderer) sta
 [MEMETIC-WIKITEXT] #conformance; an obligation stated there on **a processor** binds the carrier reader
 and consumer here as well.
 
-<a id="conformance"></a>
+<a id="/conformance"></a>
 
 ## Conformance Classes
 
@@ -100,7 +100,7 @@ A **conforming consumer** MUST honour the verdict obligations (#/the-touchstone)
 to its operator before any bag admission, treat `torn` as `mismatch`, and read absence as `unchecked` —
 refusing admission only under a policy it declares.
 
-<a id="grammar"></a>
+<a id="/grammar"></a>
 
 ## Formal Grammar (ABNF)
 
@@ -144,7 +144,7 @@ MUST hold (#/carrier-spine). (3) The `check` slot names a POSITION, never a para
 closed `text-close` sigil, on the same line (#/control-set). (4) The composition wraps `document`
 without entering it; everything inside defers to [MEMETIC-WIKITEXT].
 
-<a id="doctype"></a>
+<a id="/doctype"></a>
 
 ## The DOCTYPE — declaring an extension of TW5 wikitext
 
@@ -174,7 +174,7 @@ the media type into the DOCTYPE slot would put both under one name for no gain.
 The suffix states a structural fact about the syntax and holds whatever name the subtype takes; the
 earlier `x-` spellings file as deprecated read-side aliases there.
 
-<a id="declaration-register"></a>
+<a id="/declaration-register"></a>
 
 ## Carrier Frame — The Declaration Register
 
@@ -226,7 +226,7 @@ maintained by hand — repeats the twin-drift this corpus already keeps a witnes
 `!WORD` declarations under the same law — read before content, selecting or constraining the grammar,
 never performing a move the renderer runs. A `!WORD` that acts belongs in the speaking set.
 
-<a id="carrier-spine"></a>
+<a id="/carrier-spine"></a>
 
 ## The Carrier Spine — Four Required Sigils
 
@@ -265,7 +265,7 @@ A carrier travels as one framed transmission. It opens on a heading that names t
 
 **SOH and EOT echo the bearing vectors.** SOH opens facing a bearing (`from=? -> to=lar:///…`) as `aim` opens a turn; EOT releases to the unknown (`-> ?`) as `yield` closes one. The spine frames a meme the way the turn-frame frames an exchange.
 
-<a id="bearing-arrow"></a>
+<a id="/bearing-arrow"></a>
 
 ## The Bearing Arrow — one edge, two orientations
 
@@ -305,7 +305,7 @@ lied about its resolution.** The same cut runs through the block check (`uncheck
 and through the ward's infelicities (a misfire voids, an abuse rings hollow): ABSENCE DECLARED and
 ABSENCE DISCOVERED stand as different facts, and every instrument here that conflated them read useless.
 
-<a id="control-set"></a>
+<a id="/control-set"></a>
 
 ## Carrier Frame — The Control Set
 
@@ -427,7 +427,7 @@ below the grammar (canon: `lar:///ha.ka.ba/lares/api/pono/persona-circle`).
 Each mark's `sigil-*.tid` carries `lar-pattern`, and a SHAPE-EXACT pattern refuses a wrong fill the way
 a shape-exact slug rule refuses a truncated tag. Enforcement rides the recogniser, never the surface.
 
-<a id="resonance"></a>
+<a id="/resonance"></a>
 
 ## Namespace Resonance Glyphs — A Separate Mark
 
@@ -453,7 +453,7 @@ Two laws govern the namespace:
 1. **Opener-only.** A resonance glyph rides SOH alone, as the `namespace:` param beside the code.
 2. **EOT rides bare, always.** The resonance mark rides the heading (SOH); the release states its code and its bearing, and no namespace.
 
-<a id="trust-tiers"></a>
+<a id="/trust-tiers"></a>
 
 ## Trust Tiers — The Control-Character Roles
 
@@ -472,7 +472,7 @@ Each kernel-tier control character carries **three simultaneous roles**, bound a
 
 SOH substitutes DC1 (`0x11`) and EOT substitutes DC4 (`0x14`) in kapu-tier carriers; the parser accepts both. The kapu aliases ride SOH and EOT alone.
 
-<a id="authoring"></a>
+<a id="/authoring"></a>
 
 ## Authoring — what an author states, and what the carrier adds
 
@@ -498,7 +498,7 @@ A carrier reads in three zones, and the middle one had no name:
 
 1. **The identity heading** — the labelled `toml meta` fence. What the meme IS.
 2. **The carrier bindings** — between the heading and STX. `<<~ aka lar:///…>>` binds a reference at
-  carrier level; `<<~ kahea ahu #…>>` mounts a slot. These read as AUTHORED structure, not framing:
+  carrier level; `<<~ kahea ahu #/…>>` mounts a slot. These read as AUTHORED structure, not framing:
   they state what the carrier holds before its body opens.
 1. **The body** — between STX and ETX. Optional, and holding prose, ahu slots, both, or nothing.
 
@@ -546,7 +546,7 @@ Projecting a projection MUST change nothing. A processor whose output re-reads d
 input leaves every carrier reading "edited" on every scan, so the ingest loop never converges and a
 write-back rewrites the author's source forever.
 
-<a id="frame-head-lock"></a>
+<a id="/frame-head-lock"></a>
 
 ## The Frame Head Locks to Control
 
@@ -567,7 +567,7 @@ onto the first example it meets and answers for a span the writer never wrote �
 reader here once verified a digest written inside a teaching example while the body it named went
 unexamined, and reported the carrier sound.
 
-<a id="the-touchstone"></a>
+<a id="/the-touchstone"></a>
 
 ## The Touchstone Hash ~ the check as the Oracle's inversion
 
@@ -689,7 +689,7 @@ signature, never to this mark.
 The check stands. The seal, the render vocabulary and the projection stamper wait for a live wiki to
 render them first — a vocabulary chosen before anything renders it would freeze a form nobody has read.
 
-<a id="canonical-form"></a>
+<a id="/canonical-form"></a>
 
 ## Canonical Form ~ the writer's law
 
@@ -736,7 +736,7 @@ A migration stands as the honest exception. A document standing in a shape the c
 emits cannot be rewritten by a writer that only knows the current shape, so a migration reads with the
 reader, and writes with the emitter, and never composes bytes of its own.
 
-<a id="the-carriage"></a>
+<a id="/the-carriage"></a>
 
 ## The Carriage ~ what the grammar owns, and where it keeps it
 
@@ -812,7 +812,7 @@ A carriage record round-trips whole in bytes and lossy in fields: re-read, a fra
 fold into the body and the record dissolves. **That loss follows the design.** The boundary lives in position, and
 reserving a field to re-state it would put a derived fact back on the record.
 
-<a id="the-gradient"></a>
+<a id="/the-gradient"></a>
 
 ## The Gradient ~ how far down a carrier sits
 
@@ -846,7 +846,7 @@ rather than an address: links written before the corpus poured to `.mem`. Those 
 all, so they neither resolve nor dangle; matching one to a carrier means guessing which one it became,
 and a resolver must not guess.
 
-<a id="classifier-channel"></a>
+<a id="/classifier-channel"></a>
 
 ## The Classifier Channel — What the Sigil Layer Does
 
@@ -856,7 +856,7 @@ The carrier sigils, the namespace glyphs, and the OODA-HA marks ride as an **unp
 
 Field grounds: `lar:///ha.ka.ba/lares/docs/pono/research-streams/ward-channel-grounds#/classifier-channel`.
 
-<a id="schema"></a>
+<a id="/schema"></a>
 
 ## Schema (machine-readable)
 
@@ -884,7 +884,7 @@ kernel        = { range = "0x01–0x0F",   trust = "kernel",   resonance = "stan
 kapu-elevated = { range = "0x11–0x14",   trust = "kapu",     resonance = "elevated", writable-by = "admin-only" }
 ```
 
-<a id="frame-security"></a>
+<a id="/frame-security"></a>
 
 ## Frame Security Considerations
 
@@ -936,7 +936,7 @@ escape discipline — keeps a quoted mark from framing. The mask therefore stand
 boundary: a reader that drops it verifies teaching examples instead of bodies, a failure the corpus
 has met.
 
-<a id="carrier-bytes"></a>
+<a id="/carrier-bytes"></a>
 
 ## Carrier Bytes Law
 
@@ -949,7 +949,7 @@ A carrier at rest carries one byte law (pinned here in the spec, per the canonic
 
 The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees normalized bytes; every projection outward emits them. Mid-pipeline re-normalization constitutes a degraded shore.
 
-<a id="references"></a>
+<a id="/references"></a>
 
 ## Normative References
 
@@ -962,7 +962,7 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
 - **[LAR-URI]** — the `lar:` URI specification (sibling submission): `lar:///ha.ka.ba/lares/api/pono/lar-uri`.
 - **[TW5]** — TiddlyWiki5 WikiText grammar — the host whose macro call every frame sigil stands as.
 
-<a id="annex-open"></a>
+<a id="/annex-open"></a>
 
 ## Annex — Open Items (Informative)
 
@@ -974,7 +974,7 @@ The byte law lives at the BOUNDARY: every stratum inward (records, VM) sees norm
   which would put ETB on a carrier's text and ETX on its attestation. The frame above reads the other
   way and states why. The strict reading stays named rather than dismissed.
 
-<a id="edges"></a>
+<a id="/edges"></a>
 
 ## Edges
 

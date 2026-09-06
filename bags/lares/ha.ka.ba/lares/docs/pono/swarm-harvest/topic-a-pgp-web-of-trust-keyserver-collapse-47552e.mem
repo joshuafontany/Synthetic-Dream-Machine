@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/topic-a-pgp-web-of-trust-key
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! TOPIC A — PGP Web of Trust / keyserver collapse
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 25,114 characters
 
@@ -181,12 +181,12 @@ Brave Search returned HTTP 429 on every attempt across the whole session, and `r
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;dgp6g08nriBQApE2sbj7xlLt6GTepg9Qb40mqhK63Jc
+<<^ code="&#x0003;">>ni:///sha-256;TXJewGWhS2esGDn8_Iqmh7gIJ2StUx7fJ0wMDC4pb_U
 
 <<^ code="&#x0004;" -> to=?>>

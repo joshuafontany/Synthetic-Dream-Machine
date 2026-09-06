@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/projections/powers/ftls-card/read-magic"
 
 ! Read Magic — FTLS Card
 
-<<~ ahu #card>>
+<<~ ahu #/card>>
 
 !! Read Magic
 //First Key, Archive Handshake//
@@ -30,7 +30,7 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu>>
 
-<<~ ahu #overcharge>>
+<<~ ahu #/overcharge>>
 
 !! Overcharge
 
@@ -40,7 +40,7 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu>>
 
-<<~ ahu #components>>
+<<~ ahu #/components>>
 
 !! Components
 
@@ -48,7 +48,7 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -58,6 +58,6 @@ Tune to the writing and read its magical interface layer. The referee gives the 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;d9a5nMHO4KZVG2AnhQhDjJ8-0fAiKr5R6LiWGwHrE7o
+<<^ code="&#x0003;">>ni:///sha-256;odj1jdzeIkVHFn8bWeRqzovhgnPWrYSZ9SDWhVoqIn0
 
 <<^ code="&#x0004;" -> to=?>>

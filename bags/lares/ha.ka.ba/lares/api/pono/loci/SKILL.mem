@@ -33,7 +33,7 @@ This skill does not widen, soften, or reinterpret it.
 Loci SKILL opens the procedural stream here.
 
 
-<<~ ahu #load-contract>>
+<<~ ahu #/load-contract>>
 
 !! Load Contract
 
@@ -49,7 +49,7 @@ Loci SKILL opens the procedural stream here.
 
 <<~/ahu>>
 
-<<~ ahu #workflow-contract>>
+<<~ ahu #/workflow-contract>>
 
 !! Workflow Contract
 
@@ -81,7 +81,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -101,7 +101,7 @@ Not for:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ begin from canonical loci; gather URI and convention surfaces before decomposition
 ⏿ run the derivation algorithm in full step order; classify resolution state without collapse
@@ -111,7 +111,7 @@ Not for:
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -130,7 +130,7 @@ Do not infer `implements loci` without evidence.
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -146,7 +146,7 @@ A `lar:` URI in a `depends-on` array that resolves to no derived path counts as 
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -165,7 +165,7 @@ Rating posture:
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -187,7 +187,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! ↺ Aftermath
 
@@ -212,7 +212,7 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -222,6 +222,6 @@ Then widen: does the stack describe itself coherently after the pass? An Afterma
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;SCAhPaI2BcBLbVy9saZNJc5zztulQ-B1C24batC8GNo
+<<^ code="&#x0003;">>ni:///sha-256;-YEEyPazDyoBXv0ZSaVCn1QywAMxx08X2GwruCLpvf0
 
 <<^ code="&#x0004;" -> to=?>>

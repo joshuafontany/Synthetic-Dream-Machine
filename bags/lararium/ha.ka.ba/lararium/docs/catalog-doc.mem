@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/docs/catalog-doc"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Catalog Doc
 
@@ -41,7 +41,7 @@ A peer that has not completed auth MUST NOT receive catalog content.
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -104,7 +104,7 @@ fields = [
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Catalog Law
 
@@ -119,7 +119,7 @@ fields = [
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/docs/readiness-keys>>
 <<~ loulou lar:///ha.ka.ba/lararium/docs/open-phases>>
@@ -128,6 +128,6 @@ fields = [
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;06RZzau5_vcYOZp6YOc4eGlreYZHm2Ac5SqYA74-1Eo
+<<^ code="&#x0003;">>ni:///sha-256;Q5tSvw_5ySMkJ-uzoa3zbeHQHDGZz9UuaDV_v8Nz5tA
 
 <<^ code="&#x0004;" -> to=?>>

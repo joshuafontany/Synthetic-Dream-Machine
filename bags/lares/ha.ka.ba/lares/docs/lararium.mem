@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/lararium"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Docs
 
@@ -28,7 +28,7 @@ This shelf holds the voice-house, old all-in-one ingests, and archival materials
 
 <<~/ahu>>
 
-<<~ ahu #tree>>
+<<~ ahu #/tree>>
 
 !! Tree
 
@@ -43,7 +43,7 @@ Use this branch for:
 
 <<~/ahu>>
 
-<<~ ahu #mechanics-shelf>>
+<<~ ahu #/mechanics-shelf>>
 
 !! Mechanics Shelf
 
@@ -58,7 +58,7 @@ The rooms may deepen later without moving the seat again.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -71,6 +71,6 @@ The rooms may deepen later without moving the seat again.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;srnhEXiDrHeBqRVGV_S6fTC6rOjs0P63KsJjg_PycwE
+<<^ code="&#x0003;">>ni:///sha-256;t5I0ZfL9jpQeuPdN4KN7LGnobKG7VO_1bgh_EG2Q5Rw
 
 <<^ code="&#x0004;" -> to=?>>

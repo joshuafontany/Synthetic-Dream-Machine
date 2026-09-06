@@ -24,7 +24,7 @@ uri-path      = "ha.ka.ba/lares/api/mu/the-law-of-5s"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Law of 5s
 
@@ -36,7 +36,7 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ enter through Chaos; entertain the phenomenon and invite demonstrative ingenuity
 ⏿ pass into Discord; test the fivefold relation without hardening it into dogma
@@ -46,7 +46,7 @@ He gives away the secret when he adds, "given enough ingenuity on the part of th
 
 <<~/ahu>>
 
-<<~ ahu #the-five-seasons>>
+<<~ ahu #/the-five-seasons>>
 
 !! The Five Seasons
 
@@ -64,7 +64,7 @@ Five phases. Five questions.
 
 <<~/ahu>>
 
-<<~ ahu #maybe-logic>>
+<<~ ahu #/maybe-logic>>
 
 !! RAW's Maybe Logic
 
@@ -86,7 +86,7 @@ The agent should hold open competing readings when the frame remains underdeterm
 
 <<~/ahu>>
 
-<<~ ahu #sri-syadasti>>
+<<~ ahu #/sri-syadasti>>
 
 !! The Syad Perspectives of Sri Syadasti
 
@@ -97,7 +97,7 @@ Five standpoints license seven predications --- the //naya// wing, never a mappi
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -148,7 +148,7 @@ kapu  = "violet"
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source (TypeScript — compiled-in)
 
@@ -190,7 +190,7 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -201,6 +201,6 @@ export const RATING_COLOR: Record<Rating5, string> = {
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8vMh4HbOB2_RyJdKAnzYtrNKftb_lt9XB4-G9TQhQqI
+<<^ code="&#x0003;">>ni:///sha-256;GjakNz5GrWJ5AFmx0-Gx8335vfzMnFVJ-Q9LQ7eXnY8
 
 <<^ code="&#x0004;" -> to=?>>

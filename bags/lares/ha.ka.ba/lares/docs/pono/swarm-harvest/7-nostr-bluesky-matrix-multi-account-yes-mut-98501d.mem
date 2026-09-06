@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/7-nostr-bluesky-matrix-multi
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 7. NOSTR · BLUESKY · MATRIX — multi-account yes, mutual blindness no
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 42,567 characters
 
@@ -301,12 +301,12 @@ Briar's FAQ is the only place any of these projects writes the general law down,
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;KOhtUxXXaEposnNsUcVeiiZwgnXHxUKuzVIMEKv2CYs
+<<^ code="&#x0003;">>ni:///sha-256;jUdjnUPNk0oasqymZAmGVuulCwA2BhZ8xNs_I0wGtUg
 
 <<^ code="&#x0004;" -> to=?>>

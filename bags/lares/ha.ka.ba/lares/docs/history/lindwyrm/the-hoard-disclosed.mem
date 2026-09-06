@@ -18,7 +18,7 @@ uri-path        = "ha.ka.ba/lares/docs/history/lindwyrm/the-hoard-disclosed"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lindwyrm's Hoard — The Hoard Disclosed
 
@@ -27,7 +27,7 @@ The frame opens the public thread, then closes after the contained acts.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -45,7 +45,7 @@ Consumption note: source prose carried Act VII as epilogue/frame. This locus kee
 
 <<~/ahu>>
 
-<<~ ahu #thread-open>>
+<<~ ahu #/thread-open>>
 
 !! Thread Open
 
@@ -75,7 +75,7 @@ The Archivists keep three cover stories on file. They do not agree with each oth
 
 <<~/ahu>>
 
-<<~ ahu #lindwyrm-first-reply>>
+<<~ ahu #/lindwyrm-first-reply>>
 
 !! The Lindwyrm Answers
 
@@ -157,7 +157,7 @@ The full story runs longer. I will tell it.
 
 <<~/ahu>>
 
-<<~ ahu #contained-acts>>
+<<~ ahu #/contained-acts>>
 
 !! Contained Acts
 
@@ -174,7 +174,7 @@ This frame opens before them and closes after them. The story tells infrastructu
 
 <<~/ahu>>
 
-<<~ ahu #thread-close>>
+<<~ ahu #/thread-close>>
 
 !! Thread Close
 
@@ -220,7 +220,7 @@ The node hums.
 
 <<~/ahu>>
 
-<<~ ahu #thread-continues>>
+<<~ ahu #/thread-continues>>
 
 !! Thread Continues
 
@@ -244,7 +244,7 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 <<~/ahu>>
 
-<<~ ahu #open-questions>>
+<<~ ahu #/open-questions>>
 
 !! Open Questions
 
@@ -255,7 +255,7 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -270,6 +270,6 @@ The thread above sealed in the far calendar of New Delos. This annotation speaks
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CyOXMMf0mLPyHiXC9BwZUbZ49whvm7vZi_x_YAgs6IY
+<<^ code="&#x0003;">>ni:///sha-256;IZGpQwAbrYthocf066vJ0_aKJFs_2LO11ojiJD3wUqY
 
 <<^ code="&#x0004;" -> to=?>>

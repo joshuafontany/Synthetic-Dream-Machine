@@ -30,7 +30,7 @@ uri-path           = "ha.ka.ba/lares/api/pono/lar-uri/SKILL"
 [[lar-uri.md|../lar-uri.md]] holds the scheme law.
 This skill carries the working procedure.
 
-<<~ ahu #load-contract>>
+<<~ ahu #/load-contract>>
 
 !! Load Contract
 
@@ -45,7 +45,7 @@ Keep these points active when the skill loads:
 
 <<~/ahu>>
 
-<<~ ahu #workflow-contract>>
+<<~ ahu #/workflow-contract>>
 
 !! Workflow Contract
 
@@ -72,7 +72,7 @@ Do not:
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -89,7 +89,7 @@ Prefer another surface when the work concerns:
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ read the address and sense its form and path class
 ⏿ orient against the scheme law — slots, classes, the single `@`-bag, the fragment
@@ -99,7 +99,7 @@ Prefer another surface when the work concerns:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -108,6 +108,6 @@ Prefer another surface when the work concerns:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Z5ErWfta4iFRymlrGKKWrxAcD6ExRU9wu-3I3RZI1Lo
+<<^ code="&#x0003;">>ni:///sha-256;HAelwemI8OHYc5C8yN1G7LkPnUrA9r7uDTD9nSpADx0
 
 <<^ code="&#x0004;" -> to=?>>

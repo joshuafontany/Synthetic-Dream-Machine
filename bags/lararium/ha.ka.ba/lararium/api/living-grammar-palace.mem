@@ -21,7 +21,7 @@ written   = "2026-06-29"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! The Living-Grammar Memory-Palace ~ capturing FORM beside CONTENT
 
@@ -44,7 +44,7 @@ the verbatim hash rejoins what the tower already relates.
 
 <<~/ahu>>
 
-<<~ ahu #palace-instance>>
+<<~ ahu #/palace-instance>>
 
 !! The Nameless Palace-Instance Entity ~ a palace IS its cap-stack
 
@@ -65,7 +65,7 @@ proven TS pattern; the Python port stays specified, not yet built.
 
 <<~/ahu>>
 
-<<~ ahu #three-registers>>
+<<~ ahu #/three-registers>>
 
 !! Three Registers ~ the corpus-source axis (descriptive ↔ prescriptive)
 
@@ -101,7 +101,7 @@ the fork stays OPEN, recorded here, not resolved.
 
 <<~/ahu>>
 
-<<~ ahu #grammar-stack>>
+<<~ ahu #/grammar-stack>>
 
 !! Three-Layer Grammar-Stack ~ the construction-depth axis (orthogonal to registers)
 
@@ -130,7 +130,7 @@ render pipeline projects it, a separate concern ([[render-pipeline|lar:///ha.ka.
 
 <<~/ahu>>
 
-<<~ ahu #two-planes>>
+<<~ ahu #/two-planes>>
 
 !! Two-Planes Form-Capture ~ the spine (discrete constructicon ⋈ continuous fuzzy-membership)
 
@@ -192,7 +192,7 @@ and near-term.
 
 <<~/ahu>>
 
-<<~ ahu #multi-graph>>
+<<~ ahu #/multi-graph>>
 
 !! Multi-Graph ~ CONTENT ↠ STRUCTURE ↠ FORM, a tower — hash-joined
 
@@ -222,7 +222,7 @@ forbids.
 
 <<~/ahu>>
 
-<<~ ahu #unification>>
+<<~ ahu #/unification>>
 
 !! The Unification ~ the product-presheaf spine (the keystone, 4-spirit convergence)
 
@@ -428,7 +428,7 @@ lives in the WEAVE (the binding's braid, #ffz-binding), never in any single stra
 
 <<~/ahu>>
 
-<<~ ahu #full-tree-payload>>
+<<~ ahu #/full-tree-payload>>
 
 !! Full-Tree Payload ~ the parse-tree stored verbatim
 
@@ -440,7 +440,7 @@ renderable form. The schema rides a CID so a tree's shape stays verifiable acros
 
 <<~/ahu>>
 
-<<~ ahu #multi-aperture>>
+<<~ ahu #/multi-aperture>>
 
 !! Multi-Aperture ~ scale-selection comes free
 
@@ -454,7 +454,7 @@ Retrieval reads at multiple apertures (the attention-scale ladder, [[attention-s
 
 <<~/ahu>>
 
-<<~ ahu #pono-gating>>
+<<~ ahu #/pono-gating>>
 
 !! Pono-Gating Caps ~ all already in-tree
 
@@ -477,7 +477,7 @@ palace. They carry the same hardening the capture-nalu earned across the four-do
 
 <<~/ahu>>
 
-<<~ ahu #meshpalace>>
+<<~ ahu #/meshpalace>>
 
 !! Meshpalace ~ a third FeedCap (design-only)
 
@@ -490,7 +490,7 @@ Design-only here — the parallel DreamNet session owns the Automerge internals 
 
 <<~/ahu>>
 
-<<~ ahu #phased-plan>>
+<<~ ahu #/phased-plan>>
 
 !! Phased Plan ~ smallest-additive-first
 
@@ -525,7 +525,7 @@ grammar rides above it in the sovereign island.
 
 <<~/ahu>>
 
-<<~ ahu #ffz-binding>>
+<<~ ahu #/ffz-binding>>
 
 !! The FFZ Binding ~ the drawer's worldline-temporal facet (ratified narrowed, 2026-06-29)
 
@@ -643,7 +643,7 @@ the kept dissents ride live below (#/kept-hoike).
 
 <<~/ahu>>
 
-<<~ ahu #kept-hoike>>
+<<~ ahu #/kept-hoike>>
 
 !! Kept-Hoike ~ the five live dissents (kue speaks first)
 
@@ -696,7 +696,7 @@ re-entry: each kue's own key; or the operator's next FFZ-binding revision cycle
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds ~ the eight research libations
 
@@ -712,7 +712,7 @@ storage fork (#/three-registers), which name reconciliations, not re-designs.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -732,7 +732,7 @@ storage fork (#/three-registers), which name reconciliations, not re-designs.
 
 <<~/ahu>>
 
-<<~ ahu #ground-and-readings>>
+<<~ ahu #/ground-and-readings>>
 
 !! Ground and Readings ~ one ground, a lattice of readings, the chain as spine
 
@@ -746,6 +746,6 @@ The geometry whole: ''one GROUND · the li spine (shape ↠ idiom) · cross-cutt
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;pRxxslfdVeETr-WOgusVp4ABNaRsRwdI-1bVYMN8mbY
+<<^ code="&#x0003;">>ni:///sha-256;x6GZGTlk_-sgkxZxDLOQGhv5tXT5BULCsQx52MycVFo
 
 <<^ code="&#x0004;" -> to=?>>

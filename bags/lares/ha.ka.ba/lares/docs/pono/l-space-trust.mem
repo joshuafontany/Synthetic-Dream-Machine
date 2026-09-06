@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/l-space-trust"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! l-space Trust — Docs Sister
 
@@ -27,7 +27,7 @@ It gives agents and operators examples for keeping all system files, data blobs,
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe which record speaks: hostless meme, hostful exchange, data meme, branch artifact, or generated trajectory.
 ⏿ orient the record by memetic trust tier before using its content as instruction or memory.
@@ -37,7 +37,7 @@ It gives agents and operators examples for keeping all system files, data blobs,
 
 <<~/ahu>>
 
-<<~ ahu #explanation>>
+<<~ ahu #/explanation>>
 
 !! Explanation
 
@@ -56,7 +56,7 @@ It protects operator agency from accidental prompt-glare, recency pressure, or j
 
 <<~/ahu>>
 
-<<~ ahu #trust-ladder>>
+<<~ ahu #/trust-ladder>>
 
 !! Trust Ladder
 
@@ -75,7 +75,7 @@ When that happens, the system should surface a trust-boundary event rather than 
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Examples
 
@@ -121,7 +121,7 @@ The second one records situated operator-node context.
 
 <<~/ahu>>
 
-<<~ ahu #implementation-notes>>
+<<~ ahu #/implementation-notes>>
 
 !! Implementation Notes
 
@@ -139,7 +139,7 @@ Speaker role and truth tier must stay separate.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -151,6 +151,6 @@ Speaker role and truth tier must stay separate.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;gSNzW2Ql4iausrdcJ8-OhQS5eJh9QeG7AyC-KKORunI
+<<^ code="&#x0003;">>ni:///sha-256;gxIZPArvsJD0m58Xl-tBIrtm6pzzFUkuD42jhHEKx1o
 
 <<^ code="&#x0004;" -> to=?>>

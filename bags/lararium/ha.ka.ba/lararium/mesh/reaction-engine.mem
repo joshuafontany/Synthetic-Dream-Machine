@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/reaction-engine"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Reaction Engine — Canonical Pipeline
 
@@ -35,7 +35,7 @@ only the irreducible (CRDT, network, crypto, multi-wiki coordination). Everythin
 
 <<~/ahu>>
 
-<<~ ahu #pipeline>>
+<<~ ahu #/pipeline>>
 
 !! The Five-Layer Pipeline
 
@@ -77,7 +77,7 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 <<~/ahu>>
 
-<<~ ahu #laws>>
+<<~ ahu #/laws>>
 
 !! Pipeline Laws
 
@@ -97,7 +97,7 @@ Layer 5 — IslandMsg_Event / CRDT convergence (the crossing)
 
 <<~/ahu>>
 
-<<~ ahu #boundary-map>>
+<<~ ahu #/boundary-map>>
 
 !! Boundary Map
 
@@ -125,7 +125,7 @@ Cross-vessel boundary (CRDT convergence):
 
 <<~/ahu>>
 
-<<~ ahu #verse-alignment>>
+<<~ ahu #/verse-alignment>>
 
 !! UEFN Verse Alignment
 
@@ -145,7 +145,7 @@ One wave. All observers. Same synchronous context.
 
 <<~/ahu>>
 
-<<~ ahu #non-goals>>
+<<~ ahu #/non-goals>>
 
 !! Non-Goals (alpha)
 
@@ -155,7 +155,7 @@ One wave. All observers. Same synchronous context.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -169,6 +169,6 @@ One wave. All observers. Same synchronous context.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Yu6EO1Y3uHC9HiJ2J3VTYdaJyPJJAoCWLcN4CSvU19A
+<<^ code="&#x0003;">>ni:///sha-256;4OXoMKzuUnv_f9EHOjAY2_2U49Jo76Bl79J_G4EDcs4
 
 <<^ code="&#x0004;" -> to=?>>

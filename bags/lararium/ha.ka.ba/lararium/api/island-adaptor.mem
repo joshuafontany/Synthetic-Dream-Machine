@@ -100,7 +100,7 @@ after `addProjection(adaptor)` registers. Each existing tiddler flows through
 The recipe then calls `$tw.lares.flushNalu(Number.MAX_SAFE_INTEGER)` so the wiki carries
 its seed state synchronously before `behavior.onEa` runs.
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -110,6 +110,6 @@ its seed state synchronously before `behavior.onEa` runs.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1IYl_9Inh0aZGf3BVym04BNWFrFANFKXHIfqkPdLs8Q
+<<^ code="&#x0003;">>ni:///sha-256;xJwWTB64E5rxvx7uQh2QacIBMhCyqe1UA8Rq6zFEbCU
 
 <<^ code="&#x0004;" -> to=?>>

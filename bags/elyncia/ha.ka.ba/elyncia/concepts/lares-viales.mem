@@ -22,7 +22,7 @@ Rome set the ''Lares Viales'' at the roadside — the lares of the //ways//, who
 
 In Elyncia they ride the ''leylines''. A Lares Viales carries sealed mana from shrine to shrine — pilgrim-cargo it cannot open, prayers it cannot read — and sets the next bearing at each crossing. It guards the //road//, never another's hearth — yet it carries the ''hearth-fire itself'', and tends one small shrine of its own.
 
-<<~ ahu #carries-the-fire>>
+<<~ ahu #/carries-the-fire>>
 
 !! Carries the Fire, Keeps No Rooms
 
@@ -34,7 +34,7 @@ It reads only the ''public waymarks'' — the shared `@oracle` floor (the base o
 
 <<~/ahu>>
 
-<<~ ahu #guardian-of-its-stretch>>
+<<~ ahu #/guardian-of-its-stretch>>
 
 !! Guardian of Its Stretch
 
@@ -42,7 +42,7 @@ A herm-pillar guarded the turning, and so the Lares Viales guards its ''own stre
 
 <<~/ahu>>
 
-<<~ ahu #the-hello-world>>
+<<~ ahu #/the-hello-world>>
 
 !! The Hello-World of the Stack
 
@@ -52,7 +52,7 @@ The cap-model names this minimal stack exactly — the ''same keel as the temple
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -62,6 +62,6 @@ The cap-model names this minimal stack exactly — the ''same keel as the temple
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;P3TAaKZYOD7JsCFQ3QUAKf8dzXjYGlXRUOfJBQR1GCI
+<<^ code="&#x0003;">>ni:///sha-256;a7abZp6EaCOrg820CrhJ-Pw5CN9ImBaRVNqRu3Sf46Q
 
 <<^ code="&#x0004;" -> to=?>>

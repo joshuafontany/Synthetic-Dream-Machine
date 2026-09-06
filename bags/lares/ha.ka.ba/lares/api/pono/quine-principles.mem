@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/quine-principles"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Quine Principles
 
@@ -37,7 +37,7 @@ In neither: the description is a separate documentation artifact.
 
 <<~/ahu>>
 
-<<~ ahu #p1-unified-store>>
+<<~ ahu #/p1-unified-store>>
 
 !! P1 — Unified Store
 
@@ -62,7 +62,7 @@ The meme CARRIES the documentation; the documentation INHABITS the meme.
 
 <<~/ahu>>
 
-<<~ ahu #p2-no-privileged-meta>>
+<<~ ahu #/p2-no-privileged-meta>>
 
 !! P2 — No Privileged Meta-Level
 
@@ -87,7 +87,7 @@ as a `filterTiddlers()` call. The filter layer serves as the reflection API.
 
 <<~/ahu>>
 
-<<~ ahu #p3-causal-closure>>
+<<~ ahu #/p3-causal-closure>>
 
 !! P3 — Causal Closure
 
@@ -114,7 +114,7 @@ the content graph for P3 reasons.
 
 <<~/ahu>>
 
-<<~ ahu #p4-live-feedback>>
+<<~ ahu #/p4-live-feedback>>
 
 !! P4 — Live Feedback
 
@@ -141,7 +141,7 @@ the meme is preferred over the compiled TypeScript equivalent.
 
 <<~/ahu>>
 
-<<~ ahu #tw5-smalltalk-comparison>>
+<<~ ahu #/tw5-smalltalk-comparison>>
 
 !! TiddlyWiki vs Smalltalk
 
@@ -160,7 +160,7 @@ Lararium's answer: a filter expression that returns the self-describing layer.
 
 <<~/ahu>>
 
-<<~ ahu #if-can-live-in-wiki>>
+<<~ ahu #/if-can-live-in-wiki>>
 
 !! The "If It CAN Live In The Wiki It MUST" Rule
 
@@ -188,7 +188,7 @@ meme's `status-date` field.
 
 <<~/ahu>>
 
-<<~ ahu #ipld-bridge>>
+<<~ ahu #/ipld-bridge>>
 
 !! IPLD Bridge
 
@@ -218,7 +218,7 @@ The `lar:` URI resolver (FPI-5 trim tab) makes this migration transparent to all
 
 <<~/ahu>>
 
-<<~ ahu #heleuma-anchor-system>>
+<<~ ahu #/heleuma-anchor-system>>
 
 !! Heleuma Anchor System
 
@@ -248,7 +248,7 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -259,6 +259,6 @@ of the pattern. The TypeScript file is the material instantiation; the meme is t
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;9kMjISqk1QJmF_6Cb9l70iV1Vb_XT7WtvBVmCLfGsKI
+<<^ code="&#x0003;">>ni:///sha-256;v1nMBh1GWqaqRXg-y1Zfvx7cG5sSW9b4C3ZHdCt4Kt4
 
 <<^ code="&#x0004;" -> to=?>>

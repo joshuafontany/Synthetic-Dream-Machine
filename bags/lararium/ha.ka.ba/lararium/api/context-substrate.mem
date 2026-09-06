@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/api/context-substrate"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Context Substrate
 
@@ -31,7 +31,7 @@ by file-import as cargo. A `lar:` URI carries the reach; the daemon's TW5 VM ren
 
 <<~ aka lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -46,7 +46,7 @@ created          = "2026-08-28"
 
 <<~/ahu>>
 
-<<~ ahu #the-law>>
+<<~ ahu #/the-law>>
 
 !! The Substrate Law
 
@@ -75,7 +75,7 @@ new machinery; it takes removing the file-import bypass.''
 
 <<~/ahu>>
 
-<<~ ahu #why-transclusion>>
+<<~ ahu #/why-transclusion>>
 
 !! Why Transclusion Carries More Than Disclosure
 
@@ -94,7 +94,7 @@ stands as exactly that identifier
 
 <<~/ahu>>
 
-<<~ ahu #the-door>>
+<<~ ahu #/the-door>>
 
 !! The Door — two verbs, and the address carries the rest
 
@@ -113,7 +113,7 @@ grow a verb per tiddler kind, and the store MUST NOT announce its shelf.
 
 <<~/ahu>>
 
-<<~ ahu #the-write-shore>>
+<<~ ahu #/the-write-shore>>
 
 !! The Write Shore
 
@@ -137,7 +137,7 @@ cascade REFUSE a `put` aimed at `bags/{slug}`, or does the shore live only in pr
 
 <<~/ahu>>
 
-<<~ ahu #the-budget>>
+<<~ ahu #/the-budget>>
 
 !! The Pull Budget
 
@@ -155,7 +155,7 @@ as a ruling rather than as drift.
 
 <<~/ahu>>
 
-<<~ ahu #hidden-failures>>
+<<~ ahu #/hidden-failures>>
 
 !! Hidden Failures
 
@@ -173,7 +173,7 @@ make its own partiality legible in the frame.
 
 <<~/ahu>>
 
-<<~ ahu #forks>>
+<<~ ahu #/forks>>
 
 !! Forks — unruled
 
@@ -192,7 +192,7 @@ renders its submission pair · or drop cross-harness portability.
 
 <<~/ahu>>
 
-<<~ ahu #build-order>>
+<<~ ahu #/build-order>>
 
 !! Build Order
 
@@ -209,7 +209,7 @@ else moves first.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -223,6 +223,6 @@ else moves first.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;5aQAQ3sLgULwXkurp9bUozTk48HLBWJqYssKqioGh34
+<<^ code="&#x0003;">>ni:///sha-256;b9X_gCPA6NxhEahxyhycBfygmjUYi0ztwodNYTzWEsI
 
 <<^ code="&#x0004;" -> to=?>>

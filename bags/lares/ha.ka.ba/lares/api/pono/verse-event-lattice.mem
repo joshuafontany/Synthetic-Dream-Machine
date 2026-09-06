@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/verse-event-lattice"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Verse Event Lattice
 
@@ -33,7 +33,7 @@ episode 19 (Brooklyn Zelenka) for the peer model alignment.
 
 <<~/ahu>>
 
-<<~ ahu #type-lattice>>
+<<~ ahu #/type-lattice>>
 
 !! The Four Types
 
@@ -129,7 +129,7 @@ handle. `ReactionEngine` holds `listenable` references and subscribes to them
 
 <<~/ahu>>
 
-<<~ ahu #suspends>>
+<<~ ahu #/suspends>>
 
 !! `<suspends>` — Effect Specifier
 
@@ -161,7 +161,7 @@ The MemeSyncAdaptor properly awaits it inside an async wrapper — this is corre
 
 <<~/ahu>>
 
-<<~ ahu #simulation-types>>
+<<~ ahu #/simulation-types>>
 
 !! `agent` and `player` — Simulation Participant Types
 
@@ -186,7 +186,7 @@ The compound type `listenable(agent)` functions as the canonical event type for 
 
 <<~/ahu>>
 
-<<~ ahu #editable>>
+<<~ ahu #/editable>>
 
 !! `@editable` — Design/Logic Boundary
 
@@ -217,7 +217,7 @@ the `@editable` surface. The internal `dispatchEvent` call is the runtime logic.
 
 <<~/ahu>>
 
-<<~ ahu #using>>
+<<~ ahu #/using>>
 
 !! `using` — Module Import, Not Trait Composition
 
@@ -242,7 +242,7 @@ access it from a given file.
 
 <<~/ahu>>
 
-<<~ ahu #lararium-device-model>>
+<<~ ahu #/lararium-device-model>>
 
 !! Lararium Device Model Alignment
 
@@ -278,7 +278,7 @@ The asymmetry is the point.
 
 <<~/ahu>>
 
-<<~ ahu #composition-edges>>
+<<~ ahu #/composition-edges>>
 
 !! Composition Edge Semantics for the Four Types
 
@@ -303,7 +303,7 @@ intent, but built-in device events own `listenable(t)` fields by engine contract
 
 <<~/ahu>>
 
-<<~ ahu #unreleased-event-types>>
+<<~ ahu #/unreleased-event-types>>
 
 !! Unreleased Event Types (Confirmed, Not Yet Shipped)
 
@@ -356,7 +356,7 @@ via TW5's own event bus.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -367,6 +367,6 @@ via TW5's own event bus.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nMEzfdSZEH6U4O6AvegCeCSLnkxgpj5YT4Lxi-VR3Gg
+<<^ code="&#x0003;">>ni:///sha-256;Wk16ECSpVGNzPmCXGzh_Y3LSJayWRCXjlkOQbsGUvuY
 
 <<^ code="&#x0004;" -> to=?>>

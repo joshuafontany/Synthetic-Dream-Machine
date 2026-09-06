@@ -28,7 +28,7 @@ stepped back. The grammar now enforces itself — through register collapse dete
 the ABILITY_LADDER, and each vessel's own founding ceremony. No living authority
 tells a vessel what to do. The treaty does.
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! The Treaty Model
 
@@ -80,7 +80,7 @@ protects nothing against a kahu shipping correctly to a mesh that cannot keep up
 
 <<~/ahu>>
 
-<<~ ahu #distinction>>
+<<~ ahu #/distinction>>
 
 !! Kahu vs. cap=admin
 
@@ -102,7 +102,7 @@ does not make them kahu of DreamNet. Kahu attaches to the //corpus// specificall
 
 <<~/ahu>>
 
-<<~ ahu #cabal-surface>>
+<<~ ahu #/cabal-surface>>
 
 !! Amorphous Dreams Cabal as Kahu
 
@@ -130,7 +130,7 @@ The grammar is a treaty. The Cabal signs it. The vessels hold it.
 
 <<~/ahu>>
 
-<<~ ahu #neighboring-hawaiian-roles>>
+<<~ ahu #/neighboring-hawaiian-roles>>
 
 !! Neighboring Roles
 
@@ -148,7 +148,7 @@ These may name adjacent roles as the DreamNet social layer develops:
 
 <<~/ahu>>
 
-<<~ ahu #ea-notes>>
+<<~ ahu #/ea-notes>>
 
 !! Ea Notes
 
@@ -165,7 +165,7 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -179,6 +179,6 @@ Dreams Cabal's membership — no subsequent runtime authority transfer required.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CBV5_h4cmIXdnLcVZTSkVTQrlduD6ro7LWdjiUy5hOc
+<<^ code="&#x0003;">>ni:///sha-256;EXaJW-fkZ7gHoZIxZiO3em-uTPifWbYDDHpzEcvfY6U
 
 <<^ code="&#x0004;" -> to=?>>

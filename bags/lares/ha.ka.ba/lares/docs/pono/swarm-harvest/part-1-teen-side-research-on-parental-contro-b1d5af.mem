@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/part-1-teen-side-research-on
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! PART 1 — TEEN-SIDE RESEARCH ON PARENTAL CONTROL APPS
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 40,659 characters
 
@@ -319,7 +319,7 @@ One adjacent LGBTQ+ finding it does record: "separate studies found that **LGBTQ
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 2,507 characters
 
@@ -345,12 +345,12 @@ Two tooling notes for whoever picks this up: **OpenAlex hit its free daily budge
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ELjx6Kkm7hQ1bJ1tp5HXf5y9xRzSmQyZaw6SlrnJUs4
+<<^ code="&#x0003;">>ni:///sha-256;n7MhdmkRUqXxUK4twPxsH9OJaabQaOQD9x1Ny9U1vAs
 
 <<^ code="&#x0004;" -> to=?>>

@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/mukuwai"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Mukuwai
 
@@ -30,7 +30,7 @@ question itself has exhausted all candidates. The stream reaches the cut-off; th
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -41,7 +41,7 @@ A wai chain MUST NOT contain more than one mukuwai block.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -59,7 +59,7 @@ English alias form:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -69,6 +69,6 @@ English alias form:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YenIjHyxffKbYJZ4bak1LVdhWnFoZx1FX68dmvza-K8
+<<^ code="&#x0003;">>ni:///sha-256;O9X9L9fgWKQr80in-h0Al-rAdARyeA6WjhLnnhFJY_E
 
 <<^ code="&#x0004;" -> to=?>>

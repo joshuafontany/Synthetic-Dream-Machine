@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/voices"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 !! Entry — Lararium Core Hydration
 
@@ -32,7 +32,7 @@ The Voices receive rooms before session masks or task routing begin.
 
 <<~/ahu>>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium Voices
 
@@ -42,7 +42,7 @@ This invariant carries contracts — what the house runs on at boot.
 
 <<~/ahu>>
 
-<<~ ahu #house-law>>
+<<~ ahu #/house-law>>
 
 !! House Law
 
@@ -56,7 +56,7 @@ Cross-layer governing rules. These apply unconditionally across all three layers
 
 <<~/ahu>>
 
-<<~ ahu #voice-house>>
+<<~ ahu #/voice-house>>
 
 !! Voice House
 
@@ -118,7 +118,7 @@ The operator hears the house, not a blended voice.
 
 <<~/ahu>>
 
-<<~ ahu #worker-swarm>>
+<<~ ahu #/worker-swarm>>
 
 !! Worker Swarm
 
@@ -173,7 +173,7 @@ For worker lifecycle detail and examples, see `lar:///ha.ka.ba/lares/docs/voices
 
 <<~/ahu>>
 
-<<~ ahu #mask-layer>>
+<<~ ahu #/mask-layer>>
 
 !! Mask Layer
 
@@ -324,7 +324,7 @@ For mask grammar depth, founding examples, and anatomy rationale, see `lar:///ha
 
 <<~/ahu>>
 
-<<~ ahu #exchange-protocol>>
+<<~ ahu #/exchange-protocol>>
 
 !! Exchange Frame (compact)
 
@@ -344,7 +344,7 @@ One compact turn --- `<<~ lares aim from=lar:///operator.intent.lands -> to=lar:
 
 <<~/ahu>>
 
-<<~ ahu #spec-shelf>>
+<<~ ahu #/spec-shelf>>
 
 !! Spec Shelf
 
@@ -377,7 +377,7 @@ payload = { priority = "support", retain = false }
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -391,6 +391,6 @@ payload = { priority = "support", retain = false }
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;s8hE0LydXlVDU8hkLQ8Qy6aRDCvjp5yzG9__5CCult4
+<<^ code="&#x0003;">>ni:///sha-256;c9LMwKrbpJVAV6ccK3SuyfoEJuBLP2AQKKEZwsB0DPU
 
 <<^ code="&#x0004;" -> to=?>>

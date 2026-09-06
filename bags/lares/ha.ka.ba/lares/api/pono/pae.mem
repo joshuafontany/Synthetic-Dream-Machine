@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/pae"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Pae
 
@@ -28,7 +28,7 @@ A carrier's phased arrival through a transmission medium.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ Locate the carrier's position in its transmission sequence.
 ⏿ Hold the phase boundary as a navigation fix — not a wall.
@@ -38,7 +38,7 @@ A carrier's phased arrival through a transmission medium.
 
 <<~/ahu>>
 
-<<~ ahu #etymology>>
+<<~ ahu #/etymology>>
 
 !! Etymology
 
@@ -64,7 +64,7 @@ content body has crossed. The streaming protocol IS a navigation instrument.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Pae Law (Kānāwai)
 
@@ -88,7 +88,7 @@ Phase semantics:
 
 <<~/ahu>>
 
-<<~ ahu #ast>>
+<<~ ahu #/ast>>
 
 !! AST
 
@@ -105,7 +105,7 @@ export interface PaeNode extends AstBase {
 
 <<~/ahu>>
 
-<<~ ahu #widget>>
+<<~ ahu #/widget>>
 
 !! Widget
 
@@ -121,7 +121,7 @@ Streaming consumers read `data-lar-phase` from the rendered marker.
 
 <<~/ahu>>
 
-<<~ ahu #pae-aina>>
+<<~ ahu #/pae-aina>>
 
 !! Pae ʻĀina
 
@@ -135,10 +135,10 @@ EOT pushes off — the carrier releases the channel and the current takes it.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;D920PRh_Xmhi_PKvcLubFlttvC3HE5EjkBfmMjHcuEg
+<<^ code="&#x0003;">>ni:///sha-256;T8maU641SFyQCiloQILp1hl4LeOAYJQ1ptsxwlGoOyk
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/memetic-wikitext"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Memetic Wikitext — Extended Docs
 
@@ -26,7 +26,7 @@ This surface carries guidance, examples, and split residue.
 
 <<~/ahu>>
 
-<<~ ahu #primitive-reading-guide>>
+<<~ ahu #/primitive-reading-guide>>
 
 !! Primitive Reading Guide
 
@@ -46,7 +46,7 @@ Other quick chant terms may also serve as named `pranala` sugar where their own 
 
 <<~/ahu>>
 
-<<~ ahu #authoring-profiles>>
+<<~ ahu #/authoring-profiles>>
 
 !! Recommended Authoring Profiles
 
@@ -61,7 +61,7 @@ Profiles tune posture, not primitive meaning.
 
 <<~/ahu>>
 
-<<~ ahu #minimum-boot-examples>>
+<<~ ahu #/minimum-boot-examples>>
 
 !! Minimum Boot Example Set
 
@@ -98,7 +98,7 @@ Work begins before full binding settles.
 
 <<~/ahu>>
 
-<<~ ahu #boundary-notes>>
+<<~ ahu #/boundary-notes>>
 
 !! Boundary Notes
 
@@ -114,7 +114,7 @@ Deepen each contract in its own carrier; do not re-expand the parent submission.
 
 <<~/ahu>>
 
-<<~ ahu #migration-note>>
+<<~ ahu #/migration-note>>
 
 !! Migration Note
 
@@ -127,7 +127,7 @@ The current shape keeps:
 
 <<~/ahu>>
 
-<<~ ahu #w3c-lineage-verdicts>>
+<<~ ahu #/w3c-lineage-verdicts>>
 
 !! W3C + Prior Art Lineage Verdicts
 
@@ -184,7 +184,7 @@ The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wi
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -193,6 +193,6 @@ The submission-grade specification at `lar:///ha.ka.ba/lares/api/pono/memetic-wi
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YrW50u3EfvmJendEmQPH7yQW0QdGJ3LZU9cT2TxexPw
+<<^ code="&#x0003;">>ni:///sha-256;um07jb8P6dwT-ny73EjWkpvmMscbacjpgeH26Ux5wVc
 
 <<^ code="&#x0004;" -> to=?>>

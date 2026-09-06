@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/invented-ripple"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Invented Ripple
 
@@ -29,7 +29,7 @@ The refactor reads correct and the node names it as follow-up: //it would ripple
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect the moment a change gets named as follow-up rather than taken.
 ⏿ orient on WHY: name the cost out loud, in files and call-sites.
@@ -39,7 +39,7 @@ The refactor reads correct and the node names it as follow-up: //it would ripple
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 A deferral MUST carry a ''measured'' cost, never a narrated one.
 
@@ -51,7 +51,7 @@ The node MAY defer on a large measured footprint; that reads as judgment rather 
 
 <<~/ahu>>
 
-<<~ ahu #diagnostic>>
+<<~ ahu #/diagnostic>>
 
 If the node deferred and the measured footprint reads far smaller than the stated one, the Invented Ripple occurred.
 If the node deferred with a count attached, judgment held.
@@ -59,12 +59,12 @@ If the node took the change and the footprint was genuinely large, that reads as
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/protective-optional>> · <<~ loulou lar:///ha.ka.ba/lares/docs/handoff#/ways-of-working>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;67VxB9ibgJF3Mqj6-kFNTpE2_4OetTDpGBxNKt5D2Os
+<<^ code="&#x0003;">>ni:///sha-256;_1nJrCuDFWmjpNyWPOKlsqfffzrsAw0XUkC2BNCUwrU
 
 <<^ code="&#x0004;" -> to=?>>

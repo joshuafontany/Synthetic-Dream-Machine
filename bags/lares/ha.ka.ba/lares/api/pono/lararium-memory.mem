@@ -22,7 +22,7 @@ written   = "2026-06-24"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Lararium Memory ~ four registers · two peers · one mesh
 
@@ -62,7 +62,7 @@ five stances, five seasons, five-phase OODA-HA — memory keeps the meter.
 
 <<~/ahu>>
 
-<<~ ahu #four-registers>>
+<<~ ahu #/four-registers>>
 
 !! The Four Registers
 
@@ -94,7 +94,7 @@ crosses to canon (`@{slug}`) only through a cap-gated `MOVE` (the shore, below).
 
 <<~/ahu>>
 
-<<~ ahu #two-peers>>
+<<~ ahu #/two-peers>>
 
 !! The Two Peers ~ asymmetric, each whole
 
@@ -125,7 +125,7 @@ it holds the grant.
 
 <<~/ahu>>
 
-<<~ ahu #shared-mesh>>
+<<~ ahu #/shared-mesh>>
 
 !! The Shared Mesh ~ PLACE and ley-line
 
@@ -167,7 +167,7 @@ canon. Recall ''composes across all four'' and surfaces conflict to Talk-Story
 
 <<~/ahu>>
 
-<<~ ahu #two-organs>>
+<<~ ahu #/two-organs>>
 
 !! Two Organs ~ the GroundedVow binding
 
@@ -190,7 +190,7 @@ one `lar:` namespace.
 
 <<~/ahu>>
 
-<<~ ahu #two-drains>>
+<<~ ahu #/two-drains>>
 
 !! The Two Drains ~ how RAM empties
 
@@ -213,7 +213,7 @@ shore: it appends and never normalizes.
 
 <<~/ahu>>
 
-<<~ ahu #capture-before-wire>>
+<<~ ahu #/capture-before-wire>>
 
 !! Capture Before Wire ~ the turn-grammar rides the VM
 
@@ -241,7 +241,7 @@ site to build at.
 
 <<~/ahu>>
 
-<<~ ahu #register-dressed>>
+<<~ ahu #/register-dressed>>
 
 !! Register-Dressed, Never Gated
 
@@ -264,7 +264,7 @@ conflict press a `hoike`.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -283,6 +283,6 @@ conflict press a `hoike`.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;oP0a1GX37AJ_cVqnr8aLZIZl98bY0qx8bamwmwhWt_g
+<<^ code="&#x0003;">>ni:///sha-256;7ZNwr0RUb3rcnNcbTelqvzhrb7zLDjjfG-U7vYcSj5o
 
 <<^ code="&#x0004;" -> to=?>>

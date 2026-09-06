@@ -23,7 +23,7 @@ uri-path       = "ha.ka.ba/lares/docs/the-lares-protocols"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #thesis>>
+<<~ ahu #/thesis>>
 
 ! The Purpose of Protocols
 
@@ -39,7 +39,7 @@ Modularity describes a structural property of the system, not a governance frame
 
 <<~/ahu>>
 
-<<~ ahu #where-protocols-go-quiet>>
+<<~ ahu #/where-protocols-go-quiet>>
 
 !! Where Protocols Go Quiet
 
@@ -58,7 +58,7 @@ Theoretical openness offers little practical leverage against convergence in ung
 
 <<~/ahu>>
 
-<<~ ahu #two-traditional-models-and-the-third>>
+<<~ ahu #/two-traditional-models-and-the-third>>
 
 !! Two Traditional Models and a Third
 
@@ -81,7 +81,7 @@ Two articles, two readings of ATProto: Connected Places flags one operator three
 
 <<~/ahu>>
 
-<<~ ahu #app-file-topology>>
+<<~ ahu #/app-file-topology>>
 
 !! Topology as Political Site
 
@@ -107,7 +107,7 @@ Lares answers the diagnostic with a fourth arrangement:
 
 <<~/ahu>>
 
-<<~ ahu #lares-position>>
+<<~ ahu #/lares-position>>
 
 !! Lares Quine Position
 
@@ -142,7 +142,7 @@ The slot Lares occupies wants a name; the meme leaves the naming for a future re
 
 <<~/ahu>>
 
-<<~ ahu #the-unsolved-question>>
+<<~ ahu #/the-unsolved-question>>
 
 !! The Unsolved Question
 
@@ -166,7 +166,7 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -180,6 +180,6 @@ These questions don't get answered by adding more architecture. They get answere
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;WuKxNUOCaxcTmOx7jjY7aXsL_q9GAlPBvDrq9ggUzls
+<<^ code="&#x0003;">>ni:///sha-256;PqEYH2PfNQc9G6el7-8QEoHDtyS9cxvyMNoNi3rOeeY
 
 <<^ code="&#x0004;" -> to=?>>

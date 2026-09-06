@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/characters/companions/strandbeest-shrine"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Faerie-Ring Strandbeest Shrine
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Faerie-Ring Strandbeest-Shrine — Character Sheet
 
@@ -335,6 +335,6 @@ The strandbeest legs lock into aggressive posture — stabbing, sweeping, and tr
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3PYp3VIGLnICCKiPaQa2O-db8z1VBZTrCOF1fjXIqIc
+<<^ code="&#x0003;">>ni:///sha-256;QYKZHgQSORUeWHaY2LiCDOxXlh9ckRdhAAZWMHGHYq4
 
 <<^ code="&#x0004;" -> to=?>>

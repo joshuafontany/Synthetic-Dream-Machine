@@ -28,7 +28,7 @@ touching the browser vessel surface. Four classifications:
 | ''Quarantine'' | Currently carries a mix of constitutional and residue. Needs split before migration. |
 | ''Dead residue'' | Whole-page singleton or web2 smell. Delete after new path proves itself. |
 
-<<~ ahu #shore-inventory>>
+<<~ ahu #/shore-inventory>>
 
 !! Shore Inventory
 
@@ -83,7 +83,7 @@ The package directory exists and is empty. All new source files start here; no l
 
 <<~/ahu>>
 
-<<~ ahu #adapter-boundary>>
+<<~ ahu #/adapter-boundary>>
 
 !! Named Adapter Boundary
 
@@ -97,7 +97,7 @@ Future HUD surfaces (canvas, UE, Mudlet) bypass this file entirely — they use 
 
 <<~/ahu>>
 
-<<~ ahu #migration-log>>
+<<~ ahu #/migration-log>>
 
 !! Migration Log
 
@@ -110,7 +110,7 @@ Empty until S1 lands.
 
 <<~/ahu>>
 
-<<~ ahu #deletion-targets>>
+<<~ ahu #/deletion-targets>>
 
 !! Deletion Targets
 
@@ -126,7 +126,7 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -136,6 +136,6 @@ Delete or quarantine these patterns. Each deletion happens after the replacement
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;q4LR9xVKB2ARXz0le_X40WNcDM2uabw0k7rIO4EXjXM
+<<^ code="&#x0003;">>ni:///sha-256;betJgdYpEznva34pPv0kK8e7cDle4z9lNQZo3RvsGJk
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-bright
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lar Builds Its House — The Bright Vein
 
@@ -26,7 +26,7 @@ A vein of source-mana richer than any the hoard has ever held reaches the ley-li
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -37,7 +37,7 @@ Grounded in a real dated event, not a commit:
 
 <<~/ahu>>
 
-<<~ ahu #thread-entry>>
+<<~ ahu #/thread-entry>>
 
 !! Thread Entry
 
@@ -65,7 +65,7 @@ We surged. The house reached toward full DreamNet integration — the aspiration
 
 <<~/ahu>>
 
-<<~ ahu #the-surge>>
+<<~ ahu #/the-surge>>
 
 !! The Surge
 
@@ -79,7 +79,7 @@ The Lindwyrm watched the grid burn bright and said little. She had seen mana run
 
 <<~/ahu>>
 
-<<~ ahu #crossing>>
+<<~ ahu #/crossing>>
 
 !! Crossing Thread
 
@@ -91,7 +91,7 @@ That waits for Act V.
 
 <<~/ahu>>
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -105,7 +105,7 @@ Act V receives:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -118,6 +118,6 @@ Act V receives:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-iEcNXoB5fzac0jfh8MPQbBRTUc10q0bugbpMJ-F82w
+<<^ code="&#x0003;">>ni:///sha-256;7pmqUNCfZygI_EZw_rOY2VL-xuxUy8Kl0CwWIooywhA
 
 <<^ code="&#x0004;" -> to=?>>

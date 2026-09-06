@@ -12,7 +12,7 @@ uri-path  = "ha.ka.ba/lararium/docs/exchange-protocol"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #exchange-flow>>
+<<~ ahu #/exchange-flow>>
 
 !! Exchange Flow — Agent Contract
 
@@ -60,6 +60,6 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fGSFCK04Px4Z5zuMPeObF6PNhvsaUbgxuR4UQVB8yV4
+<<^ code="&#x0003;">>ni:///sha-256;bcRtSNVGBA7SiR_SOUYwe2sPQPCQOIVan3CJcmV3jlg
 
 <<^ code="&#x0004;" -> to=?>>

@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-selective-disclosure-add
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! THE SELECTIVE-DISCLOSURE ADDRESS BOOK — findings
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 33,899 characters
 
@@ -194,12 +194,12 @@ Cwtch does ship multiple profiles, one Tor v3 onion each — but **nowhere claim
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LogHubtt1_iJGBEpFaK0FZBD_rJVjSG74RHGu3WUea0
+<<^ code="&#x0003;">>ni:///sha-256;WaXO4epmGFydzrIW0pnITLCQniAEvgmDlNY-1EIwG34
 
 <<^ code="&#x0004;" -> to=?>>

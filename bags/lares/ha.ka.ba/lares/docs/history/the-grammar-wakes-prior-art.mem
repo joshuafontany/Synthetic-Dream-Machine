@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-grammar-wakes-prior-art"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Prior Art Comparison Battery — Genesis Side-Car
 
@@ -27,7 +27,7 @@ Where //The Grammar Wakes// tells how the teeth found the page, this side-car ho
 
 <<~/ahu>>
 
-<<~ ahu #comparison-axes>>
+<<~ ahu #/comparison-axes>>
 
 !! Comparison Axes
 
@@ -43,7 +43,7 @@ Seven axes guided each system comparison:
 
 <<~/ahu>>
 
-<<~ ahu #per-system>>
+<<~ ahu #/per-system>>
 
 !! Per-System Findings
 
@@ -73,7 +73,7 @@ Seven axes guided each system comparison:
 
 <<~/ahu>>
 
-<<~ ahu #highest-value-table>>
+<<~ ahu #/highest-value-table>>
 
 !! Highest-Value Prior Art by Spec Shore
 
@@ -90,7 +90,7 @@ Seven axes guided each system comparison:
 
 <<~/ahu>>
 
-<<~ ahu #design-tests>>
+<<~ ahu #/design-tests>>
 
 !! Open Design Tests for v5 Spec
 
@@ -108,7 +108,7 @@ The W3C research additionally surfaced: the grammar still lacks its own canonica
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -120,6 +120,6 @@ The W3C research additionally surfaced: the grammar still lacks its own canonica
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nq4iQdwwZm_-2S_PXjjLf1FU4oqt-lW4TYxssZCttQ4
+<<^ code="&#x0003;">>ni:///sha-256;k1ghhuIMwRwP2E5Crb15LoIw0vCNwOK3cL0Z8ZCTCns
 
 <<^ code="&#x0004;" -> to=?>>

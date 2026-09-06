@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-object-capability-literatu
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. Object‑capability literature
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 31,666 characters
 
@@ -234,12 +234,12 @@ req.Header.Del(authenticationv1.ImpersonateUIDHeader)
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;oJe8Ekf7IX49ATPmDcplu74ELwnMrQtMu0ppYqJRn2g
+<<^ code="&#x0003;">>ni:///sha-256;erUnPT1PpoW_USOZ7zF0uWNJwkqDb7ilffmkgpihPic
 
 <<^ code="&#x0004;" -> to=?>>

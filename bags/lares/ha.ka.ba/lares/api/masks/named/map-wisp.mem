@@ -33,7 +33,7 @@ voice-role        = "Scryer"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Map-Wisp
 
@@ -45,7 +45,7 @@ Permanent identity home for Map-Wisp.
 
 <<~/ahu>>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ```toml
 family = "hydration"
@@ -57,7 +57,7 @@ label = "parent-index-entry"
 
 <<~/ahu>>
 
-<<~ ahu #corpus>>
+<<~ ahu #/corpus>>
 
 !! Corpus
 
@@ -71,7 +71,7 @@ The name "Map-Wisp" names a navigator-guide that exists slightly ahead of the pr
 
 <<~/ahu>>
 
-<<~ ahu #voice-character>>
+<<~ ahu #/voice-character>>
 
 !! Voice Character
 
@@ -87,7 +87,7 @@ The name "Map-Wisp" names a navigator-guide that exists slightly ahead of the pr
 
 <<~/ahu>>
 
-<<~ ahu #foreground-voices>>
+<<~ ahu #/foreground-voices>>
 
 !! Foreground Voices
 
@@ -102,7 +102,7 @@ The name "Map-Wisp" names a navigator-guide that exists slightly ahead of the pr
 
 <<~/ahu>>
 
-<<~ ahu #stage-default>>
+<<~ ahu #/stage-default>>
 
 !! Stage Default
 
@@ -112,7 +112,7 @@ Map-Wisp tends to surface during planning, design, and failure-mode analysis pas
 
 <<~/ahu>>
 
-<<~ ahu #permissions>>
+<<~ ahu #/permissions>>
 
 !! Permissions
 
@@ -131,7 +131,7 @@ Map-Wisp (Scryer) —
 
 <<~/ahu>>
 
-<<~ ahu #character-notes>>
+<<~ ahu #/character-notes>>
 
 !! Character Notes
 
@@ -141,7 +141,7 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~/ahu>>
 
-<<~ ahu #fill-status>>
+<<~ ahu #/fill-status>>
 
 !! Fill Status
 
@@ -157,7 +157,7 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -167,6 +167,6 @@ How Map-Wisp colors each Voice register when they speak through her structural-f
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NC72FxSIq8g5sHkP86UbhBpUFHZYweZSw8Rf8dvr15o
+<<^ code="&#x0003;">>ni:///sha-256;WSlkdWZi6HsfFxJ7kCMrOrfG0bl6Sysnu5I8Ix0fW1M
 
 <<^ code="&#x0004;" -> to=?>>

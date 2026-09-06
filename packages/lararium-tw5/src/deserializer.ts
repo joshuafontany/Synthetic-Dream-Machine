@@ -210,6 +210,13 @@ export function memeticWikitextDeserializer(
     if (sohCode === "0011" && tiddlers.length > 0) {
       tiddlers[0]!["$carrier-soh"] = "0011";
     }
+    // WHICH SPELLING OPENED THE SECTIONS — the carrier's own, kept so the render hands it back.
+    // A plain-dialect carrier opens `<<fragment #slot>>`; the sharktooth house opens `<<~ ahu #slot>>`.
+    // Both scan as structure (ahu-scan), and a projection that emitted one spelling for both would
+    // rewrite a carrier into a namespace its reader never stepped into.
+    if (tiddlers.length > 0 && /<<fragment\s+#/.test(text) && !/<<~[^>\n]*\bahu\s+#/.test(text)) {
+      tiddlers[0]!["$carrier-dialect"] = "fragment";
+    }
     // WHAT MAY STAND BETWEEN ETX AND EOT — the BCC, and nothing else.
     //
     // ETX ends the text; the slot after it carries the block check, never payload (block-check.ts
@@ -984,7 +991,7 @@ const KAHEA_AHU_REF_RE = /<<~\s*kahea\s+ahu\s+(#\/?[\w-]+(?:\/[\w-]+)*)\s*>>/g;
  * Quoted markers (fenced/inline-code) stay verbatim — the operator SHOWS
  * the grammar there, the recompose never expands inside the mask.
  */
-function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: string, text: string, parentFields: TiddlerFields): string {
+function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: string, text: string, parentFields: TiddlerFields, dialect: string): string {
   const mask = fencedSpans(text);
   return text.replace(KAHEA_AHU_REF_RE, (marker, slot: string, offset: number) => {
     if (inMask(mask, offset)) return marker;
@@ -993,7 +1000,7 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
     if (!child) return marker;   // missing child: keep the marker — honest residue, never invented bytes
     // Diff the child against ITS parent; recurse with the child as the next level's parent.
     const meta   = emitMetaToml(child, CHILD_META_DENY, parentFields);
-    const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child);
+    const inner = expandRefs(reader, rootUri, slotPath, String(child["text"] ?? ""), child, dialect);
     const pre   = carriageText(reader, rootUri + slotPath, "preamble");
     const post  = carriageText(reader, rootUri + slotPath, "postamble");
     // The meta block sits FLUSH against the ahu sigil line (mirroring the parent carrier's SOH+meta) —
@@ -1014,7 +1021,9 @@ function expandRefs(reader: FieldsReader, rootUri: string, fragmentPrefix: strin
       // the single blank line; a filled one opens on the sigil-then-blank spacing.
       opened = rest ? `\n\n${rest}` : "";
     }
-    return `<<~ ahu ${slot}>>${opened}\n\n<<~/ahu>>`;
+    return dialect === "fragment"
+      ? `<<fragment ${slot}>>${opened}\n\n<</fragment>>`
+      : `<<~ ahu ${slot}>>${opened}\n\n<<~/ahu>>`;
   });
 }
 
@@ -1043,6 +1052,7 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   // the grammar leaves here too, instead of surviving as a literal no reader still scans for.
   const MARK = (name: string): string => frameMark(FRAME_BY_NAME[name]!)!.code;
   const sohCode = f["$carrier-soh"] === "0011" ? MARK("SOH2") : MARK("SOH");
+  const dialect = typeof f["$carrier-dialect"] === "string" ? (f["$carrier-dialect"] as string) : "ahu";
   // THE ENDS TAKE NAMES; THE ARROW KEEPS ITS SHAPE. `from=? -> to=uri` reads "this carrier resolves
   // toward that address", the spelling `pranala` and `lares aim` already write. The arrow rides as an
   // unnamed positional, which TiddlyWiki parses as one — folding the bearing into a quoted attribute
@@ -1062,12 +1072,12 @@ export function expandMemeRefs(reader: FieldsReader, memeUri: string): string | 
   out += `<<^ code="${sohCode}"${ns ? ` namespace="${ns}"` : ""} from=? -> to=${memeUri}>>\n`;
   out += carriageText(reader, memeUri, "preamble");
   if (meta) out += "```toml meta\n" + meta + "```\n\n";
-  out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f);
+  out += expandRefs(reader, memeUri, "", carriageText(reader, memeUri, "header-text"), f, dialect);
   // THE SPAN OPENS HERE. The check covers STX-open through ETX-close inclusive, so the emitter marks
   // where the body begins and computes over the bytes it has actually assembled — never over a field.
   const spanStart = out.length;
   out += `<<^ code="${MARK("STX")}">>\n\n`;
-  out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f);
+  out += expandRefs(reader, memeUri, "", String(f.text ?? ""), f, dialect);
   // ETX takes its block check adjacent, per the received framing (STX -> text -> ETX -> BCC); the
   // attestation block follows and ETB terminates it.
   //

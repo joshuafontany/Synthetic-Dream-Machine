@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/concepts/the-burned-library"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Burned Library
 
@@ -34,7 +34,7 @@ shelf-space, and LOCKED much of the records.''
 
 <<~/ahu>>
 
-<<~ ahu #the-lock>>
+<<~ ahu #/the-lock>>
 
 !! What a Locked Record Reads Like
 
@@ -49,7 +49,7 @@ treatment, and factional sponsorship — every one of them a key someone cut aft
 
 <<~/ahu>>
 
-<<~ ahu #the-kuleana>>
+<<~ ahu #/the-kuleana>>
 
 !! The Kahu Kuleana
 
@@ -70,7 +70,7 @@ its room back.
 
 <<~/ahu>>
 
-<<~ ahu #voss-interfaces>>
+<<~ ahu #/voss-interfaces>>
 
 !! The Voss-Interfaces
 
@@ -81,7 +81,7 @@ your exits memorized.// Some information they hold stays locked — not by the f
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/sdm/docs/arcana-model>>
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
@@ -89,6 +89,6 @@ your exits memorized.// Some information they hold stays locked — not by the f
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8XtQxLHVHuqsgeHRIhitN951N1dKIFBi9TCVd6iob_8
+<<^ code="&#x0003;">>ni:///sha-256;iw7ww-k3x3sEwL6oM0rqNRb7sU5bE-YC3QOip9kBv78
 
 <<^ code="&#x0004;" -> to=?>>

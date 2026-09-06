@@ -25,7 +25,7 @@ uri-path           = "ha.ka.ba/lares/api/mu/l-prime/SKILL"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #place>>
+<<~ ahu #/place>>
 
 ! L-Prime Auditor
 
@@ -33,7 +33,7 @@ The ward seeds generation forward; the loci governs first-pass composition. ''Th
 
 <<~/ahu>>
 
-<<~ ahu #trigger>>
+<<~ ahu #/trigger>>
 
 !! Trigger
 
@@ -41,7 +41,7 @@ A request to scan, flag, compare before/after, or correct ''already-settled'' wo
 
 <<~/ahu>>
 
-<<~ ahu #loop>>
+<<~ ahu #/loop>>
 
 !! The Loop
 
@@ -61,7 +61,7 @@ A request to scan, flag, compare before/after, or correct ''already-settled'' wo
 
 <<~/ahu>>
 
-<<~ ahu #surfaces>>
+<<~ ahu #/surfaces>>
 
 !! Output Surfaces
 
@@ -85,7 +85,7 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -94,6 +94,6 @@ A sentence turn beats a lecture. Output stays compact: location, bucket, reason,
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;3zWxycm7zXIctYxqim-8QSN0GiA3psEhuZfsUq3ctlI
+<<^ code="&#x0003;">>ni:///sha-256;ZPpLFmHIxo0trD8a_1sXLrxN54VVMcZ9WcqjRByeTIM
 
 <<^ code="&#x0004;" -> to=?>>

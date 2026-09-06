@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/filter-operators/implementors"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! implementors
 
@@ -28,22 +28,22 @@ TW5 filter operator from `@lararium/tw5`.
 
 <<~/ahu>>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 Exported symbols: `registerImplementors`.
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/filters/implementors" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;pEsitVcH1EKMhStYtvrN6l-1DQwzQt_HYFOybGge8OE
+<<^ code="&#x0003;">>ni:///sha-256;1hBwgtVfURhm6GsGWHgUGLnQxBG3imiO2S73QuU54Dc
 
 <<^ code="&#x0004;" -> to=?>>

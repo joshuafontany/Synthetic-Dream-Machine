@@ -16,7 +16,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/recipe-watch"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -44,7 +44,7 @@ wiki behavior starts it at `onEa`, stops it at demote.
 
 <<~/ahu>>
 
-<<~ ahu #invariants>>
+<<~ ahu #/invariants>>
 
 !! Invariants
 
@@ -76,7 +76,7 @@ CRDT slot the oracles point at.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -86,6 +86,6 @@ CRDT slot the oracles point at.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UrwfFrdHw6EJAdS8A1GQ4hR-CBa3IbnE9VdwPzDFRP0
+<<^ code="&#x0003;">>ni:///sha-256;cVu0upcKN0Hk7JFceQlOw8dHcJoWcmDG0PZoxUnUI5s
 
 <<^ code="&#x0004;" -> to=?>>

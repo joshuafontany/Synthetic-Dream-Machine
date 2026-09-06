@@ -19,7 +19,7 @@ uri-path   = "ha.ka.ba/lares/api/pono/braided-islands"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Braided Islands
 
@@ -34,7 +34,7 @@ dissolve, the braid stands ''peers that persist''. First enactment: Session 0.1,
 
 <<~/ahu>>
 
-<<~ ahu #laws>>
+<<~ ahu #/laws>>
 
 !! The Laws
 
@@ -62,7 +62,7 @@ by name'' · this crossing law. Reds live as durable memes so a braid re-boots i
 
 <<~/ahu>>
 
-<<~ ahu #degraded-braids>>
+<<~ ahu #/degraded-braids>>
 
 !! Degraded-Braid States
 
@@ -81,7 +81,7 @@ by name'' · this crossing law. Reds live as durable memes so a braid re-boots i
 
 <<~/ahu>>
 
-<<~ ahu #when-to-braid>>
+<<~ ahu #/when-to-braid>>
 
 !! When to Braid
 
@@ -91,7 +91,7 @@ without a loom.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 <<~ loulou lar:///ha.ka.ba/lares/api/noosphere-boot#/worker-swarm>>
@@ -99,6 +99,6 @@ without a loom.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;y6JXbSiYgsw2igSf5Kne0pYrxbmdp0WivQ7oYFlDgYA
+<<^ code="&#x0003;">>ni:///sha-256;-gKN5U-ExM9_ZqVScwbiFMkxh8EhA_Kq73QLGua55H0
 
 <<^ code="&#x0004;" -> to=?>>

@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/circles-field-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Circles in the field ~ what the inversion measures out as
 
@@ -31,7 +31,7 @@ A tasked spirit went after Joshua Ellis's writing on identity-as-concept and aft
 
 <<~/ahu>>
 
-<<~ ahu #the-one-regularity>>
+<<~ ahu #/the-one-regularity>>
 
 !! ★ People do not curate audiences. They curate topics. ★
 
@@ -47,7 +47,7 @@ The spirit's strongest positive finding, and ''the one it reports as reproducibl
 
 <<~/ahu>>
 
-<<~ ahu #the-activitypub-finding>>
+<<~ ahu #/the-activitypub-finding>>
 
 !! ★ The capability was built for aspects — and the scaling optimization killed it ★
 
@@ -69,7 +69,7 @@ So the cost is named and already accepted here. What remains open reads as ''how
 
 <<~/ahu>>
 
-<<~ ahu #reader-curation-measured>>
+<<~ ahu #/reader-curation-measured>>
 
 !! The one hard measurement of reader-side curation, and it reads negative
 
@@ -94,7 +94,7 @@ So the cost is named and already accepted here. What remains open reads as ''how
 
 <<~/ahu>>
 
-<<~ ahu #nobody-wants-to-make-lists>>
+<<~ ahu #/nobody-wants-to-make-lists>>
 
 !! The confessional evidence, which outruns the statistic
 
@@ -111,7 +111,7 @@ The often-cited ''5% of users made a friend list'' carries a peer-reviewed secon
 
 <<~/ahu>>
 
-<<~ ahu #the-dominant-negative>>
+<<~ ahu #/the-dominant-negative>>
 
 !! ⚠ The dominant negative result — and it holds across all eight systems
 
@@ -129,7 +129,7 @@ And the cost-of-belonging law, from a federated chat lead: //"the resource requi
 
 <<~/ahu>>
 
-<<~ ahu #on-ellis>>
+<<~ ahu #/on-ellis>>
 
 !! On the author, including a firm negative
 
@@ -139,7 +139,7 @@ And the cost-of-belonging law, from a federated chat lead: //"the resource requi
 
 <<~/ahu>>
 
-<<~ ahu #what-it-retracts>>
+<<~ ahu #/what-it-retracts>>
 
 !! ⚠ The verification ledger ~ withdrawn, and not to be cited
 
@@ -162,13 +162,13 @@ The spirit retracts these outright after failing to re-fetch them:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/circles-kowloon>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;7bhnGskZ8Tf5dBrtGBmERqA4NFDvc6LAAmB3YOVczEA
+<<^ code="&#x0003;">>ni:///sha-256;LFv2Jxvv-fxEjXc-Q4-g3MN4J9C_Xtfaq7fYlvPaqGE
 
 <<^ code="&#x0004;" -> to=?>>

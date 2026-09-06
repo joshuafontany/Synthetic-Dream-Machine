@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/api/mempalace-integration"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! mempalace ~ the lararium's memory-library
 
@@ -31,7 +31,7 @@ mempalace serves as a ''library-kind member of the bag stack'', accessed-not-loa
 
 <<~/ahu>>
 
-<<~ ahu #the-tensegrity>>
+<<~ ahu #/the-tensegrity>>
 
 !! The Tensegrity ~ compression members + tension
 
@@ -41,7 +41,7 @@ The founder's own thesis names the shape: //remember the way I remember — not 
 
 <<~/ahu>>
 
-<<~ ahu #the-shore>>
+<<~ ahu #/the-shore>>
 
 !! The @daemon Memory-Shore ~ the verb flow
 
@@ -54,7 +54,7 @@ The CLI projects the verb; the verb's true home rises into the `@daemon` VM as v
 
 <<~/ahu>>
 
-<<~ ahu #lar-net>>
+<<~ ahu #/lar-net>>
 
 !! The `lar_` Net ~ declared, never smuggled
 
@@ -68,7 +68,7 @@ The net (flat scalars — chroma's law):
 
 <<~/ahu>>
 
-<<~ ahu #the-surfaces>>
+<<~ ahu #/the-surfaces>>
 
 !! The Surfaces ~ every harness, one sweep
 
@@ -87,7 +87,7 @@ Memory recalls //and// captures across every harness, and each drawer carries it
 
 <<~/ahu>>
 
-<<~ ahu #flat-md>>
+<<~ ahu #/flat-md>>
 
 !! The Flat-MD Stance ~ complement, never replace
 
@@ -99,7 +99,7 @@ Mining `bags/` design memes through `--mode projects` clears, as docs-substrate.
 
 <<~/ahu>>
 
-<<~ ahu #federation>>
+<<~ ahu #/federation>>
 
 !! The Privacy Line ~ a gift, not a fence
 
@@ -107,7 +107,7 @@ The verbatim journey stays on the island — ''local-only, always''. Only the di
 
 <<~/ahu>>
 
-<<~ ahu #the-flow>>
+<<~ ahu #/the-flow>>
 
 !! The Blank-Slate Flow
 
@@ -125,7 +125,7 @@ lares harvest --all                                      # sweep every transcrip
 
 <<~/ahu>>
 
-<<~ ahu #forward>>
+<<~ ahu #/forward>>
 
 !! Forward ~ where the deepening pulls
 
@@ -136,6 +136,6 @@ lares harvest --all                                      # sweep every transcrip
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;OnE8HucVrdfMtbHFFckLYE3XMpvGmqrXC9bu2lH2HXw
+<<^ code="&#x0003;">>ni:///sha-256;m54kxOUmlQCO37gTXfa8ZhUyw0Uygq5ETG7ZiHL8ce4
 
 <<^ code="&#x0004;" -> to=?>>

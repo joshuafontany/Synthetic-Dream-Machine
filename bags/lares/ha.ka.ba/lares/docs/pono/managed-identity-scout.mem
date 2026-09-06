@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/managed-identity-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Managed identity ~ the measured abuse surface
 
@@ -33,7 +33,7 @@ A tasked spirit went after the abuse surface that opens when ''one identity mana
 
 <<~/ahu>>
 
-<<~ ahu #the-graph-is-the-surface>>
+<<~ ahu #/the-graph-is-the-surface>>
 
 !! ★ The surface measures as the authorization graph, not the software ★
 
@@ -60,7 +60,7 @@ The clinic's own explanation: //"many abusers are seemingly able to surveil clie
 
 <<~/ahu>>
 
-<<~ ahu #nobody-verifies-the-manager>>
+<<~ ahu #/nobody-verifies-the-manager>>
 
 !! ★ Nobody verifies who the manager is ~ and this lands on Ruling 2b ★
 
@@ -80,7 +80,7 @@ Not a UI notice. ''An identity-layer role check'' — one product verified the a
 
 <<~/ahu>>
 
-<<~ ahu #the-three-properties>>
+<<~ ahu #/the-three-properties>>
 
 !! ★ The design axis ~ three separable properties, and nothing holds all three ★
 
@@ -96,7 +96,7 @@ Property ② already exists as a written commitment in two places that never app
 
 <<~/ahu>>
 
-<<~ ahu #the-two-directions>>
+<<~ ahu #/the-two-directions>>
 
 !! ⚠ Visibility and severance pull opposite ways, and both are measured
 
@@ -113,7 +113,7 @@ A meta-analysis of ''94 independent samples, N = 23,461'' on monitoring in anoth
 
 <<~/ahu>>
 
-<<~ ahu #the-exit-that-does-not-exist>>
+<<~ ahu #/the-exit-that-does-not-exist>>
 
 !! No exit exists anywhere, and the closest thing is a petition
 
@@ -131,7 +131,7 @@ Social-recovery wallets carry the one design where the delegated party ''provabl
 
 <<~/ahu>>
 
-<<~ ahu #the-normative-floor>>
+<<~ ahu #/the-normative-floor>>
 
 !! The only text requiring a channel the manager cannot see or block
 
@@ -150,7 +150,7 @@ A coercive-control statute names //"monitoring a person via online communication
 
 <<~/ahu>>
 
-<<~ ahu #two-instrument-lies>>
+<<~ ahu #/two-instrument-lies>>
 
 !! ⚠ Two instrument-lies the spirit caught, one of them live in a standards body
 
@@ -161,13 +161,13 @@ A coercive-control statute names //"monitoring a person via online communication
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/persona-policy>>
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dyad-ladder-scout>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;PrXJdaRHfxCN6gb-_DYmdIbwIti_NT4csXRgZMkeewQ
+<<^ code="&#x0003;">>ni:///sha-256;qrUnUYA9uczUkI9_CWNDHvGj0unFWWPoRZMGpr52dSA
 
 <<^ code="&#x0004;" -> to=?>>

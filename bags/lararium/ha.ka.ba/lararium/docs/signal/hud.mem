@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/hud"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal — HUD
 
@@ -30,7 +30,7 @@ This room frames the HUD as the ''situational-awareness surface'' within the sig
 
 <<~/ahu>>
 
-<<~ ahu #sa-role>>
+<<~ ahu #/sa-role>>
 
 !! The HUD as the Signal Surface
 
@@ -49,7 +49,7 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -62,6 +62,6 @@ The instrument grammar itself stays in the pair; this room holds only the signal
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;J5gub6CyvfnMcHwEVPerOx0V4zsCy5ZsmYhzRBI1kFs
+<<^ code="&#x0003;">>ni:///sha-256;zfEW_aPwT9iN1Por-b3giqOyrQcy2dcaLomV6BC6Jdw
 
 <<^ code="&#x0004;" -> to=?>>

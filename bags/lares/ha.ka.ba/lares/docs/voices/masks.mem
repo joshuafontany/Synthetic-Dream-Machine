@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices/masks"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Masks
 
@@ -29,7 +29,7 @@ The thirteen remain beneath it.
 
 <<~/ahu>>
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -43,7 +43,7 @@ When a session context declares "action inside a lararium node," the Thirteen su
 
 <<~/ahu>>
 
-<<~ ahu #anatomy>>
+<<~ ahu #/anatomy>>
 
 !! Mask Anatomy
 
@@ -81,7 +81,7 @@ Voice character SHOULD include:
 
 <<~/ahu>>
 
-<<~ ahu #declaration-form>>
+<<~ ahu #/declaration-form>>
 
 !! Declaration Form
 
@@ -156,7 +156,7 @@ Mischief-Muse (Muse) —
 
 <<~/ahu>>
 
-<<~ ahu #stage-bands>>
+<<~ ahu #/stage-bands>>
 
 !! Stage Bands
 
@@ -184,7 +184,7 @@ The operator shifts stage values in LARES or inline; they persist until changed.
 
 <<~/ahu>>
 
-<<~ ahu #stacking-law>>
+<<~ ahu #/stacking-law>>
 
 !! Stacking Law
 
@@ -211,7 +211,7 @@ A crowded downstage is a feature of ensemble scenes, not a problem to resolve.
 
 <<~/ahu>>
 
-<<~ ahu #foreground-voices>>
+<<~ ahu #/foreground-voices>>
 
 !! Foreground Voices
 
@@ -230,7 +230,7 @@ The operator may shift `foreground-voices` per turn with `[Voices: MaskName Tria
 
 <<~/ahu>>
 
-<<~ ahu #founding-examples>>
+<<~ ahu #/founding-examples>>
 
 !! Founding Examples
 
@@ -303,7 +303,7 @@ Voices with natural affinity to this mask: Gatekeeper, Pedagogue, Scryer, Limina
 
 <<~/ahu>>
 
-<<~ ahu #mask-grammar>>
+<<~ ahu #/mask-grammar>>
 
 !! Mask Grammar
 
@@ -345,7 +345,7 @@ Modifier flags: `^` elevated · `.` baseline · `-` suppressed · `?` emerging
 
 <<~/ahu>>
 
-<<~ ahu #relation-to-lares>>
+<<~ ahu #/relation-to-lares>>
 
 !! Relation to LARES
 
@@ -359,7 +359,7 @@ unlike the Voice house which persists as stable structure.
 
 <<~/ahu>>
 
-<<~ ahu #invariant-contract>>
+<<~ ahu #/invariant-contract>>
 
 !! Invariant Contract
 
@@ -379,7 +379,7 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -391,6 +391,6 @@ The mask layer spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST impleme
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;m3AE8xP377B6aHbMAW5RmaWfX0n6oLYElPBplBkdItE
+<<^ code="&#x0003;">>ni:///sha-256;o8gfv3uFzO5N4BpQRjpoRjMoGNjnBoDHr04XVn_zJA4
 
 <<^ code="&#x0004;" -> to=?>>

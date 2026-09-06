@@ -2,7 +2,7 @@
 
 - `lar:///ha.ka.ba/lares/api/pono/RFC-2119#/normative-language`
 
-<a id="meme-header"></a>
+<a id="/meme-header"></a>
 
 # `lar:` URI Scheme — Canon Documentation
 
@@ -10,7 +10,7 @@ Full specification prose, examples, and appendices.
 Law lives in `lar:///ha.ka.ba/lares/api/pono/lar-uri`.
 This surface carries the explanation.
 
-<a id="design-intent"></a>
+<a id="/design-intent"></a>
 
 ## 1. Design Intent
 
@@ -20,7 +20,7 @@ Each URI component carries a distinct, non-overlapping concern across three sema
 
 1. **WHO** — authority (`alias:grant@host`) identifies speaker and machine host
 2. **BEARING** — the HA.KA.BA address (path) names semantic attitude
-3. **SECTION** — the fragment (`#`) carries section anchors only — `#ahu-name`, `#section-id`
+3. **SECTION** — the fragment (`#`) carries section anchors only, rooted — `#/ahu-name`, `#/section-id`
 
 Resource-state annotations such as the mana/context-window pool are HUD adjuncts, not core URI components. This value uses the shared `0–20` Level model as a navigational resource estimate. Span identity, wall-clock timestamps, and export-target metadata remain adjacent calibration fields rather than authority overloads.
 
@@ -48,7 +48,7 @@ Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire";
 
 No metric sits claimed yet. The scheme names attitude-bearing only and defines no distance function over roots.
 
-<a id="exchange-flow"></a>
+<a id="/exchange-flow"></a>
 
 ### 1.1 Exchange Flow — Order of Operations
 
@@ -83,7 +83,7 @@ Beneath the `aim`: `<<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>` ·
 
 > **SA grounding:** the `aim` is prospective AI transparency — what the node *will* do, not what it did (Endsley 2023). The sigil panel externalizes the node's metacognitive state before generation begins, an externalized metacognitive scaffold (Ji-An et al., 2025; Wang et al., 2023). *Source: `_todo/E-deep-research-report.md` §§2.1, 3.2*
 
-<a id="scheme-registration"></a>
+<a id="/scheme-registration"></a>
 
 ## 2. Scheme Registration
 
@@ -99,7 +99,7 @@ Beneath the `aim`: `<<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>` ·
 
 The `lar:` scheme identifies semantic positions, signal states, and machine events within the Lares agent architecture. It does not resolve to a network resource. URI consumers (crystal replay tools, debug log parsers, registry resolvers) treat it as an opaque structured identifier parsed according to this specification.
 
-<a id="uri-syntax"></a>
+<a id="/uri-syntax"></a>
 
 ## 3. URI Syntax
 
@@ -133,7 +133,7 @@ Three slashes: scheme + `//` (empty authority) + path beginning with `/`. Use th
 
 This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the stable attitude root of l-space.
 
-<a id="component-map"></a>
+<a id="/component-map"></a>
 
 ### 3.3 Component Map
 
@@ -145,17 +145,17 @@ This applies to authority-less forms as well: `lar:///ha.ka.ba/lares/` names the
 | 3 | **`@`** | Identity → machine delimiter | Standard | `@` |
 | 4 | **host** | Machine identity | `machine_id` from crystal system | `enyalios` |
 | 5 | **path** | Hierarchical resource | HA.KA.BA address: `/ha.ka.ba/lares/` | `/threshold.uncertain.opens` |
-| 6 | **`#fragment`** | Section anchor | Named section within this meme | `#ahu-name`, `#section-id` |
+| 6 | **`#fragment`** | Section anchor | Named section within this meme | `#/ahu-name`, `#/section-id` |
 
 > **Layout validation:** The BEARING → HOW → SECTION ordering (path → query → fragment) places the most semantically stable, least volatile information first. Grouped, goal-oriented layout confirmed by Li et al. (2024) automotive HUD research: grouped information layouts produce superior cognitive performance, lower workload, and better eye movement patterns compared to disordered layouts. *Source: `_todo/E-deep-research-report.md` §4.2*
 
-<a id="identity-stack"></a>
+<a id="/identity-stack"></a>
 
 ### 3.3.1 Identity Addressing
 
 Identity addressing lives at `lar:///ha.ka.ba/lares/docs/pono/identity-stack` — the DID / handle / lar: alias stack, the ActivityPub handle form, and the DreamDeck `chat-log:post-header` render target. That reference names *who speaks* and projects identity onto the social layer; this scheme names the bearing. The scheme's own render targets (`record:full`, `hud:exchange-pair`) ride here, in §1 Design Intent.
 
-<a id="component-semantics"></a>
+<a id="/component-semantics"></a>
 
 ### 3.4 Component Semantics
 
@@ -181,9 +181,9 @@ Span sequencing is intentionally **not** encoded in URI authority. Exchange iden
 
 **Optional sub-path extension:** After the mandatory three-slot HA.KA.BA, additional `/`-separated path segments may follow to navigate within the named territory. Sub-path segments are free-form routing tokens, not HA.KA.BA slots. The stable named graph address strips the sub-path; the sub-path is session-scope navigation only.
 
-**fragment** (`#section-anchor`) — Named section within this meme: `#ahu-name`, `#section-id`, `#pranala-name`. The fragment carries section anchors only.
+**fragment** (`#/section-anchor`) — Named section within this meme: `#/ahu-name`, `#/section-id`, `#/pranala-name`. The fragment carries section anchors only, rooted at the carrier.
 
-<a id="provisionality"></a>
+<a id="/provisionality"></a>
 
 ## 4. Provisionality Markers
 
@@ -223,7 +223,7 @@ lar://scryer:agent@enyalios/~s0.schema.updated/
 ```
 Trajectory provisional: "I predict our next territory is the updated schema — operator may redirect entirely."
 
-<a id="marker-ontology"></a>
+<a id="/marker-ontology"></a>
 
 ## 5. Marker Ontology — the authoring surface
 
@@ -236,7 +236,7 @@ The marker grammar — the meme span opener `? ->` and closer `→ ?`, the `ahu`
 
 A `lar:` URI *names* a meme; how memes, waypoints, and transclusions get *written* belongs to the authoring surface above. The per-marker semantics — what each marker settles and what it leaves open — live rigorously in `ahu` and `kahea`.
 
-<a id="stable-address"></a>
+<a id="/stable-address"></a>
 
 ## 6. Stable Address — Named Graph Form
 
@@ -252,7 +252,7 @@ No authority (empty), no query, no fragment. This is the invariant semantic bear
 
 **Comparison rule:** two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical. Query and fragment are excluded from comparison.
 
-<a id="cache-tiers"></a>
+<a id="/cache-tiers"></a>
 
 ## 7. Invariant-Core Cache Tier Mapping
 
@@ -263,7 +263,7 @@ No authority (empty), no query, no fragment. This is the invariant semantic bear
 | 2 — Session Core | Cached within session; rolling `cache_control` breakpoint | Session-stable |
 | 3 — Dynamic | Ephemeral (5-min TTL with hit-reset) | Per-exchange |
 
-<a id="module-registry"></a>
+<a id="/module-registry"></a>
 
 ## 8. Module and Registry Metadata
 
@@ -288,7 +288,7 @@ version-num = 1
 
 Module descriptors use `version_num` or semver-like fields for content versioning. Exchange sequencing belongs to spanSpan metadata (`span_seq`), not module descriptors.
 
-<a id="validation"></a>
+<a id="/validation"></a>
 
 ## 9. Validation Rules
 
@@ -302,7 +302,7 @@ A `lar:` URI is **well-formed** when:
 4. Path contains exactly three HA.KA.BA slots after the leading `/`
 5. Path slots contain no whitespace, path separators, or quotes (inherits l-space Address anti-collision rules)
 6. `p` value is a decimal in range `[0.0, 1.0]`
-7. Fragment (`#`) carries only section anchors — `#ahu-name`, `#section-id` — no chronometer data
+7. Fragment (`#`) carries only rooted section anchors — `#/ahu-name`, `#/section-id` — no chronometer data
 
 ### 9.2 Consistency
 
@@ -328,7 +328,7 @@ A spanSpan record is **consistent** when:
 4. Two URIs designate the same stable address iff their lowercased, stripped paths are byte-identical
 5. Query and fragment components are excluded from stable-address comparison
 
-<a id="security"></a>
+<a id="/security"></a>
 
 ## 10. Security Considerations
 
@@ -344,7 +344,7 @@ A spanSpan record is **consistent** when:
 
 > **Status:** Security section partially complete — required for IANA registration (RFC 7595 §7.4). To be expanded with formal threat model before any provisional IANA registration attempt.
 
-<a id="prior-art"></a>
+<a id="/prior-art"></a>
 
 ## 11. Prior Art
 
@@ -362,7 +362,7 @@ A spanSpan record is **consistent** when:
 - **OODA-HA Composable Invariant Modules** (Telarus / Lares, 2026) — Phase-scoped instruction loading with section-level confidence URIs.
 - **Kowloon / ActivityStreams export model** — Kowloon's Activity envelope (`actorId`, `object`, `target`, `to`, `canReply`, `canReact`) is a good downstream publication adapter for Lares spans. Kowloon IDs remain sink-local identifiers, not replacements for `span_id`.
 
-<a id="how-to-read"></a>
+<a id="/how-to-read"></a>
 
 ## Appendix A — How to Read an Exchange Opening
 
@@ -382,7 +382,7 @@ Quick read:
 
 The standpoint reads within its own frame (Syadasti rule): a Philosopher weighs propositional support, a Poet weighs resonance — never one universal truth-scale. A bare `<<~ syad 🏛️ 🌊 🎭>>` names which frames a claim spans without flattening them.
 
-<a id="lineage"></a>
+<a id="/lineage"></a>
 
 ## Lineage — the Ha-Ka-Ba palimpsest
 
@@ -399,7 +399,7 @@ Source: Luka Rejec, *Vastlands Guidebook* §"Death and Hakaba" --- *"the existen
 
 Audit anchors carried forward: "Ha: Body... vehicle"; "Ka: Soul... motive fire"; "Ba: Psyche... unique direction." These anchors justify heading/angle/dynamic reinterpretation without claiming strict one-to-one term identity.
 
-<a id="edges"></a>
+<a id="/edges"></a>
 
 ## Edges
 

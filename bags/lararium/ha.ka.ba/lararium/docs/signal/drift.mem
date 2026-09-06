@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/drift"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal — Drift
 
@@ -26,7 +26,7 @@ This room holds mismatch-recovery pressure where declared signal diverges from a
 
 <<~/ahu>>
 
-<<~ ahu #room-charter>>
+<<~ ahu #/room-charter>>
 
 !! Room Charter
 
@@ -37,7 +37,7 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 <<~/ahu>>
 
-<<~ ahu #drift-correction-pressure>>
+<<~ ahu #/drift-correction-pressure>>
 
 !! Drift Correction Pressure
 
@@ -49,7 +49,7 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -59,6 +59,6 @@ The in-span loop surfacing rides the `OODA-HA` Level (`lar:///ha.ka.ba/lares/api
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;sXg23ukvbseCmChskEC372NoiikfO_EfRs7-Ew5r2LU
+<<^ code="&#x0003;">>ni:///sha-256;r6fqsaPrk0mY0KKARZLC6La6L8hRjO9S2agoBzEuf4Q
 
 <<^ code="&#x0004;" -> to=?>>

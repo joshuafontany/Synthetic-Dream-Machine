@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/sigil-grammar-research"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #purpose>>
+<<~ ahu #/purpose>>
 
 ! Hawaiian Dream-Code Sigil Grammar — Research Document
 
@@ -35,7 +35,7 @@ explicit avoidance of direct natural-language overwrite.
 
 <<~/ahu>>
 
-<<~ ahu #findings>>
+<<~ ahu #/findings>>
 
 !! Findings (2026-04-27)
 
@@ -72,7 +72,7 @@ Loulou (`loulou`) was sourced from the cultural team directly and is treated as 
 
 <<~/ahu>>
 
-<<~ ahu #recommended-sigil-grammar>>
+<<~ ahu #/recommended-sigil-grammar>>
 
 !! Recommended Sigil Grammar
 
@@ -156,7 +156,7 @@ suppression. General imperative looping, switch/case, and try-catch remain defer
 
 <<~/ahu>>
 
-<<~ ahu #precedent-alignment>>
+<<~ ahu #/precedent-alignment>>
 
 !! Precedent Alignment
 
@@ -222,7 +222,7 @@ Design implication: grammar edits follow the implementation checklist below.
 
 <<~/ahu>>
 
-<<~ ahu #syntax-examples>>
+<<~ ahu #/syntax-examples>>
 
 !! Syntax Examples
 
@@ -272,7 +272,7 @@ Sugar forms do not lock out downstream command grammar.
 !!! Block worksite
 
 ```text
-<<~ ahu #fragment-id>>
+<<~ ahu #/fragment-id>>
 Body text, local claims, citations, or child sigils.
 
 <<~/ahu>>
@@ -292,7 +292,7 @@ Function expression.
 
 <<~/ahu>>
 
-<<~ ahu #parser-implementation-notes>>
+<<~ ahu #/parser-implementation-notes>>
 
 !! Parser / Agent Implementation Notes
 
@@ -347,7 +347,7 @@ When editing grammar meme or parser:
 
 <<~/ahu>>
 
-<<~ ahu #uncertainty-list>>
+<<~ ahu #/uncertainty-list>>
 
 !! Uncertainty List
 
@@ -386,7 +386,7 @@ When editing grammar meme or parser:
 
 <<~/ahu>>
 
-<<~ ahu #source-notes>>
+<<~ ahu #/source-notes>>
 
 !! Source Notes
 
@@ -406,7 +406,7 @@ When editing grammar meme or parser:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -415,6 +415,6 @@ When editing grammar meme or parser:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;SKZ96ZnHZJ3mr3TuLx0lix4xASZtbWka6lw1vhaT5f8
+<<^ code="&#x0003;">>ni:///sha-256;fJ94nVmrsSKZZ3UyKMufDNthCeYV-NU3Uqx3iZ9Dx9A
 
 <<^ code="&#x0004;" -> to=?>>

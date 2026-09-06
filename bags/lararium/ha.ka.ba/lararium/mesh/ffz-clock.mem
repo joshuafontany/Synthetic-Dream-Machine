@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/ffz-clock"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 ! FfzClock ~ the rhythmic grain of the whole house (Fuller-Fontany-Zelenka Chronometer)
 
@@ -48,7 +48,7 @@ a coordinate stays exactly as fresh whenever it gets read, because it counts not
 
 <<~/ahu>>
 
-<<~ ahu #the-spine>>
+<<~ ahu #/the-spine>>
 
 !! The spine ~ a membership TREE, never a tick-count (the keystone, 2026-06-30)
 
@@ -139,7 +139,7 @@ sharpens the boundary rather than weakening it.
 
 <<~/ahu>>
 
-<<~ ahu #the-two-domain-boundary>>
+<<~ ahu #/the-two-domain-boundary>>
 
 !! Rhythm, not causality ~ the two-domain boundary (the operator's cut, 2026-06-25)
 
@@ -166,7 +166,7 @@ enters the address.
 
 <<~/ahu>>
 
-<<~ ahu #non-interference>>
+<<~ ahu #/non-interference>>
 
 !! φ ~ the non-interference law (scale-orthogonality, NOT entrainment) (2026-06-29)
 
@@ -230,7 +230,7 @@ bitemporality). The kept dissents on the narrowing ride live at that meme's #kep
 
 <<~/ahu>>
 
-<<~ ahu #profiles>>
+<<~ ahu #/profiles>>
 
 !! Profiles ~ one clock, many domains (FFZ_PROFILES)
 
@@ -271,7 +271,7 @@ above the session clock. Canonical grain reference:
 
 <<~/ahu>>
 
-<<~ ahu #rhythmic-address>>
+<<~ ahu #/rhythmic-address>>
 
 !! The rhythmic address ~ `lar_ffz`, a stamp that names where-in-the-cadence (2026-06-25)
 
@@ -350,7 +350,7 @@ cosine-drop, Theme community-detection) names the next slice.
 
 <<~/ahu>>
 
-<<~ ahu #three-instruments>>
+<<~ ahu #/three-instruments>>
 
 !! Three instruments, three jobs ~ FfzClock is one of three
 
@@ -377,7 +377,7 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! Open ~ held
 
@@ -401,7 +401,7 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -411,6 +411,6 @@ targeted revocation MUST ride Keyhive's convergent removal, never the counter
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JOqoopcLTdIB7B1SY2F2GuCDInYwGLhD5ePLV-icFfc
+<<^ code="&#x0003;">>ni:///sha-256;nmxypGMWRP0ppimuUkG2hj62OxU1fofYl5WC3Mh0DSQ
 
 <<^ code="&#x0004;" -> to=?>>

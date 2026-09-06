@@ -23,7 +23,7 @@ written   = "2026-06-24"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Convergent Mesh ~ one shape under revocation, membership, and revision
 
@@ -35,7 +35,7 @@ Five of the six rest on machinery the house already holds — the ratchet, the r
 
 <<~/ahu>>
 
-<<~ ahu #three-clocks>>
+<<~ ahu #/three-clocks>>
 
 !! Three clocks, three jobs
 
@@ -47,7 +47,7 @@ Time rides three instruments, never one (`ffz-clock`):
 
 <<~/ahu>>
 
-<<~ ahu #two-revocation-modes>>
+<<~ ahu #/two-revocation-modes>>
 
 !! Two revocation modes ~ the epoch is a LEASE, not a revoker
 
@@ -62,7 +62,7 @@ The content-resolution design (`content-resolution`) ''mechanizes both modes on 
 
 <<~/ahu>>
 
-<<~ ahu #contract-key-agreement>>
+<<~ ahu #/contract-key-agreement>>
 
 !! The contract performs the key-agreement
 
@@ -70,7 +70,7 @@ Private docs spawn fresh and isolated per vessel — they hide in `@catalog` —
 
 <<~/ahu>>
 
-<<~ ahu #beelay-bypass>>
+<<~ ahu #/beelay-bypass>>
 
 !! The Beelay bypass ~ what rides the relay, what stays Beelay's
 
@@ -80,7 +80,7 @@ Consistent with the bypass, the content-resolution design (`content-resolution`)
 
 <<~/ahu>>
 
-<<~ ahu #groundings>>
+<<~ ahu #/groundings>>
 
 !! Groundings ~ the falsifiable cross-domain rhymes
 
@@ -103,7 +103,7 @@ The convergence reads as a real pattern integrity, not a Law-of-5s pleasing stor
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance ~ PROPOSED, twice-refuted-and-survived
 
@@ -111,7 +111,7 @@ This meme stands ''PROPOSED'' (crucible-before-binding). The model held through 
 
 <<~/ahu>>
 
-<<~ ahu #scope-1-networking>>
+<<~ ahu #/scope-1-networking>>
 
 !! Scope 1 ~ the DreamNet networking pipe [surgical 2026-07-03]
 
@@ -123,7 +123,7 @@ The Scope-1 CAD-blob pipe now carries a ''concrete design'' (`content-resolution
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -138,6 +138,6 @@ The Scope-1 CAD-blob pipe now carries a ''concrete design'' (`content-resolution
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xI1o_vLgdqoS41foRe8nDpofaeZXuY_jTTeLHhvGluY
+<<^ code="&#x0003;">>ni:///sha-256;rNZheNyHItuSHhC0WPgtnWptGtqcA1yGp8X3wisFs20
 
 <<^ code="&#x0004;" -> to=?>>

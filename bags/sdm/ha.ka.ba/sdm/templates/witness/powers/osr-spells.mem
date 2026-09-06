@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/sdm/templates/witness/powers/osr-spells"
 
 ! Template — OSR Spell Witness
 
-<<~ ahu #intent>>
+<<~ ahu #/intent>>
 
 !! Intent
 
@@ -28,7 +28,7 @@ A witness meme preserves provenance and conversion anchors for a Power module. I
 
 <<~/ahu>>
 
-<<~ ahu #witness-shape>>
+<<~ ahu #/witness-shape>>
 
 !! Witness Shape
 
@@ -44,7 +44,7 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<~/ahu>>
 
-<<~ ahu #writing-law>>
+<<~ ahu #/writing-law>>
 
 !! Writing Law
 
@@ -55,7 +55,7 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -63,6 +63,6 @@ Conversion anchor: P2 ≈ 1st, P4 ≈ 2nd, P6 ≈ 3rd, P18 ≈ 9th.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;BQPmwvFSYppxmOXeCMLnsXQBzYSFQNwYkTxiabtn4bA
+<<^ code="&#x0003;">>ni:///sha-256;smEcwGvrBUL-3vULi1i-zlSAlOwFnGIyr3zJ2gU_g9U
 
 <<^ code="&#x0004;" -> to=?>>

@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/final-report-device-per-pers
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Final Report: Device-per-person ground truth
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 12,092 characters
 
@@ -97,7 +97,7 @@ Not further productive. I'll compile the final report now with everything gather
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 7,039 characters
 
@@ -159,12 +159,12 @@ I could not reach GSMA's Mobile Gender Gap Report directly (403 on all URL guess
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xZEs2ah5xzjgp1-yAkMDMK8idwsd-q8oVGY4D1dKktI
+<<^ code="&#x0003;">>ni:///sha-256;JtPlCZG0m30fFSdoFd2h4jRWdq0vkid9wyZDJCLOUQc
 
 <<^ code="&#x0004;" -> to=?>>

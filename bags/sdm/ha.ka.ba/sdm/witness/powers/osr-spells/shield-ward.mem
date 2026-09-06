@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/shield-ward"
 
 ! OSR Witness — Shield Ward
 
-<<~ ahu #alias>>
+<<~ ahu #/alias>>
 
 !! Alias Note
 
@@ -30,7 +30,7 @@ reason = "SDM+ reserves bare `Shield` for gear, item, and general defense ontolo
 
 <<~/ahu>>
 
-<<~ ahu #basic>>
+<<~ ahu #/basic>>
 
 !! Basic
 
@@ -47,7 +47,7 @@ A magical barrier all around the magic-user, less than an inch away, moving with
 
 <<~/ahu>>
 
-<<~ ahu #expert>>
+<<~ ahu #/expert>>
 
 !! Expert
 
@@ -62,7 +62,7 @@ The Expert Set lists MU1 only; the Basic description governs.
 
 <<~/ahu>>
 
-<<~ ahu #cyclopedia>>
+<<~ ahu #/cyclopedia>>
 
 !! Rules Cyclopedia
 
@@ -79,7 +79,7 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~/ahu>>
 
-<<~ ahu #analysis>>
+<<~ ahu #/analysis>>
 
 !! Conversion Analysis
 
@@ -91,7 +91,7 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -102,6 +102,6 @@ As Basic: a barrier an inch from the body, moving with the caster, AC 2 vs missi
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;W_2od1_bt4VLbqknE55NA5kXN2P9C6_i4jkE_2u5rIw
+<<^ code="&#x0003;">>ni:///sha-256;NafMf41-onRWCNzVp5VO72wQ1BIGv7aRER189zfWoIo
 
 <<^ code="&#x0004;" -> to=?>>

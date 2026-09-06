@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! WHAT ACTUALLY HAPPENED (dated, sourced)
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 16,267 characters
 
@@ -120,12 +120,12 @@ Why this is survivable, per Ayer: clients require SCTs from **multiple logs acro
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;C-U2x2jRTFmJuTp81Nr6JmKNDCCkRyekfcxFPyq0Xy0
+<<^ code="&#x0003;">>ni:///sha-256;0vNqXYIBnwg9j6oVRayIl4MjoWzJBfr0s2F1RpazUR4
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/heleuma"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Heleuma — Anchor
 
@@ -32,7 +32,7 @@ A heleuma does not mark failure. It marks a ''named threshold crossing'' — the
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect compiled artifact — TypeScript module, runtime registration, or build asset outside lar:/// space
 ⏿ orient heleuma tier: ha (permanent structure), ka (promotion-eligible soul/fire), ba (path marker)
@@ -42,7 +42,7 @@ A heleuma does not mark failure. It marks a ''named threshold crossing'' — the
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Heleuma Law (SHALL)
 
@@ -57,7 +57,7 @@ A heleuma does not mark failure. It marks a ''named threshold crossing'' — the
 
 <<~/ahu>>
 
-<<~ ahu #freyja-alignment>>
+<<~ ahu #/freyja-alignment>>
 
 !! Freyja Alignment
 
@@ -67,7 +67,7 @@ The heleuma does not try to absorb the anchor into the graph. It holds the rope.
 
 <<~/ahu>>
 
-<<~ ahu #promotion-path>>
+<<~ ahu #/promotion-path>>
 
 !! Promotion Path
 
@@ -81,10 +81,10 @@ A heleuma API meme that acquires:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CB3Zpf-wBwOgiw_PPBtMO0XBRDapaRa-GJOsVH-VoPo
+<<^ code="&#x0003;">>ni:///sha-256;XUPXZJIE6ukfNIl0NfUDpyo7dRdJhd1YusDbL-3O6rY
 
 <<^ code="&#x0004;" -> to=?>>

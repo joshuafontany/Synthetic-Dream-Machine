@@ -15,7 +15,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/verb-summons"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! The summons relay
 
@@ -27,6 +27,6 @@ Naming note: "signal" names a DIFFERENT layer — the Agent↔Operator HUD/legib
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;s4hjPP-7XMkKggY5wLMQhhZQophInmoCqmqHIKXr_lA
+<<^ code="&#x0003;">>ni:///sha-256;X1UsfQqZdXi8FwlzLH05GCKsz0URC7Qx23UoxMRJKRg
 
 <<^ code="&#x0004;" -> to=?>>

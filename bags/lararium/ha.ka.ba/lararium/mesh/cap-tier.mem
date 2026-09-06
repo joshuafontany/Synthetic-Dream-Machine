@@ -24,7 +24,7 @@ written   = "2026-07-23"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Cap-Tier ~ the sealing posture the quine declares and the gate tightens
 
@@ -36,7 +36,7 @@ A bag answers ''one question'' about its sealing — WHO holds the read-cap — 
 
 <<~/ahu>>
 
-<<~ ahu #posture>>
+<<~ ahu #/posture>>
 
 !! The posture ~ sealed everywhere, cleartext only at the human surfaces
 
@@ -44,7 +44,7 @@ A bag answers ''one question'' about its sealing — WHO holds the read-cap — 
 
 <<~/ahu>>
 
-<<~ ahu #the-chain>>
+<<~ ahu #/the-chain>>
 
 !! The chain ~ four read-cap holder-sets, one total order
 
@@ -60,7 +60,7 @@ The tier names the read-cap holder-set, ascending in openness — a lower rank n
 
 <<~/ahu>>
 
-<<~ ahu #self-describing-datum>>
+<<~ ahu #/self-describing-datum>>
 
 !! The self-describing datum ~ the quine speaks its own walls
 
@@ -70,7 +70,7 @@ Modeled ''isomorphic to `FederationPosture`'' (federation-gate.ts) by compositio
 
 <<~/ahu>>
 
-<<~ ahu #the-keystone>>
+<<~ ahu #/the-keystone>>
 
 !! The keystone ~ declare ⊥ enforce, so the quine can only self-tighten
 
@@ -86,7 +86,7 @@ The keystone reads back through the code: revert the meet to take the more-OPEN 
 
 <<~/ahu>>
 
-<<~ ahu #declassification>>
+<<~ ahu #/declassification>>
 
 !! Declassification ~ the one-way ratchet under no-global-now
 
@@ -94,7 +94,7 @@ Tightening is free — a bag may always self-tighten, and a tightening cascade n
 
 <<~/ahu>>
 
-<<~ ahu #keyring-delivery>>
+<<~ ahu #/keyring-delivery>>
 
 !! Keyring delivery ~ the member read-cap, delivered AUTHENTICATED
 
@@ -104,7 +104,7 @@ The member tiers (PERSONAGROUP / CONTRACT) become concrete through ''keyring-del
 
 <<~/ahu>>
 
-<<~ ahu #groundings>>
+<<~ ahu #/groundings>>
 
 !! Groundings ~ the falsifiable rhymes
 
@@ -123,7 +123,7 @@ The model reads as a real pattern integrity because independent fields under the
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance ~ PROPOSED, the core built
 
@@ -137,7 +137,7 @@ Deferred with clean shores (not built): the TW5 `$:/tags/CapTierFilter` ordered-
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -156,6 +156,6 @@ Deferred with clean shores (not built): the TW5 `$:/tags/CapTierFilter` ordered-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TIB5mPADSPDFKkV4Atc4SKHLAMjHpek1pNepNKKcY0M
+<<^ code="&#x0003;">>ni:///sha-256;rk6cTyWNTF6KH8nVNxJBuUQARVoISswp1PUOoUXFhXA
 
 <<^ code="&#x0004;" -> to=?>>

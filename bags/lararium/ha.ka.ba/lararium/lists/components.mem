@@ -15,7 +15,7 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -23,7 +23,7 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 \procedure components()
 <span class="sdm-component-list">
@@ -35,13 +35,13 @@ uri-path  = "ha.ka.ba/lararium/lists/components"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/sdm/procedures/tag-pill>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-panel>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8RSdcq_5q9DBYvZ72i3Idz6Zkb7ClrqkKi9dYZwh_OU
+<<^ code="&#x0003;">>ni:///sha-256;lyWCGt-Gn1i-Bh-HbBJQT2Gdtvw6RX0JhHvLyt7muis
 
 <<^ code="&#x0004;" -> to=?>>

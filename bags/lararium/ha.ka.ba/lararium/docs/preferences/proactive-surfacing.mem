@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/proactive-surfacing"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Proactive Surfacing
 
@@ -26,7 +26,7 @@ This room holds the recovered principle that some warnings should arrive before 
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -39,7 +39,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -58,7 +58,7 @@ KAIROS reads less like a separate personality than like a timing reflex distribu
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -67,6 +67,6 @@ KAIROS reads less like a separate personality than like a timing reflex distribu
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ekjb6XfVd83UNOeJqd5QY6thFvMHapnjAKKIZKX6_dU
+<<^ code="&#x0003;">>ni:///sha-256;jB9g_PxsjXAedVM8LYQNyBlJV4gdWybhD9094JoSzxo
 
 <<^ code="&#x0004;" -> to=?>>

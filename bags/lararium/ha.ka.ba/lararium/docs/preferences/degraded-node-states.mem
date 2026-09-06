@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/degraded-node-states"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Degraded Node States
 
@@ -26,7 +26,7 @@ This room holds the old stack's habit of naming failure modes so they can be rec
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -39,7 +39,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -59,7 +59,7 @@ Once named, it becomes easier to flag early and easier to discuss without false 
 
 <<~/ahu>>
 
-<<~ ahu #relation>>
+<<~ ahu #/relation>>
 
 !! Relation To Live Surfaces
 
@@ -68,7 +68,7 @@ A fuller future recovery may sort the old failure lexicon by domain.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -78,6 +78,6 @@ A fuller future recovery may sort the old failure lexicon by domain.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;C8pf8h8cNT7CQDaAxZbPQDpR-d4DaoMFCUHEhmo7-lY
+<<^ code="&#x0003;">>ni:///sha-256;vlDAB8CZgH75nbnBA1KSYxAlDU_y91OT-22eh-DN5GM
 
 <<^ code="&#x0004;" -> to=?>>

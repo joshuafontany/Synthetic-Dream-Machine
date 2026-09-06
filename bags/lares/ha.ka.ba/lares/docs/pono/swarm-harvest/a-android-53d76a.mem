@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/a-android-53d76a"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! A. ANDROID
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 61,224 characters
 
@@ -453,12 +453,12 @@ Two further asymmetries worth stating separately. **On Android the owner's power
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_I-XOZA9Ra2i6QJAlLZXrc4Tvr076U1yuZXefATQAvU
+<<^ code="&#x0003;">>ni:///sha-256;p4tWL28OYE23bSL_9YJQke8Bx5JcA935FA-H-cZf-Wg
 
 <<^ code="&#x0004;" -> to=?>>

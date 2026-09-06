@@ -26,7 +26,7 @@ uri-path  = "ha.ka.ba/sdm/epic/powers-composition-rewrite"
 > Sprints 0–3 stand complete and committed; the composition model and the
 > module-nesting doctrine (D6) hold. Resume here once the OODA-HA cleanup lands.
 
-<<~ ahu #vision>>
+<<~ ahu #/vision>>
 
 !! Vision
 
@@ -55,7 +55,7 @@ Instance (TW5 data, mutable): what Lady Aki currently holds, how it mutated.
 
 <<~/ahu>>
 
-<<~ ahu #base>>
+<<~ ahu #/base>>
 
 !! The Base (Ha) — What Cannot Change
 
@@ -135,7 +135,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 <<~/ahu>>
 
-<<~ ahu #lineage>>
+<<~ ahu #/lineage>>
 
 !! Design Lineage — Prior Art That Carries Load
 
@@ -153,7 +153,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 <<~/ahu>>
 
-<<~ ahu #principles>>
+<<~ ahu #/principles>>
 
 !! Principles
 
@@ -214,7 +214,7 @@ This base does not change. The epic addresses it, links it, makes it queryable.
 
 <<~/ahu>>
 
-<<~ ahu #architecture>>
+<<~ ahu #/architecture>>
 
 !! Bag Topology
 
@@ -247,7 +247,7 @@ bags/sdm/
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -273,7 +273,7 @@ Pranala form:
 
 <<~/ahu>>
 
-<<~ ahu #tw5-tags>>
+<<~ ahu #/tw5-tags>>
 
 !! TW5 Tag Syntax — Component Representation
 
@@ -326,7 +326,7 @@ The TOML `tags` field mirrors the Pranala `#has` edges. `#has` edges carry graph
 
 <<~/ahu>>
 
-<<~ ahu #progressive-display>>
+<<~ ahu #/progressive-display>>
 
 !! Progressive Display — Cards as Mnemonic Doorways
 
@@ -382,7 +382,7 @@ each pill reads as a keyword the player learns over time.
 
 <<~/ahu>>
 
-<<~ ahu #shapes>>
+<<~ ahu #/shapes>>
 
 !! Meme Shapes
 
@@ -429,7 +429,7 @@ traits:
 
 <<~/ahu>>
 
-<<~ ahu #decisions-resolved>>
+<<~ ahu #/decisions-resolved>>
 
 !! Decisions Resolved — Session Zero (2026-05-31)
 
@@ -517,7 +517,7 @@ Same template, same `#has`/`#default` shape; the directory names the source-kind
 
 <<~/ahu>>
 
-<<~ ahu #sprints>>
+<<~ ahu #/sprints>>
 
 !! Sprints — Instructions for the Enacting Lares
 
@@ -669,7 +669,7 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 
 <<~/ahu>>
 
-<<~ ahu #acceptance>>
+<<~ ahu #/acceptance>>
 
 !! Epic Acceptance
 
@@ -687,7 +687,7 @@ Fresh `power-ontology.md`. Chapter 06 conversion checklist (not execution).
 
 <<~/ahu>>
 
-<<~ ahu #open-pressures>>
+<<~ ahu #/open-pressures>>
 
 !! Open Design Pressures
 
@@ -731,7 +731,7 @@ relationship to the mounted pattern. This remains speculative.
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -762,7 +762,7 @@ relationship to the mounted pattern. This remains speculative.
 
 <<~/ahu>>
 
-<<~ ahu #meme-edges>>
+<<~ ahu #/meme-edges>>
 
 !! Edges
 
@@ -776,6 +776,6 @@ history if ever needed.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;S5RoCPK6KruJRffgeeQOXrnOPoyfnXG-1pn7k9OgddA
+<<^ code="&#x0003;">>ni:///sha-256;OeBhTpCC9uJLhiFYhkSxxJdEmJYwpGwoEeoC3LbgBuo
 
 <<^ code="&#x0004;" -> to=?>>

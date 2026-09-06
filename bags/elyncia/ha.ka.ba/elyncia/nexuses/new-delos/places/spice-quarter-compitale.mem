@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/spice-quarter-compitale"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Spice Quarter Compitale
 
@@ -49,6 +49,6 @@ Undermarket behind the Cistern Wall, the East Gate warehouses.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;DIjQt7DN47iaSq1pXJ_NN2YaQ__Yb8fHRp6G9EE_y94
+<<^ code="&#x0003;">>ni:///sha-256;9v7wE44Yv5BDShpbBqEk3-sIXJ8TAFrOEj9gXtlaYbc
 
 <<^ code="&#x0004;" -> to=?>>

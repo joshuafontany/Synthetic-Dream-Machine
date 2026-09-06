@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/api/masks"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Masks API Tree
 
@@ -33,7 +33,7 @@ Grammar and stacking law defined in `lar:///ha.ka.ba/lares/docs/voices/masks`.
 
 <<~/ahu>>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/voices#/mask-layer>>
 ```toml
@@ -46,7 +46,7 @@ label = "parent-index-entry"
 
 <<~/ahu>>
 
-<<~ ahu #taxonomy>>
+<<~ ahu #/taxonomy>>
 
 !! Mask Type Taxonomy
 
@@ -60,7 +60,7 @@ Three subtypes. Each subtype lives in its own directory.
 
 <<~/ahu>>
 
-<<~ ahu #child-routes>>
+<<~ ahu #/child-routes>>
 
 !! Child Routes
 
@@ -89,7 +89,7 @@ Three subtypes. Each subtype lives in its own directory.
 
 <<~/ahu>>
 
-<<~ ahu #invocation>>
+<<~ ahu #/invocation>>
 
 !! Invocation Pattern
 
@@ -106,7 +106,7 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -123,6 +123,6 @@ Named Voice masks may also be invoked directly by their earned name in Voice hou
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MVWNl-RaUeSNelaaMAcUGPg0GidyHdIKMCSzaOlhZ8U
+<<^ code="&#x0003;">>ni:///sha-256;KCYT6F-39SvLl3H-EFFmzgeszvtaI4CiZIost0K-eH8
 
 <<^ code="&#x0004;" -> to=?>>

@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/the-abuse-surface-of-managed
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! THE ABUSE SURFACE OF MANAGED IDENTITY
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 54,685 characters
 
@@ -427,7 +427,7 @@ Whether the self-exemption is earned — a supervised Google account is *created
 
 <<~/ahu>>
 
-<<~ ahu #message-2>>
+<<~ ahu #/message-2>>
 
 !! Message 2 ~ 45,654 characters
 
@@ -650,7 +650,7 @@ That is the closest thing anywhere to a requirement for a channel the manager ca
 
 <<~/ahu>>
 
-<<~ ahu #message-3>>
+<<~ ahu #/message-3>>
 
 !! Message 3 ~ 8,806 characters
 
@@ -720,12 +720,12 @@ The supervised party can *discover* the relation in Google and Apple, and is tol
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;lBpw-CDxCUTw-I_uN4YHGLGic9mQA8cKLzzGXX4a6yo
+<<^ code="&#x0003;">>ni:///sha-256;wzDxOKlpTtfy0xVnqJokxpD4howHJ7Db16fkkQ6-90c
 
 <<^ code="&#x0004;" -> to=?>>

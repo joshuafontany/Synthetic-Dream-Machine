@@ -30,7 +30,7 @@ written    = "2026-07-20"
 > quorum, arm the charter's pre-rotation, and go live. Each step reads as its own verb; the
 > irreversible one wears a warning. The rite runs top to bottom once — a re-run re-founds.
 
-<<~ ahu #the-rite>>
+<<~ ahu #/the-rite>>
 
 !! The rite ~ rehearsed first, then the six movements, then the growing
 
@@ -66,7 +66,7 @@ the vessel's current state rather than from memory (#/agent-seed).
 
 <<~/ahu>>
 
-<<~ ahu #rehearse>>
+<<~ ahu #/rehearse>>
 
 !! ⓪ Rehearse ~ run it in a box until it bores (the REHEARSAL branch opens here)
 
@@ -417,7 +417,7 @@ lies passed a suite first.
 
 <<~/ahu>>
 
-<<~ ahu #nexus-lifecycle>>
+<<~ ahu #/nexus-lifecycle>>
 
 !! The nexus-doc lifecycle ~ born by act, lives by traffic, quiet by absence
 
@@ -451,7 +451,7 @@ door was already there wearing another name.
 
 <<~/ahu>>
 
-<<~ ahu #bag-home>>
+<<~ ahu #/bag-home>>
 
 !! Where a bag rests ~ repository ⊥ hearth ⊥ ley
 
@@ -483,7 +483,7 @@ exists to prevent.
 
 <<~/ahu>>
 
-<<~ ahu #preflight>>
+<<~ ahu #/preflight>>
 
 !! ⓪′ Preflight ~ prove the toolchain answers BEFORE anything irreversible
 
@@ -545,7 +545,7 @@ toolchain and reports nothing about the rite.
 
 <<~/ahu>>
 
-<<~ ahu #clear>>
+<<~ ahu #/clear>>
 
 !! ① Clear ~ pare to void (⚠ irreversible — the KEEPER branch)
 
@@ -665,7 +665,7 @@ name reads as the ''operator's own hand'', never the machine's.
 
 <<~/ahu>>
 
-<<~ ahu #found>>
+<<~ ahu #/found>>
 
 !! ② Found ~ stand the device + the three kahu
 
@@ -751,7 +751,7 @@ ceiling reads 0 and no argument raises it (faceless-by-class). See #crossroads.
 
 <<~/ahu>>
 
-<<~ ahu #reserve>>
+<<~ ahu #/reserve>>
 
 !! ③ Reserve ~ forge the pre-rotation's future
 
@@ -788,7 +788,7 @@ lares nexus seal show                            # the quorum STANDS + the chain
 
 <<~/ahu>>
 
-<<~ ahu #reserve-custody>>
+<<~ ahu #/reserve-custody>>
 
 !! ③′ Reserve custody ~ the independence rule
 
@@ -850,7 +850,7 @@ keys must reveal at the pending rotate first, because a sealed head's pre-commit
 
 <<~/ahu>>
 
-<<~ ahu #threshold-attest-recovery>>
+<<~ ahu #/threshold-attest-recovery>>
 
 !! ③″ Threshold-attest recovery ~ the pre-commit rhymes, the recovery rotates
 
@@ -892,7 +892,7 @@ bans a presenter `nym`, so a lawful rotation ''sheds the ban''; and a handle-car
 
 <<~/ahu>>
 
-<<~ ahu #seal-and-back-up>>
+<<~ ahu #/seal-and-back-up>>
 
 !! ④ Seal + back up ~ lock the secrets, write the net
 
@@ -980,7 +980,7 @@ before the day it matters.
 
 <<~/ahu>>
 
-<<~ ahu #regenesis-live>>
+<<~ ahu #/regenesis-live>>
 
 !! ⑤ Seed + ⑥ LIVE ~ plant the content, serve
 
@@ -1013,7 +1013,7 @@ there'' — a movement for it here would teach an irreversibility the sensorium 
 
 <<~/ahu>>
 
-<<~ ahu #crossroads>>
+<<~ ahu #/crossroads>>
 
 !! ⚲ Crossroads ~ stand a Herm where the family needs one (OPTIONAL, after LIVE)
 
@@ -1073,7 +1073,7 @@ about the stack, not a rule a later bug could flip.
 
 <<~/ahu>>
 
-<<~ ahu #grow-the-nexus>>
+<<~ ahu #/grow-the-nexus>>
 
 !! ⊕ Grow ~ open the Nexus, contract operators, welcome users
 
@@ -1130,7 +1130,7 @@ leaves the PersonaGroup's own fleet. The mesh breathes over immutable bodies whi
 
 <<~/ahu>>
 
-<<~ ahu #gather-the-fleet>>
+<<~ ahu #/gather-the-fleet>>
 
 !! ⊛ Gather ~ the operator's own vessels join the standing fleet (after LIVE)
 
@@ -1217,7 +1217,7 @@ this edge rather than orphaning the vessel holding it.
 
 <<~/ahu>>
 
-<<~ ahu #feed-the-realm>>
+<<~ ahu #/feed-the-realm>>
 
 !! ⊙ Feed ~ the first offering IS the realm's founding (after LIVE)
 
@@ -1242,7 +1242,7 @@ The second reads the capture-clock the model already argues for — ''who feeds 
 
 <<~/ahu>>
 
-<<~ ahu #dwell>>
+<<~ ahu #/dwell>>
 
 !! ⊘ Dwell ~ a second operator joins the REALM (design before commands)
 
@@ -1265,7 +1265,7 @@ A vouch rides as signal-2 on the lineage; the crossing prices it later, and the 
 
 <<~/ahu>>
 
-<<~ ahu #the-frame>>
+<<~ ahu #/the-frame>>
 
 !! The frame ~ why compromise-resistance rides early
 
@@ -1322,7 +1322,7 @@ scale dies before scale — which reads as a constraint on the rehearsal branch,
 
 <<~/ahu>>
 
-<<~ ahu #identity-classes>>
+<<~ ahu #/identity-classes>>
 
 !! Identity classes ~ who carries the reserve at all
 
@@ -1337,7 +1337,7 @@ the root). The default holds — users stay light; operators carry the future.
 
 <<~/ahu>>
 
-<<~ ahu #bags-and-shelf>>
+<<~ ahu #/bags-and-shelf>>
 
 !! What a founding vessel carries besides its keys ~ declarations and the shelf
 
@@ -1383,7 +1383,7 @@ every founding'' (#/clear).
 
 <<~/ahu>>
 
-<<~ ahu #agent-seed>>
+<<~ ahu #/agent-seed>>
 
 !! The agent seed ~ how a reader answers //what do I run next//
 
@@ -1442,7 +1442,7 @@ teach a ceremony nobody has performed.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -1456,6 +1456,6 @@ teach a ceremony nobody has performed.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MY9-_kOBo-vncwH1yzKt0AeeGPPsObUWz-vDQ6hTodo
+<<^ code="&#x0003;">>ni:///sha-256;Xp_chsgN-CsHIb4BOGnksI3eWrV8V3a_4zjoE532eyQ
 
 <<^ code="&#x0004;" -> to=?>>

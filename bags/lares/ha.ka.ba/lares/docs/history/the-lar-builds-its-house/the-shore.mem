@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-shore"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lar Builds Its House — The Shore
 
@@ -26,7 +26,7 @@ A house that can stand itself learns to part a working layer from a sealed canon
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -42,7 +42,7 @@ Talk-story stance: keep the threads ''unblurred''. This act tells ''one'' thing 
 
 <<~/ahu>>
 
-<<~ ahu #thread-entry>>
+<<~ ahu #/thread-entry>>
 
 !! Thread Entry
 
@@ -70,7 +70,7 @@ So we drew it. A ''working layer'' where edits land and live — saved, projecte
 
 <<~/ahu>>
 
-<<~ ahu #the-layers>>
+<<~ ahu #/the-layers>>
 
 !! The Layers
 
@@ -84,7 +84,7 @@ The disk carried the same shape. The seed under `bags/` held what a hand had aut
 
 <<~/ahu>>
 
-<<~ ahu #the-causal-island-shore>>
+<<~ ahu #/the-causal-island-shore>>
 
 !! Every Boundary a Causal-Island Shore
 
@@ -100,7 +100,7 @@ This act builds the ''working↔canon'' shore. The same law waits, unbuilt, at e
 
 <<~/ahu>>
 
-<<~ ahu #the-crossing>>
+<<~ ahu #/the-crossing>>
 
 !! The Crossing — Promotion Moves Down the Stack
 
@@ -120,7 +120,7 @@ And the rite speaks the right tongue. The crossing runs as an ''audited residenc
 
 <<~/ahu>>
 
-<<~ ahu #the-cost>>
+<<~ ahu #/the-cost>>
 
 !! The Cost
 
@@ -130,7 +130,7 @@ And the vault stayed shut still. A working layer and a sealed canon proved the h
 
 <<~/ahu>>
 
-<<~ ahu #crossing>>
+<<~ ahu #/crossing>>
 
 !! Crossing Thread
 
@@ -142,7 +142,7 @@ That waits for Act IV.
 
 <<~/ahu>>
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -157,7 +157,7 @@ Act IV receives:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -172,6 +172,6 @@ Act IV receives:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZCH8ytlMSSBP1TnDJtQceA8F2uNZe86DL2sbZi3kVi8
+<<^ code="&#x0003;">>ni:///sha-256;ntobr7BQkx2mDYlC0QY94mnjgFKyfTDKvWsOZmw5AP8
 
 <<^ code="&#x0004;" -> to=?>>

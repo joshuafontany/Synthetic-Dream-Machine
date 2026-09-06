@@ -48,12 +48,12 @@ uri-path   = "ha.ka.ba/lararium/tw5/ui/meta-startup-action"
 
 </$list>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/ui/meta-viewtemplate-tab>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ns4HQkEYIhYtu_bnhYx0-Co8HuIWE9fNPFV2vS4ouhQ
+<<^ code="&#x0003;">>ni:///sha-256;D2R5uRqsNh9dv7T1qT-0nRajLD2GesSLmb28UFkGLn4
 
 <<^ code="&#x0004;" -> to=?>>

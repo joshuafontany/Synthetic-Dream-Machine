@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-diaspora-aspects-9aa7ae"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. Diaspora "aspects"
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 27,655 characters
 
@@ -250,12 +250,12 @@ Across all four systems, **the same measurement gap recurs**: every one ships th
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mbTTtYXarr4JjCg7PTUjSO98DaTg4nT8ArWB0egYatM
+<<^ code="&#x0003;">>ni:///sha-256;Sdt5Kw4mHzM68Bf52AHdI4WRakTjhmeBZZrWVNNccdM
 
 <<^ code="&#x0004;" -> to=?>>

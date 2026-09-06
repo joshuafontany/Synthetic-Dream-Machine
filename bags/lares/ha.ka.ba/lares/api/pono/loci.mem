@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/loci"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Loci
 
@@ -36,7 +36,7 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ Gather the `lar:` URI and visible convention surfaces before decomposition.
 ⏿ Run the derivation algorithm; classify resolved or declared-unresolved; confirm file-path convention holds.
@@ -48,7 +48,7 @@ Root segments outside `\w.\w.\w` MAY NOT hold `loci`.
 
 <<~/ahu>>
 
-<<~ ahu #promotion-path>>
+<<~ ahu #/promotion-path>>
 
 !! Promotion Path
 
@@ -67,7 +67,7 @@ Promotion to lares/ canon (live session → branch commit → hostless URI) foll
 
 <<~/ahu>>
 
-<<~ ahu #derivation-algorithm>>
+<<~ ahu #/derivation-algorithm>>
 
 !! Derivation Algorithm — siting
 
@@ -106,7 +106,7 @@ Child items resolve under the sibling directory named for the parent's terminal 
 
 <<~/ahu>>
 
-<<~ ahu #relative-names>>
+<<~ ahu #/relative-names>>
 
 !! Relative-Name Qualification — the second office
 
@@ -128,7 +128,7 @@ Runtime: `bagScopeOf` / `qualifyStackTag` / `stackOf` and the `stack` filter ope
 
 <<~/ahu>>
 
-<<~ ahu #file-path-convention>>
+<<~ ahu #/file-path-convention>>
 
 !! Stable File-Path Convention
 
@@ -150,7 +150,7 @@ MIGRATION NOTE: the committed canon tree still sits at the pre-ruling layout (`b
 
 <<~/ahu>>
 
-<<~ ahu #address-stability>>
+<<~ ahu #/address-stability>>
 
 !! Address Stability
 
@@ -169,7 +169,7 @@ A lawful meme MUST discharge residual uncertainty outward through its footer `..
 
 <<~/ahu>>
 
-<<~ ahu #explicit-convention>>
+<<~ ahu #/explicit-convention>>
 
 !! Explicit Convention
 
@@ -190,7 +190,7 @@ Convention fails when:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -202,6 +202,6 @@ Convention fails when:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1Ge8OaTFrrJi7jmu-uCwRHoOZXipziLwlWwmaEB87DE
+<<^ code="&#x0003;">>ni:///sha-256;fmncMey53Z54IAAj0hs33E10LsghOls87yMbGvSrplI
 
 <<^ code="&#x0004;" -> to=?>>

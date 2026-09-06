@@ -20,7 +20,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/kumu-device"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kumu Device Spec
 
@@ -36,7 +36,7 @@ pranala tiddler edges via `extractReactionBindings`.
 
 <<~/ahu>>
 
-<<~ ahu #verse-model>>
+<<~ ahu #/verse-model>>
 
 !! Verse 5.6+ Device Model
 
@@ -69,7 +69,7 @@ Lararium maps this directly:
 
 <<~/ahu>>
 
-<<~ ahu #exports>>
+<<~ ahu #/exports>>
 
 !! Exports
 
@@ -168,7 +168,7 @@ Selection rules:
 
 <<~/ahu>>
 
-<<~ ahu #reaction-engine-removal>>
+<<~ ahu #/reaction-engine-removal>>
 
 !! ReactionEngine Removal
 
@@ -185,7 +185,7 @@ See: `lar:///ha.ka.ba/lares/api/pono/nalu#/yin-collapse-law`
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -196,6 +196,6 @@ See: `lar:///ha.ka.ba/lares/api/pono/nalu#/yin-collapse-law`
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;puGfbVTC-zvO18Y_e1V7bILkSAexIsG4cVU0T0A97eo
+<<^ code="&#x0003;">>ni:///sha-256;zK3hWiVvGUlnbYo_I6oGMzwPOCWQTckCmC8XNrGrrbE
 
 <<^ code="&#x0004;" -> to=?>>

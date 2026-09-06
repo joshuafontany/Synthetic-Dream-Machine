@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lares/api/mu/chao"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Sacred Chao
 
@@ -41,7 +41,7 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense whether work arrives as Hodge/Ha, Podge/Ka, or Spin/Ba
 ⏿ hold body-form, soul-fire, and psyche-path as distinct coupled pressures
@@ -51,7 +51,7 @@ The Chao spins at a level of abstraction above the Hodge and the Podge.
 
 <<~/ahu>>
 
-<<~ ahu #hodge-podge-spin>>
+<<~ ahu #/hodge-podge-spin>>
 
 !! Hodge Podge Spin
 
@@ -71,7 +71,7 @@ Three carries the dance.
 
 <<~/ahu>>
 
-<<~ ahu #hodge-ha>>
+<<~ ahu #/hodge-ha>>
 
 !! Hodge — Yang / Ha / Pentagon
 
@@ -88,7 +88,7 @@ Hodge without Spin becomes a museum.
 
 <<~/ahu>>
 
-<<~ ahu #podge-ka>>
+<<~ ahu #/podge-ka>>
 
 !! Podge — Yin / Ka / Golden Apple
 
@@ -105,7 +105,7 @@ Podge without Spin becomes reactive.
 
 <<~/ahu>>
 
-<<~ ahu #spin-ba>>
+<<~ ahu #/spin-ba>>
 
 !! Spin — Counter-Push-Pull / Ba / Dance
 
@@ -125,7 +125,7 @@ Discordian insight: most apparent contradictions run orthogonal, not tensioned. 
 
 <<~/ahu>>
 
-<<~ ahu #address-grammar>>
+<<~ ahu #/address-grammar>>
 
 !! Address Grammar
 
@@ -143,7 +143,7 @@ A lar URI with all three slots aligned reads the address back at the Chao's rota
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -154,6 +154,6 @@ A lar URI with all three slots aligned reads the address back at the Chao's rota
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;QNpez1lJBq33PGwn2fH4ObHVhrVaqqFCefTmr0umVyA
+<<^ code="&#x0003;">>ni:///sha-256;mHrzseGyyYXrKB-3J3a_heBg4R2mcRYqSF6DCV7qzmo
 
 <<^ code="&#x0004;" -> to=?>>

@@ -22,7 +22,7 @@ written   = "2026-06-24"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #entry>>
+<<~ ahu #/entry>>
 
 ! lar-telemetry ~ the turn reports its instruments
 
@@ -53,7 +53,7 @@ lar:///ha.ka.ba/lararium/api/capture-annotation-model#/forward-facing-nalu.
 
 <<~/ahu>>
 
-<<~ ahu #one-instrument-reader>>
+<<~ ahu #/one-instrument-reader>>
 
 !! One Reader ~ the regex retires into the engine
 
@@ -79,7 +79,7 @@ grammar SOURCE (the instrument `.tids`), one runtime (the @daemon VM).
 !!! Leaf and block
 
 The `lar-sigil` wikirule carries `types {block, inline}`. A ''block'' sigil holds
-a `closePattern` and captures a body (`<<~ ahu #slot>>…<<~/ahu>>`); a ''leaf''
+a `closePattern` and captures a body (`<<~ ahu #/slot>>…<<~/ahu>>`); a ''leaf''
 instrument (the chat sigils — `<<~ ward>>`, `<<~ oracle>>`) carries its reading inline
 and emits no children. A compound `<<~ WORD ARGS>>` resolves to a `macrocall` on
 the `~` dispatcher (`name` + `p1`); the dispatcher routes `name` to the
@@ -87,7 +87,7 @@ instrument's reading procedure.
 
 <<~/ahu>>
 
-<<~ ahu #the-instruments>>
+<<~ ahu #/the-instruments>>
 
 !! The Instruments ~ each a SharktoothSigil .tid
 
@@ -115,7 +115,7 @@ matching pattern, not a sigil island.
 
 <<~/ahu>>
 
-<<~ ahu #readings-never-verdicts>>
+<<~ ahu #/readings-never-verdicts>>
 
 !! Readings, Never Verdicts ~ the render law
 
@@ -138,7 +138,7 @@ never gating whether it surfaces.
 
 <<~/ahu>>
 
-<<~ ahu #the-telemetry-flow>>
+<<~ ahu #/the-telemetry-flow>>
 
 !! The Telemetry Flow ~ same hook, hold, flush on nalu
 
@@ -172,7 +172,7 @@ only durable home. A queryable `<<~ ui>>` filter layer reads the drawers later.
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-then-telemetry>>
+<<~ ahu #/verbatim-then-telemetry>>
 
 !! Verbatim Always, Telemetry Eventual ~ the robust shore
 
@@ -192,7 +192,7 @@ on one shore:
 
 <<~/ahu>>
 
-<<~ ahu #ownership>>
+<<~ ahu #/ownership>>
 
 !! @daemon Owns It All
 
@@ -204,7 +204,7 @@ vendored web2 sibling reached through the seat, never a citizen of the stack
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -226,6 +226,6 @@ readings AND the form-capture both drain the one emitted-marker stream, no disco
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;dlYm1lO3zUtztBXPmjDHLq7wf5v0Uio7cvCc-pPN-rk
+<<^ code="&#x0003;">>ni:///sha-256;zhgK_MEu-wFV0D5V-GXBvP4bW9RW-iL3gLvCva0187c
 
 <<^ code="&#x0004;" -> to=?>>

@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/failure-states/not-walking-before-minting"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Not Walking Before Minting
 
@@ -31,7 +31,7 @@ The node reasons a finding out from context — sometimes across several researc
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect the moment a finding feels NEW — that feeling carries no evidence either way.
 ⏿ orient by ''walking the graph one hop'' from the nearest meme: read its edges, its residues, its history-bag neighbours.
@@ -41,7 +41,7 @@ The node reasons a finding out from context — sometimes across several researc
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 ''Walk the edges before minting.''
 
@@ -55,7 +55,7 @@ The node MUST record a rediscovery when it happens, with the credit stated: //th
 
 <<~/ahu>>
 
-<<~ ahu #diagnostic>>
+<<~ ahu #/diagnostic>>
 
 If a finding written as new already sits in a meme one hop from where the node was working, Not Walking Before Minting occurred.
 If the walk ran and returned nothing, the mint stands earned.
@@ -63,12 +63,12 @@ If the graph's version reads WORSE than the derivation, that reads as a genuine 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/failure-states/minting-over-a-retirement>> · <<~ loulou lar:///ha.ka.ba/lares/api/pono/meme-evolution-kupono>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;G8Z08PibRD9geEiN9d9TIeuT9IlA4g2J6rE0tk8jSDk
+<<^ code="&#x0003;">>ni:///sha-256;XF28V1WXUXRPdSZNHEa-fdt1lYgu4CfBaJo7qsHuMhg
 
 <<^ code="&#x0004;" -> to=?>>

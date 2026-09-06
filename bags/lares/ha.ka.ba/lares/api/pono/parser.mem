@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/parser"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Parser Law
 
@@ -35,7 +35,7 @@ Both share the same sigil grammar. Their outputs differ in shape and consumer.
 
 <<~/ahu>>
 
-<<~ ahu #memetic-parser>>
+<<~ ahu #/memetic-parser>>
 
 !! MemeticParser — TW5 WikiParser Subclass
 
@@ -50,7 +50,7 @@ On construction it filters the inherited rule arrays (`pragmaRules`, `blockRules
 
 <<~/ahu>>
 
-<<~ ahu #lar-sigil-dispatch>>
+<<~ ahu #/lar-sigil-dispatch>>
 
 !! lar-sigil Dispatch Model
 
@@ -70,7 +70,7 @@ Dispatch output: `macrocall` nodes with `$variable = "~"` and `name = SIGIL` for
 
 <<~/ahu>>
 
-<<~ ahu #grammar-self-hosting>>
+<<~ ahu #/grammar-self-hosting>>
 
 !! Grammar Self-Hosting
 
@@ -98,7 +98,7 @@ These apply before grammar tiddlers finish loading. Grammar TOML `close_pattern`
 
 <<~/ahu>>
 
-<<~ ahu #context-pointer>>
+<<~ ahu #/context-pointer>>
 
 !! Context Pointer — `currentTiddler`
 
@@ -110,7 +110,7 @@ Filter expressions inside `<<~ ui FILTER>>` and guest-grammar blocks operate aga
 
 <<~/ahu>>
 
-<<~ ahu #normalization-open>>
+<<~ ahu #/normalization-open>>
 
 !! Normalization — Open Question
 
@@ -122,7 +122,7 @@ Open question: should the live system adopt explicit normalization with warning 
 
 <<~/ahu>>
 
-<<~ ahu #sigil-kinds>>
+<<~ ahu #/sigil-kinds>>
 
 !! Sigil Kinds
 
@@ -148,7 +148,7 @@ family        sigil-family-*          FamilyRule only; no dispatch; governs edge
 
 <<~/ahu>>
 
-<<~ ahu #control-sigils>>
+<<~ ahu #/control-sigils>>
 
 !! C0 Control Sigil Roles
 
@@ -165,14 +165,14 @@ Missing or out-of-order control sigils SHOULD emit structural warnings rather th
 
 <<~/ahu>>⊙:7c926d0ede886109
 
-<<~ ahu #closure-law>>
+<<~ ahu #/closure-law>>
 
 !! Closure Law
 
 Block forms open with a named opener and close with a named typed closer.
 
 ```text
-<<~ ahu #slot>>      — opener
+<<~ ahu #/slot>>      — opener
 
 <<~/ahu>>            — typed closer
 ```
@@ -189,7 +189,7 @@ Parser MUST reject ad-hoc closure spellings as canonical. A noncanonical closer 
 
 <<~/ahu>>
 
-<<~ ahu #meta-block>>
+<<~ ahu #/meta-block>>
 
 !! Meta Block
 
@@ -216,7 +216,7 @@ Additional ahu control slots that dissolve rather than project as children: `#ex
 
 <<~/ahu>>
 
-<<~ ahu #meme-ast>>
+<<~ ahu #/meme-ast>>
 
 !! Meme AST — Non-TW5 Path
 
@@ -241,7 +241,7 @@ Consumers: island adaptor (`island-adaptor.ts`), deserializer (`deserializer.ts`
 
 <<~/ahu>>
 
-<<~ ahu #stream-events>>
+<<~ ahu #/stream-events>>
 
 !! MemeStreamEvent — Streaming Parse Events
 
@@ -273,7 +273,7 @@ trigger = "end of stream"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -285,6 +285,6 @@ trigger = "end of stream"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;adxxIjmQcId4QSzHTmsAtxJrm4SSt2w39qf8xWSmSu0
+<<^ code="&#x0003;">>ni:///sha-256;by_IIspRKzZZ0FuNsxTg_OhcuRobN1XlHD1eJ9osY4U
 
 <<^ code="&#x0004;" -> to=?>>

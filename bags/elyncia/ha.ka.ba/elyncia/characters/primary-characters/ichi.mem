@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/characters/primary-characters/ichi"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Ichi ~ Powered Symbiote & Construct Golem
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Powered Symbiote [Hallmark Trait]
 
@@ -372,6 +372,6 @@ See ''Powered Symbiote'' (1 st).
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;OaueAfpQBmkGNmhcpOAXf40GpYIdmv78r7muy5s-xaA
+<<^ code="&#x0003;">>ni:///sha-256;-UM2R33rpy9JWfrHKaMtVv40RQE-EdGDSzXrubMDOUU
 
 <<^ code="&#x0004;" -> to=?>>

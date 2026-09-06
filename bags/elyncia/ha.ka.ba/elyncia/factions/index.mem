@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/factions/index"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Elyncia Factions ~ roster index
 
@@ -29,7 +29,7 @@ offer.
 
 <<~/ahu>>
 
-<<~ ahu #summit-roster>>
+<<~ ahu #/summit-roster>>
 
 !! The Summit Roster
 
@@ -67,7 +67,7 @@ correctly as the evening's real agenda wearing a napkin.
 
 <<~/ahu>>
 
-<<~ ahu #court-colors>>
+<<~ ahu #/court-colors>>
 
 !! Court Color Regimes
 
@@ -80,7 +80,7 @@ Derived from the court-dragon alignment canon, never invented whole:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union>>
 <<~ loulou lar:///ha.ka.ba/elyncia/concepts/grandmother-spider>>
@@ -89,6 +89,6 @@ Derived from the court-dragon alignment canon, never invented whole:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;AEcSKFh2QrUKidQ78F9QQ6gZ0BvkSycn0GN-JxVgs7I
+<<^ code="&#x0003;">>ni:///sha-256;J2aZTUOQJgW1HGmMhqOaAIp4LxeiBuh6qgx08OZNoI0
 
 <<^ code="&#x0004;" -> to=?>>

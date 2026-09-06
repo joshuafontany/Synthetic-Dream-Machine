@@ -24,7 +24,7 @@ retain       = true
 
 
 
-<<~ ahu #question>>
+<<~ ahu #/question>>
 
 !! Scouting Question
 
@@ -34,7 +34,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~/ahu>>
 
-<<~ ahu #tw5-deep>>
+<<~ ahu #/tw5-deep>>
 
 !! TW5 — Shadow Tiddler Read-Through
 
@@ -50,7 +50,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~/ahu>>
 
-<<~ ahu #smalltalk-image>>
+<<~ ahu #/smalltalk-image>>
 
 !! Smalltalk / Pharo — Method Dictionary Mutation
 
@@ -66,7 +66,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~/ahu>>
 
-<<~ ahu #emacs-lisp>>
+<<~ ahu #/emacs-lisp>>
 
 !! Emacs — C Kernel / Lisp Surface Boundary
 
@@ -82,7 +82,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~/ahu>>
 
-<<~ ahu #oberon-self-vm>>
+<<~ ahu #/oberon-self-vm>>
 
 !! Oberon / Self VM — Module Versioning and Live Reload
 
@@ -96,7 +96,7 @@ Five systems scouted: TiddlyWiki 5, Smalltalk/Pharo, Emacs Lisp, Oberon, Self VM
 
 <<~/ahu>>
 
-<<~ ahu #synthesis>>
+<<~ ahu #/synthesis>>
 
 !! Synthesis — The Four Laws for Lararium Self-Hosting
 
@@ -126,7 +126,7 @@ Lararium maps exactly:
 
 <<~/ahu>>
 
-<<~ ahu #phase-2-5-implication>>
+<<~ ahu #/phase-2-5-implication>>
 
 !! Direct Implication for Phase 2.5
 
@@ -142,7 +142,7 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ pranala #to-foundations from=? -> to=lar:///lararium-node/MEME-STORE-FOUNDATIONS family=control role=extends>>
 <<~ pranala #to-grammar from=? -> to=lar:///ha.ka.ba/lares/api/grammars/memetic-wikitext family=control role=informs>>
@@ -152,6 +152,6 @@ This is the Smalltalk method dictionary pattern: the parser algorithm (dispatch 
 
 <<~ ? -> lar:///lares_research/research-streams/lararium/SELF-HOSTING-RESEARCH>>
 
-<<^ code="&#x0003;">>ni:///sha-256;TehO0ybqXSO8TB53OOj9fqiBtOsS_3CsQ223jJ23Fh4
+<<^ code="&#x0003;">>ni:///sha-256;fWMH0qq37-ZUgMzR3YJe4sh7fJtb1zN2g1pvikYCcN8
 
 <<^ code="&#x0004;" -> to=?>>

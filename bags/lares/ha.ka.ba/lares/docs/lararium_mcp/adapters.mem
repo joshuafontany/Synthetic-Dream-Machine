@@ -17,7 +17,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/adapters"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: every submodule needs a named lane, but direct imports would couple source truths too tightly.
 ⏿ orient: adapters should translate resources/tools/prompts while preserving sidecar autonomy.
@@ -27,7 +27,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/adapters"
 
 <<~/ahu>>
 
-<<~ ahu #adapter-interface>>
+<<~ ahu #/adapter-interface>>
 
 !! Adapter Interface Contract
 
@@ -56,7 +56,7 @@ V1 constraints:
 
 <<~/ahu>>
 
-<<~ ahu #namespaces>>
+<<~ ahu #/namespaces>>
 
 !! Adapter Namespaces
 
@@ -73,7 +73,7 @@ The earlier dotted tool-prefix draft has yielded to the dash convention used by 
 
 <<~/ahu>>
 
-<<~ ahu #submodule-lanes>>
+<<~ ahu #/submodule-lanes>>
 
 !! Current Submodule Lanes
 
@@ -90,7 +90,7 @@ All current submodules count as core pieces of the MCP program, though not all e
 
 <<~/ahu>>
 
-<<~ ahu #mempalace-sidecar>>
+<<~ ahu #/mempalace-sidecar>>
 
 !! MemPalace Sidecar Contract
 
@@ -132,7 +132,7 @@ Implementation landed as `lares/lararium_mcp/adapters/mempalace.py` with mocked 
 
 <<~/ahu>>
 
-<<~ ahu #contentpalace-inherits>>
+<<~ ahu #/contentpalace-inherits>>
 
 !! ContentPalace Inherits the Schema ~ M1 sidecar-free
 
@@ -151,7 +151,7 @@ ChromaDB backs it; the 384-dim cosine space holds. ContentPalace ''extends'' the
 
 <<~/ahu>>
 
-<<~ ahu #bearing-harvest>>
+<<~ ahu #/bearing-harvest>>
 
 !! MemPalace Bearing-Harvest (talk-story moʻolelo, 2026-06-21)
 
@@ -181,7 +181,7 @@ Residue: the namespace table above still reads `lar:///submodules/mempalace/` �
 
 <<~/ahu>>
 
-<<~ ahu #registry>>
+<<~ ahu #/registry>>
 
 !! Adapter Registry
 
@@ -197,7 +197,7 @@ This keeps core hydration available when a sidecar or submodule breaks.
 
 <<~/ahu>>
 
-<<~ ahu #post-v1-writes>>
+<<~ ahu #/post-v1-writes>>
 
 !! Post-v1 Write Gates
 
@@ -211,7 +211,7 @@ The following remain blocked until explicit policy lands:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -221,6 +221,6 @@ The following remain blocked until explicit policy lands:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;1rvEQcYYh51N0PdvyPt8EiKsRm4jp-TncFt4e1no7jY
+<<^ code="&#x0003;">>ni:///sha-256;eEFHwckucRIRh5FFZacTY0z_aPNNEUy2EFWwQMNGdy0
 
 <<^ code="&#x0004;" -> to=?>>

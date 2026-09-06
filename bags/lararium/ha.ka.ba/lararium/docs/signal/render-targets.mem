@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/render-targets"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal — Render Targets
 
@@ -28,7 +28,7 @@ HUD instrument reading stays at `lar:///ha.ka.ba/lararium/docs/signal/hud`.
 
 <<~/ahu>>
 
-<<~ ahu #room-charter>>
+<<~ ahu #/room-charter>>
 
 !! Room Charter
 
@@ -43,7 +43,7 @@ This room keeps the render-surface layer:
 
 <<~/ahu>>
 
-<<~ ahu #render-target-registry>>
+<<~ ahu #/render-target-registry>>
 
 !! Render Target Registry
 
@@ -65,7 +65,7 @@ This docs meme owns:
 
 <<~/ahu>>
 
-<<~ ahu #the-five-stances>>
+<<~ ahu #/the-five-stances>>
 
 !! The Five Stances
 
@@ -79,7 +79,7 @@ bound:      <<~ syad 🏛️:*! 🌊:*?>>       (optional : tool-carry)
 
 <<~/ahu>>
 
-<<~ ahu #render-target-definitions>>
+<<~ ahu #/render-target-definitions>>
 
 !! Render Target Definitions
 
@@ -94,7 +94,7 @@ The glyph form carries the same semantic load as the ASCII sigil — standpoint,
 
 <<~/ahu>>
 
-<<~ ahu #glyph-design-intent>>
+<<~ ahu #/glyph-design-intent>>
 
 !! Glyph Design Intent
 
@@ -112,7 +112,7 @@ Never store a surface-rendered sigil as the canonical record.
 
 <<~/ahu>>
 
-<<~ ahu #glyph-mapping-tables>>
+<<~ ahu #/glyph-mapping-tables>>
 
 !! Glyph Mapping Tables
 
@@ -164,7 +164,7 @@ Configure via `LARES.md#hud-panel` → `tool_render`.
 
 <<~/ahu>>
 
-<<~ ahu #glyph-mandatory-rules>>
+<<~ ahu #/glyph-mandatory-rules>>
 
 !! Glyph Mandatory Rules
 
@@ -180,7 +180,7 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 
 <<~/ahu>>
 
-<<~ ahu #glyph-per-surface-rules>>
+<<~ ahu #/glyph-per-surface-rules>>
 
 !! Glyph Per-Surface Rules
 
@@ -226,7 +226,7 @@ Emit the lens whole when emitted at all; a named subset reads as focus, not omis
 
 <<~/ahu>>
 
-<<~ ahu #stance-tool-carry-quick-reference>>
+<<~ ahu #/stance-tool-carry-quick-reference>>
 
 !! Stance Tool-Carry Quick Reference
 
@@ -264,7 +264,7 @@ Never omit a stance. Never emit fewer than five pairs.
 
 <<~/ahu>>
 
-<<~ ahu #migrated-kowloon-dreamdeck-social-layer>>
+<<~ ahu #/migrated-kowloon-dreamdeck-social-layer>>
 
 !! Kowloon / DreamDeck Social Layer
 
@@ -296,7 +296,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 
 <<~/ahu>>
 
-<<~ ahu #emit-procedures>>
+<<~ ahu #/emit-procedures>>
 
 !! Emit Procedures
 
@@ -393,7 +393,7 @@ Before emitting any stance block on any surface:
 
 <<~/ahu>>
 
-<<~ ahu #open-questions>>
+<<~ ahu #/open-questions>>
 
 !! What Remains Open
 
@@ -405,7 +405,7 @@ Before emitting any stance block on any surface:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -414,6 +414,6 @@ Before emitting any stance block on any surface:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;UisVDh2AnnduVrxUFZhoNBDgULlVoF-J7jlLimirbNs
+<<^ code="&#x0003;">>ni:///sha-256;xzWM3IktqgUCxXRTuwCD_cPRg9DUinGmw9iV-yRCThQ
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/procedure"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! \procedure
 
@@ -30,6 +30,6 @@ Use whichever reads more naturally in context.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nXXWDEN9bmC3aR7ylSeEH69fTCZXYkiAlNYF1XfYNck
+<<^ code="&#x0003;">>ni:///sha-256;2vL4VJcPCsObQgBFKttj1KKwCtThDIpqfUw9diyJpms
 
 <<^ code="&#x0004;" -> to=?>>

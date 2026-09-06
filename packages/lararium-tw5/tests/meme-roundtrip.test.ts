@@ -54,7 +54,7 @@ describe("parse∘render — the recompose inverse on the boot meme", () => {
   test("render produces a whole carrier (no kahea markers survive)", () => {
     expect(rendered).toBeTruthy();
     expect(rendered!).not.toContain("<<~ kahea ahu ");
-    expect(rendered!).toContain("<<~ ahu #entry>>");
+    expect(rendered!).toContain("<<~ ahu #/entry>>");
     expect(rendered!).toContain("<<~/ahu>>");
   });
 

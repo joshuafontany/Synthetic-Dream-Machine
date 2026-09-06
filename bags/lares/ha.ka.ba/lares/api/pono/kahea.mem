@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kahea"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kahea
 
@@ -32,7 +32,7 @@ Sugar for `<<~ pranala from=? -> to=URI family=transclusion propagation=push-for
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the sigil form — URI (contains `/`, `lar:`, or `#`) or name-call (bare word with optional args)
 ⏿ orient: URI form → transclusion edge, push-forward; name-call → render-only invocation, no edge
@@ -42,7 +42,7 @@ Sugar for `<<~ pranala from=? -> to=URI family=transclusion propagation=push-for
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -64,7 +64,7 @@ The two forms are distinguished at parse time by URI shape:
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -98,7 +98,7 @@ Full pranala expansion (URI form):
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -136,7 +136,7 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -149,6 +149,6 @@ canonical-roles = []   # held — transclusion role vocab deferred with the pono
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Gx5zlB3YkF0oNr9bfwr00H1564OYrug4g9oMSbIK_ho
+<<^ code="&#x0003;">>ni:///sha-256;pWLGMNMvCs4F1sOR-Jrdre3mqTOWo-5BhGKC86xb7wI
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/neo-thracia/session-zero"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Neo-Thracia ~ Session Zero
 
@@ -26,7 +26,7 @@ untouched; md table separator rows dropped.//
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Session Zero — Caverns of Thracia Operation Dossier
 *Addressed from ''The Lindwyrm'' (New Delos Nexus) to ''Lady Aki'' (Grandmother Spider’s folk, Broken Isles) and crew*  
@@ -180,6 +180,6 @@ Bring three agreements to the first session:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;S8WNxOY0v5eljzuysOC3wOnGswWM_4umc6IeabIUfAI
+<<^ code="&#x0003;">>ni:///sha-256;1OKtVPdL90RrtrkuDSloqHtVK9bbEPvLNZw2hdKS3dA
 
 <<^ code="&#x0004;" -> to=?>>

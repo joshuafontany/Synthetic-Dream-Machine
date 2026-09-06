@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/npcs/melantha-vex"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Captain Melantha Vex
 
@@ -26,7 +26,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/npcs/melantha-vex"
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Captain Melantha Vex
 
@@ -293,6 +293,6 @@ Use Melantha when the table needs:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mX7gX53g0fcI6TO0W_sTGn36IU_vOsz2IK64AYK-KdY
+<<^ code="&#x0003;">>ni:///sha-256;10sfrifCaW5C4k4Nm7wTPGuBrDFjMbDmKHIYMGZQWJY
 
 <<^ code="&#x0004;" -> to=?>>

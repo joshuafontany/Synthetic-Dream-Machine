@@ -1,6 +1,6 @@
 
 
-<a id="abstract"></a>
+<a id="/abstract"></a>
 
 # TiddlyWiki 5 Wikitext — the base syntax
 
@@ -18,7 +18,7 @@ mechanism** and the **total-parse law** — it does not, and cannot, enumerate e
 run, any more than [RFC7763] could enumerate every Markdown. No wikitext exists that fails to
 parse.
 
-<a id="status"></a>
+<a id="/status"></a>
 
 ## Status
 
@@ -32,7 +32,7 @@ The finished draft goes to the TiddlyWiki core maintainers for review before any
 it — nothing here binds anyone until it has. The document travels upstream as a rendered projection of
 this record; the record's own envelope belongs to its storage format, not to the description.
 
-<a id="the-load-bearing-property"></a>
+<a id="/the-load-bearing-property"></a>
 
 ## The load-bearing property — the total parse
 
@@ -58,7 +58,7 @@ without loss, and renders the base constructs it shares. The `+tiddlywiki` suffi
 place — generic processing of the underlying representation — on parts 1 and 3 together with part 2's
 harmlessness.
 
-<a id="terminology"></a>
+<a id="/terminology"></a>
 
 ## Terminology
 
@@ -77,7 +77,7 @@ harmlessness.
 | **transclusion** | inclusion of one tiddler's content in another's rendering, `{{title}}` and its variants. |
 | **filter** | the query sub-language (`[tag[x]sort[title]]`) that selects tiddlers; opaque to this grammar, defined by its own. |
 
-<a id="lexical-structure"></a>
+<a id="/lexical-structure"></a>
 
 ## Lexical Structure
 
@@ -92,7 +92,7 @@ serves. The `\rules` pragma narrows the active set for the remainder of a parse,
 inventory below the dialect's true surface: a conforming description enumerates rules, never a fixed
 grammar, because the grammar of any given parse follows from the rules active in it.
 
-<a id="extension-mechanism"></a>
+<a id="/extension-mechanism"></a>
 
 ## The Extension Mechanism — the rule-object contract
 
@@ -134,7 +134,7 @@ contract, each visibly marked as an extension relative to the default registry �
 against CommonMark [CMARK]. One such external dialect, memetic-wikitext, documents itself in a sibling
 specification [MWT] under this contract.
 
-<a id="rule-inventory"></a>
+<a id="/rule-inventory"></a>
 
 ## Rule Inventory — the default registry
 
@@ -206,7 +206,7 @@ and the configuration tiddlers filter by these strings.
 | `html` · `conditional` | the dual-class rules, at inline position. |
 | `mvvdisplayinline` | a macro/variable/value display form. |
 
-<a id="degradation"></a>
+<a id="/degradation"></a>
 
 ## The Degradation Rule
 
@@ -227,7 +227,7 @@ survives at rest as written.
 stand independent; a processor that rewrites source to match what it rendered destroys content the
 next processor may understand.
 
-<a id="conformance"></a>
+<a id="/conformance"></a>
 
 ## Conformance
 
@@ -252,7 +252,7 @@ Normative force in this document attaches to **parsing** — input to parse tree
 enters the description only where load-bearing (the unbound-call fallback, the security gates) and otherwise left to
 implementations.
 
-<a id="test-suite"></a>
+<a id="/test-suite"></a>
 
 ## The Executable Conformance Suite
 
@@ -263,7 +263,7 @@ expected parse tree, every node carrying its producing rule and source span) and
 fixtures under `editions/test/data/`, runnable as `node tiddlywiki.js editions/test`. A parser
 claiming core conformance SHOULD pass that suite for the constructs it implements.
 
-<a id="security"></a>
+<a id="/security"></a>
 
 ## Security Considerations
 
@@ -285,7 +285,7 @@ not to the wikitext layer. An embedding application MUST NOT treat the wikitext 
 sanitizer; the gates above bound script execution through markup, not every channel a hostile
 document might use.
 
-<a id="media-type"></a>
+<a id="/media-type"></a>
 
 ## Media Type
 
@@ -303,7 +303,7 @@ model: a hint naming which rule-set family the author intended, obliging no rece
 register additional parse rules (memetic-wikitext [MWT] among them) would name themselves there
 rather than minting sibling types.
 
-<a id="references"></a>
+<a id="/references"></a>
 
 ## References
 
@@ -325,7 +325,7 @@ rather than minting sibling types.
 - **[TW5]** — the implementation: TiddlyWiki 5, `https://github.com/TiddlyWiki/TiddlyWiki5`,
   described here at `5.5.0-prerelease`, commit `69b98fc94`.
 
-<a id="edges"></a>
+<a id="/edges"></a>
 
 - `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext`
 - `lar:///ha.ka.ba/lares/api/pono/memetic-wikitext-framing`

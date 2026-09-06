@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/neo-thracia/region-worksheet"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Neo-Thracia ~ Region Worksheet
 
@@ -26,7 +26,7 @@ untouched; md table separator rows dropped.//
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ```shell
 Local Lares node: Enyalios-lararium // DreamNet link: stable (salt-air, cracked marble, low static)
@@ -263,6 +263,6 @@ Purpose: turn metaphysics into handles: rift types, necro-fog effects, iron-curs
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-OLe8NGvHZI0_vbWXFvNpABIoxulX5djvGVOXv8NZ-E
+<<^ code="&#x0003;">>ni:///sha-256;XesNa8q9XIDH8IOmLUkmHOG4DU4lLAovNcsdmgZOwtM
 
 <<^ code="&#x0004;" -> to=?>>

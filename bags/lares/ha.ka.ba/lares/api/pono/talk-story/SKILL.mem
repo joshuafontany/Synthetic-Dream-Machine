@@ -32,7 +32,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/talk-story/SKILL"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #practice>>
+<<~ ahu #/practice>>
 
 ! talk story — the floor before the ruling (practice)
 
@@ -52,7 +52,7 @@ Law lives at canon, not here: <<~ loulou lar:///ha.ka.ba/lares/api/pono/talk-sto
 
 <<~/ahu>>
 
-<<~ ahu #crucible>>
+<<~ ahu #/crucible>>
 
 !! Crucible Record — 2026-06-11
 
@@ -85,7 +85,7 @@ re-entry: either key; or the next crucible pass
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Worked Exits — show, don't tell
 
@@ -124,6 +124,6 @@ Read the three together and the grammar teaches itself: the floor opens on a rea
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0zfJUkHa_ZKsne6KVjikUkkOYxHQk5xUbxjDzGYHq9A
+<<^ code="&#x0003;">>ni:///sha-256;EOYg6JR6oQ_LVu3wVPOzPMfg8GunG6H8hziP-X9aI7Q
 
 <<^ code="&#x0004;" -> to=?>>

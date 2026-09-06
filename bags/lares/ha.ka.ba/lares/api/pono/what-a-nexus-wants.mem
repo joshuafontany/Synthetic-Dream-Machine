@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/what-a-nexus-wants"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! What a Nexus Wants Members FOR ~ open, and it gates the rest
 
@@ -32,7 +32,7 @@ So the operative variable reads: ''does the collective want something the incumb
 
 <<~/ahu>>
 
-<<~ ahu #why-it-gates>>
+<<~ ahu #/why-it-gates>>
 
 !! Why it gates
 
@@ -42,7 +42,7 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! To pour here later
 
@@ -52,7 +52,7 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -60,6 +60,6 @@ The conversion act (`the-thing-event`) runs on an assembly standing as the third
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;hLWETf-bKkIeJ49xZgw9onftSlADiMpBABqpMCbAc0A
+<<^ code="&#x0003;">>ni:///sha-256;XQWS-dlkabc2z1_dl3q7GipjWaNXB1pXvG-2i4rPQlA
 
 <<^ code="&#x0004;" -> to=?>>

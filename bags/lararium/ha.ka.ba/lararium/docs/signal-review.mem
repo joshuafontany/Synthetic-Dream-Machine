@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal-review"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal Branch Review Memo
 
@@ -28,7 +28,7 @@ This memo reviews the current signal branch, marks pressure points, and proposes
 
 <<~/ahu>>
 
-<<~ ahu #scope>>
+<<~ ahu #/scope>>
 
 !! Scope
 
@@ -54,7 +54,7 @@ This memo does not attempt chronometer closure.
 
 <<~/ahu>>
 
-<<~ ahu #observe>>
+<<~ ahu #/observe>>
 
 !! ✶ Observe
 
@@ -86,7 +86,7 @@ This memo does not attempt chronometer closure.
 
 <<~/ahu>>
 
-<<~ ahu #orient>>
+<<~ ahu #/orient>>
 
 !! ⏿ Orient
 
@@ -128,7 +128,7 @@ The branch needs a boundary pass, a settlement pass, and a reduction pass focuse
 
 <<~/ahu>>
 
-<<~ ahu #decide>>
+<<~ ahu #/decide>>
 
 !! ◇ Decide
 
@@ -166,7 +166,7 @@ Use the following labels during the review:
 
 <<~/ahu>>
 
-<<~ ahu #act>>
+<<~ ahu #/act>>
 
 !! ▶ Act
 
@@ -206,7 +206,7 @@ Use the following labels during the review:
 
 <<~/ahu>>
 
-<<~ ahu #assess>>
+<<~ ahu #/assess>>
 
 !! ↺ Assess
 
@@ -238,7 +238,7 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -251,6 +251,6 @@ That order should reduce churn and keep the branch from freezing unresolved FFZ 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;s3zFq5oiKiPyYaf7eZ-3KgsZ0WixT5mGq3sg7BCB-yE
+<<^ code="&#x0003;">>ni:///sha-256;Obu1WiIolXJvBLnUWevhgs3TtWzyBbp4A9nleCfVUg4
 
 <<^ code="&#x0004;" -> to=?>>

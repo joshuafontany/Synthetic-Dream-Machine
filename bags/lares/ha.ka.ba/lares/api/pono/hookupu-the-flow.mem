@@ -20,7 +20,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/hookupu-the-flow"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! `hoʻokupu` ~ the flow that cannot become an estate
 
@@ -34,7 +34,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/hookupu-the-flow"
 
 <<~/ahu>>
 
-<<~ ahu #the-refutation>>
+<<~ ahu #/the-refutation>>
 
 !! The giver-bound hypothesis — REFUTED, three times
 
@@ -52,7 +52,7 @@ And cumulative advantage runs on ''prestige, not merit'', proven under randomisa
 
 <<~/ahu>>
 
-<<~ ahu #the-glyph>>
+<<~ ahu #/the-glyph>>
 
 !! The Glyph ~ the form, and where it sits
 
@@ -97,7 +97,7 @@ Not coincidence: the Handle already reads as ''the only one that ever federates'
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! Open
 
@@ -108,7 +108,7 @@ Not coincidence: the Handle already reads as ''the only one that ever federates'
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -116,6 +116,6 @@ Not coincidence: the Handle already reads as ''the only one that ever federates'
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;w12rNH6K9C1yMFSbz-BQKQCxjpHHWTo_NRgnURQ4FjA
+<<^ code="&#x0003;">>ni:///sha-256;b8dk8A0R7q5PLb15dxgS7weX6mjGqmK39RLHYywdpyA
 
 <<^ code="&#x0004;" -> to=?>>

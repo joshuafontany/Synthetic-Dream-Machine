@@ -18,7 +18,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: the closed sprint docs mostly name exits and pointers to design contracts.
 ⏿ orient: canonical children now carry the durable design content; this ledger carries completion memory.
@@ -28,7 +28,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/sprint-ledger"
 
 <<~/ahu>>
 
-<<~ ahu #closed-sprints>>
+<<~ ahu #/closed-sprints>>
 
 !! Closed Sprint Outcomes
 
@@ -42,7 +42,7 @@ Sprint IDs mark ordered work slices, not wall-clock promises.
 
 <<~/ahu>>
 
-<<~ ahu #consumption-map>>
+<<~ ahu #/consumption-map>>
 
 !! Consumed Source Map
 
@@ -72,7 +72,7 @@ Active or not-yet-consumed sources: `SPRINT-03_REMOTE_SURFACES.md`, `SPRINT-04_H
 
 <<~/ahu>>
 
-<<~ ahu #done-story-index>>
+<<~ ahu #/done-story-index>>
 
 !! Done Story Index
 
@@ -91,7 +91,7 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~/ahu>>
 
-<<~ ahu #residue>>
+<<~ ahu #/residue>>
 
 !! Residue
 
@@ -101,7 +101,7 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -111,6 +111,6 @@ Individual story stubs may remain as issue-style trace records; they no longer n
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;zUuqNlUHHDW373rsj2cj9V4AeEPQ9PCvz2Kv3JPdMH8
+<<^ code="&#x0003;">>ni:///sha-256;f1gemylj4ERsSl-96yStObvBkeYWGUzyJgMMS1k9LF0
 
 <<^ code="&#x0004;" -> to=?>>

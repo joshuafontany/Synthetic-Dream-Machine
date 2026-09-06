@@ -21,7 +21,7 @@ uri-path      = "ha.ka.ba/lares/api/pono/render-pipeline"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Render Pipeline Law
 
@@ -36,7 +36,7 @@ Both engines consume the same `text/memetic-wikitext` surface. The isomorphic pa
 
 <<~/ahu>>
 
-<<~ ahu #render-axes>>
+<<~ ahu #/render-axes>>
 
 !! Render Axes — Stage, Surface, and Mode held apart
 
@@ -67,7 +67,7 @@ Orthogonal to surface: `""` (live), `carrier` (disk export), `projection` (froze
 
 <<~/ahu>>
 
-<<~ ahu #causal-island>>
+<<~ ahu #/causal-island>>
 
 !! Causal Island Boundary
 
@@ -90,7 +90,7 @@ Every render pass MUST declare its mode before it crosses the boundary.
 
 <<~/ahu>>
 
-<<~ ahu #three-render-modes>>
+<<~ ahu #/three-render-modes>>
 
 !! Three Render Modes
 
@@ -121,7 +121,7 @@ trigger     = "wiki.renderTiddler('text/plain', uri, { variables: { 'lar-render-
 
 <<~/ahu>>
 
-<<~ ahu #template-cascade>>
+<<~ ahu #/template-cascade>>
 
 !! Template Cascade
 
@@ -153,7 +153,7 @@ A target adapter may replace the default template by tagging a custom tiddler wi
 
 <<~/ahu>>
 
-<<~ ahu #child-slot-model>>
+<<~ ahu #/child-slot-model>>
 
 !! Child-Slot Model
 
@@ -165,8 +165,8 @@ A target adapter may replace the default template by tagging a custom tiddler wi
 
 ''Compound forms:''
 ```
-<<~ ahu #slot>>            → bare child-slot; ~ahu widget
-<<~ kahea ahu #slot>>      → live transclusion of child slot; ~kahea~ahu procedure
+<<~ ahu #/slot>>            → bare child-slot; ~ahu widget
+<<~ kahea ahu #/slot>>      → live transclusion of child slot; ~kahea~ahu procedure
 <<~ aka ahu #slot>>        → frozen/projection read of child slot; ~aka~ahu procedure
 ```
 
@@ -174,7 +174,7 @@ The render posture difference (live vs. frozen) lives in the template cascade se
 
 <<~/ahu>>
 
-<<~ ahu #suppressed-worksites>>
+<<~ ahu #/suppressed-worksites>>
 
 !! Suppressed Worksites — Slots That Do Not Project
 
@@ -189,7 +189,7 @@ suppressed-worksites = ["meta", "meme-body-open", "body-close", "edges"]
 
 <<~/ahu>>
 
-<<~ ahu #meme-ast-path>>
+<<~ ahu #/meme-ast-path>>
 
 !! Non-TW5 Path — Meme AST
 
@@ -216,7 +216,7 @@ This AST represents the same surface that TW5 renders, but as a traversable type
 
 <<~/ahu>>
 
-<<~ ahu #kapu-render-open>>
+<<~ ahu #/kapu-render-open>>
 
 !! Kapu Render Posture — Open Question
 
@@ -226,7 +226,7 @@ Open question: should `kapu` gain render presence in HTML mode — a visible bou
 
 <<~/ahu>>
 
-<<~ ahu #hooko-boundary>>
+<<~ ahu #/hooko-boundary>>
 
 !! Hoʻoko — Render Mutation Boundary
 
@@ -245,7 +245,7 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -256,6 +256,6 @@ Trace continuity across the causal island boundary:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LSeqR7sEMHy83qz4f3Rdp00g6cC6eTqlrzqAWhJFOmg
+<<^ code="&#x0003;">>ni:///sha-256;BfGf8EAnPk53HqALcxqf2T8hwiB2yGrNP5VuGuQsQ5g
 
 <<^ code="&#x0004;" -> to=?>>

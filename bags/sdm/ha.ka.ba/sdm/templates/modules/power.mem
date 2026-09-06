@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/sdm/templates/modules/power"
 
 ! Template — Power Module
 
-<<~ ahu #intent>>
+<<~ ahu #/intent>>
 
 !! Intent
 
@@ -30,7 +30,7 @@ The canonical SDM Power card (P/R/T/D/Ox + tags) ''is'' the `#default` block. Th
 
 <<~/ahu>>
 
-<<~ ahu #required-shape>>
+<<~ ahu #/required-shape>>
 
 !! Required Shape
 
@@ -50,7 +50,7 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu>>
 
-<<~ ahu #has-law>>
+<<~ ahu #/has-law>>
 
 !! `#has` Law
 
@@ -65,7 +65,7 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu>>
 
-<<~ ahu #writing-law>>
+<<~ ahu #/writing-law>>
 
 !! Writing Law
 
@@ -78,7 +78,7 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -87,6 +87,6 @@ tags = ["@sdm/tags/function/ecm-scan", "@sdm/tags/domain/divination", "@sdm/tags
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;zvA0M1oBAdSMmiz-tNpTPmJQx90LsSTVSy3XHQpBmGM
+<<^ code="&#x0003;">>ni:///sha-256;vXCUJPMe7pUiw_AdEGjkQhFIm0FMyoAwn8e7PUYYw2Y
 
 <<^ code="&#x0004;" -> to=?>>

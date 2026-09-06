@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/1-facebook-people-you-may-kn
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 1. FACEBOOK "People You May Know" — the canonical veil leak
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 27,484 characters
 
@@ -182,12 +182,12 @@ Two strong measured cases, both about **the unguessable handle turning out to be
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;avJc_3jB2EdflsufA2BVIFmfIxB1Z4ts2q_lXt3A8LE
+<<^ code="&#x0003;">>ni:///sha-256;K1tDFPrY3AXkwz_sWncDf2ChinYJM1TK_gL20oqkrvo
 
 <<^ code="&#x0004;" -> to=?>>

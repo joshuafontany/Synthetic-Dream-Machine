@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/projections/items/ftls-card/porters-pebble"
 
 ! Porter's Pebble — FTLS Card
 
-<<~ ahu #card>>
+<<~ ahu #/card>>
 
 !! Porter's Pebble
 //Stuckforce Relic, the Patient Mule//
@@ -30,7 +30,7 @@ A warm, palm-sized pebble of Long Ago make. Press it and it unfolds the ''Floati
 
 <<~/ahu>>
 
-<<~ ahu #holds>>
+<<~ ahu #/holds>>
 
 !! Holds
 
@@ -42,7 +42,7 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~/ahu>>
 
-<<~ ahu #components>>
+<<~ ahu #/components>>
 
 !! Components
 
@@ -50,7 +50,7 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -60,6 +60,6 @@ The carried Floating Disc runs at its own card's stats (P:2 · R:30m · T:point 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;wRanyyPj4CYFp9PKnTFmZgOo6NfksKyqQe7KQ-1fVNc
+<<^ code="&#x0003;">>ni:///sha-256;hcKPaNKNgKm52KXTSZ1SYfW6iZ-1JvheSPfZseVHdN4
 
 <<^ code="&#x0004;" -> to=?>>

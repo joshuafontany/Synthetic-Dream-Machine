@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/what-actually-happened-dated
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! WHAT ACTUALLY HAPPENED (dated, sourced)
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 25,487 characters
 
@@ -177,12 +177,12 @@ https://www.iana.org/dnssec/procedures/ksk-operator/KSK_Key_Management_Procedure
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;urx8NF3VslxJKFZfGoVxwDi0RJDMhEJdq8UW9riILzM
+<<^ code="&#x0003;">>ni:///sha-256;TZ747jlS3mZIsxzYVr4dTMhT-2gShbphCjJY-VmMyuI
 
 <<^ code="&#x0004;" -> to=?>>

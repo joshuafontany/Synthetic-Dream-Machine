@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/ecm-scan"
 
 ! ECM Scan
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ Sensing and analyzing active Powers, activations, and noospheric signatures — 
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Reveals ''what runs on the noosphere'': strength, type, and owner-trace of activ
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Feeds `function/magic-decode` and `function/archive`. The `ecm` counter-set — 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;QS_oZHc6L6e4P2O_swOaPZkCwPfeOMcNtTUjeyRkm-Y
+<<^ code="&#x0003;">>ni:///sha-256;opPs_NcfdjmmOV0lquCVQJREXAX_dn0GcKHqS8B1CCA
 
 <<^ code="&#x0004;" -> to=?>>

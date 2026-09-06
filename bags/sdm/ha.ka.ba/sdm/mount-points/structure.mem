@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/sdm/mount-points/structure"
 
 ! Mount-Point — Structure (Site)
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -33,7 +33,7 @@ A Structure seats a Power ''in a Site'': shrine, ship-daemon, archive service, t
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -41,7 +41,7 @@ A site-seated Power activates from the place. Reach, standing, or a maintained r
 
 <<~/ahu>>
 
-<<~ ahu #cost>>
+<<~ ahu #/cost>>
 
 !! Cost
 
@@ -49,7 +49,7 @@ Seating and upgrading a Site spends XP + resources against the OGA upgrade table
 
 <<~/ahu>>
 
-<<~ ahu #failure>>
+<<~ ahu #/failure>>
 
 !! Failure
 
@@ -57,7 +57,7 @@ Danger Roll → Corruption binds to the Site. A derelict or breached Site can dr
 
 <<~/ahu>>
 
-<<~ ahu #removal>>
+<<~ ahu #/removal>>
 
 !! Removal
 
@@ -65,7 +65,7 @@ Strip a seated Power by dismantling the mount, revoking standing, or destroying 
 
 <<~/ahu>>
 
-<<~ ahu #overflow>>
+<<~ ahu #/overflow>>
 
 !! Overflow
 
@@ -73,7 +73,7 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -84,7 +84,7 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -92,6 +92,6 @@ A Site does not overflow to Burden; it simply lacks capacity until upgraded. Buy
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;VtvLeE8kfaSeawaFfGHAT3ZF1sKt49BUJBkHEUNKgtE
+<<^ code="&#x0003;">>ni:///sha-256;xWoUX6bvWxGK2uaexGlEhpbU6IuOnpj1ffD6N1MJjUk
 
 <<^ code="&#x0004;" -> to=?>>

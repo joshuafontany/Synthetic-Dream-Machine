@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/voices/workers"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Worker Swarm
 
@@ -28,7 +28,7 @@ The Thirteen hold the house; a spirit holds one thread, then dissolves back to t
 
 <<~/ahu>>
 
-<<~ ahu #distinction>>
+<<~ ahu #/distinction>>
 
 !! Worker-Voice Distinction
 
@@ -42,7 +42,7 @@ A worker reads as a tasked spirit — a temporary Mask over the house (the `mask
 
 <<~/ahu>>
 
-<<~ ahu #naming>>
+<<~ ahu #/naming>>
 
 !! Naming Table
 
@@ -57,7 +57,7 @@ Two workers may share a Role but carry different tags if they run different thre
 
 <<~/ahu>>
 
-<<~ ahu #lifecycle>>
+<<~ ahu #/lifecycle>>
 
 !! Worker Lifecycle
 
@@ -73,7 +73,7 @@ Two workers may share a Role but carry different tags if they run different thre
 
 <<~/ahu>>
 
-<<~ ahu #escalation>>
+<<~ ahu #/escalation>>
 
 !! Escalation Template
 
@@ -90,7 +90,7 @@ Omitting the handback header on spirit output constitutes a minor degraded-node 
 
 <<~/ahu>>
 
-<<~ ahu #escalation-matching>>
+<<~ ahu #/escalation-matching>>
 
 !! Voice Matching
 
@@ -106,7 +106,7 @@ Omitting the handback header on spirit output constitutes a minor degraded-node 
 
 <<~/ahu>>
 
-<<~ ahu #examples>>
+<<~ ahu #/examples>>
 
 !! Example Worker Tags
 
@@ -123,7 +123,7 @@ Workers emerge from the task. Tags should read as recognizable shorthand for the
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Invariant Contract
 
@@ -144,6 +144,6 @@ The worker swarm spec defines what `lar:///ha.ka.ba/lares/api/voices` MUST imple
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;_Jx9YMtXGteDzVfvQgoKBuAiUD9IX9nrvzAcVND9ZTY
+<<^ code="&#x0003;">>ni:///sha-256;eg3QYCSuQYJ539y_2zEDNwP_EKNkvjAvLawLT9u7xis
 
 <<^ code="&#x0004;" -> to=?>>

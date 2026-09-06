@@ -29,7 +29,7 @@ The vessel stands on ''two orthogonal planes, soft-coupled at the `@oracle`'' �
 
 The genesis is ''not'' an Automerge binary carrying bytes. It is a ''thin `@oracle` pointer-doc'' (~4 KB, metadata + pointers, NO blob bytes), a ''CID manifest'' (`island.manifest.json`), and the ''CAS blobs'' (`genesis/cas/<cid>`). `buildGenesisDoc()` constructs the deterministic doc + the manifest + the cas entries; the caller writes each to its sink.
 
-<<~ ahu #two-planes>>
+<<~ ahu #/two-planes>>
 
 !! The two planes
 
@@ -41,7 +41,7 @@ The genesis is ''not'' an Automerge binary carrying bytes. It is a ''thin `@orac
 
 <<~/ahu>>
 
-<<~ ahu #the-oracle-pointer>>
+<<~ ahu #/the-oracle-pointer>>
 
 !! The `@oracle` ~ the public crossroads bulletin board
 
@@ -55,7 +55,7 @@ The `@oracle` is a ''served, signed POINTER doc'' — the public crossroads wher
 
 <<~/ahu>>
 
-<<~ ahu #seed-without-ruling>>
+<<~ ahu #/seed-without-ruling>>
 
 !! Seed without ruling ~ the home node names, never governs
 
@@ -75,7 +75,7 @@ architecture correct + stack-aligned; UNVERIFIED + load-bearing (code-scouts for
 
 <<~/ahu>>
 
-<<~ ahu #what-genesis-seeds>>
+<<~ ahu #/what-genesis-seeds>>
 
 !! What genesis seeds (the `@oracle` system plane)
 
@@ -94,7 +94,7 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 <<~/ahu>>
 
-<<~ ahu #types>>
+<<~ ahu #/types>>
 
 !! Types
 
@@ -107,7 +107,7 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 <<~/ahu>>
 
-<<~ ahu #invariants>>
+<<~ ahu #/invariants>>
 
 !! Invariants
 
@@ -133,7 +133,7 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 <<~/ahu>>
 
-<<~ ahu #layer-split>>
+<<~ ahu #/layer-split>>
 
 !! Layer Split (where genesis code lives)
 
@@ -145,7 +145,7 @@ The genesis doc seeds the ''`@oracle` runtime system island'' — the protocol s
 
 <<~/ahu>>
 
-<<~ ahu #the-shared-model>>
+<<~ ahu #/the-shared-model>>
 
 !! The two ratchets name the HEARTH, never the Nexus
 
@@ -172,7 +172,7 @@ Worse for a shelter brief: an implementation hash ''mandates a monoculture'', an
 
 <<~/ahu>>
 
-<<~ ahu #grounds>>
+<<~ ahu #/grounds>>
 
 !! Grounds (the realized flow)
 
@@ -185,7 +185,7 @@ Worse for a shelter brief: an implementation hash ''mandates a monoculture'', an
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/base-doc>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/lar-uris>>
@@ -198,6 +198,6 @@ Worse for a shelter brief: an implementation hash ''mandates a monoculture'', an
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nrDMzN8kvtRulVnsxF3z7f7XT75Rn4BaBddJmTkmCAQ
+<<^ code="&#x0003;">>ni:///sha-256;HggIa5RktgRkYIU6sFhdX_opWEK41YnoUXaKITffXPk
 
 <<^ code="&#x0004;" -> to=?>>

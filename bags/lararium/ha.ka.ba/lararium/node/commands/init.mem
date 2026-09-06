@@ -15,12 +15,12 @@ uri-path    = "ha.ka.ba/lararium/node/commands/init"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 TODO: describe the load-bearing surface this file owns.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mnkvpleYD6-fbEnyc9LadOzEuRapTmy15THq-7EUYoY
+<<^ code="&#x0003;">>ni:///sha-256;ICvTNcyMIER_32YyCF4YWgNNCHx2sLeaEdjUKQ9y7Ns
 
 <<^ code="&#x0004;" -> to=?>>

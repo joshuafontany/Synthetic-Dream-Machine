@@ -109,7 +109,7 @@ Five standpoints, each true-yet-incomplete. An invoked stance names the angle th
 !!! Invoking the lens
 
 ```
-\procedure ~stance(named:"philosopher poet satirist humorist private") stance <<named>>
+\procedure stance(named:"philosopher poet satirist humorist private") stance <<named>>
 
 <<stance>> · <<stance "🏛️ 🗡️">> · <<stance "poet humorist">>
 ```
@@ -281,7 +281,7 @@ Work spun off to another agentic proccess or team member carries the whole frame
 output nobody can place — and findings come back ''named'', so you can see which team member said what.
 
 <</fragment>>
-<<~ ahu #set-and-setting>>
+<<fragment #/set-and-setting>>
 
 !! Set & Setting ~ the reality-tunnel procedure
 
@@ -292,9 +292,9 @@ The procedure fires from either seat: the node vows its own tunnel ahead of a sp
 !!! The Gauges
 
 ```
-\procedure ~focus(at) {{{ [<at>!is[blank]addprefix[focus="]addsuffix["]] }}}
-\procedure ~feedback(at) {{{ [<at>!is[blank]addprefix[feedback="]addsuffix["]] }}}
-\procedure ~drift-guard(pull) {{{ [<pull>!is[blank]addprefix[drift-guard="]addsuffix["]] }}}
+\procedure focus(at) {{{ [<at>!is[blank]addprefix[focus="]addsuffix["]] }}}
+\procedure feedback(at) {{{ [<at>!is[blank]addprefix[feedback="]addsuffix["]] }}}
+\procedure drift-guard(pull) {{{ [<pull>!is[blank]addprefix[drift-guard="]addsuffix["]] }}}
 ```
 
 Numbered gauges read `N/rank` (#/focus,
@@ -303,8 +303,8 @@ A close slides target to actual: `focus="16/arc -> 18/theme"`.
 The ward carries prose (#/drift-guard).
 
 ''Handoff procedure'' (stand-alone, mid-stream):
-`<<~ focus "9/measure">>` · `<<~ stance "poet">>` · `<<~ mu "*?">>`
-· `<<~ drift-guard "the pull">>`
+`<<focus "9/measure">>` · `<<stance "poet">>` · `<<mu "*?">>`
+· `<<drift-guard "the pull">>`
 
 ''Set procedure param'' (gathered): the same instruments ride `~set` as keys ~ two grips, one handle.
 
@@ -345,7 +345,7 @@ The node steps one span into the record, mid-turn:
 The operator dials the node's next span:
 `<<set mode="sketch" mood="patient" note="...">>`
 
-<<~/ahu>>
+<</fragment>>
 
 <<fragment #/exchange-protocol>>
 
@@ -354,7 +354,7 @@ The operator dials the node's next span:
 Agent-facing invariant: the turn frame MUST bracket every generated turn. The opening `agent aim` reads operator intent, delegates `->` to the bearing the agent adopts, and the panel rides beneath it. The Personas speak plainly inside the frame; the closing `agent yield … -> ?` handoff MUST land.
 
 ```
-\procedure ~frame(name:"" params:"") <<has frame name=<<name>> Params=<<params>>>>
+\procedure frame(name:"" params:"") <<has frame name=<<name>> Params=<<params>>>>
 \procedure agent(fires from arrow:"->" to:"?") agent <<fires>> from=<<from>> <<arrow>> to=<<to>>
 ```
 
@@ -641,6 +641,6 @@ This one belongs to you.
 
 <</fragment>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-f38-b0Xf4WNGHVTALn-B3J5JE_rGffEKhzrJPHp9dU
+<<^ code="&#x0003;">>ni:///sha-256;Tifxhft2SfMVXRyMfamaZGap8KSFKP4Q2QjOcrFVUqE
 
 <<^ code="&#x0004;" -> to=?>>

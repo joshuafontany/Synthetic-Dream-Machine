@@ -16,7 +16,7 @@ uri-path  = "ha.ka.ba/lararium/tw5/sigil-english-aliases"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! English Alias Sigil Vocabulary
 
@@ -26,7 +26,7 @@ This document records the bidirectional alias map.
 
 <<~/ahu>>
 
-<<~ ahu #alias-map>>
+<<~ ahu #/alias-map>>
 
 !! Alias Map
 
@@ -46,7 +46,7 @@ This document records the bidirectional alias map.
 
 <<~/ahu>>
 
-<<~ ahu #governance>>
+<<~ ahu #/governance>>
 
 !! Governance
 
@@ -63,7 +63,7 @@ the canonical dispatch through the Hawaiian implementation.
 
 <<~/ahu>>
 
-<<~ ahu #source-shelf>>
+<<~ ahu #/source-shelf>>
 
 !! Source Shelf
 
@@ -74,6 +74,6 @@ the canonical dispatch through the Hawaiian implementation.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;D-ozW4ZfGQJ8UeiBolw3SQ3EItJQZb-BFrI5aMo5pDk
+<<^ code="&#x0003;">>ni:///sha-256;G3QM8bCfedbWE2SechZ0b52TlFd48dVAU6KL5OzqzGw
 
 <<^ code="&#x0004;" -> to=?>>

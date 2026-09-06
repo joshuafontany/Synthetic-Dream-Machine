@@ -20,7 +20,7 @@ uri-path  = "ha.ka.ba/sdm/templates/components/tag"
 
 ! Template — Component
 
-<<~ ahu #intent>>
+<<~ ahu #/intent>>
 
 !! Intent
 
@@ -28,7 +28,7 @@ A component meme gives one facet — a domain, function, hook, or posture — an
 
 <<~/ahu>>
 
-<<~ ahu #required-shape>>
+<<~ ahu #/required-shape>>
 
 !! Required Shape
 
@@ -61,7 +61,7 @@ Modules and cards tag with the ''short'' form. `<<tag-pill>>` reads the pointer'
 
 <<~/ahu>>
 
-<<~ ahu #promote-demote-law>>
+<<~ ahu #/promote-demote-law>>
 
 !! Promote / Demote Law
 
@@ -69,6 +69,6 @@ A component earns its address by serving a filter query. Tags start as TOML head
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;v_p86uXxOoFOYF3rk_1FBXBdP56dMPlbpxZd2SKygJY
+<<^ code="&#x0003;">>ni:///sha-256;77RJ7jkThG7IgIhmZ8ojwNotzucwUnfOiWxjNEM2JJ0
 
 <<^ code="&#x0004;" -> to=?>>

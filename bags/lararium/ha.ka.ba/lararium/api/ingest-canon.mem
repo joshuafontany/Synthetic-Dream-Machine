@@ -19,7 +19,7 @@ written   = "2026-06-27"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Ingest Canon ~ one path, born-annotated, single-write
 
@@ -32,7 +32,7 @@ The golden path for getting //any// chat session + its telemetry into the palace
 
 <<~/ahu>>
 
-<<~ ahu #the-nine-locks>>
+<<~ ahu #/the-nine-locks>>
 
 !! The nine locks (decisions, not options)
 
@@ -55,7 +55,7 @@ The golden path for getting //any// chat session + its telemetry into the palace
 
 <<~/ahu>>
 
-<<~ ahu #migration>>
+<<~ ahu #/migration>>
 
 !! Migration (the circle-back work, after FFZ)
 
@@ -84,7 +84,7 @@ no flat-index duplication survives. (`CaptureRecord` type · `ndjson.py` adapter
 
 <<~/ahu>>
 
-<<~ ahu #the-meme>>
+<<~ ahu #/the-meme>>
 
 !! The canon, in eight lines
 
@@ -99,7 +99,7 @@ no flat-index duplication survives. (`CaptureRecord` type · `ndjson.py` adapter
 
 <<~/ahu>>
 
-<<~ ahu #gradient-build>>
+<<~ ahu #/gradient-build>>
 
 !! The gradient build ~ examined gaps + grade-on-a-gradient (2026-06-27)
 
@@ -131,7 +131,7 @@ the regex shadow knows the turn/gradient sigils · the 6 turn sigils are the unb
 
 <<~/ahu>>
 
-<<~ ahu #integration>>
+<<~ ahu #/integration>>
 
 !! Full integration ~ TW5-community-grounded (2026-06-27, research-locked)
 
@@ -177,7 +177,7 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -188,6 +188,6 @@ linonetwo's tw-react + TidGi):
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Ri8qWsE8zwso46tcP3jzAPDuG27ujjayixqOrRoddiU
+<<^ code="&#x0003;">>ni:///sha-256;DpqvY6u-xrSx0zlPh0rwK8y1DhWUhw3rH_t_gkdKds0
 
 <<^ code="&#x0004;" -> to=?>>

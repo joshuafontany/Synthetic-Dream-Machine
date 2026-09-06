@@ -21,7 +21,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/testing-architecture-scout"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Mason ~ a spirit's handoff, held unedited
 
@@ -33,7 +33,7 @@ uri-path          = "ha.ka.ba/lares/docs/pono/testing-architecture-scout"
 
 <<~/ahu>>
 
-<<~ ahu #the-handoff>>
+<<~ ahu #/the-handoff>>
 
 !! The handoff, verbatim
 
@@ -218,6 +218,6 @@ Whether Stage 2's newly-lit suites are **green** — I did not run them (the pyt
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/dreamdom>>
 
-<<^ code="&#x0003;">>ni:///sha-256;F2Ki2ow2FqTsftuHNmbyQBCrY1l8mvlMSCdvr3QVDVA
+<<^ code="&#x0003;">>ni:///sha-256;hYvR2b9AfjO42VteNhNf28HYa9CEGs1uClxxkt1ggxQ
 
 <<^ code="&#x0004;" -> to=?>>

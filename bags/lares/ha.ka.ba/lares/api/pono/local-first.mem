@@ -19,7 +19,7 @@ uri-path    = "ha.ka.ba/lares/api/pono/local-first"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Local-First Software
 
@@ -36,7 +36,7 @@ the current prior-art stack closest to satisfying all seven simultaneously.
 
 <<~/ahu>>
 
-<<~ ahu #seven-ideals>>
+<<~ ahu #/seven-ideals>>
 
 !! The Seven Ideals
 
@@ -152,7 +152,7 @@ Keyhive provides the cryptographic enforcement.
 
 <<~/ahu>>
 
-<<~ ahu #server-as-peer>>
+<<~ ahu #/server-as-peer>>
 
 !! Server-as-Peer Law
 
@@ -185,7 +185,7 @@ one per wiki island, one per connected realm. Same model, different capability s
 
 <<~/ahu>>
 
-<<~ ahu #fuller-universe>>
+<<~ ahu #/fuller-universe>>
 
 !! Fuller's Non-Simultaneous Universe = Causal Island Doctrine
 
@@ -212,7 +212,7 @@ not "current globally." A lararium-node MUST present its view as local — curre
 
 <<~/ahu>>
 
-<<~ ahu #beelay-sedimentree>>
+<<~ ahu #/beelay-sedimentree>>
 
 !! Beelay Sync Model
 
@@ -234,7 +234,7 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~/ahu>>
 
-<<~ ahu #alignment-matrix>>
+<<~ ahu #/alignment-matrix>>
 
 !! Alignment Matrix (current)
 
@@ -250,7 +250,7 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -262,6 +262,6 @@ Beelay's sync protocol operates below this boundary — transparent to the meme 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;jAmJGR4dqQfCsK93D-HXX-uRCzRTzgMdoaYBzyS_yo4
+<<^ code="&#x0003;">>ni:///sha-256;BEYSvNAQvgFzO3ZQ0gbmK3NZcYKEQZ1gcRfG1doIRrs
 
 <<^ code="&#x0004;" -> to=?>>

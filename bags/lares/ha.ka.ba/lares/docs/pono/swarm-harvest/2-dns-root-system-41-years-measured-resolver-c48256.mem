@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/2-dns-root-system-41-years-m
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! 2. DNS — root system ~41 years; measured resolver centralization
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 21,186 characters
 
@@ -215,12 +215,12 @@ Its conclusions: federation is **necessary but insufficient**; technical measure
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;7K4DSApueKaJmizx4LazvVpQsnQ7C0tX_p4lganYOWo
+<<^ code="&#x0003;">>ni:///sha-256;-7VxZkKU5XERoZ0vnEtsRmcjsdKSVO0zd5S-SXTLfx4
 
 <<^ code="&#x0004;" -> to=?>>

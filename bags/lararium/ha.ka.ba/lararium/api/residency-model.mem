@@ -26,7 +26,7 @@ uri-path      = "ha.ka.ba/lararium/api/residency-model"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 ! Residency Model — Coordinate Space + Query Plan
 
@@ -38,7 +38,7 @@ A single tiddler-title MAY have residency in N bags simultaneously, each bag car
 
 <<~/ahu>>
 
-<<~ ahu #why>>
+<<~ ahu #/why>>
 
 !! Why the architecture moved here
 
@@ -55,7 +55,7 @@ Two adjacent traditions hold the right primitives. Neither surfaced through the 
 
 <<~/ahu>>
 
-<<~ ahu #data-model>>
+<<~ ahu #/data-model>>
 
 !! Data model — FRBR identity levels
 
@@ -72,7 +72,7 @@ This levels-distinction carries load-bearing weight. Conflating Work with Manife
 
 <<~/ahu>>
 
-<<~ ahu #action-verb-surface>>
+<<~ ahu #/action-verb-surface>>
 
 !! Surface I — ACTION verbs (lar URIs, ALL CAPS, SPARQL Update derivation)
 
@@ -139,7 +139,7 @@ This pair carries the wiki-level crossing (`wiki-layer-ontology#crossing-law`): 
 
 <<~/ahu>>
 
-<<~ ahu #effect-record-surface>>
+<<~ ahu #/effect-record-surface>>
 
 !! Surface II — Effect records (tiddler annotations, archival language)
 
@@ -162,7 +162,7 @@ This dual-surface design — ACTION verbs for the //gesture//, archival verbs fo
 
 <<~/ahu>>
 
-<<~ ahu #five-pono-properties>>
+<<~ ahu #/five-pono-properties>>
 
 !! The five pono properties
 
@@ -176,7 +176,7 @@ Any implementation of this model MUST hold all five:
 
 <<~/ahu>>
 
-<<~ ahu #non-residency-verbs>>
+<<~ ahu #/non-residency-verbs>>
 
 !! The non-residency tier — verbs that ride the rail, not the coordinate space
 
@@ -198,7 +198,7 @@ RECONCILE folds //forward//; ''COMPACT'' cuts //behind// (bounds the op-log; com
 
 <<~/ahu>>
 
-<<~ ahu #yang-yin-chao>>
+<<~ ahu #/yang-yin-chao>>
 
 !! Yang / Yin / Chao symmetry preserved
 
@@ -222,7 +222,7 @@ A tiddler MAY hold residency in multiple Yin coordinates simultaneously (persona
 
 <<~/ahu>>
 
-<<~ ahu #anti-patterns>>
+<<~ ahu #/anti-patterns>>
 
 !! Six anti-patterns — defenses MUST exist
 
@@ -239,7 +239,7 @@ The prior research surfaced six failure modes documented across OverlayFS, Docke
 
 <<~/ahu>>
 
-<<~ ahu #conflict-resolution>>
+<<~ ahu #/conflict-resolution>>
 
 !! Conflict resolution — Talk Story, not arbitration (2026-05-31)
 
@@ -271,7 +271,7 @@ Two Sprint deferrals (modal-view reader at the bag-pin surface; commit-queue for
 
 <<~/ahu>>
 
-<<~ ahu #closest-prior-art>>
+<<~ ahu #/closest-prior-art>>
 
 !! Closest prior art (validators)
 
@@ -287,7 +287,7 @@ Two Sprint deferrals (modal-view reader at the bag-pin surface; commit-queue for
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -306,6 +306,6 @@ rhymes with this model's thermal residency yet stays distinct (retrieval grain, 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NS8cgG22BaBrPIZwuEfHcWtEMOWdSH8vSkaSJJOmcKo
+<<^ code="&#x0003;">>ni:///sha-256;CQUEEjuQgjRrooppQvyjg7T9wioXs6NwJOqMpK5od6Q
 
 <<^ code="&#x0004;" -> to=?>>

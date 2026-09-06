@@ -18,7 +18,7 @@ written   = "2026-06-27"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Dev Loop ~ idempotent cures after a code change
 
@@ -31,7 +31,7 @@ run from any prior state (running · stale · none), so the loop never needs a c
 
 <<~/ahu>>
 
-<<~ ahu #commands>>
+<<~ ahu #/commands>>
 
 !! The reach taxonomy ~ which cure, when
 
@@ -58,7 +58,7 @@ half-dead vessel: port bound, worker `ERR_MODULE_NOT_FOUND`). So after a TS edit
 
 <<~/ahu>>
 
-<<~ ahu #vessel-paths>>
+<<~ ahu #/vessel-paths>>
 
 !! Where state lives ~ the two houses vs the corpus
 
@@ -92,7 +92,7 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 
 <<~/ahu>>
 
-<<~ ahu #laws>>
+<<~ ahu #/laws>>
 
 !! The invariants the loop rests on
 
@@ -111,7 +111,7 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -121,6 +121,6 @@ never a default; a `REPO_ROOT` default would resolve `larHome()` to the repo and
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;y-kidSApECaiSeYjGbHzS6tER-sq7_w1U74NmgXHvsM
+<<^ code="&#x0003;">>ni:///sha-256;HK2px-4Hw4ZLyGD0sjyBh5qai-NVQRnEwGGhWKvE-SA
 
 <<^ code="&#x0004;" -> to=?>>

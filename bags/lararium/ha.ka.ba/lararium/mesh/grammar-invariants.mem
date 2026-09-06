@@ -14,7 +14,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Grammar agreement ~ the second condition of belonging
 
@@ -24,7 +24,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 
 <<~/ahu>>
 
-<<~ ahu #the-outside-art>>
+<<~ ahu #/the-outside-art>>
 
 !! What the field proved ~ and the one mechanism that held
 
@@ -49,6 +49,6 @@ uri-path  = "ha.ka.ba/lararium/mesh/grammar-invariants"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-oNsMxlmXLvaWiW3FmMvHbgmNxnkH2s0yNWr5FOq0NE
+<<^ code="&#x0003;">>ni:///sha-256;ol474yhDz-NYqRjstg3qFYz9Kq8odysU-C9jrl4dLiM
 
 <<^ code="&#x0004;" -> to=?>>

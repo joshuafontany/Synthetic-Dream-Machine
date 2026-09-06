@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/operating-modes"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Preferences — Operating Modes
 
@@ -26,7 +26,7 @@ This room holds the old mode grammar as recovered operational pressure.
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -39,7 +39,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #pressure>>
+<<~ ahu #/pressure>>
 
 !! Pressure
 
@@ -59,7 +59,7 @@ A mode switch changes duty, not flavor alone.
 
 <<~/ahu>>
 
-<<~ ahu #relation>>
+<<~ ahu #/relation>>
 
 !! Relation To Live Surfaces
 
@@ -73,7 +73,7 @@ This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -83,6 +83,6 @@ This shelf preserves the heavier runtime choreography once wrapped around them.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CcGSnzm5a4a-KrA1WhDD_rBsfFMMDN1aorEzA5tmgO0
+<<^ code="&#x0003;">>ni:///sha-256;vx72L7bVvfBeikwgHZQOHsBtyKmo3KCtP8weLjVCDL0
 
 <<^ code="&#x0004;" -> to=?>>

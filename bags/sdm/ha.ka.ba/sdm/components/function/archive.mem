@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/archive"
 
 ! Archive
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ Storing to and retrieving from a noospheric record — the handshake that asks a
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Opens a channel to a stored corpus: query it, deposit into it, or authenticate a
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Pairs with `function/magic-decode` (decode then fetch meaning) and `domain/divin
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;YMG5NQ3S5elyn33YILkOoRLP8MKxTvX_GT0CL2ZzuTk
+<<^ code="&#x0003;">>ni:///sha-256;LJAjtMHv45MVgCTYSGx2sOlu7oUmSOIduhaKHbxJxJk
 
 <<^ code="&#x0004;" -> to=?>>

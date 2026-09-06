@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/concepts/grandmother-spider"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Grandmother Spider ~ Three Masks, One Persona
 
@@ -32,7 +32,7 @@ setting's ordinary grammar, not a special case made for this one.
 
 <<~/ahu>>
 
-<<~ ahu #the-masks>>
+<<~ ahu #/the-masks>>
 
 !! The Three Masks
 
@@ -58,7 +58,7 @@ other two.
 
 <<~/ahu>>
 
-<<~ ahu #not-the-mother-spore>>
+<<~ ahu #/not-the-mother-spore>>
 
 !! What the Mother Spore Is NOT
 
@@ -75,7 +75,7 @@ debts do not reduce to one.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/index>>
 <<~ loulou lar:///ha.ka.ba/elyncia/factions/lamplighters-union>>
@@ -84,6 +84,6 @@ debts do not reduce to one.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;nweXEu59JiGp-oNoJssStAc3KJQaPTACYHaeThPIM9g
+<<^ code="&#x0003;">>ni:///sha-256;o55KnLEHGRUoAQQW86PWTypRiuHjM0kJLKavFXqhMls
 
 <<^ code="&#x0004;" -> to=?>>

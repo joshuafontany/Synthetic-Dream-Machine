@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/sigil-kind"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Sigil Kind Taxonomy
 
@@ -32,7 +32,7 @@ The `lar-kind` value determines:
 
 <<~/ahu>>
 
-<<~ ahu #kind-table>>
+<<~ ahu #/kind-table>>
 
 !! Kind Table
 
@@ -51,7 +51,7 @@ family          FamilyRule   not dispatched                  no render; governs 
 
 <<~/ahu>>
 
-<<~ ahu #child-slot>>
+<<~ ahu #/child-slot>>
 
 !! child-slot
 
@@ -63,7 +63,7 @@ Properties used by grammar-cache:
 * `lar-open-pattern` — opener regex
 * `lar-close-pattern` — closer regex
 
-Dispatch: `compound` path with `closeKey = sigil.name`. Body captured between opener and `<<~/SIGIL>>`. In the live wiki, the parent tiddler holds the compound form (`<<~ kahea ahu #slot>>`); the deserializer has already split the body into a child tiddler.
+Dispatch: `compound` path with `closeKey = sigil.name`. Body captured between opener and `<<~/SIGIL>>`. In the live wiki, the parent tiddler holds the compound form (`<<~ kahea ahu #/slot>>`); the deserializer has already split the body into a child tiddler.
 
 Three render modes participate: HTML (transclude child), carrier (emit inline definition sigil), projection (emit `aka` frozen sigil).
 
@@ -76,7 +76,7 @@ No JS change needed.
 
 <<~/ahu>>
 
-<<~ ahu #edge-sugar>>
+<<~ ahu #/edge-sugar>>
 
 !! edge-sugar
 
@@ -93,7 +93,7 @@ Properties:
 
 <<~/ahu>>
 
-<<~ ahu #edge>>
+<<~ ahu #/edge>>
 
 !! edge
 
@@ -106,7 +106,7 @@ Both forms share opener parsing; closer presence distinguishes them.
 
 <<~/ahu>>
 
-<<~ ahu #header>>
+<<~ ahu #/header>>
 
 !! header
 
@@ -118,7 +118,7 @@ Appears at the document top; `from=?` marks "this carrier itself", and `to=` nam
 
 <<~/ahu>>
 
-<<~ ahu #guest-grammar>>
+<<~ ahu #/guest-grammar>>
 
 !! guest-grammar
 
@@ -144,7 +144,7 @@ Registered guest grammars (from `memetic-wikitext.tid`):
 
 <<~/ahu>>
 
-<<~ ahu #query>>
+<<~ ahu #/query>>
 
 !! query
 
@@ -158,7 +158,7 @@ The filter expression runs as `$list filter=<<p1>>` inside the TW5 VM. Full nati
 
 <<~/ahu>>
 
-<<~ ahu #family>>
+<<~ ahu #/family>>
 
 !! family
 
@@ -187,7 +187,7 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -197,6 +197,6 @@ The TypeScript validator `validatePranalaEdge` (in `@lararium/mesh`) enforces th
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;8zgCxCpaXWFQ-aAikxaGiBD-6Dc2CB5ov-Fgn7zpbX4
+<<^ code="&#x0003;">>ni:///sha-256;d8fDckQHlAwElVcXjBAY7jBkwkfnrhF5mvzG8E3Css0
 
 <<^ code="&#x0004;" -> to=?>>

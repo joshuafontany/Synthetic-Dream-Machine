@@ -17,7 +17,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/spine"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: the MCP shelf began as planning prose around a read-only Lararium server.
 ⏿ orient: the canonical surface needs one small spine that names what the server does and what remains out of v1.
@@ -27,7 +27,7 @@ uri-path        = "ha.ka.ba/lares/docs/lararium_mcp/spine"
 
 <<~/ahu>>
 
-<<~ ahu #core-proposition>>
+<<~ ahu #/core-proposition>>
 
 !! Core Proposition
 
@@ -45,7 +45,7 @@ The v1 spine carries four promises:
 
 <<~/ahu>>
 
-<<~ ahu #crucible-boundary>>
+<<~ ahu #/crucible-boundary>>
 
 !! Crucible Boundary
 
@@ -70,7 +70,7 @@ The v1 spine carries four promises:
 
 <<~/ahu>>
 
-<<~ ahu #stack>>
+<<~ ahu #/stack>>
 
 !! Proposed Stack
 
@@ -86,7 +86,7 @@ The v1 spine carries four promises:
 
 <<~/ahu>>
 
-<<~ ahu #namespace-posture>>
+<<~ ahu #/namespace-posture>>
 
 !! Namespace Posture
 
@@ -101,7 +101,7 @@ The v1 spine carries four promises:
 
 <<~/ahu>>
 
-<<~ ahu #resource-prompt-tool-model>>
+<<~ ahu #/resource-prompt-tool-model>>
 
 !! Resource, Prompt, and Tool Model
 
@@ -114,7 +114,7 @@ Remote transport should wrap the same read-only façade only after scope and aut
 
 <<~/ahu>>
 
-<<~ ahu #submodule-contribution-model>>
+<<~ ahu #/submodule-contribution-model>>
 
 !! Submodule Contribution Model
 
@@ -125,7 +125,7 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu>>
 
-<<~ ahu #residue>>
+<<~ ahu #/residue>>
 
 !! Residue
 
@@ -135,7 +135,7 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -148,6 +148,6 @@ MemPalace once demonstrated the read-only sidecar pattern (Lares talking to a pe
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aBFKmTTyWrxb-IZYoLbwJMA9ws_oM5G7eKBACe7bN9E
+<<^ code="&#x0003;">>ni:///sha-256;rM5DeM6tJk9rWJ3Rxh8zTfC8Hed4nTsqkz6mPgUUV04
 
 <<^ code="&#x0004;" -> to=?>>

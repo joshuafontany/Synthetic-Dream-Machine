@@ -18,7 +18,7 @@ uri-path   = "ha.ka.ba/elyncia/books/referee-noosphere-guide/spine"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Elyncia 04 ~ The Referee Noosphere Guide ~ Spine
 
@@ -34,7 +34,7 @@ below activate one by one as each chunk meme seats; until then the walk reads as
 
 <<~/ahu>>
 
-<<~ ahu #walk>>
+<<~ ahu #/walk>>
 
 !! The Walk ~ reading order
 
@@ -48,7 +48,7 @@ below activate one by one as each chunk meme seats; until then the walk reads as
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source Staging
 
@@ -58,12 +58,12 @@ comes only after all source text reads as moved.)//
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/books/index>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;g9HoHlWVx75oI7a5WRiC7m7ZT3Sq7ErTFd6ik572tYo
+<<^ code="&#x0003;">>ni:///sha-256;ZnAslRoJYoRGMCL6SPIgJuJtKc0lstnrYLPtovPjpys
 
 <<^ code="&#x0004;" -> to=?>>

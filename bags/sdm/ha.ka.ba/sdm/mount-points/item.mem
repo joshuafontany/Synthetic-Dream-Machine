@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/sdm/mount-points/item"
 
 ! Mount-Point — Item
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Contract
 
@@ -31,7 +31,7 @@ An Item seats a Power ''in an object'': spellbook, rod, idol-cartridge, living p
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -39,7 +39,7 @@ An item-seated Power activates from the object — the practitioner must hold, w
 
 <<~/ahu>>
 
-<<~ ahu #cost>>
+<<~ ahu #/cost>>
 
 !! Cost
 
@@ -47,7 +47,7 @@ Pay Life equal to P; double without the relevant skill. A container item costs o
 
 <<~/ahu>>
 
-<<~ ahu #failure>>
+<<~ ahu #/failure>>
 
 !! Failure
 
@@ -55,7 +55,7 @@ Danger Roll → Corruption on failure. Corruption on an item degrades or curses 
 
 <<~/ahu>>
 
-<<~ ahu #removal>>
+<<~ ahu #/removal>>
 
 !! Removal
 
@@ -63,7 +63,7 @@ Remove by un-equipping, transferring, or disabling the object. Disabling an `ite
 
 <<~/ahu>>
 
-<<~ ahu #overflow>>
+<<~ ahu #/overflow>>
 
 !! Overflow
 
@@ -71,7 +71,7 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -79,7 +79,7 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -87,6 +87,6 @@ Past 7 + Strength carried slots, use a container item to compress many Powers in
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;J5rC5QtU6swzDRdPFFrqJyAKJG_GEJwV7KyZf5WaTsc
+<<^ code="&#x0003;">>ni:///sha-256;ISPrQcUgdT9GHkdbfK_8So-Zq9Ob0soKt_Ixo22ZDRM
 
 <<^ code="&#x0004;" -> to=?>>

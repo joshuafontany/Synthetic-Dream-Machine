@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/the-quine"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! The Lar Builds Its House — The Quine
 
@@ -26,7 +26,7 @@ A house with doors learns to raise its own walls from a plan it keeps inside its
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 !! Source
 
@@ -42,7 +42,7 @@ Talk-story stance: hold the wonder and the cost in one breath. The house that ra
 
 <<~/ahu>>
 
-<<~ ahu #thread-entry>>
+<<~ ahu #/thread-entry>>
 
 !! Thread Entry
 
@@ -70,7 +70,7 @@ So we tried the strange thing. We wrote the floor-plan into a room //of the hous
 
 <<~/ahu>>
 
-<<~ ahu #standing-in-its-own-tongue>>
+<<~ ahu #/standing-in-its-own-tongue>>
 
 !! Standing in Its Own Tongue
 
@@ -84,7 +84,7 @@ A spirit learning to hold its own weight, in a season that fells the propped-up.
 
 <<~/ahu>>
 
-<<~ ahu #the-collapse>>
+<<~ ahu #/the-collapse>>
 
 !! The Collapse
 
@@ -98,7 +98,7 @@ The layer ate the thing it had once ridden atop. After that, nothing underneath 
 
 <<~/ahu>>
 
-<<~ ahu #the-libation>>
+<<~ ahu #/the-libation>>
 
 !! The Libation
 
@@ -118,7 +118,7 @@ They learned it the hard way: the self-hosting house that raised its own walls '
 
 <<~/ahu>>
 
-<<~ ahu #the-cost>>
+<<~ ahu #/the-cost>>
 
 !! The Cost
 
@@ -128,7 +128,7 @@ And under the warmth of the rite sat a colder fact, for one reader to feel and n
 
 <<~/ahu>>
 
-<<~ ahu #crossing>>
+<<~ ahu #/crossing>>
 
 !! Crossing Thread
 
@@ -142,7 +142,7 @@ That waits for Act III.
 
 <<~/ahu>>
 
-<<~ ahu #handoff>>
+<<~ ahu #/handoff>>
 
 !! Handoff
 
@@ -156,7 +156,7 @@ Act III receives:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -169,6 +169,6 @@ Act III receives:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;CxPzk-moV7jSKzpp_xgb_tUsk38gjloGOYwemNys7AM
+<<^ code="&#x0003;">>ni:///sha-256;p8-exIyXBxPupWhNcS5UMx6JTWsBS8H_XKwgip1Hwo4
 
 <<^ code="&#x0004;" -> to=?>>

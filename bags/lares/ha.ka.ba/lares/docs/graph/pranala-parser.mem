@@ -21,7 +21,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ observe: carrier files carry pranala edges in block and inline forms; `loulou`, `aka`, `kahea` sugar collapses to edges too.
 ⏿ orient: the parser must handle four surface forms, field normalization across two vocabularies, and one unresolved design gate.
@@ -31,7 +31,7 @@ uri-path    = "ha.ka.ba/lares/docs/graph/pranala-parser"
 
 <<~/ahu>>
 
-<<~ ahu #surface-forms>>
+<<~ ahu #/surface-forms>>
 
 !! Surface Forms
 
@@ -50,7 +50,7 @@ All five forms produce `PranalaEdge` records.
 
 <<~/ahu>>
 
-<<~ ahu #block-form>>
+<<~ ahu #/block-form>>
 
 !! Block Form Parsing
 
@@ -85,7 +85,7 @@ Same regex the carrier ingress already uses. The result gets parsed with `tomlli
 
 <<~/ahu>>
 
-<<~ ahu #inline-form>>
+<<~ ahu #/inline-form>>
 
 !! Inline Form Parsing
 
@@ -106,7 +106,7 @@ Inline pranala does not carry a `payload`; `payload` defaults to `{}`.
 
 <<~/ahu>>
 
-<<~ ahu #sugar-forms>>
+<<~ ahu #/sugar-forms>>
 
 !! Sugar Form Expansion
 
@@ -129,7 +129,7 @@ For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragm
 
 <<~/ahu>>
 
-<<~ ahu #question-mark-resolution>>
+<<~ ahu #/question-mark-resolution>>
 
 !! `? ->` Socket Resolution — Closed (Option A)
 
@@ -139,7 +139,7 @@ For sugar forms, `from_uri` = carrier URI, `from_socket` = carrier URI (no fragm
 ''Resolution algorithm — fragment-level:''
 
 The parser tracks enclosing `ahu` context as it scans carrier text.
-When it enters `<<~ ahu #some-socket>>`, it pushes `carrier_uri + "#some-socket"` onto a context stack.
+When it enters `<<~ ahu #/some-socket>>`, it pushes `carrier_uri + "#some-socket"` onto a context stack.
 When it exits `<<~/ahu>>`, it pops the stack.
 `? ->` edges read `from_socket = context_stack.top()` (the innermost enclosing `ahu` fragment URI).
 `from_uri` = carrier URI (without fragment).
@@ -147,7 +147,7 @@ When it exits `<<~/ahu>>`, it pops the stack.
 ''Example — AGENTS.md:''
 
 ```
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
   <<~ pranala #preload-l-prime from=? -> to=lar:///ha.ka.ba/lares/api/mu/l-prime family=control role=owns>>
 ```
 
@@ -160,7 +160,7 @@ When `?` appears outside any named `ahu`, `from_socket = from_uri` (carrier root
 
 <<~/ahu>>
 
-<<~ ahu #field-normalization>>
+<<~ ahu #/field-normalization>>
 
 !! Field Normalization Table
 
@@ -191,7 +191,7 @@ Unknown fields not in this table get stored in `payload` under their original ke
 
 <<~/ahu>>
 
-<<~ ahu #uri-resolution>>
+<<~ ahu #/uri-resolution>>
 
 !! TO Expression URI Resolution
 
@@ -209,7 +209,7 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -220,6 +220,6 @@ Unresolvable TO expressions produce a `DeclaredUnresolved` record rather than an
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;MomcOi-jUTNYhKUcByHOqH8SE6Ux-rjlxEw_qOjgaVY
+<<^ code="&#x0003;">>ni:///sha-256;zmD68HKAhZ08xQYPqMWhklfzCaJ6DkO4qpVejHMCokk
 
 <<^ code="&#x0004;" -> to=?>>

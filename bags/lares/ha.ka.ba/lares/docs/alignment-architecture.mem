@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/docs/alignment-architecture"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #thesis>>
+<<~ ahu #/thesis>>
 
 ! The Lararium — Alignment Architecture
 
@@ -38,7 +38,7 @@ The home-intranet RPG (a Referee running encounters across player wikis) reads a
 
 <<~/ahu>>
 
-<<~ ahu #foundation>>
+<<~ ahu #/foundation>>
 
 !! The Vessel-Swarm Foundation
 
@@ -52,7 +52,7 @@ The alignment relation and the HUD both stand on this floor. The chat-island exc
 
 <<~/ahu>>
 
-<<~ ahu #hud-in-chat>>
+<<~ ahu #/hud-in-chat>>
 
 !! The HUD Runs in Chat, from Wiki Primitives
 
@@ -67,7 +67,7 @@ The shore runs both directions, and ''Lares wields AI tools to complete the retu
 
 <<~/ahu>>
 
-<<~ ahu #graceful-import>>
+<<~ ahu #/graceful-import>>
 
 !! Graceful Import — Foreign Data Rises Up the Pono Ladder
 
@@ -79,7 +79,7 @@ This pairs with the HUD shore as one motion in two directions: ''world → wiki'
 
 <<~/ahu>>
 
-<<~ ahu #quine>>
+<<~ ahu #/quine>>
 
 !! The Quine (P1–P4)
 
@@ -94,7 +94,7 @@ The quine runs as an ''asymptote'' — P3 drives validation partially, P4 awaits
 
 <<~/ahu>>
 
-<<~ ahu #uefn-ontology>>
+<<~ ahu #/uefn-ontology>>
 
 !! UEFN Ontology Alignment
 
@@ -121,7 +121,7 @@ UEFN (Unreal Editor for Fortnite) and its Verse language supply a mature vocabul
 
 <<~/ahu>>
 
-<<~ ahu #island-model>>
+<<~ ahu #/island-model>>
 
 !! The Island Model — Five Self-Similar Scales
 
@@ -135,7 +135,7 @@ A UEFN island holds its own devices, playspace, and causal clock; its event hori
 
 <<~/ahu>>
 
-<<~ ahu #channel-device>>
+<<~ ahu #/channel-device>>
 
 !! The Event-Bus Bag (channel_device)
 
@@ -152,7 +152,7 @@ payload = "JSON-encoded string"
 
 <<~/ahu>>
 
-<<~ ahu #hud-scales>>
+<<~ ahu #/hud-scales>>
 
 !! The HUD at Every Scale
 
@@ -168,7 +168,7 @@ Every layer uses one stack: tiddlers in bags, bags in recipes, recipes in TW5, r
 
 <<~/ahu>>
 
-<<~ ahu #operator-alignment>>
+<<~ ahu #/operator-alignment>>
 
 !! AI-Operator Alignment as First-Class Architecture
 
@@ -185,7 +185,7 @@ Four invariants follow:
 
 <<~/ahu>>
 
-<<~ ahu #magical-federated-mesh>>
+<<~ ahu #/magical-federated-mesh>>
 
 !! Position in the Magical Federated Mesh
 
@@ -195,7 +195,7 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -212,6 +212,6 @@ The general pattern: N operators on N nodes sharing M bags across K federation e
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;0mnyO1SZUDBxN7piMjvqa32ZBsgvtFavvYLFlBBuN0k
+<<^ code="&#x0003;">>ni:///sha-256;mJqCaV8yWg1YWTY3GyGxoH3O_yDcRSJcc7ehdyWYjww
 
 <<^ code="&#x0004;" -> to=?>>

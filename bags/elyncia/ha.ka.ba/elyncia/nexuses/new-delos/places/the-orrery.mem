@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/nexuses/new-delos/places/the-orrery"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Orrery of High Delos
 
@@ -36,6 +36,6 @@ and the Painter's establishing boards stands noted).
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;tpFIXdJ-ro4XK5bahWxQEJAoD_mPWvJavJkludlSwec
+<<^ code="&#x0003;">>ni:///sha-256;j_yimQU-Nj6eSKiIv8Z6RXRAeRXR_yT1i_49v1lBCVw
 
 <<^ code="&#x0004;" -> to=?>>

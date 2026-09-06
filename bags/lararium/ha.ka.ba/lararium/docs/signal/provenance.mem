@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/signal/provenance"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Lararium Signal — Provenance
 
@@ -26,7 +26,7 @@ This room holds the witness and lineage matter behind the current lararium signa
 
 <<~/ahu>>
 
-<<~ ahu #room-charter>>
+<<~ ahu #/room-charter>>
 
 !! Room Charter
 
@@ -37,7 +37,7 @@ Theory-facing framing stays in `lar:///ha.ka.ba/lararium/docs/signal/sa-display`
 
 <<~/ahu>>
 
-<<~ ahu #provenance>>
+<<~ ahu #/provenance>>
 
 !! Provenance
 
@@ -56,7 +56,7 @@ Strong witnesses recur in:
 
 <<~/ahu>>
 
-<<~ ahu #witness-pressure>>
+<<~ ahu #/witness-pressure>>
 
 !! Witness Pressure
 
@@ -71,7 +71,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 
 <<~/ahu>>
 
-<<~ ahu #archive-collection-residue>>
+<<~ ahu #/archive-collection-residue>>
 
 !! Archive Collection Residue
 
@@ -83,7 +83,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 
 <<~/ahu>>
 
-<<~ ahu #sources>>
+<<~ ahu #/sources>>
 
 !! Primary Sources
 
@@ -95,7 +95,7 @@ The remaining task here is not to restate the root contract, but to preserve and
 
 <<~/ahu>>
 
-<<~ ahu #snapshot-witness-kernel-claude>>
+<<~ ahu #/snapshot-witness-kernel-claude>>
 
 !! Snapshot Witness — `platform-build/Lares_Kernel_Claude.snapshot.md` — Signal HUD Block
 
@@ -116,7 +116,7 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 
 <<~/ahu>>
 
-<<~ ahu #snapshot-witness-staging-kernel>>
+<<~ ahu #/snapshot-witness-staging-kernel>>
 
 !! Snapshot Witness — `staging/pre-reorder-2026-04-07/Lares_Kernel.snapshot.md` — HUD Pair and Layer Split
 
@@ -129,7 +129,7 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -139,6 +139,6 @@ Three-word attitude root `w1.w2.w3`: heading · angle · carried dynamic; noun �
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;j5OAtMJPi9U3PaJ13cTH9AnImE5TuJ6GuYy_AZKFCso
+<<^ code="&#x0003;">>ni:///sha-256;lmhyNQQRSy07o5zSYgw92gQ0GoryEu9nVx-aSGjW7LY
 
 <<^ code="&#x0004;" -> to=?>>

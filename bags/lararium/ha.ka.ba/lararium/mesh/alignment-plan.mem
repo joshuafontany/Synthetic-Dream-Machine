@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/alignment-plan"
 Governs the package dependency graph and the placement of shared concerns in the monorepo.
 This meme belongs in `@lararium/mesh` because mesh anchors the spine this plan describes.
 
-<<~ ahu #dep-graph>>
+<<~ ahu #/dep-graph>>
 
 !! Canonical Dependency Graph
 
@@ -40,7 +40,7 @@ No arrows go upstream. No package adds a dep that reaches into a downstream pack
 
 <<~/ahu>>
 
-<<~ ahu #spine-law>>
+<<~ ahu #/spine-law>>
 
 !! Spine Law
 
@@ -85,7 +85,7 @@ mesh, (C) byte emission. See `genesis-doc.ts` and `bags/lararium/mesh/genesis-do
 
 <<~/ahu>>
 
-<<~ ahu #consistency-rules>>
+<<~ ahu #/consistency-rules>>
 
 !! Consistency Rules
 
@@ -103,7 +103,7 @@ These rules apply to every new file and every dep addition in the monorepo.
 
 <<~/ahu>>
 
-<<~ ahu #open-alignment-items>>
+<<~ ahu #/open-alignment-items>>
 
 !! Open Alignment Items
 
@@ -118,7 +118,7 @@ These items name known inconsistencies in the current tree. Each carries a resol
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -127,6 +127,6 @@ These items name known inconsistencies in the current tree. Each carries a resol
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;GxU6w9aYxMqlywwFaPcaczplOCnkbLKrOGM78zOupsI
+<<^ code="&#x0003;">>ni:///sha-256;bIIh2RiDozTT98z7wrgBPZSWn0TNc7qtfUAOsP15XRk
 
 <<^ code="&#x0004;" -> to=?>>

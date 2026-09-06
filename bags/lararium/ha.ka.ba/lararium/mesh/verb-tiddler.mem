@@ -15,7 +15,7 @@ uri-path    = "ha.ka.ba/lararium/mesh/verb-tiddler"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! The surface this file owns
 
@@ -27,7 +27,7 @@ Three lar: URIs carry one request through its life, request and result held apar
 
 <<~/ahu>>
 
-<<~ ahu #ontology-attractor>>
+<<~ ahu #/ontology-attractor>>
 
 !! The internal register (LANGUAGE-protocol frame) + the nakama boundary
 
@@ -52,13 +52,13 @@ Audit/ledger note: durable residency audit lives at `@<bag>/ledger/residency/<ev
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/task-graph-geometry>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/verification-placement>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qA_u_NtMfTn0DhRnrHoz_zo-lwa2TuvWgIF0BdNohVw
+<<^ code="&#x0003;">>ni:///sha-256;cjlCJ6CwCuIyGAKDdQRb1IbVfQVpDwwmnt0RNo8yQBQ
 
 <<^ code="&#x0004;" -> to=?>>

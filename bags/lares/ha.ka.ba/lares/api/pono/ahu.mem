@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/ahu"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Ahu
 
@@ -35,25 +35,25 @@ and wikitext body.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
-✶ sense the slot name — a `#name` anchor; the boundary scope of this content unit
+✶ sense the slot name — a `#/name` anchor, rooted at the carrier; the boundary scope of this content unit
 ⏿ orient: child-slot, parent-relative addressing; slot name becomes tiddler title suffix
 ◇ parent at `lar:///uri`; this slot creates child at `lar:///uri#/name`; content stays inside boundary
 ▶ emit child-slot block node; deserializer produces a separate tiddler for each slot
-↺ parent tiddler references child via `<<~ kahea ahu #name>>`; child is independently addressable; confirm round-trip: parent body contains kahea~ahu summons; child has meta fields + content
+↺ parent tiddler references child via `<<~ kahea ahu #/name>>`; child is independently addressable; confirm round-trip: parent body contains kahea~ahu summons; child has meta fields + content
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
-An ahu block MUST declare a slot name beginning with `#`.
+An ahu block MUST declare a slot name beginning with `#/`. The slash roots the path at the carrier, so a slot names the same string it addresses; a nested slot extends it (`#/parent/child`). A CONTROL slot carries structural metadata rather than addressable content and takes no root — it opens no child to address.
 An ahu block MUST close with `<<~/ahu>>`.
 An ahu block MUST occupy a top-level scope; nesting MUST NOT occur.
 An ahu slot MUST produce an independently addressable tiddler at `parentUri + slot`.
-A parent tiddler MUST reference each child slot via `<<~ kahea ahu #slot>>` in its body.
+A parent tiddler MUST reference each child slot via `<<~ kahea ahu #/slot>>` in its body.
 Child slot tiddlers MUST NOT duplicate the parent's meta TOML — they carry their own.
 
 The slot name `#head` is conventional for the meme's primary content body.
@@ -61,14 +61,14 @@ The slot name `#source-shelf` is conventional for pranala edge declarations.
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
 Decomposed at the wiki's causal island boundaries:
 
 ```text
-<<~ ahu #slot-name>>
+<<~ ahu #/slot-name>>
 content body
 
 <<~/ahu>>
@@ -76,7 +76,7 @@ content body
 
 Compound kahea-ahu summons form (in parent tiddler body after decomposition):
 ```text
-<<~ kahea ahu #slot-name>>
+<<~ kahea ahu #/slot-name>>
 ```
 
 Regex (open, canonical):
@@ -88,7 +88,7 @@ Close tag: `<<~/ahu>>`
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -107,7 +107,7 @@ slot = 1
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -116,6 +116,6 @@ slot = 1
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;GsW2ELUHKYLxBv3BcTK4o6MtX0f6i8irNiUGlJrZgio
+<<^ code="&#x0003;">>ni:///sha-256;_NCucaRITAG1I_uXGBbPWAjTwPiIRV80RoUPe5VdXhw
 
 <<^ code="&#x0004;" -> to=?>>

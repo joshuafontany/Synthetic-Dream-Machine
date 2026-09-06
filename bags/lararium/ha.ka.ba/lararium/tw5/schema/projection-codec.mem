@@ -18,7 +18,7 @@ uri-path    = "ha.ka.ba/lararium/tw5/schema/projection-codec"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Projection Codec — Law
 
@@ -26,7 +26,7 @@ The carrier codec translates between disk carrier format (memetic-wikitext) and 
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -62,7 +62,7 @@ The codec serializes. The operator decides when and whether to write to disk. Au
 
 <<~/ahu>>
 
-<<~ ahu #wild-mage>>
+<<~ ahu #/wild-mage>>
 
 !! Wild Mage Operator Role
 
@@ -74,7 +74,7 @@ This doctrine makes the Wild Mage's authoring authority explicit rather than imp
 
 <<~/ahu>>
 
-<<~ ahu #api>>
+<<~ ahu #/api>>
 
 !! API Surface (carrier-codec.ts)
 
@@ -100,7 +100,7 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/tiddler-record>>
 <<~ pranala #source-import from=? -> to=packages/lararium-tw5/src/meme-stream.ts family=code role=has>>
@@ -108,6 +108,6 @@ composeCarrierSlotBody(fields: Record<string, string>, text: string): string
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aeL-YgcarVMRosbE3zC4YKgVIaw1qv1QsrmCKMq5-yI
+<<^ code="&#x0003;">>ni:///sha-256;RqDxaXZP-NCPWbCi61ky5EGWqMEFB7UqvcXcrJkO0DY
 
 <<^ code="&#x0004;" -> to=?>>

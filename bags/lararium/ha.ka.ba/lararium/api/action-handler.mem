@@ -24,7 +24,7 @@ uri-path    = "ha.ka.ba/lararium/api/action-handler"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! ACTION Verb Handler Family
 
@@ -38,7 +38,7 @@ operated from the CLI by `lares act`.
 
 <<~/ahu>>
 
-<<~ ahu #verbs>>
+<<~ ahu #/verbs>>
 
 !! The verb family
 
@@ -59,7 +59,7 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''neve
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Handler Law
 
@@ -86,7 +86,7 @@ ALL CAPS by convention. The first six draw from set-algebra + cataloging, ''neve
 
 <<~/ahu>>
 
-<<~ ahu #dispatch>>
+<<~ ahu #/dispatch>>
 
 !! Dispatch Shore
 
@@ -107,7 +107,7 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/api/residency-model#/effect-record>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
@@ -115,6 +115,6 @@ is shared, not duplicated (Sprint 6 parity).
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-MkpR6yMDnBKwh1CoSM4YShO9lbDmc6t2KyWxJ7r4Tc
+<<^ code="&#x0003;">>ni:///sha-256;hiWFv0pCu9CqJ71E6ZFen963nTXndrPr3aqCrmRFmO0
 
 <<^ code="&#x0004;" -> to=?>>

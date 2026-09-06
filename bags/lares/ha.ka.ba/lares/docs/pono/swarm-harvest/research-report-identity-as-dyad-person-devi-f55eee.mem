@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/research-report-identity-as-
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Research Report: Identity-as-Dyad (Person–Device Relational Edge)
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 21,296 characters
 
@@ -147,12 +147,12 @@ Both of these, if correct, would suggest the **dyad is the wrong unit** — the 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;bT16-AbzeLxoGxLgiIPR2KHkcL1M1gEqjWZM5w6feoA
+<<^ code="&#x0003;">>ni:///sha-256;Pdt92X9bQrkziyzN7c5-fDUjkwK0SsorUWNUcUyPnGU
 
 <<^ code="&#x0004;" -> to=?>>

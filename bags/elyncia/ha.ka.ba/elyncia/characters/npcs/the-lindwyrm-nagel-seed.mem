@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/elyncia/characters/npcs/the-lindwyrm-nagel-seed"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Lindwyrm ~ Nagel Seed
 
@@ -35,7 +35,7 @@ authority by declining. That stands as the Lindwyrm's own law, executed as techn
 
 <<~/ahu>>
 
-<<~ ahu #prompt>>
+<<~ ahu #/prompt>>
 
 !! The Prompt (verbatim)
 
@@ -56,7 +56,7 @@ zero 3D depth shading.">>
 
 <<~/ahu>>
 
-<<~ ahu #returns>>
+<<~ ahu #/returns>>
 
 !! What the Renders Returned
 
@@ -76,7 +76,7 @@ column of small unreadable type down the left margin.
 
 <<~/ahu>>
 
-<<~ ahu #what-it-caught>>
+<<~ ahu #/what-it-caught>>
 
 !! What the Register Caught
 
@@ -98,7 +98,7 @@ column of small unreadable type down the left margin.
 
 <<~/ahu>>
 
-<<~ ahu #craft-notes>>
+<<~ ahu #/craft-notes>>
 
 !! Craft Notes (for the next seed)
 
@@ -115,7 +115,7 @@ column of small unreadable type down the left margin.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/elyncia/characters/npcs/the-lindwyrm>>
 <<~ loulou lar:///ha.ka.ba/elyncia/campaign/high-delos-cabaret>>
@@ -123,6 +123,6 @@ column of small unreadable type down the left margin.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;cbF9aKl-q5WgelL_Rq_0RWzEjXpoB0Ro1xC-i2vd2lc
+<<^ code="&#x0003;">>ni:///sha-256;Qbj8FjyEWeeUQtJ7cOpUe4aAi8svFWTFb6vSMf3Ug2I
 
 <<^ code="&#x0004;" -> to=?>>

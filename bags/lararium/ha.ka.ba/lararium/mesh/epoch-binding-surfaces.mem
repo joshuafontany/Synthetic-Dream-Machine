@@ -22,7 +22,7 @@ written   = "2026-08-08"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Epoch Binding Surfaces ~ what a dependency bump actually costs
 
@@ -34,7 +34,7 @@ a wrong answer here reads identically to a right one until a founding breaks.
 
 <<~/ahu>>
 
-<<~ ahu #the-five>>
+<<~ ahu #/the-five>>
 
 !! The five surfaces, and what each binds TO
 
@@ -118,7 +118,7 @@ performed. ''The binding IS (vessel × hearthTrueName)'': the engine CID is not 
 
 <<~/ahu>>
 
-<<~ ahu #the-measurement>>
+<<~ ahu #/the-measurement>>
 
 !! What a runtime dep bump ACTUALLY moves ~ measured 2026-08-08
 
@@ -145,7 +145,7 @@ read. The vessel already names that condition and its cure rather than boot-loop
 
 <<~/ahu>>
 
-<<~ ahu #the-real-mover>>
+<<~ ahu #/the-real-mover>>
 
 !! ⚠ CORRECTED — what a source commit actually moves
 
@@ -186,7 +186,7 @@ co-observed points, ''no transformation exists at all, only translation by asser
 
 <<~/ahu>>
 
-<<~ ahu #the-rule>>
+<<~ ahu #/the-rule>>
 
 !! The rule for a founding
 
@@ -209,7 +209,7 @@ are acts, never upgrades''.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -217,6 +217,6 @@ are acts, never upgrades''.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;sNsglGU0RWcAgd4d9050lRTl1z6nRFt-3GHbd5IOrZ4
+<<^ code="&#x0003;">>ni:///sha-256;7Im0dnTXYRr3IC5smsBJFLpFmBhlYjgmwfj8uq_KP7I
 
 <<^ code="&#x0004;" -> to=?>>

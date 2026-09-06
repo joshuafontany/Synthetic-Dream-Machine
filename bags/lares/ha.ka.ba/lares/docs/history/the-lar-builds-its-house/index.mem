@@ -16,7 +16,7 @@ uri-path   = "ha.ka.ba/lares/docs/history/the-lar-builds-its-house/index"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Lar Builds Its House — Story Arc Index
 
@@ -28,7 +28,7 @@ This arc opens in triumph and does not close in it. The forward attractor at its
 
 <<~/ahu>>
 
-<<~ ahu #handoff-in>>
+<<~ ahu #/handoff-in>>
 
 !! Handoff In
 
@@ -36,7 +36,7 @@ From [[the Lindwyrm arc|../lindwyrm/index.md]], Act VII — the hoard disclosed,
 
 <<~/ahu>>
 
-<<~ ahu #act-map>>
+<<~ ahu #/act-map>>
 
 !! Act Map (git-grounded)
 
@@ -54,7 +54,7 @@ Aftermath (Jun 13–19): the lararium stands on the ''ley-lines that survive'' �
 
 <<~/ahu>>
 
-<<~ ahu #handoff-out>>
+<<~ ahu #/handoff-out>>
 
 !! Handoff Out
 
@@ -62,7 +62,7 @@ The cut does not resolve. This arc hands forward, open, to the arc that follows 
 
 <<~/ahu>>
 
-<<~ ahu #drafting-constraints>>
+<<~ ahu #/drafting-constraints>>
 
 !! Drafting Constraints
 
@@ -81,7 +81,7 @@ MUST NOT:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -93,6 +93,6 @@ MUST NOT:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;E5JqufaYTeXt2Rty5ohpR7yMo4uyGaGFX8d3edIr_4U
+<<^ code="&#x0003;">>ni:///sha-256;lc_wK4NVHsE828imkxmWZ5XDkTtfB9VrWizW8IeEJrc
 
 <<^ code="&#x0004;" -> to=?>>

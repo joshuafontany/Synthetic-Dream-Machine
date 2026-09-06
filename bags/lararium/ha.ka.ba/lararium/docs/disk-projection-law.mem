@@ -17,7 +17,7 @@ uri-path      = "ha.ka.ba/lararium/docs/disk-projection-law"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #pointer>>
+<<~ ahu #/pointer>>
 
 !! Disk-projection law — see api/disk-projection
 
@@ -31,6 +31,6 @@ The full, load-bearing statement — surfaces, bag roles, projection routing, th
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;aGkvgqyx11NptlhLrzLhEjvRwkf5NX3aphk0PdQOLfg
+<<^ code="&#x0003;">>ni:///sha-256;D8Nu7VjHACmN7fJsk1ey0fp4nFB-Z8_lgIKn712J988
 
 <<^ code="&#x0004;" -> to=?>>

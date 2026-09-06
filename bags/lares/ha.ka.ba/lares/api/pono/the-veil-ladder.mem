@@ -20,7 +20,7 @@ uri-path          = "ha.ka.ba/lares/api/pono/the-veil-ladder"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Veil-Ladder ~ from throwaway to true-name, a self on the fed mesh
 
@@ -28,7 +28,7 @@ A self on the DreamNet reads not as a row in a registry but as a ''ladder of vei
 
 <<~/ahu>>
 
-<<~ ahu #the-three-rungs>>
+<<~ ahu #/the-three-rungs>>
 
 !! The Three Rungs ~ where a self can stand
 
@@ -42,7 +42,7 @@ The pledge is the shore where distributed trust (a vouch) mints a public thing (
 
 <<~/ahu>>
 
-<<~ ahu #the-base-model>>
+<<~ ahu #/the-base-model>>
 
 !! The Base Model ~ anon floor, Handle overlay, burn falls back
 
@@ -61,7 +61,7 @@ Two reversibilities stay distinct: ''doc-syncs revoke and restore'' (an overlay 
 
 <<~/ahu>>
 
-<<~ ahu #the-tightrope>>
+<<~ ahu #/the-tightrope>>
 
 !! The Tightrope ~ rep ⊥ anonymity, reconciled by rotation
 
@@ -71,7 +71,7 @@ The escape is ''ROTATION'': carry the earned ''positive'' reputation onto a ''fr
 
 <<~/ahu>>
 
-<<~ ahu #the-circle>>
+<<~ ahu #/the-circle>>
 
 !! The Circle ~ a self is a place, not a row
 
@@ -79,7 +79,7 @@ A human holds one-or-more ''virtual places'' — each a single-principal ''Circl
 
 <<~/ahu>>
 
-<<~ ahu #the-distributed-trust>>
+<<~ ahu #/the-distributed-trust>>
 
 !! The Distributed Trust ~ the FLOW-map, not a blind oracle
 
@@ -92,7 +92,7 @@ Threshold-blind crypto (Coconut/FROST, k-of-n — a lone kahu is strictly weaker
 
 <<~/ahu>>
 
-<<~ ahu #the-immune-systems>>
+<<~ ahu #/the-immune-systems>>
 
 !! The Immune Systems ~ context licenses, anergy not ban
 
@@ -100,7 +100,7 @@ Bad actors are met ''one vessel-veil at a time'' by immune systems — some auto
 
 <<~/ahu>>
 
-<<~ ahu #the-price>>
+<<~ ahu #/the-price>>
 
 !! The Price ~ burn, not watch
 
@@ -110,7 +110,7 @@ Reputation across a break is ''priced, not policed''. ''Positive'' rep the holde
 
 <<~/ahu>>
 
-<<~ ahu #the-bounds>>
+<<~ ahu #/the-bounds>>
 
 !! The Bounds ~ the mesh holds mechanism, the members hold meaning
 
@@ -125,7 +125,7 @@ For a thing with ''no king'', this is not a gap — it is the only honest archit
 
 <<~/ahu>>
 
-<<~ ahu #the-recovery>>
+<<~ ahu #/the-recovery>>
 
 !! The Recovery ~ the involuntary-loss flip-side of the burn (the lone 1-vessel citizen)
 
@@ -141,6 +141,6 @@ For the citizen with ''no quorum yet'', the floor is a ''standalone recorded cod
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/causal-islands>>
 <<~ loulou lar:///ha.ka.ba/lararium/mesh/attestation-plane>>
 
-<<^ code="&#x0003;">>ni:///sha-256;qclRHOd9ZpNzBLeW1sjB7tKYj5ZbUeujAsE5hnhF14Y
+<<^ code="&#x0003;">>ni:///sha-256;7uM9hNRwiiwtCV35QY7Zx5nZMGjn3a1_sWZD3WqjJE8
 
 <<^ code="&#x0004;" -> to=?>>

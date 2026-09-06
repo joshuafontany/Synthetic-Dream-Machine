@@ -23,7 +23,7 @@ uri-path              = "ha.ka.ba/lares/api/mu/ooda-ha"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! OODA-HA
 
@@ -48,7 +48,7 @@ A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned,
 
 <<~/ahu>>
 
-<<~ ahu #phases>>
+<<~ ahu #/phases>>
 
 !! Phases
 
@@ -60,7 +60,7 @@ A loop MUST NOT drop silently. A silent loop-drop --- the open thread abandoned,
 
 <<~/ahu>>
 
-<<~ ahu #why-five>>
+<<~ ahu #/why-five>>
 
 !! Why Five, Not Four
 
@@ -74,7 +74,7 @@ Aftermath grants the Arcana — the grammar that turns and looks forwards in tim
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha-level>>
+<<~ ahu #/ooda-ha-level>>
 
 !! OODA-HA Level
 
@@ -122,7 +122,7 @@ A session that runs without any Level statement MUST default to `feedback="1/dec
 
 <<~/ahu>>
 
-<<~ ahu #band-examples>>
+<<~ ahu #/band-examples>>
 
 !! Bands in Use --- one loop, climbing
 
@@ -155,7 +155,7 @@ Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 !! The Visibility Loop --- the loop run on itself
 
@@ -167,7 +167,7 @@ Lares (Scryer): ->⏿ orienting on: the nullable user_email column. ->◇ intend
 
 <<~/ahu>>
 
-<<~ ahu #loop-count>>
+<<~ ahu #/loop-count>>
 
 !! Loop Count --- `->↺` and the `N↺` Tally
 
@@ -188,7 +188,7 @@ Lares (Gatekeeper): the first half resolves clean. ->↺ swinging to the second 
 
 <<~/ahu>>
 
-<<~ ahu #phase-yield>>
+<<~ ahu #/phase-yield>>
 
 !! Phase-Yield --- the loop suspends honestly
 
@@ -239,7 +239,7 @@ Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to r
 
 <<~/ahu>>
 
-<<~ ahu #open-loops>>
+<<~ ahu #/open-loops>>
 
 !! Open-Loop Tracking & the Gear-Shift
 
@@ -282,7 +282,7 @@ Operator and node hold separate logs --- a ''causal island'' (`lar:///ha.ka.ba/l
 
 <<~/ahu>>
 
-<<~ ahu #degraded>>
+<<~ ahu #/degraded>>
 
 !! Degraded-Node States --- loop lifecycle
 
@@ -296,7 +296,7 @@ Operator and node hold separate logs --- a ''causal island'' (`lar:///ha.ka.ba/l
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -312,13 +312,13 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/mu>>
 <<~ loulou lar:///ha.ka.ba/lares/api/mu/the-law-of-5s>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;EPvlWRo_7FH_JWPEi7dzapTBctR0JqqIo6SxD4hWA28
+<<^ code="&#x0003;">>ni:///sha-256;pgewQH7uwbR4ywYj9rdrHjcruwgf2I9VJJV8beyPuFM
 
 <<^ code="&#x0004;" -> to=?>>

@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/source-module"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Source Module
 
@@ -26,7 +26,7 @@ Makes monorepo source navigable, queryable, and reactable through lar:/// URIs.
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ detect a postbuild trigger for a priority source file; read verbatim source text
 ⏿ orient: hash the content; compare against existing carrier in the store
@@ -36,7 +36,7 @@ Makes monorepo source navigable, queryable, and reactable through lar:/// URIs.
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -50,7 +50,7 @@ agents can read, query, and react to source changes as memes.
 
 <<~/ahu>>
 
-<<~ ahu #carrier-shape>>
+<<~ ahu #/carrier-shape>>
 
 !! Carrier Shape
 
@@ -71,7 +71,7 @@ The body (`text`) is the verbatim source content.
 
 <<~/ahu>>
 
-<<~ ahu #priority-modules>>
+<<~ ahu #/priority-modules>>
 
 !! Priority Modules
 
@@ -88,7 +88,7 @@ These files are the highest-value source-module memes:
 
 <<~/ahu>>
 
-<<~ ahu #postbuild-contract>>
+<<~ ahu #/postbuild-contract>>
 
 !! Postbuild Contract
 
@@ -103,10 +103,10 @@ The `write-source-memes.ts` script MUST:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6Ku3YLF9e8Ev4wl5LSwWlXNTjJH5ntb4jpHGCWN6IoM
+<<^ code="&#x0003;">>ni:///sha-256;rkT27WdlcAZlRigPEkHnNh1eaNXi5s6_NJ7vq5jMDjg
 
 <<^ code="&#x0004;" -> to=?>>

@@ -18,7 +18,7 @@ uri-path      = "ha.ka.ba/lararium/tw5/modules/sync-adaptor"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #contract>>
+<<~ ahu #/contract>>
 
 !! Sync Adaptor — Contract
 
@@ -37,19 +37,19 @@ Echo-loop guard rule:
 
 <<~/ahu>>
 
-<<~ ahu #source>>
+<<~ ahu #/source>>
 
 <$transclude $tiddler="lar:///ha.ka.ba/lararium/tw5/modules/sync-adaptor" $mode="block"/>
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/sync/save-cascade>>
 <<~ loulou lar:///ha.ka.ba/lararium/tw5/modules/boot-gate>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;oYz_RkFeQ2BXslq7jJ1vW9r1P0-VTn66Fk8yIRkGC0U
+<<^ code="&#x0003;">>ni:///sha-256;FW2VcFj0yu_nSKVuTFwmvhy7ARdTQBR_VouUzgyruk4
 
 <<^ code="&#x0004;" -> to=?>>

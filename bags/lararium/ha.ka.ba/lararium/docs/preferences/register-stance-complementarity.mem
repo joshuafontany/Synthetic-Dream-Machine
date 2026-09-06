@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lararium/docs/preferences/register-stance-complementarity"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #meme-header>>
+<<~ ahu #/meme-header>>
 
 ! Register–Stance Complementarity — Staging Shelf
 
@@ -28,7 +28,7 @@ This room holds the explicit old claim that register and stance remain orthogona
 
 <<~/ahu>>
 
-<<~ ahu #plan>>
+<<~ ahu #/plan>>
 
 !! Plan Skeleton
 
@@ -46,7 +46,7 @@ Current comparison surfaces:
 
 <<~/ahu>>
 
-<<~ ahu #verbatim-core-registers>>
+<<~ ahu #/verbatim-core-registers>>
 
 !! Verbatim — `Lares_Epistemology.core.md` — Registers and Stances
 
@@ -64,7 +64,7 @@ Current comparison surfaces:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -75,6 +75,6 @@ Current comparison surfaces:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;d47WgF2ZLYecvAUCP6aS_hPoLgrwztYpB36MnPVqT3Y
+<<^ code="&#x0003;">>ni:///sha-256;jwWCwRCsgYq4HnMwvSSQeG8NDSayDfZVhx3omBYzfEc
 
 <<^ code="&#x0004;" -> to=?>>

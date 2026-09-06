@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lares/cli/vessel-door"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #the-law>>
+<<~ ahu #/the-law>>
 
 ! The Vessel Door ~ a substrate collapse
 
@@ -39,7 +39,7 @@ grows back wherever the law has not reached, and where to look when it does.
 
 <<~/ahu>>
 
-<<~ ahu #the-primitives>>
+<<~ ahu #/the-primitives>>
 
 !! What the door answers — SEVEN primitives
 
@@ -62,7 +62,7 @@ presence, storage size, port, seal state, personas, quorum).
 
 <<~/ahu>>
 
-<<~ ahu #the-collapse>>
+<<~ ahu #/the-collapse>>
 
 !! The collapse, verb by verb
 
@@ -97,7 +97,7 @@ and cannot be expressed as a sequence of the others. Everything else composes.
 
 <<~/ahu>>
 
-<<~ ahu #the-founding-rite>>
+<<~ ahu #/the-founding-rite>>
 
 !! ⚠ The founding rite rides the rite-door, and one movement changes
 
@@ -116,7 +116,7 @@ carries it exactly. It simply never serves as a founding step, and its name says
 
 <<~/ahu>>
 
-<<~ ahu #the-ripples>>
+<<~ ahu #/the-ripples>>
 
 !! Every caller that must close with the collapse
 
@@ -145,7 +145,7 @@ verbs directly, so each MUST move in the same act — and each row below names w
 
 <<~/ahu>>
 
-<<~ ahu #what-stands>>
+<<~ ahu #/what-stands>>
 
 !! What does NOT move, and why
 
@@ -168,7 +168,7 @@ suite afterward would prove neither half. Move the names; move nothing else.
 
 <<~/ahu>>
 
-<<~ ahu #the-verifications>>
+<<~ ahu #/the-verifications>>
 
 !! What proves it landed
 
@@ -198,7 +198,7 @@ because a verification an operator has to remember to run is a verification that
 
 <<~/ahu>>
 
-<<~ ahu #the-order>>
+<<~ ahu #/the-order>>
 
 !! The order to work in
 
@@ -223,7 +223,7 @@ reached.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -231,6 +231,6 @@ reached.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;6kB0vPlln38W7YiUxY3CX0PC5YaMkBAZSvsFfYcLkJQ
+<<^ code="&#x0003;">>ni:///sha-256;PgSldiOvSWxlvEcEL24ET_9pKNHJJJgPn8crNVqdX-g
 
 <<^ code="&#x0004;" -> to=?>>

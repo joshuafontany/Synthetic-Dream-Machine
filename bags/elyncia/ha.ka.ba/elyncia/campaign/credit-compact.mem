@@ -17,13 +17,13 @@ uri-path   = "ha.ka.ba/elyncia/campaign/credit-compact"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Lindwyrm's Expedition Credit Compact
 
 <<~/ahu>>
 
-<<~ ahu #body>>
+<<~ ahu #/body>>
 
 ! Sidebar — Lindwyrm Expedition Credit Compact v2
 
@@ -64,6 +64,6 @@ They may:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;gkntxlwWCpHIbtVmGxIxHSlaXHjX-Ugc7UHX0jHUdPc
+<<^ code="&#x0003;">>ni:///sha-256;40g88l5e5IwNaQhfXKJmX-VOVhfL_iqVS5L8PWIrzVQ
 
 <<^ code="&#x0004;" -> to=?>>

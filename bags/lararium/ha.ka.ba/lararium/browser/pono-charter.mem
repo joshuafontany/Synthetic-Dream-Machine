@@ -21,7 +21,7 @@ uri-path  = "ha.ka.ba/lararium/browser/pono-charter"
 Constitutional doc. Governs what code enters the package, how it survives, and what gets deleted.
 Code movement requires a matching entry in the ''migration allowlist'' (`deletion-map.md`).
 
-<<~ ahu #vessel-law>>
+<<~ ahu #/vessel-law>>
 
 !! Vessel Law
 
@@ -84,7 +84,7 @@ protection; no explicit CSP gets required in that context.
 
 <<~/ahu>>
 
-<<~ ahu #package-law>>
+<<~ ahu #/package-law>>
 
 !! Package Law
 
@@ -100,7 +100,7 @@ The `@lararium/browser` package carries `BrowserVesselIslandPool`, `browser-wiki
 
 <<~/ahu>>
 
-<<~ ahu #migration-allowlist>>
+<<~ ahu #/migration-allowlist>>
 
 !! Migration Allowlist
 
@@ -114,7 +114,7 @@ Code that passes all three gets a migration entry in `deletion-map.md#migration-
 
 <<~/ahu>>
 
-<<~ ahu #open-questions>>
+<<~ ahu #/open-questions>>
 
 !! Open Questions
 
@@ -128,7 +128,7 @@ These questions do not block charter adoption. They require measurement before r
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -139,6 +139,6 @@ These questions do not block charter adoption. They require measurement before r
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;03MHX9yQBlHgmhnvAaWAhRmimu5kuAwaJPR1FhhBXHQ
+<<^ code="&#x0003;">>ni:///sha-256;tebCapifjrrvuWuBn82YVOyRuFodsNhzuoPJmClpo9s
 
 <<^ code="&#x0004;" -> to=?>>

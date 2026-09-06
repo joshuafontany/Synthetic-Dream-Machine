@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lararium/docs/crossroads"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #attractor>>
+<<~ ahu #/attractor>>
 
 ! @crossroads — the Public Oracle Plane
 
@@ -30,7 +30,7 @@ The name carries the load deliberately: the Lares Compitales kept the ''crossroa
 
 <<~/ahu>>
 
-<<~ ahu #constraints>>
+<<~ ahu #/constraints>>
 
 !! Constraints the build inherits (already canon)
 
@@ -41,7 +41,7 @@ The name carries the load deliberately: the Lares Compitales kept the ''crossroa
 
 <<~/ahu>>
 
-<<~ ahu #cad-tenant>>
+<<~ ahu #/cad-tenant>>
 
 !! The concrete role ~ the public tier of the content-addressed layer
 
@@ -54,7 +54,7 @@ This ''coheres with the constraints above'', never contradicts them. The plainte
 
 <<~/ahu>>
 
-<<~ ahu #open>>
+<<~ ahu #/open>>
 
 !! What a crossroads SERVES, and what crossing it costs
 
@@ -90,7 +90,7 @@ Who writes @crossroads (community authority shape), how Nexus-level federation d
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -101,6 +101,6 @@ Who writes @crossroads (community authority shape), how Nexus-level federation d
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;uVc3RA9jSJR2rjDDEaz1nlxmrXOGQZliCxBL6pRXrB4
+<<^ code="&#x0003;">>ni:///sha-256;GLb7nqNcNuBb0UHUftC9GgfP0fHkLsdeY3FKENxGSsU
 
 <<^ code="&#x0004;" -> to=?>>

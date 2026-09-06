@@ -17,7 +17,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/if"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! \if
 
@@ -32,6 +32,6 @@ Verse `if`/`case` on the flow surface — lives at `heihei`.)
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;-vQppcIEyUjlkG9Sj3hlMg1cJkSLYwPlsFu5XLo-83Y
+<<^ code="&#x0003;">>ni:///sha-256;QzSrYg7ecbBQm9VNRYIlSJyWaaXIuhYztTK7_7LymL4
 
 <<^ code="&#x0004;" -> to=?>>

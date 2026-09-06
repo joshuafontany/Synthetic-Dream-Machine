@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/kukali"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Kukali
 
@@ -31,7 +31,7 @@ Paired with papalohe — papalohe declares the wire; kukali declares the wait at
 
 <<~/ahu>>
 
-<<~ ahu #ooda-ha>>
+<<~ ahu #/ooda-ha>>
 
 ✶ sense the wait declaration — note trigger name or absence; locate enclosing causal island
 ⏿ orient the suspension: find papalohe wire matching trigger name; bind subscribeOnce
@@ -41,7 +41,7 @@ Paired with papalohe — papalohe declares the wire; kukali declares the wait at
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law (Kānāwai)
 
@@ -56,7 +56,7 @@ A kukali that cancels MUST reject its suspension Promise cleanly without leaking
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -89,7 +89,7 @@ Regex (canonical):
 
 <<~/ahu>>
 
-<<~ ahu #verse-analogy>>
+<<~ ahu #/verse-analogy>>
 
 !! Verse Analogy
 
@@ -108,7 +108,7 @@ Kukali maps this into memetic-wikitext:
 
 <<~/ahu>>
 
-<<~ ahu #schema>>
+<<~ ahu #/schema>>
 
 !! Schema (machine-readable)
 
@@ -134,7 +134,7 @@ sigilName = "kukali"
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -145,6 +145,6 @@ sigilName = "kukali"
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;IqV0wvhDbgCEOlNCp6vR7hNNFhv-mfaWPjVyMLbEpD4
+<<^ code="&#x0003;">>ni:///sha-256;93Kn4dLAjuv1_x6t4iYzey0rF89Bgv9HuiIXh1oVEgw
 
 <<^ code="&#x0004;" -> to=?>>

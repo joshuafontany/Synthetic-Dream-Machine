@@ -17,7 +17,7 @@ uri-path   = "ha.ka.ba/sdm/docs/arcana-model"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! The Arcana Model ~ thirteen rooms, one closed set
 
@@ -28,7 +28,7 @@ FTLS Ch06 restructure, and the composition bag all cite one address.
 
 <<~/ahu>>
 
-<<~ ahu #the-thirteen>>
+<<~ ahu #/the-thirteen>>
 
 !! The Thirteen
 
@@ -61,7 +61,7 @@ cosmology's scars — life, death's border, the edge):
 
 <<~/ahu>>
 
-<<~ ahu #guard-law>>
+<<~ ahu #/guard-law>>
 
 !! The Arcana Guard-Law
 
@@ -75,7 +75,7 @@ enter as ''witness lanes'' feeding the same thirteen.
 
 <<~/ahu>>
 
-<<~ ahu #blend-law>>
+<<~ ahu #/blend-law>>
 
 !! The Blend Law (the Mage-1e warning, kept)
 
@@ -89,7 +89,7 @@ essence.
 
 <<~/ahu>>
 
-<<~ ahu #walk-order>>
+<<~ ahu #/walk-order>>
 
 !! The Walk of the Thirteen ~ five legs
 
@@ -101,7 +101,7 @@ the gear door) → ''↺ Aftermath'' — Ascension's re-seat marks Ch06 alpha.
 
 <<~/ahu>>
 
-<<~ ahu #word-senses>>
+<<~ ahu #/word-senses>>
 
 !! Word-Sense Laws ~ one name never blurs
 
@@ -133,7 +133,7 @@ verb × capability saturation × capability totality. One word, three owners, no
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/sdm/docs/composition-model>>
 <<~ loulou lar:///ha.ka.ba/sdm/docs/three-lineage-convergence>>
@@ -141,6 +141,6 @@ verb × capability saturation × capability totality. One word, three owners, no
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;yKAhL4ad5-SrGoW4iZDHXUD2EFwF8exfeFGdLWJlakg
+<<^ code="&#x0003;">>ni:///sha-256;tWHhVFPfQ4iekox0HGN-_cHafeQsi-AxIBoO3r-FCI8
 
 <<^ code="&#x0004;" -> to=?>>

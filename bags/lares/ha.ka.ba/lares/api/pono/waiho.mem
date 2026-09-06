@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/lares/api/pono/waiho"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! Waiho
 
@@ -27,7 +27,7 @@ An ephemeral name deposit. Nothing persists past scope boundary.
 
 <<~/ahu>>
 
-<<~ ahu #etymology>>
+<<~ ahu #/etymology>>
 
 !! Etymology and Mythology
 
@@ -41,7 +41,7 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<~/ahu>>
 
-<<~ ahu #law>>
+<<~ ahu #/law>>
 
 !! Law
 
@@ -54,7 +54,7 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<~/ahu>>
 
-<<~ ahu #syntax>>
+<<~ ahu #/syntax>>
 
 !! Syntax
 
@@ -68,7 +68,7 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<~/ahu>>
 
-<<~ ahu #contrast>>
+<<~ ahu #/contrast>>
 
 !! Waiho vs Kau vs Aka
 
@@ -80,7 +80,7 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/kau>>
 <<~ loulou lar:///ha.ka.ba/lares/api/pono/aka>>
@@ -91,6 +91,6 @@ In the Kumulipo creation chant, //waiho// appears in the context of primal mater
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Ya5p80KmFdW51jaidaqhKW9zVeyGTZnwtmlf4vyq3oE
+<<^ code="&#x0003;">>ni:///sha-256;UF5Ln6Det7KGFLbZ5lSYxau48sRILJITK7PD7Hdg6cw
 
 <<^ code="&#x0004;" -> to=?>>

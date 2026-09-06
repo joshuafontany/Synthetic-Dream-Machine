@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/hook/sustained"
 
 ! Sustained
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ A canonical duration hook (the `focus` family): the Power persists only while th
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Modifies duration, not effect. The Power runs as long as attention holds; a save
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Common on `function/barrier`, `function/ward`, `function/cargo`, and `domain/stu
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;uFGDVVYJeC3mxWW9wX06u-o_4GD2l_eUPXCX2Yl-kic
+<<^ code="&#x0003;">>ni:///sha-256;HesotlWFJehWeemao8gJyJgEl91HeyL8BqMrcHWHjWA
 
 <<^ code="&#x0004;" -> to=?>>

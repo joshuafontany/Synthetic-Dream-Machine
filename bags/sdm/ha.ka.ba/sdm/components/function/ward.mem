@@ -19,7 +19,7 @@ uri-path  = "ha.ka.ba/sdm/components/function/ward"
 
 ! Ward
 
-<<~ ahu #definition>>
+<<~ ahu #/definition>>
 
 !! Definition
 
@@ -27,7 +27,7 @@ A selective protection against a named category — turning aside a kind of harm
 
 <<~/ahu>>
 
-<<~ ahu #activation>>
+<<~ ahu #/activation>>
 
 !! Activation
 
@@ -35,7 +35,7 @@ Sets a condition the warded thing enforces against its named target. Stronger or
 
 <<~/ahu>>
 
-<<~ ahu #interaction>>
+<<~ ahu #/interaction>>
 
 !! Interaction
 
@@ -43,7 +43,7 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu>>
 
-<<~ ahu #filters>>
+<<~ ahu #/filters>>
 
 !! Filters
 
@@ -54,7 +54,7 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu>>
 
-<<~ ahu #aftermath>>
+<<~ ahu #/aftermath>>
 
 !! Aftermath
 
@@ -62,7 +62,7 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -70,6 +70,6 @@ Pairs with `domain/abjuration`. Often `hook/sustained` or `hook/imbued` to keep 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;4FD_OpqOBTYmBqwqFj0cphPOunU09rX4pkI2peLTYio
+<<^ code="&#x0003;">>ni:///sha-256;5u2bO7SIAhv_TIiXalV2xDLbEvNvr99h149dQtJGE5U
 
 <<^ code="&#x0004;" -> to=?>>

@@ -26,7 +26,7 @@ uri-shape   = "lar:///ha.ka.ba/wikis/{slug}/personal"
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #problem>>
+<<~ ahu #/problem>>
 
 ! The @personal slot — slot grammar + binding storage (approved canon)
 
@@ -58,7 +58,7 @@ Keyhive already names a `PersonaGroup`.
 
 <<~/ahu>>
 
-<<~ ahu #slot>>
+<<~ ahu #/slot>>
 
 !! The slot
 
@@ -81,7 +81,7 @@ DOC per `(PersonaGroup × recipe-fingerprint)`; the URI carries the address.
 
 <<~/ahu>>
 
-<<~ ahu #yang-yin-chao>>
+<<~ ahu #/yang-yin-chao>>
 
 !! Yang / Yin / Chao — the design symmetry
 
@@ -109,7 +109,7 @@ recipe-fingerprints match.
 
 <<~/ahu>>
 
-<<~ ahu #scoping-mechanism>>
+<<~ ahu #/scoping-mechanism>>
 
 !! Scoping mechanism — the resolver binds, the URI doesn't
 
@@ -147,7 +147,7 @@ resolves to a fresh MemoryTiddlerStore at boot).
 
 <<~/ahu>>
 
-<<~ ahu #cascade-rules>>
+<<~ ahu #/cascade-rules>>
 
 !! Cascade rules that route to the personal layer
 
@@ -177,7 +177,7 @@ model these entries hold as ''first-write defaults'', not authoritative routing 
 
 <<~/ahu>>
 
-<<~ ahu #core-claim>>
+<<~ ahu #/core-claim>>
 
 !! Binding storage — admin-doc-stored
 
@@ -197,7 +197,7 @@ lar:///ha.ka.ba/bags/daemon/draft-bindings/${fingerprintHex}
 
 <<~/ahu>>
 
-<<~ ahu #why-admin-doc>>
+<<~ ahu #/why-admin-doc>>
 
 !! Why admin-doc-as-storage
 
@@ -215,7 +215,7 @@ Five forces converge here. Each one rules out a parallel storage option.
 
 <<~/ahu>>
 
-<<~ ahu #data-model>>
+<<~ ahu #/data-model>>
 
 !! Data model
 
@@ -243,7 +243,7 @@ The bindings TIDDLERS live inside the admin doc. The `@personal` and `@draft` AU
 
 <<~/ahu>>
 
-<<~ ahu #vessel-boot-flow>>
+<<~ ahu #/vessel-boot-flow>>
 
 !! Vessel boot flow
 
@@ -356,7 +356,7 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 <<~/ahu>>
 
-<<~ ahu #lifecycle>>
+<<~ ahu #/lifecycle>>
 
 !! Lifecycle
 
@@ -376,7 +376,7 @@ Three research spirits (Keyhive/BeeKEM · object-capability theory · MLS/TreeKE
 
 <<~/ahu>>
 
-<<~ ahu #persongroup-liveness>>
+<<~ ahu #/persongroup-liveness>>
 
 !! PersonaGroup liveness — pre-delegate to an always-on device (design space)
 
@@ -409,7 +409,7 @@ authority graph from //viewing state// to //task-execution authority//.
 
 <<~/ahu>>
 
-<<~ ahu #browser-deferral>>
+<<~ ahu #/browser-deferral>>
 
 !! Browser-side deferral
 
@@ -417,7 +417,7 @@ The handoff names "S9 / lararium-browser S4 real boot" as still in flight (Index
 
 <<~/ahu>>
 
-<<~ ahu #residency-reconciliation>>
+<<~ ahu #/residency-reconciliation>>
 
 !! Reconciliation with the Residency Model
 
@@ -431,7 +431,7 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 <<~/ahu>>
 
-<<~ ahu #migration>>
+<<~ ahu #/migration>>
 
 !! Migration sketch
 
@@ -454,7 +454,7 @@ Open the wiki; the StoryList syncs to your other devices because each layer hold
 
 <<~/ahu>>
 
-<<~ ahu #questions>>
+<<~ ahu #/questions>>
 
 !! Questions — one ledger (collisions removed 2026-06-04)
 
@@ -487,7 +487,7 @@ Q11 (`@draft` per-fingerprint vs boot draft) ✅ resolved 2026-06-03 — ''slice
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -505,6 +505,6 @@ register's lived surface — the living grammar in use before curation lifts it 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;JjID4lMfQxMq02mRfJSoSLO9Dcgeqjt8nMMgxYZDXSE
+<<^ code="&#x0003;">>ni:///sha-256;VM1LYKfGGFoaecp99OKr-GE9WzMbz1cQ4p_ebjUvgD0
 
 <<^ code="&#x0004;" -> to=?>>

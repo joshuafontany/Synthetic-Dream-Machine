@@ -33,13 +33,13 @@ The ''inner layer'' follows the memetic-wikitext standard — TOML `#meta` block
 
 A skill authored in this pattern works both as an agentskills.io-compatible loadable skill and as a first-class typed meme. When a skill also claims a stable address under `lar:///ha.ka.ba/api/**`, it may compose with `loci` rather than facing a forced choice between `skill` and `loci`.
 
-<<~ ahu #skill-body-open>>
+<<~ ahu #/skill-body-open>>
 
 Skill template opens the verification authoring stream here.
 
 <<~/ahu>>
 
-<<~ ahu #phase-map>>
+<<~ ahu #/phase-map>>
 
 !! Phase Map
 
@@ -49,7 +49,7 @@ A verification skill gathers the target meme surface, classifies element presenc
 
 <<~/ahu>>
 
-<<~ ahu #dual-surface>>
+<<~ ahu #/dual-surface>>
 
 !! Dual Surface: SKILL.md + Memetic-Wikitext
 
@@ -85,9 +85,9 @@ invariants = ["[invariant-1]", "[invariant-2]"]
 
 Pass/fail surface belongs in the skill's prose result contract.
 
-Comment-line `ahu` markers MAY group the `#meta` TOML into agent-operator friendly sections. The canonical grouping follows `# <<~ ahu #meta-ha "structure">>`, `# <<~ ahu #meta-ka "detail">>`, and `# <<~ ahu #meta-ba "flow">>`, each closed by `# <<~/ahu>>`.
+Comment-line `ahu` markers MAY group the `#meta` TOML into agent-operator friendly sections. The canonical grouping follows `# <<~ ahu #/meta-ha "structure">>`, `# <<~ ahu #/meta-ka "detail">>`, and `# <<~ ahu #/meta-ba "flow">>`, each closed by `# <<~/ahu>>`.
 
-<<~ ahu #dual-surface-ha>>
+<<~ ahu #/dual-surface/dual-surface-ha>>
 
 !!!! Dual Surface / ha
 
@@ -95,7 +95,7 @@ Dual-surface-ha holds the identity domain: the YAML frontmatter carries the agen
 
 <<~/ahu>>
 
-<<~ ahu #dual-surface-ka>>
+<<~ ahu #/dual-surface/dual-surface-ka>>
 
 !!!! Dual Surface / ka
 
@@ -103,7 +103,7 @@ Dual-surface-ka governs the agreement check procedure between the two surfaces. 
 
 <<~/ahu>>
 
-<<~ ahu #dual-surface-ba>>
+<<~ ahu #/dual-surface/dual-surface-ba>>
 
 !!!! Dual Surface / ba
 
@@ -113,7 +113,7 @@ Dual-surface-ba governs authoring posture: write the YAML `description` first, a
 
 <<~/ahu>>
 
-<<~ ahu #invariant-declaration>>
+<<~ ahu #/invariant-declaration>>
 
 !! Invariant Declaration
 
@@ -149,7 +149,7 @@ A fail result should name: which invariant failed, what the skill observed at th
 
 Beyond pass/fail, a skill may return `status = "skip"` when the target meme lacks the element the invariant governs entirely — for instance, checking `O3 examples section present` against a skeleton meme still short of the optional-elements threshold. Skip does not count as pass. Skip should note the element class as absent and the rating consequence.
 
-<<~ ahu #invariant-declaration-ha>>
+<<~ ahu #/invariant-declaration/invariant-declaration-ha>>
 
 !!!! Invariant Declaration / ha
 
@@ -157,7 +157,7 @@ Invariant-declaration-ha holds the invariant identity domain: what makes a claim
 
 <<~/ahu>>
 
-<<~ ahu #invariant-declaration-ka>>
+<<~ ahu #/invariant-declaration/invariant-declaration-ka>>
 
 !!!! Invariant Declaration / ka
 
@@ -165,7 +165,7 @@ Invariant-declaration-ka governs the check procedure per invariant. For each dec
 
 <<~/ahu>>
 
-<<~ ahu #invariant-declaration-ba>>
+<<~ ahu #/invariant-declaration/invariant-declaration-ba>>
 
 !!!! Invariant Declaration / ba
 
@@ -175,7 +175,7 @@ Invariant-declaration-ba governs the authoring motion: start with the most struc
 
 <<~/ahu>>
 
-<<~ ahu #pre-mcp>>
+<<~ ahu #/pre-mcp>>
 
 !! Pre-MCP Implementation Patterns
 
@@ -380,7 +380,7 @@ SKILL ACTIVATION — verify [target-law] conformance
 
 The agent-native pattern offers the lowest-cost path to first-skill yield. Write it first; extract to CLI or MCP only when the verification logic becomes too complex for prompted procedure.
 
-<<~ ahu #pre-mcp-ha>>
+<<~ ahu #/pre-mcp/pre-mcp-ha>>
 
 !!!! Pre-MCP / ha
 
@@ -388,7 +388,7 @@ Pre-MCP-ha holds the implementation domain: the three available substrates (agen
 
 <<~/ahu>>
 
-<<~ ahu #pre-mcp-ka>>
+<<~ ahu #/pre-mcp/pre-mcp-ka>>
 
 !!!! Pre-MCP / ka
 
@@ -396,7 +396,7 @@ Pre-MCP-ka governs implementation detail: the agent-native pattern offers the ch
 
 <<~/ahu>>
 
-<<~ ahu #pre-mcp-ba>>
+<<~ ahu #/pre-mcp/pre-mcp-ba>>
 
 !!!! Pre-MCP / ba
 
@@ -408,7 +408,7 @@ Pre-MCP-ba governs implementation motion: start with two or three mechanical inv
 
 <<~/ahu>>
 
-<<~ ahu #post-mcp>>
+<<~ ahu #/post-mcp>>
 
 !! Post-MCP Roadmap
 
@@ -463,7 +463,7 @@ For full-graph conformance sweeps (all memes against all registered invariants),
 | Manual `lar:` → file path derivation | MCP Resource: `lar:///ha.ka.ba/api/...` | When URI routing gap causes agent friction |
 | Full-graph scan via multiple agent calls | MCP async scan tool | When graph exceeds ~10 memes |
 
-<<~ ahu #post-mcp-ha>>
+<<~ ahu #/post-mcp/post-mcp-ha>>
 
 !!!! Post-MCP / ha
 
@@ -471,7 +471,7 @@ Post-MCP-ha holds the MCP identity domain: what the MCP server counts as in this
 
 <<~/ahu>>
 
-<<~ ahu #post-mcp-ka>>
+<<~ ahu #/post-mcp/post-mcp-ka>>
 
 !!!! Post-MCP / ka
 
@@ -479,7 +479,7 @@ Post-MCP-ka governs the migration procedure. Do not migrate to MCP before Phase 
 
 <<~/ahu>>
 
-<<~ ahu #post-mcp-ba>>
+<<~ ahu #/post-mcp/post-mcp-ba>>
 
 !!!! Post-MCP / ba
 
@@ -497,7 +497,7 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -506,6 +506,6 @@ Skill template closes the verification authoring stream here.
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;mIND3rwDCn4zgWT_O8Np061mGDm2GKKHxI2ix7W6L0Q
+<<^ code="&#x0003;">>ni:///sha-256;wVAenSPCMiN7BiVNQGizAd34R3TSFgfBUbo3WlZjEdQ
 
 <<^ code="&#x0004;" -> to=?>>

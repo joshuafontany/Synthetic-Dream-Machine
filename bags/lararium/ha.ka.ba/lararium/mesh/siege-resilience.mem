@@ -22,7 +22,7 @@ uri-path  = "ha.ka.ba/lararium/mesh/siege-resilience"
 
 The fiction sets the test at its worst: the ''necrospire'' — a persistent adversary that pressures an isolated nexus for //five centuries//, never relenting, slowly creeping through key after key, node after node. No outside hand arrives to save the mesh; no global authority restores order. The engineering question hides inside the myth: ''how does a federation of households survive an adversary that outlasts every individual node, key, and operator?'' The answer never wins the static fight — it ''resets the clock the adversary races against''.
 
-<<~ ahu #two-clocks>>
+<<~ ahu #/two-clocks>>
 
 !! Two Clocks ~ authority refresh ⊥ flow self-heal
 
@@ -35,7 +35,7 @@ The two never fuse. Authority answers //"can this principal still act?"// and re
 
 <<~/ahu>>
 
-<<~ ahu #reset-the-clock>>
+<<~ ahu #/reset-the-clock>>
 
 !! Reset The Clock ~ the master insight
 
@@ -57,7 +57,7 @@ where the writer-set itself rotates. A grant binds to the frontier and goes stal
 
 <<~/ahu>>
 
-<<~ ahu #cadence>>
+<<~ ahu #/cadence>>
 
 !! Cadence ~ the refresh floor + the triggers
 
@@ -74,7 +74,7 @@ The refresh itself runs ''CHURP-style'' — cheap dynamic-committee handoff, so 
 
 <<~/ahu>>
 
-<<~ ahu #the-active-prober>>
+<<~ ahu #/the-active-prober>>
 
 !! The active prober ~ the watcher that answers back
 
@@ -138,7 +138,7 @@ The `<- s` above the `...` reads //the initiator already holds the responder's s
 
 <<~/ahu>>
 
-<<~ ahu #the-wire-budget>>
+<<~ ahu #/the-wire-budget>>
 
 !! The wire carries a BUDGET ~ and the human spends it
 
@@ -156,7 +156,7 @@ The `<- s` above the `...` reads //the initiator already holds the responder's s
 
 <<~/ahu>>
 
-<<~ ahu #the-invite-secret>>
+<<~ ahu #/the-invite-secret>>
 
 !! The secret rides the VOICE ~ the descriptor rides the code
 
@@ -175,7 +175,7 @@ The `<- s` above the `...` reads //the initiator already holds the responder's s
 
 <<~/ahu>>
 
-<<~ ahu #repair-kit>>
+<<~ ahu #/repair-kit>>
 
 !! The Repair-Kit ~ the delegate's verbs
 
@@ -194,7 +194,7 @@ Two verbs carry a sharp edge worth naming. ''evict'' runs forward-only — TreeK
 
 <<~/ahu>>
 
-<<~ ahu #nothing-reconstructs>>
+<<~ ahu #/nothing-reconstructs>>
 
 !! Two recovery shapes ~ and only one lets a secret exist again
 
@@ -206,7 +206,7 @@ Two verbs carry a sharp edge worth naming. ''evict'' runs forward-only — TreeK
 
 <<~/ahu>>
 
-<<~ ahu #self-stabilization>>
+<<~ ahu #/self-stabilization>>
 
 !! Self-Stabilization ~ the FLOW self-heal + its biological shape
 
@@ -219,7 +219,7 @@ The biological shape carries real structure, never decoration:
 
 <<~/ahu>>
 
-<<~ ahu #per-tier>>
+<<~ ahu #/per-tier>>
 
 !! Per-Tier ~ run the whole kit at every shrine
 
@@ -229,7 +229,7 @@ This autonomy explains a build decision already taken: the Herm (the crossroads-
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -242,6 +242,6 @@ Forward references (intent attractors, unbuilt): [[oracle-governance|lar:///ha.k
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;Pt_s98-6QCj2A99FxhHPPdOKCreWtSsVRLZ8PyqoLYQ
+<<^ code="&#x0003;">>ni:///sha-256;3cwoGL5Ia0iDcrTBUX-z6dZgI70UOKyPwJEiNi8si7g
 
 <<^ code="&#x0004;" -> to=?>>

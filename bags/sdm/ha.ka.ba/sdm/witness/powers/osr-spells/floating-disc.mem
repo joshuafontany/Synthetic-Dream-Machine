@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/sdm/witness/powers/osr-spells/floating-disc"
 
 ! OSR Witness — Floating Disc
 
-<<~ ahu #basic>>
+<<~ ahu #/basic>>
 
 !! Basic
 
@@ -35,7 +35,7 @@ An invisible horizontal platform the size of a small round shield, created at th
 
 <<~/ahu>>
 
-<<~ ahu #expert>>
+<<~ ahu #/expert>>
 
 !! Expert
 
@@ -50,7 +50,7 @@ The Expert Set lists MU1 only; the Basic description governs.
 
 <<~/ahu>>
 
-<<~ ahu #cyclopedia>>
+<<~ ahu #/cyclopedia>>
 
 !! Rules Cyclopedia
 
@@ -67,7 +67,7 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 <<~/ahu>>
 
-<<~ ahu #analysis>>
+<<~ ahu #/analysis>>
 
 !! Conversion Analysis
 
@@ -79,7 +79,7 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 !! Edges
 
@@ -90,6 +90,6 @@ As Basic, with the clarification that the disc follows at the caster's current m
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;xC_IhaaKEjRJg5q-zdb0jUqRXtgFnE08bWplJ_0r4ZE
+<<^ code="&#x0003;">>ni:///sha-256;FI3KgkTgWYfCGdHViE-blqMNZJP0Q0Zlfy2iMUHXn10
 
 <<^ code="&#x0004;" -> to=?>>

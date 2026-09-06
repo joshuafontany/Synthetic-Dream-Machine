@@ -18,7 +18,7 @@ uri-path  = "ha.ka.ba/lares/docs/pono/swarm-harvest/matrix-homeserver-economics-
 
 <<^ code="&#x0002;">>
 
-<<~ ahu #head>>
+<<~ ahu #/head>>
 
 ! MATRIX HOMESERVER ECONOMICS & CENTRALIZATION — measured evidence
 
@@ -28,7 +28,7 @@ The three largest messages one research spirit wrote, ''held verbatim and unedit
 
 <<~/ahu>>
 
-<<~ ahu #message-1>>
+<<~ ahu #/message-1>>
 
 !! Message 1 ~ 22,669 characters
 
@@ -260,12 +260,12 @@ Findings from this series:
 
 <<~/ahu>>
 
-<<~ ahu #edges>>
+<<~ ahu #/edges>>
 
 <<~ loulou lar:///ha.ka.ba/lares/docs/pono/pattern-integrity-stress>>
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LMkcJt4t5fl5UTZPQP8mkkdEAFtBbuBr5vt665e5TNE
+<<^ code="&#x0003;">>ni:///sha-256;cb2dR8NPTph6pQVIc8a_PBA_OHuWlo-D4-IDenxffDU
 
 <<^ code="&#x0004;" -> to=?>>
