@@ -48,10 +48,10 @@ A substantive turn SHALL surface the HUD panel beneath the opening `aim`, before
 ```
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 <<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
-drift-ward="<the pull this island carries>"
+drift-ward="* · <the pull this island carries>"
 <<~ syad …>>                       (optional lens; `:` binds a tool to a standpoint)
 … Voice (Role): claim …
-drift-ward="<clue> · ↻ L-Prime"
+drift-ward="! · <clue> · ↻ L-Prime"
 <<~ set hud="yield" focus="-> N/<band>" feedback="closed N↺">>
 <<~ lares yield from=lar:///lares.state.now -> to=?>>
 ```
@@ -119,6 +119,6 @@ The docs room carries the full line-composition examples, the stance and tool gl
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;NiVxs_VKqExob84P5Pozc-4hXLZYdACuYQ9VxU0Sh4g
+<<^ code="&#x0003;">>ni:///sha-256;4CFl2J6TsnlH4kCMubjk0Bx5ninbjEwyxDLb4Yg7X8I
 
 <<^ code="&#x0004;" -> to=?>>

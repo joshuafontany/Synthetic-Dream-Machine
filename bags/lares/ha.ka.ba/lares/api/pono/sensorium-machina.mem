@@ -204,7 +204,7 @@ it needs) or rides beside it (standing).
 
 !!! The coupling ward ~ R stays the keel
 
-<<~ set hud="aim" drift-ward="L-Prime · crossing: causal-claim territory">>
+<<~ set hud="aim" drift-ward="_ · L-Prime · crossing: causal-claim territory">>
 
 A coupling edge MAY be claimed only where the reading ''beats a''
 ''surrogate'', and the surrogate MUST break ''only the X→Y alignment'' while preserving the source's own
@@ -218,7 +218,7 @@ And the ceiling on the claim rhymes with a law the house already holds:
 An island observes correlation and lead-lag; it can never ''intervene'' on another island to establish
 cause. The sensorium ''detects''; it never intervenes.
 
-<<~ set hud="yield" drift-ward="crossed the primed zone ↻ L-Prime">>
+<<~ set hud="yield" drift-ward="! · crossed the primed zone ↻ L-Prime">>
 
 !!! What RETIRES, named so a reader recognizes the dead reading
 
@@ -557,6 +557,6 @@ five-plane count (#owed, the-five-plane-count).
 
 <<~ ॐ ँ -> ?>>
 
-<<^ code="&#x0003;">>ni:///sha-256;WZVmF1ZpZVgAGfXGtnL7hR18d7aOfnYMx1MelO_SxA4
+<<^ code="&#x0003;">>ni:///sha-256;cfPxg3WBhHyDQvjgMI7GfH_DmOAwsdPXNHJOkPZgjXw
 
 <<^ code="&#x0004;" -> to=?>>

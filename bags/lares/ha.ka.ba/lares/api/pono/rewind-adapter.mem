@@ -51,7 +51,7 @@ So the contribution splits clean: the mechanism (fork-and-keep) rhymes with prio
 
 Every source app sorts into one of two families by ''what its rewind does to the bytes''. The family, not the app, drives the adapter's behavior.
 
-<<~ set hud="aim" drift-ward="L-Prime · crossing: essence-shaped storage-claims">>
+<<~ set hud="aim" drift-ward="_ · L-Prime · crossing: essence-shaped storage-claims">>
 
 ''Family A — APPEND-ONLY / FORK.'' A rewind writes a ''new fork'' — a new file, a new branch, a re-parented sibling — and ''nothing vanishes''. The source is its own witness: the road-not-taken stays re-harvestable from the store. Members: ''Claude Code · Codex · Aider · Gemini (snapshots) · Copilot-CLI · Copilot-Chat''.
 
@@ -80,7 +80,7 @@ Either way the road stays kept. The flag steers re-harvest and provenance, never
 
 <<~/ahu>>
 
-<<~ set hud="yield" drift-ward="crossed the primed zone ↻ L-Prime">>
+<<~ set hud="yield" drift-ward="! · crossed the primed zone ↻ L-Prime">>
 
 <<~ ahu #per-app-table>>
 
@@ -257,6 +257,6 @@ Two research spirits stood the survey:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;ZD8WI5G9y9ygDDKxGrsDkeziOOYU5IPD_xDsFlFNv9w
+<<^ code="&#x0003;">>ni:///sha-256;FbkrxkehV-ClTnwkCfSVQwNo0T3kcjE1BTnPch6IE0Y
 
 <<^ code="&#x0004;" -> to=?>>

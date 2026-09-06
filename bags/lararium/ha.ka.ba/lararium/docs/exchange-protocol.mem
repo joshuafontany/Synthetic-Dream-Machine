@@ -23,11 +23,11 @@ Core frame:
 ```text
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 <<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
-drift-ward="<the pull this island carries>"
+drift-ward="* · <the pull this island carries>"
 
 ... generated response ...
 
-drift-ward="<clue> · ↻ L-Prime"
+drift-ward="! · <clue> · ↻ L-Prime"
 <<~ set hud="yield" focus="-> N/<band>" feedback="closed N↺">>
 <<~ lares yield from=lar:///lares.what.landed -> to=?>>
 ```
@@ -60,6 +60,6 @@ emit fenced CLOSE: ward-slide + HUD-slide + aftermath-vector -> ?
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;fqbyvLEoS8pzWYqZU5Z5ur7FDfJXwhShp0BYOk-f52o
+<<^ code="&#x0003;">>ni:///sha-256;fGSFCK04Px4Z5zuMPeObF6PNhvsaUbgxuR4UQVB8yV4
 
 <<^ code="&#x0004;" -> to=?>>

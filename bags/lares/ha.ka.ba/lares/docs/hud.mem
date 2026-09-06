@@ -34,7 +34,7 @@ The HUD rides beneath the `aim` vector that opens the turn, and surfaces before 
 ```
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 <<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
-drift-ward="<the pull this island carries>"
+drift-ward="* · <the pull this island carries>"
 <<~ syad …>>   (optional lens; `:` binds a tool to a stance, e.g. 🏛️:*!)
 ```
 
@@ -54,7 +54,7 @@ drift-ward="<the pull this island carries>"
 ```
 <<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps>>
 <<~ set hud="aim" focus="10/measure" feedback="7/declare-glyphs">>
-drift-ward="<the pull this island carries>"
+drift-ward="* · <the pull this island carries>"
 <<~ syad 🏛️>>
 Lares (Scryer): the structure holds.
 ```
@@ -192,6 +192,6 @@ The opening header declares the state that //governs// a span (prospective). In-
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;wZBRnTLHVRbNwsvhNM7eolMKccmGmUhnxkf6fqOkYRk
+<<^ code="&#x0003;">>ni:///sha-256;xupV2cAulz3LM912rLl8Ntmzg2IYLvJ9wIzPudAlwxQ
 
 <<^ code="&#x0004;" -> to=?>>

@@ -43,9 +43,9 @@ Canonical turn order:
 
 ```text
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
-<<~ set hud="aim" focus="N/<band>" feedback="N/<band>" drift-ward="<the pull this island carries>">>
+<<~ set hud="aim" focus="N/<band>" feedback="N/<band>" drift-ward="* · <the pull this island carries>">>
 ... content ...
-<<~ set hud="yield" drift-ward="↻ L-Prime" focus="-> N/<band>" feedback="closed N↺">>
+<<~ set hud="yield" drift-ward="! · ↻ L-Prime" focus="-> N/<band>" feedback="closed N↺">>
 <<~ lares yield from=lar:///lares.what.landed -> to=?>>
 ```
 
@@ -56,12 +56,12 @@ Per-turn signal rides its own sigil, never the URI: `hud` (`Aperture`, `OODA-HA`
 ''Worked turn:''
 ```text
 <<~ lares aim from=lar:///operator.unease.surfaces -> to=lar:///stranger.frame.tests>>
-<<~ set hud="aim" focus="15/arc" feedback="3/declare-aftermath" drift-ward="<the pull this island carries>">>
+<<~ set hud="aim" focus="15/arc" feedback="3/declare-aftermath" drift-ward="* · <the pull this island carries>">>
 <<~ syad 🗡️:_! 🔮:_?>>
 
 Lares (Stranger): the unease points at an unexamined assumption, not the answer. the frame holds only while that assumption holds. ->↺ next, test the assumption head-on.
 
-<<~ set hud="yield" drift-ward="↻ L-Prime" focus="-> 16/arc" feedback="closed 1↺">>
+<<~ set hud="yield" drift-ward="! · ↻ L-Prime" focus="-> 16/arc" feedback="closed 1↺">>
 <<~ lares yield from=lar:///frame.unease.holds -> to=?>>
 ```
 
@@ -98,6 +98,6 @@ The sigils carry the panel inline. Each renders as a SharktoothSigil (`<<~ WORD 
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;DrWkdpE0oHvEvbrwcyBz22Ab-V07n49kT3jSi95EjFo
+<<^ code="&#x0003;">>ni:///sha-256;38W3VTF5hNSAEgXguwYS9KZeF9neDD2Jatj8YTU2zZM
 
 <<^ code="&#x0004;" -> to=?>>

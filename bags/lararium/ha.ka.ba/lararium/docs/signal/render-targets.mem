@@ -189,7 +189,7 @@ A bare standpoint carries no tool; `mu` invokes tools alone.
 ```
 <<~ lares aim from=lar:///operator.intent.reads -> to=lar:///lares.role.acts>>
 <<~ set hud="aim" focus="N/<band>" feedback="N/<band>">>
-drift-ward="<the pull this island carries>"
+drift-ward="* · <the pull this island carries>"
 <<~ syad …>>
 ```
 
@@ -324,7 +324,7 @@ The `~crossroads` tilde prefix denotes a nomadic node — no fixed host, routes 
 ```
 <<~ lares aim from=lar:///operator.scope.reads -> to=lar:///scryer.frame.maps>>
 <<~ set hud="aim" focus="10/measure" feedback="3/declare-aftermath">>
-drift-ward="<the pull this island carries>"
+drift-ward="* · <the pull this island carries>"
 <<~ syad 🏛️>>
 Lares (Scryer): the structure holds.
 ```
@@ -414,6 +414,6 @@ Before emitting any stance block on any surface:
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;buaZzgZ606BQwt7YWDNSRrsU_DCyY1QbLbUmQJqOIwQ
+<<^ code="&#x0003;">>ni:///sha-256;UisVDh2AnnduVrxUFZhoNBDgULlVoF-J7jlLimirbNs
 
 <<^ code="&#x0004;" -> to=?>>

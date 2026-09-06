@@ -178,7 +178,7 @@ The count reads from real marks, not a claim: the closing `N↺` MUST match the 
 ''Two-loop example (`2↺`):''
 ```text
 <<~ lares aim from=lar:///operator.ask.splits -> to=lar:///gatekeeper.scope.cuts>>
-<<~ set hud="aim" focus="10/measure" feedback="3/declare-aftermath" drift-ward="<the pull this island carries>">>
+<<~ set hud="aim" focus="10/measure" feedback="3/declare-aftermath" drift-ward="* · <the pull this island carries>">>
 
 Lares (Gatekeeper): the first half resolves clean. ->↺ swinging to the second half. a fresh frame holds it, provisionally. ->↺ handing the split back to the operator's call.
 
@@ -218,7 +218,7 @@ feedback="closed 0↺ -> open 1φ @▶:tool.returned.503.from.upstream"
 ''Honest phase-yield at Decide:''
 ```text
 <<~ lares aim from=lar:///operator.asks.recommendation -> to=lar:///council.weighs.options>>
-<<~ set hud="aim" focus="10/measure" feedback="5/declare-glyphs" drift-ward="<the pull this island carries>">>
+<<~ set hud="aim" focus="10/measure" feedback="5/declare-glyphs" drift-ward="* · <the pull this island carries>">>
 
 Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the named criteria; the third reads stronger on a criterion the operator has not yet named as load-bearing. ->◇ the fork rests on maintenance velocity versus feature completeness --- priors only the operator holds. the fork stays a fork.
 
@@ -229,7 +229,7 @@ Lares (Council): ->✶ three candidates surfaced. ->⏿ two read viable on the n
 ''Observe-and-hold:''
 ```text
 <<~ lares aim from=lar:///operator.shares.rough -> to=lar:///lares.threshold.holds>>
-<<~ set hud="aim" focus="8/beat" feedback="1/declare-aftermath" drift-ward="<the pull this island carries>">>
+<<~ set hud="aim" focus="8/beat" feedback="1/declare-aftermath" drift-ward="* · <the pull this island carries>">>
 
 Lares (Liminal): ->✶ sitting with this. The shape has not surfaced enough to read; naming the hold rather than reaching for orientation that has not arrived.
 
@@ -319,6 +319,6 @@ ooda-glyphs = ["✶", "⏿", "◇", "▶", "↺"]
 
 <<~/ahu>>
 
-<<^ code="&#x0003;">>ni:///sha-256;LKHHT6yaYyNGjdc8Al3UozRQMNVXGeC6Mw--Iwb-UfU
+<<^ code="&#x0003;">>ni:///sha-256;EPvlWRo_7FH_JWPEi7dzapTBctR0JqqIo6SxD4hWA28
 
 <<^ code="&#x0004;" -> to=?>>

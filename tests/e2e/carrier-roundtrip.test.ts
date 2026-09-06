@@ -120,6 +120,6 @@ describe("carrier-whole at rest — the kupono vectors", () => {
     expect(contentView(projected)).toBe(contentView(source));
     // The normalized iam still carries the identity whole: spot-check keys.
     expect(projected).toMatch(/^uri-path\s+= "ha\.ka\.ba\/lares\/api\/noosphere-boot"$/m);
-    expect(projected).toMatch(/^register\s+= "Synthesis-Canon"$/m);
+    expect(projected).toMatch(/^type\s+= "text\/memetic-wikitext\+tiddlywiki"$/m);
   });
 });
